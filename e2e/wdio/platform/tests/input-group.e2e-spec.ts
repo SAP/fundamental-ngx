@@ -4,7 +4,7 @@ import {
     executeScriptAfterTagAttr,
     executeScriptBeforeTagAttr,
     getAttributeByName,
-    getAttributeByNameArr,
+    getAttributeByNameArr, getElementPlaceholder,
     getElementSize,
     getText,
     getTextArr,
@@ -19,8 +19,13 @@ import {
     waitForPresent
 } from '../../driver/wdio';
 import { InputGroupPo } from '../pages/input-group.po';
-import {inputWithFormLabel, inputWithFormPlaceholder, standardInputLabels, standardInputPlaceholders} from '../fixtures/appData/input-group-page-contents';
-import {string_value, email_value, numeric_value} from '../fixtures/testData/input-group';
+import {
+    inputWithFormLabel,
+    inputWithFormPlaceholder,
+    standardInputLabels,
+    standardInputPlaceholders
+} from '../fixtures/appData/input-group-page-contents';
+import { email_value, numeric_value, string_value } from '../fixtures/testData/input-group';
 
 describe('Input Group should', function() {
     const inputGroupPage = new InputGroupPo();
@@ -30,7 +35,7 @@ describe('Input Group should', function() {
         buttonInputLeftAndRightTextAddon, buttonInputSubmitButton, iconInput, iconInputEmailIcon, compactGroupInput,
         compactGroupButtonAddon, compactGroupLeftTextAddon, disabledInput, disabledInputButton, withFormInput,
         withFormInputTextAddon, withFormInputButtonAddon, withFormInputLabel, withFormInputQuestionMark,
-        withFormInputAsterixMark, withFormInputErrorTooltip, withFormInputInfoTooltip
+        withFormInputAsterixMark, withFormInputInfoTooltip
     } = inputGroupPage;
 
     beforeAll(() => {
@@ -51,8 +56,7 @@ describe('Input Group should', function() {
     it('have correct placeholder text', () => {
         expect(getAttributeByNameArr(standartInputArr, 'placeholder'))
             .toEqual(standardInputPlaceholders);
-        expect(getAttributeByName(withFormInput, 'placeholder'))
-            .toEqual(inputWithFormPlaceholder);
+        expect(getElementPlaceholder(withFormInput)).toEqual(inputWithFormPlaceholder);
     });
 
     it('have left text addon and accept values', () => {
@@ -173,7 +177,7 @@ describe('Input Group should', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             inputGroupPage.saveExampleBaselineScreenshot();
-            expect(inputGroupPage.compareWithBaseline()).toBeLessThan(3);
+            expect(inputGroupPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

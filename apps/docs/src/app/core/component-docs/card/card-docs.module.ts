@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import {
     CardModule,
+    BarModule,
     ButtonModule,
     BusyIndicatorModule,
     ObjectStatusModule,
@@ -51,6 +52,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         CardModule,
+        BarModule,
         ButtonModule,
         BusyIndicatorModule,
         ObjectStatusModule,

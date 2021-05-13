@@ -1,186 +1,221 @@
-<fd-panel
-    [expanded]="_definePanelState.included"
-    [fixed]="_included.length === 0"
-    *ngIf="_includeFilters.length"
->
-    <div fd-panel-title>
-        <ng-container i18n="@@platformI18nValueHelpDialog.Define.IncludeLabel">Include</ng-container> <ng-container *ngIf="_included.length">({{ _included.length }})</ng-container>
-    </div>
-    <div fd-panel-content>
-        <ng-container
-            [ngTemplateOutlet]="conditionContent"
-            [ngTemplateOutletContext]="{ items: _included, type: _defineTypes.include, filters: _includeFilters, strategies: _includeStrategy }"
-        ></ng-container>
-        <fd-layout-grid class="condition-row" *ngIf="_included.length === 0">
+<h5 fd-title class="define-condition-title" i18n="@@platformI18nValueHelpDialog.Define.Condition.Title">Product</h5>
+<ng-container *ngFor="let item of _conditions; trackBy: _trackByKeyAndType; index as i">
+    <fd-layout-grid class="condition-row" [noGap]="true">
+        <div fdLayoutGridCol="5">
+            <fd-select
+                class="vhd-condition-filters"
+                fdLayoutGridCol
+                colGrow
+                [class.fd-select-custom-class]="false"
+                i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.StrategyPlaceholder"
+                placeholder="Select a strategy"
+                #sttr
+                [compact]="true"
+                [controlTemplate]="customSelectTemplate"
+                [name]="uid + '-' + type + '-strategy-' + item.id"
+                [(ngModel)]="item.strategy"
+                (valueChange)="_filterChanged()">
+                <ng-container *ngIf="_includeStrategy.length">
+                    <li fd-list-group-header>Include</li>
+                    <fd-option *ngFor="let strategy of _includeStrategy" [value]="strategy.key">
+                        <ng-container
+                            [ngTemplateOutlet]="conditionStrategyOption"
+                            [ngTemplateOutletContext]="{ type: _defineTypes.include, strategy: strategy }"
+                        ></ng-container>
+                    </fd-option>
+                </ng-container>
+                <ng-container *ngIf="_excludeStrategy.length">
+                    <li fd-list-group-header>Exclude</li>
+                    <fd-option *ngFor="let strategy of _excludeStrategy" [value]="strategy.key">
+                        <ng-container
+                            [ngTemplateOutlet]="conditionStrategyOption"
+                            [ngTemplateOutletContext]="{ type: _defineTypes.exclude, strategy: strategy }"
+                        ></ng-container>
+                    </fd-option>
+                </ng-container>
+            </fd-select>
+        </div>
+        <div fdLayoutGridCol colGrow *ngIf="item.strategy !== _strategyIncludeValues.empty && item.strategy !== _strategyExcludeValues.not_empty">
             <div fdLayoutGridRow>
-                <div fdLayoutGridCol colGrow>&nbsp;</div>
-                <div fdLayoutGridCol class="action-col">
-                    <button fd-button i18n-aria-label="@@platformI18nValueHelpDialog.IncludeConditionBtnAddNew" aria-label="Add new define condition" glyph="add" (click)="addEmptyCondition(_defineTypes.include)"></button>
-                </div>
+                <ng-container *ngIf="item.strategy === _strategyIncludeValues.between; else valueIncludeTemplate">
+                    <div fdLayoutGridCol colGrow>
+                        <fd-form-input-message-group [triggers]="['focusin', 'focusout']">
+                            <input
+                                fd-form-control
+                                fdp-condition-count-message
+                                [maxCharacters]="_rules.maxCharactersHintCount"
+                                type="text"
+                                i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.FromPlaceholder"
+                                placeholder="from"
+                                required
+                                [compact]="true"
+                                [state]="fromModel.invalid ? 'error' : ''"
+                                [name]="uid + '-' + type + '-from-' + item.id"
+                                (blur)="_validateConditionValue(item, [fromModel.valid, toModel.valid])"
+                                #fromModel="ngModel"
+                                [(ngModel)]="item.value" />
+                                <ng-container [ngTemplateOutlet]="countError" [ngTemplateOutletContext]="{ $implicit: item.value?.length }"></ng-container>
+                        </fd-form-input-message-group>
+                    </div>
+                    <div fdLayoutGridCol colGrow>
+                        <fd-form-input-message-group [triggers]="['focusin', 'focusout']">
+                            <input
+                                fd-form-control
+                                fdp-condition-count-message
+                                [maxCharacters]="_rules.maxCharactersHintCount"
+                                type="text"
+                                i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.ToPlaceholder"
+                                placeholder="to"
+                                required
+                                [compact]="true"
+                                [state]="toModel.invalid ? 'error' : ''"
+                                [name]="uid + '-' + type + '-to-' + item.id"
+                                (blur)="_validateConditionValue(item, [fromModel.valid, toModel.valid])"
+                                #toModel="ngModel"
+                                [(ngModel)]="item.valueTo" />
+                                <ng-container [ngTemplateOutlet]="countError" [ngTemplateOutletContext]="{ $implicit: item.valueTo?.length }"></ng-container>
+                        </fd-form-input-message-group>
+                    </div>
+                </ng-container>
+                <ng-template #valueIncludeTemplate>
+                    <div fdLayoutGridCol colGrow>
+                        <fd-form-input-message-group>
+                            <input
+                                fd-form-control
+                                fdp-condition-count-message
+                                [maxCharacters]="_rules.maxCharactersHintCount"
+                                type="text"
+                                i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.ValuePlaceholder"
+                                placeholder="value"
+                                [compact]="true"
+                                [state]="valueModel.invalid ? 'error' : ''"
+                                [name]="uid + '-' + type + '-value-' + item.id"
+                                (blur)="_validateConditionValue(item, valueModel.valid)"
+                                #valueModel="ngModel"
+                                [(ngModel)]="item.value" />
+                            <ng-container *ngIf="valueModel.invalid">
+                                <ng-container [ngTemplateOutlet]="countError" [ngTemplateOutletContext]="{ $implicit: item.value?.length }"></ng-container>
+                            </ng-container>
+                        </fd-form-input-message-group>
+                    </div>
+                </ng-template>
             </div>
-        </fd-layout-grid>
-    </div>
-</fd-panel>
-<fd-panel
-    [expanded]="_definePanelState.excluded"
-    [fixed]="_excluded.length === 0"
-    *ngIf="_excludeFilters.length"
->
-    <div fd-panel-title>
-        <ng-container i18n="@@platformI18nValueHelpDialog.Define.ExcludeLabel">Exclude</ng-container> <ng-container *ngIf="_excluded.length">({{ _excluded.length }})</ng-container>
-    </div>
-    <div fd-panel-content>
-        <ng-container
-            [ngTemplateOutlet]="conditionContent"
-            [ngTemplateOutletContext]="{ items: _excluded, type: _defineTypes.exclude, filters: _excludeFilters, strategies: _excludeStrategy }"
-        ></ng-container>
+        </div>
+        <div class="action-col" fdLayoutGridCol colGrow>
+            <button
+                fd-button
+                i18n-aria-label="@@platformI18nValueHelpDialog.Condition.RemoveLabel"
+                aria-label="Remove define condition"
+                fdType="transparent"
+                glyph="decline"
+                [compact]="true"
+                (click)="removeCondition(i)"></button>
+        </div>
+    </fd-layout-grid>
+</ng-container>
 
-        <fd-layout-grid class="condition-row" *ngIf="_excluded.length === 0">
-            <div fdLayoutGridRow>
-                <div fdLayoutGridCol colGrow>&nbsp;</div>
-                <div fdLayoutGridCol class="action-col">
-                    <button fd-button i18n-aria-label="@@platformI18nValueHelpDialog.ExcludeConditionBtnAddNew" aria-label="Add new define condition" glyph="add" (click)="addEmptyCondition(_defineTypes.exclude)"></button>
-                </div>
-            </div>
-        </fd-layout-grid>
+
+<fd-layout-grid class="condition-row new-condition-row" [noGap]="true">
+    <div fdLayoutGridRow>
+        <div fdLayoutGridCol colGrow>&nbsp;</div>
+        <div fdLayoutGridCol class="action-col">
+            <button
+                fd-button
+                i18n-label="@@platformI18nValueHelpDialog.AddLabelDefineCondition"
+                i18n-aria-label="@@platformI18nValueHelpDialog.AddAriaLabelDefineCondition"
+                aria-label="Add new define condition"
+                label="Add"
+                [compact]="true"
+                (click)="addEmptyCondition()"></button>
+        </div>
     </div>
-</fd-panel>
+</fd-layout-grid>
 
+<ng-template #conditionStrategyOption let-type="type" let-strategy="strategy">
+    <ng-container *ngIf="strategyLabels[strategy.key]; else defaultOption">{{ strategyLabels[strategy.key] }}</ng-container>
+    <ng-template #defaultOption>
+        <ng-container [ngSwitch]="strategy.key">
+            <ng-container
+                *ngSwitchCase="'contains'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.Contains">
+                contains
+            </ng-container>
 
-<ng-template #conditionContent let-items="items" let-type="type" let-filters="filters" let-strategies="strategies">
-    <ng-container *ngFor="let item of items; trackBy: _trackByKeyAndType; index as i">
-        <fd-layout-grid class="condition-row">
-            <div fdLayoutGridCol="5">
-                <div fdLayoutGridRow>
-                    <fd-select
-                        class="vhd-condition-filters"
-                        fdLayoutGridCol
-                        colGrow
-                        i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.FilterPlaceholder"
-                        placeholder="Select a filter from data source"
-                        [name]="uid + '-' + type + '-filter-' + item.id"
-                        [(ngModel)]="item.key"
-                        (ngModelChange)="_filterChanged()">
-                        <fd-option value="*">{{ fullBodyLabel }}</fd-option>
-                        <fd-option *ngFor="let filter of filters" [value]="filter.key">{{ filter.label }}</fd-option>
-                    </fd-select>
-                    <fd-select
-                        class="vhd-condition-filters"
-                        fdLayoutGridCol
-                        colGrow
-                        i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.StrategyPlaceholder"
-                        placeholder="Select a strategy"
-                        [name]="uid + '-' + type + '-strategy-' + item.id"
-                        [(ngModel)]="item.strategy"
-                        (ngModelChange)="_filterChanged()">
-                        <fd-option *ngFor="let strategy of strategies" [value]="strategy.label">
-                            <ng-container *ngIf="type === 'exclude'" i18n="@@platformI18nValueHelpDialog.Define.Condition.StrategyPrefixExclude">not</ng-container>
-                            <ng-container *ngIf="strategyLabels[strategy.key]; else defaultOption">{{ strategyLabels[strategy.key] }}</ng-container>
-                            <ng-template #defaultOption>
-                                <ng-container i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label">
-                                    {strategy.key, select,
-                                        contains {contains}
-                                        equalTo {equal to}
-                                        between {between}
-                                        startsWith {starts with}
-                                        endsWith {ends with}
-                                        lessThan {less than}
-                                        lessThanEqual {less than or equal to}
-                                        greaterThan {greater than}
-                                        greaterThanEqual {greater than or equal to}
-                                        other {empty}
-                                    }
-                                </ng-container>
-                            </ng-template>
-                        </fd-option>
-                    </fd-select>
-                </div>
-            </div>
-            <div fdLayoutGridCol colGrow>
-                <div fdLayoutGridRow *ngIf="item.strategy !== _strategyValues.empty">
-                    <ng-container *ngIf="item.strategy === _strategyValues.between; else valueIncludeTemplate">
-                        <div fdLayoutGridCol colGrow>
-                            <fd-form-input-message-group [triggers]="['focusin', 'focusout']">
-                                <input
-                                    fd-form-control
-                                    fdp-condition-count-message
-                                    [maxCharacters]="_rules.maxCharactersHintCount"
-                                    type="text"
-                                    i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.FromPlaceholder"
-                                    placeholder="from"
-                                    [state]="fromModel.invalid ? 'error' : ''"
-                                    [name]="uid + '-' + type + '-from-' + item.id"
-                                    (blur)="_checkConditionValue(item, [fromModel.valid, toModel.valid])"
-                                    #fromModel="ngModel"
-                                    [(ngModel)]="item.value" />
-                                    <ng-container [ngTemplateOutlet]="countError" [ngTemplateOutletContext]="{ $implicit: item.value?.length }"></ng-container>
-                            </fd-form-input-message-group>
-                        </div>
-                        <div fdLayoutGridCol colGrow>
-                            <fd-form-input-message-group [triggers]="['focusin', 'focusout']">
-                                <input
-                                    fd-form-control
-                                    fdp-condition-count-message
-                                    [maxCharacters]="_rules.maxCharactersHintCount"
-                                    type="text"
-                                    i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.ToPlaceholder"
-                                    placeholder="to"
-                                    [state]="toModel.invalid ? 'error' : ''"
-                                    [name]="uid + '-' + type + '-to-' + item.id"
-                                    (blur)="_checkConditionValue(item, [fromModel.valid, toModel.valid])"
-                                    #toModel="ngModel"
-                                    [(ngModel)]="item.valueTo" />
-                                    <ng-container [ngTemplateOutlet]="countError" [ngTemplateOutletContext]="{ $implicit: item.valueTo?.length }"></ng-container>
-                            </fd-form-input-message-group>
-                        </div>
-                    </ng-container>
-                    <ng-template #valueIncludeTemplate>
-                        <div fdLayoutGridCol colGrow>
-                            <fd-form-input-message-group>
-                                <input
-                                    fd-form-control
-                                    fdp-condition-count-message
-                                    [maxCharacters]="_rules.maxCharactersHintCount"
-                                    type="text"
-                                    i18n-placeholder="@@platformI18nValueHelpDialog.Define.Condition.ValuePlaceholder"
-                                    placeholder="value"
-                                    [state]="valueModel.invalid ? 'error' : ''"
-                                    [name]="uid + '-' + type + '-value-' + item.id"
-                                    (blur)="_checkConditionValue(item, valueModel.valid)"
-                                    #valueModel="ngModel"
-                                    [(ngModel)]="item.value" />
-                                <ng-container *ngIf="valueModel.invalid">
-                                    <ng-container [ngTemplateOutlet]="countError" [ngTemplateOutletContext]="{ $implicit: item.value?.length }"></ng-container>
-                                </ng-container>
-                            </fd-form-input-message-group>
-                        </div>
-                    </ng-template>
-                </div>
-            </div>
-            <div class="action-col" fdLayoutGridCol colGrow>
-                <button
-                    fd-button
-                    i18n-aria-label="@@platformI18nValueHelpDialog.Condition.RemoveLabel"
-                    aria-label="Remove define condition"
-                    glyph="decline"
-                    (click)="removeCondition(items, i)"></button>
-            </div>
-            <div class="action-col" fdLayoutGridCol colGrow>
-                <button
-                    fd-button
-                    i18n-aria-label="@@platformI18nValueHelpDialog.Condition.AddLabel"
-                    aria-label="Add new define condition"
-                    glyph="add"
-                    [style.visibility]="i === items.length - 1 ? '' : 'hidden'"
-                    (click)="addEmptyCondition(type)"></button>
-            </div>
-        </fd-layout-grid>
-    </ng-container>
+            <ng-container
+                *ngSwitchCase="'equalTo'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.EqualTo">
+                equal to
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'between'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.Between">
+                between
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'startsWith'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.StartsWith">
+                starts with
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'endsWith'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.EndsWith">
+                ends with
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'lessThan'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.LessThan">
+                less than
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'lessThanEqual'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.LessThanEqual">
+                less than equal
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'greaterThan'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.GreaterThan'">
+                greater than
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'greaterThanEqual'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.GreaterThanEqual">
+                greater than equal
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'empty'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.Empty">
+                empty
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'not_equalTo'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.NotEqualTo">
+                not equal to
+            </ng-container>
+
+            <ng-container
+                *ngSwitchCase="'not_empty'"
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.NotEmpty">
+                not empty
+            </ng-container>
+        </ng-container>
+    </ng-template>
 </ng-template>
-
 
 <ng-template #countError let-count>
     <fd-form-message type="error" *ngIf="count && count > 7">
         <ng-container i18n="@@platformI18nValueHelpDialog.Condition.MaxCountError">Enter a value with no more than 7 characters</ng-container>
     </fd-form-message>
+</ng-template>
+
+<ng-template #customSelectTemplate let-textValue>
+    {{ textValue }}
 </ng-template>

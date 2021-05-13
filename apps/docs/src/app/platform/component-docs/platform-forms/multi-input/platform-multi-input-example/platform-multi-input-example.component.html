@@ -14,7 +14,10 @@
             id="fdp-id-default"
             name="input1"
             [dataSource]="_datasource"
-            displayKey="firstName"
+            (selectionChange)="showValues($event)"
+            displayKey="state"
+            [autofocus]="true"
+            [selected]="selected"
         >
         </fdp-multi-input>
     </fdp-form-field>

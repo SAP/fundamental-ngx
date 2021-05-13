@@ -1,7 +1,5 @@
-<div class="fd-multi-input fd-multi-input-custom">
-    <div class="fd-multi-input-field">
+<div class="fd-multi-input">
         <ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
-    </div>
 </div>
 <ng-template #desktopTemplate>
     <div class="fdp-multi-input" cdkOverlayOrigin #selectTrigger="cdkOverlayOrigin">
@@ -28,14 +26,15 @@
 
 <ng-template #controlTemplate>
     <fd-input-group
-        class="fd-multi-input-input-group-custom"
         [button]="!readonly"
+        [buttonFocusable]="false"
+        [isControl]="true"
         [glyph]="'value-help'"
         [state]="status"
         [disabled]="disabled"
         [compact]="contentDensity === 'compact'"
         (keydown)="removeSelectedTokens($event)"
-        (addOnButtonClicked)="!mobile && onPrimaryButtonClick(_connectedOverlay.open)"
+        (addOnButtonClicked)="!mobile && addOnButtonClick()"
         (click)="mobile && onPrimaryButtonClick(false)"
     >
         <fd-tokenizer
@@ -46,14 +45,17 @@
             [class]="contentDensity === 'compact' ? 'fd-multi-input-tokenizer-custom--compact' : ''"
             (moreClickedEvent)="moreClicked()"
         >
-            <fd-token [readOnly]="disabled" (onCloseClick)="removeToken(token)" *ngFor="let token of selected">{{
+            <fd-token [readOnly]="disabled" [compact]="contentDensity === 'compact'" (onCloseClick)="removeToken(token)" *ngFor="let token of selected">{{
                 token.label
             }}</fd-token>
             <input
                 #searchInputElement
                 type="text"
+                [compact]="contentDensity === 'compact'"
                 class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
                 fdp-auto-complete
+                (onComplete)="_onAutoComplete($event)"
+                (keydown.enter)="_onKeydownEnter($event)"
                 [inputText]="inputText"
                 [options]="_suggestions"
                 fd-input-group-input
@@ -66,6 +68,8 @@
                 [attr.aria-expanded]="isOpen && _suggestions.length > 0"
                 [readonly]="readonly"
                 [attr.aria-readonly]="readonly"
+                [attr.aria-label]="ariaLabel"
+                [attr.aria-labelledby]="ariaLabelledBy"
             />
         </fd-tokenizer>
     </fd-input-group>
@@ -78,6 +82,7 @@
         [selectionMode]="selectionMode"
         [contentDensity]="contentDensity"
         *ngIf="_suggestions && _suggestions.length"
+        [navigated]="true"
     >
         <ng-container *ngIf="!isGroup">
             <fdp-standard-list-item

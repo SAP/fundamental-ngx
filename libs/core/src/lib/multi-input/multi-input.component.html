@@ -39,6 +39,7 @@
         [isExpanded]="open && !mobile && displayedValues && displayedValues.length"
         [isControl]="true"
         [glyph]="displayAddonButton ? glyph : ''"
+        [iconTitle]="title"
         (addOnButtonClicked)="_addOnButtonClicked()">
         <fd-tokenizer [compactCollapse]="compactCollapse"
                       [compact]="compact"
@@ -47,6 +48,7 @@
                       (moreClickedEvent)="_moreClicked()"
                       class="fd-multi-input-tokenizer-custom"
                       [class]="compact ? 'fd-multi-input-tokenizer-custom--compact' : ''"
+                      tabindex="-1"
         >
             <fd-token
                 *ngFor="let token of selected"
@@ -114,9 +116,9 @@
 </ng-template>
 
 <ng-template let-value="value" #itemSource>
-    <span 
-        *ngIf="!itemTemplate" 
-        fd-list-title 
+    <span
+        *ngIf="!itemTemplate"
+        fd-list-title
         [innerHtml]="value | displayFnPipe: displayFn | highlight: searchTerm:highlight">
     </span>
 

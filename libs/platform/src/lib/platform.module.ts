@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injector, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
@@ -48,6 +48,8 @@ import { ObjectListItemModule } from './components/list/object-list-item/object-
 import { StandardListItemModule } from './components/list/standard-list-item/standard-list-item.module';
 import { PlatformListModule } from './components/list/list.module';
 import { PlatformSliderModule } from './components/slider/slider.module';
+import { PlatformConfig } from './platform.config';
+import { PlatformPageFooterModule } from './components/page-footer/page-footer.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -100,7 +102,12 @@ import { PlatformSliderModule } from './components/slider/slider.module';
         ObjectListItemModule,
         PlatformListModule,
         StandardListItemModule,
-        PlatformSliderModule
+        PlatformSliderModule,
+        PlatformPageFooterModule
     ]
 })
-export class FundamentalNgxPlatformModule {}
+export class FundamentalNgxPlatformModule {
+    constructor(injector: Injector) {
+        PlatformConfig.setInjector(injector);
+    }
+}

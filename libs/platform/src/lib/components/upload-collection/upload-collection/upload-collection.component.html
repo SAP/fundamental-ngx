@@ -483,82 +483,160 @@
 </ng-template>
 
 <ng-template #messageNewFolder let-payload="payload" let-messageStripType="messageStripType">
-    <ng-container i18n="@@platformUploadCollection.Message.Create">
-        {{ payload.folder.name }} has been { messageStripType, select, error {failed to create} other {created} }.
+    <ng-container
+        *ngIf="messageStripType === 'error'; else foldersCreated"
+        i18n="@@platformUploadCollection.Message.Create.Failed">
+        {{ payload.folder.name }} has been failed to create.
     </ng-container>
+    <ng-template #foldersCreated i18n="@@platformUploadCollection.Message.Create">
+        {{ payload.folder.name }} has been created.
+    </ng-template>
 </ng-template>
 
 <ng-template #messageUpdateVersion let-payload="payload" let-messageStripType="messageStripType">
-    <ng-container i18n="@@platformUploadCollection.Message.UpdateVersion">
-        {{ payload.item.name }} has been { messageStripType, select, error {failed to update} other {updated} } version.
+    <ng-container
+        *ngIf="messageStripType === 'error'; else versionUpdated"
+        i18n="@@platformUploadCollection.Message.UpdateVersion.Failed">
+        {{ payload.item.name }} has been failed to update version.
     </ng-container>
+    <ng-template #versionUpdated i18n="@@platformUploadCollection.Message.UpdateVersion">
+        {{ payload.item.name }} has been updated version.
+    </ng-template>
 </ng-template>
 
 <ng-template #messageFileRename let-payload="payload" let-messageStripType="messageStripType">
-    <ng-container i18n="@@platformUploadCollection.Message.FileRename">
-        The file "{{ payload.item.name }}" has been { messageStripType, select, error {failed to rename} other { renamed
-        }} to "{{ payload.fileName }}".
+    <ng-container
+        *ngIf="messageStripType === 'error'; else fileRenamed"
+        i18n="@@platformUploadCollection.Message.FileRename.Failed">
+        The file "{{ payload.item.name }}" has been failed to rename to "{{ payload.fileName }}".
     </ng-container>
+    <ng-template #fileRenamed i18n="@@platformUploadCollection.Message.FileRename">
+        The file "{{ payload.item.name }}" has been renamed to "{{ payload.fileName }}".
+    </ng-template>
 </ng-template>
 
 <ng-template #messageRemove let-payload="payload" let-messageStripType="messageStripType" let-count="count">
     <ng-container
         *ngIf="payload.items.length > 1 && count.folder && count.file"
-        i18n="@@platformUploadCollection.Message.Remove.FoldersAndFiles"
     >
-        {{ count.folder }} { count.folder, plural, =1 {folder} other {folders} } and {{ count.file }} { count.file,
-        plural, =1 {file} other {files} } have been { messageStripType, select, error {failed to remove} other {removed}
-        }.
+        <ng-container
+            *ngIf="messageStripType === 'error'; else foldersAndFilesRemoved"
+            i18n="@@platformUploadCollection.Message.Remove.FoldersAndFiles.Failed"
+        >
+            {{ count.folder }} folders and {{ count.file }} files have been failed to remove.
+        </ng-container>
+        <ng-template #foldersAndFilesRemoved i18n="@@platformUploadCollection.Message.Remove.FoldersAndFiles">
+            {{ count.folder }} folders and {{ count.file }} files have been removed.
+        </ng-template>
     </ng-container>
 
     <ng-container
-        i18n="@@platformUploadCollection.Message.Remove.Folders"
         *ngIf="payload.items.length > 1 && count.folder && !count.file"
     >
-        {{ count.folder }} folders have been { messageStripType, select, error {failed to remove} other {removed} }.
+        <ng-container
+            *ngIf="messageStripType === 'error'; else foldersRemoved"
+            i18n="@@platformUploadCollection.Message.Remove.Folders.Failed">
+            {{ count.folder }} folders have been failed to remove.
+        </ng-container>
+        <ng-template #foldersRemoved i18n="@@platformUploadCollection.Message.Remove.Folders">
+            {{ count.folder }} folders have been removed.
+        </ng-template>
     </ng-container>
 
     <ng-container
-        i18n="@@platformUploadCollection.Message.Remove.Files"
         *ngIf="payload.items.length > 1 && count.file && !count.folder"
     >
-        {{ count.file }} files have been { messageStripType, select, error {failed to remove} other {removed} }.
+        <ng-container
+            *ngIf="messageStripType === 'error'; else filesRemoved"
+            i18n="@@platformUploadCollection.Message.Remove.Files.Failed">
+            {{ count.file }} files have been failed to remove.
+        </ng-container>
+        <ng-template #filesRemoved i18n="@@platformUploadCollection.Message.Remove.Files">
+            {{ count.file }} files have been removed.
+        </ng-template>
     </ng-container>
 
-    <ng-container i18n="@@platformUploadCollection.Message.Remove.OneItem" *ngIf="payload.items.length === 1">
-        {{ payload.items[0].name }} has been { messageStripType, select, error {failed to remove} other {removed} }.
+    <ng-container *ngIf="payload.items.length === 1">
+        <ng-container
+            *ngIf="messageStripType === 'error'; else oneItemRemoved"
+            i18n="@@platformUploadCollection.Message.Remove.OneItem.Failed">
+            {{ payload.items[0].name }} has been failed to remove.
+        </ng-container>
+        <ng-template #oneItemRemoved i18n="@@platformUploadCollection.Message.Remove.OneItem">
+            {{ payload.items[0].name }} has been removed.
+        </ng-template>
     </ng-container>
 </ng-template>
 
 <ng-template #messageMove let-payload="payload" let-messageStripType="messageStripType" let-count="count">
     <ng-container
         *ngIf="payload.items.length > 1 && count.folder && count.file"
-        i18n="@@platformUploadCollection.Message.Move.FoldersAndFiles"
     >
-        {{ count.folder }} { count.folder, plural, =1 {folder} other {folders} } and {{ count.file }} { count.file,
-        plural, =1 {file} other {files}} have been { messageStripType, select, error {failed to move to} other {moved
-        to} } {{ payload.to ? payload.to.name : 'All files' }}.
+        <ng-container
+            *ngIf="messageStripType === 'error'; else filesAndFoldersMovedTo"
+            i18n="@@platformUploadCollection.Message.Move.FoldersAndFiles.Failed"
+        >
+            {{ count.folder }} folders and {{ count.file}} files have been failed to move to
+        </ng-container>
+        <ng-template #filesAndFoldersMovedTo i18n="@@platformUploadCollection.Message.Move.FoldersAndFiles">
+            {{ count.folder }} folders and {{ count.file}} files have been moved to
+        </ng-template>
+
+        <ng-container *ngIf="payload.to; else allFiles">
+            {{payload.to.name}}
+        </ng-container>.
     </ng-container>
 
     <ng-container
-        i18n="@@platformUploadCollection.Message.Move.Folders"
         *ngIf="payload.items.length > 1 && count.folder && !count.file"
     >
-        {{ count.folder }} folders have been { messageStripType, select, error {failed to move to} other {moved to} }
-        {{ payload.to ? payload.to.name : 'All files' }}.
+        <ng-container
+            *ngIf="messageStripType === 'error'; else foldersMovedTo"
+            i18n="@@platformUploadCollection.Message.Move.Folders.Failed"
+        >
+            {{ count.folder }} folders have been failed to move to
+        </ng-container>
+        <ng-template #foldersMovedTo i18n="@@platformUploadCollection.Message.Move.Folders">
+            {{ count.folder }} folders have been moved to
+        </ng-template>
+        
+        <ng-container *ngIf="payload.to; else allFiles">
+            {{payload.to.name}}
+        </ng-container>.
     </ng-container>
 
     <ng-container
-        i18n="@@platformUploadCollection.Message.Move.Files"
         *ngIf="payload.items.length > 1 && count.file && !count.folder"
     >
-        {{ count.file }} files have been { messageStripType, select, error {failed to move to} other {moved to}}
-        {{ payload.to ? payload.to.name : 'All files' }}.
+        <ng-container
+            *ngIf="messageStripType === 'error'; else filesMovedTo"
+            i18n="@@platformUploadCollection.Message.Move.Files.Failed"
+        >
+            {{ count.file }} files have been failed to move to
+        </ng-container>
+        <ng-template #filesMovedTo i18n="@@platformUploadCollection.Message.Move.Files">
+            {{ count.file }} files have been moved to
+        </ng-template>
+        
+        <ng-container *ngIf="payload.to; else allFiles">
+            {{payload.to.name}}
+        </ng-container>.
     </ng-container>
 
-    <ng-container i18n="@@platformUploadCollection.Message.Move.OneItem" *ngIf="payload.items.length === 1">
-        {{ payload.items[0].name }} has been { messageStripType, select, error {failed to move to} other {moved to} }
-        {{ payload.to ? payload.to.name : 'All files' }}.
+    <ng-container *ngIf="payload.items.length === 1">
+        <ng-container
+            *ngIf="messageStripType === 'error'; else oneItemMovedTo"
+            i18n="@@platformUploadCollection.Message.Move.OneItem.Failed"
+        >
+            {{ payload.items[0].name }} have been failed to move to
+        </ng-container>
+        <ng-template #oneItemMovedTo i18n="@@platformUploadCollection.Message.Move.OneItem">
+            {{ payload.items[0].name }} have been moved to
+        </ng-template>
+
+        <ng-container *ngIf="payload.to; else allFiles">
+            {{payload.to.name}}
+        </ng-container>.
     </ng-container>
 </ng-template>
 
@@ -599,4 +677,8 @@
     <ng-container i18n="@@platformUploadCollection.Message.FilenameLength.OneItem" *ngIf="payload.items.length === 1">
         The name "{{ payload.items[0].name }}" exceeded the maximum filename length. Allowed filename length: {{ maxFilenameLength }} characters.
     </ng-container>
+</ng-template>
+
+<ng-template #allFiles i18n="platformUploadCollection.Message.AllFiles">
+    All files
 </ng-template>

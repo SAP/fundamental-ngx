@@ -10,9 +10,6 @@ import * as strategyLabelsVhdTs from '!raw-loader!./platform-vhd-examples/platfo
 import * as tokenVhdHtml from '!raw-loader!./platform-vhd-examples/platform-vhd-token-example.component.html';
 import * as tokenVhdTs from '!raw-loader!./platform-vhd-examples/platform-vhd-token-example.component.ts';
 
-import * as filtersVhdHtml from '!raw-loader!./platform-vhd-examples/platform-vhd-filters-example.component.html';
-import * as filtersVhdTs from '!raw-loader!./platform-vhd-examples/platform-vhd-filters-example.component.ts';
-
 import * as inputVhdHtml from '!raw-loader!./platform-vhd-examples/platform-vhd-input-example.component.html';
 import * as inputVhdTs from '!raw-loader!./platform-vhd-examples/platform-vhd-input-example.component.ts';
 
@@ -68,20 +65,6 @@ export class PlatformVhdDocsComponent {
             component: 'PlatformVhdTokenExampleComponent',
             code: tokenVhdTs,
             fileName: 'platform-vhd-token-example'
-        }
-    ];
-
-    filtersValueHelpDialog: ExampleFile[] = [
-        {
-            language: 'html',
-            code: filtersVhdHtml,
-            fileName: 'platform-vhd-filters-example'
-        },
-        {
-            language: 'typescript',
-            component: 'PlatformVhdFiltersExampleComponent',
-            code: filtersVhdTs,
-            fileName: 'platform-vhd-filters-example'
         }
     ];
 

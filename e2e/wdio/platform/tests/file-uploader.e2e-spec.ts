@@ -3,10 +3,11 @@ import {
     click,
     getAlertText,
     getAttributeByName,
-    getElementArrayLength,
+    getElementArrayLength, getElementPlaceholder, getElementTitle,
     getText,
-    refreshPage, sendKeys,
-    uploadFile, waitForPresent
+    refreshPage,
+    uploadFile,
+    waitForPresent
 } from '../../driver/wdio';
 import { FileUploaderPo } from '../pages/file-uploader.po';
 import { imagePath, placeholderValue, titleValue } from '../fixtures/appData/file-uploader.page-content';
@@ -33,8 +34,7 @@ describe('File uploader test suite', function() {
     it('Verify placeholders', () => {
         const arrLength = getElementArrayLength(fileUploaderInput);
         for (let i = 0; i < arrLength; i++) {
-            expect(placeholderValue).toContain(getAttributeByName
-            (fileUploaderInput, 'placeholder', i));
+            expect(placeholderValue).toContain(getElementPlaceholder(fileUploaderInput, i));
         }
     });
 
@@ -55,7 +55,7 @@ describe('File uploader test suite', function() {
         for (let i = 0; i < arrLength; i++) {
             uploadFile(fileUploaderInputFile, imagePath);
             expect(imagePath).toContain(getText(fileSelectedText, i));
-            expect(imagePath).toContain(getAttributeByName(fileUploaderInput, 'title', i).slice(1));
+            expect(imagePath).toContain(getElementTitle(fileUploaderInput, i).slice(1));
         }
     });
 

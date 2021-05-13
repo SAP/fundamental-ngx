@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     template: `
         <div class="step-input-example-container" style="justify-content: space-evenly;">
             <div class="step-input-example">
-                <label fd-form-label for="default-input">Normal</label>
+                <label fd-form-label for="default-input">Default</label>
                 <fd-step-input id="default-input" [(value)]="value1"></fd-step-input>
                 <small>Value: {{ value1 }}</small>
             </div>

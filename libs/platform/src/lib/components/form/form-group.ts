@@ -2,8 +2,8 @@ import { TemplateRef } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 
 import { FormField } from './form-field';
-import { LabelLayout, HintPlacement } from './form-options';
 import { FormFieldGroup } from './form-field-group';
+import { LabelLayout, HintPlacement } from './form-options';
 
 /**
  * FormGroup base class.
@@ -41,10 +41,6 @@ export abstract class FormGroupContainer {
      */
     addFormField: (formField: FormField) => void;
     /**
-     * Attach underlying form field group
-     */
-    addFormFieldGroup: (formFieldGroup: FormFieldGroup) => void;
-    /**
      * Detach underlying form field
      */
     removeFormField: (formField: FormField) => void;
@@ -56,4 +52,12 @@ export abstract class FormGroupContainer {
      * Detach form formControl
      */
     removeFormControl: (name: string) => void;
+    /**
+     * Attach underlying form field group
+     */
+    addFormFieldGroup: (formFieldGroup: FormFieldGroup) => void;
+    /**
+     * Detach underlying form field group
+     */
+    removeFormFieldGroup: (formFieldGroup: FormFieldGroup) => void;
 }

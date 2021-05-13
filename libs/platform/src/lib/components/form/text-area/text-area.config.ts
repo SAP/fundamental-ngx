@@ -9,7 +9,7 @@ export class TextAreaConfig {
     /**
      * Content Density of element. 'cozy' | 'compact'
      */
-    contentDensity: ContentDensity = 'cozy';
+    contentDensity: ContentDensity;
 
     /**
      * Create Provider factory function

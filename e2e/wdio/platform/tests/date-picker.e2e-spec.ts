@@ -1,17 +1,39 @@
 import {
     click,
-    elementArray, getAttributeByName, getCSSPropertyByName, getText, getValue,
-    refreshPage, scrollIntoView, sendKeys, setValue,
-    waitForElDisplayed, waitForPresent
+    elementArray,
+    getAttributeByName,
+    getCSSPropertyByName, getElementPlaceholder,
+    getText,
+    getValue,
+    refreshPage,
+    scrollIntoView,
+    sendKeys,
+    setValue,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 import { DatePicker } from '../pages/date-picker.po';
-import {date, text, highlightedColor, year2000, date1, date2, date3, date4, date5, date6, date7, date8, date9} from '../fixtures/testData/date-picker';
+import {
+    date,
+    date1,
+    date2,
+    date3,
+    date4,
+    date5,
+    date6,
+    date7,
+    date8,
+    date9,
+    highlightedColor,
+    text,
+    year2000
+} from '../fixtures/testData/date-picker';
 
 describe('Date picker suite', function() {
     const datePickerPage: DatePicker = new DatePicker();
     const {
         inputDatePicker, buttonDatePicker, activeButtonDatePicker, activeInputDatePicker, calendarExpanded,
-        calendarYearsSection, currentYear, currentDay, buttonGerman, buttonBulgarian, buttonSelectYear, buttonSelectMonth,
+        calendarYearsSection, currentDay, buttonGerman, buttonBulgarian, buttonSelectYear, buttonSelectMonth,
         buttonSelectYearsRange, buttonFirstRangeYear, buttonFirstYear, buttonFirstMonth, filterCalendarValue,
         dayInCalendarButtonByValue, yearInCalendarByValue
     } = datePickerPage;
@@ -35,7 +57,7 @@ describe('Date picker suite', function() {
         }
     });
 
-    it('Verify on click on the date picker button', () => {
+    it('Verify calendar is expanded on click on the date picker button', () => {
         const activeButtons = elementArray(activeButtonDatePicker);
         for (let i = 1; i < activeButtons.length; i++) {
             sendKeys(['Escape']);
@@ -81,7 +103,7 @@ describe('Date picker suite', function() {
     it('Verify date input field have placeholder', () => {
         const inputs = elementArray(inputDatePicker);
         for (let i = 0; i < inputs.length; i++) {
-            expect(getAttributeByName(inputDatePicker, 'placeholder', i)).toBeDefined();
+            expect(getElementPlaceholder(inputDatePicker, i)).toBeDefined();
         }
     });
 
@@ -248,7 +270,7 @@ describe('Date picker suite', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             datePickerPage.saveExampleBaselineScreenshot();
-            expect(datePickerPage.compareWithBaseline()).toBeLessThan(3);
+            expect(datePickerPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

@@ -11,6 +11,7 @@ import {
     OnChanges,
     OnDestroy,
     OnInit,
+    Optional,
     Output,
     SimpleChanges,
     TemplateRef,
@@ -21,7 +22,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PopoverComponent } from '../popover/popover.component';
 import { MenuKeyboardService } from '../menu/menu-keyboard.service';
 import { FormStates } from '../form/form-control/form-states';
-import { applyCssClass, CssClassBuilder, DynamicComponentService, FocusEscapeDirection } from '../utils/public_api';
+import {
+    applyCssClass,
+    RtlService,
+    ContentDensityService,
+    CssClassBuilder,
+    DynamicComponentService,
+    FocusEscapeDirection
+} from '../utils/public_api';
 import { KeyUtil } from '../utils/functions';
 import { PopoverFillMode } from '../popover/popover-position/popover-position';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
@@ -75,7 +83,7 @@ export class MultiInputComponent implements
 
     /** Whether the input is in compact mode. */
     @Input()
-    compact = false;
+    compact?: boolean;
 
     /** Whether to use cozy visuals but compact collapsing behavior. */
     @Input()
@@ -197,6 +205,12 @@ export class MultiInputComponent implements
     @Input()
     itemTemplate: TemplateRef<any>;
 
+    /**
+     * The tooltip for the multi-input icon.
+     */
+    @Input()
+    title: string;
+
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
     readonly searchTermChange: EventEmitter<string> = new EventEmitter<string>();
@@ -244,6 +258,9 @@ export class MultiInputComponent implements
     /** @hidden */
     displayedValues: any[] = [];
 
+    /**  @hidden */
+    _dir: string;
+
     /** @hidden */
     private _subscriptions = new Subscription();
 
@@ -259,14 +276,29 @@ export class MultiInputComponent implements
     constructor(
         private _elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
-        private _dynamicComponentService: DynamicComponentService
+        private _dynamicComponentService: DynamicComponentService,
+        @Optional() private _rtlService: RtlService,
+        @Optional() private _contentDensityService: ContentDensityService
     ) { }
 
     /** @hidden */
     ngOnInit(): void {
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
+                this.buildComponentCssClass();
+                this._changeDetRef.markForCheck();
+            }))
+        }
         this.buildComponentCssClass();
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
+        }
+        if (this._rtlService) {
+            this._subscriptions.add(this._rtlService.rtl.subscribe(isRtl => {
+                this._dir = isRtl ? 'rtl' : 'ltr';
+                this.buildComponentCssClass();
+            }));
         }
     }
 
@@ -300,6 +332,13 @@ export class MultiInputComponent implements
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
+        // TODO: this icon flip may be addressed in styles in the future
+        if (this.glyph === 'value-help' && this._dir === 'rtl') {
+            const icon = this.elementRef().nativeElement.querySelector('.sap-icon--value-help');
+            if (icon) {
+                icon.style.transform = 'scaleX(-1)';
+            }
+        }
         return [
             'fd-multi-input',
             'fd-multi-input-custom',

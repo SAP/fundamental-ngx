@@ -31,9 +31,7 @@ const exampleDataSource = () => {
         key: value,
         name: `${value}`,
         label: `Product ${value}`,
-        advanced: index > 0,
-        include: index >= 0,
-        exclude: index >= 0
+        advanced: index > 0
       }
     })
   }
@@ -47,7 +45,7 @@ export class PlatformVhdMultiInputExampleComponent implements OnInit {
   filters: any;
   originalData: ExampleTestModel[];
   dataSource: ValueHelpDialogDataSource<ExampleTestModel>;
-  currentValue: VhdValue = {};
+  currentValue: Partial<VhdValue> = {};
   selected: ExampleTestModel[] = [];
 
   constructor(private readonly _changeDetectorRef: ChangeDetectorRef) {}

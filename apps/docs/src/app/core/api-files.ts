@@ -22,6 +22,14 @@ export const API_FILES = {
     ],
     alert: ['AlertComponent', 'AlertConfig', 'AlertService', 'AlertRef'],
     avatar: ['AvatarComponent'],
+    avatarGroup: [
+        'AvatarGroupComponent',
+        'AvatarGroupItemDirective',
+        'AvatarGroupOverflowBodyDirective',
+        'AvatarGroupOverflowItemDirective',
+        'AvatarGroupOverflowButtonDirective',
+        'AvatarGroupOverflowButtonTextDirective'
+    ],
     bar: ['BarComponent', 'BarElementDirective', 'BarLeftDirective', 'BarMiddleDirective', 'BarRightDirective'],
     card: [
         'CardComponent',
@@ -30,7 +38,6 @@ export const API_FILES = {
         'CardSubtitleDirective',
         'CardSecondSubtitleDirective',
         'CardContentComponent',
-        'CardFooterComponent',
         'CardLoaderComponent',
         'CardKpiHeaderComponent',
         'CardKpiValueDirective',
@@ -60,6 +67,7 @@ export const API_FILES = {
     carousel: ['CarouselComponent', 'CarouselItemComponent', 'CarouselService'],
     combobox: ['ComboboxComponent'],
     checkbox: ['CheckboxComponent'],
+    contentDensity: [],
     datePicker: ['DatePickerComponent'],
     datetimePicker: ['DatetimePickerComponent'],
     dynamicPage: [
@@ -71,6 +79,10 @@ export const API_FILES = {
         'DynamicPageGlobalActionsComponent',
         'DynamicPageFooterComponent',
         'DynamicPageContentComponent'
+    ],
+    facets: [
+      'FacetComponent',
+      'FacetGroupComponent'
     ],
     feedInput: [
         'FeedInputComponent',
@@ -173,22 +185,25 @@ export const API_FILES = {
         'MessageBoxFooterButtonComponent'
     ],
     notification: [
+        'NotificationTitleDirective',
+        'NotificationIndicatorDirective',
+        'NotificationParagraphDirective',
+        'NotificationFooterContentDirective',
+        'NotificationSeparatorDirective',
+        'NotificationLimitTitleDirective',
+        'NotificationLimitDescriptionDirective',
+        'NotificationActionsComponent',
+        'NotificationContentComponent',
+        'NotificationLimitComponent',
+        'NotificationGroupHeaderComponent',
+        'NotificationGroupComponent',
+        'NotificationGroupListComponent',
         'NotificationComponent',
         'NotificationHeaderComponent',
         'NotificationBodyComponent',
         'NotificationFooterComponent',
-        'NotificationServiceDirective',
-        'NotificationActionsDirective',
-        'NotificationAvatarDirective',
-        'NotificationContentDirective',
-        'NotificationDescriptionDirective',
-        'NotificationMetadataDirective',
-        'NotificationTextDirective',
-        'NotificationTitleDirective',
-        'DefaultNotificationComponent',
         'NotificationContainer',
         'NotificationConfig',
-        'NotificationDefault',
         'NotificationRef'
     ],
     objectIdentifier: ['ObjectIdentifierComponent'],

@@ -3,7 +3,7 @@ import {
     click,
     getAttributeByName,
     getAttributeByNameArr,
-    getElementArrayLength,
+    getElementArrayLength, getElementPlaceholder,
     getText,
     refreshPage,
     scrollIntoView,
@@ -145,7 +145,7 @@ describe('Multi input test suite', function() {
             const dropdownOption = getText(dropdownOptionText, j);
             expect(dropdownOption).toContain(optionsArr[0].substring(0, 3));
         }
-        multiInputPage.expandDropdown(activeDropdownButtons, 4);
+        multiInputPage.expandDropdown(activeDropdownButtons, 5);
         setValue(mobileInput, optionsArr[4].substring(0, 3));
         filteredOptions = getElementArrayLength(dropdownOptions);
         for (let j = 0; j < filteredOptions; j++) {
@@ -188,8 +188,8 @@ describe('Multi input test suite', function() {
     it('Verify inputs should have placeholder', () => {
         const activeInputsQuantity = getElementArrayLength(activeInputs);
         for (let i = 0; i < activeInputsQuantity; i++) {
-            expect(placeholderValue).toContain(getAttributeByName
-            (activeInputs, 'placeholder', i));
+            expect(placeholderValue).toContain(getElementPlaceholder
+            (activeInputs, i));
         }
     });
 

@@ -29,8 +29,10 @@ import {
 } from '../utils/services/keyboard-support/keyboard-support.service';
 import { ActionSheetItemComponent, ActionSheetClickEvent } from './action-sheet-item/action-sheet-item.component';
 import { startWith, takeUntil } from 'rxjs/operators';
-import { Subject, merge } from 'rxjs';
+import { Subject, merge, Subscription } from 'rxjs';
 import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-mobile.component';
+import { ContentDensityService } from '../utils/public_api';
+import { Placement } from '../popover/popover-position/popover-position';
 
 @Component({
     selector: 'fd-action-sheet',
@@ -56,6 +58,14 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** Whether should be displayed in mobile mode **/
     @Input()
     mobile = false;
+
+    /** The position of the popover body. Set to 'bottom' by default. **/
+    @Input()
+    placement: Placement = 'bottom';
+
+    /** Whether the popover body has an arrow. Set to false by default. **/
+    @Input()
+    noArrow = false;
 
     /** Whenever links should be visible **/
     @Input()
@@ -108,10 +118,14 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden **/
     private readonly _onRefresh$: Subject<void> = new Subject<void>();
 
+    /** @hidden */
+    private _subscriptions = new Subscription();
+
     constructor(
         private _elementRef: ElementRef,
         private _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>,
         private _changeDetectionRef: ChangeDetectorRef,
+        @Optional() private _contentDensityService: ContentDensityService,
         @Optional() private _dynamicComponentService: DynamicComponentService
     ) {}
 
@@ -129,10 +143,21 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         if (this.mobile) {
             this._setUpMobileMode();
         }
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this._compact = density !== 'cozy';
+                this.actionSheetBody.compact = density !== 'cozy';
+                this.actionSheetItems.forEach(item => {
+                    item.compact = density !== 'cozy';
+                    this._changeDetectionRef.markForCheck();
+                });
+            }));
+        }
     }
 
     /** @hidden */
     ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
@@ -173,7 +198,9 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     private _initializeChildrenState(): void {
         if (this.actionSheetBody) {
             this.actionSheetBody.mobile = this.mobile;
-            this.actionSheetBody.compact = this._compact;
+            if (this.compact === false || this.compact === true) {
+                this.actionSheetBody.compact = this._compact;
+            }
         }
     }
 
@@ -224,7 +251,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     private _setItemsProperties(): void {
-        if (this.actionSheetItems) {
+        if (this.actionSheetItems && this.compact === false || this.compact === true) {
             this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.compact = this._compact);
         }
     }

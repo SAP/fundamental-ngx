@@ -1,10 +1,26 @@
 import {
     click,
-    elementArray, getAttributeByName, getCSSPropertyByName, getText, getValue,
-    refreshPage, scrollIntoView, sendKeys, setValue,
-    waitForElDisplayed, waitForPresent, waitForUnclickable
+    elementArray,
+    getAttributeByName,
+    getCSSPropertyByName, getElementPlaceholder,
+    getText,
+    getValue,
+    refreshPage,
+    scrollIntoView,
+    sendKeys,
+    setValue,
+    waitForElDisplayed,
+    waitForPresent,
+    waitForUnclickable
 } from '../../driver/wdio';
-import {date, currentDate, highlightedColor, compactDate, year2030, text} from '../fixtures/testData/date-time-picker';
+import {
+    compactDate,
+    currentDate,
+    date,
+    highlightedColor,
+    text,
+    year2030
+} from '../fixtures/testData/date-time-picker';
 import { DateTimePicker } from '../pages/date-time-picker.po';
 
 let dateTimePickerPage: DateTimePicker;
@@ -87,7 +103,7 @@ describe('Datetime picker suite', function() {
     it('Verify date input field have placeholder', () => {
         const inputs = elementArray(datePickerInput);
         for (let i = 0; i < inputs.length; i++) {
-            expect(['', null]).not.toContain(getAttributeByName(datePickerInput, 'placeholder', i));
+            expect(['', null]).not.toContain(getElementPlaceholder(datePickerInput, i));
         }
     });
 

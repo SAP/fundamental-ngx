@@ -130,6 +130,7 @@
 
 <ng-template #radio>
     <input
+        [attr.tabindex]="selectionMode === 'singleSelect' ? -1 : 0"
         type="radio"
         class="fd-radio fd-radio--compact fd-grid-list__radio-input"
         [id]="id + '-radio'"

@@ -42,6 +42,8 @@ import * as platformTableP13FilterSrc from '!raw-loader!./platform-table-example
 import * as platformTableP13FilterTsSrc from '!raw-loader!./platform-table-examples/platform-table-p13-filter-example.component.ts';
 import * as platformTableP13GroupSrc from '!raw-loader!./platform-table-examples/platform-table-p13-group-example.component.html';
 import * as platformTableP13GroupTsSrc from '!raw-loader!./platform-table-examples/platform-table-p13-group-example.component.ts';
+import * as platformTreeTableDefaultSrc from '!raw-loader!./platform-table-examples/platform-table-tree-example.component.html';
+import * as platformTreeTableDefaultTsSrc from '!raw-loader!./platform-table-examples/platform-table-tree-example.component.ts';
 
 import { TableDataProviderExample } from './platform-table-examples/platform-table-data-provider-example';
 import { ExampleItem } from './platform-table-examples/platform-table-data-items-example';
@@ -361,6 +363,22 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-p13-group-example',
             component: 'PlatformTableP13GroupExampleComponent',
             name: 'platform-table-example.component.ts'
+        }
+    ];
+
+    treeTableFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTreeTableDefaultSrc,
+            fileName: 'platform-table-tree-example',
+            name: 'platform-table-tree-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: platformTreeTableDefaultTsSrc,
+            fileName: 'platform-table-tree-example',
+            component: 'PlatformTableTreeExampleComponent',
+            name: 'platform-table-tree-example.component.ts'
         }
     ];
 

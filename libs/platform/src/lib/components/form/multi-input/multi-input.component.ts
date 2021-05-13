@@ -1,15 +1,13 @@
 import { Direction } from '@angular/cdk/bidi';
-import { BACKSPACE, DELETE, DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import {
     ChangeDetectionStrategy,
     Component,
     ViewEncapsulation,
     ViewChild,
-    EventEmitter,
     forwardRef,
     Input,
-    Output,
     OnInit,
     AfterViewInit,
     ChangeDetectorRef,
@@ -23,13 +21,7 @@ import {
     TemplateRef
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
-import {
-    TokenizerComponent,
-    KeyUtil,
-    DialogConfig,
-    DynamicComponentService,
-    RtlService
-} from '@fundamental-ngx/core';
+import { TokenizerComponent, KeyUtil, DialogConfig, DynamicComponentService, RtlService } from '@fundamental-ngx/core';
 
 import { Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -39,11 +31,12 @@ import { ListComponent, SelectionType } from '../../list/list.component';
 import { ListConfig } from '../../list/list.config';
 import { FormFieldControl, Status } from '../form-control';
 import { FormField } from '../form-field';
-import { InputGroupAddonComponent } from '../input-group/addon.component';
+
 import { InputType } from '../input/input.component';
-import { BaseMultiInput } from './base-multi-input';
+import { BaseMultiInput, MultiInputSelectionChangeEvent } from './base-multi-input';
 import { PlatformMultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MULTIINPUT_COMPONENT } from './multi-input.interface';
+import { AutoCompleteEvent } from '../auto-complete/auto-complete.directive';
 
 @Component({
     selector: 'fdp-multi-input',
@@ -60,17 +53,28 @@ import { MULTIINPUT_COMPONENT } from './multi-input.interface';
     ]
 })
 export class PlatformMultiInputComponent extends BaseMultiInput implements OnInit, AfterViewInit {
-
     /** type Represent the type of input used for the multi Input */
     @Input()
     type: InputType;
+
+    /**boolean type represents the focus set for the respective multi input */
+    @Input()
+    autofocus = false;
 
     @ViewChild(ListComponent)
     listTemplateDD: ListComponent;
 
     /** Selected values from the list items. */
+
+    _selected: any[] = [];
+
     @Input()
-    selected: any[] = [];
+    set selected(selectedValue: any[]) {
+        this.value = selectedValue;
+    }
+    get selected(): any[] {
+        return this._selected;
+    }
 
     /**
      *
@@ -88,7 +92,8 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     get isGroup(): boolean {
         return !!(this.group && this.groupKey);
     }
-    /** Whether the input is disabled. */
+    /** @hidden
+     * Whether the input is disabled. */
     protected _disabled = false;
 
     @Input()
@@ -111,9 +116,6 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     @ViewChild(TokenizerComponent)
     tokenizer: TokenizerComponent;
 
-    @ViewChild(InputGroupAddonComponent)
-    inputGroupAddOn: InputGroupAddonComponent;
-
     /** @hidden */
     @ViewChild('controlTemplate')
     controlTemplate: TemplateRef<any>;
@@ -126,23 +128,36 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     @ViewChild(CdkConnectedOverlay)
     _connectedOverlay: CdkConnectedOverlay;
 
+    /** @hidden */
     public updateSelectedListVariables = [];
+    /** @hidden */
     private _dataSourceSubscription = Subscription.EMPTY;
 
     /** @hidden */
     private _direction: Direction = 'ltr';
 
     constructor(
+        /** @hidden */
         readonly cd: ChangeDetectorRef,
+        /** @hidden */
         readonly elementRef: ElementRef,
+        /** @hidden */
         @Optional() @Self() readonly ngControl: NgControl,
+        /** @hidden */
         @Optional() @Self() readonly ngForm: NgForm,
+        /** @hidden */
         @Optional() readonly dialogConfig: DialogConfig,
+        /** @hidden */
         readonly _dynamicComponentService: DynamicComponentService,
+        /** @hidden */
         @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
+        /** @hidden */
         readonly _listConfig: ListConfig,
-        private _rtlService: RtlService,
+        /** @hidden */
+        @Optional() private _rtlService: RtlService,
+        /** @hidden */
         @Optional() @SkipSelf() @Host() formField: FormField,
+        /** @hidden */
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
         super(cd, elementRef, ngControl, ngForm, dialogConfig, _listConfig, formField, formControl);
@@ -161,7 +176,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
 
-        this._rtlService.rtl
+        this._rtlService?.rtl
             .pipe(takeUntil(this._destroyed))
             .subscribe((isRtl) => (this._direction = isRtl ? 'rtl' : 'ltr'));
 
@@ -173,19 +188,33 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         if (this.mobile) {
             this._setUpMobileMode();
         }
+        if (this.autofocus) {
+            this.searchInputElement.nativeElement.focus();
+        }
     }
 
-    addToArray($select: any): void {
-        const index = this.selected.findIndex((selectvalue) => selectvalue.label === $select.label);
+    /** @hidden
+     * Method to emit change event
+     */
+    emitChangeEvent<T>(modelValue: T): void {
+        const event = new MultiInputSelectionChangeEvent(this, modelValue);
+
+        this.selectionChange.emit(event);
+    }
+
+    /** @hidden */
+    addToArray(value: any): void {
+        const index = this.selected.findIndex((selectvalue) => selectvalue.label === value.label);
         if (index === -1) {
-            this.selected.push($select);
+            this.selected.push(value);
             this.close();
         }
         this._updateModel(this.selected);
+        this.emitChangeEvent(value ? this.selected : null);
         this._cd.detectChanges();
     }
 
-    /**
+    /** @hidden
      * Control Value Accessor
      */
     writeValue(value: any[]): void {
@@ -196,12 +225,20 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     }
 
     /** @hidden */
+    addOnButtonClick(): void {
+        this.searchTermChanged('');
+        this.selectionMode = 'none';
+        this.showList(!this.isOpen);
+    }
+
+    /** @hidden */
     moreClicked(): void {
         this.open();
         this._suggestions = this.selected;
         this.selectionMode = 'delete';
         this._cd.markForCheck();
     }
+    /** @hidden */
     deleteToken(selectedValue): void {
         if (this.tokenizer.tokenList.length > 0) {
             this.tokenizer.tokenList.forEach((token) => {
@@ -216,9 +253,11 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         }
         this._cd.markForCheck();
     }
-
+    /** @hidden */
     removeToken(token): void {
         this.selected.splice(this.selected.indexOf(token), 1);
+        this.emitChangeEvent(token ? this.selected : null);
+        this.searchInputElement.nativeElement.focus();
         this._updateModel(this.selected);
     }
 
@@ -262,18 +301,27 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
      * Method to set as selected
      */
     setAsSelected(item: MultiInputOption[]): void {
-        const selectedItem = item[0];
+        this._selected = item;
+        this.inputText = '';
+    }
 
-        if (this.isSelectedOptionItem(selectedItem)) {
+    /** @hidden */
+    _onAutoComplete(event: AutoCompleteEvent): void {
+        if (!event.forceClose) {
             return;
         }
 
-        this.selectedValue = this.isGroup
-            ? selectedItem.children
-                ? selectedItem.children[0]
-                : selectedItem
-            : selectedItem;
-        this.inputText = this.displayValue(this.selected);
+        const [item] = this.isGroup ? this._suggestions[0]?.children || [] : this._suggestions;
+        if (item && item.label === event.term) {
+            this.addToArray(item);
+        }
+    }
+
+    /** @hidden */
+    _onKeydownEnter(event: KeyboardEvent): void {
+        if (this.inputText) {
+            event.preventDefault();
+        }
     }
 
     /** @hidden
@@ -321,17 +369,17 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
             { injector: Injector.create({ providers: [{ provide: MULTIINPUT_COMPONENT, useValue: this }] }) }
         );
     }
-    /** Handle dialog dismissing, closes popover and sets backup data. */
+    /** @hidden Handle dialog dismissing, closes popover and sets backup data. */
     dialogDismiss(term: string): void {
         if (this.selectedValue && term !== this.selectedValue.label) {
             this.selectedValue = this._getSelectedOptionItem(term);
         }
-        this.selected = [];
+        this._selected = [];
         this.inputText = term;
         this.showList(false);
     }
 
-    /** Handle dialog approval, closes popover and propagates data changes. */
+    /** @hidden Handle dialog approval, closes popover and propagates data changes. */
     dialogApprove(): void {
         if (this.selected && this.selectedValue.label === this.inputText) {
             this._updateModel(this.selectedValue.value);

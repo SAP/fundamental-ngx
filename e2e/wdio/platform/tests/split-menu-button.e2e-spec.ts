@@ -1,20 +1,33 @@
 import { SplitMenuButtonPo } from '../pages/split-menu-button.po';
-import {standardBtnText, iconAttr, textColorAttr, tooltipAttr, compactAttr, compactValue, bgColorAttr,
-    typesBtnHvrColorArr, typesBtnColorArr, standardBtnText2, defaultHvrColor, iconLabel, behaviorBtnTextArr,
-    iconBtnTextArr, typesBtnTextArr} from '../fixtures/appData/split-menu-button-page-contents';
 import {
-    acceptAlert,
+    behaviorBtnTextArr,
+    bgColorAttr,
+    compactAttr,
+    compactValue,
+    defaultHvrColor,
+    iconAttr,
+    iconBtnTextArr,
+    iconLabel,
+    standardBtnText,
+    standardBtnText2,
+    textColorAttr,
+    typesBtnColorArr,
+    typesBtnHvrColorArr,
+    typesBtnTextArr
+} from '../fixtures/appData/split-menu-button-page-contents';
+import {
     browserIsIEorSafari,
     click,
     elementArray,
     getAttributeByName,
     getCSSPropertyByName,
-    getElementArrayLength,
+    getElementArrayLength, getElementTitle,
     mouseHoverElement,
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,
-    waitForNotDisplayed, waitForPresent
+    waitForNotDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('Split menu button test suite', () => {
@@ -153,7 +166,7 @@ describe('Split menu button test suite', () => {
         }
     });
 
-    it('should check split btn type examples hover colors', () => {
+    xit('should check split btn type examples hover colors', () => {
         const typesBtnArr = elementArray(typesExSelectionBtnArr);
         const typesArrowBtnArr = elementArray(typesExArrowBtnArr);
 
@@ -198,8 +211,7 @@ describe('Split menu button test suite', () => {
         const menuBtnArr = elementArray(mainBtnArr);
 
         for (let i = 0; i < menuBtnArr.length; i++) {
-            expect(getAttributeByName(mainBtnArr, tooltipAttr, i))
-                .not.toEqual(null);
+            expect(getElementTitle(mainBtnArr, i)).not.toEqual(null);
         }
     });
 

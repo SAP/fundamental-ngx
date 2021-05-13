@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'text-expandable',
+    selector: 'fd-text-expandable',
     templateUrl: './text-expandable.component.html'
 })
 export class TextExpandableComponent {

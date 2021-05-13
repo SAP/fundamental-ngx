@@ -24,7 +24,7 @@ import { coerceNumberProperty, _isNumberValue } from '@angular/cdk/coercion';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
-import { applyCssClass, CssClassBuilder, KeyUtil, RtlService } from '../utils/public_api';
+import { applyCssClass, ContentDensityService, CssClassBuilder, KeyUtil, RtlService } from '../utils/public_api';
 import { PopoverComponent } from '../popover/public_api';
 import { SliderControlValue, SliderCustomValue, SliderRangeHandles, SliderTickMark, SliderValueTargets } from './slider.model';
 import { MIN_DISTANCE_BETWEEN_TICKS } from './constants';
@@ -167,7 +167,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** Whether to apply cozy mode. */
     @Input()
-    cozy: boolean;
+    cozy: boolean = null;
 
     _position: number | number[] = 0;
 
@@ -286,7 +286,8 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         private readonly _cdr: ChangeDetectorRef,
         private readonly _renderer: Renderer2,
         private readonly _platform: Platform,
-        @Optional() private readonly _rtlService: RtlService
+        @Optional() private readonly _rtlService: RtlService,
+        @Optional() private _contentDensityService: ContentDensityService
     ) {}
 
     /** @hidden */
@@ -297,6 +298,10 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
         if (this._valuesBySteps.length === 0) {
             this._constructValuesBySteps();
+        }
+
+        if (this.cozy === null && this._contentDensityService) {
+            this._subscribeToContentDensity();
         }
     }
 
@@ -708,11 +713,22 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden Rtl change subscription */
     private _subscribeToRtl(): void {
-        this._isRtl = this._rtlService?.rtl.getValue();
+        if (!this._rtlService) {
+            return;
+        }
 
-        this._rtlService?.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
+        this._rtlService.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
             this._isRtl = isRtl;
             this._cdr.markForCheck();
+        });
+    }
+
+    /** @hidden ContentDensity change subscription */
+    private _subscribeToContentDensity(): void {
+        this._contentDensityService?._contentDensityListener.pipe(takeUntil(this._onDestroy$)).subscribe((density) => {
+            this.cozy = density === 'cozy';
+            this.buildComponentCssClass();
+            this._cdr.detectChanges();
         });
     }
 
@@ -807,7 +823,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             if (!this._instanceOfCustomValue(firstHandle)) {
                 firstHandle = this.customValues[0];
             }
-    
+
             if (!this._instanceOfCustomValue(secondHandle)) {
                 secondHandle = this.customValues[this.customValues.length - 1];
             }

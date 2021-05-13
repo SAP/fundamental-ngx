@@ -88,15 +88,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     autoComplete = true;
 
     /**
-     * content Density of element. 'cozy' | 'compact'
-     */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-        this.isCompact = contentDensity === 'compact';
-    }
-
-    /**
      * Todo: Name of the entity for which DataProvider will be loaded. You can either pass list of
      * items or use this entityClass and internally we should be able to do lookup to some registry
      * and retrieve the best matching DataProvider that is set on application level
@@ -371,6 +362,11 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         this.isOpen = false;
         this.isOpenChange.emit(this.isOpen);
         this._cd.markForCheck();
+    }
+
+    /**@hidden */
+    convertObjectToMultiInputOption(items: any[]): MultiInputOption[] {
+        return this._convertObjectsToOptionItems(items);
     }
 
     /** @hidden */

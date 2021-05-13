@@ -8,11 +8,9 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { applyCssClass, ColorAccent, CssClassBuilder, getRandomColorAccent, Size } from '../utils/public_api';
 import { ANY_LANGUAGE_LETTERS_REGEX } from '../utils/consts';
 
-export type AvatarSize = 'xs' | 's' | 'm' | 'l' | 'xl';
-export type ColorAccent = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 let avatarUniqueId = 0;
 
 @Component({
@@ -52,7 +50,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** The size of the Avatar. Options include: *xs*, *s*, *m*, *l* and *xl*. */
-    @Input() size: AvatarSize = 'l';
+    @Input() size: Size = 'l';
 
     /** The glyph name. */
     @Input() glyph: string = null;
@@ -77,6 +75,9 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** A number from 1 to 10 representing the background color of the Avatar. */
     @Input() colorAccent: ColorAccent = null;
+
+    /** Whether or not to apply random background color to the Avatar. */
+    @Input() random = false;
 
     /**
      * @deprecated
@@ -106,7 +107,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** @hidden */
     @HostBinding('attr.role')
     get role(): string {
-        return this.zoomGlyph ? 'button' : 'presentation';
+        return this.zoomGlyph ? 'button' : 'img';
     }
 
     /** @hidden */
@@ -145,7 +146,8 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         return [
             'fd-avatar',
             this.size ? `fd-avatar--${this.size}` : '',
-            this.colorAccent ? `fd-avatar--accent-color-${this.colorAccent}` : '',
+            this.colorAccent && !this.random ? `fd-avatar--accent-color-${this.colorAccent}` : '',
+            this.random ? `fd-avatar--accent-color-${getRandomColorAccent()}` : '',
             this.circle ? 'fd-avatar--circle' : '',
             this.border ? 'fd-avatar--border' : '',
             this.transparent ? 'fd-avatar--transparent' : '',

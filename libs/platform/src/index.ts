@@ -25,3 +25,4 @@ export * from './lib/components/upload-collection/public_api';
 export * from './lib/utils/pipes/public_api';
 export * from './lib/components/approval-flow/public_api';
 export * from './lib/components/slider/public_api';
+export * from './lib/components/page-footer/public_api';

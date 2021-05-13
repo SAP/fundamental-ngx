@@ -1,13 +1,30 @@
 import { InfoLabelPO } from '../pages/info-label.po';
-import { semanticColorsArr, ariaLabelAttribute, ariaLabelExample, ariaLabelledByAttribute, ariaSuccessLabel, backgroundColor,
-cssAlignmentAttribute, decimalLabel, defaultLabelText, iconInfoLabelText, infoLabelText, labelContentAlignment, labelIconAttribute,
-labelIconAttributeValue, largeNumberLabel, numberLabel, safariAriaLabelExample, safariAriaSuccessLabel, safariDefaultLabelText,
-safariIconInfoLabelText, safariInfoLabelText, safariLargeNumberLabel} from '../fixtures/appData/info-label-page-contents';
+import {
+    ariaLabelExample,
+    ariaLabelledByAttribute,
+    ariaSuccessLabel,
+    backgroundColor,
+    cssAlignmentAttribute,
+    decimalLabel,
+    defaultLabelText,
+    infoLabelText,
+    labelContentAlignment,
+    labelIconAttribute,
+    labelIconAttributeValue,
+    largeNumberLabel,
+    numberLabel,
+    safariAriaLabelExample,
+    safariAriaSuccessLabel,
+    safariIconInfoLabelText,
+    safariInfoLabelText,
+    safariLargeNumberLabel,
+    semanticColorsArr
+} from '../fixtures/appData/info-label-page-contents';
 import {
     browserIsSafari,
     elementArray,
     getAttributeByName,
-    getCSSPropertyByName,
+    getCSSPropertyByName, getElementAriaLabel,
     getText,
     waitForElDisplayed
 } from '../../driver/wdio';
@@ -111,8 +128,7 @@ describe('Info Label component test suite', () => {
         const ariaAttrArr = elementArray(accessibilityAttrArr);
 
         if (browserIsSafari()) {
-            expect(getAttributeByName(accessibilityLabelsArr, ariaLabelAttribute, 0))
-                .not.toBe(null);
+            expect(getElementAriaLabel(accessibilityLabelsArr)).not.toBe(null);
             expect(getAttributeByName(accessibilityLabelsArr, ariaLabelledByAttribute, 1))
                 .not.toBe(null);
 
@@ -124,8 +140,7 @@ describe('Info Label component test suite', () => {
                     .toContain(semanticColorsArr[1].value);
             }
         } else {
-            expect(getAttributeByName(accessibilityLabelsArr, ariaLabelAttribute, 0))
-                .not.toBe(null);
+            expect(getElementAriaLabel(accessibilityLabelsArr)).not.toBe(null);
             expect(getAttributeByName(accessibilityLabelsArr, ariaLabelledByAttribute, 1))
                 .not.toBe(null);
 

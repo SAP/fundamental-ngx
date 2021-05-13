@@ -11,7 +11,7 @@ import {
     checkElementScreenshot, scrollIntoView, isElementDisplayed, pause
 } from '../../driver/wdio';
 
-describe('alert test suite', function() {
+describe('Alert test suite', function() {
     const alertPage = new AlertPo();
     const {
         alerts,
