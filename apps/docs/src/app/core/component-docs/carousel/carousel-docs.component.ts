@@ -29,14 +29,14 @@ export class CarouselDocsComponent {
     carouselSingle: ExampleFile[] = [
         {
             language: 'html',
-            fileName: 'carousel-one-active-item',
-            component: 'CarouselOneActiveItemComponent',
+            fileName: 'carousel-one-active-item-example',
+            component: 'CarouselOneActiveItemExampleComponent',
             code: carouselOneActiveItemHtml
         },
         {
             language: 'typescript',
-            fileName: 'carousel-one-active-item',
-            component: 'CarouselOneActiveItemComponent',
+            fileName: 'carousel-one-active-item-example',
+            component: 'CarouselOneActiveItemExampleComponent',
             code: carouselOneActiveItemTs
         }
     ];
@@ -44,14 +44,14 @@ export class CarouselDocsComponent {
     carouselVertical: ExampleFile[] = [
         {
             language: 'html',
-            fileName: 'carousel-vertical-direction',
-            component: 'CarouselVerticalDirectionComponent',
+            fileName: 'carousel-vertical-direction-example',
+            component: 'CarouselVerticalDirectionExampleComponent',
             code: carouselVerticalHtml
         },
         {
             language: 'typescript',
-            fileName: 'carousel-vertical-direction',
-            component: 'CarouselVerticalDirectionComponent',
+            fileName: 'carousel-vertical-direction-example',
+            component: 'CarouselVerticalDirectionExampleComponent',
             code: carouselVerticalTs
         }
     ];
@@ -59,14 +59,14 @@ export class CarouselDocsComponent {
     carouselMultiItem: ExampleFile[] = [
         {
             language: 'typescript',
-            fileName: 'carousel-multiple-active-item',
-            component: 'CarouselMultipleActiveItemComponent',
+            fileName: 'carousel-multiple-active-item-example',
+            component: 'CarouselMultipleActiveItemExampleComponent',
             code: carouselMultipleActiveItemTs
         },
         {
             language: 'html',
-            fileName: 'carousel-multiple-active-item',
-            component: 'CarouselMultipleActiveItemComponent',
+            fileName: 'carousel-multiple-active-item-example',
+            component: 'CarouselMultipleActiveItemExampleComponent',
             code: carouselMultipleActiveItemHtml
         }
     ];
@@ -89,14 +89,14 @@ export class CarouselDocsComponent {
     carouselNoIndicator: ExampleFile[] = [
         {
             language: 'typescript',
-            fileName: 'carousel-no-page-indicator',
-            component: 'CarouselNoPageIndicatorComponent',
+            fileName: 'carousel-no-page-indicator-example',
+            component: 'CarouselNoPageIndicatorExampleComponent',
             code: carouselNoIndicatorTs
         },
         {
             language: 'html',
-            fileName: 'carousel-no-page-indicator',
-            component: 'CarouselNoPageIndicatorComponent',
+            fileName: 'carousel-no-page-indicator-example',
+            component: 'CarouselNoPageIndicatorExampleComponent',
             code: carouselNoIndicatorHtml
         }
     ];
@@ -104,14 +104,14 @@ export class CarouselDocsComponent {
     carouselHiddenNavigation: ExampleFile[] = [
         {
             language: 'typescript',
-            fileName: 'carousel-hidden-navigation',
-            component: 'CarouselHiddenNavigationComponent',
+            fileName: 'carousel-hidden-navigation-example',
+            component: 'CarouselHiddenNavigationExampleComponent',
             code: carouselHiddenNavigationTs
         },
         {
             language: 'html',
-            fileName: 'carousel-hidden-navigation',
-            component: 'CarouselHiddenNavigationComponent',
+            fileName: 'carousel-hidden-navigation-example',
+            component: 'CarouselHiddenNavigationExampleComponent',
             code: carouselHiddenNavigationHtml
         }
     ];
@@ -119,14 +119,14 @@ export class CarouselDocsComponent {
     carouselContentNavigator: ExampleFile[] = [
         {
             language: 'typescript',
-            fileName: 'carousel-content-navigation',
-            component: 'CarouselContentNavigationComponent',
+            fileName: 'carousel-content-navigation-example',
+            component: 'CarouselContentNavigationExampleComponent',
             code: carouselContentNavigatorTs
         },
         {
             language: 'html',
-            fileName: 'carousel-content-navigation',
-            component: 'CarouselContentNavigationComponent',
+            fileName: 'carousel-content-navigation-example',
+            component: 'CarouselContentNavigationExampleComponent',
             code: carouselContentNavigatorHtml
         }
     ];
@@ -134,14 +134,14 @@ export class CarouselDocsComponent {
     carouselLoopedNavigation: ExampleFile[] = [
         {
             language: 'typescript',
-            fileName: 'carousel-looped-navigation',
-            component: 'CarouselLoopedNavigationComponent',
+            fileName: 'carousel-looped-navigation-example',
+            component: 'CarouselLoopedNavigationExampleComponent',
             code: carouselLoopedNavigationTs
         },
         {
             language: 'html',
-            fileName: 'carousel-looped-navigation',
-            component: 'CarouselLoopedNavigationComponent',
+            fileName: 'carousel-looped-navigation-example',
+            component: 'CarouselLoopedNavigationExampleComponent',
             code: carouselLoopedNavigationHtml
         }
     ];
@@ -149,14 +149,14 @@ export class CarouselDocsComponent {
     carouselErrorMessage: ExampleFile[] = [
         {
             language: 'typescript',
-            fileName: 'carousel-error-message',
-            component: 'CarouselErrorMessageComponent',
+            fileName: 'carousel-error-message-example',
+            component: 'CarouselErrorMessageExampleComponent',
             code: carouselErrorMessageTs
         },
         {
             language: 'html',
-            fileName: 'carousel-error-message',
-            component: 'CarouselErrorMessageComponent',
+            fileName: 'carousel-error-message-example',
+            component: 'CarouselErrorMessageExampleComponent',
             code: carouselErrorMessageHtml
         }
     ];
