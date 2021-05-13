@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.4...v0.30.1-rc.5) (2021-05-13)
+
+
+### Bug Fixes
+
+* (Platform) Pre-populated values not honouring the display key value ([#5204](https://github.com/SAP/fundamental-ngx/issues/5204)) ([4f2d9a0](https://github.com/SAP/fundamental-ngx/commit/4f2d9a0f283bd39e919a9561172810ac62b6b074))
+
 ### [0.30.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.3...v0.30.1-rc.4) (2021-05-13)
 
 
