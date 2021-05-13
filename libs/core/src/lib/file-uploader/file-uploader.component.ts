@@ -241,8 +241,6 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
         } event.preventDefault();
     }
 
-
-
     /**
      * Opens the file selector.
      */
