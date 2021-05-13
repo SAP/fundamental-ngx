@@ -1,7 +1,6 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    ChangeDetectorRef,
     ElementRef,
     Input,
     OnChanges,
@@ -13,7 +12,6 @@ import { applyCssClass, CssClassBuilder } from '../utils/public_api';
 export type MessagePageType = '' | 'filter' | 'search' | 'no-items' | 'error';
 
 @Component({
-    // tslint:disable-next-line:component-selector
     selector: 'fd-message-page',
     templateUrl: './message-page.component.html',
     styleUrls: ['./message-page.component.scss'],
@@ -50,7 +48,6 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
         if (messagePageGlyph) {
             this._glyph = messagePageGlyph;
             this._getMessagePageIcon();
-            this._changeDetectorRef.detectChanges();
         }
         
     }
@@ -70,7 +67,7 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
 
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -97,7 +94,6 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
     ngOnInit(): void {
         this.buildComponentCssClass();
         this._getMessagePageIcon();
-        this._changeDetectorRef.detectChanges();
     }
 
      /** 
