@@ -15,7 +15,7 @@
     </tr>
     </thead>
     <tbody fd-table-body>
-        <tr *ngFor="let row of tableRows; let i = index" fd-table-row [attr.aria-selected]="tableRows[i].checked" [disabled]="tableRows[i].disabled">
+        <tr *ngFor="let row of tableRows; let i = index" fd-table-row [attr.aria-selected]="tableRows[i].checked" [isDisabled]="tableRows[i].disabled">
             <td fd-table-cell fd-table-status-indicator [status]="row.status"></td>
             <td fd-table-cell>
                 <fd-checkbox
@@ -43,7 +43,7 @@
         </thead>
         <tbody fd-table-body>
         <ng-container *ngFor="let fruit of fruits">
-            <tr fd-table-row [main]="true" [activable]="true" [disabled]="fruit.disabled">
+            <tr fd-table-row [main]="true" [activable]="true" [isDisabled]="fruit.disabled">
                 <td fd-table-cell>
                     <p fd-table-text [title]="true">{{fruit.name}}</p>
                     <p fd-table-text>{{fruit.country}}</p>
@@ -52,7 +52,7 @@
                     {{fruit.price}}
                 </td>
             </tr>
-            <tr fd-table-row [secondary]="true" [disabled]="fruit.disabled">
+            <tr fd-table-row [secondary]="true" [isDisabled]="fruit.disabled">
                 <td fd-table-cell colspan="100%">
                     <p fd-table-text>
                         <label fd-form-label>Status:</label>

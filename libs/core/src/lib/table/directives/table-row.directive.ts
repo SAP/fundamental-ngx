@@ -60,14 +60,14 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     /** Whether or not the table row is disabled */
     @HostBinding('class.fd-table__row--disabled')
     @Input()
-    disabled = false;
+    isDisabled = false;
 
     /** @hidden */
     propagateKeysSubscription: Subscription;
 
     /** When the row is disabled, prevent interaction via enter and space keys */
     @HostListener('keydown', ['$event']) handleKeyDown(event: KeyboardEvent): void {
-        if (this.disabled && KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+        if (this.isDisabled && KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             event.preventDefault();
         }
     }
