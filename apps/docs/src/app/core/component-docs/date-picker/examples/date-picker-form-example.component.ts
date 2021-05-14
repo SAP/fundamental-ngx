@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { FdDate } from '@fundamental-ngx/core';
+import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-date-picker-form-example',
@@ -44,7 +44,17 @@ import { FdDate } from '@fundamental-ngx/core';
                 {{ customForm.controls.disabledDate.value?.toDateString() || 'null' }}
             </div>
         </form>
-    `
+    `,
+    providers: [
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        },
+        {
+            provide: DATE_TIME_FORMATS,
+            useValue: FD_DATETIME_FORMATS
+        }
+    ]
 })
 export class DatePickerFormExampleComponent {
     customForm = new FormGroup({
