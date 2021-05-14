@@ -10,7 +10,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
     constructor() {
         super();
 
-        this.layouts = [
+        this.guides = [
             { url: 'core/home', name: 'Home' },
             { url: 'core/new-component', name: 'New Component' }
         ];
