@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { DatetimePickerComponent, FdDate } from '@fundamental-ngx/core';
+import { DatetimeAdapter, DatetimePickerComponent, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-date-time-picker-allow-null-example',
@@ -12,7 +12,17 @@ import { DatetimePickerComponent, FdDate } from '@fundamental-ngx/core';
         <br />
         <br />
         <span>Selected Date: {{ selectedDay }}</span>
-    `
+    `,
+    providers: [
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        },
+        {
+            provide: DATE_TIME_FORMATS,
+            useValue: FD_DATETIME_FORMATS
+        }
+    ]
 })
 export class DatetimePickerAllowNullExampleComponent {
     @ViewChild(DatetimePickerComponent) datePicker: DatetimePickerComponent<FdDate>;
