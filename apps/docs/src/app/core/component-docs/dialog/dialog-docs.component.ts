@@ -155,13 +155,13 @@ export class DialogDocsComponent {
         {
             language: 'html',
             code: objectDialogHtml,
-            fileName: 'dialog-object'
+            fileName: 'dialog-object-example'
         },
         {
             language: 'typescript',
             code: objectDialogTs,
-            fileName: 'dialog-object',
-            component: 'DialogObjectComponent'
+            fileName: 'dialog-object-example',
+            component: 'DialogObjectExampleComponent'
         }
     ];
 
@@ -204,7 +204,7 @@ export class DialogDocsComponent {
             code: secondDialogStackedTs,
             name: 'Second Dialog',
             fileName: 'second-dialog-example',
-            component: 'SecondDialogExample',
+            component: 'SecondDialogExampleComponent',
             entryComponent: true
         },
         {
@@ -212,14 +212,14 @@ export class DialogDocsComponent {
             code: firstDialogStackedTs,
             name: 'First Dialog',
             fileName: 'first-dialog-example',
-            component: 'FirstDialogExample',
+            component: 'FirstDialogExampleComponent',
             entryComponent: true
         },
         {
             language: 'typescript',
             code: dialogStackedTs,
             fileName: 'dialog-stacked-example',
-            component: 'DialogStackedExample',
+            component: 'DialogStackedExampleComponent',
             main: true
         }
     ];
