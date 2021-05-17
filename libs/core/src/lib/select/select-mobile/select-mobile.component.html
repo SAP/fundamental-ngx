@@ -2,8 +2,8 @@
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
 
         <fd-dialog-header>
-            <h1 *ngIf="mobileConfig.title" fd-title>{{mobileConfig.title}}</h1>
-            <button *ngIf="mobileConfig.hasCloseButton" fd-dialog-close-button [mobile]="true" (click)="_cancel()">
+            <h1 tabindex="-1" *ngIf="mobileConfig.title" fd-title [attr.aria-label]="mobileConfig.title">{{mobileConfig.title}}</h1>
+            <button tabindex="0" role="button" *ngIf="mobileConfig.hasCloseButton" aria-label="close" fd-dialog-close-button [mobile]="true" (click)="_cancel()">
             </button>
         </fd-dialog-header>
 
