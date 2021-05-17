@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.8...v0.30.1-rc.9) (2021-05-17)
+
+### [0.30.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.7...v0.30.1-rc.8) (2021-05-15)
+
+
+### Bug Fixes
+
+* (Core) wizard step indicator stacking bugs on narrow screens ([#5272](https://github.com/SAP/fundamental-ngx/issues/5272)) ([916eeb8](https://github.com/SAP/fundamental-ngx/commit/916eeb8b086632187c0e0471e0b304ff9def6141))
+
+### [0.30.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.6...v0.30.1-rc.7) (2021-05-15)
+
+### [0.30.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.5...v0.30.1-rc.6) (2021-05-13)
+
+
+### Bug Fixes
+
+* (Core/Platform) Fix the File uploader accessibilty bug reading he file name after selecting the file and reading button browse button value and remove readonly attribute. ([#5328](https://github.com/SAP/fundamental-ngx/issues/5328)) ([f7a7c21](https://github.com/SAP/fundamental-ngx/commit/f7a7c21d5c2cd2709337ecfa09470b535b71c331))
+
+### [0.30.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.4...v0.30.1-rc.5) (2021-05-13)
+
+
+### Bug Fixes
+
+* (Platform) Pre-populated values not honouring the display key value ([#5204](https://github.com/SAP/fundamental-ngx/issues/5204)) ([4f2d9a0](https://github.com/SAP/fundamental-ngx/commit/4f2d9a0f283bd39e919a9561172810ac62b6b074))
+
 ### [0.30.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.3...v0.30.1-rc.4) (2021-05-13)
 
 
