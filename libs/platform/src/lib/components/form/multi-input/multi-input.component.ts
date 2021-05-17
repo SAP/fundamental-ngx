@@ -65,8 +65,16 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     listTemplateDD: ListComponent;
 
     /** Selected values from the list items. */
+
+    _selected: any[] = [];
+
     @Input()
-    selected: any[] = [];
+    set selected(selectedValue: any[]) {
+        this.value = selectedValue;
+    }
+    get selected(): any[] {
+        return this._selected;
+    }
 
     /**
      *
@@ -181,9 +189,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
             this._setUpMobileMode();
         }
         if (this.autofocus) {
-            console.log('autofocus value', this.autofocus);
             this.searchInputElement.nativeElement.focus();
-            console.log('autofocus value', this.autofocus);
         }
     }
 
@@ -295,18 +301,8 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
      * Method to set as selected
      */
     setAsSelected(item: MultiInputOption[]): void {
-        const selectedItem = item[0];
-
-        if (this.isSelectedOptionItem(selectedItem)) {
-            return;
-        }
-
-        this.selectedValue = this.isGroup
-            ? selectedItem.children
-                ? selectedItem.children[0]
-                : selectedItem
-            : selectedItem;
-        this.inputText = this.displayValue(this.selected);
+        this._selected = item;
+        this.inputText = '';
     }
 
     /** @hidden */
@@ -378,7 +374,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         if (this.selectedValue && term !== this.selectedValue.label) {
             this.selectedValue = this._getSelectedOptionItem(term);
         }
-        this.selected = [];
+        this._selected = [];
         this.inputText = term;
         this.showList(false);
     }
