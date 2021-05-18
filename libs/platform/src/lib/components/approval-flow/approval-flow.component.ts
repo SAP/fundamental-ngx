@@ -650,12 +650,13 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
         /** Algorithm in short:
          * 1. Find all possible paths, longest path length = number of columns in graph
-         * 2. Make all paths the same length (by filling with blank nodes), so the every node will be only in one column
-         * 3. Remove duplicates in paths, so the every node is appeared only once in all paths
-         * 4. Remove empty paths
-         * 5. Transform paths into the columns
-         * 6. Trim end space nodes in columns
-         * 7. Remove columns which contain only blank nodes
+         * 2. Trim end blank nodes in every path
+         * 3. Make all paths the same length (by filling with blank nodes), so the every node will be only in one column
+         * 4. Remove duplicates in paths, so the every node is appeared only once in all paths
+         * 5. Remove empty paths
+         * 6. Transform paths into the columns
+         * 7. Trim end space nodes in columns
+         * 8. Remove columns which contain only blank nodes
         */
         const paths = getAllGraphPaths(rootNodes, nodes);
 
@@ -665,7 +666,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             return [];
         }
 
-        const pathsWithBlankNodes = fillPathsWithBlankNodes(paths);
+        const pathsWithoutBlankEndNodes = trimEndBlankNodes(paths);
+        const pathsWithBlankNodes = fillPathsWithBlankNodes(pathsWithoutBlankEndNodes);
         const pathsWithSpaces = replaceDuplicatesWithSpacesInPaths(pathsWithBlankNodes);
         const notEmptyPaths = removeEmptyPaths(pathsWithSpaces);
         const columns = transformPathsIntoColumns(notEmptyPaths);
@@ -718,12 +720,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 const graphPrevColumn = graph[column.index - 1];
 
                 const prevHNode = graphPrevColumn?.nodes[nodeIndex];
-                const prevHNodeMetadata = metadata[prevHNode?.id];
-                const nextHNode = graphNextColumn?.nodes[nodeIndex]
-                const nextHNodeMetadata = metadata[nextHNode?.id];
-
-                const prevNode = graphPrevColumn?.nodes[nodeIndex - 1];
-                const nextNode = graphNextColumn?.nodes[nodeIndex - 1];
+                const nextHNode = graphNextColumn?.nodes[nodeIndex];
+                const isPrevHNodeFinal = metadata[prevHNode?.id]?.isFinal;
 
                 nodeMetadata.renderAddNodeAfterButton =
                     nodeMetadata.canAddNodeAfter
@@ -738,26 +736,19 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                     nodeIndex > 0
                     && (
                         !prevHNode
-                        || prevHNode.space
-                        || (
-                            prevHNodeMetadata?.parallelStart
-                            && nextNode?.targets.includes(node.id)
-                            )
+                        || (prevHNode?.space && !node.space)
                     );
 
                 nodeMetadata.renderVerticalLineAfter =
                     graphNextColumn
                     && nodeIndex > 0
                     && (
-                        !nextHNode
-                        || nextHNode.space
-                        || (
-                            nextHNodeMetadata?.parallelEnd
-                            && node.targets.includes(prevNode?.id)
-                        )
+                        (!nextHNode && !isPrevHNodeFinal)
+                        || (nextHNode?.space && !node.space)
                     );
             });
         });
+
 
         return metadata;
     }
@@ -1091,6 +1082,24 @@ function getAllGraphPaths(rootNodes: ApprovalGraphNode[], nodes: ApprovalGraphNo
     }
 
     return paths;
+}
+
+function trimEndBlankNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
+    const processedPaths: ApprovalGraphNode[][] = [];
+
+    paths.forEach(path => {
+        const reversedPath = path.reverse();
+        let nodeIndex = 0;
+
+        while (reversedPath[nodeIndex].blank) {
+            nodeIndex++;
+        }
+
+        reversedPath[nodeIndex].targets = [];
+        processedPaths.push(reversedPath.slice(nodeIndex).reverse());
+    });
+
+    return processedPaths;
 }
 
 function fillPathsWithBlankNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
