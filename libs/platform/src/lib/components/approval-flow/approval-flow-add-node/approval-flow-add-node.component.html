@@ -56,6 +56,7 @@
         <ng-container *ngIf="!_selectMode">
             <div fd-form-item *ngIf="_data.showNodeTypeSelect">
                 <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogNodeType">Parallel or serial</label>
+
                 <fd-select [compact]="true" [(value)]="_nodeType">
                     <ng-container *ngFor="let option of _nodeTypesArray; trackBy: _trackByFn">
                         <ng-container [ngSwitch]='option'>
@@ -147,6 +148,7 @@
                 </fd-date-picker>
             </div>
         </ng-container>
+
         <ng-container *ngIf="_selectMode">
             <fdp-approval-flow-team-list
                 *ngIf="viewService.isSelectTeamMode"
@@ -203,6 +205,7 @@
                 </button>
             </fd-dialog-footer-button>
         </ng-container>
+
         <ng-container *ngIf="_selectMode">
             <ng-container *ngIf="viewService.isSelectUserMode">
                 <fd-dialog-footer-button>

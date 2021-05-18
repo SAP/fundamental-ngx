@@ -39,6 +39,7 @@ export class ApprovalFlowUserListComponent implements AfterViewInit {
     /** @hidden */
     _trackByFn = trackByFn;
 
+    /** @hidden */
     constructor(private _cdr: ChangeDetectorRef) {}
 
     /** @hidden */
@@ -61,7 +62,7 @@ export class ApprovalFlowUserListComponent implements AfterViewInit {
     /** @hidden */
     _onSelect(event: SelectionChangeEvent): void {
         this._selectedItems = event.selectedItems;
-        
+
         this.onSelectionChange.emit(this._getUsersFromSelectedItems(event.selectedItems));
     }
 

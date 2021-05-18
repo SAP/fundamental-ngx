@@ -151,8 +151,22 @@
 </ng-container>
 
 <div class="approval-flow__edit-mode-footer" [attr.dir]="_dir" *ngIf="_isEditMode">
-    <button fd-button label="Save" [compact]="true" fdType="emphasized" (click)="_saveEditModeChanges()"></button>
-    <button fd-button label="Exit" [compact]="true" fdType="transparent" (click)="_exitEditMode()"></button>
+    <button
+        fd-button
+        label="Save"
+        i18n-label="@@platformApprovalFlowEditModeSave"
+        [compact]="true"
+        fdType="emphasized"
+        (click)="_saveEditModeChanges()"
+    ></button>
+    <button
+        fd-button
+        label="Exit"
+        i18n-label="@@platformApprovalFlowEditModeExit"
+        [compact]="true"
+        fdType="transparent"
+        (click)="_exitEditMode()"
+    ></button>
 </div>
 
 <ng-template let-messageToast #reminderTemplate>
@@ -189,7 +203,7 @@
 </ng-template>
 <ng-template #nodesRemove>
     <ng-container i18n="@@platformApprovalFlowNodesRemovedAlert">
-        Approvers has been removed
+        Approvers have been removed
     </ng-container>
 </ng-template>
 

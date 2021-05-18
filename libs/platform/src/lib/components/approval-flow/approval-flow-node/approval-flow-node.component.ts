@@ -196,6 +196,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     /** @hidden */
     private _subscriptions = new Subscription();
 
+    /** @hidden */
     constructor(
         private _elRef: ElementRef,
         private _cdr: ChangeDetectorRef,

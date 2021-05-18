@@ -39,6 +39,7 @@ import {
     ApprovalStatus,
     ApprovalUser
 } from './interfaces';
+import { ApprovalFlowSelectTypeComponent } from './approval-flow-select-type/approval-flow-select-type.component';
 
 interface ApprovalGraphColumn {
     nodes: ApprovalGraphNode[];
@@ -181,6 +182,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden */
     private _subscriptions = new Subscription();
 
+    /** @hidden */
     constructor(
         private _dialogService: DialogService,
         private _messageToastService: MessageToastService,
@@ -534,10 +536,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._cacheCurrentApprovalProcess();
 
         this._nodeComponents
-            .filter(c => c._isSelected)
-            .forEach(({ node }) => {
-                this._deleteNode(node);
-                this._buildView(this._approvalProcess);
+            .forEach((component) => {
+                if (component._isSelected) {
+                    this._deleteNode(component.node);
+                    this._buildView(this._approvalProcess);
+                }
             });
 
         this._showMessage('nodesRemove');
@@ -549,8 +552,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             .find(comp => comp.node === node)._nativeElement.getBoundingClientRect();
 
         this._nodeComponents
-            .filter(n => n.node !== node && Boolean(n._dropZones.length))
-            .forEach(n => n._checkIfNodeDraggedInDropZone(draggedNodeDimensions));
+            .forEach(component => {
+                if (component.node !== node && Boolean(component._dropZones.length)) {
+                    component._checkIfNodeDraggedInDropZone(draggedNodeDimensions)
+                }
+            });
     }
 
     /** @hidden Node drop handler */
@@ -566,9 +572,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const placement = dropTarget._activeDropZones[0].placement;
 
         this._nodeComponents.forEach(n => n._deactivateDropZones());
-        this._deleteNode(nodeToDrop);
 
         if (placement === 'after') {
+            this._deleteNode(nodeToDrop);
+
             const nextNode = getGraphNodes(this._graph).find(node => node.id === dropTarget.node.targets[0]);
 
             if (nextNode?.blank) {
@@ -580,13 +587,39 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             }
 
             dropTarget.node.targets = [nodeToDrop.id];
+
+            this._finishDragDropProcess(nodeToDrop);
         }
 
         if (placement === 'before') {
-            this._replaceTargetsInSourceNodes(dropTarget.node.id, [nodeToDrop.id]);
-            nodeToDrop.targets = [dropTarget.node.id];
-        }
+            const dialog = this._dialogService.open(ApprovalFlowSelectTypeComponent, {
+                data: {
+                    rtl: this._defaultDialogOptions.rtl
+                }
+            });
 
+            dialog.afterClosed.subscribe((selectedType: APPROVAL_FLOW_NODE_TYPES) => {
+                if (!selectedType) {
+                    return;
+                }
+
+                this._deleteNode(nodeToDrop);
+
+                if (selectedType === APPROVAL_FLOW_NODE_TYPES.SERIAL) {
+                    this._replaceTargetsInSourceNodes(dropTarget.node.id, [nodeToDrop.id]);
+                    nodeToDrop.targets = [dropTarget.node.id];
+                } else if (selectedType === APPROVAL_FLOW_NODE_TYPES.PARALLEL) {
+                    this._addParallelTargets(dropTarget.node.id, nodeToDrop.id);
+                    nodeToDrop.targets = [...dropTarget.node.targets];
+                }
+
+                this._finishDragDropProcess(nodeToDrop);
+            });
+        }
+    }
+
+    /** @hidden */
+    private _finishDragDropProcess(nodeToDrop: ApprovalGraphNode): void {
         this._approvalProcess.nodes.push(nodeToDrop);
         this._buildView(this._approvalProcess);
     }
@@ -817,6 +850,15 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         );
     }
 
+    /** @hidden */
+    private _addParallelTargets(targetNodeId: string, nodeIdToAdd: string): void {
+        this._approvalProcess.nodes.forEach(n => {
+            if (isNodeTargetsIncludeId(n, targetNodeId)) {
+                n.targets.push(nodeIdToAdd);
+            }
+        });
+    }
+
     /** @hidden Replace all occurrences of "idToReplace" in all nodes' "targets" with ones in "replaceWith" array */
     private _replaceTargetsInSourceNodes(idToReplace: string, replaceWith: string[]): void {
         this._approvalProcess.nodes.forEach(n => {
@@ -935,8 +977,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
             if (areAllNodesEmpty) {
                 column
-                    .filter(node => node.blank)
-                    .forEach(node => this._replaceTargetsInSourceNodes(node.id, node.targets))
+                    .forEach(node => {
+                        if (node.blank) {
+                            this._replaceTargetsInSourceNodes(node.id, node.targets)
+                        }
+                    })
             } else {
                 processedColumns.push(column);
             }
@@ -1148,16 +1193,12 @@ function replaceDuplicatesWithSpacesInPaths(paths: ApprovalGraphNode[][]): Appro
 
     paths.forEach((path, index) => {
         path.forEach(node => {
-            const pathsWithNode = paths
-                .filter((_path, _index) => {
-                    return _index !== index
-                        && _path.indexOf(node) > -1;
-                });
+            paths.forEach((_path, _index) => {
+                const isNodeInPath = _index !== index && _path.indexOf(node) > -1;
 
-            pathsWithNode.forEach(_path => {
-                const nodeIndex = _path.indexOf(node);
-
-                _path.splice(nodeIndex, 1, getSpaceNode());
+                if (isNodeInPath) {
+                    _path.splice(_path.indexOf(node), 1, getSpaceNode());
+                }
             });
         });
 
