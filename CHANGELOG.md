@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.12...v0.30.1-rc.13) (2021-05-18)
+
+
+### Bug Fixes
+
+* (Platform) make lib working on ViewEngine ([#5397](https://github.com/SAP/fundamental-ngx/issues/5397)) ([b164c65](https://github.com/SAP/fundamental-ngx/commit/b164c65e16ab2d24fa1e4bdf1830195701fbd94b))
+
 ### [0.30.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.11...v0.30.1-rc.12) (2021-05-18)
 
 
