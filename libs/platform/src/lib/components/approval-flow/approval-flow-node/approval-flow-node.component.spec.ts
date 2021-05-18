@@ -88,7 +88,13 @@ describe('ApprovalFlowNodeComponent', () => {
     });
 
     it('should have approved class when node is approved', () => {
-        component.node.status = 'approved';
+        component.node = {
+            ...component.node,
+            status: 'approved'
+        };
+
+        fixture.detectChanges();
+        detectChangesOnPush();
 
         component.ngOnChanges();
 
