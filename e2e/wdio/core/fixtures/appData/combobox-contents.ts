@@ -1,4 +1,4 @@
-export const  placeholders = [
+export const  placeholderTestText = [
     'Type some text...',
     'Type some text...',
     'Type some text...',
@@ -33,4 +33,21 @@ export const openStateAlertTestText = [
     'Combobox Opened',
     'Combobox Closed'
 ];
-
+export const settingsTestText = [
+    'Search Term: Photo Voltaic',
+    'Returned from itemClicked Event: { "item": { "name": "Photo Voltaic", "icon": "photo-voltaic" }, "index": 0 }',
+    'Search Term: Settings',
+    'Returned from itemClicked Event: { "item": { "name": "Settings", "icon": "settings" }, "index": 1 }'
+];
+export const searchTermOneUsdTestText = 'Search Term: Apple - 1.00 USD';
+export const searchTermHalfUsdTestText = 'Search Term: Banana - 0.50 USD';
+export const reactiveFormTestText1 = [
+    'Touched: true',
+    'Dirty: true',
+    'Json Value: { "displayedValue": "Apple", "value": "AppleValue" }'
+];
+export const reactiveFormTestText2 = [
+    'Touched: true',
+    'Dirty: true',
+    'Json Value: "Apple"'
+];
