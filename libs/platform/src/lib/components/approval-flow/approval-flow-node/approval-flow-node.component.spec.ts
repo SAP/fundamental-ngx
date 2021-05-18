@@ -50,7 +50,10 @@ describe('ApprovalFlowNodeComponent', () => {
     });
 
     it('should add blank class', () => {
-        component.node.blank = true;
+        component.node = {
+            ...component.node,
+            blank: true
+        };
 
         fixture.detectChanges();
         detectChangesOnPush();
@@ -59,23 +62,22 @@ describe('ApprovalFlowNodeComponent', () => {
     });
 
     it('should toggle line-before & line-after classes', () => {
-        component.node.blank = false;
-
         fixture.detectChanges();
         detectChangesOnPush();
 
         expect(fixture.nativeElement).toHaveClass('approval-flow-node--line-before');
         expect(fixture.nativeElement).toHaveClass('approval-flow-node--line-after');
 
-        component.node.blank = true;
+        component.node = {
+            ...component.node,
+            blank: true
+        };
 
         fixture.detectChanges();
         detectChangesOnPush();
 
         expect(fixture.nativeElement).not.toHaveClass('approval-flow-node--line-before');
         expect(fixture.nativeElement).not.toHaveClass('approval-flow-node--line-after');
-
-        component.node.blank = false;
     });
 
     it('should render arrow when arrow option set to true', () => {
@@ -96,14 +98,12 @@ describe('ApprovalFlowNodeComponent', () => {
         fixture.detectChanges();
         detectChangesOnPush();
 
-        component.ngOnChanges();
-
         expect(fixture.nativeElement).toHaveClass('approval-flow-node--approved');
     });
 
     it('should add parent-approved class if parent node is approved', () => {
         component.meta = {
-            parents: [ Object.assign({ status: 'approved' }, node) ],
+            parents: [  { ...node, status: 'approved' } ],
             isRoot: false,
             isFinal: false,
             parallelStart: false,
@@ -117,15 +117,22 @@ describe('ApprovalFlowNodeComponent', () => {
     });
 
     it('should have positive object status when node is approved', () => {
-        component.node.status = 'approved';
+        component.node = {
+            ...component.node,
+            status: 'approved'
+        };
 
-        component.ngOnChanges();
+        fixture.detectChanges();
+        detectChangesOnPush();
 
         expect(component._objectStatus).toEqual('positive');
     });
 
     it('should have negative object status when node is rejected', () => {
-        component.node.status = 'rejected';
+        component.node = {
+            ...component.node,
+            status: 'rejected'
+        };
 
         component.ngOnInit();
         fixture.detectChanges();
