@@ -9,8 +9,8 @@ import { API_FILES } from '../../api-files';
 import { FormattedTextHeaderComponent } from './formatted-text-header/formatted-text-header.component';
 import { FormattedTextDocsComponent } from './formatted-text-docs.component';
 import { FormattedTextExampleComponent } from './examples/base/formatted-text-example.component';
-import { FormattedTextLinksExampleComponent } from './examples/links/formatted-text-example.component';
-import { FormattedTextScriptExampleComponent } from './examples/script/formatted-text-example.component';
+import { FormattedTextLinksExampleComponent } from './examples/links/formatted-text-links-example.component';
+import { FormattedTextScriptExampleComponent } from './examples/script/formatted-text-script-example.component';
 
 const routes: Routes = [
     {
