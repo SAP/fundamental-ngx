@@ -437,7 +437,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             type !== 'empty'
             && type === 'before'
             && !source.actionsConfig?.disableAddParallel
-            && !source.actionsConfig?.disableAddBefore;
+            && !source.actionsConfig?.disableAddBefore
+            && !this._graphMetadata[source.id].isFinal;
 
         const dialog = this._dialogService.open(ApprovalFlowAddNodeComponent, {
             data: {
@@ -472,10 +473,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                         this._replaceTargetsInSourceNodes(source.id, [addedNode.id]);
                     } else {
                         source.targets = [addedNode.id];
-
-                        if (type === 'after') {
-                            this._setOnlyOneFinalNode(source, addedNode);
-                        }
                     }
                 } else {
                     const parents = this._graphMetadata[source.id].parents;
@@ -592,6 +589,14 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         }
 
         if (placement === 'before') {
+            if (this._graphMetadata[dropTarget.node.id].isFinal) {
+                this._deleteNode(nodeToDrop);
+                this._replaceTargetsInSourceNodes(dropTarget.node.id, [nodeToDrop.id]);
+                nodeToDrop.targets = [dropTarget.node.id];
+                this._finishDragDropProcess(nodeToDrop);
+                return;
+            }
+
             const dialog = this._dialogService.open(ApprovalFlowSelectTypeComponent, {
                 data: {
                     rtl: this._defaultDialogOptions.rtl
@@ -636,14 +641,18 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden Build a graph to render based on provided data, node connections are managed by node's "targets" array */
     private _buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
         if (!nodes.length) {
+            this._showMessage('error');
             return [];
         }
 
         const rootNodes = findRootNodes(nodes);
         const finalNodes = findFinalNodes(nodes);
 
-        if (!rootNodes.length || !finalNodes.length) {
-            console.warn('Err: Not possible to build graph because root or final nodes aren\'t present!');
+        if (!rootNodes.length || !finalNodes.length || finalNodes.length > 1) {
+            console.warn(`
+                Err: Not possible to build graph because root or final nodes aren\'t present!
+                Or there are multiple final nodes!
+            `);
             this._showMessage('error');
             return [];
         }
@@ -979,22 +988,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         });
 
         return processedColumns;
-    }
-
-    /** @hidden
-     *  Check if source node was final node, there exist multiple final nodes and set only one
-     */
-    private _setOnlyOneFinalNode(sourceNode: ApprovalNode, newFinalNode: ApprovalNode): void {
-        const isFinalNode = this._graphMetadata[sourceNode.id].isFinal;
-
-        if (isFinalNode) {
-            const finalNodes = this._approvalProcess.nodes
-                .filter(node => this._graphMetadata[node.id].isFinal);
-
-            if (finalNodes.length > 1) {
-                finalNodes.forEach(node => node.targets = [newFinalNode.id]);
-            }
-        }
     }
 }
 
