@@ -21,6 +21,8 @@ export class TableRow<T = any> {
         // expanded/collapsed
         public expanded = true,
         // if item should be hidden. Used to skip rendering
-        public hidden = false
+        public hidden = false,
+        // if the row is non-navigable
+        public unnavigable = false
     ) {}
 }

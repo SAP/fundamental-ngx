@@ -1,11 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { RtlService } from '@fundamental-ngx/core';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-table-disable-row-example',
     templateUrl: './table-disable-row-example.component.html'
 })
-export class TableDisableRowExampleComponent {
+export class TableDisableRowExampleComponent implements OnInit {
     selectMasterModel = false;
+
+    navigationArrow$: Observable<string>;
 
     tableRows: any[] = [
         {
@@ -15,16 +20,16 @@ export class TableDisableRowExampleComponent {
             column3: 'Row 1',
             date: '09-07-18',
             checked: false,
-            disabled: false
+            unnavigable: false
         },
         {
-            status: 'valid',
+            status: 'warning',
             column1: 'user.name@email.com',
             column2: 'Row 2',
             column3: 'Row 2',
             date: '09-07-18',
             checked: false,
-            disabled: true
+            unnavigable: true
         },
         {
             status: '',
@@ -33,7 +38,7 @@ export class TableDisableRowExampleComponent {
             column3: 'Row 3',
             date: '09-07-18',
             checked: false,
-            disabled: false
+            unnavigable: false
         }
     ];
 
@@ -47,7 +52,7 @@ export class TableDisableRowExampleComponent {
             country: 'India',
             description: 'A banana is an elongated, edible fruit – botanically a berry – produced by several kinds of large herbaceous flowering plants in the genus Musa.',
             checked: false,
-            disabled: false
+            unnavigable: false
         },
         {
             name: 'Apple',
@@ -58,9 +63,17 @@ export class TableDisableRowExampleComponent {
             country: 'USA',
             description: 'An apple is an edible fruit produced by an apple tree (Malus domestica). Apple trees are cultivated worldwide and are the most widely grown species in the genus Malus.',
             checked: false,
-            disabled: true
+            unnavigable: true
         }
     ];
+
+    constructor(private _rtlService: RtlService) {}
+
+    ngOnInit(): void {
+        this.navigationArrow$ = this._rtlService.rtl.pipe(
+            map((isRtl) => (isRtl ? 'slim-arrow-left' : 'slim-arrow-right'))
+        );
+    }
 
     select(index: number, checked: boolean): void {
         this.tableRows[index].checked = checked;
@@ -78,7 +91,7 @@ export class TableDisableRowExampleComponent {
 
     private _selectAll(): void {
         this.tableRows.forEach((row) => {
-            if (!row.disabled) {
+            if (!row.unnavigable) {
                 row.checked = true;
             }
         });
@@ -89,6 +102,6 @@ export class TableDisableRowExampleComponent {
     }
 
     private _allSelected(): boolean {
-        return !this.tableRows.filter((_row) => (!_row.disabled)).find((_row) => !_row.checked);
+        return !this.tableRows.filter((_row) => (!_row.unnavigable)).find((_row) => !_row.checked);
     }
 }

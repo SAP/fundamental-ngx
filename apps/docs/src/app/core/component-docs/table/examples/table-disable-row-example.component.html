@@ -15,7 +15,7 @@
     </tr>
     </thead>
     <tbody fd-table-body>
-        <tr *ngFor="let row of tableRows; let i = index" fd-table-row [attr.aria-selected]="tableRows[i].checked" [isDisabled]="tableRows[i].disabled">
+        <tr *ngFor="let row of tableRows; let i = index" fd-table-row [attr.aria-selected]="tableRows[i].checked" [unnavigable]="tableRows[i].unnavigable">
             <td fd-table-cell fd-table-status-indicator [status]="row.status"></td>
             <td fd-table-cell>
                 <fd-checkbox
@@ -38,12 +38,12 @@
         <tr fd-table-row>
             <th fd-table-cell>Fruit Description</th>
             <th fd-table-cell>Price</th>
-            
+            <th fd-table-cell></th>
         </tr>
         </thead>
         <tbody fd-table-body>
         <ng-container *ngFor="let fruit of fruits">
-            <tr fd-table-row [main]="true" [activable]="true" [isDisabled]="fruit.disabled">
+            <tr fd-table-row [main]="true" [activable]="true" [unnavigable]="fruit.unnavigable"> 
                 <td fd-table-cell>
                     <p fd-table-text [title]="true">{{fruit.name}}</p>
                     <p fd-table-text>{{fruit.country}}</p>
@@ -51,8 +51,11 @@
                 <td fd-table-cell [fitContent]="true">
                     {{fruit.price}}
                 </td>
+                <td fd-table-cell [fitContent]="true" [noPadding]="true">
+                    <i fd-table-icon *ngIf="!fruit.unnavigable" [glyph]="navigationArrow$ | async" [navigation]="true" role="presentation"></i>
+                </td>
             </tr>
-            <tr fd-table-row [secondary]="true" [isDisabled]="fruit.disabled">
+            <tr fd-table-row [secondary]="true" [unnavigable]="fruit.unnavigable">
                 <td fd-table-cell colspan="100%">
                     <p fd-table-text>
                         <label fd-form-label>Status:</label>

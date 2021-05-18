@@ -57,17 +57,17 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     @Input()
     secondary = false;
 
-    /** Whether or not the table row is disabled */
-    @HostBinding('class.fd-table__row--disabled')
+    /** Whether or not the table row is unnavigable */
+    @HostBinding('class.fd-table__row--unnavigable')
     @Input()
-    isDisabled = false;
+    unnavigable = false;
 
     /** @hidden */
     propagateKeysSubscription: Subscription;
 
-    /** When the row is disabled, prevent interaction via enter and space keys */
+    /** When the row is unnavigable, prevent interaction via enter and space keys */
     @HostListener('keydown', ['$event']) handleKeyDown(event: KeyboardEvent): void {
-        if (this.isDisabled && KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+        if (this.unnavigable && KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             event.preventDefault();
         }
     }

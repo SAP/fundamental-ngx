@@ -24,7 +24,6 @@
 	}
 }
 
-.fd-table__row--disabled {
+.fd-table__row--unnavigable {
 	pointer-events: none;
-	opacity: var(--sapContent_DisabledOpacity);
 }
