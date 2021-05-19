@@ -60,7 +60,16 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     /** Whether or not the table row is unnavigable */
     @HostBinding('class.fd-table__row--unnavigable')
     @Input()
-    unnavigable = false;
+    set unnavigable(val: boolean) {
+        this._unnavigable = val;
+        this._changeDetRef.detectChanges();
+    }
+    get unnavigable(): boolean {
+        return this._unnavigable;
+    }
+
+    /** @hidden */
+    private _unnavigable = false;
 
     /** @hidden */
     propagateKeysSubscription: Subscription;

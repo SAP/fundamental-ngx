@@ -164,16 +164,17 @@
 
 <separator></separator>
 
-<fd-docs-section-title [id]="'with-row-disabled'" [componentName]="'table'">
-    Table with Disabled Row
+<fd-docs-section-title [id]="'with-row-unnavigable'" [componentName]="'table'">
+    Table with Unnavigable Row
 </fd-docs-section-title>
 <description>
-    A row can be non-navigable by setting the property <code>[unnavigable]="true"</code>, for both regular and Pop In modes.
+    A row can be unnavigable by setting the property <code>[unnavigable]="true"</code>, for both regular and Pop In modes.
+    Unnavigable rows will disable interaction and navigation.
 </description>
 <component-example>
-    <fd-table-disable-row-example></fd-table-disable-row-example>    
+    <fd-table-unnavigable-row-example></fd-table-unnavigable-row-example>
 </component-example>
-<code-example [exampleFiles]="tableDisableRowExample"></code-example>
+<code-example [exampleFiles]="tableUnnavigableRowExample"></code-example>
 
 <separator></separator>
 

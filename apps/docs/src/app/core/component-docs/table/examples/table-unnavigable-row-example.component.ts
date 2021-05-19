@@ -4,10 +4,10 @@ import { RtlService } from '@fundamental-ngx/core';
 import { map } from 'rxjs/operators';
 
 @Component({
-    selector: 'fd-table-disable-row-example',
-    templateUrl: './table-disable-row-example.component.html'
+    selector: 'fd-table-unnavigable-row-example',
+    templateUrl: './table-unnavigable-row-example.component.html'
 })
-export class TableDisableRowExampleComponent implements OnInit {
+export class TableUnnavigableRowExampleComponent implements OnInit {
     selectMasterModel = false;
 
     navigationArrow$: Observable<string>;

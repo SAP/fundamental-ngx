@@ -31,11 +31,10 @@ import * as tableCustomHtml from '!raw-loader!./examples/table-custom-columns-ex
 import * as tableFocusableHtml from '!raw-loader!./examples/table-focusable-example/table-focusable-example.component.html';
 import * as tableCustomTs from '!raw-loader!./examples/table-custom-columns-example/table-custom-columns-example.component.ts';
 import * as tableDialogCustom from '!raw-loader!./examples/table-custom-columns-example/table-custom-dialog.component.ts';
+import * as tableUnnavigableRowHtml from '!raw-loader!./examples/table-unnavigable-row-example.component.html';
+import * as tableUnnavigableRowTs from '!raw-loader!./examples/table-unnavigable-row-example.component.ts';
 import * as tableFilterPipe from '!raw-loader!../../../documentation/core-helpers/pipes/filter.pipe.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
-
-import * as tableDisableRowHtml from '!raw-loader!./examples/table-disable-row-example.component.html';
-import * as tableDisableRowTs from '!raw-loader!./examples/table-disable-row-example.component.ts';
 
 @Component({
     selector: 'app-table',
@@ -120,17 +119,17 @@ export class TableDocsComponent {
         }
     ];
 
-    tableDisableRowExample: ExampleFile[] = [
+    tableUnnavigableRowExample: ExampleFile[] = [
         {
             language: 'html',
-            code: tableDisableRowHtml,
-            fileName: 'table-disable-row-example'
+            code: tableUnnavigableRowHtml,
+            fileName: 'table-unnavigable-row-example'
         },
         {
             language: 'typescript',
-            component: 'TableDisableRowExampleComponent',
-            code: tableDisableRowTs,
-            fileName: 'table-disable-row-example'
+            component: 'TableUnnavigableRowExampleComponent',
+            code: tableUnnavigableRowTs,
+            fileName: 'table-unnavigable-row-example'
         }
     ];
 

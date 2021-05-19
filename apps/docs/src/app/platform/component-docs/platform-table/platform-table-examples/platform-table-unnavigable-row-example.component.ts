@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core';
@@ -6,25 +6,40 @@ import {
     TableDataSource,
     TableDataProvider,
     TableState,
-    TableRowSelectionChangeEvent
+    TableRowSelectionChangeEvent,
+    TableComponent
 } from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-platform-table-disable-row-example',
-    templateUrl: './platform-table-disable-row-example.component.html'
+    selector: 'fdp-platform-table-unnavigable-row-example',
+    templateUrl: './platform-table-unnavigable-row-example.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformTableDisableRowExampleComponent {
+export class PlatformTableUnnavigableRowExampleComponent implements AfterViewInit {
 
     source: TableDataSource<ExampleItem>;
+
+    @ViewChild(TableComponent)
+    table: TableComponent;
 
     constructor() {
         this.source = new TableDataSource(new TableDataProviderExample());
     }
 
+    ngAfterViewInit(): void {
+        this.setRowUnnavigable(0);
+        this.setRowUnnavigable(1);
+        this.setRowUnnavigable(2);
+    }
+
     onRowSelectionChange(event: TableRowSelectionChangeEvent<ExampleItem>): void {
         console.log(event);
     }
-    
+
+    private setRowUnnavigable(index: number): void {
+        this.table.tableRows.toArray()[index + 1].unnavigable = true;
+        this.table._tableRows[index].unnavigable = true;
+    }
 }
 
 export interface ExampleItem {
@@ -97,8 +112,7 @@ const ITEMS: ExampleItem[] = [
         status: 'Stocked on demand',
         statusColor: 'informative',
         date: new FdDate(2020, 1, 7),
-        verified: true,
-        unnavigable: true
+        verified: true
     },
     {
         name: 'Astro Laptop 1516',
@@ -110,8 +124,7 @@ const ITEMS: ExampleItem[] = [
         status: 'Out of stock',
         statusColor: 'negative',
         date: new FdDate(2020, 2, 5),
-        verified: true,
-        unnavigable: true
+        verified: true
     },
     {
         name: 'Astro Phone 6',
@@ -123,8 +136,7 @@ const ITEMS: ExampleItem[] = [
         status: 'Stocked on demand',
         statusColor: 'informative',
         date: new FdDate(2020, 1, 12),
-        verified: true,
-        unnavigable: true
+        verified: true
     },
     {
         name: 'Beam Breaker B-1',
@@ -159,30 +171,6 @@ const ITEMS: ExampleItem[] = [
         status: 'Stocked on demand',
         statusColor: 'informative',
         date: new FdDate(2020, 9, 22),
-        verified: true
-    },
-    {
-        name: 'Bending Screen 21HD',
-        description: 'nunc nisl duis bibendum',
-        price: {
-            value: 66.46,
-            currency: 'EUR'
-        },
-        status: 'Available',
-        statusColor: 'positive',
-        date: new FdDate(2020, 8, 14),
-        verified: false
-    },
-    {
-        name: 'Blaster Extreme',
-        description: 'quisque ut',
-        price: {
-            value: 436.88,
-            currency: 'USD'
-        },
-        status: 'Available',
-        statusColor: 'positive',
-        date: new FdDate(2020, 8, 15),
         verified: true
     }
 ];
