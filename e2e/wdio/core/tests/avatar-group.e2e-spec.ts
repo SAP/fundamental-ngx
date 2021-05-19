@@ -25,13 +25,13 @@ describe('Avatar test suite', function() {
         click(firstExampleAvatar);
         waitForPresent(usedDetailsPopup);
 
-        expect(doesItExist(usedDetailsPopup)).toBe(true);
+        expect(doesItExist(usedDetailsPopup)).toBe(true, 'user details popup not displayed');
 
         scrollIntoView(secondExampleAvatar);
         click(secondExampleAvatar);
         waitForPresent(usedGroupDetailsPopup);
 
-        expect(doesItExist(usedGroupDetailsPopup)).toBe(true);
+        expect(doesItExist(usedGroupDetailsPopup)).toBe(true, 'group details popup not displayed');
     });
 
     it('should have individual details on group popup', () => {
@@ -40,7 +40,7 @@ describe('Avatar test suite', function() {
         waitForPresent(usedGroupDetailsPopup);
         click(popoverUserAvatar);
 
-        expect(isElementDisplayed(individualCard)).toBe(true);
+        expect(isElementDisplayed(individualCard)).toBe(true, 'user details popup not displayed');
     });
 
     it('should Individual to be smaller than group', () => {
