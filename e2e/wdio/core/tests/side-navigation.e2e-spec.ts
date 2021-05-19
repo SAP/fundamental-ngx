@@ -65,7 +65,7 @@ describe('Side-navigation test suite', () => {
         sideNavigationPage.checkRtlSwitch();
     });
 
-    xit('should check examples visual regression', () => {
+    it('should check examples visual regression', () => {
         sideNavigationPage.saveExampleBaselineScreenshot();
         expect(sideNavigationPage.compareWithBaseline()).toBeLessThan(5);
     });
