@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { UP_ARROW, DOWN_ARROW, ENTER, SPACE, HOME, END, hasModifierKey } from '@angular/cdk/keycodes';
+import { KeyUtil } from '../utils/functions';
+import { UP_ARROW, DOWN_ARROW, ENTER, SPACE, HOME, TAB, END, hasModifierKey } from '@angular/cdk/keycodes';
 
 import { SelectInterface } from './select.interface';
 import { OptionsInterface } from './options.interface';
@@ -112,6 +112,12 @@ export class SelectKeyManagerService {
         ) {
             event.preventDefault();
             manager.activeItem._selectViaInteraction();
+        } else if (
+            !isTyping &&
+            KeyUtil.isKeyCode(event, [TAB]) &&
+           this._component.mobile
+        ) {
+            event.preventDefault();
         } else {
             manager.onKeydown(event);
         }

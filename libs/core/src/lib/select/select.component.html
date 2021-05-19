@@ -22,7 +22,8 @@
     <div class="fd-select__control" role="list" #selectControl [ngClass]="state ? 'is-' + state : ''"
         [class.is-active]="_isOpen" [class.is-expanded]="_isOpen" [class.is-disabled]="disabled"
         [class.is-readonly]="readonly" [attr.tabindex]="_tabIndex" [attr.id]="controlId" [attr.aria-active]="_isOpen"
-        aria-live="assertive"
+        aria-live="polite"
+        [attr.aria-selected]="selected?.selected"
         [attr.aria-expanded]="_isOpen" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly"
         [attr.aria-controls]="controlId + '-list-box'" [attr.aria-haspopup]="!(this.readonly || this.disabled)"
         [attr.title]="triggerValue" [attr.aria-label]="triggerValue" [attr.aria-labelledby]="triggerValue"
@@ -43,10 +44,10 @@
 </ng-template>
 
 <ng-template #selectOptionsListTemplate>
-    <ul #optionPanel fd-list class="fd-select-options" role="listbox" tabindex="0" [compact]="compact"
+    <ul #optionPanel fd-list class="fd-select-options" role="listbox" tabindex="-1" [compact]="compact"
         [mobileMode]="mobile" [dropdownMode]="true" [hasMessage]="!!stateMessage" [attr.id]="controlId + '-list-box'"
         [style.max-height]="maxHeight || calculatedMaxHeight + 'px'" [attr.tooltip]="triggerValue" [attr.aria-label]="triggerValue">
-        <li *ngIf="stateMessage" [attr.aria-label]="stateMessage" fd-list-message tabindex="0" role="presentation" [type]="state">
+        <li *ngIf="stateMessage" [attr.aria-label]="stateMessage" fd-list-message tabindex="-1" role="presentation" [type]="state">
             {{stateMessage}}
         </li>
 
