@@ -36,11 +36,11 @@ describe('shellbar test suite', function() {
             click(basicExample + shellbarAvatar);
             waitForElDisplayed(popover);
 
-            expect(isElementDisplayed(popover)).toBe(true);
+            expect(isElementDisplayed(popover)).toBe(true, 'popover is not displayed');
 
             click(basicExample + shellbarAvatar);
 
-            expect(doesItExist(popover)).toBe(false);
+            expect(doesItExist(popover)).toBe(false, 'popover is displayed');
         });
 
         it('should check user action menu items are clickable', () => {
@@ -49,7 +49,7 @@ describe('shellbar test suite', function() {
             const menuItemCount = getElementArrayLength(popoverMenuItem);
 
             for (let i = 0; i < menuItemCount; i++) {
-                expect(isElementClickable(popoverMenuItem, i)).toBe(true);
+                expect(isElementClickable(popoverMenuItem, i)).toBe(true, `menu item ${i} is not clickable`);
             }
         });
 
@@ -173,20 +173,20 @@ describe('shellbar test suite', function() {
             const navItemCount = getElementArrayLength(sideNavItems);
 
             for (let i = 0; i < navItemCount; i++) {
-                expect(isElementClickable(sideNavItems, i)).toBe(true);
+                expect(isElementClickable(sideNavItems, i)).toBe(true, `nav item ${i} is not clickable`);
             }
         });
 
         it('should check ability to collapse side nav', () => {
             scrollIntoView(sideNavExample);
 
-            expect(isElementDisplayed(sideNavText)).toBe(true);
-            expect(isElementDisplayed(sideNavIcons)).toBe(true);
+            expect(isElementDisplayed(sideNavText)).toBe(true, 'nav text is not displayed');
+            expect(isElementDisplayed(sideNavIcons)).toBe(true, 'nav icon is not displayed');
 
             click(sideNavControlBtn);
 
-            expect(isElementDisplayed(sideNavText)).toBe(false);
-            expect(isElementDisplayed(sideNavIcons)).toBe(true);
+            expect(isElementDisplayed(sideNavText)).toBe(false, 'nav text is displayed');
+            expect(isElementDisplayed(sideNavIcons)).toBe(true, 'nav icon is not displayed');
         });
     });
 
