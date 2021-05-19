@@ -3,11 +3,10 @@ import {
     addIsActiveClass,
     checkElementScreenshot,
     click, dragAndDrop, elementArray,
-    getAttributeByName,
     getCSSPropertyByName,
     getElementArrayLength, getImageTagBrowserPlatform, getText, mouseHoverElement,
     refreshPage, saveElementScreenshot,
-    scrollIntoView, waitForClickable, waitForElDisplayed
+    scrollIntoView, waitForClickable, waitForElDisplayed, getElementClass
 } from '../../driver/wdio';
 
 import {
@@ -21,7 +20,7 @@ import {
 
 import {
     text, productTitle, textLocked, warningColor, successColor, neutralColor, errorColor, color, backGroundColor,
-    fontWeight, bold, classAttribute, isSelected, button, item, link, toolbar, radioButton, checkbox
+    fontWeight, bold, isSelected, button, item, link, toolbar, radioButton, checkbox
 } from '../fixtures/appData/grid-list-content';
 
 describe('Grid-list test suite', function() {
@@ -115,7 +114,7 @@ describe('Grid-list test suite', function() {
         for (let i = 0; i < itemsLength; i++) {
             scrollIntoView(singleSelectItems, i);
             click(singleSelectItems, i);
-            expect(getAttributeByName(singleSelectItems, classAttribute, i)).toContain(isSelected);
+            expect(getElementClass(singleSelectItems, i)).toContain(isSelected);
             expect(getElementArrayLength(singleSelectItemsSelected)).toEqual(1);
         }
     });

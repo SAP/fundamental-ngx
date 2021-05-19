@@ -3,7 +3,7 @@ import {
     click,
     getAttributeByName,
     getAttributeByNameArr,
-    getElementArrayLength,
+    getElementArrayLength, getElementPlaceholder,
     getText,
     refreshPage,
     scrollIntoView,
@@ -188,8 +188,8 @@ describe('Multi input test suite', function() {
     it('Verify inputs should have placeholder', () => {
         const activeInputsQuantity = getElementArrayLength(activeInputs);
         for (let i = 0; i < activeInputsQuantity; i++) {
-            expect(placeholderValue).toContain(getAttributeByName
-            (activeInputs, 'placeholder', i));
+            expect(placeholderValue).toContain(getElementPlaceholder
+            (activeInputs, i));
         }
     });
 
