@@ -85,7 +85,7 @@ Each commit message consists of a **header**, a **body** and a **footer**.  The 
 format that includes a **type**, a **scope** and a **subject**:
 
 ```
-<type>(<scope>): <subject>
+<type>: (<Scope>) <subject>
 <BLANK LINE>
 <body>
 <BLANK LINE>
@@ -102,17 +102,17 @@ The footer should contain a [closing reference to an issue](https://help.github.
 Samples: 
 
 ```
-docs(core): update changelog to beta.5
+docs: (Core) update changelog to beta.5
 ```
 ```
-fix(platform): need to depend on latest rxjs and zone.js
+fix: (Platform) need to depend on latest rxjs and zone.js
 
 The version in our package.json gets copied to the one we publish, and users need the latest of these.
 ```
 
 
 ```
-fix(platform): Actionbar as component
+fix: (Platform) Actionbar as component
 
 ```
 
@@ -134,13 +134,13 @@ Must be one of the following:
 
 ### Scope
 The scope should be the name of the npm package affected (as perceived by the person reading the changelog 
-generated from commit messages).
+generated from commit messages). Capitalize the first letter.
 
 The following is the list of supported scopes:
 
-* **core**
-* **platform**
-* **doc-app**
+* **Core**
+* **Platform**
+* **Doc-app**
 
 There are currently a few exceptions to the "use package name" rule:
 
@@ -187,7 +187,7 @@ The PR title must follow this format:
 
 
 ```
-<type>: <subject>
+<type>: (<Scope>) <subject>
 ```
 
 Samples:
@@ -208,7 +208,15 @@ Type can have following values: `WIP|feat|chore|test|docs|fix`.
 The `WIP` represent work in progress and it will not be merged, so please make sure to use one of 
 the specific format such as `feat|chore|test|doc|fix` if your PR needs to be merged with main 
 
+### Scope
+The scope should be the name of the npm package affected (as perceived by the person reading the changelog 
+generated from commit messages). Capitalize the first letter.
 
+The following is the list of supported scopes:
+
+* **Core**
+* **Platform**
+* **Doc-app**
 
 Here are following rules behind the PR title message:
 
