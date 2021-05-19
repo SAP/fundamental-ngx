@@ -334,7 +334,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         protected readonly _cd: ChangeDetectorRef,
         protected readonly elementRef: ElementRef,
         @Optional() @Self() readonly ngControl: NgControl,
-        @Optional() @Self() readonly ngForm: NgForm,
+        @Optional() @SkipSelf() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
         protected listConfig: ListConfig,
         @Optional() @SkipSelf() @Host() formField: FormField,
