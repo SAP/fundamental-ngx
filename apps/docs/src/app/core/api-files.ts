@@ -38,7 +38,6 @@ export const API_FILES = {
         'CardSubtitleDirective',
         'CardSecondSubtitleDirective',
         'CardContentComponent',
-        'CardFooterComponent',
         'CardLoaderComponent',
         'CardKpiHeaderComponent',
         'CardKpiValueDirective',
@@ -186,22 +185,25 @@ export const API_FILES = {
         'MessageBoxFooterButtonComponent'
     ],
     notification: [
+        'NotificationTitleDirective',
+        'NotificationIndicatorDirective',
+        'NotificationParagraphDirective',
+        'NotificationFooterContentDirective',
+        'NotificationSeparatorDirective',
+        'NotificationLimitTitleDirective',
+        'NotificationLimitDescriptionDirective',
+        'NotificationActionsComponent',
+        'NotificationContentComponent',
+        'NotificationLimitComponent',
+        'NotificationGroupHeaderComponent',
+        'NotificationGroupComponent',
+        'NotificationGroupListComponent',
         'NotificationComponent',
         'NotificationHeaderComponent',
         'NotificationBodyComponent',
         'NotificationFooterComponent',
-        'NotificationServiceDirective',
-        'NotificationActionsDirective',
-        'NotificationAvatarDirective',
-        'NotificationContentDirective',
-        'NotificationDescriptionDirective',
-        'NotificationMetadataDirective',
-        'NotificationTextDirective',
-        'NotificationTitleDirective',
-        'DefaultNotificationComponent',
         'NotificationContainer',
         'NotificationConfig',
-        'NotificationDefault',
         'NotificationRef'
     ],
     objectIdentifier: ['ObjectIdentifierComponent'],
@@ -351,5 +353,12 @@ export const API_FILES = {
         'GridListItemToolbarComponent',
         'GridListGroupHeaderComponent'
     ],
-    statusIndicator: ['StatusIndicatorComponent']
+    statusIndicator: ['StatusIndicatorComponent'],
+    messagePage: [
+        'MessagePageComponent',
+        'MessagePageActionsComponent',
+        'MessagePageMoreComponent',
+        'MessagePageTitleComponent',
+        'MessagePageSubtitleComponent'
+    ],
 };

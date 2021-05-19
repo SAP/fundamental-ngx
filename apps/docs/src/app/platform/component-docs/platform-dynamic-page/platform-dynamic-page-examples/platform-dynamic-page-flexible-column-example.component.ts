@@ -1,11 +1,5 @@
-import {
-    Component,
-    ChangeDetectionStrategy,
-    ViewChild,
-    ElementRef,
-    ChangeDetectorRef
-} from '@angular/core';
-import { FlexibleColumnLayout } from '@fundamental-ngx/core';
+import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { FlexibleColumnLayout, BreadcrumbComponent } from '@fundamental-ngx/core';
 import {
     DynamicPageCollapseChangeEvent,
     DynamicPageComponent,
@@ -31,6 +25,12 @@ export class PlatformDynamicPageFlexibleColumnExampleComponent {
      */
     @ViewChild(DynamicPageComponent)
     dynamicPageComponent: DynamicPageComponent;
+
+    /**
+     * access to breadcrumb component
+     */
+    @ViewChild(BreadcrumbComponent)
+    breadCrumbComponent: BreadcrumbComponent;
 
     /**
      * documentation related property
@@ -64,7 +64,7 @@ export class PlatformDynamicPageFlexibleColumnExampleComponent {
      */
     changeLayout(newValue: string): void {
         this.localLayout = newValue;
-        this.recalculateDynamicPageContainerPositions();
+        this.onViewportChanged();
     }
 
     /**
@@ -94,16 +94,13 @@ export class PlatformDynamicPageFlexibleColumnExampleComponent {
 
     onLayoutChanged(layout: FlexibleColumnLayout): void {
         console.log('layout is ' + layout);
-        this.recalculateDynamicPageContainerPositions();
+        this.onViewportChanged();
     }
 
-    /**
-     * since transition animation takes some time to fully show content,
-     * set timer here to reset the positions
-     */
-    recalculateDynamicPageContainerPositions(): void {
+    private onViewportChanged(): void {
+        // Wait until animation is done and trigger Breadcrumb resize
         setTimeout(() => {
-            this.dynamicPageComponent?.setContainerPositions();
-        }, 700);
+            this.breadCrumbComponent.onResize();
+        }, 800);
     }
 }

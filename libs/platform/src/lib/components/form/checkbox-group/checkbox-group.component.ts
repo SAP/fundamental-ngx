@@ -54,6 +54,18 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
     @Input()
     isInline = false;
 
+    /**
+     * Establishes two way binding, when checkbox group used outside form.
+     */
+    @Input()
+    get checked(): string[] {
+        return this._checked;
+    }
+    set checked(checkedValues: string[]) {
+        this._checked = checkedValues;
+        this.value = checkedValues;
+    }
+
     /** Children checkboxes passed as content */
     @ContentChildren(CheckboxComponent)
     contentCheckboxes: QueryList<CheckboxComponent>;
@@ -64,6 +76,13 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
 
     @Output()
     readonly valueChange: EventEmitter<PlatformCheckboxChange> = new EventEmitter<PlatformCheckboxChange>();
+
+    /** Emits checked change event */
+    @Output()
+    readonly checkedChange: EventEmitter<string[]> = new EventEmitter<string[]>();
+
+    /** @hidden used for two way binding, when used outside form */
+    private _checked: string[];
 
     constructor(
         cd: ChangeDetectorRef,
@@ -87,8 +106,12 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
      * @param event: contains checkbox and event in a PlatformCheckboxChange class object.
      */
     public groupValueChanges(event: PlatformCheckboxChange): void {
-        this.onTouched();
-        this.valueChange.emit(event);
+        if (event instanceof PlatformCheckboxChange) {
+            this.checked = event.checked;
+            this.onTouched();
+            this.valueChange.emit(event);
+            this.checkedChange.emit(this.checked);
+        }
     }
 
     /**

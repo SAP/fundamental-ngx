@@ -1,14 +1,18 @@
-import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } from '@angular/core';
+import { 
+    ChangeDetectionStrategy,
+    Component,
+    HostBinding,
+    ViewEncapsulation
+} from '@angular/core';
 
 @Component({
     selector: 'fd-notification-body',
-    templateUrl: './notification-body.component.html',
-    styleUrls: ['./notification-body.component.scss'],
+    template: `<ng-content></ng-content>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotificationBodyComponent {
-    /** @hidden */
-    @HostBinding('class.fd-notification__body')
-    fdNotificationHeaderBody = true;
+     /** @hidden */
+     @HostBinding('class.fd-notification__body')
+     fdNotificationBodyClass = true;
 }
