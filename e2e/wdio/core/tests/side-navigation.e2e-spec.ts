@@ -6,24 +6,23 @@ import {
     getElementClass,
     refreshPage,
     waitForPresent,
-    acceptAlert,
-    doesItExist
 } from '../../driver/wdio';
-import { sideNavigation } from '../../core/pages/side-navigation.po';
+import { SideNavigationPo } from '../../core/pages/side-navigation.po';
+import { checkRtlOrientation } from '../../helper/assertion-helper';
 
 describe('Side-navigation test suite', () => {
 
-    const snPage = new sideNavigation();
+    const sideNavigationPage = new SideNavigationPo();
     const {
         iconsExample, objectExample, CompactExample, TitilesExample, condensedExample,
         NavigationExample, ThreeLevelsExample, pragmaticalyExample, NonSelectableExample,
         condensedObjectExample, MultipleSelectedExample, expandArrow, mainListPoint,
         pointContainsSubList, expandedListPoint, expandListExample, listItem, subListItem,
         subList, expandList, openBtn, selectChildBtn
-    } = snPage;
+    } = sideNavigationPage;
 
     beforeAll(() => {
-        snPage.open();
+        sideNavigationPage.open();
     }, 1);
 
     afterEach(() => {
@@ -43,23 +42,32 @@ describe('Side-navigation test suite', () => {
         expect(getElementClass(NonSelectableExample + mainListPoint)).not.toContain('is-selected');
     });
 
-    xit('sublist working check', () => {
+    it('should check that items in expanded list choosing correct', () => {
         isExpandListWorking(condensedObjectExample);
         isExpandListWorking(condensedExample);
 
     });
-    xit('multiple levels check', () => {
+    it('should check that items in multiple levels list choosing correct', () => {
         checkMultipleLevels(ThreeLevelsExample);
         checkMultipleLevels(iconsExample);
         checkMultipleLevels(objectExample);
     });
 
-    xit('should check work buttons "select child" & "open"', () => {
+    it('should check work buttons "select child" & "open"', () => {
         click(selectChildBtn);
         expect(getAttributeByName(pragmaticalyExample + pointContainsSubList, 'ng-reflect-selected')).toEqual('false');
         expect(getAttributeByName(pragmaticalyExample + subListItem, 'ng-reflect-selected')).toEqual('false');
         click(openBtn);
         expect(getAttributeByName(pragmaticalyExample + expandArrow, 'aria-expanded')).toEqual('false');
+    });
+
+    it('should check RTL and LTR orientation', () => {
+        sideNavigationPage.checkRtlSwitch();
+    });
+
+    xit('should check examples visual regression', () => {
+        sideNavigationPage.saveExampleBaselineScreenshot();
+        expect(sideNavigationPage.compareWithBaseline()).toBeLessThan(5);
     });
 
     function checkIsSelected(section: string, i: number = 0, point: string = section + mainListPoint): void {
@@ -70,19 +78,20 @@ describe('Side-navigation test suite', () => {
     function isExpandListWorking(section: string, point: string = section + mainListPoint,): void {
         click(point, 2);
         expect(isElementDisplayed(expandList)).toBe(true);
-        const length = getElementArrayLength(expandListExample + listItem);
-        for (let i = 0; i < length; i++) {
+        const listLength = getElementArrayLength(expandListExample + listItem);
+        for (let i = 0; i < listLength; i++) {
             click(expandListExample + listItem, i);
             expect(getElementClass(expandedListPoint, i)).toContain('is-selected');
         }
     }
 
     function checkMultipleLevels(section: string): void {
-        if (section != objectExample)
+        if (section !== objectExample){
             click(section + expandArrow);
+        }
         expect(isElementDisplayed(subList)).toBe(true);
-        const length = getElementArrayLength(section + subListItem);
-        for (let i = 0; i < length; i++) {
+        const listLength = getElementArrayLength(section + subListItem);
+        for (let i = 0; i < listLength; i++) {
             click(section + subListItem, i);
             expect(getElementClass(section + subListItem, i)).toContain('is-selected');
             expect(getElementClass(section + pointContainsSubList)).toContain('is-selected');

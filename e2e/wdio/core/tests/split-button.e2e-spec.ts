@@ -4,7 +4,6 @@ import {
     click,
     getElementArrayLength,
     getText,
-    isAlertOpen,
     isElementDisplayed,
     refreshPage,
     waitForPresent
@@ -15,8 +14,8 @@ describe('Split-button test suite', () => {
     const splitButtonPage = new SplitButtonPo();
     const {
         mainbtn, splitItem, splitMenu, buttonBehaviorExample,
-        iconBehaviorExample, button, buttonTypesExample, buttonPragmaticalExample,
-        buttonTemplateExample, icons
+        iconBehaviorExample, buttonTypesExample, buttonPragmaticalExample,
+        buttonTemplateExample, arrowDownBtn
     } = splitButtonPage;
 
     beforeAll(() => {
@@ -30,12 +29,12 @@ describe('Split-button test suite', () => {
 
     it('should expand the menu and button shall invoke drop down menu', () => {
         checkMenuOpens(buttonBehaviorExample);
-        checkMenuOpens(iconBehaviorExample);
         checkMenuOpens(buttonTypesExample);
         checkMenuOpens(buttonTemplateExample);
         checkMenuOpens(buttonPragmaticalExample);
+        checkMenuOpens(iconBehaviorExample)
 
-    }); 
+    });
 
     it('Verify split button does not have less than 2 buuttons', () => {
         checkSplitMenuQuantity(buttonBehaviorExample);
@@ -44,36 +43,35 @@ describe('Split-button test suite', () => {
         checkSplitMenuQuantity(buttonTemplateExample);
         checkSplitMenuQuantity(buttonPragmaticalExample);
 
-    }); 
+    });
     it('Verify user can choose only one option at a time', () => {
         for (let i = 0; i < 2; i++) {
-            click(buttonBehaviorExample + icons);
+            click(buttonBehaviorExample + arrowDownBtn);
             expect(isElementDisplayed(splitMenu)).toBe(true);
             click(splitItem, i);
-            const splitBtnValue = getText(splitItem, i);
-            const mainBtnValue = getText(mainbtn);
-            expect(mainBtnValue).toEqual(splitBtnValue);
-            click(buttonBehaviorExample + icons);
+            acceptAlert();
+            const menuItemValue = getText(splitItem, i);
+            const mainButtonValue = getText(mainbtn);
+            expect(mainButtonValue).toEqual(menuItemValue);
+            click(buttonBehaviorExample + arrowDownBtn);
         }
-    }); 
+    });
 
     it('After did choose expand menu should close', () => {
-        click(buttonBehaviorExample + button);
+        click(buttonBehaviorExample + arrowDownBtn);
         expect(isElementDisplayed(splitMenu)).toBe(true);
         click(splitItem);
         acceptAlert();
         // after choose split button in menu - menu should be closed
-        expect(isElementDisplayed(splitMenu)).toBe(false) ;
+        expect(isElementDisplayed(splitMenu)).toBe(false);
         click(mainbtn);
         // after click on mainbtn an alert appears
-        expect(isAlertOpen()).toBe(true) ;
         acceptAlert();
-    }); 
+    });
 
     it('should check RTL and LTR orientation', () => {
         splitButtonPage.checkRtlSwitch();
     });
-
 
     it('should check examples visual regression', () => {
         splitButtonPage.saveExampleBaselineScreenshot();
@@ -81,18 +79,20 @@ describe('Split-button test suite', () => {
     });
 
     function checkMenuOpens(section: string): void {
-        const length = getElementArrayLength(section + button);
-        for (let i = 0; i < length; i++) {
-            click(section + button, i);
+        const itemsLength = getElementArrayLength(section + arrowDownBtn);
+        for (let i = 0; i < itemsLength; i++) {
+            click(section + arrowDownBtn, i);
             expect(isElementDisplayed(splitMenu)).toBe(true);
+            click(section + arrowDownBtn, i);
         }
     }
     function checkSplitMenuQuantity(section: string): void {
-        const length = getElementArrayLength(section + button);
-        for (let i = 0; i < length; i++) {
-            click(section + button, i);
-            let splitBtnArr = getElementArrayLength(splitItem);
+        const itemsLength = getElementArrayLength(section + arrowDownBtn);
+        for (let i = 0; i < itemsLength; i++) {
+            click(section + arrowDownBtn, i);
+            const splitBtnArr = getElementArrayLength(splitItem);
             expect(splitBtnArr).toBeGreaterThanOrEqual(2);
+            click(section + arrowDownBtn, i);
         }
     }
 });

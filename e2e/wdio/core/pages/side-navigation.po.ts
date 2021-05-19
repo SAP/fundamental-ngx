@@ -1,7 +1,7 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed, waitForPresent, getElementArrayLength } from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent} from '../../driver/wdio';
 
-export class sideNavigation extends CoreBaseComponentPo {
+export class SideNavigationPo extends CoreBaseComponentPo {
     private url = '/sideNavigation';
 
     root = '#page-content';
@@ -19,13 +19,13 @@ export class sideNavigation extends CoreBaseComponentPo {
     condensedObjectExample = 'fd-side-navigation-condensed-object-example ';
 
     mainListPoint = '.fd-nested-list__link';
-    listItem = 'li.fd-nested-list__item'
-    expandArrow = '.sap-icon--navigation-right-arrow';
+    listItem = 'li.fd-nested-list__item';
     selectedClass1 = 'fd-nested-list__link is-selected';
     selectedClass2 = 'fd-nested-list__link ng-star-inserted is-selected';
     selectedClass3 = 'fd-nested-list__content has-child ng-star-inserted is-selected';
 
-    pointContainsSubList = '.has-child';
+    pointContainsSubList = '.has-child ';
+    expandArrow = this.pointContainsSubList + 'button';
     expandListExample = 'fd-popover-body ';
     expandedListPoint = '.fd-popover__popper ul li a';
     subList = '.level-2'
@@ -47,11 +47,11 @@ export class sideNavigation extends CoreBaseComponentPo {
         return super.getScreenshotFolder(this.url);
     }
 
-    saveExampleBaselineScreenshot(specName: string = 'switch'): void {
+    saveExampleBaselineScreenshot(specName: string = 'side-navigation'): void {
         super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
     }
 
-    compareWithBaseline(specName: string = 'switch'): any {
+    compareWithBaseline(specName: string = 'side-navigation'): any {
         return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 

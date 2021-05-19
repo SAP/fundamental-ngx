@@ -202,6 +202,11 @@ export function uploadFile(selector: string, pathToFile: string, index: number =
     $$(selector)[index].setValue(pathToFile);
 }
 
+export function getElementClass(selector: string, index: number = 0): string {
+    checkSelectorExists(selector, index);
+    return $$(selector)[index].getAttribute('class');
+}
+
 export function getAttributeByName(selector: string, attrName: string, index: number = 0): string {
     checkSelectorExists(selector, index);
     return $$(selector)[index].getAttribute(attrName);

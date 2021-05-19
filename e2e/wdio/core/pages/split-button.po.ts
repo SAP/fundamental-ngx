@@ -13,10 +13,7 @@ export class SplitButtonPo extends CoreBaseComponentPo {
     buttonTemplateExample = 'fd-split-button-template-example ';
 
     mainbtn = '.fd-button__text'
-    arrowDownBtn = '.sap-icon--slim-arrow-down'
-    icons = 'fd-icon';
-    cartIcon = 'fd-icon.sap-icon--cart'
-    menuIcon = 'fd-icon.sap-icon--menu'
+    arrowDownBtn = 'fd-split-button .fd-button:nth-of-type(2)';
     button = '.fd-button';
     splitMenu = 'div.fd-popover__popper'
     splitItem = '.fd-menu__list li';
