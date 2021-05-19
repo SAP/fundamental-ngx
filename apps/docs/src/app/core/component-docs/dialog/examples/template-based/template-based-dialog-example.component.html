@@ -13,11 +13,13 @@
             <fd-button-bar
                     fdType="emphasized"
                     label="Interested"
+                    [compact]="true"
                     (click)="dialog.close('Continue')">
             </fd-button-bar>
             <fd-button-bar
                     fd-initial-focus
                     label="Cancel"
+                    [compact]="true"
                     (click)="dialog.dismiss('Cancel')">
             </fd-button-bar>
         </fd-dialog-footer>
