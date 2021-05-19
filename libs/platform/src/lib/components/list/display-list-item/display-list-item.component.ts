@@ -1,6 +1,6 @@
 import {
     Component, ChangeDetectorRef, ElementRef, forwardRef,
-    ChangeDetectionStrategy
+    ChangeDetectionStrategy, Optional
 } from '@angular/core';
 
 import { BaseListItem } from '../base-list-item';
@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 export class DisplayListItemComponent extends BaseListItem {
     /** @hidden */
     constructor(_changeDetectorRef: ChangeDetectorRef, itemEl: ElementRef,
-        protected _listConfig: ListConfig, protected _router: Router) {
+        protected _listConfig: ListConfig, @Optional() protected _router: Router) {
         super(_changeDetectorRef, itemEl, _listConfig, _router);
     }
 

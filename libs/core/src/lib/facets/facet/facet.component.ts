@@ -17,6 +17,7 @@ let randomTitleId = 0;
 @Component({
     selector: 'fd-facet',
     templateUrl: './facet.component.html',
+    styleUrls: ['./facet.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {

@@ -10,7 +10,7 @@ import {
     sendKeys, isEnabled,
     setValue,
     waitForElDisplayed,
-    waitForPresent, mouseHoverElement, addIsActiveClass
+    waitForPresent, mouseHoverElement, addIsActiveClass, getElementPlaceholder
 } from '../../driver/wdio';
 import { time, text, defaultValidTime } from '../fixtures/testData/time-picker';
 import { TimePickerPO } from '../pages/time-picker.po';
@@ -95,7 +95,7 @@ describe('Time picker suite', function() {
     it('Verify input field have placeholder', () => {
         const inputsCount = getElementArrayLength(activeTimePickerInput);
         for (let i = 0; i < inputsCount; i++) {
-            expect(['', null]).not.toContain(getAttributeByName(activeTimePickerInput, 'placeholder', i));
+            expect(['', null]).not.toContain(getElementPlaceholder(activeTimePickerInput, i));
         }
     });
 

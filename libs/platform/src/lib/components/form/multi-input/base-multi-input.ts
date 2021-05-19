@@ -364,6 +364,11 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         this._cd.markForCheck();
     }
 
+    /**@hidden */
+    convertObjectToMultiInputOption(items: any[]): MultiInputOption[] {
+        return this._convertObjectsToOptionItems(items);
+    }
+
     /** @hidden */
     searchTermChanged(text: string = this.inputText): void {
         if (text) {

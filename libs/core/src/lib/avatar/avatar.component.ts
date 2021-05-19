@@ -8,7 +8,7 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, ColorAccent, CssClassBuilder, Size } from '../utils/public_api';
+import { applyCssClass, ColorAccent, CssClassBuilder, getRandomColorAccent, Size } from '../utils/public_api';
 import { ANY_LANGUAGE_LETTERS_REGEX } from '../utils/consts';
 
 let avatarUniqueId = 0;
@@ -75,6 +75,9 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** A number from 1 to 10 representing the background color of the Avatar. */
     @Input() colorAccent: ColorAccent = null;
+
+    /** Whether or not to apply random background color to the Avatar. */
+    @Input() random = false;
 
     /**
      * @deprecated
@@ -143,7 +146,8 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         return [
             'fd-avatar',
             this.size ? `fd-avatar--${this.size}` : '',
-            this.colorAccent ? `fd-avatar--accent-color-${this.colorAccent}` : '',
+            this.colorAccent && !this.random ? `fd-avatar--accent-color-${this.colorAccent}` : '',
+            this.random ? `fd-avatar--accent-color-${getRandomColorAccent()}` : '',
             this.circle ? 'fd-avatar--circle' : '',
             this.border ? 'fd-avatar--border' : '',
             this.transparent ? 'fd-avatar--transparent' : '',

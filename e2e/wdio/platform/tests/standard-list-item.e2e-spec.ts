@@ -201,7 +201,7 @@ describe('Standard List Item test suite:', function() {
     xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             standardListPage.saveExampleBaselineScreenshot('standard-list-item', {removeElements: $(standardListPage.sFooterByLineAvatar)});
-            expect(standardListPage.compareWithBaseline('standard-list-item', {removeElements: $(standardListPage.sFooterByLineAvatar)})).toEqual(0);
+            expect(standardListPage.compareWithBaseline('standard-list-item', {removeElements: $(standardListPage.sFooterByLineAvatar)})).toBeLessThan(5);
         });
     });
 });
