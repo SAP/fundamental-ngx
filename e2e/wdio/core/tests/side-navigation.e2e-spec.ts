@@ -8,15 +8,14 @@ import {
     waitForPresent,
 } from '../../driver/wdio';
 import { SideNavigationPo } from '../../core/pages/side-navigation.po';
-import { checkRtlOrientation } from '../../helper/assertion-helper';
 
 describe('Side-navigation test suite', () => {
 
     const sideNavigationPage = new SideNavigationPo();
     const {
-        iconsExample, objectExample, CompactExample, TitilesExample, condensedExample,
-        NavigationExample, ThreeLevelsExample, pragmaticalyExample, NonSelectableExample,
-        condensedObjectExample, MultipleSelectedExample, expandArrow, mainListPoint,
+        iconsExample, objectExample, compactExample, titlesExample, condensedExample,
+        navigationExample, threeLevelsExample, pragmaticalyExample, nonSelectableExample,
+        condensedObjectExample, multipleSelectedExample, expandArrow, listItemLink,
         pointContainsSubList, expandedListPoint, expandListExample, listItem, subListItem,
         subList, expandList, openBtn, selectChildBtn
     } = sideNavigationPage;
@@ -27,28 +26,28 @@ describe('Side-navigation test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(mainListPoint);
+        waitForPresent(listItemLink);
     }, 1);
 
     it('should check list item select', () => {
-        checkIsSelected(NavigationExample);
-        checkIsSelected(TitilesExample);
-        checkIsSelected(CompactExample);
-        checkIsSelected(ThreeLevelsExample);
-        checkIsSelected(MultipleSelectedExample);
+        checkIsSelected(navigationExample);
+        checkIsSelected(titlesExample);
+        checkIsSelected(compactExample);
+        checkIsSelected(threeLevelsExample);
+        checkIsSelected(multipleSelectedExample);
         checkIsSelected(iconsExample);
         checkIsSelected(objectExample, 1);
-        click(NonSelectableExample + mainListPoint);
-        expect(getElementClass(NonSelectableExample + mainListPoint)).not.toContain('is-selected');
+        click(nonSelectableExample + listItemLink);
+        expect(getElementClass(nonSelectableExample + listItemLink)).not.toContain('is-selected');
     });
 
     it('should check that items in expanded list choosing correct', () => {
-        isExpandListWorking(condensedObjectExample);
-        isExpandListWorking(condensedExample);
+        checkExpandListIsWorking(condensedObjectExample);
+        checkExpandListIsWorking(condensedExample);
 
     });
     it('should check that items in multiple levels list choosing correct', () => {
-        checkMultipleLevels(ThreeLevelsExample);
+        checkMultipleLevels(threeLevelsExample);
         checkMultipleLevels(iconsExample);
         checkMultipleLevels(objectExample);
     });
@@ -70,12 +69,12 @@ describe('Side-navigation test suite', () => {
         expect(sideNavigationPage.compareWithBaseline()).toBeLessThan(5);
     });
 
-    function checkIsSelected(section: string, i: number = 0, point: string = section + mainListPoint): void {
+    function checkIsSelected(section: string, i: number = 0, point: string = section + listItemLink): void {
         click(point, i);
         expect(getElementClass(point, i)).toContain('is-selected');
     }
 
-    function isExpandListWorking(section: string, point: string = section + mainListPoint,): void {
+    function checkExpandListIsWorking(section: string, point: string = section + listItemLink): void {
         click(point, 2);
         expect(isElementDisplayed(expandList)).toBe(true);
         const listLength = getElementArrayLength(expandListExample + listItem);
@@ -86,7 +85,7 @@ describe('Side-navigation test suite', () => {
     }
 
     function checkMultipleLevels(section: string): void {
-        if (section !== objectExample){
+        if (section !== objectExample) {
             click(section + expandArrow);
         }
         expect(isElementDisplayed(subList)).toBe(true);

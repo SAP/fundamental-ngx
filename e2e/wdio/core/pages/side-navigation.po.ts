@@ -6,23 +6,20 @@ export class SideNavigationPo extends CoreBaseComponentPo {
 
     root = '#page-content';
 
-    NavigationExample = 'fd-side-navigation-example ';
-    TitilesExample = 'fd-side-navigation-titles-example ';
-    CompactExample = 'fd-side-navigation-compact-example ';
-    NonSelectableExample = 'fd-side-navigation-non-selectable-example ';
-    ThreeLevelsExample = 'fd-side-navigation-three-levels-example ';
-    MultipleSelectedExample = 'fd-side-navigation-multiple-selected-example ';
+    navigationExample = 'fd-side-navigation-example ';
+    titlesExample = 'fd-side-navigation-titles-example ';
+    compactExample = 'fd-side-navigation-compact-example ';
+    nonSelectableExample = 'fd-side-navigation-non-selectable-example ';
+    threeLevelsExample = 'fd-side-navigation-three-levels-example ';
+    multipleSelectedExample = 'fd-side-navigation-multiple-selected-example ';
     pragmaticalyExample = 'fd-side-navigation-programmatically-example ';
     iconsExample = 'fd-side-navigation-icons-example ';
     condensedExample = 'fd-side-navigation-condensed-example ';
     objectExample = 'fd-side-navigation-object-example ';
     condensedObjectExample = 'fd-side-navigation-condensed-object-example ';
 
-    mainListPoint = '.fd-nested-list__link';
+    listItemLink = '.fd-nested-list__link';
     listItem = 'li.fd-nested-list__item';
-    selectedClass1 = 'fd-nested-list__link is-selected';
-    selectedClass2 = 'fd-nested-list__link ng-star-inserted is-selected';
-    selectedClass3 = 'fd-nested-list__content has-child ng-star-inserted is-selected';
 
     pointContainsSubList = '.has-child ';
     expandArrow = this.pointContainsSubList + 'button';
