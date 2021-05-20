@@ -1,9 +1,9 @@
 import { ProductSwitchPo } from '../pages/product-switch.po';
 import {
     applyState,
-    click,
+    click, clickAndMoveElement,
     getCSSPropertyByName,
-    getElementArrayLength,
+    getElementArrayLength, getText,
     isElementDisplayed,
     refreshPage,
     waitForElDisplayed
@@ -19,6 +19,11 @@ describe('product switch test suite', function() {
         productSwitchPage.open();
     }, 1);
 
+    beforeEach(() => {
+        refreshPage();
+        waitForElDisplayed(productSwitchPage.title);
+    }, 1);
+
     describe('shellbar example', function() {
         it('should check ability to open product switch', () => {
             click(shellbarButton);
@@ -27,19 +32,27 @@ describe('product switch test suite', function() {
         });
 
         it('should check items are clickable', () => {
+            click(shellbarButton);
             checkElArrIsClickable(shellbarSwitchItems);
         });
 
         it('should check items are focusable', function() {
+            click(shellbarButton);
             const itemCount = getElementArrayLength(shellbarSwitchItems);
 
             for (let i = 0; i < itemCount; i++) {
                 applyState('focus', shellbarSwitchItems, i);
                 expect(emptyDataArr).not.toContain(getCSSPropertyByName(shellbarSwitchItems, focusAttribute, i).value);
             }
+        });
 
-            // close popover
+        it('should drag and drop apps', () => {
             click(shellbarButton);
+            const originalCardData = getText(shellbarSwitchItems, 4);
+
+            clickAndMoveElement(shellbarSwitchItems, 50, 0, 4);
+
+            expect(getText(shellbarSwitchItems, 4)).not.toEqual(originalCardData);
         });
     });
 
@@ -64,8 +77,6 @@ describe('product switch test suite', function() {
         });
 
         it('should check examples visual regression', () => {
-            refreshPage();
-            waitForElDisplayed(productSwitchPage.title);
             productSwitchPage.saveExampleBaselineScreenshot();
             expect(productSwitchPage.compareWithBaseline()).toBeLessThan(5);
         });
