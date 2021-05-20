@@ -260,12 +260,25 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden Node edit mode checkbox change handler */
     _onNodeCheck(node: ApprovalNode): void {
         const checked = this._nodeComponents.filter(n => n._isSelected);
-        const checkedNodesCount = checked.length;
-        const canAdd = checkedNodesCount === 1 && !isNodeApproved(checked[0].node);
+        const isOneNotApprovedNodeChecked = checked.length === 1 && !isNodeApproved(checked[0].node);
 
-        this._canAddBefore = canAdd && this._graphMetadata[node.id].canAddNodeBefore;
-        this._canAddAfter = canAdd && this._graphMetadata[node.id].canAddNodeAfter;
-        this._canAddParallel = canAdd && this._graphMetadata[node.id].canAddParallel;
+        this._canAddBefore =
+            isOneNotApprovedNodeChecked
+            && this._graphMetadata[node.id].canAddNodeBefore
+            && !node.disableActions
+            && !node.actionsConfig?.disableAddBefore;
+
+        this._canAddAfter =
+            isOneNotApprovedNodeChecked
+            && this._graphMetadata[node.id].canAddNodeAfter
+            && !node.disableActions
+            && !node.actionsConfig?.disableAddAfter;
+
+        this._canAddParallel =
+            isOneNotApprovedNodeChecked
+            && this._graphMetadata[node.id].canAddParallel
+            && !node.disableActions
+            && !node.actionsConfig?.disableAddParallel;
     }
 
     /** @hidden Watcher's avatar click handler */
