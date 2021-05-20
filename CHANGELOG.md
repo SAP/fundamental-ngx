@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.19...v0.30.1-rc.20) (2021-05-20)
+
+### [0.30.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.18...v0.30.1-rc.19) (2021-05-19)
+
+### [0.30.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.17...v0.30.1-rc.18) (2021-05-19)
+
+### [0.30.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.16...v0.30.1-rc.17) (2021-05-19)
+
+### [0.30.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.15...v0.30.1-rc.16) (2021-05-19)
+
+### [0.30.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.14...v0.30.1-rc.15) (2021-05-18)
+
+
+### Features
+
+* (Core) introduce new Message Page component ([#5349](https://github.com/SAP/fundamental-ngx/issues/5349)) ([b6624d4](https://github.com/SAP/fundamental-ngx/commit/b6624d435c9c07e32b8c425c0cff7bf7b6b0bd0e))
+
+### [0.30.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.13...v0.30.1-rc.14) (2021-05-18)
+
 ### [0.30.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.12...v0.30.1-rc.13) (2021-05-18)
 
 
