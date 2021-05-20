@@ -167,6 +167,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     @Input()
     fillControlMode: PopoverFillMode = 'at-least';
 
+    /** Sets title attribute to addon button. */
+    @Input()
+    addonIconTitle: string = null;
+
     /** Event emitted when item is selected. */
     @Output()
     selectionChange = new EventEmitter<MultiComboboxSelectionChangeEvent>();

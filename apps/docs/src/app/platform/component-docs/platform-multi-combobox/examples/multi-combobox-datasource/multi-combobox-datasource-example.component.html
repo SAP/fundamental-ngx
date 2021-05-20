@@ -8,7 +8,7 @@
             [selectedItems]="selectedItems1"
             (selectionChange)="onSelect1($event)"
         ></fdp-multi-combobox>
-        <p>Selected Item: {{ selectedItems1 }}</p>
+        <p>Selected: {{ selectedItems1 }}</p>
     </fdp-form-field>
 
     <fdp-form-field id="array-of-objects" label="Array of Objects">
@@ -22,7 +22,7 @@
             [selectedItems]="selectedItems2"
             (selectionChange)="onSelect2($event)"
         ></fdp-multi-combobox>
-        <p>Selected Item: {{ selectedItems2 | json }}</p>
+        <p>Selected: {{ selectedItems2 | json }}</p>
     </fdp-form-field>
 
     <fdp-form-field id="observable" label="Observable">
@@ -36,7 +36,7 @@
             (selectionChange)="onSelect3($event)"
             [selectedItems]="selectedItems3"
         ></fdp-multi-combobox>
-        <p>Selected Item: {{ selectedItems3 | json }}</p>
+        <p>Selected: {{ selectedItems3 | json }}</p>
     </fdp-form-field>
 
     <fdp-form-field id="ds" label="Data Source">
@@ -50,6 +50,19 @@
             (selectionChange)="onSelect4($event)"
             [selectedItems]="selectedItems4"
         ></fdp-multi-combobox>
-        <p>Selected Item: {{ selectedItems4 | json }}</p>
+        <p>Selected: {{ selectedItems4 | json }}</p>
+    </fdp-form-field>
+</fdp-form-group>
+
+<fdp-form-group [noLabelLayout]="false" columnLayout="XL3-L2-M1-S1">
+    <fdp-form-field id="standard" label="Example with 'N more' label" column="1">
+        <fdp-multi-combobox
+            name="standard"
+            placeholder="Type some text..."
+            [dataSource]="dataSourceStrings"
+            (selectionChange)="onSelect5($event)"
+            [selectedItems]="selectedItems5"
+        ></fdp-multi-combobox>
+        <p>Selected: {{ selectedItems5  }}</p>
     </fdp-form-field>
 </fdp-form-group>
