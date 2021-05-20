@@ -9,6 +9,8 @@ import { BaseEntity, EntityBaseType, IdentityKey } from './entity-server/interfa
 import { EntityType } from '../../../domain/decorators';
 import { EntityCollectionsService } from './entity-collections-service';
 import { EntityCollectionService } from './entity-collection-service';
+import { EntityDTOType } from '../../../domain/entity';
+import { Type } from '../../../domain/utility';
 
 class ChildEntity extends BaseEntity<{ name: string }> {
     name: 'child entity';
@@ -43,10 +45,15 @@ class EntityMetaOptionsServiceMock implements EntityMetaOptionsService {
 }
 
 class EntityCollectionsServiceMock implements EntityCollectionsService {
-    getEntityCollectionService<T>(entityType: EntityType<T>): EntityCollectionService<T> {
+    getEntityCollectionService<T extends BaseEntity<EntityDTOType<T>>>(
+        entityType: Type<T>
+    ): EntityCollectionService<EntityDTOType<T>> {
         throw new Error('Method not implemented.');
     }
-    registerEntityCollectionService<T>(entityType: EntityType<T>, entityCollectionService: EntityCollectionService<T>): void {
+    registerEntityCollectionService<T extends BaseEntity<EntityDTOType<T>>>(
+        entityType: Type<T>,
+        entityCollectionService: EntityCollectionService<EntityDTOType<T>>
+    ): void {
         throw new Error('Method not implemented.');
     }
 }

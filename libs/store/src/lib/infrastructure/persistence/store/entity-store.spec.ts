@@ -1,10 +1,9 @@
 import { of } from 'rxjs';
 
-import { DefaultEntityStore } from './entity-store';
-import { QueryBuilder } from '../query/query-builder';
 import { Type } from '../../../domain/utility';
-import { IdentityKey } from '../../../domain/entity';
-import { BaseEntity } from '../domain/base-classes/base-entity';
+import { IdentityKey, BaseEntity } from '../../../domain/entity';
+import { QueryBuilder } from '../query/query-builder';
+import { DefaultEntityStore } from './entity-store';
 import { EntityCollectionService } from './entity-collection-service';
 
 class UserDTO {
@@ -13,16 +12,12 @@ class UserDTO {
     age: number;
 }
 class User extends BaseEntity<UserDTO> {
-    constructor(dto: UserDTO) {
-        super(dto);
-    }
-
     get identity(): IdentityKey {
         return this.value.id;
     }
 }
 
-class UserCollectionServiceMock implements Partial<EntityCollectionService<User>> {
+class UserCollectionServiceMock implements Partial<EntityCollectionService<UserDTO>> {
     getAll() {
         return of([]);
     }
@@ -35,16 +30,16 @@ class UserCollectionServiceMock implements Partial<EntityCollectionService<User>
         return of(null);
     }
 
-    add(entity: User) {
+    add(entity: UserDTO) {
         return of(entity);
     }
 
-    update(entity: User) {
+    update(entity: UserDTO) {
         return of(entity);
     }
 
-    delete(entityOrId: User | string | number) {
-        return entityOrId instanceof User ? of(entityOrId.identity) : of(entityOrId);
+    delete(entityOrId: UserDTO | string | number) {
+        return entityOrId instanceof Object ? of(entityOrId.id) : of(entityOrId);
     }
 }
 
@@ -53,12 +48,12 @@ class QueryBuilderMock extends QueryBuilder<User> {}
 describe('Default Entity Store', () => {
     let entity: Type<User>;
     let store: DefaultEntityStore<User>;
-    let collectionService: EntityCollectionService<User>;
+    let collectionService: EntityCollectionService<UserDTO>;
     let queryBuilder: QueryBuilder<User>;
 
     beforeEach(() => {
         entity = User;
-        collectionService = new UserCollectionServiceMock() as EntityCollectionService<User>;
+        collectionService = new UserCollectionServiceMock() as EntityCollectionService<UserDTO>;
         queryBuilder = new QueryBuilderMock(null);
         store = new DefaultEntityStore(entity, collectionService, queryBuilder);
     });
@@ -82,39 +77,47 @@ describe('Default Entity Store', () => {
     });
 
     it('should delegate save to entityService.update() method if entity id exists', () => {
-        const dto: UserDTO = { id: '27', name: 'John', age: 35 };
-        const user: User = new User(dto);
+        const userDto: UserDTO = { id: '27', name: 'John', age: 35 };
+        const user: User = new User(userDto);
 
         // check returned result
-        spyOn(collectionService, 'update').and.callFake(() => of(user));
+        spyOn(collectionService, 'update').and.callFake(() => of(userDto));
 
-        store.save(user).subscribe((data) => expect(data).toBe(user));
+        store.save(user).subscribe((data) => {
+            expect(data).toBeInstanceOf(User);
+            expect(data.value).toEqual(userDto);
+        });
 
-        expect(collectionService.update).toHaveBeenCalledOnceWith(user);
+        expect(collectionService.update).toHaveBeenCalledOnceWith(userDto);
     });
 
     it("should delegate save to entityService.add() method if entity id doesn't exist", () => {
-        const dto: UserDTO = { id: undefined, name: 'John', age: 35 };
-        const user = new User(dto);
+        const userDto: UserDTO = { id: undefined, name: 'John', age: 35 };
+        const user = new User(userDto);
 
         // check returned result
-        spyOn(collectionService, 'add').and.callFake(() => of(user));
+        spyOn(collectionService, 'add').and.callFake(() => of(userDto));
 
-        store.save(user).subscribe((data) => expect(data).toEqual(user));
+        store.save(user).subscribe((data) => {
+            expect(data).toBeInstanceOf(User);
+            expect(data.value).toEqual(userDto)
+        });
 
-        expect(collectionService.add).toHaveBeenCalledOnceWith(user);
+        expect(collectionService.add).toHaveBeenCalledOnceWith(userDto);
     });
 
     it('should delegate delete to entityService.delete()', () => {
-        const dto: UserDTO = { id: '27', name: 'John', age: 35 };
-        const user = new User(dto);
+        const userDto: UserDTO = { id: '27', name: 'John', age: 35 };
+        const user = new User(userDto);
 
         // check returned result
         spyOn(collectionService, 'delete').and.callFake(() => of(user.identity));
 
-        store.delete(user).subscribe((data) => expect(data).toBe(user));
+        store.delete(user).subscribe((data) => {
+            expect(data).toBe(user);
+        });
 
-        expect(collectionService.delete).toHaveBeenCalledOnceWith(user);
+        expect(collectionService.delete).toHaveBeenCalledOnceWith(userDto);
     });
 
     it('should has queryBuilder reference', () => {

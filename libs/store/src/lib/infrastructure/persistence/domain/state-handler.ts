@@ -1,6 +1,4 @@
-import { BaseValue } from '../../persistence/domain/base-classes/base-value';
-import { Type } from '../../../domain/utility';
-import { Composite } from './base-classes';
+import { Type, Composite, BaseValue } from '../../../domain/public_api';
 
 // TODO: Add Constraints <T extends object, K extends object = {}>
 export function instanceForType<T, K>(Type: Type<T>, fromState: K): T {

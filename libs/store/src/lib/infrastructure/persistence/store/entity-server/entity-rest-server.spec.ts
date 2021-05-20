@@ -1,14 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-
 import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-
 import { of } from 'rxjs';
-
 import { Update } from '@ngrx/entity';
 import { DefaultDataServiceConfig, DataServiceError, Pluralizer } from '@ngrx/data';
 
 import { EntityOperationComplexPath } from '../../../../domain/rest-resource';
+import { EntityType } from '../../../../domain/public_api';
 import { EntityRestServerServiceFactory, EntityRestServerService } from './entity-rest-server';
 import { HttpUrlGenerator, DefaultHttpUrlGenerator } from '../http-url-generator';
 import {
@@ -19,7 +17,6 @@ import {
 import { BaseEntity, EntityBaseType, IdentityKey } from './interfaces';
 import { DefaultQueryAdapter, QueryAdapter, QueryAdapterService } from '../../query/query-adapter';
 import { QuerySnapshotModel } from '../../query/query';
-import { EntityType } from 'libs/store/src/lib/domain/decorators';
 
 class Hero extends BaseEntity {
     id!: number;

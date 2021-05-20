@@ -1,6 +1,4 @@
-import { BaseEntity, BaseValue } from '../domain/base-classes';
-import { RESTResource } from '../../../domain/decorators';
-import { IdentityKey } from '../../../domain/public_api';
+import { IdentityKey, BaseEntity, BaseValue, RESTResource } from '../../../domain/public_api';
 import { instanceForType } from './state-handler';
 
 interface MoneyDTO {

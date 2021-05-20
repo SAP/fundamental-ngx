@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs';
 import { ChainingStrategyFieldsMap } from '../../../domain/chaining-policy';
+import { BaseEntity, EntityDTOType } from '../../../domain/entity';
 
 import { Predicate } from './grammar/predicate';
 import { QueryService } from './query.service';
@@ -9,7 +10,7 @@ export interface OrderBy<TModel> {
     order?: 'ASCENDING' | 'DESCENDING';
 }
 
-export class QuerySnapshotModel<T extends {}> {
+export class QuerySnapshotModel<T> {
     keyword: string;
     predicate: Predicate<T>;
     skip: number;
@@ -18,10 +19,10 @@ export class QuerySnapshotModel<T extends {}> {
     includeCount: boolean;
     select: Array<keyof T>;
     expand: Array<keyof T>;
-    chainingStrategy?: ChainingStrategyFieldsMap<T>;
+    chainingStrategy?: ChainingStrategyFieldsMap<any>;
 }
 
-export type QuerySnapshot<T extends {}> = Readonly<QuerySnapshotModel<T>>;
+export type QuerySnapshot<T> = Readonly<QuerySnapshotModel<T>>;
 
 export const isQuerySnapshot = <K>(data: any): data is QuerySnapshot<K> => {
     return data instanceof QuerySnapshotModel;
@@ -30,12 +31,12 @@ export const isQuerySnapshot = <K>(data: any): data is QuerySnapshot<K> => {
 /**
  * @todo We may need a method for end-users to add custom query parameters.
  */
-export class Query<TModel> {
+export class Query<Entity extends BaseEntity<EntityDTOType<Entity>>> {
     /** @hidden - stores current keyword */
     protected _keyword: string;
 
     /** @hidden - stores current predicate */
-    protected _predicate: Predicate<TModel>;
+    protected _predicate: Predicate<EntityDTOType<Entity>>;
 
     /** @hidden - stores current offset */
     protected _skip: number;
@@ -47,27 +48,27 @@ export class Query<TModel> {
     protected _suppressPageReset: boolean;
 
     /** @hidden - stores current order bys */
-    protected _orderByFields: Array<OrderBy<TModel>>;
+    protected _orderByFields: Array<OrderBy<EntityDTOType<Entity>>>;
 
     /** @hidden - stores current enable count flag */
     protected _includeCount: boolean;
 
     /** @hidden - stores current selection of properties */
-    protected _select: Array<keyof TModel>;
+    protected _select: Array<keyof EntityDTOType<Entity>>;
 
     /** @hidden - stores current expand properties */
-    protected _expand: Array<keyof TModel>;
+    protected _expand: Array<keyof EntityDTOType<Entity>>;
 
     constructor(
-        protected readonly service: QueryService<TModel>,
-        protected readonly chainingStrategy?: ChainingStrategyFieldsMap<TModel>
+        protected readonly service: QueryService<Entity>,
+        protected readonly chainingStrategy?: ChainingStrategyFieldsMap<Entity>
     ) {}
 
     /**
      * Replace current filter settings.
      * @param predicate Predicate object which contains new filter criteria.
      */
-    where(predicate: Predicate<TModel>): this {
+    where(predicate: Predicate<EntityDTOType<Entity>>): this {
         this._predicate = predicate;
         return this;
     }
@@ -85,7 +86,7 @@ export class Query<TModel> {
      * Set order by rules for query.
      * @param orderBys Set of OrderBy objects.
      */
-    orderBy(...orderBys: Array<OrderBy<TModel>>): this {
+    orderBy(...orderBys: Array<OrderBy<EntityDTOType<Entity>>>): this {
         this._orderByFields = orderBys;
         return this;
     }
@@ -134,7 +135,7 @@ export class Query<TModel> {
      * the entity properties included in the return data.
      * @param select List of properties to include in response data
      */
-    select<TP extends keyof TModel>(...select: Array<TP>): this {
+    select<TP extends keyof EntityDTOType<Entity>>(...select: Array<TP>): this {
         this._select = select;
         return this;
     }
@@ -144,7 +145,7 @@ export class Query<TModel> {
      * to include relational data.
      * @param extend List of expanded properties to include in response data
      */
-    expand<TP extends keyof TModel>(...expand: Array<TP>): this {
+    expand<TP extends keyof EntityDTOType<Entity>>(...expand: Array<TP>): this {
         this._expand = expand;
         return this;
     }
@@ -152,7 +153,7 @@ export class Query<TModel> {
     /**
      * Initiate query and return observable
      */
-    fetch(): Observable<Array<TModel>> {
+    fetch(): Observable<Entity[]> {
         if (!this._suppressPageReset) {
             this._skip = 0;
         }
@@ -194,8 +195,8 @@ export class Query<TModel> {
     /**
      * Create current query state snapshot
      */
-    createSnapshot(): QuerySnapshot<TModel> {
-        const snapshot = new QuerySnapshotModel<TModel>();
+    createSnapshot(): QuerySnapshot<EntityDTOType<Entity>> {
+        const snapshot = new QuerySnapshotModel<EntityDTOType<Entity>>();
 
         snapshot.keyword = this._keyword;
         snapshot.predicate = this._predicate;

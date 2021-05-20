@@ -1,5 +1,10 @@
 import { BaseEntity, Entity, IdentityKey, RESTResource } from '@fundamental-ngx/store';
 
+export interface LineItemDTO {
+    lineItemId: string;
+    reqId: string;
+}
+
 @RESTResource({
     path: '/requisitions/:reqId/lineItems'
 })
@@ -8,11 +13,11 @@ import { BaseEntity, Entity, IdentityKey, RESTResource } from '@fundamental-ngx/
     name: 'LineItem',
     aggregateOf: 'Requisition'
 })
-export class LineItem extends BaseEntity<any> {
-    lineItemId: string;
-    reqId: string;
-
+export class LineItem extends BaseEntity<LineItemDTO> {
     get identity(): IdentityKey {
-        return this.lineItemId;
+        return this.value.lineItemId;
+    }
+    get reqId(): string {
+        return this.value.reqId;
     }
 }

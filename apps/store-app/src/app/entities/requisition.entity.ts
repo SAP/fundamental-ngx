@@ -1,15 +1,12 @@
-import { Entity, IdentityKey, RESTResource } from '@fundamental-ngx/store';
-import { BaseEntity } from '@fundamental-ngx/store';
-import { LineItem } from './line-items.value-object';
-import { User } from './user.entity';
+import { Entity, IdentityKey, RESTResource, BaseEntity } from '@fundamental-ngx/store';
+import { User, UserDTO } from './user.entity';
 
 export interface ReqDTO {
     id: number;
     title: string;
     totalAmount: number;
-    owner: User;
     ownerId: string;
-    lineItems: Array<LineItem>;
+    owner?: UserDTO;
 }
 
 // URI with endpoints for different actions
@@ -35,14 +32,19 @@ export interface ReqDTO {
     }
 })
 export class Requisition extends BaseEntity<ReqDTO> {
-    id: string;
-    title: string;
-    totalAmount: number;
-    owner: User;
-    ownerId: string;
-    lineItems: LineItem[];
-
     get identity(): IdentityKey {
         return this.value.id;
+    }
+    get title(): string {
+        return this.value.title;
+    }
+    get totalAmount(): number {
+        return this.value.totalAmount;
+    }
+    get owner(): User {
+        return new User(this.value.owner);
+    }
+    get ownerId(): string {
+        return this.value.ownerId;
     }
 }

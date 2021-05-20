@@ -1,8 +1,7 @@
 import { Observable } from 'rxjs';
 import { Update } from '@ngrx/entity';
 
-import { IdentityKey } from '../../../../domain/entity';
-import { BaseEntity } from '../../domain/base-classes/base-entity';
+import { IdentityKey, BaseEntity } from '../../../../domain/entity';
 import { QueryParams, QuerySnapshot } from '../../query/query-adapter';
 
 export { BaseEntity, IdentityKey };

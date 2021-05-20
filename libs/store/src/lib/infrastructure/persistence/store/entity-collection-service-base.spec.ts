@@ -2,22 +2,25 @@ import { EntityServices, EntityCollectionService as NgrxEntityCollectionService 
 import { fail } from 'assert';
 import { of, Subject } from 'rxjs';
 
+import { IdentityKey, BaseEntity } from '../../../domain/entity';
 import { EntityMetaOptions, EntityMetaOptionsService } from '../utils/entity-options.service';
 import { EntityCollectionService } from './entity-collection-service';
 import { DefaultEntityCollectionService } from './entity-collection-service-base';
 import { EntityCollectionsService } from './entity-collections-service';
-import { BaseEntity } from '../domain/base-classes/base-entity';
-import { IdentityKey } from '../../../domain/entity';
 
 describe('EntityCollectionService', () => {
-    let service: DefaultEntityCollectionService<Hero>;
+    let service: DefaultEntityCollectionService<HeroDTO>;
     let entityServices: jasmine.SpyObj<EntityServices>;
     let entityMetaOptionsService: jasmine.SpyObj<EntityMetaOptionsService>;
-    let ngrxHeroCollectionService: jasmine.SpyObj<NgrxEntityCollectionService<Hero>>;
+    let ngrxHeroCollectionService: jasmine.SpyObj<NgrxEntityCollectionService<HeroDTO>>;
     let entityCollectionsService: jasmine.SpyObj<EntityCollectionsService>;
     let entityMetaOptions: EntityMetaOptions<Hero>;
 
-    class Advantage extends BaseEntity {
+    class AdvantageDTO {
+        id: string; 
+        title: string;
+    }
+    class Advantage extends BaseEntity<AdvantageDTO> {
         constructor(public id: string, public title: string) {
             super({ id, title });
         }
@@ -27,9 +30,14 @@ describe('EntityCollectionService', () => {
         }
     }
 
-    class User extends BaseEntity {
+    interface UserDTO {
+        id: string; 
+        name: string;
+    }
+
+    class User extends BaseEntity<UserDTO> {
         constructor(public id: string, public name: string) {
-            super({ id, name })
+            super({ id, name });
         }
 
         get identity(): IdentityKey {
@@ -58,7 +66,7 @@ describe('EntityCollectionService', () => {
     }
 
     beforeEach(() => {
-        ngrxHeroCollectionService = jasmine.createSpyObj<NgrxEntityCollectionService<Hero>>(
+        ngrxHeroCollectionService = jasmine.createSpyObj<NgrxEntityCollectionService<HeroDTO>>(
             'EntityCollectionService',
             ['add', 'delete', 'getAll', 'getByKey', 'getWithQuery', 'update', 'upsert'],
             ['collection$', 'entities$', 'count$', 'loading$', 'loaded$', 'errors$']
@@ -275,7 +283,7 @@ describe('EntityCollectionService', () => {
                             }
                         };
 
-                        const results: Hero[] = [];
+                        const results: HeroDTO[] = [];
 
                         service.getByKey('123').subscribe((result) => {
                             results.push(result);
@@ -342,7 +350,7 @@ describe('EntityCollectionService', () => {
                             }
                         };
 
-                        const results: Hero[] = [];
+                        const results: HeroDTO[] = [];
 
                         service.getByKey('123').subscribe({
                             next: (result) => {

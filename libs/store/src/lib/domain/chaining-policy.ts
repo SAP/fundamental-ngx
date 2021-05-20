@@ -1,6 +1,5 @@
-import { IdentityKey } from './entity';
+import { IdentityKey, BaseEntity } from './entity';
 import { AllowedFields, Type, IfTargetIncludeConditionType } from './utility';
-import { BaseEntity } from '../infrastructure/persistence';
 
 export type ChainingStrategy =
     | 'non-block' // call immediately and non-block (default)

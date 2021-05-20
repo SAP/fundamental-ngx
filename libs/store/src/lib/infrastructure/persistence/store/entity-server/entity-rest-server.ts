@@ -12,9 +12,8 @@ import {
     EntityMetaOptions
 } from '../../utils/entity-options.service';
 import { QueryAdapter, QueryAdapterService, QuerySnapshot } from '../../query/query-adapter';
-
 import { HttpUrlGenerator } from '../http-url-generator';
-import { BaseEntity, EntityServerService } from './interfaces';
+import {  EntityServerService } from './interfaces';
 
 export declare type HttpMethods = 'DELETE' | 'GET' | 'POST' | 'PUT' | 'PATCH';
 

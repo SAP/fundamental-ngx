@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import {
     FetchPolicy,
     CachePolicy,
     EntityType,
     BaseEntity,
-    ChainingStrategyFieldsMap, Type
+    ChainingStrategyFieldsMap, Type, EntityDTOType
 } from '../../../domain/public_api';
 import { DefaultEntityStore, EntityStore } from './entity-store';
 import { QueryBuilder } from '../query/query-builder';
@@ -15,14 +16,13 @@ import { QuerySnapshot } from '../query/query';
 import { EntityCollectionService } from './entity-collection-service';
 import { EntityCollectionsService } from './entity-collections-service';
 import { instanceForType } from '../domain/state-handler';
-import { map } from 'rxjs/operators';
 
 //#region Interfaces
 
 /**
  * Entity Store Builder interface
  */
-export interface EntityStoreBuilder<T extends BaseEntity> {
+export interface EntityStoreBuilder<T extends BaseEntity<EntityDTOType<T>>> {
     /**
      * Apply Cache Policy
      * @param policy CachePolicy settings
@@ -48,7 +48,7 @@ export interface EntityStoreBuilder<T extends BaseEntity> {
  * Entity Store Builder Factory interface
  */
 export abstract class EntityStoreBuilderFactory {
-    abstract create<T extends BaseEntity>(entity: EntityType<T>): EntityStoreBuilder<T>;
+    abstract create<T extends BaseEntity<EntityDTOType<T>>>(entity: EntityType<T>): EntityStoreBuilder<T>;
 }
 
 //#endregion
@@ -58,13 +58,13 @@ export abstract class EntityStoreBuilderFactory {
 /**
  * Entity Store Builder default implementation
  */
-export class DefaultEntityStoreBuilder<T extends BaseEntity> implements EntityStoreBuilder<T> {
+export class DefaultEntityStoreBuilder<T extends BaseEntity<EntityDTOType<T>>> implements EntityStoreBuilder<T> {
     protected cachePolicy: CachePolicy | null = null;
     protected fetchPolicy: FetchPolicy | null = null;
     protected chainingStrategyMap: ChainingStrategyFieldsMap<T> | null = null;
 
     constructor(
-        protected readonly entity: EntityType<T>,
+        protected readonly entityClass: EntityType<T>,
         protected readonly entityCollectionsService: EntityCollectionsService
     ) {
         this.reset();
@@ -92,12 +92,12 @@ export class DefaultEntityStoreBuilder<T extends BaseEntity> implements EntitySt
     }
 
     create(): EntityStore<T> {
-        const entityCollectionService = this.entityCollectionsService.getEntityCollectionService<T>(this.entity);
+        const entityCollectionService = this.entityCollectionsService.getEntityCollectionService<T>(this.entityClass);
         const queryBuilder = new QueryBuilder(
-            new DefaultQueryService(this.entity, entityCollectionService));
+            new DefaultQueryService(this.entityClass, entityCollectionService));
 
         const result = new DefaultEntityStore<T>(
-            this.entity,
+            this.entityClass,
             entityCollectionService,
             queryBuilder, {
             cachePolicy: this.cachePolicy,
@@ -118,27 +118,27 @@ export class DefaultEntityStoreBuilder<T extends BaseEntity> implements EntitySt
 export class DefaultEntityStoreBuilderFactory implements EntityStoreBuilderFactory {
     constructor(protected readonly entityCollectionsService: EntityCollectionsService) {}
 
-    create<T extends BaseEntity>(entity: EntityType<T>): EntityStoreBuilder<T> {
+    create<T extends BaseEntity<EntityDTOType<T>>>(entity: EntityType<T>): EntityStoreBuilder<T> {
         return new DefaultEntityStoreBuilder(entity, this.entityCollectionsService);
     }
 }
 
-export class DefaultQueryService<TModel> extends QueryService<TModel> {
+export class DefaultQueryService<TModel extends BaseEntity<EntityDTOType<TModel>>> extends QueryService<TModel> {
     constructor(
         private entity: Type<TModel>,
-        private service: EntityCollectionService<TModel>) {
+        private service: EntityCollectionService<EntityDTOType<TModel>>) {
         super();
     }
 
     getByKey(id: string): Observable<TModel> {
         return this.service.getByKey(id).pipe(
-            map((dto: TModel) => instanceForType(this.entity, dto))
+            map((dto: EntityDTOType<TModel>) => instanceForType(this.entity, dto))
         );
     }
 
-    getWithQuery(query: QuerySnapshot<TModel>): Observable<TModel[]> {
-        return this.service.getWithQuery(query as any).pipe(
-            map((data: TModel[]) => {
+    getWithQuery(query: QuerySnapshot<EntityDTOType<TModel>>): Observable<TModel[]> {
+        return this.service.getWithQuery(query).pipe(
+            map((data: EntityDTOType<TModel>[]) => {
                 return data.map(dto => instanceForType(this.entity, dto));
             })
         );

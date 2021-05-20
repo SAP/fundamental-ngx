@@ -3,12 +3,18 @@ import { EntityCollection, EntityCollectionService as NgrxEntityCollectionServic
 import { Store } from '@ngrx/store';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
+import {
+    BaseEntity,
+    EntityMetaOptions,
+    EntityType,
+    IdentityKey,
+    ChainingPolicy,
+    ChainingPolicyFieldOptions
+} from '../../../domain/public_api';
 import { QuerySnapshotModel } from '../query/query';
-import { BaseEntity, EntityMetaOptions, EntityType, IdentityKey } from '../../../domain/public_api';
 import { EntityMetaOptionsService } from '../utils/entity-options.service';
 import { EntityCollectionService } from './entity-collection-service';
 import { EntityCollectionsService } from './entity-collections-service';
-import { ChainingPolicy, ChainingPolicyFieldOptions } from '../../../domain/chaining-policy';
 
 /**
  * Default EntityCollectionService implementation.
@@ -43,10 +49,10 @@ export class DefaultEntityCollectionService<T> implements EntityCollectionServic
      * @hidden
      * Meta options associated with Entity
      */
-    protected readonly entityMetaOptions: EntityMetaOptions<T>;
+    protected readonly entityMetaOptions: EntityMetaOptions<BaseEntity<T>>;
 
     constructor(
-        protected readonly entity: EntityType<T>,
+        protected readonly entity: EntityType<BaseEntity<T>>,
         protected readonly entityServices: EntityServices,
         protected readonly entityMetaOptionsService: EntityMetaOptionsService,
         protected readonly entityCollectionsService: EntityCollectionsService
@@ -103,7 +109,7 @@ export class DefaultEntityCollectionService<T> implements EntityCollectionServic
      */
     private handleRequestChaining(
         entitySource: Observable<T>,
-        chainingPolicy: ChainingPolicy<T> = this.entityMetaOptions.chainingPolicy
+        chainingPolicy: ChainingPolicy<BaseEntity<T>> = this.entityMetaOptions.chainingPolicy
     ): Observable<T> {
         const fieldsForChaining: [string, ChainingPolicyFieldOptions<T, any>][] = Object.entries<any>(
             chainingPolicy?.fields || {}

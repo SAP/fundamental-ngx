@@ -1,32 +1,62 @@
 import { QueryBuilder } from './query-builder';
-import { and, eq } from './grammar/query-expressions';
+import { eq } from './grammar/query-expressions';
 import { QuerySnapshot } from './query-adapter';
 import { QueryService } from './query.service';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { QuerySnapshotModel } from './query';
+import { BaseEntity, EntityDTOType, IdentityKey } from '../../../domain/public_api';
 
-class Supplier {
+interface SupplierDTO {
+    id: IdentityKey;
     name: string;
 }
 
-class Distributor {
+class Supplier extends BaseEntity<SupplierDTO> {
+    get identity(): IdentityKey {
+        return this.value.id;
+    }
+}
+
+interface DistributorDTO {
+    id: IdentityKey;
     name: string;
 }
 
-class Fruit {
+class Distributor extends BaseEntity<DistributorDTO> {
+    get identity(): IdentityKey {
+        return this.value.id;
+    }
+}
+
+interface FruitDTO {
+    id: IdentityKey;
     name: string;
     variety: string;
     origin: string;
     price: number;
-    supplier: Supplier;
-    distributor: Distributor;
+    supplier: SupplierDTO;
+    distributor: DistributorDTO;
 }
 
-class MockQueryService<TModel> extends QueryService<TModel> {
-    getByKey(id: string): Observable<TModel> {
+class Fruit extends BaseEntity<FruitDTO> {
+    get identity(): IdentityKey {
+        return this.value.id;
+    }
+
+    get supplier(): Supplier {
+        return new Supplier({ id: this.value.supplier.id, name: this.value.supplier.name });
+    }
+
+    get distributor(): Distributor {
+        return new Distributor({ id: this.value.distributor.id, name: this.value.distributor.name });
+    }
+}
+
+class MockQueryService<Entity extends BaseEntity<EntityDTOType<Entity>>> extends QueryService<Entity> {
+    getByKey(id: string): Observable<Entity> {
         throw new Error('Method not implemented.');
     }
-    getWithQuery(query: Readonly<QuerySnapshotModel<TModel>>): Observable<TModel[]> {
+    getWithQuery(query: Readonly<QuerySnapshotModel<EntityDTOType<Entity>>>): Observable<Entity[]> {
         throw new Error('Method not implemented.');
     }
     count(): Observable<number> {
@@ -37,7 +67,7 @@ class MockQueryService<TModel> extends QueryService<TModel> {
 describe('Store: Query', () => {
     let qb: QueryBuilder<Fruit>;
     let service: QueryService<Fruit>;
-    let getWithQuerySnapshotParam: QuerySnapshot<Fruit>;
+    let getWithQuerySnapshotParam: QuerySnapshot<FruitDTO>;
 
     beforeEach(() => {
         service = new MockQueryService<Fruit>();
@@ -127,7 +157,7 @@ describe('Store: Query', () => {
 
     it('should be able to modify query to get next page of results', () => {
         const query = qb.build();
-        let snapshot: QuerySnapshot<Fruit>;
+        let snapshot: QuerySnapshot<FruitDTO>;
 
         query.withMaxResults(20).withFirstResult(10).fetch();
         snapshot = query.createSnapshot();
@@ -152,7 +182,7 @@ describe('Store: Query', () => {
 
     it('should be able to modify query to get previous page of results', () => {
         const query = qb.build();
-        let snapshot: QuerySnapshot<Fruit>;
+        let snapshot: QuerySnapshot<FruitDTO>;
 
         query.withMaxResults(20).withFirstResult(80).fetch();
         snapshot = query.createSnapshot();
@@ -177,7 +207,7 @@ describe('Store: Query', () => {
 
     it('should default the top to 0 if previous results in a negative index', () => {
         const query = qb.build();
-        let snapshot: QuerySnapshot<Fruit>;
+        let snapshot: QuerySnapshot<FruitDTO>;
 
         query.withMaxResults(20).withFirstResult(10).fetch();
         snapshot = query.createSnapshot();

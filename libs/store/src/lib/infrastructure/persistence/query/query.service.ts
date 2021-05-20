@@ -1,14 +1,14 @@
 import { Observable } from 'rxjs';
-import { BaseEntity } from '../store/entity-server/interfaces';
 
+import { BaseEntity, EntityDTOType } from '../../../domain/entity';
 import { QuerySnapshot } from './query';
 
-export abstract class QueryService<TModel extends {}> {
+export abstract class QueryService<Entity extends BaseEntity<EntityDTOType<Entity>>> {
     /**
      * Request entity by ID and return observable for entity.
      * @param id Identifier of entity
      */
-    abstract getByKey(id: string): Observable<TModel>;
+    abstract getByKey(id: string): Observable<Entity>;
 
     /**
      * Request collection of entities from service with query string
@@ -16,7 +16,7 @@ export abstract class QueryService<TModel extends {}> {
      *
      * @param query URL query string
      */
-    abstract getWithQuery(query: QuerySnapshot<TModel>): Observable<TModel[]>;
+    abstract getWithQuery(query: QuerySnapshot<EntityDTOType<Entity>>): Observable<Entity[]>;
 
     /**
      * Request count of entities in collection and return observable

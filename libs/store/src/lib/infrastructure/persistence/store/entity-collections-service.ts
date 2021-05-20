@@ -1,4 +1,4 @@
-import { BaseEntity, EntityType } from '../../../domain/public_api';
+import { BaseEntity, EntityDTOType, EntityType } from '../../../domain/public_api';
 import { EntityCollectionService } from './entity-collection-service';
 
 /**
@@ -13,15 +13,15 @@ export abstract class EntityCollectionsService {
      *
      * @param entityType {class} Entity class to get associated service for
      */
-    abstract getEntityCollectionService<T>(entityType: EntityType<T>): EntityCollectionService<T>;
+    abstract getEntityCollectionService<T extends BaseEntity<EntityDTOType<T>>>(entityType: EntityType<T>): EntityCollectionService<EntityDTOType<T>>;
     /**
      * Register EntityCollectionService instance
      *
      * @param entityType Entity class to associate a service with
      * @param entityCollectionService Entity collection service instance
      */
-    abstract registerEntityCollectionService<T>(
+    abstract registerEntityCollectionService<T extends BaseEntity<EntityDTOType<T>>>(
         entityType: EntityType<T>,
-        entityCollectionService: EntityCollectionService<T>
+        entityCollectionService: EntityCollectionService<EntityDTOType<T>>
     ): void;
 }

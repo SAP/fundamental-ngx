@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { EntityServices } from '@ngrx/data';
 
-import { BaseEntity } from './entity-server/interfaces';
-import { EntityType } from '../../../domain/public_api';
+import { BaseEntity, EntityType } from '../../../domain/public_api';
 import { EntityMetaOptionsService } from '../utils/entity-options.service';
 import { EntityCollectionService } from './entity-collection-service';
 import { DefaultEntityCollectionService } from './entity-collection-service-base';
@@ -24,7 +23,7 @@ export class EntityCollectionServiceFactory {
      * @returns EntityCollectionService<T>
      */
     create<T>(
-        entityType: EntityType<T>,
+        entityType: EntityType<BaseEntity<T>>,
         // Can't use it as dependency in ctr due to DI circular error
         entityCollectionsService: EntityCollectionsService
     ): EntityCollectionService<T> {

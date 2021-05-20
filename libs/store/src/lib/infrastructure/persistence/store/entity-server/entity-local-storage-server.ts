@@ -4,7 +4,7 @@ import { DataServiceError, DefaultDataServiceConfig } from '@ngrx/data';
 import { Update } from '@ngrx/entity';
 import { from, Observable, of, throwError } from 'rxjs';
 import { delay, map, timeout } from 'rxjs/operators';
-import { v4 as uuidV4 } from 'uuid';
+// import { v4 as uuidV4 } from 'uuid';
 
 import { QuerySnapshot } from '../../query/query';
 import { QueryAdapter } from '../../query/query-adapter';

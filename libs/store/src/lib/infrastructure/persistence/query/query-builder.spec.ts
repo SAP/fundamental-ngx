@@ -1,50 +1,64 @@
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { BaseEntity, IdentityKey } from '../store/entity-server/interfaces';
 import { QueryBuilder } from './query-builder';
 import { Query, QuerySnapshotModel } from './query';
-import { QuerySnapshot } from './query-adapter';
 import { QueryService } from './query.service';
 import { eq } from './grammar/query-expressions';
 import { Predicate } from './grammar/predicate';
+import { EntityDTOType } from '../../../domain/entity';
 
-class Supplier extends BaseEntity {
+interface SupplierDTO {
     id: IdentityKey;
     name: string;
+}
 
+class Supplier extends BaseEntity<SupplierDTO> {
     get identity(): IdentityKey {
-        return this.id;
+        return this.value.id;
     }
 }
 
-class Distributor extends BaseEntity {
+interface DistributorDTO {
     id: IdentityKey;
     name: string;
+}
 
+class Distributor extends BaseEntity<DistributorDTO> {
     get identity(): IdentityKey {
-        return this.id;
+        return this.value.id;
     }
 }
 
-class Fruit extends BaseEntity {
+interface FruitDTO {
     id: IdentityKey;
     name: string;
     variety: string;
     origin: string;
     price: number;
-    supplier: Supplier;
-    distributor: Distributor;
+    supplier: SupplierDTO;
+    distributor: DistributorDTO;
+}
 
+class Fruit extends BaseEntity<FruitDTO> {
     get identity(): IdentityKey {
-        return this.id;
+        return this.value.id;
+    }
+
+    get supplier(): Supplier {
+        return new Supplier({ id: this.value.supplier.id, name: this.value.supplier.name });
+    }
+
+    get distributor(): Distributor {
+        return new Distributor({ id: this.value.distributor.id, name: this.value.distributor.name });
     }
 }
 
-class MockQueryService<TModel> extends QueryService<TModel> {
-    getByKey(id: string): Observable<TModel> {
+class MockQueryService<Entity extends BaseEntity<EntityDTOType<Entity>>> extends QueryService<Entity> {
+    getByKey(id: string): Observable<Entity> {
         throw new Error('Method not implemented.');
     }
-    getWithQuery(query: Readonly<QuerySnapshotModel<TModel>>): Observable<TModel[]> {
+    getWithQuery(query: Readonly<QuerySnapshotModel<EntityDTOType<Entity>>>): Observable<Entity[]> {
         throw new Error('Method not implemented.');
     }
     count(): Observable<number> {
@@ -68,10 +82,12 @@ describe('Store: Query Builder', () => {
     });
 
     it('should have ability to set chaining strategy for new query', () => {
-        const query = qb.withChainingStrategy({
-            distributor: 'non-block',
-            supplier: 'suppress'
-        }).build();
+        const query = qb
+            .withChainingStrategy({
+                distributor: 'non-block',
+                supplier: 'suppress'
+            })
+            .build();
 
         expect(query.createSnapshot().chainingStrategy).toEqual({
             distributor: 'non-block',
@@ -86,7 +102,7 @@ describe('Store: Query Builder', () => {
     });
 
     it('should have ability to set predicate for new query', () => {
-        const predicate: Predicate<Fruit> = eq('name', 'apple');
+        const predicate: Predicate<FruitDTO> = eq('name', 'apple');
         const query = qb.where(predicate).build();
 
         expect(query.createSnapshot().predicate).toEqual(predicate);

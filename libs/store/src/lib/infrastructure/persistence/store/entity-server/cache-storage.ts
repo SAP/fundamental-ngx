@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { BaseEntity, EntityCacheStorageService } from './interfaces';
+import {  EntityCacheStorageService } from './interfaces';
 
 /**
  * Entity Cache Storage Service

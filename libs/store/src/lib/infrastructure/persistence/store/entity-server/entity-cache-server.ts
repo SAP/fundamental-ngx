@@ -1,7 +1,6 @@
 import { from, Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { Update } from '@ngrx/entity';
-import { v4 as uuidV4 } from 'uuid';
 
 import {
     BaseEntity,

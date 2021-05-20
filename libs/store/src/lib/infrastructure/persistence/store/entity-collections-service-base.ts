@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { EntityType } from '../../../domain/public_api';
+import { BaseEntity, EntityDTOType, EntityType } from '../../../domain/public_api';
 import { EntityCollectionService } from './entity-collection-service';
 import { EntityCollectionsService } from './entity-collections-service';
 import { EntityCollectionServiceFactory } from './entity-collection-service-factory';
@@ -20,7 +20,7 @@ export class DefaultEntityCollectionsService extends EntityCollectionsService {
         super();
     }
 
-    getEntityCollectionService<T>(entityType: EntityType<T>): EntityCollectionService<T> {
+    getEntityCollectionService<T extends BaseEntity<EntityDTOType<T>>>(entityType: EntityType<T>): EntityCollectionService<EntityDTOType<T>> {
         let service = this.servicesMap.get(entityType);
         if (service) {
             return service;
@@ -31,9 +31,9 @@ export class DefaultEntityCollectionsService extends EntityCollectionsService {
         return service;
     }
 
-    registerEntityCollectionService<T>(
+    registerEntityCollectionService<T extends BaseEntity<EntityDTOType<T>>>(
         entityType: EntityType<T>,
-        entityCollectionService: EntityCollectionService<T>
+        entityCollectionService: EntityCollectionService<EntityDTOType<T>>
     ): void {
         this.servicesMap.set(entityType, entityCollectionService);
     }
@@ -42,7 +42,7 @@ export class DefaultEntityCollectionsService extends EntityCollectionsService {
      * Create a new instance of an EntityCollectionService.
      * @param entity {class} Entity class to create service for
      */
-    protected createEntityCollectionService<T>(entity: EntityType<T>): EntityCollectionService<T> {
-        return this.entityCollectionServiceFactory.create<T>(entity, this);
+    protected createEntityCollectionService<T extends BaseEntity<EntityDTOType<T>>>(entity: EntityType<T>): EntityCollectionService<EntityDTOType<T>> {
+        return this.entityCollectionServiceFactory.create<EntityDTOType<T>>(entity, this);
     }
 }

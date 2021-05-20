@@ -1,4 +1,4 @@
-import { deepFreeze } from '../../utils/deep-freeze';
+import { deepFreeze } from './utility';
 import { Composite } from './composite';
 
 export abstract class BaseValue<T> extends Composite<T>{

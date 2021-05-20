@@ -1,5 +1,4 @@
 import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
 import { EntityCollection } from '@ngrx/data';
 
 import { QuerySnapshot } from '../query/query';
