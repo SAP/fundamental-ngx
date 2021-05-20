@@ -419,29 +419,38 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    handleSelect(checked: any, value: any, event?: MouseEvent): void {
+    checkboxChanged(event: boolean, value: any): void {
+        this.handleSelect(event, value, null, true)
+    }
+
+    /** @hidden */
+    handleSelect(checked: any, value: any, event?: MouseEvent, fromCheckbox?: boolean): void {
         if (event) {
             event.preventDefault(); // prevent this function from being called twice when checkbox updates
-        }
-        const previousLength = this.selected.length;
-        if (checked) {
-            this.selected.push(value);
+            this._resetSearchTerm();
+            this.popoverRef.close();
         } else {
-            // remove the token whose close button was explicitly clicked
-            this.selected.splice(this.selected.indexOf(value), 1);
+            const previousLength = this.selected.length;
+            if (checked) {
+                this.selected.push(value);
+            } else {
+                // remove the token whose close button was explicitly clicked
+                this.selected.splice(this.selected.indexOf(value), 1);
+            }
+
+            // Handle popover placement update
+            if (this._shouldPopoverBeUpdated(previousLength, this.selected.length)) {
+                this.popoverRef.refreshPosition();
+            }
+
+            if (!fromCheckbox) {
+            }
+
+            this.searchInputElement.nativeElement.focus();
+
+            // On Mobile mode changes are propagated only on approve.
+            this._propagateChange();
         }
-
-        // Handle popover placement update
-        if (this._shouldPopoverBeUpdated(previousLength, this.selected.length)) {
-            this.popoverRef.refreshPosition();
-        }
-
-        this._resetSearchTerm();
-
-        this.searchInputElement.nativeElement.focus();
-
-        // On Mobile mode changes are propagated only on approve.
-        this._propagateChange();
     }
 
     /** @hidden */

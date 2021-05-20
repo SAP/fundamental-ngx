@@ -93,11 +93,12 @@
         <li
             *ngFor="let value of displayedValues"
             fd-list-item
+            (click)="handleSelect(selected.indexOf(value) === -1, value, $event)"
             [selected]="selected.indexOf(value) !== -1"
         >
             <fd-checkbox
                 [compact]="compact"
-                (ngModelChange)="handleSelect($event, value)"
+                (ngModelChange)="checkboxChanged($event, value)"
                 [ngModel]="selected.indexOf(value) !== -1">
             </fd-checkbox>
             <ng-container
