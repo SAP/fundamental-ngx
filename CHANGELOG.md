@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.20...v0.30.1-rc.21) (2021-05-20)
+
+
+### Bug Fixes
+
+* (Core|Platform) remove deps from packages nx builder improvement ([#5421](https://github.com/SAP/fundamental-ngx/issues/5421)) ([4fb959e](https://github.com/SAP/fundamental-ngx/commit/4fb959e4ec6f25911120cd51952f48cff5b0ab8e))
+
 ### [0.30.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.19...v0.30.1-rc.20) (2021-05-20)
 
 ### [0.30.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.18...v0.30.1-rc.19) (2021-05-19)
