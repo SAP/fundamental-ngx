@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.18...v0.30.1-rc.19) (2021-05-19)
+
+### [0.30.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.17...v0.30.1-rc.18) (2021-05-19)
+
+### [0.30.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.16...v0.30.1-rc.17) (2021-05-19)
+
+### [0.30.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.15...v0.30.1-rc.16) (2021-05-19)
+
+### [0.30.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.14...v0.30.1-rc.15) (2021-05-18)
+
+
+### Features
+
+* (Core) introduce new Message Page component ([#5349](https://github.com/SAP/fundamental-ngx/issues/5349)) ([b6624d4](https://github.com/SAP/fundamental-ngx/commit/b6624d435c9c07e32b8c425c0cff7bf7b6b0bd0e))
+
+### [0.30.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.13...v0.30.1-rc.14) (2021-05-18)
+
+### [0.30.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.12...v0.30.1-rc.13) (2021-05-18)
+
+
+### Bug Fixes
+
+* (Platform) make lib working on ViewEngine ([#5397](https://github.com/SAP/fundamental-ngx/issues/5397)) ([b164c65](https://github.com/SAP/fundamental-ngx/commit/b164c65e16ab2d24fa1e4bdf1830195701fbd94b))
+
+### [0.30.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.11...v0.30.1-rc.12) (2021-05-18)
+
+
+### Bug Fixes
+
+* (Core) form adjust hint alignment ([#5310](https://github.com/SAP/fundamental-ngx/issues/5310)) ([2c98df4](https://github.com/SAP/fundamental-ngx/commit/2c98df4b2b6d2a54a2bddeeece395f62c12c1a50))
+
+### [0.30.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.10...v0.30.1-rc.11) (2021-05-18)
+
+### [0.30.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.9...v0.30.1-rc.10) (2021-05-17)
+
 ### [0.30.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.8...v0.30.1-rc.9) (2021-05-17)
 
 ### [0.30.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.7...v0.30.1-rc.8) (2021-05-15)

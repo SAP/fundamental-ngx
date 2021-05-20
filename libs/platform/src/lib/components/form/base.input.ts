@@ -186,6 +186,8 @@ export abstract class BaseInput extends BaseComponent
     }
 
     ngOnInit(): void {
+        super.ngOnInit();
+
         if (!this.id || !this.name) {
             throw new Error('form input must have [id] and [name] attribute.');
         }
@@ -218,6 +220,7 @@ export abstract class BaseInput extends BaseComponent
     }
 
     ngOnDestroy(): void {
+        super.ngOnDestroy();
         this.stateChanges.complete();
         this._destroyed.next();
         this._destroyed.complete();
