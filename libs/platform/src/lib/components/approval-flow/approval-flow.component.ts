@@ -203,6 +203,14 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden */
+    get _canRemoveSelectedNodes(): boolean {
+        const selectedNodes = this._selectedNodes;
+
+        return selectedNodes.length
+            && selectedNodes.every(node => !node.disableActions && !node.actionsConfig?.disableRemove);
+    }
+
+    /** @hidden */
     ngOnInit(): void {
         if (!this.dataSource) {
             return;
@@ -641,7 +649,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden Build a graph to render based on provided data, node connections are managed by node's "targets" array */
     private _buildNodeTree(nodes: ApprovalGraphNode[]): ApprovalFlowGraph {
         if (!nodes.length) {
-            this._showMessage('error');
             return [];
         }
 
@@ -649,10 +656,12 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const finalNodes = findFinalNodes(nodes);
 
         if (!rootNodes.length || !finalNodes.length || finalNodes.length > 1) {
-            console.warn(`
-                Err: Not possible to build graph because root or final nodes aren\'t present!
-                Or there are multiple final nodes!
-            `);
+            console.warn(
+                finalNodes.length > 1
+                    ? 'Err: Multiple final nodes aren\'t supported yet!'
+                    : 'Err: Not possible to build graph because root or final nodes aren\'t present!'
+            );
+
             this._showMessage('error');
             return [];
         }

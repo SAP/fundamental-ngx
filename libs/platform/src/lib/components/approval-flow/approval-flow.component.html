@@ -42,7 +42,7 @@
 
             <button *ngIf="_canAddParallel" fd-button label="Add parallel approvers" [compact]="true" (click)="_addNodeFromToolbar('parallel')"></button>
 
-            <button *ngIf="_selectedNodes.length" fd-button label="Remove" [compact]="true" (click)="_deleteCheckedNodes()"></button>
+            <button *ngIf="_canRemoveSelectedNodes" fd-button label="Remove" [compact]="true" (click)="_deleteCheckedNodes()"></button>
         </ng-container>
     </div>
 </fd-toolbar>
