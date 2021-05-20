@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, Type, ViewChild } from '@angular/core';
 
 import { TemplateModule } from '../../utils/directives/template/template.module';
@@ -36,7 +36,6 @@ class CustomHeaderTestComponent {
     template: `
         <fd-message-box-header>
             <h1 fd-title>Default Title</h1>
-            <fd-message-box-close-icon></fd-message-box-close-icon>
         </fd-message-box-header>
     `
 })
@@ -45,7 +44,7 @@ class DefaultHeaderTestComponent {
 }
 
 describe('MessageBoxHeaderComponent', () => {
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [MessageBoxHeaderComponent, CustomHeaderTestComponent, DefaultHeaderTestComponent],
             imports: [BarModule, TemplateModule],
@@ -84,10 +83,8 @@ describe('MessageBoxHeaderComponent', () => {
         const { fixture } = setup<DefaultHeaderTestComponent>(DefaultHeaderTestComponent);
         await whenStable(fixture);
 
-        const buttonEl = fixture.nativeElement.querySelector('fd-message-box-close-icon');
         const headerEl = fixture.nativeElement.querySelector('.fd-bar--header');
 
-        expect(buttonEl).toBeTruthy();
         expect(headerEl).toBeTruthy();
     });
 

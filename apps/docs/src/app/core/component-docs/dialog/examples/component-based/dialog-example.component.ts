@@ -18,28 +18,17 @@ import { DialogRef } from '@fundamental-ngx/core';
             </fd-dialog-body>
 
             <fd-dialog-footer>
-                <fd-dialog-footer-button>
-                    <button
-                        fd-button
-                        fdType="emphasized"
-                        fd-dialog-decisive-button
+                <fd-button-bar 
                         label="Interesting"
-                        [compact]="true"
+                        fdType="emphasized"
                         (click)="this.dialogRef.close('Continue')">
-                    </button>
-                </fd-dialog-footer-button>
-
-                <fd-dialog-footer-button>
-                    <button
-                        fd-button
-                        fdType="transparent"
-                        fd-dialog-decisive-button
-                        fd-initial-focus
+                </fd-button-bar>
+                <fd-button-bar 
                         label="Cancel"
-                        [compact]="true"
+                        fdInitialFocus
+                        fdType="transparent"
                         (click)="this.dialogRef.dismiss('Cancel')">
-                    </button>
-                </fd-dialog-footer-button>
+                </fd-button-bar>
             </fd-dialog-footer>
         </fd-dialog>
     `

@@ -1,5 +1,5 @@
 import { By } from '@angular/platform-browser';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RadioButtonComponent } from './radio.component';
 import { RadioModule, FormModule, FormGroupComponent } from '@fundamental-ngx/core';
 import { FormsModule } from '@angular/forms';
@@ -48,7 +48,7 @@ describe('RadioButtonComponent', () => {
     let component: TestRadioButtonComponent;
     let fixture: ComponentFixture<TestRadioButtonComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [RadioModule, FormModule, FormsModule],
             declarations: [RadioButtonComponent, FormGroupComponent, TestRadioButtonComponent]
@@ -93,14 +93,6 @@ describe('RadioButtonComponent', () => {
 
         expect(inputElems[1].nativeElement.classList.contains('fd-radio')).toBeTruthy();
         expect(inputElems[1].nativeElement.classList.contains('fd-radio--compact')).toBeTruthy();
-    });
-
-    it('radio click should be called', () => {
-        const radioElem = fixture.debugElement.query(By.css('fd-radio-button'));
-
-        spyOn(component.radioButton1, 'onClick');
-        radioElem.triggerEventHandler('click', null);
-        expect(component.radioButton1.onClick).toHaveBeenCalled();
     });
 
     it('radio click should should change control value', async () => {

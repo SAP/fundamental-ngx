@@ -1,23 +1,18 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewEncapsulation } from '@angular/core';
-import { AbstractFdNgxClass } from '../utils/abstract-fd-ngx-class';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
+import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
 
-/**
- * @hidden
- * The base class for the icon component
- */
-const BASE_ICON_CLASS = 'sap-icon';
+export type IconFont = 'SAP-icons' | 'BusinessSuiteInAppSymbols' | 'SAP-icons-TNT';
 
-/**
- * @hidden
- * Prefix for icon prop classes
- */
-const PREFIX_ICON_CLASS = BASE_ICON_CLASS + '--';
+const SAP_ICONS_PREFIX = 'sap-icon';
+const TNT_PREFIX = 'TNT';
+const BusinessSuiteInAppSymbol_PREFIX = 'businessSuiteInAppSymbols';
 
 /**
  * The component that represents an icon.
  *
  * ```html
- * <fd-icon [glyph]="cart-approval"></fd-icon>
+ * <fd-icon font="SAP-icons-TNT" glyph="exceptions"></fd-icon>
  * ```
  */
 @Component({
@@ -30,29 +25,54 @@ const PREFIX_ICON_CLASS = BASE_ICON_CLASS + '--';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class IconComponent extends AbstractFdNgxClass {
+export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
+
     /** The icon name to display. See the icon page for the list of icons
      * here: https://sap.github.io/fundamental-ngx/icon
      * */
     @Input() glyph;
 
-    /** @deprecated
-     * Icon size is deprecated. The size can be set by font-size. It will be removed after version 0.23
-     * The size of the icon
-     * The predefined values for the input size are *xs*, *s*, *l*, and *xl*.
-     * *size* can accept any other string, for example *xxs*, which will be translated into class *sap-icon--xxs*.
+    /** 
+     * The icon font
+     * Options include: 'SAP-icons', 'BusinessSuiteInAppSymbols' and 'SAP-icons-TNT'
      */
-    @Input() size = '';
+    @Input() font: IconFont = 'SAP-icons';
+
+    /** user's custom classes */
+    @Input()
+    class: string;
 
     /** @hidden */
-    _setProperties(): void {
-        if (this.glyph) {
-            this._addClassToElement(PREFIX_ICON_CLASS + this.glyph);
-        }
+    constructor(private _elementRef: ElementRef) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.buildComponentCssClass();
     }
 
     /** @hidden */
-    constructor(private elementRef: ElementRef) {
-        super(elementRef);
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
+    }
+
+    @applyCssClass
+    /** CssClassBuilder interface implementation
+     * function must return single string
+     * function is responsible for order which css classes are applied
+     */
+    buildComponentCssClass(): string[] {
+        return [
+            this.class,
+            this.glyph && this.font === 'SAP-icons' ? 
+            `${SAP_ICONS_PREFIX}--${this.glyph}` : '',
+            this.glyph && this.font === 'SAP-icons-TNT' ? 
+            `${SAP_ICONS_PREFIX}-${TNT_PREFIX}--${this.glyph}` : '',
+            this.glyph && this.font === 'BusinessSuiteInAppSymbols' ?  
+            `${SAP_ICONS_PREFIX}-${BusinessSuiteInAppSymbol_PREFIX}--${this.glyph}` : '',
+        ];
+    }
+
+    elementRef(): ElementRef<any> {
+        return this._elementRef;
     }
 }

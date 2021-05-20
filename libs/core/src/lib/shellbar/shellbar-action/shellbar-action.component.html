@@ -1,5 +1,5 @@
 <div class="fd-shellbar__action fd-shellbar__action--desktop">
-    <button fd-button class="fd-shellbar__button" (click)="callback ? callback($event) : ''" [glyph]="glyph">
+    <button fd-button class="fd-shellbar__button" [compact]="false" (click)="callback ? callback($event) : ''" [glyph]="glyph">
         <span
             *ngIf="notificationCount"
             class="fd-counter fd-counter--notification fd-shellbar__counter--notification"

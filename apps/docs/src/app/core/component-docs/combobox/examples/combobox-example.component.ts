@@ -10,7 +10,7 @@ export class ComboboxExampleComponent {
     searchTermTwo = '';
     searchTermThree = '';
     searchTermFour = '';
-    searchTermFive = '';
+    searchTermFive = 'Kiwi';
     searchTermSix = '';
     fruits = ['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry'];
 }

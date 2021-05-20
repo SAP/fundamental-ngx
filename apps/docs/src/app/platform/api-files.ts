@@ -18,6 +18,7 @@ export const API_FILES = {
         'DynamicPageHeaderComponent',
         'DynamicPageContentComponent'
     ],
+    formContainer: ['FormGroupComponent', 'FormFieldComponent', 'FormFieldGroupComponent'],
     infoLabel: ['InfoLabelComponent'],
     input: ['InputComponent'],
     link: ['LinkComponent'],
@@ -27,7 +28,7 @@ export const API_FILES = {
     objectMarker: ['PlatformObjectMarkerComponent'],
     radioGroup: ['RadioGroupComponent'],
     searchField: ['SearchFieldComponent'],
-    select: ['SelectPlatformComponent'],
+    select: ['SelectComponent', 'BaseSelect', 'SelectConfig'],
     splitMenuButton: ['SplitMenuButtonComponent'],
     table: [
         'TableComponent',
@@ -41,10 +42,16 @@ export const API_FILES = {
         'TableViewSettingsDialogComponent',
         'TableViewSettingsFilterComponent',
         'FdpViewSettingsFilterCustomDef',
+        'TableP13DialogComponent',
+        'TableP13SortComponent',
+        'TableP13FilterComponent',
+        'TableP13GroupComponent',
+        'TableP13ColumnsComponent',
         'TableDataSource',
         'TableDataProvider'
     ],
     textarea: ['TextAreaComponent'],
+    timePicker: ['PlatformTimePickerComponent'],
     panel: [
         'PlatformPanelComponent',
         'PlatformPanelContentComponent',
@@ -77,7 +84,11 @@ export const API_FILES = {
         'ListConfig'
     ],
     multiInput: ['PlatformMultiInputComponent'],
+    valueHelpDialog: ['PlatformValueHelpDialogComponent', 'VhdFilterComponent', 'VhdSearchComponent'],
     feedInput: ['FeedInputComponent'],
     fileUploader: ['PlatformFileUploaderComponent'],
-    uploadCollection: ['UploadCollectionComponent', 'UploadCollectionDataProvider', 'UploadCollectionDataSource']
+    uploadCollection: ['UploadCollectionComponent', 'UploadCollectionDataProvider', 'UploadCollectionDataSource'],
+    approvalFlow: ['ApprovalFlowComponent', 'ApprovalFlowNodeComponent'],
+    slider: ['SliderComponent'],
+    footer: ['FooterComponent']
 };

@@ -35,6 +35,20 @@ $gutter-size: 15px;
     font-style: normal;
 }
 
+@font-face {
+    font-family: "BusinessSuiteInAppSymbols";
+    src: url("~@sap-theming/theming-base-content/content/Base/baseLib/sap_fiori_3/fonts/BusinessSuiteInAppSymbols.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "SAP-icons-TNT";
+    src: url("~@sap-theming/theming-base-content/content/Base/baseLib/sap_fiori_3/fonts/SAP-icons-TNT.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
 html,
 body {
     position: relative;
@@ -164,14 +178,6 @@ pre {
     border: 1px solid #ccc;
     transition: 0.25s background-color;
     display: block;
-
-    ul {
-        margin-left: 0;
-
-        a:hover {
-            text-decoration: none;
-        }
-    }
 }
 
 .fd-centered-content {
@@ -285,4 +291,24 @@ body {
 
 .fd-info-label + .fd-info-label {
     margin-left: 0.3rem;
+}
+
+.fd-docs--toolbar {
+	.fd-shellbar__product {
+		margin: 0 0.5rem;
+	}
+
+	.fd-shellbar--s {
+		.fd-shellbar__product {
+			margin: 0;
+		}
+	}
+
+	.fd-shellbar__action--mobile {
+		display: none !important;
+	}
+
+	.fd-shellbar__action--desktop {
+		display: flex !important;
+	}
 }

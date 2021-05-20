@@ -1,0 +1,48 @@
+<div class="fd-dynamic-page__collapsible-header-container">
+    <div
+        class="fd-dynamic-page__collapsible-header"
+        [attr.aria-label]="headerAriaLabel"
+        [attr.aria-hidden]="collapsed"
+        [attr.id]="id"
+        role="region"
+        #headerContent
+    >
+        <ng-content></ng-content>
+    </div>
+    <div class="fd-dynamic-page__collapsible-header-visibility-container" #pincollapseContainer>
+        <ng-container *ngIf="collapsible">
+            <div class="fd-dynamic-page__collapsible-header-visibility-container--left-gradient"></div>
+            <div
+                role="toolbar"
+                aria-label="Pin/Collapse actions"
+                class="fd-dynamic-page__collapsible-header-visibility-container--button-group"
+            >
+                <button
+                    fd-button
+                    class="fd-dynamic-page__collapse-button"
+                    aria-haspopup="true"
+                    [attr.aria-label]="collapsed ? expandLabel : collapseLabel"
+                    [attr.title]="collapsed ? expandLabel : collapseLabel"
+                    [attr.aria-expanded]="!collapsed"
+                    [attr.aria-controls]="id"
+                    (click)="toggleCollapse()"
+                >
+                    <i *ngIf="!collapsed" class="sap-icon--slim-arrow-up"></i>
+                    <i *ngIf="collapsed" class="sap-icon--slim-arrow-down"></i>
+                </button>
+                <button
+                    fd-button
+                    class="fd-dynamic-page__pin-button"
+                    [attr.aria-label]="_pinned ? unpinAriaLabel : pinAriaLabel"
+                    [attr.title]="_pinned ? unpinAriaLabel : pinAriaLabel"
+                    [attr.aria-selected]="_pinned"
+                    (click)="togglePinned()"
+                    *ngIf="pinnable && !collapsed"
+                >
+                    <i class="sap-icon--pushpin-off"></i>
+                </button>
+            </div>
+            <div class="fd-dynamic-page__collapsible-header-visibility-container--right-gradient"></div>
+        </ng-container>
+    </div>
+</div>

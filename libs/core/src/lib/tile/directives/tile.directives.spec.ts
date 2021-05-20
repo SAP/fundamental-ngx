@@ -1,5 +1,5 @@
 import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {
     TileActionCloseDirective,
     TileActionContainerDirective,
@@ -29,8 +29,8 @@ import {
 @Component({
     selector: 'fd-test-component',
     template: `
-        <button fd-button fd-tile-action-close [compact]="true" [fdType]="'transparent'"></button>
-        <button fd-button fd-tile-action-indicator [compact]="true" [fdType]="'transparent'"></button>
+        <button fd-button fd-tile-action-close [compact]="true" fdType="transparent"></button>
+        <button fd-button fd-tile-action-indicator [compact]="true" fdType="transparent"></button>
         <div #header fd-tile-header [twoColumn]="true">
             <div fd-tile-header-content></div>
         </div>
@@ -41,9 +41,9 @@ import {
         <div #content fd-tile-content [twoColumn]="true">
             <div fd-tile-content-text></div>
             <div fd-tile-content-byline></div>
-            <i fd-tile-refresh [glyph]="'refresh'"></i>
-            <span #profileImg fd-tile-profile-img [backgroundImage]="'http://lorempixel.com/60/60/nature'"></span>
-            <span #backgroundImg fd-tile-background-img [backgroundImage]="'http://lorempixel.com/60/60/nature'"></span>
+            <i fd-tile-refresh glyph="refresh"></i>
+            <span #profileImg fd-tile-profile-img backgroundImage="https://picsum.photos/60/60"></span>
+            <span #backgroundImg fd-tile-background-img backgroundImage="https://picsum.photos/60/60"></span>
             <span fd-tile-logo></span>
             <span fd-tile-toggle></span>
         </div>
@@ -99,7 +99,7 @@ describe('TileDirectives', () => {
         debugElement: DebugElement,
         element: HTMLElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 TileHeaderDirective,
@@ -151,13 +151,13 @@ describe('TileDirectives', () => {
         expect(component.profileImg.nativeElement.className).toContain('fd-tile__profile-img');
         expect(component.profileImg.nativeElement.id).toContain('fd-profileTile-');
         expect(component.profileImg.nativeElement.style.getPropertyValue('background-image')).toContain(
-            'url("http://lorempixel.com/60/60/nature")'
+            'url("https://picsum.photos/60/60")'
         );
         expect(component.container.nativeElement.className).toContain('fd-tile-container');
         expect(component.container.nativeElement.className).toContain('fd-tile-container--list');
         expect(component.backgroundImg.nativeElement.className).toContain('fd-tile__background-img');
         expect(component.backgroundImg.nativeElement.style.getPropertyValue('background-image')).toContain(
-            'url("http://lorempixel.com/60/60/nature")'
+            'url("https://picsum.photos/60/60")'
         );
         expect(component.slideContainer.nativeElement.className).toContain('fd-tile__container');
         expect(component.dot.nativeElement.className).toContain('fd-tile__dot');

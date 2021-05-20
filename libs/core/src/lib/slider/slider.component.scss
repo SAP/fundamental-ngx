@@ -1,0 +1,75 @@
+@import '~fundamental-styles/dist/slider';
+@import '~fundamental-styles/dist/input';
+@import '~fundamental-styles/dist/popover';
+
+.fd-popover__popper--cdk-custom {
+    top: -7px !important;
+    overflow: hidden;
+
+    .fd-slider--tooltip {
+        padding: 0.25rem;
+        min-width: 2rem;
+        text-align: center;
+        height: 1.375rem;
+        line-height: 1;
+        direction: ltr;
+
+        margin: 0 !important;
+        border: 0;
+
+        color: #6a6d70;
+        color: var(--sapContent_LabelColor, #6a6d70);
+        font-size: 0.875rem;
+        font-size: var(--sapFontSize);
+    }
+}
+
+.fd-slider {
+    display: block;
+
+    &.fd-slider--with-labels {
+        padding-bottom: 2rem;
+    }
+
+    &__tick-wrapper {
+        .fd-slider__label,
+        .fd-slider__tick {
+            position: absolute;
+        }
+    }
+
+    &__track {
+        .fd-slider__handle:focus {
+            z-index: 2;
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+        }
+
+        .fd-popover-custom {
+            display: none;
+        }
+    }
+
+    &__labels {
+        .fd-slider__label {
+            white-space: nowrap;
+        }
+    }
+
+    // IE11 workaround
+    &__alternative-tick-width {
+        .fd-slider__tick {
+            width: 1px;
+        }
+    }
+}
+
+[dir='rtl'] {
+    .fd-slider__handle {
+        transform: translate(50%, -50%);
+    }
+}

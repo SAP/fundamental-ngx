@@ -1,0 +1,72 @@
+@mixin fd-rtl {
+    @at-root {
+        [dir='rtl'] &,
+        &[dir='rtl'] {
+            @content;
+        }
+    }
+}
+
+@mixin grabbing-cursor {
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+    cursor: -o-grabbing;
+    cursor: -ms-grabbing;
+    cursor: grabbing;
+}
+
+.fd-grid-list {
+    .fd-dnd-item.fd-dnd-on-drag {
+        @include grabbing-cursor;
+
+        background-color: transparent;
+    }
+
+    &__item {
+        .drop-area__line--vertical {
+            height: 100%;
+
+            &.before {
+                left: -0.55rem;
+            }
+
+            &.after {
+                right: -0.55rem;
+            }
+        }
+
+        .fd-toolbar {
+            &--actions {
+                margin-left: auto;
+
+                > * {
+                    margin-left: 0.5rem;
+
+                    @include fd-rtl() {
+                        margin-left: 0;
+                        margin-right: 0.5rem;
+                    }
+                }
+
+                @include fd-rtl() {
+                    margin-left: 0;
+                    margin-right: auto;
+                }
+            }
+
+            .fd-grid-list__item-input,
+            &--actions,
+            &--extra-content {
+                display: flex;
+                align-items: center;
+                height: 100%;
+            }
+        }
+    }
+
+    &__btn-navigation {
+        @include fd-rtl() {
+            transform: rotate(180deg);
+        }
+    }
+}

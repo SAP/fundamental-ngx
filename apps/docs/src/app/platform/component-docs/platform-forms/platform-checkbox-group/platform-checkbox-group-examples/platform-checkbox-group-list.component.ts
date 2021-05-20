@@ -7,8 +7,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class PlatformCheckboxGroupListComponent {
     seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
+    dishes: string[] = ['Italian', 'Chinese', 'Indian', 'Japanese'];
     sports: string[] = ['cycling', 'running', 'visit gym', 'swimming'];
-    phoneslist: string[] = ['Samsung', 'Apple', 'OnePlus', 'Redmi'];
+    phonesList: string[] = ['Samsung', 'Apple', 'OnePlus', 'Redmi'];
 
     // data passing to form
     selectedPhones = { phones: ['Samsung', 'OnePlus'] };
@@ -22,4 +23,7 @@ export class PlatformCheckboxGroupListComponent {
     // template driven
     countrySeason = '';
     selectedSports = ['running', 'swimming'];
+
+    // outside form
+    selectedDishes = ['Chinese', 'Italian'];
 }

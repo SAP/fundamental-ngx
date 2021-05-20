@@ -1,7 +1,8 @@
 import { FormControlComponent } from './form-control.component';
 import { Component, DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/public_api';
 
 @Component({
     selector: 'fd-test-component',
@@ -17,9 +18,10 @@ describe('FormControlComponent', () => {
 
     let directive, componentInstance;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [FormControlComponent, TestComponent]
+            declarations: [FormControlComponent, TestComponent],
+            providers: [ContentDensityService]
         });
     }));
 
@@ -43,6 +45,12 @@ describe('FormControlComponent', () => {
 
     it('should add appropriate classes', () => {
         componentInstance.ngOnChanges();
+        expect(componentInstance.buildComponentCssClass).toHaveBeenCalled();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        componentInstance.ngOnInit();
+        expect(componentInstance.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
         expect(componentInstance.buildComponentCssClass).toHaveBeenCalled();
     });
 });

@@ -33,7 +33,7 @@ describe('FeedInputComponent', () => {
 
         hostEl = fixture.debugElement.query(By.css('.fd-feed-input'));
         textareaEl = fixture.debugElement.query(By.css('textarea'));
-        buttonEl = fixture.debugElement.query(By.css('fdp-button'));
+        buttonEl = fixture.debugElement.query(By.css('button'));
     });
 
     it('should create', () => {
@@ -43,11 +43,11 @@ describe('FeedInputComponent', () => {
     it('should disabled state', () => {
         component.disabled = true;
         fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          expect(textareaEl.nativeElement.disabled).toBeTruthy();
 
-        console.log(textareaEl.nativeElement);
-
-        expect(textareaEl.nativeElement.getAttribute('aria-disabled')).toEqual('true');
-        expect(buttonEl.nativeElement.getAttribute('aria-disabled')).toEqual('true');
+        });
+        expect(buttonEl.nativeElement.disabled).toBeTruthy();
     });
 
     it('should button disabled when textarea has not a value', () => {
@@ -55,7 +55,7 @@ describe('FeedInputComponent', () => {
         textareaEl.nativeElement.dispatchEvent(new Event('input'));
         fixture.detectChanges();
 
-        expect(buttonEl.nativeElement.getAttribute('ng-reflect-disabled')).toEqual('true');
+        expect(buttonEl.nativeElement.disabled).toBeTruthy();
     });
 
     it('should button enable when textarea has a value', () => {
@@ -63,14 +63,15 @@ describe('FeedInputComponent', () => {
         textareaEl.nativeElement.dispatchEvent(new Event('input'));
         fixture.detectChanges();
 
-        expect(buttonEl.nativeElement.getAttribute('ng-reflect-disabled')).toEqual('false');
+        expect(buttonEl.nativeElement.disabled).toBeFalsy();
     });
 
     it('should textarea grow by default', () => {
+        const defaultHeight = textareaEl.nativeElement.style.height;
         textareaEl.nativeElement.value = '1 \n 2 \n 3 \n 4';
         component.resize();
 
-        expect(textareaEl.nativeElement.style.height).toEqual('88px');
+        expect(textareaEl.nativeElement.style.height).toBeGreaterThan(defaultHeight);
     });
 
     it('should set max height', () => {

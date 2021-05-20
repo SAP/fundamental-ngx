@@ -1,13 +1,12 @@
 <main class="fd-page">
     <div *ngIf="true" class="fd-page__content fd-has-background-color-neutral-2">
-        <fdp-form-group #fg1 [multiLayout]="true" [formGroup]="form" [object]="data">
+        <fdp-form-group #fg1 [formGroup]="form" [object]="data">
             <fdp-form-field
                 #ff1
                 id="basicTextarea"
                 label="Basic Textarea with Platform Forms"
                 placeholder="Start entering detailed description"
                 hint="This is tooltip help"
-                zone="zLeft"
                 rank="10"
                 hintPlacement="left"
             >
@@ -20,7 +19,6 @@
                 label="Readonly Textarea"
                 placeholder="Start entering detailed description"
                 hint="This is tooltip help"
-                zone="zLeft"
                 rank="10"
                 hintPlacement="left"
             >
@@ -34,7 +32,6 @@
                 label="Disabled Textarea"
                 placeholder="Start entering detailed description"
                 hint="This is tooltip help"
-                zone="zLeft"
                 rank="10"
                 hintPlacement="left"
             >
@@ -48,7 +45,6 @@
                 label="Compact Textarea"
                 placeholder="Start entering detailed description"
                 hint="This is tooltip help"
-                zone="zLeft"
                 rank="10"
                 hintPlacement="left"
             >

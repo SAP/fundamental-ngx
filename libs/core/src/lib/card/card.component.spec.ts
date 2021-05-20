@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
@@ -7,6 +7,7 @@ import { CardModule } from './card.module';
 import { CardComponent } from './card.component';
 import { CardType, CLASS_NAME } from './constants';
 import { getCardModifierClassNameByCardType } from './utils';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 @Component({
     template: `
@@ -31,7 +32,7 @@ class CardHostTestComponent {
     loaderText = 'Loading...';
 
     isLoading = false;
-    isCompact = false;
+    isCompact = undefined;
     cardType: CardType = 'standard';
 }
 describe('CardComponent', () => {
@@ -39,10 +40,11 @@ describe('CardComponent', () => {
     let host: CardHostTestComponent;
     let card: CardComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, CardModule],
-            declarations: [CardHostTestComponent]
+            declarations: [CardHostTestComponent],
+            providers: [ContentDensityService]
         }).compileComponents();
     }));
 
@@ -55,6 +57,13 @@ describe('CardComponent', () => {
 
     it('should create', () => {
         expect(host).toBeTruthy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        spyOn(card, 'buildComponentCssClass');
+        card.ngOnInit();
+        expect(card.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
+        expect(card.buildComponentCssClass).toHaveBeenCalled();
     });
 
     it('should add card className to host', () => {
@@ -106,6 +115,8 @@ describe('CardComponent', () => {
 
     describe('compact', () => {
         it('should has binding', () => {
+            host.isCompact = true;
+            fixture.detectChanges();
             expect(card.compact).toBe(host.isCompact);
         });
 

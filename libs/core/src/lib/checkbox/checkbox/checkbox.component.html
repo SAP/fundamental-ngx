@@ -9,7 +9,6 @@
     [attr.tabindex]="tabIndexValue"
     [attr.aria-label]="ariaLabel"
     [attr.aria-labelledby]="ariaLabelledBy"
-    [attr.aria-checked]="ariaChecked"
     [attr.aria-describedby]="ariaDescribedBy"
     [attr.aria-disabled]="disabled"
     [class.fd-checkbox--compact]="compact"
@@ -28,9 +27,13 @@
        [class.fd-checkbox__label--compact]="compact"
        (click)="checkByClick($event)">
     <ng-container *ngIf="label">
-        {{ label }}
+        <span class="fd-checkbox__text">
+            {{ label }}
+        </span>
     </ng-container>
     <ng-container *ngIf="!label">
-        <ng-content></ng-content>
+        <span class="fd-checkbox__text">
+            <ng-content></ng-content>
+        </span>
     </ng-container>
 </label>

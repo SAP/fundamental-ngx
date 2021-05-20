@@ -1,5 +1,16 @@
 @import '~fundamental-styles/dist/toolbar';
 
+
+@mixin fd-rtl {
+	@at-root {
+		[dir='rtl'] &,
+		&[dir='rtl'] {
+			@content;
+		}
+	}
+}
+
+
 .fd-toolbar {
 	position: relative;
 
@@ -90,10 +101,23 @@ $block: fd-toolbar;
 
 
 .#{$block}__overflow__body {
+	max-height: 50vh;
+	overflow: auto;
+
 	.fd-button--menu {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		max-width: 100%;
+	}
+}
+
+.#{$block} > .#{$block}__overflow,
+.#{$block} .#{$block}__overflow, {
+	margin-left: auto;
+
+	@include fd-rtl() {
+		margin-left: 0;
+		margin-right: auto;
 	}
 }

@@ -17,27 +17,17 @@
     </fd-dialog-body>
 
     <fd-dialog-footer *ngIf="_showFooter()">
-        <fd-dialog-footer-button *ngIf="_defaultDialogConfig?.approveButton">
-            <button
-                fd-button
+        <fd-button-bar
+                *ngIf="_defaultDialogConfig?.approveButton"
                 fdType="emphasized"
                 fd-initial-focus
-                fd-dialog-decisive-button
-                [compact]="true"
                 [label]="_defaultDialogConfig?.approveButton"
                 (click)="_approveButtonClicked()">
-            </button>
-        </fd-dialog-footer-button>
-
-        <fd-dialog-footer-button *ngIf="_defaultDialogConfig?.cancelButton">
-            <button
-                fd-button
-                fdType="transparent"
-                fd-dialog-decisive-button
-                [compact]="true"
+        </fd-button-bar>
+        <fd-button-bar
+                *ngIf="_defaultDialogConfig?.cancelButton"
                 [label]="_defaultDialogConfig?.cancelButton"
                 (click)="_cancelButtonClicked()">
-            </button>
-        </fd-dialog-footer-button>
+        </fd-button-bar>
     </fd-dialog-footer>
 </fd-dialog>

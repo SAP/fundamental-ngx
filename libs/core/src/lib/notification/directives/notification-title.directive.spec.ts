@@ -1,9 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NotificationModule } from '../notification.module';
 
 @Component({
-    template: ` <span #directiveElement fd-notification-title>Notification Test</span> `
+    template: `<h2 #directiveElement fd-notification-title [unread]="true">Notification Test</h2> `
 })
 class TestComponent {
     @ViewChild('directiveElement')
@@ -13,7 +13,7 @@ describe('NotificationTitleDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent],
             imports: [NotificationModule]
@@ -31,6 +31,6 @@ describe('NotificationTitleDirective', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-notification__title');
+        expect(component.ref.nativeElement.className).toBe('fd-notification__title fd-notification__title--unread');
     });
 });

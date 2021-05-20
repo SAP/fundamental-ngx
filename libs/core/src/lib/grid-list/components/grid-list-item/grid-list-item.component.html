@@ -1,0 +1,205 @@
+<div
+    [id]="id"
+    tabindex="0"
+    class="fd-grid-list__item"
+    [class.is-navigated]="isNavigated"
+    [class.is-selected]="!!_selectedItem || _selectedItem === 0"
+    [class.fd-grid-list__item--link]="type === 'active' || type === 'detailsAndActive'"
+    [class.fd-grid-list__item--unread]="state === 'unread'"
+    [class.fd-grid-list__item--locked]="state === 'locked'"
+    [class.fd-grid-list__item--draft]="state === 'draft'"
+    [class.fd-grid-list__item--error]="state === 'error'"
+    (keydown)="_onKeyDown($event)"
+    (click)="selectionMode === 'singleSelect' && _singleSelect($event); _onClick()"
+    [attr.aria-label]="ariaLabel"
+>
+    <span
+        *ngIf="status"
+        class="fd-grid-list__highlight"
+        [class.fd-grid-list__highlight--positive]="status === 'success'"
+        [class.fd-grid-list__highlight--negative]="status === 'warning'"
+        [class.fd-grid-list__highlight--critical]="status === 'error'"
+        [class.fd-grid-list__highlight--neutral]="status === 'neutral'"
+        i18n-aria-label="coreGridList.Item.Status|Status aria-label attribute"
+        [attr.aria-label]="'Item has status. Status: ' + status + '.'"
+    ></span>
+
+    <ng-container *ngIf="selectionMode === 'singleSelect'">
+        <ng-container *ngTemplateOutlet="radio"></ng-container>
+    </ng-container>
+
+    <div
+        class="fd-toolbar fd-toolbar--transparent fd-grid-list__item-toolbar"
+        *ngIf="
+            counter ||
+            itemToolbarComponent?.contentTemplateRef ||
+            (type && type !== 'inactive' && type !== 'active') ||
+            (selectionMode !== 'none' && selectionMode !== 'singleSelect')
+        "
+    >
+        <ng-container *ngIf="selectionMode === 'singleSelectLeft'">
+            <div class="fd-grid-list__item-input">
+                <ng-container *ngTemplateOutlet="radio"></ng-container>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="selectionMode === 'multiSelect'">
+            <div class="fd-grid-list__item-input">
+                <ng-container *ngTemplateOutlet="checkbox"></ng-container>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="itemToolbarComponent?.contentTemplateRef">
+            <div class="fd-toolbar--extra-content">
+                <ng-container *ngTemplateOutlet="itemToolbarComponent.contentTemplateRef"></ng-container>
+            </div>
+        </ng-container>
+
+        <div class="fd-toolbar--actions">
+            <span
+                *ngIf="counter"
+                class="fd-grid-list__item-counter"
+                i18n-aria-label="@@coreGridList.Item.Counter|Count aria-label attribute"
+                [attr.aria-label]="'Item has ' + counter + ' children'"
+                [innerText]="counter"
+            ></span>
+
+            <button
+                *ngIf="type === 'detail' || type === 'detailsAndActive'"
+                fd-button
+                fdType="transparent"
+                glyph="edit"
+                i18n-aria-label="coreGridList.Item.Btn.Details|Button aria-label attribute"
+                aria-label="Details"
+                i18n-title="coreGridList.Item.Btn.Details|Button title attribute"
+                title="Details"
+                [compact]="true"
+                (click)="_onDetail($event)"
+            ></button>
+
+            <button
+                *ngIf="selectionMode === 'delete'"
+                fd-button
+                fdType="transparent"
+                glyph="decline"
+                i18n-aria-label="coreGridList.Item.Btn.Delete|Button aria-label attribute"
+                aria-label="Delete"
+                i18n-title="coreGridList.Item.Btn.Delete|Button title attribute"
+                title="Delete"
+                [compact]="true"
+                (click)="_onDelete($event)"
+            ></button>
+
+            <button
+                *ngIf="type === 'navigation'"
+                fd-button
+                fdType="transparent"
+                glyph="navigation-right-arrow"
+                i18n-aria-label="coreGridList.Item.Btn.Navigation|Button aria-label attribute"
+                aria-label="Navigation"
+                i18n-title="coreGridList.Item.Btn.Navigation|Button aria-label attribute"
+                title="Navigation"
+                class="fd-grid-list__btn-navigation"
+                [compact]="true"
+                (click)="_onNavigate($event)"
+            ></button>
+
+            <ng-container *ngIf="selectionMode === 'singleSelectRight'">
+                <ng-container *ngTemplateOutlet="radio"></ng-container>
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="fd-grid-list__item-body" [class.fd-grid-list__item-body--no-padding]="noPadding">
+        <ng-container *ngIf="state">
+            <ng-container *ngTemplateOutlet="itemFooter"></ng-container>
+        </ng-container>
+
+        <ng-template>
+            <ng-content select="fd-grid-list-item-toolbar"></ng-content>
+            <ng-content select="fd-grid-list-item-footer-bar"></ng-content>
+        </ng-template>
+
+        <ng-content></ng-content>
+
+        <ng-container *ngIf="!state && footerBarComponent?.contentTemplateRef">
+            <ng-container *ngTemplateOutlet="itemFooter"></ng-container>
+        </ng-container>
+    </div>
+</div>
+
+<ng-template #radio>
+    <input
+        [attr.tabindex]="selectionMode === 'singleSelect' ? -1 : 0"
+        type="radio"
+        class="fd-radio fd-radio--compact fd-grid-list__radio-input"
+        [id]="id + '-radio'"
+        [name]="'fd-grid-list-item-toolbar-' + selectionMode"
+        [attr.aria-label]="ariaLabel"
+        [value]="value"
+        [ngModel]="_selectedItem"
+        (ngModelChange)="$event && _selectionItem($event)"
+    />
+    <label class="fd-radio__label fd-grid-list__radio-label" [for]="id + '-radio'" tabindex="-1"></label>
+</ng-template>
+
+<ng-template #checkbox>
+    <input
+        type="checkbox"
+        class="fd-checkbox fd-checkbox--compact fd-grid-list__checkbox-input"
+        [id]="id + '-checkbox'"
+        [attr.aria-label]="ariaLabel"
+        [ngModel]="_selectedItem"
+        (ngModelChange)="_selectionItem($event)"
+    />
+    <label
+        class="fd-checkbox__label fd-checkbox__label--compact fd-grid-list__checkbox-label"
+        [for]="id + '-checkbox'"
+        tabindex="-1"
+    ></label>
+</ng-template>
+
+<ng-template #itemFooter>
+    <div class="fd-grid-list__item-body-actions" *ngIf="footerBarComponent || state">
+        <ng-container *ngIf="footerBarComponent?.contentTemplateRef">
+            <ng-container *ngTemplateOutlet="footerBarComponent.contentTemplateRef"></ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="!footerBarComponent?.contentTemplateRef && state">
+            <span
+                *ngIf="state === 'error'"
+                fd-object-status
+                status="negative"
+                i18n-label="coreGridList.Item.Status.ContainsErrors|Error label attribute"
+                label="Contains errors"
+                i18n-title="coreGridList.Item.Status.ContainsErrors|Error title attribute"
+                title="Contains errors"
+            ></span>
+
+            <button
+                *ngIf="state === 'locked'"
+                fd-button
+                fdType="transparent"
+                glyph="private"
+                i18n-aria-label="coreGridList.Item.Status.Locked|Button aria-label attribute"
+                aria-label="Locked"
+                i18n-label="coreGridList.Item.Status.Locked|Button label attribute"
+                label="Locked"
+                [compact]="true"
+                (click)="_clickOnLocked($event)"
+            ></button>
+
+            <button
+                *ngIf="state === 'draft'"
+                fd-button
+                fdType="transparent"
+                i18n-aria-label="coreGridList.Item.Status.Draft|Button aria-label attribute"
+                aria-label="Draft"
+                i18n-label="coreGridList.Item.Status.Draft|Button label attribute"
+                label="Draft"
+                [compact]="true"
+                (click)="_clickOnDraft($event)"
+            ></button>
+        </ng-container>
+    </div>
+</ng-template>

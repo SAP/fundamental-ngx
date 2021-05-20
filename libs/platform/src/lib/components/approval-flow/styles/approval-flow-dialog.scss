@@ -1,0 +1,97 @@
+:host ::ng-deep {
+    a {
+        color: #0A6ED1;
+        color: var(--sapLinkColor, #0A6ED1);
+    }
+
+    .fd-list--byline .fd-list__byline-left {
+        width: 100%;
+    }
+
+    fd-popover {
+        width: 100%;
+    }
+
+    fd-dialog {
+        fd-dialog-header {
+            margin-bottom: 1rem;
+
+            .fd-bar--header {
+                flex-direction: column;
+                padding-bottom: 1rem;
+            }
+
+            p {
+                font-size: 1rem;
+                margin: .65rem 0;
+
+                fd-icon {
+                    font-size: .875rem;
+                    color: #0854A0;
+                    color: var(--sapButton_IconColor, #0854A0);
+                    position: relative;
+                    cursor: pointer;
+                    margin-right: .75rem;
+                }
+            }
+
+            &.show-search {
+                margin-bottom: 0;
+
+                .fd-bar--header {
+                    min-height: 2.5rem;
+                    height: auto;
+                }
+            }
+        }
+
+        fd-avatar {
+            margin-right: .652rem;
+        }
+
+        fd-dialog-body {
+            padding: 1rem;
+
+            fdp-list {
+                display: block;
+                margin-left: -1rem;
+                margin-right: -1rem;
+            }
+        }
+
+        fdp-standard-list-item {
+            .fd-checkbox__label {
+                position: relative;
+                left: .3125rem;
+            }
+
+            fd-avatar {
+                margin-left: .1875rem;
+            }
+        }
+    }
+
+    &[dir='rtl'] {
+        fd-dialog-header p fd-icon {
+            margin-right: 0;
+            margin-left: .75rem;
+        }
+
+        fd-avatar {
+            margin-right: 0;
+            margin-left: .652rem;
+        }
+
+        fdp-standard-list-item {
+            .fd-checkbox__label {
+                left: auto;
+                right: .3125rem;
+            }
+        }
+    }
+}
+
+
+.fd-form-item {
+    margin-bottom: 1rem;
+}

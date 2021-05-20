@@ -1,0 +1,216 @@
+<fd-dialog [attr.dir]="_data.rtl ? 'rtl' : 'ltr'">
+    <fd-dialog-header [class.show-search]="_selectMode && !_userToShowDetails">
+        <ng-template fdTemplate="header">
+            <p>
+                <ng-container *ngIf="!_selectMode && !_data.isEdit" i18n="@@platformApprovalFlowAddNodeDialogAddApprovers">Add approvers</ng-container>
+                <ng-container *ngIf="!_selectMode && _data.isEdit" i18n="@@platformApprovalFlowAddNodeDialogEditApprover">Edit approver</ng-container>
+                <ng-container *ngIf="viewService.isSelectUserMode || viewService.isSelectTeamMode" i18n="@@platformApprovalFlowAddNodeDialogAddApproverTeam">User/Team
+                </ng-container>
+                <ng-container *ngIf="viewService.isTeamMembersMode">
+                    <fd-icon
+                        [glyph]="_headerArrowGlyph"
+                        (click)="_exitTeamMembersMode()"
+                    ></fd-icon>
+                    {{ viewService.team.name }} ({{ viewService.team.members.length }})
+                </ng-container>
+                <ng-container *ngIf="viewService.isUserDetailsMode">
+                    <fd-icon
+                        [glyph]="_headerArrowGlyph"
+                        (click)="_exitUserDetailsMode()"
+                    ></fd-icon>
+                    <ng-container i18n="@@platformApprovalFlowAddNodeDialogUserDetailHeader">Detail</ng-container>
+                </ng-container>
+            </p>
+            <fdp-search-field
+                *ngIf="_selectMode && !_userToShowDetails"
+                i18n-placeholder
+                placeholder="Search"
+                contentDensity="compact"
+                [inputText]="_searchString"
+                [suggestions]="[]"
+                (inputChange)="_onSearchStringChange($event.text)"
+            ></fdp-search-field>
+        </ng-template>
+    </fd-dialog-header>
+
+    <fd-dialog-body [class.approval-flow__dialog-body--auto-height]="viewService.isUserDetailsMode">
+        <ng-container *ngIf="!_selectMode">
+            <div fd-form-item *ngIf="_data.showNodeTypeSelect">
+                <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogNodeType">Parallel or serial</label>
+                <fd-select [compact]="true" [(value)]="_nodeType">
+                    <fd-option
+                        *ngFor="let option of _nodeTypes; trackBy: _trackByFn"
+                        [value]="option"
+                        [attr.dir]="_data.rtl ? 'rtl' : 'ltr'">
+                        {{ option }}
+                    </fd-option>
+                </fd-select>
+            </div>
+            <div fd-form-item>
+                <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogApproverType">Approver type</label>
+                <fd-select [compact]="true" [(value)]="_approverType">
+                    <fd-option
+                        *ngFor="let option of _approverTypes; trackBy: _trackByFn"
+                        [value]="option"
+                        [attr.dir]="_data.rtl ? 'rtl' : 'ltr'">
+                        {{ option }}
+                    </fd-option>
+                </fd-select>
+            </div>
+            <div fd-form-item>
+                <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogUserOrTeam">User/Team</label>
+                <div class="approval-flow__select-approvers-container">
+                    <fd-multi-input
+                        [compact]="true"
+                        [showAllButton]="false"
+                        [(ngModel)]="_selectedApprovers"
+                        [displayFn]="_displayUserFn"
+                        (openChange)="_goToSelectMode()"
+                    ></fd-multi-input>
+                </div>
+            </div>
+            <div fd-form-item>
+                <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogDueDate">Due date</label>
+                <fd-date-picker
+                    type="single"
+                    compact="true"
+                    [attr.dir]="_data.rtl ? 'rtl' : 'ltr'"
+                    [state]="_isDateNull() ? 'error' : ''"
+                    [(ngModel)]="_dueDate">
+                </fd-date-picker>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="_selectMode">
+            <fdp-approval-flow-team-list
+                *ngIf="viewService.isSelectTeamMode"
+                [isRtl]="_data.rtl"
+                [teams]="_filteredTeams"
+                [selectedTeamId]="_selectedTeam?.id"
+                (onTeamClick)="_viewTeamMembers($event)"
+                (onTeamRadioClick)="_setSelectedTeam($event)"
+            ></fdp-approval-flow-team-list>
+            <fdp-approval-flow-user-list
+                *ngIf="viewService.isSelectUserMode || viewService.isTeamMembersMode"
+                [users]="viewService.isSelectUserMode ? _filteredApprovers : _filteredTeamMembers"
+                [isSelectable]="viewService.isSelectUserMode"
+                [selectedUsers]="_selectedApprovers"
+                (onUserClick)="_seeUserDetails($event)"
+                (onSelectionChange)="_selectedApprovers = $event"
+            ></fdp-approval-flow-user-list>
+            <fdp-approval-flow-user-details
+                *ngIf="viewService.isUserDetailsMode && _userToShowDetails"
+                [user]="_userToShowDetails"
+                [detailsTemplate]="_data.userDetailsTemplate"
+                [details]="_userToShowDetailsData$"
+            ></fdp-approval-flow-user-details>
+        </ng-container>
+    </fd-dialog-body>
+
+    <fd-dialog-footer>
+        <ng-container *ngIf="!_selectMode">
+            <fd-dialog-footer-button>
+                <button
+                    fd-button
+                    fd-dialog-decisive-button
+                    fdType="emphasized"
+                    i18n-label="platformApprovalFlowDialogButtonAdd"
+                    label="Add"
+                    [compact]="true"
+                    [disabled]="_isMainSubmitButtonDisabled"
+                    (click)="_submit()">
+                </button>
+            </fd-dialog-footer-button>
+
+            <fd-dialog-footer-button>
+                <button
+                    fd-button
+                    fd-initial-focus
+                    fd-dialog-decisive-button
+                    fdType="transparent"
+                    i18n-label="platformApprovalFlowDialogButtonCancel"
+                    label="Cancel"
+                    [compact]="true"
+                    (click)="dialogRef.close()">
+                </button>
+            </fd-dialog-footer-button>
+        </ng-container>
+        <ng-container *ngIf="_selectMode">
+            <ng-container *ngIf="viewService.isSelectUserMode">
+                <fd-dialog-footer-button>
+                    <button
+                        fd-button
+                        fdType="emphasized"
+                        i18n-label="platformApprovalFlowAddNodeDialogSelectButton"
+                        label="Select"
+                        [compact]="true"
+                        [disabled]="!_selectedApprovers.length"
+                        (click)="_confirmSelectedApprovers()">
+                    </button>
+                </fd-dialog-footer-button>
+
+                <fd-dialog-footer-button>
+                    <button
+                        fd-button
+                        fd-initial-focus
+                        fdType="transparent"
+                        i18n-label="platformApprovalFlowDialogButtonCancel"
+                        label="Cancel"
+                        [compact]="true"
+                        (click)="_exitSelectMode()">
+                    </button>
+                </fd-dialog-footer-button>
+            </ng-container>
+            <ng-container *ngIf="viewService.isSelectTeamMode">
+                <fd-dialog-footer-button>
+                    <button
+                        fd-button
+                        fdType="emphasized"
+                        i18n-label="platformApprovalFlowDialogButtonAdd"
+                        label="Add"
+                        [compact]="true"
+                        [disabled]="!_selectedTeam && !viewService.team"
+                        (click)="_confirmSelectedTeam()">
+                    </button>
+                </fd-dialog-footer-button>
+
+                <fd-dialog-footer-button>
+                    <button
+                        fd-button
+                        fd-initial-focus
+                        fdType="transparent"
+                        i18n-label="platformApprovalFlowDialogButtonCancel"
+                        label="Cancel"
+                        [compact]="true"
+                        (click)="_exitSelectMode()">
+                    </button>
+                </fd-dialog-footer-button>
+            </ng-container>
+            <ng-container *ngIf="viewService.isTeamMembersMode">
+                <fd-dialog-footer-button>
+                    <button
+                        fd-button
+                        fd-initial-focus
+                        fdType="transparent"
+                        i18n-label="platformApprovalFlowDialogButtonClose"
+                        label="Close"
+                        [compact]="true"
+                        (click)="_exitTeamMembersMode()">
+                    </button>
+                </fd-dialog-footer-button>
+            </ng-container>
+            <ng-container *ngIf="viewService.isUserDetailsMode">
+                <fd-dialog-footer-button>
+                    <button
+                        fd-button
+                        fd-initial-focus
+                        fdType="transparent"
+                        i18n-label="platformApprovalFlowDialogButtonClose"
+                        label="Close"
+                        [compact]="true"
+                        (click)="_exitUserDetailsMode()">
+                    </button>
+                </fd-dialog-footer-button>
+            </ng-container>
+        </ng-container>
+    </fd-dialog-footer>
+</fd-dialog>

@@ -26,9 +26,9 @@ import {
     DateRange,
     DaysOfWeek,
     FdCalendarView,
+    Placement,
     SpecialDayRule
 } from '@fundamental-ngx/core';
-import { Placement } from 'popper.js';
 import { FormFieldControl, Status } from '../form-control';
 import { BaseInput } from '../base.input';
 import { FormField } from '../form-field';
@@ -131,7 +131,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
 
     @Input()
     get state(): Status {
-        if (this.fdDatePickerComponent?.isInvalidDateInput) {
+        if (this.fdDatePickerComponent?._isInvalidDateInput) {
             return 'error';
         }
         return this.status || this._state;
@@ -216,8 +216,6 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      */
     @ViewChild(FdDatePickerComponent)
     fdDatePickerComponent: FdDatePickerComponent<D>;
-
-    private _state: Status;
 
     /**
      * Function used to disable certain dates in the calendar.

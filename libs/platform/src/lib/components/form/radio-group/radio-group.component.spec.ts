@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChildren, QueryList } from '@angular/core';
 import { FormControl, ReactiveFormsModule, FormGroup, FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -12,7 +12,7 @@ import { SelectItem } from '../../../domain/data-model';
 @Component({
     selector: 'fdp-test-reative-fdp-form-group',
     template: `
-        <fdp-form-group [multiLayout]="true" [formGroup]="form1" [object]="formData">
+        <fdp-form-group [formGroup]="form1" [object]="formData">
             <fdp-form-field #fl1 [id]="'pizzaBrand'" [label]="'Select Pizza Store:'" zone="zLeft" rank="1">
                 <fdp-radio-group
                     [list]="pizzaBrands"
@@ -95,7 +95,7 @@ describe('Radio Group Test with Reactive fdp-form-group', () => {
     let component: TestRadioGroupReactiveFdpGroup;
     let fixture: ComponentFixture<TestRadioGroupReactiveFdpGroup>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule],
             declarations: [TestRadioGroupReactiveFdpGroup, RadioGroupComponent, RadioButtonComponent]
@@ -248,7 +248,7 @@ describe('Radio Group Test with Reactive fdp-form-group', () => {
 @Component({
     selector: 'fdp-test-template-driven-fdp-form-group',
     template: `
-        <fdp-form-group [multiLayout]="true">
+        <fdp-form-group>
             <fdp-form-field [id]="'pizzaBrandt'" [label]="'Select Pizza Store:'" zone="zLeft" rank="1">
                 <fdp-radio-group
                     [list]="pizzaBrands"
@@ -331,7 +331,7 @@ describe('Radio Group Test with Template Driven fdp-form-group', () => {
     let component: TestRadioGroupTemplateDrivenFdpGroup;
     let fixture: ComponentFixture<TestRadioGroupTemplateDrivenFdpGroup>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule],
             declarations: [TestRadioGroupTemplateDrivenFdpGroup, RadioGroupComponent, RadioButtonComponent]

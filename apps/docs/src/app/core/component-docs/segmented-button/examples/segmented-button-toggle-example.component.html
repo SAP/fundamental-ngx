@@ -1,5 +1,8 @@
-<fd-segmented-button>
-    <button fd-button label="Left" (click)="toggleLMR(0)" [class]="isSelectedLMR(0)"></button>
-    <button fd-button label="Middle" (click)="toggleLMR(1)" [class]="isSelectedLMR(1)"></button>
-    <button fd-button label="Right" (click)="toggleLMR(2)" [class]="isSelectedLMR(2)"></button>
+<fd-segmented-button [toggle]="true" [(ngModel)]="value">
+    <button fd-button label="Left" value="first"></button>
+    <button fd-button label="Middle" value="second"></button>
+    <button fd-button label="Right" value="third"></button>
 </fd-segmented-button>
+
+<br/>
+<small>value: {{value}}</small>

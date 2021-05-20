@@ -1,7 +1,8 @@
 import { Observable } from 'rxjs';
 import { NgControl } from '@angular/forms';
 
-import { ContentDensity, Status } from './form-options';
+import { Status } from './form-options';
+import { ContentDensity } from '@fundamental-ngx/core';
 
 export abstract class FormFieldControl<T> {
     /**
@@ -14,6 +15,11 @@ export abstract class FormFieldControl<T> {
      * Need to have a way to set placeholder to the input
      */
     placeholder: string;
+
+    /**
+     * Need to have a way to set Mandatory to the input field
+     */
+    required: boolean;
 
     /**
      * Sets id from FF to Input

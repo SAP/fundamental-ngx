@@ -1,6 +1,6 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { By } from '@angular/platform-browser';
-import { async, ComponentFixture, TestBed, inject, fakeAsync, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed, inject, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { ElementRef, ViewChild, Component } from '@angular/core';
 import { ButtonModule, RtlService, IconModule } from '@fundamental-ngx/core';
 import { ENTER, DOWN_ARROW } from '@angular/cdk/keycodes';
@@ -29,7 +29,7 @@ function mouseClickOnElement(el: Element): void {
         >
         </fdp-split-menu-button>
 
-        <fdp-menu #basicMenu id="basic-menu">
+        <fdp-menu #basicMenu id="basic-menu" xPosition="after">
             <fdp-menu-item (itemSelect)="onItemSelect('First Item')">First Item</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onItemSelect('Second Item')">Second Item</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onItemSelect('Third Item')">Third Item</fdp-menu-item>
@@ -59,7 +59,7 @@ describe('SplitMenuButtonComponent', () => {
     let fixture: ComponentFixture<TestWrapperComponent>;
     let overlayContainerEl: HTMLElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ButtonModule, PlatformMenuModule, IconModule],
             declarations: [TestWrapperComponent, SplitMenuButtonComponent],
@@ -82,7 +82,7 @@ describe('SplitMenuButtonComponent', () => {
     });
 
     it('should call onPrimaryButtonClick on Primary Button click', () => {
-        const buttons = fixture.debugElement.queryAll(By.css('button'));
+        const buttons = fixture.debugElement.queryAll(By.css('.fd-button'));
         buttons[0].nativeElement.click();
         fixture.detectChanges();
         expect(host.actionValue).toEqual('Default Button');
@@ -92,8 +92,8 @@ describe('SplitMenuButtonComponent', () => {
         /**
          * FIRST-CLICK On Menu Button (OPEN MENU)
          */
-        const buttons = fixture.debugElement.queryAll(By.css('button'));
-        mouseClickOnElement(buttons[1].nativeElement);
+        const splitMenuButton = fixture.debugElement.query(By.css('.fd-button-split'));
+        mouseClickOnElement(splitMenuButton.nativeElement);
         tick(1);
         fixture.detectChanges();
 
@@ -112,8 +112,7 @@ describe('SplitMenuButtonComponent', () => {
         /**
          * FIRST-CLICK On Menu Button (OPEN MENU)
          */
-        const buttons1 = fixture.debugElement.queryAll(By.css('button'));
-        mouseClickOnElement(buttons[1].nativeElement);
+        mouseClickOnElement(splitMenuButton.nativeElement);
         tick(1);
         fixture.detectChanges();
 
@@ -130,7 +129,7 @@ describe('SplitMenuButtonComponent', () => {
          * KEYPRESS ENTER
          */
         const keyboardEvent2 = createKeyboardEvent('keydown', ENTER, 'Enter');
-        items1[1].dispatchEvent(keyboardEvent);
+        items1[1].dispatchEvent(keyboardEvent2);
         fixture.detectChanges();
         expect(host.actionValue).toBe('Second Item');
     }));

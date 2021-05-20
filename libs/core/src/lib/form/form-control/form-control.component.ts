@@ -1,6 +1,17 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    Input,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Optional,
+    ViewEncapsulation
+} from '@angular/core';
 import { FormStates } from './form-states';
-import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
+import { applyCssClass, ContentDensityService, CssClassBuilder } from '../../utils/public_api';
+import { Subscription } from 'rxjs';
 
 /**
  * Directive intended for use on form controls.
@@ -17,7 +28,7 @@ import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges {
+export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges, OnDestroy {
     /**
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
@@ -29,7 +40,7 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges 
      * Whether form is in compact mode
      */
     @Input()
-    compact = false;
+    compact?: boolean;
 
     @Input()
     type: string;
@@ -37,6 +48,9 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges 
     /** user's custom classes */
     @Input()
     class: string;
+
+    /** @hidden */
+    private _subscriptions = new Subscription();
 
     @applyCssClass
     /** CssClassBuilder interface implementation
@@ -62,16 +76,27 @@ export class FormControlComponent implements CssClassBuilder, OnInit, OnChanges 
     }
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef, @Optional() private _contentDensityService: ContentDensityService) {}
 
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
+                this.buildComponentCssClass();
+            }));
+        }
     }
 
     /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
     }
 
     /** @hidden */

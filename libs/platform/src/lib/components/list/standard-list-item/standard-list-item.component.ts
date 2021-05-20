@@ -1,6 +1,6 @@
 import {
     Component, ChangeDetectionStrategy, ElementRef,
-    ChangeDetectorRef, forwardRef
+    ChangeDetectorRef, forwardRef, Optional
 } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -34,7 +34,7 @@ export class StandardListItemComponent extends BaseListItem {
 
     /** @hidden */
     constructor(_changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef,
-        protected _listConfig: ListConfig, _router: Router) {
+        protected _listConfig: ListConfig, @Optional() _router: Router) {
         super(_changeDetectorRef, itemEl, _listConfig, _router);
     }
 

@@ -1,9 +1,10 @@
-import { ComponentFixture, TestBed, async, tick, fakeAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed, tick, fakeAsync, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
 
 import { CheckboxComponent } from './checkbox.component';
 import { whenStable } from '../../utils/tests/when-stable';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/public_api';
 
 function getCheckboxInput(fixture: ComponentFixture<any>): any {
     return fixture.nativeElement.querySelector('input');
@@ -30,10 +31,11 @@ describe('CheckboxComponent', () => {
     let hostComponent: TestCheckboxComponent;
     let fixture: ComponentFixture<TestCheckboxComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FormsModule],
-            declarations: [CheckboxComponent, TestCheckboxComponent]
+            declarations: [CheckboxComponent, TestCheckboxComponent],
+            providers: [ContentDensityService]
         }).compileComponents();
     }));
 
@@ -58,6 +60,27 @@ describe('CheckboxComponent', () => {
 
         await fixture.whenStable();
         expect(checkbox.checkboxValue).toBe(true);
+    });
+
+    it('should be unchecked on null', async () => {
+        hostComponent.value = null;
+        fixture.detectChanges();
+
+        await fixture.whenStable();
+        expect(checkbox.isChecked).toBe(false);
+    });
+
+    it('should be unchecked on undefined', async () => {
+        hostComponent.value = undefined;
+        fixture.detectChanges();
+
+        await fixture.whenStable();
+        expect(checkbox.isChecked).toBe(false);
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        checkbox.ngOnInit();
+        expect(checkbox.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('should be checked on click', async () => {

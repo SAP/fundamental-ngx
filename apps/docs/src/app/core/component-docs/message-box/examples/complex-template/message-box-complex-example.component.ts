@@ -8,6 +8,7 @@ import { MessageBoxRef } from '@fundamental-ngx/core';
                 <ng-template fdTemplate="header">
                     <div fd-bar-left>
                         <fd-bar-element>
+                            <fd-message-box-semantic-icon glyph="activate"></fd-message-box-semantic-icon>
                             <h1 fd-title>Fruit facts</h1>
                         </fd-bar-element>
                     </div>
@@ -27,17 +28,12 @@ import { MessageBoxRef } from '@fundamental-ngx/core';
             <fd-message-box-footer>
                 <ng-template fdTemplate="footer">
                     <div fd-bar-middle>
-                        <fd-bar-element>
-                            <button
-                                fd-button
+                        <fd-button-bar
                                 fd-initial-focus
-                                fd-message-box-decisive-button
-                                fdType="emphasized"
                                 label="Ok"
-                                [compact]="true"
+                                fdType="emphasized"
                                 (click)="messageBoxRef.close('Ok')">
-                            </button>
-                        </fd-bar-element>
+                        </fd-button-bar>
                     </div>
                 </ng-template>
             </fd-message-box-footer>

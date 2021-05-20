@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 import {
-    ItemsPerPage,
+    ItemPerPage,
     FilenameLengthExceedEvent,
     FileSizeExceedEvent,
     TypeMismatchEvent,
@@ -16,7 +16,7 @@ import { PlatformUploadCollectionDataProviderExample } from './platform-upload-c
 })
 export class PlatformUploadCollectionDisabledExampleComponent {
     dataSource: UploadCollectionDataSource;
-    itemsPerPage: ItemsPerPage[] = [
+    itemsPerPage: ItemPerPage[] = [
         {
             label: 5,
             default: false

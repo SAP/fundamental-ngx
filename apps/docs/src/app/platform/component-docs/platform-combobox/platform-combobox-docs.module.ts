@@ -2,13 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { IconModule, MOBILE_MODE_CONFIG } from '@fundamental-ngx/core';
-import {
-    PlatformComboboxModule,
-    PlatformComboboxMobileModule,
-    DATA_PROVIDERS,
-    DataProvider,
-    FdpFormGroupModule
-} from '@fundamental-ngx/platform';
+import { PlatformComboboxModule, PlatformComboboxMobileModule, FdpFormGroupModule } from '@fundamental-ngx/platform';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -22,6 +16,7 @@ import { ComboboxColumnsExampleComponent } from './examples/combobox-columns/com
 import { ComboboxTemplatesExampleComponent } from './examples/combobox-templates/combobox-templates-example.component';
 import { ComboboxGroupExampleComponent } from './examples/combobox-group/combobox-group-example.component';
 import { ComboboxFormsExampleComponent } from './examples/combobox-forms/combobox-forms-example.component';
+import { ComboboxStateComponent } from './examples/combobox-states/combobox-states-example.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [
@@ -45,10 +40,7 @@ const routes: Routes = [
         IconModule
     ],
     exports: [RouterModule],
-    providers: [
-        { provide: DATA_PROVIDERS, useClass: DataProvider as any },
-        { provide: MOBILE_MODE_CONFIG, useValue: COMBOBOX_MOBILE_CONFIG, multi: true }
-    ],
+    providers: [{ provide: MOBILE_MODE_CONFIG, useValue: COMBOBOX_MOBILE_CONFIG, multi: true }],
     declarations: [
         PlatformComboboxHeaderComponent,
         PlatformComboboxDocsComponent,
@@ -58,8 +50,8 @@ const routes: Routes = [
         ComboboxColumnsExampleComponent,
         ComboboxTemplatesExampleComponent,
         ComboboxGroupExampleComponent,
-        ComboboxFormsExampleComponent
+        ComboboxFormsExampleComponent,
+        ComboboxStateComponent
     ]
 })
-export class PlatformComboboxDocsModule {
-}
+export class PlatformComboboxDocsModule {}

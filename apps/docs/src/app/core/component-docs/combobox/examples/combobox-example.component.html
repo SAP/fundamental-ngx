@@ -1,7 +1,10 @@
 <div class="examples-column">
     <div fd-form-item>
-        <label fd-form-label>Standard</label>
+        <label fd-form-label for="comboboxID1">Standard</label>
         <fd-combobox
+            inputId="comboboxID1"
+            ariaLabel="Standard"
+            ariaLabelledby="standart-combobox"
             maxHeight="250px"
             placeholder="Type some text..."
             [dropdownValues]="fruits"
@@ -11,8 +14,11 @@
     <small>Search Term: {{ searchTermOne }}</small>
 
     <div fd-form-item>
-        <label fd-form-label>Disable Highlighting</label>
+        <label fd-form-label for="comboboxID2">Disable Highlighting</label>
         <fd-combobox
+            inputId="comboboxID2"
+            ariaLabel="Disable Highlighting"
+            ariaLabelledby="disable-highlighting"
             maxHeight="250px"
             placeholder="Type some text..."
             [highlighting]="false"
@@ -23,8 +29,11 @@
     <small>Search Term: {{ searchTermTwo }}</small>
 
     <div fd-form-item>
-        <label fd-form-label>Disable Auto Complete</label>
+        <label fd-form-label for="comboboxID3">Disable Auto Complete</label>
         <fd-combobox
+            inputId="comboboxID3"
+            ariaLabel="Disable Auto Complete"
+            ariaLabelledby="disable-autocomplete"
             maxHeight="250px"
             placeholder="Type some text..."
             [autoComplete]="false"
@@ -35,8 +44,11 @@
     <small>Search Term: {{ searchTermThree }}</small>
 
     <div fd-form-item>
-        <label fd-form-label>Compact</label>
+        <label fd-form-label for="comboboxID4">Compact</label>
         <fd-combobox
+            inputId="comboboxID4"
+            ariaLabel="Compact"
+            ariaLabelledby="compact-size-combobox"
             maxHeight="250px"
             placeholder="Type some text..."
             [compact]="true"
@@ -47,8 +59,11 @@
     <small>Search Term: {{ searchTermFour }}</small>
 
     <div fd-form-item>
-        <label fd-form-label>Readonly</label>
+        <label fd-form-label for="comboboxID5">Readonly</label>
         <fd-combobox
+            inputId="comboboxID5"
+            ariaLabel="Readonly"
+            ariaLabelledby="readonly-combobox"
             readOnly="true"
             maxHeight="250px"
             placeholder="Type some text..."
@@ -59,8 +74,11 @@
     <small>Search Term: {{ searchTermFive }}</small>
 
     <div fd-form-item>
-        <label fd-form-label>Hide Addon Button</label>
+        <label fd-form-label for="comboboxID6">Hide Addon Button</label>
         <fd-combobox
+            inputId="comboboxID6"
+            ariaLabel="Hide Addon Button"
+            ariaLabelledby="hide-addon-button"
             maxHeight="250px"
             placeholder="Type some text..."
             [dropdownValues]="fruits"

@@ -56,7 +56,7 @@ import { FdpListDataSource, ListConfig, MatchingStrategy } from '../../list/publ
 import { isFunction, isJsObject, isString } from '../../../utils/lang';
 import { ContentDensity, FormFieldControl, Status } from '../form-control';
 import { FormField } from '../form-field';
-import { TextAlignment } from '../public_api';
+import { TextAlignment } from '../combobox';
 
 export class MultiInputSelectionChangeEvent {
     constructor(
@@ -86,15 +86,6 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     /** Whether the autocomplete should be enabled; Enabled by default */
     @Input()
     autoComplete = true;
-
-    /**
-     * content Density of element. 'cozy' | 'compact'
-     */
-    @Input()
-    set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-        this.isCompact = contentDensity === 'compact';
-    }
 
     /**
      * Todo: Name of the entity for which DataProvider will be loaded. You can either pass list of
@@ -371,6 +362,11 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         this.isOpen = false;
         this.isOpenChange.emit(this.isOpen);
         this._cd.markForCheck();
+    }
+
+    /**@hidden */
+    convertObjectToMultiInputOption(items: any[]): MultiInputOption[] {
+        return this._convertObjectsToOptionItems(items);
     }
 
     /** @hidden */

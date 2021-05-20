@@ -1,8 +1,7 @@
-import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { BarModule, BreadcrumbModule, ToolbarModule } from '@fundamental-ngx/core';
+import { BarModule, BreadcrumbModule, FlexibleColumnLayoutModule, ToolbarModule } from '@fundamental-ngx/core';
 import { PlatformButtonModule, PlatformDynamicPageModule } from '@fundamental-ngx/platform';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -10,6 +9,7 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { API_FILES } from '../../api-files';
 import { PlatformDynamicPageDocsComponent } from './platform-dynamic-page-docs.component';
 import { PlatformDynamicPageExampleComponent } from './platform-dynamic-page-examples/platform-dynamic-page-example.component';
+import { PlatformDynamicPageFlexibleColumnExampleComponent } from './platform-dynamic-page-examples/platform-dynamic-page-flexible-column-example.component';
 import { PlatformDynamicPageNonCollapsibleExampleComponent } from './platform-dynamic-page-examples/platform-dynamic-page-non-collapsible-example.component';
 import { PlatformDynamicPageResponsivePaddingExampleComponent } from './platform-dynamic-page-examples/platform-dynamic-page-responsive-padding-example.component';
 import { PlatformDynamicPageSnapScrollExampleComponent } from './platform-dynamic-page-examples/platform-dynamic-page-snap-scroll-example.component';
@@ -36,7 +36,7 @@ const routes: Routes = [
         ToolbarModule,
         PlatformButtonModule,
         BarModule,
-        ScrollingModule
+        FlexibleColumnLayoutModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -47,6 +47,7 @@ const routes: Routes = [
         PlatformDynamicPageTabbedExampleComponent,
         PlatformDynamicPageResponsivePaddingExampleComponent,
         PlatformDynamicPageNonCollapsibleExampleComponent,
+        PlatformDynamicPageFlexibleColumnExampleComponent
     ]
 })
 export class PlatformDynamicPageDocsModule { }

@@ -20,12 +20,7 @@ import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { Direction } from '@angular/cdk/bidi';
 import { takeUntil } from 'rxjs/operators';
 
-import {
-    closestElement,
-    DialogConfig,
-    DynamicComponentService,
-    RtlService
-} from '@fundamental-ngx/core';
+import { closestElement, DialogConfig, DynamicComponentService, RtlService } from '@fundamental-ngx/core';
 import { ComboBoxDataSource, DATA_PROVIDERS, DataProvider } from '../../../../domain/data-source';
 import { FormFieldControl } from '../../form-control';
 import { BaseCombobox, ComboboxSelectionChangeEvent } from '../commons/base-combobox';
@@ -78,9 +73,9 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
         @Optional() @Self() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
         readonly _dynamicComponentService: DynamicComponentService,
-        @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
+        @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
         readonly _comboboxConfig: ComboboxConfig,
-        private _rtlService: RtlService,
+        @Optional() private _rtlService: RtlService,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
@@ -89,7 +84,7 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
 
     /** @hidden */
     ngOnInit(): void {
-        const providers = this.providers.size === 0 ? this._comboboxConfig.providers : this.providers;
+        const providers = this.providers?.size === 0 ? this._comboboxConfig.providers : this.providers;
         // if we have both prefer dataSource
         if (!this.dataSource && this.entityClass && providers.has(this.entityClass)) {
             this.dataSource = new ComboBoxDataSource(providers.get(this.entityClass));
@@ -100,7 +95,7 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
 
-        this._rtlService.rtl
+        this._rtlService?.rtl
             .pipe(takeUntil(this._destroyed))
             .subscribe(isRtl => this._direction = isRtl ? 'rtl' : 'ltr');
 

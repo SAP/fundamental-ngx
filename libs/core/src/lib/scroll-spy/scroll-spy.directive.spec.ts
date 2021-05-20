@@ -1,5 +1,5 @@
 import { Component, DebugElement, ElementRef } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ScrollSpyDirective } from './scroll-spy.directive';
 import { By } from '@angular/platform-browser';
 
@@ -29,7 +29,7 @@ describe('ScrollSpyDirective', () => {
 
     let directive, directiveInstance;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [ScrollSpyDirective, ScrollSpyTestComponent],
             providers: [{ provide: ElementRef, useClass: MockElementRef }]

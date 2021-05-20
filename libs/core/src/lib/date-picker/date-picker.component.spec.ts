@@ -9,6 +9,7 @@ import { CalendarModule } from '../calendar/calendar.module';
 import { ButtonModule } from '../button/button.module';
 import { InputGroupModule } from '../input-group/input-group.module';
 import { DateRange } from '../calendar/models/date-range';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 describe('DatePickerComponent', () => {
     let component: DatePickerComponent<FdDate>;
@@ -27,7 +28,8 @@ describe('DatePickerComponent', () => {
                     IconModule,
                     InputGroupModule,
                     ButtonModule
-                ]
+                ],
+                providers: [ContentDensityService]
             }).compileComponents();
         })
     );
@@ -48,10 +50,10 @@ describe('DatePickerComponent', () => {
 
     it('should open the calendar', () => {
         component.isOpen = false;
-        component.isInvalidDateInput = true;
+        component._isInvalidDateInput = true;
         component.openCalendar();
         expect(component.isOpen).toBeTruthy();
-        expect(component.inputFieldDate).toBeNull();
+        expect(component._inputFieldDate).toBeNull();
     });
 
     it('should not open the calendar if the component is disabled', () => {
@@ -63,10 +65,15 @@ describe('DatePickerComponent', () => {
 
     it('should close the calendar', () => {
         component.isOpen = true;
-        component.isInvalidDateInput = true;
+        component._isInvalidDateInput = true;
         component.closeCalendar();
-        expect(component.inputFieldDate).toBeNull();
+        expect(component._inputFieldDate).toBeNull();
         expect(component.isOpen).not.toBeTruthy();
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        component.ngOnInit();
+        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
     it('Should handle single date change and update input', () => {
@@ -74,9 +81,9 @@ describe('DatePickerComponent', () => {
         spyOn(component.selectedDateChange, 'emit');
         const date = adapter.today();
         const dateStr = (<any>component)._formatDate(date);
-        component.inputFieldDate = '';
+        component._inputFieldDate = '';
         component.handleSingleDateChange(date);
-        expect(component.inputFieldDate).toEqual(dateStr);
+        expect(component._inputFieldDate).toEqual(dateStr);
         expect(component.onChange).toHaveBeenCalledWith(date);
         expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
     });
@@ -88,9 +95,9 @@ describe('DatePickerComponent', () => {
         const dateLast = adapter.addCalendarDays(dateStart, 10);
         const dateStrStart = (<any>component)._formatDate(dateStart);
         const dateStrLast = (<any>component)._formatDate(dateLast);
-        component.inputFieldDate = '';
+        component._inputFieldDate = '';
         component.handleRangeDateChange({ start: dateStart, end: dateLast });
-        expect(component.inputFieldDate).toBe(dateStrStart + component.rangeDelimiter + dateStrLast);
+        expect(component._inputFieldDate).toBe(dateStrStart + component.rangeDelimiter + dateStrLast);
         expect(component.onChange).toHaveBeenCalledWith({ start: dateStart, end: dateLast });
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: dateStart, end: dateLast });
     });
@@ -100,13 +107,13 @@ describe('DatePickerComponent', () => {
         const dateStr = (<any>component)._formatDate(date);
         component.writeValue(date);
         expect(component.selectedDate).toEqual(date);
-        expect(component.inputFieldDate).toBe(dateStr);
+        expect(component._inputFieldDate).toBe(dateStr);
     });
 
     it('Should handle null write value for single mode', () => {
         component.writeValue(null);
         expect(component.selectedDate).toBeUndefined();
-        expect(component.inputFieldDate).toBe('');
+        expect(component._inputFieldDate).toBe('');
     });
 
     it('Should handle correct write value for range mode', () => {
@@ -123,7 +130,7 @@ describe('DatePickerComponent', () => {
         const dateEnd = null;
         component.writeValue({ start: dateStart, end: dateEnd });
         expect(component.selectedRangeDate).toEqual({ start: dateStart, end: dateEnd });
-        expect(component.inputFieldDate).toBe('');
+        expect(component._inputFieldDate).toBe('');
     });
 
     it('Should register invalid string date and not call event for single mode', () => {
@@ -131,7 +138,7 @@ describe('DatePickerComponent', () => {
         component.type = 'single';
         component.dateStringUpdate('hello');
         const date: FdDate = adapter.parse('hello');
-        expect(component.isInvalidDateInput).toBe(true);
+        expect(component._isInvalidDateInput).toBe(true);
         expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
         expect(component.isModelValid()).toBe(false);
     });
@@ -142,7 +149,7 @@ describe('DatePickerComponent', () => {
         component.dateStringUpdate('start - end');
         const start: FdDate = adapter.parse('start');
         const end: FdDate = adapter.parse('end');
-        expect(component.isInvalidDateInput).toBe(true);
+        expect(component._isInvalidDateInput).toBe(true);
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: start, end: end });
         expect(component.isModelValid()).toBe(false);
     });
@@ -167,9 +174,9 @@ describe('DatePickerComponent', () => {
         component.type = 'range';
         component.dateStringUpdate(strDate1 + ' - ' + strDate2);
 
-        expect(component.isInvalidDateInput).toBe(false);
-        expect(component.calendarComponent.currentlyDisplayed.month).toBe(date2.month);
-        expect(component.calendarComponent.currentlyDisplayed.year).toBe(date2.year);
+        expect(component._isInvalidDateInput).toBe(false);
+        expect(component._calendarComponent.currentlyDisplayed.month).toBe(date2.month);
+        expect(component._calendarComponent.currentlyDisplayed.year).toBe(date2.year);
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date2, end: date1 });
         expect(component.onChange).toHaveBeenCalledWith({ start: date2, end: date1 });
     });
@@ -184,9 +191,9 @@ describe('DatePickerComponent', () => {
         component.type = 'single';
         spyOn(adapter, 'parse').and.returnValue(date);
         component.dateStringUpdate(strDate);
-        expect(component.isInvalidDateInput).toBe(true);
-        expect(component.calendarComponent.currentlyDisplayed.month).toBe(todayDate.month);
-        expect(component.calendarComponent.currentlyDisplayed.year).toBe(todayDate.year);
+        expect(component._isInvalidDateInput).toBe(true);
+        expect(component._calendarComponent.currentlyDisplayed.month).toBe(todayDate.month);
+        expect(component._calendarComponent.currentlyDisplayed.year).toBe(todayDate.year);
         expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
         expect(component.onChange).toHaveBeenCalledWith(date);
     });
@@ -214,9 +221,9 @@ describe('DatePickerComponent', () => {
         });
         component.dateStringUpdate(strDate1 + ' - ' + strDate2);
 
-        expect(component.isInvalidDateInput).toBe(true);
-        expect(component.calendarComponent.currentlyDisplayed.month).toBe(todayDate.month);
-        expect(component.calendarComponent.currentlyDisplayed.year).toBe(todayDate.year);
+        expect(component._isInvalidDateInput).toBe(true);
+        expect(component._calendarComponent.currentlyDisplayed.month).toBe(todayDate.month);
+        expect(component._calendarComponent.currentlyDisplayed.year).toBe(todayDate.year);
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith(rangeDateInvalidObject);
         expect(component.onChange).toHaveBeenCalledWith(rangeDateInvalidObject);
     });
@@ -243,10 +250,25 @@ describe('DatePickerComponent', () => {
         });
         component.dateStringUpdate(strDate1 + ' - ' + strDate2);
 
-        expect(component.isInvalidDateInput).toBe(true);
-        expect(component.calendarComponent.currentlyDisplayed.month).toBe(date1.month);
-        expect(component.calendarComponent.currentlyDisplayed.year).toBe(date1.year);
+        expect(component._isInvalidDateInput).toBe(true);
+        expect(component._calendarComponent.currentlyDisplayed.month).toBe(date1.month);
+        expect(component._calendarComponent.currentlyDisplayed.year).toBe(date1.year);
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith(rangeDateInvalidObject);
         expect(component.onChange).toHaveBeenCalledWith(rangeDateInvalidObject);
+    });
+
+    it('should hide message on open', () => {
+        const hideSpy = spyOn((<any>component)._popoverFormMessage, 'hide').and.callThrough();
+        component.openCalendar();
+        fixture.detectChanges();
+        expect(hideSpy).toHaveBeenCalled();
+    })
+
+    it('should show message on close', () => {
+        component.isOpen = true;
+        const showSpy = spyOn((<any>component)._popoverFormMessage, 'show').and.callThrough();
+        component.closeCalendar();
+        fixture.detectChanges();
+        expect(showSpy).toHaveBeenCalled();
     });
 });

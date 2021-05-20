@@ -1,0 +1,66 @@
+<fd-docs-section-title id="basic" componentName="slider">Basic</fd-docs-section-title>
+<component-example>
+    <fdp-slider-basic-example></fdp-slider-basic-example>
+</component-example>
+<code-example [exampleFiles]="basic"></code-example>
+
+<fd-docs-section-title id="tooltip" componentName="slider">Tooltip</fd-docs-section-title>
+<component-example>
+    <fdp-slider-tooltip-example></fdp-slider-tooltip-example>
+</component-example>
+<code-example [exampleFiles]="tooltip"></code-example>
+
+<fd-docs-section-title id="ticks-and-labels" componentName="slider">Ticks Marks and Labels</fd-docs-section-title>
+<component-example>
+    <fdp-slider-ticks-and-labels-example></fdp-slider-ticks-and-labels-example>
+</component-example>
+<code-example [exampleFiles]="ticksAndLabels"></code-example>
+
+<fd-docs-section-title id="custom-values" componentName="slider">Custom Values</fd-docs-section-title>
+<component-example>
+    <fdp-slider-custom-values-example></fdp-slider-custom-values-example>
+</component-example>
+<code-example [exampleFiles]="customValues"></code-example>
+
+<fd-docs-section-title id="range" componentName="slider">Range</fd-docs-section-title>
+<component-example>
+    <fdp-slider-range-example></fdp-slider-range-example>
+</component-example>
+<code-example [exampleFiles]="range"></code-example>
+
+<fd-docs-section-title id="form-field" componentName="slider">Slider With Form Field</fd-docs-section-title>
+<component-example>
+    <fdp-slider-form-field-example></fdp-slider-form-field-example>
+</component-example>
+<code-example [exampleFiles]="formField"></code-example>
+
+<fd-docs-section-title id="disabled" componentName="slider">Disabled</fd-docs-section-title>
+<component-example>
+    <fdp-slider-disabled-example></fdp-slider-disabled-example>
+</component-example>
+<code-example [exampleFiles]="disabled"></code-example>
+
+<fd-docs-section-title id="cozy" componentName="slider">Cozy</fd-docs-section-title>
+<component-example>
+    <fdp-slider-cozy-example></fdp-slider-cozy-example>
+</component-example>
+<code-example [exampleFiles]="cozy"></code-example>
+
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
+    <fdp-slider
+        id="slider-playground"
+        name="slider-playground"
+        [(ngModel)]="value"
+        [min]="+data.properties.min"
+        [max]="+data.properties.max"
+        [step]="+data.properties.step"
+        [jump]="+data.properties.jump"
+        [disabled]="data.properties.disabled"
+        [showTicks]="data.properties.showTicks"
+        [showTicksLabels]="data.properties.showTicksLabels"
+        [mode]="data.properties.mode"
+        [hideProgressBar]="data.properties.hideProgressBar"
+    ></fdp-slider>
+
+    <p>Value: {{ value | json }}</p>
+</playground>

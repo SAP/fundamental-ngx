@@ -1,6 +1,8 @@
-import { AfterContentInit, Component, Optional } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, Optional } from '@angular/core';
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogFooterBase } from '../base/dialog-footer-base.class';
+
+export const DialogButtonClass = 'fd-dialog__decisive-button';
 
 /**
  * Building block of the dialog used to create dialog button.
@@ -18,7 +20,7 @@ import { DialogFooterBase } from '../base/dialog-footer-base.class';
     selector: 'fd-dialog-footer',
     templateUrl: './dialog-footer.component.html'
 })
-export class DialogFooterComponent extends DialogFooterBase implements AfterContentInit {
+export class DialogFooterComponent extends DialogFooterBase implements AfterContentInit, AfterViewInit {
 
     /** @hidden */
     constructor(@Optional() public dialogConfig: DialogConfig) {
@@ -29,5 +31,10 @@ export class DialogFooterComponent extends DialogFooterBase implements AfterCont
     /** @hidden */
     ngAfterContentInit(): void {
         super.ngAfterContentInit();
+    }
+
+    /** @hidden */
+    ngAfterViewInit(): void {
+        this._listenForButtonChanges(DialogButtonClass);
     }
 }

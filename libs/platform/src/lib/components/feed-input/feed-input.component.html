@@ -3,8 +3,8 @@
         class="fd-feed-input__thumb"
         size="s"
         role="img"
-        [attr.aria-label]="title"
-        [title]="title"
+        [attr.aria-label]="userTitle"
+        [title]="userTitle"
         [image]="avatarSrc"
         [class.fd-avatar--placeholder]="!avatarSrc"
         [class.sap-icon]="!avatarSrc"
@@ -15,10 +15,8 @@
     <textarea
         #textAreaElement
         fd-form-control
-        aria-required="true"
-        class="fd-feed-input__textarea"
+        class="fd-textarea  fd-feed-input__textarea"
         [disabled]="disabled"
-        [attr.aria-disabled]="disabled"
         [placeholder]="placeholder"
         [(ngModel)]="value"
         (ngModelChange)="onChange()"
@@ -29,8 +27,7 @@
         glyph="feeder-arrow"
         title="Send"
         ariaLabel="Send"
-        [disabled]="!value"
-        [attr.aria-disabled]="!value || disabled"
+        [disabled]="!value || disabled"
         (click)="onSubmit()"
     >
     </fdp-button>

@@ -5,5 +5,14 @@
     display: -webkit-box;
 }
 .fd-wizard-container-wrapper {
-    overflow-y: scroll;
+    overflow: auto;
+}
+// TODO: remove when fundamental-styles version 0.16.1 is merged
+.fd-wizard__step--stacked:last-child {
+    padding-right: 2.375rem;
+}
+.fd-wizard__step--stacked:last-child[dir=rtl],
+[dir=rtl] .fd-wizard__step--stacked:last-child {
+    padding-right: 0;
+    padding-left: 2.375rem;
 }

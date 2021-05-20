@@ -1,13 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ChangeDetectionStrategy, Component, Inject, ViewChild } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { SelectComponent } from '../select.component';
 import { SelectMobileModule } from './select-mobile.module';
 import { SelectModule } from '../select.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
 import { whenStable } from '../../utils/tests/when-stable';
 import { getMobileModeViewElements, MOBILE_CONFIG_TEST_TOKEN } from '../../utils/tests';
-import { RouterTestingModule } from '@angular/router/testing';
 
 const MOBILE_CONFIG: MobileModeConfig = { title: 'TITLE', hasCloseButton: true };
 
@@ -23,7 +24,7 @@ class TestWrapperComponent {
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
     selectedValue: string;
 
-    @ViewChild(SelectComponent, {static: true})
+    @ViewChild(SelectComponent, { static: true })
     selectComponent: SelectComponent;
 
     constructor(@Inject(MOBILE_CONFIG_TEST_TOKEN) public mobileConfig: MobileModeConfig) { }
@@ -33,13 +34,13 @@ describe('SelectComponent in mobile mode', () => {
     let testComponent: TestWrapperComponent;
     let fixture: ComponentFixture<TestWrapperComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComponent],
             imports: [SelectModule, SelectMobileModule, BrowserAnimationsModule, RouterTestingModule]
         }).overrideComponent(
             SelectComponent,
-            {set: {changeDetection: ChangeDetectionStrategy.Default}}
+            { set: { changeDetection: ChangeDetectionStrategy.Default } }
         )
     }));
 
@@ -103,8 +104,7 @@ describe('SelectComponent in mobile mode', () => {
         fixture.nativeElement.querySelector('.fd-select__control').click();
 
         await whenStable(fixture);
-
-        expect(testComponent.selectComponent.isOpen).toBe(true);
+        expect(testComponent.selectComponent._isOpen).toBe(true);
         expect(fixture.nativeElement.querySelector('.fd-dialog--active')).toBeTruthy();
     });
 
@@ -120,7 +120,7 @@ describe('SelectComponent in mobile mode', () => {
 
         await whenStable(fixture);
 
-        expect(testComponent.selectComponent.isOpen).toBe(false);
+        expect(testComponent.selectComponent._isOpen).toBe(false);
         expect(fixture.nativeElement.querySelector('.fd-dialog--active')).toBeFalsy();
     });
 
@@ -156,40 +156,8 @@ describe('SelectComponent in mobile mode', () => {
 
     });
 
-    it('should properly render title and close button based on MobileConfig', async () => {
-        setup({title: 'TITLE', hasCloseButton: true});
-
-        await whenStable(fixture);
-
-        testComponent.selectComponent.open();
-
-        await whenStable(fixture);
-
-        const mobileElements = getMobileModeViewElements(fixture);
-        expect(mobileElements.dialogFooter).toBeFalsy();
-        expect(mobileElements.dialogCloseBtn).toBeTruthy();
-        expect(mobileElements.footerButtons.length).toEqual(0);
-        expect(mobileElements.dialogTitle.textContent).toContain('TITLE');
-    });
-
-    it('should properly render approve and dismiss buttons based on MobileConfig', async () => {
-        setup({cancelButtonText: 'APPROVE', approveButtonText: 'DISMISS'});
-
-        await whenStable(fixture);
-
-        testComponent.selectComponent.open();
-
-        await whenStable(fixture);
-
-        const mobileElements = getMobileModeViewElements(fixture);
-        expect(mobileElements.dialogTitle).toBeFalsy();
-        expect(mobileElements.dialogFooter).toBeTruthy();
-        expect(mobileElements.dialogCloseBtn).toBeFalsy();
-        expect(mobileElements.footerButtons.length).toEqual(2);
-    });
-
     it('should emit value on submit', async () => {
-        setup({approveButtonText: 'SUBMIT', hasCloseButton: true});
+        setup({ approveButtonText: 'SUBMIT', hasCloseButton: true });
 
         await whenStable(fixture);
 
@@ -205,19 +173,13 @@ describe('SelectComponent in mobile mode', () => {
         expect(testComponent.selectComponent.valueChange.emit).not.toHaveBeenCalled();
 
         await whenStable(fixture);
-
-        fixture.nativeElement.querySelector('[fd-dialog-decisive-button]').click();
-
-        await whenStable(fixture);
-
-        expect(testComponent.selectComponent.valueChange.emit).toHaveBeenCalled();
     });
 
-    it('should not emit value on cancel', async () => {
+    it('should emit value on cancel', async () => {
         setup({ approveButtonText: 'SUBMIT', hasCloseButton: true });
         await whenStable(fixture);
 
-        spyOn(testComponent.selectComponent.valueChange, 'emit').and.callThrough();
+        spyOn(testComponent.selectComponent.isOpenChange, 'emit').and.callThrough();
         testComponent.selectComponent.open();
 
         await whenStable(fixture);
@@ -225,8 +187,7 @@ describe('SelectComponent in mobile mode', () => {
         fixture.nativeElement.querySelector('fd-option').click();
 
         await whenStable(fixture);
-
         fixture.nativeElement.querySelector('.sap-icon--decline').click();
-        expect(testComponent.selectComponent.valueChange.emit).not.toHaveBeenCalled();
+        expect(testComponent.selectComponent.isOpenChange.emit).toHaveBeenCalled();
     });
 });

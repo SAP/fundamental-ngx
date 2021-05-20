@@ -1,8 +1,7 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-card-compact-example',
-    templateUrl: './card-compact-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush
+    templateUrl: './card-compact-example.component.html'
 })
 export class CardCompactExampleComponent {}

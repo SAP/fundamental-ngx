@@ -1,19 +1,21 @@
 import { Component } from '@angular/core'
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { PlatformThumbnailModule } from './thumbnail.module';
-import { Media, ThumbnailComponent } from './thumbnail.component';
+import { Media } from './thumbnail.interfaces';
+import { ThumbnailComponent } from './thumbnail.component';
 
 @Component({
     template: `<fdp-thumbnail [mediaList]="mediaList"></fdp-thumbnail>`
 })
 class DefaultThumbnailTestComponent {
     mediaList: Media[] = [{
-        thumbnailUrl: 'http://lorempixel.com/400/400/nature',
+        title: 'Nature Details',
+        thumbnailUrl: 'https://picsum.photos/400/400',
         mediaType: 'video',
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
-        alt: 'Failed to load http://lorempixel.com/400/400/nature',
+        alt: 'Failed to load https://picsum.photos/400/400',
         label: 'nature'
     }];
 }
@@ -22,7 +24,7 @@ describe('DefaultThumbnailComponent', () => {
     let component: DefaultThumbnailTestComponent;
     let fixture: ComponentFixture<DefaultThumbnailTestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformThumbnailModule],
             declarations: [ThumbnailComponent, DefaultThumbnailTestComponent]
@@ -61,10 +63,11 @@ describe('DefaultThumbnailComponent', () => {
 class HorizontalThumbnailTestComponent {
 
     mediaList: Media[] = [{
-        thumbnailUrl: 'http://lorempixel.com/400/400/nature',
+        title: 'Nature Details',
+        thumbnailUrl: 'https://picsum.photos/400/400',
         mediaType: 'video',
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
-        alt: 'Failed to load http://lorempixel.com/400/400/nature',
+        alt: 'Failed to load https://picsum.photos/400/400',
         label: 'nature'
     }];
 }
@@ -73,7 +76,7 @@ describe('HorizontalThumbnailComponent', () => {
     let component: HorizontalThumbnailTestComponent;
     let fixture: ComponentFixture<HorizontalThumbnailTestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformThumbnailModule],
             declarations: [ThumbnailComponent, HorizontalThumbnailTestComponent]
@@ -104,10 +107,10 @@ describe('HorizontalThumbnailComponent', () => {
 class ImageThumbnailTestComponent {
 
     mediaList = [{
-        thumbnailUrl: 'http://lorempixel.com/400/400/nature',
+        thumbnailUrl: 'https://picsum.photos/400/400',
         mediaType: 'image',
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
-        alt: 'Failed to load http://lorempixel.com/400/400/nature',
+        alt: 'Failed to load https://picsum.photos/400/400',
         label: 'nature'
     }];
 }
@@ -117,7 +120,7 @@ describe('ImageThumbnailComponent', () => {
     let component: ImageThumbnailTestComponent;
     let fixture: ComponentFixture<ImageThumbnailTestComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformThumbnailModule],
             declarations: [ThumbnailComponent, ImageThumbnailTestComponent]

@@ -2,12 +2,9 @@ import { Component } from '@angular/core';
 import { BarElementDirective } from '../../bar/directives/bar-element.directive';
 
 /**
- * Building block of the dialog used to create message box button.
- *
- * ```html
- * <fd-dialog-footer-button></fd-dialog-footer-button>
- * ```
- * */
+ * @deprecated
+ * Consider using `fd-button-bar`
+ */
 @Component({
     selector: 'fd-dialog-footer-button',
     template: '<ng-content></ng-content>'

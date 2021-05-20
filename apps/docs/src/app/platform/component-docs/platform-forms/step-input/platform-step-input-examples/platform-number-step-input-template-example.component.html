@@ -1,8 +1,8 @@
 <main class="fd-page">
     <div class="fd-page__content fd-has-background-color-neutral-2">
-        <fdp-form-group [multiLayout]="true">
+        <fdp-form-group>
             <fdp-form-field
-                id="number"
+                id="quantity-template-driven"
                 label="Quantity"
                 placeholder="Things quantity"
                 hint="This is tooltip to help"
@@ -11,7 +11,7 @@
                 hintPlacement="left"
                 [validators]="stepInputQtyValidators"
             >
-                <fdp-number-step-input name="qty" [(ngModel)]="qty"></fdp-number-step-input>
+                <fdp-number-step-input [id]="'quantity-template-driven'" name="qty" [(ngModel)]="qty"></fdp-number-step-input>
             </fdp-form-field>
 
             <ng-template #i18n let-errors>

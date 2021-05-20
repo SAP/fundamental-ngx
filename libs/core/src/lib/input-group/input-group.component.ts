@@ -9,11 +9,18 @@ import {
     TemplateRef,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
+    ElementRef,
+    OnDestroy,
+    OnInit,
+    Optional
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { fromEvent, Subject, Subscription } from 'rxjs';
+import { filter, takeUntil, tap } from 'rxjs/operators';
+
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { FormStates } from '../form/form-control/form-states';
-import { ButtonType } from '../button/button.component';
+import { ContentDensityService } from '../utils/public_api';
 
 export type InputGroupPlacement = 'before' | 'after';
 
@@ -40,14 +47,7 @@ export type InputGroupPlacement = 'before' | 'after';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputGroupComponent implements ControlValueAccessor {
-    /** @hidden */
-    @ContentChild(InputGroupInputDirective)
-    inputElement: InputGroupInputDirective;
-
-    /** @hidden */
-    @ContentChild(InputGroupAddOnDirective)
-    addOnElement: InputGroupAddOnDirective;
+export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDestroy {
 
     /** Input template */
     @Input()
@@ -62,7 +62,7 @@ export class InputGroupComponent implements ControlValueAccessor {
 
     /** Whether the input group is in compact mode. */
     @Input()
-    compact = false;
+    compact?: boolean;
 
     /** Whether the input group is inline. */
     @Input()
@@ -113,12 +113,42 @@ export class InputGroupComponent implements ControlValueAccessor {
     @Input()
     isExpanded = false;
 
+    /** Label applied to button with glyph element. */
+    @Input()
+    glyphAriaLabel: string;
+
+    /** The tooltip for the input group icon. */
+    @Input()
+    iconTitle: string;
+
     /** Event emitted when the add-on button is clicked. */
     @Output()
     addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();
 
+    /** @hidden Focus state */
+    get isFocused(): boolean {
+        return this._isFocused;
+    };
+
     /** @hidden */
-    constructor(private changeDetectorRef: ChangeDetectorRef) {}
+    private _isFocused = false;
+
+    /** An RxJS Subject that will kill the stream upon component’s destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    @ContentChild(InputGroupInputDirective)
+    inputElement: InputGroupInputDirective;
+
+    /** @hidden */
+    @ContentChild(InputGroupAddOnDirective)
+    addOnElement: InputGroupAddOnDirective;
+
+    /** @hidden */
+    constructor (
+        private readonly elementRef: ElementRef,
+        private readonly changeDetectorRef: ChangeDetectorRef,
+        @Optional() private _contentDensityService: ContentDensityService
+    ) {}
 
     /** @hidden */
     inputTextValue: string;
@@ -128,6 +158,9 @@ export class InputGroupComponent implements ControlValueAccessor {
      * @hidden
      */
     inShellbar = false;
+
+    /** @hidden */
+    private _subscriptions = new Subscription();
 
     /** @hidden */
     onChange: any = () => {};
@@ -145,6 +178,24 @@ export class InputGroupComponent implements ControlValueAccessor {
         this.inputTextValue = value;
         this.onChange(value);
         this.onTouched();
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this._listenElementEvents();
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
+                this.changeDetectorRef.markForCheck();
+            }));
+        }
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /** @hidden */
@@ -185,5 +236,23 @@ export class InputGroupComponent implements ControlValueAccessor {
         if (!this.buttonFocusable) {
             event.preventDefault();
         }
+    }
+    /** @hidden */
+    private _listenElementEvents(): void {
+        fromEvent(this.elementRef.nativeElement, 'focus', { capture: true }).pipe(
+            filter(event => event['target']?.tagName !== 'BUTTON'),
+            tap(() => {
+                this._isFocused = true;
+                this.changeDetectorRef.markForCheck();
+            }),
+            takeUntil(this._onDestroy$)
+        ).subscribe();
+        fromEvent(this.elementRef.nativeElement, 'blur', { capture: true }).pipe(
+            tap(() => {
+                this._isFocused = false;
+                this.changeDetectorRef.markForCheck();
+            }),
+            takeUntil(this._onDestroy$)
+        ).subscribe();
     }
 }

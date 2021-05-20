@@ -52,7 +52,7 @@ export class ListDataProvider extends DataProvider<Address> {
     }
 }
 @Component({
-    selector: 'fdp-standard-list-item-with-single-selection-example',
+    selector: 'fdp-platform-standard-list-item-with-single-selection-example',
     templateUrl: './platform-standard-list-item-with-single-selection-example.component.html'
 })
 export class PlatformStandardListItemWithSingleSelectionExampleComponent implements AfterViewInit {

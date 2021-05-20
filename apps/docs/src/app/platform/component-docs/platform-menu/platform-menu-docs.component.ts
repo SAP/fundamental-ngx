@@ -1,4 +1,4 @@
-import { OnInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 import * as platformBasicMenuSrc from '!raw-loader!./platform-menu-examples/platform-menu-basic-example.component.html';
@@ -17,11 +17,15 @@ import * as platformScrollingMenuSrc from '!raw-loader!./platform-menu-examples/
 import * as platformScrollingMenuTsCode from '!raw-loader!./platform-menu-examples/platform-menu-scrolling-example.component.ts';
 import * as platformScrollingMenuScss from '!raw-loader!./platform-menu-examples/platform-menu-scrolling-example.component.scss';
 
+import * as platformWithIconsMenuSrc from '!raw-loader!./platform-menu-examples/platform-menu-with-icons-example.component.html';
+import * as platformWithIconsMenuTsCode from '!raw-loader!./platform-menu-examples/platform-menu-with-icons-example.component.ts';
+import * as platformWithIconsMenuScss from '!raw-loader!./platform-menu-examples/platform-menu-with-icons-example.component.scss';
+
 @Component({
     selector: 'app-menu',
     templateUrl: './platform-menu-docs.component.html'
 })
-export class PlatformMenuDocsComponent implements OnInit {
+export class PlatformMenuDocsComponent {
     menuBasic: ExampleFile[] = [
         {
             language: 'html',
@@ -82,5 +86,18 @@ export class PlatformMenuDocsComponent implements OnInit {
         }
     ];
 
-    ngOnInit(): void { }
+    menuWithIcons: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformWithIconsMenuSrc,
+            fileName: 'platform-menu-with-icons-example',
+            scssFileCode: platformWithIconsMenuScss
+        },
+        {
+            language: 'typescript',
+            code: platformWithIconsMenuTsCode,
+            fileName: 'platform-menu-with-icons-example',
+            component: 'PlatformMenuWithIconsExampleComponent'
+        }
+    ];
 }

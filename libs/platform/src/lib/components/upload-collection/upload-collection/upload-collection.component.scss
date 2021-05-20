@@ -133,6 +133,12 @@ $fd-upload-collection-drag-and-drop-active-color-var: var(--sapContent_DragAndDr
                 margin-left: $fd-pagination-padding-x;
             }
         }
+
+        .fdp-upload-collection__pagination {
+            @include fd-reset();
+
+            display: flex;
+        }
     }
 
     &__hidden {
@@ -152,6 +158,10 @@ $fd-upload-collection-drag-and-drop-active-color-var: var(--sapContent_DragAndDr
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        .sap-icon--slim-arrow-down {
+            display: none;
+        }
     }
 
     &__dragdrop-area {
@@ -203,6 +213,11 @@ $fd-upload-collection-drag-and-drop-active-color-var: var(--sapContent_DragAndDr
     .fd-form-item {
         align-items: center;
         flex-direction: row;
+    }
+
+    .fdp-table .fd-table__cell {
+        max-width: 100px;
+        min-width: 100px;
     }
 }
 

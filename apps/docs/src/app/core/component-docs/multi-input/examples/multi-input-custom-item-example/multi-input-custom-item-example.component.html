@@ -1,0 +1,16 @@
+<fd-multi-input
+    [dropdownValues]="values"
+    placeholder="Search here..."
+    [itemTemplate]="template"
+    [displayFn]="displayFunction"
+    [(ngModel)]="selected"
+></fd-multi-input>
+
+<br>
+Selected: [{{ selected | json }}]
+
+<!-- Note that in this case you are responsible for highlighting. -->
+<ng-template #template let-item>
+    <i fd-list-icon [glyph]="item.icon"></i>
+    <span fd-list-title>{{ item.name }}</span>
+</ng-template>

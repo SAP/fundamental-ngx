@@ -26,7 +26,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/info-label', name: 'Info Label' },
             { url: 'platform/input', name: 'Input' },
             { url: 'platform/input-group', name: 'Input Group' },
-            { url: 'platform/feed-input', name: 'Feed Input'},
+            { url: 'platform/feed-input', name: 'Feed Input' },
             { url: 'platform/link', name: 'Link' },
             { url: 'platform/menu', name: 'Menu' },
             { url: 'platform/menu-button', name: 'Menu Button' },
@@ -41,8 +41,10 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/table', name: 'Table' },
             { url: 'platform/textarea', name: 'Textarea' },
             { url: 'platform/thumbnail', name: 'Thumbnail' },
+            { url: 'platform/time-picker', name: 'Time Picker' },
             { url: 'platform/switch', name: 'Switch' },
             { url: 'platform/step-input', name: 'Step Input' },
+            { url: 'platform/select', name: 'Select' },
             { url: 'platform/combobox', name: 'Combobox' },
             { url: 'platform/upload-collection', name: 'Upload Collection' },
             {
@@ -54,10 +56,17 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
                     { url: 'platform/display-list-item', name: 'Display List Item' },
                     { url: 'platform/object-list-item', name: 'Object List Item' }
                 ]
-            }
+            },
+            { url: 'platform/value-help-dialog', name: 'Value Help Dialog' },
+            { url: 'platform/approval-flow', name: 'Approval Flow' },
+            { url: 'platform/slider', name: 'Slider' }
         ];
 
-        this.layouts = [{ url: 'platform/dynamic-page', name: 'Dynamic Page' }];
+        this.layouts = [
+            { url: 'platform/dynamic-page', name: 'Dynamic Page' },
+            { url: 'platform/form-container', name: 'Form Container' },
+            { url: 'platform/page-footer', name: 'Page Footer' }
+        ];
 
         this.utilities = [];
 

@@ -9,6 +9,9 @@ import * as displayT from '!raw-loader!./examples/multi-input-displaywith-exampl
 import * as filterH from '!raw-loader!./examples/multi-input-filter-example/multi-input-filter-example.component.html';
 import * as filterT from '!raw-loader!./examples/multi-input-filter-example/multi-input-filter-example.component.ts';
 
+import * as includesH from '!raw-loader!./examples/multi-input-includes-example/multi-input-includes-example.component.html';
+import * as includesT from '!raw-loader!./examples/multi-input-includes-example/multi-input-includes-example.component.ts';
+
 import * as asyncH from '!raw-loader!./examples/multi-input-async-example/multi-input-async-example.component.html';
 import * as asyncT from '!raw-loader!./examples/multi-input-async-example/multi-input-async-example.component.ts';
 
@@ -23,6 +26,9 @@ import * as newTokensT from '!raw-loader!./examples/multi-input-new-tokens-examp
 
 import * as mobileH from '!raw-loader!./examples/multi-input-mobile-example/multi-input-mobile-example.component.html';
 import * as mobileT from '!raw-loader!./examples/multi-input-mobile-example/multi-input-mobile-example.component.ts';
+
+import * as customH from '!raw-loader!./examples/multi-input-custom-item-example/multi-input-custom-item-example.component.html';
+import * as customT from '!raw-loader!./examples/multi-input-custom-item-example/multi-input-custom-item-example.component.ts';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -71,6 +77,20 @@ export class MultiInputDocsComponent {
             component: 'MultiInputFilterExampleComponent',
             code: filterT,
             fileName: 'multi-input-filter-example'
+        }
+    ];
+
+    includes: ExampleFile[] = [
+        {
+            language: 'html',
+            code: includesH,
+            fileName: 'multi-input-includes-example'
+        },
+        {
+            language: 'typescript',
+            component: 'MultiInputIncludesExampleComponent',
+            code: includesT,
+            fileName: 'multi-input-includes-example'
         }
     ];
 
@@ -141,6 +161,20 @@ export class MultiInputDocsComponent {
             component: 'MultiInputNewTokensExampleComponent',
             code: newTokensT,
             fileName: 'multi-input-new-tokens-example'
+        }
+    ];
+
+    customItem: ExampleFile[] = [
+        {
+            language: 'html',
+            code: customH,
+            fileName: 'multi-input-custom-item-example'
+        },
+        {
+            language: 'typescript',
+            component: 'MultiInputCustomItemExampleComponent',
+            code: customT,
+            fileName: 'multi-input-custom-item-example'
         }
     ];
 }

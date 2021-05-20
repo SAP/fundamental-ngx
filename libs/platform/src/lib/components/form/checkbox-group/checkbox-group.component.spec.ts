@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChildren, QueryList } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { FormModule } from '@fundamental-ngx/core';
@@ -12,7 +12,7 @@ import { By } from '@angular/platform-browser';
 @Component({
     selector: 'fdp-cbg-reactive-test',
     template: `
-        <fdp-form-group [multiLayout]="true" [formGroup]="form1" [object]="formData">
+        <fdp-form-group [formGroup]="form1" [object]="formData">
             <fdp-form-field #fl1 [id]="'phones'" [label]="'Phones interested in:'" zone="zLeft" rank="1">
                 <fdp-checkbox-group
                     [list]="phoneslist"
@@ -95,7 +95,7 @@ describe('CheckboxGroup component Reactive Form Test', () => {
     let host: TestReactiveCheckboxGroupComponnet;
     let fixture: ComponentFixture<TestReactiveCheckboxGroupComponnet>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule, ReactiveFormsModule],
             declarations: [TestReactiveCheckboxGroupComponnet, CheckboxGroupComponent, CheckboxComponent]
@@ -271,7 +271,7 @@ describe('CheckboxGroup component Reactive Form Test', () => {
 @Component({
     selector: 'fdp-cbg-template-driven-test',
     template: `
-        <fdp-form-group [multiLayout]="true">
+        <fdp-form-group>
             <fdp-form-field [id]="'phonest'" [label]="'Phones interested in:'" zone="zLeft" rank="1">
                 <fdp-checkbox-group [list]="phoneslist" [name]="'brands'" [(ngModel)]="phones"></fdp-checkbox-group>
             </fdp-form-field>
@@ -347,7 +347,7 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
     let host: TestTemplateDrivenCheckboxGroupComponnet;
     let fixture: ComponentFixture<TestTemplateDrivenCheckboxGroupComponnet>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule],
             declarations: [TestTemplateDrivenCheckboxGroupComponnet, CheckboxGroupComponent, CheckboxComponent]
@@ -545,7 +545,7 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
 @Component({
     selector: 'fdp-cbg-reactive-formgroup-data',
     template: `
-        <fdp-form-group [multiLayout]="true" [formGroup]="form2">
+        <fdp-form-group [formGroup]="form2">
             <fdp-form-field #fl1 [id]="'phones'" [label]="'Phones interested in:'" zone="zLeft" rank="1">
                 <fdp-checkbox-group [list]="phoneslist" [name]="'brands'" formControlName="phones"></fdp-checkbox-group>
             </fdp-form-field>
@@ -613,7 +613,7 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
     let host: TestReactiveCheckboxGroupWithData;
     let fixture: ComponentFixture<TestReactiveCheckboxGroupWithData>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule, ReactiveFormsModule],
             declarations: [TestReactiveCheckboxGroupWithData, CheckboxGroupComponent, CheckboxComponent]

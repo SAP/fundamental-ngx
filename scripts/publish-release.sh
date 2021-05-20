@@ -7,9 +7,9 @@ git fetch
 
 # make sure we're on a releasable branch
 git_branch=$(git rev-parse --abbrev-ref HEAD)
-master=$(echo $git_branch | grep -cE "^master$")
+main=$(echo $git_branch | grep -cE "^main$")
 archive=$(echo $git_branch | grep -cE "^archive\-v\d+$")
-[[ "$master" = "0" && "$archive" = "0" ]] && echo -e "\n\t${ERROR}Sorry, this branch cannot be released.${NOCOLOR}\n\tReleases can only be published from 'master' and 'archive-v#' branches.\n\n" && exit 0
+[[ "$main" = "0" && "$archive" = "0" ]] && echo -e "\n\t${ERROR}Sorry, this branch cannot be released.${NOCOLOR}\n\tReleases can only be published from 'main' and 'archive-v#' branches.\n\n" && exit 0
 
 # make sure the current branch is a release candidate
 rcVersion=$(grep '\"version\":' package.json | grep -c "\-rc.")
@@ -33,5 +33,5 @@ git commit --allow-empty -m "chore(release): create new release via script"
 git push --set-upstream origin $TMP_BRANCH
 
 # delete branch on local machine
-git checkout master
+git checkout main
 git branch -D $TMP_BRANCH

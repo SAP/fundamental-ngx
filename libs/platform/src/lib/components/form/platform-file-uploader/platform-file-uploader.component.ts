@@ -38,9 +38,6 @@ export class FileUploaderSelectionChangeEvent {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformFileUploaderComponent extends BaseInput {
-    /** @hidden state of checkbox, coming from CBG */
-    private _state: stateType;
-
     /** Button value */
     @Input()
     buttonLabel: string;
@@ -69,9 +66,16 @@ export class PlatformFileUploaderComponent extends BaseInput {
     @Input()
     accept: string;
 
-    /** Content Density of element. cozy | compact */
+    /**
+     * content Density of element: 'cozy' | 'compact'
+     */
     @Input()
-    contentDensity: ContentDensity = 'cozy';
+    set contentDensity(contentDensity: ContentDensity) {
+        this._contentDensity = contentDensity;
+    }
+    get contentDensity(): ContentDensity {
+        return this._contentDensity || 'cozy';
+    }
 
     /** Specifies number of files to allow to select */
     @Input()

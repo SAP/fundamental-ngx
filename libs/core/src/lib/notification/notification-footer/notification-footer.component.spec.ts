@@ -1,12 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { whenStable } from '../../utils/tests';
 import { NotificationFooterComponent } from './notification-footer.component';
 
 describe('NotificationFooterComponent', () => {
     let component: NotificationFooterComponent;
     let fixture: ComponentFixture<NotificationFooterComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [NotificationFooterComponent]
         }).compileComponents();
@@ -20,5 +20,11 @@ describe('NotificationFooterComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
+    });
+
+    it('should apply proper css classes', async () => {
+        await whenStable(fixture);
+
+        expect(fixture.nativeElement).toHaveClass('fd-notification__footer');
     });
 });

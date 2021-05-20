@@ -22,6 +22,14 @@ export const API_FILES = {
     ],
     alert: ['AlertComponent', 'AlertConfig', 'AlertService', 'AlertRef'],
     avatar: ['AvatarComponent'],
+    avatarGroup: [
+        'AvatarGroupComponent',
+        'AvatarGroupItemDirective',
+        'AvatarGroupOverflowBodyDirective',
+        'AvatarGroupOverflowItemDirective',
+        'AvatarGroupOverflowButtonDirective',
+        'AvatarGroupOverflowButtonTextDirective'
+    ],
     bar: ['BarComponent', 'BarElementDirective', 'BarLeftDirective', 'BarMiddleDirective', 'BarRightDirective'],
     card: [
         'CardComponent',
@@ -30,7 +38,6 @@ export const API_FILES = {
         'CardSubtitleDirective',
         'CardSecondSubtitleDirective',
         'CardContentComponent',
-        'CardFooterComponent',
         'CardLoaderComponent',
         'CardKpiHeaderComponent',
         'CardKpiValueDirective',
@@ -60,8 +67,23 @@ export const API_FILES = {
     carousel: ['CarouselComponent', 'CarouselItemComponent', 'CarouselService'],
     combobox: ['ComboboxComponent'],
     checkbox: ['CheckboxComponent'],
+    contentDensity: [],
     datePicker: ['DatePickerComponent'],
     datetimePicker: ['DatetimePickerComponent'],
+    dynamicPage: [
+        'DynamicPageComponent',
+        'DynamicPageSubheaderComponent',
+        'DynamicPageHeaderComponent',
+        'DynamicPageTitleContentComponent',
+        'DynamicPageLayoutActionsComponent',
+        'DynamicPageGlobalActionsComponent',
+        'DynamicPageFooterComponent',
+        'DynamicPageContentComponent'
+    ],
+    facets: [
+      'FacetComponent',
+      'FacetGroupComponent'
+    ],
     feedInput: [
         'FeedInputComponent',
         'FeedInputTextareaDirective',
@@ -75,7 +97,7 @@ export const API_FILES = {
         'FileUploaderDragndropDirective',
         'FileUploaderService'
     ],
-    fixedCardLayout: ['FixedCardLayoutComponent', 'CardDefinitionDirective'],
+    fixedCardLayout: ['FixedCardLayoutComponent', 'CardDefinitionDirective', 'FixedCardLayoutItemComponent'],
     flexibleColumnLayout: ['FlexibleColumnLayoutComponent'],
     form: [
         'FormControlComponent',
@@ -92,6 +114,7 @@ export const API_FILES = {
     formMessage: ['FormInputMessageGroupComponent'],
     globalConfig: [],
     icon: ['IconComponent'],
+    illustratedMessage: ['IllustratedMessageComponent'],
     infoLabel: ['InfoLabelComponent'],
     infiniteScroll: ['InfiniteScrollDirective'],
     inlineHelp: ['InlineHelpComponent'],
@@ -157,27 +180,30 @@ export const API_FILES = {
         'MessageBoxHeaderComponent',
         'MessageBoxFooterComponent',
         'MessageBoxDefaultComponent',
-        'MessageBoxCloseIconComponent',
+        'MessageBoxSemanticIconComponent',
         'MessageBoxContainerComponent',
-        'MessageBoxFooterButtonComponent',
+        'MessageBoxFooterButtonComponent'
     ],
     notification: [
+        'NotificationTitleDirective',
+        'NotificationIndicatorDirective',
+        'NotificationParagraphDirective',
+        'NotificationFooterContentDirective',
+        'NotificationSeparatorDirective',
+        'NotificationLimitTitleDirective',
+        'NotificationLimitDescriptionDirective',
+        'NotificationActionsComponent',
+        'NotificationContentComponent',
+        'NotificationLimitComponent',
+        'NotificationGroupHeaderComponent',
+        'NotificationGroupComponent',
+        'NotificationGroupListComponent',
         'NotificationComponent',
         'NotificationHeaderComponent',
         'NotificationBodyComponent',
         'NotificationFooterComponent',
-        'NotificationServiceDirective',
-        'NotificationActionsDirective',
-        'NotificationAvatarDirective',
-        'NotificationContentDirective',
-        'NotificationDescriptionDirective',
-        'NotificationMetadataDirective',
-        'NotificationTextDirective',
-        'NotificationTitleDirective',
-        'DefaultNotificationComponent',
         'NotificationContainer',
         'NotificationConfig',
-        'NotificationDefault',
         'NotificationRef'
     ],
     objectIdentifier: ['ObjectIdentifierComponent'],
@@ -194,9 +220,20 @@ export const API_FILES = {
         'PopoverBodySubheaderDirective',
         'PopoverBodyFooterDirective'
     ],
-    popoverDirective: ['PopoverDirective'],
     objectNumber: ['ObjectNumberComponent'],
     productSwitch: ['ProductSwitchComponent', 'ProductSwitchItem'],
+    quickView: [
+        'QuickViewComponent',
+        'QuickViewTitleComponent',
+        'QuickViewSubheaderComponent',
+        'QuickViewSubheaderTitleComponent',
+        'QuickViewSubheaderSubtitleComponent',
+        'QuickViewGroupComponent',
+        'QuickViewGroupTitleComponent',
+        'QuickViewGroupItemComponent',
+        'QuickViewGroupItemLabelComponent',
+        'QuickViewGroupItemContentComponent'
+    ],
     scrollSpy: ['ScrollSpyDirective'],
     select: ['SelectComponent', 'OptionComponent'],
     shellbar: [
@@ -237,7 +274,6 @@ export const API_FILES = {
         'TabListComponent',
         'TabPanelComponent',
         'TabTitleDirective',
-        'TabLoadTitleDirective',
         'TabNavComponent',
         'TabLinkDirective',
         'TabItemDirective',
@@ -249,8 +285,11 @@ export const API_FILES = {
         'TabHeaderDirective',
         'TabCounterHeaderDirective',
         'TabProcessIconDirective',
-        'TabSeparator'
+        'TabItemExpandComponent',
+        'TabSeparator',
+        'TabInfo'
     ],
+    text: ['TextComponent'],
     tile: [
         'TileComponent',
         'TileHeaderDirective',
@@ -291,6 +330,7 @@ export const API_FILES = {
     title: ['TitleComponent'],
     switch: ['SwitchComponent'],
     stepInput: ['StepInputComponent'],
+    slider: ['SliderComponent'],
     token: ['TokenComponent', 'TokenizerComponent'],
     toolbar: [
         'ToolbarComponent',
@@ -301,5 +341,24 @@ export const API_FILES = {
     ],
     tree: ['TreeComponent', 'TreeChildComponent', 'TreeRowObjectModel'],
     ratingIndicator: ['RatingIndicatorComponent'],
-    wizard: ['WizardComponent']
+    wizard: ['WizardComponent'],
+    gridList: [
+        'GridListComponent',
+        'GridListItemComponent',
+        'GridListTitleBarComponent',
+        'GridListFilterBarComponent',
+        'GridListMoreBtnComponent',
+        'GridListFooterComponent',
+        'GridListItemFooterBarComponent',
+        'GridListItemToolbarComponent',
+        'GridListGroupHeaderComponent'
+    ],
+    statusIndicator: ['StatusIndicatorComponent'],
+    messagePage: [
+        'MessagePageComponent',
+        'MessagePageActionsComponent',
+        'MessagePageMoreComponent',
+        'MessagePageTitleComponent',
+        'MessagePageSubtitleComponent'
+    ],
 };

@@ -1,7 +1,8 @@
 import { MessageStripComponent } from './message-strip.component';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
+import { ButtonModule } from '../button/button.module';
 
 @Component({
     template: `
@@ -19,8 +20,9 @@ describe('MessageStripComponent', () => {
     let component: MessageStripComponent;
     let fixture: ComponentFixture<TestMessageStripComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
+            imports: [ButtonModule],
             declarations: [MessageStripComponent, ButtonComponent, TestMessageStripComponent]
         }).compileComponents();
     }));

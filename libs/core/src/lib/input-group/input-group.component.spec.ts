@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { InputGroupComponent } from './input-group.component';
 import { FormsModule } from '@angular/forms';
@@ -9,12 +9,13 @@ import {
 } from './input-group-directives';
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
 
 describe('InputGroupComponent', () => {
     let component: InputGroupComponent;
     let fixture: ComponentFixture<InputGroupComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FormsModule, ButtonModule, IconModule],
             declarations: [
@@ -22,7 +23,8 @@ describe('InputGroupComponent', () => {
                 InputGroupAddOnDirective,
                 InputGroupTextareaDirective,
                 InputGroupComponent
-            ]
+            ],
+            providers: [ContentDensityService]
         }).compileComponents();
     }));
 
@@ -39,5 +41,10 @@ describe('InputGroupComponent', () => {
     it('should get an ID and handle the close event for that ID', () => {
         component.addOnButtonClicked.subscribe(($event) => expect($event).toBeDefined());
         component.buttonClicked({});
+    });
+
+    it('should handle content density when compact input is not provided', () => {
+        component.ngOnInit();
+        expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 });

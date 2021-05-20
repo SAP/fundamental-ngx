@@ -3,8 +3,7 @@ import { MESSAGE_BOX_DEFAULT_CONFIG, MessageBoxConfig } from '@fundamental-ngx/c
 
 const DEFAULT_CONFIG: MessageBoxConfig = {
     type: 'error',
-    escKeyCloseable: false,
-    backdropClickCloseable: false
+    escKeyCloseable: false
 };
 
 @NgModule({

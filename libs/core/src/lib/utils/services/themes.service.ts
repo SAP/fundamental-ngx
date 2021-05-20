@@ -1,7 +1,7 @@
-import { Injectable, Optional } from '@angular/core';
+import { Injectable, isDevMode, Optional } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { THEME_SWITCHER_ROUTER_MISSING_ERROR } from '../consts';
@@ -13,7 +13,8 @@ export interface ThemeServiceOutput {
 
 export interface Theme {
     id: string,
-    name: string
+    name: string,
+    description?: string
 }
 
 
@@ -27,19 +28,23 @@ export class ThemesService {
     themes: Theme[] = [
         {
             id: 'sap_fiori_3',
-            name: 'Fiori 3'
+            name: 'Fiori 3',
+            description: 'Use in regular office environment'
         },
         {
             id: 'sap_fiori_3_dark',
-            name: 'Fiori 3 Dark'
+            name: 'Fiori 3 Dark',
+            description: 'Use in dimmed environments'
         },
         {
             id: 'sap_fiori_3_hcb',
-            name: 'High Contrast Black'
+            name: 'High Contrast Black',
+            description: 'Optimized contrast and accessibility for extremely bright environments'
         },
         {
             id: 'sap_fiori_3_hcw',
-            name: 'High Contrast White'
+            name: 'High Contrast White',
+            description: 'Optimized contrast and accessibility for extremely dark environments'
         },
         {
             id: 'sap_fiori_3_light_dark',
@@ -55,7 +60,7 @@ export class ThemesService {
 
     constructor(
         @Optional() private _activatedRoute: ActivatedRoute,
-        private _sanitizer: DomSanitizer,
+        private _sanitizer: DomSanitizer
     ) {}
 
 
@@ -72,13 +77,33 @@ export class ThemesService {
         }
 
         this._activatedRoute.queryParams
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(param => this.onThemeQueryParamChange.next({
-                themeUrl: this.setTheme(param[paramName]),
-                customThemeUrl: this.setCustomTheme(param[paramName])
-            })
-        );
-    };
+            .pipe(
+                takeUntil(this._onDestroy$),
+                filter(param => param && param[paramName])
+            )
+            .subscribe(param => this._propagateThemes(param[paramName]));
+
+        const nativeTheme = this._getNativeParameterByName(paramName);
+        if (nativeTheme) {
+            this._propagateThemes(nativeTheme)
+        }
+    }
+
+    /** Method to get once theme object directly from url. */
+    getThemesFromURL(param?: string): ThemeServiceOutput {
+        const paramName = param || 'theme';
+
+        const nativeTheme = this._getNativeParameterByName(paramName);
+        if (!nativeTheme && isDevMode()) {
+            console.warn('There is no theme param set named: ' + param);
+            return;
+        }
+
+        return {
+            themeUrl: this.setTheme(nativeTheme),
+            customThemeUrl: this.setCustomTheme(nativeTheme)
+        }
+    }
 
     /** Assign css file corresponding to chosen theme from @sap-theming **/
     setTheme(theme: string): SafeResourceUrl {
@@ -88,5 +113,24 @@ export class ThemesService {
     /** Assign css file corresponding to chosen theme fundamental-styles **/
     setCustomTheme(theme: string): SafeResourceUrl {
         return this._sanitizer.bypassSecurityTrustResourceUrl('assets/fundamental-styles-theming/' + theme + '.css');
+    }
+
+    /** @hidden */
+    private _getNativeParameterByName(paramName: string): string {
+        paramName = paramName.replace(/[\[\]]/g, '\\$&');
+        const regex = new RegExp('[?&]' + paramName + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(window.location.href);
+        if (!results || !results[2]) {
+            return '';
+        }
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    /** @hidden */
+    private _propagateThemes(theme: string): void {
+        this.onThemeQueryParamChange.next({
+            themeUrl: this.setTheme(theme),
+            customThemeUrl: this.setCustomTheme(theme)
+        })
     }
 }

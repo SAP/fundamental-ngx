@@ -1,8 +1,16 @@
-<fd-segmented-button style="margin-right: 10px; margin-left: 10px;">
-    <button fd-button label="survey" [glyph]="'survey'" (click)="setLocaleIcon(0)" [class]="isSelectedIcon(0)">
-    </button>
-    <button fd-button label="pie-chart" [glyph]="'pie-chart'" (click)="setLocaleIcon(1)" [class]="isSelectedIcon(1)">
-    </button>
-    <button fd-button label="pool" [glyph]="'pool'" (click)="setLocaleIcon(2)" [class]="isSelectedIcon(2)">
-    </button>
+<fd-text text="example with label buttons"></fd-text>
+<fd-segmented-button [(ngModel)]="value">
+    <button fd-button label="Left" value="first"></button>
+    <button fd-button label="Middle" value="second"></button>
+    <button fd-button label="Right" value="third"></button>
 </fd-segmented-button>
+
+<fd-text text="example with icon buttons"></fd-text>
+<fd-segmented-button [(ngModel)]="value">
+    <button fd-button [glyph]="'cart'" value="first"></button>
+    <button fd-button [glyph]="'action'" value="second"></button>
+    <button fd-button [glyph]="'activities'" value="third"></button>
+</fd-segmented-button>
+
+<br/>
+<small>value: {{value}}</small>

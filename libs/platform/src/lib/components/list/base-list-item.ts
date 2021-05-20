@@ -1,10 +1,10 @@
 import {
     ElementRef, Input, ChangeDetectorRef, EventEmitter,
     Output, HostListener, ViewChild, AfterViewChecked,
-    OnInit, Directive, TemplateRef, HostBinding
+    OnInit, Directive, TemplateRef, HostBinding, Optional
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { ENTER, SPACE, UP_ARROW, DOWN_ARROW } from '@angular/cdk/keycodes';
 
 import { CheckboxComponent, RadioButtonComponent, KeyUtil } from '@fundamental-ngx/core';
 
@@ -238,11 +238,15 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      * radio button selected value binded to template */
     _selectionValue: string;
 
+    /** @hidden
+     * get the focused element for key manager */
+    _focused: boolean;
+
     /** @hidden */
     constructor(protected _changeDetectorRef: ChangeDetectorRef,
         public itemEl: ElementRef,
         protected _listConfig: ListConfig,
-        private router: Router) {
+        @Optional() private router: Router) {
         super(_changeDetectorRef);
 
     }
@@ -265,11 +269,16 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
             currentitem.classList.add('fd-list-item__no-seprator');
         }
         if (currentitem) {
-        currentitem.removeAttribute('role');
+        currentitem.setAttribute('role', 'option');
         if (currentitem.parentNode) {
         currentitem.parentNode.removeAttribute('title');
         currentitem.parentNode.removeAttribute('aria-label');
-            }
+        if (this.selectRow ||
+            this.selectionMode === 'multi' ||
+            this.selectionMode === 'single') {
+        currentitem.parentNode.setAttribute('aria-selected', this._selected ? this._selected : false);
+        }
+    }
         }
     }
 
@@ -290,6 +299,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
         }
         const event = new ModifyItemEvent();
         event.source = this;
+        this._focused = !this._focused;
         this.itemSelected.emit(event);
         this._changeDetectorRef.markForCheck();
 
@@ -329,6 +339,16 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
         const $event = new ModifyItemEvent();
         $event.source = this;
         this.itemSelected.emit($event);
+    }
+
+    /** @hidden */
+    /** helps to avoid multi rows active class with navigation */
+    @HostListener('focusout', ['$event'])
+    _onBlur(event: KeyboardEvent): void {
+        if (this.anchor !== undefined &&
+            !(KeyUtil.isKeyCode(event, ENTER) && KeyUtil.isKeyCode(event, SPACE))) {
+            this.anchor.nativeElement.classList.remove(IS_ACTIVE_CLASS);
+        }
     }
 
     /** @hidden */

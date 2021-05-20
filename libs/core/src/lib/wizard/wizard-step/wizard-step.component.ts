@@ -1,6 +1,7 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
     ElementRef,
@@ -20,7 +21,7 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
 
-import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS } from '../wizard.component';
+import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS } from '../constants';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -29,7 +30,7 @@ import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS } from '../wizard.component'
         class: 'fd-wizard__step',
         '[class.fd-wizard__step--completed]': 'status === "completed" || completed',
         '[class.fd-wizard__step--current]': 'status === "current"',
-        '[class.fd-wizard__step--upcoming]': 'status === "upcoming" && !completed',
+        '[class.fd-wizard__step--upcoming]': 'status === "upcoming"',
         '[class.fd-wizard__step--active]': 'status === "active"'
     },
     templateUrl: './wizard-step.component.html',
@@ -70,6 +71,12 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     optionalText: string;
 
     /**
+     * Whether or not this step is the summary page.
+     */
+    @Input()
+    isSummary = false;
+
+    /**
      * Event emitted when the wizard step's status changes.
      */
     @Output()
@@ -100,9 +107,6 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     wizardLabel: ElementRef;
 
     /** @hidden */
-    finalStep = false;
-
-    /** @hidden */
     visited = false;
 
     /** @hidden */
@@ -115,7 +119,10 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     _stepId: number;
 
     /** @hidden */
-    constructor(private _elRef: ElementRef) {}
+    _finalStep = false;
+
+    /** @hidden */
+    constructor(private _elRef: ElementRef, private _cdRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -132,21 +139,22 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (this.stepIndicator) {
-            this._subscriptions.add(
-                this.stepIndicator.stepIndicatorItemClicked.subscribe((step) => {
-                    this.stepIndicatorItemClicked.emit(step);
-                })
-            );
-            if (this.stepIndicator.glyph) {
-                this.glyph = this.stepIndicator.glyph;
-            }
+        if (this.isSummary) {
+            this._summaryInit();
+        } else if (this.stepIndicator) {
+            this._notSummaryInit();
         }
     }
 
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
+    }
+
+    /** @hidden */
+    setFinalStep(val: boolean): void {
+        this._finalStep = val;
+        this._cdRef.detectChanges();
     }
 
     /** @hidden */
@@ -182,5 +190,31 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     /** @hidden */
     getStepClientWidth(): number {
         return this._elRef.nativeElement.clientWidth;
+    }
+
+    /** @hidden */
+    removeFromDom(): void {
+        if (this._elRef.nativeElement.parentNode) {
+            this._elRef.nativeElement.parentNode.removeChild(this._elRef.nativeElement);
+        }
+    }
+
+    /** @hidden */
+    _summaryInit(): void {
+        this._elRef.nativeElement.style.display = 'none';
+        this.content.tallContent = true;
+        this.removeFromDom();
+    }
+
+    /** @hidden */
+    _notSummaryInit(): void {
+        this._subscriptions.add(
+            this.stepIndicator.stepIndicatorItemClicked.subscribe((step) => {
+                this.stepIndicatorItemClicked.emit(step);
+            })
+        );
+        if (this.stepIndicator.glyph) {
+            this.glyph = this.stepIndicator.glyph;
+        }
     }
 }

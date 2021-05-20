@@ -3,23 +3,21 @@
         <fdp-form-field
             #ffl1
             label="My Favorite Colors"
-            [id]="'input9'"
+            id="input9"
             name="reactiveFormInput"
-            zone="“zLeft”"
             rank="1"
-            [placeholder]="'Field placeholder text'"
-            [required]="true"
+            placeholder="Field placeholder text"
+            required="true"
         >
             <fdp-input
-                [name]="'input6'"
-                [id]="'input6'"
+                name="input9"
                 [formControl]="ffl1.formControl"
-                [type]="'text'"
-                [ariaLabelledBy]="'label'"
+                type="text"
+                ariaLabelledBy="label"
             >
             </fdp-input>
         </fdp-form-field>
-        <fdp-form-field id="button-1" [rank]="10" zone="zRight">
+        <fdp-form-field id="button-1" [rank]="10">
             <fdp-button type="submit" (click)="onSubmit()" label="Submit"></fdp-button>
         </fdp-form-field>
         <ng-template #i18n let-errors>
