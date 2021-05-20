@@ -11,11 +11,11 @@ import {
 } from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-platform-table-unnavigable-row-example',
-    templateUrl: './platform-table-unnavigable-row-example.component.html',
+    selector: 'fdp-platform-table-navigatable-row-example',
+    templateUrl: './platform-table-navigatable-row-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformTableUnnavigableRowExampleComponent implements AfterViewInit {
+export class PlatformTableNavigatableRowExampleComponent implements AfterViewInit {
 
     source: TableDataSource<ExampleItem>;
 
@@ -27,18 +27,18 @@ export class PlatformTableUnnavigableRowExampleComponent implements AfterViewIni
     }
 
     ngAfterViewInit(): void {
-        this.setRowUnnavigable(0);
-        this.setRowUnnavigable(1);
-        this.setRowUnnavigable(2);
+        this.setRowUnnavigatable(0);
+        this.setRowUnnavigatable(1);
+        this.setRowUnnavigatable(2);
     }
 
     onRowSelectionChange(event: TableRowSelectionChangeEvent<ExampleItem>): void {
         console.log(event);
     }
 
-    private setRowUnnavigable(index: number): void {
-        this.table.tableRows.toArray()[index + 1].unnavigable = true;
-        this.table._tableRows[index].unnavigable = true;
+    private setRowUnnavigatable(index: number): void {
+        this.table.tableRows.toArray()[index + 1].navigatable = false;
+        this.table._tableRows[index].navigatable = false;
     }
 }
 
@@ -53,7 +53,7 @@ export interface ExampleItem {
     statusColor?: string;
     date: FdDate;
     verified: boolean;
-    unnavigable?: boolean;
+    navigatable?: boolean;
 }
 
 /**

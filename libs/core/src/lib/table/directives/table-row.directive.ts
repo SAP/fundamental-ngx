@@ -57,26 +57,28 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     @Input()
     secondary = false;
 
-    /** Whether or not the table row is unnavigable */
-    @HostBinding('class.fd-table__row--unnavigable')
+    /** Whether or not the table row is navigatable */
     @Input()
-    set unnavigable(val: boolean) {
-        this._unnavigable = val;
+    set navigatable(val: boolean) {
+        this._navigatable = val;
         this._changeDetRef.detectChanges();
     }
-    get unnavigable(): boolean {
-        return this._unnavigable;
+    get navigatable(): boolean {
+        return this._navigatable;
     }
 
     /** @hidden */
-    private _unnavigable = false;
+    private _navigatable = true;
+
+    @HostBinding('class.fd-table__row--unnavigatable') 
+    get unnavigatable(): boolean { return !this.navigatable; }
 
     /** @hidden */
     propagateKeysSubscription: Subscription;
 
     /** When the row is unnavigable, prevent interaction via enter and space keys */
     @HostListener('keydown', ['$event']) handleKeyDown(event: KeyboardEvent): void {
-        if (this.unnavigable && KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+        if (!this._navigatable && KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             event.preventDefault();
         }
     }

@@ -4,10 +4,10 @@ import { RtlService } from '@fundamental-ngx/core';
 import { map } from 'rxjs/operators';
 
 @Component({
-    selector: 'fd-table-unnavigable-row-example',
-    templateUrl: './table-unnavigable-row-example.component.html'
+    selector: 'fd-table-navigatable-row-example',
+    templateUrl: './table-navigatable-row-example.component.html'
 })
-export class TableUnnavigableRowExampleComponent implements OnInit {
+export class TableNavigatableRowExampleComponent implements OnInit {
     selectMasterModel = false;
 
     navigationArrow$: Observable<string>;
@@ -20,7 +20,7 @@ export class TableUnnavigableRowExampleComponent implements OnInit {
             column3: 'Row 1',
             date: '09-07-18',
             checked: false,
-            unnavigable: false
+            navigatable: true
         },
         {
             status: 'warning',
@@ -29,7 +29,7 @@ export class TableUnnavigableRowExampleComponent implements OnInit {
             column3: 'Row 2',
             date: '09-07-18',
             checked: false,
-            unnavigable: true
+            navigatable: false
         },
         {
             status: '',
@@ -38,7 +38,7 @@ export class TableUnnavigableRowExampleComponent implements OnInit {
             column3: 'Row 3',
             date: '09-07-18',
             checked: false,
-            unnavigable: false
+            navigatable: true
         }
     ];
 
@@ -52,7 +52,7 @@ export class TableUnnavigableRowExampleComponent implements OnInit {
             country: 'India',
             description: 'A banana is an elongated, edible fruit – botanically a berry – produced by several kinds of large herbaceous flowering plants in the genus Musa.',
             checked: false,
-            unnavigable: false
+            navigatable: true
         },
         {
             name: 'Apple',
@@ -63,7 +63,7 @@ export class TableUnnavigableRowExampleComponent implements OnInit {
             country: 'USA',
             description: 'An apple is an edible fruit produced by an apple tree (Malus domestica). Apple trees are cultivated worldwide and are the most widely grown species in the genus Malus.',
             checked: false,
-            unnavigable: true
+            navigatable: false
         }
     ];
 
@@ -91,7 +91,7 @@ export class TableUnnavigableRowExampleComponent implements OnInit {
 
     private _selectAll(): void {
         this.tableRows.forEach((row) => {
-            if (!row.unnavigable) {
+            if (row.navigatable) {
                 row.checked = true;
             }
         });
@@ -102,6 +102,6 @@ export class TableUnnavigableRowExampleComponent implements OnInit {
     }
 
     private _allSelected(): boolean {
-        return !this.tableRows.filter((_row) => (!_row.unnavigable)).find((_row) => !_row.checked);
+        return !this.tableRows.filter((_row) => (_row.navigatable)).find((_row) => !_row.checked);
     }
 }

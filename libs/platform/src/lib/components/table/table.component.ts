@@ -1440,7 +1440,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _getSelectableRows(): TableRow[] {
-        return this._tableRows.filter(({ type, unnavigable }) => (type === 'item' || type === 'tree') && !unnavigable);
+        return this._tableRows.filter(({ type, navigatable }) => (type === 'item' || type === 'tree') && navigatable);
     }
 
     /** @hidden */

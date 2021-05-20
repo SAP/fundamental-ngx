@@ -31,8 +31,8 @@ import * as tableCustomHtml from '!raw-loader!./examples/table-custom-columns-ex
 import * as tableFocusableHtml from '!raw-loader!./examples/table-focusable-example/table-focusable-example.component.html';
 import * as tableCustomTs from '!raw-loader!./examples/table-custom-columns-example/table-custom-columns-example.component.ts';
 import * as tableDialogCustom from '!raw-loader!./examples/table-custom-columns-example/table-custom-dialog.component.ts';
-import * as tableUnnavigableRowHtml from '!raw-loader!./examples/table-unnavigable-row-example.component.html';
-import * as tableUnnavigableRowTs from '!raw-loader!./examples/table-unnavigable-row-example.component.ts';
+import * as tableNavigatableRowHtml from '!raw-loader!./examples/table-navigatable-row-example.component.html';
+import * as tableNavigatableRowTs from '!raw-loader!./examples/table-navigatable-row-example.component.ts';
 import * as tableFilterPipe from '!raw-loader!../../../documentation/core-helpers/pipes/filter.pipe.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -119,17 +119,17 @@ export class TableDocsComponent {
         }
     ];
 
-    tableUnnavigableRowExample: ExampleFile[] = [
+    tableNavigatableRowExample: ExampleFile[] = [
         {
             language: 'html',
-            code: tableUnnavigableRowHtml,
-            fileName: 'table-unnavigable-row-example'
+            code: tableNavigatableRowHtml,
+            fileName: 'table-navigatable-row-example'
         },
         {
             language: 'typescript',
-            component: 'TableUnnavigableRowExampleComponent',
-            code: tableUnnavigableRowTs,
-            fileName: 'table-unnavigable-row-example'
+            component: 'TableNavigatableRowExampleComponent',
+            code: tableNavigatableRowTs,
+            fileName: 'table-navigatable-row-example'
         }
     ];
 
