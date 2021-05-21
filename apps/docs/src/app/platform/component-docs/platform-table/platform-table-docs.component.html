@@ -137,6 +137,22 @@
 <separator></separator>
 
 <fd-docs-section-title
+    id="loading-table"
+    componentName="table"
+>
+    Loading/Busy State
+</fd-docs-section-title>
+<description>
+    Use <code>[loading]="true|false"</code> to set busy state.
+</description>
+<component-example>
+    <fdp-platform-table-loading-example></fdp-platform-table-loading-example>
+</component-example>
+<code-example [exampleFiles]="loadingTableFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title
     id="page-scrolling-table"
     componentName="table"
 >
@@ -385,6 +401,7 @@
             [contentDensity]="data.table.contentDensity"
             [selectionMode]="data.table.selectionMode"
             [freezeColumnsTo]="data.table.freezeColumnsTo"
+            [loading]="data.table.loading"
             emptyTableMessage="No data found"
             (rowSelectionChange)="onRowSelectionChange($event)"
             (sortChange)="onSortChange($event)"

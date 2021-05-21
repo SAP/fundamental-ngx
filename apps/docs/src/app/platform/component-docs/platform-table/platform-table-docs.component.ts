@@ -30,6 +30,8 @@ import * as platformTableFilterableSrc from '!raw-loader!./platform-table-exampl
 import * as platformTableFilterableTsSrc from '!raw-loader!./platform-table-examples/platform-table-filterable-example.component.ts';
 import * as platformTableFreezableSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.html';
 import * as platformTableFreezableTsSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.ts';
+import * as platformTableLoadingSrc from '!raw-loader!./platform-table-examples/platform-table-loading-example.component.html';
+import * as platformTableLoadingTsSrc from '!raw-loader!./platform-table-examples/platform-table-loading-example.component.ts';
 import * as platformTablePageScrollingSrc from '!raw-loader!./platform-table-examples/platform-table-page-scrolling-example.component.html';
 import * as platformTablePageScrollingTsSrc from '!raw-loader!./platform-table-examples/platform-table-page-scrolling-example.component.ts';
 import * as platformTableInitialStateSrc from '!raw-loader!./platform-table-examples/platform-table-initial-state-example.component.html';
@@ -84,6 +86,9 @@ export class PlatformTableDocsComponent {
                     },
                     noBodyBorders: {
                         type: 'boolean'
+                    },
+                    loading: {
+                        type: 'boolean'
                     }
                 }
             },
@@ -130,7 +135,8 @@ export class PlatformTableDocsComponent {
             noHorizontalBorders: false,
             noVerticalBorders: false,
             noBorders: false,
-            noBodyBorders: false
+            noBodyBorders: false,
+            loading: false
         },
         'table-toolbar': {
             title: 'Order Line Items',
@@ -268,6 +274,22 @@ export class PlatformTableDocsComponent {
             code: platformTableFreezableTsSrc,
             fileName: 'platform-table-freezable-example',
             component: 'PlatformTableFreezableExampleComponent',
+            name: 'platform-table-example.component.ts'
+        }
+    ];
+
+    loadingTableFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableLoadingSrc,
+            fileName: 'platform-table-loading-example',
+            name: 'platform-table-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: platformTableLoadingTsSrc,
+            fileName: 'platform-table-loading-example',
+            component: 'PlatformTableLoadingExampleComponent',
             name: 'platform-table-example.component.ts'
         }
     ];
