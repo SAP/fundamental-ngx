@@ -643,7 +643,23 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
                 if (selectedType === APPROVAL_FLOW_NODE_TYPES.PARALLEL) {
                     this._addParallelTargets(dropTarget.node.id, nodeToDrop.id);
-                    nodeToDrop.targets = [...dropTarget.node.targets];
+
+                    const graphNodes = getGraphNodes(this._graph);
+                    let currNode = dropTarget.node;
+                    let nextNode: ApprovalGraphNode;
+
+                    do {
+                        if (currNode.targets.length === 1) {
+                            nextNode = graphNodes.find(node => node.id === currNode.targets[0]);
+
+                            if (nextNode?.blank) {
+                                currNode = nextNode;
+                                nextNode = graphNodes.find(node => node.id === currNode.targets[0]);
+                            }
+                        }
+                    } while (nextNode?.blank);
+
+                    nodeToDrop.targets = currNode.targets;
                 }
 
                 this._finishDragDropProcess(nodeToDrop);
@@ -769,8 +785,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                     );
 
                 nodeMetadata.renderVerticalLineBefore =
-                    graphPrevColumn
-                    && nodeIndex > 0
+                    nodeIndex > 0
                     && (
                         !prevHNode
                         || (prevHNode?.space && !node.space)
@@ -880,7 +895,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         } while (nextNode?.blank);
 
         const parent = this._graphMetadata[nodeToDelete.id].parents[0];
-        const isParentParallelStart = this._graphMetadata[parent.id]?.parallelStart;
+        const isParentParallelStart = this._graphMetadata[parent?.id]?.parallelStart;
         const isTargetParallelEnd = this._graphMetadata[nodeToDelete.targets[0]]?.parallelEnd;
         const targets = (isParentParallelStart && isTargetParallelEnd) || nodesToDelete.length > 1 ? [] : currNode.targets;
 
