@@ -19,6 +19,7 @@
             'fd-calendar__content--years': activeView === 'year'
         }"
     >
+    {{startingDayOfWeek}}
         <fd-calendar-day-view
             *ngSwitchCase="'day'"
             [selectedDate]="selectedDate"

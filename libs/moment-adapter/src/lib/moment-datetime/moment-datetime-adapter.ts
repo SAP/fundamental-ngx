@@ -1,8 +1,6 @@
 import { Inject, Injectable, InjectionToken, LOCALE_ID, Optional } from '@angular/core';
 import moment, { Locale, LongDateFormatSpec, Moment, MomentFormatSpecification, MomentInput } from 'moment';
-
 import { DatetimeAdapter, DateLocale } from '@fundamental-ngx/core';
-import { Observable } from 'rxjs';
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
     return Array.from(new Array(length)).map((_, index) => mapFn(index));
@@ -44,6 +42,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
 
     setLocale(locale: string): void {
         this._momentLocaleData = moment.localeData(locale);
+        
         this._localeData = {
             firstDayOfWeek: this._momentLocaleData.firstDayOfWeek(),
             longMonths: this._momentLocaleData.months(),
@@ -53,6 +52,8 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
             shortDaysOfWeek: this._momentLocaleData.weekdaysShort(),
             narrowDaysOfWeek: this._momentLocaleData.weekdaysMin()
         };
+
+        console.log('locale data fdw: ', this._localeData.firstDayOfWeek);
 
         super.setLocale(locale);
     }

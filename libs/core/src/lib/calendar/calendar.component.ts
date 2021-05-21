@@ -143,7 +143,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
 
     /** The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on. */
     @Input()
-    startingDayOfWeek: DaysOfWeek = 1;
+    startingDayOfWeek: DaysOfWeek;
 
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
@@ -274,7 +274,20 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
         }
 
         // set default value
+        this.startingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
         this.selectedDate = this._dateTimeAdapter.today();
+        this._changeDetectorRef.markForCheck();
+        this._listenToLocaleChanges();
+    }
+
+    
+    /** @hidden */
+    private _listenToLocaleChanges(): void {
+        this._dateTimeAdapter.localeChanges.subscribe(() => {
+            // set default value
+            this.startingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
+            this._changeDetectorRef.markForCheck();
+        });
     }
 
     /** @hidden */
