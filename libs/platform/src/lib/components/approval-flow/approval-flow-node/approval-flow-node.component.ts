@@ -20,7 +20,7 @@ import { Subscription } from 'rxjs';
 
 import { ApprovalFlowDropZoneDirective } from './approval-flow-drop-zone.directive';
 import { ApprovalGraphNode, ApprovalGraphNodeMetadata, ApprovalStatus } from '../interfaces';
-import { isNodeApproved } from '../helpers';
+import { isNodeApproved, isNodeStarted } from '../helpers';
 import { ApprovalFlowNodeTarget } from '../approval-flow-add-node/approval-flow-add-node.component';
 
 const NODE_STATUS_CLASS_MAP = {
@@ -210,7 +210,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     get _isNotStarted(): boolean {
-        return this.node.status === 'not started';
+        return !isNodeStarted(this.node);
     }
 
     /** @hidden */
