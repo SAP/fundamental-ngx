@@ -139,6 +139,7 @@
                                 (onDelete)="_onNodeDelete(node)"
                                 (keyup.enter)="_onNodeClick(node)"
                                 (keydown)="_onNodeKeyDown($event, node, firstColumn, firstNode, lastColumn, lastNode)"
+                                (cdkDragStarted)="_dragDropInProgress = true"
                                 (cdkDragReleased)="_onNodeDrop(node, $event.source)"
                                 (cdkDragMoved)="_onNodeDragMoved(node)"
                             ></fdp-approval-flow-node>

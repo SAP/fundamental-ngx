@@ -128,7 +128,7 @@
         class="approval-flow-node__drop-zone"
         [class.approval-flow-node__drop-zone--active]="dropZone.active"
         [class.approval-flow-node__drop-zone--blank]="isNextNodeBlank"
-        [class.approval-flow-node__drop-zone--partial]="!_blank && !isNextNodeBlank"
+        [class.approval-flow-node__drop-zone--partial]="!_blank && (!isNextNodeBlank || placement === 'before')"
     ></div>
 </ng-template>
 

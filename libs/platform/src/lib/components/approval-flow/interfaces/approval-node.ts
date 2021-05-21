@@ -17,7 +17,7 @@ export interface ApprovalNode {
     actionsConfig?: ApprovalNodeActionsConfig;
 }
 
-export type ApprovalGraphNode = ApprovalNode & { blank?: boolean; space?: boolean; meta?: any };
+export type ApprovalGraphNode = ApprovalNode & { blank?: boolean; space?: boolean; };
 
 export interface ApprovalGraphMetadata {
     [key: string]: ApprovalGraphNodeMetadata

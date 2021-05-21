@@ -177,6 +177,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _multipleRootNodes = false;
 
     /** @hidden */
+    _dragDropInProgress = false;
+
+    /** @hidden */
     private _editModeInitSub: Subscription;
 
     /** @hidden */
@@ -240,6 +243,10 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Node click handler */
     _onNodeClick(node: ApprovalNode): void {
+        if (this._dragDropInProgress) {
+            return;
+        }
+
         const dialog = this._dialogService.open(ApprovalFlowApproverDetailsComponent, {
             data: {
                 node: node,
@@ -592,7 +599,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             this._deleteNode(nodeToDrop);
             this._buildView(this._approvalProcess);
 
-            const nextNode = getGraphNodes(this._graph).find(node => node.id === dropTarget.node.targets[0]);            
+            const nextNode = getGraphNodes(this._graph).find(node => node.id === dropTarget.node.targets[0]);
 
             if (nextNode?.blank) {
                 this._deleteNode(nextNode);
@@ -608,10 +615,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         if (placement === 'before') {
             if (this._graphMetadata[dropTarget.node.id].isFinal) {
                 this._deleteNode(nodeToDrop);
+                this._buildView(this._approvalProcess);
                 this._replaceTargets(dropTarget.node.id, [nodeToDrop.id]);
-
                 nodeToDrop.targets = [dropTarget.node.id];
-
                 this._finishDragDropProcess(nodeToDrop);
                 return;
             }
@@ -628,12 +634,13 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 }
 
                 this._deleteNode(nodeToDrop);
+                this._buildView(this._approvalProcess);
 
                 if (selectedType === APPROVAL_FLOW_NODE_TYPES.SERIAL) {
                     this._replaceTargets(dropTarget.node.id, [nodeToDrop.id]);
                     nodeToDrop.targets = [dropTarget.node.id];
                 }
-                
+
                 if (selectedType === APPROVAL_FLOW_NODE_TYPES.PARALLEL) {
                     this._addParallelTargets(dropTarget.node.id, nodeToDrop.id);
                     nodeToDrop.targets = [...dropTarget.node.targets];
@@ -648,6 +655,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     private _finishDragDropProcess(nodeToDrop: ApprovalGraphNode): void {
         this._approvalProcess.nodes.push(nodeToDrop);
         this._buildView(this._approvalProcess);
+        this._dragDropInProgress = false;
     }
 
     /** @hidden */
@@ -870,8 +878,13 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 }
             }
         } while (nextNode?.blank);
-        
-        this._replaceTargets(nodeToDelete.id, nodesToDelete.length > 1 ? [] : currNode.targets);
+
+        const parent = this._graphMetadata[nodeToDelete.id].parents[0];
+        const isParentParallelStart = this._graphMetadata[parent.id]?.parallelStart;
+        const isTargetParallelEnd = this._graphMetadata[nodeToDelete.targets[0]]?.parallelEnd;
+        const targets = (isParentParallelStart && isTargetParallelEnd) || nodesToDelete.length > 1 ? [] : currNode.targets;
+
+        this._replaceTargets(nodeToDelete.id, targets);
         this._approvalProcess.nodes = this._approvalProcess.nodes.filter(node => !nodesToDelete.includes(node));
     }
 
