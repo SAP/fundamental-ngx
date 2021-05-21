@@ -455,10 +455,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden Open add node dialog */
     _addNode(source: ApprovalGraphNode, type: ApprovalFlowNodeTarget): void {
         const showNodeTypeSelect =
-            type !== 'empty'
-            && type === 'before'
+            type === 'before'
             && !source.actionsConfig?.disableAddParallel
-            && !source.actionsConfig?.disableAddBefore
             && !this._graphMetadata[source.id].isFinal;
 
         const dialog = this._dialogService.open(ApprovalFlowAddNodeComponent, {
@@ -485,22 +483,22 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
             addedNode.id = `tempId${(Math.random() * 1000).toFixed()}`;
 
-            if (type !== 'empty') {
-                addedNode.targets = source.targets;
+            if (type === 'empty') {
+                this._enterEditMode();
+            } else {
+                addedNode.targets = type === 'before' ? [source.id] : source.targets;
 
                 if (nodeType === APPROVAL_FLOW_NODE_TYPES.SERIAL) {
                     if (type === 'before') {
-                        addedNode.targets = [source.id];
                         this._replaceTargetsInSourceNodes(source.id, [addedNode.id]);
                     } else {
                         source.targets = [addedNode.id];
                     }
-                } else {
-                    const parents = this._graphMetadata[source.id].parents;
-                    parents.forEach(parentNode => parentNode.targets.push(addedNode.id));
                 }
-            } else {
-                this._enterEditMode();
+
+                if (nodeType === APPROVAL_FLOW_NODE_TYPES.PARALLEL) {
+                    this._graphMetadata[source.id].parents.forEach(parentNode => parentNode.targets.push(addedNode.id));
+                }
             }
 
             this._showMessage(addedNode.approvalTeamId ? 'teamAddSuccess' : 'approverAddSuccess');
@@ -511,9 +509,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     _addNodeFromToolbar(type: ApprovalFlowNodeTarget): void {
-        const node = this._nodeComponents.length ? this._nodeComponents.filter(n => n._isSelected)[0]?.node : null;
-
-        this._addNode(node, type);
+        this._addNode(this._nodeComponents?.filter(n => n._isSelected)[0]?.node, type);
     }
 
     /** @hidden Open edit node dialog */
@@ -557,11 +553,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             .forEach((component) => {
                 if (component._isSelected) {
                     this._deleteNode(component.node);
-                    this._buildView(this._approvalProcess);
                 }
             });
 
         this._showMessage('nodesRemove');
+        this._buildView(this._approvalProcess);
     }
 
     /** @hidden Node drag move handler, used to check if need to highlight a drop zone rectangle */
@@ -579,7 +575,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Node drop handler */
     _onNodeDrop(nodeToDrop: ApprovalGraphNode, drag: CdkDrag): void {
-        this._cacheCurrentApprovalProcess();
         drag.reset();
 
         const dropTarget = this._nodeComponents.find(n => n._isAnyDropZoneActive);
@@ -587,20 +582,25 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             return;
         }
 
+        this._cacheCurrentApprovalProcess();
+
         const placement = dropTarget._activeDropZones[0].placement;
 
         this._nodeComponents.forEach(n => n._deactivateDropZones());
 
         if (placement === 'after') {
-            this._deleteNode(nodeToDrop);
-
-            const nextNode = getGraphNodes(this._graph).find(node => node.id === dropTarget.node.targets[0]);
+            const graphNodes = getGraphNodes(this._graph);
+            let nextNode = graphNodes.find(node => node.id === dropTarget.node.targets[0]);
 
             if (nextNode?.blank) {
-                nodeToDrop.targets = [...nextNode.targets];
+                while (nextNode?.blank) {
+                    nextNode = graphNodes.find(node => node.id === nextNode.targets[0]);
+                }
 
-                this._deleteNode(nextNode);
+                nodeToDrop.targets = [...nextNode.targets];
+                this._deleteNode(nodeToDrop);
             } else {
+                this._deleteNode(nodeToDrop);
                 nodeToDrop.targets = [...dropTarget.node.targets];
             }
 
@@ -856,20 +856,32 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden Delete node object in local approval process data structure */
     private _deleteNode(nodeToDelete: ApprovalNode): void {
         const metadata = this._graphMetadata[nodeToDelete.id];
-
         const isParentParallelStart = this._graphMetadata[metadata.parents[0]?.id]?.parallelStart;
         const isTargetParallelEnd = this._graphMetadata[nodeToDelete.targets[0]]?.parallelEnd;
+        const shouldDeleteLine =
+            isParentParallelStart
+            && nodeToDelete.targets.length === 1
+            && getGraphNodes(this._graph).find(node => node.id === nodeToDelete.targets[0] && node.blank);
 
-        let targets: string[] = [];
-        if (!isParentParallelStart || !isTargetParallelEnd) {
-            targets = nodeToDelete.targets;
+        if (shouldDeleteLine) {
+            this.removeBlankNodesSequence(nodeToDelete.targets[0]);
         }
 
+        const targets = (isParentParallelStart && isTargetParallelEnd) || shouldDeleteLine ? [] : nodeToDelete.targets;
         this._replaceTargetsInSourceNodes(nodeToDelete.id, targets);
-        this._approvalProcess.nodes.splice(
-            this._approvalProcess.nodes.findIndex(node => node.id === nodeToDelete.id),
-            1
-        );
+        this._approvalProcess.nodes.splice(this._approvalProcess.nodes.findIndex(node => node.id === nodeToDelete.id), 1);
+    }
+
+    /** @hidden */
+    private removeBlankNodesSequence(nodeId: string): void {
+        const graphNodes = getGraphNodes(this._graph);
+        let nextNode = graphNodes.find(node => node.id === nodeId);
+
+        while (nextNode?.blank) {
+            const nodeToDeleteId = nextNode.id;
+            nextNode = graphNodes.find(node => node.id === nextNode.targets[0]);
+            this._approvalProcess.nodes.splice(this._approvalProcess.nodes.findIndex(node => node.id === nodeToDeleteId), 1);
+        }
     }
 
     /** @hidden */
@@ -1078,7 +1090,7 @@ function getAllGraphPaths(rootNodes: ApprovalGraphNode[], nodes: ApprovalGraphNo
             const path = queue.pop();
             const lastNodeInPath = path[path.length - 1];
 
-            /** Indicates about an error or specific case */
+            /** Indicates about an error */
             if (!lastNodeInPath) {
                 return [];
             }
@@ -1136,11 +1148,11 @@ function fillPathsWithBlankNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNod
                 return;
             }
 
-            const nodeIndexes = paths.map(_path => _path.indexOf(node));
-            const mostFarPathNodeIndex = Math.max(...nodeIndexes);
+            const nodeIndexInPaths = paths.map(_path => _path.indexOf(node));
+            const mostFarNodeIndexInPaths = Math.max(...nodeIndexInPaths);
 
-            if (nodeIndex < mostFarPathNodeIndex) {
-                emptyNodes = getEmptyNodes(mostFarPathNodeIndex - nodeIndex, path[nodeIndex - 1].status);
+            if (nodeIndex < mostFarNodeIndexInPaths) {
+                emptyNodes = getEmptyNodes(mostFarNodeIndexInPaths - nodeIndex, path[nodeIndex - 1].status);
 
                 emptyNodes[emptyNodes.length - 1].targets = [node.id];
                 path[nodeIndex - 1].targets = [emptyNodes[0].id];
@@ -1149,7 +1161,7 @@ function fillPathsWithBlankNodes(paths: ApprovalGraphNode[][]): ApprovalGraphNod
                 return;
             }
 
-            if (nodeIndex === mostFarPathNodeIndex && nodeIndex === path.length - 1) {
+            if (nodeIndex === mostFarNodeIndexInPaths && nodeIndex === path.length - 1) {
                 emptyNodes = getEmptyNodes(longestPathLength - path.length, 'not started', 'space');
 
                 path.splice(nodeIndex + 1, 0, ...emptyNodes);
@@ -1169,23 +1181,16 @@ function getBlankNodesAfterFromProcessedPaths(
 ): ApprovalGraphNode[] {
     const blankNodes: ApprovalGraphNode[] = [];
 
-    const pathWithNextBlankNode = processedPaths.find(path => {
+    const pathWithBlankNodeAfter = processedPaths.find(path => {
         const nodeIndex = path.indexOf(node);
-        return !!(nodeIndex > -1 && path[nodeIndex + 1]?.blank);
+        return nodeIndex > -1 && path[nodeIndex + 1]?.blank;
     });
 
-    if (pathWithNextBlankNode) {
-        const nodeIndex = pathWithNextBlankNode.indexOf(node);
+    if (pathWithBlankNodeAfter) {
+        const nodeIndex = pathWithBlankNodeAfter.indexOf(node) + 1;
+        const nextNotBlankNodeIndex = pathWithBlankNodeAfter.findIndex((_node, _index) => _index > nodeIndex && !_node.blank);
 
-        for (let i = nodeIndex + 1; i < pathWithNextBlankNode.length; i++) {
-            const _node = pathWithNextBlankNode[i];
-
-            if (_node.blank) {
-                blankNodes.push(_node);
-            } else {
-                break;
-            }
-        }
+        blankNodes.push(...pathWithBlankNodeAfter.slice(nodeIndex, nextNotBlankNodeIndex));
     }
 
     return blankNodes;
