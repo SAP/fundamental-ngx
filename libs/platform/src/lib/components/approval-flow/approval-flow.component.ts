@@ -740,7 +740,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         graph.forEach((column, columnIndex) => {
             column.nodes.forEach((node, nodeIndex) => {
                 const parents = findParentNodes(node, nodes);
-                const allParentsApproved = parents?.every(_node => isNodeApproved(_node));
+                const allParentsApproved = parents.length ? parents.every(_node => isNodeApproved(_node)) : false;
 
                 metadata[node.id] = {
                     parents: parents,
