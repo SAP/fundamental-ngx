@@ -1,10 +1,11 @@
-import { ElementRef, InjectionToken, TemplateRef, ViewChild } from '@angular/core';
+import { ElementRef, InjectionToken } from '@angular/core';
+import { Subject } from 'rxjs';
+
 import { DialogConfig } from '../../dialog/utils/dialog-config.class';
 import { DialogRef } from '../../dialog/utils/dialog-ref.class';
 import { DialogService } from '../../dialog/dialog-service/dialog.service';
 import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
 import { MobileMode } from '../interfaces/mobile-control.interface';
-import { Subject } from 'rxjs';
 import { MOBILE_CONFIG_ERROR } from '../consts';
 
 export const MOBILE_MODE_CONFIG = new InjectionToken<MobileModeConfigToken>('Provides configuration for mobile control');
@@ -17,7 +18,8 @@ export interface MobileModeConfigToken {
 export enum MobileModeControl {
     MENU = 'MENU',
     SELECT = 'SELECT',
-    COMBOBOX = 'COMBOBOX',
+    COMBOBOX = 'MULTI_COMBOBOX',
+    MULTI_COMBOBOX = 'MULTI_COMBOBOX',
     MULTI_INPUT = 'MULTI_INPUT'
 }
 

@@ -30,6 +30,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/link', name: 'Link' },
             { url: 'platform/menu', name: 'Menu' },
             { url: 'platform/menu-button', name: 'Menu Button' },
+            { url: 'platform/multi-combobox', name: 'Multi Combobox' },
             { url: 'platform/multi-input', name: 'Multi Input' },
             { url: 'platform/panel', name: 'Panel' },
             { url: 'platform/object-marker', name: 'Object Marker' },
