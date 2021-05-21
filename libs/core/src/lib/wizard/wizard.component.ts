@@ -201,6 +201,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         const dialogBody = this._elRef.nativeElement.parentElement;
         let retVal = 0;
         if (dialogBody.tagName.toLowerCase() === 'fd-dialog-body') {
+            const dialogBodyStyle = this._elRef.nativeElement.parentElement.style;
+            dialogBodyStyle.paddingTop = '0';
+            dialogBodyStyle.paddingBottom = '0';
+            dialogBodyStyle.overflowY = 'hidden';
             if (dialogBody.querySelector('.' + 'fd-title--h2')) {
                 retVal = dialogBody.querySelector('.' + 'fd-title--h2').offsetHeight;
             }
