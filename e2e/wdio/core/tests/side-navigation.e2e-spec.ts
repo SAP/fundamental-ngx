@@ -38,7 +38,7 @@ describe('Side-navigation test suite', () => {
         checkIsSelected(iconsExample);
         checkIsSelected(objectExample, 1);
         click(nonSelectableExample + listItemLink);
-        expect(getElementClass(nonSelectableExample + listItemLink)).not.toContain('is-selected');
+        expect(getElementClass(nonSelectableExample + listItemLink)).not.toContain('is-selected', 'item is selected');
     });
 
     it('should check that items in expanded list choosing correct', () => {
@@ -54,10 +54,10 @@ describe('Side-navigation test suite', () => {
 
     it('should check work buttons "select child" & "open"', () => {
         click(selectChildBtn);
-        expect(getAttributeByName(pragmaticalyExample + pointContainsSubList, 'ng-reflect-selected')).toEqual('false');
-        expect(getAttributeByName(pragmaticalyExample + subListItem, 'ng-reflect-selected')).toEqual('false');
+        expect(getAttributeByName(pragmaticalyExample + pointContainsSubList, 'ng-reflect-selected')).toEqual('false', 'element with subitems is selected');
+        expect(getAttributeByName(pragmaticalyExample + subListItem, 'ng-reflect-selected')).toEqual('false', 'element is not selected');
         click(openBtn);
-        expect(getAttributeByName(pragmaticalyExample + expandArrow, 'aria-expanded')).toEqual('false');
+        expect(getAttributeByName(pragmaticalyExample + expandArrow, 'aria-expanded')).toEqual('false', 'expanded menu is not closed');
     });
 
     it('should check RTL and LTR orientation', () => {
@@ -71,16 +71,16 @@ describe('Side-navigation test suite', () => {
 
     function checkIsSelected(section: string, i: number = 0, point: string = section + listItemLink): void {
         click(point, i);
-        expect(getElementClass(point, i)).toContain('is-selected');
+        expect(getElementClass(point, i)).toContain('is-selected', 'element is not selected');
     }
 
     function checkExpandListIsWorking(section: string, point: string = section + listItemLink): void {
         click(point, 2);
-        expect(isElementDisplayed(expandList)).toBe(true);
+        expect(isElementDisplayed(expandList)).toBe(true, 'expanded list is not displayed');
         const listLength = getElementArrayLength(expandListExample + listItem);
         for (let i = 0; i < listLength; i++) {
             click(expandListExample + listItem, i);
-            expect(getElementClass(expandedListPoint, i)).toContain('is-selected');
+            expect(getElementClass(expandedListPoint, i)).toContain('is-selected', 'element is not selected');
         }
     }
 
@@ -88,12 +88,12 @@ describe('Side-navigation test suite', () => {
         if (section !== objectExample) {
             click(section + expandArrow);
         }
-        expect(isElementDisplayed(subList)).toBe(true);
+        expect(isElementDisplayed(subList)).toBe(true, 'expanded list is not displayed');
         const listLength = getElementArrayLength(section + subListItem);
         for (let i = 0; i < listLength; i++) {
             click(section + subListItem, i);
-            expect(getElementClass(section + subListItem, i)).toContain('is-selected');
-            expect(getElementClass(section + pointContainsSubList)).toContain('is-selected');
+            expect(getElementClass(section + subListItem, i)).toContain('is-selected', 'element is not selected');
+            expect(getElementClass(section + pointContainsSubList)).toContain('is-selected', 'element with subitems is not selected');
         }
     }
 
