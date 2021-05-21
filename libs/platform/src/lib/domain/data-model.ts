@@ -41,6 +41,15 @@ export interface OptionItem {
     children?: OptionItem[];
 }
 
+export interface SelectableOptionItem extends OptionItem {
+    selected?: boolean;
+    children?: SelectableOptionItem[];
+}
+
+export function isSelectableItem(item: SelectItem): item is SelectItem {
+    return item && item.label !== undefined && item.value !== undefined && item.hasOwnProperty('selected');
+}
+
 export function isSelectItem(item: SelectItem): item is SelectItem {
     return item && item.label !== undefined && item.value !== undefined;
 }
@@ -65,3 +74,4 @@ export interface MultiInputOption {
 }
 
 export const isOptionItem = isSelectItem;
+export const isSelectableOptionItem = isSelectableItem;
