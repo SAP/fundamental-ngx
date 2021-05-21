@@ -33,6 +33,7 @@ export * from './time-picker/time-picker.component';
 export * from './step-input/public_api';
 export * from './input-group/public_api';
 export * from './combobox/public_api';
+export * from './multi-combobox/public_api';
 export * from './multi-input/public_api';
 export * from './platform-file-uploader/platform-file-uploader.module';
 export * from './platform-file-uploader/platform-file-uploader.component';
