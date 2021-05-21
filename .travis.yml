@@ -14,6 +14,8 @@ script:
   - npm run build-all
 jobs:
   include:
+    - stage: Lint commit message
+      script: commitlint-travis
     - stage: "Lint and Test"
       if: type = pull_request
       before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
