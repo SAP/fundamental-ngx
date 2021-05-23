@@ -210,7 +210,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const selectedNodes = this._selectedNodes;
 
         return selectedNodes.length
-            && selectedNodes.every(node => !node.disableActions && !node.actionsConfig?.disableRemove);
+            && selectedNodes.every(node => {
+                return !node.disableActions
+                    && !node.actionsConfig?.disableRemove
+                    && !this._isFinalNodeWithMultipleParents(node);
+            });
     }
 
     /** @hidden */
@@ -239,6 +243,22 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
+    }
+
+    /** @hidden */
+    _isFinalNodeWithMultipleParents(node: ApprovalGraphNode): boolean {
+        const nodeMetadata = this._graphMetadata[node.id];
+
+        return nodeMetadata.isFinal && this._graph[nodeMetadata.columnIndex - 1]?.nodes.length > 1;
+    }
+
+    /** @hidden */
+    _isCdkDragDisabled(node: ApprovalGraphNode): boolean {
+        return !this._isEditMode
+            || node.blank
+            || node.space
+            || node.status !== 'not started'
+            || this._isFinalNodeWithMultipleParents(node);
     }
 
     /** @hidden Node click handler */

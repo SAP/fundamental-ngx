@@ -166,7 +166,7 @@
     </li>
 
     <li
-        *ngIf="!this.node?.actionsConfig?.disableRemove"
+        *ngIf="!this.node?.actionsConfig?.disableRemove && !this.disableRemoving"
         fd-menu-item
         (click)="menu.close(); onDelete.emit()"
     >

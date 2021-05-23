@@ -64,6 +64,9 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
      */
     @Input() allNodesInColumnApproved = false;
 
+    /** Whether to disable remove action */
+    @Input() disableRemoving = false;
+
     /** Whether the node is in edit mode */
     @Input()
     @HostBinding('class.approval-flow-node--edit-mode')

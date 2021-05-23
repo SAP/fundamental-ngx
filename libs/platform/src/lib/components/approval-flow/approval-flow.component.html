@@ -121,7 +121,7 @@
                             *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last; trackBy: _trackByFn">
                             <fdp-approval-flow-node
                                 cdkDrag
-                                [cdkDragDisabled]="!_isEditMode || node.blank || node.space || node.status !== 'not started'"
+                                [cdkDragDisabled]="_isCdkDragDisabled(node)"
                                 [attr.dir]="_dir"
                                 [attr.tabindex]="node.blank || node.space ? -1 : 0"
                                 [node]="node"
@@ -132,6 +132,7 @@
                                 [dueDateThreshold]="dueDateThreshold"
                                 [renderArrow]="columnIndex > 0"
                                 [allNodesInColumnApproved]="column.allNodesApproved"
+                                [disableRemoving]="_isFinalNodeWithMultipleParents(node)"
                                 (onNodeClick)="_onNodeClick(node)"
                                 (onNodeCheck)="_onNodeCheck(node)"
                                 (onAdd)="_addNode(node, $event)"
