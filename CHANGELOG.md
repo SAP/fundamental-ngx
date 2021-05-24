@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.24...v0.30.1-rc.25) (2021-05-21)
+
+### [0.30.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.23...v0.30.1-rc.24) (2021-05-21)
+
+### [0.30.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.22...v0.30.1-rc.23) (2021-05-21)
+
+
+### Features
+
+* (Platform) Multi-Combobox component ([#5107](https://github.com/SAP/fundamental-ngx/issues/5107)) ([44da63f](https://github.com/SAP/fundamental-ngx/commit/44da63f0391b51a33c30e6fb63701fe286196d8d))
+
+### [0.30.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.21...v0.30.1-rc.22) (2021-05-21)
+
 ### [0.30.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.20...v0.30.1-rc.21) (2021-05-20)
 
 

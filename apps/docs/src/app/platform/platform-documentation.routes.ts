@@ -261,6 +261,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'multi-combobox',
+                loadChildren: () =>
+                    import('./component-docs/platform-multi-combobox/platform-multi-combobox-docs.module').then(
+                        (m) => m.PlatformMultiComboboxDocsModule
+                    )
+            },
+            {
                 path: 'multi-input',
                 loadChildren: () =>
                     import('./component-docs/platform-forms/multi-input/platform-multi-input-docs.module').then(
