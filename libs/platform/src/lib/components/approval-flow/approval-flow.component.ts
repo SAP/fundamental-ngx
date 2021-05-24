@@ -151,6 +151,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _canAddParallel = false;
 
     /** @hidden */
+    _canEditNode = false;
+
+    /** @hidden */
     _usersForWatchersList: ApprovalUser[] = [];
 
     /** @hidden */
@@ -306,6 +309,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             && this._graphMetadata[node.id].canAddParallel
             && !node.disableActions
             && !node.actionsConfig?.disableAddParallel;
+
+        this._canEditNode =
+            isOneNotApprovedNodeChecked
+            && !node.disableActions
+            && !node.actionsConfig?.disableEdit;
     }
 
     /** @hidden Watcher's avatar click handler */
@@ -537,6 +545,11 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     /** @hidden */
     _addNodeFromToolbar(type: ApprovalFlowNodeTarget): void {
         this._addNode(this._nodeComponents?.filter(n => n._isSelected)[0]?.node, type);
+    }
+
+    /** @hidden */
+    _editNodeFromToolbar(): void {
+        this._editNode(this._nodeComponents?.filter(n => n._isSelected)[0]?.node);
     }
 
     /** @hidden Open edit node dialog */
@@ -970,6 +983,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         this._canAddAfter = false;
         this._canAddBefore = false;
         this._canAddParallel = false;
+        this._canEditNode = false;
     }
 
     /** @hidden */
