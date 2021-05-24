@@ -1,8 +1,10 @@
-import { Directive, OnInit, ElementRef } from '@angular/core';
+import { Directive, Input, OnInit, ElementRef } from '@angular/core';
 
 import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
 import { CLASS_NAME } from '../constants';
+
+export type KpiStatus = 'positive' | 'negative' | 'critical' | 'informative';
 
 @Directive({
     // tslint:disable-next-line: directive-selector
@@ -11,6 +13,10 @@ import { CLASS_NAME } from '../constants';
 export class CardKpiValueDirective implements OnInit, CssClassBuilder {
     /** @hidden */
     class: string;
+
+    /** Set type of KPI value. eg: 'positive', 'negative', 'critical', 'informative' */
+    @Input()
+    status: KpiStatus;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef<HTMLElement>) {}
@@ -23,7 +29,7 @@ export class CardKpiValueDirective implements OnInit, CssClassBuilder {
     @applyCssClass
     /** @hidden */
     buildComponentCssClass(): string[] {
-        return [CLASS_NAME.cardAnalyticsKpiValue];
+        return [CLASS_NAME.cardAnalyticsKpiValue, this.status ? `${CLASS_NAME.cardAnalyticsKpiValue}--${this.status}` : ''];
     }
 
     /** @hidden */
