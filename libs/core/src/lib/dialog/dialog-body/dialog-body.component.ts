@@ -26,4 +26,9 @@ export class DialogBodyComponent {
         @Optional() public dialogConfig: DialogConfig,
         @Optional() public dialogRef: DialogRef
     ) {}
+
+    /** @hidden */
+    elementRef(): ElementRef<any> {
+        return this._elRef;
+    }
 }

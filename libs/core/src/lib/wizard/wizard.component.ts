@@ -9,6 +9,7 @@ import {
     HostListener,
     Input,
     OnDestroy,
+    Optional,
     QueryList,
     TemplateRef,
     ViewChild,
@@ -19,6 +20,7 @@ import { Subscription } from 'rxjs';
 import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progress-bar.directive';
 import { scrollTop } from '../utils/functions/scroll';
 import { ACTIVE_STEP_STATUS, CURRENT_STEP_STATUS, UPCOMING_STEP_STATUS, COMPLETED_STEP_STATUS } from './constants';
+import { DialogBodyComponent } from '../dialog/dialog-body/dialog-body.component';
 
 export const STEP_MIN_WIDTH = 168;
 export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';
@@ -93,7 +95,11 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _previousWidth: number;
 
-    constructor(private _elRef: ElementRef, private readonly _cdRef: ChangeDetectorRef) {}
+    constructor(
+        private _elRef: ElementRef,
+        private readonly _cdRef: ChangeDetectorRef,
+        @Optional() private _dialogBodyComponent: DialogBodyComponent
+    ) {}
 
     /** @hidden */
     @HostListener('window:resize')
@@ -198,18 +204,21 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _getDialogOffset(): number {
-        const dialogBody = this._elRef.nativeElement.parentElement;
         let retVal = 0;
-        if (dialogBody.tagName.toLowerCase() === 'fd-dialog-body') {
-            const dialogBodyStyle = this._elRef.nativeElement.parentElement.style;
-            dialogBodyStyle.paddingTop = '0';
-            dialogBodyStyle.paddingBottom = '0';
-            dialogBodyStyle.overflowY = 'hidden';
-            if (dialogBody.querySelector('.' + 'fd-title--h2')) {
-                retVal = dialogBody.querySelector('.' + 'fd-title--h2').offsetHeight;
+        if (this._dialogBodyComponent) {
+            const dialogBody = this._dialogBodyComponent.elementRef().nativeElement;
+            if (dialogBody.tagName.toLowerCase() === 'fd-dialog-body') {
+                const dialogBodyStyle = dialogBody.style;
+                dialogBodyStyle.paddingTop = '0';
+                dialogBodyStyle.paddingBottom = '0';
+                dialogBodyStyle.overflowY = 'hidden';
+                if (dialogBody.querySelector('.' + 'fd-title--h2')) {
+                    retVal = dialogBody.querySelector('.' + 'fd-title--h2').offsetHeight;
+                }
+                retVal = retVal + window.innerHeight - dialogBody.offsetHeight;
             }
-            retVal = retVal + window.innerHeight - dialogBody.offsetHeight;
         }
+
         return retVal;
     }
 
