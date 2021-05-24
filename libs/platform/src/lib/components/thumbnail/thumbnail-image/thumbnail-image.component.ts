@@ -26,6 +26,8 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     @Output()
     thumbnailClicked: EventEmitter<Media> = new EventEmitter();
 
+    moreLabel: string;
+
     /** @hidden */
     constructor(protected _changeDetectorRef: ChangeDetectorRef, private _dialogService: DialogService, private _rtlService: RtlService) { }
 
@@ -83,6 +85,8 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     private _setOverlay(): void {
         if (this.mediaList.length > this.maxImages) {
             this.mediaList[this.maxImages - 1].overlayRequired = true;
+            const rem  = this.mediaList.length - this.maxImages;
+            this.moreLabel = rem + 'more';
         }
     }
 
