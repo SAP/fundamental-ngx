@@ -19,26 +19,24 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { PopoverComponent } from '../popover/popover.component';
-import { MenuKeyboardService } from '../menu/menu-keyboard.service';
-import { FormStates } from '../form/form-control/form-states';
-import {
-    applyCssClass,
-    RtlService,
-    ContentDensityService,
-    CssClassBuilder,
-    DynamicComponentService,
-    FocusEscapeDirection
-} from '../utils/public_api';
-import { KeyUtil } from '../utils/functions';
-import { PopoverFillMode } from '../popover/popover-position/popover-position';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
+import { FormStates } from '@fundamental-ngx/core/shared';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
-import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 import { Subscription } from 'rxjs';
-import { TokenizerComponent } from '../token/tokenizer.component';
-import { ListComponent } from '../list/list.component';
+import { TokenizerComponent } from '@fundamental-ngx/core/token';
+import { ListComponent } from '@fundamental-ngx/core/list';
 import { DOWN_ARROW, TAB, SPACE, ENTER } from '@angular/cdk/keycodes';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { FocusEscapeDirection } from '@fundamental-ngx/core/utils';
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a

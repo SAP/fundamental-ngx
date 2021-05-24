@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
-import { whenStable } from '../utils/tests/when-stable';
+import { whenStable } from '@fundamental-ngx/core/tests';
 
 import { FlexibleColumnLayoutModule } from './flexible-column-layout.module';
 import { FlexibleColumnLayoutComponent } from './flexible-column-layout.component';
@@ -25,8 +25,8 @@ declare var viewport: any;
 
 @Component({
     template: `
-        <fd-flexible-column-layout 
-            [(layout)]="layout" 
+        <fd-flexible-column-layout
+            [(layout)]="layout"
             [backgroundDesign] = "backgroundDesign">
                 <ng-template #startColumn>
                     <div style="height: 800px;">

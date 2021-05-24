@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { DynamicPageBaseActions } from './dynamic-page-base-actions';
 import { CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
-import { ToolbarComponent } from '../../../toolbar/toolbar.component';
+import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
 
 @Component({
     selector: 'fd-dynamic-page-global-actions',

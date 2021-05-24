@@ -21,10 +21,10 @@ import { startWith, takeUntil } from 'rxjs/operators';
 import {
     FocusEscapeDirection,
     KeyboardSupportService
-} from '../utils/services/keyboard-support/keyboard-support.service';
+} from '@fundamental-ngx/core/utils';
 import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
 import { ListFocusItem } from './list-focus-item.model';
-import { ContentDensityService } from '../utils/public_api';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 type FocusItem = ListGroupHeaderDirective | ListItemComponent;
 /**
@@ -40,7 +40,7 @@ type FocusItem = ListGroupHeaderDirective | ListItemComponent;
         role: 'list',
         tabindex: '0'
     },
-    styleUrls: ['./list.component.scss', '../utils/drag-and-drop/drag-and-drop.scss'],
+    styleUrls: ['./list.component.scss', '../../utils/src/drag-and-drop/drag-and-drop.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [KeyboardSupportService]

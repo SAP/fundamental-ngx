@@ -25,7 +25,7 @@ let gridListUniqueId = 0;
 @Component({
     selector: 'fd-grid-list',
     templateUrl: './grid-list.component.html',
-    styleUrls: ['./grid-list.component.scss', '../../../utils/drag-and-drop/drag-and-drop.scss'],
+    styleUrls: ['./grid-list.component.scss', '../../../../utils/src/drag-and-drop/drag-and-drop.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [GridListSelectionService],
     changeDetection: ChangeDetectionStrategy.OnPush

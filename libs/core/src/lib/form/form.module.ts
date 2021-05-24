@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PopoverModule } from '../popover/popover.module';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { FieldSetModule } from './fieldset/fieldset.module';
 import { FormControlModule } from './form-control/form-control.module';
 import { FormItemModule } from './form-item/form-item.module';

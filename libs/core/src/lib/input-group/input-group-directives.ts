@@ -11,9 +11,11 @@ import {
     Renderer2
 } from '@angular/core';
 import { InputGroupPlacement } from './input-group.component';
-import { FormStates } from '../form/form-control/form-states';
-import { applyCssClass, ContentDensityService, CssClassBuilder } from '../utils/public_api';
+import { FormStates } from '@fundamental-ngx/core/shared';
 import { Subscription } from 'rxjs';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
 
 @Directive({
     // tslint:disable-next-line:directive-selector

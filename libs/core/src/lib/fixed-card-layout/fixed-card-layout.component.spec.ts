@@ -6,7 +6,7 @@ import { CardModule } from '../card/card.module';
 import { RtlService } from '../utils/services/rtl.service';
 
 import { FixedCardLayoutComponent, CardDefinitionDirective } from './fixed-card-layout.component';
-import { whenStable } from './../utils/tests/when-stable';
+import { whenStable } from '@fundamental-ngx/core/tests';
 @Component({
     template: `
         <div>

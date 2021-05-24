@@ -1,6 +1,5 @@
 export * from './list.module';
 export * from './list-item/list-item.component';
-export * from './list-item/list-item-utils';
 export * from './list-message.directive';
 export * from './directives/list-footer.directive';
 export * from './directives/list-group-header.directive';

@@ -13,3 +13,4 @@ export * from './default-menu-item.class';
 export * from './menu-keyboard.service';
 export * from './menu.component';
 export * from './menu-mobile/menu-mobile.module';
+export * from './menu-mobile/menu-mobile.component';

@@ -1,25 +1,519 @@
 {
-    "npmScope": "fundamental-ngx",
-    "implicitDependencies": {
-        "angular.json": "*",
-        "package.json": "*",
-        "tsconfig.json": "*",
-        "tslint.json": "*",
-        "nx.json": "*"
-    },
-    "projects": {
-        "docs": {
-            "tags": ["fd"]
-        },
-        "docs-e2e": {
-            "tags": [],
-            "implicitDependencies": ["docs"]
-        },
-        "core": {
-            "tags": ["fd"]
-        },
-        "platform": {
-            "tags": ["fdp"]
-        }
+  "npmScope": "fundamental-ngx",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "affected": { "defaultBase": "main" },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "strictlyOrderedTargets": ["build", "lint", "test", "e2e"],
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
     }
+  },
+  "projects": {
+    "docs": {
+      "tags": ["fd"],
+      "implicitDependencies": ["core", "platform"]
+    },
+    "docs-e2e": {
+      "tags": [],
+      "implicitDependencies": ["docs"]
+    },
+    "core": {
+      "tags": ["fd"],
+      "implicitDependencies": ["fundamental-ngx"]
+    },
+    "fundamental-ngx": {
+      "tags": [],
+      "implicitDependencies": [
+        "icon",
+        "button",
+        "checkbox",
+        "dialog",
+        "action-bar",
+        "action-sheet",
+        "alert",
+        "avatar",
+        "avatar-group",
+        "bar",
+        "busy-indicator",
+        "calendar",
+        "card",
+        "carousel",
+        "combobox",
+        "date-picker",
+        "datetime",
+        "datetime-picker",
+        "dynamic-page",
+        "dynamic-side-content",
+        "facets",
+        "feed-input",
+        "feed-list-item",
+        "file-uploader",
+        "fixed-card-layout",
+        "flexible-column-layout",
+        "form",
+        "formatted-text",
+        "grid-list",
+        "illustrated-message",
+        "infinite-scroll",
+        "info-label",
+        "inline-help",
+        "input-group",
+        "layout-grid",
+        "layout-panel",
+        "link",
+        "list",
+        "menu",
+        "message-box",
+        "message-strip",
+        "notification",
+        "object-identifier",
+        "object-marker",
+        "object-number",
+        "object-status",
+        "pagination",
+        "panel",
+        "popover",
+        "product-switch",
+        "quick-view",
+        "radio",
+        "rating-indicator",
+        "scroll-spy",
+        "segmented-button",
+        "select",
+        "shared",
+        "shellbar",
+        "side-navigation",
+        "slider",
+        "split-button",
+        "status-indicator",
+        "step-input",
+        "switch",
+        "table",
+        "tabs",
+        "text",
+        "tile",
+        "time",
+        "time-picker",
+        "title",
+        "token",
+        "toolbar",
+        "utils",
+        "message-toast",
+        "multi-input",
+        "wizard",
+        "tree"
+      ]
+    },
+    "platform": {
+      "tags": ["fdp"]
+    },
+    "icon": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "button": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "checkbox": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "action-bar": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "action-sheet": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "popover", "button"]
+    },
+    "alert": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "button"]
+    },
+    "avatar": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "avatar-group": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "bar": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "button"]
+    },
+    "breadcrumb": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "menu", "popover"]
+    },
+    "busy-indicator": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "calendar": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "card": {
+      "tags": ["fd"],
+      "implicitDependencies": [
+        "utils",
+        "shared",
+        "avatar",
+        "object-status",
+        "button"
+      ]
+    },
+    "carousel": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "combobox": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "list", "menu"]
+    },
+    "date-picker": {
+      "tags": ["fd"],
+      "implicitDependencies": [
+        "utils",
+        "shared",
+        "calendar",
+        "form",
+        "icon",
+        "popover",
+        "input-group",
+        "button"
+      ]
+    },
+    "datetime": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "datetime-picker": {
+      "tags": ["fd"],
+      "implicitDependencies": [
+        "utils",
+        "shared",
+        "datetime",
+        "calendar",
+        "form",
+        "time"
+      ]
+    },
+    "dialog": {
+      "tags": ["fd"],
+      "implicitDependencies": [
+        "title",
+        "bar",
+        "button",
+        "busy-indicator",
+        "utils",
+        "shared"
+      ]
+    },
+    "dynamic-page": {
+      "tags": ["fd"],
+      "implicitDependencies": [
+        "utils",
+        "shared",
+        "toolbar",
+        "breadcrumb",
+        "tabs"
+      ]
+    },
+    "dynamic-side-content": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "facets": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "form"]
+    },
+    "feed-input": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "avatar", "form"]
+    },
+    "feed-list-item": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "file-uploader": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "form", "button"]
+    },
+    "fixed-card-layout": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "flexible-column-layout": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "form": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "inline-help"]
+    },
+    "formatted-text": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "grid-list": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "toolbar", "form"]
+    },
+    "illustrated-message": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "infinite-scroll": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "info-label": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "inline-help": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "input-group": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "layout-grid": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "layout-panel": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "link": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "list": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "form", "checkbox"]
+    },
+    "menu": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "list"]
+    },
+    "message-box": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "message-strip": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "message-page": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "message-toast": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "multi-input": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "nested-list": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "menu", "popover", "icon"]
+    },
+    "notification": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "object-identifier": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "link"]
+    },
+    "object-marker": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "object-number": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "object-status": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "pagination": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "select"]
+    },
+    "panel": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "popover": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "product-switch": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "menu", "popover"]
+    },
+    "quick-view": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "form", "popover"]
+    },
+    "radio": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "rating-indicator": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "popover"]
+    },
+    "scroll-spy": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "segmented-button": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "select": {
+      "tags": ["fd"],
+      "implicitDependencies": [
+        "utils",
+        "shared",
+        "popover",
+        "list",
+        "busy-indicator"
+      ]
+    },
+    "shellbar": {
+      "tags": ["fd"],
+      "implicitDependencies": [
+        "utils",
+        "shared",
+        "combobox",
+        "menu",
+        "product-switch",
+        "popover",
+        "avatar"
+      ]
+    },
+    "side-navigation": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "nested-list"]
+    },
+    "slider": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "popover"]
+    },
+    "split-button": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "menu"]
+    },
+    "status-indicator": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "step-input": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "switch": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "table": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "checkbox"]
+    },
+    "tabs": {
+      "tags": ["fd"],
+      "implicitDependencies": [
+        "utils",
+        "shared",
+        "scroll-spy",
+        "popover",
+        "menu",
+        "icon",
+        "checkbox"
+      ]
+    },
+    "text": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "link"]
+    },
+    "tile": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "time": {
+      "tags": ["fd"],
+      "implicitDependencies": [
+        "utils",
+        "shared",
+        "carousel",
+        "datetime",
+        "form"
+      ]
+    },
+    "time-picker": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "time", "popover"]
+    },
+    "title": {
+      "tags": ["fd"],
+      "implicitDependencies": ["icon", "utils"]
+    },
+    "token": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "input-group", "form"]
+    },
+    "toolbar": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "popover"]
+    },
+    "tree": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils"]
+    },
+    "wizard": {
+      "tags": ["fd"],
+      "implicitDependencies": [
+        "utils",
+        "shared",
+        "dialog",
+        "mobile-mode",
+        "action-sheet"
+      ]
+    },
+    "mobile-mode": {
+      "tags": ["fd"],
+      "implicitDependencies": ["utils", "dialog"]
+    },
+    "utils": {
+      "tags": ["fd"]
+    },
+    "shared": {
+      "tags": ["fd"]
+    },
+    "tests": {
+      "tags": ["fd"],
+      "implicitDependencies": ["mobile-mode"]
+    }
+  }
 }

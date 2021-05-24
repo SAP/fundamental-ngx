@@ -16,13 +16,12 @@ import {
 import { CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { addClassNameToElement } from '../../utils';
-import { BreadcrumbComponent } from '../../../breadcrumb/breadcrumb.component';
+import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
 import { DynamicPageGlobalActionsComponent } from '../actions/dynamic-page-global-actions.component';
 import { DynamicPageTitleContentComponent } from '../actions/dynamic-page-title-content.component';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { FocusMonitor } from '@angular/cdk/a11y';
 
 export const ActionSquashBreakpointPx = 1280;
 

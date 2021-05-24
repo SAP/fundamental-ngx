@@ -14,8 +14,6 @@ import {
 } from '@angular/core';
 import { startWith } from 'rxjs/operators';
 
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
-
 import {
     CLASS_NAME,
     DynamicSideContentPosition,
@@ -25,6 +23,8 @@ import {
 import { getPositionClassName, getSizeClassName } from './utils';
 import { DynamicSideContentMainComponent } from './dynamic-side-content-main.component';
 import { DynamicSideContentSideComponent } from './dynamic-side-content-side.component';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
 
 let componentId = 0;
 
