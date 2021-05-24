@@ -88,7 +88,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     stackedStepsRight: WizardStepComponent[] = [];
 
     /** @hidden */
-    private _subscriptions: Subscription = new Subscription();
+    private _stepEventSubscriptions: Subscription = new Subscription();
+
+    /** @hidden */
+    private _stepListChangesSubscription: Subscription = new Subscription();
 
     /** @hidden */
     private _previousWidth: number;
@@ -119,14 +122,13 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         setTimeout(() => {
             // fixes ExpressionChangedAfterItHasBeenCheckedError
             this._setContentTemplates();
-            this._subscriptions.add(
+            this._stepListChangesSubscription.add(
                 this.steps.changes.subscribe(() => {
                     this._handleStepOrStatusChanges();
+                    this._setupStepEvents();
                 })
             );
-            this.steps.forEach((step) => {
-                this._setupStepEvents(step);
-            });
+            this._setupStepEvents();
             this._cdRef.detectChanges();
             this._handleStepOrStatusChanges();
             this.resizeHandler();
@@ -135,7 +137,8 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
+        this._stepEventSubscriptions.unsubscribe();
+        this._stepListChangesSubscription.unsubscribe();
         this.wrapperContainer.nativeElement.removeEventListener('scroll', handleTimeoutReference);
     }
 
@@ -234,26 +237,30 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     }
 
     /** @hidden */
-    private _setupStepEvents(step: WizardStepComponent): void {
-        this._subscriptions.add(
-            step.stepClicked.subscribe((event) => {
-                this._stepClicked(event);
-            })
-        );
-        this._subscriptions.add(
-            step.statusChange.subscribe(() => {
-                this._handleStepOrStatusChanges();
-            })
-        );
-        this._subscriptions.add(
-            step.stepIndicatorItemClicked.subscribe((event) => {
-                this._stepClicked(event);
-            })
-        );
-        // need to call wizardShrinking for each step < 168px on first load
-        if (step.wizardLabel && step.getStepClientWidth() < STEP_MIN_WIDTH) {
-            this._wizardShrinking();
-        }
+    private _setupStepEvents(): void {
+        this._stepEventSubscriptions.unsubscribe();
+        this._stepEventSubscriptions = new Subscription();
+        this.steps.forEach(step => {
+            this._stepEventSubscriptions.add(
+                step.stepClicked.subscribe((event) => {
+                    this._stepClicked(event);
+                })
+            );
+            this._stepEventSubscriptions.add(
+                step.statusChange.subscribe(() => {
+                    this._handleStepOrStatusChanges();
+                })
+            );
+            this._stepEventSubscriptions.add(
+                step.stepIndicatorItemClicked.subscribe((event) => {
+                    this._stepClicked(event);
+                })
+            );
+            // need to call wizardShrinking for each step < 168px on first load
+            if (step.wizardLabel && step.getStepClientWidth() < STEP_MIN_WIDTH) {
+                this._wizardShrinking();
+            }
+        });
     }
 
     /** @hidden */
@@ -307,9 +314,6 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 }
                 if (!templatesLength || (!this.appendToWizard && step.status === CURRENT_STEP_STATUS)) {
                     this.contentTemplates = [step.content.contentTemplate];
-                    if (!this.appendToWizard && step.status === CURRENT_STEP_STATUS) {
-                        break;
-                    }
                 } else if (this.appendToWizard && !step.isSummary) {
                     this.contentTemplates.push(step.content.contentTemplate);
                 }
