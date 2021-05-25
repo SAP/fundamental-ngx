@@ -4,7 +4,7 @@
             <ng-container [ngTemplateOutlet]="displayTextTemplate || showingItems" [ngTemplateOutletContext]="{ showing: currentShowing }"></ng-container>
         </span>
         <nav class="fd-pagination__nav" *ngIf="totalItems >= itemsPerPage">
-            <a
+            <div
                 class="fd-pagination__link fd-pagination__link--previous"
                 tabindex="0"
                 role="button"
@@ -14,23 +14,24 @@
                 (keypress)="onKeypressHandler(currentPage - 1, $event)"
                 (click)="previousPage()"
             >
-            </a>
+            </div>
             <div dir="ltr" class="fd-pagination-direction-override-display">
                 <ng-container *ngFor="let page of pages">
-                    <a
+                    <div
                         class="fd-pagination__link"
                         tabindex="0"
-                        role="button"
+                        role="option"
                         (keypress)="onKeypressHandler(page, $event)"
                         (click)="goToPage(page, $event)"
                         *ngIf="page !== -1; else more"
                         [attr.aria-selected]="currentPage === page"
+                        [attr.aria-label]="pageLabel + page"
                     >
                         {{ page }}
-                    </a>
+                    </div>
                 </ng-container>
             </div>
-            <a
+            <div
                 class="fd-pagination__link fd-pagination__link--next"
                 [title]="nextLabel"
                 [attr.aria-label]="nextLabel"
@@ -40,7 +41,7 @@
                 (keypress)="onKeypressHandler(currentPage + 1, $event)"
                 (click)="nextPage()"
             >
-            </a>
+            </div>
         </nav>
     </div>
     <div class="fd-pagination__per-page" *ngIf="itemsPerPageTemplate || itemsPerPageOptions && itemsPerPageOptions.length">
