@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.26...v0.30.1-rc.27) (2021-05-25)
+
+
+### Bug Fixes
+
+* (Core|Platform) dialog body min height (ie11 fix), table dialogs fixes ([#5463](https://github.com/SAP/fundamental-ngx/issues/5463)) ([4c28905](https://github.com/SAP/fundamental-ngx/commit/4c28905be8c7266c7db21544ccfd4f7b8f27d5fd))
+* (Platform) combobox group header not readable for accessibility ([#5206](https://github.com/SAP/fundamental-ngx/issues/5206)) ([61cf0d0](https://github.com/SAP/fundamental-ngx/commit/61cf0d0b23baaa5d5f3107e40ccdc7183dbd0f2d))
+
 ### [0.30.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.25...v0.30.1-rc.26) (2021-05-25)
 
 
