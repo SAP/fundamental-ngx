@@ -54,9 +54,6 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         this._changeDetectorRef.detectChanges();
     }
 
-
-
-
     /** Opens the Dialog when the imgaes croses the maximum number of images to display */
     openDialog(selectedMedia: Media, mediaList: Media[]): void {
         this.mediaList.forEach(item => item.selected = false);
