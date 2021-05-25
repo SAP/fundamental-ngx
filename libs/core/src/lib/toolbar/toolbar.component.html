@@ -1,6 +1,6 @@
 <div #toolbar>
     <ng-content></ng-content>
-    <span #overflowSpacer></span>
+    <span #overflowSpacer class="fd-toolbar__overflow-spacer"></span>
     <ng-container *ngIf="shouldOverflow">
         <fd-popover
                 placement="bottom-end"
