@@ -10,7 +10,7 @@
         tabindex="0"
         [attr.aria-selected]="image.selected"
         [attr.title]="image.label"
-        [attr.aria-label]="image.overlayRequired ? moreLabel:image.label"
+        [attr.aria-label]="image.overlayRequired ? dynamicMoreLabel:image.label"
     >
         <fd-avatar [image]="image.thumbnailUrl" size="m"></fd-avatar>
         <div class="fdp-thumbnail-overflow" *ngIf="image.overlayRequired">+{{ mediaList.length - maxImages }}</div>

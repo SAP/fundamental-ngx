@@ -18,15 +18,21 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     @Input()
     isHorizontal = false;
 
-    /**Maximum limit for the thumbnail images to display */
+    /** Maximum limit for the thumbnail images to display */
     @Input()
     maxImages = 5;
+
+
+    /** More Label  */
+    @Input()
+    moreLabel = 'More';
 
     /** Output event for thumbnail image click */
     @Output()
     thumbnailClicked: EventEmitter<Media> = new EventEmitter();
 
-    moreLabel: string;
+   /** Specifies the dynamic label when total images is more than max display image */
+    dynamicMoreLabel: string;
 
     /** @hidden */
     constructor(protected _changeDetectorRef: ChangeDetectorRef, private _dialogService: DialogService, private _rtlService: RtlService) { }
@@ -86,7 +92,7 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         if (this.mediaList.length > this.maxImages) {
             this.mediaList[this.maxImages - 1].overlayRequired = true;
             const rem  = this.mediaList.length - this.maxImages;
-            this.moreLabel = rem + 'more';
+            this.dynamicMoreLabel = rem + this.moreLabel;
         }
     }
 
