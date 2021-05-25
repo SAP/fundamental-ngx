@@ -5,8 +5,7 @@ import {
     getElementArrayLength,
     getElementClass,
     getText,
-    isElementDisplayed,
-    pause,
+    isElementDisplayed
 } from '../../driver/wdio';
 import {
     iconsArr, buttonClassArr
