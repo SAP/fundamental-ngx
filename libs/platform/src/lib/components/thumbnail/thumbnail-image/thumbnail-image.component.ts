@@ -71,8 +71,6 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         });
     }
 
-
-
     /** @hidden */
     thumbnailClick(selectedMedia: Media): void {
         this.mediaList.forEach(item => item.selected = false);
