@@ -20,15 +20,11 @@
   "projects": {
     "docs": {
       "tags": ["fd"],
-      "implicitDependencies": ["core", "platform"]
+      "implicitDependencies": ["platform"]
     },
     "docs-e2e": {
       "tags": [],
       "implicitDependencies": ["docs"]
-    },
-    "core": {
-      "tags": ["fd"],
-      "implicitDependencies": ["fundamental-ngx"]
     },
     "fundamental-ngx": {
       "tags": [],
@@ -506,7 +502,7 @@
       "implicitDependencies": ["utils", "dialog"]
     },
     "utils": {
-      "tags": ["fd"]
+      "tags": []
     },
     "shared": {
       "tags": ["fd"]

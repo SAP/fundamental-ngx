@@ -281,7 +281,7 @@ exports.config = {
      */
     before: function() {
         require('ts-node').register({
-            project: 'e2e/tsconfig.json'
+            project: 'e2e/tsconfig.base.json'
         });
 
         browser.addCommand('focus', function() {
