@@ -308,8 +308,8 @@ describe('Approval flow', function() {
             click(editExampleButton);
             waitForElDisplayed(approvalFlowNodeCheckbox);
             click(approvalFlowNodeCheckbox, 1);
-            waitForElDisplayed(topActionButtons, 2);
-            click(topActionButtons, 2);
+            waitForElDisplayed(topActionButtons, 3);
+            click(topActionButtons, 3);
             const approvalFlowNodeCountAfterRemove = getElementArrayLength(approvalFlowNode);
 
             expect(approvalFlowNodeCountBefore).toEqual(approvalFlowNodeCountAfterRemove + 1);
