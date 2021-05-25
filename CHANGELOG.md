@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.27...v0.30.1-rc.28) (2021-05-25)
+
+
+### Bug Fixes
+
+* (Core) allow for conditionally adding steps to a wizard via *ngIf ([#5456](https://github.com/SAP/fundamental-ngx/issues/5456)) ([2e71ae7](https://github.com/SAP/fundamental-ngx/commit/2e71ae70ae1dc7cdd3f91d00d431ed1fbc2a3b48))
+* (Core) do not use fdScrollSpy when appendToWizard=false ([#5454](https://github.com/SAP/fundamental-ngx/issues/5454)) ([008b103](https://github.com/SAP/fundamental-ngx/commit/008b1035405e48bccd5205f3bb0820aef70d071e))
+* (Core) remove wizard padding logic from dialog body component ([#5437](https://github.com/SAP/fundamental-ngx/issues/5437)) ([74cde8b](https://github.com/SAP/fundamental-ngx/commit/74cde8bc5003b3160b35bafaf99aa587399a3ca2))
+
 ### [0.30.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.26...v0.30.1-rc.27) (2021-05-25)
 
 
