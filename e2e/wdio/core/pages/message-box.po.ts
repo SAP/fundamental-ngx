@@ -21,7 +21,6 @@ export class MessageBoxPo extends CoreBaseComponentPo {
     resultTxt = 'p';
     messageIcon = this.messageBoxExample + 'fd-message-box-semantic-icon > i';
 
-
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);

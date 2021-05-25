@@ -5,7 +5,7 @@ export const iconsArr = [
     'message-warning',
     'message-success',
     'thumb-up'
-];
+]; 
 
 export const buttonClassArr = [
     'standard',
