@@ -663,11 +663,7 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
     private _refreshWeekCount(): string[] {
         const calendarDayList = this.calendarDayList;
         const weekNumbers: string[] = [];
-        for (let index = 6; index < calendarDayList.length; index = index + 7) {
-            console.log('calendar day index: ', index);
-            console.log('calendar list: ', calendarDayList);
-            console.log('calendar day list by index: ', calendarDayList[index].date);
-            console.log('push: ', this._dateTimeAdapter.getWeekName(calendarDayList[index].date));
+        for (let index = 0; index < calendarDayList.length; index = index + 7) {
             weekNumbers.push(this._dateTimeAdapter.getWeekName(calendarDayList[index].date));
         }
         

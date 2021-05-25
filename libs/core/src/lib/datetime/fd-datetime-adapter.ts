@@ -4,6 +4,7 @@ import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 import { LETTERS_UNICODE_RANGE } from '../utils/consts/unicode-letters.regex';
 
 import { DatetimeAdapter } from './datetime-adapter';
+import { MonthLocaleType } from './datetime-formats';
 import { FdDate } from './fd-date';
 import { range, toIso8601 } from './fd-date.utils';
 
@@ -73,7 +74,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         );
     }
 
-    getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
+    getMonthNames(style: MonthLocaleType): string[] {
         const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { month: style, timeZone: 'utc' });
         return range(12, (i) =>
             this._stripDirectionalityCharacters(this._format(dateTimeFormat, new Date(2017, i, 1)))
@@ -87,7 +88,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         );
     }
 
-    getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
+    getDayOfWeekNames(style: MonthLocaleType): string[] {
         const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { weekday: style, timeZone: 'utc' });
         return range(7, (i) =>
             this._stripDirectionalityCharacters(this._format(dateTimeFormat, new Date(2017, 0, i + 1)))

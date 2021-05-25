@@ -8,6 +8,7 @@
  */
 
 import { Observable, Subject } from 'rxjs';
+import { MonthLocaleType } from './datetime-formats';
 
 export abstract class DatetimeAdapter<D> {
     /** current locale */
@@ -122,7 +123,7 @@ export abstract class DatetimeAdapter<D> {
      * @param style The naming style (e.g. long = 'January', short = 'Jan', narrow = 'J').
      * @returns An ordered list of all month names, starting with January.
      */
-    abstract getMonthNames(style: 'long' | 'short' | 'narrow'): string[];
+    abstract getMonthNames(style: MonthLocaleType): string[];
 
     /**
      * Gets a list of names for the dates of the month.
@@ -135,7 +136,7 @@ export abstract class DatetimeAdapter<D> {
      * @param style The naming style (e.g. long = 'Sunday', short = 'Sun', narrow = 'S').
      * @returns An ordered list of all weekday names, starting with Sunday.
      */
-    abstract getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[];
+    abstract getDayOfWeekNames(style: MonthLocaleType): string[];
    
     /**
      * Gets the name for the year of the given date.

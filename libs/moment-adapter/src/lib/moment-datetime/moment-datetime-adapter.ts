@@ -1,6 +1,6 @@
 import { Inject, Injectable, InjectionToken, LOCALE_ID, Optional } from '@angular/core';
 import moment, { Locale, LongDateFormatSpec, Moment, MomentFormatSpecification, MomentInput } from 'moment';
-import { DatetimeAdapter, DateLocale } from '@fundamental-ngx/core';
+import { DatetimeAdapter, DateLocale, MonthLocaleType } from '@fundamental-ngx/core';
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
     return Array.from(new Array(length)).map((_, index) => mapFn(index));
@@ -53,8 +53,6 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
             narrowDaysOfWeek: this._momentLocaleData.weekdaysMin()
         };
 
-        console.log('locale data fdw: ', this._localeData.firstDayOfWeek);
-
         super.setLocale(locale);
     }
 
@@ -102,7 +100,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
         return this.clone(date).week();
     };
 
-    getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
+    getMonthNames(style: MonthLocaleType): string[] {
         switch (style) {
             case 'narrow':
                 return this._localeData.narrowMonths;
@@ -118,7 +116,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
         return range(31, (i) => this.createDate(2017, 0, i + 1).format('D'));
     };
 
-    getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
+    getDayOfWeekNames(style: MonthLocaleType): string[] {
         switch (style) {
             case 'narrow':
                 return this._localeData.narrowDaysOfWeek;

@@ -218,6 +218,9 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     private _subscriptions = new Subscription();
 
     /** @hidden */
+    private adapterStartingDayOfWeek: DaysOfWeek;
+
+    /** @hidden */
     onChange: (_: D | DateRange<D>) => void = () => {};
 
     /** @hidden */
@@ -273,19 +276,16 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
             throw createMissingDateImplementationError('DATE_TIME_FORMATS');
         }
 
-        // set default value
-        this.startingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
+        this.adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
         this.selectedDate = this._dateTimeAdapter.today();
         this._changeDetectorRef.markForCheck();
         this._listenToLocaleChanges();
     }
 
-    
     /** @hidden */
     private _listenToLocaleChanges(): void {
         this._dateTimeAdapter.localeChanges.subscribe(() => {
-            // set default value
-            this.startingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
+            this.adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
             this._changeDetectorRef.markForCheck();
         });
     }
@@ -294,9 +294,11 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     ngOnInit(): void {
         this._prepareDisplayedView();
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                })
+            );
         }
     }
 
@@ -529,6 +531,10 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
         this.activeView = 'year';
         this.currentlyDisplayed.year = yearsSelected.startYear;
         this._changeDetectorRef.detectChanges();
+    }
+
+    getWeekStartDay(): DaysOfWeek {
+        return this.startingDayOfWeek === undefined ? this.adapterStartingDayOfWeek : this.startingDayOfWeek;
     }
 
     /** Method that provides information if model selected date/dates have properly types and are valid */
