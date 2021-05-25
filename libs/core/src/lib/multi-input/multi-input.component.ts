@@ -294,12 +294,12 @@ export class MultiInputComponent implements
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
         }
-        if (this._rtlService) {
-            this._subscriptions.add(this._rtlService.rtl.subscribe(isRtl => {
+        this._subscriptions.add(
+            this._rtlService?.rtl.subscribe(isRtl => {
                 this._dir = isRtl ? 'rtl' : 'ltr';
                 this.buildComponentCssClass();
-            }));
-        }
+            })
+        );
     }
 
     /** @hidden */
