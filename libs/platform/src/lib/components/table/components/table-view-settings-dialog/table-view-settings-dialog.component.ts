@@ -28,7 +28,9 @@ const dialogConfig: DialogConfig = {
     responsivePadding: false,
     verticalPadding: false,
     minWidth: '30%',
-    minHeight: '50%'
+    minHeight: '50%',
+    /** 88px it's the header + footer height */
+    bodyMinHeight: 'calc(50vh - 88px)'
 };
 
 /**
