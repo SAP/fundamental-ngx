@@ -17,7 +17,8 @@ import { WizardComponent } from '../../wizard/wizard.component';
     templateUrl: 'dialog-body.component.html',
     host: {
         '[class.fd-dialog__body]': 'true',
-        '[class.fd-dialog__body--no-vertical-padding]': '!dialogConfig.verticalPadding'
+        '[class.fd-dialog__body--no-vertical-padding]': '!dialogConfig.verticalPadding',
+        '[style.min-height]': 'dialogConfig.bodyMinHeight'
     }
 })
 export class DialogBodyComponent implements AfterContentInit {
