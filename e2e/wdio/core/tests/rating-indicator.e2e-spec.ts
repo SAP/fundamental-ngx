@@ -47,7 +47,7 @@ describe('Rating indicator test suite', function() {
         it('verify that star is disabled', () => {
             const lengthOfStars = getElementArrayLength(starsRatingDisplayMode);
             for (let i = 1; i < lengthOfStars; i++) {
-                expect(isElementClickable(starsRatingDisplayMode, i)).toBe(false, `${starsRatingDisplayMode} not clickable`);
+                expect(isElementClickable(starsRatingDisplayMode, i)).toBe(false, `${starsRatingDisplayMode} ${i} not clickable`);
             }
         });
     });
@@ -55,11 +55,11 @@ describe('Rating indicator test suite', function() {
     describe('Test dynamic changes', function() {
 
         it('verify that amount of stars changed', () => {
-            const numOfSize = 7;
+            const starCount = 7;
             scrollIntoView(inputsDynamicChanges);
-            setValue(inputsDynamicChanges, numOfSize + '');
-            const lengthOfStars = getElementArrayLength(starsRatingDynamicChanges) - 1;
-            expect(lengthOfStars).toBe(numOfSize);
+            setValue(inputsDynamicChanges, starCount + '');
+            const starLength = getElementArrayLength(starsRatingDynamicChanges) - 1;
+            expect(starLength).toBe(starCount);
         });
 
         it('verify that it is allowed to select half of star', () => {
