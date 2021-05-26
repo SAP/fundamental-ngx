@@ -12,7 +12,8 @@ export class DialogStateExample {
         const dialogRef = this.dialogService.open(template, {
             width: '300px',
             responsivePadding: true,
-            data: 'This Dialog will be closed after 4s'
+            data: 'This Dialog will be closed after 4s',
+            ariaLabelledBy: 'fd-dialog-header-7'
         });
         setTimeout(() => dialogRef.close(), 4000);
     }
@@ -21,7 +22,8 @@ export class DialogStateExample {
         const dialogRef = this.dialogService.open(template, {
             width: '300px',
             responsivePadding: true,
-            data: 'This Dialog will be dismissed after 4s'
+            data: 'This Dialog will be dismissed after 4s',
+            ariaLabelledBy: 'fd-dialog-header-7'
         });
         setTimeout(() => dialogRef.dismiss(), 4000);
     }
@@ -30,7 +32,8 @@ export class DialogStateExample {
         const dialogRef = this.dialogService.open(template, {
             width: '300px',
             responsivePadding: true,
-            data: 'This Dialog will be hidden after 4s'
+            data: 'This Dialog will be hidden after 4s',
+            ariaLabelledBy: 'fd-dialog-header-7'
         });
         setTimeout(() => dialogRef.hide(true), 4000);
     }
@@ -38,7 +41,8 @@ export class DialogStateExample {
     openLoadingDialog(template): void {
         const dialogRef = this.dialogService.open(template, {
             width: '300px',
-            responsivePadding: true
+            responsivePadding: true,
+            ariaLabelledBy: 'fd-dialog-header-7'
         });
         dialogRef.loading(true);
     }
