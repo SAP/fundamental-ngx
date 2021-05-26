@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.30...v0.30.1-rc.31) (2021-05-26)
+
+
+### Bug Fixes
+
+* (Platform) fix rtl mode for combobox secondary column ([#5466](https://github.com/SAP/fundamental-ngx/issues/5466)) ([9e68102](https://github.com/SAP/fundamental-ngx/commit/9e68102e505a2fb8e1dda4fc05989177a10a054b))
+
 ### [0.30.1-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.29...v0.30.1-rc.30) (2021-05-26)
 
 ### [0.30.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.28...v0.30.1-rc.29) (2021-05-25)
