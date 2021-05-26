@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.31...v0.30.1-rc.32) (2021-05-26)
+
+### [0.30.1-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.30...v0.30.1-rc.31) (2021-05-26)
+
+
+### Bug Fixes
+
+* (Platform) fix rtl mode for combobox secondary column ([#5466](https://github.com/SAP/fundamental-ngx/issues/5466)) ([9e68102](https://github.com/SAP/fundamental-ngx/commit/9e68102e505a2fb8e1dda4fc05989177a10a054b))
+
+### [0.30.1-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.29...v0.30.1-rc.30) (2021-05-26)
+
+### [0.30.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.28...v0.30.1-rc.29) (2021-05-25)
+
+### [0.30.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.27...v0.30.1-rc.28) (2021-05-25)
+
+
+### Bug Fixes
+
+* (Core) allow for conditionally adding steps to a wizard via *ngIf ([#5456](https://github.com/SAP/fundamental-ngx/issues/5456)) ([2e71ae7](https://github.com/SAP/fundamental-ngx/commit/2e71ae70ae1dc7cdd3f91d00d431ed1fbc2a3b48))
+* (Core) do not use fdScrollSpy when appendToWizard=false ([#5454](https://github.com/SAP/fundamental-ngx/issues/5454)) ([008b103](https://github.com/SAP/fundamental-ngx/commit/008b1035405e48bccd5205f3bb0820aef70d071e))
+* (Core) remove wizard padding logic from dialog body component ([#5437](https://github.com/SAP/fundamental-ngx/issues/5437)) ([74cde8b](https://github.com/SAP/fundamental-ngx/commit/74cde8bc5003b3160b35bafaf99aa587399a3ca2))
+
+### [0.30.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.26...v0.30.1-rc.27) (2021-05-25)
+
+
+### Bug Fixes
+
+* (Core|Platform) dialog body min height (ie11 fix), table dialogs fixes ([#5463](https://github.com/SAP/fundamental-ngx/issues/5463)) ([4c28905](https://github.com/SAP/fundamental-ngx/commit/4c28905be8c7266c7db21544ccfd4f7b8f27d5fd))
+* (Platform) combobox group header not readable for accessibility ([#5206](https://github.com/SAP/fundamental-ngx/issues/5206)) ([61cf0d0](https://github.com/SAP/fundamental-ngx/commit/61cf0d0b23baaa5d5f3107e40ccdc7183dbd0f2d))
+
 ### [0.30.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.25...v0.30.1-rc.26) (2021-05-25)
 
 

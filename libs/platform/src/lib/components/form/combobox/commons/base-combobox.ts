@@ -40,7 +40,6 @@ import {
     ListComponent,
     MobileModeConfig,
     TemplateDirective,
-    FormStates,
     closestElement
 } from '@fundamental-ngx/core';
 import {
@@ -148,7 +147,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** Horizontally align text inside the second column (Applicable for two columns layout) */
     @Input()
-    secondaryTextAlignment: TextAlignment = 'right';
+    secondaryTextAlignment: TextAlignment;
 
     /** Turns on/off Adjustable Width feature */
     @Input()

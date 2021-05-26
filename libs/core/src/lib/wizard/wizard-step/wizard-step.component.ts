@@ -172,12 +172,6 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     }
 
     /** @hidden */
-    wizardLabelClicked(event: MouseEvent): void {
-        event.preventDefault();
-        this.stepClicked.emit(this);
-    }
-
-    /** @hidden */
     getClassList(): DOMTokenList {
         return this._elRef.nativeElement.classList;
     }
