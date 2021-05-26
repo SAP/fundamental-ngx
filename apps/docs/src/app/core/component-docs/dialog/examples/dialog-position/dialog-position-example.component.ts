@@ -13,7 +13,7 @@ export class DialogPositionExampleComponent {
             width: '300px',
             responsivePadding: true,
             position: { bottom: '100px', right: '100px' },
-            ariaLabelledBy: 'fd-dialog-id-6'
+            ariaLabelledBy: 'fd-dialog-header-6'
         });
     }
 }

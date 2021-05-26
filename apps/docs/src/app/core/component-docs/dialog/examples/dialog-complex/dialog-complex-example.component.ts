@@ -46,7 +46,7 @@ export class DialogComplexExampleComponent {
             draggable: true,
             resizable: true,
             verticalPadding: false,
-            ariaLabelledBy: 'fd-dialog-id-3'
+            ariaLabelledBy: 'fd-dialog-header-3'
         });
         this.dialogRef.loading(true);
         setTimeout(() => this.dialogRef.loading(false), 2000);

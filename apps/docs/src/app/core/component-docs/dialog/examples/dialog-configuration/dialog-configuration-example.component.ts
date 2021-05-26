@@ -14,7 +14,7 @@ export class DialogConfigurationExample {
             draggable: true,
             responsivePadding: true,
             backdropClickCloseable: true,
-            ariaLabelledBy: 'fd-dialog-id-4'
+            ariaLabelledBy: 'fd-dialog-header-4'
         });
     }
 
@@ -24,7 +24,7 @@ export class DialogConfigurationExample {
             resizable: true,
             responsivePadding: true,
             backdropClickCloseable: true,
-            ariaLabelledBy: 'fd-dialog-id-4'
+            ariaLabelledBy: 'fd-dialog-header-4'
         });
     }
 
@@ -33,7 +33,7 @@ export class DialogConfigurationExample {
             width: '300px',
             escKeyCloseable: false,
             responsivePadding: true,
-            ariaLabelledBy: 'fd-dialog-id-4'
+            ariaLabelledBy: 'fd-dialog-header-4'
         });
     }
 }

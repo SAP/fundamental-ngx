@@ -29,7 +29,7 @@ export class ComponentBasedDialogExampleComponent {
                 ]
             },
             width: '400px',
-            ariaLabelledBy: 'fd-dialog-id-1'
+            ariaLabelledBy: 'fd-dialog-header-1'
         });
 
         dialogRef.afterClosed.subscribe(

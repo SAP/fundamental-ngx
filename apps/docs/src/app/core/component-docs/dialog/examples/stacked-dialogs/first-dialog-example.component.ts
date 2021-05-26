@@ -6,7 +6,7 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
     template: `
         <fd-dialog>
             <fd-dialog-header>
-                <h1 id="fd-dialog-id-8" fd-title>First Dialog</h1>
+                <h1 id="fd-dialog-header-8" fd-title>First Dialog</h1>
                 <button fd-dialog-close-button (click)="dialogRef.dismiss('x')"></button>
             </fd-dialog-header>
 
@@ -28,7 +28,7 @@ export class FirstDialogExampleComponent {
     openDialog(): void {
         this._dialogService.open(SecondDialogExampleComponent, {
             responsivePadding: true,
-            ariaLabelledBy: 'fd-dialog-id-9'
+            ariaLabelledBy: 'fd-dialog-header-9'
         });
     }
 }
