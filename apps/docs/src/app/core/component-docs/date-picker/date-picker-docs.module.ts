@@ -5,7 +5,8 @@ import {
     DatePickerModule,
     FormModule,
     InputGroupModule,
-    SegmentedButtonModule
+    SegmentedButtonModule,
+    PipeModule
 } from '@fundamental-ngx/core';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -45,7 +46,8 @@ const routes: Routes = [
         SegmentedButtonModule,
         InputGroupModule,
         FdDatetimeModule,
-        DatePickerModule
+        DatePickerModule,
+        PipeModule
     ],
     exports: [RouterModule],
     declarations: [
