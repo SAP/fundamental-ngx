@@ -14,5 +14,5 @@ export const buttonClassArr = [
     'attention',
     'positive',
     'positive',
-    'positive'
+    'positive' 
 ];

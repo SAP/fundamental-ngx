@@ -15,7 +15,7 @@ export class MessageBoxPo extends CoreBaseComponentPo {
     messageBoxExample = 'fd-message-box-container '
 
     messageBox = 'fd-message-box';
-    button = '.fd-button';
+    button = '.fd-button'; 
     okButton = 'fd-button-bar:nth-child(1)';
     cancelButton = 'fd-button-bar:nth-child(2)';
     resultTxt = 'p';

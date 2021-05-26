@@ -36,7 +36,7 @@ describe('Message-box test suits', function () {
 
     it('Should check status after closing message-box', () => {
         checkResult(basedObjectExample);
-        checkResult(openTemplateExample);
+        checkResult(openTemplateExample); 
         checkResult(basedComponentExample);
     })
 
