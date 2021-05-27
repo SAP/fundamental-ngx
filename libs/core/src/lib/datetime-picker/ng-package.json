@@ -1,6 +1,6 @@
 {
   "$schema": "../../../../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../../../../dist/@fundamental-ngx/core/datetime-picker",
+  "dest": "../../../../../dist/libs/core/datetime-picker",
   "lib": {
     "entryFile": "./public_api.ts"
   }

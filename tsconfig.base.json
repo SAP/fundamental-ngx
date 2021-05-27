@@ -19,602 +19,93 @@
     "paths": {
       "@fundamental-ngx/platform": ["libs/platform/src/index.ts"],
       "@fundamental-ngx/core": ["libs/core/src/lib/index.ts"],
-      "@fundamental-ngx/core/action-bar": [
-          "libs/core/src/lib/action-bar/action-bar/index.ts",
-          "libs/core/src/lib/action-bar/index.ts"
-      ],
-      "@fundamental-ngx/core/action-sheet": [
-          "libs/core/src/lib/action-sheet/action-sheet/index.ts",
-          "libs/core/src/lib/action-sheet/index.ts"
-      ],
-      "@fundamental-ngx/core/alert": [
-          "libs/core/src/lib/alert/alert/index.ts",
-          "libs/core/src/lib/alert/index.ts"
-      ],
-      "@fundamental-ngx/core/avatar": [
-          "libs/core/src/lib/avatar/avatar/index.ts",
-          "libs/core/src/lib/avatar/index.ts"
-      ],
-      "@fundamental-ngx/core/avatar-group": [
-          "libs/core/src/lib/avatar-group/avatar-group/index.ts",
-          "libs/core/src/lib/avatar-group/index.ts"
-      ],
-      "@fundamental-ngx/core/bar": ["libs/core/src/lib/bar/bar", "libs/core/src/lib/bar/index.ts"],
-      "@fundamental-ngx/core/breadcrumb": [
-          "libs/core/src/lib/breadcrumb/breadcrumb/index.ts",
-          "libs/core/src/lib/breadcrumb/index.ts"
-      ],
-      "@fundamental-ngx/core/busy-indicator": [
-          "libs/core/src/lib/busy-indicator/busy-indicator/index.ts",
-          "libs/core/src/lib/busy-indicator/index.ts"
-      ],
-      "@fundamental-ngx/core/button": [
-          "libs/core/src/lib/button/button/index.ts",
-          "libs/core/src/lib/button/index.ts"
-      ],
-      "@fundamental-ngx/core/calendar": [
-          "libs/core/src/lib/calendar/calendar/index.ts",
-          "libs/core/src/lib/calendar/index.ts"
-      ],
-      "@fundamental-ngx/core/card": ["libs/core/src/lib/card/card", "libs/core/src/lib/card/index.ts"],
-      "@fundamental-ngx/core/carousel": [
-          "libs/core/src/lib/carousel/carousel/index.ts",
-          "libs/core/src/lib/carousel/index.ts"
-      ],
-      "@fundamental-ngx/core/checkbox": [
-          "libs/core/src/lib/checkbox/checkbox/index.ts",
-          "libs/core/src/lib/checkbox/index.ts"
-      ],
-      "@fundamental-ngx/core/combobox": [
-          "libs/core/src/lib/combobox/combobox/index.ts",
-          "libs/core/src/lib/combobox/index.ts"
-      ],
-      "@fundamental-ngx/core/date-picker": [
-          "libs/core/src/lib/date-picker/date-picker/index.ts",
-          "libs/core/src/lib/date-picker/index.ts"
-      ],
-      "@fundamental-ngx/core/datetime": [
-          "libs/core/src/lib/datetime/datetime/index.ts",
-          "libs/core/src/lib/datetime/index.ts"
-      ],
-      "@fundamental-ngx/core/datetime-picker": [
-          "libs/core/src/lib/datetime-picker/datetime-picker/index.ts",
-          "libs/core/src/lib/datetime-picker/index.ts"
-      ],
-      "@fundamental-ngx/core/dialog": [
-          "libs/core/src/lib/dialog/dialog/index.ts",
-          "libs/core/src/lib/dialog/index.ts"
-      ],
-      "@fundamental-ngx/core/dynamic-page": [
-          "libs/core/src/lib/dynamic-page/dynamic-page/index.ts",
-          "libs/core/src/lib/dynamic-page/index.ts"
-      ],
-      "@fundamental-ngx/core/dynamic-side-content": [
-          "libs/core/src/lib/dynamic-side-content/dynamic-side-content/index.ts",
-          "libs/core/src/lib/dynamic-side-content/index.ts"
-      ],
-      "@fundamental-ngx/core/facets": [
-          "libs/core/src/lib/facets/facets/index.ts",
-          "libs/core/src/lib/facets/index.ts"
-      ],
-      "@fundamental-ngx/core/feed-input": [
-          "libs/core/src/lib/feed-input/feed-input/index.ts",
-          "libs/core/src/lib/feed-input/index.ts"
-      ],
-      "@fundamental-ngx/core/feed-list-item": [
-          "libs/core/src/lib/feed-list-item/feed-list-item/index.ts",
-          "libs/core/src/lib/feed-list-item/index.ts"
-      ],
-      "@fundamental-ngx/core/file-uploader": [
-          "libs/core/src/lib/file-uploader/file-uploader/index.ts",
-          "libs/core/src/lib/file-uploader/index.ts"
-      ],
-      "@fundamental-ngx/core/fixed-card-layout": [
-          "libs/core/src/lib/fixed-card-layout/fixed-card-layout/index.ts",
-          "libs/core/src/lib/fixed-card-layout/index.ts"
-      ],
-      "@fundamental-ngx/core/flexible-column-layout": [
-          "libs/core/src/lib/flexible-column-layout/flexible-column-layout/index.ts",
-          "libs/core/src/lib/flexible-column-layout/index.ts"
-      ],
-      "@fundamental-ngx/core/form": ["libs/core/src/lib/form/form", "libs/core/src/lib/form/index.ts"],
-      "@fundamental-ngx/core/formatted-text": [
-          "libs/core/src/lib/formatted-text/formatted-text/index.ts",
-          "libs/core/src/lib/formatted-text/index.ts"
-      ],
-      "@fundamental-ngx/core/grid-list": [
-          "libs/core/src/lib/grid-list/grid-list/index.ts",
-          "libs/core/src/lib/grid-list/index.ts"
-      ],
-      "@fundamental-ngx/core/icon": ["libs/core/src/lib/icon/icon", "libs/core/src/lib/icon/index.ts"],
-      "@fundamental-ngx/core/illustrated-message": [
-          "libs/core/src/lib/illustrated-message/illustrated-message/index.ts",
-          "libs/core/src/lib/illustrated-message/index.ts"
-      ],
-      "@fundamental-ngx/core/infinite-scroll": [
-          "libs/core/src/lib/infinite-scroll/infinite-scroll/index.ts",
-          "libs/core/src/lib/infinite-scroll/index.ts"
-      ],
-      "@fundamental-ngx/core/info-label": [
-          "libs/core/src/lib/info-label/info-label/index.ts",
-          "libs/core/src/lib/info-label/index.ts"
-      ],
+      "@fundamental-ngx/core/action-bar": ["libs/core/src/lib/action-bar/index.ts"],
+      "@fundamental-ngx/core/action-sheet": ["libs/core/src/lib/action-sheet/index.ts"],
+      "@fundamental-ngx/core/alert": ["libs/core/src/lib/alert/index.ts"],
+      "@fundamental-ngx/core/avatar": ["libs/core/src/lib/avatar/index.ts"],
+      "@fundamental-ngx/core/avatar-group": ["libs/core/src/lib/avatar-group/index.ts"],
+      "@fundamental-ngx/core/bar": ["libs/core/src/lib/bar/index.ts"],
+      "@fundamental-ngx/core/breadcrumb": ["libs/core/src/lib/breadcrumb/index.ts"],
+      "@fundamental-ngx/core/busy-indicator": ["libs/core/src/lib/busy-indicator/index.ts"],
+      "@fundamental-ngx/core/button": ["libs/core/src/lib/button/index.ts"],
+      "@fundamental-ngx/core/calendar": ["libs/core/src/lib/calendar/index.ts"],
+      "@fundamental-ngx/core/card": ["libs/core/src/lib/card/index.ts"],
+      "@fundamental-ngx/core/carousel": ["libs/core/src/lib/carousel/index.ts"],
+      "@fundamental-ngx/core/checkbox": ["libs/core/src/lib/checkbox/index.ts"],
+      "@fundamental-ngx/core/combobox": ["libs/core/src/lib/combobox/index.ts"],
+      "@fundamental-ngx/core/date-picker": ["libs/core/src/lib/date-picker/index.ts"],
+      "@fundamental-ngx/core/datetime": ["libs/core/src/lib/datetime/index.ts"],
+      "@fundamental-ngx/core/datetime-picker": ["libs/core/src/lib/datetime-picker/index.ts"],
+      "@fundamental-ngx/core/dialog": ["libs/core/src/lib/dialog/index.ts"],
+      "@fundamental-ngx/core/dynamic-page": ["libs/core/src/lib/dynamic-page/index.ts"],
+      "@fundamental-ngx/core/dynamic-side-content": ["libs/core/src/lib/dynamic-side-content/index.ts"],
+      "@fundamental-ngx/core/facets": ["libs/core/src/lib/facets/index.ts"],
+      "@fundamental-ngx/core/feed-input": ["libs/core/src/lib/feed-input/index.ts"],
+      "@fundamental-ngx/core/feed-list-item": ["libs/core/src/lib/feed-list-item/index.ts"],
+      "@fundamental-ngx/core/file-uploader": ["libs/core/src/lib/file-uploader/index.ts"],
+      "@fundamental-ngx/core/fixed-card-layout": ["libs/core/src/lib/fixed-card-layout/index.ts"],
+      "@fundamental-ngx/core/flexible-column-layout": ["libs/core/src/lib/flexible-column-layout/index.ts"],
+      "@fundamental-ngx/core/form": ["libs/core/src/lib/form/index.ts"],
+      "@fundamental-ngx/core/formatted-text": ["libs/core/src/lib/formatted-text/index.ts"],
+      "@fundamental-ngx/core/grid-list": ["libs/core/src/lib/grid-list/index.ts"],
+      "@fundamental-ngx/core/icon": ["libs/core/src/lib/icon/index.ts"],
+      "@fundamental-ngx/core/illustrated-message": ["libs/core/src/lib/illustrated-message/index.ts"],
+      "@fundamental-ngx/core/infinite-scroll": ["libs/core/src/lib/infinite-scroll/index.ts"],
+      "@fundamental-ngx/core/info-label": ["libs/core/src/lib/info-label/index.ts"],
       "@fundamental-ngx/core/inline-help": [
-          "libs/core/src/lib/inline-help/inline-help/index.ts",
-          "libs/core/src/lib/inline-help/index.ts"
+        "libs/core/src/lib/inline-help/inline-help/index.ts",
+        "libs/core/src/lib/inline-help/index.ts"
       ],
-      "@fundamental-ngx/core/input-group": [
-          "libs/core/src/lib/input-group/input-group/index.ts",
-          "libs/core/src/lib/input-group/index.ts"
-      ],
-      "@fundamental-ngx/core/layout-grid": [
-          "libs/core/src/lib/layout-grid/layout-grid/index.ts",
-          "libs/core/src/lib/layout-grid/index.ts"
-      ],
-      "@fundamental-ngx/core/layout-panel": [
-          "libs/core/src/lib/layout-panel/layout-panel/index.ts",
-          "libs/core/src/lib/layout-panel/index.ts"
-      ],
-      "@fundamental-ngx/core/link": ["libs/core/src/lib/link/link", "libs/core/src/lib/link/index.ts"],
-      "@fundamental-ngx/core/list": ["libs/core/src/lib/list/list", "libs/core/src/lib/list/index.ts"],
-      "@fundamental-ngx/core/menu": ["libs/core/src/lib/menu/menu", "libs/core/src/lib/menu/index.ts"],
-      "@fundamental-ngx/core/message-box": [
-          "libs/core/src/lib/message-box/message-box/index.ts",
-          "libs/core/src/lib/message-box/index.ts"
-      ],
-      "@fundamental-ngx/core/message-strip": [
-          "libs/core/src/lib/message-strip/message-strip/index.ts",
-          "libs/core/src/lib/message-strip/index.ts"
-      ],
-      "@fundamental-ngx/core/message-toast": [
-          "libs/core/src/lib/message-toast/message-toast/index.ts",
-          "libs/core/src/lib/message-toast/index.ts"
-      ],
-      "@fundamental-ngx/core/multi-input": [
-          "libs/core/src/lib/multi-input/multi-input/index.ts",
-          "libs/core/src/lib/multi-input/index.ts"
-      ],
-      "@fundamental-ngx/core/nested-list": [
-          "libs/core/src/lib/nested-list/nested-list/index.ts",
-          "libs/core/src/lib/nested-list/index.ts"
-      ],
-      "@fundamental-ngx/core/notification": [
-          "libs/core/src/lib/notification/notification/index.ts",
-          "libs/core/src/lib/notification/index.ts"
-      ],
-      "@fundamental-ngx/core/object-identifier": [
-          "libs/core/src/lib/object-identifier/object-identifier/index.ts",
-          "libs/core/src/lib/object-identifier/index.ts"
-      ],
-      "@fundamental-ngx/core/object-marker": [
-          "libs/core/src/lib/object-marker/object-marker/index.ts",
-          "libs/core/src/lib/object-marker/index.ts"
-      ],
-      "@fundamental-ngx/core/object-number": [
-          "libs/core/src/lib/object-number/object-number/index.ts",
-          "libs/core/src/lib/object-number/index.ts"
-      ],
-      "@fundamental-ngx/core/object-status": [
-          "libs/core/src/lib/object-status/object-status/index.ts",
-          "libs/core/src/lib/object-status/index.ts"
-      ],
-      "@fundamental-ngx/core/pagination": [
-          "libs/core/src/lib/pagination/pagination/index.ts",
-          "libs/core/src/lib/pagination/index.ts"
-      ],
-      "@fundamental-ngx/core/panel": [
-          "libs/core/src/lib/panel/panel/index.ts",
-          "libs/core/src/lib/panel/index.ts"
-      ],
-      "@fundamental-ngx/core/popover": [
-          "libs/core/src/lib/popover/popover/index.ts",
-          "libs/core/src/lib/popover/index.ts"
-      ],
-      "@fundamental-ngx/core/product-switch": [
-          "libs/core/src/lib/product-switch/product-switch/index.ts",
-          "libs/core/src/lib/product-switch/index.ts"
-      ],
-      "@fundamental-ngx/core/quick-view": [
-          "libs/core/src/lib/quick-view/quick-view/index.ts",
-          "libs/core/src/lib/quick-view/index.ts"
-      ],
-      "@fundamental-ngx/core/radio": [
-          "libs/core/src/lib/radio/radio/index.ts",
-          "libs/core/src/lib/radio/index.ts"
-      ],
-      "@fundamental-ngx/core/rating-indicator": [
-          "libs/core/src/lib/rating-indicator/rating-indicator/index.ts",
-          "libs/core/src/lib/rating-indicator/index.ts"
-      ],
-      "@fundamental-ngx/core/scroll-spy": [
-          "libs/core/src/lib/scroll-spy/scroll-spy/index.ts",
-          "libs/core/src/lib/scroll-spy/index.ts"
-      ],
-      "@fundamental-ngx/core/segmented-button": [
-          "libs/core/src/lib/segmented-button/segmented-button/index.ts",
-          "libs/core/src/lib/segmented-button/index.ts"
-      ],
-      "@fundamental-ngx/core/select": [
-          "libs/core/src/lib/select/select/index.ts",
-          "libs/core/src/lib/select/index.ts"
-      ],
-      "@fundamental-ngx/core/shared": [
-          "libs/core/src/lib/shared/shared/index.ts",
-          "libs/core/src/lib/shared/index.ts"
-      ],
-      "@fundamental-ngx/core/shellbar": [
-          "libs/core/src/lib/shellbar/shellbar/index.ts",
-          "libs/core/src/lib/shellbar/index.ts"
-      ],
-      "@fundamental-ngx/core/side-navigation": [
-          "libs/core/src/lib/side-navigation/side-navigation/index.ts",
-          "libs/core/src/lib/side-navigation/index.ts"
-      ],
-      "@fundamental-ngx/core/slider": [
-          "libs/core/src/lib/slider/slider/index.ts",
-          "libs/core/src/lib/slider/index.ts"
-      ],
-      "@fundamental-ngx/core/split-button": [
-          "libs/core/src/lib/split-button/split-button/index.ts",
-          "libs/core/src/lib/split-button/index.ts"
-      ],
-      "@fundamental-ngx/core/status-indicator": [
-          "libs/core/src/lib/status-indicator/status-indicator/index.ts",
-          "libs/core/src/lib/status-indicator/index.ts"
-      ],
-      "@fundamental-ngx/core/step-input": [
-          "libs/core/src/lib/step-input/step-input/index.ts",
-          "libs/core/src/lib/step-input/index.ts"
-      ],
-      "@fundamental-ngx/core/switch": [
-          "libs/core/src/lib/switch/switch/index.ts",
-          "libs/core/src/lib/switch/index.ts"
-      ],
-      "@fundamental-ngx/core/table": [
-          "libs/core/src/lib/table/table/index.ts",
-          "libs/core/src/lib/table/index.ts"
-      ],
-      "@fundamental-ngx/core/tabs": ["libs/core/src/lib/tabs/tabs", "libs/core/src/lib/tabs/index.ts"],
-      "@fundamental-ngx/core/text": ["libs/core/src/lib/text/text", "libs/core/src/lib/text/index.ts"],
-      "@fundamental-ngx/core/tile": ["libs/core/src/lib/tile/tile", "libs/core/src/lib/tile/index.ts"],
-      "@fundamental-ngx/core/time": ["libs/core/src/lib/time/time", "libs/core/src/lib/time/index.ts"],
-      "@fundamental-ngx/core/time-picker": [
-          "libs/core/src/lib/time-picker/time-picker/index.ts",
-          "libs/core/src/lib/time-picker/index.ts"
-      ],
-      "@fundamental-ngx/core/title": [
-          "libs/core/src/lib/title/title/index.ts",
-          "libs/core/src/lib/title/index.ts"
-      ],
-      "@fundamental-ngx/core/token": [
-          "libs/core/src/lib/token/token/index.ts",
-          "libs/core/src/lib/token/index.ts"
-      ],
-      "@fundamental-ngx/core/toolbar": [
-          "libs/core/src/lib/toolbar/toolbar/index.ts",
-          "libs/core/src/lib/toolbar/index.ts"
-      ],
-      "@fundamental-ngx/core/tree": ["libs/core/src/lib/tree/tree", "libs/core/src/lib/tree/index.ts"],
-      "@fundamental-ngx/core/utils": [
-          "libs/core/src/lib/utils/utils/index.ts",
-          "libs/core/src/lib/utils/index.ts"
-      ],
-      "@fundamental-ngx/core/wizard": [
-          "libs/core/src/lib/wizard/wizard/index.ts",
-          "libs/core/src/lib/wizard/index.ts"
-      ],
-      "@fundamental-ngx/core/mobile-mode": [
-          "libs/core/src/lib/mobile-mode/mobile-mode/index.ts",
-          "libs/core/src/lib/mobile-mode/index.ts"
-      ],
-      "@fundamental-ngx/core/tests": [
-          "libs/core/src/lib/tests/tests/index.ts",
-          "libs/core/src/lib/tests/index.ts"
-      ],
-      "@fundamental-ngx/core/message-page": [
-        "libs/core/src/lib/message-page/message-page/index.ts",
-        "libs/core/src/lib/message-page/index.ts"
-      ],
-      "@fundamental-ngx/core/root": ["libs/core/src/lib/root/root/index.ts",
-        "libs/core/src/lib/root/index.ts"]
-      // "@fundamental-ngx/core/action-bar": [
-      //     "dist/@fundamental-ngx/core/action-bar/action-bar",
-      //     "dist/@fundamental-ngx/core/action-bar"
-      // ],
-      // "@fundamental-ngx/core/action-sheet": [
-      //     "dist/@fundamental-ngx/core/action-sheet/action-sheet",
-      //     "dist/@fundamental-ngx/core/action-sheet"
-      // ],
-      // "@fundamental-ngx/core/alert": [
-      //     "dist/@fundamental-ngx/core/alert/alert",
-      //     "dist/@fundamental-ngx/core/alert"
-      // ],
-      // "@fundamental-ngx/core/avatar": [
-      //     "dist/@fundamental-ngx/core/avatar/avatar",
-      //     "dist/@fundamental-ngx/core/avatar"
-      // ],
-      // "@fundamental-ngx/core/avatar-group": [
-      //     "dist/@fundamental-ngx/core/avatar-group/avatar-group",
-      //     "dist/@fundamental-ngx/core/avatar-group"
-      // ],
-      // "@fundamental-ngx/core/bar": ["dist/@fundamental-ngx/core/bar/bar", "dist/@fundamental-ngx/core/bar"],
-      // "@fundamental-ngx/core/breadcrumb": [
-      //     "dist/@fundamental-ngx/core/breadcrumb/breadcrumb",
-      //     "dist/@fundamental-ngx/core/breadcrumb"
-      // ],
-      // "@fundamental-ngx/core/busy-indicator": [
-      //     "dist/@fundamental-ngx/core/busy-indicator/busy-indicator",
-      //     "dist/@fundamental-ngx/core/busy-indicator"
-      // ],
-      // "@fundamental-ngx/core/button": [
-      //     "dist/@fundamental-ngx/core/button/button",
-      //     "dist/@fundamental-ngx/core/button"
-      // ],
-      // "@fundamental-ngx/core/calendar": [
-      //     "dist/@fundamental-ngx/core/calendar/calendar",
-      //     "dist/@fundamental-ngx/core/calendar"
-      // ],
-      // "@fundamental-ngx/core/card": ["dist/@fundamental-ngx/core/card/card", "dist/@fundamental-ngx/core/card"],
-      // "@fundamental-ngx/core/carousel": [
-      //     "dist/@fundamental-ngx/core/carousel/carousel",
-      //     "dist/@fundamental-ngx/core/carousel"
-      // ],
-      // "@fundamental-ngx/core/checkbox": [
-      //     "dist/@fundamental-ngx/core/checkbox/checkbox",
-      //     "dist/@fundamental-ngx/core/checkbox"
-      // ],
-      // "@fundamental-ngx/core/combobox": [
-      //     "dist/@fundamental-ngx/core/combobox/combobox",
-      //     "dist/@fundamental-ngx/core/combobox"
-      // ],
-      // "@fundamental-ngx/core/date-picker": [
-      //     "dist/@fundamental-ngx/core/date-picker/date-picker",
-      //     "dist/@fundamental-ngx/core/date-picker"
-      // ],
-      // "@fundamental-ngx/core/datetime": [
-      //     "dist/@fundamental-ngx/core/datetime/datetime",
-      //     "dist/@fundamental-ngx/core/datetime"
-      // ],
-      // "@fundamental-ngx/core/datetime-picker": [
-      //     "dist/@fundamental-ngx/core/datetime-picker/datetime-picker",
-      //     "dist/@fundamental-ngx/core/datetime-picker"
-      // ],
-      // "@fundamental-ngx/core/dialog": [
-      //     "dist/@fundamental-ngx/core/dialog/dialog",
-      //     "dist/@fundamental-ngx/core/dialog"
-      // ],
-      // "@fundamental-ngx/core/dynamic-page": [
-      //     "dist/@fundamental-ngx/core/dynamic-page/dynamic-page",
-      //     "dist/@fundamental-ngx/core/dynamic-page"
-      // ],
-      // "@fundamental-ngx/core/dynamic-side-content": [
-      //     "dist/@fundamental-ngx/core/dynamic-side-content/dynamic-side-content",
-      //     "dist/@fundamental-ngx/core/dynamic-side-content"
-      // ],
-      // "@fundamental-ngx/core/facets": [
-      //     "dist/@fundamental-ngx/core/facets/facets",
-      //     "dist/@fundamental-ngx/core/facets"
-      // ],
-      // "@fundamental-ngx/core/feed-input": [
-      //     "dist/@fundamental-ngx/core/feed-input/feed-input",
-      //     "dist/@fundamental-ngx/core/feed-input"
-      // ],
-      // "@fundamental-ngx/core/feed-list-item": [
-      //     "dist/@fundamental-ngx/core/feed-list-item/feed-list-item",
-      //     "dist/@fundamental-ngx/core/feed-list-item"
-      // ],
-      // "@fundamental-ngx/core/file-uploader": [
-      //     "dist/@fundamental-ngx/core/file-uploader/file-uploader",
-      //     "dist/@fundamental-ngx/core/file-uploader"
-      // ],
-      // "@fundamental-ngx/core/fixed-card-layout": [
-      //     "dist/@fundamental-ngx/core/fixed-card-layout/fixed-card-layout",
-      //     "dist/@fundamental-ngx/core/fixed-card-layout"
-      // ],
-      // "@fundamental-ngx/core/flexible-column-layout": [
-      //     "dist/@fundamental-ngx/core/flexible-column-layout/flexible-column-layout",
-      //     "dist/@fundamental-ngx/core/flexible-column-layout"
-      // ],
-      // "@fundamental-ngx/core/form": ["dist/@fundamental-ngx/core/form/form", "dist/@fundamental-ngx/core/form"],
-      // "@fundamental-ngx/core/formatted-text": [
-      //     "dist/@fundamental-ngx/core/formatted-text/formatted-text",
-      //     "dist/@fundamental-ngx/core/formatted-text"
-      // ],
-      // "@fundamental-ngx/core/grid-list": [
-      //     "dist/@fundamental-ngx/core/grid-list/grid-list",
-      //     "dist/@fundamental-ngx/core/grid-list"
-      // ],
-      // "@fundamental-ngx/core/icon": ["dist/@fundamental-ngx/core/icon/icon", "dist/@fundamental-ngx/core/icon"],
-      // "@fundamental-ngx/core/illustrated-message": [
-      //     "dist/@fundamental-ngx/core/illustrated-message/illustrated-message",
-      //     "dist/@fundamental-ngx/core/illustrated-message"
-      // ],
-      // "@fundamental-ngx/core/infinite-scroll": [
-      //     "dist/@fundamental-ngx/core/infinite-scroll/infinite-scroll",
-      //     "dist/@fundamental-ngx/core/infinite-scroll"
-      // ],
-      // "@fundamental-ngx/core/info-label": [
-      //     "dist/@fundamental-ngx/core/info-label/info-label",
-      //     "dist/@fundamental-ngx/core/info-label"
-      // ],
-      // "@fundamental-ngx/core/inline-help": [
-      //     "dist/@fundamental-ngx/core/inline-help/inline-help",
-      //     "dist/@fundamental-ngx/core/inline-help"
-      // ],
-      // "@fundamental-ngx/core/input-group": [
-      //     "dist/@fundamental-ngx/core/input-group/input-group",
-      //     "dist/@fundamental-ngx/core/input-group"
-      // ],
-      // "@fundamental-ngx/core/layout-grid": [
-      //     "dist/@fundamental-ngx/core/layout-grid/layout-grid",
-      //     "dist/@fundamental-ngx/core/layout-grid"
-      // ],
-      // "@fundamental-ngx/core/layout-panel": [
-      //     "dist/@fundamental-ngx/core/layout-panel/layout-panel",
-      //     "dist/@fundamental-ngx/core/layout-panel"
-      // ],
-      // "@fundamental-ngx/core/link": ["dist/@fundamental-ngx/core/link/link", "dist/@fundamental-ngx/core/link"],
-      // "@fundamental-ngx/core/list": ["dist/@fundamental-ngx/core/list/list", "dist/@fundamental-ngx/core/list"],
-      // "@fundamental-ngx/core/menu": ["dist/@fundamental-ngx/core/menu/menu", "dist/@fundamental-ngx/core/menu"],
-      // "@fundamental-ngx/core/message-box": [
-      //     "dist/@fundamental-ngx/core/message-box/message-box",
-      //     "dist/@fundamental-ngx/core/message-box"
-      // ],
-      // "@fundamental-ngx/core/message-strip": [
-      //     "dist/@fundamental-ngx/core/message-strip/message-strip",
-      //     "dist/@fundamental-ngx/core/message-strip"
-      // ],
-      // "@fundamental-ngx/core/message-toast": [
-      //     "dist/@fundamental-ngx/core/message-toast/message-toast",
-      //     "dist/@fundamental-ngx/core/message-toast"
-      // ],
-      // "@fundamental-ngx/core/multi-input": [
-      //     "dist/@fundamental-ngx/core/multi-input/multi-input",
-      //     "dist/@fundamental-ngx/core/multi-input"
-      // ],
-      // "@fundamental-ngx/core/nested-list": [
-      //     "dist/@fundamental-ngx/core/nested-list/nested-list",
-      //     "dist/@fundamental-ngx/core/nested-list"
-      // ],
-      // "@fundamental-ngx/core/notification": [
-      //     "dist/@fundamental-ngx/core/notification/notification",
-      //     "dist/@fundamental-ngx/core/notification"
-      // ],
-      // "@fundamental-ngx/core/object-identifier": [
-      //     "dist/@fundamental-ngx/core/object-identifier/object-identifier",
-      //     "dist/@fundamental-ngx/core/object-identifier"
-      // ],
-      // "@fundamental-ngx/core/object-marker": [
-      //     "dist/@fundamental-ngx/core/object-marker/object-marker",
-      //     "dist/@fundamental-ngx/core/object-marker"
-      // ],
-      // "@fundamental-ngx/core/object-number": [
-      //     "dist/@fundamental-ngx/core/object-number/object-number",
-      //     "dist/@fundamental-ngx/core/object-number"
-      // ],
-      // "@fundamental-ngx/core/object-status": [
-      //     "dist/@fundamental-ngx/core/object-status/object-status",
-      //     "dist/@fundamental-ngx/core/object-status"
-      // ],
-      // "@fundamental-ngx/core/pagination": [
-      //     "dist/@fundamental-ngx/core/pagination/pagination",
-      //     "dist/@fundamental-ngx/core/pagination"
-      // ],
-      // "@fundamental-ngx/core/panel": [
-      //     "dist/@fundamental-ngx/core/panel/panel",
-      //     "dist/@fundamental-ngx/core/panel"
-      // ],
-      // "@fundamental-ngx/core/popover": [
-      //     "dist/@fundamental-ngx/core/popover/popover",
-      //     "dist/@fundamental-ngx/core/popover"
-      // ],
-      // "@fundamental-ngx/core/product-switch": [
-      //     "dist/@fundamental-ngx/core/product-switch/product-switch",
-      //     "dist/@fundamental-ngx/core/product-switch"
-      // ],
-      // "@fundamental-ngx/core/quick-view": [
-      //     "dist/@fundamental-ngx/core/quick-view/quick-view",
-      //     "dist/@fundamental-ngx/core/quick-view"
-      // ],
-      // "@fundamental-ngx/core/radio": [
-      //     "dist/@fundamental-ngx/core/radio/radio",
-      //     "dist/@fundamental-ngx/core/radio"
-      // ],
-      // "@fundamental-ngx/core/rating-indicator": [
-      //     "dist/@fundamental-ngx/core/rating-indicator/rating-indicator",
-      //     "dist/@fundamental-ngx/core/rating-indicator"
-      // ],
-      // "@fundamental-ngx/core/scroll-spy": [
-      //     "dist/@fundamental-ngx/core/scroll-spy/scroll-spy",
-      //     "dist/@fundamental-ngx/core/scroll-spy"
-      // ],
-      // "@fundamental-ngx/core/segmented-button": [
-      //     "dist/@fundamental-ngx/core/segmented-button/segmented-button",
-      //     "dist/@fundamental-ngx/core/segmented-button"
-      // ],
-      // "@fundamental-ngx/core/select": [
-      //     "dist/@fundamental-ngx/core/select/select",
-      //     "dist/@fundamental-ngx/core/select"
-      // ],
-      // "@fundamental-ngx/core/shared": [
-      //     "dist/@fundamental-ngx/core/shared/shared",
-      //     "dist/@fundamental-ngx/core/shared"
-      // ],
-      // "@fundamental-ngx/core/shellbar": [
-      //     "dist/@fundamental-ngx/core/shellbar/shellbar",
-      //     "dist/@fundamental-ngx/core/shellbar"
-      // ],
-      // "@fundamental-ngx/core/side-navigation": [
-      //     "dist/@fundamental-ngx/core/side-navigation/side-navigation",
-      //     "dist/@fundamental-ngx/core/side-navigation"
-      // ],
-      // "@fundamental-ngx/core/slider": [
-      //     "dist/@fundamental-ngx/core/slider/slider",
-      //     "dist/@fundamental-ngx/core/slider"
-      // ],
-      // "@fundamental-ngx/core/split-button": [
-      //     "dist/@fundamental-ngx/core/split-button/split-button",
-      //     "dist/@fundamental-ngx/core/split-button"
-      // ],
-      // "@fundamental-ngx/core/status-indicator": [
-      //     "dist/@fundamental-ngx/core/status-indicator/status-indicator",
-      //     "dist/@fundamental-ngx/core/status-indicator"
-      // ],
-      // "@fundamental-ngx/core/step-input": [
-      //     "dist/@fundamental-ngx/core/step-input/step-input",
-      //     "dist/@fundamental-ngx/core/step-input"
-      // ],
-      // "@fundamental-ngx/core/switch": [
-      //     "dist/@fundamental-ngx/core/switch/switch",
-      //     "dist/@fundamental-ngx/core/switch"
-      // ],
-      // "@fundamental-ngx/core/table": [
-      //     "dist/@fundamental-ngx/core/table/table",
-      //     "dist/@fundamental-ngx/core/table"
-      // ],
-      // "@fundamental-ngx/core/tabs": ["dist/@fundamental-ngx/core/tabs/tabs", "dist/@fundamental-ngx/core/tabs"],
-      // "@fundamental-ngx/core/text": ["dist/@fundamental-ngx/core/text/text", "dist/@fundamental-ngx/core/text"],
-      // "@fundamental-ngx/core/tile": ["dist/@fundamental-ngx/core/tile/tile", "dist/@fundamental-ngx/core/tile"],
-      // "@fundamental-ngx/core/time": ["dist/@fundamental-ngx/core/time/time", "dist/@fundamental-ngx/core/time"],
-      // "@fundamental-ngx/core/time-picker": [
-      //     "dist/@fundamental-ngx/core/time-picker/time-picker",
-      //     "dist/@fundamental-ngx/core/time-picker"
-      // ],
-      // "@fundamental-ngx/core/title": [
-      //     "dist/@fundamental-ngx/core/title/title",
-      //     "dist/@fundamental-ngx/core/title"
-      // ],
-      // "@fundamental-ngx/core/token": [
-      //     "dist/@fundamental-ngx/core/token/token",
-      //     "dist/@fundamental-ngx/core/token"
-      // ],
-      // "@fundamental-ngx/core/toolbar": [
-      //     "dist/@fundamental-ngx/core/toolbar/toolbar",
-      //     "dist/@fundamental-ngx/core/toolbar"
-      // ],
-      // "@fundamental-ngx/core/tree": ["dist/@fundamental-ngx/core/tree/tree", "dist/@fundamental-ngx/core/tree"],
-      // "@fundamental-ngx/core/utils": [
-      //     "dist/@fundamental-ngx/core/utils/utils",
-      //     "dist/@fundamental-ngx/core/utils"
-      // ],
-      // "@fundamental-ngx/core/wizard": [
-      //     "dist/@fundamental-ngx/core/wizard/wizard",
-      //     "dist/@fundamental-ngx/core/wizard"
-      // ],
-      // "@fundamental-ngx/core/mobile-mode": [
-      //     "dist/@fundamental-ngx/core/mobile-mode/mobile-mode",
-      //     "dist/@fundamental-ngx/core/mobile-mode"
-      // ],
-      // "@fundamental-ngx/core/tests": [
-      //     "dist/@fundamental-ngx/core/tests/tests",
-      //     "dist/@fundamental-ngx/core/tests"
-      // ],
-      // "@fundamental-ngx/core/message-page": [
-      //   "dist/@fundamental-ngx/core/message-page/message-page",
-      //   "dist/@fundamental-ngx/core/message-page"
-      // ],
-      // "@fundamental-ngx/core/root": ["dist/@fundamental-ngx/core/root/root",
-      //   "dist/@fundamental-ngx/core/root"]
+      "@fundamental-ngx/core/input-group": ["libs/core/src/lib/input-group/index.ts"],
+      "@fundamental-ngx/core/layout-grid": ["libs/core/src/lib/layout-grid/index.ts"],
+      "@fundamental-ngx/core/layout-panel": ["libs/core/src/lib/layout-panel/index.ts"],
+      "@fundamental-ngx/core/link": ["libs/core/src/lib/link/index.ts"],
+      "@fundamental-ngx/core/list": ["libs/core/src/lib/list/index.ts"],
+      "@fundamental-ngx/core/menu": ["libs/core/src/lib/menu/index.ts"],
+      "@fundamental-ngx/core/message-box": ["libs/core/src/lib/message-box/index.ts"],
+      "@fundamental-ngx/core/message-strip": ["libs/core/src/lib/message-strip/index.ts"],
+      "@fundamental-ngx/core/message-toast": ["libs/core/src/lib/message-toast/index.ts"],
+      "@fundamental-ngx/core/multi-input": ["libs/core/src/lib/multi-input/index.ts"],
+      "@fundamental-ngx/core/nested-list": ["libs/core/src/lib/nested-list/index.ts"],
+      "@fundamental-ngx/core/notification": ["libs/core/src/lib/notification/index.ts"],
+      "@fundamental-ngx/core/object-identifier": ["libs/core/src/lib/object-identifier/index.ts"],
+      "@fundamental-ngx/core/object-marker": ["libs/core/src/lib/object-marker/index.ts"],
+      "@fundamental-ngx/core/object-number": ["libs/core/src/lib/object-number/index.ts"],
+      "@fundamental-ngx/core/object-status": ["libs/core/src/lib/object-status/index.ts"],
+      "@fundamental-ngx/core/pagination": ["libs/core/src/lib/pagination/index.ts"],
+      "@fundamental-ngx/core/panel": ["libs/core/src/lib/panel/index.ts"],
+      "@fundamental-ngx/core/popover": ["libs/core/src/lib/popover/index.ts"],
+      "@fundamental-ngx/core/product-switch": ["libs/core/src/lib/product-switch/index.ts"],
+      "@fundamental-ngx/core/quick-view": ["libs/core/src/lib/quick-view/index.ts"],
+      "@fundamental-ngx/core/radio": ["libs/core/src/lib/radio/index.ts"],
+      "@fundamental-ngx/core/rating-indicator": ["libs/core/src/lib/rating-indicator/index.ts"],
+      "@fundamental-ngx/core/scroll-spy": ["libs/core/src/lib/scroll-spy/index.ts"],
+      "@fundamental-ngx/core/segmented-button": ["libs/core/src/lib/segmented-button/index.ts"],
+      "@fundamental-ngx/core/select": ["libs/core/src/lib/select/index.ts"],
+      "@fundamental-ngx/core/shared": ["libs/core/src/lib/shared/index.ts"],
+      "@fundamental-ngx/core/shellbar": ["libs/core/src/lib/shellbar/index.ts"],
+      "@fundamental-ngx/core/side-navigation": ["libs/core/src/lib/side-navigation/index.ts"],
+      "@fundamental-ngx/core/slider": ["libs/core/src/lib/slider/index.ts"],
+      "@fundamental-ngx/core/split-button": ["libs/core/src/lib/split-button/index.ts"],
+      "@fundamental-ngx/core/status-indicator": ["libs/core/src/lib/status-indicator/index.ts"],
+      "@fundamental-ngx/core/step-input": ["libs/core/src/lib/step-input/index.ts"],
+      "@fundamental-ngx/core/switch": ["libs/core/src/lib/switch/index.ts"],
+      "@fundamental-ngx/core/table": ["libs/core/src/lib/table/index.ts"],
+      "@fundamental-ngx/core/tabs": ["libs/core/src/lib/tabs/index.ts"],
+      "@fundamental-ngx/core/text": ["libs/core/src/lib/text/index.ts"],
+      "@fundamental-ngx/core/tile": ["libs/core/src/lib/tile/index.ts"],
+      "@fundamental-ngx/core/time": ["libs/core/src/lib/time/index.ts"],
+      "@fundamental-ngx/core/time-picker": ["libs/core/src/lib/time-picker/index.ts"],
+      "@fundamental-ngx/core/title": ["libs/core/src/lib/title/index.ts"],
+      "@fundamental-ngx/core/token": ["libs/core/src/lib/token/index.ts"],
+      "@fundamental-ngx/core/toolbar": ["libs/core/src/lib/toolbar/index.ts"],
+      "@fundamental-ngx/core/tree": ["libs/core/src/lib/tree/index.ts"],
+      "@fundamental-ngx/core/utils": ["libs/core/src/lib/utils/index.ts"],
+      "@fundamental-ngx/core/wizard": ["libs/core/src/lib/wizard/index.ts"],
+      "@fundamental-ngx/core/mobile-mode": ["libs/core/src/lib/mobile-mode/index.ts"],
+      "@fundamental-ngx/core/tests": ["libs/core/src/lib/tests/index.ts"],
+      "@fundamental-ngx/core/message-page": ["libs/core/src/lib/message-page/index.ts"],
+      "@fundamental-ngx/core/root": ["libs/core/src/lib/root/index.ts"]
     },
     "skipLibCheck": true
   },

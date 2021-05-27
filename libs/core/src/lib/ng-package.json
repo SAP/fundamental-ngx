@@ -1,6 +1,6 @@
 {
   "$schema": "../../../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../../../dist/@fundamental-ngx/core",
+  "dest": "../../../../dist/libs/core",
   "deleteDestPath": false,
   "lib": {
     "entryFile": "./public_api.ts"

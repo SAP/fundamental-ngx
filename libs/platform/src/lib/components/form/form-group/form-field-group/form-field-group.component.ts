@@ -2,12 +2,10 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChildren,
-    forwardRef,
     Input,
     OnDestroy,
     OnInit,
     Optional,
-    Provider,
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
@@ -15,17 +13,7 @@ import {
 import { FormField } from '../../form-field';
 import { FormFieldGroup } from '../../form-field-group';
 import { FormGroupContainer } from '../../form-group';
-import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
-
-export const formFieldGroupProvider: Provider = {
-    provide: FormFieldGroup,
-    useExisting: forwardRef(() => FormFieldGroupComponent)
-};
-
-export const formGroupChildProvider: Provider = {
-    provide: FORM_GROUP_CHILD_FIELD_TOKEN,
-    useExisting: forwardRef(() => FormFieldGroupComponent)
-};
+import { formFieldGroupProvider, formGroupChildProvider } from '../providers/form-field-provider';
 
 @Component({
     selector: 'fdp-form-field-group',

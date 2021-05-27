@@ -1,6 +1,6 @@
 {
   "$schema": "../../../../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../../../../dist/@fundamental-ngx/core/toolbar",
+  "dest": "../../../../../dist/libs/core/toolbar",
   "lib": {
     "entryFile": "./public_api.ts"
   }

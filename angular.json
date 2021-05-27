@@ -272,7 +272,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core"
+            "dist/libs/core"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/tsconfig.lib.json",
@@ -316,7 +316,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/breadcrumb"
+            "dist/libs/core/breadcrumb"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/breadcrumb/tsconfig.lib.json",
@@ -360,7 +360,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/message-page"
+            "dist/libs/core/message-page"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/message-page/tsconfig.lib.json",
@@ -404,7 +404,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/nested-list"
+            "dist/libs/core/nested-list"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/nested-list/tsconfig.lib.json",
@@ -448,7 +448,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/mobile-mode"
+            "dist/libs/core/mobile-mode"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/mobile-mode/tsconfig.lib.json",
@@ -492,7 +492,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/tests"
+            "dist/libs/core/tests"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/tests/tsconfig.lib.json",
@@ -536,7 +536,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/icon"
+            "dist/libs/core/icon"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/icon/tsconfig.lib.json",
@@ -580,7 +580,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/button"
+            "dist/libs/core/button"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/button/tsconfig.lib.json",
@@ -624,7 +624,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/checkbox"
+            "dist/libs/core/checkbox"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/checkbox/tsconfig.lib.json",
@@ -668,7 +668,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/dialog"
+            "dist/libs/core/dialog"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/dialog/tsconfig.lib.json",
@@ -712,7 +712,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/action-bar"
+            "dist/libs/core/action-bar"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/action-bar/tsconfig.lib.json",
@@ -756,7 +756,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/action-sheet"
+            "dist/libs/core/action-sheet"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/action-sheet/tsconfig.lib.json",
@@ -800,7 +800,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/alert"
+            "dist/libs/core/alert"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/alert/tsconfig.lib.json",
@@ -844,7 +844,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/avatar"
+            "dist/libs/core/avatar"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/avatar/tsconfig.lib.json",
@@ -888,7 +888,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/avatar-group"
+            "dist/libs/core/avatar-group"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/avatar-group/tsconfig.lib.json",
@@ -932,7 +932,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/bar"
+            "dist/libs/core/bar"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/bar/tsconfig.lib.json",
@@ -976,7 +976,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/busy-indicator"
+            "dist/libs/core/busy-indicator"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/busy-indicator/tsconfig.lib.json",
@@ -1020,7 +1020,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/calendar"
+            "dist/libs/core/calendar"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/calendar/tsconfig.lib.json",
@@ -1064,7 +1064,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/card"
+            "dist/libs/core/card"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/card/tsconfig.lib.json",
@@ -1108,7 +1108,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/carousel"
+            "dist/libs/core/carousel"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/carousel/tsconfig.lib.json",
@@ -1152,7 +1152,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/combobox"
+            "dist/libs/core/combobox"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/combobox/tsconfig.lib.json",
@@ -1196,7 +1196,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/date-picker"
+            "dist/libs/core/date-picker"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/date-picker/tsconfig.lib.json",
@@ -1240,7 +1240,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/datetime"
+            "dist/libs/core/datetime"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/datetime/tsconfig.lib.json",
@@ -1284,7 +1284,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/datetime-picker"
+            "dist/libs/core/datetime-picker"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/datetime-picker/tsconfig.lib.json",
@@ -1328,7 +1328,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/dynamic-page"
+            "dist/libs/core/dynamic-page"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/dynamic-page/tsconfig.lib.json",
@@ -1372,7 +1372,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/dynamic-side-content"
+            "dist/libs/core/dynamic-side-content"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/dynamic-side-content/tsconfig.lib.json",
@@ -1416,7 +1416,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/facets"
+            "dist/libs/core/facets"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/facets/tsconfig.lib.json",
@@ -1460,7 +1460,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/feed-input"
+            "dist/libs/core/feed-input"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/feed-input/tsconfig.lib.json",
@@ -1504,7 +1504,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/feed-list-item"
+            "dist/libs/core/feed-list-item"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/feed-list-item/tsconfig.lib.json",
@@ -1548,7 +1548,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/file-uploader"
+            "dist/libs/core/file-uploader"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/file-uploader/tsconfig.lib.json",
@@ -1592,7 +1592,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/fixed-card-layout"
+            "dist/libs/core/fixed-card-layout"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/fixed-card-layout/tsconfig.lib.json",
@@ -1636,7 +1636,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/flexible-column-layout"
+            "dist/libs/core/flexible-column-layout"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/flexible-column-layout/tsconfig.lib.json",
@@ -1680,7 +1680,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/form"
+            "dist/libs/core/form"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/form/tsconfig.lib.json",
@@ -1724,7 +1724,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/formatted-text"
+            "dist/libs/core/formatted-text"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/formatted-text/tsconfig.lib.json",
@@ -1768,7 +1768,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/grid-list"
+            "dist/libs/core/grid-list"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/grid-list/tsconfig.lib.json",
@@ -1812,7 +1812,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/illustrated-message"
+            "dist/libs/core/illustrated-message"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/illustrated-message/tsconfig.lib.json",
@@ -1856,7 +1856,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/infinite-scroll"
+            "dist/libs/core/infinite-scroll"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/infinite-scroll/tsconfig.lib.json",
@@ -1900,7 +1900,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/info-label"
+            "dist/libs/core/info-label"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/info-label/tsconfig.lib.json",
@@ -1944,7 +1944,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/inline-help"
+            "dist/libs/core/inline-help"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/inline-help/tsconfig.lib.json",
@@ -1988,7 +1988,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/input-group"
+            "dist/libs/core/input-group"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/input-group/tsconfig.lib.json",
@@ -2032,7 +2032,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/layout-grid"
+            "dist/libs/core/layout-grid"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/layout-grid/tsconfig.lib.json",
@@ -2076,7 +2076,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/layout-panel"
+            "dist/libs/core/layout-panel"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/layout-panel/tsconfig.lib.json",
@@ -2120,7 +2120,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/link"
+            "dist/libs/core/link"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/link/tsconfig.lib.json",
@@ -2164,7 +2164,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/list"
+            "dist/libs/core/list"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/list/tsconfig.lib.json",
@@ -2208,7 +2208,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/menu"
+            "dist/libs/core/menu"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/menu/tsconfig.lib.json",
@@ -2252,7 +2252,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/message-box"
+            "dist/libs/core/message-box"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/message-box/tsconfig.lib.json",
@@ -2296,7 +2296,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/message-strip"
+            "dist/libs/core/message-strip"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/message-strip/tsconfig.lib.json",
@@ -2340,7 +2340,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/notification"
+            "dist/libs/core/notification"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/notification/tsconfig.lib.json",
@@ -2384,7 +2384,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/object-identifier"
+            "dist/libs/core/object-identifier"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/object-identifier/tsconfig.lib.json",
@@ -2428,7 +2428,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/object-marker"
+            "dist/libs/core/object-marker"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/object-marker/tsconfig.lib.json",
@@ -2472,7 +2472,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/object-number"
+            "dist/libs/core/object-number"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/object-number/tsconfig.lib.json",
@@ -2516,7 +2516,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/object-status"
+            "dist/libs/core/object-status"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/object-status/tsconfig.lib.json",
@@ -2560,7 +2560,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/pagination"
+            "dist/libs/core/pagination"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/pagination/tsconfig.lib.json",
@@ -2604,7 +2604,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/panel"
+            "dist/libs/core/panel"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/panel/tsconfig.lib.json",
@@ -2648,7 +2648,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/popover"
+            "dist/libs/core/popover"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/popover/tsconfig.lib.json",
@@ -2692,7 +2692,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/product-switch"
+            "dist/libs/core/product-switch"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/product-switch/tsconfig.lib.json",
@@ -2736,7 +2736,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/quick-view"
+            "dist/libs/core/quick-view"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/quick-view/tsconfig.lib.json",
@@ -2780,7 +2780,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/radio"
+            "dist/libs/core/radio"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/radio/tsconfig.lib.json",
@@ -2824,7 +2824,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/rating-indicator"
+            "dist/libs/core/rating-indicator"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/rating-indicator/tsconfig.lib.json",
@@ -2868,7 +2868,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/scroll-spy"
+            "dist/libs/core/scroll-spy"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/scroll-spy/tsconfig.lib.json",
@@ -2912,7 +2912,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/segmented-button"
+            "dist/libs/core/segmented-button"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/segmented-button/tsconfig.lib.json",
@@ -2956,7 +2956,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/select"
+            "dist/libs/core/select"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/select/tsconfig.lib.json",
@@ -3000,7 +3000,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/shared"
+            "dist/libs/core/shared"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/shared/tsconfig.lib.json",
@@ -3044,7 +3044,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/shellbar"
+            "dist/libs/core/shellbar"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/shellbar/tsconfig.lib.json",
@@ -3088,7 +3088,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/side-navigation"
+            "dist/libs/core/side-navigation"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/side-navigation/tsconfig.lib.json",
@@ -3132,7 +3132,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/slider"
+            "dist/libs/core/slider"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/slider/tsconfig.lib.json",
@@ -3176,7 +3176,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/split-button"
+            "dist/libs/core/split-button"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/split-button/tsconfig.lib.json",
@@ -3220,7 +3220,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/status-indicator"
+            "dist/libs/core/status-indicator"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/status-indicator/tsconfig.lib.json",
@@ -3264,7 +3264,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/step-input"
+            "dist/libs/core/step-input"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/step-input/tsconfig.lib.json",
@@ -3308,7 +3308,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/switch"
+            "dist/libs/core/switch"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/switch/tsconfig.lib.json",
@@ -3352,7 +3352,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/table"
+            "dist/libs/core/table"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/table/tsconfig.lib.json",
@@ -3396,7 +3396,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/tabs"
+            "dist/libs/core/tabs"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/tabs/tsconfig.lib.json",
@@ -3440,7 +3440,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/text"
+            "dist/libs/core/text"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/text/tsconfig.lib.json",
@@ -3484,7 +3484,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/tile"
+            "dist/libs/core/tile"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/tile/tsconfig.lib.json",
@@ -3528,7 +3528,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/time"
+            "dist/libs/core/time"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/time/tsconfig.lib.json",
@@ -3572,7 +3572,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/time-picker"
+            "dist/libs/core/time-picker"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/time-picker/tsconfig.lib.json",
@@ -3616,7 +3616,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/title"
+            "dist/libs/core/title"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/title/tsconfig.lib.json",
@@ -3660,7 +3660,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/token"
+            "dist/libs/core/token"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/token/tsconfig.lib.json",
@@ -3704,7 +3704,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/toolbar"
+            "dist/libs/core/toolbar"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/toolbar/tsconfig.lib.json",
@@ -3748,7 +3748,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/utils"
+            "dist/libs/core/utils"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/utils/tsconfig.lib.json",
@@ -3792,7 +3792,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/message-toast"
+            "dist/libs/core/message-toast"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/message-toast/tsconfig.lib.json",
@@ -3836,7 +3836,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/multi-input"
+            "dist/libs/core/multi-input"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/multi-input/tsconfig.lib.json",
@@ -3880,7 +3880,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/wizard"
+            "dist/libs/core/wizard"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/wizard/tsconfig.lib.json",
@@ -3924,7 +3924,7 @@
         "build": {
           "builder": "@nrwl/angular:package",
           "outputs": [
-            "dist/@fundamental-ngx/core/tree"
+            "dist/libs/core/tree"
           ],
           "options": {
             "tsConfig": "libs/core/src/lib/tree/tsconfig.lib.json",

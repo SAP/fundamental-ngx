@@ -1,6 +1,6 @@
 {
   "$schema": "../../../../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../../../../dist/@fundamental-ngx/core/message-page",
+  "dest": "../../../../../dist/libs/core/message-page",
   "lib": {
     "entryFile": "./public_api.ts"
   }
