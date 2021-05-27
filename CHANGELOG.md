@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.34...v0.30.1-rc.35) (2021-05-27)
+
+
+### Bug Fixes
+
+* (Core) fix not readable label for accessibility ([#5460](https://github.com/SAP/fundamental-ngx/issues/5460)) ([1eb65ae](https://github.com/SAP/fundamental-ngx/commit/1eb65aef80b8a12d9ac58fc8f96ee2dd11bd8881))
+
 ### [0.30.1-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.33...v0.30.1-rc.34) (2021-05-27)
 
 ### [0.30.1-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.32...v0.30.1-rc.33) (2021-05-27)
