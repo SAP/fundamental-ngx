@@ -85,7 +85,7 @@ Each commit message consists of a **header**, a **body** and a **footer**.  The 
 format that includes a **type**, a **scope** and a **subject**:
 
 ```
-<type>: (<Scope>) <subject>
+<type>(<scope>): <subject>
 <BLANK LINE>
 <body>
 <BLANK LINE>
@@ -102,17 +102,17 @@ The footer should contain a [closing reference to an issue](https://help.github.
 Samples: 
 
 ```
-docs: (Core) update changelog to beta.5
+docs(core): update changelog to beta.5
 ```
 ```
-fix: (Platform) need to depend on latest rxjs and zone.js
+fix(platform): need to depend on latest rxjs and zone.js
 
 The version in our package.json gets copied to the one we publish, and users need the latest of these.
 ```
 
 
 ```
-fix: (Platform) Actionbar as component
+fix(platform): actionbar as component
 
 ```
 
@@ -134,19 +134,19 @@ Must be one of the following:
 
 ### Scope
 The scope should be the name of the npm package affected (as perceived by the person reading the changelog 
-generated from commit messages). Capitalize the first letter.
+generated from commit messages).
 
 The following is the list of supported scopes:
 
-* **Core**
-* **Platform**
-* **Docs**
-* **E2E**
+* **core**
+* **platform**
+* **docs**
+* **e2e**
 
 There are currently a few exceptions to the "use package name" rule:
 
-* **Changelog**: used for updating the release notes in CHANGELOG.md
-* **Docs**: used for docs-app (angular.io) related changes within the /aio directory of the
+* **changelog**: used for updating the release notes in CHANGELOG.md
+* **docs**: used for docs-app (angular.io) related changes within the /aio directory of the
   repo
 
 ### Subject
@@ -185,18 +185,18 @@ The PR title must follow this format:
 
 
 ```
-<type>: (<Scope>) <subject>
+<type>(<scope>): <subject>
 ```
 
 Samples:
 
 ```
-feat: My adding new binding to button component
+feat: my adding new binding to button component
 ```
 
 
 ```
-chore: Updated package.json
+chore: updated package.json
 ```
 
 ##### Type
@@ -212,10 +212,10 @@ generated from commit messages). Capitalize the first letter.
 
 The following is the list of supported scopes:
 
-* **Core**
-* **Platform**
-* **Docs**
-* **E2E**
+* **core**
+* **platform**
+* **docs**
+* **e2e**
 
 Here are following rules behind the PR title message:
 
