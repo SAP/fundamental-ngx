@@ -126,6 +126,11 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     @Input()
     nextLabel = 'Next';
 
+    /** Label for the 'Page' page button. */
+    @Input()
+    pageLabel = 'Page';
+
+
     /** Event fired when the page is changed. */
     @Output()
     pageChangeStart = new EventEmitter<number>();
