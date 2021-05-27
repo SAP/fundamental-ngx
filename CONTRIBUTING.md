@@ -149,6 +149,21 @@ There are currently a few exceptions to the "use package name" rule:
 * **docs**: used for docs-app (angular.io) related changes within the /aio directory of the
   repo
 
+### Multiple scopes
+To use multiple scopes need to follow those delimiter options are:
+
+* "/"
+* "\\"
+* ","
+
+Samples: 
+
+```
+fix(core,platform): message
+fix(core\platform): message
+fix(core/platform): message
+```
+
 ### Subject
 The subject contains a succinct description of the change:
 
