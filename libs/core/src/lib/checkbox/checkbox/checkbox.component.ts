@@ -127,7 +127,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     /** @hidden Reference to callback provided by FormControl.*/
     public onTouched = () => {};
     /** @hidden Reference to callback provided by FormControl.*/
-    public onValueChange = (newValue) => {};
+    public onValueChange = (_) => {};
 
     /** @hidden */
     constructor(
@@ -203,7 +203,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
         this.muteKey(event);
     }
 
-    /** @hidden Updates checkbox Indeterminate state on spacebar key on IE11 */
+    /** @hidden Updates checkbox Indeterminate state on space bar key on IE11 */
     public checkByKey(event: KeyboardEvent): void {
         if (this._isSpaceBarEvent(event) && this._platform.TRIDENT) {
             this._nextValueEvent();
