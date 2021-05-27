@@ -234,7 +234,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/core/tsconfig.lib.json",
-            "project": "libs/core/ng-package.json"
+            "project": "libs/core/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
           },
           "configurations": {
             "production": {
@@ -282,7 +283,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "libs/platform/tsconfig.lib.json",
-            "project": "libs/platform/ng-package.json"
+            "project": "libs/platform/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
           },
           "configurations": {
             "production": {

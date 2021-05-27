@@ -2,6 +2,137 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.31...v0.30.1-rc.32) (2021-05-26)
+
+### [0.30.1-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.30...v0.30.1-rc.31) (2021-05-26)
+
+
+### Bug Fixes
+
+* (Platform) fix rtl mode for combobox secondary column ([#5466](https://github.com/SAP/fundamental-ngx/issues/5466)) ([9e68102](https://github.com/SAP/fundamental-ngx/commit/9e68102e505a2fb8e1dda4fc05989177a10a054b))
+
+### [0.30.1-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.29...v0.30.1-rc.30) (2021-05-26)
+
+### [0.30.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.28...v0.30.1-rc.29) (2021-05-25)
+
+### [0.30.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.27...v0.30.1-rc.28) (2021-05-25)
+
+
+### Bug Fixes
+
+* (Core) allow for conditionally adding steps to a wizard via *ngIf ([#5456](https://github.com/SAP/fundamental-ngx/issues/5456)) ([2e71ae7](https://github.com/SAP/fundamental-ngx/commit/2e71ae70ae1dc7cdd3f91d00d431ed1fbc2a3b48))
+* (Core) do not use fdScrollSpy when appendToWizard=false ([#5454](https://github.com/SAP/fundamental-ngx/issues/5454)) ([008b103](https://github.com/SAP/fundamental-ngx/commit/008b1035405e48bccd5205f3bb0820aef70d071e))
+* (Core) remove wizard padding logic from dialog body component ([#5437](https://github.com/SAP/fundamental-ngx/issues/5437)) ([74cde8b](https://github.com/SAP/fundamental-ngx/commit/74cde8bc5003b3160b35bafaf99aa587399a3ca2))
+
+### [0.30.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.26...v0.30.1-rc.27) (2021-05-25)
+
+
+### Bug Fixes
+
+* (Core|Platform) dialog body min height (ie11 fix), table dialogs fixes ([#5463](https://github.com/SAP/fundamental-ngx/issues/5463)) ([4c28905](https://github.com/SAP/fundamental-ngx/commit/4c28905be8c7266c7db21544ccfd4f7b8f27d5fd))
+* (Platform) combobox group header not readable for accessibility ([#5206](https://github.com/SAP/fundamental-ngx/issues/5206)) ([61cf0d0](https://github.com/SAP/fundamental-ngx/commit/61cf0d0b23baaa5d5f3107e40ccdc7183dbd0f2d))
+
+### [0.30.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.25...v0.30.1-rc.26) (2021-05-25)
+
+
+### Features
+
+* (Platform) approval flow phase 3 ([#5302](https://github.com/SAP/fundamental-ngx/issues/5302)) ([dda7e5b](https://github.com/SAP/fundamental-ngx/commit/dda7e5be11f72aabfdc00966cbaa594b921481ef))
+
+
+### Bug Fixes
+
+* (Core) Kpi value status input added. removed Card css classes from Ngx. ([#5392](https://github.com/SAP/fundamental-ngx/issues/5392)) ([65c8dd1](https://github.com/SAP/fundamental-ngx/commit/65c8dd1b3cbdec6163a935ad9dacacfaa19128d8))
+
+### [0.30.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.24...v0.30.1-rc.25) (2021-05-21)
+
+### [0.30.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.23...v0.30.1-rc.24) (2021-05-21)
+
+### [0.30.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.22...v0.30.1-rc.23) (2021-05-21)
+
+
+### Features
+
+* (Platform) Multi-Combobox component ([#5107](https://github.com/SAP/fundamental-ngx/issues/5107)) ([44da63f](https://github.com/SAP/fundamental-ngx/commit/44da63f0391b51a33c30e6fb63701fe286196d8d))
+
+### [0.30.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.21...v0.30.1-rc.22) (2021-05-21)
+
+### [0.30.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.20...v0.30.1-rc.21) (2021-05-20)
+
+
+### Bug Fixes
+
+* (Core|Platform) remove deps from packages nx builder improvement ([#5421](https://github.com/SAP/fundamental-ngx/issues/5421)) ([4fb959e](https://github.com/SAP/fundamental-ngx/commit/4fb959e4ec6f25911120cd51952f48cff5b0ab8e))
+
+### [0.30.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.19...v0.30.1-rc.20) (2021-05-20)
+
+### [0.30.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.18...v0.30.1-rc.19) (2021-05-19)
+
+### [0.30.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.17...v0.30.1-rc.18) (2021-05-19)
+
+### [0.30.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.16...v0.30.1-rc.17) (2021-05-19)
+
+### [0.30.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.15...v0.30.1-rc.16) (2021-05-19)
+
+### [0.30.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.14...v0.30.1-rc.15) (2021-05-18)
+
+
+### Features
+
+* (Core) introduce new Message Page component ([#5349](https://github.com/SAP/fundamental-ngx/issues/5349)) ([b6624d4](https://github.com/SAP/fundamental-ngx/commit/b6624d435c9c07e32b8c425c0cff7bf7b6b0bd0e))
+
+### [0.30.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.13...v0.30.1-rc.14) (2021-05-18)
+
+### [0.30.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.12...v0.30.1-rc.13) (2021-05-18)
+
+
+### Bug Fixes
+
+* (Platform) make lib working on ViewEngine ([#5397](https://github.com/SAP/fundamental-ngx/issues/5397)) ([b164c65](https://github.com/SAP/fundamental-ngx/commit/b164c65e16ab2d24fa1e4bdf1830195701fbd94b))
+
+### [0.30.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.11...v0.30.1-rc.12) (2021-05-18)
+
+
+### Bug Fixes
+
+* (Core) form adjust hint alignment ([#5310](https://github.com/SAP/fundamental-ngx/issues/5310)) ([2c98df4](https://github.com/SAP/fundamental-ngx/commit/2c98df4b2b6d2a54a2bddeeece395f62c12c1a50))
+
+### [0.30.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.10...v0.30.1-rc.11) (2021-05-18)
+
+### [0.30.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.9...v0.30.1-rc.10) (2021-05-17)
+
+### [0.30.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.8...v0.30.1-rc.9) (2021-05-17)
+
+### [0.30.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.7...v0.30.1-rc.8) (2021-05-15)
+
+
+### Bug Fixes
+
+* (Core) wizard step indicator stacking bugs on narrow screens ([#5272](https://github.com/SAP/fundamental-ngx/issues/5272)) ([916eeb8](https://github.com/SAP/fundamental-ngx/commit/916eeb8b086632187c0e0471e0b304ff9def6141))
+
+### [0.30.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.6...v0.30.1-rc.7) (2021-05-15)
+
+### [0.30.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.5...v0.30.1-rc.6) (2021-05-13)
+
+
+### Bug Fixes
+
+* (Core/Platform) Fix the File uploader accessibilty bug reading he file name after selecting the file and reading button browse button value and remove readonly attribute. ([#5328](https://github.com/SAP/fundamental-ngx/issues/5328)) ([f7a7c21](https://github.com/SAP/fundamental-ngx/commit/f7a7c21d5c2cd2709337ecfa09470b535b71c331))
+
+### [0.30.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.4...v0.30.1-rc.5) (2021-05-13)
+
+
+### Bug Fixes
+
+* (Platform) Pre-populated values not honouring the display key value ([#5204](https://github.com/SAP/fundamental-ngx/issues/5204)) ([4f2d9a0](https://github.com/SAP/fundamental-ngx/commit/4f2d9a0f283bd39e919a9561172810ac62b6b074))
+
+### [0.30.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.3...v0.30.1-rc.4) (2021-05-13)
+
+
+### Bug Fixes
+
+* (Core) Text component's more or less label for expand/collapse functionality is not readable for accessibility. ([#5271](https://github.com/SAP/fundamental-ngx/issues/5271)) ([80c09e6](https://github.com/SAP/fundamental-ngx/commit/80c09e65baed2fc465c899aada23654f13a0ee40))
+
 ### [0.30.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.2...v0.30.1-rc.3) (2021-05-11)
 
 

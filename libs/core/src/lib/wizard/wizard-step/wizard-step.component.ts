@@ -30,7 +30,7 @@ import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS } from '../constants';
         class: 'fd-wizard__step',
         '[class.fd-wizard__step--completed]': 'status === "completed" || completed',
         '[class.fd-wizard__step--current]': 'status === "current"',
-        '[class.fd-wizard__step--upcoming]': 'status === "upcoming" && !completed',
+        '[class.fd-wizard__step--upcoming]': 'status === "upcoming"',
         '[class.fd-wizard__step--active]': 'status === "active"'
     },
     templateUrl: './wizard-step.component.html',
@@ -169,12 +169,6 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
         ) {
             this.stepClicked.emit(this);
         }
-    }
-
-    /** @hidden */
-    wizardLabelClicked(event: MouseEvent): void {
-        event.preventDefault();
-        this.stepClicked.emit(this);
     }
 
     /** @hidden */
