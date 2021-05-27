@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.32...v0.30.1-rc.33) (2021-05-27)
+
+
+### Bug Fixes
+
+* (Core) fix for a11y issues of Pagination component. ([#5468](https://github.com/SAP/fundamental-ngx/issues/5468)) ([8dabef7](https://github.com/SAP/fundamental-ngx/commit/8dabef7ce78dd5381488300a3dcebd838b9a2550))
+
 ### [0.30.1-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.31...v0.30.1-rc.32) (2021-05-26)
 
 ### [0.30.1-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.30...v0.30.1-rc.31) (2021-05-26)
