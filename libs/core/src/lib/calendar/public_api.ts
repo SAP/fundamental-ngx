@@ -10,3 +10,4 @@ export * from './calendar-views/calendar-month-view/calendar-month-view.componen
 export * from './calendar-views/calendar-year-view/calendar-year-view.component';
 export * from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
 export * from './calendar-directives';
+export * from './calendar.service';

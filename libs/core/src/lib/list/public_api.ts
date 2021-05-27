@@ -14,3 +14,4 @@ export * from './directives/byline/list-byline-right.directive';
 export * from './directives/byline/list-content.directive';
 export * from './directives/byline/list-thumbnail.directive';
 export * from './list.component';
+export * from './list-focus-item.model';

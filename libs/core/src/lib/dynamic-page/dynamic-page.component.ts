@@ -13,7 +13,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
+import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import {
     DynamicPageContentComponent
 } from './dynamic-page-content/dynamic-page-content.component';
@@ -299,7 +299,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
             addClassNameToElement(
                 this._renderer,
                 pinCollapseShadowElement.nativeElement,
-                CLASS_NAME.dynamicPageCollapsibleHeaderPinCollapseNoShadow
+                DYNAMIC_PAGE_CLASS_NAME.dynamicPageCollapsibleHeaderPinCollapseNoShadow
             );
         }
     }

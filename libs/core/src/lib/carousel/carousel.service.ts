@@ -295,6 +295,7 @@ export class CarouselService implements OnDestroy {
 
     /** @hidden */
     private _hammerSetup(): void {
+
         this._hammer = new Hammer(this._elementRef.nativeElement);
 
         if (this.config.vertical) {

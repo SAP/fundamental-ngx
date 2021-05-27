@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { whenStable } from '@fundamental-ngx/core/utils';
-import { CarouselModule } from '../utils/directives/carousel/carousel.module';
+import { whenStable } from '@fundamental-ngx/core/tests';
+import { CarouselModule } from '@fundamental-ngx/core/carousel';
 import { CarouselComponent } from './carousel.component';
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
 import { ButtonModule } from '../button/button.module';

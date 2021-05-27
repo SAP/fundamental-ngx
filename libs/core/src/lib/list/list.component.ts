@@ -40,7 +40,7 @@ type FocusItem = ListGroupHeaderDirective | ListItemComponent;
         role: 'list',
         tabindex: '0'
     },
-    styleUrls: ['./list.component.scss', '../../utils/src/drag-and-drop/drag-and-drop.scss'],
+    styleUrls: ['./list.component.scss', '../utils/drag-and-drop/drag-and-drop.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [KeyboardSupportService]

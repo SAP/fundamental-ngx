@@ -13,7 +13,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
+import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { addClassNameToElement } from '../../utils';
 import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
@@ -78,7 +78,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
 
     /** @hidden */
     ngOnInit(): void {
-        this._addClassNameToHostElement(CLASS_NAME.dynamicPageTitleArea);
+        this._addClassNameToHostElement(DYNAMIC_PAGE_CLASS_NAME.dynamicPageTitleArea);
         this._listenToPageChanges();
     }
 
@@ -136,7 +136,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
         if (this._breadcrumbComponent) {
             this._addClassNameToCustomElement(
                 this._breadcrumbComponent.elementRef.nativeElement,
-                CLASS_NAME.dynamicPageBreadcrumb
+                DYNAMIC_PAGE_CLASS_NAME.dynamicPageBreadcrumb
             );
         }
     }

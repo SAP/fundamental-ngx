@@ -1,6 +1,6 @@
 {
-  "name": "breadcrumb",
-  "version": "0.0.1",
+  "name": "@fundamental-ngx/core/breadcrumb",
+  "version": "VERSION_PLACEHOLDER",
   "peerDependencies": {
     "@angular/common": "^11.2.14",
     "@angular/core": "^11.2.14"

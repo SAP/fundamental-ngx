@@ -18,7 +18,8 @@ export enum MobileModeControl {
     MENU = 'MENU',
     SELECT = 'SELECT',
     COMBOBOX = 'COMBOBOX',
-    MULTI_INPUT = 'MULTI_INPUT'
+    MULTI_INPUT = 'MULTI_INPUT',
+    MULTI_COMBOBOX = 'MULTI_COMBOBOX'
 }
 
 export abstract class MobileModeBase<T extends MobileMode> {

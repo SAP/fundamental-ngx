@@ -7,509 +7,890 @@
     "tslint.json": "*",
     "nx.json": "*"
   },
-  "affected": { "defaultBase": "main" },
+  "affected": {
+    "defaultBase": "main"
+  },
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
       "options": {
-        "strictlyOrderedTargets": ["build", "lint", "test", "e2e"],
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
+        "strictlyOrderedTargets": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ]
       }
     }
   },
   "projects": {
     "docs": {
-      "tags": ["fd"],
-      "implicitDependencies": ["platform"]
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core",
+        "platform"
+      ]
     },
     "docs-e2e": {
       "tags": [],
-      "implicitDependencies": ["docs"]
+      "implicitDependencies": [
+        "docs"
+      ]
     },
-    "fundamental-ngx": {
+    "core": {
       "tags": [],
       "implicitDependencies": [
-        "icon",
-        "button",
-        "checkbox",
-        "dialog",
-        "action-bar",
-        "action-sheet",
-        "alert",
-        "avatar",
-        "avatar-group",
-        "bar",
-        "busy-indicator",
-        "calendar",
-        "card",
-        "carousel",
-        "combobox",
-        "date-picker",
-        "datetime",
-        "datetime-picker",
-        "dynamic-page",
-        "dynamic-side-content",
-        "facets",
-        "feed-input",
-        "feed-list-item",
-        "file-uploader",
-        "fixed-card-layout",
-        "flexible-column-layout",
-        "form",
-        "formatted-text",
-        "grid-list",
-        "illustrated-message",
-        "infinite-scroll",
-        "info-label",
-        "inline-help",
-        "input-group",
-        "layout-grid",
-        "layout-panel",
-        "link",
-        "list",
-        "menu",
-        "message-box",
-        "message-strip",
-        "notification",
-        "object-identifier",
-        "object-marker",
-        "object-number",
-        "object-status",
-        "pagination",
-        "panel",
-        "popover",
-        "product-switch",
-        "quick-view",
-        "radio",
-        "rating-indicator",
-        "scroll-spy",
-        "segmented-button",
-        "select",
-        "shared",
-        "shellbar",
-        "side-navigation",
-        "slider",
-        "split-button",
-        "status-indicator",
-        "step-input",
-        "switch",
-        "table",
-        "tabs",
-        "text",
-        "tile",
-        "time",
-        "time-picker",
-        "title",
-        "token",
-        "toolbar",
-        "utils",
-        "message-toast",
-        "multi-input",
-        "wizard",
-        "tree"
+        "core-icon",
+        "core-button",
+        "core-checkbox",
+        "core-dialog",
+        "core-action-bar",
+        "core-action-sheet",
+        "core-alert",
+        "core-avatar",
+        "core-avatar-group",
+        "core-bar",
+        "core-busy-indicator",
+        "core-calendar",
+        "core-card",
+        "core-carousel",
+        "core-combobox",
+        "core-date-picker",
+        "core-datetime",
+        "core-datetime-picker",
+        "core-dynamic-page",
+        "core-dynamic-side-content",
+        "core-facets",
+        "core-feed-input",
+        "core-feed-list-item",
+        "core-file-uploader",
+        "core-fixed-card-layout",
+        "core-flexible-column-layout",
+        "core-form",
+        "core-formatted-text",
+        "core-grid-list",
+        "core-illustrated-message",
+        "core-infinite-scroll",
+        "core-info-label",
+        "core-inline-help",
+        "core-input-group",
+        "core-layout-grid",
+        "core-layout-panel",
+        "core-link",
+        "core-list",
+        "core-menu",
+        "core-message-box",
+        "core-message-strip",
+        "core-notification",
+        "core-object-identifier",
+        "core-object-marker",
+        "core-object-number",
+        "core-object-status",
+        "core-pagination",
+        "core-panel",
+        "core-popover",
+        "core-product-switch",
+        "core-quick-view",
+        "core-radio",
+        "core-rating-indicator",
+        "core-scroll-spy",
+        "core-segmented-button",
+        "core-select",
+        "core-shared",
+        "core-shellbar",
+        "core-side-navigation",
+        "core-slider",
+        "core-split-button",
+        "core-status-indicator",
+        "core-step-input",
+        "core-switch",
+        "core-table",
+        "core-tabs",
+        "core-text",
+        "core-tile",
+        "core-time",
+        "core-time-picker",
+        "core-title",
+        "core-token",
+        "core-toolbar",
+        "core-utils",
+        "core-message-toast",
+        "core-multi-input",
+        "core-wizard",
+        "core-tree"
       ]
     },
     "platform": {
-      "tags": ["fdp"]
-    },
-    "icon": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "button": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "checkbox": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "action-bar": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "action-sheet": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "popover", "button"]
-    },
-    "alert": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "button"]
-    },
-    "avatar": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "avatar-group": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "bar": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "button"]
-    },
-    "breadcrumb": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "menu", "popover"]
-    },
-    "busy-indicator": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "calendar": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "card": {
-      "tags": ["fd"],
-      "implicitDependencies": [
-        "utils",
-        "shared",
-        "avatar",
-        "object-status",
-        "button"
+      "tags": [
+        "fdp"
       ]
     },
-    "carousel": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "combobox": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "list", "menu"]
-    },
-    "date-picker": {
-      "tags": ["fd"],
+    "core-breadcrumb": {
+      "tags": [
+        "fd"
+      ],
       "implicitDependencies": [
-        "utils",
-        "shared",
-        "calendar",
-        "form",
-        "icon",
-        "popover",
-        "input-group",
-        "button"
+        "core-utils",
+        "core-menu",
+        "core-popover"
       ]
     },
-    "datetime": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "datetime-picker": {
-      "tags": ["fd"],
+    "core-message-page": {
+      "tags": [
+        "fd"
+      ],
       "implicitDependencies": [
-        "utils",
-        "shared",
-        "datetime",
-        "calendar",
-        "form",
-        "time"
+        "core-utils"
       ]
     },
-    "dialog": {
-      "tags": ["fd"],
+    "core-nested-list": {
+      "tags": [
+        "fd"
+      ],
       "implicitDependencies": [
-        "title",
-        "bar",
-        "button",
-        "busy-indicator",
-        "utils",
-        "shared"
+        "core-utils",
+        "core-menu",
+        "core-popover",
+        "core-icon"
       ]
     },
-    "dynamic-page": {
-      "tags": ["fd"],
+    "core-mobile-mode": {
+      "tags": [
+        "fd"
+      ],
       "implicitDependencies": [
-        "utils",
-        "shared",
-        "toolbar",
-        "breadcrumb",
-        "tabs"
+        "core-utils",
+        "core-dialog"
       ]
     },
-    "dynamic-side-content": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "facets": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "form"]
-    },
-    "feed-input": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "avatar", "form"]
-    },
-    "feed-list-item": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "file-uploader": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "form", "button"]
-    },
-    "fixed-card-layout": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "flexible-column-layout": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "form": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "inline-help"]
-    },
-    "formatted-text": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "grid-list": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "toolbar", "form"]
-    },
-    "illustrated-message": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "infinite-scroll": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "info-label": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "inline-help": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "input-group": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "layout-grid": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "layout-panel": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "link": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "list": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "form", "checkbox"]
-    },
-    "menu": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "list"]
-    },
-    "message-box": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "message-strip": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "message-page": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "message-toast": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "multi-input": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "nested-list": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "menu", "popover", "icon"]
-    },
-    "notification": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "object-identifier": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "link"]
-    },
-    "object-marker": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "object-number": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "object-status": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "pagination": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "select"]
-    },
-    "panel": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "popover": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "product-switch": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "menu", "popover"]
-    },
-    "quick-view": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "form", "popover"]
-    },
-    "radio": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "rating-indicator": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "popover"]
-    },
-    "scroll-spy": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "segmented-button": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "select": {
-      "tags": ["fd"],
+    "core-tests": {
+      "tags": [
+        "fd"
+      ],
       "implicitDependencies": [
-        "utils",
-        "shared",
-        "popover",
-        "list",
-        "busy-indicator"
+        "core-mobile-mode"
       ]
     },
-    "shellbar": {
-      "tags": ["fd"],
+    "core-icon": {
+      "tags": [
+        "fd"
+      ],
       "implicitDependencies": [
-        "utils",
-        "shared",
-        "combobox",
-        "menu",
-        "product-switch",
-        "popover",
-        "avatar"
+        "core-utils"
       ]
     },
-    "side-navigation": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "nested-list"]
-    },
-    "slider": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "popover"]
-    },
-    "split-button": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "menu"]
-    },
-    "status-indicator": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "step-input": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "switch": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "table": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "checkbox"]
-    },
-    "tabs": {
-      "tags": ["fd"],
+    "core-button": {
+      "tags": [
+        "fd"
+      ],
       "implicitDependencies": [
-        "utils",
-        "shared",
-        "scroll-spy",
-        "popover",
-        "menu",
-        "icon",
-        "checkbox"
+        "core-utils",
+        "core-icon"
       ]
     },
-    "text": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "link"]
-    },
-    "tile": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "time": {
-      "tags": ["fd"],
+    "core-checkbox": {
+      "tags": [
+        "fd"
+      ],
       "implicitDependencies": [
-        "utils",
-        "shared",
-        "carousel",
-        "datetime",
-        "form"
+        "core-utils"
       ]
     },
-    "time-picker": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "time", "popover"]
-    },
-    "title": {
-      "tags": ["fd"],
-      "implicitDependencies": ["icon", "utils"]
-    },
-    "token": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "input-group", "form"]
-    },
-    "toolbar": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "popover"]
-    },
-    "tree": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils"]
-    },
-    "wizard": {
-      "tags": ["fd"],
+    "core-dialog": {
+      "tags": [
+        "fd"
+      ],
       "implicitDependencies": [
-        "utils",
-        "shared",
-        "dialog",
-        "mobile-mode",
-        "action-sheet"
+        "core-title",
+        "core-bar",
+        "core-button",
+        "core-busy-indicator",
+        "core-utils",
+        "core-shared"
       ]
     },
-    "mobile-mode": {
-      "tags": ["fd"],
-      "implicitDependencies": ["utils", "dialog"]
+    "core-action-bar": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
     },
-    "utils": {
-      "tags": []
+    "core-action-sheet": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-popover",
+        "core-button",
+        "core-dialog"
+      ]
     },
-    "shared": {
-      "tags": ["fd"]
+    "core-alert": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-button"
+      ]
     },
-    "tests": {
-      "tags": ["fd"],
-      "implicitDependencies": ["mobile-mode"]
+    "core-avatar": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-avatar-group": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-bar": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-button"
+      ]
+    },
+    "core-busy-indicator": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-calendar": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-card": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-shared",
+        "core-avatar",
+        "core-object-status",
+        "core-button"
+      ]
+    },
+    "core-carousel": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-combobox": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-list",
+        "core-menu"
+      ]
+    },
+    "core-date-picker": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-shared",
+        "core-calendar",
+        "core-form",
+        "core-icon",
+        "core-popover",
+        "core-input-group",
+        "core-button"
+      ]
+    },
+    "core-datetime": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-datetime-picker": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-shared",
+        "core-datetime",
+        "core-calendar",
+        "core-form",
+        "core-time"
+      ]
+    },
+    "core-dynamic-page": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-shared",
+        "core-toolbar",
+        "core-breadcrumb",
+        "core-tabs"
+      ]
+    },
+    "core-dynamic-side-content": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-facets": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-form"
+      ]
+    },
+    "core-feed-input": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-avatar",
+        "core-form"
+      ]
+    },
+    "core-feed-list-item": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-file-uploader": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-form",
+        "core-button"
+      ]
+    },
+    "core-fixed-card-layout": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-flexible-column-layout": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-form": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-inline-help"
+      ]
+    },
+    "core-formatted-text": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-grid-list": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-toolbar",
+        "core-form"
+      ]
+    },
+    "core-illustrated-message": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-infinite-scroll": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-info-label": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-inline-help": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-popover"
+      ]
+    },
+    "core-input-group": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-layout-grid": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-layout-panel": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-link": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-list": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-form",
+        "core-checkbox"
+      ]
+    },
+    "core-menu": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-list",
+        "core-mobile-mode"
+      ]
+    },
+    "core-message-box": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-dialog"
+      ]
+    },
+    "core-message-strip": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-notification": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-object-identifier": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-link"
+      ]
+    },
+    "core-object-marker": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-object-number": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-object-status": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-pagination": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-select"
+      ]
+    },
+    "core-panel": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-button"
+      ]
+    },
+    "core-popover": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-product-switch": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-menu",
+        "core-popover"
+      ]
+    },
+    "core-quick-view": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-form",
+        "core-popover",
+        "core-bar"
+      ]
+    },
+    "core-radio": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-rating-indicator": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-popover"
+      ]
+    },
+    "core-scroll-spy": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-segmented-button": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-select": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-shared",
+        "core-popover",
+        "core-list",
+        "core-mobile-mode",
+        "core-busy-indicator"
+      ]
+    },
+    "core-shared": {
+      "tags": [
+        "fd"
+      ]
+    },
+    "core-shellbar": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-shared",
+        "core-combobox",
+        "core-menu",
+        "core-product-switch",
+        "core-popover",
+        "core-avatar"
+      ]
+    },
+    "core-side-navigation": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-nested-list"
+      ]
+    },
+    "core-slider": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-popover"
+      ]
+    },
+    "core-split-button": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-menu"
+      ]
+    },
+    "core-status-indicator": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-step-input": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-button"
+      ]
+    },
+    "core-switch": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-table": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-checkbox"
+      ]
+    },
+    "core-tabs": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-shared",
+        "core-scroll-spy",
+        "core-popover",
+        "core-menu",
+        "core-icon",
+        "core-checkbox"
+      ]
+    },
+    "core-text": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-link"
+      ]
+    },
+    "core-tile": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-time": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-shared",
+        "core-carousel",
+        "core-datetime",
+        "core-form"
+      ]
+    },
+    "core-time-picker": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-time",
+        "core-popover"
+      ]
+    },
+    "core-title": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-icon",
+        "core-utils"
+      ]
+    },
+    "core-token": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-input-group",
+        "core-form"
+      ]
+    },
+    "core-toolbar": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-popover",
+        "core-button"
+      ]
+    },
+    "core-utils": {
+      "tags": [],
+      "implicitDependencies": ["core-shared"]
+    },
+    "core-message-toast": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-multi-input": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils"
+      ]
+    },
+    "core-wizard": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-shared",
+        "core-dialog",
+        "core-mobile-mode",
+        "core-action-sheet"
+      ]
+    },
+    "core-tree": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-popover",
+        "core-menu"
+      ]
     }
   }
 }

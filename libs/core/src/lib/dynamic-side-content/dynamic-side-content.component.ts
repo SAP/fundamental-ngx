@@ -15,7 +15,7 @@ import {
 import { startWith } from 'rxjs/operators';
 
 import {
-    CLASS_NAME,
+    DYNAMIC_SIDE_CONTENT_CLASS_NAME,
     DynamicSideContentPosition,
     DynamicSideContentSize,
     DYNAMIC_SIDE_CONTENT_CHILD_TOKEN
@@ -103,7 +103,7 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return [CLASS_NAME.container, getSizeClassName(this.size), getPositionClassName(this.position)];
+        return [DYNAMIC_SIDE_CONTENT_CLASS_NAME.container, getSizeClassName(this.size), getPositionClassName(this.position)];
     }
 
     /** @hidden */

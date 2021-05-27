@@ -18,7 +18,7 @@ import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, TAB, UP_ARROW } from
     templateUrl: './product-switch-body.component.html',
     styleUrls: [
         './product-switch-body.component.scss',
-        '../../../utils/src/drag-and-drop/drag-and-drop.scss'
+        '../../utils/drag-and-drop/drag-and-drop.scss'
     ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush

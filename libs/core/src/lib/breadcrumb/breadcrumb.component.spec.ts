@@ -8,7 +8,7 @@ import { Component, ViewChild } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { BreadcrumbComponent } from './breadcrumb.component';
-import { whenStable } from '@fundamental-ngx/core/utils';
+import { whenStable } from '@fundamental-ngx/core/tests';
 import { BreadcrumbItemDirective, BreadcrumbLinkDirective } from './public_api';
 @Component({
     selector: 'fd-breadcrumb-test-component',

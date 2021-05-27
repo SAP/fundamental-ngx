@@ -15,5 +15,6 @@
     "enableResourceInlining": true
   },
   "exclude": ["test.ts", "**/*.spec.ts"],
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts"],
+  "files": ["public_api.ts"]
 }
