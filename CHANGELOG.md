@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.37...v0.30.1-rc.38) (2021-05-28)
+
+
+### Bug Fixes
+
+* (Core) tooltip and screenreader added for Popover ([#5481](https://github.com/SAP/fundamental-ngx/issues/5481)) ([8fb86f7](https://github.com/SAP/fundamental-ngx/commit/8fb86f7247cffe212219f793f1b63692443e509b))
+
 ### [0.30.1-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.36...v0.30.1-rc.37) (2021-05-28)
 
 
