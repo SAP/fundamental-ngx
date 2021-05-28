@@ -46,6 +46,10 @@ let cdkPopoverUniqueId = 0;
 })
 export class PopoverComponent extends BasePopoverClass implements AfterViewInit, OnDestroy, OnChanges {
 
+    /** Tooltip for popover */
+    @Input()
+    title: string;
+
     /** Reference to popover trigger element */
     @Input()
     trigger: ElementRef;
