@@ -39,15 +39,15 @@ export class MenuButtonComponent extends BaseComponent implements OnInit {
     @Output()
     buttonClicked: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
 
-    // tabindex for button.
-    tabindex = 0;
-
     /**
      * @hidden disabling fd-button does not disables menu button. because menu trigger is on menu-button; menu gets open.
      * to prevent this, need to apply is-disabled at menu-button level as well.
      */
     @HostBinding('class.is-disabled')
-    private _menuButtonDisabled = false;
+    menuButtonDisabled = false;
+
+    // tabindex for button.
+    tabindex = 0;
 
     constructor(_cd: ChangeDetectorRef) {
         super(_cd);
@@ -55,7 +55,7 @@ export class MenuButtonComponent extends BaseComponent implements OnInit {
 
     /** @hidden */
     ngOnInit(): void {
-        this._menuButtonDisabled = this.disabled;
+        this.menuButtonDisabled = this.disabled;
         this.tabindex = this.disabled ? -1 : 0;
     }
 
