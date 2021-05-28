@@ -39,7 +39,8 @@ export type fdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
             useExisting: forwardRef(() => CheckboxComponent),
             multi: true
         }
-    ]
+    ],
+    host: { '[attr.tabindex]': '-1' }
 })
 export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestroy {
     /** @hidden */
