@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.38...v0.30.1-rc.39) (2021-05-28)
+
+
+### Bug Fixes
+
+* (Core) fix pickers input groupt focus state ([#5510](https://github.com/SAP/fundamental-ngx/issues/5510)) ([9fcc61e](https://github.com/SAP/fundamental-ngx/commit/9fcc61e934a1993a9be4c35e06b5e7b8b83a2dc2))
+
 ### [0.30.1-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.37...v0.30.1-rc.38) (2021-05-28)
 
 
