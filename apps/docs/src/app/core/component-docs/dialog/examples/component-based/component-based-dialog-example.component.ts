@@ -28,7 +28,8 @@ export class ComponentBasedDialogExampleComponent {
                     `In Hawaii, the word for pineapple is “Hala kahiki“`
                 ]
             },
-            width: '400px'
+            width: '400px',
+            ariaLabelledBy: 'fd-dialog-header-1'
         });
 
         dialogRef.afterClosed.subscribe(

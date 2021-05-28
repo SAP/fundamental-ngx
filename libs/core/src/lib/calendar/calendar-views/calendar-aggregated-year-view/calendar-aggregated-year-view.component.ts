@@ -256,7 +256,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
             this._dateTimeFormats.display.yearA11yLabel
         );
         const endYearFormatted = this._dateTimeAdapter.format(
-            this._dateTimeAdapter.createDate(years.startYear, 1, 1),
+            this._dateTimeAdapter.createDate(years.endYear, 1, 1),
             this._dateTimeFormats.display.yearA11yLabel
         );
         return `${this._getYearString(years.startYear, startYearFormatted)} - ${this._getYearString(

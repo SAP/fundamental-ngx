@@ -73,6 +73,11 @@ export class DialogConfigBase<T> implements DynamicComponentConfig {
     /** Whether the dialog should have vertical padding. */
     verticalPadding?: boolean = true;
 
+    /** Workaround for IE11, as `flex-grow: 1` on dialog body won't work when 'min-height' for dialog set
+     * There is another way to get dialog of wanted height by setting `min-height` for dialog body.
+     */
+    bodyMinHeight?: string;
+
     /** Whether the dialog should have responsive horizontal padding changing with Dialogs window width.
      * max-width: 599px                         - .fd-dialog__content--s
      * min-width: 600px and max-width: 1023px   - .fd-dialog__content--m

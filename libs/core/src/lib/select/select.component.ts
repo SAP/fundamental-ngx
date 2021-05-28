@@ -91,7 +91,7 @@ export class SelectComponent implements
     @Input()
     controlId = `fd-select-${selectUniqueId++}`;
 
-    /** Whether the select component is disabled. */
+    /** Holds the control state of select */
     @Input()
     state: SelectControlState = null;
 
@@ -99,7 +99,7 @@ export class SelectComponent implements
     @Input()
     mobile = false;
 
-    /** Whether the select component is disabled. */
+    /** Holds the message with respect to state */
     @Input()
     stateMessage: string;
 

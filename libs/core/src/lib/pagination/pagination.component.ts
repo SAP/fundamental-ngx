@@ -30,6 +30,9 @@ interface CurrentShowing {
     to: number;
     of: number;
 };
+
+let paginationUniqueId = 0;
+
 /**
  * The component that is used to provide navigation between paged information.
  * ```html
@@ -60,6 +63,10 @@ interface CurrentShowing {
     preserveWhitespaces: true
 })
 export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
+    /** Id for the pagination component. If omitted, a unique one is generated. */
+    @Input()
+    id: string = 'fd-pagination-' + paginationUniqueId++;
+
     /** Represents the total number of items. */
     @Input()
     totalItems: number;
@@ -125,6 +132,11 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     /** Label for the 'next' page button. */
     @Input()
     nextLabel = 'Next';
+
+    /** Label for the 'Page' page button. */
+    @Input()
+    pageLabel = 'Page';
+
 
     /** Event fired when the page is changed. */
     @Output()

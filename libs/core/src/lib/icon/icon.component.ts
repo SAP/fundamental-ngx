@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 export type IconFont = 'SAP-icons' | 'BusinessSuiteInAppSymbols' | 'SAP-icons-TNT';
@@ -40,6 +40,11 @@ export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
     /** user's custom classes */
     @Input()
     class: string;
+
+    /** Aria-label for Icon. */
+    @Input()
+    @HostBinding('attr.aria-label')
+    ariaLabel: string = null;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}

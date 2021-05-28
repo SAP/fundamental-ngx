@@ -10,6 +10,6 @@ export class DialogStackedExampleComponent {
     constructor(private _dialogService: DialogService) {}
 
     openDialog(): void {
-        this._dialogService.open(FirstDialogExampleComponent, { responsivePadding: true });
+        this._dialogService.open(FirstDialogExampleComponent, { responsivePadding: true, ariaLabelledBy: 'fd-dialog-header-8' });
     }
 }

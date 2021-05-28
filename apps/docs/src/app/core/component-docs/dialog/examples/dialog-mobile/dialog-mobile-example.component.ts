@@ -11,7 +11,8 @@ export class DialogMobileExampleComponent {
     openDialog(dialogTemplate): void {
         this._dialogService.open(dialogTemplate, {
             mobile: true,
-            responsivePadding: true
+            responsivePadding: true,
+            ariaLabelledBy: 'fd-dialog-header-5'
         });
     }
 }

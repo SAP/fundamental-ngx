@@ -12,7 +12,8 @@ export class DialogPositionExampleComponent {
         this._dialogService.open(template, {
             width: '300px',
             responsivePadding: true,
-            position: { bottom: '100px', right: '100px' }
+            position: { bottom: '100px', right: '100px' },
+            ariaLabelledBy: 'fd-dialog-header-6'
         });
     }
 }

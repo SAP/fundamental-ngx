@@ -45,7 +45,8 @@ export class DialogComplexExampleComponent {
             height: '370px',
             draggable: true,
             resizable: true,
-            verticalPadding: false
+            verticalPadding: false,
+            ariaLabelledBy: 'fd-dialog-header-3'
         });
         this.dialogRef.loading(true);
         setTimeout(() => this.dialogRef.loading(false), 2000);
