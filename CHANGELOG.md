@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.40...v0.30.1-rc.41) (2021-05-28)
+
+
+### Bug Fixes
+
+* (Core) fix calendar aria-label wrong date for year range ([#5512](https://github.com/SAP/fundamental-ngx/issues/5512)) ([30db74d](https://github.com/SAP/fundamental-ngx/commit/30db74d58a1ceb0b1b5002033d944f432244d15a))
+
 ### [0.30.1-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.39...v0.30.1-rc.40) (2021-05-28)
 
 
