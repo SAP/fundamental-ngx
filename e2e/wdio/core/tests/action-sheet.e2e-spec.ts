@@ -4,7 +4,7 @@ import {
     checkElementScreenshot,
     click,
     getAttributeByName,
-    getElementArrayLength,
+    getElementArrayLength, getElementClass,
     getImageTagBrowserPlatform,
     getText,
     mouseHoverElement,
@@ -16,7 +16,7 @@ import {
     waitForNotDisplayed
 } from '../../driver/wdio';
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
-import { alertMessages, classAttribute, compactValue } from '../fixtures/appData/action-sheet-content';
+import { alertMessages, compactValue } from '../fixtures/appData/action-sheet-content';
 
 describe('Action sheet test suite', function() {
     const actionSheetPage = new ActionSheetPo();
@@ -48,7 +48,7 @@ describe('Action sheet test suite', function() {
 
     it('should check compact', () => {
         click(actionSheetMenuButton, 1);
-        expect(getAttributeByName(actionSheetListItemButtons, classAttribute)).toContain(compactValue);
+        expect(getElementClass(actionSheetListItemButtons)).toContain(compactValue);
     });
 
     it('should check alert appears after selection', () => {

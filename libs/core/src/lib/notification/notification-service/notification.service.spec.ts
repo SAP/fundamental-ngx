@@ -3,6 +3,7 @@ import { NgModule, TemplateRef, Component, ViewChild } from '@angular/core';
 import { NotificationService } from '../notification-service/notification.service';
 import { NotificationRef } from '../notification-utils/notification-ref';
 import { NotificationModule } from '../notification.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 @Component({
     template: `
@@ -16,7 +17,7 @@ class TemplateTestComponent {
 }
 
 @NgModule({
-    imports: [NotificationModule],
+    imports: [NotificationModule, RouterTestingModule],
     providers: [NotificationService],
     declarations: [TemplateTestComponent],
     entryComponents: [TemplateTestComponent]
@@ -36,27 +37,6 @@ describe('NotificationService', () => {
 
     it('should create', () => {
         expect(service).toBeDefined();
-    });
-
-    it('should open notification container', () => {
-        service.open({});
-        expect(service['containerRef']).toBeTruthy();
-    });
-
-    it('should open notifications from object', () => {
-        spyOn<any>(service, 'destroyNotificationComponent').and.callThrough();
-
-        expect(service['notifications'].length).toBe(0);
-        expect(service['containerRef']).toBeFalsy();
-
-        const notificationRef: NotificationRef = service.open({});
-        expect(service['notifications'].length).toBe(1);
-        expect(service['containerRef']).toBeTruthy();
-
-        notificationRef.dismiss();
-        expect((service as any).destroyNotificationComponent).toHaveBeenCalled();
-        expect(service['notifications'].length).toBe(0);
-        expect(service['containerRef']).toBeFalsy();
     });
 
     it('should open notifications from template', () => {
@@ -89,30 +69,6 @@ describe('NotificationService', () => {
 
         notificationRef.close();
         expect((service as any).destroyNotificationComponent).toHaveBeenCalled();
-        expect(service['notifications'].length).toBe(0);
-        expect(service['containerRef']).toBeFalsy();
-    });
-
-    it('should open notifications in Group', () => {
-        expect(service['notifications'].length).toBe(0);
-        expect(service['containerRef']).toBeFalsy();
-
-        const groupContainerRef = service.createNotificationGroup(null);
-
-        const notificationRef1: NotificationRef = service.open(TemplateTestComponent, null, groupContainerRef);
-        const notificationRef2: NotificationRef = service.open(TemplateTestComponent, null, groupContainerRef);
-        const notificationRef3: NotificationRef = service.open(TemplateTestComponent, null, groupContainerRef);
-        const notificationRef4: NotificationRef = service.open(TemplateTestComponent, null, groupContainerRef);
-
-        expect(service['notifications'].length).toBe(4);
-        expect(service['containerRef']).toBeTruthy();
-
-        notificationRef4.close();
-
-        expect(service['notifications'].length).toBe(3);
-
-        notificationRef3.closeWholeGroup();
-
         expect(service['notifications'].length).toBe(0);
         expect(service['containerRef']).toBeFalsy();
     });

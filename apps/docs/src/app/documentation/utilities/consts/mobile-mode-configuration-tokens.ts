@@ -11,6 +11,11 @@ export const COMBOBOX_MOBILE_CONFIG: MobileModeConfigToken = {
     config: {dialogConfig: MOBILE_DIALOG_PORTRAIT}
 };
 
+export const MULTI_COMBOBOX_MOBILE_CONFIG: MobileModeConfigToken = {
+    target: MobileModeControl.MULTI_COMBOBOX,
+    config: {dialogConfig: MOBILE_DIALOG_PORTRAIT}
+};
+
 export const MULTI_INPUT_MOBILE_CONFIG: MobileModeConfigToken = {
     target: MobileModeControl.MULTI_INPUT,
     config: {dialogConfig: MOBILE_DIALOG_PORTRAIT}

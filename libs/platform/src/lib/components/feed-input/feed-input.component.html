@@ -15,10 +15,8 @@
     <textarea
         #textAreaElement
         fd-form-control
-        aria-required="true"
         class="fd-textarea  fd-feed-input__textarea"
         [disabled]="disabled"
-        [attr.aria-disabled]="disabled"
         [placeholder]="placeholder"
         [(ngModel)]="value"
         (ngModelChange)="onChange()"
@@ -29,7 +27,7 @@
         glyph="feeder-arrow"
         title="Send"
         ariaLabel="Send"
-        [ariaDisabled]="!value || disabled"
+        [disabled]="!value || disabled"
         (click)="onSubmit()"
     >
     </fdp-button>

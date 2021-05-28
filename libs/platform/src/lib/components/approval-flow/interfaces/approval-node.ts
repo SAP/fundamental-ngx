@@ -11,27 +11,43 @@ export interface ApprovalNode {
     dueDate?: Date;
     createDate?: Date;
     approvalTeamId?: string;
+    variousTeams?: boolean;
     isEveryoneApprovalNeeded?: boolean;
+    disableActions?: boolean;
+    actionsConfig?: ApprovalNodeActionsConfig;
 }
 
-export type ApprovalGraphNode = ApprovalNode & { blank?: boolean; meta?: any };
+export type ApprovalGraphNode = ApprovalNode & { blank?: boolean; space?: boolean; };
 
+export interface ApprovalGraphMetadata {
+    [key: string]: ApprovalGraphNodeMetadata
+}
 export interface ApprovalGraphNodeMetadata {
-    parent: ApprovalGraphNode;
+    parents: ApprovalGraphNode[];
     isRoot: boolean;
-    isLast: boolean;
+    isFinal: boolean;
     parallelStart: boolean;
     parallelEnd: boolean;
-    isParallel: boolean;
     isLastInParallel?: boolean;
+    isFirstInParallel?: boolean;
     columnIndex?: number;
     nodeIndex?: number;
-    prevVNode?: ApprovalGraphNode;
-    nextVNode?: ApprovalGraphNode;
-    prevHNode?: ApprovalGraphNode;
-    nextHNode?: ApprovalGraphNode;
     canAddNodeBefore?: boolean;
     canAddNodeAfter?: boolean;
     canAddParallel?: boolean;
-    canDelete?: boolean;
+    renderAddNodeAfterButton?: boolean;
+    renderVerticalLineBefore?: boolean;
+    renderVerticalLineAfter?: boolean;
+    isVerticalLineBeforeSolid?: boolean;
+    isVerticalLineAfterSolid?: boolean;
+    firstOfMultipleRootNodes?: boolean;
+    rootNodesApproved?: boolean;
+}
+
+export interface ApprovalNodeActionsConfig {
+    disableAddBefore?: boolean;
+    disableAddAfter?: boolean;
+    disableAddParallel?: boolean;
+    disableEdit?: boolean;
+    disableRemove?: boolean;
 }

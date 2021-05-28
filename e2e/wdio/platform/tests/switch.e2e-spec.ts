@@ -13,7 +13,7 @@ import {
     browserIsSafari,
     click,
     getAttributeByName,
-    getCSSPropertyByName,
+    getCSSPropertyByName, getElementAriaLabel,
     getElementSize,
     isElementClickable,
     mouseHoverElement,
@@ -168,12 +168,12 @@ describe('Verify Switch component', function() {
 
     it('should have alternative title or aria-label for all switches', () => {
         waitForPresent(defaultSwitchInput);
-        const alternativeTextDefaultSwitch = getAttributeByName(defaultSwitchLabel, 'aria-label');
-        const alternativeTextDefaultCompactSwitch = getAttributeByName(defaultCompactSwitchLabel, 'aria-label');
-        const alternativeTextDisabledSwitch = getAttributeByName(disabledSwitchLabel, 'aria-label');
-        const alternativeTextFormDisabledSwitch = getAttributeByName(formDisabledSwitchLabel, 'aria-label');
-        const alternativeTextSemanticSwitch = getAttributeByName(semanticSwitchLabel, 'aria-label');
-        const alternativeTextSemanticCompactFormDisabledSwitch = getAttributeByName(semanticCompactSwitchLabel, 'aria-label');
+        const alternativeTextDefaultSwitch = getElementAriaLabel(defaultSwitchLabel);
+        const alternativeTextDefaultCompactSwitch = getElementAriaLabel(defaultCompactSwitchLabel);
+        const alternativeTextDisabledSwitch = getElementAriaLabel(disabledSwitchLabel);
+        const alternativeTextFormDisabledSwitch = getElementAriaLabel(formDisabledSwitchLabel);
+        const alternativeTextSemanticSwitch = getElementAriaLabel(semanticSwitchLabel);
+        const alternativeTextSemanticCompactFormDisabledSwitch = getElementAriaLabel(semanticCompactSwitchLabel);
 
         expect(alternativeTextDefaultSwitch).toBe(default_switch_alternative_text);
         expect(alternativeTextDefaultCompactSwitch).toBe(default_compact_switch_alternative_text);

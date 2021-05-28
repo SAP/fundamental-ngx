@@ -37,6 +37,10 @@ export class PlatformCheckboxGroupListObjectComponent {
     languagesKnown = '';
     currencies = ['INR', 'USD'];
     itemsData = ['pen'];
+
+    // outside form
+    selectedDishes = ['java', 'javascript'];
+    selectedInvoices = ['pen'];
 }
 
 class Country implements SelectItem {

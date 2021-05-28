@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NotificationService } from '@fundamental-ngx/core';
-import { NotificationContentComponent } from './notification-content.component';
+import { NotificationExampleContentComponent } from './notification-content.component';
 
 @Component({
     selector: 'fd-notification-component-as-content-example',
@@ -15,18 +15,15 @@ export class NotificationComponentAsContentExampleComponent {
     constructor(private notificationService: NotificationService) {}
 
     open(): void {
-        const notificationService = this.notificationService.open(NotificationContentComponent, {
+        const notificationService = this.notificationService.open(NotificationExampleContentComponent, {
             data: {
                 title: 'Notification Title',
-                description: 'Notification Description',
-                metadata: 'Other Data',
-                moreInfo: 'More Info',
-                approve: 'Approve',
-                cancel: 'Cancel',
-                type: 'success'
+                paragraph: 'Notification Description',
+                firstFooterContent: 'SAP Analytics Cloud',
+                secondFooterContent: 'Just Now',
+                open: 'Open'
             },
-            size: 'm',
-            type: 'success'
+            width: '500px'
         });
 
         notificationService.afterClosed.subscribe(

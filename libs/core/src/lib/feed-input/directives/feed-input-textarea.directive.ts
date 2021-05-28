@@ -27,7 +27,6 @@ export class FeedInputTextareaDirective implements OnInit {
 
     /** @hidden */
     @HostBinding('disabled')
-    @HostBinding('attr.aria-disabled')
     disabled: boolean;
 
     /** Event emitted when the textarea value changed */

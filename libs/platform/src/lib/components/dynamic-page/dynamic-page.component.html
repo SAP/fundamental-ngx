@@ -1,32 +1,64 @@
 <section class="fd-dynamic-page" [attr.aria-label]="ariaLabel">
-    <header class="fd-dynamic-page__header" [class.fd-dynamic-page__header--not-collapsible]="!headerCollapsible" #header>
+    <header
+        class="fd-dynamic-page__header"
+        [class.fd-dynamic-page__header--not-collapsible]="!_headerCollapsible"
+        #header
+    >
         <div>
-            <div (click)="toggleCollapse()" (keydown.enter)="toggleCollapse()">
-                <ng-content select="fdp-dynamic-page-title"></ng-content>
+            <div *ngIf="titleComponent" (click)="toggleCollapse()" (keydown.enter)="toggleCollapse()">
+                <ng-container *ngTemplateOutlet="titleComponent.contentTemplateRef"></ng-container>
             </div>
-            <ng-content select="fdp-dynamic-page-header"></ng-content>
+            <fdp-dynamic-page-header-internal
+                *ngIf="headerComponent"
+                [collapsible]="headerComponent.collapsible"
+                [pinnable]="headerComponent.pinnable"
+                [collapsed]="headerComponent.collapsed"
+                [expandLabel]="headerComponent.expandLabel"
+                [collapseLabel]="headerComponent.collapseLabel"
+                [role]="headerComponent.role"
+                [id]="headerComponent.id"
+                [headerAriaLabel]="headerComponent.headerAriaLabel"
+                [pinAriaLabel]="headerComponent.pinAriaLabel"
+                [unpinAriaLabel]="headerComponent.unpinAriaLabel"
+                [background]="headerComponent.background"
+                [size]="headerComponent.size"
+                (collapseChange)="headerComponent._onCollapseChange($event)"
+            >
+                <ng-container [ngTemplateOutlet]="headerComponent.contentTemplateRef"></ng-container>
+            </fdp-dynamic-page-header-internal>
         </div>
     </header>
 
-    <div class="fd-dynamic-page__tabs--overflow" *ngIf="isTabbed" #contentContainer>
+    <div class="fd-dynamic-page__tabs--overflow" *ngIf="isTabbed" #tabsContainer>
         <fd-tab-list (selectedTabChange)="_handleTabChange($event)" #dynamicPageTabs>
             <ng-container *ngFor="let tab of tabs; let i = index">
                 <fd-tab [title]="tab.tabLabel" [id]="tab.id">
-                    <fdp-dynamic-page-tabbed-content
-                        [background]="background"
-                        [size]="size"
+                    <fdp-dynamic-page-content-host
+                        [background]="tab.background"
+                        [size]="tab.size"
+                        (scroll)="_onScrollContentSubject.next($event)"
                     >
-                        <ng-container *ngTemplateOutlet="tab.contentTemplate"></ng-container>
-                        <div class="footer-spacer"></div>
-                    </fdp-dynamic-page-tabbed-content>
+                        <ng-container *ngTemplateOutlet="tab.contentTemplateRef"></ng-container>
+                        <!-- footer spacer -->
+                        <div class="footer-spacer" *ngIf="footerComponent"></div>
+                    </fdp-dynamic-page-content-host>
                 </fd-tab>
             </ng-container>
         </fd-tab-list>
     </div>
-    <ng-container *ngIf="!isTabbed">
-        <ng-content select="fdp-dynamic-page-content"></ng-content>
+    <ng-container *ngIf="!isTabbed && contentComponent">
+        <fdp-dynamic-page-content-host
+            [id]="contentComponent.id"
+            [background]="contentComponent.background"
+            [size]="contentComponent.size"
+            (scroll)="_onScrollContentSubject.next($event)"
+        >
+            <ng-container *ngTemplateOutlet="contentComponent.contentTemplateRef"></ng-container>
+            <!-- footer spacer -->
+            <div class="footer-spacer" *ngIf="footerComponent"></div>
+        </fdp-dynamic-page-content-host>
     </ng-container>
     <footer>
-        <ng-content select="fdp-dynamic-page-footer"></ng-content>
+        <ng-container *ngIf="footerComponent" [ngTemplateOutlet]="footerComponent.contentTemplateRef"></ng-container>
     </footer>
 </section>

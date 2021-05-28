@@ -16,7 +16,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForPresent,
-    waitForElDisplayed, browserIsFirefox
+    waitForElDisplayed, browserIsFirefox, getElementAriaLabel, getElementTitle
 } from '../../driver/wdio';
 
 describe('Checkbox test suite', () => {
@@ -33,7 +33,9 @@ describe('Checkbox test suite', () => {
         tristateCheckboxParis,
         errorCheckboxes,
         presenceCheckbox,
-        accessibilityCheckboxes
+        accessibilityCheckboxes,
+        disabledAccessibilityCheckbox,
+        disabledAccessibilityCheckboxLabel,
 
     } = new CheckboxPO();
     const checkboxPage = new CheckboxPO();
@@ -250,8 +252,7 @@ describe('Checkbox test suite', () => {
 
     xdescribe('Check Accessibility on checkbox examples', () => {
         it('should check a11y checkboxes', () => {
-            expect(getAttributeByName(accessibilityCheckboxes, 'aria-label'))
-                .toEqual(a11yCheckboxAriaLabel);
+            expect(getElementAriaLabel(accessibilityCheckboxes)).toEqual(a11yCheckboxAriaLabel);
             expect(getAttributeByName(accessibilityCheckboxes, 'aria-disabled')).toBe('false');
 
             expect(getAttributeByName(accessibilityCheckboxes, 'aria-labelledby', 1))
@@ -260,10 +261,9 @@ describe('Checkbox test suite', () => {
         });
 
         it('should check the disabled accessibility checkbox', () => {
-            checkIfDisabled(checkboxPage.disabledAccessibilityCheckbox, 'ng-reflect-is-disabled', 'true');
-            expect(getAttributeByName(checkboxPage.disabledAccessibilityCheckbox, 'aria-disabled')).toBe('true');
-            expect(getAttributeByName(checkboxPage.disabledAccessibilityCheckboxLabel, 'title'))
-                .toEqual(disabledCheckboxTitle);
+            checkIfDisabled(disabledAccessibilityCheckbox, 'ng-reflect-is-disabled', 'true');
+            expect(getAttributeByName(disabledAccessibilityCheckbox, 'aria-disabled')).toBe('true');
+            expect(getElementTitle(disabledAccessibilityCheckboxLabel)).toEqual(disabledCheckboxTitle);
         });
     });
 
