@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.40...v0.30.1-rc.41) (2021-05-28)
+
+
+### Bug Fixes
+
+* (Core) fix calendar aria-label wrong date for year range ([#5512](https://github.com/SAP/fundamental-ngx/issues/5512)) ([30db74d](https://github.com/SAP/fundamental-ngx/commit/30db74d58a1ceb0b1b5002033d944f432244d15a))
+
+### [0.30.1-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.39...v0.30.1-rc.40) (2021-05-28)
+
+
+### Bug Fixes
+
+* (Core) allow enter symbols to combobox ([#5505](https://github.com/SAP/fundamental-ngx/issues/5505)) ([176f377](https://github.com/SAP/fundamental-ngx/commit/176f37751e3683102341c3143a176456b2cf05cf))
+
+### [0.30.1-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.38...v0.30.1-rc.39) (2021-05-28)
+
+
+### Bug Fixes
+
+* (Core) fix pickers input groupt focus state ([#5510](https://github.com/SAP/fundamental-ngx/issues/5510)) ([9fcc61e](https://github.com/SAP/fundamental-ngx/commit/9fcc61e934a1993a9be4c35e06b5e7b8b83a2dc2))
+
 ### [0.30.1-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.37...v0.30.1-rc.38) (2021-05-28)
 
 
