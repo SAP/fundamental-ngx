@@ -72,7 +72,7 @@ For an existing Angular CLI application,
 
     To add the entire library, add the following import to your main application module.
 
-    ```javascript
+    ```typescript
     import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 
     @NgModule({
@@ -86,14 +86,20 @@ For an existing Angular CLI application,
 
     For example, to use Switchs, add the following import to your main application module.
 
-    ```javascript
-    import { CheckboxModule } from '@fundamental-ngx/core’';
+    ```typescript
+    import { CheckboxModule } from '@fundamental-ngx/core';
+    ```
+
+    Version 0.31.0 brings new way of importing individual modules, which is prefered way.
+
+    ```typescript
+    import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
     ```
 
     For models prior to 0.10 use `fundamental-ngx`
 
-    ```
-    import { CheckboxModule } from '@fundamental-ngx/core';
+    ```typescript
+    import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 
     @NgModule({
         ...
