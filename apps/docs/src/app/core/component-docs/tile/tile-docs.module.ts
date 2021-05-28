@@ -16,7 +16,8 @@ import {
     TileColumnsExampleComponent,
     TileGenericExampleComponent
 } from './examples/tile-examples.component';
-import { AvatarModule, TileModule } from '@fundamental-ngx/core';
+import { TileModule } from '@fundamental-ngx/core/tile';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
 
 const routes: Routes = [
     {

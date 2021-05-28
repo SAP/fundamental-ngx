@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { IconModule, MOBILE_MODE_CONFIG } from '@fundamental-ngx/core';
 import { PlatformComboboxModule, PlatformComboboxMobileModule, FdpFormGroupModule } from '@fundamental-ngx/platform';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -18,6 +17,8 @@ import { ComboboxGroupExampleComponent } from './examples/combobox-group/combobo
 import { ComboboxFormsExampleComponent } from './examples/combobox-forms/combobox-forms-example.component';
 import { ComboboxStateComponent } from './examples/combobox-states/combobox-states-example.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
 
 const routes: Routes = [
     {

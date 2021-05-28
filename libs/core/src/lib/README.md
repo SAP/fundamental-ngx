@@ -1,4 +1,3 @@
-@@ -1,135 +0,0 @@
 # @Fundamental-NGX/Core
 
 [![npm version](https://badge.fury.io/js/%40fundamental-ngx%2Fcore.svg)](//www.npmjs.com/package/@fundamental-ngx/core)

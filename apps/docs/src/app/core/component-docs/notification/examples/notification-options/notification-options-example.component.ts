@@ -1,5 +1,6 @@
 import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
-import { ActionSheetComponent, MessageToastService } from '@fundamental-ngx/core';
+import { ActionSheetComponent } from '@fundamental-ngx/core/action-sheet';
+import { MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 @Component({
     selector: 'fd-notification-options-example',
@@ -12,7 +13,7 @@ export class NotificationOptionsExampleComponent {
 
     expanded = true;
 
-    constructor(private _messageToastService: MessageToastService, ) {}
+    constructor(private _messageToastService: MessageToastService) {}
 
     actionPicked(action: string): void {
         this.openMessageToast(action);

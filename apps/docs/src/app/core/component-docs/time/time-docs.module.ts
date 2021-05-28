@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FormModule, TimeModule, FdDatetimeModule } from '@fundamental-ngx/core';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
@@ -17,6 +16,9 @@ import { Time12ExampleComponent } from './examples/time-12-example.component';
 import { TimeTwoDigitsExampleComponent } from './examples/time-two-digits-example/time-two-digits-example.component';
 import { TimeSizesExampleComponent } from './examples/time-sizes-example.component';
 import { TimeNoSpinnersExampleComponent } from './examples/time-no-spinners-example/time-no-spinners-example.component';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { TimeModule } from '@fundamental-ngx/core/time';
 
 const routes: Routes = [
     {

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core';
+import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
 import {
     FdpFormGroupModule,
     PlatformMultiComboboxMobileModule,

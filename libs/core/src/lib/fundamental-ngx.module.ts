@@ -171,6 +171,6 @@ import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
         StatusIndicatorModule,
         GridListModule
     ],
-    providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService]
+    providers: []
 })
 export class FundamentalNgxCoreModule {}
