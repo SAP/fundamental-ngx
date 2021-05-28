@@ -25,8 +25,19 @@ export type HeaderSizes = 1 | 2 | 3 | 4 | 5 | 6;
 })
 export class TitleComponent implements OnInit, DoCheck {
     /** The size of the header */
+    _headerSize: HeaderSizes = null;
+
+    get headerSize(): HeaderSizes {
+        return this._headerSize;
+    }
+
     @Input()
-    headerSize: HeaderSizes = null;
+    set headerSize(value: HeaderSizes) {
+        this._headerSize = value;
+        if (this._appliedHeaderSize !== this.headerSize) {
+            this._setHeaderSize();
+        }
+    }
 
     /** Whether or not the title should wrap (truncates by default) */
     @Input()
