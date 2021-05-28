@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.39...v0.30.1-rc.40) (2021-05-28)
+
+
+### Bug Fixes
+
+* (Core) allow enter symbols to combobox ([#5505](https://github.com/SAP/fundamental-ngx/issues/5505)) ([176f377](https://github.com/SAP/fundamental-ngx/commit/176f37751e3683102341c3143a176456b2cf05cf))
+
 ### [0.30.1-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.38...v0.30.1-rc.39) (2021-05-28)
 
 
