@@ -18,9 +18,9 @@ export class PaginationPo extends CoreBaseComponentPo {
     toggledButton = 'fd-segmented-button button';
     selectPaginationPages = '#background-ex2 .fd-pagination__link.ng-star-inserted';
     playgroundInputFields = '.form-control';
-    playgroundPages = '.playground-content .fd-pagination__link.ng-star-inserted';
-    playgroundLabel = '.schema .fd-form-label';
-    playgroundExamples = '.col.playground-content .fd-pagination';
+    playgroundPages = '.fd-playground__content .fd-pagination__link.ng-star-inserted';
+    playgroundLabel = '.fd-playground__schema .fd-form-label';
+    playgroundExamples = '.fd-playground__content .fd-pagination';
 
 
     getScreenshotFolder(): object {

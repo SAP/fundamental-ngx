@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.37...v0.30.1-rc.38) (2021-05-28)
+
+
+### Bug Fixes
+
+* (Core) tooltip and screenreader added for Popover ([#5481](https://github.com/SAP/fundamental-ngx/issues/5481)) ([8fb86f7](https://github.com/SAP/fundamental-ngx/commit/8fb86f7247cffe212219f793f1b63692443e509b))
+
+### [0.30.1-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.36...v0.30.1-rc.37) (2021-05-28)
+
+
+### Bug Fixes
+
+* (Core) screenreader helper added for overflow ([#5490](https://github.com/SAP/fundamental-ngx/issues/5490)) ([cd9ce4b](https://github.com/SAP/fundamental-ngx/commit/cd9ce4b816c1ca97c0f28b92eafff7061a0fe0f9))
+* (Platform) information for docs are updated ([#5489](https://github.com/SAP/fundamental-ngx/issues/5489)) ([20cab6e](https://github.com/SAP/fundamental-ngx/commit/20cab6e3f74d7560779efa25b25d067da8a93b3d))
+* (Platform) Open Menu on click for Internet explorer ([#5484](https://github.com/SAP/fundamental-ngx/issues/5484)) ([919d670](https://github.com/SAP/fundamental-ngx/commit/919d670078c09af81c840ff296aa15b4df195d3b))
+
+### [0.30.1-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.35...v0.30.1-rc.36) (2021-05-27)
+
+### [0.30.1-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.34...v0.30.1-rc.35) (2021-05-27)
+
+
+### Bug Fixes
+
+* (Core) fix not readable label for accessibility ([#5460](https://github.com/SAP/fundamental-ngx/issues/5460)) ([1eb65ae](https://github.com/SAP/fundamental-ngx/commit/1eb65aef80b8a12d9ac58fc8f96ee2dd11bd8881))
+
+### [0.30.1-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.33...v0.30.1-rc.34) (2021-05-27)
+
+### [0.30.1-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.32...v0.30.1-rc.33) (2021-05-27)
+
+
+### Bug Fixes
+
+* (Core) fix for a11y issues of Pagination component. ([#5468](https://github.com/SAP/fundamental-ngx/issues/5468)) ([8dabef7](https://github.com/SAP/fundamental-ngx/commit/8dabef7ce78dd5381488300a3dcebd838b9a2550))
+
 ### [0.30.1-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.31...v0.30.1-rc.32) (2021-05-26)
 
 ### [0.30.1-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.30...v0.30.1-rc.31) (2021-05-26)
