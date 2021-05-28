@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.41...v0.30.1-rc.42) (2021-05-28)
+
+
+### Bug Fixes
+
+* (Core) fix pickers input groupt addon active state ([#5491](https://github.com/SAP/fundamental-ngx/issues/5491)) ([d6e9e53](https://github.com/SAP/fundamental-ngx/commit/d6e9e53674b54a49412958b9abfc69e341ecc7bf))
+
 ### [0.30.1-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.40...v0.30.1-rc.41) (2021-05-28)
 
 
