@@ -4,7 +4,7 @@
     class="fd-grid-list__item"
     [class.is-navigated]="isNavigated"
     [class.is-selected]="!!_selectedItem || _selectedItem === 0"
-    [class.fd-grid-list__item--link]="type === 'active' || type === 'detailsAndActive'"
+    [class.fd-grid-list__item--link]="_isActive && (type === 'active' || type === 'detailsAndActive')"
     [class.fd-grid-list__item--unread]="state === 'unread'"
     [class.fd-grid-list__item--locked]="state === 'locked'"
     [class.fd-grid-list__item--draft]="state === 'draft'"
@@ -75,6 +75,8 @@
                 title="Details"
                 [compact]="true"
                 (click)="_onDetail($event)"
+                (mouseover)="_isActive = false"
+                (mouseout)="_isActive = true"
             ></button>
 
             <button
@@ -88,6 +90,8 @@
                 title="Delete"
                 [compact]="true"
                 (click)="_onDelete($event)"
+                (mouseover)="_isActive = false"
+                (mouseout)="_isActive = true"
             ></button>
 
             <button
@@ -102,6 +106,8 @@
                 class="fd-grid-list__btn-navigation"
                 [compact]="true"
                 (click)="_onNavigate($event)"
+                (mouseover)="_isActive = false"
+                (mouseout)="_isActive = true"
             ></button>
 
             <ng-container *ngIf="selectionMode === 'singleSelectRight'">
@@ -139,8 +145,16 @@
         [value]="value"
         [ngModel]="_selectedItem"
         (ngModelChange)="$event && _selectionItem($event)"
+        (mouseover)="_isActive = false"
+        (mouseout)="_isActive = true"
     />
-    <label class="fd-radio__label fd-grid-list__radio-label" [for]="id + '-radio'" tabindex="-1"></label>
+    <label
+        class="fd-radio__label fd-grid-list__radio-label"
+        [for]="id + '-radio'"
+        tabindex="-1"
+        (mouseover)="_isActive = false"
+        (mouseout)="_isActive = true"
+    ></label>
 </ng-template>
 
 <ng-template #checkbox>
@@ -151,11 +165,15 @@
         [attr.aria-label]="ariaLabel"
         [ngModel]="_selectedItem"
         (ngModelChange)="_selectionItem($event)"
+        (mouseover)="_isActive = false"
+        (mouseout)="_isActive = true"
     />
     <label
         class="fd-checkbox__label fd-checkbox__label--compact fd-grid-list__checkbox-label"
         [for]="id + '-checkbox'"
         tabindex="-1"
+        (mouseover)="_isActive = false"
+        (mouseout)="_isActive = true"
     ></label>
 </ng-template>
 
@@ -187,6 +205,8 @@
                 label="Locked"
                 [compact]="true"
                 (click)="_clickOnLocked($event)"
+                (mouseover)="_isActive = false"
+                (mouseout)="_isActive = true"
             ></button>
 
             <button
@@ -199,6 +219,8 @@
                 label="Draft"
                 [compact]="true"
                 (click)="_clickOnDraft($event)"
+                (mouseover)="_isActive = false"
+                (mouseout)="_isActive = true"
             ></button>
         </ng-container>
     </div>

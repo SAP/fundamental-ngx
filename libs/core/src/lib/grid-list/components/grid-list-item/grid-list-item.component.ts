@@ -118,6 +118,12 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     @Input()
     isNavigated = false;
 
+    /** @hidden
+     * The active state of the list item.
+     * If set to true, the whole card has active state. Becomes false only when the Edit button is clicked.
+     */
+    _isActive = true;
+
     /**
      * Event is thrown, when type is active
      * and item is pressed
@@ -265,7 +271,6 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
         if (typeof this._selectedItem !== 'undefined') {
             return;
         }
-
         this._gridListSelectionService.setSelectedItem(this.value, this._index);
     }
 
