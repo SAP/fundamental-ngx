@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.30.1-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.36...v0.30.1-rc.37) (2021-05-28)
+
+
+### Bug Fixes
+
+* (Core) screenreader helper added for overflow ([#5490](https://github.com/SAP/fundamental-ngx/issues/5490)) ([cd9ce4b](https://github.com/SAP/fundamental-ngx/commit/cd9ce4b816c1ca97c0f28b92eafff7061a0fe0f9))
+* (Platform) information for docs are updated ([#5489](https://github.com/SAP/fundamental-ngx/issues/5489)) ([20cab6e](https://github.com/SAP/fundamental-ngx/commit/20cab6e3f74d7560779efa25b25d067da8a93b3d))
+* (Platform) Open Menu on click for Internet explorer ([#5484](https://github.com/SAP/fundamental-ngx/issues/5484)) ([919d670](https://github.com/SAP/fundamental-ngx/commit/919d670078c09af81c840ff296aa15b4df195d3b))
+
 ### [0.30.1-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.35...v0.30.1-rc.36) (2021-05-27)
 
 ### [0.30.1-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.34...v0.30.1-rc.35) (2021-05-27)
