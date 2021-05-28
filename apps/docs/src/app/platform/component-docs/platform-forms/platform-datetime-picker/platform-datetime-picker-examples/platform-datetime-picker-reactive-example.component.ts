@@ -28,7 +28,7 @@ export class PlatformDatetimePickerReactiveExampleComponent {
 
     onSubmit(): void {
         if (this.datetimePickerForm.valid) {
-            alert('Form Value: ' + this.datetimePickerForm.value);
+            alert('Form Value: ' + JSON.stringify(this.datetimePickerForm.value));
         } else {
             alert('Form invalid');
         }
