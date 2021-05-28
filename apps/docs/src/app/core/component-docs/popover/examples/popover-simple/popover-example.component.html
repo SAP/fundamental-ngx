@@ -1,7 +1,7 @@
 <div class="fd-docs-flex-display-helper">
-    <fd-popover>
+    <fd-popover title="photo 1 in circle">
         <fd-popover-control>
-            <fd-avatar size="s" [circle]="true" image="http://picsum.photos/id/1018/400"></fd-avatar>
+            <fd-avatar size="s" [circle]="true" ariaLabel="photo 1 in circle" image="http://picsum.photos/id/1018/400"></fd-avatar>
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length">
             <ul fd-list>
@@ -12,9 +12,9 @@
         </fd-popover-body>
     </fd-popover>
 
-    <fd-popover placement="top">
+    <fd-popover placement="top" title="menu2">
         <fd-popover-control>
-            <fd-icon [glyph]="'menu2'"></fd-icon>
+            <fd-icon [glyph]="'menu2'" ariaLabel="menu2"></fd-icon>
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length">
             <ul fd-list>
@@ -25,9 +25,9 @@
         </fd-popover-body>
     </fd-popover>
 
-    <fd-popover placement="bottom">
+    <fd-popover placement="bottom" title="money-bills">
         <fd-popover-control>
-            <fd-avatar size="m" [glyph]="'money-bills'" colorAccent="3"></fd-avatar>
+            <fd-avatar size="m" [glyph]="'money-bills'" ariaLabel="money-bills" colorAccent="3"></fd-avatar>
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length" style="min-width: 400px;">
             <div fd-popover-body-header>
@@ -48,7 +48,7 @@
 
     <fd-popover>
         <fd-popover-control>
-            <button fd-button label="Button"></button>
+            <button fd-button label="Sample"></button>
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length">
             <div fd-popover-body-header>
@@ -81,9 +81,9 @@
         </fd-popover-body>
     </fd-popover>
 
-    <fd-popover placement="bottom">
+    <fd-popover placement="bottom" title="circle photo">
         <fd-popover-control>
-            <fd-avatar size="s" [circle]="true" image="https://picsum.photos/id/2/400/400"></fd-avatar>
+            <fd-avatar size="s" [circle]="true" ariaLabel="circle photo" image="https://picsum.photos/id/2/400/400"></fd-avatar>
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length">
             <ul fd-list>
