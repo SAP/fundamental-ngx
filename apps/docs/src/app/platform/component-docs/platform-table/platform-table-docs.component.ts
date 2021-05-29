@@ -46,6 +46,8 @@ import * as platformTableP13GroupSrc from '!raw-loader!./platform-table-examples
 import * as platformTableP13GroupTsSrc from '!raw-loader!./platform-table-examples/platform-table-p13-group-example.component.ts';
 import * as platformTreeTableDefaultSrc from '!raw-loader!./platform-table-examples/platform-table-tree-example.component.html';
 import * as platformTreeTableDefaultTsSrc from '!raw-loader!./platform-table-examples/platform-table-tree-example.component.ts';
+import * as platformTableNavigatableRowSrc from '!raw-loader!./platform-table-examples/platform-table-navigatable-row-example.component.html';
+import * as platformTableNavigatableRowTsSrc from '!raw-loader!./platform-table-examples/platform-table-navigatable-row-example.component.ts';
 
 import { TableDataProviderExample } from './platform-table-examples/platform-table-data-provider-example';
 import { ExampleItem } from './platform-table-examples/platform-table-data-items-example';
@@ -401,6 +403,22 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-tree-example',
             component: 'PlatformTableTreeExampleComponent',
             name: 'platform-table-tree-example.component.ts'
+        }
+    ];
+
+    navitableRowFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableNavigatableRowSrc,
+            fileName: 'platform-table-navigatable-row-example',
+            name: 'platform-table-navigatable-row-example.component.html'
+        }, 
+        {
+            language: 'typescript',
+            code: platformTableNavigatableRowTsSrc,
+            fileName: 'platform-table-navigatable-row-example',
+            component: 'PlatformTableNavigatableRowExampleComponent',
+            name: 'platform-table-navigatable-row-example.component.ts'
         }
     ];
 

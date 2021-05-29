@@ -38,6 +38,7 @@ import { PlatformTableP13GroupExampleComponent } from './platform-table-examples
 import { PlatformTableP13SortExampleComponent } from './platform-table-examples/platform-table-p13-sort-example.component';
 import { PlatformTableTreeExampleComponent } from './platform-table-examples/platform-table-tree-example.component';
 import { PlatformTableLoadingExampleComponent } from './platform-table-examples/platform-table-loading-example.component';
+import { PlatformTableNavigatableRowExampleComponent } from './platform-table-examples/platform-table-navigatable-row-example.component';
 
 const routes: Routes = [
     {
@@ -83,7 +84,8 @@ const routes: Routes = [
         PlatformTableP13FilterExampleComponent,
         PlatformTableP13GroupExampleComponent,
         PlatformTableTreeExampleComponent,
-        PlatformTableLoadingExampleComponent
+        PlatformTableLoadingExampleComponent,
+        PlatformTableNavigatableRowExampleComponent
     ],
     providers: [RtlService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

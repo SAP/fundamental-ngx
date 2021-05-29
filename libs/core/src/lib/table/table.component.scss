@@ -23,3 +23,7 @@
 		white-space: nowrap;
 	}
 }
+
+.fd-table__row--unnavigatable {
+	pointer-events: none;
+}

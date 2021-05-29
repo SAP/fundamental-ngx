@@ -4,6 +4,7 @@ import {
     ContentChildren,
     Directive,
     HostBinding,
+    HostListener,
     Input,
     OnDestroy,
     OnInit,
@@ -12,6 +13,8 @@ import {
 import { TableCellDirective } from './table-cell.directive';
 import { TableService } from '../table.service';
 import { Subscription } from 'rxjs';
+import { KeyUtil } from '../../utils/functions';
+import { ENTER, SPACE, TAB } from '@angular/cdk/keycodes';
 
 export const HIDDEN_CLASS_NAME = 'fd-table-hidden';
 
@@ -54,8 +57,31 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     @Input()
     secondary = false;
 
+    /** Whether or not the table row is navigatable */
+    @Input()
+    set navigatable(val: boolean) {
+        this._navigatable = val;
+        this._changeDetRef.detectChanges();
+    }
+    get navigatable(): boolean {
+        return this._navigatable;
+    }
+
+    /** @hidden */
+    private _navigatable = true;
+
+    @HostBinding('class.fd-table__row--unnavigatable') 
+    get unnavigatable(): boolean { return !this.navigatable; }
+
     /** @hidden */
     propagateKeysSubscription: Subscription;
+
+    /** When the row is unnavigable, prevent interaction via enter and space keys */
+    @HostListener('keydown', ['$event']) handleKeyDown(event: KeyboardEvent): void {
+        if (!this._navigatable && KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+            event.preventDefault();
+        }
+    }
 
     constructor(
         private _changeDetRef: ChangeDetectorRef,
