@@ -89,7 +89,7 @@ describe('Menu Button Disabled test and Type, size test', () => {
 
     it('button should be disabled', () => {
         const menubuttonElement = fixture.debugElement.query(By.css('fdp-menu-button'));
-        expect(menubuttonElement.nativeElement.classList.contains('is-disabled')).toBeTrue();
+        expect(menubuttonElement.nativeElement.classList.contains('menu-button-disabled')).toBeTrue();
     });
 
     it('button should be standard and contain Menu', () => {

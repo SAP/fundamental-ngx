@@ -81,7 +81,17 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
     primaryButtonWidth: string;
 
     // tabindex for button.
-    tabindex = 0;
+    get tabindex(): number {
+        return this._tabindex;
+    }
+
+    // set tabindex for button
+    set tabindex(tabindex: number) {
+        this._tabindex = tabindex;
+    }
+
+    /** @hidden */
+    private _tabindex = 0;
 
     /** handles rtl service
      * @hidden */

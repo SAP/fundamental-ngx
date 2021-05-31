@@ -6,6 +6,8 @@
     [label]="label"
     [compact]="contentDensity === 'compact'"
     [glyph]="icon"
+    [disabled]="disabled"
+    [attr.aria-disabled]="disabled"
     (click)="onButtonClick($event)"
     [fdType]="type"
     [attr.tabindex]="tabindex"
