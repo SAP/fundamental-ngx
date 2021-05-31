@@ -420,10 +420,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             event.stopPropagation();
         } else if (this.openOnKeyboardEvent && !event.ctrlKey && !KeyUtil.isKeyCode(event, this.nonOpeningKeys)) {
             this.isOpenChangeHandle(true);
-            const acceptedKeys = !KeyUtil.isKeyCode(event, BACKSPACE)
-                && !KeyUtil.isKeyType(event, 'alphabetical')
-                && !KeyUtil.isKeyType(event, 'numeric');
-            if (this.isEmptyValue && acceptedKeys) {
+            if (this.isEmptyValue && (KeyUtil.isKeyType(event, 'control')) && !KeyUtil.isKeyCode(event, BACKSPACE) ) {
                 this.listComponent.setItemActive(0);
             }
         }
