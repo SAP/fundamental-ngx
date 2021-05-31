@@ -13,7 +13,8 @@ import {
     CalendarModule,
     FdDatetimeModule,
     QuickViewModule,
-    InfoLabelModule
+    InfoLabelModule,
+    SelectModule
 } from '@fundamental-ngx/core';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -62,7 +63,8 @@ const routes: Routes = [
         CalendarModule,
         FdDatetimeModule,
         QuickViewModule,
-        InfoLabelModule
+        InfoLabelModule,
+        SelectModule
     ],
     exports: [RouterModule],
     declarations: [
