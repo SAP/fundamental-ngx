@@ -11,7 +11,7 @@
             <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
         </ng-container>
 
-        <div #slideContainer [class.fd-carousel-items-horizontal]="!vertical">
+        <div #slideContainer [class.fd-carousel-items-horizontal]="!vertical" (click)="_itemClicked($event)">
             <ng-content></ng-content>
         </div>
 

@@ -4,6 +4,14 @@ fd-carousel:focus {
  outline: 1px dotted;
 }
 
+.fd-carousel:hover .fd-carousel__content .fd-button.fd-carousel__button{
+  display: block;
+}
+
+.fd-carousel .fd-carousel__content .fd-button.fd-carousel__button{
+  display: none;
+}
+
 .fd-carousel-items-horizontal {
     display: flex;
     align-items: center;
