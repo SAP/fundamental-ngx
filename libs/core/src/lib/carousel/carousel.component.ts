@@ -304,6 +304,11 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }
     }
 
+    /** @hidden */
+    _itemClicked($event: MouseEvent| KeyboardEvent): void {
+        $event.stopPropagation();
+    }
+
     _isRtl(): boolean {
         return this._rtlService?.rtl.getValue();
     }
