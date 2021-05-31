@@ -13,7 +13,6 @@
     "strictMetadataEmit": true,
     "enableResourceInlining": true
   },
-  "files": ["./public_api.ts"],
-  "exclude": ["src/test-setup.ts", "**/*.spec.ts"],
+  "exclude": ["test.ts", "**/*.spec.ts"],
   "include": ["**/*.ts"]
 }

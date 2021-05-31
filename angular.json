@@ -332,7 +332,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/breadcrumb/src/test.ts",
+            "main": "libs/core/src/lib/breadcrumb/test.ts",
             "tsConfig": "libs/core/src/lib/breadcrumb/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/breadcrumb/karma.conf.js"
           }
@@ -376,7 +376,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/message-page/src/test.ts",
+            "main": "libs/core/src/lib/message-page/test.ts",
             "tsConfig": "libs/core/src/lib/message-page/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/message-page/karma.conf.js"
           }
@@ -420,7 +420,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/nested-list/src/test.ts",
+            "main": "libs/core/src/lib/nested-list/test.ts",
             "tsConfig": "libs/core/src/lib/nested-list/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/nested-list/karma.conf.js"
           }
@@ -464,7 +464,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/mobile-mode/src/test.ts",
+            "main": "libs/core/src/lib/mobile-mode/test.ts",
             "tsConfig": "libs/core/src/lib/mobile-mode/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/mobile-mode/karma.conf.js"
           }
@@ -508,7 +508,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/tests/src/test.ts",
+            "main": "libs/core/src/lib/tests/test.ts",
             "tsConfig": "libs/core/src/lib/tests/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/tests/karma.conf.js"
           }
@@ -552,7 +552,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/icon/src/test.ts",
+            "main": "libs/core/src/lib/icon/test.ts",
             "tsConfig": "libs/core/src/lib/icon/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/icon/karma.conf.js"
           }
@@ -596,7 +596,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/button/src/test.ts",
+            "main": "libs/core/src/lib/button/test.ts",
             "tsConfig": "libs/core/src/lib/button/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/button/karma.conf.js"
           }
@@ -640,7 +640,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/checkbox/src/test.ts",
+            "main": "libs/core/src/lib/checkbox/test.ts",
             "tsConfig": "libs/core/src/lib/checkbox/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/checkbox/karma.conf.js"
           }
@@ -684,7 +684,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/dialog/src/test.ts",
+            "main": "libs/core/src/lib/dialog/test.ts",
             "tsConfig": "libs/core/src/lib/dialog/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/dialog/karma.conf.js"
           }
@@ -728,7 +728,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/action-bar/src/test.ts",
+            "main": "libs/core/src/lib/action-bar/test.ts",
             "tsConfig": "libs/core/src/lib/action-bar/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/action-bar/karma.conf.js"
           }
@@ -772,7 +772,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/action-sheet/src/test.ts",
+            "main": "libs/core/src/lib/action-sheet/test.ts",
             "tsConfig": "libs/core/src/lib/action-sheet/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/action-sheet/karma.conf.js"
           }
@@ -816,7 +816,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/alert/src/test.ts",
+            "main": "libs/core/src/lib/alert/test.ts",
             "tsConfig": "libs/core/src/lib/alert/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/alert/karma.conf.js"
           }
@@ -860,7 +860,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/avatar/src/test.ts",
+            "main": "libs/core/src/lib/avatar/test.ts",
             "tsConfig": "libs/core/src/lib/avatar/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/avatar/karma.conf.js"
           }
@@ -904,7 +904,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/avatar-group/src/test.ts",
+            "main": "libs/core/src/lib/avatar-group/test.ts",
             "tsConfig": "libs/core/src/lib/avatar-group/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/avatar-group/karma.conf.js"
           }
@@ -948,7 +948,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/bar/src/test.ts",
+            "main": "libs/core/src/lib/bar/test.ts",
             "tsConfig": "libs/core/src/lib/bar/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/bar/karma.conf.js"
           }
@@ -992,7 +992,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/busy-indicator/src/test.ts",
+            "main": "libs/core/src/lib/busy-indicator/test.ts",
             "tsConfig": "libs/core/src/lib/busy-indicator/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/busy-indicator/karma.conf.js"
           }
@@ -1036,7 +1036,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/calendar/src/test.ts",
+            "main": "libs/core/src/lib/calendar/test.ts",
             "tsConfig": "libs/core/src/lib/calendar/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/calendar/karma.conf.js"
           }
@@ -1080,7 +1080,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/card/src/test.ts",
+            "main": "libs/core/src/lib/card/test.ts",
             "tsConfig": "libs/core/src/lib/card/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/card/karma.conf.js"
           }
@@ -1124,7 +1124,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/carousel/src/test.ts",
+            "main": "libs/core/src/lib/carousel/test.ts",
             "tsConfig": "libs/core/src/lib/carousel/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/carousel/karma.conf.js"
           }
@@ -1168,7 +1168,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/combobox/src/test.ts",
+            "main": "libs/core/src/lib/combobox/test.ts",
             "tsConfig": "libs/core/src/lib/combobox/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/combobox/karma.conf.js"
           }
@@ -1212,7 +1212,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/date-picker/src/test.ts",
+            "main": "libs/core/src/lib/date-picker/test.ts",
             "tsConfig": "libs/core/src/lib/date-picker/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/date-picker/karma.conf.js"
           }
@@ -1256,7 +1256,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/datetime/src/test.ts",
+            "main": "libs/core/src/lib/datetime/test.ts",
             "tsConfig": "libs/core/src/lib/datetime/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/datetime/karma.conf.js"
           }
@@ -1300,7 +1300,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/datetime-picker/src/test.ts",
+            "main": "libs/core/src/lib/datetime-picker/test.ts",
             "tsConfig": "libs/core/src/lib/datetime-picker/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/datetime-picker/karma.conf.js"
           }
@@ -1344,7 +1344,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/dynamic-page/src/test.ts",
+            "main": "libs/core/src/lib/dynamic-page/test.ts",
             "tsConfig": "libs/core/src/lib/dynamic-page/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/dynamic-page/karma.conf.js"
           }
@@ -1388,7 +1388,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/dynamic-side-content/src/test.ts",
+            "main": "libs/core/src/lib/dynamic-side-content/test.ts",
             "tsConfig": "libs/core/src/lib/dynamic-side-content/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/dynamic-side-content/karma.conf.js"
           }
@@ -1432,7 +1432,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/facets/src/test.ts",
+            "main": "libs/core/src/lib/facets/test.ts",
             "tsConfig": "libs/core/src/lib/facets/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/facets/karma.conf.js"
           }
@@ -1476,7 +1476,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/feed-input/src/test.ts",
+            "main": "libs/core/src/lib/feed-input/test.ts",
             "tsConfig": "libs/core/src/lib/feed-input/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/feed-input/karma.conf.js"
           }
@@ -1520,7 +1520,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/feed-list-item/src/test.ts",
+            "main": "libs/core/src/lib/feed-list-item/test.ts",
             "tsConfig": "libs/core/src/lib/feed-list-item/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/feed-list-item/karma.conf.js"
           }
@@ -1564,7 +1564,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/file-uploader/src/test.ts",
+            "main": "libs/core/src/lib/file-uploader/test.ts",
             "tsConfig": "libs/core/src/lib/file-uploader/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/file-uploader/karma.conf.js"
           }
@@ -1608,7 +1608,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/fixed-card-layout/src/test.ts",
+            "main": "libs/core/src/lib/fixed-card-layout/test.ts",
             "tsConfig": "libs/core/src/lib/fixed-card-layout/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/fixed-card-layout/karma.conf.js"
           }
@@ -1652,7 +1652,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/flexible-column-layout/src/test.ts",
+            "main": "libs/core/src/lib/flexible-column-layout/test.ts",
             "tsConfig": "libs/core/src/lib/flexible-column-layout/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/flexible-column-layout/karma.conf.js"
           }
@@ -1696,7 +1696,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/form/src/test.ts",
+            "main": "libs/core/src/lib/form/test.ts",
             "tsConfig": "libs/core/src/lib/form/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/form/karma.conf.js"
           }
@@ -1740,7 +1740,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/formatted-text/src/test.ts",
+            "main": "libs/core/src/lib/formatted-text/test.ts",
             "tsConfig": "libs/core/src/lib/formatted-text/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/formatted-text/karma.conf.js"
           }
@@ -1784,7 +1784,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/grid-list/src/test.ts",
+            "main": "libs/core/src/lib/grid-list/test.ts",
             "tsConfig": "libs/core/src/lib/grid-list/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/grid-list/karma.conf.js"
           }
@@ -1828,7 +1828,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/illustrated-message/src/test.ts",
+            "main": "libs/core/src/lib/illustrated-message/test.ts",
             "tsConfig": "libs/core/src/lib/illustrated-message/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/illustrated-message/karma.conf.js"
           }
@@ -1872,7 +1872,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/infinite-scroll/src/test.ts",
+            "main": "libs/core/src/lib/infinite-scroll/test.ts",
             "tsConfig": "libs/core/src/lib/infinite-scroll/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/infinite-scroll/karma.conf.js"
           }
@@ -1916,7 +1916,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/info-label/src/test.ts",
+            "main": "libs/core/src/lib/info-label/test.ts",
             "tsConfig": "libs/core/src/lib/info-label/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/info-label/karma.conf.js"
           }
@@ -1960,7 +1960,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/inline-help/src/test.ts",
+            "main": "libs/core/src/lib/inline-help/test.ts",
             "tsConfig": "libs/core/src/lib/inline-help/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/inline-help/karma.conf.js"
           }
@@ -2004,7 +2004,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/input-group/src/test.ts",
+            "main": "libs/core/src/lib/input-group/test.ts",
             "tsConfig": "libs/core/src/lib/input-group/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/input-group/karma.conf.js"
           }
@@ -2048,7 +2048,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/layout-grid/src/test.ts",
+            "main": "libs/core/src/lib/layout-grid/test.ts",
             "tsConfig": "libs/core/src/lib/layout-grid/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/layout-grid/karma.conf.js"
           }
@@ -2092,7 +2092,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/layout-panel/src/test.ts",
+            "main": "libs/core/src/lib/layout-panel/test.ts",
             "tsConfig": "libs/core/src/lib/layout-panel/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/layout-panel/karma.conf.js"
           }
@@ -2136,7 +2136,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/link/src/test.ts",
+            "main": "libs/core/src/lib/link/test.ts",
             "tsConfig": "libs/core/src/lib/link/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/link/karma.conf.js"
           }
@@ -2180,7 +2180,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/list/src/test.ts",
+            "main": "libs/core/src/lib/list/test.ts",
             "tsConfig": "libs/core/src/lib/list/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/list/karma.conf.js"
           }
@@ -2224,7 +2224,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/menu/src/test.ts",
+            "main": "libs/core/src/lib/menu/test.ts",
             "tsConfig": "libs/core/src/lib/menu/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/menu/karma.conf.js"
           }
@@ -2268,7 +2268,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/message-box/src/test.ts",
+            "main": "libs/core/src/lib/message-box/test.ts",
             "tsConfig": "libs/core/src/lib/message-box/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/message-box/karma.conf.js"
           }
@@ -2312,7 +2312,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/message-strip/src/test.ts",
+            "main": "libs/core/src/lib/message-strip/test.ts",
             "tsConfig": "libs/core/src/lib/message-strip/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/message-strip/karma.conf.js"
           }
@@ -2356,7 +2356,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/notification/src/test.ts",
+            "main": "libs/core/src/lib/notification/test.ts",
             "tsConfig": "libs/core/src/lib/notification/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/notification/karma.conf.js"
           }
@@ -2400,7 +2400,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/object-identifier/src/test.ts",
+            "main": "libs/core/src/lib/object-identifier/test.ts",
             "tsConfig": "libs/core/src/lib/object-identifier/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/object-identifier/karma.conf.js"
           }
@@ -2444,7 +2444,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/object-marker/src/test.ts",
+            "main": "libs/core/src/lib/object-marker/test.ts",
             "tsConfig": "libs/core/src/lib/object-marker/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/object-marker/karma.conf.js"
           }
@@ -2488,7 +2488,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/object-number/src/test.ts",
+            "main": "libs/core/src/lib/object-number/test.ts",
             "tsConfig": "libs/core/src/lib/object-number/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/object-number/karma.conf.js"
           }
@@ -2532,7 +2532,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/object-status/src/test.ts",
+            "main": "libs/core/src/lib/object-status/test.ts",
             "tsConfig": "libs/core/src/lib/object-status/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/object-status/karma.conf.js"
           }
@@ -2576,7 +2576,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/pagination/src/test.ts",
+            "main": "libs/core/src/lib/pagination/test.ts",
             "tsConfig": "libs/core/src/lib/pagination/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/pagination/karma.conf.js"
           }
@@ -2620,7 +2620,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/panel/src/test.ts",
+            "main": "libs/core/src/lib/panel/test.ts",
             "tsConfig": "libs/core/src/lib/panel/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/panel/karma.conf.js"
           }
@@ -2664,7 +2664,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/popover/src/test.ts",
+            "main": "libs/core/src/lib/popover/test.ts",
             "tsConfig": "libs/core/src/lib/popover/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/popover/karma.conf.js"
           }
@@ -2708,7 +2708,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/product-switch/src/test.ts",
+            "main": "libs/core/src/lib/product-switch/test.ts",
             "tsConfig": "libs/core/src/lib/product-switch/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/product-switch/karma.conf.js"
           }
@@ -2752,7 +2752,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/quick-view/src/test.ts",
+            "main": "libs/core/src/lib/quick-view/test.ts",
             "tsConfig": "libs/core/src/lib/quick-view/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/quick-view/karma.conf.js"
           }
@@ -2796,7 +2796,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/radio/src/test.ts",
+            "main": "libs/core/src/lib/radio/test.ts",
             "tsConfig": "libs/core/src/lib/radio/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/radio/karma.conf.js"
           }
@@ -2840,7 +2840,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/rating-indicator/src/test.ts",
+            "main": "libs/core/src/lib/rating-indicator/test.ts",
             "tsConfig": "libs/core/src/lib/rating-indicator/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/rating-indicator/karma.conf.js"
           }
@@ -2884,7 +2884,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/scroll-spy/src/test.ts",
+            "main": "libs/core/src/lib/scroll-spy/test.ts",
             "tsConfig": "libs/core/src/lib/scroll-spy/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/scroll-spy/karma.conf.js"
           }
@@ -2928,7 +2928,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/segmented-button/src/test.ts",
+            "main": "libs/core/src/lib/segmented-button/test.ts",
             "tsConfig": "libs/core/src/lib/segmented-button/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/segmented-button/karma.conf.js"
           }
@@ -2972,7 +2972,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/select/src/test.ts",
+            "main": "libs/core/src/lib/select/test.ts",
             "tsConfig": "libs/core/src/lib/select/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/select/karma.conf.js"
           }
@@ -3016,7 +3016,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/shared/src/test.ts",
+            "main": "libs/core/src/lib/shared/test.ts",
             "tsConfig": "libs/core/src/lib/shared/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/shared/karma.conf.js"
           }
@@ -3060,7 +3060,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/shellbar/src/test.ts",
+            "main": "libs/core/src/lib/shellbar/test.ts",
             "tsConfig": "libs/core/src/lib/shellbar/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/shellbar/karma.conf.js"
           }
@@ -3104,7 +3104,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/side-navigation/src/test.ts",
+            "main": "libs/core/src/lib/side-navigation/test.ts",
             "tsConfig": "libs/core/src/lib/side-navigation/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/side-navigation/karma.conf.js"
           }
@@ -3148,7 +3148,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/slider/src/test.ts",
+            "main": "libs/core/src/lib/slider/test.ts",
             "tsConfig": "libs/core/src/lib/slider/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/slider/karma.conf.js"
           }
@@ -3192,7 +3192,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/split-button/src/test.ts",
+            "main": "libs/core/src/lib/split-button/test.ts",
             "tsConfig": "libs/core/src/lib/split-button/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/split-button/karma.conf.js"
           }
@@ -3236,7 +3236,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/status-indicator/src/test.ts",
+            "main": "libs/core/src/lib/status-indicator/test.ts",
             "tsConfig": "libs/core/src/lib/status-indicator/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/status-indicator/karma.conf.js"
           }
@@ -3280,7 +3280,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/step-input/src/test.ts",
+            "main": "libs/core/src/lib/step-input/test.ts",
             "tsConfig": "libs/core/src/lib/step-input/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/step-input/karma.conf.js"
           }
@@ -3324,7 +3324,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/switch/src/test.ts",
+            "main": "libs/core/src/lib/switch/test.ts",
             "tsConfig": "libs/core/src/lib/switch/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/switch/karma.conf.js"
           }
@@ -3368,7 +3368,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/table/src/test.ts",
+            "main": "libs/core/src/lib/table/test.ts",
             "tsConfig": "libs/core/src/lib/table/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/table/karma.conf.js"
           }
@@ -3412,7 +3412,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/tabs/src/test.ts",
+            "main": "libs/core/src/lib/tabs/test.ts",
             "tsConfig": "libs/core/src/lib/tabs/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/tabs/karma.conf.js"
           }
@@ -3456,7 +3456,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/text/src/test.ts",
+            "main": "libs/core/src/lib/text/test.ts",
             "tsConfig": "libs/core/src/lib/text/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/text/karma.conf.js"
           }
@@ -3500,7 +3500,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/tile/src/test.ts",
+            "main": "libs/core/src/lib/tile/test.ts",
             "tsConfig": "libs/core/src/lib/tile/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/tile/karma.conf.js"
           }
@@ -3544,7 +3544,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/time/src/test.ts",
+            "main": "libs/core/src/lib/time/test.ts",
             "tsConfig": "libs/core/src/lib/time/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/time/karma.conf.js"
           }
@@ -3588,7 +3588,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/time-picker/src/test.ts",
+            "main": "libs/core/src/lib/time-picker/test.ts",
             "tsConfig": "libs/core/src/lib/time-picker/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/time-picker/karma.conf.js"
           }
@@ -3632,7 +3632,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/title/src/test.ts",
+            "main": "libs/core/src/lib/title/test.ts",
             "tsConfig": "libs/core/src/lib/title/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/title/karma.conf.js"
           }
@@ -3676,7 +3676,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/token/src/test.ts",
+            "main": "libs/core/src/lib/token/test.ts",
             "tsConfig": "libs/core/src/lib/token/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/token/karma.conf.js"
           }
@@ -3720,7 +3720,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/toolbar/src/test.ts",
+            "main": "libs/core/src/lib/toolbar/test.ts",
             "tsConfig": "libs/core/src/lib/toolbar/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/toolbar/karma.conf.js"
           }
@@ -3808,7 +3808,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/message-toast/src/test.ts",
+            "main": "libs/core/src/lib/message-toast/test.ts",
             "tsConfig": "libs/core/src/lib/message-toast/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/message-toast/karma.conf.js"
           }
@@ -3852,7 +3852,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/multi-input/src/test.ts",
+            "main": "libs/core/src/lib/multi-input/test.ts",
             "tsConfig": "libs/core/src/lib/multi-input/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/multi-input/karma.conf.js"
           }
@@ -3896,7 +3896,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/wizard/src/test.ts",
+            "main": "libs/core/src/lib/wizard/test.ts",
             "tsConfig": "libs/core/src/lib/wizard/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/wizard/karma.conf.js"
           }
@@ -3940,7 +3940,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "libs/core/src/lib/tree/src/test.ts",
+            "main": "libs/core/src/lib/tree/test.ts",
             "tsConfig": "libs/core/src/lib/tree/tsconfig.spec.json",
             "karmaConfig": "libs/core/src/lib/tree/karma.conf.js"
           }

@@ -1,5 +1,5 @@
 import { ElementRef, EventEmitter, OnDestroy, QueryList } from '@angular/core';
-import * as Hammer from 'hammerjs';
+import Hammer from 'hammerjs';
 import { Injectable } from '@angular/core';
 
 export const DEFAULT_TRANSITION_DURATION = '150ms';
@@ -45,7 +45,7 @@ export class CarouselService implements OnDestroy {
     readonly activeChange: EventEmitter<PanEndOutput> = new EventEmitter<PanEndOutput>();
 
     /** @hidden */
-    private _hammer: Hammer = null;
+    private _hammer: HammerManager = null;
 
     /** @hidden */
     private _previousActiveItem: CarouselItemInterface;

@@ -1,6 +1,6 @@
 {
   "extends": "../../../../../tsconfig.base.json",
-  "files": ["public_api.ts"],
+  "files": [],
   "include": [],
   "references": [
     {

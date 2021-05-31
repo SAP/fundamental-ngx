@@ -6,7 +6,5 @@
   },
   "angularCompilerOptions": {
     "enableIvy": false
-  },
-  "exclude": ["test.ts", "**/*.spec.ts"],
-  "files": ["public_api.ts"]
+  }
 }
