@@ -116,6 +116,10 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     @HostBinding('style.position')
     readonly position = 'relative';
 
+    /** @hidden */
+    @HostBinding('style.outline')
+    readonly outline = 'none';
+
     /** Values returned by control. */
     public values: FdCheckboxValues = { trueValue: true, falseValue: false, thirdStateValue: null };
     /** Stores current checkbox value. */

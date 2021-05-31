@@ -20,13 +20,15 @@
     (click)="$event.stopPropagation()"
 />
 
-<label class="fd-checkbox__label"
-       #labelElement
-       [for]="inputId"
-       [ngClass]="labelClass"
-       [attr.title]="title"
-       [class.fd-checkbox__label--compact]="compact"
-       (click)="checkByClick($event)">
+<label
+    class="fd-checkbox__label"
+    #labelElement
+    [for]="inputId"
+    [ngClass]="labelClass"
+    [attr.title]="title"
+    [class.fd-checkbox__label--compact]="compact"
+    (click)="checkByClick($event)">
+
     <ng-container *ngIf="label">
             <span class="fd-checkbox__text">
                 {{ label }}
