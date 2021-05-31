@@ -32,6 +32,7 @@ import { CalendarModule } from '@fundamental-ngx/core/calendar';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
 import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 const routes: Routes = [
     {
@@ -59,7 +60,8 @@ const routes: Routes = [
         CalendarModule,
         FdDatetimeModule,
         QuickViewModule,
-        InfoLabelModule
+        InfoLabelModule,
+        SelectModule
     ],
     exports: [RouterModule],
     declarations: [
