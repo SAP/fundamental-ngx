@@ -30,13 +30,13 @@ import { FormFieldGroup } from '../../form-field-group';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
 import { FormFieldGroupComponent } from '../form-field-group/form-field-group.component';
 
-const formGroupChildProvider: Provider = {
-    provide: FORM_GROUP_CHILD_FIELD_TOKEN,
-    useExisting: forwardRef(() => FormFieldGroupComponent)
-};
-
 const formFieldProvider: Provider = {
     provide: FormField,
+    useExisting: forwardRef(() => FormFieldComponent)
+};
+
+const formGroupChildProvider: Provider = {
+    provide: FORM_GROUP_CHILD_FIELD_TOKEN,
     useExisting: forwardRef(() => FormFieldComponent)
 };
 
