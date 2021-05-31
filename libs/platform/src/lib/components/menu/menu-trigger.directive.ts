@@ -95,8 +95,9 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
             $event.preventDefault();
             $event.stopPropagation();
         }
-        // filter out clicks initiated by keyboard enter
-        if ($event.detail > 0) {
+        // filter out clicks initiated by keyboard enter.
+        // For IE 11, MouseEvent fires a MSPointerEvent object instead of MouseEvent.
+        if ($event.detail > 0 || ($event instanceof PointerEvent && $event.detail === 0)) {
             this.toggleMenu();
         }
     }
