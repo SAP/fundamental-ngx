@@ -131,7 +131,8 @@
     "platform": {
       "tags": [
         "fdp"
-      ]
+      ],
+      "implicitDependencies": ["core"]
     },
     "core-breadcrumb": {
       "tags": [

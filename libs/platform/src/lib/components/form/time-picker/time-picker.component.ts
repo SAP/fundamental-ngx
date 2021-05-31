@@ -19,7 +19,7 @@ import { BaseInput } from '../base.input';
 import { Placement, TimePickerComponent } from '@fundamental-ngx/core';
 import { FormFieldControl, Status } from '../form-control';
 import { NgControl, NgForm } from '@angular/forms';
-import { FormField } from '@fundamental-ngx/platform';
+import { FormField } from '../form-field';
 
 @Component({
     selector: 'fdp-time-picker',
