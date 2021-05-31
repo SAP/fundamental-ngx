@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { RtlService } from '@fundamental-ngx/core';
-import { map } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-table-navigatable-row-example',
     templateUrl: './table-navigatable-row-example.component.html'
 })
-export class TableNavigatableRowExampleComponent implements OnInit {
+export class TableNavigatableRowExampleComponent implements OnInit, OnDestroy {
     selectMasterModel = false;
 
     navigationArrow$: Observable<string>;
@@ -67,12 +67,28 @@ export class TableNavigatableRowExampleComponent implements OnInit {
         }
     ];
 
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
     constructor(private _rtlService: RtlService) {}
 
     ngOnInit(): void {
         this.navigationArrow$ = this._rtlService.rtl.pipe(
+            takeUntil(this._onDestroy$),
             map((isRtl) => (isRtl ? 'slim-arrow-left' : 'slim-arrow-right'))
         );
+    }
+
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
+    }
+
+    getGlyph(row: any): string {
+        if (row.navigatable) {
+            let arrowGlyph: string;
+            this.navigationArrow$.subscribe((arrow) => arrowGlyph = arrow);
+            return arrowGlyph;
+        }
     }
 
     select(index: number, checked: boolean): void {
@@ -102,6 +118,6 @@ export class TableNavigatableRowExampleComponent implements OnInit {
     }
 
     private _allSelected(): boolean {
-        return !this.tableRows.filter((_row) => (_row.navigatable)).find((_row) => !_row.checked);
+        return this.tableRows.filter((_row) => (_row.navigatable)).every((_row) => _row.checked);
     }
 }
