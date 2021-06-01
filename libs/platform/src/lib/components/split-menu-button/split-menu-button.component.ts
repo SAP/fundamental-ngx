@@ -82,16 +82,8 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
 
     // tabindex for button.
     get tabindex(): number {
-        return this._tabindex;
+        return this.disabled ? -1 : 0;
     }
-
-    // set tabindex for button
-    set tabindex(tabindex: number) {
-        this._tabindex = tabindex;
-    }
-
-    /** @hidden */
-    private _tabindex = 0;
 
     /** handles rtl service
      * @hidden */
@@ -106,8 +98,6 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
 
     /** @hidden */
     ngOnInit(): void {
-        this.tabindex = this.disabled ? -1 : 0;
-
         this.secondaryId = 'secondary-' + this.id;
         // if no title provided.
         this.title = this.title || this.buttonLabel;
