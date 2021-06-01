@@ -1,3 +1,21 @@
+## [0.30.1-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.44...v0.30.1-rc.45) (2021-06-01)
+
+
+
+## [0.30.1-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.43...v0.30.1-rc.44) (2021-05-31)
+
+
+
+## [0.30.1-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.42...v0.30.1-rc.43) (2021-05-31)
+
+
+### Bug Fixes
+
+* **core:** checkbox parent element focus fix ([#5508](https://github.com/SAP/fundamental-ngx/issues/5508)) ([6b94cfa](https://github.com/SAP/fundamental-ngx/commit/6b94cfa80312db6968e2213f4e862cf2f21720ad))
+* **platform:** playground disable option functions incorrectly ([#5521](https://github.com/SAP/fundamental-ngx/issues/5521)) ([e660169](https://github.com/SAP/fundamental-ngx/commit/e6601694edda6cdb2fae3e602fa2c17bc69923bc))
+
+
+
 ## [0.30.1-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.41...v0.30.1-rc.42) (2021-05-28)
 
 
