@@ -8,7 +8,7 @@ import {
     saveElementScreenshot,
     waitForElDisplayed,
     waitForInvisibilityOf,
-    checkElementScreenshot, scrollIntoView, isElementDisplayed, pause
+    checkElementScreenshot, scrollIntoView, isElementDisplayed, pause, waitForNotDisplayed
 } from '../../driver/wdio';
 
 describe('Alert test suite', function() {
@@ -56,7 +56,7 @@ describe('Alert test suite', function() {
         })
     });
 
-    describe('visual regression', function() {
+    xdescribe('visual regression', function() {
         // TODO: enable after resolving https://github.com/SAP/fundamental-ngx/issues/4957
         xit('should check example blocks visual regression', () => {
             alertPage.saveExampleBaselineScreenshot();
@@ -72,11 +72,7 @@ describe('Alert test suite', function() {
                 saveElementScreenshot(popupAlert, `alert-customPopup-example-${i}-core-${getImageTagBrowserPlatform()}`, alertPage.getScreenshotFolder());
                 expect(checkElementScreenshot(popupAlert, `alert-customPopup-example-${i}-core-${getImageTagBrowserPlatform()}`, alertPage.getScreenshotFolder()))
                     .toBeLessThan(1);
-                if (doesItExist(popupAlert + button) === false) {
-                    waitForInvisibilityOf(popupAlert);
-                    continue;
-                }
-                click(popupAlert + button);
+                waitForNotDisplayed(popupAlert);
             }
         });
     });

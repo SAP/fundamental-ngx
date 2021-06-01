@@ -166,7 +166,7 @@ describe('Menu component test suite', function() {
         menuPage.checkRtlSwitch();
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             menuPage.saveExampleBaselineScreenshot();
             expect(menuPage.compareWithBaseline()).toBeLessThan(3);

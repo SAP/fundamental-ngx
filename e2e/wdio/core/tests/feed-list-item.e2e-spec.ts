@@ -47,7 +47,7 @@ describe('Feed list item test suite:', function() {
         expect(alertText).toContain(getAlertText());
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
 
         it('should check author links states', () => {
             const linksLength = getElementArrayLength(links);

@@ -362,7 +362,7 @@ describe('Standard List test suite', function() {
         });
     });
 
-    describe('example block visual regression', function() {
+    xdescribe('example block visual regression', function() {
         it('should check examples visual regression', () => {
             refreshPage();
             waitForElDisplayed(standardListPage.title);

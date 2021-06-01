@@ -148,7 +148,7 @@ describe('Verify Feed Input component', function() {
         feedInputPage.checkRtlSwitch();
     });
 
-    describe('Should check visual regression', function() {
+    xdescribe('Should check visual regression', function() {
 
         it('should check examples visual regression', () => {
             feedInputPage.saveExampleBaselineScreenshot();

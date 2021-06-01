@@ -6,8 +6,10 @@ env:
   NX_RUN_GROUP: ${{ github.run_id }}
   NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
   MOZ_HEALESS: 1
-  SAUCE_USERNAME_PR: valorkinpr
-  SAUCE_ACCESS_KEY_PR: e0a97bd3-4b74-4408-89bf-cce1b44a8bf1
+  SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+  SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+  TRAVIS_BUILD_ID: ${{ github.run_id }}
+  TRAVIS_PULL_REQUEST_BRANCH: ${{ github.head_ref }}
 
 jobs:
   build_and_cache:
@@ -30,11 +32,21 @@ jobs:
 
       # end: npm ci && build
       - run: |
-          npx ng build --runner cloud --prod --with-deps
+          npx ng build --runner cloud --with-deps
+          npm run build-pack-library
 
-  unit_tests_with_coverage:
+  unit_tests:
     runs-on: ubuntu-latest
     needs: build_and_cache
+    strategy:
+      # when one test fails, DO NOT cancel the other
+      # containers, because this will kill Cypress processes
+      # leaving the Dashboard hanging ...
+      # https://github.com/cypress-io/github-action/issues/48
+      fail-fast: false
+      matrix:
+        # run 3 copies of the current job in parallel
+        node: [ core, platform ]
     steps:
       - uses: actions/checkout@v2.3.4
 
@@ -48,14 +60,14 @@ jobs:
             dist
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - name: npm ci && npm run build --prod
+      - name: npm ci && npm run build --dev
         if: steps.cache-build.outputs.cache-hit != 'true'
         run: |
           npm ci
-          npx ng build --runner cloud --prod --with-deps
+          npx ng build --runner cloud --with-deps
       # end: npm ci && build
 
-      - run: npm test --  --runner cloud
+      - run: npx ng test ${{ matrix.node }} --watch false --code-coverage true --browsers=ChromeHeadless --runner cloud
 #      - run: npx codecov ./coverage/
 #        continue-on-error: true
 
@@ -75,11 +87,11 @@ jobs:
             dist
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - name: npm ci && npm run build --prod
+      - name: npm ci && npm run build --dev
         if: steps.cache-build.outputs.cache-hit != 'true'
         run: |
           npm ci
-          npx ng build --runner cloud --prod --with-deps
+          npx ng build --runner cloud --with-deps
       # end: npm ci && build
       - run: npm run lint -- --runner cloud
 
@@ -101,11 +113,11 @@ jobs:
             dist
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - name: npm ci && npm run build --prod
+      - name: npm ci && npm run build --dev
         if: steps.cache-build.outputs.cache-hit != 'true'
         run: |
           npm ci
-          npx ng build --runner cloud --prod --with-deps
+          npx ng build --runner cloud --with-deps
       # end: npm ci && build
 
 #      - run: npm run scully
@@ -116,53 +128,54 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOKEN }}'
           projectId: valorkin-fundamental-ngx
+          target: valorkin-fundamental-ngx
           expires: 30d
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
 
-#  e2e_smoke:
-#    name: Cypress run
-#    runs-on: ubuntu-latest
-#    needs: [build_and_cache, firebase_preview]
-#
-#    strategy:
-#      # when one test fails, DO NOT cancel the other
-#      # containers, because this will kill Cypress processes
-#      # leaving the Dashboard hanging ...
-#      # https://github.com/cypress-io/github-action/issues/48
-#      fail-fast: false
-#      matrix:
-#        # run 3 copies of the current job in parallel
-#        containers: [1, 2, 3, 4, 5]
-#    steps:
-#      - uses: actions/checkout@v2.3.4
-#
-#      # start: npm ci && build
-#      - uses: actions/cache@v2.1.4
-#        id: cache-build
-#        with:
-#          path: |
-#            ~/.npm
-#            node_modules
-#            dist
-#          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-#          restore-keys: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-#      - name: npm ci && npm run build --prod
-#        if: steps.cache-build.outputs.cache-hit != 'true'
-#        run: |
-#          npm ci
-#          npx ng build --runner cloud --prod --with-deps
-#          npx nx run ngx-bootstrap:build-sass --runner cloud
-#      # end: npm ci && build
-#
-#      # because of "record" and "parallel" parameters
-#      # these containers will load balance all found tests among themselves
-#      - name: smoke e2e on firebase
-#        if: ${{ needs.firebase_preview.outputs.output_url }}
-#        run: npx nx run ngx-bootstrap-docs-e2e:e2e -c firebase --runner cloud --record --group smoke --baseUrl=${{ needs.firebase_preview.outputs.output_url }}/ngx-bootstrap/ -- --parallel
-#
+  e2e_smoke:
+    name: wdio run
+    runs-on: ubuntu-latest
+    needs: [build_and_cache, firebase_preview]
+
+    strategy:
+      # when one test fails, DO NOT cancel the other
+      # containers, because this will kill Cypress processes
+      # leaving the Dashboard hanging ...
+      # https://github.com/cypress-io/github-action/issues/48
+      fail-fast: false
+      matrix:
+        # run 3 copies of the current job in parallel
+        node: ["suite platformA", "suite platformB", "spec core"]
+        browser: [msedge, firefox, chrome]
+    steps:
+      - uses: actions/checkout@v2.3.4
+
+      # start: npm ci && build
+      - uses: actions/cache@v2.1.4
+        id: cache-build
+        with:
+          path: |
+            ~/.npm
+            node_modules
+            dist
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - name: npm ci && npm run build --dev
+        if: steps.cache-build.outputs.cache-hit != 'true'
+        run: |
+          npm ci
+          npx ng build --runner cloud --with-deps
+
+      - name: smoke e2e on firebase
+        env:
+          CAP_SLUG: ${{ matrix.browser }}
+        if: ${{ needs.firebase_preview.outputs.output_url }}
+        run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.node }} --baseUrl=${{ needs.firebase_preview.outputs.output_url }}/fundamental-ngx
+
 #      - name: smoke e2e local
 #        if: ${{ !needs.firebase_preview.outputs.output_url }}
-#        run: npx nx run ngx-bootstrap-docs-e2e:e2e --prod --runner cloud --record --group smoke -- --parallel
+##        todo: add serve from local dist folder
+#        run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio-local.conf.js --${{ matrix.node }}
 
 

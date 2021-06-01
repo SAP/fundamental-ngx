@@ -26,7 +26,7 @@ describe('Inline help test suite', function() {
         inlineHelpPage.open();
     }, 1);
 
-    it('Verify icons hover state', () => {
+    xit('Verify icons hover state', () => {
         const arr = getElementArrayLength(inlineHelpIcons);
         scrollIntoView(exampleAreaContainersArr);
         for (let i = 0, diff = 0; i < arr; i++, diff = 0) {
@@ -39,7 +39,7 @@ describe('Inline help test suite', function() {
         }
     });
 
-    it('Verify inline help input', () => {
+    xit('Verify inline help input', () => {
         scrollIntoView(exampleAreaContainersArr);
         mouseHoverElement(inlineHelpInput);
         saveElementScreenshot(inlineHelpInput, `inline-help-input`, inlineHelpPage.getScreenshotFolder());
@@ -49,7 +49,7 @@ describe('Inline help test suite', function() {
         expect(getAttributeByName(inlineHelpInput, 'fd-inline-help')).toContain('Inline Help Tooltip');
     });
 
-    it('Verify button inline help', () => {
+    xit('Verify button inline help', () => {
         scrollIntoView(exampleAreaContainersArr, 1);
         click(inlineHelpButton);
         waitForPresent('fd-popover-body');
@@ -60,7 +60,7 @@ describe('Inline help test suite', function() {
         expect(getAttributeByName(inlineHelpButton, 'fd-inline-help')).toContain('Inline Help Tooltip');
     });
 
-    it('Verify styled inline help icon', () => {
+    xit('Verify styled inline help icon', () => {
         scrollIntoView(exampleAreaContainersArr, 2);
         mouseHoverElement(inlineHelpStyledIcon);
         saveElementScreenshot(inlineHelpExampleExtended, `inline-help-styled-icon`, inlineHelpPage.getScreenshotFolder(), 2);
@@ -70,7 +70,7 @@ describe('Inline help test suite', function() {
         expect(getAttributeByName(inlineHelpStyledIcon, 'fd-inline-help')).toContain('Inline Help Tooltip');
     });
 
-    it('Verify template inline help example', () => {
+    xit('Verify template inline help example', () => {
         scrollIntoView(exampleAreaContainersArr, 3);
         mouseHoverElement(inlineHelpTemplateExample);
         saveElementScreenshot(inlineHelpExampleExtended, `inline-help-template`, inlineHelpPage.getScreenshotFolder(), 3);
@@ -79,7 +79,7 @@ describe('Inline help test suite', function() {
         expect(diff).toBeLessThan(3, `Inline help template has mismatch percentage of ${diff}%`);
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             inlineHelpPage.saveExampleBaselineScreenshot();
             expect(inlineHelpPage.compareWithBaseline()).toBeLessThan(3);

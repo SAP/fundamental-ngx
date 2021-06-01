@@ -122,7 +122,7 @@ describe('Link component test suite', function() {
         linkPage.checkRtlSwitch();
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         xit('should check examples visual regression', () => {
             linkPage.saveExampleBaselineScreenshot();
             expect(linkPage.compareWithBaseline()).toBeLessThan(3);
