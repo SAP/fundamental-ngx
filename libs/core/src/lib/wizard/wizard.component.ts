@@ -9,6 +9,7 @@ import {
     HostListener,
     Input,
     OnDestroy,
+    Optional,
     QueryList,
     TemplateRef,
     ViewChild,
@@ -19,6 +20,7 @@ import { Subscription } from 'rxjs';
 import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progress-bar.directive';
 import { scrollTop } from '../utils/functions/scroll';
 import { ACTIVE_STEP_STATUS, CURRENT_STEP_STATUS, UPCOMING_STEP_STATUS, COMPLETED_STEP_STATUS } from './constants';
+import { DialogBodyComponent } from '../dialog/dialog-body/dialog-body.component';
 
 export const STEP_MIN_WIDTH = 168;
 export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';
@@ -88,12 +90,19 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     stackedStepsRight: WizardStepComponent[] = [];
 
     /** @hidden */
-    private _subscriptions: Subscription = new Subscription();
+    private _stepEventSubscriptions: Subscription = new Subscription();
+
+    /** @hidden */
+    private _stepListChangesSubscription: Subscription = new Subscription();
 
     /** @hidden */
     private _previousWidth: number;
 
-    constructor(private _elRef: ElementRef, private readonly _cdRef: ChangeDetectorRef) {}
+    constructor(
+        private _elRef: ElementRef,
+        private readonly _cdRef: ChangeDetectorRef,
+        @Optional() private _dialogBodyComponent: DialogBodyComponent
+    ) {}
 
     /** @hidden */
     @HostListener('window:resize')
@@ -119,14 +128,13 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         setTimeout(() => {
             // fixes ExpressionChangedAfterItHasBeenCheckedError
             this._setContentTemplates();
-            this._subscriptions.add(
+            this._stepListChangesSubscription.add(
                 this.steps.changes.subscribe(() => {
                     this._handleStepOrStatusChanges();
+                    this._setupStepEvents();
                 })
             );
-            this.steps.forEach((step) => {
-                this._setupStepEvents(step);
-            });
+            this._setupStepEvents();
             this._cdRef.detectChanges();
             this._handleStepOrStatusChanges();
             this.resizeHandler();
@@ -135,7 +143,8 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
+        this._stepEventSubscriptions.unsubscribe();
+        this._stepListChangesSubscription.unsubscribe();
         this.wrapperContainer.nativeElement.removeEventListener('scroll', handleTimeoutReference);
     }
 
@@ -198,14 +207,19 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _getDialogOffset(): number {
-        const dialogBody = this._elRef.nativeElement.parentElement;
         let retVal = 0;
-        if (dialogBody.tagName.toLowerCase() === 'fd-dialog-body') {
-            if (dialogBody.querySelector('.' + 'fd-title--h2')) {
-                retVal = dialogBody.querySelector('.' + 'fd-title--h2').offsetHeight;
+        if (this._dialogBodyComponent) {
+            const dialogBody = this._dialogBodyComponent.elementRef().nativeElement;
+            if (dialogBody.tagName.toLowerCase() === 'fd-dialog-body') {
+                this._dialogBodyComponent.dialogConfig.verticalPadding = false;
+                const dialogBodyTitle = dialogBody.querySelector('.fd-title--h2');
+                if (dialogBodyTitle) {
+                    retVal = dialogBodyTitle.offsetHeight;
+                }
+                retVal = retVal + window.innerHeight - dialogBody.offsetHeight;
             }
-            retVal = retVal + window.innerHeight - dialogBody.offsetHeight;
         }
+
         return retVal;
     }
 
@@ -234,26 +248,30 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     }
 
     /** @hidden */
-    private _setupStepEvents(step: WizardStepComponent): void {
-        this._subscriptions.add(
-            step.stepClicked.subscribe((event) => {
-                this._stepClicked(event);
-            })
-        );
-        this._subscriptions.add(
-            step.statusChange.subscribe(() => {
-                this._handleStepOrStatusChanges();
-            })
-        );
-        this._subscriptions.add(
-            step.stepIndicatorItemClicked.subscribe((event) => {
-                this._stepClicked(event);
-            })
-        );
-        // need to call wizardShrinking for each step < 168px on first load
-        if (step.wizardLabel && step.getStepClientWidth() < STEP_MIN_WIDTH) {
-            this._wizardShrinking();
-        }
+    private _setupStepEvents(): void {
+        this._stepEventSubscriptions.unsubscribe();
+        this._stepEventSubscriptions = new Subscription();
+        this.steps.forEach(step => {
+            this._stepEventSubscriptions.add(
+                step.stepClicked.subscribe((event) => {
+                    this._stepClicked(event);
+                })
+            );
+            this._stepEventSubscriptions.add(
+                step.statusChange.subscribe(() => {
+                    this._handleStepOrStatusChanges();
+                })
+            );
+            this._stepEventSubscriptions.add(
+                step.stepIndicatorItemClicked.subscribe((event) => {
+                    this._stepClicked(event);
+                })
+            );
+            // need to call wizardShrinking for each step < 168px on first load
+            if (step.wizardLabel && step.getStepClientWidth() < STEP_MIN_WIDTH) {
+                this._wizardShrinking();
+            }
+        });
     }
 
     /** @hidden */
@@ -307,9 +325,6 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 }
                 if (!templatesLength || (!this.appendToWizard && step.status === CURRENT_STEP_STATUS)) {
                     this.contentTemplates = [step.content.contentTemplate];
-                    if (!this.appendToWizard && step.status === CURRENT_STEP_STATUS) {
-                        break;
-                    }
                 } else if (this.appendToWizard && !step.isSummary) {
                     this.contentTemplates.push(step.content.contentTemplate);
                 }

@@ -13,7 +13,8 @@ export class DialogConfigurationExample {
             width: '300px',
             draggable: true,
             responsivePadding: true,
-            backdropClickCloseable: true
+            backdropClickCloseable: true,
+            ariaLabelledBy: 'fd-dialog-header-4'
         });
     }
 
@@ -22,7 +23,8 @@ export class DialogConfigurationExample {
             width: '300px',
             resizable: true,
             responsivePadding: true,
-            backdropClickCloseable: true
+            backdropClickCloseable: true,
+            ariaLabelledBy: 'fd-dialog-header-4'
         });
     }
 
@@ -30,7 +32,8 @@ export class DialogConfigurationExample {
         this._dialogService.open(template, {
             width: '300px',
             escKeyCloseable: false,
-            responsivePadding: true
+            responsivePadding: true,
+            ariaLabelledBy: 'fd-dialog-header-4'
         });
     }
 }
