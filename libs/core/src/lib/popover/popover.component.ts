@@ -147,7 +147,7 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     /** Handler for alt + arrow down keydown */
     triggerKeyDownHandler(event: KeyboardEvent): void {
         if ((KeyUtil.isKeyCode(event, DOWN_ARROW) && event.altKey && !this.disabled) ||
-         (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE))) {
+         (KeyUtil.isKeyCode(event, [ENTER, SPACE]))) {
             this.open();
             event.preventDefault();
             event.stopPropagation();

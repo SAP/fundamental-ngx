@@ -6,7 +6,7 @@
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length">
             <ul fd-list>
-                <li fd-list-item *ngFor="let option of list1" (click)="navigate(this)" (keydown)="navigate(this)">
+                <li fd-list-item *ngFor="let option of list1">
                     <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
                 </li>
             </ul>
@@ -47,7 +47,7 @@
         </fd-popover-body>
     </fd-popover>
 
-    <fd-popover [focusTrapped]="true" [focusAutoCapture]="true">
+    <fd-popover [focusTrapped]="true" [focusAutoCapture]="true" [(isOpen)]="isOpen">
         <fd-popover-control>
             <button fd-button label="Sample"></button>
         </fd-popover-control>
@@ -74,8 +74,8 @@
             <div fd-popover-body-footer>
                 <div fd-bar [barDesign]="'footer'" [cozy]="true">
                     <div fd-bar-right>
-                        <fd-button-bar label="Save" fdType="emphasized"></fd-button-bar>
-                        <fd-button-bar label="Cancel"></fd-button-bar>
+                        <fd-button-bar label="Save" fdType="emphasized" (click)="this.isOpen = false"></fd-button-bar>
+                        <fd-button-bar label="Cancel" (click)="this.isOpen = false"></fd-button-bar>
                     </div>
                 </div>
             </div>

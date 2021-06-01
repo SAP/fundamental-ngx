@@ -12,9 +12,12 @@ $fd-focus-outline-offset: 0.0625rem;
     &:focus,
     &.is-focus {
       outline-offset: $offset;
-      outline-width: var(--sapContent_FocusWidth);
-      outline-color: var(--sapContent_FocusColor);
-      outline-style: var(--sapContent_FocusStyle);
+      outline-width: .0625rem;
+      outline-width: var(--sapContent_FocusWidth, .0625rem);
+      outline-color: #000;
+      outline-color: var(--sapContent_FocusColor, #000);
+      outline-style: dotted;
+      outline-style: var(--sapContent_FocusStyle, dotted);
     }
   }
 

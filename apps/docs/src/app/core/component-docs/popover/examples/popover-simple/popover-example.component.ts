@@ -7,6 +7,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
     encapsulation: ViewEncapsulation.None
 })
 export class PopoverExampleComponent {
+    isOpen = false;
+
     list1 = [
         { text: 'Option 1', url: '#' },
         { text: 'Option 2', url: '#' },
