@@ -12,6 +12,7 @@ import {
     getTextArr,
     refreshPage, sendKeys
 } from '../../driver/wdio';
+import { emptyValuesArr } from '../fixtures/appData/menu-contents';
 
 describe('Menu tests', function() {
     const menuPage = new MenuPo();
@@ -84,14 +85,14 @@ describe('Menu tests', function() {
                 const menuItemsArrLength = getElementArrayLength(menuItemsArr);
                 for (let j = 0; j < menuItemsArrLength - 1; j++) {
                     sendKeys('ArrowDown');
-                    expect(['', '\"\"', null, undefined])
+                    expect(emptyValuesArr)
                         .not.toContain(getCSSPropertyByName(menuItemsArr, 'outline-style', j + 1));
 
                 }
 
                 for (let g = menuItemsArrLength - 1; g > 0; g--) {
                     sendKeys('ArrowUp');
-                    expect(['', '\"\"', null, undefined])
+                    expect(emptyValuesArr)
                         .not.toContain(getCSSPropertyByName(menuItemsArr, 'outline-style', g - 1));
                 }
             }
@@ -103,7 +104,7 @@ describe('Menu tests', function() {
                 const menuItemsArrLength = getElementArrayLength(menuItemsArr);
                 for (let j = 0; j < menuItemsArrLength - 1; j++) {
                     sendKeys('Tab');
-                    expect(['', '\"\"', null, undefined])
+                    expect(emptyValuesArr)
                         .not.toContain(getCSSPropertyByName(menuItemsArr, 'outline-style', j + 1));
                 }
             }
