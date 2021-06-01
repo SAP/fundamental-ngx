@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 
 import { AvatarGroupComponent } from '@fundamental-ngx/core/avatar-group';
@@ -7,9 +7,7 @@ import { AvatarGroupDataExampleService } from './avatar-group-data-example.servi
 
 @Component({
     selector: 'fd-avatar-group-individual-type-example',
-    templateUrl: './avatar-group-individual-type-example.component.html',
-    styleUrls: ['./avatar-group-individual-type-example.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    templateUrl: './avatar-group-individual-type-example.component.html'
 })
 export class AvatarGroupIndividualTypeExampleComponent {
     @ViewChild('avatarGroup_IndividualType')

@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 
 import { PopoverComponent, PopoverBodyComponent } from '@fundamental-ngx/core/popover';
@@ -7,9 +7,7 @@ import { AvatarGroupDataExampleService } from './avatar-group-data-example.servi
 
 @Component({
     selector: 'fd-avatar-group-group-type-example',
-    templateUrl: './avatar-group-group-type-example.component.html',
-    styleUrls: ['./avatar-group-group-type-example.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    templateUrl: './avatar-group-group-type-example.component.html'
 })
 export class AvatarGroupGroupTypeExampleComponent {
     @ViewChild('overflowPopoverBody')

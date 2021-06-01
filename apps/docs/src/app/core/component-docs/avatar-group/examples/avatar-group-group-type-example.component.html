@@ -8,10 +8,8 @@
                 (isOpenChange)="isOpenChanged($event)"
                 placement="bottom"
                 maxWidth="312"
-                additionalBodyClass="fd-avatar-group--group-type__overflow-popover-body--custom-class"
                 #overflowPopover>
-        <fd-popover-control class="fd-avatar-group__popover-control"
-                            tabindex="0"
+        <fd-popover-control tabindex="0"
                             (click)="handleControlClick($event, overflowPopover)"
                             (keydown)="handleControlKeydown($event, overflowPopover)">
             <div *ngFor="let person of people" fd-avatar-group-item>
@@ -69,7 +67,11 @@
                     </div>
                 </div>
 
-                <div fd-avatar-group-overflow-body>
+                <div fd-avatar-group-overflow-body
+                     [noPadding]="isDetailStage"
+                     [noHorizontalScroll]="isDetailStage"
+                     [noVerticalScroll]="false"
+                >
                     <ng-container *ngIf="overflowPopoverStage === 'main'">
                         <ng-container *ngFor="let person of people; let idx = index;">
                             <div fd-avatar-group-overflow-item>
