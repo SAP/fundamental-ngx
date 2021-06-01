@@ -1,5 +1,14 @@
 {
-   "projects": {
-     "default": "allure-results"
-   }
+"projects": {
+    "default": "valorkin-fundamental-ngx"
+  },
+  "targets": {
+    "valorkin-fundamental-ngx": {
+      "hosting": {
+        "valorkin-fundamental-ngx": [
+          "valorkin-fundamental-ngx"
+        ]
+      }
+    }
+  }
 }
