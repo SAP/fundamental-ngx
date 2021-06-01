@@ -22,12 +22,13 @@ describe('Radio button component test', function() {
     it('verify disable radio buttons', () => {
         const disableRadioButtonsLength = getElementArrayLength(disableRadioButton);
         for (let i = 0; i < disableRadioButtonsLength; i++) {
+            if (i <= 5) {
+                scrollIntoView(disableRadioButton, i);
+                expect(getAttributeByName(disableRadioButton, 'disabled', i)).toBe('true');
+            }
             if (i > 5) {
                 scrollIntoView(disableRadioButton, i);
                 expect(getAttributeByName(disableRadioButton, 'ng-reflect-name', i)).toBe('disabledRadio');
-            } else {
-                scrollIntoView(disableRadioButton, i);
-                expect(getAttributeByName(disableRadioButton, 'disabled', i)).toBe('true');
             }
         }
     });
