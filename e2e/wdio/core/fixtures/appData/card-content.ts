@@ -24,8 +24,8 @@ export const btnText = [
 export const analyticsTitle = 'Failure Breakdown';
 export const tableHeaderText = [
     'Name',
-    'Price',
     'Country',
+    'Price',
     'Status'
 ];
 export const tableContentsText = [

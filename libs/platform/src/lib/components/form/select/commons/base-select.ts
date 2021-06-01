@@ -103,7 +103,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
     @Input()
     width: string;
 
-    /** Whether the select component is disabled. */
+    /** Holds the message with respect to state */
     @Input()
     stateMessage: string;
 

@@ -157,7 +157,6 @@ pre {
     margin: 0;
     white-space: pre-wrap;
     white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
     white-space: -o-pre-wrap;
     word-wrap: break-word;
     display: flex;
@@ -189,7 +188,8 @@ pre {
     pointer-events: none;
 }
 
-//highlight overrides
+/** Highlight overrides */
+
 .hljs-tag,
 .hljs-name {
     color: #000080;
@@ -240,7 +240,6 @@ a:focus {
         background-color: #fff !important;
         white-space: pre-wrap;
         white-space: -moz-pre-wrap;
-        white-space: -pre-wrap;
         white-space: -o-pre-wrap;
         word-wrap: break-word;
         display: flex;

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, ViewEncapsulation, HostBinding } from '@angular/core';
 import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
 import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
 
@@ -41,6 +41,11 @@ export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
     /** user's custom classes */
     @Input()
     class: string;
+
+    /** Aria-label for Icon. */
+    @Input()
+    @HostBinding('attr.aria-label')
+    ariaLabel: string = null;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
