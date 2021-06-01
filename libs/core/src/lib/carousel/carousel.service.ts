@@ -140,7 +140,14 @@ export class CarouselService implements OnDestroy {
             this.active = carouselArray[2];
         }
         const activeItemIndex: number = carouselArray.findIndex((item) => item === this.active);
-        const itemToActivate = carouselArray[activeItemIndex - 1];
+        let itemToActivate = carouselArray[activeItemIndex - 1];
+
+        // case where slides can move infinitely in one direction
+        // handle case where on-load activeItemIndex = 0 and activeItemIndex - 1 returns undefined item from item array.
+        if (!itemToActivate) {
+            itemToActivate = carouselArray[this.items.toArray().length - 1];
+        }
+
         this.goToItem(itemToActivate, true, languageDirection);
         this.active = itemToActivate;
     }
