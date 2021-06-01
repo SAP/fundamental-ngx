@@ -39,7 +39,8 @@ export type fdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
             useExisting: forwardRef(() => CheckboxComponent),
             multi: true
         }
-    ]
+    ],
+    host: { '[attr.tabindex]': '-1' }
 })
 export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestroy {
     /** @hidden */
@@ -115,6 +116,10 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     @HostBinding('style.position')
     readonly position = 'relative';
 
+    /** @hidden */
+    @HostBinding('style.outline')
+    readonly outline = 'none';
+
     /** Values returned by control. */
     public values: FdCheckboxValues = { trueValue: true, falseValue: false, thirdStateValue: null };
     /** Stores current checkbox value. */
@@ -127,7 +132,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     /** @hidden Reference to callback provided by FormControl.*/
     public onTouched = () => {};
     /** @hidden Reference to callback provided by FormControl.*/
-    public onValueChange = (newValue) => {};
+    public onValueChange = (_) => {};
 
     /** @hidden */
     constructor(
@@ -203,7 +208,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
         this.muteKey(event);
     }
 
-    /** @hidden Updates checkbox Indeterminate state on spacebar key on IE11 */
+    /** @hidden Updates checkbox Indeterminate state on space bar key on IE11 */
     public checkByKey(event: KeyboardEvent): void {
         if (this._isSpaceBarEvent(event) && this._platform.TRIDENT) {
             this._nextValueEvent();
