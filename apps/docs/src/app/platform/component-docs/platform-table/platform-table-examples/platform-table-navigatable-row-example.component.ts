@@ -27,18 +27,13 @@ export class PlatformTableNavigatableRowExampleComponent implements AfterViewIni
     }
 
     ngAfterViewInit(): void {
-        this.setRowUnnavigatable(0);
-        this.setRowUnnavigatable(1);
-        this.setRowUnnavigatable(2);
+        this.table.setNavigatableRowState(0, false);
+        this.table.setNavigatableRowState(1, false);
+        this.table.setNavigatableRowState(2, false);
     }
 
     onRowSelectionChange(event: TableRowSelectionChangeEvent<ExampleItem>): void {
         console.log(event);
-    }
-
-    private setRowUnnavigatable(index: number): void {
-        this.table.tableRows.toArray()[index + 1].navigatable = false;
-        this.table._tableRows[index].navigatable = false;
     }
 }
 

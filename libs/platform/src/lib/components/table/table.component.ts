@@ -636,6 +636,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._isFilteringFromHeaderDisabled = disabled;
     }
 
+    /** Set the navigatable property on a row */
+    setNavigatableRowState(rowIndex: number, state: boolean): void {
+        this.tableRows.toArray()[rowIndex + 1].navigatable = state;
+        this._tableRows[rowIndex].navigatable = state;
+    }
+
     /** @hidden
      *  Needs to prevent scrolling and other events on loading.
      *  TODO: refactor it on keyboard navigation implementation
