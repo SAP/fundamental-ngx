@@ -240,7 +240,6 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     /** @hidden */
     private _listenElementEvents(): void {
         fromEvent(this.elementRef.nativeElement, 'focus', { capture: true }).pipe(
-            filter(event => event['target']?.tagName !== 'BUTTON'),
             tap(() => {
                 this._isFocused = true;
                 this.changeDetectorRef.markForCheck();
