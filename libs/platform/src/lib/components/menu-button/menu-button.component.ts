@@ -5,8 +5,7 @@ import {
     EventEmitter,
     ChangeDetectorRef,
     ChangeDetectionStrategy,
-    HostBinding,
-    OnInit
+    HostBinding
 } from '@angular/core';
 import { ButtonType } from '@fundamental-ngx/core';
 import { BaseComponent } from '../base';
@@ -17,7 +16,7 @@ import { BaseComponent } from '../base';
     styleUrls: ['./menu-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MenuButtonComponent extends BaseComponent implements OnInit {
+export class MenuButtonComponent extends BaseComponent {
     /** Label for menu button */
     @Input()
     label: string;
@@ -45,29 +44,17 @@ export class MenuButtonComponent extends BaseComponent implements OnInit {
      * to prevent this, need to apply disabled at menu-button level as well.
      */
     @HostBinding('class.menu-button-disabled')
-    menuButtonDisabled = false;
+    get menuButtonDisabled(): boolean {
+        return this.disabled;
+    }
 
-    // tabindex for button.
+    // @hidden tabindex for button.
     get tabindex(): number {
-        return this._tabindex;
+        return this.disabled ? -1 : 0;
     }
-
-    // set tabindex for button
-    set tabindex(tabindex: number) {
-        this._tabindex = tabindex;
-    }
-
-    /** @hidden */
-    private _tabindex = 0;
 
     constructor(_cd: ChangeDetectorRef) {
         super(_cd);
-    }
-
-    /** @hidden */
-    ngOnInit(): void {
-        this.menuButtonDisabled = this.disabled;
-        this.tabindex = this.disabled ? -1 : 0;
     }
 
     /**
