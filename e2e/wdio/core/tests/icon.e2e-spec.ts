@@ -1,6 +1,6 @@
 import { IconPo } from '../pages/icon.po';
 
-describe('Avatar test suite', function() {
+describe('Icon test suite', function() {
     const iconPage = new IconPo();
 
     beforeAll(() => {
