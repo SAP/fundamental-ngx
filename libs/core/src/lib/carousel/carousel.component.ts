@@ -208,8 +208,6 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     private _slideSwiped = false;
 
-    private _prevBtnClickedAtStart = true;
-
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing) */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -304,11 +302,6 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }
     }
 
-    /** @hidden */
-    _itemClicked($event: MouseEvent| KeyboardEvent): void {
-        $event.stopPropagation();
-    }
-
     _isRtl(): boolean {
         return this._rtlService?.rtl.getValue();
     }
@@ -337,17 +330,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this._preventDefaultBtnFocus();
         this._carouselService.pickPrevious(this.dir);
 
-        /** Handle looped carousel, first click on prev button. */
-        if (this.loop && this._prevBtnClickedAtStart) {
-            const slidesArray = this.slides.toArray();
-            this._carouselService.goToItem(slidesArray[Math.ceil(this.slides.length / 2) - 1], true, this.dir);
-            slidesArray[Math.ceil(this.slides.length / 2) - 1].visibility = 'visible';
-            this.slideChange.emit(new CarouselActiveSlides([slidesArray[Math.ceil(this.slides.length / 2) - 1]], 'Previous'));
-        } else {
-            /** Have to refactor the _notifySlideChange to get rid of else condition */
-            this._notifySlideChange(SlideDirection.PREVIOUS);
-        }
-        this._prevBtnClickedAtStart = false;
+        this._notifySlideChange(SlideDirection.PREVIOUS);
         this._changeDetectorRef.detectChanges();
     }
 
@@ -356,8 +339,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         if (!this.loop && this.currentActiveSlidesStartIndex >= this.pageIndicatorsCountArray.length - 1) {
             return;
         }
-        // Handles looped carousel, first navigation is prev button.
-        this._prevBtnClickedAtStart = false;
+
         // Moving to next slide
         this.leftButtonDisabled = false;
         this._adjustActiveItemPosition(SlideDirection.NEXT);
