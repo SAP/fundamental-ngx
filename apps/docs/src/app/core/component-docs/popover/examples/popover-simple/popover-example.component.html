@@ -1,11 +1,12 @@
 <div class="fd-docs-flex-display-helper">
     <fd-popover [focusTrapped]="true" [focusAutoCapture]="true" title="photo 1 in circle">
         <fd-popover-control>
-            <fd-avatar size="s" [circle]="true" ariaLabel="photo 1 in circle" image="http://picsum.photos/id/1018/400"></fd-avatar>
+            <fd-avatar size="s" [circle]="true" ariaLabel="photo 1 in circle" image="http://picsum.photos/id/1018/400"
+            tabindex="0"></fd-avatar>
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length">
             <ul fd-list>
-                <li fd-list-item *ngFor="let option of list1">
+                <li fd-list-item *ngFor="let option of list1" (click)="navigate(this)" (keydown)="navigate(this)">
                     <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
                 </li>
             </ul>
@@ -14,7 +15,7 @@
 
     <fd-popover placement="top" [focusTrapped]="true" [focusAutoCapture]="true" title="menu2">
         <fd-popover-control>
-            <fd-icon [glyph]="'menu2'" ariaLabel="menu2"></fd-icon>
+            <fd-icon [glyph]="'menu2'" ariaLabel="menu2" tabindex="0"></fd-icon>
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length">
             <ul fd-list>
@@ -27,7 +28,7 @@
 
     <fd-popover placement="bottom" [focusTrapped]="true" [focusAutoCapture]="true" title="money-bills">
         <fd-popover-control>
-            <fd-avatar size="m" [glyph]="'money-bills'" ariaLabel="money-bills" colorAccent="3"></fd-avatar>
+            <fd-avatar size="m" [glyph]="'money-bills'" ariaLabel="money-bills" colorAccent="3" tabindex = "0"></fd-avatar>
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length" style="min-width: 400px">
             <div fd-popover-body-header>
@@ -83,7 +84,7 @@
 
     <fd-popover placement="bottom" [focusTrapped]="true" [focusAutoCapture]="true" title="circle photo">
         <fd-popover-control>
-            <fd-avatar size="s" [circle]="true" ariaLabel="circle photo" image="https://picsum.photos/id/2/400/400"></fd-avatar>
+            <fd-avatar size="s" [circle]="true" ariaLabel="circle photo" image="https://picsum.photos/id/2/400/400" tabindex="0"></fd-avatar>
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length">
             <ul fd-list>

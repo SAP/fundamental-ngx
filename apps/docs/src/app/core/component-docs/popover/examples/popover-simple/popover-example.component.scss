@@ -1,4 +1,26 @@
-.fd-docs-flex-display-helper {
+$fd-focus-outline-offset: 0.0625rem;
+
+@mixin fd-fiori-focus($offset: -0.1875rem) {
+    &:focus,
+    &.is-focus {
+      outline-offset: $offset;
+      outline-width: var(--sapContent_FocusWidth);
+      outline-color: var(--sapContent_FocusColor);
+      outline-style: var(--sapContent_FocusStyle);
+    }
+  }
+
+  // temporary will be removed once respective component styles are updated
+  fd-avatar,
+  fd-icon,
+ .fd-list,
+ a {
+    @include fd-fiori-focus($fd-focus-outline-offset);
+    cursor: pointer;
+  }
+
+
+  .fd-docs-flex-display-helper {
     display: flex;
     align-items: center;
     justify-content: space-around;
