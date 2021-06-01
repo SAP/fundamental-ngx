@@ -356,6 +356,11 @@ export function clickNextElement(selector: string, index: number = 0): void {
     $$(selector)[index].nextElement().click();
 }
 
+export function clickPreviousElement(selector: string, index: number = 0): void {
+    checkSelectorExists(selector, index);
+    $$(selector)[index].previousElement().click();
+}
+
 export function getElementLocation(selector: string, index?: number): WebdriverIO.LocationReturn;
 export function getElementLocation(selector: string, index: number, prop: 'x' | 'y'): number;
 export function getElementLocation(selector: string, index: number = 0, prop?: 'x' | 'y'): WebdriverIO.LocationReturn | number {
@@ -426,4 +431,9 @@ export function applyState(state: 'hover' | 'active' | 'focus', selector: string
 export function getPreviousElementText(selector: string, index: number = 0): string {
     checkSelectorExists(selector, index);
     return $$(selector)[index].previousElement().getText();
+}
+
+export function getNextElementText(selector: string, index: number = 0): string {
+    checkSelectorExists(selector, index);
+    return $$(selector)[index].nextElement().getText();
 }
