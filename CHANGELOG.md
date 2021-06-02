@@ -1,3 +1,12 @@
+## [0.30.1-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.46...v0.30.1-rc.47) (2021-06-02)
+
+
+### Features
+
+* **core:** split into libraries ([#5453](https://github.com/SAP/fundamental-ngx/issues/5453)) ([54727a4](https://github.com/SAP/fundamental-ngx/commit/54727a48a73a4665db62231714c83b9f5b182e1a))
+
+
+
 ## [0.30.1-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.45...v0.30.1-rc.46) (2021-06-02)
 
 
