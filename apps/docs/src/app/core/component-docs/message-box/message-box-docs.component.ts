@@ -59,7 +59,7 @@ export class MessageBoxDocsComponent {
     componentBased: ExampleFile[] = [
         {
             language: 'typescript',
-            code: componentBasedTs,
+            code: componentBasedExampleTs,
             name: 'Message box content',
             fileName: 'message-box-example',
             component: 'MessageBoxExampleComponent',
@@ -67,7 +67,7 @@ export class MessageBoxDocsComponent {
         },
         {
             language: 'typescript',
-            code: componentBasedExampleTs,
+            code: componentBasedTs,
             entryComponent: true,
             main: true,
             fileName: 'component-based-message-box-example',
