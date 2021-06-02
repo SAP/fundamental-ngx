@@ -19,6 +19,7 @@ import * as popoverDynamicTSrc from '!raw-loader!./examples/popover-dynamic/popo
 import * as dropdownPopoverHtml from '!raw-loader!./examples/popover-dropdown/popover-dropdown.component.html';
 import * as dropdownPopoverTs from '!raw-loader!./examples/popover-dropdown/popover-dropdown-example.component.ts';
 import * as dropdownPopoverScss from '!raw-loader!./examples/popover-dropdown/popover-dropdown.component.scss';
+import * as dropdownContainerSrcTs from '!raw-loader!./examples/popover-container-example/popover-container-example.component.ts';
 import * as dropdownContainerSrc from '!raw-loader!./examples/popover-container-example/popover-container-example.component.html';
 import * as popoverFocusSrcTs from '!raw-loader!./examples/popover-focus-example/popover-focus-example.component.ts';
 import * as popoverFocusSrcH from '!raw-loader!./examples/popover-focus-example/popover-focus-example.component.html';
@@ -62,6 +63,12 @@ export class PopoverDocsComponent {
         {
             language: 'html',
             code: dropdownContainerSrc,
+            fileName: 'popover-container-example',
+            component: 'PopoverContainerExampleComponent'
+        },
+        {
+            language: 'typescript',
+            code: dropdownContainerSrcTs,
             fileName: 'popover-container-example',
             component: 'PopoverContainerExampleComponent'
         }
