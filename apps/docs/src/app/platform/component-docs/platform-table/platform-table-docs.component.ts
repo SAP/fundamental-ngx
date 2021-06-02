@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 
-import { DatetimeAdapter, RtlService } from '@fundamental-ngx/core';
 import {
     TableColumnFreezeEvent,
     TableDataSource,
@@ -49,6 +48,8 @@ import * as platformTreeTableDefaultTsSrc from '!raw-loader!./platform-table-exa
 
 import { TableDataProviderExample } from './platform-table-examples/platform-table-data-provider-example';
 import { ExampleItem } from './platform-table-examples/platform-table-data-items-example';
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fdp-table-docs',

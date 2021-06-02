@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core';
+import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
 
 export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
     ...FD_DATETIME_FORMATS,

@@ -1,4 +1,4 @@
-export const CLASS_NAME = {
+export const DYNAMIC_PAGE_CLASS_NAME = {
     dynamicPage: 'fd-dynamic-page',
     dynamicPageTitleArea: 'fd-dynamic-page__title-area',
     dynamicPageMainContainer: 'fd-dynamic-page__main-container',

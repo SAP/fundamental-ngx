@@ -1,6 +1,7 @@
 import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { PopoverBodyComponent } from '@fundamental-ngx/core/popover';
+import { Size } from '@fundamental-ngx/core/utils';
 
-import { PopoverBodyComponent, Size } from '@fundamental-ngx/core';
 import { AvatarGroupDataExampleService } from './avatar-group-data-example.service';
 
 @Component({

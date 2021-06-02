@@ -16,12 +16,12 @@ import {
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 
-import { DatetimeAdapter } from '../datetime/datetime-adapter';
-import { DateTimeFormats, DATE_TIME_FORMATS } from '../datetime/datetime-formats';
+import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
 
 import { DateRange } from './models/date-range';
 import { CalendarCurrent } from './models/calendar-current';
-import { SpecialDayRule } from './models/special-day-rule';
+import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { CalendarYearGrid } from './models/calendar-year-grid';
 import { AggregatedYear } from './models/aggregated-year';
 import { CalendarDayViewComponent } from './calendar-views/calendar-day-view/calendar-day-view.component';
@@ -32,8 +32,8 @@ import {
     CalendarAggregatedYearViewComponent
     // Comment to fix max-line-length error
 } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
-import { ContentDensityService } from '../utils/public_api';
 import { Subscription } from 'rxjs';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 let calendarUniqueId = 0;
 

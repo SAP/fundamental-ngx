@@ -9,7 +9,8 @@ import { CalendarModule } from '../calendar/calendar.module';
 import { ButtonModule } from '../button/button.module';
 import { InputGroupModule } from '../input-group/input-group.module';
 import { DateRange } from '../calendar/models/date-range';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
+import { DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 describe('DatePickerComponent', () => {
     let component: DatePickerComponent<FdDate>;

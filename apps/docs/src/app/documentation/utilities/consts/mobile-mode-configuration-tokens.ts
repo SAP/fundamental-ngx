@@ -1,4 +1,4 @@
-import { MobileModeControl, MobileModeConfigToken } from '@fundamental-ngx/core';
+import { MobileModeConfigToken, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { MOBILE_DIALOG_PORTRAIT } from './mobile-dialog.consts';
 
 export const SELECT_MOBILE_CONFIG: MobileModeConfigToken = {

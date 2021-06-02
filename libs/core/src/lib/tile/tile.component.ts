@@ -8,7 +8,8 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 type TileType = null | 'kpi' | 'launch' | 'feed' | 'slide' | 'line';
 type TileSize = null | 's';

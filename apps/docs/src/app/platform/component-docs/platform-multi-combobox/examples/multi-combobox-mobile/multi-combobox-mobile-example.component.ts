@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { MobileModeConfig } from '@fundamental-ngx/core';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { DATA_PROVIDERS, MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/platform';
 
 @Component({

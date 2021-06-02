@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { FlexibleColumnLayout, BreadcrumbComponent } from '@fundamental-ngx/core';
+import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
+import { FlexibleColumnLayout } from '@fundamental-ngx/core/flexible-column-layout';
 import {
     DynamicPageCollapseChangeEvent,
     DynamicPageComponent,
