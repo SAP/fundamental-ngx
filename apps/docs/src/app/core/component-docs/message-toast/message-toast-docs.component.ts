@@ -29,8 +29,8 @@ export class MessageToastDocsComponent {
         {
             language: 'typescript',
             code: messageToastContentExample,
-            fileName: 'message-toast-content',
-            component: 'AlertContentComponent',
+            fileName: 'message-toast-content-example',
+            component: 'MessageToastContentExampleComponent',
             name: 'Content Component',
             entryComponent: true
         }
