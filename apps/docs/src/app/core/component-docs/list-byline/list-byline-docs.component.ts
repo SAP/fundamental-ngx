@@ -5,8 +5,11 @@ import * as bylineNavigationSrcHtml from '!raw-loader!./examples/list-byline-nav
 import * as bylineBorderlessSrcHtml from '!raw-loader!./examples/list-byline-borderless-example/list-byline-borderless-example.component.html';
 import * as bylineSelectionSrcHtml from '!raw-loader!./examples/list-byline-selection-example/list-byline-selection-example.component.html';
 import * as bylineSelectionSrcTs from '!raw-loader!./examples/list-byline-selection-example/list-byline-selection-example.component.ts';
+import * as bylineButtonsTs from '!raw-loader!./examples/list-byline-button-example/list-byline-button-example.component.ts'
 import * as bylineButtonsHtml from '!raw-loader!./examples/list-byline-button-example/list-byline-button-example.component.html'
+import * as bylineInteractiveTs from '!raw-loader!./examples/list-byline-interactive-example/list-byline-interactive-example.component.ts';
 import * as bylineInteractiveHtml from '!raw-loader!./examples/list-byline-interactive-example/list-byline-interactive-example.component.html';
+import * as bylineWrapTs from '!raw-loader!./examples/list-byline-wrap-example/list-byline-wrap-example.component.ts';
 import * as bylineWrapHtml from '!raw-loader!./examples/list-byline-wrap-example/list-byline-wrap-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -57,9 +60,14 @@ export class ListBylineDocsComponent {
         {
             language: 'html',
             code: bylineButtonsHtml,
-            fileName: 'list-byline-button-example',
-            component: 'ListBylineButtonExampleComponent',
+            fileName: 'list-byline-button-example'
         },
+        {
+            language: 'typescript',
+            code: bylineButtonsTs,
+            fileName: 'list-byline-button-example',
+            component: 'ListBylineButtonExampleComponent'
+        }
     ];
 
     interactiveList: ExampleFile[] = [
@@ -67,8 +75,14 @@ export class ListBylineDocsComponent {
             language: 'html',
             code: bylineInteractiveHtml,
             fileName: 'list-byline-interactive-example',
-            component: 'ListBylineInteractiveExampleComponent',
+            
         },
+        {
+            language: 'typescript',
+            code: bylineInteractiveTs,
+            fileName: 'list-byline-interactive-example',
+            component: 'ListBylineInteractiveExampleComponent',
+        }
     ];
 
     wrapList: ExampleFile[] = [
@@ -76,7 +90,13 @@ export class ListBylineDocsComponent {
             language: 'html',
             code: bylineWrapHtml,
             fileName: 'list-byline-wrap-example',
-            component: 'ListBylineWrapExampleComponent',
+            
         },
+        {
+            language: 'typescript',
+            code: bylineWrapTs,
+            fileName: 'list-byline-wrap-example',
+            component: 'ListBylineWrapExampleComponent',
+        }
     ];
 }
