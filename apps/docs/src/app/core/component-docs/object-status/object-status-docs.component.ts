@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import * as ObjectStatusDefaultExample from '!raw-loader!./examples/object-status-default-example.component.html';
+import * as objectStatusDefaultTs from '!raw-loader!./examples/object-status-default-example.component.ts';
+import * as objectStatusDefaultHtml from '!raw-loader!./examples/object-status-default-example.component.html';
 import * as ObjectStatusTextExample from '!raw-loader!./examples/object-status-text-example.component.html';
 import * as ObjectStatusGenericTextExample from '!raw-loader!./examples/object-status-generic-text-example.component.html';
 import * as ObjectStatusTextIconExample from '!raw-loader!./examples/object-status-icon-text-example.component.html';
@@ -7,6 +8,7 @@ import * as ObjectStatusClickableAndIConExample from '!raw-loader!./examples/obj
 import * as ObjectStatusInvertedTextExample from '!raw-loader!./examples/object-status-inverted-example.component.html';
 import * as ObjectStatusInvertedGenericExample from '!raw-loader!./examples/object-status-inverted-generic-text-example.component.html';
 import * as ObjectStatusLargeExample from '!raw-loader!./examples/object-status-large-example.component.html';
+import * as objectStatusExamplesScss from '!raw-loader!./examples/object-status-examples.component.scss';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -16,10 +18,23 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 export class ObjectStatusDocsComponent {
     defaultObjectStatusHtmlType: ExampleFile[] = [
         {
+            language: 'typescript',
+            code: objectStatusDefaultTs,
+            fileName: 'object-status-default-example',
+            component: 'ObjectStatusDefaultExampleComponent'
+        },
+        {
             language: 'html',
-            code: ObjectStatusDefaultExample,
+            code: objectStatusDefaultHtml,
             fileName: 'object-status-default-example'
-        }
+        },
+        {
+            language: 'scss',
+            code: objectStatusExamplesScss,
+            fileName: 'object-status-examples',
+            component: 'ObjectStatusDefaultExample',
+            scssFileCode: objectStatusExamplesScss
+        },
     ];
 
     ObjectStatusTextExample: ExampleFile[] = [
@@ -35,7 +50,7 @@ export class ObjectStatusDocsComponent {
             language: 'html',
             code: ObjectStatusGenericTextExample,
             fileName: 'object-status-generic-text-example'
-        }
+        },
     ];
 
     ObjectStatusNumericIconExample: ExampleFile[] = [
