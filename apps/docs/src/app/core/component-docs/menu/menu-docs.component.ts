@@ -41,9 +41,14 @@ export class MenuDocsComponent {
         {
             language: 'html',
             code: menuMobileHtml,
+            fileName: 'menu-mobile-example'
+        },
+        {
+            language: 'typescript',
+            code: menuMobileTs,
             fileName: 'menu-mobile-example',
-            typescriptFileCode: menuMobileTs,
-            component: 'MenuMobileExampleComponent'
+            component: 'MenuMobileExampleComponent',
+            entryComponent: true
         }
     ];
 

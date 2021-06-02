@@ -37,7 +37,6 @@ const routes: Routes = [
         MenuMobileExampleComponent,
         MenuSeparatorExampleComponent,
         MenuWithSubmenuExampleComponent
-    ],
-    entryComponents: [MenuMobileExampleComponent]
+    ]
 })
 export class MenuDocsModule {}
