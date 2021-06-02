@@ -17,15 +17,17 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { TabPanelComponent } from '@fundamental-ngx/core';
-import { fromEvent, Subscription } from 'rxjs';
-import { debounceTime, startWith, throttleTime } from 'rxjs/operators';
+import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, startWith, throttleTime } from 'rxjs/operators';
+
 import { BaseComponent } from '../base';
 import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
+import { DynamicPageContentHostComponent } from './dynamic-page-content/dynamic-page-content-host.component';
 import {
     DynamicPageContentComponent,
     DynamicPageTabChangeEvent
 } from './dynamic-page-content/dynamic-page-content.component';
-import { DynamicPageTabbedContentComponent } from './dynamic-page-content/dynamic-page-tabbed-content.component';
+import { DynamicPageFooterComponent } from './dynamic-page-footer/dynamic-page-footer.component';
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
 import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 import { DynamicPageService } from './dynamic-page.service';
@@ -65,51 +67,49 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
 
     /**
      * user provided offset in px
+     * @deprecated
      */
     @Input()
     offset = 0;
-
-    /** reference to header component  */
-    @ContentChild(DynamicPageHeaderComponent)
-    headerComponent: DynamicPageHeaderComponent;
 
     /** reference to title component  */
     @ContentChild(DynamicPageTitleComponent)
     titleComponent: DynamicPageTitleComponent;
 
+    /** reference to header component  */
+    @ContentChild(DynamicPageHeaderComponent)
+    headerComponent: DynamicPageHeaderComponent;
+
+    /** reference to footer component  */
+    @ContentChild(DynamicPageFooterComponent)
+    footerComponent: DynamicPageFooterComponent;
+
     /** reference to content component  */
     @ContentChild(DynamicPageContentComponent)
     contentComponent: DynamicPageContentComponent;
 
-    /** reference to content component to filter tabs */
+    /** reference to content components list */
     @ContentChildren(DynamicPageContentComponent, { descendants: true })
-    tabbedContent: QueryList<DynamicPageContentComponent>;
-
-    /** reference to content component to filter tabs */
-    @ViewChildren(DynamicPageTabbedContentComponent)
-    tabContents: QueryList<DynamicPageTabbedContentComponent>;
+    contentComponents: QueryList<DynamicPageContentComponent>;
 
     @ViewChildren(TabPanelComponent)
     dynamicPageTabs: QueryList<TabPanelComponent>;
 
-    /**
-     * @hidden
-     * reference to header container
-     */
-    @ViewChild('header')
-    header: ElementRef<HTMLElement>;
+    /** @hidden */
+    @ViewChildren(DynamicPageContentHostComponent)
+    _contentHostComponents: QueryList<DynamicPageContentHostComponent>;
 
     /**
      * @hidden
      * reference to tabbed content container
      */
-    @ViewChild('contentContainer')
-    contentContainer: ElementRef<HTMLElement>;
-
-    /**
-     * tracks whether the header was toggled or not
-     */
-    isHeaderCollapsed = false;
+    @ViewChild('tabsContainer')
+    set _tabsContainer(tabsContainer: ElementRef<HTMLElement>) {
+        if (!tabsContainer?.nativeElement) {
+            return;
+        }
+        this._setTabStyles(tabsContainer.nativeElement);
+    }
 
     /**
      * @hidden
@@ -123,16 +123,21 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
      */
     tabs: DynamicPageContentComponent[] = [];
 
-    /** @hidden */
-    private _distanceFromTop = 0;
+    /**
+     * @hidden
+     * On Scroll Content Subject
+     */
+    _onScrollContentSubject: Subject<Event> = new Subject();
 
     /**
-     * subscription for when collapse value has changed
+     * @hidden
      */
-    private _collapseValSubscription: Subscription = new Subscription();
+    private _onScrollContent$: Observable<Event> = this._onScrollContentSubject.asObservable();
 
     /** @hidden */
-    public headerCollapsible = true;
+    get _headerCollapsible(): boolean {
+        return this.headerComponent?.collapsible;
+    }
 
     /** @hidden */
     constructor(
@@ -142,74 +147,36 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         private _dynamicPageService: DynamicPageService
     ) {
         super(_cd);
-        if (this._collapseValSubscription) {
-            this._collapseValSubscription.unsubscribe();
-        }
-        this._collapseValSubscription = this._dynamicPageService.$collapseValue.subscribe((val) => {
-            this.setContainerPositions();
-        });
     }
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this._listenToTabbedContentQueryListChanges();
-        if (this.background) {
-            this.titleComponent.background = this.background;
-            this.headerComponent.background = this.background;
-            this.contentComponent.background = this.background;
-        }
-        if (this.size) {
-            this.titleComponent.size = this.size;
-            this.headerComponent.size = this.size;
-            this.contentComponent.size = this.size;
-        }
-        this.headerCollapsible = this.headerComponent.collapsible;
+        this._inheritPageOptions();
+        this._listenToContentComponentsListChanges();
     }
 
-    /**@hidden */
+    /** @hidden */
     ngAfterViewInit(): void {
-        this._setTabStyles();
-        this._setToolbarStyles();
-        this.setContainerPositions();
-
-        this._subscriptions.add(
-            this.tabbedContent.changes.subscribe(() => {
-                this._setTabStyles();
-            })
-        );
         if (this.headerComponent?.collapsible) {
-            this._listenOnScroll();
-            this._listenOnResize();
+            this._listenToContentScroll();
         }
+
         this._cd.detectChanges();
-    }
-
-    /**@hidden */
-    ngOnDestroy(): void {
-        this._collapseValSubscription.unsubscribe();
-        this._subscriptions.unsubscribe();
-    }
-
-    /**
-     * Set the positions of the tabs and content with respect to the window
-     */
-    setContainerPositions(): void {
-        this._setTabsPosition();
-        this._setContainerPosition();
     }
 
     /**
      * Snap the header to expand or collapse based on scrolling. Uses CDKScrollable.
      */
     snapOnScroll(): void {
-        this._listenOnScroll();
+        // TODO: Do we really need it? Who uses it?
+        this._listenToContentScroll();
     }
 
     /**
      * toggle the visibility of the header on click of title area.
      */
     toggleCollapse(): void {
-        if (this.headerCollapsible) {
+        if (this._headerCollapsible) {
             this._dynamicPageService.toggleHeader();
         }
     }
@@ -236,92 +203,31 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         return this._elementRef;
     }
 
-    /**
-     * @hidden
-     * set top position of normal content on scrolling
-     */
-    private _setContainerPosition(): void {
-        if (this.contentComponent) {
-            const contentComponentElement = this.contentComponent.getElementRef().nativeElement;
-            this._distanceFromTop = window.pageYOffset + contentComponentElement.getBoundingClientRect().top;
-            contentComponentElement.style.height = this._getCalculatedHeight();
-            this._addClassNameToCustomElement(contentComponentElement, 'content-sticker');
-        }
-    }
-
-    /**@hidden */
-    private _getCalculatedHeight(): string {
-        return 'calc(100vh - ' + (this._distanceFromTop + this.offset) + 'px)';
-    }
-
     /** @hidden */
-    private _listenOnScroll(): void {
-        if (this.contentComponent) {
-            const contentComponentElement = this.contentComponent.getElementRef().nativeElement;
-
-            this._subscriptions.add(
-                fromEvent(contentComponentElement, 'scroll')
-                    .pipe(debounceTime(20), throttleTime(20))
-                    .subscribe(() => {
-                        if (contentComponentElement.scrollTop > 0) {
-                            this._dynamicPageService.collapseHeader();
-                        } else {
-                            this._dynamicPageService.expandHeader();
-                        }
-                    })
-            );
-        }
-    }
-
-    /** @hidden Listen for window resize and adjust tab and content positions accordingly */
-    private _listenOnResize(): void {
-        this._subscriptions.add(
-            fromEvent(window, 'resize')
-                .pipe(debounceTime(60))
-                .subscribe(() => {
-                    this.setContainerPositions();
-                })
-        );
-    }
-
-    /**
-     * @hidden
-     * set position for tabs and tabbed content's position relative to the tabs on scrolling
-     */
-    private _setTabsPosition(): void {
-        if (!this.contentContainer) {
-            return;
-        }
-        const tabList: HTMLElement = this.contentContainer.nativeElement.querySelector('.fd-tabs');
-        if (!tabList) {
-            return;
-        }
-
-        const tabContent = this.tabContents?.toArray();
-        if (tabContent) {
-            tabContent.forEach((contentItem) => {
-                const element: HTMLElement = contentItem
-                    .getElementRef()
-                    .nativeElement.querySelector('.fd-dynamic-page__content');
-                if (element) {
-                    if (this._distanceFromTop === 0) {
-                        this._distanceFromTop = window.pageYOffset + element.getBoundingClientRect().top;
-                    }
-                    element.style.height = this._getCalculatedHeight();
+    private _listenToContentScroll(): void {
+        this._onScrollContent$
+            .pipe(
+                debounceTime(20),
+                throttleTime(20),
+                map((event) => (event.target as HTMLElement).scrollTop > 0),
+                distinctUntilChanged()
+            )
+            .subscribe((collapse) => {
+                if (collapse) {
+                    this._dynamicPageService.collapseHeader();
+                } else {
+                    this._dynamicPageService.expandHeader();
                 }
             });
-        }
     }
 
     /**
      * @hidden
      * set styles for tab labels
      */
-    private _setTabStyles(): void {
-        if (!this.contentContainer) {
-            return;
-        }
-        const tabList: HTMLElement = this.contentContainer.nativeElement.querySelector('.fd-tabs');
+    private _setTabStyles(tabsContainerElement: HTMLElement): void {
+        const tabList: HTMLElement = tabsContainerElement.querySelector('.fd-tabs');
+
         if (!tabList) {
             return;
         }
@@ -329,10 +235,6 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         this._addClassNameToCustomElement(tabList, CLASS_NAME.dynamicPageTabs);
         this._addClassNameToCustomElement(tabList, CLASS_NAME.dynamicPageTabsAddShadow);
         this._renderer.setStyle(tabList, 'z-index', 1);
-
-        if (this.header) {
-            this._renderer.setStyle(this.header.nativeElement, 'z-index', 2);
-        }
 
         if (this.size) {
             this._setTabsSize(this.size, tabList);
@@ -360,7 +262,7 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
      * @param sizeType
      * @param element
      */
-    _setTabsSize(sizeType: DynamicPageResponsiveSize, element: Element): void {
+    private _setTabsSize(sizeType: DynamicPageResponsiveSize, element: Element): void {
         switch (sizeType) {
             case 'small':
                 this._addClassNameToCustomElement(element, CLASS_NAME.dynamicPageTabsSmall);
@@ -381,98 +283,33 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
 
     /**
      * @hidden
-     * add classes to projected toolbars
+     * handle tab changes and emit event
      */
-    private _setToolbarStyles(): void {
-        // adds global actions classes to its toolbar
-        const globalToolbarEl = this._elementRef.nativeElement.querySelector(
-            'fdp-dynamic-page-global-actions .fd-toolbar'
-        );
-        if (globalToolbarEl) {
-            addClassNameToElement(this._renderer, globalToolbarEl, CLASS_NAME.dynamicPageGlobalActions);
-        }
-
-        const layoutToolbarEl = this._elementRef.nativeElement.querySelector(
-            'fdp-dynamic-page-layout-actions .fd-toolbar'
-        );
-        if (layoutToolbarEl) {
-            addClassNameToElement(this._renderer, layoutToolbarEl, CLASS_NAME.dynamicPageLayoutActions);
-        }
-
-        const actionsContainerEl = this._elementRef.nativeElement.querySelector(
-            '.' + CLASS_NAME.dynamicPageActionsContainer
-        );
-        // set toolbar sizes
-        this._setToolbarsSize(this.size, actionsContainerEl, globalToolbarEl, layoutToolbarEl);
+    _handleTabChange(tabPanel: TabPanelComponent): void {
+        // Emit Event
+        this._emitTabChangeEvent(tabPanel);
     }
 
     /**
      * @hidden
-     * add size classes to toolbars
-     * @param sizeType
-     * @param element
+     * fire tab change event
      */
-    _setToolbarsSize(
-        sizeType: DynamicPageResponsiveSize,
-        actionsContainer: Element,
-        globalActions: Element,
-        layoutActions: Element
-    ): void {
-        switch (sizeType) {
-            case 'small':
-                if (globalActions) {
-                    this._addClassNameToCustomElement(globalActions, CLASS_NAME.dynamicPageGlobalActionsToolbarSmall);
-                }
-                break;
-            case 'medium':
-                if (actionsContainer) {
-                    this._addClassNameToCustomElement(actionsContainer, CLASS_NAME.dynamicPageActionsContainerMedium);
-                    const globalActionsEl: HTMLElement = actionsContainer.querySelector(
-                        'fdp-dynamic-page-global-actions'
-                    );
-                    const layoutActionsEl: HTMLElement = actionsContainer.querySelector(
-                        'fdp-dynamic-page-layout-actions'
-                    );
-                    if (globalActionsEl) {
-                        globalActionsEl.style.order = '2';
-                    }
-                    if (layoutActionsEl) {
-                        layoutActionsEl.style.order = '1';
-                    }
-                }
-                if (globalActions) {
-                    this._addClassNameToCustomElement(globalActions, CLASS_NAME.dynamicPageGlobalActionsToolbarMedium);
-                }
-                if (layoutActions) {
-                    this._addClassNameToCustomElement(layoutActions, CLASS_NAME.dynamicPageLayoutActionsToolbarMedium);
-                }
-                break;
-            case 'large':
-            case 'extra-large':
-            default:
-                break;
-        }
-    }
-
-    /** @hidden
-     * handle tab changes and emit event
-     */
-    _handleTabChange(tabPanel: TabPanelComponent): void {
+    private _emitTabChangeEvent(tabPanel: TabPanelComponent): void {
         const event = new DynamicPageTabChangeEvent(this.contentComponent, tabPanel);
         this.contentComponent.tabChange.emit(event);
         this._cd.detectChanges();
     }
 
     /** @hidden */
-    private _listenToTabbedContentQueryListChanges(): void {
-        this.tabbedContent.changes.pipe(startWith(this.tabbedContent)).subscribe(() => {
-            this._createContent();
+    private _listenToContentComponentsListChanges(): void {
+        this.contentComponents.changes.pipe(startWith(this.contentComponents)).subscribe(() => {
+            this._createContentTabs();
         });
     }
 
     /** @hidden */
-    private _createContent(): void {
-        const content = this.tabbedContent.toArray();
+    private _createContentTabs(): void {
+        const content = this.contentComponents.toArray();
         // reset array
         this.tabs = [];
         if (!this._isTabContentPresent(content)) {
@@ -509,5 +346,20 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
     /**@hidden */
     private _addClassNameToCustomElement(element: Element, className: string): void {
         addClassNameToElement(this._renderer, element, className);
+    }
+
+    /** @hidden */
+    private _inheritPageOptions(): void {
+        // Title
+        this.titleComponent.background = this.background;
+        this.titleComponent.size = this.size;
+        // Header
+        this.headerComponent.background = this.background;
+        this.headerComponent.size = this.size;
+        // Content
+        this.contentComponents.forEach((contentCmp) => {
+            contentCmp.background = this.background;
+            contentCmp.size = this.size;
+        });
     }
 }

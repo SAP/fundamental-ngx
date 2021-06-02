@@ -29,7 +29,7 @@
 
             <fd-popover-body>
                 <fd-quick-view [id]="person.id">
-                    <fd-quick-view-title align="middle">Business card</fd-quick-view-title>
+                    <fd-quick-view-title align="left">Business card</fd-quick-view-title>
                     <fd-quick-view-subheader>
                         <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
                                    [circle]="true"
@@ -54,21 +54,21 @@
                         <fd-quick-view-group-item>
                             <fd-quick-view-group-item-label>Phone</fd-quick-view-group-item-label>
                             <fd-quick-view-group-item-content>
-                                <span [innerText]="person.phone"></span>
+                                <a [href]="'tel:' + person.phone" [innerText]="person.phone"></a>
                             </fd-quick-view-group-item-content>
                         </fd-quick-view-group-item>
 
                         <fd-quick-view-group-item>
                             <fd-quick-view-group-item-label>Mobile</fd-quick-view-group-item-label>
                             <fd-quick-view-group-item-content>
-                                <span [innerText]="person.mobile"></span>
+                                <a [href]="'tel:' + person.mobile" [innerText]="person.mobile"></a>
                             </fd-quick-view-group-item-content>
                         </fd-quick-view-group-item>
 
                         <fd-quick-view-group-item>
                             <fd-quick-view-group-item-label>Email</fd-quick-view-group-item-label>
                             <fd-quick-view-group-item-content>
-                                <span [innerText]="person.email"></span>
+                                <a [href]="'mailto:' + person.email" [innerText]="person.email"></a>
                             </fd-quick-view-group-item-content>
                         </fd-quick-view-group-item>
                     </fd-quick-view-group>
@@ -100,9 +100,7 @@
             <div class="fd-popover__wrapper">
                 <div fd-popover-body-header>
                     <div fd-bar barDesign="header">
-                        <div fd-bar-middle
-                             [style.justify-content]="isDetailStage ? 'space-between' : 'center'"
-                             dir="ltr">
+                        <div fd-bar-left>
                             <fd-button-bar *ngIf="isDetailStage"
                                            (click)="openOverflowMain()"
                                            glyph="navigation-left-arrow"
@@ -111,7 +109,7 @@
                                            title="Back"
                             ></fd-button-bar>
                             <fd-bar-element>
-                                Team Members ({{ avatarGroup_IndividualType.overflowItemsCount }})
+                                {{ isDetailStage ? 'Business Card' : 'Team Members (' + avatarGroup_IndividualType.overflowItemsCount + ')' }}
                             </fd-bar-element>
                             <fd-bar-element *ngIf="isDetailStage">&nbsp;</fd-bar-element>
                         </div>
@@ -185,21 +183,21 @@
                                 <fd-quick-view-group-item>
                                     <fd-quick-view-group-item-label>Phone</fd-quick-view-group-item-label>
                                     <fd-quick-view-group-item-content>
-                                        <span [innerText]="personDetails.phone"></span>
+                                        <a [href]="'tel:' + personDetails.phone" [innerText]="personDetails.phone"></a>
                                     </fd-quick-view-group-item-content>
                                 </fd-quick-view-group-item>
 
                                 <fd-quick-view-group-item>
                                     <fd-quick-view-group-item-label>Mobile</fd-quick-view-group-item-label>
                                     <fd-quick-view-group-item-content>
-                                        <span [innerText]="personDetails.mobile"></span>
+                                        <a [href]="'tel:' + personDetails.mobile" [innerText]="personDetails.mobile"></a>
                                     </fd-quick-view-group-item-content>
                                 </fd-quick-view-group-item>
 
                                 <fd-quick-view-group-item>
                                     <fd-quick-view-group-item-label>Email</fd-quick-view-group-item-label>
                                     <fd-quick-view-group-item-content>
-                                        <span [innerText]="personDetails.email"></span>
+                                        <a [href]="'mailto:' + personDetails.email" [innerText]="personDetails.email"></a>
                                     </fd-quick-view-group-item-content>
                                 </fd-quick-view-group-item>
                             </fd-quick-view-group>

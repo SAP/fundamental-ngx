@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { distinctUntilChanged, startWith } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 export type ContentDensity = 'cozy' | 'condensed' | 'compact';
 export const DEFAULT_CONTENT_DENSITY: ContentDensity = 'cozy';
@@ -10,19 +10,31 @@ export const DEFAULT_CONTENT_DENSITY: ContentDensity = 'cozy';
  */
 @Injectable()
 export class ContentDensityService {
+    /** 
+     * @hidden 
+     * Content Density behavior subject
+     */
     private _contentDensity: BehaviorSubject<ContentDensity> = new BehaviorSubject(DEFAULT_CONTENT_DENSITY);
+    /** 
+     * @hidden 
+     * Content Density changes stream
+     */
+    private _contentDensityChanges = this._contentDensity.asObservable().pipe(distinctUntilChanged());
 
-    /** @hidden */
+    // TODO: Why it is hidden and named following private name convention? 
+    // It is used widely in the lib
+    /**
+     * @hidden
+     * Content Density changes stream
+     */
     get _contentDensityListener(): Observable<ContentDensity> {
-        return this.contentDensity.pipe(
-            distinctUntilChanged(),
-            startWith(this.contentDensity.getValue())
-        );
+        return this._contentDensityChanges;
     }
 
-    /** Content Density BehaviourSubject */
+    // TODO: We should hide BehaviorSubject from the public api 
+    // and expose only observable and set method instead
+    /** Content Density BehaviorSubject */
     get contentDensity(): BehaviorSubject<ContentDensity> {
         return this._contentDensity;
     }
-
 }

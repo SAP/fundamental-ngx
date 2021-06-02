@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import {
     CardModule,
+    BarModule,
     ButtonModule,
     BusyIndicatorModule,
     ObjectStatusModule,
@@ -12,7 +13,8 @@ import {
     CalendarModule,
     FdDatetimeModule,
     QuickViewModule,
-    InfoLabelModule
+    InfoLabelModule,
+    SelectModule
 } from '@fundamental-ngx/core';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -51,6 +53,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         CardModule,
+        BarModule,
         ButtonModule,
         BusyIndicatorModule,
         ObjectStatusModule,
@@ -60,7 +63,8 @@ const routes: Routes = [
         CalendarModule,
         FdDatetimeModule,
         QuickViewModule,
-        InfoLabelModule
+        InfoLabelModule,
+        SelectModule
     ],
     exports: [RouterModule],
     declarations: [

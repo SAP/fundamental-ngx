@@ -2,7 +2,7 @@ import {
     click,
     elementArray,
     getAttributeByName,
-    getCSSPropertyByName,
+    getCSSPropertyByName, getElementPlaceholder,
     getText,
     getValue,
     refreshPage,
@@ -103,7 +103,7 @@ describe('Date picker suite', function() {
     it('Verify date input field have placeholder', () => {
         const inputs = elementArray(inputDatePicker);
         for (let i = 0; i < inputs.length; i++) {
-            expect(getAttributeByName(inputDatePicker, 'placeholder', i)).toBeDefined();
+            expect(getElementPlaceholder(inputDatePicker, i)).toBeDefined();
         }
     });
 

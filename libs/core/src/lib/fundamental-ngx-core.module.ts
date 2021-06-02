@@ -89,6 +89,7 @@ import { DynamicPageModule } from './dynamic-page/dynamic-page.module';
 import { StatusIndicatorModule } from './status-indicator/status-indicator.module';
 import { GridListModule } from './grid-list/grid-list.module';
 import { FacetModule } from './facets/facet.module';
+import { MessagePageModule } from './message-page/message-page.module';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -178,7 +179,8 @@ import { FacetModule } from './facets/facet.module';
         OnlyDigitsModule,
         IllustratedMessageModule,
         StatusIndicatorModule,
-        GridListModule
+        GridListModule,
+        MessagePageModule
     ],
     providers: [AlertService, DialogService, NotificationService, MessageToastService, ThemesService]
 })
