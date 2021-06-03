@@ -18,7 +18,7 @@ import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
 import { NestedListInterface } from './nested-list.interface';
 import { Subscription } from 'rxjs';
-import { ContentDensityService } from '../../utils/public_api';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 @Directive({
     selector: '[fdNestedList], [fd-nested-list]'

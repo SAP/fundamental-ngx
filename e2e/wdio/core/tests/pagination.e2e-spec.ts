@@ -29,7 +29,8 @@ describe('Pagination test suite:', function() {
         waitForPresent(standardButton);
     }, 1);
 
-    describe('Check Basic Pagination example', function() {
+    // discussed with Sean
+    xdescribe('Check Basic Pagination example', function() {
 
         it('should check selected pages by clicking each option', () => {
             scrollIntoView(standardButton);

@@ -71,7 +71,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
 
     constructor(protected _cd: ChangeDetectorRef) {
         const injector = PlatformConfig.getInjector();
-        // There is an issue in ViewEngine, it simply ignores InjectFlags.Optional 
+        // There is an issue in ViewEngine, it simply ignores InjectFlags.Optional
         // so to make it work in ViewEngine we need to to use notFoundValue as "null" and avoid "undefined"
         // cause "undefined" is equal to Injector.THROW_IF_NOT_FOUND
         this._contentDensityService = injector?.get(ContentDensityService, null, InjectFlags.Optional);

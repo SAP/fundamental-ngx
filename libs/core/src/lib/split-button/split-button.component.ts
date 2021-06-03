@@ -20,13 +20,13 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
-import { ButtonType } from '../button/base-button';
-import { MenuComponent } from '../menu/menu.component';
-import { MenuItemComponent } from '../menu/menu-item/menu-item.component';
+import { ButtonType } from '@fundamental-ngx/core/button';
+import { MenuComponent } from '@fundamental-ngx/core/menu';
+import { MenuItemComponent } from '@fundamental-ngx/core/menu';
 import { Subscription } from 'rxjs';
 import { MainAction } from './main-action';
 import { first } from 'rxjs/operators';
-import { ContentDensityService } from '../utils/public_api';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 export const splitButtonTextClass = 'fd-button-split__text';
 export const splitButtonTextCompactClass = 'fd-button-split__text--compact';

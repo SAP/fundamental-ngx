@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { FdDate } from '@fundamental-ngx/core';
+import { FdDate } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-date-picker-form-example',
@@ -9,7 +9,7 @@ import { FdDate } from '@fundamental-ngx/core';
             <div>
                 <div fd-form-item>
                     <label fd-form-label>Date Picker</label>
-                    <fd-date-picker 
+                    <fd-date-picker
                             [state]="isValid() ? 'success' : 'error'"
                             [message]="isValid() ? 'This is valid(success) DatePicker' : 'This is invalid(error) DatePicker'"
                             formControlName="date">
@@ -27,9 +27,9 @@ import { FdDate } from '@fundamental-ngx/core';
 
             <div fd-form-item>
                 <label fd-form-label>Disabled Date Picker</label>
-                <fd-date-picker 
-                        state="information" 
-                        message="This is disabled DatePicker" 
+                <fd-date-picker
+                        state="information"
+                        message="This is disabled DatePicker"
                         formControlName="disabledDate">
                 </fd-date-picker>
                 <br />

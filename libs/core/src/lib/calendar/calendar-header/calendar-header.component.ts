@@ -19,7 +19,7 @@ import { FdCalendarView } from '../calendar.component';
 import { CalendarCurrent } from '../models/calendar-current';
 import { CalendarYearGrid } from '../models/calendar-year-grid';
 import { CalendarService } from '../calendar.service';
-import { DatetimeAdapter } from '../../datetime/datetime-adapter';
+import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 /**
  * Internal use only.

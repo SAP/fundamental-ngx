@@ -2,13 +2,13 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PopoverModule } from '../popover/popover.module';
 import { IconModule } from '../icon/icon.module';
 import { MenuModule } from '../menu/menu.module';
-import { RtlService } from '../utils/services/rtl.service';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { RouterModule } from '@angular/router';
 import { Component, ViewChild } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { BreadcrumbComponent } from './breadcrumb.component';
-import { whenStable } from '../utils/tests/when-stable';
+import { whenStable } from '@fundamental-ngx/core/tests';
 import { BreadcrumbItemDirective, BreadcrumbLinkDirective } from './public_api';
 @Component({
     selector: 'fd-breadcrumb-test-component',
