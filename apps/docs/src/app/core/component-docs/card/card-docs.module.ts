@@ -60,7 +60,8 @@ const routes: Routes = [
         CalendarModule,
         FdDatetimeModule,
         QuickViewModule,
-        InfoLabelModule
+        InfoLabelModule,
+        SelectModule
     ],
     exports: [RouterModule],
     declarations: [
