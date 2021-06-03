@@ -53,7 +53,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this._initializeChildrenState();
         this._setItemsProperties();
     }
-    private _compact = false;
+    private _compact;
 
     /** Whether should be displayed in mobile mode **/
     @Input()
@@ -143,7 +143,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         if (this.mobile) {
             this._setUpMobileMode();
         }
-        if (this.compact === undefined && this._contentDensityService) {
+        if (this._compact === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
                 this._compact = density !== 'cozy';
                 this.actionSheetBody.compact = density !== 'cozy';
@@ -198,9 +198,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     private _initializeChildrenState(): void {
         if (this.actionSheetBody) {
             this.actionSheetBody.mobile = this.mobile;
-            if (this.compact === false || this.compact === true) {
-                this.actionSheetBody.compact = this._compact;
-            }
+            this.actionSheetBody.compact = this._compact;
         }
     }
 
@@ -251,7 +249,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     private _setItemsProperties(): void {
-        if (this.actionSheetItems && this.compact === false || this.compact === true) {
+        if (this.actionSheetItems) {
             this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.compact = this._compact);
         }
     }
