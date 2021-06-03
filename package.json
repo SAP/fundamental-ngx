@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.30.1-rc.47",
+  "version": "0.30.1-rc.52",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "Fundamental Library for Angular is a themable Fiori 3 Angular component library.",
@@ -87,8 +87,9 @@
     "docker-test": "docker run -u $(id -u) --rm -v \"$PWD\":/app trion/ng-cli-karma npm run test",
     "e2e-generate-report": "allure generate allure-results --clean -o allure-report",
     "prepare": "husky install",
-    "version": "run-s changelog git-add",
-    "version.changelog": "npm version prerelease --preid=rc -m \"chore(release): version %s build ${TRAVIS_BUILD_NUMBER} [ci skip]\"",
+    "version": "npm run changelog && npm run git-add",
+    "version.rc": "npm version prerelease --preid=rc -m \"chore(release): version %s build ${TRAVIS_BUILD_NUMBER} [ci skip]\"",
+    "version.patch": "npm version patch -m \"chore(release): version %s build ${TRAVIS_BUILD_NUMBER} [ci skip]\"",
     "git-add": "git add -A",
     "changelog": "conventional-changelog -i ./CHANGELOG.md -s -p angular"
   },
@@ -107,7 +108,7 @@
     "@angular/platform-browser-dynamic": "~11.2.13",
     "@angular/router": "~11.2.13",
     "@nrwl/angular": "~11.1.5",
-    "@sap-theming/theming-base-content": "~11.1.28",
+    "@sap-theming/theming-base-content": "~11.1.29",
     "@stackblitz/sdk": "1.5.2",
     "@types/google.visualization": "0.0.66",
     "@types/hammerjs": "2.0.39",
