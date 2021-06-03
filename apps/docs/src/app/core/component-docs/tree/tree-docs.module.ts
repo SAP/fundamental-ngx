@@ -6,7 +6,7 @@ import { API_FILES } from '../../api-files';
 import { TreeDocsComponent } from './tree-docs.component';
 import { TreeHeaderComponent } from './tree-header/tree-header.component';
 import { SimpleTreeExampleComponent } from './examples/simple-tree-example.component';
-import { TreeModule } from '@fundamental-ngx/core';
+import { TreeModule } from '@fundamental-ngx/core/tree';
 
 const routes: Routes = [
     {

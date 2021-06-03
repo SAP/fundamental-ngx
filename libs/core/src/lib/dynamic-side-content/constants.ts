@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
 
-export const CLASS_NAME = {
+export const DYNAMIC_SIDE_CONTENT_CLASS_NAME = {
     container: 'fd-dynamic-side',
     containerSizeSm: 'fd-dynamic-side--sm',
     containerSizeMd: 'fd-dynamic-side--md',

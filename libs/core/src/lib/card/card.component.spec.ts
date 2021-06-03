@@ -7,7 +7,7 @@ import { CardModule } from './card.module';
 import { CardComponent } from './card.component';
 import { CardType, CLASS_NAME } from './constants';
 import { getCardModifierClassNameByCardType } from './utils';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
 
 @Component({
     template: `

@@ -9,3 +9,4 @@ export const compactAttribute = 'compact';
 export const mondayStartDate = 'M';
 export const currentDayClass = 'current';
 export const otherMonth = 'fd-calendar__item ng-star-inserted fd-calendar__item--other-month';
+export const fullCurrentDayClass = 'fd-calendar__item ng-star-inserted is-active fd-calendar__item--current';

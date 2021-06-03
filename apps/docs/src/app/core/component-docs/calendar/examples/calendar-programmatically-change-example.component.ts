@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
+import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-calendar-programmatically-change-example',

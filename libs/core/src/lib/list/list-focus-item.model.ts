@@ -1,6 +1,5 @@
 import { ElementRef, EventEmitter } from '@angular/core';
-
-import { KeyboardSupportItemInterface } from '../utils/public_api';
+import { KeyboardSupportItemInterface } from '@fundamental-ngx/core/utils';
 
 export class ListFocusItem implements KeyboardSupportItemInterface {
     /** @hidden Implementation of KeyboardSupportItemInterface */

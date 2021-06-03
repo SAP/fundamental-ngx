@@ -18,9 +18,9 @@ import {
 import { WizardStepComponent } from './wizard-step/wizard-step.component';
 import { Subscription } from 'rxjs';
 import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progress-bar.directive';
-import { scrollTop } from '../utils/functions/scroll';
+import { scrollTop } from '@fundamental-ngx/core/utils';
 import { ACTIVE_STEP_STATUS, CURRENT_STEP_STATUS, UPCOMING_STEP_STATUS, COMPLETED_STEP_STATUS } from './constants';
-import { DialogBodyComponent } from '../dialog/dialog-body/dialog-body.component';
+import { DialogBodyComponent } from '@fundamental-ngx/core/dialog';
 
 export const STEP_MIN_WIDTH = 168;
 export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';

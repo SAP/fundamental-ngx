@@ -1,7 +1,7 @@
 import { AfterContentInit, ContentChildren, Directive, QueryList, TemplateRef } from '@angular/core';
-import { TemplateDirective } from '../../utils/directives/template/template.directive';
-import { ButtonBarComponent } from '../../bar/button-bar/button-bar.component';
-import { ButtonComponent } from '../../button/button.component';
+import { TemplateDirective } from '@fundamental-ngx/core/utils';
+import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { startWith } from 'rxjs/operators';
 
 @Directive()

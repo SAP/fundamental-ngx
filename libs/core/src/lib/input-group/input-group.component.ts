@@ -19,8 +19,8 @@ import { fromEvent, Subject, Subscription } from 'rxjs';
 import { filter, takeUntil, tap } from 'rxjs/operators';
 
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
-import { FormStates } from '../form/form-control/form-states';
-import { ContentDensityService } from '../utils/public_api';
+import { FormStates } from '@fundamental-ngx/core/shared';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 export type InputGroupPlacement = 'before' | 'after';
 

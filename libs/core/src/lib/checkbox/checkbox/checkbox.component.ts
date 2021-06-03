@@ -16,11 +16,9 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FdCheckboxValues } from './fd-checkbox-values.interface';
-import { compareObjects, KeyUtil } from '../../utils/functions';
 import { Platform } from '@angular/cdk/platform';
-import { LIST_ITEM_COMPONENT, ListItemInterface } from '../../list/list-item/list-item-utils';
+import { LIST_ITEM_COMPONENT, ListItemInterface, compareObjects, KeyUtil, ContentDensityService } from '@fundamental-ngx/core/utils';
 import { SPACE } from '@angular/cdk/keycodes';
-import { ContentDensityService } from '../../utils/public_api';
 import { Subscription } from 'rxjs';
 
 let checkboxUniqueId = 0;

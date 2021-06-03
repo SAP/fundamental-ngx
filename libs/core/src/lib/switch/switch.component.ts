@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ContentDensityService } from '../utils/public_api';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 let switchUniqueId = 0;
 
