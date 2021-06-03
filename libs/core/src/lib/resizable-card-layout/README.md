@@ -11,10 +11,6 @@ Run `ng generate component component-name --project resizable-card-layout` to ge
 
 Run `ng build resizable-card-layout` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Publishing
-
-After building your library with `ng build resizable-card-layout`, go to the dist folder `cd dist/resizable-card-layout` and run `npm publish`.
-
 ## Running unit tests
 
 Run `ng test resizable-card-layout` to execute the unit tests via [Karma](https://karma-runner.github.io).

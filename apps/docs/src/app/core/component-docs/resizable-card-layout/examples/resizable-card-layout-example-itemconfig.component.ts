@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ResizableCardLayoutConfig, ResizedEvent } from '@fundamental-ngx/core';
+import { ResizableCardLayoutConfig, ResizedEvent } from '@fundamental-ngx/core/resizable-card-layout';
 
 @Component({
     selector: 'fd-resizable-card-layout-example-itemconfig',
