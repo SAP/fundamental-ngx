@@ -1,5 +1,5 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { DialogRef, DialogService, DialogDefaultContent } from '@fundamental-ngx/core';
+import { DialogDefaultContent, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 
 @Component({
   selector: 'fd-dialog-object-example',

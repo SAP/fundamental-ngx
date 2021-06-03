@@ -1,7 +1,8 @@
 import { Directive, OnInit, ElementRef, Input, OnChanges } from '@angular/core';
 
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
-import { ObjectStatus, buildObjectStatusCssClasses } from '../object-status/object-status.component';
+import { ObjectStatus, buildObjectStatusCssClasses } from '@fundamental-ngx/core/object-status';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 import { CLASS_NAME } from './constants';
 

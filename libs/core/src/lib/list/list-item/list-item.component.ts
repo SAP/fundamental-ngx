@@ -18,16 +18,16 @@ import {
 } from '@angular/core';
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 
-import { CheckboxComponent } from '../../checkbox/checkbox/checkbox.component';
-import { RadioButtonComponent } from '../../radio/radio-button/radio-button.component';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
+import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 import { ListLinkDirective } from '../directives/list-link.directive';
 import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
-import { KeyUtil } from '../../utils/functions';
-import { LIST_ITEM_COMPONENT, ListItemInterface } from './list-item-utils';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { LIST_ITEM_COMPONENT, ListItemInterface } from '@fundamental-ngx/core/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ListFocusItem } from '../list-focus-item.model';
-import { ButtonComponent } from '../../button/button.component';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 /**
  * The component that represents a list item.

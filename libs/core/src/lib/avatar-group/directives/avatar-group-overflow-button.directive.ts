@@ -1,6 +1,9 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
+import { Size } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { getRandomColorAccent } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 
-import { applyCssClass, CssClassBuilder, getRandomColorAccent, Size } from '../../utils/public_api';
 import { AvatarGroupOverflowButtonColor } from '../avatar-group.component';
 
 @Directive({

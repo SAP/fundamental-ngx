@@ -27,8 +27,8 @@
 <ng-template #controlTemplate>
     <fd-input-group
         [button]="!readonly"
-		[buttonFocusable]="false"
-		[isControl]="true"
+        [buttonFocusable]="false"
+        [isControl]="true"
         [glyph]="'value-help'"
         [state]="status"
         [disabled]="disabled"
@@ -40,7 +40,7 @@
         <fd-tokenizer
             *ngIf="selected"
             [compact]="contentDensity === 'compact'"
-			[tokenizerFocusable]="false"
+            [tokenizerFocusable]="false"
             class="fd-multi-input-tokenizer-custom"
             [class]="contentDensity === 'compact' ? 'fd-multi-input-tokenizer-custom--compact' : ''"
             (moreClickedEvent)="moreClicked()"

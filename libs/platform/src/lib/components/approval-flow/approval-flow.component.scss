@@ -1,271 +1,244 @@
 $block: approval-flow;
+
 $column-line-top-offset: 48px;
 $column-line-top-offset--edit-mode: 64px;
+
 $carousel-controls-height: 94px;
 $carousel-controls-height--edit-mode: 126px;
 
-.#{$block}__title {
-    font-size: 1.125rem;
-    font-weight: 400;
-}
-
-.#{$block}__messages {
-    margin-bottom: 1rem;
-
-    fd-message-strip:not(:last-child) {
+.#{$block} {
+    &__messages {
         margin-bottom: 1rem;
-    }
-}
 
-.#{$block}__watchers {
-    margin-bottom: .5rem;
-    padding-left: 1rem;
-
-    fd-avatar {
-        margin-right: .5rem;
-        cursor: pointer;
-    }
-
-    fd-avatar:focus {
-        outline-offset: 0.0625rem;
-        outline-width: 0.0625rem;
-        outline-style: dotted;
-        outline-color: var(--sapContent_FocusColor, #0854A0);
-    }
-
-    &[dir='rtl'] {
-        padding-right: 1rem;
-
-        fd-avatar {
-            margin-left: .5rem;
-            margin-right: 0;
+        fd-message-strip:not(:last-child) {
+            margin-bottom: 1rem;
         }
     }
 
-    .#{$block}__watchers-input-container {
-        width: 278px;
+    &__watchers {
+        margin-bottom: .5rem;
+        padding-left: 1rem;
+
+        &-title {
+            font-size: .875em;
+            color: #6A6D70;
+            color: var(--sapContent_LabelColor, #6A6D70);
+            margin: 1rem 0 .5rem 0;
+        }
+
+        fd-avatar {
+            margin-right: .5rem;
+            cursor: pointer;
+
+            &:focus {
+                outline-offset: 0.0625rem;
+                outline-width: 0.0625rem;
+                outline-style: dotted;
+                outline-color: var(--sapContent_FocusColor, #0854A0);
+            }
+        }
+
+        &[dir='rtl'] {
+            padding-right: 1rem;
+
+            fd-avatar {
+                margin-left: .5rem;
+                margin-right: 0;
+            }
+        }
+
+        & &-input-container {
+            width: 278px;
+        }
     }
-}
 
-.#{$block}__watchers-title {
-    font-size: .875em;
-    color: #6A6D70;
-    color: var(--sapContent_LabelColor, #6A6D70);
-    margin: 1rem 0 .5rem 0;
-}
+    &__container {
+        position: relative;
+        padding: 0 1rem;
 
+        &--extra-padding-start {
+            padding-left: 2rem;
+        }
 
-.#{$block}__container {
-    position: relative;
-    padding: 0 2rem;
-}
+        &--extra-padding-end {
+            padding-right: 2rem;
+        }
 
-.#{$block}__graph-container {
-    position: relative;
-    overflow: hidden;
-    padding-left: 2rem;
-    padding-top: .5rem;
-    padding-bottom: 3.5rem;
-}
+        &[dir='rtl'] {
+            &.#{$block}__container--extra-padding-start {
+                padding-left: 1rem;
+                padding-right: 2rem;
+            }
 
-.#{$block}__carousel-controls {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    height: $carousel-controls-height;
-    padding-top: .5rem;
-    left: 0;
+            &.#{$block}__container--extra-padding-end {
+                padding-right: 1rem;
+                padding-left: 2rem;
+            }
+        }
+    }
 
-    button {
+    &__graph-container {
+        position: relative;
+        overflow: hidden;
+        padding-left: 2rem;
+        padding-top: .5rem;
+        padding-bottom: 3.5rem;
+
+        &--multiple-root-nodes {
+            padding-left: 4rem;
+        }
+
+        &[dir='rtl'] {
+            &.#{$block}__graph-container--multiple-root-nodes {
+                padding-left: 1rem;
+                padding-right: 2rem;
+            }
+        }
+    }
+
+    &__carousel-controls {
         position: absolute;
-        border: none;
-        background: transparent;
-        color: #6A6D70;
-        color: var(--sapContent_LabelColor, #6A6D70);
         display: flex;
-        justify-content: space-between;
-        width: 20px;
         align-items: center;
-        cursor: pointer;
+        width: 100%;
+        height: $carousel-controls-height;
+        padding-top: .5rem;
+        left: 0;
 
-        &:focus {
+        button {
+            position: absolute;
+            border: none;
+            background: transparent;
+            color: #6A6D70;
+            color: var(--sapContent_LabelColor, #6A6D70);
+            display: flex;
+            justify-content: space-between;
+            width: 20px;
+            align-items: center;
+            cursor: pointer;
+
+            &:focus {
+                outline-offset: 0.0625rem;
+                outline-width: 0.0625rem;
+                outline-style: dotted;
+                outline-color: var(--sapContent_FocusColor, #0854A0);
+            }
+
+            fd-icon {
+                font-size: .875rem;
+                color: #0854A0;
+                color: var(--sapButton_IconColor, #0854A0);
+                position: relative;
+                top: 1px;
+            }
+        }
+
+        &--edit-mode {
+            height: $carousel-controls-height--edit-mode;
+        }
+
+        &[dir='rtl'] {
+            .#{$block}__control--next-slide {
+                right: auto;
+                left: 0;
+            }
+
+            .#{$block}__control--prev-slide {
+                left: auto;
+                right: 0;
+            }
+        }
+    }
+
+    &__control {
+        &--next-slide {
+            right: 0;
+        }
+
+        &--prev-slide {
+            left: 0;
+        }
+    }
+
+    &__graph {
+        display: flex;
+        align-items: flex-start;
+        position: relative;
+        left: 0;
+        transition: left .3s;
+
+        .#{$block}__column {
+            margin-right: 4rem;
+            position: relative;
+        }
+
+        &[dir='rtl'] {
+            .#{$block}__column {
+                margin-right: 4rem;
+
+                &:first-child {
+                    margin-right: 2rem;
+                }
+            }
+        }
+
+        fdp-approval-flow-node + fdp-approval-flow-node:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+
+        fdp-approval-flow-node:focus {
             outline-offset: 0.0625rem;
             outline-width: 0.0625rem;
             outline-style: dotted;
             outline-color: var(--sapContent_FocusColor, #0854A0);
         }
-
-        fd-icon {
-            font-size: .875rem;
-            color: #0854A0;
-            color: var(--sapButton_IconColor, #0854A0);
-            position: relative;
-            top: 1px;
-        }
     }
 
-    &.#{$block}__carousel-controls--edit-mode {
-        height: $carousel-controls-height--edit-mode;
-    }
-
-    &[dir='rtl'] {
-        .#{$block}__control--next-slide {
-            right: auto;
-            left: 0;
-        }
-
-        .#{$block}__control--prev-slide {
-            left: auto;
-            right: 0;
-        }
-    }
-}
-
-.#{$block}__control {
-    &--next-slide {
-        right: 0;
-    }
-
-    &--prev-slide {
-        left: 0;
-    }
-}
-
-.#{$block}__graph {
-    display: flex;
-    align-items: flex-start;
-    position: relative;
-    left: 0;
-    transition: left .3s;
-
-    .#{$block}__column {
-        margin-right: 4rem;
-        position: relative;
-
-        &.#{$block}__column--vertical-line-before:before, &.#{$block}__column--vertical-line-after:after {
-            content: '';
-            position: absolute;
-            top: $column-line-top-offset;
-            height: calc(100% - 111px);
-        }
-
-        &.#{$block}__column--vertical-line-before {
-            &:before {
-                border-right: 2px dashed #89919A;
-                border-right: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
-                left: -2.2rem;
-            }
-
-            &-solid:before {
-                border-right: 1px solid #89919A;
-                border-right: 1px solid var(--sapField_ReadOnly_BorderColor, #89919A);
-            }
-        }
-
-        &.#{$block}__column--vertical-line-after {
-            &:after {
-                border-right: 2px dashed #89919A;
-                border-right: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
-                right: -2rem;
-            }
-
-            &-solid:after {
-                border-right: 1px solid #89919A;
-                border-right: 1px solid var(--sapField_ReadOnly_BorderColor, #89919A);
-            }
-        }
-    }
-
-    &.#{$block}__graph--edit-mode {
-        .#{$block}__column--vertical-line-before:before, .#{$block}__column--vertical-line-after:after {
-            top: $column-line-top-offset--edit-mode !important;
-            height: calc(100% - 142px) !important;
-        }
-    }
-
-    &[dir='rtl'] {
-        .#{$block}__column {
-            margin-right: 4rem;
-
-            &:first-child {
-                margin-right: 2rem;
-            }
-
-            &:not(:first-child) {
-            }
-
-            &.#{$block}__column--vertical-line-before {
-                &:before {
-                    left: auto;
-                    right: -2rem;
-                }
-            }
-
-            &.#{$block}__column--vertical-line-after {
-                &:after {
-                    right: auto;
-                    left: -2.2rem;
-                }
-            }
-        }
-    }
-
-    fdp-approval-flow-node + fdp-approval-flow-node:not(:last-child) {
-        margin-bottom: 1rem;
-    }
-
-    fdp-approval-flow-node:focus {
-        outline-offset: 0.0625rem;
-        outline-width: 0.0625rem;
-        outline-style: dotted;
-        outline-color: var(--sapContent_FocusColor, #0854A0);
-    }
-}
-
-.#{$block}__edit-mode-footer {
-    display: flex;
-    justify-content: flex-end;
-    background-color: #fff;
-    background: var(--sapBaseColor, #fff);
-    padding: .5rem;
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
-
-    .fd-button--emphasized {
-        margin-right: .5rem;
-    }
-
-    &[dir='rtl'] {
-        .fd-button--emphasized {
-            margin-left: .5rem;
-            margin-right: auto;
-        }
-    }
-}
-
-fd-toolbar {
-    display: block;
-    margin-bottom: .5rem;
-
-    .fd-toolbar {
+    &__edit-mode-footer {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
+        background-color: #fff;
+        background: var(--sapBaseColor, #fff);
+        padding: .5rem;
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3);
+        border-radius: 4px;
 
-        .#{$block}__toolbar-controls {
-            button:not(:last-child) {
+        .fd-button--emphasized {
+            margin-right: .5rem;
+        }
+
+        &[dir='rtl'] {
+            .fd-button--emphasized {
+                margin-left: .5rem;
+                margin-right: auto;
+            }
+        }
+    }
+
+    &__toolbar {
+        display: block;
+        margin-bottom: .5rem;
+
+        &-title {
+            font-size: 1.125rem;
+            font-weight: 400;
+        }
+
+        .fd-toolbar {
+            display: flex;
+            justify-content: space-between;
+
+            .#{$block}__toolbar-controls button:not(:last-child) {
                 margin-right: .5rem;
             }
         }
-    }
 
-     &[dir='rtl'] {
-         .#{$block}__title {
-            padding-right: .5rem;
-         }
+        &[dir='rtl'] {
+            .#{$block}__toolbar-title {
+                padding-right: .5rem;
+            }
 
-         .#{$block}__toolbar-controls {
-            button:not(:last-child) {
+            .#{$block}__toolbar-controls button:not(:last-child) {
                 margin-left: .5rem;
                 margin-right: auto;
             }

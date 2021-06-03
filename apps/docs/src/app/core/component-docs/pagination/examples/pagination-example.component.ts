@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PaginationComponent } from '@fundamental-ngx/core';
 import { tap, delay } from 'rxjs/operators';
+import { PaginationComponent } from '@fundamental-ngx/core/pagination';
 
 @Component({
     selector: 'fd-pagination-example',

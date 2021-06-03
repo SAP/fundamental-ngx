@@ -21,9 +21,9 @@ import {
 } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { NotificationRef } from '../notification-utils/notification-ref';
-import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
+import { AbstractFdNgxClass } from '@fundamental-ngx/core/utils';
 import { NotificationConfig } from '../notification-utils/notification-config';
-import { KeyUtil } from '../../utils/functions/key-util';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -107,8 +107,8 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         if (this.childContent) {
             if (this.childContent instanceof Type) {
                 this._loadFromComponent(this.childContent);
-            } 
-            
+            }
+
             if (this.childContent instanceof TemplateRef) {
                 this._loadFromTemplate(this.childContent);
             }

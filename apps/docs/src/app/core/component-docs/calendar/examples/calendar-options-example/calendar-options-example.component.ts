@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SpecialDayRule } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-calendar-options-example',

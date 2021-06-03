@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TreeRowObject } from '@fundamental-ngx/core';
+import { TreeRowObject } from '@fundamental-ngx/core/tree';
 
 @Component({
     selector: 'fd-simple-tree-example',

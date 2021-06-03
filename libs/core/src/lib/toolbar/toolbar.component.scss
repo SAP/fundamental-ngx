@@ -17,6 +17,10 @@
 	.fd-form-label {
 		align-self: auto;
 	}
+
+	&__overflow-spacer {
+		display: none;
+	}
 }
 
 .fd-toolbar > * {

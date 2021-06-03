@@ -170,6 +170,12 @@ export class ComboBoxDataSource<T> implements DataSource<T> {
     close(): void { }
 }
 
+export class MultiComboBoxDataSource<T> extends ComboBoxDataSource<T> {
+    constructor(public dataProvider: DataProvider<any>) {
+        super(dataProvider);
+    }
+}
+
 export class SearchFieldDataSource<T> extends ComboBoxDataSource<T> {
     constructor(public dataProvider: DataProvider<any>) {
         super(dataProvider);

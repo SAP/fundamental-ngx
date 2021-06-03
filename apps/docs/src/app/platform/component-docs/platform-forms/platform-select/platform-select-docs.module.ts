@@ -2,12 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import {
-    DialogModule,
-    ListModule,
-    SelectMobileModule,
-    SelectModule
-} from '@fundamental-ngx/core';
 import {PlatformSelectModule, FdpFormGroupModule, PlatformButtonModule } from '@fundamental-ngx/platform';
 
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
@@ -24,6 +18,9 @@ import { PlatformSelectMobileExampleComponent } from './platform-select-examples
 import { PlatformSelectColumnsExampleComponent } from './platform-select-examples/platform-select-columns/platform-select-columns-example.component';
 import { PlatformSelectNoneExampleComponent } from './platform-select-examples/platform-select-none/platform-select-none-example.component';
 import { PlatformSelectNoWrapExampleComponent } from './platform-select-examples/platform-select-nowrap/platform-select-nowrap-example.component';
+import { SelectMobileModule, SelectModule } from '@fundamental-ngx/core/select';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { ListModule } from '@fundamental-ngx/core/list';
 
 const routes: Routes = [
     {
