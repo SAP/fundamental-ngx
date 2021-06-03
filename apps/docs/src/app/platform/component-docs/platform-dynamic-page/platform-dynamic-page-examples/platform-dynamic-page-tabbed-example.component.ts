@@ -1,9 +1,10 @@
-import { Component, ChangeDetectionStrategy, ViewChild, ElementRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import {
     DynamicPageCollapseChangeEvent,
     DynamicPageComponent,
     DynamicPageTabChangeEvent
 } from '@fundamental-ngx/platform';
+import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
 
 @Component({
     selector: 'fdp-platform-dynamic-page-tabbed-example',
@@ -11,7 +12,7 @@ import {
     styleUrls: ['./platform-dynamic-page-tabbed-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformDynamicPageTabbedExampleComponent {
+export class PlatformDynamicPageTabbedExampleComponent implements OnDestroy {
     @ViewChild('overlay')
     overlay: ElementRef<HTMLElement>;
 
@@ -22,6 +23,8 @@ export class PlatformDynamicPageTabbedExampleComponent {
 
     pageTitle = 'Balenciaga Tripple S Trainers';
 
+    constructor(private _overflowHandlingService: PlatformDynamicPagePageOverflowService) {}
+
     onCollapseChange(event: DynamicPageCollapseChangeEvent): void {
         console.log('collapse changed');
     }
@@ -29,13 +32,17 @@ export class PlatformDynamicPageTabbedExampleComponent {
     openPage(): void {
         this.overlay.nativeElement.style.width = '100%';
         this.fullscreen = true;
-        document.getElementById('page-content').style.overflowY = 'hidden'; // hide the underlying page scrollbars
+        this._overflowHandlingService.isExampleOpened.next(true);
     }
     closePage(event: Event): void {
         event.stopPropagation();
+        this.resetPageActions();
+    }
+
+    resetPageActions(): void {
         this.fullscreen = false;
         this.overlay.nativeElement.style.width = '0%';
-        document.getElementById('page-content').style.overflowY = 'auto';
+        this._overflowHandlingService.isExampleOpened.next(false);
     }
 
     onTabChanged(event: DynamicPageTabChangeEvent): void {
@@ -44,5 +51,9 @@ export class PlatformDynamicPageTabbedExampleComponent {
 
     switchTab(id: string): void {
         this.dynamicPageComponent.setSelectedTab(id);
+    }
+
+    ngOnDestroy(): void {
+        this.resetPageActions();
     }
 }

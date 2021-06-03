@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Placement } from '../../popover/popover-position/popover-position';
-import { BasePopoverClass } from '../../popover/base/base-popover.class';
+import { Placement } from '@fundamental-ngx/core/shared';
+import { BasePopoverClass } from '@fundamental-ngx/core/popover';
 
 @Component({
     selector: 'fd-product-switch',

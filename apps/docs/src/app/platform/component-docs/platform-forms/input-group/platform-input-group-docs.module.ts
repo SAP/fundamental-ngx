@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { IconModule } from '@fundamental-ngx/core';
+import { IconModule } from '@fundamental-ngx/core/icon';
 import { PlatformInputGroupModule, FdpFormGroupModule, PlatformButtonModule } from '@fundamental-ngx/platform';
 
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';

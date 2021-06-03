@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
 import moment from 'moment';
 
 // Import moment locale data required for this example
@@ -11,11 +10,12 @@ import 'moment/locale/bg';
 import 'moment/locale/ja';
 import 'moment/locale/tr';
 import 'moment/locale/zh-cn';
+import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-calendar-i18n-moment-example',
     template: ` <label fd-form-label for="language">Select language:</label>
-        <fd-segmented-button id="language" style="margin-bottom:20px" 
+        <fd-segmented-button id="language" style="margin-bottom:20px"
                              [ngModel]="locale" (ngModelChange)="setLocale($event)">
             <button fd-button label="English" value="en-gb"></button>
             <button fd-button label="Persian" value="fa"></button>

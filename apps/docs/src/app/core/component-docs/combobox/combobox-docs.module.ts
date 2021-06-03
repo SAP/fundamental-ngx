@@ -4,9 +4,11 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { ComboboxHeaderComponent } from './combobox-header/combobox-header.component';
 import { ComboboxDocsComponent } from './combobox-docs.component';
-import { ComboboxMobileModule, ComboboxModule, FormModule, ListModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { examples } from './examples';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { ComboboxMobileModule, ComboboxModule } from '@fundamental-ngx/core/combobox';
 
 const routes: Routes = [
     {

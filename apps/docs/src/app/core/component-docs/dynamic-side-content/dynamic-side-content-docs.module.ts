@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { DynamicSideContentModule } from '@fundamental-ngx/core';
-
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
@@ -12,6 +10,7 @@ import { DynamicSideContentDocsComponent } from './dynamic-side-content-docs.com
 import { DynamicSideContentBasicExampleComponent } from './examples/dynamic-side-content-basic-example.component';
 import { DynamicSideContentPositioningExampleComponent } from './examples/dynamic-side-content-positioning-example.component';
 import { DynamicSideContentSizeExampleComponent } from './examples/dynamic-side-content-size-example.component';
+import { DynamicSideContentModule } from '@fundamental-ngx/core/dynamic-side-content';
 
 const routes: Routes = [
     {

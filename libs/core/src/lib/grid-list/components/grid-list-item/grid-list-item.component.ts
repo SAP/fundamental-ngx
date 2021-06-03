@@ -18,7 +18,7 @@ import {
 import { Subscription } from 'rxjs';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { KeyUtil } from '../../../utils/functions';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { parseLayoutPattern } from '../../helpers';
 import { GridListSelectionActions, GridListSelectionService } from '../../services/grid-list-selection.service';
 import { GridListItemToolbarComponent } from '../grid-list-item-toolbar/grid-list-item-toolbar.component';

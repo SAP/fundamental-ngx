@@ -23,7 +23,7 @@ import {
     landscapeAttribute,
     mondayStartDate,
     portraitAttribute,
-    otherMonth
+    otherMonth, fullCurrentDayClass
 } from '../fixtures/appData/calendar-contents';
 
 describe('calendar test suite', function() {
@@ -360,7 +360,8 @@ describe('calendar test suite', function() {
     function checkSingleSelection(calendar: string, selector: string, index: number = 0): void {
         scrollIntoView(calendar + selector, index);
         while (getAttributeByName(calendar + selector, disabledAttribute, index) === 'true' ||
-        getAttributeByName(calendar + selector, classAttribute, index) === otherMonth) {
+        getAttributeByName(calendar + selector, classAttribute, index) === otherMonth ||
+        getAttributeByName(calendar + selector, classAttribute, index) === fullCurrentDayClass ) {
             index++;
         }
         click(calendar + selector, index);

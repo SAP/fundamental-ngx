@@ -160,7 +160,7 @@ import { SharedDocumentationModule } from '../../../documentation/shared-documen
 import { PosterDocsComponent } from './poster-docs.component';
 import { PosterExampleComponent } from './examples/poster-example.component';
 import { PosterHeaderComponent } from './poster-header/poster-header.component';
-import { PosterModule } from '@fundamental-ngx/core';
+import { PosterModule } from '@fundamental-ngx/core/poster';
 
 const routes: Routes = [
     {

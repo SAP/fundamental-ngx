@@ -1,4 +1,4 @@
-import { DialogConfig } from '@fundamental-ngx/core';
+import { DialogConfig } from '@fundamental-ngx/core/dialog';
 
 export const MOBILE_DIALOG_PORTRAIT: DialogConfig = {
     width: '360px',
