@@ -53,7 +53,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this._initializeChildrenState();
         this._setItemsProperties();
     }
-    private _compact;
+    private _compact: boolean = undefined;
 
     /** Whether should be displayed in mobile mode **/
     @Input()
