@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
-import { KeyUtil } from '../utils/functions';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { UP_ARROW, DOWN_ARROW, ENTER, SPACE, HOME, END, hasModifierKey } from '@angular/cdk/keycodes';
 
 import { SelectInterface } from './select.interface';

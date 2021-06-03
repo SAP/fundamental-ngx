@@ -1,0 +1,32 @@
+@import '~@angular/cdk/overlay-prebuilt';
+@import '~fundamental-styles/dist/margins';
+
+.fdp-multi-combobox-tokenizer-custom {
+    width: calc(100% - 2.25rem);
+    &--compact {
+        width: calc(100% - 2rem);
+    }
+}
+
+.fdp-multi-combobox__list-container {
+    .fd-list {
+        .fd-list__item {
+            &.fd-list__group-header {
+                padding: 0 1rem;
+            }
+
+            .fd-list__title {
+                // TODO: to investigate (in "two columns" template the second column align not properly)
+                max-width: inherit;
+            }
+        }
+
+        &.fd-list--compact {
+            .fd-list__item {
+                &.fd-list__group-header {
+                    padding: 0 0.5rem;
+                }
+            }
+        }
+    }
+}

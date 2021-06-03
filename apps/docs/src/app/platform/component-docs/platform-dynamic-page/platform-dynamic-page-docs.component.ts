@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
+import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-examples/platform-dynamic-page-page-overflow.service';
 
 import * as dynamicPageBasicExample from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-example.component.html';
 import * as dynamicPageBasicExampleScss from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-example.component.scss';
@@ -26,11 +28,17 @@ import * as dynamicPageFlexibleColumnExample from '!raw-loader!./platform-dynami
 import * as dynamicPageFlexibleColumnExampleScss from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-flexible-column-example.component.scss';
 import * as dynamicPageFlexibleColumnExampleTsCode from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-flexible-column-example.component.ts';
 
+import * as platformDynamicPagePageOverflowServiceTs from '!raw-loader!./platform-dynamic-page-examples/platform-dynamic-page-page-overflow.service.ts';
+
 @Component({
     selector: 'app-dynamic-page',
     templateUrl: './platform-dynamic-page-docs.component.html'
 })
-export class PlatformDynamicPageDocsComponent {
+export class PlatformDynamicPageDocsComponent implements OnInit, OnDestroy {
+    private _subscription: Subscription;
+    // service to change the overflow value for page-content class
+    constructor(private _overflowHandlingService: PlatformDynamicPagePageOverflowService) {}
+
     dynamicPageBasic: ExampleFile[] = [
         {
             language: 'html',
@@ -43,6 +51,14 @@ export class PlatformDynamicPageDocsComponent {
             code: dynamicPageBasicExampleTsCode,
             fileName: 'platform-dynamic-page-example',
             component: 'PlatformDynamicPageExampleComponent'
+        },
+        {
+            language: 'typescript',
+            name: 'platform-dynamic-page-page-overflow.service.ts',
+            code: platformDynamicPagePageOverflowServiceTs,
+            fileName: 'platform-dynamic-page-page-overflow',
+            component: 'PlatformDynamicPagePageOverflowService',
+            service: true
         }
     ];
     dynamicPageSnapScroll: ExampleFile[] = [
@@ -57,6 +73,14 @@ export class PlatformDynamicPageDocsComponent {
             code: dynamicPageSnapScrollExampleTsCode,
             fileName: 'platform-dynamic-page-snap-scroll-example',
             component: 'PlatformDynamicPageSnapScrollExampleComponent'
+        },
+        {
+            language: 'typescript',
+            name: 'platform-dynamic-page-page-overflow.service.ts',
+            code: platformDynamicPagePageOverflowServiceTs,
+            fileName: 'platform-dynamic-page-page-overflow',
+            component: 'PlatformDynamicPagePageOverflowService',
+            service: true
         }
     ];
 
@@ -72,6 +96,14 @@ export class PlatformDynamicPageDocsComponent {
             code: dynamicPageTabbedExampleTsCode,
             fileName: 'platform-dynamic-page-tabbed-example',
             component: 'PlatformDynamicPageTabbedExampleComponent'
+        },
+        {
+            language: 'typescript',
+            name: 'platform-dynamic-page-page-overflow.service.ts',
+            code: platformDynamicPagePageOverflowServiceTs,
+            fileName: 'platform-dynamic-page-page-overflow',
+            component: 'PlatformDynamicPagePageOverflowService',
+            service: true
         }
     ];
 
@@ -87,6 +119,14 @@ export class PlatformDynamicPageDocsComponent {
             code: dynamicPageResponsivePaddingExampleTsCode,
             fileName: 'platform-dynamic-page-responsive-padding-example',
             component: 'PlatformDynamicPageResponsivePaddingExampleComponent'
+        },
+        {
+            language: 'typescript',
+            name: 'platform-dynamic-page-page-overflow.service.ts',
+            code: platformDynamicPagePageOverflowServiceTs,
+            fileName: 'platform-dynamic-page-page-overflow',
+            component: 'PlatformDynamicPagePageOverflowService',
+            service: true
         }
     ];
 
@@ -102,6 +142,14 @@ export class PlatformDynamicPageDocsComponent {
             code: dynamicPageNonCollapsibleExampleTsCode,
             fileName: 'platform-dynamic-page-non-collapsible-example',
             component: 'PlatformDynamicPageNonCollapsibleExampleComponent'
+        },
+        {
+            language: 'typescript',
+            name: 'platform-dynamic-page-page-overflow.service.ts',
+            code: platformDynamicPagePageOverflowServiceTs,
+            fileName: 'platform-dynamic-page-page-overflow',
+            component: 'PlatformDynamicPagePageOverflowService',
+            service: true
         }
     ];
 
@@ -117,6 +165,28 @@ export class PlatformDynamicPageDocsComponent {
             code: dynamicPageFlexibleColumnExampleTsCode,
             fileName: 'platform-dynamic-page-flexible-column-example',
             component: 'PlatformDynamicPageFlexibleColumnExampleComponent'
+        },
+        {
+            language: 'typescript',
+            name: 'platform-dynamic-page-page-overflow.service.ts',
+            code: platformDynamicPagePageOverflowServiceTs,
+            fileName: 'platform-dynamic-page-page-overflow',
+            component: 'PlatformDynamicPagePageOverflowService',
+            service: true
         }
     ];
+
+    ngOnInit(): void {
+        this._subscription = this._overflowHandlingService.isExampleOpened.subscribe((isExampleOpened) => {
+            if (isExampleOpened) {
+                document.getElementById('page-content').style.overflowY = 'hidden'; // hide the underlying page scrollbars
+            } else {
+                document.getElementById('page-content').style.overflowY = '';
+            }
+        });
+    }
+
+    ngOnDestroy(): void {
+      this._subscription.unsubscribe();
+    }
 }

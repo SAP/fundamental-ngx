@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuItemComponent } from '@fundamental-ngx/core';
+import { MenuItemComponent } from '@fundamental-ngx/core/menu';
 
 @Component({
     selector: 'fd-split-button-programmatical-example',

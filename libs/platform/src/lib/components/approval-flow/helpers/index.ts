@@ -1,7 +1,15 @@
-import { ApprovalNode, ApprovalUser } from '../interfaces';
+import { ApprovalNode, ApprovalTeam, ApprovalUser } from '../interfaces';
 
 export function isNodeApproved(node: ApprovalNode): boolean {
     return node.status === 'approved';
+}
+
+export function isNodeStarted(node: ApprovalNode): boolean {
+    return node.status !== 'not started';
+}
+
+export function displayTeamFn(team: ApprovalTeam): string {
+    return team.name;
 }
 
 export function displayUserFn(user: ApprovalUser): string {

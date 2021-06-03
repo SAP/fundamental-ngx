@@ -11,9 +11,9 @@ import {
     MenuSeparatorExampleComponent,
 } from './examples/menu-examples.component';
 
-import { MenuMobileModule, MenuModule } from '@fundamental-ngx/core';
 import { MenuWithSubmenuExampleComponent } from './examples/menu-with-submenu-example.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { MenuMobileModule, MenuModule } from '@fundamental-ngx/core/menu';
 
 const routes: Routes = [
     {

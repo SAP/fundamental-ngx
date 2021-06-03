@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ChangeDetectionStrategy, Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 
-import { Size } from '../utils/public_api';
+import { Size } from '@fundamental-ngx/core/utils';
 import { AvatarGroupModule } from './avatar-group.module';
 import { AvatarGroupComponent, AvatarGroupType } from './avatar-group.component';
 

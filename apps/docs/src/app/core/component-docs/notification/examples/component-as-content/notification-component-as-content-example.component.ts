@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NotificationService } from '@fundamental-ngx/core';
+import { NotificationService } from '@fundamental-ngx/core/notification';
 import { NotificationExampleContentComponent } from './notification-content.component';
 
 @Component({
