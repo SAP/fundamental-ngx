@@ -83,7 +83,7 @@ export class TableDocsComponent {
         },
         {
             language: 'typescript',
-            component: 'TableExampleComponent',
+            component: 'TableWithoutBordersExampleComponent',
             code: tableWithoutBordersTsSrc,
             fileName: 'table-without-borders-example'
         }
@@ -93,7 +93,7 @@ export class TableDocsComponent {
         {
             language: 'html',
             code: tableFooterHtml,
-            fileName: 'table-example'
+            fileName: 'table-footer-example'
         },
         {
             language: 'typescript',
@@ -161,7 +161,7 @@ export class TableDocsComponent {
         },
         {
             language: 'typescript',
-            component: 'SortPipe',
+            component: 'SortByPipe',
             code: tableColumnSortPipeTs,
             pipe: true,
             fileName: 'table-example-sorting',
