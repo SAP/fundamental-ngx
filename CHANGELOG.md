@@ -1,3 +1,12 @@
+## [0.30.1-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.54...v0.30.1-rc.55) (2021-06-04)
+
+
+### Features
+
+* **core:** introduce resizable-card-layout component ([#4964](https://github.com/SAP/fundamental-ngx/issues/4964)) ([691066e](https://github.com/SAP/fundamental-ngx/commit/691066edfb68ab7e175049ff9666f6bb64d47f4a))
+
+
+
 ## [0.30.1-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.53...v0.30.1-rc.54) (2021-06-04)
 
 
