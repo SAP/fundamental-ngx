@@ -361,4 +361,8 @@ export const API_FILES = {
         'MessagePageTitleComponent',
         'MessagePageSubtitleComponent'
     ],
+    resizableCardLayout: [
+        'ResizableCardLayoutComponent',
+        'ResizableCardItemComponent'
+    ],
 };
