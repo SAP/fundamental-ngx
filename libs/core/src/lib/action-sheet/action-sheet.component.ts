@@ -53,8 +53,11 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         this._initializeChildrenState();
         this._setItemsProperties();
     }
-    private _compact: boolean = undefined;
 
+    get compact(): boolean {
+      return this._compact;
+    }
+    
     /** Whether should be displayed in mobile mode **/
     @Input()
     mobile = false;
@@ -120,6 +123,9 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     private _subscriptions = new Subscription();
+
+    /** @hidden */
+    private _compact: boolean;
 
     constructor(
         private _elementRef: ElementRef,
