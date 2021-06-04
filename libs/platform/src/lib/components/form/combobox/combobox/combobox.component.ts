@@ -84,6 +84,7 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
 
     /** @hidden */
     ngOnInit(): void {
+        super.ngOnInit();
         const providers = this.providers?.size === 0 ? this._comboboxConfig.providers : this.providers;
         // if we have both prefer dataSource
         if (!this.dataSource && this.entityClass && providers.has(this.entityClass)) {
