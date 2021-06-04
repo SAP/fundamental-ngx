@@ -1,7 +1,7 @@
 <h3>Use With Reactive Form</h3>
 <p>Compact radio group with 'default' state and with default selection</p>
 <fdp-form-group [formGroup]="form1">
-    <fdp-form-field #ffl1 id="radioc1" rank="1">
+    <fdp-form-field #ffl1 id="radioc1" rank="1" [required]="true">
         <fdp-radio-group name="radioc1" contentDensity="compact" selected="spring" [isInline]="false"
             [formControl]="ffl1.formControl">
             <fdp-radio-button value="winter">Winter</fdp-radio-button>
