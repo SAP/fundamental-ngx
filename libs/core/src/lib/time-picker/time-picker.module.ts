@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { PopoverModule } from '../popover/popover.module';
-import { InputGroupModule } from '../input-group/input-group.module';
-import { TimeModule } from '../time/time.module';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { TimeModule } from '@fundamental-ngx/core/time';
 
 import { TimePickerComponent } from './time-picker.component';
-import { FormMessageModule } from '../form/form-message/form-message.module';
+import { FormMessageModule } from '@fundamental-ngx/core/form';
 
 @NgModule({
     declarations: [TimePickerComponent],

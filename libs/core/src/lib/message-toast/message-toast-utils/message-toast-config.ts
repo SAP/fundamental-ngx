@@ -1,5 +1,5 @@
 /* tslint:disable:no-inferrable-types */
-import { DynamicComponentConfig } from '../../utils/dynamic-component/dynamic-component-config';
+import { DynamicComponentConfig } from '@fundamental-ngx/core/utils';
 
 /**
  * Configuration for opening a message toast with the MessageToastService.

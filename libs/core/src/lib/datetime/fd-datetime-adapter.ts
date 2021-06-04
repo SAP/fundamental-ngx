@@ -1,7 +1,7 @@
 import { Platform } from '@angular/cdk/platform';
 import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 
-import { LETTERS_UNICODE_RANGE } from '../utils/consts/unicode-letters.regex';
+import { LETTERS_UNICODE_RANGE } from '@fundamental-ngx/core/utils';
 
 import { DatetimeAdapter } from './datetime-adapter';
 import { FdDate } from './fd-date';

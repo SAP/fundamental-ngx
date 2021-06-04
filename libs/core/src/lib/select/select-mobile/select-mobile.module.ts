@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ButtonModule } from '../../button/button.module';
-import { DialogModule } from '../../dialog/dialog.module';
-import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { SelectMobileComponent } from './select-mobile.component';
 
 @NgModule({

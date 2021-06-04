@@ -8,8 +8,8 @@ import { MessageToastDocsComponent } from './message-toast-docs.component';
 import { MessageToastHeaderComponent } from './message-toast-header/message-toast-header.component';
 import { MessageToastContentExampleComponent } from './examples/message-toast-content-example.component';
 
-import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 const routes: Routes = [
     {

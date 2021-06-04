@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { FdDropEvent } from '@fundamental-ngx/core';
+import { FdDropEvent } from '@fundamental-ngx/core/utils';
 
 interface GridListItem {
     id: number;

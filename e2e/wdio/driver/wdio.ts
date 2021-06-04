@@ -374,7 +374,7 @@ export function clickAndDragElement(locationX: number, locationY: number, newLoc
         'id': 'pointer1',
         'parameters': { 'pointerType': 'mouse' },
         'actions': [
-            { 'type': 'pointerMove', 'duration': 200, 'x': locationX, 'y': locationY },
+            { 'type': 'pointerMove', 'duration': 600, 'x': locationX, 'y': locationY },
             { 'type': 'pointerDown', 'button': 0 },
             { 'type': 'pointerMove', 'duration': 600, 'x': locationX, 'y': locationY },
             { 'type': 'pointerMove', 'duration': 1000, 'x': newLocationX, 'y': newLocationY },
@@ -417,4 +417,9 @@ export function applyState(state: 'hover' | 'active' | 'focus', selector: string
         case 'focus':
             return focusElement(selector, index);
     }
+}
+
+export function getPreviousElementText(selector: string, index: number = 0): string {
+    checkSelectorExists(selector, index);
+    return $$(selector)[index].previousElement().getText();
 }

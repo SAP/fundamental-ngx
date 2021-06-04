@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessageBoxService, MessageBoxType } from '@fundamental-ngx/core';
+import { MessageBoxService, MessageBoxType } from '@fundamental-ngx/core/message-box';
 
 @Component({
     selector: 'fd-semantic-types-example',
