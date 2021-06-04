@@ -4,12 +4,24 @@ fd-carousel:focus {
  outline: 1px dotted;
 }
 
-.fd-carousel:hover .fd-carousel__content .fd-button.fd-carousel__button{
-  display: block;
+.fd-carousel:hover {
+  .fd-carousel__content {
+    .fd-carousel__button {
+      &.fd-button {
+        display: block;
+      }
+    }
+  }
 }
 
-.fd-carousel .fd-carousel__content .fd-button.fd-carousel__button{
-  display: none;
+.fd-carousel:hover {
+  .fd-carousel__content {
+    .fd-carousel__button {
+      &.fd-button {
+        display: block;
+      }
+    }
+  }
 }
 
 .fd-carousel-items-horizontal {
