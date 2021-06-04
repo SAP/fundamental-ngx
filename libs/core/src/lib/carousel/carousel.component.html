@@ -67,14 +67,14 @@
 
 <ng-template #buttonLeft>
     <button fd-button class="fd-carousel__button fd-carousel__button--left" [style.z-index]="1" data-slide="previous"
-        [attr.aria-label]="leftNavigationBtnLabel" (click)="previous(true); $event.stopPropagation();"
+        [attr.aria-label]="leftNavigationBtnLabel" (click)="previous($event)"
         [disabled]="leftButtonDisabled" [attr.title]="leftNavigationBtnLabel"
         glyph="slim-arrow-left"></button>
 </ng-template>
 
 <ng-template #buttonRight>
     <button fd-button class="fd-carousel__button fd-carousel__button--right" [style.z-index]="1" data-slide="next"
-        [attr.aria-label]="rightNavigationBtnLabel" (click)="next(true); $event.stopPropagation();"
+        [attr.aria-label]="rightNavigationBtnLabel" (click)="next($event)"
         [disabled]="rightButtonDisabled" [attr.title]="rightNavigationBtnLabel"
         glyph="slim-arrow-right"></button>
 </ng-template>

@@ -317,15 +317,15 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /** Transitions to the previous slide in the carousel. */
-    previous(keepFocus?: boolean): void {
+    previous($event: MouseEvent | KeyboardEvent): void {
+        $event.stopPropagation()
+
         if (!this.loop && this.currentActiveSlidesStartIndex <= 0) {
             return;
         }
         this.rightButtonDisabled = false;
         this._adjustActiveItemPosition(SlideDirection.PREVIOUS);
-        if (!keepFocus) {
-            this._preventDefaultBtnFocus();
-        }
+        this._preventDefaultBtnFocus();
         this._carouselService.pickPrevious(this.dir);
 
         /** Handle looped carousel, first click on prev button. */
@@ -343,7 +343,9 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /** Transitions to the next slide in the carousel. */
-    next(keepFocus?: boolean): void {
+    next($event: MouseEvent | KeyboardEvent): void {
+        $event.stopPropagation()
+
         if (!this.loop && this.currentActiveSlidesStartIndex >= this.pageIndicatorsCountArray.length - 1) {
             return;
         }
@@ -352,9 +354,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         // Moving to next slide
         this.leftButtonDisabled = false;
         this._adjustActiveItemPosition(SlideDirection.NEXT);
-        if (!keepFocus) {
-            this._preventDefaultBtnFocus();
-        }
+        this._preventDefaultBtnFocus();
         this._carouselService.pickNext(this.dir);
         this._notifySlideChange(SlideDirection.NEXT);
         this._changeDetectorRef.detectChanges();
