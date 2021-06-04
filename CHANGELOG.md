@@ -1,3 +1,12 @@
+## [0.30.1-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.52...v0.30.1-rc.53) (2021-06-03)
+
+
+### Bug Fixes
+
+* **core:** fix typedoc generation ([#5554](https://github.com/SAP/fundamental-ngx/issues/5554)) ([860f74e](https://github.com/SAP/fundamental-ngx/commit/860f74e2515f3b9ccf23bac6f473c488d57b4ee0))
+
+
+
 ## [0.30.1-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.51...v0.30.1-rc.52) (2021-06-03)
 
 
