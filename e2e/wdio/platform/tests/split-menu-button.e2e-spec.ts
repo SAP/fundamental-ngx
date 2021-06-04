@@ -227,7 +227,7 @@ describe('Split menu button test suite', () => {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             spMenuBtnPage.saveExampleBaselineScreenshot();
-            expect(spMenuBtnPage.compareWithBaseline()).toBeLessThan(3);
+            expect(spMenuBtnPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
