@@ -9,7 +9,6 @@ import { BaseListItem } from '../base-list-item';
 import { ListConfig } from '../list.config';
 
 
-
 @Component({
     selector: 'fdp-standard-list-item',
     templateUrl: './standard-list-item.component.html',

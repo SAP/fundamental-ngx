@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RatingIndicatorModule } from '@fundamental-ngx/core';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
@@ -9,6 +8,7 @@ import { RatingIndicatorDocsHeaderComponent } from './rating-indicator-docs-head
 import { RatingIndicatorDocsComponent } from './rating-indicator-docs.component';
 
 import { examples } from './examples';
+import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
 
 const routes: Routes = [
     {

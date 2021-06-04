@@ -7,7 +7,7 @@ import { MessageBoxContainerComponent } from './message-box-container.component'
 import { MessageBoxContent } from '../utils/message-box-content.class';
 import { MessageBoxConfig } from '../utils/message-box-config.class';
 import { MessageBoxRef } from '../utils/message-box-ref.class';
-import { whenStable } from '../../utils/tests';
+import { whenStable } from '@fundamental-ngx/core/tests';
 
 @Component({ template: '<ng-template #template></ng-template>' })
 class TestComponent {

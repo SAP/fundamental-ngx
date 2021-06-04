@@ -11,19 +11,19 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { DialogService } from '../../dialog/dialog-service/dialog.service';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 import { Observable, of } from 'rxjs';
 import { MenuService } from '../services/menu.service';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { map, startWith, takeUntil } from 'rxjs/operators';
-import { RtlService } from '../../utils/services/rtl.service';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { MENU_COMPONENT, MenuInterface } from '../menu.interface';
 import {
     MOBILE_MODE_CONFIG,
     MobileModeBase,
     MobileModeControl,
     MobileModeConfigToken
-} from '../../utils/base-class/mobile-mode.class';
+} from '@fundamental-ngx/core/mobile-mode';
 
 @Component({
     selector: 'fd-menu-mobile',

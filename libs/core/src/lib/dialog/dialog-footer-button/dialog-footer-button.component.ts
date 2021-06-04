@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BarElementDirective } from '../../bar/directives/bar-element.directive';
+import { BarElementDirective } from '@fundamental-ngx/core/bar';
 
 /**
  * @deprecated

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ConnectedPosition, OverlayModule } from '@angular/cdk/overlay';
 import { A11yModule } from '@angular/cdk/a11y';
 import { PopoverModule } from './popover.module';
-import { DefaultPositions, PopoverPosition } from './popover-position/popover-position';
+import { DefaultPositions, PopoverPosition } from '../shared/interfaces/popover-position';
 import { PopoverComponent } from './popover.component';
 
 

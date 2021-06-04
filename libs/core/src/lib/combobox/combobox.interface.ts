@@ -1,5 +1,5 @@
 import { EventEmitter, InjectionToken } from '@angular/core';
-import { MobileMode } from '../utils/interfaces/mobile-control.interface';
+import { MobileMode } from '@fundamental-ngx/core/mobile-mode';
 
 export const COMBOBOX_COMPONENT = new InjectionToken<string[]>('ComboboxInterface');
 
