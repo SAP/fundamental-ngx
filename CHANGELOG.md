@@ -1,3 +1,12 @@
+## [0.30.1-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.55...v0.30.1-rc.56) (2021-06-04)
+
+
+### Bug Fixes
+
+* **platform:** clickable object status handle Enter and Space button ([#5535](https://github.com/SAP/fundamental-ngx/issues/5535)) ([7ccdabb](https://github.com/SAP/fundamental-ngx/commit/7ccdabb0a77050157614a184138ab1c1f841de95))
+
+
+
 ## [0.30.1-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.54...v0.30.1-rc.55) (2021-06-04)
 
 
