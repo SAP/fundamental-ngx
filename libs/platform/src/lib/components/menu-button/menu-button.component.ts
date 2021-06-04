@@ -43,7 +43,7 @@ export class MenuButtonComponent extends BaseComponent {
      * because menu trigger is on menu-button; menu gets open.
      * to prevent this, need to apply disabled at menu-button level as well.
      */
-    @HostBinding('class.menu-button-disabled')
+    @HostBinding('class.fd-menu-button-disabled')
     get menuButtonDisabled(): boolean {
         return this.disabled;
     }

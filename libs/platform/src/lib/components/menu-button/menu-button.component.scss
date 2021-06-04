@@ -2,7 +2,7 @@
     display: inline-block;
 }
 
-:host(.menu-button-disabled) {
+:host(.fd-menu-button-disabled) {
     cursor: not-allowed;
     pointer-events: none;
 }
