@@ -14,11 +14,11 @@ fd-carousel:focus {
   }
 }
 
-.fd-carousel:hover {
+.fd-carousel {
   .fd-carousel__content {
     .fd-carousel__button {
       &.fd-button {
-        display: block;
+        display: none;
       }
     }
   }
