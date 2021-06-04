@@ -23,7 +23,7 @@ export type HeaderSizes = 1 | 2 | 3 | 4 | 5 | 6;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class TitleComponent implements OnInit, DoCheck {
+export class TitleComponent implements OnInit {
     /** The size of the header */
     _headerSize: HeaderSizes = null;
 
@@ -52,13 +52,6 @@ export class TitleComponent implements OnInit, DoCheck {
     /** @hidden */
     ngOnInit(): void {
         this._setHeaderSize();
-    }
-
-    /** @hidden */
-    ngDoCheck(): void {
-        if (this.headerSize && this._appliedHeaderSize !== this.headerSize) {
-            this._setHeaderSize();
-        }
     }
 
     /** @hidden */
