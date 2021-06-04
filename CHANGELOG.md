@@ -1,3 +1,63 @@
+## [0.30.1-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.55...v0.30.1-rc.56) (2021-06-04)
+
+
+### Bug Fixes
+
+* **platform:** clickable object status handle Enter and Space button ([#5535](https://github.com/SAP/fundamental-ngx/issues/5535)) ([7ccdabb](https://github.com/SAP/fundamental-ngx/commit/7ccdabb0a77050157614a184138ab1c1f841de95))
+
+
+
+## [0.30.1-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.54...v0.30.1-rc.55) (2021-06-04)
+
+
+### Features
+
+* **core:** introduce resizable-card-layout component ([#4964](https://github.com/SAP/fundamental-ngx/issues/4964)) ([691066e](https://github.com/SAP/fundamental-ngx/commit/691066edfb68ab7e175049ff9666f6bb64d47f4a))
+
+
+
+## [0.30.1-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.53...v0.30.1-rc.54) (2021-06-04)
+
+
+
+## [0.30.1-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.52...v0.30.1-rc.53) (2021-06-03)
+
+
+### Bug Fixes
+
+* **core:** fix typedoc generation ([#5554](https://github.com/SAP/fundamental-ngx/issues/5554)) ([860f74e](https://github.com/SAP/fundamental-ngx/commit/860f74e2515f3b9ccf23bac6f473c488d57b4ee0))
+
+
+
+## [0.30.1-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.51...v0.30.1-rc.52) (2021-06-03)
+
+
+
+## [0.30.1-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.50...v0.30.1-rc.51) (2021-06-03)
+
+
+
+## [0.30.1-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.49...v0.30.1-rc.50) (2021-06-02)
+
+
+
+## [0.30.1-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.48...v0.30.1-rc.49) (2021-06-02)
+
+
+
+## [0.30.1-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.47...v0.30.1-rc.48) (2021-06-02)
+
+
+
+## [0.30.1-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.46...v0.30.1-rc.47) (2021-06-02)
+
+
+### Features
+
+* **core:** split into libraries ([#5453](https://github.com/SAP/fundamental-ngx/issues/5453)) ([54727a4](https://github.com/SAP/fundamental-ngx/commit/54727a48a73a4665db62231714c83b9f5b182e1a))
+
+
+
 ## [0.30.1-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.45...v0.30.1-rc.46) (2021-06-02)
 
 

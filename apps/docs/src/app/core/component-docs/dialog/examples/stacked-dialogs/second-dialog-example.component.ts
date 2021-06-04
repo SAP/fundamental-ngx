@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { DialogRef } from '@fundamental-ngx/core';
+import { Component } from '@angular/core';
+import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 @Component({
     template: `

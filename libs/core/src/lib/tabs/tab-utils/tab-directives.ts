@@ -8,7 +8,8 @@ import {
     OnChanges,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 /**
  * Directive used to identify the template which will populate the tab header.

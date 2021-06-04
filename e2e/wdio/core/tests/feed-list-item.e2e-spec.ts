@@ -49,7 +49,7 @@ describe('Feed list item test suite:', function() {
 
     describe('Check visual regression', function() {
 
-        it('should check author links states', () => {
+        xit('should check author links states', () => {
             const linksLength = getElementArrayLength(links);
             for (let i = 0; i < linksLength; i++) {
                 scrollIntoView(links, i);

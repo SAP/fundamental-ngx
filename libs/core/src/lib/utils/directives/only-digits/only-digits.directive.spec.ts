@@ -1,4 +1,4 @@
-import { MockElementRef } from '../../tests';
+import { MockElementRef } from '../../../tests';
 import { OnlyDigitsDirective } from './only-digits.directive';
 
 describe('OnlyDigitsDirective', () => {

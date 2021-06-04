@@ -17,8 +17,10 @@ import { TabItemDirective } from '../tab-item/tab-item.directive';
 import { TabsService } from '../tabs.service';
 import { merge, Subject, Subscription } from 'rxjs';
 import { TabModes, TabSizes } from '../tab-list.component';
-import { applyCssClass, ContentDensityService, CssClassBuilder } from '../../utils/public_api';
 import { filter, takeUntil } from 'rxjs/operators';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
 
 @Component({
     // tslint:disable-next-line:component-selector

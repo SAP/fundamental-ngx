@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { PopoverModule } from '../popover/popover.module';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { FormsModule } from '@angular/forms';
-import { MenuModule } from '../menu/menu.module';
-import { PipeModule } from '../utils/pipes/pipe.module';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { PipeModule } from '@fundamental-ngx/core/utils';
 import { ComboboxComponent } from './combobox.component';
-import { ButtonModule } from '../button/button.module';
-import { InputGroupModule } from '../input-group/input-group.module';
-import { ListModule } from '../list/list.module';
-import { IconModule } from '../icon/icon.module';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { IconModule } from '@fundamental-ngx/core/icon';
 import { AutoCompleteDirective } from './auto-complete.directive';
 
 @NgModule({

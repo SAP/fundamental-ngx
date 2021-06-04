@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { DateRange, FdDate } from '@fundamental-ngx/core';
+import { DateRange } from '@fundamental-ngx/core/calendar';
+import { FdDate } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-calendar-mark-hover',

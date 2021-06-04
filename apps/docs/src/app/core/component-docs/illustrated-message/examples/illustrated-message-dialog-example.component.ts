@@ -1,5 +1,5 @@
 import { Component, TemplateRef } from '@angular/core';
-import { DialogConfig, DialogService } from '@fundamental-ngx/core';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fd-illustrated-message-dialog-example',

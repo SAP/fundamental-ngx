@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CarouselModule, CardModule, ListModule, TableModule, SegmentedButtonModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -16,6 +15,11 @@ import { CarouselContentNavigationExampleComponent } from './examples/carousel-c
 import { CarouselLoopedNavigationExampleComponent } from './examples/carousel-looped-navigation-example.component';
 import { CarouselErrorMessageExampleComponent } from './examples/carousel-error-message-example.component';
 import { CarouselLoadingContentExampleComponent } from './examples/carousel-loading-content-example.component';
+import { CarouselModule } from '@fundamental-ngx/core/carousel';
+import { CardModule } from '@fundamental-ngx/core/card';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { TableModule } from '@fundamental-ngx/core/table';
 
 const routes: Routes = [
     {

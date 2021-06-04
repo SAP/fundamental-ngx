@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 import { FirstDialogExampleComponent } from './first-dialog-example.component';
-import { DialogConfig, DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-dialog-stacked-example',

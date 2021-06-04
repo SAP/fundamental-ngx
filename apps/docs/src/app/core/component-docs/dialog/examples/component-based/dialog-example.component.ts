@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { DialogRef } from '@fundamental-ngx/core';
+import { Component } from '@angular/core';
+import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 @Component({
     template: `
@@ -18,12 +18,12 @@ import { DialogRef } from '@fundamental-ngx/core';
             </fd-dialog-body>
 
             <fd-dialog-footer>
-                <fd-button-bar 
+                <fd-button-bar
                         label="Interesting"
                         fdType="emphasized"
                         (click)="this.dialogRef.close('Continue')">
                 </fd-button-bar>
-                <fd-button-bar 
+                <fd-button-bar
                         label="Cancel"
                         fdInitialFocus
                         fdType="transparent"

@@ -1,4 +1,4 @@
-import { FdDate } from '@fundamental-ngx/core';
+import { FdDate } from '@fundamental-ngx/core/datetime';
 
 export interface ExampleItem {
     name: string;

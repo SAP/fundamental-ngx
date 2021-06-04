@@ -9,8 +9,8 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { KeyboardSupportItemInterface } from '../../utils/interfaces/keyboard-support-item.interface';
-import { ButtonComponent } from '../../button/button.component';
+import { KeyboardSupportItemInterface } from '@fundamental-ngx/core/utils';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 export interface ActionSheetClickEvent {
     shouldClose: boolean;
