@@ -62,8 +62,9 @@ export class TitleComponent implements OnInit {
         } else {
             headerSize = this._elementRef.nativeElement.tagName.charAt(1);
         }
-        this._elementRef.nativeElement.classList.add(`fd-title--h${headerSize}`);
+
         this._elementRef.nativeElement.classList.remove(`fd-title--h${this._appliedHeaderSize}`);
+        this._elementRef.nativeElement.classList.add(`fd-title--h${headerSize}`);
         this._appliedHeaderSize = headerSize;
     }
 }
