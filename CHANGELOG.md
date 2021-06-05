@@ -1,3 +1,19 @@
+## [0.30.1-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.56...v0.30.1-rc.57) (2021-06-05)
+
+
+### Bug Fixes
+
+* **core:** fix tab focus, focus styles on popover and avatars, overflow trigger, avatar titles and roles for Avatar Group ([#5074](https://github.com/SAP/fundamental-ngx/issues/5074)) ([bd3bb03](https://github.com/SAP/fundamental-ngx/commit/bd3bb035d7f0d08641c18f658284e068c22d6ec8))
+
+
+### BREAKING CHANGES
+
+* **core:** - Added for `noPadding`, `noHorizontalScroll` and `noVerticalScroll` inputs for `AvatarGroupOverflowBodyDirective` (`fd-avatar-group-overflow-body`).
+- Added `AvatarGroupFocusableAvatarDirective` (`fd-avatar-group-focusable-avatar`) needed to bind styles for focusable Avatars.
+- Changes in markup
+
+
+
 ## [0.30.1-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.55...v0.30.1-rc.56) (2021-06-04)
 
 
