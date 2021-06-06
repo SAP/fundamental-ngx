@@ -3,14 +3,14 @@ import { NotificationComponent } from '../notification/notification.component';
 import { NotificationContainer } from '../notification-utils/notification-container';
 import { NotificationConfig } from '../notification-utils/notification-config';
 import { NotificationRef } from '../notification-utils/notification-ref';
-import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 
 @Injectable()
 export class NotificationService {
     public notifications: {
         notificationComponent: ComponentRef<NotificationComponent>;
     }[] = [];
-    
+
     public containerRef: ComponentRef<NotificationContainer>;
 
     constructor(private dynamicComponentService: DynamicComponentService) {}
@@ -41,7 +41,7 @@ export class NotificationService {
         // Pass Container reference to config
         notificationConfig.container = this.containerRef.location.nativeElement;
         let notificationComponentRef: ComponentRef<NotificationComponent>;
-        
+
         // Create Notification Component
         notificationComponentRef = this.dynamicComponentService.createDynamicComponent(
             content,
@@ -61,7 +61,7 @@ export class NotificationService {
         };
 
         const refSub = notificationService.afterClosed.subscribe(defaultBehaviourOnClose, defaultBehaviourOnClose);
-        
+
         return notificationService;
     }
 

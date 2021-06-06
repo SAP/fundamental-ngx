@@ -9,7 +9,8 @@ import {
     EventEmitter,
     Output
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 let messageStripUniqueId = 0;
 

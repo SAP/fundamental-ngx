@@ -17,17 +17,17 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { DatetimeAdapter } from '../../../datetime/datetime-adapter';
-import { DATE_TIME_FORMATS, DateTimeFormats } from '../../../datetime/datetime-formats';
+import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DATE_TIME_FORMATS, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 
 import { DateRange } from '../../models/date-range';
 import { CalendarCurrent } from '../../models/calendar-current';
 import { CalendarDay } from '../../models/calendar-day';
-import { SpecialDayRule } from '../../models/special-day-rule';
+import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 
 import { CalendarType, DaysOfWeek } from '../../calendar.component';
 import { CalendarService } from '../../calendar.service';
-import { compareObjects } from '../../../utils/public_api';
+import { compareObjects } from '@fundamental-ngx/core/utils';
 
 /** Component representing the day view of the calendar. */
 @Component({

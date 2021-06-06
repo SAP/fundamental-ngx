@@ -3,13 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { CdkTableModule } from '@angular/cdk/table';
 
 import {
-    ObjectStatusModule,
-    TableModule,
-    LayoutPanelModule,
-    FdDatetimeModule,
-    RtlService
-} from '@fundamental-ngx/core';
-import {
     PlatformButtonModule,
     PlatformInputModule,
     PlatformSearchFieldModule,
@@ -37,6 +30,12 @@ import { PlatformTableP13FilterExampleComponent } from './platform-table-example
 import { PlatformTableP13GroupExampleComponent } from './platform-table-examples/platform-table-p13-group-example.component';
 import { PlatformTableP13SortExampleComponent } from './platform-table-examples/platform-table-p13-sort-example.component';
 import { PlatformTableTreeExampleComponent } from './platform-table-examples/platform-table-tree-example.component';
+import { PlatformTableLoadingExampleComponent } from './platform-table-examples/platform-table-loading-example.component';
+import { TableModule } from '@fundamental-ngx/core/table';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { RtlService } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -81,7 +80,8 @@ const routes: Routes = [
         PlatformTableP13SortExampleComponent,
         PlatformTableP13FilterExampleComponent,
         PlatformTableP13GroupExampleComponent,
-        PlatformTableTreeExampleComponent
+        PlatformTableTreeExampleComponent,
+        PlatformTableLoadingExampleComponent
     ],
     providers: [RtlService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

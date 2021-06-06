@@ -1,5 +1,6 @@
 import { Component, Injectable, LOCALE_ID } from '@angular/core';
-import { CalendarI18nLabels, FdDate, DatetimeAdapter, FdDatetimeAdapter, DATE_TIME_FORMATS, FD_DATETIME_FORMATS } from '@fundamental-ngx/core';
+import { FdDate, DatetimeAdapter, FdDatetimeAdapter, DATE_TIME_FORMATS, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import { CalendarI18nLabels } from '@fundamental-ngx/core/calendar';
 
 // Translated aria labels.
 // Please note these labels should be translated for each locale separately

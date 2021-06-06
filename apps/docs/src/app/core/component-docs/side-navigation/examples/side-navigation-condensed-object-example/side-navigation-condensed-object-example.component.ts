@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SideNavigationModel } from '@fundamental-ngx/core';
+import { SideNavigationModel } from '@fundamental-ngx/core/side-navigation';
 
 @Component({
     selector: 'fd-side-navigation-condensed-object-example',
