@@ -18,13 +18,13 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FormStates } from '../form/form-control/form-states';
-import { KeyUtil } from '../utils/functions';
+import { FormStates } from '@fundamental-ngx/core/shared';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { defer, fromEvent, interval, merge, Observable, Subscription, timer } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import NumberFormat = Intl.NumberFormat;
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { ContentDensityService } from '../utils/public_api';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 let stepInputUniqueId = 0;
 

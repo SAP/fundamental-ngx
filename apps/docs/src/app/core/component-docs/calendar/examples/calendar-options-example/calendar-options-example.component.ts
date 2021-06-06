@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DatetimeAdapter, DATE_TIME_FORMATS, FdDatetimeAdapter, FD_DATETIME_FORMATS, SpecialDayRule } from '@fundamental-ngx/core';
+import { DatetimeAdapter, DATE_TIME_FORMATS, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-calendar-options-example',

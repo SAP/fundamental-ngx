@@ -19,7 +19,7 @@
         aria-live="polite"
         autocomplete="off"
         type="text"
-        tabindex="-1"
+        tabindex="0"
         [id]="id"
         [attr.aria-label]="ariaLabel"
         [attr.aria-labelledby]="ariaLabelledBy"
@@ -27,6 +27,7 @@
         [title]="ariaLabel"
         [placeholder]="placeholder"
         (click)="open()"
+        (keydown)="keyDownHandle($event)"
         [value]=""
     />
 
@@ -37,6 +38,7 @@
         (click)="open()"
         [label]="buttonLabel"
         [compact]="compact"
+        tabindex="0"
     ></button>
     <ng-content select="[fd-form-control]"></ng-content>
 </div>

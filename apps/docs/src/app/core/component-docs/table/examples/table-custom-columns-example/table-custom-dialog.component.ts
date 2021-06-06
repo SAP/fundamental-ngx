@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { DialogRef } from '@fundamental-ngx/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DisplayedColumn } from './table-custom-columns-example.component';
+import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 @Component({
     template: `

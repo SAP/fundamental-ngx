@@ -1,9 +1,8 @@
 import { ObjectMarkerPo } from '../pages/object-marker.po';
 import {
     click,
-    getAttributeByName,
-    getCSSPropertyByName,
-    getElementArrayLength,
+    getCSSPropertyByName, getElementAriaLabel,
+    getElementArrayLength, getElementTitle,
     mouseHoverElement,
     refreshPage,
     scrollIntoView, waitForPresent
@@ -42,8 +41,8 @@ describe('Object marker test suite', function() {
     it('Verify technical statuses', () => {
         const arr = getElementArrayLength(iconOnlyMarkers);
         for (let i = 0; i < arr; i++) {
-            expect(getAttributeByName(iconOnlyMarkers, 'title', i)).toBe(iconStatusesList[i][0]);
-            expect(getAttributeByName(iconOnlyMarkers, 'aria-label', i)).toBe(iconStatusesList[i][1]);
+            expect(getElementTitle(iconOnlyMarkers, i)).toBe(iconStatusesList[i][0]);
+            expect(getElementAriaLabel(iconOnlyMarkers, i)).toBe(iconStatusesList[i][1]);
         }
     });
 

@@ -1,6 +1,5 @@
 import { InfoLabelPO } from '../pages/info-label.po';
 import {
-    ariaLabelAttribute,
     ariaLabelExample,
     ariaLabelledByAttribute,
     ariaSuccessLabel,
@@ -25,7 +24,7 @@ import {
     browserIsSafari,
     elementArray,
     getAttributeByName,
-    getCSSPropertyByName,
+    getCSSPropertyByName, getElementAriaLabel,
     getText,
     waitForElDisplayed
 } from '../../driver/wdio';
@@ -129,8 +128,7 @@ describe('Info Label component test suite', () => {
         const ariaAttrArr = elementArray(accessibilityAttrArr);
 
         if (browserIsSafari()) {
-            expect(getAttributeByName(accessibilityLabelsArr, ariaLabelAttribute, 0))
-                .not.toBe(null);
+            expect(getElementAriaLabel(accessibilityLabelsArr)).not.toBe(null);
             expect(getAttributeByName(accessibilityLabelsArr, ariaLabelledByAttribute, 1))
                 .not.toBe(null);
 
@@ -142,8 +140,7 @@ describe('Info Label component test suite', () => {
                     .toContain(semanticColorsArr[1].value);
             }
         } else {
-            expect(getAttributeByName(accessibilityLabelsArr, ariaLabelAttribute, 0))
-                .not.toBe(null);
+            expect(getElementAriaLabel(accessibilityLabelsArr)).not.toBe(null);
             expect(getAttributeByName(accessibilityLabelsArr, ariaLabelledByAttribute, 1))
                 .not.toBe(null);
 

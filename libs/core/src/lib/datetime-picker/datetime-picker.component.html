@@ -15,6 +15,7 @@
                 [compact]="compact"
                 [state]="state"
                 [disabled]="disabled"
+                [isControl]="true"
             >
                 <input
                     type="text"
@@ -44,6 +45,7 @@
                         [compact]="compact"
                         [attr.tabindex]="buttonFocusable ? 0 : -1"
                         [attr.aria-label]="displayDatetimeToggleLabel"
+                        [class.is-expanded]="isOpen"
                         [attr.aria-expanded]="isOpen"
                         (click)="togglePopover()"
                     ></button>

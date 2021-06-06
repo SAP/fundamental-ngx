@@ -7,7 +7,7 @@ import { BarMiddleDirective } from './directives/bar-middle.directive';
 import { BarRightDirective } from './directives/bar-right.directive';
 import { BarElementDirective } from './directives/bar-element.directive';
 import { ButtonBarComponent } from './button-bar/button-bar.component';
-import { ButtonModule } from '../button/button.module';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @NgModule({
     declarations: [BarComponent, BarLeftDirective, BarMiddleDirective, BarRightDirective, BarElementDirective, ButtonBarComponent],

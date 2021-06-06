@@ -1,9 +1,9 @@
 <div class="fd-pagination__holder" *ngIf="totalItems">
     <div class="fd-pagination__pages">
-        <span class="fd-pagination__total" [ngClass]="rtlClass" *ngIf="displayTotalItems">
+        <span [attr.id]="id + '__total'" class="fd-pagination__total" [ngClass]="rtlClass" *ngIf="displayTotalItems">
             <ng-container [ngTemplateOutlet]="displayTextTemplate || showingItems" [ngTemplateOutletContext]="{ showing: currentShowing }"></ng-container>
         </span>
-        <nav class="fd-pagination__nav" *ngIf="totalItems >= itemsPerPage">
+        <nav class="fd-pagination__nav" [attr.aria-labelledby]="id + '__total'" *ngIf="totalItems >= itemsPerPage">
             <a
                 class="fd-pagination__link fd-pagination__link--previous"
                 tabindex="0"
@@ -19,12 +19,13 @@
                 <ng-container *ngFor="let page of pages">
                     <a
                         class="fd-pagination__link"
+                        [class.is-selected]="currentPage == page"
                         tabindex="0"
-                        role="button"
                         (keypress)="onKeypressHandler(page, $event)"
                         (click)="goToPage(page, $event)"
                         *ngIf="page !== -1; else more"
-                        [attr.aria-selected]="currentPage === page"
+                        [attr.aria-current]="currentPage == page"
+                        [attr.aria-label]="pageLabel +' '+ page"
                     >
                         {{ page }}
                     </a>

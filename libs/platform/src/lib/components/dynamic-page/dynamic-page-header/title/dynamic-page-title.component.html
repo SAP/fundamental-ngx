@@ -1,16 +1,30 @@
-<div class="fd-dynamic-page__main-container">
-    <div class="fd-dynamic-page__breadcrumb-title-container" #breadcrumbTitleContainer>
-        <nav aria-label="Breadcrumbs"><ng-content select="fd-breadcrumb"></ng-content></nav>
-        <div class="fd-dynamic-page__title-container">
-            <div class="fd-dynamic-page__title" #titleRef>{{ title }}</div>
-            <ng-content select="fdp-dynamic-page-key-info"></ng-content>
+<ng-template #contentTemplateRef>
+    <fdp-dynamic-page-title-host [background]="background" [size]="size">
+        <div class="fd-dynamic-page__main-container">
+            <div class="fd-dynamic-page__breadcrumb-title-container" #breadcrumbTitleContainer>
+                <nav aria-label="Breadcrumbs">
+                    <!-- Can not avoid "ng-content" since breadcrumb does not provide ng-template wrapper approach  -->
+                    <ng-content select="fd-breadcrumb"></ng-content>
+                </nav>
+                <div class="fd-dynamic-page__title-container">
+                    <div class="fd-dynamic-page__title" #titleRef>{{ title }}</div>
+                    <ng-container
+                        *ngIf="keyInfoComponent"
+                        [ngTemplateOutlet]="keyInfoComponent.contentTemplateRef"
+                    ></ng-container>
+                </div>
+            </div>
+            <div class="fd-dynamic-page__actions-container" #actionsContainer>
+                <div class="fd-dynamic-page__toolbar-container">
+                    <div *ngIf="globalActionsComponent" #globalActionsContainer>
+                        <ng-container *ngTemplateOutlet="globalActionsComponent.contentTemplateRef"></ng-container>
+                    </div>
+                    <div *ngIf="layoutActionsComponent" #layoutActionsContainer>
+                        <ng-container *ngTemplateOutlet="layoutActionsComponent.contentTemplateRef"></ng-container>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="fd-dynamic-page__actions-container" #actionsContainer>
-        <div class="fd-dynamic-page__toolbar-container">
-            <ng-content select="fdp-dynamic-page-global-actions"></ng-content>
-            <ng-content select="fdp-dynamic-page-layout-actions"></ng-content>
-        </div>
-    </div>
-</div>
-<div class="fd-dynamic-page__subtitle" *ngIf="subtitle">{{ subtitle }}</div>
+        <div class="fd-dynamic-page__subtitle" *ngIf="subtitle">{{ subtitle }}</div>
+    </fdp-dynamic-page-title-host>
+</ng-template>

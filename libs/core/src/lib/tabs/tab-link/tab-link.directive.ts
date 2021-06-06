@@ -1,5 +1,5 @@
 import { Directive, ElementRef, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
-import { AbstractFdNgxClass } from '../../utils/abstract-fd-ngx-class';
+import { AbstractFdNgxClass } from '@fundamental-ngx/core/utils';
 
 /**
  * Tab link for nav mode

@@ -1,20 +1,30 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef, Renderer2, ViewEncapsulation } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewEncapsulation, ViewChild, TemplateRef } from '@angular/core';
 
 import { CLASS_NAME } from '../../constants';
-import { addClassNameToElement } from '../../utils';
 
 @Component({
     selector: 'fdp-dynamic-page-key-info',
-    template: '<ng-content></ng-content>',
+    template: `
+        <ng-template #contentTemplateRef>
+            <div [ngClass]="CLASS_NAME.dynamicPageKeyInfo">
+                <ng-content></ng-content>
+            </div>
+        </ng-template>
+    `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class DynamicPageKeyInfoComponent implements OnInit {
-    /** @hidden */
-    constructor(private _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
+export class DynamicPageKeyInfoComponent {
+    readonly CLASS_NAME = CLASS_NAME;
 
-    /** @hidden */
-    ngOnInit(): void {
-        addClassNameToElement(this._renderer, this._elementRef.nativeElement, CLASS_NAME.dynamicPageKeyInfo);
-    }
+    /**
+     * @hidden
+     * The component view is wrapped in ng-template so
+     * component's consumer have to use this templateRef to render it
+     * in its view.
+     *
+     * The template reference to the component view.
+     */
+    @ViewChild('contentTemplateRef')
+    contentTemplateRef: TemplateRef<any>;
 }

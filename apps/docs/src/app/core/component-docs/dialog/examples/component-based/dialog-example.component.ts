@@ -1,11 +1,11 @@
-import { Component, Inject } from '@angular/core';
-import { DialogRef } from '@fundamental-ngx/core';
+import { Component } from '@angular/core';
+import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 @Component({
     template: `
         <fd-dialog>
             <fd-dialog-header>
-                <h1 fd-title>{{ dialogRef.data.title }}</h1>
+                <h1 id="fd-dialog-header-1" fd-title>{{ dialogRef.data.title }}</h1>
                 <button fd-dialog-close-button (click)="dialogRef.dismiss('Close button')"></button>
             </fd-dialog-header>
 
@@ -18,12 +18,12 @@ import { DialogRef } from '@fundamental-ngx/core';
             </fd-dialog-body>
 
             <fd-dialog-footer>
-                <fd-button-bar 
+                <fd-button-bar
                         label="Interesting"
                         fdType="emphasized"
                         (click)="this.dialogRef.close('Continue')">
                 </fd-button-bar>
-                <fd-button-bar 
+                <fd-button-bar
                         label="Cancel"
                         fdInitialFocus
                         fdType="transparent"

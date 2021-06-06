@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { DateRange, DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core';
+import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import { DateRange } from '@fundamental-ngx/core/calendar';
 
 @Component({
     selector: 'fd-calendar-range-example',

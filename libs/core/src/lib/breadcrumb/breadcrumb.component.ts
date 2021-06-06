@@ -16,13 +16,13 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
-import { RtlService } from '../utils/services/rtl.service';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { KeyUtil } from '../utils/functions';
-import { MenuComponent } from '../menu/menu.component';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { ContentDensityService } from '../utils/public_api';
-import { Placement } from '../popover/popover-position/popover-position';
+import { Placement } from '@fundamental-ngx/core/shared';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.
@@ -97,14 +97,17 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy 
     /** @hidden */
     ngOnInit(): void {
         if (this._rtlService) {
-            this._subscriptions.add(this._rtlService.rtl
-                .subscribe((value) => this.placement$.next(value ? 'bottom-end' : 'bottom-start')));
+            this._subscriptions.add(
+                this._rtlService.rtl.subscribe((value) => this.placement$.next(value ? 'bottom-end' : 'bottom-start'))
+            );
         }
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this._cdRef.markForCheck();
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._cdRef.markForCheck();
+                })
+            );
         }
     }
 
@@ -116,6 +119,9 @@ export class BreadcrumbComponent implements AfterContentInit, OnInit, OnDestroy 
     /** @hidden */
     @HostListener('window:resize', [])
     onResize(): void {
+        if (!this.elementRef.nativeElement.parentElement) {
+            return;
+        }
         this.containerBoundary = this.elementRef.nativeElement.parentElement.getBoundingClientRect().width;
         if (this.containerElement) {
             this.containerBoundary = this.containerElement.getBoundingClientRect().width;

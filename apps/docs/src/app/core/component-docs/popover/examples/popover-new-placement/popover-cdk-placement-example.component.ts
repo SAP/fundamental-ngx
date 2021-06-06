@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { PopoverComponent, XPositions, YPositions } from '@fundamental-ngx/core';
 import { ConnectionPositionPair } from '@angular/cdk/overlay';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { XPositions, YPositions } from '@fundamental-ngx/core/shared';
 
 @Component({
     selector: 'fd-popover-cdk-placement-example',

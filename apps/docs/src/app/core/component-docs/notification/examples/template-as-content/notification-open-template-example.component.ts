@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NotificationService } from '@fundamental-ngx/core';
+import { NotificationService } from '@fundamental-ngx/core/notification';
 
 @Component({
     selector: 'fd-notification-open-template-example',
@@ -12,11 +12,8 @@ export class NotificationOpenTemplateExampleComponent {
     constructor(private notificationService: NotificationService) {}
 
     open(notificationComponent): void {
-        const notificationRef = this.notificationService.open(notificationComponent, {
-            size: 's',
-            type: 'warning'
-        });
-
+        const notificationRef = this.notificationService.open(notificationComponent);
+        setTimeout(() => notificationRef.dismiss('dismissed'), 4000);
         notificationRef.afterClosed.subscribe(
             (result) => {
                 this.closeReason = 'Notification closed with result: ' + result;
