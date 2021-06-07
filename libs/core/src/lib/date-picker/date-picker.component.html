@@ -20,6 +20,7 @@
                 [class.is-error]="_isInvalidDateInput && useValidation"
                 [attr.aria-label]="dateInputLabel"
                 [attr.id]="inputId"
+                [attr.aria-required]="required"
                 [(ngModel)]="_inputFieldDate"
                 (ngModelChange)="handleInputChange($event)"
                 (focus)="onTouched()"

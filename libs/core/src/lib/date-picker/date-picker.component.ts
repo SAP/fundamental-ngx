@@ -86,6 +86,10 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     @Input()
     inputId: string;
 
+    /** If it is mandatory field */
+    @Input()
+    required = false;
+
     /** Text displayed in message */
     @Input()
     set message(message: string) {

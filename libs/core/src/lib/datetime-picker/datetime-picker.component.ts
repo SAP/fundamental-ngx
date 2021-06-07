@@ -92,6 +92,10 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     @Input()
     inputId: string;
 
+    /** If it is mandatory field */
+    @Input()
+    required = false;
+
     /**
      * Whether the time component should be meridian (am/pm).
      * Default value is based on the current locale format option
