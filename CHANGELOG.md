@@ -1,3 +1,12 @@
+## [0.30.1-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.60...v0.30.1-rc.61) (2021-06-07)
+
+
+### Bug Fixes
+
+* **core:** fix compact items change to cozy after being clicked in Action Sheet ([#5552](https://github.com/SAP/fundamental-ngx/issues/5552)) ([0da051d](https://github.com/SAP/fundamental-ngx/commit/0da051dfae23979dfac0c9c794a0142fb763f3c1))
+
+
+
 ## [0.30.1-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.59...v0.30.1-rc.60) (2021-06-07)
 
 
