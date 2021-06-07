@@ -231,6 +231,7 @@ export abstract class BaseInput extends BaseComponent
 
     setDisabledState(isDisabled: boolean): void {
         const newState = coerceBooleanProperty(isDisabled);
+        this._cd.markForCheck();
         if (newState !== this._disabled) {
             this._disabled = isDisabled;
             this.stateChanges.next('setDisabledState');

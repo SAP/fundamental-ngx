@@ -8,7 +8,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { CLASS_NAME } from '../constants';
+import { DYNAMIC_PAGE_CLASS_NAME } from '../constants';
 import { addClassNameToElement } from '../utils';
 
 
@@ -38,7 +38,7 @@ export class DynamicPageContentComponent implements OnInit {
 
     /**@hidden */
     ngOnInit(): void {
-        this._addClassNameToHostElement(CLASS_NAME.dynamicPageContent);
+        this._addClassNameToHostElement(DYNAMIC_PAGE_CLASS_NAME.dynamicPageContent);
     }
 
     /** Element reference to host of content dynamic page */

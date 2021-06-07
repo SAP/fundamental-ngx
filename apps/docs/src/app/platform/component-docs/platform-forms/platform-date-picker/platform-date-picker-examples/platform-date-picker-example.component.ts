@@ -7,7 +7,7 @@ import {
     FdDate,
     FdDatetimeAdapter,
     FD_DATETIME_FORMATS
-} from '@fundamental-ngx/core';
+} from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fdp-platform-date-picker-example',

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ViewChild, Component, ViewChildren, QueryList } from '@angular/core';
 
-import { whenStable } from '../utils/tests/when-stable';
+import { whenStable } from '@fundamental-ngx/core/tests';
 import { ToolbarComponent } from './toolbar.component';
 import { ToolbarItemDirective } from './toolbar-item.directive';
 import { ToolbarSpacerComponent } from './toolbar-spacer.component';

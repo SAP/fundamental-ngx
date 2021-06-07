@@ -7,7 +7,7 @@ import {
     ViewEncapsulation,
     OnInit
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 export type MessagePageType = '' | 'filter' | 'search' | 'no-items' | 'error';
 
@@ -23,7 +23,7 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
     @Input()
     class: string;
 
-    /** 
+    /**
      * The type of the Message Page.
      * Options include: filter, search, no-items, error and default.
      * Leave empty for default.
@@ -31,17 +31,17 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
     @Input()
     type: MessagePageType;
 
-     /** 
+     /**
      * Whether the Message Page has an icon.
      * Set to true by default.
-     * It's recommended to always show an icon with the Message Page. 
+     * It's recommended to always show an icon with the Message Page.
      */
     @Input()
     hasIcon = true;
 
-    /** 
+    /**
      * The icon of the Message Page.
-     * The default icon is .sap-icon--documents. 
+     * The default icon is .sap-icon--documents.
      */
     @Input()
     set glyph(messagePageGlyph: string) {
@@ -49,10 +49,10 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
             this._glyph = messagePageGlyph;
             this._getMessagePageIcon();
         }
-        
+
     }
 
-    /** 
+    /**
      * Getter method for the glyph property
      */
     get glyph(): string {
@@ -96,8 +96,8 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
         this._getMessagePageIcon();
     }
 
-     /** 
-      * @hidden 
+     /**
+      * @hidden
       * Determine the icon based on the Message Page type
       * If no type is specified, the default icon is 'documents'
       */

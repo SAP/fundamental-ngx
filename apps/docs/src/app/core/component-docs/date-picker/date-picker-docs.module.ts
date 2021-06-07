@@ -1,13 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {
-    FdDatetimeModule,
-    DatePickerModule,
-    FormModule,
-    InputGroupModule,
-    SegmentedButtonModule,
-    PipeModule
-} from '@fundamental-ngx/core';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -26,6 +18,12 @@ import { DatePickerComplexI18nExampleComponent } from './examples/date-picker-co
 import { DatePickerRangeDisabledExampleComponent } from './examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component';
 import { DatePickerDisableFuncExampleComponent } from './examples/date-picker-disable-func-example/date-picker-disable-func-example.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { DatePickerModule } from '@fundamental-ngx/core/date-picker';
+import { PipeModule } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {

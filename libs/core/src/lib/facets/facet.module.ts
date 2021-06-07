@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FacetGroupComponent } from './facet-group.component';
 import { FacetContentComponent } from './content/facet-content.component';
 import { FacetComponent } from './facet/facet.component';
-import { TitleModule } from '../title/title.module';
-import { FormLabelModule } from '../form/form-label/form-label.module';
+import { TitleModule } from '@fundamental-ngx/core/title';
+import { FormLabelModule } from '@fundamental-ngx/core/form';
 
 @NgModule({
     declarations: [FacetComponent, FacetGroupComponent, FacetContentComponent],

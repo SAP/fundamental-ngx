@@ -11,7 +11,7 @@ export class DateFormatPipe<D> implements PipeTransform {
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {}
 
-    transform(date: D): any {
+    transform(date: D): string {
         return this._dateTimeAdapter.format(date, this._dateTimeFormats.display.dateInput);
     }
 }
@@ -25,7 +25,7 @@ export class DateTimeFormatPipe<D> implements PipeTransform {
         @Optional() @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats
     ) {}
 
-    transform(date: D): any {
+    transform(date: D): string {
         return this._dateTimeAdapter.format(date, this._dateTimeFormats.display.dateTimeInput);
     }
 }
@@ -38,7 +38,7 @@ export class DateFromNowPipe<D> implements PipeTransform {
         private _dateTimeAdapter: DatetimeAdapter<D>
     ) {}
 
-    transform(date: D): any {
+    transform(date: D): string {
         if (this._dateTimeAdapter.fromNow && typeof this._dateTimeAdapter.fromNow !== 'undefined') {
             return this._dateTimeAdapter.fromNow(date);
         } else {

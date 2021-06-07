@@ -16,7 +16,7 @@ import {
 import { WizardContentComponent } from '../wizard-content/wizard-content.component';
 import { WizardStepIndicatorComponent } from '../wizard-step-indicator/wizard-step-indicator.component';
 import { Subscription } from 'rxjs';
-import { KeyUtil } from '../../utils/functions';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';

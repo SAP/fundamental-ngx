@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MultiInputComponent } from './multi-input.component';
-import { TokenModule } from '../token/token.module';
+import { TokenModule } from '@fundamental-ngx/core/token';
 import { FormsModule } from '@angular/forms';
-import { PopoverModule } from '../popover/popover.module';
-import { PipeModule } from '../utils/pipes/pipe.module';
-import { InputGroupModule } from '../input-group/input-group.module';
-import { FormModule } from '../form/form.module';
-import { CheckboxModule } from '../checkbox/checkbox.module';
-import { ListModule } from '../list/list.module';
-import { LinkModule } from '../link/link.module';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { PipeModule } from '@fundamental-ngx/core/utils';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { LinkModule } from '@fundamental-ngx/core/link';
 
 @NgModule({
     declarations: [MultiInputComponent],

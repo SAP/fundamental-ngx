@@ -19,18 +19,18 @@ import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { Placement } from '../popover/popover-position/popover-position';
-import { FormStates } from '../form/form-control/form-states';
-import { SpecialDayRule } from '../calendar/models/special-day-rule';
-import { CalendarComponent, CalendarType, DaysOfWeek, FdCalendarView } from '../calendar/calendar.component';
-import { CalendarYearGrid } from '../calendar/models/calendar-year-grid';
-import { DateRange } from '../calendar/models/date-range';
-import { DatetimeAdapter } from '../datetime/datetime-adapter';
-import { DateTimeFormats, DATE_TIME_FORMATS } from '../datetime/datetime-formats';
+import { Placement } from '@fundamental-ngx/core/shared';
+import { FormStates } from '@fundamental-ngx/core/shared';
+import { SpecialDayRule } from '@fundamental-ngx/core/shared';
+import { CalendarComponent, CalendarType, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
+import { CalendarYearGrid } from '@fundamental-ngx/core/calendar';
+import { DateRange } from '@fundamental-ngx/core/calendar';
+import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
 import { createMissingDateImplementationError } from './errors';
-import { PopoverFormMessageService } from '../form/form-message/popover-form-message.service';
-import { PopoverService } from '../popover/popover-service/popover.service';
-import { ContentDensityService } from '../utils/public_api';
+import { PopoverFormMessageService } from '@fundamental-ngx/core/form';
+import { PopoverService } from '@fundamental-ngx/core/popover';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 /**
  * The datetime picker component is an opinionated composition of the fd-popover and

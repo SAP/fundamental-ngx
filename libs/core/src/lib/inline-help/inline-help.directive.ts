@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
-import { PopoverService } from '../popover/popover-service/popover.service';
-import { BasePopoverClass } from '../popover/base/base-popover.class';
+import { PopoverService } from '@fundamental-ngx/core/popover';
+import { BasePopoverClass } from '@fundamental-ngx/core/popover';
 
 const INLINE_HELP_CLASS = 'fd-inline-help__content';
 
