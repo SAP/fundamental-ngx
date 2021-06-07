@@ -84,9 +84,6 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
         return this._navigatable;
     }
 
-    // @HostBinding('class.fd-table__row--unnavigatable') 
-    // get unnavigatable(): boolean { return !this.navigatable; }
-
      /** @hidden */
      private _activable = false;
 

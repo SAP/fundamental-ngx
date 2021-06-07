@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { FdDate } from '@fundamental-ngx/core';
+import { FdDate } from '@fundamental-ngx/core/datetime';
 import {
     TableDataSource,
     TableDataProvider,
@@ -50,11 +50,11 @@ export interface ExampleItem {
  * Table Data Provider Example
  */
  export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
-    items: ExampleItem[] = [...ITEMS];
+    items: ExampleItem[] = ITEMS;
     totalItems = ITEMS.length;
 
     fetch(tableState: TableState): Observable<ExampleItem[]> {
-        this.items = [...ITEMS];
+        this.items = ITEMS;
 
         // apply searching
         if (tableState.searchInput) {

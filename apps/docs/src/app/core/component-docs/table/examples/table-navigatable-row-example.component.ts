@@ -39,7 +39,7 @@ export class TableNavigatableRowExampleComponent implements OnInit, OnDestroy {
         }
     ];
 
-    tableRowsAdditional = [
+    tableRowsAdditional: any[] = [
         {
             column1: 'user.name@email.com',
             column2: 'Row1',
@@ -125,7 +125,7 @@ export class TableNavigatableRowExampleComponent implements OnInit, OnDestroy {
 
     alert(row: any): void {
         if (row.navigatable) {
-            window.alert('Navigation event took place!');
+            alert('Navigation event took place!');
         }
     }
 }

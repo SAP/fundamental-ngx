@@ -26,7 +26,8 @@ import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
-import { FdDropEvent, RtlService, TableRowDirective } from '@fundamental-ngx/core';
+import { FdDropEvent, RtlService } from '@fundamental-ngx/core/utils';
+import { TableRowDirective } from '@fundamental-ngx/core/table';
 
 import { isDataSource } from '../../domain';
 import { getNestedValue } from '../../utils/object';
