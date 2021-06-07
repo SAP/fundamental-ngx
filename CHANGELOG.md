@@ -1,3 +1,122 @@
+## [0.30.1-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.60...v0.30.1-rc.61) (2021-06-07)
+
+
+### Bug Fixes
+
+* **core:** fix compact items change to cozy after being clicked in Action Sheet ([#5552](https://github.com/SAP/fundamental-ngx/issues/5552)) ([0da051d](https://github.com/SAP/fundamental-ngx/commit/0da051dfae23979dfac0c9c794a0142fb763f3c1))
+
+
+
+## [0.30.1-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.59...v0.30.1-rc.60) (2021-06-07)
+
+
+
+## [0.30.1-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.58...v0.30.1-rc.59) (2021-06-07)
+
+
+
+## [0.30.1-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.57...v0.30.1-rc.58) (2021-06-06)
+
+
+
+## [0.30.1-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.56...v0.30.1-rc.57) (2021-06-05)
+
+
+### Bug Fixes
+
+* **core:** fix tab focus, focus styles on popover and avatars, overflow trigger, avatar titles and roles for Avatar Group ([#5074](https://github.com/SAP/fundamental-ngx/issues/5074)) ([bd3bb03](https://github.com/SAP/fundamental-ngx/commit/bd3bb035d7f0d08641c18f658284e068c22d6ec8))
+
+
+### BREAKING CHANGES
+
+* **core:** - Added for `noPadding`, `noHorizontalScroll` and `noVerticalScroll` inputs for `AvatarGroupOverflowBodyDirective` (`fd-avatar-group-overflow-body`).
+- Added `AvatarGroupFocusableAvatarDirective` (`fd-avatar-group-focusable-avatar`) needed to bind styles for focusable Avatars.
+- Changes in markup
+
+
+
+## [0.30.1-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.55...v0.30.1-rc.56) (2021-06-04)
+
+
+### Bug Fixes
+
+* **platform:** clickable object status handle Enter and Space button ([#5535](https://github.com/SAP/fundamental-ngx/issues/5535)) ([7ccdabb](https://github.com/SAP/fundamental-ngx/commit/7ccdabb0a77050157614a184138ab1c1f841de95))
+
+
+
+## [0.30.1-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.54...v0.30.1-rc.55) (2021-06-04)
+
+
+### Features
+
+* **core:** introduce resizable-card-layout component ([#4964](https://github.com/SAP/fundamental-ngx/issues/4964)) ([691066e](https://github.com/SAP/fundamental-ngx/commit/691066edfb68ab7e175049ff9666f6bb64d47f4a))
+
+
+
+## [0.30.1-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.53...v0.30.1-rc.54) (2021-06-04)
+
+
+
+## [0.30.1-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.52...v0.30.1-rc.53) (2021-06-03)
+
+
+### Bug Fixes
+
+* **core:** fix typedoc generation ([#5554](https://github.com/SAP/fundamental-ngx/issues/5554)) ([860f74e](https://github.com/SAP/fundamental-ngx/commit/860f74e2515f3b9ccf23bac6f473c488d57b4ee0))
+
+
+
+## [0.30.1-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.51...v0.30.1-rc.52) (2021-06-03)
+
+
+
+## [0.30.1-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.50...v0.30.1-rc.51) (2021-06-03)
+
+
+
+## [0.30.1-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.49...v0.30.1-rc.50) (2021-06-02)
+
+
+
+## [0.30.1-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.48...v0.30.1-rc.49) (2021-06-02)
+
+
+
+## [0.30.1-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.47...v0.30.1-rc.48) (2021-06-02)
+
+
+
+## [0.30.1-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.46...v0.30.1-rc.47) (2021-06-02)
+
+
+### Features
+
+* **core:** split into libraries ([#5453](https://github.com/SAP/fundamental-ngx/issues/5453)) ([54727a4](https://github.com/SAP/fundamental-ngx/commit/54727a48a73a4665db62231714c83b9f5b182e1a))
+
+
+
+## [0.30.1-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.45...v0.30.1-rc.46) (2021-06-02)
+
+
+
+## [0.30.1-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.44...v0.30.1-rc.45) (2021-06-01)
+
+
+
+## [0.30.1-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.43...v0.30.1-rc.44) (2021-05-31)
+
+
+
+## [0.30.1-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.42...v0.30.1-rc.43) (2021-05-31)
+
+
+### Bug Fixes
+
+* **core:** checkbox parent element focus fix ([#5508](https://github.com/SAP/fundamental-ngx/issues/5508)) ([6b94cfa](https://github.com/SAP/fundamental-ngx/commit/6b94cfa80312db6968e2213f4e862cf2f21720ad))
+* **platform:** playground disable option functions incorrectly ([#5521](https://github.com/SAP/fundamental-ngx/issues/5521)) ([e660169](https://github.com/SAP/fundamental-ngx/commit/e6601694edda6cdb2fae3e602fa2c17bc69923bc))
+
+
+
 ## [0.30.1-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.41...v0.30.1-rc.42) (2021-05-28)
 
 

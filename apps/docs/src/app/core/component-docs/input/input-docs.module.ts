@@ -10,8 +10,9 @@ import {
     InputInlineHelpExampleComponent,
     InputStateExampleComponent
 } from './examples/input-examples.component';
-import { FormModule, InlineHelpModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { InlineHelpModule } from '@fundamental-ngx/core/inline-help';
 
 const routes: Routes = [
     {

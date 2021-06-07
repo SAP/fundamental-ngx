@@ -1,10 +1,10 @@
 import { Subject } from 'rxjs';
-import { MenuKeyboardService } from '../menu/menu-keyboard.service';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { Inject, Injectable } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { NestedItemInterface } from './nested-item/nested-item.interface';
 import { NestedListInterface } from './nested-list/nested-list.interface';
-import { KeyUtil } from '../utils/functions';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
 /**

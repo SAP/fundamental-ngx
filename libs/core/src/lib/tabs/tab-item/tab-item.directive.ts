@@ -1,6 +1,7 @@
 import { ContentChild, Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@angular/core';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
-import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
 
 export type TabItemState = 'success' | 'error' | 'warning' | 'information' | 'neutral';
 

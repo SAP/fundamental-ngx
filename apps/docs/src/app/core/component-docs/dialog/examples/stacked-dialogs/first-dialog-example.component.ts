@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core';
+import { Component } from '@angular/core';
+import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { SecondDialogExampleComponent } from './second-dialog-example.component';
 
 @Component({

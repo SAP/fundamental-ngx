@@ -100,7 +100,8 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/fixed-card-layout', name: 'Fixed Card Layout' },
             { url: 'core/flexible-column-layout', name: 'Flexible Column Layout' },
             { url: 'core/layoutPanel', name: 'Layout Panel' },
-            { url: 'core/layoutGrid', name: 'Layout Grid' }
+            { url: 'core/layoutGrid', name: 'Layout Grid' },
+            { url: 'core/resizable-card-layout', name: 'Resizable Card Layout' }
         ];
 
         this.utilities = [

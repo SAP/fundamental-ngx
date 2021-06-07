@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
+import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-date-picker-range-disabled-example',

@@ -1,7 +1,7 @@
 import { Subject } from 'rxjs';
 import { Injectable, Optional } from '@angular/core';
 
-import { RtlService } from '../utils/services/rtl.service';
+import { RtlService } from '@fundamental-ngx/core/utils';
 
 @Injectable()
 export class CalendarService {

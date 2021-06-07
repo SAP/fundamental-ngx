@@ -8,7 +8,7 @@ import {
     ChangeDetectorRef
 } from '@angular/core';
 import { DynamicPageBaseActions } from './dynamic-page-base-actions';
-import { CLASS_NAME } from '../../constants';
+import { DYNAMIC_PAGE_CLASS_NAME } from '../../constants';
 
 
 @Component({
@@ -29,7 +29,7 @@ export class DynamicPageLayoutActionsComponent extends DynamicPageBaseActions im
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.addClassToToolbar(CLASS_NAME.dynamicPageLayoutActionsToolbar, this._elementRef);
-        this.addClassToToolbar(CLASS_NAME.dynamicPageToolbar, this._elementRef);
+        this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageLayoutActionsToolbar, this._elementRef);
+        this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageToolbar, this._elementRef);
     }
 }
