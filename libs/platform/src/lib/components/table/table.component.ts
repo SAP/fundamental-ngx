@@ -405,7 +405,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     get _rowsDraggable(): boolean {
-        return this.isTreeTable 
+        return this.isTreeTable
             && !this._sortRulesMap.size
             && !this._groupRulesMap.size
             && !this._filterRulesMap.size
@@ -831,6 +831,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
+    _isLastFreezableColumn(colIndex: number): boolean {
+        return this._freezableColumns?.includes(this._freezableColumns[colIndex])
+            && !this._freezableColumns.includes(this._freezableColumns[colIndex + 1]);
+    }
+
+    /** @hidden */
     _dragDropStart(): void {
         this._dragDropInProgress = true;
     }
@@ -910,14 +916,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         const dragRowIndex = allRows.findIndex(row => row === dragRow);
         const dragRowChildren = this._findRowChildren(dragRow);
 
-        const rowsToMove = allRows.splice(dragRowIndex, dragRowChildren.length + 1); 
+        const rowsToMove = allRows.splice(dragRowIndex, dragRowChildren.length + 1);
 
         const dropRowIndex = allRows.findIndex(row => row === dropRow);
         const dropRowChildren = this._findRowChildren(dropRow);
 
         const rowsBefore = allRows.slice(0, dropRowIndex + dropRowChildren.length + 1);
         const rowsAfter = allRows.slice(dropRowIndex + dropRowChildren.length + 1);
-            
+
         this._tableRows = [
             ...rowsBefore,
             ...rowsToMove,
