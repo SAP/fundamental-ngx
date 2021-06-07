@@ -1,32 +1,58 @@
+<h4 class="table-example-popin-title">Entire row as navigation</h4>
 <table fd-table>
-    <thead fd-table-header>
+    <thead fd-table-header [noBorderX]="true">
     <tr fd-table-row>
-        <th fd-table-cell fd-table-status-indicator></th>
-        <th fd-table-cell>
-            <fd-checkbox
-                [ngModel]="selectMasterModel"
-                (ngModelChange)="selectMaster($event)"
-            ></fd-checkbox>
-        </th>
         <th fd-table-cell>Column 1</th>
         <th fd-table-cell>Column 2</th>
         <th fd-table-cell>Column 3</th>
         <th fd-table-cell>Date</th>
+        <th fd-table-cell></th>
     </tr>
     </thead>
-    <tbody fd-table-body>
-        <tr *ngFor="let row of tableRows; let i = index" fd-table-row [attr.aria-selected]="row.checked" [navigatable]="row.navigatable">
-            <td fd-table-cell fd-table-status-indicator [status]="row.status"></td>
-            <td fd-table-cell>
-                <fd-checkbox
-                    [ngModel]="tableRows[i].checked"
-                    (ngModelChange)="select(i, $event)"
-                ></fd-checkbox>
-            </td>
+    <tbody fd-table-body [noBorderX]="true">
+        <tr *ngFor="let row of tableRows; let i = index" fd-table-row [attr.aria-selected]="row.checked" (click)="alert(row)"
+        [activable]="true" [hoverable]="true" [navigatable]="row.navigatable" >
             <td fd-table-cell><a fd-link href="#">{{ row.column1 }}</a></td>
             <td fd-table-cell>{{ row.column2 }}</td>
             <td fd-table-cell>{{ row.column3 }}</td>
             <td fd-table-cell>{{ row.date }}</td>
+            <td fd-table-cell [fitContent]="true" [noPadding]="true">
+                <i fd-table-icon [glyph]="getGlyph(row)" [navigation]="row.navigatable" role="presentation"></i>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+
+<h4 class="table-example-popin-title">Row with navigation button</h4>
+<table fd-table>
+    <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell>Column 1</th>
+            <th fd-table-cell>Column 2</th>
+            <th fd-table-cell>Column 3</th>
+            <th fd-table-cell>Column 4</th>
+            <th fd-table-cell></th>
+        </tr>
+    </thead>
+    <tbody fd-table-body>
+        <tr *ngFor="let row of tableRowsAdditional" fd-table-row [hoverable]="true" [navigatable]="row.navigatable">
+            <td fd-table-cell>
+                <a fd-link href="#">{{ row.column1 }}</a>
+            </td>
+            <td fd-table-cell>
+                <p fd-table-text>
+                    {{ row.column2 }}
+                </p>
+            </td>
+            <td fd-table-cell>{{ row.date }}</td>
+            <td fd-table-cell><fd-icon [glyph]="row.type"></fd-icon></td>
+            <td fd-table-cell [fitContent]="true">
+                <button aria-label="navigation" class="fd-button fd-button--transparent" [disabled]="!row.navigatable" [routerLink]="'/core/home'">
+                    <i [ngClass]="getClass()"></i>
+                </button>
+            </td>
         </tr>
     </tbody>
 </table>
@@ -43,7 +69,7 @@
         </thead>
         <tbody fd-table-body>
         <ng-container *ngFor="let fruit of fruits">
-            <tr fd-table-row [main]="true" [activable]="true" [navigatable]="fruit.navigatable"> 
+            <tr fd-table-row [main]="true" [activable]="true" [navigatable]="fruit.navigatable" (click)="alert(fruit)"> 
                 <td fd-table-cell>
                     <p fd-table-text [title]="true">{{fruit.name}}</p>
                     <p fd-table-text>{{fruit.country}}</p>

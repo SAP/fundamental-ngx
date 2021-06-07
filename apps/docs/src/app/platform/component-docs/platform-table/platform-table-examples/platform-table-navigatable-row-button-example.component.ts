@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, AfterViewInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core';
@@ -6,16 +6,15 @@ import {
     TableDataSource,
     TableDataProvider,
     TableState,
-    TableRowSelectionChangeEvent,
     TableComponent
 } from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-platform-table-navigatable-row-example',
-    templateUrl: './platform-table-navigatable-row-example.component.html',
+    selector: 'fdp-platform-table-navigatable-row-button-example',
+    templateUrl: './platform-table-navigatable-row-button-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformTableNavigatableRowExampleComponent implements AfterViewInit {
+export class PlatformTableNavigatableRowButtonExampleComponent implements AfterViewInit {
 
     source: TableDataSource<ExampleItem>;
 
@@ -29,11 +28,8 @@ export class PlatformTableNavigatableRowExampleComponent implements AfterViewIni
     ngAfterViewInit(): void {
         this.table.setNavigatableRowState(0, false);
         this.table.setNavigatableRowState(1, false);
-        this.table.setNavigatableRowState(2, false);
-    }
-
-    onRowSelectionChange(event: TableRowSelectionChangeEvent<ExampleItem>): void {
-        console.log(event);
+        this.table.setRowNavigationTarget(2, '/platform/home');
+        this.table.setRowNavigationTarget(3, '/platform/home');
     }
 }
 
@@ -48,12 +44,10 @@ export interface ExampleItem {
     statusColor?: string;
     date: FdDate;
     verified: boolean;
-    navigatable?: boolean;
 }
 
 /**
  * Table Data Provider Example
- *
  */
  export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     items: ExampleItem[] = [...ITEMS];
@@ -144,28 +138,5 @@ const ITEMS: ExampleItem[] = [
         statusColor: 'informative',
         date: new FdDate(2020, 11, 24),
         verified: false
-    },
-    {
-        name: 'Beam Breaker B-2',
-        description: 'sapien in sapien iaculis congue',
-        price: {
-            value: 332.57,
-            currency: 'NZD'
-        },
-        status: 'No info',
-        date: new FdDate(2020, 10, 23),
-        verified: true
-    },
-    {
-        name: 'Benda Laptop 1408',
-        description: 'suspendisse potenti cras in',
-        price: {
-            value: 243.49,
-            currency: 'CNY'
-        },
-        status: 'Stocked on demand',
-        statusColor: 'informative',
-        date: new FdDate(2020, 9, 22),
-        verified: true
     }
 ];

@@ -43,6 +43,14 @@ export class TableRow<T = any> {
         /**
          * If the row is navigatable
          */
-        public navigatable = true
+        public navigatable = true,
+        /**
+         * If the row has navigation indicator
+         */
+        public hasNavIndicator = false,
+        /**
+         * Navigation target of the row
+         */
+        public navigationTarget: string = ''
     ) {}
 }

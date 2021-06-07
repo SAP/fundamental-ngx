@@ -233,6 +233,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     @Input()
     relationKey: string;
 
+    /** Whether table row has navigation button. */
+    @Input()
+    navigationButton = false;
+    
     /** Event fired when table selection has changed. */
     @Output()
     readonly rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<T>> = new EventEmitter<TableRowSelectionChangeEvent<T>>();
@@ -640,6 +644,36 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     setNavigatableRowState(rowIndex: number, state: boolean): void {
         this.tableRows.toArray()[rowIndex + 1].navigatable = state;
         this._tableRows[rowIndex].navigatable = state;
+        if (!state) {
+            this._tableRows[rowIndex].hasNavIndicator = false;
+        }
+        this._cd.detectChanges();
+    }
+
+    /** Set the navigation indicator property on a row */
+    setRowNavigationIndicator(rowIndex: number, state: boolean): void {
+        if (this._tableRows[rowIndex].navigatable) {
+            this._tableRows[rowIndex].hasNavIndicator = state;
+            if (state) {
+                this.navigationButton = false;
+            }
+        }
+        this._cd.detectChanges();
+    }
+
+    /** Set the navigation target property on a row */
+    setRowNavigationTarget(rowIndex: number, target: string): void {
+        if (this._tableRows[rowIndex].navigatable) {
+            this._tableRows[rowIndex].navigationTarget = target;
+        }
+        this._cd.detectChanges();
+    }
+
+    /** Get corresponding arrow icon for navigation indicator */
+    getGlyph(row: TableRow<T>): string {
+        if (row.hasNavIndicator) {
+            return this._rtl ? 'navigation-left-arrow' : 'navigation-right-arrow';
+        }
     }
 
     /** @hidden
@@ -794,6 +828,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
+    _getNavIndicatorStyles(): { [key: string]: string } { 
+        const key = this._rtl ? 'padding-left' : 'padding-right';
+        return { 'justify-content': 'flex-end', [key]: '5px' };
+    }
+
+    /** @hidden */
     _getRowHeight(): number {
         return ROW_HEIGHT.get(this.contentDensity);
     }
@@ -839,6 +879,22 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     _isTreeRowFirstCell(cellIndex: number, row: TableRow): boolean {
         return cellIndex === 0 && row.type === 'tree';
+    }
+
+    /**  
+     * @hidden
+     * Chech if the cell should contain a navigation button
+    */
+    _showNavButton(cellIndex: number, row: TableRow): boolean {
+        return this.navigationButton && cellIndex === this._visibleColumns.length - 1;
+    }
+
+    /**  
+     * @hidden
+     * Chech if the cell should contain a navigation indicator
+    */
+    _showNavIndicator(cellIndex: number, row: TableRow): boolean {
+        return row.hasNavIndicator && cellIndex === this._visibleColumns.length - 1;
     }
 
     /** @hidden */
@@ -1446,7 +1502,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _getSelectableRows(): TableRow[] {
-        return this._tableRows.filter(({ navigatable, type }) => navigatable && (type === 'item' || type === 'tree'));
+        return this._tableRows.filter(({ type }) => type === 'item' || type === 'tree');
     }
 
     /** @hidden */

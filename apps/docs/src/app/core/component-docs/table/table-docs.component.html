@@ -168,9 +168,11 @@
     Table with Non-navigatable Row
 </fd-docs-section-title>
 <description>
-    A row can be non-navigatable by setting the property <code>[navigatable]="false"</code>, for both regular and Pop In modes.
-    Non-navigatable rows will disable interaction and navigation. <br>
-    To hide the arrow icon, leave the <code>glyph</code> property empty i.e. <code>[glyph]=""</code>, and set <code>[navigation]="false"</code> for the <code>fd-table-icon</code> directive.
+    A row can be non-navigatable by setting the property <code>[navigatable]="false"</code>, for both regular and Pop In modes.<br><br>
+    When an entire row is used for navigation, the navigation indicator will hide when the row becomes non-navigatable.<br>
+    To hide indicator, leave the <code>glyph</code> property empty i.e. <code>[glyph]=""</code>, and set <code>[navigation]="false"</code> for the <code>fd-table-icon</code> directive.<br><br>
+    When a row uses button for navigation, the button will be disabled when the row becomes non-navigatable. <br><br> 
+    Upon navigation event, either the user is taken to a new page, or the event is handled by an implementation such as <code>(click)="myFunction()"</code>
 </description>
 <component-example>
     <fd-table-navigatable-row-example></fd-table-navigatable-row-example>

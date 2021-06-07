@@ -288,6 +288,9 @@
                             [attr.aria-selected]="row.checked"
                             (started)="_dragDropStart()"
                             [navigatable]="row.navigatable"
+                            [hoverable]="row.hasNavIndicator"
+                            [activable]="row.hasNavIndicator"
+                            [routerLink]="row.hasNavIndicator ? row.navigationTarget : '#'"
                         >
                             <!-- Row Selection Cell -->
                             <ng-container [ngSwitch]="selectionMode">
@@ -345,6 +348,22 @@
                                     title="Toggle row"
                                     i18n-title="Toggle row|Toggle tree row children@@platformTableTreeRowToggle"
                                 ></fd-icon>
+
+                                <i 
+                                    *ngIf="_showNavIndicator(colIdx, row)"
+                                    fd-table-icon
+                                    [ngStyle]="_getNavIndicatorStyles()"            
+                                    [ngClass]="_rtl ? 'sap-icon--slim-arrow-left' : 'sap-icon--slim-arrow-right'"
+                                ></i>
+
+                                <button 
+                                    *ngIf="_showNavButton(colIdx, row)"
+                                    class="fd-button fd-button--transparent" 
+                                    [disabled]="!row.navigatable"
+                                    [routerLink]="row.navigationTarget"
+                                >
+                                    <i [ngClass]="_rtl ? 'sap-icon--navigation-left-arrow' : 'sap-icon--navigation-right-arrow'"></i>
+                                </button>
 
                                 <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
                                     <ng-container *ngTemplateOutlet="column.columnCellTemplate; context:{$implicit: row.value}">

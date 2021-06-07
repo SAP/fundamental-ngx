@@ -8,13 +8,12 @@ import { map, takeUntil } from 'rxjs/operators';
     templateUrl: './table-navigatable-row-example.component.html'
 })
 export class TableNavigatableRowExampleComponent implements OnInit, OnDestroy {
-    selectMasterModel = false;
-
     navigationArrow$: Observable<string>;
+
+    navigationButton$: Observable<string>;
 
     tableRows: any[] = [
         {
-            status: '',
             column1: 'user.name@email.com',
             column2: 'Row 1',
             column3: 'Row 1',
@@ -23,7 +22,6 @@ export class TableNavigatableRowExampleComponent implements OnInit, OnDestroy {
             navigatable: true
         },
         {
-            status: 'warning',
             column1: 'user.name@email.com',
             column2: 'Row 2',
             column3: 'Row 2',
@@ -32,12 +30,35 @@ export class TableNavigatableRowExampleComponent implements OnInit, OnDestroy {
             navigatable: false
         },
         {
-            status: '',
             column1: 'user.name@email.com',
             column2: 'Row 3',
             column3: 'Row 3',
             date: '09-07-18',
             checked: false,
+            navigatable: true
+        }
+    ];
+
+    tableRowsAdditional = [
+        {
+            column1: 'user.name@email.com',
+            column2: 'Row1',
+            date: '09-07-18',
+            type: 'search',
+            navigatable: true
+        },
+        {
+            column1: 'user.name@email.com',
+            column2: 'Row 2',
+            date: '09-08-18',
+            type: 'cart',
+            navigatable: false
+        },
+        {
+            column1: 'user.name@email.com',
+            column2: 'Row 3',
+            date: '02-14-18',
+            type: 'calendar',
             navigatable: true
         }
     ];
@@ -76,6 +97,11 @@ export class TableNavigatableRowExampleComponent implements OnInit, OnDestroy {
             takeUntil(this._onDestroy$),
             map((isRtl) => (isRtl ? 'slim-arrow-left' : 'slim-arrow-right'))
         );
+
+        this.navigationButton$ = this._rtlService.rtl.pipe(
+            takeUntil(this._onDestroy$),
+            map((isRtl) => (isRtl ? 'sap-icon--navigation-left-arrow' : 'sap-icon--navigation-right-arrow'))
+        );
     }
 
     ngOnDestroy(): void {
@@ -91,33 +117,15 @@ export class TableNavigatableRowExampleComponent implements OnInit, OnDestroy {
         }
     }
 
-    select(index: number, checked: boolean): void {
-        this.tableRows[index].checked = checked;
-        this.selectMasterModel = this._allSelected();
+    getClass(): string {   
+        let arrowButton: string;
+        this.navigationButton$.subscribe((arrow) => arrowButton = arrow);
+        return arrowButton;
     }
 
-    selectMaster(checked: boolean): void {
-        this.selectMasterModel = checked;
-        if (checked) {
-            this._selectAll();
-        } else {
-            this._deselectAll();
+    alert(row: any): void {
+        if (row.navigatable) {
+            window.alert('Navigation event took place!');
         }
-    }
-
-    private _selectAll(): void {
-        this.tableRows.forEach((row) => {
-            if (row.navigatable) {
-                row.checked = true;
-            }
-        });
-    }
-
-    private _deselectAll(): void {
-        this.tableRows.forEach((row) => (row.checked = false));
-    }
-
-    private _allSelected(): boolean {
-        return this.tableRows.filter((_row) => (_row.navigatable)).every((_row) => _row.checked);
     }
 }
