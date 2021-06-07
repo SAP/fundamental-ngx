@@ -19,9 +19,6 @@
       [class.fd-form-label--colon]="colon"
 >
     <ng-content></ng-content>
-    <ng-container *ngIf="required">
-        <span [attr.aria-label]="'required'"></span>
-    </ng-container>
 </span>
 
 <ng-container *ngIf="inlineHelpPlacement === 'after' && inlineHelpTitle">

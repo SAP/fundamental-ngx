@@ -62,6 +62,10 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     @Input()
     disabled = false;
 
+    /** If it is mandatory field */
+    @Input()
+    required = false;
+
     /** Whether the file input should accept multiple files. */
     @Input()
     multiple = true;

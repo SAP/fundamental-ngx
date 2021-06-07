@@ -33,6 +33,7 @@
                 [attr.id]="inputId"
                 [placeholder]="_placeholder"
                 [attr.aria-label]="timePickerInputLabel"
+                [attr.aria-required]="required"
                 (keyup.enter)="timeInputChanged($event.currentTarget.value)"
             />
         </fd-input-group>

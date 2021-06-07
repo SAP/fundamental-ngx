@@ -98,6 +98,8 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
     /** @hidden */
     ngOnInit(): void {
+        super.ngOnInit();
+
         const providers = this.providers?.size === 0 ? this._multiComboboxConfig.providers : this.providers;
         // if we have both prefer dataSource
         if (!this.dataSource && this.entityClass && providers.has(this.entityClass)) {

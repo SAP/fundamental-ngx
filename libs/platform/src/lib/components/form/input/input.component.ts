@@ -58,6 +58,9 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
     @Input()
     type: InputType = 'text';
 
+    @Input()
+    required: boolean;
+
     /** @hidden */
     @ViewChild('inputElemRef')
     inputElemRef: ElementRef;

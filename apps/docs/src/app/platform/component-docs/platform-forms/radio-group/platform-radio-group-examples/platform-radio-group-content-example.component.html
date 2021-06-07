@@ -1,7 +1,7 @@
 <h3>Use With Reactive Form</h3>
 <p>Compact radio group with 'default' state and with default selection</p>
 <fdp-form-group [formGroup]="form1">
-    <fdp-form-field #ffl1 id="radioc1" rank="1" [required]="true">
+    <fdp-form-field #ffl1 id="radioc1" rank="1">
         <fdp-radio-group name="radioc1" contentDensity="compact" selected="spring" [isInline]="false"
             [formControl]="ffl1.formControl">
             <fdp-radio-button value="winter">Winter</fdp-radio-button>
@@ -45,8 +45,9 @@
 <p>Radio group with disabled button and validation error</p>
 <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
     <fdp-form-group [formGroup]="form4">
-        <fdp-form-field #ffl4 id="radioc4" rank="1" [required]="true">
-            <fdp-radio-group name="radioc4" contentDensity="compact" [isInline]="true" [formControl]="ffl4.formControl">
+        <fdp-form-field #ffl4 id="radioc4" rank="1" [required]="true" label="select your favorite month">
+            <fdp-radio-group name="radioc4" contentDensity="compact" [isInline]="true"
+                ariaLabel="select your favorite month" [formControl]="ffl4.formControl">
                 <fdp-radio-button value="january">January</fdp-radio-button>
                 <fdp-radio-button value="february">February</fdp-radio-button>
                 <fdp-radio-button value="march">March</fdp-radio-button>
