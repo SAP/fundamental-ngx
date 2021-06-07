@@ -77,7 +77,7 @@ jobs:
         with:
           path: dist/libs/core
           key: dist-core-${{ github.run_id }}
-      - run: npx nx build core --prod --with-deps --runner cloud
+      - run: npx nx build core --runner cloud --with-deps
 
   # build platform
   build-platform:
@@ -97,7 +97,7 @@ jobs:
         with:
           path: dist/libs/platform
           key: dist-platform-${{ github.run_id }}
-      - run: npx nx build platform --prod --with-deps --runner cloud
+      - run: npx nx build platform --runner cloud --with-deps
 
 # build platform
   build-docs:
