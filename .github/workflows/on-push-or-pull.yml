@@ -233,10 +233,6 @@ jobs:
         with:
           path: ${{ env.CACHE_NODE_MODULES_PATH }}
           key: node_modules-${{ hashFiles('**/package-lock.json') }}
-      - uses: actions/cache@v2
-        with:
-          path: ${{ env.CACHE_DIST_PATH }}
-          key: dist-${{ github.run_id }}
 
       - name: smoke e2e on firebase
         env:
@@ -249,6 +245,6 @@ jobs:
           CAP_SLUG: ${{ matrix.browser }}
         if: ${{ !needs.firebase_preview.outputs.output_url }}
         run: |
-          npx ng serve --disable-host-check --ssl --no-watch
+          npx ng serve --disable-host-check --ssl --no-watch &
           npx wait-on https://localhost:4200
           TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.node }}
