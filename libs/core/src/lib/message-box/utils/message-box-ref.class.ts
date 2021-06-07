@@ -1,4 +1,4 @@
-import { DialogRefBase } from '../../dialog/base/dialog-ref-base.class';
+import { DialogRefBase } from '@fundamental-ngx/core/dialog';
 import { Injectable } from '@angular/core';
 
 @Injectable()

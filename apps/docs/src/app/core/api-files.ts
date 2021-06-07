@@ -25,6 +25,7 @@ export const API_FILES = {
     avatarGroup: [
         'AvatarGroupComponent',
         'AvatarGroupItemDirective',
+        'AvatarGroupFocusableAvatarDirective',
         'AvatarGroupOverflowBodyDirective',
         'AvatarGroupOverflowItemDirective',
         'AvatarGroupOverflowButtonDirective',
@@ -360,5 +361,9 @@ export const API_FILES = {
         'MessagePageMoreComponent',
         'MessagePageTitleComponent',
         'MessagePageSubtitleComponent'
+    ],
+    resizableCardLayout: [
+        'ResizableCardLayoutComponent',
+        'ResizableCardItemComponent'
     ],
 };

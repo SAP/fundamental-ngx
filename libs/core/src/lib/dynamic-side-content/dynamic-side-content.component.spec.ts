@@ -3,13 +3,13 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
-import { whenStable } from '../utils/tests/when-stable';
+import { whenStable } from '@fundamental-ngx/core/tests';
 
 import { DynamicSideContentModule } from './dynamic-side-content.module';
 import { DynamicSideContentComponent } from './dynamic-side-content.component';
 import { DynamicSideContentSideComponent } from './dynamic-side-content-side.component';
 import { DynamicSideContentMainComponent } from './dynamic-side-content-main.component';
-import { DynamicSideContentPosition, DynamicSideContentSize, CLASS_NAME } from './constants';
+import { DynamicSideContentPosition, DynamicSideContentSize, DYNAMIC_SIDE_CONTENT_CLASS_NAME } from './constants';
 
 @Component({
     template: `
@@ -61,7 +61,7 @@ describe('DynamicSideContent', () => {
 
         it('should add container', () => {
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
-            expect(componentDebugEl.classes[CLASS_NAME.container]).toBeTrue();
+            expect(componentDebugEl.classes[DYNAMIC_SIDE_CONTENT_CLASS_NAME.container]).toBeTrue();
         });
 
         it('should add modifier for position="equalSplit"', () => {
@@ -69,7 +69,7 @@ describe('DynamicSideContent', () => {
             fixture.detectChanges();
 
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
-            expect(componentDebugEl.classes[CLASS_NAME.containerSideEqual]).toBeTrue();
+            expect(componentDebugEl.classes[DYNAMIC_SIDE_CONTENT_CLASS_NAME.containerSideEqual]).toBeTrue();
         });
 
         it('should add modifier for position="bottom"', () => {
@@ -77,7 +77,7 @@ describe('DynamicSideContent', () => {
             fixture.detectChanges();
 
             const componentDebugEl = fixture.debugElement.query(By.directive(DynamicSideContentComponent));
-            expect(componentDebugEl.classes[CLASS_NAME.containerSideBelow]).toBeTrue();
+            expect(componentDebugEl.classes[DYNAMIC_SIDE_CONTENT_CLASS_NAME.containerSideBelow]).toBeTrue();
         });
 
         it('should add modifier for size option', () => {
@@ -85,19 +85,19 @@ describe('DynamicSideContent', () => {
 
             host.size = 'sm';
             fixture.detectChanges();
-            expect(componentDebugEl.classes[CLASS_NAME.containerSizeSm]).toBeTrue();
+            expect(componentDebugEl.classes[DYNAMIC_SIDE_CONTENT_CLASS_NAME.containerSizeSm]).toBeTrue();
 
             host.size = 'md';
             fixture.detectChanges();
-            expect(componentDebugEl.classes[CLASS_NAME.containerSizeMd]).toBeTrue();
+            expect(componentDebugEl.classes[DYNAMIC_SIDE_CONTENT_CLASS_NAME.containerSizeMd]).toBeTrue();
 
             host.size = 'lg';
             fixture.detectChanges();
-            expect(componentDebugEl.classes[CLASS_NAME.containerSizeMd]).toBeTrue();
+            expect(componentDebugEl.classes[DYNAMIC_SIDE_CONTENT_CLASS_NAME.containerSizeMd]).toBeTrue();
 
             host.size = 'xl';
             fixture.detectChanges();
-            expect(componentDebugEl.classes[CLASS_NAME.containerSizeXl]).toBeTrue();
+            expect(componentDebugEl.classes[DYNAMIC_SIDE_CONTENT_CLASS_NAME.containerSizeXl]).toBeTrue();
         });
     });
 

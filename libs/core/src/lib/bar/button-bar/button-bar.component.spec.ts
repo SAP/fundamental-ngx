@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ButtonBarComponent } from './button-bar.component';
 import { ButtonModule } from '../../button/button.module';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
 
 describe('ButtonBarComponent', () => {
     let component: ButtonBarComponent;

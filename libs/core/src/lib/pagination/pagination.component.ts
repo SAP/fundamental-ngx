@@ -18,9 +18,9 @@ import {
 import { coerceNumberProperty, coerceArray } from '@angular/cdk/coercion';
 import { Subscription } from 'rxjs';
 
-import { KeyUtil } from '../utils/functions';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { PaginationService } from './pagination.service';
-import { RtlService } from '../utils/services/rtl.service';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { Pagination } from './pagination.model';
 
 /** Constant representing the default number of items per page. */

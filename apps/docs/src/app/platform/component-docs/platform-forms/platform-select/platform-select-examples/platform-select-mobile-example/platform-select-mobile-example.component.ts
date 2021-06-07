@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { MobileModeConfig } from '@fundamental-ngx/core';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { FdpSelectionChangeEvent, OptionItem} from '@fundamental-ngx/platform';
 
 export class Fruit {
@@ -42,10 +42,10 @@ export class PlatformSelectMobileExampleComponent {
     mobileConfig: MobileModeConfig = {
         title: 'Title',
         hasCloseButton: true,
-        dialogConfig: { 
+        dialogConfig: {
             width: '360px',
-            height: '440px' 
-            } 
+            height: '440px'
+            }
     };
 
     onSelect(item: FdpSelectionChangeEvent): void {

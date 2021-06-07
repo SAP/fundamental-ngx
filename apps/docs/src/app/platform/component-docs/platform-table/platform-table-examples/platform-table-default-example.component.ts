@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { FdDate } from '@fundamental-ngx/core';
+import { FdDate } from '@fundamental-ngx/core/datetime';
 import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx/platform';
 
 @Component({

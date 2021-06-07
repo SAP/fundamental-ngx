@@ -6,7 +6,7 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { Placement, PopoverFillMode } from '../../popover/popover-position/popover-position';
+import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 
 @Component({

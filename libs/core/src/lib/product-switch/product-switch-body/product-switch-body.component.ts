@@ -9,8 +9,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ProductSwitchItem } from './product-switch.item';
-import { FdDropEvent } from '../../utils/drag-and-drop/dnd-list/dnd-list.directive';
-import { KeyUtil } from '../../utils/functions';
+import { FdDropEvent } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 
 @Component({

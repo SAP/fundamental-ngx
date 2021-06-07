@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { ActionSheetComponent, MessageToastService } from '@fundamental-ngx/core';
+import { ActionSheetComponent } from '@fundamental-ngx/core/action-sheet';
+import { MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 @Component({
     selector: 'fd-action-sheet-compact-example',

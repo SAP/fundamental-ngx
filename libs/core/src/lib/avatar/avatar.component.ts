@@ -8,8 +8,7 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, ColorAccent, CssClassBuilder, getRandomColorAccent, Size } from '../utils/public_api';
-import { ANY_LANGUAGE_LETTERS_REGEX } from '../utils/consts';
+import { ANY_LANGUAGE_LETTERS_REGEX, ColorAccent, Size, applyCssClass, getRandomColorAccent, CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 let avatarUniqueId = 0;
 

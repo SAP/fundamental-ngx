@@ -5,13 +5,13 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { API_FILES } from '../../api-files';
 import { TitleHeaderComponent } from './title-header/title-header.component';
 import { TitleDocsComponent } from './title-docs.component';
-import { TitleModule } from '@fundamental-ngx/core';
 import {
     TitleElisionExampleComponent,
     TitleSemanticExampleComponent,
     TitleVisualExampleComponent,
     TitleWrappingExampleComponent
 } from './examples/title-examples.component';
+import { TitleModule } from '@fundamental-ngx/core/title';
 
 const routes: Routes = [
     {

@@ -19,20 +19,20 @@ import {
     ContentChildren,
     ChangeDetectorRef
 } from '@angular/core';
-import { PopoverComponent } from '../popover/popover.component';
-import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.component';
 import { ActionSheetControlComponent } from './action-sheet-control/action-sheet-control.component';
 import {
     FocusEscapeDirection,
     KeyboardSupportService
-} from '../utils/services/keyboard-support/keyboard-support.service';
+} from '@fundamental-ngx/core/utils';
 import { ActionSheetItemComponent, ActionSheetClickEvent } from './action-sheet-item/action-sheet-item.component';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { Subject, merge, Subscription } from 'rxjs';
 import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-mobile.component';
-import { ContentDensityService } from '../utils/public_api';
-import { Placement } from '../popover/popover-position/popover-position';
+import { Placement } from '@fundamental-ngx/core/shared';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fd-action-sheet',
