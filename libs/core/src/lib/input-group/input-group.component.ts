@@ -160,9 +160,15 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     /** @hidden */
     inputTextValue: string;
 
+    /** @hidden */
     _inputId = `fd-input-group-input-id-${addOnInputRandomId++}`;
+
+    /** @hidden */
     _addOnNonButtonId = `fd-input-group-non-button-id-${addOnNonButtonRandomId++}`;
+
+    /** @hidden */
     _addOnButtonId = `fd-input-group-button-id-${addOnButtonRandomId++}`;
+
     /**
      * Whether or not the input coup is in the shellbar. Only for internal use by combobox component
      * @hidden
