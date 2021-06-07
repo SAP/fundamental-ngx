@@ -130,16 +130,20 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      */
 
     @Input()
-    get state(): Status {
+    get datepickerState(): Status {
+
         if (this.fdDatePickerComponent?._isInvalidDateInput) {
             return 'error';
         }
-        return this.status || this._state;
+
+        return this.status || this._datepickerState;
     }
 
-    set state(state: Status) {
-        this._state = state ? state : 'default';
+    set datepickerState(state: Status) {
+        this._datepickerState = state ? state : 'default';
     }
+
+    _datepickerState: Status;
 
     /**
      * Whether AddOn Button should be focusable, set to true by default
@@ -277,12 +281,12 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
         this.onTouched();
 
         if (this.type === 'single' && !this.value && !this.allowNull) {
-            this.state = 'error'; // null value in not allowNull should throw error
+            this.datepickerState = 'error'; // null value in not allowNull should throw error
         } else if (this.type === 'range' && !this.allowNull) {
             const dateRange = this.value as DateRange<D>;
-            this.state = dateRange.start ? 'default' : 'error';
+            this.datepickerState = dateRange.start ? 'default' : 'error';
         } else {
-            this.state = undefined; // resetting to default state
+            this.datepickerState = undefined; // resetting to default state
         }
 
         this.stateChanges.next('date picker: handleDateInputChange');

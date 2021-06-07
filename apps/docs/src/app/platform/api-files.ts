@@ -8,6 +8,7 @@ export const API_FILES = {
     actionbar: ['actionbarcomponent'],
     button: ['ButtonComponent'],
     checkbox: ['CheckboxComponent'],
+    formGenerator: ['FormGeneratorComponent', 'FormGeneratorService', 'DynamicFormControlDirective', 'DynamicFormControlFieldDirective'],
     checkboxGroup: ['CheckboxGroupComponent'],
     datePicker: ['PlatformDatetimePickerComponent'],
     datetimePicker: ['PlatformDatetimePickerComponent'],
