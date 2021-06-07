@@ -304,22 +304,26 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }
     }
 
+    _isRtl(): boolean {
+        return this._rtlService?.rtl.getValue();
+    }
+
     /** @hidden */
     @HostListener('keydown.arrowright', ['$event'])
     onKeydownArrowRight(event: KeyboardEvent): void {
         event.preventDefault();
+        this._isRtl() ? this.previous() : this.next();
     }
 
     /** @hidden */
     @HostListener('keydown.arrowleft', ['$event'])
     onKeydownArrowLeft(event: KeyboardEvent): void {
         event.preventDefault();
+        this._isRtl() ? this.next() : this.previous();
     }
 
     /** Transitions to the previous slide in the carousel. */
-    previous($event: MouseEvent | KeyboardEvent): void {
-        $event.stopPropagation()
-
+    previous(): void {
         if (!this.loop && this.currentActiveSlidesStartIndex <= 0) {
             return;
         }
@@ -343,9 +347,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     }
 
     /** Transitions to the next slide in the carousel. */
-    next($event: MouseEvent | KeyboardEvent): void {
-        $event.stopPropagation()
-
+    next(): void {
         if (!this.loop && this.currentActiveSlidesStartIndex >= this.pageIndicatorsCountArray.length - 1) {
             return;
         }
