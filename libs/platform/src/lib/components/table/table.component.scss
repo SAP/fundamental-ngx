@@ -189,7 +189,7 @@
             &.fd-dnd-on-drag {
                 &.fd-dnd-placeholder {
                     padding-left: 2rem;
-    
+
                     @include fd-rtl() {
                         padding-left: 0.5rem;
                     }
@@ -199,7 +199,7 @@
 
         .fd-table__cell {
             @include fd-table-nested-cell-padding(20);
-        
+
             &.fdp-table__cell--tree-no-expand {
                 @include fd-table-nested-cell-padding(20, false, true);
             }
@@ -211,27 +211,27 @@
             .fd-table__cell {
                 &[data-nesting-level='0'] {
                     padding-left: 0;
-    
+
                     @include fd-rtl() {
                         padding-left: 0.5rem;
-                        padding-right: 0.5;
+                        padding-right: 0;
                     }
                 }
-    
+
                 &:hover {
                     cursor: grab;
                 }
-        
+
                 &:active {
                     cursor: grabbing;
                 }
             }
         }
-        
+
         .fd-replace-indicator {
             top: auto;
         }
-        
+
         .fd-table__row {
             .fd-replace-indicator {
                 height: 2.75rem;
@@ -377,6 +377,10 @@
     .fd-table__empty-table-message {
         padding: 1rem;
         text-align: center;
+    }
+
+    .fd-dnd-item {
+        position: inherit;
     }
 }
 
