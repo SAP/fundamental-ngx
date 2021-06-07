@@ -142,6 +142,7 @@
     "@commitlint/config-conventional": "12.1.4",
     "@commitlint/travis-cli": "12.1.4",
     "@nrwl/cli": "11.1.5",
+    "@nrwl/nx-cloud": "12.1.8",
     "@nrwl/schematics": "8.12.11",
     "@nrwl/tao": "11.5.1",
     "@nrwl/workspace": "11.5.2",
