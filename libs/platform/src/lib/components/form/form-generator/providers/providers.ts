@@ -1,7 +1,7 @@
 import { forwardRef, Provider } from '@angular/core';
-import { FormFieldComponent } from '@fundamental-ngx/platform';
 import { FormField } from '../../form-field';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../../form-group/constants';
+import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
 
 export const dynamicFormFieldProvider: Provider = {
     provide: FormField,

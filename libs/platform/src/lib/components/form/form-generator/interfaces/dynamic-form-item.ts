@@ -1,8 +1,9 @@
 import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
 import { SafeUrl } from '@angular/platform-browser';
-import { HintPlacement, LabelLayout, SelectItem } from '@fundamental-ngx/platform';
-import { ContentDensity } from '@fundamental-ngx/platform';
-import { InputType } from '@fundamental-ngx/platform';
+import { SelectItem } from '../../../../domain/data-model';
+import { ContentDensity } from '../../form-control';
+import { HintPlacement, LabelLayout } from '../../form-options';
+import { InputType } from '../../input/input.component';
 
 export interface InquierChoiseItem {
     name: string;

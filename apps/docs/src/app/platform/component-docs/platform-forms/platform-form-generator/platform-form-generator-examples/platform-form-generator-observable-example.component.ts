@@ -50,7 +50,7 @@ export class PlatformFormGeneratorObservableExampleComponent implements OnInit {
             message: 'Password',
             validators: [Validators.required],
             validate: (value: string) => {
-                const passwordPattern = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$');
+                const passwordPattern = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\\w\\s]).{8,}$');
                 return passwordPattern.test(value) ? true : 'Minimum eight characters, at least one letter, one number and one special character'
             },
             guiOptions: {
