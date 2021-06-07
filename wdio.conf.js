@@ -3,6 +3,103 @@ module.exports = require('./wdio.conf.ts');*/
 const { join } = require('path');
 require('ts-node').register({ transpileOnly: true });
 AllureReporter = require('@wdio/allure-reporter').default;
+
+const allCapabilities = [
+    // {
+    //     browserName: 'internet explorer',
+    //     browserVersion: 'latest',
+    //     platformName: 'Windows 10',
+    //     'sauce:options': {
+    //         screenResolution: '1920x1080',
+    //         name: 'e2e-win-internet-explorer ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+    //         requireWindowFocus: true,
+    //     }
+    // },
+    {
+        slug: 'msedge',
+        browserName: 'MicrosoftEdge',
+        platformName: 'Windows 10',
+        browserVersion: 'latest',
+        acceptInsecureCerts: true,
+        'sauce:options': {
+            screenResolution: '1920x1080',
+            name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        }
+    },
+    {
+        slug: 'msedge',
+        browserName: 'MicrosoftEdge',
+        platformName: 'macOS 10.15',
+        browserVersion: 'latest',
+        acceptInsecureCerts: true,
+        'sauce:options': {
+            screenResolution: '1920x1440',
+            name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        }
+    },
+    {
+        slug: 'firefox',
+        browserName: 'firefox',
+        platformName: 'Windows 10',
+        browserVersion: 'latest',
+        acceptInsecureCerts: true,
+        'sauce:options': {
+            name: 'e2e-win-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+            screenResolution: '1920x1080',
+        }
+    },
+    {
+        slug: 'firefox',
+        browserName: 'firefox',
+        platformName: 'macOS 10.15',
+        browserVersion: 'latest',
+        acceptInsecureCerts: true,
+        'sauce:options': {
+            screenResolution: '1920x1440',
+            name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        }
+    },
+    {
+        slug: 'chrome',
+        browserName: 'chrome',
+        platformName: 'Windows 10',
+        browserVersion: 'latest',
+        acceptInsecureCerts: true,
+        'sauce:options': {
+            screenResolution: '1920x1080',
+            name: 'e2e-win-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+        }
+    },
+    {
+        slug: 'chrome',
+        browserName: 'chrome',
+        platformName: 'macOS 10.15',
+        browserVersion: 'latest',
+        acceptInsecureCerts: true,
+        'sauce:options': {
+            name: 'e2e-MAC-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+            screenResolution: '1920x1440',
+        }
+    },
+
+    // {
+    //     browserName: 'safari',
+    //     browserVersion: '13.1',
+    //     platformName: 'macOS 10.15',
+    //     'sauce:options': {
+    //         screenResolution: '1920x1440',
+    //         name: 'e2e-MAC-safari ' + process.env.TRAVIS_BUILD_ID,
+    //     }
+    // }
+]
+const capabilities = (process.env.CAP_SLUG
+    ? allCapabilities.filter( item => item.slug === process.env.CAP_SLUG)
+    : allCapabilities)
+    .map(item => {
+        delete item.slug;
+        return item;
+    });
+
 exports.config = {
     //
     // ====================
@@ -25,12 +122,11 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-         './e2e/wdio/**/*.e2e-spec.ts',
+        './e2e/wdio/**/*.e2e-spec.ts',
     ],
     // Patterns to exclude.
     exclude: [
         './e2e/wdio/**/checkbox-group.e2e-spec.ts',
-        './e2e/wdio/core/**/dialog.e2e-spec.ts',
     ],
     suites: {
         platformA: [
@@ -89,93 +185,13 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 20,
+    maxInstances: 7,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [
-        // {
-        //     browserName: 'internet explorer',
-        //     browserVersion: 'latest',
-        //     platformName: 'Windows 10',
-        //     'sauce:options': {
-        //         screenResolution: '1920x1080',
-        //         name: 'e2e-win-internet-explorer ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-        //         requireWindowFocus: true,
-        //     }
-        // },
-        {
-            browserName: 'MicrosoftEdge',
-            browserVersion: 'latest',
-            platformName: 'Windows 10',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1080',
-                name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
-        {
-            browserName: 'firefox',
-            browserVersion: 'latest',
-            platformName: 'Windows 10',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                name: 'e2e-win-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-                screenResolution: '1920x1080',
-            }
-        },
-        {
-            browserName: 'chrome',
-            browserVersion: 'latest',
-            platformName: 'Windows 10',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1080',
-                name: 'e2e-win-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
-        {
-            browserName: 'chrome',
-            platformName: 'macOS 10.15',
-            browserVersion: 'latest',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                name: 'e2e-MAC-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-                screenResolution: '1920x1440',
-            }
-        },
-        {
-            browserName: 'firefox',
-            platformName: 'macOS 10.15',
-            browserVersion: 'latest',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1440',
-                name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
-        {
-            browserName: 'MicrosoftEdge',
-            platformName: 'macOS 10.15',
-            browserVersion: 'latest',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1440',
-                name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
-        // {
-        //     browserName: 'safari',
-        //     browserVersion: '13.1',
-        //     platformName: 'macOS 10.15',
-        //     'sauce:options': {
-        //         screenResolution: '1920x1440',
-        //         name: 'e2e-MAC-safari ' + process.env.TRAVIS_BUILD_ID,
-        //     }
-        // }
-    ],
+    capabilities,
     //
     // ===================
     // Test Configurations
@@ -207,7 +223,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'https://sap.dev:4200/',
+    // baseUrl: 'https://sap.dev:4200/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 30000,

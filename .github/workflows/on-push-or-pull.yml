@@ -235,14 +235,14 @@ jobs:
           key: node_modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: smoke e2e on firebase
-#        env:
-#          CAP_SLUG: ${{ matrix.browser }}
+        env:
+          CAP_SLUG: ${{ matrix.browser }}
         if: ${{ needs.firebase_preview.outputs.output_url }}
         run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.node }} --baseUrl=${{ needs.firebase_preview.outputs.output_url }}/fundamental-ngx
 
       - name: smoke e2e on local
-#        env:
-#          CAP_SLUG: ${{ matrix.browser }}
+        env:
+          CAP_SLUG: ${{ matrix.browser }}
         if: ${{ !needs.firebase_preview.outputs.output_url }}
         run: |
           npx ng serve --disable-host-check --ssl --no-watch &
