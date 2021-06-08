@@ -1,8 +1,9 @@
 <form [formGroup]="customForm" class="flex-form">
     <div fd-form-item>
-        <label fd-form-label>TimePicker</label>
+        <label fd-form-label required="true">TimePicker</label>
         <fd-time-picker formControlName="time"
                         [state]="isValid() ? 'success' : 'error'"
+                        required="true"
                         [message]="isValid() ? 'Valid Time' : 'Invalid Time'">
         </fd-time-picker>
         <br />
