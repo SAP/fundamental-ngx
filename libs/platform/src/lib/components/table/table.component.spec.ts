@@ -3,6 +3,8 @@ import { Observable, of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Component, DebugElement, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { ListModule, PopoverModule, RtlService, TableModule, CheckboxModule } from '@fundamental-ngx/core';
 
@@ -60,7 +62,16 @@ describe('TableComponent internal', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [FormsModule, ReactiveFormsModule, TableModule, CheckboxModule, PopoverModule, ListModule],
+                imports: [
+                            FormsModule, 
+                            ReactiveFormsModule, 
+                            TableModule, 
+                            CheckboxModule, 
+                            PopoverModule, 
+                            ListModule, 
+                            RouterModule, 
+                            RouterTestingModule
+                         ],
                 declarations: [TableComponent, TableScrollerDirective, TableScrollableDirective],
                 providers: [RtlService]
             }).compileComponents();
@@ -232,7 +243,7 @@ describe('TableComponent internal', () => {
         beforeEach(
             waitForAsync(() => {
                 TestBed.configureTestingModule({
-                    imports: [PlatformTableModule, PlatformButtonModule],
+                    imports: [PlatformTableModule, PlatformButtonModule, RouterModule, RouterTestingModule],
                     declarations: [TableHostComponent],
                     providers: [RtlService]
                 }).compileComponents();
@@ -728,7 +739,7 @@ describe('TableComponent internal', () => {
         beforeEach(
             waitForAsync(() => {
                 TestBed.configureTestingModule({
-                    imports: [PlatformTableModule],
+                    imports: [PlatformTableModule, RouterModule, RouterTestingModule],
                     declarations: [TableHostComponent],
                     providers: [RtlService]
                 }).compileComponents();
@@ -819,7 +830,7 @@ describe('TableComponent internal', () => {
         beforeEach(
             waitForAsync(() => {
                 TestBed.configureTestingModule({
-                    imports: [PlatformTableModule],
+                    imports: [PlatformTableModule, RouterModule, RouterTestingModule],
                     declarations: [TableHostComponent],
                     providers: [RtlService]
                 }).compileComponents();
@@ -993,7 +1004,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
         beforeEach(
             waitForAsync(() => {
                 TestBed.configureTestingModule({
-                    imports: [PlatformTableModule],
+                    imports: [PlatformTableModule, RouterModule, RouterTestingModule],
                     declarations: [TableHostComponent],
                     providers: [RtlService]
                 }).compileComponents();
