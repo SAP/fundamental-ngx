@@ -158,7 +158,8 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
     @applyCssClass
     buildComponentCssClass(): string[] {
         return [
-            this.dialogConfig.hasBackdrop ? 'fd-dialog' : '',
+            this.dialogConfig.hasBackdrop ? 'fd-dialog' : 'fd-dialog__no-backdrop',
+            this.dialogConfig.container !== 'body' ? 'fd-dialog__targeted' : '',
             this.showDialogWindow ? 'fd-dialog--active' : '',
             this._class,
             this.dialogConfig.backdropClass ? this.dialogConfig.backdropClass : ''
