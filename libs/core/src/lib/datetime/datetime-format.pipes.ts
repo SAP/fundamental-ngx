@@ -1,6 +1,6 @@
 import { Inject, Optional, Pipe, PipeTransform } from '@angular/core';
-import { DATE_TIME_FORMATS, DateTimeFormats } from '../../datetime/datetime-formats';
-import { DatetimeAdapter } from '../../datetime/datetime-adapter';
+import { DATE_TIME_FORMATS, DateTimeFormats } from './datetime-formats';
+import { DatetimeAdapter } from './datetime-adapter';
 
 @Pipe({
     name: 'dateFormat'

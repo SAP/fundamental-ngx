@@ -5,7 +5,6 @@ import { SearchHighlightPipe } from './search-highlight.pipe';
 import { TwoDigitsPipe } from './two-digits.pipe';
 import { ListGroupPipe } from './list-group.pipe';
 import { SafePipe } from './safe.pipe';
-import { DateFormatPipe, DateFromNowPipe, DateTimeFormatPipe } from './dateFormat.pipes';
 
 @NgModule({
     declarations: [
@@ -14,19 +13,13 @@ import { DateFormatPipe, DateFromNowPipe, DateTimeFormatPipe } from './dateForma
         TwoDigitsPipe,
         ListGroupPipe,
         SafePipe,
-        DateFormatPipe,
-        DateTimeFormatPipe,
-        DateFromNowPipe
     ],
     exports: [
         DisplayFnPipe,
         SearchHighlightPipe,
         TwoDigitsPipe,
         ListGroupPipe,
-        SafePipe,
-        DateFormatPipe,
-        DateTimeFormatPipe,
-        DateFromNowPipe
+        SafePipe
     ]
 })
 export class PipeModule {}
