@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { NotificationHeaderComponent } from './notification-header.component';
-import { whenStable } from '../../utils/tests';
+import { whenStable } from '@fundamental-ngx/core/tests';
 import { ButtonModule } from '../../button/button.module';
 
 describe('NotificationHeaderComponent', () => {

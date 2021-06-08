@@ -7,7 +7,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { KeyUtil } from '../utils/functions';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { TAB } from '@angular/cdk/keycodes';
 
 export type BusyIndicatorSize = 's' | 'm' | 'l';

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { DatetimeAdapter, FdDate, SpecialDayRule } from '@fundamental-ngx/core';
+import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
+import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 
 @Component({
     selector: 'fd-calendar-special-day-example',

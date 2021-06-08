@@ -8,7 +8,7 @@ import { DragAndDropModule } from '../../utils/drag-and-drop/drag-and-drop.modul
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Component, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { createKeyboardEvent } from '../../utils/tests/event-objects';
+import { createKeyboardEvent } from '@fundamental-ngx/core/tests';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 
 @Component({

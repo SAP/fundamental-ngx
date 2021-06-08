@@ -86,8 +86,10 @@ describe('Thumbnail field', function() {
     });
 
     it('should be able to close gallery popup', () => {
+        scrollIntoView(verticalGalleryImages, 4);
         waitForElDisplayed(verticalGalleryImages, 4);
         clickWithOption(verticalGalleryImages, 4, 5000, {x: 10});
+        scrollIntoView(galleryDialog);
         waitForElDisplayed(galleryDialog);
         click(galleryDialogCloseButton);
 
@@ -120,7 +122,7 @@ describe('Thumbnail field', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             thumbnailPage.saveExampleBaselineScreenshot();
-            expect(thumbnailPage.compareWithBaseline()).toBeLessThan(3);
+            expect(thumbnailPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

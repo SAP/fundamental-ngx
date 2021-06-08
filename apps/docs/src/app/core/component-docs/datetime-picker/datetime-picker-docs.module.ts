@@ -1,13 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {
-    SegmentedButtonModule,
-    FdDatetimeModule,
-    DatetimePickerModule,
-    FormModule,
-    InputGroupModule,
-    SelectModule
-} from '@fundamental-ngx/core';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -21,6 +13,12 @@ import { DatetimeFormExampleComponent } from './examples/datetime-form-example/d
 import { DatetimePickerAllowNullExampleComponent } from './examples/datetime-allow-null-example/datetime-allow-null-example.component';
 import { DatetimeDisabledExampleComponent } from './examples/datetime-disabled-example/datetime-disabled-example.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { SelectModule } from '@fundamental-ngx/core/select';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 
 const routes: Routes = [
     {

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ToolbarModule, ObjectMarkerModule, ObjectStatusModule } from '@fundamental-ngx/core';
 import { PlatformListModule, ObjectListItemModule, PlatformButtonModule, PlatformObjectStatusModule, PlatformMenuModule } from '@fundamental-ngx/platform';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -17,6 +16,9 @@ import { PlatformObjectListItemBorderLessExampleComponent } from './platform-obj
 import { PlatformObjectListItemWithRowSelectionExampleComponent } from './platform-object-list-item-examples/platform-object-list-item-with-row-selection-example.component';
 import { PlatformObjectListItemWithRowNavigationExampleComponent } from './platform-object-list-item-examples/platform-object-list-item-with-row-navigation-example.component';
 import { PlatformObjectListItemWithRowSelectionAndNavigationExampleComponent } from './platform-object-list-item-examples/platform-object-list-item-with-row-selection-and-navigation-example.component';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 
 
 const routes: Routes = [

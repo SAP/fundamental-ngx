@@ -58,6 +58,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/menu', name: 'Menu' },
             { url: 'core/message-box', name: 'Message Box' },
             { url: 'core/message-strip', name: 'Message Strip' },
+            { url: 'core/message-page', name: 'Message Page' },
             { url: 'core/message-toast', name: 'Message Toast' },
             { url: 'core/multi-input', name: 'Multi Input' },
             { url: 'core/notification', name: 'Notification' },
@@ -99,7 +100,8 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/fixed-card-layout', name: 'Fixed Card Layout' },
             { url: 'core/flexible-column-layout', name: 'Flexible Column Layout' },
             { url: 'core/layoutPanel', name: 'Layout Panel' },
-            { url: 'core/layoutGrid', name: 'Layout Grid' }
+            { url: 'core/layoutGrid', name: 'Layout Grid' },
+            { url: 'core/resizable-card-layout', name: 'Resizable Card Layout' }
         ];
 
         this.utilities = [

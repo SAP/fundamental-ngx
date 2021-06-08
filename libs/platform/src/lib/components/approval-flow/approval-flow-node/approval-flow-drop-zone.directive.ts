@@ -7,7 +7,8 @@ import { Directive, ElementRef, Input } from '@angular/core';
     exportAs: 'fdp-approval-flow-drop-zone'
 })
 export class ApprovalFlowDropZoneDirective {
-    @Input() placement: 'before'|'after'|'blank';
+    @Input() placement: 'before'| 'after';
+
     active = false;
 
     constructor(private elRef: ElementRef) {}

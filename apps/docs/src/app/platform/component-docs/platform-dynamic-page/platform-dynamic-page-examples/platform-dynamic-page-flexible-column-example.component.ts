@@ -1,10 +1,12 @@
-import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
-import { FlexibleColumnLayout, BreadcrumbComponent } from '@fundamental-ngx/core';
+import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { BreadcrumbComponent } from '@fundamental-ngx/core/breadcrumb';
+import { FlexibleColumnLayout } from '@fundamental-ngx/core/flexible-column-layout';
 import {
     DynamicPageCollapseChangeEvent,
     DynamicPageComponent,
     DynamicPageTabChangeEvent
 } from '@fundamental-ngx/platform';
+import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
 
 @Component({
     selector: 'fdp-platform-dynamic-page-flexible-column-example',
@@ -12,7 +14,7 @@ import {
     styleUrls: ['./platform-dynamic-page-flexible-column-example.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformDynamicPageFlexibleColumnExampleComponent {
+export class PlatformDynamicPageFlexibleColumnExampleComponent implements OnDestroy {
     /**
      * documentation related property
      * provides access to the HTML element with "overlay" reference
@@ -47,7 +49,10 @@ export class PlatformDynamicPageFlexibleColumnExampleComponent {
      */
     localLayout = 'OneColumnStartFullScreen';
 
-    constructor(private _cd: ChangeDetectorRef) {}
+    constructor(
+        private _cd: ChangeDetectorRef,
+        private _overflowHandlingService: PlatformDynamicPagePageOverflowService
+    ) {}
 
     onCollapseChange(event: DynamicPageCollapseChangeEvent): void {
         console.log('collapse changed');
@@ -74,7 +79,7 @@ export class PlatformDynamicPageFlexibleColumnExampleComponent {
     openPage(): void {
         this.fullscreen = true;
         this.overlay.nativeElement.style.width = '100%';
-        document.getElementById('page-content').style.overflowY = 'hidden'; // hide the underlying page scrollbars
+        this._overflowHandlingService.isExampleOpened.next(true);
     }
 
     /**
@@ -83,9 +88,13 @@ export class PlatformDynamicPageFlexibleColumnExampleComponent {
      */
     closePage(event: Event): void {
         event.stopPropagation();
+        this.resetPageActions();
+    }
+
+    resetPageActions(): void {
         this.fullscreen = false;
         this.overlay.nativeElement.style.width = '0%';
-        document.getElementById('page-content').style.overflowY = 'auto';
+        this._overflowHandlingService.isExampleOpened.next(false);
     }
 
     onTabChanged(event: DynamicPageTabChangeEvent): void {
@@ -102,5 +111,9 @@ export class PlatformDynamicPageFlexibleColumnExampleComponent {
         setTimeout(() => {
             this.breadCrumbComponent.onResize();
         }, 800);
+    }
+
+    ngOnDestroy(): void {
+        this.resetPageActions();
     }
 }

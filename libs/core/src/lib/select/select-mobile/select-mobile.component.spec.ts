@@ -6,9 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SelectComponent } from '../select.component';
 import { SelectMobileModule } from './select-mobile.module';
 import { SelectModule } from '../select.module';
-import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
-import { whenStable } from '../../utils/tests/when-stable';
-import { getMobileModeViewElements, MOBILE_CONFIG_TEST_TOKEN } from '../../utils/tests';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { whenStable } from '@fundamental-ngx/core/tests';
+import { getMobileModeViewElements, MOBILE_CONFIG_TEST_TOKEN } from '@fundamental-ngx/core/tests';
 
 const MOBILE_CONFIG: MobileModeConfig = { title: 'TITLE', hasCloseButton: true };
 
