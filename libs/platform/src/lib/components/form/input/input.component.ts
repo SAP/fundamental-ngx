@@ -58,6 +58,11 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
     @Input()
     type: InputType = 'text';
 
+    /**
+     * @hidden ,input field is used by other components like input-group.
+     * input group will not be able to required value to input, untill required is Input property in input.
+     */
+    /** If it is mandatory field */
     @Input()
     required: boolean;
 
