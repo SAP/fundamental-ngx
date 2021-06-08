@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DialogModule, DialogService, FormModule, InputGroupModule, ListModule } from '@fundamental-ngx/core';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
 import { DialogDocsHeaderComponent } from './dialog-docs-header/dialog-docs-header.component';
@@ -14,6 +13,10 @@ import {
     SecondDialogExampleComponent
 } from './examples';
 import { A11yModule } from '@angular/cdk/a11y';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 
 const routes: Routes = [
     {

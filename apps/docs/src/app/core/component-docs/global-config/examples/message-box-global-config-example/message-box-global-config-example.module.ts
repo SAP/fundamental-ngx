@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MESSAGE_BOX_DEFAULT_CONFIG, MessageBoxConfig } from '@fundamental-ngx/core';
+import { MessageBoxConfig, MESSAGE_BOX_DEFAULT_CONFIG } from '@fundamental-ngx/core/message-box';
 
 const DEFAULT_CONFIG: MessageBoxConfig = {
     type: 'error',

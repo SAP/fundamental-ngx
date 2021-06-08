@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GridListItemOutputEvent } from '@fundamental-ngx/core';
+import { GridListItemOutputEvent } from '@fundamental-ngx/core/grid-list';
 
 @Component({
     selector: 'fd-grid-list-states-example',

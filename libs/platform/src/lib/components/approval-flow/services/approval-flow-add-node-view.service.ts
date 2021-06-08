@@ -19,16 +19,16 @@ export class ApprovalFlowAddNodeViewService {
         return this.currentView === VIEW_MODES.USER_DETAILS;
     }
 
+    get isTeamMembersMode(): boolean {
+        return this.currentView === VIEW_MODES.VIEW_TEAM_MEMBERS;
+    }
+
     get isSelectUserMode(): boolean {
         return this.currentView === VIEW_MODES.SELECT_USER;
     }
 
     get isSelectTeamMode(): boolean {
         return this.currentView === VIEW_MODES.SELECT_TEAM;
-    }
-
-    get isTeamMembersMode(): boolean {
-        return this.currentView === VIEW_MODES.VIEW_TEAM_MEMBERS;
     }
 
     get team(): ApprovalTeam {

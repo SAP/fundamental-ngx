@@ -1,18 +1,25 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     EventEmitter,
+    Host,
     Input,
     OnDestroy,
     OnInit,
+    Optional,
     Output,
+    Self,
+    SkipSelf,
     ViewChild
 } from '@angular/core';
 
 import { BaseInput } from '../base.input';
 import { Placement, TimePickerComponent } from '@fundamental-ngx/core';
 import { FormFieldControl, Status } from '../form-control';
+import { NgControl, NgForm } from '@angular/forms';
+import { FormField } from '../form-field';
 
 @Component({
     selector: 'fdp-time-picker',
@@ -45,7 +52,7 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
     spinnerButtons = true;
 
     /** @deprecated
-     * Meridian is deprecated. Use displayFormat and parseFormat inputs or 
+     * Meridian is deprecated. Use displayFormat and parseFormat inputs or
      * DateTimeFormats.display.timeInput and DateTimeFormats.parse.timeInput instead.
      * @Input When set to false, uses the 24 hour clock (hours ranging from 0 to 23).
      * Default value based on the current locale format option
@@ -149,6 +156,19 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
 
     @ViewChild(TimePickerComponent)
     timePickerComponent: TimePickerComponent<D>;
+
+    constructor(
+        cd: ChangeDetectorRef,
+        @Optional() @Self() ngControl: NgControl,
+        @Optional() @SkipSelf() ngForm: NgForm,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+    ) {
+        super(cd, ngControl, ngForm, formField, formControl);
+        if (this.ngControl) {
+            this.ngControl.valueAccessor = this;
+        }
+    }
 
     /**
      * Method that handles changes when popover is opened or closed.

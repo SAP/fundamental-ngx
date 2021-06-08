@@ -1,7 +1,7 @@
 import { NgModule} from '@angular/core';
 import { ActionSheetMobileComponent } from './action-sheet-mobile.component';
-import { ButtonModule } from '../../button/button.module';
-import { DialogModule } from '../../dialog/dialog.module';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { CommonModule } from '@angular/common';
 
 @NgModule({

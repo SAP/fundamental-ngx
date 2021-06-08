@@ -34,7 +34,7 @@ describe('Inline help test suite', function() {
             saveElementScreenshot(exampleAreaContainersArr, `inline-help-icon-${i}`, inlineHelpPage.getScreenshotFolder());
             checkElementScreenshot(exampleAreaContainersArr, `inline-help-icon-${i}`, inlineHelpPage.getScreenshotFolder());
 
-            expect(diff).toBeLessThan(3, `Inline help icon ${i} has mismatch percentage of ${diff}%`);
+            expect(diff).toBeLessThan(5, `Inline help icon ${i} has mismatch percentage of ${diff}%`);
             expect(getAttributeByName(inlineHelpIcons, 'fd-inline-help', i)).toContain('Inline Help Tooltip');
         }
     });
@@ -45,7 +45,7 @@ describe('Inline help test suite', function() {
         saveElementScreenshot(inlineHelpInput, `inline-help-input`, inlineHelpPage.getScreenshotFolder());
         const diff = checkElementScreenshot(exampleAreaContainersArr, `inline-help-input`, inlineHelpPage.getScreenshotFolder());
 
-        expect(diff).toBeLessThan(3, `Inline help input has mismatch percentage of ${diff}%`);
+        expect(diff).toBeLessThan(5, `Inline help input has mismatch percentage of ${diff}%`);
         expect(getAttributeByName(inlineHelpInput, 'fd-inline-help')).toContain('Inline Help Tooltip');
     });
 
@@ -56,7 +56,7 @@ describe('Inline help test suite', function() {
         saveElementScreenshot(inlineHelpExampleExtended, `inline-help-button`, inlineHelpPage.getScreenshotFolder(), 1);
         const diff = checkElementScreenshot(inlineHelpExampleExtended, `inline-help-button`, inlineHelpPage.getScreenshotFolder(), 1);
 
-        expect(diff).toBeLessThan(3, `Inline help button has mismatch percentage of ${diff}%`);
+        expect(diff).toBeLessThan(5, `Inline help button has mismatch percentage of ${diff}%`);
         expect(getAttributeByName(inlineHelpButton, 'fd-inline-help')).toContain('Inline Help Tooltip');
     });
 
@@ -66,7 +66,7 @@ describe('Inline help test suite', function() {
         saveElementScreenshot(inlineHelpExampleExtended, `inline-help-styled-icon`, inlineHelpPage.getScreenshotFolder(), 2);
         const diff = checkElementScreenshot(inlineHelpExampleExtended, `inline-help-styled-icon`, inlineHelpPage.getScreenshotFolder(), 2);
 
-        expect(diff).toBeLessThan(3, `Inline help styled icon has mismatch percentage of ${diff}%`);
+        expect(diff).toBeLessThan(5, `Inline help styled icon has mismatch percentage of ${diff}%`);
         expect(getAttributeByName(inlineHelpStyledIcon, 'fd-inline-help')).toContain('Inline Help Tooltip');
     });
 
@@ -76,13 +76,13 @@ describe('Inline help test suite', function() {
         saveElementScreenshot(inlineHelpExampleExtended, `inline-help-template`, inlineHelpPage.getScreenshotFolder(), 3);
         const diff = checkElementScreenshot(inlineHelpExampleExtended, `inline-help-template`, inlineHelpPage.getScreenshotFolder(), 3);
 
-        expect(diff).toBeLessThan(3, `Inline help template has mismatch percentage of ${diff}%`);
+        expect(diff).toBeLessThan(5, `Inline help template has mismatch percentage of ${diff}%`);
     });
 
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             inlineHelpPage.saveExampleBaselineScreenshot();
-            expect(inlineHelpPage.compareWithBaseline()).toBeLessThan(3);
+            expect(inlineHelpPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 

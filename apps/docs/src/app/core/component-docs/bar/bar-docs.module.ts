@@ -14,8 +14,9 @@ import { BarHeaderExampleComponent } from './examples/bar-header-example.compone
 import { BarPageExampleComponent } from './examples/bar-page-example.component';
 import { BarPageResponsiveExampleComponent } from './examples/bar-page-responsive-example.component';
 import { BarHeaderComponent } from './bar-header/bar-header.component';
-import { AvatarModule, BarModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { BarModule } from '@fundamental-ngx/core/bar';
 
 const routes: Routes = [
     {

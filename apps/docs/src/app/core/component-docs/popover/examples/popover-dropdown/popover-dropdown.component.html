@@ -1,11 +1,11 @@
-<fd-popover>
+<fd-popover [focusTrapped]="true" [focusAutoCapture]="true">
     <fd-popover-control>
         <button fd-button label="Dropdown Popover" [fdMenu]="true"></button>
     </fd-popover-control>
     <fd-popover-body>
         <ul fd-list>
             <li fd-list-item *ngFor="let option of list">
-                <span fd-list-title>{{option}}</span>
+                <span fd-list-title>{{ option }}</span>
             </li>
         </ul>
     </fd-popover-body>
@@ -17,19 +17,19 @@
     <fd-popover-body>
         <ul fd-list>
             <li fd-list-item *ngFor="let option of list">
-                <span fd-list-title>{{option}}</span>
+                <span fd-list-title>{{ option }}</span>
             </li>
         </ul>
     </fd-popover-body>
 </fd-popover>
-<fd-popover>
+<fd-popover [focusTrapped]="true" [focusAutoCapture]="true">
     <fd-popover-control>
         <button fd-button label="Dropdown with icon" glyph="filter" [fdMenu]="true"></button>
     </fd-popover-control>
     <fd-popover-body>
         <ul fd-list>
             <li fd-list-item *ngFor="let option of list">
-                <span fd-list-title>{{option}}</span>
+                <span fd-list-title>{{ option }}</span>
             </li>
         </ul>
     </fd-popover-body>
