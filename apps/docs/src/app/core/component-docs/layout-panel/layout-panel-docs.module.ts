@@ -6,8 +6,9 @@ import { LayoutPanelDocsHeaderComponent } from './layout-panel-docs-header/layou
 import { LayoutPanelDocsComponent } from './layout-panel-docs.component';
 import { LayoutPanelExampleComponent } from './examples/layout-panel-examples.component';
 import { LayoutPanelEdgeBleedExampleComponent } from './examples/layout-panel-edge-bleed-example.component';
-import { LayoutPanelModule, TableModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
+import { TableModule } from '@fundamental-ngx/core/table';
 
 const routes: Routes = [
     {

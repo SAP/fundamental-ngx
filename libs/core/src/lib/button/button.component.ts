@@ -5,13 +5,16 @@ import {
     ElementRef,
     Input,
     OnChanges,
+    OnDestroy,
     OnInit,
     Optional,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, ContentDensityService, CssClassBuilder } from '../utils/public_api';
 import { BaseButton } from './base-button';
 import { Subscription } from 'rxjs';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
 
 
 /**
@@ -37,7 +40,7 @@ import { Subscription } from 'rxjs';
         '[attr.disabled]': '_disabled || null'
     }
 })
-export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit {
+export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit,  OnDestroy {
     /** The property allows user to pass additional css classes. */
     @Input()
     class = '';
@@ -70,6 +73,11 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
             }));
         }
         this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+      this._subscriptions.unsubscribe();
     }
 
     @applyCssClass

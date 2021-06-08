@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import * as approvalFlowTs from '!raw-loader!./platform-approval-flow-examples/platform-approval-flow-example.component.ts';
-import * as approvalFlowDataSource from '!raw-loader!./platform-approval-flow-examples/approval-flow-example-data-source.class.ts';
+import * as approvalFlowSrc from '!raw-loader!./platform-approval-flow-examples/platform-approval-flow-example.component.html';
+import * as approvalFlowTsSrc from '!raw-loader!./platform-approval-flow-examples/platform-approval-flow-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -11,17 +11,17 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 export class PlatformApprovalFlowDocsComponent {
     basic: ExampleFile[] = [
         {
-            language: 'typescript',
-            code: approvalFlowTs,
+            language: 'html',
+            code: approvalFlowSrc,
             fileName: 'platform-approval-flow-example',
-            name: 'approval-flow-example.component.ts'
+            name: 'approval-flow-example.component.html'
         },
         {
             language: 'typescript',
-            code: approvalFlowDataSource,
-            fileName: 'platform-approval-flow-data-source',
-            name: 'approval-flow-example-data-source.class.ts'
+            code: approvalFlowTsSrc,
+            fileName: 'platform-approval-flow-example',
+            component: 'PlatformApprovalFlowExampleComponent',
+            name: 'approval-flow-example.component.ts'
         }
     ];
-
 }

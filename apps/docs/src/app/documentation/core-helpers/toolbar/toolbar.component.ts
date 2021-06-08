@@ -2,19 +2,14 @@ import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild, 
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 import { Libraries } from '../../utilities/libraries';
-import {
-    ContentDensity,
-    ContentDensityService,
-    MenuComponent,
-    MenuKeyboardService,
-    ShellbarMenuItem,
-    ShellbarSizes,
-    ThemesService
-} from '@fundamental-ngx/core';
+
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { DocsThemeService } from '../../services/docs-theme.service';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
+import { MenuComponent, MenuKeyboardService } from '@fundamental-ngx/core/menu';
+import { ContentDensity, ContentDensityService, ThemesService } from '@fundamental-ngx/core/utils';
+import { ShellbarMenuItem, ShellbarSizes } from '@fundamental-ngx/core/shellbar';
 
 
 @Component({

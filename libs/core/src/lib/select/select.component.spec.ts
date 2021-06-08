@@ -459,7 +459,7 @@ export function keyboardEventWithModifier(
 
     // IE won't set `defaultPrevented` on synthetic events so we need to do it manually.
     event.preventDefault = function (): void {
-        Object.defineProperty(event, 'defaultPrevented', { get: () => true });
+        Object.defineProperty(event, 'defaultPrevented', { get: () => true, configurable: true });
         return originalPreventDefault.apply(this, arguments);
     };
 

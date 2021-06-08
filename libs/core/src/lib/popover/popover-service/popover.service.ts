@@ -21,9 +21,9 @@ import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay/position/co
 import { merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
 
-import { GetDefaultPosition, PopoverPosition } from '../popover-position/popover-position';
+import { GetDefaultPosition, PopoverPosition } from '@fundamental-ngx/core/shared';
 import { BasePopoverClass } from '../base/base-popover.class';
-import { RtlService } from '../../utils/services/rtl.service';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { PopoverBodyComponent } from '../popover-body/popover-body.component';
 
 const MAX_BODY_SIZE = 99999999;
