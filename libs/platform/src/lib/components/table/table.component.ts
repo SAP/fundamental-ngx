@@ -829,12 +829,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    _getNavIndicatorStyles(): { [key: string]: string } { 
-        const key = this._rtl ? 'padding-left' : 'padding-right';
-        return { 'justify-content': 'flex-end', [key]: '5px' };
-    }
-
-    /** @hidden */
     _getRowHeight(): number {
         return ROW_HEIGHT.get(this.contentDensity);
     }

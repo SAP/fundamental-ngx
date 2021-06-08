@@ -122,6 +122,16 @@
                 }
             }
         }
+
+        /** Temporary style for navigation indicator until column width can fit content */ 
+        .fdp-table__navigation-indicator {
+            justify-content: flex-end;
+             padding-right: 5px;
+            [dir='rtl'] & {
+                padding-left: 5px;
+                padding-right: 0px;
+            }
+        }
     }
 
     .fd-table__cell {
