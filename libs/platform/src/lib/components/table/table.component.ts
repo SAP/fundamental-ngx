@@ -831,12 +831,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    _isLastFreezableColumn(colIndex: number): boolean {
-        return this._freezableColumns?.includes(this._freezableColumns[colIndex])
-            && !this._freezableColumns.includes(this._freezableColumns[colIndex + 1]);
-    }
-
-    /** @hidden */
     _dragDropStart(): void {
         this._dragDropInProgress = true;
     }
