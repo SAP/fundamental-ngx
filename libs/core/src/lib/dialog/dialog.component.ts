@@ -21,7 +21,7 @@ import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
 import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
 import { DialogRef } from './utils/dialog-ref.class';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { applyCssClass, RtlService } from '@fundamental-ngx/core/utils';
 import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { DialogBase } from './base/dialog-base.class';
 
@@ -104,11 +104,14 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
     /** @hidden Whenever dialog is dragged */
     isDragged: boolean;
 
+    /** @hidden handles rtl service */
+    _dir = 'ltr';
+
     /** @hidden */
     private _class = '';
 
     /** @hidden */
-    private _onHidden: Subscription;
+    private _subscription = new Subscription();
 
     /** @hidden */
     constructor(
@@ -116,7 +119,8 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
         @Optional() private _dialogRef: DialogRef,
         @Optional() router: Router,
         changeDetectorRef: ChangeDetectorRef,
-        elementRef: ElementRef
+        elementRef: ElementRef,
+        @Optional() private readonly _rtlService: RtlService
     ) {
         super(router, elementRef, changeDetectorRef);
     }
@@ -135,6 +139,7 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
     ngOnInit(): void {
         super.ngOnInit();
         this._listenOnHidden();
+        this._subscribeToRtl();
         this.buildComponentCssClass();
     }
 
@@ -151,7 +156,7 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
     /** @hidden */
     ngOnDestroy(): void {
         super.ngOnDestroy();
-        this._onHidden.unsubscribe();
+        this._subscription.unsubscribe();
     }
 
     /** @hidden */
@@ -172,9 +177,27 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
 
     /** @hidden Listen on Dialog visibility */
     private _listenOnHidden(): void {
-        this._onHidden = this._dialogRef.onHide.subscribe(isHidden => {
-            this.showDialogWindow = !isHidden;
-            this.buildComponentCssClass();
-        })
+        this._subscription.add(
+            this._dialogRef.onHide.subscribe((isHidden) => {
+                this.showDialogWindow = !isHidden;
+                this.buildComponentCssClass();
+            })
+        );
+    }
+
+    /** @hidden Rtl change subscription */
+    private _subscribeToRtl(): void {
+        if (!this._rtlService) {
+            this._dir = 'ltr';
+
+            return;
+        }
+
+        this._subscription.add(
+            this._rtlService.rtl.subscribe((isRtl: boolean) => {
+                this._dir = isRtl ? 'rtl' : 'ltr';
+                this._changeDetectorRef.detectChanges();
+            })
+        );
     }
 }
