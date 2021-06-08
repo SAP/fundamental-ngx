@@ -21,7 +21,8 @@ export class StackblitzDependencies {
         'moment',
         'hammerjs',
         'tslib',
-        'typescript'
+        'typescript',
+        'focus-trap'
     ];
 
     static GetDependencies(): object {
