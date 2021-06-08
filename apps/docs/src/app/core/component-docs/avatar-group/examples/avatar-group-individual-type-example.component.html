@@ -20,7 +20,8 @@
                                [size]="size"
                                role="img"
                                [title]="person.firstName + ' ' + person.lastName"
-                               [label]="person.firstName + ' ' + person.lastName"></fd-avatar>
+                               [label]="person.firstName + ' ' + person.lastName"
+                               [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"></fd-avatar>
 
                     <fd-avatar *ngIf="person.imageUrl"
                                [circle]="true"
@@ -28,7 +29,8 @@
                                [size]="size"
                                [image]="person.imageUrl"
                                role="img"
-                               [title]="person.firstName + ' ' + person.lastName"></fd-avatar>
+                               [title]="person.firstName + ' ' + person.lastName"
+                               [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"></fd-avatar>
 
                     <fd-avatar *ngIf="person.glyph"
                                [circle]="true"
@@ -36,7 +38,8 @@
                                [size]="size"
                                [glyph]="person.glyph"
                                role="img"
-                               [title]="person.firstName + ' ' + person.lastName"></fd-avatar>
+                               [title]="person.firstName + ' ' + person.lastName"
+                               [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"></fd-avatar>
                 </div>
             </fd-popover-control>
 
@@ -47,23 +50,26 @@
                         <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
                                    [circle]="true"
                                    size="s"
-                                   [label]="person.firstName + ' ' + person.lastName"
                                    role="img"
-                                   [title]="person.firstName + ' ' + person.lastName"></fd-avatar>
+                                   [label]="person.firstName + ' ' + person.lastName"
+                                   [title]="person.firstName + ' ' + person.lastName"
+                                   [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"></fd-avatar>
 
                         <fd-avatar *ngIf="person.imageUrl"
                                    [circle]="true"
                                    size="s"
-                                   [image]="person.imageUrl"
                                    role="img"
-                                   [title]="person.firstName + ' ' + person.lastName"></fd-avatar>
+                                   [image]="person.imageUrl"
+                                   [title]="person.firstName + ' ' + person.lastName"
+                                   [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"></fd-avatar>
 
                         <fd-avatar *ngIf="person.glyph"
                                    [circle]="true"
                                    size="s"
-                                   [glyph]="person.glyph"
                                    role="img"
-                                   [title]="person.firstName + ' ' + person.lastName"></fd-avatar>
+                                   [glyph]="person.glyph"
+                                   [title]="person.firstName + ' ' + person.lastName"
+                                   [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"></fd-avatar>
                         <fd-quick-view-subheader-title>{{ person.firstName }} {{ person.lastName }}</fd-quick-view-subheader-title>
                         <fd-quick-view-subheader-subtitle>{{ person.position }}</fd-quick-view-subheader-subtitle>
                     </fd-quick-view-subheader>
@@ -151,9 +157,10 @@
                                        fd-avatar-group-focusable-avatar
                                        [circle]="true"
                                        size="s"
-                                       [label]="person.firstName + ' ' + person.lastName"
                                        role="img"
+                                       [label]="person.firstName + ' ' + person.lastName"
                                        [title]="person.firstName + ' ' + person.lastName"
+                                       [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
                                        (click)="openOverflowDetails(idx)"
                                        (keydown.enter)="openOverflowDetails(idx)"
                                        (keydown.space)="openOverflowDetails(idx)"
@@ -163,9 +170,10 @@
                                        fd-avatar-group-focusable-avatar
                                        [circle]="true"
                                        size="s"
-                                       [image]="person.imageUrl"
                                        role="img"
+                                       [image]="person.imageUrl"
                                        [title]="person.firstName + ' ' + person.lastName"
+                                       [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
                                        (click)="openOverflowDetails(idx)"
                                        (keydown.enter)="openOverflowDetails(idx)"
                                        (keydown.space)="openOverflowDetails(idx)"
@@ -175,9 +183,10 @@
                                        fd-avatar-group-focusable-avatar
                                        [circle]="true"
                                        size="s"
-                                       [glyph]="person.glyph"
                                        role="img"
+                                       [glyph]="person.glyph"
                                        [title]="person.firstName + ' ' + person.lastName"
+                                       [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
                                        (click)="openOverflowDetails(idx)"
                                        (keydown.enter)="openOverflowDetails(idx)"
                                        (keydown.space)="openOverflowDetails(idx)"
@@ -193,21 +202,24 @@
                                            size="s"
                                            [label]="personDetails.firstName + ' ' + personDetails.lastName"
                                            role="img"
-                                           [title]="personDetails.firstName + ' ' + personDetails.lastName"></fd-avatar>
+                                           [title]="personDetails.firstName + ' ' + personDetails.lastName"
+                                           [ariaLabel]="personDetails.firstName + ' ' + personDetails.lastName + ' avatar'"></fd-avatar>
 
                                 <fd-avatar *ngIf="personDetails.imageUrl"
                                            [circle]="true"
                                            size="s"
                                            [image]="personDetails.imageUrl"
                                            role="img"
-                                           [title]="personDetails.firstName + ' ' + personDetails.lastName"></fd-avatar>
+                                           [title]="personDetails.firstName + ' ' + personDetails.lastName"
+                                           [ariaLabel]="personDetails.firstName + ' ' + personDetails.lastName + ' avatar'"></fd-avatar>
 
                                 <fd-avatar *ngIf="personDetails.glyph"
                                            [circle]="true"
                                            size="s"
                                            [glyph]="personDetails.glyph"
                                            role="img"
-                                           [title]="personDetails.firstName + ' ' + personDetails.lastName"></fd-avatar>
+                                           [title]="personDetails.firstName + ' ' + personDetails.lastName"
+                                           [ariaLabel]="personDetails.firstName + ' ' + personDetails.lastName + ' avatar'"></fd-avatar>
                                 <fd-quick-view-subheader-title>{{ personDetails.firstName }} {{ personDetails.lastName }}</fd-quick-view-subheader-title>
                                 <fd-quick-view-subheader-subtitle>{{ personDetails.position }}</fd-quick-view-subheader-subtitle>
                             </fd-quick-view-subheader>
