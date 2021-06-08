@@ -3,7 +3,7 @@ import { DATE_TIME_FORMATS, DateTimeFormats } from '../../datetime/datetime-form
 import { DatetimeAdapter } from '../../datetime/datetime-adapter';
 
 @Pipe({
-    name: 'dateFormatPipe'
+    name: 'dateFormat'
 })
 export class DateFormatPipe<D> implements PipeTransform {
     constructor(
@@ -17,7 +17,7 @@ export class DateFormatPipe<D> implements PipeTransform {
 }
 
 @Pipe({
-    name: 'dateTimeFormatPipe'
+    name: 'dateTimeFormat'
 })
 export class DateTimeFormatPipe<D> implements PipeTransform {
     constructor(
@@ -31,7 +31,7 @@ export class DateTimeFormatPipe<D> implements PipeTransform {
 }
 
 @Pipe({
-    name: 'dateFromNowPipe'
+    name: 'dateFromNow'
 })
 export class DateFromNowPipe<D> implements PipeTransform {
     constructor(
