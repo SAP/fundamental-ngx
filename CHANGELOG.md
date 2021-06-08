@@ -1,4 +1,11 @@
 
+### [0.30.1-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.63...v0.30.1-rc.64) (2021-06-08)
+
+
+### Bug Fixes
+
+* **core:** clicking on edit button in Grid List active card ([#5520](https://github.com/SAP/fundamental-ngx/issues/5520)) ([7525d34](https://github.com/SAP/fundamental-ngx/commit/7525d34274d657783039ca38c71cd5cd42a0ce55))
+
 ### [0.30.1-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.62...v0.30.1-rc.63) (2021-06-08)
 
 ### [0.30.1-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.61...v0.30.1-rc.62) (2021-06-07)
