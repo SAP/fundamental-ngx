@@ -1,12 +1,15 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
     ElementRef,
+    Injector,
     Input,
     OnChanges,
     OnDestroy,
+    Optional,
     SimpleChanges,
     TemplateRef,
     ViewChild,
@@ -24,6 +27,9 @@ import { BasePopoverClass } from './base/base-popover.class';
 import { KeyUtil } from '../utils/functions/key-util';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
 import { PopoverService } from './popover-service/popover.service';
+import { DynamicComponentService, MobileModeConfig, POPOVER_COMPONENT } from '@fundamental-ngx/core';
+import { PopoverMobileComponent } from './popover-mobile/popover-mobile.component';
+import { isThisTypeNode } from 'typescript';
 
 let cdkPopoverUniqueId = 0;
 
@@ -37,6 +43,7 @@ let cdkPopoverUniqueId = 0;
     templateUrl: './popover.component.html',
     host: {
         '[class.fd-popover-custom]': 'true',
+        '[class.fd-popover-custom--mobile]': 'mobile',
         '[attr.id]': 'id'
     },
     encapsulation: ViewEncapsulation.None,
@@ -62,6 +69,13 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     @Input()
     id: string = 'fd-popover-' + cdkPopoverUniqueId++;
 
+    /** Whether the select component should be displayed in mobile mode. */
+    @Input()
+    mobile = false;
+
+    @Input()
+    mobileConfig: MobileModeConfig = { hasCloseButton: true };
+
     /** @hidden */
     @ViewChild('templateRef', { read: TemplateRef })
     templateRef: TemplateRef<any>;
@@ -83,7 +97,10 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     directiveRef: any;
 
     constructor(
-        private _popoverService: PopoverService
+        private _elementRef: ElementRef,
+        private _popoverService: PopoverService,
+        private _cdr: ChangeDetectorRef,
+        @Optional() private _dynamicComponentService: DynamicComponentService
     ) {
         super();
     }
@@ -102,6 +119,7 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
             popoverBody: this.popoverBody,
         } : null);
 
+        this._setupView();
     }
 
     /** @hidden */
@@ -121,6 +139,7 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
 
     /** Opens the popover. */
     open(): void {
+        // debugger;
         this._popoverService.open();
     }
 
@@ -146,10 +165,29 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
 
     /** Handler for alt + arrow down keydown */
     triggerKeyDownHandler(event: KeyboardEvent): void {
+        // debugger;
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) && event.altKey && !this.disabled) {
             this.open();
             event.preventDefault();
             event.stopPropagation();
         }
+    }
+
+    private _setupView(): void {
+        if (this.mobile) {
+            // debugger;
+            this._setupMobileMode();
+        }
+
+        this._cdr.detectChanges();
+    }
+
+    private _setupMobileMode(): void {
+        this._dynamicComponentService.createDynamicComponent(
+            this.templateRef,
+            PopoverMobileComponent,
+            { container: this._elementRef.nativeElement },
+            { injector: Injector.create({ providers: [{ provide: POPOVER_COMPONENT, useValue: this }] }) }
+        );
     }
 }
