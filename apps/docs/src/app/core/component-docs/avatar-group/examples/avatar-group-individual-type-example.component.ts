@@ -1,13 +1,14 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ENTER, ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 
-import { AvatarGroupComponent, PopoverBodyComponent, Size } from '@fundamental-ngx/core';
+import { AvatarGroupComponent } from '@fundamental-ngx/core/avatar-group';
+import { PopoverComponent, PopoverBodyComponent } from '@fundamental-ngx/core/popover';
+import { KeyUtil, Size } from '@fundamental-ngx/core/utils';
 import { AvatarGroupDataExampleService } from './avatar-group-data-example.service';
 
 @Component({
     selector: 'fd-avatar-group-individual-type-example',
-    templateUrl: './avatar-group-individual-type-example.component.html',
-    styleUrls: ['./avatar-group-individual-type-example.component.scss'],
-    encapsulation: ViewEncapsulation.None
+    templateUrl: './avatar-group-individual-type-example.component.html'
 })
 export class AvatarGroupIndividualTypeExampleComponent {
     @ViewChild('avatarGroup_IndividualType')
@@ -41,5 +42,29 @@ export class AvatarGroupIndividualTypeExampleComponent {
         this.overflowPopoverStage = 'main';
 
         setTimeout(() => this.popoverBodyComponent?._focusFirstTabbableElement(), 0);
+    }
+
+    handleControlClick(event: MouseEvent, popover: PopoverComponent): void {
+        popover.open();
+    }
+
+    handleControlKeydown(event: KeyboardEvent, popover: PopoverComponent): void {
+        if (!KeyUtil.isKeyCode(event, [ESCAPE, TAB, SPACE, ENTER])) {
+            return;
+        }
+
+        if (KeyUtil.isKeyCode(event, [ESCAPE, TAB])) {
+            popover.close();
+        }
+
+        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+            popover.open();
+        }
+    }
+
+    handleOverflowPopoverOpen(isOpen: boolean): void {
+        if (isOpen) {
+            this.openOverflowMain();
+        }
     }
 }

@@ -8,7 +8,8 @@ import { ProductSwitchDndExampleComponent } from './examples/product-switch-dnd-
 import { ProductSwitchDocsHeaderComponent } from './product-switch-docs-header/product-switch-docs-header.component';
 import { ProductSwitchListComponent } from './examples/product-switch-list/product-switch-list-example.component';
 import { ProductSwitchDocsComponent } from './product-switch-docs.component';
-import { ProductSwitchModule, ShellbarModule } from '@fundamental-ngx/core';
+import { ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
+import { ShellbarModule } from '@fundamental-ngx/core/shellbar';
 
 const routes: Routes = [
     {

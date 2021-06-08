@@ -8,8 +8,11 @@ import { PaginationExampleComponent } from './examples/pagination-example.compon
 import { PaginationShowingExampleComponent } from './examples/pagination-showing-example.component';
 import { PaginationPerPageExampleComponent } from './examples/pagination-per-page-example.component';
 
-import { PaginationModule, ToolbarModule, SelectModule, SegmentedButtonModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { PaginationModule } from '@fundamental-ngx/core/pagination';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { SelectModule } from '@fundamental-ngx/core/select';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 
 const routes: Routes = [
     {

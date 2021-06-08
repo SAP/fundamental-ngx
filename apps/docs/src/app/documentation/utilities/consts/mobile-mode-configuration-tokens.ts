@@ -1,4 +1,4 @@
-import { MobileModeControl, MobileModeConfigToken } from '@fundamental-ngx/core';
+import { MobileModeConfigToken, MobileModeControl } from '@fundamental-ngx/core/mobile-mode';
 import { MOBILE_DIALOG_PORTRAIT } from './mobile-dialog.consts';
 
 export const SELECT_MOBILE_CONFIG: MobileModeConfigToken = {
@@ -8,6 +8,11 @@ export const SELECT_MOBILE_CONFIG: MobileModeConfigToken = {
 
 export const COMBOBOX_MOBILE_CONFIG: MobileModeConfigToken = {
     target: MobileModeControl.COMBOBOX,
+    config: {dialogConfig: MOBILE_DIALOG_PORTRAIT}
+};
+
+export const MULTI_COMBOBOX_MOBILE_CONFIG: MobileModeConfigToken = {
+    target: MobileModeControl.MULTI_COMBOBOX,
     config: {dialogConfig: MOBILE_DIALOG_PORTRAIT}
 };
 

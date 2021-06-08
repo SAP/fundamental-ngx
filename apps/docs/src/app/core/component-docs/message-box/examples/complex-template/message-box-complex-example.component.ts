@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessageBoxRef } from '@fundamental-ngx/core';
+import { MessageBoxRef } from '@fundamental-ngx/core/message-box';
 
 @Component({
     template: `

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 import { DialogExampleComponent } from './dialog-example.component';
-import { DialogConfig, DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-component-based-dialog-example',
@@ -28,7 +28,8 @@ export class ComponentBasedDialogExampleComponent {
                     `In Hawaii, the word for pineapple is “Hala kahiki“`
                 ]
             },
-            width: '400px'
+            width: '400px',
+            ariaLabelledBy: 'fd-dialog-header-1'
         });
 
         dialogRef.afterClosed.subscribe(

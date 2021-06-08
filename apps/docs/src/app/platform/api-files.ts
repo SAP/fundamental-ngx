@@ -62,6 +62,7 @@ export const API_FILES = {
     stepInput: ['NumberStepInputComponent', 'StepInputComponent', 'StepInputConfig'],
     inputGroup: ['InputGroupConfig', 'InputGroupComponent', 'InputGroupAddonComponent', 'InputGroupInputComponent'],
     combobox: ['ComboboxComponent', 'BaseCombobox', 'ComboboxConfig'],
+    multiCombobox: ['MultiComboboxComponent', 'BaseMultiCombobox'],
     list: ['ListComponent', 'StandardListItemComponent', 'ListFooter', 'ListGroupHeader', 'ListConfig'],
     standardlistitem: ['ListComponent', 'StandardListItemComponent', 'ListFooter', 'ListGroupHeader', 'ListConfig'],
     thumbnail: ['ThumbnailComponent'],

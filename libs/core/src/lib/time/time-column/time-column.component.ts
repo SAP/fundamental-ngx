@@ -18,11 +18,10 @@ import {
 import { Subject, Subscription } from 'rxjs';
 import { buffer, debounceTime, map } from 'rxjs/operators';
 import { DOWN_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-
-import { CarouselDirective } from '../../utils/directives/carousel/carousel.directive';
-import { CarouselItemDirective } from '../../utils/directives/carousel/carousel-item.directive';
-import { KeyUtil } from '../../utils/functions';
-import { CarouselConfig, PanEndOutput } from '../../utils/services/carousel.service';
+import {CarouselDirective} from '@fundamental-ngx/core/carousel';
+import { CarouselItemDirective } from '@fundamental-ngx/core/carousel';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { CarouselConfig, PanEndOutput } from '@fundamental-ngx/core/carousel';
 import { TimeColumnConfig } from './time-column-config';
 
 import { SelectableViewItem } from '../models';

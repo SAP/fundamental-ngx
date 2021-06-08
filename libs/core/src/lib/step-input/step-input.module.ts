@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StepInputComponent } from './step-input.component';
-import { ButtonModule } from '../button/button.module';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 
 @NgModule({
