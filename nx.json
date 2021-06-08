@@ -101,6 +101,7 @@
         "core-quick-view",
         "core-radio",
         "core-rating-indicator",
+        "core-resizable-card-layout",
         "core-scroll-spy",
         "core-segmented-button",
         "core-select",
@@ -658,6 +659,15 @@
       "implicitDependencies": [
         "core-utils",
         "core-popover"
+      ]
+    },
+    "core-resizable-card-layout": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-card"
       ]
     },
     "core-scroll-spy": {

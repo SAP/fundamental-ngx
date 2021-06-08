@@ -79,6 +79,7 @@
       "@fundamental-ngx/core/quick-view": ["libs/core/src/lib/quick-view/index.ts"],
       "@fundamental-ngx/core/radio": ["libs/core/src/lib/radio/index.ts"],
       "@fundamental-ngx/core/rating-indicator": ["libs/core/src/lib/rating-indicator/index.ts"],
+      "@fundamental-ngx/core/resizable-card-layout": ["libs/core/src/lib/resizable-card-layout/index.ts"],
       "@fundamental-ngx/core/scroll-spy": ["libs/core/src/lib/scroll-spy/index.ts"],
       "@fundamental-ngx/core/segmented-button": ["libs/core/src/lib/segmented-button/index.ts"],
       "@fundamental-ngx/core/select": ["libs/core/src/lib/select/index.ts"],
