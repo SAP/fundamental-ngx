@@ -16,6 +16,7 @@ export class StackblitzDependencies {
         '@angular/platform-browser-dynamic',
         '@sap-theming/theming-base-content',
         'core-js',
+        'focus-trap',
         'fundamental-styles',
         'moment',
         'hammerjs',
