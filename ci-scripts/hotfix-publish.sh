@@ -18,7 +18,7 @@ if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Hotfix-release" ]]; then
   # delete temp branch
   git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$HOTFIX_BRANCH" > /dev/null 2>&1;
 
-  std_ver=$(npm run version.changelog)
+  std_ver=$(npm run std-version)
 
   release_tag=$(echo "$std_ver" | grep "tagging release" | awk '{print $4}')
 
@@ -71,6 +71,6 @@ fi
 if [[ $latest == "true" ]]; then
   git stash
   git checkout $MASTER_BRANCH
-  npm run version.changelog
+  npm run std-version
   git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $MASTER_BRANCH > /dev/null;
 fi
