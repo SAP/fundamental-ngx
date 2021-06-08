@@ -5,4 +5,4 @@
 <br />
 <br />
 <br />
-Selected: {{ date | dateTimeFormat }}
+Selected: {{ date ? (date | dateTimeFormat) : 'null' }}
