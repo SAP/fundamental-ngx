@@ -8,6 +8,8 @@
                     [triggers]="[]"
                     [closeOnOutsideClick]="true"
                     [closeOnEscapeKey]="true"
+                    [focusAutoCapture]="true"
+                    [focusTrapped]="true"
                     #individualPopover>
             <fd-popover-control>
                 <div fd-avatar-group-item
@@ -79,21 +81,21 @@
                         <fd-quick-view-group-item>
                             <fd-quick-view-group-item-label>Phone</fd-quick-view-group-item-label>
                             <fd-quick-view-group-item-content>
-                                <a [href]="'tel:' + person.phone" [innerText]="person.phone"></a>
+                                <a fd-link [href]="'tel:' + person.phone" [innerText]="person.phone"></a>
                             </fd-quick-view-group-item-content>
                         </fd-quick-view-group-item>
 
                         <fd-quick-view-group-item>
                             <fd-quick-view-group-item-label>Mobile</fd-quick-view-group-item-label>
                             <fd-quick-view-group-item-content>
-                                <a [href]="'tel:' + person.mobile" [innerText]="person.mobile"></a>
+                                <a fd-link [href]="'tel:' + person.mobile" [innerText]="person.mobile"></a>
                             </fd-quick-view-group-item-content>
                         </fd-quick-view-group-item>
 
                         <fd-quick-view-group-item>
                             <fd-quick-view-group-item-label>Email</fd-quick-view-group-item-label>
                             <fd-quick-view-group-item-content>
-                                <a [href]="'mailto:' + person.email" [innerText]="person.email"></a>
+                                <a fd-link [href]="'mailto:' + person.email" [innerText]="person.email"></a>
                             </fd-quick-view-group-item-content>
                         </fd-quick-view-group-item>
                     </fd-quick-view-group>
@@ -229,21 +231,21 @@
                                 <fd-quick-view-group-item>
                                     <fd-quick-view-group-item-label>Phone</fd-quick-view-group-item-label>
                                     <fd-quick-view-group-item-content>
-                                        <a [href]="'tel:' + personDetails.phone" [innerText]="personDetails.phone"></a>
+                                        <a fd-link [href]="'tel:' + personDetails.phone" [innerText]="personDetails.phone"></a>
                                     </fd-quick-view-group-item-content>
                                 </fd-quick-view-group-item>
 
                                 <fd-quick-view-group-item>
                                     <fd-quick-view-group-item-label>Mobile</fd-quick-view-group-item-label>
                                     <fd-quick-view-group-item-content>
-                                        <a [href]="'tel:' + personDetails.mobile" [innerText]="personDetails.mobile"></a>
+                                        <a fd-link [href]="'tel:' + personDetails.mobile" [innerText]="personDetails.mobile"></a>
                                     </fd-quick-view-group-item-content>
                                 </fd-quick-view-group-item>
 
                                 <fd-quick-view-group-item>
                                     <fd-quick-view-group-item-label>Email</fd-quick-view-group-item-label>
                                     <fd-quick-view-group-item-content>
-                                        <a [href]="'mailto:' + personDetails.email" [innerText]="personDetails.email"></a>
+                                        <a fd-link [href]="'mailto:' + personDetails.email" [innerText]="personDetails.email"></a>
                                     </fd-quick-view-group-item-content>
                                 </fd-quick-view-group-item>
                             </fd-quick-view-group>
