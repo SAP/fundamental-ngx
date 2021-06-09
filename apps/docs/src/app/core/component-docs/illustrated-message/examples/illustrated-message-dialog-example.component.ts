@@ -9,12 +9,13 @@ export class IllustratedMessageDialogExampleComponent {
     dialogSvgConfig = {
         dialog: {url: 'assets/images/sapIllus-Dialog-NoMail.svg', id: 'sapIllus-Dialog-NoMail'}
     }
+    dialogId = 'im-dialog-81mf46'
 
     confirmationReason: string;
 
     constructor(private _dialogService: DialogService) {}
 
     openDialog(dialog: TemplateRef<any>): void {
-        const dialogRef = this._dialogService.open(dialog);
+        this._dialogService.open(dialog, { id: this.dialogId, ariaLabelledBy: `${this.dialogId}-header`, ariaDescribedBy: `${this.dialogId}-description` });
     }
 }
