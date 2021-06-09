@@ -72,6 +72,7 @@ import { GridListModule } from '@fundamental-ngx/core/grid-list';
 import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { ResizableCardLayoutModule } from '@fundamental-ngx/core/resizable-card-layout';
 
 import { PaginationModule } from '@fundamental-ngx/core/pagination';
 import { SelectModule } from '@fundamental-ngx/core/select';
@@ -169,7 +170,8 @@ import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
         OnlyDigitsModule,
         IllustratedMessageModule,
         StatusIndicatorModule,
-        GridListModule
+        GridListModule,
+        ResizableCardLayoutModule
     ],
     providers: []
 })
