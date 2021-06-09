@@ -55,7 +55,8 @@ describe('Split menu button test suite', () => {
     it('should check drop-down arrow menu functionality', () => {
         const dropdownArrowBtnArr = getElementArrayLength(arrowBtnArr);
 
-        for (let i = 0; i < dropdownArrowBtnArr; i++) {
+        // -1 for last disabled button. on disabled button click, click will be intercepted.
+        for (let i = 0; i < dropdownArrowBtnArr -1; i++) {
             click(arrowBtnArr, i);
             expect(waitForElDisplayed(menuOverlay));
             click(arrowBtnArr, i);
@@ -100,6 +101,10 @@ describe('Split menu button test suite', () => {
     it('should check split menu buttons with icon examples', () => {
         const iconArrowBtnArr = elementArray(iconExArrowBtnArr);
         const iconBtnArr = elementArray(iconBtnAttrArr);
+
+        // last button is disabled
+        iconArrowBtnArr.splice(-1, 1);
+        iconBtnArr.splice(-1, 1);
 
         spMenuBtnPage.checkBtnSelectionChange(iconArrowBtnArr, iconExSelectionBtnArr, iconBtnTextArr);
         for (let i = 0; i < iconBtnArr.length; i++) {
@@ -222,7 +227,7 @@ describe('Split menu button test suite', () => {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             spMenuBtnPage.saveExampleBaselineScreenshot();
-            expect(spMenuBtnPage.compareWithBaseline()).toBeLessThan(3);
+            expect(spMenuBtnPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
