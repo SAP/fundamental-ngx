@@ -118,6 +118,12 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     @Input()
     isNavigated = false;
 
+    /** @hidden
+     * The active state of the list item.
+     * If set to true, the whole card has active state. Becomes false only when the Edit button is clicked.
+     */
+    _isActive = true;
+
     /**
      * Event is thrown, when type is active
      * and item is pressed
@@ -259,13 +265,21 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     }
 
     /** @hidden */
+    _setActive(event: MouseEvent, isActive: boolean): void {
+        if (this._isElementCanBeClicked(event)) {
+            return;
+        }
+
+        this._isActive = isActive;
+    }
+
+    /** @hidden */
     _singleSelect(event: Event): void {
         this._preventDefault(event);
 
         if (typeof this._selectedItem !== 'undefined') {
             return;
         }
-
         this._gridListSelectionService.setSelectedItem(this.value, this._index);
     }
 
@@ -317,7 +331,11 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     }
 
     /** @hidden */
-    _onClick(): void {
+    _onClick(event: MouseEvent): void {
+        if (!this._isElementCanBeClicked(event)) {
+            return;
+        }
+
         if (this.type !== 'active' && this.type !== 'detailsAndActive') {
             return;
         }
@@ -348,6 +366,23 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
         if (typeof this._selectedItem === 'undefined') {
             this._singleSelect(event);
         }
+    }
+
+    /** @hidden */
+    private _isElementCanBeClicked(event: MouseEvent): boolean {
+        if (!event?.target) {
+            return false;
+        }
+
+        const { classList } = event.target as HTMLElement;
+
+        return (
+            !classList.contains('fd-grid-list__action-button') &&
+            !classList.contains('fd-grid-list__radio-label') &&
+            !classList.contains('fd-grid-list__radio-input') &&
+            !classList.contains('fd-grid-list__checkbox-label') &&
+            !classList.contains('fd-grid-list__checkbox-input')
+        );
     }
 
     /** @hidden */
