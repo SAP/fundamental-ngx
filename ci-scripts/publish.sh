@@ -12,7 +12,7 @@ if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release" ]]; then
    echo "################ Running RC deploy tasks ################"
 
    CURRENT_BRANCH=${TRAVIS_BRANCH}
-   npm run version.changelog
+   npm run std-version -- --prerelease rc --no-verify
 
 elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
    echo "################ Running Master deploy tasks ################"
@@ -20,7 +20,7 @@ elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
 
   # delete temp branch
   git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$TRAVIS_BRANCH" > /dev/null 2>&1;
-  std_ver=$(npm run version.changelog)
+  std_ver=$(npm run std-version)
   release_tag=$(echo "$std_ver" | grep "tagging release" | awk '{print $4}')
 
   if  [[ $release_tag == v* ]]; then
