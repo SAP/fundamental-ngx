@@ -2,24 +2,37 @@
     <fd-popover [noArrow]="false"
                 [focusTrapped]="true"
                 [focusAutoCapture]="true"
+                [triggers]="[]"
+                [closeOnOutsideClick]="true"
                 [closeOnEscapeKey]="true"
                 (isOpenChange)="isOpenChanged($event)"
                 placement="bottom"
-                additionalBodyClass="fd-avatar-group--group-type__overflow-popover-body--custom-class">
-        <fd-popover-control>
+                maxWidth="312"
+                #overflowPopover>
+        <fd-popover-control tabindex="0"
+                            (click)="handleControlClick($event, overflowPopover)"
+                            (keydown)="handleControlKeydown($event, overflowPopover)">
             <div *ngFor="let person of people" fd-avatar-group-item>
                 <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
                            [label]="person.firstName + ' ' + person.lastName"
+                           [title]="person.firstName + ' ' + person.lastName"
+                           role="img"
                            [circle]="true"
                            [border]="true"
                            [size]="size"></fd-avatar>
 
-                <fd-avatar *ngIf="person.imageUrl" [circle]="true"
+                <fd-avatar *ngIf="person.imageUrl"
+                           role="img"
+                           [title]="person.firstName + ' ' + person.lastName"
+                           [circle]="true"
                            [border]="true"
                            [size]="size"
                            [image]="person.imageUrl"></fd-avatar>
 
-                <fd-avatar *ngIf="person.glyph" [circle]="true"
+                <fd-avatar *ngIf="person.glyph"
+                           role="img"
+                           [title]="person.firstName + ' ' + person.lastName"
+                           [circle]="true"
                            [border]="true"
                            [size]="size"
                            [glyph]="person.glyph"></fd-avatar>
@@ -27,6 +40,7 @@
             <button *ngIf="avatarGroup_GroupType.overflowItemsCount > 0"
                     fd-button
                     fd-avatar-group-overflow-button
+                    tabindex="-1"
                     [size]="size">
                 <bdi fd-avatar-group-overflow-button-text>
                     +{{ avatarGroup_GroupType.overflowItemsCount }}
@@ -53,34 +67,47 @@
                     </div>
                 </div>
 
-                <div fd-avatar-group-overflow-body>
+                <div fd-avatar-group-overflow-body
+                     [noPadding]="isDetailStage"
+                     [noHorizontalScroll]="isDetailStage"
+                     [noVerticalScroll]="false"
+                >
                     <ng-container *ngIf="overflowPopoverStage === 'main'">
                         <ng-container *ngFor="let person of people; let idx = index;">
-                            <div fd-avatar-group-overflow-item (click)="openOverflowDetails(idx)">
+                            <div fd-avatar-group-overflow-item>
                                 <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
+                                           fd-avatar-group-focusable-avatar
                                            [circle]="true"
                                            size="s"
                                            [label]="person.firstName + ' ' + person.lastName"
+                                           [title]="person.firstName + ' ' + person.lastName"
+                                           role="img"
                                            (click)="openOverflowDetails(idx)"
                                            (keydown.enter)="openOverflowDetails(idx)"
                                            (keydown.space)="openOverflowDetails(idx)"
-                                           tabindex="0"></fd-avatar>
+                                ></fd-avatar>
                                 <fd-avatar *ngIf="person.imageUrl"
+                                           fd-avatar-group-focusable-avatar
+                                           role="img"
+                                           [title]="person.firstName + ' ' + person.lastName"
                                            [circle]="true"
                                            size="s"
                                            [image]="person.imageUrl"
                                            (click)="openOverflowDetails(idx)"
                                            (keydown.enter)="openOverflowDetails(idx)"
                                            (keydown.space)="openOverflowDetails(idx)"
-                                           tabindex="0"></fd-avatar>
+                                ></fd-avatar>
                                 <fd-avatar *ngIf="person.glyph"
+                                           fd-avatar-group-focusable-avatar
+                                           role="img"
+                                           [title]="person.firstName + ' ' + person.lastName"
                                            [circle]="true"
                                            size="s"
                                            [glyph]="person.glyph"
                                            (click)="openOverflowDetails(idx)"
                                            (keydown.enter)="openOverflowDetails(idx)"
                                            (keydown.space)="openOverflowDetails(idx)"
-                                           tabindex="0"></fd-avatar>
+                                ></fd-avatar>
                             </div>
                         </ng-container>
                     </ng-container>
@@ -88,12 +115,23 @@
                     <ng-container *ngIf="overflowPopoverStage === 'detail'">
                         <fd-quick-view [id]="personDetails.id">
                             <fd-quick-view-subheader>
-                                <fd-avatar *ngIf="!personDetails.imageUrl && !personDetails.glyph" [circle]="true"
+                                <fd-avatar *ngIf="!personDetails.imageUrl && !personDetails.glyph"
+                                           [circle]="true"
                                            size="s"
-                                           [label]="personDetails.firstName + ' ' + personDetails.lastName"></fd-avatar>
-                                <fd-avatar *ngIf="personDetails.imageUrl" [circle]="true" size="s"
+                                           [label]="personDetails.firstName + ' ' + personDetails.lastName"
+                                           role="img"
+                                           [title]="personDetails.firstName + ' ' + personDetails.lastName"></fd-avatar>
+                                <fd-avatar *ngIf="personDetails.imageUrl"
+                                           [circle]="true"
+                                           size="s"
+                                           role="img"
+                                           [title]="personDetails.firstName + ' ' + personDetails.lastName"
                                            [image]="personDetails.imageUrl"></fd-avatar>
-                                <fd-avatar *ngIf="personDetails.glyph" [circle]="true" size="s"
+                                <fd-avatar *ngIf="personDetails.glyph"
+                                           [circle]="true"
+                                           size="s"
+                                           role="img"
+                                           [title]="personDetails.firstName + ' ' + personDetails.lastName"
                                            [glyph]="personDetails.glyph"></fd-avatar>
                                 <fd-quick-view-subheader-title>{{ personDetails.firstName }} {{ personDetails.lastName }}</fd-quick-view-subheader-title>
                                 <fd-quick-view-subheader-subtitle>{{ personDetails.position }}</fd-quick-view-subheader-subtitle>
