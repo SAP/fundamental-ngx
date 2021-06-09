@@ -71,10 +71,10 @@ export class GridListSingleSelectLeftExampleComponent {
     }
 
     detail(event: GridListItemOutputEvent<number>): void {
-        console.log('Detail event', event);
+        alert('Detail event value is: ' + event.value);
     }
 
     navigate(event: GridListItemOutputEvent<number>): void {
-        console.log('Navigation event', event);
+        alert('Navigation event value is: ' + event.value);
     }
 }
