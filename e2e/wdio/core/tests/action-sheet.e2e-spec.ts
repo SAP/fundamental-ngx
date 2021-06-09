@@ -3,7 +3,6 @@ import {
     addIsActiveClass,
     checkElementScreenshot,
     click,
-    getAttributeByName,
     getElementArrayLength, getElementClass,
     getImageTagBrowserPlatform,
     getText,
