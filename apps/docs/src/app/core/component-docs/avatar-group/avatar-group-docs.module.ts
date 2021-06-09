@@ -5,19 +5,17 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
-import {
-    AvatarGroupModule,
-    AvatarModule,
-    BarModule,
-    ButtonModule,
-    PopoverModule,
-    QuickViewModule,
-    TitleModule
-} from '@fundamental-ngx/core';
 import { AvatarGroupDocsComponent } from './avatar-group-docs.component';
 import { AvatarGroupHeaderComponent } from './avatar-group-header/avatar-group-header.component';
 import { AvatarGroupGroupTypeExampleComponent } from './examples/avatar-group-group-type-example.component';
 import { AvatarGroupIndividualTypeExampleComponent } from './examples/avatar-group-individual-type-example.component';
+import { AvatarGroupModule } from '@fundamental-ngx/core/avatar-group';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { TitleModule } from '@fundamental-ngx/core/title';
 
 const routes: Routes = [
     {

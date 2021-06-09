@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NotificationRef } from '@fundamental-ngx/core';
+import { NotificationRef } from '@fundamental-ngx/core/notification';
 
 @Component({
     selector: 'fd-notification-example-content',
@@ -28,17 +28,17 @@ import { NotificationRef } from '@fundamental-ngx/core';
             </fd-notification-footer>
         </fd-notification-content>
         <fd-notification-actions>
-            <button 
-                fd-button 
-                [label]="notificationRef.data.open" 
-                [compact]="true" 
+            <button
+                fd-button
+                [label]="notificationRef.data.open"
+                [compact]="true"
                 (click)="notificationRef.close('Open Button Clicked')"></button>
-            <button 
-                fd-button 
-                fdType="transparent" 
-                glyph="decline" 
-                title="close" 
-                [compact]="true" 
+            <button
+                fd-button
+                fdType="transparent"
+                glyph="decline"
+                title="close"
+                [compact]="true"
                 (click)="notificationRef.close('Close Button Click')"></button>
         </fd-notification-actions>
     </fd-notification-body>

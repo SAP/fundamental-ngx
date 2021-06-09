@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
-import {
-    DateRange,
-    DatetimeAdapter,
-    DateTimeFormats,
-    DATE_TIME_FORMATS,
-    FdDate,
-    FD_DATETIME_FORMATS
-} from '@fundamental-ngx/core';
+import { DateRange } from '@fundamental-ngx/core/calendar';
+import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS, FdDate, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
 
 /**
  * FD_DATETIME_FORMATS is based on Intl.DateTimeFormat,

@@ -1,6 +1,6 @@
-import { Directive, Input, OnInit, ElementRef } from '@angular/core';
-
-import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
+import { Directive, OnInit, ElementRef, Input } from '@angular/core';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 import { CLASS_NAME } from '../constants';
 

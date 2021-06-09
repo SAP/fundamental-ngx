@@ -12,19 +12,6 @@ import { PopoverDialogExampleComponent } from './examples/popover-dialog/popover
 import { PopoverPlacementExampleComponent } from './examples/popover-placement/popover-placement-example.component';
 import { PopoverProgrammaticOpenExampleComponent } from './examples/popover-programmatic/popover-programmatic-open-example.component';
 import { PopoverExampleComponent } from './examples/popover-simple/popover-example.component';
-import {
-    DialogModule,
-    MultiInputModule,
-    PopoverModule,
-    SideNavigationModule,
-    BarModule,
-    AvatarModule,
-    ListModule,
-    SegmentedButtonModule,
-    FormModule,
-    CheckboxModule,
-    PopoverMobileModule,
-} from '@fundamental-ngx/core';
 import { PopoverComplexExampleComponent } from './examples/popover-complex-example/popover-complex-example.component';
 import {
     PopoverContainerExampleComponent
@@ -34,6 +21,16 @@ import { PopoverCdkPlacementExampleComponent } from './examples/popover-new-plac
 import { PopoverFocusExampleComponent } from './examples/popover-focus-example/popover-focus-example.component';
 import { PopoverTriggerExampleComponent } from './examples/popover-trigger-example/popover-trigger-example.component';
 import { PopoverMobileExampleComponent } from './examples/popover-mobile/popover-mobile-example.component';
+import { PopoverMobileModule, PopoverModule } from '@fundamental-ngx/core/popover';
+import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
+import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 
 const routes: Routes = [
     {

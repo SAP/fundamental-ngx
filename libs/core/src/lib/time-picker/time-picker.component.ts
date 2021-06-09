@@ -21,18 +21,17 @@ import {
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Placement } from '../popover/popover-position/popover-position';
+import { Placement } from '@fundamental-ngx/core/shared';
 
-import { DATE_TIME_FORMATS, DateTimeFormats } from '../datetime/datetime-formats';
-import { DatetimeAdapter } from '../datetime/datetime-adapter';
+import { DATE_TIME_FORMATS, DateTimeFormats } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { createMissingDateImplementationError } from './errors';
 
-import { TimeComponent } from '../time/time.component';
-import { FormStates } from '../form/form-control/form-states';
-import { PopoverFormMessageService } from '../form/form-message/popover-form-message.service';
-import { PopoverService } from '../popover/popover-service/popover.service';
-import { ContentDensityService } from '../utils/public_api';
-
+import { TimeComponent } from '@fundamental-ngx/core/time';
+import { FormStates } from '@fundamental-ngx/core/shared';
+import { PopoverFormMessageService } from '@fundamental-ngx/core/form';
+import { PopoverService } from '@fundamental-ngx/core/popover';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 @Component({
     selector: 'fd-time-picker',
     templateUrl: './time-picker.component.html',

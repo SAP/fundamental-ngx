@@ -10,7 +10,7 @@ import { SchemaModule } from '../schema/schema.module';
 import { PLATFORM_COMPONENT_SCHEMAS } from './component-docs/schemas';
 import { StackblitzService } from '../documentation/core-helpers/stackblitz/stackblitz.service';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { AvatarModule } from '@fundamental-ngx/core';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { DocsThemeService } from '../documentation/services/docs-theme.service';
 
 @NgModule({

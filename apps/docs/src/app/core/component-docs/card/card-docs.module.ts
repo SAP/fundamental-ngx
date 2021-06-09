@@ -1,22 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import {
-    CardModule,
-    BarModule,
-    ButtonModule,
-    BusyIndicatorModule,
-    ObjectStatusModule,
-    ToolbarModule,
-    ListModule,
-    TableModule,
-    CalendarModule,
-    FdDatetimeModule,
-    QuickViewModule,
-    InfoLabelModule,
-    SelectModule
-} from '@fundamental-ngx/core';
-
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
@@ -36,6 +20,19 @@ import { CardCalendarExampleComponent } from './examples/calendar-card/card-cale
 import { CardQuickViewExampleComponent } from './examples/quick-view-card/card-quick-view-example.component';
 import { CardListExampleComponent } from './examples/list-card/card-list-example.component';
 import { CardLinkListExampleComponent } from './examples/link-list-card/card-link-list-example.component';
+import { CardModule } from '@fundamental-ngx/core/card';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { TableModule } from '@fundamental-ngx/core/table';
+import { CalendarModule } from '@fundamental-ngx/core/calendar';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
+import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 const routes: Routes = [
     {

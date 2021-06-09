@@ -13,13 +13,13 @@ import { Observable, of } from 'rxjs';
 
 import { NestedLinkDirective } from '../nested-link/nested-link.directive';
 import { NestedListKeyboardService } from '../nested-list-keyboard.service';
-import { PopoverComponent } from '../../popover/popover.component';
-import { RtlService } from '../../utils/public_api';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { map } from 'rxjs/operators';
 import { NestedItemInterface } from '../nested-item/nested-item.interface';
 import { NestedItemService } from '../nested-item/nested-item.service';
 import { NestedListPopoverInterface } from './nested-list-popover.interface';
 import { NestedListContentDirective } from '../nested-content/nested-list-content.directive';
+import { RtlService } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fd-nested-list-popover',

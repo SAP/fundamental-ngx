@@ -1,5 +1,6 @@
 import { Component, Injectable, LOCALE_ID } from '@angular/core';
-import { DatetimeAdapter, FdDate, FdDatetimeAdapter, TimeI18n } from '@fundamental-ngx/core';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { TimeI18n } from '@fundamental-ngx/core/time';
 
 // Aria labels i18n
 @Injectable()

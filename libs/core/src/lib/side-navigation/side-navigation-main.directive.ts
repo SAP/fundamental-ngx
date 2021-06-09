@@ -1,5 +1,5 @@
 import { ContentChild, Directive, HostBinding } from '@angular/core';
-import { NestedListDirective } from '../nested-list/nested-list/nested-list.directive';
+import { NestedListDirective } from '@fundamental-ngx/core/nested-list';
 
 @Directive({
     selector: '[fdSideNavigationMain], [fd-side-nav-main]'

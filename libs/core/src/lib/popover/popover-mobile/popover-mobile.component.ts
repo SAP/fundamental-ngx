@@ -16,11 +16,11 @@ import { Subscription } from 'rxjs';
 import { DialogService } from '../../dialog/public_api';
 import {
     MobileModeBase,
-    MobileModeConfigToken,
-    MobileModeControl,
     MOBILE_MODE_CONFIG,
-    RtlService,
-} from '../../utils/public_api';
+    MobileModeControl,
+    MobileModeConfigToken
+} from '@fundamental-ngx/core/mobile-mode';
+import { RtlService } from '../../utils/public_api';
 import { PopoverService } from '../popover-service/popover.service';
 import { PopoverInterface, POPOVER_COMPONENT } from '../popover.interface';
 

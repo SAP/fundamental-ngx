@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { whenStable } from './../utils/tests/when-stable';
-import { CarouselModule } from '../utils/directives/carousel/carousel.module';
+import { whenStable } from '@fundamental-ngx/core/tests';
+import { CarouselModule } from '@fundamental-ngx/core/carousel';
 import { CarouselComponent } from './carousel.component';
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
 import { ButtonModule } from '../button/button.module';
@@ -16,7 +16,7 @@ import { ButtonModule } from '../button/button.module';
             [pageIndicator]="showPageIndicator"
             [navigation]="showNavigator"
             [navigatorInPageIndicator]="navigatorInPageIndicator"
-            [carouselIndicatorsOrientation]="pageIndicatorContainerPlacement"
+            [pageIndicatorsOrientation]="pageIndicatorContainerPlacement"
             [loop]="isCircular"
         >
             <fd-carousel-item>
@@ -144,12 +144,12 @@ describe('CarouselComponent', () => {
     });
 
     it('should have 8 carousel items', async () => {
-        whenStable(fixture);
+        await whenStable(fixture);
         expect(component.carousel.slides.length).toEqual(8);
     });
 
     it('should left navigation button be disabled and right navigation button enabled on default carousel', async () => {
-        whenStable(fixture);
+        await whenStable(fixture);
         const leftNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--left'));
         const rightNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));
 
@@ -158,7 +158,7 @@ describe('CarouselComponent', () => {
 
         // click right button 7 time to reach last item.
         rightNavigationBtn.nativeElement.click();
-        whenStable(fixture);
+        await whenStable(fixture);
 
         expect(leftNavigationBtn.nativeElement.disabled).toEqual(false);
         expect(rightNavigationBtn.nativeElement.disabled).toEqual(false);
@@ -169,7 +169,7 @@ describe('CarouselComponent', () => {
         rightNavigationBtn.nativeElement.click();
         rightNavigationBtn.nativeElement.click();
         rightNavigationBtn.nativeElement.click();
-        whenStable(fixture);
+        await whenStable(fixture);
 
         expect(leftNavigationBtn.nativeElement.disabled).toEqual(false);
         expect(rightNavigationBtn.nativeElement.disabled).toEqual(true);
@@ -185,7 +185,7 @@ describe('CarouselComponent', () => {
             [pageIndicator]="showPageIndicator"
             [navigation]="showNavigator"
             [navigatorInPageIndicator]="navigatorInPageIndicator"
-            [carouselIndicatorsOrientation]="pageIndicatorContainerPlacement"
+            [pageIndicatorsOrientation]="pageIndicatorContainerPlacement"
             [loop]="isCircular"
         >
             <fd-carousel-item>
@@ -313,7 +313,7 @@ describe('CarouselComponent Multiple Active Item', () => {
     });
 
     it('should have both navigation button enabled', async () => {
-        whenStable(fixture);
+        await whenStable(fixture);
 
         const leftNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--left'));
         const rightNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));
@@ -326,14 +326,14 @@ describe('CarouselComponent Multiple Active Item', () => {
         rightNavigationBtn.nativeElement.click();
         rightNavigationBtn.nativeElement.click();
 
-        whenStable(fixture);
+        await whenStable(fixture);
         expect(leftNavigationBtn.nativeElement.disabled).toEqual(false);
         expect(rightNavigationBtn.nativeElement.disabled).toEqual(false);
 
         rightNavigationBtn.nativeElement.click();
         rightNavigationBtn.nativeElement.click();
 
-        whenStable(fixture);
+        await whenStable(fixture);
         expect(leftNavigationBtn.nativeElement.disabled).toEqual(false);
         expect(rightNavigationBtn.nativeElement.disabled).toEqual(true);
 
@@ -344,13 +344,13 @@ describe('CarouselComponent Multiple Active Item', () => {
         leftNavigationBtn.nativeElement.click();
         leftNavigationBtn.nativeElement.click();
 
-        whenStable(fixture);
+        await whenStable(fixture);
         expect(leftNavigationBtn.nativeElement.disabled).toEqual(true);
         expect(rightNavigationBtn.nativeElement.disabled).toEqual(false);
     });
 
     it('should make right button disabled on last item active', async () => {
-        whenStable(fixture);
+        await whenStable(fixture);
 
         const leftNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--left'));
         const rightNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));
@@ -365,13 +365,13 @@ describe('CarouselComponent Multiple Active Item', () => {
         rightNavigationBtn.nativeElement.click();
         rightNavigationBtn.nativeElement.click();
 
-        whenStable(fixture);
+        await whenStable(fixture);
         expect(leftNavigationBtn.nativeElement.disabled).toEqual(false);
         expect(rightNavigationBtn.nativeElement.disabled).toEqual(true);
     });
 
     it('should have left button disabled on first item active', async () => {
-        whenStable(fixture);
+        await whenStable(fixture);
 
         const leftNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--left'));
         const rightNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));
@@ -382,7 +382,7 @@ describe('CarouselComponent Multiple Active Item', () => {
         rightNavigationBtn.nativeElement.click();
         rightNavigationBtn.nativeElement.click();
 
-        whenStable(fixture);
+        await whenStable(fixture);
         expect(leftNavigationBtn.nativeElement.disabled).toEqual(false);
         expect(rightNavigationBtn.nativeElement.disabled).toEqual(false);
     });
@@ -397,7 +397,7 @@ describe('CarouselComponent Multiple Active Item', () => {
             [pageIndicator]="showPageIndicator"
             [navigation]="showNavigator"
             [navigatorInPageIndicator]="navigatorInPageIndicator"
-            [carouselIndicatorsOrientation]="pageIndicatorContainerPlacement"
+            [pageIndicatorsOrientation]="pageIndicatorContainerPlacement"
             [loop]="isCircular"
         >
             <fd-carousel-item>
@@ -525,7 +525,7 @@ describe('CarouselComponent looping navigation', () => {
     });
 
     it('should have both navigation button enabled', async () => {
-        whenStable(fixture);
+        await whenStable(fixture);
 
         const leftNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--left'));
         const rightNavigationBtn = fixture.debugElement.query(By.css('.fd-carousel__button--right'));

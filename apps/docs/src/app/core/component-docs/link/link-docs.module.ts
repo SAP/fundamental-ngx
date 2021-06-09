@@ -5,8 +5,8 @@ import { API_FILES } from '../../api-files';
 import { LinkHeaderComponent } from './link-header/link-header.component';
 import { LinkDocsComponent } from './link-docs.component';
 import { LinkExampleComponent } from './examples/link-example.component';
-import { LinkModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { LinkModule } from '@fundamental-ngx/core/link';
 
 const routes: Routes = [
     {
