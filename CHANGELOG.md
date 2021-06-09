@@ -1,4 +1,11 @@
 
+### [0.30.1-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.65...v0.30.1-rc.66) (2021-06-09)
+
+
+### Bug Fixes
+
+* **core:** dialog z-index fix ([#5617](https://github.com/SAP/fundamental-ngx/issues/5617)) ([dcb96bf](https://github.com/SAP/fundamental-ngx/commit/dcb96bf7fdafaac7b6749d2821dbdbfe59d50809))
+
 ### [0.30.1-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.64...v0.30.1-rc.65) (2021-06-09)
 
 
