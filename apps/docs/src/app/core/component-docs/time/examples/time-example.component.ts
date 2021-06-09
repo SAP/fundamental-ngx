@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { CUSTOM_FD_DATETIME_FORMATS } from 'apps/docs/src/app/platform/component-docs/platform-forms/platform-date-picker/platform-date-picker-examples/platform-date-picker-format-example.component';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-time-example',
