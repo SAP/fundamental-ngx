@@ -35,8 +35,7 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     set activable(val: boolean) {
         if (this.navigatable) {
             this._activable = val;
-        } 
-        this._changeDetRef.detectChanges();
+        }
     }
     get activable(): boolean {
         return this._activable;
@@ -48,8 +47,7 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     set hoverable(val: boolean) {
         if (this.navigatable) {
             this._hoverable = val;
-        } 
-        this._changeDetRef.detectChanges();
+        }
     }
     get hoverable(): boolean {
         return this._hoverable;
