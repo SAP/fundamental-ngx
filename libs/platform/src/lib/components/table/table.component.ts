@@ -710,6 +710,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         return row.type === TableRowType.ITEM;
     }
 
+    /** @hidden */
+    _isGroupRow(row: TableRow): boolean {
+        return row.type === TableRowType.GROUP;
+    }
+
     /**
      * @hidden
      * Toggle selectable row
@@ -883,7 +888,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     _isTreeRowFirstCell(cellIndex: number, row: TableRow): boolean {
-        return cellIndex === 0 && row.type === TableRowType.TREE;
+        return cellIndex === 0 && this._isTreeRow(row);
     }
 
     /**  
@@ -964,7 +969,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         dragRow.parent = dropRow;
         dragRow.level = dropRow.level + 1;
 
-        if (dropRow.type !== TableRowType.TREE) {
+        if (!this._isTreeRow(dropRow)) {
             dropRow.type = TableRowType.TREE;
         }
 
@@ -1351,7 +1356,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * Sort tree like groups by group.direction setting
      */
     private _sortTreeLikeGroupedRows(groupedRows: TreeLike<TableRow>[]): TreeLike<TableRow>[] {
-        if (!groupedRows[0] || groupedRows[0].type !== TableRowType.GROUP) {
+        if (!groupedRows[0] || !this._isGroupRow(groupedRows[0])) {
             return groupedRows;
         }
 
@@ -1507,7 +1512,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _getSelectableRows(): TableRow[] {
-        return this._tableRows.filter(({ type }) => type === TableRowType.ITEM || type === TableRowType.TREE);
+        return this._tableRows.filter((row) => this._isItemRow(row) || this._isTreeRow(row));
     }
 
     /** @hidden */
