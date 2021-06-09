@@ -31,15 +31,15 @@ import { Subject, Subscription, merge, Observable, defer } from 'rxjs';
 import { startWith, takeUntil, switchMap } from 'rxjs/operators';
 import { SelectionModel } from '@angular/cdk/collections';
 
-import { PopoverFillMode } from '../popover/popover-position/popover-position';
-import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
-import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { SELECT_COMPONENT, SelectInterface } from './select.interface';
 import { SelectKeyManagerService } from './select-key-manager.service';
 import { OptionComponent, FdOptionSelectionChange } from './option/option.component';
 import { SelectMobileComponent } from './select-mobile/select-mobile.component';
-import { RtlService } from '../utils/services/rtl.service';
-import { ContentDensityService } from '../utils/public_api';
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 let selectUniqueId = 0;
 

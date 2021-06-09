@@ -1,5 +1,5 @@
 import { Component, TemplateRef } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fd-popover-dialog-example',

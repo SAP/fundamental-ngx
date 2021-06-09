@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { whenStable } from '../../utils/tests';
+import { whenStable } from '@fundamental-ngx/core/tests';
 import { MessagePageSubtitleComponent } from './message-page-subtitle.component';
 
 describe('MessagePageSubtitleComponent', () => {

@@ -2,8 +2,8 @@ import { Component, Directive, OnChanges, OnInit, ElementRef, ViewChild, Content
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 
-import { ButtonComponent } from '../../button/public_api';
-import { CssClassBuilder, applyCssClass } from '../../utils/public_api';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 const TEST_DIRECTIVE_CLASS = 'fd-test-directive';
 

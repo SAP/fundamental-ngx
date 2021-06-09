@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertRef } from '@fundamental-ngx/core';
+import { AlertRef } from '@fundamental-ngx/core/alert';
 
 @Component({
     selector: 'fd-alert-content',

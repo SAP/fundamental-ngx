@@ -6,22 +6,20 @@ import { SharedDocumentationModule } from '../../../documentation/shared-documen
 import { WizardDocsComponent } from './wizard-docs.component';
 import { WizardExampleComponent } from './examples/wizard-example.component';
 import { WizardHeaderComponent } from './wizard-header/wizard-header.component';
-import {
-    BarModule,
-    LayoutGridModule,
-    DialogModule,
-    FormGroupModule,
-    FormModule,
-    RadioModule,
-    TitleModule,
-    WizardModule
-} from '@fundamental-ngx/core';
+
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { WizardCustomizableExampleComponent } from './examples/wizard-customizable-example.component';
 import { WizardMobileExampleComponent } from './examples/wizard-mobile-example.component';
 import { WizardBranchingExampleComponent } from './examples/wizard-branching-example.component';
 import { WizardDialogExampleComponent } from './examples/wizard-dialog-example.component';
 import { WizardNgForExampleComponent } from './examples/wizard-ngfor-example.component';
+import { WizardModule } from '@fundamental-ngx/core/wizard';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { RadioModule } from '@fundamental-ngx/core/radio';
+import { FormGroupModule, FormModule } from '@fundamental-ngx/core/form';
+import { TitleModule } from '@fundamental-ngx/core/title';
+import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
 
 const routes: Routes = [
     {

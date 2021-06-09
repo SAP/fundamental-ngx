@@ -21,8 +21,8 @@ import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
 import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
 import { DialogRef } from './utils/dialog-ref.class';
-import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
-import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { DialogBase } from './base/dialog-base.class';
 
 /**

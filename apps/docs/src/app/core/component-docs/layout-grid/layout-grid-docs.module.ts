@@ -4,9 +4,9 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { LayoutGridDocsComponent } from './layout-grid-docs.component';
 import { LayoutGridDocsHeaderComponent } from './layout-grid-docs-header/layout-grid-docs-header.component';
-import { LayoutGridModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { examples } from './examples';
+import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 
 const routes: Routes = [
     {
