@@ -1,5 +1,14 @@
-import { Component, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import { ObjectStatus } from '@fundamental-ngx/core';
+import {
+    Component,
+    Input,
+    Output,
+    EventEmitter,
+    ViewEncapsulation,
+    ChangeDetectionStrategy,
+    HostListener
+} from '@angular/core';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { KeyUtil, ObjectStatus } from '@fundamental-ngx/core';
 
 export type IndicationColorType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
@@ -58,6 +67,15 @@ export class ObjectStatusComponent {
     /** Event sent when button is clicked */
     @Output()
     objectStatusClick: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    _onKeydown($event: KeyboardEvent): void {
+        if (this.clickable && KeyUtil.isKeyCode($event, [ENTER, SPACE])) {
+            $event.preventDefault();
+            this.objectStatusClick.emit($event);
+        }
+    }
 
     /**
      *  Handles button click
