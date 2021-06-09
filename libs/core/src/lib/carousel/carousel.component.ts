@@ -29,8 +29,8 @@ import {
     CarouselConfig,
     PanEndOutput,
     CarouselItemInterface
-} from '../utils/services/carousel.service';
-import { RtlService } from '../utils/services/rtl.service';
+} from './carousel.service';
+import { RtlService } from '@fundamental-ngx/core/utils';
 
 /** Page limit to switch to numerical indicator */
 const ICON_PAGE_INDICATOR_LIMIT = 8;

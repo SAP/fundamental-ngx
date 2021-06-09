@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { Placement } from '../../popover/popover-position/popover-position';
+import { Placement } from '@fundamental-ngx/core/shared';
 
 /**
  * Label to be linked to a form control.

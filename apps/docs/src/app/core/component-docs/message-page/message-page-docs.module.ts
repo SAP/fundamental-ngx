@@ -13,8 +13,9 @@ import { MessagePageActionsExampleComponent } from './examples/message-page-exam
 import { MessagePageCustomIconExampleComponent } from './examples/message-page-examples.component';
 import { MessagePageNoIconExampleComponent } from './examples/message-page-examples.component';
 
-import { MessagePageModule, LinkModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { MessagePageModule } from '@fundamental-ngx/core/message-page';
+import { LinkModule } from '@fundamental-ngx/core/link';
 
 
 

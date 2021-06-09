@@ -1,4 +1,4 @@
-import { DynamicComponentConfig } from '../../utils/dynamic-component/dynamic-component-config';
+import { DynamicComponentConfig } from '@fundamental-ngx/core/utils';
 
 /**
  * @deprecated

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FdDate } from '@fundamental-ngx/core';
+import { FdDate } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-time-picker-allow-null-example',

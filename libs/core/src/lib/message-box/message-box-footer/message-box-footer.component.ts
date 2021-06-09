@@ -4,7 +4,7 @@ import {
     MessageBoxConfig,
     MessageBoxConfigurableElement
 } from '../utils/message-box-config.class';
-import { DialogFooterBase } from '../../dialog/base/dialog-footer-base.class';
+import { DialogFooterBase } from '@fundamental-ngx/core/dialog';
 
 export const MessageBoxButtonClass = 'fd-message-box__decisive-button';
 

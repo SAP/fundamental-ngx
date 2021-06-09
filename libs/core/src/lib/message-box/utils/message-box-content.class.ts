@@ -1,4 +1,4 @@
-import { DialogContentBase } from '../../dialog/base/dialog-content-base.class';
+import { DialogContentBase } from '@fundamental-ngx/core/dialog';
 import { TemplateRef } from '@angular/core';
 
 export class MessageBoxContent extends DialogContentBase {

@@ -6,7 +6,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
-import { KeyboardSupportService } from '../../utils/services/keyboard-support/keyboard-support.service';
+import { KeyboardSupportService } from '@fundamental-ngx/core/utils';
 
 /**
  * A component used to enforce a certain layout for the action sheet.
