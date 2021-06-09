@@ -1,3 +1,5 @@
+import { TableRowType } from '../enums';
+
 /**
  * Table row entity
  * Used to represent table row in the template
@@ -7,7 +9,7 @@ export class TableRow<T = any> {
         /**
          * Row semantic type
          */
-        public type: 'item' | 'group' | 'tree',
+        public type: TableRowType.ITEM | TableRowType.GROUP | TableRowType.TREE,
         /**
          * Indicates if row is selected
          */

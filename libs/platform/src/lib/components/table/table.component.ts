@@ -52,7 +52,7 @@ import {
     TableRowToggleOpenStateEvent,
     TableRowsRearrangeEvent
 } from './models';
-import { FILTER_STRING_STRATEGY, ContentDensity, SelectionMode, SortDirection } from './enums';
+import { FILTER_STRING_STRATEGY, ContentDensity, SelectionMode, SortDirection, TableRowType } from './enums';
 import { DEFAULT_COLUMN_WIDTH, DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
 import { TableDataSource } from './domain/table-data-source';
 import { ArrayTableDataSource } from './domain/array-data-source';
@@ -700,6 +700,16 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         );
     }
 
+    /** @hidden */
+    _isTreeRow(row: TableRow): boolean {
+        return row.type === TableRowType.TREE;
+    }
+
+    /** @hidden */
+    _isItemRow(row: TableRow): boolean {
+        return row.type === TableRowType.ITEM;
+    }
+
     /**
      * @hidden
      * Toggle selectable row
@@ -873,7 +883,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     _isTreeRowFirstCell(cellIndex: number, row: TableRow): boolean {
-        return cellIndex === 0 && row.type === 'tree';
+        return cellIndex === 0 && row.type === TableRowType.TREE;
     }
 
     /**  
@@ -945,7 +955,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         const dragRowChildren = this._findRowChildren(dragRow);
 
         if (parentRowChildren.length - (dragRowChildren.length + 1) === 0) {
-            parentRow.type = 'item';
+            parentRow.type = TableRowType.ITEM;
         }
     }
 
@@ -954,8 +964,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         dragRow.parent = dropRow;
         dragRow.level = dropRow.level + 1;
 
-        if (dropRow.type !== 'tree') {
-            dropRow.type = 'tree';
+        if (dropRow.type !== TableRowType.TREE) {
+            dropRow.type = TableRowType.TREE;
         }
 
         const children = this._findRowChildren(dragRow);
@@ -1111,7 +1121,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             return this._createTreeTableRowsByDataSourceItems(source);
         }
 
-        return source.map((item: T, index: number) => new TableRow('item', false, index, item));
+        return source.map((item: T, index: number) => new TableRow(TableRowType.ITEM, false, index, item));
     }
 
     /** @hidden */
@@ -1121,7 +1131,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             const hasChildren = item.hasOwnProperty(this.relationKey)
                 && Array.isArray(item[this.relationKey])
                 && item[this.relationKey].length;
-            const row = new TableRow(hasChildren ? 'tree' : 'item', false, index, item);
+            const row = new TableRow(hasChildren ? TableRowType.TREE : TableRowType.ITEM, false, index, item);
 
             row.expanded = false;
             rows.push(row);
@@ -1314,7 +1324,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             }
 
             const groupTableRow: TreeLike<TableRow<GroupTableRowValueType>> = new TableRow<GroupTableRowValueType>(
-                'group',
+                TableRowType.GROUP,
                 false,
                 0,
                 { field: rule.field, value: value, count: 0 },
@@ -1341,7 +1351,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * Sort tree like groups by group.direction setting
      */
     private _sortTreeLikeGroupedRows(groupedRows: TreeLike<TableRow>[]): TreeLike<TableRow>[] {
-        if (!groupedRows[0] || groupedRows[0].type !== 'group') {
+        if (!groupedRows[0] || groupedRows[0].type !== TableRowType.GROUP) {
             return groupedRows;
         }
 
@@ -1497,7 +1507,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _getSelectableRows(): TableRow[] {
-        return this._tableRows.filter(({ type }) => type === 'item' || type === 'tree');
+        return this._tableRows.filter(({ type }) => type === TableRowType.ITEM || type === TableRowType.TREE);
     }
 
     /** @hidden */

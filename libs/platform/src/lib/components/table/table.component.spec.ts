@@ -10,7 +10,7 @@ import { ListModule, PopoverModule, RtlService, TableModule, CheckboxModule } fr
 
 import { PlatformTableModule } from './table.module';
 import { TableComponent } from './table.component';
-import { FILTER_STRING_STRATEGY, SelectionMode, SortDirection } from './enums';
+import { FILTER_STRING_STRATEGY, SelectionMode, SortDirection, TableRowType } from './enums';
 import { TableDataProvider, TableDataSource } from './domain';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { TableService } from './table.service';
@@ -144,7 +144,7 @@ describe('TableComponent internal', () => {
         component._toggleAllSelectableRows(true);
 
         expect(component._tableRows.filter((r) => r.checked).length).toEqual(
-            component._tableRows.filter(({ type }) => type === 'item').length
+            component._tableRows.filter(({ type }) => type === TableRowType.ITEM).length
         );
 
         component._toggleAllSelectableRows(false);
