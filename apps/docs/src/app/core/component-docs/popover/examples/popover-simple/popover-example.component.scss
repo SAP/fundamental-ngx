@@ -1,9 +1,6 @@
-$fd-focus-outline-offset: 0.0625rem;
-
-@mixin fd-fiori-focus($offset: -0.1875rem) {
+@mixin fd-fiori-focus() {
     &:focus,
     &.is-focus {
-      outline-offset: $offset;
       outline-width: .0625rem;
       outline-width: var(--sapContent_FocusWidth, .0625rem);
       outline-color: #000;
@@ -13,12 +10,11 @@ $fd-focus-outline-offset: 0.0625rem;
     }
   }
 
-  // temporary will be removed once respective component styles are updated
   fd-avatar,
   fd-icon,
  .fd-list,
  a {
-    @include fd-fiori-focus($fd-focus-outline-offset);
+    @include fd-fiori-focus();
     cursor: pointer;
   }
 
