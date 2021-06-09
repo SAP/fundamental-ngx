@@ -1,4 +1,11 @@
 
+### [0.30.1-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.64...v0.30.1-rc.65) (2021-06-09)
+
+
+### Bug Fixes
+
+* **platform:** do not open menu on disabled menu button and split menu button ([#5514](https://github.com/SAP/fundamental-ngx/issues/5514)) ([d5fdc2e](https://github.com/SAP/fundamental-ngx/commit/d5fdc2e655beae23f95ae9d727be9709de0954da))
+
 ### [0.30.1-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.63...v0.30.1-rc.64) (2021-06-08)
 
 
