@@ -5,6 +5,7 @@ import {
     ElementRef,
     Input,
     OnChanges,
+    OnDestroy,
     OnInit,
     Optional,
     ViewEncapsulation
@@ -39,7 +40,7 @@ import { applyCssClass } from '@fundamental-ngx/core/utils';
         '[attr.disabled]': '_disabled || null'
     }
 })
-export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit {
+export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit,  OnDestroy {
     /** The property allows user to pass additional css classes. */
     @Input()
     class = '';
@@ -72,6 +73,11 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
             }));
         }
         this.buildComponentCssClass();
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+      this._subscriptions.unsubscribe();
     }
 
     @applyCssClass
