@@ -17,7 +17,7 @@
                 [attr.aria-disabled]="false"
                 type="button"
                 (click)="previousClicked.emit()"
-                [title]="previousAriaLabel"
+                [attr.title]="previousAriaLabel"
             ></button>
         </div>
         <ng-container *ngIf="isOnDayView || isOnMonthView">
@@ -73,7 +73,7 @@
                 [attr.aria-disabled]="false"
                 (click)="nextClicked.emit()"
                 type="button"
-                [title]="nextAriaLabel"
+                [attr.title]="nextAriaLabel"
             ></button>
         </div>
         <button
