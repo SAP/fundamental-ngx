@@ -1,4 +1,12 @@
 
+### [0.30.1-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.69...v0.30.1-rc.70) (2021-06-10)
+
+
+### Bug Fixes
+
+* **core:** fix scroll spy target offset top ([#5640](https://github.com/SAP/fundamental-ngx/issues/5640)) ([d21c669](https://github.com/SAP/fundamental-ngx/commit/d21c66954e4960f31ccddf374f5f80104ce0ce01))
+* **platform:** fix Search field focus if click outside ([#5633](https://github.com/SAP/fundamental-ngx/issues/5633)) ([a0f6413](https://github.com/SAP/fundamental-ngx/commit/a0f64130e8478e776431e668a3fdd568575e98fe))
+
 ### [0.30.1-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.68...v0.30.1-rc.69) (2021-06-10)
 
 
