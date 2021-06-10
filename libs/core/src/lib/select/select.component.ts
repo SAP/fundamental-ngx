@@ -47,8 +47,10 @@ export type SelectControlState = 'error' | 'success' | 'warning' | 'information'
 
 const SELECT_HEADER_IDENTIFIER = '.fd-list__group-header';
 
+export const SELECT_PANEL_MAX_HEIGHT = 250;
+
 /** The height of the select items in `rem` units. */
-export const SELECT_ITEM_HEIGHT_EM = 3;
+export const SELECT_ITEM_HEIGHT_EM = 4;
 
 /**
 * Event object that is emitted when selection is changed
@@ -604,15 +606,20 @@ export class SelectComponent implements
     */
     _getOptionScrollPosition(
         optionIndex: number,
-        optionHeight: number,
+        itemHeight: number,
         currentScrollPosition: number,
         panelHeight: number
     ): number {
+        const offsetHeight = this._options.get(optionIndex)._getHtmlElement().offsetHeight ;
+        const optionHeight = offsetHeight === 0  ? itemHeight : offsetHeight;
         const optionOffset = optionIndex * optionHeight;
+        panelHeight = SELECT_PANEL_MAX_HEIGHT;
         if (optionOffset < currentScrollPosition) {
             return optionOffset;
         }
-        if (optionOffset + optionHeight > currentScrollPosition + panelHeight) {
+
+       if (optionOffset + optionHeight > currentScrollPosition + panelHeight) {
+            console.log('sds', optionOffset - panelHeight + optionHeight);
             return Math.max(0, optionOffset - panelHeight + optionHeight);
         }
         return currentScrollPosition;
