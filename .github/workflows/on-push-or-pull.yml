@@ -216,7 +216,7 @@ jobs:
   # run e2e tests on saucelabs
   e2e_smoke:
     runs-on: ubuntu-latest
-    needs: [build-core, build-platform, firebase_preview]
+    needs: firebase_preview
 
     strategy:
       # when one test fails, DO NOT cancel the other
@@ -225,8 +225,8 @@ jobs:
       # https://github.com/cypress-io/github-action/issues/48
       fail-fast: false
       matrix:
-        node: ["suite platformA", "suite platformB", "spec core"]
-        browser: [msedge, firefox, chrome]
+        suite: ["suite platformA", "suite platformB", "spec core"]
+        browser: [ms-msedge, ms-firefox, ms-chrome, osx-msedge, osx-firefox, osx-chrome]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
@@ -238,7 +238,7 @@ jobs:
         env:
           CAP_SLUG: ${{ matrix.browser }}
         if: ${{ needs.firebase_preview.outputs.output_url }}
-        run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.node }} --baseUrl=${{ needs.firebase_preview.outputs.output_url }}/fundamental-ngx
+        run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.suite }} --baseUrl=${{ needs.firebase_preview.outputs.output_url }}/fundamental-ngx
 
       - name: smoke e2e on local
         env:
@@ -247,4 +247,4 @@ jobs:
         run: |
           npx ng serve --disable-host-check --ssl --no-watch &
           npx wait-on https://localhost:4200
-          TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.node }}
+          TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.suite }}
