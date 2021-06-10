@@ -10,6 +10,7 @@ import {
     OnChanges,
     OnDestroy,
     Optional,
+    Renderer2,
     SimpleChanges,
     TemplateRef,
     ViewChild,
@@ -95,10 +96,14 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
      */
     directiveRef: any;
 
+    /** @hidden */
+    private _clickEventListener: Function;
+
     constructor(
         private _elementRef: ElementRef,
         private _popoverService: PopoverService,
         private _cdr: ChangeDetectorRef,
+        private _rendered: Renderer2,
         @Optional() private _dynamicComponentService: DynamicComponentService
     ) {
         super();
@@ -106,17 +111,19 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (!this.popoverBody) {
-            this._popoverService.templateContent = this.templateRef;
+        if (!this.mobile) {
+            if (!this.popoverBody) {
+                this._popoverService.templateContent = this.templateRef;
+            }
+            this._popoverService.initialise(
+                this.trigger || this.triggerOrigin.elementRef,
+                this,
+                this.popoverBody ? {
+                template: this.templateRef,
+                container: this.container,
+                popoverBody: this.popoverBody,
+            } : null);
         }
-        this._popoverService.initialise(
-            this.trigger || this.triggerOrigin.elementRef,
-            this,
-            this.popoverBody ? {
-            template: this.templateRef,
-            container: this.container,
-            popoverBody: this.popoverBody,
-        } : null);
 
         this._setupView();
     }
@@ -131,15 +138,29 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
         this._popoverService.onDestroy();
     }
 
-    /** Closes the popover. */
-    close(): void {
-        this._popoverService.close();
+    /** Toggles menu open/close state */
+    toggle(): void {
+        if (this.isOpen) {
+            this.close();
+        } else {
+            this.open();
+        }
     }
 
     /** Opens the popover. */
     open(): void {
-        // debugger;
+        this.isOpen = true;
         this._popoverService.open();
+        this.isOpenChange.emit(this.isOpen);
+        this._cdr.markForCheck();
+    }
+
+    /** Closes the popover. */
+    close(): void {
+        this.isOpen = false;
+        this._popoverService.close();
+        this.isOpenChange.emit(this.isOpen);
+        this._cdr.markForCheck();
     }
 
     /**
@@ -162,19 +183,8 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
         this._popoverService.refreshPosition();
     }
 
-    /** Handler for alt + arrow down keydown */
-    // triggerKeyDownHandler(event: KeyboardEvent): void {
-    //     // debugger;
-    //     if (KeyUtil.isKeyCode(event, DOWN_ARROW) && event.altKey && !this.disabled) {
-    //         this.open();
-    //         event.preventDefault();
-    //         event.stopPropagation();
-    //     }
-    // }
-
     private _setupView(): void {
         if (this.mobile) {
-            // debugger;
             this._setupMobileMode();
         }
 
@@ -186,7 +196,30 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
             this.templateRef,
             PopoverMobileComponent,
             { container: this._elementRef.nativeElement },
-            { injector: Injector.create({ providers: [{ provide: POPOVER_COMPONENT, useValue: this }] }) }
+            {
+                injector: Injector.create({
+                    providers: [{ provide: POPOVER_COMPONENT, useValue: this }]
+                })
+            }
         );
+
+        this._listenOnTriggerRefClicks();
+    }
+
+    private _listenOnTriggerRefClicks(): void {
+        this._destroyEventListeners();
+
+        if (this.trigger && this.mobile) {
+            this._clickEventListener = this._rendered.listen(
+                this.trigger.nativeElement, 'click', () => this.toggle()
+            );
+        }
+    }
+
+    private _destroyEventListeners(): void {
+        if (this._clickEventListener) {
+            this._clickEventListener();
+            this._clickEventListener = null;
+        }
     }
 }

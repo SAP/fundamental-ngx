@@ -1,13 +1,7 @@
+<button fd-button [fdPopoverTrigger]="popoverMobile">Open Mobile Popover</button>
+
 <fd-popover #popoverMobile
     [mobile]="true"
     [mobileConfig]="{ title: 'Test', hasCloseButton: true }"
-    style="display: block"
-    [focusTrapped]="true"
-    [focusAutoCapture]="true">
-    <fd-popover-control>
-        <button fd-button>Trigger Mobile Popover</button>
-    </fd-popover-control>
-    <!-- <fd-popover-body>
-        <div style="padding: 12px">This popover is connected to other element</div>
-    </fd-popover-body> -->
+    style="display: block">
 </fd-popover>

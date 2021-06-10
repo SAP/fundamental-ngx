@@ -23,6 +23,7 @@ import {
 import { RtlService } from '../../utils/public_api';
 import { PopoverService } from '../popover-service/popover.service';
 import { PopoverInterface, POPOVER_COMPONENT } from '../popover.interface';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-popover-mobile',
@@ -31,7 +32,7 @@ import { PopoverInterface, POPOVER_COMPONENT } from '../popover.interface';
     encapsulation: ViewEncapsulation.None,
     providers: [PopoverService],
 })
-export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> implements OnInit, AfterViewInit, OnDestroy {
+export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> implements OnInit, OnDestroy {
     childContent: TemplateRef<any> = undefined;
 
     @ViewChild('dialogTemplate')
@@ -52,20 +53,18 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     }
 
     ngOnInit(): void {
-        // debugger;
         this._listenOnPopoverOpenChange();
     }
 
-    ngAfterViewInit(): void {
-        // debugger;
-        this._openDialog();
-        this.dialogRef.hide(true);
-    }
+    // ngAfterViewInit(): void {
+    //     this._openDialog();
+    //     this.dialogRef.hide(true);
+    // }
 
     ngOnDestroy(): void {
         this.dialogRef.close();
         super.onDestroy();
-        // this._subscriptions.unsubscribe();
+        this._subscriptions.unsubscribe();
     }
 
     close(): void {
@@ -75,14 +74,19 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
 
     private _listenOnPopoverOpenChange(): void {
         this._subscriptions.add(
-            this._component.isOpenChange.subscribe((isOpen) => {
-                this.dialogRef.hide(!isOpen);
-            })
+            this._component.isOpenChange
+                .pipe(takeUntil(this._onDestroy$))
+                .subscribe((isOpen) => {
+                    if (isOpen) {
+                        this._openDialog();
+                    } else {
+                        this.dialogRef.hide(true);
+                    }
+                })
         );
     }
 
     private _openDialog(): void {
-        // debugger;
         this.dialogRef = this._dialogService.open(this._dialogTemplate, {
             ...this.dialogConfig,
             mobile: true,
