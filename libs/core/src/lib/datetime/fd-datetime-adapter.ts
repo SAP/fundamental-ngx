@@ -23,6 +23,8 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     /** Whether to clamp the date between 1 and 9999 to avoid IE and Edge errors. */
     private readonly _fixYearsRangeIssue: boolean;
 
+    fromNow: undefined;
+
     constructor(@Optional() @Inject(LOCALE_ID) localeId: string, platform: Platform) {
         super();
 

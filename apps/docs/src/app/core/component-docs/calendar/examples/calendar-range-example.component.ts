@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
 import { DateRange } from '@fundamental-ngx/core/calendar';
-import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-calendar-range-example',
@@ -15,7 +15,17 @@ import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
         <br />
         <div>Selected First Date: {{ selected.start }}</div>
         <br />
-        <div>Selected Last Date: {{ selected.end }}</div>`
+        <div>Selected Last Date: {{ selected.end }}</div>`,
+    providers: [
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        },
+        {
+            provide: DATE_TIME_FORMATS,
+            useValue: FD_DATETIME_FORMATS
+        }
+    ]
 })
 export class CalendarRangeExampleComponent {
     selected: DateRange<FdDate> = new DateRange(new FdDate(2019, 10, 11), new FdDate(2019, 10, 19));
