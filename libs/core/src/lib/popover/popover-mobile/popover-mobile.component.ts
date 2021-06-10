@@ -56,11 +56,6 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
         this._listenOnPopoverOpenChange();
     }
 
-    // ngAfterViewInit(): void {
-    //     this._openDialog();
-    //     this.dialogRef.hide(true);
-    // }
-
     ngOnDestroy(): void {
         this.dialogRef.close();
         super.onDestroy();
