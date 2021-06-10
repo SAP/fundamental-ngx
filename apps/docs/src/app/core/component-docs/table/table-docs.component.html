@@ -169,7 +169,7 @@
 </fd-docs-section-title>
 <description>
     A row can be non-navigatable by setting the property <code>[navigatable]="false"</code>.<br><br>
-    When a table row is navigatable, you should indicate them with an arrow icon. When a row is not navigatable, the arrow icon should hide.<br>
+    If only some of the table rows are navigatable, you should indicate them with an arrow icon.<br>
     To hide the arrow icon, supply no value to the <code>[glyph]</code> property, and set <code>[navigation]="false"</code> for the <code>fd-table-icon</code> directive.<br><br>
     When a row uses button for navigation, the button will be disabled when the row becomes non-navigatable. <br><br> 
     Upon navigation event, either the user is taken to a new page, or the event is handled by an implementation such as <code>(click)="myFunction()"</code>
