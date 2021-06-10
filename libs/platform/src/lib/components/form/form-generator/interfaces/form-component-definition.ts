@@ -1,5 +1,7 @@
+import { Type } from '@angular/core';
+import { BaseDynamicFormGeneratorControl } from '../base-dynamic-form-generator-control';
+
 export interface FormComponentDefinition {
-    type?: string;
     types?: string[];
-    component: any;
+    component: Type<BaseDynamicFormGeneratorControl>;
 }

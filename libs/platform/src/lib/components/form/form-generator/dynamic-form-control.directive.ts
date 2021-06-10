@@ -1,6 +1,7 @@
 import { ComponentFactoryResolver, Directive, Input, OnInit, ViewContainerRef } from '@angular/core';
-import { DynamicFormItem } from './interfaces/dynamic-form-item';
 import { FormGroup } from '@angular/forms';
+
+import { DynamicFormItem } from './interfaces/dynamic-form-item';
 import { BaseDynamicFormGeneratorControl } from './base-dynamic-form-generator-control';
 import { FormGeneratorService } from './form-generator.service';
 import { FormField } from '../form-field';

@@ -1,8 +1,16 @@
 import { Directive, Input } from '@angular/core';
-import { DynamicFormItem } from './interfaces/dynamic-form-item';
 import { FormGroup } from '@angular/forms';
+
+import { DynamicFormItem } from './interfaces/dynamic-form-item';
 import { FormField } from '../form-field';
 import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from './providers/providers';
+
+export interface BaseDynamicFormGeneratorControlInterface {
+    formItem: DynamicFormItem;
+    name: string;
+    form: FormGroup;
+    formField: FormField;
+}
 
 /**
  * Abstract class that used as a base for the Dynamic Form Generator components.
@@ -10,7 +18,7 @@ import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from './provi
 @Directive({
     providers: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]
 })
-export abstract class BaseDynamicFormGeneratorControl {
+export abstract class BaseDynamicFormGeneratorControl implements BaseDynamicFormGeneratorControlInterface {
 
     /**
      * @description @see DynamicFormItem

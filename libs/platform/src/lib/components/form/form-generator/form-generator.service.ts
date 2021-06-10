@@ -1,23 +1,14 @@
 import { Injectable, Type } from '@angular/core';
 import { AsyncValidatorFn, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+
 import { DynamicFormControl } from './dynamic-form-control';
-import { DynamicFormItem, InquierChoiseItem } from './interfaces/dynamic-form-item';
+import { DynamicFormItem, DynamicFormItemChoices } from './interfaces/dynamic-form-item';
 import { FormComponentDefinition } from './interfaces/form-component-definition';
 import { DEFAULT_COMPONENTS_LIST } from './config/default-components-list';
 import { DEFAULT_VALIDATION_ERRORS } from './config/default-validation-errors';
-import { SelectItem } from '../../../domain/data-model';
-import { Observable } from 'rxjs';
-import { isFunction } from '../../../utils/lang';
-
-function isPromise<T = any>(obj: any): obj is Promise<T> {
-    // allow any Promise/A+ compliant thenable.
-    // It's up to the caller to ensure that obj.then conforms to the spec
-    return !!obj && isFunction(obj.then);
-}
-
-function isSubscribable(obj: any|Observable<any>): obj is Observable<any> {
-    return !!obj && isFunction(obj.subscribe);
-}
+import { BaseDynamicFormGeneratorControl, SelectItem } from '@fundamental-ngx/platform';
+import { isFunction, isPromise, isSubscribable } from '../../../utils/lang';
 
 interface SubscriptionStrategy {
     createSubscription(async: Observable<any>|Promise<any>|Function, updateLatestValue: any): Promise<any>;
@@ -26,8 +17,7 @@ interface SubscriptionStrategy {
 class SubscribableStrategy implements SubscriptionStrategy {
     createSubscription(async: Observable<any>, updateLatestValue: any): Promise<any> {
         return async.toPromise().then(updateLatestValue, e => {
-
-            throw e;
+            console.error(e);
         });
     }
 }
@@ -35,14 +25,13 @@ class SubscribableStrategy implements SubscriptionStrategy {
 class PromiseStrategy implements SubscriptionStrategy {
     createSubscription(async: Promise<any>, updateLatestValue: (v: any) => any): Promise<any> {
         return async.then(updateLatestValue, e => {
-
-            throw e;
+            console.error(e);
         });
     }
 }
 
 class FunctionStrategy implements SubscriptionStrategy {
-    createSubscription(fn: Function, updateLatestValue: any): any {
+    createSubscription(fn: Function, updateLatestValue: (v: any) => any): any {
 
         const result = isFunction(fn) ? fn() : fn;
 
@@ -50,40 +39,44 @@ class FunctionStrategy implements SubscriptionStrategy {
     }
 }
 
-  const _promiseStrategy = new PromiseStrategy();
-  const _subscribableStrategy = new SubscribableStrategy();
-  const _functionStrategy = new FunctionStrategy();
+class ValueStrategy implements SubscriptionStrategy {
+    createSubscription(value: any, updateLatestValue: (v: any) => any): any {
+        updateLatestValue(value);
+    }
+}
+
+const _promiseStrategy = new PromiseStrategy();
+const _subscribableStrategy = new SubscribableStrategy();
+const _functionStrategy = new FunctionStrategy();
+const _valueStrategy = new ValueStrategy();
 
 /**
  * @description Form generator service
  */
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class FormGeneratorService {
 
     /**
      * @hidden
      * @private
      */
-    private _formComponentDefinitions: FormComponentDefinition[] = DEFAULT_COMPONENTS_LIST;
+     private _formComponentDefinitions: FormComponentDefinition[] = DEFAULT_COMPONENTS_LIST;
 
-    /**
-     * @hidden
-     * @private
-     */
-    private _validationErrorHints = DEFAULT_VALIDATION_ERRORS;
+     /**
+      * @hidden
+      * @private
+      */
+     private _validationErrorHints = DEFAULT_VALIDATION_ERRORS;
 
-    /**
-     * @hidden
-     * @private
-     */
-    private _latestAsyncValue: any;
+     /**
+      * @hidden
+      * @private
+      */
+     private _latestAsyncValue: any;
 
     constructor(
         private _fb: FormBuilder
-    ) {
-    }
+    ) { }
 
     /**
      * @description Generates `FormGroup` class with the list of `DynamicFormControl` control classes
@@ -94,12 +87,12 @@ export class FormGeneratorService {
     async generateForm(formItems: DynamicFormItem[]): Promise<FormGroup> {
         const form = this._fb.group({});
 
-        formItems.forEach((q) => {
+        formItems.forEach((formItem) => {
 
-            const formItemComponentType = this.getComponentDefinitionByType(q.type);
+            const formItemComponentType = this.getComponentDefinitionByType(formItem.type);
 
             if (!formItemComponentType) {
-                console.warn(`Form item '${q.name}' with type '${q.type}' has no defined component.
+                console.warn(`Form item '${formItem.name}' with type '${formItem.type}' has no defined component.
                 Please use 'addComponent' method in ${FormGeneratorService.name} to define appropriate relations.`);
 
                 return;
@@ -107,35 +100,35 @@ export class FormGeneratorService {
 
             let validator: AsyncValidatorFn = null;
 
-            if (isFunction(q.validate)) {
+            if (isFunction(formItem.validate)) {
                 validator = async (control: DynamicFormControl) => {
-                    const formValue = await this.getFormValue(form);
-
-                    const obj = q.validate(control.value, formValue);
+                    const obj = formItem.validate(control.value, form.value);
 
                     const result = await this._getFunctionValue(obj);
 
-                    return result === true ? null : { validator: typeof result === 'boolean' ? true : result };
+                    return result === null ? result : { validator: typeof result === 'boolean' ? true : result };
                 };
 
-                q.asyncValidators = q.asyncValidators || [];
-                q.asyncValidators = typeof q.asyncValidators === 'function' ? [q.asyncValidators] : q.asyncValidators;
+                formItem.asyncValidators = formItem.asyncValidators || [];
+                formItem.asyncValidators = typeof formItem.asyncValidators === 'function'
+                    ? [formItem.asyncValidators]
+                    : formItem.asyncValidators;
 
-                q.asyncValidators.push(validator);
+                formItem.asyncValidators.push(validator);
             }
 
             let formControl: DynamicFormControl;
 
-            q.validators = q.validators || [Validators.nullValidator];
+            formItem.validators = formItem.validators || [Validators.nullValidator];
 
-            formControl = new DynamicFormControl(q.default, {
-                validators: q.validators,
-                asyncValidators: q.asyncValidators,
-                dynamicFormitem: q,
+            formControl = new DynamicFormControl(formItem.default, {
+                validators: formItem.validators,
+                asyncValidators: formItem.asyncValidators,
+                dynamicFormItem: formItem,
                 updateOn: 'change'
             });
 
-            form.addControl(q.name, formControl);
+            form.addControl(formItem.name, formControl);
 
             formControl.updateValueAndValidity({ emitEvent: false });
         });
@@ -146,9 +139,13 @@ export class FormGeneratorService {
         for (const key of formControlNames) {
             const formItem = formItems.find(fi => fi.name === key);
 
-            formItem.message = await this._getFormItemLabel(formItem, form);
+            formItem.message = await this._getFormItemPropertyValue(formItem, form, 'message');
+            formItem.placeholder = await this._getFormItemPropertyValue(formItem, form, 'placeholder');
             formItem.choices = await this._getFormItemChoices(formItem, form);
-            formItem.default = await this._getFormItemDefaultValue(formItem, form);
+            formItem.default = await this._getFormItemPropertyValue(formItem, form, 'default');
+
+            // Update form value since it might be changed
+            form.controls[formItem.name].setValue(formItem.default);
 
             (form.controls[key] as DynamicFormControl).formItem = formItem;
         }
@@ -172,12 +169,6 @@ export class FormGeneratorService {
                 delete formValue[i];
                 continue;
             }
-            if (formItem.filter) {
-
-                const obj = formItem.filter(formValue[i]);
-
-                formValue[i] = await this._getFunctionValue(obj);
-            }
 
             if (formItem.transformer) {
 
@@ -193,21 +184,35 @@ export class FormGeneratorService {
     /**
      * @description Adds custom component to the list of available components for the form generator items.
      * @param component Angular component.
-     * @param type type of the form item.
+     * @param types types of the form item.
      */
-    addComponent<T>(component: Type<T>, type: string): void {
+    addComponent(component: Type<BaseDynamicFormGeneratorControl>, types: string[]): boolean {
 
-        const existingIndex = this._formComponentDefinitions.findIndex(c => c.type === type);
+        const bestMatchComponentIndex = this._formComponentDefinitions.findIndex(c => c.types.every(t => types.includes(t)));
 
-        if (existingIndex > -1) {
-            this._formComponentDefinitions[existingIndex].component = component;
-            return;
+        if (bestMatchComponentIndex > -1) {
+            this._formComponentDefinitions[bestMatchComponentIndex].component = component;
+            return true;
+        }
+
+        // Try to find component in types key. There might be some unique cases when new component might replace multiple.
+        const existingComponents = this._formComponentDefinitions.filter(c => c.types.filter(t => types.includes(t)));
+
+        for (const existingComponent of existingComponents) {
+
+            existingComponent.types = existingComponent.types.filter(t => !types.includes(t));
+
+            const index = this._formComponentDefinitions.findIndex(c => c.component === existingComponent.component);
+
+            this._formComponentDefinitions[index] = existingComponent;
         }
 
         this._formComponentDefinitions.push({
-            type: type,
+            types: types,
             component: component
         });
+
+        return true;
     }
 
 
@@ -217,14 +222,7 @@ export class FormGeneratorService {
      * @returns @see FormComponentDefinition Component definition for the form item
      */
     getComponentDefinitionByType(type: string): FormComponentDefinition | null {
-        return this._getFormComponents().find(c => c.type === type || c.types?.includes(type));
-    }
-
-    /**
-     * @private
-     */
-    private _getFormComponents(): FormComponentDefinition[] {
-        return this._formComponentDefinitions;
+        return this._formComponentDefinitions.find(c => c.types.includes(type));
     }
 
     /**
@@ -250,18 +248,20 @@ export class FormGeneratorService {
      * @param form
      * @returns `Set` where key is item name, and boolean value if field needs to be shown.
      */
-    async checkVisibleFormItems(form: FormGroup): Promise<Set<{[key: string]: boolean}>> {
+    async checkVisibleFormItems(form: FormGroup): Promise<{[key: string]: boolean}> {
 
-        const shouldShowFields = new Set<{[key: string]: boolean}>();
+        const shouldShowFields: {[key: string]: boolean} = {};
+
+        const formValue = form.value;
 
         for (const [key, control] of Object.entries(form.controls)) {
             const formItem = (control as DynamicFormControl).formItem;
 
-            if (formItem.when === undefined) {
+            if (!formItem.when) {
                 continue;
             }
 
-            const obj = formItem.when(form.value);
+            const obj = formItem.when(formValue);
 
             shouldShowFields[key] = await this._getFunctionValue(obj);
         }
@@ -274,43 +274,21 @@ export class FormGeneratorService {
      * @private
      * @param formItem
      * @param form
+     * @param key
      * @returns
      */
-    private async _getFormItemLabel(formItem: DynamicFormItem, form: FormGroup): Promise<string> {
-        let message = formItem.message;
+    private async _getFormItemPropertyValue<T = string>(formItem: DynamicFormItem,
+                                                        form: FormGroup,
+                                                        key: keyof DynamicFormItem): Promise<T> {
+        let value = formItem[key];
 
-        if (typeof formItem.message === 'function') {
-            const currentAnswers = await this.getFormValue(form);
+        if (typeof value === 'function') {
+            const obj = value(form.value);
 
-            const obj = formItem.message(currentAnswers);
-
-            message = await this._getFunctionValue(obj);
+            value = await this._getFunctionValue(obj);
         }
 
-        return message as string;
-    }
-
-    /**
-     * @hidden
-     * @private
-     * @param formItem
-     * @param form
-     * @returns
-     */
-    private async _getFormItemDefaultValue(formItem: DynamicFormItem, form: FormGroup): Promise<string> {
-        let answer = formItem.default;
-
-        if (typeof formItem.default === 'function') {
-            const currentAnswers = await this.getFormValue(form);
-
-            const obj = formItem.default(currentAnswers);
-
-            answer = await this._getFunctionValue(obj);
-        }
-
-        form.controls[formItem.name].setValue(answer);
-
-        return answer;
+        return value as T;
     }
 
     /**
@@ -322,55 +300,15 @@ export class FormGeneratorService {
      */
     private async _getFormItemChoices(formItem: DynamicFormItem, form: FormGroup): Promise<SelectItem[]> {
 
-        const defaultChoices = formItem.choices;
+        const defaultChoices = await this._getFormItemPropertyValue<DynamicFormItemChoices[]>(formItem, form, 'choices');
 
         if (!defaultChoices) {
             return [];
         }
 
-        let returnChoices: any;
-
-        if (typeof defaultChoices === 'function') {
-
-            const currentAnswers = await this.getFormValue(form);
-
-            const obj = defaultChoices(currentAnswers);
-
-            returnChoices = await this._getFunctionValue(obj) as string[] | number[] | SelectItem[];
-        } else {
-            returnChoices = defaultChoices;
-        }
-
-        returnChoices = returnChoices.map((c: string | number | SelectItem | InquierChoiseItem) => {
-
-            if (typeof c === 'object') {
-                c.label = c.label || (c as InquierChoiseItem).name;
-
-                return c;
-            }
-
-            return { label: c, value: c } as SelectItem;
+        return defaultChoices.map((c: string | number | SelectItem) => {
+            return typeof c === 'object' ? c : { label: c, value: c } as SelectItem;
         }) as SelectItem[];
-
-        return returnChoices;
-    }
-
-    /**
-     * @hidden
-     * @private
-     * @param obj
-     * @returns
-     */
-    private _selectStrategy(obj: Observable<any>|Promise<any>|Function): SubscriptionStrategy {
-        if (isPromise(obj)) {
-            return _promiseStrategy;
-        }
-
-        if (isSubscribable(obj)) {
-            return _subscribableStrategy;
-        }
-
-        return _functionStrategy;
     }
 
     /**
@@ -398,5 +336,27 @@ export class FormGeneratorService {
         }
 
         return this._latestAsyncValue;
+    }
+
+    /**
+     * @hidden
+     * @private
+     * @param obj
+     * @returns
+     */
+     private _selectStrategy(obj: Observable<any>|Promise<any>|Function): SubscriptionStrategy {
+        if (isPromise(obj)) {
+            return _promiseStrategy;
+        }
+
+        if (isSubscribable(obj)) {
+            return _subscribableStrategy;
+        }
+
+        if (isFunction(obj)) {
+            return _functionStrategy;
+        }
+
+        return _valueStrategy;
     }
 }

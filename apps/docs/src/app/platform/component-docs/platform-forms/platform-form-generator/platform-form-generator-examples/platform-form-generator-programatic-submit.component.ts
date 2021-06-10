@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
-import { FdDate } from '@fundamental-ngx/core';
-import { DynamicFormItem, FormGeneratorComponent } from '@fundamental-ngx/platform';
+import { Component, ViewChild } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+
+import { FdDate } from '@fundamental-ngx/core';
+import { DynamicFormItem, FormGeneratorComponent } from '@fundamental-ngx/platform';
 
 export const dummyAwaitablePromise = (timeout = 200) => {
     return new Promise<boolean>((resolve) => {
@@ -17,7 +18,7 @@ export const dummyAwaitablePromise = (timeout = 200) => {
   selector: 'fdp-platform-form-generator-programatic-submit',
   templateUrl: './platform-form-generator-programatic-submit.component.html'
 })
-export class PlatformFormGeneratorProgramaticSubmitComponent implements OnInit {
+export class PlatformFormGeneratorProgramaticSubmitComponent {
 
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;
 
@@ -85,7 +86,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent implements OnInit {
                 inline: true,
                 column: 2
             },
-            choices: (answers) => of([
+            choices: (formValue) => of([
                 'USA',
                 'Germany',
                 {
@@ -93,8 +94,8 @@ export class PlatformFormGeneratorProgramaticSubmitComponent implements OnInit {
                     value: 'Ukraine'
                 }
             ]),
-            validate: (input, answers) => {
-                return input?.length > 0;
+            validate: (input, formValue) => {
+                return input?.length > 0 ? null : 'You need to select some country';
             }
         },
         {
@@ -114,7 +115,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent implements OnInit {
             message: 'Main speciality',
             validators: [Validators.required],
             choices: () => of(['Front-end', 'Back-end']),
-            when: (answers: any) => of(answers.department === 'IT'),
+            when: (formValue: any) => of(formValue.department === 'IT'),
             guiOptions: {
                 column: 2
             }
@@ -124,7 +125,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent implements OnInit {
             name: 'agree',
             message: 'Do you agree with terms and conditions?',
             choices: ['Yes', 'No'],
-            validate: (value) => of(value === 'Yes'),
+            validate: (value) => of(value === 'Yes' ? null : 'You must agree'),
             guiOptions: {
                 column: 2
             }
@@ -144,7 +145,6 @@ export class PlatformFormGeneratorProgramaticSubmitComponent implements OnInit {
             name: 'birthday',
             message: 'Your birthday',
             guiOptions: {
-                datePicker: {},
                 column: 1
             },
             validators: [Validators.required],
@@ -159,18 +159,14 @@ export class PlatformFormGeneratorProgramaticSubmitComponent implements OnInit {
             message: 'Enable some analytics',
             default: false,
             guiOptions: {
-                semantic: true
+                additionalData: {
+                    semantic: true
+                }
             }
         }
     ];
 
-    constructor() {
-    }
-
-    ngOnInit(): void {
-    }
-
-    onFormCreated(form: FormGroup): void {
+    onFormCreated(): void {
         this.formCreated = true;
 
         console.log(this.formGenerator);

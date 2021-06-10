@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
-import { FdDate } from '@fundamental-ngx/core';
-import { DynamicFormItem } from '@fundamental-ngx/platform';
+import { Component } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+
+import { FdDate } from '@fundamental-ngx/core';
+import { DynamicFormItem } from '@fundamental-ngx/platform';
 
 export const dummyAwaitablePromise = (timeout = 200) => {
     return new Promise<boolean>((resolve) => {
@@ -17,7 +18,7 @@ export const dummyAwaitablePromise = (timeout = 200) => {
   selector: 'fdp-platform-form-generator-observable-example',
   templateUrl: './platform-form-generator-observable-example.component.html'
 })
-export class PlatformFormGeneratorObservableExampleComponent implements OnInit {
+export class PlatformFormGeneratorObservableExampleComponent {
 
     loading = false;
 
@@ -83,7 +84,7 @@ export class PlatformFormGeneratorObservableExampleComponent implements OnInit {
                 inline: true,
                 column: 2
             },
-            choices: (answers) => of([
+            choices: (formValue) => of([
                 'USA',
                 'Germany',
                 {
@@ -91,8 +92,8 @@ export class PlatformFormGeneratorObservableExampleComponent implements OnInit {
                     value: 'Ukraine'
                 }
             ]),
-            validate: (input, answers) => {
-                return input?.length > 0;
+            validate: (input, formValue) => {
+                return input?.length > 0 ? null : 'You need to select some country';
             }
         },
         {
@@ -112,7 +113,7 @@ export class PlatformFormGeneratorObservableExampleComponent implements OnInit {
             message: 'Main speciality',
             validators: [Validators.required],
             choices: () => of(['Front-end', 'Back-end']),
-            when: (answers: any) => of(answers.department === 'IT'),
+            when: (formValue: any) => of(formValue.department === 'IT'),
             guiOptions: {
                 column: 2
             }
@@ -122,7 +123,7 @@ export class PlatformFormGeneratorObservableExampleComponent implements OnInit {
             name: 'agree',
             message: 'Do you agree with terms and conditions?',
             choices: ['Yes', 'No'],
-            validate: (value) => of(value === 'Yes'),
+            validate: (value) => of(value === 'Yes' ? null : 'You must agree'),
             guiOptions: {
                 column: 2
             }
@@ -142,7 +143,6 @@ export class PlatformFormGeneratorObservableExampleComponent implements OnInit {
             name: 'birthday',
             message: 'Your birthday',
             guiOptions: {
-                datePicker: {},
                 column: 1
             },
             validators: [Validators.required],
@@ -157,18 +157,14 @@ export class PlatformFormGeneratorObservableExampleComponent implements OnInit {
             message: 'Enable some analytics',
             default: false,
             guiOptions: {
-                semantic: true
+                additionalData: {
+                    semantic: true
+                }
             }
         }
     ];
 
-    constructor() {
-    }
-
-    ngOnInit(): void {
-    }
-
-    onFormCreated(form: FormGroup): void {
+    onFormCreated(): void {
         this.formCreated = true;
     }
 

@@ -3,11 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../../api-files';
 import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
-import { PlatformCheckboxModule, FdpFormGroupModule, PlatformButtonModule, PlatformSliderModule } from '@fundamental-ngx/platform';
+import { PlatformCheckboxModule, FdpFormGroupModule, PlatformButtonModule, PlatformSliderModule, PlatformFormGeneratorModule } from '@fundamental-ngx/platform';
 import { PlatformFormGeneratorHeaderComponent } from './platform-form-generator-header/platform-form-generator-header.component';
 import { PlatformFormGeneratorDocsComponent } from './platform-form-generator-docs.component';
 import { PlatformFormGeneratorExampleComponent } from './platform-form-generator-examples/platform-form-generator-example.component';
-import { PlatformFormGeneratorModule } from '@fundamental-ngx/platform';
 import {
     PlatformFormGeneratorCustomComponentExampleComponent,
     PlatformFormGeneratorCustomSliderElement

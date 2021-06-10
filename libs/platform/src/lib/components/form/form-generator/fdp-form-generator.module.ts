@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormGeneratorComponent } from './form-generator/form-generator.component';
-import { FormGeneratorService } from './form-generator.service';
 import { DynamicFormControlFieldDirective } from './dynamic-form-control-field.directive';
 import { PlatformInputModule } from '../input/fdp-input.module';
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
@@ -22,6 +21,7 @@ import { DynamicFormGeneratorRadioComponent } from './dynamic-form-generator-rad
 import { DynamicFormGeneratorDatepickerComponent } from './dynamic-form-generator-datepicker/dynamic-form-generator-datepicker.component';
 import { DynamicFormGeneratorSwitchComponent } from './dynamic-form-generator-switch/dynamic-form-generator-switch.component';
 import { BusyIndicatorModule, FormMessageModule } from '@fundamental-ngx/core';
+import { FormGeneratorService } from './form-generator.service';
 
 @NgModule({
     declarations: [
@@ -53,10 +53,7 @@ import { BusyIndicatorModule, FormMessageModule } from '@fundamental-ngx/core';
         FormMessageModule,
         BusyIndicatorModule
     ],
-    providers: [
-        FormGeneratorService,
-        DynamicFormControlFieldDirective
-    ],
+    providers: [FormGeneratorService],
     exports: [FormGeneratorComponent]
 })
 export class PlatformFormGeneratorModule {

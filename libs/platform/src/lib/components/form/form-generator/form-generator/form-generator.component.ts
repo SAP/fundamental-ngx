@@ -11,9 +11,10 @@ import {
 } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { takeWhile } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+
 import { FormGeneratorService } from '../form-generator.service';
 import { DynamicFormItem } from '../interfaces/dynamic-form-item';
-import { Subscription } from 'rxjs';
 import { DynamicFormControl } from '../dynamic-form-control';
 
 /**
@@ -45,7 +46,7 @@ export class FormGeneratorComponent implements OnDestroy {
     set formItems(formItems: DynamicFormItem[]) {
         this._formItems = formItems;
 
-        this._generateForm().then(_ => true);
+        this._generateForm();
     }
 
     /**
@@ -92,7 +93,7 @@ export class FormGeneratorComponent implements OnDestroy {
     /**
      * Set of flags representing if particular form item should be visible to the user.
      */
-    shouldShowFields: Set<{[key: string]: boolean}> = new Set();
+    shouldShowFields: {[key: string]: boolean} = {};
 
     /**
      * Flag representing that form is loading

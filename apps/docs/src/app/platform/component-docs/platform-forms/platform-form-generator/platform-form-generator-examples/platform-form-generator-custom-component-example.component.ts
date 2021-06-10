@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGeneratorService, DynamicFormItem } from '@fundamental-ngx/platform';
+import { Component } from '@angular/core';
+
 import {
     dynamicFormFieldProvider,
     dynamicFormGroupChildProvider,
-    BaseDynamicFormGeneratorControl
+    BaseDynamicFormGeneratorControl,
+    FormGeneratorService,
+    DynamicFormItem
 } from '@fundamental-ngx/platform';
-import { FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'fdp-form-generator-slider',
@@ -21,12 +22,9 @@ import { FormGroup } from '@angular/forms';
     `,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]
 })
-export class PlatformFormGeneratorCustomSliderElement extends BaseDynamicFormGeneratorControl implements OnInit {
+export class PlatformFormGeneratorCustomSliderElement extends BaseDynamicFormGeneratorControl {
     constructor() {
         super();
-    }
-
-    ngOnInit(): void {
     }
 }
 
@@ -34,7 +32,7 @@ export class PlatformFormGeneratorCustomSliderElement extends BaseDynamicFormGen
   selector: 'fdp-platform-form-generator-custom-component-example',
   templateUrl: './platform-form-generator-custom-component-example.component.html'
 })
-export class PlatformFormGeneratorCustomComponentExampleComponent implements OnInit {
+export class PlatformFormGeneratorCustomComponentExampleComponent {
 
     formCreated = false;
     formValue: { [key: string]: any };
@@ -64,13 +62,10 @@ export class PlatformFormGeneratorCustomComponentExampleComponent implements OnI
     constructor(
         private _formGeneratorService: FormGeneratorService
     ) {
-        this._formGeneratorService.addComponent(PlatformFormGeneratorCustomSliderElement, 'slider');
+        this._formGeneratorService.addComponent(PlatformFormGeneratorCustomSliderElement, ['slider']);
     }
 
-    ngOnInit(): void {
-    }
-
-    onFormCreated(form: FormGroup): void {
+    onFormCreated(): void {
         this.formCreated = true;
     }
 

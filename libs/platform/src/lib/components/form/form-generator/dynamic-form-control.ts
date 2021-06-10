@@ -28,6 +28,6 @@ export class DynamicFormControl extends FormControl {
         formItem?: DynamicFormItem
     ) {
         super(formState, validatorOrOpts);
-        this.formItem = (validatorOrOpts as DynamicAbstractControlOptions).dynamicFormitem;
+        this.formItem = (validatorOrOpts as DynamicAbstractControlOptions).dynamicFormItem;
     }
 }

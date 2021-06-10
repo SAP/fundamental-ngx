@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { Validators } from '@angular/forms';
+
 import { DynamicFormItem } from '@fundamental-ngx/platform';
 import { FdDate } from '@fundamental-ngx/core';
 
@@ -15,7 +16,7 @@ export const dummyAwaitablePromise = (timeout = 200) => {
     selector: 'fdp-platform-form-generator-example',
     templateUrl: './platform-form-generator-example.component.html'
 })
-export class PlatformFormGeneratorExampleComponent implements OnInit {
+export class PlatformFormGeneratorExampleComponent {
 
     loading = false;
 
@@ -85,7 +86,7 @@ export class PlatformFormGeneratorExampleComponent implements OnInit {
                 inline: true,
                 column: 2
             },
-            choices: (answers) => {
+            choices: (formValue) => {
                 return [
                     'USA',
                     'Germany',
@@ -95,8 +96,8 @@ export class PlatformFormGeneratorExampleComponent implements OnInit {
                     }
                 ];
             },
-            validate: (input, answers) => {
-                return input?.length > 0;
+            validate: (input, formValue) => {
+                return input?.length > 0 ? null : 'You need to select some country';
             }
         },
         {
@@ -119,9 +120,9 @@ export class PlatformFormGeneratorExampleComponent implements OnInit {
                 await dummyAwaitablePromise();
                 return ['Front-end', 'Back-end'];
             },
-            when: async (answers: any) => {
+            when: async (formValue: any) => {
                 await dummyAwaitablePromise();
-                return answers.department === 'IT';
+                return formValue.department === 'IT';
             },
             guiOptions: {
                 column: 2
@@ -134,7 +135,7 @@ export class PlatformFormGeneratorExampleComponent implements OnInit {
             choices: ['Yes', 'No'],
             validate: async (value) => {
                 await dummyAwaitablePromise();
-                return value === 'Yes';
+                return value === 'Yes' ? null : 'You must agree';
             },
             guiOptions: {
                 column: 2
@@ -157,7 +158,6 @@ export class PlatformFormGeneratorExampleComponent implements OnInit {
             name: 'birthday',
             message: 'Your birthday',
             guiOptions: {
-                datePicker: {},
                 column: 1
             },
             validators: [Validators.required],
@@ -174,18 +174,14 @@ export class PlatformFormGeneratorExampleComponent implements OnInit {
             message: 'Enable some analytics',
             default: false,
             guiOptions: {
-                semantic: true
+                additionalData: {
+                    semantic: true
+                }
             }
         }
     ];
 
-    constructor() {
-    }
-
-    ngOnInit(): void {
-    }
-
-    onFormCreated(form: FormGroup): void {
+    onFormCreated(): void {
         this.formCreated = true;
     }
 

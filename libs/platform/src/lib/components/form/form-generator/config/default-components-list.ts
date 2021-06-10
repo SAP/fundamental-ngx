@@ -13,7 +13,7 @@ export const DEFAULT_COMPONENTS_LIST: FormComponentDefinition[] = [
         component: DynamicFormGeneratorInputComponent
     },
     {
-        type: 'checkbox',
+        types: ['checkbox'],
         component: DynamicFormGeneratorCheckboxComponent
     },
     {
@@ -21,7 +21,7 @@ export const DEFAULT_COMPONENTS_LIST: FormComponentDefinition[] = [
         component: DynamicFormGeneratorRadioComponent
     },
     {
-        type: 'editor',
+        types: ['editor'],
         component: DynamicFormGeneratorEditorComponent
     },
     {
@@ -29,11 +29,11 @@ export const DEFAULT_COMPONENTS_LIST: FormComponentDefinition[] = [
         component: DynamicFormGeneratorSelectComponent
     },
     {
-        type: 'datepicker',
+        types: ['datepicker'],
         component: DynamicFormGeneratorDatepickerComponent
     },
     {
-        type: 'switch',
+        types: ['switch'],
         component: DynamicFormGeneratorSwitchComponent
     }
 ];

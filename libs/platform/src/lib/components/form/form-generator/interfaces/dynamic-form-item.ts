@@ -1,16 +1,9 @@
 import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
-import { SafeUrl } from '@angular/platform-browser';
-import { SelectItem } from '../../../../domain/data-model';
-import { ContentDensity } from '../../form-control';
-import { HintPlacement, LabelLayout } from '../../form-options';
-import { InputType } from '../../input/input.component';
+import { Observable } from 'rxjs';
+import { SelectItem, ContentDensity, HintPlacement, LabelLayout, InputType } from '@fundamental-ngx/platform';
 
-export interface InquierChoiseItem {
-    name: string;
-    value?: any;
-    description?: string;
-    label?: string;
-}
+export type DynamicFormItemChoices = number | string | SelectItem;
+export type DynamicFormItemValidationResult = null | boolean | string;
 
 /**
  * Dynamic form item object interface which is used for generating form controls of defined type with validation rules.
@@ -37,76 +30,77 @@ export interface DynamicFormItem {
     /**
      * @description
      * Display name of the form item.
+     * @param formValue the form value hash.
      */
-    message?: string | Function | Promise<string>;
+    message?: string | ((formValue?: {[key: string]: any}) => string | Promise<string> | Observable<string>);
+
+    /**
+     * @description
+     * Display placeholder of the form item.
+     * @param formValue the form value hash.
+     */
+    placeholder?: string | ((formValue?: {[key: string]: any}) => string | Promise<string> | Observable<string>);
+
+    /**
+     * @description
+     * If true, will fallback to `message` property if `placeholder` was not provided.
+     */
+    useMessageAsPlaceholder?: boolean;
 
     /**
      * @description
      * Default value of the form item.
      */
-    default?: string | number | boolean | any | Function;
+    default?: any | ((formValue?: {[key: string]: any}) => any | Promise<any>| Observable<any>);
 
     /**
      * @description
      * The list of available options to select.
+     * @param formValue raw form item value.
      */
-    choices?: (number | string | InquierChoiseItem | SelectItem | Promise<number[] | string[] | SelectItem[]>)[] | Function;
+    choices?: DynamicFormItemChoices[] |
+    ((formValue?: {[key: string]: any}) => DynamicFormItemChoices[]
+    | Promise<DynamicFormItemChoices[]>
+    | Observable<DynamicFormItemChoices[]>);
 
     /**
      * @description
-     * Receive the user input and answers hash.
-     * Should return true if the value is valid, and an error message (String) otherwise.
-     * If false is returned, a default error message is provided.
-     * @returns Boolean
+     * Receive the user input and form value hash.
+     * Should return null if the value is valid, and an error message (String) or `false` otherwise.
+     * If `false` is returned, a default error message is provided.
+     * @param formItemValue raw form item value.
+     * @param formValue the form value hash.
+     * @returns null or String
      */
-    validate?: Function;
+    validate?: (formItemValue?: any, formValue?: {[key: string]: any}) =>
+    DynamicFormItemValidationResult | Promise<DynamicFormItemValidationResult> | Observable<DynamicFormItemValidationResult>;
 
     /**
      * @description
-     * The list of validators applied to a control.
+     * The list of validators applied to the form item.
      */
     validators?: ValidatorFn | ValidatorFn[] | null;
 
     /**
      * @description
-     * The list of async validators applied to control.
+     * The list of async validators applied to the form item.
      */
     asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null;
 
     /**
-     * @description
-     * Receive the user input and answers hash.
-     * @returns Object - the filtered value to be used inside the program.
-     * The value returned will be added to the Answers hash.
+     * @description Transforms raw form item value.
+     * @param formItemValue raw form item value.
+     * @param formValue the form value hash.
+     * @returns updated form item value to be used in the form value hash.
      */
-    filter?: Function;
+    transformer?: (formItemValue?: any, formValue?: {[key: string]: any}) => any | Promise<any>;
 
     /**
-     * @description
-     * Receive the user input, answers hash and option flags, and return a transformed value to display to the user.
-     * The transformation only impacts what is shown while editing. It does not modify the answers hash.
-     */
-    transformer?: Function;
-
-    /**
-     * @description
-     * Receive the current user answers hash.
-     * Should return true or false depending on whether or not this form item should be asked.
+     * @description Should return true or false depending on whether or not this form item should be asked.
+     * @param formValue the form value hash.
      * @returns Boolean
      */
-    when?: Function;
-
-    /**
-     * @description
-     * Change the default prefix message.
-     */
-    prefix?: string;
-
-    /**
-     * @description
-     * Change the default suffix message.
-     */
-    suffix?: string;
+    when?: (formValue?: {[key: string]: any}) => boolean | Promise<boolean> | Observable<boolean>;
 
     /**
      * @hidden
@@ -123,11 +117,13 @@ export interface DynamicFormItem {
 }
 
 export interface DynamicFormItemGuiOptions {
+
     /**
      * @description
      * Index of column if form has multi-column layout
      */
     column?: number;
+
     /**
      * @description
      * If set, hint icon is added to control label with tooltip message as a value.
@@ -137,31 +133,21 @@ export interface DynamicFormItemGuiOptions {
     hintPlacement?: HintPlacement;
 
     layout?: LabelLayout;
+
     /**
      * @description
      * If set, controls inner elements will be inlined
      */
     inline?: boolean;
+
     /**
      * @description
      * If set, overrides current content density of the element defined on the global scope.
      */
     contentDensity?: ContentDensity;
-    /**
-     * @description
-     * If set, adds a link element to the label.
-     */
-    link?: {
-        /**
-         * @description
-         * If set, this function will be triggered, when user clicks on the link.
-         */
-        command?: Function;
-        url?: string | SafeUrl;
-        text?: string;
-    };
-    datePicker?: any;
-    semantic?: boolean;
 
+    /**
+     * @description Object contains additional payload. Useful for custom elements to manipulate it's view.
+     */
     additionalData?: any;
 }

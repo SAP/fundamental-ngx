@@ -1,7 +1,8 @@
-import { DynamicFormControlFieldDirective } from './dynamic-form-control-field.directive';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
+import { DynamicFormControlFieldDirective } from './dynamic-form-control-field.directive';
 import { DynamicFormControl } from './dynamic-form-control';
 
 @Component({
@@ -20,7 +21,7 @@ class TestComponent {
     shouldShow = true;
 
     constructor() {
-        this.control = new DynamicFormControl('default value', {dynamicFormitem: {type: 'input'}});
+        this.control = new DynamicFormControl('default value', {dynamicFormItem: {type: 'input'}});
     }
 }
 
