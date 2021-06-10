@@ -1,4 +1,42 @@
 
+### [0.30.1-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.70...v0.30.1-rc.71) (2021-06-10)
+
+### [0.30.1-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.69...v0.30.1-rc.70) (2021-06-10)
+
+
+### Bug Fixes
+
+* **core:** fix scroll spy target offset top ([#5640](https://github.com/SAP/fundamental-ngx/issues/5640)) ([d21c669](https://github.com/SAP/fundamental-ngx/commit/d21c66954e4960f31ccddf374f5f80104ce0ce01))
+* **platform:** fix Search field focus if click outside ([#5633](https://github.com/SAP/fundamental-ngx/issues/5633)) ([a0f6413](https://github.com/SAP/fundamental-ngx/commit/a0f64130e8478e776431e668a3fdd568575e98fe))
+
+### [0.30.1-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.68...v0.30.1-rc.69) (2021-06-10)
+
+
+### Bug Fixes
+
+* **platform:** table last fixed column border fix ([#5621](https://github.com/SAP/fundamental-ngx/issues/5621)) ([ea16b3e](https://github.com/SAP/fundamental-ngx/commit/ea16b3ea7f90c22bb0f59f858a0db4e24c1c6d44))
+
+### [0.30.1-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.67...v0.30.1-rc.68) (2021-06-10)
+
+### [0.30.1-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.66...v0.30.1-rc.67) (2021-06-10)
+
+
+### Features
+
+* **core:** implement datetime formatter pipes ([#5502](https://github.com/SAP/fundamental-ngx/issues/5502)) ([2cc9152](https://github.com/SAP/fundamental-ngx/commit/2cc91528107e5c8f26b09f6636e7c5757e60b096))
+
+
+### Bug Fixes
+
+* **core:** use fd-button for carousel button and fix focus after last item reached ([#5586](https://github.com/SAP/fundamental-ngx/issues/5586)) ([0df3320](https://github.com/SAP/fundamental-ngx/commit/0df3320f154fc65b746273784ad4d4bba420b00c))
+
+### [0.30.1-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.65...v0.30.1-rc.66) (2021-06-09)
+
+
+### Bug Fixes
+
+* **core:** dialog z-index fix ([#5617](https://github.com/SAP/fundamental-ngx/issues/5617)) ([dcb96bf](https://github.com/SAP/fundamental-ngx/commit/dcb96bf7fdafaac7b6749d2821dbdbfe59d50809))
+
 ### [0.30.1-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.64...v0.30.1-rc.65) (2021-06-09)
 
 
