@@ -227,7 +227,6 @@ jobs:
       max-parallel: 6
       matrix:
         suite: ["suite platformA", "suite platformB", "spec core"]
-        browser: [ms-msedge, ms-firefox, ms-chrome, osx-msedge, osx-firefox, osx-chrome]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
