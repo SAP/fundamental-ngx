@@ -1,4 +1,11 @@
 
+### [0.30.1-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.68...v0.30.1-rc.69) (2021-06-10)
+
+
+### Bug Fixes
+
+* **platform:** table last fixed column border fix ([#5621](https://github.com/SAP/fundamental-ngx/issues/5621)) ([ea16b3e](https://github.com/SAP/fundamental-ngx/commit/ea16b3ea7f90c22bb0f59f858a0db4e24c1c6d44))
+
 ### [0.30.1-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.67...v0.30.1-rc.68) (2021-06-10)
 
 ### [0.30.1-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.66...v0.30.1-rc.67) (2021-06-10)
