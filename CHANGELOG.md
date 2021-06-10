@@ -1,4 +1,16 @@
 
+### [0.30.1-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.66...v0.30.1-rc.67) (2021-06-10)
+
+
+### Features
+
+* **core:** implement datetime formatter pipes ([#5502](https://github.com/SAP/fundamental-ngx/issues/5502)) ([2cc9152](https://github.com/SAP/fundamental-ngx/commit/2cc91528107e5c8f26b09f6636e7c5757e60b096))
+
+
+### Bug Fixes
+
+* **core:** use fd-button for carousel button and fix focus after last item reached ([#5586](https://github.com/SAP/fundamental-ngx/issues/5586)) ([0df3320](https://github.com/SAP/fundamental-ngx/commit/0df3320f154fc65b746273784ad4d4bba420b00c))
+
 ### [0.30.1-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.65...v0.30.1-rc.66) (2021-06-09)
 
 
