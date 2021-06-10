@@ -73,7 +73,7 @@ export class ListDocsComponent {
         {
             language: 'html',
             code: actionListH,
-            fileName: 'list-complex-example'
+            fileName: 'list-action-example'
         },
         {
             language: 'typescript',
@@ -107,11 +107,11 @@ export class ListDocsComponent {
             language: 'typescript',
             code: listFilterTs,
             fileName: 'list-data-example',
-            component: 'listDataExampleComponent'
+            component: 'ListDataExampleComponent'
         },
         {
             language: 'typescript',
-            component: 'SortPipe',
+            component: 'SortByPipe',
             code: listSortPipe,
             pipe: true,
             fileName: 'sort',
