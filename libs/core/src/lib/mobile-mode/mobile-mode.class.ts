@@ -45,6 +45,7 @@ export abstract class MobileModeBase<T extends MobileMode> {
         private readonly _mobileModes: MobileModeConfigToken[]) {
 
         this._mobileModes = this._mobileModes || [];
+        // debugger;
         this.mobileConfig = this._getMobileModeConfig();
         this.dialogConfig = this.mobileConfig.dialogConfig;
     }
