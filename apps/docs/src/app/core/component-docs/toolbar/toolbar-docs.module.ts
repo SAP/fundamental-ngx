@@ -11,7 +11,6 @@ import {
     ToolbarTitleExampleComponent,
     ToolbarSpacerExampleComponent,
     ToolbarSeparatorExampleComponent,
-    ToolbarOverflowExampleComponent,
     ToolbarOverflowPriorityExampleComponent,
     ToolbarOverflowGroupingExampleComponent,
     ToolbarSizeExampleComponent
@@ -26,6 +25,7 @@ import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
+import { ToolbarOverflowExampleComponent } from './examples/toolbar-overflow-example.component';
 
 const examples = [
     ToolbarTypeExampleComponent,

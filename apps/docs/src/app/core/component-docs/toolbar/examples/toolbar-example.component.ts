@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DatetimeAdapter, FdDatetimeAdapter } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-toolbar-type-example',
@@ -23,12 +24,6 @@ export class ToolbarSpacerExampleComponent {}
     templateUrl: './toolbar-separator-example.component.html'
 })
 export class ToolbarSeparatorExampleComponent {}
-
-@Component({
-    selector: 'fd-toolbar-overflow-example',
-    templateUrl: './toolbar-overflow-example.component.html'
-})
-export class ToolbarOverflowExampleComponent {}
 
 @Component({
     selector: 'fd-toolbar-overflow-priority-example',
