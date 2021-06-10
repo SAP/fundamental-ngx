@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { DatetimeAdapter, FdDatetimeAdapter } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-toolbar-type-example',
