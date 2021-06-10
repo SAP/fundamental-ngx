@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 
+import * as layoutGridBlockSrc from '!raw-loader!./examples/example-layout-grid-block.component.ts';
+import * as layoutGridBasicSrcTs from '!raw-loader!./examples/layout-grid-basic-example.component.ts';
 import * as layoutGridBasicSrc from '!raw-loader!./examples/layout-grid-basic-example.component.html';
+import * as growingGridBasicSrcTs from '!raw-loader!./examples/layout-grid-growing-example.component.ts';
 import * as growingGridBasicSrc from '!raw-loader!./examples/layout-grid-growing-example.component.html';
 import * as layoutGridOffsetSrc from '!raw-loader!./examples/layout-grid-offset-example.component.html';
 import * as layoutGridResponsiveSrc from '!raw-loader!./examples/layout-grid-responsive-example.component.html';
@@ -26,6 +29,18 @@ export class LayoutGridDocsComponent {
             language: 'html',
             code: layoutGridBasicSrc,
             fileName: 'layout-grid-basic-example'
+        },
+        {
+            language: 'typescript',
+            component: 'LayoutGridBasicExampleComponent',
+            code: layoutGridBasicSrcTs,
+            fileName: 'layout-grid-basic-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ExampleLayoutGridBlockComponent',
+            code: layoutGridBlockSrc,
+            fileName: 'example-layout-grid-block'
         }
     ];
 
@@ -34,6 +49,18 @@ export class LayoutGridDocsComponent {
             language: 'html',
             code: growingGridBasicSrc,
             fileName: 'layout-grid-growing-example'
+        },
+        {
+            language: 'typescript',
+            component: 'LayoutGridGrowingExampleComponent',
+            code: growingGridBasicSrcTs,
+            fileName: 'layout-grid-growing-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ExampleLayoutGridBlockComponent',
+            code: layoutGridBlockSrc,
+            fileName: 'example-layout-grid-block'
         }
     ];
 
@@ -42,6 +69,12 @@ export class LayoutGridDocsComponent {
             language: 'html',
             code: layoutGridOffsetSrc,
             fileName: 'layout-grid-offset-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ExampleLayoutGridBlockComponent',
+            code: layoutGridBlockSrc,
+            fileName: 'example-layout-grid-block'
         }
     ];
 
@@ -50,6 +83,12 @@ export class LayoutGridDocsComponent {
             language: 'html',
             code: layoutGridResponsiveSrc,
             fileName: 'layout-grid-responsive-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ExampleLayoutGridBlockComponent',
+            code: layoutGridBlockSrc,
+            fileName: 'example-layout-grid-block'
         }
     ];
 
@@ -58,6 +97,12 @@ export class LayoutGridDocsComponent {
             language: 'html',
             code: layoutGridRowSrc,
             fileName: 'layout-grid-row-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ExampleLayoutGridBlockComponent',
+            code: layoutGridBlockSrc,
+            fileName: 'example-layout-grid-block'
         }
     ];
 
@@ -66,6 +111,12 @@ export class LayoutGridDocsComponent {
             language: 'html',
             code: layoutGridNoGapSrc,
             fileName: 'layout-grid-nogap-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ExampleLayoutGridBlockComponent',
+            code: layoutGridBlockSrc,
+            fileName: 'example-layout-grid-block'
         }
     ];
 
@@ -74,6 +125,12 @@ export class LayoutGridDocsComponent {
             language: 'html',
             code: layoutGridNestingSrc,
             fileName: 'layout-grid-nesting-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ExampleLayoutGridBlockComponent',
+            code: layoutGridBlockSrc,
+            fileName: 'example-layout-grid-block'
         }
     ];
 
@@ -82,6 +139,12 @@ export class LayoutGridDocsComponent {
             language: 'html',
             code: layoutGridResponsiveOffsetSrc,
             fileName: 'layout-grid-responsive-offset-example'
+        },
+        {
+            language: 'typescript',
+            component: 'ExampleLayoutGridBlockComponent',
+            code: layoutGridBlockSrc,
+            fileName: 'example-layout-grid-block'
         }
     ];
 }
