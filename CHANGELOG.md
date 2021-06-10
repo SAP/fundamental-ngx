@@ -1,4 +1,11 @@
 
+### [0.30.1-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.72...v0.30.1-rc.73) (2021-06-10)
+
+
+### Bug Fixes
+
+* **core,platform:** updating file uploader examples to display valid error message, on selecting invalid file. ([#5629](https://github.com/SAP/fundamental-ngx/issues/5629)) ([3377cd2](https://github.com/SAP/fundamental-ngx/commit/3377cd25c75b9bf80f1370d73e57e1ceeb4cc5e8))
+
 ### [0.30.1-rc.72](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.71...v0.30.1-rc.72) (2021-06-10)
 
 ### [0.30.1-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.70...v0.30.1-rc.71) (2021-06-10)
