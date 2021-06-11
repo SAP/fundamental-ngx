@@ -1,0 +1,54 @@
+<fdp-table
+    #table
+    [dataSource]="source"
+    contentDensity="cozy"
+    emptyTableMessage="No data found"
+    [navigationButton]="true"
+    [bodyHeight]="'176px'"
+>
+    <fdp-table-toolbar
+        title="Order Items"
+        [hideItemCount]="true"
+        [hideSearchInput]="true"
+    >
+    </fdp-table-toolbar>
+
+    <fdp-column
+        name="name"
+        key="name"
+        label="Name"
+        align="start"
+    >
+    </fdp-column>
+
+    <fdp-column
+        name="description"
+        key="description"
+        label="Description"
+    >
+    </fdp-column>
+
+    <fdp-column
+        name="price"
+        key="price.value"
+        label="Price"
+        align="end"
+    >
+    </fdp-column>
+
+    <fdp-column
+        name="status"
+        key="status"
+        label="Status"
+        align="center"
+    >
+    </fdp-column>
+
+    <fdp-column
+        name="navigation"
+        key="navigation"
+        label=""
+        align="end"
+    >
+    </fdp-column>
+</fdp-table>
