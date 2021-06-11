@@ -1,4 +1,73 @@
 
+### [0.30.1-rc.76](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.75...v0.30.1-rc.76) (2021-06-11)
+
+
+### Bug Fixes
+
+* **platform:** updating condensed mode for platform button ([#5638](https://github.com/SAP/fundamental-ngx/issues/5638)) ([5844d6d](https://github.com/SAP/fundamental-ngx/commit/5844d6d80efbce611ede478b9dade3e40be7c8eb))
+
+### [0.30.1-rc.75](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.74...v0.30.1-rc.75) (2021-06-11)
+
+
+### Bug Fixes
+
+* **core:** fix a11y for Input Group component ([#5619](https://github.com/SAP/fundamental-ngx/issues/5619)) ([9862f24](https://github.com/SAP/fundamental-ngx/commit/9862f243fb8d009222bc22d109b856b849d622a0))
+
+### [0.30.1-rc.74](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.73...v0.30.1-rc.74) (2021-06-11)
+
+
+### Bug Fixes
+
+* **core:** fix datetime wrong date ([#5551](https://github.com/SAP/fundamental-ngx/issues/5551)) ([53995d0](https://github.com/SAP/fundamental-ngx/commit/53995d00e6912cacfe8ba3b20c6684d35e774627))
+* **platform:** table selection cells position fix ([#5614](https://github.com/SAP/fundamental-ngx/issues/5614)) ([b037216](https://github.com/SAP/fundamental-ngx/commit/b037216c6df617ea5524efe204dd0e6804686c82))
+
+### [0.30.1-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.72...v0.30.1-rc.73) (2021-06-10)
+
+
+### Bug Fixes
+
+* **core,platform:** updating file uploader examples to display valid error message, on selecting invalid file. ([#5629](https://github.com/SAP/fundamental-ngx/issues/5629)) ([3377cd2](https://github.com/SAP/fundamental-ngx/commit/3377cd25c75b9bf80f1370d73e57e1ceeb4cc5e8))
+
+### [0.30.1-rc.72](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.71...v0.30.1-rc.72) (2021-06-10)
+
+### [0.30.1-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.70...v0.30.1-rc.71) (2021-06-10)
+
+### [0.30.1-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.69...v0.30.1-rc.70) (2021-06-10)
+
+
+### Bug Fixes
+
+* **core:** fix scroll spy target offset top ([#5640](https://github.com/SAP/fundamental-ngx/issues/5640)) ([d21c669](https://github.com/SAP/fundamental-ngx/commit/d21c66954e4960f31ccddf374f5f80104ce0ce01))
+* **platform:** fix Search field focus if click outside ([#5633](https://github.com/SAP/fundamental-ngx/issues/5633)) ([a0f6413](https://github.com/SAP/fundamental-ngx/commit/a0f64130e8478e776431e668a3fdd568575e98fe))
+
+### [0.30.1-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.68...v0.30.1-rc.69) (2021-06-10)
+
+
+### Bug Fixes
+
+* **platform:** table last fixed column border fix ([#5621](https://github.com/SAP/fundamental-ngx/issues/5621)) ([ea16b3e](https://github.com/SAP/fundamental-ngx/commit/ea16b3ea7f90c22bb0f59f858a0db4e24c1c6d44))
+
+### [0.30.1-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.67...v0.30.1-rc.68) (2021-06-10)
+
+### [0.30.1-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.66...v0.30.1-rc.67) (2021-06-10)
+
+
+### Features
+
+* **core:** implement datetime formatter pipes ([#5502](https://github.com/SAP/fundamental-ngx/issues/5502)) ([2cc9152](https://github.com/SAP/fundamental-ngx/commit/2cc91528107e5c8f26b09f6636e7c5757e60b096))
+
+
+### Bug Fixes
+
+* **core:** use fd-button for carousel button and fix focus after last item reached ([#5586](https://github.com/SAP/fundamental-ngx/issues/5586)) ([0df3320](https://github.com/SAP/fundamental-ngx/commit/0df3320f154fc65b746273784ad4d4bba420b00c))
+
+### [0.30.1-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.65...v0.30.1-rc.66) (2021-06-09)
+
+
+### Bug Fixes
+
+* **core:** dialog z-index fix ([#5617](https://github.com/SAP/fundamental-ngx/issues/5617)) ([dcb96bf](https://github.com/SAP/fundamental-ngx/commit/dcb96bf7fdafaac7b6749d2821dbdbfe59d50809))
+
 ### [0.30.1-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.64...v0.30.1-rc.65) (2021-06-09)
 
 

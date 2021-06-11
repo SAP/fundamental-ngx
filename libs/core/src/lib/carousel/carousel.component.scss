@@ -14,11 +14,6 @@ fd-carousel:focus {
     overflow: hidden;
 }
 
-.fd-carousel__button.fd-button[dir=rtl] > [class*=sap-icon],
-[dir=rtl] .fd-carousel__button.fd-button > [class*=sap-icon] {
-    transform: rotate(0deg);
-}
-
 .fd-carousel__content > .fd-carousel__button.fd-button {
     &.is-focus,
     &:focus {
