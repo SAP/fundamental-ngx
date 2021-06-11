@@ -40,7 +40,8 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
 
     title: string;
 
-    view: TemplateRef<any>;
+    viewBody: TemplateRef<any>;
+    viewFooter: TemplateRef<any>;
 
     private _subscriptions = new Subscription();
 
@@ -59,8 +60,10 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     ngOnInit(): void {
         this._listenOnPopoverOpenChange();
 
-        this.view = this.childContent;
         this.title = this.mobileConfig.title || '';
+        this.viewBody = (<any> this.childContent).popoverBodyContentTemplate;
+        this.viewFooter = (<any> this.childContent).popoverFooterContentTemplate;
+
         this._changeDetectorref.markForCheck();
     }
 

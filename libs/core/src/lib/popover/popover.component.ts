@@ -41,6 +41,7 @@ let cdkPopoverUniqueId = 0;
 @Component({
     selector: 'fd-popover',
     templateUrl: './popover.component.html',
+    styleUrls: ['./popover.component.scss'],
     host: {
         '[class.fd-popover-custom]': 'true',
         '[class.fd-popover-custom--mobile]': 'mobile',
@@ -48,11 +49,9 @@ let cdkPopoverUniqueId = 0;
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    styleUrls: ['./popover.component.scss'],
-    providers: [PopoverService]
+    providers: [PopoverService],
 })
 export class PopoverComponent extends BasePopoverClass implements AfterViewInit, OnDestroy, OnChanges {
-
     /** Tooltip for popover */
     @Input()
     title: string;
@@ -89,7 +88,13 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     triggerOrigin: CdkOverlayOrigin;
 
     @ContentChild(PopoverBodyComponent)
-    popoverBody: PopoverBodyComponent
+    popoverBody: PopoverBodyComponent;
+
+    @ContentChild('popoverBodyContent')
+    popoverBodyContentTemplate: TemplateRef<any>;
+
+    @ContentChild('popoverFooterContent')
+    popoverFooterContentTemplate: TemplateRef<any>;
 
     /** @deprecated
      * Left for backward compatibility
@@ -193,7 +198,10 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
 
     private _setupMobileMode(): void {
         this._dynamicComponentService.createDynamicComponent(
-            this.templateRef,
+            {
+                popoverBodyContentTemplate: this.popoverBodyContentTemplate,
+                popoverFooterContentTemplate: this.popoverFooterContentTemplate,
+            },
             PopoverMobileComponent,
             { container: this._elementRef.nativeElement },
             {
