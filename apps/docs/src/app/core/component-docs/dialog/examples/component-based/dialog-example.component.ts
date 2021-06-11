@@ -10,7 +10,10 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
             </fd-dialog-header>
 
             <fd-dialog-body>
-                <ul>
+                <p style="text-align: justify; margin: 0">
+                    {{ dialogRef.data.pinnapleDescription }}
+                </p>
+                <ul style="margin-bottom: 0">
                     <li *ngFor="let fact of dialogRef.data.pineappleFunFacts">
                         {{ fact }}
                     </li>

@@ -20,6 +20,7 @@
             [(ngModel)]="files"
             multiple="true"
             (selectionChange)="handleFileSelection($event)"
+            (invalidFileChange)="handleInvalidFileSelection($event)"
         ></fdp-file-uploader>
     </fdp-form-field>
 </fdp-form-group>
@@ -31,3 +32,12 @@ Files Selected:
 <span *ngFor="let file of this.files">
     <span class="green">{{ file.name }} </span><br
 /></span>
+
+
+<br />
+
+Invalid Files:
+<br />
+<span *ngFor="let file of invalidFiles">
+    <span class="red">{{ file.name }} </span><br />
+</span>
