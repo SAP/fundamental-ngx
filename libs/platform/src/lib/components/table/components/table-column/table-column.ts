@@ -39,4 +39,10 @@ export abstract class TableColumn {
 
     /** Column header template */
     abstract headerCellTemplate: TemplateRef<any>;
+
+    /** Column cell ARIA label */
+    abstract cellAriaLabelKey: string;
+
+    /** Whether cell inner is focusable, may be used only if the custom template defined, needed for the screen readers */
+    abstract cellFocusable: boolean;
 }

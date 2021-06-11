@@ -1,26 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { A11yModule } from '@angular/cdk/a11y';
 
-import {
-    BusyIndicatorModule,
-    ButtonModule,
-    CheckboxModule,
-    DatePickerModule,
-    DialogModule,
-    DragAndDropModule,
-    FormModule,
-    IconModule,
-    InputGroupModule,
-    LayoutGridModule,
-    ListModule,
-    PanelModule,
-    PopoverModule,
-    RadioModule,
-    SelectModule,
-    TableModule,
-    ToolbarModule
-} from '@fundamental-ngx/core';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
+import { DatePickerModule } from '@fundamental-ngx/core/date-picker';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { DragAndDropModule } from '@fundamental-ngx/core/utils';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { PanelModule } from '@fundamental-ngx/core/panel';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { RadioModule } from '@fundamental-ngx/core/radio';
+import { SelectModule } from '@fundamental-ngx/core/select';
+import { TableModule } from '@fundamental-ngx/core/table';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 
 import { PlatformInputModule } from '../form/input/fdp-input.module';
 import { PlatformButtonModule } from '../button/button.module';
@@ -87,7 +86,8 @@ import { PlatformTableColumnResizerComponent } from './components/table-column-r
         PanelModule,
         DatePickerModule,
         BusyIndicatorModule,
-        DragAndDropModule
+        DragAndDropModule,
+        A11yModule
     ],
     declarations: [
         TableComponent,

@@ -18,7 +18,7 @@ import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { RtlService } from '@fundamental-ngx/core/utils';
 
 import { ColumnAlign, FilterableColumnDataType } from '../../enums';
-import { FdpCellDef } from '../../directives/table-cell.directive';
+import { FdpCellDef, FdpTableCell } from '../../directives/table-cell.directive';
 import { FdpHeaderCellDef } from '../../directives/table-header.directive';
 
 import { TableColumn } from './table-column';
@@ -132,14 +132,29 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     /** Column header template */
     headerCellTemplate: TemplateRef<any>;
 
+    /** Column cell ARIA label */
+    cellAriaLabelKey: string;
+
+    /** Whether cell inner is focusable, may be used only if the custom template defined, needed for the screen readers */
+    cellFocusable = false;
+
+    /** Get the custom cell template */
     @ContentChild(FdpCellDef)
     set fdpCellDef(fdpCellDef: FdpCellDef) {
         this.columnCellTemplate = fdpCellDef?.templateRef;
     }
 
+    /** Get the custom header cell template */
     @ContentChild(FdpHeaderCellDef)
     set fdpHeaderCellDef(fdpHeaderCellDef: FdpHeaderCellDef) {
         this.headerCellTemplate = fdpHeaderCellDef?.templateRef;
+    }
+
+    /** Get the custom header cell template ARIA attributes */
+    @ContentChild(FdpTableCell)
+    set fdpTableCellAria(tableCell: FdpTableCell) {
+        this.cellAriaLabelKey = tableCell?.ariaLabelKey;
+        this.cellFocusable = tableCell?.focusable;
     }
 
     /** @hidden */

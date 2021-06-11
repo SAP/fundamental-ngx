@@ -5,9 +5,9 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    ElementRef,
     EventEmitter,
     HostBinding,
-    HostListener,
     Inject,
     Input,
     NgZone,
@@ -24,21 +24,22 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
-import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
+import { TAB } from '@angular/cdk/keycodes';
+import { BehaviorSubject, fromEvent, isObservable, merge, Observable, of, Subscription } from 'rxjs';
+import { debounceTime, delay, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
-import { FdDropEvent, RtlService } from '@fundamental-ngx/core/utils';
+import { FdDropEvent, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { TableRowDirective } from '@fundamental-ngx/core/table';
 
 import { isDataSource } from '../../domain';
 import { getNestedValue } from '../../utils/object';
 
-import { TableService } from './table.service';
+import { TableCellNavigationId, TableService } from './table.service';
 
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { SearchInput } from './interfaces/search-field.interface';
 import { ContentDensity, FILTER_STRING_STRATEGY, SelectionMode, SortDirection, TableRowType } from './enums';
-import { DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
+import { DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH, FIRST_CELL_NAVIGATION_ID } from './constants';
 import { TableDataSource } from './domain/table-data-source';
 import { ArrayTableDataSource } from './domain/array-data-source';
 import { ObservableTableDataSource } from './domain/observable-data-source';
@@ -81,6 +82,8 @@ interface GroupTableRowValueType {
 }
 
 let tableUniqueId = 0;
+let tableToolbarTitleUniqueId = 0;
+
 
 /**
  * The component that represents a table.
@@ -295,6 +298,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     readonly verticalScrollable: TableScrollable;
 
     /** @hidden */
+    @ViewChild('tableContainer')
+    readonly tableContainer: ElementRef;
+
+    /** @hidden */
+    @ViewChild('focusableMock')
+    readonly focusableMock: ElementRef;
+
+    /** @hidden */
     @ContentChildren(TableColumn)
     readonly columns: QueryList<TableColumn>;
 
@@ -427,6 +438,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     _scrollBarWidth = 0;
 
     /** @hidden */
+    _tableToolbarTitleId = 'fd-table-toolbar-title-' + tableToolbarTitleUniqueId++;
+
+    /** @hidden */
     get _isShownSelectionColumn(): boolean {
         return this.selectionMode !== SelectionMode.NONE;
     }
@@ -448,9 +462,13 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             sortable: this._isShownSortSettingsInToolbar,
             filterable: this._isShownFilterSettingsInToolbar,
             groupable: this._isShownGroupSettingsInToolbar,
-            columns: this._isShownColumnSettingsInToolbar
+            columns: this._isShownColumnSettingsInToolbar,
+            titleId: this._tableToolbarTitleId
         };
     }
+
+    /** @hidden */
+    _firstCellNavigationId = FIRST_CELL_NAVIGATION_ID;
 
     /** @hidden */
     private _ds: FdpTableDataSource<T>;
@@ -472,6 +490,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _dragDropInProgress = false;
+
+    /** @hidden */
+    private _shouldFocusAfterPageHasChanged = false;
 
     /** @hidden */
     private get _selectionColumnWidth(): number {
@@ -710,7 +731,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             return;
         }
 
-
         if (row.navigatable) {
             row.navigationTarget = target;
         }
@@ -738,17 +758,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._setFreezableInfo();
 
         this._cdr.markForCheck();
-    }
-
-    /** @hidden
-     *  Needs to prevent scrolling and other events on loading.
-     *  TODO: refactor it on keyboard navigation implementation
-     * */
-    @HostListener('keydown', ['$event'])
-    keyDownHandler(event: KeyboardEvent): void {
-        if (this.loading) {
-            event.preventDefault();
-        }
     }
 
     // Private API
@@ -791,7 +800,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * @hidden
      * Toggle selectable row
      */
-    _toggleSelectableRow(rowToToggle: TableRow): void {
+    _toggleSelectableRow(rowToToggle: TableRow, event?: KeyboardEvent): void {
+        event?.preventDefault();
+
         const checked = (rowToToggle.checked = !rowToToggle.checked);
         const removed = [];
         const added = [];
@@ -813,7 +824,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         checked ? added.push(rowToToggle) : removed.push(rowToToggle);
 
         this._emitRowSelectionChangeEvent(added, removed);
-
         this._calculateCheckedAll();
     }
 
@@ -821,7 +831,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * @hidden
      * Select / Unselect all selectable rows
      */
-    _toggleAllSelectableRows(selectAll: boolean): void {
+    _toggleAllSelectableRows(event?: KeyboardEvent): void {
+        event?.preventDefault();
+
+        if (this.selectionMode !== SelectionMode.MULTIPLE) {
+            return;
+        }
+
+        const selectAll = !this._checkedAll;
         const removed: TableRow<T>[] = [];
         const added: TableRow<T>[] = [];
 
@@ -829,12 +846,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             if (row.checked === selectAll) {
                 return;
             }
+
             row.checked = selectAll;
             selectAll ? added.push(row) : removed.push(row);
         });
 
         this._emitRowSelectionChangeEvent(added, removed);
-
         this._calculateCheckedAll();
     }
 
@@ -926,11 +943,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    _getFreezableSelectionCellStyles(): { [key: string]: string | number } {
-        return { 'min-width.px': this._selectionColumnWidth, 'max-width.px': this._selectionColumnWidth };
-    }
-
-    /** @hidden */
     _getRowHeight(): number {
         return ROW_HEIGHT.get(this.contentDensity);
     }
@@ -960,38 +972,18 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * @hidden
      * Expand/Collapse group row
      */
-    _toggleGroupRow(groupRow: TableRow): void {
+    _toggleGroupRow(groupRow: TableRow, event?: KeyboardEvent): void {
         if (this._dragDropInProgress) {
             return;
         }
 
+        event?.preventDefault();
         this._toggleExpandableTableRow(groupRow);
 
         const groupRowIndex = this._tableRows.indexOf(groupRow);
         this.rowToggleOpenState.emit(
             new TableRowToggleOpenStateEvent(groupRowIndex, groupRow.value, groupRow.expanded)
         );
-    }
-
-    /**
-     * @hidden
-     * Select / Unselect all children rows
-     */
-    _toggleAllChildrenRows(treeRow: TableRow): void {
-        const removed = [];
-        const added = [];
-
-        this._findRowChildren(treeRow).forEach((row) => {
-            if (row.checked === treeRow.checked) {
-                return;
-            }
-            row.checked = treeRow.checked;
-            treeRow.checked ? added.push(row) : removed.push(row);
-        });
-
-        this._emitRowSelectionChangeEvent(added, removed);
-
-        this._calculateCheckedAll();
     }
 
     /** @hidden */
@@ -1023,9 +1015,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     _dragDropItemDrop(event: FdDropEvent<TableRow>): void {
         /** After timeout to make click event handled first */
-        this._ngZone.runOutsideAngular(() => {
-            setTimeout(() => this._dragDropInProgress = false);
-        });
+        setTimeout(() => this._dragDropInProgress = false);
 
         if (this.isTreeTable && event.draggedItemIndex !== event.replacedItemIndex) {
             const dragRow = this._tableRows.find(row => row === this._tableRowsVisible[event.draggedItemIndex]);
@@ -1057,6 +1047,13 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         }
 
         this.router?.navigate([ row.navigationTarget ]);
+    }
+
+    /** @hidden */
+    _getCellNavigationId(rowIdx: number, colIdx: number): TableCellNavigationId {
+        const colIdxAddition = this._isShownSelectionColumn ? 1 : 0;
+
+        return `${rowIdx},${colIdx + colIdxAddition}` as TableCellNavigationId;
     }
 
     /** @hidden */
@@ -1092,8 +1089,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         const children = this._findRowChildren(dragRow);
         children.forEach(row => {
-            const updatedRowLevel = this._getRowParents(row).length;
-            row.level = updatedRowLevel;
+            row.level = this._getRowParents(row).length;
         });
     }
 
@@ -1293,6 +1289,13 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     private _onTableRowsChanged(): void {
         this._calculateVisibleTableRows();
         this._calculateCheckedAll();
+
+        if (this._shouldFocusAfterPageHasChanged) {
+            this._cdr.detectChanges();
+            this._tableService.focusNextTableCell(this._tableService.focusedTableCellNavId);
+
+            this._shouldFocusAfterPageHasChanged = false;
+        }
     }
 
     /** @hidden */
@@ -1560,9 +1563,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         const sortedTreeLikeGroupedRows = this._sortTreeLikeGroupedRows(treeLikeGroupedRows);
 
         // Convert tree like list to a flat list
-        const flatTableRowsList = this._convertTreeLikeToFlatList(sortedTreeLikeGroupedRows);
-
-        return flatTableRowsList;
+        return this._convertTreeLikeToFlatList(sortedTreeLikeGroupedRows);
     }
 
     /** @hidden */
@@ -1583,6 +1584,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         });
 
         this._onTableRowsChanged();
+        this._tableService.clearFocusableTableCells();
     }
 
     /** @hidden */
@@ -1748,10 +1750,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                     })
                 )
                 .subscribe(() => {
+                    this._shouldFocusAfterPageHasChanged = true;
                     const currentPage = this.getTableState().page.currentPage;
-                    this._ngZone.run(() => {
-                        this.setCurrentPage(currentPage + 1);
-                    });
+                    this._ngZone.run(() => this.setCurrentPage(currentPage + 1));
                 })
         );
     }
@@ -1770,5 +1771,61 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             this._tableService.tableColumnsWidth$
                 .subscribe(() => this.recalculateTableColumnWidth())
         )
+    }
+
+    /** @hidden */
+    private _listenToFocus(): void {
+        if (!this.tableContainer || !this.focusableMock) {
+            return;
+        }
+
+        let shouldDelegateFocus = true;
+
+        this._subscriptions.add(
+            fromEvent(this.tableContainer.nativeElement, 'keydown')
+                .subscribe((event: KeyboardEvent) => {
+                    if (this.loading) {
+                        event.preventDefault();
+                        return;
+                    }
+
+                    if (KeyUtil.isKeyCode(event, TAB)) {
+                        this._tableService.processFocusBetweenCellInners(
+                            event,
+                            this.tableContainer.nativeElement,
+                            this.focusableMock.nativeElement
+                        );
+
+                        if (!event.shiftKey && !this._tableService.isFocusInsideTableCell) {
+                            shouldDelegateFocus = false;
+
+                            this.focusableMock.nativeElement.focus();
+                        }
+                    }
+                })
+        );
+
+        this._subscriptions.add(
+            fromEvent(this.tableContainer.nativeElement, 'focusout')
+                .pipe(delay(0))
+                .subscribe(() => {
+                    if (!this.tableContainer.nativeElement.contains(this._document.activeElement)) {
+                        this._tableService.resetFocusedTableCell();
+                        this._cdr.markForCheck();
+                    }
+                }
+            )
+        );
+
+        this._subscriptions.add(
+            fromEvent(this.focusableMock.nativeElement, 'focus')
+                .subscribe(() => {
+                    if (shouldDelegateFocus) {
+                        this._tableService.focusNextTableCell(FIRST_CELL_NAVIGATION_ID);
+                    }
+
+                    shouldDelegateFocus = true;
+                })
+        );
     }
 }

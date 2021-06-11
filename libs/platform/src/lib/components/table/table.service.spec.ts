@@ -1,19 +1,22 @@
 import { TestBed } from '@angular/core/testing';
 import { Observer } from 'rxjs';
 
+import { RtlService } from '@fundamental-ngx/core/utils';
+
 import { TableService } from './table.service';
 import { DEFAULT_TABLE_STATE } from './constants';
 import { CollectionGroup, CollectionStringFilter, TableState } from './interfaces';
-import { GroupChange, SortChange, FilterChange, FreezeChange, SearchChange } from './models';
+import { FilterChange, FreezeChange, GroupChange, SearchChange, SortChange } from './models';
 import { FILTER_STRING_STRATEGY, SortDirection } from './enums';
 import { SearchInput } from './interfaces/search-field.interface';
+import { FdpCellSelectableDirective } from './directives';
 
 describe('TableServiceService', () => {
     let service: TableService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [TableService]
+            providers: [TableService, RtlService]
         });
         service = TestBed.inject(TableService);
     });
@@ -139,4 +142,22 @@ describe('TableServiceService', () => {
         expect(subscriberNextSpy).toHaveBeenCalledTimes(1);
         expect(subscriberNextSpy).toHaveBeenCalledWith(newState);
     });
+
+    it('should navigate over the table cells', () => {
+        const tableCellMock = {
+            focus: () => null,
+            _elRef: { nativeElement: { innerText: '' } }
+        } as FdpCellSelectableDirective;
+        const focusSpy = spyOn(tableCellMock, 'focus');
+
+        service.registerFocusableTableCell('0,0', tableCellMock);
+        service.focusNextTableCell('0,0');
+
+        expect(focusSpy).toHaveBeenCalled();
+
+        service.registerFocusableTableCell('0,1', tableCellMock);
+        service.focusNextTableCell('0,0', new KeyboardEvent('keydown', { key: 'ArrowRight' }));
+
+        expect(focusSpy).toHaveBeenCalledTimes(2);
+    })
 });

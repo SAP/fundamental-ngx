@@ -63,7 +63,20 @@
 >
     Custom Column
 </fd-docs-section-title>
-<description>This example shows custom column definition implementation </description>
+<description>
+    This example shows custom column definition implementation.
+    <ul>
+        <li>
+            Use F2 button to go into/out of the cell when navigating over the table cells.
+        </li>
+        <li>
+            Use input property <code>ariaLabel</code> of the <code>fdp-table-cell</code> for specifying how custom column content should be read by screen readers.
+        </li>
+        <li>
+            Use input property <code>[focusable]="true"</code> of the <code>fdp-table-cell</code> if there is some focusable content in the table cell (input, button, link, etc) so the screen reader will read about that a user can go into the table cell.
+        </li>
+    </ul>
+</description>
 <component-example>
     <fdp-platform-table-custom-column-example></fdp-platform-table-custom-column-example>
 </component-example>

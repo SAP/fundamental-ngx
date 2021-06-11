@@ -128,13 +128,13 @@ describe('TableComponent internal', () => {
         component.selectionMode = SelectionMode.MULTIPLE;
         component.ngAfterViewInit();
 
-        component._toggleAllSelectableRows(true);
+        component._toggleAllSelectableRows();
 
         expect(component._tableRows.filter((r) => r.checked).length).toEqual(
             component._tableRows.filter(({ type }) => type === TableRowType.ITEM).length
         );
 
-        component._toggleAllSelectableRows(false);
+        component._toggleAllSelectableRows();
 
         expect(component._tableRows.filter((r) => r.checked).length).toEqual(0);
     });
@@ -614,11 +614,11 @@ describe('TableComponent internal', () => {
                     fixture.detectChanges();
                     calculateTableElementsMetaData();
 
-                    expect(tableRowCells2DArray[0][0].nativeElement.innerText).toContain('Status : invalid');
-                    expect(tableRowCells2DArray[1][0].nativeElement.innerText).toContain('Client Verified : false');
+                    expect(tableRowCells2DArray[0][0].nativeElement.innerText).toMatch(/Status\n?: invalid$/);
+                    expect(tableRowCells2DArray[1][0].nativeElement.innerText).toMatch(/Client Verified\n?: false$/);
 
-                    expect(tableRowCells2DArray[27][0].nativeElement.innerText).toContain('Status : valid');
-                    expect(tableRowCells2DArray[28][0].nativeElement.innerText).toContain('Client Verified : true');
+                    expect(tableRowCells2DArray[27][0].nativeElement.innerText).toMatch(/Status\n?: valid$/);
+                    expect(tableRowCells2DArray[28][0].nativeElement.innerText).toMatch(/Client Verified\n?: true$/);
                 });
             });
         });
@@ -814,7 +814,7 @@ describe('TableComponent internal', () => {
         source = new TableDataSource(new TableDataProviderWithPaging());
     }
 
-    xdescribe('TableComponent Page Scrolling', async () => {
+    describe('TableComponent Page Scrolling', async () => {
         let hostComponent: TableHostComponent;
         let fixture: ComponentFixture<TableHostComponent>;
         let tableComponent: TableComponent<SourceItem>;
