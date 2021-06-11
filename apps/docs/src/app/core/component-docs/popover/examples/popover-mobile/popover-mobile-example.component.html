@@ -2,6 +2,15 @@
 
 <fd-popover #popoverMobile
     [mobile]="true"
-    [mobileConfig]="{ title: 'Test', hasCloseButton: true }"
+    [mobileConfig]="{ title: 'Mobile Popover', hasCloseButton: true }"
     style="display: block">
+    <div fd-form-item>
+        <label fd-form-label for="input-1">Input 1</label>
+        <input fd-form-control type="text" id="input-1" placeholder="Field placeholder text" />
+    </div>
+
+    <div fd-form-item>
+        <label fd-form-label for="input-2">Input 2</label>
+        <input fd-form-control type="text" id="input-2" placeholder="Field placeholder text" />
+    </div>
 </fd-popover>

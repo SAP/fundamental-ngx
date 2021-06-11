@@ -27,6 +27,7 @@ import { takeUntil } from 'rxjs/operators';
 @Component({
     selector: 'fd-popover-mobile',
     templateUrl: './popover-mobile.component.html',
+    styleUrls: ['./popover-mobile.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     providers: [PopoverService],
@@ -36,6 +37,10 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
 
     @ViewChild('dialogTemplate')
     _dialogTemplate: TemplateRef<any>;
+
+    title: string;
+
+    view: TemplateRef<any>;
 
     private _subscriptions = new Subscription();
 
@@ -53,6 +58,10 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
 
     ngOnInit(): void {
         this._listenOnPopoverOpenChange();
+
+        this.view = this.childContent;
+        this.title = this.mobileConfig.title || '';
+        this._changeDetectorref.markForCheck();
     }
 
     ngOnDestroy(): void {
@@ -85,10 +94,11 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
             ...this.dialogConfig,
             mobile: true,
             focusTrapped: false,
-            verticalPadding: false,
+            verticalPadding: true,
             escKeyCloseable: false,
             backdropClickCloseable: false,
             container: this._elementRef.nativeElement,
+            responsivePadding: true,
         });
     }
 }

@@ -1,12 +1,14 @@
-<ng-template #template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
+<ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
-            <h1 id="fd-mobile-popover-1" fd-title>Mobile Popover Example</h1>
-            <button fd-dialog-close-button (click)="close()"></button>
+            <h1 id="fd-mobile-popover-1" fd-title>{{title}}</h1>
+            <button
+                *ngIf="this.mobileConfig.hasCloseButton"
+                fd-dialog-close-button (click)="close()"></button>
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <p>Mobile Popover Example</p>
+            <ng-container *ngTemplateOutlet="view"></ng-container>
         </fd-dialog-body>
     </fd-dialog>
 </ng-template>
