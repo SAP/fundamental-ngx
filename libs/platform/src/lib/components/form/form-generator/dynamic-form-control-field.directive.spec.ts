@@ -21,7 +21,7 @@ class TestComponent {
     shouldShow = true;
 
     constructor() {
-        this.control = new DynamicFormControl('default value', {dynamicFormItem: {type: 'input'}});
+        this.control = new DynamicFormControl('default value', {dynamicFormItem: {type: 'input', name: 'test', message: 'test'}});
     }
 }
 
