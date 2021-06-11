@@ -1,4 +1,11 @@
 
+### [0.30.1-rc.78](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.77...v0.30.1-rc.78) (2021-06-11)
+
+
+### Bug Fixes
+
+* **core:** add fix for dialog header not applying styling correctly ([#5525](https://github.com/SAP/fundamental-ngx/issues/5525)) ([0b58eb3](https://github.com/SAP/fundamental-ngx/commit/0b58eb33d6fa0f03f3b0fafe3ea9ddb5d1c90e98))
+
 ### [0.30.1-rc.77](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.76...v0.30.1-rc.77) (2021-06-11)
 
 
