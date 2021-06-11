@@ -1,4 +1,12 @@
 
+### [0.30.1-rc.74](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.73...v0.30.1-rc.74) (2021-06-11)
+
+
+### Bug Fixes
+
+* **core:** fix datetime wrong date ([#5551](https://github.com/SAP/fundamental-ngx/issues/5551)) ([53995d0](https://github.com/SAP/fundamental-ngx/commit/53995d00e6912cacfe8ba3b20c6684d35e774627))
+* **platform:** table selection cells position fix ([#5614](https://github.com/SAP/fundamental-ngx/issues/5614)) ([b037216](https://github.com/SAP/fundamental-ngx/commit/b037216c6df617ea5524efe204dd0e6804686c82))
+
 ### [0.30.1-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.72...v0.30.1-rc.73) (2021-06-10)
 
 
