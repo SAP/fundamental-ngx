@@ -11,9 +11,13 @@ import {
     END,
     ENTER,
     ESCAPE,
+    F2,
     HOME,
     LEFT_ARROW,
-    META, NUMPAD_MINUS, PAGE_DOWN,
+    MAC_ENTER,
+    META,
+    NUMPAD_MINUS,
+    PAGE_DOWN,
     PAGE_UP,
     RIGHT_ARROW,
     SHIFT,
@@ -34,6 +38,7 @@ const keyMap: Map<number, string[]> = new Map([
     [ESCAPE, ['Escape', 'Esc']],
     [DELETE, ['Delete', 'Del']],
     [ENTER, ['Enter']],
+    [MAC_ENTER, ['Return']],
     [TAB, ['Tab']],
     [HOME, ['Home']],
     [END, ['End']],
@@ -49,7 +54,8 @@ const keyMap: Map<number, string[]> = new Map([
     [PAGE_UP, ['PageUp']],
     [PAGE_DOWN, ['PageDown']],
     [DASH, ['-']],
-    [NUMPAD_MINUS, ['-']]
+    [NUMPAD_MINUS, ['-']],
+    [F2, ['F2']]
 ]);
 
 export class KeyUtil {

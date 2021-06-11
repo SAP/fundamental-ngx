@@ -1,16 +1,32 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Optional } from '@angular/core';
+import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+
 import { SearchInput } from './interfaces/search-field.interface';
 import { CollectionFilter, CollectionGroup, CollectionPage, CollectionSort, TableState } from './interfaces';
-import { DEFAULT_TABLE_STATE } from './constants';
-import { FilterChange, FreezeChange, GroupChange, SortChange, SearchChange, ColumnsChange, PageChange } from './models';
+import { DEFAULT_TABLE_STATE, FIRST_CELL_NAVIGATION_ID } from './constants';
+import { ColumnsChange, FilterChange, FreezeChange, GroupChange, PageChange, SearchChange, SortChange } from './models';
+import { FdpCellSelectableDirective } from './directives';
+
+
+/** Cell navigation id, where first number indicates the row index, second - the column index
+ *  Used to register cell for the arrow keys navigation
+ *  TODO: Template literal types should be used here but it's broken in TS 4.1.
+ */
+export type TableCellNavigationId = string; // `${number},${number}`;
 
 @Injectable()
 export class TableService {
+    private _focusedTableCellNavId = FIRST_CELL_NAVIGATION_ID;
+    private _isFocusInsideTableCell = false;
+
     private _tableStateSubject$: BehaviorSubject<TableState> = new BehaviorSubject(DEFAULT_TABLE_STATE);
     private _markForCheck$: Subject<void> = new Subject<void>();
+
+    private _tableCellsMap = new Map<string, FdpCellSelectableDirective>();
 
     readonly tableState$: Observable<TableState> = this._tableStateSubject$.asObservable();
     readonly tableStateChanges$ = this.tableState$.pipe(skip(1));
@@ -23,10 +39,32 @@ export class TableService {
     readonly columnsChange: EventEmitter<ColumnsChange> = new EventEmitter<ColumnsChange>();
     readonly pageChange: EventEmitter<PageChange> = new EventEmitter<PageChange>();
 
+    /** Flag which shows is the focus inside the table cell */
+    get isFocusInsideTableCell(): boolean {
+        return this._isFocusInsideTableCell;
+    }
+
+    /** Currently focused table cell's ID (always looks like `${rowIndex},${colIndex}`) */
+    get focusedTableCellNavId(): TableCellNavigationId {
+        if (!this._focusedTableCellNavId) {
+            return FIRST_CELL_NAVIGATION_ID;
+        }
+
+        return this._focusedTableCellNavId;
+    }
+
     /** Listen for changes in table subcomponents (mostly table column) */
     get markForCheck$(): Subject<void> {
         return this._markForCheck$;
     }
+
+    /** @hidden */
+    private get _rtl(): boolean {
+        return this._rtlService?.rtl.getValue();
+    }
+
+    /** @hidden */
+    constructor(@Optional() private readonly _rtlService: RtlService) {}
 
     /** Get current state/settings of the Table. */
     getTableState(): TableState {
@@ -176,10 +214,114 @@ export class TableService {
         }
 
         const state: TableState = this._setCurrentPageToState(prevState, currentPage);
-        
+
         this.setTableState(state);
-        
+
         this.pageChange.emit({ current: state.page, previous: prevPageState });
+    }
+
+    /** Register focusable table cell to have ability navigate over it with arrow buttons */
+    registerFocusableTableCell(id: string, tableCell: FdpCellSelectableDirective): void {
+        this._tableCellsMap.set(id, tableCell);
+    }
+
+    /** Register focusable table cell to have ability navigate over it with arrow buttons */
+    clearFocusableTableCells(): void {
+        this._tableCellsMap.clear();
+    }
+
+    /** Navigate over registered focusable table cells */
+    focusNextTableCell(currCellNavId: TableCellNavigationId, event?: KeyboardEvent): void {
+        if (!event) {
+            const currCell = this._tableCellsMap.get(currCellNavId);
+
+            if (currCell) {
+                currCell.focus();
+            }
+
+            return;
+        }
+
+        const [rowIndex, colIndex] = currCellNavId.split(',');
+        let nextCellId: string;
+
+        if (KeyUtil.isKeyCode(event, UP_ARROW)) {
+            nextCellId = `${+rowIndex - 1},${colIndex}`;
+        }
+
+        if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
+            nextCellId = `${+rowIndex + 1},${colIndex}`;
+        }
+
+        if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
+            nextCellId = `${rowIndex},${+colIndex - (this._rtl ? -1 : 1)}`;
+        }
+
+        if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
+            nextCellId = `${rowIndex},${+colIndex + (this._rtl ? -1 : 1)}`;
+        }
+
+        const nextCell = this._tableCellsMap.get(nextCellId);
+        if (nextCell) {
+            this._tableCellsMap.get(nextCellId).focus();
+        }
+    }
+
+    /** Set currently focused cell */
+    setFocusedTableCell(cellId): void {
+        this._focusedTableCellNavId = cellId;
+    }
+
+    /** Reset currently focused cell to initial value */
+    resetFocusedTableCell(): void {
+        this._focusedTableCellNavId = FIRST_CELL_NAVIGATION_ID;
+    }
+
+    /** Mark that focus inside the cell */
+    setFocusInsideCell(): void {
+        this._isFocusInsideTableCell = true;
+    }
+
+    /** Mark that focus isn't inside the cell */
+    removeFocusInsideCell(): void {
+        this._isFocusInsideTableCell = false;
+    }
+
+    /** Focus on table cell inner any first focusable element */
+    processFocusInsideCell(tableCellNavId: TableCellNavigationId): void {
+        const tableCell = this._tableCellsMap.get(tableCellNavId);
+
+        if (this.isFocusInsideTableCell) {
+            tableCell.focus();
+            this.removeFocusInsideCell();
+            return;
+        }
+
+        const focusableElements = getFocusableElements(tableCell._elRef.nativeElement);
+
+        if (focusableElements.length) {
+            focusableElements[0].focus();
+            this.setFocusInsideCell();
+        }
+    }
+
+    /** Process focus when navigating between cell inners */
+    processFocusBetweenCellInners(event: KeyboardEvent, tableContainer: HTMLElement, focusableMock: HTMLElement): void {
+        if (!this.isFocusInsideTableCell) {
+            return;
+        }
+
+        const focusableElements = getFocusableElements(tableContainer);
+        const currFocusElementIndex = focusableElements.findIndex(el => el === document.activeElement);
+
+        if (currFocusElementIndex === 1 && event.shiftKey) {
+            this.removeFocusInsideCell();
+        }
+
+        if (currFocusElementIndex === focusableElements.length - 1 && !event.shiftKey) {
+            focusableMock.focus();
+            this.removeFocusInsideCell();
+        }
     }
 
     /** @hidden */
@@ -187,4 +329,14 @@ export class TableService {
         const newPageState: CollectionPage = { ...state.page, currentPage: currentPage };
         return { ...state, page: newPageState  };
     }
+}
+
+/** Get all focusable child elements */
+function getFocusableElements(rootElement: any): any[] {
+    return [
+        ...rootElement.querySelectorAll(
+            'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
+        )
+    ]
+        .filter(el => !el.hasAttribute('disabled') && el.getAttribute('tabindex') !== '-1');
 }

@@ -3,7 +3,8 @@ import { Directive, TemplateRef } from '@angular/core';
 /** Column header container. */
 // tslint:disable-next-line:directive-selector
 @Directive({ selector: 'fdp-table-header' })
-export class FdpTableHeader {}
+export class FdpTableHeader {
+}
 
 /**
  * Header cell definition for a platform table.
