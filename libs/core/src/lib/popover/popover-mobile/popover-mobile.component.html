@@ -2,13 +2,22 @@
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
             <h1 id="fd-mobile-popover-1" fd-title>{{title}}</h1>
-            <button
+            <button fd-dialog-close-button
+                class="mobile-popover-close-button"
                 *ngIf="this.mobileConfig.hasCloseButton"
-                fd-dialog-close-button (click)="close()"></button>
+                (click)="close()"></button>
         </fd-dialog-header>
 
         <fd-dialog-body>
             <ng-container *ngTemplateOutlet="view"></ng-container>
         </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-button-bar
+                fdType="emphasized"
+                [label]="'Close'"
+                (click)="close()">
+            </fd-button-bar>
+        </fd-dialog-footer>
     </fd-dialog>
 </ng-template>
