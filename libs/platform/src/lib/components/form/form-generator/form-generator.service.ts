@@ -234,7 +234,7 @@ export class FormGeneratorService {
 
     /**
      * @description Adds custom error hint defined by user.
-     * @param type error type.
+     * @param type error type from validator.
      * @param value display text.
      */
     addValidationErrorHint(type: string, value: string): void {
