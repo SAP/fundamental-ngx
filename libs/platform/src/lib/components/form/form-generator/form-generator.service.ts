@@ -7,8 +7,9 @@ import { DynamicFormItem, DynamicFormItemChoices } from './interfaces/dynamic-fo
 import { FormComponentDefinition } from './interfaces/form-component-definition';
 import { DEFAULT_COMPONENTS_LIST } from './config/default-components-list';
 import { DEFAULT_VALIDATION_ERRORS } from './config/default-validation-errors';
-import { BaseDynamicFormGeneratorControl, SelectItem } from '@fundamental-ngx/platform';
 import { isFunction, isPromise, isSubscribable } from '../../../utils/lang';
+import { SelectItem } from '../../../domain/data-model';
+import { BaseDynamicFormGeneratorControl } from './base-dynamic-form-generator-control';
 
 interface SubscriptionStrategy {
     createSubscription(async: Observable<any>|Promise<any>|Function, updateLatestValue: any): Promise<any>;

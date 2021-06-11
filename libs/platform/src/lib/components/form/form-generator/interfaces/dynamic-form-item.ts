@@ -1,6 +1,10 @@
 import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { SelectItem, ContentDensity, HintPlacement, LabelLayout, InputType } from '@fundamental-ngx/platform';
+
+import { SelectItem } from '../../../../domain/data-model';
+import { InputType } from '../../input/input.component';
+import { HintPlacement, LabelLayout } from '../../form-options';
+import { ContentDensity } from '../../form-control';
 
 export type DynamicFormItemChoices = number | string | SelectItem;
 export type DynamicFormItemValidationResult = null | boolean | string;
