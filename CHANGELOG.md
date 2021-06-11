@@ -1,4 +1,11 @@
 
+### [0.30.1-rc.76](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.75...v0.30.1-rc.76) (2021-06-11)
+
+
+### Bug Fixes
+
+* **platform:** updating condensed mode for platform button ([#5638](https://github.com/SAP/fundamental-ngx/issues/5638)) ([5844d6d](https://github.com/SAP/fundamental-ngx/commit/5844d6d80efbce611ede478b9dade3e40be7c8eb))
+
 ### [0.30.1-rc.75](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.74...v0.30.1-rc.75) (2021-06-11)
 
 
