@@ -1,20 +1,38 @@
 <div fd-form-item>
-    <label fd-form-label>Left Aligned Icon Button Add-on</label>
-    <fd-input-group placement="before"
-                    glyph="accelerated"
-                    placeholder="Amount"
-                    glyphAriaLabel="Submit"
-                    [button]="true">
+    <label
+        fd-form-label
+        for="fd-input-group-button-1"
+        id="fd-input-group-button-label-1"
+        title="Left Aligned Icon Button Add-on"
+        >Left Aligned Icon Button Add-on
+    </label>
+    <fd-input-group
+        placement="before"
+        glyph="cart"
+        placeholder="Amount"
+        glyphAriaLabel="Add to Cart"
+        [button]="true"
+        ariaLabelledby="fd-input-group-button-label-1"
+    >
     </fd-input-group>
 </div>
 
-<br/>
+<br />
 
 <div fd-form-item>
-    <label fd-form-label>Right Aligned Text Button Add-on</label>
-    <fd-input-group placement="after"
-                    addOnText="Submit"
-                    placeholder="Amount"
-                    [button]="true">
+    <label
+        fd-form-label
+        for="fd-input-group-button-2"
+        id="fd-input-group-button-label-2"
+        title="Right Aligned Text Button Add-on"
+        >Right Aligned Text Button Add-on
+    </label>
+    <fd-input-group
+        placement="after"
+        addOnText="Submit"
+        placeholder="Amount"
+        [button]="true"
+        ariaLabelledby="fd-input-group-button-label-2"
+    >
     </fd-input-group>
 </div>
