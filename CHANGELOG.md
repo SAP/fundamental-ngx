@@ -1,4 +1,17 @@
 
+### [0.30.1-rc.81](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.79...v0.30.1-rc.81) (2021-06-11)
+
+
+### Features
+
+* **core/platform:** navigatable row in table ([#5526](https://github.com/SAP/fundamental-ngx/issues/5526)) ([68f8669](https://github.com/SAP/fundamental-ngx/commit/68f8669f1d7a8688100a6840714bdc2010df782b))
+* **platform:** form generator ([#5622](https://github.com/SAP/fundamental-ngx/issues/5622)) ([a44ffac](https://github.com/SAP/fundamental-ngx/commit/a44ffac37991e677710e326b291a36dc6777dbe5))
+
+
+### Bug Fixes
+
+* **core:** fix documentation api tab for wizard ([#5660](https://github.com/SAP/fundamental-ngx/issues/5660)) ([0ee8c4d](https://github.com/SAP/fundamental-ngx/commit/0ee8c4d81ac64b08fdb75eeac439d32bf1d6c715))
+
 ### [0.30.1-rc.80](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.79...v0.30.1-rc.80) (2021-06-11)
 
 
