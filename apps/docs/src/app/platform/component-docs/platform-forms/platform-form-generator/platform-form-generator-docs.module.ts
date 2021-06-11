@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../../api-files';
 import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
@@ -11,7 +12,6 @@ import {
     PlatformFormGeneratorCustomComponentExampleComponent,
     PlatformFormGeneratorCustomSliderElement
 } from './platform-form-generator-examples/platform-form-generator-custom-component-example.component';
-import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { PlatformFormGeneratorObservableExampleComponent } from './platform-form-generator-examples/platform-form-generator-observable-example.component';
 import { PlatformFormGeneratorProgramaticSubmitComponent } from './platform-form-generator-examples/platform-form-generator-programatic-submit.component';
 import { PlatformFormGeneratorCustomErrorExampleComponent } from './platform-form-generator-examples/platform-form-generator-custom-error-example.component';

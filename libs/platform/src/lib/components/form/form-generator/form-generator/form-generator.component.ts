@@ -11,7 +11,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
-import { takeWhile } from 'rxjs/operators';
+import { debounceTime, takeWhile } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 import { FormGeneratorService } from '../form-generator.service';
@@ -46,7 +46,7 @@ export class FormGeneratorComponent implements OnDestroy {
     };
 
     set formItems(formItems: DynamicFormItem[]) {
-        this._formItems = formItems;
+        this._formItems = formItems.map(i => ({...i}));
 
         this._generateForm();
     }
@@ -185,10 +185,10 @@ export class FormGeneratorComponent implements OnDestroy {
         this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
 
         this._formValueSubscription = this.form.valueChanges
-        .pipe(takeWhile(() => this._allowSubscribe))
+        .pipe(takeWhile(() => this._allowSubscribe), debounceTime(50))
         .subscribe(async () => {
             this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
-            this._cd.detectChanges();
+            this._cd.markForCheck();
         });
 
         this.formLoading = false;
