@@ -1,4 +1,11 @@
 
+### [0.30.1-rc.75](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.74...v0.30.1-rc.75) (2021-06-11)
+
+
+### Bug Fixes
+
+* **core:** fix a11y for Input Group component ([#5619](https://github.com/SAP/fundamental-ngx/issues/5619)) ([9862f24](https://github.com/SAP/fundamental-ngx/commit/9862f243fb8d009222bc22d109b856b849d622a0))
+
 ### [0.30.1-rc.74](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.73...v0.30.1-rc.74) (2021-06-11)
 
 
