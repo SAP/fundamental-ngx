@@ -1,4 +1,11 @@
 
+### [0.30.1-rc.77](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.76...v0.30.1-rc.77) (2021-06-11)
+
+
+### Bug Fixes
+
+* **core:** fix datetime exports ([#5658](https://github.com/SAP/fundamental-ngx/issues/5658)) ([dc9f717](https://github.com/SAP/fundamental-ngx/commit/dc9f717c76a2c62cba8dd6fce33108a85a6da210))
+
 ### [0.30.1-rc.76](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.75...v0.30.1-rc.76) (2021-06-11)
 
 
