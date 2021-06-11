@@ -50,7 +50,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
                 column: 1
             },
             // Emulate some API request
-            validate: (value) => of(value === 'John' ? true : 'Your name should be John').pipe(delay(400)),
+            validate: (value) => of(value === 'John' ? null : 'Your name should be John').pipe(delay(400)),
             transformer: async (value: any) => {
                 await dummyAwaitablePromise();
                 return `${value}777`;
@@ -65,7 +65,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
             validators: [Validators.required],
             validate: (value: string) => {
                 const passwordPattern = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\\w\\s]).{8,}$');
-                return passwordPattern.test(value) ? true : 'Minimum eight characters, at least one letter, one number and one special character'
+                return passwordPattern.test(value) ? null : 'Minimum eight characters, at least one letter, one number and one special character'
             },
             guiOptions: {
                 column: 1
@@ -149,7 +149,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
             guiOptions: {
                 column: 2
             },
-            validate: (result: string) => of(result === 'Angular' ? true : 'You should pick Angular')
+            validate: (result: string) => of(result === 'Angular' ? null : 'You should pick Angular')
         },
         {
             type: 'datepicker',
@@ -159,7 +159,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
                 column: 1
             },
             validators: [Validators.required],
-            validate: (value: FdDate) => of(value !== null && value.year < 2020 ? true : 'You need to be born before 2020'),
+            validate: (value: FdDate) => of(value !== null && value.year < 2020 ? null : 'You need to be born before 2020'),
             transformer: (value: FdDate) => {
                 return value?.toDateString();
             }
