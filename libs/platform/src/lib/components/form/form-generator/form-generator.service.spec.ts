@@ -1,11 +1,26 @@
 import { Component } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlatformSliderModule } from '../../slider/slider.module';
 
 import { FormGeneratorService } from './form-generator.service';
 import { DynamicFormItem } from './interfaces/dynamic-form-item';
 import { BaseDynamicFormGeneratorControl, dynamicFormFieldProvider, dynamicFormGroupChildProvider } from './public_api';
+
+export const dummyFormItemsWithWhenCondition: DynamicFormItem[] = [
+    {
+        type: 'input',
+        name: 'shouldBeVisible',
+        message: 'Sould be visible',
+        default: true
+    },
+    {
+        type: 'input',
+        name: 'shouldBeHidden',
+        message: 'Should be hidden',
+        when: (answers) => answers.shouldBeVisible === true
+    }
+]
 
 export const dummyFormItems: DynamicFormItem[] = [
     {
@@ -59,7 +74,8 @@ describe('FormGeneratorService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [TestCustomComponent],
-            imports: [FormsModule, ReactiveFormsModule, PlatformSliderModule]
+            imports: [FormsModule, ReactiveFormsModule, PlatformSliderModule],
+            providers: [FormGeneratorService]
         });
         service = TestBed.inject(FormGeneratorService);
     });
@@ -69,16 +85,12 @@ describe('FormGeneratorService', () => {
     });
 
     it('should create empty form', async () => {
-
         const form = await service.generateForm([]);
-
         expect(Object.keys(form.controls).length).toBe(0);
     });
 
     it('should create form with controls', async () => {
-
         const form = await service.generateForm(dummyFormItems);
-
         expect(form.controls.something).toBeTruthy();
     });
 
@@ -87,14 +99,33 @@ describe('FormGeneratorService', () => {
         expect(form.controls['shouldNotBeInForm']).toBeUndefined();
     });
 
-    it('Should return transformed form value', async () => {
+    it('should return transformed form value', async () => {
         const form = await service.generateForm(dummyFormItems);
         form.controls.something.setValue('test');
         const formValue = await service.getFormValue(form);
         expect(formValue.something).toEqual('test!!!');
     });
 
-    it('Should add custom component', async () => {
+    it('should add custom component', async () => {
         expect(service.addComponent(TestCustomComponent, ['slider'])).toBeTruthy();
+    });
+
+    it('should add custom component and return it by the type', async () => {
+        service.addComponent(TestCustomComponent, ['slider']);
+
+        expect(service.getComponentDefinitionByType('slider').component).toEqual(TestCustomComponent);
+    });
+
+    it('should check hide second field', async () => {
+        const form = await service.generateForm(dummyFormItemsWithWhenCondition);
+        const visibleItems = await service.checkVisibleFormItems(form);
+        expect(visibleItems.shouldBeHidden).toBeTruthy();
+    });
+
+    it('should check show second field', async () => {
+        const form = await service.generateForm(dummyFormItemsWithWhenCondition);
+        form.controls.shouldBeVisible.setValue(false);
+        const visibleItems = await service.checkVisibleFormItems(form);
+        expect(visibleItems.shouldBeHidden).toBeFalsy();
     });
 });

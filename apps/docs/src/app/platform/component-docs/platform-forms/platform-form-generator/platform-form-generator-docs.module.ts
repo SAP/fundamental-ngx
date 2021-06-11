@@ -14,6 +14,7 @@ import {
 import { BusyIndicatorModule } from '@fundamental-ngx/core';
 import { PlatformFormGeneratorObservableExampleComponent } from './platform-form-generator-examples/platform-form-generator-observable-example.component';
 import { PlatformFormGeneratorProgramaticSubmitComponent } from './platform-form-generator-examples/platform-form-generator-programatic-submit.component';
+import { PlatformFormGeneratorCustomErrorExampleComponent } from './platform-form-generator-examples/platform-form-generator-custom-error-example.component';
 
 const routes: Routes = [
     {
@@ -46,6 +47,7 @@ const routes: Routes = [
         PlatformFormGeneratorCustomSliderElement,
         PlatformFormGeneratorObservableExampleComponent,
         PlatformFormGeneratorProgramaticSubmitComponent,
+        PlatformFormGeneratorCustomErrorExampleComponent,
     ]
 })
 export class PlatformFormGeneratorDocsModule {}

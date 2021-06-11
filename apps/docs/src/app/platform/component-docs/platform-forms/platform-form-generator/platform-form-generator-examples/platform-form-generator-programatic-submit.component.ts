@@ -30,12 +30,11 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
     questions: DynamicFormItem[] = [
         {
             type: 'input',
-            name: 'name',
+            name: 'name3',
             message: 'Your name',
             default: 'John',
             guiOptions: {
                 hint: 'Some contextual hint',
-                contentDensity: 'compact',
                 column: 1
             },
             // Emulate some API request
@@ -49,7 +48,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         {
             type: 'password',
             controlType: 'password',
-            name: 'password',
+            name: 'password3',
             message: 'Password',
             validators: [Validators.required],
             validate: (value: string) => {
@@ -62,7 +61,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         },
         {
             type: 'number',
-            name: 'age',
+            name: 'age3',
             message: () => of('Your age').pipe(delay(400)),
             default: '18',
             validators: [Validators.required],
@@ -72,7 +71,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         },
         {
             type: 'editor',
-            name: 'bio',
+            name: 'bio3',
             message: 'Your biography',
             guiOptions: {
                 column: 1
@@ -80,7 +79,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         },
         {
             type: 'checkbox',
-            name: 'citizenship4',
+            name: 'citizenship3',
             message: 'Your citizenship',
             guiOptions: {
                 inline: true,
@@ -100,7 +99,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         },
         {
             type: 'list',
-            name: 'department',
+            name: 'department3',
             message: 'Department you work in',
             validators: [Validators.required],
             default: 'IT',
@@ -111,7 +110,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         },
         {
             type: 'list',
-            name: 'main_speciality',
+            name: 'main_speciality3',
             message: 'Main speciality',
             validators: [Validators.required],
             choices: () => of(['Front-end', 'Back-end']),
@@ -122,7 +121,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         },
         {
             type: 'confirm',
-            name: 'agree',
+            name: 'agree3',
             message: 'Do you agree with terms and conditions?',
             choices: ['Yes', 'No'],
             validate: (value) => of(value === 'Yes' ? null : 'You must agree'),
@@ -132,7 +131,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         },
         {
             type: 'radio',
-            name: 'choose_best_option',
+            name: 'choose_best_option3',
             message: 'Primary front-end framework you use',
             choices: ['Angular', 'React', 'VueJS'],
             guiOptions: {
@@ -142,7 +141,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         },
         {
             type: 'datepicker',
-            name: 'birthday',
+            name: 'birthday3',
             message: 'Your birthday',
             guiOptions: {
                 column: 1
@@ -155,7 +154,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
         },
         {
             type: 'switch',
-            name: 'enable_feature',
+            name: 'enable_feature3',
             message: 'Enable some analytics',
             default: false,
             guiOptions: {
@@ -168,8 +167,6 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
 
     onFormCreated(): void {
         this.formCreated = true;
-
-        console.log(this.formGenerator);
     }
 
     async onFormSubmitted(value: { [key: string]: any }): Promise<void> {

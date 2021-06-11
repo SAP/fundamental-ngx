@@ -11,6 +11,9 @@ import * as customFormGeneratorSrc from '!raw-loader!./platform-form-generator-e
 import * as programaticSubmitHtml from '!raw-loader!./platform-form-generator-examples/platform-form-generator-programatic-submit.component.html';
 import * as programaticSubmitSrc from '!raw-loader!./platform-form-generator-examples/platform-form-generator-programatic-submit.component.ts';
 
+import * as customErrorsHtml from '!raw-loader!./platform-form-generator-examples/platform-form-generator-custom-error-example.component.html';
+import * as customErrorsSrc from '!raw-loader!./platform-form-generator-examples/platform-form-generator-custom-error-example.component.ts';
+
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -71,6 +74,20 @@ export class PlatformFormGeneratorDocsComponent {
             code: programaticSubmitSrc,
             fileName: 'platform-form-generator-programatic-submit.component',
             component: 'PlatformFormGeneratorProgramaticSubmitComponent'
+        }
+    ];
+
+    customErrors: ExampleFile[] = [
+        {
+            language: 'html',
+            code: customErrorsHtml,
+            fileName: 'platform-form-generator-custom-error-example.component'
+        },
+        {
+            language: 'typescript',
+            code: customErrorsSrc,
+            fileName: 'platform-form-generator-custom-error-example.component',
+            component: 'PlatformFormGeneratorCustomErrorExampleComponent'
         }
     ];
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { BaseDynamicFormGeneratorControl } from '../base-dynamic-form-generator-control';
 import { dynamicFormFieldProvider, dynamicFormGroupChildProvider } from '../providers/providers';
 import { DATE_TIME_FORMATS, DatetimeAdapter, FD_DATETIME_FORMATS, FdDatetimeAdapter } from '@fundamental-ngx/core';
@@ -6,6 +6,7 @@ import { DATE_TIME_FORMATS, DatetimeAdapter, FD_DATETIME_FORMATS, FdDatetimeAdap
 @Component({
     selector: 'fdp-dynamic-form-generator-datepicker',
     templateUrl: './dynamic-form-generator-datepicker.component.html',
+    encapsulation: ViewEncapsulation.None,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider],
     providers: [
         // Note that this is usually provided in the root of your application.

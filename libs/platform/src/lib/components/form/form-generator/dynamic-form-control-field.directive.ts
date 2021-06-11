@@ -56,12 +56,9 @@ export class DynamicFormControlFieldDirective implements OnInit {
         this._updateView();
     }
 
-    private _shouldShowFormItem = false;
-
-    get shouldShowFormItem(): boolean {
-        return this._shouldShowFormItem && this._componentRemoved;
-    }
-
+    /**
+     * @description If false, validation will be skipped from the form item control
+     */
     set shouldShowFormItem(value: boolean) {
         if (value === this._shouldShowFormItem) {
             return;
@@ -79,6 +76,11 @@ export class DynamicFormControlFieldDirective implements OnInit {
 
         this._control.updateValueAndValidity({ emitEvent: false });
     }
+
+    /**
+     * @hidden
+     */
+    private _shouldShowFormItem = false;
 
     ngOnInit(): void {
         this._updateView();

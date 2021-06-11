@@ -1,4 +1,4 @@
-import { AsyncValidatorFn, FormControl, ValidatorFn } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { DynamicAbstractControlOptions } from './interfaces/dynamic-abstract-control';
 import { DynamicFormItem } from './interfaces/dynamic-form-item';
 
@@ -23,11 +23,9 @@ export class DynamicFormControl extends FormControl {
      */
     constructor(
         formState?: any,
-        validatorOrOpts?: ValidatorFn | ValidatorFn[] | DynamicAbstractControlOptions | null,
-        asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
-        formItem?: DynamicFormItem
+        validatorOrOpts?: DynamicAbstractControlOptions | null
     ) {
         super(formState, validatorOrOpts);
-        this.formItem = (validatorOrOpts as DynamicAbstractControlOptions).dynamicFormItem;
+        this.formItem = validatorOrOpts.dynamicFormItem;
     }
 }

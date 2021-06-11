@@ -53,6 +53,12 @@ import { FormField } from '../form-field';
     providers: [{ provide: FormFieldControl, useExisting: PlatformDatePickerComponent, multi: true }]
 })
 export class PlatformDatePickerComponent<D> extends BaseInput {
+
+    /**
+     * @hidden
+     */
+     private _datepickerState: Status;
+
     /**
      * date-picker value set as controller value
      */
@@ -142,8 +148,6 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     set datepickerState(state: Status) {
         this._datepickerState = state ? state : 'default';
     }
-
-    _datepickerState: Status;
 
     /**
      * Whether AddOn Button should be focusable, set to true by default

@@ -25,14 +25,14 @@ export interface DynamicFormItem {
      * @description
      * Name of the form item in form.
      */
-    name?: string;
+    name: string;
 
     /**
      * @description
      * Display name of the form item.
      * @param formValue the form value hash.
      */
-    message?: string | ((formValue?: {[key: string]: any}) => string | Promise<string> | Observable<string>);
+    message: string | ((formValue?: {[key: string]: any}) => string | Promise<string> | Observable<string>);
 
     /**
      * @description
@@ -79,13 +79,19 @@ export interface DynamicFormItem {
      * @description
      * The list of validators applied to the form item.
      */
-    validators?: ValidatorFn | ValidatorFn[] | null;
+    validators?: ValidatorFn[] | null;
 
     /**
      * @description
      * The list of async validators applied to the form item.
      */
     asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null;
+
+    /**
+     * @description Set when form item is a mandatory one.
+     *
+     */
+    required?: boolean;
 
     /**
      * @description Transforms raw form item value.

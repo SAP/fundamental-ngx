@@ -45,11 +45,6 @@ class ValueStrategy implements SubscriptionStrategy {
     }
 }
 
-const _promiseStrategy = new PromiseStrategy();
-const _subscribableStrategy = new SubscribableStrategy();
-const _functionStrategy = new FunctionStrategy();
-const _valueStrategy = new ValueStrategy();
-
 /**
  * @description Form generator service
  */
@@ -58,19 +53,16 @@ export class FormGeneratorService {
 
     /**
      * @hidden
-     * @private
      */
      private _formComponentDefinitions: FormComponentDefinition[] = DEFAULT_COMPONENTS_LIST;
 
      /**
       * @hidden
-      * @private
       */
      private _validationErrorHints = DEFAULT_VALIDATION_ERRORS;
 
      /**
       * @hidden
-      * @private
       */
      private _latestAsyncValue: any;
 
@@ -106,7 +98,11 @@ export class FormGeneratorService {
 
                     const result = await this._getFunctionValue(obj);
 
-                    return result === null ? result : { validator: typeof result === 'boolean' ? true : result };
+                    const returnObj = {};
+
+                    returnObj[`${control.formItem.name}Validator`] = typeof result === 'boolean' ? true : result;
+
+                    return result === null ? result : returnObj;
                 };
 
                 formItem.asyncValidators = formItem.asyncValidators || [];
@@ -120,6 +116,8 @@ export class FormGeneratorService {
             let formControl: DynamicFormControl;
 
             formItem.validators = formItem.validators || [Validators.nullValidator];
+
+            formItem.required = formItem.required || formItem.validators.includes(Validators.required);
 
             formControl = new DynamicFormControl(formItem.default, {
                 validators: formItem.validators,
@@ -229,8 +227,8 @@ export class FormGeneratorService {
      * @returns Object of available errors, where key is an error type,
      * and it's value is a display text.
      */
-    getValidationErrorHints(): {[key: string]: any} {
-        return this._validationErrorHints;
+    getValidationErrorHints(key: string): string {
+        return this._validationErrorHints[key];
     }
 
     /**
@@ -258,6 +256,7 @@ export class FormGeneratorService {
             const formItem = (control as DynamicFormControl).formItem;
 
             if (!formItem.when) {
+                shouldShowFields[key] = true;
                 continue;
             }
 
@@ -271,7 +270,6 @@ export class FormGeneratorService {
 
     /**
      * @hidden
-     * @private
      * @param formItem
      * @param form
      * @param key
@@ -293,7 +291,6 @@ export class FormGeneratorService {
 
     /**
      * @hidden
-     * @private
      * @param formItem
      * @param form
      * @returns
@@ -313,7 +310,6 @@ export class FormGeneratorService {
 
     /**
      * @hidden
-     * @private
      * @param value
      */
     private _updateLatestValue(value: any): void {
@@ -322,41 +318,45 @@ export class FormGeneratorService {
 
     /**
      * @hidden
-     * @private
+     * @description Returns value from Promise-like, Observable-like, simple function or just some object.
      * @param obj
      * @returns
      */
     private async _getFunctionValue(obj: any): Promise<any> {
         const strategy = this._selectStrategy(obj);
 
-        await strategy.createSubscription(obj, (value: any) => this._updateLatestValue(value));
+        let result: any;
 
-        if (isFunction(this._latestAsyncValue)) {
-            await this._getFunctionValue(this._latestAsyncValue);
+        await strategy.createSubscription(obj, (value: any) => {
+            result = value;
+        });
+
+        if (isFunction(result)) {
+            await this._getFunctionValue(result);
         }
 
-        return this._latestAsyncValue;
+        return result;
     }
 
     /**
      * @hidden
-     * @private
+     * @description Selects appropriate strategy on how to resolve function value
      * @param obj
      * @returns
      */
      private _selectStrategy(obj: Observable<any>|Promise<any>|Function): SubscriptionStrategy {
         if (isPromise(obj)) {
-            return _promiseStrategy;
+            return new PromiseStrategy();
         }
 
         if (isSubscribable(obj)) {
-            return _subscribableStrategy;
+            return new SubscribableStrategy();
         }
 
         if (isFunction(obj)) {
-            return _functionStrategy;
+            return new FunctionStrategy();
         }
 
-        return _valueStrategy;
+        return new ValueStrategy();
     }
 }

@@ -66,3 +66,21 @@
 <code-example [exampleFiles]="programaticSubmit"></code-example>
 
 <separator></separator>
+
+<fd-docs-section-title [id]="'def5'" [componentName]="'FormGeneratorComponent'">
+    Custom errors in Form Generator
+</fd-docs-section-title>
+<description>
+    Form generator supports multiple ways of defining validation error hints:
+    <ul>
+        <li>With validation function, which returns string if field is invalid;</li>
+        <li>With predefined generic texts</li>
+    </ul>
+    If you want to change default validation error messages, you can use <code>addValidationErrorHint</code> method
+    in <code>FormGeneratorService</code>.
+    This will allow you to override default ones, and add new generic validation error messages.
+</description>
+<component-example>
+    <fdp-platform-form-generator-custom-error-example></fdp-platform-form-generator-custom-error-example>
+</component-example>
+<code-example [exampleFiles]="customErrors"></code-example>

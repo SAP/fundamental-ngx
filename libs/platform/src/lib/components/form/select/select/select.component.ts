@@ -48,7 +48,10 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
     set selectState(state: SelectControlState) {
         this._state = state;
     }
-    _selectState: SelectControlState = null;
+    /**
+     * @hidden
+     */
+    private _selectState: SelectControlState = null;
 
     /**
     * Directly sets value to the component that at the ends up at writeValue as well fires

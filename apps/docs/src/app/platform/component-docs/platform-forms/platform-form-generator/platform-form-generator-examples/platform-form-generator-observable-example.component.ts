@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import { FdDate } from '@fundamental-ngx/core';
-import { DynamicFormItem } from '@fundamental-ngx/platform';
+import { DynamicFormItem, FormGeneratorComponent } from '@fundamental-ngx/platform';
 
 export const dummyAwaitablePromise = (timeout = 200) => {
     return new Promise<boolean>((resolve) => {
@@ -20,6 +20,8 @@ export const dummyAwaitablePromise = (timeout = 200) => {
 })
 export class PlatformFormGeneratorObservableExampleComponent {
 
+    @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;
+
     loading = false;
 
     formCreated = false;
@@ -28,12 +30,11 @@ export class PlatformFormGeneratorObservableExampleComponent {
     questions: DynamicFormItem[] = [
         {
             type: 'input',
-            name: 'name',
+            name: 'name2',
             message: 'Your name',
             default: 'John',
             guiOptions: {
                 hint: 'Some contextual hint',
-                contentDensity: 'compact',
                 column: 1
             },
             // Emulate some API request
@@ -47,7 +48,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         {
             type: 'password',
             controlType: 'password',
-            name: 'password',
+            name: 'password2',
             message: 'Password',
             validators: [Validators.required],
             validate: (value: string) => {
@@ -60,7 +61,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         },
         {
             type: 'number',
-            name: 'age',
+            name: 'age2',
             message: () => of('Your age').pipe(delay(400)),
             default: '18',
             validators: [Validators.required],
@@ -70,7 +71,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         },
         {
             type: 'editor',
-            name: 'bio',
+            name: 'bio2',
             message: 'Your biography',
             guiOptions: {
                 column: 1
@@ -78,7 +79,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         },
         {
             type: 'checkbox',
-            name: 'citizenship3',
+            name: 'citizenship2',
             message: 'Your citizenship',
             guiOptions: {
                 inline: true,
@@ -98,7 +99,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         },
         {
             type: 'list',
-            name: 'department',
+            name: 'department2',
             message: 'Department you work in',
             validators: [Validators.required],
             default: 'IT',
@@ -109,7 +110,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         },
         {
             type: 'list',
-            name: 'main_speciality',
+            name: 'main_speciality2',
             message: 'Main speciality',
             validators: [Validators.required],
             choices: () => of(['Front-end', 'Back-end']),
@@ -120,7 +121,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         },
         {
             type: 'confirm',
-            name: 'agree',
+            name: 'agree2',
             message: 'Do you agree with terms and conditions?',
             choices: ['Yes', 'No'],
             validate: (value) => of(value === 'Yes' ? null : 'You must agree'),
@@ -130,7 +131,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         },
         {
             type: 'radio',
-            name: 'choose_best_option',
+            name: 'choose_best_option2',
             message: 'Primary front-end framework you use',
             choices: ['Angular', 'React', 'VueJS'],
             guiOptions: {
@@ -140,7 +141,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         },
         {
             type: 'datepicker',
-            name: 'birthday',
+            name: 'birthday2',
             message: 'Your birthday',
             guiOptions: {
                 column: 1
@@ -153,7 +154,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         },
         {
             type: 'switch',
-            name: 'enable_feature',
+            name: 'enable_feature2',
             message: 'Enable some analytics',
             default: false,
             guiOptions: {
@@ -177,6 +178,10 @@ export class PlatformFormGeneratorObservableExampleComponent {
         await dummyAwaitablePromise(5000);
 
         this.loading = false;
+    }
+
+    submitForm(): void {
+        this.formGenerator.submit();
     }
 
 }

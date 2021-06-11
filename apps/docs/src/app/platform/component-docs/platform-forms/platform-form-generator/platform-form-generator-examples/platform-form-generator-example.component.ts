@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { DynamicFormItem } from '@fundamental-ngx/platform';
+import { DynamicFormItem, FormGeneratorComponent } from '@fundamental-ngx/platform';
 import { FdDate } from '@fundamental-ngx/core';
 
 export const dummyAwaitablePromise = (timeout = 200) => {
@@ -18,6 +18,8 @@ export const dummyAwaitablePromise = (timeout = 200) => {
 })
 export class PlatformFormGeneratorExampleComponent {
 
+    @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;
+
     loading = false;
 
     formCreated = false;
@@ -31,14 +33,13 @@ export class PlatformFormGeneratorExampleComponent {
             default: 'John',
             guiOptions: {
                 hint: 'Some contextual hint',
-                contentDensity: 'compact',
                 column: 1
             },
             validate: async (value) => {
 
                 await dummyAwaitablePromise();
 
-                return value === 'John' ? true : 'Your name should be John';
+                return value === 'John' ? null : 'Your name should be John';
             },
             transformer: async (value: any) => {
                 await dummyAwaitablePromise();
@@ -54,7 +55,7 @@ export class PlatformFormGeneratorExampleComponent {
             validators: [Validators.required],
             validate: (value: string) => {
                 const passwordPattern = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\\w\\s]).{8,}$');
-                return passwordPattern.test(value) ? true : 'Minimum eight characters, at least one letter, one number and one special character'
+                return passwordPattern.test(value) ? null : 'Minimum eight characters, at least one letter, one number and one special character'
             },
             guiOptions: {
                 column: 1
@@ -80,7 +81,7 @@ export class PlatformFormGeneratorExampleComponent {
         },
         {
             type: 'checkbox',
-            name: 'citizenship2',
+            name: 'citizenship',
             message: 'Your citizenship',
             guiOptions: {
                 inline: true,
@@ -150,7 +151,7 @@ export class PlatformFormGeneratorExampleComponent {
                 column: 2
             },
             validate: (result: string) => {
-                return result === 'Angular' ? true : 'You should pick Angular';
+                return result === 'Angular' ? null : 'You should pick Angular';
             }
         },
         {
@@ -162,7 +163,7 @@ export class PlatformFormGeneratorExampleComponent {
             },
             validators: [Validators.required],
             validate: (value: FdDate) => {
-                return value !== null && value.year < 2020 ? true : 'You need to be born before 2020';
+                return value !== null && value.year < 2020 ? null : 'You need to be born before 2020';
             },
             transformer: (value: FdDate) => {
                 return value?.toDateString();
@@ -194,6 +195,10 @@ export class PlatformFormGeneratorExampleComponent {
         await dummyAwaitablePromise(5000);
 
         this.loading = false;
+    }
+
+    submitForm(): void {
+        this.formGenerator.submit();
     }
 
 }

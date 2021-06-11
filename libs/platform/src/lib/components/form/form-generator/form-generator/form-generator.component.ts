@@ -7,7 +7,8 @@ import {
     OnDestroy,
     Output,
     TemplateRef,
-    ViewChild
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
 import { takeWhile } from 'rxjs/operators';
@@ -24,6 +25,7 @@ import { DynamicFormControl } from '../dynamic-form-control';
 @Component({
     selector: 'fdp-form-generator',
     templateUrl: './form-generator.component.html',
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormGeneratorComponent implements OnDestroy {
@@ -102,19 +104,16 @@ export class FormGeneratorComponent implements OnDestroy {
 
     /**
      * @hidden
-     * @private
      */
     private _allowSubscribe = true;
 
     /**
      * @hidden
-     * @private
      */
     private _formItems: DynamicFormItem[];
 
     /**
      * @hidden
-     * @private
      */
     private _formValueSubscription: Subscription;
 
@@ -134,13 +133,13 @@ export class FormGeneratorComponent implements OnDestroy {
     /**
      * @hidden
      */
-    async onSubmit(): Promise<void> {
+    async _onSubmit(): Promise<void> {
 
         this.form.markAllAsTouched();
         this._cd.markForCheck();
 
         // stop here if form is invalid
-        if (this.form.invalid) {
+        if (this.form.invalid || this.form.pending) {
             return;
         }
 
@@ -154,14 +153,15 @@ export class FormGeneratorComponent implements OnDestroy {
     /**
      * @hidden
      */
-    getErrors(errors: {[key: string]: any}): {type: string; value: any}[] {
+    _getErrors(errors: {[key: string]: any}): {type: string; value: any}[] {
         return Object.entries(errors).map(e => {
             const errorType = e[0];
             let errorValue = e[1];
 
-            if (typeof errorValue === 'boolean') {
-                // Try to get some default error message
-                errorValue = this._fgService.getValidationErrorHints()[errorType];
+            const defaultErrorValue = this._fgService.getValidationErrorHints(errorType);
+
+            if (defaultErrorValue) {
+                errorValue = defaultErrorValue;
             }
             return {type: errorType, value: errorValue};
         });
@@ -169,7 +169,6 @@ export class FormGeneratorComponent implements OnDestroy {
 
     /**
      * @hidden
-     * @private
      */
     private async _generateForm(): Promise<void> {
 
@@ -194,6 +193,8 @@ export class FormGeneratorComponent implements OnDestroy {
 
         this.formLoading = false;
 
+        this._cd.detectChanges();
+
         this.formCreated.emit(this.form);
     }
 
@@ -201,7 +202,7 @@ export class FormGeneratorComponent implements OnDestroy {
      *
      * @hidden
      */
-    trackFn(index: number, value: DynamicFormControl): string {
+    _trackFn(index: number, value: DynamicFormControl): string {
         return `${index}_${value.formItem.name}`;
     }
 

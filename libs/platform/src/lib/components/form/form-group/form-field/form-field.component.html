@@ -5,6 +5,7 @@
                    [required]="editable && required"
                    fd-form-label
                    [inlineHelpTitle]="hint"
+                   [inlineHelpTrigger]="['click']"
                    [inlineHelpBodyPlacement]="hintPlacement">
                 <span *ngIf="!noLabelLayout">{{ label }}</span>
             </label>
