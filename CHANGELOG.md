@@ -1,4 +1,11 @@
 
+### [0.30.1-rc.79](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.78...v0.30.1-rc.79) (2021-06-11)
+
+
+### Bug Fixes
+
+* **core:** fix dialogs footer button size ([#5612](https://github.com/SAP/fundamental-ngx/issues/5612)) ([589a32a](https://github.com/SAP/fundamental-ngx/commit/589a32a61fcb493428922334a7a526ecea065e10))
+
 ### [0.30.1-rc.78](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.77...v0.30.1-rc.78) (2021-06-11)
 
 
