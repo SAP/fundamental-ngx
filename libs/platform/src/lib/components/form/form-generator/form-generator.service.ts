@@ -3,7 +3,7 @@ import { AsyncValidatorFn, FormBuilder, FormGroup, Validators } from '@angular/f
 import { Observable } from 'rxjs';
 
 import { DynamicFormControl } from './dynamic-form-control';
-import { DynamicFormItem, DynamicFormItemChoices } from './interfaces/dynamic-form-item';
+import { DynamicFormItem, DynamicFormItemChoices, DynamicFormValue } from './interfaces/dynamic-form-item';
 import { FormComponentDefinition } from './interfaces/form-component-definition';
 import { DEFAULT_COMPONENTS_LIST } from './config/default-components-list';
 import { DEFAULT_VALIDATION_ERRORS } from './config/default-validation-errors';
@@ -157,7 +157,7 @@ export class FormGeneratorService {
      * @param form
      * @returns form value object.
      */
-    async getFormValue(form: FormGroup): Promise<{ [key: string]: any }> {
+    async getFormValue(form: FormGroup): Promise<DynamicFormValue> {
         const formValue = Object.assign({}, form.value);
 
         for (const [i, control] of Object.entries(form.controls)) {

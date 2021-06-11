@@ -43,9 +43,9 @@ export class PlatformFormGeneratorCustomErrorExampleComponent {
     ];
 
     constructor(
-        private _fgService: FormGeneratorService
+        private readonly _formGeneratorService: FormGeneratorService
     ) {
-        this._fgService.addValidationErrorHint('pattern', 'This field is not matching the pattern');
+        this._formGeneratorService.addValidationErrorHint('pattern', 'This field is not matching the pattern');
     }
 
     submitForm(): void {

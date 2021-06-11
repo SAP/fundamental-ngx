@@ -11,7 +11,7 @@ import {
     PlatformFormGeneratorCustomComponentExampleComponent,
     PlatformFormGeneratorCustomSliderElement
 } from './platform-form-generator-examples/platform-form-generator-custom-component-example.component';
-import { BusyIndicatorModule } from '@fundamental-ngx/core';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { PlatformFormGeneratorObservableExampleComponent } from './platform-form-generator-examples/platform-form-generator-observable-example.component';
 import { PlatformFormGeneratorProgramaticSubmitComponent } from './platform-form-generator-examples/platform-form-generator-programatic-submit.component';
 import { PlatformFormGeneratorCustomErrorExampleComponent } from './platform-form-generator-examples/platform-form-generator-custom-error-example.component';

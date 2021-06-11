@@ -36,14 +36,14 @@ export interface DynamicFormItem {
      * Display name of the form item.
      * @param formValue the form value hash.
      */
-    message: string | ((formValue?: {[key: string]: any}) => string | Promise<string> | Observable<string>);
+    message: string | ((formValue?: DynamicFormValue) => string | Promise<string> | Observable<string>);
 
     /**
      * @description
      * Display placeholder of the form item.
      * @param formValue the form value hash.
      */
-    placeholder?: string | ((formValue?: {[key: string]: any}) => string | Promise<string> | Observable<string>);
+    placeholder?: string | ((formValue?: DynamicFormValue) => string | Promise<string> | Observable<string>);
 
     /**
      * @description
@@ -55,7 +55,7 @@ export interface DynamicFormItem {
      * @description
      * Default value of the form item.
      */
-    default?: any | ((formValue?: {[key: string]: any}) => any | Promise<any>| Observable<any>);
+    default?: any | ((formValue?: DynamicFormValue) => any | Promise<any>| Observable<any>);
 
     /**
      * @description
@@ -63,7 +63,7 @@ export interface DynamicFormItem {
      * @param formValue raw form item value.
      */
     choices?: DynamicFormItemChoices[] |
-    ((formValue?: {[key: string]: any}) => DynamicFormItemChoices[]
+    ((formValue?: DynamicFormValue) => DynamicFormItemChoices[]
     | Promise<DynamicFormItemChoices[]>
     | Observable<DynamicFormItemChoices[]>);
 
@@ -76,7 +76,7 @@ export interface DynamicFormItem {
      * @param formValue the form value hash.
      * @returns null or String
      */
-    validate?: (formItemValue?: any, formValue?: {[key: string]: any}) =>
+    validate?: (formItemValue?: any, formValue?: DynamicFormValue) =>
     DynamicFormItemValidationResult | Promise<DynamicFormItemValidationResult> | Observable<DynamicFormItemValidationResult>;
 
     /**
@@ -103,14 +103,14 @@ export interface DynamicFormItem {
      * @param formValue the form value hash.
      * @returns updated form item value to be used in the form value hash.
      */
-    transformer?: (formItemValue?: any, formValue?: {[key: string]: any}) => any | Promise<any>;
+    transformer?: (formItemValue?: any, formValue?: DynamicFormValue) => any | Promise<any>;
 
     /**
      * @description Should return true or false depending on whether or not this form item should be asked.
      * @param formValue the form value hash.
      * @returns Boolean
      */
-    when?: (formValue?: {[key: string]: any}) => boolean | Promise<boolean> | Observable<boolean>;
+    when?: (formValue?: DynamicFormValue) => boolean | Promise<boolean> | Observable<boolean>;
 
     /**
      * @hidden
@@ -160,4 +160,8 @@ export interface DynamicFormItemGuiOptions {
      * @description Object contains additional payload. Useful for custom elements to manipulate it's view.
      */
     additionalData?: any;
+}
+
+export interface DynamicFormValue {
+    [key: string]: any;
 }

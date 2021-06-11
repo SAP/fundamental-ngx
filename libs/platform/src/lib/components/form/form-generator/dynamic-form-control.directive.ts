@@ -36,15 +36,15 @@ export class DynamicFormControlDirective implements OnInit {
     @Input() formField: FormField;
 
     constructor(
-        private _fg: FormGeneratorService,
-        private _vcRef: ViewContainerRef,
-        private _cfRes: ComponentFactoryResolver
+        private readonly _formGeneratorService: FormGeneratorService,
+        private readonly _vcRef: ViewContainerRef,
+        private readonly _cfRes: ComponentFactoryResolver
     ) {
     }
 
     ngOnInit(): void {
 
-        const foundComponent = this._fg.getComponentDefinitionByType(this.formItem.type);
+        const foundComponent = this._formGeneratorService.getComponentDefinitionByType(this.formItem.type);
 
         if (!foundComponent) {
             return;

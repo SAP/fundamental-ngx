@@ -25,12 +25,12 @@ export class PlatformFormGeneratorDocsComponent {
         {
             language: 'html',
             code: defaultFormGeneratorhtml,
-            fileName: 'platform-form-generator-example.component'
+            fileName: 'platform-form-generator-example'
         },
         {
             language: 'typescript',
             code: defaultFormGeneratorSrc,
-            fileName: 'platform-form-generator-example.component',
+            fileName: 'platform-form-generator-example',
             component: 'PlatformFormGeneratorExampleComponent'
         }
     ];
@@ -39,12 +39,12 @@ export class PlatformFormGeneratorDocsComponent {
         {
             language: 'html',
             code: defaultObservableFormGeneratorhtml,
-            fileName: 'platform-form-generator-observable-example.component'
+            fileName: 'platform-form-generator-observable-example'
         },
         {
             language: 'typescript',
             code: defaultObservableFormGeneratorSrc,
-            fileName: 'platform-form-generator-observable-example.component',
+            fileName: 'platform-form-generator-observable-example',
             component: 'PlatformFormGeneratorObservableExampleComponent'
         }
     ];
@@ -53,12 +53,12 @@ export class PlatformFormGeneratorDocsComponent {
         {
             language: 'html',
             code: customFormGeneratorhtml,
-            fileName: 'platform-form-generator-custom-component-example.component'
+            fileName: 'platform-form-generator-custom-component-example'
         },
         {
             language: 'typescript',
             code: customFormGeneratorSrc,
-            fileName: 'platform-form-generator-custom-component-example.component',
+            fileName: 'platform-form-generator-custom-component-example',
             component: 'PlatformFormGeneratorCustomComponentExampleComponent'
         }
     ];
@@ -67,12 +67,12 @@ export class PlatformFormGeneratorDocsComponent {
         {
             language: 'html',
             code: programaticSubmitHtml,
-            fileName: 'platform-form-generator-programatic-submit.component'
+            fileName: 'platform-form-generator-programatic-submit'
         },
         {
             language: 'typescript',
             code: programaticSubmitSrc,
-            fileName: 'platform-form-generator-programatic-submit.component',
+            fileName: 'platform-form-generator-programatic-submit',
             component: 'PlatformFormGeneratorProgramaticSubmitComponent'
         }
     ];
@@ -81,12 +81,12 @@ export class PlatformFormGeneratorDocsComponent {
         {
             language: 'html',
             code: customErrorsHtml,
-            fileName: 'platform-form-generator-custom-error-example.component'
+            fileName: 'platform-form-generator-custom-error-example'
         },
         {
             language: 'typescript',
             code: customErrorsSrc,
-            fileName: 'platform-form-generator-custom-error-example.component',
+            fileName: 'platform-form-generator-custom-error-example',
             component: 'PlatformFormGeneratorCustomErrorExampleComponent'
         }
     ];

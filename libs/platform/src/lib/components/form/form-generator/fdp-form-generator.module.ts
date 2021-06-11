@@ -20,8 +20,9 @@ import { DynamicFormGeneratorSelectComponent } from './dynamic-form-generator-se
 import { DynamicFormGeneratorRadioComponent } from './dynamic-form-generator-radio/dynamic-form-generator-radio.component';
 import { DynamicFormGeneratorDatepickerComponent } from './dynamic-form-generator-datepicker/dynamic-form-generator-datepicker.component';
 import { DynamicFormGeneratorSwitchComponent } from './dynamic-form-generator-switch/dynamic-form-generator-switch.component';
-import { BusyIndicatorModule, FormMessageModule } from '@fundamental-ngx/core';
 import { FormGeneratorService } from './form-generator.service';
+import { FormMessageModule } from '@fundamental-ngx/core/form';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 
 @NgModule({
     declarations: [

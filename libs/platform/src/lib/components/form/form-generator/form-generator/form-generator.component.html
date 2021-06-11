@@ -12,7 +12,7 @@
                 <ng-container *fdpDynamicFormControlField="field; show: shouldShowFields[field.formItem.name] !== false">
                     <fdp-form-field
                     [hint]="field.formItem?.guiOptions?.hint"
-                    [hintPlacement]="'left'"
+                    [hintPlacement]="field.formItem?.guiOptions?.hintPlacement || 'left'"
                     [placeholder]="field.formItem?.placeholder || (field.formItem?.useMessageAsPlaceholder && field.formItem?.message)"
                     [id]="field.formItem?.name"
                     [i18Strings]="i18n"

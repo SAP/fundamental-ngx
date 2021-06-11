@@ -32,8 +32,8 @@ export class DynamicFormControlFieldDirective implements OnInit {
     private _componentRemoved = true;
 
     constructor(
-        private templateRef: TemplateRef<any>,
-        private viewContainer: ViewContainerRef
+        private readonly _templateRef: TemplateRef<any>,
+        private readonly _viewContainer: ViewContainerRef
     ) {
     }
 
@@ -88,10 +88,10 @@ export class DynamicFormControlFieldDirective implements OnInit {
 
     private _updateView(): void {
         if (this._shouldShowFormItem && this._componentRemoved) {
-            this.viewContainer.createEmbeddedView(this.templateRef);
+            this._viewContainer.createEmbeddedView(this._templateRef);
             this._componentRemoved = false;
         } else if (!this._shouldShowFormItem) {
-            this.viewContainer.clear();
+            this._viewContainer.clear();
             this._componentRemoved = true;
         }
     }

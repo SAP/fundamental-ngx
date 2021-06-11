@@ -5,7 +5,8 @@ import {
     dynamicFormGroupChildProvider,
     BaseDynamicFormGeneratorControl,
     FormGeneratorService,
-    DynamicFormItem
+    DynamicFormItem,
+    DynamicFormValue
 } from '@fundamental-ngx/platform';
 
 @Component({
@@ -29,13 +30,13 @@ export class PlatformFormGeneratorCustomSliderElement extends BaseDynamicFormGen
 }
 
 @Component({
-  selector: 'fdp-platform-form-generator-custom-component-example',
-  templateUrl: './platform-form-generator-custom-component-example.component.html'
+    selector: 'fdp-platform-form-generator-custom-component-example',
+    templateUrl: './platform-form-generator-custom-component-example.component.html'
 })
 export class PlatformFormGeneratorCustomComponentExampleComponent {
 
     formCreated = false;
-    formValue: { [key: string]: any };
+    formValue: DynamicFormValue;
 
     questions: DynamicFormItem[] = [
         {
@@ -60,7 +61,7 @@ export class PlatformFormGeneratorCustomComponentExampleComponent {
     ]
 
     constructor(
-        private _formGeneratorService: FormGeneratorService
+        private readonly _formGeneratorService: FormGeneratorService
     ) {
         this._formGeneratorService.addComponent(PlatformFormGeneratorCustomSliderElement, ['slider']);
     }
@@ -69,7 +70,7 @@ export class PlatformFormGeneratorCustomComponentExampleComponent {
         this.formCreated = true;
     }
 
-    onFormSubmitted(value: { [key: string]: any }): void {
+    onFormSubmitted(value: DynamicFormValue): void {
         this.formValue = value;
     }
 }

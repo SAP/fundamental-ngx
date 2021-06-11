@@ -15,7 +15,7 @@ import { takeWhile } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 import { FormGeneratorService } from '../form-generator.service';
-import { DynamicFormItem } from '../interfaces/dynamic-form-item';
+import { DynamicFormItem, DynamicFormValue } from '../interfaces/dynamic-form-item';
 import { DynamicFormControl } from '../dynamic-form-control';
 
 /**
@@ -76,7 +76,7 @@ export class FormGeneratorComponent implements OnDestroy {
      * and submitted.
      */
     @Output()
-    formSubmitted = new EventEmitter<{ [key: string]: any }>();
+    formSubmitted = new EventEmitter<DynamicFormValue>();
 
     /**
      * @description Represents the form instance. @see NgForm

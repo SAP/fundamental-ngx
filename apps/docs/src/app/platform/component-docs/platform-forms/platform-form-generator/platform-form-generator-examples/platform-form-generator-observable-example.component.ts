@@ -3,8 +3,8 @@ import { Validators } from '@angular/forms';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-import { FdDate } from '@fundamental-ngx/core';
-import { DynamicFormItem, FormGeneratorComponent } from '@fundamental-ngx/platform';
+import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform';
+import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
 
 export const dummyAwaitablePromise = (timeout = 200) => {
     return new Promise<boolean>((resolve) => {
@@ -15,8 +15,20 @@ export const dummyAwaitablePromise = (timeout = 200) => {
 };
 
 @Component({
-  selector: 'fdp-platform-form-generator-observable-example',
-  templateUrl: './platform-form-generator-observable-example.component.html'
+    selector: 'fdp-platform-form-generator-observable-example',
+    templateUrl: './platform-form-generator-observable-example.component.html',
+    providers: [
+        // Note that this is usually provided in the root of your application.
+        // Due to the limit of this example we must provide it on this level.
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        },
+        {
+            provide: DATE_TIME_FORMATS,
+            useValue: FD_DATETIME_FORMATS
+        }
+    ]
 })
 export class PlatformFormGeneratorObservableExampleComponent {
 
@@ -25,7 +37,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
     loading = false;
 
     formCreated = false;
-    formValue: { [key: string]: any };
+    formValue: DynamicFormValue;
 
     questions: DynamicFormItem[] = [
         {
@@ -169,7 +181,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         this.formCreated = true;
     }
 
-    async onFormSubmitted(value: { [key: string]: any }): Promise<void> {
+    async onFormSubmitted(value: DynamicFormValue): Promise<void> {
         this.formValue = value;
 
         this.loading = true;
