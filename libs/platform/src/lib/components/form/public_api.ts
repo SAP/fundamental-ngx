@@ -42,3 +42,4 @@ export * from './platform-file-uploader/platform-file-uploader.component';
 export * from './auto-complete/auto-complete.module';
 export * from './auto-complete/auto-complete.directive';
 export * from './select/public_api';
+export * from './form-generator/public_api';
