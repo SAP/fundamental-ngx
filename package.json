@@ -120,7 +120,7 @@
     "jasminewd2": "2.2.0",
     "karma-viewport": "1.0.8",
     "moment": "2.29.1",
-    "ngx-markdown": "10.1.1",
+    "ngx-markdown": "12.0.1",
     "npm": "6.14.13",
     "raw-loader": "4.0.2",
     "rxjs": "~6.6.6",
