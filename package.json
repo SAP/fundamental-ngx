@@ -156,7 +156,7 @@
     "@wdio/spec-reporter": "7.0.0",
     "@wdio/sync": "7.0.0",
     "angular-cli-ghpages": "1.0.0-rc.1",
-    "autoprefixer": "10.2.5",
+    "autoprefixer": "10.2.6",
     "axe-core": "4.2.2",
     "axe-html-reporter": "2.2.0",
     "babel-loader": "8.2.2",
