@@ -111,6 +111,7 @@
                     class="fdp-search-field__suggestion-item fd-menu__item fd-menu__link"
                     *ngFor="let value of dropdownValues$ | async | suggestionMatches: inputText"
                     (keydown.enter)="onItemClick(value)"
+                    (keydown.tab)="onItemClick(value)"
                     (click)="onItemClick(value)"
                     [innerHTML]="value | highlight: inputText:true:true"
                     role="menuitem"
