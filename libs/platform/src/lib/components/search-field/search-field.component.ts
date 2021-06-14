@@ -283,7 +283,6 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
                 }
                 break;
             case 'Escape':
-            case 'Tab':
                 this.closeSuggestionMenu(true);
                 break
         }
