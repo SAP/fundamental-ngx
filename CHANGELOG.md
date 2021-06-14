@@ -1,4 +1,11 @@
 
+### [0.30.1-rc.87](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.86...v0.30.1-rc.87) (2021-06-14)
+
+
+### Features
+
+* **core:** add option to change default cover bg size to contain ([#5549](https://github.com/SAP/fundamental-ngx/issues/5549)) ([8896257](https://github.com/SAP/fundamental-ngx/commit/8896257dfbf4364221e0cbcf3bc21e66de3ea56f))
+
 ### [0.30.1-rc.86](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.85...v0.30.1-rc.86) (2021-06-14)
 
 ### [0.30.1-rc.85](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.84...v0.30.1-rc.85) (2021-06-14)
