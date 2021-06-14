@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { DialogService, RtlService } from '@fundamental-ngx/core';
-
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 let componentExampleUniqueId = 0;
 
 @Component({
