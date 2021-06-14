@@ -13,10 +13,9 @@ import {
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 
-import { SliderTickMark } from '@fundamental-ngx/core';
+import { SliderTickMark } from '@fundamental-ngx/core/slider';
 
 import { BaseInput } from '../form/base.input';
-import { ContentDensity } from '../form/form-control';
 import { FormField } from '../form/form-field';
 import { FormFieldControl } from '../form/form-control';
 
