@@ -282,6 +282,10 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
                     this._suggestionkeyManager.onKeydown($event);
                 }
                 break;
+            case 'Escape':
+            case 'Tab':
+                this.closeSuggestionMenu(true);
+                break
         }
     }
 
