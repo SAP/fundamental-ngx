@@ -19,13 +19,15 @@ import {
     QueryList,
     SimpleChanges,
     ViewChild,
+    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
-import { FdDropEvent, RtlService } from '@fundamental-ngx/core';
+import { FdDropEvent, RtlService } from '@fundamental-ngx/core/utils';
+import { TableRowDirective } from '@fundamental-ngx/core/table';
 
 import { isDataSource } from '../../domain';
 import { getNestedValue } from '../../utils/object';
@@ -50,7 +52,7 @@ import {
     TableRowToggleOpenStateEvent,
     TableRowsRearrangeEvent
 } from './models';
-import { FILTER_STRING_STRATEGY, ContentDensity, SelectionMode, SortDirection } from './enums';
+import { FILTER_STRING_STRATEGY, ContentDensity, SelectionMode, SortDirection, TableRowType } from './enums';
 import { DEFAULT_COLUMN_WIDTH, DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
 import { TableDataSource } from './domain/table-data-source';
 import { ArrayTableDataSource } from './domain/array-data-source';
@@ -232,6 +234,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     @Input()
     relationKey: string;
 
+    /** Whether table row has navigation button. */
+    @Input()
+    navigationButton = false;
+    
     /** Event fired when table selection has changed. */
     @Output()
     readonly rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<T>> = new EventEmitter<TableRowSelectionChangeEvent<T>>();
@@ -274,6 +280,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     @ContentChildren(TableColumn)
     readonly columns: QueryList<TableColumn>;
+
+    /** @hidden */
+    @ViewChildren(TableRowDirective)
+    tableRows: QueryList<TableRowDirective>;
 
     /** @hidden */
     _tableColumnsSubject: BehaviorSubject<TableColumn[]> = new BehaviorSubject([]);
@@ -631,6 +641,42 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._isFilteringFromHeaderDisabled = disabled;
     }
 
+    /** Set the navigatable property on a row */
+    setNavigatableRowState(rowIndex: number, state: boolean): void {
+        this.tableRows.toArray()[rowIndex + 1].navigatable = state;
+        this._tableRows[rowIndex].navigatable = state;
+        if (!state) {
+            this._tableRows[rowIndex].hasNavIndicator = false;
+        }
+        this._cd.detectChanges();
+    }
+
+    /** Set the navigation indicator property on a row */
+    setRowNavigationIndicator(rowIndex: number, state: boolean): void {
+        if (this._tableRows[rowIndex].navigatable) {
+            this._tableRows[rowIndex].hasNavIndicator = state;
+            if (state) {
+                this.navigationButton = false;
+            }
+        }
+        this._cd.detectChanges();
+    }
+
+    /** Set the navigation target property on a row */
+    setRowNavigationTarget(rowIndex: number, target: string): void {
+        if (this._tableRows[rowIndex].navigatable) {
+            this._tableRows[rowIndex].navigationTarget = target;
+        }
+        this._cd.detectChanges();
+    }
+
+    /** Get corresponding arrow icon for navigation indicator */
+    getGlyph(row: TableRow<T>): string {
+        if (row.hasNavIndicator) {
+            return this._rtl ? 'navigation-left-arrow' : 'navigation-right-arrow';
+        }
+    }
+
     /** @hidden
      *  Needs to prevent scrolling and other events on loading.
      *  TODO: refactor it on keyboard navigation implementation
@@ -652,6 +698,21 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             column.freezable ||
             (column.filterable && !this._isFilteringFromHeaderDisabled)
         );
+    }
+
+    /** @hidden */
+    _isTreeRow(row: TableRow): boolean {
+        return row.type === TableRowType.TREE;
+    }
+
+    /** @hidden */
+    _isItemRow(row: TableRow): boolean {
+        return row.type === TableRowType.ITEM;
+    }
+
+    /** @hidden */
+    _isGroupRow(row: TableRow): boolean {
+        return row.type === TableRowType.GROUP;
     }
 
     /**
@@ -827,7 +888,23 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     _isTreeRowFirstCell(cellIndex: number, row: TableRow): boolean {
-        return cellIndex === 0 && row.type === 'tree';
+        return cellIndex === 0 && this._isTreeRow(row);
+    }
+
+    /**  
+     * @hidden
+     * Chech if the cell should contain a navigation button
+    */
+    _showNavButton(cellIndex: number, row: TableRow): boolean {
+        return this.navigationButton && cellIndex === this._visibleColumns.length - 1;
+    }
+
+    /**  
+     * @hidden
+     * Chech if the cell should contain a navigation indicator
+    */
+    _showNavIndicator(cellIndex: number, row: TableRow): boolean {
+        return row.hasNavIndicator && cellIndex === this._visibleColumns.length - 1;
     }
 
     /** @hidden */
@@ -883,7 +960,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         const dragRowChildren = this._findRowChildren(dragRow);
 
         if (parentRowChildren.length - (dragRowChildren.length + 1) === 0) {
-            parentRow.type = 'item';
+            parentRow.type = TableRowType.ITEM;
         }
     }
 
@@ -892,8 +969,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         dragRow.parent = dropRow;
         dragRow.level = dropRow.level + 1;
 
-        if (dropRow.type !== 'tree') {
-            dropRow.type = 'tree';
+        if (!this._isTreeRow(dropRow)) {
+            dropRow.type = TableRowType.TREE;
         }
 
         const children = this._findRowChildren(dragRow);
@@ -1049,7 +1126,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             return this._createTreeTableRowsByDataSourceItems(source);
         }
 
-        return source.map((item: T, index: number) => new TableRow('item', false, index, item));
+        return source.map((item: T, index: number) => new TableRow(TableRowType.ITEM, false, index, item));
     }
 
     /** @hidden */
@@ -1059,7 +1136,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             const hasChildren = item.hasOwnProperty(this.relationKey)
                 && Array.isArray(item[this.relationKey])
                 && item[this.relationKey].length;
-            const row = new TableRow(hasChildren ? 'tree' : 'item', false, index, item);
+            const row = new TableRow(hasChildren ? TableRowType.TREE : TableRowType.ITEM, false, index, item);
 
             row.expanded = false;
             rows.push(row);
@@ -1252,7 +1329,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             }
 
             const groupTableRow: TreeLike<TableRow<GroupTableRowValueType>> = new TableRow<GroupTableRowValueType>(
-                'group',
+                TableRowType.GROUP,
                 false,
                 0,
                 { field: rule.field, value: value, count: 0 },
@@ -1279,7 +1356,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * Sort tree like groups by group.direction setting
      */
     private _sortTreeLikeGroupedRows(groupedRows: TreeLike<TableRow>[]): TreeLike<TableRow>[] {
-        if (!groupedRows[0] || groupedRows[0].type !== 'group') {
+        if (!groupedRows[0] || !this._isGroupRow(groupedRows[0])) {
             return groupedRows;
         }
 
@@ -1435,7 +1512,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _getSelectableRows(): TableRow[] {
-        return this._tableRows.filter(({ type }) => type === 'item' || type === 'tree');
+        return this._tableRows.filter((row) => this._isItemRow(row) || this._isTreeRow(row));
     }
 
     /** @hidden */

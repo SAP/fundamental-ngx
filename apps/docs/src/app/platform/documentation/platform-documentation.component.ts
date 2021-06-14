@@ -69,7 +69,9 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/page-footer', name: 'Page Footer' }
         ];
 
-        this.utilities = [];
+        this.utilities = [
+            { url: 'platform/form-generator', name: 'Form Generator' },
+        ];
 
         this.sections = [
             {

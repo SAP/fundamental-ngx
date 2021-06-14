@@ -1,4 +1,87 @@
 
+### [0.30.1-rc.86](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.85...v0.30.1-rc.86) (2021-06-14)
+
+### [0.30.1-rc.85](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.84...v0.30.1-rc.85) (2021-06-14)
+
+### [0.30.1-rc.84](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.83...v0.30.1-rc.84) (2021-06-13)
+
+### [0.30.1-rc.83](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.82...v0.30.1-rc.83) (2021-06-13)
+
+### [0.30.1-rc.82](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.81...v0.30.1-rc.82) (2021-06-12)
+
+### [0.30.1-rc.81](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.79...v0.30.1-rc.81) (2021-06-11)
+
+
+### Features
+
+* **core/platform:** navigatable row in table ([#5526](https://github.com/SAP/fundamental-ngx/issues/5526)) ([68f8669](https://github.com/SAP/fundamental-ngx/commit/68f8669f1d7a8688100a6840714bdc2010df782b))
+* **platform:** form generator ([#5622](https://github.com/SAP/fundamental-ngx/issues/5622)) ([a44ffac](https://github.com/SAP/fundamental-ngx/commit/a44ffac37991e677710e326b291a36dc6777dbe5))
+
+
+### Bug Fixes
+
+* **core:** fix documentation api tab for wizard ([#5660](https://github.com/SAP/fundamental-ngx/issues/5660)) ([0ee8c4d](https://github.com/SAP/fundamental-ngx/commit/0ee8c4d81ac64b08fdb75eeac439d32bf1d6c715))
+
+### [0.30.1-rc.80](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.79...v0.30.1-rc.80) (2021-06-11)
+
+
+### Features
+
+* **core/platform:** navigatable row in table ([#5526](https://github.com/SAP/fundamental-ngx/issues/5526)) ([68f8669](https://github.com/SAP/fundamental-ngx/commit/68f8669f1d7a8688100a6840714bdc2010df782b))
+* **platform:** form generator ([#5622](https://github.com/SAP/fundamental-ngx/issues/5622)) ([a44ffac](https://github.com/SAP/fundamental-ngx/commit/a44ffac37991e677710e326b291a36dc6777dbe5))
+
+### [0.30.1-rc.79](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.78...v0.30.1-rc.79) (2021-06-11)
+
+
+### Bug Fixes
+
+* **core:** fix dialogs footer button size ([#5612](https://github.com/SAP/fundamental-ngx/issues/5612)) ([589a32a](https://github.com/SAP/fundamental-ngx/commit/589a32a61fcb493428922334a7a526ecea065e10))
+
+### [0.30.1-rc.78](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.77...v0.30.1-rc.78) (2021-06-11)
+
+
+### Bug Fixes
+
+* **core:** add fix for dialog header not applying styling correctly ([#5525](https://github.com/SAP/fundamental-ngx/issues/5525)) ([0b58eb3](https://github.com/SAP/fundamental-ngx/commit/0b58eb33d6fa0f03f3b0fafe3ea9ddb5d1c90e98))
+
+### [0.30.1-rc.77](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.76...v0.30.1-rc.77) (2021-06-11)
+
+
+### Bug Fixes
+
+* **core:** fix datetime exports ([#5658](https://github.com/SAP/fundamental-ngx/issues/5658)) ([dc9f717](https://github.com/SAP/fundamental-ngx/commit/dc9f717c76a2c62cba8dd6fce33108a85a6da210))
+
+### [0.30.1-rc.76](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.75...v0.30.1-rc.76) (2021-06-11)
+
+
+### Bug Fixes
+
+* **platform:** updating condensed mode for platform button ([#5638](https://github.com/SAP/fundamental-ngx/issues/5638)) ([5844d6d](https://github.com/SAP/fundamental-ngx/commit/5844d6d80efbce611ede478b9dade3e40be7c8eb))
+
+### [0.30.1-rc.75](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.74...v0.30.1-rc.75) (2021-06-11)
+
+
+### Bug Fixes
+
+* **core:** fix a11y for Input Group component ([#5619](https://github.com/SAP/fundamental-ngx/issues/5619)) ([9862f24](https://github.com/SAP/fundamental-ngx/commit/9862f243fb8d009222bc22d109b856b849d622a0))
+
+### [0.30.1-rc.74](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.73...v0.30.1-rc.74) (2021-06-11)
+
+
+### Bug Fixes
+
+* **core:** fix datetime wrong date ([#5551](https://github.com/SAP/fundamental-ngx/issues/5551)) ([53995d0](https://github.com/SAP/fundamental-ngx/commit/53995d00e6912cacfe8ba3b20c6684d35e774627))
+* **platform:** table selection cells position fix ([#5614](https://github.com/SAP/fundamental-ngx/issues/5614)) ([b037216](https://github.com/SAP/fundamental-ngx/commit/b037216c6df617ea5524efe204dd0e6804686c82))
+
+### [0.30.1-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.72...v0.30.1-rc.73) (2021-06-10)
+
+
+### Bug Fixes
+
+* **core,platform:** updating file uploader examples to display valid error message, on selecting invalid file. ([#5629](https://github.com/SAP/fundamental-ngx/issues/5629)) ([3377cd2](https://github.com/SAP/fundamental-ngx/commit/3377cd25c75b9bf80f1370d73e57e1ceeb4cc5e8))
+
+### [0.30.1-rc.72](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.71...v0.30.1-rc.72) (2021-06-10)
+
 ### [0.30.1-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.70...v0.30.1-rc.71) (2021-06-10)
 
 ### [0.30.1-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.69...v0.30.1-rc.70) (2021-06-10)
