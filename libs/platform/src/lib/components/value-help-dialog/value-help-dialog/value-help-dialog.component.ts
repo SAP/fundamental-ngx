@@ -78,7 +78,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
   /** Initial expand state for advanced search panel */
   @Input()
-  isOpenAdvanced = true;
+  isOpenAdvanced = false;
 
   /** Data source */
   @Input()
