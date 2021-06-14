@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { FileUploaderSelectionChangeEvent } from '@fundamental-ngx/platform';
+import { FileUploaderSelectionChangeEvent, FileUploaderInvalidChangeEvent } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-platform-file-uploader-example',
@@ -10,6 +10,7 @@ import { FileUploaderSelectionChangeEvent } from '@fundamental-ngx/platform';
 })
 export class PlatformFileUploaderExampleComponent {
     files: File[];
+    invalidFiles: File[];
 
     handleFileSelection(files: FileUploaderSelectionChangeEvent): void {
         this.files = files.payload;
@@ -17,4 +18,12 @@ export class PlatformFileUploaderExampleComponent {
             alert('file uploaded' + this.files.length);
         }
     }
+
+    handleInvalidFileSelection(files: FileUploaderInvalidChangeEvent): void {
+        this.invalidFiles = files.payload;
+        if (this.invalidFiles.length > 0) {
+            alert('Invalid file ' + this.invalidFiles.length);
+        }
+    }
+
 }

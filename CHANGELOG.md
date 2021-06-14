@@ -1,3 +1,215 @@
+
+### [0.30.1-rc.86](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.85...v0.30.1-rc.86) (2021-06-14)
+
+### [0.30.1-rc.85](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.84...v0.30.1-rc.85) (2021-06-14)
+
+### [0.30.1-rc.84](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.83...v0.30.1-rc.84) (2021-06-13)
+
+### [0.30.1-rc.83](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.82...v0.30.1-rc.83) (2021-06-13)
+
+### [0.30.1-rc.82](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.81...v0.30.1-rc.82) (2021-06-12)
+
+### [0.30.1-rc.81](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.79...v0.30.1-rc.81) (2021-06-11)
+
+
+### Features
+
+* **core/platform:** navigatable row in table ([#5526](https://github.com/SAP/fundamental-ngx/issues/5526)) ([68f8669](https://github.com/SAP/fundamental-ngx/commit/68f8669f1d7a8688100a6840714bdc2010df782b))
+* **platform:** form generator ([#5622](https://github.com/SAP/fundamental-ngx/issues/5622)) ([a44ffac](https://github.com/SAP/fundamental-ngx/commit/a44ffac37991e677710e326b291a36dc6777dbe5))
+
+
+### Bug Fixes
+
+* **core:** fix documentation api tab for wizard ([#5660](https://github.com/SAP/fundamental-ngx/issues/5660)) ([0ee8c4d](https://github.com/SAP/fundamental-ngx/commit/0ee8c4d81ac64b08fdb75eeac439d32bf1d6c715))
+
+### [0.30.1-rc.80](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.79...v0.30.1-rc.80) (2021-06-11)
+
+
+### Features
+
+* **core/platform:** navigatable row in table ([#5526](https://github.com/SAP/fundamental-ngx/issues/5526)) ([68f8669](https://github.com/SAP/fundamental-ngx/commit/68f8669f1d7a8688100a6840714bdc2010df782b))
+* **platform:** form generator ([#5622](https://github.com/SAP/fundamental-ngx/issues/5622)) ([a44ffac](https://github.com/SAP/fundamental-ngx/commit/a44ffac37991e677710e326b291a36dc6777dbe5))
+
+### [0.30.1-rc.79](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.78...v0.30.1-rc.79) (2021-06-11)
+
+
+### Bug Fixes
+
+* **core:** fix dialogs footer button size ([#5612](https://github.com/SAP/fundamental-ngx/issues/5612)) ([589a32a](https://github.com/SAP/fundamental-ngx/commit/589a32a61fcb493428922334a7a526ecea065e10))
+
+### [0.30.1-rc.78](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.77...v0.30.1-rc.78) (2021-06-11)
+
+
+### Bug Fixes
+
+* **core:** add fix for dialog header not applying styling correctly ([#5525](https://github.com/SAP/fundamental-ngx/issues/5525)) ([0b58eb3](https://github.com/SAP/fundamental-ngx/commit/0b58eb33d6fa0f03f3b0fafe3ea9ddb5d1c90e98))
+
+### [0.30.1-rc.77](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.76...v0.30.1-rc.77) (2021-06-11)
+
+
+### Bug Fixes
+
+* **core:** fix datetime exports ([#5658](https://github.com/SAP/fundamental-ngx/issues/5658)) ([dc9f717](https://github.com/SAP/fundamental-ngx/commit/dc9f717c76a2c62cba8dd6fce33108a85a6da210))
+
+### [0.30.1-rc.76](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.75...v0.30.1-rc.76) (2021-06-11)
+
+
+### Bug Fixes
+
+* **platform:** updating condensed mode for platform button ([#5638](https://github.com/SAP/fundamental-ngx/issues/5638)) ([5844d6d](https://github.com/SAP/fundamental-ngx/commit/5844d6d80efbce611ede478b9dade3e40be7c8eb))
+
+### [0.30.1-rc.75](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.74...v0.30.1-rc.75) (2021-06-11)
+
+
+### Bug Fixes
+
+* **core:** fix a11y for Input Group component ([#5619](https://github.com/SAP/fundamental-ngx/issues/5619)) ([9862f24](https://github.com/SAP/fundamental-ngx/commit/9862f243fb8d009222bc22d109b856b849d622a0))
+
+### [0.30.1-rc.74](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.73...v0.30.1-rc.74) (2021-06-11)
+
+
+### Bug Fixes
+
+* **core:** fix datetime wrong date ([#5551](https://github.com/SAP/fundamental-ngx/issues/5551)) ([53995d0](https://github.com/SAP/fundamental-ngx/commit/53995d00e6912cacfe8ba3b20c6684d35e774627))
+* **platform:** table selection cells position fix ([#5614](https://github.com/SAP/fundamental-ngx/issues/5614)) ([b037216](https://github.com/SAP/fundamental-ngx/commit/b037216c6df617ea5524efe204dd0e6804686c82))
+
+### [0.30.1-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.72...v0.30.1-rc.73) (2021-06-10)
+
+
+### Bug Fixes
+
+* **core,platform:** updating file uploader examples to display valid error message, on selecting invalid file. ([#5629](https://github.com/SAP/fundamental-ngx/issues/5629)) ([3377cd2](https://github.com/SAP/fundamental-ngx/commit/3377cd25c75b9bf80f1370d73e57e1ceeb4cc5e8))
+
+### [0.30.1-rc.72](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.71...v0.30.1-rc.72) (2021-06-10)
+
+### [0.30.1-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.70...v0.30.1-rc.71) (2021-06-10)
+
+### [0.30.1-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.69...v0.30.1-rc.70) (2021-06-10)
+
+
+### Bug Fixes
+
+* **core:** fix scroll spy target offset top ([#5640](https://github.com/SAP/fundamental-ngx/issues/5640)) ([d21c669](https://github.com/SAP/fundamental-ngx/commit/d21c66954e4960f31ccddf374f5f80104ce0ce01))
+* **platform:** fix Search field focus if click outside ([#5633](https://github.com/SAP/fundamental-ngx/issues/5633)) ([a0f6413](https://github.com/SAP/fundamental-ngx/commit/a0f64130e8478e776431e668a3fdd568575e98fe))
+
+### [0.30.1-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.68...v0.30.1-rc.69) (2021-06-10)
+
+
+### Bug Fixes
+
+* **platform:** table last fixed column border fix ([#5621](https://github.com/SAP/fundamental-ngx/issues/5621)) ([ea16b3e](https://github.com/SAP/fundamental-ngx/commit/ea16b3ea7f90c22bb0f59f858a0db4e24c1c6d44))
+
+### [0.30.1-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.67...v0.30.1-rc.68) (2021-06-10)
+
+### [0.30.1-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.66...v0.30.1-rc.67) (2021-06-10)
+
+
+### Features
+
+* **core:** implement datetime formatter pipes ([#5502](https://github.com/SAP/fundamental-ngx/issues/5502)) ([2cc9152](https://github.com/SAP/fundamental-ngx/commit/2cc91528107e5c8f26b09f6636e7c5757e60b096))
+
+
+### Bug Fixes
+
+* **core:** use fd-button for carousel button and fix focus after last item reached ([#5586](https://github.com/SAP/fundamental-ngx/issues/5586)) ([0df3320](https://github.com/SAP/fundamental-ngx/commit/0df3320f154fc65b746273784ad4d4bba420b00c))
+
+### [0.30.1-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.65...v0.30.1-rc.66) (2021-06-09)
+
+
+### Bug Fixes
+
+* **core:** dialog z-index fix ([#5617](https://github.com/SAP/fundamental-ngx/issues/5617)) ([dcb96bf](https://github.com/SAP/fundamental-ngx/commit/dcb96bf7fdafaac7b6749d2821dbdbfe59d50809))
+
+### [0.30.1-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.64...v0.30.1-rc.65) (2021-06-09)
+
+
+### Bug Fixes
+
+* **platform:** do not open menu on disabled menu button and split menu button ([#5514](https://github.com/SAP/fundamental-ngx/issues/5514)) ([d5fdc2e](https://github.com/SAP/fundamental-ngx/commit/d5fdc2e655beae23f95ae9d727be9709de0954da))
+
+### [0.30.1-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.63...v0.30.1-rc.64) (2021-06-08)
+
+
+### Bug Fixes
+
+* **core:** clicking on edit button in Grid List active card ([#5520](https://github.com/SAP/fundamental-ngx/issues/5520)) ([7525d34](https://github.com/SAP/fundamental-ngx/commit/7525d34274d657783039ca38c71cd5cd42a0ce55))
+
+### [0.30.1-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.62...v0.30.1-rc.63) (2021-06-08)
+
+### [0.30.1-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.61...v0.30.1-rc.62) (2021-06-07)
+
+## [0.30.1-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.60...v0.30.1-rc.61) (2021-06-07)
+
+
+### Bug Fixes
+
+* **core:** fix compact items change to cozy after being clicked in Action Sheet ([#5552](https://github.com/SAP/fundamental-ngx/issues/5552)) ([0da051d](https://github.com/SAP/fundamental-ngx/commit/0da051dfae23979dfac0c9c794a0142fb763f3c1))
+
+
+
+## [0.30.1-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.59...v0.30.1-rc.60) (2021-06-07)
+
+
+
+## [0.30.1-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.58...v0.30.1-rc.59) (2021-06-07)
+
+
+
+## [0.30.1-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.57...v0.30.1-rc.58) (2021-06-06)
+
+
+
+## [0.30.1-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.56...v0.30.1-rc.57) (2021-06-05)
+
+
+### Bug Fixes
+
+* **core:** fix tab focus, focus styles on popover and avatars, overflow trigger, avatar titles and roles for Avatar Group ([#5074](https://github.com/SAP/fundamental-ngx/issues/5074)) ([bd3bb03](https://github.com/SAP/fundamental-ngx/commit/bd3bb035d7f0d08641c18f658284e068c22d6ec8))
+
+
+### BREAKING CHANGES
+
+* **core:** - Added for `noPadding`, `noHorizontalScroll` and `noVerticalScroll` inputs for `AvatarGroupOverflowBodyDirective` (`fd-avatar-group-overflow-body`).
+- Added `AvatarGroupFocusableAvatarDirective` (`fd-avatar-group-focusable-avatar`) needed to bind styles for focusable Avatars.
+- Changes in markup
+
+
+
+## [0.30.1-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.55...v0.30.1-rc.56) (2021-06-04)
+
+
+### Bug Fixes
+
+* **platform:** clickable object status handle Enter and Space button ([#5535](https://github.com/SAP/fundamental-ngx/issues/5535)) ([7ccdabb](https://github.com/SAP/fundamental-ngx/commit/7ccdabb0a77050157614a184138ab1c1f841de95))
+
+
+
+## [0.30.1-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.54...v0.30.1-rc.55) (2021-06-04)
+
+
+### Features
+
+* **core:** introduce resizable-card-layout component ([#4964](https://github.com/SAP/fundamental-ngx/issues/4964)) ([691066e](https://github.com/SAP/fundamental-ngx/commit/691066edfb68ab7e175049ff9666f6bb64d47f4a))
+
+
+
+## [0.30.1-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.53...v0.30.1-rc.54) (2021-06-04)
+
+
+
+## [0.30.1-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.52...v0.30.1-rc.53) (2021-06-03)
+
+
+### Bug Fixes
+
+* **core:** fix typedoc generation ([#5554](https://github.com/SAP/fundamental-ngx/issues/5554)) ([860f74e](https://github.com/SAP/fundamental-ngx/commit/860f74e2515f3b9ccf23bac6f473c488d57b4ee0))
+
+
+
+## [0.30.1-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.51...v0.30.1-rc.52) (2021-06-03)
+
+
+
 ## [0.30.1-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.50...v0.30.1-rc.51) (2021-06-03)
 
 
@@ -11780,6 +11992,3 @@ remove FdDate.getWeekNumber in favor of DatetimeAdapter.getWeekNumber
 * add function to select tab by ID, refactor selection algorithm, emit tabChange event ([0dd96ba](https://github.com/SAP/fundamental-ngx/commit/0dd96ba04f8ed4708902baedb6c43659c56f650f))
 * links should support both URL inputs and routerLinks ([e07f5ce](https://github.com/SAP/fundamental-ngx/commit/e07f5ce25d980a00318563912a1367638493a059))
 * modal service open should return modal ref ([8b5b76c](https://github.com/SAP/fundamental-ngx/commit/8b5b76c9596bef71e4c6788f520038a41f0eba93))
-
-
-

@@ -1,4 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 
 /** Dialog component used to create the dialog in object based approach */
@@ -10,10 +11,14 @@ import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 export class DialogDefaultComponent implements AfterViewInit {
 
     /** @hidden */
-    _defaultDialogConfig: DialogDefaultContent;
+    _defaultDialogContent: DialogDefaultContent;
+    
+    /** @hidden */
+    _defaultDialogConfiguration: DialogConfig;
 
     /** @hidden */
-    constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+    constructor(private _changeDetectorRef: ChangeDetectorRef) {
+    }
 
     /** @hidden
      * TODO: Inspect why DialogDefaultComponents needs change detection re-run to render adjusted content (dialog header title)
@@ -24,23 +29,23 @@ export class DialogDefaultComponent implements AfterViewInit {
 
     /** Whether there is a approve button, or cancel button text */
     _showFooter(): boolean {
-        return this._defaultDialogConfig &&
-            !!(this._defaultDialogConfig.cancelButton || this._defaultDialogConfig.approveButton)
+        return this._defaultDialogContent &&
+            !!(this._defaultDialogContent.cancelButton || this._defaultDialogContent.approveButton)
         ;
     }
 
     /** @hidden */
     _closeButtonClicked(): void {
-        this._defaultDialogConfig.closeButtonCallback();
+        this._defaultDialogContent.closeButtonCallback();
     }
 
     /** @hidden */
     _approveButtonClicked(): void {
-        this._defaultDialogConfig.approveButtonCallback();
+        this._defaultDialogContent.approveButtonCallback();
     }
 
     /** @hidden */
     _cancelButtonClicked(): void {
-        this._defaultDialogConfig.cancelButtonCallback();
+        this._defaultDialogContent.cancelButtonCallback();
     }
 }

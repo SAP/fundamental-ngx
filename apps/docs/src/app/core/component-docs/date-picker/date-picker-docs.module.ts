@@ -23,6 +23,7 @@ import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { DatePickerModule } from '@fundamental-ngx/core/date-picker';
+import { PipeModule } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -43,7 +44,8 @@ const routes: Routes = [
         SegmentedButtonModule,
         InputGroupModule,
         FdDatetimeModule,
-        DatePickerModule
+        DatePickerModule,
+        PipeModule
     ],
     exports: [RouterModule],
     declarations: [
