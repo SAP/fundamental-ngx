@@ -46,13 +46,14 @@
                     fd-button
                     fd-avatar-group-overflow-button
                     tabindex="-1"
+                    [compact]="false"
                     [size]="size">
                 <bdi fd-avatar-group-overflow-button-text>
                     +{{ avatarGroup_GroupType.overflowItemsCount }}
                 </bdi>
             </button>
         </fd-popover-control>
-        <fd-popover-body #overflowPopoverBody>
+        <fd-popover-body #overflowPopoverBody aria-labelledby="avatar-group-1-popover-header" role="tooltip">
             <div class="fd-popover__wrapper">
                 <div fd-popover-body-header>
                     <div fd-bar barDesign="header">
@@ -64,7 +65,7 @@
                                            aria-label="Back"
                                            title="Back"
                             ></fd-button-bar>
-                            <fd-bar-element>
+                            <fd-bar-element id="avatar-group-1-popover-header">
                                 {{ isDetailStage ? 'Business Card' : 'Team Members (' + people.length + ')' }}
                             </fd-bar-element>
                             <fd-bar-element *ngIf="isDetailStage">&nbsp;</fd-bar-element>
