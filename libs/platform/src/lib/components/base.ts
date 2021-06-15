@@ -37,7 +37,7 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
     @Input()
     name: string;
 
-    /** content Density of element. cozy | compact */
+    /** content Density of element. cozy | compact | condensed*/
     @Input()
     set contentDensity(contentDensity: ContentDensity) {
         this._contentDensity = contentDensity;
