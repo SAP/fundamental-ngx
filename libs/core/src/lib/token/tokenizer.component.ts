@@ -216,10 +216,10 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     }
 
     constructor(private _elementRef: ElementRef,
-        @Optional() private _contentDensityService: ContentDensityService,
-        private _cdRef: ChangeDetectorRef,
-        @Optional() private _rtlService: RtlService,
-        private _renderer: Renderer2) {
+                @Optional() private _contentDensityService: ContentDensityService,
+                private _cdRef: ChangeDetectorRef,
+                @Optional() private _rtlService: RtlService,
+                private _renderer: Renderer2) {
         this._renderer.listen('window', 'click', (e: Event) => {
             if (this.elementRef().nativeElement.contains(e.target) === false) {
                 this.tokenList.forEach(token => {
@@ -296,16 +296,14 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keyDown(keyboardEvent: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(keyboardEvent, [DELETE, BACKSPACE]) &&
-            !this._isInputFocused() &&
-            !this.disableKeyboardDeletion) {
+        const focusedTokenIndex = this._getFocusedTokenIndex();
+        if (KeyUtil.isKeyCode(keyboardEvent, [DELETE, BACKSPACE]) && !this.disableKeyboardDeletion) {
             const selectedElements = this._getActiveTokens();
-            const focusedTokenIndex = this._getFocusedTokenIndex();
             selectedElements.forEach(element => element.onCloseClick.emit());
             if (selectedElements.length > 0) {
                 if (KeyUtil.isKeyCode(keyboardEvent, DELETE)) {
                     this._focusInput();
-                } else {
+                } else if (focusedTokenIndex > 0) {
                     this.focusTokenElement(focusedTokenIndex - 1);
                 }
             }
@@ -314,7 +312,8 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         if (KeyUtil.isKeyCode(keyboardEvent, BACKSPACE) &&
             this._isInputFocused() &&
             !this._getInputValue() &&
-            !this.disableKeyboardDeletion) {
+            !this.disableKeyboardDeletion &&
+            focusedTokenIndex > 0) {
             this.focusTokenElement(this.tokenList.length - 1);
         }
     }
