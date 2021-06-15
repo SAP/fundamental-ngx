@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ComponentRef,
     ContentChild,
     ElementRef,
     Injector,
@@ -104,6 +105,9 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     /** @hidden */
     private _clickEventListener: Function;
 
+    /** @hidden */
+    private _mobileModeComponentRef: ComponentRef<PopoverMobileComponent>;
+
     constructor(
         private _elementRef: ElementRef,
         private _popoverService: PopoverService,
@@ -140,6 +144,8 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
 
     /** @hidden */
     ngOnDestroy(): void {
+        this._destroyMobileComponent();
+        this._destroyEventListeners();
         this._popoverService.onDestroy();
     }
 
@@ -197,7 +203,7 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     }
 
     private _setupMobileMode(): void {
-        this._dynamicComponentService.createDynamicComponent(
+        this._mobileModeComponentRef = this._dynamicComponentService.createDynamicComponent(
             {
                 popoverBodyContentTemplate: this.popoverBodyContentTemplate,
                 popoverFooterContentTemplate: this.popoverFooterContentTemplate,
@@ -228,6 +234,13 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
         if (this._clickEventListener) {
             this._clickEventListener();
             this._clickEventListener = null;
+        }
+    }
+
+    /** @hidden */
+    private _destroyMobileComponent(): void {
+        if (this._mobileModeComponentRef) {
+            this._mobileModeComponentRef.destroy();
         }
     }
 }

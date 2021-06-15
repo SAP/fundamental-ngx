@@ -19,8 +19,6 @@ import {
     MobileModeControl,
     MobileModeConfigToken
 } from '@fundamental-ngx/core/mobile-mode';
-import { RtlService } from '../../utils/public_api';
-import { PopoverService } from '../popover-service/popover.service';
 import { PopoverInterface, POPOVER_COMPONENT } from '../popover.interface';
 import { takeUntil } from 'rxjs/operators';
 
@@ -30,7 +28,6 @@ import { takeUntil } from 'rxjs/operators';
     styleUrls: ['./popover-mobile.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [PopoverService],
 })
 export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> implements OnInit, OnDestroy {
     childContent: TemplateRef<any> = undefined;
@@ -48,9 +45,7 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,
-        private _popoverService: PopoverService,
         private _changeDetectorref: ChangeDetectorRef,
-        @Optional() private _rtlService: RtlService,
         @Inject(POPOVER_COMPONENT) _popoverComponent: PopoverInterface,
         @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
     ) {
