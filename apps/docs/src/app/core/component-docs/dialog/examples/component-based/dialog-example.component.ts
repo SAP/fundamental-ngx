@@ -10,7 +10,7 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
             </fd-dialog-header>
 
             <fd-dialog-body>
-                <p style="text-align: justify; margin: 0">
+                <p id="fd-dialog-body-1" role="dialog" style="text-align: justify; margin: 0">
                     {{ dialogRef.data.pinnapleDescription }}
                 </p>
                 <ul style="margin-bottom: 0">
