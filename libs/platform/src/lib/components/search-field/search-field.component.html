@@ -108,6 +108,7 @@
                     *ngFor="let value of dropdownValues$ | async | suggestionMatches: inputText"
                     (keydown.enter)="onItemClick(value)"
                     (keydown.tab)="onItemClick(value)"
+                    (keyup.space)="onItemClick(value); $event.stopPropagation();"
                     (click)="onItemClick(value)"
                     [innerHTML]="value | highlight: inputText:true:true"
                     role="menuitem"
