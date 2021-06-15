@@ -9,7 +9,7 @@ export class FacetsPo extends CoreBaseComponentPo {
     raitingIndicatorExample = 'fd-rating-indicator-facet-example ';
     groupExample = 'fd-facet-group-example ';
     link = '.fd-link';
-    raitingIndicator = '.fd-rating-indicator__input';
+    raitingIndicator = '.fd-rating-indicator__label';
     chosenRaitingStars = '.fd-rating-indicator__dynamic-text';
 
     open(): void {
