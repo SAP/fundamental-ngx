@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.0...v0.31.0-rc.1) (2021-06-16)
+
+
+### Bug Fixes
+
+* **platform:** fix base input status if error ([#5684](https://github.com/SAP/fundamental-ngx/issues/5684)) ([39d970d](https://github.com/SAP/fundamental-ngx/commit/39d970db4f2efb5b385b2aabb97e046b3da10271))
+
 ## [0.31.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.89...v0.31.0-rc.0) (2021-06-16)
 
 
