@@ -126,6 +126,7 @@
                     <div fd-form-item>
                         <fd-input-group>
                             <input
+                                #inputGroupField
                                 fd-input-group-input
                                 fd-form-control
                                 [compact]="true"
@@ -135,8 +136,8 @@
                                 id="value-help-dialog-search"
                                 [placeholder]="searchField.placeholder" />
 
-                            <span fd-input-group-addon [compact]="true">
-                                <fd-icon glyph="search"></fd-icon>
+                            <span fd-input-group-addon [compact]="true" button="true">
+                                <button fd-button title="Search" glyph="search" fdType="transparent" (click)="_searchAction(inputGroupField)"></button>
                             </span>
                         </fd-input-group>
                     </div>
