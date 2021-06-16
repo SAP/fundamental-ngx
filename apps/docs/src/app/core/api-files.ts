@@ -233,7 +233,8 @@ export const API_FILES = {
         'QuickViewGroupTitleComponent',
         'QuickViewGroupItemComponent',
         'QuickViewGroupItemLabelComponent',
-        'QuickViewGroupItemContentComponent'
+        'QuickViewGroupItemContentComponent',
+        'QuickViewGroupItemContentElementDirective'
     ],
     scrollSpy: ['ScrollSpyDirective'],
     select: ['SelectComponent', 'OptionComponent'],
