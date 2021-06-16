@@ -1,4 +1,22 @@
 
+## [0.31.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.0...v0.31.0-rc.1) (2021-06-16)
+
+
+### Bug Fixes
+
+* **platform:** fix base input status if error ([#5684](https://github.com/SAP/fundamental-ngx/issues/5684)) ([39d970d](https://github.com/SAP/fundamental-ngx/commit/39d970db4f2efb5b385b2aabb97e046b3da10271))
+
+## [0.31.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.89...v0.31.0-rc.0) (2021-06-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core:** added `QuickViewGroupItemContentElementDirective` (`fd-quick-view-group-item-content-element`) needed for bind the corresponding label to the element (email, phone, link, etc.)
+
+### Bug Fixes
+
+* **core:** fix Quick View Accessibility issues ([#5493](https://github.com/SAP/fundamental-ngx/issues/5493)) ([7ca006d](https://github.com/SAP/fundamental-ngx/commit/7ca006da9d9175f1adc18002bf623ba3011dc5bf))
+
 ### [0.30.1-rc.89](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.88...v0.30.1-rc.89) (2021-06-15)
 
 ### [0.30.1-rc.88](https://github.com/SAP/fundamental-ngx/compare/v0.30.1-rc.87...v0.30.1-rc.88) (2021-06-15)
