@@ -21,7 +21,7 @@ import { PopoverCdkPlacementExampleComponent } from './examples/popover-new-plac
 import { PopoverFocusExampleComponent } from './examples/popover-focus-example/popover-focus-example.component';
 import { PopoverTriggerExampleComponent } from './examples/popover-trigger-example/popover-trigger-example.component';
 import { PopoverMobileExampleComponent } from './examples/popover-mobile/popover-mobile-example.component';
-import { PopoverMobileModule, PopoverModule } from '@fundamental-ngx/core/popover';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
@@ -47,7 +47,6 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
-        PopoverMobileModule,
         PopoverModule,
         SideNavigationModule,
         MultiInputModule,
