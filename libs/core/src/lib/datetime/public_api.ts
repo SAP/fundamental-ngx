@@ -4,3 +4,4 @@ export * from './fd-date';
 export * from './fd-date-formats';
 export * from './fd-datetime-adapter';
 export * from './fd-datetime.module';
+export * from './datetime-format.pipes';
