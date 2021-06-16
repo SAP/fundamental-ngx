@@ -63,6 +63,9 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** Whether or not to apply a transparent style to the Avatar. */
     @Input() transparent = false;
 
+    /** Whether or not to apply background size contain style to the Avatar */
+    @Input() contain = false;
+
     /** Whether or not to apply a placeholder background style to the Avatar. */
     @Input() placeholder = false;
 
@@ -150,6 +153,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
             this.circle ? 'fd-avatar--circle' : '',
             this.border ? 'fd-avatar--border' : '',
             this.transparent ? 'fd-avatar--transparent' : '',
+            this.contain ? 'fd-avatar--background-contain' : '',
             this.placeholder ? 'fd-avatar--placeholder' : '',
             this.tile ? 'fd-avatar--tile' : '',
             this.class

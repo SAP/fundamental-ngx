@@ -43,11 +43,11 @@ export interface ExampleItem {
  *
  */
 export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
-    items: ExampleItem[] = [...ITEMS];
+    items: ExampleItem[] = ITEMS;
     totalItems = ITEMS.length;
 
     fetch(tableState: TableState): Observable<ExampleItem[]> {
-        this.items = [...ITEMS];
+        this.items = ITEMS;
 
         // apply searching
         if (tableState.searchInput) {
