@@ -477,7 +477,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     getSuggestionsLength(): number {
         let count = 0;
         this.suggestions?.forEach((suggestion) => {
-            if (this.inputText && suggestion.value.toLowerCase().indexOf(this.inputText?.trim().toLowerCase()) > -1) {
+            if (this.inputText && suggestion.value?.toLowerCase().indexOf(this.inputText?.trim()?.toLowerCase()) > -1) {
                 count = count + 1;
             }
         });
