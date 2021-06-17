@@ -1,4 +1,15 @@
 
+## [0.31.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.4...v0.31.0-rc.5) (2021-06-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core:** added `AvatarGroupPopoverControlDirective` (`fd-avatar-group-popover-control`) needed to bind the corresponding CSS class and attributes to group type overflow popover control.
+
+### Bug Fixes
+
+* **core:** fix Avatar Group's popover control styles & enhance a11y ([#5628](https://github.com/SAP/fundamental-ngx/issues/5628)) ([3d9def3](https://github.com/SAP/fundamental-ngx/commit/3d9def3d783ee7d89440d25ccb9d6bdb9adafd1d))
+
 ## [0.31.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.3...v0.31.0-rc.4) (2021-06-17)
 
 
