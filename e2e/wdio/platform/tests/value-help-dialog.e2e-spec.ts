@@ -128,9 +128,9 @@ describe('Value help dialog test suite', function() {
 
         it('should check advanced search toggle', () => {
             click(openDialogBtn);
-            expect(doesItExist(advSearchOptions)).toBe(true);
-            click(advSearchToggle);
             expect(doesItExist(advSearchOptions)).toBe(false);
+            click(advSearchToggle);
+            expect(doesItExist(advSearchOptions)).toBe(true);
             click(advSearchToggle);
             expect(doesItExist(advSearchOptions)).toBe(false);
         });
