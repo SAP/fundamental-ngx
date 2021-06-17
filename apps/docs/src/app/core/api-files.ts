@@ -26,6 +26,7 @@ export const API_FILES = {
         'AvatarGroupComponent',
         'AvatarGroupItemDirective',
         'AvatarGroupFocusableAvatarDirective',
+        'AvatarGroupPopoverControlDirective',
         'AvatarGroupOverflowBodyDirective',
         'AvatarGroupOverflowItemDirective',
         'AvatarGroupOverflowButtonDirective',
