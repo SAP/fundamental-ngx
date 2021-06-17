@@ -293,6 +293,11 @@ export class SelectComponent implements
         this._updateCalculatedHeight();
     }
 
+    /** @hidden */
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+    }
+
     get selected(): OptionComponent {
         return this._selectionModel.selected[0];
     }
