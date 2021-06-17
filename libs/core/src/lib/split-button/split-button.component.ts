@@ -118,6 +118,10 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     mainActionBtn: ElementRef;
 
     /** @hidden */
+    @ViewChild('menuActionButton', { read: ElementRef })
+    menuActionBtn: ElementRef;
+
+    /** @hidden */
     mainButtonWidth: string;
 
     /** @hidden */
@@ -179,6 +183,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
                 const lastItem = items[items.length - 1];
                 if (lastItem && !lastItem.submenu) {
                     this.menu.close();
+                    this.menuActionBtn.nativeElement.focus();
                 }
             })
         );
