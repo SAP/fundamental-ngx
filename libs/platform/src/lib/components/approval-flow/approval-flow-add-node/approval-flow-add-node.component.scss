@@ -1,21 +1,14 @@
-$block: approval-flow;
+$block: fdp-approval-flow-add-node;
 
+.#{$block} {
+    &__dialog {
+        &-body {
+            width: 320px;
+            height: 433px;
 
-fd-dialog {
-    fd-dialog-body {
-        height: 433px;
-
-        .fd-list__item {
-            cursor: pointer;
-        }
-
-        &.#{$block}__dialog-body--auto-height {
-            height: auto;
+            &--auto-height {
+                height: auto;
+            }
         }
     }
-}
-
-
-.#{$block}__select-approvers-container {
-    width: 288px;
 }

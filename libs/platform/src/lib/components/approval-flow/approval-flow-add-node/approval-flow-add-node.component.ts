@@ -1,19 +1,16 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
-import { DialogRef, FdDate } from '@fundamental-ngx/core';
 import { forkJoin, Observable, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import {
-    ApprovalDataSource,
-    ApprovalNode,
-    ApprovalTeam,
-    ApprovalUser
-} from '../public_api';
-import {
-    ApprovalFlowAddNodeViewService,
-    VIEW_MODES
-} from '../services/approval-flow-add-node-view.service';
+import { FdDate } from '@fundamental-ngx/core/datetime';
+import { DialogRef } from '@fundamental-ngx/core/dialog';
+
+import { ApprovalFlowAddNodeViewService, VIEW_MODES } from '../services/approval-flow-add-node-view.service';
 import { displayTeamFn, displayUserFn, filterByName, trackByFn } from '../helpers';
+import { ApprovalNode } from '../interfaces/approval-node';
+import { ApprovalDataSource } from '../interfaces/approval-data-source';
+import { ApprovalTeam } from '../interfaces/approval-team';
+import { ApprovalUser } from '../interfaces/approval-user';
 
 export interface AddNodeDialogRefData {
     isEdit?: boolean;
@@ -26,9 +23,17 @@ export interface AddNodeDialogRefData {
     rtl: boolean;
 }
 
+export interface AddNodeDialogFormData {
+    node: ApprovalNode;
+    nodeType: APPROVAL_FLOW_NODE_TYPES;
+    toNextSerial: boolean
+}
+
 export type ApprovalFlowNodeTarget =
     'empty' |
     'before' |
+    'before-all' |
+    'after-all' |
     'after' |
     'parallel';
 
@@ -46,7 +51,7 @@ export enum APPROVAL_FLOW_APPROVER_TYPES {
 @Component({
     selector: 'fdp-approval-flow-add-node',
     templateUrl: './approval-flow-add-node.component.html',
-    styleUrls: ['./approval-flow-add-node.component.scss', '../styles/approval-flow-dialog.scss'],
+    styleUrls: [ './approval-flow-add-node.component.scss', '../styles/approval-flow-dialog.scss' ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
@@ -123,6 +128,9 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     _trackByFn = trackByFn;
 
     /** @hidden */
+    _addToNextSerial = false;
+
+    /** @hidden */
     private _viewChangeSub: Subscription;
 
     /** @hidden */
@@ -172,12 +180,13 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
                 this._setFilteredApprovers(approvers || []);
 
                 if (this._data.isEdit) {
-                    this._selectedApprovers = [...this._data.node.approvers];
                     this._checkDueDate = this._data.checkDueDate;
 
                     if (this._checkDueDate && this._data.node.dueDate) {
                         this._dueDate = FdDate.getFdDateByDate(new Date(this._data.node.dueDate));
                     }
+
+                    this._selectedApprovers = [...this._data.node.approvers];
 
                     if (this._data.node.approvalTeamId) {
                         this.viewService.selectTeam(this._teams.find(t => t.id === this._data.node.approvalTeamId));
@@ -329,7 +338,11 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
             this._data.node.dueDate = this._dueDate.toDate();
         }
 
-        this.dialogRef.close({ node: this._data.node, nodeType: this._nodeType });
+        this.dialogRef.close({
+            node: this._data.node,
+            nodeType: this._nodeType,
+            toNextSerial: this._addToNextSerial
+        } as AddNodeDialogFormData);
     }
 
     /** @hidden */

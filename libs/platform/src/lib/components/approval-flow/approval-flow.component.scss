@@ -88,9 +88,23 @@ $carousel-controls-height--edit-mode: 126px;
             padding-left: 4rem;
         }
 
+        &--multiple-final-nodes {
+            padding-right: 4rem;
+        }
+
         &[dir='rtl'] {
             &.#{$block}__graph-container--multiple-root-nodes {
                 padding-left: 1rem;
+                padding-right: 2rem;
+            }
+
+            &.#{$block}__graph-container--multiple-final-nodes {
+                padding-right: 1rem;
+                padding-left: 2rem;
+            }
+
+            &.#{$block}__graph-container--multiple-root-nodes.#{$block}__graph-container--multiple-final-nodes {
+                padding-left: 2rem;
                 padding-right: 2rem;
             }
         }

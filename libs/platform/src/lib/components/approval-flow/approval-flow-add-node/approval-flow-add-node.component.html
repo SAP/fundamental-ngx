@@ -1,4 +1,4 @@
-<fd-dialog [attr.dir]="_data.rtl ? 'rtl' : 'ltr'">
+<fd-dialog class="fdp-approval-flow-add-node__dialog" [attr.dir]="_data.rtl ? 'rtl' : 'ltr'">
     <fd-dialog-header [class.show-search]="_selectMode && !_userToShowDetails">
         <ng-template fdTemplate="header">
             <p>
@@ -52,7 +52,10 @@
         </ng-template>
     </fd-dialog-header>
 
-    <fd-dialog-body [class.approval-flow__dialog-body--auto-height]="viewService.isUserDetailsMode">
+    <fd-dialog-body
+        class="fdp-approval-flow-add-node__dialog-body"
+        [class.fdp-approval-flow-add-node__dialog-body--auto-height]="viewService.isUserDetailsMode"
+    >
         <ng-container *ngIf="!_selectMode">
             <div fd-form-item *ngIf="_data.showNodeTypeSelect">
                 <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogNodeType">Parallel or serial</label>
@@ -114,26 +117,30 @@
             <div fd-form-item>
                 <label fd-form-label i18n="@@platformApprovalFlowAddNodeDialogUserOrTeam">User/Team</label>
 
-                <div class="approval-flow__select-approvers-container">
-                    <fd-multi-input
-                        *ngIf="_isSingleUserMode"
-                        [compact]="true"
-                        [showAllButton]="false"
-                        [(ngModel)]="_selectedApprovers"
-                        [displayFn]="_displayUserFn"
-                        (openChange)="_goToSelectMode()"
-                        (selectedChange)="_setSelectedApprovers($event)"
-                    ></fd-multi-input>
+                <fd-multi-input
+                    *ngIf="_isSingleUserMode"
+                    [compact]="true"
+                    [showAllButton]="false"
+                    [(ngModel)]="_selectedApprovers"
+                    [displayFn]="_displayUserFn"
+                    (openChange)="_goToSelectMode()"
+                    (selectedChange)="_setSelectedApprovers($event)"
+                ></fd-multi-input>
 
-                    <fd-multi-input
-                        *ngIf="!_isSingleUserMode"
-                        [compact]="true"
-                        [showAllButton]="false"
-                        [(ngModel)]="_selectedTeamArray"
-                        [displayFn]="_displayTeamFn"
-                        (openChange)="_goToSelectMode()"
-                    ></fd-multi-input>
-                </div>
+                <fd-multi-input
+                    *ngIf="!_isSingleUserMode"
+                    [compact]="true"
+                    [showAllButton]="false"
+                    [(ngModel)]="_selectedTeamArray"
+                    [displayFn]="_displayTeamFn"
+                    (openChange)="_goToSelectMode()"
+                ></fd-multi-input>
+            </div>
+
+            <div *ngIf="_nodeType === _nodeTypes.PARALLEL" fd-form-item>
+                <fd-checkbox
+                    [(ngModel)]="_addToNextSerial"
+                    i18n="@@platformApprovalFlowAddToNext">Add to the next serial node</fd-checkbox>
             </div>
 
             <div *ngIf="_checkDueDate" fd-form-item>

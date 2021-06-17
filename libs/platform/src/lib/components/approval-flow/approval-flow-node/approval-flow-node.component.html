@@ -3,9 +3,13 @@
     class="approval-flow-node__vertical-line-before"
     [class.approval-flow-node__vertical-line-before-solid]="_isVerticalLineBeforeSolid"></div>
 <div
-    *ngIf="!_isFinal && meta?.renderVerticalLineAfter"
+    *ngIf="meta?.renderVerticalLineAfter"
     class="approval-flow-node__vertical-line-after"
     [class.approval-flow-node__vertical-line-after-solid]="_isVerticalLineAfterSolid"></div>
+
+<div
+    *ngIf="_isFinal && meta?.nodeIndex === 0"
+    class="approval-flow-node__carousel-end-marker"></div>
 
 <ng-container *ngIf="!_blank && !_space">
     <div *ngIf="renderArrow" class="approval-flow-node__arrow"></div>
@@ -13,8 +17,6 @@
     <div
         *ngIf="_isRoot && meta?.nodeIndex === 0"
         class="approval-flow-node__carousel-start-marker"></div>
-
-    <div *ngIf="_isFinal" class="approval-flow-node__carousel-end-marker"></div>
 
     <div *ngIf="isEdit" class="approval-flow-node__edit-controls">
         <fd-checkbox
@@ -100,6 +102,10 @@
     </div>
 </ng-container>
 
+<ng-container *ngIf="_showAddButton && meta?.canAddNodeBeforeAll && !node?.actionsConfig?.disableAddBefore">
+    <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before-all' }" ></ng-container>
+</ng-container>
+
 <ng-container *ngIf="_showAddButton && meta?.canAddNodeBefore && !node?.actionsConfig?.disableAddBefore">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before' }" ></ng-container>
 </ng-container>
@@ -108,13 +114,19 @@
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'after' }" ></ng-container>
 </ng-container>
 
+<ng-container *ngIf="_showAfterAllAddButton && meta?.canAddNodeAfterAll && meta?.renderAddNodeAfterButton && !node?.actionsConfig?.disableAddAfter">
+    <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'after-all' }" ></ng-container>
+</ng-container>
+
 <ng-template #addNodeButton let-placement="placement">
     <button
         class="approval-flow-node__add"
         *ngIf="node.status !== 'approved'"
         [class.approval-flow-node__add--blank]="_blank"
-        [class.approval-flow-node__add--before]="!_blank && placement === 'before'"
-        [class.approval-flow-node__add--after]="!_blank && placement === 'after'"
+        [class.approval-flow-node__add--before]="!_blank && (placement === 'before' || placement === 'before-all')"
+        [class.approval-flow-node__add--before-all]="!_blank && placement === 'before-all'"
+        [class.approval-flow-node__add--after]="!_blank && (placement === 'after' || placement === 'after-all')"
+        [class.approval-flow-node__add--after-all]="placement === 'after-all'"
         [style.visibility]="dropZone.active ? 'hidden' : ''"
         (click)="onAdd.emit(placement)"
     >
@@ -128,7 +140,7 @@
         class="approval-flow-node__drop-zone"
         [class.approval-flow-node__drop-zone--active]="dropZone.active"
         [class.approval-flow-node__drop-zone--blank]="isNextNodeBlank"
-        [class.approval-flow-node__drop-zone--partial]="!_blank && (!isNextNodeBlank || placement === 'before')"
+        [class.approval-flow-node__drop-zone--partial]="_dropZonePartial(placement)"
     ></div>
 </ng-template>
 
@@ -150,7 +162,7 @@
     </li>
 
     <li
-        *ngIf="!meta?.isFinal && meta?.canAddParallel && !this.node?.actionsConfig?.disableAddParallel"
+        *ngIf="meta?.canAddParallel && !this.node?.actionsConfig?.disableAddParallel"
         fd-menu-item
         (click)="menu.close(); onAdd.emit('parallel')"
     >
@@ -166,7 +178,7 @@
     </li>
 
     <li
-        *ngIf="!this.node?.actionsConfig?.disableRemove && !this.disableRemoving"
+        *ngIf="!this.node?.actionsConfig?.disableRemove"
         fd-menu-item
         (click)="menu.close(); onDelete.emit()"
     >

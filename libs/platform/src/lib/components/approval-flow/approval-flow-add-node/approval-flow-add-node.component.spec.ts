@@ -1,9 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DialogConfig, DialogRef, FdDatetimeModule } from '@fundamental-ngx/core';
-import { PlatformApprovalFlowModule } from '@fundamental-ngx/platform';
 import { of } from 'rxjs';
 
-import { ApprovalFlowAddNodeComponent, AddNodeDialogRefData, APPROVAL_FLOW_APPROVER_TYPES } from './approval-flow-add-node.component';
+import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { PlatformApprovalFlowModule } from '../approval-flow.module';
+
+import { AddNodeDialogRefData, APPROVAL_FLOW_APPROVER_TYPES, ApprovalFlowAddNodeComponent } from './approval-flow-add-node.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestApprovalFlowDataSource } from '../approval-flow.component.spec';
 import { ApprovalNode, ApprovalTeam } from '../interfaces';
@@ -30,7 +32,7 @@ describe('ApprovalFlowAddNodeComponent', () => {
         rtl: false,
         node: node
     };
-    
+
     dialogRef.data = dialogData;
 
     beforeEach(async () => {
@@ -110,7 +112,7 @@ describe('ApprovalFlowAddNodeComponent', () => {
     it('should confirm selected team', () => {
         let approvalTeam: ApprovalTeam;
         const viewServiceSpy = spyOn(TestBed.inject(ApprovalFlowAddNodeViewService), 'resetView').and.callThrough();
-        
+
         approvalFlowDataSource.fetchTeams().subscribe(teams => approvalTeam = teams[0]);
 
         component._data.isEdit = true;

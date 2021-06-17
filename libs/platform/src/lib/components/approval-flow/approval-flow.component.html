@@ -78,21 +78,21 @@
             ></button>
 
             <button
-                *ngIf="_canEditNode"
-                fd-button
-                label="Edit"
-                i18n-label="@@platformApprovalEdit"
-                [compact]="true"
-                (click)="_editNodeFromToolbar()"
-            ></button>
-
-            <button
                 *ngIf="_canRemoveSelectedNodes"
                 fd-button
                 label="Remove"
                 i18n-label="@@platformApprovalRemove"
                 [compact]="true"
                 (click)="_deleteCheckedNodes()"
+            ></button>
+
+            <button
+                *ngIf="_canEditNode"
+                fd-button
+                label="Edit approver"
+                i18n-label="@@platformApprovalEditApprover"
+                [compact]="true"
+                (click)="_editNodeFromToolbar()"
             ></button>
         </ng-container>
     </div>
@@ -157,6 +157,7 @@
                 class="approval-flow__graph-container"
                 [attr.dir]="_dir"
                 [class.approval-flow__graph-container--multiple-root-nodes]="_multipleRootNodes"
+                [class.approval-flow__graph-container--multiple-final-nodes]="_multipleFinalNodes"
                 #graphContainerEl
             >
                 <div
@@ -178,12 +179,11 @@
                                 [node]="node"
                                 [meta]="_graphMetadata[node.id]"
                                 [isEdit]="_isEditMode"
-                                [isNextNodeBlank]="!node.blank && _graph[columnIndex + 1]?.nodes[nodeIndex]?.blank"
+                                [isNextNodeBlank]="_isNextNodeBlank(node, columnIndex, nodeIndex)"
                                 [checkDueDate]="checkDueDate"
                                 [dueDateThreshold]="dueDateThreshold"
                                 [renderArrow]="columnIndex > 0"
                                 [allNodesInColumnApproved]="column.allNodesApproved"
-                                [disableRemoving]="_isFinalNodeWithMultipleParents(node)"
                                 (onNodeClick)="_onNodeClick(node)"
                                 (onNodeCheck)="_onNodeCheck(node)"
                                 (onAdd)="_addNode(node, $event)"

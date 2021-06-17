@@ -15,8 +15,11 @@ import {
     ViewChild,
     ViewChildren
 } from '@angular/core';
-import { MenuComponent, ObjectStatus, RtlService } from '@fundamental-ngx/core';
 import { Subscription } from 'rxjs';
+
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { MenuComponent } from '@fundamental-ngx/core/menu';
+import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 
 import { ApprovalFlowDropZoneDirective } from './approval-flow-drop-zone.directive';
 import { ApprovalGraphNode, ApprovalGraphNodeMetadata, ApprovalStatus } from '../interfaces';
@@ -39,7 +42,8 @@ const DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fdp-approval-flow-node',
-        '[class.approval-flow-node--first-root]': 'meta?.firstOfMultipleRootNodes'
+        '[class.approval-flow-node--first-root]': 'meta?.firstOfMultipleRootNodes',
+        '[class.approval-flow-node--first-final]': 'meta?.firstOfMultipleFinalNodes'
     }
 })
 export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
@@ -63,9 +67,6 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
      *  Used to render appropriate vertical line after (dashed/solid)
      */
     @Input() allNodesInColumnApproved = false;
-
-    /** Whether to disable remove action */
-    @Input() disableRemoving = false;
 
     /** Whether the node is in edit mode */
     @Input()
@@ -110,7 +111,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     /** @hidden */
     @HostBinding('class.approval-flow-node--line-after')
     get _renderLineAfter(): boolean {
-        return !this.node?.blank;
+        return !this.node?.blank || this._isFinal;
     }
 
     /** @hidden */
@@ -157,6 +158,12 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     @HostBinding('class.approval-flow-node--last-in-parallel')
     get _isLastInParallel(): boolean {
         return Boolean(this.meta?.isLastInParallel);
+    }
+
+    /** Whether the node is blank and the final */
+    @HostBinding('class.approval-flow-node--last-blank')
+    get _lastBlank(): boolean {
+        return this._blank && this.node.targets.length === 0;
     }
 
     /** @hidden */
@@ -252,7 +259,23 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     get _showAddButton(): boolean {
-        return this.isEdit && !this._blank && !this._space && !this.node?.disableActions;
+        return this.isEdit
+            && !this._blank
+            && !this._space
+            && !this.node?.disableActions;
+    }
+
+    /** @hidden */
+    get _showAfterAllAddButton(): boolean {
+        return this.isEdit
+            && !this._space
+            && !this.node?.disableActions
+    }
+
+    /** @hidden */
+    _dropZonePartial(placement: ApprovalFlowNodeTarget): boolean {
+        return (!this._blank && (!this.isNextNodeBlank || placement === 'before'))
+            || (this._lastBlank && placement === 'after-all')
     }
 
     /** @hidden */
