@@ -159,7 +159,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * Id of elements (separated by space) for setting aria-labelledby for search input
      * Not shown in the UI, only visible by the screen-readers.
      */
-    @Input() ariaLabelledby: string; 
+    @Input() ariaLabelledby: string;
 
     /**
      * Input change event.
@@ -215,7 +215,10 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     public submitId = '';
     public menuId = '';
     public dir = 'ltr';
+    currentSearchSuggestionAnnoucementMessage = '';
 
+    private _searchSuggestionAnnoucementMessagePart1 = 'suggestions found';
+    private _searchSuggestionAnnoucementMessagePart2 = 'use up and down arrows to navigate';
     private _suggestionOverlayRef: OverlayRef;
     private _suggestionPortal: TemplatePortal;
     private _suggestionkeyManager: FocusKeyManager<SearchFieldSuggestionDirective>;
@@ -293,6 +296,12 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * @hidden
      */
     onValueChange($event: string): void {
+        // when search result not changed but input text is changed.
+        // again need to announce the result, so clear this message.
+        setTimeout(() => {
+            this.currentSearchSuggestionAnnoucementMessage = '';
+        });
+
         this.inputChange.emit({
             text: $event,
             category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
@@ -312,6 +321,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             );
             this.dataSource.match(match);
         }
+        this._updateSearchAnnoucementText();
     }
 
     /**
@@ -460,6 +470,20 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this._dataSource = dataSource;
     }
 
+    /**
+     * return count for matching suggestion with input text
+     * @returns number
+     */
+    getSuggestionsLength(): number {
+        let count = 0;
+        this.suggestions?.forEach((suggestion) => {
+            if (this.inputText && suggestion.value.toLowerCase().indexOf(this.inputText?.trim().toLowerCase()) > -1) {
+                count = count + 1;
+            }
+        });
+        return count;
+    }
+
     /** @hidden */
     private _listenElementEvents(): void {
         fromEvent(this.elementRef.nativeElement, 'focus', { capture: true })
@@ -481,6 +505,16 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             )
             .subscribe();
     }
+
+    /** @hidden */
+    private _updateSearchAnnoucementText(): void {
+        // create search suggestion message with count.
+        const suggestionCount = this.getSuggestionsLength();
+        this.currentSearchSuggestionAnnoucementMessage =
+            suggestionCount +
+            this._searchSuggestionAnnoucementMessagePart1 +
+            (suggestionCount > 0 ? this._searchSuggestionAnnoucementMessagePart2 : '');
+    }
 }
 
 @Pipe({
@@ -488,6 +522,6 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
 })
 export class SuggestionMatchesPipe implements PipeTransform {
     transform(values: string[], match: string): string[] {
-        return values.filter((value) => value.toLowerCase().indexOf(match.trim().toLowerCase()) > -1);
+        return values.filter((value) => value.toLowerCase().indexOf(match?.trim().toLowerCase()) > -1);
     }
 }
