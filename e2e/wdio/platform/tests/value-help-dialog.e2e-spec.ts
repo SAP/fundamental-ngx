@@ -130,7 +130,7 @@ describe('Value help dialog test suite', function() {
             click(openDialogBtn);
             expect(doesItExist(advSearchOptions)).toBe(true);
             click(advSearchToggle);
-            expect(doesItExist(advSearchOptions)).toBe(true);
+            expect(doesItExist(advSearchOptions)).toBe(false);
             click(advSearchToggle);
             expect(doesItExist(advSearchOptions)).toBe(false);
         });
