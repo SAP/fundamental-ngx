@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.7...v0.31.0-rc.8) (2021-06-17)
+
+
+### Bug Fixes
+
+* **platform:** value help dialog, hidden filter by default, added missing search icon to search field ([#5677](https://github.com/SAP/fundamental-ngx/issues/5677)) ([641f582](https://github.com/SAP/fundamental-ngx/commit/641f582a8e412310a1f6068773a4696702286a06))
+
 ## [0.31.0-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.6...v0.31.0-rc.7) (2021-06-17)
 
 ## [0.31.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.5...v0.31.0-rc.6) (2021-06-17)
