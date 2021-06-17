@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ToolbarModule } from '@fundamental-ngx/core';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { PlatformListModule, StandardListItemModule, PlatformButtonModule } from '@fundamental-ngx/platform';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';

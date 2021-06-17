@@ -1,4 +1,4 @@
-import { OverflowPriority } from '../../toolbar/toolbar.component';
+export type OverflowPriority = 'always' | 'never' | 'low' | 'high' | 'disappear';
 
 export const OVERFLOW_PRIORITY_SCORE: Map<OverflowPriority, number> = new Map([
     ['always', 0],

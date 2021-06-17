@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { SliderCustomValue } from '@fundamental-ngx/core';
+import { SliderCustomValue } from '@fundamental-ngx/core/slider';
 
 @Component({
     selector: 'fd-slider-custom-values-example',

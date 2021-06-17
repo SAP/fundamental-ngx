@@ -24,7 +24,7 @@ import { SelectComponent as CoreSelect } from '@fundamental-ngx/core';
 import { DynamicComponentService, FdSelectChange, SelectControlState } from '@fundamental-ngx/core';
 import { OptionItem } from '../../../../domain';
 import { FormField } from '../../form-field';
-import { FormFieldControl, Status } from '../../form-control';
+import { FormFieldControl } from '../../form-control';
 import { BaseSelect, FdpSelectionChangeEvent } from '../commons/base-select';
 import { SelectConfig } from '../select.config';
 
@@ -39,15 +39,19 @@ import { SelectConfig } from '../select.config';
 export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit, AfterViewChecked {
 
 
-    /** Whether the select component is disabled. */
+    /** Holds the control state of select */
     @Input()
-    get state(): SelectControlState {
-        return this._state;
+    get selectState(): SelectControlState {
+
+        return this.status as SelectControlState || this._selectState;
     }
-    set state(state: SelectControlState) {
+    set selectState(state: SelectControlState) {
         this._state = state;
     }
-    _state: SelectControlState = null;
+    /**
+     * @hidden
+     */
+    private _selectState: SelectControlState = null;
 
     /**
     * Directly sets value to the component that at the ends up at writeValue as well fires
@@ -201,7 +205,7 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
 
         this.selected = selectedItem;
         this.value = this.displayValue(this.selected);
-        
+
     }
 
     /**

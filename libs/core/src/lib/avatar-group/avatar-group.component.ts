@@ -5,7 +5,6 @@ import {
     ContentChildren,
     ElementRef,
     forwardRef,
-    HostBinding,
     Input,
     OnChanges,
     OnDestroy,
@@ -19,7 +18,7 @@ import { ViewportRuler } from '@angular/cdk/overlay';
 import { of, Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-import { ColorAccent, Size } from '../utils/datatypes';
+import { ColorAccent, Size } from '@fundamental-ngx/core/utils';
 import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
 
 export type AvatarGroupType = 'group' | 'individual';
@@ -37,7 +36,6 @@ let avatarGroupUniqueId = 0;
 export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy {
     /** Id of the Avatar Group. */
     @Input()
-    @HostBinding('attr.id')
     id = `fd-avatar-group-${avatarGroupUniqueId++}`;
 
     /** Apply user custom class. */

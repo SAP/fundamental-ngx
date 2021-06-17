@@ -4,8 +4,8 @@ import * as themeSwitcherSrc from '!raw-loader!./examples/theme-switcher-example
 import * as themeUrlSrc from '!raw-loader!./examples/theme-url-example.component.html';
 import * as themeSwitcherSrcTs from '!raw-loader!./examples/theme-switcher-example.component.ts';
 import * as themeUrlSrcTs from '!raw-loader!./examples/theme-url-example.component.ts';
-import { ThemeServiceOutput } from '@fundamental-ngx/core';
 import { DocsThemeService } from '../../../documentation/services/docs-theme.service';
+import { ThemeServiceOutput } from '@fundamental-ngx/core/utils';
 
 
 @Component({

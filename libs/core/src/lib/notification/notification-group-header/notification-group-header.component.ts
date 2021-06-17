@@ -1,25 +1,26 @@
-import { 
-    ChangeDetectionStrategy, 
+import {
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component, 
+    Component,
     EventEmitter,
-    HostBinding, 
+    HostBinding,
     Input,
-    OnInit, 
+    OnInit,
     OnDestroy,
     Optional,
     Output,
-    ViewEncapsulation 
+    ViewEncapsulation
 } from '@angular/core';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { Subscription } from 'rxjs';
-import { RtlService, ContentDensityService } from '../../utils/public_api';
+import { RtlService } from '@fundamental-ngx/core/utils';
 @Component({
     selector: 'fd-notification-group-header',
     template: `
-    <button 
+    <button
         fd-button
         fdType="transparent"
-        role="button" 
+        role="button"
         [compact]="expandCompact"
         [attr.aria-expanded]="expanded"
         [attr.aria-label]="expandAriaLabel"

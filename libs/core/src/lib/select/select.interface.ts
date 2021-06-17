@@ -2,10 +2,9 @@ import { EventEmitter, InjectionToken, QueryList, ElementRef } from '@angular/co
 
 import { OptionComponent } from './option/option.component';
 import { FdSelectChange } from './select.component';
-import { DialogConfig } from '../dialog/utils/dialog-config.class';
-import { MobileMode } from '../utils/interfaces/mobile-control.interface';
-import { MobileModeConfig } from '../utils/public_api';
+import { MobileMode } from '@fundamental-ngx/core/mobile-mode';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 
 export const SELECT_COMPONENT = new InjectionToken<SelectInterface>('SelectInterface');
 

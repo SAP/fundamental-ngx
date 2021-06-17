@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { ObjectStatusModule } from '../object-status/object-status.module';
-import { ButtonModule } from '../button/button.module';
-import { ToolbarModule } from '../toolbar/toolbar.module';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 
 import { GridListComponent } from './components/grid-list/grid-list.component';
 import { GridListFilterBarComponent } from './components/grid-list-filter-bar/grid-list-filter-bar.component';

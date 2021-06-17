@@ -1,13 +1,13 @@
 <fd-card
     cardType="analytical"
     [isLoading]="isLoading"
-    class="analytical-card"
+    class="fd-docs-example-analytical-card"
 >
     <fd-card-header>
         <h2 fd-card-title>Failure Breakdown</h2>
 
         <fd-card-kpi-header>
-            <strong fd-card-kpi-value fd-object-status status="positive">42.2</strong>
+            <strong fd-card-kpi-value status="positive">42.2</strong>
             <span
                 fd-card-kpi-scale-icon
                 glyph="up"
@@ -29,7 +29,7 @@
     <fd-card-content tabindex="0">
         <div
             #chart
-            class="chart-container"
+            class="fd-docs-example-chart-container"
         ></div>
     </fd-card-content>
     <fd-card-loader>

@@ -1,6 +1,6 @@
 /* tslint:disable:no-inferrable-types */
 
-import { DynamicComponentConfig } from '../../utils/dynamic-component/dynamic-component-config';
+import { DynamicComponentConfig } from '@fundamental-ngx/core/utils';
 import { DialogPosition } from '../utils/dialog-position.class';
 
 export class DialogConfigBase<T> implements DynamicComponentConfig {
@@ -72,6 +72,11 @@ export class DialogConfigBase<T> implements DynamicComponentConfig {
 
     /** Whether the dialog should have vertical padding. */
     verticalPadding?: boolean = true;
+
+    /** Workaround for IE11, as `flex-grow: 1` on dialog body won't work when 'min-height' for dialog set
+     * There is another way to get dialog of wanted height by setting `min-height` for dialog body.
+     */
+    bodyMinHeight?: string;
 
     /** Whether the dialog should have responsive horizontal padding changing with Dialogs window width.
      * max-width: 599px                         - .fd-dialog__content--s

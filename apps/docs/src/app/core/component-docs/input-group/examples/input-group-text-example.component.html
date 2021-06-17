@@ -1,19 +1,27 @@
 <h4 fd-form-header>Form Header</h4>
-<br>
+<br />
 <div fd-form-item>
-    <label fd-form-label>Left Aligned Text Add-on</label>
-    <fd-input-group addOnText="$"
-                    placement="before"
-                    placeholder="Amount">
+    <label fd-form-label for="fd-input-group-text-1" id="fd-input-group-label-1">Left Aligned Text Add-on</label>
+    <fd-input-group
+        id="fd-input-group-text-1"
+        addOnText="$"
+        placement="before"
+        placeholder="Amount"
+        ariaLabelledby="fd-input-group-label-1"
+    >
     </fd-input-group>
 </div>
 
-<br/>
+<br />
 
 <div fd-form-item>
-    <label fd-form-label>Right Aligned Text Add-on</label>
-    <fd-input-group addOnText="$"
-                    placement="after"
-                    placeholder="Amount">
+    <label fd-form-label for="fd-input-group-text-2" id="fd-input-group-label-2">Right Aligned Text Add-on</label>
+    <fd-input-group
+        id="fd-input-group-text-2"
+        addOnText="$"
+        placement="after"
+        placeholder="Amount"
+        ariaLabelledby="fd-input-group-label-2"
+    >
     </fd-input-group>
 </div>

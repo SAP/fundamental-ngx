@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
-import {
-    DateRange,
-    DatetimeAdapter,
-    DateTimeFormats,
-    DATE_TIME_FORMATS,
-    FdDate,
-    FD_DATETIME_FORMATS
-} from '@fundamental-ngx/core';
+import { DateRange } from '@fundamental-ngx/core/calendar';
+import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS, FdDate, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
 
 /**
  * FD_DATETIME_FORMATS is based on Intl.DateTimeFormat,
@@ -30,13 +24,13 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
     selector: 'fd-date-picker-format-example',
     template: `
         <fd-date-picker [(ngModel)]="date" placeholder="dd-mm-yyyy"></fd-date-picker>
-        <br />
-        <div>Selected Date: {{ date?.toDateString() }}</div>
-        <br />
+        <br/>
+        <div>Selected Date: {{ date | dateFormat }}</div>
+        <br/>
         <fd-date-picker placeholder="mm/dd/yy to mm/dd/yy" type="range" [(ngModel)]="selectedRange"></fd-date-picker>
-        <br />
-        <div>Selected First Date: {{ selectedRange?.start?.toDateString() }}</div>
-        <div>Selected Last Date: {{ selectedRange?.end?.toDateString() }}</div>
+        <br/>
+        <div>Selected First Date: {{ selectedRange?.start | dateFormat }}</div>
+        <div>Selected Last Date: {{ selectedRange?.end | dateFormat }}</div>
     `,
     providers: [
         {

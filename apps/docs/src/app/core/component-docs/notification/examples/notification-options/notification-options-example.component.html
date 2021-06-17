@@ -76,7 +76,7 @@
         <fd-notification-actions>
             <fd-action-sheet  [compact]="true" [noArrow]="true" placement="bottom-end">
                 <fd-action-sheet-control>
-                    <button fd-button fdType="transparent" glyph="overflow" [compact]="true"></button>
+                    <button fd-button fdType="transparent" glyph="overflow" title="overflow" [compact]="true"></button>
                 </fd-action-sheet-control>
                 <fd-action-sheet-body>
                     <li fd-action-sheet-item [compact]="true" label="Approve" glyph="accept" (click)="actionPicked('Approve')"></li>
@@ -112,7 +112,7 @@
             <fd-notification-actions>
                 <fd-action-sheet [mobile]="true">
                     <fd-action-sheet-control>
-                        <button fd-button fdType="transparent" glyph="overflow"></button>
+                        <button fd-button fdType="transparent" glyph="overflow" title="overflow"></button>
                     </fd-action-sheet-control>
                     <fd-action-sheet-body>
                         <li fd-action-sheet-item label="Approve" glyph="accept" (click)="actionPicked('Approve')" [isCloseButton]="true"></li>

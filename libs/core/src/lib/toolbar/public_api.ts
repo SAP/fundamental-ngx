@@ -5,3 +5,6 @@ export * from './toolbar-spacer.component';
 export * from './toolbar-separator.component';
 export * from './toolbar-label.directive';
 export * from './toolbar-form-label.directive';
+export * from './toolbar-overflow-priority.directive';
+export * from './toolbar-form-label.directive';
+export * from './toolbar-overflow-group.directive'

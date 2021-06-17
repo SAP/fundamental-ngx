@@ -28,13 +28,14 @@
                 type="button"
                 fdType="transparent"
                 [compact]="compact"
+                [id]="_addOnButtonId"
                 [attr.tabindex]="buttonFocusable ? 0 : -1"
-                [attr.title]="iconTitle"
+                [attr.title]="iconTitle ? iconTitle : null"
                 [glyph]="glyph"
                 [class.fd-shellbar__button]="inShellbar"
                 [class.is-expanded]="isExpanded"
-                [attr.aria-expanded]="isExpanded"
-                [attr.aria-label]="glyphAriaLabel"
+                [attr.aria-expanded]="inShellbar ? isExpanded : null"
+                [attr.aria-label]="glyphAriaLabel ? glyphAriaLabel : (glyph ? glyph : addOnText)"
                 [attr.aria-controls]="input"
                 [disabled]="disabled"
                 (mousedown)="preventFocus($event)"
@@ -44,9 +45,17 @@
             </button>
         </span>
 
-        <span *ngIf="!button" fd-input-group-addon [compact]="compact" [placement]="placement">
+        <span
+            *ngIf="!button"
+            fd-input-group-addon
+            [id]="_addOnNonButtonId"
+            [compact]="compact"
+            [placement]="placement"
+            [attr.aria-label]="glyphAriaLabel ? glyphAriaLabel : glyph ? glyph : addOnText"
+            [attr.title]="glyph ? glyph : addOnText"
+        >
             <ng-container *ngIf="!glyph">{{ addOnText }}</ng-container>
-            <span *ngIf="glyph" [className]="'sap-icon--' + glyph"></span>
+            <span *ngIf="glyph" [attr.title]="glyph" [className]="'sap-icon--' + glyph"></span>
         </span>
     </ng-container>
 
@@ -61,6 +70,8 @@
     </ng-container>
     <input
         [(ngModel)]="inputText"
+        [id]="_inputId"
+        [attr.aria-labelledby]="_getAriaLabelledbyIdsForInput()"
         [class.fd-shellbar__input-group__input]="inShellbar"
         fd-input-group-input
         [compact]="compact"

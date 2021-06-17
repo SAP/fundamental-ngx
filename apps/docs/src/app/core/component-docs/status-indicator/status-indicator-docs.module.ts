@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { StatusIndicatorModule } from '@fundamental-ngx/core';
-
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
 import { StatusIndicatorDocsComponent } from './status-indicator-docs.component';
@@ -17,6 +15,7 @@ import { StatusIndicatorCircularFillClockComponent } from './example/status-indi
 import { StatusIndicatorCircularFillAntiClockComponent } from './example/status-indicator-cirular-fill-anti-clockwise.component';
 import { StatusIndicatorLinearFillTypeComponent } from './example/status-indicator-linear-fill-type.component';
 import { StatusIndicatorClickableTypeComponent } from './example/status-indicator-clickable-type.component';
+import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
 
 const routes: Routes = [
     {

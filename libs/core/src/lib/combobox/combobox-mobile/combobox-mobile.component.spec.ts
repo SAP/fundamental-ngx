@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ComboboxMobileComponent } from './combobox-mobile.component';
-import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
-import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { EventEmitter } from '@angular/core';
 import { DialogModule } from '../../dialog/dialog.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

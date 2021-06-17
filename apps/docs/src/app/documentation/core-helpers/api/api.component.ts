@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiDocsService } from '../../services/api-docs.service';
-import { MenuComponent } from '@fundamental-ngx/core';
+import { MenuComponent } from '@fundamental-ngx/core/menu';
 
 @Component({
     selector: 'fd-api',
