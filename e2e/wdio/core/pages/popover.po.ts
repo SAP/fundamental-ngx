@@ -11,6 +11,7 @@ export class PopoverPo extends CoreBaseComponentPo {
     iconMoney = 'i.sap-icon--money-bills ';
     standardMoneyButton = 'fd-button-bar .fd-button--standard';
     barElement = '.fd-bar__element';
+    headerTitle = 'span.fd-list__title';
     basicPopoverButton = '#background-ex0 button';
     simplePopoverButton = '#background-ex1 .fd-button--standard';
     popoverMessage = '.fd-popover__popper--no-arrow div';
