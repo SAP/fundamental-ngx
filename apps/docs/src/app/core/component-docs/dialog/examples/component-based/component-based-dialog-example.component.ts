@@ -18,6 +18,16 @@ export class ComponentBasedDialogExampleComponent {
         const dialogRef = this._dialogService.open(DialogExampleComponent, {
             data: {
                 title: `Pineapple Fun Facts`,
+                pinnapleDescription: `
+                The pineapple (Ananas comosus) is a tropical plant with an edible fruit 
+                and the most economically significant plant in the family Bromeliaceae. 
+                The pineapple is indigenous to South America, 
+                where it has been cultivated for many centuries. 
+                The introduction of the pineapple to Europe in the 17th 
+                century made it a significant cultural icon of luxury. 
+                Since the 1820s, pineapple has been commercially grown in 
+                greenhouses and many tropical plantations.
+                `,
                 pineappleFunFacts: [
                     `You can grow your own pineapple by planting the top of the pineapple in soil`,
                     `Pulling leaves from a pineapple is not an indication of ripeness as many people think`,
@@ -29,7 +39,8 @@ export class ComponentBasedDialogExampleComponent {
                 ]
             },
             width: '400px',
-            ariaLabelledBy: 'fd-dialog-header-1'
+            ariaLabelledBy: 'fd-dialog-header-1',
+            responsivePadding: true
         });
 
         dialogRef.afterClosed.subscribe(

@@ -145,7 +145,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     ngOnDestroy(): void {
         this._stepEventSubscriptions.unsubscribe();
         this._stepListChangesSubscription.unsubscribe();
-        this.wrapperContainer.nativeElement.removeEventListener('scroll', handleTimeoutReference);
+        this.wrapperContainer?.nativeElement.removeEventListener('scroll', handleTimeoutReference);
     }
 
     /**
@@ -357,7 +357,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _setUpScrollListener(): void {
-        this.wrapperContainer.nativeElement.addEventListener('scroll', handleTimeoutReference, false);
+        this.wrapperContainer?.nativeElement.addEventListener('scroll', handleTimeoutReference, false);
     }
 
     /** @hidden */

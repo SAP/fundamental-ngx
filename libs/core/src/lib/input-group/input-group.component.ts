@@ -23,6 +23,9 @@ import { FormStates } from '@fundamental-ngx/core/shared';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 export type InputGroupPlacement = 'before' | 'after';
+let addOnNonButtonRandomId = 0;
+let addOnButtonRandomId = 0;
+let addOnInputRandomId = 0;
 
 /**
  * The component that represents an input group.
@@ -121,6 +124,10 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     @Input()
     iconTitle: string;
 
+    /** the associated ids for the input aria-labelledby field */
+    @Input()
+    ariaLabelledby: string;
+
     /** Event emitted when the add-on button is clicked. */
     @Output()
     addOnButtonClicked: EventEmitter<any> = new EventEmitter<any>();
@@ -152,6 +159,15 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
 
     /** @hidden */
     inputTextValue: string;
+
+    /** @hidden */
+    _inputId = `fd-input-group-input-id-${addOnInputRandomId++}`;
+
+    /** @hidden */
+    _addOnNonButtonId = `fd-input-group-non-button-id-${addOnNonButtonRandomId++}`;
+
+    /** @hidden */
+    _addOnButtonId = `fd-input-group-button-id-${addOnButtonRandomId++}`;
 
     /**
      * Whether or not the input coup is in the shellbar. Only for internal use by combobox component
@@ -189,6 +205,18 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
                 this.changeDetectorRef.markForCheck();
             }));
         }
+    }
+
+    /** @hidden
+     * calculate the correct ids for input aria-labelledby
+     */
+    private _getAriaLabelledbyIdsForInput(): string {
+      let ariaLabelledByIds = this.ariaLabelledby ? this.ariaLabelledby + ' ' : '';
+      if (!this.button) {
+          ariaLabelledByIds += this._addOnNonButtonId;
+      }
+
+      return ariaLabelledByIds;
     }
 
     /** @hidden */

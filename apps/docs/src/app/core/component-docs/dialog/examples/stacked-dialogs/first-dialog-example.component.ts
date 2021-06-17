@@ -16,7 +16,12 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
             </fd-dialog-body>
 
             <fd-dialog-footer>
-                <fd-button-bar fd-initial-focus fdType="emphasized" label="Open Second Dialog" (click)="openDialog()">
+                <fd-button-bar
+                        fd-initial-focus
+                        fdType="emphasized"
+                        label="Open Second Dialog"
+                        [compact]="true"
+                        (click)="openDialog()">
                 </fd-button-bar>
             </fd-dialog-footer>
         </fd-dialog>
