@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.5...v0.31.0-rc.6) (2021-06-17)
+
+
+### Features
+
+* **core:** shellbar - product menu - open item in new tab ([#5688](https://github.com/SAP/fundamental-ngx/issues/5688)) ([74d0414](https://github.com/SAP/fundamental-ngx/commit/74d04143fe82edec2a45495d01e5185946dc1677))
+
 ## [0.31.0-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.4...v0.31.0-rc.5) (2021-06-17)
 
 
