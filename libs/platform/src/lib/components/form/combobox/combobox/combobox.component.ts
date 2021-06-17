@@ -25,7 +25,7 @@ import { ComboBoxDataSource, DATA_PROVIDERS, DataProvider } from '../../../../do
 import { FormFieldControl } from '../../form-control';
 import { BaseCombobox, ComboboxSelectionChangeEvent } from '../commons/base-combobox';
 import { ComboboxConfig } from '../combobox.config';
-import { OptionItem } from '../../../../domain';
+import { OptionItem, SelectableOptionItem } from '../../../../domain';
 import { ComboboxMobileComponent } from '../combobox-mobile/combobox/combobox-mobile.component';
 import { COMBOBOX_COMPONENT } from '../combobox.interface';
 import { FormField } from '../../form-field';
@@ -58,9 +58,17 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
     /** @hidden */
     selected?: OptionItem;
 
+    /** @hidden
+     * List of selected suggestions
+     * */
+    _selected: SelectableOptionItem[] = [];
+
     /** @hidden */
     private _direction: Direction = 'ltr';
-
+    
+    /** @hidden */
+    private _timeout: any;
+    
     /** @hidden */
     get isGroup(): boolean {
         return !!(this.group && this.groupKey);
@@ -81,7 +89,6 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
     ) {
         super(cd, elementRef, ngControl, ngForm, dialogConfig, _comboboxConfig, formField, formControl);
     }
-
     /** @hidden */
     ngOnInit(): void {
         const providers = this.providers?.size === 0 ? this._comboboxConfig.providers : this.providers;
@@ -238,7 +245,6 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
             { injector: Injector.create({ providers: [{ provide: COMBOBOX_COMPONENT, useValue: this }] }) }
         );
     }
-
     /** @hidden */
     private _getSelectedOptionItem(text: string): OptionItem | undefined {
         if (!this.isGroup) {
@@ -252,5 +258,33 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
                 return result;
             }, [])
             .find(item => item.label === text);
+    }
+
+    validateOnKeyup(event: KeyboardEvent): void {
+        const isPrintableKey = event.key?.length === 1;
+        if (!event.shiftKey && !isPrintableKey) {
+            return;
+        }
+
+        if (this.inputText && this.isListEmpty) {
+            this.inputText = this.inputText.slice(0, -1);
+            this.isSearchInvalid = true;
+            this.state = 'error';
+            this.inputText ? this.showList(true) : this.showList(false);
+            this.searchTermChanged('');
+
+            if (this._timeout) {
+                clearTimeout(this._timeout);
+            }
+            const threeSeconds = 3000;
+            this._timeout = setTimeout(() => {
+                this.isSearchInvalid = false;
+                this.state = 'default';
+                this.cd.markForCheck();
+            }, threeSeconds);
+        } else {
+            this.isSearchInvalid = false;
+            this.state = 'default';
+        }
     }
 }
