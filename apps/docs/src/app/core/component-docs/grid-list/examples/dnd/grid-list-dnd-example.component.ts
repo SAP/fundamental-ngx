@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { GridListItemOutputEvent } from '@fundamental-ngx/core/grid-list';
 import { FdDropEvent } from '@fundamental-ngx/core/utils';
 
 interface GridListItem {
@@ -56,5 +57,13 @@ export class GridListDndExampleComponent {
     itemsChangeHandle(dropEvent: FdDropEvent<any>): void {
         console.log('Drag and drop event: ', dropEvent);
         this.list = dropEvent.items;
+    }
+
+    showAlert(message: string): void {
+        alert('Clicked on ' + message);
+    }
+
+    navigate(event: GridListItemOutputEvent<number>): void {
+        alert('Navigation event value is: ' + event.value);
     }
 }
