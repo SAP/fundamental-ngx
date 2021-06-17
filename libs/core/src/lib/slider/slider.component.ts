@@ -70,11 +70,11 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     @Input()
     class: string;
 
-    /** Id of the element that labels object number. */
+    /** Id of the element that labels slider. */
     @Input()
     ariaLabelledBy: string = null;
 
-    /** Aria label for the object number. */
+    /** Aria label for the slider. */
     @Input()
     ariaLabel: string = null;
 
