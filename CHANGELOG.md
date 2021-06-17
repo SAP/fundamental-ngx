@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.3...v0.31.0-rc.4) (2021-06-17)
+
+
+### Bug Fixes
+
+* **core:** fix a11y for Grid List component ([#5643](https://github.com/SAP/fundamental-ngx/issues/5643)) ([8a0628f](https://github.com/SAP/fundamental-ngx/commit/8a0628f3caab1cbe3f2aa9b1b3f4cb0b4641b373))
+
 ## [0.31.0-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.2...v0.31.0-rc.3) (2021-06-16)
 
 ## [0.31.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.1...v0.31.0-rc.2) (2021-06-16)
