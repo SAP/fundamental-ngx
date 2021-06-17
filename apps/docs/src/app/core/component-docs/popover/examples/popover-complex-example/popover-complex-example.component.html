@@ -6,7 +6,7 @@
         <fd-popover-body>
             <ul fd-list>
                 <li fd-list-item *ngFor="let option of list">
-                    <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
+                    <a [attr.href]="option.url" fd-list-title tabindex="-1">{{ option.text }}</a>
                 </li>
             </ul>
         </fd-popover-body>
@@ -17,16 +17,16 @@
             <button fd-button label="With Header"></button>
         </fd-popover-control>
         <fd-popover-body>
-            <div fd-popover-body-header>
-                <div fd-bar [cozy]="true">
+			<div fd-popover-body-header>
+                <div fd-bar [cozy]="true" id="popover-bar-header-1">
                     <div fd-bar-left>
                         <fd-bar-element>Cozy Header</fd-bar-element>
                     </div>
                 </div>
             </div>
-            <ul fd-list>
+            <ul fd-list aria-labelledby="popover-bar-header-1">
                 <li fd-list-item *ngFor="let option of list">
-                    <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
+                    <a [attr.href]="option.url" fd-link fd-list-title tabindex="-1">{{ option.text }}</a>
                 </li>
             </ul>
         </fd-popover-body>
@@ -38,15 +38,15 @@
         </fd-popover-control>
         <fd-popover-body>
             <div fd-popover-body-header>
-                <div fd-bar [cozy]="true">
+                <div fd-bar [cozy]="true" id="popover-bar-header-2">
                     <div fd-bar-left>
                         <fd-bar-element>Cozy Header</fd-bar-element>
                     </div>
                 </div>
             </div>
-            <ul fd-list>
+            <ul fd-list aria-labelledby="popover-bar-header-2">
                 <li fd-list-item *ngFor="let option of list">
-                    <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
+                    <a [attr.href]="option.url" fd-link fd-list-title tabindex="-1">{{ option.text }}</a>
                 </li>
             </ul>
             <div fd-popover-body-footer>
@@ -66,24 +66,22 @@
         </fd-popover-control>
         <fd-popover-body>
             <div fd-popover-body-header>
-                <div fd-bar barDesign="header-with-subheader" [cozy]="true">
+                <div fd-bar [cozy]="true" id="popover-bar-header-3">
                     <div fd-bar-left>
                         <fd-bar-element>Cozy Header</fd-bar-element>
                     </div>
                 </div>
-                <div fd-bar barDesign="subheader" [cozy]="true">
+                <div fd-bar [cozy]="true" id="popover-bar-header-4">
                     <div fd-bar-middle>
-                        <fd-bar-element>Cozy Subheader</fd-bar-element>
+                        <fd-bar-element>Cozy SubHeader</fd-bar-element>
                     </div>
                 </div>
             </div>
-
-            <ul fd-list>
+            <ul fd-list aria-labelledby="popover-bar-header-3 popover-bar-header-4">
                 <li fd-list-item *ngFor="let option of list">
-                    <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
+                    <a [attr.href]="option.url" fd-link fd-list-title tabindex="-1">{{ option.text }}</a>
                 </li>
-            </ul>
-
+			</ul>
             <div fd-popover-body-footer>
                 <div fd-bar barDesign="footer" [cozy]="true">
                     <div fd-bar-right>
