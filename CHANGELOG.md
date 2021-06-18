@@ -1,4 +1,12 @@
 
+## [0.31.0-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.12...v0.31.0-rc.13) (2021-06-18)
+
+
+### Bug Fixes
+
+* **core:** make no date message optional ([#5678](https://github.com/SAP/fundamental-ngx/issues/5678)) ([5aee232](https://github.com/SAP/fundamental-ngx/commit/5aee23280ac6cc65c075ea9a380922fc0e8dd610))
+* **core:** update schematics paths ([#5707](https://github.com/SAP/fundamental-ngx/issues/5707)) ([f33aa6f](https://github.com/SAP/fundamental-ngx/commit/f33aa6f0d43d7187965a36886c5ea23e8707c524))
+
 ## [0.31.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.11...v0.31.0-rc.12) (2021-06-18)
 
 
