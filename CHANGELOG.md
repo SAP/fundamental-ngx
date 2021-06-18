@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.11...v0.31.0-rc.12) (2021-06-18)
+
+
+### Bug Fixes
+
+* **core:** fix meridian switch changing hour display in Time component ([#5697](https://github.com/SAP/fundamental-ngx/issues/5697)) ([74a758c](https://github.com/SAP/fundamental-ngx/commit/74a758cafd653939ffb31f30108c38dcf621aef1))
+
 ## [0.31.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.10...v0.31.0-rc.11) (2021-06-18)
 
 
