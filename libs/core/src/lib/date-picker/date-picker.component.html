@@ -37,6 +37,7 @@
                     [class.is-expanded]="isOpen"
                     [attr.aria-expanded]="isOpen"
                     (click)="toggleCalendar()"
+                    [attr.title]="displayCalendarToggleLabel"
                 ></button>
             </span>
         </fd-input-group>
