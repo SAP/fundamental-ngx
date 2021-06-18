@@ -860,14 +860,6 @@ describe('SearchFieldComponent with DataSource', () => {
         mouseClickOnElement(button.nativeElement);
         fixture.detectChanges();
 
-        // failing because of 'Error: 1 timer(s) still in the queue'.
-
-        // click on category item
-        // const catMenuEl = overlayContainerEl.querySelector('.fd-menu');
-        // const catItems = getDropdownItems(catMenuEl);
-        // (catItems[2] as HTMLElement).click();
-        // fixture.detectChanges();
-
         // simulate input entry
         const textInput = fixture.debugElement.query(By.css('input.fd-input'));
         textInput.nativeElement.value = 'al';
