@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.9...v0.31.0-rc.10) (2021-06-18)
+
+
+### Bug Fixes
+
+* **core,platform:** add fix to match readonly state of combobox as per fiori3 ([#5701](https://github.com/SAP/fundamental-ngx/issues/5701)) ([f7a4ea7](https://github.com/SAP/fundamental-ngx/commit/f7a4ea7923c866601bd96c3943f1a0d440a627ce))
+
 ## [0.31.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.8...v0.31.0-rc.9) (2021-06-18)
 
 
