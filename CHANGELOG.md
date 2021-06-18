@@ -1,4 +1,12 @@
 
+## [0.31.0-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.8...v0.31.0-rc.9) (2021-06-18)
+
+
+### Bug Fixes
+
+* **core:** split button, close on click ([#5690](https://github.com/SAP/fundamental-ngx/issues/5690)) ([6ab69d6](https://github.com/SAP/fundamental-ngx/commit/6ab69d630c1bbfc00e77cee1e708f1d3358c63a0))
+* **core:** use explicit dependencies ([#5704](https://github.com/SAP/fundamental-ngx/issues/5704)) ([7585aa4](https://github.com/SAP/fundamental-ngx/commit/7585aa4657a2b49b2d85af7cfe711b0dd1b2a7c0))
+
 ## [0.31.0-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.7...v0.31.0-rc.8) (2021-06-17)
 
 
