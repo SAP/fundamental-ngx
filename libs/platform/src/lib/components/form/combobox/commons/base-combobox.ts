@@ -76,9 +76,9 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     @Input()
     maxHeight = '250px';
     /** @hidden */
-    isListEmpty = true;
+    _isListEmpty = true;
     /** @hidden */
-    isSearchInvalid = false;
+    _isSearchInvalid = false;
     /**
      *  The state of the form control - applies css classes.
      *  Can be 'success', 'error', 'warning', 'default', 'information'.
@@ -186,6 +186,8 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** @hidden */
     @ContentChildren(TemplateDirective)
     customTemplates: QueryList<TemplateDirective>;
+
+    /** @hidden */
     _flatSuggestions: SelectableOptionItem[];
     /** @hidden
      * Custom Option item Template
@@ -557,7 +559,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             .open()
             .pipe(
                 takeUntil(this._destroyed),
-                tap(data => this.isListEmpty = !data?.length),
+                tap(data => this._isListEmpty = !data?.length),
                 filter(data => !!data.length)
             )
             .subscribe(data => {

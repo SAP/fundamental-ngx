@@ -70,7 +70,7 @@
             (ngModelChange)="searchTermChanged()"
             [placeholder]="placeholder"
             (focus)="onTouched()"
-            (blur)="!mobile && onBlur($event)"
+            (blur)="!mobile && _onBlur($event)"
             [attr.aria-expanded]="isOpen && _suggestions.length > 0"
             [readonly]="readonly"
             [attr.aria-readonly]="readonly"
@@ -203,7 +203,7 @@
 
 <ng-template #errorMessageTemplate>
     <fd-form-message
-        *ngIf="isSearchInvalid"
+        *ngIf="_isSearchInvalid"
         type="error"
         [embedded]="isOpen">
         Invalid entry

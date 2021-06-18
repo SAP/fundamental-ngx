@@ -56,7 +56,7 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
     listTemplate: TemplateRef<any>;
 
     /** @hidden */
-    selected?: OptionItem;
+    _selectedElement?: OptionItem;
 
     /** @hidden
      * List of selected suggestions
@@ -117,7 +117,8 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
         }
     }
 
-    onBlur(event: FocusEvent): void {
+    /** @hidden */
+    _onBlur(event: FocusEvent): void {
         const target = event.relatedTarget as HTMLElement;
         if (target) {
             const isList = !!closestElement('.fdp-combobox__list-container', target);
@@ -126,7 +127,7 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
             }
         }
 
-        if (this.selected && this.selected.label === this.inputText) {
+        if (this._selectedElement && this._selectedElement.label === this.inputText) {
             return;
         }
 
@@ -149,7 +150,7 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
      */
     selectOptionItem(item: OptionItem): void {
         if (this.mobile) {
-            this.selected = item;
+            this._selectedElement = item;
             this.inputText = item.label;
             this.cd.detectChanges();
 
@@ -171,29 +172,29 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
             return;
         }
 
-        this.selected = this.isGroup ? selectedItem.children ? selectedItem.children[0] : selectedItem : selectedItem;
-        this.inputText = this.displayValue(this.selected);
+        this._selectedElement = this.isGroup ? selectedItem.children ? selectedItem.children[0] : selectedItem : selectedItem;
+        this.inputText = this.displayValue(this._selectedElement);
     }
 
     /** @hidden
      * Define is selected item selected
      */
     isSelectedOptionItem(selectedItem: any): boolean {
-        return this.lookupKey && this.lookupValue(this.selected) === this.lookupValue(selectedItem) ||
-            this.displayValue(this.selected) === this.displayValue(selectedItem);
+        return this.lookupKey && this.lookupValue(this._selectedElement) === this.lookupValue(selectedItem) ||
+            this.displayValue(this._selectedElement) === this.displayValue(selectedItem);
     }
 
     /** @hidden
      * Define is selected item selected by display value
      */
     isSelectedOptionItemByDisplayValue(selectedItem: any): boolean {
-        return this.selected && this.selected.label === selectedItem;
+        return this._selectedElement && this._selectedElement.label === selectedItem;
     }
 
     /** Handle dialog dismissing, closes popover and sets backup data. */
     dialogDismiss(term: string): void {
-        if (this.selected && term !== this.selected.label) {
-            this.selected = this._getSelectedOptionItem(term);
+        if (this._selectedElement && term !== this._selectedElement.label) {
+            this._selectedElement = this._getSelectedOptionItem(term);
         }
 
         this.inputText = term;
@@ -202,8 +203,8 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
 
     /** Handle dialog approval, closes popover and propagates data changes. */
     dialogApprove(): void {
-        if (this.selected && this.selected.label === this.inputText) {
-            this._updateModel(this.selected.value);
+        if (this._selectedElement && this._selectedElement.label === this.inputText) {
+            this._updateModel(this._selectedElement.value);
         } else {
             const optionItem = this._getSelectedOptionItem(this.inputText);
 
@@ -260,15 +261,16 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
             .find(item => item.label === text);
     }
 
+    /** Handle dialog error */
     validateOnKeyup(event: KeyboardEvent): void {
         const isPrintableKey = event.key?.length === 1;
         if (!event.shiftKey && !isPrintableKey) {
             return;
         }
 
-        if (this.inputText && this.isListEmpty) {
+        if (this.inputText && this._isListEmpty) {
             this.inputText = this.inputText.slice(0, -1);
-            this.isSearchInvalid = true;
+            this._isSearchInvalid = true;
             this.state = 'error';
             this.inputText ? this.showList(true) : this.showList(false);
             this.searchTermChanged('');
@@ -278,12 +280,12 @@ export class ComboboxComponent extends BaseCombobox implements OnInit, AfterView
             }
             const threeSeconds = 3000;
             this._timeout = setTimeout(() => {
-                this.isSearchInvalid = false;
+                this._isSearchInvalid = false;
                 this.state = 'default';
                 this.cd.markForCheck();
             }, threeSeconds);
         } else {
-            this.isSearchInvalid = false;
+            this._isSearchInvalid = false;
             this.state = 'default';
         }
     }
