@@ -12,7 +12,6 @@ import {
     ViewEncapsulation,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { DialogService } from '../../dialog/public_api';
 import {
     MobileModeBase,
     MOBILE_MODE_CONFIG,
@@ -21,6 +20,7 @@ import {
 } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverInterface, POPOVER_COMPONENT } from '../popover.interface';
 import { takeUntil } from 'rxjs/operators';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fd-popover-mobile',
