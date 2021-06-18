@@ -162,6 +162,17 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     @Input() ariaLabelledby: string;
 
     /**
+     * Message announced by screen reader, when search suggestions opens.
+     */
+    @Input() searchSuggestionMessage = 'suggestions found.';
+
+    /**
+     * Second part of message for search suggestion.
+     * direction for navigating the suggestion. This is not necessry in case of 0 suggestion.
+     */
+    @Input() searchSuggestionNavigateMessage = 'use up and down arrows to navigate';
+
+    /**
      * Input change event.
      */
     @Output() inputChange: EventEmitter<SearchInput> = new EventEmitter();
@@ -217,8 +228,6 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     public dir = 'ltr';
     currentSearchSuggestionAnnoucementMessage = '';
 
-    private _searchSuggestionAnnoucementMessagePart1 = 'suggestions found';
-    private _searchSuggestionAnnoucementMessagePart2 = 'use up and down arrows to navigate';
     private _suggestionOverlayRef: OverlayRef;
     private _suggestionPortal: TemplatePortal;
     private _suggestionkeyManager: FocusKeyManager<SearchFieldSuggestionDirective>;
@@ -478,7 +487,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         let count = 0;
         this.suggestions?.forEach((suggestion) => {
             if (this.inputText && suggestion.value?.toLowerCase().indexOf(this.inputText?.trim()?.toLowerCase()) > -1) {
-                count = count + 1;
+                count++;
             }
         });
         return count;
@@ -512,8 +521,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         const suggestionCount = this.getSuggestionsLength();
         this.currentSearchSuggestionAnnoucementMessage =
             suggestionCount +
-            this._searchSuggestionAnnoucementMessagePart1 +
-            (suggestionCount > 0 ? this._searchSuggestionAnnoucementMessagePart2 : '');
+            this.searchSuggestionMessage +
+            (suggestionCount > 0 ? this.searchSuggestionNavigateMessage : '');
     }
 }
 
