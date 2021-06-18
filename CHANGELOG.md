@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.10...v0.31.0-rc.11) (2021-06-18)
+
+
+### Bug Fixes
+
+* **core:** fix a11y for Facets component ([#5687](https://github.com/SAP/fundamental-ngx/issues/5687)) ([2dc59df](https://github.com/SAP/fundamental-ngx/commit/2dc59dff9b21d72e548e5fa4a96b89e6826dab32))
+
 ## [0.31.0-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.9...v0.31.0-rc.10) (2021-06-18)
 
 
