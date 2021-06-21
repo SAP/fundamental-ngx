@@ -10,7 +10,7 @@
 
 <div>
     This is an Example of
-    <fdp-link href="http://www.google.com" title="Extra info as tooltip text" linkType="subtle">
+    <fdp-link href="http://www.google.com" [title]="'Extra info as tooltip text'" linkType="subtle">
         Subtle Link
     </fdp-link>
     text after link
@@ -57,7 +57,7 @@
 <br />
 <br />
 <p>Example of using image file as link.</p>
-<fdp-link [id]="'img-link'" [href]="'https://www.google.com/'" i18n-title title="On click you will get to target page">
+<fdp-link [id]="'img-link'" [href]="'https://www.google.com/'" i18n-title [title]="'On click you will get to target page'">
     <img src="https://picsum.photos/id/1021/50/50" />
 </fdp-link>
 <br />
@@ -76,7 +76,7 @@
 <br />
 <p>Example for specifiying relation between documents.</p>
 <fdp-link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
- title="Specify relation between document">
+ [title]="'Specify relation between document'">
     Specify relation between document
 </fdp-link>
 <br />
