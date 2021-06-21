@@ -417,12 +417,12 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    checkboxChanged(event: boolean, value: any): void {
-        this.handleSelect(event, value, null, true)
+    _checkboxChanged(event: boolean, value: any): void {
+        this._handleSelect(event, value, null, true)
     }
 
     /** @hidden */
-    handleSelect(checked: boolean, value: any, event?: MouseEvent, fromCheckbox?: boolean): void {
+    _handleSelect(checked: boolean, value: any, event?: MouseEvent, fromCheckbox?: boolean): void {
         if (event) {
             event.preventDefault(); // prevent this function from being called twice when checkbox updates
             this._resetSearchTerm();
@@ -498,7 +498,7 @@ export class MultiInputComponent implements
         if (this.allowNewTokens && this.newTokenValidateFn(this.searchTerm)) {
             const newToken = this.newTokenParseFn(this.searchTerm);
             this.dropdownValues.push(newToken);
-            this.handleSelect(true, newToken);
+            this._handleSelect(true, newToken);
             this._applySearchTermChange('');
             this.open = false;
         }

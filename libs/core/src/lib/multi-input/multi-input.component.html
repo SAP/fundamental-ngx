@@ -54,7 +54,7 @@
                 *ngFor="let token of selected"
                 [compact]="compact"
                 [disabled]="disabled"
-                (onCloseClick)="handleSelect(false, token, $event)"
+                (onCloseClick)="_handleSelect(false, token, $event)"
             >
                 <span [innerHtml]="token | displayFnPipe: displayFn"></span>
             </fd-token>
@@ -93,12 +93,12 @@
         <li
             *ngFor="let value of displayedValues"
             fd-list-item
-            (click)="handleSelect(selected.indexOf(value) === -1, value, $event)"
+            (click)="_handleSelect(selected.indexOf(value) === -1, value, $event)"
             [selected]="selected.indexOf(value) !== -1"
         >
             <fd-checkbox
                 [compact]="compact"
-                (ngModelChange)="checkboxChanged($event, value)"
+                (ngModelChange)="_checkboxChanged($event, value)"
                 [ngModel]="selected.indexOf(value) !== -1">
             </fd-checkbox>
             <ng-container

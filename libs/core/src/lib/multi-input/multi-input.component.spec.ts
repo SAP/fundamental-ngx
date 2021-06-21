@@ -173,7 +173,7 @@ describe('MultiInputComponent', () => {
 
         await fixture.whenStable();
 
-        component.handleSelect(true, component.dropdownValues[0]);
+        component._handleSelect(true, component.dropdownValues[0]);
 
         expect(component.onChange).not.toHaveBeenCalled();
         expect(component.selectedChange.emit).not.toHaveBeenCalled();
@@ -193,7 +193,7 @@ describe('MultiInputComponent', () => {
 
         await fixture.whenStable();
 
-        component.handleSelect(true, component.dropdownValues[0]);
+        component._handleSelect(true, component.dropdownValues[0]);
 
         expect(component.onChange).not.toHaveBeenCalled();
         expect(component.selectedChange.emit).not.toHaveBeenCalled();
@@ -206,17 +206,15 @@ describe('MultiInputComponent', () => {
         expect(component.selected).toEqual([component.dropdownValues[0]]);
     });
 
-    it('should focus the input and clear the search term after selection', async() => {
-        const inputFocusSpy = spyOn(component.searchInputElement.nativeElement, 'focus');
+    it('should clear the search term after selection', async() => {
         const event = new MouseEvent('click');
 
         await fixture.whenStable();
 
         component.searchTerm = 'search';
 
-        component.handleSelect(true, component.dropdownValues[0], event);
+        component._handleSelect(true, component.dropdownValues[0], event);
 
-        expect(inputFocusSpy).toHaveBeenCalled();
         expect(component.searchTerm).toBe('');
     });
 
