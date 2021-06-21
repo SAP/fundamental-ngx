@@ -7,6 +7,7 @@ import {
     EventEmitter,
     Host,
     Input,
+    OnInit,
     OnDestroy,
     Optional,
     Output,
@@ -22,15 +23,13 @@ import { ENTER } from '@angular/cdk/keycodes';
 import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import {
-    FocusEscapeDirection,
-    KeyUtil,
-    ListComponent,
-    MobileModeConfig,
-    TemplateDirective,
-    PopoverFillMode,
-    ContentDensityService
-} from '@fundamental-ngx/core';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { MobileModeConfig} from '@fundamental-ngx/core/mobile-mode';
+import { ListComponent } from '@fundamental-ngx/core/list';
+import { FocusEscapeDirection,
+         KeyUtil,
+         TemplateDirective,
+         ContentDensityService} from '@fundamental-ngx/core/utils';
 import {
     isOptionItem,
     OptionItem
@@ -54,7 +53,7 @@ export class FdpSelectionChangeEvent {
 }
 
 @Directive()
-export abstract class BaseSelect extends CollectionBaseInput implements AfterViewInit, OnDestroy {
+export abstract class BaseSelect extends CollectionBaseInput implements OnInit, AfterViewInit, OnDestroy {
 
     /** Provides maximum default height for the optionPanel */
     @Input()
@@ -178,16 +177,17 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
     maxWidth?: number;
 
     /**
-     * content Density of element. 'cozy' | 'compact'| 'condensed'
+     * content Density of element. 'cozy' | 'compact'
      */
     @Input()
     set contentDensity(contentDensity: ContentDensity) {
-
-        if (this.isCompact === undefined && this._contentDensityService) {
+        if (contentDensity === undefined && this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.isCompact = density !== 'cozy';
-                this._cd.markForCheck();
+                this._isCompact = density !== 'cozy';
+                this.cd.markForCheck();
             }))
+        } else {
+            this._isCompact = contentDensity !== 'cozy';
         }
     }
 
@@ -200,6 +200,10 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
         if (value) {
             this._optionItems = this._convertToOptionItems(value);
         }
+    }
+
+    get canClose(): boolean {
+        return !(this.mobile && this.mobileConfig.approveButtonText);
     }
 
     /** Event emitted when item is selected. */
@@ -232,26 +236,13 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
     _selectedItemTemplate: TemplateRef<any>;
 
     /** @hidden */
-    searchInputElement: ElementRef;
-
-    /** @hidden */
-   // _contentDensity: ContentDensity = this.selectConfig.contentDensity;
-
-    /** @hidden */
     _contentDensityService: ContentDensityService;
 
     /**
      * @hidden
      * Whether "contentDensity" is "compact"
      */
-    isCompact: boolean;
-
-    /** Whether the select is opened. */
-    isOpen = false;
-
-    get canClose(): boolean {
-        return !(this.mobile && this.mobileConfig.approveButtonText);
-    }
+    _isCompact: boolean;
 
     /**
      * List of option items
@@ -259,12 +250,21 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
      * */
     _optionItems: OptionItem[];
 
+    /** @hidden */
+    _subscriptions = new Subscription();
+
+    /** @hidden */
+    private _searchInputElement: ElementRef;
+
+    /** Whether the select is opened. */
+    private _isOpen = false;
+
     /**
      * Need for opening mobile version
      *
      * @hidden
      */
-    openChange = new Subject<boolean>();
+    private _openChange = new Subject<boolean>();
 
     /** @hidden */
     private _dsSubscription?: Subscription;
@@ -285,6 +285,20 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
         super(cd, ngControl, ngForm, formField, formControl);
     }
 
+    /** @hidden
+     * extended by super class
+    */
+    ngOnInit(): void {
+        if (this.contentDensity === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this._isCompact = density !== 'cozy';
+                this.cd.markForCheck();
+            }))
+        } else {
+            this._isCompact = this.contentDensity !== 'cozy';
+        }
+    }
+
     /** @hidden */
     ngAfterViewInit(): void {
         this._initWindowResize();
@@ -295,6 +309,8 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
     /** @hidden */
     ngOnDestroy(): void {
         super.ngOnDestroy();
+
+        this._subscriptions.unsubscribe();
 
         if (this._dsSubscription) {
             this._dsSubscription.unsubscribe();
@@ -351,9 +367,9 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
             }
         }
 
-        if (this.isOpen && (forceClose || this.canClose)) {
-            this.isOpen = false;
-            this.openChange.next(this.isOpen);
+        if (this._isOpen && (forceClose || this.canClose)) {
+            this._isOpen = false;
+            this._openChange.next(this._isOpen);
             this.cd.markForCheck();
             this.onTouched();
         }
@@ -362,10 +378,10 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
 
     /** @hidden */
     showList(isOpen: boolean): void {
-        if (this.isOpen !== isOpen) {
-            this.isOpen = isOpen;
+        if (this._isOpen !== isOpen) {
+            this._isOpen = isOpen;
             this.onTouched();
-            this.openChange.next(isOpen);
+            this._openChange.next(isOpen);
         }
 
         this.cd.detectChanges();
@@ -391,7 +407,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
     /** Method passed to list component */
     handleListFocusEscape(direction: FocusEscapeDirection): void {
         if (direction === 'up') {
-            this.searchInputElement.nativeElement.focus();
+            this._searchInputElement.nativeElement.focus();
         }
     }
 
@@ -449,9 +465,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
      * @hidden
      */
     private _convertObjectsToOptionItems(items: any[]): OptionItem[] {
-        // if (this.group && this.groupKey) {
-        //     return this._convertObjectsToGroupOptionItems(items);
-        // } else
         if (this.showSecondaryText && this.secondaryKey) {
             return this._convertObjectsToSecondaryOptionItems(items);
         } else {

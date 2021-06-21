@@ -19,7 +19,7 @@ import {
 import { NgControl, NgForm } from '@angular/forms';
 
 
-import { SelectComponent as CoreSelect} from '@fundamental-ngx/core';
+import { SelectComponent as CoreSelect } from '@fundamental-ngx/core';
 
 import { DynamicComponentService, FdSelectChange, SelectControlState } from '@fundamental-ngx/core';
 import { OptionItem } from '../../../../domain';
