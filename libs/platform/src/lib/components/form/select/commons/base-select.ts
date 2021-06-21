@@ -28,7 +28,8 @@ import {
     ListComponent,
     MobileModeConfig,
     TemplateDirective,
-    PopoverFillMode
+    PopoverFillMode,
+    ContentDensityService
 } from '@fundamental-ngx/core';
 import {
     isOptionItem,
@@ -54,7 +55,7 @@ export class FdpSelectionChangeEvent {
 
 @Directive()
 export abstract class BaseSelect extends CollectionBaseInput implements AfterViewInit, OnDestroy {
-   
+
     /** Provides maximum default height for the optionPanel */
     @Input()
     maxHeight = '250px';
@@ -111,7 +112,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
     @Input()
     readonly = false;
 
-    /** Placeholder for the select. Appears in the 
+    /** Placeholder for the select. Appears in the
     * triggerbox if no option is selected. */
     @Input()
     placeholder: string;
@@ -177,12 +178,17 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
     maxWidth?: number;
 
     /**
-     * content Density of element. 'cozy' | 'compact'
+     * content Density of element. 'cozy' | 'compact'| 'condensed'
      */
     @Input()
     set contentDensity(contentDensity: ContentDensity) {
-        this._contentDensity = contentDensity;
-        this.isCompact = contentDensity === 'compact';
+
+        if (this.isCompact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.isCompact = density !== 'cozy';
+                this._cd.markForCheck();
+            }))
+        }
     }
 
     /** Data for suggestion list */
@@ -229,13 +235,16 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
     searchInputElement: ElementRef;
 
     /** @hidden */
-    _contentDensity: ContentDensity = this.selectConfig.contentDensity;
+   // _contentDensity: ContentDensity = this.selectConfig.contentDensity;
+
+    /** @hidden */
+    _contentDensityService: ContentDensityService;
 
     /**
      * @hidden
      * Whether "contentDensity" is "compact"
      */
-    isCompact: boolean = this._contentDensity === 'compact';
+    isCompact: boolean;
 
     /** Whether the select is opened. */
     isOpen = false;
@@ -442,7 +451,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements AfterVie
     private _convertObjectsToOptionItems(items: any[]): OptionItem[] {
         // if (this.group && this.groupKey) {
         //     return this._convertObjectsToGroupOptionItems(items);
-        // } else 
+        // } else
         if (this.showSecondaryText && this.secondaryKey) {
             return this._convertObjectsToSecondaryOptionItems(items);
         } else {
