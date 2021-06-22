@@ -35,7 +35,6 @@
         [state]="status === 'error' ? 'error' : state"
         [buttonFocusable]="false"
         [disabled]="disabled"
-        [readOnly]="readonly"
         [isControl]="true"
         (addOnButtonClicked)="!mobile && onPrimaryButtonClick(_connectedOverlay.open)"
         [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
