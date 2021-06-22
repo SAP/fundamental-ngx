@@ -91,9 +91,11 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     @ContentChild(PopoverBodyComponent)
     popoverBody: PopoverBodyComponent;
 
+    /** @hidden - template for Dialog body content */
     @ContentChild('popoverBodyContent')
     popoverBodyContentTemplate: TemplateRef<any>;
 
+    /** @hidde - template for Dialog footer content */
     @ContentChild('popoverFooterContent')
     popoverFooterContentTemplate: TemplateRef<any>;
 
@@ -194,6 +196,7 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
         this._popoverService.refreshPosition();
     }
 
+    /** @hidden Select and instantiate popover view mode */
     private _setupView(): void {
         if (this.mobile) {
             this._setupMobileMode();
@@ -202,6 +205,7 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
         this._cdr.detectChanges();
     }
 
+    /** @hidden Open Popover in mobile mode */
     private _setupMobileMode(): void {
         this._mobileModeComponentRef = this._dynamicComponentService.createDynamicComponent(
             {
@@ -220,6 +224,7 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
         this._listenOnTriggerRefClicks();
     }
 
+    /** @hidden - Listen on popover trigger ref clicks */
     private _listenOnTriggerRefClicks(): void {
         this._destroyEventListeners();
 
@@ -230,6 +235,10 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
         }
     }
 
+    /**
+     * @hidden
+     * This is going to be removed in feature, on dialog and dynamic service component refactor
+     */
     private _destroyEventListeners(): void {
         if (this._clickEventListener) {
             this._clickEventListener();

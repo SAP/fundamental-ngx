@@ -30,16 +30,25 @@ import { DialogService } from '@fundamental-ngx/core/dialog';
     encapsulation: ViewEncapsulation.None,
 })
 export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> implements OnInit, OnDestroy {
+    /** @hidden
+     * from mobile class can not prefix _,
+     * to avoid build issues
+    */
     childContent: TemplateRef<any> = undefined;
 
+    /** @hidden */
     @ViewChild('dialogTemplate')
     _dialogTemplate: TemplateRef<any>;
 
+    /** Current popover title */
     title: string;
 
+    /** Dialog body content */
     viewBody: TemplateRef<any>;
+    /** Dialog footer content */
     viewFooter: TemplateRef<any>;
 
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     constructor(
@@ -52,6 +61,7 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
         super(elementRef, dialogService, _popoverComponent, MobileModeControl.POPOVER, mobileModes);
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this._listenOnPopoverOpenChange();
 
@@ -62,17 +72,20 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
         this._changeDetectorref.markForCheck();
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this.dialogRef.close();
         super.onDestroy();
         this._subscriptions.unsubscribe();
     }
 
+    /** Closes the Dialog and Popover component */
     close(): void {
         this.dialogRef.close();
         this._component.close();
     }
 
+    /** @hidden Opens/closes the Dialog based on Popover isOpenChange events */
     private _listenOnPopoverOpenChange(): void {
         this._subscriptions.add(
             this._component.isOpenChange
@@ -87,6 +100,7 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
         );
     }
 
+    /** @hidden Opens the Dialog */
     private _openDialog(): void {
         this.dialogRef = this._dialogService.open(this._dialogTemplate, {
             ...this.dialogConfig,
