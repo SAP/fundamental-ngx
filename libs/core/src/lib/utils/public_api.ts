@@ -51,3 +51,5 @@ export * from './consts';
 export * from './abstract-fd-ngx-class';
 
 export * from './list-item/list-item-utils';
+
+export * from './mixins/apply-mixin';

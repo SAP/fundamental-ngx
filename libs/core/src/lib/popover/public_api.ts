@@ -6,5 +6,8 @@ export * from './popover-control/popover-control.component';
 export * from './popover-control/popover-control.component';
 export * from './popover.component';
 export * from './popover-trigger.directive';
+export * from './popover-mobile/popover-mobile.module';
+export * from './popover-mobile/popover-mobile.component';
+export * from './popover.interface';
 export * from './popover-service/popover.service';
 export * from './base/base-popover.class';

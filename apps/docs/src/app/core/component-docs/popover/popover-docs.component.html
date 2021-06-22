@@ -197,3 +197,27 @@
     <fd-popover-dropdown-example></fd-popover-dropdown-example>
 </component-example>
 <code-example [exampleFiles]="dropdownPopover"></code-example>
+
+<separator></separator>
+<separator></separator>
+
+<fd-docs-section-title id="mobile-popover" componentName="popover">
+    Responsive Popover in mobile mode
+</fd-docs-section-title>
+<description>
+    To use Popover in mobile mode:
+    <ul>
+        <li>Set <code>[mobile]</code> property to true</li>
+        <li>Add <code>&lt;ng-template #popoverBodyContent&gt;...&lt;ng-template&gt;</code> inside <code>fd-popover</code> to pass popover body content from outside</li>
+        <li>Add <code>&lt;ng-template #popoverFooterContent&gt;...&lt;ng-template&gt;</code> inside <code>fd-popover</code> to pass popover footer content from outside</li>
+    </ul>
+
+    Popover Mobile Mode can be configured <strong>globally</strong> by providing <code>MOBILE_MODE_CONFIG</code> token.
+    Check <a [routerLink]="['/core/global-config']" fragment="mobile-mode-config">Global Configuration Page</a> for mobile information.
+</description>
+<component-example>
+    <fd-popover-mobile-example></fd-popover-mobile-example>
+</component-example>
+<code-example [exampleFiles]="mobilePopover"></code-example>
+
+<separator></separator>
