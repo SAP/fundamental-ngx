@@ -129,7 +129,7 @@ describe('MultiInputComponent', () => {
         await fixture.whenStable();
         spyOn(component.selectedChange, 'emit');
         spyOn(component, 'onChange');
-        spyOn(component, 'handleSelect').and.callThrough();
+        spyOn(component, '_handleSelect').and.callThrough();
         component.dropdownValues = ['test1', 'test2', 'foobar'];
         component.ngOnInit();
         fixture.detectChanges();
@@ -147,7 +147,7 @@ describe('MultiInputComponent', () => {
         await fixture.whenStable();
         spyOn(component.selectedChange, 'emit');
         spyOn(component, 'onChange');
-        spyOn(component, 'handleSelect').and.callThrough();
+        spyOn(component, '_handleSelect').and.callThrough();
         component.dropdownValues = ['test1', 'test2', 'foobar'];
         component.ngOnInit();
         component.open = true;
