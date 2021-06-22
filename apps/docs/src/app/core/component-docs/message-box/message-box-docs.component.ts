@@ -124,13 +124,13 @@ export class MessageBoxDocsComponent {
             name: 'Message box complex',
             fileName: 'complex-template-example',
             component: 'ComplexTemplateExampleComponent',
+            main: true,
             entryComponent: true
         },
         {
             language: 'typescript',
             code: complexTemplateExampleTs,
             entryComponent: true,
-            main: true,
             fileName: 'message-box-complex-example',
             component: 'MessageBoxComplexExampleComponent'
         }
