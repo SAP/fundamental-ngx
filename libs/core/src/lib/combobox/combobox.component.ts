@@ -357,7 +357,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.mobile) {
+        if (this.mobile || this.readOnly) {
             this.showDropdownButton = false;
         }
         this._refreshDisplayedValues();

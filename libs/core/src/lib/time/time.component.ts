@@ -258,8 +258,17 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
      * This implicitly changes hours by +/- 12
      */
     handleMeridianChange(meridian: Meridian): void {
-        const hourOffset: number = meridian === Meridian.AM ? -12 : 12;
-        const currentHour = this._getModelHour();
+        let hourOffset: number = meridian === Meridian.AM ? -12 : 12;
+        let currentHour = this._getModelHour();
+
+        if (currentHour > 12 && meridian === Meridian.PM) {
+            currentHour -= 12;
+        } else if (currentHour === 12) {
+            currentHour = 0;
+        } else if (currentHour < 12 && meridian === Meridian.AM) {
+            hourOffset = 0;
+        }
+        
         const newHour = Math.max(0, Math.min(23, currentHour + hourOffset));
 
         this.handleHourChange(newHour);

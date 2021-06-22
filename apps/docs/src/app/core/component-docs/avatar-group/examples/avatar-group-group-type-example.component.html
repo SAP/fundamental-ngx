@@ -9,13 +9,16 @@
                 placement="bottom"
                 maxWidth="312"
                 #overflowPopover>
-        <fd-popover-control tabindex="0"
+        <fd-popover-control fd-avatar-group-popover-control
+                            [attr.aria-label]="'Has popup type dialog Conjoined avatars, ' + (people?.length - avatarGroup_GroupType?.overflowItemsCount)
+            + ' avatars displayed, ' + avatarGroup_GroupType?.overflowItemsCount + ' avatars hidden, activate for complete list'"
                             (click)="handleControlClick($event, overflowPopover)"
                             (keydown)="handleControlKeydown($event, overflowPopover)">
             <div *ngFor="let person of people" fd-avatar-group-item>
                 <fd-avatar *ngIf="!person.imageUrl && !person.glyph"
                            [label]="person.firstName + ' ' + person.lastName"
                            [title]="person.firstName + ' ' + person.lastName"
+                           [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
                            role="img"
                            [circle]="true"
                            [border]="true"
@@ -24,6 +27,7 @@
                 <fd-avatar *ngIf="person.imageUrl"
                            role="img"
                            [title]="person.firstName + ' ' + person.lastName"
+                           [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
                            [circle]="true"
                            [border]="true"
                            [size]="size"
@@ -32,6 +36,7 @@
                 <fd-avatar *ngIf="person.glyph"
                            role="img"
                            [title]="person.firstName + ' ' + person.lastName"
+                           [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
                            [circle]="true"
                            [border]="true"
                            [size]="size"
@@ -41,13 +46,14 @@
                     fd-button
                     fd-avatar-group-overflow-button
                     tabindex="-1"
+                    [compact]="false"
                     [size]="size">
                 <bdi fd-avatar-group-overflow-button-text>
                     +{{ avatarGroup_GroupType.overflowItemsCount }}
                 </bdi>
             </button>
         </fd-popover-control>
-        <fd-popover-body #overflowPopoverBody>
+        <fd-popover-body #overflowPopoverBody aria-labelledby="avatar-group-1-popover-header" role="tooltip">
             <div class="fd-popover__wrapper">
                 <div fd-popover-body-header>
                     <div fd-bar barDesign="header">
@@ -59,7 +65,7 @@
                                            aria-label="Back"
                                            title="Back"
                             ></fd-button-bar>
-                            <fd-bar-element>
+                            <fd-bar-element id="avatar-group-1-popover-header">
                                 {{ isDetailStage ? 'Business Card' : 'Team Members (' + people.length + ')' }}
                             </fd-bar-element>
                             <fd-bar-element *ngIf="isDetailStage">&nbsp;</fd-bar-element>
@@ -81,6 +87,7 @@
                                            size="s"
                                            [label]="person.firstName + ' ' + person.lastName"
                                            [title]="person.firstName + ' ' + person.lastName"
+                                           [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
                                            role="img"
                                            (click)="openOverflowDetails(idx)"
                                            (keydown.enter)="openOverflowDetails(idx)"
@@ -90,6 +97,7 @@
                                            fd-avatar-group-focusable-avatar
                                            role="img"
                                            [title]="person.firstName + ' ' + person.lastName"
+                                           [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
                                            [circle]="true"
                                            size="s"
                                            [image]="person.imageUrl"
@@ -101,6 +109,7 @@
                                            fd-avatar-group-focusable-avatar
                                            role="img"
                                            [title]="person.firstName + ' ' + person.lastName"
+                                           [ariaLabel]="person.firstName + ' ' + person.lastName + ' avatar'"
                                            [circle]="true"
                                            size="s"
                                            [glyph]="person.glyph"
@@ -118,20 +127,23 @@
                                 <fd-avatar *ngIf="!personDetails.imageUrl && !personDetails.glyph"
                                            [circle]="true"
                                            size="s"
-                                           [label]="personDetails.firstName + ' ' + personDetails.lastName"
                                            role="img"
-                                           [title]="personDetails.firstName + ' ' + personDetails.lastName"></fd-avatar>
+                                           [label]="personDetails.firstName + ' ' + personDetails.lastName"
+                                           [title]="personDetails.firstName + ' ' + personDetails.lastName"
+                                           [ariaLabel]="personDetails.firstName + ' ' + personDetails.lastName + ' avatar'"></fd-avatar>
                                 <fd-avatar *ngIf="personDetails.imageUrl"
                                            [circle]="true"
                                            size="s"
                                            role="img"
                                            [title]="personDetails.firstName + ' ' + personDetails.lastName"
+                                           [ariaLabel]="personDetails.firstName + ' ' + personDetails.lastName + ' avatar'"
                                            [image]="personDetails.imageUrl"></fd-avatar>
                                 <fd-avatar *ngIf="personDetails.glyph"
                                            [circle]="true"
                                            size="s"
                                            role="img"
                                            [title]="personDetails.firstName + ' ' + personDetails.lastName"
+                                           [ariaLabel]="personDetails.firstName + ' ' + personDetails.lastName + ' avatar'"
                                            [glyph]="personDetails.glyph"></fd-avatar>
                                 <fd-quick-view-subheader-title>{{ personDetails.firstName }} {{ personDetails.lastName }}</fd-quick-view-subheader-title>
                                 <fd-quick-view-subheader-subtitle>{{ personDetails.position }}</fd-quick-view-subheader-subtitle>
@@ -142,21 +154,21 @@
                                 <fd-quick-view-group-item>
                                     <fd-quick-view-group-item-label>Phone</fd-quick-view-group-item-label>
                                     <fd-quick-view-group-item-content>
-                                        <a [href]="'tel:' + personDetails.phone" [innerText]="personDetails.phone"></a>
+                                        <a fd-link [href]="'tel:' + personDetails.phone" [innerText]="personDetails.phone"></a>
                                     </fd-quick-view-group-item-content>
                                 </fd-quick-view-group-item>
 
                                 <fd-quick-view-group-item>
                                     <fd-quick-view-group-item-label>Mobile</fd-quick-view-group-item-label>
                                     <fd-quick-view-group-item-content>
-                                        <a [href]="'tel:' + personDetails.mobile" [innerText]="personDetails.mobile"></a>
+                                        <a fd-link [href]="'tel:' + personDetails.mobile" [innerText]="personDetails.mobile"></a>
                                     </fd-quick-view-group-item-content>
                                 </fd-quick-view-group-item>
 
                                 <fd-quick-view-group-item>
                                     <fd-quick-view-group-item-label>Email</fd-quick-view-group-item-label>
                                     <fd-quick-view-group-item-content>
-                                        <a [href]="'mailto:' + personDetails.email" [innerText]="personDetails.email"></a>
+                                        <a fd-link [href]="'mailto:' + personDetails.email" [innerText]="personDetails.email"></a>
                                     </fd-quick-view-group-item-content>
                                 </fd-quick-view-group-item>
                             </fd-quick-view-group>

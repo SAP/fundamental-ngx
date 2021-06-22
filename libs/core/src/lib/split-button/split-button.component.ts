@@ -30,10 +30,7 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 export const splitButtonTextClass = 'fd-button-split__text';
 export const splitButtonTextCompactClass = 'fd-button-split__text--compact';
-const splitButtonTextClasses = [
-    splitButtonTextClass,
-    splitButtonTextCompactClass
-]
+const splitButtonTextClasses = [splitButtonTextClass, splitButtonTextCompactClass];
 
 /**
  * Split Button component, used to enhance standard HTML button and add possibility to put some dropdown with
@@ -64,7 +61,6 @@ const splitButtonTextClasses = [
     encapsulation: ViewEncapsulation.None
 })
 export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDestroy, OnInit, AfterViewInit {
-
     /** Whether to apply compact mode to the button. */
     @Input()
     compact?: boolean;
@@ -122,6 +118,10 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     mainActionBtn: ElementRef;
 
     /** @hidden */
+    @ViewChild('menuActionButton', { read: ElementRef })
+    menuActionBtn: ElementRef;
+
+    /** @hidden */
     mainButtonWidth: string;
 
     /** @hidden */
@@ -134,9 +134,11 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     private _contentDensitySubscription = new Subscription();
 
     /** @hidden */
+    private _menuActivePathSubscription = new Subscription();
+
+    /** @hidden */
     constructor(
         private _cdRef: ChangeDetectorRef,
-        private _elRef: ElementRef,
         @Optional() private _contentDensityService: ContentDensityService,
         private _renderer: Renderer2
     ) {}
@@ -175,6 +177,16 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         } else if (!this.mainActionTitle && this.selected) {
             this.selectMenuItem(this.selected);
         }
+
+        this._menuActivePathSubscription.add(
+            this.menu.activePath.subscribe((items) => {
+                const lastItem = items[items.length - 1];
+                if (lastItem && !lastItem.submenu) {
+                    this.menu.close();
+                    this.menuActionBtn.nativeElement.focus();
+                }
+            })
+        );
     }
 
     /** @hidden */
@@ -200,6 +212,7 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         this._menuItemSubscriptions.unsubscribe();
         this._menuSubscription.unsubscribe();
         this._contentDensitySubscription.unsubscribe();
+        this._menuActivePathSubscription.unsubscribe();
     }
 
     /** Function called to select a menu item for the split button. */
@@ -266,11 +279,11 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
         if (!textSpanElement) {
             return;
         }
-        splitButtonTextClasses.forEach(_class => this._renderer.removeClass(textSpanElement, _class));
+        splitButtonTextClasses.forEach((_class) => this._renderer.removeClass(textSpanElement, _class));
         if (this.compact) {
-            this._renderer.addClass(textSpanElement, splitButtonTextCompactClass)
+            this._renderer.addClass(textSpanElement, splitButtonTextCompactClass);
         } else {
-            this._renderer.addClass(textSpanElement, splitButtonTextClass)
+            this._renderer.addClass(textSpanElement, splitButtonTextClass);
         }
     }
 }

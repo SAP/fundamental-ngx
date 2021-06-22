@@ -75,6 +75,6 @@ export class GridListMultiSelectExampleComponent {
     }
 
     navigate(event: GridListItemOutputEvent<number>): void {
-        console.log('Navigation event', event);
+        alert('Navigation event value is: ' + event.value);
     }
 }
