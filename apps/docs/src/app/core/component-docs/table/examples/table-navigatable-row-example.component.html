@@ -1,0 +1,103 @@
+<h4 class="table-example-popin-title">Entire row as navigation</h4>
+<table fd-table>
+    <thead fd-table-header [noBorderX]="true">
+    <tr fd-table-row>
+        <th fd-table-cell>Column 1</th>
+        <th fd-table-cell>Column 2</th>
+        <th fd-table-cell>Column 3</th>
+        <th fd-table-cell>Date</th>
+        <th fd-table-cell></th>
+    </tr>
+    </thead>
+    <tbody fd-table-body [noBorderX]="true">
+        <tr *ngFor="let row of tableRows; let i = index" fd-table-row [attr.aria-selected]="row.checked" (click)="alert(row)"
+        [activable]="true" [hoverable]="true" [navigatable]="row.navigatable" >
+            <td fd-table-cell><a fd-link href="#">{{ row.column1 }}</a></td>
+            <td fd-table-cell>{{ row.column2 }}</td>
+            <td fd-table-cell>{{ row.column3 }}</td>
+            <td fd-table-cell>{{ row.date }}</td>
+            <td fd-table-cell [fitContent]="true" [noPadding]="true">
+                <i fd-table-icon [glyph]="getGlyph(row)" [navigation]="row.navigatable" role="presentation"></i>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<br>
+
+<h4 class="table-example-popin-title">Row with navigation button</h4>
+<table fd-table>
+    <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell>Column 1</th>
+            <th fd-table-cell>Column 2</th>
+            <th fd-table-cell>Column 3</th>
+            <th fd-table-cell>Column 4</th>
+            <th fd-table-cell></th>
+        </tr>
+    </thead>
+    <tbody fd-table-body>
+        <tr *ngFor="let row of tableRowsAdditional" fd-table-row [hoverable]="true" [navigatable]="row.navigatable">
+            <td fd-table-cell>
+                <a fd-link href="#">{{ row.column1 }}</a>
+            </td>
+            <td fd-table-cell>
+                <p fd-table-text>
+                    {{ row.column2 }}
+                </p>
+            </td>
+            <td fd-table-cell>{{ row.date }}</td>
+            <td fd-table-cell><fd-icon [glyph]="row.type"></fd-icon></td>
+            <td fd-table-cell [fitContent]="true">
+                <button aria-label="navigation" class="fd-button fd-button--transparent" [disabled]="!row.navigatable" [routerLink]="'/core/home'">
+                    <i [ngClass]="getClass()"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div style="max-width: 450px; padding-bottom: 50px">
+    <h4 class="table-example-popin-title">Mobile Mode</h4>
+    <table fd-table [popIn]="true" [noBorderX]="true" [noBorderY]="true" [responsive]="true">
+        <thead fd-table-header>
+        <tr fd-table-row>
+            <th fd-table-cell>Fruit Description</th>
+            <th fd-table-cell>Price</th>
+            <th fd-table-cell></th>
+        </tr>
+        </thead>
+        <tbody fd-table-body>
+        <ng-container *ngFor="let fruit of fruits">
+            <tr fd-table-row [main]="true" [activable]="true" [navigatable]="fruit.navigatable" (click)="alert(fruit)"> 
+                <td fd-table-cell>
+                    <p fd-table-text [title]="true">{{fruit.name}}</p>
+                    <p fd-table-text>{{fruit.country}}</p>
+                </td>
+                <td fd-table-cell [fitContent]="true">
+                    {{fruit.price}}
+                </td>
+                <td fd-table-cell [fitContent]="true" [noPadding]="true">
+                    <i fd-table-icon [glyph]="getGlyph(fruit)" [navigation]="fruit.navigatable" role="presentation"></i>
+                </td>
+            </tr>
+            <tr fd-table-row [secondary]="true" [navigable]="fruit.navigable">
+                <td fd-table-cell colspan="100%">
+                    <p fd-table-text>
+                        <label fd-form-label>Status:</label>
+                        <span fd-object-status [status]="fruit.status">{{fruit.statusName}}</span>
+                    </p>
+                    <p fd-table-text>
+                        <label fd-form-label>Date Of Expire:</label>
+                        {{fruit.dateOfExpire}}
+                    </p>
+                    <p fd-table-text>
+                        <label fd-form-label>Description:</label>
+                        {{fruit.description}}
+                    </p>
+                </td>
+            </tr>
+        </ng-container>
+        </tbody>
+    </table>
+</div>

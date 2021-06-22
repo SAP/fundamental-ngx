@@ -2,6 +2,7 @@
     [id]="id"
     tabindex="0"
     class="fd-grid-list__item"
+    role="option"
     [class.is-navigated]="isNavigated"
     [class.is-selected]="!!_selectedItem || _selectedItem === 0"
     [class.fd-grid-list__item--link]="_isActive && (type === 'active' || type === 'detailsAndActive')"
@@ -14,6 +15,7 @@
     [attr.aria-label]="ariaLabel"
     (mouseover)="_setActive($event, false)"
     (mouseout)="_setActive($event, true)"
+    [attr.aria-selected]="selectionMode === 'none' ? null : !!_selectedItem || _selectedItem === 0"
 >
     <span
         *ngIf="status"
@@ -137,6 +139,7 @@
         [attr.tabindex]="selectionMode === 'singleSelect' ? -1 : 0"
         type="radio"
         class="fd-radio fd-radio--compact fd-grid-list__radio-input"
+        [style.display]="selectionMode === 'singleSelect' ? 'none' : ''"
         [id]="id + '-radio'"
         [name]="'fd-grid-list-item-toolbar-' + selectionMode"
         [attr.aria-label]="ariaLabel"

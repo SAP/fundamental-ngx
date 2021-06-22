@@ -31,6 +31,8 @@ import * as tableCustomHtml from '!raw-loader!./examples/table-custom-columns-ex
 import * as tableFocusableHtml from '!raw-loader!./examples/table-focusable-example/table-focusable-example.component.html';
 import * as tableCustomTs from '!raw-loader!./examples/table-custom-columns-example/table-custom-columns-example.component.ts';
 import * as tableDialogCustom from '!raw-loader!./examples/table-custom-columns-example/table-custom-dialog.component.ts';
+import * as tableNavigatableRowHtml from '!raw-loader!./examples/table-navigatable-row-example.component.html';
+import * as tableNavigatableRowTs from '!raw-loader!./examples/table-navigatable-row-example.component.ts';
 import * as tableFilterPipe from '!raw-loader!../../../documentation/core-helpers/pipes/filter.pipe.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -114,6 +116,20 @@ export class TableDocsComponent {
             component: 'TablePopinExampleComponent',
             code: tablePopInHTs,
             fileName: 'table-popin-example'
+        }
+    ];
+
+    tableNavigatableRowExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tableNavigatableRowHtml,
+            fileName: 'table-navigatable-row-example'
+        },
+        {
+            language: 'typescript',
+            component: 'TableNavigatableRowExampleComponent',
+            code: tableNavigatableRowTs,
+            fileName: 'table-navigatable-row-example'
         }
     ];
 

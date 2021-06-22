@@ -24,7 +24,7 @@ import {
     OnChanges,
     Self
 } from '@angular/core';
-import { ControlValueAccessor, NgControl} from '@angular/forms';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { Subject, Subscription, merge, Observable, defer } from 'rxjs';
@@ -79,13 +79,13 @@ export class FdSelectChange {
     ]
 })
 export class SelectComponent implements
-           ControlValueAccessor,
-           SelectInterface,
-           OnInit,
-           AfterViewInit,
-           AfterContentInit,
-           OnChanges ,
-           OnDestroy {
+    ControlValueAccessor,
+    SelectInterface,
+    OnInit,
+    AfterViewInit,
+    AfterContentInit,
+    OnChanges,
+    OnDestroy {
 
     /** Id of the control. */
     @Input()
@@ -260,15 +260,15 @@ export class SelectComponent implements
     /** @hidden
     * Combined stream of all of the child options' change events.
     */
-   readonly _optionSelectionChanges: Observable<FdOptionSelectionChange> = defer(() => {
-    const _options = this._options;
+    readonly _optionSelectionChanges: Observable<FdOptionSelectionChange> = defer(() => {
+        const _options = this._options;
 
-    if (_options) {
-        return _options.changes.pipe(
-            startWith(_options),
-            switchMap(() => merge(..._options.map((option) => option.selectionChange)))
-        );
-     }
+        if (_options) {
+            return _options.changes.pipe(
+                startWith(_options),
+                switchMap(() => merge(..._options.map((option) => option.selectionChange)))
+            );
+        }
     }) as Observable<FdOptionSelectionChange>;
 
     /**
@@ -291,6 +291,12 @@ export class SelectComponent implements
     @HostListener('window:resize')
     _resizeScrollHandler(): void {
         this._updateCalculatedHeight();
+    }
+
+    /** @hidden */
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+        this._tabIndex = this.disabled ? -1 : 0;
     }
 
     get selected(): OptionComponent {
@@ -342,7 +348,7 @@ export class SelectComponent implements
     }
 
     // /** @hidden */
-     _compareWith = (o1: any, o2: any) => o1 === o2;
+    _compareWith = (o1: any, o2: any) => o1 === o2;
     /**
      * Function to compare the option values with the selected values.
      */
@@ -540,8 +546,8 @@ export class SelectComponent implements
         isOpen ? this.open() : this.close();
     }
 
-      /** @hidden
-     * Returns _keyManagerService. */
+    /** @hidden
+   * Returns _keyManagerService. */
     _getKeyService(): SelectKeyManagerService {
         return this._keyManagerService;
     }
@@ -558,10 +564,10 @@ export class SelectComponent implements
     /** @hidden */
     _highlightCorrectOption(): void {
         if (this._keyManagerService._keyManager && this._selectionModel.isEmpty()) {
-                this._keyManagerService._keyManager.setFirstItemActive();
+            this._keyManagerService._keyManager.setFirstItemActive();
         } else if (this._keyManagerService._keyManager && !this._selectionModel.isEmpty()) {
-                this._keyManagerService._keyManager.setActiveItem(this.selected);
-            }
+            this._keyManagerService._keyManager.setActiveItem(this.selected);
+        }
     }
 
     /** @hidden */
@@ -715,8 +721,8 @@ export class SelectComponent implements
         } else {
             if (wasSelected !== option.selected) {
                 option.selected ?
-                this._selectionModel.select(option) :
-                this._selectionModel.deselect(option);
+                    this._selectionModel.select(option) :
+                    this._selectionModel.deselect(option);
             }
             if (isUserInput) {
                 this._keyManagerService._keyManager.setActiveItem(option);

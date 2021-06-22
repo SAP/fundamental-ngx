@@ -284,10 +284,14 @@
                             fd-dnd-item
                             role="row"
                             [hoverable]="_isShownSelectionColumn"
-                            [class.fdp-table__row--tree]="row.type === 'tree'"
+                            [class.fdp-table__row--tree]="_isTreeRow(row)"
                             [attr.aria-rowindex]="rowIdx"
                             [attr.aria-selected]="row.checked"
                             (started)="_dragDropStart()"
+                            [navigatable]="row.navigatable"
+                            [hoverable]="row.hasNavIndicator"
+                            [activable]="row.hasNavIndicator"
+                            [routerLink]="row.hasNavIndicator ? row.navigationTarget : './'"
                         >
                             <!-- Row Selection Cell -->
                             <ng-container [ngSwitch]="selectionMode">
@@ -329,9 +333,9 @@
                                 [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.name)"
                                 [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
                                 [class.fdp-table__cell--tree]="_isTreeRowFirstCell(colIdx, row)"
-                                [class.fdp-table__cell--tree-no-expand]="colIdx === 0 && isTreeTable && row.type === 'item'"
+                                [class.fdp-table__cell--tree-no-expand]="colIdx === 0 && isTreeTable && _isItemRow(row)"
                                 [ngStyle]="_freezableColumns?.includes(column.name) ? _getFreezableCellStyles(colIdx) : null"
-                                [attr.aria-expanded]="row.type === 'tree' ? row.expanded : null"
+                                [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
                                 [attr.data-nesting-level]="colIdx === 0 && row.level"
                                 [tabindex]="_isTreeRowFirstCell(colIdx, row) ? 0 : -1"
                                 [focusable]="_isTreeRowFirstCell(colIdx, row)"
@@ -346,6 +350,22 @@
                                     title="Toggle row"
                                     i18n-title="Toggle row|Toggle tree row children@@platformTableTreeRowToggle"
                                 ></fd-icon>
+
+                                <i 
+                                    *ngIf="_showNavIndicator(colIdx, row)"
+                                    fd-table-icon
+                                    [ngClass]="_rtl ? 'sap-icon--slim-arrow-left' : 'sap-icon--slim-arrow-right'"
+                                    class="fdp-table__navigation-indicator"
+                                ></i>
+
+                                <button 
+                                    *ngIf="_showNavButton(colIdx, row)"
+                                    class="fd-button fd-button--transparent" 
+                                    [disabled]="!row.navigatable"
+                                    [routerLink]="row.navigationTarget"
+                                >
+                                    <i [ngClass]="_rtl ? 'sap-icon--navigation-left-arrow' : 'sap-icon--navigation-right-arrow'"></i>
+                                </button>
 
                                 <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
                                     <ng-container *ngTemplateOutlet="column.columnCellTemplate; context:{$implicit: row.value}">

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import {
     ButtonModule,
@@ -65,6 +66,7 @@ import { FdpCellSelectableDirective } from './directives/table-cell-selectable.d
     imports: [
         CommonModule,
         FormsModule,
+        RouterModule,
 
         TableModule,
         ToolbarModule,

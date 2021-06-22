@@ -61,6 +61,7 @@ describe('Value help dialog test suite', function() {
 
         it('should check advanced search results', () => {
             click(openDialogBtn);
+            click(advSearchToggle);
             click(showAllBtn);
             const advSearchFieldCount = 6;
             const searchResultsColumnsArr = [productNameColumn, productCodeColumn, productCityColumn, productZipcodeColumn,
@@ -127,11 +128,11 @@ describe('Value help dialog test suite', function() {
 
         it('should check advanced search toggle', () => {
             click(openDialogBtn);
-            expect(doesItExist(advSearchOptions)).toBe(true);
-            click(advSearchToggle);
             expect(doesItExist(advSearchOptions)).toBe(false);
             click(advSearchToggle);
             expect(doesItExist(advSearchOptions)).toBe(true);
+            click(advSearchToggle);
+            expect(doesItExist(advSearchOptions)).toBe(false);
         });
 
         it('should check the remove conditions btn', () => {

@@ -55,6 +55,6 @@ export class GridListDeleteExampleComponent {
 
     delete(event: GridListItemOutputEvent<number>): void {
         this.list.splice(event.index, 1);
-        console.log('Deleted item event', event);
+        alert('Deleted item event ' + event.value);
     }
 }
