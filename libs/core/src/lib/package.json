@@ -18,14 +18,14 @@
     "@angular/forms": "ANGULAR_VER_PLACEHOLDER",
     "@angular/animations": "ANGULAR_VER_PLACEHOLDER",
     "@angular/router": "ANGULAR_VER_PLACEHOLDER",
-    "rxjs": "RXJS_VER_PLACEHOLDER",
+    "rxjs": "RXJS_VER_PLACEHOLDER"
+  },
+  "dependencies": {
     "@angular/cdk": "CDK_VER_PLACEHOLDER",
     "@sap-theming/theming-base-content": "THEMING_VER_PLACEHOLDER",
     "focus-trap": "FOCUSTRAP_VER_PLACEHOLDER",
     "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
-    "hammerjs": "HAMMERJS_VER_PLACEHOLDER"
-  },
-  "dependencies": {
+    "hammerjs": "HAMMERJS_VER_PLACEHOLDER",
     "tslib": "^2.0.0"
   }
 }
