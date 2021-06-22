@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.18...v0.31.0-rc.19) (2021-06-22)
+
+
+### Bug Fixes
+
+* **core:** fix disabled for select component in reactive form ([#5698](https://github.com/SAP/fundamental-ngx/issues/5698)) ([beec3d6](https://github.com/SAP/fundamental-ngx/commit/beec3d6bbaad32515c53f4ab7922f85fec812e80))
+
 ## [0.31.0-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.17...v0.31.0-rc.18) (2021-06-21)
 
 ## [0.31.0-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.16...v0.31.0-rc.17) (2021-06-21)
