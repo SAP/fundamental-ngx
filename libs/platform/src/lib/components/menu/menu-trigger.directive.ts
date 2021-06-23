@@ -10,12 +10,15 @@ import {
     AfterContentInit
 } from '@angular/core';
 import { Overlay, OverlayRef, OverlayConfig, ConnectedPosition } from '@angular/cdk/overlay';
-
-import { MenuComponent, MenuCloseMethod } from './menu.component';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { Subscription, fromEvent } from 'rxjs';
-import { MenuItemComponent } from './menu-item.component';
 import { take, filter } from 'rxjs/operators';
+import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
+
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+
+import { MenuComponent, MenuCloseMethod } from './menu.component';
+import { MenuItemComponent } from './menu-item.component';
 
 @Directive({
     selector: `[fdpMenuTriggerFor]`,
@@ -89,51 +92,49 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
     }
 
     /** @hidden Handle click on trigger element. */
-    @HostListener('click', ['$event']) onTriggerClick($event: MouseEvent): void {
+    @HostListener('click', ['$event']) onTriggerClick(event: MouseEvent): void {
         // Need to interupt default menu behavior of closing the menu
         if (this._isMenuItem()) {
-            $event.preventDefault();
-            $event.stopPropagation();
+            event.preventDefault();
+            event.stopPropagation();
         }
         // filter out clicks initiated by keyboard enter.
         // For IE 11, MouseEvent fires a MSPointerEvent object instead of MouseEvent.
-        if ($event.detail > 0 || ($event instanceof PointerEvent && $event.detail === 0)) {
+        if (event.detail > 0 || (event instanceof PointerEvent && event.detail === 0)) {
             this.toggleMenu();
         }
     }
 
     /** @hidden Handled keypress which focus is on trigger element. */
-    @HostListener('keydown', ['$event']) onTriggerKeydown($event: KeyboardEvent): void {
-        switch ($event.key) {
-            case 'Enter':
-                // Need to interupt default menu item behavior of closing the menu
-                if (this._isMenuItem()) {
-                    $event.preventDefault();
-                    $event.stopPropagation();
-                }
+    @HostListener('keydown', ['$event']) onTriggerKeydown(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+            if (KeyUtil.isKeyCode(event, [SPACE])) {
+                event.preventDefault();
+            }
+
+            // Need to interupt default menu item behavior of closing the menu
+            if (this._isMenuItem()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            if (this._menuItem) {
+                this._menuItem.isSelected = true;
+            }
+            this.openMenu();
+        } else if (KeyUtil.isKeyCode(event, [RIGHT_ARROW])) {
+            if (this._menu.cascadesRight()) {
                 if (this._menuItem) {
                     this._menuItem.isSelected = true;
                 }
                 this.openMenu();
-                break;
-            case 'ArrowRight':
-            case 'Right':
-                if (this._menu.cascadesRight()) {
-                    if (this._menuItem) {
-                        this._menuItem.isSelected = true;
-                    }
-                    this.openMenu();
+            }
+        } else if (KeyUtil.isKeyCode(event, [LEFT_ARROW])) {
+            if (this._menu.cascadesLeft()) {
+                if (this._menuItem) {
+                    this._menuItem.isSelected = true;
                 }
-                break;
-            case 'ArrowLeft':
-            case 'Left':
-                if (this._menu.cascadesLeft()) {
-                    if (this._menuItem) {
-                        this._menuItem.isSelected = true;
-                    }
-                    this.openMenu();
-                }
-                break;
+                this.openMenu();
+            }
         }
     }
 
