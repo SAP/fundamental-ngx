@@ -1,12 +1,13 @@
 <div class="examples-column">
     <form [formGroup]="customForm">
         <div fd-form-item>
-            <label fd-form-label>Combobox with communication via Objects</label>
+            <label fd-form-label required="true">Combobox with communication via Objects</label>
             <fd-combobox
                 state="information"
                 communicateByObject="true"
                 placeholder="Type some text..."
                 formControlName="itemOnDropdownMode"
+                required="true"
                 [displayFn]="myDisplayFunction"
                 [dropdownValues]="dropdownValues">
                 <li fd-list-message type="information">More information</li>

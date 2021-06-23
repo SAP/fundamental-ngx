@@ -1,6 +1,6 @@
 <h4>Default select</h4>
 <form [formGroup]="customForm">
-    <fd-select formControlName="selectControl">
+    <fd-select formControlName="selectControl" required="true">
         <fd-option *ngFor="let option of options" [value]="option">{{option}}</fd-option>
     </fd-select>
 </form>

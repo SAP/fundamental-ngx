@@ -26,15 +26,11 @@ describe('Inline help test suite', function() {
         inlineHelpPage.open();
     }, 1);
 
-    it('Verify icons hover state', () => {
+    it('Verify icons hover tooltip', () => {
         const arr = getElementArrayLength(inlineHelpIcons);
         scrollIntoView(exampleAreaContainersArr);
         for (let i = 0, diff = 0; i < arr; i++, diff = 0) {
             mouseHoverElement(inlineHelpIcons, i);
-            saveElementScreenshot(exampleAreaContainersArr, `inline-help-icon-${i}`, inlineHelpPage.getScreenshotFolder());
-            checkElementScreenshot(exampleAreaContainersArr, `inline-help-icon-${i}`, inlineHelpPage.getScreenshotFolder());
-
-            expect(diff).toBeLessThan(5, `Inline help icon ${i} has mismatch percentage of ${diff}%`);
             expect(getAttributeByName(inlineHelpIcons, 'fd-inline-help', i)).toContain('Inline Help Tooltip');
         }
     });

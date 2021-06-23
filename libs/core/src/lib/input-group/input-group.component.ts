@@ -67,6 +67,10 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     @Input()
     compact?: boolean;
 
+    /** If it is mandatory field */
+    @Input()
+    required = false;
+
     /** Whether the input group is inline. */
     @Input()
     inline = false;
