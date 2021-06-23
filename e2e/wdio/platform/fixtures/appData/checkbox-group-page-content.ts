@@ -9,7 +9,6 @@ export const hobbiesArr = ['Cooking', 'Painting', 'Coding', 'Gardening'];
 export const europeanCountriesArr = ['Italy', 'France', 'Switzerland', 'Austria'];
 export const reptilesArr = ['Snakes', 'Crocodiles', 'Lizards', 'Elephants'];
 export const threeFruitsArr = ['Apple', 'Banana', 'Grapes'];
-export const errorBorderStyle = '187,0,0';
 export const errorTooltipMessage = 'Value is required.';
 export const markingsStyle = 'flex';
 export const seasonsOutputLabel = 'Seasons: ';

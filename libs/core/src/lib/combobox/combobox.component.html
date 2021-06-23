@@ -66,6 +66,7 @@
             [attr.aria-owns]="autoComplete && !mobile ? (comboboxId + '-result') : null"
             [attr.aria-haspopup]="autoComplete && !mobile"
             [attr.aria-expanded]="!mobile && open && displayedValues.length"
+            [attr.aria-required]="required"
             [enable]="autoComplete && !mobile"
             [displayFn]="displayFn"
             [options]="dropdownValues"

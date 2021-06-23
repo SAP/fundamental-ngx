@@ -1,6 +1,4 @@
 export const unitAttr = 'unit';
-export const statusAttr = 'status';
-export const colorAttr = 'color';
 export const basicExamplesText = [
     '-2,000.00',
     '0.00',
@@ -8,13 +6,6 @@ export const basicExamplesText = [
     '100.88',
     '999.00'
 ];
-export const statusColors = {
-    negative: '187,0,0',
-    critical: '233,115,12',
-    positive: '16,126,62',
-    informative: '5,59,112',
-    null: '50,54,58'
-};
 export const objStatusExamplesText = [
     '2,000',
     '0',

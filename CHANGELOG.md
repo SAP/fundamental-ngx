@@ -1,4 +1,19 @@
 
+## [0.31.0-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.20...v0.31.0-rc.21) (2021-06-23)
+
+
+### Bug Fixes
+
+* **platform:** add title for menu action ([#5700](https://github.com/SAP/fundamental-ngx/issues/5700)) ([84a04a9](https://github.com/SAP/fundamental-ngx/commit/84a04a9f13391d618f5a4a4b8174201a5de5c04a))
+* **platform:** remove the readonly prop from combobox ([#5738](https://github.com/SAP/fundamental-ngx/issues/5738)) ([7823374](https://github.com/SAP/fundamental-ngx/commit/78233749043a3a769b8a0d18014327440bec593c))
+
+## [0.31.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.19...v0.31.0-rc.20) (2021-06-23)
+
+
+### Bug Fixes
+
+* **core,platform:** fix screen reader accessibility for reading mandatory field, includes all forms related components ([#5627](https://github.com/SAP/fundamental-ngx/issues/5627)) ([2defad1](https://github.com/SAP/fundamental-ngx/commit/2defad11213fb4fcf8a784bcf7f47df3682de214))
+
 ## [0.31.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.18...v0.31.0-rc.19) (2021-06-22)
 
 

@@ -1,4 +1,5 @@
 <fd-file-uploader
+    [id]="id"
     [ariaLabel]="ariaLabel"
     [ariaLabelledBy]="ariaLabelledBy"
     [placeholder]="placeholder"
@@ -11,6 +12,7 @@
     [maxFileSize]="maxFileSize"
     [minFileSize]="minFileSize"
     [state]="stateType"
+    [required]="required"
     [(ngModel)]="value"
     (selectedInvalidFiles)="handleInvalidFiles($event)"
     (selectedFilesChanged)="handleFileChange($event)"
