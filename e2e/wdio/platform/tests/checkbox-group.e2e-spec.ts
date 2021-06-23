@@ -2,7 +2,6 @@ import { CheckboxGroupPO } from '../pages/checkbox-group.po';
 import { checkIfDisabled, checkLabels, checkMarkingCheckbox } from '../../helper/assertion-helper';
 import {
     countriesArr,
-    errorBorderStyle,
     errorTooltipMessage,
     europeanCountriesArr,
     fourFruitsArr,
@@ -17,18 +16,14 @@ import {
     sportsArr,
     threeFruitsArr
 } from '../fixtures/appData/checkbox-group-page-content';
-import { checkboxFocusStyle, checkboxHoverState } from '../fixtures/appData/checkbox-page-contents';
 import {
     click,
     clickNextElement,
     executeScriptBeforeTagAttr,
-    focusElement,
-    getCSSPropertyByName,
     getElementArrayLength,
     getText,
     mouseHoverElement,
     refreshPage,
-    scrollIntoView
 } from '../../driver/wdio';
 
 xdescribe('Checkbox group test suite', () => {
@@ -288,11 +283,6 @@ xdescribe('Checkbox group test suite', () => {
 
         it('should check Checkbox group created from passed checkboxes and value is required', () => {
             clickNextElement(formValidationCheckboxesArr, 1);
-            for (let i = 0; 3 > i; i++) {
-                expect(getCSSPropertyByName(formValidationCheckboxesArr, 'border-color', i).value)
-                    .toContain(errorBorderStyle);
-            }
-
             click(sectiontitle, 2);
 
             // clickNextElement(formValidationCheckboxesArr, 2);
@@ -310,10 +300,6 @@ xdescribe('Checkbox group test suite', () => {
             clickNextElement(formValidationCheckboxesArr, 4);
             // click twice to mark and unmark box to get error state
             clickNextElement(formValidationCheckboxesArr, 4);
-            for (let i = 3; 6 > i; i++) {
-                expect(getCSSPropertyByName(formValidationCheckboxesArr, 'border-color', i).value)
-                    .toContain(errorBorderStyle);
-            }
             // needed for getting the tooltip in next line
             click(sectiontitle, 1);
             mouseHoverElement(formValidationCheckboxesArr, 3);
@@ -330,11 +316,6 @@ xdescribe('Checkbox group test suite', () => {
             clickNextElement(formValidationCheckboxesArr, 6);
             // click twice to mark and unmark box to get error state
             clickNextElement(formValidationCheckboxesArr, 6);
-
-            for (let i = 6; 10 > i; i++) {
-                expect(getCSSPropertyByName(formValidationCheckboxesArr, 'border-color', i).value)
-                    .toContain(errorBorderStyle);
-            }
             click(sectiontitle, 1);
             mouseHoverElement(formValidationCheckboxesArr, 6);
             expect(getText(errorTooltip)).toEqual(errorTooltipMessage);
@@ -358,24 +339,10 @@ xdescribe('Checkbox group test suite', () => {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             checkboxGroupPage.saveExampleBaselineScreenshot();
-            expect(checkboxGroupPage.compareWithBaseline()).toBeLessThan(3);
+            expect(checkboxGroupPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
-
-function checkHoverState(elementSelector, index: number = 0): boolean {
-    scrollIntoView(elementSelector, index);
-    mouseHoverElement(elementSelector, index);
-    return expect(getCSSPropertyByName(elementSelector, 'border-bottom-color', index).value)
-        .toContain(checkboxHoverState);
-}
-
-function checkFocusState(elementSelector, index: number = 0): boolean {
-    // clickNextElement(elementSelector, index);
-    focusElement(elementSelector, index);
-    return expect(getCSSPropertyByName(elementSelector, 'outline-style', index).value)
-        .toContain(checkboxFocusStyle);
-}
 
 function checkOutputLabel(array, label, selections): void {
     const arrL = getElementArrayLength(array);
