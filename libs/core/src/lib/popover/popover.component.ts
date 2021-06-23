@@ -197,6 +197,15 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
         this._popoverService.refreshPosition();
     }
 
+    /** Handler for alt + arrow down keydown */
+    triggerKeyDownHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, DOWN_ARROW) && event.altKey && !this.disabled) {
+            this.open();
+            event.preventDefault();
+            event.stopPropagation();
+        }
+    }
+
     /** @hidden Select and instantiate popover view mode */
     private _setupView(): void {
         if (this.mobile) {
@@ -251,15 +260,6 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     private _destroyMobileComponent(): void {
         if (this._mobileModeComponentRef) {
             this._mobileModeComponentRef.destroy();
-        }
-    }
-
-    /** Handler for alt + arrow down keydown */
-    triggerKeyDownHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, DOWN_ARROW) && event.altKey && !this.disabled) {
-            this.open();
-            event.preventDefault();
-            event.stopPropagation();
         }
     }
 }
