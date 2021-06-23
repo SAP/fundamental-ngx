@@ -108,6 +108,10 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     @HostBinding('attr.aria-labelledby')
     ariaLabelledBy: string = null;
 
+    /** If it is mandatory field */
+    @Input()
+    required = false;
+
     /** Values to be filtered in the search input. */
     @Input()
     dropdownValues: any[] = [];
@@ -357,7 +361,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.mobile) {
+        if (this.mobile || this.readOnly) {
             this.showDropdownButton = false;
         }
         this._refreshDisplayedValues();

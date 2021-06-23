@@ -11,7 +11,6 @@ import {
     borderStyleAttr,
     compactAttr,
     compactValue,
-    fontWeightAttr,
     itemUnreadStatus,
     lazyLoadAttr,
     listTypeAttr,
@@ -262,15 +261,7 @@ describe('List test suite:', function() {
         it('should do basic checks and check unread data', () => {
             checkElArrIsClickable(unreadListItems);
             checkElementText(unreadListItems);
-            if (browserIsSafari()) {
-                expect(getCSSPropertyByName(unreadListItemText, fontWeightAttr, 0).value).toBe('normal');
-                expect(getAttributeByName(unreadListAttr, itemUnreadStatus, 1)).toBe('true');
-                expect(getCSSPropertyByName(unreadListItemText, fontWeightAttr, 1).value).toBe('bold');
-            } else {
-                expect(getCSSPropertyByName(unreadListItemText, fontWeightAttr, 0).value).toBe(400);
-                expect(getAttributeByName(unreadListAttr, itemUnreadStatus, 1)).toBe('true');
-                expect(getCSSPropertyByName(unreadListItemText, fontWeightAttr, 1).value).toBe(700);
-            }
+            expect(getAttributeByName(unreadListAttr, itemUnreadStatus, 1)).toBe('true');
         });
     });
 

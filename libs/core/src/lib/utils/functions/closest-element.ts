@@ -23,3 +23,20 @@ export function closestElement(selector, element): Element | null {
 
     return element;
 }
+
+/** Alternative way to get closes element. */
+export function getClosest(selector, elem): Element | null {
+    // .matches polyfill
+    if (!Element.prototype.matches) {
+        /** @ts-ignore */
+        Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+    }
+
+    // get the closest matching element
+    for ( ; elem && elem !== document; elem = elem.parentNode) {
+        if (elem.matches(selector)) {
+            return elem;
+        }
+    }
+    return null;
+}

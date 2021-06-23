@@ -23,5 +23,3 @@ export const placeholdersArray = [
         'Enter the sport name'
     ];
 export const errorText = 'Pellentesque metus lacus commodo eget justo ut rutrum varius nunc';
-export const errorBorderColor = '187,0,0';
-

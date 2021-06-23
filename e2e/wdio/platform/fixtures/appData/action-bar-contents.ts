@@ -1,7 +1,3 @@
-export const defaultBtnHvrColor = '235,245,254';
-export const saveBtnHvrColor = '8,92,175';
-export const negCancelBtnHvrColor = '255,235,235';
-export const hoverColorAttr = 'background-color';
 export const alertMsg = 'Back button clicked';
 export const actionBarTitles = [
     'Page Action bar component',

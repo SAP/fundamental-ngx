@@ -83,6 +83,10 @@ export class MultiInputComponent implements
     @Input()
     compact?: boolean;
 
+    /** If it is mandatory field */
+    @Input()
+    required = false;
+
     /** Whether to use cozy visuals but compact collapsing behavior. */
     @Input()
     compactCollapse = false;
