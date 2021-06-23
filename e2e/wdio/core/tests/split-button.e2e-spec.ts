@@ -71,7 +71,7 @@ describe('Split-button test suite', () => {
         splitButtonPage.checkRtlSwitch();
     });
 
-    xit('should check examples visual regression', () => {
+    it('should check examples visual regression', () => {
         splitButtonPage.saveExampleBaselineScreenshot();
         expect(splitButtonPage.compareWithBaseline()).toBeLessThan(5);
     });
