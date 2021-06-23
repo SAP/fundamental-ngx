@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.19...v0.31.0-rc.20) (2021-06-23)
+
+
+### Bug Fixes
+
+* **core,platform:** fix screen reader accessibility for reading mandatory field, includes all forms related components ([#5627](https://github.com/SAP/fundamental-ngx/issues/5627)) ([2defad1](https://github.com/SAP/fundamental-ngx/commit/2defad11213fb4fcf8a784bcf7f47df3682de214))
+
 ## [0.31.0-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.18...v0.31.0-rc.19) (2021-06-22)
 
 
