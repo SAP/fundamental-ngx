@@ -1,29 +1,14 @@
 import { BusyIndicatorPo } from '../pages/busy-indicator.po';
 import {
-    addIsActiveClass,
-    addValue, checkElementScreenshot,
+    addValue,
     click,
     getElementArrayLength,
     isElementClickable,
-    isElementDisplayed, mouseHoverElement,
-    refreshPage, saveElementScreenshot,
+    isElementDisplayed,
+    refreshPage,
     scrollIntoView,
     waitForPresent
 } from '../../driver/wdio';
-import {
-    disableButtonActive,
-    disableButtonExample,
-    disableButtonFocus,
-    disableButtonHover, enableLoadingButtonActive,
-    enableLoadingButtonExample, enableLoadingButtonFocus, enableLoadingButtonHover,
-    saveButtonActive,
-    saveButtonExample,
-    saveButtonFocus,
-    saveButtonHover,
-    indicatorBlockExample,
-    indicatorBlockFocus
-} from '../fixtures/testData/busy-indicator.tags';
-import { disableButtonContent, indicatorBlock, saveButtonContent } from '../fixtures/appData/busy-indicator-contents';
 
 describe('Busy Indicator test suite:', function() {
     const busyIndicatorPage: BusyIndicatorPo = new BusyIndicatorPo();
@@ -90,82 +75,5 @@ describe('Busy Indicator test suite:', function() {
             busyIndicatorPage.saveExampleBaselineScreenshot();
             expect(busyIndicatorPage.compareWithBaseline()).toBeLessThan(5);
         });
-
-        xit('Check disable button hover state', () => {
-            scrollIntoView(enableDisableButton);
-            checkElementHoverState(enableDisableButton, disableButtonExample + disableButtonHover + '-', disableButtonContent);
-        });
-
-        xit('Check disable button active state', () => {
-            scrollIntoView(enableDisableButton);
-            checkElementActiveState(enableDisableButton, disableButtonExample + disableButtonActive + '-', disableButtonContent);
-        });
-
-        xit('Check disable button focus state', () => {
-            scrollIntoView(enableDisableButton);
-            checkElementFocusState(enableDisableButton, disableButtonExample + disableButtonFocus + '-', disableButtonContent);
-        });
-
-        xit('Check save button hover state', () => {
-            scrollIntoView(saveButton);
-            click(enableDisableButton);
-            checkElementHoverState(saveButton, saveButtonExample + saveButtonHover + '-', saveButtonContent);
-        });
-
-        xit('Check save button active state', () => {
-            scrollIntoView(saveButton);
-            click(enableDisableButton);
-            checkElementActiveState(saveButton, saveButtonExample + saveButtonActive + '-', saveButtonContent);
-        });
-
-        xit('Check save button focus state', () => {
-            scrollIntoView(saveButton);
-            click(enableDisableButton);
-            checkElementFocusState(saveButton, saveButtonExample + saveButtonFocus + '-', saveButtonContent);
-        });
-
-        xit('Check enable loading button hover state', () => {
-            scrollIntoView(enableDisableButton);
-            click(enableDisableButton);
-            checkElementHoverState(enableDisableButton, enableLoadingButtonExample + enableLoadingButtonHover + '-', saveButtonContent);
-        });
-
-        xit('Check enable loading button active state', () => {
-            scrollIntoView(enableDisableButton);
-            click(enableDisableButton);
-            checkElementActiveState(enableDisableButton, enableLoadingButtonExample + enableLoadingButtonActive + '-', saveButtonContent);
-        });
-
-        xit('Check enable loading button focus state', () => {
-            scrollIntoView(enableDisableButton);
-            click(enableDisableButton);
-            checkElementFocusState(enableDisableButton, enableLoadingButtonExample + enableLoadingButtonFocus + '-', saveButton);
-        });
-
-        xit('Check indicator for block focus state', () => {
-            scrollIntoView(enableDisableButton);
-            checkElementFocusState(indicatorBlockWrapper, indicatorBlockExample + indicatorBlockFocus + '-', indicatorBlock);
-        });
     });
-
-    function checkElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        mouseHoverElement(selector, index);
-        saveElementScreenshot(selector, tag, busyIndicatorPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag, busyIndicatorPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} button hover state mismatch`);
-    }
-
-    function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        click(selector, index);
-        saveElementScreenshot(selector, tag, busyIndicatorPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag, busyIndicatorPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} button focus state mismatch`);
-    }
-
-    function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        addIsActiveClass(selector, index);
-        saveElementScreenshot(selector, tag, busyIndicatorPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag, busyIndicatorPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} button item ${index} active state mismatch`);
-    }
 });
