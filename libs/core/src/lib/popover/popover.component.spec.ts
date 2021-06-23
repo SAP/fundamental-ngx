@@ -4,6 +4,7 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { PopoverModule } from './popover.module';
 import { PopoverComponent } from './popover.component';
 import { PopoverService } from './popover-service/popover.service';
+import { DOWN_ARROW } from '@angular/cdk/keycodes';
 
 
 describe('PopoverComponent', () => {
@@ -113,6 +114,25 @@ describe('PopoverComponent', () => {
         component.refreshPosition();
 
         expect(popoverServiceStub.refreshPosition).toHaveBeenCalled();
+    });
+
+    it ('should trigger keydown handler', () => {
+        const event = {
+            altKey: 'test-down-arrow',
+            keyCode: DOWN_ARROW,
+            preventDefault: () => {},
+            stopPropagation: () => {},
+        } as any;
+        component.disabled = false;
+        spyOn(component, 'open');
+        spyOn(event, 'preventDefault');
+        spyOn(event, 'stopPropagation');
+
+        component.triggerKeyDownHandler(event as KeyboardEvent);
+
+        expect(component.open).toHaveBeenCalled();
+        expect(event.preventDefault).toHaveBeenCalled();
+        expect(event.stopPropagation).toHaveBeenCalled();
     });
 });
 
