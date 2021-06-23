@@ -1,10 +1,11 @@
 import { ToolbarPo } from '../pages/toolbar.po';
 import {
-    click, doubleClick, getAttributeByName,
-    getElementArrayLength, getText,
+    checkElementScreenshot,
+    click, getAttributeByName,
+    getElementArrayLength, getImageTagBrowserPlatform, getText, getValue,
     isElementClickable, isElementDisplayed,
 
-    refreshPage, scrollIntoView
+    refreshPage, saveElementScreenshot, scrollIntoView
 } from '../../driver/wdio';
 import {
     fruitArr, currentDay, date
@@ -39,9 +40,17 @@ describe('Toolbar test suite', function() {
         });
 
         it('verify checkbox', () => {
+            const checkboxSquareTag = 'checkbox-square-';
+            const checkboxTickTag = 'checkbox-tick-';
             scrollIntoView(checkbox);
-            doubleClick(checkbox);
-            expect(getAttributeByName(checkbox, 'ng-reflect-model')).toBe('true');
+            click(checkbox);
+            saveElementScreenshot(checkbox, checkboxSquareTag + getImageTagBrowserPlatform(), toolbarPage.getScreenshotFolder());
+            expect(checkElementScreenshot(checkbox, checkboxSquareTag + getImageTagBrowserPlatform(),
+                toolbarPage.getScreenshotFolder())).toBeLessThan(5, `element item state mismatch`);
+            click(checkbox);
+            saveElementScreenshot(checkbox, checkboxTickTag + getImageTagBrowserPlatform(), toolbarPage.getScreenshotFolder());
+            expect(checkElementScreenshot(checkbox, checkboxTickTag + getImageTagBrowserPlatform(),
+                toolbarPage.getScreenshotFolder())).toBeLessThan(5, `element item state mismatch`);
         });
 
         it('verify dropdown menu', () => {
@@ -71,8 +80,7 @@ describe('Toolbar test suite', function() {
             click(dayInCalendarButtonByValue(currentDay.toString()));
             selectHoursMinutesAndPeriod();
             click(okButton);
-            expect(getAttributeByName(dateTimeInput, 'ng-reflect-model'))
-                .toEqual(date);
+            expect(getValue(dateTimeInput)).toEqual(date);
         });
 
     });

@@ -13,8 +13,8 @@ export class ToolbarPo extends CoreBaseComponentPo {
     moreButton = '.fd-button--transparent.ng-star-inserted';
     overflowBody = '.fd-toolbar__overflow__body';
     alwaysButton = '[ng-reflect-label="Always"]';
-    overflowGroupingButton = '#background-ex4' + this.button;
-    checkbox = '.fd-checkbox.ng-valid';
+    overflowGroupingButton = '#background-ex7' + this.button;
+    checkbox = '.fd-checkbox__label';
     dropdownMenu = '.fd-select__control.ng-star-inserted';
     dropdownOption = '.fd-list__item.ng-star-inserted';
     inputFieldText  = 'div.fd-select__text-content';
