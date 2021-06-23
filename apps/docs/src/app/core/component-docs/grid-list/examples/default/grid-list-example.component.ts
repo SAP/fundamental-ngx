@@ -5,7 +5,7 @@ interface GridListItem {
     id: number;
     title: string;
     description: string;
-    type?: string,
+    type?: string;
     counter?: number;
 }
 
@@ -53,6 +53,10 @@ export class GridListDefaultExampleComponent {
     ];
 
     navigate(event: GridListItemOutputEvent<undefined>): void {
-        console.log('Navigation event', event);
+        alert('Navigation event');
+    }
+
+    showAlert(message: string): void {
+        alert('Clicked on ' + message);
     }
 }

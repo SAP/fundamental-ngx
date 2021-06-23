@@ -16,6 +16,7 @@ import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { TitleModule } from '@fundamental-ngx/core/title';
+import { LinkModule } from '@fundamental-ngx/core/link';
 
 const routes: Routes = [
     {
@@ -38,6 +39,7 @@ const routes: Routes = [
         PopoverModule,
         QuickViewModule,
         BarModule,
+        LinkModule,
         TitleModule
     ],
     exports: [RouterModule],
