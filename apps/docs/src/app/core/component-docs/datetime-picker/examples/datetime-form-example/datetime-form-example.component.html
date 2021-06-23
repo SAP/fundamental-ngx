@@ -3,10 +3,11 @@
     class="flex-form"
 >
     <div fd-form-item>
-        <label fd-form-label>Valid Date Picker</label>
+        <label fd-form-label required="true">Valid Date Picker</label>
         <fd-datetime-picker
             [state]="isValid() ? 'success' : 'error'"
             [message]="isValid() ? 'This is valid DateTimePicker' : 'This is invalid DateTimePicker'"
+            required="true"
             formControlName="date"
             [disableFunction]="disableFunction"
         >

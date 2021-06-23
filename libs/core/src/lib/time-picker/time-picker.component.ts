@@ -76,6 +76,10 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
     @Input()
     disabled: boolean;
 
+    /** If it is mandatory field */
+    @Input()
+    required = false;
+
     /** @Input Whether to show spinner buttons */
     @Input()
     spinnerButtons = true;

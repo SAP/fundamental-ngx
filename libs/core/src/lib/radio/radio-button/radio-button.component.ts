@@ -112,6 +112,10 @@ export class RadioButtonComponent
     @Input()
     value: any;
 
+    /** If it is mandatory field */
+    @Input()
+    required = false;
+
     get checked(): boolean {
         if (this.value === undefined) {
             return false;
