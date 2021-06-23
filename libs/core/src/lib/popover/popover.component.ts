@@ -27,10 +27,11 @@ import {
 import { BasePopoverClass } from './base/base-popover.class';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
 import { PopoverService } from './popover-service/popover.service';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/core/utils';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { POPOVER_COMPONENT } from './popover.interface';
 import { PopoverMobileComponent } from './popover-mobile/popover-mobile.component';
+import { DOWN_ARROW } from '@angular/cdk/keycodes';
 
 let cdkPopoverUniqueId = 0;
 
@@ -250,6 +251,15 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     private _destroyMobileComponent(): void {
         if (this._mobileModeComponentRef) {
             this._mobileModeComponentRef.destroy();
+        }
+    }
+
+    /** Handler for alt + arrow down keydown */
+    triggerKeyDownHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, DOWN_ARROW) && event.altKey && !this.disabled) {
+            this.open();
+            event.preventDefault();
+            event.stopPropagation();
         }
     }
 }
