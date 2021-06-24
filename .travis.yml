@@ -11,7 +11,7 @@ services:
 git:
   depth: false
 script:
-  - npm run build-all
+  - travis_wait 20 npm run build-all
 jobs:
   include:
     - stage: Lint commit message
@@ -93,7 +93,7 @@ jobs:
         - bash ./ci-scripts/setup-npm.sh
       deploy:
         - provider: script
-          script: bash ./ci-scripts/publish.sh
+          script: travis_wait 20 bash ./ci-scripts/publish.sh
           skip_cleanup: true
           on:
             all_branches: true
@@ -107,7 +107,7 @@ jobs:
         - bash ./ci-scripts/setup-npm.sh
       deploy:
         - provider: script
-          script: bash ./ci-scripts/publish.sh
+          script: travis_wait 20 bash ./ci-scripts/publish.sh
           skip_cleanup: true
           on:
             all_branches: true
