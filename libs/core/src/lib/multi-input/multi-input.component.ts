@@ -41,6 +41,8 @@ import {
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 
+let inputRandomId = 0;
+
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
  * limited number of pre-defined options with a filter-enabled context.
@@ -112,7 +114,7 @@ export class MultiInputComponent implements
 
     /** Id attribute for input element inside MultiInput component */
     @Input()
-    inputId = '';
+    inputId = `fd-input-id-${inputRandomId++}`;
 
     /** Whether the search term should be highlighted in results. */
     @Input()
@@ -172,9 +174,9 @@ export class MultiInputComponent implements
     @Input()
     state: FormStates;
 
-    /** Whether AddOn Button should be focusable, set to false by default */
+    /** Whether AddOn Button should be focusable, set to true by default */
     @Input()
-    buttonFocusable = false;
+    buttonFocusable = true;
 
     /** Whether the multi-input allows the creation of new tokens. */
     @Input()
@@ -219,6 +221,17 @@ export class MultiInputComponent implements
     /** Whether the autocomplete should be enabled; Enabled by default */
     @Input()
     autoComplete = true;
+
+    /**
+     * Message announced by screen reader, when search suggestions opens.
+     */
+    @Input() searchSuggestionMessage = 'suggestions found';
+
+    /**
+     * Second part of message for search suggestion.
+     * direction for navigating the suggestion. This is not necessry in case of 0 suggestion.
+     */
+    @Input() searchSuggestionNavigateMessage = 'use up and down arrows to navigate';
 
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
@@ -266,6 +279,8 @@ export class MultiInputComponent implements
 
     /** @hidden */
     displayedValues: any[] = [];
+
+    currentSearchSuggestionAnnoucementMessage = '';
 
     /**  @hidden */
     _dir: string;
@@ -463,7 +478,7 @@ export class MultiInputComponent implements
             this._resetSearchTerm();
         }
 
-        this.searchInputElement.nativeElement.focus();
+        // this.searchInputElement.nativeElement.focus();
 
         // On Mobile mode changes are propagated only on approve.
         this._propagateChange();
@@ -559,6 +574,19 @@ export class MultiInputComponent implements
     /** @hidden */
     _addOnButtonClicked(): void {
         this.openChangeHandle(!this.open);
+        if (this.open) {
+            this.listComponent.setItemActive(0);
+        }
+    }
+
+    /** @hidden */
+    private _updateSearchAnnoucementText(): void {
+        // create search suggestion message with count.
+        this.currentSearchSuggestionAnnoucementMessage =
+            this.displayedValues.length +
+            ' ' +
+            this.searchSuggestionMessage +
+            (this.displayedValues.length > 0 ? ',' + this.searchSuggestionNavigateMessage : '');
     }
 
     disableParentFocusTrap(): void {
@@ -572,8 +600,14 @@ export class MultiInputComponent implements
     /** @hidden */
     private _applySearchTermChange(searchTerm: string): void {
         this.searchTerm = searchTerm;
+        // when search result not changed but input text is changed.
+        // again need to announce the result, so clear this message.
+        setTimeout(() => {
+            this.currentSearchSuggestionAnnoucementMessage = '';
+        });
         this.searchTermChange.emit(this.searchTerm);
         this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
+        this._updateSearchAnnoucementText();
         this._changeDetRef.detectChanges();
     }
 

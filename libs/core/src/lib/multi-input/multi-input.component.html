@@ -74,6 +74,8 @@
                    [compact]="compact"
                    [disabled]="disabled"
                    [attr.aria-required]="required"
+                   [attr.aria-haspopup]="!mobile"
+                   [attr.aria-expanded]="!!(open && !mobile && displayedValues && displayedValues.length)"
                    [ngClass]="{ 'fd-input--compact': compact }"
                    (ngModelChange)="_handleSearchTermChange($event)"
                    (keydown)="_handleInputKeydown($event)"
@@ -134,3 +136,14 @@
         <ng-container [ngTemplateOutlet]="itemTemplate" [ngTemplateOutletContext]="{ $implicit: value }"></ng-container>
     </ng-container>
 </ng-template>
+
+<div
+    [attr.id]="inputId + '-suggesstions'"
+    class="fd-search-suggestions-voiceover-text"
+    aria-live="polite"
+    aria-atomic="true"
+    *ngIf="searchTerm.length > 0"
+    i18n="@@platformI18nMultiInputFieldSearchSuggestionMessage"
+>
+    {{ currentSearchSuggestionAnnoucementMessage }}
+</div>

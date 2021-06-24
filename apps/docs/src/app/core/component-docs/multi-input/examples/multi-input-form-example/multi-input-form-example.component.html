@@ -1,8 +1,9 @@
 <form [formGroup]="customForm">
     <fieldset fd-fieldset>
         <div fd-form-item>
-            <label fd-form-label required="true">Valid Multi Input</label>
+            <label fd-form-label for="validmultiInput" required="true">Valid Multi Input</label>
             <fd-multi-input
+                inputId="validmultiInput"
                 [state]="isValid() ? 'success' : 'error'"
                 formControlName="selectedValues"
                 [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
@@ -12,8 +13,9 @@
             </fd-multi-input>
         </div>
         <div fd-form-item>
-            <label fd-form-label>Disabled Multi Input</label>
+            <label fd-form-label for="disabledmultiInput">Disabled Multi Input</label>
             <fd-multi-input
+                inputId="disabledmultiInput"
                 formControlName="disabledSelectedValues"
                 [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
                 placeholder="Search Here..."
