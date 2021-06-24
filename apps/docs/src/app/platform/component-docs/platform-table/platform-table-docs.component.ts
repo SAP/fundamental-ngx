@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 
-import { DatetimeAdapter, RtlService } from '@fundamental-ngx/core';
 import {
     TableColumnFreezeEvent,
     TableDataSource,
@@ -30,6 +29,8 @@ import * as platformTableFilterableSrc from '!raw-loader!./platform-table-exampl
 import * as platformTableFilterableTsSrc from '!raw-loader!./platform-table-examples/platform-table-filterable-example.component.ts';
 import * as platformTableFreezableSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.html';
 import * as platformTableFreezableTsSrc from '!raw-loader!./platform-table-examples/platform-table-freezable-example.component.ts';
+import * as platformTableLoadingSrc from '!raw-loader!./platform-table-examples/platform-table-loading-example.component.html';
+import * as platformTableLoadingTsSrc from '!raw-loader!./platform-table-examples/platform-table-loading-example.component.ts';
 import * as platformTablePageScrollingSrc from '!raw-loader!./platform-table-examples/platform-table-page-scrolling-example.component.html';
 import * as platformTablePageScrollingTsSrc from '!raw-loader!./platform-table-examples/platform-table-page-scrolling-example.component.ts';
 import * as platformTableInitialStateSrc from '!raw-loader!./platform-table-examples/platform-table-initial-state-example.component.html';
@@ -44,9 +45,13 @@ import * as platformTableP13GroupSrc from '!raw-loader!./platform-table-examples
 import * as platformTableP13GroupTsSrc from '!raw-loader!./platform-table-examples/platform-table-p13-group-example.component.ts';
 import * as platformTreeTableDefaultSrc from '!raw-loader!./platform-table-examples/platform-table-tree-example.component.html';
 import * as platformTreeTableDefaultTsSrc from '!raw-loader!./platform-table-examples/platform-table-tree-example.component.ts';
+import * as platformTableNavigatableRowSrc from '!raw-loader!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.html';
+import * as platformTableNavigatableRowTsSrc from '!raw-loader!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.ts';
 
 import { TableDataProviderExample } from './platform-table-examples/platform-table-data-provider-example';
 import { ExampleItem } from './platform-table-examples/platform-table-data-items-example';
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fdp-table-docs',
@@ -81,6 +86,9 @@ export class PlatformTableDocsComponent {
                         type: 'boolean'
                     },
                     noBodyBorders: {
+                        type: 'boolean'
+                    },
+                    loading: {
                         type: 'boolean'
                     }
                 }
@@ -128,7 +136,8 @@ export class PlatformTableDocsComponent {
             noHorizontalBorders: false,
             noVerticalBorders: false,
             noBorders: false,
-            noBodyBorders: false
+            noBodyBorders: false,
+            loading: false
         },
         'table-toolbar': {
             title: 'Order Line Items',
@@ -270,6 +279,22 @@ export class PlatformTableDocsComponent {
         }
     ];
 
+    loadingTableFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableLoadingSrc,
+            fileName: 'platform-table-loading-example',
+            name: 'platform-table-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: platformTableLoadingTsSrc,
+            fileName: 'platform-table-loading-example',
+            component: 'PlatformTableLoadingExampleComponent',
+            name: 'platform-table-example.component.ts'
+        }
+    ];
+
     pageScrollingTableFiles: ExampleFile[] = [
         {
             language: 'html',
@@ -379,6 +404,22 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-tree-example',
             component: 'PlatformTableTreeExampleComponent',
             name: 'platform-table-tree-example.component.ts'
+        }
+    ];
+
+    navitableRowFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableNavigatableRowSrc,
+            fileName: 'platform-table-navigatable-row-indicator-example',
+            name: 'platform-table-navigatable-row-indicator-example.component.html'
+        }, 
+        {
+            language: 'typescript',
+            code: platformTableNavigatableRowTsSrc,
+            fileName: 'platform-table-navigatable-row-indicator-example',
+            component: 'PlatformTableNavigatableRowIndicatorExampleComponent',
+            name: 'platform-table-navigatable-row-indicator-example.component.ts'
         }
     ];
 

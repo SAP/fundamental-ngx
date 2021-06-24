@@ -14,10 +14,8 @@ import {
 } from '@angular/core';
 import { startWith } from 'rxjs/operators';
 
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
-
 import {
-    CLASS_NAME,
+    DYNAMIC_SIDE_CONTENT_CLASS_NAME,
     DynamicSideContentPosition,
     DynamicSideContentSize,
     DYNAMIC_SIDE_CONTENT_CHILD_TOKEN
@@ -25,6 +23,8 @@ import {
 import { getPositionClassName, getSizeClassName } from './utils';
 import { DynamicSideContentMainComponent } from './dynamic-side-content-main.component';
 import { DynamicSideContentSideComponent } from './dynamic-side-content-side.component';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
 
 let componentId = 0;
 
@@ -103,7 +103,7 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return [CLASS_NAME.container, getSizeClassName(this.size), getPositionClassName(this.position)];
+        return [DYNAMIC_SIDE_CONTENT_CLASS_NAME.container, getSizeClassName(this.size), getPositionClassName(this.position)];
     }
 
     /** @hidden */

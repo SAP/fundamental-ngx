@@ -17,4 +17,9 @@ export interface ShellbarMenuItem {
     /* The icon to include in shellbar menu item See the icon page for the list of icons.
     */
     glyph?: string;
+
+    /**
+    /* If true open the link in a new tab.
+    */
+    newTab?: boolean;
 }

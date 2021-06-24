@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AvatarModule, FeedInputModule, FormControlModule } from '@fundamental-ngx/core';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
 import { FeedInputDocsComponent } from './feed-input-docs.component';
@@ -11,6 +10,9 @@ import { FeedInputPlaceholderExampleComponent } from './examples/feed-input-plac
 import { FeedInputNoAvatarExampleComponent } from './examples/feed-input-no-avatar-example/feed-input-no-avatar-example.component';
 import { FeedInputDisabledExampleComponent } from './examples/feed-input-disabled-example/feed-input-disabled-example.component';
 import { FeedInputGrowExampleComponent } from './examples/feed-input-grow-example/feed-input-grow-example.component';
+import { FeedInputModule } from '@fundamental-ngx/core/feed-input';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { FormControlModule } from '@fundamental-ngx/core/form';
 
 const routes: Routes = [
     {

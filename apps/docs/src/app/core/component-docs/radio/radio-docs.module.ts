@@ -5,8 +5,9 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { API_FILES } from '../../api-files';
 import { RadioHeaderComponent } from './radio-header/radio-header.component';
 import { RadioDocsComponent } from './radio-docs.component';
-import { FormModule, RadioModule } from '@fundamental-ngx/core';
 import { examples } from './examples';
+import { RadioModule } from '@fundamental-ngx/core/radio';
+import { FormModule } from '@fundamental-ngx/core/form';
 
 const routes: Routes = [
     {

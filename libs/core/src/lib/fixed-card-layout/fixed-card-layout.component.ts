@@ -25,7 +25,7 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
 import { CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 
-import { RtlService } from '../utils/services/rtl.service';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
 
 const CARD_MINIMUM_WIDTH = 320; // in px; 20rem max card size

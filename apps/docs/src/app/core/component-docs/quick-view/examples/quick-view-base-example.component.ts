@@ -37,4 +37,8 @@ export class QuickViewBaseExampleComponent {
             }]
         }]
     };
+
+    getGroupId(idx: number, group: any): string {
+        return `${this.data.id}-${idx}-${group.title.split(' ').join('-')}`
+    }
 }

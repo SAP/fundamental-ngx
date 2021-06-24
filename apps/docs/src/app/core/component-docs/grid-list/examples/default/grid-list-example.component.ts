@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { GridListItemOutputEvent } from '@fundamental-ngx/core';
+import { GridListItemOutputEvent } from '@fundamental-ngx/core/grid-list';
 
 interface GridListItem {
     id: number;
     title: string;
     description: string;
-    type?: string,
+    type?: string;
     counter?: number;
 }
 
@@ -53,6 +53,10 @@ export class GridListDefaultExampleComponent {
     ];
 
     navigate(event: GridListItemOutputEvent<undefined>): void {
-        console.log('Navigation event', event);
+        alert('Navigation event');
+    }
+
+    showAlert(message: string): void {
+        alert('Clicked on ' + message);
     }
 }

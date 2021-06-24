@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { InputGroupComponent } from './input-group.component';
-import { ButtonModule } from '../button/button.module';
-import { IconModule } from '../icon/icon.module';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { IconModule } from '@fundamental-ngx/core/icon';
 import {
     InputGroupAddOnDirective,
     InputGroupInputDirective,

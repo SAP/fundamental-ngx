@@ -15,12 +15,12 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { stateType } from '../radio/radio-button/radio-button.component';
-import { ContentDensityService } from '../utils/public_api';
+import { stateType } from '@fundamental-ngx/core/radio';
 import { FileUploaderService, FileUploadOutput } from './file-uploader.service';
 import { Subscription } from 'rxjs';
-import { KeyUtil } from '../utils/functions';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { ENTER, SPACE, TAB } from '@angular/cdk/keycodes';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 let fileUploaderInputUniqueId = 0;
 
@@ -61,6 +61,10 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     /** Whether the file input is disabled. */
     @Input()
     disabled = false;
+
+    /** If it is mandatory field */
+    @Input()
+    required = false;
 
     /** Whether the file input should accept multiple files. */
     @Input()
@@ -228,7 +232,12 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
         selectedFiles.forEach((file) => (fileName = fileName.concat(' ' + file.name)));
         this.inputRefText.nativeElement.value = fileName;
         this.inputRefText.nativeElement.title = fileName;
+        if (fileName) {
         this.inputRefText.nativeElement.placeholder = fileName;
+        } else {
+            this.inputRefText.nativeElement.placeholder = this.placeholder;
+            this.inputRefText.nativeElement.title = this.placeholder;
+        }
         this.inputRefText.nativeElement.focus();
     }
 

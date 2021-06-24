@@ -1,8 +1,7 @@
 import { ChangeDetectorRef, Directive, ElementRef, Input, OnChanges, OnDestroy, OnInit, Optional } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { startWith } from 'rxjs/operators';
-
-import { RtlService } from '../utils/public_api';
+import { RtlService } from '@fundamental-ngx/core/utils';
 
 @Directive({
     // tslint:disable-next-line: directive-selector

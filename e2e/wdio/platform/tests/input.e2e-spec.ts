@@ -8,7 +8,6 @@ import {
     executeScriptBeforeTagAttr,
     getAttributeByName,
     getAttributeByNameArr,
-    getCSSPropertyByName,
     getElementArrayLength, getElementPlaceholder,
     getElementSize,
     getText,
@@ -25,7 +24,6 @@ import {
     waitForPresent
 } from '../../driver/wdio';
 import {
-    errorBorderColor,
     errorText,
     favoriteColor,
     labelsArray,
@@ -139,8 +137,6 @@ describe('Input should ', function() {
         scrollIntoView(messagesComponentsInput);
         waitForElDisplayed(messagesComponentsInput);
         click(submitBtn);
-        const errorBackgroundColor = getCSSPropertyByName(messagesComponentsInput, 'border-bottom-color').value;
-        expect(errorBackgroundColor).toContain(errorBorderColor);
         mouseHoverElement(messagesComponentsInput);
         pause(300);
         waitForElDisplayed(errorTextAttr);
@@ -186,7 +182,7 @@ describe('Input should ', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             inputPage.saveExampleBaselineScreenshot();
-            expect(inputPage.compareWithBaseline()).toBeLessThan(3);
+            expect(inputPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

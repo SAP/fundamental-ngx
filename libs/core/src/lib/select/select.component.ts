@@ -24,22 +24,22 @@ import {
     OnChanges,
     Self
 } from '@angular/core';
-import { ControlValueAccessor, NgControl} from '@angular/forms';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { Subject, Subscription, merge, Observable, defer } from 'rxjs';
 import { startWith, takeUntil, switchMap } from 'rxjs/operators';
 import { SelectionModel } from '@angular/cdk/collections';
 
-import { PopoverFillMode } from '../popover/popover-position/popover-position';
-import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
-import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { SELECT_COMPONENT, SelectInterface } from './select.interface';
 import { SelectKeyManagerService } from './select-key-manager.service';
 import { OptionComponent, FdOptionSelectionChange } from './option/option.component';
 import { SelectMobileComponent } from './select-mobile/select-mobile.component';
-import { RtlService } from '../utils/services/rtl.service';
-import { ContentDensityService } from '../utils/public_api';
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 let selectUniqueId = 0;
 
@@ -79,19 +79,19 @@ export class FdSelectChange {
     ]
 })
 export class SelectComponent implements
-           ControlValueAccessor,
-           SelectInterface,
-           OnInit,
-           AfterViewInit,
-           AfterContentInit,
-           OnChanges ,
-           OnDestroy {
+    ControlValueAccessor,
+    SelectInterface,
+    OnInit,
+    AfterViewInit,
+    AfterContentInit,
+    OnChanges,
+    OnDestroy {
 
     /** Id of the control. */
     @Input()
     controlId = `fd-select-${selectUniqueId++}`;
 
-    /** Whether the select component is disabled. */
+    /** Holds the control state of select */
     @Input()
     state: SelectControlState = null;
 
@@ -99,13 +99,17 @@ export class SelectComponent implements
     @Input()
     mobile = false;
 
-    /** Whether the select component is disabled. */
+    /** Holds the message with respect to state */
     @Input()
     stateMessage: string;
 
     /** Whether the select component is disabled. */
     @Input()
     disabled = false;
+
+    /** If it is mandatory field */
+    @Input()
+    required = false;
 
     /** Whether the select component is readonly. */
     @Input()
@@ -260,15 +264,15 @@ export class SelectComponent implements
     /** @hidden
     * Combined stream of all of the child options' change events.
     */
-   readonly _optionSelectionChanges: Observable<FdOptionSelectionChange> = defer(() => {
-    const _options = this._options;
+    readonly _optionSelectionChanges: Observable<FdOptionSelectionChange> = defer(() => {
+        const _options = this._options;
 
-    if (_options) {
-        return _options.changes.pipe(
-            startWith(_options),
-            switchMap(() => merge(..._options.map((option) => option.selectionChange)))
-        );
-     }
+        if (_options) {
+            return _options.changes.pipe(
+                startWith(_options),
+                switchMap(() => merge(..._options.map((option) => option.selectionChange)))
+            );
+        }
     }) as Observable<FdOptionSelectionChange>;
 
     /**
@@ -291,6 +295,12 @@ export class SelectComponent implements
     @HostListener('window:resize')
     _resizeScrollHandler(): void {
         this._updateCalculatedHeight();
+    }
+
+    /** @hidden */
+    setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
+        this._tabIndex = this.disabled ? -1 : 0;
     }
 
     get selected(): OptionComponent {
@@ -342,7 +352,7 @@ export class SelectComponent implements
     }
 
     // /** @hidden */
-     _compareWith = (o1: any, o2: any) => o1 === o2;
+    _compareWith = (o1: any, o2: any) => o1 === o2;
     /**
      * Function to compare the option values with the selected values.
      */
@@ -540,8 +550,8 @@ export class SelectComponent implements
         isOpen ? this.open() : this.close();
     }
 
-      /** @hidden
-     * Returns _keyManagerService. */
+    /** @hidden
+   * Returns _keyManagerService. */
     _getKeyService(): SelectKeyManagerService {
         return this._keyManagerService;
     }
@@ -558,10 +568,10 @@ export class SelectComponent implements
     /** @hidden */
     _highlightCorrectOption(): void {
         if (this._keyManagerService._keyManager && this._selectionModel.isEmpty()) {
-                this._keyManagerService._keyManager.setFirstItemActive();
+            this._keyManagerService._keyManager.setFirstItemActive();
         } else if (this._keyManagerService._keyManager && !this._selectionModel.isEmpty()) {
-                this._keyManagerService._keyManager.setActiveItem(this.selected);
-            }
+            this._keyManagerService._keyManager.setActiveItem(this.selected);
+        }
     }
 
     /** @hidden */
@@ -715,8 +725,8 @@ export class SelectComponent implements
         } else {
             if (wasSelected !== option.selected) {
                 option.selected ?
-                this._selectionModel.select(option) :
-                this._selectionModel.deselect(option);
+                    this._selectionModel.select(option) :
+                    this._selectionModel.deselect(option);
             }
             if (isUserInput) {
                 this._keyManagerService._keyManager.setActiveItem(option);

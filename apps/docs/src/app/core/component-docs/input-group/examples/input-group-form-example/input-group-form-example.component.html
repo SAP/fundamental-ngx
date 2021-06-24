@@ -1,12 +1,15 @@
 <form [formGroup]="customForm">
     <fieldset fd-fieldset>
         <div fd-form-item>
-            <label fd-form-label>Search Input</label>
-            <fd-input-group glyph="decline"
-                            glyphAriaLabel="Clear"
-                            placeholder="Search"
-                            formControlName="searchQuery"
-                            [button]="true">
+            <label fd-form-label for="fd-input-group-form-1" id="fd-input-group-form-label-1">Search Input</label>
+            <fd-input-group
+                glyph="decline"
+                glyphAriaLabel="Clear"
+                placeholder="Search"
+                formControlName="searchQuery"
+                [button]="true"
+                ariaLabelledby="fd-input-group-form-label-1"
+            >
             </fd-input-group>
         </div>
         <small>Search Query Entered: {{ customForm.controls.searchQuery.value }}</small>
