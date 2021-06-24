@@ -1,9 +1,8 @@
 import { InputGroupPo } from '../pages/input-group.po';
 import {
     clearValue, click,
-    getAttributeByName,
-    getElementArrayLength, getElementSize, getText, getValue, isElementClickable, isEnabled,
-    refreshPage, scrollIntoView, setValue, waitForElDisplayed
+    getElementArrayLength, getElementPlaceholder, getElementSize, getText, getValue, isElementClickable, isEnabled,
+    refreshPage, scrollIntoView, setValue
 } from '../../driver/wdio';
 import { smallTestText, testText } from '../fixtures/appData/input-group-contents';
 
@@ -20,7 +19,6 @@ describe('Input group component test', function() {
 
     afterEach(() => {
         refreshPage();
-        waitForElDisplayed(inputFields);
     }, 2);
 
     describe('Check all placeholders', function() {
@@ -28,19 +26,19 @@ describe('Input group component test', function() {
         it('verify inputs have amount placeholder text', () => {
             const inputLength = getElementArrayLength(inputFields);
             for (let i = 1; i < inputLength - 10; i++) {
-                expect(getAttributeByName(inputFields, 'placeholder', i)).toBe('Amount');
+                expect(getElementPlaceholder(inputFields, i)).toBe('Amount');
             }
         });
 
         it('verify Input Group Search placeholder', () => {
-            expect(getAttributeByName(inputFields, 'placeholder', 9)).toBe('Search');
-            expect(getAttributeByName(inputFields, 'placeholder', 10)).toBe('Search');
+            expect(getElementPlaceholder(inputFields, 9)).toBe('Search');
+            expect(getElementPlaceholder(inputFields, 10)).toBe('Search');
         });
 
         it('verify Input Group with States placeholder', () => {
             const inputLength = getElementArrayLength(inputFields);
             for (let i = 14; i < inputLength - 1; i++) {
-                expect(getAttributeByName(inputFields, 'placeholder', i)).toBe('Placeholder');
+                expect(getElementPlaceholder(inputFields, i)).toBe('Placeholder');
             }
         });
     });
@@ -54,7 +52,7 @@ describe('Input group component test', function() {
 
     describe('Check all input fields accept values', function() {
 
-        it('verify ???', () => {
+        it('verify eight input fields accept values', () => {
             const inputLength = getElementArrayLength(inputFields);
             for (let i = 1; i < inputLength - 10; i++) {
                 scrollIntoView(inputFields, i);
@@ -112,7 +110,7 @@ describe('Input group component test', function() {
             scrollIntoView(inputFields, 18);
             setValue(playgroundInputField, 'Search');
             clearValue(inputFields, 18);
-            expect(getAttributeByName(inputFields, 'placeholder', 18)).toBe('Search');
+            expect(getElementPlaceholder(inputFields, 18)).toBe('Search');
         });
 
         it('verify playground input accept values by ngModel and addOnText', () => {
@@ -133,7 +131,7 @@ describe('Input group component test', function() {
         it('verify disable input', () => {
             scrollIntoView(playgroundCheckbox, 2);
             click(playgroundCheckbox, 2);
-            expect(isEnabled(inputFields, 18)).toBe(false);
+            expect(isEnabled(inputFields, 18)).toBe(false, 'input field is active');
         });
     });
 
@@ -144,12 +142,11 @@ describe('Input group component test', function() {
         });
     });
 
-    xdescribe('Should check visual regression', function() {
+    describe('Should check visual regression', function() {
 
         it('should check visual regression for all examples', () => {
             inputGroupPage.saveExampleBaselineScreenshot();
             expect(inputGroupPage.compareWithBaseline()).toBeLessThan(5);
         });
-
     });
 });

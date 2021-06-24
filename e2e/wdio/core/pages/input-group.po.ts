@@ -3,8 +3,6 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class InputGroupPo extends CoreBaseComponentPo {
     url = '/inputGroup';
-    root = '#page-content';
-    contentPage = '#page-content';
 
     inputFields = '.fd-input-group__input';
     inputGroupSearchText = 'fd-input-group~small';
@@ -17,7 +15,7 @@ export class InputGroupPo extends CoreBaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
-        waitForPresent(this.contentPage);
+        waitForPresent(this.title);
     }
 
     getScreenshotFolder(): object {
