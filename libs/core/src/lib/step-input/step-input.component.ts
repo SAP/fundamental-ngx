@@ -58,6 +58,10 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     @Input()
     disabled: boolean;
 
+    /** If it is mandatory field */
+    @Input()
+    required = false;
+
     /** Sets locale used to format numeric value */
     @Input()
     locale: string;

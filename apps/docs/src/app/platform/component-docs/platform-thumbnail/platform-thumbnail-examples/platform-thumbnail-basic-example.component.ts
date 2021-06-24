@@ -34,8 +34,8 @@ export class PlatformThumbnailBasicExampleComponent {
     {
         title: 'Nature Details',
         thumbnailUrl: '//picsum.photos/id/1008/400',
-        mediaType: 'video',
-        mediaUrl: '//www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+        mediaType: 'image',
+        mediaUrl: '//picsum.photos/id/1008/400',
         alt: 'Failed to load //picsum.photos/id/1008/400',
         label: 'nature'
     },
@@ -58,8 +58,8 @@ export class PlatformThumbnailBasicExampleComponent {
     {
         title: 'Nature Details',
         thumbnailUrl: '//picsum.photos/id/1008/400',
-        mediaType: 'video',
-        mediaUrl: '//www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+        mediaType: 'image',
+        mediaUrl: '//picsum.photos/id/1008/400',
         alt: 'Failed to load //picsum.photos/id/1008/400',
         label: 'nature'
     },

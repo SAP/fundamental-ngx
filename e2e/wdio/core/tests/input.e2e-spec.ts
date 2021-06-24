@@ -27,8 +27,7 @@ describe('Input should ', function() {
         inlineHelpRightInput, inlineHelpLeftInput, validInput, invalidInput,
         warningInput, informationInput, disabledInput, readonlyInput, reactiveDefaultInput,
         reactiveDisabledInput, reactivePrimaryInput, reactiveSecondaryInput, formMessagePopover,
-        inlineHelpPopover, requiredInputLabel, inlineHelpLabels, validInputLabel, invalidInputLabel,
-        warningInputLabel, informationInputLabel, addBtn, reactivePrimaryInput2
+        validInputLabel, invalidInputLabel, warningInputLabel, informationInputLabel, addBtn, reactivePrimaryInput2
     } = inputPage;
 
     const inputsArr = [defaultInput, requiredInput, passwordInput, compactInput,

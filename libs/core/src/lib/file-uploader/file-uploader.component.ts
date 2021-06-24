@@ -62,6 +62,10 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     @Input()
     disabled = false;
 
+    /** If it is mandatory field */
+    @Input()
+    required = false;
+
     /** Whether the file input should accept multiple files. */
     @Input()
     multiple = true;
@@ -228,7 +232,12 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
         selectedFiles.forEach((file) => (fileName = fileName.concat(' ' + file.name)));
         this.inputRefText.nativeElement.value = fileName;
         this.inputRefText.nativeElement.title = fileName;
+        if (fileName) {
         this.inputRefText.nativeElement.placeholder = fileName;
+        } else {
+            this.inputRefText.nativeElement.placeholder = this.placeholder;
+            this.inputRefText.nativeElement.title = this.placeholder;
+        }
         this.inputRefText.nativeElement.focus();
     }
 

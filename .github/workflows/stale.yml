@@ -13,4 +13,4 @@ jobs:
         stale-pr-label: 'stale'
         stale-pr-message: 'This pull request is stale because it has been open 2 days with no activity. Remove stale label or comment or this will be closed in 3 days'
         days-before-stale: 2
-        days-before-close: 5
+        days-before-close: 3

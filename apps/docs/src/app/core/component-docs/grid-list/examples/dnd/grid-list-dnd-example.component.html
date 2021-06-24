@@ -1,30 +1,55 @@
 <fd-grid-list>
-    <fd-grid-list-title-bar title="Products">
+    <fd-grid-list-title-bar [title]="'Products'">
         <span fd-grid-list-title-bar-additional-title-item [innerText]="'(' + list.length + ')'"></span>
 
         <fd-grid-list-title-bar-spacer></fd-grid-list-title-bar-spacer>
 
-        <button fd-button fdType="transparent" glyph="sort" aria-label="Sort" title="Sort" [compact]="true"></button>
+        <button
+            fd-button
+            fdType="transparent"
+            glyph="sort"
+            aria-label="Sort"
+            aria-labelledby="grid-list-title-bar-dnd-1 grid-list-button-dnd-1"
+            title="Sort"
+            [compact]="true"
+            (click)="showAlert('Sort')"
+        ></button>
         <button
             fd-button
             fdType="transparent"
             glyph="filter"
-            aria-title="Filter"
+            aria-label="Filter"
             title="Filter"
             [compact]="true"
+            (click)="showAlert('Filter')"
         ></button>
         <button
             fd-button
             fdType="transparent"
             glyph="group-2"
-            aria-title="Group"
+            aria-label="Group"
             title="Group"
             [compact]="true"
+            (click)="showAlert('Group')"
         ></button>
     </fd-grid-list-title-bar>
 
-    <div class="fd-row" fd-dnd-list [items]="list" [gridMode]="true" (itemDropped)="itemsChangeHandle($event)" style="margin-top: 0;">
-        <fd-grid-list-item *ngFor="let item of list;" [value]="item.id" fd-dnd-item containerSelector=".fd-grid-list__item" type="navigatio">
+    <div
+        class="fd-row"
+        fd-dnd-list
+        [items]="list"
+        [gridMode]="true"
+        (itemDropped)="itemsChangeHandle($event)"
+        style="margin-top: 0"
+    >
+        <fd-grid-list-item
+            *ngFor="let item of list"
+            [value]="item.id"
+            fd-dnd-item
+            containerSelector=".fd-grid-list__item"
+            type="navigation"
+            (navigate)="navigate($event)"
+        >
             <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
             <div class="fd-grid-list-item-body--container">
@@ -37,7 +62,6 @@
                         <p>Anytown, SD 57401</p>
                         <p>USA</p>
                     </div>
-    
                     <a [routerLink]="['./']" fd-link tabindex="0">john_li@example.com</a>
                 </div>
             </div>
@@ -46,3 +70,6 @@
         </fd-grid-list-item>
     </div>
 </fd-grid-list>
+
+<span aria-hidden="true" style="display: none" id="grid-list-button-dnd-1">Sort</span>
+<span aria-hidden="true" style="display: none" id="grid-list-title-bar-dnd-1">Products with {{ list.length }} items</span>

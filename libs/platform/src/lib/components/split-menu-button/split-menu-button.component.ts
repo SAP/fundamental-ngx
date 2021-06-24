@@ -80,6 +80,11 @@ export class SplitMenuButtonComponent extends BaseComponent implements OnInit, A
     /** @hidden */
     primaryButtonWidth: string;
 
+    // tabindex for button.
+    get tabindex(): number {
+        return this.disabled ? -1 : 0;
+    }
+
     /** handles rtl service
      * @hidden */
     private _rtlChangeSubscription = Subscription.EMPTY;

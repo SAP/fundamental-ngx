@@ -392,18 +392,22 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
                 take(1)
             )
             .subscribe((event) => {
-                this.closeSuggestionMenu();
+                const target = event.target as HTMLElement;
+                const focus = !(target.tagName === 'INPUT' && this.inputId !== target.id);
+                this.closeSuggestionMenu(focus);
             });
 
         this.showDropdown = true;
     }
 
-    closeSuggestionMenu(): void {
+    closeSuggestionMenu(focus = true): void {
         if (!this._suggestionOverlayRef) {
             return;
         }
         this._suggestionOverlayRef.detach();
-        this.inputField.nativeElement.focus();
+        if (focus) {
+            this.inputField.nativeElement.focus();
+        }
         this.showDropdown = false;
     }
 

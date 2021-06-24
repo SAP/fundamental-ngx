@@ -92,6 +92,10 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     @Input()
     inputId: string;
 
+    /** If it is mandatory field */
+    @Input()
+    required = false;
+
     /**
      * Whether the time component should be meridian (am/pm).
      * Default value is based on the current locale format option
@@ -453,7 +457,6 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     /** Closes the popover and refresh model */
     closePopover(): void {
         if (this.isOpen) {
-            this.handleInputChange(this._inputFieldDate);
             this.onClose.emit();
             this.isOpen = false;
             this.isOpenChange.emit(this.isOpen);
