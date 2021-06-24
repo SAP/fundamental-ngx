@@ -1,12 +1,10 @@
 import { ActionSheetPo } from '../pages/action-sheet.po';
 import {
-    addIsActiveClass,
     checkElementScreenshot,
     click,
     getElementArrayLength, getElementClass,
     getImageTagBrowserPlatform,
     getText,
-    mouseHoverElement,
     refreshPage,
     saveElementScreenshot,
     scrollIntoView,
@@ -108,61 +106,6 @@ describe('Action sheet test suite', function() {
                 expect(checkElementScreenshot(actionSheetList,
                     `action-sheet-items-example-${i}-core-${getImageTagBrowserPlatform()}`, actionSheetPage.getScreenshotFolder()))
                     .toBeLessThan(5);
-            }
-        });
-
-        xit('should check action sheet item focus state', () => {
-            const actionSheetCount = getElementArrayLength(actionSheetMenuButton);
-
-            for (let i = 0; actionSheetCount > i; i++) {
-                click(actionSheetMenuButton, i);
-                const actionSheetItemCount = getElementArrayLength(actionSheetListItems);
-
-                for (let j = 0; actionSheetItemCount > j; j++) {
-                    if (i === 2) {
-                        sendKeys('Tab');
-                        saveElementScreenshot(actionSheetListItems, `action-sheet-item-example-${i}-focus-item-${j}-core-${getImageTagBrowserPlatform()}`, actionSheetPage.getScreenshotFolder(), j);
-                        expect(checkElementScreenshot(actionSheetListItems, `action-sheet-item-example-${i}-focus-item-${j}-core-${getImageTagBrowserPlatform()}`, actionSheetPage.getScreenshotFolder(), j))
-                            .toBeLessThan(1);
-                        continue;
-                    }
-                    saveElementScreenshot(actionSheetListItems, `action-sheet-item-example-${i}-focus-item-${j}-core-${getImageTagBrowserPlatform()}`, actionSheetPage.getScreenshotFolder(), j);
-                    expect(checkElementScreenshot(actionSheetListItems, `action-sheet-item-example-${i}-focus-item-${j}-core-${getImageTagBrowserPlatform()}`, actionSheetPage.getScreenshotFolder(), j))
-                        .toBeLessThan(1);
-                    sendKeys('Tab');
-                }
-            }
-        });
-
-        xit('should check action sheet item hover state', () => {
-            const actionSheetCount = getElementArrayLength(actionSheetMenuButton);
-
-            for (let i = 0; actionSheetCount > i; i++) {
-                click(actionSheetMenuButton, i);
-                const actionSheetItemCount = getElementArrayLength(actionSheetListItems);
-
-                for (let j = 0; actionSheetItemCount > j; j++) {
-                    mouseHoverElement(actionSheetListItems, j);
-                    saveElementScreenshot(actionSheetListItems, `action-sheet-item-example-${i}-hover-item-${j}-core-${getImageTagBrowserPlatform()}`, actionSheetPage.getScreenshotFolder(), j);
-                    expect(checkElementScreenshot(actionSheetListItems, `action-sheet-item-example-${i}-hover-item-${j}-core-${getImageTagBrowserPlatform()}`, actionSheetPage.getScreenshotFolder(), j))
-                        .toBeLessThan(1);
-                }
-            }
-        });
-
-        xit('should check action sheet item active state', () => {
-            const actionSheetCount = getElementArrayLength(actionSheetMenuButton);
-
-            for (let i = 0; actionSheetCount > i; i++) {
-                click(actionSheetMenuButton, i);
-                const actionSheetItemCount = getElementArrayLength(actionSheetListItems);
-
-                for (let j = 0; actionSheetItemCount > j; j++) {
-                    addIsActiveClass(actionSheetListItemButtons, j);
-                    saveElementScreenshot(actionSheetListItems, `action-sheet-item-example-${i}-active-item-${j}-core-${getImageTagBrowserPlatform()}`, actionSheetPage.getScreenshotFolder(), j);
-                    expect(checkElementScreenshot(actionSheetListItems, `action-sheet-item-example-${i}-active-item-${j}-core-${getImageTagBrowserPlatform()}`, actionSheetPage.getScreenshotFolder(), j))
-                        .toBeLessThan(1);
-                }
             }
         });
     });

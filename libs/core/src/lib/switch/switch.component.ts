@@ -66,6 +66,10 @@ export class SwitchComponent implements ControlValueAccessor, OnInit, OnDestroy 
     @Input()
     name: string;
 
+    /** If it is mandatory field */
+    @Input()
+    required = false;
+
     /** Whether the switch is checked. */
     @Input()
     checked = false;

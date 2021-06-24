@@ -24,6 +24,7 @@
                     [(ngModel)]="_inputFieldDate"
                     [attr.aria-label]="datetimeInputLabel"
                     [attr.id]="inputId"
+                    [attr.aria-required]="required"
                     [placeholder]="placeholder"
                     [compact]="compact"
                     [ngClass]="{ 'is-error': _isInvalidDateInput && useValidation }"

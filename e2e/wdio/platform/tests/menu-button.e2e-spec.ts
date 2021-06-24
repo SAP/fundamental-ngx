@@ -1,15 +1,11 @@
 import { MenuButtonPo } from '../pages/menu-button.po';
 import {
-    alignmentCenter,
-    btnColorArr,
     compactAttr,
     cozyAndCompactBtnTextArr,
     disabledState,
     icon,
     iconAttr,
     selectedItem,
-    textAlignmentAttr,
-    textColorAttr,
     tooltipAttr,
     truncatedBtnNoIconTooltipText,
     truncatedBtnText,
@@ -21,7 +17,6 @@ import {
     click,
     doubleClick,
     getAttributeByName,
-    getCSSPropertyByName,
     getElementArrayLength,
     getText,
     isElementDisplayed,
@@ -103,23 +98,15 @@ describe('Menu button test suite', function() {
             }
         });
 
-        it('should check cozy btn text and colors', () => {
+        it('should check cozy btn text', () => {
             const cozyBtnTextArrLength = getElementArrayLength(cozyBtnAttrArr);
-            const cozyBtnArrLength = getElementArrayLength(cozyBtnArr);
 
             for (let i = 0; cozyBtnTextArrLength > i; i++) {
                 expect(getText(cozyBtnAttrArr, i).trim()).toEqual(cozyAndCompactBtnTextArr[i]);
             }
-
-            for (let j = 0; cozyBtnArrLength > j; j++) {
-                expect(getCSSPropertyByName(cozyBtnArr, textColorAttr, j).value)
-                    .toContain(btnColorArr[j]);
-                expect(getCSSPropertyByName(cozyBtnArr, textAlignmentAttr, j).value)
-                    .toEqual(alignmentCenter);
-            }
         });
 
-        it('should check compact btn text and colors', () => {
+        it('should check compact btn text', () => {
             const compactBtnTextArrLength = getElementArrayLength(compactBtnAttrArr);
             const compactBtnArrLength = getElementArrayLength(compactBtnArr);
 
@@ -129,10 +116,6 @@ describe('Menu button test suite', function() {
             }
 
             for (let j = 0; compactBtnArrLength > j; j++) {
-                expect(getCSSPropertyByName(compactBtnArr, textColorAttr, j).value)
-                    .toContain(btnColorArr[j]);
-                expect(getCSSPropertyByName(compactBtnArr, textAlignmentAttr, j).value)
-                    .toEqual(alignmentCenter);
                 expect(getAttributeByName(compactBtnArr, compactAttr)).toEqual('true');
             }
         });
@@ -190,7 +173,7 @@ describe('Menu button test suite', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             menuBtnPage.saveExampleBaselineScreenshot();
-            expect(menuBtnPage.compareWithBaseline()).toBeLessThan(3);
+            expect(menuBtnPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 })

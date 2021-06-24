@@ -67,6 +67,7 @@
                    [ngModel]="searchTerm"
                    [compact]="compact"
                    [disabled]="disabled"
+                   [attr.aria-required]="required"
                    [ngClass]="{ 'fd-input--compact': compact }"
                    (ngModelChange)="_handleSearchTermChange($event)"
                    (keydown)="_handleInputKeydown($event)"

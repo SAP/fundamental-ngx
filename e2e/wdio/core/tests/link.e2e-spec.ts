@@ -43,52 +43,7 @@ describe('Link test suite', function() {
     describe('visual regression', function() {
         xit('should check examples visual regression', () => {
             linkPage.saveExampleBaselineScreenshot();
-            expect(linkPage.compareWithBaseline()).toBeLessThan(2);
-        });
-
-        xit('check link hover state', () => {
-            const linkCount = getElementArrayLength(links);
-
-            for (let i = 0; i < linkCount; i++) {
-                checkLinkHoverState(links, `link-${i}-hover-state-core-` + getImageTagBrowserPlatform(), `link-${i}`, i);
-            }
-        });
-
-        xit('should check link focus state', () => {
-            const linkCount = getElementArrayLength(links);
-
-            for (let i = 0; i < linkCount; i++) {
-                checkLinkFocusState(links, `link-${i}-focus-state-core-` + getImageTagBrowserPlatform(), `link-${i}`, i);
-            }
-        });
-
-        xit('should check link active state', () => {
-            const linkCount = getElementArrayLength(links);
-
-            for (let i = 0; i < linkCount; i++) {
-                checkLinkActiveState(links, `link-${i}-active-state-core-` + getImageTagBrowserPlatform(), `link-${i}`, i);
-            }
+            expect(linkPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
-
-    function checkLinkHoverState(selector: string, tag: string, linkName: string, index: number = 0): void {
-        mouseHoverElement(selector, index);
-        saveElementScreenshot(selector, tag, linkPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag, linkPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${linkName} hover state mismatch`);
-    }
-
-    function checkLinkFocusState(selector: string, tag: string, linkName: string, index: number = 0): void {
-        focusElement(selector, index);
-        saveElementScreenshot(selector, tag, linkPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag, linkPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${linkName} focus state mismatch`);
-    }
-
-    function checkLinkActiveState(selector: string, tag: string, linkName: string, index: number = 0): void {
-        addIsActiveClass(selector, index);
-        saveElementScreenshot(selector, tag, linkPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag, linkPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${linkName} active state mismatch`);
-    }
 });
