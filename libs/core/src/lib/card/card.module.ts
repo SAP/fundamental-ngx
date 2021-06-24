@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ButtonModule } from '../button/button.module';
-import { AvatarModule } from '../avatar/avatar.module';
-import { ObjectStatusModule } from '../object-status/object-status.module';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 
 import { CardComponent } from './card.component';
 import { CardHeaderComponent } from './card-header.component';

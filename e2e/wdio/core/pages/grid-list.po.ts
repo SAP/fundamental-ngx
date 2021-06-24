@@ -10,7 +10,7 @@ export class GridListPo extends CoreBaseComponentPo {
     moreButtonItems = '#fd-grid-list-9 fd-grid-list-item';
     footer = '.fd-grid-list__footer';
     gridListsArray = '.fd-doc-component';
-    gridListsTitle = '[title="Products"] label';
+    gridListsTitle = 'fd-toolbar label';
     deleteModeTitle = '[selectionmode="delete"] [title="Products"]';
     deleteItemButton = '[selectionmode="delete"] fd-grid-list-item button';
     multiSelectModeSelectedItems = 'fd-grid-list[selectionmode="multiSelect"] fd-grid-list-item .is-selected';

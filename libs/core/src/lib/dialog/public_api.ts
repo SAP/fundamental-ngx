@@ -13,3 +13,14 @@ export * from './utils/dialog-ref.class';
 export * from './utils/dialog-config.class';
 export * from './utils/dialog-position.class';
 export * from './utils/dialog-default-content.class';
+export * from './dialog-default/dialog-default.component';
+export * from './dialog-container/dialog-container.component';
+
+export * from './base/dialog-base.class';
+export * from './base/dialog-base.service';
+export * from './base/dialog-config-base.class';
+export * from './base/dialog-content-base.class';
+export * from './base/dialog-footer-base.class';
+export * from './base/dialog-header-base.class';
+export * from './base/dialog-ref-base.class';
+export * from './utils/dialog.animations';

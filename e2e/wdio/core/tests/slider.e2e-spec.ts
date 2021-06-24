@@ -219,7 +219,7 @@ describe('slider test suite', function() {
             refreshPage();
             waitForElDisplayed(basicExamples);
             sliderPage.saveExampleBaselineScreenshot();
-            expect(sliderPage.compareWithBaseline()).toBeLessThan(3);
+            expect(sliderPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 

@@ -12,7 +12,7 @@ import {
     OnChanges,
     SimpleChanges
 } from '@angular/core';
-import { LinkComponent } from '../link/link.component';
+import { LinkComponent } from '@fundamental-ngx/core/link';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 

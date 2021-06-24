@@ -7,9 +7,9 @@ import { WizardStepComponent } from './wizard-step/wizard-step.component';
 import { WizardStepIndicatorComponent } from './wizard-step-indicator/wizard-step-indicator.component';
 import { WizardContentComponent } from './wizard-content/wizard-content.component';
 import { WizardNextStepComponent } from './wizard-next-step/wizard-next-step.component';
-import { IconModule } from '../icon/icon.module';
-import { ActionSheetModule } from '../action-sheet/action-sheet.module';
-import { ScrollSpyModule } from '../scroll-spy/scroll-spy.module';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
+import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
 
 @NgModule({
     declarations: [

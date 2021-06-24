@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { TableService } from './table.service';
 import { Subscription } from 'rxjs';
-import { ContentDensityService } from '../utils/services/content-density.service';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 /**
  * The component that represents a table.

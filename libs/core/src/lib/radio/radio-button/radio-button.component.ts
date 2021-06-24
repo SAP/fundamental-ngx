@@ -14,8 +14,10 @@ import {
     Optional
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { applyCssClass, ContentDensityService, CssClassBuilder } from '../../utils/public_api';
 import { Subscription } from 'rxjs';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 export type stateType = 'success' | 'error' | 'warning' | 'default' | 'information';
 let uniqueId = 0;
@@ -109,6 +111,10 @@ export class RadioButtonComponent
      */
     @Input()
     value: any;
+
+    /** If it is mandatory field */
+    @Input()
+    required = false;
 
     get checked(): boolean {
         if (this.value === undefined) {

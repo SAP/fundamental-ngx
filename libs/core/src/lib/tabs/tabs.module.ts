@@ -19,12 +19,12 @@ import {
 import { TabNavComponent } from './tab-nav/tab-nav.component';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
-import { IconModule } from '../icon/icon.module';
-import { ButtonModule } from '../button/button.module';
-import { ListModule } from '../list/list.module';
-import { PopoverModule } from '../popover/popover.module';
-import { MenuModule } from '../menu/menu.module';
-import { ScrollSpyModule } from '../scroll-spy/scroll-spy.module';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 
 @NgModule({

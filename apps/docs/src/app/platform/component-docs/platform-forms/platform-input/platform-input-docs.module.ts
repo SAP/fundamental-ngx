@@ -10,7 +10,7 @@ import { ApiComponent } from '../../../../documentation/core-helpers/api/api.com
 import { API_FILES } from '../../../api-files';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
-import { PopoverModule } from '@fundamental-ngx/core';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 
 const routes: Routes = [
     {

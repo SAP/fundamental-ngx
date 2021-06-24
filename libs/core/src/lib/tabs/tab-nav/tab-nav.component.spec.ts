@@ -3,7 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { TabsModule } from '../tabs.module';
 import { TabNavComponent } from './tab-nav.component';
 import { TabLinkDirective } from '../tab-link/tab-link.directive';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/services/content-density.service';
 
 @Component({
     selector: 'fd-test-tabs',

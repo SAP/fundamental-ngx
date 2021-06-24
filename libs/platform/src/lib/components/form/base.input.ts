@@ -231,6 +231,7 @@ export abstract class BaseInput extends BaseComponent
 
     setDisabledState(isDisabled: boolean): void {
         const newState = coerceBooleanProperty(isDisabled);
+        this._cd.markForCheck();
         if (newState !== this._disabled) {
             this._disabled = isDisabled;
             this.stateChanges.next('setDisabledState');
@@ -298,7 +299,7 @@ export abstract class BaseInput extends BaseComponent
         const newState = !!(control && control.invalid && (control.touched || (parent && parent.submitted)));
 
         if (newState !== oldState) {
-            this._status = newState ? 'error' : this.state;
+            this._status = newState ? 'error' : this.state === 'error' ? 'default' : this.state;
             this.stateChanges.next('updateErrorState');
             this._cd.markForCheck();
         }

@@ -7,8 +7,10 @@ import { FormMessageDocsComponent } from './form-message-docs.component';
 import {
     FormMessageExampleComponent,
 } from './examples/form-message-example.component';
-import { FormModule, InputGroupModule, PopoverModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 
 const routes: Routes = [
     {

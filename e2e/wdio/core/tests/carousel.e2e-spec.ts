@@ -209,7 +209,7 @@ describe('Carousel test suite', function() {
         });
 
         it('should check disabling busy indicator', () => {
-            click(disableLoadingBtn);
+            click(disableLoadingBtn, 2);
             expect(busyIndicator).not.toBeVisible();
         });
     });

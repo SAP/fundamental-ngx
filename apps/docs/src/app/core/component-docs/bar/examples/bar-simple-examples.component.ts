@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { RtlService } from '@fundamental-ngx/core';
+import { RtlService } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fd-bar-subheader-example',

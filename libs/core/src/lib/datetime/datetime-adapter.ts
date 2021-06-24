@@ -340,6 +340,12 @@ export abstract class DatetimeAdapter<D> {
     abstract isTimeFormatIncludesSeconds(displayFormat: unknown): boolean;
 
     /**
+     * @param date The date being referenced.
+     * @returns String representing how much time has passed since the date param.
+     */
+    abstract fromNow?(date: D): string;
+
+    /**
      * Compares two dates.
      * @param first The first date to compare.
      * @param second The second date to compare.

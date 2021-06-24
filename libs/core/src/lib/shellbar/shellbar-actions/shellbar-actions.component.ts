@@ -14,8 +14,8 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
 import { ShellbarMenuItem } from '../model/shellbar-menu-item';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
-import { ComboboxComponent } from '../../combobox/combobox.component';
-import { ProductSwitchComponent } from '../../product-switch/product-switch/product-switch.component';
+import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
+import { ProductSwitchComponent } from '@fundamental-ngx/core/product-switch';
 
 /**
  * The component that represents shellbar actions.

@@ -1,4 +1,4 @@
-import { NestedListModel } from '../nested-list/nested-list-model';
+import { NestedListModel } from '@fundamental-ngx/core/nested-list';
 
 export interface SideNavigationModel {
     condensed?: boolean;

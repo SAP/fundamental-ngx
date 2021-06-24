@@ -25,6 +25,8 @@ export const API_FILES = {
     avatarGroup: [
         'AvatarGroupComponent',
         'AvatarGroupItemDirective',
+        'AvatarGroupFocusableAvatarDirective',
+        'AvatarGroupPopoverControlDirective',
         'AvatarGroupOverflowBodyDirective',
         'AvatarGroupOverflowItemDirective',
         'AvatarGroupOverflowButtonDirective',
@@ -232,7 +234,8 @@ export const API_FILES = {
         'QuickViewGroupTitleComponent',
         'QuickViewGroupItemComponent',
         'QuickViewGroupItemLabelComponent',
-        'QuickViewGroupItemContentComponent'
+        'QuickViewGroupItemContentComponent',
+        'QuickViewGroupItemContentElementDirective'
     ],
     scrollSpy: ['ScrollSpyDirective'],
     select: ['SelectComponent', 'OptionComponent'],
@@ -360,5 +363,9 @@ export const API_FILES = {
         'MessagePageMoreComponent',
         'MessagePageTitleComponent',
         'MessagePageSubtitleComponent'
+    ],
+    resizableCardLayout: [
+        'ResizableCardLayoutComponent',
+        'ResizableCardItemComponent'
     ],
 };
