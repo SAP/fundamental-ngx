@@ -8,10 +8,11 @@ import { FdDate } from '@fundamental-ngx/core/datetime';
         <form [formGroup]="customForm" class="flex-form">
             <div>
                 <div fd-form-item>
-                    <label fd-form-label>Date Picker</label>
+                    <label fd-form-label required="true">Date Picker</label>
                     <fd-date-picker
                             [state]="isValid() ? 'success' : 'error'"
                             [message]="isValid() ? 'This is valid(success) DatePicker' : 'This is invalid(error) DatePicker'"
+                            required="true"
                             formControlName="date">
                     </fd-date-picker>
                 </div>

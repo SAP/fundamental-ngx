@@ -101,6 +101,10 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     @Input()
     labelClass: string;
 
+    /** If it is mandatory field */
+    @Input()
+    required = false;
+
     /** @hidden */
     private _subscriptions = new Subscription();
 

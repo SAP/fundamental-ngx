@@ -1,7 +1,6 @@
 import { ObjectNumberPo } from '../pages/object-number.po';
 import {
     getAttributeByName,
-    getCSSPropertyByName,
     getElementArrayLength,
     getText,
     scrollIntoView,
@@ -9,10 +8,7 @@ import {
 } from '../../driver/wdio';
 import {
     unitAttr,
-    statusAttr,
-    colorAttr,
     basicExamplesText,
-    statusColors,
     objStatusExamplesText,
     styledObjExampleText,
     largeFont,
@@ -33,8 +29,6 @@ describe('object number test suite', function () {
         unitObjExamples,
         decimalObjExamples,
         truncationObjExample,
-        objectNumberText,
-        objectNumberUnit
     } = objectNumberPage;
 
     beforeAll(() => {
@@ -54,26 +48,21 @@ describe('object number test suite', function () {
     });
 
     describe('basic object number examples', function () {
-        xit('should check colors and values', () => {
+        xit('should check values', () => {
             checkObjectValues(basicExamples, basicExamplesText);
-            checkStatusColors(basicExamples, objectNumberText(basicExamples), statusColors);
-            checkStatusColors(basicExamples, objectNumberUnit(basicExamples), statusColors);
+
         });
     });
 
     describe('object number status examples', function () {
-        xit('should check object number status examples', () => {
+        it('should check object number status examples', () => {
             checkObjectValues(objStatusExamples, objStatusExamplesText);
-            checkStatusColors(objStatusExamples, objectNumberText(objStatusExamples), statusColors);
-            checkStatusColors(objStatusExamples, objectNumberUnit(objStatusExamples), statusColors);
         });
     });
 
     describe('large object number examples', function () {
-        xit('should check colors and values', () => {
+        it('should check values', () => {
             checkObjectValues(largeObjExamples, styledObjExampleText);
-            checkStatusColors(largeObjExamples, objectNumberText(largeObjExamples), statusColors);
-            checkStatusColors(largeObjExamples, objectNumberUnit(largeObjExamples), statusColors);
         });
 
         it('should check large font', () => {
@@ -86,10 +75,9 @@ describe('object number test suite', function () {
     });
 
     describe('bold object number examples', function () {
-        xit('should check colors and values', () => {
+        it('should check values', () => {
             checkObjectValues(boldObjExamples, styledObjExampleText);
-            checkStatusColors(boldObjExamples, objectNumberText(boldObjExamples), statusColors);
-            checkStatusColors(boldObjExamples, objectNumberUnit(boldObjExamples), statusColors);
+
         });
 
         it('should check bold font', () => {
@@ -102,26 +90,20 @@ describe('object number test suite', function () {
     });
 
     describe('object number units examples', function () {
-        xit('should check colors and values', () => {
+        it('should check values', () => {
             checkObjectValues(unitObjExamples, objUnitExamplesText);
-            checkStatusColors(unitObjExamples, objectNumberText(unitObjExamples), statusColors);
-            checkStatusColors(unitObjExamples, objectNumberUnit(unitObjExamples), statusColors);
         });
     });
 
     describe('object number decimal examples', function () {
-        xit('should check colors and values', () => {
+        it('should check values', () => {
             checkObjectValues(decimalObjExamples, objDecimalExamplesText);
-            checkStatusColors(decimalObjExamples, objectNumberText(decimalObjExamples), statusColors);
-            checkStatusColors(decimalObjExamples, objectNumberUnit(decimalObjExamples), statusColors);
         });
     });
 
     describe('object number decimal examples', function () {
-        xit('should check colors and values', () => {
+        it('should check values', () => {
             checkObjectValues(truncationObjExample, objTruncationText);
-            checkStatusColors(truncationObjExample, objectNumberText(truncationObjExample), statusColors);
-            checkStatusColors(truncationObjExample, objectNumberUnit(truncationObjExample), statusColors);
         });
     });
 
@@ -147,15 +129,5 @@ function checkObjectValues(selector, dataArr): void {
         const textValue = getText(selector, i);
 
         expect(textValue).toEqual(dataArr[i] + ' ' + unitValue);
-    }
-}
-
-function checkStatusColors(attrSelector, textSelector, colorsArr): void {
-    const objectCount = getElementArrayLength(textSelector);
-
-    for (let i = 0; i < objectCount; i++) {
-        const objectStatus = getAttributeByName(attrSelector, statusAttr, i);
-
-        expect(getCSSPropertyByName(textSelector, colorAttr, i).value).toContain(colorsArr[objectStatus]);
     }
 }
