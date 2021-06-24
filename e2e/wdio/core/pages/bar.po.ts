@@ -17,14 +17,6 @@ export class BarPo extends CoreBaseComponentPo {
         return super.getScreenshotFolder(this.url);
     }
 
-    saveExampleBaselineScreenshot(specName: string = 'bar'): void {
-        super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
-    }
-
-    compareWithBaseline(specName: string = 'bar'): any {
-        return super.compareWithBaseline(specName, this.getScreenshotFolder());
-    }
-
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);

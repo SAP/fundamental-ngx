@@ -13,10 +13,6 @@ import {
 } from '../../driver/wdio';
 import { time, text, defaultValidTime } from '../fixtures/testData/time-picker';
 import { TimePickerPO } from '../pages/time-picker.po';
-import {
-    notValidInputFieldExample,
-    notValidInputFieldState,
-} from '../fixtures/testData/time-picker-tags';
 
 describe('Time picker suite', function() {
     const timePickerPage = new TimePickerPO();
@@ -25,7 +21,6 @@ describe('Time picker suite', function() {
         activeTimePickerButton, errorBorder, selectedValue,
         disabledInput, disabledButton,
         navigationDownArrowButton, timeItem, setToNullButton, setValidTimeButton,
-        invalidTimePickerInput,
     } = timePickerPage;
 
     beforeAll(() => {
@@ -133,7 +128,7 @@ describe('Time picker suite', function() {
         timePickerPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
+    describe('Check visual regression', function() {
         beforeEach(() => {
             refreshPage();
             waitForPresent(timePickerInput);
@@ -150,37 +145,6 @@ describe('Time picker suite', function() {
             waitForElDisplayed(timerExpanded);
             saveElementScreenshot(timerExpanded, `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`, timePickerPage.getScreenshotFolder());
             expect(checkElementScreenshot(timerExpanded, `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`, timePickerPage.getScreenshotFolder()))
-                .toBeLessThan(5);
-        });
-
-        it('should check not valid input field for basic time picker', () => {
-            scrollIntoView(setToNullButton);
-            click(setToNullButton);
-            expect(doesItExist(errorBorder)).toBe(true);
-            scrollIntoView(invalidTimePickerInput);
-            saveElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-basic-time-picker', timePickerPage.getScreenshotFolder());
-            expect(checkElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-basic-time-picker', timePickerPage.getScreenshotFolder()))
-                .toBeLessThan(5);
-        });
-
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/4853
-        xit('should check not valid input field for time picker with reactive form', () => {
-            scrollIntoView(setToNullButton);
-            click(setToNullButton, 1);
-            expect(doesItExist(errorBorder)).toBe(true);
-            scrollIntoView(invalidTimePickerInput);
-            saveElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-reactive-form', timePickerPage.getScreenshotFolder());
-            expect(checkElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-reactive-form', timePickerPage.getScreenshotFolder()))
-                .toBeLessThan(5);
-        });
-
-        it('should check not valid input field state for time picker with template form', () => {
-            scrollIntoView(setToNullButton);
-            click(setToNullButton, 2);
-            expect(doesItExist(errorBorder)).toBe(true);
-            scrollIntoView(invalidTimePickerInput);
-            saveElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-template-form', timePickerPage.getScreenshotFolder());
-            expect(checkElementScreenshot(invalidTimePickerInput, notValidInputFieldExample + notValidInputFieldState + '-with-template-form', timePickerPage.getScreenshotFolder()))
                 .toBeLessThan(5);
         });
     });

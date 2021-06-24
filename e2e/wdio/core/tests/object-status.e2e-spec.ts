@@ -92,7 +92,7 @@ describe('Object Status test suite', function() {
     });
 
     describe('Check visual regression', function() {
-        xit('should check examples visual regression', () => {
+        it('should check examples visual regression', () => {
             objectStatusPage.saveExampleBaselineScreenshot();
             expect(objectStatusPage.compareWithBaseline()).toBeLessThan(5);
         });

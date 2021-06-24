@@ -14,7 +14,7 @@ describe('Busy Indicator test suite:', function() {
     const busyIndicatorPage: BusyIndicatorPo = new BusyIndicatorPo();
     const {
         formName, formSurname, formPassword, saveButton, enableDisableButton,
-        saveIndicator, formIndicator, smallIndicator, middleIndicator, largeIndicator, componentExample, indicatorBlockWrapper
+        saveIndicator, formIndicator, smallIndicator, middleIndicator, largeIndicator,
     } = busyIndicatorPage;
     const text = 'test';
 
@@ -66,14 +66,5 @@ describe('Busy Indicator test suite:', function() {
         expect(isElementClickable(formPassword)).toBe(false);
         expect(isElementDisplayed(saveIndicator)).toBe(true);
         expect(isElementDisplayed(formIndicator)).toBe(true);
-    });
-
-    xdescribe('Check visual regression', function() {
-
-        // skipped due to element is moving
-        xit('should check examples visual regression', () => {
-            busyIndicatorPage.saveExampleBaselineScreenshot();
-            expect(busyIndicatorPage.compareWithBaseline()).toBeLessThan(5);
-        });
     });
 });
