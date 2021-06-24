@@ -183,6 +183,7 @@
                                             fd-form-control
                                             [value]="_getItemName(item)"
                                             (blur)="_fileNameChange($event, item)"
+                                            (input)="_checkName($event, item)"
                                             type="text"
                                             i18n-placeholder
                                             placeholder="Enter a name"

@@ -162,7 +162,7 @@ export class UploadCollectionComponent {
      * 'Same name' refers to an already existing file name in the list.
      * */
     @Input()
-    sameFilenameAllowed = false;
+    sameFileNameAllowed = false;
 
     /**
      * The event is triggered when the file type or the MIME type don't match the permitted types
@@ -326,16 +326,9 @@ export class UploadCollectionComponent {
             return;
         }
 
-        if (
-            !this.sameFilenameAllowed &&
-            this._getList().some((item) => currentItem.documentId !== item.documentId && item.name === newName)
-        ) {
-            currentItem.sameFilenameState = 'error';
-
+        if (currentItem.sameFilenameState) {
             return;
         }
-
-        currentItem.sameFilenameState = null;
 
         const data = {
             parentFolderId: this._getCurrentFolderId(),
@@ -367,6 +360,24 @@ export class UploadCollectionComponent {
                     });
                 }
             });
+    }
+
+    /** @hidden */
+    _checkName(e: FocusEvent, currentItem: UploadCollectionItem): void {
+        const input = e.target as HTMLInputElement;
+        const itemName = input.value;
+        const newName = currentItem.type === 'file' ? `${itemName}.${currentItem.name.split('.').pop()}` : itemName;
+
+        if (
+            !this.sameFileNameAllowed &&
+            this._getList().some((item) => currentItem.documentId !== item.documentId && item.name === newName)
+        ) {
+            currentItem.sameFilenameState = 'error';
+
+            return;
+        }
+
+        currentItem.sameFilenameState = null;
     }
 
     /** @hidden
@@ -669,7 +680,7 @@ export class UploadCollectionComponent {
 
     /** @hidden */
     _onRowSelectionChange(data: TableRowSelectionChangeEvent<UploadCollectionItem>): void {
-        if (!this.sameFilenameAllowed) {
+        if (!this.sameFileNameAllowed) {
             const removedItem = data.removed[0];
             this._clearItemSameFilenameState(removedItem);
         }
