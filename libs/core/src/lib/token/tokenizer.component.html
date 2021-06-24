@@ -1,7 +1,10 @@
 <div
     class="fd-tokenizer fd-tokenizer--scrollable"
     [class.is-focus]="_tokenizerHasFocus"
-    [class.fd-tokenizer--compact]="compact">
+    [class.fd-tokenizer--compact]="compact"
+    [attr.aria-label]="tokenList?.length + ' tokens'"
+    role="listbox"
+    >
     <div class="fd-tokenizer__inner" #tokenizerInner>
         <ng-content select="fd-token"></ng-content>
         <span (click)="moreClicked()"

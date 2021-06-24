@@ -74,3 +74,16 @@
 .fd-popover__body--hidden {
 	display: none;
 }
+
+// remove this once https://github.com/SAP/fundamental-ngx/issues/5710 is resolved and available.
+// text should not be on screen, but also can't be made hidden or display none.
+// for screen reader requirement
+// please see: https://webaim.org/techniques/css/invisiblecontent/
+.fd-search-suggestions-voiceover-text {
+    position: absolute;
+    left: -625rem;
+    top: auto;
+    width: 0.0625rem;
+    height: 0.0625rem;
+    overflow: hidden;
+}
