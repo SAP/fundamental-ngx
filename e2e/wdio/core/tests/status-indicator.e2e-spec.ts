@@ -21,7 +21,6 @@ describe('Status indicator component test', function() {
         acceptAlert();
     });
 
-
     it('should check RTL and LTR orientation', () => {
         statusIndicatorPage.checkRtlSwitch();
     });

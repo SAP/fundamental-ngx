@@ -47,31 +47,24 @@ describe('Verify Switch component', function() {
             // capture before state
             waitForPresent(defaultSwitchInput);
             const isCheckedBefore = getAttributeByName(defaultSwitchInput, 'aria-checked');
-            const handelColorBefore = getCSSPropertyByName(defaultSwitchHandel, 'background-color');
             click(defaultSwitchHandel);
             // capture after state
             const isCheckedAfter = getAttributeByName(defaultSwitchInput, 'aria-checked');
-            const handelColorAfter = getCSSPropertyByName(defaultSwitchHandel, 'background-color');
 
             expect(isCheckedBefore).toBe('false', 'Default switch has incorrect state before click');
-            expect(handelColorBefore.value).toContain('255,255,255');
             expect(isCheckedAfter).toBe('true', 'Default switch has incorrect state after click');
-            expect(handelColorAfter.value).toContain('9,92,175');
+
         });
 
         it('should compact change something to active or inactive', () => {
             // capture before state
             const isCheckedBefore = getAttributeByName(defaultCompactSwitchInput, 'aria-checked');
-            const handelColorBefore = getCSSPropertyByName(defaultCompactSwitchHandel, 'background-color');
             click(defaultCompactSwitchHandel);
             // capture after state
             const isCheckedAfter = getAttributeByName(defaultCompactSwitchInput, 'aria-checked');
-            const handelColorAfter = getCSSPropertyByName(defaultCompactSwitchHandel, 'background-color');
 
             expect(isCheckedBefore).toBe('false', 'Default compact switch has incorrect state before click');
-            expect(handelColorBefore.value).toContain('255,255,255');
             expect(isCheckedAfter).toBe('true', 'Default compact switch has incorrect state after click');
-            expect(handelColorAfter.value).toContain('9,92,175');
         });
 
         it('should default change state on hover', () => {
@@ -85,8 +78,7 @@ describe('Verify Switch component', function() {
             mouseHoverElement(defaultSwitchHandel);
             const handelColorAfter = getCSSPropertyByName(defaultSwitchHandel, 'background-color');
 
-            expect(handelColorBefore.value).toContain('255,255,255');
-            expect(handelColorAfter.value).toContain('235,245,254');
+            expect(handelColorBefore.value).not.toBe(handelColorAfter.value);
         });
 
         it('should compact default change state on hover', () => {
@@ -99,8 +91,7 @@ describe('Verify Switch component', function() {
             mouseHoverElement(defaultCompactSwitchHandel);
             const handelColorAfter = getCSSPropertyByName(defaultCompactSwitchHandel, 'background-color');
 
-            expect(handelColorBefore.value).toContain('255,255,255');
-            expect(handelColorAfter.value).toContain('235,245,254');
+            expect(handelColorBefore.value).not.toBe(handelColorAfter.value);
         });
 
         it('compact switch should be smaller than default', () => {
@@ -246,8 +237,7 @@ describe('Verify Switch component', function() {
                 mouseHoverElement(semanticSwitchHandel);
                 const handelColorAfter = getCSSPropertyByName(semanticSwitchHandel, 'background-color');
 
-                expect(handelColorBefore.value).toContain('255,255,255');
-                expect(handelColorAfter.value).toContain('255,235,235');
+                expect(handelColorBefore.value).not.toBe(handelColorAfter.value);
                 return;
             }
             console.log('Skip for Safari and IE');
@@ -264,9 +254,7 @@ describe('Verify Switch component', function() {
             mouseHoverElement(semanticCompactSwitchHandel);
             const handelColorAfter = getCSSPropertyByName(semanticCompactSwitchHandel, 'background-color');
 
-            expect(handelColorBefore.value).toContain('255,255,255');
-            expect(handelColorAfter.value).toContain('241,253,246');
-
+            expect(handelColorBefore.value).not.toBe(handelColorAfter.value);
         });
 
         // No example given to verify
@@ -277,10 +265,9 @@ describe('Verify Switch component', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             switchPage.saveExampleBaselineScreenshot();
-            expect(switchPage.compareWithBaseline()).toBeLessThan(3);
+            expect(switchPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
-
 
     /*xdescribe('has correct page content', function() {
          // TODO: add page content checks

@@ -76,7 +76,7 @@ describe('Verify Panel', () => {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             panelPage.saveExampleBaselineScreenshot();
-            expect(panelPage.compareWithBaseline()).toBeLessThan(3);
+            expect(panelPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
