@@ -70,7 +70,7 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     @Input()
     id: string = 'fd-popover-' + cdkPopoverUniqueId++;
 
-    /** Whether the select component should be displayed in mobile mode. */
+    /** Whether the popover component should be displayed in mobile mode. */
     @Input()
     mobile = false;
 
