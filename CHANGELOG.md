@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.26...v0.31.0-rc.27) (2021-06-25)
+
+
+### Bug Fixes
+
+* **core:** fix shellbar-user-menu input type ([#5822](https://github.com/SAP/fundamental-ngx/issues/5822)) ([70c5d6c](https://github.com/SAP/fundamental-ngx/commit/70c5d6c663af38b14ed41ba5bc5ad38a47bc572f))
+
 ## [0.31.0-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.25...v0.31.0-rc.26) (2021-06-25)
 
 ## [0.31.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.24...v0.31.0-rc.25) (2021-06-25)
