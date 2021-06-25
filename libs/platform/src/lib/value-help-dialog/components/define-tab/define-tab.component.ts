@@ -30,6 +30,8 @@ class ExtendedExcludedEntity extends VhdExcludedEntity {
     id: number;
 }
 
+let titleUniqueId = 0;
+
 @Component({
     selector: 'fdp-define-tab',
     templateUrl: './define-tab.component.html',
@@ -38,8 +40,13 @@ class ExtendedExcludedEntity extends VhdExcludedEntity {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefineTabComponent<T> extends VhdBaseTab implements OnChanges {
-    @Input()
-    fullBodyLabel = 'Product';
+  protected defaultId = `fd-title-id-${titleUniqueId++}`;
+
+  @Input()
+  titleId: string = this.defaultId;
+
+  @Input()
+  fullBodyLabel = 'Product';
 
     @Input()
     conditions: ExtendedBaseEntity[] = [];

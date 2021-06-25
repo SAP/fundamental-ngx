@@ -16,6 +16,8 @@ import { InfiniteScrollDirective } from '@fundamental-ngx/core/infinite-scroll';
 import { VhdFilter, VdhTableSelection } from '../../models';
 import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
 
+let titleUniqueId = 0;
+
 @Component({
     selector: 'fdp-select-tab',
     templateUrl: './select-tab.component.html',
@@ -24,91 +26,96 @@ import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, AfterViewInit {
-    @Input()
-    selected: T[] = [];
+  protected defaultId = `fd-select-tab-title-id-${titleUniqueId++}`;
 
-    /** Actual filters */
-    @Input()
-    filters: VhdFilter[] = [];
+  @Input()
+  selectTitleId: string = this.defaultId;
 
-    /** Close dialog immediately after select any row from search table. It'll be skipped if multi option is true */
-    @Input()
-    selection: VdhTableSelection = 'single';
+  @Input()
+  selected: T[] = [];
 
-    /** Text displayed when table has no items. */
-    @Input()
-    emptyTableMessage = 'Use the search to get results';
+  /** Actual filters */
+  @Input()
+  filters: VhdFilter[] = [];
 
-    /** Uniq field from data source */
-    @Input()
-    uniqueKey = 'id';
+  /** Close dialog immediately after select any row from search table. It'll be skipped if multi option is true */
+  @Input()
+  selection: VdhTableSelection = 'single';
 
-    /** Items per page for pagination below search table */
-    @Input()
-    pageSize: number;
+  /** Text displayed when table has no items. */
+  @Input()
+  emptyTableMessage = 'Use the search to get results';
 
-    /** Count of default mobile header from search table */
-    @Input()
-    defaultMobileHeaders = 2;
+  /** Uniq field from data source */
+  @Input()
+  uniqueKey = 'id';
 
-    /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
-    @Input()
-    contentTableDensity: ContentDensity = ContentDensityEnum.COMPACT;
+  /** Items per page for pagination below search table */
+  @Input()
+  pageSize: number;
 
-    @Input()
-    /** Displayed data for search table */
-    displayedData: T[] = [];
+  /** Count of default mobile header from search table */
+  @Input()
+  defaultMobileHeaders = 2;
 
-    /** Event emitted when row was selected. */
-    @Output()
-    select = new EventEmitter<T[]>();
+  /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
+  @Input()
+  contentTableDensity: ContentDensity = ContentDensityEnum.COMPACT;
 
-    @ViewChild(InfiniteScrollDirective) infiniteScrollTable: InfiniteScrollDirective;
+  @Input()
+  /** Displayed data for search table */
+  displayedData: T[] = [];
 
-    /** @hidden */
-    _contentDensityOptions = ContentDensityEnum;
+  /** Event emitted when row was selected. */
+  @Output()
+  select = new EventEmitter<T[]>();
 
-    /** @hidden indeterminate flag for `select all` checkbox */
-    _selectedAll = false;
+  @ViewChild(InfiniteScrollDirective) infiniteScrollTable: InfiniteScrollDirective;
 
-    /** @hidden Shown items count in mobile view */
-    _shownFrom = 0;
+  /** @hidden */
+  _contentDensityOptions = ContentDensityEnum;
 
-    /** @hidden Shown items count in mobile view */
-    _shownCount = 0;
+  /** @hidden indeterminate flag for `select all` checkbox */
+  _selectedAll = false;
 
-    /** @hidden Current page in desktop view */
-    _currentPage = 0;
+  /** @hidden Shown items count in mobile view */
+  _shownFrom = 0;
 
-    /** @hidden Headers and body for search table */
-    _tableFilters: {
-        main: VhdFilter[];
-        secondary: VhdFilter[];
-    } = {
-        main: [],
-        secondary: []
-    };
+  /** @hidden Shown items count in mobile view */
+  _shownCount = 0;
 
-    /** @hidden */
-    _selectedMap: { [key: string]: boolean } = {};
+  /** @hidden Current page in desktop view */
+  _currentPage = 0;
 
-    /** @hidden */
-    private selectedItems: T[] = [];
+  /** @hidden Headers and body for search table */
+  _tableFilters: {
+    main: VhdFilter[],
+    secondary: VhdFilter[]
+  } = {
+    main: [],
+    secondary: []
+  };
 
-    /** Selection type getters */
-    get isSingleSelection(): boolean {
-        return this.selection === 'single';
-    }
-    get isOnceSelection(): boolean {
-        return this.selection === 'once';
-    }
-    get isMultiSelection(): boolean {
-        return this.selection === 'multi';
-    }
+  /** @hidden */
+  _selectedMap: { [key: string]: boolean; } = {};
 
-    ngAfterViewInit(): void {
-        Promise.resolve(true).then(() => this._checkScrollAndShowMore());
-    }
+  /** @hidden */
+  private selectedItems: T[] = [];
+
+  /** Selection type getters */
+  get isSingleSelection(): boolean {
+    return this.selection === 'single';
+  }
+  get isOnceSelection(): boolean {
+    return this.selection === 'once';
+  }
+  get isMultiSelection(): boolean {
+    return this.selection === 'multi';
+  }
+
+  ngAfterViewInit(): void {
+    Promise.resolve(true).then(() => this._checkScrollAndShowMore());
+  }
 
     /** @hidden  */
     ngOnChanges(changes: SimpleChanges): void {

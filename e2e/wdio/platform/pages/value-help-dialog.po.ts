@@ -37,7 +37,7 @@ export class ValueHelpDialogPo extends BaseComponentPo {
     tableRows = 'table tr';
     selectedItemID = 'tr[aria-selected="true"] td:nth-of-type(2)';
     selectedItemName = 'tr[aria-selected="true"] td:nth-of-type(3)';
-    selectedTokens = '.fd-toolbar fd-token';
+    selectedTokens = '.fd-tokenizer fd-token';
     showAllBtn = '.fdp-value-help-dialog__toggle-filters button';
 
     // define conditions form selectors
