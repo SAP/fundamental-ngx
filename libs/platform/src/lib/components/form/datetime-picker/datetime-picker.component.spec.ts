@@ -174,7 +174,7 @@ describe('PlatformDatetimePickerComponent', () => {
         expect(inputGroupEl.nativeElement.classList.contains('is-error')).toBeTrue();
     });
 
-    it('should take 100% of container width', async () => {
+    it('should take 100% of container width', () => {
       const customPopoverEl = fixture.debugElement.query(By.css('.fd-datetime .fd-popover-custom'));
       expect(customPopoverEl.nativeElement.style.display).toBe('inline');
     });
