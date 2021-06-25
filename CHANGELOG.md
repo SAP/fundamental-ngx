@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.24...v0.31.0-rc.25) (2021-06-25)
+
+
+### Bug Fixes
+
+* **core:** set disabled state for button-bar element ([#5780](https://github.com/SAP/fundamental-ngx/issues/5780)) ([186031c](https://github.com/SAP/fundamental-ngx/commit/186031c279b7434a6d737431b213c21d9c57beba))
+
 ## [0.31.0-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.23...v0.31.0-rc.24) (2021-06-25)
 
 ## [0.31.0-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.22...v0.31.0-rc.23) (2021-06-24)
