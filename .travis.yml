@@ -11,7 +11,7 @@ services:
 git:
   depth: false
 script:
-  - npm run build-all
+  - travis_wait 20 npm run build-all
 jobs:
   include:
     - stage: Lint commit message
