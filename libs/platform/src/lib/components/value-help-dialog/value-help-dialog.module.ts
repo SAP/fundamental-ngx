@@ -46,6 +46,7 @@ import { ConditionCountMessageDirective } from './directives/condition-count-mes
     CommonModule,
     FormsModule,
 
+    BarModule,
     DialogModule,
     TabsModule,
     ButtonModule,
