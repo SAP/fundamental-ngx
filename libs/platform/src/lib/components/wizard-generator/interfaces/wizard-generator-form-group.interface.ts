@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { DynamicFormItem } from '../../form/form-generator/interfaces/dynamic-form-item';
 
 export interface WizardGeneratorFormGroup {
@@ -13,11 +12,6 @@ export interface WizardGeneratorFormGroup {
      * @description Form main title.
      */
     title: string;
-    /**
-     * @description Should return true or false depending on whether or not this form group should be visible.
-     * @returns Boolean
-     */
-    when?: () => boolean | Promise<boolean> | Observable<boolean>;
     /**
      * @description List of @see DynamicFormItem representing the list of items
      * to be rendered in the form.
