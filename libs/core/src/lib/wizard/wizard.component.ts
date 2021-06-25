@@ -102,7 +102,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         private _elRef: ElementRef,
         private readonly _cdRef: ChangeDetectorRef,
         @Optional() private _dialogBodyComponent: DialogBodyComponent
-    ) {}
+    ) { }
 
     /** @hidden */
     @HostListener('window:resize')
@@ -165,6 +165,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         }
         wizardFooterHeight = this._getWizardFooterHeight();
         dialogOffset = this._getDialogOffset();
+
         return shellbarHeight + wizardNavHeight + wizardFooterHeight + dialogOffset;
     }
 
@@ -293,7 +294,8 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         const templatesLength = this.contentTemplates.length;
         this.contentTemplates = [];
         let _stepId = 0;
-        for (const step of this.steps.toArray()) {
+        const steps = this.steps.toArray();
+        for (const step of steps) {
             if (step.content) {
                 if (!step.isSummary) {
                     step.content.tallContent = false;
@@ -307,11 +309,12 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
              If the step is completed and appendToWizard is true, hide the nextStep button, unless it's the last step,
              or if there's a summary and it is the second to last step
              */
-            if (step.completed && this.appendToWizard && step !== this._getLastNonSummaryStep()) {
+            if (step.completed && this.appendToWizard && step.content?.nextStep && step !== this._getLastNonSummaryStep()) {
                 step.content.nextStep._getElRef().nativeElement.style.display = 'none';
             } else if (
-                (step.completed && this.appendToWizard) ||
-                (step.visited && step.branching && step.status === CURRENT_STEP_STATUS)
+                step.content?.nextStep &&
+                ((step.completed && this.appendToWizard) ||
+                (step.visited && step.branching && step.status === CURRENT_STEP_STATUS))
             ) {
                 step.content.nextStep._getElRef().nativeElement.style.removeProperty('display');
             }
@@ -323,14 +326,23 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                 if (step.status === CURRENT_STEP_STATUS && (!step.completed || !this.appendToWizard)) {
                     step.content.tallContent = true;
                 }
-                if (!templatesLength || (!this.appendToWizard && step.status === CURRENT_STEP_STATUS)) {
+
+                const isCurrentStep = !this.appendToWizard && step.status === CURRENT_STEP_STATUS;
+
+                if (!templatesLength || isCurrentStep) {
                     this.contentTemplates = [step.content.contentTemplate];
+
+                    // If we found needed step, break the cycle, since it might set wrong step later.
+                    if (isCurrentStep) {
+                        break;
+                    }
                 } else if (this.appendToWizard && !step.isSummary) {
                     this.contentTemplates.push(step.content.contentTemplate);
                 }
             }
         }
-        const lastVisibleTemplate = this.steps.toArray()[this.contentTemplates.length - 1];
+
+        const lastVisibleTemplate = steps[this.contentTemplates.length - 1];
         if (lastVisibleTemplate && lastVisibleTemplate.content) {
             lastVisibleTemplate.content.tallContent = true;
         }

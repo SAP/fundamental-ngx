@@ -85,7 +85,8 @@ describe('FormGeneratorComponent', () => {
                 PlatformInputModule,
                 PlatformDatePickerModule,
                 PlatformSwitchModule,
-                PlatformFormGeneratorModule],
+                PlatformFormGeneratorModule
+            ],
             declarations: [ TestComponent ],
         }).compileComponents();
 

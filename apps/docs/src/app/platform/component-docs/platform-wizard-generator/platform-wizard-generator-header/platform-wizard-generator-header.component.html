@@ -1,0 +1,23 @@
+<header>Wizard generator</header>
+<description>
+    This is a wrapper of the Platform component present in <a routerLink="/core/wizard">@fundamental-ngx/core</a>.
+    <br />
+    It provides ability to dynamically generate Wizard without any user-provided templates.
+    <br />
+    <br />
+
+    <h3>Platform specific enhancements:</h3>
+    <ul>
+        <li>
+            Steps are dynamically rendered based on steps object input.
+        </li>
+        <li>
+            Branching logic is based on the steps object input.
+        </li>
+    </ul>
+</description>
+<br />
+<import module="PlatformWizardGeneratorModule"></import>
+
+<fd-header-tabs></fd-header-tabs>
+<router-outlet></router-outlet>

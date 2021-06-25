@@ -315,7 +315,14 @@ export const ROUTES: Routes = [
                     import('./component-docs/platform-slider/slider-docs.module').then(
                         (m) => m.PlatformSliderDocsModule
                     )
-            }
+            },
+            {
+                path: 'wizard-generator',
+                loadChildren: () =>
+                    import(
+                        './component-docs/platform-wizard-generator/platform-wizard-generator-docs.module'
+                    ).then((m) => m.PlatformWizardGeneratorDocsModule)
+            },
         ]
     }
 ];

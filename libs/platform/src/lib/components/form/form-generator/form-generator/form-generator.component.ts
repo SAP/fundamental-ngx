@@ -17,6 +17,18 @@ import { Subscription } from 'rxjs';
 import { FormGeneratorService } from '../form-generator.service';
 import { DynamicFormItem, DynamicFormValue } from '../interfaces/dynamic-form-item';
 import { DynamicFormControl } from '../dynamic-form-control';
+import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
+
+export interface SubmitFormEventResult {
+    /**
+     * @description Indicator if validation has been passed.
+     */
+    success: boolean;
+    /**
+     * @description Formatted form value.
+     */
+    value: DynamicFormValue
+};
 
 /**
  * @description Form Generator component represents a high-level component
@@ -73,10 +85,16 @@ export class FormGeneratorComponent implements OnDestroy {
 
     /**
      * @description Event which notifies parent component that the form has been successfuly validated
-     * and submitted.
+     * and submitted. Contains form
      */
     @Output()
     formSubmitted = new EventEmitter<DynamicFormValue>();
+
+    /**
+     * @description Event which notifies parent component that the form was submitted.
+     */
+    @Output()
+    formSubmittedStatus = new EventEmitter<SubmitFormEventResult>();
 
     /**
      * @description Represents the form instance. @see NgForm
@@ -86,7 +104,7 @@ export class FormGeneratorComponent implements OnDestroy {
     /**
      * @description Dynamically generated form. @see FormGeneratorService
      */
-    form: FormGroup;
+    form: DynamicFormGroup;
     /**
      * @description List of the form controls.
      */
@@ -140,12 +158,14 @@ export class FormGeneratorComponent implements OnDestroy {
 
         // stop here if form is invalid
         if (this.form.invalid || this.form.pending) {
+            this.formSubmittedStatus.emit({success: false, value: null});
             return;
         }
 
         const formValue = await this._fgService.getFormValue(this.form);
 
         this.formSubmitted.emit(formValue);
+        this.formSubmittedStatus.emit({success: true, value: formValue});
 
         this.form.markAsPristine();
     }
@@ -180,7 +200,7 @@ export class FormGeneratorComponent implements OnDestroy {
 
         this.form = form;
 
-        this.formControlItems = Object.values(this.form.controls) as DynamicFormControl[];
+        this.formControlItems = Object.values(this.form.controls);
 
         this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
 

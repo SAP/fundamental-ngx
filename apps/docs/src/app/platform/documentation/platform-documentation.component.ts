@@ -71,6 +71,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
 
         this.utilities = [
             { url: 'platform/form-generator', name: 'Form Generator' },
+            { url: 'platform/wizard-generator', name: 'Wizard Generator' },
         ];
 
         this.sections = [

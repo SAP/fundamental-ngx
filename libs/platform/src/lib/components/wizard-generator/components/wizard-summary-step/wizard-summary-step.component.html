@@ -1,0 +1,6 @@
+<ng-container *ngIf="_shouldRender">
+    <ng-container *ngFor="let step of wizardSteps; trackBy: trackFn">
+        <fdp-wizard-summary-section [step]="step" [stepValue]="_submittedForms[step.id]"></fdp-wizard-summary-section>
+    </ng-container>
+</ng-container>
+

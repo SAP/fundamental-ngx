@@ -1,5 +1,5 @@
 import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
-import { AbstractControl, AsyncValidatorFn, ValidatorFn } from '@angular/forms';
+import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
 import { DynamicFormControl } from './dynamic-form-control';
 
 /**
@@ -47,8 +47,8 @@ export class DynamicFormControlFieldDirective implements OnInit {
     }
 
     @Input()
-    set fdpDynamicFormControlField(value: AbstractControl) {
-        this._control = value as DynamicFormControl;
+    set fdpDynamicFormControlField(value: DynamicFormControl) {
+        this._control = value;
 
         this._originalValidators = this._control.formItem.validators;
         this._originalAsyncValidators = this._control.formItem.asyncValidators;

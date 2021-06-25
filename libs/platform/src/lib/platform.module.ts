@@ -51,6 +51,7 @@ import { PlatformSliderModule } from './components/slider/slider.module';
 import { PlatformConfig } from './platform.config';
 import { PlatformPageFooterModule } from './components/page-footer/page-footer.module';
 import { PlatformFormGeneratorModule } from './components/form/form-generator/fdp-form-generator.module';
+import { PlatformWizardGeneratorModule } from './components/wizard-generator/wizard-generator.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -67,12 +68,10 @@ import { PlatformFormGeneratorModule } from './components/form/form-generator/fd
         PlatformMenuModule,
         PlatformSelectModule,
         PlatformLinkModule,
-        PlatformListModule,
         PlatformRadioGroupModule,
         PlatformMenuButtonModule,
         PlatformSplitMenuButtonModule,
         PlatformInfoLabelModule,
-        PlatformTextAreaModule,
         PlatformPanelModule,
         PlatformSwitchModule,
         PlatformTextAreaModule,
@@ -89,12 +88,10 @@ import { PlatformFormGeneratorModule } from './components/form/form-generator/fd
         PlatformDatetimePickerModule,
         PlatformTimePickerModule,
         PlatformMultiInputModule,
-        PlatformMultiInputModule,
         PlatformMultiInputMobileModule,
         PlatformFeedInputModule,
         PlatformFileUploaderModule,
         PlatformUploadCollectionModule,
-        PlatformValueHelpDialogModule,
         PlatformAutoCompleteModule,
         PlatformApprovalFlowModule,
         PlatformValueHelpDialogModule,
@@ -105,7 +102,8 @@ import { PlatformFormGeneratorModule } from './components/form/form-generator/fd
         StandardListItemModule,
         PlatformSliderModule,
         PlatformPageFooterModule,
-        PlatformFormGeneratorModule
+        PlatformFormGeneratorModule,
+        PlatformWizardGeneratorModule
     ],
     declarations: []
 })

@@ -1,0 +1,10 @@
+<h3 *ngIf="item.title" fd-title>{{ item.title }}</h3>
+
+<fdp-form-generator
+    *ngFor="let form of item.formGroups; let i = index"
+    [mainTitle]="form.title"
+    [columnLayout]="form.columnLayout"
+    [formItems]="form.formItems"
+    (formCreated)="onFormCreated($event, form.id)"
+    (formSubmittedStatus)="onFormSubmitted($event, form.id)"
+></fdp-form-generator>

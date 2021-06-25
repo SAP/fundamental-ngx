@@ -1,0 +1,94 @@
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import { filter, takeWhile } from 'rxjs/operators';
+import { BaseWizardGenerator } from '../../base-wizard-generator';
+import { WizardDialogData } from '../../interfaces/wizard-dialog-data.interface';
+import { WizardTitle } from '../../interfaces/wizard-title.interface';
+import { WizardGeneratorService } from '../../wizard-generator.service';
+
+@Component({
+    selector: 'fdp-dialog-wizard-generator',
+    templateUrl: './dialog-wizard-generator.component.html',
+    styleUrls: ['./dialog-wizard-generator.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [WizardGeneratorService]
+})
+export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
+
+    @ViewChild('confirmationDialog') confirmationDialog: TemplateRef<any>;
+
+    /**
+     * @description Wizards dialog title configuration.
+     */
+    title: WizardTitle;
+
+    confirmationDialogText = 'Are you sure you want to discard your progress?';
+    confirmationDialogCloseText = 'Confirm';
+    confirmationDialogCancelText = 'Cancel';
+
+    constructor(
+        _wizardGeneratorService: WizardGeneratorService,
+        _cd: ChangeDetectorRef,
+        private _dialogRef: DialogRef<WizardDialogData>,
+        private _dialogService: DialogService
+    ) {
+        super(_wizardGeneratorService, _cd);
+
+        this.items = this._dialogRef.data.items;
+        this.title = this._dialogRef.data.title;
+        this.appendToWizard = this._dialogRef.data.appendToWizard;
+        this.addSummary = this._dialogRef.data.addSummary;
+        this.navigationButtonLabels = this._dialogRef.data.navigationButtonLabels;
+        this.contentHeight = this._dialogRef.data.contentHeight;
+
+        if (this._dialogRef.data.confirmationDialogText) {
+            this.confirmationDialogText = this._dialogRef.data.confirmationDialogText;
+        }
+
+        if (this._dialogRef.data.confirmationDialogCancelText) {
+            this.confirmationDialogCancelText = this._dialogRef.data.confirmationDialogCancelText;
+        }
+
+        if (this._dialogRef.data.confirmationDialogCloseText) {
+            this.confirmationDialogCloseText = this._dialogRef.data.confirmationDialogCloseText;
+        }
+    }
+
+    /**
+     * @description Cancels Wizard progress and closes the dialog.
+     */
+    cancel(): void {
+        const dialogRef = this._dialogService.open(this.confirmationDialog, { responsivePadding: true });
+
+        dialogRef.afterClosed
+        .pipe(takeWhile(() => this._allowSubscribe), filter((result) => result))
+        .subscribe(() => {
+            this._dialogRef.dismiss();
+        }, () => {});
+    }
+
+    /**
+     * @description Completes Wizard process, emits Wizard result and closes the dialog.
+     */
+    async finish(): Promise<void> {
+
+        if (this.isSummaryStep) {
+            const wizardResult = await this._wizardGeneratorService.getWizardFormValue(true);
+            this._dialogRef.close(wizardResult);
+            return;
+        }
+
+        const currentStepId = this._wizardGeneratorService.getCurrentStepId();
+        this.submitStepForms(currentStepId)
+        .pipe(takeWhile(() => this._allowSubscribe))
+        .subscribe(async (result) => {
+            if (Object.values(result).some(r => !r.success)) {
+                return;
+            }
+
+            const wizardResult = await this._wizardGeneratorService.getWizardFormValue(true);
+            this._dialogRef.close(wizardResult);
+        });
+    }
+}
