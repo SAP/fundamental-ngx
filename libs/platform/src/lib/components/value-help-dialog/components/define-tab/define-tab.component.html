@@ -1,4 +1,4 @@
-<h5 fd-title class="define-condition-title" i18n="@@platformI18nValueHelpDialog.Define.Condition.Title">Product</h5>
+<h5 [id]="titleId" fd-title class="define-condition-title" i18n="@@platformI18nValueHelpDialog.Define.Condition.Title">Product</h5>
 <ng-container *ngFor="let item of _conditions; trackBy: _trackByKeyAndType; index as i">
     <fd-layout-grid class="condition-row" [noGap]="true">
         <div fdLayoutGridCol="5">
@@ -14,7 +14,9 @@
                 [controlTemplate]="customSelectTemplate"
                 [name]="uid + '-' + type + '-strategy-' + item.id"
                 [(ngModel)]="item.strategy"
-                (valueChange)="_filterChanged()">
+                (valueChange)="_filterChanged()"
+                [attr.aria-label]="'Select a strategy from dropdown'"
+                [attr.aria-labelledby]="titleId">
                 <ng-container *ngIf="_includeStrategy.length">
                     <li fd-list-group-header>Include</li>
                     <fd-option *ngFor="let strategy of _includeStrategy" [value]="strategy.key">
@@ -105,10 +107,11 @@
             <button
                 fd-button
                 i18n-aria-label="@@platformI18nValueHelpDialog.Condition.RemoveLabel"
-                aria-label="Remove define condition"
+                aria-label="Remove Define Condition"
                 fdType="transparent"
                 glyph="decline"
                 [compact]="true"
+                title="Remove Define Condition"
                 (click)="removeCondition(i)"></button>
         </div>
     </fd-layout-grid>
@@ -123,9 +126,10 @@
                 fd-button
                 i18n-label="@@platformI18nValueHelpDialog.AddLabelDefineCondition"
                 i18n-aria-label="@@platformI18nValueHelpDialog.AddAriaLabelDefineCondition"
-                aria-label="Add new define condition"
+                aria-label="Add New Define Condition"
                 label="Add"
                 [compact]="true"
+                title="Add New Define Condition"
                 (click)="addEmptyCondition()"></button>
         </div>
     </div>

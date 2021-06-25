@@ -2,27 +2,25 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import {
-  TokenModule,
-  ButtonModule,
-  TabsModule,
-  DialogModule,
-  FormModule,
-  CheckboxModule,
-  LayoutGridModule,
-  ToolbarModule,
-  TableModule,
-  PipeModule,
-  IconModule,
-  ListModule,
-  LinkModule,
-  BarModule,
-  SelectModule,
-  PanelModule,
-  InputGroupModule,
-  PopoverModule,
-  InfiniteScrollModule
-} from '@fundamental-ngx/core';
+import { TokenModule } from '@fundamental-ngx/core/token';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { LinkModule } from '@fundamental-ngx/core/link';
+import { PanelModule } from '@fundamental-ngx/core/panel';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { TableModule } from '@fundamental-ngx/core/table';
+import { PipeModule } from '@fundamental-ngx/core/utils';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 import { PlatformValueHelpDialogComponent } from './value-help-dialog/value-help-dialog.component';
 import { VhdFilterComponent } from './components/value-help-dialog-filter/value-help-dialog-filter.component';
@@ -46,6 +44,7 @@ import { ConditionCountMessageDirective } from './directives/condition-count-mes
     CommonModule,
     FormsModule,
 
+    BarModule,
     DialogModule,
     TabsModule,
     ButtonModule,

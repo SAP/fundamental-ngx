@@ -1,24 +1,30 @@
-
 <div class="table-header">
-    <h5 fd-title><ng-container i18n="@@platformI18nValueHelpDialogDisplayCountLabel">Items</ng-container> ({{ displayedData.length }})</h5>
+    <h5 fd-title>
+        <ng-container i18n="@@platformI18nValueHelpDialogDisplayCountLabel">Items</ng-container> ({{
+            displayedData.length
+        }})
+    </h5>
 </div>
-<div class="fdp-value-help-dialog__table-holder table-content"
+<div
+    class="fdp-value-help-dialog__table-holder table-content"
     fdInfiniteScroll
     (onScrollAction)="_showMoreElements()"
     [scrollPercent]="80"
+    role="table"
 >
-    <table fd-table
+    <table
+        fd-table
         [compact]="contentTableDensity === _contentDensityOptions.COMPACT"
         [condensed]="contentTableDensity === _contentDensityOptions.CONDENSED"
         [popIn]="mobile"
         [noBorderX]="mobile"
         [noBorderY]="false"
+        role="presentation"
     >
         <thead fd-table-header>
             <tr fd-table-row *ngIf="displayedData.length && _tableFilters">
-                <th fd-table-cell [fitContent]="mobile">
+                <th fd-table-cell [fitContent]="mobile" role="cell">
                     <fd-checkbox
-                        role="checkbox"
                         *ngIf="isMultiSelection"
                         [name]="uid + '-row-all'"
                         [compact]="true"
@@ -28,11 +34,25 @@
                         (ngModelChange)="_toggleAllRows()"
                     ></fd-checkbox>
                 </th>
-                <th fd-table-cell *ngFor="let filter of _tableFilters.main; trackBy: _trackByFilterFn">{{ filter.label }}</th>
+                <th
+                    scope="col"
+                    role="columnheader"
+                    fd-table-cell
+                    *ngFor="let filter of _tableFilters.main; trackBy: _trackByFilterFn; let colindex = index"
+                    [attr.aria-colindex]="colindex"
+                >
+                    {{ filter.label }}
+                </th>
             </tr>
         </thead>
-        <tbody fd-table-body>
-            <ng-container *ngFor="let row of displayedData | slice:_shownFrom:_shownCount; trackBy:_trackByTableRowFn; index as i">
+        <tbody fd-table-body role="rowgroup">
+            <ng-container
+                *ngFor="
+                    let row of displayedData | slice: _shownFrom:_shownCount;
+                    trackBy: _trackByTableRowFn;
+                    index as i
+                "
+            >
                 <tr
                     fd-table-row
                     [hoverable]="!mobile"
@@ -41,9 +61,8 @@
                     [activable]="!isMultiSelection"
                     (click)="!isMultiSelection && _toggleSelectRow(row)"
                 >
-                    <td fd-table-cell [fitContent]="mobile">
+                    <td fd-table-cell [fitContent]="mobile" role="cell">
                         <fd-checkbox
-                            role="checkbox"
                             *ngIf="isMultiSelection"
                             [name]="uid + '-row-' + i"
                             [compact]="true"
@@ -51,12 +70,25 @@
                             (change)="_toggleSelectRow(row)"
                         ></fd-checkbox>
                     </td>
-                    <td fd-table-cell *ngFor="let filter of _tableFilters.main">{{ row[filter.key] || '' }}</td>
+                    <td
+                        fd-table-cell
+                        *ngFor="let filter of _tableFilters.main; let rowIndex = index"
+                        role="cell"
+                        [attr.aria-rowindex]="rowIndex"
+                    >
+                        {{ row[filter.key] || '' }}
+                    </td>
                 </tr>
 
-                <tr fd-table-row *ngIf="mobile && _tableFilters.secondary.length" [secondary]="true" [attr.aria-selected]="_selectedMap[row[uniqueKey]]">
-                    <td fd-table-cell></td>
-                    <td fd-table-cell colspan="100%" [fitContent]="true">
+                <tr
+                    fd-table-row
+                    *ngIf="mobile && _tableFilters.secondary.length"
+                    [secondary]="true"
+                    [attr.aria-selected]="_selectedMap[row[uniqueKey]]"
+                    role="rowheader"
+                >
+                    <td fd-table-cell role="cell"></td>
+                    <td colspan="100%" [fitContent]="true" role="cell">
                         <p fd-table-text *ngFor="let filter of _tableFilters.secondary">
                             <label>{{ filter.label }}:</label>
                             {{ row[filter.key] || '' }}
@@ -64,19 +96,29 @@
                     </td>
                 </tr>
             </ng-container>
-            <tr fd-table-row *ngIf="displayedData.length && mobile && _shownCount && _shownCount !== displayedData.length">
-                <td colspan="100%">
+            <tr
+                fd-table-row
+                *ngIf="displayedData.length && mobile && _shownCount && _shownCount !== displayedData.length"
+                role="rowheader"
+            >
+                <td colspan="100%" role="cell">
                     <div fd-bar barDesign="header-with-subheader">
                         <div fd-bar-middle>
                             <fd-bar-element>
-                                <button fd-button fdType="transparent" i18n-label="@@platformI18nValueHelpDialogMoreButton" label="More" (click)="_showMoreElements()"></button>
+                                <button
+                                    fd-button
+                                    fdType="transparent"
+                                    i18n-label="@@platformI18nValueHelpDialogMoreButton"
+                                    label="More"
+                                    (click)="_showMoreElements()"
+                                ></button>
                             </fd-bar-element>
                         </div>
                     </div>
                 </td>
             </tr>
-            <tr fd-table-row *ngIf="!displayedData.length">
-                <td colspan="100%">
+            <tr fd-table-row *ngIf="!displayedData.length" role="rowheader">
+                <td colspan="100%" role="row">
                     <div class="fdp-value-help-dialog__empty-message">
                         {{ emptyTableMessage }}
                     </div>
