@@ -22,14 +22,17 @@ import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATET
 export class PlatformDatetimePickerReactiveExampleComponent {
     datetimePickerForm = new FormGroup({});
 
+    stringValue: string;
+
     formData = new StoredDatetimeObject(new FdDate(2008, 2, 11, 21, 15));
 
     requiredDateValidator: ValidatorFn[] = [Validators.required];
 
     onSubmit(): void {
         if (this.datetimePickerForm.valid) {
-            alert('Form Value: ' + this.datetimePickerForm.value);
+            this.stringValue = JSON.stringify(this.datetimePickerForm.value);
         } else {
+            this.stringValue = '';
             alert('Form invalid');
         }
     }
