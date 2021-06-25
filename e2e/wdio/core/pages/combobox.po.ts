@@ -11,7 +11,6 @@ export class ComboboxPo extends CoreBaseComponentPo {
     smallText = 'div~small';
     smallText_2 = 'fd-combobox~small';
     allInputFields = this.root + ' .fd-input.fd-input-group__input';
-    disableInputFields = '.fd-popover-custom--disabled fd-input-group';
     activeInputButton = '//button[contains(@class, \'fd-input-group\') and not (contains(@class, \'is-disabled\'))]';
     mobileButton = '.cdk-drag-disabled button';
     mobileTitle = 'h1.fd-title--h5';

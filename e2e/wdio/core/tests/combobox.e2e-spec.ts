@@ -3,7 +3,7 @@ import {
     acceptAlert,
     click, getAlertText,
     getAttributeByName,
-    getElementArrayLength, getText, isElementClickable, isElementDisplayed,
+    getElementArrayLength, getText, isElementClickable, isElementDisplayed, isEnabled,
     refreshPage, scrollIntoView, setValue
 } from '../../driver/wdio';
 
@@ -26,7 +26,7 @@ import {
 describe('Combobox component test suit', function() {
     const comboboxPage = new ComboboxPo();
     const {
-        allInputFields, disableInputFields, dropdownPopover, activeInputButton, dropdownOption, smallText,
+        allInputFields, dropdownPopover, activeInputButton, dropdownOption, smallText,
         smallText_2, mobileButton, mobileTitle, reactiveFormButton, reactiveFormText, standardButton
     } = comboboxPage;
 
@@ -46,12 +46,8 @@ describe('Combobox component test suit', function() {
         }
     });
 
-    it('verify placeholders in all disable input fields input fields', () => {
-        const inputLength = getElementArrayLength(disableInputFields);
-        for (let i = 0; i < inputLength; i++) {
-            scrollIntoView(disableInputFields, i);
-            expect(getAttributeByName(disableInputFields, 'ng-reflect-disabled', i)).toBe('true');
-        }
+    it('verify disable input field', () => {
+        expect(isEnabled(allInputFields, 20)).toBe(false, '');
     });
 
     describe('Check Standard Combobox', function() {
@@ -308,7 +304,7 @@ describe('Combobox component test suit', function() {
         });
     });
 
-    describe('Should check visual regression', function() {
+    fdescribe('Should check visual regression', function() {
 
         it('should check visual regression for all examples', () => {
             comboboxPage.saveExampleBaselineScreenshot();
