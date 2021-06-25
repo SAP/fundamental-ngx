@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy,
+         Component,
+        ElementRef,
+        HostBinding,
+        Input,
+        OnChanges,
+        OnInit,
+        ViewEncapsulation,
+        Output,
+        EventEmitter,
+        HostListener } from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 export type IconFont = 'SAP-icons' | 'BusinessSuiteInAppSymbols' | 'SAP-icons-TNT';
@@ -46,6 +56,10 @@ export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
     @HostBinding('attr.aria-label')
     ariaLabel: string = null;
 
+    /** @hidden **/
+    @Output()
+    keyDown = new EventEmitter<KeyboardEvent>();
+
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
@@ -78,5 +92,11 @@ export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
 
     elementRef(): ElementRef<any> {
         return this._elementRef;
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    keydownHandler(event: KeyboardEvent): void {
+        this.keyDown.emit(event);
     }
 }
