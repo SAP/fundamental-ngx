@@ -19,7 +19,6 @@ export * from './layout-grid-responsive-offset-example.component';
 export * from './layout-grid-row-example.component';
 
 export const examples = [
-    ExampleLayoutGridBlockComponent,
     LayoutGridRowExampleComponent,
     LayoutGridBasicExampleComponent,
     LayoutGridNoGapExampleComponent,
@@ -27,5 +26,6 @@ export const examples = [
     LayoutGridNestingExampleComponent,
     LayoutGridResponsiveOffsetExample,
     LayoutGridGrowingExampleComponent,
-    LayoutGridResponsiveExampleComponent
+    LayoutGridResponsiveExampleComponent,
+    ExampleLayoutGridBlockComponent
 ];
