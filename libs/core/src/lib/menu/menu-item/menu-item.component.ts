@@ -63,7 +63,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** Reference to sub-menu component */
     @Input()
-    submenu: BaseSubmenu;
+    submenu: BaseSubmenu | undefined ;
 
     /** Emitted when the menu item is selected. */
     @Output()
@@ -88,9 +88,9 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** @hidden */
     constructor(public elementRef: ElementRef,
-                @Optional() public menuService: MenuService,
+                @Optional() public menuService: MenuService | null,
                 private _changeDetectorRef: ChangeDetectorRef,
-                @Optional() @Inject(SUBMENU) private _submenu: BaseSubmenu) {
+                @Optional() @Inject(SUBMENU) private _submenu: BaseSubmenu | null) {
     }
 
     /** @hidden */
@@ -199,7 +199,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** @hidden Listen on menu mode and set proper mode listeners */
     private _listenOnMenuMode(): void {
-        this.menuService.isMobileMode.subscribe(isMobile => {
+        this.menuService?.isMobileMode.subscribe(isMobile => {
             this._hoverSubscriptions.unsubscribe();
             if (!isMobile) {
                 this._hoverSubscriptions = this._listenOnMenuLinkHover();
