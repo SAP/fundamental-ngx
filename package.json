@@ -199,6 +199,6 @@
     "wdio-chromedriver-service": "6.0.4",
     "wdio-html-format-reporter": "0.4.0",
     "wdio-image-comparison-service": "2.0.0",
-    "webdriverio": "7.5.7"
+    "webdriverio": "7.7.4"
   }
 }
