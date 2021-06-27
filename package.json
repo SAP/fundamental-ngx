@@ -137,7 +137,7 @@
     "@angular/compiler-cli": "~11.2.13",
     "@angular/language-service": "~11.2.13",
     "@angularclass/hmr": "3.0.0",
-    "@babel/core": "7.13.14",
+    "@babel/core": "7.14.6",
     "@commitlint/cli": "12.1.4",
     "@commitlint/config-conventional": "12.1.4",
     "@commitlint/travis-cli": "12.1.4",
