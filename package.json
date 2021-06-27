@@ -104,7 +104,7 @@
     "@angular/platform-browser-dynamic": "~11.2.13",
     "@angular/router": "~11.2.13",
     "@nrwl/angular": "~11.1.5",
-    "@sap-theming/theming-base-content": "~11.1.29",
+    "@sap-theming/theming-base-content": "11.1.30",
     "@stackblitz/sdk": "1.5.2",
     "@types/google.visualization": "0.0.66",
     "@types/hammerjs": "2.0.39",
