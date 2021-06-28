@@ -583,10 +583,10 @@ export class MultiInputComponent implements
     private _updateSearchAnnoucementText(): void {
         // create search suggestion message with count.
         this.currentSearchSuggestionAnnoucementMessage =
-            this.displayedValues.length +
+            this.displayedValues?.length +
             ' ' +
             this.searchSuggestionMessage +
-            (this.displayedValues.length > 0 ? ',' + this.searchSuggestionNavigateMessage : '');
+            (this.displayedValues?.length > 0 ? ',' + this.searchSuggestionNavigateMessage : '');
     }
 
     disableParentFocusTrap(): void {
@@ -600,15 +600,10 @@ export class MultiInputComponent implements
     /** @hidden */
     private _applySearchTermChange(searchTerm: string): void {
         this.searchTerm = searchTerm;
-        // when search result not changed but input text is changed.
-        // again need to announce the result, so clear this message.
-        setTimeout(() => {
-            this.currentSearchSuggestionAnnoucementMessage = '';
-        });
         this.searchTermChange.emit(this.searchTerm);
         this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
         this._updateSearchAnnoucementText();
-        this._changeDetRef.detectChanges();
+        this._changeDetRef.markForCheck();
     }
 
     /** @hidden */

@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MultiInputComponent, MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY, DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
 
-describe('MultiInputComponent', () => {
+fdescribe('MultiInputComponent', () => {
     let component: MultiInputComponent;
     let fixture: ComponentFixture<MultiInputComponent>;
 
@@ -184,7 +184,7 @@ describe('MultiInputComponent', () => {
         expect(component.selected).toEqual([component.dropdownValues[0]]);
     });
 
-    it('should focus the input and clear the search term after selection', async() => {
+    xit('should focus the input and clear the search term after selection', async() => {
         const inputFocusSpy = spyOn(component.searchInputElement.nativeElement, 'focus');
 
         await fixture.whenStable();
