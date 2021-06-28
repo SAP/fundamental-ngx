@@ -330,7 +330,8 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         this._onDestroy$.complete();
     }
 
-    isRtl(): boolean {
+    /** @hidden */
+    private isRtl(): boolean {
         return this._rtlService?.rtl.getValue();
     }
 
