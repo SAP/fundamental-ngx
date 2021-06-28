@@ -8,6 +8,7 @@
                         <button fd-button
                                 fdType="transparent"
                                 id="menu-mobile-navigate-back"
+                                [compact]="false"
                                 [attr.aria-label]="'Go to previous menu level: ' + title"
                                 [glyph]="navigationIcon$ | async"
                                 (click)="backToParentLevel()">

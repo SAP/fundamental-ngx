@@ -30,10 +30,10 @@
                     class="fd-shellbar__button--menu fd-docs--theme-menu"
                     fdType="transparent"
                     [compact]="false"
-                    [fdMenu]="true"
+                    glyph="settings"
                     [fdMenuTrigger]="optionsMenu">
             </button>
-            <fd-menu #optionsMenu [mobile]="true" [mobileConfig]="{ title: 'Options', hasCloseButton: true }">
+            <fd-menu #optionsMenu [compact]="false" [mobile]="true" [mobileConfig]="{ title: 'Options', hasCloseButton: true }">
                 <li fd-menu-item [submenu]="themeSubmenu">
                     <div fd-menu-interactive>
                         <span fd-menu-title>Themes</span>
