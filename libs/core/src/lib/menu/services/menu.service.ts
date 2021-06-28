@@ -237,10 +237,11 @@ export class MenuService {
                 this.setFocused(closest.item);
             }
         } else if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
-            this.setActive(true, this.focusedNode.item);
-            this.focusedNode.item.click();
-            if (this.focusedNode.children.length) {
-                focusRight(this.focusedNode);
+            const focusedNode = this.focusedNode;
+            this.setActive(true, focusedNode.item);
+            focusedNode.item.click();
+            if (focusedNode.children.length) {
+                focusRight(focusedNode);
             }
         } else if (KeyUtil.isKeyCode(event, ESCAPE) && this.menu.closeOnEscapeKey) {
             this.menu.close();

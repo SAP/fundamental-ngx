@@ -19,6 +19,7 @@
             [id]="innerInputId"
             [name]="name"
             [disabled]="disabled"
+            [attr.aria-required]="required"
             [attr.aria-checked]="checked"
             [attr.aria-labelledby]="ariaLabelledby + ' ' + (semantic ? _semanticLabelId : '')"
             [(ngModel)]="isChecked"

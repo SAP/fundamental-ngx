@@ -1,4 +1,5 @@
 <fd-date-picker
+    [inputId]="id"
     [attr.aria-label]="ariaLabel"
     [attr.ariaLabelledBy]="ariaLabelledBy"
     [attr.ariaDescribedBy]="ariaDescribedBy"
@@ -6,6 +7,7 @@
     [state]="datepickerState"
     [placeholder]="placeholder"
     [compact]="contentDensity === 'compact'"
+    [required]="required"
     [selectedDate]="selectedDate"
     [selectedRangeDate]="selectedRangeDate"
     [startingDayOfWeek]="startingDayOfWeek"

@@ -5,7 +5,6 @@ import {
     ContentChildren,
     ElementRef,
     forwardRef,
-    HostBinding,
     Input,
     OnChanges,
     OnDestroy,
@@ -37,7 +36,6 @@ let avatarGroupUniqueId = 0;
 export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, OnDestroy {
     /** Id of the Avatar Group. */
     @Input()
-    @HostBinding('attr.id')
     id = `fd-avatar-group-${avatarGroupUniqueId++}`;
 
     /** Apply user custom class. */

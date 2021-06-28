@@ -2,15 +2,12 @@ import { LinkPo } from '../pages/link.po';
 import {
     defaultLink_alt_text,
     googleLink,
-    linkFocusState,
     standardLinksAltTextArray,
     truncatedLink_alt_text
 } from '../fixtures/appData/link-page-contents';
 import {
-    browserIsIEorSafari,
     click,
     getAttributeByName,
-    getCSSPropertyByName,
     getCurrentUrl, getElementAriaLabel,
     getElementArrayLength, getElementClass, getElementTitle,
     isElementClickable,
@@ -34,7 +31,6 @@ describe('Link component test suite', function() {
 
         mouseHoverElement(iconLink);
         checkLinkData(iconLink);
-        checkLinkHover(iconLink);
         expect(iconLinkAltText).toBe(defaultLink_alt_text);
         expect(isElementClickable(iconLink)).toBe(true);
     });
@@ -61,7 +57,6 @@ describe('Link component test suite', function() {
 
         expect(getElementClass(emphasizedLink)).toContain('emphasized');
         checkLinkData(emphasizedLink);
-        checkLinkHover(emphasizedLink);
         expect(emphasizedLinkAltText).toBe(defaultLink_alt_text);
         expect(isElementClickable(emphasizedLink)).toBe(true);
     });
@@ -92,7 +87,6 @@ describe('Link component test suite', function() {
         mouseHoverElement(invertedLink);
         expect(getElementClass(invertedLink)).toContain('inverted');
         checkLinkData(invertedLink);
-        checkLinkHover(invertedLink);
         expect(invertedLinkAltText).toBe(defaultLink_alt_text);
         expect(isElementClickable(invertedLink)).toBe(true);
     });
@@ -104,7 +98,6 @@ describe('Link component test suite', function() {
         mouseHoverElement(truncatedLink);
         expect(getElementClass(truncatedLink)).toContain('truncate');
         checkLinkData(truncatedLink);
-        checkLinkHover(truncatedLink);
         expect(truncatedLinkAltText).toBe(truncatedLink_alt_text);
         expect(isElementClickable(truncatedLink)).toBe(true);
         linkPage.open();
@@ -125,7 +118,7 @@ describe('Link component test suite', function() {
     describe('Check visual regression', function() {
         xit('should check examples visual regression', () => {
             linkPage.saveExampleBaselineScreenshot();
-            expect(linkPage.compareWithBaseline()).toBeLessThan(3);
+            expect(linkPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
@@ -135,15 +128,6 @@ function checkLinkData(element, index: number = 0): void {
     expect([null, '']).not.toContain(getElementAriaLabel(element, index));
     expect([null, '']).not.toContain(getElementTitle(element, index));
     expect([null, '']).not.toContain(getAttributeByName(element, 'href', index));
-}
-
-function checkLinkHover(element): void {
-    // TODO fix for IE & Safari
-    if (browserIsIEorSafari()) {
-        console.log('skip hover check for IE, Safari');
-        return;
-    }
-    expect(getCSSPropertyByName(element, 'text-decoration').value).toContain(linkFocusState);
 }
 
 function checkLinkTarget(element, site: string, newPageElement): void {

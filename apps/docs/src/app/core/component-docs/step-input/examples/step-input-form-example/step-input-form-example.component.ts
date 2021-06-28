@@ -7,8 +7,8 @@ import { FormControl } from '@angular/forms';
         <div class="step-input-example-container">
 
             <div class="step-input-example">
-                <label fd-form-label for="reactive-form-input">Reactive forms</label>
-                <fd-step-input id="reactive-form-input" [formControl]="stepInputFormControl1"></fd-step-input>
+                <label fd-form-label for="reactive-form-input" required="true">Reactive forms</label>
+                <fd-step-input id="reactive-form-input" required="true" [formControl]="stepInputFormControl1"></fd-step-input>
                 <table [style.fontSize]="'smaller'">
                     <tr>
                         <td>Value:</td>

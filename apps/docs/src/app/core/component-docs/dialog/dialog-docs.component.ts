@@ -76,6 +76,9 @@ export class DialogDocsComponent {
                     verticalPadding: {
                         type: 'boolean'
                     },
+                    responsivePadding: {
+                        type: 'boolean'
+                    },
                     width: {
                         type: 'string'
                     },
@@ -114,6 +117,7 @@ export class DialogDocsComponent {
             draggable: false,
             resizable: false,
             verticalPadding: true,
+            responsivePadding: true,
             width: '',
             height: '',
             minHeight: '',
