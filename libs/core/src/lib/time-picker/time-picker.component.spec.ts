@@ -139,7 +139,7 @@ describe('TimePickerComponent', () => {
         const hideSpy = spyOn((<any>component)._popoverFormMessage, 'hide');
         component.handleIsOpenChange(true);
         expect(hideSpy).toHaveBeenCalled();
-    })
+    });
 
     it('should show message on close', () => {
         component.isOpen = true;
@@ -147,5 +147,12 @@ describe('TimePickerComponent', () => {
         const showSpy = spyOn((<any>component)._popoverFormMessage, 'show');
         component.handleIsOpenChange(false);
         expect(showSpy).toHaveBeenCalled();
+    });
+
+    it('should focus the active column indicator on open', () => {
+        component.isOpen = false;
+        const spy = spyOn((<any>component).child, 'focusActiveColumnIndicator');
+        component.handleIsOpenChange(true);
+        expect(spy).toHaveBeenCalled();
     });
 });
