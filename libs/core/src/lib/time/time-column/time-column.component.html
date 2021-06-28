@@ -6,7 +6,7 @@
     glyph="navigation-up-arrow"
     [compact]="compact"
     [attr.aria-label]="timeConfig?.decreaseLabel"
-    (keydown)="spinnerButtonKeydownHandle($event, true)"
+    (keyup)="spinnerButtonKeyupHandle($event, true)"
     (click)="scrollUp($event)"
 ></button>
 <div
@@ -41,7 +41,7 @@
     <div
         class="fd-time__current-indicator"
         #indicator
-        tabindex="0"
+        tabindex="-1"
         [ngClass]="{'fd-time-column-custom-hidden': !active}"
         [id]="currentIndicatorId"
     >
@@ -60,7 +60,7 @@
     glyph="navigation-down-arrow"
     [compact]="compact"
     [attr.aria-label]="timeConfig?.increaseLabel"
-    (keydown)="spinnerButtonKeydownHandle($event)"
+    (keyup)="spinnerButtonKeyupHandle($event)"
     (click)="scrollDown()"
 >
 </button>

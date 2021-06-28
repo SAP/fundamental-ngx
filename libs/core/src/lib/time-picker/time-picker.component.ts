@@ -375,6 +375,10 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
         this.isOpen = isOpen;
         this.isOpenChange.emit(this.isOpen);
         this._changeMessageVisibility();
+        if (isOpen) {
+            this._changeDetectorRef.detectChanges();
+            this.child.focusActiveColumnIndicator();
+        }
     }
 
     /** @hidden */
