@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.29.2](https://github.com/SAP/fundamental-ngx/compare/v0.29.1...v0.29.2) (2021-06-28)
+
+
+### Bug Fixes
+
+* **core|platform:** set a specific version of @sap-theming/theming-base-content ([504f5ca](https://github.com/SAP/fundamental-ngx/commit/504f5cafae617e0fc27bd4766814e67ac1b8ca65))
+
 ### [0.29.1](https://github.com/SAP/fundamental-ngx/compare/v0.29.1-rc.19...v0.29.1) (2021-05-03)
 
 
