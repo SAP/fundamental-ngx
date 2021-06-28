@@ -62,7 +62,7 @@
     .fdp-table__body-table,
     .fdp-table__header-table,
     .fdp-table__body-hs-table {
-        // table-layout fixed does not work with absolutely positioned cells
+        // table-layout:fixed does not work with absolutely positioned cells
         // instead we need to keep each cell with defined width
         table-layout: auto;
         width: 100%;
@@ -123,26 +123,23 @@
             }
         }
 
-        /** Temporary style for navigation indicator until column width can fit content */ 
+        /** Temporary style for navigation indicator until column width can fit content */
         .fdp-table__navigation-indicator {
             justify-content: flex-end;
-             padding-right: 5px;
+            padding-right: 5px;
+
             [dir='rtl'] & {
                 padding-left: 5px;
-                padding-right: 0px;
+                padding-right: 0;
             }
         }
     }
 
     .fd-table__cell {
         box-sizing: border-box;
-
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-
-        max-width: 200px;
-        min-width: 200px;
 
         @include fd-table-nested-cell-padding(20, true);
 
@@ -171,6 +168,11 @@
         &[tabindex="-1"] {
             outline: none;
         }
+    }
+
+    .fdp-table__cell--empty {
+        padding: 0;
+        width: auto;
     }
 
     &.fd-table--condensed  {
@@ -263,6 +265,7 @@
 
     .fdp-table__container {
         position: relative;
+        overflow: hidden;
     }
 
     @mixin fdp-empty-scrollbar-block() {

@@ -47,6 +47,7 @@ export class TableScrollerDirective implements OnInit, OnDestroy {
                 })
             );
         }
+
         if (scrollDirectionToListen === 'horizontal') {
             this._subscriptions.add(
                 this._tableScrollDispatcher.horizontallyScrolled().subscribe((trigger) => {
@@ -54,6 +55,7 @@ export class TableScrollerDirective implements OnInit, OnDestroy {
                 })
             );
         }
+
         if (scrollDirectionToListen === 'both') {
             this._subscriptions.add(
                 this._tableScrollDispatcher.scrolled().subscribe((trigger) => {
