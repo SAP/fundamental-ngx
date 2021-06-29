@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.35...v0.31.0-rc.36) (2021-06-29)
+
+
+### Bug Fixes
+
+* **core:** fix a11y for Status Indicator ([#5705](https://github.com/SAP/fundamental-ngx/issues/5705)) ([b641ecb](https://github.com/SAP/fundamental-ngx/commit/b641ecbe1bd5ea7e1075c8593b2c592b52f11179))
+
 ## [0.31.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.34...v0.31.0-rc.35) (2021-06-29)
 
 
