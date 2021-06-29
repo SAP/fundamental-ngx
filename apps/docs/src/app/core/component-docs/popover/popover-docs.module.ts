@@ -76,7 +76,6 @@ const routes: Routes = [
         PopoverCdkPlacementExampleComponent,
         PopoverFocusExampleComponent,
         PopoverTriggerExampleComponent,
-        PopoverTriggerExampleComponent,
         PopoverMobileExampleComponent,
     ]
 })

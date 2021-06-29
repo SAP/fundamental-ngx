@@ -2,8 +2,7 @@
 
 <fd-popover #popoverMobile
     [mobile]="true"
-    [mobileConfig]="{ title: 'Mobile Popover', hasCloseButton: true }"
-    style="display: block">
+    [mobileConfig]="{ title: 'Mobile Popover', hasCloseButton: true }">
     <ng-template #popoverBodyContent>
         <div class="form-container">
             <div fd-form-item>
@@ -17,11 +16,11 @@
             </div>
 
             <div fd-form-item>
-                <button fd-button (click)="addClick()" [fdType]="'emphasized'">Add Click</button>
+                <button fd-button (click)="addClick()" fdType="emphasized">Add Click</button>
             </div>
 
             <div fd-form-item>
-                <button fd-button (click)="reset()" [fdType]="'attention'">Reset</button>
+                <button fd-button (click)="reset()" fdType="attention">Reset</button>
             </div>
         </div>
     </ng-template>

@@ -36,10 +36,6 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     */
     childContent: TemplateRef<any> = undefined;
 
-    /** @hidden */
-    @ViewChild('dialogTemplate')
-    _dialogTemplate: TemplateRef<any>;
-
     /** Current popover title */
     title: string;
 
@@ -47,6 +43,10 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     viewBody: TemplateRef<any>;
     /** Dialog footer content */
     viewFooter: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChild('dialogTemplate')
+    _dialogTemplate: TemplateRef<any>;
 
     /** @hidden */
     private _subscriptions = new Subscription();
