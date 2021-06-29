@@ -74,7 +74,7 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
 
     /** @hidden */
     ngOnDestroy(): void {
-        this.dialogRef.close();
+        this.dialogRef?.close();
         super.onDestroy();
         this._subscriptions.unsubscribe();
     }
