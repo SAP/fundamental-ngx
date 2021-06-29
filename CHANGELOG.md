@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.34...v0.31.0-rc.35) (2021-06-29)
+
+
+### Bug Fixes
+
+* **core:** add ariaLabelledby to the dialog header for screen reader ([#5682](https://github.com/SAP/fundamental-ngx/issues/5682)) ([96cc6ce](https://github.com/SAP/fundamental-ngx/commit/96cc6ce253e32545c7d6dced6e4c2e096e20f4f2))
+
 ## [0.31.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.32...v0.31.0-rc.34) (2021-06-29)
 
 
