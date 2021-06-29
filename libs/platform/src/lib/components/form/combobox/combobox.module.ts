@@ -7,7 +7,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DynamicComponentService, TemplateModule } from '@fundamental-ngx/core/utils';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule } from '@fundamental-ngx/core/list';
-import { FormModule } from '@fundamental-ngx/core';
+import { FormModule } from '@fundamental-ngx/core/form';
 import { ComboboxComponent } from './combobox/combobox.component';
 import { HighlightPipe } from './pipes/highlight.pipe';
 import { PlatformAutoCompleteModule } from '../auto-complete/auto-complete.module';
