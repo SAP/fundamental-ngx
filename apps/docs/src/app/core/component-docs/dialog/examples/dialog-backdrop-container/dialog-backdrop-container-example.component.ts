@@ -26,7 +26,8 @@ export class DialogBackdropContainerExampleComponent {
             responsivePadding: true,
             backdropClass: 'dialog-custom-overlay-example',
             data: `This dialog has a custom backdrop!`,
-            ariaLabelledBy: 'fd-dialog-header-2'
+            ariaLabelledBy: 'fd-dialog-header-2',
+            ariaDescribedBy: 'fd-dialog-body-2'
         });
     }
 
@@ -36,7 +37,8 @@ export class DialogBackdropContainerExampleComponent {
             container: containerRef,
             responsivePadding: true,
             data: `This dialog has been opened inside a local div!`,
-            ariaLabelledBy: 'fd-dialog-header-2'
+            ariaLabelledBy: 'fd-dialog-header-2',
+            ariaDescribedBy: 'fd-dialog-body-2'
         });
     }
 
@@ -48,7 +50,8 @@ export class DialogBackdropContainerExampleComponent {
             responsivePadding: true,
             backdropClass: 'static-dialog',
             data: `This dialog has been opened inside a local div and displayed as a static element!`,
-            ariaLabelledBy: 'fd-dialog-header-2'
+            ariaLabelledBy: 'fd-dialog-header-2',
+            ariaDescribedBy: 'fd-dialog-body-2'
         });
     }
 }

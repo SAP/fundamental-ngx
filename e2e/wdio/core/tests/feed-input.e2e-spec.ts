@@ -1,15 +1,14 @@
 import {
-    addIsActiveClass,
-    addValue, checkElementScreenshot,
-    clearValue, click,
+    addValue,
+    clearValue,
     doesItExist,
     elementDisplayed,
     getAttributeByName,
     getCSSPropertyByName,
     getElementArrayLength, getElementPlaceholder,
-    getElementSize, getElementTitle, getImageTagBrowserPlatform,
-    isEnabled, mouseHoverElement,
-    refreshPage, saveElementScreenshot,
+    getElementSize, getElementTitle,
+    isEnabled,
+    refreshPage,
     scrollIntoView,
     sendKeys,
     setValue,
@@ -18,16 +17,8 @@ import {
 } from '../../driver/wdio';
 import { FeedInputPo } from '../pages/feed-input.po';
 import { four_lines_text, eight_lines_text} from '../fixtures/testData/feed-input';
-
 import {
-    inputTextAreaDisable,
-    inputButtonDisable,
-    inputTextAreaActive, inputButtonActive
-} from '../fixtures/testData/feed-input-tags';
-
-import {
-    default_placeholder, default_avatar, send_button_tooltip,
-    button, textArea
+    default_placeholder, default_avatar, send_button_tooltip, emptyValuesArr
 } from '../fixtures/appData/feed-input-page-contents';
 
 describe('Verify Feed Input component', function() {
@@ -132,8 +123,9 @@ describe('Verify Feed Input component', function() {
             const inputFocusStyle = getCSSPropertyByName(feedInputTextArea, 'outline-style', i).value;
             sendKeys('Tab');
             const sendButtonFocusStyle = getCSSPropertyByName(feedInputButton, 'outline-style', i).value;
-            expect(inputFocusStyle).toBe('dotted');
-            expect(sendButtonFocusStyle).toContain('dotted');
+
+            expect(emptyValuesArr).not.toContain(sendButtonFocusStyle);
+            expect(emptyValuesArr).not.toContain(inputFocusStyle);
         }
     });
 
@@ -152,76 +144,7 @@ describe('Verify Feed Input component', function() {
 
         it('should check examples visual regression', () => {
             feedInputPage.saveExampleBaselineScreenshot();
-            expect(feedInputPage.compareWithBaseline()).toBeLessThan(1);
-        });
-
-        xit('should check disable input text area hover state', () => {
-            scrollIntoView(disableInputTextArea);
-            checkDisableElementHoverState(disableInputTextArea, inputTextAreaDisable, textArea);
-        });
-
-        xit('should check disable input button hover state', () => {
-            scrollIntoView(disableInputButton);
-            checkDisableElementHoverState(disableInputButton, inputButtonDisable, button);
-        });
-
-        xit('should check active input text areas states', () => {
-            const activeInputTextAreasLength = getElementArrayLength(activeInputTextAreas);
-            for (let i = 0; i < activeInputTextAreasLength; i++) {
-                if (i === 3) {
-                    continue;
-                }
-                scrollIntoView(activeInputTextAreas, i);
-                checkElementStates(activeInputTextAreas, inputTextAreaActive + i + '-', textArea, i);
-            }
-        });
-
-        xit('should check active input buttons states', () => {
-            const inputButtonsLength = getElementArrayLength(feedInputButton);
-            for (let i = 0; i < inputButtonsLength; i++) {
-                if (i === 3) {
-                    continue;
-                }
-                scrollIntoView(feedInputTextArea, i);
-                setValue(feedInputTextArea, four_lines_text, i);
-                checkElementHoverState(feedInputButton, inputButtonActive + i + '-', button, i);
-            }
+            expect(feedInputPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
-
-    function checkElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        mouseHoverElement(selector, index);
-        saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), feedInputPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), feedInputPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element hover state mismatch`);
-    }
-
-    function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        click(selector, index);
-        saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), feedInputPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), feedInputPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element focus state mismatch`);
-    }
-
-    function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        addIsActiveClass(selector, index);
-        saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), feedInputPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), feedInputPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element item ${index} active state mismatch`);
-    }
-
-    function checkDisableElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        mouseHoverElement(selector, index);
-        saveElementScreenshot(selector, tag + 'hover-state-' + getImageTagBrowserPlatform(),
-            feedInputPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag + 'hover-state-' + getImageTagBrowserPlatform(),
-            feedInputPage.getScreenshotFolder(), index))
-            .toBeLessThan(2, `${elementName} element hover state mismatch`);
-    }
-
-    function checkElementStates(selector: string, tag: string, elementName: string, index: number = 0): void {
-        checkElementHoverState(selector, tag + 'hover-state-', elementName, index);
-        checkElementFocusState(selector, tag + 'focus-state-', elementName, index);
-        checkElementActiveState(selector, tag + 'active-state-', elementName, index);
-    }
 });
