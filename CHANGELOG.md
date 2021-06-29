@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.32...v0.31.0-rc.34) (2021-06-29)
+
+
+### Bug Fixes
+
+* **platform:** adjust Datetime Picker width to container width when used with Platform Forms ([#5759](https://github.com/SAP/fundamental-ngx/issues/5759)) ([42f4820](https://github.com/SAP/fundamental-ngx/commit/42f4820d00f1665c7cabc0a20705677ebd21fa17))
+
 ## [0.31.0-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.32...v0.31.0-rc.33) (2021-06-29)
 
 
