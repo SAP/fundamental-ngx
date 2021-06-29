@@ -1,21 +1,21 @@
 import {
     Component,
     ContentChildren,
-    HostListener,
     Input,
-    OnInit,
     QueryList,
     ViewEncapsulation,
     ContentChild,
     ViewChild,
     ChangeDetectionStrategy
 } from '@angular/core';
-import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
-import { ShellbarMenuItem } from '../model/shellbar-menu-item';
-import { ShellbarUser } from '../model/shellbar-user';
-import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
+
 import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 import { ProductSwitchComponent } from '@fundamental-ngx/core/product-switch';
+
+import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.component';
+import { ShellbarUserMenu } from '../model/shellbar-user-menu';
+import { ShellbarUser } from '../model/shellbar-user';
+import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.component';
 
 /**
  * The component that represents shellbar actions.
@@ -56,7 +56,7 @@ export class ShellbarActionsComponent {
 
     /** The user menu data. */
     @Input()
-    userMenu: ShellbarMenuItem[];
+    userMenu: ShellbarUserMenu[];
 
     /** When set to true, popover list will be closed after selecting the option */
     @Input()
