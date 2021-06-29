@@ -1,10 +1,11 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { A11yModule } from '@angular/cdk/a11y';
+import { DOWN_ARROW } from '@angular/cdk/keycodes';
+
 import { PopoverModule } from './popover.module';
 import { PopoverComponent } from './popover.component';
 import { PopoverService } from './popover-service/popover.service';
-import { DOWN_ARROW } from '@angular/cdk/keycodes';
 
 
 describe('PopoverComponent', () => {
