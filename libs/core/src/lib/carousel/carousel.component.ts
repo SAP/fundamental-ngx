@@ -24,12 +24,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FdCarouselResourceStrings, CarouselResourceStringsEN } from './i18n/carousel-resources';
 import { CarouselItemComponent } from './carousel-item/carousel-item.component';
-import {
-    CarouselService,
-    CarouselConfig,
-    PanEndOutput,
-    CarouselItemInterface
-} from './carousel.service';
+import { CarouselService, CarouselConfig, PanEndOutput, CarouselItemInterface } from './carousel.service';
 import { RtlService } from '@fundamental-ngx/core/utils';
 
 /** Page limit to switch to numerical indicator */
@@ -328,7 +323,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this.rightButtonDisabled = false;
         this._adjustActiveItemPosition(SlideDirection.PREVIOUS);
         this._preventDefaultBtnFocus();
-        this._carouselService.pickPrevious(this.dir);
+        this._carouselService.pickPrevious();
 
         this._notifySlideChange(SlideDirection.PREVIOUS);
         this._changeDetectorRef.detectChanges();
@@ -344,7 +339,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this.leftButtonDisabled = false;
         this._adjustActiveItemPosition(SlideDirection.NEXT);
         this._preventDefaultBtnFocus();
-        this._carouselService.pickNext(this.dir);
+        this._carouselService.pickNext();
         this._notifySlideChange(SlideDirection.NEXT);
         this._changeDetectorRef.detectChanges();
     }
@@ -474,8 +469,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
      */
     private _getStepTaken(event: PanEndOutput, actualActiveSlideIndex: number): number {
         let stepsCalculated: number;
-
-        if (event.after) {
+        if ((!this._isRtl() && event.after) || (this._isRtl() && !event.after)) {
             if (actualActiveSlideIndex === 0 && this.currentActiveSlidesStartIndex === 0) {
                 stepsCalculated = 0;
             } else if (actualActiveSlideIndex > this.currentActiveSlidesStartIndex) {
@@ -544,8 +538,10 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     private _subscribeToRtl(): void {
         const refreshDirection = () => {
             this.dir = this._rtlService?.rtl.getValue() ? 'rtl' : 'ltr';
+            this._carouselService.isRtl = this.dir === 'rtl';
+
             if (this._carouselService.items) {
-                this._carouselService.goToItem(this._carouselService.active, false, this.dir);
+                this._carouselService.goToItem(this._carouselService.active, false);
             }
             this._changeDetectorRef.detectChanges();
         };
@@ -573,6 +569,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
      */
     private _onSlideDrag(isDragging: boolean): void {
         if (isDragging) {
+            // TODO: use timeout here
             this.slides.forEach((_slide) => {
                 _slide.visibility = 'visible';
             });

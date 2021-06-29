@@ -59,6 +59,19 @@ export class CarouselService implements OnDestroy {
     /** @hidden */
     private _currentTransitionPx = 0;
 
+    /**
+     * @hidden,
+     */
+    private _isRtl = false;
+
+    get isRtl(): boolean {
+        return this._isRtl;
+    }
+
+    set isRtl(isrtl: boolean) {
+        this._isRtl = isrtl;
+    }
+
     get currentTransitionPx(): number {
         return this._currentTransitionPx;
     }
@@ -109,7 +122,7 @@ export class CarouselService implements OnDestroy {
     }
 
     /** Change active element */
-    goToItem(item: CarouselItemInterface, smooth?: boolean, languageDirection: string = 'ltr'): void {
+    goToItem(item: CarouselItemInterface, smooth?: boolean): void {
         let index: number = this.getIndexOfItem(item);
         if (this.config.infinite) {
             this._centerActive(index);
@@ -117,12 +130,12 @@ export class CarouselService implements OnDestroy {
             index = this.getIndexOfItem(item);
         }
 
-        this._transitionToIndex(index, smooth, languageDirection);
+        this._transitionToIndex(index, smooth);
 
         this._previousActiveItem = item;
     }
 
-    pickNext(languageDirection = 'ltr'): void {
+    pickNext(): void {
         const carouselArray: CarouselItemInterface[] = this.items.toArray();
         if (!this.active) {
             this.active = carouselArray[0];
@@ -130,11 +143,11 @@ export class CarouselService implements OnDestroy {
         const activeItemIndex: number = carouselArray.findIndex((item) => item === this.active);
 
         const itemToActivate = carouselArray[activeItemIndex + 1];
-        this.goToItem(itemToActivate, true, languageDirection);
+        this.goToItem(itemToActivate, true);
         this.active = itemToActivate;
     }
 
-    pickPrevious(languageDirection = 'ltr'): void {
+    pickPrevious(): void {
         const carouselArray: CarouselItemInterface[] = this.items.toArray();
         if (!this.active) {
             this.active = carouselArray[2];
@@ -148,7 +161,7 @@ export class CarouselService implements OnDestroy {
             itemToActivate = carouselArray[this.items.toArray().length - 1];
         }
 
-        this.goToItem(itemToActivate, true, languageDirection);
+        this.goToItem(itemToActivate, true);
         this.active = itemToActivate;
     }
 
@@ -182,7 +195,7 @@ export class CarouselService implements OnDestroy {
     }
 
     /** @hidden */
-    private _transitionToIndex(index: number, smooth?: boolean, languageDirection?: string): void {
+    private _transitionToIndex(index: number, smooth?: boolean): void {
         let transitionPx: number = this._getSize(this.items.first) * index;
 
         if (smooth) {
@@ -191,7 +204,7 @@ export class CarouselService implements OnDestroy {
             this._elementRef.nativeElement.style.transitionDuration = '0s';
         }
 
-        if (languageDirection === 'ltr' || (this.config.vertical && languageDirection === 'rtl')) {
+        if (!this.isRtl || (this.config.vertical && this.isRtl)) {
             transitionPx = -transitionPx;
         }
         this._transitionCarousel(transitionPx);
@@ -200,7 +213,10 @@ export class CarouselService implements OnDestroy {
     /** Get closes element, based on current transition */
     private _getClosest(): CarouselItemInterface {
         /** If transition is positive, it'should go to first element */
-        if (!this.config.infinite && this._currentTransitionPx > 0) {
+        if (
+            !this.config.infinite &&
+            ((!this.isRtl && this._currentTransitionPx > 0) || (this.isRtl && this._currentTransitionPx < 0))
+        ) {
             return this.items.first;
         }
 
@@ -213,7 +229,7 @@ export class CarouselService implements OnDestroy {
          * every element should have same width, otherwise it should be looped through all elements,
          * which is not good for performance
          */
-        let index: number = Math.abs(Math.ceil(this._currentTransitionPx / size));
+        let index: number = Math.ceil(Math.abs(this._currentTransitionPx / size));
 
         // When elementsAtOnce > 1, swiping should stop at last index - elementsAtOnce
         if (!this.config.infinite && this.config.elementsAtOnce > 1) {
@@ -222,7 +238,7 @@ export class CarouselService implements OnDestroy {
             }
         }
 
-        index = index + (halfApproached ? 1 : 0);
+        index = index + (halfApproached ? 0 : -1);
         /** Checking if transition went out of scope of array */
         if (this.items.toArray()[index]) {
             return this.items.toArray()[index];
