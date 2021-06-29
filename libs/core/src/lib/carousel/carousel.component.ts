@@ -556,7 +556,12 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         const actualActiveSlideIndex = this._slidesCopy.findIndex((_slide) => _slide === firstActiveSlide);
         const stepTaken = this._getStepTaken(event, actualActiveSlideIndex);
         if (stepTaken > 0) {
-            const slideDirection: SlideDirection = event.after ? SlideDirection.NEXT : SlideDirection.PREVIOUS;
+            let slideDirection: SlideDirection;
+            if (!this._isRtl()) {
+                slideDirection = event.after ? SlideDirection.NEXT : SlideDirection.PREVIOUS;
+            } else if (this._isRtl()) {
+                slideDirection = event.after ? SlideDirection.PREVIOUS : SlideDirection.NEXT;
+            }
 
             this._adjustActiveItemPosition(slideDirection, stepTaken);
             this._notifySlideChange(slideDirection, firstActiveSlide);
