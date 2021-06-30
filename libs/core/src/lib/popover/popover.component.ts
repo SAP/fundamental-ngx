@@ -96,7 +96,7 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     @ContentChild('popoverBodyContent')
     popoverBodyContentTemplate: TemplateRef<any>;
 
-    /** @hidde - template for Dialog footer content */
+    /** @hidden - template for Dialog footer content */
     @ContentChild('popoverFooterContent')
     popoverFooterContentTemplate: TemplateRef<any>;
 

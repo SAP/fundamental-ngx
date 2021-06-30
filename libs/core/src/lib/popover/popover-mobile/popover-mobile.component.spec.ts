@@ -22,7 +22,7 @@ const MOBILE_CONFIG: MobileModeConfig = { title: 'Test popover title' };
             </ng-template>
             <ng-template #popoverFooterContent>
                 <div class="footer-buttons-container">
-                    <button fd-button [fdType]="'positive'">Dummy Button</button>
+                    <button fd-button fdType="positive">Dummy Button</button>
                 </div>
             </ng-template>
         </fd-popover>
