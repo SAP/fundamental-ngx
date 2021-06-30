@@ -148,11 +148,4 @@ describe('TimePickerComponent', () => {
         component.handleIsOpenChange(false);
         expect(showSpy).toHaveBeenCalled();
     });
-
-    it('should focus the active column indicator on open', () => {
-        component.isOpen = false;
-        const spy = spyOn((<any>component).child, 'focusActiveColumnIndicator');
-        component.handleIsOpenChange(true);
-        expect(spy).toHaveBeenCalled();
-    });
 });
