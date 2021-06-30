@@ -343,6 +343,20 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             : this._popoverValueRef[sliderValueTarget];
     }
 
+    /** @hidden */
+    get minValue(): string | number {
+        return this.customValues.length > 0
+            ? this.customValues[this.min as number].label
+            : this.min;
+    }
+
+    /** @hidden */
+    get maxValue(): string | number {
+        return this.customValues.length > 0
+            ? this.customValues[this.max as number].label
+            : this.max;
+    }
+
     @applyCssClass
     /**
      * @hidden
