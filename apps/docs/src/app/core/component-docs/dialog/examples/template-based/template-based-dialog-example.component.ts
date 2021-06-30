@@ -13,7 +13,8 @@ export class TemplateBasedDialogExampleComponent {
     openDialog(dialog: TemplateRef<any>): void {
         const dialogRef = this._dialogService.open(dialog, {
             responsivePadding: true,
-            ariaLabelledBy: 'fd-dialog-header-10'
+            ariaLabelledBy: 'fd-dialog-header-10',
+            ariaDescribedBy: 'fd-dialog-body-10'
         });
 
         dialogRef.afterClosed.subscribe(

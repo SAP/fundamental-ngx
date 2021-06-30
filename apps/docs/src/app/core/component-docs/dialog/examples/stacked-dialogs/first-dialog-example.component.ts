@@ -11,17 +11,20 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
             </fd-dialog-header>
 
             <fd-dialog-body>
-                This is the first dialog!<br />
-                Click the button below to open the second dialog.
+                <div id="fd-dialog-body-8" role="document">
+                    This is the first dialog!<br />
+                    Click the button below to open the second dialog.
+                </div>
             </fd-dialog-body>
 
             <fd-dialog-footer>
                 <fd-button-bar
-                        fd-initial-focus
-                        fdType="emphasized"
-                        label="Open Second Dialog"
-                        [compact]="true"
-                        (click)="openDialog()">
+                    fd-initial-focus
+                    fdType="emphasized"
+                    label="Open Second Dialog"
+                    [compact]="true"
+                    (click)="openDialog()"
+                >
                 </fd-button-bar>
             </fd-dialog-footer>
         </fd-dialog>
@@ -33,7 +36,8 @@ export class FirstDialogExampleComponent {
     openDialog(): void {
         this._dialogService.open(SecondDialogExampleComponent, {
             responsivePadding: true,
-            ariaLabelledBy: 'fd-dialog-header-9'
+            ariaLabelledBy: 'fd-dialog-header-9',
+            ariaDescribedBy: 'fd-dialog-body-9'
         });
     }
 }
