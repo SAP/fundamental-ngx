@@ -1,4 +1,5 @@
-export const defaultLink_alt_text = 'Extra info as tooltip text and aria-label';
+export const defaultLink_alt_text = 'Extra info as tooltip text';
+export const iconLinkAriaLabel = 'icon as link';
 export const truncatedLink_alt_text = 'this is a long text link. so getting truncated.';
 
 export const standardLinksAltTextArray: Array<string> = [
@@ -11,7 +12,7 @@ export const standardLinksAltTextArray: Array<string> = [
     'click link to start download',
     'On click you will get to target page',
     'target web is printable for resolution:300dpi',
-    null, // need to update after https://github.com/SAP/fundamental-ngx/issues/3633
+    'Specify relation between document',
     'text will be translated'
 ];
 
