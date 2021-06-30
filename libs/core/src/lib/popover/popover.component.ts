@@ -1,4 +1,5 @@
 import {
+    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
@@ -46,7 +47,7 @@ let cdkPopoverUniqueId = 0;
     styleUrls: ['./popover.component.scss'],
     providers: [PopoverService]
 })
-export class PopoverComponent extends BasePopoverClass implements AfterViewInit, OnDestroy, OnChanges {
+export class PopoverComponent extends BasePopoverClass implements AfterViewInit, AfterContentInit, OnDestroy, OnChanges {
 
     /** Tooltip for popover */
     @Input()
@@ -109,6 +110,13 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
             popoverBody: this.popoverBody,
         } : null);
 
+    }
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        if (this.popoverControl && this.triggers.includes('click')) {
+            this.popoverControl.makeTabbable();
+        }
     }
 
     /** @hidden */

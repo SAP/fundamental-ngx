@@ -1,4 +1,4 @@
-import { AfterContentInit, ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } from '@angular/core';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -16,10 +16,11 @@ import { AfterContentInit, ChangeDetectionStrategy, Component, ElementRef, ViewE
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PopoverControlComponent implements AfterContentInit {
+export class PopoverControlComponent {
     constructor(public elRef: ElementRef) {}
 
-    ngAfterContentInit(): void {
+    /** @hidden */
+    makeTabbable(): void {
         const elemChild = this.elRef.nativeElement.children[0];
         if (elemChild?.getAttribute('tabindex') !== '-1') {
             elemChild.tabIndex = '0';
