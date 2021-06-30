@@ -4,6 +4,7 @@ import {
     Component,
     ContentChild,
     ElementRef,
+    HostListener,
     Input,
     OnChanges,
     OnDestroy,
@@ -18,12 +19,13 @@ import {
     CdkOverlayOrigin,
     ConnectedPosition,
 } from '@angular/cdk/overlay';
-import { DOWN_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { BasePopoverClass } from './base/base-popover.class';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
 import { PopoverService } from './popover-service/popover.service';
+import { PopoverControlComponent } from './popover-control/popover-control.component';
 
 let cdkPopoverUniqueId = 0;
 
@@ -74,8 +76,13 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     @ViewChild(CdkOverlayOrigin)
     triggerOrigin: CdkOverlayOrigin;
 
+    /** @hidden */
     @ContentChild(PopoverBodyComponent)
-    popoverBody: PopoverBodyComponent
+    popoverBody: PopoverBodyComponent;
+
+    /** @hidden */
+    @ContentChild(PopoverControlComponent)
+    popoverControl: PopoverControlComponent;
 
     /** @deprecated
      * Left for backward compatibility
@@ -112,6 +119,18 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     /** @hidden */
     ngOnDestroy(): void {
         this._popoverService.onDestroy();
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    onKeyDown(event: KeyboardEvent): void {
+        if (this.popoverControl.elRef.nativeElement.children[0] === document.activeElement) {
+            if (KeyUtil.isKeyCode(event, SPACE) || KeyUtil.isKeyCode(event, ENTER)) {
+                // prevent page scrolling on Space keydown
+                event.preventDefault();
+                this._popoverService.toggle();
+            }
+        }
     }
 
     /** Closes the popover. */
