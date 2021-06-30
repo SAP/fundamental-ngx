@@ -198,7 +198,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** @hidden Checks for Menu Service dependency and passes it if further */
     private _setMenuService(): void {
-        this.menuService = this.menuService || this._submenu.menuService;
+        this.menuService = this.menuService || this._submenu?.menuService;
         if (this.submenu) {
             this.submenu.menuService = this.menuService;
         }
