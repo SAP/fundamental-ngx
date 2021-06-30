@@ -32,6 +32,7 @@ import { PopoverBodyComponent } from './popover-body/popover-body.component';
 import { PopoverService } from './popover-service/popover.service';
 import { POPOVER_COMPONENT } from './popover.interface';
 import { PopoverMobileComponent } from './popover-mobile/popover-mobile.component';
+import { PopoverChildContent } from './popover-child-content.interface';
 
 let cdkPopoverUniqueId = 0;
 
@@ -222,7 +223,7 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
             {
                 popoverBodyContentTemplate: this.popoverBodyContentTemplate,
                 popoverFooterContentTemplate: this.popoverFooterContentTemplate,
-            },
+            } as PopoverChildContent,
             PopoverMobileComponent,
             { container: this._elementRef.nativeElement },
             {

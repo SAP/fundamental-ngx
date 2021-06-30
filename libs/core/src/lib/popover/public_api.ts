@@ -11,3 +11,4 @@ export * from './popover-mobile/popover-mobile.component';
 export * from './popover.interface';
 export * from './popover-service/popover.service';
 export * from './base/base-popover.class';
+export * from './popover-child-content.interface';

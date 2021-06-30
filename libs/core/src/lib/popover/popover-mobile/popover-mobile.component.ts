@@ -21,6 +21,7 @@ import {
 import { PopoverInterface, POPOVER_COMPONENT } from '../popover.interface';
 import { takeUntil } from 'rxjs/operators';
 import { DialogService } from '@fundamental-ngx/core/dialog';
+import { PopoverChildContent } from '../popover-child-content.interface';
 
 @Component({
     selector: 'fd-popover-mobile',
@@ -33,7 +34,7 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
      * from mobile class can not prefix _,
      * to avoid build issues
     */
-    childContent: TemplateRef<any> = undefined;
+    childContent: PopoverChildContent = undefined;
 
     /** Current popover title */
     title: string;
@@ -66,8 +67,8 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
         this._listenOnPopoverOpenChange();
 
         this.title = this.mobileConfig.title || '';
-        this.viewBody = (<any> this.childContent).popoverBodyContentTemplate;
-        this.viewFooter = (<any> this.childContent).popoverFooterContentTemplate;
+        this.viewBody = this.childContent.popoverBodyContentTemplate;
+        this.viewFooter = this.childContent.popoverFooterContentTemplate;
 
         this._changeDetectorref.markForCheck();
     }
