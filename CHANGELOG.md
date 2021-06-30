@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.37...v0.31.0-rc.38) (2021-06-30)
+
+
+### Bug Fixes
+
+* **platform:** associate both label and inline help with Textarea component for a11y ([#5819](https://github.com/SAP/fundamental-ngx/issues/5819)) ([2fb29a8](https://github.com/SAP/fundamental-ngx/commit/2fb29a86477e5c4a08232ac49a48218dcb80eacd))
+
 ## [0.31.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.36...v0.31.0-rc.37) (2021-06-30)
 
 ## [0.31.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.35...v0.31.0-rc.36) (2021-06-29)
