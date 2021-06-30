@@ -25,7 +25,6 @@ import { DialogService } from '@fundamental-ngx/core/dialog';
 @Component({
     selector: 'fd-popover-mobile',
     templateUrl: './popover-mobile.component.html',
-    styleUrls: ['./popover-mobile.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
 })
