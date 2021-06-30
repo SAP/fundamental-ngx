@@ -1,6 +1,5 @@
 import {
     Component,
-    OnInit,
     ElementRef,
     HostBinding,
     Output,
@@ -11,7 +10,10 @@ import {
     Input
 } from '@angular/core';
 import { FocusableOption } from '@angular/cdk/a11y';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { Subject } from 'rxjs';
+
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fdp-menu-item',
@@ -61,7 +63,7 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
 
     /** @hidden Handle selection of item via keyboard 'Enter' or mouseclick. */
     @HostListener('keydown', ['$event']) onItemKeydown(event: KeyboardEvent): void {
-        if (event && event.key === 'Enter') {
+        if (event && (KeyUtil.isKeyCode(event, [SPACE, ENTER]))) {
             this.itemSelect.emit();
         }
     }
