@@ -26,9 +26,15 @@
     </ng-template>
 
     <ng-template #popoverFooterContent>
-        <div class="footer-buttons-container">
-            <button fd-button fdType="positive" (click)="accept()">Accept</button>
-            <button fd-button fdType="negative" (click)="decline()">Decline</button>
-        </div>
+        <fd-button-bar
+            label="Accept"
+            fdType="positive"
+            (click)="accept()">
+        </fd-button-bar>
+        <fd-button-bar
+            label="Decline"
+            fdType="negative"
+            (click)="decline()">
+        </fd-button-bar>
     </ng-template>
 </fd-popover>

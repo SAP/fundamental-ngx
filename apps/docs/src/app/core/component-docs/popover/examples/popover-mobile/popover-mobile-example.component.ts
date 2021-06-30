@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'fd-popover-mobile-example',
     templateUrl: './popover-mobile-example.component.html',
-    styleUrls: ['./popover-mobile-example.component.scss'],
 })
 export class PopoverMobileExampleComponent {
     clickCount = 0;
