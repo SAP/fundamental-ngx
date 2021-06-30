@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.39...v0.31.0-rc.40) (2021-06-30)
+
+
+### Bug Fixes
+
+* **platform:** read anchor text instead of title only in Link component ([#5713](https://github.com/SAP/fundamental-ngx/issues/5713)) ([e20599e](https://github.com/SAP/fundamental-ngx/commit/e20599e4d54bafce6fc575cc9afeabf7677d5da4))
+
 ## [0.31.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.38...v0.31.0-rc.39) (2021-06-30)
 
 
