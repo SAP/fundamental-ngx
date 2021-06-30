@@ -25,3 +25,12 @@
         }
     }
 }
+
+.fd-list__group-header.ng-star-inserted{
+    padding-bottom: 0.25rem;
+    border-bottom: none;
+    &:focus{
+        border: .1rem dotted black;
+        margin: .1rem;
+    }
+}
