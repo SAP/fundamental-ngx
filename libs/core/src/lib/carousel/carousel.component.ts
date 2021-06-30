@@ -578,7 +578,6 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
      */
     private _onSlideDrag(isDragging: boolean): void {
         if (isDragging) {
-            // TODO: use timeout here
             this.slides.forEach((_slide) => {
                 _slide.visibility = 'visible';
             });
