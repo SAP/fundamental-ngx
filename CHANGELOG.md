@@ -1,4 +1,25 @@
 
+## [0.31.0-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.39...v0.31.0-rc.40) (2021-06-30)
+
+
+### Bug Fixes
+
+* **platform:** read anchor text instead of title only in Link component ([#5713](https://github.com/SAP/fundamental-ngx/issues/5713)) ([e20599e](https://github.com/SAP/fundamental-ngx/commit/e20599e4d54bafce6fc575cc9afeabf7677d5da4))
+
+## [0.31.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.38...v0.31.0-rc.39) (2021-06-30)
+
+
+### Bug Fixes
+
+* **platform:** open menu and select menu item with spacebar ([#5754](https://github.com/SAP/fundamental-ngx/issues/5754)) ([bcbf7e4](https://github.com/SAP/fundamental-ngx/commit/bcbf7e43b14036106a8a233021746ef480ff5bd8))
+
+## [0.31.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.37...v0.31.0-rc.38) (2021-06-30)
+
+
+### Bug Fixes
+
+* **platform:** associate both label and inline help with Textarea component for a11y ([#5819](https://github.com/SAP/fundamental-ngx/issues/5819)) ([2fb29a8](https://github.com/SAP/fundamental-ngx/commit/2fb29a86477e5c4a08232ac49a48218dcb80eacd))
+
 ## [0.31.0-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.36...v0.31.0-rc.37) (2021-06-30)
 
 ## [0.31.0-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.35...v0.31.0-rc.36) (2021-06-29)
