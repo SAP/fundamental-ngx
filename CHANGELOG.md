@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.38...v0.31.0-rc.39) (2021-06-30)
+
+
+### Bug Fixes
+
+* **platform:** open menu and select menu item with spacebar ([#5754](https://github.com/SAP/fundamental-ngx/issues/5754)) ([bcbf7e4](https://github.com/SAP/fundamental-ngx/commit/bcbf7e43b14036106a8a233021746ef480ff5bd8))
+
 ## [0.31.0-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.37...v0.31.0-rc.38) (2021-06-30)
 
 
