@@ -469,7 +469,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
      */
     private _getStepTaken(event: PanEndOutput, actualActiveSlideIndex: number): number {
         let stepsCalculated: number;
-        if ((!this._isRtl() && event.after) || (this._isRtl() && !event.after)) {
+        if ((!this._isRtl() && event.after) || (this._isRtl() && !event.after && !this.vertical) || (this.vertical && event.after)) {
             if (actualActiveSlideIndex === 0 && this.currentActiveSlidesStartIndex === 0) {
                 stepsCalculated = 0;
             } else if (actualActiveSlideIndex > this.currentActiveSlidesStartIndex) {
@@ -560,9 +560,13 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             if (!this._isRtl()) {
                 slideDirection = event.after ? SlideDirection.NEXT : SlideDirection.PREVIOUS;
             } else if (this._isRtl()) {
-                slideDirection = event.after ? SlideDirection.PREVIOUS : SlideDirection.NEXT;
+                // vertical carousel slide direction is same in ltr and rtl
+                if (this.vertical) {
+                    slideDirection = event.after ? SlideDirection.NEXT : SlideDirection.PREVIOUS;
+                } else {
+                    slideDirection = event.after ? SlideDirection.PREVIOUS : SlideDirection.NEXT;
+                }
             }
-
             this._adjustActiveItemPosition(slideDirection, stepTaken);
             this._notifySlideChange(slideDirection, firstActiveSlide);
             this._changeDetectorRef.detectChanges();

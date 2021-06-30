@@ -212,10 +212,12 @@ export class CarouselService implements OnDestroy {
 
     /** Get closes element, based on current transition */
     private _getClosest(): CarouselItemInterface {
-        /** If transition is positive, it'should go to first element */
+        /** If transition is positive, it should go to first element */
         if (
             !this.config.infinite &&
-            ((!this.isRtl && this._currentTransitionPx > 0) || (this.isRtl && this._currentTransitionPx < 0))
+            ((!this.config.vertical &&
+                ((!this.isRtl && this._currentTransitionPx > 0) || (this.isRtl && this._currentTransitionPx < 0))) ||
+                (this.config.vertical && this._currentTransitionPx > 0))
         ) {
             return this.items.first;
         }
