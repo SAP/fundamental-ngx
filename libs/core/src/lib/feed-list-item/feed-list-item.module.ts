@@ -8,7 +8,7 @@ import { FeedListComponent } from './components/list/feed-list.component';
 import { FeedListAvatarComponent } from './components/feed-list-avatar/feed-list-avatar.component';
 import { FeedListActionComponent } from './components/feed-list-action/feed-list-action.component';
 import { FeedListFooterComponent } from './components/feed-list-footer/feed-list-footer.component';
-import { FeedListFooterBylineDirective } from './directives/byline.directive';
+import { FeedListFooterBylineDirective } from './components/feed-list-footer/directives/byline.directive';
 import { LineClampModule } from '@fundamental-ngx/core/utils';
 import { PipeModule } from '@fundamental-ngx/core/utils';
 
