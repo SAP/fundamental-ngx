@@ -35,11 +35,13 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { MenuItemComponent } from './menu-item.component';
 import { FocusKeyManager, FocusOrigin } from '@angular/cdk/a11y';
 import { Observable, merge, Subscription } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
-import { RtlService } from '@fundamental-ngx/core';
+import { ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
+
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { MenuItemComponent } from './menu-item.component';
 import { ContentDensity } from './../form/form-control';
 
 /**
@@ -132,34 +134,26 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterContentInit, O
         this._dirChangeSubscription.unsubscribe();
     }
 
-    onKeydown($event: KeyboardEvent): void {
-        const code = $event.key;
-        switch (code) {
-            case 'Left':
-            case 'ArrowLeft':
-                if (this.cascadesRight()) {
-                    this.close.emit('arrow');
-                }
-                break;
-            case 'Right':
-            case 'ArrowRight':
-                if (this.cascadesLeft()) {
-                    this.close.emit('arrow');
-                }
-                break;
-            case 'Esc':
-            case 'Escape':
-                this.close.emit('keyboard');
-                break;
-            case 'Enter':
-                this.close.emit('keyboard');
-                break;
-            default:
-                this._keyManager.onKeydown($event);
+    onKeydown(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
+            if (this.cascadesRight()) {
+                this.close.emit('arrow');
+            }
+        } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
+            if (this.cascadesLeft()) {
+                this.close.emit('arrow');
+            }
+        } else if (KeyUtil.isKeyCode(event, ESCAPE)) {
+            this.close.emit('keyboard');
+        } else if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+            event.preventDefault();
+            this.close.emit('keyboard');
+        } else {
+            this._keyManager.onKeydown(event);
         }
     }
 
-    onClick($event: MouseEvent): void {
+    onClick(event: MouseEvent): void {
         this.close.emit('mouse');
     }
 
