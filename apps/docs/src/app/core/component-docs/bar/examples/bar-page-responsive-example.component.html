@@ -1,6 +1,6 @@
 <div fd-bar [inPage]="true" [size]="'m_l'">
     <div fd-bar-left>
-        <fd-button-bar [glyph]="navigationArrow$ | async"></fd-button-bar>
+        <fd-button-bar ariaLabel='back' [glyph]="navigationArrow$ | async"></fd-button-bar>
         <fd-bar-element>
             Left Section
         </fd-bar-element>
@@ -15,7 +15,9 @@
             Right Section
         </fd-bar-element>
         <fd-bar-element>
-            <fd-avatar size="xs" image="http://picsum.photos/id/1018/400"> </fd-avatar>
+            <div tabindex="0" role="img" aria-label="Nature">
+                <fd-avatar size="xs" image="http://picsum.photos/id/1018/400"> </fd-avatar>
+            </div>
         </fd-bar-element>
     </div>
 </div>
