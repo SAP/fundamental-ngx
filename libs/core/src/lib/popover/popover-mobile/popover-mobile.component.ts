@@ -50,6 +50,7 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     /** @hidden */
     private _subscriptions = new Subscription();
 
+    /**@hidden */
     constructor(
         elementRef: ElementRef,
         dialogService: DialogService,

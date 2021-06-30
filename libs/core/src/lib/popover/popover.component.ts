@@ -111,6 +111,7 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     /** @hidden */
     private _mobileModeComponentRef: ComponentRef<PopoverMobileComponent>;
 
+    /**@hidden */
     constructor(
         private _elementRef: ElementRef,
         private _popoverService: PopoverService,
