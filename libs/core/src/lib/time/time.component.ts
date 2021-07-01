@@ -348,9 +348,11 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
             this.handlePreviousColumnFocus(this.activeView);
             event.preventDefault();
+            this.focusActiveColumnIndicator();
         } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
             this.handleNextColumnFocus(this.activeView);
             event.preventDefault();
+            this.focusActiveColumnIndicator();
         }
     }
 
@@ -411,6 +413,11 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
             increaseLabel: this._timeI18nLabels.increasePeriodLabel,
             label: this._timeI18nLabels.periodLabel
         };
+    }
+
+    /** @hidden */
+    focusActiveColumnIndicator(): void {
+        this.columns.filter(column => column.active)[0].indicator.nativeElement.focus();
     }
 
     /** @hidden */
