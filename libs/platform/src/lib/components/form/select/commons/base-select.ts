@@ -181,14 +181,8 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
      */
     @Input()
     set contentDensity(contentDensity: ContentDensity) {
-        if (contentDensity === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this._isCompact = density !== 'cozy';
-                this.cd.markForCheck();
-            }))
-        } else {
-            this._isCompact = contentDensity !== 'cozy';
-        }
+        this._contentDensity = contentDensity;
+        this._isCompact = this.contentDensity !== 'cozy';
     }
 
     /** Data for suggestion list */
@@ -294,9 +288,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
                 this._isCompact = density !== 'cozy';
                 this.cd.markForCheck();
             }))
-        } else {
-            this._isCompact = this.contentDensity !== 'cozy';
-        }
+         }
     }
 
     /** @hidden */
