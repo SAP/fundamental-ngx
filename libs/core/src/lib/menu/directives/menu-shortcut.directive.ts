@@ -1,5 +1,5 @@
 import { AfterViewInit, Directive, ElementRef, HostBinding, Input, OnDestroy } from '@angular/core';
-import { MenuItemComponent } from '../../menu/menu-item/menu-item.component';
+import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessageBoxService } from '@fundamental-ngx/core';
+import { MessageBoxService } from '@fundamental-ngx/core/message-box';
 import { MessageBoxComplexExampleComponent } from './message-box-complex-example.component';
 
 @Component({

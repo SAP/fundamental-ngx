@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ButtonModule, MultiInputModule, InputGroupModule, TokenModule, ToolbarModule } from '@fundamental-ngx/core';
 import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform';
 
 import { PlatformVhdDocsComponent } from './platform-vhd.docs.component';
@@ -19,6 +18,11 @@ import {
     PlatformVhdMobileExampleComponent,
     PlatformVhdStrategyLabelExampleComponent
 } from './platform-vhd-examples'
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import { TokenModule } from '@fundamental-ngx/core/token';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 
 const routes: Routes = [
     {

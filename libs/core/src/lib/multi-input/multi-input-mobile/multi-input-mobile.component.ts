@@ -11,7 +11,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { DialogService } from '../../dialog/dialog-service/dialog.service';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 import { takeUntil } from 'rxjs/operators';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.interface';
 import {
@@ -19,7 +19,7 @@ import {
     MobileModeBase,
     MobileModeControl,
     MobileModeConfigToken
-} from '../../utils/base-class/mobile-mode.class';
+} from '@fundamental-ngx/core/mobile-mode';
 
 
 @Component({

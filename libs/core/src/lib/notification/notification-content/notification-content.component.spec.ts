@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { whenStable } from '../../utils/tests';
+import { whenStable } from '@fundamental-ngx/core/tests';
 import { NotificationContentComponent } from './notification-content.component';
 
 describe('NotificationContentComponent', () => {

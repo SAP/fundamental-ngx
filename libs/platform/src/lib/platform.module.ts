@@ -50,6 +50,7 @@ import { PlatformListModule } from './components/list/list.module';
 import { PlatformSliderModule } from './components/slider/slider.module';
 import { PlatformConfig } from './platform.config';
 import { PlatformPageFooterModule } from './components/page-footer/page-footer.module';
+import { PlatformFormGeneratorModule } from './components/form/form-generator/fdp-form-generator.module';
 
 @NgModule({
     imports: [CommonModule, FundamentalNgxCoreModule],
@@ -103,8 +104,10 @@ import { PlatformPageFooterModule } from './components/page-footer/page-footer.m
         PlatformListModule,
         StandardListItemModule,
         PlatformSliderModule,
-        PlatformPageFooterModule
-    ]
+        PlatformPageFooterModule,
+        PlatformFormGeneratorModule
+    ],
+    declarations: []
 })
 export class FundamentalNgxPlatformModule {
     constructor(injector: Injector) {

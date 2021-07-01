@@ -1,0 +1,15 @@
+<fdp-form-group [noLabelLayout]="false">
+    <fdp-form-field id="mobile" label="Mobile Mode Combobox">
+        <fdp-multi-combobox
+            name="mobile"
+            placeholder="Type some text..."
+            displayKey="name"
+            [dataSource]="dataSource"
+            [mobile]="true"
+            [mobileConfig]="mobileConfig"
+            (selectionChange)="onSelect($event)"
+            [selectedItems]="selectedItems"
+        ></fdp-multi-combobox>
+        <p>Selected: {{ selectedItems | json }}</p>
+    </fdp-form-field>
+</fdp-form-group>

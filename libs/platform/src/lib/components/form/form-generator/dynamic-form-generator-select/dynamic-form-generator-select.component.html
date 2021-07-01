@@ -1,0 +1,9 @@
+<ng-container [formGroup]="form">
+<fdp-select
+    [contentDensity]="formItem.guiOptions?.contentDensity"
+    [placeholder]="formItem.message"
+    [name]="name"
+    [list]="formItem.choices"
+    [formControlName]="name"
+></fdp-select>
+</ng-container>

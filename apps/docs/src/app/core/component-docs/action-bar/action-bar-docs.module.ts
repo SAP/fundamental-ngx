@@ -13,7 +13,7 @@ import { ActionBarMobileExampleComponent } from './examples/action-bar-mobile-ex
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
-import { ActionBarModule } from '@fundamental-ngx/core';
+import { ActionBarModule } from '@fundamental-ngx/core/action-bar';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 

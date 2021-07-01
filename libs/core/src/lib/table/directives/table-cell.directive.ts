@@ -8,7 +8,7 @@ import {
     ContentChildren,
     forwardRef
 } from '@angular/core';
-import { CheckboxComponent } from '../../checkbox/checkbox/checkbox.component';
+import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
 
 @Directive({
     selector: '[fdTableCell], [fd-table-cell]'

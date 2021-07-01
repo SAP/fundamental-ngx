@@ -1,6 +1,5 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ObjectMarkerModule } from '@fundamental-ngx/core';
 import { ObjectMarkerDocsComponent } from './object-marker-docs.component';
 import { ObjectMarkerHeaderComponent } from './object-marker-header/object-marker-header.component';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -12,6 +11,7 @@ import {
 } from './examples/object-marker-example.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ObjectMarkerClickableExampleComponent } from './examples/object-marker-clickable-example.component';
+import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
 
 const routes: Routes = [
     {

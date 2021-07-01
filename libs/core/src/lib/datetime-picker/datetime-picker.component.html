@@ -15,6 +15,7 @@
                 [compact]="compact"
                 [state]="state"
                 [disabled]="disabled"
+                [isControl]="true"
             >
                 <input
                     type="text"
@@ -23,6 +24,7 @@
                     [(ngModel)]="_inputFieldDate"
                     [attr.aria-label]="datetimeInputLabel"
                     [attr.id]="inputId"
+                    [attr.aria-required]="required"
                     [placeholder]="placeholder"
                     [compact]="compact"
                     [ngClass]="{ 'is-error': _isInvalidDateInput && useValidation }"
@@ -44,6 +46,7 @@
                         [compact]="compact"
                         [attr.tabindex]="buttonFocusable ? 0 : -1"
                         [attr.aria-label]="displayDatetimeToggleLabel"
+                        [class.is-expanded]="isOpen"
                         [attr.aria-expanded]="isOpen"
                         (click)="togglePopover()"
                     ></button>

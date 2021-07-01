@@ -87,8 +87,9 @@
         "no-consecutive-blank-lines": [true, 10],
         "ordered-imports": [false],
         "nx-enforce-module-boundaries": [
-            true,
+            false,
             {
+                "enforceBuildableLibDependency": true,
                 "allow": [],
                 "depConstraints": [
                     {

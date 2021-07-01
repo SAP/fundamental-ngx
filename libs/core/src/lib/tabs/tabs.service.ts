@@ -1,7 +1,7 @@
 import { Injectable, Optional } from '@angular/core';
 import { Subject } from 'rxjs';
-import { RtlService } from '../utils/services/rtl.service';
-import { KeyUtil } from '../utils/functions';
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 
 /**

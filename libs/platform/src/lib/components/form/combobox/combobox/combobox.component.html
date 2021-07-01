@@ -34,11 +34,11 @@
         [glyph]="!readonly ? 'navigation-down-arrow' : ' '"
         [state]="status === 'error' ? 'error' : state"
         [buttonFocusable]="false"
-        [disabled]="disabled || readonly"
+        [disabled]="disabled"
         [isControl]="true"
         (addOnButtonClicked)="!mobile && onPrimaryButtonClick(_connectedOverlay.open)"
         [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
-        [attr.aria-disabled]="disabled || readonly"
+        [attr.aria-disabled]="disabled"
         [attr.aria-readonly]="readonly"
         [glyphAriaLabel]="ariaLabel"
         (click)="mobile && onPrimaryButtonClick(false)"
@@ -58,6 +58,7 @@
             [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
             [attr.aria-owns]="autoComplete && !mobile ? id + '-result' : null"
             [attr.aria-haspopup]="autoComplete && !mobile"
+            [attr.aria-required]="required"
             fd-input-group-input
             tabindex="0"
             [id]="id"
@@ -95,8 +96,8 @@
         <ng-container *ngIf="isGroup">
             <ng-container *ngFor="let group of _suggestions">
                 <ng-container *ngIf="!groupItemTemplate">
-                    <li fd-list-group-header role="group">
-                        <span fd-list-title>{{group.label}}</span>
+                    <li fd-list-group-header role="group" tabindex="0">
+                        <span fd-list-title [attr.title]="group.label" >{{group.label}}</span>
                     </li>
                 </ng-container>
 

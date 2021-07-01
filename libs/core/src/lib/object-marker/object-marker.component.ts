@@ -7,7 +7,8 @@ import {
     OnChanges,
     ElementRef
 } from '@angular/core';
-import { CssClassBuilder, applyCssClass } from '../utils/public_api';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 @Component({
     // tslint:disable-next-line:component-selector

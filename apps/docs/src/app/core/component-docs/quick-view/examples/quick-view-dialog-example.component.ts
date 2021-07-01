@@ -1,5 +1,5 @@
 import { Component, TemplateRef } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fd-quick-view-dialog-example',
@@ -38,9 +38,17 @@ export class QuickViewDialogExampleComponent {
         }]
     };
 
+    get isOpened(): boolean {
+        return !!document.querySelector(`#${this.data.id}`);
+    }
+
     constructor(private readonly dialogService: DialogService) {}
 
     openDialog(dialog: TemplateRef<any>): void {
-        this.dialogService.open(dialog);
+        this.dialogService.open(dialog, { id: this.data.id, ariaLabelledBy: `${this.data.id}-header` });
+    }
+
+    getGroupId(idx: number, group: any): string {
+        return `${this.data.id}-${idx}-${group.title.split(' ').join('-')}`
     }
 }

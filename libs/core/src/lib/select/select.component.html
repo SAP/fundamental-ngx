@@ -24,7 +24,7 @@
         [class.is-readonly]="readonly" [attr.tabindex]="_tabIndex" [attr.id]="controlId" [attr.aria-active]="_isOpen"
         [attr.aria-expanded]="_isOpen" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly"
         [attr.aria-controls]="controlId + '-list-box'" [attr.aria-haspopup]="!(this.readonly || this.disabled)"
-        [attr.aria-label]="ariaLabel" [attr.aria-labelledby]="ariaLabelledBy"
+        [attr.aria-label]="ariaLabel" [attr.aria-labelledby]="ariaLabelledBy" [attr.aria-required]="required"
         [attr.aria-activedescendant]="_getAriaActiveDescendant()" (focus)="_onFocus()" (blur)="_onBlur()">
         <div class="fd-select__text-content">
             <ng-container [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"

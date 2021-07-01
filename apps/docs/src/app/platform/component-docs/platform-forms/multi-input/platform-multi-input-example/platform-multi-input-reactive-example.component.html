@@ -5,7 +5,7 @@
             id="input-simple"
             rank="1"
             placeholder="Field placeholder text"
-            [required]="true"
+            required="true"
         >
             <fdp-multi-input
                 formControlName="item"
@@ -19,8 +19,11 @@
                 [status]="hasError() ? 'error' : 'success'"
             >
             </fdp-multi-input>
-            <p>Form Selected Item: {{ itemField.value | json }}</p>
         </fdp-form-field>
+        <ng-template #i18n let-errors>
+            <span *ngIf="errors?.required"> Value is required </span>
+        </ng-template>
     </fdp-form-group>
+    <p>Form Selected Item: {{ itemField.value | json }}</p>
     <fdp-button contentDensity="compact" type="submit" style="margin-left: 2rem" label="Submit"></fdp-button>
 </form>

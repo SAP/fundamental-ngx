@@ -1,5 +1,5 @@
 import { ConnectedPosition } from '@angular/cdk/overlay';
-import { PopoverPosition } from './popover-position';
+import { PopoverPosition } from '../../shared/interfaces/popover-position';
 
 describe('PopoverPosition', () => {
 

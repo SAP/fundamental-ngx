@@ -1,17 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import {
-    ToolbarModule,
-    ButtonModule,
-    SegmentedButtonModule,
-    SplitButtonModule,
-    MenuModule,
-    SelectModule,
-    CheckboxModule,
-    FormModule,
-    DatetimePickerModule,
-    FdDatetimeModule
-} from '@fundamental-ngx/core';
 
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ToolbarDocsComponent } from './toolbar-docs.component';
@@ -28,6 +16,16 @@ import {
     ToolbarOverflowGroupingExampleComponent,
     ToolbarSizeExampleComponent
 } from './examples/toolbar-example.component';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { SplitButtonModule } from '@fundamental-ngx/core/split-button';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { SelectModule } from '@fundamental-ngx/core/select';
+import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
 
 const examples = [
     ToolbarTypeExampleComponent,
@@ -59,7 +57,6 @@ const routes: Routes = [
         ButtonModule,
         SegmentedButtonModule,
         SplitButtonModule,
-        SegmentedButtonModule,
         MenuModule,
         SelectModule,
         CheckboxModule,

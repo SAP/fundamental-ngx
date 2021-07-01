@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ShellbarUser } from '../model/shellbar-user';
 import { ShellbarUserMenu } from '../model/shellbar-user-menu';
-import { MenuComponent } from '../../menu/menu.component';
-import { Placement } from '../../popover/popover-position/popover-position';
-import { PopoverFillMode } from '../../popover/popover-position/popover-position';
+import { MenuComponent } from '@fundamental-ngx/core/menu';
+import { Placement } from '@fundamental-ngx/core/shared';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 /**
  * This Component extends popover component and passes all of the options and events from outside to popover component

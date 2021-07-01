@@ -11,8 +11,9 @@ import {
     ButtonStateExampleComponent,
     ButtonTypesExampleComponent
 } from './examples/button-examples.component';
-import { ButtonModule, CarouselModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CarouselModule } from '@fundamental-ngx/core/carousel';
 
 const routes: Routes = [
     {

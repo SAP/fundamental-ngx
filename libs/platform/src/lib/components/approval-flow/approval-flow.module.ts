@@ -13,6 +13,7 @@ import {
     DialogModule,
     FormModule,
     IconModule,
+    IllustratedMessageModule,
     MenuModule,
     MessageStripModule,
     MessageToastModule,
@@ -35,6 +36,7 @@ import { ApprovalFlowUserDetailsComponent } from './approval-flow-user-details/a
 import { ApprovalFlowDropZoneDirective } from './approval-flow-node/approval-flow-drop-zone.directive';
 import { ApprovalFlowTeamListComponent } from './approval-flow-team-list/approval-flow-team-list.component';
 import { ApprovalFlowAddNodeViewService } from './services/approval-flow-add-node-view.service';
+import { ApprovalFlowSelectTypeComponent } from './approval-flow-select-type/approval-flow-select-type.component';
 
 
 @NgModule({
@@ -46,7 +48,13 @@ import { ApprovalFlowAddNodeViewService } from './services/approval-flow-add-nod
         ApprovalFlowUserListComponent,
         ApprovalFlowUserDetailsComponent,
         ApprovalFlowDropZoneDirective,
-        ApprovalFlowTeamListComponent
+        ApprovalFlowTeamListComponent,
+        ApprovalFlowSelectTypeComponent
+    ],
+    entryComponents: [
+        ApprovalFlowAddNodeComponent,
+        ApprovalFlowApproverDetailsComponent,
+        ApprovalFlowSelectTypeComponent
     ],
     providers: [
         ApprovalFlowAddNodeViewService
@@ -73,7 +81,8 @@ import { ApprovalFlowAddNodeViewService } from './services/approval-flow-add-nod
         DatePickerModule,
         FormModule,
         DragDropModule,
-        RadioModule
+        RadioModule,
+        IllustratedMessageModule
     ],
     exports: [
         ApprovalFlowComponent

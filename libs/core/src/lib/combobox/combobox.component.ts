@@ -22,23 +22,23 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ListMessageDirective } from '../list/list-message.directive';
+import { ListMessageDirective } from '@fundamental-ngx/core/list';
 import { ComboboxItem } from './combobox-item';
-import { MenuKeyboardService } from '../menu/menu-keyboard.service';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { Subject, Subscription } from 'rxjs';
-import { FormStates } from '../form/form-control/form-states';
-import { PopoverComponent } from '../popover/popover.component';
-import { GroupFunction } from '../utils/pipes/list-group.pipe';
-import { InputGroupComponent } from '../input-group/input-group.component';
-import { KeyUtil } from '../utils/functions';
+import { FormStates } from '@fundamental-ngx/core/shared';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { GroupFunction } from '@fundamental-ngx/core/utils';
+import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { AutoCompleteEvent } from './auto-complete.directive';
-import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
-import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
-import { ListComponent } from '../list/list.component';
-import { FocusEscapeDirection } from '../utils/services/keyboard-support/keyboard-support.service';
-import { PopoverFillMode } from '../popover/popover-position/popover-position';
+import { ListComponent } from '@fundamental-ngx/core/list';
+import { FocusEscapeDirection } from '@fundamental-ngx/core/utils';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import {
     BACKSPACE,
     CONTROL,
@@ -52,7 +52,7 @@ import {
     TAB,
     UP_ARROW
 } from '@angular/cdk/keycodes';
-import { ContentDensityService } from '../utils/public_api';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 let comboboxUniqueId = 0;
 
@@ -107,6 +107,10 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     @Input()
     @HostBinding('attr.aria-labelledby')
     ariaLabelledBy: string = null;
+
+    /** If it is mandatory field */
+    @Input()
+    required = false;
 
     /** Values to be filtered in the search input. */
     @Input()
@@ -357,7 +361,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** @hidden */
     ngOnInit(): void {
-        if (this.mobile) {
+        if (this.mobile || this.readOnly) {
             this.showDropdownButton = false;
         }
         this._refreshDisplayedValues();
@@ -420,10 +424,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             event.stopPropagation();
         } else if (this.openOnKeyboardEvent && !event.ctrlKey && !KeyUtil.isKeyCode(event, this.nonOpeningKeys)) {
             this.isOpenChangeHandle(true);
-            const acceptedKeys = !KeyUtil.isKeyCode(event, BACKSPACE)
-                && !KeyUtil.isKeyType(event, 'alphabetical')
-                && !KeyUtil.isKeyType(event, 'numeric');
-            if (this.isEmptyValue && acceptedKeys) {
+            if (this.isEmptyValue && (KeyUtil.isKeyType(event, 'control')) && !KeyUtil.isKeyCode(event, BACKSPACE) ) {
                 this.listComponent.setItemActive(0);
             }
         }

@@ -11,13 +11,13 @@ export class ScrollSpyDirective {
      * An array of tags to track.
      */
     @Input()
-    public trackedTags: string[] = [];
+    trackedTags: string[] = [];
 
     /**
      * Whether events are still fired if there is no tag present on the user's screen.
      */
     @Input()
-    public fireEmpty = false;
+    fireEmpty = false;
 
     /**
      * A number that represent at what location in the container the event is fired.
@@ -25,61 +25,64 @@ export class ScrollSpyDirective {
      * 0 for the top and 1 for the bottom.
      */
     @Input()
-    public targetPercent = 0;
+    targetPercent = 0;
 
     /**
      * Number that represents the offset in pixels for fired target. `100` value means that the event will be fired for
      * target that is 100 pixels below the spy container.
      */
     @Input()
-    public targetOffset = 0;
+    targetOffset = 0;
 
     /**
      * Whether to disable scroll spy
      */
     @Input()
-    public scrollSpyDisabled = false;
+    scrollSpyDisabled = false;
 
     /**
      * Event fired on the scroll element when a new item becomes activated by the scrollspy .
      * The returned value is the HTMLElement itself.
      */
     @Output()
-    public readonly spyChange: EventEmitter<HTMLElement> = new EventEmitter<HTMLElement>();
+    readonly spyChange: EventEmitter<HTMLElement> = new EventEmitter<HTMLElement>();
 
     /** @hidden */
-    private currentActive: HTMLElement;
+    private _currentActive: HTMLElement;
 
     /** @hidden */
-    constructor(private elRef: ElementRef) {}
+    constructor(private readonly _elRef: ElementRef) {}
 
     /** @hidden */
     @HostListener('scroll', ['$event'])
-    onScroll(event: any): void {
+    onScroll(event: Event): void {
         if (this.scrollSpyDisabled) {
             return;
         }
 
         let spiedTag: HTMLElement;
-        const children = this.elRef.nativeElement.children;
-        const targetScrollTop = event.target.scrollTop;
-        const targetOffsetTop = event.target.offsetTop + this.targetOffset;
+        const target = event.target as HTMLElement;
+        const children: HTMLElement[] = this._elRef.nativeElement.children;
+        const [firstChild] = children;
+        const childrenLength = children.length;
+        const targetScrollTop = target.scrollTop;
+        const targetOffsetTop = target.offsetTop + this.targetOffset - (target.offsetTop - firstChild.offsetTop);
 
-        for (let i = 0; i < children.length; i++) {
-            const element: HTMLElement = children[i];
+        for (let i = 0; i < childrenLength; i++) {
+            const element = children[i];
             if (this.trackedTags.some((tag) => tag.toLocaleUpperCase() === element.tagName.toLocaleUpperCase())) {
                 if (
                     element.offsetTop - targetOffsetTop <=
-                    targetScrollTop + event.target.offsetHeight * this.targetPercent
+                    targetScrollTop + target.offsetHeight * this.targetPercent
                 ) {
                     spiedTag = element;
                 }
             }
         }
 
-        if ((spiedTag || this.fireEmpty) && spiedTag !== this.currentActive) {
-            this.currentActive = spiedTag;
-            this.spyChange.emit(this.currentActive);
+        if ((spiedTag || this.fireEmpty) && spiedTag !== this._currentActive) {
+            this._currentActive = spiedTag;
+            this.spyChange.emit(this._currentActive);
         }
     }
 }

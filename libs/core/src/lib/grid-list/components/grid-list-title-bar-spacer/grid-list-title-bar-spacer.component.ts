@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ToolbarSpacerComponent } from '../../../toolbar/toolbar-spacer.component';
+import { ToolbarSpacerComponent } from '@fundamental-ngx/core/toolbar';
 
 @Component({
     selector: 'fd-grid-list-title-bar-spacer',

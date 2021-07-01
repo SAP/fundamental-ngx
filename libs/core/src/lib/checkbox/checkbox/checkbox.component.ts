@@ -16,11 +16,9 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FdCheckboxValues } from './fd-checkbox-values.interface';
-import { compareObjects, KeyUtil } from '../../utils/functions';
 import { Platform } from '@angular/cdk/platform';
-import { LIST_ITEM_COMPONENT, ListItemInterface } from '../../list/list-item/list-item-utils';
+import { LIST_ITEM_COMPONENT, ListItemInterface, compareObjects, KeyUtil, ContentDensityService } from '@fundamental-ngx/core/utils';
 import { SPACE } from '@angular/cdk/keycodes';
-import { ContentDensityService } from '../../utils/public_api';
 import { Subscription } from 'rxjs';
 
 let checkboxUniqueId = 0;
@@ -39,7 +37,8 @@ export type fdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force
             useExisting: forwardRef(() => CheckboxComponent),
             multi: true
         }
-    ]
+    ],
+    host: { '[attr.tabindex]': '-1' }
 })
 export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestroy {
     /** @hidden */
@@ -102,6 +101,10 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     @Input()
     labelClass: string;
 
+    /** If it is mandatory field */
+    @Input()
+    required = false;
+
     /** @hidden */
     private _subscriptions = new Subscription();
 
@@ -115,6 +118,10 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     @HostBinding('style.position')
     readonly position = 'relative';
 
+    /** @hidden */
+    @HostBinding('style.outline')
+    readonly outline = 'none';
+
     /** Values returned by control. */
     public values: FdCheckboxValues = { trueValue: true, falseValue: false, thirdStateValue: null };
     /** Stores current checkbox value. */
@@ -127,7 +134,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     /** @hidden Reference to callback provided by FormControl.*/
     public onTouched = () => {};
     /** @hidden Reference to callback provided by FormControl.*/
-    public onValueChange = (newValue) => {};
+    public onValueChange = (_) => {};
 
     /** @hidden */
     constructor(
@@ -203,7 +210,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
         this.muteKey(event);
     }
 
-    /** @hidden Updates checkbox Indeterminate state on spacebar key on IE11 */
+    /** @hidden Updates checkbox Indeterminate state on space bar key on IE11 */
     public checkByKey(event: KeyboardEvent): void {
         if (this._isSpaceBarEvent(event) && this._platform.TRIDENT) {
             this._nextValueEvent();

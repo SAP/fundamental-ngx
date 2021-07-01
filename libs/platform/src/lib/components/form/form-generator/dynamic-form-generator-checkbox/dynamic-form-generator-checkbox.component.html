@@ -1,0 +1,9 @@
+<ng-container [formGroup]="form">
+    <fdp-checkbox-group
+        [contentDensity]="formItem.guiOptions?.contentDensity"
+        [isInline]="formItem.guiOptions?.inline || false"
+        [name]="name"
+        [list]="formItem.choices"
+        [formControlName]="name"
+    ></fdp-checkbox-group>
+</ng-container>

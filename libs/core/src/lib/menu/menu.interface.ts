@@ -1,7 +1,7 @@
 import { EventEmitter, InjectionToken } from '@angular/core';
-import { DialogConfig } from '../dialog/utils/dialog-config.class';
+import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { MenuItemComponent } from './menu-item/menu-item.component';
-import { MobileMode } from '../utils/interfaces/mobile-control.interface';
+import { MobileMode } from '@fundamental-ngx/core/mobile-mode';
 
 export const MENU_COMPONENT = new InjectionToken<string[]>('MenuInterface');
 

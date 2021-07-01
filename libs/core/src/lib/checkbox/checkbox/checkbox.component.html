@@ -11,6 +11,7 @@
     [attr.aria-labelledby]="ariaLabelledBy"
     [attr.aria-describedby]="ariaDescribedBy"
     [attr.aria-disabled]="disabled"
+    [attr.aria-required]="required"
     [class.fd-checkbox--compact]="compact"
     [ngClass]="state ? 'is-' + state : ''"
     [ngModel]="isChecked"
@@ -19,21 +20,25 @@
     (keyup)="handleInputKeyUp($event)"
     (click)="$event.stopPropagation()"
 />
-<label class="fd-checkbox__label"
-       #labelElement
-       [for]="inputId"
-       [ngClass]="labelClass"
-       [attr.title]="title"
-       [class.fd-checkbox__label--compact]="compact"
-       (click)="checkByClick($event)">
+
+<label
+    class="fd-checkbox__label"
+    #labelElement
+    [for]="inputId"
+    [ngClass]="labelClass"
+    [attr.title]="title"
+    [class.fd-checkbox__label--compact]="compact"
+    (click)="checkByClick($event)">
+
     <ng-container *ngIf="label">
-        <span class="fd-checkbox__text">
-            {{ label }}
-        </span>
+            <span class="fd-checkbox__text">
+                {{ label }}
+            </span>
     </ng-container>
+
     <ng-container *ngIf="!label">
-        <span class="fd-checkbox__text">
-            <ng-content></ng-content>
-        </span>
+            <span class="fd-checkbox__text">
+                <ng-content></ng-content>
+            </span>
     </ng-container>
 </label>

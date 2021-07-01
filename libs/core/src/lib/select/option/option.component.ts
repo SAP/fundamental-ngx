@@ -22,7 +22,7 @@ import {
     SPACE
 } from '@angular/cdk/keycodes';
 
-import { KeyUtil } from '../../utils/functions/key-util';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { OptionsInterface } from '../options.interface';
 
 let optionUniqueId = 0;

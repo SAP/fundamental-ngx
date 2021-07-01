@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 import { FirstDialogExampleComponent } from './first-dialog-example.component';
-import { DialogConfig, DialogService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-dialog-stacked-example',
@@ -10,6 +10,6 @@ export class DialogStackedExampleComponent {
     constructor(private _dialogService: DialogService) {}
 
     openDialog(): void {
-        this._dialogService.open(FirstDialogExampleComponent, { responsivePadding: true });
+        this._dialogService.open(FirstDialogExampleComponent, { responsivePadding: true, ariaLabelledBy: 'fd-dialog-header-8', ariaDescribedBy: 'fd-dialog-body-8' });
     }
 }

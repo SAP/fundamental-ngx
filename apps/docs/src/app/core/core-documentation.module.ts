@@ -9,7 +9,7 @@ import { StackblitzService } from '../documentation/core-helpers/stackblitz/stac
 import { CoreDocumentationComponent } from './documentation/core-documentation.component';
 import { HomeDocsComponent } from './component-docs/core-home/core-home.component';
 import { NewComponentComponent } from './component-docs/new-component/new-component.component';
-import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core';
+import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
 import {
     COMBOBOX_MOBILE_CONFIG,
     MENU_MOBILE_CONFIG,

@@ -6,7 +6,7 @@ import { ContentDensityHeaderComponent } from './content-density-header/content-
 import { ContentDensityDocsComponent } from './content-density-docs.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ContentDensityExampleComponent } from './examples/content-density-example.component';
-import { ContentDensityService, SelectModule } from '@fundamental-ngx/core';
+import { SelectModule } from '@fundamental-ngx/core/select';
 
 const routes: Routes = [
     {

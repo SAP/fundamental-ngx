@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FdDate, DateRange, DatetimeAdapter } from '@fundamental-ngx/core';
+import { DateRange } from '@fundamental-ngx/core/calendar';
+import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-date-picker-range-example',

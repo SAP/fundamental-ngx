@@ -1,5 +1,6 @@
 import { Component, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { DialogConfig, DialogService, FdDate } from '@fundamental-ngx/core';
+import { FdDate } from '@fundamental-ngx/core/datetime';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fd-calendar-mobile-example',

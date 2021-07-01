@@ -1,6 +1,10 @@
 $block: approval-flow-node;
+
 $node-height: 94px;
 $node-height--edit-mode: 126px;
+$node-width: 278px;
+$node-margin-bottom: 1rem;
+
 $carousel-marker-height: 11px;
 $carousel-marker-top: $node-height / 2 - $carousel-marker-height / 2;
 $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-height / 2;
@@ -9,13 +13,76 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     box-sizing: border-box;
     display: block;
     position: relative;
-    margin-bottom: 1rem;
+    margin-bottom: $node-margin-bottom;
+    width: $node-width;
+    height: $node-height;
+
+    &.#{$block}--edit-mode {
+        height: $node-height--edit-mode;
+
+        .#{$block}__vertical-line-before:before,
+        .#{$block}__vertical-line-after:after {
+            top: calc(-1 * (#{$node-height--edit-mode} / 2 + #{$node-margin-bottom}));
+            height: calc(#{$node-height--edit-mode} + #{$node-margin-bottom});
+        }
+    }
+
+    .#{$block}__vertical-line-before:before,
+    .#{$block}__vertical-line-after:after {
+        content: '';
+        position: absolute;
+        top: calc(-1 * (#{$node-height} / 2 + #{$node-margin-bottom}));
+        height: calc(#{$node-height} + #{$node-margin-bottom});
+    }
+
+    .#{$block}__vertical-line-before {
+        &:before {
+            border-right: 2px dashed #89919A;
+            border-right: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
+            left: calc(-2rem - 1px);
+        }
+
+        &-solid:before {
+            border-right: 1px solid #89919A;
+            border-right: 1px solid var(--sapField_ReadOnly_BorderColor, #89919A);
+        }
+    }
+
+    .#{$block}__vertical-line-after {
+        &:after {
+            border-right: 2px dashed #89919A;
+            border-right: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
+            right: calc(-2rem - 1px);
+        }
+
+        &-solid:after {
+            border-right: 1px solid #89919A;
+            border-right: 1px solid var(--sapField_ReadOnly_BorderColor, #89919A);
+        }
+    }
+
+    &[dir='rtl'] {
+        .#{$block}__vertical-line-before {
+            &:before {
+                left: auto;
+                right: calc(-2rem - 1px);
+            }
+        }
+
+        .#{$block}__vertical-line-after {
+            &:after {
+                right: auto;
+                left: calc(-2rem - 1px);
+            }
+        }
+    }
+}
+
+:host:not(.#{$block}--space) {
     background: #fff;
     background: var(--sapBaseColor, #fff);
     border-radius: 4px;
     box-shadow: 0 0 2px rgba(0, 0, 0, .1), 0 2px 8px rgba(0, 0, 0, .1);
-    width: 278px;
-    height: $node-height;
     cursor: pointer;
 
     &.#{$block}--blank {
@@ -26,28 +93,28 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
 
         &:before {
             content: '';
-            width: calc(100% + 3.7rem);
+            width: calc(100% + 4rem);
             height: 0;
             display: block;
             position: absolute;
-            left: -4rem;
+            left: -2rem;
             border-top: 2px dashed #89919A;
             border-top: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
             top: calc(50% - 1px);
         }
     }
 
-    &.#{$block}--line-before:before, &.#{$block}--line-after:after {
+    &.#{$block}--line-before:before,
+    &.#{$block}--line-after:after {
         content: '';
-        width: 1.9rem;
+        width: 2rem;
         height: 0;
         display: block;
         position: absolute;
         border-top: 2px dashed #89919A;
         border-top: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
-        top: 0;
+        top: calc(50% - 1px);
         bottom: 0;
-        margin: auto;
         pointer-events: none;
     }
 
@@ -56,11 +123,12 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     }
 
     &.#{$block}--line-after:after {
-        right: -1.9rem;
+        right: -2rem;
     }
 
     &.#{$block}--approved {
-        &.#{$block}--line-after:after {
+        &.#{$block}--line-after:after,
+        &.#{$block}--blank:before {
             border-top-style: solid;
             border-top-width: 1px;
         }
@@ -70,11 +138,10 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
         &.#{$block}--line-before:before {
             border-top-style: solid;
             border-top-width: 1px;
-            left: -2.2rem;
-            width: 2.2rem;
+            left: -2rem;
+            width: 2rem;
         }
     }
-
 
     &.#{$block}--selected {
         background: #E5F0FA;
@@ -99,15 +166,9 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
         }
     }
 
-    &.#{$block}--in-parallel {
-        .#{$block}__add--before {
-            & + .#{$block}__drop-zone {
-                left: -1.8rem;
-            }
-        }
-    }
-
-    &.#{$block}--last-in-parallel, &.#{$block}--parallel-start {
+    &.#{$block}--last-in-parallel,
+    &.#{$block}--parallel-start,
+    &.#{$block}--final {
         .#{$block}__add--after {
             right: -1.5rem;
 
@@ -115,16 +176,52 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
                 right: -1.8rem;
             }
         }
+    }
 
-        &.#{$block}--blank:not(.#{$block}--blank-top):before {
-            width: calc(100% + 5.7rem);
-        }
+    &.#{$block}--first-in-parallel,
+    &.#{$block}--parallel-end,
+    &.#{$block}--root {
+        .#{$block}__add--before {
+            left: -1.5rem;
 
-        &.#{$block}--blank.#{$block}--blank-top:before {
-            width: calc(100% + 7.7rem);
+            & + .#{$block}__drop-zone {
+                left: -1.8rem;
+            }
         }
     }
 
+    &.#{$block}--next-blank {
+        .#{$block}__add--after {
+            right: calc(-4rem - #{$node-width} / 2);
+
+            & + .#{$block}__drop-zone {
+                left: calc(100% + 4rem);
+            }
+        }
+    }
+
+    &.#{$block}--first-root {
+        &.#{$block}--line-before:before {
+            width: 4rem;
+            left: -4rem;
+        }
+
+        .#{$block}__carousel-start-marker {
+            left: -4rem;
+        }
+    }
+
+    &.cdk-drag-dragging {
+        &:before,
+        &:after,
+        .#{$block}__add,
+        .#{$block}__carousel-start-marker,
+        .#{$block}__carousel-end-marker,
+        .#{$block}__vertical-line-before,
+        .#{$block}__vertical-line-after {
+            visibility: hidden;
+        }
+    }
 
     &[dir='rtl'] {
         .#{$block}__avatar {
@@ -185,11 +282,11 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
         }
 
         .#{$block}__add--before {
-            right: -1.5rem;
+            right: -2.5rem;
             left: auto;
 
             & + .#{$block}__drop-zone {
-                right: -1.8rem;
+                right: -2.8rem;
             }
         }
 
@@ -203,7 +300,9 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
             }
         }
 
-        &.#{$block}--last-in-parallel, &.#{$block}--parallel-start {
+        &.#{$block}--last-in-parallel,
+        &.#{$block}--parallel-start,
+        &.#{$block}--final {
             .#{$block}__add--after {
                 left: -1.5rem;
 
@@ -211,23 +310,40 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
                     left: -1.8rem;
                 }
             }
+        }
 
-            &.#{$block}--blank:not(.#{$block}--blank-top):before {
-                width: calc(100% + 5.7rem);
-                left: -2rem;
+        &.#{$block}--first-in-parallel,
+        &.#{$block}--parallel-end,
+        &.#{$block}--root {
+            .#{$block}__add--before {
+                right: -1.5rem;
+
+                & + .#{$block}__drop-zone {
+                    right: -1.8rem;
+                }
+            }
+        }
+
+        &.#{$block}--next-blank {
+            .#{$block}__add--after {
+                left: calc(-4rem - #{$node-width} / 2);
+
+                & + .#{$block}__drop-zone {
+                    right: calc(100% + 4rem);
+                }
+            }
+        }
+
+        &.#{$block}--first-root {
+            &.#{$block}--line-before:before {
+                left: auto;
+                right: -4rem;
             }
 
-        }
-
-        &.#{$block}--blank.#{$block}--blank-top:before {
-            width: calc(100% + 5.7rem);
-            left: -2rem;
-        }
-    }
-
-    &.cdk-drag-dragging {
-        .#{$block}__add, &:before, &:after, .#{$block}__carousel-start-marker, .#{$block}__carousel-end-marker {
-            visibility: hidden;
+            .#{$block}__carousel-start-marker {
+                left: auto;
+                right: -4rem;
+            }
         }
     }
 }
@@ -243,18 +359,8 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     justify-content: space-between;
     align-items: center;
     height: 2rem;
-    padding: 0 1rem;
+    padding: 0 .5rem 0 0.3rem;
     box-shadow: 0 1px 4px rgba(0, 0, 0, .15);
-
-    .#{$block}__menu-button {
-        position: absolute;
-        right: .5rem;
-    }
-
-    fd-checkbox {
-        position: absolute !important;
-        left: .3rem;
-    }
 }
 
 .#{$block}__avatar {
@@ -338,11 +444,11 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
     }
 
     &.#{$block}__add--before {
-        left: -1.5rem;
+        left: -2.5rem;
         right: auto;
 
         & + .#{$block}__drop-zone {
-            left: -1.8rem;
+            left: -2.8rem;
         }
     }
 
@@ -372,7 +478,6 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
 
     &.#{$block}__drop-zone--blank {
         width: 100%;
-        left: 0;
         top: 0;
     }
 

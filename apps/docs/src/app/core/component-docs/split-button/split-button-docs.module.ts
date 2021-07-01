@@ -10,8 +10,8 @@ import { ButtonSplitTemplateExampleComponent } from './examples/split-button-tem
 import { ButtonSplitProgrammaticalExampleComponent } from './examples/split-button-programmatical-example.component';
 import { ButtonSplitOptionsExampleComponent } from './examples/split-button-options-example.component';
 import { ButtonSplitTypesIconsComponent } from './examples/split-button-icons-example.component';
-import { SplitButtonModule } from '@fundamental-ngx/core';
 import { ButtonSplitBehaviorsComponent } from './examples/split-button-behaviors-example.component';
+import { SplitButtonModule } from '@fundamental-ngx/core/split-button';
 
 const routes: Routes = [
     {

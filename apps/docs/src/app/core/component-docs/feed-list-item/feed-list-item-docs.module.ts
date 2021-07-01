@@ -8,8 +8,12 @@ import { FeedListItemHeaderComponent } from './feed-list-item-header/feed-list-i
 import { FeedListItemDocsComponent } from './feed-list-item-docs.component';
 
 import { examples } from './examples';
+import { FeedListItemModule } from '@fundamental-ngx/core/feed-list-item';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 
-import { FeedListItemModule, MenuModule, ActionSheetModule, AvatarModule, ToolbarModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {

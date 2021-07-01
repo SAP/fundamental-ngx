@@ -1,7 +1,7 @@
 /* tslint:disable:no-inferrable-types */
 
 import { Injectable, InjectionToken } from '@angular/core';
-import { DialogConfigBase } from '../../dialog/base/dialog-config-base.class';
+import { DialogConfigBase } from '@fundamental-ngx/core/dialog';
 
 export const MESSAGE_BOX_DEFAULT_CONFIG = new InjectionToken<MessageBoxConfig>('Default MessageBoxConfig');
 /** @hidden */

@@ -14,10 +14,13 @@ import {
     Optional,
     OnDestroy
 } from '@angular/core';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { Subscription } from 'rxjs';
 
-import { applyCssClass, ContentDensityService, CssClassBuilder, RtlService } from '../utils/public_api';
 import { PanelContentDirective } from './panel-content/panel-content.directive';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
 
 let panelUniqueId = 0;
 let panelExpandUniqueId = 0;

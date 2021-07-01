@@ -8,17 +8,13 @@ import {
     click,
     sendKeys,
     checkElementScreenshot,
-    mouseHoverElement, saveElementScreenshot, addIsActiveClass, getImageTagBrowserPlatform
+    saveElementScreenshot,
 } from '../../driver/wdio';
 import {
-    testText, fdTypeOptions, iconOptions, button
+    testText, fdTypeOptions, iconOptions,
 } from '../fixtures/appData/button-contents';
 import {
-    stateButtonsDisableTag,
-    buttonsIconTag,
-    buttonsMenuTag, buttonPlaygroundTag,
-    buttonsSizeTag,
-    buttonsTypeTag, buttonStateTag
+    buttonPlaygroundTag,
 } from '../fixtures/testData/button-tags';
 
 describe('Button test suite:', function() {
@@ -157,77 +153,5 @@ describe('Button test suite:', function() {
             buttonPage.saveExampleBaselineScreenshot();
             expect(buttonPage.compareWithBaseline()).toBeLessThan(5);
         });
-
-        xit('should check buttons type states', () => {
-            const typeButtonsLength = getElementArrayLength(typeButtons);
-            for (let i = 0; i < typeButtonsLength; i++) {
-                scrollIntoView(typeButtons, i);
-                checkElementStates(typeButtons, buttonsTypeTag + i + '-', button, i);
-            }
-        });
-
-        xit('should check state button states', () => {
-            scrollIntoView(stateButton);
-            checkElementStates(stateButton, buttonStateTag, button);
-        });
-
-        xit('verify disable state buttons hover state', () => {
-            const disableStateButtonsLength = getElementArrayLength(disableStateButtons);
-            for (let i = 0; i < disableStateButtonsLength; i++) {
-                scrollIntoView(disableStateButtons, i);
-                checkElementHoverState(disableStateButtons, stateButtonsDisableTag + i + '-hover-state-', button, i);
-            }
-        });
-
-        xit('should check buttons with icons states', () => {
-            const iconButtonsLength = getElementArrayLength(iconButtons);
-            for (let i = 0; i < iconButtonsLength; i++) {
-                scrollIntoView(iconButtons, i);
-                checkElementStates(iconButtons, buttonsIconTag + i + '-', button, i);
-            }
-        });
-
-        xit('should check size buttons states', () => {
-            const sizeButtonsLength = getElementArrayLength(sizeButtons);
-            for (let i = 0; i < sizeButtonsLength; i++) {
-                scrollIntoView(sizeButtons, i);
-                checkElementStates(sizeButtons, buttonsSizeTag + i + '-', button, i);
-            }
-        });
-
-        xit('should check menu buttons states', () => {
-            const menuButtonsLength = getElementArrayLength(menuButtons);
-            for (let i = 0; i < menuButtonsLength; i++) {
-                scrollIntoView(menuButtons, i);
-                checkElementStates(menuButtons, buttonsMenuTag + i + '-', button, i);
-            }
-        });
     });
-
-    function checkElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        mouseHoverElement(selector, index);
-        saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), buttonPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), buttonPage.getScreenshotFolder(), index))
-            .toBeLessThan(5, `${elementName} element item with ${index} hover state mismatch`);
-    }
-
-    function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        click(selector, index);
-        saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), buttonPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), buttonPage.getScreenshotFolder(), index))
-            .toBeLessThan(5, `${elementName} element item with ${index} focus state mismatch`);
-    }
-
-    function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        addIsActiveClass(selector, index);
-        saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), buttonPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), buttonPage.getScreenshotFolder(), index))
-            .toBeLessThan(5, `${elementName} element item with ${index} active state mismatch`);
-    }
-
-    function checkElementStates(selector: string, tag: string, elementName: string, index: number = 0): void {
-        checkElementHoverState(selector, tag + 'hover-state-', elementName, index);
-        checkElementFocusState(selector, tag + 'focus-state-', elementName, index);
-        checkElementActiveState(selector, tag + 'active-state-', elementName, index);
-    }
 });

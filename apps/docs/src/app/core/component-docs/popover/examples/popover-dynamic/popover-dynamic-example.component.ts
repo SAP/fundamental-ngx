@@ -1,5 +1,5 @@
 import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { PopoverComponent } from '@fundamental-ngx/core';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
 
 @Component({
     selector: 'fd-popover-dynamic-example',

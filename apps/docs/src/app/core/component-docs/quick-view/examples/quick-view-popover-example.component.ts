@@ -44,4 +44,19 @@ export class QuickViewPopoverExampleComponent {
             }]
         }]
     };
+
+    isOpened1 = false;
+    isOpened2 = false;
+
+    isOpenChangePopover1(isOpen: boolean): void {
+        this.isOpened1 = isOpen;
+    }
+
+    isOpenChangePopover2(isOpen: boolean): void {
+        this.isOpened2 = isOpen;
+    }
+
+    getGroupId(idx: number, group: any): string {
+        return `${this.data.id}-${idx}-${group.title.split(' ').join('-')}`
+    }
 }

@@ -5,8 +5,9 @@ import { API_FILES } from '../../api-files';
 import { InfiniteScrollHeaderComponent } from './infinite-scroll-header/infinite-scroll-header.component';
 import { InfiniteScrollDocsComponent } from './infinite-scroll-docs.component';
 import { InfiniteScrollBasicExampleComponent } from './examples/infinite-scroll-basic-example/infinite-scroll-basic-example.component';
-import { InfiniteScrollModule } from '@fundamental-ngx/core';
+
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { InfiniteScrollModule } from '@fundamental-ngx/core/infinite-scroll';
 
 const routes: Routes = [
     {

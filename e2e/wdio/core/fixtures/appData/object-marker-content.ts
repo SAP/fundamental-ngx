@@ -5,5 +5,3 @@ export const iconStatusesList = [
     ['Editable', 'Favorite Editable'],
     ['Private', 'Favorite Private']
 ];
-export const textDecorationAttribute = 'text-decoration';
-export const textDecorationValues = ['none solid rgb(40, 110, 180)', 'rgb(40,110,180)', 'none'];

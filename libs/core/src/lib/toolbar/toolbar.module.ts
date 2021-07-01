@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ButtonModule } from '../button/button.module';
-import { PopoverModule } from '../popover/public_api';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ToolbarComponent } from './toolbar.component';
 import { ToolbarItemDirective } from './toolbar-item.directive';
 import { ToolbarSeparatorComponent } from './toolbar-separator.component';

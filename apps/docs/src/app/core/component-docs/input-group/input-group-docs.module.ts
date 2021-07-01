@@ -4,9 +4,10 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { InputGroupHeaderComponent } from './input-group-header/input-group-header.component';
 import { InputGroupDocsComponent } from './input-group-docs.component';
-import { FormModule, InputGroupModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { examples } from './examples';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 
 const routes: Routes = [
     {

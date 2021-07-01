@@ -10,7 +10,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { DialogService } from '../../dialog/dialog-service/dialog.service';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 import { takeUntil } from 'rxjs/operators';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
 import {
@@ -18,7 +18,7 @@ import {
     MobileModeBase,
     MobileModeConfigToken,
     MobileModeControl
-} from '../../utils/base-class/mobile-mode.class';
+} from '@fundamental-ngx/core/mobile-mode';
 
 @Component({
     selector: 'fd-combobox-mobile',

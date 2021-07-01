@@ -4,7 +4,6 @@ import {
     browserIsIEorSafari,
     click,
     elementDisplayed,
-    getCSSPropertyByName,
     getElementArrayLength,
     getText,
     refreshPage,
@@ -12,8 +11,6 @@ import {
     waitForInvisibilityOf,
     getElementLocation, waitForPresent
 } from '../../driver/wdio';
-
-import {cardSpacingAttr, cardMinWidth, cardSpacingValue, cardWidthAttr, placeholderBorderAttr, placeholderBorderStyle} from '../fixtures/appData/fixed-card-layout-content';
 
 describe('Fixed card layout test suite', function() {
     const fxdCardLayoutPage = new FixedCardLayoutPo();
@@ -42,20 +39,6 @@ describe('Fixed card layout test suite', function() {
     }, 1);
 
     describe('main checks', function() {
-        it('should check spacing between cards', () => {
-
-            expect(getCSSPropertyByName(cardDivArr, cardSpacingAttr).value)
-                .toBe(cardSpacingValue);
-        });
-
-        it('should check card minimum width', () => {
-            const cardsCount = getElementArrayLength(cardDivArr);
-
-            for (let i = 0; cardsCount > i; i++) {
-                expect(getCSSPropertyByName(cardDivArr, cardWidthAttr, i).value)
-                    .toBe(cardMinWidth);
-            }
-        });
 
         it('should check card can be hidden', () => {
             const cardStartCount = getElementArrayLength(cardDivArr);
@@ -147,8 +130,6 @@ describe('Fixed card layout test suite', function() {
             }]);
 
             expect(elementDisplayed(placeholderCard)).toBe(true);
-            expect(getCSSPropertyByName(placeholderCard, placeholderBorderAttr).value)
-                .toEqual(placeholderBorderStyle);
         });
 
         // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/3910
@@ -190,7 +171,7 @@ describe('Fixed card layout test suite', function() {
         describe('Check visual regression', function() {
             it('should check examples visual regression', () => {
                 fxdCardLayoutPage.saveExampleBaselineScreenshot();
-                expect(fxdCardLayoutPage.compareWithBaseline()).toBeLessThan(3);
+                expect(fxdCardLayoutPage.compareWithBaseline()).toBeLessThan(5);
             });
         });
     });

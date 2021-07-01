@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FdDatetimeModule, MultiInputModule, RtlService } from '@fundamental-ngx/core';
 import { PlatformApprovalFlowModule } from '@fundamental-ngx/platform';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -8,6 +7,9 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { PlatformApprovalFlowHeaderComponent } from './platform-approval-flow-header/platform-approval-flow-header.component';
 import { PlatformApprovalFlowDocsComponent } from './platform-approval-flow-docs.component';
 import { PlatformApprovalFlowExampleComponent } from './platform-approval-flow-examples/platform-approval-flow-example.component';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import { RtlService } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {

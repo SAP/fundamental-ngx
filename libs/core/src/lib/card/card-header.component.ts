@@ -12,11 +12,12 @@ import {
     SimpleChanges
 } from '@angular/core';
 
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
-import { AvatarComponent } from '../avatar/avatar.component';
+import { AvatarComponent } from '@fundamental-ngx/core/avatar';
 
 import { CLASS_NAME } from './constants';
 import { CardSubtitleDirective } from './card-subtitle.directive';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fd-card-header',

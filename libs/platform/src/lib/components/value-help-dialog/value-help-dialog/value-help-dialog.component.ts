@@ -19,7 +19,10 @@ import {
 import { Subject, Observable, Subscription, isObservable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { DialogService, DialogConfig, DialogRef, RtlService } from '@fundamental-ngx/core';
+import { DialogService, DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { InputGroupInputDirective } from '@fundamental-ngx/core/input-group';
+
 import { isDataSource } from '../../../domain/data-source';
 import { ContentDensity } from '../../table/enums';
 import {
@@ -78,7 +81,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
   /** Initial expand state for advanced search panel */
   @Input()
-  isOpenAdvanced = true;
+  isOpenAdvanced = false;
 
   /** Data source */
   @Input()
@@ -489,6 +492,12 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
 
   toggleShownFilters(): void {
     this.shownFilterCount = this.maxShownInitialFilters === this.shownFilterCount ? Infinity : this.maxShownInitialFilters;
+  }
+
+  /** @hidden */
+  _searchAction(input: InputGroupInputDirective): void {
+    const inputElement = input.elementRef().nativeElement as HTMLInputElement;
+    inputElement.focus();
   }
 
   /** @hidden */

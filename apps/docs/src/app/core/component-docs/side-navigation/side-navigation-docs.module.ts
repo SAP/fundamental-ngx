@@ -17,8 +17,9 @@ import { SideNavigationObjectExampleComponent } from './examples/side-navigation
 import { SideNavigationMultipleSelectedExampleComponent } from './examples/side-navigation-multiple-selected-example/side-navigation-multiple-selected-example.component';
 import { SideNavigationCondensedObjectExampleComponent } from './examples/side-navigation-condensed-object-example/side-navigation-condensed-object-example.component';
 import { SideNavigationCondensedExampleComponent } from './examples/side-navigation-condensed-example/side-navigation-condensed-example.component';
-import { SideNavigationModule } from '@fundamental-ngx/core';
+
 import { SideNavigationNonSelectableExampleComponent} from './examples/side-navigation-non-selectable-example/side-navigation-non-selectable-example.component';
+import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 
 const routes: Routes = [
     {

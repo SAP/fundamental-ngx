@@ -9,13 +9,13 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { NestedListDirective } from '../nested-list/nested-list/nested-list.directive';
-import { NestedListKeyboardService } from '../nested-list/nested-list-keyboard.service';
+import { NestedListDirective } from '@fundamental-ngx/core/nested-list';
+import { NestedListKeyboardService } from '@fundamental-ngx/core/nested-list';
 import { SideNavigationUtilityDirective } from './side-navigation-utility.directive';
 import { SideNavigationMainDirective } from './side-navigation-main.directive';
 import { SideNavigationModel } from './side-navigation-model';
-import { PreparedNestedListComponent } from '../nested-list/prepared-nested-list/prepared-nested-list.component';
-import { NestedListStateService } from '../nested-list/nested-list-state.service';
+import { PreparedNestedListComponent } from '@fundamental-ngx/core/nested-list';
+import { NestedListStateService } from '@fundamental-ngx/core/nested-list';
 
 /**
  * The side-navigation is a wrapping component representing

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MobileModeConfig } from '@fundamental-ngx/core';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 
 @Component({
     selector: 'fd-select-mobile-example',

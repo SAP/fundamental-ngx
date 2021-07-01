@@ -23,16 +23,16 @@ import {
 } from '@angular/core';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuService } from './services/menu.service';
-import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { MenuMobileComponent } from './menu-mobile/menu-mobile.component';
 import { Subscription } from 'rxjs';
-import { DialogConfig } from '../dialog/utils/dialog-config.class';
-import { MobileModeConfig } from '../utils/interfaces/mobile-mode-config';
-import { RtlService } from '../utils/services/rtl.service';
+import { DialogConfig } from '@fundamental-ngx/core/dialog';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { MENU_COMPONENT, MenuInterface } from './menu.interface';
-import { BasePopoverClass } from '../popover/base/base-popover.class';
-import { PopoverService } from '../popover/popover-service/popover.service';
-import { ContentDensityService } from '../utils/public_api';
+import { BasePopoverClass } from '@fundamental-ngx/core/popover';
+import { PopoverService } from '@fundamental-ngx/core/popover';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 let menuUniqueId = 0;
 

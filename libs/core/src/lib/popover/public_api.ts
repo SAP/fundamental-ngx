@@ -5,5 +5,6 @@ export * from './popover-body/popover-body-directives/popover-body-footer.direct
 export * from './popover-control/popover-control.component';
 export * from './popover-control/popover-control.component';
 export * from './popover.component';
-export * from './popover-position/popover-position';
 export * from './popover-trigger.directive';
+export * from './popover-service/popover.service';
+export * from './base/base-popover.class';

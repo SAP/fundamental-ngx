@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PopoverComponent } from '@fundamental-ngx/core';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
 
 @Component({
     selector: 'fdp-platform-input-auto-complete-validation-example',

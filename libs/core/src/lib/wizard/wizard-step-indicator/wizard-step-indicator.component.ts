@@ -11,9 +11,9 @@ import {
     ViewChild
 } from '@angular/core';
 import { WizardStepComponent } from '../wizard-step/wizard-step.component';
-import { ActionSheetComponent } from '../../action-sheet/action-sheet.component';
-import { ContentDensityService } from '../../utils/public_api';
+import { ActionSheetComponent } from '@fundamental-ngx/core/action-sheet';
 import { Subscription } from 'rxjs';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fd-wizard-step-indicator',

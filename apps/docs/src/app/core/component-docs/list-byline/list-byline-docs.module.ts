@@ -4,7 +4,6 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { ListBylineHeaderComponent } from './list-byline-header/list-byline-header.component';
 import { ListBylineDocsComponent } from './list-byline-docs.component';
-import { CheckboxModule, LinkModule, ListModule, RadioModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { SharedDocumentationModule } from '../../../documentation/shared-documentation.module';
 import { ListBylineSelectionExampleComponent } from './examples/list-byline-selection-example/list-byline-selection-example.component';
@@ -14,6 +13,10 @@ import { ListBylineStandardExampleComponent } from './examples/list-byline-stand
 import { ListBylineButtonExampleComponent } from './examples/list-byline-button-example/list-byline-button-example.component';
 import { ListBylineInteractiveExampleComponent } from './examples/list-byline-interactive-example/list-byline-interactive-example.component';
 import { ListBylineWrapExampleComponent } from './examples/list-byline-wrap-example/list-byline-wrap-example.component';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { LinkModule } from '@fundamental-ngx/core/link';
+import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
+import { RadioModule } from '@fundamental-ngx/core/radio';
 
 const routes: Routes = [
     {

@@ -10,3 +10,4 @@ export * from './components/grid-list-title-bar/grid-list-title-bar.component';
 export * from './components/grid-list-title-bar/grid-list-title-bar.directive';
 export * from './components/grid-list-title-bar-spacer/grid-list-title-bar-spacer.component';
 export * from './grid-list.module';
+export * from './services/grid-list-selection.service';

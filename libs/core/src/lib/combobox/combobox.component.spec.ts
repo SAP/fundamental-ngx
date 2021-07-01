@@ -4,11 +4,11 @@ import { CommonModule } from '@angular/common';
 import { PopoverModule } from '../popover/popover.module';
 import { FormsModule } from '@angular/forms';
 import { ListModule } from '../list/list.module';
-import { PipeModule } from '../utils/pipes/pipe.module';
+import { PipeModule } from '@fundamental-ngx/core/utils';
 import { InputGroupModule } from '../input-group/input-group.module';
-import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { ButtonModule } from '../button/button.module';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
 
 describe('ComboboxComponent', () => {
     let component: ComboboxComponent;

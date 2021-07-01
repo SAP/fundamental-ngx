@@ -1,7 +1,5 @@
 import {
-    checkElementScreenshot,
     click,
-    currentPlatformName,
     doesItExist,
     getElementArrayLength,
     getText,
@@ -9,7 +7,6 @@ import {
     isElementClickable,
     isElementDisplayed,
     refreshPage,
-    saveElementScreenshot,
     selectOptionByValueAttribute,
     sendKeys,
     setValue,
@@ -33,7 +30,6 @@ import {
 describe('Approval flow', function() {
     const approvalFlowPage = new ApprovalFlowPo();
     const {
-        root,
         selectExample,
         flowNavigationArrow,
         approvalFlowNode,
@@ -189,8 +185,8 @@ describe('Approval flow', function() {
     it('should be able to search users', () => {
         waitForElDisplayed(editExampleButton);
         click(editExampleButton);
-        waitForElDisplayed(approvalFlowNode, 3);
-        click(approvalFlowNode, 3);
+        waitForElDisplayed(approvalFlowNode, 1);
+        click(approvalFlowNode, 1);
         waitForElDisplayed(detailsDialogSearchInput);
         const usersCountBeforeSearch = getElementArrayLength(detailsDialogTeamMemberName);
         setValue(detailsDialogSearchInput, 'Caleb');
@@ -251,8 +247,8 @@ describe('Approval flow', function() {
             const approvalFlowNodeCountBefore = getElementArrayLength(approvalFlowNode);
 
             click(editExampleButton);
-            waitForElDisplayed(addNode);
-            click(addNode);
+            waitForElDisplayed(addNode, 1);
+            click(addNode, 1);
             click(detailsDialogParallelSerialSelect);
             click(detailsDialogParallelSerialSelectOption, 1);
             click(detailsDialogUserTeamButton);
@@ -312,13 +308,8 @@ describe('Approval flow', function() {
             click(editExampleButton);
             waitForElDisplayed(approvalFlowNodeCheckbox);
             click(approvalFlowNodeCheckbox, 1);
-
-            saveElementScreenshot(root, 'remove-node-state-' + currentPlatformName(), approvalFlowPage.getScreenshotFolder());
-            expect(checkElementScreenshot(root, 'remove-node-state-' + currentPlatformName(), approvalFlowPage.getScreenshotFolder()))
-                .toBeLessThan(2);
-
-            waitForElDisplayed(topActionButtons, 1);
-            click(topActionButtons, 1);
+            waitForElDisplayed(topActionButtons, 3);
+            click(topActionButtons, 3);
             const approvalFlowNodeCountAfterRemove = getElementArrayLength(approvalFlowNode);
 
             expect(approvalFlowNodeCountBefore).toEqual(approvalFlowNodeCountAfterRemove + 1);
@@ -331,9 +322,9 @@ describe('Approval flow', function() {
             waitForElDisplayed(editExampleButton);
             click(editExampleButton);
             waitForElDisplayed(approvalFlowNodeActionMenu);
-            click(approvalFlowNodeActionMenu, 1);
-            waitForElDisplayed(approvalFlowNodeActionMenuItem, 1);
-            click(approvalFlowNodeActionMenuItem, 1);
+            click(approvalFlowNodeActionMenu, 3);
+            waitForElDisplayed(approvalFlowNodeActionMenuItem, 2);
+            click(approvalFlowNodeActionMenuItem, 2);
 
             waitForElDisplayed(messageStrip);
             const approvalFlowNodeCountAfterRemove = getElementArrayLength(approvalFlowNode);
@@ -431,7 +422,7 @@ describe('Approval flow', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             approvalFlowPage.saveExampleBaselineScreenshot();
-            expect(approvalFlowPage.compareWithBaseline()).toBeLessThan(1);
+            expect(approvalFlowPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 

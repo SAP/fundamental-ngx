@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertConfig, AlertService } from '@fundamental-ngx/core';
+import { AlertConfig, AlertService } from '@fundamental-ngx/core/alert';
 
 @Component({
     selector: 'fd-alert-width-example',

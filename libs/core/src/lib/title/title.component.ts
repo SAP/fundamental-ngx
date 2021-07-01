@@ -1,7 +1,6 @@
 import {
     ChangeDetectionStrategy,
     Component,
-    DoCheck,
     ElementRef,
     Input,
     OnInit,
@@ -23,10 +22,21 @@ export type HeaderSizes = 1 | 2 | 3 | 4 | 5 | 6;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class TitleComponent implements OnInit, DoCheck {
+export class TitleComponent implements OnInit {
     /** The size of the header */
+    _headerSize: HeaderSizes = null;
+
+    get headerSize(): HeaderSizes {
+        return this._headerSize;
+    }
+
     @Input()
-    headerSize: HeaderSizes = null;
+    set headerSize(value: HeaderSizes) {
+        this._headerSize = value;
+        if (this._appliedHeaderSize !== this.headerSize) {
+            this._setHeaderSize();
+        }
+    }
 
     /** Whether or not the title should wrap (truncates by default) */
     @Input()
@@ -44,13 +54,6 @@ export class TitleComponent implements OnInit, DoCheck {
     }
 
     /** @hidden */
-    ngDoCheck(): void {
-        if (this.headerSize && this._appliedHeaderSize !== this.headerSize) {
-            this._setHeaderSize();
-        }
-    }
-
-    /** @hidden */
     private _setHeaderSize(): void {
         let headerSize;
         if (this.headerSize) {
@@ -58,8 +61,9 @@ export class TitleComponent implements OnInit, DoCheck {
         } else {
             headerSize = this._elementRef.nativeElement.tagName.charAt(1);
         }
-        this._elementRef.nativeElement.classList.add(`fd-title--h${headerSize}`);
+
         this._elementRef.nativeElement.classList.remove(`fd-title--h${this._appliedHeaderSize}`);
+        this._elementRef.nativeElement.classList.add(`fd-title--h${headerSize}`);
         this._appliedHeaderSize = headerSize;
     }
 }

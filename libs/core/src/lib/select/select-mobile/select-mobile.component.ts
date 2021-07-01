@@ -13,13 +13,13 @@ import {
 import { Subscription } from 'rxjs';
 
 import { SELECT_COMPONENT, SelectInterface } from '../select.interface';
-import { DialogService } from '../../dialog/dialog-service/dialog.service';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 import {
     MOBILE_MODE_CONFIG,
     MobileModeConfigToken,
     MobileModeBase,
     MobileModeControl
-} from '../../utils/base-class/mobile-mode.class';
+} from '@fundamental-ngx/core/mobile-mode';
 
 /**
  * This component provides extended mobile support for Select component to render list of option since full screen

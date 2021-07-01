@@ -20,7 +20,7 @@ import {
 
 import { generateUploadCollectionItems } from './platform-upload-collection-items-generator';
 import { HttpClient } from '@angular/common/http';
-import { uuidv4 } from '@fundamental-ngx/core';
+import { uuidv4 } from '@fundamental-ngx/core/utils';
 
 export class PlatformUploadCollectionDataProviderExample extends UploadCollectionDataProvider {
     items: UploadCollectionItem[] = generateUploadCollectionItems(50, 4, 2);

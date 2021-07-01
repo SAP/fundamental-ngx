@@ -2,17 +2,20 @@ language: node_js
 sudo: required
 node_js: 12.18.4
 cache: npm
-dist: trusty
 addons:
   chrome: stable
   hosts:
     - sap.dev
+services:
+  - xvfb
 git:
   depth: false
 script:
-  - npm run build-all
+  - travis_wait 20 npm run build-all
 jobs:
   include:
+    - stage: Lint commit message
+      script: commitlint-travis
     - stage: "Lint and Test"
       if: type = pull_request
       before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
@@ -71,17 +74,13 @@ jobs:
     - stage: "Test"
       name: Sauce Labs - unit tests platform
       if: type = pull_request
-      env:
-        - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
-        - BUILD_ID=$TRAVIS_BUILD_ID
-        - JOB_URL=$TRAVIS_JOB_WEB_UR
-        - SAUCE_USERNAME=$SAUCE_USERNAME
-        - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
-      script: npm run test:platform:saucelabs
+      before_script:
+            - export CHROME_BIN=/usr/bin/google-chrome
+      script: npm run test:platform
     - stage: "Test"
       name: Sauce Labs - unit tests core
       if: type = pull_request
-      script: npm run test:core:saucelabs
+      script: npm run test
 #    - stage: "Test"
 #      name: A11y report
 #      if: type = pull_request

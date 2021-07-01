@@ -7,7 +7,7 @@ import {
     Input,
     ViewEncapsulation
 } from '@angular/core';
-import { CarouselItemInterface } from '../../utils/services/carousel.service';
+import { CarouselItemInterface } from '../carousel.service';
 
 let carouselItemUniqueId = 0;
 

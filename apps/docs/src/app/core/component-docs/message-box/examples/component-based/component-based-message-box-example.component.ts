@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { MessageBoxService } from '@fundamental-ngx/core/message-box';
 import { MessageBoxExampleComponent } from './message-box-example.component';
-import { MessageBoxService } from '@fundamental-ngx/core';
 
 export interface TextData {
     title: string;

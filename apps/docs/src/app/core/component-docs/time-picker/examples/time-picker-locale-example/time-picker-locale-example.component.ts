@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-time-picker-locale-example',

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ButtonModule } from '../button/button.module';
-import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { NotificationContainer } from './notification-utils/notification-container';
 import { NotificationService } from './notification-service/notification.service';
 import { NotificationComponent } from './notification/notification.component';

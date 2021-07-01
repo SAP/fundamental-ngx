@@ -186,6 +186,8 @@ export abstract class BaseInput extends BaseComponent
     }
 
     ngOnInit(): void {
+        super.ngOnInit();
+
         if (!this.id || !this.name) {
             throw new Error('form input must have [id] and [name] attribute.');
         }
@@ -205,7 +207,16 @@ export abstract class BaseInput extends BaseComponent
         }
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
+        const labelAndHelpId = `fdp-form-label-${this.id} fdp-form-hint-${this.id}`;
+        // if not specified, associate label and inline help ids with the input,
+        // else add these ids to the specified ones
+        if (!this.ariaLabelledBy) {
+            this.ariaLabelledBy = labelAndHelpId;
+        } else {
+            this.ariaLabelledBy += ' ' + labelAndHelpId;
+        }
         this._cd.detectChanges();
     }
 
@@ -218,6 +229,7 @@ export abstract class BaseInput extends BaseComponent
     }
 
     ngOnDestroy(): void {
+        super.ngOnDestroy();
         this.stateChanges.complete();
         this._destroyed.next();
         this._destroyed.complete();
@@ -228,6 +240,7 @@ export abstract class BaseInput extends BaseComponent
 
     setDisabledState(isDisabled: boolean): void {
         const newState = coerceBooleanProperty(isDisabled);
+        this._cd.markForCheck();
         if (newState !== this._disabled) {
             this._disabled = isDisabled;
             this.stateChanges.next('setDisabledState');
@@ -295,7 +308,7 @@ export abstract class BaseInput extends BaseComponent
         const newState = !!(control && control.invalid && (control.touched || (parent && parent.submitted)));
 
         if (newState !== oldState) {
-            this._status = newState ? 'error' : this.state;
+            this._status = newState ? 'error' : this.state === 'error' ? 'default' : this.state;
             this.stateChanges.next('updateErrorState');
             this._cd.markForCheck();
         }

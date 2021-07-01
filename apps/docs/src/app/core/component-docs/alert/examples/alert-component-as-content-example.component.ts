@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertContentComponent } from './alert-content.component';
-import { AlertConfig, AlertService } from '@fundamental-ngx/core';
+import { AlertConfig, AlertService } from '@fundamental-ngx/core/alert';
 
 @Component({
     selector: 'fd-alert-component-as-content-example',

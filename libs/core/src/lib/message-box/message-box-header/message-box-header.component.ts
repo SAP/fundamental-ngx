@@ -1,5 +1,5 @@
 import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Optional } from '@angular/core';
-import { DialogHeaderBase } from '../../dialog/base/dialog-header-base.class';
+import { DialogHeaderBase } from '@fundamental-ngx/core/dialog';
 import {
     MESSAGE_BOX_CONFIGURABLE_ELEMENT,
     MessageBoxConfig,
@@ -12,7 +12,7 @@ import {
  * ```html
  * <fd-message-box-header>
  *     <fd-message-box-semantic-icon></fd-message-box-semantic-icon>
- *     <h1 fd-title><!-- Content --></h1> 
+ *     <h1 fd-title><!-- Content --></h1>
  * </fd-message-box-header>
  *
  * Complex header:

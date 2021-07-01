@@ -1,25 +1,36 @@
 <fd-grid-list>
-    <fd-grid-list-title-bar title="Products">
+    <fd-grid-list-title-bar [title]="'Products'">
         <span fd-grid-list-title-bar-additional-title-item [innerText]="'(' + list.length + ')'"></span>
 
         <fd-grid-list-title-bar-spacer></fd-grid-list-title-bar-spacer>
 
-        <button fd-button fdType="transparent" glyph="sort" aria-label="Sort" title="Sort" [compact]="true"></button>
+        <button
+            fd-button
+            fdType="transparent"
+            glyph="sort"
+            aria-labelledby="grid-list-title-bar-1 grid-list-button-1"
+            aria-label="Sort"
+            title="Sort"
+            [compact]="true"
+            (click)="showAlert('Sort')"
+        ></button>
         <button
             fd-button
             fdType="transparent"
             glyph="filter"
-            aria-title="Filter"
+            aria-label="Filter"
             title="Filter"
             [compact]="true"
+            (click)="showAlert('Filter')"
         ></button>
         <button
             fd-button
             fdType="transparent"
             glyph="group-2"
-            aria-title="Group"
+            aria-label="Group"
             title="Group"
             [compact]="true"
+            (click)="showAlert('Group')"
         ></button>
     </fd-grid-list-title-bar>
 
@@ -45,3 +56,6 @@
         </div>
     </fd-grid-list-item>
 </fd-grid-list>
+
+<span aria-hidden="true" style="display: none" id="grid-list-button-1">Sort</span>
+<span aria-hidden="true" style="display: none"  id="grid-list-title-bar-1">Products with {{list.length}} items</span>

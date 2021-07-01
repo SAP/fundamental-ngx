@@ -3,11 +3,13 @@
     [formGroup]="datetimePickerForm"
     [object]="formData"
     (onSubmit)="onSubmit()"
+    mainTitle="Datetime Picker with XL3-L1-M1-S1 form layout"
+    columnLayout="XL3-L1-M1-S1"
 >
     <fdp-form-field
         #ffl1
         id="simple"
-        rank="1"
+        column="1"
         required="true"
         [validators]="requiredDateValidator"
         placeholder="MM/dd/YYYY, hh:mm"
@@ -22,7 +24,7 @@
     <fdp-form-field
         #ffl3
         id="withAllowNull"
-        rank="3"
+        column="2"
         label="With allowNull not enabled to disallow input from taking null value:"
     >
         <fdp-datetime-picker
@@ -37,7 +39,7 @@
     <fdp-form-field
         #ffl6
         id="storedDate"
-        rank="7"
+        column="3"
         required="true"
         label="Passing datetime through form object:"
     >
@@ -49,18 +51,7 @@
         </fdp-datetime-picker>
     </fdp-form-field>
 
-    <fdp-form-field
-        id="submitBtn"
-        rank="8"
-    >
-        <button
-            fd-button
-            name="submitBtn"
-            (click)="onSubmit()"
-        >Submit</button>
-    </fdp-form-field>
-
-    <ng-template
+    <ng-template 
         #i18n
         let-errors
     >
@@ -70,4 +61,7 @@
     </ng-template>
 </fdp-form-group>
 
+<button fd-button name="submitBtn" (click)="onSubmit()">Submit</button>
 <div>form valid: {{ datetimePickerForm?.valid }}</div>
+
+<div *ngIf="stringValue">form value: {{ stringValue }}</div>

@@ -12,7 +12,7 @@ import { PlatformTextareaCounterExampleComponent } from './platform-textarea-exa
 import { PlatformTextareaCounterTemplateExampleComponent } from './platform-textarea-examples/platform-textarea-counter-template-example.component';
 import { PlatformTextareaAutogrowExampleComponent } from './platform-textarea-examples/platform-textarea-autogrow-example.component';
 import { PlatformTextareaI18nExampleComponent } from './platform-textarea-examples/platform-textarea-i18n-example.component';
-import { FormMessageModule } from '@fundamental-ngx/core';
+import { FormMessageModule } from '@fundamental-ngx/core/form';
 
 const routes: Routes = [
     {

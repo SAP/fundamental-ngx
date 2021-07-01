@@ -1,0 +1,12 @@
+export const classAttribute = 'class';
+export const disabledAttribute = 'aria-disabled';
+export const activeClass = 'is-active';
+export const customYearLabel = 'Year';
+export const customYearRangeLabel = 'Aggr. Year.';
+export const landscapeAttribute = 'landscape';
+export const portraitAttribute = 'portrait';
+export const compactAttribute = 'compact';
+export const mondayStartDate = 'M';
+export const currentDayClass = 'current';
+export const otherMonth = 'fd-calendar__item ng-star-inserted fd-calendar__item--other-month';
+export const fullCurrentDayClass = 'fd-calendar__item ng-star-inserted is-active fd-calendar__item--current';

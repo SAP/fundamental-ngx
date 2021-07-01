@@ -1,0 +1,15 @@
+<fdp-form-group [noLabelLayout]="false" [formGroup]="customForm">
+    <fdp-form-field id="field" label="Array of Strings">
+        <fdp-multi-combobox
+            name="field"
+            placeholder="Type some text..."
+            [dataSource]="dataSource"
+            displayKey="name"
+            (selectionChange)="onSelect($event)"
+            formControlName="field"
+            [selectedItems]="selectedItems"
+        ></fdp-multi-combobox>
+        <p>Selected Item: {{ selectedItems | json }}</p>
+        <p>Form Selected Item: {{ customForm.getRawValue() | json }}</p>
+    </fdp-form-field>
+</fdp-form-group>

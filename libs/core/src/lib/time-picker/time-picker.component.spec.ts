@@ -8,7 +8,7 @@ import { TimeModule } from '../time/time.module';
 import { ButtonModule } from '../button/button.module';
 
 import { TimePickerComponent } from './time-picker.component';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
 
 describe('TimePickerComponent', () => {
     let component: TimePickerComponent<FdDate>;

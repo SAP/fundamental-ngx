@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PaginationComponent } from './pagination.component';
-import { ButtonModule } from '../button/button.module';
-import { IconModule } from '../icon/icon.module';
-import { SelectModule } from '../select/select.module';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { SelectModule } from '@fundamental-ngx/core/select';
 import { PaginationService } from './pagination.service';
 
 @NgModule({

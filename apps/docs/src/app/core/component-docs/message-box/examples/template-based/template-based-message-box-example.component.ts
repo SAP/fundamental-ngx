@@ -1,5 +1,5 @@
 import { Component, TemplateRef } from '@angular/core';
-import { MessageBoxService } from '@fundamental-ngx/core';
+import { MessageBoxService } from '@fundamental-ngx/core/message-box';
 
 @Component({
     selector: 'fd-message-box-open-template-example',

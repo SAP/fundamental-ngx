@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { GridListItemOutputEvent } from '@fundamental-ngx/core';
+import { GridListItemOutputEvent } from '@fundamental-ngx/core/grid-list';
 
 interface GridListItem {
     id: number;
@@ -68,10 +68,10 @@ export class GridListSingleSelectExampleComponent {
     }
 
     detail(event: GridListItemOutputEvent<number>): void {
-        console.log('Detail event', event);
+        alert('Detail event value is: ' + event.value);
     }
 
     navigate(event: GridListItemOutputEvent<number>): void {
-        console.log('Navigation event', event);
+        alert('Navigation event value is: ' + event.value);
     }
 }

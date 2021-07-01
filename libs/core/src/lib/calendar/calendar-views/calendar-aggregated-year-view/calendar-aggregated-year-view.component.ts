@@ -16,8 +16,8 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { DatetimeAdapter } from '../../../datetime/datetime-adapter';
-import { DateTimeFormats, DATE_TIME_FORMATS } from '../../../datetime/datetime-formats';
+import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
 
 import { CalendarService } from '../../calendar.service';
 import { AggregatedYear, CalendarAggregatedYear } from '../../models/aggregated-year';
@@ -256,7 +256,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
             this._dateTimeFormats.display.yearA11yLabel
         );
         const endYearFormatted = this._dateTimeAdapter.format(
-            this._dateTimeAdapter.createDate(years.startYear, 1, 1),
+            this._dateTimeAdapter.createDate(years.endYear, 1, 1),
             this._dateTimeFormats.display.yearA11yLabel
         );
         return `${this._getYearString(years.startYear, startYearFormatted)} - ${this._getYearString(

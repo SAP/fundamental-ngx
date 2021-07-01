@@ -3,8 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
 
 import { CheckboxComponent } from './checkbox.component';
-import { whenStable } from '../../utils/tests/when-stable';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/public_api';
+import { whenStable } from '@fundamental-ngx/core/tests';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
 
 function getCheckboxInput(fixture: ComponentFixture<any>): any {
     return fixture.nativeElement.querySelector('input');

@@ -9,7 +9,7 @@ import { AlertContentComponent } from './examples/alert-content.component';
 import { AlertInlineExampleComponent } from './examples/alert-inline-example.component';
 import { AlertWidthExampleComponent } from './examples/alert-width-example.component';
 import { AlertHeaderComponent } from './alert-header/alert-header.component';
-import { AlertModule, AlertService } from '@fundamental-ngx/core';
+import { AlertModule, AlertService } from '@fundamental-ngx/core/alert';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [

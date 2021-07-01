@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import {
-    AvatarModule,
-    ObjectNumberModule,
-    ObjectStatusModule,
-    RatingIndicatorModule,
-    FacetModule,
-    IconModule,
-    LinkModule,
-    TextModule
-} from '@fundamental-ngx/core';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { FacetModule } from '@fundamental-ngx/core/facets';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { LinkModule } from '@fundamental-ngx/core/link';
+import { ObjectNumberModule } from '@fundamental-ngx/core/object-number';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
+import { TextModule } from '@fundamental-ngx/core/text';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';

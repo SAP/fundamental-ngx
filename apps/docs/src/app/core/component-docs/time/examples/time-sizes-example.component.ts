@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FdDate } from '@fundamental-ngx/core';
+import { FdDate } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-time-sizes-example',

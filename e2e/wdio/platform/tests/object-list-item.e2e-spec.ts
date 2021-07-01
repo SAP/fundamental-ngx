@@ -1,9 +1,7 @@
 import {
-    browserIsFirefox,
     click,
     elementDisplayed,
     getAttributeByName,
-    getCSSPropertyByName,
     getCurrentUrl,
     getElementArrayLength,
     getText,
@@ -12,7 +10,7 @@ import {
 } from '../../driver/wdio';
 import { ObjectListItemPo } from '../pages/object-list-item.po';
 import { checkElArrIsClickable, checkElementDisplayed, checkElementText } from '../../helper/assertion-helper';
-import { altNoBorderStyle, navUrl, noBorderAttr, noBorderStyle } from '../fixtures/appData/object-list-item-contents';
+import { navUrl } from '../fixtures/appData/object-list-item-contents';
 
 describe('Object list item suite:', function() {
     const objListPage = new ObjectListItemPo();
@@ -47,16 +45,10 @@ describe('Object list item suite:', function() {
     });
 
     describe('Object List Item examples:', function() {
-        it('should check styles and content', () => {
-            expect(getAttributeByName(objListAttr, noBorderAttr)).toBe('true');
+        it('should check content displayed', () => {
             checkElementDisplayed(obJListIntro);
             checkElementDisplayed(objListAttributes);
             checkElementDisplayed(objListStatuses);
-            if (browserIsFirefox()) {
-                expect(getCSSPropertyByName(objListItem, altNoBorderStyle).value).toBe('none');
-            } else {
-                expect(getCSSPropertyByName(objListItem, noBorderStyle).value).toBe('none');
-            }
         });
     });
 

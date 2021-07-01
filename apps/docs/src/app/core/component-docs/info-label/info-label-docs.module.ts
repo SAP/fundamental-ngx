@@ -10,8 +10,8 @@ import {
     InfoLableNumericIconExampleComponent
 } from './examples/info-label-examples.component';
 import { InfoLabelHeaderComponent } from './info-label-header/info-label-header.component';
-import { InfoLabelModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 
 const routes: Routes = [
     {

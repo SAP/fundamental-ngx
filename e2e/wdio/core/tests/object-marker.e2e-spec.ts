@@ -1,16 +1,15 @@
 import { ObjectMarkerPo } from '../pages/object-marker.po';
 import {
     click,
-    getCSSPropertyByName, getElementAriaLabel,
-    getElementArrayLength, getElementTitle,
-    mouseHoverElement,
+    getElementAriaLabel,
+    getElementArrayLength,
+    getElementTitle,
     refreshPage,
-    scrollIntoView, waitForPresent
+    scrollIntoView,
+    waitForPresent
 } from '../../driver/wdio';
 import {
     iconStatusesList,
-    textDecorationAttribute,
-    textDecorationValues
 } from '../fixtures/appData/object-marker-content';
 
 describe('Object marker test suite', function() {
@@ -18,7 +17,6 @@ describe('Object marker test suite', function() {
     const {
         marker,
         iconOnlyMarkers,
-        clickableMarkers
     } = objectMarkerPage;
 
     beforeAll(() => {
@@ -52,19 +50,10 @@ describe('Object marker test suite', function() {
         });
     });
 
-    it('Verify marker hover state', () => {
-        const arr = getElementArrayLength(clickableMarkers);
-        for (let i = 0; i < arr; i++) {
-            scrollIntoView(clickableMarkers, i);
-            mouseHoverElement(clickableMarkers, i);
-            expect(textDecorationValues).toContain(getCSSPropertyByName(clickableMarkers, textDecorationAttribute, i).value);
-        }
-    });
-
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             objectMarkerPage.saveExampleBaselineScreenshot();
-            expect(objectMarkerPage.compareWithBaseline()).toBeLessThan(3);
+            expect(objectMarkerPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

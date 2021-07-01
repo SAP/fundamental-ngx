@@ -8,10 +8,10 @@ import { MenuSeparatorComponent } from './menu-separator/menu-separator.componen
 import { MenuAddonDirective } from './directives/menu-addon.directive';
 import { MenuItemComponent, SubmenuComponent } from './menu-item/menu-item.component';
 import { MenuShortcutDirective } from './directives/menu-shortcut.directive';
-import { PopoverModule } from '../popover/popover.module';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { MenuTriggerDirective } from './directives/menu-trigger.directive';
-import { IconModule } from '../icon/icon.module';
-import { InitialFocusModule } from '../utils/directives/initial-focus/initial-focus.module';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { InitialFocusModule } from '@fundamental-ngx/core/utils';
 
 @NgModule({
     imports: [CommonModule, PopoverModule, IconModule, InitialFocusModule],

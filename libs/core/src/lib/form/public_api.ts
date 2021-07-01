@@ -1,5 +1,4 @@
 export * from './form.module';
-export * from './form-control/form-states';
 export * from './form-control/form-control.component';
 export * from './form-control/form-control.module';
 export * from './form-group/form-group.component';

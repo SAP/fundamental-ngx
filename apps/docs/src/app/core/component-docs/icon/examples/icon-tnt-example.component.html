@@ -1,6 +1,6 @@
-<div class="grid">
-    <div *ngFor="let icon of icons">
-        <fd-icon style="font-size:2rem" font="SAP-icons-TNT" [glyph]="icon"></fd-icon>
+<div class="fd-docs-icon-container">
+    <div class="fd-docs-icons" *ngFor="let icon of icons">
+        <fd-icon font="SAP-icons-TNT" [glyph]="icon"></fd-icon>
         <span>{{ icon }}</span>
     </div>
 </div>

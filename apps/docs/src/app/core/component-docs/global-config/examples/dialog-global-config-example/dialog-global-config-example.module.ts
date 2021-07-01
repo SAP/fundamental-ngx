@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { DIALOG_DEFAULT_CONFIG, DialogConfig } from '@fundamental-ngx/core';
+import { DialogConfig, DIALOG_DEFAULT_CONFIG } from '@fundamental-ngx/core/dialog';
 
 const DEFAULT_CONFIG: DialogConfig = {
     draggable: true,

@@ -19,23 +19,24 @@ export class StackblitzModuleWrapper {
     ];
 
     static GetModule(tsFiles: StackblitzFile[]): string {
-        const defaultImports: string = this.defaultModules.map(this.getImport).join(';\n');
+        const defaultImports: string = this.defaultModules.map(this.getImport).concat(['']).join(';\n');
 
         // Imports generated basing on passed ts files.
         const imports: string = tsFiles
             .map((file) => this.getImport({ name: file.componentName, path: './' + file.basis }))
+            .concat(['']) // to generate ";\n" in the end as well
             .join(';\n');
 
-        const moduleImports: string = this.defaultModules.map((module) => module.name).join(',\n');
+        const moduleImports: string = this.defaultModules.map((module) => module.name).join(',\n        ');
 
         const declarations: string = tsFiles
             .filter((file) => !file.service)
             .map((file) => file.componentName)
-            .join(',\n');
+            .join(',\n      ');
         const providers: string = tsFiles
             .filter((file) => file.service)
             .map((file) => file.componentName)
-            .join(',\n');
+            .join(',\n      ');
 
         // Main component that will be added as a root, if there is no component with main flag, first is chosen
         let mainComponent: string;
@@ -49,11 +50,12 @@ export class StackblitzModuleWrapper {
         const entryComponents: string = tsFiles
             .filter((file) => file.entryComponent)
             .map((file) => file.componentName)
-            .join(',\n');
-        return `
+            .join(',\n      ');
+
+return `
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { RtlService } from '@fundamental-ngx/core';
+import { RtlService } from '@fundamental-ngx/core/utils';
 ${defaultImports}
 ${imports}
 

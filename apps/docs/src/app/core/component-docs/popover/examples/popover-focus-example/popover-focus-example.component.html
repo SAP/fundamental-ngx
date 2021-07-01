@@ -1,8 +1,8 @@
-<fd-popover [focusTrapped]="true" [focusAutoCapture]="true" [closeOnEscapeKey]="true">
+<fd-popover [focusTrapped]="true" [focusAutoCapture]="true" [closeOnEscapeKey]="true" [focusTrapped]="true">
     <fd-popover-control>
         <button fd-button>Trigger</button>
     </fd-popover-control>
-    <fd-popover-body style="min-width: 400px;">
+    <fd-popover-body style="min-width: 400px">
         <div fd-popover-body-header>
             <div fd-bar barDesign="header">
                 <div fd-bar-left>
@@ -13,7 +13,7 @@
         </div>
         <ul fd-list>
             <li fd-list-item *ngFor="let option of list">
-                <span fd-list-title>{{option.text}}</span>
+                <span fd-list-title>{{ option.text }}</span>
             </li>
         </ul>
         <div fd-popover-body-footer>

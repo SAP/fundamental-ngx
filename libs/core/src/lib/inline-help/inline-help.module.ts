@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { InlineHelpDirective } from './inline-help.directive';
-import { PopoverModule } from '../popover/popover.module';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 
 @NgModule({
     imports: [CommonModule, PopoverModule],

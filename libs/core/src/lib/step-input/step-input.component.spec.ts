@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { whenStable } from '../utils/tests/when-stable';
+import { whenStable } from '@fundamental-ngx/core/tests';
 import { StepInputComponent } from './step-input.component';
 import { StepInputModule } from './step-input.module';
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';

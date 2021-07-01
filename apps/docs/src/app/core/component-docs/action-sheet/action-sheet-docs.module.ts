@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ActionSheetModule } from '@fundamental-ngx/core';
+import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
 import { ActionSheetHeaderComponent } from './action-sheet-header/action-sheet-header.component';
 import { ActionSheetDocsComponent } from './action-sheet-docs.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';

@@ -60,7 +60,7 @@ describe('Alert test suite', function() {
         // TODO: enable after resolving https://github.com/SAP/fundamental-ngx/issues/4957
         xit('should check example blocks visual regression', () => {
             alertPage.saveExampleBaselineScreenshot();
-            expect(alertPage.compareWithBaseline()).toBeLessThan(4);
+            expect(alertPage.compareWithBaseline()).toBeLessThan(5);
         });
 
         it('should check custom alerts visual regression', () => {
@@ -71,7 +71,7 @@ describe('Alert test suite', function() {
                 scrollIntoView(popupAlert);
                 saveElementScreenshot(popupAlert, `alert-customPopup-example-${i}-core-${getImageTagBrowserPlatform()}`, alertPage.getScreenshotFolder());
                 expect(checkElementScreenshot(popupAlert, `alert-customPopup-example-${i}-core-${getImageTagBrowserPlatform()}`, alertPage.getScreenshotFolder()))
-                    .toBeLessThan(1);
+                    .toBeLessThan(5);
                 if (doesItExist(popupAlert + button) === false) {
                     waitForInvisibilityOf(popupAlert);
                     continue;

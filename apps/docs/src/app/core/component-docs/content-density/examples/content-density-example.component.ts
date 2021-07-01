@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ContentDensity, ContentDensityService } from '@fundamental-ngx/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { ContentDensity, ContentDensityService } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fd-content-density-example',

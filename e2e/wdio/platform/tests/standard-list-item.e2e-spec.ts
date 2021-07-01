@@ -7,11 +7,9 @@ import {
     compactAttr,
     linkAttr,
     noBorderAttr,
-    noStyle,
     secondaryAttr,
     secondaryTypes,
-    solidStyle
-} from '../fixtures/appData/standard-link-item-contents';
+} from '../fixtures/appData/standard-list-item-contents';
 import {
     checkAttributeValueTrue,
     checkElArrIsClickable,
@@ -36,8 +34,6 @@ describe('Standard List Item test suite:', function() {
     describe('Standard List Item - Border Less examples:', function() {
         it('should check border and interactions', () => {
             expect(getAttributeByName(sNoBorderAttr, noBorderAttr)).toBe('true');
-            expect(getCSSPropertyByName(sNoBorderList, borderAttr).value)
-                .toBe(noStyle);
             checkElArrIsClickable(sNoBorderList);
         });
     });
@@ -46,8 +42,6 @@ describe('Standard List Item test suite:', function() {
         it('should check border and styles', () => {
             expect(getAttributeByName(sNoBorderByLineAttr, noBorderAttr))
                 .toBe('true');
-            expect(getCSSPropertyByName(sNoBorderByLineList, borderAttr).value)
-                .toBe(noStyle);
             expect(getAttributeByName(sNoBorderByLineSection, compactAttr, 0))
                 .toBe('false');
             expect(getAttributeByName(sNoBorderByLineSection, compactAttr, 1))
@@ -63,9 +57,7 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item (ByLine)- Footer examples:', function() {
-        it('should check border, styles, and footer', () => {
-            expect(getCSSPropertyByName(sFooterByLineList, borderAttr).value)
-                .toBe(solidStyle);
+        it('should check border and footer', () => {
             checkAttributeValueTrue(sFooterAttr, byLineAttr);
             checkElementDisplayed(sFooter);
             checkElementText(sFooterList);
@@ -79,9 +71,7 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item (ByLine)- Group header examples:', function() {
-        it('should check border and styles', () => {
-            expect(getCSSPropertyByName(sGroupHeaderList, borderAttr).value)
-                .toBe(solidStyle);
+        it('should check border', () => {
             checkAttributeValueTrue(sGroupHeaderAttr, byLineAttr);
         });
 
@@ -93,9 +83,7 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item- Interactive state examples:', function() {
-        it('should check border and styles', () => {
-            expect(getCSSPropertyByName(sInteractiveList, borderAttr).value)
-                .toBe(solidStyle);
+        it('should check border', () => {
             checkAttributeValueTrue(sInteractiveAttr, byLineAltAttr);
             const linkCount = getElementArrayLength(sInteractiveLink);
             for (let i = 0; linkCount > i; i++) {
@@ -115,11 +103,8 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item (ByLine)- Secondary text types examples:', function() {
-        it('should check border and styles', () => {
+        it('should check border', () => {
             checkAttributeValueTrue(sSecTypeAttr, byLineAltAttr);
-            expect(getCSSPropertyByName(sSecTypeList, borderAttr).value)
-                .toBe(solidStyle);
-
         });
 
         it('should check content and interactions', () => {
@@ -139,10 +124,8 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item (ByLine)- Multi Selection examples:', function() {
-        it('should check border and styles', () => {
+        it('should check border', () => {
             checkAttributeValueTrue(sMultiAttr, byLineAltAttr);
-            expect(getCSSPropertyByName(sMultiList, borderAttr).value)
-                .toBe(solidStyle);
         });
 
         it('should check content and basic interactions', () => {
@@ -164,13 +147,11 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item (ByLine)- Inverted Secondary text types examples:', function() {
-        it('should check border and styles', () => {
+        it('should check border', () => {
             if (browser.capabilities.browserName === 'internet explorer') {
                 console.log('skip');
             } else {
                 checkAttributeValueTrue(sInvtAttr, byLineAltAttr);
-                expect(getCSSPropertyByName(sInvtList, borderAttr).value)
-                    .toBe(solidStyle);
             }
         });
 

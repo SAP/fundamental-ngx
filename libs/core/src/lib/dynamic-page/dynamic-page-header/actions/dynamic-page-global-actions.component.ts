@@ -8,8 +8,8 @@ import {
     ChangeDetectorRef, ContentChild
 } from '@angular/core';
 import { DynamicPageBaseActions } from './dynamic-page-base-actions';
-import { CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
-import { ToolbarComponent } from '../../../toolbar/toolbar.component';
+import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
+import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
 
 @Component({
     selector: 'fd-dynamic-page-global-actions',
@@ -34,7 +34,7 @@ export class DynamicPageGlobalActionsComponent extends DynamicPageBaseActions im
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.addClassToToolbar(CLASS_NAME.dynamicPageToolbar, this._elementRef);
+        this.addClassToToolbar(DYNAMIC_PAGE_CLASS_NAME.dynamicPageToolbar, this._elementRef);
     }
 
     /** @hidden */

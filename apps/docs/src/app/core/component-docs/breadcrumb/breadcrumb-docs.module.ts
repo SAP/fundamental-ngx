@@ -9,7 +9,7 @@ import {
 } from './examples/breadcrumb-examples.component';
 import { BreadcrumbHeaderComponent } from './breadcrumb-header/breadcrumb-header.component';
 import { BreadcrumbDocsComponent } from './breadcrumb-docs.component';
-import { BreadcrumbModule } from '@fundamental-ngx/core';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
 const routes: Routes = [

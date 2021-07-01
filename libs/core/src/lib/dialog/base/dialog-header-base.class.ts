@@ -7,8 +7,8 @@ import {
     QueryList,
     TemplateRef
 } from '@angular/core';
-import { TemplateDirective } from '../../utils/directives/template/template.directive';
-import { TitleComponent } from '../../title/title.component';
+import { TemplateDirective } from '@fundamental-ngx/core/utils';
+import { TitleComponent } from '@fundamental-ngx/core/title';
 
 @Directive()
 export abstract class DialogHeaderBase implements AfterContentInit {

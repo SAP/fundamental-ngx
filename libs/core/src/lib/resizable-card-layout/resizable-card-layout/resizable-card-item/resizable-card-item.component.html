@@ -1,0 +1,35 @@
+<div class="fd-resizable-card-layout__item" [class.fd-resizable-card-layout__indication-border]="showBorder"
+    #resizeCard>
+    <div class="fd-resizable-card-layout__item--border-display fd-resizable-card-layout__item--resize-transition"
+        [style.width.px]="cardWidth" [style.height.px]="cardHeight" (mouseenter)="showResizeIcon($event)"
+        (mouseleave)="hideResizeIcon($event)">
+        <div class="fd-resizable-card-layout__card">
+            <ng-content></ng-content>
+
+            <ng-container *ngIf="showingResizeIcon">
+                <div class="fd-resizable-card-layout__icon-wrapper">
+                    <div class="fd-resizable-card-layout__icon" #cornerHandle (mousedown)="onMouseDown($event, 'both')">
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+        <ng-container *ngIf="resizable">
+            <ng-container *ngTemplateOutlet="verticalHandleTemplate"></ng-container>
+            <ng-container *ngTemplateOutlet="horizontalHandleTemplate"></ng-container>
+        </ng-container>
+    </div>
+
+    <div class="fd-resizable-card-layout__item--resize-transition" [style.width.px]="resizeIndicationBorderWidth"
+        [style.height.px]="cardHeight"></div>
+</div>
+
+<ng-template #verticalHandleTemplate>
+    <div #verticalHandle class="fd-resizable-card-layout__resize--vertical"
+        (mousedown)="onMouseDown($event, 'horizontal')"></div>
+</ng-template>
+
+<ng-template #horizontalHandleTemplate>
+    <div #horizontalHandle class="fd-resizable-card-layout__resize--horizontal"
+        (mousedown)="onMouseDown($event, 'vertical')"></div>
+</ng-template>

@@ -69,6 +69,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'form-generator',
+                loadChildren: () =>
+                    import(
+                        './component-docs/platform-forms/platform-form-generator/platform-form-generator-docs.module'
+                    ).then((m) => m.PlatformFormGeneratorDocsModule)
+            },
+            {
                 path: 'form-container',
                 loadChildren: () =>
                     import(
@@ -258,6 +265,13 @@ export const ROUTES: Routes = [
                 loadChildren: () =>
                     import('./component-docs/platform-vhd/platform-vhd-docs.module').then(
                         (m) => m.PlatformVhdDocsModule
+                    )
+            },
+            {
+                path: 'multi-combobox',
+                loadChildren: () =>
+                    import('./component-docs/platform-multi-combobox/platform-multi-combobox-docs.module').then(
+                        (m) => m.PlatformMultiComboboxDocsModule
                     )
             },
             {

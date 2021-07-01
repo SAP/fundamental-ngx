@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { DialogConfig, DialogRef, DialogService, TableComponent } from '@fundamental-ngx/core';
+import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+import { TableComponent } from '@fundamental-ngx/core/table';
 import { TableCustomDialogComponent } from './table-custom-dialog.component';
 
 export interface DisplayedColumn {

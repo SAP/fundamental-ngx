@@ -1,4 +1,12 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import {
+    Component,
+    Input,
+    Output,
+    EventEmitter,
+    ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    HostBinding
+} from '@angular/core';
 import { ButtonType } from '@fundamental-ngx/core';
 import { BaseComponent } from '../base';
 
@@ -29,6 +37,21 @@ export class MenuButtonComponent extends BaseComponent {
     /** Event sent when menu-button is clicked */
     @Output()
     buttonClicked: EventEmitter<MouseEvent | KeyboardEvent | TouchEvent> = new EventEmitter();
+
+    /**
+     * @hidden disabling fd-button does not disables menu button.
+     * because menu trigger is on menu-button; menu gets open.
+     * to prevent this, need to apply disabled at menu-button level as well.
+     */
+    @HostBinding('class.fd-menu-button--disabled')
+    get menuButtonDisabled(): boolean {
+        return this.disabled;
+    }
+
+    // @hidden tabindex for button.
+    get tabindex(): number {
+        return this.disabled ? -1 : 0;
+    }
 
     constructor(_cd: ChangeDetectorRef) {
         super(_cd);

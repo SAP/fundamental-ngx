@@ -1,7 +1,8 @@
 <div class="approval-flow__messages" *ngIf="_messages.length">
     <fd-message-strip
         *ngFor="let message of _messages; let i = index; trackBy: _trackByFn"
-        type="success"
+        [type]="message.type === 'error' ? 'error' : 'success'"
+        [dismissible]="message.type !== 'error'"
         (onDismiss)="_dismissMessage(i)">
         <bdi>
             <span [ngSwitch]="message.type">
@@ -11,27 +12,95 @@
                 <ng-container *ngSwitchCase="'nodeRemove'" [ngTemplateOutlet]="nodeRemove"></ng-container>
                 <ng-container *ngSwitchCase="'nodesRemove'" [ngTemplateOutlet]="nodesRemove"></ng-container>
                 <ng-container *ngSwitchCase="'teamRemove'" [ngTemplateOutlet]="teamRemove"></ng-container>
+                <ng-container *ngSwitchCase="'error'" [ngTemplateOutlet]="errorBuildGraph"></ng-container>
             </span>
-            <a href="#" (click)="$event.preventDefault();_dismissMessage(i);_undoLastAction()" i18n="@@platformApprovalFlowUndo">Undo</a>
+
+            <a
+                href="#"
+                *ngIf="_previousApprovalProcess"
+                (click)="$event.preventDefault();_dismissMessage(i);_undoLastAction()"
+                i18n="@@platformApprovalFlowUndo"
+            >
+                Undo
+            </a>
         </bdi>
     </fd-message-strip>
 </div>
 
-<fd-toolbar [hasTitle]="true" [attr.dir]="_dir">
-    <h3 class="approval-flow__title">{{ title }}</h3>
+<fd-toolbar class="approval-flow__toolbar" [hasTitle]="true" [attr.dir]="_dir">
+    <h3 class="approval-flow__toolbar-title">{{ title }}</h3>
+
     <div class="approval-flow__toolbar-controls" *ngIf="isEditAvailable">
-        <button *ngIf="!_isEditMode" fd-button label="Edit" [compact]="true" (click)="_enterEditMode()"></button>
+        <button
+            *ngIf="!_graph.length && !_isErrorState"
+            fd-button
+            label="Add a step"
+            i18n-label="@@platformApprovalAddStep"
+            [compact]="true"
+            (click)="_addNodeFromToolbar('empty')"
+        ></button>
+
+        <button
+            *ngIf="!_isEditMode && _graph.length"
+            fd-button
+            label="Edit"
+            i18n-label="@@platformApprovalEdit"
+            [compact]="true"
+            (click)="_enterEditMode()"
+        ></button>
+
         <ng-container *ngIf="_isEditMode">
-            <button *ngIf="_canAddBefore" fd-button label="Add approvers before" [compact]="true" (click)="_addNodeFromToolbar('before')"></button>
-            <button *ngIf="_canAddAfter" fd-button label="Add approvers after" [compact]="true" (click)="_addNodeFromToolbar('after')"></button>
-            <button *ngIf="_canAddParallel" fd-button label="Add parallel approvers" [compact]="true" (click)="_addNodeFromToolbar('parallel')"></button>
-            <button *ngIf="_canDelete" fd-button label="Remove" [compact]="true" (click)="_deleteCheckedNodes()"></button>
+            <button
+                *ngIf="_canAddBefore"
+                fd-button
+                label="Add approvers before"
+                i18n-label="@@platformApprovalAddApproversBefore"
+                [compact]="true"
+                (click)="_addNodeFromToolbar('before')"
+            ></button>
+
+            <button
+                *ngIf="_canAddAfter"
+                fd-button
+                label="Add approvers after"
+                i18n-label="@@platformApprovalAddApproversAfter"
+                [compact]="true"
+                (click)="_addNodeFromToolbar('after')"
+            ></button>
+
+            <button
+                *ngIf="_canAddParallel"
+                fd-button
+                label="Add parallel approvers"
+                i18n-label="@@platformApprovalAddApproversParallel"
+                [compact]="true"
+                (click)="_addNodeFromToolbar('parallel')"
+            ></button>
+
+            <button
+                *ngIf="_canEditNode"
+                fd-button
+                label="Edit"
+                i18n-label="@@platformApprovalEdit"
+                [compact]="true"
+                (click)="_editNodeFromToolbar()"
+            ></button>
+
+            <button
+                *ngIf="_canRemoveSelectedNodes"
+                fd-button
+                label="Remove"
+                i18n-label="@@platformApprovalRemove"
+                [compact]="true"
+                (click)="_deleteCheckedNodes()"
+            ></button>
         </ng-container>
     </div>
 </fd-toolbar>
 
 <div class="approval-flow__watchers" [attr.dir]="_dir" *ngIf="_approvalProcess?.watchers.length || _isEditMode">
     <p class="approval-flow__watchers-title" i18n="@@platformApprovalFlowWatchers">{{ watchersLabel }}</p>
+
     <ng-container *ngIf="!_isEditMode">
         <fd-avatar
             *ngFor="let watcher of _approvalProcess?.watchers; trackBy: _trackByFn"
@@ -43,6 +112,7 @@
             (keyup.enter)="$event.stopPropagation(); _onWatcherClick(watcher)"
             (click)="_onWatcherClick(watcher)"></fd-avatar>
     </ng-container>
+
     <div class="approval-flow__watchers-input-container" *ngIf="_isEditMode">
         <fd-multi-input
             [compact]="true"
@@ -56,78 +126,110 @@
     </div>
 </div>
 
-<div class="approval-flow__container">
-    <div class="approval-flow__carousel-controls" *ngIf="_isCarousel" [attr.dir]="_dir" [class.approval-flow__carousel-controls--edit-mode]="_isEditMode" >
-        <button class="approval-flow__control--prev-slide" *ngIf="_carouselStep > 0" (click)="previousSlide()"
-            aria-label="Go to previous slide" i18n-aria-label="@@platformApprovalPrevButton">
-            <fd-icon [glyph]="'navigation-' + (_isRTL ? 'right' : 'left') + '-arrow'"></fd-icon>
-            {{ _carouselStep }}
-        </button>
-        <button class="approval-flow__control--next-slide" *ngIf="(_maxCarouselStep - _carouselStep) > 0"
-            (click)="nextSlide()" aria-label="Go to next slide" i18n-aria-label="@@platformApprovalNextButton">
-            {{ _maxCarouselStep - _carouselStep }}
-            <fd-icon [glyph]="'navigation-' + (_isRTL ? 'left' : 'right') + '-arrow'"></fd-icon>
-        </button>
-    </div>
-    <div class="approval-flow__graph-container" #graphContainerEl>
-        <div class="approval-flow__graph" #graphEl [style.left.px]="_isRTL ? -_carouselScrollX : _carouselScrollX"
-             [attr.dir]="_dir"
-             [class.approval-flow__graph--edit-mode]="_isEditMode"
+<ng-container *ngIf="!_isErrorState">
+    <ng-container *ngIf="_graph.length; else emptyApprovalFlowGraph">
+        <div
+            class="approval-flow__container"
+            [attr.dir]="_dir"
+            [class.approval-flow__container--extra-padding-start]="_isCarousel && _carouselStep > 0"
+            [class.approval-flow__container--extra-padding-end]="_isCarousel && (_maxCarouselStep - _carouselStep) > 0"
         >
-            <div class="approval-flow__column"
-                 *ngFor="let column of _graph; let columnIndex = index; let firstColumn = first; let lastColumn = last; trackBy: _trackByFn"
-                 [class.approval-flow__column--vertical-line-before]="column.nodes.length > 1 && !column.isPartial && _graph[columnIndex - 1]?.nodes.length === 1"
-                 [class.approval-flow__column--vertical-line-after]="(column.nodes.length > 1 && _graph[columnIndex + 1]?.nodes.length === 1)"
-                 [class.approval-flow__column--vertical-line-before-solid]="_graph[columnIndex - 1]?.allNodesApproved"
-                 [class.approval-flow__column--vertical-line-after-solid]="column.allNodesApproved"
+            <div
+                class="approval-flow__carousel-controls"
+                *ngIf="_isCarousel"
+                [attr.dir]="_dir"
+                [class.approval-flow__carousel-controls--edit-mode]="_isEditMode"
             >
-                <ng-container
-                    *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last; trackBy: _trackByFn">
-                    <fdp-approval-flow-node
-                        cdkDrag
-                        [cdkDragDisabled]="!_isEditMode || node.status !== 'not started' || (_metaMap[node.id].isLast && _metaMap[node.id].parallelEnd)"
-                        [attr.dir]="_dir"
-                        [attr.tabindex]="node.blank ? -1 : 0"
-                        [node]="node"
-                        [blank]="node.blank"
-                        [parent]="_nodeParentsMap[node.id]"
-                        [meta]="_metaMap[node.id]"
-                        [isEdit]="_isEditMode"
-                        [checkDueDate]="checkDueDate"
-                        [dueDateThreshold]="dueDateThreshold"
-                        [renderArrow]="columnIndex > 0"
-                        [renderLineBefore]="(_isCarousel && firstColumn) || !!_nodeParentsMap[node.id] && !_graph[columnIndex - 1]?.nodes[nodeIndex]?.blank"
-                        [renderLineAfter]="(_isCarousel && lastColumn && lastNode) || !lastColumn && !node.blank && !_graph[columnIndex + 1]?.nodes[nodeIndex]?.blank"
-                        [renderCarouselStartMarker]="(_isCarousel && _metaMap[node.id].isRoot)"
-                        [renderCarouselEndMarker]="(_isCarousel && _metaMap[node.id].isLast)"
-                        (onNodeClick)="_onNodeClick(node)"
-                        (onNodeCheck)="_onNodeCheck(node)"
-                        (onAdd)="_addNode(node, $event)"
-                        (onEdit)="_editNode(node)"
-                        (onDelete)="_onNodeDelete(node)"
-                        (keyup.enter)="_onNodeClick(node)"
-                        (keydown)="_onNodeKeyDown($event, node, firstColumn, firstNode, lastColumn, lastNode)"
-                        (cdkDragReleased)="_onNodeDrop(node, $event.source)"
-                        (cdkDragMoved)="_onNodeDragMoved(node)"
-                    ></fdp-approval-flow-node>
-                </ng-container>
+                <button class="approval-flow__control--prev-slide" *ngIf="_carouselStep > 0" (click)="previousSlide()"
+                    aria-label="Go to previous slide" i18n-aria-label="@@platformApprovalPrevButton">
+                    <fd-icon [glyph]="'navigation-' + (_isRTL ? 'right' : 'left') + '-arrow'"></fd-icon>
+                    {{ _carouselStep }}
+                </button>
+
+                <button class="approval-flow__control--next-slide" *ngIf="(_maxCarouselStep - _carouselStep) > 0"
+                    (click)="nextSlide()" aria-label="Go to next slide" i18n-aria-label="@@platformApprovalNextButton">
+                    {{ _maxCarouselStep - _carouselStep }}
+                    <fd-icon [glyph]="'navigation-' + (_isRTL ? 'left' : 'right') + '-arrow'"></fd-icon>
+                </button>
+            </div>
+
+            <div
+                class="approval-flow__graph-container"
+                [attr.dir]="_dir"
+                [class.approval-flow__graph-container--multiple-root-nodes]="_multipleRootNodes"
+                #graphContainerEl
+            >
+                <div
+                    class="approval-flow__graph" #graphEl [style.left.px]="_isRTL ? -_carouselScrollX : _carouselScrollX"
+                    [attr.dir]="_dir"
+                    [class.approval-flow__graph--edit-mode]="_isEditMode"
+                >
+                    <div
+                        class="approval-flow__column"
+                        *ngFor="let column of _graph; let columnIndex = index; let firstColumn = first; let lastColumn = last; trackBy: _trackByFn"
+                    >
+                        <ng-container
+                            *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last; trackBy: _trackByFn">
+                            <fdp-approval-flow-node
+                                cdkDrag
+                                [cdkDragDisabled]="_isCdkDragDisabled(node)"
+                                [attr.dir]="_dir"
+                                [attr.tabindex]="node.blank || node.space ? -1 : 0"
+                                [node]="node"
+                                [meta]="_graphMetadata[node.id]"
+                                [isEdit]="_isEditMode"
+                                [isNextNodeBlank]="!node.blank && _graph[columnIndex + 1]?.nodes[nodeIndex]?.blank"
+                                [checkDueDate]="checkDueDate"
+                                [dueDateThreshold]="dueDateThreshold"
+                                [renderArrow]="columnIndex > 0"
+                                [allNodesInColumnApproved]="column.allNodesApproved"
+                                [disableRemoving]="_isFinalNodeWithMultipleParents(node)"
+                                (onNodeClick)="_onNodeClick(node)"
+                                (onNodeCheck)="_onNodeCheck(node)"
+                                (onAdd)="_addNode(node, $event)"
+                                (onEdit)="_editNode(node)"
+                                (onDelete)="_onNodeDelete(node)"
+                                (keyup.enter)="_onNodeClick(node)"
+                                (keydown)="_onNodeKeyDown($event, node, firstColumn, firstNode, lastColumn, lastNode)"
+                                (cdkDragStarted)="_dragDropInProgress = true"
+                                (cdkDragReleased)="_onNodeDrop(node, $event.source)"
+                                (cdkDragMoved)="_onNodeDragMoved(node)"
+                            ></fdp-approval-flow-node>
+                        </ng-container>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </ng-container>
+</ng-container>
+
 <div class="approval-flow__edit-mode-footer" [attr.dir]="_dir" *ngIf="_isEditMode">
-    <button fd-button label="Save" [compact]="true" fdType="emphasized" (click)="_saveEditModeChanges()"></button>
-    <button fd-button label="Exit" [compact]="true" fdType="transparent" (click)="_exitEditMode()"></button>
+    <button
+        fd-button
+        label="Save"
+        i18n-label="@@platformApprovalFlowEditModeSave"
+        [compact]="true"
+        fdType="emphasized"
+        (click)="_saveEditModeChanges()"
+    ></button>
+    <button
+        fd-button
+        label="Exit"
+        i18n-label="@@platformApprovalFlowEditModeExit"
+        [compact]="true"
+        fdType="transparent"
+        (click)="_exitEditMode()"
+    ></button>
 </div>
 
 <ng-template let-messageToast #reminderTemplate>
     <ng-container
-        *ngIf="messageToast.data.targets.length === 1; else multipleRecievers"
+        *ngIf="messageToast.data.targets.length === 1; else multipleReceivers"
         i18n="@@platformApprovalFlowReminderMessage">
         Reminder has been sent to {{messageToast.data.targets[0].name}}
     </ng-container>
-    
-    <ng-template #multipleRecievers i18n="@@platformApprovalFlowReminderMessageMultipleRecievers">
+
+    <ng-template #multipleReceivers i18n="@@platformApprovalFlowReminderMessageMultipleRecievers">
         Reminder has been sent to {{messageToast.data.targets.length}} members of {{messageToast.data.node.description}}
     </ng-template>
 </ng-template>
@@ -154,11 +256,44 @@
 </ng-template>
 <ng-template #nodesRemove>
     <ng-container i18n="@@platformApprovalFlowNodesRemovedAlert">
-        Approvers has been removed
+        Approvers have been removed
     </ng-container>
 </ng-template>
+
 <ng-template #teamRemove>
     <ng-container i18n="@@platformApprovalFlowTeamRemovedAlert">
         1 team has been removed
     </ng-container>
+</ng-template>
+
+<ng-template #errorBuildGraph>
+    <ng-container i18n="@@platformApprovalBuildGraphFailCheckData">
+        There was an error when trying to build graph. Check the initial data.
+    </ng-container>
+</ng-template>
+
+<ng-template #emptyApprovalFlowGraph>
+    <figure fd-illustrated-message type="spot" [svgConfig]="_emptyApprovalFlowSpotConfig">
+        <figcaption fd-illustrated-message-figcaption>
+            <h3 fd-illustrated-message-title i18n="@@platformApprovalFlowEmptyTitle">
+                Start adding approvers and watchers
+            </h3>
+            <p fd-illustrated-message-text i18n="@@platformApprovalFlowEmptyHint">
+                To add approvers click <b>Add a step</b>. To add watchers, click the Watchers field.
+            </p>
+        </figcaption>
+    </figure>
+
+    <!-- TODO #5178: Replace with illustrated image component after it gets fixed -->
+    <div style="display: none">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128" id="sapIllus-Spot-NoData">
+            <path d="M41.6179,32.7174H84.6273a1,1,0,0,1,.723.3092l7.2445,7.5824,7.4817,7.8491a1,1,0,0,1,.2761.69l-.0046,55.6069a4.1038,4.1038,0,0,1-.8787,2.1212A4.0564,4.0564,0,0,1,98.1,107.9631l-56.3858.0313a2.6167,2.6167,0,0,1-3.0812-3.2309l-.0152-69.0594Z" class="sapIllus_PatternShadow" style="fill: var(--sapIllus_PatternShadow);"></path>
+            <path d="M35.7928,27.4987H78.8022a1,1,0,0,1,.723.3092L86.77,35.39l7.4816,7.8492a1,1,0,0,1,.2762.69l-.0046,55.6069a3,3,0,0,1-3,3H35.808a2.9946,2.9946,0,0,1-3-2.9913c-.01-12.0564-.0423-57.0116-.0152-69.0595A2.9943,2.9943,0,0,1,35.7928,27.4987Z" class="sapIllus_ObjectFillColor" style="fill: var(--sapIllus_ObjectFillColor);"></path>
+            <path d="M93.2978,44.5335H78.8208a.9925.9925,0,0,1-.974-1.01V28.5108a.97.97,0,0,1,1.6628-.7143L93.9865,42.8092A1.0151,1.0151,0,0,1,93.2978,44.5335Z" class="sapIllus_BrandColorSecondary" style="fill: var(--sapIllus_BrandColorSecondary);"></path>
+            <path d="M104.608,38.9485l5.9157-1.7721c1.32-.3954.7584-2.5258-.5689-2.1282L104.0392,36.82c-1.32.3953-.7584,2.5258.5688,2.1282Z" class="sapIllus_Layering1" style="fill: var(--sapIllus_Layering1);"></path>
+            <path d="M85.2973,21.2465l.9718-5.9331c.2154-1.3151-1.777-1.8807-1.9941-.5554l-.9718,5.9332c-.2155,1.3151,1.777,1.8807,1.9941.5553Z" class="sapIllus_Layering1" style="fill: var(--sapIllus_Layering1);"></path>
+            <path d="M95.3034,29.0015a1.01,1.01,0,0,1-.6837-.267,1.0783,1.0783,0,0,1-.0864-1.4932l5.9511-6.8857a1.01,1.01,0,0,1,1.4538-.0884,1.0785,1.0785,0,0,1,.0865,1.4932l-5.9511,6.8858A1.0164,1.0164,0,0,1,95.3034,29.0015Z" class="sapIllus_Layering1" style="fill: var(--sapIllus_Layering1);"></path>
+            <path d="M94.8747,42.8861,80.0855,27.4623a1.5152,1.5152,0,0,0-1.0885-.4636H35.807a3.509,3.509,0,0,0-3.5146,3.4836c-.0294,13.2857.0137,66.7559.0157,69.0257a3.5076,3.5076,0,0,0,3.5146,3.4894H91.7709a3.5106,3.5106,0,0,0,3.5146-3.4982l.005-55.5785A1.49,1.49,0,0,0,94.8747,42.8861Zm-16.21-14.8355a1.15,1.15,0,0,1,.2561-.0309,1.04,1.04,0,0,1,.51.2134l14.276,14.8837.0194.02a.5891.5891,0,0,1,.0968.6251c-.1016.1764-.4086.24-.69.24L78.8355,44a.6031.6031,0,0,1-.5472-.6131c-.0087-4.9588-.017-9.9015-.0035-14.8689A.5189.5189,0,0,1,78.6646,28.0506Zm13.1062,73.95H35.8188a2.5045,2.5045,0,0,1-2.5107-2.491c-.002-2.2694-.0451-55.74-.0157-69.0248a2.5054,2.5054,0,0,1,2.5107-2.4861H77.3684a1.49,1.49,0,0,0-.0976.5106V43.4934A1.5145,1.5145,0,0,0,78.7894,45H78.92L94.286,47.9749l-.0046,51.5269A2.5074,2.5074,0,0,1,91.7708,102.0006Z" class="sapIllus_StrokeDetailColor" style="fill: var(--sapIllus_StrokeDetailColor);"></path>
+        </svg>
+    </div>
 </ng-template>

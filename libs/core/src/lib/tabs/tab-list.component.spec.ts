@@ -4,7 +4,7 @@ import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { TabListComponent } from './tab-list.component';
 import { TabsModule } from './tabs.module';
-import { whenStable } from '../utils/tests';
+import { whenStable } from '@fundamental-ngx/core/tests';
 
 @Component({
     template: `

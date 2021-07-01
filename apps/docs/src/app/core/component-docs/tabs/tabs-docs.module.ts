@@ -11,7 +11,9 @@ import {
     TabNavigationExampleChildSecond,
     TabNavigationExampleChildThird
 } from './examples';
-import { SegmentedButtonModule, TabsModule, TitleModule } from '@fundamental-ngx/core';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { TitleModule } from '@fundamental-ngx/core/title';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 
 const routes: Routes = [
     {

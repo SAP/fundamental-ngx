@@ -11,8 +11,8 @@
         <ng-content select="fd-wizard-step-indicator"></ng-content>
         <div class="fd-wizard__label-container" [class.fd-wizard__label-container--optional]="optionalText">
             <div #wizardLabel>
-                <span class="fd-wizard__label" (click)="wizardLabelClicked($event)">{{ label }}</span>
-                <span *ngIf="optionalText" class="fd-wizard__optional-text" (click)="wizardLabelClicked($event)">
+                <span class="fd-wizard__label">{{ label }}</span>
+                <span *ngIf="optionalText" class="fd-wizard__optional-text">
                     {{ optionalText }}
                 </span>
             </div>

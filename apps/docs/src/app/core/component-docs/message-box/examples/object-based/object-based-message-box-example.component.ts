@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessageBoxContent, MessageBoxService } from '@fundamental-ngx/core';
+import { MessageBoxContent, MessageBoxService } from '@fundamental-ngx/core/message-box';
 
 @Component({
     selector: 'fd-object-based-message-box-example',

@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IconModule } from '../icon/icon.module';
-import { PopoverModule } from '../popover/popover.module';
-import { CalendarModule } from '../calendar/calendar.module';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { CalendarModule } from '@fundamental-ngx/core/calendar';
 import { FormsModule } from '@angular/forms';
 import { DatetimePickerComponent } from './datetime-picker.component';
-import { TimeModule } from '../time/time.module';
-import { ButtonModule } from '../button/button.module';
-import { InputGroupModule } from '../input-group/input-group.module';
-import { BarModule } from '../bar/bar.module';
-import { FormMessageModule } from '../form/form-message/form-message.module';
+import { TimeModule } from '@fundamental-ngx/core/time';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { FormMessageModule } from '@fundamental-ngx/core/form';
 
 @NgModule({
     declarations: [DatetimePickerComponent],

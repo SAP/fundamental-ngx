@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { GridListItemOutputEvent } from '@fundamental-ngx/core';
+import { GridListItemOutputEvent } from '@fundamental-ngx/core/grid-list';
 
 interface GridListItem {
     id: number;
@@ -55,6 +55,6 @@ export class GridListDeleteExampleComponent {
 
     delete(event: GridListItemOutputEvent<number>): void {
         this.list.splice(event.index, 1);
-        console.log('Deleted item event', event);
+        alert('Deleted item event ' + event.value);
     }
 }

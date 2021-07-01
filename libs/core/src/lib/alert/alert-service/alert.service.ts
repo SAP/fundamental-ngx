@@ -2,7 +2,7 @@ import { Injectable, ComponentRef, TemplateRef, Type } from '@angular/core';
 import { AlertComponent } from '../alert.component';
 import { AlertContainerComponent } from '../alert-utils/alert-container.component';
 import { AlertConfig } from '../alert-utils/alert-config';
-import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { AlertRef } from '../alert-utils/alert-ref';
 
 /**

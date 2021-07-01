@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MenuComponent, RtlService } from '@fundamental-ngx/core';
+import { MenuComponent } from '@fundamental-ngx/core/menu';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-table-pagination-example',

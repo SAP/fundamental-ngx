@@ -9,7 +9,7 @@ describe('Avatar test suite', function() {
 
     it('should check visual regression for all examples', () => {
         avatarPage.saveExampleBaselineScreenshot();
-        expect(avatarPage.compareWithBaseline()).toBeLessThan(3);
+        expect(avatarPage.compareWithBaseline()).toBeLessThan(5);
     });
 
     it('should check orientation', () => {

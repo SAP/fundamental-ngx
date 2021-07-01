@@ -1,21 +1,26 @@
 <div class="fd-button-split fd-has-margin-right-small" role="group" aria-label="button-split" [fdMenuTrigger]="menu">
-    <button fd-button #mainActionButton
-            [label]="mainActionTitle"
-            [ngStyle]="{width: mainButtonWidth}"
-            [fdType]="fdType"
-            [compact]="compact"
-            [disabled]="disabled"
-            (click)="onMainButtonClick($event)">
+    <button
+        fd-button
+        #mainActionButton
+        [label]="mainActionTitle"
+        [ngStyle]="{ width: mainButtonWidth }"
+        [fdType]="fdType"
+        [compact]="compact"
+        [disabled]="disabled"
+        (click)="onMainButtonClick($event)"
+    >
         <ng-container *ngTemplateOutlet="titleTemplate"></ng-container>
     </button>
 
-    <button fd-button
-            [glyph]="glyph"
-            [fdType]="fdType"
-            [compact]="compact"
-            [disabled]="disabled"
-            [attr.aria-label]="expandButtonAriaLabel">
-    </button>
+    <button
+        fd-button
+        #menuActionButton
+        [glyph]="glyph"
+        [fdType]="fdType"
+        [compact]="compact"
+        [disabled]="disabled"
+        [attr.aria-label]="expandButtonAriaLabel"
+    ></button>
 
     <ng-content select="fd-menu"></ng-content>
 </div>

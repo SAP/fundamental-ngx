@@ -16,7 +16,6 @@ import {
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { CssClassBuilder, applyCssClass } from '../../utils/public_api';
 import {
     INDICATOR_DEFAULT_CAPACITY,
     INDICATOR_PREFIX,
@@ -24,6 +23,8 @@ import {
     RatingIndicatorSize,
     RatingIndicatorSizeEnum
 } from '../constants';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
 
 let ratingUID = 0;
 

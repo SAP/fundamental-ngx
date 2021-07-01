@@ -350,27 +350,28 @@
     <fdp-menu-item
         *ngFor="let value of _itemsPerPageOptions"
         (itemSelect)="_itemsPerPageChange(value.label)"
+        [attr.title]="'Results per page: ' + value.label"
         [innerText]="value.label"
     ></fdp-menu-item>
 </fdp-menu>
 
 <fdp-menu #menuActions xPosition="before" contentDensity="compact">
     <fdp-menu-item (itemSelect)="_moveToClicked()">
-        <fd-icon class="fdp-upload-collection__fd-icon" glyph="folder-blank"></fd-icon>
+        <fd-icon class="fdp-upload-collection__fd-icon" glyph="folder-blank" i18n-title="platformUploadCollection.Icon.MoveTo|Menu Action" title="Move to icon"></fd-icon>
         <span i18n="platformUploadCollection.Btn.MoveTo|Menu Action">Move to</span>
     </fdp-menu-item>
     <ng-container *ngIf="_activeItem?.type === 'file'">
         <fdp-menu-item (itemSelect)="_downloadClicked()">
-            <fd-icon class="fdp-upload-collection__fd-icon" glyph="download"></fd-icon>
+            <fd-icon class="fdp-upload-collection__fd-icon" glyph="download" i18n-title="platformUploadCollection.Icon.Download|Menu Action" title="Download icon"></fd-icon>
             <span i18n="platformUploadCollection.Btn.Download|Menu Action">Download</span>
         </fdp-menu-item>
         <fdp-menu-item (itemSelect)="_openUpdateFileVersion()">
-            <fd-icon class="fdp-upload-collection__fd-icon" glyph="drill-up"></fd-icon>
+            <fd-icon class="fdp-upload-collection__fd-icon" glyph="drill-up" i18n-title="platformUploadCollection.Icon.UpdateVersion|Menu Action" title="Update version icon"></fd-icon>
             <span i18n="platformUploadCollection.Btn.UpdateVersion|Menu Action">Update version</span>
         </fdp-menu-item>
     </ng-container>
     <fdp-menu-item (itemSelect)="_remove()">
-        <fd-icon class="fdp-upload-collection__fd-icon" glyph="delete"></fd-icon>
+        <fd-icon class="fdp-upload-collection__fd-icon" glyph="delete" i18n-title="platformUploadCollection.Icon.Remove|Menu Action" title="Remove icon"></fd-icon>
         <span i18n="platformUploadCollection.Btn.Remove|Menu Action">Remove</span>
     </fdp-menu-item>
 </fdp-menu>

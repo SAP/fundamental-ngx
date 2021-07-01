@@ -9,8 +9,8 @@ import {
     QueryList,
     ViewEncapsulation
 } from '@angular/core';
-import { ButtonComponent } from '../button/button.component';
-import { ComboboxComponent } from '../combobox/combobox.component';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 
 export type ShellbarSizes = 's' | 'm' | 'l' | 'xl';
 

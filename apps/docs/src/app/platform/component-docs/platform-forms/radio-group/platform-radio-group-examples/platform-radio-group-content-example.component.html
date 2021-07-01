@@ -45,8 +45,9 @@
 <p>Radio group with disabled button and validation error</p>
 <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
     <fdp-form-group [formGroup]="form4">
-        <fdp-form-field #ffl4 id="radioc4" rank="1" [required]="true">
-            <fdp-radio-group name="radioc4" contentDensity="compact" [isInline]="true" [formControl]="ffl4.formControl">
+        <fdp-form-field #ffl4 id="radioc4" rank="1" required="true" label="select your favorite month">
+            <fdp-radio-group name="radioc4" contentDensity="compact" [isInline]="true"
+                ariaLabel="select your favorite month" [formControl]="ffl4.formControl">
                 <fdp-radio-button value="january">January</fdp-radio-button>
                 <fdp-radio-button value="february">February</fdp-radio-button>
                 <fdp-radio-button value="march">March</fdp-radio-button>

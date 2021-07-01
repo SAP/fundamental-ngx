@@ -9,8 +9,10 @@ import {
     Optional,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass, ContentDensityService, CssClassBuilder } from '../utils/public_api';
 import { Subscription } from 'rxjs';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 export type SizeType = '' | 's' | 'm_l' | 'xl';
 export type BarDesignType = 'header' | 'subheader' | 'header-with-subheader' | 'footer' | 'floating-footer';

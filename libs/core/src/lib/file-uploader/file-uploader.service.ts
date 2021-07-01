@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { parserFileSize } from '../utils/functions';
+import { parserFileSize } from '@fundamental-ngx/core/utils';
 
 export interface FileUploadOutput {
     validFiles?: File[];

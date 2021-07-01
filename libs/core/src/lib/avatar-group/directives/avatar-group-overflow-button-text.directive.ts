@@ -1,7 +1,4 @@
-import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
-
-import { applyCssClass, CssClassBuilder, getRandomColorAccent, Size } from '../../utils/public_api';
-import { AvatarGroupOverflowButtonColor } from '../avatar-group.component';
+import { Directive } from '@angular/core';
 
 @Directive({
     // tslint:disable-next-line:directive-selector

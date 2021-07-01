@@ -13,7 +13,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
+import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
 import {
     DynamicPageContentComponent
 } from './dynamic-page-content/dynamic-page-content.component';
@@ -21,8 +21,8 @@ import { DynamicPageSubheaderComponent } from './dynamic-page-header/subheader/d
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
 import { DynamicPageService } from './dynamic-page.service';
 import { addClassNameToElement, dynamicPageWidthToSize } from './utils';
-import { TabListComponent } from '../tabs/tab-list.component';
-import { FlexibleColumnLayoutComponent } from '../flexible-column-layout/flexible-column-layout.component';
+import { TabListComponent } from '@fundamental-ngx/core/tabs';
+import { FlexibleColumnLayoutComponent } from '@fundamental-ngx/core/flexible-column-layout';
 
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, delay, takeUntil } from 'rxjs/operators';
@@ -299,7 +299,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
             addClassNameToElement(
                 this._renderer,
                 pinCollapseShadowElement.nativeElement,
-                CLASS_NAME.dynamicPageCollapsibleHeaderPinCollapseNoShadow
+                DYNAMIC_PAGE_CLASS_NAME.dynamicPageCollapsibleHeaderPinCollapseNoShadow
             );
         }
     }

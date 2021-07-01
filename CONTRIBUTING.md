@@ -112,7 +112,7 @@ The version in our package.json gets copied to the one we publish, and users nee
 
 
 ```
-fix(platform): Actionbar as component
+fix(platform): actionbar as component
 
 ```
 
@@ -140,16 +140,29 @@ The following is the list of supported scopes:
 
 * **core**
 * **platform**
-* **doc-app**
+* **docs**
+* **e2e**
 
 There are currently a few exceptions to the "use package name" rule:
 
 * **changelog**: used for updating the release notes in CHANGELOG.md
-* **doc-app**: used for docs-app (angular.io) related changes within the /aio directory of the
+* **docs**: used for docs-app (angular.io) related changes within the /aio directory of the
   repo
-* none/empty string: useful for `style`, `test` and `refactor` changes that are done across all
-  packages (e.g. `style: add missing semicolons`) and for docs changes that are not related to a
-  specific package (e.g. `docs: fix typo in tutorial`).
+
+### Multiple scopes
+To use multiple scopes need to follow those delimiter options are:
+
+* "/"
+* "\\"
+* ","
+
+Samples: 
+
+```
+fix(core,platform): message
+fix(core\platform): message
+fix(core/platform): message
+```
 
 ### Subject
 The subject contains a succinct description of the change:
@@ -187,18 +200,18 @@ The PR title must follow this format:
 
 
 ```
-<type>: <subject>
+<type>(<scope>): <subject>
 ```
 
 Samples:
 
 ```
-feat: My adding new binding to button component
+feat: my adding new binding to button component
 ```
 
 
 ```
-chore: Updated package.json
+chore: updated package.json
 ```
 
 ##### Type
@@ -208,7 +221,16 @@ Type can have following values: `WIP|feat|chore|test|docs|fix`.
 The `WIP` represent work in progress and it will not be merged, so please make sure to use one of 
 the specific format such as `feat|chore|test|doc|fix` if your PR needs to be merged with main 
 
+### Scope
+The scope should be the name of the npm package affected (as perceived by the person reading the changelog 
+generated from commit messages). Capitalize the first letter.
 
+The following is the list of supported scopes:
+
+* **core**
+* **platform**
+* **docs**
+* **e2e**
 
 Here are following rules behind the PR title message:
 

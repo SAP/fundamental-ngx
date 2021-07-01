@@ -1,8 +1,8 @@
 import { Inject, Injectable, Injector, Optional, TemplateRef, Type } from '@angular/core';
-import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { MESSAGE_BOX_DEFAULT_CONFIG, MessageBoxConfig } from '../utils/message-box-config.class';
 import { MessageBoxRef } from '../utils/message-box-ref.class';
-import { DialogBaseService } from '../../dialog/base/dialog-base.service';
+import { DialogBaseService } from '@fundamental-ngx/core/dialog';
 import { MessageBoxContainerComponent } from '../message-box-container/message-box-container.component';
 import { MessageBoxContent } from '../utils/message-box-content.class';
 

@@ -124,14 +124,22 @@
             <fd-layout-grid *ngIf="!mobile || (mobile && !isOpenAdvanced)">
                 <div fdLayoutGridCol="12" colMd="12" [colLg]="mobile ? 12: 6" [colXl]="mobile ? 12: 6">
                     <div fd-form-item>
-                        <input
-                            fd-form-control
-                            [compact]="true"
-                            type="search"
-                            [(ngModel)]="_mainSearch"
-                            name="value-help-dialog-search"
-                            id="value-help-dialog-search"
-                            [placeholder]="searchField.placeholder" />
+                        <fd-input-group>
+                            <input
+                                #inputGroupField
+                                fd-input-group-input
+                                fd-form-control
+                                [compact]="true"
+                                type="search"
+                                [(ngModel)]="_mainSearch"
+                                name="value-help-dialog-search"
+                                id="value-help-dialog-search"
+                                [placeholder]="searchField.placeholder" />
+
+                            <span fd-input-group-addon [compact]="true" button="true">
+                                <button fd-button title="Search" glyph="search" fdType="transparent" (click)="_searchAction(inputGroupField)"></button>
+                            </span>
+                        </fd-input-group>
                     </div>
                 </div>
 

@@ -11,16 +11,14 @@ import { SelectAddingExampleComponent } from './examples/select-adding-example/s
 import { SelectCustomTriggerComponent } from './examples/select-custom-trigger/select-custom-trigger.component';
 import { SelectMaxHeightExampleComponent } from './examples/select-height/select-max-height-example.component';
 import { SelectProgrammaticExampleComponent } from './examples/select-programmatic-example/select-programmatic-example.component';
-import {
-    DialogModule,
-    FormModule,
-    ListModule,
-    SelectMobileModule,
-    SelectModule
-} from '@fundamental-ngx/core';
+
 import { SelectSemanticStateExampleComponent } from './examples/select-semantic-state-example/select-semantic-state-example.component';
 import { SelectModeExampleComponent } from './examples/select-mode-example/select-mode-example.component';
 import { SelectMobileExampleComponent } from './examples/select-mobile-example/select-mobile-example.component';
+import { SelectMobileModule, SelectModule } from '@fundamental-ngx/core/select';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { FormModule } from '@fundamental-ngx/core/form';
 
 const routes: Routes = [
     {

@@ -11,7 +11,7 @@ import {
 import { CopyService } from '../../services/copy.service';
 import { ExampleFile } from './example-file';
 import { height } from '../../utilities/animations/collapse';
-import { AlertConfig, AlertService } from '@fundamental-ngx/core';
+import { AlertConfig, AlertService } from '@fundamental-ngx/core/alert';
 import { StackblitzService } from '../stackblitz/stackblitz.service';
 import { CodeSnippetComponent } from '../code-snippet/code-snippet.component';
 

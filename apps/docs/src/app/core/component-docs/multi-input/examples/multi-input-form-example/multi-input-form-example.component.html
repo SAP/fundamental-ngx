@@ -1,12 +1,13 @@
 <form [formGroup]="customForm">
     <fieldset fd-fieldset>
         <div fd-form-item>
-            <label fd-form-label>Valid Multi Input</label>
+            <label fd-form-label required="true">Valid Multi Input</label>
             <fd-multi-input
                 [state]="isValid() ? 'success' : 'error'"
                 formControlName="selectedValues"
                 [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
                 [placeholder]="'Search Here...'"
+                required="true"
             >
             </fd-multi-input>
         </div>

@@ -14,7 +14,6 @@ export const i18n = [
     'zh'
 ];
 export const year2030 = 2030;
-export const highlightedColor = ['rgb(8,84,160)', 'rgba(8,84,160,1)'];
 export const date = `${currentMonth}/1/${currentYear}, 11:01 PM`;
 export const date2 = `${currentMonth}/${currentDay}/${currentYear}, 11:01 PM`;
 export const date3 = '10/5/2018, 3:30 PM';

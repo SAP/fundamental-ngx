@@ -18,11 +18,14 @@ import {
 } from '@angular/core';
 
 import { Observable, of, fromEvent, Subscription } from 'rxjs';
-import { delay, tap, debounceTime, takeWhile, distinctUntilChanged, switchMap, filter } from 'rxjs/operators';
+import { delay, tap, debounceTime, takeWhile, distinctUntilChanged, filter } from 'rxjs/operators';
 
-import { ToolbarItemDirective } from './public_api';
-import { applyCssClass, ContentDensityService, CssClassBuilder } from '../utils/public_api';
-import { OVERFLOW_PRIORITY_SCORE } from '../utils/consts';
+import { OVERFLOW_PRIORITY_SCORE } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { ToolbarItemDirective } from './toolbar-item.directive';
+import { OverflowPriority } from '@fundamental-ngx/core/utils';
 
 const ELEMENT_MARGIN = 8;
 const OVERFLOW_SPACE = 50 + 2 * ELEMENT_MARGIN;
@@ -32,7 +35,6 @@ export type ToolbarType = 'solid' | 'transparent' | 'auto' | 'info';
 
 export type ToolbarSize = 'cozy' | 'compact' | 'condensed' | null;
 
-export type OverflowPriority = 'always' | 'never' | 'low' | 'high' | 'disappear';
 export const enum OverflowPriorityEnum {
     ALWAYS = 'always',
     NEVER = 'never',

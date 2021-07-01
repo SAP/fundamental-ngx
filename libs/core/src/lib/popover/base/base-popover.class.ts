@@ -1,6 +1,6 @@
 import { Directive, ElementRef, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 import { ConnectedPosition, ScrollStrategy } from '@angular/cdk/overlay';
-import { Placement, PopoverFillMode } from '../popover-position/popover-position';
+import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 @Directive()
 export class BasePopoverClass {

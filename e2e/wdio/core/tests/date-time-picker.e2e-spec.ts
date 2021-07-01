@@ -1,32 +1,21 @@
 import {
-    addIsActiveClass,
-    checkElementScreenshot, clearValue,
     click,
     elementArray,
     getAttributeByName,
-    getCSSPropertyByName,
-    getElementArrayLength, getImageTagBrowserPlatform,
+    getElementArrayLength,
     getText,
     getValue, isElementClickable,
-    isElementDisplayed, mouseHoverElement,
-    refreshPage, saveElementScreenshot,
+    isElementDisplayed,
+    refreshPage,
     scrollIntoView,
     sendKeys,
     setValue,
     waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
-import {
-    buttonTag,
-    inputFieldTag,
-    changeButtonTag,
-    buttonOptionTag,
-    optionCountryTag
-} from '../fixtures/testData/date-time-picker-tags';
 import { DateTimePicker } from '../pages/date-time-picker.po';
 import {
     year2030,
-    highlightedColor,
     testText,
     date,
     date2,
@@ -35,10 +24,7 @@ import {
     dates,
     i18n,
     currentDay,
-    button,
-    input
 } from '../fixtures/appData/date-time-picker-contents';
-
 
 describe('Datetime picker suite', function() {
     const dateTimePickerPage = new DateTimePicker();
@@ -47,7 +33,7 @@ describe('Datetime picker suite', function() {
         activeDateTimePickerInput, topPage, selectYearButton, selectMonthButton, calendarYearsSection, disabledDateTimePickerButton,
         disabledDateTimePickerInput, okButton, filterCalendarValue, buttonSelectYearsRange, buttonFirstRangeYear, buttonFirstYear,
         buttonFirstMonth, selectedHours, selectedMinutes, navigationDownArrowButton, navigationUpArrowButton, timeItem, period,
-        cancelButton, buttonChange, optionButton, countryOption, activeDay, dayInCalendarButtonByValue, getOptionByName
+        cancelButton, buttonChange, optionButton, activeDay, dayInCalendarButtonByValue, getOptionByName
     } = new DateTimePicker();
 
     beforeAll(() => {
@@ -117,15 +103,6 @@ describe('Datetime picker suite', function() {
             for (let i = 0; i < inputs.length; i++) {
                 expect(['', null]).not.toContain(getAttributeByName(datePickerInput, 'ng-reflect-model', i));
             }
-        });
-
-        it('verify selected date is showing in blue background', () => {
-            click(activeDateTimePickerButton, 1);
-            click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
-            click(okButton);
-            click(activeDateTimePickerButton, 1);
-            expect(highlightedColor)
-                .toContain(getCSSPropertyByName(dateTimePickerPage.dayInCalendarButtonByValue('1'), 'background-color').value);
         });
 
         it('verify the user can then choose the desired date from the calendar, and the time from the rotating wheel, ' +
@@ -271,46 +248,6 @@ describe('Datetime picker suite', function() {
             dateTimePickerPage.saveExampleBaselineScreenshot();
             expect(dateTimePickerPage.compareWithBaseline()).toBeLessThan(5);
         });
-
-        xit('should check input fields states', () => {
-            const inputsLength = getElementArrayLength(activeDateTimePickerInput);
-            for (let i = 0; i < inputsLength; i++) {
-                scrollIntoView(activeDateTimePickerInput, i);
-                clearValue(activeDateTimePickerInput, i);
-                checkElementStates(activeDateTimePickerInput, inputFieldTag + i + '-',
-                    input, i);
-            }
-        });
-
-        xit('should check date picker button states', () => {
-            const buttonsLength = getElementArrayLength(activeDateTimePickerButton);
-            for (let i = 1; i < buttonsLength; i++) {
-
-                sendKeys(['Escape']);
-                scrollIntoView(activeDateTimePickerButton, i);
-                checkElementStates(activeDateTimePickerButton, buttonTag + i + '-',
-                    button, i);
-            }
-        });
-
-        xit('should check change button states', () => {
-            scrollIntoView(buttonChange);
-            checkElementStates(buttonChange, changeButtonTag, button);
-        });
-
-        xit('should check option button states', () => {
-            scrollIntoView(optionButton);
-            checkElementStates(optionButton, buttonOptionTag, button);
-        });
-
-        xit('should check country option states', () => {
-            scrollIntoView(optionButton);
-            click(optionButton);
-            saveElementScreenshot(countryOption, optionCountryTag, dateTimePickerPage.getScreenshotFolder());
-            expect(checkElementScreenshot(countryOption, optionCountryTag, dateTimePickerPage.getScreenshotFolder()))
-                .toBeLessThan(5, `Country option state mismatch`);
-        });
-
     });
 
     function selectHoursAndMinutes(hour: number = 11, minute: number = 1): void {
@@ -321,33 +258,6 @@ describe('Datetime picker suite', function() {
         while (getText(selectedMinutes) !== minute.toString()) {
             click(navigationDownArrowButton);
         }
-    }
-
-    function checkElementHoverState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        mouseHoverElement(selector, index);
-        saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), dateTimePickerPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), dateTimePickerPage.getScreenshotFolder(), index))
-            .toBeLessThan(5, `${elementName} element with index ${index} hover state mismatch`);
-    }
-
-    function checkElementFocusState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        click(selector, index);
-        saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), dateTimePickerPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), dateTimePickerPage.getScreenshotFolder(), index))
-            .toBeLessThan(5, `${elementName} element with index ${index} focus state mismatch`);
-    }
-
-    function checkElementActiveState(selector: string, tag: string, elementName: string, index: number = 0): void {
-        addIsActiveClass(selector, index);
-        saveElementScreenshot(selector, tag + getImageTagBrowserPlatform(), dateTimePickerPage.getScreenshotFolder(), index);
-        expect(checkElementScreenshot(selector, tag + getImageTagBrowserPlatform(), dateTimePickerPage.getScreenshotFolder(), index))
-            .toBeLessThan(5, `${elementName} element item with index ${index} active state mismatch`);
-    }
-
-    function checkElementStates(selector: string, tag: string, elementName: string, index: number = 0): void {
-        checkElementHoverState(selector, tag + 'hover-state-', elementName, index);
-        checkElementFocusState(selector, tag + 'focus-state-', elementName, index);
-        checkElementActiveState(selector, tag + 'active-state-', elementName, index);
     }
 
     function selectHoursMinutesAndPeriod(hour: number = 11, minute: number = 1): void {

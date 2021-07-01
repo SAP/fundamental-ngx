@@ -3,7 +3,7 @@ import { Component, ViewChild, ContentChildren, QueryList } from '@angular/core'
 import { RtlService } from '../utils/services/rtl.service';
 import { TokenizerInputDirective } from './token-input.directive';
 
-import { whenStable } from '../utils/tests/when-stable';
+import { whenStable } from '@fundamental-ngx/core/tests';
 import { FormControlComponent } from '../form/form-control/form-control.component';
 import { TokenComponent, TokenizerComponent } from './public_api';
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';

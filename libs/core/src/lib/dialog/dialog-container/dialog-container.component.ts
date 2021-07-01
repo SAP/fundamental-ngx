@@ -12,9 +12,9 @@ import {
 } from '@angular/core';
 import { DialogRef } from '../utils/dialog-ref.class';
 import { DialogConfig } from '../utils/dialog-config.class';
-import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator';
-import { CssClassBuilder } from '../../utils/interfaces/css-class-builder.interface';
-import { DynamicComponentContainer } from '../../utils/dynamic-component/dynamic-component-container';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { DynamicComponentContainer } from '@fundamental-ngx/core/utils';
 import { DialogDefaultComponent } from '../dialog-default/dialog-default.component';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 import { DialogContentType } from '../dialog-service/dialog.service';
@@ -91,6 +91,7 @@ export class DialogContainerComponent extends DynamicComponentContainer<DialogCo
         this.containerRef.clear();
         const componentFactory = this._componentFactoryResolver.resolveComponentFactory(DialogDefaultComponent);
         this._componentRef = this.containerRef.createComponent(componentFactory);
-        this._componentRef.instance._defaultDialogConfig = config;
+        this._componentRef.instance._defaultDialogContent = config;
+        this._componentRef.instance._defaultDialogConfiguration = this.dialogConfig;
     }
 }

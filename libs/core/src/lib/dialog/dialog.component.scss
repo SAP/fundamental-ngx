@@ -1,7 +1,7 @@
 @import '~fundamental-styles/dist/dialog';
 
 .fd-dialog {
-    z-index: 1000;
+    z-index: 999;
 }
 
 .fd-dialog__resize-handle {

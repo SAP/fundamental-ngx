@@ -60,6 +60,7 @@
                 [options]="_suggestions"
                 fd-input-group-input
                 fd-form-control
+                [id]="id"
                 [disabled]="disabled"
                 [(ngModel)]="inputText"
                 (ngModelChange)="searchTermChanged()"
@@ -70,6 +71,7 @@
                 [attr.aria-readonly]="readonly"
                 [attr.aria-label]="ariaLabel"
                 [attr.aria-labelledby]="ariaLabelledBy"
+                [attr.aria-required]="required"
             />
         </fd-tokenizer>
     </fd-input-group>

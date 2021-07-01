@@ -1,8 +1,8 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { CSS_CLASS_NAME, GRID_COLUMNS_NUMBER } from '../constants';
-import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator';
-import { CssClassBuilder } from '../../utils/interfaces/css-class-builder.interface';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 @Directive({
     selector: '[fd-layout-grid-col], [fdLayoutGridCol]'

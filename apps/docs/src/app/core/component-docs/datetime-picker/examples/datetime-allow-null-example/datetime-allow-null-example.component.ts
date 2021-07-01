@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { DatetimePickerComponent, FdDate } from '@fundamental-ngx/core';
+import { FdDate } from '@fundamental-ngx/core/datetime';
+import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 
 @Component({
     selector: 'fd-date-time-picker-allow-null-example',

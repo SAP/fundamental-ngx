@@ -1,7 +1,7 @@
 import { ElementRef, Injectable, Renderer2 } from '@angular/core';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from '../menu.component';
-import { KeyUtil } from '../../utils/functions';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { Observable, Subject } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { DOWN_ARROW, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
@@ -237,10 +237,11 @@ export class MenuService {
                 this.setFocused(closest.item);
             }
         } else if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
-            this.setActive(true, this.focusedNode.item);
-            this.focusedNode.item.click();
-            if (this.focusedNode.children.length) {
-                focusRight(this.focusedNode);
+            const focusedNode = this.focusedNode;
+            this.setActive(true, focusedNode.item);
+            focusedNode.item.click();
+            if (focusedNode.children.length) {
+                focusRight(focusedNode);
             }
         } else if (KeyUtil.isKeyCode(event, ESCAPE) && this.menu.closeOnEscapeKey) {
             this.menu.close();

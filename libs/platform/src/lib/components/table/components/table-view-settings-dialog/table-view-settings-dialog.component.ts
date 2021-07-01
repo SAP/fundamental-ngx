@@ -28,7 +28,8 @@ const dialogConfig: DialogConfig = {
     responsivePadding: false,
     verticalPadding: false,
     minWidth: '30%',
-    minHeight: '50%'
+    /** 88px it's the header + footer height */
+    bodyMinHeight: 'calc(50vh - 88px)'
 };
 
 /**
@@ -127,12 +128,9 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
         };
 
         const dialogRef = this._dialogService.open(FiltersComponent, {
-            responsivePadding: false,
-            verticalPadding: false,
-            minWidth: '30%',
-            minHeight: '50%',
+            ...dialogConfig,
             data: dialogData
-        } as DialogConfig);
+        });
 
         this._subscriptions.add(
             dialogRef.afterClosed

@@ -9,7 +9,7 @@ import {
     forwardRef
 } from '@angular/core';
 
-import { CLASS_NAME, DYNAMIC_SIDE_CONTENT_CHILD_TOKEN } from './constants';
+import { DYNAMIC_SIDE_CONTENT_CLASS_NAME, DYNAMIC_SIDE_CONTENT_CHILD_TOKEN } from './constants';
 
 let componentId = 0;
 
@@ -35,7 +35,7 @@ export class DynamicSideContentMainComponent implements OnInit {
 
     /** @hidden */
     ngOnInit(): void {
-        this._addClassName(CLASS_NAME.main);
+        this._addClassName(DYNAMIC_SIDE_CONTENT_CLASS_NAME.main);
     }
 
     /** @hidden */

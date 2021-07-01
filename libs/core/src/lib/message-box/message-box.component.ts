@@ -15,8 +15,8 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
-import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 import {
     MESSAGE_BOX_CONFIGURABLE_ELEMENT,
     MessageBoxConfig,
@@ -25,8 +25,8 @@ import {
 
 import { MessageBoxRef } from './utils/message-box-ref.class';
 
-import { DialogBase } from '../dialog/base/dialog-base.class';
-import { dialogFadeNgIf } from '../dialog/utils/dialog.animations';
+import { DialogBase } from '@fundamental-ngx/core/dialog';
+import { dialogFadeNgIf } from '@fundamental-ngx/core/dialog';
 import { CSS_CLASS_NAME } from './utils/const';
 
 /**

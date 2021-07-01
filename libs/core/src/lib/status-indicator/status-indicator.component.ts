@@ -9,7 +9,8 @@ import {
     ChangeDetectorRef,
     OnInit
 } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../utils/public_api';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 export type StatusIndicatorSize = 'sm' | 'md' | 'lg' | 'xl';
 export type StatusIndicatorColor = 'negative' | 'critical' | 'positive';
@@ -33,6 +34,9 @@ export interface Point {
         '[attr.title]': 'title',
         '[attr.role]': 'role',
         '[attr.aria-valuetext]': 'ariaValueText',
+        '[attr.aria-valuenow]': 'fillPercentage ? fillPercentage : 0',
+        '[attr.aria-valuemin]': '0',
+        '[attr.aria-valuemax]': '100',
         '[attr.tabindex]': 'focusable ? 0 : -1'
     },
     encapsulation: ViewEncapsulation.None,

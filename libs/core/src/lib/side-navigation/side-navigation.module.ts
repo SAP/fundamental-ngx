@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SideNavigationComponent } from './side-navigation.component';
 import { SideNavigationMainDirective } from './side-navigation-main.directive';
 import { SideNavigationUtilityDirective } from './side-navigation-utility.directive';
-import { NestedListModule } from '../nested-list/nested-list.module';
+import { NestedListModule } from '@fundamental-ngx/core/nested-list';
 
 @NgModule({
     imports: [CommonModule, NestedListModule],

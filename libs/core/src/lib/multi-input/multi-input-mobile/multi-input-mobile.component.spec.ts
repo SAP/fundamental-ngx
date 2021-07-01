@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MultiInputMobileComponent } from './multi-input-mobile.component';
-import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
-import { DynamicComponentService } from '../../utils/dynamic-component/dynamic-component.service';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { EventEmitter } from '@angular/core';
-import { DialogModule } from '../../dialog/dialog.module';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { MultiInputComponent } from '../multi-input.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MULTI_INPUT_COMPONENT } from '../multi-input.interface';

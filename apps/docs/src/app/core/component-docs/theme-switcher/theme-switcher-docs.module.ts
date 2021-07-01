@@ -6,7 +6,7 @@ import { ThemeSwitcherHeaderComponent } from './theme-switcher-header/theme-swit
 import { ThemeSwitcherDocsComponent } from './theme-switcher-docs.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { examples } from './examples';
-import { ObjectStatusModule } from '@fundamental-ngx/core';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 
 const routes: Routes = [
     {

@@ -1,0 +1,86 @@
+<fd-docs-section-title id="def1" componentName="FormGeneratorComponent">
+    Form Generator usage with Promise-based values
+</fd-docs-section-title>
+<description>
+    This example shows default scenario of the Form Generator usage with values received from Promise-like functions.
+</description>
+<component-example>
+    <fdp-platform-form-generator-example></fdp-platform-form-generator-example>
+</component-example>
+<code-example [exampleFiles]="defaultFormGenerator"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="def2" componentName="FormGeneratorComponent">
+    Form Generator usage with Observable-based values
+</fd-docs-section-title>
+<description>
+    This example shows default scenario of the Form Generator usage with values received from Observable objects.
+</description>
+<component-example>
+    <fdp-platform-form-generator-observable-example></fdp-platform-form-generator-observable-example>
+</component-example>
+<code-example [exampleFiles]="defaultObservableFormGenerator"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="def3" componentName="FormGeneratorComponent">
+    Form generator usage with custom controls
+</fd-docs-section-title>
+<description>
+    If default set of controls is not enough to cover your needs, <code>FormGeneratorService</code> allows to define
+    custom controls and render them for respective question types.
+    In order to make your component work properly, it should follow these requirements:
+    <ul>
+        <li>
+            Component <b>must</b> include these
+            <code>viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]</code>,
+            which can be imported from <code>@fundamental-ngx/platform</code>;
+        </li>
+        <li>
+            Component <b>must</b> inherit <code>BaseDynamicFormGeneratorControl</code>,
+            which can be imported from <code>@fundamental-ngx/platform</code>;
+        </li>
+        <li>Inner form control should be wrapped with
+            <code>&lt;ng-container [formGroup]=&quot;form&quot;&gt;&lt;/ng-control&gt;</code>
+            for appropriate binding to work.
+        </li>
+    </ul>
+</description>
+<component-example>
+    <fdp-platform-form-generator-custom-component-example></fdp-platform-form-generator-custom-component-example>
+</component-example>
+<code-example [exampleFiles]="customFormGenerator"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="def4" componentName="FormGeneratorComponent">
+    Form Generator programatic submit
+</fd-docs-section-title>
+<description>
+    If you want to trigger form submition outside form generator component, this example shows how to do it.
+</description>
+<component-example>
+    <fdp-platform-form-generator-programatic-submit></fdp-platform-form-generator-programatic-submit>
+</component-example>
+<code-example [exampleFiles]="programaticSubmit"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="def5" componentName="FormGeneratorComponent">
+    Custom errors in Form Generator
+</fd-docs-section-title>
+<description>
+    Form generator supports multiple ways of defining validation error hints:
+    <ul>
+        <li>With validation function, which returns string if field is invalid;</li>
+        <li>With predefined generic texts</li>
+    </ul>
+    If you want to change default validation error messages, you can use <code>addValidationErrorHint</code> method
+    in <code>FormGeneratorService</code>.
+    This will allow you to override default ones, and add new generic validation error messages.
+</description>
+<component-example>
+    <fdp-platform-form-generator-custom-error-example></fdp-platform-form-generator-custom-error-example>
+</component-example>
+<code-example [exampleFiles]="customErrors"></code-example>

@@ -11,13 +11,11 @@ import { QuickViewGroupTitleComponent } from './quick-view-group-title/quick-vie
 import { QuickViewGroupItemComponent } from './quick-view-group-item/quick-view-group-item.component';
 import { QuickViewGroupItemLabelComponent } from './quick-view-group-item-label/quick-view-group-item-label.component';
 import { QuickViewGroupItemContentComponent } from './quick-view-group-item-content/quick-view-group-item-content.component';
-import { TitleModule } from '../title/title.module';
-import { BarModule } from '../bar/bar.module';
-import { FormGroupModule } from '../form/form-group/form-group.module';
-import { FormItemModule } from '../form/form-item/form-item.module';
-import { FormLabelModule } from '../form/form-label/form-label.module';
-import { PopoverModule } from '../popover/popover.module';
-
+import { QuickViewGroupItemContentElementDirective } from './quick-view-group-item-content/quick-view-group-item-content-element.directive';
+import { TitleModule } from '@fundamental-ngx/core/title';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { FormGroupModule, FormItemModule, FormLabelModule } from '@fundamental-ngx/core/form';
 
 @NgModule({
     imports: [CommonModule, TitleModule, BarModule, FormGroupModule, FormItemModule, FormLabelModule, PopoverModule],
@@ -31,7 +29,8 @@ import { PopoverModule } from '../popover/popover.module';
         QuickViewGroupTitleComponent,
         QuickViewGroupItemComponent,
         QuickViewGroupItemLabelComponent,
-        QuickViewGroupItemContentComponent
+        QuickViewGroupItemContentComponent,
+        QuickViewGroupItemContentElementDirective
     ],
     exports: [
         QuickViewComponent,
@@ -43,7 +42,8 @@ import { PopoverModule } from '../popover/popover.module';
         QuickViewGroupTitleComponent,
         QuickViewGroupItemComponent,
         QuickViewGroupItemLabelComponent,
-        QuickViewGroupItemContentComponent
+        QuickViewGroupItemContentComponent,
+        QuickViewGroupItemContentElementDirective
     ]
 })
 export class QuickViewModule {}

@@ -11,8 +11,8 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
-import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { fromEvent, Subscription } from 'rxjs';
 
 export interface SvgConfig {
@@ -39,27 +39,27 @@ let illustratedMessageUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IllustratedMessageComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit, CssClassBuilder {
-    /** 
+    /**
      * The type of the Illustrated Message
      * Options include: 'scene' | 'spot' | 'dialog'
      * The default type is set to 'scene'
      */
     @Input() type: 'scene' | 'dialog' | 'spot' = 'scene';
 
-    /** 
+    /**
      * An object containing url and id for each type used to construct the svg href
      * For 'scene' type 'scene' and 'dialog' values are required
      * In small screens (less than 600px) 'dialog' svg will be applied for 'scene' type
      */
     @Input() svgConfig: SvgConfig;
 
-    /** 
+    /**
      * When set to true will remove the illustration from the Illustrated Message
      * The default is set to false
      */
     @Input() noSvg = false;
 
-    /** 
+    /**
      * Id of the Illustrated Message
      * If not provided, a default one is generated
      */
@@ -133,19 +133,19 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
             switch (this.type) {
                 case 'scene' : {
                     this._isSmallScreen = window.innerWidth < 600;
-                    
-                    this._href = this._isSmallScreen ? 
+
+                    this._href = this._isSmallScreen ?
                     `${this.svgConfig.dialog?.url}#${this.svgConfig.dialog?.id}` :
                     `${this.svgConfig.scene?.url}#${this.svgConfig.scene?.id}`
                     this._cdRef.detectChanges();
                 }
                 break;
-    
+
                 case 'dialog' : {
                     this._href = `${this.svgConfig.dialog?.url}#${this.svgConfig.dialog?.id}`;
                 }
                 break;
-    
+
                 case 'spot' : {
                     this._href = `${this.svgConfig.spot?.url}#${this.svgConfig.spot?.id}`;
                 }

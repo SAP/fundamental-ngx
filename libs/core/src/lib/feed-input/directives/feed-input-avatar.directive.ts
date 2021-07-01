@@ -1,5 +1,6 @@
 import { Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
-import { applyCssClass, CssClassBuilder } from '../../utils/public_api';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 /**
  * Applies a thumb styles

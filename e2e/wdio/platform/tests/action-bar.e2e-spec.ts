@@ -4,18 +4,14 @@ import {
     acceptAlert,
     click,
     getAlertText,
-    getCSSPropertyByName,
-    mouseHoverElement,
     scrollIntoView,
     waitForElDisplayed
 } from '../../driver/wdio';
-import { saveBtnHvrColor,
-    defaultBtnHvrColor,
-    negCancelBtnHvrColor,
-    hoverColorAttr,
+import {
     alertMsg,
     actionBarTitles,
-    actionBarDescriptions} from '../fixtures/appData/action-bar-contents';
+    actionBarDescriptions
+} from '../fixtures/appData/action-bar-contents';
 
 describe('Action Bar Test Suite', function() {
     const actionBarPage = new ActionBarPo();
@@ -32,14 +28,7 @@ describe('Action Bar Test Suite', function() {
     }, 1);
 
     describe('Main checks', function() {
-        it('should check action buttons', ()  => {
-            mouseHoverElement(actionBtnArr);
-            expect(getCSSPropertyByName(actionBtnArr, hoverColorAttr).value).toContain(saveBtnHvrColor);
-            mouseHoverElement(actionBtnArr, 1);
-            expect(getCSSPropertyByName(actionBtnArr, hoverColorAttr, 1).value).toContain(defaultBtnHvrColor);
-            scrollIntoView(actionBtnArr, 10);
-            mouseHoverElement(actionBtnArr, 10);
-            expect(getCSSPropertyByName(actionBtnArr, hoverColorAttr, 10).value).toContain(negCancelBtnHvrColor);
+        it('should check action buttons', () => {
             checkElArrIsClickable(actionBtnArr);
             click(actionBtnArr, 8);
             checkElArrIsClickable(menuItems);
@@ -78,7 +67,7 @@ describe('Action Bar Test Suite', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             actionBarPage.saveExampleBaselineScreenshot();
-            expect(actionBarPage.compareWithBaseline()).toBeLessThan(3);
+            expect(actionBarPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

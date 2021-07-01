@@ -3,14 +3,11 @@ import {
     isElementDisplayed,
     getAttributeByName,
     getText,
-    browserIsIE,
-    getCSSPropertyByName,
     waitForElDisplayed,
-    getElementArrayLength
 } from '../../driver/wdio';
 import { checkAttributeValueTrue, checkElArrIsClickable, checkElementText, checkElementTextValue } from '../../helper/assertion-helper';
 import {cardTitleArr, compactAttr, analyticsTitle, badgeText, barChartCounterText, barChartItemsText, barChartTitleText, btnText,
-cardListItemText, cardSubtitleText, cardTypeAttr, colorAttr, compactFont, fontSizeAttr, loaderAttr, statusColors,
+cardListItemText, cardSubtitleText, cardTypeAttr, loaderAttr,
 tableCardCountries, tableCardNames, tableCardPrices, tableCardStatuses, tableCardTitle, tableContentsText, tableHeaderText} from '../fixtures/appData/card-content';
 
 describe('Card test suite:', function() {
@@ -54,13 +51,6 @@ describe('Card test suite:', function() {
             checkElementTextValue(compactCardListItems, cardListItemText);
             checkElArrIsClickable(compactCardHeader);
             checkElArrIsClickable(compactCardListItems);
-            // skip IE due to https://github.com/SAP/fundamental-ngx/issues/4310
-            if (!browserIsIE()) {
-                expect(getCSSPropertyByName(compactCardListItems, fontSizeAttr).value)
-                    .toBe(compactFont);
-                return;
-            }
-            console.log('skip IE due to issue #4310');
         });
     });
 
@@ -114,14 +104,6 @@ describe('Card test suite:', function() {
             checkElementTextValue(tableCardItemPrices, tableCardPrices);
             checkElementTextValue(tableCardItemStatuses, tableCardStatuses);
             checkElArrIsClickable(tableCardItems);
-        });
-
-        xit('should check status colors', () => {
-            const statusesCount = getElementArrayLength(tableCardItemStatuses);
-            for (let i = 0; statusesCount > i; i++) {
-                expect(getCSSPropertyByName(tableCardItemStatuses, colorAttr, i).value)
-                    .toContain(statusColors[i]);
-            }
         });
     });
 

@@ -1,7 +1,7 @@
 import { Platform } from '@angular/cdk/platform';
 import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 
-import { LETTERS_UNICODE_RANGE } from '../utils/consts/unicode-letters.regex';
+import { LETTERS_UNICODE_RANGE } from '@fundamental-ngx/core/utils';
 
 import { DatetimeAdapter } from './datetime-adapter';
 import { FdDate } from './fd-date';
@@ -22,6 +22,8 @@ const PM_DAY_PERIOD_DEFAULT = 'PM';
 export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
     /** Whether to clamp the date between 1 and 9999 to avoid IE and Edge errors. */
     private readonly _fixYearsRangeIssue: boolean;
+
+    fromNow: undefined;
 
     constructor(@Optional() @Inject(LOCALE_ID) localeId: string, platform: Platform) {
         super();

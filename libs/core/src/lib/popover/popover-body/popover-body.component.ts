@@ -14,10 +14,10 @@ import { ESCAPE } from '@angular/cdk/keycodes';
 
 import { Subject } from 'rxjs';
 
-import { ARROW_SIZE, ArrowPosition } from '../popover-position/popover-position';
-import { PopoverFlippedXDirection } from '../popover-position/popover-position';
-import { KeyUtil } from '../../utils/functions/key-util';
-import { PopoverPosition } from '../popover-position/popover-position';
+import { ARROW_SIZE, ArrowPosition } from '@fundamental-ngx/core/shared';
+import { PopoverFlippedXDirection } from '@fundamental-ngx/core/shared';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { PopoverPosition } from '@fundamental-ngx/core/shared';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 
 /**

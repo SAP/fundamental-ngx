@@ -24,10 +24,14 @@ import { coerceNumberProperty, _isNumberValue } from '@angular/cdk/coercion';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
-import { applyCssClass, ContentDensityService, CssClassBuilder, KeyUtil, RtlService } from '../utils/public_api';
-import { PopoverComponent } from '../popover/public_api';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { SliderControlValue, SliderCustomValue, SliderRangeHandles, SliderTickMark, SliderValueTargets } from './slider.model';
 import { MIN_DISTANCE_BETWEEN_TICKS } from './constants';
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,

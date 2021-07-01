@@ -8,10 +8,10 @@ import {
     Optional,
     ViewChild
 } from '@angular/core';
-import { BaseButton, ButtonType } from '../../button/base-button';
-import { ButtonComponent } from '../../button/button.component';
-import { ContentDensityService } from '../../utils/public_api';
+import { BaseButton, ButtonType } from '@fundamental-ngx/core/button';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { Subscription } from 'rxjs';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 @Component({
   selector: 'fd-button-bar',
@@ -51,6 +51,11 @@ export class ButtonBarComponent extends BaseButton implements OnInit, OnDestroy 
     @HostBinding('class.fd-bar__element')
     _barElement = true;
 
+    @HostBinding('style.pointer-events')
+    get pointerEvents(): string {
+        return this._disabled ? 'none' : 'auto';
+    }
+
     /** @hidden */
     @ViewChild(ButtonComponent)
     _buttonComponent: ButtonComponent;
@@ -58,7 +63,10 @@ export class ButtonBarComponent extends BaseButton implements OnInit, OnDestroy 
     /** @hidden */
     private _subscriptions = new Subscription();
 
-    constructor(@Optional() private _contentDensityService: ContentDensityService, private _cdRef: ChangeDetectorRef) {
+    constructor(
+        @Optional() private _contentDensityService: ContentDensityService,
+        private _cdRef: ChangeDetectorRef,
+        ) {
         super();
     }
 

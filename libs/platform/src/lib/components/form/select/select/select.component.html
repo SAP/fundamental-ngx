@@ -14,7 +14,7 @@
 [attr.aria-readonly]="readonly"
 attr.role="listbox"
 [value]="value"
-[state]="state"
+[state]="selectState"
 [stateMessage]="stateMessage"
 [mobile]="mobile"
 [mobileConfig]="mobileConfig"
@@ -34,7 +34,7 @@ attr.role="listbox"
            [ngTemplateOutletContext]="{ optionItem: item, index: index }"></ng-container>
 
     </fd-option>
-  
+
  </fd-select>
 
 <ng-template let-optionItem="optionItem" let-index="index" #listItem>

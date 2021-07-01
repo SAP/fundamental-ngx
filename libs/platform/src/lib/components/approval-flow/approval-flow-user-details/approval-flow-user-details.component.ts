@@ -10,9 +10,6 @@ import { ApprovalUser } from '../interfaces';
 })
 export class ApprovalFlowUserDetailsComponent {
     @Input() user: ApprovalUser;
-
     @Input() details: Observable<any>;
-
     @Input() detailsTemplate: TemplateRef<any> ;
-
 }

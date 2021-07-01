@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CalendarYearGrid } from '@fundamental-ngx/core';
+import { CalendarYearGrid } from '@fundamental-ngx/core/calendar';
 
 @Component({
     selector: 'fd-calendar-grid-example',

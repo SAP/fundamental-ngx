@@ -19,14 +19,14 @@ import { takeUntil } from 'rxjs/operators';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
 
-import { DatetimeAdapter } from '../datetime/datetime-adapter';
+import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { Meridian, SelectableViewItem } from './models';
 import { createMissingDateImplementationError } from './errors';
 import { TimeI18n } from './i18n/time-i18n';
 import { TimeColumnConfig } from './time-column/time-column-config';
 import { TimeColumnComponent } from './time-column/time-column.component';
-import { KeyUtil } from '../utils/functions';
-import { ContentDensityService } from '../utils/public_api';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 export type FdTimeActiveView = 'hour' | 'minute' | 'second' | 'meridian';
 
@@ -258,8 +258,17 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
      * This implicitly changes hours by +/- 12
      */
     handleMeridianChange(meridian: Meridian): void {
-        const hourOffset: number = meridian === Meridian.AM ? -12 : 12;
-        const currentHour = this._getModelHour();
+        let hourOffset: number = meridian === Meridian.AM ? -12 : 12;
+        let currentHour = this._getModelHour();
+
+        if (currentHour > 12 && meridian === Meridian.PM) {
+            currentHour -= 12;
+        } else if (currentHour === 12) {
+            currentHour = 0;
+        } else if (currentHour < 12 && meridian === Meridian.AM) {
+            hourOffset = 0;
+        }
+        
         const newHour = Math.max(0, Math.min(23, currentHour + hourOffset));
 
         this.handleHourChange(newHour);

@@ -12,11 +12,10 @@ import {
     TemplateRef,
     ViewChild,
     Optional,
-    Provider,
-    forwardRef,
-    ElementRef,
     Host,
-    SkipSelf
+    SkipSelf,
+    Provider,
+    forwardRef
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
@@ -29,13 +28,14 @@ import { Column, LabelLayout, HintPlacement } from '../../form-options';
 import { FormGroupContainer } from '../../form-group';
 import { FormFieldGroup } from '../../form-field-group';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
+import { FormFieldGroupComponent } from '../form-field-group/form-field-group.component';
 
-export const formFieldProvider: Provider = {
+const formFieldProvider: Provider = {
     provide: FormField,
     useExisting: forwardRef(() => FormFieldComponent)
 };
 
-export const formGroupChildProvider: Provider = {
+const formGroupChildProvider: Provider = {
     provide: FORM_GROUP_CHILD_FIELD_TOKEN,
     useExisting: forwardRef(() => FormFieldComponent)
 };

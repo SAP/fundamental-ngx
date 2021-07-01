@@ -22,14 +22,16 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { FormControlComponent } from '../form/form-control/form-control.component';
+import { FormControlComponent } from '@fundamental-ngx/core/form';
 import { TokenComponent } from './token.component';
-import { RtlService } from '../utils/services/rtl.service';
-import { applyCssClass, ContentDensityService, CssClassBuilder } from '../utils/public_api';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { fromEvent, Subject, Subscription } from 'rxjs';
-import { KeyUtil } from '../utils/functions';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { A, BACKSPACE, DELETE, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 import { filter, takeUntil, tap } from 'rxjs/operators';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fd-tokenizer',

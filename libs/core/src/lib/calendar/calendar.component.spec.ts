@@ -5,7 +5,7 @@ import { FdDatetimeModule, FdDate } from '../datetime';
 import { CalendarComponent } from './calendar.component';
 import { CalendarModule } from './calendar.module';
 import { ButtonModule } from '../button/button.module';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
 
 describe('CalendarComponent', () => {
     let component: CalendarComponent<FdDate>;

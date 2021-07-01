@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 
 import { DynamicSideContentMainComponent } from './dynamic-side-content-main.component';
-import { CLASS_NAME } from './constants';
+import { DYNAMIC_SIDE_CONTENT_CLASS_NAME } from './constants';
 
 describe('DynamicSideContentMainComponent', () => {
     let fixture: ComponentFixture<DynamicSideContentMainComponent>;
@@ -26,6 +26,6 @@ describe('DynamicSideContentMainComponent', () => {
     });
 
     it('should add className to host', () => {
-        expect(fixture.debugElement.classes[CLASS_NAME.main]).toBeTrue();
+        expect(fixture.debugElement.classes[DYNAMIC_SIDE_CONTENT_CLASS_NAME.main]).toBeTrue();
     });
 });

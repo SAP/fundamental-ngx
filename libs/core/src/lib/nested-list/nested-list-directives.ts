@@ -13,9 +13,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { NestedItemService } from './nested-item/nested-item.service';
-import { applyCssClass } from '../utils/decorators/apply-css-class.decorator';
-import { CssClassBuilder } from '../utils/interfaces/css-class-builder.interface';
-import { RtlService } from '../utils/services/rtl.service';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 

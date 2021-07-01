@@ -8,10 +8,10 @@ import { DynamicPageLayoutActionsComponent } from './dynamic-page-header/actions
 import { DynamicPageSubheaderComponent } from './dynamic-page-header/subheader/dynamic-page-subheader.component';
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
 import { DynamicPageComponent } from './dynamic-page.component';
-import { ButtonModule } from '../button/button.module';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { DynamicPageTitleContentComponent } from './dynamic-page-header/actions/dynamic-page-title-content.component';
-import { ToolbarModule } from '../toolbar/toolbar.module';
-import { PopoverModule } from '../popover/popover.module';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 
 @NgModule({
     declarations: [

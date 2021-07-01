@@ -1,18 +1,11 @@
 import { ObjectMarkerPo } from '../pages/object-marker.po';
 import {
-    getAttributeByName,
-    getCSSPropertyByName, getElementAriaLabel,
+    getElementAriaLabel,
     getElementArrayLength, getElementTitle,
-    mouseHoverElement,
     refreshPage,
-    scrollIntoView,
     waitForPresent
 } from '../../driver/wdio';
-import {
-    iconStatusesList,
-    textDecorationAttribute,
-    textDecorationValues,
-} from '../fixtures/appData/object-marker-contents';
+import { iconStatusesList } from '../fixtures/appData/object-marker-contents';
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
 
 describe('Object marker test suite', function() {
@@ -40,15 +33,6 @@ describe('Object marker test suite', function() {
         }
     });
 
-    it('Verify marker hover state', () => {
-        const objectMarkerCount = getElementArrayLength(clickableMarkers);
-        for (let i = 0; i < objectMarkerCount; i++) {
-            scrollIntoView(clickableMarkers, i);
-            mouseHoverElement(clickableMarkers, i);
-            expect(textDecorationValues).toContain(getCSSPropertyByName(clickableMarkers, textDecorationAttribute, i).value);
-        }
-    });
-
     it('Verify RTL and LTR orientation', () => {
         objectMarkerPage.checkRtlSwitch();
     });
@@ -57,6 +41,6 @@ describe('Object marker test suite', function() {
         refreshPage();
         waitForPresent(marker);
         objectMarkerPage.saveExampleBaselineScreenshot();
-        expect(objectMarkerPage.compareWithBaseline()).toBeLessThan(3);
+        expect(objectMarkerPage.compareWithBaseline()).toBeLessThan(5);
     });
 });

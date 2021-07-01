@@ -75,7 +75,7 @@ describe('File uploader test suite', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             fileUploaderPage.saveExampleBaselineScreenshot();
-            expect(fileUploaderPage.compareWithBaseline()).toBeLessThan(3);
+            expect(fileUploaderPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 

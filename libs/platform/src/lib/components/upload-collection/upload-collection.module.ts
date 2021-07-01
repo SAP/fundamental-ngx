@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import {
     ToolbarModule,
@@ -57,7 +58,8 @@ import { MoveToComponent } from './dialogs/move-to/move-to.component';
         FileUploaderModule,
         ListModule,
         PlatformPipeModule,
-        PlatformMenuButtonModule
+        PlatformMenuButtonModule,
+        RouterModule
     ],
     exports: [UploadCollectionComponent]
 })

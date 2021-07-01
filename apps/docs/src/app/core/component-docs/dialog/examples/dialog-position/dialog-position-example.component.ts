@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DialogConfig, DialogService } from '@fundamental-ngx/core';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 
 @Component({
     selector: 'fd-dialog-position-example',
@@ -12,7 +12,9 @@ export class DialogPositionExampleComponent {
         this._dialogService.open(template, {
             width: '300px',
             responsivePadding: true,
-            position: { bottom: '100px', right: '100px' }
+            position: { bottom: '100px', right: '100px' },
+            ariaLabelledBy: 'fd-dialog-header-6',
+            ariaDescribedBy: 'fd-dialog-body-6'
         });
     }
 }

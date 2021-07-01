@@ -5,7 +5,7 @@ import { TemplateModule } from '../../utils/directives/template/template.module'
 import { MessageBoxFooterComponent, MessageBoxButtonClass } from './message-box-footer.component';
 import { MessageBoxConfig } from '../utils/message-box-config.class';
 import { BarModule } from '../../bar/bar.module';
-import { whenStable } from '../../utils/tests';
+import { whenStable } from '@fundamental-ngx/core/tests';
 
 
 @Component({

@@ -7,8 +7,8 @@ import { IconDocsComponent } from './icon-docs.component';
 import { IconExampleComponent } from './examples/icon-example.component';
 import { IconTNTExampleComponent } from './examples/icon-tnt-example.component';
 import { IconBusinessSuiteInAppSymbolsExampleComponent } from './examples/icon-businessSuiteInAppSymbols-example.component';
-import { IconModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { IconModule } from '@fundamental-ngx/core/icon';
 
 const routes: Routes = [
     {

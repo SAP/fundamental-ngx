@@ -7,6 +7,7 @@
         zone="zLeft"
         rank="1"
         placeholder="Choose file to upload"
+        required="true"
     >
         <fdp-file-uploader
             ariaLabel="Choose file"
@@ -20,6 +21,7 @@
             [(ngModel)]="files"
             multiple="true"
             (selectionChange)="handleFileSelection($event)"
+            (invalidFileChange)="handleInvalidFileSelection($event)"
         ></fdp-file-uploader>
     </fdp-form-field>
 </fdp-form-group>
@@ -31,3 +33,12 @@ Files Selected:
 <span *ngFor="let file of this.files">
     <span class="green">{{ file.name }} </span><br
 /></span>
+
+
+<br />
+
+Invalid Files:
+<br />
+<span *ngFor="let file of invalidFiles">
+    <span class="red">{{ file.name }} </span><br />
+</span>

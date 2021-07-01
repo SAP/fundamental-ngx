@@ -12,7 +12,8 @@ import {
     ObjectIdentifierLinkExampleComponent
 } from './examples/object-identifier-components';
 import { ObjectIdentifierTableExampleComponent } from './examples/object-identifier-table-example.component';
-import { ObjectIdentifierModule, TableModule } from '@fundamental-ngx/core';
+import { ObjectIdentifierModule } from '@fundamental-ngx/core/object-identifier';
+import { TableModule } from '@fundamental-ngx/core/table';
 
 const routes: Routes = [
     {

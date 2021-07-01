@@ -1,5 +1,4 @@
 import { Component, LOCALE_ID, ViewChild } from '@angular/core';
-import { DatePickerComponent, FdDate, DatetimeAdapter, FdDatetimeAdapter } from '@fundamental-ngx/core';
 
 import moment from 'moment';
 // Moment locale data required for this example
@@ -9,6 +8,8 @@ import 'moment/locale/de';
 import 'moment/locale/fr';
 import 'moment/locale/bg';
 import 'moment/locale/pl';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
 
 @Component({
     selector: 'fd-date-picker-complex-i18n-example',

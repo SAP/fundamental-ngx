@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MOBILE_MODE_CONFIG, MobileModeControl, MobileModeConfigToken, DialogConfig } from '@fundamental-ngx/core';
+import { MobileModeConfigToken, MobileModeControl, MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
 
 const SELECT_MOBILE_CONFIG: MobileModeConfigToken = {
     target: MobileModeControl.SELECT,

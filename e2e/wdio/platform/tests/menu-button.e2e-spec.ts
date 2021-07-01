@@ -1,15 +1,11 @@
 import { MenuButtonPo } from '../pages/menu-button.po';
 import {
-    alignmentCenter,
-    btnColorArr,
     compactAttr,
     cozyAndCompactBtnTextArr,
     disabledState,
     icon,
     iconAttr,
     selectedItem,
-    textAlignmentAttr,
-    textColorAttr,
     tooltipAttr,
     truncatedBtnNoIconTooltipText,
     truncatedBtnText,
@@ -21,7 +17,6 @@ import {
     click,
     doubleClick,
     getAttributeByName,
-    getCSSPropertyByName,
     getElementArrayLength,
     getText,
     isElementDisplayed,
@@ -56,11 +51,6 @@ describe('Menu button test suite', function() {
         });
 
         it('should check selected menu option and close menu', () => {
-            // skip for IE https://github.com/SAP/fundamental-ngx/issues/4058
-            if (browserIsIEorSafari()) {
-                console.log('Skip for Safari and IE');
-                return;
-            }
             click(cozyBtnArr);
             click(menuItemArr);
 
@@ -69,32 +59,17 @@ describe('Menu button test suite', function() {
         });
 
         it('should check menu items visible', () => {
-            // skip for IE https://github.com/SAP/fundamental-ngx/issues/4058
-            if (browserIsIE()) {
-                console.log('Skip for IE');
-                return;
-            }
             click(cozyBtnArr);
             expect(isElementDisplayed(menuItemOverlay)).toBe(true);
         });
 
         it('should check close menu by clicking menu btn', () => {
-            // skip for IE https://github.com/SAP/fundamental-ngx/issues/4058
-            if (browserIsIE()) {
-                console.log('Skip for IE');
-                return;
-            }
             doubleClick(cozyBtnArr);
             expect(isElementDisplayed(menuItemOverlay)).toBe(false);
 
         });
 
         it('should check closing menu when clicking outside of menu', () => {
-            // skip for IE https://github.com/SAP/fundamental-ngx/issues/4058
-            if (browserIsIE()) {
-                console.log('Skip for IE');
-                return;
-            }
             waitForPresent(cozyBtnArr);
             click(cozyBtnArr);
             waitForElDisplayed(menuItemOverlay);
@@ -123,23 +98,15 @@ describe('Menu button test suite', function() {
             }
         });
 
-        it('should check cozy btn text and colors', () => {
+        it('should check cozy btn text', () => {
             const cozyBtnTextArrLength = getElementArrayLength(cozyBtnAttrArr);
-            const cozyBtnArrLength = getElementArrayLength(cozyBtnArr);
 
             for (let i = 0; cozyBtnTextArrLength > i; i++) {
                 expect(getText(cozyBtnAttrArr, i).trim()).toEqual(cozyAndCompactBtnTextArr[i]);
             }
-
-            for (let j = 0; cozyBtnArrLength > j; j++) {
-                expect(getCSSPropertyByName(cozyBtnArr, textColorAttr, j).value)
-                    .toContain(btnColorArr[j]);
-                expect(getCSSPropertyByName(cozyBtnArr, textAlignmentAttr, j).value)
-                    .toEqual(alignmentCenter);
-            }
         });
 
-        it('should check compact btn text and colors', () => {
+        it('should check compact btn text', () => {
             const compactBtnTextArrLength = getElementArrayLength(compactBtnAttrArr);
             const compactBtnArrLength = getElementArrayLength(compactBtnArr);
 
@@ -149,10 +116,6 @@ describe('Menu button test suite', function() {
             }
 
             for (let j = 0; compactBtnArrLength > j; j++) {
-                expect(getCSSPropertyByName(compactBtnArr, textColorAttr, j).value)
-                    .toContain(btnColorArr[j]);
-                expect(getCSSPropertyByName(compactBtnArr, textAlignmentAttr, j).value)
-                    .toEqual(alignmentCenter);
                 expect(getAttributeByName(compactBtnArr, compactAttr)).toEqual('true');
             }
         });
@@ -161,43 +124,42 @@ describe('Menu button test suite', function() {
     describe('Check types of menu buttons', function() {
 
         it('should check disabled buttons', () => {
-            // https://github.com/SAP/fundamental-ngx/issues/3757 first btn is enabled, start from 0 after fix
-            for (let i = 1; 6 > i; i++) {
+            for (let i = 0; 5 > i; i++) {
                 expect(getAttributeByName(menuTypeBtnAttrArr, disabledState, i)).toEqual('true');
             }
         });
 
         it('should check btn with and without icon', () => {
             waitForElDisplayed(menuTypeBtnArr, 0);
-            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 6)).toBe(icon);
+            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 5)).toBe(icon);
+            expect(getText(menuTypeBtnArr, 5).trim()).toEqual(cozyAndCompactBtnTextArr[0]);
+            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 6)).toBe(null);
             expect(getText(menuTypeBtnArr, 6).trim()).toEqual(cozyAndCompactBtnTextArr[0]);
-            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 7)).toBe(null);
-            expect(getText(menuTypeBtnArr, 7).trim()).toEqual(cozyAndCompactBtnTextArr[0]);
-            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 8)).toBe(icon);
-            expect(getText(menuTypeBtnArr, 8).trim()).toBe('');
+            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 7)).toBe(icon);
+            expect(getText(menuTypeBtnArr, 7).trim()).toBe('');
         });
 
         it('should check compact btn with and without icon', () => {
-            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 9)).toBe(icon);
+            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 8)).toBe(icon);
+            expect(getText(menuTypeBtnArr, 8).trim()).toEqual(cozyAndCompactBtnTextArr[0]);
+            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 9)).toBe(null);
             expect(getText(menuTypeBtnArr, 9).trim()).toEqual(cozyAndCompactBtnTextArr[0]);
-            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 10)).toBe(null);
-            expect(getText(menuTypeBtnArr, 10).trim()).toEqual(cozyAndCompactBtnTextArr[0]);
-            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 11)).toBe(icon);
-            expect(getText(menuTypeBtnArr, 11).trim()).toBe('');
+            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 10)).toBe(icon);
+            expect(getText(menuTypeBtnArr, 10).trim()).toBe('');
 
-            for (let i = 9; 12 > i; i++) {
+            for (let i = 8; 11 > i; i++) {
                 expect(getAttributeByName(menuTypeBtnArr, compactAttr, i)).toBe('true');
             }
         });
 
         it('should check long text menu btn with and without icon', () => {
-            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 12)).toContain(icon);
+            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 11)).toContain(icon);
+            expect(getText(menuTypeBtnArr, 11).trim()).toEqual(truncatedBtnText);
+            expect(getAttributeByName(menuTypeBtnArr, tooltipAttr, 11))
+                .toContain(truncatedBtnTooltipText);
+            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 12)).toBe(null);
             expect(getText(menuTypeBtnArr, 12).trim()).toEqual(truncatedBtnText);
             expect(getAttributeByName(menuTypeBtnArr, tooltipAttr, 12))
-                .toContain(truncatedBtnTooltipText);
-            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 13)).toBe(null);
-            expect(getText(menuTypeBtnArr, 13).trim()).toEqual(truncatedBtnText);
-            expect(getAttributeByName(menuTypeBtnArr, tooltipAttr, 13))
                 .toBe(truncatedBtnNoIconTooltipText);
         });
     });
@@ -211,7 +173,7 @@ describe('Menu button test suite', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             menuBtnPage.saveExampleBaselineScreenshot();
-            expect(menuBtnPage.compareWithBaseline()).toBeLessThan(3);
+            expect(menuBtnPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 })

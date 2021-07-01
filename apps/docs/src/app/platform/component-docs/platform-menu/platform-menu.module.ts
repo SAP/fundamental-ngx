@@ -14,7 +14,7 @@ import { PlatformMenuScrollingExampleComponent } from './platform-menu-examples/
 import { PlatformMenuXPositionExampleComponent } from './platform-menu-examples/platform-menu-x-position-example.component';
 import { PlatformMenuWithIconsExampleComponent } from './platform-menu-examples/platform-menu-with-icons-example.component';
 import { PlatformMenuModule, PlatformButtonModule, } from '@fundamental-ngx/platform';
-import { AvatarModule } from '@fundamental-ngx/core';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
 
 const routes: Routes = [
     {

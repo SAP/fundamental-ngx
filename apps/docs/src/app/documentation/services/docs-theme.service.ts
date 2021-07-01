@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { ThemeServiceOutput } from '@fundamental-ngx/core/utils';
 import { Subject } from 'rxjs';
-import { ThemeServiceOutput } from '@fundamental-ngx/core';
 
 @Injectable()
 export class DocsThemeService {

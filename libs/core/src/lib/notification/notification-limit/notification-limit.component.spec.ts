@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NotificationLimitComponent } from './notification-limit.component';
-import { whenStable } from '../../utils/tests';
+import { whenStable } from '@fundamental-ngx/core/tests';
 
 describe('NotificationLimitComponent', () => {
     let component: NotificationLimitComponent;

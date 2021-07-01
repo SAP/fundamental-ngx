@@ -8,7 +8,7 @@ import { ScrollSpyOffsetExampleComponent } from './examples/scroll-spy-custom-of
 import { ScrollSpyExampleComponent } from './examples/scroll-spy-example/scroll-spy-example.component';
 import { ScrollSpyHeaderComponent } from './scroll-spy-header/scroll-spy-header.component';
 import { ScrollSpyDocsComponent } from './scroll-spy-docs.component';
-import { ScrollSpyModule } from '@fundamental-ngx/core';
+import { ScrollSpyModule } from '@fundamental-ngx/core/scroll-spy';
 
 const routes: Routes = [
     {

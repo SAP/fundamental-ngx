@@ -4,7 +4,6 @@
     aria-label="split-button"
     [attr.dir]="dir"
     [style.max-width]="splitButtonMaxWidth"
-    [fdpMenuTriggerFor]="menu"
 >
     <button
         fd-button
@@ -18,7 +17,7 @@
         [disabled]="disabled"
         [fdType]="type"
         [glyph]="icon"
-        [attr.tabindex]="0"
+        [attr.tabindex]="tabindex"
         [compact]="contentDensity === 'compact'"
         (click)="primaryButtonClicked($event)"
     >
@@ -32,8 +31,9 @@
         [glyph]="'slim-arrow-down'"
         [disabled]="disabled"
         [fdType]="type"
-        [attr.tabindex]="0"
+        [attr.tabindex]="tabindex"
         [compact]="contentDensity === 'compact'"
         [attr.aria-haspopup]="true"
+        [fdpMenuTriggerFor]="menu"
     ></button>
 </div>

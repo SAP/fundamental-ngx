@@ -2,7 +2,7 @@ import {
     ElementRef, Injectable,
 } from '@angular/core';
 import { MessageStates } from './form-message.component';
-import { PopoverService } from '../../popover/popover-service/popover.service';
+import { PopoverService } from '@fundamental-ngx/core/popover';
 import { CSS_CLASS_NAME, getTypeClassName } from './constants';
 
 @Injectable()

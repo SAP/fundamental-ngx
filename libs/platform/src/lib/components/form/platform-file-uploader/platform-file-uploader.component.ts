@@ -6,6 +6,7 @@ import {
     EventEmitter,
     Host,
     Input,
+    OnInit,
     Optional,
     Output,
     Self,
@@ -37,7 +38,7 @@ export class FileUploaderSelectionChangeEvent {
     templateUrl: './platform-file-uploader.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformFileUploaderComponent extends BaseInput {
+export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
     /** Button value */
     @Input()
     buttonLabel: string;
@@ -130,6 +131,11 @@ export class PlatformFileUploaderComponent extends BaseInput {
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
         super(_cd, ngControl, ngForm, formField, formControl);
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        super.ngOnInit();
     }
 
     /** Handle valid file changes event handler */

@@ -11,11 +11,13 @@ import {
     Optional
 } from '@angular/core';
 
-import { applyCssClass, ContentDensityService, CssClassBuilder } from '../utils/public_api';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 import { CLASS_NAME, CardType } from './constants';
-import { getCardModifierClassNameByCardType } from './utils';
 import { Subscription } from 'rxjs';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { getCardModifierClassNameByCardType } from './utils';
 
 let cardId = 0;
 

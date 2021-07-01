@@ -21,10 +21,10 @@ import { startWith, takeUntil } from 'rxjs/operators';
 import {
     FocusEscapeDirection,
     KeyboardSupportService
-} from '../utils/services/keyboard-support/keyboard-support.service';
+} from '@fundamental-ngx/core/utils';
 import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
 import { ListFocusItem } from './list-focus-item.model';
-import { ContentDensityService } from '../utils/public_api';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 type FocusItem = ListGroupHeaderDirective | ListItemComponent;
 /**

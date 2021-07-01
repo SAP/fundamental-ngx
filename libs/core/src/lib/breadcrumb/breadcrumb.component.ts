@@ -16,13 +16,13 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
-import { RtlService } from '../utils/services/rtl.service';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { KeyUtil } from '../utils/functions';
-import { MenuComponent } from '../menu/menu.component';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { ContentDensityService } from '../utils/public_api';
-import { Placement } from '../popover/popover-position/popover-position';
+import { Placement } from '@fundamental-ngx/core/shared';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 /**
  * Breadcrumb parent wrapper directive. Must have breadcrumb item child directives.

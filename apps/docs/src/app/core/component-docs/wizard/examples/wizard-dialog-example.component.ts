@@ -1,5 +1,6 @@
 import { Component, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { DialogService, WizardStepStatus } from '@fundamental-ngx/core';
+import { DialogService } from '@fundamental-ngx/core/dialog';
+import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
 @Component({
     selector: 'fd-wizard-dialog-example',

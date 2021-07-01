@@ -62,11 +62,11 @@ export class ApprovalFlowPo extends BaseComponentPo {
         return super.getScreenshotFolder(this.url);
     }
 
-    saveExampleBaselineScreenshot(specName: string = 'action-bar'): void {
+    saveExampleBaselineScreenshot(specName: string = 'approval-flow'): void {
         super.saveExampleBaselineScreenshot(specName, this.getScreenshotFolder());
     }
 
-    compareWithBaseline(specName: string = 'action-bar'): any {
+    compareWithBaseline(specName: string = 'approval-flow'): any {
         return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

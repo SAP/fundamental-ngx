@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { GridListItemOutputEvent } from '@fundamental-ngx/core';
+import { GridListItemOutputEvent } from '@fundamental-ngx/core/grid-list';
 
 interface GridListItem {
     id: number;
@@ -75,6 +75,6 @@ export class GridListMultiSelectExampleComponent {
     }
 
     navigate(event: GridListItemOutputEvent<number>): void {
-        console.log('Navigation event', event);
+        alert('Navigation event value is: ' + event.value);
     }
 }

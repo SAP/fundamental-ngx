@@ -19,7 +19,7 @@ import {
 } from '@angular/core';
 import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { getElementCapacity, getElementWidth, KeyUtil } from '../utils/functions';
+import { getElementCapacity, getElementWidth, KeyUtil } from '@fundamental-ngx/core/utils';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
@@ -27,9 +27,9 @@ import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { TabInfo } from './tab-utils/tab-info.class';
 import { TabsService } from './tabs.service';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { MenuComponent } from '../menu/menu.component';
-import { scrollTop } from '../utils/functions/scroll';
-import { ContentDensityService } from '../utils/public_api';
+import { MenuComponent } from '@fundamental-ngx/core/menu';
+import { scrollTop } from '@fundamental-ngx/core/utils';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 export type TabModes = 'icon-only' | 'process' | 'filter';
 

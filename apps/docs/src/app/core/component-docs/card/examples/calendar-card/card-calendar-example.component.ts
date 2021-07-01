@@ -1,5 +1,5 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
-import { FdCalendarView } from '@fundamental-ngx/core';
+import { FdCalendarView } from '@fundamental-ngx/core/calendar';
 
 @Component({
     selector: 'fd-card-calendar-example',

@@ -10,21 +10,16 @@ import { NotificationOptionsExampleComponent } from './examples/notification-opt
 import { NotificationOpenTemplateExampleComponent } from './examples/template-as-content/notification-open-template-example.component';
 import { NotificationGroupExampleComponent } from './examples/notification-group/notification-group-example.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import { 
-    AvatarModule, 
-    NotificationModule, 
-    NotificationService, 
-    MessageStripModule, 
-    TabsModule, 
-    ButtonModule, 
-    PopoverModule, 
-    MenuModule, 
-    ListModule, 
-    ActionSheetModule, 
-    MessageToastModule 
-} from '@fundamental-ngx/core';
-
-
+import { NotificationModule, NotificationService } from '@fundamental-ngx/core/notification';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { MessageStripModule } from '@fundamental-ngx/core/message-strip';
+import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { MenuModule } from '@fundamental-ngx/core/menu';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
+import { MessageToastModule } from '@fundamental-ngx/core/message-toast';
 
 const routes: Routes = [
     {
@@ -39,15 +34,15 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forChild(routes), 
-        SharedDocumentationPageModule, 
-        NotificationModule, 
-        AvatarModule, 
-        MessageStripModule, 
-        TabsModule, 
-        ButtonModule, 
-        PopoverModule, 
-        MenuModule, 
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        NotificationModule,
+        AvatarModule,
+        MessageStripModule,
+        TabsModule,
+        ButtonModule,
+        PopoverModule,
+        MenuModule,
         ListModule,
         ActionSheetModule,
         MessageToastModule

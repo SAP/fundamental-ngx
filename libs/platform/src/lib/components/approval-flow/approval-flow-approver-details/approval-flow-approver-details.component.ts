@@ -37,8 +37,8 @@ export class ApprovalFlowApproverDetailsComponent implements OnInit {
     /** @hidden */
     _userToShowDetailsData$: Observable<any>;
 
-    constructor(public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) {
-    }
+    /** @hidden */
+    constructor(public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) { }
 
     /** @hidden */
     get _data(): DialogRefData {

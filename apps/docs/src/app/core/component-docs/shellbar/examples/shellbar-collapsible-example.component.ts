@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ShellbarMenuItem, ProductSwitchItem, ShellbarUser, ShellbarUserMenu, ShellbarSizes } from '@fundamental-ngx/core';
+import { ProductSwitchItem } from '@fundamental-ngx/core/product-switch';
+import { ShellbarMenuItem, ShellbarUser, ShellbarUserMenu, ShellbarSizes } from '@fundamental-ngx/core/shellbar';
 
 @Component({
     selector: 'fd-shellbar-collapsible-example',

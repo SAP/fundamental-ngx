@@ -153,20 +153,6 @@ describe('Verify Textarea component', function() {
                 });
         */
 
-        it('should have focused state', () => {
-            mouseHoverElement(basicTextArea);
-            const borderColorOnHover = getCSSPropertyByName(basicTextArea, 'border-bottom-color');
-            expect(borderColorOnHover.value).toContain('8,84,160'); // TODO: Replace with hex
-        });
-
-        it('should have hover state', () => {
-            const borderStyleBefore = getCSSPropertyByName(basicTextArea, 'outline-style');
-            click(basicTextArea);
-            const borderStyle = getCSSPropertyByName(basicTextArea, 'outline-style');
-            expect(borderStyleBefore.value).toBe('none');
-            expect(borderStyle.value).toBe('dotted');
-        });
-
         it('should have * if textarea is mandatory', () => {
             const labelAsterisk = executeScriptAfterTagAttr(detailedTextAreaLabel, 'content');
             expect(labelAsterisk).toBe('"*"');
@@ -174,11 +160,9 @@ describe('Verify Textarea component', function() {
 
         it('should see an error if trying to submit empty mandatory textarea', () => {
             clearValue(detailedTextArea);
-            const borderColor = getCSSPropertyByName(detailedTextArea, 'border-bottom-color');
             mouseHoverElement(detailedTextArea);
             const errorText = getText(detailedTextAreaErrorMessage);
 
-            expect(borderColor.value).toContain('187,0,0');  // TODO: Replace with hex
             expect(errorText.trim()).toBe('Value is required');
         });
         // TODO: Need to be fixed for EdgeWin
@@ -186,20 +170,16 @@ describe('Verify Textarea component', function() {
             // need to sendKeys because of the issue with characters counter
             addValue(detailedTextArea, 'test');
             const charCounterText1 = getText(detailedTextAreaCharacterCounter);
-            const borderColorBefore = getCSSPropertyByName(detailedTextArea, 'border-bottom-color');
 
             addValue(detailedTextArea, 'test');
             const charCounterText2 = getText(detailedTextAreaCharacterCounter);
             setValue(detailedTextArea, 'test');
             mouseHoverElement(detailedTextArea);
-            const borderColorAfter = getCSSPropertyByName(detailedTextArea, 'border-bottom-color');
             const charCounterText3 = getText(detailedTextAreaCharacterCounter);
 
             expect(charCounterText1.trim()).toBe('21 characters over the limit');
             expect(charCounterText2.trim()).toBe('25 characters over the limit');
-            expect(borderColorBefore.value).toContain('187,0,0');
             expect(charCounterText3.trim()).toBe('6 characters remaining');
-            expect(borderColorAfter.value).toContain('8,84,160');
         });
 
         it('should show error if more than permitted characters were added', () => {
@@ -286,9 +266,8 @@ describe('Verify Textarea component', function() {
         describe('Check visual regression', function() {
             it('should check examples visual regression', () => {
                 textareaPage.saveExampleBaselineScreenshot();
-                expect(textareaPage.compareWithBaseline()).toBeLessThan(3);
+                expect(textareaPage.compareWithBaseline()).toBeLessThan(5);
             });
         });
     });
-
 });

@@ -4,9 +4,10 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { BusyIndicatorHeaderComponent } from './busy-indicator-header/busy-indicator-header.component';
 import { BusyIndicatorDocsComponent } from './busy-indicator-docs.component';
-import { BusyIndicatorModule, FormModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { examples } from './examples';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { FormModule } from '@fundamental-ngx/core/form';
 
 const routes: Routes = [
     {

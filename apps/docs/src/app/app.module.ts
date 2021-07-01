@@ -5,7 +5,7 @@ import { MarkdownModule } from 'ngx-markdown';
 
 import { AppComponent } from './app.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ContentDensityService } from '@fundamental-ngx/core';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {

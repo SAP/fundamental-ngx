@@ -5,6 +5,7 @@
     buttonLabel="Browse"
     buttonAriaLabel="browse file"
     accept=".png,.jpg"
+    required="true"
     [(ngModel)]="files"
     [multiple]="true"
     (selectedFilesChanged)="handleFileSelection($event)"

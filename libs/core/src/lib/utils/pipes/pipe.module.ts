@@ -7,7 +7,19 @@ import { ListGroupPipe } from './list-group.pipe';
 import { SafePipe } from './safe.pipe';
 
 @NgModule({
-    declarations: [DisplayFnPipe, SearchHighlightPipe, TwoDigitsPipe, ListGroupPipe, SafePipe],
-    exports: [DisplayFnPipe, SearchHighlightPipe, TwoDigitsPipe, ListGroupPipe, SafePipe]
+    declarations: [
+        DisplayFnPipe,
+        SearchHighlightPipe,
+        TwoDigitsPipe,
+        ListGroupPipe,
+        SafePipe,
+    ],
+    exports: [
+        DisplayFnPipe,
+        SearchHighlightPipe,
+        TwoDigitsPipe,
+        ListGroupPipe,
+        SafePipe
+    ]
 })
-export class PipeModule { }
+export class PipeModule {}

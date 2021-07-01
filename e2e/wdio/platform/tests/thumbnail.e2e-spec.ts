@@ -63,31 +63,11 @@ describe('Thumbnail field', function() {
         }
     });
 
-    it('should highlight on hover', () => {
-        scrollIntoView(verticalGalleryImages);
-        const arrLength = getElementArrayLength(verticalGalleryImages);
-        for (let i = 0; arrLength > i; i++) {
-            scrollIntoView(verticalGalleryImages, i);
-            mouseHoverElement(verticalGalleryImages, i);
-            expect(getParentElementCSSProperty(verticalGalleryImages, 'border-bottom-color', i)).toContain('8,84,160');
-        }
-
-        for (let i = 0; arrLength > i; i++) {
-            scrollIntoView(horizontalGalleryImages, i);
-            mouseHoverElement(horizontalGalleryImages, i);
-            expect(getParentElementCSSProperty(horizontalGalleryImages, 'border-bottom-color', i)).toContain('8,92,175');
-        }
-
-        for (let i = 0; arrLength > i; i++) {
-            scrollIntoView(verticalGalleryVideo, i);
-            mouseHoverElement(verticalGalleryVideo, i);
-            expect(getParentElementCSSProperty(verticalGalleryVideo, 'border-bottom-color', i)).toContain('8,84,160');
-        }
-    });
-
     it('should be able to close gallery popup', () => {
+        scrollIntoView(verticalGalleryImages, 4);
         waitForElDisplayed(verticalGalleryImages, 4);
         clickWithOption(verticalGalleryImages, 4, 5000, {x: 10});
+        scrollIntoView(galleryDialog);
         waitForElDisplayed(galleryDialog);
         click(galleryDialogCloseButton);
 
@@ -120,7 +100,7 @@ describe('Thumbnail field', function() {
     describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             thumbnailPage.saveExampleBaselineScreenshot();
-            expect(thumbnailPage.compareWithBaseline()).toBeLessThan(3);
+            expect(thumbnailPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

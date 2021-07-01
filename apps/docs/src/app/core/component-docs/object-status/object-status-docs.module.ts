@@ -14,8 +14,8 @@ import {
     ObjectStatusLargeExampleComponent
 } from './examples/object-status-examples.component';
 import { ObjectStatusHeaderComponent } from './object-status-header/object-status-header.component';
-import { ObjectStatusModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 
 const routes: Routes = [
     {

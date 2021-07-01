@@ -7,8 +7,8 @@ import {
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
-import { CssClassBuilder } from '../../utils/interfaces/css-class-builder.interface';
-import { applyCssClass } from '../../utils/decorators/apply-css-class.decorator';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
 import { CSS_CLASS_NAME, getTypeClassName } from './constants';
 
 export type MessageStates = 'success' | 'error' | 'warning' | 'information';

@@ -1,16 +1,14 @@
 import { LinkPo } from '../pages/link.po';
 import {
     defaultLink_alt_text,
+    iconLinkAriaLabel,
     googleLink,
-    linkFocusState,
     standardLinksAltTextArray,
     truncatedLink_alt_text
 } from '../fixtures/appData/link-page-contents';
 import {
-    browserIsIEorSafari,
     click,
     getAttributeByName,
-    getCSSPropertyByName,
     getCurrentUrl, getElementAriaLabel,
     getElementArrayLength, getElementClass, getElementTitle,
     isElementClickable,
@@ -34,8 +32,8 @@ describe('Link component test suite', function() {
 
         mouseHoverElement(iconLink);
         checkLinkData(iconLink);
-        checkLinkHover(iconLink);
-        expect(iconLinkAltText).toBe(defaultLink_alt_text);
+        expect(iconLinkAltText).toBe(iconLinkAriaLabel);
+        expect(getElementTitle(iconLink)).toBe(defaultLink_alt_text);
         expect(isElementClickable(iconLink)).toBe(true);
     });
 
@@ -44,30 +42,26 @@ describe('Link component test suite', function() {
 
         const arrL = getElementArrayLength(standardLinks);
         for (let i = 0; arrL > i; i++) {
-            // after fix: https://github.com/SAP/fundamental-ngx/issues/3633 need to remove if statement index 9
-            if (i !== 9) {
-                expect(getElementAriaLabel(standardLinks, i)).toBe(standardLinksAltTextArray[i]);
-                checkLinkData(standardLinks, i);
-                expect(isElementClickable(standardLinks, i)).toBe(true);
-            }
+            expect(getElementTitle(standardLinks, i)).toBe(standardLinksAltTextArray[i]);
+            checkLinkData(standardLinks, i);
+            expect(isElementClickable(standardLinks, i)).toBe(true);
         }
     });
 
     it('should check emphasized link', () => {
-        const emphasizedLinkAltText = getElementAriaLabel((emphasizedLink));
+        const emphasizedLinkAltText = getElementTitle((emphasizedLink));
 
         scrollIntoView(emphasizedLink);
         mouseHoverElement(emphasizedLink);
 
         expect(getElementClass(emphasizedLink)).toContain('emphasized');
         checkLinkData(emphasizedLink);
-        checkLinkHover(emphasizedLink);
         expect(emphasizedLinkAltText).toBe(defaultLink_alt_text);
         expect(isElementClickable(emphasizedLink)).toBe(true);
     });
 
     it('should check disabled link', () => {
-        const disabledLinkAltText = getElementAriaLabel(disabledLink);
+        const disabledLinkAltText = getElementTitle(disabledLink);
 
         expect(getElementClass(disabledLink)).toContain('disabled');
         checkDisabledLinkData(disabledLink);
@@ -76,7 +70,7 @@ describe('Link component test suite', function() {
     });
 
     it('should check disabled emphasized link', () => {
-        const disabledEmphasizedLinkAltText = getElementAriaLabel(emphasizedDisabledLink);
+        const disabledEmphasizedLinkAltText = getElementTitle(emphasizedDisabledLink);
 
         expect(getElementClass(emphasizedDisabledLink)).toContain('disabled');
         expect(getElementClass(emphasizedDisabledLink)).toContain( 'emphasized');
@@ -86,25 +80,23 @@ describe('Link component test suite', function() {
     });
 
     it('should check inverted link', () => {
-        const invertedLinkAltText = getElementAriaLabel(invertedLink);
+        const invertedLinkAltText = getElementTitle(invertedLink);
 
         scrollIntoView(invertedLink);
         mouseHoverElement(invertedLink);
         expect(getElementClass(invertedLink)).toContain('inverted');
         checkLinkData(invertedLink);
-        checkLinkHover(invertedLink);
         expect(invertedLinkAltText).toBe(defaultLink_alt_text);
         expect(isElementClickable(invertedLink)).toBe(true);
     });
 
     it('should check truncated link', () => {
-        const truncatedLinkAltText = getElementAriaLabel(truncatedLink);
+        const truncatedLinkAltText = getElementTitle(truncatedLink);
 
         scrollIntoView(truncatedLink);
         mouseHoverElement(truncatedLink);
         expect(getElementClass(truncatedLink)).toContain('truncate');
         checkLinkData(truncatedLink);
-        checkLinkHover(truncatedLink);
         expect(truncatedLinkAltText).toBe(truncatedLink_alt_text);
         expect(isElementClickable(truncatedLink)).toBe(true);
         linkPage.open();
@@ -125,25 +117,15 @@ describe('Link component test suite', function() {
     describe('Check visual regression', function() {
         xit('should check examples visual regression', () => {
             linkPage.saveExampleBaselineScreenshot();
-            expect(linkPage.compareWithBaseline()).toBeLessThan(3);
+            expect(linkPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
 
 function checkLinkData(element, index: number = 0): void {
     expect(getAttributeByName(element, 'type', index)).toBe('text');
-    expect([null, '']).not.toContain(getElementAriaLabel(element, index));
     expect([null, '']).not.toContain(getElementTitle(element, index));
     expect([null, '']).not.toContain(getAttributeByName(element, 'href', index));
-}
-
-function checkLinkHover(element): void {
-    // TODO fix for IE & Safari
-    if (browserIsIEorSafari()) {
-        console.log('skip hover check for IE, Safari');
-        return;
-    }
-    expect(getCSSPropertyByName(element, 'text-decoration').value).toContain(linkFocusState);
 }
 
 function checkLinkTarget(element, site: string, newPageElement): void {
@@ -154,7 +136,7 @@ function checkLinkTarget(element, site: string, newPageElement): void {
 }
 
 function checkDisabledLinkData(element, index: number = 0): void {
-    expect([null, '']).not.toContain(getElementAriaLabel(element, index));
+    expect([null, '']).not.toContain(getElementTitle(element, index));
     expect([null, '']).not.toContain(getElementTitle(element, index));
     expect(getAttributeByName(element, 'type', index)).toBe('text');
 }

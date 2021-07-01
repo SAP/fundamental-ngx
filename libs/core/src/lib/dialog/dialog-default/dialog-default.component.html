@@ -1,32 +1,34 @@
 <fd-dialog>
     <fd-dialog-header>
-        <h1 fd-title>{{ _defaultDialogConfig?.title }}</h1>
+        <h1 fd-title>{{ _defaultDialogContent?.title }}</h1>
         <button fd-dialog-close-button
-                *ngIf="_defaultDialogConfig?.closeButtonCallback"
+                *ngIf="_defaultDialogContent?.closeButtonCallback"
                 (click)="_closeButtonClicked()">
         </button>
-        <ng-container *ngIf="_defaultDialogConfig?.subHeader">
+        <ng-container *ngIf="_defaultDialogContent?.subHeader">
             <ng-template fdTemplate="subheader">
-                <ng-container *ngTemplateOutlet="_defaultDialogConfig.subHeader"></ng-container>
+                <ng-container *ngTemplateOutlet="_defaultDialogContent.subHeader"></ng-container>
             </ng-template>
         </ng-container>
     </fd-dialog-header>
 
-    <fd-dialog-body *ngIf="_defaultDialogConfig?.content">
-        <ng-container *ngTemplateOutlet="_defaultDialogConfig?.content"></ng-container>
+    <fd-dialog-body *ngIf="_defaultDialogContent?.content">
+        <ng-container *ngTemplateOutlet="_defaultDialogContent?.content"></ng-container>
     </fd-dialog-body>
 
     <fd-dialog-footer *ngIf="_showFooter()">
         <fd-button-bar
-                *ngIf="_defaultDialogConfig?.approveButton"
+                *ngIf="_defaultDialogContent?.approveButton"
                 fdType="emphasized"
                 fd-initial-focus
-                [label]="_defaultDialogConfig?.approveButton"
+                [label]="_defaultDialogContent?.approveButton"
+                [compact]="!_defaultDialogConfiguration.mobile"
                 (click)="_approveButtonClicked()">
         </fd-button-bar>
         <fd-button-bar
-                *ngIf="_defaultDialogConfig?.cancelButton"
-                [label]="_defaultDialogConfig?.cancelButton"
+                *ngIf="_defaultDialogContent?.cancelButton"
+                [label]="_defaultDialogContent?.cancelButton"
+                [compact]="!_defaultDialogConfiguration.mobile"
                 (click)="_cancelButtonClicked()">
         </fd-button-bar>
     </fd-dialog-footer>

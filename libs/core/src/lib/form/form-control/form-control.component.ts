@@ -9,9 +9,11 @@ import {
     Optional,
     ViewEncapsulation
 } from '@angular/core';
-import { FormStates } from './form-states';
-import { applyCssClass, ContentDensityService, CssClassBuilder } from '../../utils/public_api';
+import { FormStates } from '@fundamental-ngx/core/shared';
 import { Subscription } from 'rxjs';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass } from '@fundamental-ngx/core/utils';
 
 /**
  * Directive intended for use on form controls.

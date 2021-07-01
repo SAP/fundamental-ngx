@@ -21,7 +21,7 @@ import {
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
 
 import { BasePopoverClass } from './base/base-popover.class';
-import { KeyUtil } from '../utils/functions/key-util';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
 import { PopoverService } from './popover-service/popover.service';
 
@@ -45,6 +45,10 @@ let cdkPopoverUniqueId = 0;
     providers: [PopoverService]
 })
 export class PopoverComponent extends BasePopoverClass implements AfterViewInit, OnDestroy, OnChanges {
+
+    /** Tooltip for popover */
+    @Input()
+    title: string;
 
     /** Reference to popover trigger element */
     @Input()

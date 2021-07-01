@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 
 import { DialogService, RtlService, uuidv4 } from '@fundamental-ngx/core';
@@ -24,7 +26,7 @@ describe('UploadCollectionComponent', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 declarations: [UploadCollectionComponent],
-                imports: [PlatformUploadCollectionModule],
+                imports: [PlatformUploadCollectionModule, RouterModule, RouterTestingModule],
                 providers: [RtlService, DialogService, FilesValidatorService]
             }).compileComponents();
         })

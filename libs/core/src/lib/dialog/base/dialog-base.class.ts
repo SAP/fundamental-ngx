@@ -17,7 +17,7 @@ import { createFocusTrap, FocusTrap } from 'focus-trap';
 import { DialogConfigBase } from './dialog-config-base.class';
 import { DialogRefBase } from './dialog-ref-base.class';
 import { DialogSize, dialogWidthToSize } from '../utils/dialog-width-to-size';
-import { KeyUtil } from '../../utils/functions/key-util';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 
 @Directive()
 export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {

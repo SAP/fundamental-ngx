@@ -9,7 +9,7 @@ import { PanelExpandableExampleComponent } from './examples/panel-expandable-exa
 import { PanelFixedExampleComponent } from './examples/panel-fixed-example.component';
 import { PanelCompactExampleComponent } from './examples/panel-compact-example.component';
 import { PanelFixedHeightExampleComponent } from './examples/panel-fixed-height-example.component';
-import { PanelModule } from '@fundamental-ngx/core';
+import { PanelModule } from '@fundamental-ngx/core/panel';
 
 const routes: Routes = [
     {

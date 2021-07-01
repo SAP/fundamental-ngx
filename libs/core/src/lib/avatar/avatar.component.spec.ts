@@ -11,6 +11,7 @@ import { AvatarComponent } from './avatar.component';
                     [circle]="circle"
                     [transparent]="transparent"
                     [placeholder]="placeholder"
+                    [contain]="contain"
                     [tile]="tile"
                     [colorAccent]="colorAccent"
                     [random]="random"
@@ -25,6 +26,7 @@ class TestComponent {
     circle = false;
     transparent = false;
     placeholder = false;
+    contain = false;
     tile = false;
     colorAccent: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 = null;
     random = false;
@@ -92,6 +94,12 @@ describe('AvatarComponent', () => {
         component.transparent = true;
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.fd-avatar--transparent')).toBeTruthy();
+    });
+
+    it('Should Use background size contain option', () => {
+        component.contain = true;
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('.fd-avatar--background-contain')).toBeTruthy();
     });
 
     it('Should Add Placeholder Background', () => {

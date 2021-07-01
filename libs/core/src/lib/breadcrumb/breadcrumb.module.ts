@@ -5,9 +5,9 @@ import { RouterModule } from '@angular/router';
 import { BreadcrumbComponent } from './breadcrumb.component';
 import { BreadcrumbItemDirective } from './breadcrumb-item.directive';
 import { BreadcrumbLinkDirective } from './breadcrumb-link.directive';
-import { IconModule } from '../icon/icon.module';
-import { PopoverModule } from '../popover/popover.module';
-import { MenuModule } from '../menu/menu.module';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { MenuModule } from '@fundamental-ngx/core/menu';
 
 @NgModule({
     imports: [CommonModule, IconModule, PopoverModule, MenuModule, RouterModule],

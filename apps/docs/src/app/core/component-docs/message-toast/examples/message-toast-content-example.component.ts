@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessageToastRef } from '@fundamental-ngx/core';
+import { MessageToastRef } from '@fundamental-ngx/core/message-toast';
 
 @Component({
     selector: 'fd-message-toast-content-example',

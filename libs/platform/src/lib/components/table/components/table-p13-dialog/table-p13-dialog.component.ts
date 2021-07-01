@@ -22,7 +22,8 @@ const dialogConfig: DialogConfig = {
     responsivePadding: true,
     verticalPadding: true,
     minWidth: '30rem',
-    minHeight: '50%'
+    /** 88px it's the header + footer height */
+    bodyMinHeight: 'calc(50vh - 88px)'
 };
 
 /**
@@ -132,12 +133,12 @@ export class TableP13DialogComponent implements OnDestroy {
         };
 
         const dialogRef = this._dialogService.open(P13FilteringDialogComponent, {
+            ...dialogConfig,
             responsivePadding: false,
             verticalPadding: false,
             width: '50rem',
-            minHeight: '50%',
             data: dialogData
-        } as DialogConfig);
+        });
 
         this._subscriptions.add(
             dialogRef.afterClosed
@@ -187,9 +188,9 @@ export class TableP13DialogComponent implements OnDestroy {
 
         const dialogRef = this._dialogService.open(P13ColumnsDialogComponent, {
             ...dialogConfig,
-            minWidth: '35rem',
             responsivePadding: false,
             verticalPadding: false,
+            minWidth: '35rem',
             data: dialogData
         });
 

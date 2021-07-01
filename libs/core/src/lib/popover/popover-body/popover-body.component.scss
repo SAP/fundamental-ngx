@@ -177,7 +177,7 @@ $fd-popover-background-color: #fff;
 	max-height: initial;
 }
 
-.fd-inline-help__content {
+.fd-popover__popper.fd-inline-help__content {
 	padding: .75rem;
 	font-size: .75rem;
 	font-size: var(--sapFontSmallSize,.75rem);

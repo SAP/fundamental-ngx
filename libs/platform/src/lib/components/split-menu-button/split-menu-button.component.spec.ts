@@ -25,6 +25,7 @@ function mouseClickOnElement(el: Element): void {
             [buttonLabel]="'Default Button'"
             [icon]="'world'"
             [type]="'standard'"
+            [disabled]="disabled"
             (primaryButtonClick)="onPrimaryButtonClick()"
         >
         </fdp-split-menu-button>
@@ -44,6 +45,8 @@ class TestWrapperComponent {
     splitMenuElement: ElementRef;
 
     actionValue: string;
+
+    disabled = false;
 
     onPrimaryButtonClick(): void {
         this.actionValue = 'Default Button';
@@ -92,8 +95,8 @@ describe('SplitMenuButtonComponent', () => {
         /**
          * FIRST-CLICK On Menu Button (OPEN MENU)
          */
-        const splitMenuButton = fixture.debugElement.query(By.css('.fd-button-split'));
-        mouseClickOnElement(splitMenuButton.nativeElement);
+        const splitMenuButton = fixture.debugElement.queryAll(By.css('.fd-button'));
+        mouseClickOnElement(splitMenuButton[1].nativeElement);
         tick(1);
         fixture.detectChanges();
 
@@ -112,7 +115,7 @@ describe('SplitMenuButtonComponent', () => {
         /**
          * FIRST-CLICK On Menu Button (OPEN MENU)
          */
-        mouseClickOnElement(splitMenuButton.nativeElement);
+        mouseClickOnElement(splitMenuButton[1].nativeElement);
         tick(1);
         fixture.detectChanges();
 
@@ -132,5 +135,30 @@ describe('SplitMenuButtonComponent', () => {
         items1[1].dispatchEvent(keyboardEvent2);
         fixture.detectChanges();
         expect(host.actionValue).toBe('Second Item');
+    }));
+
+    it('should not open menu when split-menu-button is disabled', fakeAsync(() => {
+        host.disabled = true;
+        fixture.detectChanges();
+
+        const splitButtons = fixture.debugElement.queryAll(By.css('.fd-button'));
+        expect(splitButtons[0].nativeElement.classList.contains('is-disabled')).toBeTrue();
+        expect(splitButtons[1].nativeElement.classList.contains('is-disabled')).toBeTrue();
+
+        // click on primary button
+        mouseClickOnElement(splitButtons[0].nativeElement);
+        tick(1);
+        fixture.detectChanges();
+
+        const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
+        expect(items.length).toBeFalsy();
+
+        // click on secondary button
+        mouseClickOnElement(splitButtons[1].nativeElement);
+        tick(1);
+        fixture.detectChanges();
+
+        const items1 = overlayContainerEl.querySelectorAll('.fd-menu__item');
+        expect(items1.length).toBeFalsy();
     }));
 });

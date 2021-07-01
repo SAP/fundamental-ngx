@@ -10,8 +10,8 @@ import { CommonModule } from '@angular/common';
 import { MenuMobileModule } from './menu-mobile.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MenuTitleDirective } from '../directives/menu-title.directive';
-import { MobileModeConfig } from '../../utils/interfaces/mobile-mode-config';
-import { getMobileModeViewElements, whenStable } from '../../utils/tests';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { getMobileModeViewElements, whenStable } from '@fundamental-ngx/core/tests';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ButtonModule } from '../../button/button.module';
 

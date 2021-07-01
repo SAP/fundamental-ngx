@@ -70,6 +70,10 @@ export function acceptAlert(): void {
     browser.acceptAlert();
 }
 
+export function isAlertOpen(): boolean {
+    return browser.isAlertOpen();
+}
+
 export function click(selector: string, index: number = 0, waitTime: number = defaultWaitTime()): void {
     checkSelectorExists(selector, index);
     $$(selector)[index].waitForDisplayed({ timeout: waitTime });
@@ -352,6 +356,11 @@ export function clickNextElement(selector: string, index: number = 0): void {
     $$(selector)[index].nextElement().click();
 }
 
+export function clickPreviousElement(selector: string, index: number = 0): void {
+    checkSelectorExists(selector, index);
+    $$(selector)[index].previousElement().click();
+}
+
 export function getElementLocation(selector: string, index?: number): WebdriverIO.LocationReturn;
 export function getElementLocation(selector: string, index: number, prop: 'x' | 'y'): number;
 export function getElementLocation(selector: string, index: number = 0, prop?: 'x' | 'y'): WebdriverIO.LocationReturn | number {
@@ -374,7 +383,7 @@ export function clickAndDragElement(locationX: number, locationY: number, newLoc
         'id': 'pointer1',
         'parameters': { 'pointerType': 'mouse' },
         'actions': [
-            { 'type': 'pointerMove', 'duration': 200, 'x': locationX, 'y': locationY },
+            { 'type': 'pointerMove', 'duration': 600, 'x': locationX, 'y': locationY },
             { 'type': 'pointerDown', 'button': 0 },
             { 'type': 'pointerMove', 'duration': 600, 'x': locationX, 'y': locationY },
             { 'type': 'pointerMove', 'duration': 1000, 'x': newLocationX, 'y': newLocationY },
@@ -417,4 +426,14 @@ export function applyState(state: 'hover' | 'active' | 'focus', selector: string
         case 'focus':
             return focusElement(selector, index);
     }
+}
+
+export function getPreviousElementText(selector: string, index: number = 0): string {
+    checkSelectorExists(selector, index);
+    return $$(selector)[index].previousElement().getText();
+}
+
+export function getNextElementText(selector: string, index: number = 0): string {
+    checkSelectorExists(selector, index);
+    return $$(selector)[index].nextElement().getText();
 }

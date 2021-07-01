@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TextComponent } from './text.component';
-import { LineClampModule } from '../utils/public_api';
-import { LinkModule } from '../link/public_api';
+import { LinkModule } from '@fundamental-ngx/core/link';
+import { LineClampModule } from '@fundamental-ngx/core/utils';
 
 @NgModule({
     declarations: [TextComponent],

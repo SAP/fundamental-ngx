@@ -8,16 +8,16 @@ import {
     NestedListIconDirective,
     NestedListTitleDirective
 } from './nested-list-directives';
-import { MenuKeyboardService } from '../menu/menu-keyboard.service';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { CommonModule } from '@angular/common';
 import { NestedListKeyboardService } from './nested-list-keyboard.service';
-import { PopoverModule } from '../popover/popover.module';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { NestedListPopoverComponent } from './nested-list-popover/nested-list-popover.component';
 import { PreparedNestedListComponent } from './prepared-nested-list/prepared-nested-list.component';
 import { NestedListStateService } from './nested-list-state.service';
 import { RouterModule } from '@angular/router';
 import { NestedListContentDirective } from './nested-content/nested-list-content.directive';
-import { IconModule } from '../icon/icon.module';
+import { IconModule } from '@fundamental-ngx/core/icon';
 
 @NgModule({
     imports: [

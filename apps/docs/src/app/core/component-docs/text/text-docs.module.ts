@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { TextModule } from '@fundamental-ngx/core';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -12,6 +11,7 @@ import { TextWhitespacesComponent } from './examples/text-whitespaces.component'
 import { TextMaxLinesComponent } from './examples/text-max-lines.component';
 import { TextHyphenationComponent } from './examples/text-hyphenation.component';
 import { TextExpandableComponent } from './examples/text-expandable.component';
+import { TextModule } from '@fundamental-ngx/core/text';
 
 const routes: Routes = [
     {

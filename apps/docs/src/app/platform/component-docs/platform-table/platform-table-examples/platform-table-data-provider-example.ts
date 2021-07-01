@@ -1,6 +1,6 @@
 import { Observable, of } from 'rxjs';
 
-import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core';
+import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 import {
     CollectionBooleanFilter,
     CollectionDateFilter,

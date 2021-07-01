@@ -4,7 +4,7 @@ import { ListComponent } from './list.component';
 import { ListItemComponent } from './list-item/list-item.component';
 import { ListMessageDirective } from './list-message.directive';
 import { ListLinkDirective } from './directives/list-link.directive';
-import { FormModule } from '../form/form.module';
+import { FormModule } from '@fundamental-ngx/core/form';
 import { ListFooterDirective } from './directives/list-footer.directive';
 import { ListTitleDirective } from './directives/list-title.directive';
 import { ListGroupHeaderDirective } from './directives/list-group-header.directive';

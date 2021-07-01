@@ -1,7 +1,21 @@
-<ng-container *ngIf="!blank">
+<div
+    *ngIf="meta?.renderVerticalLineBefore"
+    class="approval-flow-node__vertical-line-before"
+    [class.approval-flow-node__vertical-line-before-solid]="_isVerticalLineBeforeSolid"></div>
+<div
+    *ngIf="!_isFinal && meta?.renderVerticalLineAfter"
+    class="approval-flow-node__vertical-line-after"
+    [class.approval-flow-node__vertical-line-after-solid]="_isVerticalLineAfterSolid"></div>
+
+<ng-container *ngIf="!_blank && !_space">
     <div *ngIf="renderArrow" class="approval-flow-node__arrow"></div>
-    <div *ngIf="renderCarouselStartMarker" class="approval-flow-node__carousel-start-marker"></div>
-    <div *ngIf="renderCarouselEndMarker" class="approval-flow-node__carousel-end-marker"></div>
+
+    <div
+        *ngIf="_isRoot && meta?.nodeIndex === 0"
+        class="approval-flow-node__carousel-start-marker"></div>
+
+    <div *ngIf="_isFinal" class="approval-flow-node__carousel-end-marker"></div>
+
     <div *ngIf="isEdit" class="approval-flow-node__edit-controls">
         <fd-checkbox
             [(ngModel)]="_isSelected"
@@ -9,7 +23,9 @@
             [disabled]="_isEditActionsAvailable"
             (ngModelChange)="_onCheck(_isSelected)"
         ></fd-checkbox>
+
         <button
+            *ngIf="!this.node?.disableActions"
             class="approval-flow-node__menu-button"
             fd-button
             fdType="transparent"
@@ -18,34 +34,19 @@
             [fdMenuTrigger]="menu"
             [disabled]="_isEditActionsAvailable"
         ></button>
-
-        <fd-menu #menu [compact]="true" placement="bottom-end" (isOpenChange)="_onMenuOpen()">
-            <li *ngIf="meta.canAddNodeBefore" fd-menu-item (click)="menu.close(); onAdd.emit('before')">
-                <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversBefore">Add approvers before</div>
-            </li>
-            <li *ngIf="meta.canAddNodeAfter" fd-menu-item (click)="menu.close(); onAdd.emit('after')">
-                <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversAfter">Add approvers after</div>
-            </li>
-            <li *ngIf="meta.canAddParallel" fd-menu-item (click)="menu.close(); onAdd.emit('parallel')">
-                <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversParallel">Add parallel approvers</div>
-            </li>
-            <li fd-menu-item (click)="menu.close(); onEdit.emit()" *ngIf="_isNotStarted">
-                <div fd-menu-interactive i18n="@@platformApprovalFlowNodeEditApprover">Edit approver</div>
-            </li>
-            <li *ngIf="meta.canDelete" fd-menu-item (click)="menu.close(); onDelete.emit()">
-                <div fd-menu-interactive i18n="@@platformApprovalFlowNodeRemoveNode">Remove</div>
-            </li>
-        </fd-menu>
     </div>
+
     <div class="approval-flow-node__inner" (click)="_onClick()">
         <div class="approval-flow-node__avatar">
             <ng-container *ngIf="node.approvers.length === 1">
                 <fd-avatar [image]="node.approvers[0].imgUrl" size="xs" [circle]="true"></fd-avatar>
             </ng-container>
+
             <ng-container *ngIf="node.approvers.length > 1">
                 <fd-avatar [label]="node.description" size="xs" [circle]="true"></fd-avatar>
             </ng-container>
         </div>
+
         <div class="approval-flow-node__info">
             <div
                 class="approval-flow-node__name"
@@ -54,28 +55,40 @@
                 <ng-container *ngIf="node.approvers.length === 1; else multipleApprovers">
                     {{node.approvers[0].name}}
                 </ng-container>
+
                 <ng-template #multipleApprovers i18n="@@platformApprovalFlowNodeMembers">
                     {{node.approvers.length}} members
                 </ng-template>
             </div>
-            <div class="approval-flow-node__description">
-                {{ node.approvers.length > 1 ? node.description : node.approvers[0].description }}
+
+            <div class="approval-flow-node__description" >
+                <ng-container *ngIf="!node.variousTeams; else variousTeams">
+                    {{ node.approvers.length > 1 ? node.description : node.approvers[0].description }}
+                </ng-container>
+
+                <ng-template #variousTeams i18n="@@platformApprovalFlowNodeVariousTeams">
+                    Various teams
+                </ng-template>
             </div>
+
             <fdp-object-status
                 [status]="_objectStatus"
                 inverted="true">
                 <ng-container *ngIf="!checkDueDate || !_showDueDateWarning">{{ node.status }}</ng-container>
+
                 <ng-container *ngIf="checkDueDate && _showDueDateWarning">
                     <ng-container
                         *ngIf="_dueIn === dueDateThreshold"
                         i18n="@@platformApprovalFlowNodeStatusDueToday">
                         Due today
                     </ng-container>
+
                     <ng-container
                         *ngIf="_dueIn < dueDateThreshold"
                         i18n="@@platformApprovalFlowNodeStatusDueInXDays">
                         Due in {{ dueDateThreshold - _dueIn }} days
                     </ng-container>
+
                     <ng-container
                         *ngIf="_dueIn > dueDateThreshold"
                         i18n="@@platformApprovalFlowNodeStatusXDaysOverdue">
@@ -86,33 +99,77 @@
         </div>
     </div>
 </ng-container>
-<ng-container *ngIf="isEdit && blank">
-    <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'blank' }"></ng-container>
-</ng-container>
-<ng-container *ngIf="isEdit && (!blank && meta.canAddNodeBefore)">
+
+<ng-container *ngIf="_showAddButton && meta?.canAddNodeBefore && !node?.actionsConfig?.disableAddBefore">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before' }" ></ng-container>
 </ng-container>
-<ng-container *ngIf="isEdit && (!blank && meta.canAddNodeAfter)">
+
+<ng-container *ngIf="_showAddButton && meta?.canAddNodeAfter && meta?.renderAddNodeAfterButton && !node?.actionsConfig?.disableAddAfter">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'after' }" ></ng-container>
 </ng-container>
+
 <ng-template #addNodeButton let-placement="placement">
     <button
         class="approval-flow-node__add"
-        [class.approval-flow-node__add--blank]="blank"
-        [class.approval-flow-node__add--before]="!blank && placement === 'before'"
-        [class.approval-flow-node__add--after]="!blank && placement === 'after'"
+        *ngIf="node.status !== 'approved'"
+        [class.approval-flow-node__add--blank]="_blank"
+        [class.approval-flow-node__add--before]="!_blank && placement === 'before'"
+        [class.approval-flow-node__add--after]="!_blank && placement === 'after'"
         [style.visibility]="dropZone.active ? 'hidden' : ''"
         (click)="onAdd.emit(placement)"
     >
         <fd-icon glyph="add"></fd-icon>
     </button>
+
     <div
         #dropZone="fdp-approval-flow-drop-zone"
         fdp-approval-flow-drop-zone
         [placement]="placement"
         class="approval-flow-node__drop-zone"
         [class.approval-flow-node__drop-zone--active]="dropZone.active"
-        [class.approval-flow-node__drop-zone--blank]="blank"
-        [class.approval-flow-node__drop-zone--partial]="!blank"
+        [class.approval-flow-node__drop-zone--blank]="isNextNodeBlank"
+        [class.approval-flow-node__drop-zone--partial]="!_blank && (!isNextNodeBlank || placement === 'before')"
     ></div>
 </ng-template>
+
+<fd-menu #menu [compact]="true" placement="bottom-end" (isOpenChange)="_onMenuOpen()">
+    <li
+        *ngIf="meta?.canAddNodeBefore && !this.node?.actionsConfig?.disableAddBefore"
+        fd-menu-item
+        (click)="menu.close(); onAdd.emit('before')"
+    >
+        <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversBefore">Add approvers before</div>
+    </li>
+
+    <li
+        *ngIf="meta?.canAddNodeAfter && !this.node?.actionsConfig?.disableAddAfter"
+        fd-menu-item
+        (click)="menu.close(); onAdd.emit('after')"
+    >
+        <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversAfter">Add approvers after</div>
+    </li>
+
+    <li
+        *ngIf="!meta?.isFinal && meta?.canAddParallel && !this.node?.actionsConfig?.disableAddParallel"
+        fd-menu-item
+        (click)="menu.close(); onAdd.emit('parallel')"
+    >
+        <div fd-menu-interactive i18n="@@platformApprovalFlowNodeAddApproversParallel">Add parallel approvers</div>
+    </li>
+
+    <li
+        *ngIf="_isNotStarted && !this.node?.actionsConfig?.disableEdit"
+        fd-menu-item
+        (click)="menu.close(); onEdit.emit()"
+    >
+        <div fd-menu-interactive i18n="@@platformApprovalFlowNodeEditApprover">Edit approver</div>
+    </li>
+
+    <li
+        *ngIf="!this.node?.actionsConfig?.disableRemove && !this.disableRemoving"
+        fd-menu-item
+        (click)="menu.close(); onDelete.emit()"
+    >
+        <div fd-menu-interactive i18n="@@platformApprovalFlowNodeRemoveNode">Remove</div>
+    </li>
+</fd-menu>
