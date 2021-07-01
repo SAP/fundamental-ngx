@@ -139,7 +139,7 @@ describe('TimePickerComponent', () => {
         const hideSpy = spyOn((<any>component)._popoverFormMessage, 'hide');
         component.handleIsOpenChange(true);
         expect(hideSpy).toHaveBeenCalled();
-    })
+    });
 
     it('should show message on close', () => {
         component.isOpen = true;

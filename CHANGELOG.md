@@ -1,4 +1,20 @@
 
+## [0.31.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.44...v0.31.0-rc.45) (2021-07-01)
+
+## [0.31.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.43...v0.31.0-rc.44) (2021-07-01)
+
+
+### Bug Fixes
+
+* **core:** timepicker keyboard functionality improvements ([#5840](https://github.com/SAP/fundamental-ngx/issues/5840)) ([a7f3f89](https://github.com/SAP/fundamental-ngx/commit/a7f3f8976763d840654c2dca12e2a8c2f629284e))
+
+## [0.31.0-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.42...v0.31.0-rc.43) (2021-07-01)
+
+
+### Bug Fixes
+
+* **core:** fix RTL view key press accessibility for Slider component ([#5834](https://github.com/SAP/fundamental-ngx/issues/5834)) ([1d6ea48](https://github.com/SAP/fundamental-ngx/commit/1d6ea48b03a89d4f0ef5b7197e496e4dddd0183a))
+
 ## [0.31.0-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.41...v0.31.0-rc.42) (2021-07-01)
 
 ## [0.31.0-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.40...v0.31.0-rc.41) (2021-07-01)
