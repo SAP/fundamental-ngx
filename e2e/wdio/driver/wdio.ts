@@ -71,10 +71,7 @@ export function acceptAlert(): void {
 }
 
 export function isAlertOpen(): boolean {
-    return browser.isAlertOpen();
-  
-export function isAlertOpen(): boolean{
-    return browser.isAlertOpen()
+    return browser.isAlertOpen();s
 }
 
 export function click(selector: string, index: number = 0, waitTime: number = defaultWaitTime()): void {
@@ -215,10 +212,6 @@ export function getAttributeByName(selector: string, attrName: string, index: nu
     return $$(selector)[index].getAttribute(attrName);
 }
 
-export function getElementClass(selector: string, index: number = 0): string {
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].getAttribute('class');
-}
 
 export function getElementTitle(selector: string, index: number = 0): string {
     checkSelectorExists(selector, index);
