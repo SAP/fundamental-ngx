@@ -22,7 +22,7 @@ export class PopoverControlComponent {
     /** @hidden */
     makeTabbable(): void {
         const elemChild = this.elRef.nativeElement.children[0];
-        if (elemChild?.getAttribute('tabindex') !== '-1') {
+        if (elemChild && elemChild.getAttribute('tabindex') !== '-1') {
             elemChild.tabIndex = '0';
             elemChild.classList.add('fd-popover-outline');
         }
