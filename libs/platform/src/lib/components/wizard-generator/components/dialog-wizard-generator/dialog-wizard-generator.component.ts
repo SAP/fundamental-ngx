@@ -9,7 +9,6 @@ import { WizardGeneratorService } from '../../wizard-generator.service';
 @Component({
     selector: 'fdp-dialog-wizard-generator',
     templateUrl: './dialog-wizard-generator.component.html',
-    styleUrls: ['./dialog-wizard-generator.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [WizardGeneratorService]
@@ -23,10 +22,20 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
      */
     title: WizardTitle;
 
+    /**
+     * @description Confirmation message when wizard dialog close button has been clicked.
+     */
     confirmationDialogText = 'Are you sure you want to discard your progress?';
+    /**
+     * @description Confirm button text for close confirmation dialog.
+     */
     confirmationDialogCloseText = 'Confirm';
+    /**
+     * @description Cancel button text for close confirmation dialog.
+     */
     confirmationDialogCancelText = 'Cancel';
 
+    /** @hidden */
     constructor(
         _wizardGeneratorService: WizardGeneratorService,
         _cd: ChangeDetectorRef,
@@ -41,6 +50,7 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
         this.addSummary = this._dialogRef.data.addSummary;
         this.navigationButtonLabels = this._dialogRef.data.navigationButtonLabels;
         this.contentHeight = this._dialogRef.data.contentHeight;
+        this.responsivePaddings = this._dialogRef.data.responsivePaddings;
 
         if (this._dialogRef.data.confirmationDialogText) {
             this.confirmationDialogText = this._dialogRef.data.confirmationDialogText;

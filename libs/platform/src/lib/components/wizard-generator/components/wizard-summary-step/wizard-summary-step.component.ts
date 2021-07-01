@@ -47,6 +47,7 @@ export class WizardSummaryStepComponent {
      */
     _wizardSteps: WizardGeneratorItem[];
 
+    /** @hidden */
     constructor(
         private _wizardGeneratorService: WizardGeneratorService,
         private _cd: ChangeDetectorRef
@@ -57,7 +58,7 @@ export class WizardSummaryStepComponent {
      * @param index
      * @returns step index
      */
-    trackFn(index: number): number {
+    _trackFn(index: number): number {
         return index;
     }
 }

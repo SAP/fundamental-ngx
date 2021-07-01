@@ -6,6 +6,7 @@ import {
     ContentChild,
     ContentChildren,
     ElementRef,
+    HostBinding,
     HostListener,
     Input,
     OnDestroy,
@@ -67,6 +68,13 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
      */
     @Input()
     contentHeight: string;
+
+    /**
+     * Whether or not apply responsive paddings styling.
+     */
+    @Input()
+    @HostBinding('class.fd-wizard--responsive-paddings')
+    responsivePaddings = false;
 
     /** @hidden */
     @ContentChildren(WizardStepComponent, { descendants: true })

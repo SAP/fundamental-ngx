@@ -43,6 +43,12 @@ export const DEFAULT_WIZARD_NAVIGATION_BUTTONS: WizardNavigationButtons = {
 export class BaseWizardGenerator implements OnDestroy {
 
     /**
+     * @description Whether or not apply responsive paddings styling.
+     */
+     @Input()
+     responsivePaddings = false;
+
+    /**
      * @description Button labels to be used in Wizard navigation
      */
     @Input()
@@ -170,6 +176,7 @@ export class BaseWizardGenerator implements OnDestroy {
      */
     private _navigationButtonLabels = DEFAULT_WIZARD_NAVIGATION_BUTTONS;
 
+    /** @hidden */
     constructor(
         protected _wizardGeneratorService: WizardGeneratorService,
         private _cd: ChangeDetectorRef
@@ -225,6 +232,7 @@ export class BaseWizardGenerator implements OnDestroy {
         const currentStepIndex = this._wizardGeneratorService.getCurrentStepIndex();
 
         this._wizardGeneratorService.validateStepForms()
+        .pipe(takeWhile(() => this._allowSubscribe))
         .subscribe(async (result) => {
 
             if (!result) {
@@ -275,6 +283,7 @@ export class BaseWizardGenerator implements OnDestroy {
         }
 
         this._wizardGeneratorService.validateStepForms()
+        .pipe(takeWhile(() => this._allowSubscribe))
         .subscribe(async (result) => {
 
             if (!result) {

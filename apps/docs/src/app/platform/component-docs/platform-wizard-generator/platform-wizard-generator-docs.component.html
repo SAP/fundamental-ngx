@@ -56,3 +56,54 @@
 <code-example [exampleFiles]="branchingExample"></code-example>
 
 <separator></separator>
+
+<fd-docs-section-title id="wizardResponsivePaddingsExample" componentName="wizard">
+    Responsive paddings for Wizard generator
+</fd-docs-section-title>
+<description>
+    <p>The default wizard dont have responsive paddings applied for progress bar and content.
+    To enable responsive paddings, you can use <code>[responsivePaddings]="true"</code> input to the wizard generator component,
+    or <code>responsivePaddings</code> property for wizard generator in dialog configuration.</p>
+    <p>Responsive paddings values:</p>
+    <table>
+        <thead>
+           <tr>
+              <th style="text-align: left;"><strong>rem</strong></th>
+              <th style="text-align: left;">
+                 <div style="margin-left: 2rem;">
+                    <p><strong>Min-width</strong> </p>
+                 </div>
+              </th>
+              <th style="text-align: left;">
+                 <div style="margin-left: 2rem;"><strong>Max-width</strong> </div>
+              </th>
+           </tr>
+        </thead>
+        <tbody>
+           <tr>
+              <td style="text-align: left;">1rem</td>
+              <td style="text-align: left;"><span style="margin-left: 2rem;"><em>n/a</em></span></td>
+              <td style="text-align: left;"><span style="margin-left: 2rem;">599px</span></td>
+           </tr>
+           <tr>
+              <td style="text-align: left;">2rem</td>
+              <td style="text-align: left;"><span style="margin-left: 2rem;">600px</span></td>
+              <td style="text-align: left;"><span style="margin-left: 2rem;">1023px</span></td>
+           </tr>
+           <tr>
+              <td style="text-align: left;">2rem</td>
+              <td style="text-align: left;"><span style="margin-left: 2rem;">1024px</span></td>
+              <td style="text-align: left;"><span style="margin-left: 2rem;">1439px</span></td>
+           </tr>
+           <tr>
+              <td style="text-align: left;">3rem</td>
+              <td style="text-align: left;"><span style="margin-left: 2rem;">1440px</span></td>
+              <td style="text-align: left;"><span style="margin-left: 2rem;"><em>n/a</em></span></td>
+           </tr>
+        </tbody>
+     </table>
+</description>
+<component-example>
+    <fdp-wizard-generator-responsive-paddings-example></fdp-wizard-generator-responsive-paddings-example>
+</component-example>
+<code-example [exampleFiles]="responsivePaddingsExample"></code-example>

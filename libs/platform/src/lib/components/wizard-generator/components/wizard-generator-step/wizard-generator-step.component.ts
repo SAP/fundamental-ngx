@@ -82,6 +82,7 @@ export class WizardGeneratorStepComponent implements OnDestroy {
      */
     private _allowSubscribe = true;
 
+    /** @hidden */
     constructor(
         private _wizardGeneratorService: WizardGeneratorService
     ) { }

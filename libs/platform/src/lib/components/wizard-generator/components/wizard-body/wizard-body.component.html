@@ -1,8 +1,7 @@
-<div [class.fdp-wizard--hidden]="!_wizardReady"></div>
-<fd-wizard [appendToWizard]="appendToWizard" [contentHeight]="contentHeight" *ngIf="visibleItems">
+<fd-wizard [responsivePaddings]="responsivePaddings" [appendToWizard]="appendToWizard" [contentHeight]="contentHeight" *ngIf="visibleItems">
     <fd-wizard-navigation>
         <ul fd-wizard-progress-bar>
-            <ng-container *ngFor="let step of visibleItems; let i = index; trackBy: trackFn">
+            <ng-container *ngFor="let step of visibleItems; let i = index; trackBy: _trackFn">
                 <li
                     fd-wizard-step
                     [label]="step.name"

@@ -16,6 +16,7 @@ import { BaseWizardGenerator } from '../../base-wizard-generator';
 })
 export class WizardGeneratorComponent extends BaseWizardGenerator {
 
+    /** @hidden */
     constructor(
         _wizardGeneratorService: WizardGeneratorService,
         _cd: ChangeDetectorRef

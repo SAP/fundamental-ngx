@@ -10,6 +10,7 @@ import { PlatformButtonModule, PlatformWizardGeneratorModule } from '@fundamenta
 import { WizardGeneratorDialogExampleComponent } from './examples/wizard-generator-dialog-example.component';
 import { WizardGeneratorConditionExampleComponent } from './examples/wizard-generator-condition-example.component';
 import { WizardGeneratorCustomizableExampleComponent } from './examples/wizard-generator-customizable-example.component';
+import { WizardGeneratorResponsivePaddingsExampleComponent } from './examples/wizard-generator-responsive-paddings-example.component';
 
 const routes: Routes = [
     {
@@ -29,7 +30,8 @@ const routes: Routes = [
         WizardGeneratorDefaultExampleComponent,
         WizardGeneratorDialogExampleComponent,
         WizardGeneratorConditionExampleComponent,
-        WizardGeneratorCustomizableExampleComponent
+        WizardGeneratorCustomizableExampleComponent,
+        WizardGeneratorResponsivePaddingsExampleComponent
     ],
     imports: [
         RouterModule.forChild(routes),

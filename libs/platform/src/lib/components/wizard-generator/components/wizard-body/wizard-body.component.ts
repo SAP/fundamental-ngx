@@ -13,11 +13,16 @@ export interface WizardStepChange {
 @Component({
     selector: 'fdp-wizard-body',
     templateUrl: './wizard-body.component.html',
-    styleUrls: ['./wizard-body.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WizardBodyComponent implements OnInit, OnDestroy {
+
+    /**
+     * @description Whether or not apply responsive paddings styling.
+     */
+    @Input()
+    responsivePaddings = false;
 
     /**
      * @description Button labels to be used in Wizard navigation
@@ -48,11 +53,19 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      */
     @Input() isLastStep = false;
 
-
+    /**
+     * @description Boolean flag indicating whether or not to append Summary page as the last step.
+     */
     @Input() addSummary = false;
 
+    /**
+     * @description Is current step is summary step.
+     */
     @Input() isSummaryStep = false;
 
+    /**
+     * @description Array of visible Wizard Steps.
+     */
     get visibleItems(): WizardGeneratorItem[] {
         return this._visibleItems || this._wizardGeneratorService.items;
     }
@@ -60,10 +73,6 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     set visibleItems(items: WizardGeneratorItem[]) {
         this._visibleItems = items;
     }
-
-    private _visibleItems: WizardGeneratorItem[];
-
-    _wizardReady = false;
 
     /**
      * @description Emits when some step status has been changed.
@@ -85,6 +94,12 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      */
     private _allowSubscribe = true;
 
+    /**
+     * @hidden
+     */
+    private _visibleItems: WizardGeneratorItem[];
+
+    /** @hidden */
     constructor(
         private _wizardGeneratorService: WizardGeneratorService,
         private _cd: ChangeDetectorRef
@@ -99,7 +114,6 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
         .pipe(takeWhile(() => this._allowSubscribe), debounceTime(50))
         .subscribe((visibleSteps) => {
             this._visibleItems = visibleSteps;
-            this._wizardReady = true;
             this._cd.detectChanges();
         });
     }
@@ -145,7 +159,7 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      * @param item
      * @returns
      */
-    trackFn(_index: number, item: WizardGeneratorItem): string {
+    _trackFn(_index: number, item: WizardGeneratorItem): string {
         return item.id;
     }
 }

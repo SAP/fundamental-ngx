@@ -10,10 +10,16 @@ import { WizardGeneratorFormsValue } from './interfaces/wizard-generator-item.in
 @Injectable()
 export class WizardDialogGeneratorService {
 
+    /** @hidden */
     constructor(
         private _dialogService: DialogService
     ) { }
 
+    /**
+     * @description Opens dialog with wizard component inside.
+     * @param config Dialog options with wizard config.
+     * @returns DialogRef instance.
+     */
     open(config: DialogConfig<WizardDialogData>): DialogRef<WizardDialogData, WizardGeneratorFormsValue> {
         const dialogRef = this._dialogService.open(DialogWizardGeneratorComponent, config);
 

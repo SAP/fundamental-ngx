@@ -38,7 +38,7 @@ export class DynamicFormControlFieldDirective implements OnInit {
     }
 
     /**
-     * @description boolean flag representing if current item should be shown
+     * @description boolean flag representing if current item should be shown.
      */
     @Input()
     set fdpDynamicFormControlFieldShow(value: boolean) {
@@ -46,6 +46,9 @@ export class DynamicFormControlFieldDirective implements OnInit {
         this._updateView();
     }
 
+    /**
+     * @description Form control instance.
+     */
     @Input()
     set fdpDynamicFormControlField(value: DynamicFormControl) {
         this._control = value;

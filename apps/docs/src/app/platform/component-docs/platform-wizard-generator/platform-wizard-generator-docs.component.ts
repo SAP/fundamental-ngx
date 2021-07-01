@@ -13,6 +13,9 @@ import * as customizableWizardGeneratorTsExample from '!raw-loader!./examples/wi
 import * as conditionWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-condition-example.component.html';
 import * as conditionWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-condition-example.component.ts';
 
+import * as responsiveWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-responsive-paddings-example.component.html';
+import * as responsiveWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-responsive-paddings-example.component.ts';
+
 @Component({
     selector: 'fdp-platform-wizard-generator-docs',
     templateUrl: './platform-wizard-generator-docs.component.html'
@@ -64,7 +67,7 @@ export class PlatformWizardGeneratorDocsComponent {
     branchingExample: ExampleFile[] = [
         {
             language: 'html',
-            code: conditionWizardGeneratorHtmlExample,
+            code: responsiveWizardGeneratorHtmlExample,
             fileName: 'wizard-generator-condition-example'
         },
         {
@@ -72,6 +75,20 @@ export class PlatformWizardGeneratorDocsComponent {
             code: conditionWizardGeneratorTsExample,
             fileName: 'wizard-generator-condition-example',
             component: 'WizardGeneratorConditionExampleComponent'
+        }
+    ];
+
+    responsivePaddingsExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: conditionWizardGeneratorHtmlExample,
+            fileName: 'wizard-generator-responsive-paddings-example'
+        },
+        {
+            language: 'typescript',
+            code: responsiveWizardGeneratorTsExample,
+            fileName: 'wizard-generator-responsive-paddings-example',
+            component: 'WizardGeneratorResponsivePaddingsExampleComponent'
         }
     ];
 

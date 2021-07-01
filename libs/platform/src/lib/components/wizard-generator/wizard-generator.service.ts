@@ -28,14 +28,21 @@ export class WizardGeneratorService {
      */
     dependencySteps: any = {};
 
-    private _visibleWizardSteps$ = new Subject<WizardGeneratorItem[]>();
-
-    private _stepsComponents$ = new Subject<StepsComponents>();
-
+    /**
+     * @description Steps that are visible to the user.
+     */
     public visibleWizardSteps: WizardGeneratorItem[] = [];
 
+    /** @hidden */
+    private _visibleWizardSteps$ = new Subject<WizardGeneratorItem[]>();
+
+    /** @hidden */
+    private _stepsComponents$ = new Subject<StepsComponents>();
+
+    /** @hidden */
     private _submittedFormRawValues: WizardGeneratorFormsValue = {};
 
+    /** @hidden */
     constructor(
         private _formGeneratorService: FormGeneratorService
     ) { }

@@ -4,6 +4,11 @@ import { WizardTitle } from './wizard-title.interface';
 
 export interface WizardDialogData {
     /**
+     * @description Whether or not apply responsive paddings styling.
+     */
+     responsivePaddings: boolean;
+
+    /**
      * @description Button labels to be used in Wizard navigation
      */
     navigationButtonLabels?: WizardNavigationButtons;

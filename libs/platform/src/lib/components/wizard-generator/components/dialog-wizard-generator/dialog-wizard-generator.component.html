@@ -1,9 +1,9 @@
-<fd-dialog class="fdp-wizard-dialog">
+<fd-dialog>
     <fd-dialog-header>
         <h2 fd-title [headerSize]="title.size">{{ title.text }}</h2>
     </fd-dialog-header>
     <fd-dialog-body>
-        <fdp-wizard-body [navigationButtonLabels]="navigationButtonLabels" [hidden]="!_wizardCreated" (statusChange)="stepStatusChanged($event.id, $event.status)" [appendToWizard]="appendToWizard" [contentHeight]="contentHeight"></fdp-wizard-body>
+        <fdp-wizard-body [responsivePaddings]="responsivePaddings" [navigationButtonLabels]="navigationButtonLabels" [hidden]="!_wizardCreated" (statusChange)="stepStatusChanged($event.id, $event.status)" [appendToWizard]="appendToWizard" [contentHeight]="contentHeight"></fdp-wizard-body>
         <div fd-bar barDesign="floating-footer" *ngIf="_wizardCreated">
             <div fd-bar-right>
                 <fdp-button class="fd-bar__element" *ngIf="!isFirstStep" [contentDensity]="navigationButtonLabels.goBack.contentDensity" [buttonType]="navigationButtonLabels.goBack.type" [label]="navigationButtonLabels.goBack.label" (click)="goBack()"></fdp-button>

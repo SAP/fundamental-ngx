@@ -76,6 +76,9 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     @Input()
     isSummary = false;
 
+    /**
+     * User-defined validation function which determines if user can navigate between steps.
+     */
     @Input()
     stepClickValidator: (visited: boolean, completed: boolean) => boolean | Promise<boolean>;
 

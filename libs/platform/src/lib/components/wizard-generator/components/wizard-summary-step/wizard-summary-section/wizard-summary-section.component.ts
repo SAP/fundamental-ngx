@@ -41,6 +41,7 @@ export class WizardSummarySectionComponent implements OnInit {
      */
     _formattedStepValue: FormattedFormStep[] = [];
 
+    /** @hidden */
     constructor(
         private _wizardGeneratorService: WizardGeneratorService
     ) { }

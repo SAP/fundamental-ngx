@@ -125,6 +125,7 @@ export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
                 items: this.stepItems,
                 appendToWizard: false,
                 addSummary: false,
+                responsivePaddings: false,
                 title: this.wizardTitle
             }
         }).afterClosed.pipe(takeWhile(() => this.allowSubscribe))
