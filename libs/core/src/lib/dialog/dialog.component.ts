@@ -146,6 +146,7 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
     /** @hidden */
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
+        this.dialogWindow.nativeElement.focus();
     }
 
     /** @hidden */
