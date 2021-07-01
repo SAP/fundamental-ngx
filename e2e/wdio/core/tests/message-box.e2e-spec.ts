@@ -5,7 +5,7 @@ import {
     getElementArrayLength,
     getElementClass,
     getText,
-    isElementDisplayed
+    isElementDisplayed, refreshPage, waitForElDisplayed
 } from '../../driver/wdio';
 import {
     iconsArr, buttonClassArr, sectionsArr
@@ -54,6 +54,8 @@ describe('Message-box test suits', function () {
 
     describe('visual regression', function () {
         it('should check examples visual regression', () => {
+            refreshPage();
+            waitForElDisplayed(messageBoxPage.title);
             messageBoxPage.saveExampleBaselineScreenshot();
             expect(messageBoxPage.compareWithBaseline()).toBeLessThan(5);
         });
