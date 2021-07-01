@@ -11,16 +11,18 @@ import {
     ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
+
 import { Subscription } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
 import {
     MobileModeBase,
     MOBILE_MODE_CONFIG,
     MobileModeControl,
     MobileModeConfigToken
 } from '@fundamental-ngx/core/mobile-mode';
-import { PopoverInterface, POPOVER_COMPONENT } from '../popover.interface';
-import { takeUntil } from 'rxjs/operators';
 import { DialogService } from '@fundamental-ngx/core/dialog';
+import { PopoverInterface, POPOVER_COMPONENT } from '../popover.interface';
 import { PopoverChildContent } from '../popover-child-content.interface';
 
 @Component({
