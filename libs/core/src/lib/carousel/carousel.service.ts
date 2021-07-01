@@ -32,17 +32,23 @@ export interface PanEndOutput {
     providedIn: 'root'
 })
 export class CarouselService implements OnDestroy {
+    /** Event thrown when element is dragged. Emits "true" when drag starts and "false" when drag ends. */
+    readonly dragStateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    /** Event thrown, when active element is changed */
+    readonly activeChange: EventEmitter<PanEndOutput> = new EventEmitter<PanEndOutput>();
+
     /** Configuration for carousel */
     config: CarouselConfig;
 
     /** Initial active item of carousel, position first + offset */
     active: CarouselItemInterface;
 
-    /** Event thrown when element is dragged. Emits "true" when drag starts and "false" when drag ends. */
-    readonly dragStateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    /** Set to true for rtl mode */
+    isRtl = false;
 
-    /** Event thrown, when active element is changed */
-    readonly activeChange: EventEmitter<PanEndOutput> = new EventEmitter<PanEndOutput>();
+    /** carousel items query list */
+    items: QueryList<CarouselItemInterface>;
 
     /** @hidden */
     private _hammer: HammerManager = null;
@@ -59,30 +65,18 @@ export class CarouselService implements OnDestroy {
     /** @hidden */
     private _currentTransitionPx = 0;
 
-    /**
-     * @hidden,
-     */
-    private _isRtl = false;
-
-    get isRtl(): boolean {
-        return this._isRtl;
-    }
-
-    set isRtl(isrtl: boolean) {
-        this._isRtl = isrtl;
-    }
-
+    /** return current transition value in px */
     get currentTransitionPx(): number {
         return this._currentTransitionPx;
     }
 
+    /** set current transition value in px */
     set currentTransitionPx(currentTransitionPx: number) {
         this._currentTransitionPx = currentTransitionPx;
     }
 
+    /** @hidden */
     private _elementRef: ElementRef;
-
-    items: QueryList<CarouselItemInterface>;
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -91,6 +85,7 @@ export class CarouselService implements OnDestroy {
         }
     }
 
+    /** set initial values for the service */
     initialise(
         config: CarouselConfig,
         items: QueryList<CarouselItemInterface>,
@@ -105,14 +100,17 @@ export class CarouselService implements OnDestroy {
         }
     }
 
+    /** update config value for the service */
     updateConfig(config: CarouselConfig): void {
         this.config = config;
     }
 
+    /** set element ref */
     setElementRef(elementRef: ElementRef): void {
         this._elementRef = elementRef;
     }
 
+    /** set items and assign active item, if not already there */
     setItems(items: QueryList<CarouselItemInterface>): void {
         this.items = items;
         const carouselArray: CarouselItemInterface[] = this.items.toArray();
@@ -135,6 +133,7 @@ export class CarouselService implements OnDestroy {
         this._previousActiveItem = item;
     }
 
+    /** pick next element and set it active */
     pickNext(): void {
         const carouselArray: CarouselItemInterface[] = this.items.toArray();
         if (!this.active) {
@@ -147,6 +146,7 @@ export class CarouselService implements OnDestroy {
         this.active = itemToActivate;
     }
 
+    /** pick previous element and set it active */
     pickPrevious(): void {
         const carouselArray: CarouselItemInterface[] = this.items.toArray();
         if (!this.active) {
@@ -210,7 +210,7 @@ export class CarouselService implements OnDestroy {
         this._transitionCarousel(transitionPx);
     }
 
-    /** Get closes element, based on current transition */
+    /** @hidden Get closes element, based on current transition */
     private _getClosest(): CarouselItemInterface {
         /** If transition is positive, it should go to first element */
         if (
@@ -254,7 +254,7 @@ export class CarouselService implements OnDestroy {
         return this.items.toArray().findIndex((_item) => _item === item);
     }
 
-    /** Getting size of carousel, width for horizontal, height for vertical */
+    /** @hidden Getting size of carousel, width for horizontal, height for vertical */
     private _getSize(item: CarouselItemInterface): number {
         if (this.config.vertical) {
             return item.getHeight();
@@ -299,7 +299,7 @@ export class CarouselService implements OnDestroy {
     }
 
     /**
-     * Animates the carousel to the currently selected slide.
+     * @hidden Animates the carousel to the currently selected slide.
      */
     private _transitionCarousel(transitionPx: number): void {
         this._currentTransitionPx = transitionPx;
@@ -311,7 +311,7 @@ export class CarouselService implements OnDestroy {
         }
     }
 
-    /** Pam Start handler, removes transition duration, */
+    /** @hidden Pam Start handler, removes transition duration, */
     private _handlePanStart(): void {
         this._elementRef.nativeElement.style.transitionDuration = '0s';
         this._prePanTransitionPx = this._currentTransitionPx;
@@ -320,7 +320,6 @@ export class CarouselService implements OnDestroy {
 
     /** @hidden */
     private _hammerSetup(): void {
-
         this._hammer = new Hammer(this._elementRef.nativeElement);
 
         if (this.config.vertical) {

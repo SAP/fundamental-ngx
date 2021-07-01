@@ -20,12 +20,14 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { FdCarouselResourceStrings, CarouselResourceStringsEN } from './i18n/carousel-resources';
-import { CarouselItemComponent } from './carousel-item/carousel-item.component';
-import { CarouselService, CarouselConfig, PanEndOutput, CarouselItemInterface } from './carousel.service';
+import { Subject } from 'rxjs';
+
 import { RtlService } from '@fundamental-ngx/core/utils';
+
+import { CarouselItemComponent } from './carousel-item/carousel-item.component';
+import { CarouselResourceStringsEN, FdCarouselResourceStrings } from './i18n/carousel-resources';
+import { CarouselConfig, CarouselItemInterface, CarouselService, PanEndOutput } from './carousel.service';
 
 /** Page limit to switch to numerical indicator */
 const ICON_PAGE_INDICATOR_LIMIT = 8;
@@ -203,9 +205,10 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     private _slideSwiped = false;
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing) */
+    /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing) */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
+    /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef,
         private _renderer: Renderer2,
@@ -297,6 +300,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }
     }
 
+    /** get value for rtl */
     _isRtl(): boolean {
         return this._rtlService?.rtl.getValue();
     }
@@ -469,7 +473,11 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
      */
     private _getStepTaken(event: PanEndOutput, actualActiveSlideIndex: number): number {
         let stepsCalculated: number;
-        if ((!this._isRtl() && event.after) || (this._isRtl() && !event.after && !this.vertical) || (this.vertical && event.after)) {
+        if (
+            (!this._isRtl() && event.after) ||
+            (this._isRtl() && !event.after && !this.vertical) ||
+            (this.vertical && event.after)
+        ) {
             if (actualActiveSlideIndex === 0 && this.currentActiveSlidesStartIndex === 0) {
                 stepsCalculated = 0;
             } else if (actualActiveSlideIndex > this.currentActiveSlidesStartIndex) {
@@ -559,7 +567,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
             let slideDirection: SlideDirection;
             if (!this._isRtl()) {
                 slideDirection = event.after ? SlideDirection.NEXT : SlideDirection.PREVIOUS;
-            } else if (this._isRtl()) {
+            } else {
                 // vertical carousel slide direction is same in ltr and rtl
                 if (this.vertical) {
                     slideDirection = event.after ? SlideDirection.NEXT : SlideDirection.PREVIOUS;
