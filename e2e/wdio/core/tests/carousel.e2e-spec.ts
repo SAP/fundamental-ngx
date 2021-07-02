@@ -151,7 +151,7 @@ describe('Carousel test suite', function() {
             expect(hiddenNavBtns).not.toBeVisible();
         });
 
-        xit('should check swipe navigation', () => {
+        it('should check swipe navigation', () => {
             scrollIntoView(sectionTitle, 5);
             const imgLocationX = Math.floor(getElementLocation(displayedImg, 3, 'x'));
             const imgLocationY = Math.floor(getElementLocation(displayedImg, 3, 'y'));
@@ -178,7 +178,10 @@ describe('Carousel test suite', function() {
         });
 
         it('should check navigation', () => {
-           checkCarouselNavigation(4, 13);
+            scrollIntoView(displayedImg, 4);
+            mouseHoverElement(displayedImg, 4);
+            waitForElDisplayed(contentNavBtns);
+            checkCarouselNavigation(4, 13);
         });
     });
 
