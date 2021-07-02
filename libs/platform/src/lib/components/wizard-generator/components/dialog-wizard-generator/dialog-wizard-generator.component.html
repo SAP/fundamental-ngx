@@ -10,25 +10,25 @@
                     <ng-template #defaultGoBackButtonTemplate>
                         <fdp-button class="fd-bar__element" [contentDensity]="navigationButtonLabels.goBack.contentDensity" [buttonType]="navigationButtonLabels.goBack.type" [label]="navigationButtonLabels.goBack.label" (click)="goBack()"></fdp-button>
                     </ng-template>
-                    <ng-template [ngTemplateOutlet]="goBackButtonTemplate || defaultGoBackButtonTemplate" [ngTemplateOutletContext]="{ goBack: goBackFn() }"></ng-template>
+                    <ng-template [ngTemplateOutlet]="goBackButtonTemplate || defaultGoBackButtonTemplate" [ngTemplateOutletContext]="{ goBack: _goBackFn() }"></ng-template>
                 </ng-container>
                 <ng-container *ngIf="!isSummaryStep">
                     <ng-template #defaultGoNextButtonTemplate>
                         <fdp-button class="fd-bar__element" [contentDensity]="navigationButtonLabels.goNext.contentDensity" [buttonType]="navigationButtonLabels.goNext.type" [label]="navigationButtonLabels.goNext.label" (click)="goNext()"></fdp-button>
                     </ng-template>
-                    <ng-template [ngTemplateOutlet]="goNextButtonTemplate || defaultGoNextButtonTemplate" [ngTemplateOutletContext]="{ goNext: goNextFn() }"></ng-template>
+                    <ng-template [ngTemplateOutlet]="goNextButtonTemplate || defaultGoNextButtonTemplate" [ngTemplateOutletContext]="{ goNext: _goNextFn() }"></ng-template>
                 </ng-container>
                 <ng-container *ngIf="addSummary && isSummaryStep || !addSummary && isLastStep">
                     <ng-template #defaultFinishButtonTemplate>
                         <fdp-button class="fd-bar__element" [contentDensity]="navigationButtonLabels.finish.contentDensity" [buttonType]="navigationButtonLabels.finish.type" [label]="navigationButtonLabels.finish.label" (click)="finish()"></fdp-button>
                     </ng-template>
-                    <ng-template [ngTemplateOutlet]="finishButtonTemplate || defaultFinishButtonTemplate" [ngTemplateOutletContext]="{ finish: finishFn() }"></ng-template>
+                    <ng-template [ngTemplateOutlet]="finishButtonTemplate || defaultFinishButtonTemplate" [ngTemplateOutletContext]="{ finish: _finishFn() }"></ng-template>
                 </ng-container>
                 <ng-container>
                     <ng-template #defaultCancelButtonTemplate>
                         <fdp-button class="fd-bar__element" [contentDensity]="navigationButtonLabels.cancel.contentDensity" [buttonType]="navigationButtonLabels.cancel.type" [label]="navigationButtonLabels.cancel.label" (click)="cancel()"></fdp-button>
                     </ng-template>
-                    <ng-template [ngTemplateOutlet]="cancelButtonTemplate || defaultCancelButtonTemplate" [ngTemplateOutletContext]="{ cancel: cancelFn() }"></ng-template>
+                    <ng-template [ngTemplateOutlet]="cancelButtonTemplate || defaultCancelButtonTemplate" [ngTemplateOutletContext]="{ cancel: _cancelFn() }"></ng-template>
                 </ng-container>
             </div>
         </div>

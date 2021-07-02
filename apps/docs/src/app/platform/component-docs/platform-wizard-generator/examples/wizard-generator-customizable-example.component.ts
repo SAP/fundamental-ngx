@@ -13,7 +13,7 @@ export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
     @ViewChild('goBackTemplate') goBackTemplate: TemplateRef<any>;
     @ViewChild('finishTemplate') finishTemplate: TemplateRef<any>;
     @ViewChild('cancelTemplate') cancelTemplate: TemplateRef<any>;
-    @ViewChild('conrirmationDialogTemplate') confirmationDialogTemplate: TemplateRef<any>;
+    @ViewChild('confirmationDialogTemplate') confirmationDialogTemplate: TemplateRef<any>;
 
     wizardValue: WizardGeneratorFormsValue;
 

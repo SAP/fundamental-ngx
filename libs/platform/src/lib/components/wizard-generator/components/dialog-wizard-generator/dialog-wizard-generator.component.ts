@@ -120,27 +120,31 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
         });
     }
 
-    goBackFn(): () => void {
-        return () => {
-            this.goBack();
-        }
+    /**
+     * @hidden
+     */
+    _goBackFn(): () => void {
+        return this.goBack.bind(this);
     }
 
-    goNextFn(): () => void {
-        return () => {
-            this.goNext();
-        }
+    /**
+     * @hidden
+     */
+    _goNextFn(): () => Promise<void> {
+        return this.goNext.bind(this);
     }
 
-    finishFn(): () => void {
-        return () => {
-            this.finish();
-        }
+    /**
+     * @hidden
+     */
+    _finishFn(): () => Promise<void> {
+        return this.finish.bind(this);
     }
 
-    cancelFn(): () => void {
-        return () => {
-            this.cancel();
-        }
+    /**
+     * @hidden
+     */
+    _cancelFn(): () => void {
+        return this.cancel.bind(this);
     }
 }
