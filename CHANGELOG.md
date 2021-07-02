@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.46...v0.31.0-rc.47) (2021-07-02)
+
+
+### Bug Fixes
+
+* **platform,core:** update styles lib version ([#5856](https://github.com/SAP/fundamental-ngx/issues/5856)) ([7bb07db](https://github.com/SAP/fundamental-ngx/commit/7bb07db6e82fe706ce472862a3744010e2d030f8))
+
 ## [0.31.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.45...v0.31.0-rc.46) (2021-07-02)
 
 
