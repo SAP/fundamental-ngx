@@ -25,7 +25,13 @@ import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { SliderControlValue, SliderCustomValue, SliderRangeHandles, SliderTickMark, SliderValueTargets } from './slider.model';
+import {
+    SliderControlValue,
+    SliderCustomValue,
+    SliderRangeHandles,
+    SliderTickMark,
+    SliderValueTargets
+} from './slider.model';
 import { MIN_DISTANCE_BETWEEN_TICKS } from './constants';
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
@@ -325,6 +331,11 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     }
 
     /** @hidden */
+    private isRtl(): boolean {
+        return this._rtlService?.rtl.getValue();
+    }
+
+    /** @hidden */
     getValuenow(position: number | number[], sliderValueTarget: SliderValueTargets): string | number {
         return this.customValues.length > 0
             ? this.customValues[position as number].label
@@ -435,7 +446,6 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         if (!KeyUtil.isKeyCode(event, allowedKeys)) {
             return;
         }
-
         event.preventDefault();
 
         const diff = event.shiftKey ? this.jump : this.step;
@@ -453,13 +463,22 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
                 handleIndex = SliderRangeHandles.Second;
             }
         }
+        if (this.isRtl()) {
+            if (KeyUtil.isKeyCode(event, LEFT_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
+                newValue = prevValue + diff;
+            }
 
-        if (KeyUtil.isKeyCode(event, LEFT_ARROW) || KeyUtil.isKeyCode(event, DOWN_ARROW)) {
-            newValue = prevValue - diff;
-        }
+            if (KeyUtil.isKeyCode(event, RIGHT_ARROW) || KeyUtil.isKeyCode(event, DOWN_ARROW)) {
+                newValue = prevValue - diff;
+            }
+        } else {
+            if (KeyUtil.isKeyCode(event, LEFT_ARROW) || KeyUtil.isKeyCode(event, DOWN_ARROW)) {
+                newValue = prevValue - diff;
+            }
 
-        if (KeyUtil.isKeyCode(event, RIGHT_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
-            newValue = prevValue + diff;
+            if (KeyUtil.isKeyCode(event, RIGHT_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
+                newValue = prevValue + diff;
+            }
         }
 
         if (newValue === null) {
