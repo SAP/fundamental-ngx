@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnChanges, OnInit, SimpleChanges, TemplateRef } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, OnInit, SimpleChanges, TemplateRef, HostBinding } from '@angular/core';
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { BasePopoverClass } from '@fundamental-ngx/core/popover';
 
@@ -18,7 +18,7 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
     /** The trigger events that will open/close the inline help component.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
     @Input()
-    triggers: string[] = ['mouseenter', 'mouseleave'];
+    triggers: string[] = ['mouseenter', 'mouseleave', 'focus', 'focusout'];
 
     /** Whether the popover should have an arrow. */
     @Input()
