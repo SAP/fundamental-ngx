@@ -368,4 +368,5 @@ export const API_FILES = {
         'ResizableCardLayoutComponent',
         'ResizableCardItemComponent'
     ],
+    offScreen: ['OffScreenElementComponent'],
 };

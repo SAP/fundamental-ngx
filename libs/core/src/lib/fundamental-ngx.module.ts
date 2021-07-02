@@ -12,7 +12,7 @@ import { CarouselModule } from '@fundamental-ngx/core/carousel';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import { DragAndDropModule, OnlyDigitsModule, ThemesService } from '@fundamental-ngx/core/utils';
+import { DragAndDropModule, OnlyDigitsModule, ThemesService, OffScreenElementModule } from '@fundamental-ngx/core/utils';
 import { FacetModule } from '@fundamental-ngx/core/facets';
 import { FeedListItemModule } from '@fundamental-ngx/core/feed-list-item';
 import { FeedInputModule } from '@fundamental-ngx/core/feed-input';
@@ -171,7 +171,8 @@ import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
         IllustratedMessageModule,
         StatusIndicatorModule,
         GridListModule,
-        ResizableCardLayoutModule
+        ResizableCardLayoutModule,
+        OffScreenElementModule
     ],
     providers: []
 })

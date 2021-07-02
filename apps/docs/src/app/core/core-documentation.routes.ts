@@ -458,6 +458,13 @@ export const ROUTES: Routes = [
                         (m) => m.ResizableCardLayoutDocsModule
                     )
             },
+            {
+                path: 'off-screen',
+                loadChildren: () =>
+                    import('./component-docs/off-screen/off-screen-docs.module').then(
+                        (m) => m.OffScreenDocsModule
+                    )
+            }
         ]
     }
 ];

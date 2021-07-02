@@ -14,6 +14,7 @@ import {
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CarouselModule } from '@fundamental-ngx/core/carousel';
+import { OffScreenElementModule} from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -31,7 +32,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ButtonModule, CarouselModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ButtonModule, CarouselModule, OffScreenElementModule],
     exports: [RouterModule],
     declarations: [
         ButtonDocsComponent,
@@ -43,4 +44,4 @@ const routes: Routes = [
         ButtonMenuExampleComponent
     ]
 })
-export class ButtonDocsModule { }
+export class ButtonDocsModule {}

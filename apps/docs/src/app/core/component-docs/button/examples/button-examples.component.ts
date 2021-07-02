@@ -26,7 +26,13 @@ export class ButtonSizesExampleComponent {}
     templateUrl: './button-icons-example.component.html',
     styleUrls: ['./button-examples.component.scss']
 })
-export class ButtonIconsExampleComponent {}
+export class ButtonIconsExampleComponent {
+    count = 1
+
+    increment(): void {
+        this.count = this.count + 1;
+    }
+}
 
 @Component({
     selector: 'fd-button-state-example',
