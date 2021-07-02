@@ -1,0 +1,75 @@
+<ul
+    class="fd-icon-tab-bar__header"
+    role="tablist"
+    [class.fd-icon-tab-bar__header--left-padding]="showLeftBtn"
+    fdOverflowItems
+    [isRtl]="isRtl"
+    itemSelector='[data-overflowItem]'
+    [offset]='offsetForOverflowDirective'
+    (changed)='onChangeSize($event)'
+>
+    <li
+        *ngIf="showLeftBtn"
+        role="presentation"
+        class="fd-icon-tab-bar__item  fd-icon-tab-bar__item--prev-steps"
+    >
+        <fd-icon-tab-bar-popover
+            [items]="_prevSteps"
+            [label]="_prevSteps.length.toString()"
+            [isSeparators]="true"
+            (selectedExtraItem)="selectExtraItem($event)"
+        ></fd-icon-tab-bar-popover>
+    </li>
+    <li *ngFor="let item of tabs; let index = index"
+        [ngClass]="item.cssClasses"
+        class="fd-icon-tab-bar__item"
+        role="presentation"
+        data-overflowItem
+        [attr.aria-hidden]="item.hidden"
+    >
+        <a
+            (click)="selectItem(item)"
+            [attr.aria-selected]="item.uniqueKey === selectedItemKey"
+            aria-selected="true"
+            class="fd-icon-tab-bar__tab"
+            role="tab"
+        >
+            <ng-container *ngIf="item.icon; else processTextOnly">
+                <div class="fd-icon-tab-bar__container">
+                    <span class="fd-icon-tab-bar__icon">
+                        <fd-icon [glyph]="item.icon"></fd-icon>
+                    </span>
+                    <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
+                </div>
+                <div class="fd-icon-tab-bar__details">
+                    <span class="fd-icon-tab-bar__counter">{{item.counter}}</span>
+                    <span class="fd-icon-tab-bar__label">{{item.label}}</span>
+                </div>
+            </ng-container>
+            <ng-template #processTextOnly>
+                <span class="fd-icon-tab-bar__tag">{{item.label}}</span>
+                <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
+            </ng-template>
+        </a>
+        <span *ngIf="lastVisibleTabIndex !== index" class="fd-icon-tab-bar__separator">
+            <fd-icon glyph="process"></fd-icon>
+        </span>
+    </li>
+    <li
+        *ngIf="showRightBtn"
+        role="presentation"
+        class="fd-icon-tab-bar__item fd-icon-tab-bar__item--extra-btn"
+        fdExtraButton
+        [isRtl]="isRtl"
+        [offset]="16"
+        [anchorIndexInsideParent]="anchorIndex"
+    >
+        <fd-icon-tab-bar-popover
+            [items]="_nextSteps"
+            [isSeparators]="true"
+            [label]="_nextSteps.length.toString()"
+            (selectedExtraItem)="selectExtraItem($event)"
+        >
+        </fd-icon-tab-bar-popover>
+    </li>
+</ul>

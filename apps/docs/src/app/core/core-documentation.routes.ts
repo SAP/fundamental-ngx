@@ -458,6 +458,13 @@ export const ROUTES: Routes = [
                         (m) => m.ResizableCardLayoutDocsModule
                     )
             },
+            {
+                path: 'icon-tab-bar',
+                loadChildren: () =>
+                    import('./component-docs/icon-tab-bar/icon-tab-bar-docs.module').then(
+                        (m) => m.IconTabBarDocsModule
+                    )
+            },
         ]
     }
 ];

@@ -1,0 +1,9 @@
+import { Component } from '@angular/core';
+import { IconTabBarExampleClass } from '../icon-tab-bar-example.class';
+
+@Component({
+  selector: 'fd-icon-tab-bar-process-type-example',
+  templateUrl: './icon-tab-bar-process-type-example.component.html',
+  styleUrls: ['./icon-tab-bar-process-type-example.component.scss']
+})
+export class IconTabBarProcessTypeExampleComponent extends IconTabBarExampleClass {}

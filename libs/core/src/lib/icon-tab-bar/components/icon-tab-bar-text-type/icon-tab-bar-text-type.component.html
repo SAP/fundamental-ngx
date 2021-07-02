@@ -1,0 +1,54 @@
+<ul
+    class='fd-icon-tab-bar__header'
+    role='tablist'
+    fdOverflowItems
+    itemSelector='[data-overflowItem]'
+    [isRtl]="isRtl"
+    [offset]='100'
+    (changed)='onChangeSize($event)'
+>
+    <li *ngFor='let item of tabs'
+        [ngClass]='item.cssClasses'
+        data-overflowItem
+        class='fd-icon-tab-bar__item'
+        [attr.aria-hidden]='item.hidden'
+        role='presentation'
+    >
+        <a
+            class='fd-icon-tab-bar__tab'
+            role='tab'
+            *ngIf='!item.subItems'
+            (click)='selectItem(item)'
+            [attr.aria-selected]='item.uniqueKey === selectedItemKey'
+        >
+            <span class='fd-icon-tab-bar__tag'>
+                {{ item.label }}
+                <ng-container *ngIf='item.counter'> ({{item.counter}})</ng-container>
+            </span>
+            <span *ngIf='item.badge' class='fd-icon-tab-bar__badge'></span>
+        </a>
+        <ng-container *ngIf='item.subItems'>
+            <fd-text-type-popover
+                [parentTab]="item"
+                [selectedSubItemKey]="selectedItemKey"
+                (selectedSubItem)="selectItem($event)"
+            >
+            </fd-text-type-popover>
+        </ng-container>
+    </li>
+    <li
+        *ngIf='extraItems.length'
+        role="presentation"
+        class="fd-icon-tab-bar__item fd-icon-tab-bar__item--extra-btn"
+        fdExtraButton
+        [isRtl]="isRtl"
+        [anchorIndexInsideParent]="lastVisibleTabIndex"
+    >
+        <fd-text-type-popover
+            [items]="extraItems"
+            [isExtraItemsMode]="true"
+            (selectedExtraItem)="selectExtraItem($event)"
+        >
+        </fd-text-type-popover>
+    </li>
+</ul>

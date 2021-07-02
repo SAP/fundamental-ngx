@@ -1,0 +1,115 @@
+@import '~fundamental-styles/dist/icon-tab-bar';
+@import '~fundamental-styles/dist/list.css';
+
+// These styles should move to fundamental/styles repo.
+.fd-icon-tab-bar {
+
+  &__header {
+    position: relative;
+    overflow-x: hidden;;
+
+    &--left-padding {
+      padding-left: 3.5rem;
+    }
+  }
+
+  &__item--hidden {
+    display: none;
+  }
+
+  &__item--extra-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0!important;
+  }
+
+  &__item--prev-steps {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0!important;
+  }
+
+  &__separator {
+    width: 2rem;
+  }
+}
+
+.fd-list__icon-container {
+  display: flex;
+  align-items: center;
+  width: 1.25rem;
+  margin-right: .5rem;
+}
+
+.fd-icon-tab-bar__list-item {
+  min-width: 100px;
+  width: 100%;
+}
+
+[dir=rtl] {
+
+  .fd-list__icon {
+    justify-content: center;
+  }
+
+  .fd-list__icon-container {
+    margin-left: 1rem;
+    margin-right: 0;
+  }
+}
+
+.fd-icon-tab-bar__list {
+  max-height: 300px;
+  overflow: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.fd-list__item--positive .fd-list__icon [class*=sap-icon],
+.fd-list__item--positive .fd-list__icon[class*=sap-icon],
+.fd-list__item--positive .fd-list__title,
+.fd-list__item--positive .fd-list__counter {
+  color: #107e3e;
+  color: var(--fdIcon_Tab_Bar_Semantic_Badge_Color_Positive,var(--sapPositiveElementColor,#107e3e));
+}
+
+.fd-list__item--negative .fd-list__icon [class*=sap-icon],
+.fd-list__item--negative .fd-list__icon[class*=sap-icon],
+.fd-list__item--negative .fd-list__title,
+.fd-list__item--negative .fd-list__counter {
+  color: #b00;
+  color: var(--fdIcon_Tab_Bar_Semantic_Badge_Color_Negative,var(--sapNegativeElementColor,#b00));
+}
+
+.fd-list__item--critical .fd-list__icon [class*=sap-icon],
+.fd-list__item--critical .fd-list__icon[class*=sap-icon],
+.fd-list__item--critical .fd-list__title,
+.fd-list__item--critical .fd-list__counter {
+  color: #df6e0c;
+  color: var(--fdIcon_Tab_Bar_Semantic_Color_Critical,var(--sapCriticalElementColor,#df6e0c));
+}
+
+.fd-list__item--informative .fd-list__icon [class*=sap-icon],
+.fd-list__item--informative .fd-list__icon[class*=sap-icon],
+.fd-list__item--informative .fd-list__title,
+.fd-list__item--informative .fd-list__counter {
+  color: #0a6ed1;
+  color: var(--fdIcon_Tab_Bar_Semantic_Color_Informative,var(--sapInformativeElementColor,#0a6ed1));
+}
