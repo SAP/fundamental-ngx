@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.45...v0.31.0-rc.46) (2021-07-02)
+
+
+### Bug Fixes
+
+* **platform:** fix content density in select component with no predefined value ([#5726](https://github.com/SAP/fundamental-ngx/issues/5726)) ([bac69c5](https://github.com/SAP/fundamental-ngx/commit/bac69c5101e87cd290e8ff98790260c6a8e8913a))
+
 ## [0.31.0-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.44...v0.31.0-rc.45) (2021-07-01)
 
 ## [0.31.0-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.43...v0.31.0-rc.44) (2021-07-01)
