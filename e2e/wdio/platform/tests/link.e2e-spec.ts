@@ -115,7 +115,7 @@ describe('Link component test suite', function() {
     });
 
     describe('Check visual regression', function() {
-        xit('should check examples visual regression', () => {
+        it('should check examples visual regression', () => {
             linkPage.saveExampleBaselineScreenshot();
             expect(linkPage.compareWithBaseline()).toBeLessThan(5);
         });
