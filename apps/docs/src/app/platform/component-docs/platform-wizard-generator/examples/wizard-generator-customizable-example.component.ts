@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { takeWhile } from 'rxjs/operators';
 import { WizardDialogGeneratorService, WizardGeneratorFormsValue, WizardGeneratorItem, WizardTitle } from '@fundamental-ngx/platform';
@@ -8,6 +8,12 @@ import { WizardDialogGeneratorService, WizardGeneratorFormsValue, WizardGenerato
   templateUrl: './wizard-generator-customizable-example.component.html'
 })
 export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
+
+    @ViewChild('goNextTemplate') goNextTemplate: TemplateRef<any>;
+    @ViewChild('goBackTemplate') goBackTemplate: TemplateRef<any>;
+    @ViewChild('finishTemplate') finishTemplate: TemplateRef<any>;
+    @ViewChild('cancelTemplate') cancelTemplate: TemplateRef<any>;
+    @ViewChild('conrirmationDialogTemplate') confirmationDialogTemplate: TemplateRef<any>;
 
     wizardValue: WizardGeneratorFormsValue;
 
@@ -126,7 +132,12 @@ export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
                 appendToWizard: false,
                 addSummary: false,
                 responsivePaddings: false,
-                title: this.wizardTitle
+                title: this.wizardTitle,
+                goNextButtonTemplate: this.goNextTemplate,
+                goBackButtonTemplate: this.goBackTemplate,
+                finishButtonTemplate: this.finishTemplate,
+                cancelButtonTemplate: this.cancelTemplate,
+                confirmationDialogTemplate: this.confirmationDialogTemplate
             }
         }).afterClosed.pipe(takeWhile(() => this.allowSubscribe))
         .subscribe((wizardValue: WizardGeneratorFormsValue) => {

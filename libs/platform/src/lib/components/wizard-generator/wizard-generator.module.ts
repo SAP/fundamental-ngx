@@ -15,6 +15,8 @@ import { WizardSummaryStepComponent } from './components/wizard-summary-step/wiz
 import { WizardSummarySectionComponent } from './components/wizard-summary-step/wizard-summary-section/wizard-summary-section.component';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
 import { PlatformFormGeneratorModule } from '../form/form-generator/fdp-form-generator.module';
+import { FdpWizardGeneratorGoNextButtonDirective } from './directives/fdp-wizard-generator-go-next-button.directive';
+import { FdpWizardGeneratorFinishButtonDirective } from './directives/fdp-wizard-generator-finish-button.directive';
 
 
 
@@ -25,7 +27,9 @@ import { PlatformFormGeneratorModule } from '../form/form-generator/fdp-form-gen
         WizardBodyComponent,
         DialogWizardGeneratorComponent,
         WizardSummaryStepComponent,
-        WizardSummarySectionComponent
+        WizardSummarySectionComponent,
+        FdpWizardGeneratorGoNextButtonDirective,
+        FdpWizardGeneratorFinishButtonDirective
     ],
     entryComponents: [DialogWizardGeneratorComponent],
     imports: [
@@ -45,7 +49,9 @@ import { PlatformFormGeneratorModule } from '../form/form-generator/fdp-form-gen
         WizardBodyComponent,
         DialogWizardGeneratorComponent,
         WizardSummaryStepComponent,
-        WizardSummarySectionComponent
+        WizardSummarySectionComponent,
+        FdpWizardGeneratorGoNextButtonDirective,
+        FdpWizardGeneratorFinishButtonDirective
     ],
     providers: [WizardDialogGeneratorService]
 })

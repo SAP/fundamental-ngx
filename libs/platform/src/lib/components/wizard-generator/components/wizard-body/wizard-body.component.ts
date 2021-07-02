@@ -1,4 +1,15 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Input,
+    OnDestroy,
+    OnInit,
+    Output,
+    TemplateRef,
+    ViewEncapsulation
+} from '@angular/core';
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
 import { debounceTime, takeWhile } from 'rxjs/operators';
 import { WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
@@ -57,6 +68,16 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      * @description Boolean flag indicating whether or not to append Summary page as the last step.
      */
     @Input() addSummary = false;
+
+    /**
+     * User-defined template for "Go Next" button.
+     */
+    @Input() goNextButtonTemplate: TemplateRef<any>;
+
+    /**
+     * User-defined template for "Finish" button.
+     */
+    @Input() finishButtonTemplate: TemplateRef<any>;
 
     /**
      * @description Is current step is summary step.
@@ -161,5 +182,17 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      */
     _trackFn(_index: number, item: WizardGeneratorItem): string {
         return item.id;
+    }
+
+    goNextFn(): () => void {
+        return () => {
+            this.goNext.emit();
+        }
+    }
+
+    finishFn(): () => void {
+        return () => {
+            this.finish.emit();
+        }
     }
 }

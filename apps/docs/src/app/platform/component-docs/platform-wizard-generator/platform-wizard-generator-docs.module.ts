@@ -11,6 +11,7 @@ import { WizardGeneratorDialogExampleComponent } from './examples/wizard-generat
 import { WizardGeneratorConditionExampleComponent } from './examples/wizard-generator-condition-example.component';
 import { WizardGeneratorCustomizableExampleComponent } from './examples/wizard-generator-customizable-example.component';
 import { WizardGeneratorResponsivePaddingsExampleComponent } from './examples/wizard-generator-responsive-paddings-example.component';
+import { BarModule, DialogModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -37,7 +38,9 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         PlatformWizardGeneratorModule,
-        PlatformButtonModule
+        PlatformButtonModule,
+        DialogModule,
+        BarModule
     ]
 })
 export class PlatformWizardGeneratorDocsModule { }

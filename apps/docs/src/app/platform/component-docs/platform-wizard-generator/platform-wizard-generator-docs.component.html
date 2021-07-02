@@ -34,7 +34,17 @@
 <description>
     The wizard component can be customized with modifier inputs.
     Steps can be placed on separate pages, rather than appended to the wizard, by setting the <code>[appendToWizard]</code> input to <code>false</code>.
+    <br><br>
     You can also use icons for the step indicators by adding <code>icon</code> property to the wizard steps object.
+    <br><br>
+    Buttons appearance can be changed with <code>[navigationButtonLabels]</code> property.
+    <br><br>
+    Dialog close confirmation text can be changed with <code>confirmationDialogText, confirmationDialogCloseText, confirmationDialogCancelText</code> properties.
+    <br><br>
+    If you want to use completely different style for navigational buttons, you can use <code>goNextButtonTemplate, goBackButtonTemplate, finishButtonTemplate, cancelButtonTemplate</code>
+    properties for the dialog wizard, and content-projected html with special directives: <code>fdpWizardGeneratorGoNextButton, fdpWizardGeneratorFinishButton</code>.
+    <br><br>
+    If you want to use your custom confirmation dialog, you can pass it <code>confirmationDialogTemplate</code> property to wizard dialog service.
 </description>
 <component-example>
     <fdp-wizard-generator-customizable-example></fdp-wizard-generator-customizable-example>

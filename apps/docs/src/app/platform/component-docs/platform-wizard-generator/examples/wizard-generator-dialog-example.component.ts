@@ -113,6 +113,7 @@ export class WizardGeneratorDialogExampleComponent implements OnDestroy {
     }
 
     openDialog(): void {
+
         this._wizardDialogService.open({
             width: '100%',
             height: '100%',

@@ -20,8 +20,18 @@
                         <fdp-wizard-summary-step [status]="step.status" *ngIf="step.summary"></fdp-wizard-summary-step>
 
                         <fd-wizard-next-step *ngIf="appendToWizard">
-                            <fdp-button *ngIf="!addSummary && !isLastStep" [contentDensity]="navigationButtonLabels.goNext.contentDensity" [buttonType]="navigationButtonLabels.goNext.type" [label]="navigationButtonLabels.goNext.label" (click)="goNext.emit()"></fdp-button>
-                            <fdp-button *ngIf="addSummary && isSummaryStep || !addSummary && isLastStep" [contentDensity]="navigationButtonLabels.finish.contentDensity" [buttonType]="navigationButtonLabels.finish.type" [label]="navigationButtonLabels.finish.label" (click)="finish.emit()"></fdp-button>
+                            <ng-container *ngIf="!addSummary && !isLastStep">
+                                <ng-template #defaultGoNextButtonTemplate>
+                                    <fdp-button [contentDensity]="navigationButtonLabels.goNext.contentDensity" [buttonType]="navigationButtonLabels.goNext.type" [label]="navigationButtonLabels.goNext.label" (click)="goNext.emit()"></fdp-button>
+                                </ng-template>
+                                <ng-template [ngTemplateOutlet]="goNextButtonTemplate || defaultGoNextButtonTemplate" [ngTemplateOutletContext]="{ goNext: goNextFn() }"></ng-template>
+                            </ng-container>
+                            <ng-container *ngIf="addSummary && isSummaryStep || !addSummary && isLastStep">
+                                <ng-template #defaultFinishTemplate>
+                                    <fdp-button *ngIf="addSummary && isSummaryStep || !addSummary && isLastStep" [contentDensity]="navigationButtonLabels.finish.contentDensity" [buttonType]="navigationButtonLabels.finish.type" [label]="navigationButtonLabels.finish.label" (click)="finish.emit()"></fdp-button>
+                                </ng-template>
+                                <ng-template [ngTemplateOutlet]="finishButtonTemplate || defaultFinishButtonTemplate" [ngTemplateOutletContext]="{ finish: finishFn() }"></ng-template>
+                            </ng-container>
                         </fd-wizard-next-step>
                     </fd-wizard-content>
                 </li>

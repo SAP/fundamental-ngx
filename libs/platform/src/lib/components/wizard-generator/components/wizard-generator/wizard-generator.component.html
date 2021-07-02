@@ -1,6 +1,8 @@
 <ng-container *ngIf="_wizardCreated">
     <fdp-wizard-body
         [navigationButtonLabels]="navigationButtonLabels"
+        [goNextButtonTemplate]="goNextButtonTemplate"
+        [finishButtonTemplate]="finishButtonTemplate"
         [responsivePaddings]="responsivePaddings"
         [hidden]="!_wizardCreated"
         [appendToWizard]="appendToWizard"

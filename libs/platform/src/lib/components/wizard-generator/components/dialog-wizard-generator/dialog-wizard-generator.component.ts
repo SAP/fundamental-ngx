@@ -15,7 +15,7 @@ import { WizardGeneratorService } from '../../wizard-generator.service';
 })
 export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
 
-    @ViewChild('confirmationDialog') confirmationDialog: TemplateRef<any>;
+    @ViewChild('defaultConfirmationDialogTemplate') defaultConfirmationDialogTemplate: TemplateRef<any>;
 
     /**
      * @description Wizards dialog title configuration.
@@ -35,6 +35,16 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
      */
     confirmationDialogCancelText = 'Cancel';
 
+    goNextButtonTemplate: TemplateRef<any>;
+
+    goBackButtonTemplate: TemplateRef<any>;
+
+    finishButtonTemplate: TemplateRef<any>;
+
+    cancelButtonTemplate: TemplateRef<any>;
+
+    confirmationDialogTemplate: TemplateRef<any>;
+
     /** @hidden */
     constructor(
         _wizardGeneratorService: WizardGeneratorService,
@@ -51,6 +61,11 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
         this.navigationButtonLabels = this._dialogRef.data.navigationButtonLabels;
         this.contentHeight = this._dialogRef.data.contentHeight;
         this.responsivePaddings = this._dialogRef.data.responsivePaddings;
+        this.goNextButtonTemplate = this._dialogRef.data.goNextButtonTemplate;
+        this.goBackButtonTemplate = this._dialogRef.data.goBackButtonTemplate;
+        this.finishButtonTemplate = this._dialogRef.data.finishButtonTemplate;
+        this.cancelButtonTemplate = this._dialogRef.data.cancelButtonTemplate;
+        this.confirmationDialogTemplate = this._dialogRef.data.confirmationDialogTemplate;
 
         if (this._dialogRef.data.confirmationDialogText) {
             this.confirmationDialogText = this._dialogRef.data.confirmationDialogText;
@@ -69,7 +84,10 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
      * @description Cancels Wizard progress and closes the dialog.
      */
     cancel(): void {
-        const dialogRef = this._dialogService.open(this.confirmationDialog, { responsivePadding: true });
+
+        const template = this.confirmationDialogTemplate || this.defaultConfirmationDialogTemplate;
+
+        const dialogRef = this._dialogService.open(template, { responsivePadding: true });
 
         dialogRef.afterClosed
         .pipe(takeWhile(() => this._allowSubscribe), filter((result) => result))
@@ -100,5 +118,29 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
             const wizardResult = await this._wizardGeneratorService.getWizardFormValue(true);
             this._dialogRef.close(wizardResult);
         });
+    }
+
+    goBackFn(): () => void {
+        return () => {
+            this.goBack();
+        }
+    }
+
+    goNextFn(): () => void {
+        return () => {
+            this.goNext();
+        }
+    }
+
+    finishFn(): () => void {
+        return () => {
+            this.finish();
+        }
+    }
+
+    cancelFn(): () => void {
+        return () => {
+            this.cancel();
+        }
     }
 }

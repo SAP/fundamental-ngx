@@ -1,3 +1,4 @@
+import { TemplateRef } from '@angular/core';
 import { WizardGeneratorItem } from './wizard-generator-item.interface';
 import { WizardNavigationButtons } from './wizard-navigation-buttons.interface';
 import { WizardTitle } from './wizard-title.interface';
@@ -54,4 +55,29 @@ export interface WizardDialogData {
      * @description Text that will be displayed if user clicks on Cancel button in confirmation dialog.
      */
     confirmationDialogCancelText?: string;
+
+    /**
+     * User-defined template for "Go Next" button.
+     */
+    goNextButtonTemplate?: TemplateRef<any>;
+
+    /**
+     * User-defined template for "Go Back" button.
+     */
+    goBackButtonTemplate?: TemplateRef<any>;
+
+    /**
+     * User-defined template for "Finish" button.
+     */
+    finishButtonTemplate?: TemplateRef<any>;
+
+    /**
+     * User-defined template for "Cancel" button.
+     */
+    cancelButtonTemplate?: TemplateRef<any>;
+
+    /**
+     * User-defined template for cancel confirmation dialog.
+     */
+    confirmationDialogTemplate?: TemplateRef<any>;
 }
