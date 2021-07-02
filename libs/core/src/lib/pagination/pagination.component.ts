@@ -139,7 +139,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
     /** Aria label for the navigation element */
     @Input()
-    ariaLabel = 'Pagination with id ' + this.id;
+    ariaLabel = 'Pagination';
 
     /** Event fired when the page is changed. */
     @Output()
