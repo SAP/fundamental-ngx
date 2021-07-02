@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-inline-help-example',
@@ -17,12 +17,4 @@ import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
         `
     ]
 })
-export class InlineHelpExampleComponent {
-
-    constructor(private _render: Renderer2, private _elementRef: ElementRef) {}
-    _showHint(): void {
-        console.log(' this._elementRef.nativeElement.querySelector(fd-icon)...',
-  this._elementRef.nativeElement.querySelector('fd-icon'));
-        this._elementRef.nativeElement.querySelector('fd-icon').onmouseover();
-    }
-}
+export class InlineHelpExampleComponent {}
