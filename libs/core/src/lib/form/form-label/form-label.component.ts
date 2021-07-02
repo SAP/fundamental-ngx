@@ -55,7 +55,7 @@ export class FormLabelComponent implements OnChanges {
     /** The trigger events that will open/close the inline help.
      *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
     @Input()
-    inlineHelpTrigger: string[] = ['mouseleave', 'mouseenter'];
+    inlineHelpTrigger: string[] = ['mouseleave', 'mouseenter', 'focusin', 'focusout'];
 
     /** If inline help trigger icon should be placed after, or before text */
     @Input()
