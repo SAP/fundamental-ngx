@@ -27,6 +27,8 @@ import * as popoverCdkPlacementSrcH from '!raw-loader!./examples/popover-new-pla
 import * as popoverCdkScrollSrcTs from '!raw-loader!./examples/popover-scroll-example/popover-scroll-example.component.ts';
 import * as popoverCdkScrollSrcH from '!raw-loader!./examples/popover-scroll-example/popover-scroll-example.component.html';
 import * as popoverTriggerSrc from '!raw-loader!./examples/popover-trigger-example/popover-trigger-example.component.html';
+import * as mobilePopoverHtmlSrc from '!raw-loader!./examples/popover-mobile/popover-mobile-example.component.html';
+import * as mobilePopoverTsSrc from '!raw-loader!./examples/popover-mobile/popover-mobile-example.component.ts';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -203,5 +205,19 @@ export class PopoverDocsComponent {
             component: 'PopoverDropdownComponent',
             scssFileCode: dropdownPopoverScss
         }
+    ];
+
+    mobilePopover: ExampleFile[] = [
+        {
+            language: 'html',
+            code: mobilePopoverHtmlSrc,
+            fileName: 'popover-mobile-example',
+        },
+        {
+            language: 'typescript',
+            component: 'PopoverMobileExampleComponent',
+            code: mobilePopoverTsSrc,
+            fileName: 'popover-mobile-example',
+        },
     ];
 }
