@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.50...v0.31.0-rc.51) (2021-07-03)
+
+
+### Bug Fixes
+
+* **core:** handle invalid date inside date's components ([#5851](https://github.com/SAP/fundamental-ngx/issues/5851)) ([f1f3705](https://github.com/SAP/fundamental-ngx/commit/f1f3705a2f1a3656695a197a751b444dab030665))
+
 ## [0.31.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.49...v0.31.0-rc.50) (2021-07-03)
 
 
