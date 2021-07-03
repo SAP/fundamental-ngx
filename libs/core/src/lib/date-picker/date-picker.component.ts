@@ -536,6 +536,14 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         this._inputFieldDate = dateStr;
         /** Case when there is single mode */
         if (this.type === 'single') {
+            if (!dateStr) {
+                this._isInvalidDateInput = !this.allowNull;
+                this.selectedDate = null;
+                this._refreshCurrentlyDisplayedCalendarDate(this.selectedDate);
+                this.onChange(this.selectedDate);
+                this.selectedDateChange.emit(this.selectedDate);
+                return;
+            }
             const date = this._dateTimeAdapter.parse(dateStr, this._dateTimeFormats.parse.dateInput);
 
             /** Check if dates are equal, if so, there is no need to make any changes */
@@ -543,7 +551,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
                 this._isInvalidDateInput = !this._isSingleModelValid(date);
 
                 /** Check if date is valid, if it's not, there is no need to refresh calendar */
-                if (!this._isInvalidDateInput && dateStr) {
+                if (!this._isInvalidDateInput) {
                     this._refreshCurrentlyDisplayedCalendarDate(date);
                 }
 
@@ -557,6 +565,14 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
 
             /** Case when there is range mode */
         } else {
+            if (!dateStr) {
+                this._isInvalidDateInput = !this.allowNull;
+                this.selectedRangeDate =  {start: null, end: null};
+                this._refreshCurrentlyDisplayedCalendarDate(this.selectedRangeDate.start);
+                this.onChange(this.selectedRangeDate);
+                this.selectedRangeDateChange.emit(this.selectedRangeDate);
+                return;
+            }
             const [startDateStr, endDateStr] = dateStr.split(this.rangeDelimiter);
             const startDate = this._dateTimeAdapter.parse(startDateStr, this._dateTimeFormats.parse.dateInput);
             const endDate = this._dateTimeAdapter.parse(endDateStr, this._dateTimeFormats.parse.dateInput);
@@ -595,10 +611,6 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
                     this._refreshCurrentlyDisplayedCalendarDate(this.selectedRangeDate.start);
                 }
             }
-        }
-
-        if (!dateStr && this.allowNull) {
-            this._isInvalidDateInput = false;
         }
     }
 
