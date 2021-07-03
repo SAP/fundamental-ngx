@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.49...v0.31.0-rc.50) (2021-07-03)
+
+
+### Bug Fixes
+
+* **core:** always show dashed branching indicator ([#5861](https://github.com/SAP/fundamental-ngx/issues/5861)) ([302ff6c](https://github.com/SAP/fundamental-ngx/commit/302ff6c9ac355b5d467df44fe6ffe33739cc4597))
+
 ## [0.31.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.48...v0.31.0-rc.49) (2021-07-02)
 
 
