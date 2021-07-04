@@ -187,7 +187,7 @@
     "nan": "2.14.2",
     "ng-packagr": "11.2.4",
     "prettier": "2.3.2",
-    "rollup": "2.47.0",
+    "rollup": "2.52.7",
     "standard-version": "9.3.0",
     "ts-node": "9.1.1",
     "tslint": "6.1.3",
