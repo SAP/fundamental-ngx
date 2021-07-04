@@ -135,7 +135,7 @@
     "@angular-devkit/core": "~11.2.12",
     "@angular/cli": "~11.2.12",
     "@angular/compiler-cli": "~11.2.13",
-    "@angular/language-service": "~11.2.13",
+    "@angular/language-service": "~12.1.1",
     "@angularclass/hmr": "3.0.0",
     "@babel/core": "7.13.14",
     "@commitlint/cli": "12.1.4",
