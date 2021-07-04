@@ -166,7 +166,7 @@
     "dotenv": "8.2.0",
     "fs-extra": "9.1.0",
     "github-assistant": "0.3.3",
-    "husky": "6.0.0",
+    "husky": "7.0.0",
     "jasmine-core": "3.6.0",
     "jasmine-marbles": "0.8.1",
     "jasmine-spec-reporter": "6.0.0",
