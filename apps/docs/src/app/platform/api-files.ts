@@ -5,7 +5,7 @@
  * Names are sorted in the ApiComponent so order does not matter.
  */
 export const API_FILES = {
-    actionbar: ['actionbarcomponent'],
+    actionbar: ['ActionBarComponent', 'ActionButtonGroupComponent'],
     button: ['ButtonComponent'],
     checkbox: ['CheckboxComponent'],
     formGenerator: ['FormGeneratorComponent', 'FormGeneratorService', 'DynamicFormControlDirective', 'DynamicFormControlFieldDirective'],
@@ -74,7 +74,6 @@ export const API_FILES = {
         'ListComponent',
         'ListFooter',
         'ListGroupHeader',
-        'ListHeader',
         'ListConfig'
     ],
     objectlistitem: [
@@ -82,7 +81,6 @@ export const API_FILES = {
         'ListComponent',
         'ListFooter',
         'ListGroupHeader',
-        'ListHeader',
         'ListConfig'
     ],
     multiInput: ['PlatformMultiInputComponent'],
@@ -92,7 +90,7 @@ export const API_FILES = {
     uploadCollection: ['UploadCollectionComponent', 'UploadCollectionDataProvider', 'UploadCollectionDataSource'],
     approvalFlow: ['ApprovalFlowComponent', 'ApprovalFlowNodeComponent'],
     slider: ['SliderComponent'],
-    footer: ['FooterComponent'],
+    footer: ['PlatformFooterComponent'],
     wizardGenerator: [
         'WizardGeneratorService',
         'WizardDialogGeneratorService',
