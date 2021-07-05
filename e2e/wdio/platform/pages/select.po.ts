@@ -15,7 +15,7 @@ export class SelectPo extends BaseComponentPo {
     selectSemanticStateOption = '.fd-list__item.ng-star-inserted';
     customControlContentExample = 'fdp-select-custom-trigger';
     selectMobileExample = 'fdp-select-mobile-example';
-    mobileCloseButton = '.cdk-drag button';
+    mobileCloseButton = 'fd-bar-element button';
     mobileTitle = '.fd-title--h5';
     selectMaxHeightExample = 'fdp-select-max-height-example';
     selectNoneExample = 'fdp-select-none-example';
