@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.55...v0.31.0-rc.56) (2021-07-05)
+
+
+### Bug Fixes
+
+* **core:** prevent error on missing menuService ([#5821](https://github.com/SAP/fundamental-ngx/issues/5821)) ([b767580](https://github.com/SAP/fundamental-ngx/commit/b767580cd05e57827470f7393110dec38e075a3f))
+
 ## [0.31.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.54...v0.31.0-rc.55) (2021-07-05)
 
 ## [0.31.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.53...v0.31.0-rc.54) (2021-07-05)
