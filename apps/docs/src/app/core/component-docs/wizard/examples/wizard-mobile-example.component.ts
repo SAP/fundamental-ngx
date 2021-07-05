@@ -38,6 +38,12 @@ export class WizardMobileExampleComponent {
 
     example1goToStep(step: number): void {
         switch (step) {
+            case 1: {
+                this.example1step1status = 'current';
+                this.example1step2status = 'upcoming';
+                this.example1step3status = 'upcoming';
+                break;
+            }
             case 2: {
                 this.example1step1status = 'completed';
                 this.example1step2status = 'current';
@@ -55,6 +61,12 @@ export class WizardMobileExampleComponent {
 
     example2goToStep(step: number): void {
         switch (step) {
+            case 1: {
+                this.example2step1status = 'current';
+                this.example2step2status = 'upcoming';
+                this.example2step3status = 'upcoming';
+                break;
+            }
             case 2: {
                 this.example2step1status = 'completed';
                 this.example2step2status = 'current';
