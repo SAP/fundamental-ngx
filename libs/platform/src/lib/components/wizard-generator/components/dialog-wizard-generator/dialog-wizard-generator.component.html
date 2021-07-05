@@ -12,7 +12,7 @@
                     </ng-template>
                     <ng-template [ngTemplateOutlet]="goBackButtonTemplate || defaultGoBackButtonTemplate" [ngTemplateOutletContext]="{ goBack: _goBackFn() }"></ng-template>
                 </ng-container>
-                <ng-container *ngIf="!isSummaryStep">
+                <ng-container *ngIf="!addSummary && !isLastStep">
                     <ng-template #defaultGoNextButtonTemplate>
                         <fdp-button class="fd-bar__element" [contentDensity]="navigationButtonLabels.goNext.contentDensity" [buttonType]="navigationButtonLabels.goNext.type" [label]="navigationButtonLabels.goNext.label" (click)="goNext()"></fdp-button>
                     </ng-template>
