@@ -178,7 +178,10 @@ describe('Carousel test suite', function() {
         });
 
         it('should check navigation', () => {
-           checkCarouselNavigation(4, 13);
+            scrollIntoView(displayedImg, 4);
+            mouseHoverElement(displayedImg, 4);
+            waitForElDisplayed(contentNavBtns);
+            checkCarouselNavigation(4, 13);
         });
     });
 
