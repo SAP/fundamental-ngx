@@ -137,6 +137,9 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     @Input()
     pageLabel = 'Page';
 
+    /** Aria label for the navigation element */
+    @Input()
+    ariaLabel = 'Pagination';
 
     /** Event fired when the page is changed. */
     @Output()
