@@ -107,7 +107,7 @@ describe('object status test suite', function() {
     });
 
     describe('Visual regression', function() {
-        xit('should check examples visual regression', () => {
+        it('should check examples visual regression', () => {
             refreshPage();
             waitForPresent(defaultExamples + status);
             objectStatusPage.saveExampleBaselineScreenshot();

@@ -11,6 +11,7 @@ import { FdDate, FdDatetimeModule } from '../datetime';
 import { ButtonModule } from '../button/button.module';
 import { InputGroupModule } from '../input-group/input-group.module';
 import { DateTimeFormats, DATE_TIME_FORMATS } from '../datetime/datetime-formats';
+import { INVALID_DATE_ERROR } from '@fundamental-ngx/core';
 
 describe('DatetimePickerComponent', () => {
     let component: DatetimePickerComponent<FdDate>;
@@ -113,7 +114,7 @@ describe('DatetimePickerComponent', () => {
 
     it('should reset input if time format is invalid', () => {
         component.writeValue('hello' as any);
-        expect(component._inputFieldDate).toBe('');
+        expect(component._inputFieldDate).toBe(INVALID_DATE_ERROR);
     });
 
     it('should use displayFormat and set to true _displayHours, _displayMinutes, _meridian', () => {

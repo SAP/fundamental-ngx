@@ -12,7 +12,7 @@ import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
         ></fd-datetime-picker>
         <br />
         <br />
-        <span>Selected Date: {{ selectedDay }}</span>
+        <span>Selected Date: {{ selectedDay || 'null' }}</span>
     `
 })
 export class DatetimePickerAllowNullExampleComponent {
@@ -21,6 +21,6 @@ export class DatetimePickerAllowNullExampleComponent {
     selectedDay: FdDate = FdDate.getNow();
 
     isInvalid(): boolean {
-        return this.datePicker?.isInvalidDateInput;
+        return !this.selectedDay || !this.selectedDay.isDateValid();
     }
 }

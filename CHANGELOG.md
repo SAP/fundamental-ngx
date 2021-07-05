@@ -1,4 +1,40 @@
 
+## [0.31.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.54...v0.31.0-rc.55) (2021-07-05)
+
+## [0.31.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.53...v0.31.0-rc.54) (2021-07-05)
+
+
+### Bug Fixes
+
+* **core:** add ariaLabel to Pagination component ([#5845](https://github.com/SAP/fundamental-ngx/issues/5845)) ([ab6f6dd](https://github.com/SAP/fundamental-ngx/commit/ab6f6ddbf43713938cf5740147354b191ec76b14))
+
+## [0.31.0-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.52...v0.31.0-rc.53) (2021-07-05)
+
+## [0.31.0-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.51...v0.31.0-rc.52) (2021-07-04)
+
+## [0.31.0-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.50...v0.31.0-rc.51) (2021-07-03)
+
+
+### Bug Fixes
+
+* **core:** handle invalid date inside date's components ([#5851](https://github.com/SAP/fundamental-ngx/issues/5851)) ([f1f3705](https://github.com/SAP/fundamental-ngx/commit/f1f3705a2f1a3656695a197a751b444dab030665))
+
+## [0.31.0-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.49...v0.31.0-rc.50) (2021-07-03)
+
+
+### Bug Fixes
+
+* **core:** always show dashed branching indicator ([#5861](https://github.com/SAP/fundamental-ngx/issues/5861)) ([302ff6c](https://github.com/SAP/fundamental-ngx/commit/302ff6c9ac355b5d467df44fe6ffe33739cc4597))
+
+## [0.31.0-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.48...v0.31.0-rc.49) (2021-07-02)
+
+
+### Features
+
+* **core:** implement responsive popover ([#5737](https://github.com/SAP/fundamental-ngx/issues/5737)) ([16b0167](https://github.com/SAP/fundamental-ngx/commit/16b0167627fc18cf5e43b37a6876fd726275846f))
+
+## [0.31.0-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.47...v0.31.0-rc.48) (2021-07-02)
+
 ## [0.31.0-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.46...v0.31.0-rc.47) (2021-07-02)
 
 

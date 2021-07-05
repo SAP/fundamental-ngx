@@ -1,9 +1,12 @@
 import { BarPo } from '../pages/bar.po';
 import {
+    checkElementScreenshot,
     getElementArrayLength,
+    getImageTagBrowserPlatform,
     isElementClickable,
     isElementDisplayed,
     refreshPage,
+    saveElementScreenshot,
     scrollIntoView,
     waitForPresent
 } from '../../driver/wdio';
@@ -11,8 +14,7 @@ import {
 describe('Bar test suite:', function() {
     const barPage: BarPo = new BarPo();
     const {
-        arrowButtons, leftSections, saveCancelButtons, pictures,
-        subMiddleSection, rightSections, middleSections,
+        arrowButtons, leftSections, saveCancelButtons, pictures, subMiddleSection, rightSections, middleSections,
     } = barPage;
 
     beforeAll(() => {
@@ -69,12 +71,19 @@ describe('Bar test suite:', function() {
         }
     });
 
-    xdescribe('Check visual regression', function() {
+    describe('Check visual regression', function() {
 
-        // skipped due to issue with example selector for this component
-        xit('should check examples visual regression', () => {
-            barPage.saveExampleBaselineScreenshot();
-            expect(barPage.compareWithBaseline()).toBeLessThan(1);
+        it('should check examples visual regression', () => {
+            const exampleCount = getElementArrayLength(barPage.exampleAreaContainersArr);
+            for (let i = 0; i < exampleCount; i++) {
+                // not working for floating footer example (index 5)
+                if (i !== 5) {
+                    scrollIntoView(barPage.exampleAreaContainersArr, i);
+                    saveElementScreenshot(barPage.exampleAreaContainersArr, `bar-example-${i}-core-${getImageTagBrowserPlatform()}`, barPage.getScreenshotFolder(), i);
+                    expect(checkElementScreenshot(barPage.exampleAreaContainersArr, `bar-example-${i}-core-${getImageTagBrowserPlatform()}`, barPage.getScreenshotFolder(), i))
+                        .toBeLessThan(5)
+                }
+            }
         });
     });
 });
