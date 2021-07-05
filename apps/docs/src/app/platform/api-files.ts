@@ -54,10 +54,10 @@ export const API_FILES = {
     textarea: ['TextAreaComponent'],
     timePicker: ['PlatformTimePickerComponent'],
     panel: [
-        'PlatformPanelComponent',
-        'PlatformPanelContentComponent',
-        'PlatformPanelActionsComponent',
-        'PlatformPanelConfig'
+        'PanelComponent',
+        'PanelContentComponent',
+        'PanelActionsComponent',
+        'PanelConfig'
     ],
     switch: ['SwitchComponent'],
     stepInput: ['NumberStepInputComponent', 'StepInputComponent', 'StepInputConfig'],

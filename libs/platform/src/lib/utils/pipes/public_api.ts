@@ -1,2 +1,2 @@
 export * from './pipe.module';
-export * from './convert-bytes/index';
+export * from './convert-bytes';
