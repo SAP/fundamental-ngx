@@ -4,11 +4,10 @@ import { WizardGeneratorItem, WizardTitle, WizardDialogGeneratorService, WizardG
 import { takeWhile } from 'rxjs/operators';
 
 @Component({
-    selector: 'fdp-wizard-generator-dialog-example',
-    templateUrl: './wizard-generator-dialog-example.component.html'
+  selector: 'fdp-wizard-generator-responsive-dialog-example',
+  templateUrl: './wizard-generator-responsive-dialog-example.component.html'
 })
-export class WizardGeneratorDialogExampleComponent implements OnDestroy {
-
+export class WizardGeneratorResponsiveDialogExampleComponent implements OnDestroy {
     wizardValue: any;
 
     wizardTitle: WizardTitle = {
@@ -122,7 +121,7 @@ export class WizardGeneratorDialogExampleComponent implements OnDestroy {
                 items: this.stepItems,
                 appendToWizard: false,
                 addSummary: true,
-                responsivePaddings: false,
+                responsivePaddings: true,
                 title: this.wizardTitle
             }
         }).afterClosed.pipe(takeWhile(() => this.allowSubscribe))

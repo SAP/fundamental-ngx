@@ -16,6 +16,9 @@ import * as conditionWizardGeneratorTsExample from '!raw-loader!./examples/wizar
 import * as responsiveWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-responsive-paddings-example.component.html';
 import * as responsiveWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-responsive-paddings-example.component.ts';
 
+import * as responsiveDialogWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-responsive-dialog-example.component.html';
+import * as responsiveDialogWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-responsive-dialog-example.component.ts';
+
 @Component({
     selector: 'fdp-platform-wizard-generator-docs',
     templateUrl: './platform-wizard-generator-docs.component.html'
@@ -89,6 +92,20 @@ export class PlatformWizardGeneratorDocsComponent {
             code: responsiveWizardGeneratorTsExample,
             fileName: 'wizard-generator-responsive-paddings-example',
             component: 'WizardGeneratorResponsivePaddingsExampleComponent'
+        }
+    ];
+
+    responsiveDialogPaddingsExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: responsiveDialogWizardGeneratorHtmlExample,
+            fileName: 'wizard-generator-responsive-dialog-example'
+        },
+        {
+            language: 'typescript',
+            code: responsiveDialogWizardGeneratorTsExample,
+            fileName: 'wizard-generator-responsive-dialog-example',
+            component: 'WizardGeneratorResponsiveDialogExampleComponent'
         }
     ];
 

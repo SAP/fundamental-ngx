@@ -504,16 +504,19 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _shrinkWhileAnyStepIsTooNarrow(): void {
-        this.stackedStepsLeft = [];
-        this.stackedStepsRight = [];
-        this.steps.first.stepIndicator.setStackedItems(this.stackedStepsLeft);
-        this._getLastNonSummaryStep().stepIndicator.setStackedItems(this.stackedStepsRight);
-        this._resetStepClasses();
-        let i = 0;
-        while (this._anyStepIsTooNarrow() && i < this.steps.length - 1) {
-            i++;
-            this._wizardShrinking();
-        }
+        // Add small delay for elements to render appropriately.
+        setTimeout(() => {
+            this.stackedStepsLeft = [];
+            this.stackedStepsRight = [];
+            this.steps.first.stepIndicator.setStackedItems(this.stackedStepsLeft);
+            this._getLastNonSummaryStep().stepIndicator.setStackedItems(this.stackedStepsRight);
+            this._resetStepClasses();
+            let i = 0;
+            while (this._anyStepIsTooNarrow() && i < this.steps.length - 1) {
+                i++;
+                this._wizardShrinking();
+            }
+        }, 10);
     }
 
     /** @hidden */

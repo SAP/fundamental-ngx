@@ -72,8 +72,7 @@
 </fd-docs-section-title>
 <description>
     <p>The default wizard dont have responsive paddings applied for progress bar and content.
-    To enable responsive paddings, you can use <code>[responsivePaddings]="true"</code> input to the wizard generator component,
-    or <code>responsivePaddings</code> property for wizard generator in dialog configuration.</p>
+    To enable responsive paddings, you can use <code>[responsivePaddings]="true"</code> input to the wizard generator component.</p>
     <p>Responsive paddings values:</p>
     <table>
         <thead>
@@ -117,3 +116,14 @@
     <fdp-wizard-generator-responsive-paddings-example></fdp-wizard-generator-responsive-paddings-example>
 </component-example>
 <code-example [exampleFiles]="responsivePaddingsExample"></code-example>
+
+<fd-docs-section-title id="wizardDialogResponsivePaddingsExample" componentName="wizard">
+    Responsive paddings for Wizard generator in dialog
+</fd-docs-section-title>
+<description>
+    Use <code>responsivePaddings: true</code> property for dialog config to enable wizard responsive paddings inside dialog.
+</description>
+<component-example>
+    <fdp-wizard-generator-responsive-dialog-example></fdp-wizard-generator-responsive-dialog-example>
+</component-example>
+<code-example [exampleFiles]="responsiveDialogPaddingsExample"></code-example>

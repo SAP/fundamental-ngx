@@ -4,7 +4,7 @@
     </fd-dialog-header>
     <fd-dialog-body>
         <fdp-wizard-body [responsivePaddings]="responsivePaddings" [navigationButtonLabels]="navigationButtonLabels" [hidden]="!_wizardCreated" (statusChange)="stepStatusChanged($event.id, $event.status)" [appendToWizard]="appendToWizard" [contentHeight]="contentHeight"></fdp-wizard-body>
-        <div fd-bar barDesign="floating-footer" *ngIf="_wizardCreated">
+        <div fd-bar barDesign="floating-footer" [class.fd-bar--responsive-paddings]="responsivePaddings" *ngIf="_wizardCreated">
             <div fd-bar-right>
                 <ng-container *ngIf="!isFirstStep">
                     <ng-template #defaultGoBackButtonTemplate>
