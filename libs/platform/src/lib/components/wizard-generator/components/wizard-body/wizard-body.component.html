@@ -27,7 +27,7 @@
                                 <ng-template [ngTemplateOutlet]="goNextButtonTemplate || defaultGoNextButtonTemplate" [ngTemplateOutletContext]="{ goNext: _goNextFn() }"></ng-template>
                             </ng-container>
                             <ng-container *ngIf="addSummary && isSummaryStep || !addSummary && isLastStep">
-                                <ng-template #defaultFinishTemplate>
+                                <ng-template #defaultFinishButtonTemplate>
                                     <fdp-button *ngIf="addSummary && isSummaryStep || !addSummary && isLastStep" [contentDensity]="navigationButtonLabels.finish.contentDensity" [buttonType]="navigationButtonLabels.finish.type" [label]="navigationButtonLabels.finish.label" (click)="finish.emit()"></fdp-button>
                                 </ng-template>
                                 <ng-template [ngTemplateOutlet]="finishButtonTemplate || defaultFinishButtonTemplate" [ngTemplateOutletContext]="{ finish: _finishFn() }"></ng-template>
