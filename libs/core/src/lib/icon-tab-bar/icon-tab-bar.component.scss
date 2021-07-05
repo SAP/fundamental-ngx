@@ -1,0 +1,10 @@
+@import '~fundamental-styles/dist/icon-tab-bar';
+
+// These styles should move to fundamental/styles repo.
+.fd-icon-tab-bar {
+
+    &__header {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}

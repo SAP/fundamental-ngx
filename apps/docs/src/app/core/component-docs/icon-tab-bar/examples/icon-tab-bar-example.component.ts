@@ -9,8 +9,19 @@ export class IconTabBarExampleComponent {
 
     items: IconTabBarItem[] = [
         {
-            icon: '',
-            label: 'Item x',
-        }
+            id: 'item 1',
+            label: 'Item 1',
+        },
+        {
+            id: 'item 2',
+            label: 'Item 2',
+            badge: true,
+        },
+        {
+            id: 'item 3',
+            label: 'Item 3',
+            counter: 100,
+            active: true,
+        },
     ];
 }

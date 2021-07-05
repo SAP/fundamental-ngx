@@ -1,1 +1,19 @@
-<p *ngFor='let item of items'>{{item.label}}</p>
+<div class='fd-icon-tab-bar'>
+    <ul role='tablist' class='fd-icon-tab-bar__header'>
+        <li *ngFor='let item of items' role='presentation' class='fd-icon-tab-bar__item'>
+            <span
+                role='tab'
+                class='fd-icon-tab-bar__tab'
+                [attr.aria-selected]='item.id === selectedItemId'
+                id='tab1'
+                (click)='selectItem(item.id)'
+            >
+                <span class='fd-icon-tab-bar__tag'>
+                    {{ item.label }}
+                    <ng-container *ngIf='item.counter'> ({{item.counter}})</ng-container>
+                </span>
+                <span *ngIf='item.badge' class='fd-icon-tab-bar__badge'></span>
+            </span>
+        </li>
+    </ul>
+</div>

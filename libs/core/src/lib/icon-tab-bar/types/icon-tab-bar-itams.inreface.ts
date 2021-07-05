@@ -1,5 +1,6 @@
 export interface IconTabBarItem {
-    icon: string;
+    id: string|number;
+    icon?: string;
     label: string;
     color?: string;
     counter?: number;
