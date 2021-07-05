@@ -268,7 +268,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         } else if (currentHour < 12 && meridian === Meridian.AM) {
             hourOffset = 0;
         }
-        
+
         const newHour = Math.max(0, Math.min(23, currentHour + hourOffset));
 
         this.handleHourChange(newHour);
@@ -348,15 +348,17 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
             this.handlePreviousColumnFocus(this.activeView);
             event.preventDefault();
+            this.focusActiveColumnIndicator();
         } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
             this.handleNextColumnFocus(this.activeView);
             event.preventDefault();
+            this.focusActiveColumnIndicator();
         }
     }
 
     /** @hidden */
     writeValue(time: D): void {
-        if (!time) {
+        if (!time || !this._dateTimeAdapter.isValid(time)) {
             return;
         }
         this.time = time;
@@ -411,6 +413,11 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
             increaseLabel: this._timeI18nLabels.increasePeriodLabel,
             label: this._timeI18nLabels.periodLabel
         };
+    }
+
+    /** @hidden */
+    focusActiveColumnIndicator(): void {
+        this.columns.filter(column => column.active)[0].indicator.nativeElement.focus();
     }
 
     /** @hidden */

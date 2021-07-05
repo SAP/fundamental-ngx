@@ -1,4 +1,5 @@
 import { FdDate } from './index';
+import { INVALID_DATE_ERROR } from '@fundamental-ngx/core';
 
 describe('FdDate', () => {
     it('should create FdDate instance of now by new with no parameters', () => {
@@ -57,29 +58,29 @@ describe('FdDate', () => {
         expect(fdDate.second).toEqual(10);
     });
 
-    it('should throw Error if month is not between 1 - 12', () => {
-        expect(() => new FdDate(2020, 1, 1)).not.toThrow();
-        expect(() => new FdDate(2020, 12, 1)).not.toThrow();
-        expect(() => new FdDate(2020, 0, 1)).toThrow();
-        expect(() => new FdDate(2020, 13, 1)).toThrow();
+    it('should be invalid date if month is not between 1 - 12', () => {
+        expect(new FdDate(2020, 1, 1).isDateValid()).toBeTrue();
+        expect(new FdDate(2020, 12, 1).isDateValid()).toBeTrue();
+        expect(new FdDate(2020, 0, 1).isDateValid()).toBeFalse();
+        expect(new FdDate(2020, 13, 1).isDateValid()).toBeFalse();
     });
 
-    it('should throw Error if day is integer and less than 1', () => {
-        expect(() => new FdDate(2020, 1, 1)).not.toThrow();
-        expect(() => new FdDate(2020, 1, 0)).toThrow();
+    it('should be invalid date if day is integer and less than 1', () => {
+        expect(new FdDate(2020, 1, 1).isDateValid()).toBeTrue()
+        expect(new FdDate(2020, 1, 0).isDateValid()).toBeFalse()
     });
 
-    it('should throw Error if day is integer and not valid for particular month and year', () => {
-        expect(() => new FdDate(2017, 2, 29)).toThrow();
+    it('should be invalid date if day is integer and not valid for particular month and year', () => {
+        expect(new FdDate(2017, 2, 29).isDateValid()).toBeFalse();
     });
 
-    it('should throw Error if hour, minute or second is integer and out of range', () => {
-        expect(() => new FdDate(2020, 1, 1, -1)).toThrow();
-        expect(() => new FdDate(2020, 1, 1, 24)).toThrowError();
-        expect(() => new FdDate(2020, 1, 1, 0, -1)).toThrowError();
-        expect(() => new FdDate(2020, 1, 1, 0, 60)).toThrowError();
-        expect(() => new FdDate(2020, 1, 1, 0, 0, -1)).toThrowError();
-        expect(() => new FdDate(2020, 1, 1, 0, 0, 60)).toThrowError();
+    it('should be invalid date if hour, minute or second is integer and out of range', () => {
+        expect(new FdDate(2020, 1, 1, -1).isDateValid()).toBeFalse();
+        expect(new FdDate(2020, 1, 1, 24).isDateValid()).toBeFalse();
+        expect(new FdDate(2020, 1, 1, 0, -1).isDateValid()).toBeFalse();
+        expect(new FdDate(2020, 1, 1, 0, 60).isDateValid()).toBeFalse();
+        expect(new FdDate(2020, 1, 1, 0, 0, -1).isDateValid()).toBeFalse();
+        expect(new FdDate(2020, 1, 1, 0, 0, 60).isDateValid()).toBeFalse();
     });
 
     it('should create invalid FdDate', () => {
@@ -162,5 +163,24 @@ describe('FdDate', () => {
 
     it('should get day of week by "getDayOfWeek()"', () => {
         expect(new FdDate(2020, 11, 21).getDayOfWeek()).toEqual(7 /* Saturday */);
+    });
+
+    it('should get invalid date error message for invalid date when we invoke methods which returns string format', () => {
+        const invalidFdDate = new FdDate(12312, 24, 44);
+        expect(invalidFdDate.toString()).toBe(INVALID_DATE_ERROR);
+        expect(invalidFdDate.toDateString()).toBe(INVALID_DATE_ERROR);
+        expect(invalidFdDate.toTimeString()).toBe(INVALID_DATE_ERROR);
+    });
+
+    it('should get NaN for invalid date when we invoke methods which returns number format', () => {
+        const invalidFdDate = new FdDate(12312, 24, 44);
+        expect(invalidFdDate.valueOf()).toBeNaN();
+        expect(invalidFdDate.getTimeStamp()).toBeNaN();
+        expect(invalidFdDate.getDayOfWeek()).toBeNaN();
+    });
+
+    it('should change FdDate validation status by setTime()', () => {
+        const validDate = new FdDate(2020, 11, 21);
+        expect(validDate.setTime(25, 100, 100).isDateValid()).toBeFalse();
     });
 });

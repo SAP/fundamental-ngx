@@ -1,7 +1,7 @@
 import { Platform } from '@angular/cdk/platform';
 import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 
-import { LETTERS_UNICODE_RANGE } from '@fundamental-ngx/core/utils';
+import { INVALID_DATE_ERROR, LETTERS_UNICODE_RANGE } from '@fundamental-ngx/core/utils';
 
 import { DatetimeAdapter } from './datetime-adapter';
 import { FdDate } from './fd-date';
@@ -220,12 +220,12 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
             date = this._parseTimeString(value);
         }
 
-        return Number.isNaN(date.valueOf()) ? null : this._createFdDateFromDateInstance(date);
+        return this._createFdDateFromDateInstance(date);
     }
 
     format(date: FdDate, displayFormat: Intl.DateTimeFormatOptions): string {
         if (!this.isValid(date)) {
-            throw Error('FdDateAdapter: Cannot format invalid date.');
+            return INVALID_DATE_ERROR;
         }
 
         // On IE and Edge the i18n API will throw a hard error that can crash the entire app
@@ -350,6 +350,9 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
 
     /** @hidden */
     private _format(formatter: Intl.DateTimeFormat, date: Date): string {
+        if (Number.isNaN(date.valueOf())) {
+            return INVALID_DATE_ERROR;
+        }
         date = this._createUTCDateInstance(
             date.getFullYear(),
             date.getMonth(),
@@ -368,7 +371,14 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
      * @param date FdDate instance
      * @returns date Native date instance
      */
-    private _createDateInstanceByFdDate({ year, month, day, hour, minute, second }: FdDate): Date {
+    private _createDateInstanceByFdDate(fdDate: FdDate): Date {
+        const { year, month, day, hour, minute, second } = fdDate;
+        // We have stricter validation rules than Date object.
+        // For example, Date allows values for month=100 or for day=100.
+        // Therefore, we need to do this trick for the consistency of the validation status
+        if (!this.isValid(fdDate)) {
+            return new Date(NaN);
+        }
         const date = new Date();
         date.setFullYear(year, month - 1, day);
         date.setHours(hour, minute, second, 0);

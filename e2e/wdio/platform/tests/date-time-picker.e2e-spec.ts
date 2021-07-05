@@ -200,14 +200,6 @@ describe('Datetime picker suite', function() {
         expect(getAttributeByName(activeDateTimePickerInput, 'ng-reflect-model'))
             .toEqual(date);
     });
-
-    xdescribe('Check visual regression', function() {
-        it('should check examples visual regression', () => {
-            dateTimePickerPage.saveExampleBaselineScreenshot();
-            expect(dateTimePickerPage.compareWithBaseline()).toBeLessThan(1);
-        });
-    });
-
 });
 
 function selectHoursAndMinutes(hour: number = 1, minute: number = 1): void {

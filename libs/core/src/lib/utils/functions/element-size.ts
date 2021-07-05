@@ -1,8 +1,8 @@
 import { ElementRef } from '@angular/core';
 
-const pxToNum = (pixels: string): number => Number(pixels.replace('px', '')) || 0;
+export const pxToNum = (pixels: string): number => Number(pixels.replace('px', '')) || 0;
 
-const toNativeElement = (element: HTMLElement | ElementRef): HTMLElement =>
+export const toNativeElement = (element: HTMLElement | ElementRef): HTMLElement =>
     element instanceof ElementRef
         ? element.nativeElement
         : element;
