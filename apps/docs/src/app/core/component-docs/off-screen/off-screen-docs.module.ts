@@ -9,6 +9,7 @@ import { OffScreenExampleComponent } from './examples/off-screen-example.compone
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { OffScreenElementModule } from '@fundamental-ngx/core/utils';
+import { ComboboxModule } from '@fundamental-ngx/core/combobox';
 
 const routes: Routes = [
     {
@@ -21,7 +22,13 @@ const routes: Routes = [
     }
 ];
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ButtonModule, OffScreenElementModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        ButtonModule,
+        ComboboxModule,
+        OffScreenElementModule,
+    ],
     exports: [RouterModule],
     declarations: [OffScreenHeaderComponent, OffScreenDocsComponent, OffScreenExampleComponent]
 })

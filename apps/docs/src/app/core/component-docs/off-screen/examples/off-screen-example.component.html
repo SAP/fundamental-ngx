@@ -1,0 +1,13 @@
+<div fd-form-item>
+    <label fd-form-label>Search Field</label>
+    <fd-combobox
+        maxHeight="250px"
+        placeholder="Type some text..."
+        [isSearch]="true"
+        [dropdownValues]="fruits"
+        [(ngModel)]="searchTerm">
+    </fd-combobox>
+</div>
+<small>Search Term: {{ searchTerm }}</small>
+
+<div fdOffScreen>{{ count }} suggestions found. use up and down arrows to navigate.</div>

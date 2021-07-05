@@ -1,21 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck, ViewChild } from '@angular/core';
+import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 
 @Component({
     selector: 'fd-off-screen-example',
-    template: `<div fdOffScreen>Current count value is: {{ count }}</div>
-        <br />
-        <button fd-button label="Increament count" (click)="onIncrease()"></button>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <button fd-button label="Decreament count" (click)="onDecrease()"></button> `
+    templateUrl: './off-screen-example.component.html'
 })
-export class OffScreenExampleComponent {
+export class OffScreenExampleComponent implements DoCheck {
     count = 0;
 
-    onIncrease(): void {
-        this.count = this.count + 1;
-    }
+    searchTerm = '';
+    fruits = [
+        'Apple',
+        'Pineapple',
+        'Banana',
+        'Kiwi',
+        'Strawberry',
+        'Blueberry',
+        'Orange',
+        'Lemon',
+        'Raspberry',
+        'Grapefruit',
+        'Apricot',
+        'Avocado',
+        'Cherry'
+    ];
 
-    onDecrease(): void {
-        this.count = this.count - 1;
+    /** @hidden */
+    @ViewChild(ComboboxComponent)
+    comboboxComponent: ComboboxComponent;
+
+    ngDoCheck(): void {
+        if (this.comboboxComponent?.inputTextValue) {
+            this.count = this.comboboxComponent?.displayedValues.length;
+        } else {
+            this.count = 0;
+        }
     }
 }
