@@ -11,8 +11,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
-import { debounceTime, takeWhile } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
 
 import { FormGeneratorService } from '../form-generator.service';
 import { DynamicFormItem, DynamicFormValue } from '../interfaces/dynamic-form-item';
@@ -123,17 +123,18 @@ export class FormGeneratorComponent implements OnDestroy {
     /**
      * @hidden
      */
-    private _allowSubscribe = true;
-
-    /**
-     * @hidden
-     */
     private _formItems: DynamicFormItem[];
 
     /**
      * @hidden
      */
     private _formValueSubscription: Subscription;
+
+    /**
+     * @hidden
+     * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
+     */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(
         private _fgService: FormGeneratorService,
@@ -145,7 +146,8 @@ export class FormGeneratorComponent implements OnDestroy {
      * @hidden
      */
     ngOnDestroy(): void {
-        this._allowSubscribe = false;
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /**
@@ -205,7 +207,7 @@ export class FormGeneratorComponent implements OnDestroy {
         this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
 
         this._formValueSubscription = this.form.valueChanges
-        .pipe(takeWhile(() => this._allowSubscribe), debounceTime(50))
+        .pipe(debounceTime(50), takeUntil(this._onDestroy$))
         .subscribe(async () => {
             this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
             this._cd.markForCheck();

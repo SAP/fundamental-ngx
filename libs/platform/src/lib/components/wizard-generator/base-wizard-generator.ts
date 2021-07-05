@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Directive, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 
-import { Observable } from 'rxjs';
-import { debounceTime, finalize, takeWhile } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, finalize, takeUntil } from 'rxjs/operators';
 
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
@@ -16,22 +16,22 @@ import { WizardStepSubmittedForms } from './components/wizard-generator-step/wiz
 export const DEFAULT_WIZARD_NAVIGATION_BUTTONS: WizardNavigationButtons = {
     goBack: {
         label: 'Previous Step',
-        contentDencity: 'compact',
+        contentDensity: 'compact',
         type: 'ghost'
     },
     goNext: {
         label: 'Next Step',
-        contentDencity: 'compact',
+        contentDensity: 'compact',
         type: 'emphasized'
     },
     cancel: {
         label: 'Cancel',
-        contentDencity: 'compact',
+        contentDensity: 'compact',
         type: 'ghost'
     },
     finish: {
         label: 'Finish',
-        contentDencity: 'compact',
+        contentDensity: 'compact',
         type: 'emphasized'
     }
 }
@@ -57,7 +57,7 @@ export class BaseWizardGenerator implements OnDestroy {
     }
 
     set navigationButtonLabels(value: WizardNavigationButtons) {
-        this._navigationButtonLabels = Object.assign(DEFAULT_WIZARD_NAVIGATION_BUTTONS, value);
+        this._navigationButtonLabels = Object.assign({}, DEFAULT_WIZARD_NAVIGATION_BUTTONS, value);
     }
 
     /**
@@ -85,7 +85,8 @@ export class BaseWizardGenerator implements OnDestroy {
      * Whether or not to append the step to the wizard. If false, each step will be displayed on a different page.
      * Default is true.
      */
-    @Input() appendToWizard = true;
+    @Input()
+    appendToWizard = true;
 
     /**
      * Custom height to use for the wizard's content pane. By default, this value is calc(100vh - 144px), where 144px
@@ -116,7 +117,7 @@ export class BaseWizardGenerator implements OnDestroy {
     get isSummaryStep(): boolean {
         const currentIndex = this._wizardGeneratorService.getCurrentStepIndex();
 
-        return this.visibleItems[currentIndex].summary === true;
+        return this.visibleItems[currentIndex]?.summary === true;
     }
 
     /**
@@ -148,18 +149,18 @@ export class BaseWizardGenerator implements OnDestroy {
     get isBranchingStep(): boolean {
         const currentIndex = this._wizardGeneratorService.getCurrentStepIndex();
 
-        return this._visibleItems[currentIndex].branching;
+        return this._visibleItems[currentIndex]?.branching === true;
     }
 
     /**
      * @hidden
      */
-    _visibleItems: WizardGeneratorItem[];
+    _visibleItems: WizardGeneratorItem[] = [];
 
     /**
      * @hidden
      */
-    private _items: WizardGeneratorItem[];
+    private _items: WizardGeneratorItem[] = [];
 
     /**
      * @hidden
@@ -168,8 +169,9 @@ export class BaseWizardGenerator implements OnDestroy {
 
     /**
      * @hidden
+     * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    protected _allowSubscribe = true;
+    protected readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /**
      * @hidden
@@ -182,14 +184,14 @@ export class BaseWizardGenerator implements OnDestroy {
         private _cd: ChangeDetectorRef
     ) {
         this._wizardGeneratorService.getVisibleSteps()
-        .pipe(takeWhile(() => this._allowSubscribe), debounceTime(10))
+        .pipe(debounceTime(10), takeUntil(this._onDestroy$))
         .subscribe((visibleSteps) => {
             this.visibleItems = visibleSteps;
             this._cd.detectChanges();
         });
 
         this._wizardGeneratorService.trackStepsComponents()
-        .pipe(takeWhile(() => this._allowSubscribe), debounceTime(10))
+        .pipe(debounceTime(10), takeUntil(this._onDestroy$))
         .subscribe(async (stepsComponents) => {
             if (stepsComponents.size === this.items?.length) {
                 await this._setVisibleSteps();
@@ -201,7 +203,8 @@ export class BaseWizardGenerator implements OnDestroy {
      * @hidden
      */
     ngOnDestroy(): void {
-        this._allowSubscribe = false;
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /**
@@ -232,7 +235,7 @@ export class BaseWizardGenerator implements OnDestroy {
         const currentStepIndex = this._wizardGeneratorService.getCurrentStepIndex();
 
         this._wizardGeneratorService.validateStepForms()
-        .pipe(takeWhile(() => this._allowSubscribe))
+        .pipe(takeUntil(this._onDestroy$))
         .subscribe(async (result) => {
 
             if (!result) {
@@ -283,7 +286,7 @@ export class BaseWizardGenerator implements OnDestroy {
         }
 
         this._wizardGeneratorService.validateStepForms()
-        .pipe(takeWhile(() => this._allowSubscribe))
+        .pipe(takeUntil(this._onDestroy$))
         .subscribe(async (result) => {
 
             if (!result) {

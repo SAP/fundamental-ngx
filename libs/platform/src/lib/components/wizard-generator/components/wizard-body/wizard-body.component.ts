@@ -11,7 +11,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
-import { debounceTime, takeWhile } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 import { WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
 import { WizardNavigationButtons } from '../../interfaces/wizard-navigation-buttons.interface';
 import { WizardGeneratorService } from '../../wizard-generator.service';
@@ -45,7 +46,8 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      * @description Whether or not to append the step to the wizard. If false, each step will be displayed on a different page.
      * Default is true.
      */
-    @Input() appendToWizard = true;
+    @Input()
+    appendToWizard = true;
 
     /**
      * @description Custom height to use for the wizard's content pane. By default, this value is calc(100vh - 144px), where 144px
@@ -57,32 +59,38 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     /**
      * @description Whether or not Wizard is currently on the first step
      */
-    @Input() isFirstStep = false;
+    @Input()
+    isFirstStep = false;
 
     /**
      * @description Whether or not Wizard is currently on the last step
      */
-    @Input() isLastStep = false;
+    @Input()
+    isLastStep = false;
 
     /**
      * @description Boolean flag indicating whether or not to append Summary page as the last step.
      */
-    @Input() addSummary = false;
+    @Input()
+    addSummary = false;
 
     /**
      * User-defined template for "Go Next" button.
      */
-    @Input() goNextButtonTemplate: TemplateRef<any>;
+    @Input()
+    goNextButtonTemplate: TemplateRef<any>;
 
     /**
      * User-defined template for "Finish" button.
      */
-    @Input() finishButtonTemplate: TemplateRef<any>;
+    @Input()
+    finishButtonTemplate: TemplateRef<any>;
 
     /**
      * @description Is current step is summary step.
      */
-    @Input() isSummaryStep = false;
+    @Input()
+    isSummaryStep = false;
 
     /**
      * @description Array of visible Wizard Steps.
@@ -98,22 +106,26 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     /**
      * @description Emits when some step status has been changed.
      */
-    @Output() statusChange = new EventEmitter<WizardStepChange>();
+    @Output()
+    statusChange = new EventEmitter<WizardStepChange>();
 
     /**
      * @description Emits when "Go next" button has been clicked
      */
-    @Output() goNext = new EventEmitter<void>();
+    @Output()
+    goNext = new EventEmitter<void>();
 
     /**
      * @description Emits when "Finish" button has been clicked
      */
-    @Output() finish = new EventEmitter<void>();
+    @Output()
+    finish = new EventEmitter<void>();
 
     /**
      * @hidden
+     * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private _allowSubscribe = true;
+     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /**
      * @hidden
@@ -132,7 +144,7 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      */
     ngOnInit(): void {
         this._wizardGeneratorService.getVisibleSteps()
-        .pipe(takeWhile(() => this._allowSubscribe), debounceTime(50))
+        .pipe(debounceTime(50), takeUntil(this._onDestroy$))
         .subscribe((visibleSteps) => {
             this._visibleItems = visibleSteps;
             this._cd.detectChanges();
@@ -143,7 +155,8 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      * @hidden
      */
     ngOnDestroy(): void {
-        this._allowSubscribe = false;
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /**

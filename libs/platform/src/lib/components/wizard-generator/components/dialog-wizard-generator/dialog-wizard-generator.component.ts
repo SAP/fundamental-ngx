@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { filter, takeWhile } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { BaseWizardGenerator } from '../../base-wizard-generator';
 import { WizardDialogData } from '../../interfaces/wizard-dialog-data.interface';
 import { WizardTitle } from '../../interfaces/wizard-title.interface';
@@ -90,7 +90,7 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
         const dialogRef = this._dialogService.open(template, { responsivePadding: true });
 
         dialogRef.afterClosed
-        .pipe(takeWhile(() => this._allowSubscribe), filter((result) => result))
+        .pipe(filter((result) => result), takeUntil(this._onDestroy$))
         .subscribe(() => {
             this._dialogRef.dismiss();
         }, () => {});
@@ -109,7 +109,7 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
 
         const currentStepId = this._wizardGeneratorService.getCurrentStepId();
         this.submitStepForms(currentStepId)
-        .pipe(takeWhile(() => this._allowSubscribe))
+        .pipe(takeUntil(this._onDestroy$))
         .subscribe(async (result) => {
             if (Object.values(result).some(r => !r.success)) {
                 return;

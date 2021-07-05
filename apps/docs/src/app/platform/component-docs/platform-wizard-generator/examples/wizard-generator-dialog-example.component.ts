@@ -1,7 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { WizardGeneratorItem, WizardTitle, WizardDialogGeneratorService, WizardGeneratorFormsValue } from '@fundamental-ngx/platform';
-import { takeWhile } from 'rxjs/operators';
 
 @Component({
     selector: 'fdp-wizard-generator-dialog-example',
@@ -104,12 +105,16 @@ export class WizardGeneratorDialogExampleComponent implements OnDestroy {
         }
     ];
 
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
     constructor(
         private _wizardDialogService: WizardDialogGeneratorService
     ) { }
 
     ngOnDestroy(): void {
-        this.allowSubscribe = false;
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     openDialog(): void {
@@ -125,7 +130,7 @@ export class WizardGeneratorDialogExampleComponent implements OnDestroy {
                 responsivePaddings: false,
                 title: this.wizardTitle
             }
-        }).afterClosed.pipe(takeWhile(() => this.allowSubscribe))
+        }).afterClosed.pipe(takeUntil(this._onDestroy$))
         .subscribe((wizardValue: WizardGeneratorFormsValue) => {
             this.wizardValue = wizardValue;
         }, () => {});

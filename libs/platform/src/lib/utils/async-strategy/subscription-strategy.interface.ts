@@ -7,5 +7,5 @@ export interface SubscriptionStrategy {
      * @param updateLatestValue Callback function where awaited value will be passed.
      * as an argument
      */
-    createSubscription(obj: Observable<any>|Promise<any>|Function, updateLatestValue: any): Promise<any>;
+    createSubscription(obj: Observable<any>|Promise<any>|Function, updateLatestValue: any): Promise<void> | void;
 }

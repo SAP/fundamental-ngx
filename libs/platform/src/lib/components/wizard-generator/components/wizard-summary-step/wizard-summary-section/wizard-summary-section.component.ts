@@ -24,12 +24,14 @@ export class WizardSummarySectionComponent implements OnInit {
     /**
      * @description Current step for the section.
      */
-    @Input() step: WizardGeneratorItem;
+    @Input()
+    step: WizardGeneratorItem;
 
     /**
      * @description Step forms values.
      */
-    @Input() stepValue: WizardStepFormsValue;
+    @Input()
+    stepValue: WizardStepFormsValue;
 
     /**
      * @hidden

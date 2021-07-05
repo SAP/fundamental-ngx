@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { debounceTime, takeWhile } from 'rxjs/operators';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 import { FormGeneratorComponent, SubmitFormEventResult } from '../../../form/form-generator/form-generator/form-generator.component';
 import { DynamicFormGroup } from '../../../form/form-generator/interfaces/dynamic-form-group';
 import { DynamicFormValue } from '../../../form/form-generator/interfaces/dynamic-form-item';
@@ -45,17 +45,20 @@ export class WizardGeneratorStepComponent implements OnDestroy {
     /**
      * @description Current step.
      */
-    @Input() item: WizardGeneratorItem;
+    @Input()
+    item: WizardGeneratorItem;
 
     /**
      * @description Emits when all forms in the step has been submited
      */
-    @Output() formsSubmitted = new EventEmitter<DynamicFormValue[]>();
+    @Output()
+    formsSubmitted = new EventEmitter<DynamicFormValue[]>();
 
     /**
      * @description Emits when all forms in the step has been created
      */
-    @Output() formsCreated = new EventEmitter<WizardStepForms>();
+    @Output()
+    formsCreated = new EventEmitter<WizardStepForms>();
 
     /**
      * @hidden
@@ -79,8 +82,9 @@ export class WizardGeneratorStepComponent implements OnDestroy {
 
     /**
      * @hidden
+     * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-    private _allowSubscribe = true;
+     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
     constructor(
@@ -92,7 +96,8 @@ export class WizardGeneratorStepComponent implements OnDestroy {
      */
     ngOnDestroy(): void {
         this._wizardGeneratorService.removeWizardStepComponent(this.item.id);
-        this._allowSubscribe = false;
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /**
@@ -191,7 +196,7 @@ export class WizardGeneratorStepComponent implements OnDestroy {
             for (const control of Object.values(form.controls)) {
 
                 control.valueChanges
-                .pipe(takeWhile(() => this._allowSubscribe), debounceTime(50))
+                .pipe(debounceTime(50), takeUntil(this._onDestroy$))
                 .subscribe(async () => {
                     await this._wizardGeneratorService.refreshStepVisibility();
                 });

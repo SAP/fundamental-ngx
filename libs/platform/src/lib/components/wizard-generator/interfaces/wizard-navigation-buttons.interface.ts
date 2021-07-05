@@ -22,6 +22,6 @@ export interface WizardNavigationButtons {
 
 export interface WizardNavigationButton {
     label: string;
-    contentDencity: ContentDensity;
+    contentDensity: ContentDensity;
     type: ButtonType;
 }

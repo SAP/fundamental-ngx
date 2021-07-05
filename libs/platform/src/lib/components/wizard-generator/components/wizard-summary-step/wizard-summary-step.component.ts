@@ -19,7 +19,8 @@ export class WizardSummaryStepComponent {
     /**
      * @description Summary step status.
      */
-    @Input() set status(status: WizardStepStatus) {
+    @Input()
+    set status(status: WizardStepStatus) {
         if (status === 'current') {
             this._wizardGeneratorService.getWizardFormValue(true).then(forms => {
                 this._submittedForms = forms;
