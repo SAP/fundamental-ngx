@@ -55,6 +55,7 @@ exports.config = {
         platformB: [
             './e2e/wdio/platform/**/menu.e2e-spec.ts',
             './e2e/wdio/platform/**/menu-button.e2e-spec.ts',
+            './e2e/wdio/platform/**/multi-combobox.e2e-spec.ts',
             './e2e/wdio/platform/**/multi-input.e2e-spec.ts',
             './e2e/wdio/platform/**/object-list-item.e2e-spec.ts',
             './e2e/wdio/platform/**/object-marker.e2e-spec.ts',
@@ -72,6 +73,7 @@ exports.config = {
             './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
             './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',
             './e2e/wdio/platform/**/time-picker.e2e-spec.ts',
+            './e2e/wdio/platform/**/select.e2e-spec.ts',
         ]
     },
     // ============

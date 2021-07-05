@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
             [itemsPerPage]="itemsPerPage"
             [currentPage]="currentPage"
             (pageChangeStart)="pageChanged($event)"
+            ariaLabel="Pagination with displayTextTemplate property"
         ></fd-pagination>
         <ng-template #customDisplayTextTemplate let-showing="showing">
             From {{ showing.from }} to {{ showing.to }}. Total items {{ showing.of }}
