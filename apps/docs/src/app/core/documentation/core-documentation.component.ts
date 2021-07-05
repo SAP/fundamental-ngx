@@ -91,7 +91,8 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/object-number', name: 'Object Number' },
             { url: 'core/wizard', name: 'Wizard' },
             { url: 'core/grid-list', name: 'Grid List' },
-            { url: 'core/slider', name: 'Slider' }
+            { url: 'core/slider', name: 'Slider' },
+            { url: 'core/icon-tab-bar', name: 'Icon Tab Bar' }
         ];
 
         this.layouts = [
