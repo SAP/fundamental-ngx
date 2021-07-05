@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.56...v0.31.0-rc.57) (2021-07-05)
+
+
+### Features
+
+* **core:** bring new qr code icon ([#5865](https://github.com/SAP/fundamental-ngx/issues/5865)) ([9152f14](https://github.com/SAP/fundamental-ngx/commit/9152f141bae72d5f3cba96709fc39314db7acd64))
+
 ## [0.31.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.55...v0.31.0-rc.56) (2021-07-05)
 
 
