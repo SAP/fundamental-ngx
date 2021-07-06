@@ -32,7 +32,7 @@ import { BarModule } from '@fundamental-ngx/core/bar';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
-import { LinkModule } from '@fundamental-ngx/core';
+import { LinkModule } from '@fundamental-ngx/core/link';
 
 const routes: Routes = [
     {

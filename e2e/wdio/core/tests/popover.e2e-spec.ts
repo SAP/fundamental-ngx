@@ -27,7 +27,7 @@ describe('Popover test suite', function() {
         simplePopoverButton, popoverMessage, headerPopoverButton, placementPopoverButton, programmaticControlButton,
         popoverDialogsButton, multiInputButton, multiInputOption, multiInputSpan, popoverDialogsHeader, popoverDialogParagraph,
         clickMeButton, popoverDialogMessage, hoverElement, triggerButton2, triggerButton, popoverContainer, scrollButton,
-        scrollMessage, plusButton, dynamicOption, dropdownButton, dropdownOption, dynamicSubOption, cdkButton, segmentButton, headerTitle
+        scrollMessage, plusButton, dynamicOption, dropdownButton, dropdownOption, dynamicSubOption, cdkButton, segmentButton
     } = popoverPage;
 
     beforeAll(() => {
@@ -125,26 +125,26 @@ describe('Popover test suite', function() {
         it('should check that button "with header" has header', () => {
             scrollIntoView(headerPopoverButton);
             click(headerPopoverButton, 1);
-            expect(getText(headerTitle)).toBe(cozyHeaderTestText);
+            expect(getText(barElement)).toBe(cozyHeaderTestText);
         });
 
         it('should check that button "with header and footer" has header and all buttons are clickable', () => {
             scrollIntoView(headerPopoverButton);
             click(headerPopoverButton, 2);
-            expect(getText(headerTitle)).toBe(cozyHeaderTestText);
+            expect(getText(barElement)).toBe(cozyHeaderTestText);
 
-            expect(isElementClickable(headerTitle, 1)).toBe(true, `save button not clickable`);
-            expect(isElementClickable(headerTitle, 2)).toBe(true, `cancel button not clickable`);
+            expect(isElementClickable(barElement, 1)).toBe(true, `save button not clickable`);
+            expect(isElementClickable(barElement, 2)).toBe(true, `cancel button not clickable`);
         });
 
         it('should check that button "with header, subHeader and footer" has header, subheader and all buttons are clickable', () => {
             scrollIntoView(headerPopoverButton);
             click(headerPopoverButton, 3);
-            expect(getText(headerTitle)).toBe(cozyHeaderTestText);
-            expect(getText(headerTitle, 1)).toBe(cozySubheaderTestText);
+            expect(getText(barElement)).toBe(cozyHeaderTestText);
+            expect(getText(barElement, 1)).toBe(cozySubheaderTestText);
 
-            expect(isElementClickable(headerTitle, 2)).toBe(true, `save button not clickable`);
-            expect(isElementClickable(headerTitle, 3)).toBe(true, `cancel button not clickable`);
+            expect(isElementClickable(barElement, 2)).toBe(true, `save button not clickable`);
+            expect(isElementClickable(barElement, 3)).toBe(true, `cancel button not clickable`);
         });
     });
 

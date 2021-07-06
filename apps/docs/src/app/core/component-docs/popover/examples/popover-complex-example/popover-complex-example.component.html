@@ -17,11 +17,15 @@
             <button fd-button label="With Header"></button>
         </fd-popover-control>
         <fd-popover-body>
-            <ul fd-list>
-				<li fd-list-group-header>
-					<span fd-list-title>Cozy Header</span>
-				</li>
-                <li fd-list-item *ngFor="let option of list">
+			<div fd-popover-body-header>
+                <div fd-bar [cozy]="true" tabindex="0">
+                    <div fd-bar-left>
+                        <fd-bar-element>Cozy Header</fd-bar-element>
+                    </div>
+                </div>
+            </div>
+            <ul fd-list tabindex="-1">
+                <li fd-list-item *ngFor="let option of list" tabindex="0">
                     <a [attr.href]="option.url" fd-link fd-list-title>{{ option.text }}</a>
                 </li>
             </ul>
@@ -33,11 +37,15 @@
             <button fd-button label="With Header And Footer"></button>
         </fd-popover-control>
         <fd-popover-body>
-            <ul fd-list>
-				<li fd-list-group-header>
-					<span fd-list-title>Cozy Header</span>
-				</li>
-                <li fd-list-item *ngFor="let option of list">
+            <div fd-popover-body-header>
+                <div fd-bar [cozy]="true" tabindex="0">
+                    <div fd-bar-left>
+                        <fd-bar-element>Cozy Header</fd-bar-element>
+                    </div>
+                </div>
+            </div>
+            <ul fd-list tabindex="-1">
+                <li fd-list-item *ngFor="let option of list" tabindex="0">
                     <a [attr.href]="option.url" fd-link fd-list-title>{{ option.text }}</a>
                 </li>
             </ul>
@@ -57,14 +65,22 @@
             <button fd-button label="With Header, SubHeader And Footer"></button>
         </fd-popover-control>
         <fd-popover-body>
-            <ul fd-list>
-				<li fd-list-group-header>
-					<span fd-list-title>Cozy Header</span>
-				</li>
-				<li fd-list-group-header>
-					<span fd-list-title>Cozy SubHeader</span>
-				</li>
-                <li fd-list-item *ngFor="let option of list">
+            <div fd-popover-body-header>
+                <div fd-bar [cozy]="true" tabindex="0">
+                    <div fd-bar-left>
+                        <fd-bar-element>Cozy Header</fd-bar-element>
+                    </div>
+                </div>
+            </div>            
+			<div fd-popover-body-header>
+                <div fd-bar [cozy]="true" tabindex="0">
+                    <div fd-bar-middle>
+                        <fd-bar-element>Cozy SubHeader</fd-bar-element>
+                    </div>
+                </div>
+            </div>
+            <ul fd-list tabindex="-1">
+                <li fd-list-item *ngFor="let option of list" tabindex="0">
                     <a [attr.href]="option.url" fd-link fd-list-title>{{ option.text }}</a>
                 </li>
 			</ul>
