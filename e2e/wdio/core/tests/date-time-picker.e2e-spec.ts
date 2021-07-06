@@ -242,14 +242,6 @@ describe('Datetime picker suite', function() {
             dateTimePickerPage.checkRtlSwitch();
         });
 
-    xdescribe('Check visual regression', function() {
-
-        it('should check examples visual regression', () => {
-            dateTimePickerPage.saveExampleBaselineScreenshot();
-            expect(dateTimePickerPage.compareWithBaseline()).toBeLessThan(5);
-        });
-    });
-
     function selectHoursAndMinutes(hour: number = 11, minute: number = 1): void {
         while (getText(selectedHours) !== hour.toString()) {
             click(navigationUpArrowButton);

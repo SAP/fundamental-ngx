@@ -57,23 +57,6 @@
     border-right-color: #6a6d70;
     border-right-color: var(--sapNeutralBorderColor, #6a6d70);
 }
-.fd-tabs__link.is-selected {
-    .fd-tabs__tag:after {
-        background-color: #0854a0;
-        background-color: var(--fdTabs_Selected_Color, var(--sapSelectedColor, #0854a0));
-    }
-    .fd-tabs__icon {
-        color: #fff;
-        color: var(--fdTabs_Selected_Icon_Color, var(--sapContent_ContrastIconColor, #fff));
-        background-color: #0854a0;
-        background-color: var(--fdTabs_Selected_Color, var(--sapSelectedColor, #0854a0));
-
-        &::after {
-            background-color: #0854a0;
-            background-color: var(--fdTabs_Selected_Color, var(--sapSelectedColor, #0854a0));
-        }
-    }
-}
 .fd-tabs--filter .fd-tabs__link.is-selected {
     &::after {
         background-color: #0854a0;

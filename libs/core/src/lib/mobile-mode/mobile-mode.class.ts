@@ -17,6 +17,7 @@ export interface MobileModeConfigToken {
 export enum MobileModeControl {
     MENU = 'MENU',
     SELECT = 'SELECT',
+    POPOVER = 'POPOVER',
     COMBOBOX = 'COMBOBOX',
     MULTI_INPUT = 'MULTI_INPUT',
     MULTI_COMBOBOX = 'MULTI_COMBOBOX'
