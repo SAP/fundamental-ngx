@@ -10,7 +10,9 @@ export class ToolbarPo extends CoreBaseComponentPo {
     activeInfoToolbar = '.fd-toolbar--active';
     overflowButton = '#background-ex2' + this.button;
     overflowPriorityButton = '#background-ex3' + this.button;
-    moreButton = '.fd-button--transparent.ng-star-inserted';
+    overflowPriorityExample = 'fd-toolbar-overflow-priority-example';
+    overflowGroupingExample = 'fd-toolbar-overflow-grouping-example';
+    moreButton = ' [title="More"]';
     overflowBody = '.fd-toolbar__overflow__body';
     alwaysButton = '[ng-reflect-label="Always"]';
     overflowGroupingButton = '#background-ex7' + this.button;
@@ -18,8 +20,6 @@ export class ToolbarPo extends CoreBaseComponentPo {
     dropdownMenu = '.fd-select__control.ng-star-inserted';
     dropdownOption = '.fd-list__item.ng-star-inserted';
     inputFieldText  = 'div.fd-select__text-content';
-    popoverButton = '.fd-toolbar__overflow__body' + this.button;
-    popoverInput = '.fd-input.fd-input--compact.fd-toolbar-fade-in';
     selectedHours = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[12]';
     selectedMinutes = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[54]';
     navigationUpArrowButton = 'button[glyph="navigation-up-arrow"]';

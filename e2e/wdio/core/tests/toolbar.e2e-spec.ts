@@ -1,7 +1,7 @@
 import { ToolbarPo } from '../pages/toolbar.po';
 import {
     checkElementScreenshot,
-    click, getAttributeByName,
+    click,
     getElementArrayLength, getImageTagBrowserPlatform, getText, getValue,
     isElementClickable, isElementDisplayed,
 
@@ -15,9 +15,9 @@ describe('Toolbar test suite', function() {
     const toolbarPage = new ToolbarPo();
     const {
         activeInfoToolbar, overflowButton, overflowPriorityButton, moreButton, overflowBody, alwaysButton,
-        overflowGroupingButton, checkbox, dropdownMenu, dropdownOption, inputFieldText, popoverButton, popoverInput,
-        selectedHours, selectedMinutes, navigationUpArrowButton, navigationDownArrowButton, timeItem, period,
-        dayInCalendarButtonByValue, dateTimeButton, okButton, dateTimeInput
+        overflowGroupingButton, checkbox, dropdownMenu, dropdownOption, inputFieldText, selectedHours, selectedMinutes,
+        navigationUpArrowButton, navigationDownArrowButton, timeItem, period, dayInCalendarButtonByValue,
+        dateTimeButton, okButton, dateTimeInput, overflowPriorityExample, overflowGroupingExample
     } = toolbarPage;
 
     beforeAll(() => {
@@ -66,14 +66,6 @@ describe('Toolbar test suite', function() {
             }
         });
 
-        it('verify popover', () => {
-            scrollIntoView(moreButton, 2);
-            click(moreButton, 2);
-            checkClickableButton(popoverButton);
-
-            expect(getAttributeByName(popoverInput, 'placeholder')).toBe('Field placeholder text');
-        });
-
         it('verify popover date time picker example', () => {
             scrollIntoView(dateTimeButton);
             click(dateTimeButton);
@@ -89,7 +81,7 @@ describe('Toolbar test suite', function() {
 
         it('should check Toolbar Overflow Priority example', () => {
             checkClickableButton(overflowPriorityButton);
-            click(moreButton, 3);
+            click(overflowPriorityExample + moreButton);
             expect(isElementDisplayed(overflowBody)).toBe(true, 'overflow body id not displayed');
             expect(isElementClickable(alwaysButton)).toBe(true, 'button is not clickable');
         });
@@ -99,7 +91,7 @@ describe('Toolbar test suite', function() {
 
         it('should check Toolbar Overflow Grouping example', () => {
             checkClickableButton(overflowGroupingButton);
-            click(moreButton, 4);
+            click(overflowGroupingExample + moreButton);
             expect(isElementDisplayed(overflowBody)).toBe(true, 'overflow body id not displayed');
             expect(isElementClickable(alwaysButton)).toBe(true, 'button is not clickable');
         });
