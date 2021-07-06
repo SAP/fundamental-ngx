@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.59...v0.31.0-rc.60) (2021-07-06)
+
+
+### Bug Fixes
+
+* **docs:** fix wizard mobile step 2 navigation example ([#5880](https://github.com/SAP/fundamental-ngx/issues/5880)) ([ac9931a](https://github.com/SAP/fundamental-ngx/commit/ac9931a5f0fa8bbb9da3f9a979daf99a7d820c0c))
+
 ## [0.31.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.58...v0.31.0-rc.59) (2021-07-06)
 
 ## [0.31.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.57...v0.31.0-rc.58) (2021-07-06)
