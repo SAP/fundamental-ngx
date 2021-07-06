@@ -200,18 +200,10 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     /**
      * @hidden
      */
-    _goNextFn(): () => void {
-        return () => {
-            this.goNext.emit();
-        }
-    }
+    _goNextFn: () => void = () => this.goNext.emit();
 
     /**
      * @hidden
      */
-    _finishFn(): () => void {
-        return () => {
-            this.finish.emit();
-        }
-    }
+    _finishFn: () => void = () => this.finish.emit();
 }

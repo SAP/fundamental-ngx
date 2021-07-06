@@ -35,14 +35,29 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
      */
     confirmationDialogCancelText = 'Cancel';
 
+    /**
+     * User-defined template for "Go Next" button.
+     */
     goNextButtonTemplate: TemplateRef<any>;
 
+    /**
+     * User-defined template for "Go Back" button.
+     */
     goBackButtonTemplate: TemplateRef<any>;
 
+    /**
+     * User-defined template for "Finish" button.
+     */
     finishButtonTemplate: TemplateRef<any>;
 
+    /**
+     * User-defined template for "Cancel" button.
+     */
     cancelButtonTemplate: TemplateRef<any>;
 
+    /**
+     * User-defined template for cancellation confirmation dialog.
+     */
     confirmationDialogTemplate: TemplateRef<any>;
 
     /** @hidden */
@@ -123,28 +138,19 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
     /**
      * @hidden
      */
-    _goBackFn(): () => void {
-        return this.goBack.bind(this);
-    }
+    _goBackFn: () => void = () => this.goBack();
+    /**
+     * @hidden
+     */
+    _goNextFn: () => Promise<void> = () => this.goNext();
 
     /**
      * @hidden
      */
-    _goNextFn(): () => Promise<void> {
-        return this.goNext.bind(this);
-    }
+    _finishFn: () => Promise<void> = () => this.finish();
 
     /**
      * @hidden
      */
-    _finishFn(): () => Promise<void> {
-        return this.finish.bind(this);
-    }
-
-    /**
-     * @hidden
-     */
-    _cancelFn(): () => void {
-        return this.cancel.bind(this);
-    }
+    _cancelFn: () => void = () => this.cancel();
 }
