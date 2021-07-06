@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconTabBarComponent } from './icon-tab-bar.component';
-import { IconModule } from '@fundamental-ngx/core';
+import { IconModule, PopoverModule } from '@fundamental-ngx/core';
 
 
 
@@ -12,6 +12,7 @@ import { IconModule } from '@fundamental-ngx/core';
     imports: [
         CommonModule,
         IconModule,
+        PopoverModule,
     ],
     exports: [
         CommonModule,

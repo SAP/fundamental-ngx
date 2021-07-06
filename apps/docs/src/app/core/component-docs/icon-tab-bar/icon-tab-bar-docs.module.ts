@@ -2,11 +2,15 @@ import { NgModule } from '@angular/core';
 import { IconTabBarDocsComponent } from './icon-tab-bar-docs.component';
 import { IconTabBarHeaderComponent } from './icon-tab-bar-header/icon-tab-bar-header.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import { IconTabBarExampleComponent } from './examples/icon-tab-bar-example.component';
+import { IconTabBarTextTypeExampleComponent } from './examples/icon-tab-bar-text-type-example/icon-tab-bar-text-type-example.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
 import { IconTabBarModule } from '../../../../../../../libs/core/src/lib/icon-tab-bar';
+import { IconTabBarFilterTypeExampleComponent } from './examples/icon-tab-bar-filter-type-example/icon-tab-bar-filter-type-example.component';
+import { IconTabBarProcessTypeExampleComponent } from './examples/icon-tab-bar-process-type-example/icon-tab-bar-process-type-example.component';
+import { IconTabBarIconTypeExampleComponent } from './examples/icon-tab-bar-icon-type-example/icon-tab-bar-icon-type-example.component';
+import { IconTabBarIconOnlyTypeExampleComponent } from './examples/icon-tab-bar-icon-only-type-example/icon-tab-bar-icon-only-type-example.component';
 
 const routes: Routes = [
     {
@@ -23,7 +27,11 @@ const routes: Routes = [
     declarations: [
         IconTabBarDocsComponent,
         IconTabBarHeaderComponent,
-        IconTabBarExampleComponent,
+        IconTabBarTextTypeExampleComponent,
+        IconTabBarFilterTypeExampleComponent,
+        IconTabBarProcessTypeExampleComponent,
+        IconTabBarIconTypeExampleComponent,
+        IconTabBarIconOnlyTypeExampleComponent,
     ],
     imports: [
         RouterModule.forChild(routes),

@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
-import { IconTabBarItem } from '../../../../../../../../libs/core/src/lib/icon-tab-bar/types';
+import { IconTabBarItem } from '../../../../../../../../../libs/core/src/lib/icon-tab-bar/types';
 
 @Component({
-    selector: 'fd-icon-tab-bar-example',
-    template: '<fd-icon-tab-bar [items]="items"></fd-icon-tab-bar>'
+    selector: 'fd-icon-tab-bar-text-type-example',
+    templateUrl: './icon-tab-bar-text-type-example.component.html',
+    styleUrls: ['./icon-tab-bar-text-type-example.component.scss']
 })
-export class IconTabBarExampleComponent {
+export class IconTabBarTextTypeExampleComponent {
 
     items: IconTabBarItem[] = [
         {
             id: 'item 1',
             label: 'Item 1',
+            color: 'critical'
         },
         {
             id: 'item 2',
