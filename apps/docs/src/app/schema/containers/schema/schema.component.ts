@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Properties, Schema } from '../../models/schema.model';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { Properties, Schema } from '../../models/schema.model';
 
 @Component({
     selector: 'schema',
@@ -33,16 +33,15 @@ export class SchemaComponent implements OnInit, OnChanges, OnDestroy {
      */
     private _resetted = false;
 
-    /**
-     * @hidden
-     */
-    private _allowSubscribe = true;
+    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /**
      * @hidden
      */
     ngOnDestroy(): void {
-        this._allowSubscribe = false;
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /**
@@ -78,7 +77,7 @@ export class SchemaComponent implements OnInit, OnChanges, OnDestroy {
         this.schemaGroup.patchValue(this.initialValues);
 
         this.schemaGroup.valueChanges
-        .pipe(takeWhile(() => this._allowSubscribe)).subscribe((values) => {
+        .pipe(takeUntil(this._onDestroy$)).subscribe((values) => {
             this.onSchemaValues.emit(values);
         });
     }
