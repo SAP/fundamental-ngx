@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.60...v0.31.0-rc.61) (2021-07-06)
+
+
+### Bug Fixes
+
+* **platform:** position the form fields on top ([#5876](https://github.com/SAP/fundamental-ngx/issues/5876)) ([6a8b041](https://github.com/SAP/fundamental-ngx/commit/6a8b041224bd997b06293e00b59856cb5b6d0f73))
+
 ## [0.31.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.59...v0.31.0-rc.60) (2021-07-06)
 
 
