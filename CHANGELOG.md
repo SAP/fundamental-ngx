@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.61...v0.31.0-rc.62) (2021-07-06)
+
+
+### Bug Fixes
+
+* **core:** fix pagination rtl ([#5881](https://github.com/SAP/fundamental-ngx/issues/5881)) ([01f1804](https://github.com/SAP/fundamental-ngx/commit/01f18049682f9b5b16088a0cfe4423e685c20a79))
+
 ## [0.31.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.60...v0.31.0-rc.61) (2021-07-06)
 
 
