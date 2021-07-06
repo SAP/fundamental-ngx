@@ -28,12 +28,12 @@ export class OffScreenElementComponent {
   /** set value for aria-atomic attribute. possible values are true and false. Default value is 'true' */
   @Input()
   @HostBinding('attr.aria-atomic')
-  atomic = true
+  ariaAtomic = true
 
   /** set value for aria-relevant attribute. possible values are 'additions' | 'removals' | 'text' | 'all' */
   @Input()
   @HostBinding('attr.aria-relevant')
-  relevant: ariaLiveRelevantType | ariaLiveRelevantType[];
+  ariaRelevant: ariaLiveRelevantType | ariaLiveRelevantType[];
 
   /** @hidden */
   constructor() {}
