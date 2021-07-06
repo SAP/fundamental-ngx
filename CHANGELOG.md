@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.57...v0.31.0-rc.58) (2021-07-06)
+
+
+### Bug Fixes
+
+* **core:** change styling tabs component ([#5735](https://github.com/SAP/fundamental-ngx/issues/5735)) ([14f8851](https://github.com/SAP/fundamental-ngx/commit/14f88511f7433fb92c80cf288e7a9fd7056050bb))
+
 ## [0.31.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.56...v0.31.0-rc.57) (2021-07-05)
 
 
