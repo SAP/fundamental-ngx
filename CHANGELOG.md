@@ -1,4 +1,48 @@
 
+## [0.31.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.61...v0.31.0-rc.62) (2021-07-06)
+
+
+### Bug Fixes
+
+* **core:** fix pagination rtl ([#5881](https://github.com/SAP/fundamental-ngx/issues/5881)) ([01f1804](https://github.com/SAP/fundamental-ngx/commit/01f18049682f9b5b16088a0cfe4423e685c20a79))
+
+## [0.31.0-rc.61](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.60...v0.31.0-rc.61) (2021-07-06)
+
+
+### Bug Fixes
+
+* **platform:** position the form fields on top ([#5876](https://github.com/SAP/fundamental-ngx/issues/5876)) ([6a8b041](https://github.com/SAP/fundamental-ngx/commit/6a8b041224bd997b06293e00b59856cb5b6d0f73))
+
+## [0.31.0-rc.60](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.59...v0.31.0-rc.60) (2021-07-06)
+
+
+### Bug Fixes
+
+* **docs:** fix wizard mobile step 2 navigation example ([#5880](https://github.com/SAP/fundamental-ngx/issues/5880)) ([ac9931a](https://github.com/SAP/fundamental-ngx/commit/ac9931a5f0fa8bbb9da3f9a979daf99a7d820c0c))
+
+## [0.31.0-rc.59](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.58...v0.31.0-rc.59) (2021-07-06)
+
+## [0.31.0-rc.58](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.57...v0.31.0-rc.58) (2021-07-06)
+
+
+### Bug Fixes
+
+* **core:** change styling tabs component ([#5735](https://github.com/SAP/fundamental-ngx/issues/5735)) ([14f8851](https://github.com/SAP/fundamental-ngx/commit/14f88511f7433fb92c80cf288e7a9fd7056050bb))
+
+## [0.31.0-rc.57](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.56...v0.31.0-rc.57) (2021-07-05)
+
+
+### Features
+
+* **core:** bring new qr code icon ([#5865](https://github.com/SAP/fundamental-ngx/issues/5865)) ([9152f14](https://github.com/SAP/fundamental-ngx/commit/9152f141bae72d5f3cba96709fc39314db7acd64))
+
+## [0.31.0-rc.56](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.55...v0.31.0-rc.56) (2021-07-05)
+
+
+### Bug Fixes
+
+* **core:** prevent error on missing menuService ([#5821](https://github.com/SAP/fundamental-ngx/issues/5821)) ([b767580](https://github.com/SAP/fundamental-ngx/commit/b767580cd05e57827470f7393110dec38e075a3f))
+
 ## [0.31.0-rc.55](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.54...v0.31.0-rc.55) (2021-07-05)
 
 ## [0.31.0-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.53...v0.31.0-rc.54) (2021-07-05)
