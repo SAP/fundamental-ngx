@@ -1,10 +1,14 @@
 @import '~fundamental-styles/dist/icon-tab-bar';
+@import '~fundamental-styles/dist/list.css';
 
 // These styles should move to fundamental/styles repo.
 .fd-icon-tab-bar {
 
     &__header {
-        padding-left: 3rem;
-        padding-right: 3rem;
+        position: relative;
+    }
+
+    &__item--hidden {
+        visibility: hidden;
     }
 }

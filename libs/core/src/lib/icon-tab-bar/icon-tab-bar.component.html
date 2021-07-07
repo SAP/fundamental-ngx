@@ -122,23 +122,5 @@
 </ng-template>
 
 <ng-template #textType>
-    <ul class='fd-icon-tab-bar__header' role='tablist'>
-            <li *ngFor='let item of items' [ngClass]='item.cssClasses'
-                class='fd-icon-tab-bar__item'
-                role='presentation'
-            >
-                <a
-                    (click)='selectItem(item)'
-                    [attr.aria-selected]='item.id === selectedItemId'
-                    class='fd-icon-tab-bar__tab'
-                    role='tab'
-                >
-                    <span class='fd-icon-tab-bar__tag'>
-                        {{ item.label }}
-                        <ng-container *ngIf='item.counter'> ({{item.counter}})</ng-container>
-                    </span>
-                    <span *ngIf='item.badge' class='fd-icon-tab-bar__badge'></span>
-                </a>
-            </li>
-        </ul>
+    <fd-icon-tab-bar-text-type [items]='items' (selected)='selectItem($event)'></fd-icon-tab-bar-text-type>
 </ng-template>

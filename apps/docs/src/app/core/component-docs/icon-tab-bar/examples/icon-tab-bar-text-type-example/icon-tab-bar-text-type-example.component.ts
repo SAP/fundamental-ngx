@@ -12,7 +12,43 @@ export class IconTabBarTextTypeExampleComponent {
         {
             id: 'item 1',
             label: 'Item 1',
-            color: 'critical'
+            color: 'critical',
+            subItems: [
+                {
+                    id: 'item 1',
+                    label: 'Item 1',
+                    color: 'critical',
+                },
+                {
+                    id: 'item 2',
+                    label: 'Item 2',
+                    badge: true,
+                },
+                {
+                    id: 'item 3',
+                    label: 'Item 3',
+                    counter: 100,
+                    active: true,
+                    subItems: [
+                        {
+                            id: 'Subitem 1',
+                            label: 'Subitem 1',
+                            color: 'critical',
+                        },
+                        {
+                            id: 'item 2',
+                            label: 'Subitem 2',
+                            badge: true,
+                        },
+                        {
+                            id: 'item 3',
+                            label: 'Subitem 3',
+                            counter: 100,
+                            active: true,
+                        },
+                    ]
+                },
+            ]
         },
         {
             id: 'item 2',
@@ -24,6 +60,52 @@ export class IconTabBarTextTypeExampleComponent {
             label: 'Item 3',
             counter: 100,
             active: true,
+        },
+        {
+            id: 'item 2',
+            label: 'Item 2',
+            badge: true,
+        },
+        {
+            id: 'item 2',
+            label: 'Item 2',
+            badge: true,
+        },
+        {
+            id: 'item 2',
+            label: 'Item 2',
+            badge: true,
+        },
+        {
+            id: 'item 2',
+            label: 'Item 2',
+            badge: true,
+        },
+        {
+            id: 'item 3',
+            label: 'Item 3',
+            counter: 100,
+            active: true,
+        },
+        {
+            id: 'item 2',
+            label: 'Item 2',
+            badge: true,
+        },
+        {
+            id: 'item 2',
+            label: 'Item 2',
+            badge: true,
+        },
+        {
+            id: 'item 2',
+            label: 'Item 2',
+            badge: true,
+        },
+        {
+            id: 'item 2',
+            label: 'Item 2',
+            badge: true,
         },
     ];
 }

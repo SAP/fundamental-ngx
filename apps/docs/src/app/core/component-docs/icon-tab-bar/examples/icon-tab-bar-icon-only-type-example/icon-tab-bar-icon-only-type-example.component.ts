@@ -12,18 +12,146 @@ export class IconTabBarIconOnlyTypeExampleComponent {
         {
             id: 'item 1',
             icon: 'account',
-            label: 'Item 1',
+            counter: 12,
             color: 'positive'
         },
         {
             id: 'item 2',
             icon: 'product',
+            counter: 32,
             badge: true,
         },
         {
             id: 'item 3',
             icon: 'present',
             active: true,
+            counter: 763,
+        },
+        {
+            id: 'item 1',
+            icon: 'account',
+            counter: 12,
+            color: 'positive'
+        },
+        {
+            id: 'item 2',
+            icon: 'product',
+            counter: 32,
+            badge: true,
+        },
+        {
+            id: 'item 1',
+            icon: 'account',
+            counter: 12,
+            color: 'positive'
+        },
+        {
+            id: 'item 2',
+            icon: 'product',
+            counter: 32,
+            badge: true,
+        },
+        {
+            id: 'item 1',
+            icon: 'account',
+            counter: 12,
+            color: 'positive'
+        },
+        {
+            id: 'item 2',
+            icon: 'product',
+            counter: 32,
+            badge: true,
+        },
+        {
+            id: 'item 1',
+            icon: 'account',
+            counter: 12,
+            color: 'positive'
+        },
+        {
+            id: 'item 2',
+            icon: 'product',
+            counter: 32,
+            badge: true,
+        },
+        {
+            id: 'item 1',
+            icon: 'account',
+            counter: 12,
+            color: 'positive'
+        },
+        {
+            id: 'item 2',
+            icon: 'product',
+            counter: 32,
+            badge: true,
+        },
+        {
+            id: 'item 1',
+            icon: 'account',
+            counter: 12,
+            color: 'positive'
+        },
+        {
+            id: 'item 2',
+            icon: 'product',
+            counter: 32,
+            badge: true,
+        },
+        {
+            id: 'item 2',
+            icon: 'product',
+            counter: 32,
+            badge: true,
+        },
+        {
+            id: 'item 1',
+            icon: 'account',
+            counter: 12,
+            color: 'positive'
+        },
+        {
+            id: 'item 2',
+            icon: 'product',
+            counter: 32,
+            badge: true,
+        },
+        {
+            id: 'item 2',
+            icon: 'product',
+            counter: 32,
+            badge: true,
+        },
+        {
+            id: 'item 1',
+            icon: 'account',
+            counter: 12,
+            color: 'positive'
+        },
+        {
+            id: 'item 2',
+            icon: 'product',
+            counter: 32,
+            badge: true,
+        },
+        {
+            id: 'item 2',
+            icon: 'product',
+            counter: 32,
+            badge: true,
+        },
+        {
+            id: 'item 1',
+            icon: 'account',
+            counter: 12,
+            color: 'positive'
+        },
+        {
+            id: 'item 2',
+            icon: 'product',
+            counter: 32,
+            badge: true,
         },
     ];
 

@@ -11,4 +11,6 @@ export interface IconTabBarItem {
     badge?: boolean;
     subItems?: IconTabBarItem[];
     cssClasses?: string[];
+    subItemsLevel?: number;
+    hidden?: boolean;
 }
