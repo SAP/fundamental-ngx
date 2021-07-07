@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.63...v0.31.0-rc.64) (2021-07-07)
+
+
+### Features
+
+* **platform:** wizard generator ([#5823](https://github.com/SAP/fundamental-ngx/issues/5823)) ([aa8a71b](https://github.com/SAP/fundamental-ngx/commit/aa8a71b08ebd60be669a28caad8498fddd1cb1e9))
+
 ## [0.31.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.62...v0.31.0-rc.63) (2021-07-07)
 
 
