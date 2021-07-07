@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.64...v0.31.0-rc.65) (2021-07-07)
+
+
+### Bug Fixes
+
+* **core:** fix failing unit tests ([#5898](https://github.com/SAP/fundamental-ngx/issues/5898)) ([e733e81](https://github.com/SAP/fundamental-ngx/commit/e733e811c177176d6a13eb302b83894896a322f8))
+
 ## [0.31.0-rc.64](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.63...v0.31.0-rc.64) (2021-07-07)
 
 
