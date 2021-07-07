@@ -110,7 +110,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/infiniteScroll', name: 'Infinite Scroll' },
             { url: 'core/scroll-spy', name: 'Scroll Spy' },
             { url: 'core/theme-switcher', name: 'Theme Switcher API' },
-            { url: 'core/off-screen', name: 'OffScreen' }
+            { url: 'core/off-screen', name: 'Off Screen' }
         ];
 
         this.sections = [

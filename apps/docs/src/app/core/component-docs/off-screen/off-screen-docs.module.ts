@@ -8,8 +8,8 @@ import { OffScreenDocsComponent } from './off-screen-docs.component';
 import { OffScreenExampleComponent } from './examples/off-screen-example.component';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { OffScreenElementModule } from '@fundamental-ngx/core/utils';
 import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { OffScreenElementModule } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
