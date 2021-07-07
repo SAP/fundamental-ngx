@@ -1,5 +1,5 @@
 #### Please provide a link to the associated issue.
-Closes SAP/fundamental-ngx#
+Closes
 
 #### Please provide a brief summary of this pull request.
 

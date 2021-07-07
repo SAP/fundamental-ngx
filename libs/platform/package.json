@@ -4,7 +4,7 @@
   "schematics": "./schematics/collection.json",
   "license": "Apache-2.0",
   "homepage": "https://sap.github.io/fundamental-ngx/home",
-  "description": "SAP Fundamentals platform, implemented in Angular",
+  "description": "Fundamental Library for Angular - platform",
   "scripts":{
     "build": "../../node_modules/.bin/tsc -p tsconfig.schematics.json",
     "copy:schemas": "cp schematics/*/schema.json ../../dist/libs/platform/",

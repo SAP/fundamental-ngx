@@ -270,11 +270,13 @@ describe('List test suite:', function() {
             listPage.checkRtlSwitch();
         });
     });
-    // TODO: Failed. Unable to debug at the moment.
-    xdescribe('Check visual regression', function() {
+
+    describe('Check visual regression', function() {
         it('should check examples visual regression', () => {
+            refreshPage();
+            waitForElDisplayed(listPage.title);
             listPage.saveExampleBaselineScreenshot();
-            expect(listPage.compareWithBaseline()).toBeLessThan(3);
+            expect(listPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });

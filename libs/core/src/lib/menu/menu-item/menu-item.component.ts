@@ -52,7 +52,6 @@ export const SUBMENU = new InjectionToken<BaseSubmenu>('Submenu component depend
     }
 })
 export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterContentInit, OnDestroy {
-
     /** Set the Menu Item as disabled/enabled */
     @Input()
     disabled = false;
@@ -63,7 +62,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** Reference to sub-menu component */
     @Input()
-    submenu: BaseSubmenu;
+    submenu: BaseSubmenu | undefined;
 
     /** Emitted when the menu item is selected. */
     @Output()
@@ -87,11 +86,12 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     private _hoverSubscriptions: Subscription = new Subscription();
 
     /** @hidden */
-    constructor(public elementRef: ElementRef,
-                @Optional() public menuService: MenuService,
-                private _changeDetectorRef: ChangeDetectorRef,
-                @Optional() @Inject(SUBMENU) private _submenu: BaseSubmenu) {
-    }
+    constructor(
+        public elementRef: ElementRef,
+        @Optional() public menuService: MenuService | null,
+        private _changeDetectorRef: ChangeDetectorRef,
+        @Optional() @Inject(SUBMENU) private _submenu: BaseSubmenu | null
+    ) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -120,7 +120,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** Whether menu item has popup (desktop mode)  */
     get hasPopup(): boolean {
-        return this.submenu && (!this.menuService.menu || !this.menuService.menu.mobile);
+        return this.submenu && (!this.menuService?.menu || !this.menuService?.menu.mobile);
     }
 
     /** Focuses Menu Item interactive element */
@@ -149,35 +149,42 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     /** @hidden Creates click listener on menu item interactive element */
     private _listenOnMenuLinkClick(): void {
         this._subscriptions.add(
-            fromEvent(this.menuInteractive.elementRef.nativeElement, 'click')
-                .subscribe(() => this.menuService.setActive(true, this))
-        )
+            fromEvent(this.menuInteractive.elementRef.nativeElement, 'click').subscribe(() =>
+                this.menuService?.setActive(true, this)
+            )
+        );
     }
 
     /** @hidden Creates hover listeners for activating/deactivating menu item */
     private _listenOnMenuLinkHover(): Subscription {
         const hoverSubscriptions: Subscription = new Subscription();
 
-        const mouseEnter$: Observable<MouseEvent> = fromEvent(this.menuInteractive.elementRef.nativeElement, 'mouseenter');
-        const mouseLeave$: Observable<MouseEvent> = fromEvent(this.menuInteractive.elementRef.nativeElement, 'mouseleave');
-
-        // Set focus on hover
-        hoverSubscriptions.add(
-            mouseEnter$.subscribe(() => this.menuService.setFocused(this))
+        const mouseEnter$: Observable<MouseEvent> = fromEvent(
+            this.menuInteractive.elementRef.nativeElement,
+            'mouseenter'
+        );
+        const mouseLeave$: Observable<MouseEvent> = fromEvent(
+            this.menuInteractive.elementRef.nativeElement,
+            'mouseleave'
         );
 
+        // Set focus on hover
+        hoverSubscriptions.add(mouseEnter$.subscribe(() => this.menuService?.setFocused(this)));
+
         const timerFactory$ = defer(() => {
-            return timer(this.menuService.menu.openOnHoverTime).pipe(takeUntil(mouseLeave$))
+            return timer(this.menuService ? this.menuService.menu.openOnHoverTime : 0).pipe(takeUntil(mouseLeave$));
         });
 
         const timeTrigger$ = mouseEnter$.pipe(switchMap(() => timerFactory$));
 
         // Set active on long hover
         hoverSubscriptions.add(
-            mouseEnter$.pipe(
-                filter(() => !!this.submenu),
-                sample(timeTrigger$)
-            ).subscribe(() => this.menuService.setActive(true, this))
+            mouseEnter$
+                .pipe(
+                    filter(() => !!this.submenu),
+                    sample(timeTrigger$)
+                )
+                .subscribe(() => this.menuService?.setActive(true, this))
         );
 
         return hoverSubscriptions;
@@ -191,7 +198,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** @hidden Checks for Menu Service dependency and passes it if further */
     private _setMenuService(): void {
-        this.menuService = this.menuService || this._submenu.menuService;
+        this.menuService = this.menuService || this._submenu?.menuService;
         if (this.submenu) {
             this.submenu.menuService = this.menuService;
         }
@@ -199,7 +206,7 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
 
     /** @hidden Listen on menu mode and set proper mode listeners */
     private _listenOnMenuMode(): void {
-        this.menuService.isMobileMode.subscribe(isMobile => {
+        this.menuService?.isMobileMode.subscribe((isMobile) => {
             this._hoverSubscriptions.unsubscribe();
             if (!isMobile) {
                 this._hoverSubscriptions = this._listenOnMenuLinkHover();
@@ -210,14 +217,15 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     /** @hidden Updates focused menu item on outer focus */
     private _listenOnOuterFocus(): void {
         this._subscriptions.add(
-            fromEvent(this.menuInteractive.elementRef.nativeElement, 'focus').pipe(
-                filter(() => this.menuService.focusedNode !== this.menuService.menuMap.get(this))
-            ).subscribe(() => this.menuService.setFocused(this))
-        )
+            fromEvent(this.menuInteractive.elementRef.nativeElement, 'focus')
+                .pipe(
+                    filter(() => !!this.menuService),
+                    filter(() => this.menuService.focusedNode !== this.menuService.menuMap.get(this))
+                )
+                .subscribe(() => this.menuService.setFocused(this))
+        );
     }
 }
-
-
 
 @Component({
     selector: 'fd-submenu',
@@ -228,11 +236,10 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [{provide: SUBMENU, useExisting: SubmenuComponent}],
+    providers: [{ provide: SUBMENU, useExisting: SubmenuComponent }],
     exportAs: 'fdSubmenu'
 })
 export class SubmenuComponent implements BaseSubmenu {
-
     /** Aria-label for navigation */
     @Input()
     ariaLabel: string = null;

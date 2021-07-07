@@ -9,7 +9,7 @@ import {
     Output,
     SimpleChanges,
     ViewEncapsulation,
-    TemplateRef, OnDestroy
+    TemplateRef, OnDestroy, ChangeDetectorRef
 } from '@angular/core';
 import {
     ENTER,
@@ -137,6 +137,9 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     @Input()
     pageLabel = 'Page';
 
+    /** Aria label for the navigation element */
+    @Input()
+    ariaLabel = 'Pagination';
 
     /** Event fired when the page is changed. */
     @Output()
@@ -182,6 +185,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     /** @hidden */
     constructor (
         private readonly paginationService: PaginationService,
+        private readonly _cd: ChangeDetectorRef,
         @Optional() private readonly _rtlService: RtlService
     ) {}
 
@@ -294,5 +298,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         this._currentShowing.from = this.currentPage - 1 === 0 ? 1 : (this.currentPage - 1) * pagination.itemsPerPage + 1;
         this._currentShowing.to = Math.min((this.currentPage - 1) * pagination.itemsPerPage + pagination.itemsPerPage, this.totalItems);
         this._currentShowing.of = this.totalItems;
+
+        this._cd.markForCheck();
     }
 }

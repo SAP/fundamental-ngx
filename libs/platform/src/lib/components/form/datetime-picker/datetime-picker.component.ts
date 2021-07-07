@@ -1,4 +1,5 @@
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -14,21 +15,13 @@ import {
     ViewChild
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
-import {
-    CalendarYearGrid,
-    DatetimeAdapter,
-    DateTimeFormats,
-    DatetimePickerComponent,
-    DATE_TIME_FORMATS,
-    DaysOfWeek,
-    FdCalendarView,
-    Placement,
-    SpecialDayRule
-} from '@fundamental-ngx/core';
-
+import { CalendarYearGrid, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/core/calendar';
+import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
+import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { BaseInput } from '../base.input';
-import { FormField } from '../form-field';
 import { FormFieldControl, Status } from '../form-control';
+import { FormField } from '../form-field';
 import { createMissingDateImplementationError } from './errors';
 
 @Component({
@@ -37,7 +30,7 @@ import { createMissingDateImplementationError } from './errors';
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: FormFieldControl, useExisting: PlatformDatetimePickerComponent, multi: true }]
 })
-export class PlatformDatetimePickerComponent<D> extends BaseInput {
+export class PlatformDatetimePickerComponent<D> extends BaseInput implements AfterViewInit {
     /**
      * value for datetime
      */
@@ -252,6 +245,16 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput {
         this.value = _dateTimeAdapter.now();
     }
 
+    /**
+     * @hidden
+     */
+    ngAfterViewInit(): void {
+        // if used with platform forms, adjust width of datetimepicker to take 100% container space
+        if (this.formField) {
+            this._adjustPickerWidth();
+        }
+    }
+
     /** @hidden */
     writeValue(value: D): void {
         super.writeValue(value);
@@ -308,4 +311,16 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput {
     handleActiveViewChange = (fdCalendarView: FdCalendarView): void => {
         this.activeViewChange.emit(fdCalendarView);
     };
+
+    /**
+     * @hidden
+     * method that adjusts width of datetimepicker to take 100% container space
+     */
+    private _adjustPickerWidth(): void {
+        const customPopoverEl = this._elRef.nativeElement.querySelector('.fd-datetime .fd-popover-custom');
+        if (!customPopoverEl) {
+            return;
+        }
+        customPopoverEl.style.display = 'inline';
+    }
 }

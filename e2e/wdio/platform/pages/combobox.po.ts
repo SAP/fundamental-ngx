@@ -34,19 +34,19 @@ export class ComboBoxPo extends BaseComponentPo {
     };
 
     comboBoxButtons = (name: string) => {
-        return `//label[@for='${name}']/../../fdp-input-message-group//button`;
+        return `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//button`;
     };
 
     comboBoxExpandedButtons = (name: string) => {
-        return `//label[@for='${name}']/../../fdp-input-message-group//button[contains (@class,"is-expanded")]`;
+        return `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//button[contains (@class,"is-expanded")]`;
     };
 
     comboBoxInputs = (name: string) => {
-        return `//label[@for='${name}']/../../fdp-input-message-group//input`;
+        return `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//input`;
     };
 
     filledComboBoxInputs = (name: string, option: string) => {
-        return `//label[@for='${name}']/../../fdp-input-message-group//input[@ng-reflect-model='${option}']`;
+        return `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//input[@ng-reflect-model='${option}']`;
     };
 
     expandDropdown(type: string): void {
