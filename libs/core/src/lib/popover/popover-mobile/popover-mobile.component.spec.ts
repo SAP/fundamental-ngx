@@ -68,7 +68,7 @@ describe('PopoverMobileComponent', () => {
     });
 
     it ('should destroy', () => {
-        popoverMobileComponent.dialogRef = { close: () => {} } as DialogRef;
+        popoverMobileComponent.dialogRef = new PopoverMobileDialogRefStub();
         spyOn(popoverMobileComponent.dialogRef, 'close');
 
         popoverMobileComponent.ngOnDestroy();
@@ -77,7 +77,7 @@ describe('PopoverMobileComponent', () => {
     });
 
     it ('should close', () => {
-        popoverMobileComponent.dialogRef = { close: () => {} } as DialogRef;
+        popoverMobileComponent.dialogRef = new PopoverMobileDialogRefStub();
         spyOn(popoverMobileComponent.dialogRef, 'close');
 
         popoverMobileComponent.close();
@@ -85,3 +85,7 @@ describe('PopoverMobileComponent', () => {
         expect(popoverMobileComponent.dialogRef.close).toHaveBeenCalled();
     });
 });
+
+class PopoverMobileDialogRefStub extends DialogRef {
+    close(): void {}
+}

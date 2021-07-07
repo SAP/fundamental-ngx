@@ -144,4 +144,5 @@ class PopoverServiceStub {
     close(): void {}
     applyNewPosition(): void {}
     refreshPosition(): void {}
+    onDestroy(): void {}
 }
