@@ -23,6 +23,7 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
               [compact]="compact"
               [fdType]="fdType"
               [label]="label"
+              [attr.title]="ariaLabel"
               [attr.aria-label]="ariaLabel"
               [fdMenu]="fdMenu"
               [disabled]="disabled"
