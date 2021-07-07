@@ -1,4 +1,12 @@
 
+## [0.31.0-rc.63](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.62...v0.31.0-rc.63) (2021-07-07)
+
+
+### Bug Fixes
+
+* **core:** use the proper feed-list styles from fundamental style library to apply styles in ngx feed list item component ([#5844](https://github.com/SAP/fundamental-ngx/issues/5844)) ([e0a95f9](https://github.com/SAP/fundamental-ngx/commit/e0a95f93b0ca88d35ed6e1c6f2e1976d4b56496f))
+* **docs:** add resettable flag for playground and reset message strip ([#5883](https://github.com/SAP/fundamental-ngx/issues/5883)) ([4133481](https://github.com/SAP/fundamental-ngx/commit/4133481b515a69d8de82bb396d507352bff36cb0))
+
 ## [0.31.0-rc.62](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.61...v0.31.0-rc.62) (2021-07-06)
 
 
