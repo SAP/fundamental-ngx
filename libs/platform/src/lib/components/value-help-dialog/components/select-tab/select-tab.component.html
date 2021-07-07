@@ -14,10 +14,10 @@
         [noBorderX]="mobile"
         [noBorderY]="false"
         tabindex="0"
-        role="table"
+        role="presentation"
     >
-        <thead fd-table-header role="rowgroup">
-            <tr fd-table-row *ngIf="displayedData.length && _tableFilters" role="row">
+        <thead fd-table-header role="columnheader">
+            <tr fd-table-row *ngIf="displayedData.length && _tableFilters">
                 <th fd-table-cell [fitContent]="mobile"  scope="col" role="cell">
                     <fd-checkbox
                         role="checkbox"
@@ -27,11 +27,11 @@
                         [tristate]="true"
                         [tristateSelectable]="false"
                         [ngModel]="_selectedAll"
-						 [attr.aria-label]="'Select all items in this table'"
+                        [attr.aria-label]="'Select all items in this table'"
                         (ngModelChange)="_toggleAllRows()"
                     ></fd-checkbox>
                 </th>
-                <th scope="col" role="cell" fd-table-cell *ngFor="let filter of _tableFilters.main; trackBy: _trackByFilterFn">{{ filter.label }}</th>
+                <th scope="col" role="cell" fd-table-cell *ngFor="let filter of _tableFilters.main; trackBy: _trackByFilterFn; let colindex = index" [attr.aria-colindex]="colindex">{{ filter.label }}</th>
             </tr>
         </thead>
         <tbody fd-table-body role="rowgroup">
@@ -45,6 +45,7 @@
                     (click)="!isMultiSelection && _toggleSelectRow(row)"
                     role="row"
 					scope="row"
+					[attr.aria-rowindex]="i"
                 >
                     <td fd-table-cell [fitContent]="mobile" role="cell">
                         <fd-checkbox
