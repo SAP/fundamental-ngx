@@ -2,12 +2,12 @@ import { UploadCollectionPo } from '../pages/upload-collection.po';
 
 import {
     click, getElementArrayLength, getElementPlaceholder, getText, isElementClickable,
-    refreshPage, scrollIntoView, setValue,
+    refreshPage, scrollIntoView, sendKeys, setValue,
     waitForPresent
 } from '../../driver/wdio';
 import {
     columnHeaderTestArr,
-    testArr, testFolder1,
+    paginationTestArr, testFolder1,
     testFolderArr
 } from '../fixtures/appData/upload-collection-content';
 
@@ -30,13 +30,13 @@ describe('Upload collection test suite', function() {
 
 
     it('should check the possibility of creating table item for Default and Without Pagination and Search examples', () => {
-        creatingFolder(defaultExample);
-        creatingFolder(turnOffExample);
+        checkCreatingFolder(defaultExample);
+        checkCreatingFolder(turnOffExample);
     });
 
     it('should check the possibility of removing table item for Default and Without Pagination and Search examples', () => {
-        removingItem(defaultExample);
-        removingItem(turnOffExample);
+        checkRemovingItem(defaultExample);
+        checkRemovingItem(turnOffExample);
     });
 
     it('should check the choice how many items display on page for all examples', () => {
@@ -77,6 +77,11 @@ describe('Upload collection test suite', function() {
         checkAbleToSearch(readonlyExample);
     });
 
+    it('should check for clickability cancel button in dialog header window', () => {
+        checkClickabilityCancelButton(defaultExample);
+        checkClickabilityCancelButton(defaultExample);
+    });
+
 
     it('should check orientation', () => {
         uploadCollectionPage.checkRtlSwitch();
@@ -112,17 +117,17 @@ describe('Upload collection test suite', function() {
         const linksLength = getElementArrayLength(selector + tablePages);
         for (let i = 0; i < linksLength; i++) {
             click(selector + tablePages, i);
-            expect(getText(selector + tableResult)).toBe(testArr[i]);
+            expect(getText(selector + tableResult)).toBe(paginationTestArr[i]);
         }
     }
 
     function checkSelectedPagesByNextPrevious(selector: string): void {
         scrollIntoView(selector + linkNext);
         click(selector + linkNext);
-        expect(getText(selector + tableResult)).toBe(testArr[1]);
+        expect(getText(selector + tableResult)).toBe(paginationTestArr[1]);
 
         click(selector + linkPrevious);
-        expect(getText(selector + tableResult)).toBe(testArr[0]);
+        expect(getText(selector + tableResult)).toBe(paginationTestArr[0]);
     }
 
     function checkColumnHeaderText(selector: string, str: string = ''): void {
@@ -143,22 +148,37 @@ describe('Upload collection test suite', function() {
         }
     }
 
-    function creatingFolder(selector: string): void {
+    function checkCreatingFolder(selector: string): void {
         scrollIntoView(selector);
-        expect(getText(selector + tableItemCount)).toBe('54');
+        const countBeforeAdd = getText(selector + tableItemCount);
+        const countBeforeAddNum = Number(countBeforeAdd);
+        expect(countBeforeAddNum).toEqual(54);
         click(selector + transparentButton);
         setValue(dialogInputField, testFolder1);
-        expect(isElementClickable(dialogCreateButton, 1)).toBe(true, '"Cancel" button not clickable');
         click(dialogCreateButton);
         expect(getText(selector + tableItemCount)).toBe('55');
+        const countAfterAdd = getText(selector + tableItemCount);
+        const countAfterAddNum = Number(countAfterAdd);
+        expect(countAfterAddNum).toEqual(55);
         expect(getText(selector + tableContent, 4)).toBe(testFolder1);
     }
 
-    function removingItem(selector: string): void {
+    function checkRemovingItem(selector: string): void {
         scrollIntoView(selector);
-        expect(getText(selector + tableItemCount)).toBe('54');
+        const countBeforeRemove = getText(selector + tableItemCount);
+        const countBeforeRemoveNum = Number(countBeforeRemove);
+        expect(countBeforeRemoveNum).toEqual(54);
         click(selector + transparentButton, 5);
         click(menuButton, 3);
-        expect(getText(selector + tableItemCount)).toBe('53');
+        const countAfterRemove = getText(selector + tableItemCount);
+        const countAfterRemoveNum = Number(countAfterRemove);
+        expect(countAfterRemoveNum).toEqual(53);
+    }
+
+    function checkClickabilityCancelButton(selector: string): void {
+        scrollIntoView(selector + transparentButton);
+        click(defaultExample + transparentButton);
+        expect(isElementClickable(dialogCreateButton, 1)).toBe(true, '"Cancel" button not clickable');
+        sendKeys(['Escape']);
     }
 });

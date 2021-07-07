@@ -1,4 +1,4 @@
-export const testArr = [
+export const paginationTestArr = [
     'Showing 1-10 of 54',
     'Showing 11-20 of 54',
     'Showing 21-30 of 54',

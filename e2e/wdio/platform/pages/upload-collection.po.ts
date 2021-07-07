@@ -3,7 +3,6 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class UploadCollectionPo extends BaseComponentPo {
     private url = '/upload-collection';
-    root = '#page-content';
 
     defaultExample = 'fdp-upload-collection-example';
     disableExample = 'fdp-upload-collection-disabled-example';
@@ -21,8 +20,8 @@ export class UploadCollectionPo extends BaseComponentPo {
     columnHeaders = ' [role="columnheader"]';
     tableContent = ' fd-icon~span';
     transparentButton = ' .fd-button--transparent';
-    dialogInputField = 'fd-dialog-body .fd-input.ng-pristine';
-    dialogCreateButton = '.fd-dialog__decisive-button';
+    dialogInputField = 'fd-dialog-body .fd-input';
+    dialogCreateButton = 'button.fd-dialog__decisive-button';
     tableItemCount = ' span~span';
     menuButton = '.fd-menu__item';
 
