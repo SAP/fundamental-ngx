@@ -26,7 +26,7 @@
             </div>
             <ul fd-list tabindex="-1">
                 <li fd-list-item *ngFor="let option of list" tabindex="0">
-                    <a [attr.href]="option.url" fd-link fd-list-title>{{ option.text }}</a>
+                    <a [attr.href]="option.url" fd-link fd-list-title tabindex="-1">{{ option.text }}</a>
                 </li>
             </ul>
         </fd-popover-body>
@@ -46,7 +46,7 @@
             </div>
             <ul fd-list tabindex="-1">
                 <li fd-list-item *ngFor="let option of list" tabindex="0">
-                    <a [attr.href]="option.url" fd-link fd-list-title>{{ option.text }}</a>
+                    <a [attr.href]="option.url" fd-link fd-list-title tabindex="-1">{{ option.text }}</a>
                 </li>
             </ul>
             <div fd-popover-body-footer>
@@ -81,7 +81,7 @@
             </div>
             <ul fd-list tabindex="-1">
                 <li fd-list-item *ngFor="let option of list" tabindex="0">
-                    <a [attr.href]="option.url" fd-link fd-list-title>{{ option.text }}</a>
+                    <a [attr.href]="option.url" fd-link fd-list-title tabindex="-1">{{ option.text }}</a>
                 </li>
 			</ul>
             <div fd-popover-body-footer>
