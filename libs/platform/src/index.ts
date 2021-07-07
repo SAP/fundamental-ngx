@@ -26,3 +26,5 @@ export * from './lib/utils/pipes/public_api';
 export * from './lib/components/approval-flow/public_api';
 export * from './lib/components/slider/public_api';
 export * from './lib/components/page-footer/public_api';
+export * from './lib/components/form/form-generator/public_api';
+export * from './lib/components/wizard-generator/public_api';

@@ -92,5 +92,15 @@ export const API_FILES = {
     uploadCollection: ['UploadCollectionComponent', 'UploadCollectionDataProvider', 'UploadCollectionDataSource'],
     approvalFlow: ['ApprovalFlowComponent', 'ApprovalFlowNodeComponent'],
     slider: ['SliderComponent'],
-    footer: ['FooterComponent']
+    footer: ['FooterComponent'],
+    wizardGenerator: [
+        'WizardGeneratorService',
+        'WizardDialogGeneratorService',
+        'WizardGeneratorComponent',
+        'DialogWizardGeneratorComponent',
+        'WizardBodyComponent',
+        'WizardGeneratorStepComponent',
+        'WizardSummaryStepComponent',
+        'WizardSummarySectionComponent'
+    ],
 };

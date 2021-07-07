@@ -1,50 +1,16 @@
 import { Injectable, Type } from '@angular/core';
 import { AsyncValidatorFn, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 
 import { DynamicFormControl } from './dynamic-form-control';
 import { DynamicFormItem, DynamicFormItemChoices, DynamicFormValue } from './interfaces/dynamic-form-item';
 import { FormComponentDefinition } from './interfaces/form-component-definition';
 import { DEFAULT_COMPONENTS_LIST } from './config/default-components-list';
 import { DEFAULT_VALIDATION_ERRORS } from './config/default-validation-errors';
-import { isFunction, isPromise, isSubscribable } from '../../../utils/lang';
+import { isFunction } from '../../../utils/lang';
 import { SelectItem } from '../../../domain/data-model';
 import { BaseDynamicFormGeneratorControl } from './base-dynamic-form-generator-control';
-
-interface SubscriptionStrategy {
-    createSubscription(async: Observable<any>|Promise<any>|Function, updateLatestValue: any): Promise<any>;
-  }
-
-class SubscribableStrategy implements SubscriptionStrategy {
-    createSubscription(async: Observable<any>, updateLatestValue: any): Promise<any> {
-        return async.toPromise().then(updateLatestValue, e => {
-            console.error(e);
-        });
-    }
-}
-
-class PromiseStrategy implements SubscriptionStrategy {
-    createSubscription(async: Promise<any>, updateLatestValue: (v: any) => any): Promise<any> {
-        return async.then(updateLatestValue, e => {
-            console.error(e);
-        });
-    }
-}
-
-class FunctionStrategy implements SubscriptionStrategy {
-    createSubscription(fn: Function, updateLatestValue: (v: any) => any): any {
-
-        const result = isFunction(fn) ? fn() : fn;
-
-        updateLatestValue(result);
-    }
-}
-
-class ValueStrategy implements SubscriptionStrategy {
-    createSubscription(value: any, updateLatestValue: (v: any) => any): any {
-        updateLatestValue(value);
-    }
-}
+import { selectStrategy } from '../../../utils/async-strategy/select-strategy.class';
+import { DynamicFormGroup } from './interfaces/dynamic-form-group';
 
 /**
  * @description Form generator service
@@ -77,8 +43,8 @@ export class FormGeneratorService {
      * @param formItems the list of form items which used for form control generation.
      * @returns `FormGroup` class with the list of `DynamicFormControl` control classes.
      */
-    async generateForm(formItems: DynamicFormItem[]): Promise<FormGroup> {
-        const form = this._fb.group({});
+    async generateForm(formItems: DynamicFormItem[]): Promise<DynamicFormGroup> {
+        const form = this._fb.group({}) as DynamicFormGroup;
 
         formItems.forEach((formItem) => {
 
@@ -146,7 +112,7 @@ export class FormGeneratorService {
             // Update form value since it might be changed
             form.controls[formItem.name].setValue(formItem.default);
 
-            (form.controls[key] as DynamicFormControl).formItem = formItem;
+            form.controls[key].formItem = formItem;
         }
 
         return form;
@@ -157,12 +123,12 @@ export class FormGeneratorService {
      * @param form
      * @returns form value object.
      */
-    async getFormValue(form: FormGroup): Promise<DynamicFormValue> {
+    async getFormValue(form: DynamicFormGroup): Promise<DynamicFormValue> {
         const formValue = Object.assign({}, form.value);
 
         for (const [i, control] of Object.entries(form.controls)) {
 
-            const formItem = (control as DynamicFormControl).formItem;
+            const formItem = control.formItem;
 
             if (formItem.shouldShow === false) {
                 delete formValue[i];
@@ -247,14 +213,14 @@ export class FormGeneratorService {
      * @param form
      * @returns `Set` where key is item name, and boolean value if field needs to be shown.
      */
-    async checkVisibleFormItems(form: FormGroup): Promise<{[key: string]: boolean}> {
+    async checkVisibleFormItems(form: DynamicFormGroup): Promise<{[key: string]: boolean}> {
 
         const shouldShowFields: {[key: string]: boolean} = {};
 
         const formValue = form.value;
 
         for (const [key, control] of Object.entries(form.controls)) {
-            const formItem = (control as DynamicFormControl).formItem;
+            const formItem = control.formItem;
 
             if (!formItem.when) {
                 shouldShowFields[key] = true;
@@ -311,20 +277,12 @@ export class FormGeneratorService {
 
     /**
      * @hidden
-     * @param value
-     */
-    private _updateLatestValue(value: any): void {
-        this._latestAsyncValue = value;
-    }
-
-    /**
-     * @hidden
      * @description Returns value from Promise-like, Observable-like, simple function or just some object.
      * @param obj
      * @returns
      */
     private async _getFunctionValue(obj: any): Promise<any> {
-        const strategy = this._selectStrategy(obj);
+        const strategy = selectStrategy(obj);
 
         let result: any;
 
@@ -337,27 +295,5 @@ export class FormGeneratorService {
         }
 
         return result;
-    }
-
-    /**
-     * @hidden
-     * @description Selects appropriate strategy on how to resolve function value
-     * @param obj
-     * @returns
-     */
-     private _selectStrategy(obj: Observable<any>|Promise<any>|Function): SubscriptionStrategy {
-        if (isPromise(obj)) {
-            return new PromiseStrategy();
-        }
-
-        if (isSubscribable(obj)) {
-            return new SubscribableStrategy();
-        }
-
-        if (isFunction(obj)) {
-            return new FunctionStrategy();
-        }
-
-        return new ValueStrategy();
     }
 }
