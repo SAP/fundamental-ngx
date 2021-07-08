@@ -10,7 +10,7 @@
             <!-- The Wizard -->
             <fd-wizard>
                 <fd-wizard-navigation>
-                    <ul fd-wizard-progress-bar>
+                    <ul fd-wizard-progress-bar size="md">
                         <li
                             fd-wizard-step
                             *ngFor="let step of steps; let i = index"
@@ -19,7 +19,7 @@
                             [label]="step.label"
                         >
                             <fd-wizard-step-indicator [glyph]="step.glyph"></fd-wizard-step-indicator>
-                            <fd-wizard-content>
+                            <fd-wizard-content size="md">
                                 <h3 fd-title>{{ i + 1 }}. {{ step.label }}</h3>
                                 <fd-message-strip type="information" [dismissible]="false">
                                     {{ step.messageStrip }}

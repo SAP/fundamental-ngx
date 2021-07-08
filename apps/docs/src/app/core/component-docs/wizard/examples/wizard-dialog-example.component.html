@@ -6,7 +6,7 @@
         <fd-dialog-body>
             <fd-wizard [appendToWizard]="false">
                 <fd-wizard-navigation>
-                    <ul fd-wizard-progress-bar>
+                    <ul fd-wizard-progress-bar size="sm">
                         <li
                             fd-wizard-step
                             [status]="step1status"
@@ -14,7 +14,7 @@
                             label="Product Type"
                         >
                             <fd-wizard-step-indicator>1</fd-wizard-step-indicator>
-                            <fd-wizard-content>
+                            <fd-wizard-content size="sm">
                                 <h3 fd-title>1. Product Type</h3>
                                 <fd-message-strip type="information" [dismissible]="false">
                                     The Wizard control is supposed to break down large tasks, into smaller steps, easier
@@ -40,7 +40,7 @@
                             label="Customer Information"
                         >
                             <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
-                            <fd-wizard-content>
+                            <fd-wizard-content size="sm">
                                 <h3 fd-title>2. Customer Information</h3>
                                 <fd-message-strip type="information" [dismissible]="false">
                                     As the developer, you are in charge of whether or not to disable the next step
@@ -106,7 +106,7 @@
                             optionalText="(Optional)"
                         >
                             <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
-                            <fd-wizard-content>
+                            <fd-wizard-content size="sm">
                                 <h3 fd-title>3. Additional Information</h3>
                                 <fd-message-strip type="information" [dismissible]="false">
                                     Some steps may not require any input from the customer to progress to the next step.
@@ -129,7 +129,7 @@
                             label="Pricing and Payment"
                         >
                             <fd-wizard-step-indicator>4</fd-wizard-step-indicator>
-                            <fd-wizard-content>
+                            <fd-wizard-content size="sm">
                                     <h3 fd-title>4. Payment</h3>
                                     <div>
                                         Sed fermentum, mi et tristique ullamcorper, sapien sapien faucibus sem, quis pretium
@@ -145,7 +145,7 @@
                             </fd-wizard-content>
                         </li>
                         <li fd-wizard-step [status]="summaryStatus" [isSummary]="true" (statusChange)="statusChanged(5, $event)">
-                            <fd-wizard-content>
+                            <fd-wizard-content size="sm">
                                 <h4 class="fd-title fd-title--h4">1. Product Type</h4>
                                 <fd-layout-grid style="margin-bottom: 2rem">
                                     <div fdLayoutGridCol="4" colMd="2" colLg="2" colXl="2">

@@ -150,6 +150,8 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
         } else if (this.stepIndicator) {
             this._notSummaryInit();
         }
+        // TODO: remove
+        this._elRef.nativeElement.style.boxSizing = 'content-box';
     }
 
     /** @hidden */
