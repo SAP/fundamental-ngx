@@ -57,12 +57,8 @@ let cdkPopoverUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [PopoverService],
 })
-<<<<<<< HEAD
 export class PopoverComponent extends BasePopoverClass implements AfterViewInit, AfterContentInit, OnDestroy, OnChanges {
 
-=======
-export class PopoverComponent extends BasePopoverClass implements AfterViewInit, OnDestroy, OnChanges {
->>>>>>> main
     /** Tooltip for popover */
     @Input()
     title: string;
