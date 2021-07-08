@@ -226,8 +226,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     public submitId = '';
     public menuId = '';
     public dir = 'ltr';
-    currentSearchSuggestionAnnoucementMessage = '';
 
+    private _currentSearchSuggestionAnnoucementMessage = '';
     private _suggestionOverlayRef: OverlayRef;
     private _suggestionPortal: TemplatePortal;
     private _suggestionkeyManager: FocusKeyManager<SearchFieldSuggestionDirective>;
@@ -309,7 +309,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         // when search result not changed but input text is changed.
         // again need to announce the result, so clear this message.
         setTimeout(() => {
-            this.currentSearchSuggestionAnnoucementMessage = '';
+            this._currentSearchSuggestionAnnoucementMessage = '';
         });
 
         this.inputChange.emit({
@@ -481,10 +481,10 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     }
 
     /**
-     * return count for matching suggestion with input text
+     * @hidden return count for matching suggestion with input text
      * @returns number
      */
-    getSuggestionsLength(): number {
+    private _getSuggestionsLength(): number {
         let count = 0;
         this.suggestions?.forEach((suggestion) => {
             if (this.inputText && suggestion.value?.toLowerCase().indexOf(this.inputText?.trim()?.toLowerCase()) > -1) {
@@ -519,13 +519,13 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     /** @hidden */
     private _updateSearchAnnoucementText(): void {
         // create search suggestion message with count.
-        const suggestionCount = this.getSuggestionsLength();
-        this.currentSearchSuggestionAnnoucementMessage =
+        const suggestionCount = this._getSuggestionsLength();
+        this._currentSearchSuggestionAnnoucementMessage =
             suggestionCount +
             this.searchSuggestionMessage +
             (suggestionCount > 0 ? this.searchSuggestionNavigateMessage : '');
         if (this.inputText?.length > 0) {
-            this._liveAnnouncer.announce(this.currentSearchSuggestionAnnoucementMessage);
+            this._liveAnnouncer.announce(this._currentSearchSuggestionAnnoucementMessage);
         }
     }
 }
