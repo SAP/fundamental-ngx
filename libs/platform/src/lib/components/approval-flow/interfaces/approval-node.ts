@@ -17,11 +17,11 @@ export interface ApprovalNode {
     actionsConfig?: ApprovalNodeActionsConfig;
 }
 
-export type ApprovalGraphNode = ApprovalNode & { blank?: boolean; space?: boolean; };
+/** Blank - node used as connection between common nodes
+  * Space - node used to visually represent space in the graph
+  */
+export type ApprovalGraphNode = ApprovalNode & { blank?: boolean; space?: boolean; selected?: boolean };
 
-export interface ApprovalGraphMetadata {
-    [key: string]: ApprovalGraphNodeMetadata
-}
 export interface ApprovalGraphNodeMetadata {
     parents: ApprovalGraphNode[];
     isRoot: boolean;

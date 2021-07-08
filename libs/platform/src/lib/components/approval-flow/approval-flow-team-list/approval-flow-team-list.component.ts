@@ -7,16 +7,26 @@ import { trackByFn } from '../helpers';
     templateUrl: './approval-flow-team-list.component.html',
     styleUrls: ['./approval-flow-team-list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        class: 'fdp-approval-flow-team-list'
+    }
 })
 export class ApprovalFlowTeamListComponent {
-    @Input() teams: ApprovalTeam[] = [];
-    @Input() isRtl = false;
-    @Input() selectedTeamId: number;
+    @Input()
+    teams: ApprovalTeam[] = [];
 
-    @Output() onTeamClick = new EventEmitter<ApprovalTeam>();
-    @Output() onTeamRadioClick = new EventEmitter<ApprovalTeam>();
+    @Input()
+    isRtl = false;
 
+    @Input()
+    selectedTeamId: number;
+
+    @Output()
+    onTeamClick = new EventEmitter<ApprovalTeam>();
+
+    @Output()
+    onTeamRadioClick = new EventEmitter<ApprovalTeam>();
 
     /** @hidden */
     _trackByFn = trackByFn;

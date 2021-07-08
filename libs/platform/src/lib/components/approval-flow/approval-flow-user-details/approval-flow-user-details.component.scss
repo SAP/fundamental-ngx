@@ -1,16 +1,19 @@
-$block: approval-flow-user-details;
+$block: fdp-approval-flow-user-details;
 
-.#{$block}__user-info {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
+.#{$block} {
+    &__user-info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    &__name {
+        font-size: 1rem;
+    }
+
+    &__description {
+        color: #6A6D70;
+        color: var(--sapContent_LabelColor, #6A6D70);
+    }
 }
 
-.#{$block}__name {
-    font-size: 1rem;
-}
-
-.#{$block}__description {
-    color: #6A6D70;
-    color: var(--sapContent_LabelColor, #6A6D70);
-}

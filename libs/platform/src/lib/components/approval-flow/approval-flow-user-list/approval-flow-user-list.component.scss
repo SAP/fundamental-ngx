@@ -1,14 +1,14 @@
-$block: approval-flow-user-list;
+$block: fdp-approval-flow-user-list;
 
-:host {
+.#{$block} {
     display: block;
     margin-top: -1rem;
-}
 
-.#{$block}__selected-count {
-    line-height: 2rem;
-    margin: 0 -1rem;
-    padding: 0 1rem;
-    background: #F2F2F2;
-    background: var(--sapList_HeaderBackground, #F2F2F2);
+    &__selected-count {
+        line-height: 2rem;
+        margin: 0 -1rem;
+        padding: 0 1rem;
+        background: #F2F2F2;
+        background: var(--sapList_HeaderBackground, #F2F2F2);
+    }
 }

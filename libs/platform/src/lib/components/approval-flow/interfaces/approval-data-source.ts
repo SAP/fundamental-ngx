@@ -5,7 +5,6 @@ import { ApprovalUser } from './approval-user';
 import { ApprovalTeam } from './approval-team';
 
 export interface ApprovalDataSource {
-
     /**
      * Fetch of approval process data.
      */
@@ -55,5 +54,4 @@ export interface ApprovalDataSource {
      * Send reminders for an approval.
      */
     sendReminders(members: ApprovalUser[], approval: ApprovalNode): Observable<any>;
-
 }

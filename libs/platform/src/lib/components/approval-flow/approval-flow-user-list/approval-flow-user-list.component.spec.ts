@@ -10,7 +10,7 @@ import { ApprovalUser } from '../interfaces';
 import { ApprovalFlowUserListComponent } from './approval-flow-user-list.component';
 
 
-describe('ApprovalFlowTeamListComponent', () => {
+describe('ApprovalFlowUserListComponent', () => {
     let component: ApprovalFlowUserListComponent;
     let fixture: ComponentFixture<ApprovalFlowUserListComponent>;
 
@@ -37,17 +37,18 @@ describe('ApprovalFlowTeamListComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should preselect users', () => {
+    it('should preselect users', async () => {
         const approvalUsers: ApprovalUser[] = [{
             id: 'id1',
             name: 'name1'
         }];
 
         component.users = approvalUsers;
-        component.selectedUsers = approvalUsers;
+        await fixture.whenStable();
 
+        component.selectedUsers = approvalUsers;
         fixture.detectChanges();
-        
+
         component.ngAfterViewInit();
 
         expect(component._selectedItems.length).toEqual(approvalUsers.length);

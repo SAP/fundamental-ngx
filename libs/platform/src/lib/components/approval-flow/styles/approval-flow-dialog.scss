@@ -1,4 +1,15 @@
-:host ::ng-deep {
+$block: fdp-approval-flow-dialog;
+
+@mixin fd-rtl {
+    @at-root {
+        [dir='rtl'] &,
+        &[dir='rtl'] {
+            @content;
+        }
+    }
+}
+
+.#{$block} {
     a {
         color: #0A6ED1;
         color: var(--sapLinkColor, #0A6ED1);
@@ -71,7 +82,11 @@
         }
     }
 
-    &[dir='rtl'] {
+    .fd-form-item {
+        margin-bottom: 1rem;
+    }
+
+    @include fd-rtl() {
         fd-dialog-header p fd-icon {
             margin-right: 0;
             margin-left: .75rem;
@@ -89,8 +104,4 @@
             }
         }
     }
-}
-
-.fd-form-item {
-    margin-bottom: 1rem;
 }
