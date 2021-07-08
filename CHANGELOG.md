@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.65...v0.31.0-rc.66) (2021-07-08)
+
+
+### Bug Fixes
+
+* **core:** import FormStates to checkbox ([#5858](https://github.com/SAP/fundamental-ngx/issues/5858)) ([536d49d](https://github.com/SAP/fundamental-ngx/commit/536d49d5a28869c9a712ad129189420387809aa3))
+
 ## [0.31.0-rc.65](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.64...v0.31.0-rc.65) (2021-07-07)
 
 
