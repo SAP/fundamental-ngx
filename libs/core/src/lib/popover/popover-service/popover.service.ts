@@ -16,7 +16,7 @@ import {
     OverlayConfig,
     OverlayRef, ViewportRuler
 } from '@angular/cdk/overlay';
-import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay/position/connected-position';
+import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
 
 import { merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
