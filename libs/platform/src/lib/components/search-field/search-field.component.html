@@ -89,17 +89,6 @@
     </div>
 </div>
 
-<div
-    [attr.id]="id + '-suggesstion-annoucement'"
-    class="fd-search-suggestions-voiceover-text"
-    aria-live="polite"
-    aria-atomic="true"
-    *ngIf="inputText?.length > 0"
-    i18n="@@platformI18nSearchFieldSearchSuggestionMessage"
->
-    {{ currentSearchSuggestionAnnoucementMessage }}
-</div>
-
 <ng-template #suggestionMenuTemplate>
     <div
         class="fdp-search-field__suggestion-dropdown fd-popover__body fd-popover__body--no-arrow"
