@@ -53,9 +53,10 @@
                             [compact]="true"
                             [ngModel]="_selectedMap[row[uniqueKey]]"
                             (change)="_toggleSelectRow(row)"
+							[attr.aria-label]="'Selected row'+i"
                         ></fd-checkbox>
                     </td>
-                    <td fd-table-cell *ngFor="let filter of _tableFilters.main; index as i" role="cell" [attr.aria-rowindex]="i">{{ row[filter.key] || '' }}</td>
+                    <td fd-table-cell *ngFor="let filter of _tableFilters.main; index as col" role="cell" [attr.aria-rowindex]="col" [attr.aria-label]="'row '+i +' column ' + filter.label + ' ' + row[filter.key]">{{ row[filter.key] || '' }}</td>
                 </tr>
 
                 <tr fd-table-row *ngIf="mobile && _tableFilters.secondary.length" [secondary]="true" [attr.aria-selected]="_selectedMap[row[uniqueKey]]" scope="row" role="row">

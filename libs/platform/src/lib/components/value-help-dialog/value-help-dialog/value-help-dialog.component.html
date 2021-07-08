@@ -265,19 +265,19 @@
 </ng-template>
 
 <ng-template #desktopTabs>
-    <nav fd-tab-nav class="fdp-value-help-dialog__tabs" *ngIf="showSelectionTab && showDefineTab">
-        <div fd-tab-item (click)="switchTab(_tabTypes.selectFromList)" *ngIf="showSelectionTab">
+    <nav fd-tab-nav class="fdp-value-help-dialog__tabs" *ngIf="showSelectionTab && showDefineTab" role="tablist">
+        <div fd-tab-item (click)="switchTab(_tabTypes.selectFromList)" *ngIf="showSelectionTab" role="tab">
             <a fd-tab-link [active]="selectedTab === _tabTypes.selectFromList"><span fd-tab-tag>{{ selectTabTitle }}</span></a>
         </div>
-        <div fd-tab-item (click)="switchTab(_tabTypes.defineConditions)" *ngIf="showDefineTab">
+        <div fd-tab-item (click)="switchTab(_tabTypes.defineConditions)" *ngIf="showDefineTab" role="tab">
             <a fd-tab-link [active]="selectedTab === _tabTypes.defineConditions"><span fd-tab-tag>{{ defineTabTitle }}</span></a>
         </div>
     </nav>
 </ng-template>
 
 <ng-template #mobileTabs>
-  <div *ngIf="!hasSelectedTab && showSelectionTab && showDefineTab">
-    <div fd-bar [inPage]="true"  *ngIf="showSelectionTab">
+  <div *ngIf="!hasSelectedTab && showSelectionTab && showDefineTab" role="tab">
+    <div fd-bar [inPage]="true"  *ngIf="showSelectionTab" role="tabpanel">
       <div fd-bar-left>
         <fd-bar-element>
             {{ selectTabTitle }}
@@ -289,7 +289,7 @@
         </fd-bar-element>
     </div>
   </div>
-  <div fd-bar [inPage]="true" *ngIf="showDefineTab">
+  <div fd-bar [inPage]="true" *ngIf="showDefineTab" role="tabpanel">
     <div fd-bar-left>
         <fd-bar-element>
             {{ defineTabTitle }}
@@ -307,7 +307,7 @@
 <ng-template #selectedTabHeader>
     <ng-container [ngSwitch]="selectedTab">
         <ng-container *ngSwitchCase="_tabTypes.selectFromList">
-            <ng-container *ngTemplateOutlet="tabLink, context: {title: 'Select from list', type: selectedTab}"></ng-container>
+            <ng-container *ngTemplateOutlet="tabLink, context: {title: selectTabTitle, type: selectedTab}"></ng-container>
         </ng-container>
         <ng-container *ngSwitchCase="_tabTypes.advancedSearch">
             <ng-container *ngTemplateOutlet="advancedHeader"></ng-container>
