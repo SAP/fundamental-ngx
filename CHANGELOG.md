@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.67...v0.31.0-rc.68) (2021-07-08)
+
+
+### Bug Fixes
+
+* **platform:** add missing exports for classes in Platform library ([#5882](https://github.com/SAP/fundamental-ngx/issues/5882)) ([82bca36](https://github.com/SAP/fundamental-ngx/commit/82bca36db3ac01933c6409c30b9b658054432ccc))
+
 ## [0.31.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.66...v0.31.0-rc.67) (2021-07-08)
 
 
