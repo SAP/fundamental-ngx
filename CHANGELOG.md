@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.67](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.66...v0.31.0-rc.67) (2021-07-08)
+
+
+### Bug Fixes
+
+* **core:** fix a11y issues for bar component ([#5853](https://github.com/SAP/fundamental-ngx/issues/5853)) ([a172026](https://github.com/SAP/fundamental-ngx/commit/a172026407f8e8277472a0c4a36bcda231effecf))
+
 ## [0.31.0-rc.66](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.65...v0.31.0-rc.66) (2021-07-08)
 
 
