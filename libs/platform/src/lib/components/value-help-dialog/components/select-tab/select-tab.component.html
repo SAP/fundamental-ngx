@@ -44,7 +44,6 @@
                     (click)="!isMultiSelection && _toggleSelectRow(row)"
                     role="row"
 					scope="row"
-					[attr.aria-rowindex]="i"
                 >
                     <td fd-table-cell [fitContent]="mobile" role="cell">
                         <fd-checkbox
@@ -56,7 +55,7 @@
                             (change)="_toggleSelectRow(row)"
                         ></fd-checkbox>
                     </td>
-                    <td fd-table-cell *ngFor="let filter of _tableFilters.main" role="cell">{{ row[filter.key] || '' }}</td>
+                    <td fd-table-cell *ngFor="let filter of _tableFilters.main; index as i" role="cell" [attr.aria-rowindex]="i">{{ row[filter.key] || '' }}</td>
                 </tr>
 
                 <tr fd-table-row *ngIf="mobile && _tableFilters.secondary.length" [secondary]="true" [attr.aria-selected]="_selectedMap[row[uniqueKey]]" scope="row" role="row">
