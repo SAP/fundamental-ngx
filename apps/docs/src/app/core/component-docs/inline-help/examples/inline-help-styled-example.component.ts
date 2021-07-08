@@ -1,5 +1,4 @@
-import { Component, ViewEncapsulation, Input } from '@angular/core';
-
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fd-inline-help-styled-example',
@@ -9,7 +8,4 @@ import { Component, ViewEncapsulation, Input } from '@angular/core';
     ],
     encapsulation: ViewEncapsulation.None
 })
-export class InlineHelpStyledExampleComponent {
-    @Input()
-    inlineHelpTrigger: string[] = ['mouseleave', 'mouseenter', 'focusin', 'focusout'];
-}
+export class InlineHelpStyledExampleComponent {}

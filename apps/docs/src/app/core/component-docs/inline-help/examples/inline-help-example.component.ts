@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-inline-help-example',
@@ -17,7 +17,4 @@ import { Component, Input } from '@angular/core';
         `
     ]
 })
-export class InlineHelpExampleComponent {
-    @Input()
-    inlineHelpTrigger: string[] = ['mouseleave', 'mouseenter', 'focusin', 'focusout'];
-}
+export class InlineHelpExampleComponent {}
