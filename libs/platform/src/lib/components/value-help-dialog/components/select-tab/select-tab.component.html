@@ -13,7 +13,7 @@
         [popIn]="mobile"
         [noBorderX]="mobile"
         [noBorderY]="false"
-        role="grid"
+        role="presentation"
     >
         <thead fd-table-header role="columnheader">
             <tr fd-table-row *ngIf="displayedData.length && _tableFilters">
@@ -53,7 +53,7 @@
                             [compact]="true"
                             [ngModel]="_selectedMap[row[uniqueKey]]"
                             (change)="_toggleSelectRow(row)"
-							[attr.aria-label]="'Selected row'+i"
+                            [attr.aria-label]="'Selected row'+i +' '+ _selectedMap[row[uniqueKey]]"
                         ></fd-checkbox>
                     </td>
                     <td fd-table-cell *ngFor="let filter of _tableFilters.main; index as col" role="cell" [attr.aria-rowindex]="col" [attr.aria-label]="'row '+i +' column ' + filter.label + ' ' + row[filter.key]">{{ row[filter.key] || '' }}</td>
