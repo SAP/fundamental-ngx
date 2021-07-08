@@ -16,6 +16,6 @@ export class IllustratedMessageDialogExampleComponent {
     constructor(private _dialogService: DialogService) {}
 
     openDialog(dialog: TemplateRef<any>): void {
-        this._dialogService.open(dialog, { id: this.dialogId });
+        this._dialogService.open(dialog, { id: this.dialogId, ariaLabelledBy: `${this.dialogId}-header`, ariaDescribedBy: `${this.dialogId}-description` });
     }
 }
