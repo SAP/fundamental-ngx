@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 
 @Component({
@@ -6,18 +6,33 @@ import { Schema } from '../../../schema/models/schema.model';
     templateUrl: './playground.component.html',
     styleUrls: ['./playground.components.scss']
 })
-export class PlayGroundComponent implements OnInit {
+export class PlayGroundComponent {
     @Input() schema: Schema;
 
-    @Input() schemaInitialValues;
+    @Input() schemaInitialValues: any;
 
     @Input() displayBlock: boolean;
 
+    /**
+     * Is current playground can be resetted to defaults.
+     */
+    @Input() resettable = false;
+
     @Output() onFormChanges: EventEmitter<any> = new EventEmitter<any>();
 
-    ngOnInit(): void {}
+    /**
+     * Emits event when playground was resetted.
+     */
+    @Output() onReset: EventEmitter<void> = new EventEmitter<void>();
 
-    onSchemaValueChanges($event): void {
+    onSchemaValueChanges($event: any): void {
         this.onFormChanges.emit($event);
+    }
+
+    /**
+     * Emits event when playground was resetted.
+     */
+    reset(): void {
+        this.onReset.emit();
     }
 }

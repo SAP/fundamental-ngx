@@ -25,68 +25,90 @@
     </fd-product-menu>
 
     <fd-shellbar-actions [closePopoverOnSelect]>
-        <button fd-button
-                class="fd-shellbar__button--menu fd-docs--theme-menu"
-                fdType="transparent"
-                [compact]="false"
-                [fdMenu]="true"
-                [fdMenuTrigger]="densityMenu">
-            Content Density
-        </button>
+        <ng-container *ngIf="size === 's'">
+            <button fd-button
+                    class="fd-shellbar__button--menu fd-docs--theme-menu"
+                    fdType="transparent"
+                    [compact]="false"
+                    glyph="settings"
+                    [fdMenuTrigger]="optionsMenu">
+            </button>
+            <fd-menu #optionsMenu [compact]="false" [mobile]="true" [mobileConfig]="{ title: 'Options', hasCloseButton: true }">
+                <li fd-menu-item [submenu]="themeSubmenu">
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Themes</span>
+                        <fd-menu-addon [submenuIndicator]="true"></fd-menu-addon>
+                    </div>
+                </li>
 
-        <fd-menu #densityMenu
-                 [fillControlMode]="null"
-                 placement="bottom-end">
-            <li fd-menu-item>
-                <div fd-menu-interactive (click)="selectDensity('cozy')">
-                    <span fd-menu-title>Cozy</span>
-                </div>
-            </li>
-            <li fd-menu-item>
-                <div fd-menu-interactive (click)="selectDensity('condensed')">
-                    <span fd-menu-title>Condensed</span>
-                </div>
-            </li>
-            <li fd-menu-item>
-                <div fd-menu-interactive (click)="selectDensity('compact')">
-                    <span fd-menu-title>Compact</span>
-                </div>
-            </li>
-        </fd-menu>
+                <li fd-menu-item [submenu]="densitySubmenu">
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Content Density</span>
+                        <fd-menu-addon [submenuIndicator]="true"></fd-menu-addon>
+                    </div>
+                </li>
 
-        <button fd-button
-                glyph="palette"
-                class="fd-shellbar__button--menu fd-docs--theme-menu"
-                fdType="transparent"
-                [compact]="false"
-                [fdMenu]="true"
-                [fdMenuTrigger]="themesMenu">
-        </button>
+                <li fd-menu-item [submenu]="versionSubmenu">
+                    <div fd-menu-interactive>
+                        <span fd-menu-title>Versions</span>
+                        <fd-menu-addon [submenuIndicator]="true"></fd-menu-addon>
+                    </div>
+                </li>
+            </fd-menu>
 
-        <fd-menu #themesMenu
-                 [fillControlMode]="null"
-                 placement="bottom-end">
-            <li fd-menu-item *ngFor="let theme of themes">
-                <div fd-menu-interactive (click)="selectTheme(theme.id)">
-                    <span fd-menu-title>{{ theme.name }}</span>
-                </div>
-            </li>
-        </fd-menu>
+            <fd-submenu #themeSubmenu>
+                <ng-container *ngTemplateOutlet="themesTemplate"></ng-container>
+            </fd-submenu>
 
-        <button fd-button fdType="transparent" [fdMenu]="true" [fdMenuTrigger]="versionsMenu" [compact]="false"
-                class="fd-shellbar__button--menu fd-docs--toolbar__version fd-docs--theme-menu">
-            v {{ version.id }}
-        </button>
+            <fd-submenu #densitySubmenu>
+                <ng-container *ngTemplateOutlet="densitiesTemplate"></ng-container>
+            </fd-submenu>
 
-        <fd-menu #versionsMenu
-                 [fillControlMode]="null"
-                 placement="bottom-end">
-            <li fd-menu-item *ngFor="let version of versions">
-                <div fd-menu-interactive (click)="selectVersion(version)">
-                    <span fd-menu-title>{{ version.id }}</span>
-                </div>
-            </li>
-        </fd-menu>
+            <fd-submenu #versionSubmenu>
+                <ng-container *ngTemplateOutlet="versionsTemplate"></ng-container>
+            </fd-submenu>
+
+        </ng-container>
+        <ng-container *ngIf="size !== 's'">
+            <button fd-button
+                    class="fd-shellbar__button--menu fd-docs--theme-menu"
+                    fdType="transparent"
+                    [fdMenu]="true"
+                    [fdMenuTrigger]="densityMenu">
+                Content Density
+            </button>
+
+            <fd-menu #densityMenu
+                     [fillControlMode]="null"
+                     placement="bottom-end">
+                <ng-container *ngTemplateOutlet="densitiesTemplate"></ng-container>
+            </fd-menu>
+
+            <button fd-button
+                    glyph="palette"
+                    class="fd-shellbar__button--menu fd-docs--theme-menu"
+                    fdType="transparent"
+                    [fdMenu]="true"
+                    [fdMenuTrigger]="themesMenu">
+            </button>
+
+            <fd-menu #themesMenu
+                     [fillControlMode]="null"
+                     placement="bottom-end">
+                <ng-container *ngTemplateOutlet="themesTemplate"></ng-container>
+            </fd-menu>
+
+            <button fd-button fdType="transparent" [fdMenu]="true" [fdMenuTrigger]="versionsMenu"
+                    class="fd-shellbar__button--menu fd-docs--toolbar__version fd-docs--theme-menu">
+                v {{ version.id }}
+            </button>
+
+            <fd-menu #versionsMenu
+                     [fillControlMode]="null"
+                     placement="bottom-end">
+                <ng-container *ngTemplateOutlet="versionsTemplate"></ng-container>
+            </fd-menu>
+        </ng-container>
 
         <a href="https://github.com/SAP/fundamental-ngx"
            title="Find us on Github!"
@@ -129,3 +151,37 @@
 </fd-shellbar>
 <link rel="stylesheet" *ngIf="cssUrl" [href]="cssUrl"/>
 <link rel="stylesheet" *ngIf="customCssUrl" [href]="customCssUrl"/>
+
+<ng-template #themesTemplate>
+    <li fd-menu-item *ngFor="let theme of themes">
+        <div fd-menu-interactive (click)="selectTheme(theme.id)">
+            <span fd-menu-title>{{ theme.name }}</span>
+        </div>
+    </li>
+</ng-template>
+
+<ng-template #densitiesTemplate>
+    <li fd-menu-item>
+        <div fd-menu-interactive (click)="selectDensity('cozy')">
+            <span fd-menu-title>Cozy</span>
+        </div>
+    </li>
+    <li fd-menu-item>
+        <div fd-menu-interactive (click)="selectDensity('condensed')">
+            <span fd-menu-title>Condensed</span>
+        </div>
+    </li>
+    <li fd-menu-item>
+        <div fd-menu-interactive (click)="selectDensity('compact')">
+            <span fd-menu-title>Compact</span>
+        </div>
+    </li>
+</ng-template>
+
+<ng-template #versionsTemplate>
+    <li fd-menu-item *ngFor="let version of versions">
+        <div fd-menu-interactive (click)="selectVersion(version)">
+            <span fd-menu-title>{{ version.id }}</span>
+        </div>
+    </li>
+</ng-template>

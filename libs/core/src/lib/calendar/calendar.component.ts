@@ -487,10 +487,12 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      * which are connected to days displayed
      */
     setCurrentlyDisplayed(date: D): void {
-        this.currentlyDisplayed = {
-            month: this._dateTimeAdapter.getMonth(date),
-            year: this._dateTimeAdapter.getYear(date)
-        };
+        if (this._dateTimeAdapter.isValid(date)) {
+            this.currentlyDisplayed = {
+                month: this._dateTimeAdapter.getMonth(date),
+                year: this._dateTimeAdapter.getYear(date)
+            };
+        }
     }
 
     /**

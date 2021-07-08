@@ -13,6 +13,7 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './message-strip-docs.component.html'
 })
 export class MessageStripDocsComponent {
+
     static schema: any = {
         properties: {
             properties: {
@@ -86,11 +87,32 @@ export class MessageStripDocsComponent {
 
     schema: Schema;
 
+    /**
+     * Should show message strip component in playground.
+     */
+     shouldShow = true;
+
+    /**
+     * @hidden
+     */
+    private _originalSchemaValues = Object.assign({}, this.data);
+
     constructor(private schemaFactory: SchemaFactoryService) {
         this.schema = this.schemaFactory.getComponent('messageStrip');
     }
 
     onSchemaValues(data): void {
         this.data = data;
+    }
+
+    /**
+     * Resets message strip playground component and it's configuration
+     */
+    reset(): void {
+        this.shouldShow = false;
+        setTimeout(() => {
+            this.data = Object.assign({}, this._originalSchemaValues);
+            this.shouldShow = true;
+        });
     }
 }

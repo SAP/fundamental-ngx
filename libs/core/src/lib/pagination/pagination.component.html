@@ -3,7 +3,11 @@
         <span [attr.id]="id + '__total'" class="fd-pagination__total" [ngClass]="rtlClass" *ngIf="displayTotalItems">
             <ng-container [ngTemplateOutlet]="displayTextTemplate || showingItems" [ngTemplateOutletContext]="{ showing: currentShowing }"></ng-container>
         </span>
-        <nav class="fd-pagination__nav" [attr.aria-labelledby]="id + '__total'" *ngIf="totalItems >= itemsPerPage">
+        <nav
+            class="fd-pagination__nav"
+            [attr.aria-label]="ariaLabel"
+            [attr.aria-labelledby]="displayTotalItems ? id + '__total' : null"
+            *ngIf="totalItems >= itemsPerPage">
             <a
                 class="fd-pagination__link fd-pagination__link--previous"
                 tabindex="0"
