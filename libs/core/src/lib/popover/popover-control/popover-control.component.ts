@@ -17,6 +17,8 @@ import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } fro
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PopoverControlComponent {
+
+    /** @hidden */
     constructor(public elRef: ElementRef) {}
 
     /** @hidden */
@@ -24,7 +26,6 @@ export class PopoverControlComponent {
         const elemChild = this.elRef.nativeElement.children[0];
         if (elemChild && elemChild.getAttribute('tabindex') !== '-1') {
             elemChild.tabIndex = '0';
-            elemChild.classList.add('fd-popover-outline');
         }
     }
 }
