@@ -19,9 +19,6 @@ export interface ApprovalNode {
 
 export type ApprovalGraphNode = ApprovalNode & { blank?: boolean; space?: boolean; };
 
-export interface ApprovalGraphMetadata {
-    [key: string]: ApprovalGraphNodeMetadata
-}
 export interface ApprovalGraphNodeMetadata {
     parents: ApprovalGraphNode[];
     isRoot: boolean;

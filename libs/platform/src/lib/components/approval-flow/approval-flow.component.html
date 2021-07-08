@@ -1,105 +1,29 @@
-<div class="approval-flow__messages" *ngIf="_messages.length">
-    <fd-message-strip
-        *ngFor="let message of _messages; let i = index; trackBy: _trackByFn"
-        [type]="message.type === 'error' ? 'error' : 'success'"
-        [dismissible]="message.type !== 'error'"
-        (onDismiss)="_dismissMessage(i)">
-        <bdi>
-            <span [ngSwitch]="message.type">
-                <ng-container *ngSwitchCase="'approverAddSuccess'" [ngTemplateOutlet]="approverAddSuccess"></ng-container>
-                <ng-container *ngSwitchCase="'teamAddSuccess'" [ngTemplateOutlet]="teamAddSuccess"></ng-container>
-                <ng-container *ngSwitchCase="'nodeEdit'" [ngTemplateOutlet]="nodeEdit"></ng-container>
-                <ng-container *ngSwitchCase="'nodeRemove'" [ngTemplateOutlet]="nodeRemove"></ng-container>
-                <ng-container *ngSwitchCase="'nodesRemove'" [ngTemplateOutlet]="nodesRemove"></ng-container>
-                <ng-container *ngSwitchCase="'teamRemove'" [ngTemplateOutlet]="teamRemove"></ng-container>
-                <ng-container *ngSwitchCase="'error'" [ngTemplateOutlet]="errorBuildGraph"></ng-container>
-            </span>
+<fdp-approval-flow-messages
+    *ngIf="_messages.length"
+    [(messages)]="_messages"
+    [enableUndoAction]="!!_previousApprovalProcess"
+    (undoLastAction)="_undoLastAction()"
+></fdp-approval-flow-messages>
 
-            <a
-                href="#"
-                *ngIf="_previousApprovalProcess"
-                (click)="$event.preventDefault();_dismissMessage(i);_undoLastAction()"
-                i18n="@@platformApprovalFlowUndo"
-            >
-                Undo
-            </a>
-        </bdi>
-    </fd-message-strip>
-</div>
+<fd-grid-list class="fdp-approval-flow__toolbar">
+    <fd-grid-list-title-bar [title]="title">
+        <fd-grid-list-title-bar-spacer></fd-grid-list-title-bar-spacer>
 
-<fd-toolbar class="approval-flow__toolbar" [hasTitle]="true" [attr.dir]="_dir">
-    <h3 class="approval-flow__toolbar-title">{{ title }}</h3>
+        <fdp-approval-flow-toolbar-actions
+            *ngIf="isEditAvailable"
+            [graph]="_graph"
+            [graphMetadata]="_graphMetadata"
+            [nodeComponents]="_nodeComponents"
+            [isEditMode]="_isEditMode"
+            (enterEditMode)="_enterEditMode()"
+            (addNode)="_addNode($event.node, $event.target)"
+            (editCheckedNode)="_editNode($event)"
+            (deleteCheckedNodes)="_deleteCheckedNodes()"></fdp-approval-flow-toolbar-actions>
+    </fd-grid-list-title-bar>
+</fd-grid-list>
 
-    <div class="approval-flow__toolbar-controls" *ngIf="isEditAvailable">
-        <button
-            *ngIf="!_graph.length && !_isErrorState"
-            fd-button
-            label="Add a step"
-            i18n-label="@@platformApprovalAddStep"
-            [compact]="true"
-            (click)="_addNodeFromToolbar('empty')"
-        ></button>
-
-        <button
-            *ngIf="!_isEditMode && _graph.length"
-            fd-button
-            label="Edit"
-            i18n-label="@@platformApprovalEdit"
-            [compact]="true"
-            (click)="_enterEditMode()"
-        ></button>
-
-        <ng-container *ngIf="_isEditMode">
-            <button
-                *ngIf="_canAddBefore"
-                fd-button
-                label="Add approvers before"
-                i18n-label="@@platformApprovalAddApproversBefore"
-                [compact]="true"
-                (click)="_addNodeFromToolbar('before')"
-            ></button>
-
-            <button
-                *ngIf="_canAddAfter"
-                fd-button
-                label="Add approvers after"
-                i18n-label="@@platformApprovalAddApproversAfter"
-                [compact]="true"
-                (click)="_addNodeFromToolbar('after')"
-            ></button>
-
-            <button
-                *ngIf="_canAddParallel"
-                fd-button
-                label="Add parallel approvers"
-                i18n-label="@@platformApprovalAddApproversParallel"
-                [compact]="true"
-                (click)="_addNodeFromToolbar('parallel')"
-            ></button>
-
-            <button
-                *ngIf="_canRemoveSelectedNodes"
-                fd-button
-                label="Remove"
-                i18n-label="@@platformApprovalRemove"
-                [compact]="true"
-                (click)="_deleteCheckedNodes()"
-            ></button>
-
-            <button
-                *ngIf="_canEditNode"
-                fd-button
-                label="Edit approver"
-                i18n-label="@@platformApprovalEditApprover"
-                [compact]="true"
-                (click)="_editNodeFromToolbar()"
-            ></button>
-        </ng-container>
-    </div>
-</fd-toolbar>
-
-<div class="approval-flow__watchers" [attr.dir]="_dir" *ngIf="_approvalProcess?.watchers.length || _isEditMode">
-    <p class="approval-flow__watchers-title" i18n="@@platformApprovalFlowWatchers">{{ watchersLabel }}</p>
+<div class="fdp-approval-flow__watchers" *ngIf="_approvalProcess?.watchers.length || _isEditMode">
+    <p class="fdp-approval-flow__watchers-title" i18n="@@platformApprovalFlowWatchers">{{ watchersLabel }}</p>
 
     <ng-container *ngIf="!_isEditMode">
         <fd-avatar
@@ -113,7 +37,7 @@
             (click)="_onWatcherClick(watcher)"></fd-avatar>
     </ng-container>
 
-    <div class="approval-flow__watchers-input-container" *ngIf="_isEditMode">
+    <div class="fdp-approval-flow__watchers-input-container" *ngIf="_isEditMode">
         <fd-multi-input
             [compact]="true"
             [dropdownValues]="_usersForWatchersList"
@@ -126,55 +50,58 @@
     </div>
 </div>
 
-<ng-container *ngIf="!_isErrorState">
-    <ng-container *ngIf="_graph.length; else emptyApprovalFlowGraph">
+<ng-container *ngIf="!_graph.errors">
+    <ng-container *ngIf="_graph.columns.length; else emptyApprovalFlowGraph">
         <div
-            class="approval-flow__container"
-            [attr.dir]="_dir"
-            [class.approval-flow__container--extra-padding-start]="_isCarousel && _carouselStep > 0"
-            [class.approval-flow__container--extra-padding-end]="_isCarousel && (_maxCarouselStep - _carouselStep) > 0"
+            class="fdp-approval-flow__container"
+            [class.fdp-approval-flow__container--extra-padding-start]="_isCarousel && _carouselStep > 0"
+            [class.fdp-approval-flow__container--extra-padding-end]="_isCarousel && (_maxCarouselStep - _carouselStep) > 0"
         >
             <div
-                class="approval-flow__carousel-controls"
+                class="fdp-approval-flow-carousel-controls"
                 *ngIf="_isCarousel"
-                [attr.dir]="_dir"
-                [class.approval-flow__carousel-controls--edit-mode]="_isEditMode"
+                [class.fdp-approval-flow__carousel-controls--edit-mode]="_isEditMode"
             >
-                <button class="approval-flow__control--prev-slide" *ngIf="_carouselStep > 0" (click)="previousSlide()"
-                    aria-label="Go to previous slide" i18n-aria-label="@@platformApprovalPrevButton">
-                    <fd-icon [glyph]="'navigation-' + (_isRTL ? 'right' : 'left') + '-arrow'"></fd-icon>
+                <button
+                    *ngIf='_carouselStep > 0'
+                    class='fdp-approval-flow-carousel-controls__button--prev-slide'
+                    aria-label='Go to previous slide'
+                    i18n-aria-label='@@platformApprovalPrevButton'
+                    (click)="previousSlide()">
+                    <fd-icon [glyph]="'navigation-' + (_rtl ? 'right' : 'left') + '-arrow'"></fd-icon>
                     {{ _carouselStep }}
                 </button>
 
-                <button class="approval-flow__control--next-slide" *ngIf="(_maxCarouselStep - _carouselStep) > 0"
-                    (click)="nextSlide()" aria-label="Go to next slide" i18n-aria-label="@@platformApprovalNextButton">
+                <button
+                    *ngIf='(_maxCarouselStep - _carouselStep) > 0'
+                    class='fdp-approval-flow-carousel-controls__button--next-slide'
+                    aria-label='Go to next slide'
+                    i18n-aria-label='@@platformApprovalNextButton'
+                    (click)="nextSlide()">
                     {{ _maxCarouselStep - _carouselStep }}
-                    <fd-icon [glyph]="'navigation-' + (_isRTL ? 'left' : 'right') + '-arrow'"></fd-icon>
+                    <fd-icon [glyph]="'navigation-' + (_rtl ? 'left' : 'right') + '-arrow'"></fd-icon>
                 </button>
             </div>
 
             <div
-                class="approval-flow__graph-container"
-                [attr.dir]="_dir"
-                [class.approval-flow__graph-container--multiple-root-nodes]="_multipleRootNodes"
-                [class.approval-flow__graph-container--multiple-final-nodes]="_multipleFinalNodes"
+                class="fdp-approval-flow__graph-container"
+                [class.fdp-approval-flow__graph-container--multiple-root-nodes]="_multipleRootNodes"
+                [class.fdp-approval-flow__graph-container--multiple-final-nodes]="_multipleFinalNodes"
                 #graphContainerEl
             >
                 <div
-                    class="approval-flow__graph" #graphEl [style.left.px]="_isRTL ? -_carouselScrollX : _carouselScrollX"
-                    [attr.dir]="_dir"
-                    [class.approval-flow__graph--edit-mode]="_isEditMode"
+                    class="fdp-approval-flow__graph" #graphEl [style.left.px]="_rtl ? -_carouselScrollX : _carouselScrollX"
+                    [class.fdp-approval-flow__graph--edit-mode]="_isEditMode"
                 >
                     <div
-                        class="approval-flow__column"
-                        *ngFor="let column of _graph; let columnIndex = index; let firstColumn = first; let lastColumn = last; trackBy: _trackByFn"
+                        class="fdp-approval-flow__column"
+                        *ngFor="let column of _graph.columns; let columnIndex = index; let firstColumn = first; let lastColumn = last; trackBy: _trackByFn"
                     >
                         <ng-container
                             *ngFor="let node of column.nodes; let nodeIndex = index; let firstNode = first; let lastNode = last; trackBy: _trackByFn">
                             <fdp-approval-flow-node
                                 cdkDrag
                                 [cdkDragDisabled]="_isCdkDragDisabled(node)"
-                                [attr.dir]="_dir"
                                 [attr.tabindex]="node.blank || node.space ? -1 : 0"
                                 [node]="node"
                                 [meta]="_graphMetadata[node.id]"
@@ -185,7 +112,6 @@
                                 [renderArrow]="columnIndex > 0"
                                 [allNodesInColumnApproved]="column.allNodesApproved"
                                 (onNodeClick)="_onNodeClick(node)"
-                                (onNodeCheck)="_onNodeCheck(node)"
                                 (onAdd)="_addNode(node, $event)"
                                 (onEdit)="_editNode(node)"
                                 (onDelete)="_onNodeDelete(node)"
@@ -203,7 +129,7 @@
     </ng-container>
 </ng-container>
 
-<div class="approval-flow__edit-mode-footer" [attr.dir]="_dir" *ngIf="_isEditMode">
+<div class="fdp-approval-flow__edit-mode-footer" *ngIf="_isEditMode">
     <button
         fd-button
         label="Save"
@@ -212,6 +138,7 @@
         fdType="emphasized"
         (click)="_saveEditModeChanges()"
     ></button>
+
     <button
         fd-button
         label="Exit"
@@ -227,49 +154,11 @@
         *ngIf="messageToast.data.targets.length === 1; else multipleReceivers"
         i18n="@@platformApprovalFlowReminderMessage">
         Reminder has been sent to {{messageToast.data.targets[0].name}}
-    </ng-container>
+    </ng-container>s
 
     <ng-template #multipleReceivers i18n="@@platformApprovalFlowReminderMessageMultipleRecievers">
         Reminder has been sent to {{messageToast.data.targets.length}} members of {{messageToast.data.node.description}}
     </ng-template>
-</ng-template>
-
-<ng-template #approverAddSuccess>
-    <ng-container i18n="@@platformApprovalFlowApproverAddedAlert">
-        1 approver has been added
-    </ng-container>
-</ng-template>
-<ng-template #teamAddSuccess>
-    <ng-container i18n="@@platformApprovalFlowTeamAddedAlert">
-        1 team has been added
-    </ng-container>
-</ng-template>
-<ng-template #nodeEdit>
-    <ng-container i18n="@@platformApprovalFlowNodeEditedAlert">
-        1 approver has been edited
-    </ng-container>
-</ng-template>
-<ng-template #nodeRemove>
-    <ng-container i18n="@@platformApprovalFlowNodeRemovedAlert">
-        1 approver has been removed
-    </ng-container>
-</ng-template>
-<ng-template #nodesRemove>
-    <ng-container i18n="@@platformApprovalFlowNodesRemovedAlert">
-        Approvers have been removed
-    </ng-container>
-</ng-template>
-
-<ng-template #teamRemove>
-    <ng-container i18n="@@platformApprovalFlowTeamRemovedAlert">
-        1 team has been removed
-    </ng-container>
-</ng-template>
-
-<ng-template #errorBuildGraph>
-    <ng-container i18n="@@platformApprovalBuildGraphFailCheckData">
-        There was an error when trying to build graph. Check the initial data.
-    </ng-container>
 </ng-template>
 
 <ng-template #emptyApprovalFlowGraph>

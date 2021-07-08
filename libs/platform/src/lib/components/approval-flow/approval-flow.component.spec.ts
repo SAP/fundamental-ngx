@@ -281,9 +281,9 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should properly set node flags (nodes metadata)', () => {
-        const simpleGraphRootNode = component._graph[0].nodes[0];
-        const graphLastColumn = component._graph.length - 1;
-        const simpleGraphFinalNode = component._graph[graphLastColumn].nodes[0];
+        const simpleGraphRootNode = component._graph.columns[0].nodes[0];
+        const graphLastColumnIndex = component._graph.columns.length - 1;
+        const simpleGraphFinalNode = component._graph.columns[graphLastColumnIndex].nodes[0];
 
         expect(component._graphMetadata[simpleGraphRootNode.id].isRoot).toBeTruthy();
         expect(component._graphMetadata[simpleGraphFinalNode.id].isFinal).toBeTruthy();
@@ -298,21 +298,21 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should render approval flow title', () => {
-        const titleEl = fixture.nativeElement.querySelector('.approval-flow__toolbar-title');
+        const titleEl = fixture.nativeElement.querySelector('.fdp-approval-flow__toolbar .fd-toolbar .fd-label');
 
         expect(titleEl).toBeTruthy();
-        expect(titleEl.textContent).toEqual(TEST_APPROVAL_FLOW_TITLE);
+        expect(titleEl.textContent.trim()).toEqual(TEST_APPROVAL_FLOW_TITLE);
 
         const newTitle = `${TEST_APPROVAL_FLOW_TITLE}-changed`;
 
         host.title = newTitle;
         fixture.detectChanges();
 
-        expect(titleEl.textContent).toEqual(newTitle);
+        expect(titleEl.textContent.trim()).toEqual(newTitle);
     });
 
     it('should render watchers list', () => {
-        const watchersContainer = fixture.nativeElement.querySelector('.approval-flow__watchers');
+        const watchersContainer = fixture.nativeElement.querySelector('.fdp-approval-flow__watchers');
 
         expect(watchersContainer).toBeTruthy();
         expect(watchersContainer.querySelectorAll('fd-avatar').length).toEqual(simpleGraph.watchers.length);
@@ -321,7 +321,7 @@ describe('ApprovalFlowComponent', () => {
     it('should call watcher click handler on watcher click', () => {
         spyOn(component, '_onWatcherClick').and.callThrough();
 
-        const watchersContainer = fixture.nativeElement.querySelector('.approval-flow__watchers');
+        const watchersContainer = fixture.nativeElement.querySelector('.fdp-approval-flow__watchers');
         const watcher = watchersContainer.querySelector('fd-avatar');
 
         expect(watcher).toBeTruthy();
@@ -332,10 +332,10 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should render graph', () => {
-        const nodesContainer = fixture.nativeElement.querySelector('.approval-flow__graph');
+        const nodesContainer = fixture.nativeElement.querySelector('.fdp-approval-flow__graph');
 
         expect(nodesContainer).toBeTruthy();
-        expect(nodesContainer.querySelectorAll('.approval-flow__column').length).toEqual(simpleGraph.nodes.length);
+        expect(nodesContainer.querySelectorAll('.fdp-approval-flow__column').length).toEqual(simpleGraph.nodes.length);
         expect(nodesContainer.querySelectorAll('fdp-approval-flow-node').length).toEqual(simpleGraph.nodes.length);
     });
 
@@ -358,7 +358,7 @@ describe('ApprovalFlowComponent', () => {
     it('should call keydown handler if arrow key was pressed', () => {
         spyOn(component, '_onNodeKeyDown').and.callThrough();
 
-        const nodesContainer = fixture.nativeElement.querySelector('.approval-flow__graph');
+        const nodesContainer = fixture.nativeElement.querySelector('.fdp-approval-flow__graph');
 
         expect(nodesContainer).toBeTruthy();
 
