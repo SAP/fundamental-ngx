@@ -25,7 +25,7 @@ import { PopoverComponent } from '@fundamental-ngx/core';
 import { Observable, isObservable, of, Subscription, fromEvent, Subject } from 'rxjs';
 import { map, filter, take, takeUntil, tap } from 'rxjs/operators';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { FocusKeyManager, FocusableOption } from '@angular/cdk/a11y';
+import { FocusKeyManager, FocusableOption, LiveAnnouncer } from '@angular/cdk/a11y';
 import { RtlService } from '@fundamental-ngx/core';
 import { SearchFieldDataSource } from '../../domain/public_api';
 import { BaseComponent } from '../base';
@@ -250,7 +250,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         private _viewContainerRef: ViewContainerRef,
         protected _cd: ChangeDetectorRef,
         private _rtl: RtlService,
-        private readonly elementRef: ElementRef
+        private readonly elementRef: ElementRef,
+        private _liveAnnouncer: LiveAnnouncer
     ) {
         super(_cd);
     }
@@ -523,6 +524,9 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             suggestionCount +
             this.searchSuggestionMessage +
             (suggestionCount > 0 ? this.searchSuggestionNavigateMessage : '');
+        if (this.inputText?.length > 0) {
+            this._liveAnnouncer.announce(this.currentSearchSuggestionAnnoucementMessage);
+        }
     }
 }
 

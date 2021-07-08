@@ -38,11 +38,11 @@ import {
 import { FocusKeyManager, FocusOrigin } from '@angular/cdk/a11y';
 import { Observable, merge, Subscription } from 'rxjs';
 import { startWith, switchMap } from 'rxjs/operators';
+import { ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 
 import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { MenuItemComponent } from './menu-item.component';
 import { ContentDensity } from './../form/form-control';
-import { ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 
 /**
  * Variables for generating menu IDs.
