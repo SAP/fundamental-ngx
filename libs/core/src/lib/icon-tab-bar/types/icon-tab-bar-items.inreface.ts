@@ -1,7 +1,7 @@
 import { SemanticColor } from './index';
 
 export interface IconTabBarItem {
-    id: string|number;
+    id?: string|number;
     icon?: string;
     label?: string;
     color?: SemanticColor;

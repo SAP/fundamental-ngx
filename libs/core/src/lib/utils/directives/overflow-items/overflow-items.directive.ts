@@ -19,7 +19,7 @@ export class OverflowItemsDirective implements AfterViewInit, OnDestroy {
     private unsubscribe$$ = new Subject();
 
     constructor(
-        private hostEl: ElementRef
+        private _el: ElementRef
     ) {
     }
 
@@ -36,9 +36,10 @@ export class OverflowItemsDirective implements AfterViewInit, OnDestroy {
     }
 
     private calculateAmountOfOverflowedItems(): void {
-        const items = this.hostEl.nativeElement.querySelectorAll(this.itemSelector);
+        console.log('calculateAmountOfOverflowedItems');
+        const items = this._el.nativeElement.querySelectorAll(this.itemSelector);
         const arrItems = [...items];
-        const containerWidth = this.hostEl.nativeElement.offsetWidth;
+        const containerWidth = this._el.nativeElement.offsetWidth;
         const extra = this.checkWidthWithOffset(arrItems, containerWidth);
         this.changed.emit(extra);
     }

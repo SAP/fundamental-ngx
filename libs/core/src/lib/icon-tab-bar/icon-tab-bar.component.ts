@@ -61,8 +61,9 @@ export class IconTabBarComponent implements OnInit {
         // }
         const selectedItem = this.items.find(item => item.active);
         this.selectedItemId = selectedItem?.id;
-        this.items.forEach(item => {
+        this.items.forEach((item, index) => {
             item.cssClasses = [];
+            item.id = index;
             if (item.color) {
                 item.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
             }

@@ -4,11 +4,49 @@
 // These styles should move to fundamental/styles repo.
 .fd-icon-tab-bar {
 
-    &__header {
-        position: relative;
-    }
+  &__header {
+    position: relative;
+    overflow-x: hidden;;
+  }
 
-    &__item--hidden {
-        visibility: hidden;
-    }
+  &__item--hidden {
+    visibility: hidden;
+  }
+
+  &__item--extra-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
+
+.fd-list__icon-container {
+  display: flex;
+  align-items: center;
+  width: 1.25rem;
+  margin-right: .5rem;
+}
+
+//.fd-icon-tab-bar__item--positive .fd-icon-tab-bar__icon [class*=sap-icon],
+//.fd-icon-tab-bar__item--positive .fd-icon-tab-bar__icon[class*=sap-icon] {
+//  background: #107e3e;
+//  background: var(--fdIcon_Tab_Bar_Semantic_Badge_Color_Positive,var(--sapPositiveElementColor,#107e3e));
+//}
+//
+//.fd-icon-tab-bar__item--negative .fd-icon-tab-bar__icon [class*=sap-icon],
+//.fd-icon-tab-bar__item--negative .fd-icon-tab-bar__icon[class*=sap-icon] {
+//  background: #b00;
+//  background: var(--fdIcon_Tab_Bar_Semantic_Badge_Color_Negative,var(--sapNegativeElementColor,#b00));
+//}
+//
+//.fd-icon-tab-bar__item--critical .fd-icon-tab-bar__icon [class*=sap-icon],
+//.fd-icon-tab-bar__item--critical .fd-icon-tab-bar__icon[class*=sap-icon] {
+//  color: #df6e0c;
+//  color: var(--fdIcon_Tab_Bar_Semantic_Color_Critical,var(--sapCriticalElementColor,#df6e0c))
+//}
+//
+//.fd-icon-tab-bar__item--informative .fd-icon-tab-bar__icon [class*=sap-icon],
+//.fd-icon-tab-bar__item--informative .fd-icon-tab-bar__icon[class*=sap-icon] {
+//  color: #0a6ed1;
+//  color: var(--fdIcon_Tab_Bar_Semantic_Color_Informative,var(--sapInformativeElementColor,#0a6ed1))
+//}
