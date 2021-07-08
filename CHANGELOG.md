@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.69](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.68...v0.31.0-rc.69) (2021-07-08)
+
+
+### Bug Fixes
+
+* **platform:** correct imports for checkbox group module ([#5878](https://github.com/SAP/fundamental-ngx/issues/5878)) ([97d6caa](https://github.com/SAP/fundamental-ngx/commit/97d6caa4d20ee0d188ab074bf3ac15417c8a956e))
+
 ## [0.31.0-rc.68](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.67...v0.31.0-rc.68) (2021-07-08)
 
 
