@@ -27,7 +27,6 @@ jobs:
         - SAUCE_USERNAME=$SAUCE_USERNAME
         - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
       script: bash ./ci-scripts/test-lint.sh && npm run test:coveralls && npm run build-pack-library
-
     - stage: "Test"
       name: Sauce Labs - e2e tests - platform
       if: type = pull_request
@@ -68,11 +67,6 @@ jobs:
       name: Sauce Labs - unit tests core
       if: type = pull_request
       script: npm run test
-#    - stage: "Test"
-#      name: A11y report
-#      if: type = pull_request
-#      script: npm run e2e:a11y
-
     - stage: "cron test"
       name: Sauce Labs - e2e tests - platformA
       if: type = cron
@@ -128,7 +122,6 @@ jobs:
       name: Sauce Labs - unit tests core
       if: type = cron
       script: npm run test
-
     - stage: "Pre-release"
       if: branch = main AND type = push
       before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
