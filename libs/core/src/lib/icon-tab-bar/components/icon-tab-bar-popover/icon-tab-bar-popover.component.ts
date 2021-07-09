@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { IconTabBarItem } from '../../types';
 
 @Component({
@@ -6,19 +6,29 @@ import { IconTabBarItem } from '../../types';
     templateUrl: './icon-tab-bar-popover.component.html',
     styleUrls: ['./icon-tab-bar-popover.component.scss']
 })
-export class IconTabBarPopoverComponent implements OnInit {
+export class IconTabBarPopoverComponent implements OnChanges {
 
     @Input() items: IconTabBarItem[];
 
-    constructor() {
+    @Output()
+    selected: EventEmitter<any> = new EventEmitter<any>();
+
+    constructor(
+        protected _cd: ChangeDetectorRef,
+    ) {}
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.items) {
+            this.items.forEach(item => {
+                if (item.color) {
+                    item.cssClasses = [`fd-list__item--${item.color}`];
+                }
+            });
+        }
     }
 
-    ngOnInit(): void {
-        this.items.forEach(item => {
-            if (item.color) {
-                item.cssClasses = [`fd-list__item--${item.color}`];
-            }
-        });
+    selectItem(selectedItem: IconTabBarItem): void {
+        this.selected.emit(selectedItem);
+        // this._cd.detectChanges();
     }
-
 }

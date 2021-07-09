@@ -16,7 +16,7 @@ export abstract class IconTabBarClass implements OnInit {
 
     selectedItemId: string|number;
     extraItems: IconTabBarItem[] = [];
-    moreBtnOrder = 0;
+    lastVisibleTabIndex = 0;
 
     constructor(
         protected _cd: ChangeDetectorRef,
@@ -33,8 +33,36 @@ export abstract class IconTabBarClass implements OnInit {
         this.selected.emit(selectedItem)
     }
 
+    selectSubItem(selectedItem: IconTabBarItem): void {
+        const deletedItem = <IconTabBarItem>this.items.splice(this.lastVisibleTabIndex, 1, selectedItem)[0];
+        this.items.splice(selectedItem.id, 1, deletedItem);
+
+        deletedItem.id = selectedItem.id;
+        const itemToPopover = cloneDeep(deletedItem);
+        deletedItem.hidden = true;
+        deletedItem.cssClasses.push('fd-icon-tab-bar__item--hidden')
+
+        let indexInExtraItems;
+        this.extraItems.forEach((item, index) => {
+            if (item.id === selectedItem.id) {
+                indexInExtraItems = index;
+            }
+        })
+
+        selectedItem.id = this.lastVisibleTabIndex;
+        selectedItem.hidden = false;
+        if (selectedItem.color) {
+            selectedItem.cssClasses = [`fd-icon-tab-bar__item--${selectedItem.color}`];
+        }
+        this.extraItems.splice(indexInExtraItems, 1, itemToPopover);
+        this.extraItems = [...this.extraItems];
+
+
+        this.selectItem(selectedItem);
+    }
+
     onChangeSize(extraItems: number): void {
-        this.moreBtnOrder = this.items.length - 1 - extraItems;
+        this.lastVisibleTabIndex = this.items.length - 1 - extraItems;
         this.items.forEach(item => {
             item.hidden = false;
             item.cssClasses = item.cssClasses.filter(cssClass => cssClass !== 'fd-icon-tab-bar__item--hidden')
@@ -47,6 +75,6 @@ export abstract class IconTabBarClass implements OnInit {
             this.items[i].hidden = true;
             this.items[i].cssClasses.push('fd-icon-tab-bar__item--hidden')
         }
-        this._cd.detectChanges();
+        // this._cd.detectChanges();
     }
 }

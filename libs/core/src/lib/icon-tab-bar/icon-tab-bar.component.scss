@@ -28,6 +28,40 @@
   margin-right: .5rem;
 }
 
+.fd-icon-tab-bar__list-item {
+  min-width: 100px;
+  width: 100%;
+}
+
+[dir=rtl] {
+
+  .fd-list__icon {
+    justify-content: center;
+  }
+
+  .fd-list__icon-container {
+    margin-left: 1rem;
+    margin-right: 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .fd-list__item--positive .fd-list__icon [class*=sap-icon],
 .fd-list__item--positive .fd-list__icon[class*=sap-icon],
 .fd-list__item--positive .fd-list__title,

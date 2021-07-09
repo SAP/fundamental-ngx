@@ -18,7 +18,7 @@ import { Subject } from 'rxjs';
     selector: 'fd-icon-tab-bar',
     templateUrl: './icon-tab-bar.component.html',
     styleUrls: ['./icon-tab-bar.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    // changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
 })
 export class IconTabBarComponent implements OnInit, OnDestroy {
@@ -82,9 +82,9 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
             .subscribe((isRtl: boolean) => {
                 const shouldDetect = this._isRtl !== null;
                 this._isRtl = isRtl;
-                if (shouldDetect) {
-                    setTimeout(() => this._cd.detectChanges(), 100);
-                }
+                // if (shouldDetect) {
+                //     setTimeout(() => this._cd.detectChanges(), 100);
+                // }
         });
 
         const selectedItem = this.items.find(item => item.active);

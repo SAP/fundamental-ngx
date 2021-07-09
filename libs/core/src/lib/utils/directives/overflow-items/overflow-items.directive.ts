@@ -60,7 +60,6 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
         const containerWidth = this._el.nativeElement.offsetWidth;
         const extra = this.checkWidthWithOffset(arrItems, containerWidth);
         this.changed.emit(extra);
-        // console.log(extra);
     }
 
     private checkWidthWithOffset(arrItems: HTMLElement[], containerWidth: number, checkWithOffset: boolean = false): number {
@@ -70,9 +69,11 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
             : containerWidth;
         for (let i = 0; i < arrItems.length; i++) {
             const item = arrItems[i];
+
             itemsTotalWidth += this.isRtl
                 ? containerWidth - item.offsetLeft - itemsTotalWidth
                 : item.offsetWidth + item.offsetLeft - itemsTotalWidth;
+
             if (parentWidth < itemsTotalWidth) {
                 return checkWithOffset
                     ? arrItems.length - i

@@ -2,6 +2,7 @@
     class="fd-icon-tab-bar__header"
     role="tablist"
     fdOverflowItems
+    [isRtl]="isRtl"
     itemSelector="[data-overflowItem]"
     [offset]="100"
     (changed)="onChangeSize($event)"
@@ -52,8 +53,8 @@
         class="fd-icon-tab-bar__item fd-icon-tab-bar__item--extra-btn"
         fdExtraButton
         [isRtl]="isRtl"
-        [lastVisibleItemIndex]="moreBtnOrder"
+        [lastVisibleItemIndex]="lastVisibleTabIndex"
     >
-        <fd-icon-tab-bar-popover [items]="extraItems"></fd-icon-tab-bar-popover>
+        <fd-icon-tab-bar-popover [items]="extraItems" (selected)="selectSubItem($event)"></fd-icon-tab-bar-popover>
     </li>
 </ul>

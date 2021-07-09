@@ -11,14 +11,18 @@
                 role="listitem"
                 [ngClass]="item.cssClasses"
                 tabindex="-1">
-                <a class="fd-list__link" tabindex="0">
+                <a
+                    class="fd-list__link"
+                    tabindex="0"
+                    (click)="selectItem(item)"
+                >
                         <span class="fd-list__icon-container">
                             <span class="fd-list__icon">
                                 <i class="{{'sap-icon--' + item.icon}}" role="presentation"></i>
                             </span>
                             <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
                         </span>
-                    <span *ngIf="item.label" class='fd-list__title'>{{item.label}}</span>
+                    <span *ngIf="item.label" class="fd-list__title">{{item.label}}</span>
                     <span *ngIf="item.counter" class="fd-list__counter">({{item.counter}})</span>
                 </a>
             </li>

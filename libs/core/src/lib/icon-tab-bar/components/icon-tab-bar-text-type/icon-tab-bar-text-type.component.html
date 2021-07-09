@@ -37,7 +37,7 @@
         class="fd-icon-tab-bar__item fd-icon-tab-bar__item--extra-btn"
         fdExtraButton
         [isRtl]="isRtl"
-        [lastVisibleItemIndex]='moreBtnOrder'
+        [lastVisibleItemIndex]='lastVisibleTabIndex'
     >
         <ng-container [ngTemplateOutletContext]='{items: extraItems}' [ngTemplateOutlet]='moreBtn'></ng-container>
     </li>
