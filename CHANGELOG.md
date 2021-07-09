@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.75](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.74...v0.31.0-rc.75) (2021-07-09)
+
+
+### Bug Fixes
+
+* **platform:** add error message for combobox component ([#5699](https://github.com/SAP/fundamental-ngx/issues/5699)) ([75f50be](https://github.com/SAP/fundamental-ngx/commit/75f50beb089a42b58222c0db11cfd2ea19a90f45))
+
 ## [0.31.0-rc.74](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.73...v0.31.0-rc.74) (2021-07-09)
 
 ## [0.31.0-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.72...v0.31.0-rc.73) (2021-07-09)
