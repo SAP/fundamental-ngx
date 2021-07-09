@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 import { RtlService } from '@fundamental-ngx/core/utils';
 
 let componentExampleUniqueId = 0;
@@ -19,7 +20,11 @@ let componentExampleUniqueId = 0;
         </div>
     `,
     styleUrls: ['./component-example.component.scss'],
-    providers: [RtlService],
+    providers: [
+        RtlService,
+        // Needed in order for dialog service and components to inherit local rtl service.
+        DialogService
+    ],
     encapsulation: ViewEncapsulation.None
 })
 export class ComponentExampleComponent implements OnInit {
