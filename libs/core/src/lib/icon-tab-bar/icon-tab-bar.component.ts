@@ -1,6 +1,18 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Optional, Output, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Input, OnDestroy,
+    OnInit,
+    Optional,
+    Output,
+    ViewEncapsulation
+} from '@angular/core';
 import { IconTabBarBackground, IconTabBarItem, IconTabBarSize, TabDestinyMode, TabType } from './types';
-import { ContentDensityService, IconFont } from '@fundamental-ngx/core';
+import { ContentDensityService, IconFont, RtlService } from '@fundamental-ngx/core';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'fd-icon-tab-bar',
@@ -9,7 +21,7 @@ import { ContentDensityService, IconFont } from '@fundamental-ngx/core';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
 })
-export class IconTabBarComponent implements OnInit {
+export class IconTabBarComponent implements OnInit, OnDestroy {
 
     @Input()
     type: TabType = 'text';
@@ -42,9 +54,14 @@ export class IconTabBarComponent implements OnInit {
 
     selectedItemId: string|number;
     cssClassForContainer: string[];
+    _isRtl: boolean = null;
+
+    private _onDestroy$ = new Subject();
 
     constructor(
+        private _cd: ChangeDetectorRef,
         @Optional() private _contentDensityService: ContentDensityService,
+        @Optional() private _rtlService: RtlService,
     ) {
     }
 
@@ -59,6 +76,17 @@ export class IconTabBarComponent implements OnInit {
         //             }
         //     })
         // }
+
+        this._rtlService.rtl
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((isRtl: boolean) => {
+                const shouldDetect = this._isRtl !== null;
+                this._isRtl = isRtl;
+                if (shouldDetect) {
+                    setTimeout(() => this._cd.detectChanges(), 100);
+                }
+        });
+
         const selectedItem = this.items.find(item => item.active);
         this.selectedItemId = selectedItem?.id;
         this.items.forEach((item, index) => {
@@ -90,4 +118,8 @@ export class IconTabBarComponent implements OnInit {
         this.selected.emit(selectedItem.id)
     }
 
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
+    }
 }

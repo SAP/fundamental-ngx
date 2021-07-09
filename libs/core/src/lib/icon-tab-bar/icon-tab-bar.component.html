@@ -17,17 +17,17 @@
 </div>
 
 <ng-template #processType>
-    <fd-icon-tab-bar-process-type (selected)="selectItem($event)" [items]="items"></fd-icon-tab-bar-process-type>
+    <fd-icon-tab-bar-process-type (selected)="selectItem($event)" [items]="items" [isRtl]="_isRtl"></fd-icon-tab-bar-process-type>
 </ng-template>
 
 <ng-template #filterType>
-    <fd-icon-tab-bar-filter-type (selected)="selectItem($event)" [items]="items" [showTabAll]="showTabAll"></fd-icon-tab-bar-filter-type>
+    <fd-icon-tab-bar-filter-type (selected)="selectItem($event)" [items]="items" [showTabAll]="showTabAll" [isRtl]="_isRtl"></fd-icon-tab-bar-filter-type>
 </ng-template>
 
 <ng-template #iconType>
-    <fd-icon-tab-bar-icon-type (selected)="selectItem($event)" [items]="items"></fd-icon-tab-bar-icon-type>
+    <fd-icon-tab-bar-icon-type (selected)="selectItem($event)" [items]="items" [isRtl]="_isRtl"></fd-icon-tab-bar-icon-type>
 </ng-template>
 
 <ng-template #textType>
-    <fd-icon-tab-bar-text-type (selected)="selectItem($event)" [items]="items"></fd-icon-tab-bar-text-type>
+    <fd-icon-tab-bar-text-type (selected)="selectItem($event)" [items]="items" [isRtl]="_isRtl"></fd-icon-tab-bar-text-type>
 </ng-template>

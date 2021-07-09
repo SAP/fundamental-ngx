@@ -8,6 +8,7 @@ import { ExtraButtonDirective } from './directives/extra-button.directive';
 import { IconTabBarIconTypeComponent } from './components/icon-tab-bar-icon-type/icon-tab-bar-icon-type.component';
 import { IconTabBarProcessTypeComponent } from './components/icon-tab-bar-process-type/icon-tab-bar-process-type.component';
 import { IconTabBarFilterTypeComponent } from './components/icon-tab-bar-filter-type/icon-tab-bar-filter-type.component';
+import { IconTabBarPopoverComponent } from './components/icon-tab-bar-popover/icon-tab-bar-popover.component';
 
 
 
@@ -19,6 +20,7 @@ import { IconTabBarFilterTypeComponent } from './components/icon-tab-bar-filter-
         IconTabBarIconTypeComponent,
         IconTabBarProcessTypeComponent,
         IconTabBarFilterTypeComponent,
+        IconTabBarPopoverComponent,
     ],
     imports: [
         CommonModule,

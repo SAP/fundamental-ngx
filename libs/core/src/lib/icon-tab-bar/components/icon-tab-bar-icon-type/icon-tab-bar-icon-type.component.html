@@ -37,38 +37,9 @@
         role="presentation"
         class="fd-icon-tab-bar__item fd-icon-tab-bar__item--extra-btn"
         fdExtraButton
+        [isRtl]="isRtl"
         [lastVisibleItemIndex]="moreBtnOrder"
     >
-        <ng-container [ngTemplateOutletContext]="{items: extraItems}" [ngTemplateOutlet]="popoverView"></ng-container>
+        <fd-icon-tab-bar-popover [items]="extraItems"></fd-icon-tab-bar-popover>
     </li>
 </ul>
-
-<ng-template #popoverView let-items="items">
-    <fd-popover [focusAutoCapture]="true" [focusTrapped]="true">
-        <fd-popover-control>
-            <button class="fd-icon-tab-bar__overflow">
-                <span class="fd-icon-tab-bar__overflow-text">More</span>
-                <i class="sap-icon--slim-arrow-down" role="presentation"></i>
-            </button>
-        </fd-popover-control>
-        <fd-popover-body>
-            <ul class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list" role="list">
-                <li *ngFor="let item of items" class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
-                    role="listitem"
-                    [ngClass]="item.cssClasses"
-                    tabindex="-1">
-                    <a class="fd-list__link" tabindex="0">
-                        <span class="fd-list__icon-container">
-                            <span class="fd-list__icon">
-                                <i class="{{'sap-icon--' + item.icon}}" role="presentation"></i>
-                            </span>
-                            <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
-                        </span>
-                        <span *ngIf="item.label" class='fd-list__title'>{{item.label}}</span>
-                        <span *ngIf="item.counter" class="fd-list__counter">({{item.counter}})</span>
-                    </a>
-                </li>
-            </ul>
-        </fd-popover-body>
-    </fd-popover>
-</ng-template>

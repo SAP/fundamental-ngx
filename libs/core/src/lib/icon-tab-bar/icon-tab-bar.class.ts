@@ -8,6 +8,9 @@ export abstract class IconTabBarClass implements OnInit {
     @Input()
     items: IconTabBarItem[];
 
+    @Input()
+    isRtl: boolean;
+
     @Output()
     selected: EventEmitter<any> = new EventEmitter<any>();
 
@@ -27,7 +30,7 @@ export abstract class IconTabBarClass implements OnInit {
     selectItem(selectedItem: IconTabBarItem): void {
         this.selectedItemId = selectedItem.id;
         selectedItem.badge = false;
-        this.selected.emit(selectedItem.id)
+        this.selected.emit(selectedItem)
     }
 
     onChangeSize(extraItems: number): void {

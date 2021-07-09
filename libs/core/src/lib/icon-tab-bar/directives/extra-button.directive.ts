@@ -1,20 +1,29 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 @Directive({
     selector: '[fdExtraButton]'
 })
-export class ExtraButtonDirective implements AfterViewInit, OnDestroy {
+export class ExtraButtonDirective implements OnChanges, AfterViewInit, OnDestroy {
 
     @Input()
     lastVisibleItemIndex: number;
+
+    @Input()
+    isRtl: boolean;
 
     private unsubscribe$$ = new Subject();
 
     constructor(
         private _el: ElementRef,
     ) {
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.isRtl && !changes.isRtl.firstChange) {
+            this._calculatePosition();
+        }
     }
 
     ngAfterViewInit(): void {
@@ -32,12 +41,23 @@ export class ExtraButtonDirective implements AfterViewInit, OnDestroy {
     private _calculatePosition(): void {
         const nativeEl = this._el.nativeElement;
         const parent = nativeEl.parentElement;
+
         const anchor = parent.children[this.lastVisibleItemIndex];
         const computed = getComputedStyle(anchor);
-        const myPosition = anchor.offsetLeft + anchor.offsetWidth;
-        const marginLeft = parseInt(computed.marginRight, 10);
 
-        this._el.nativeElement.style.left = `${myPosition + marginLeft}px`;
+        const myPosition = this.isRtl
+            ? anchor.offsetLeft - nativeEl.offsetWidth
+            : anchor.offsetLeft + anchor.offsetWidth;
+
+        const margin = this.isRtl
+            ? parseInt(computed.marginLeft, 10)
+            : parseInt(computed.marginRight, 10);
+
+        const myPositionWithOffset = this.isRtl
+            ? myPosition - margin
+            : myPosition + margin;
+
+        this._el.nativeElement.style.left = `${myPositionWithOffset}px`;
     }
 
     ngOnDestroy(): void {
