@@ -1,4 +1,14 @@
 
+## [0.31.0-rc.72](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.71...v0.31.0-rc.72) (2021-07-09)
+
+
+### Bug Fixes
+
+* **core:** fix looped carousel item order and swipe of items in rtl view ([#5848](https://github.com/SAP/fundamental-ngx/issues/5848)) ([9ad8e8d](https://github.com/SAP/fundamental-ngx/commit/9ad8e8d4df318513ce85af6cd70f65ba69c55891))
+* **core:** remove duplicated css imports ([#5906](https://github.com/SAP/fundamental-ngx/issues/5906)) ([136e8e4](https://github.com/SAP/fundamental-ngx/commit/136e8e46763f86c36d35228d7d989922c11f5d6c))
+* **core:** small screens should use mobile settings dialog, optional MenuService ([#5839](https://github.com/SAP/fundamental-ngx/issues/5839)) ([1c46e69](https://github.com/SAP/fundamental-ngx/commit/1c46e6917cddfc4b8b87dd9e0750cc3ec7c6bcdf))
+* **core:** update imports for angular cdk connectionPositionPair ([#5904](https://github.com/SAP/fundamental-ngx/issues/5904)) ([ad36d67](https://github.com/SAP/fundamental-ngx/commit/ad36d67a3d6f1cf50cce924af1f85d50bf0d1656))
+
 ## [0.31.0-rc.71](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.70...v0.31.0-rc.71) (2021-07-08)
 
 ## [0.31.0-rc.70](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.69...v0.31.0-rc.70) (2021-07-08)
