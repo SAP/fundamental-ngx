@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.72...v0.31.0-rc.73) (2021-07-09)
+
+
+### Bug Fixes
+
+* **docs:** apply correct z-index for overlay container ([#5905](https://github.com/SAP/fundamental-ngx/issues/5905)) ([562d693](https://github.com/SAP/fundamental-ngx/commit/562d6935aa9ed74bbdd1fb912a77fae358eb2171))
+
 ## [0.31.0-rc.72](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.71...v0.31.0-rc.72) (2021-07-09)
 
 
