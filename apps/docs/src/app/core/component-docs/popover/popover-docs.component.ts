@@ -27,6 +27,7 @@ import * as popoverCdkPlacementSrcH from '!raw-loader!./examples/popover-new-pla
 import * as popoverCdkScrollSrcTs from '!raw-loader!./examples/popover-scroll-example/popover-scroll-example.component.ts';
 import * as popoverCdkScrollSrcH from '!raw-loader!./examples/popover-scroll-example/popover-scroll-example.component.html';
 import * as popoverTriggerSrc from '!raw-loader!./examples/popover-trigger-example/popover-trigger-example.component.html';
+import * as popoverTriggerTsSrc from '!raw-loader!./examples/popover-trigger-example/popover-trigger-example.component.ts';
 import * as mobilePopoverHtmlSrc from '!raw-loader!./examples/popover-mobile/popover-mobile-example.component.html';
 import * as mobilePopoverTsSrc from '!raw-loader!./examples/popover-mobile/popover-mobile-example.component.ts';
 
@@ -73,6 +74,7 @@ export class PopoverDocsComponent {
             language: 'html',
             code: popoverTriggerSrc,
             fileName: 'popover-trigger-example',
+            typescriptFileCode: popoverTriggerTsSrc,
             component: 'PopoverTriggerExampleComponent'
         }
     ];
