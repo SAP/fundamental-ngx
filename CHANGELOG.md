@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.77](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.76...v0.31.0-rc.77) (2021-07-10)
+
+
+### Bug Fixes
+
+* **docs,core:** add missing modules and components ([#5922](https://github.com/SAP/fundamental-ngx/issues/5922)) ([49b86c7](https://github.com/SAP/fundamental-ngx/commit/49b86c7c956e95cd1814ace1aff777b8b8d936f3))
+
 ## [0.31.0-rc.76](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.75...v0.31.0-rc.76) (2021-07-10)
 
 
