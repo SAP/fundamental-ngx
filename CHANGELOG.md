@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.76](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.75...v0.31.0-rc.76) (2021-07-10)
+
+
+### Bug Fixes
+
+* **docs:** fix documentation rtl for dialog ([#5924](https://github.com/SAP/fundamental-ngx/issues/5924)) ([ef9b248](https://github.com/SAP/fundamental-ngx/commit/ef9b248f5de72686f1f019a838ce02c54b5a7faf))
+
 ## [0.31.0-rc.75](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.74...v0.31.0-rc.75) (2021-07-09)
 
 
