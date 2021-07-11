@@ -144,7 +144,7 @@
     "@nrwl/cli": "11.1.5",
     "@nrwl/schematics": "8.12.11",
     "@nrwl/tao": "11.5.1",
-    "@nrwl/workspace": "11.5.2",
+    "@nrwl/workspace": "12.5.7",
     "@schematics/angular": "~11.2.11",
     "@types/jasmine": "3.6.6",
     "@types/jasminewd2": "2.0.8",
