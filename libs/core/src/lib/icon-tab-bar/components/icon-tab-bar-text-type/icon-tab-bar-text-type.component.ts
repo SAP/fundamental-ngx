@@ -1,5 +1,6 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IconTabBarClass } from '../../icon-tab-bar.class';
+import { IconTabBarItem } from '../../types';
 
 @Component({
     selector: 'fd-icon-tab-bar-text-type',
@@ -13,5 +14,4 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass implements OnIn
 
     @Input()
     enableTabReordering = false;
-
 }

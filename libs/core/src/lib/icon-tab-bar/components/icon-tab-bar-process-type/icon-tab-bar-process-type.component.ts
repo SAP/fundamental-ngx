@@ -1,14 +1,99 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IconTabBarClass } from '../../icon-tab-bar.class';
+import { IconTabBarItem } from '../../types';
+import { cloneDeep } from '../../../utils/functions/clone-deep';
 
 @Component({
     selector: 'fd-icon-tab-bar-process-type',
     templateUrl: './icon-tab-bar-process-type.component.html',
     styleUrls: ['./icon-tab-bar-process-type.component.scss']
 })
-export class IconTabBarProcessTypeComponent extends IconTabBarClass implements OnInit {
+export class IconTabBarProcessTypeComponent extends IconTabBarClass {
 
-    ngOnInit(): void {
+    _nextSteps: IconTabBarItem[];
+
+    _prevSteps: IconTabBarItem[];
+
+    firstVisibleTabIndex = 0;
+    currentStepIndex = 0;
+
+    selectItem(selectedItem: IconTabBarItem): void {
+        this.items.forEach((item, index) => {
+            if (item.id === selectedItem.id) {
+                this.currentStepIndex = index;
+            }
+        });
+        super.selectItem(selectedItem);
     }
 
+    selectExtraItem(selectedItem: IconTabBarItem): void {
+        const fromPrevSteps = !!this._prevSteps.find(item => item.id === selectedItem.id);
+        const indexToDelete = fromPrevSteps
+            ? this.firstVisibleTabIndex
+            : this.lastVisibleTabIndex;
+        let arrToMan = fromPrevSteps
+            ? this._prevSteps
+            : this._nextSteps;
+
+
+        const deletedItem = <IconTabBarItem>this.items.splice(indexToDelete, 1, selectedItem)[0];
+        this.items.splice(selectedItem.id, 1, deletedItem);
+
+        deletedItem.id = selectedItem.id;
+        const itemToPopover = cloneDeep(deletedItem);
+        deletedItem.hidden = true;
+        deletedItem.cssClasses.push('fd-icon-tab-bar__item--hidden')
+
+        let indexInExtraItems;
+        arrToMan.forEach((item, index) => {
+            if (item.id === selectedItem.id) {
+                indexInExtraItems = index;
+            }
+        })
+
+        selectedItem.id = indexToDelete;
+        selectedItem.hidden = false;
+        if (selectedItem.color) {
+            selectedItem.cssClasses = [`fd-icon-tab-bar__item--${selectedItem.color}`];
+        }
+        arrToMan.splice(indexInExtraItems, 1, itemToPopover);
+        arrToMan = [...arrToMan];
+
+
+        this.selectItem(selectedItem);
+    }
+
+    onChangeSize(extraItems: number): void {
+        this._nextSteps = [];
+        this._prevSteps = [];
+        this.items.forEach(item => {
+            item.hidden = false;
+            item.cssClasses = item.cssClasses.filter(cssClass => cssClass !== 'fd-icon-tab-bar__item--hidden')
+        });
+        const amountOfPreviousSteps = this.items.length - 1 - this.currentStepIndex;
+        const visibleAmountOfItems = this.items.length - extraItems;
+        for (let i = amountOfPreviousSteps; i >= 0; i--) {
+            this._prevSteps.push(this.items[i]);
+            this.items[i].hidden = true;
+            this.items[i].cssClasses.push('fd-icon-tab-bar__item--hidden');
+        }
+
+        if (this._prevSteps.length >= extraItems) {
+            return;
+        }
+
+        let amountOfNextSteps = extraItems - this._prevSteps.length;
+        let nextIndex = this._prevSteps.length - 1 + visibleAmountOfItems;
+        while (amountOfNextSteps > 0) {
+            this._prevSteps.push(this.items[nextIndex]);
+            this.items[nextIndex].hidden = true;
+            this.items[nextIndex].cssClasses.push('fd-icon-tab-bar__item--hidden');
+
+            ++nextIndex;
+            --amountOfNextSteps;
+        }
+        this.firstVisibleTabIndex = this._prevSteps.length;
+        this.lastVisibleTabIndex = this.items.length - 1 - this._nextSteps.length;
+        // this._cd.detectChanges();
+    }
 }

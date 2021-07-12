@@ -6,10 +6,4 @@ import { IconTabBarClass } from '../../icon-tab-bar.class';
     templateUrl: './icon-tab-bar-icon-type.component.html',
     styleUrls: ['./icon-tab-bar-icon-type.component.scss']
 })
-export class IconTabBarIconTypeComponent extends IconTabBarClass implements OnInit {
-
-
-    ngOnInit(): void {
-    }
-
-}
+export class IconTabBarIconTypeComponent extends IconTabBarClass {}

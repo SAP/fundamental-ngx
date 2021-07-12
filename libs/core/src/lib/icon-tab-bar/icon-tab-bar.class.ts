@@ -14,7 +14,7 @@ export abstract class IconTabBarClass implements OnInit {
     @Output()
     selected: EventEmitter<any> = new EventEmitter<any>();
 
-    selectedItemId: string|number;
+    selectedItemId: number;
     extraItems: IconTabBarItem[] = [];
     lastVisibleTabIndex = 0;
 
@@ -33,7 +33,8 @@ export abstract class IconTabBarClass implements OnInit {
         this.selected.emit(selectedItem)
     }
 
-    selectSubItem(selectedItem: IconTabBarItem): void {
+    // ToDo: прописать логику для нестед форм, чтобы перемещалась вся ветка для нестед таб.
+    selectExtraItem(selectedItem: IconTabBarItem): void {
         const deletedItem = <IconTabBarItem>this.items.splice(this.lastVisibleTabIndex, 1, selectedItem)[0];
         this.items.splice(selectedItem.id, 1, deletedItem);
 

@@ -28,18 +28,21 @@ export abstract class IconTabBarExampleClass implements OnInit {
     ];
 
     ngOnInit(): void {
-        this.generateItems();
+        this.items = this.generateItems();
     }
 
-    private generateItems(): void {
+    protected generateItems(subItems: boolean = false): IconTabBarItem[] {
+        const items = [];
         for (let i = 0; i < this.icons.length; i++) {
             const icon = this.icons[i];
-            this.items.push({
+            items.push({
                 icon: icon,
                 label: `Item ${i}`,
                 counter: Math.floor(Math.random() * 100),
-                color: i % 5 === 0 ? 'critical' : 'informative'
+                color: i % 5 === 0 ? 'critical' : 'informative',
+                subItems: subItems ? this.generateItems() : null,
             });
         }
+        return items;
     }
 }

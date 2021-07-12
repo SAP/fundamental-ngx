@@ -92,6 +92,9 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
         this.items.forEach((item, index) => {
             item.cssClasses = [];
             item.id = index;
+            if (Array.isArray(item.subItems) && item.subItems.length) {
+                this.generateId(item);
+            }
             if (item.color) {
                 item.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
             }
@@ -110,6 +113,18 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
         if (this.densityMode === 'compact') {
             this.cssClassForContainer.push('fd-icon-tab-bar--compact');
         }
+    }
+
+    // ToDo: поменять как-то айдишники
+    generateId(parent: IconTabBarItem): void {
+        parent.subItems.forEach((item, index) => {
+           item.id = parent.id === 0
+               ? parent.id * 10 + index
+               : 10 + index;
+           if (Array.isArray(item.subItems) && item.subItems.length) {
+               this.generateId(item);
+           }
+        });
     }
 
     selectItem(selectedItem: IconTabBarItem): void {

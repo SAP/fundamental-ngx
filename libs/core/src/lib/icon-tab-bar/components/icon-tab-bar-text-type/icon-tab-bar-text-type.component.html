@@ -28,7 +28,12 @@
             <span *ngIf='item.badge' class='fd-icon-tab-bar__badge'></span>
         </a>
         <ng-container *ngIf='item.subItems'>
-            <ng-container [ngTemplateOutletContext]='{item: item}' [ngTemplateOutlet]='itemWithSubItems'></ng-container>
+            <fd-text-type-popover
+                [parentTab]="item"
+                [selectedSubItemId]="selectedItemId"
+                (selectedSubItem)="selectItem($event)"
+            >
+            </fd-text-type-popover>
         </ng-container>
     </li>
     <li
@@ -39,76 +44,11 @@
         [isRtl]="isRtl"
         [lastVisibleItemIndex]='lastVisibleTabIndex'
     >
-        <ng-container [ngTemplateOutletContext]='{items: extraItems}' [ngTemplateOutlet]='moreBtn'></ng-container>
+        <fd-text-type-popover
+            [items]="extraItems"
+            [isExtraItemsMode]="true"
+            (selectedExtraItem)="selectExtraItem($event)"
+        >
+        </fd-text-type-popover>
     </li>
 </ul>
-
-<ng-template #itemWithSubItems let-item='item'>
-    <fd-popover [focusAutoCapture]='true' [focusTrapped]='true'>
-        <fd-popover-control>
-            <a
-                aria-controls='popoverA1'
-                aria-expanded='true'
-                aria-haspopup='true'
-                aria-selected='true'
-                class='fd-icon-tab-bar__tab'
-                role='tab'
-                tabindex='0'>
-                <div class='fd-icon-tab-bar__tab-container'>
-                    <span class='fd-icon-tab-bar__tag'>{{item.label}}</span>
-                    <span class='fd-icon-tab-bar__arrow'>
-                        <i class='sap-icon--slim-arrow-down' role='presentation'></i>
-                    </span>
-                    <span *ngIf='item.badge' class='fd-icon-tab-bar__badge'></span>
-                </div>
-            </a>
-        </fd-popover-control>
-        <fd-popover-body>
-            <ul class='fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list' role='list'>
-                <ng-container [ngTemplateOutletContext]='{level: 1, items: items}'
-                              [ngTemplateOutlet]='subItem'></ng-container>
-            </ul>
-        </fd-popover-body>
-    </fd-popover>
-</ng-template>
-
-<ng-template #subItem let-items='items' let-level='level'>
-    <ng-container *ngFor='let item of items'>
-        <li
-            [attr.aria-level]='level' class='fd-list__item fd-list__item--link fd-icon-tab-bar__list-item'
-            [ngClass]="item.cssClasses"
-            role='listitem'
-            tabindex='-1'>
-            <a class='fd-list__link' tabindex='0'>
-                <span class='fd-list__title'>{{item.label}}</span>
-                <span *ngIf='item.badge' class='fd-icon-tab-bar__badge'></span>
-                <span *ngIf="item.counter" class="fd-list__counter">({{item.counter}})</span>
-            </a>
-        </li>
-        <ng-container *ngIf='item.subItems && item.subItems.length'>
-            <ng-container [ngTemplateOutletContext]='{level: level + 1, items: item.subItems}'
-                          [ngTemplateOutlet]='subItem'></ng-container>
-        </ng-container>
-    </ng-container>
-</ng-template>
-
-
-<ng-template #moreBtn let-items='items'>
-    <fd-popover [focusAutoCapture]='true' [focusTrapped]='true'>
-        <fd-popover-control>
-            <button class="fd-icon-tab-bar__overflow">
-                <span class="fd-icon-tab-bar__overflow-text">More</span>
-                <i class="sap-icon--slim-arrow-down" role="presentation"></i>
-            </button>
-        </fd-popover-control>
-        <fd-popover-body>
-            <ul class='fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list' role='list'>
-                <ng-container
-                    [ngTemplateOutletContext]='{level: 1, items: items}'
-                    [ngTemplateOutlet]='subItem'
-                >
-                </ng-container>
-            </ul>
-        </fd-popover-body>
-    </fd-popover>
-</ng-template>

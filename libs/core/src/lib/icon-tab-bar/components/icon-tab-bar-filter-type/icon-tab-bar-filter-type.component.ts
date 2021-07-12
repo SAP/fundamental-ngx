@@ -6,12 +6,8 @@ import { IconTabBarClass } from '../../icon-tab-bar.class';
     templateUrl: './icon-tab-bar-filter-type.component.html',
     styleUrls: ['./icon-tab-bar-filter-type.component.scss']
 })
-export class IconTabBarFilterTypeComponent extends IconTabBarClass implements OnInit {
+export class IconTabBarFilterTypeComponent extends IconTabBarClass {
 
     @Input()
     showTabAll = true;
-
-    ngOnInit(): void {
-    }
-
 }

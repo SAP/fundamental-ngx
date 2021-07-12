@@ -41,6 +41,6 @@
         [isRtl]="isRtl"
         [lastVisibleItemIndex]="lastVisibleTabIndex"
     >
-        <fd-icon-tab-bar-popover [items]="extraItems" (selected)="selectSubItem($event)"></fd-icon-tab-bar-popover>
+        <fd-icon-tab-bar-popover [items]="extraItems" (selectedExtraItem)="selectExtraItem($event)"></fd-icon-tab-bar-popover>
     </li>
 </ul>

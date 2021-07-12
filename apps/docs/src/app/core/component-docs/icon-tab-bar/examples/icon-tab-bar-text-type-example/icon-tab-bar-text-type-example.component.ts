@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IconTabBarItem } from '../../../../../../../../../libs/core/src/lib/icon-tab-bar/types';
 import { IconTabBarExampleClass } from '../icon-tab-bar-example.class';
 
@@ -7,4 +7,9 @@ import { IconTabBarExampleClass } from '../icon-tab-bar-example.class';
     templateUrl: './icon-tab-bar-text-type-example.component.html',
     styleUrls: ['./icon-tab-bar-text-type-example.component.scss']
 })
-export class IconTabBarTextTypeExampleComponent extends IconTabBarExampleClass {}
+export class IconTabBarTextTypeExampleComponent extends IconTabBarExampleClass implements OnInit {
+
+    ngOnInit(): void {
+        this.items = this.generateItems(true);
+    }
+}
