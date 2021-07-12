@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.78](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.77...v0.31.0-rc.78) (2021-07-12)
+
+
+### Bug Fixes
+
+* **core:** add box-sizing for correct tooltip size ([#5916](https://github.com/SAP/fundamental-ngx/issues/5916)) ([9ec6f3e](https://github.com/SAP/fundamental-ngx/commit/9ec6f3eb6ea9c1bc42a28ffae95cd5622c5db97e))
+
 ## [0.31.0-rc.77](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.76...v0.31.0-rc.77) (2021-07-10)
 
 
