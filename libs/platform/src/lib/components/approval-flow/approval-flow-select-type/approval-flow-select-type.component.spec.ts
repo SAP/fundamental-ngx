@@ -1,8 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DialogConfig, DialogRef, FdDatetimeModule } from '@fundamental-ngx/core';
-import { PlatformApprovalFlowModule } from '@fundamental-ngx/platform';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
+
+import { PlatformApprovalFlowModule } from '../approval-flow.module';
 import { ApprovalFlowSelectTypeComponent } from './approval-flow-select-type.component';
 
 describe('ApprovalFlowSelectTypeComponent', () => {

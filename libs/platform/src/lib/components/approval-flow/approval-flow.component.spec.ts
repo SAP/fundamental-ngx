@@ -2,17 +2,20 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RIGHT_ARROW } from '@angular/cdk/keycodes';
-
 import { Observable, of } from 'rxjs';
-import { DialogService, RtlService } from '@fundamental-ngx/core';
+
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 import {
     ApprovalDataSource,
+    ApprovalFlowComponent,
     ApprovalNode,
     ApprovalProcess,
-    PlatformApprovalFlowModule,
-    ApprovalFlowComponent,
-    ApprovalUser, ApprovalTeam
+    ApprovalTeam,
+    ApprovalUser,
+    PlatformApprovalFlowModule
 } from '@fundamental-ngx/platform';
+
 import { createKeyboardEvent } from '../../testing/event-objects';
 import { AddNodeDialogRefData, APPROVAL_FLOW_NODE_TYPES } from './approval-flow-add-node/approval-flow-add-node.component';
 
