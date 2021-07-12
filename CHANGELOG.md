@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.86](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.85...v0.31.0-rc.86) (2021-07-12)
+
+
+### Features
+
+* **platform:** approval flow phase 4 ([#5749](https://github.com/SAP/fundamental-ngx/issues/5749)) ([5dce07f](https://github.com/SAP/fundamental-ngx/commit/5dce07fe989f5b5de15455dd64f94d83ca0662ab))
+
 ## [0.31.0-rc.85](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.84...v0.31.0-rc.85) (2021-07-12)
 
 ## [0.31.0-rc.84](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.83...v0.31.0-rc.84) (2021-07-12)
