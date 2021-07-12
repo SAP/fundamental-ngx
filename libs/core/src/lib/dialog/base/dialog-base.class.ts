@@ -74,9 +74,6 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
     /** @hidden */
     ngOnInit(): void {
         this._listenAndCloseOnNavigation();
-
-        console.log(this._rtlService);
-
         this._subscriptions.add(
             this._rtlService?.rtl.subscribe(isRtl => {
                 this._dir = isRtl ? 'rtl' : 'ltr';
