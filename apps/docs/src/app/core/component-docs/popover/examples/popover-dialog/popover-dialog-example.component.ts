@@ -12,7 +12,8 @@ export class PopoverDialogExampleComponent {
         this._dialogService.open(template, {
             width: '500px',
             responsivePadding: true,
-            ariaLabelledBy: 'fd-dialog-popover-1'
+            ariaLabelledBy: 'fd-dialog-popover-1',
+            focusTrapped: false
         });
     }
 }

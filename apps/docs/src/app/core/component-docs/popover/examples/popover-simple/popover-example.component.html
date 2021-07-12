@@ -31,7 +31,7 @@
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length" style="min-width: 400px">
             <div fd-popover-body-header>
-                <div fd-bar [barDesign]="'header'">
+                <div fd-bar [barDesign]="'header'" tabindex="0">
                     <div fd-bar-left>
                         <fd-button-bar glyph="navigation-left-arrow" fdType="standard"></fd-button-bar>
                         <fd-bar-element>Header</fd-bar-element>
@@ -52,12 +52,12 @@
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length">
             <div fd-popover-body-header>
-                <div fd-bar [barDesign]="'header-with-subheader'" [cozy]="true">
+                <div fd-bar [barDesign]="'header-with-subheader'" [cozy]="true" tabindex="0">
                     <div fd-bar-left>
                         <fd-bar-element>Cozy Header</fd-bar-element>
                     </div>
                 </div>
-                <div fd-bar [barDesign]="'subheader'" [cozy]="true">
+                <div fd-bar [barDesign]="'subheader'" [cozy]="true" tabindex="0">
                     <div fd-bar-middle>
                         <fd-bar-element [fullWidth]="true"
                             >SubHeader Middle section with Full Width Element
