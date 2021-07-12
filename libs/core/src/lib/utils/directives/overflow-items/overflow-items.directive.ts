@@ -69,6 +69,10 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
             : containerWidth;
         for (let i = 0; i < arrItems.length; i++) {
             const item = arrItems[i];
+            const oldHiddenValue = item.hidden;
+            item.hidden = true;
+            item.style.display = 'flex';
+
 
             itemsTotalWidth += this.isRtl
                 ? containerWidth - item.offsetLeft - itemsTotalWidth
@@ -79,6 +83,8 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
                     ? arrItems.length - i
                     : this.checkWidthWithOffset(arrItems, containerWidth, true);
             }
+            item.hidden = oldHiddenValue;
+            item.style.removeProperty('font-family');
         }
         return 0;
     }

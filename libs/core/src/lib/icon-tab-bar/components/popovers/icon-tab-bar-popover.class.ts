@@ -11,8 +11,10 @@ export abstract class IconTabBarPopoverClass implements OnChanges {
     @Input()
     items: IconTabBarItem[];
 
-    @Output()
+    @Input()
+    isSeparators = false;
 
+    @Output()
     selectedExtraItem: EventEmitter<IconTabBarItem> = new EventEmitter<IconTabBarItem>();
 
     constructor(

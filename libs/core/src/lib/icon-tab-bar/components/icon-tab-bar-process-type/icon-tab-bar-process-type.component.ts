@@ -10,9 +10,9 @@ import { cloneDeep } from '../../../utils/functions/clone-deep';
 })
 export class IconTabBarProcessTypeComponent extends IconTabBarClass {
 
-    _nextSteps: IconTabBarItem[];
+    _nextSteps: IconTabBarItem[] = [];
 
-    _prevSteps: IconTabBarItem[];
+    _prevSteps: IconTabBarItem[] = [];
 
     firstVisibleTabIndex = 0;
     currentStepIndex = 0;
@@ -70,22 +70,25 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
             item.hidden = false;
             item.cssClasses = item.cssClasses.filter(cssClass => cssClass !== 'fd-icon-tab-bar__item--hidden')
         });
-        const amountOfPreviousSteps = this.items.length - 1 - this.currentStepIndex;
+        if (!extraItems) {
+            return;
+        }
+        const amountOfPreviousSteps = this.currentStepIndex - 1;
         const visibleAmountOfItems = this.items.length - extraItems;
         for (let i = amountOfPreviousSteps; i >= 0; i--) {
-            this._prevSteps.push(this.items[i]);
+            this._prevSteps.push(cloneDeep(this.items[i]));
             this.items[i].hidden = true;
             this.items[i].cssClasses.push('fd-icon-tab-bar__item--hidden');
         }
 
-        if (this._prevSteps.length >= extraItems) {
+        if ((this._prevSteps.length + visibleAmountOfItems) === this.items.length) {
             return;
         }
 
         let amountOfNextSteps = extraItems - this._prevSteps.length;
         let nextIndex = this._prevSteps.length - 1 + visibleAmountOfItems;
         while (amountOfNextSteps > 0) {
-            this._prevSteps.push(this.items[nextIndex]);
+            this._nextSteps.push(cloneDeep(this.items[nextIndex]));
             this.items[nextIndex].hidden = true;
             this.items[nextIndex].cssClasses.push('fd-icon-tab-bar__item--hidden');
 
@@ -95,5 +98,6 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
         this.firstVisibleTabIndex = this._prevSteps.length;
         this.lastVisibleTabIndex = this.items.length - 1 - this._nextSteps.length;
         // this._cd.detectChanges();
+        // console.log(this);
     }
 }

@@ -8,4 +8,8 @@ import { IconTabBarPopoverClass } from '../icon-tab-bar-popover.class';
     templateUrl: './icon-tab-bar-popover.component.html',
     styleUrls: ['./icon-tab-bar-popover.component.scss']
 })
-export class IconTabBarPopoverComponent extends IconTabBarPopoverClass {}
+export class IconTabBarPopoverComponent extends IconTabBarPopoverClass {
+
+    @Input()
+    leftSide = false;
+}

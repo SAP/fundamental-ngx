@@ -7,7 +7,14 @@
     [offset]='100'
     (changed)='onChangeSize($event)'
 >
-    <li *ngFor="let item of items"
+    <li
+        *ngIf="_prevSteps.length"
+        role="presentation"
+        class="fd-icon-tab-bar__item fd-icon-tab-bar__item--extra-btn"
+    >
+        <fd-icon-tab-bar-popover [items]="_prevSteps"></fd-icon-tab-bar-popover>
+    </li>
+    <li *ngFor="let item of items; let index = index"
         [ngClass]="item.cssClasses"
         class="fd-icon-tab-bar__item"
         role="presentation"
@@ -38,18 +45,18 @@
                 <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
             </ng-template>
         </a>
-        <span class="fd-icon-tab-bar__separator">
+        <span *ngIf="lastVisibleTabIndex !== index" class="fd-icon-tab-bar__separator">
             <i class="sap-icon--process" role="presentation"></i>
         </span>
     </li>
     <li
-        *ngIf="extraItems.length"
+        *ngIf="_nextSteps.length"
         role="presentation"
         class="fd-icon-tab-bar__item fd-icon-tab-bar__item--extra-btn"
         fdExtraButton
         [isRtl]="isRtl"
         [lastVisibleItemIndex]="lastVisibleTabIndex"
     >
-        <fd-icon-tab-bar-popover [items]="extraItems"></fd-icon-tab-bar-popover>
+        <fd-icon-tab-bar-popover [items]="_nextSteps" [isSeparators]="true"></fd-icon-tab-bar-popover>
     </li>
 </ul>
