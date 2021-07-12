@@ -21,7 +21,7 @@ import {
 } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { NotificationRef } from '../notification-utils/notification-ref';
-import { AbstractFdNgxClass } from '@fundamental-ngx/core/utils';
+import { AbstractFdNgxClass, RtlService } from '@fundamental-ngx/core/utils';
 import { NotificationConfig } from '../notification-utils/notification-config';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { ESCAPE } from '@angular/cdk/keycodes';
@@ -48,6 +48,12 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     /** @hidden */
     @ViewChild('vc', { read: ViewContainerRef })
     containerRef: ViewContainerRef;
+
+    /**
+     * @hidden
+     */
+     @HostBinding('attr.dir')
+     _dir: string;
 
     /** User defined width for the notification */
     @HostBinding('style.width')
@@ -90,7 +96,8 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         private cdRef: ChangeDetectorRef,
         private _router: Router,
         @Optional() private notificationConfig: NotificationConfig,
-        @Optional() private notificationRef: NotificationRef
+        @Optional() private notificationRef: NotificationRef,
+        @Optional() private _rtlService: RtlService
     ) {
         super(elRef);
         this._setNotificationConfig(notificationConfig);
@@ -98,6 +105,14 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
 
     /** @hidden */
     ngOnInit(): void {
+
+        this._subscriptions.add(
+            this._rtlService?.rtl.subscribe(isRtl => {
+                this._dir = isRtl ? 'rtl' : 'ltr';
+                this.cdRef.detectChanges();
+            })
+        );
+
         this._listenAndCloseOnNavigation();
         this._setProperties();
     }

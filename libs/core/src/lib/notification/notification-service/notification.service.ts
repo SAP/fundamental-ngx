@@ -1,9 +1,9 @@
-import { ComponentRef, Injectable, TemplateRef, Type } from '@angular/core';
+import { ComponentRef, Injectable, Optional, TemplateRef, Type } from '@angular/core';
 import { NotificationComponent } from '../notification/notification.component';
 import { NotificationContainer } from '../notification-utils/notification-container';
 import { NotificationConfig } from '../notification-utils/notification-config';
 import { NotificationRef } from '../notification-utils/notification-ref';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
 
 @Injectable()
 export class NotificationService {
@@ -13,7 +13,10 @@ export class NotificationService {
 
     public containerRef: ComponentRef<NotificationContainer>;
 
-    constructor(private dynamicComponentService: DynamicComponentService) {}
+    constructor(
+        private dynamicComponentService: DynamicComponentService,
+        @Optional() private _rtlService: RtlService
+        ) {}
 
     /**
      * Opens a notification component with a content of type TemplateRef or Component Type
@@ -47,7 +50,7 @@ export class NotificationService {
             content,
             NotificationComponent,
             notificationConfig,
-            { services: [notificationService, notificationConfig] }
+            { services: [notificationService, notificationConfig, this._rtlService] }
         );
 
         // Add To array
