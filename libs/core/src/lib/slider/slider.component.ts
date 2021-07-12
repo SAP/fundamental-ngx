@@ -20,6 +20,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import { Platform } from '@angular/cdk/platform';
 import { coerceNumberProperty, _isNumberValue } from '@angular/cdk/coercion';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
@@ -297,6 +298,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         private readonly _cdr: ChangeDetectorRef,
         private readonly _renderer: Renderer2,
         private readonly _platform: Platform,
+        private readonly _liveAnnouncer: LiveAnnouncer,
         @Optional() private readonly _rtlService: RtlService,
         @Optional() private _contentDensityService: ContentDensityService
     ) {}
@@ -345,16 +347,12 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden */
     get minValue(): string | number {
-        return this.customValues.length > 0
-            ? this.customValues[this.min as number].label
-            : this.min;
+        return this.customValues.length > 0 ? this.customValues[this.min as number].label : this.min;
     }
 
     /** @hidden */
     get maxValue(): string | number {
-        return this.customValues.length > 0
-            ? this.customValues[this.max as number].label
-            : this.max;
+        return this.customValues.length > 0 ? this.customValues[this.max as number].label : this.max;
     }
 
     @applyCssClass
@@ -628,18 +626,25 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden */
     private _constructRangeModelValue(): number[] | SliderTickMark[] {
+        let rangeLowerValue: number | string;
+        let rangeHigherValue: number | string;
         let rangeValue: number[] | SliderTickMark[] = [
             Math.min(this._handle1Value, this._handle2Value),
             Math.max(this._handle1Value, this._handle2Value)
         ];
+
+        rangeLowerValue = rangeValue[0];
+        rangeHigherValue = rangeValue[1];
 
         if (this.customValues.length > 0) {
             const min = this.customValues[rangeValue[0]] || this.customValues[0];
             const max = this.customValues[rangeValue[1]] || this.customValues[this.customValues.length - 1];
 
             rangeValue = [min, max];
+            rangeLowerValue = rangeValue[0].label;
+            rangeHigherValue = rangeValue[1].label;
         }
-
+        this._liveAnnouncer.announce('range value between ' + rangeLowerValue + ' and ' + rangeHigherValue, 'polite');
         return rangeValue;
     }
 
