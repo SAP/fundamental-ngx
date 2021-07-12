@@ -106,14 +106,14 @@
         role="slider"
         [attr.aria-label]="
             ariaLabel ||
-            'range slider handle 1 minimum value is ' + minValue + ', maximum value is ' + maxValue
+            'range slider minimum value is ' + minValue + ', maximum value is ' + maxValue
         "
         [attr.aria-labelledby]="ariaLabelledBy"
         [fdPopoverTrigger]="tooltipMode ? rangeSliderPopover1 : ''"
         [attr.aria-valuemin]="'value is ' + minValue"
         [attr.aria-valuemax]="'value is ' + maxValue"
-        [attr.aria-valuenow]="'current value is ' + getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1)"
-        [attr.aria-valuetext]="'current value is ' + getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1)"
+        [attr.aria-valuenow]="'handle 1 value is ' + getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1)"
+        [attr.aria-valuetext]="'handle 1 value is ' + getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1)"
         [attr.title]="getValuenow(_handle1Value, _sliderValueTargets.RANGE_SLIDER1)"
         fd-slider-position
         [position]="_handle1Position"
@@ -134,14 +134,14 @@
         role="slider"
         [attr.aria-label]="
             ariaLabel ||
-            'range slider handle 2 minimum value is ' + minValue + ', maximum value is ' + maxValue
+            'range slider minimum value is ' + minValue + ', maximum value is ' + maxValue
         "
         [attr.aria-labelledby]="ariaLabelledBy"
         [fdPopoverTrigger]="tooltipMode ? rangeSliderPopover2 : ''"
         [attr.aria-valuemin]="'value is ' + minValue"
         [attr.aria-valuemax]="'value is ' + maxValue"
-        [attr.aria-valuenow]="'current value is ' + getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2)"
-        [attr.aria-valuetext]="'current value is ' + getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2)"
+        [attr.aria-valuenow]="'handle 2 value is ' + getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2)"
+        [attr.aria-valuetext]="'handle 2 value is ' + getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2)"
         [attr.title]="getValuenow(_handle2Value, _sliderValueTargets.RANGE_SLIDER2)"
         fd-slider-position
         [position]="_handle2Position"
