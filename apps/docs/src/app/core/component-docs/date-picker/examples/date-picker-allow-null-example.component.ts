@@ -29,6 +29,6 @@ export class DatePickerAllowNullExampleComponent {
     date = FdDate.getNow();
 
     isInvalid(): boolean {
-        return !this.datePicker || !this.datePicker.isModelValid();
+        return !this.date || !this.date.isDateValid();
     }
 }

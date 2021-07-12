@@ -25,3 +25,8 @@ export const MENU_MOBILE_CONFIG: MobileModeConfigToken = {
     target: MobileModeControl.MENU,
     config: {dialogConfig: MOBILE_DIALOG_PORTRAIT}
 };
+
+export const POPOVER_MOBILE_CONFIG: MobileModeConfigToken = {
+    target: MobileModeControl.POPOVER,
+    config: { dialogConfig: MOBILE_DIALOG_PORTRAIT },
+};

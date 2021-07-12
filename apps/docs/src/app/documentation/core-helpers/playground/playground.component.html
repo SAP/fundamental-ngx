@@ -10,8 +10,10 @@
             <schema
                 class="fd-playground__schema"
                 [schema]="schema"
+                [resettable]="resettable"
                 [initialValues]="schemaInitialValues"
                 (onSchemaValues)="onSchemaValueChanges($event)"
+                (onReset)="reset()"
             ></schema>
         </div>
     </div>

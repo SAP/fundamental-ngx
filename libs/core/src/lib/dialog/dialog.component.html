@@ -10,6 +10,7 @@
     [fdResizeBoundary]="elementRef()?.nativeElement"
     [class]="dialogConfig.dialogPanelClass"
     [ngClass]="{
+        'cdk-drag': dialogConfig.draggable,
         'fd-dialog__content': true,
         'fd-dialog__content--s': dialogPaddingSize === 'sm',
         'fd-dialog__content--m': dialogPaddingSize === 'md',

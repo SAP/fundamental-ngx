@@ -38,7 +38,7 @@
     Carousel can display multiple active item at a time as well. On left navigation button click, right most item hides
     and a new item is shown on left side. On right navigation button click, left most item hides and a new item is shown
     on right side. <code>visibleSlidesCount</code> property is used to set, how many item will be active at a time. Ex.
-    <code>visibleSlidesCount=3</code>.
+    <code>[visibleSlidesCount]="3"</code>.
 </description>
 <component-example>
     <fd-carousel-multiple-active-item-example></fd-carousel-multiple-active-item-example>
@@ -107,7 +107,7 @@
 <code-example [exampleFiles]="carouselLoopedNavigation"></code-example>
 
 <fd-docs-section-title id="carousel-error-message" componentName="carousel">
-    Carousel error message when no item is loaded
+    Carousel error message when no item is loaded. Use Message Page component to create the error message.
 </fd-docs-section-title>
 <description>
     Error message can be displayed as carousel content when loading item is not successful.

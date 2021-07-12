@@ -11,12 +11,24 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
-import { debounceTime, takeWhile } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
 
 import { FormGeneratorService } from '../form-generator.service';
 import { DynamicFormItem, DynamicFormValue } from '../interfaces/dynamic-form-item';
 import { DynamicFormControl } from '../dynamic-form-control';
+import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
+
+export interface SubmitFormEventResult {
+    /**
+     * @description Indicator if validation has been passed.
+     */
+    success: boolean;
+    /**
+     * @description Formatted form value.
+     */
+    value: DynamicFormValue
+};
 
 /**
  * @description Form Generator component represents a high-level component
@@ -73,10 +85,16 @@ export class FormGeneratorComponent implements OnDestroy {
 
     /**
      * @description Event which notifies parent component that the form has been successfuly validated
-     * and submitted.
+     * and submitted. Contains form
      */
     @Output()
     formSubmitted = new EventEmitter<DynamicFormValue>();
+
+    /**
+     * @description Event which notifies parent component that the form was submitted.
+     */
+    @Output()
+    formSubmittedStatus = new EventEmitter<SubmitFormEventResult>();
 
     /**
      * @description Represents the form instance. @see NgForm
@@ -86,7 +104,7 @@ export class FormGeneratorComponent implements OnDestroy {
     /**
      * @description Dynamically generated form. @see FormGeneratorService
      */
-    form: FormGroup;
+    form: DynamicFormGroup;
     /**
      * @description List of the form controls.
      */
@@ -105,17 +123,18 @@ export class FormGeneratorComponent implements OnDestroy {
     /**
      * @hidden
      */
-    private _allowSubscribe = true;
-
-    /**
-     * @hidden
-     */
     private _formItems: DynamicFormItem[];
 
     /**
      * @hidden
      */
     private _formValueSubscription: Subscription;
+
+    /**
+     * @hidden
+     * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
+     */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     constructor(
         private _fgService: FormGeneratorService,
@@ -127,7 +146,8 @@ export class FormGeneratorComponent implements OnDestroy {
      * @hidden
      */
     ngOnDestroy(): void {
-        this._allowSubscribe = false;
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /**
@@ -140,12 +160,14 @@ export class FormGeneratorComponent implements OnDestroy {
 
         // stop here if form is invalid
         if (this.form.invalid || this.form.pending) {
+            this.formSubmittedStatus.emit({success: false, value: null});
             return;
         }
 
         const formValue = await this._fgService.getFormValue(this.form);
 
         this.formSubmitted.emit(formValue);
+        this.formSubmittedStatus.emit({success: true, value: formValue});
 
         this.form.markAsPristine();
     }
@@ -180,12 +202,12 @@ export class FormGeneratorComponent implements OnDestroy {
 
         this.form = form;
 
-        this.formControlItems = Object.values(this.form.controls) as DynamicFormControl[];
+        this.formControlItems = Object.values(this.form.controls);
 
         this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
 
         this._formValueSubscription = this.form.valueChanges
-        .pipe(takeWhile(() => this._allowSubscribe), debounceTime(50))
+        .pipe(debounceTime(50), takeUntil(this._onDestroy$))
         .subscribe(async () => {
             this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
             this._cd.markForCheck();
