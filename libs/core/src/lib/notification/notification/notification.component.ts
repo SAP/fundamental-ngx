@@ -39,6 +39,7 @@ import { filter } from 'rxjs/operators';
     host: {
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
+        '[attr.dir]': '_dir',
         role: 'alertdialog',
         '[attr.id]': 'id'
     },
@@ -52,7 +53,6 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     /**
      * @hidden
      */
-     @HostBinding('attr.dir')
      _dir: string;
 
     /** User defined width for the notification */
@@ -109,7 +109,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
         this._subscriptions.add(
             this._rtlService?.rtl.subscribe(isRtl => {
                 this._dir = isRtl ? 'rtl' : 'ltr';
-                this.cdRef.detectChanges();
+                this.cdRef.markForCheck();
             })
         );
 
