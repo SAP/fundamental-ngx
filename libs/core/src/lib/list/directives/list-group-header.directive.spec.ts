@@ -39,6 +39,6 @@ describe('ListHeaderComponent', () => {
     });
 
     it('should assign class', () => {
-        expect(component.ref.nativeElement.className).toBe('fd-list__item fd-list__group-header');
+        expect(component.ref.nativeElement.className).toBe('fd-list__group-header');
     });
 });
