@@ -181,6 +181,30 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     @Input()
     disabled = false;
 
+    /**
+     * slider current value verbose string.
+     * This will be read only once by screen reader and upon slider value change,
+     * this string will not be read.
+     */
+    @Input()
+    singleSliderCurrentValuePrefix = 'Current value is ';
+
+    /**
+     * @hidden range slider handle 1 current value supporting string
+     * This will be read only once by screen reader and upon slider value change,
+     * this string will not be read.
+     */
+    @Input()
+    rangeSliderHandle1CurrentValuePrefix = 'handle 1 value is ';
+
+    /**
+     * @hidden range slider handle 2 current value supporting string
+     * This will be read only once by screen reader and upon slider value change,
+     * this string will not be read.
+     */
+    @Input()
+    rangeSliderHandle2CurrentValuePrefix = 'handle 2 value is ';
+
     _position: number | number[] = 0;
 
     /** Control value */
@@ -267,6 +291,21 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden */
     _isRtl = false;
+
+    /**
+     * @hidden slider current value supporting string.
+     */
+    _singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
+
+    /**
+     * @hidden range slider handle 1 current value supporting string
+     */
+    _rangeSliderHandle1CurrentValuePrefix = this.rangeSliderHandle1CurrentValuePrefix;
+
+    /**
+     * @hidden range slider handle 2 current value supporting string
+     */
+    _rangeSliderHandle2CurrentValuePrefix = this.rangeSliderHandle2CurrentValuePrefix;
 
     /** @hidden */
     private _min = 0;
@@ -564,6 +603,17 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         this._updatePopoversPosition();
     }
 
+    /** @hidden reset default prefix on leaving the slider */
+    onBlur(event: MouseEvent): void {
+        if (this._isRange) {
+            this._rangeSliderHandle2CurrentValuePrefix = this.rangeSliderHandle2CurrentValuePrefix;
+            this._rangeSliderHandle2CurrentValuePrefix = this.rangeSliderHandle2CurrentValuePrefix;
+        } else {
+            this._singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
+        }
+        this._cdr.markForCheck();
+    }
+
     /** @hidden */
     private _updatePopoversPosition(): void {
         this._cdr.detectChanges();
@@ -594,6 +644,14 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         if (newValue < this.min) {
             newValue = this.min;
         }
+
+        if (this._isRange) {
+            this._rangeSliderHandle1CurrentValuePrefix = '';
+            this._rangeSliderHandle2CurrentValuePrefix = '';
+        } else {
+            this._singleSliderCurrentValuePrefix = '';
+        }
+        this._cdr.markForCheck();
 
         const stepDiffArray = this._valuesBySteps
             .map((stepValue) => ({ diff: Math.abs(stepValue - newValue), value: stepValue }))
