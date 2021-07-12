@@ -122,13 +122,13 @@ describe('CalendarDayViewComponent', () => {
     it('should properly rearrange days when different startingDayOfWeek is used', () => {
         component.startingDayOfWeek = 1;
         component.ngOnInit();
-        expect(component.shortWeekDays).toEqual(['S', 'M', 'T', 'W', 'T', 'F', 'S']);
+        expect(component.shortWeekDays).toEqual(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']);
         component.startingDayOfWeek = 2;
         component.ngOnInit();
-        expect(component.shortWeekDays).toEqual(['M', 'T', 'W', 'T', 'F', 'S', 'S']);
+        expect(component.shortWeekDays).toEqual(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']);
         component.startingDayOfWeek = 3;
         component.ngOnInit();
-        expect(component.shortWeekDays).toEqual(['T', 'W', 'T', 'F', 'S', 'S', 'M']);
+        expect(component.shortWeekDays).toEqual(['Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', 'Mon']);
     });
 
     it('should generate proper week count on january 2010', () => {
