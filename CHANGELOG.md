@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.87](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.86...v0.31.0-rc.87) (2021-07-12)
+
+
+### Bug Fixes
+
+* **core:** display dropdown button for mobile combobox ([#5939](https://github.com/SAP/fundamental-ngx/issues/5939)) ([7237bc3](https://github.com/SAP/fundamental-ngx/commit/7237bc360e3fc535d1bd49b2a99b35898151b629))
+
 ## [0.31.0-rc.86](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.85...v0.31.0-rc.86) (2021-07-12)
 
 
