@@ -20,13 +20,15 @@ import {
 } from '@angular/core';
 
 import { Overlay, OverlayConfig, ConnectedPosition, OverlayRef } from '@angular/cdk/overlay';
-
-import { PopoverComponent } from '@fundamental-ngx/core';
+import { FocusKeyManager, FocusableOption, LiveAnnouncer } from '@angular/cdk/a11y';
+import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW, DOWN_ARROW, ESCAPE } from '@angular/cdk/keycodes';
+import { TemplatePortal } from '@angular/cdk/portal';
 import { Observable, isObservable, of, Subscription, fromEvent, Subject } from 'rxjs';
 import { map, filter, take, takeUntil, tap } from 'rxjs/operators';
-import { TemplatePortal } from '@angular/cdk/portal';
-import { FocusKeyManager, FocusableOption, LiveAnnouncer } from '@angular/cdk/a11y';
-import { RtlService } from '@fundamental-ngx/core';
+
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
+
 import { SearchFieldDataSource } from '../../domain/public_api';
 import { BaseComponent } from '../base';
 
@@ -281,23 +283,17 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this._onDestroy$.next();
     }
 
-    onKeydown($event: KeyboardEvent): void {
-        if (!$event) {
+    onKeydown(event: KeyboardEvent): void {
+        if (!event) {
             return;
         }
-        const code = $event.key;
-        switch (code) {
-            case 'Down':
-            case 'ArrowDown':
-            case 'Up':
-            case 'ArrowUp':
-                if (this._suggestionkeyManager) {
-                    this._suggestionkeyManager.onKeydown($event);
-                }
-                break;
-            case 'Escape':
-                this.closeSuggestionMenu(true);
-                break;
+
+        if (KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW])) {
+            if (this._suggestionkeyManager) {
+                this._suggestionkeyManager.onKeydown(event);
+            }
+        } else if (KeyUtil.isKeyCode(event, [ESCAPE])) {
+            this.closeSuggestionMenu(true);
         }
     }
 
@@ -305,18 +301,16 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * Capturing value change in input text field of combobox.
      * @hidden
      */
-    onValueChange($event: string): void {
+    onValueChange(event: string): void {
         // when search result not changed but input text is changed.
         // again need to announce the result, so clear this message.
-        setTimeout(() => {
-            this._currentSearchSuggestionAnnoucementMessage = '';
-        });
+        setTimeout(() => (this._currentSearchSuggestionAnnoucementMessage = ''));
 
         this.inputChange.emit({
-            text: $event,
+            text: event,
             category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
         });
-        const inputStr: string = $event.trim();
+        const inputStr: string = event.trim();
         if (inputStr.length === 0) {
             this.closeSuggestionMenu();
             return;
@@ -338,10 +332,10 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * Capturing item selection from dropdown menu of combobox.
      * @hidden
      */
-    onItemClick($event: string): void {
-        this.inputText = $event;
+    onItemClick(event: string): void {
+        this.inputText = event;
         const searchInput: SearchInput = {
-            text: $event,
+            text: event,
             category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
         };
         this.inputChange.emit(searchInput);
@@ -491,6 +485,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
                 count++;
             }
         });
+
         return count;
     }
 
