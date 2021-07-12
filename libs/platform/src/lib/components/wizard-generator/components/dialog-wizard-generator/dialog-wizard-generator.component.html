@@ -1,0 +1,62 @@
+<fd-dialog>
+    <fd-dialog-header>
+        <h2 fd-title [headerSize]="title.size">{{ title.text }}</h2>
+    </fd-dialog-header>
+    <fd-dialog-body>
+        <fdp-wizard-body [responsivePaddings]="responsivePaddings" [navigationButtonLabels]="navigationButtonLabels" [hidden]="!_wizardCreated" (statusChange)="stepStatusChanged($event.id, $event.status)" [appendToWizard]="appendToWizard" [contentHeight]="contentHeight"></fdp-wizard-body>
+        <div fd-bar barDesign="floating-footer" [class.fd-bar--responsive-paddings]="responsivePaddings" *ngIf="_wizardCreated">
+            <div fd-bar-right>
+                <ng-container *ngIf="!isFirstStep">
+                    <ng-template #defaultGoBackButtonTemplate>
+                        <fdp-button class="fd-bar__element" [contentDensity]="navigationButtonLabels.goBack.contentDensity" [buttonType]="navigationButtonLabels.goBack.type" [label]="navigationButtonLabels.goBack.label" (click)="goBack()"></fdp-button>
+                    </ng-template>
+                    <ng-template [ngTemplateOutlet]="goBackButtonTemplate || defaultGoBackButtonTemplate" [ngTemplateOutletContext]="{ goBack: _goBackFn }"></ng-template>
+                </ng-container>
+                <ng-container *ngIf="!isLastStep">
+                    <ng-template #defaultGoNextButtonTemplate>
+                        <fdp-button class="fd-bar__element" [contentDensity]="navigationButtonLabels.goNext.contentDensity" [buttonType]="navigationButtonLabels.goNext.type" [label]="navigationButtonLabels.goNext.label" (click)="goNext()"></fdp-button>
+                    </ng-template>
+                    <ng-template [ngTemplateOutlet]="goNextButtonTemplate || defaultGoNextButtonTemplate" [ngTemplateOutletContext]="{ goNext: _goNextFn }"></ng-template>
+                </ng-container>
+                <ng-container *ngIf="addSummary && isSummaryStep || !addSummary && isLastStep">
+                    <ng-template #defaultFinishButtonTemplate>
+                        <fdp-button class="fd-bar__element" [contentDensity]="navigationButtonLabels.finish.contentDensity" [buttonType]="navigationButtonLabels.finish.type" [label]="navigationButtonLabels.finish.label" (click)="finish()"></fdp-button>
+                    </ng-template>
+                    <ng-template [ngTemplateOutlet]="finishButtonTemplate || defaultFinishButtonTemplate" [ngTemplateOutletContext]="{ finish: _finishFn }"></ng-template>
+                </ng-container>
+                <ng-container>
+                    <ng-template #defaultCancelButtonTemplate>
+                        <fdp-button class="fd-bar__element" [contentDensity]="navigationButtonLabels.cancel.contentDensity" [buttonType]="navigationButtonLabels.cancel.type" [label]="navigationButtonLabels.cancel.label" (click)="cancel()"></fdp-button>
+                    </ng-template>
+                    <ng-template [ngTemplateOutlet]="cancelButtonTemplate || defaultCancelButtonTemplate" [ngTemplateOutletContext]="{ cancel: _cancelFn }"></ng-template>
+                </ng-container>
+            </div>
+        </div>
+    </fd-dialog-body>
+</fd-dialog>
+
+<ng-template let-dialog let-dialogConfig="dialogConfig" #defaultConfirmationDialogTemplate>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <button fd-dialog-close-button (click)="dialog.dismiss()"></button>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            {{ confirmationDialogText }}
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-button-bar
+                    fdType="emphasized"
+                    [label]="confirmationDialogCloseText"
+                    type="submit"
+                    (click)="dialog.close(true)">
+            </fd-button-bar>
+            <fd-button-bar
+                    fd-initial-focus
+                    [label]="confirmationDialogCancelText"
+                    (click)="dialog.dismiss()">
+            </fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>

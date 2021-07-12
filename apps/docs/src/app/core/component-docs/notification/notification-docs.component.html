@@ -1,4 +1,6 @@
-<h2>Notification</h2>
+<fd-docs-section-title id="notification-standard" componentName="notification">
+    Notification
+</fd-docs-section-title>
 <description>
     Notification Component can be used with a lot of different types and sizes. Also there is example of container
     usage. It is possible to provide container reference, where should the notification belong. By default it is a
@@ -12,13 +14,15 @@
 
 <separator></separator>
 
-<h2>Template as Content</h2>
+<fd-docs-section-title id="notification-template-content" componentName="notification">
+    Template as Content
+</fd-docs-section-title>
 <description>
     The NotificationService allows passing in a template reference as the content of the notification. Add
     <code>let-notification</code> to the template element to access the injected <code>NotificationRef</code>.
     <br /><br />
     The example also features a confirmation notification. Subscribe to <code>afterClosed</code> to access the returned
-    value. A dismissal will trigger an error on the observable, similar to rejecting a promise. The example notification is dismissed after 4 seconds. 
+    value. A dismissal will trigger an error on the observable, similar to rejecting a promise. The example notification is dismissed after 4 seconds.
 </description>
 <component-example>
     <fd-notification-open-template-example></fd-notification-open-template-example>
@@ -27,7 +31,9 @@
 
 <separator></separator>
 
-<h2>Component as Content</h2>
+<fd-docs-section-title id="notification-component-content" componentName="notification">
+    Component as Content
+</fd-docs-section-title>
 <description>
     A component type can be passed to the NotificationService open method as the content of the notification. Inject
     <code>NotificationRef</code> inside the content component to access methods such as close and dismiss.
@@ -38,9 +44,9 @@
 <code-example [exampleFiles]="componentAsContent"></code-example>
 
 <separator></separator>
-<h2>
+<fd-docs-section-title id="notification-group" componentName="notification">
     Notification Group
-</h2>
+</fd-docs-section-title>
 <description>
     Items are added to a list based on internal events within apps or systems. The list can display various types of notifications, which can differ in terms of appearance, content, and functionality. The list can be ordered by Date (the most recent notification appears first), by Type (notifications appear as grouped notifications ordered from A-Z) and by Priority (from highest to lowest priority).
 </description>

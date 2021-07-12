@@ -3,6 +3,7 @@ import {
     ChangeDetectorRef,
     Directive,
     ElementRef,
+    HostBinding,
     HostListener,
     OnDestroy,
     OnInit
@@ -17,10 +18,16 @@ import { createFocusTrap, FocusTrap } from 'focus-trap';
 import { DialogConfigBase } from './dialog-config-base.class';
 import { DialogRefBase } from './dialog-ref-base.class';
 import { DialogSize, dialogWidthToSize } from '../utils/dialog-width-to-size';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 
 @Directive()
 export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
+
+    /**
+     * @hidden
+     */
+    @HostBinding('attr.dir')
+    _dir: string;
 
     /** @hidden Reference to dialog window element*/
     abstract dialogWindow: ElementRef;
@@ -60,12 +67,22 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
     constructor(
         protected _router: Router,
         protected _elementRef: ElementRef,
-        protected _changeDetectorRef: ChangeDetectorRef
+        protected _changeDetectorRef: ChangeDetectorRef,
+        protected _rtlService: RtlService
     ) {}
 
     /** @hidden */
     ngOnInit(): void {
         this._listenAndCloseOnNavigation();
+
+        console.log(this._rtlService);
+
+        this._subscriptions.add(
+            this._rtlService?.rtl.subscribe(isRtl => {
+                this._dir = isRtl ? 'rtl' : 'ltr';
+                this._changeDetectorRef.detectChanges();
+            })
+        );
     }
 
     /** @hidden */
