@@ -189,6 +189,7 @@ describe('SliderComponent', () => {
     it('range slider second handle should have the ability to be less than the first handle', async () => {
         const slider = sliders[3];
         const event = { target: slider.rangeHandle2.nativeElement } as any;
+        const valueOfFirstHandleBeforeMoving = slider.value[0];
 
         slider.onHandleClick(event);
 
@@ -197,7 +198,7 @@ describe('SliderComponent', () => {
 
         await whenStable(fixture);
 
-        expect(component.value4).toEqual([10, 20]);
+        expect(slider.value[1]).toEqual(valueOfFirstHandleBeforeMoving);
     });
 
     it('should contain is-disabled class', () => {
