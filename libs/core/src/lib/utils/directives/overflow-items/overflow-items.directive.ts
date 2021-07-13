@@ -57,8 +57,11 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
     private calculateAmountOfOverflowedItems(): void {
         const items = this._el.nativeElement.querySelectorAll(this.itemSelector);
         const arrItems = [...items];
-        const containerWidth = this._el.nativeElement.offsetWidth;
-        const extra = this.checkWidthWithOffset(arrItems, containerWidth);
+        const computed = getComputedStyle(this._el.nativeElement);
+        const contentWidth = this._el.nativeElement.clientWidth
+            - parseFloat(computed.paddingLeft)
+            - parseFloat(computed.paddingRight);
+        const extra = this.checkWidthWithOffset(arrItems, contentWidth);
         this.changed.emit(extra);
     }
 
@@ -67,26 +70,37 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
         const parentWidth = checkWithOffset
             ? containerWidth - this.offset
             : containerWidth;
-        for (let i = 0; i < arrItems.length; i++) {
-            const item = arrItems[i];
-            const oldHiddenValue = item.hidden;
+
+        arrItems.forEach(item => {
             item.hidden = true;
             item.style.display = 'flex';
+        });
 
+        for (let i = 0; i < arrItems.length; i++) {
+            const item = arrItems[i];
 
             itemsTotalWidth += this.isRtl
                 ? containerWidth - item.offsetLeft - itemsTotalWidth
                 : item.offsetWidth + item.offsetLeft - itemsTotalWidth;
 
+
             if (parentWidth < itemsTotalWidth) {
+                this._clearTempStyles(arrItems);
                 return checkWithOffset
                     ? arrItems.length - i
                     : this.checkWidthWithOffset(arrItems, containerWidth, true);
             }
-            item.hidden = oldHiddenValue;
-            item.style.removeProperty('font-family');
         }
+
+        this._clearTempStyles(arrItems);
         return 0;
+    }
+
+    private _clearTempStyles(arrItems: HTMLElement[]): void {
+        arrItems.forEach(item => {
+            item.hidden = false;
+            item.style.removeProperty('display');
+        });
     }
 
     ngOnDestroy(): void {

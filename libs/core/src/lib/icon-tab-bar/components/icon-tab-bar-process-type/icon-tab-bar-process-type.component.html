@@ -1,18 +1,19 @@
 <ul
     class="fd-icon-tab-bar__header"
     role="tablist"
+    [class.fd-icon-tab-bar__header--left-padding]="_prevSteps.length"
     fdOverflowItems
     [isRtl]="isRtl"
     itemSelector='[data-overflowItem]'
-    [offset]='100'
+    [offset]='offsetForOverflowDirective'
     (changed)='onChangeSize($event)'
 >
     <li
         *ngIf="_prevSteps.length"
         role="presentation"
-        class="fd-icon-tab-bar__item fd-icon-tab-bar__item--extra-btn"
+        class="fd-icon-tab-bar__item  fd-icon-tab-bar__item--prev-steps"
     >
-        <fd-icon-tab-bar-popover [items]="_prevSteps"></fd-icon-tab-bar-popover>
+        <fd-icon-tab-bar-popover [items]="_prevSteps" [label]="_prevSteps.length.toString()"></fd-icon-tab-bar-popover>
     </li>
     <li *ngFor="let item of items; let index = index"
         [ngClass]="item.cssClasses"
@@ -55,8 +56,9 @@
         class="fd-icon-tab-bar__item fd-icon-tab-bar__item--extra-btn"
         fdExtraButton
         [isRtl]="isRtl"
-        [lastVisibleItemIndex]="lastVisibleTabIndex"
+        [offset]="16"
+        [anchorIndexInsideParent]="ancorIndex"
     >
-        <fd-icon-tab-bar-popover [items]="_nextSteps" [isSeparators]="true"></fd-icon-tab-bar-popover>
+        <fd-icon-tab-bar-popover [items]="_nextSteps" [isSeparators]="true" [label]="_nextSteps.length.toString()"></fd-icon-tab-bar-popover>
     </li>
 </ul>

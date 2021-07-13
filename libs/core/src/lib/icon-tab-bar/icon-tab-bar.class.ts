@@ -16,7 +16,8 @@ export abstract class IconTabBarClass implements OnInit {
 
     selectedItemId: number;
     extraItems: IconTabBarItem[] = [];
-    lastVisibleTabIndex = 0;
+    lastVisibleTabIndex: number;
+    ancorIndex: number;
 
     constructor(
         protected _cd: ChangeDetectorRef,
@@ -25,6 +26,7 @@ export abstract class IconTabBarClass implements OnInit {
     ngOnInit(): void {
         const selectedItem = this.items.find(item => item.active);
         this.selectedItemId = selectedItem?.id;
+        this.lastVisibleTabIndex = this.items.length - 1
     }
 
     selectItem(selectedItem: IconTabBarItem): void {

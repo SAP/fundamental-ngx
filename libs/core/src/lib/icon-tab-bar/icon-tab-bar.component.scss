@@ -7,6 +7,10 @@
   &__header {
     position: relative;
     overflow-x: hidden;;
+
+    &--left-padding {
+      padding-left: 68px;
+    }
   }
 
   &__item--hidden {
@@ -18,6 +22,18 @@
     top: 50%;
     transform: translateY(-50%);
     margin: 0!important;
+  }
+
+  &__item--prev-steps {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0!important;
+  }
+
+  &__separator {
+    width: 2rem;
   }
 }
 

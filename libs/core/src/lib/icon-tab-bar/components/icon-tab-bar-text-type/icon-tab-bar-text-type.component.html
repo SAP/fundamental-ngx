@@ -42,7 +42,7 @@
         class="fd-icon-tab-bar__item fd-icon-tab-bar__item--extra-btn"
         fdExtraButton
         [isRtl]="isRtl"
-        [lastVisibleItemIndex]='lastVisibleTabIndex'
+        [anchorIndexInsideParent]="lastVisibleTabIndex"
     >
         <fd-text-type-popover
             [items]="extraItems"

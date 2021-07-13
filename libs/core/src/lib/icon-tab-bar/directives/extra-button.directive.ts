@@ -8,12 +8,15 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 export class ExtraButtonDirective implements OnChanges, AfterViewInit, OnDestroy {
 
     @Input()
-    lastVisibleItemIndex: number;
+    anchorIndexInsideParent: number;
 
     @Input()
     isRtl: boolean;
 
-    private unsubscribe$$ = new Subject();
+    @Input()
+    offset = 0;
+
+    private _onDestroy$ = new Subject();
 
     constructor(
         private _el: ElementRef,
@@ -31,18 +34,18 @@ export class ExtraButtonDirective implements OnChanges, AfterViewInit, OnDestroy
             .pipe(
                 debounceTime(50),
                 distinctUntilChanged(),
-                takeUntil(this.unsubscribe$$),
+                takeUntil(this._onDestroy$),
             )
-            .subscribe((_) => this._calculatePosition());
+            .subscribe((_ =>  this._calculatePosition()));
 
-        this._calculatePosition();
+        setTimeout(() => this._calculatePosition());
     }
 
     private _calculatePosition(): void {
         const nativeEl = this._el.nativeElement;
         const parent = nativeEl.parentElement;
 
-        const anchor = parent.children[this.lastVisibleItemIndex];
+        const anchor = parent.children[this.anchorIndexInsideParent];
         const computed = getComputedStyle(anchor);
 
         const myPosition = this.isRtl
@@ -54,14 +57,16 @@ export class ExtraButtonDirective implements OnChanges, AfterViewInit, OnDestroy
             : parseInt(computed.marginRight, 10);
 
         const myPositionWithOffset = this.isRtl
-            ? myPosition - margin
-            : myPosition + margin;
+            ? myPosition - margin - this.offset
+            : myPosition + margin + this.offset;
 
+
+        console.log('anchor', anchor);
         this._el.nativeElement.style.left = `${myPositionWithOffset}px`;
     }
 
     ngOnDestroy(): void {
-        this.unsubscribe$$.next();
-        this.unsubscribe$$.complete();
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 }

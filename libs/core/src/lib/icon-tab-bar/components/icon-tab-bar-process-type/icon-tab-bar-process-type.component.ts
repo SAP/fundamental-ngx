@@ -16,6 +16,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
 
     firstVisibleTabIndex = 0;
     currentStepIndex = 0;
+    offsetForOverflowDirective = 68;
 
     selectItem(selectedItem: IconTabBarItem): void {
         this.items.forEach((item, index) => {
@@ -42,14 +43,14 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
         deletedItem.id = selectedItem.id;
         const itemToPopover = cloneDeep(deletedItem);
         deletedItem.hidden = true;
-        deletedItem.cssClasses.push('fd-icon-tab-bar__item--hidden')
+        deletedItem.cssClasses.push('fd-icon-tab-bar__item--hidden');
 
         let indexInExtraItems;
         arrToMan.forEach((item, index) => {
             if (item.id === selectedItem.id) {
                 indexInExtraItems = index;
             }
-        })
+        });
 
         selectedItem.id = indexToDelete;
         selectedItem.hidden = false;
@@ -64,12 +65,13 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
     }
 
     onChangeSize(extraItems: number): void {
-        this._nextSteps = [];
-        this._prevSteps = [];
-        this.items.forEach(item => {
-            item.hidden = false;
-            item.cssClasses = item.cssClasses.filter(cssClass => cssClass !== 'fd-icon-tab-bar__item--hidden')
-        });
+        if (this._prevSteps.length) {
+            debugger;
+            // Убрать кнопку которая сюда попала.
+            extraItems = extraItems - 1;
+        }
+        console.log('extraItems', extraItems);
+        this.clearExtraList();
         if (!extraItems) {
             return;
         }
@@ -81,12 +83,16 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
             this.items[i].cssClasses.push('fd-icon-tab-bar__item--hidden');
         }
 
+        // this.offsetForOverflowDirective = this._prevSteps.length ? 132 : 68;
+
         if ((this._prevSteps.length + visibleAmountOfItems) === this.items.length) {
             return;
         }
 
         let amountOfNextSteps = extraItems - this._prevSteps.length;
-        let nextIndex = this._prevSteps.length - 1 + visibleAmountOfItems;
+        let nextIndex = this._prevSteps.length
+            ? this._prevSteps.length + visibleAmountOfItems
+            : visibleAmountOfItems;
         while (amountOfNextSteps > 0) {
             this._nextSteps.push(cloneDeep(this.items[nextIndex]));
             this.items[nextIndex].hidden = true;
@@ -96,8 +102,20 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
             --amountOfNextSteps;
         }
         this.firstVisibleTabIndex = this._prevSteps.length;
-        this.lastVisibleTabIndex = this.items.length - 1 - this._nextSteps.length;
+        this.lastVisibleTabIndex = this._prevSteps.length + visibleAmountOfItems - 1;
+        // Добавляю +1 для левой кнопки
+        this.ancorIndex = this._prevSteps.length
+            ? this._prevSteps.length + visibleAmountOfItems
+            : this._prevSteps.length + visibleAmountOfItems - 1;
         // this._cd.detectChanges();
-        // console.log(this);
+    }
+
+    private clearExtraList(): void {
+        this._nextSteps = [];
+        this._prevSteps = [];
+        this.items.forEach(item => {
+            item.hidden = false;
+            item.cssClasses = item.cssClasses.filter(cssClass => cssClass !== 'fd-icon-tab-bar__item--hidden');
+        });
     }
 }

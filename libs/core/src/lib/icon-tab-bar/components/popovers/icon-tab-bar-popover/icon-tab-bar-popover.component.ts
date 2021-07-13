@@ -12,4 +12,7 @@ export class IconTabBarPopoverComponent extends IconTabBarPopoverClass {
 
     @Input()
     leftSide = false;
+
+    @Input()
+    label = 'more';
 }
