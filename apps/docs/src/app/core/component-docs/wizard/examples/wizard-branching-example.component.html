@@ -10,7 +10,7 @@
             <!-- The Wizard -->
             <fd-wizard>
                 <fd-wizard-navigation>
-                    <ul fd-wizard-progress-bar>
+                    <ul fd-wizard-progress-bar size="xl">
                         <li
                             fd-wizard-step
                             [status]="step1status"
@@ -18,7 +18,7 @@
                             label="Step 1: One Line"
                         >
                             <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
-                            <fd-wizard-content>
+                            <fd-wizard-content size="xl">
                                 <div fd-form-item>
                                     <label fd-form-label for="address-1">Address Line 1</label>
                                     <input fd-form-control type="text" id="address-1" />
@@ -46,7 +46,7 @@
                             label="Step 2: Payment Selection"
                         >
                             <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
-                            <fd-wizard-content>
+                            <fd-wizard-content size="xl">
                                 Please select a payment type:
                                 <fd-radio-button
                                     value="bank"
@@ -88,7 +88,7 @@
                             "
                         >
                             <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
-                            <fd-wizard-content>
+                            <fd-wizard-content size="xl">
                                 <div fd-form-item>
                                     <label fd-form-label for="payment"
                                         >Enter your
