@@ -13,8 +13,11 @@ export class NotificationService {
 
     public containerRef: ComponentRef<NotificationContainer>;
 
+    /**
+     * @hidden
+     */
     constructor(
-        private dynamicComponentService: DynamicComponentService,
+        private _dynamicComponentService: DynamicComponentService,
         @Optional() private _rtlService: RtlService
         ) {}
 
@@ -34,7 +37,7 @@ export class NotificationService {
 
         // Create Container if it doesn't exist
         if (!this.containerRef) {
-            this.containerRef = this.dynamicComponentService.createDynamicComponent(
+            this.containerRef = this._dynamicComponentService.createDynamicComponent(
                 content,
                 NotificationContainer,
                 notificationConfig
@@ -46,7 +49,7 @@ export class NotificationService {
         let notificationComponentRef: ComponentRef<NotificationComponent>;
 
         // Create Notification Component
-        notificationComponentRef = this.dynamicComponentService.createDynamicComponent(
+        notificationComponentRef = this._dynamicComponentService.createDynamicComponent(
             content,
             NotificationComponent,
             notificationConfig,
@@ -87,7 +90,7 @@ export class NotificationService {
         const indexOf = this.notifications.indexOf(arrayRef);
 
         // Destroy Component
-        this.dynamicComponentService.destroyComponent(arrayRef.notificationComponent);
+        this._dynamicComponentService.destroyComponent(arrayRef.notificationComponent);
 
         // Remove it from Array
         this.notifications[indexOf] = null;
@@ -95,7 +98,7 @@ export class NotificationService {
 
         // If there is no other notification Components, just remove container.
         if (this.notifications.length === 0) {
-            this.dynamicComponentService.destroyComponent(this.containerRef);
+            this._dynamicComponentService.destroyComponent(this.containerRef);
             this.containerRef = null;
         }
     }
