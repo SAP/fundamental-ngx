@@ -8,4 +8,5 @@ export class MultiInputExampleComponent {
     selected = ['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry'];
     secondSelected = ['Pineapple'];
     thirdSelected = ['Kiwi'];
+    selectedDisabledAutoComplete = ['Kiwi'];
 }

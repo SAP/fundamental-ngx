@@ -1,6 +1,6 @@
 import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { BACKSPACE, CONTROL, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
+import { KeyUtil } from '../../functions/key-util';
 
 export interface AutoCompleteEvent {
     term: string;
