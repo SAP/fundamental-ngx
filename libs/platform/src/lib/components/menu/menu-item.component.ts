@@ -7,7 +7,8 @@ import {
     HostListener,
     ChangeDetectionStrategy,
     OnDestroy,
-    Input
+    Input,
+    ViewEncapsulation
 } from '@angular/core';
 import { FocusableOption } from '@angular/cdk/a11y';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
@@ -19,7 +20,8 @@ import { KeyUtil } from '@fundamental-ngx/core/utils';
     selector: 'fdp-menu-item',
     templateUrl: './menu-item.component.html',
     styleUrls: ['./menu-item.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class MenuItemComponent implements OnDestroy, FocusableOption {
     @Input() cascadeDirection: 'right' | 'left' = 'right';
@@ -40,16 +42,6 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
 
     /** Sets whether this item is a trigger for sub-menu. */
     @HostBinding('class.trigger') isTrigger = false;
-
-    /** @hidden set CSS class 'cascades-right' if cascadeDirection='right'. */
-    @HostBinding('class.cascades-right') get cascadesRight(): boolean {
-        return this.cascadeDirection === 'right';
-    }
-
-    /** @hidden set CSS class 'cascades-left' if cascadeDirection='left'. */
-    @HostBinding('class.cascades-left') get cascadesLeft(): boolean {
-        return this.cascadeDirection === 'left';
-    }
 
     /** @hidden set CSS class 'is-selected' if menu-item opens a sub-menu. */
     @HostBinding('class.is-selected')
