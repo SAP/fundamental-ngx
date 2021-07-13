@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.90](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.89...v0.31.0-rc.90) (2021-07-13)
+
+
+### Bug Fixes
+
+* **core,docs:** add local rtl service for notification component ([#5937](https://github.com/SAP/fundamental-ngx/issues/5937)) ([640e5c9](https://github.com/SAP/fundamental-ngx/commit/640e5c941c9f3984c883171166ed4e5fa58995d3))
+
 ## [0.31.0-rc.89](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.88...v0.31.0-rc.89) (2021-07-13)
 
 ## [0.31.0-rc.88](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.87...v0.31.0-rc.88) (2021-07-13)
