@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    HostListener,
     Inject,
     OnDestroy,
     OnInit,
@@ -11,9 +12,11 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { DialogService } from '@fundamental-ngx/core/dialog';
+import { ESCAPE } from '@angular/cdk/keycodes';
 import { takeUntil } from 'rxjs/operators';
-import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.interface';
+
+import { DialogService } from '@fundamental-ngx/core/dialog';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import {
     MOBILE_MODE_CONFIG,
     MobileModeBase,
@@ -21,6 +24,7 @@ import {
     MobileModeConfigToken
 } from '@fundamental-ngx/core/mobile-mode';
 
+import { MULTI_INPUT_COMPONENT, MultiInputInterface } from '../multi-input.interface';
 
 @Component({
     selector: 'fd-multi-input-mobile',
@@ -67,9 +71,18 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
         this.dialogRef.hide(true);
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this.dialogRef.close();
         super.onDestroy();
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    keydownHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, [ESCAPE])) {
+            this.handleDismiss();
+        }
     }
 
     /** Throw select all event, it's handled by multi input component */

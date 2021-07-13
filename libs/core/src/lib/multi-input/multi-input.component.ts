@@ -20,24 +20,27 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DOWN_ARROW, TAB, SPACE, ENTER } from '@angular/cdk/keycodes';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Subscription } from 'rxjs';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { FormStates, PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { TokenizerComponent } from '@fundamental-ngx/core/token';
-import { ListComponent } from '@fundamental-ngx/core/list';
+
 import {
+    applyCssClass,
     ContentDensityService,
     CssClassBuilder,
     DynamicComponentService,
-    RtlService,
-    applyCssClass,
     FocusEscapeDirection,
     KeyUtil,
     FocusTrapService,
-    uuidv4
+    uuidv4,
+    RtlService
 } from '@fundamental-ngx/core/utils';
+import { ListComponent } from '@fundamental-ngx/core/list';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { FormStates, PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { TokenizerComponent } from '@fundamental-ngx/core/token';
+
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 
@@ -67,15 +70,9 @@ let inputRandomId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MultiInputComponent implements
-    MultiInputInterface,
-    ControlValueAccessor,
-    CssClassBuilder,
-    OnInit,
-    OnChanges,
-    AfterViewInit,
-    OnDestroy {
-
+export class MultiInputComponent
+    implements MultiInputInterface, ControlValueAccessor, CssClassBuilder, OnInit, OnChanges, AfterViewInit, OnDestroy
+{
     /** Placeholder for the input field. */
     @Input()
     placeholder = '';
@@ -225,13 +222,15 @@ export class MultiInputComponent implements
     /**
      * Message announced by screen reader, when search suggestions opens.
      */
-    @Input() searchSuggestionMessage = 'suggestions found';
+    @Input()
+    searchSuggestionMessage = 'suggestion found';
 
     /**
      * Second part of message for search suggestion.
      * direction for navigating the suggestion. This is not necessry in case of 0 suggestion.
      */
-    @Input() searchSuggestionNavigateMessage = 'use up and down arrows to navigate';
+    @Input()
+    searchSuggestionNavigateMessage = 'use up and down arrows to navigate';
 
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
@@ -289,38 +288,39 @@ export class MultiInputComponent implements
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    onChange: Function = () => {
-    };
+    onChange: Function = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {
-    };
+    onTouched: Function = () => {};
 
     /** @hidden */
     constructor(
         private _elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
         private _dynamicComponentService: DynamicComponentService,
+        private _liveAnnouncer: LiveAnnouncer,
         @Optional() private _rtlService: RtlService,
         @Optional() private _contentDensityService: ContentDensityService,
         @Optional() private _focusTrapService: FocusTrapService
-    ) { }
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this.buildComponentCssClass();
-                this._changeDetRef.markForCheck();
-            }))
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this.buildComponentCssClass();
+                    this._changeDetRef.markForCheck();
+                })
+            );
         }
         this.buildComponentCssClass();
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
         }
         this._subscriptions.add(
-            this._rtlService?.rtl.subscribe(isRtl => {
+            this._rtlService?.rtl.subscribe((isRtl) => {
                 this._dir = isRtl ? 'rtl' : 'ltr';
                 this.buildComponentCssClass();
             })
@@ -367,11 +367,7 @@ export class MultiInputComponent implements
                 icon.style.transform = 'scaleX(-1)';
             }
         }
-        return [
-            'fd-multi-input',
-            'fd-multi-input-custom',
-            this.class
-        ];
+        return ['fd-multi-input', 'fd-multi-input-custom', this.class];
     }
 
     elementRef(): ElementRef<any> {
@@ -417,7 +413,7 @@ export class MultiInputComponent implements
     /** @hidden */
     openChangeHandle(open: boolean): void {
         if (this.disabled) {
-            return ;
+            return;
         }
 
         if (!open && this.open && !this.mobile) {
@@ -562,7 +558,7 @@ export class MultiInputComponent implements
     _moreClicked(): void {
         this.openChangeHandle(true);
         const newDisplayedValues: any[] = [];
-        this.displayedValues.forEach(value => {
+        this.displayedValues.forEach((value) => {
             if (this.selected.indexOf(value) !== -1) {
                 newDisplayedValues.push(value);
             }
@@ -586,7 +582,8 @@ export class MultiInputComponent implements
             this.displayedValues?.length +
             ' ' +
             this.searchSuggestionMessage +
-            (this.displayedValues?.length > 0 ? ',' + this.searchSuggestionNavigateMessage : '');
+            (this.displayedValues?.length > 0 && !this.mobile ? ',' + this.searchSuggestionNavigateMessage : '');
+        this._liveAnnouncer.announce(this.currentSearchSuggestionAnnoucementMessage, 'polite');
     }
 
     disableParentFocusTrap(): void {
@@ -613,7 +610,7 @@ export class MultiInputComponent implements
             if (item) {
                 const term = this.displayFn(item).toLocaleLowerCase();
                 let retVal;
-                this.includes ? retVal = term.includes(searchLower) : retVal = term.startsWith(searchLower);
+                this.includes ? (retVal = term.includes(searchLower)) : (retVal = term.startsWith(searchLower));
                 return retVal;
             }
         });
@@ -652,8 +649,10 @@ export class MultiInputComponent implements
 
     /** @hidden */
     private _shouldPopoverBeUpdated(previousLength: number, currentLength: number): boolean {
-        return !!this.popoverRef && ((previousLength === 0 && currentLength === 1) ||
-            (previousLength === 1 && currentLength === 0));
+        return (
+            !!this.popoverRef &&
+            ((previousLength === 0 && currentLength === 1) || (previousLength === 1 && currentLength === 0))
+        );
     }
 
     /** @hidden */
