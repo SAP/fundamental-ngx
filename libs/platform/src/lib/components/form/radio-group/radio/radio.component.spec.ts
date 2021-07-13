@@ -44,7 +44,7 @@ class TestRadioButtonComponent {
     @ViewChild('radio2') radioButton2: RadioButtonComponent;
     @ViewChild('radio3') radioButton3: RadioButtonComponent;
 }
-fdescribe('RadioButtonComponent', () => {
+describe('RadioButtonComponent', () => {
     let component: TestRadioButtonComponent;
     let fixture: ComponentFixture<TestRadioButtonComponent>;
 
