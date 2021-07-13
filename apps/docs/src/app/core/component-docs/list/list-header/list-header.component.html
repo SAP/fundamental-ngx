@@ -32,13 +32,12 @@
             You want to manage complex datasets that need to be extensively sorted, grouped, filtered, or edited.
             Instead, use the <a routerLink="/core/table">Table</a>.
         </li>
-<!--         TODO Uncomment after Tree Component implementation-->
-<!--        <li>-->
-<!--            You work with complex hierarchies. In this case, use <a routerLink="/core/tree">Tree Component</a>.-->
-<!--        </li>-->
+        <li>
+            You work with complex hierarchies. In this case, use <a routerLink="/core/tree">Tree Component</a>.
+        </li>
     </ul>
 </description>
-<import module="ListModule"></import>
+<import module="ListModule" subPackage="list"></import>
 
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>

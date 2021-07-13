@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Libraries } from '../../utilities/libraries';
 
 @Component({
@@ -12,22 +12,21 @@ import { Libraries } from '../../utilities/libraries';
         </code>
     `
 })
-export class ImportComponent {
+export class ImportComponent implements OnInit {
     @Input() module: string;
+    @Input() subPackage: string;
 
     library: string;
 
-    constructor(@Inject('CURRENT_LIB') private currentLib: Libraries) {
-        switch (this.currentLib) {
-            case 'core': {
-                this.library = '@fundamental-ngx/core';
-                break;
-            }
+    constructor(@Inject('CURRENT_LIB') private currentLib: Libraries) { }
 
-            case 'platform': {
-                this.library = '@fundamental-ngx/platform';
-                break;
-            }
+    ngOnInit(): void {
+        const libraryPath = ['@fundamental-ngx', this.currentLib];
+
+        if (this.subPackage) {
+            libraryPath.push(this.subPackage);
         }
+
+        this.library = libraryPath.join('/');
     }
 }
