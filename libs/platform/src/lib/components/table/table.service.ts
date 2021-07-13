@@ -1,18 +1,20 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { skip } from 'rxjs/operators';
 
 import { SearchInput } from './interfaces/search-field.interface';
 import { CollectionFilter, CollectionGroup, CollectionPage, CollectionSort, TableState } from './interfaces';
 import { DEFAULT_TABLE_STATE } from './constants';
-import { FilterChange, FreezeChange, GroupChange, SortChange, SearchChange, ColumnsChange, PageChange } from './models';
+import { ColumnsChange, FilterChange, FreezeChange, GroupChange, PageChange, SearchChange, SortChange } from './models';
 
 @Injectable()
 export class TableService {
     private _tableStateSubject$: BehaviorSubject<TableState> = new BehaviorSubject(DEFAULT_TABLE_STATE);
     private _markForCheck$: Subject<void> = new Subject<void>();
+    private _tableColumnsWidth$ = new Subject<void>();
 
-    readonly tableState$: Observable<TableState> = this._tableStateSubject$.asObservable();
+    readonly tableColumnsWidth$ = this._tableColumnsWidth$.asObservable();
+    readonly tableState$ = this._tableStateSubject$.asObservable();
     readonly tableStateChanges$ = this.tableState$.pipe(skip(1));
 
     readonly searchChange: EventEmitter<SearchChange> = new EventEmitter<SearchChange>();
@@ -49,7 +51,7 @@ export class TableService {
 
         const state: TableState = { ...prevState, searchInput: searchInput };
 
-        this.setTableState(this._setCurrentPageToState(state, 1));
+        this.setTableState(setCurrentPageToState(state, 1));
 
         this.searchChange.emit({ current: searchInput, previous: prevState.searchInput });
     }
@@ -62,7 +64,7 @@ export class TableService {
         const newSortRules: CollectionSort[] = [...sortRules];
         const state: TableState = { ...prevState, sortBy: newSortRules };
 
-        this.setTableState(this._setCurrentPageToState(state, 1));
+        this.setTableState(setCurrentPageToState(state, 1));
 
         this.sortChange.emit({ current: state.sortBy, previous: prevSortRules });
     }
@@ -79,7 +81,7 @@ export class TableService {
 
         const state: TableState = { ...prevState, sortBy: newSortRules };
 
-        this.setTableState(this._setCurrentPageToState(state, 1));
+        this.setTableState(setCurrentPageToState(state, 1));
 
         this.sortChange.emit({ current: state.sortBy, previous: prevSortRules });
     }
@@ -92,7 +94,7 @@ export class TableService {
         const newFilterRules: CollectionFilter[] = [...filterRules];
         const state: TableState = { ...prevState, filterBy: newFilterRules };
 
-        this.setTableState(this._setCurrentPageToState(state, 1));
+        this.setTableState(setCurrentPageToState(state, 1));
 
         this.filterChange.emit({ current: state.filterBy, previous: prevFilterRules });
     }
@@ -109,7 +111,7 @@ export class TableService {
 
         const state: TableState = { ...prevState, filterBy: newFilterRules };
 
-        this.setTableState(this._setCurrentPageToState(state, 1));
+        this.setTableState(setCurrentPageToState(state, 1));
 
         this.filterChange.emit({ current: state.filterBy, previous: prevFilterRules });
     }
@@ -175,16 +177,20 @@ export class TableService {
             return;
         }
 
-        const state: TableState = this._setCurrentPageToState(prevState, currentPage);
-        
+        const state: TableState = setCurrentPageToState(prevState, currentPage);
+
         this.setTableState(state);
-        
+
         this.pageChange.emit({ current: state.page, previous: prevPageState });
     }
 
-    /** @hidden */
-    private _setCurrentPageToState(state: TableState, currentPage: number): TableState {
-        const newPageState: CollectionPage = { ...state.page, currentPage: currentPage };
-        return { ...state, page: newPageState  };
+    /** Trigger columns width recalculation */
+    recalculateColumnsWidth(): void {
+        this._tableColumnsWidth$.next();
     }
+}
+
+function setCurrentPageToState(state: TableState, currentPage: number): TableState {
+    const newPageState: CollectionPage = { ...state.page, currentPage: currentPage };
+    return { ...state, page: newPageState  };
 }

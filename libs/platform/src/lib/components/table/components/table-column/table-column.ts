@@ -25,6 +25,9 @@ export abstract class TableColumn {
     /** Data type the column represents. */
     abstract dataType: FilterableColumnDataType;
 
+    /** Width of the column cells */
+    abstract width: string;
+
     /** Toggles grouping feature in the column header. */
     abstract groupable: boolean;
 

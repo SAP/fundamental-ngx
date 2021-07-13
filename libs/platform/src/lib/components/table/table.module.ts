@@ -61,6 +61,8 @@ import { FdpViewSettingsFilterCustomDef } from './directives/table-view-settings
 import { TableScrollableDirective } from './directives/table-scrollable.directive';
 import { TableScrollerDirective } from './directives/table-scroller.directive';
 import { FdpCellSelectableDirective } from './directives/table-cell-selectable.directive';
+import { PlatformTableCellResizableDirective } from './directives';
+import { PlatformTableColumnResizerComponent } from './components/table-column-resizer/table-column-resizer.component';
 
 @NgModule({
     imports: [
@@ -123,7 +125,9 @@ import { FdpCellSelectableDirective } from './directives/table-cell-selectable.d
         FilterRuleComponent,
         P13ColumnsDialogComponent,
         TableScrollableDirective,
-        TableScrollerDirective
+        TableScrollerDirective,
+        PlatformTableCellResizableDirective,
+        PlatformTableColumnResizerComponent
     ],
     exports: [
         TableComponent,

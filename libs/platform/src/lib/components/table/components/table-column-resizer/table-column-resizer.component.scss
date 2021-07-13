@@ -1,0 +1,18 @@
+.fdp-table-column-resizer {
+    cursor: col-resize;
+    position: absolute;
+    width: 0;
+    top: 0;
+    left: -10000px;
+    opacity: 0.5;
+    z-index: 999;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-left: 3px solid var(--sapContent_DragAndDropActiveColor, #0854A0);
+    border-right: 3px solid var(--sapContent_DragAndDropActiveColor, #0854A0);
+    user-select: none;
+
+    &--active {
+        opacity: 1;
+    }
+}
