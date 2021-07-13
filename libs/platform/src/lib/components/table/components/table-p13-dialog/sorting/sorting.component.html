@@ -19,7 +19,6 @@
     </fd-dialog-header>
 
     <fd-dialog-body>
-
         <div
             class="sort-row"
             *ngFor="let rule of rules; let i = index"
@@ -29,6 +28,7 @@
                 [value]="rule.columnKey"
                 (valueChange)="_onRuleColumnKeyChange(rule, $event)"
                 [compact]="true"
+                [ariaLabel]="'Rule #'+ (i + 1) + ', sort by'"
                 placeholder="(none)"
                 i18n-placeholder="@@platformTableP13SortDialogNoneSelectedColumn|Table column select placeholder"
             >
@@ -45,6 +45,7 @@
                 [value]="rule.direction"
                 (valueChange)="_onRuleDirectionChange(rule, $event)"
                 [compact]="true"
+                [ariaLabel]="'Rule #'+ (i + 1) + ', sort direction'"
                 placeholder="(none)"
                 i18n-placeholder="@@platformTableP13SortDialogNoneSelectedSorting|Sorting select placeholder"
             >

@@ -63,13 +63,13 @@ describe('TableComponent internal', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [
-                            FormsModule, 
-                            ReactiveFormsModule, 
-                            TableModule, 
-                            CheckboxModule, 
-                            PopoverModule, 
-                            ListModule, 
-                            RouterModule, 
+                            FormsModule,
+                            ReactiveFormsModule,
+                            TableModule,
+                            CheckboxModule,
+                            PopoverModule,
+                            ListModule,
+                            RouterModule,
                             RouterTestingModule
                          ],
                 declarations: [TableComponent, TableScrollerDirective, TableScrollableDirective],
@@ -141,13 +141,13 @@ describe('TableComponent internal', () => {
         component.selectionMode = SelectionMode.MULTIPLE;
         component.ngAfterViewInit();
 
-        component._toggleAllSelectableRows(true);
+        component._toggleAllSelectableRows();
 
         expect(component._tableRows.filter((r) => r.checked).length).toEqual(
             component._tableRows.filter(({ type }) => type === TableRowType.ITEM).length
         );
 
-        component._toggleAllSelectableRows(false);
+        component._toggleAllSelectableRows();
 
         expect(component._tableRows.filter((r) => r.checked).length).toEqual(0);
     });
@@ -621,11 +621,11 @@ describe('TableComponent internal', () => {
                     fixture.detectChanges();
                     calculateTableElementsMetaData();
 
-                    expect(tableRowCells2DArray[0][0].nativeElement.innerText).toContain('Status : invalid');
-                    expect(tableRowCells2DArray[1][0].nativeElement.innerText).toContain('Client Verified : false');
+                    expect(tableRowCells2DArray[0][0].nativeElement.innerText).toMatch(/Status\n?: invalid$/);
+                    expect(tableRowCells2DArray[1][0].nativeElement.innerText).toMatch(/Client Verified\n?: false$/);
 
-                    expect(tableRowCells2DArray[27][0].nativeElement.innerText).toContain('Status : valid');
-                    expect(tableRowCells2DArray[28][0].nativeElement.innerText).toContain('Client Verified : true');
+                    expect(tableRowCells2DArray[27][0].nativeElement.innerText).toMatch(/Status\n?: valid$/);
+                    expect(tableRowCells2DArray[28][0].nativeElement.innerText).toMatch(/Client Verified\n?: true$/);
                 });
             });
         });
@@ -840,7 +840,7 @@ describe('TableComponent internal', () => {
         beforeEach(() => {
             fixture = TestBed.createComponent(TableHostComponent);
             hostComponent = fixture.componentInstance;
-            
+
             const originFetch = hostComponent.source.fetch;
             spyOn(hostComponent.source, 'fetch').and.callFake((state: TableState) => {
                 dataSourceLastFetchState = state;
@@ -870,7 +870,7 @@ describe('TableComponent internal', () => {
             await new Promise(resolve => setTimeout(() => resolve(null), 100));
             fixture.detectChanges();
             calculateTableElementsMetaData();
-        }; 
+        };
 
         beforeEach(() => {
             calculateTableElementsMetaData();
@@ -909,7 +909,7 @@ describe('TableComponent internal', () => {
             expect(hostComponent.source.fetch).toHaveBeenCalledTimes(2);
         });
 
-        it('should get new 50 items per each request', async() => {            
+        it('should get new 50 items per each request', async() => {
             await tableBodyScrollTop(999999);
 
             expect(tableBodyRows.length).toBe(100);
@@ -919,7 +919,7 @@ describe('TableComponent internal', () => {
             expect(tableBodyRows.length).toBe(150);
         });
 
-        it('should stop fetching on scroll if currentPage is the last one', async() => {            
+        it('should stop fetching on scroll if currentPage is the last one', async() => {
             await tableBodyScrollTop(999999); // 100
             await tableBodyScrollTop(999999); // 150
             await tableBodyScrollTop(999999); // 200
@@ -930,7 +930,7 @@ describe('TableComponent internal', () => {
             // try one more
             await tableBodyScrollTop(0);
             await tableBodyScrollTop(999999);
-            
+
             expect(tableBodyRows.length).toBe(200);
             expect(hostComponent.source.fetch).toHaveBeenCalledTimes(4);
         });
@@ -1044,9 +1044,9 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
             it('should emit event when parent item collapsed/expanded', () => {
                 const emitSpy = spyOn(tableComponent.rowToggleOpenState, 'emit').and.callThrough();
-    
+
                 firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
-    
+
                 const event1 = new TableRowToggleOpenStateEvent<SourceItem>(
                     0,
                     tableComponent._tableRowsVisible[0].value,
@@ -1056,7 +1056,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 expect(emitSpy).toHaveBeenCalledWith(event1);
 
                 secondRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
-                
+
                 const secondRowIndex = 1 + treeItemsChildrenPerParentCount;
                 const event2 = new TableRowToggleOpenStateEvent<SourceItem>(
                     secondRowIndex,
@@ -1078,7 +1078,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 expect(tableBodyRows.length).toEqual(
                     treeItemParentsCount + treeItemsChildrenPerParentCount
                 );
-                
+
                 secondRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
                 fixture.detectChanges();
@@ -1098,7 +1098,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 expect(tableBodyRows.length).toEqual(
                     treeItemParentsCount + treeItemsChildrenPerParentCount
                 );
-                
+
                 secondRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
                 fixture.detectChanges();
@@ -1120,7 +1120,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
             it('should rearrange table rows on drop', () => {
                 firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
-                
+
                 tableComponent._dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 0,
@@ -1140,7 +1140,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                 const emitSpy = spyOn(tableComponent.rowsRearrange, 'emit').and.callThrough();
 
                 firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
-                
+
                 tableComponent._dragDropItemDrop({
                     items: [],
                     replacedItemIndex: 0,
@@ -1159,8 +1159,8 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
                     draggedItemIndex: 1
                 });
 
-                fixture.detectChanges();   
-                
+                fixture.detectChanges();
+
                 calculateTableElementsMetaData();
 
                 expect(tableComponent._tableRows[0].expanded).toBeTrue();

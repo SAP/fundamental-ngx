@@ -5,15 +5,15 @@
     let-filterable="filterable"
     let-groupable="groupable"
     let-columns="columns"
+    let-titleId="titleId"
 >
-
     <fd-toolbar
         fdType="transparent"
         [clearBorder]="true"
         [hasTitle]="!!title"
         [size]="_getCozyCompactSize(size)"
     >
-        <label fd-toolbar-label [id]="tableToolbarTitleId">{{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span></label>
+        <label fd-toolbar-label [id]="titleId">{{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span></label>
 
         <fd-toolbar-spacer></fd-toolbar-spacer>
 
@@ -23,7 +23,7 @@
             placeholder="Search"
             [contentDensity]="_getCozyCompactSize(size)"
             [suggestions]="searchSuggestions"
-            [ariaLabelledBy]="tableToolbarTitleId"
+            [ariaLabelledBy]="titleId"
             (searchSubmit)="submitSearch($event)"
         ></fdp-search-field>
 

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { A11yModule } from '@angular/cdk/a11y';
 import { RouterModule } from '@angular/router';
 
 import {
@@ -87,7 +88,8 @@ import { FdpCellSelectableDirective } from './directives/table-cell-selectable.d
         PanelModule,
         DatePickerModule,
         BusyIndicatorModule,
-        DragAndDropModule
+        DragAndDropModule,
+        A11yModule
     ],
     declarations: [
         TableComponent,
