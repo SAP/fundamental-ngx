@@ -10,10 +10,10 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { IconModule } from '@fundamental-ngx/core/icon';
-import { AutoCompleteDirective } from './auto-complete.directive';
+import { AutoCompleteModule } from '@fundamental-ngx/core/utils';
 
 @NgModule({
-    declarations: [ComboboxComponent, AutoCompleteDirective],
+    declarations: [ComboboxComponent],
     imports: [
         CommonModule,
         PopoverModule,
@@ -23,7 +23,8 @@ import { AutoCompleteDirective } from './auto-complete.directive';
         ButtonModule,
         InputGroupModule,
         ListModule,
-        IconModule
+        IconModule,
+        AutoCompleteModule
     ],
     exports: [ComboboxComponent]
 })

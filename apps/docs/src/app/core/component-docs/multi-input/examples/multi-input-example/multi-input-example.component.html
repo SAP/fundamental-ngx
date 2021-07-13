@@ -33,3 +33,16 @@ Selected: [{{ secondSelected.toLocaleString() }}]
 ></fd-multi-input>
 
 Selected: [{{ thirdSelected.toLocaleString() }}]
+
+<br /><br />
+
+<label fd-label for="multiInputDisabledAutoComplete">Disable Auto Complete</label>
+<fd-multi-input
+    inputId="multiInputDisabledAutoComplete"
+    [autoComplete]="false"
+    [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange']"
+    [placeholder]="'Search here...'"
+    [(ngModel)]="selectedDisabledAutoComplete"
+></fd-multi-input>
+
+Selected: [{{ selectedDisabledAutoComplete.toLocaleString() }}]
