@@ -27,8 +27,10 @@ export class PlatformTableNavigatableRowIndicatorExampleComponent implements Aft
 
     ngAfterViewInit(): void {
         this.table.setNavigatableRowState(1, false);
+
         this.table.setRowNavigationIndicator(0, true);
         this.table.setRowNavigationIndicator(2, true);
+
         this.table.setRowNavigationTarget(0, '/platform/home');
         this.table.setRowNavigationTarget(2, '/platform/home');
     }
