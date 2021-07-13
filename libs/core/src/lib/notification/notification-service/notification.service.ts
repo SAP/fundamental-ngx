@@ -1,4 +1,4 @@
-import { ComponentRef, Injectable, Optional, TemplateRef, Type } from '@angular/core';
+import { ComponentRef, Injectable, Injector, Optional, TemplateRef, Type } from '@angular/core';
 import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
 import { NotificationComponent } from '../notification/notification.component';
 import { NotificationContainer } from '../notification-utils/notification-container';
@@ -48,12 +48,20 @@ export class NotificationService {
         notificationConfig.container = this.containerRef.location.nativeElement;
         let notificationComponentRef: ComponentRef<NotificationComponent>;
 
+        const injector = Injector.create({
+            providers: [
+                { provide: NotificationConfig, useValue: notificationConfig },
+                { provide: NotificationRef, useValue: notificationService },
+                { provide: RtlService, useValue: this._rtlService }
+            ]
+        });
+
         // Create Notification Component
         notificationComponentRef = this._dynamicComponentService.createDynamicComponent(
             content,
             NotificationComponent,
             notificationConfig,
-            { services: [notificationService, notificationConfig, this._rtlService] }
+            { injector: injector }
         );
 
         // Add To array
