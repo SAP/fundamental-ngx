@@ -19,24 +19,28 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { FormStates } from '@fundamental-ngx/core/shared';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
-import { Subscription } from 'rxjs';
-import { TokenizerComponent } from '@fundamental-ngx/core/token';
-import { ListComponent } from '@fundamental-ngx/core/list';
 import { DOWN_ARROW, TAB, SPACE, ENTER } from '@angular/cdk/keycodes';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
-import { RtlService } from '@fundamental-ngx/core/utils';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { FocusEscapeDirection } from '@fundamental-ngx/core/utils';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { Subscription } from 'rxjs';
+
+import {
+    applyCssClass,
+    ContentDensityService,
+    CssClassBuilder,
+    DynamicComponentService,
+    FocusEscapeDirection,
+    KeyUtil,
+    RtlService
+} from '@fundamental-ngx/core/utils';
+import { ListComponent } from '@fundamental-ngx/core/list';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { FormStates, PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { TokenizerComponent } from '@fundamental-ngx/core/token';
+
+import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
+import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 
 let inputRandomId = 0;
 
@@ -218,13 +222,15 @@ export class MultiInputComponent implements
     /**
      * Message announced by screen reader, when search suggestions opens.
      */
-    @Input() searchSuggestionMessage = 'suggestions found';
+    @Input()
+    searchSuggestionMessage = 'suggestion found';
 
     /**
      * Second part of message for search suggestion.
      * direction for navigating the suggestion. This is not necessry in case of 0 suggestion.
      */
-    @Input() searchSuggestionNavigateMessage = 'use up and down arrows to navigate';
+    @Input()
+    searchSuggestionNavigateMessage = 'use up and down arrows to navigate';
 
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
@@ -294,6 +300,7 @@ export class MultiInputComponent implements
         private _elementRef: ElementRef,
         private _changeDetRef: ChangeDetectorRef,
         private _dynamicComponentService: DynamicComponentService,
+        private _liveAnnouncer: LiveAnnouncer,
         @Optional() private _rtlService: RtlService,
         @Optional() private _contentDensityService: ContentDensityService
     ) { }
@@ -563,7 +570,8 @@ export class MultiInputComponent implements
             this.displayedValues?.length +
             ' ' +
             this.searchSuggestionMessage +
-            (this.displayedValues?.length > 0 ? ',' + this.searchSuggestionNavigateMessage : '');
+            (this.displayedValues?.length > 0 && !this.mobile ? ',' + this.searchSuggestionNavigateMessage : '');
+        this._liveAnnouncer.announce(this.currentSearchSuggestionAnnoucementMessage, 'polite');
     }
 
     /** @hidden */
