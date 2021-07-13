@@ -297,7 +297,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     @HostListener('keydown', ['$event'])
     keyDown(keyboardEvent: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(keyboardEvent, [DELETE, BACKSPACE]) &&
-            !this._isInputFocused() &&
+            (!this._isInputFocused() || this._tokensSelected()) &&
             !this.disableKeyboardDeletion) {
             const selectedElements = this._getActiveTokens();
             const focusedTokenIndex = this._getFocusedTokenIndex();
@@ -340,7 +340,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         let newIndex: number;
         const rtl = this._rtlService && this._rtlService.rtl ? this._rtlService.rtl.getValue() : false;
         if (KeyUtil.isKeyCode(event, SPACE) && !this._isInputFocused()) {
-            const token = this.tokenList.find((element, index) => index === fromIndex);
+            const token = this.tokenList.find((_, index) => index === fromIndex);
             this.tokenList.forEach(shadowedToken => {
                 if (shadowedToken !== token) {
                     shadowedToken.selected = false
@@ -665,6 +665,10 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** @hidden */
     private _isInputFocused(): boolean {
         return document.activeElement === this.input.elementRef().nativeElement;
+    }
+
+    private _tokensSelected(): boolean {
+        return this.tokenList.some(t => t.selected);
     }
 
     /** @hidden */
