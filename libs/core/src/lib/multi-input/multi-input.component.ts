@@ -213,6 +213,10 @@ export class MultiInputComponent implements
     @Input()
     title: string;
 
+    /** Whether the autocomplete should be enabled; Enabled by default */
+    @Input()
+    autoComplete = true;
+
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
     readonly searchTermChange: EventEmitter<string> = new EventEmitter<string>();
