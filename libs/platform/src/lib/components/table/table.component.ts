@@ -22,6 +22,7 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
@@ -46,13 +47,13 @@ import {
     TableColumnsChangeEvent,
     TableFilterChangeEvent,
     TableGroupChangeEvent,
-    TableRowSelectionChangeEvent,
-    TableSortChangeEvent,
     TableRow,
+    TableRowSelectionChangeEvent,
+    TableRowsRearrangeEvent,
     TableRowToggleOpenStateEvent,
-    TableRowsRearrangeEvent
+    TableSortChangeEvent
 } from './models';
-import { FILTER_STRING_STRATEGY, ContentDensity, SelectionMode, SortDirection, TableRowType } from './enums';
+import { ContentDensity, FILTER_STRING_STRATEGY, SelectionMode, SortDirection, TableRowType } from './enums';
 import { DEFAULT_COLUMN_WIDTH, DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
 import { TableDataSource } from './domain/table-data-source';
 import { ArrayTableDataSource } from './domain/array-data-source';
@@ -237,7 +238,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** Whether table row has navigation button. */
     @Input()
     navigationButton = false;
-    
+
     /** Event fired when table selection has changed. */
     @Output()
     readonly rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<T>> = new EventEmitter<TableRowSelectionChangeEvent<T>>();
@@ -465,7 +466,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         private readonly _tableScrollDispatcher: TableScrollDispatcherService,
         private readonly _ngZone: NgZone,
         @Inject(DOCUMENT) private readonly _document: Document | null,
-        @Optional() private readonly _rtlService: RtlService
+        @Optional() private readonly _rtlService: RtlService,
+        @Optional() private readonly router: Router
     ) {
         super();
     }
@@ -643,30 +645,53 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** Set the navigatable property on a row */
     setNavigatableRowState(rowIndex: number, state: boolean): void {
-        this.tableRows.toArray()[rowIndex + 1].navigatable = state;
-        this._tableRows[rowIndex].navigatable = state;
-        if (!state) {
-            this._tableRows[rowIndex].hasNavIndicator = false;
+        const row = this._tableRows[rowIndex];
+
+        if (!row) {
+            return;
         }
+
+        this.tableRows.toArray()[rowIndex + 1].navigatable = state;
+        row.navigatable = state;
+
+        if (!state) {
+            row.hasNavIndicator = false;
+        }
+
         this._cd.detectChanges();
     }
 
     /** Set the navigation indicator property on a row */
     setRowNavigationIndicator(rowIndex: number, state: boolean): void {
-        if (this._tableRows[rowIndex].navigatable) {
-            this._tableRows[rowIndex].hasNavIndicator = state;
+        const row = this._tableRows[rowIndex];
+
+        if (!row) {
+            return;
+        }
+
+        if (row.navigatable) {
+            row.hasNavIndicator = state;
+
             if (state) {
                 this.navigationButton = false;
             }
         }
+
         this._cd.detectChanges();
     }
 
     /** Set the navigation target property on a row */
     setRowNavigationTarget(rowIndex: number, target: string): void {
-        if (this._tableRows[rowIndex].navigatable) {
-            this._tableRows[rowIndex].navigationTarget = target;
+        const row = this._tableRows[rowIndex];
+
+        if (!row) {
+            return;
         }
+
+        if (row.navigatable) {
+            row.navigationTarget = target;
+        }
+
         this._cd.detectChanges();
     }
 
@@ -891,17 +916,17 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         return cellIndex === 0 && this._isTreeRow(row);
     }
 
-    /**  
+    /**
      * @hidden
-     * Chech if the cell should contain a navigation button
+     * Check if the cell should contain a navigation button
     */
     _showNavButton(cellIndex: number, row: TableRow): boolean {
         return this.navigationButton && cellIndex === this._visibleColumns.length - 1;
     }
 
-    /**  
+    /**
      * @hidden
-     * Chech if the cell should contain a navigation indicator
+     * Check if the cell should contain a navigation indicator
     */
     _showNavIndicator(cellIndex: number, row: TableRow): boolean {
         return row.hasNavIndicator && cellIndex === this._visibleColumns.length - 1;
@@ -940,6 +965,15 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             this._cd.markForCheck();
             this._emitRowsRearrangeEvent(dragRow, event.draggedItemIndex, event.replacedItemIndex);
         }
+    }
+
+    /** @hidden */
+    _navigateByRowNavigationTarget(row: TableRow<T>): void {
+        if (!row.navigatable || !row.navigationTarget) {
+            return;
+        }
+
+        this.router?.navigate([ row.navigationTarget ]);
     }
 
     /** @hidden */

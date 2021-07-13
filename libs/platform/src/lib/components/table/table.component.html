@@ -291,7 +291,7 @@
                             [navigatable]="row.navigatable"
                             [hoverable]="row.hasNavIndicator"
                             [activable]="row.hasNavIndicator"
-                            [routerLink]="row.hasNavIndicator ? row.navigationTarget : './'"
+                            (click)="row.hasNavIndicator && _navigateByRowNavigationTarget(row)"
                         >
                             <!-- Row Selection Cell -->
                             <ng-container [ngSwitch]="selectionMode">
@@ -351,18 +351,19 @@
                                     i18n-title="Toggle row|Toggle tree row children@@platformTableTreeRowToggle"
                                 ></fd-icon>
 
-                                <i 
+                                <i
                                     *ngIf="_showNavIndicator(colIdx, row)"
                                     fd-table-icon
                                     [ngClass]="_rtl ? 'sap-icon--slim-arrow-left' : 'sap-icon--slim-arrow-right'"
                                     class="fdp-table__navigation-indicator"
                                 ></i>
 
-                                <button 
+                                <button
                                     *ngIf="_showNavButton(colIdx, row)"
-                                    class="fd-button fd-button--transparent" 
+                                    class="fd-button fd-button--transparent"
                                     [disabled]="!row.navigatable"
-                                    [routerLink]="row.navigationTarget"
+                                    (click)="_navigateByRowNavigationTarget(row)"
+                                    (keydown.enter)="_navigateByRowNavigationTarget(row)"
                                 >
                                     <i [ngClass]="_rtl ? 'sap-icon--navigation-left-arrow' : 'sap-icon--navigation-right-arrow'"></i>
                                 </button>

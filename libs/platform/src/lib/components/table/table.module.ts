@@ -1,26 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 
 import {
+    BusyIndicatorModule,
     ButtonModule,
     CheckboxModule,
-    FormModule,
-    SelectModule,
-    RadioModule,
-    InputGroupModule,
-    DialogModule,
-    IconModule,
-    ListModule,
-    PopoverModule,
-    TableModule,
-    ToolbarModule,
-    LayoutGridModule,
-    PanelModule,
     DatePickerModule,
-    BusyIndicatorModule,
-    DragAndDropModule
+    DialogModule,
+    DragAndDropModule,
+    FormModule,
+    IconModule,
+    InputGroupModule,
+    LayoutGridModule,
+    ListModule,
+    PanelModule,
+    PopoverModule,
+    RadioModule,
+    SelectModule,
+    TableModule,
+    ToolbarModule
 } from '@fundamental-ngx/core';
 
 import { PlatformInputModule } from '../form/input/fdp-input.module';
@@ -66,7 +65,6 @@ import { FdpCellSelectableDirective } from './directives/table-cell-selectable.d
     imports: [
         CommonModule,
         FormsModule,
-        RouterModule,
 
         TableModule,
         ToolbarModule,
