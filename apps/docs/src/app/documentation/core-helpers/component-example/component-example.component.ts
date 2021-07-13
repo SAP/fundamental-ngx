@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { NotificationService } from '@fundamental-ngx/core/notification';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { RtlService } from '@fundamental-ngx/core/utils';
 
@@ -23,7 +24,8 @@ let componentExampleUniqueId = 0;
     providers: [
         RtlService,
         // Needed in order for dialog service and components to inherit local rtl service.
-        DialogService
+        DialogService,
+        NotificationService
     ],
     encapsulation: ViewEncapsulation.None
 })

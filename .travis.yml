@@ -14,7 +14,9 @@ script:
   - travis_wait 20 npm run build-all
 jobs:
   include:
-    - stage: Lint commit message
+    - stage: "Lint and Test"
+      name: lint commit message
+      if: type = pull_request
       script: commitlint-travis
     - stage: "Lint and Test"
       if: type = pull_request
@@ -27,7 +29,7 @@ jobs:
         - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
       script: bash ./ci-scripts/test-lint.sh && npm run test:coveralls && npm run build-pack-library
     - stage: "Test"
-      name: Sauce Labs - e2e tests - platformA
+      name: Sauce Labs - e2e tests - platform
       if: type = pull_request
       env:
         - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
@@ -40,24 +42,9 @@ jobs:
       before_script:
         - sudo apt-get install jq
         - npm install firebase-tools -g
-      script: npm run e2e:platformA:ci
+      script: npm run e2e:platform:ci
     - stage: "Test"
-      name: Sauce Labs - e2e tests - platformB
-      if: type = pull_request
-      env:
-        - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
-        - BUILD_ID=$TRAVIS_BUILD_ID
-        - JOB_URL=$TRAVIS_JOB_WEB_UR
-        - SAUCE_USERNAME=$SAUCE_USERNAME
-        - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
-        - FIREBASE_TOKEN=$FIREBASE_TOKEN
-        - GITHUB_TOKEN=$GITHUB_TOKEN
-      before_script:
-        - sudo apt-get install jq
-        - npm install firebase-tools -g
-      script: npm run e2e:platformB:ci
-    - stage: "Test"
-      name: Sauce Labs - e2e tests (core)
+      name: Sauce Labs - e2e tests - core
       if: type = pull_request
       env:
         - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
@@ -75,16 +62,71 @@ jobs:
       name: Sauce Labs - unit tests platform
       if: type = pull_request
       before_script:
-            - export CHROME_BIN=/usr/bin/google-chrome
+        - export CHROME_BIN=/usr/bin/google-chrome
       script: npm run test:platform
     - stage: "Test"
       name: Sauce Labs - unit tests core
       if: type = pull_request
       script: npm run test
-#    - stage: "Test"
-#      name: A11y report
-#      if: type = pull_request
-#      script: npm run e2e:a11y
+    #    - stage: "Test"
+    #      name: A11y report
+    #      if: type = pull_request
+    #      script: npm run e2e:a11y
+    - stage: "cron test"
+      name: Sauce Labs - e2e tests - platformA
+      if: type = cron
+      env:
+#        - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+        - BUILD_ID=$TRAVIS_BUILD_ID
+        - JOB_URL=$TRAVIS_JOB_WEB_UR
+        - SAUCE_USERNAME=$SAUCE_USERNAME
+        - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
+        - FIREBASE_TOKEN=$FIREBASE_TOKEN
+        - GITHUB_TOKEN=$GITHUB_TOKEN
+      before_script:
+        - sudo apt-get install jq
+        - npm install firebase-tools -g
+      script: npm run e2e:cron:platformA:ci
+    - stage: "cron test"
+      name: Sauce Labs - e2e tests - platformB
+      if: type = cron
+      env:
+#        - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+        - BUILD_ID=$TRAVIS_BUILD_ID
+        - JOB_URL=$TRAVIS_JOB_WEB_UR
+        - SAUCE_USERNAME=$SAUCE_USERNAME
+        - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
+        - FIREBASE_TOKEN=$FIREBASE_TOKEN
+        - GITHUB_TOKEN=$GITHUB_TOKEN
+      before_script:
+        - sudo apt-get install jq
+        - npm install firebase-tools -g
+      script: npm run e2e:cron:platformB:ci
+    - stage: "cron test"
+      name: Sauce Labs - e2e tests - core
+      if: type = cron
+      env:
+#        - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
+        - BUILD_ID=$TRAVIS_BUILD_ID
+        - JOB_URL=$TRAVIS_JOB_WEB_UR
+        - SAUCE_USERNAME=$SAUCE_USERNAME
+        - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
+        - FIREBASE_TOKEN=$FIREBASE_TOKEN
+        - GITHUB_TOKEN=$GITHUB_TOKEN
+      before_script:
+        - sudo apt-get install jq
+        - npm install firebase-tools -g
+      script: npm run e2e:cron:core:ci
+    - stage: "cron test"
+      name: Sauce Labs - unit tests platform
+      if: type = cron
+      before_script:
+        - export CHROME_BIN=/usr/bin/google-chrome
+      script: npm run test:platform
+    - stage: "cron test"
+      name: Sauce Labs - unit tests core
+      if: type = cron
+      script: npm run test
     - stage: "Pre-release"
       if: branch = main AND type = push
       before_script: export NODE_OPTIONS='–--max_old_space_size=4096'

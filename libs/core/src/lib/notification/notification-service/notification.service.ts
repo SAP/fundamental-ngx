@@ -1,9 +1,9 @@
-import { ComponentRef, Injectable, TemplateRef, Type } from '@angular/core';
+import { ComponentRef, Injectable, Injector, Optional, TemplateRef, Type } from '@angular/core';
+import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
 import { NotificationComponent } from '../notification/notification.component';
 import { NotificationContainer } from '../notification-utils/notification-container';
 import { NotificationConfig } from '../notification-utils/notification-config';
 import { NotificationRef } from '../notification-utils/notification-ref';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 
 @Injectable()
 export class NotificationService {
@@ -13,7 +13,13 @@ export class NotificationService {
 
     public containerRef: ComponentRef<NotificationContainer>;
 
-    constructor(private dynamicComponentService: DynamicComponentService) {}
+    /**
+     * @hidden
+     */
+    constructor(
+        private _dynamicComponentService: DynamicComponentService,
+        @Optional() private _rtlService: RtlService
+        ) {}
 
     /**
      * Opens a notification component with a content of type TemplateRef or Component Type
@@ -31,7 +37,7 @@ export class NotificationService {
 
         // Create Container if it doesn't exist
         if (!this.containerRef) {
-            this.containerRef = this.dynamicComponentService.createDynamicComponent(
+            this.containerRef = this._dynamicComponentService.createDynamicComponent(
                 content,
                 NotificationContainer,
                 notificationConfig
@@ -42,12 +48,20 @@ export class NotificationService {
         notificationConfig.container = this.containerRef.location.nativeElement;
         let notificationComponentRef: ComponentRef<NotificationComponent>;
 
+        const injector = Injector.create({
+            providers: [
+                { provide: NotificationConfig, useValue: notificationConfig },
+                { provide: NotificationRef, useValue: notificationService },
+                { provide: RtlService, useValue: this._rtlService }
+            ]
+        });
+
         // Create Notification Component
-        notificationComponentRef = this.dynamicComponentService.createDynamicComponent(
+        notificationComponentRef = this._dynamicComponentService.createDynamicComponent(
             content,
             NotificationComponent,
             notificationConfig,
-            { services: [notificationService, notificationConfig] }
+            { injector: injector }
         );
 
         // Add To array
@@ -84,7 +98,7 @@ export class NotificationService {
         const indexOf = this.notifications.indexOf(arrayRef);
 
         // Destroy Component
-        this.dynamicComponentService.destroyComponent(arrayRef.notificationComponent);
+        this._dynamicComponentService.destroyComponent(arrayRef.notificationComponent);
 
         // Remove it from Array
         this.notifications[indexOf] = null;
@@ -92,7 +106,7 @@ export class NotificationService {
 
         // If there is no other notification Components, just remove container.
         if (this.notifications.length === 0) {
-            this.dynamicComponentService.destroyComponent(this.containerRef);
+            this._dynamicComponentService.destroyComponent(this.containerRef);
             this.containerRef = null;
         }
     }

@@ -21,7 +21,7 @@ import {
 } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { NotificationRef } from '../notification-utils/notification-ref';
-import { AbstractFdNgxClass } from '@fundamental-ngx/core/utils';
+import { AbstractFdNgxClass, RtlService } from '@fundamental-ngx/core/utils';
 import { NotificationConfig } from '../notification-utils/notification-config';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { ESCAPE } from '@angular/cdk/keycodes';
@@ -39,6 +39,7 @@ import { filter } from 'rxjs/operators';
     host: {
         '[attr.aria-labelledby]': 'ariaLabelledBy',
         '[attr.aria-label]': 'ariaLabel',
+        '[attr.dir]': '_dir',
         role: 'alertdialog',
         '[attr.id]': 'id'
     },
@@ -48,6 +49,11 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     /** @hidden */
     @ViewChild('vc', { read: ViewContainerRef })
     containerRef: ViewContainerRef;
+
+    /**
+     * @hidden
+     */
+     _dir: string;
 
     /** User defined width for the notification */
     @HostBinding('style.width')
@@ -85,19 +91,28 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
 
     // @ts-ignore
     constructor(
-        private elRef: ElementRef,
-        private componentFactoryResolver: ComponentFactoryResolver,
-        private cdRef: ChangeDetectorRef,
+        private _elRef: ElementRef,
+        private _componentFactoryResolver: ComponentFactoryResolver,
+        private _cdRef: ChangeDetectorRef,
         private _router: Router,
-        @Optional() private notificationConfig: NotificationConfig,
-        @Optional() private notificationRef: NotificationRef
+        @Optional() private _notificationConfig: NotificationConfig,
+        @Optional() private _notificationRef: NotificationRef,
+        @Optional() private _rtlService: RtlService
     ) {
-        super(elRef);
-        this._setNotificationConfig(notificationConfig);
+        super(_elRef);
+        this._setNotificationConfig(_notificationConfig);
     }
 
     /** @hidden */
     ngOnInit(): void {
+
+        this._subscriptions.add(
+            this._rtlService?.rtl.subscribe(isRtl => {
+                this._dir = isRtl ? 'rtl' : 'ltr';
+                this._cdRef.markForCheck();
+            })
+        );
+
         this._listenAndCloseOnNavigation();
         this._setProperties();
     }
@@ -113,7 +128,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
                 this._loadFromTemplate(this.childContent);
             }
         }
-        this.cdRef.detectChanges();
+        this._cdRef.detectChanges();
     }
 
     /** @hidden */
@@ -124,18 +139,18 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     /** @hidden Listen and close notification on Escape key */
     @HostListener('window:keyup', ['$event'])
     _closeNotificationEsc(event: KeyboardEvent): void {
-        if (this.escKeyCloseable && KeyUtil.isKeyCode(event, ESCAPE) && this.notificationRef) {
-            this.notificationRef.dismiss('escape');
+        if (this.escKeyCloseable && KeyUtil.isKeyCode(event, ESCAPE) && this._notificationRef) {
+            this._notificationRef.dismiss('escape');
         }
     }
 
     /** @hidden Listen on NavigationStart event and dismiss the dialog */
     private _listenAndCloseOnNavigation(): void {
-        if (this._router && this.notificationRef) {
+        if (this._router && this._notificationRef) {
             this._subscriptions.add(
                 this._router.events.pipe(
                     filter(event => event instanceof NavigationStart && this.closeOnNavigation)
-                ).subscribe(() => this.notificationRef.dismiss())
+                ).subscribe(() => this._notificationRef.dismiss())
             );
         }
     }
@@ -143,7 +158,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     /** @hidden */
     private _loadFromComponent(content: Type<any>): void {
         this.containerRef.clear();
-        const componentFactory = this.componentFactoryResolver.resolveComponentFactory(content);
+        const componentFactory = this._componentFactoryResolver.resolveComponentFactory(content);
         this.componentRef = this.containerRef.createComponent(componentFactory);
     }
 
@@ -151,7 +166,7 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     private _loadFromTemplate(content: TemplateRef<any>): void {
         this.containerRef.clear();
         const context = {
-            $implicit: this.notificationRef
+            $implicit: this._notificationRef
         };
         this.componentRef = this.containerRef.createEmbeddedView(content, context);
     }
