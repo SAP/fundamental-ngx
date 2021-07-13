@@ -11,9 +11,9 @@ import * as datePickerPositionSrc from '!raw-loader!./examples/date-picker-posit
 import * as datePickerComplexI18nSrcTs from '!raw-loader!./examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component.ts';
 import * as datePickerComplexI18nSrcH from '!raw-loader!./examples/date-picker-complex-i18n-example/date-picker-complex-i18n-example.component.html';
 import * as datePickerRangeDisableTs from '!raw-loader!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.ts';
-import * as datePickerSingleDisableTs from '!raw-loader!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.ts';
-import * as datePickerSingleDisableH from '!raw-loader!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.ts';
 import * as datePickerRangeDisableH from '!raw-loader!./examples/date-picker-range-disabled-example/date-picker-range-disabled-example.component.html';
+import * as datePickerSingleDisableTs from '!raw-loader!./examples/date-picker-disable-func-example/date-picker-disable-func-example.component.ts';
+import * as datePickerSingleDisableH from '!raw-loader!./examples/date-picker-disable-func-example/date-picker-disable-func-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -98,13 +98,13 @@ export class DatePickerDocsComponent {
             language: 'typescript',
             component: 'DatePickerRangeDisabledExampleComponent',
             code: datePickerRangeDisableTs,
-            fileName: 'fd-date-picker-range-disabled-example'
+            fileName: 'date-picker-range-disabled-example'
         },
         {
             language: 'html',
             component: 'DatePickerRangeDisabledExampleComponent',
             code: datePickerRangeDisableH,
-            fileName: 'fd-date-picker-range-disabled-example'
+            fileName: 'date-picker-range-disabled-example'
         }
     ];
 
@@ -113,13 +113,13 @@ export class DatePickerDocsComponent {
             language: 'typescript',
             component: 'DatePickerDisableFuncExampleComponent',
             code: datePickerSingleDisableTs,
-            fileName: 'fd-date-picker-disable-func-example'
+            fileName: 'date-picker-disable-func-example'
         },
         {
             language: 'html',
             component: 'DatePickerDisableFuncExampleComponent',
             code: datePickerSingleDisableH,
-            fileName: 'fd-date-picker-disable-func-example'
+            fileName: 'date-picker-disable-func-example'
         }
     ];
 

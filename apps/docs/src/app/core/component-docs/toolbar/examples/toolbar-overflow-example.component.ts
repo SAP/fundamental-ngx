@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { DatetimeAdapter, DATE_TIME_FORMATS, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
 
 @Component({
-    selector: 'fd-calendar-options-example',
-    templateUrl: './calendar-options-example.component.html',
+    selector: 'fd-toolbar-overflow-example',
+    templateUrl: './toolbar-overflow-example.component.html',
     providers: [
         {
             provide: DatetimeAdapter,
@@ -15,8 +15,4 @@ import { DatetimeAdapter, DATE_TIME_FORMATS, FdDatetimeAdapter, FD_DATETIME_FORM
         }
     ]
 })
-export class CalendarOptionsExampleComponent {
-    showWeekCount = false;
-    compact = true;
-    markWeekends = false;
-}
+export class ToolbarOverflowExampleComponent {}

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FdDate, DatetimeAdapter, FdDatetimeAdapter, DATE_TIME_FORMATS, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
 import { DateRange } from '@fundamental-ngx/core/calendar';
-import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-date-picker-range-example',
@@ -9,7 +9,17 @@ import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
         <br />
         <div>Selected First Date: {{ this.selectedRange?.start?.toDateString() || 'null' }}</div>
         <br />
-        <div>Selected Last Date: {{ this.selectedRange?.end?.toDateString() || 'null' }}</div>`
+        <div>Selected Last Date: {{ this.selectedRange?.end?.toDateString() || 'null' }}</div>`,
+    providers: [
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        },
+        {
+            provide: DATE_TIME_FORMATS,
+            useValue: FD_DATETIME_FORMATS
+        }
+    ]
 })
 export class DatePickerRangeExampleComponent {
     selectedRange: DateRange<FdDate>;

@@ -167,20 +167,20 @@ specialDay: SpecialDayRule[] = [
         {
             language: 'typescript',
             component: 'CalendarSpecialDayExampleComponent',
-            fileName: 'calendar-special-days-example',
+            fileName: 'calendar-special-day-example',
             code: { default: this.exampleSpecialDays },
             name: 'Example Special Day Functions'
         },
         {
             language: 'typescript',
             component: 'CalendarSpecialDayExampleComponent',
-            fileName: 'calendar-special-days-example',
+            fileName: 'calendar-special-day-example',
             code: calendarSpecialSrc
         },
         {
             language: 'html',
             component: 'CalendarSpecialDayExampleComponent',
-            fileName: 'calendar-special-days-example',
+            fileName: 'calendar-special-day-example',
             code: calendarSpecialHtml
         }
     ];

@@ -22,9 +22,3 @@ export class MenuAddonExampleComponent {
 export class MenuSeparatorExampleComponent {
 }
 
-@Component({
-    selector: 'fd-menu-mobile-example',
-    templateUrl: './menu-mobile-example.component.html'
-})
-export class MenuMobileExampleComponent {
-}

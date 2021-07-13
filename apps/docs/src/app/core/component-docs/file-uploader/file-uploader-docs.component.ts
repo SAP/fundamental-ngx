@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import * as fileUploaderCompactH from '!raw-loader!./examples/file-uploader-compact-example/file-uploader-compact-example.component.html';
 import * as fileUploaderCompactT from '!raw-loader!./examples/file-uploader-compact-example/file-uploader-compact-example.component.ts';
 
-import * as fileUploaderTruncationH from '!raw-loader!./examples/file-uploader-example/file-uploader-example.component.html';
-import * as fileUploaderTruncationT from '!raw-loader!./examples/file-uploader-example/file-uploader-example.component.ts';
+import * as fileUploaderTruncationH from '!raw-loader!./examples/file-uploader-truncation-example/file-uploader-truncation-example.component.html';
+import * as fileUploaderTruncationT from '!raw-loader!./examples/file-uploader-truncation-example/file-uploader-truncation-example.component.ts';
 
 
 import * as fileUploaderH from '!raw-loader!./examples/file-uploader-example/file-uploader-example.component.html';

@@ -2,7 +2,7 @@ import { Component, TemplateRef } from '@angular/core';
 import { MessageBoxService } from '@fundamental-ngx/core/message-box';
 
 @Component({
-    selector: 'fd-message-box-open-template-example',
+    selector: 'fd-template-based-message-box-example',
     templateUrl: './template-based-message-box-example.component.html'
 })
 export class TemplateBasedMessageBoxExampleComponent {

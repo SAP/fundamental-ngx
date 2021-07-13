@@ -1,11 +1,21 @@
 import { Component } from '@angular/core';
-import { FdDate } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'fd-calendar-form-example',
     templateUrl: 'calendar-form-example.component.html',
-    styleUrls: ['calendar-form-example.component.scss']
+    styleUrls: ['calendar-form-example.component.scss'],
+    providers: [
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        },
+        {
+            provide: DATE_TIME_FORMATS,
+            useValue: FD_DATETIME_FORMATS
+        }
+    ]
 })
 export class CalendarFormExamplesComponent {
     customForm = new FormGroup({

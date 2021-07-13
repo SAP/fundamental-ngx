@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import * as menuHtml from '!raw-loader!./examples/menu-example.component.html';
 import * as menuAddonHtml from '!raw-loader!./examples/menu-addon-example.component.html';
+import * as menuMobileTs from '!raw-loader!./examples/menu-mobile-example.component.ts';
 import * as menuMobileHtml from '!raw-loader!./examples/menu-mobile-example.component.html';
 import * as menuSeparatorHtml from '!raw-loader!./examples/menu-separator-example.component.html';
 import * as menuWithSubmenuHtml from '!raw-loader!./examples/menu-with-submenu-example.component.html';
@@ -41,6 +42,13 @@ export class MenuDocsComponent {
             language: 'html',
             code: menuMobileHtml,
             fileName: 'menu-mobile-example'
+        },
+        {
+            language: 'typescript',
+            code: menuMobileTs,
+            fileName: 'menu-mobile-example',
+            component: 'MenuMobileExampleComponent',
+            entryComponent: true
         }
     ];
 

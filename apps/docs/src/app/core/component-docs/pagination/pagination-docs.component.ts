@@ -71,12 +71,12 @@ export class PaginationDocsComponent {
         {
             language: 'html',
             code: paginationPerPageHtml,
-            fileName: 'pagination-perpage-example',
+            fileName: 'pagination-per-page-example',
         },
         {
             language: 'typescript',
             code: paginationPerPageTs,
-            fileName: 'pagination-perpage-example',
+            fileName: 'pagination-per-page-example',
             component: 'PaginationPerPageExampleComponent'
         }
     ];

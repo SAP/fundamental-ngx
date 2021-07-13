@@ -4,7 +4,6 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { ObjectStatusDocsComponent } from './object-status-docs.component';
 import {
-    ObjectStatusDefaultExampleComponent,
     ObjectStatusTextExampleComponent,
     ObjectStatusTextIconExampleComponent,
     ObjectStatusClickableAndIconExampleComponent,
@@ -16,6 +15,7 @@ import {
 import { ObjectStatusHeaderComponent } from './object-status-header/object-status-header.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ObjectStatusDefaultExampleComponent } from './examples/object-status-default-example.component';
 
 const routes: Routes = [
     {

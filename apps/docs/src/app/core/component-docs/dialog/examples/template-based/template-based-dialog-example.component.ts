@@ -2,7 +2,7 @@ import { Component, TemplateRef } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 
 @Component({
-    selector: 'fd-dialog-open-template-example',
+    selector: 'fd-template-based-dialog-example',
     templateUrl: './template-based-dialog-example.component.html'
 })
 export class TemplateBasedDialogExampleComponent {

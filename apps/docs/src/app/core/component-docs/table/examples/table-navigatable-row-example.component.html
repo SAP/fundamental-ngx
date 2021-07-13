@@ -11,13 +11,13 @@
     </thead>
     <tbody fd-table-body [noBorderX]="true">
         <tr *ngFor="let row of tableRows; let i = index" fd-table-row [attr.aria-selected]="row.checked" (click)="alert(row)"
-        [activable]="true" [hoverable]="true" [navigatable]="row.navigatable" >
+        [activable]="true" [hoverable]="true">
             <td fd-table-cell><a fd-link href="#">{{ row.column1 }}</a></td>
             <td fd-table-cell>{{ row.column2 }}</td>
             <td fd-table-cell>{{ row.column3 }}</td>
             <td fd-table-cell>{{ row.date }}</td>
             <td fd-table-cell [fitContent]="true" [noPadding]="true">
-                <i fd-table-icon [glyph]="getGlyph(row)" [navigation]="row.navigatable" role="presentation"></i>
+                <i fd-table-icon [glyph]="getGlyph(row)" role="presentation"></i>
             </td>
         </tr>
     </tbody>
@@ -37,7 +37,7 @@
         </tr>
     </thead>
     <tbody fd-table-body>
-        <tr *ngFor="let row of tableRowsAdditional" fd-table-row [hoverable]="true" [navigatable]="row.navigatable">
+        <tr *ngFor="let row of tableRowsAdditional" fd-table-row [hoverable]="true">
             <td fd-table-cell>
                 <a fd-link href="#">{{ row.column1 }}</a>
             </td>
@@ -69,7 +69,7 @@
         </thead>
         <tbody fd-table-body>
         <ng-container *ngFor="let fruit of fruits">
-            <tr fd-table-row [main]="true" [activable]="true" [navigatable]="fruit.navigatable" (click)="alert(fruit)"> 
+            <tr fd-table-row [main]="true" [activable]="true" (click)="alert(fruit)"> 
                 <td fd-table-cell>
                     <p fd-table-text [title]="true">{{fruit.name}}</p>
                     <p fd-table-text>{{fruit.country}}</p>
@@ -78,10 +78,10 @@
                     {{fruit.price}}
                 </td>
                 <td fd-table-cell [fitContent]="true" [noPadding]="true">
-                    <i fd-table-icon [glyph]="getGlyph(fruit)" [navigation]="fruit.navigatable" role="presentation"></i>
+                    <i fd-table-icon [glyph]="getGlyph(fruit)" role="presentation"></i>
                 </td>
             </tr>
-            <tr fd-table-row [secondary]="true" [navigable]="fruit.navigable">
+            <tr fd-table-row [secondary]="true">
                 <td fd-table-cell colspan="100%">
                     <p fd-table-text>
                         <label fd-form-label>Status:</label>

@@ -4,7 +4,7 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 export class CheckboxPo extends CoreBaseComponentPo {
     private url = '/checkbox';
 
-    standardCheckbox = 'fd-default-checkbox-example ';
+    standardCheckbox = 'fd-checkbox-default-example ';
     tristateCheckbox = 'fd-checkbox-tristate-example ';
     customValueCheckbox = 'fd-checkbox-custom-values-example ';
     reactiveFormCheckbox = 'fd-checkbox-reactive-forms-example ';

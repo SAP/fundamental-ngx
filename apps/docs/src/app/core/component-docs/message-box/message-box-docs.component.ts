@@ -59,7 +59,7 @@ export class MessageBoxDocsComponent {
     componentBased: ExampleFile[] = [
         {
             language: 'typescript',
-            code: componentBasedTs,
+            code: componentBasedExampleTs,
             name: 'Message box content',
             fileName: 'message-box-example',
             component: 'MessageBoxExampleComponent',
@@ -67,7 +67,7 @@ export class MessageBoxDocsComponent {
         },
         {
             language: 'typescript',
-            code: componentBasedExampleTs,
+            code: componentBasedTs,
             entryComponent: true,
             main: true,
             fileName: 'component-based-message-box-example',
@@ -124,13 +124,13 @@ export class MessageBoxDocsComponent {
             name: 'Message box complex',
             fileName: 'complex-template-example',
             component: 'ComplexTemplateExampleComponent',
+            main: true,
             entryComponent: true
         },
         {
             language: 'typescript',
             code: complexTemplateExampleTs,
             entryComponent: true,
-            main: true,
             fileName: 'message-box-complex-example',
             component: 'MessageBoxComplexExampleComponent'
         }
