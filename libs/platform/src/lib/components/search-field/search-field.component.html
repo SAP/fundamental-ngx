@@ -4,7 +4,11 @@
     [class.is-loading]="isLoading"
     [class.hide-category-label]="hideCategoryLabel"
 >
-    <div #inputGroup class="fdp-search-field__input-group fd-input-group" [class.is-focus]="isFocused">
+    <div
+        #inputGroup
+        class="fdp-search-field__input-group fd-input-group"
+        [class.is-focus]="isFocused"
+    >
         <span
             class="fd-input-group__addon fd-input-group__addon--button"
             [class.fd-input-group__addon--compact]="contentDensity === 'compact'"
@@ -23,7 +27,6 @@
         <input
             #inputField
             type="search"
-            role="search"
             [attr.placeholder]="placeholder"
             class="fdp-search-field__input fd-input fd-input-group__input"
             [attr.id]="inputId"
@@ -61,7 +64,7 @@
         >
             <button
                 i18n-title="@@platformSearchFieldSubmitButtonTitle"
-                title="search"
+                title="Search"
                 class="fdp-search-field__submit fd-input-group__button fd-button fd-button--transparent"
                 [attr.id]="submitId"
                 [attr.disabled]="disabled ? '' : null"
@@ -88,7 +91,6 @@
         </span>
     </div>
 </div>
-
 <ng-template #suggestionMenuTemplate>
     <div
         class="fdp-search-field__suggestion-dropdown fd-popover__body fd-popover__body--no-arrow"
