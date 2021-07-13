@@ -19,13 +19,13 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
+import { UP_ARROW, DOWN_ARROW, ESCAPE } from '@angular/cdk/keycodes';
 import { Overlay, OverlayConfig, ConnectedPosition, OverlayRef } from '@angular/cdk/overlay';
 import { FocusKeyManager, FocusableOption, LiveAnnouncer } from '@angular/cdk/a11y';
-import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW, DOWN_ARROW, ESCAPE } from '@angular/cdk/keycodes';
 import { TemplatePortal } from '@angular/cdk/portal';
+
 import { Observable, isObservable, of, Subscription, fromEvent, Subject } from 'rxjs';
 import { map, filter, take, takeUntil, tap } from 'rxjs/operators';
-
 import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 
@@ -75,7 +75,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     /**
      * Place holder text for search input field.
      */
-    @Input() placeholder: string;
+    @Input()
+    placeholder: string;
 
     /**
      * List of string values to populate suggestion dropdown selection.
@@ -121,7 +122,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     /**
      * Initial input text.
      */
-    @Input() inputText: string;
+    @Input()
+    inputText: string;
 
     /**
      * List of categories.
@@ -139,55 +141,65 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     /**
      * Set label for category dropdown button.
      */
-    @Input() categoryLabel = 'Category';
+    @Input()
+    categoryLabel = 'Category';
 
     /**
      * Hide display of category label
      */
-    @Input() hideCategoryLabel = false;
+    @Input()
+    hideCategoryLabel = false;
 
     /**
      * Toggle "loading" mode.
      */
-    @Input() isLoading = false;
+    @Input()
+    isLoading = false;
 
     /**
      * ARIA label to specify what the search field is
      * Not shown in the UI, only visible by the screen-readers.
      */
-    @Input() ariaLabel: string;
+    @Input()
+    ariaLabel: string;
 
     /**
      * Id of elements (separated by space) for setting aria-labelledby for search input
      * Not shown in the UI, only visible by the screen-readers.
      */
-    @Input() ariaLabelledby: string;
+    @Input()
+    ariaLabelledby: string;
 
     /**
      * Message announced by screen reader, when search suggestions opens.
      */
-    @Input() searchSuggestionMessage = 'suggestions found.';
+    @Input()
+    searchSuggestionMessage = 'suggestions found.';
 
     /**
      * Second part of message for search suggestion.
      * direction for navigating the suggestion. This is not necessry in case of 0 suggestion.
      */
-    @Input() searchSuggestionNavigateMessage = 'use up and down arrows to navigate';
+    @Input()
+    searchSuggestionNavigateMessage = 'use up and down arrows to navigate';
 
     /**
      * Input change event.
      */
-    @Output() inputChange: EventEmitter<SearchInput> = new EventEmitter();
+    @Output()
+    inputChange: EventEmitter<SearchInput> = new EventEmitter();
 
     /**
      * Search submit event.
      */
-    @Output() searchSubmit: EventEmitter<SearchInput> = new EventEmitter();
+    @Output()
+    searchSubmit: EventEmitter<SearchInput> = new EventEmitter();
 
     /**
      * Cancel search event.
      */
-    @Output() cancelSearch: EventEmitter<void> = new EventEmitter();
+    @Output()
+    cancelSearch: EventEmitter<void> = new EventEmitter();
 
     /** @hidden Focus state */
     get isFocused(): boolean {
@@ -252,7 +264,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         private _viewContainerRef: ViewContainerRef,
         protected _cd: ChangeDetectorRef,
         private _rtl: RtlService,
-        private readonly elementRef: ElementRef,
+        private readonly _elementRef: ElementRef,
         private _liveAnnouncer: LiveAnnouncer
     ) {
         super(_cd);
@@ -480,10 +492,12 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      */
     private _getSuggestionsLength(): number {
         let count = 0;
-        this.suggestions?.forEach((suggestion) => {
-            if (this.inputText && suggestion.value?.toLowerCase().indexOf(this.inputText?.trim()?.toLowerCase()) > -1) {
-                count++;
-            }
+        this.dropdownValues$.subscribe((suggestions) => {
+            suggestions?.forEach((suggestion) => {
+                if (this.inputText && suggestion?.toLowerCase().indexOf(this.inputText?.trim()?.toLowerCase()) > -1) {
+                    count++;
+                }
+            });
         });
 
         return count;
@@ -491,7 +505,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
 
     /** @hidden */
     private _listenElementEvents(): void {
-        fromEvent(this.elementRef.nativeElement, 'focus', { capture: true })
+        fromEvent(this._elementRef.nativeElement, 'focus', { capture: true })
             .pipe(
                 tap(() => {
                     this._isFocused = true;
@@ -500,7 +514,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
                 takeUntil(this._onDestroy$)
             )
             .subscribe();
-        fromEvent(this.elementRef.nativeElement, 'blur', { capture: true })
+        fromEvent(this._elementRef.nativeElement, 'blur', { capture: true })
             .pipe(
                 tap(() => {
                     this._isFocused = false;
