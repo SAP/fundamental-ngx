@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.88](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.87...v0.31.0-rc.88) (2021-07-13)
+
+
+### Bug Fixes
+
+* **core,platform:** replace name with attr.name for taborder to work correctly ([#5895](https://github.com/SAP/fundamental-ngx/issues/5895)) ([49ae715](https://github.com/SAP/fundamental-ngx/commit/49ae715e684577f67472edbcf1f1b3a54583fa65))
+
 ## [0.31.0-rc.87](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.86...v0.31.0-rc.87) (2021-07-12)
 
 
