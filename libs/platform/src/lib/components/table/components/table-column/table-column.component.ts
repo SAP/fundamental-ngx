@@ -143,7 +143,7 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
 
     /** @hidden */
     constructor(
-        private readonly _rtlService: RtlService,
+        @Optional() private readonly _rtlService: RtlService,
         @Optional() @SkipSelf() @Host() private readonly _tableService: TableService
     ) {
         super();
@@ -187,7 +187,7 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
             .asObservable()
             .pipe(
                 switchMap((align) =>
-                    this._rtlService.rtl.pipe(
+                    this._rtlService?.rtl.pipe(
                         map(
                             (isRtl): ColumnAlignEnum => {
                                 if (isRtl && align === ColumnAlignEnum.Start) {
