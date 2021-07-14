@@ -413,6 +413,9 @@ export class MultiInputComponent implements
         if (!this.open) {
             this._resetSearchTerm();
         }
+
+        this.tokenizer.removeSelectedTokens();
+
         this._changeDetRef.detectChanges();
     }
 

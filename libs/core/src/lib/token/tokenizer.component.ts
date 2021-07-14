@@ -402,6 +402,11 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         this.moreClickedEvent.emit();
     }
 
+    removeSelectedTokens(): void {
+        const selectedElements = this._getActiveTokens();
+        selectedElements.forEach(element => element.onCloseClick.emit());
+    }
+
     /** @hidden */
     private _handleArrowLeft(fromIndex: number): void {
         // if the leftmost visible token is selected, and there are moreTokensLeft, need to display a moreTokenLeft
