@@ -29,6 +29,7 @@ export interface PanEndOutput {
     after: boolean;
 }
 
+/** @dynamic */
 @Injectable({
     providedIn: 'root'
 })
@@ -85,7 +86,10 @@ export class CarouselService implements OnDestroy {
     /** @hidden */
     private _dragStarted = false;
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    /**
+     * @hidden
+     * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
+     */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
@@ -337,6 +341,7 @@ export class CarouselService implements OnDestroy {
         this._setupDragEnd();
     }
 
+    /** @hidden */
     private _subscribeToEvents(
                                events: string[],
                                element: HTMLElement | Document,
