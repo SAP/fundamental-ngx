@@ -35,6 +35,12 @@
                     Serial approver
                 </fd-radio-button>
             </div>
+
+            <div *ngIf="_nodeType === _nodeTypes.PARALLEL" fd-form-item>
+                <fd-checkbox
+                    [(ngModel)]="_toNextSerial"
+                    i18n="@@platformApprovalFlowAddToNext">Add to the next serial node</fd-checkbox>
+            </div>
         </fd-form-group>
     </fd-dialog-body>
 
@@ -48,7 +54,7 @@
                     i18n-label="@@platformApprovalFlowSelectTypeDialogConfirm"
                     label="Confirm"
                     [compact]="true"
-                    (click)="_dialogRef.close(_nodeType)">
+                    (click)="_submit()">
                 </button>
             </fd-dialog-footer-button>
 

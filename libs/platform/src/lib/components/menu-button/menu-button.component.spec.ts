@@ -39,7 +39,7 @@ describe('MenuButtonComponent', () => {
 
     it('button onclick should be called', () => {
         spyOn(component, 'onButtonClick');
-        component.onButtonClick(event);
+        component.onButtonClick({});
         expect(component.onButtonClick).toHaveBeenCalled();
     });
 });
@@ -181,7 +181,7 @@ describe('Menu Button click on Item select', () => {
 
     it('clicked function should be called', () => {
         spyOn(host, 'clicked');
-        host.clicked(event);
+        host.clicked({});
         expect(host.clicked).toHaveBeenCalled();
     });
 

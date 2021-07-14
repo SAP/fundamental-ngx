@@ -33,6 +33,7 @@ export class ApprovalFlowPo extends BaseComponentPo {
     approvalFlowNodeName = this.approvalFlowNode + ' .approval-flow-node__name';
     approvalFlowNodeDescription = this.approvalFlowNode + ' .approval-flow-node__description';
     approvalFlowNodeCheckbox = 'fd-checkbox';
+    approvalFlowNodeCheckboxAlt = '//*[contains(@class, "fd-checkbox") and contains(@aria-disabled, "false")]/ancestor::fd-checkbox/label';
     approvalFlowNodeActionMenu = '.approval-flow-node__edit-controls button';
     approvalFlowNodeActionMenuItem = '[role="menuitem"]';
 
