@@ -16,7 +16,7 @@ export type WizardSize = 'sm' | 'md' | 'lg' | 'xl';
 })
 export class WizardProgressBarDirective {
     /**
-     * Size (padding) of the wizard progress bar.
+     * Size (horizontal paddings) of the wizard progress bar.
      */
     @Input()
     size: WizardSize = null;
