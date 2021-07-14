@@ -1,5 +1,5 @@
 <ng-template let-dialog let-dialogConfig="dialogConfig" #container>
-    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog" role="dialog">
         <fd-dialog-header [dir]="_dir">
             <ng-template fdTemplate="header">
                 <ng-container *ngTemplateOutlet="mobile ? mobileDialogTitle : desktopDialogTitle"></ng-container>
@@ -117,7 +117,6 @@
     <ng-container *ngIf="isSelectionTab">
         <form
             class="fdp-value-help-dialog__row fdp-value-help-dialog__advanced-search"
-            aria-label ="Selectid filters"
             [id]="'advanced-search-' + id"
             (ngSubmit)="search()"
         >
@@ -134,7 +133,8 @@
                                 [(ngModel)]="_mainSearch"
                                 name="value-help-dialog-search"
                                 id="value-help-dialog-search"
-                                [placeholder]="searchField.placeholder" />
+                                [placeholder]="searchField.placeholder"
+                                [attr.aria-label]="searchField.placeholder" />
 
                             <span fd-input-group-addon [compact]="true" button="true">
                                 <button fd-button title="Search" glyph="search" fdType="transparent" (click)="_searchAction(inputGroupField)"></button>
@@ -229,16 +229,16 @@
 </ng-template>
 
 <ng-template #dialogTitleText>
-    <h5 fd-title>{{ dialogTitle }}</h5>
+    <h5 [attr.id]="headerId" fd-title>{{ dialogTitle }}</h5>
 </ng-template>
 
 <ng-template #tabLink let-title="title" let-type="type">
     <ng-container *ngIf="selectedTab === type && showSelectionTab && showDefineTab">
-        <button fd-button glyph="navigation-left-arrow" fdType="transparent" (click)="switchTab()"></button>
+        <button fd-button glyph="navigation-left-arrow" fdType="transparent" (click)="switchTab()" title="Back"></button>
         <h5 fd-title>{{ title }}</h5>
     </ng-container>
     <ng-container *ngIf="selectedTab !== type">
-        <a fd-list-link (click)="switchTab(type)">
+        <a fd-list-link (click)="switchTab(type)" title="Open dialog">
             <span fd-list-title>{{ title }}</span>
             <i fd-list-icon glyph="navigation-right-arrow"></i>
         </a>
@@ -276,26 +276,38 @@
 </ng-template>
 
 <ng-template #mobileTabs>
-    <ul fd-list [compact]="true" *ngIf="!hasSelectedTab && showSelectionTab && showDefineTab">
-        <li fd-list-item *ngIf="showSelectionTab">
-            <a fd-list-link (click)="switchTab(_tabTypes.selectFromList)">
-                <span fd-list-title>{{ selectTabTitle }}</span>
-                <i fd-list-icon glyph="navigation-right-arrow"></i>
-            </a>
-        </li>
-        <li fd-list-item *ngIf="showDefineTab">
-            <a fd-list-link (click)="switchTab(_tabTypes.defineConditions)">
-                <span fd-list-title>{{ defineTabTitle }}</span>
-                <i fd-list-icon glyph="navigation-right-arrow"></i>
-            </a>
-        </li>
-    </ul>
+  <div *ngIf="!hasSelectedTab && showSelectionTab && showDefineTab">
+    <div fd-bar [inPage]="true"  *ngIf="showSelectionTab">
+      <div fd-bar-left>
+        <fd-bar-element>
+            {{ selectTabTitle }}
+        </fd-bar-element>
+      </div>
+    <div fd-bar-right>
+        <fd-bar-element>
+			<fd-button-bar glyph="navigation-right-arrow" (click)="switchTab(_tabTypes.selectFromList)" title="{{selectTabTitle}} tab "></fd-button-bar>
+        </fd-bar-element>
+    </div>
+  </div>
+  <div fd-bar [inPage]="true" *ngIf="showDefineTab">
+    <div fd-bar-left>
+        <fd-bar-element>
+            {{ defineTabTitle }}
+        </fd-bar-element>
+    </div>
+    <div fd-bar-right>
+       <fd-bar-element>
+		  <fd-button-bar glyph="navigation-right-arrow" (click)="switchTab(_tabTypes.defineConditions)" title="{{defineTabTitle}} tab "></fd-button-bar>
+        </fd-bar-element>
+      </div>
+    </div> 
+  </div>
 </ng-template>
 
 <ng-template #selectedTabHeader>
     <ng-container [ngSwitch]="selectedTab">
         <ng-container *ngSwitchCase="_tabTypes.selectFromList">
-            <ng-container *ngTemplateOutlet="tabLink, context: {title: 'Select from list', type: selectedTab}"></ng-container>
+            <ng-container *ngTemplateOutlet="tabLink, context: {title: selectTabTitle, type: selectedTab}"></ng-container>
         </ng-container>
         <ng-container *ngSwitchCase="_tabTypes.advancedSearch">
             <ng-container *ngTemplateOutlet="advancedHeader"></ng-container>

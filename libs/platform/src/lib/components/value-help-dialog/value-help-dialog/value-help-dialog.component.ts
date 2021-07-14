@@ -60,6 +60,10 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
   @Input()
   id: string = 'fdp-vhd-' + vhiUniqueId++;
 
+  /**add header id for handling accessibility */
+  @Input()
+  headerId: string;
+
   /** Initial state of Value help dialog */
   @Input()
   value: VhdValue<T[]> = {
@@ -355,6 +359,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
       maxWidth: this.mobile ? null : '92%',
       width: this.mobile ? null : '1080px',
       height: this.mobile ? null : '98%',
+      ariaLabelledBy: this.headerId,
     });
     this._listenDialogEvents();
   }
