@@ -404,7 +404,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     removeSelectedTokens(): void {
         const selectedElements = this._getActiveTokens();
-        selectedElements.forEach(element => element.onCloseClick.emit());
+        selectedElements.forEach(element => element.onRemove.emit());
     }
 
     /** @hidden */

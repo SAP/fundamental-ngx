@@ -428,7 +428,7 @@ export class MultiInputComponent implements
     }
 
     /** @hidden */
-    handleSelect(checked: any, value: any, event?: MouseEvent): void {
+    handleSelect(checked: any, value: any, resetSearch = true, event?: MouseEvent): void {
         if (event) {
             event.preventDefault(); // prevent this function from being called twice when checkbox updates
         }
@@ -436,8 +436,12 @@ export class MultiInputComponent implements
         if (checked) {
             this.selected.push(value);
         } else {
-            // remove the token whose close button was explicitly clicked
-            this.selected.splice(this.selected.indexOf(value), 1);
+            const selectedIndex = this.selected.indexOf(value);
+
+            if (selectedIndex > -1) {
+                // remove the token whose close button was explicitly clicked
+                this.selected.splice(this.selected.indexOf(value), 1);
+            }
         }
 
         // Handle popover placement update
@@ -445,7 +449,9 @@ export class MultiInputComponent implements
             this.popoverRef.refreshPosition();
         }
 
-        this._resetSearchTerm();
+        if (resetSearch) {
+            this._resetSearchTerm();
+        }
 
         this.searchInputElement.nativeElement.focus();
 

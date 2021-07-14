@@ -54,7 +54,8 @@
                 *ngFor="let token of selected"
                 [compact]="compact"
                 [disabled]="disabled"
-                (onCloseClick)="handleSelect(false, token, $event)"
+                (onCloseClick)="handleSelect(false, token, true, $event)"
+                (onRemove)="handleSelect(false, token, false)"
             >
                 <span [innerHtml]="token | displayFnPipe: displayFn"></span>
             </fd-token>
