@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.94](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.93...v0.31.0-rc.94) (2021-07-14)
+
+
+### Bug Fixes
+
+* **core:** provide screen reader access for inline help ([#5863](https://github.com/SAP/fundamental-ngx/issues/5863)) ([5f999e2](https://github.com/SAP/fundamental-ngx/commit/5f999e27fc6c1bd1317ad5754b767355a7adae43))
+
 ## [0.31.0-rc.93](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.92...v0.31.0-rc.93) (2021-07-14)
 
 ## [0.31.0-rc.92](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.91...v0.31.0-rc.92) (2021-07-13)
