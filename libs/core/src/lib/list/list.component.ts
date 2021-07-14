@@ -37,8 +37,7 @@ type FocusItem = ListGroupHeaderDirective | ListItemComponent;
     templateUrl: `./list.component.html`,
     host: {
         class: 'fd-list',
-        role: 'list',
-        tabindex: '0'
+        role: 'list'
     },
     styleUrls: ['./list.component.scss', '../utils/drag-and-drop/drag-and-drop.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -144,6 +143,7 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     ngAfterContentInit(): void {
         this._keyboardSupportService.setKeyboardService(this._focusItems, false);
         this._listenOnQueryChange();
+        this.setItemActive(0);
     }
 
     /** @hidden */
