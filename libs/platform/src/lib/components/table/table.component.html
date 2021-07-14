@@ -283,15 +283,14 @@
                             fd-table-row
                             fd-dnd-item
                             role="row"
-                            [hoverable]="_isShownSelectionColumn"
                             [class.fdp-table__row--tree]="_isTreeRow(row)"
-                            [attr.aria-rowindex]="rowIdx"
+                            [hoverable]="_isShownSelectionColumn || row.hasNavIndicator"
+                            [navigatable]="row.navigatable || rowsActivable"
+                            [activable]="row.hasNavIndicator || rowsActivable"
                             [attr.aria-selected]="row.checked"
+                            [attr.aria-rowindex]="rowIdx"
+                            (click)="_onRowClick(row)"
                             (started)="_dragDropStart()"
-                            [navigatable]="row.navigatable"
-                            [hoverable]="row.hasNavIndicator"
-                            [activable]="row.hasNavIndicator"
-                            (click)="row.hasNavIndicator && _navigateByRowNavigationTarget(row)"
                         >
                             <!-- Row Selection Cell -->
                             <ng-container [ngSwitch]="selectionMode">
@@ -426,6 +425,7 @@
         role="row"
         class="fdp-table__row--group"
         [attr.aria-rowindex]="rowIdx"
+        (click)="_emitRowActivate(row)"
     >
         <td
             fd-table-cell

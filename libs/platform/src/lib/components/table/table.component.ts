@@ -37,22 +37,6 @@ import { TableService } from './table.service';
 
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { SearchInput } from './interfaces/search-field.interface';
-import {
-    ColumnsChange,
-    FilterChange,
-    FreezeChange,
-    GroupChange,
-    SortChange,
-    TableColumnFreezeEvent,
-    TableColumnsChangeEvent,
-    TableFilterChangeEvent,
-    TableGroupChangeEvent,
-    TableRow,
-    TableRowSelectionChangeEvent,
-    TableRowsRearrangeEvent,
-    TableRowToggleOpenStateEvent,
-    TableSortChangeEvent
-} from './models';
 import { ContentDensity, FILTER_STRING_STRATEGY, SelectionMode, SortDirection, TableRowType } from './enums';
 import { DEFAULT_COLUMN_WIDTH, DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
 import { TableDataSource } from './domain/table-data-source';
@@ -64,6 +48,23 @@ import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-tool
 import { Table } from './table';
 import { TableScrollable, TableScrollDispatcherService } from './table-scroll-dispatcher.service';
 import { getScrollBarWidth } from './utils';
+import {
+    ColumnsChange,
+    FilterChange,
+    FreezeChange,
+    GroupChange,
+    SortChange,
+    TableColumnFreezeEvent,
+    TableColumnsChangeEvent,
+    TableFilterChangeEvent,
+    TableGroupChangeEvent,
+    TableRow,
+    TableRowActivateEvent,
+    TableRowSelectionChangeEvent,
+    TableRowsRearrangeEvent,
+    TableRowToggleOpenStateEvent,
+    TableSortChangeEvent
+} from './models';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
@@ -239,6 +240,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     @Input()
     navigationButton = false;
 
+    /** Whether table row can be clicked */
+    @Input()
+    rowsActivable = false;
+
     /** Event fired when table selection has changed. */
     @Output()
     readonly rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<T>> = new EventEmitter<TableRowSelectionChangeEvent<T>>();
@@ -273,6 +278,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      */
     @Output()
     readonly rowsRearrange = new EventEmitter<TableRowsRearrangeEvent<T>>();
+
+    /*
+     * Event fired when row clicked
+     */
+    @Output()
+    readonly rowActivate = new EventEmitter<TableRowActivateEvent<T>>();
 
     /** @hidden */
     @ViewChild('verticalScrollable')
@@ -871,6 +882,27 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     _getRowHeight(): number {
         return ROW_HEIGHT.get(this.contentDensity);
+    }
+
+    /** @hidden */
+    _onRowClick(row: TableRow<T>): void {
+        if (row.hasNavIndicator) {
+            this._navigateByRowNavigationTarget(row);
+        }
+
+        if (this.rowsActivable) {
+            this._emitRowActivate(row);
+        }
+    }
+
+    /** @hidden */
+    _emitRowActivate(row: TableRow<T>): void {
+        if (!this.rowsActivable) {
+            return;
+        }
+
+        const rowIndex = this._tableRows.indexOf(row);
+        this.rowActivate.emit(new TableRowActivateEvent<T>(rowIndex, row.value));
     }
 
     /**

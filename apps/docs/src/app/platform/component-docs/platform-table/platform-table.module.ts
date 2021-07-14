@@ -38,6 +38,7 @@ import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { RtlService } from '@fundamental-ngx/core/utils';
+import { PlatformTableActivableExampleComponent } from './platform-table-examples/platform-table-activable-example.component';
 
 const routes: Routes = [
     {
@@ -85,7 +86,8 @@ const routes: Routes = [
         PlatformTableTreeExampleComponent,
         PlatformTableLoadingExampleComponent,
         PlatformTableNavigatableRowIndicatorExampleComponent,
-        PlatformTableNavigatableRowButtonExampleComponent
+        PlatformTableNavigatableRowButtonExampleComponent,
+        PlatformTableActivableExampleComponent
     ],
     providers: [RtlService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
