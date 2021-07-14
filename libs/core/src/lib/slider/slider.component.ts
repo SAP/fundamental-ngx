@@ -603,8 +603,18 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         this._updatePopoversPosition();
     }
 
+    /** @hidden show popover on focus over slider handle */
+    onFocus(event: MouseEvent | KeyboardEvent): void {
+        this._showPopovers();
+        this._cdr.markForCheck();
+    }
+
     /** @hidden reset default prefix on leaving the slider */
-    onBlur(event: MouseEvent): void {
+    onBlur(event: MouseEvent | KeyboardEvent): void {
+        // hide popover when focus moves out of slider handle
+        this._hidePopovers();
+
+        // reset prefix string for slider current value that need to be announced
         if (this._isRange) {
             this._rangeSliderHandle2CurrentValuePrefix = this.rangeSliderHandle2CurrentValuePrefix;
             this._rangeSliderHandle2CurrentValuePrefix = this.rangeSliderHandle2CurrentValuePrefix;

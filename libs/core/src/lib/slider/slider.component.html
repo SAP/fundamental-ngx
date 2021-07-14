@@ -67,6 +67,7 @@
         i18n-aria-valuenow="@@slider.single.valuenow.details|Slider valuenow attribute"
         i18n-aria-valuetext="@@slider.single.valuetext.details|Slider valuetext attribute"
         (mousedown)="onHandleClick($event); $event.stopPropagation()"
+        (focus)="onFocus($event)"
         (blur)="onBlur($event)"
         (keydown)="onKeyDown($event)"
     ></div>
@@ -123,6 +124,7 @@
         i18n-aria-valuetext="@@slider.range.handle1.valuetext.details|range slider valuetext attribute"
         (mousedown)="onHandleClick($event); $event.stopPropagation()"
         (keydown)="onKeyDown($event)"
+        (focus)="onFocus($event)"
         (blur)="onBlur($event)"
     ></div>
 
@@ -151,6 +153,7 @@
         i18n-aria-valuetext="@@slider.range.handle2.valuetext.details|range 2 slider valuetext attribute"
         (mousedown)="onHandleClick($event); $event.stopPropagation()"
         (keydown)="onKeyDown($event)"
+        (focus)="onFocus($event)"
         (blur)="onBlur($event)"
     ></div>
 
