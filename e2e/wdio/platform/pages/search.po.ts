@@ -7,7 +7,7 @@ export class SearchPo extends BaseComponentPo {
     root = '#page-content';
 
     searchFields = '[type="search"]';
-    searchIcons = '[title="Submit"]';
+    searchIcons = '[title="search"]';
     clearSearchIcon = '.fdp-search-field__clear';
     searchCategoryBtn = '.fdp-search-field__category-button';
     autosuggestionItems = '[role="menu"] [role="menuitem"]';

@@ -5,7 +5,7 @@ import { SearchFieldComponent, SuggestionMatchesPipe, SearchFieldSuggestionDirec
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PlatformMenuModule } from '../menu/public_api';
-import { IconModule } from '@fundamental-ngx/core';
+import { IconModule } from '@fundamental-ngx/core/icon';
 
 @NgModule({
     imports: [
