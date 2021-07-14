@@ -4,6 +4,7 @@ import * as toolbarTypeExampleHtml from '!raw-loader!./examples/toolbar-type-exa
 import * as toolbarTitleExampleHtml from '!raw-loader!./examples/toolbar-title-example.component.html';
 import * as toolbarSpacerExampleHtml from '!raw-loader!./examples/toolbar-spacer-example.component.html';
 import * as toolbarSeparatorExampleHtml from '!raw-loader!./examples/toolbar-separator-example.component.html';
+import * as toolbarOverflowExampleTs from '!raw-loader!./examples/toolbar-overflow-example.component.ts';
 import * as toolbarOverflowExampleHtml from '!raw-loader!./examples/toolbar-overflow-example.component.html';
 import * as toolbarOverflowPriorityExampleHtml from '!raw-loader!./examples/toolbar-overflow-priority-example.component.html';
 import * as toolbarOverflowGroupingExampleHtml from '!raw-loader!./examples/toolbar-overflow-grouping-example.component.html';
@@ -52,6 +53,12 @@ export class ToolbarDocsComponent {
             language: 'html',
             code: toolbarOverflowExampleHtml,
             fileName: 'toolbar-overflow-example'
+        },
+        {
+            language: 'typescript',
+            code: toolbarOverflowExampleTs,
+            fileName: 'toolbar-overflow-example',
+            component: 'ToolbarOverflowExampleComponent'
         }
     ];
 
