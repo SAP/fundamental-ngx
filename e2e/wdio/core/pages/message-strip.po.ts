@@ -3,7 +3,7 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class MessageStripPo extends CoreBaseComponentPo {
     private url = '/message-strip';
-    
+
     defaultExample = 'fd-message-strip-example ';
     noIconExample = 'fd-message-strip-noicon-example ';
     widthExample = 'fd-message-strip-width-example ';
@@ -11,19 +11,15 @@ export class MessageStripPo extends CoreBaseComponentPo {
 
     messageStrip = '.fd-message-strip';
     dismissButton = '.fd-message-strip__close';
-
-    dissmissibleCheckbox = 'label[for="playgrounddismissible"]'
-    noIconCheckbox = 'label[for="playgroundnoIcon"]'
-    widthInput = '#playgroundwidth'
+    dismissibleCheckbox = 'label[for="playgrounddismissible"]';
+    noIconCheckbox = 'label[for="playgroundnoIcon"]';
+    widthInput = '#playgroundwidth';
     messageInput = '#playgroundmessage';
-
-    select = '#playgroundtype';
-
+    typeSelectionField = '#playgroundtype';
     messageStripPG = this.playground + this.messageStrip;
     stateOption = this.playground + 'option';
-    resetButton = this.playground + '.schema--inner-group:nth-child(3) .fd-button';
+    resetButton = this.playground + '.fd-fieldset .fd-button';
     messageStripMessage = this.playground + '.fd-message-strip__text';
-
 
     open(): void {
         super.open(this.url);

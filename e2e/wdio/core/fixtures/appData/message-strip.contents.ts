@@ -9,7 +9,7 @@ export const messageTypes = [
     'success',
     'information',
     'error'
-]
+];
 
 export const playgroundStates = [
     'default',

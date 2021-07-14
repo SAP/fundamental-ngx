@@ -11,11 +11,11 @@ import {
     waitForElDisplayed
 } from '../../driver/wdio';
 
-import { sections, messageTypes, playgroundStates } from '../fixtures/appData/message-strip.conents'
-import { customMessage, customWidth } from '../fixtures/testData/message-strip.tags'
+import { sections, messageTypes, playgroundStates } from '../fixtures/appData/message-strip.contents';
+import { customMessage, customWidth } from '../fixtures/testData/message-strip';
 import { MessageStripPo } from '../pages/message-strip.po';
 
-describe('Message-strip test suite', function () {
+describe('Message-strip test suite', function() {
     const messageStripPage = new MessageStripPo();
     const {
         noIconExample,
@@ -23,11 +23,11 @@ describe('Message-strip test suite', function () {
         messageStrip,
         dismissButton,
         playground,
-        dissmissibleCheckbox,
+        dismissibleCheckbox,
         noIconCheckbox,
         widthInput,
         messageInput,
-        select,
+        typeSelectionField,
         messageStripPG,
         messageStripMessage,
         resetButton,
@@ -40,7 +40,7 @@ describe('Message-strip test suite', function () {
 
     beforeEach(() => {
         refreshPage();
-        waitForElDisplayed(messageStripPage.title)
+        waitForElDisplayed(messageStripPage.title);
     }, 1);
 
 
@@ -84,12 +84,12 @@ describe('Message-strip test suite', function () {
 
         it('should check choosing states of message-strip', () => {
             for (let i = 0; i < playgroundStates.length; i++) {
-                click(select);
+                click(typeSelectionField);
                 click(stateOption, i);
                 expect(getElementClass(messageStripPG)).toContain(playgroundStates[i]);
             }
             click(resetButton);
-            expect(getElementClass(messageStripPG)).toContain(playgroundStates[0])
+            expect(getElementClass(messageStripPG)).toContain(playgroundStates[0]);
         });
 
         it('should check changing message in message-strip', () => {
@@ -105,11 +105,11 @@ describe('Message-strip test suite', function () {
             setValue(widthInput, customWidth);
             expect(getAttributeByName(messageStripPG, 'style')).toContain(`width: ${customWidth}`);
             click(resetButton);
-            expect(getValue(widthInput)).toEqual(defaultWidth)
+            expect(getValue(widthInput)).toEqual(defaultWidth);
         });
 
-        it('should check working dissmisible mode', () => {
-            click(dissmissibleCheckbox);
+        it('should check working dismissible mode', () => {
+            click(dismissibleCheckbox);
             // checkbox is enabled by default
             expect(getElementClass(messageStripPG)).not.toContain('dismissible');
             click(resetButton);
@@ -121,8 +121,7 @@ describe('Message-strip test suite', function () {
             expect(getElementClass(messageStripPG)).toContain('no-icon');
             click(resetButton);
             expect(getElementClass(messageStripPG)).not.toContain('no-icon');
-        })
-
+        });
     });
 
     function checkDismissingMessage(section: string): void {
@@ -135,20 +134,18 @@ describe('Message-strip test suite', function () {
                 expect(isElementDisplayed(section + messageStrip, i)).toBe(false);
             }
         }
-    };
+    }
 
     function checkMessageStatus(section: string): void {
         const messageLength = getElementArrayLength(section + messageStrip);
         for (let i = 0; i < messageLength; i++) {
             if (i === 4) {
                 for (let j = 0; j < messageTypes.length; j++) {
-                    expect(getElementClass(section + messageStrip, i)).not.toContain(messageTypes[j])
+                    expect(getElementClass(section + messageStrip, i)).not.toContain(messageTypes[j]);
                 }
                 continue;
             }
-            expect(getElementClass(section + messageStrip, i)).toContain(messageTypes[i])
+            expect(getElementClass(section + messageStrip, i)).toContain(messageTypes[i]);
         }
-    };
-
-
+    }
 });
