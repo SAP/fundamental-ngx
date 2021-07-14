@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.97](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.96...v0.31.0-rc.97) (2021-07-14)
+
+
+### Bug Fixes
+
+* **platform:** table dependencies refactoring ([#5967](https://github.com/SAP/fundamental-ngx/issues/5967)) ([9c7cbef](https://github.com/SAP/fundamental-ngx/commit/9c7cbeffe16d091524de5d77bfaeb2c8ad4976d0))
+
 ## [0.31.0-rc.96](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.95...v0.31.0-rc.96) (2021-07-14)
 
 ## [0.31.0-rc.95](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.94...v0.31.0-rc.95) (2021-07-14)
