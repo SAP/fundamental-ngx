@@ -12,8 +12,8 @@ export class MessageStripPo extends CoreBaseComponentPo {
     messageStrip = '.fd-message-strip';
     dismissButton = '.fd-message-strip__close';
 
-    dissmissibleCheckbox = '#playgrounddismissible'
-    noIconCheckbox = '#playgroundnoIcon'
+    dissmissibleCheckbox = 'label[for="playgrounddismissible"]'
+    noIconCheckbox = 'label[for="playgroundnoIcon"]'
     widthInput = '#playgroundwidth'
     messageInput = '#playgroundmessage';
 
