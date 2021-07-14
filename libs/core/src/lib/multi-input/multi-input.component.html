@@ -68,6 +68,8 @@
                    [compact]="compact"
                    [disabled]="disabled"
                    [attr.aria-required]="required"
+                   [attr.aria-haspopup]="!mobile"
+                   [attr.aria-expanded]="!!(open && !mobile && displayedValues && displayedValues.length)"
                    [ngClass]="{ 'fd-input--compact': compact }"
                    (ngModelChange)="_handleSearchTermChange($event)"
                    (keydown)="_handleInputKeydown($event)"
