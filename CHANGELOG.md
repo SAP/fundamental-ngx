@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.104](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.103...v0.31.0-rc.104) (2021-07-15)
+
+
+### Bug Fixes
+
+* **platform:** remove style from ngx to reuse the style from fundamental-style lib for menu component ([#5962](https://github.com/SAP/fundamental-ngx/issues/5962)) ([1ad3d12](https://github.com/SAP/fundamental-ngx/commit/1ad3d12defe48d866c24b80895dd236e64794e99))
+
 ## [0.31.0-rc.103](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.102...v0.31.0-rc.103) (2021-07-15)
 
 ## [0.31.0-rc.102](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.101...v0.31.0-rc.102) (2021-07-15)
