@@ -1,4 +1,5 @@
 import {
+    browserIsFirefox,
     click,
     doesItExist,
     getElementArrayLength,
@@ -66,7 +67,8 @@ describe('Approval flow', function() {
         messageStripCancelUndoMessage,
         topActionButtons,
         approvalFlowNodeActionMenu,
-        approvalFlowNodeActionMenuItem
+        approvalFlowNodeActionMenuItem,
+        approvalFlowNodeCheckboxAlt
     } = approvalFlowPage;
 
     beforeAll(() => {
@@ -186,7 +188,7 @@ describe('Approval flow', function() {
         waitForElDisplayed(editExampleButton);
         click(editExampleButton);
         waitForElDisplayed(approvalFlowNode, 1);
-        click(approvalFlowNode, 1);
+        browserIsFirefox() ? click(approvalFlowNode, 3) : click(approvalFlowNode, 1);
         waitForElDisplayed(detailsDialogSearchInput);
         const usersCountBeforeSearch = getElementArrayLength(detailsDialogTeamMemberName);
         setValue(detailsDialogSearchInput, 'Caleb');
@@ -248,7 +250,7 @@ describe('Approval flow', function() {
 
             click(editExampleButton);
             waitForElDisplayed(addNode, 1);
-            click(addNode, 1);
+            browserIsFirefox() ? click(addNode, 2) : click(addNode, 1);
             click(detailsDialogParallelSerialSelect);
             click(detailsDialogParallelSerialSelectOption, 1);
             click(detailsDialogUserTeamButton);
@@ -307,9 +309,9 @@ describe('Approval flow', function() {
             waitForElDisplayed(editExampleButton);
             click(editExampleButton);
             waitForElDisplayed(approvalFlowNodeCheckbox);
-            click(approvalFlowNodeCheckbox, 1);
-            waitForElDisplayed(topActionButtons, 3);
-            click(topActionButtons, 3);
+            browserIsFirefox() ? click(approvalFlowNodeCheckboxAlt, 1) : click(approvalFlowNodeCheckbox, 1);
+            waitForElDisplayed(topActionButtons, 2);
+            click(topActionButtons, 2);
             const approvalFlowNodeCountAfterRemove = getElementArrayLength(approvalFlowNode);
 
             expect(approvalFlowNodeCountBefore).toEqual(approvalFlowNodeCountAfterRemove + 1);

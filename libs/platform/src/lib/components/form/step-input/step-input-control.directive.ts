@@ -19,11 +19,12 @@ export class StepInputControlDirective {
      * @hidden
      * Handle "input" event to keep track of what user is entering
      */
-    @HostListener('input')
-    onInput(): void {
+    @HostListener('input', ['$event'])
+    onInput(event: InputEvent): void {
         if (!this.stepInput.canChangeValue) {
             return;
         }
+
         const value: string = ((event.target as HTMLInputElement).value || '').trim();
         this.stepInput.onEnterValue(value);
     }

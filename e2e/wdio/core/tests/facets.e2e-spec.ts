@@ -1,0 +1,56 @@
+import { FacetsPo } from '../pages/facets.po';
+import { click, getElementArrayLength, getText, isElementClickable, refreshPage, waitForPresent } from '../../driver/wdio';
+
+describe('dynamic side content test suite', function () {
+    const facetsPage = new FacetsPo();
+    const {
+        linkFacestExample,
+        raitingIndicatorExample,
+        groupExample,
+        link,
+        chosenRaitingStars,
+        raitingIndicator
+     } = facetsPage;
+
+    beforeAll(() => {
+        facetsPage.open();
+    }, 1);
+
+    afterEach(() => {
+        refreshPage();
+        waitForPresent(link);
+    }, 1);
+
+    it('Should check raiting indicator', () => {
+        CheckRaitingIndicator(raitingIndicatorExample);
+        CheckRaitingIndicator(groupExample)
+    })
+
+    it('Should check that links is clickable', () => {
+        const linkLength = getElementArrayLength(linkFacestExample + link);
+        for (let i = 0; i < linkLength; i++) {
+            expect(isElementClickable(linkFacestExample + link, i)).toBe(true, `link with index ${i} is not clickable`)
+        }
+    })
+
+    describe('check orientation', function () {
+        it('should check RTL and LTR orientation', () => {
+            facetsPage.checkRtlSwitch();
+        });
+    });
+
+    describe('Check visual regression', function () {
+        it('should check examples visual regression', () => {
+            facetsPage.saveExampleBaselineScreenshot();
+            expect(facetsPage.compareWithBaseline()).toBeLessThan(5);
+        });
+    });
+    
+    function CheckRaitingIndicator(section: string): void {
+        const lengthRI = getElementArrayLength(section + raitingIndicator)
+        for(let i = 1; i < lengthRI; i++){
+        click(section + raitingIndicator, i)
+        expect(getText(section + chosenRaitingStars)).toEqual(`(${i} of 5)`)
+        }
+    }
+});

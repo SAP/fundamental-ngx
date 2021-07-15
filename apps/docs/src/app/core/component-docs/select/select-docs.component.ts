@@ -144,9 +144,9 @@ export class SelectDocsComponent {
         {
             language: 'html',
             code: selectSemanticStateHtml,
-            fileName: 'select-types-example',
+            fileName: 'select-semantic-state-example',
             typescriptFileCode: selectSemanticStateTs,
-            component: 'SelectTypesExampleComponent'
+            component: 'SelectSemanticStateExampleComponent'
         }
     ];
 }

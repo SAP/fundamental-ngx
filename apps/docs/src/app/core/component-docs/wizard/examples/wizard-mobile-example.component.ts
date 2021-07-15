@@ -81,4 +81,14 @@ export class WizardMobileExampleComponent {
             }
         }
     }
+
+    finish1Wizard(): void {
+        alert('Wizard steps are completed.');
+        this.example1goToStep(1);
+    }
+
+    finish2Wizard(): void {
+        alert('Wizard steps are completed.');
+        this.example2goToStep(1);
+    }
 }

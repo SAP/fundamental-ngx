@@ -33,7 +33,9 @@ export interface ApprovalGraphNodeMetadata {
     columnIndex?: number;
     nodeIndex?: number;
     canAddNodeBefore?: boolean;
+    canAddNodeBeforeAll?: boolean;
     canAddNodeAfter?: boolean;
+    canAddNodeAfterAll?: boolean;
     canAddParallel?: boolean;
     renderAddNodeAfterButton?: boolean;
     renderVerticalLineBefore?: boolean;
@@ -41,6 +43,7 @@ export interface ApprovalGraphNodeMetadata {
     isVerticalLineBeforeSolid?: boolean;
     isVerticalLineAfterSolid?: boolean;
     firstOfMultipleRootNodes?: boolean;
+    firstOfMultipleFinalNodes?: boolean;
     rootNodesApproved?: boolean;
 }
 

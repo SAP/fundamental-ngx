@@ -1,4 +1,106 @@
 
+## [0.31.0-rc.99](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.98...v0.31.0-rc.99) (2021-07-15)
+
+## [0.31.0-rc.98](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.97...v0.31.0-rc.98) (2021-07-15)
+
+## [0.31.0-rc.97](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.96...v0.31.0-rc.97) (2021-07-14)
+
+
+### Bug Fixes
+
+* **platform:** table dependencies refactoring ([#5967](https://github.com/SAP/fundamental-ngx/issues/5967)) ([9c7cbef](https://github.com/SAP/fundamental-ngx/commit/9c7cbeffe16d091524de5d77bfaeb2c8ad4976d0))
+
+## [0.31.0-rc.96](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.95...v0.31.0-rc.96) (2021-07-14)
+
+## [0.31.0-rc.95](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.94...v0.31.0-rc.95) (2021-07-14)
+
+## [0.31.0-rc.94](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.93...v0.31.0-rc.94) (2021-07-14)
+
+
+### Bug Fixes
+
+* **core:** provide screen reader access for inline help ([#5863](https://github.com/SAP/fundamental-ngx/issues/5863)) ([5f999e2](https://github.com/SAP/fundamental-ngx/commit/5f999e27fc6c1bd1317ad5754b767355a7adae43))
+
+## [0.31.0-rc.93](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.92...v0.31.0-rc.93) (2021-07-14)
+
+## [0.31.0-rc.92](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.91...v0.31.0-rc.92) (2021-07-13)
+
+## [0.31.0-rc.91](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.90...v0.31.0-rc.91) (2021-07-13)
+
+## [0.31.0-rc.90](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.89...v0.31.0-rc.90) (2021-07-13)
+
+
+### Bug Fixes
+
+* **core,docs:** add local rtl service for notification component ([#5937](https://github.com/SAP/fundamental-ngx/issues/5937)) ([640e5c9](https://github.com/SAP/fundamental-ngx/commit/640e5c941c9f3984c883171166ed4e5fa58995d3))
+
+## [0.31.0-rc.89](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.88...v0.31.0-rc.89) (2021-07-13)
+
+## [0.31.0-rc.88](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.87...v0.31.0-rc.88) (2021-07-13)
+
+
+### Bug Fixes
+
+* **core,platform:** replace name with attr.name for taborder to work correctly ([#5895](https://github.com/SAP/fundamental-ngx/issues/5895)) ([49ae715](https://github.com/SAP/fundamental-ngx/commit/49ae715e684577f67472edbcf1f1b3a54583fa65))
+
+## [0.31.0-rc.87](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.86...v0.31.0-rc.87) (2021-07-12)
+
+
+### Bug Fixes
+
+* **core:** display dropdown button for mobile combobox ([#5939](https://github.com/SAP/fundamental-ngx/issues/5939)) ([7237bc3](https://github.com/SAP/fundamental-ngx/commit/7237bc360e3fc535d1bd49b2a99b35898151b629))
+
+## [0.31.0-rc.86](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.85...v0.31.0-rc.86) (2021-07-12)
+
+
+### Features
+
+* **platform:** approval flow phase 4 ([#5749](https://github.com/SAP/fundamental-ngx/issues/5749)) ([5dce07f](https://github.com/SAP/fundamental-ngx/commit/5dce07fe989f5b5de15455dd64f94d83ca0662ab))
+
+## [0.31.0-rc.85](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.84...v0.31.0-rc.85) (2021-07-12)
+
+## [0.31.0-rc.84](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.83...v0.31.0-rc.84) (2021-07-12)
+
+## [0.31.0-rc.83](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.82...v0.31.0-rc.83) (2021-07-12)
+
+## [0.31.0-rc.82](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.81...v0.31.0-rc.82) (2021-07-12)
+
+## [0.31.0-rc.81](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.80...v0.31.0-rc.81) (2021-07-12)
+
+## [0.31.0-rc.80](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.79...v0.31.0-rc.80) (2021-07-12)
+
+## [0.31.0-rc.79](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.78...v0.31.0-rc.79) (2021-07-12)
+
+## [0.31.0-rc.78](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.77...v0.31.0-rc.78) (2021-07-12)
+
+
+### Bug Fixes
+
+* **core:** add box-sizing for correct tooltip size ([#5916](https://github.com/SAP/fundamental-ngx/issues/5916)) ([9ec6f3e](https://github.com/SAP/fundamental-ngx/commit/9ec6f3eb6ea9c1bc42a28ffae95cd5622c5db97e))
+
+## [0.31.0-rc.77](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.76...v0.31.0-rc.77) (2021-07-10)
+
+
+### Bug Fixes
+
+* **docs,core:** add missing modules and components ([#5922](https://github.com/SAP/fundamental-ngx/issues/5922)) ([49b86c7](https://github.com/SAP/fundamental-ngx/commit/49b86c7c956e95cd1814ace1aff777b8b8d936f3))
+
+## [0.31.0-rc.76](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.75...v0.31.0-rc.76) (2021-07-10)
+
+
+### Bug Fixes
+
+* **docs:** fix documentation rtl for dialog ([#5924](https://github.com/SAP/fundamental-ngx/issues/5924)) ([ef9b248](https://github.com/SAP/fundamental-ngx/commit/ef9b248f5de72686f1f019a838ce02c54b5a7faf))
+
+## [0.31.0-rc.75](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.74...v0.31.0-rc.75) (2021-07-09)
+
+
+### Bug Fixes
+
+* **platform:** add error message for combobox component ([#5699](https://github.com/SAP/fundamental-ngx/issues/5699)) ([75f50be](https://github.com/SAP/fundamental-ngx/commit/75f50beb089a42b58222c0db11cfd2ea19a90f45))
+
+## [0.31.0-rc.74](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.73...v0.31.0-rc.74) (2021-07-09)
+
 ## [0.31.0-rc.73](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.72...v0.31.0-rc.73) (2021-07-09)
 
 

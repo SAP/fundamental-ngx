@@ -1,19 +1,19 @@
 <header>Illustrated Message</header>
 <description>Illustrated messages for SAP Fiori  are a simple yet powerful way to engage users and add personality to the experience. </description
 >
-<import module="IllustratedMessageModule"></import>
+<import module="IllustratedMessageModule" subPackage="illustrated-message"></import>
 
 <br>
 <div>
     <h3>Structure</h3>
     <ul>
         <li>
-            <b>Illustration (optional)</b> - helps clarify the situation. Must always be paired with a message.<br>To set the Illustration you need to provide a configuration object containing the <i>url</i> and the <i>id</i> of the svg. <br>For 'scene' type, both 'scene' and 'dialog' must be set in order to change the svg on small screens. 
+            <b>Illustration (optional)</b> - helps clarify the situation. Must always be paired with a message.<br>To set the Illustration you need to provide a configuration object containing the <i>url</i> and the <i>id</i> of the svg. <br>For 'scene' type, both 'scene' and 'dialog' must be set in order to change the svg on small screens.
             Pass the configuration object to the <code>[svgConfig]</code> property of <code>fd-illustrated-message</code>. To exclude the illustration set the <code>noSvg</code> property to true.
             <br><br>
         </li>
         <li>
-            <b>Message (required)</b> - <code>fd-illustrated-message-figcaption</code> 
+            <b>Message (required)</b> - <code>fd-illustrated-message-figcaption</code>
             <br>Consists of:
             <ul>
                 <li>
@@ -30,7 +30,7 @@
             <br>Include a call to action (CTA) button if there is a clear next step.
         </li>
     </ul>
-    
+
     <h3>Types and sizing</h3>
     <ul>
         <li>Scene (default) - The largest illustration type, mainly used in full-screen situations. For small screens (less than 600px) the max size of the illustration is 15rem (width) and 11.25rem (height). For all other screens the max size of the illustration is 20rem (width) and 15rem (height).  </li>
