@@ -250,6 +250,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     private _rtlChangeSubscription = Subscription.EMPTY;
     private _outsideClickSubscription = Subscription.EMPTY;
     private _dataSourceSubscription = Subscription.EMPTY;
+    private _suggestionSubscription = Subscription.EMPTY;
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     @ViewChild('categoryDropdown', { static: false }) categoryDropdown: PopoverComponent;
@@ -292,6 +293,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this._rtlChangeSubscription.unsubscribe();
         this._outsideClickSubscription.unsubscribe();
         this._dataSourceSubscription.unsubscribe();
+        this._suggestionSubscription.unsubscribe();
         this._onDestroy$.next();
     }
 
@@ -492,7 +494,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      */
     private _getSuggestionsLength(): number {
         let count = 0;
-        this.dropdownValues$.subscribe((suggestions) => {
+        this._suggestionSubscription = this.dropdownValues$.subscribe((suggestions) => {
             suggestions?.forEach((suggestion) => {
                 if (this.inputText && suggestion?.toLowerCase().indexOf(this.inputText?.trim()?.toLowerCase()) > -1) {
                     count++;
