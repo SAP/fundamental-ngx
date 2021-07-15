@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.102](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.101...v0.31.0-rc.102) (2021-07-15)
+
+
+### Bug Fixes
+
+* **core:** add button type as per fiori spec ([#5981](https://github.com/SAP/fundamental-ngx/issues/5981)) ([011176a](https://github.com/SAP/fundamental-ngx/commit/011176ad09ac26e019c8559cce6ee80d50a797fa))
+
 ## [0.31.0-rc.101](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.100...v0.31.0-rc.101) (2021-07-15)
 
 
