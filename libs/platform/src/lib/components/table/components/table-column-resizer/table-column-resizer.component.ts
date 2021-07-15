@@ -64,12 +64,12 @@ export class PlatformTableColumnResizerComponent implements OnInit, OnDestroy {
     /** @hidden */
     @HostBinding('class.fdp-table-column-resizer--active')
     get _isActive(): boolean {
-        return this._tableColumnResizeService?.resizeInProgress;
+        return this._tableColumnResizeService.resizeInProgress;
     }
 
     /** @hidden */
     private get _resizerPosition(): number {
-        return this._tableColumnResizeService?.resizerPosition;
+        return this._tableColumnResizeService.resizerPosition;
     }
 
     /** @hidden */
@@ -94,7 +94,7 @@ export class PlatformTableColumnResizerComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     ngOnInit(): void {
-        this._tableColumnResizeService?.markForCheck
+        this._tableColumnResizeService.markForCheck
             .pipe(takeUntil(this._destroyed))
             .subscribe(() => this._cd.markForCheck())
     }
@@ -108,7 +108,7 @@ export class PlatformTableColumnResizerComponent implements OnInit, OnDestroy {
     /** @hidden */
     @HostListener('mousedown', ['$event'])
     _onMouseDown(event: MouseEvent): void {
-        this._tableColumnResizeService?.startResize(event);
+        this._tableColumnResizeService.startResize(event);
 
         this._listenForMouseUp();
     }
@@ -124,7 +124,7 @@ export class PlatformTableColumnResizerComponent implements OnInit, OnDestroy {
         this._pointerMoveListener = fromEvent(this._document, 'mouseup')
             .pipe(take(1), takeUntil(this._destroyed))
             .subscribe((event: MouseEvent) => {
-                this._tableColumnResizeService?.finishResize(event);
+                this._tableColumnResizeService.finishResize(event);
                 this._cd.markForCheck();
             });
     }

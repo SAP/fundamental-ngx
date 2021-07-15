@@ -1,6 +1,20 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PlatformTableColumnResizerComponent } from './table-column-resizer.component';
+import { TableColumnResizeService } from '../../table-column-resize.service';
+import { of } from 'rxjs';
+
+class TableColumnResizeServiceMock {
+    resizerPosition = null;
+
+    resizeInProgress = false;
+
+    markForCheck = of(null);
+
+    startResize(): void {}
+
+    finishResize(event: any): void {}
+}
 
 describe('PlatformTableColumnResizerComponent', () => {
     let component: PlatformTableColumnResizerComponent;
@@ -8,7 +22,8 @@ describe('PlatformTableColumnResizerComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [PlatformTableColumnResizerComponent]
+            declarations: [PlatformTableColumnResizerComponent],
+            providers: [ { provide: TableColumnResizeService, useClass: TableColumnResizeServiceMock } ]
         }).compileComponents();
     }));
 
