@@ -276,6 +276,9 @@ export class MultiInputComponent
     @ViewChild(TokenizerComponent)
     tokenizer: TokenizerComponent;
 
+    @ViewChild('inputfield', { read: ElementRef })
+    inputfield: ElementRef;
+
     /** @hidden */
     displayedValues: any[] = [];
 
@@ -438,6 +441,7 @@ export class MultiInputComponent
         this.tokenizer.removeSelectedTokens();
 
         this._changeDetRef.detectChanges();
+        this.inputfield.nativeElement.focus();
     }
 
     /** Method that selects all possible options. */
