@@ -24,5 +24,6 @@ grep -rl 'RXJS_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/RXJS_VER_PLACEHOL
 grep -rl 'CDK_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/CDK_VER_PLACEHOLDER/${CDK_VERSION}/g"
 grep -rl 'FDSTYLES_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/FDSTYLES_VER_PLACEHOLDER/${FDSTYLES_VERSION}/g"
 grep -rl 'FOCUSTRAP_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/FOCUSTRAP_VER_PLACEHOLDER/${FOCUSTRAP_VERSION}/g"
+grep -rl 'THEMING_VER_PLACEHOLDER' . | xargs  perl -X -p -i -e "s/THEMING_VER_PLACEHOLDER/${THEMING_VERSION}/g"
 
 cd ../
