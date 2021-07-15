@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.105](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.104...v0.31.0-rc.105) (2021-07-15)
+
+
+### Bug Fixes
+
+* **core:** remove hammerjs from library ([#5980](https://github.com/SAP/fundamental-ngx/issues/5980)) ([690eb48](https://github.com/SAP/fundamental-ngx/commit/690eb48545f0b7a8ffdec651e5304760dbb1fb6a))
+
 ## [0.31.0-rc.104](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.103...v0.31.0-rc.104) (2021-07-15)
 
 
