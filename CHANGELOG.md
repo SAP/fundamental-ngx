@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.101](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.100...v0.31.0-rc.101) (2021-07-15)
+
+
+### Bug Fixes
+
+* **core:** removed list body focus and focused to the list items ([#5946](https://github.com/SAP/fundamental-ngx/issues/5946)) ([cd25c30](https://github.com/SAP/fundamental-ngx/commit/cd25c301f4d71ebfa9a77c69e1ced34ac5448981))
+
 ## [0.31.0-rc.100](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.99...v0.31.0-rc.100) (2021-07-15)
 
 
