@@ -19,7 +19,6 @@ export class StackblitzDependencies {
         'focus-trap',
         'fundamental-styles',
         'moment',
-        'hammerjs',
         'tslib',
         'typescript',
         'focus-trap'

@@ -1,6 +1,7 @@
-import { ElementRef, EventEmitter, OnDestroy, QueryList } from '@angular/core';
-import Hammer from 'hammerjs';
-import { Injectable } from '@angular/core';
+import { ElementRef, EventEmitter, Inject, OnDestroy, QueryList, Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { fromEvent, merge, Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 export const DEFAULT_TRANSITION_DURATION = '150ms';
 
@@ -28,6 +29,7 @@ export interface PanEndOutput {
     after: boolean;
 }
 
+/** @dynamic */
 @Injectable({
     providedIn: 'root'
 })
@@ -49,9 +51,6 @@ export class CarouselService implements OnDestroy {
 
     /** carousel items query list */
     items: QueryList<CarouselItemInterface>;
-
-    /** @hidden */
-    private _hammer: HammerManager = null;
 
     /** @hidden */
     private _previousActiveItem: CarouselItemInterface;
@@ -76,13 +75,30 @@ export class CarouselService implements OnDestroy {
     }
 
     /** @hidden */
-    private _elementRef: ElementRef;
+    private _elementRef: ElementRef<HTMLElement>;
+
+    /** @hidden */
+    private _initialDragPosition = 0;
+    /** @hidden */
+    private _lastDragPosition = 0;
+    /** @hidden */
+    private _listenToMouseMove = false;
+    /** @hidden */
+    private _dragStarted = false;
+
+    /**
+     * @hidden
+     * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
+     */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    /** @hidden */
+    constructor(@Inject(DOCUMENT) private readonly _document: Document | null) {}
 
     /** @hidden */
     ngOnDestroy(): void {
-        if (this._hammer) {
-            this._hammer.destroy();
-        }
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     /** set initial values for the service */
@@ -96,7 +112,7 @@ export class CarouselService implements OnDestroy {
         this.setItems(items);
 
         if (this.config.gestureSupport) {
-            this._hammerSetup();
+            this._setupGestures();
         }
     }
 
@@ -319,19 +335,73 @@ export class CarouselService implements OnDestroy {
     }
 
     /** @hidden */
-    private _hammerSetup(): void {
-        this._hammer = new Hammer(this._elementRef.nativeElement);
+    private _setupGestures(): void {
+        this._setupDragStart();
+        this._setupDrag();
+        this._setupDragEnd();
+    }
 
-        if (this.config.vertical) {
-            this._hammer.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL });
-            this._hammer.on('panmove', (event) => this._handlePan(event.deltaY));
-            this._hammer.on('panstart', () => this._handlePanStart());
-            this._hammer.on('panend', (event) => this._handlePanEnd(event.deltaY));
-        } else {
-            this._hammer.on('panmove', (event) => this._handlePan(event.deltaX));
-            this._hammer.on('panstart', () => this._handlePanStart());
-            this._hammer.on('panend', (event) => this._handlePanEnd(event.deltaX));
-        }
+    /** @hidden */
+    private _subscribeToEvents(
+                               events: string[],
+                               element: HTMLElement | Document,
+                               callback: (event: MouseEvent | TouchEvent) => void
+    ): void {
+        merge(events.map((e) => fromEvent<MouseEvent | TouchEvent>(element, e, {passive: true})))
+        .forEach((evt: Observable<MouseEvent | TouchEvent>) => {
+            evt.pipe(takeUntil(this._onDestroy$))
+            .subscribe((event) => {
+                callback(event);
+            });
+        });
+    }
+
+    /** @hidden */
+    private _setupDragStart(): void {
+        const events = ['mousedown', 'touchstart'];
+
+        this._subscribeToEvents(events, this._elementRef.nativeElement, (event) => {
+            this._listenToMouseMove = true;
+            this._lastDragPosition = this._initialDragPosition = this._getDragCoordinate(event);
+            this._handlePanStart();
+        });
+    }
+
+    /** @hidden */
+    private _setupDrag(): void {
+
+        const events = ['mousemove', 'touchmove'];
+
+        this._subscribeToEvents(events, this._document, (event) => {
+            const coordinate = this._getDragCoordinate(event);
+
+            if (!this._listenToMouseMove || coordinate === this._lastDragPosition) {
+                return;
+            }
+
+            this._dragStarted = true;
+            this._handlePan(this._getDraggedDelta(coordinate));
+        });
+    }
+
+    /** @hidden */
+    private _setupDragEnd(): void {
+        const events = ['mouseup', 'touchend'];
+
+        this._subscribeToEvents(events, this._document, (event) => {
+            if (!this._listenToMouseMove) {
+                return;
+            }
+
+            if (this._dragStarted) {
+                this._handlePanEnd(this._getDraggedDelta(this._getDragCoordinate(event)));
+            } else {
+                this.dragStateChange.emit(false);
+            }
+
+            this._listenToMouseMove = false;
+            this._dragStarted = false;
+        });
     }
 
     /** @hidden */
@@ -341,5 +411,30 @@ export class CarouselService implements OnDestroy {
         } else {
             return DEFAULT_TRANSITION_DURATION;
         }
+    }
+
+    /** @hidden */
+    private _getDraggedDelta(offset: number): number {
+        this._lastDragPosition = offset;
+        return offset - this._initialDragPosition;
+    }
+
+    /** @hidden */
+    private _getDragCoordinate(event: MouseEvent | TouchEvent): number {
+
+        let coordinates: Touch | MouseEvent;
+
+        if (this._isTouchEvent(event)) {
+            coordinates = event.touches[0] || event.changedTouches[0];
+        } else {
+            coordinates = event;
+        }
+
+        return this.config.vertical ? coordinates.pageY : coordinates.pageX;
+    }
+
+    /** @hidden */
+    private _isTouchEvent(event: any): event is TouchEvent {
+        return event.touches !== undefined;
     }
 }

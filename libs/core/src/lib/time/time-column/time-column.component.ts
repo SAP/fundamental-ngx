@@ -220,11 +220,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
 
     /** It prevents from accidentally change the item by click event */
     handleDrag(isDragging: boolean): void {
-        if (!isDragging) {
-            setTimeout(() => (this._isDragging = false), 30);
-        } else {
-            this._isDragging = isDragging;
-        }
+        this._isDragging = isDragging;
     }
 
     /** Method that handles active item change */
