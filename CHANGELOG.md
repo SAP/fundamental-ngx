@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.100](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.99...v0.31.0-rc.100) (2021-07-15)
+
+
+### Bug Fixes
+
+* **core,platform:** add keyboard support for Inline Help icon triggers ([#5862](https://github.com/SAP/fundamental-ngx/issues/5862)) ([c8d594e](https://github.com/SAP/fundamental-ngx/commit/c8d594ea467dc59dfbef3573055e2e1d901e184c))
+
 ## [0.31.0-rc.99](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.98...v0.31.0-rc.99) (2021-07-15)
 
 ## [0.31.0-rc.98](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.97...v0.31.0-rc.98) (2021-07-15)
