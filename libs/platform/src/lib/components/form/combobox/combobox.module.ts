@@ -3,7 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 
-import { ButtonModule, DynamicComponentService, InputGroupModule, ListModule, TemplateModule } from '@fundamental-ngx/core';
+import { ButtonModule } from '@fundamental-ngx/core/button'; 
+import { DynamicComponentService, TemplateModule } from '@fundamental-ngx/core/utils';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { ListModule } from '@fundamental-ngx/core/list';
+import { FormModule } from '@fundamental-ngx/core/form';
 import { ComboboxComponent } from './combobox/combobox.component';
 import { HighlightPipe } from './pipes/highlight.pipe';
 import { PlatformAutoCompleteModule } from '../auto-complete/auto-complete.module';
@@ -17,7 +21,8 @@ import { PlatformAutoCompleteModule } from '../auto-complete/auto-complete.modul
         ListModule,
         ButtonModule,
         OverlayModule,
-        PlatformAutoCompleteModule
+        PlatformAutoCompleteModule,
+        FormModule
     ],
     providers: [DynamicComponentService],
     exports: [ComboboxComponent, TemplateModule]

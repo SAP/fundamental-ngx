@@ -1,16 +1,21 @@
 <header>Approval Flow</header>
+
+<div class="fd-info-labels">
+    <span title="Non Fiori 3 Component" class="fd-info-label fd-info-label--accent-color-6">non-fiori 3</span>
+</div>
+
 <description>
     The Approval Flow component is a complex component which tracks and manages the approval process for a business
     object. From the Approval Flow component a user is able to:
+
     <ul>
-        <li>See the progress of approvals</li>
-        <li>Add, edit and delete approvers</li>
-        <li>Add, delete and move approvals</li>
+        <li>See the progress of the approval process</li>
+        <li>Add, edit, move (drag and drop) and delete approvers</li>
         <li>Add and remove watchers</li>
         <li>Send reminder notifications to approvers</li>
     </ul>
-    The only limitation, for now, it's that the process cannot have multiple final nodes (there should be only one).
 </description>
+
 <import module="PlatformApprovalFlowModule" path="@fundamental-ngx/platform"></import>
 
 <fd-header-tabs></fd-header-tabs>

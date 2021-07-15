@@ -1,12 +1,8 @@
 import { LinkPo } from '../pages/link.po';
 import {
-    addIsActiveClass,
-    checkElementScreenshot, click, focusElement,
-    getElementArrayLength, getImageTagBrowserPlatform,
+    getElementArrayLength,
     isElementClickable,
-    mouseHoverElement,
     refreshPage,
-    saveElementScreenshot
 } from '../../driver/wdio';
 
 describe('Link test suite', function() {
@@ -41,7 +37,7 @@ describe('Link test suite', function() {
     });
 
     describe('visual regression', function() {
-        xit('should check examples visual regression', () => {
+        it('should check examples visual regression', () => {
             linkPage.saveExampleBaselineScreenshot();
             expect(linkPage.compareWithBaseline()).toBeLessThan(5);
         });

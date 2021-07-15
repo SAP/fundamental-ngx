@@ -9,7 +9,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { ConnectionPositionPair } from '@angular/cdk/overlay/position/connected-position';
+import { ConnectionPositionPair } from '@angular/cdk/overlay';
 import { ESCAPE } from '@angular/cdk/keycodes';
 
 import { Subject } from 'rxjs';

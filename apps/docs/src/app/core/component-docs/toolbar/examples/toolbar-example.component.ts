@@ -25,12 +25,6 @@ export class ToolbarSpacerExampleComponent {}
 export class ToolbarSeparatorExampleComponent {}
 
 @Component({
-    selector: 'fd-toolbar-overflow-example',
-    templateUrl: './toolbar-overflow-example.component.html'
-})
-export class ToolbarOverflowExampleComponent {}
-
-@Component({
     selector: 'fd-toolbar-overflow-priority-example',
     templateUrl: './toolbar-overflow-priority-example.component.html'
 })

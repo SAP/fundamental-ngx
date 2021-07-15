@@ -14,7 +14,7 @@
     </div>
     <div class="fd-container fd-form-layout-grid-container">
         <ng-container *ngFor="let row of rows | keyvalue; trackBy: trackByFn">
-            <div class="fd-row">
+            <div class="fd-row fd-row--top">
                 <div class="fd-form-group__header" *ngIf="row.value.label">
                     <h1 class="fd-form-group__header-text">{{ row.value.label }}</h1>
                 </div>

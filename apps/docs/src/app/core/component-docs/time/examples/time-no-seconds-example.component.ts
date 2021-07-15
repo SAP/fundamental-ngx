@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
-import { FdDate } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-time-no-seconds-example',
-    templateUrl: './time-no-seconds-example.component.html'
+    templateUrl: './time-no-seconds-example.component.html',
+    providers: [
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        }
+    ]
 })
 export class TimeNoSecondsExampleComponent {
     timeNoSeconds = new FdDate().setTime(12, 0, null);

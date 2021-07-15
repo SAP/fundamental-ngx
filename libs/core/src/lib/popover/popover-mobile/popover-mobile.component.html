@@ -1,0 +1,16 @@
+<ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+        <fd-dialog-header>
+            <h1 fd-title>{{title}}</h1>
+            <button fd-dialog-close-button *ngIf="this.mobileConfig.hasCloseButton" (click)="close()"></button>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+            <ng-container *ngTemplateOutlet="viewBody"></ng-container>
+        </fd-dialog-body>
+
+        <fd-dialog-footer>
+            <ng-container *ngTemplateOutlet="viewFooter"></ng-container>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>

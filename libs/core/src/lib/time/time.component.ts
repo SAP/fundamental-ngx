@@ -268,7 +268,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         } else if (currentHour < 12 && meridian === Meridian.AM) {
             hourOffset = 0;
         }
-        
+
         const newHour = Math.max(0, Math.min(23, currentHour + hourOffset));
 
         this.handleHourChange(newHour);
@@ -358,7 +358,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
 
     /** @hidden */
     writeValue(time: D): void {
-        if (!time) {
+        if (!time || !this._dateTimeAdapter.isValid(time)) {
             return;
         }
         this.time = time;

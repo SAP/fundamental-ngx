@@ -9,7 +9,7 @@ import { DialogRefBase } from '../base/dialog-ref-base.class';
  */
 
 @Injectable()
-export class DialogRef<T = any> extends DialogRefBase<T> {
+export class DialogRef<T = any, P = any> extends DialogRefBase<T, P> {
     private readonly _onHide = new BehaviorSubject<boolean>(false);
     private readonly _onLoading = new BehaviorSubject<boolean>(false);
 

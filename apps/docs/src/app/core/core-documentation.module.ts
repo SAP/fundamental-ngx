@@ -14,6 +14,7 @@ import {
     COMBOBOX_MOBILE_CONFIG,
     MENU_MOBILE_CONFIG,
     MULTI_INPUT_MOBILE_CONFIG,
+    POPOVER_MOBILE_CONFIG,
     SELECT_MOBILE_CONFIG
 } from '../documentation/utilities/consts';
 import { DocsThemeService } from '../documentation/services/docs-theme.service';
@@ -28,7 +29,8 @@ import { DocsThemeService } from '../documentation/services/docs-theme.service';
         { provide: MOBILE_MODE_CONFIG, useValue: MENU_MOBILE_CONFIG, multi: true },
         { provide: MOBILE_MODE_CONFIG, useValue: SELECT_MOBILE_CONFIG, multi: true },
         { provide: MOBILE_MODE_CONFIG, useValue: COMBOBOX_MOBILE_CONFIG, multi: true },
-        { provide: MOBILE_MODE_CONFIG, useValue: MULTI_INPUT_MOBILE_CONFIG, multi: true }
+        { provide: MOBILE_MODE_CONFIG, useValue: MULTI_INPUT_MOBILE_CONFIG, multi: true },
+        { provide: MOBILE_MODE_CONFIG, useValue: POPOVER_MOBILE_CONFIG, multi: true },
     ]
 })
 export class CoreDocumentationModule {}

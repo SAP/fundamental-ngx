@@ -10,6 +10,7 @@ import { PaginationComponent } from '@fundamental-ngx/core/pagination';
             [totalItems]="totalItems"
             (pageChangeStart)="newPageClicked($event)"
             [currentPage]="currentPage"
+            ariaLabel="Basic pagination example"
         ></fd-pagination>
         <br /><br />
         <button fd-button label="Go to page 1" (click)="goToPage(1)"></button>

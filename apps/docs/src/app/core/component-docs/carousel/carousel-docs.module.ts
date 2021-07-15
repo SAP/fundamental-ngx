@@ -18,8 +18,9 @@ import { CarouselLoadingContentExampleComponent } from './examples/carousel-load
 import { CarouselModule } from '@fundamental-ngx/core/carousel';
 import { CardModule } from '@fundamental-ngx/core/card';
 import { ListModule } from '@fundamental-ngx/core/list';
-import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { TableModule } from '@fundamental-ngx/core/table';
+import { MessagePageModule } from '@fundamental-ngx/core/message-page';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 
 const routes: Routes = [
     {
@@ -40,7 +41,8 @@ const routes: Routes = [
         CardModule,
         ListModule,
         SegmentedButtonModule,
-        TableModule
+        TableModule,
+        MessagePageModule
     ],
     exports: [RouterModule],
     declarations: [

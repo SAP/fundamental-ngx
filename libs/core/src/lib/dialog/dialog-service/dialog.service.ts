@@ -1,7 +1,7 @@
 import { Inject, Injectable, Injector, Optional, TemplateRef, Type } from '@angular/core';
 import { DialogContainerComponent } from '../dialog-container/dialog-container.component';
 import { DIALOG_DEFAULT_CONFIG, DialogConfig } from '../utils/dialog-config.class';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
 import { DialogRef } from '../utils/dialog-ref.class';
 import { DialogBaseService } from '../base/dialog-base.service';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
@@ -15,9 +15,10 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
     /** @hidden */
     constructor(
         @Inject(DynamicComponentService) dynamicComponentService: DynamicComponentService,
-        @Optional() @Inject(DIALOG_DEFAULT_CONFIG) private _defaultConfig: DialogConfig
+        @Optional() @Inject(DIALOG_DEFAULT_CONFIG) private _defaultConfig: DialogConfig,
+        @Optional() private _rtlService: RtlService
     ) {
-        super(dynamicComponentService)
+        super(dynamicComponentService);
     }
 
     /**
@@ -34,7 +35,8 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
         const injector = Injector.create({
             providers: [
                 { provide: DialogConfig, useValue: dialogConfig },
-                { provide: DialogRef, useValue: dialogRef }
+                { provide: DialogRef, useValue: dialogRef },
+                { provide: RtlService, useValue: this._rtlService }
             ]
         });
 

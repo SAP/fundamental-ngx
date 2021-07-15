@@ -3,6 +3,7 @@ import { LOCALE_ID } from '@angular/core';
 import { waitForAsync, inject, TestBed } from '@angular/core/testing';
 
 import { DatetimeAdapter, FdDatetimeAdapter, FdDatetimeAdapterModule, FdDate } from './index';
+import { INVALID_DATE_ERROR } from '@fundamental-ngx/core';
 
 describe('FdDatetimeAdapter', () => {
     let platform: Platform;
@@ -262,14 +263,14 @@ describe('FdDatetimeAdapter', () => {
         expect(adapter.createDate(2017, 1, 1)).toEqual(new FdDate(2017, 1, 1));
     });
 
-    it('should not create Date with month over/under-flow', () => {
-        expect(() => adapter.createDate(2017, 13, 1)).toThrow();
-        expect(() => adapter.createDate(2017, 0, 1)).toThrow();
+    it('should be invalid date with month over/under-flow', () => {
+        expect(adapter.createDate(2017, 13, 1).isDateValid()).toBeFalse();
+        expect(adapter.createDate(2017, 0, 1).isDateValid()).toBeFalse();
     });
 
-    it('should not create Date with date over/under-flow', () => {
-        expect(() => adapter.createDate(2017, 2, 32)).toThrow();
-        expect(() => adapter.createDate(2017, 2, 0)).toThrow();
+    it('should be invalid date with date over/under-flow', () => {
+        expect(adapter.createDate(2017, 2, 32).isDateValid()).toBeFalse();
+        expect(adapter.createDate(2017, 2, 0).isDateValid()).toBeFalse();
     });
 
     it('should create Date with low year number', () => {
@@ -322,9 +323,9 @@ describe('FdDatetimeAdapter', () => {
         expect(adapter.parse(date)).not.toBe(date);
     });
 
-    it('should parse invalid value to null', () => {
+    it('should parse invalid value to invalid date', () => {
         const d = adapter.parse('hello');
-        expect(d).toBeNull();
+        expect(d.isDateValid()).toBeFalse();
     });
 
     it('should format', () => {
