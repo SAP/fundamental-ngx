@@ -193,7 +193,7 @@ describe('Checkbox test suite', () => {
             scrollIntoView(checkboxPage.submitBtn);
             clickNextElement(presenceCheckbox);
             scrollIntoView(checkboxPage.submitBtn);
-            mouseHoverElement(checkboxPage.submitBtn);
+            click(checkboxPage.submitBtn);
             waitForElDisplayed(checkboxPage.errorTooltip);
             expect(getText(checkboxPage.errorTooltip).trim()).toEqual(checkboxErrorTooltip);
             // TODO improve hover check stability for FF
