@@ -134,6 +134,11 @@
         "fdp"
       ],
       "implicitDependencies": ["core"]
+    }, 
+    "moment-adapter": {
+      "tags": [
+        "fdm"
+      ]
     },
     "core-breadcrumb": {
       "tags": [

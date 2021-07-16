@@ -8,6 +8,7 @@
  */
 
 import { Observable, Subject } from 'rxjs';
+import { MonthLocaleType } from './datetime-formats';
 
 export abstract class DatetimeAdapter<D> {
     /** current locale */
@@ -116,12 +117,13 @@ export abstract class DatetimeAdapter<D> {
      * @returns The week number (min 1, max 53).
      */
     abstract getWeekNumber(date: D): number;
+
     /**
      * Gets a list of names for the months.
      * @param style The naming style (e.g. long = 'January', short = 'Jan', narrow = 'J').
      * @returns An ordered list of all month names, starting with January.
      */
-    abstract getMonthNames(style: 'long' | 'short' | 'narrow'): string[];
+    abstract getMonthNames(style: MonthLocaleType): string[];
 
     /**
      * Gets a list of names for the dates of the month.
@@ -134,7 +136,7 @@ export abstract class DatetimeAdapter<D> {
      * @param style The naming style (e.g. long = 'Sunday', short = 'Sun', narrow = 'S').
      * @returns An ordered list of all weekday names, starting with Sunday.
      */
-    abstract getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[];
+    abstract getDayOfWeekNames(style: MonthLocaleType): string[];
 
     /**
      * Gets the name for the year of the given date.
@@ -255,15 +257,6 @@ export abstract class DatetimeAdapter<D> {
     abstract addCalendarDays(date: D, days: number): D;
 
     /**
-     * Get Amount of weeks in current month/year
-     * @param year The year of the date
-     * @param month The month of the date
-     * @param firstDayOfWeek The first day of week. 1 - Sunday, 2 - Monday...
-     * @returns Number of weeks in the given month
-     */
-    abstract getAmountOfWeeks(year: number, month: number, firstDayOfWeek: number): number;
-
-    /**
      * Clones the given date.
      * @param date The date to clone
      * @returns A new date equal to the given date.
@@ -344,6 +337,23 @@ export abstract class DatetimeAdapter<D> {
      * @returns String representing how much time has passed since the date param.
      */
     abstract fromNow?(date: D): string;
+
+    /**
+     * Get Amount of weeks in given month/year
+     * @param year The year of the date
+     * @param month The month of the date
+     * @param firstDayOfWeek The first day of week. 1 - Sunday, 2 - Monday...
+     * @returns Number of weeks in the given month
+     */
+    getAmountOfWeeks(year: number, month: number, firstDayOfWeek: number): number {
+        const firstOfMonth = new Date(year, month - 1, 1);
+        const lastOfMonth = new Date(year, month, 0);
+
+        const dayOffset = (firstOfMonth.getDay() - firstDayOfWeek + 8) % 7;
+        const used = dayOffset + lastOfMonth.getDate();
+
+        return Math.ceil(used / 7);
+    }
 
     /**
      * Compares two dates.

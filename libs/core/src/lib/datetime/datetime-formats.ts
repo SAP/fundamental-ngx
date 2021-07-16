@@ -23,4 +23,16 @@ export interface DateTimeFormats {
     rangeDelimiter: string;
 }
 
+export interface DateLocale {
+    firstDayOfWeek: number,
+    longMonths: string[],
+    shortMonths: string[],
+    narrowMonths: string[],
+    longDaysOfWeek: string[],
+    shortDaysOfWeek: string[],
+    narrowDaysOfWeek: string[]
+}
+
+export type MonthLocaleType = 'long' | 'short' | 'narrow';
+
 export const DATE_TIME_FORMATS = new InjectionToken<DateTimeFormats>('date-formats');

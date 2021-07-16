@@ -157,6 +157,7 @@ export const API_FILES = {
     ],
     messageStrip: ['MessageStripComponent'],
     messageToast: ['MessageToastComponent', 'MessageToastConfig', 'MessageToastService', 'MessageToastRef'],
+    momentDatetimeAdapter: ['MomentDateTimeAdapter'],
     dialog: [
         'DialogService',
         'DialogContainerComponent',

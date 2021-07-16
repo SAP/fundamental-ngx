@@ -1,41 +1,45 @@
 import { Platform } from '@angular/cdk/platform';
 import { LOCALE_ID } from '@angular/core';
 import { waitForAsync, inject, TestBed } from '@angular/core/testing';
+import moment from 'moment';
 
-import { DatetimeAdapter, FdDatetimeAdapter, FdDatetimeAdapterModule, FdDate } from './index';
-import { INVALID_DATE_ERROR } from '@fundamental-ngx/core';
+import { DatetimeAdapter } from '@fundamental-ngx/core';
+import { MomentDatetimeAdapter, MomentDatetimeModule } from './moment-datetime.module';
 
-describe('FdDatetimeAdapter', () => {
+export const JAN = 0, FEB = 1, MAR = 2, APR = 3, MAY = 4, JUN = 5, JUL = 6, AUG = 7, SEP = 8,
+    OCT = 9, NOV = 10, DEC = 11;
+
+describe('MomentDatetimeAdapter', () => {
     let platform: Platform;
-    let adapter: FdDatetimeAdapter;
+    let adapter: MomentDatetimeAdapter;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [FdDatetimeAdapterModule]
+                imports: [MomentDatetimeModule]
             }).compileComponents();
         })
     );
 
-    beforeEach(inject([DatetimeAdapter, Platform], (dateAdapter: FdDatetimeAdapter, _platform: Platform) => {
+    beforeEach(inject([DatetimeAdapter, Platform], (dateAdapter: MomentDatetimeAdapter, _platform: Platform) => {
         adapter = dateAdapter;
         platform = _platform;
     }));
 
     it('should get year', () => {
-        expect(adapter.getYear(new FdDate(2017, 1, 1))).toBe(2017);
+        expect(adapter.getYear(moment([2017, JAN, 1]))).toBe(2017);
     });
 
     it('should get month', () => {
-        expect(adapter.getMonth(new FdDate(2017, 1, 1))).toBe(1);
+        expect(adapter.getMonth(moment([2017, JAN, 1]))).toBe(1);
     });
 
     it('should get date', () => {
-        expect(adapter.getDate(new FdDate(2017, 1, 1))).toBe(1);
+        expect(adapter.getDate(moment([2017, JAN, 1]))).toBe(1);
     });
 
     it('should get day of week', () => {
-        expect(adapter.getDayOfWeek(new FdDate(2017, 1, 1))).toBe(1);
+        expect(adapter.getDayOfWeek(moment([2017, JAN, 1]))).toBe(0);
     });
 
     it('should get long month names', () => {
@@ -124,7 +128,7 @@ describe('FdDatetimeAdapter', () => {
             '12月'
         ]);
     });
-
+    
     it('should get date names', () => {
         expect(adapter.getDateNames()).toEqual([
             '1',
@@ -162,39 +166,10 @@ describe('FdDatetimeAdapter', () => {
     });
 
     it('should get date names in a different locale', () => {
-        adapter.setLocale('ja-JP');
+        adapter.setLocale('ar-AE');
         expect(adapter.getDateNames()).toEqual([
-            '1日',
-            '2日',
-            '3日',
-            '4日',
-            '5日',
-            '6日',
-            '7日',
-            '8日',
-            '9日',
-            '10日',
-            '11日',
-            '12日',
-            '13日',
-            '14日',
-            '15日',
-            '16日',
-            '17日',
-            '18日',
-            '19日',
-            '20日',
-            '21日',
-            '22日',
-            '23日',
-            '24日',
-            '25日',
-            '26日',
-            '27日',
-            '28日',
-            '29日',
-            '30日',
-            '31日'
+            '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩', '١٠', '١١', '١٢', '١٣', '١٤', '١٥', '١٦',
+            '١٧', '١٨', '١٩', '٢٠', '٢١', '٢٢', '٢٣', '٢٤', '٢٥', '٢٦', '٢٧', '٢٨', '٢٩', '٣٠', '٣١'
         ]);
     });
 
@@ -215,12 +190,7 @@ describe('FdDatetimeAdapter', () => {
     });
 
     it('should get narrow day of week names', () => {
-        // Edge & IE use two-letter narrow days.
-        if (platform.EDGE || platform.TRIDENT) {
-            expect(adapter.getDayOfWeekNames('narrow')).toEqual(['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']);
-        } else {
-            expect(adapter.getDayOfWeekNames('narrow')).toEqual(['S', 'M', 'T', 'W', 'T', 'F', 'S']);
-        }
+        expect(adapter.getDayOfWeekNames('narrow')).toEqual(['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']);
     });
 
     it('should get day of week names in a different locale', () => {
@@ -237,22 +207,12 @@ describe('FdDatetimeAdapter', () => {
     });
 
     it('should get year name', () => {
-        expect(adapter.getYearName(new FdDate(2017, 1, 1))).toBe('2017');
-    });
-
-    it('should get year name for low year numbers', () => {
-        const createAndFormat = (year: number) => {
-            return adapter.getYearName(adapter.createDate(year, 1, 1));
-        };
-
-        expect(createAndFormat(50)).toBe('50');
-        expect(createAndFormat(99)).toBe('99');
-        expect(createAndFormat(100)).toBe('100');
+        expect(adapter.getYearName(moment([2017, JAN, 1]))).toBe('2017');
     });
 
     it('should get year name in a different locale', () => {
-        adapter.setLocale('ja-JP');
-        expect(adapter.getYearName(new FdDate(2017, 1, 1))).toBe('2017年');
+        adapter.setLocale('ar-AE');
+        expect(adapter.getYearName(moment([2017, JAN, 1]))).toBe('٢٠١٧');
     });
 
     it('should get first day of week', () => {
@@ -260,166 +220,165 @@ describe('FdDatetimeAdapter', () => {
     });
 
     it('should create Date', () => {
-        expect(adapter.createDate(2017, 1, 1)).toEqual(new FdDate(2017, 1, 1));
+        expect(adapter.createDate(2017, JAN, 1).format()).toEqual((moment([2017, JAN, 1]).format()));
     });
 
-    it('should be invalid date with month over/under-flow', () => {
-        expect(adapter.createDate(2017, 13, 1).isDateValid()).toBeFalse();
-        expect(adapter.createDate(2017, 0, 1).isDateValid()).toBeFalse();
+    it('should not create Date with month over/under-flow', () => {
+        expect(() => adapter.createDate(2017, 13, 1)).toThrow();
+        expect(() => adapter.createDate(2017, -1, 1)).toThrow();
     });
 
-    it('should be invalid date with date over/under-flow', () => {
-        expect(adapter.createDate(2017, 2, 32).isDateValid()).toBeFalse();
-        expect(adapter.createDate(2017, 2, 0).isDateValid()).toBeFalse();
+    it('should not create Date with date over/under-flow', () => {
+        expect(() => adapter.createDate(2017, FEB, 32)).toThrow();
+        expect(() => adapter.createDate(2017, FEB, 0)).toThrow();
+    });
+
+    it('should get year name for low year numbers', () => {
+        const createAndFormat = (year: number) => {
+            return adapter.getYearName(adapter.createDate(year, JAN, 1));
+        };
+
+        expect(createAndFormat(50)).toEqual('0050');
+        expect(createAndFormat(99)).toEqual('0099');
+        expect(createAndFormat(100)).toEqual('0100');
     });
 
     it('should create Date with low year number', () => {
-        expect(adapter.createDate(-1, 1, 1).year).toBe(-1);
-        expect(adapter.createDate(0, 1, 1).year).toBe(0);
-        expect(adapter.createDate(50, 1, 1).year).toBe(50);
-        expect(adapter.createDate(99, 1, 1).year).toBe(99);
-        expect(adapter.createDate(100, 1, 1).year).toBe(100);
+        expect(adapter.createDate(-1, JAN, 1).year()).toBe(-1);
+        expect(adapter.createDate(0, JAN, 1).year()).toBe(0);
+        expect(adapter.createDate(50, JAN, 1).year()).toBe(50);
+        expect(adapter.createDate(99, JAN, 1).year()).toBe(99);
+        expect(adapter.createDate(100, JAN, 1).year()).toBe(100);
     });
 
     it('should format Date with low year number', () => {
         const createAndFormat = (year: number) => {
-            return adapter.format(adapter.createDate(year, 1, 1), {});
+            return adapter.format(adapter.createDate(year, JAN, 1), 'L');
         };
 
-        expect(createAndFormat(50)).toBe('1/1/50');
-        expect(createAndFormat(99)).toBe('1/1/99');
-        expect(createAndFormat(100)).toBe('1/1/100');
+        expect(createAndFormat(50)).toBe('01/01/0050');
+        expect(createAndFormat(99)).toBe('01/01/0099');
+        expect(createAndFormat(100)).toBe('01/01/0100');
     });
 
     it(`should get today's date`, () => {
-        expect(adapter.datesEqual(adapter.today(), FdDate.getToday())).toBe(true, `should be equal to today's date`);
+        expect(adapter.datesEqual(adapter.today(), moment().startOf('day')))
+            .toBe(true, `should be equal to today's date`);
     });
 
     it(`should get now date`, () => {
-        expect(adapter.datesEqual(adapter.now(), new FdDate())).toBe(true, `should be equal to now date moment`);
+        expect(adapter.datesEqual(adapter.now(), moment())).toBe(true, `should be equal to now date moment`);
     });
 
     it('should parse "en" date string', () => {
-        expect(adapter.parse('1/1/2017')).toEqual(new FdDate(2017, 1, 1));
+        expect(adapter.parse('1/1/2017').format()).toEqual(moment([2017, JAN, 1]).format());
     });
 
     it('should parse "en" time string', () => {
-        expect(adapter.parse('10:30 PM', { hour: 'numeric', minute: '2-digit', hour12: true })).toEqual(
-            FdDate.getNow().setTime(22, 30, 0)
-        );
-        expect(adapter.parse('10:30', { hour: 'numeric', minute: '2-digit' })).toEqual(
-            FdDate.getNow().setTime(10, 30, 0)
-        );
+        expect(adapter.parse('10:30 PM', 'HH:mm:ss A').format())
+            .toEqual(moment({hours: 22, minutes: 30, seconds: 0}).format());
+        expect(adapter.parse('10:30', 'HH:mm:ss').format())
+            .toEqual(moment({hours: 10, minutes: 30, seconds: 0}).format());
     });
 
     it('should parse number', () => {
-        const timestamp = new Date(2017, 0, 1).getTime();
-        expect(adapter.parse(timestamp)).toEqual(new FdDate(2017, 1, 1));
+        const timestamp = new Date(2017, JAN, 1).getTime();
+        expect(adapter.parse(timestamp).format()).toEqual(moment([2017, JAN, 1]).format());
     });
 
     it('should parse Date', () => {
-        const date = new FdDate(2017, 1, 1);
+        const date = moment([2017, JAN, 1]);
         expect(adapter.parse(date)).toEqual(date);
         expect(adapter.parse(date)).not.toBe(date);
     });
 
-    it('should parse invalid value to invalid date', () => {
-        const d = adapter.parse('hello');
-        expect(d.isDateValid()).toBeFalse();
+    it('should parse invalid value as invalid', () => {
+        const date = adapter.parse('hello');
+        expect(date).not.toBeNull();
+        expect(date.isValid()).toBeFalse();
     });
 
     it('should format', () => {
-        expect(adapter.format(new FdDate(2017, 1, 1), {})).toEqual('1/1/2017');
+        expect(adapter.format(moment([2017, JAN, 1]), 'L')).toEqual('01/01/2017');
     });
 
     it('should format with custom format', () => {
-        expect(
-            adapter.format(new FdDate(2017, 1, 1), {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            })
-        ).toEqual('January 1, 2017');
+        expect(adapter.format(moment([2017, JAN, 1]), 'MMMM D, YYYY'))
+            .toEqual('January 1, 2017');
     });
 
     it('should format with a different locale', () => {
         adapter.setLocale('ja-JP');
-        // Edge & IE use a different format in Japanese.
-        if (platform.EDGE || platform.TRIDENT) {
-            expect(adapter.format(new FdDate(2017, 1, 1), {})).toEqual('2017年1月1日');
-        } else {
-            expect(adapter.format(new FdDate(2017, 1, 1), {})).toEqual('2017/1/1');
-        }
+        expect(adapter.format(moment([2017, JAN, 1]), 'LL')).toEqual('2017年1月1日');
     });
 
     it('should add years', () => {
-        expect(adapter.addCalendarYears(new FdDate(2017, 1, 1), 1)).toEqual(new FdDate(2018, 1, 1));
-        expect(adapter.addCalendarYears(new FdDate(2017, 1, 1), -1).toDateString()).toEqual(
-            new FdDate(2016, 1, 1).toDateString()
-        );
+        expect(adapter.addCalendarYears(moment([2017, JAN, 1]), 1).format()).toEqual(moment([2018, JAN, 1]).format())
+        expect(adapter.addCalendarYears(moment([2017, JAN, 1]), -1).format()).toEqual(moment([2016, JAN, 1]).format())
     });
 
     it('should respect leap years when adding years', () => {
-        expect(adapter.addCalendarYears(new FdDate(2016, 2, 29), 1)).toEqual(new FdDate(2017, 2, 28));
-        expect(adapter.addCalendarYears(new FdDate(2016, 2, 29), -1)).toEqual(new FdDate(2015, 2, 28));
+        expect(adapter.addCalendarYears(moment([2016, FEB, 29]), 1).format()).toEqual(moment([2017, FEB, 28]).format())
+        expect(adapter.addCalendarYears(moment([2016, FEB, 29]), -1).format()).toEqual(moment([2015, FEB, 28]).format())
     });
 
     it('should add months', () => {
-        expect(adapter.addCalendarMonths(new FdDate(2017, 1, 1), 1)).toEqual(new FdDate(2017, 2, 1));
-        expect(adapter.addCalendarMonths(new FdDate(2017, 1, 1), -1)).toEqual(new FdDate(2016, 12, 1));
+        expect(adapter.addCalendarMonths(moment([2017, JAN, 1]), 1).format()).toEqual(moment([2017, FEB, 1]).format())
+        expect(adapter.addCalendarMonths(moment([2017, JAN, 1]), -1).format()).toEqual(moment([2016, DEC, 1]).format())
     });
 
     it('should respect month length differences when adding months', () => {
-        expect(adapter.addCalendarMonths(new FdDate(2017, 1, 31), 1)).toEqual(new FdDate(2017, 2, 28));
-        expect(adapter.addCalendarMonths(new FdDate(2017, 3, 31), -1)).toEqual(new FdDate(2017, 2, 28));
+        expect(adapter.addCalendarMonths(moment([2017, JAN, 31]), 1).format()).toEqual(moment([2017, FEB, 28]).format())
+        expect(adapter.addCalendarMonths(moment([2017, MAR, 31]), -1).format()).toEqual(moment([2017, FEB, 28]).format())
     });
 
     it('should add days', () => {
-        expect(adapter.addCalendarDays(new FdDate(2017, 1, 1), 1)).toEqual(new FdDate(2017, 1, 2));
-        expect(adapter.addCalendarDays(new FdDate(2017, 1, 1), -1)).toEqual(new FdDate(2016, 12, 31));
+        expect(adapter.addCalendarDays(moment([2017, JAN, 1]), 1).format()).toEqual(moment([2017, JAN, 2]).format())
+        expect(adapter.addCalendarDays(moment([2017, JAN, 1]), -1).format()).toEqual(moment([2016, DEC, 31]).format())
     });
 
     it('should clone', () => {
-        const date = new FdDate(2017, 1, 1);
+        const date = moment([2017, JAN, 1]);
         expect(adapter.clone(date)).toEqual(date);
         expect(adapter.clone(date)).not.toBe(date);
     });
 
     it('should preserve time when cloning', () => {
-        const date = new FdDate(2017, 1, 1, 4, 5, 6);
-        expect(adapter.clone(date)).toEqual(date);
+        const date = moment([2017, 1, 1, 4, 5, 6]);
+        expect(adapter.clone(date).format()).toEqual(moment(date).format());
         expect(adapter.clone(date)).not.toBe(date);
     });
 
     it('should compare dates', () => {
-        expect(adapter.compareDate(new FdDate(2017, 1, 1), new FdDate(2017, 1, 2))).toBeLessThan(0);
-        expect(adapter.compareDate(new FdDate(2017, 1, 1), new FdDate(2017, 2, 1))).toBeLessThan(0);
-        expect(adapter.compareDate(new FdDate(2017, 1, 1), new FdDate(2018, 1, 1))).toBeLessThan(0);
-        expect(adapter.compareDate(new FdDate(2017, 1, 1), new FdDate(2017, 1, 1))).toBe(0);
-        expect(adapter.compareDate(new FdDate(2018, 1, 1), new FdDate(2017, 1, 1))).toBeGreaterThan(0);
-        expect(adapter.compareDate(new FdDate(2017, 2, 1), new FdDate(2017, 1, 1))).toBeGreaterThan(0);
-        expect(adapter.compareDate(new FdDate(2017, 1, 2), new FdDate(2017, 1, 1))).toBeGreaterThan(0);
+        expect(adapter.compareDate(moment([2017, JAN, 1]), moment([2017, JAN, 2]))).toBeLessThan(0);
+        expect(adapter.compareDate(moment([2017, JAN, 1]), moment([2017, FEB, 1]))).toBeLessThan(0);
+        expect(adapter.compareDate(moment([2017, JAN, 1]), moment([2018, JAN, 1]))).toBeLessThan(0);
+        expect(adapter.compareDate(moment([2017, JAN, 1]), moment([2017, JAN, 1]))).toBe(0);
+        expect(adapter.compareDate(moment([2018, JAN, 1]), moment([2017, JAN, 1]))).toBeGreaterThan(0);
+        expect(adapter.compareDate(moment([2017, FEB, 1]), moment([2017, JAN, 1]))).toBeGreaterThan(0);
+        expect(adapter.compareDate(moment([2017, JAN, 2]), moment([2017, JAN, 1]))).toBeGreaterThan(0);
     });
 
     it('should use UTC for formatting by default', () => {
-        expect(adapter.format(new FdDate(1800, 7, 14), { day: 'numeric' })).toBe('14');
+        expect(adapter.format(moment([1800, 7, 14]), 'DD')).toBe('14');
     });
 
     it('should count today as a valid date instance', () => {
-        const date = new FdDate();
+        const date = moment();
         expect(adapter.isValid(date)).toBe(true);
     });
 
     it('should count an invalid date as an invalid date instance', () => {
-        expect(adapter.isValid((NaN as unknown) as FdDate)).toBe(false);
+        const date = moment(NaN);
+        expect(adapter.isValid(date)).toBe(false);
     });
 
     it('should not throw when attempting to format a date with a year less than 1', () => {
-        expect(() => adapter.format(new FdDate(-1, 1, 1), {})).not.toThrow();
+        expect(() => adapter.format(moment([-1, 1, 1]), '')).not.toThrow();
     });
 
     it('should not throw when attempting to format a date with a year greater than 9999', () => {
-        expect(() => adapter.format(new FdDate(10000, 1, 1), {})).not.toThrow();
+        expect(() => adapter.format(moment([10000, 1, 1]), '')).not.toThrow();
     });
 
     it('should get hour names 0-23 range', () => {
@@ -520,23 +479,23 @@ describe('FdDatetimeAdapter', () => {
     });
 });
 
-describe('FdDatetimeAdapter with LOCALE_ID override', () => {
-    let adapter: FdDatetimeAdapter;
+describe('MomentDatetimeAdapter with LOCALE_ID override', () => {
+    let adapter: MomentDatetimeAdapter;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [FdDatetimeAdapterModule],
+                imports: [MomentDatetimeModule],
                 providers: [{ provide: LOCALE_ID, useValue: 'da-DK' }]
             }).compileComponents();
         })
     );
 
-    beforeEach(inject([DatetimeAdapter], (_adapter: FdDatetimeAdapter) => {
+    beforeEach(inject([DatetimeAdapter], (_adapter: MomentDatetimeAdapter) => {
         adapter = _adapter;
     }));
 
-    it('should take the default locale id from the injection token', () => {
+    it('should take the default locale from the MOMENT_DATE_TIME_ADAPTER_OPTIONS injection token', () => {
         expect(adapter.getDayOfWeekNames('long')).toEqual([
             'søndag',
             'mandag',

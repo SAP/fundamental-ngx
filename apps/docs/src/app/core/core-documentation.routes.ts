@@ -458,6 +458,13 @@ export const ROUTES: Routes = [
                 path: 'wizard',
                 loadChildren: () => import('./component-docs/wizard/wizard-docs.module').then((m) => m.WizardDocsModule)
             },
+            {
+                path: 'moment-datetime-adapter',
+                loadChildren: () =>
+                    import('./component-docs/moment-datetime-adapter/moment-datetime-adapter-docs.module').then(
+                        (m) => m.MomentDatetimeAdapterDocsModule
+                    )
+            }
         ]
     }
 ];

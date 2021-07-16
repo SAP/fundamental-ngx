@@ -4,6 +4,7 @@ import { Inject, Injectable, LOCALE_ID, Optional } from '@angular/core';
 import { INVALID_DATE_ERROR, LETTERS_UNICODE_RANGE } from '@fundamental-ngx/core/utils';
 
 import { DatetimeAdapter } from './datetime-adapter';
+import { MonthLocaleType } from './datetime-formats';
 import { FdDate } from './fd-date';
 import { range, toIso8601 } from './fd-date.utils';
 
@@ -75,7 +76,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         );
     }
 
-    getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
+    getMonthNames(style: MonthLocaleType): string[] {
         const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { month: style, timeZone: 'utc' });
         return range(12, (i) =>
             this._stripDirectionalityCharacters(this._format(dateTimeFormat, new Date(2017, i, 1)))
@@ -89,7 +90,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         );
     }
 
-    getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
+    getDayOfWeekNames(style: MonthLocaleType): string[] {
         const dateTimeFormat = new Intl.DateTimeFormat(this.locale, { weekday: style, timeZone: 'utc' });
         return range(7, (i) =>
             this._stripDirectionalityCharacters(this._format(dateTimeFormat, new Date(2017, 0, i + 1)))
@@ -264,16 +265,6 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         const date = this._createDateInstanceByFdDate(fdDate);
         date.setDate(date.getDate() + days);
         return this._createFdDateFromDateInstance(date);
-    }
-
-    getAmountOfWeeks(year: number, month: number, firstDayOfWeek: number): number {
-        const firstOfMonth = new Date(year, month - 1, 1);
-        const lastOfMonth = new Date(year, month, 0);
-
-        const dayOffset = (firstOfMonth.getDay() - firstDayOfWeek + 8) % 7;
-        const used = dayOffset + lastOfMonth.getDate();
-
-        return Math.ceil(used / 7);
     }
 
     clone(date: FdDate): FdDate {
