@@ -1,2 +1,9 @@
 @import '~fundamental-styles/dist/input';
 @import '~fundamental-styles/dist/time';
+
+.fd-time__list {
+    touch-action: pan-x;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}

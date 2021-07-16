@@ -50,8 +50,7 @@
               "moment",
               "highlight.js",
               "focus-trap",
-              "@angularclass/hmr",
-              "hammerjs"
+              "@angularclass/hmr"
             ]
           },
           "configurations": {

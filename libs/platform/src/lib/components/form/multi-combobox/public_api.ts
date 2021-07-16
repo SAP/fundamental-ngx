@@ -3,3 +3,4 @@ export { BaseMultiCombobox, MultiComboboxSelectionChangeEvent } from './commons/
 export { MultiComboboxComponent } from './multi-combobox/multi-combobox.component';
 export { PlatformMultiComboboxMobileModule } from './multi-combobox-mobile/multi-combobox-mobile.module';
 export { MultiComboboxMobileComponent } from './multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component';
+export { MultiComboboxConfig } from './multi-combobox.config';

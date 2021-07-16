@@ -4,39 +4,16 @@ fd-carousel:focus {
  outline: 1px dotted;
 }
 
-.fd-carousel-items-horizontal {
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
+// TODO: Remove this after updating fundamental-styles lib version.
+.fd-carousel__content {
+    > div {
+        touch-action: pan-x;
+        user-select: none;
+        -webkit-user-drag: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
-.fd-carousel-items-display {
-    overflow: hidden;
-}
-
-.fd-carousel__content > .fd-carousel__button.fd-button {
-    &.is-focus,
-    &:focus {
-        top: 50%;
-    }
-
-    [dir=ltr] &.fd-carousel__button--left.is-focus,
-    [dir=ltr] &.fd-carousel__button--left:focus {
-        right: auto;
-    }
-
-    [dir=ltr] &.fd-carousel__button--right.is-focus,
-    [dir=ltr] &.fd-carousel__button--right:focus {
-        left: auto;
-    }
-
-    [dir=rtr] &.fd-carousel__button--left.is-focus,
-    [dir=rtr] &.fd-carousel__button--left:focus {
-        left: auto;
-    }
-
-    [dir=rtr] &.fd-carousel__button--right.is-focus,
-    [dir=rtr] &.fd-carousel__button--right:focus {
-        right: auto;
+        &.fd-carousel__content--horizontal {
+            touch-action: pan-y;
+        }
     }
 }

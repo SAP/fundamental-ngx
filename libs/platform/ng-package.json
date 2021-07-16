@@ -4,5 +4,5 @@
     "lib": {
         "entryFile": "src/index.ts"
     },
-    "allowedNonPeerDependencies": ["@fundamental-ngx/core"]
+    "allowedNonPeerDependencies": ["@fundamental-ngx/core", "xml2js"]
 }

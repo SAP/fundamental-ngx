@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-
 @Component({
     selector: 'fd-inline-help-styled-example',
     templateUrl: './inline-help-styled-example.component.html',

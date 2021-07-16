@@ -30,9 +30,9 @@ export class PlatformDatePickerDisableFuncExampleComponent {
 
         const currentYear = this.datetimeAdapter.today().year;
         const currentMonth = this.datetimeAdapter.today().month;
-        const currentDay = this.datetimeAdapter.today().day;
+        const totalDaysInMonth = this.datetimeAdapter.getNumDaysInMonth(this.datetimeAdapter.today());
 
-        if (year === currentYear && month === currentMonth && day < currentDay) {
+        if (year === currentYear && month === currentMonth && day <= totalDaysInMonth) {
             return false;
         } else {
             return true;
