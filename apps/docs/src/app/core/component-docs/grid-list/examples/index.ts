@@ -11,6 +11,7 @@ import { GridListSingleSelectRightExampleComponent } from './single-select-right
 import { GridListSingleSelectExampleComponent } from './single-select/grid-list-single-select-example.component';
 import { GridListStatesExampleComponent } from './states/grid-list-states-example.component';
 import { GridListStatusesExampleComponent } from './statuses/grid-list-statuses-example.component';
+import { GridListFocusingItemExampleComponent } from './focusing/grid-list-focusing-example.component';
 
 export const COMPONENTS = [
     GridListDefaultExampleComponent,
@@ -25,5 +26,6 @@ export const COMPONENTS = [
     GridListMoreExampleComponent,
     GridListFooterExampleComponent,
     GridListDndExampleComponent,
-    GridListLayoutExampleComponent
+    GridListLayoutExampleComponent,
+    GridListFocusingItemExampleComponent
 ];

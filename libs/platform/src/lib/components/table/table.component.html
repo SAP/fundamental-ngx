@@ -283,15 +283,14 @@
                             fd-table-row
                             fd-dnd-item
                             role="row"
-                            [hoverable]="_isShownSelectionColumn"
                             [class.fdp-table__row--tree]="_isTreeRow(row)"
-                            [attr.aria-rowindex]="rowIdx"
+                            [hoverable]="_isShownSelectionColumn || row.hasNavIndicator"
+                            [navigatable]="row.navigatable || rowsActivable"
+                            [activable]="row.hasNavIndicator || rowsActivable"
                             [attr.aria-selected]="row.checked"
+                            [attr.aria-rowindex]="rowIdx"
+                            (click)="_onRowClick(row)"
                             (started)="_dragDropStart()"
-                            [navigatable]="row.navigatable"
-                            [hoverable]="row.hasNavIndicator"
-                            [activable]="row.hasNavIndicator"
-                            [routerLink]="row.hasNavIndicator ? row.navigationTarget : './'"
                         >
                             <!-- Row Selection Cell -->
                             <ng-container [ngSwitch]="selectionMode">
@@ -351,18 +350,19 @@
                                     i18n-title="Toggle row|Toggle tree row children@@platformTableTreeRowToggle"
                                 ></fd-icon>
 
-                                <i 
+                                <i
                                     *ngIf="_showNavIndicator(colIdx, row)"
                                     fd-table-icon
                                     [ngClass]="_rtl ? 'sap-icon--slim-arrow-left' : 'sap-icon--slim-arrow-right'"
                                     class="fdp-table__navigation-indicator"
                                 ></i>
 
-                                <button 
+                                <button
                                     *ngIf="_showNavButton(colIdx, row)"
-                                    class="fd-button fd-button--transparent" 
+                                    class="fd-button fd-button--transparent"
                                     [disabled]="!row.navigatable"
-                                    [routerLink]="row.navigationTarget"
+                                    (click)="_navigateByRowNavigationTarget(row)"
+                                    (keydown.enter)="_navigateByRowNavigationTarget(row)"
                                 >
                                     <i [ngClass]="_rtl ? 'sap-icon--navigation-left-arrow' : 'sap-icon--navigation-right-arrow'"></i>
                                 </button>
@@ -425,6 +425,7 @@
         role="row"
         class="fdp-table__row--group"
         [attr.aria-rowindex]="rowIdx"
+        (click)="_emitRowActivate(row)"
     >
         <td
             fd-table-cell

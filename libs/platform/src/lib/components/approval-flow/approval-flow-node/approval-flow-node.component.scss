@@ -102,6 +102,14 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
             border-top: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
             top: calc(50% - 1px);
         }
+
+        &.#{$block}--first-final:before {
+            width: calc(100% + 2rem);
+        }
+
+        &:not(.#{$block}--last-blank) .#{$block}__add--after-all + .#{$block}__drop-zone {
+            width: 100%;
+        }
     }
 
     &.#{$block}--line-before:before,
@@ -139,7 +147,6 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
             border-top-style: solid;
             border-top-width: 1px;
             left: -2rem;
-            width: 2rem;
         }
     }
 
@@ -176,6 +183,14 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
                 right: -1.8rem;
             }
         }
+
+        &:not(.#{$block}--blank) .#{$block}__add--after-all {
+            right: -3.5rem;
+
+            & + .#{$block}__drop-zone {
+                right: -3.8rem;
+            }
+        }
     }
 
     &.#{$block}--first-in-parallel,
@@ -186,6 +201,24 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
 
             & + .#{$block}__drop-zone {
                 left: -1.8rem;
+            }
+
+            &-all {
+                left: -3.5rem;
+
+                & + .#{$block}__drop-zone {
+                    left: -3.8rem;
+                }
+            }
+        }
+    }
+
+    &.#{$block}--last-blank {
+        .#{$block}__add--after-all {
+            left: calc(#{$node-width} + 2.5rem);
+
+            & + .#{$block}__drop-zone {
+                left: calc(100% + 2rem);
             }
         }
     }
@@ -208,6 +241,18 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
 
         .#{$block}__carousel-start-marker {
             left: -4rem;
+        }
+    }
+
+
+    &.#{$block}--first-final {
+        &.#{$block}--line-after:after {
+            width: 4rem;
+            right: -4rem;
+        }
+
+        .#{$block}__carousel-end-marker {
+            right: -4rem;
         }
     }
 
@@ -255,13 +300,6 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
         &.#{$block}--line-after:after {
             right: auto;
             left: -2rem;
-            width: 2rem;
-        }
-
-        &.#{$block}--parent-approved {
-            &.#{$block}--line-before:before {
-                width: 2rem;
-            }
         }
 
         .#{$block}__name.#{$block}__name--members-count {
@@ -310,6 +348,14 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
                     left: -1.8rem;
                 }
             }
+
+            &:not(.#{$block}--blank) .#{$block}__add--after-all {
+                left: -3.5rem;
+
+                & + .#{$block}__drop-zone {
+                    left: -3.8rem;
+                }
+            }
         }
 
         &.#{$block}--first-in-parallel,
@@ -320,6 +366,24 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
 
                 & + .#{$block}__drop-zone {
                     right: -1.8rem;
+                }
+
+                &-all {
+                    right: -3.5rem;
+
+                    & + .#{$block}__drop-zone {
+                        right: -3.8rem;
+                    }
+                }
+            }
+        }
+
+        &.#{$block}--last-blank {
+            .#{$block}__add--after-all {
+                right: calc(#{$node-width} + 2.5rem);
+
+                & + .#{$block}__drop-zone {
+                    right: calc(100% + 2rem);
                 }
             }
         }
@@ -343,6 +407,24 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
             .#{$block}__carousel-start-marker {
                 left: auto;
                 right: -4rem;
+            }
+        }
+
+        &.#{$block}--first-final {
+            &.#{$block}--line-after:after {
+                right: auto;
+                left: -4rem;
+            }
+
+            .#{$block}__carousel-end-marker {
+                right: auto;
+                left: -4rem;
+            }
+        }
+
+        &.#{$block}--blank {
+            &.#{$block}--first-final:before {
+                left: 0;
             }
         }
     }

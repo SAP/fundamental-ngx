@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FdDate, DateTimeFormats, DATE_TIME_FORMATS, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import { FdDate, DateTimeFormats, DATE_TIME_FORMATS, FD_DATETIME_FORMATS, DatetimeAdapter, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 /**
  * FD_DATETIME_FORMATS is based on Intl.DateTimeFormat,
@@ -25,6 +25,10 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
     selector: 'fd-datetime-format-example',
     templateUrl: './datetime-format-example.component.html',
     providers: [
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        },
         {
             provide: DATE_TIME_FORMATS,
             useValue: CUSTOM_FD_DATETIME_FORMATS

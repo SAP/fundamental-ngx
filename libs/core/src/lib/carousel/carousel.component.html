@@ -6,12 +6,12 @@
         <ng-container *ngTemplateOutlet="pageIndicatorContainer"></ng-container>
     </ng-container>
 
-    <div class="fd-carousel__content fd-carousel-items-display" [class.fd-carousel-items-horizontal]="!vertical">
+    <div class="fd-carousel__content fd-carousel__content--display">
         <ng-container *ngIf="!navigatorInPageIndicator">
             <ng-container *ngTemplateOutlet="buttonLeft"></ng-container>
         </ng-container>
 
-        <div #slideContainer [class.fd-carousel-items-horizontal]="!vertical">
+        <div #slideContainer [class.fd-carousel__content--horizontal]="!vertical">
             <ng-content></ng-content>
         </div>
 
