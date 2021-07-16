@@ -231,10 +231,10 @@ describe('GridListComponent', () => {
         fixture.detectChanges();
 
         const radioButtons = fixture.debugElement.queryAll(By.css('.fd-grid-list__item .fd-checkbox'));
-        radioButtons[1].nativeElement.click();
-        radioButtons[2].nativeElement.click();
-        radioButtons[3].nativeElement.click();
-        radioButtons[4].nativeElement.click();
+
+        radioButtons.forEach((button) => {
+            button.nativeElement.click();
+        });
 
         fixture.detectChanges();
 
@@ -243,7 +243,7 @@ describe('GridListComponent', () => {
         const selectedItemEvent = {
             added: [],
             index: [],
-            removed: ['Title 2', 'Title 3', 'Title 4', 'Title 5'],
+            removed: ['Title 1', 'Title 2', 'Title 3', 'Title 4', 'Title 5', 'Title 6'],
             selection: []
         };
         expect(component.selectionChange).toHaveBeenCalledWith(selectedItemEvent);

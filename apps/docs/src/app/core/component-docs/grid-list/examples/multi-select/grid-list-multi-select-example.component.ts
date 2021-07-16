@@ -19,7 +19,8 @@ interface GridListItem {
 })
 export class GridListMultiSelectExampleComponent {
 
-    @ViewChild(GridListComponent) grid: GridListComponent<GridListItem>;
+    @ViewChild(GridListComponent)
+    grid: GridListComponent<GridListItem>;
 
     list: GridListItem[] = [
         {
