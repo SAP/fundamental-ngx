@@ -60,61 +60,60 @@
             </div>
         </ng-container>
 
-        <div class="fd-toolbar--actions">
-            <span
-                *ngIf="counter"
-                class="fd-grid-list__item-counter"
-                i18n-aria-label="@@coreGridList.Item.Counter|Count aria-label attribute"
-                [attr.aria-label]="'Item has ' + counter + ' children'"
-                [innerText]="counter"
-            ></span>
+        <fd-grid-list-title-bar-spacer></fd-grid-list-title-bar-spacer>
+        <span
+            *ngIf="counter"
+            class="fd-grid-list__item-counter"
+            i18n-aria-label="@@coreGridList.Item.Counter|Count aria-label attribute"
+            [attr.aria-label]="'Item has ' + counter + ' children'"
+            [innerText]="counter"
+        ></span>
 
-            <button
-                *ngIf="type === 'detail' || type === 'detailsAndActive'"
-                fd-button
-                fdType="transparent"
-                glyph="edit"
-                class="fd-grid-list__action-button"
-                i18n-aria-label="coreGridList.Item.Btn.Details|Button aria-label attribute"
-                aria-label="Details"
-                i18n-title="coreGridList.Item.Btn.Details|Button title attribute"
-                title="Details"
-                [compact]="true"
-                (click)="_onDetail($event)"
-            ></button>
+        <button
+            *ngIf="type === 'detail' || type === 'detailsAndActive'"
+            fd-button
+            fdType="transparent"
+            glyph="edit"
+            class="fd-grid-list__action-button"
+            i18n-aria-label="coreGridList.Item.Btn.Details|Button aria-label attribute"
+            aria-label="Details"
+            i18n-title="coreGridList.Item.Btn.Details|Button title attribute"
+            title="Details"
+            [compact]="true"
+            (click)="_onDetail($event)"
+        ></button>
 
-            <button
-                *ngIf="selectionMode === 'delete'"
-                fd-button
-                fdType="transparent"
-                glyph="decline"
-                class="fd-grid-list__action-button"
-                i18n-aria-label="coreGridList.Item.Btn.Delete|Button aria-label attribute"
-                aria-label="Delete"
-                i18n-title="coreGridList.Item.Btn.Delete|Button title attribute"
-                title="Delete"
-                [compact]="true"
-                (click)="_onDelete($event)"
-            ></button>
+        <button
+            *ngIf="selectionMode === 'delete'"
+            fd-button
+            fdType="transparent"
+            glyph="decline"
+            class="fd-grid-list__action-button"
+            i18n-aria-label="coreGridList.Item.Btn.Delete|Button aria-label attribute"
+            aria-label="Delete"
+            i18n-title="coreGridList.Item.Btn.Delete|Button title attribute"
+            title="Delete"
+            [compact]="true"
+            (click)="_onDelete($event)"
+        ></button>
 
-            <button
-                *ngIf="type === 'navigation'"
-                fd-button
-                fdType="transparent"
-                glyph="navigation-right-arrow"
-                i18n-aria-label="coreGridList.Item.Btn.Navigation|Button aria-label attribute"
-                aria-label="Navigation"
-                i18n-title="coreGridList.Item.Btn.Navigation|Button aria-label attribute"
-                title="Navigation"
-                class="fd-grid-list__action-button fd-grid-list__btn-navigation"
-                [compact]="true"
-                (click)="_onNavigate($event)"
-            ></button>
+        <button
+            *ngIf="type === 'navigation'"
+            fd-button
+            fdType="transparent"
+            glyph="navigation-right-arrow"
+            i18n-aria-label="coreGridList.Item.Btn.Navigation|Button aria-label attribute"
+            aria-label="Navigation"
+            i18n-title="coreGridList.Item.Btn.Navigation|Button aria-label attribute"
+            title="Navigation"
+            class="fd-grid-list__action-button fd-grid-list__btn-navigation"
+            [compact]="true"
+            (click)="_onNavigate($event)"
+        ></button>
 
-            <ng-container *ngIf="selectionMode === 'singleSelectRight'">
-                <ng-container *ngTemplateOutlet="radio"></ng-container>
-            </ng-container>
-        </div>
+        <ng-container *ngIf="selectionMode === 'singleSelectRight'">
+            <ng-container *ngTemplateOutlet="radio"></ng-container>
+        </ng-container>
     </div>
 
     <div class="fd-grid-list__item-body" [class.fd-grid-list__item-body--no-padding]="noPadding">
