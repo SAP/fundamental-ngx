@@ -289,7 +289,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     isTimeFormatIncludesDayPeriod(displayFormat: string): boolean {
         const format = this._prepareFormat(displayFormat);
 
-        return !!displayFormat.match(/[aA]/);
+        return !!format.match(/[aA]/);
     };
 
     isTimeFormatIncludesHours(displayFormat: string): boolean {
@@ -301,13 +301,13 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     isTimeFormatIncludesMinutes(displayFormat: string): boolean {
         const format = this._prepareFormat(displayFormat);
 
-        return !!displayFormat.match(/[m]/);
+        return !!format.match(/[m]/);
     };
 
     isTimeFormatIncludesSeconds(displayFormat: string): boolean {
         const format = this._prepareFormat(displayFormat);
 
-        return !!displayFormat.match(/[s]/);
+        return !!format.match(/[s]/);
     };
 
     /**
