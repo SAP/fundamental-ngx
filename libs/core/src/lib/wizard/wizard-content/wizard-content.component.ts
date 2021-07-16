@@ -18,7 +18,7 @@ export class WizardContentComponent {
     contentBackground: WizardContentBackground;
 
     /**
-     * Size of the wizard progress bar.
+     * Size (horizontal paddings) of the wizard content.
      */
     @Input()
     size: WizardSize;
