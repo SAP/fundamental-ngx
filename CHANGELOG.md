@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.113](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.112...v0.31.0-rc.113) (2021-07-16)
+
+
+### Bug Fixes
+
+* **core:** fix datepicker bugs from defect hunting ([#5991](https://github.com/SAP/fundamental-ngx/issues/5991)) ([bb870fb](https://github.com/SAP/fundamental-ngx/commit/bb870fbf9ae9ffb50f469d7cebcb7ce565ad19dd))
+
 ## [0.31.0-rc.112](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.111...v0.31.0-rc.112) (2021-07-16)
 
 ## [0.31.0-rc.111](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.110...v0.31.0-rc.111) (2021-07-16)
