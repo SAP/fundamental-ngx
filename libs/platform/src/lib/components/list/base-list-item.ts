@@ -211,11 +211,6 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     */
     _hasByLine = false;
 
-    /**@hidden
-     * list item with no bottom border
-    */
-    _noSeperator: boolean;
-
     /** @hidden */
     _contentDensity: ContentDensity = this._listConfig.contentDensity;
 
@@ -265,9 +260,6 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     ngAfterViewChecked(): void {
         this._changeDetectorRef.detectChanges();
         const currentitem = this.itemEl.nativeElement.querySelector('li');
-        if (this._noSeperator) {
-            currentitem.classList.add('fd-list-item__no-seprator');
-        }
         if (currentitem) {
         currentitem.setAttribute('role', 'option');
         if (currentitem.parentNode) {
