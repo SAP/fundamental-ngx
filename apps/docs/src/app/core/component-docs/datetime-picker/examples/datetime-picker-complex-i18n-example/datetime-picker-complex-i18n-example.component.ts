@@ -1,5 +1,5 @@
 import { Component, LOCALE_ID, ViewChild } from '@angular/core';
-import { FdDate, DatetimeAdapter, FdDatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { FdDate, DatetimeAdapter, FdDatetimeAdapter, DATE_TIME_FORMATS, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 
 const placeholders = new Map([
@@ -24,6 +24,10 @@ const placeholders = new Map([
         {
             provide: DatetimeAdapter,
             useClass: FdDatetimeAdapter
+        },
+        {
+            provide: DATE_TIME_FORMATS,
+            useValue: FD_DATETIME_FORMATS
         }
     ]
 })

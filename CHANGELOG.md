@@ -1,4 +1,82 @@
 
+## [0.31.0-rc.109](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.108...v0.31.0-rc.109) (2021-07-16)
+
+## [0.31.0-rc.108](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.107...v0.31.0-rc.108) (2021-07-16)
+
+## [0.31.0-rc.107](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.106...v0.31.0-rc.107) (2021-07-16)
+
+## [0.31.0-rc.106](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.105...v0.31.0-rc.106) (2021-07-16)
+
+
+### Bug Fixes
+
+* **platform:** fix Platform ng-add schematics failing in Angular12 apps ([#5973](https://github.com/SAP/fundamental-ngx/issues/5973)) ([e1c425c](https://github.com/SAP/fundamental-ngx/commit/e1c425ccf2bbd0135d7b868bd2d0bc504c84f912))
+
+## [0.31.0-rc.105](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.104...v0.31.0-rc.105) (2021-07-15)
+
+
+### Bug Fixes
+
+* **core:** remove hammerjs from library ([#5980](https://github.com/SAP/fundamental-ngx/issues/5980)) ([690eb48](https://github.com/SAP/fundamental-ngx/commit/690eb48545f0b7a8ffdec651e5304760dbb1fb6a))
+
+## [0.31.0-rc.104](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.103...v0.31.0-rc.104) (2021-07-15)
+
+
+### Bug Fixes
+
+* **platform:** remove style from ngx to reuse the style from fundamental-style lib for menu component ([#5962](https://github.com/SAP/fundamental-ngx/issues/5962)) ([1ad3d12](https://github.com/SAP/fundamental-ngx/commit/1ad3d12defe48d866c24b80895dd236e64794e99))
+
+## [0.31.0-rc.103](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.102...v0.31.0-rc.103) (2021-07-15)
+
+## [0.31.0-rc.102](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.101...v0.31.0-rc.102) (2021-07-15)
+
+
+### Bug Fixes
+
+* **core:** add button type as per fiori spec ([#5981](https://github.com/SAP/fundamental-ngx/issues/5981)) ([011176a](https://github.com/SAP/fundamental-ngx/commit/011176ad09ac26e019c8559cce6ee80d50a797fa))
+
+## [0.31.0-rc.101](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.100...v0.31.0-rc.101) (2021-07-15)
+
+
+### Bug Fixes
+
+* **core:** removed list body focus and focused to the list items ([#5946](https://github.com/SAP/fundamental-ngx/issues/5946)) ([cd25c30](https://github.com/SAP/fundamental-ngx/commit/cd25c301f4d71ebfa9a77c69e1ced34ac5448981))
+
+## [0.31.0-rc.100](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.99...v0.31.0-rc.100) (2021-07-15)
+
+
+### Bug Fixes
+
+* **core,platform:** add keyboard support for Inline Help icon triggers ([#5862](https://github.com/SAP/fundamental-ngx/issues/5862)) ([c8d594e](https://github.com/SAP/fundamental-ngx/commit/c8d594ea467dc59dfbef3573055e2e1d901e184c))
+
+## [0.31.0-rc.99](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.98...v0.31.0-rc.99) (2021-07-15)
+
+## [0.31.0-rc.98](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.97...v0.31.0-rc.98) (2021-07-15)
+
+## [0.31.0-rc.97](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.96...v0.31.0-rc.97) (2021-07-14)
+
+
+### Bug Fixes
+
+* **platform:** table dependencies refactoring ([#5967](https://github.com/SAP/fundamental-ngx/issues/5967)) ([9c7cbef](https://github.com/SAP/fundamental-ngx/commit/9c7cbeffe16d091524de5d77bfaeb2c8ad4976d0))
+
+## [0.31.0-rc.96](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.95...v0.31.0-rc.96) (2021-07-14)
+
+## [0.31.0-rc.95](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.94...v0.31.0-rc.95) (2021-07-14)
+
+## [0.31.0-rc.94](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.93...v0.31.0-rc.94) (2021-07-14)
+
+
+### Bug Fixes
+
+* **core:** provide screen reader access for inline help ([#5863](https://github.com/SAP/fundamental-ngx/issues/5863)) ([5f999e2](https://github.com/SAP/fundamental-ngx/commit/5f999e27fc6c1bd1317ad5754b767355a7adae43))
+
+## [0.31.0-rc.93](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.92...v0.31.0-rc.93) (2021-07-14)
+
+## [0.31.0-rc.92](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.91...v0.31.0-rc.92) (2021-07-13)
+
+## [0.31.0-rc.91](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.90...v0.31.0-rc.91) (2021-07-13)
+
 ## [0.31.0-rc.90](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.89...v0.31.0-rc.90) (2021-07-13)
 
 

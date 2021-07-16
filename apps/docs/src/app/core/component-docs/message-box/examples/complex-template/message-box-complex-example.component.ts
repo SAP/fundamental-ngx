@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MessageBoxRef } from '@fundamental-ngx/core/message-box';
 
 @Component({
+    selector: 'fd-message-box-complex-example',
     template: `
         <fd-message-box>
             <fd-message-box-header>
