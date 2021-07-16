@@ -3,3 +3,17 @@
 fd-carousel:focus {
  outline: 1px dotted;
 }
+
+// TODO: Remove this after updating fundamental-styles lib version.
+.fd-carousel__content {
+    > div {
+        touch-action: pan-x;
+        user-select: none;
+        -webkit-user-drag: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+        &.fd-carousel__content--horizontal {
+            touch-action: pan-y;
+        }
+    }
+}

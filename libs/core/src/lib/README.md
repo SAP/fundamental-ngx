@@ -99,7 +99,7 @@ For an existing Angular CLI application,
     For models prior to 0.10 use `fundamental-ngx`
 
     ```typescript
-    import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
+    import { CheckboxModule } from 'fundamental-ngx';
 
     @NgModule({
         ...

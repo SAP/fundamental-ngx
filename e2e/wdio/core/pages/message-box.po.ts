@@ -6,7 +6,7 @@ export class MessageBoxPo extends CoreBaseComponentPo {
     root = '#page-content';
 
     basedObjectExample = 'fd-object-based-message-box-example ';
-    openTemplateExample = 'fd-message-box-open-template-example ';
+    openTemplateExample = 'fd-template-based-message-box-example ';
     basedComponentExample = 'fd-component-based-message-box-example ';
     sematicTypesExample = 'fd-semantic-types-example ';
     positionExample = 'fd-message-box-position-example ';
