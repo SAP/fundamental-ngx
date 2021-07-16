@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.111](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.110...v0.31.0-rc.111) (2021-07-16)
+
+
+### Bug Fixes
+
+* **core:** fix slider handler position ([#5761](https://github.com/SAP/fundamental-ngx/issues/5761)) ([63e0542](https://github.com/SAP/fundamental-ngx/commit/63e0542e930a5217b2f3e26f59a8f0cab652f126))
+
 ## [0.31.0-rc.110](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.109...v0.31.0-rc.110) (2021-07-16)
 
 ## [0.31.0-rc.109](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.108...v0.31.0-rc.109) (2021-07-16)
