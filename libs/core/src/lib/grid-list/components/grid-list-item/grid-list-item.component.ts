@@ -13,6 +13,7 @@ import {
     Output,
     Renderer2,
     SimpleChanges,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -167,6 +168,10 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     locked = new EventEmitter<GridListItemOutputEvent<T>>();
 
     /** @hidden */
+    @ViewChild('gridListItem')
+    _gridListItem: ElementRef;
+
+    /** @hidden */
     get gridLayoutClasses(): string[] {
         return this._gridLayoutClasses;
     }
@@ -262,6 +267,11 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     /** @hidden */
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
+    }
+
+    /** Focus grid list item programmatically */
+    focus(): void {
+        this._gridListItem?.nativeElement.focus();
     }
 
     /** @hidden */
