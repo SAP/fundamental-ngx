@@ -174,7 +174,7 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     @HostListener('keydown', ['$event'])
     onKeyDown(event: KeyboardEvent): void {
         if (this.popoverControl.elRef.nativeElement.children[0] === document.activeElement) {
-            if (KeyUtil.isKeyCode(event, SPACE) || KeyUtil.isKeyCode(event, ENTER)) {
+            if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
                 // prevent page scrolling on Space keydown
                 event.preventDefault();
                 this._popoverService.toggle();

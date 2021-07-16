@@ -12,7 +12,6 @@ import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } fro
 @Component({
     selector: 'fd-popover-control',
     templateUrl: './popover-control.component.html',
-    styleUrls: ['./popover-control.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
