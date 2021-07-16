@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.117](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.116...v0.31.0-rc.117) (2021-07-16)
+
+
+### Features
+
+* **platform:** table column width & resizing ([#5879](https://github.com/SAP/fundamental-ngx/issues/5879)) ([222053f](https://github.com/SAP/fundamental-ngx/commit/222053f210c8e13e2a275c998adb5e33c5988b62))
+
 ## [0.31.0-rc.116](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.115...v0.31.0-rc.116) (2021-07-16)
 
 ## [0.31.0-rc.115](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.114...v0.31.0-rc.115) (2021-07-16)
