@@ -17,7 +17,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { Platform } from '@angular/cdk/platform';
 import { coerceNumberProperty, _isNumberValue } from '@angular/cdk/coercion';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
@@ -325,6 +325,9 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     /** @hidden */
     private _valuesBySteps: number[] = [];
 
+    /** @hidden */
+    private _tooltipOpen = false;
+
     /**
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
@@ -494,11 +497,13 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             return;
         }
 
-        const allowedKeys: number[] = [LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW];
+        const allowedKeys: number[] = [LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW, ENTER, SPACE];
         if (!KeyUtil.isKeyCode(event, allowedKeys)) {
             return;
         }
         event.preventDefault();
+
+        this._closeOpenPopupOnClick();
 
         const diff = event.shiftKey ? this.jump : this.step;
         let newValue: number | SliderTickMark | null = null;
@@ -551,11 +556,13 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden */
     _showPopovers(): void {
+        this._tooltipOpen = true;
         this._popovers.forEach((popover) => popover.open());
     }
 
     /** @hidden */
     _hidePopovers(): void {
+        this._tooltipOpen = false;
         const elementsToCheck = [
             this.handle?.nativeElement,
             this.rangeHandle1?.nativeElement,
@@ -603,25 +610,26 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         this._updatePopoversPosition();
     }
 
-    /** @hidden show popover on focus over slider handle */
-    onFocus(event: MouseEvent | KeyboardEvent): void {
-        this._showPopovers();
-        this._cdr.markForCheck();
-    }
-
     /** @hidden reset default prefix on leaving the slider */
     onBlur(event: MouseEvent | KeyboardEvent): void {
-        // hide popover when focus moves out of slider handle
-        this._hidePopovers();
-
         // reset prefix string for slider current value that need to be announced
         if (this._isRange) {
-            this._rangeSliderHandle2CurrentValuePrefix = this.rangeSliderHandle2CurrentValuePrefix;
+            this._rangeSliderHandle1CurrentValuePrefix = this.rangeSliderHandle1CurrentValuePrefix;
             this._rangeSliderHandle2CurrentValuePrefix = this.rangeSliderHandle2CurrentValuePrefix;
         } else {
             this._singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
         }
         this._cdr.markForCheck();
+    }
+
+    /** @hidden */
+    private _closeOpenPopupOnClick(): void {
+        if (this._tooltipOpen) {
+            this._popovers.forEach((popover) => popover.close());
+        } else {
+            this._popovers.forEach((popover) => popover.open());
+        }
+        this._tooltipOpen = !this._tooltipOpen;
     }
 
     /** @hidden */
