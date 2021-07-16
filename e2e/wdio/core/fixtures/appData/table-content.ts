@@ -25,3 +25,10 @@ export const paginationTestArr = [
     'Showing 21-25 of 25'
 ];
 export const dateTestText = 'date';
+export const testText = 'test';
+export const tableCellArr2 = [
+    'Apple',
+    'Row 1',
+    'Row 1',
+    '09-07-18',
+];

@@ -9,6 +9,7 @@ export class TablePo extends CoreBaseComponentPo {
     tableCheckboxesExample = 'fd-table-checkboxes-example';
     tableSemanticExample = 'fd-table-semantic-example';
     tableCustomColumnsExample = 'fd-table-custom-columns-example';
+    tableColumnSortingExample = 'fd-table-column-sorting-example';
     tablePopinExample = 'fd-table-popin-example';
     tableNavigatableRowExample = 'fd-table-navigatable-row-example';
     tablePaginationExample = 'fd-table-pagination-example';
@@ -30,6 +31,9 @@ export class TablePo extends CoreBaseComponentPo {
     linkNext = '.fd-pagination__link--next';
     inputGroup = ' .fd-input-group__input';
     dialogValue = '.fd-list__item.ng-star-inserted .fd-list__title';
+    tableInner = '.fd-table__inner';
+    columnSortingInput = '.fd-popover__popper input';
+    listItem = '.fd-list__item';
 
     open(): void {
         super.open(this.url);
