@@ -61,6 +61,11 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     @HostBinding('attr.id')
     id = 'fd-slider-id-' + sliderId++;
 
+    /** Whether to apply cozy mode. */
+    @Input()
+    @HostBinding('class.fd-slider--lg')
+    cozy: boolean = null;
+
     /** User's custom classes */
     @Input()
     class: string;
@@ -174,10 +179,6 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     /** Whether the control is disabled. */
     @Input()
     disabled = false;
-
-    /** Whether to apply cozy mode. */
-    @Input()
-    cozy: boolean = null;
 
     _position: number | number[] = 0;
 
