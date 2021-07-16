@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.106](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.105...v0.31.0-rc.106) (2021-07-16)
+
+
+### Bug Fixes
+
+* **platform:** fix Platform ng-add schematics failing in Angular12 apps ([#5973](https://github.com/SAP/fundamental-ngx/issues/5973)) ([e1c425c](https://github.com/SAP/fundamental-ngx/commit/e1c425ccf2bbd0135d7b868bd2d0bc504c84f912))
+
 ## [0.31.0-rc.105](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.104...v0.31.0-rc.105) (2021-07-15)
 
 
