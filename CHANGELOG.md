@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.114](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.113...v0.31.0-rc.114) (2021-07-16)
+
+
+### Features
+
+* **core:** grid list item focus method ([#6002](https://github.com/SAP/fundamental-ngx/issues/6002)) ([a2a66e8](https://github.com/SAP/fundamental-ngx/commit/a2a66e875686dbcb1e51af1a13affcb113331b01))
+
 ## [0.31.0-rc.113](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.112...v0.31.0-rc.113) (2021-07-16)
 
 
