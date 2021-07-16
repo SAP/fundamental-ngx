@@ -13,6 +13,27 @@
 <separator></separator>
 
 <fd-docs-section-title
+    id="actiable-rows-table"
+    componentName="table"
+>
+    Activable Rows
+</fd-docs-section-title>
+<description>
+    <p>This example shows activable rows</p>
+
+    <ul>
+        <li>Use <code>[rowsActivable]="true"</code> input property on the table to make rows activable.</li>
+        <li>Event <code>(rowActivate)</code> is emitted when row gets activated.</li>
+    </ul>
+</description>
+<component-example>
+    <fdp-platform-table-activable-example></fdp-platform-table-activable-example>
+</component-example>
+<code-example [exampleFiles]="defaultTableFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title
     id="custom-columns-table"
     componentName="table"
 >
@@ -378,6 +399,7 @@
 <description>
     Setting a row's <code>navigatable</code> property to <code>false</code> will make the row non-navigatable. When the row is non-navigatable, the row's navigation indicator will hide.<br>
     To show navigation indicator on a navigatable row, set the row's <code>navigationIndicator</code> property to <code>true</code> and set the row's <code>navigationTarget</code> property to guide navigation.<br>
+    Using this feature requires `RouterModule` to be provided in the host application.
 </description>
 <component-example>
     <fdp-platform-table-navigatable-row-indicator-example></fdp-platform-table-navigatable-row-indicator-example>

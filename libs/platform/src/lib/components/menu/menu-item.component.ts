@@ -1,6 +1,5 @@
 import {
     Component,
-    OnInit,
     ElementRef,
     HostBinding,
     Output,
@@ -8,16 +7,21 @@ import {
     HostListener,
     ChangeDetectionStrategy,
     OnDestroy,
-    Input
+    Input,
+    ViewEncapsulation
 } from '@angular/core';
 import { FocusableOption } from '@angular/cdk/a11y';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { Subject } from 'rxjs';
+
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fdp-menu-item',
     templateUrl: './menu-item.component.html',
     styleUrls: ['./menu-item.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class MenuItemComponent implements OnDestroy, FocusableOption {
     @Input() cascadeDirection: 'right' | 'left' = 'right';
@@ -39,16 +43,6 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
     /** Sets whether this item is a trigger for sub-menu. */
     @HostBinding('class.trigger') isTrigger = false;
 
-    /** @hidden set CSS class 'cascades-right' if cascadeDirection='right'. */
-    @HostBinding('class.cascades-right') get cascadesRight(): boolean {
-        return this.cascadeDirection === 'right';
-    }
-
-    /** @hidden set CSS class 'cascades-left' if cascadeDirection='left'. */
-    @HostBinding('class.cascades-left') get cascadesLeft(): boolean {
-        return this.cascadeDirection === 'left';
-    }
-
     /** @hidden set CSS class 'is-selected' if menu-item opens a sub-menu. */
     @HostBinding('class.is-selected')
     isSelected = false;
@@ -61,7 +55,7 @@ export class MenuItemComponent implements OnDestroy, FocusableOption {
 
     /** @hidden Handle selection of item via keyboard 'Enter' or mouseclick. */
     @HostListener('keydown', ['$event']) onItemKeydown(event: KeyboardEvent): void {
-        if (event && event.key === 'Enter') {
+        if (event && (KeyUtil.isKeyCode(event, [SPACE, ENTER]))) {
             this.itemSelect.emit();
         }
     }

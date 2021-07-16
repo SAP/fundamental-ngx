@@ -13,6 +13,7 @@ import { checkLtrOrientation, checkRtlOrientation } from '../../helper/assertion
 export class BaseComponentPo {
 
     title = 'header .header';
+    root = '#page-content';
     exampleAreaContainersArr = '.fd-doc-component';
     rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
     defaultScreenshotFolder = '/e2e/wdio/baselineScreenshot/platform';

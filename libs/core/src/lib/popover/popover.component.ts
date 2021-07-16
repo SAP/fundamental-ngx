@@ -1,12 +1,17 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
+    ComponentRef,
     ContentChild,
     ElementRef,
+    Injector,
     Input,
     OnChanges,
     OnDestroy,
+    Optional,
+    Renderer2,
     SimpleChanges,
     TemplateRef,
     ViewChild,
@@ -20,10 +25,14 @@ import {
 } from '@angular/cdk/overlay';
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
 
+import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/core/utils';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { BasePopoverClass } from './base/base-popover.class';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
 import { PopoverService } from './popover-service/popover.service';
+import { POPOVER_COMPONENT } from './popover.interface';
+import { PopoverMobileComponent } from './popover-mobile/popover-mobile.component';
+import { PopoverChildContent } from './popover-child-content.interface';
 
 let cdkPopoverUniqueId = 0;
 
@@ -35,17 +44,17 @@ let cdkPopoverUniqueId = 0;
 @Component({
     selector: 'fd-popover',
     templateUrl: './popover.component.html',
+    styleUrls: ['./popover.component.scss'],
     host: {
         '[class.fd-popover-custom]': 'true',
+        '[class.fd-popover-custom--mobile]': 'mobile',
         '[attr.id]': 'id'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    styleUrls: ['./popover.component.scss'],
-    providers: [PopoverService]
+    providers: [PopoverService],
 })
 export class PopoverComponent extends BasePopoverClass implements AfterViewInit, OnDestroy, OnChanges {
-
     /** Tooltip for popover */
     @Input()
     title: string;
@@ -62,6 +71,13 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     @Input()
     id: string = 'fd-popover-' + cdkPopoverUniqueId++;
 
+    /** Whether the popover component should be displayed in mobile mode. */
+    @Input()
+    mobile = false;
+
+    @Input()
+    mobileConfig: MobileModeConfig = { hasCloseButton: true };
+
     /** @hidden */
     @ViewChild('templateRef', { read: TemplateRef })
     templateRef: TemplateRef<any>;
@@ -75,33 +91,55 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     triggerOrigin: CdkOverlayOrigin;
 
     @ContentChild(PopoverBodyComponent)
-    popoverBody: PopoverBodyComponent
+    popoverBody: PopoverBodyComponent;
+
+    /** @hidden - template for Dialog body content */
+    @ContentChild('popoverBodyContent')
+    popoverBodyContentTemplate: TemplateRef<any>;
+
+    /** @hidden - template for Dialog footer content */
+    @ContentChild('popoverFooterContent')
+    popoverFooterContentTemplate: TemplateRef<any>;
 
     /** @deprecated
      * Left for backward compatibility
      */
     directiveRef: any;
 
+    /** @hidden */
+    private _clickEventListener: Function;
+
+    /** @hidden */
+    private _mobileModeComponentRef: ComponentRef<PopoverMobileComponent>;
+
+    /**@hidden */
     constructor(
-        private _popoverService: PopoverService
+        private _elementRef: ElementRef,
+        private _popoverService: PopoverService,
+        private _cdr: ChangeDetectorRef,
+        private _rendered: Renderer2,
+        @Optional() private _dynamicComponentService: DynamicComponentService
     ) {
         super();
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (!this.popoverBody) {
-            this._popoverService.templateContent = this.templateRef;
+        if (!this.mobile) {
+            if (!this.popoverBody) {
+                this._popoverService.templateContent = this.templateRef;
+            }
+            this._popoverService.initialise(
+                this.trigger || this.triggerOrigin.elementRef,
+                this,
+                this.popoverBody ? {
+                template: this.templateRef,
+                container: this.container,
+                popoverBody: this.popoverBody,
+            } : null);
         }
-        this._popoverService.initialise(
-            this.trigger || this.triggerOrigin.elementRef,
-            this,
-            this.popoverBody ? {
-            template: this.templateRef,
-            container: this.container,
-            popoverBody: this.popoverBody,
-        } : null);
 
+        this._setupView();
     }
 
     /** @hidden */
@@ -111,17 +149,34 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
 
     /** @hidden */
     ngOnDestroy(): void {
+        this._destroyMobileComponent();
+        this._destroyEventListeners();
         this._popoverService.onDestroy();
     }
 
-    /** Closes the popover. */
-    close(): void {
-        this._popoverService.close();
+    /** Toggles menu open/close state */
+    toggle(): void {
+        if (this.isOpen) {
+            this.close();
+        } else {
+            this.open();
+        }
     }
 
     /** Opens the popover. */
     open(): void {
+        this.isOpen = true;
         this._popoverService.open();
+        this.isOpenChange.emit(this.isOpen);
+        this._cdr.markForCheck();
+    }
+
+    /** Closes the popover. */
+    close(): void {
+        this.isOpen = false;
+        this._popoverService.close();
+        this.isOpenChange.emit(this.isOpen);
+        this._cdr.markForCheck();
     }
 
     /**
@@ -150,6 +205,63 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
             this.open();
             event.preventDefault();
             event.stopPropagation();
+        }
+    }
+
+    /** @hidden Select and instantiate popover view mode */
+    private _setupView(): void {
+        if (this.mobile) {
+            this._setupMobileMode();
+        }
+
+        this._cdr.detectChanges();
+    }
+
+    /** @hidden Open Popover in mobile mode */
+    private _setupMobileMode(): void {
+        this._mobileModeComponentRef = this._dynamicComponentService.createDynamicComponent(
+            {
+                popoverBodyContentTemplate: this.popoverBodyContentTemplate,
+                popoverFooterContentTemplate: this.popoverFooterContentTemplate,
+            } as PopoverChildContent,
+            PopoverMobileComponent,
+            { container: this._elementRef.nativeElement },
+            {
+                injector: Injector.create({
+                    providers: [{ provide: POPOVER_COMPONENT, useValue: this }]
+                })
+            }
+        );
+
+        this._listenOnTriggerRefClicks();
+    }
+
+    /** @hidden - Listen on popover trigger ref clicks */
+    private _listenOnTriggerRefClicks(): void {
+        this._destroyEventListeners();
+
+        if (this.trigger && this.mobile) {
+            this._clickEventListener = this._rendered.listen(
+                this.trigger.nativeElement, 'click', () => this.toggle()
+            );
+        }
+    }
+
+    /**
+     * @hidden
+     * This is going to be removed in feature, on dialog and dynamic service component refactor
+     */
+    private _destroyEventListeners(): void {
+        if (this._clickEventListener) {
+            this._clickEventListener();
+            this._clickEventListener = null;
+        }
+    }
+
+    /** @hidden */
+    private _destroyMobileComponent(): void {
+        if (this._mobileModeComponentRef) {
+            this._mobileModeComponentRef.destroy();
         }
     }
 }

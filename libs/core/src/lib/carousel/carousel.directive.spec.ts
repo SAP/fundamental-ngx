@@ -167,7 +167,7 @@ describe('CarouselDirective', () => {
         verticalFixture.detectChanges();
 
         expect(verticalDirective.carouselService.currentTransitionPx).toBe(thirdDelta);
-        expect((<any>verticalDirective)._carouselService._getClosest().value).toBe(verticalDirective.items.toArray()[4].value);
+        expect((<any>verticalDirective)._carouselService._getClosest().value).toBe(verticalDirective.items.toArray()[3].value);
     });
 
     it('should handle pan end', () => {
@@ -233,7 +233,7 @@ describe('CarouselDirective', () => {
         horizontalFixture.detectChanges();
 
         expect(horizontalDirective.carouselService.currentTransitionPx).toBe(thirdDelta);
-        expect((<any>horizontalDirective)._carouselService._getClosest().value).toBe(horizontalDirective.items.toArray()[4].value);
+        expect((<any>horizontalDirective)._carouselService._getClosest().value).toBe(horizontalDirective.items.toArray()[3].value);
     });
 
     it('horizontal should return closest with half', () => {

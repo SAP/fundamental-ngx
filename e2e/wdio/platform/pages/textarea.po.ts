@@ -6,14 +6,14 @@ export class TextareaPo extends BaseComponentPo {
     root = '#page-content';
 
     basicTextArea = '#basicTextarea';
-    basicTextAreaLabel = '[for="basicTextarea"] > span';
-    basicTextAreaPopoverIcon = '[for="basicTextarea"] fd-popover-control span';
+    basicTextAreaLabel = '#fdp-form-label-basicTextarea';
+    basicTextAreaPopoverIcon = '#fdp-form-label-basicTextarea fd-popover-control span';
     basicTextAreaPopoverBody = 'fd-popover-body';
 
-    readOnlyTextAreaLabel = '[for="readonlyDescription"] > span';
+    readOnlyTextAreaLabel = '#fdp-form-label-readonlyDescription > span';
 
     disabledTextArea = '#disabledDescription';
-    disabledTextAreaLabel = '[for="disabledDescription"] > span';
+    disabledTextAreaLabel = '#fdp-form-label-disabledDescription > span';
 
     growingDisabledTextarea = '#growingDisabledTextarea';
     growingMaxLinesTextarea = '#growingMaxLinesTextarea';
@@ -22,13 +22,12 @@ export class TextareaPo extends BaseComponentPo {
     withCharactersMaxNumberTextarea = '#noCounterMessageInteraction';
 
     compactTextArea = '#compactTextarea';
-    compactTextAreaLabel = '[for="compactTextarea"] > span';
+    compactTextAreaLabel = '#fdp-form-label-compactTextarea > span';
 
-    detailedTextAreaLabel = '[for="detailedDescription"] > span';
+    detailedTextAreaLabel = '#fdp-form-label-detailedDescription > span';
     detailedTextArea = '#detailedDescription';
     detailedTextAreaErrorMessage = '[type="error"]';
-    detailedTextAreaCharacterCounter = '//div[label[@for="detailedDescription"]]//div[@role="alert"]//span';
-
+    detailedTextAreaCharacterCounter = `//div[label[@id='fdp-form-label-detailedDescription']]//div[@role="alert"]//span`;
     noPlatformsFormTextAreaLabel = '[for="textarea-1"]';
 
     open(): void {

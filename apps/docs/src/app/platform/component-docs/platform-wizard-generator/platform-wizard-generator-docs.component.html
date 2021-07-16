@@ -1,0 +1,129 @@
+<fd-docs-section-title id="wizardDefaultExample" componentName="wizard">
+    Default Wizard generator
+</fd-docs-section-title>
+<description>
+    The default wizard displays a walkthrough screen with forms split into sections.
+    Once the user fills all of the necessary input fields, and presses the "Next step" button, new step will appear.
+    A summary page can be created by adding the <code>[addSummary]="true"</code> input to the wizard generator component.
+</description>
+<component-example>
+    <fdp-wizard-generator-default-example></fdp-wizard-generator-default-example>
+</component-example>
+<code-example [exampleFiles]="defaultExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="wizardDialogExample" componentName="wizard">
+    Wizard generator in dialog
+</fd-docs-section-title>
+<description>
+    The wizard generator can also be used within a dialog by calling <code>open</code> method from <code>WizardDialogGeneratorService</code>
+    A Cancel button is displayed in the footer, so the user can exit the wizard at any point during the process.
+    However, if a user exits the wizard after adding their input, they will receive a warning that their information will be lost.
+</description>
+<component-example>
+    <fdp-wizard-generator-dialog-example></fdp-wizard-generator-dialog-example>
+</component-example>
+<code-example [exampleFiles]="dialogExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="wizardCustomizationExample" componentName="wizard">
+    Customizable Wizard generator
+</fd-docs-section-title>
+<description>
+    The wizard component can be customized with modifier inputs.
+    Steps can be placed on separate pages, rather than appended to the wizard, by setting the <code>[appendToWizard]</code> input to <code>false</code>.
+    <br><br>
+    You can also use icons for the step indicators by adding <code>icon</code> property to the wizard steps object.
+    <br><br>
+    Buttons appearance can be changed with <code>[navigationButtonLabels]</code> property.
+    <br><br>
+    Dialog close confirmation text can be changed with <code>confirmationDialogText, confirmationDialogCloseText, confirmationDialogCancelText</code> properties.
+    <br><br>
+    If you want to use completely different style for navigational buttons, you can use <code>goNextButtonTemplate, goBackButtonTemplate, finishButtonTemplate, cancelButtonTemplate</code>
+    properties for the dialog wizard, and content-projected html with special directives: <code>fdpWizardGeneratorGoNextButton, fdpWizardGeneratorFinishButton</code>.
+    <br><br>
+    If you want to use your custom confirmation dialog, you can pass it <code>confirmationDialogTemplate</code> property to wizard dialog service.
+</description>
+<component-example>
+    <fdp-wizard-generator-customizable-example></fdp-wizard-generator-customizable-example>
+</component-example>
+<code-example [exampleFiles]="customizableExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="wizardBranchingExample" componentName="wizard">
+    Branching Wizard
+</fd-docs-section-title>
+<description>
+    Developers can configure branching behaviour of the wizard by providing <code>when</code> property function to the wizard generator step
+    and by specifying <code>dependencyFields</code> property of the wizard generator step to reflect which steps are creating branches.
+</description>
+<component-example>
+    <fdp-wizard-generator-condition-example></fdp-wizard-generator-condition-example>
+</component-example>
+<code-example [exampleFiles]="branchingExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="wizardResponsivePaddingsExample" componentName="wizard">
+    Responsive paddings for Wizard generator
+</fd-docs-section-title>
+<description>
+    <p>The default wizard dont have responsive paddings applied for progress bar and content.
+    To enable responsive paddings, you can use <code>[responsivePaddings]="true"</code> input to the wizard generator component.</p>
+    <p>Responsive paddings values:</p>
+    <table>
+        <thead>
+           <tr>
+              <th style="text-align: left;"><strong>rem</strong></th>
+              <th style="text-align: left;">
+                 <div style="margin-left: 2rem;">
+                    <p><strong>Min-width</strong> </p>
+                 </div>
+              </th>
+              <th style="text-align: left;">
+                 <div style="margin-left: 2rem;"><strong>Max-width</strong> </div>
+              </th>
+           </tr>
+        </thead>
+        <tbody>
+           <tr>
+              <td style="text-align: left;">1rem</td>
+              <td style="text-align: left;"><span style="margin-left: 2rem;"><em>n/a</em></span></td>
+              <td style="text-align: left;"><span style="margin-left: 2rem;">599px</span></td>
+           </tr>
+           <tr>
+              <td style="text-align: left;">2rem</td>
+              <td style="text-align: left;"><span style="margin-left: 2rem;">600px</span></td>
+              <td style="text-align: left;"><span style="margin-left: 2rem;">1023px</span></td>
+           </tr>
+           <tr>
+              <td style="text-align: left;">2rem</td>
+              <td style="text-align: left;"><span style="margin-left: 2rem;">1024px</span></td>
+              <td style="text-align: left;"><span style="margin-left: 2rem;">1439px</span></td>
+           </tr>
+           <tr>
+              <td style="text-align: left;">3rem</td>
+              <td style="text-align: left;"><span style="margin-left: 2rem;">1440px</span></td>
+              <td style="text-align: left;"><span style="margin-left: 2rem;"><em>n/a</em></span></td>
+           </tr>
+        </tbody>
+     </table>
+</description>
+<component-example>
+    <fdp-wizard-generator-responsive-paddings-example></fdp-wizard-generator-responsive-paddings-example>
+</component-example>
+<code-example [exampleFiles]="responsivePaddingsExample"></code-example>
+
+<fd-docs-section-title id="wizardDialogResponsivePaddingsExample" componentName="wizard">
+    Responsive paddings for Wizard generator in dialog
+</fd-docs-section-title>
+<description>
+    Use <code>responsivePaddings: true</code> property for dialog config to enable wizard responsive paddings inside dialog.
+</description>
+<component-example>
+    <fdp-wizard-generator-responsive-dialog-example></fdp-wizard-generator-responsive-dialog-example>
+</component-example>
+<code-example [exampleFiles]="responsiveDialogPaddingsExample"></code-example>

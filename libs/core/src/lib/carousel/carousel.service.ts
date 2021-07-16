@@ -1,6 +1,7 @@
-import { ElementRef, EventEmitter, OnDestroy, QueryList } from '@angular/core';
-import Hammer from 'hammerjs';
-import { Injectable } from '@angular/core';
+import { ElementRef, EventEmitter, Inject, OnDestroy, QueryList, Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { fromEvent, merge, Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 export const DEFAULT_TRANSITION_DURATION = '150ms';
 
@@ -28,24 +29,28 @@ export interface PanEndOutput {
     after: boolean;
 }
 
+/** @dynamic */
 @Injectable({
     providedIn: 'root'
 })
 export class CarouselService implements OnDestroy {
-    /** Configuration for carousel */
-    config: CarouselConfig;
-
-    /** Initial active item of carousel, position first + offset */
-    active: CarouselItemInterface;
-
     /** Event thrown when element is dragged. Emits "true" when drag starts and "false" when drag ends. */
     readonly dragStateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     /** Event thrown, when active element is changed */
     readonly activeChange: EventEmitter<PanEndOutput> = new EventEmitter<PanEndOutput>();
 
-    /** @hidden */
-    private _hammer: HammerManager = null;
+    /** Configuration for carousel */
+    config: CarouselConfig;
+
+    /** Initial active item of carousel, position first + offset */
+    active: CarouselItemInterface;
+
+    /** Set to true for rtl mode */
+    isRtl = false;
+
+    /** carousel items query list */
+    items: QueryList<CarouselItemInterface>;
 
     /** @hidden */
     private _previousActiveItem: CarouselItemInterface;
@@ -59,25 +64,44 @@ export class CarouselService implements OnDestroy {
     /** @hidden */
     private _currentTransitionPx = 0;
 
+    /** return current transition value in px */
     get currentTransitionPx(): number {
         return this._currentTransitionPx;
     }
 
+    /** set current transition value in px */
     set currentTransitionPx(currentTransitionPx: number) {
         this._currentTransitionPx = currentTransitionPx;
     }
 
-    private _elementRef: ElementRef;
+    /** @hidden */
+    private _elementRef: ElementRef<HTMLElement>;
 
-    items: QueryList<CarouselItemInterface>;
+    /** @hidden */
+    private _initialDragPosition = 0;
+    /** @hidden */
+    private _lastDragPosition = 0;
+    /** @hidden */
+    private _listenToMouseMove = false;
+    /** @hidden */
+    private _dragStarted = false;
+
+    /**
+     * @hidden
+     * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
+     */
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+
+    /** @hidden */
+    constructor(@Inject(DOCUMENT) private readonly _document: Document | null) {}
 
     /** @hidden */
     ngOnDestroy(): void {
-        if (this._hammer) {
-            this._hammer.destroy();
-        }
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
+    /** set initial values for the service */
     initialise(
         config: CarouselConfig,
         items: QueryList<CarouselItemInterface>,
@@ -88,18 +112,21 @@ export class CarouselService implements OnDestroy {
         this.setItems(items);
 
         if (this.config.gestureSupport) {
-            this._hammerSetup();
+            this._setupGestures();
         }
     }
 
+    /** update config value for the service */
     updateConfig(config: CarouselConfig): void {
         this.config = config;
     }
 
+    /** set element ref */
     setElementRef(elementRef: ElementRef): void {
         this._elementRef = elementRef;
     }
 
+    /** set items and assign active item, if not already there */
     setItems(items: QueryList<CarouselItemInterface>): void {
         this.items = items;
         const carouselArray: CarouselItemInterface[] = this.items.toArray();
@@ -109,7 +136,7 @@ export class CarouselService implements OnDestroy {
     }
 
     /** Change active element */
-    goToItem(item: CarouselItemInterface, smooth?: boolean, languageDirection: string = 'ltr'): void {
+    goToItem(item: CarouselItemInterface, smooth?: boolean): void {
         let index: number = this.getIndexOfItem(item);
         if (this.config.infinite) {
             this._centerActive(index);
@@ -117,12 +144,13 @@ export class CarouselService implements OnDestroy {
             index = this.getIndexOfItem(item);
         }
 
-        this._transitionToIndex(index, smooth, languageDirection);
+        this._transitionToIndex(index, smooth);
 
         this._previousActiveItem = item;
     }
 
-    pickNext(languageDirection = 'ltr'): void {
+    /** pick next element and set it active */
+    pickNext(): void {
         const carouselArray: CarouselItemInterface[] = this.items.toArray();
         if (!this.active) {
             this.active = carouselArray[0];
@@ -130,18 +158,26 @@ export class CarouselService implements OnDestroy {
         const activeItemIndex: number = carouselArray.findIndex((item) => item === this.active);
 
         const itemToActivate = carouselArray[activeItemIndex + 1];
-        this.goToItem(itemToActivate, true, languageDirection);
+        this.goToItem(itemToActivate, true);
         this.active = itemToActivate;
     }
 
-    pickPrevious(languageDirection = 'ltr'): void {
+    /** pick previous element and set it active */
+    pickPrevious(): void {
         const carouselArray: CarouselItemInterface[] = this.items.toArray();
         if (!this.active) {
             this.active = carouselArray[2];
         }
         const activeItemIndex: number = carouselArray.findIndex((item) => item === this.active);
-        const itemToActivate = carouselArray[activeItemIndex - 1];
-        this.goToItem(itemToActivate, true, languageDirection);
+        let itemToActivate = carouselArray[activeItemIndex - 1];
+
+        // case where slides can move infinitely in one direction
+        // handle case where on-load activeItemIndex = 0 and activeItemIndex - 1 returns undefined item from item array.
+        if (!itemToActivate) {
+            itemToActivate = carouselArray[this.items.toArray().length - 1];
+        }
+
+        this.goToItem(itemToActivate, true);
         this.active = itemToActivate;
     }
 
@@ -175,7 +211,7 @@ export class CarouselService implements OnDestroy {
     }
 
     /** @hidden */
-    private _transitionToIndex(index: number, smooth?: boolean, languageDirection?: string): void {
+    private _transitionToIndex(index: number, smooth?: boolean): void {
         let transitionPx: number = this._getSize(this.items.first) * index;
 
         if (smooth) {
@@ -184,16 +220,21 @@ export class CarouselService implements OnDestroy {
             this._elementRef.nativeElement.style.transitionDuration = '0s';
         }
 
-        if (languageDirection === 'ltr' || (this.config.vertical && languageDirection === 'rtl')) {
+        if (!this.isRtl || (this.config.vertical && this.isRtl)) {
             transitionPx = -transitionPx;
         }
         this._transitionCarousel(transitionPx);
     }
 
-    /** Get closes element, based on current transition */
+    /** @hidden Get closes element, based on current transition */
     private _getClosest(): CarouselItemInterface {
-        /** If transition is positive, it'should go to first element */
-        if (!this.config.infinite && this._currentTransitionPx > 0) {
+        /** If transition is positive, it should go to first element */
+        if (
+            !this.config.infinite &&
+            ((!this.config.vertical &&
+                ((!this.isRtl && this._currentTransitionPx > 0) || (this.isRtl && this._currentTransitionPx < 0))) ||
+                (this.config.vertical && this._currentTransitionPx > 0))
+        ) {
             return this.items.first;
         }
 
@@ -206,7 +247,7 @@ export class CarouselService implements OnDestroy {
          * every element should have same width, otherwise it should be looped through all elements,
          * which is not good for performance
          */
-        let index: number = Math.abs(Math.ceil(this._currentTransitionPx / size));
+        let index: number = Math.ceil(Math.abs(this._currentTransitionPx / size));
 
         // When elementsAtOnce > 1, swiping should stop at last index - elementsAtOnce
         if (!this.config.infinite && this.config.elementsAtOnce > 1) {
@@ -215,7 +256,7 @@ export class CarouselService implements OnDestroy {
             }
         }
 
-        index = index + (halfApproached ? 1 : 0);
+        index = index + (halfApproached ? 0 : -1);
         /** Checking if transition went out of scope of array */
         if (this.items.toArray()[index]) {
             return this.items.toArray()[index];
@@ -229,7 +270,7 @@ export class CarouselService implements OnDestroy {
         return this.items.toArray().findIndex((_item) => _item === item);
     }
 
-    /** Getting size of carousel, width for horizontal, height for vertical */
+    /** @hidden Getting size of carousel, width for horizontal, height for vertical */
     private _getSize(item: CarouselItemInterface): number {
         if (this.config.vertical) {
             return item.getHeight();
@@ -274,7 +315,7 @@ export class CarouselService implements OnDestroy {
     }
 
     /**
-     * Animates the carousel to the currently selected slide.
+     * @hidden Animates the carousel to the currently selected slide.
      */
     private _transitionCarousel(transitionPx: number): void {
         this._currentTransitionPx = transitionPx;
@@ -286,7 +327,7 @@ export class CarouselService implements OnDestroy {
         }
     }
 
-    /** Pam Start handler, removes transition duration, */
+    /** @hidden Pam Start handler, removes transition duration, */
     private _handlePanStart(): void {
         this._elementRef.nativeElement.style.transitionDuration = '0s';
         this._prePanTransitionPx = this._currentTransitionPx;
@@ -294,20 +335,73 @@ export class CarouselService implements OnDestroy {
     }
 
     /** @hidden */
-    private _hammerSetup(): void {
+    private _setupGestures(): void {
+        this._setupDragStart();
+        this._setupDrag();
+        this._setupDragEnd();
+    }
 
-        this._hammer = new Hammer(this._elementRef.nativeElement);
+    /** @hidden */
+    private _subscribeToEvents(
+                               events: string[],
+                               element: HTMLElement | Document,
+                               callback: (event: MouseEvent | TouchEvent) => void
+    ): void {
+        merge(events.map((e) => fromEvent<MouseEvent | TouchEvent>(element, e, {passive: true})))
+        .forEach((evt: Observable<MouseEvent | TouchEvent>) => {
+            evt.pipe(takeUntil(this._onDestroy$))
+            .subscribe((event) => {
+                callback(event);
+            });
+        });
+    }
 
-        if (this.config.vertical) {
-            this._hammer.get('pan').set({ direction: Hammer.DIRECTION_VERTICAL });
-            this._hammer.on('panmove', (event) => this._handlePan(event.deltaY));
-            this._hammer.on('panstart', () => this._handlePanStart());
-            this._hammer.on('panend', (event) => this._handlePanEnd(event.deltaY));
-        } else {
-            this._hammer.on('panmove', (event) => this._handlePan(event.deltaX));
-            this._hammer.on('panstart', () => this._handlePanStart());
-            this._hammer.on('panend', (event) => this._handlePanEnd(event.deltaX));
-        }
+    /** @hidden */
+    private _setupDragStart(): void {
+        const events = ['mousedown', 'touchstart'];
+
+        this._subscribeToEvents(events, this._elementRef.nativeElement, (event) => {
+            this._listenToMouseMove = true;
+            this._lastDragPosition = this._initialDragPosition = this._getDragCoordinate(event);
+            this._handlePanStart();
+        });
+    }
+
+    /** @hidden */
+    private _setupDrag(): void {
+
+        const events = ['mousemove', 'touchmove'];
+
+        this._subscribeToEvents(events, this._document, (event) => {
+            const coordinate = this._getDragCoordinate(event);
+
+            if (!this._listenToMouseMove || coordinate === this._lastDragPosition) {
+                return;
+            }
+
+            this._dragStarted = true;
+            this._handlePan(this._getDraggedDelta(coordinate));
+        });
+    }
+
+    /** @hidden */
+    private _setupDragEnd(): void {
+        const events = ['mouseup', 'touchend'];
+
+        this._subscribeToEvents(events, this._document, (event) => {
+            if (!this._listenToMouseMove) {
+                return;
+            }
+
+            if (this._dragStarted) {
+                this._handlePanEnd(this._getDraggedDelta(this._getDragCoordinate(event)));
+            } else {
+                this.dragStateChange.emit(false);
+            }
+
+            this._listenToMouseMove = false;
+            this._dragStarted = false;
+        });
     }
 
     /** @hidden */
@@ -317,5 +411,30 @@ export class CarouselService implements OnDestroy {
         } else {
             return DEFAULT_TRANSITION_DURATION;
         }
+    }
+
+    /** @hidden */
+    private _getDraggedDelta(offset: number): number {
+        this._lastDragPosition = offset;
+        return offset - this._initialDragPosition;
+    }
+
+    /** @hidden */
+    private _getDragCoordinate(event: MouseEvent | TouchEvent): number {
+
+        let coordinates: Touch | MouseEvent;
+
+        if (this._isTouchEvent(event)) {
+            coordinates = event.touches[0] || event.changedTouches[0];
+        } else {
+            coordinates = event;
+        }
+
+        return this.config.vertical ? coordinates.pageY : coordinates.pageX;
+    }
+
+    /** @hidden */
+    private _isTouchEvent(event: any): event is TouchEvent {
+        return event.touches !== undefined;
     }
 }

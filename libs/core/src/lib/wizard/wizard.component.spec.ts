@@ -113,6 +113,8 @@ describe('WizardComponent', () => {
         step3.nativeElement.style.width = '200px';
         component.resizeHandler();
 
+        await new Promise(resolve => setTimeout(() => resolve(null), 20));
+
         expect(component.steps.first.getClassList().contains('fd-wizard__step--no-label')).toBeFalsy();
         expect(component.steps.first.getClassList().contains('fd-wizard__step--stacked')).toBeFalsy();
         expect(component.steps.toArray()[1].getClassList().contains('fd-wizard__step--stacked-top')).toBeFalsy();
@@ -135,7 +137,7 @@ describe('WizardComponent', () => {
         component.ngAfterViewInit();
         tick();
         component.steps.first.statusChange.emit();
-        tick();
+        tick(20);
 
         expect(component.wrapperContainer.nativeElement.scrollTo).toHaveBeenCalled();
     }));

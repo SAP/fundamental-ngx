@@ -17,7 +17,7 @@ export class CarouselPo extends CoreBaseComponentPo {
     hiddenPageIndicator = 'fd-carousel-no-page-indicator-example fd-carousel ol';
     hiddenNavBtns = 'fd-carousel-hidden-navigation-example ' + this.navBtns;
     numberedPagination = 'fd-carousel .fd-carousel__text';
-    errorMsg = 'fd-carousel-error-message-example fd-carousel .fd-carousel-items-horizontal';
+    errorMsg = '.fd-carousel__content .fd-message-page__title';
     busyIndicator = 'fd-carousel-loading-content-example .fd-busy-indicator';
     disableLoadingBtn = 'fd-carousel-loading-content-example .fd-button--standard';
     contentNavBtns = 'fd-carousel-content-navigation-example ' + this.navBtns;

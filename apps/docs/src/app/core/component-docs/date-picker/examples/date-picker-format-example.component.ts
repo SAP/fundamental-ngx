@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
+import {
+    DatetimeAdapter,
+    DateTimeFormats,
+    DATE_TIME_FORMATS,
+    FdDate,
+    FdDatetimeAdapter,
+    FD_DATETIME_FORMATS
+} from '@fundamental-ngx/core/datetime';
 import { DateRange } from '@fundamental-ngx/core/calendar';
-import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS, FdDate, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
 
 /**
  * FD_DATETIME_FORMATS is based on Intl.DateTimeFormat,
@@ -33,6 +40,10 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
         <div>Selected Last Date: {{ selectedRange?.end | dateFormat }}</div>
     `,
     providers: [
+        {
+            provide: DatetimeAdapter,
+            useClass: FdDatetimeAdapter
+        },
         {
             provide: DATE_TIME_FORMATS,
             useValue: CUSTOM_FD_DATETIME_FORMATS

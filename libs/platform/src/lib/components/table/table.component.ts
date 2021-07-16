@@ -22,6 +22,7 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
@@ -36,23 +37,7 @@ import { TableService } from './table.service';
 
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { SearchInput } from './interfaces/search-field.interface';
-import {
-    ColumnsChange,
-    FilterChange,
-    FreezeChange,
-    GroupChange,
-    SortChange,
-    TableColumnFreezeEvent,
-    TableColumnsChangeEvent,
-    TableFilterChangeEvent,
-    TableGroupChangeEvent,
-    TableRowSelectionChangeEvent,
-    TableSortChangeEvent,
-    TableRow,
-    TableRowToggleOpenStateEvent,
-    TableRowsRearrangeEvent
-} from './models';
-import { FILTER_STRING_STRATEGY, ContentDensity, SelectionMode, SortDirection, TableRowType } from './enums';
+import { ContentDensity, FILTER_STRING_STRATEGY, SelectionMode, SortDirection, TableRowType } from './enums';
 import { DEFAULT_COLUMN_WIDTH, DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
 import { TableDataSource } from './domain/table-data-source';
 import { ArrayTableDataSource } from './domain/array-data-source';
@@ -63,6 +48,23 @@ import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-tool
 import { Table } from './table';
 import { TableScrollable, TableScrollDispatcherService } from './table-scroll-dispatcher.service';
 import { getScrollBarWidth } from './utils';
+import {
+    ColumnsChange,
+    FilterChange,
+    FreezeChange,
+    GroupChange,
+    SortChange,
+    TableColumnFreezeEvent,
+    TableColumnsChangeEvent,
+    TableFilterChangeEvent,
+    TableGroupChangeEvent,
+    TableRow,
+    TableRowActivateEvent,
+    TableRowSelectionChangeEvent,
+    TableRowsRearrangeEvent,
+    TableRowToggleOpenStateEvent,
+    TableSortChangeEvent
+} from './models';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
@@ -237,7 +239,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** Whether table row has navigation button. */
     @Input()
     navigationButton = false;
-    
+
+    /** Whether table row can be clicked */
+    @Input()
+    rowsActivable = false;
+
     /** Event fired when table selection has changed. */
     @Output()
     readonly rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<T>> = new EventEmitter<TableRowSelectionChangeEvent<T>>();
@@ -272,6 +278,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      */
     @Output()
     readonly rowsRearrange = new EventEmitter<TableRowsRearrangeEvent<T>>();
+
+    /*
+     * Event fired when row clicked
+     */
+    @Output()
+    readonly rowActivate = new EventEmitter<TableRowActivateEvent<T>>();
 
     /** @hidden */
     @ViewChild('verticalScrollable')
@@ -465,7 +477,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         private readonly _tableScrollDispatcher: TableScrollDispatcherService,
         private readonly _ngZone: NgZone,
         @Inject(DOCUMENT) private readonly _document: Document | null,
-        @Optional() private readonly _rtlService: RtlService
+        @Optional() private readonly _rtlService: RtlService,
+        @Optional() private readonly router: Router
     ) {
         super();
     }
@@ -643,30 +656,53 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** Set the navigatable property on a row */
     setNavigatableRowState(rowIndex: number, state: boolean): void {
-        this.tableRows.toArray()[rowIndex + 1].navigatable = state;
-        this._tableRows[rowIndex].navigatable = state;
-        if (!state) {
-            this._tableRows[rowIndex].hasNavIndicator = false;
+        const row = this._tableRows[rowIndex];
+
+        if (!row) {
+            return;
         }
+
+        this.tableRows.toArray()[rowIndex + 1].navigatable = state;
+        row.navigatable = state;
+
+        if (!state) {
+            row.hasNavIndicator = false;
+        }
+
         this._cd.detectChanges();
     }
 
     /** Set the navigation indicator property on a row */
     setRowNavigationIndicator(rowIndex: number, state: boolean): void {
-        if (this._tableRows[rowIndex].navigatable) {
-            this._tableRows[rowIndex].hasNavIndicator = state;
+        const row = this._tableRows[rowIndex];
+
+        if (!row) {
+            return;
+        }
+
+        if (row.navigatable) {
+            row.hasNavIndicator = state;
+
             if (state) {
                 this.navigationButton = false;
             }
         }
+
         this._cd.detectChanges();
     }
 
     /** Set the navigation target property on a row */
     setRowNavigationTarget(rowIndex: number, target: string): void {
-        if (this._tableRows[rowIndex].navigatable) {
-            this._tableRows[rowIndex].navigationTarget = target;
+        const row = this._tableRows[rowIndex];
+
+        if (!row) {
+            return;
         }
+
+        if (row.navigatable) {
+            row.navigationTarget = target;
+        }
+
         this._cd.detectChanges();
     }
 
@@ -848,6 +884,27 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         return ROW_HEIGHT.get(this.contentDensity);
     }
 
+    /** @hidden */
+    _onRowClick(row: TableRow<T>): void {
+        if (row.hasNavIndicator) {
+            this._navigateByRowNavigationTarget(row);
+        }
+
+        if (this.rowsActivable) {
+            this._emitRowActivate(row);
+        }
+    }
+
+    /** @hidden */
+    _emitRowActivate(row: TableRow<T>): void {
+        if (!this.rowsActivable) {
+            return;
+        }
+
+        const rowIndex = this._tableRows.indexOf(row);
+        this.rowActivate.emit(new TableRowActivateEvent<T>(rowIndex, row.value));
+    }
+
     /**
      * @hidden
      * Expand/Collapse group row
@@ -891,17 +948,17 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         return cellIndex === 0 && this._isTreeRow(row);
     }
 
-    /**  
+    /**
      * @hidden
-     * Chech if the cell should contain a navigation button
+     * Check if the cell should contain a navigation button
     */
     _showNavButton(cellIndex: number, row: TableRow): boolean {
         return this.navigationButton && cellIndex === this._visibleColumns.length - 1;
     }
 
-    /**  
+    /**
      * @hidden
-     * Chech if the cell should contain a navigation indicator
+     * Check if the cell should contain a navigation indicator
     */
     _showNavIndicator(cellIndex: number, row: TableRow): boolean {
         return row.hasNavIndicator && cellIndex === this._visibleColumns.length - 1;
@@ -940,6 +997,15 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             this._cd.markForCheck();
             this._emitRowsRearrangeEvent(dragRow, event.draggedItemIndex, event.replacedItemIndex);
         }
+    }
+
+    /** @hidden */
+    _navigateByRowNavigationTarget(row: TableRow<T>): void {
+        if (!row.navigatable || !row.navigationTarget) {
+            return;
+        }
+
+        this.router?.navigate([ row.navigationTarget ]);
     }
 
     /** @hidden */

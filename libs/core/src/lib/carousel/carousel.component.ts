@@ -20,17 +20,14 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { FdCarouselResourceStrings, CarouselResourceStringsEN } from './i18n/carousel-resources';
-import { CarouselItemComponent } from './carousel-item/carousel-item.component';
-import {
-    CarouselService,
-    CarouselConfig,
-    PanEndOutput,
-    CarouselItemInterface
-} from './carousel.service';
+import { Subject } from 'rxjs';
+
 import { RtlService } from '@fundamental-ngx/core/utils';
+
+import { CarouselItemComponent } from './carousel-item/carousel-item.component';
+import { CarouselResourceStringsEN, FdCarouselResourceStrings } from './i18n/carousel-resources';
+import { CarouselConfig, CarouselItemInterface, CarouselService, PanEndOutput } from './carousel.service';
 
 /** Page limit to switch to numerical indicator */
 const ICON_PAGE_INDICATOR_LIMIT = 8;
@@ -208,11 +205,10 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
 
     private _slideSwiped = false;
 
-    private _prevBtnClickedAtStart = true;
-
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing) */
+    /** @hidden An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing) */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
+    /** @hidden */
     constructor(
         private readonly _elementRef: ElementRef,
         private _renderer: Renderer2,
@@ -304,6 +300,7 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         }
     }
 
+    /** get value for rtl */
     _isRtl(): boolean {
         return this._rtlService?.rtl.getValue();
     }
@@ -330,19 +327,9 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         this.rightButtonDisabled = false;
         this._adjustActiveItemPosition(SlideDirection.PREVIOUS);
         this._preventDefaultBtnFocus();
-        this._carouselService.pickPrevious(this.dir);
+        this._carouselService.pickPrevious();
 
-        /** Handle looped carousel, first click on prev button. */
-        if (this.loop && this._prevBtnClickedAtStart) {
-            const slidesArray = this.slides.toArray();
-            this._carouselService.goToItem(slidesArray[Math.ceil(this.slides.length / 2) - 1], true, this.dir);
-            slidesArray[Math.ceil(this.slides.length / 2) - 1].visibility = 'visible';
-            this.slideChange.emit(new CarouselActiveSlides([slidesArray[Math.ceil(this.slides.length / 2) - 1]], 'Previous'));
-        } else {
-            /** Have to refactor the _notifySlideChange to get rid of else condition */
-            this._notifySlideChange(SlideDirection.PREVIOUS);
-        }
-        this._prevBtnClickedAtStart = false;
+        this._notifySlideChange(SlideDirection.PREVIOUS);
         this._changeDetectorRef.detectChanges();
     }
 
@@ -351,13 +338,12 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         if (!this.loop && this.currentActiveSlidesStartIndex >= this.pageIndicatorsCountArray.length - 1) {
             return;
         }
-        // Handles looped carousel, first navigation is prev button.
-        this._prevBtnClickedAtStart = false;
+
         // Moving to next slide
         this.leftButtonDisabled = false;
         this._adjustActiveItemPosition(SlideDirection.NEXT);
         this._preventDefaultBtnFocus();
-        this._carouselService.pickNext(this.dir);
+        this._carouselService.pickNext();
         this._notifySlideChange(SlideDirection.NEXT);
         this._changeDetectorRef.detectChanges();
     }
@@ -487,8 +473,11 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
      */
     private _getStepTaken(event: PanEndOutput, actualActiveSlideIndex: number): number {
         let stepsCalculated: number;
-
-        if (event.after) {
+        if (
+            (!this._isRtl() && event.after) ||
+            (this._isRtl() && !event.after && !this.vertical) ||
+            (this.vertical && event.after)
+        ) {
             if (actualActiveSlideIndex === 0 && this.currentActiveSlidesStartIndex === 0) {
                 stepsCalculated = 0;
             } else if (actualActiveSlideIndex > this.currentActiveSlidesStartIndex) {
@@ -556,9 +545,11 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
     /** @hidden Rtl change subscription */
     private _subscribeToRtl(): void {
         const refreshDirection = () => {
-            this.dir = this._rtlService?.rtl.getValue() ? 'rtl' : 'ltr';
+            this.dir = this._isRtl() ? 'rtl' : 'ltr';
+            this._carouselService.isRtl = this.dir === 'rtl';
+
             if (this._carouselService.items) {
-                this._carouselService.goToItem(this._carouselService.active, false, this.dir);
+                this._carouselService.goToItem(this._carouselService.active, false);
             }
             this._changeDetectorRef.detectChanges();
         };
@@ -573,8 +564,17 @@ export class CarouselComponent implements OnInit, AfterContentInit, AfterViewIni
         const actualActiveSlideIndex = this._slidesCopy.findIndex((_slide) => _slide === firstActiveSlide);
         const stepTaken = this._getStepTaken(event, actualActiveSlideIndex);
         if (stepTaken > 0) {
-            const slideDirection: SlideDirection = event.after ? SlideDirection.NEXT : SlideDirection.PREVIOUS;
-
+            let slideDirection: SlideDirection;
+            if (!this._isRtl()) {
+                slideDirection = event.after ? SlideDirection.NEXT : SlideDirection.PREVIOUS;
+            } else {
+                // vertical carousel slide direction is same in ltr and rtl
+                if (this.vertical) {
+                    slideDirection = event.after ? SlideDirection.NEXT : SlideDirection.PREVIOUS;
+                } else {
+                    slideDirection = event.after ? SlideDirection.PREVIOUS : SlideDirection.NEXT;
+                }
+            }
             this._adjustActiveItemPosition(slideDirection, stepTaken);
             this._notifySlideChange(slideDirection, firstActiveSlide);
             this._changeDetectorRef.detectChanges();

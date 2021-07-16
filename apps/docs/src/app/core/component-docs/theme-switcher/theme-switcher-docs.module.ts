@@ -7,6 +7,7 @@ import { ThemeSwitcherDocsComponent } from './theme-switcher-docs.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { examples } from './examples';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { ThemesService } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {
@@ -26,6 +27,9 @@ const routes: Routes = [
         ThemeSwitcherDocsComponent,
         ThemeSwitcherHeaderComponent,
         examples
+    ],
+    providers: [
+        ThemesService
     ]
 })
 

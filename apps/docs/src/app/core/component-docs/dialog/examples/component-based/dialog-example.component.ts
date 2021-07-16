@@ -6,11 +6,10 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
         <fd-dialog>
             <fd-dialog-header>
                 <h1 id="fd-dialog-header-1" fd-title>{{ dialogRef.data.title }}</h1>
-                <button fd-dialog-close-button (click)="dialogRef.dismiss('Close button')"></button>
             </fd-dialog-header>
 
             <fd-dialog-body>
-                <p style="text-align: justify; margin: 0">
+                <p id="fd-dialog-body-1" role="dialog" style="text-align: justify; margin: 0">
                     {{ dialogRef.data.pinnapleDescription }}
                 </p>
                 <ul style="margin-bottom: 0">

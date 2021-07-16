@@ -11,8 +11,8 @@ import { CalendarModule } from '@fundamental-ngx/core/calendar';
 import { CarouselModule } from '@fundamental-ngx/core/carousel';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
-import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
-import { DragAndDropModule, OnlyDigitsModule, ThemesService } from '@fundamental-ngx/core/utils';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { DragAndDropModule, OnlyDigitsModule } from '@fundamental-ngx/core/utils';
 import { FacetModule } from '@fundamental-ngx/core/facets';
 import { FeedListItemModule } from '@fundamental-ngx/core/feed-list-item';
 import { FeedInputModule } from '@fundamental-ngx/core/feed-input';
@@ -31,8 +31,8 @@ import { TileModule } from '@fundamental-ngx/core/tile';
 import { TextModule } from '@fundamental-ngx/core/text';
 import { PanelModule } from '@fundamental-ngx/core/panel';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
-import { NotificationModule, NotificationService } from '@fundamental-ngx/core/notification';
-import { AlertModule, AlertService } from '@fundamental-ngx/core/alert';
+import { NotificationModule } from '@fundamental-ngx/core/notification';
+import { AlertModule } from '@fundamental-ngx/core/alert';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { AvatarGroupModule } from '@fundamental-ngx/core/avatar-group';
 import { BarModule } from '@fundamental-ngx/core/bar';
@@ -47,7 +47,7 @@ import { TokenModule } from '@fundamental-ngx/core/token';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 import { TitleModule } from '@fundamental-ngx/core/title';
 import { QuickViewModule } from '@fundamental-ngx/core/quick-view';
-import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { PopoverMobileModule, PopoverModule } from '@fundamental-ngx/core/popover';
 import { ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import { DynamicSideContentModule } from '@fundamental-ngx/core/dynamic-side-content';
 import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
@@ -59,7 +59,7 @@ import { SliderModule } from '@fundamental-ngx/core/slider';
 import { TableModule } from '@fundamental-ngx/core/table';
 import { SwitchModule } from '@fundamental-ngx/core/switch';
 import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
-import { MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { MessageToastModule } from '@fundamental-ngx/core/message-toast';
 import { MultiInputModule, MultiInputMobileModule } from '@fundamental-ngx/core/multi-input';
 import { MessageBoxModule } from '@fundamental-ngx/core/message-box';
 import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
@@ -75,7 +75,7 @@ import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { ResizableCardLayoutModule } from '@fundamental-ngx/core/resizable-card-layout';
 
 import { PaginationModule } from '@fundamental-ngx/core/pagination';
-import { SelectModule } from '@fundamental-ngx/core/select';
+import { SelectMobileModule, SelectModule } from '@fundamental-ngx/core/select';
 import { ShellbarModule } from '@fundamental-ngx/core/shellbar';
 import { TreeModule } from '@fundamental-ngx/core/tree';
 import { WizardModule } from '@fundamental-ngx/core/wizard';
@@ -140,12 +140,14 @@ import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
         PanelModule,
         ProductSwitchModule,
         PopoverModule,
+        PopoverMobileModule,
         QuickViewModule,
         RatingIndicatorModule,
         RadioModule,
         ScrollSpyModule,
         SegmentedButtonModule,
         SelectModule,
+        SelectMobileModule,
         ShellbarModule,
         SideNavigationModule,
         SplitButtonModule,

@@ -1,18 +1,46 @@
 @import '~fundamental-styles/dist/wizard';
-.fd-wizard__label,
-.fd-wizard__optional-text {
-    display: block;
+
+@mixin fd-wizard-responsive-paddings() {
+
+    @media (max-width: 599px) {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    @media (min-width: 600px) and (max-width: 1439px) {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    @media (min-width: 1440px) {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+}
+
+$block: 'fd-wizard';
+
+.#{$block} {
+    &__label,
+    &__optional-text {
+        display: block;
     display: -webkit-box;
-}
-.fd-wizard-container-wrapper {
-    overflow: auto;
-}
-// TODO: remove when fundamental-styles version 0.16.1 is merged
-.fd-wizard__step--stacked:last-child {
-    padding-right: 2.375rem;
-}
-.fd-wizard__step--stacked:last-child[dir=rtl],
-[dir=rtl] .fd-wizard__step--stacked:last-child {
-    padding-right: 0;
-    padding-left: 2.375rem;
+    }
+
+    &-container-wrapper {
+        overflow: auto;
+    }
+
+    &--responsive-paddings {
+        .#{$block} {
+            &__content,
+            &__progress-bar {
+                @include fd-wizard-responsive-paddings();
+            }
+
+            .fd-bar--floating-footer {
+
+            }
+        }
+    }
 }

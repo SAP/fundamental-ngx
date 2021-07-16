@@ -23,7 +23,7 @@ export class LayoutPanelDocsComponent {
             language: 'html',
             component: 'LayoutPanelEdgeBleedExampleComponent',
             code: panelEdgeBleedSrc,
-            fileName: 'panel-edge-bleed-example',
+            fileName: 'layout-panel-edge-bleed-example',
             typescriptFileCode: panelEdgeBleedSrcTs
         }
     ];

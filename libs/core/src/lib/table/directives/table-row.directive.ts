@@ -9,9 +9,10 @@ import {
     OnInit,
     QueryList
 } from '@angular/core';
+import { Subscription } from 'rxjs';
+
 import { TableCellDirective } from './table-cell.directive';
 import { TableService } from '../table.service';
-import { Subscription } from 'rxjs';
 
 export const HIDDEN_CLASS_NAME = 'fd-table-hidden';
 
@@ -72,11 +73,13 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     @Input()
     set navigatable(val: boolean) {
         this._navigatable = val;
+
         if (!val) {
             this._hoverable = false;
             this._activable = false;
-        } 
-        this._changeDetRef.detectChanges();
+        }
+
+        this._changeDetRef.markForCheck();
     }
     get navigatable(): boolean {
         return this._navigatable;
@@ -87,13 +90,14 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
 
      /** @hidden */
      private _hoverable = false;
- 
+
      /** @hidden */
      private _navigatable = true;
 
     /** @hidden */
     propagateKeysSubscription: Subscription;
 
+    /** @hidden */
     constructor(
         private _changeDetRef: ChangeDetectorRef,
         private _tableService: TableService
