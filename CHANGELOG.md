@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.115](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.114...v0.31.0-rc.115) (2021-07-16)
+
+
+### Bug Fixes
+
+* **core:** add ability to manually remove selection ([#5997](https://github.com/SAP/fundamental-ngx/issues/5997)) ([0c87ba2](https://github.com/SAP/fundamental-ngx/commit/0c87ba21a4d45488d2481864c3ffab16d44069a4))
+
 ## [0.31.0-rc.114](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.113...v0.31.0-rc.114) (2021-07-16)
 
 
