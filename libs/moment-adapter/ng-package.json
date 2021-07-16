@@ -5,7 +5,7 @@
         "entryFile": "src/index.ts",
         "styleIncludePaths": ["../../node_modules"]
     },
-    "whitelistedNonPeerDependencies": [
+    "allowedNonPeerDependencies": [
         "@angular/cdk",
         "focus-trap",
         "fundamental-styles",
