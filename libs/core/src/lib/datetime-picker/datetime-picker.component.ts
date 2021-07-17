@@ -607,6 +607,7 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     }
 
     private _setInput(dateTime: D): void {
+        // debugger;
         this._inputFieldDate = this._isModelValid ? this._formatDateTime(dateTime) : '';
         this._changeDetRef.detectChanges();
     }

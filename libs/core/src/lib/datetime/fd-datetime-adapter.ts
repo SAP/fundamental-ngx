@@ -236,7 +236,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         }
 
         displayFormat = { ...displayFormat, timeZone: 'utc' };
-
+        // debugger;
         const dateTimeFormatter = new Intl.DateTimeFormat(this.locale, displayFormat);
         const dateInstance = this._createDateInstanceByFdDate(date);
         return this._stripDirectionalityCharacters(this._format(dateTimeFormatter, dateInstance));
