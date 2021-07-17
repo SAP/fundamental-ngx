@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.118](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.117...v0.31.0-rc.118) (2021-07-17)
+
+
+### Bug Fixes
+
+* **core:** various wizard bugs from defect hunting sprint 66 ([#5966](https://github.com/SAP/fundamental-ngx/issues/5966)) ([a265e7e](https://github.com/SAP/fundamental-ngx/commit/a265e7e0ce913eaad078da27d47883262ea1e87b))
+
 ## [0.31.0-rc.117](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.116...v0.31.0-rc.117) (2021-07-16)
 
 
