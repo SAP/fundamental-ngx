@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.119](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.118...v0.31.0-rc.119) (2021-07-17)
+
+
+### Bug Fixes
+
+* **platform:** table columns reordering feature columns sorting fix ([#5971](https://github.com/SAP/fundamental-ngx/issues/5971)) ([2dc94df](https://github.com/SAP/fundamental-ngx/commit/2dc94dfe6c16d397a94f3ab3c158570db4f4bdb5))
+
 ## [0.31.0-rc.118](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.117...v0.31.0-rc.118) (2021-07-17)
 
 
