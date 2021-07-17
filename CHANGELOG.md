@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.120](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.119...v0.31.0-rc.120) (2021-07-17)
+
+
+### Bug Fixes
+
+* **core:** use 3 letters for day names on calendar and shortened hrs/… ([#5859](https://github.com/SAP/fundamental-ngx/issues/5859)) ([3eedadb](https://github.com/SAP/fundamental-ngx/commit/3eedadb67d220ce190a5bf95435ac9030bea69c4))
+
 ## [0.31.0-rc.119](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.118...v0.31.0-rc.119) (2021-07-17)
 
 
