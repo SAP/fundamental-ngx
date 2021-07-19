@@ -184,11 +184,6 @@ describe('Checkbox test suite', () => {
                 console.log('Skip for Safari and IE');
                 return;
             }
-            const errorCheckboxesLength = getElementArrayLength(errorCheckboxes);
-
-            for (let i = 0; errorCheckboxesLength > i; i++) {
-                checkIfDisabled(errorCheckboxes, 'ng-reflect-is-disabled', 'false', i);
-            }
 
             scrollIntoView(checkboxPage.submitBtn);
             click(errorCheckboxes);
