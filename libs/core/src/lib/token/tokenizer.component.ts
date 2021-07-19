@@ -22,16 +22,18 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { FormControlComponent } from '@fundamental-ngx/core/form';
-import { TokenComponent } from './token.component';
-import { RtlService } from '@fundamental-ngx/core/utils';
-import { fromEvent, Subject, Subscription } from 'rxjs';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { A, BACKSPACE, DELETE, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
+import { fromEvent, Subject, Subscription } from 'rxjs';
 import { filter, takeUntil, tap } from 'rxjs/operators';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { FormControlComponent } from '@fundamental-ngx/core/form';
+import {
+    ContentDensityService,
+    CssClassBuilder,
+    applyCssClass,
+    RtlService,
+    KeyUtil
+} from '@fundamental-ngx/core/utils';
+import { TokenComponent } from './token.component';
 
 @Component({
     selector: 'fd-tokenizer',
@@ -402,6 +404,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         this.moreClickedEvent.emit();
     }
 
+    /** Removes all selected tokens */
     removeSelectedTokens(): void {
         const selectedElements = this._getActiveTokens();
         selectedElements.forEach(element => element.onRemove.emit());
@@ -672,6 +675,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         return document.activeElement === this.input.elementRef().nativeElement;
     }
 
+    /** @hidden */
     private _tokensSelected(): boolean {
         return this.tokenList.some(t => t.selected);
     }

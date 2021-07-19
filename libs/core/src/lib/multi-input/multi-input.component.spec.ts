@@ -129,7 +129,7 @@ describe('MultiInputComponent', () => {
         await fixture.whenStable();
         spyOn(component.selectedChange, 'emit');
         spyOn(component, 'onChange');
-        spyOn(component, 'handleSelect').and.callThrough();
+        spyOn(component, '_handleSelect').and.callThrough();
         component.dropdownValues = ['test1', 'test2', 'foobar'];
         component.ngOnInit();
         fixture.detectChanges();
@@ -147,7 +147,7 @@ describe('MultiInputComponent', () => {
         await fixture.whenStable();
         spyOn(component.selectedChange, 'emit');
         spyOn(component, 'onChange');
-        spyOn(component, 'handleSelect').and.callThrough();
+        spyOn(component, '_handleSelect').and.callThrough();
         component.dropdownValues = ['test1', 'test2', 'foobar'];
         component.ngOnInit();
         component.open = true;
@@ -173,7 +173,7 @@ describe('MultiInputComponent', () => {
 
         await fixture.whenStable();
 
-        component.handleSelect(true, component.dropdownValues[0]);
+        component._handleSelect(true, component.dropdownValues[0]);
 
         expect(component.onChange).not.toHaveBeenCalled();
         expect(component.selectedChange.emit).not.toHaveBeenCalled();
@@ -193,7 +193,7 @@ describe('MultiInputComponent', () => {
 
         await fixture.whenStable();
 
-        component.handleSelect(true, component.dropdownValues[0]);
+        component._handleSelect(true, component.dropdownValues[0]);
 
         expect(component.onChange).not.toHaveBeenCalled();
         expect(component.selectedChange.emit).not.toHaveBeenCalled();
@@ -213,7 +213,7 @@ describe('MultiInputComponent', () => {
 
         component.searchTerm = 'search';
 
-        component.handleSelect(true, component.dropdownValues[0]);
+        component._handleSelect(true, component.dropdownValues[0]);
 
         expect(inputFocusSpy).toHaveBeenCalled();
         expect(component.searchTerm).toBe('');
