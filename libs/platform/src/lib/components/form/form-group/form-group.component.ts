@@ -42,6 +42,7 @@ import { Subject } from 'rxjs';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 import { FormField } from '../form-field';
+import { FormFieldComponent } from './form-field/form-field.component';
 import { FormGroupContainer } from '../form-group';
 import { HintPlacement, LabelLayout } from '../form-options';
 import { FormFieldGroup } from '../form-field-group';
@@ -284,7 +285,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         this._updateFieldByColumn();
         this._updateFormFieldsProperties();
         this._listenToFormGroupChildren();
-
+        this._listenFormFieldColumnChange();
         this._cd.markForCheck();
     }
 
@@ -348,6 +349,16 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
             this._updateFieldByColumn();
             this._cd.markForCheck();
         });
+    }
+
+    /** @hidden */
+    private _listenFormFieldColumnChange(): void {
+        this.formGroupChildren.forEach((field: FormFieldComponent) =>
+            field.onColumnChange?.subscribe((_) => {
+                this._updateFieldByColumn();
+                this._cd.markForCheck();
+            })
+        );
     }
 
     /**

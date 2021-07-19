@@ -19,16 +19,15 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
-import { Subject } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { fromEvent, Subject } from 'rxjs';
+import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 
 import { FormFieldControl } from '../../form-control';
 import { FormField } from '../../form-field';
-import { Column, LabelLayout, HintPlacement } from '../../form-options';
+import { Column, LabelLayout, HintPlacement, ColumnLayout } from '../../form-options';
 import { FormGroupContainer } from '../../form-group';
 import { FormFieldGroup } from '../../form-field-group';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
-import { FormFieldGroupComponent } from '../form-field-group/form-field-group.component';
 
 const formFieldProvider: Provider = {
     provide: FormField,
@@ -86,6 +85,10 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     @Input()
     column: number;
 
+    /** object for placing field in column in each screen layout */
+    @Input()
+    columnLayout: ColumnLayout;
+
     /**
      * This is in most of the cases set from parent container (form-group)
      */
@@ -142,6 +145,9 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     @Output()
     onChange: EventEmitter<string> = new EventEmitter<string>();
 
+    @Output()
+    onColumnChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
     @ViewChild('renderer', { static: true })
     renderer: TemplateRef<any>;
 
@@ -163,6 +169,21 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     protected _destroyed = new Subject<void>();
+
+    /** @hidden */
+    private _isColumnLayoutEnabled = true;
+
+    /** @hidden column number for different screen sizes */
+    private _xlColumnNumber: number;
+
+    /** @hidden */
+    private _lgColumnNumber: number;
+
+    /** @hidden */
+    private _mdColumnNumber: number;
+
+    /** @hidden */
+    private _sColumnNumber = 1;
 
     /** @hidden */
     constructor(
@@ -192,6 +213,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     ngAfterContentInit(): void {
+        this._setLayout();
         this._cd.markForCheck();
     }
 
@@ -354,6 +376,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         if (this.control && this._editable) {
             this.control.id = this.id;
             this.control.required = this.required;
+
             if (this.placeholder) {
                 this.control.placeholder = this.placeholder;
             }
@@ -368,6 +391,58 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
         if (this.control.ngControl && !this.id) {
             throw new Error('fdp-form-field must contain [id] binding.');
+        }
+    }
+
+    /** @hidden */
+    private _setColumnNumber(): void {
+        try {
+            this._xlColumnNumber = this.columnLayout['XL'];
+            this._lgColumnNumber = this.columnLayout['L'];
+            this._mdColumnNumber = this.columnLayout['M'];
+            this._sColumnNumber = this.columnLayout['S'] || 1;
+        } catch (error) {
+            this._isColumnLayoutEnabled = false;
+        }
+    }
+
+    /** @hidden listen for window resize and set value of column and isInLine based on screen size */
+    private _setLayout(): void {
+        this._setColumnNumber();
+        this._updateLayout();
+
+        if (this._isColumnLayoutEnabled) {
+            fromEvent(window, 'resize')
+                .pipe(debounceTime(50), takeUntil(this._destroyed))
+                .subscribe(() => this._updateLayout());
+        }
+    }
+
+    /** @hidden */
+    private _updateLayout(): void {
+        let columnUpdated = false;
+        const width = window.innerWidth;
+
+        if (this._isColumnLayoutEnabled) {
+            // check if value has changed, then only assign new value.
+            if (width > 0 && width < 600 && this._sColumnNumber !== this.column) {
+                this.column = this._sColumnNumber;
+                columnUpdated = true;
+            } else if (width >= 600 && width < 1024 && this._mdColumnNumber !== this.column) {
+                this.column = this._mdColumnNumber;
+                columnUpdated = true;
+            } else if (width >= 1024 && width < 1440 && this._lgColumnNumber !== this.column) {
+                this.column = this._lgColumnNumber;
+                columnUpdated = true;
+            } else if (width >= 1440 && this._xlColumnNumber !== this.column) {
+                this.column = this._xlColumnNumber;
+                columnUpdated = true;
+            }
+        }
+
+        if (columnUpdated) {
+            // emit column change, so form-group knows it and re-arranges the fields
+            this.onColumnChange.emit(true);
         }
     }
 }

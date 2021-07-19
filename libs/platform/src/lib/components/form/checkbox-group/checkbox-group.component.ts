@@ -13,7 +13,8 @@ import {
     Optional,
     Self,
     SkipSelf,
-    Host
+    Host,
+    OnInit
 } from '@angular/core';
 import { NgForm, NgControl } from '@angular/forms';
 
@@ -37,7 +38,7 @@ import { FormField } from '../form-field';
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => CheckboxGroupComponent), multi: true }]
 })
-export class CheckboxGroupComponent extends CollectionBaseInput {
+export class CheckboxGroupComponent extends CollectionBaseInput implements OnInit {
     /**
      * value for selected checkboxes.
      */
@@ -47,12 +48,6 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
     set value(selectedValue: any) {
         super.setValue(selectedValue);
     }
-
-    /**
-     * To Display multiple checkboxes in a line
-     */
-    @Input()
-    isInline = false;
 
     /**
      * Establishes two way binding, when checkbox group used outside form.
@@ -92,6 +87,10 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
         super(cd, ngControl, ngForm, formField, formControl);
+    }
+
+    ngOnInit(): void {
+        super.ngOnInit();
     }
 
     writeValue(value: any): void {

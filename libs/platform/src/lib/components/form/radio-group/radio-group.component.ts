@@ -58,12 +58,6 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     }
 
     /**
-     * To Display Radio buttons in a line
-     */
-    @Input()
-    isInline = false;
-
-    /**
      * None value radio button created
      */
     @Input()

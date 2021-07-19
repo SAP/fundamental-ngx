@@ -11,6 +11,10 @@ import * as platformComplexFormContainerSrc from '!raw-loader!./platform-form-co
 import * as platformComplexFormContainerTsCode from '!raw-loader!./platform-form-container-examples/platform-form-container-complex-example.component.ts';
 import * as platformColFormContainerSrc from '!raw-loader!./platform-form-container-examples/platform-form-basic/platform-form-basic-example.component.html';
 import * as platformGFormContainerSrc from '!raw-loader!./platform-form-container-examples/platform-form-group/platform-form-group-example.component.html';
+import * as platformFormFieldLayoutSrc from '!raw-loader!./platform-form-container-examples/platform-field-layout/platform-field-column-change-example.component.html';
+import * as platformFormFieldLayoutTsCode from '!raw-loader!./platform-form-container-examples/platform-field-layout/platform-field-column-change-example.component.ts';
+import * as platformFormFieldInlineLayoutSrc from '!raw-loader!./platform-form-container-examples/platform-field-layout/platform-field-isinline-change-example.component.html';
+import * as platformFormFieldInlineLayoutTsCode from '!raw-loader!./platform-form-container-examples/platform-field-layout/platform-field-isinline-change-example.component.ts';
 
 @Component({
     selector: 'app-form-container',
@@ -79,7 +83,7 @@ export class PlatformFormContainerDocsComponent {
             fileName: 'platform-form-container-columns-example',
             component: 'PlatformFormContainerBasicExampleComponent'
         }
-    ]
+    ];
 
     formContainerGroup: ExampleFile[] = [
         {
@@ -88,7 +92,35 @@ export class PlatformFormContainerDocsComponent {
             fileName: 'platform-form-container-grouping-example',
             component: 'PlatformFormContainerGroupExampleComponent'
         }
-    ]
+    ];
 
+    formFieldColumnLayout: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformFormFieldLayoutSrc,
+            fileName: 'platform-field-column-change-example',
+            component: 'PlatformFieldColumnChangeExampleComponent'
+        },
+        {
+            language: 'typescript',
+            code: platformFormFieldLayoutTsCode,
+            fileName: 'platform-field-column-change-example',
+            component: 'PlatformFieldColumnChangeExampleComponent'
+        }
+    ];
 
+    formFieldInlineLayout: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformFormFieldInlineLayoutSrc,
+            fileName: 'platform-field-isinline-change-example',
+            component: 'PlatformFieldIsInlineChangeExampleComponent'
+        },
+        {
+            language: 'typescript',
+            code: platformFormFieldInlineLayoutTsCode,
+            fileName: 'platform-field-isinline-change-example',
+            component: 'PlatformFieldIsInlineChangeExampleComponent'
+        }
+    ];
 }

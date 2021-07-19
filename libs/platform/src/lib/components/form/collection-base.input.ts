@@ -1,8 +1,12 @@
-import { Input, Directive } from '@angular/core';
+import { Input, Directive, OnInit } from '@angular/core';
 import { BaseInput } from './base.input';
 import { isSelectItem } from '../../domain/data-model';
 import { isFunction, isJsObject, isString } from '../../utils/lang';
 import { SelectItem } from '../../domain/data-model';
+import { fromEvent } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
+import { InlineLayout } from './../form/form-options';
+
 
 /**
  * Defines specific behavior for Input controls which deals with list of values including:
@@ -14,7 +18,7 @@ import { SelectItem } from '../../domain/data-model';
  *
  */
 @Directive()
-export abstract class CollectionBaseInput extends BaseInput {
+export abstract class CollectionBaseInput extends BaseInput implements OnInit {
     /**
      * list of values, it can be of type SelectItem or String.
      */
@@ -43,6 +47,38 @@ export abstract class CollectionBaseInput extends BaseInput {
      */
     @Input()
     displayKey: string;
+
+    /** To display all the fields of collection in a line */
+    @Input()
+    set isInline(inline: boolean) {
+        this._isInline = inline;
+        this._cd.markForCheck();
+    }
+    get isInline(): boolean {
+        return this._isInline;
+    }
+
+    /** object to change isInline property based on screen size */
+    @Input()
+    get inlineLayout(): InlineLayout {
+        return this._inlineLayout;
+    }
+
+    set inlineLayout(layout: InlineLayout) {
+        this._inlineLayout = layout;
+    }
+
+    private _inlineLayout: InlineLayout;
+    private _isInline: boolean;
+    private _xlIsInline: boolean;
+    private _lgIsInline: boolean;
+    private _mdIsInline: boolean;
+    private _sIsInline: boolean;
+    private _isInLineLayoutEnabled = true;
+
+    ngOnInit(): void {
+        this._setFieldLayout();
+    }
 
     protected lookupValue(item: any): string {
         if (isSelectItem(item)) {
@@ -73,6 +109,40 @@ export abstract class CollectionBaseInput extends BaseInput {
             return obj;
         } else {
             return this.objectGet(obj[is[0]], is.slice(1));
+        }
+    }
+
+    protected _setFieldLayout(): void {
+        try {
+            this._xlIsInline = this.inlineLayout['XL'];
+            this._lgIsInline = this.inlineLayout['L'];
+            this._mdIsInline = this.inlineLayout['M'];
+            this._sIsInline = this.inlineLayout['S'];
+            this._updateLayout();
+        } catch (error) {
+            this._isInLineLayoutEnabled = false;
+        }
+
+        if (this._isInLineLayoutEnabled) {
+            fromEvent(window, 'resize')
+                .pipe(debounceTime(50), takeUntil(this._destroyed))
+                .subscribe(() => this._updateLayout());
+        }
+    }
+
+    /** @hidden */
+    private _updateLayout(): void {
+        const width = window.innerWidth;
+
+        // check if value has changed, then only assign new value.
+        if (width > 0 && width < 600 && this.isInline !== this._sIsInline) {
+            this.isInline = this._sIsInline;
+        } else if (width >= 600 && width < 1024 && this.isInline !== this._mdIsInline) {
+            this.isInline = this._mdIsInline;
+        } else if (width >= 1024 && width < 1440 && this.isInline !== this._lgIsInline) {
+            this.isInline = this._lgIsInline;
+        } else if (width >= 1440 && this.isInline !== this._xlIsInline) {
+            this.isInline = this._xlIsInline;
         }
     }
 }
