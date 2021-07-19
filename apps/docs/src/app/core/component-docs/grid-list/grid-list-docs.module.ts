@@ -13,6 +13,7 @@ import { DragAndDropModule } from '@fundamental-ngx/core/utils';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { LinkModule } from '@fundamental-ngx/core/link';
 import { TitleModule } from '@fundamental-ngx/core/title';
+import { ButtonModule } from '@fundamental-ngx/core/button';
 
 const routes: Routes = [
     {
@@ -33,7 +34,8 @@ const routes: Routes = [
         DragAndDropModule,
         AvatarModule,
         LinkModule,
-        TitleModule
+        TitleModule,
+        ButtonModule
     ],
     exports: [RouterModule],
     declarations: [
