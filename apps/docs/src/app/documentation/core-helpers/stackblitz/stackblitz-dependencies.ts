@@ -68,16 +68,17 @@ export class StackblitzDependencies {
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
-            {
+              "src/assets",
+              {
                 "glob": "**/css_variables.css",
                 "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/",
                 "output": "./assets/theming-base/"
-            },
-            {
+              },
+              {
                 "glob": "**/*",
                 "input": "./node_modules/fundamental-styles/dist/theming/",
                 "output": "./assets/fundamental-styles-theming/"
-            }
+              }
             ],
             "styles": [
               "src/styles.scss"

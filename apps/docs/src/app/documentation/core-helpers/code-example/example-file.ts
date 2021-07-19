@@ -17,4 +17,5 @@ export interface ExampleFile {
     };
     service?: boolean;
     pipe?: boolean;
+    path?: string;
 }
