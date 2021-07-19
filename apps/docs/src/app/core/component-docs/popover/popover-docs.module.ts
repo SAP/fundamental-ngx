@@ -20,6 +20,7 @@ import {
 import { PopoverScrollExampleComponent } from './examples/popover-scroll-example/popover-scroll-example.component';
 import { PopoverCdkPlacementExampleComponent } from './examples/popover-new-placement/popover-cdk-placement-example.component';
 import { PopoverFocusExampleComponent } from './examples/popover-focus-example/popover-focus-example.component';
+import { PopoverMobileExampleComponent } from './examples/popover-mobile/popover-mobile-example.component';
 import { PopoverTriggerExampleComponent } from './examples/popover-trigger-example/popover-trigger-example.component';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
@@ -74,7 +75,8 @@ const routes: Routes = [
         PopoverScrollExampleComponent,
         PopoverCdkPlacementExampleComponent,
         PopoverFocusExampleComponent,
-        PopoverTriggerExampleComponent
+        PopoverTriggerExampleComponent,
+        PopoverMobileExampleComponent,
     ]
 })
 export class PopoverDocsModule {}

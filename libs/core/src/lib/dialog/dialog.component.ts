@@ -21,7 +21,7 @@ import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
 import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
 import { DialogRef } from './utils/dialog-ref.class';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { applyCssClass, RtlService } from '@fundamental-ngx/core/utils';
 import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { DialogBase } from './base/dialog-base.class';
 
@@ -115,10 +115,11 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
         @Optional() public dialogConfig: DialogConfig,
         @Optional() private _dialogRef: DialogRef,
         @Optional() router: Router,
+        @Optional() rtlService: RtlService,
         changeDetectorRef: ChangeDetectorRef,
         elementRef: ElementRef
     ) {
-        super(router, elementRef, changeDetectorRef);
+        super(router, elementRef, changeDetectorRef, rtlService);
     }
 
     /** @hidden */
@@ -146,6 +147,7 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
     /** @hidden */
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
+        this.dialogWindow.nativeElement.focus();
     }
 
     /** @hidden */

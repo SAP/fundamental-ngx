@@ -19,7 +19,7 @@
         </div>
     </a>
     <span
-        *ngIf="!_finalStep || (status === 'current' && branching)"
+        *ngIf="!_finalStep || branching"
         class="fd-wizard__connector"
         [class.fd-wizard__connector--active]="completed"
         [class.fd-wizard__connector--branching]="branching"

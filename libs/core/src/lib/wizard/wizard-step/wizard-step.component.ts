@@ -77,6 +77,12 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     isSummary = false;
 
     /**
+     * User-defined validation function which determines if user can navigate between steps.
+     */
+    @Input()
+    stepClickValidator: (visited: boolean, completed: boolean) => boolean | Promise<boolean>;
+
+    /**
      * Event emitted when the wizard step's status changes.
      */
     @Output()
@@ -144,6 +150,8 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
         } else if (this.stepIndicator) {
             this._notSummaryInit();
         }
+        // TODO: remove after next fundamental-styles version
+        this._elRef.nativeElement.style.boxSizing = 'content-box';
     }
 
     /** @hidden */
@@ -158,14 +166,16 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     }
 
     /** @hidden */
-    stepContainerKeypress(event?: KeyboardEvent): void {
+    async stepContainerKeypress(event?: KeyboardEvent): Promise<void> {
         if (event) {
             event.preventDefault();
         }
+
         if (
             this.visited &&
             (!event || KeyUtil.isKeyCode(event, [SPACE, ENTER])) &&
-            (!this.stepIndicator || !this.stepIndicator.stackedItems || !this.stepIndicator.stackedItems.length)
+            (!this.stepIndicator || !this.stepIndicator.stackedItems || !this.stepIndicator.stackedItems.length) &&
+            (this.stepClickValidator === undefined || await this.stepClickValidator(this.visited, this.completed) === true)
         ) {
             this.stepClicked.emit(this);
         }

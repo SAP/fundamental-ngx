@@ -13,6 +13,51 @@
 <separator></separator>
 
 <fd-docs-section-title
+    id="custom-width-table"
+    componentName="table"
+>
+    Custom Column Width & Column Resizing
+</fd-docs-section-title>
+<description>
+    <p>
+        Use <code>width</code> on the table column for setting custom width for the column cells.
+        Setting width in percents (%) currently not supported due to the technical reasons.
+        For the columns without width set it will be calculated automatically based on the body cell content but not header cell content.
+    </p>
+
+    <p>
+        Columns width will be recalculated on any <code>width</code> change but you also can use table's method <code>recalculateTableColumnWidth</code> to recalculate it manually.
+    </p>
+</description>
+<component-example>
+    <fdp-platform-table-custom-width-example></fdp-platform-table-custom-width-example>
+</component-example>
+<code-example [exampleFiles]="customColumnTableFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title
+    id="actiable-rows-table"
+    componentName="table"
+>
+    Activable Rows
+</fd-docs-section-title>
+<description>
+    <p>This example shows activable rows</p>
+
+    <ul>
+        <li>Use <code>[rowsActivable]="true"</code> input property on the table to make rows activable.</li>
+        <li>Event <code>(rowActivate)</code> is emitted when row gets activated.</li>
+    </ul>
+</description>
+<component-example>
+    <fdp-platform-table-activable-example></fdp-platform-table-activable-example>
+</component-example>
+<code-example [exampleFiles]="defaultTableFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title
     id="custom-columns-table"
     componentName="table"
 >
@@ -32,7 +77,15 @@
 >
     Single Row Selection
 </fd-docs-section-title>
-<description>This example shows single row selection </description>
+<description>
+    <p>
+        This example shows single row selection
+    </p>
+
+    <p>
+        Consider that in the table with selection column the overall columns width cannot be less than table container.
+    </p>
+</description>
 <component-example>
     <fdp-platform-table-single-row-selection-example></fdp-platform-table-single-row-selection-example>
 </component-example>
@@ -46,7 +99,15 @@
 >
     Multiple Row Selection
 </fd-docs-section-title>
-<description>This example shows multiple row selection </description>
+<description>
+    <p>
+        This example shows multiple row selection
+    </p>
+
+    <p>
+        Consider that in the table with selection column present the overall columns width cannot be less than table container.
+    </p>
+</description>
 <component-example>
     <fdp-platform-table-multiple-row-selection-example></fdp-platform-table-multiple-row-selection-example>
 </component-example>
@@ -127,7 +188,15 @@
     Column Freezing
 </fd-docs-section-title>
 <description>
-    Use <code>[freezeColumnsTo]="columnName"</code> to freeze columns up to and including.
+    <p>
+        Use <code>[freezeColumnsTo]="columnName"</code> to freeze columns up to and including.
+        When using it's very important to set the <code>width</code> for the every column
+        as table cells width won't be calculated properly.
+    </p>
+
+    <p>
+        Consider that currently resizing isn't possible within the table with frozen columns.
+    </p>
 </description>
 <component-example>
     <fdp-platform-table-freezable-example></fdp-platform-table-freezable-example>
@@ -172,6 +241,7 @@
             Add <code>[pageSize]="itemsPerPage"</code> to specify how many items there are per page.
         </li>
     </ul>
+    Consider that columns width automatically calculates only after the first set of data comes to the component.
 </description>
 <component-example>
     <fdp-platform-table-page-scrolling-example></fdp-platform-table-page-scrolling-example>
@@ -378,6 +448,7 @@
 <description>
     Setting a row's <code>navigatable</code> property to <code>false</code> will make the row non-navigatable. When the row is non-navigatable, the row's navigation indicator will hide.<br>
     To show navigation indicator on a navigatable row, set the row's <code>navigationIndicator</code> property to <code>true</code> and set the row's <code>navigationTarget</code> property to guide navigation.<br>
+    Using this feature requires `RouterModule` to be provided in the host application.
 </description>
 <component-example>
     <fdp-platform-table-navigatable-row-indicator-example></fdp-platform-table-navigatable-row-indicator-example>
@@ -428,6 +499,7 @@
             [sortable]="data['first-column'].sortable"
             [filterable]="data['first-column'].filterable"
             [groupable]="data['first-column'].groupable"
+            [width]="data['first-column'].width"
         >
         </fdp-column>
 

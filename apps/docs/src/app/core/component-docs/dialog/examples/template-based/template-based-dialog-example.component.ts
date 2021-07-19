@@ -2,7 +2,7 @@ import { Component, TemplateRef } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 
 @Component({
-    selector: 'fd-dialog-open-template-example',
+    selector: 'fd-template-based-dialog-example',
     templateUrl: './template-based-dialog-example.component.html'
 })
 export class TemplateBasedDialogExampleComponent {
@@ -13,7 +13,8 @@ export class TemplateBasedDialogExampleComponent {
     openDialog(dialog: TemplateRef<any>): void {
         const dialogRef = this._dialogService.open(dialog, {
             responsivePadding: true,
-            ariaLabelledBy: 'fd-dialog-header-10'
+            ariaLabelledBy: 'fd-dialog-header-10',
+            ariaDescribedBy: 'fd-dialog-body-10'
         });
 
         dialogRef.afterClosed.subscribe(

@@ -16,26 +16,16 @@
         padding: 16px 0 8px 16px;
     }
 
-    .fd-wizard__content {
-        padding-left: 32px;
-        padding-right: 32px;
-    }
-
-    .fd-wizard__progress-bar {
-        padding-left: 32px;
-        padding-right: 32px;
-    }
-
     .fd-bar--floating-footer {
         margin: 8px;
     }
 
-    /* All calsses below are for the fullscreen functionality */
+    /* All classes below are for the fullscreen functionality */
     .docs-wizard-example-overlay {
         height: 100%;
         width: 0;
         position: fixed;
-        z-index: 10;
+        z-index: 1001;
         top: 0;
         left: 0;
         background-color: rgb(255, 255, 255);

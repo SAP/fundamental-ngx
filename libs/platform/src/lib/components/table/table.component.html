@@ -16,6 +16,8 @@
 
         <!-- Table body outlet -->
         <ng-container [ngTemplateOutlet]="tableBodyTemplate"></ng-container>
+
+        <fdp-table-column-resizer [style.bottom.px]="_scrollBarWidth"></fdp-table-column-resizer>
     </div>
 </fd-busy-indicator>
 
@@ -41,6 +43,7 @@
                 </thead>
             </table>
         </div>
+
         <div
             class="fdp-table__scrollbar-mock"
             [style.width.px]="_scrollBarWidth"
@@ -68,12 +71,13 @@
             <th
                 fd-table-cell
                 role="columnheader"
-                scope="col"
+                [fdpTableCellResizable]="_getColumnResizableSide(colIdx)"
+                [columnIndex]="colIdx"
                 [id]="id+'__'+column.name"
                 [attr.aria-colindex]="colIdx"
                 [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.name)"
                 [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
-                [ngStyle]="_freezableColumns?.includes(column.name) ? _getFreezableCellStyles(colIdx) : null"
+                [ngStyle]="_getCellStyles(column)"
                 [fdPopoverTrigger]="columnHeaderPopover"
                 [class.fdp-table__cell--has-menu]="_isColumnHasHeaderMenu(column)"
                 [style.text-align]="column.align"
@@ -81,12 +85,14 @@
                 <div [class.fd-table__inner]="_sortRulesMap.has(column.key)">
                     <ng-container *ngTemplateOutlet="tableHeaderCellContentTemplate; context:{column: column}">
                     </ng-container>
+
                     <fd-icon
                         *ngIf="_sortRulesMap.has(column.key)"
                         fd-table-icon
                         [glyph]="_sortRulesMap.get(column.key).direction === SORT_DIRECTION.ASC ? 'sort-ascending' : 'sort-descending'"
                     ></fd-icon>
                 </div>
+
                 <!-- Header menu -->
                 <fd-popover
                     #columnHeaderPopover
@@ -209,6 +215,8 @@
                 </fd-popover>
             </th>
         </ng-container>
+
+        <th class="fdp-table__cell--empty"></th>
     </tr>
 </ng-template>
 
@@ -221,6 +229,7 @@
         [ngIf]="column?.headerCellTemplate"
         *ngTemplateOutlet="column.headerCellTemplate"
     ></ng-container>
+
     <ng-container
         [ngIf]="!column?.headerCellTemplate"
         *ngTemplateOutlet="defaultTableHeaderCellTemplate; context: {column: column}"
@@ -283,15 +292,14 @@
                             fd-table-row
                             fd-dnd-item
                             role="row"
-                            [hoverable]="_isShownSelectionColumn"
                             [class.fdp-table__row--tree]="_isTreeRow(row)"
-                            [attr.aria-rowindex]="rowIdx"
+                            [hoverable]="_isShownSelectionColumn || row.hasNavIndicator"
+                            [navigatable]="row.navigatable || rowsActivable"
+                            [activable]="row.hasNavIndicator || rowsActivable"
                             [attr.aria-selected]="row.checked"
+                            [attr.aria-rowindex]="rowIdx"
+                            (click)="_onRowClick(row)"
                             (started)="_dragDropStart()"
-                            [navigatable]="row.navigatable"
-                            [hoverable]="row.hasNavIndicator"
-                            [activable]="row.hasNavIndicator"
-                            [routerLink]="row.hasNavIndicator ? row.navigationTarget : './'"
                         >
                             <!-- Row Selection Cell -->
                             <ng-container [ngSwitch]="selectionMode">
@@ -327,6 +335,8 @@
                             <td
                                 *ngFor="let column of _visibleColumns; let colIdx = index"
                                 fd-table-cell
+                                [fdpTableCellResizable]="_getColumnResizableSide(colIdx)"
+                                [columnIndex]="colIdx"
                                 role="cell"
                                 [headers]="id+'__'+column.name"
                                 [style.textAlign]="column.align"
@@ -334,7 +344,7 @@
                                 [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
                                 [class.fdp-table__cell--tree]="_isTreeRowFirstCell(colIdx, row)"
                                 [class.fdp-table__cell--tree-no-expand]="colIdx === 0 && isTreeTable && _isItemRow(row)"
-                                [ngStyle]="_freezableColumns?.includes(column.name) ? _getFreezableCellStyles(colIdx) : null"
+                                [ngStyle]="_getCellStyles(column)"
                                 [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
                                 [attr.data-nesting-level]="colIdx === 0 && row.level"
                                 [tabindex]="_isTreeRowFirstCell(colIdx, row) ? 0 : -1"
@@ -351,18 +361,19 @@
                                     i18n-title="Toggle row|Toggle tree row children@@platformTableTreeRowToggle"
                                 ></fd-icon>
 
-                                <i 
+                                <i
                                     *ngIf="_showNavIndicator(colIdx, row)"
                                     fd-table-icon
                                     [ngClass]="_rtl ? 'sap-icon--slim-arrow-left' : 'sap-icon--slim-arrow-right'"
                                     class="fdp-table__navigation-indicator"
                                 ></i>
 
-                                <button 
+                                <button
                                     *ngIf="_showNavButton(colIdx, row)"
-                                    class="fd-button fd-button--transparent" 
+                                    class="fd-button fd-button--transparent"
                                     [disabled]="!row.navigatable"
-                                    [routerLink]="row.navigationTarget"
+                                    (click)="_navigateByRowNavigationTarget(row)"
+                                    (keydown.enter)="_navigateByRowNavigationTarget(row)"
                                 >
                                     <i [ngClass]="_rtl ? 'sap-icon--navigation-left-arrow' : 'sap-icon--navigation-right-arrow'"></i>
                                 </button>
@@ -374,12 +385,15 @@
 
                                 <ng-template #defaultTableCellTemplate>{{row?.value | valueByPath: column.key}}</ng-template>
                             </td>
+
+                            <td class="fdp-table__cell--empty"></td>
                         </tr>
                     </ng-container>
                 </tbody>
             </table>
         </div>
     </div>
+
     <!-- Table Body horizontal scroll area -->
     <div
         class="fdp-table__body-hs"
@@ -402,8 +416,10 @@
                             role="cell"
                             class="fdp-table__cell--selection"
                         ></td>
+
                         <td
                             *ngFor="let column of _visibleColumns"
+                            [ngStyle]="_getCellStyles(column)"
                             fd-table-cell
                             role="cell"
                         ></td>
@@ -425,6 +441,7 @@
         role="row"
         class="fdp-table__row--group"
         [attr.aria-rowindex]="rowIdx"
+        (click)="_emitRowActivate(row)"
     >
         <td
             fd-table-cell

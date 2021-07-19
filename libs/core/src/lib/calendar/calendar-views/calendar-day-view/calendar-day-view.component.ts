@@ -640,12 +640,11 @@ export class CalendarDayViewComponent<D> implements OnInit, OnChanges, OnDestroy
      * Method that is called to refresh i18n short week days.
      */
     private _refreshShortWeekDays(): void {
-        const shortDayOfWeekNames = this._dateTimeAdapter.getDayOfWeekNames('narrow');
+        const shortDayOfWeekNames = this._dateTimeAdapter.getDayOfWeekNames('short');
 
         this._shortWeekDays = shortDayOfWeekNames
             .slice(this.startingDayOfWeek - 1)
-            .concat(shortDayOfWeekNames.slice(0, this.startingDayOfWeek - 1))
-            .map((weekday) => weekday[0].toLocaleUpperCase());
+            .concat(shortDayOfWeekNames.slice(0, this.startingDayOfWeek - 1));
 
         this.changeDetRef.markForCheck();
     }

@@ -22,6 +22,13 @@ export class DynamicSideContentDocsComponent {
             component: 'DynamicSideContentBasicExampleComponent',
             typescriptFileCode: basicExampleTsCode,
             scssFileCode: exampleScssCode
+        },
+        {
+            language: 'scss',
+            code: exampleScssCode,
+            fileName: 'dynamic-side-content',
+            component: 'DynamicSideContentBasicExampleComponent',
+            scssFileCode: exampleScssCode
         }
     ];
 
@@ -33,6 +40,13 @@ export class DynamicSideContentDocsComponent {
             component: 'DynamicSideContentPositioningExampleComponent',
             typescriptFileCode: positioningExampleTsCode,
             scssFileCode: exampleScssCode
+        },
+        {
+            language: 'scss',
+            code: exampleScssCode,
+            fileName: 'dynamic-side-content',
+            component: 'DynamicSideContentPositioningExampleComponent',
+            scssFileCode: exampleScssCode
         }
     ];
 
@@ -43,6 +57,13 @@ export class DynamicSideContentDocsComponent {
             fileName: 'dynamic-side-content-size-example',
             component: 'DynamicSideContentSizeExampleComponent',
             typescriptFileCode: sizeExampleTsCode,
+            scssFileCode: exampleScssCode
+        },
+        {
+            language: 'scss',
+            code: exampleScssCode,
+            fileName: 'dynamic-side-content',
+            component: 'DynamicSideContentSizeExampleComponent',
             scssFileCode: exampleScssCode
         }
     ];

@@ -100,6 +100,10 @@ class TestComponent {
     selectionChange(event): void {
         console.log('Selection event', event);
     }
+
+    clearSelection(): void {
+        this.gridListComponent.clearSelection();
+    }
 }
 
 describe('GridListComponent', () => {
@@ -218,6 +222,31 @@ describe('GridListComponent', () => {
 
         const checkboxButtonsLength = fixture.debugElement.queryAll(By.css('.fd-grid-list__item .fd-checkbox')).length;
         expect(checkboxButtonsLength).toEqual(6);
+    });
+
+    it('Multi Select mode: should throw selection events if unselected all', () => {
+        component.setMode('multiSelect');
+        spyOn(component, 'selectionChange');
+
+        fixture.detectChanges();
+
+        const radioButtons = fixture.debugElement.queryAll(By.css('.fd-grid-list__item .fd-checkbox'));
+
+        radioButtons.forEach((button) => {
+            button.nativeElement.click();
+        });
+
+        fixture.detectChanges();
+
+        component.clearSelection();
+
+        const selectedItemEvent = {
+            added: [],
+            index: [],
+            removed: ['Title 1', 'Title 2', 'Title 3', 'Title 4', 'Title 5', 'Title 6'],
+            selection: []
+        };
+        expect(component.selectionChange).toHaveBeenCalledWith(selectedItemEvent);
     });
 
     it('Multi Select mode: should throw selection events if select item', () => {

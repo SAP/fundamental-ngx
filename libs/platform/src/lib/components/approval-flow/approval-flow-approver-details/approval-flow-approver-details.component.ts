@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef } from '@angular/core';
-import { DialogRef } from '@fundamental-ngx/core';
-
 import { Observable } from 'rxjs';
+
+import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 import { ApprovalDataSource, ApprovalNode, ApprovalUser } from '../public_api';
 import { filterByName } from '../helpers';

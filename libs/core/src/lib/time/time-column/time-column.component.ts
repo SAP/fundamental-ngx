@@ -3,6 +3,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
     HostBinding,
     HostListener,
@@ -122,6 +123,10 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     @ViewChildren(CarouselItemDirective)
     items: QueryList<CarouselItemDirective>;
 
+    /** @hidden */
+    @ViewChild('indicator', { read: ElementRef })
+    indicator: ElementRef;
+
     /* Whether the action bar also has a back button. */
     @HostBinding('class.fd-time__col')
     fdTimeColClass = true;
@@ -193,7 +198,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
     }
 
     /** @hidden */
-    spinnerButtonKeydownHandle(event: KeyboardEvent, upButton?: boolean): void {
+    spinnerButtonKeyupHandle(event: KeyboardEvent, upButton?: boolean): void {
         if (KeyUtil.isKeyCode(event, SPACE)) {
             if (upButton) {
                 this.scrollUp();
@@ -215,11 +220,7 @@ export class TimeColumnComponent<K, T extends SelectableViewItem<K> = Selectable
 
     /** It prevents from accidentally change the item by click event */
     handleDrag(isDragging: boolean): void {
-        if (!isDragging) {
-            setTimeout(() => (this._isDragging = false), 30);
-        } else {
-            this._isDragging = isDragging;
-        }
+        this._isDragging = isDragging;
     }
 
     /** Method that handles active item change */

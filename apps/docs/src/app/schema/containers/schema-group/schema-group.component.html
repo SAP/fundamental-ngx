@@ -66,4 +66,11 @@
             </fieldset>
         </ng-template>
     </ng-container>
+
+    <ng-container *ngIf="resettable">
+        <fieldset fd-fieldset class="schema--inner-group">
+            <button fd-button (click)="reset()">Reset</button>
+        </fieldset>
+
+    </ng-container>
 </div>

@@ -128,7 +128,7 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    private _tabIndex = -1;
+    private _tabIndex = 0;
 
     constructor(
         public elementRef: ElementRef,

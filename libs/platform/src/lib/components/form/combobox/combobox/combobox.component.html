@@ -65,17 +65,21 @@
             [name]="name"
             [compact]="isCompact"
             (keydown)="onInputKeydownHandler($event)"
+            (keyup)="validateOnKeyup($event)"
             [disabled]="disabled"
             [(ngModel)]="inputText"
             (ngModelChange)="searchTermChanged()"
             [placeholder]="placeholder"
             (focus)="onTouched()"
-            (blur)="!mobile && onBlur($event)"
+            (blur)="!mobile && _onBlur($event)"
             [attr.aria-expanded]="isOpen && _suggestions.length > 0"
             [readonly]="readonly"
             [attr.aria-readonly]="readonly"
         />
     </fd-input-group>
+    <ng-container *ngIf="!isOpen">
+        <ng-container *ngTemplateOutlet="errorMessageTemplate"></ng-container>
+    </ng-container>
 </ng-template>
 
 <ng-template #listTemplate>
@@ -91,7 +95,8 @@
         [style.maxHeight]="!mobile && maxHeight"
         [style.minWidth]="!mobile && minWidth + 'px'"
         [style.maxWidth]="autoResize && maxWidth + 'px'"
-    >
+    >   
+    <ng-container *ngTemplateOutlet="errorMessageTemplate"></ng-container>
         <ng-content></ng-content>
         <ng-container *ngIf="isGroup">
             <ng-container *ngFor="let group of _suggestions">
@@ -195,4 +200,13 @@
             ></ng-container>
         </ng-container>
     </ng-container>
+</ng-template>
+
+<ng-template #errorMessageTemplate>
+    <fd-form-message
+        *ngIf="_isSearchInvalid"
+        type="error"
+        [embedded]="isOpen">
+        Invalid entry
+    </fd-form-message>
 </ng-template>
