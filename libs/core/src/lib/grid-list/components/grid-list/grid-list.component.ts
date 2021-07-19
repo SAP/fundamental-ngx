@@ -122,6 +122,13 @@ export class GridListComponent<T> implements OnChanges, AfterContentInit, OnDest
         this.subscription.unsubscribe();
     }
 
+    /**
+     * Clears previous selection of the items.
+     */
+    clearSelection(): void {
+        this._gridListSelectionService.clearSelection();
+    }
+
     /** @hidden */
     private _updateGridListItemsProperties(components: QueryList<GridListItemComponent<T>>): void {
         const layoutPattern = this.layoutPattern ? this.layoutPattern : 'XL4-L3-M2-S1';

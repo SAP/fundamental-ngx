@@ -16,12 +16,13 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { WizardStepComponent } from './wizard-step/wizard-step.component';
 import { Subscription } from 'rxjs';
-import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progress-bar.directive';
-import { scrollTop } from '@fundamental-ngx/core/utils';
-import { ACTIVE_STEP_STATUS, CURRENT_STEP_STATUS, UPCOMING_STEP_STATUS, COMPLETED_STEP_STATUS } from './constants';
 import { DialogBodyComponent } from '@fundamental-ngx/core/dialog';
+import { scrollTop } from '@fundamental-ngx/core/utils';
+import { WizardStepComponent } from './wizard-step/wizard-step.component';
+import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progress-bar.directive';
+import { WizardContentComponent } from './wizard-content/wizard-content.component';
+import { ACTIVE_STEP_STATUS, CURRENT_STEP_STATUS, UPCOMING_STEP_STATUS, COMPLETED_STEP_STATUS } from './constants';
 
 export const STEP_MIN_WIDTH = 168;
 export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';
@@ -83,6 +84,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     @ContentChild(WizardProgressBarDirective)
     progressBar: WizardProgressBarDirective;
+
+    /** @hidden */
+    @ContentChildren(WizardContentComponent)
+    wizardContent: WizardContentComponent;
 
     /** @hidden */
     @ViewChild('wrapperContainer')
