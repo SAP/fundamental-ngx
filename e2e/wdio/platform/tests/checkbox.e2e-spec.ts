@@ -179,7 +179,7 @@ describe('Checkbox test suite', () => {
     });
 
     describe('Checkbox With Form and State Change on Error', () => {
-        it('should check error handling examples', () => {
+        xit('should check error handling examples', () => {
             if (browserIsIEorSafari()) {
                 console.log('Skip for Safari and IE');
                 return;
