@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.125](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.124...v0.31.0-rc.125) (2021-07-19)
+
+
+### Bug Fixes
+
+* **core:** fix access modifier for method in Input Group ([#6004](https://github.com/SAP/fundamental-ngx/issues/6004)) ([295ebc7](https://github.com/SAP/fundamental-ngx/commit/295ebc7a2af4d11527d18959f6f487a2e8ec9922))
+
 ## [0.31.0-rc.124](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.123...v0.31.0-rc.124) (2021-07-19)
 
 ## [0.31.0-rc.123](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.122...v0.31.0-rc.123) (2021-07-19)
