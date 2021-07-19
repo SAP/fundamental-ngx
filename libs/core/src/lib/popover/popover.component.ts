@@ -1,4 +1,5 @@
 import {
+    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -54,7 +55,7 @@ let cdkPopoverUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [PopoverService],
 })
-export class PopoverComponent extends BasePopoverClass implements AfterViewInit, OnDestroy, OnChanges {
+export class PopoverComponent extends BasePopoverClass implements AfterViewInit, AfterContentInit, OnDestroy, OnChanges {
     /** Tooltip for popover */
     @Input()
     title: string;
@@ -140,6 +141,14 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
         }
 
         this._setupView();
+    }
+
+    /** @hidden */
+    ngAfterContentInit(): void {
+        if (this.popoverBody && this.popoverBody.notificationGroup) {
+            super.focusTrapped = true;
+            super.focusAutoCapture = true;
+        }
     }
 
     /** @hidden */
