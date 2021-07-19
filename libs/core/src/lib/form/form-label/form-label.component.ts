@@ -52,11 +52,6 @@ export class FormLabelComponent implements OnChanges {
     @Input()
     inlineHelpBodyPlacement: Placement;
 
-    /** The trigger events that will open/close the inline help.
-     *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
-    @Input()
-    inlineHelpTrigger: string[] = ['mouseleave', 'mouseenter'];
-
     /** If inline help trigger icon should be placed after, or before text */
     @Input()
     inlineHelpPlacement: 'before' | 'after' = 'after';
@@ -78,5 +73,4 @@ export class FormLabelComponent implements OnChanges {
         this.inlineHelpClass = !!this.inlineHelpTitle;
         this.inlineHelpAfter = this.inlineHelpTitle && this.inlineHelpPlacement === 'after';
     }
-
 }

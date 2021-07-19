@@ -2,12 +2,12 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CdkTableModule } from '@angular/cdk/table';
 
-import {
-    PlatformButtonModule,
-    PlatformInputModule,
-    PlatformSearchFieldModule,
-    PlatformTableModule
-} from '@fundamental-ngx/platform';
+import { TableModule } from '@fundamental-ngx/core/table';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
+import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { PlatformButtonModule, PlatformInputModule, PlatformSearchFieldModule, PlatformTableModule } from '@fundamental-ngx/platform';
 
 import { API_FILES } from '../../api-files';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -33,11 +33,8 @@ import { PlatformTableTreeExampleComponent } from './platform-table-examples/pla
 import { PlatformTableLoadingExampleComponent } from './platform-table-examples/platform-table-loading-example.component';
 import { PlatformTableNavigatableRowIndicatorExampleComponent } from './platform-table-examples/platform-table-navigatable-row-indicator-example.component';
 import { PlatformTableNavigatableRowButtonExampleComponent } from './platform-table-examples/platform-table-navigatable-row-button-example.component';
-import { TableModule } from '@fundamental-ngx/core/table';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
-import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
-import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { PlatformTableCustomWidthExampleComponent } from './platform-table-examples/platform-table-custom-width-example.component';
+import { PlatformTableActivableExampleComponent } from './platform-table-examples/platform-table-activable-example.component';
 
 const routes: Routes = [
     {
@@ -85,7 +82,10 @@ const routes: Routes = [
         PlatformTableTreeExampleComponent,
         PlatformTableLoadingExampleComponent,
         PlatformTableNavigatableRowIndicatorExampleComponent,
-        PlatformTableNavigatableRowButtonExampleComponent
+        PlatformTableNavigatableRowButtonExampleComponent,
+        PlatformTableCustomWidthExampleComponent,
+        PlatformTableNavigatableRowButtonExampleComponent,
+        PlatformTableActivableExampleComponent
     ],
     providers: [RtlService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

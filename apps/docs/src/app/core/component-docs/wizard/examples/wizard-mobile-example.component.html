@@ -1,7 +1,7 @@
 <div style="display: flex; justify-content: space-around; flex-wrap: wrap">
     <fd-wizard [appendToWizard]="false">
         <fd-wizard-navigation>
-            <ul fd-wizard-progress-bar>
+            <ul fd-wizard-progress-bar size="sm">
                 <li
                     fd-wizard-step
                     [status]="example1step1status"
@@ -9,7 +9,7 @@
                     label="Step 1: One Line"
                 >
                     <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
-                    <fd-wizard-content>
+                    <fd-wizard-content size="sm">
                         Sed fermentum, mi et tristique ullamcorper, sapien sapien faucibus sem, quis pretium nibh lorem
                         malesuada diam. Nulla quis arcu aliquet, feugiat massa semper, volutpat diam. Nam vitae ante
                         posuere, molestie neque sit amet, dapibus velit. Maecenas eleifend tempor lorem. Mauris vitae
@@ -27,10 +27,26 @@
                     label="Step 2: Very long label that truncates on the second line"
                 >
                     <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
-                    <fd-wizard-content> Wizard Content for step 2 </fd-wizard-content>
+                    <fd-wizard-content size="sm">
+                        Wizard Content for step 2
+                        <fd-wizard-next-step>
+                            <button fd-button fdType="emphasized" (click)="example1goToStep(3)">Go to Step 3</button>
+                        </fd-wizard-next-step>
+                    </fd-wizard-content>
                 </li>
-                <li fd-wizard-step status="upcoming" label="Step 3">
+                <li
+                    fd-wizard-step
+                    [status]="example1step3status"
+                    label="Step 3"
+                    (statusChange)="statusChanged(1, 3, $event)"
+                >
                     <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
+                    <fd-wizard-content>
+                        Wizard Content for step 3
+                        <fd-wizard-next-step>
+                            <button fd-button fdType="emphasized" (click)="finish1Wizard()">Submit</button>
+                        </fd-wizard-next-step>
+                    </fd-wizard-content>
                 </li>
             </ul>
         </fd-wizard-navigation>
@@ -44,7 +60,7 @@
 
     <fd-wizard [appendToWizard]="false">
         <fd-wizard-navigation>
-            <ul fd-wizard-progress-bar>
+            <ul fd-wizard-progress-bar size="sm">
                 <li
                     fd-wizard-step
                     [status]="example2step1status"
@@ -52,7 +68,7 @@
                     label="Step 1: One Line"
                 >
                     <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator>
-                    <fd-wizard-content>
+                    <fd-wizard-content size="sm">
                         <img src="https://picsum.photos/id/1023/220/220" role="presentation" />
                         <fd-wizard-next-step [floating]="true">
                             <button fd-button fdType="emphasized" (click)="example2goToStep(2)">Go to Step 2</button>
@@ -66,10 +82,26 @@
                     label="Step 2: Very long label that truncates on the second line"
                 >
                     <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
-                    <fd-wizard-content> Wizard Content for step 2 </fd-wizard-content>
+                    <fd-wizard-content size="sm">
+                        Wizard Content for step 2
+                        <fd-wizard-next-step [floating]="true">
+                            <button fd-button fdType="emphasized" (click)="example2goToStep(3)">Go to Step 3</button>
+                        </fd-wizard-next-step>
+                    </fd-wizard-content>
                 </li>
-                <li fd-wizard-step status="upcoming" label="Step 3">
+                <li
+                    fd-wizard-step
+                    [status]="example2step3status"
+                    label="Step 3"
+                    (statusChange)="statusChanged(2, 3, $event)"
+                >
                     <fd-wizard-step-indicator>3</fd-wizard-step-indicator>
+                    <fd-wizard-content>
+                        Wizard Content for step 3
+                        <fd-wizard-next-step [floating]="true">
+                            <button fd-button fdType="emphasized" (click)="finish2Wizard()">Submit</button>
+                        </fd-wizard-next-step>
+                    </fd-wizard-content>
                 </li>
             </ul>
         </fd-wizard-navigation>

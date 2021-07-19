@@ -15,6 +15,7 @@ import * as gridListMoreTs from '!raw-loader!./examples/more/grid-list-more-exam
 import * as gridListFooterTs from '!raw-loader!./examples/footer/grid-list-footer-example.component';
 import * as gridListDndTs from '!raw-loader!./examples/dnd/grid-list-dnd-example.component';
 import * as gridListLayoutTs from '!raw-loader!./examples/layout/grid-list-layout-example.component';
+import * as gridListFocusingTs from '!raw-loader!./examples/focusing/grid-list-focusing-example.component';
 
 import * as gridListDefaultHtml from '!raw-loader!./examples/default/grid-list-example.component.html';
 import * as gridListSingleSelectHtml from '!raw-loader!./examples/single-select/grid-list-single-select-example.component.html';
@@ -29,6 +30,7 @@ import * as gridListMoreHtml from '!raw-loader!./examples/more/grid-list-more-ex
 import * as gridListFooterHtml from '!raw-loader!./examples/footer/grid-list-footer-example.component.html';
 import * as gridListDndHtml from '!raw-loader!./examples/dnd/grid-list-dnd-example.component.html';
 import * as gridListLayoutHtml from '!raw-loader!./examples/layout/grid-list-layout-example.component.html';
+import * as gridListFocusingHtml from '!raw-loader!./examples/focusing/grid-list-focusing-example.component.html';
 
 import * as scssFileCode from '!raw-loader!./examples/grid-list.component.scss';
 
@@ -229,6 +231,21 @@ export class GridListDocsComponent {
             code: gridListLayoutTs,
             fileName: 'grid-list-layout-example',
             component: 'GridListLayoutExampleComponent'
+        }
+    ];
+
+    gridListFocusingExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: gridListFocusingHtml,
+            scssFileCode: scssFileCode,
+            fileName: 'grid-list-focusing-example'
+        },
+        {
+            language: 'typescript',
+            code: gridListFocusingTs,
+            fileName: 'grid-list-focusing-example',
+            component: 'GridListFocusingItemExampleComponent'
         }
     ];
 }

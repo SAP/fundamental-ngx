@@ -2,7 +2,7 @@
 <description>
     The flexible column layout is a layout control that displays multiple floorplans on a single page. This allows faster and more fluid navigation between multiple floorplans than the usual page-by-page navigation. The flexible column layout offers different layouts with up to three columns. Users can expand the column they want to focus on, switch between different layouts, and view the rightmost column in full screen mode.
 </description>
-<import module="FlexibleColumnLayoutModule"></import>
+<import module="FlexibleColumnLayoutModule" subPackage="flexible-column-layout"></import>
 
 <description>
     <p>Depending on the current layout and display size, the flexible column layout consists of one, two, or three horizontally-aligned columns. Each column contains content that is not provided by the flexible column layout itself. This content is passed to the component through <code>ng-template</code> and using the template references <code>#startColumn</code>, <code>#midColumn</code> and <code>#endColumn</code>.</p>
@@ -63,7 +63,7 @@
     <h2>Responsiveness</h2>
     <p>The flexible column layout changes its behavior for sizes LG, MD and SM in real time whenever the user resizes the screen. For more information visit the <a target="_blank" href="https://experience.sap.com/fiori-design-web/flexible-column-layout/#responsiveness">Responsiveness</a> section of Fiori Design Guidelines.
     </p>
-    <p>By default, the Flexible Column Layout applies the Fiori 3 break points: </p> 
+    <p>By default, the Flexible Column Layout applies the Fiori 3 break points: </p>
     <ul>
         <li>Size SM: max-width: 960px</li>
         <li>Size MD: min-width: 961px and max-width: 1280px</li>
@@ -73,7 +73,7 @@
     To overwrite the default breakpoints use the <code>smBreakPoint</code> and <code>lgBreakPoint</code> properties. It's also possible to provide a custom function that will handle the resizing of the screen. Use the <code>customOnResizeFunction</code> property to overwrite the default behaviour. </p>
 
     <p>The <code>backgroundDesign</code> property specifies the background design of the column layout. The default is set to "solid". The other two options include "translucent" and "transparent".</p>
-    
+
 </description>
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>

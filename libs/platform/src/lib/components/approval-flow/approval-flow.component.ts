@@ -17,14 +17,17 @@ import {
 } from '@angular/core';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { CdkDrag } from '@angular/cdk/drag-drop';
-
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, take } from 'rxjs/operators';
-import { DialogService, KeyUtil, MessageToastService, RtlService } from '@fundamental-ngx/core';
+
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { MessageToastService } from '@fundamental-ngx/core/message-toast';
+import { DialogService } from '@fundamental-ngx/core/dialog';
 
 import { ApprovalFlowApproverDetailsComponent } from './approval-flow-approver-details/approval-flow-approver-details.component';
 import { ApprovalFlowNodeComponent } from './approval-flow-node/approval-flow-node.component';
 import {
+    AddNodeDialogFormData,
     APPROVAL_FLOW_NODE_TYPES,
     ApprovalFlowAddNodeComponent,
     ApprovalFlowNodeTarget
@@ -39,7 +42,7 @@ import {
     ApprovalStatus,
     ApprovalUser
 } from './interfaces';
-import { ApprovalFlowSelectTypeComponent } from './approval-flow-select-type/approval-flow-select-type.component';
+import { ApprovalFlowSelectTypeComponent, SelectTypeDialogFormData } from './approval-flow-select-type/approval-flow-select-type.component';
 
 interface ApprovalGraphColumn {
     nodes: ApprovalGraphNode[];
@@ -180,6 +183,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _multipleRootNodes = false;
 
     /** @hidden */
+    _multipleFinalNodes = false;
+
+    /** @hidden */
     _dragDropInProgress = false;
 
     /** @hidden */
@@ -213,11 +219,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const selectedNodes = this._selectedNodes;
 
         return selectedNodes.length
-            && selectedNodes.every(node => {
-                return !node.disableActions
-                    && !node.actionsConfig?.disableRemove
-                    && !this._isFinalNodeWithMultipleParents(node);
-            });
+            && selectedNodes.every(node => !node.disableActions && !node.actionsConfig?.disableRemove);
     }
 
     /** @hidden */
@@ -249,10 +251,14 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden */
-    _isFinalNodeWithMultipleParents(node: ApprovalGraphNode): boolean {
-        const nodeMetadata = this._graphMetadata[node.id];
+    _isNextNodeBlank(node: ApprovalGraphNode, columnIndex: number, nodeIndex: number): boolean {
+        const nextNode = this._graph[columnIndex + 1]?.nodes[nodeIndex];
+        const nextNodeBlank = nextNode?.blank;
+        const nextNodeParallelEnd = this._graphMetadata[nextNode?.id]?.parallelEnd;
 
-        return nodeMetadata.isFinal && this._graph[nodeMetadata.columnIndex - 1]?.nodes.length > 1;
+        return !node.blank
+            && nextNodeBlank
+            && !nextNodeParallelEnd;
     }
 
     /** @hidden */
@@ -260,8 +266,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         return !this._isEditMode
             || node.blank
             || node.space
-            || node.status !== 'not started'
-            || this._isFinalNodeWithMultipleParents(node);
+            || node.status !== 'not started';
     }
 
     /** @hidden Node click handler */
@@ -489,10 +494,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
     /** @hidden Open add node dialog */
     _addNode(source: ApprovalGraphNode, type: ApprovalFlowNodeTarget): void {
-        const showNodeTypeSelect =
-            type === 'before'
-            && !source.actionsConfig?.disableAddParallel
-            && !this._graphMetadata[source.id].isFinal;
+        const showNodeTypeSelect = type === 'before' && !source.actionsConfig?.disableAddParallel;
 
         const dialog = this._dialogService.open(ApprovalFlowAddNodeComponent, {
             data: {
@@ -504,40 +506,68 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             }
         });
 
-        dialog.afterClosed.subscribe((data: { node: ApprovalNode, nodeType: APPROVAL_FLOW_NODE_TYPES }) => {
+        dialog.afterClosed.subscribe((data: AddNodeDialogFormData ) => {
             if (!data) {
                 return;
             }
 
-            const { node: addedNode, nodeType } = data;
-            if (!addedNode) {
+            const { node, nodeType, toNextSerial } = data;
+
+            if (!node) {
                 return;
             }
 
             this._cacheCurrentApprovalProcess();
 
-            addedNode.id = `tempId${(Math.random() * 1000).toFixed()}`;
+            node.id = `tempId${(Math.random() * 1000).toFixed()}`;
 
-            if (type === 'empty') {
-                this._enterEditMode();
-            } else {
-                addedNode.targets = type === 'before' ? [source.id] : source.targets;
+            switch (type) {
+                case 'empty':
+                    this._enterEditMode();
+                    break;
 
-                if (nodeType === APPROVAL_FLOW_NODE_TYPES.SERIAL) {
-                    if (type === 'before') {
-                        this._replaceTargets(source.id, [addedNode.id]);
-                    } else {
-                        source.targets = [addedNode.id];
+                case 'before':
+                    if (nodeType === APPROVAL_FLOW_NODE_TYPES.SERIAL) {
+                        node.targets = [source.id];
+                        this._replaceTargets(source.id, [node.id]);
                     }
-                }
 
-                if (nodeType === APPROVAL_FLOW_NODE_TYPES.PARALLEL) {
-                    this._addParallelTargets(source.id, addedNode.id);
-                }
+                    if (nodeType === APPROVAL_FLOW_NODE_TYPES.PARALLEL) {
+                        this._processAddingParallelNode(node, source, toNextSerial);
+                    }
+
+                    break;
+
+                case 'before-all':
+                    node.targets = this._graph[0].nodes.map(_node => _node.id);
+                    break;
+
+                case 'after':
+                    node.targets = source.targets;
+                    source.targets = [node.id];
+                    break;
+
+                case 'after-all':
+                    const targetParents = this._graphMetadata[source.targets[0]]?.parents;
+
+                    if (targetParents) {
+                        node.targets = source.targets;
+                        this._replaceTargets(source.id, [node.id]);
+
+                        this._approvalProcess.nodes = this._approvalProcess.nodes.filter(_node => _node.id !== source.id);
+                    } else {
+                        this._graph[this._graph.length - 1].nodes.forEach(_node => _node.targets.push(node.id));
+                    }
+
+                    break;
+
+                case 'parallel':
+                    this._processAddingParallelNode(node, source, toNextSerial);
+                    break;
             }
 
-            this._showMessage(addedNode.approvalTeamId ? 'teamAddSuccess' : 'approverAddSuccess');
-            this._approvalProcess.nodes.push(addedNode);
+            this._showMessage(node.approvalTeamId ? 'teamAddSuccess' : 'approverAddSuccess');
+            this._approvalProcess.nodes.push(node);
             this._buildView(this._approvalProcess);
         });
     }
@@ -589,12 +619,14 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _deleteCheckedNodes(): void {
         this._cacheCurrentApprovalProcess();
 
-        this._nodeComponents
-            .forEach((component) => {
-                if (component._isSelected) {
-                    this._deleteNode(component.node);
-                    this._buildView(this._approvalProcess);
-                }
+        const nodesToDelete = this._nodeComponents
+            .filter(nodeComponent => nodeComponent._isSelected)
+            .map(nodeComponent => nodeComponent.node);
+
+        nodesToDelete
+            .forEach(node => {
+                this._deleteNode(node);
+                this._buildView(this._approvalProcess);
             });
 
         this._showMessage('nodesRemove');
@@ -618,6 +650,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         drag.reset();
 
         const dropTarget = this._nodeComponents.find(n => n._isAnyDropZoneActive);
+
         if (!dropTarget) {
             return;
         }
@@ -646,57 +679,59 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         }
 
         if (placement === 'before') {
-            if (this._graphMetadata[dropTarget.node.id].isFinal) {
-                this._deleteNode(nodeToDrop);
-                this._buildView(this._approvalProcess);
-                this._replaceTargets(dropTarget.node.id, [nodeToDrop.id]);
-                nodeToDrop.targets = [dropTarget.node.id];
-                this._finishDragDropProcess(nodeToDrop);
-                return;
-            }
-
             const dialog = this._dialogService.open(ApprovalFlowSelectTypeComponent, {
                 data: {
                     rtl: this._defaultDialogOptions.rtl
                 }
             });
 
-            dialog.afterClosed.subscribe((selectedType: APPROVAL_FLOW_NODE_TYPES) => {
-                if (!selectedType) {
+            dialog.afterClosed.subscribe((data: SelectTypeDialogFormData) => {
+                if (!data) {
                     return;
                 }
+
+                const { type, toNextSerial } = data;
 
                 this._deleteNode(nodeToDrop);
                 this._buildView(this._approvalProcess);
 
-                if (selectedType === APPROVAL_FLOW_NODE_TYPES.SERIAL) {
+                if (type === APPROVAL_FLOW_NODE_TYPES.SERIAL) {
                     this._replaceTargets(dropTarget.node.id, [nodeToDrop.id]);
                     nodeToDrop.targets = [dropTarget.node.id];
                 }
 
-                if (selectedType === APPROVAL_FLOW_NODE_TYPES.PARALLEL) {
-                    this._addParallelTargets(dropTarget.node.id, nodeToDrop.id);
-
-                    const graphNodes = getGraphNodes(this._graph);
-                    let currNode = dropTarget.node;
-                    let nextNode: ApprovalGraphNode;
-
-                    do {
-                        if (currNode.targets.length === 1) {
-                            nextNode = graphNodes.find(node => node.id === currNode.targets[0]);
-
-                            if (nextNode?.blank) {
-                                currNode = nextNode;
-                                nextNode = graphNodes.find(node => node.id === currNode.targets[0]);
-                            }
-                        }
-                    } while (nextNode?.blank);
-
-                    nodeToDrop.targets = currNode.targets;
+                if (type === APPROVAL_FLOW_NODE_TYPES.PARALLEL) {
+                    this._processAddingParallelNode(nodeToDrop, dropTarget.node, toNextSerial);
                 }
 
                 this._finishDragDropProcess(nodeToDrop);
             });
+        }
+
+        if (placement === 'before-all') {
+            this._deleteNode(nodeToDrop);
+
+            const firstColumnNodes = this._graph[0].nodes;
+            nodeToDrop.targets = firstColumnNodes.map(node => node.id);
+
+            this._finishDragDropProcess(nodeToDrop);
+        }
+
+        if (placement === 'after-all') {
+            this._deleteNode(nodeToDrop);
+            this._buildView(this._approvalProcess);
+
+            nodeToDrop.targets = [...dropTarget.node.targets];
+
+            if (dropTarget.node.targets.length === 0) {
+                const lastColumnNodes = this._graph[this._graph.length - 1].nodes;
+                lastColumnNodes.forEach(node => node.targets.push(nodeToDrop.id));
+            } else {
+                this._approvalProcess.nodes = this._approvalProcess.nodes.filter(node => node.id !== dropTarget.node.id);
+                this._replaceTargets(dropTarget.node.id, [nodeToDrop.id]);
+            }
+
+            this._finishDragDropProcess(nodeToDrop);
         }
     }
 
@@ -725,13 +760,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const rootNodes = findRootNodes(nodes);
         const finalNodes = findFinalNodes(nodes);
 
-        if (!rootNodes.length || !finalNodes.length || finalNodes.length > 1) {
-            console.warn(
-                finalNodes.length > 1
-                    ? 'Err: Multiple final nodes aren\'t supported yet!'
-                    : 'Err: Not possible to build graph because root or final nodes aren\'t present!'
-            );
-
+        if (!rootNodes.length || !finalNodes.length) {
+            console.warn(`Err: Not possible to build graph because root or final nodes aren't present!`);
             this._showMessage('error');
             return [];
         }
@@ -740,11 +770,12 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
          * 1. Find all possible paths, longest path length = amount of columns in the graph
          * 2. Trim paths (remove blank nodes at the end of every path)
          * 3. Make all paths the same length, so every node will be present at the one index across all paths
-         * 4. Remove duplicate nodes in paths, so the every node appears only once among all paths
-         * 5. Remove empty paths
-         * 6. Transform paths into the columns
-         * 7. Trim columns (remove blank & empty node at the end of every column)
-         * 8. Remove columns which contain only blank and empty nodes
+         * 4. Sort paths by their likeliness to avoid paths crossing
+         * 5. Remove duplicate nodes in paths, so the every node appears only once among all paths
+         * 6. Remove empty paths
+         * 7. Transform paths into the columns
+         * 8. Trim columns (remove blank & empty node at the end of every column)
+         * 9. Remove columns which contain only blank and empty nodes
         */
         const paths = getAllGraphPaths(rootNodes, nodes);
 
@@ -755,8 +786,9 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         }
 
         const trimmedPaths = trimPaths(paths);
-        const sameLengthPaths = makeAllPathsSameLength(trimmedPaths);
-        const pathsWithUniqueNodes = removeDuplicateNodesInPaths(sameLengthPaths);
+        const sameLengthPaths = makePathsSameLength(trimmedPaths);
+        const pathsBySimilarity = sortPaths(sameLengthPaths);
+        const pathsWithUniqueNodes = removeDuplicateNodesInPaths(pathsBySimilarity);
         const notEmptyPaths = removeEmptyPaths(pathsWithUniqueNodes);
         const columns = transformPathsIntoColumns(notEmptyPaths);
         const trimmedColumns = trimColumns(columns);
@@ -773,28 +805,36 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         graph.forEach((column, columnIndex) => {
             column.nodes.forEach((node, nodeIndex) => {
                 const parents = findParentNodes(node, nodes);
-                const allParentsApproved = parents.length ? parents.every(_node => isNodeApproved(_node)) : false;
+                const parentsApproved = parents.length ? parents.every(_node => isNodeApproved(_node)) : false;
+                const isRoot = !parents.length && !node.space;
+                const isFinal = !node.targets.length && !node.space;
+                const parallelEnd = parents.length > 1;
+                const firstOfMultipleRootNodes = columnIndex === 0 && column.nodes.length > 1 && nodeIndex === 0;
+                const firstOfMultipleFinalNodes = columnIndex === graph.length - 1 && column.nodes.length > 1 && nodeIndex === 0
 
                 metadata[node.id] = {
                     parents: parents,
-                    isRoot: !parents.length && !node.blank && !node.space,
-                    isFinal: !node.targets.length && !node.blank && !node.space,
+                    isRoot: isRoot,
+                    isFinal: isFinal,
                     parallelStart: node.targets.length > 1,
-                    parallelEnd: parents.length > 1,
+                    parallelEnd: parallelEnd,
                     columnIndex: columnIndex,
                     nodeIndex: nodeIndex,
-                    canAddNodeBefore: !isNodeStarted(node) && !allParentsApproved,
+                    canAddNodeBefore: !isNodeStarted(node) && !parentsApproved,
+                    canAddNodeBeforeAll: isRoot && firstOfMultipleRootNodes,
                     canAddNodeAfter: !isNodeApproved(node),
+                    canAddNodeAfterAll: !isNodeApproved(node) && ((isFinal && firstOfMultipleFinalNodes) || (parallelEnd && node.blank)),
                     canAddParallel: !isNodeApproved(node),
                     isVerticalLineBeforeSolid: node.space && graph[columnIndex - 1]?.allNodesApproved,
                     isVerticalLineAfterSolid: node.space && column.allNodesApproved,
-                    firstOfMultipleRootNodes: columnIndex === 0 && column.nodes.length > 1 && nodeIndex === 0,
+                    firstOfMultipleRootNodes: firstOfMultipleRootNodes,
+                    firstOfMultipleFinalNodes: firstOfMultipleFinalNodes,
                     rootNodesApproved: columnIndex === 0 && column.allNodesApproved
                 };
             });
         });
 
-        /* Some flags can be calculated only at the 2nd run, when all nodes already have base metadata */
+        /* Some flags can be calculated only on the second run, when all nodes already have base metadata */
         graph.forEach(column => {
             column.nodes.forEach((node, nodeIndex) => {
                 const nodeMetadata = metadata[node.id];
@@ -802,8 +842,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                 nodeMetadata.isLastInParallel = metadata[node.targets[0]]?.parallelEnd;
                 nodeMetadata.isFirstInParallel = metadata[nodeMetadata.parents[0]?.id]?.parallelStart;
 
-                const graphNextColumn = graph[column.index + 1];
                 const graphPrevColumn = graph[column.index - 1];
+                const graphNextColumn = graph[column.index + 1];
 
                 const prevHNode = graphPrevColumn?.nodes[nodeIndex];
                 const nextHNode = graphNextColumn?.nodes[nodeIndex];
@@ -817,23 +857,35 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
                         || nextHNode?.blank
                     );
 
-                nodeMetadata.renderVerticalLineBefore =
-                    nodeIndex > 0
-                    && (
-                        !prevHNode
-                        || (prevHNode?.space && !node.space)
-                    );
+                if (nodeMetadata.parallelStart) {
+                    const nextColumnNodes = graphNextColumn.nodes;
+                    const children = nextColumnNodes.filter(_node => node.targets.includes(_node.id));
+                    const firstChildIndex = nextColumnNodes
+                        .findIndex(_node => _node.id === children[0].id);
+                    const lastChildIndex = nextColumnNodes
+                        .findIndex(_node => _node.id === children[children.length - 1].id);
 
-                nodeMetadata.renderVerticalLineAfter =
-                    graphNextColumn
-                    && nodeIndex > 0
-                    && (
-                        !nextHNode
-                        || (nextHNode?.space && !node.space)
-                    );
+                    for (let i = firstChildIndex + 1; i <= lastChildIndex; i++) {
+                        metadata[nextColumnNodes[i].id].renderVerticalLineBefore = true;
+                    }
+                }
+
+                if (nodeMetadata.parallelEnd) {
+                    const prevColumnNodes = graphPrevColumn.nodes;
+                    const firstParentIndex = prevColumnNodes
+                        .findIndex(_node => _node.id === nodeMetadata.parents[0].id);
+                    const lastParentIndex = prevColumnNodes
+                        .findIndex(_node => _node.id === nodeMetadata.parents[nodeMetadata.parents.length - 1].id);
+
+                    for (let i = firstParentIndex + 1; i <= lastParentIndex; i++) {
+                        metadata[prevColumnNodes[i].id].renderVerticalLineAfter = true;
+                    }
+                }
+
+                nodeMetadata.renderVerticalLineBefore = !nodeMetadata.renderVerticalLineBefore ? (nodeIndex > 0 && !prevHNode) : true;
+                nodeMetadata.renderVerticalLineAfter = !nodeMetadata.renderVerticalLineAfter ? (nodeIndex > 0 && !nextHNode) : true;
             });
         });
-
 
         return metadata;
     }
@@ -849,6 +901,7 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         const nodes = getGraphNodes(this._graph);
         this._approvalProcess.nodes = nodes.filter(node => !node.space);
         this._multipleRootNodes = nodes.filter(node => this._graphMetadata[node.id].isRoot).length > 1;
+        this._multipleFinalNodes = nodes.filter(node => this._graphMetadata[node.id].isFinal).length > 1;
 
         this._resetCheckedNodes();
         this._cdr.detectChanges();
@@ -918,29 +971,31 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
             if (currNode.targets.length === 1) {
                 nextNode = graphNodes.find(node => node.id === currNode.targets[0]);
 
-                if (nextNode?.blank) {
+                if (nextNode?.blank && this._graphMetadata[nextNode.id].parents.length === 1) {
                     nodesToDelete.push(nextNode);
 
                     currNode = nextNode;
                     nextNode = graphNodes.find(node => node.id === currNode.targets[0]);
                 }
             }
-        } while (nextNode?.blank);
+        } while (nextNode?.blank && this._graphMetadata[nextNode.id].parents.length === 1);
 
         const parent = this._graphMetadata[nodeToDelete.id].parents[0];
+        const target = nodeToDelete.targets[0];
         const isParentParallelStart = this._graphMetadata[parent?.id]?.parallelStart;
-        const isTargetParallelEnd = this._graphMetadata[nodeToDelete.targets[0]]?.parallelEnd;
+        const isTargetParallelEnd = this._graphMetadata[target]?.parallelEnd;
         const targets = (isParentParallelStart && isTargetParallelEnd) || nodesToDelete.length > 1 ? [] : currNode.targets;
 
         this._replaceTargets(nodeToDelete.id, targets);
+
         this._approvalProcess.nodes = this._approvalProcess.nodes.filter(node => !nodesToDelete.includes(node));
     }
 
     /** @hidden */
     private _addParallelTargets(targetNodeId: string, nodeIdToAdd: string): void {
-        this._approvalProcess.nodes.forEach(n => {
-            if (isNodeTargetsIncludeId(n, targetNodeId)) {
-                n.targets.push(nodeIdToAdd);
+        this._approvalProcess.nodes.forEach(node => {
+            if (isNodeTargetsIncludeId(node, targetNodeId)) {
+                node.targets.push(nodeIdToAdd);
             }
         });
     }
@@ -1075,6 +1130,49 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
 
         return processedColumns;
     }
+
+    /** @hidden */
+    private _findSerialNode(yIndex: number, targets: string[]): string[] {
+        const targetIsParent = targets.some(targetId => this._graphMetadata[targetId].nodeIndex <= yIndex - 1);
+
+        if (targetIsParent) {
+            return targets;
+        }
+
+        const targetNode = this._approvalProcess.nodes.find(node => node.id === targets[0]);
+        return this._findSerialNode(yIndex, targetNode.targets);
+    }
+
+    /** @hidden */
+    private _processAddingParallelNode(addedNode: ApprovalGraphNode, sourceNode: ApprovalGraphNode, toNextSerial = false): void {
+        addedNode.targets = sourceNode.targets;
+
+        this._addParallelTargets(sourceNode.id, addedNode.id);
+
+        if (toNextSerial) {
+            let yIndex = this._graphMetadata[sourceNode.id].nodeIndex;
+            let targets = sourceNode.targets;
+
+            if (yIndex === 0) {
+                const sourceNodeMetadata = this._graphMetadata[sourceNode.id];
+                const columnNodes = this._graph[sourceNodeMetadata.columnIndex].nodes;
+                const nextParallelNode = columnNodes.find((node, index) => index > 0 && !node.space);
+
+                if (nextParallelNode) {
+                    yIndex = this._graphMetadata[nextParallelNode.id].columnIndex;
+                    targets = nextParallelNode.targets;
+
+                    addedNode.targets = this._findSerialNode(yIndex, targets);
+                    return;
+                }
+
+                addedNode.targets = sourceNode.targets;
+                return;
+            }
+
+            addedNode.targets = this._findSerialNode(yIndex, targets);
+        }
+    }
 }
 
 function findRootNodes(nodes: ApprovalNode[]): ApprovalNode[] {
@@ -1167,22 +1265,25 @@ function trimPaths(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
     const processedPaths: ApprovalGraphNode[][] = [];
 
     paths.forEach(path => {
-        const reversedPath = path.reverse();
-        let nodeIndex = 0;
+        let indexToSlice = path.length - 1;
 
-        while (reversedPath[nodeIndex].blank) {
-            nodeIndex++;
+        for (let i = path.length - 1; i > 0; --i) {
+            if (path[i].blank) {
+                indexToSlice = i - 1;
+            } else {
+                break;
+            }
         }
 
-        reversedPath[nodeIndex].targets = [];
-        processedPaths.push(reversedPath.slice(nodeIndex).reverse());
+        path[indexToSlice].targets = [];
+        processedPaths.push(path.slice(0, indexToSlice + 1));
     });
 
     return processedPaths;
 }
 
 /** Make all paths the same length by adding blank & space nodes */
-function makeAllPathsSameLength(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
+function makePathsSameLength(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
     const processedPaths: ApprovalGraphNode[][] = [];
     const pathLengths = paths.map(path => path.length);
     const longestPathLength = Math.max(...pathLengths);
@@ -1194,10 +1295,10 @@ function makeAllPathsSameLength(paths: ApprovalGraphNode[][]): ApprovalGraphNode
         }
 
         path.forEach((node, nodeIndex) => {
-            let emptyNodes = getBlankNodesAfterFromProcessedPaths(node, processedPaths);
+            let emptyNodes = getBlankNodesAfterNode(node, processedPaths);
 
-            if (emptyNodes.length) {
-                path.splice(nodeIndex, 0, ...emptyNodes);
+            if (emptyNodes.length && emptyNodes[0].id !== path[nodeIndex + 1]?.id) {
+                path.splice(nodeIndex + 1, 0, ...emptyNodes);
                 return;
             }
 
@@ -1205,7 +1306,7 @@ function makeAllPathsSameLength(paths: ApprovalGraphNode[][]): ApprovalGraphNode
             const mostFarNodeIndexInPaths = Math.max(...nodeIndexInPaths);
 
             if (nodeIndex < mostFarNodeIndexInPaths) {
-                emptyNodes = getEmptyNodes(mostFarNodeIndexInPaths - nodeIndex, path[nodeIndex - 1].status);
+                emptyNodes = getBlankNodes(mostFarNodeIndexInPaths - nodeIndex, path[nodeIndex - 1].status);
 
                 emptyNodes[emptyNodes.length - 1].targets = [node.id];
                 path[nodeIndex - 1].targets = [emptyNodes[0].id];
@@ -1215,7 +1316,9 @@ function makeAllPathsSameLength(paths: ApprovalGraphNode[][]): ApprovalGraphNode
             }
 
             if (nodeIndex === mostFarNodeIndexInPaths && nodeIndex === path.length - 1) {
-                emptyNodes = getEmptyNodes(longestPathLength - path.length, 'not started', 'space');
+                emptyNodes = getBlankNodes(longestPathLength - path.length, path[nodeIndex].status);
+
+                path[nodeIndex].targets = [emptyNodes[0].id];
 
                 path.splice(nodeIndex + 1, 0, ...emptyNodes);
                 return;
@@ -1228,40 +1331,84 @@ function makeAllPathsSameLength(paths: ApprovalGraphNode[][]): ApprovalGraphNode
     return processedPaths;
 }
 
-function getBlankNodesAfterFromProcessedPaths(
+function sortPaths(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
+    if (paths.length === 1) {
+        return paths;
+    }
+
+    let similarities: number[][] = [];
+    let pathSimilarity = 0;
+
+    paths.forEach((path, index) => {
+        for (let i = 0; i < paths.length; i++) {
+            if (index !== i && !similarities.some(likely => index === likely[1] && i === likely[0])) {
+                pathSimilarity = 0;
+
+                for (let j = 0; j < path.length; j++) {
+                    if (path[j].id === paths[i][j].id) {
+                        pathSimilarity++;
+                    }
+                }
+
+                similarities.push([index, i, pathSimilarity]);
+            }
+        }
+    });
+
+    similarities = similarities.sort((a, b) => a[2] > b[2] ? -1 : 1)
+
+    const usedPathIndexes = [];
+    const processedPaths: ApprovalGraphNode[][] = [];
+
+    similarities.forEach(similarity => {
+        if (!usedPathIndexes.some(i => i === similarity[0])) {
+            processedPaths.push(paths[similarity[0]])
+            usedPathIndexes.push(similarity[0]);
+        }
+
+        if (!usedPathIndexes.some(i => i === similarity[1])) {
+            processedPaths.push(paths[similarity[1]])
+            usedPathIndexes.push(similarity[1]);
+        }
+    })
+
+    return processedPaths;
+}
+
+function getBlankNodesAfterNode(
     node: ApprovalGraphNode,
-    processedPaths: ApprovalGraphNode[][]
+    paths: ApprovalGraphNode[][]
 ): ApprovalGraphNode[] {
     const blankNodes: ApprovalGraphNode[] = [];
 
-    const pathWithBlankNodeAfter = processedPaths.find(path => {
+    const pathWithBlankNodeAfter = paths.find(path => {
         const nodeIndex = path.indexOf(node);
         return nodeIndex > -1 && path[nodeIndex + 1]?.blank;
     });
 
     if (pathWithBlankNodeAfter) {
         const nodeIndex = pathWithBlankNodeAfter.indexOf(node) + 1;
-        const nextNotBlankNodeIndex = pathWithBlankNodeAfter.findIndex((_node, _index) => _index > nodeIndex && !_node.blank);
+        const nextNotBlankNodeIndex = pathWithBlankNodeAfter.findIndex((_node, _index) => {
+            return _index > nodeIndex && !_node.blank;
+        });
 
-        blankNodes.push(...pathWithBlankNodeAfter.slice(nodeIndex, nextNotBlankNodeIndex));
+        blankNodes.push(...pathWithBlankNodeAfter.slice(nodeIndex, nextNotBlankNodeIndex > 0 ? nextNotBlankNodeIndex : undefined));
     }
 
     return blankNodes;
 }
 
-function getEmptyNodes(
+function getBlankNodes(
     count: number,
-    status: ApprovalStatus = 'not started',
-    nodeType: 'blank' | 'space' = 'blank',
+    status: ApprovalStatus
 ): ApprovalGraphNode[] {
     const nodes: ApprovalGraphNode[] = [];
-    const nodeFn = nodeType === 'blank' ? getBlankNode : getSpaceNode;
 
     let node: ApprovalGraphNode;
     let nodeId: string;
 
     for (let i = count; i > 0; i--) {
-        node = Object.assign({}, nodeFn(), { targets: [ nodeType === 'blank' && nodeId ], status: status })
+        node = Object.assign({}, getBlankNode(), { targets: nodeId ? [ nodeId ] : [], status: status })
         nodeId = node.id;
 
         nodes.unshift(node);
@@ -1270,7 +1417,7 @@ function getEmptyNodes(
     return nodes;
 }
 
-/** Make every nodes present once among all the paths */
+/** Make every node to be present only once among all paths */
 function removeDuplicateNodesInPaths(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
     const processedPaths: ApprovalGraphNode[][] = [];
 
@@ -1292,18 +1439,13 @@ function removeDuplicateNodesInPaths(paths: ApprovalGraphNode[][]): ApprovalGrap
 }
 
 function removeEmptyPaths(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {
-    const processedPaths: ApprovalGraphNode[][] = [];
-
-    paths.forEach((path) => {
-        const currentPath = [...path];
-        const isPathEmpty = path.every(node => node.space);
-
-        if (!isPathEmpty) {
-            processedPaths.push(currentPath);
+    return paths.reduce((acc, path) => {
+        if (!path.every(node => node.space)) {
+            acc.push(path);
         }
-    });
 
-    return processedPaths;
+        return acc;
+    }, [] as ApprovalGraphNode[][]);
 }
 
 function transformPathsIntoColumns(paths: ApprovalGraphNode[][]): ApprovalGraphNode[][] {

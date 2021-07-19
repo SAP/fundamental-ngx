@@ -119,7 +119,7 @@ export async function writeToAngularConfig(
 
         // adding serve configurations
         const serveConfigObject = projectObject.architect.serve.configurations;
-        const defaultServeConfig = projectObject.architect.serve.options.browserTarget;
+        const defaultServeConfig = projectObject.architect['extract-i18n'].options.browserTarget;
         languageServeObj = {
             [language]: {
                 browserTarget: defaultServeConfig + ':' + language

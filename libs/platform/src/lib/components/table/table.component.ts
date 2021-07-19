@@ -22,6 +22,7 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
@@ -36,6 +37,17 @@ import { TableService } from './table.service';
 
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { SearchInput } from './interfaces/search-field.interface';
+import { ContentDensity, FILTER_STRING_STRATEGY, SelectionMode, SortDirection, TableRowType } from './enums';
+import { DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
+import { TableDataSource } from './domain/table-data-source';
+import { ArrayTableDataSource } from './domain/array-data-source';
+import { ObservableTableDataSource } from './domain/observable-data-source';
+
+import { TableColumn } from './components/table-column/table-column';
+import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-toolbar/table-toolbar';
+import { Table } from './table';
+import { TableScrollable, TableScrollDispatcherService } from './table-scroll-dispatcher.service';
+import { getScrollBarWidth } from './utils';
 import {
     ColumnsChange,
     FilterChange,
@@ -46,23 +58,15 @@ import {
     TableColumnsChangeEvent,
     TableFilterChangeEvent,
     TableGroupChangeEvent,
-    TableRowSelectionChangeEvent,
-    TableSortChangeEvent,
     TableRow,
+    TableRowActivateEvent,
+    TableRowSelectionChangeEvent,
+    TableRowsRearrangeEvent,
     TableRowToggleOpenStateEvent,
-    TableRowsRearrangeEvent
+    TableSortChangeEvent
 } from './models';
-import { FILTER_STRING_STRATEGY, ContentDensity, SelectionMode, SortDirection, TableRowType } from './enums';
-import { DEFAULT_COLUMN_WIDTH, DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
-import { TableDataSource } from './domain/table-data-source';
-import { ArrayTableDataSource } from './domain/array-data-source';
-import { ObservableTableDataSource } from './domain/observable-data-source';
-
-import { TableColumn } from './components/table-column/table-column';
-import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-toolbar/table-toolbar';
-import { Table } from './table';
-import { TableScrollable, TableScrollDispatcherService } from './table-scroll-dispatcher.service';
-import { getScrollBarWidth } from './utils';
+import { TableColumnResizeService } from './table-column-resize.service';
+import { TableColumnResizableSide } from './directives';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
@@ -115,7 +119,12 @@ let tableUniqueId = 0;
     styleUrls: ['./table.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [{ provide: Table, useExisting: TableComponent }, TableService, TableScrollDispatcherService],
+    providers: [
+        { provide: Table, useExisting: TableComponent },
+        TableService,
+        TableScrollDispatcherService,
+        TableColumnResizeService
+    ],
     host: {
         class: 'fdp-table',
         '[class.fd-table--compact]': 'contentDensity === CONTENT_DENSITY.COMPACT',
@@ -139,6 +148,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     @Input()
     set dataSource(value: FdpTableDataSource<T>) {
         this._ds = value;
+
         if (value && this._viewInitiated) {
             this._initializeDS(value);
         }
@@ -237,7 +247,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** Whether table row has navigation button. */
     @Input()
     navigationButton = false;
-    
+
+    /** Whether table row can be clicked */
+    @Input()
+    rowsActivable = false;
+
     /** Event fired when table selection has changed. */
     @Output()
     readonly rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<T>> = new EventEmitter<TableRowSelectionChangeEvent<T>>();
@@ -266,12 +280,15 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     @Output()
     readonly rowToggleOpenState = new EventEmitter<TableRowToggleOpenStateEvent<T>>();
 
-    /*
-     * Event fired when tree rows rearranged through drag & drop
-     * Consider that rows rearranged with their children rows
-     */
+    /* Event fired when tree rows rearranged through drag & drop. Consider that rows rearranged with their children rows. */
     @Output()
     readonly rowsRearrange = new EventEmitter<TableRowsRearrangeEvent<T>>();
+
+    /*
+     * Event fired when row clicked
+     */
+    @Output()
+    readonly rowActivate = new EventEmitter<TableRowActivateEvent<T>>();
 
     /** @hidden */
     @ViewChild('verticalScrollable')
@@ -308,6 +325,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * Data source items stream.
      */
     readonly _dataSourceItemsSubject: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
+
     /**
      * @hidden
      * Representation of table rows.
@@ -359,10 +377,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     _freezableColumns: string[] = [];
-    /** @hidden */
-    _columnWidth = DEFAULT_COLUMN_WIDTH;
+
     /** @hidden */
     _selectionColumnWidth = 0;
+
     /** @hidden */
     _tablePadding = 0;
 
@@ -409,6 +427,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     _visibleColumns: TableColumn[] = [];
 
     /** @hidden */
+    _scrollBarWidth = 0;
+
+    /** @hidden */
     get _isShownSelectionColumn(): boolean {
         return this.selectionMode !== SelectionMode.NONE;
     }
@@ -435,9 +456,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    _scrollBarWidth = 0;
-
-    /** @hidden */
     private _ds: FdpTableDataSource<T>;
 
     /** @hidden */
@@ -460,12 +478,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     constructor(
-        private readonly _tableService: TableService,
-        private readonly _cd: ChangeDetectorRef,
-        private readonly _tableScrollDispatcher: TableScrollDispatcherService,
         private readonly _ngZone: NgZone,
+        private readonly _cdr: ChangeDetectorRef,
+        private readonly _tableService: TableService,
+        private readonly _tableScrollDispatcher: TableScrollDispatcherService,
+        private readonly _tableColumnResizeService: TableColumnResizeService,
         @Inject(DOCUMENT) private readonly _document: Document | null,
-        @Optional() private readonly _rtlService: RtlService
+        @Optional() private readonly _rtlService: RtlService,
+        @Optional() private readonly router: Router
     ) {
         super();
     }
@@ -475,6 +495,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         if (!this._viewInitiated) {
             return;
         }
+
         if ('selectionMode' in changes || 'freezeColumnsTo' in changes) {
             this._setFreezableInfo();
         }
@@ -513,7 +534,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         this._listenToColumnPropertiesChange();
 
-        this._cd.detectChanges();
+        this._listenToColumnsWidthChange();
+
+        this._cdr.detectChanges();
     }
 
     /** @hidden */
@@ -529,7 +552,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** Set current state/settings of the Table. */
     setTableState(state: TableState): void {
         this._tableService.setTableState(state);
-        this._cd.markForCheck();
+        this._cdr.markForCheck();
     }
 
     getTableColumns(): TableColumn[] {
@@ -539,37 +562,37 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** Set Sorting rules */
     sort(sortRules: CollectionSort[]): void {
         this._tableService.setSort(sortRules);
-        this._cd.markForCheck();
+        this._cdr.markForCheck();
     }
 
     /** Add Sorting rules to the existing ones */
     addSort(sortRules: CollectionSort[]): void {
         this._tableService.addSort(sortRules);
-        this._cd.markForCheck();
+        this._cdr.markForCheck();
     }
 
     /** Set Filter rules */
     filter(filterRules: CollectionFilter[]): void {
         this._tableService.setFilters(filterRules);
-        this._cd.markForCheck();
+        this._cdr.markForCheck();
     }
 
     /** Add Filter rule */
     addFilter(filterRules: CollectionFilter[]): void {
         this._tableService.addFilters(filterRules);
-        this._cd.markForCheck();
+        this._cdr.markForCheck();
     }
 
     /** Set Groups */
     group(groups: CollectionGroup[]): void {
         this._tableService.setGroups(groups);
-        this._cd.markForCheck();
+        this._cdr.markForCheck();
     }
 
     /** Add Groups */
     addGroup(groups: CollectionGroup[]): void {
         this._tableService.addGroups(groups);
-        this._cd.markForCheck();
+        this._cdr.markForCheck();
     }
 
     /**
@@ -579,7 +602,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      */
     setColumns(columns: string[]): void {
         this._tableService.setColumns(columns);
-        this._cd.markForCheck();
+        this._cdr.markForCheck();
     }
 
     /** Freeze table to column */
@@ -587,7 +610,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._tableService.freezeTo(columnName);
         this.freezeColumnsTo = columnName;
         this._setFreezableInfo();
-        this._cd.markForCheck();
+        this._cdr.markForCheck();
     }
 
     /** Unfreeze column */
@@ -597,43 +620,43 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._tableService.freezeTo(freezeToName);
         this.freezeColumnsTo = freezeToName;
         this._setFreezableInfo();
-        this._cd.markForCheck();
+        this._cdr.markForCheck();
     }
 
     /** Search in table */
     search(searchInput: SearchInput): void {
         this._tableService.search(searchInput);
-        this._cd.markForCheck();
+        this._cdr.markForCheck();
     }
 
     /** Search in table */
     setCurrentPage(currentPage: number): void {
         this._tableService.setCurrentPage(currentPage);
-        this._cd.markForCheck();
+        this._cdr.markForCheck();
     }
 
     /** Toolbar Sort Settings button visibility */
     showSortSettingsInToolbar(showSortSettings: boolean): void {
         this._isShownSortSettingsInToolbar = showSortSettings;
-        this._cd.detectChanges();
+        this._cdr.detectChanges();
     }
 
     /** Toolbar Filter Settings button visibility */
     showFilterSettingsInToolbar(showFilterSettings: boolean): void {
         this._isShownFilterSettingsInToolbar = showFilterSettings;
-        this._cd.detectChanges();
+        this._cdr.detectChanges();
     }
 
     /** Toolbar Group Settings button visibility */
     showGroupSettingsInToolbar(showGroupSettings: boolean): void {
         this._isShownGroupSettingsInToolbar = showGroupSettings;
-        this._cd.detectChanges();
+        this._cdr.detectChanges();
     }
 
     /** Toolbar Columns Settings button visibility */
     showColumnSettingsInToolbar(showColumnSettings: boolean): void {
         this._isShownColumnSettingsInToolbar = showColumnSettings;
-        this._cd.detectChanges();
+        this._cdr.detectChanges();
     }
 
     /** Disable filter from column heder menu */
@@ -643,31 +666,55 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** Set the navigatable property on a row */
     setNavigatableRowState(rowIndex: number, state: boolean): void {
-        this.tableRows.toArray()[rowIndex + 1].navigatable = state;
-        this._tableRows[rowIndex].navigatable = state;
-        if (!state) {
-            this._tableRows[rowIndex].hasNavIndicator = false;
+        const row = this._tableRows[rowIndex];
+
+        if (!row) {
+            return;
         }
-        this._cd.detectChanges();
+
+        this.tableRows.toArray()[rowIndex + 1].navigatable = state;
+        row.navigatable = state;
+
+        if (!state) {
+            row.hasNavIndicator = false;
+        }
+
+        this._cdr.detectChanges();
     }
 
     /** Set the navigation indicator property on a row */
     setRowNavigationIndicator(rowIndex: number, state: boolean): void {
-        if (this._tableRows[rowIndex].navigatable) {
-            this._tableRows[rowIndex].hasNavIndicator = state;
+        const row = this._tableRows[rowIndex];
+
+        if (!row) {
+            return;
+        }
+
+        if (row.navigatable) {
+            row.hasNavIndicator = state;
+
             if (state) {
                 this.navigationButton = false;
             }
         }
-        this._cd.detectChanges();
+
+        this._cdr.detectChanges();
     }
 
     /** Set the navigation target property on a row */
     setRowNavigationTarget(rowIndex: number, target: string): void {
-        if (this._tableRows[rowIndex].navigatable) {
-            this._tableRows[rowIndex].navigationTarget = target;
+        const row = this._tableRows[rowIndex];
+
+        if (!row) {
+            return;
         }
-        this._cd.detectChanges();
+
+
+        if (row.navigatable) {
+            row.navigationTarget = target;
+        }
+
+        this._cdr.detectChanges();
     }
 
     /** Get corresponding arrow icon for navigation indicator */
@@ -675,6 +722,16 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         if (row.hasNavIndicator) {
             return this._rtl ? 'navigation-left-arrow' : 'navigation-right-arrow';
         }
+    }
+
+    /** Manually triggers columns width recalculation */
+    recalculateTableColumnWidth(): void {
+        this._cdr.detectChanges();
+
+        this._tableColumnResizeService.initialize(this._selectionColumnWidth, !!this.freezeColumnsTo, this._scrollBarWidth);
+        this._setFreezableInfo();
+
+        this._cdr.markForCheck();
     }
 
     /** @hidden
@@ -689,6 +746,15 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     // Private API
+
+    /** @hidden */
+    _getColumnResizableSide(columnIndex: number): TableColumnResizableSide {
+        if (columnIndex === 0) {
+            return 'end';
+        }
+
+        return 'both';
+    }
 
     /** @hidden */
     _isColumnHasHeaderMenu(column: TableColumn): boolean {
@@ -730,6 +796,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 if (row === rowToToggle) {
                     return;
                 }
+
                 if (row.checked) {
                     row.checked = false;
                     removed.push(row);
@@ -833,9 +900,24 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    _getFreezableCellStyles(colIdx: number): { [klass: string]: number } {
-        const key = this._rtl ? 'margin-right.px' : 'margin-left.px';
-        return { [key]: this._selectionColumnWidth + colIdx * this._columnWidth };
+    _getCellStyles(column: TableColumn): { [klass: string]: number } {
+        const styles = {};
+        const columnIndex = this._visibleColumns.indexOf(column);
+
+        if (this._freezableColumns.includes(column.name)) {
+            const key = this._rtl ? 'margin-right.px' : 'margin-left.px';
+            styles[key] = this._selectionColumnWidth + this._tableColumnResizeService.getPrevColumnsWidth(columnIndex);
+        }
+
+        const columnWidth = this._tableColumnResizeService.getColumnWidthStyle(column, columnIndex);
+        styles['min-width'] = columnWidth;
+        styles['max-width'] = columnWidth;
+
+        if (!this._isShownSelectionColumn) {
+            styles['width'] = columnWidth;
+        }
+
+        return styles;
     }
 
     /** @hidden */
@@ -846,6 +928,27 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     _getRowHeight(): number {
         return ROW_HEIGHT.get(this.contentDensity);
+    }
+
+    /** @hidden */
+    _onRowClick(row: TableRow<T>): void {
+        if (row.hasNavIndicator) {
+            this._navigateByRowNavigationTarget(row);
+        }
+
+        if (this.rowsActivable) {
+            this._emitRowActivate(row);
+        }
+    }
+
+    /** @hidden */
+    _emitRowActivate(row: TableRow<T>): void {
+        if (!this.rowsActivable) {
+            return;
+        }
+
+        const rowIndex = this._tableRows.indexOf(row);
+        this.rowActivate.emit(new TableRowActivateEvent<T>(rowIndex, row.value));
     }
 
     /**
@@ -891,17 +994,17 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         return cellIndex === 0 && this._isTreeRow(row);
     }
 
-    /**  
+    /**
      * @hidden
-     * Chech if the cell should contain a navigation button
+     * Check if the cell should contain a navigation button
     */
     _showNavButton(cellIndex: number, row: TableRow): boolean {
         return this.navigationButton && cellIndex === this._visibleColumns.length - 1;
     }
 
-    /**  
+    /**
      * @hidden
-     * Chech if the cell should contain a navigation indicator
+     * Check if the cell should contain a navigation indicator
     */
     _showNavIndicator(cellIndex: number, row: TableRow): boolean {
         return row.hasNavIndicator && cellIndex === this._visibleColumns.length - 1;
@@ -937,9 +1040,18 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 this._onTableRowsChanged();
             }
 
-            this._cd.markForCheck();
+            this._cdr.markForCheck();
             this._emitRowsRearrangeEvent(dragRow, event.draggedItemIndex, event.replacedItemIndex);
         }
+    }
+
+    /** @hidden */
+    _navigateByRowNavigationTarget(row: TableRow<T>): void {
+        if (!row.navigatable || !row.navigationTarget) {
+            return;
+        }
+
+        this.router?.navigate([ row.navigationTarget ]);
     }
 
     /** @hidden */
@@ -1027,6 +1139,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _listenToTableRowsPipe(): void {
+        let tableSizeSet = false;
+
         this._subscriptions.add(
             this._dataSourceItemsSubject
                 .asObservable()
@@ -1045,7 +1159,15 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 .subscribe((rows) => {
                     this._setTableRows(rows);
 
-                    this._cd.markForCheck();
+                    if (!tableSizeSet && rows.length) {
+                        this.recalculateTableColumnWidth();
+
+                        tableSizeSet = true;
+
+                        return;
+                    }
+
+                    this._cdr.markForCheck();
                 })
         );
     }
@@ -1094,6 +1216,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             this._tableService.groupChange.subscribe((event: GroupChange) => {
                 this._buildGroupRulesMap();
                 this._calculateVisibleColumns();
+
+                /** Some columns have been hidden, need to refresh the layout */
+                this._tableColumnResizeService.resetColumnsWidth();
+                this._cdr.detectChanges();
+
+                /** Then recalculate width for the columns */
+                this.recalculateTableColumnWidth();
+
                 this.groupChange.emit(new TableGroupChangeEvent(this, event.current, event.previous));
             })
         );
@@ -1115,7 +1245,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._subscriptions.add(
             this._rtlService.rtl.pipe(distinctUntilChanged()).subscribe((rtl) => {
                 this._rtl = rtl;
-                this._cd.markForCheck();
+                this._cdr.markForCheck();
             })
         );
     }
@@ -1175,7 +1305,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     private _listenToColumns(): void {
         this.columns.changes.pipe(startWith(null)).subscribe(() => {
-            const columns = this.columns.toArray();
+            const columns = this.getTableColumns();
             this._buildColumnsMap(columns);
             this._tableColumnsSubject.next(columns);
         });
@@ -1186,29 +1316,30 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * Construct visible columns for rendering purpose
      */
     private _calculateVisibleColumns(): void {
-        const columnsDefinition = this.columns.toArray();
+        const columnsDefinition = this.getTableColumns();
         const { columns, groupBy } = this.getTableState();
-        const groupedColumnsToHide = groupBy.filter(({ showAsColumn }) => !showAsColumn).map(({ field }) => field);
+        const groupedColumnsToHide = groupBy
+            .filter(({ showAsColumn }) => !showAsColumn)
+            .map(({ field }) => field);
+
         this._visibleColumns = columns // need to start mapping from state.columns list to keep right order
             .map((name) => columnsDefinition.find((column) => column.name === name))
             .filter((column) => !!column)
-            // exclude columns which shouldn't be shown due to group settings
-            .filter(({ key }) => !groupedColumnsToHide.includes(key));
+            .filter(({ key }) => !groupedColumnsToHide.includes(key)); // exclude columns which shouldn't be shown due to the group settings
 
         this._calculateTableColumnsLength();
     }
 
     /** @hidden */
     private _calculateTableColumnsLength(): void {
-        const columnsLen = this._visibleColumns.length;
-        this._tableColumnsLength = this._isShownSelectionColumn ? columnsLen + 1 : columnsLen;
+        this._tableColumnsLength = this._visibleColumns.length + (this._isShownSelectionColumn ? 1 : 0);
     }
 
     /** @hidden */
     private _setFreezableInfo(): void {
         this._freezableColumns = this._getFreezableColumn();
         this._selectionColumnWidth = this._isShownSelectionColumn ? SELECTION_COLUMN_WIDTH.get(this.contentDensity) : 0;
-        this._tablePadding = this._selectionColumnWidth + this._columnWidth * this._freezableColumns.length;
+        this._tablePadding = this._selectionColumnWidth + this._tableColumnResizeService.getPrevColumnsWidth(this._freezableColumns.length);
     }
 
     /** @hidden */
@@ -1224,6 +1355,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             if (!column.name) {
                 continue;
             }
+
             if (column.name === this.freezeColumnsTo) {
                 columnNames.push(column.name);
 
@@ -1446,6 +1578,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 row.hidden = true;
                 row.expanded = false;
             }
+
             // if parent is expanded we want show only items which direct parents are expanded as well
             if (expanded) {
                 row.hidden = !this._getRowParents(row, rowToToggle).every((parent) => parent.expanded);
@@ -1544,6 +1677,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         if (dataSourceStream === undefined) {
             throw new Error(`[TableDataSource] source did not match an Array, Observable, nor DataSource`);
         }
+
         /**
          * This is single point of data entry to the component. We don't want to set data on different
          * places. If any new data comes in either you do a search and you want to pass initial data
@@ -1556,7 +1690,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
             this._dataSourceItemsSubject.next(items);
 
-            this._cd.markForCheck();
+            this._cdr.markForCheck();
         });
 
         this._subscriptions.add(this._dsSubscription);
@@ -1572,9 +1706,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         if (isDataSource(source)) {
             return source as TableDataSource<T>;
         }
+
         if (Array.isArray(source)) {
             return new ArrayTableDataSource(source);
         }
+
         if (isObservable(source)) {
             return new ObservableTableDataSource(source);
         }
@@ -1587,6 +1723,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         if (!this._document) {
             return;
         }
+
         this._scrollBarWidth = getScrollBarWidth(this._document);
     }
 
@@ -1626,7 +1763,15 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     private _listenToColumnPropertiesChange(): void {
         this._subscriptions.add(
             this._tableService.markForCheck$
-                .subscribe(() => this._cd.markForCheck())
+                .subscribe(() => this._cdr.markForCheck())
         );
+    }
+
+    /** @hidden */
+    private _listenToColumnsWidthChange(): void {
+        this._subscriptions.add(
+            this._tableService.tableColumnsWidth$
+                .subscribe(() => this.recalculateTableColumnWidth())
+        )
     }
 }

@@ -1,26 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 
 import {
+    BusyIndicatorModule,
     ButtonModule,
     CheckboxModule,
-    FormModule,
-    SelectModule,
-    RadioModule,
-    InputGroupModule,
-    DialogModule,
-    IconModule,
-    ListModule,
-    PopoverModule,
-    TableModule,
-    ToolbarModule,
-    LayoutGridModule,
-    PanelModule,
     DatePickerModule,
-    BusyIndicatorModule,
-    DragAndDropModule
+    DialogModule,
+    DragAndDropModule,
+    FormModule,
+    IconModule,
+    InputGroupModule,
+    LayoutGridModule,
+    ListModule,
+    PanelModule,
+    PopoverModule,
+    RadioModule,
+    SelectModule,
+    TableModule,
+    ToolbarModule
 } from '@fundamental-ngx/core';
 
 import { PlatformInputModule } from '../form/input/fdp-input.module';
@@ -61,12 +60,13 @@ import { FdpViewSettingsFilterCustomDef } from './directives/table-view-settings
 import { TableScrollableDirective } from './directives/table-scrollable.directive';
 import { TableScrollerDirective } from './directives/table-scroller.directive';
 import { FdpCellSelectableDirective } from './directives/table-cell-selectable.directive';
+import { PlatformTableCellResizableDirective } from './directives';
+import { PlatformTableColumnResizerComponent } from './components/table-column-resizer/table-column-resizer.component';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
-        RouterModule,
 
         TableModule,
         ToolbarModule,
@@ -123,7 +123,9 @@ import { FdpCellSelectableDirective } from './directives/table-cell-selectable.d
         FilterRuleComponent,
         P13ColumnsDialogComponent,
         TableScrollableDirective,
-        TableScrollerDirective
+        TableScrollerDirective,
+        PlatformTableCellResizableDirective,
+        PlatformTableColumnResizerComponent
     ],
     exports: [
         TableComponent,

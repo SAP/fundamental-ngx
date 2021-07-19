@@ -5,7 +5,7 @@ import {
     getElementArrayLength, getImageTagBrowserPlatform, getText, getValue,
     isElementClickable, isElementDisplayed,
 
-    refreshPage, saveElementScreenshot, scrollIntoView
+    refreshPage, saveElementScreenshot, scrollIntoView, waitForElDisplayed
 } from '../../driver/wdio';
 import {
     fruitArr, currentDay, date
@@ -26,6 +26,7 @@ describe('Toolbar test suite', function() {
 
     afterEach(() => {
         refreshPage();
+        waitForElDisplayed(toolbarPage.title);
     }, 2);
 
     it('verify info active toolbar is clickable', () => {

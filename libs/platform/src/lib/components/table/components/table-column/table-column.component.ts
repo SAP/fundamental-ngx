@@ -2,7 +2,6 @@ import {
     ChangeDetectionStrategy,
     Component,
     ContentChild,
-    forwardRef,
     Host,
     Input,
     OnChanges,
@@ -10,14 +9,13 @@ import {
     OnInit,
     Optional,
     SimpleChanges,
-    SkipSelf,
     TemplateRef
 } from '@angular/core';
 
 import { BehaviorSubject, Subject } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
-import { RtlService } from '@fundamental-ngx/core';
+import { RtlService } from '@fundamental-ngx/core/utils';
 
 import { ColumnAlign, FilterableColumnDataType } from '../../enums';
 import { FdpCellDef } from '../../directives/table-cell.directive';
@@ -75,6 +73,7 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     /** @ts-ignore */
     @Input() set align(align: ColumnAlign) {
         let _align = ColumnAlignEnum.Start;
+
         switch (align) {
             case ColumnAlign.CENTER:
                 _align = ColumnAlignEnum.Center;
@@ -85,6 +84,7 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
             case ColumnAlign.START:
                 _align = ColumnAlignEnum.Start;
         }
+
         this._align$.next(_align);
     }
 
@@ -116,6 +116,16 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     @Input()
     freezable = false;
 
+    /** Width of the column cells. */
+    @Input()
+    get width(): string {
+        return this._width;
+    }
+    set width(value: string) {
+        this._width = value;
+        this._tableService?.recalculateColumnsWidth();
+    }
+
     /** Column cell template */
     columnCellTemplate: TemplateRef<any>;
 
@@ -142,9 +152,12 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     private _destroyed = new Subject<void>();
 
     /** @hidden */
+    private _width: string;
+
+    /** @hidden */
     constructor(
-        private readonly _rtlService: RtlService,
-        @Optional() @SkipSelf() @Host() private readonly _tableService: TableService
+        @Optional() @Host() private readonly _tableService: TableService,
+        @Optional() private readonly _rtlService: RtlService
     ) {
         super();
     }
@@ -187,12 +200,13 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
             .asObservable()
             .pipe(
                 switchMap((align) =>
-                    this._rtlService.rtl.pipe(
+                    this._rtlService?.rtl.pipe(
                         map(
                             (isRtl): ColumnAlignEnum => {
                                 if (isRtl && align === ColumnAlignEnum.Start) {
                                     return ColumnAlignEnum.End;
                                 }
+
                                 if (isRtl && align === ColumnAlignEnum.End) {
                                     return ColumnAlignEnum.Start;
                                 }
@@ -206,10 +220,7 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
             )
             .subscribe((align) => {
                 this._align = align;
-
-                if (this._tableService) {
-                    this._tableService.markForCheck();
-                }
+                this._tableService?.markForCheck();
             });
     }
 }

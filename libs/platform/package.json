@@ -23,6 +23,7 @@
     "url": "https://github.com/SAP/fundamental-ngx"
   },
   "dependencies": {
-    "@fundamental-ngx/core": "VERSION_PLACEHOLDER"
+    "@fundamental-ngx/core": "VERSION_PLACEHOLDER",
+    "xml2js":"0.4.23"
   }
 }

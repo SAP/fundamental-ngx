@@ -25,7 +25,7 @@ describe('ButtonComponent', () => {
 
     it('button onclick should be called', () => {
         spyOn(component, 'onBtnClick');
-        component.onBtnClick(event);
+        component.onBtnClick({});
         expect(component.onBtnClick).toHaveBeenCalled();
     });
     // TODO: Unskip after fix
