@@ -1,6 +1,11 @@
 <span
-    *ngIf="hasLabel && (labelPosition === 'left' || labelPosition === 'top')"
-    [ngClass]="'fd-status-indicator__label--' + labelSize"
+    *ngIf="labelPosition === 'left' || labelPosition === 'top'"
+    [ngClass]="{'fd-status-indicator__label--sm' : labelSize ==='sm',
+	'fd-status-indicator__label--md' : labelSize ==='md',
+	'fd-status-indicator__label--lg' : labelSize ==='lg',
+	'fd-status-indicator__label--xl' : labelSize ==='xl',
+	'fd-status-indicator__label--top': labelPosition === 'top',
+	'fd-status-indicator__label--left' : labelPosition === 'left'}"
     class="fd-status-indicator__label"
     >{{ statusLabel }}
 </span>
@@ -16,8 +21,13 @@
     <ng-container [ngTemplateOutlet]="svgTemplate"></ng-container>
 </svg>
 <span
-    *ngIf="hasLabel && (labelPosition === 'right' || labelPosition === 'bottom')"
-    [ngClass]="'fd-status-indicator__label--' + size"
+    *ngIf="labelPosition === 'right' || labelPosition === 'bottom'"
+    [ngClass]="{'fd-status-indicator__label--sm' : labelSize ==='sm',
+	'fd-status-indicator__label--md' : labelSize ==='md',
+	'fd-status-indicator__label--lg' : labelSize ==='lg',
+	'fd-status-indicator__label--xl' : labelSize ==='xl',
+	'fd-status-indicator__label--right': labelPosition === 'right',
+	'fd-status-indicator__label--bottom' : labelPosition === 'bottom'}"
     class="fd-status-indicator__label"
     >{{ statusLabel }}
 </span>
