@@ -119,6 +119,9 @@ export class PlatformTableDocsComponent {
                     },
                     groupable: {
                         type: 'boolean'
+                    },
+                    width: {
+                        type: 'string'
                     }
                 }
             }
@@ -147,7 +150,8 @@ export class PlatformTableDocsComponent {
             align: 'start',
             sortable: true,
             filterable: true,
-            groupable: true
+            groupable: true,
+            width: '200px'
         }
     };
 
@@ -413,7 +417,7 @@ export class PlatformTableDocsComponent {
             code: platformTableNavigatableRowSrc,
             fileName: 'platform-table-navigatable-row-indicator-example',
             name: 'platform-table-navigatable-row-indicator-example.component.html'
-        }, 
+        },
         {
             language: 'typescript',
             code: platformTableNavigatableRowTsSrc,

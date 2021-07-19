@@ -1,4 +1,51 @@
 
+## [0.31.0-rc.126](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.125...v0.31.0-rc.126) (2021-07-19)
+
+## [0.31.0-rc.125](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.124...v0.31.0-rc.125) (2021-07-19)
+
+
+### Bug Fixes
+
+* **core:** fix access modifier for method in Input Group ([#6004](https://github.com/SAP/fundamental-ngx/issues/6004)) ([295ebc7](https://github.com/SAP/fundamental-ngx/commit/295ebc7a2af4d11527d18959f6f487a2e8ec9922))
+
+## [0.31.0-rc.124](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.123...v0.31.0-rc.124) (2021-07-19)
+
+## [0.31.0-rc.123](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.122...v0.31.0-rc.123) (2021-07-19)
+
+## [0.31.0-rc.122](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.121...v0.31.0-rc.122) (2021-07-19)
+
+## [0.31.0-rc.121](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.120...v0.31.0-rc.121) (2021-07-18)
+
+## [0.31.0-rc.120](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.119...v0.31.0-rc.120) (2021-07-17)
+
+
+### Bug Fixes
+
+* **core:** use 3 letters for day names on calendar and shortened hrs/… ([#5859](https://github.com/SAP/fundamental-ngx/issues/5859)) ([3eedadb](https://github.com/SAP/fundamental-ngx/commit/3eedadb67d220ce190a5bf95435ac9030bea69c4))
+
+## [0.31.0-rc.119](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.118...v0.31.0-rc.119) (2021-07-17)
+
+
+### Bug Fixes
+
+* **platform:** table columns reordering feature columns sorting fix ([#5971](https://github.com/SAP/fundamental-ngx/issues/5971)) ([2dc94df](https://github.com/SAP/fundamental-ngx/commit/2dc94dfe6c16d397a94f3ab3c158570db4f4bdb5))
+
+## [0.31.0-rc.118](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.117...v0.31.0-rc.118) (2021-07-17)
+
+
+### Bug Fixes
+
+* **core:** various wizard bugs from defect hunting sprint 66 ([#5966](https://github.com/SAP/fundamental-ngx/issues/5966)) ([a265e7e](https://github.com/SAP/fundamental-ngx/commit/a265e7e0ce913eaad078da27d47883262ea1e87b))
+
+## [0.31.0-rc.117](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.116...v0.31.0-rc.117) (2021-07-16)
+
+
+### Features
+
+* **platform:** table column width & resizing ([#5879](https://github.com/SAP/fundamental-ngx/issues/5879)) ([222053f](https://github.com/SAP/fundamental-ngx/commit/222053f210c8e13e2a275c998adb5e33c5988b62))
+
+## [0.31.0-rc.116](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.115...v0.31.0-rc.116) (2021-07-16)
+
 ## [0.31.0-rc.115](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.114...v0.31.0-rc.115) (2021-07-16)
 
 

@@ -206,19 +206,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
         const visibleColumnKeys = this.initialVisibleColumnKeys;
 
         this._selectableColumns = this.availableColumns
-            // Selected items go on top
             .slice()
-            .sort((a, b) => {
-                const aIndex = visibleColumnKeys.indexOf(a.key);
-                const bIndex = visibleColumnKeys.indexOf(b.key);
-                if (aIndex === -1 && bIndex > -1) {
-                    return 1;
-                }
-                if (aIndex > -1 && bIndex === -1) {
-                    return -1;
-                }
-                return aIndex - bIndex;
-            })
             .map(
                 (column, index: number): SelectableColumn => ({
                     column: column,

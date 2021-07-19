@@ -7,19 +7,19 @@ export type WizardSize = 'sm' | 'md' | 'lg' | 'xl';
     selector: '[fd-wizard-progress-bar]',
     host: {
         class: 'fd-wizard__progress-bar',
-        '[class.fd-wizard__progress-bar--s]': 'size === "sm"',
-        '[class.fd-wizard__progress-bar--m]': 'size === "md"',
-        '[class.fd-wizard__progress-bar--l]': 'size === "lg"',
+        '[class.fd-wizard__progress-bar--sm]': 'size === "sm"',
+        '[class.fd-wizard__progress-bar--md]': 'size === "md"',
+        '[class.fd-wizard__progress-bar--lg]': 'size === "lg"',
         '[class.fd-wizard__progress-bar--xl]': 'size === "xl"',
         '[style.display]': 'visible ? "" : "none"'
     }
 })
 export class WizardProgressBarDirective {
     /**
-     * Size of the wizard progress bar.
+     * Size (horizontal paddings) of the wizard progress bar.
      */
     @Input()
-    size: WizardSize;
+    size: WizardSize = null;
 
     /** @hidden */
     visible = true;

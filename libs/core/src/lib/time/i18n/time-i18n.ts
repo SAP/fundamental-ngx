@@ -9,7 +9,7 @@ export class TimeI18n {
     increaseHoursLabel = 'Increase hours';
 
     /** label for the 'hours' column */
-    hoursLabel = 'Hours';
+    hoursLabel = 'Hrs';
 
     /** Aria label for the 'decrease hours' button */
     decreaseHoursLabel = 'Decrease hours';
@@ -18,7 +18,7 @@ export class TimeI18n {
     increaseMinutesLabel = 'Increase minutes';
 
     /** label for the 'minutes' column */
-    minutesLabel = 'Minutes';
+    minutesLabel = 'Min';
 
     /** Aria label for the 'decrease minutes' button */
     decreaseMinutesLabel = 'Decrease minutes';
@@ -27,7 +27,7 @@ export class TimeI18n {
     increaseSecondsLabel = 'Increase seconds';
 
     /** label for the 'seconds' column */
-    secondsLabel = 'Seconds';
+    secondsLabel = 'Sec';
 
     /** Aria label for the 'decrease seconds' button */
     decreaseSecondsLabel = 'Decrease seconds';
