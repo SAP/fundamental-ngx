@@ -1,4 +1,28 @@
 
+## [0.31.0-rc.128](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.127...v0.31.0-rc.128) (2021-07-20)
+
+## [0.31.0-rc.127](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.126...v0.31.0-rc.127) (2021-07-20)
+
+
+### Bug Fixes
+
+* **platform:** correct forms validation error message ([#5972](https://github.com/SAP/fundamental-ngx/issues/5972)) ([e227560](https://github.com/SAP/fundamental-ngx/commit/e227560b84b3750451b25c8d94f9889e40c3f705))
+
+## [0.31.0-rc.126](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.125...v0.31.0-rc.126) (2021-07-19)
+
+## [0.31.0-rc.125](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.124...v0.31.0-rc.125) (2021-07-19)
+
+
+### Bug Fixes
+
+* **core:** fix access modifier for method in Input Group ([#6004](https://github.com/SAP/fundamental-ngx/issues/6004)) ([295ebc7](https://github.com/SAP/fundamental-ngx/commit/295ebc7a2af4d11527d18959f6f487a2e8ec9922))
+
+## [0.31.0-rc.124](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.123...v0.31.0-rc.124) (2021-07-19)
+
+## [0.31.0-rc.123](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.122...v0.31.0-rc.123) (2021-07-19)
+
+## [0.31.0-rc.122](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.121...v0.31.0-rc.122) (2021-07-19)
+
 ## [0.31.0-rc.121](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.120...v0.31.0-rc.121) (2021-07-18)
 
 ## [0.31.0-rc.120](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.119...v0.31.0-rc.120) (2021-07-17)

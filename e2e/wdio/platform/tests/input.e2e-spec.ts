@@ -137,7 +137,7 @@ describe('Input should ', function() {
         scrollIntoView(messagesComponentsInput);
         waitForElDisplayed(messagesComponentsInput);
         click(submitBtn);
-        mouseHoverElement(messagesComponentsInput);
+        click(messagesComponentsInput);
         pause(300);
         waitForElDisplayed(errorTextAttr);
         expect(getText(errorTextAttr).trim()).toBe(errorText);
