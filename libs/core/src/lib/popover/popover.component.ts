@@ -55,7 +55,6 @@ let cdkPopoverUniqueId = 0;
     providers: [PopoverService]
 })
 export class PopoverComponent extends BasePopoverClass implements AfterViewInit, AfterContentInit, OnDestroy, OnChanges {
-
     /** Tooltip for popover */
     @Input()
     title: string;
@@ -153,6 +152,10 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
 
     /** @hidden */
     ngAfterContentInit(): void {
+        if (this.popoverBody && this.popoverBody.notificationGroup) {
+            super.focusTrapped = true;
+            super.focusAutoCapture = true;
+        }
         if (this.popoverControl && this.triggers.includes('click')) {
             this.popoverControl.makeTabbable();
         }
