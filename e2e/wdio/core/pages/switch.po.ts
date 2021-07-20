@@ -4,8 +4,6 @@ import { waitForElDisplayed, waitForPresent} from '../../driver/wdio';
 export class SwitchPo extends CoreBaseComponentPo {
     private url = '/switch';
 
-    root = '#page-content';
-
     switchSizesExample = 'fd-switch-sizes-example ';
     disabledSwitchExample = 'fd-disabled-switch-example ';
     switchBindingExample = 'fd-switch-binding-example ';
@@ -28,7 +26,7 @@ export class SwitchPo extends CoreBaseComponentPo {
     declineIcon = this.semanticswitchExample + '.sap-icon--decline';
     acceptIcon = this.semanticswitchExample + '.sap-icon--accept';
     switchBtn = this.switchBindingExample + '.fd-button--standard';
-    
+
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
@@ -46,5 +44,4 @@ export class SwitchPo extends CoreBaseComponentPo {
     compareWithBaseline(specName: string = 'switch'): any {
         return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
-    
 }

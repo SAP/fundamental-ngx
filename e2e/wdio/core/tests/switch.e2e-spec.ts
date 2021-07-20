@@ -76,28 +76,30 @@ describe('Switch test suite', () => {
         expect(switchPage.compareWithBaseline()).toBeLessThan(5);
     });
 
-
     function checkSwitchingWork(section: string, length: number = getElementArrayLength(section + toggle),
         switchToggle: string = section + toggle, flag: string = section + toggleInput): void {
         for (let i = 0; i < length; i++) {
             if (getElementClass(switchToggle, i) !== disabledToggle) {
-                if (getAttributeByName(flag, 'aria-checked', i) == 'true') {
+                if (getAttributeByName(flag, 'aria-checked', i) === 'true') {
                     click(switchToggle, i);
                     expect(checkToggleState(section, i)).toBe(false, 'toggle is enabled');
                 }
-                if(getAttributeByName(flag, 'aria-checked', i) == 'false'){
+                if (getAttributeByName(flag, 'aria-checked', i) === 'false') {
                     click(switchToggle, i);
                     expect(checkToggleState(section, i)).toBe(true, 'toggle is disabled');
                 }
             }
         }
     }
+
     function checkToggleState(section: string, i: number = 0, flag: string = section + toggleInput): boolean {
         if (getAttributeByName(section + toggle, 'class', i) !== disabledToggle) {
-            if (getAttributeByName(flag, 'aria-checked', i) === 'true')
+            if (getAttributeByName(flag, 'aria-checked', i) === 'true') {
                 return true;
-            if(getAttributeByName(flag, 'aria-checked', i) !== 'true')
+            }
+            if (getAttributeByName(flag, 'aria-checked', i) !== 'true') {
                 return false;
+            }
         }
     }
 });
