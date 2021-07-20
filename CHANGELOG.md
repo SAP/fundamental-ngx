@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.133](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.132...v0.31.0-rc.133) (2021-07-20)
+
+
+### Bug Fixes
+
+* **core:** notification group focus trap ([#6017](https://github.com/SAP/fundamental-ngx/issues/6017)) ([913d86f](https://github.com/SAP/fundamental-ngx/commit/913d86f441a62d2a9ff4cc7daefd43bfdf7ce24e))
+
 ## [0.31.0-rc.132](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.131...v0.31.0-rc.132) (2021-07-20)
 
 
