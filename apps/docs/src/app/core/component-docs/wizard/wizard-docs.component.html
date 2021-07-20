@@ -1,4 +1,4 @@
-<fd-docs-section-title id="Wizard" componentName="wizard">Default Wizard</fd-docs-section-title>
+<fd-docs-section-title id="default" componentName="wizard">Default Wizard</fd-docs-section-title>
 <description>
     The default wizard displays a walkthrough screen with forms split into sections. Once the user fills all of the
     necessary input fields, a button is displayed to go to the next section. A Cancel button is displayed in the footer,
@@ -19,7 +19,7 @@
 <code-example [exampleFiles]="wizardExample"></code-example>
 <separator></separator>
 
-<fd-docs-section-title id="Wizard-Customizable" componentName="wizard">Customizable Wizard</fd-docs-section-title>
+<fd-docs-section-title id="customizable" componentName="wizard">Customizable Wizard</fd-docs-section-title>
 <description>
     The wizard component can be customized with modifier inputs. Steps can be placed on separate pages, rather than
     appended to the wizard, by setting the <code>[appendToWizard]</code> input to false.
@@ -30,7 +30,7 @@
 <code-example [exampleFiles]="wizardCustomizableExample"></code-example>
 <separator></separator>
 
-<fd-docs-section-title id="Wizard-Mobile" componentName="wizard">Mobile Wizard</fd-docs-section-title>
+<fd-docs-section-title id="mobile" componentName="wizard">Mobile Wizard</fd-docs-section-title>
 <description>
     For mobile devices, use the <code>fd-bar</code> component with the <code>barDesign="floating-footer"</code> modifier
     to achieve a floating footer. The Next Step button is placed after the content whenever possible. However, it can be
@@ -43,7 +43,7 @@
 <code-example [exampleFiles]="wizardMobileExample"></code-example>
 <separator></separator>
 
-<fd-docs-section-title id="Wizard-Branching" componentName="wizard">Branching Wizard</fd-docs-section-title>
+<fd-docs-section-title id="branching" componentName="wizard">Branching Wizard</fd-docs-section-title>
 <description>
     A branching step connector can be used by applying the <code>[branching]</code> boolean input to the wizard step.
     This should be used if one step may lead to two different steps afterwords. In this example, step 2 may take a user
@@ -56,7 +56,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="Wizard-Dialog" componentName="wizard">Dialog Wizard</fd-docs-section-title>
+<fd-docs-section-title id="dialog" componentName="wizard">Dialog Wizard</fd-docs-section-title>
 <description>
     The wizard can also be placed in a dialog. The <code>[appendToWizard]</code> input must be set to false, and a dialog
     width and height must be provided to ensure the dialog does not change size as the user progresses through steps and
@@ -70,7 +70,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="Wizard-Ngfor" componentName="wizard">Wizard with steps in ngFor</fd-docs-section-title>
+<fd-docs-section-title id="ng-for" componentName="wizard">Wizard with steps in ngFor</fd-docs-section-title>
 <description>
     Alternatively, wizard steps can be created by iterating over an array using <code>ngFor</code>.
 </description>
