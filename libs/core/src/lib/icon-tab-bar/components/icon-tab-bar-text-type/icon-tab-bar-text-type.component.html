@@ -6,13 +6,15 @@
     [isRtl]="isRtl"
     [offset]='100'
     [items]="tabs"
-    fd-dnd-list
+    fd-dnd-container
+    (itemDropped)="onDrop($event)"
     (changed)='onChangeSize($event)'
 >
     <li *ngFor='let item of tabs'
         [ngClass]='item.cssClasses'
         data-overflowItem
         fd-dnd-item
+        [dndItemData]="item"
         class='fd-icon-tab-bar__item'
         [attr.aria-hidden]='item.hidden'
         role='presentation'
@@ -21,7 +23,7 @@
             class='fd-icon-tab-bar__tab'
             role='tab'
             *ngIf='!item.subItems'
-            (click)='selectItem(item)'
+            (click)='selectItem(item, $event)'
             [attr.aria-selected]='item.uniqueKey === selectedItemKey'
         >
             <span class='fd-icon-tab-bar__tag'>

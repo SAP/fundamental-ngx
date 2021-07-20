@@ -29,7 +29,7 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
     isRtl: boolean;
 
     @Output()
-    changed: EventEmitter<{amount: number, event: ChangedOverflowItemsEvent}> = new EventEmitter<any>();
+    changed: EventEmitter<number> = new EventEmitter<number>();
 
     private _onDestroy$ = new Subject();
     itemsLength = 0;
@@ -69,7 +69,7 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
 
     private calculateAmountOfOverflowedItems(event: ChangedOverflowItemsEvent): void {
         const extra = this.getAmountOfExtraItems()
-        this.changed.emit({amount: extra, event: event});
+        this.changed.emit(extra);
     }
 
     private checkWidthWithOffset(arrItems: HTMLElement[], containerWidth: number, checkWithOffset: boolean = false): number {

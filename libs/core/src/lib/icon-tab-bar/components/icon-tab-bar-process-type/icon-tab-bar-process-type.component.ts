@@ -60,14 +60,14 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
         // this._recalculateExtraItems(extraItems, amountOfPreviousSteps);
     }
 
-    onChangeSize(data: {amount: number, event: ChangedOverflowItemsEvent}): void {
+    onChangeSize(extraItems: number): void {
         // let extraItems = data.amount;
         // if (this._prevSteps.length) {
         //     // Убрать кнопку которая сюда попала.
         //     extraItems = data.amount - 1;
         // }
-        const amountOfPrevSteps = this.currentStepIndex > data.amount ? data.amount : this.currentStepIndex;
-        this.recalculateItemsByPrevArr(data.amount, amountOfPrevSteps);
+        const amountOfPrevSteps = this.currentStepIndex > extraItems ? extraItems : this.currentStepIndex;
+        this.recalculateItemsByPrevArr(extraItems, amountOfPrevSteps);
     }
     private clearExtraList(): void {
         this._nextSteps = [];

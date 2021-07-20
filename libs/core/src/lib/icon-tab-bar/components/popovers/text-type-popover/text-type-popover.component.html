@@ -1,5 +1,5 @@
 <ng-container *ngIf="isExtraItemsMode">
-    <fd-popover [focusAutoCapture]='true' [focusTrapped]='true' #popover>
+    <fd-popover [focusAutoCapture]='true' [focusTrapped]='true' (isOpenChange)="test()" #popover>
         <fd-popover-control>
             <button class="fd-icon-tab-bar__overflow">
                 <span class="fd-icon-tab-bar__overflow-text">More</span>
@@ -50,6 +50,8 @@
             [attr.aria-level]='level' class='fd-list__item fd-list__item--link fd-icon-tab-bar__list-item'
             [ngClass]="item.cssClasses"
             role='listitem'
+            fd-dnd-item
+            [dndItemData]="{uid: 'hello'}"
             tabindex='-1'>
             <a
                 class='fd-list__link'

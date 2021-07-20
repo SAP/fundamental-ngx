@@ -67,7 +67,8 @@ export abstract class IconTabBarClass implements OnInit {
         });
     }
 
-    selectItem(selectedItem: IconTabBarItem): void {
+    selectItem(selectedItem: IconTabBarItem, event?: Event): void {
+        event?.stopPropagation();
         this.selectedItemKey = selectedItem.uniqueKey;
         selectedItem.badge = false;
         this.selected.emit(selectedItem)
@@ -101,8 +102,7 @@ export abstract class IconTabBarClass implements OnInit {
         this.selectItem(selectedItem);
     }
 
-    onChangeSize(data: {amount: number, event: ChangedOverflowItemsEvent}): void {
-        const extraItems = data.amount;
+    onChangeSize(extraItems: number): void {
         this.lastVisibleTabIndex = this.tabs.length - 1 - extraItems;
         this.tabs.forEach(item => {
             item.hidden = false;
