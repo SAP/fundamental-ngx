@@ -1,7 +1,5 @@
 import { FixedCardLayoutPo } from '../pages/fixed-card-layout.po';
 import {
-    browserIsIE,
-    browserIsIEorSafari,
     click,
     elementDisplayed,
     getElementArrayLength,
@@ -53,12 +51,6 @@ describe('Fixed card layout test suite', function() {
         });
 
         it('should drag a card from the header', () => {
-            // skip Safari for now due to issue where mouse position resets to 0,0
-            // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
-            if (browserIsIEorSafari()) {
-                console.log('Skip for Safari and IE');
-                return;
-            }
             const originalFirstCardText = getText(cardDivArr);
 
             scrollIntoView(cardHeaderArr);
@@ -68,11 +60,6 @@ describe('Fixed card layout test suite', function() {
         });
 
         it('should drag a card from the content area', () => {
-            // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
-            if (browserIsIE()) {
-                console.log('Skip IE because of #3882');
-                return;
-            }
             const originalFirstCardText = getText(cardDivArr);
 
             scrollIntoView(cardDivArr);
@@ -82,11 +69,6 @@ describe('Fixed card layout test suite', function() {
         });
 
         it('should check drag and drop cards swap locations', () => {
-            // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
-            if (browserIsIE()) {
-                console.log('skip IE because of #3882');
-                return;
-            }
             const originalFirstCardText = getText(cardDivArr);
             const originalSwapCardText = getText(cardDivArr, 4);
 
@@ -99,11 +81,6 @@ describe('Fixed card layout test suite', function() {
         });
 
         it('should check placeholder exists on drag', () => {
-            // skip IE due to https://github.com/SAP/fundamental-ngx/issues/3882
-            if (browserIsIE()) {
-                console.log('Skip for IE because of #3882');
-                return;
-            }
             scrollIntoView(cardDivArr);
             const clickElement = cardContentArr;
             const locationElement = cardDivArr;
@@ -132,8 +109,7 @@ describe('Fixed card layout test suite', function() {
             expect(elementDisplayed(placeholderCard)).toBe(true);
         });
 
-        // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/3910
-        xit('should check columns are reactive', () => {
+        it('should check columns are reactive', () => {
             const originalCardColumnsCount = getElementArrayLength(cardColumnArr);
 
             click(navigationMenuBtn);
@@ -142,8 +118,7 @@ describe('Fixed card layout test suite', function() {
             expect(originalCardColumnsCount).not.toEqual(newCardColumnsCount);
         });
 
-        // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/3910
-        xit('should check cards are reactive to columns', () => {
+        it('should check cards are reactive to columns', () => {
             const originalLastCardText = getText(cardDivArr, 8);
 
             click(navigationMenuBtn, 0);
