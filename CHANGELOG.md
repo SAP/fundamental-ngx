@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.129](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.128...v0.31.0-rc.129) (2021-07-20)
+
+
+### Bug Fixes
+
+* **core,platform:** feedinput component style cleanup ([#6015](https://github.com/SAP/fundamental-ngx/issues/6015)) ([aced3e2](https://github.com/SAP/fundamental-ngx/commit/aced3e2861dac79eaf6d74a160618ce159b588cc))
+
 ## [0.31.0-rc.128](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.127...v0.31.0-rc.128) (2021-07-20)
 
 ## [0.31.0-rc.127](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.126...v0.31.0-rc.127) (2021-07-20)
