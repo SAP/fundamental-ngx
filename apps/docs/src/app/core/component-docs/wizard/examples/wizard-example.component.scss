@@ -59,3 +59,8 @@
         }
     }
 }
+
+/** this is only necessary due to the overlay z-index used in the wizard examples */
+.fd-dialog {
+    z-index: 1002 !important;
+}

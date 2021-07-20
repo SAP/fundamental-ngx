@@ -112,7 +112,7 @@
 </div>
 
 <ng-template let-dialog let-dialogConfig="dialogConfig" #confirmationDialog>
-    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog" style="z-index: 1002;">
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
             <button fd-dialog-close-button (click)="dialog.dismiss()"></button>
         </fd-dialog-header>
