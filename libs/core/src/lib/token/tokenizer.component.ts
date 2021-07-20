@@ -22,16 +22,18 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { FormControlComponent } from '@fundamental-ngx/core/form';
-import { TokenComponent } from './token.component';
-import { RtlService } from '@fundamental-ngx/core/utils';
-import { fromEvent, Subject, Subscription } from 'rxjs';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { A, BACKSPACE, DELETE, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
+import { fromEvent, Subject, Subscription } from 'rxjs';
 import { filter, takeUntil, tap } from 'rxjs/operators';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
+import { FormControlComponent } from '@fundamental-ngx/core/form';
+import {
+    ContentDensityService,
+    CssClassBuilder,
+    applyCssClass,
+    RtlService,
+    KeyUtil
+} from '@fundamental-ngx/core/utils';
+import { TokenComponent } from './token.component';
 
 @Component({
     selector: 'fd-tokenizer',
@@ -297,7 +299,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     @HostListener('keydown', ['$event'])
     keyDown(keyboardEvent: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(keyboardEvent, [DELETE, BACKSPACE]) &&
-            !this._isInputFocused() &&
+            (!this._isInputFocused() || this._tokensSelected()) &&
             !this.disableKeyboardDeletion) {
             const selectedElements = this._getActiveTokens();
             const focusedTokenIndex = this._getFocusedTokenIndex();
@@ -340,7 +342,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         let newIndex: number;
         const rtl = this._rtlService && this._rtlService.rtl ? this._rtlService.rtl.getValue() : false;
         if (KeyUtil.isKeyCode(event, SPACE) && !this._isInputFocused()) {
-            const token = this.tokenList.find((element, index) => index === fromIndex);
+            const token = this.tokenList.find((_, index) => index === fromIndex);
             this.tokenList.forEach(shadowedToken => {
                 if (shadowedToken !== token) {
                     shadowedToken.selected = false
@@ -400,6 +402,12 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** @hidden */
     moreClicked(): void {
         this.moreClickedEvent.emit();
+    }
+
+    /** Removes all selected tokens */
+    removeSelectedTokens(): void {
+        const selectedElements = this._getActiveTokens();
+        selectedElements.forEach(element => element.onRemove.emit());
     }
 
     /** @hidden */
@@ -665,6 +673,11 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** @hidden */
     private _isInputFocused(): boolean {
         return document.activeElement === this.input.elementRef().nativeElement;
+    }
+
+    /** @hidden */
+    private _tokensSelected(): boolean {
+        return this.tokenList.some(t => t.selected);
     }
 
     /** @hidden */

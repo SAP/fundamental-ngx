@@ -2,7 +2,7 @@
 <fd-multi-input
     inputId="multiInput"
     [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange']"
-    [placeholder]="'Search here...'"
+    placeholder="Search here..."
     [(ngModel)]="selected"
 ></fd-multi-input>
 
@@ -14,7 +14,7 @@ Selected: [{{ selected.toLocaleString() }}]
 <fd-multi-input
     inputId="disabledMultiInput1"
     [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
-    [placeholder]="'Search here...'"
+    placeholder="Search here..."
     [disabled]="true"
     [(ngModel)]="secondSelected"
 ></fd-multi-input>
@@ -27,9 +27,23 @@ Selected: [{{ secondSelected.toLocaleString() }}]
 <fd-multi-input
     inputId="noAddonMultiInput1"
     [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
-    [placeholder]="'Search here...'"
+    placeholder="Search here..."
     [(ngModel)]="thirdSelected"
     [displayAddonButton]="false"
 ></fd-multi-input>
 
 Selected: [{{ thirdSelected.toLocaleString() }}]
+
+<br /><br />
+
+<label fd-label for="multiInputDisabledAutoComplete">Disable Auto Complete</label>
+<fd-multi-input
+    inputId="multiInputDisabledAutoComplete"
+    [autoComplete]="false"
+    [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange']"
+    placeholder="Search here..."
+    [displayAddonButton]="false"
+    [(ngModel)]="selectedDisabledAutoComplete"
+></fd-multi-input>
+
+Selected: [{{ selectedDisabledAutoComplete.toLocaleString() }}]
