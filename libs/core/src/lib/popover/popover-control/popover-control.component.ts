@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } from '@angular/core';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -15,4 +15,16 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PopoverControlComponent {}
+export class PopoverControlComponent {
+
+    /** @hidden */
+    constructor(public elRef: ElementRef) {}
+
+    /** @hidden */
+    makeTabbable(): void {
+        const elemChild = this.elRef.nativeElement.children[0];
+        if (elemChild && elemChild.getAttribute('tabindex') !== '-1') {
+            elemChild.tabIndex = '0';
+        }
+    }
+}

@@ -1,6 +1,5 @@
 import { ElementRef, Injectable, InjectionToken, OnDestroy } from '@angular/core';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
 
 export interface TableScrollable {
     /** Returns observable that emits when a scroll event is fired on the host element. */
@@ -41,16 +40,25 @@ export class TableScrollDispatcherService implements OnDestroy {
         if (this._scrollableSubscriptionsMap.has(scrollable)) {
             return;
         }
+
         this._scrollableSubscriptionsMap.set(
             scrollable,
             new Subscription()
-                .add(scrollable.getScrollStream().subscribe(() => this._scrollSubject.next(scrollable)))
+                .add(
+                    scrollable
+                        .getScrollStream()
+                        .subscribe(() => this._scrollSubject.next(scrollable))
+                )
                 .add(
                     scrollable
                         .getHorizontalScrollStream()
                         .subscribe(() => this._horizontalScrollSubject.next(scrollable))
                 )
-                .add(scrollable.getVerticalScrollStream().subscribe(() => this._verticalScrollSubject.next(scrollable)))
+                .add(
+                    scrollable
+                        .getVerticalScrollStream()
+                        .subscribe(() => this._verticalScrollSubject.next(scrollable))
+                )
         );
     }
 
@@ -58,6 +66,7 @@ export class TableScrollDispatcherService implements OnDestroy {
         if (!this._scrollableSubscriptionsMap.has(scrollable)) {
             return;
         }
+
         this._scrollableSubscriptionsMap.get(scrollable).unsubscribe();
     }
 
@@ -66,21 +75,21 @@ export class TableScrollDispatcherService implements OnDestroy {
         return this._scrollSubject.asObservable();
     }
 
-    /** Horizontal Scroll stream */
+    /** Horizontal scroll stream */
     horizontallyScrolled(): Observable<TableScrollable> {
         return this._horizontalScrollSubject.asObservable();
     }
 
-    /** Vertical Scroll stream */
+    /** Vertical scroll stream */
     verticallyScrolled(): Observable<TableScrollable> {
         return this._verticalScrollSubject.asObservable();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        Array.from(this._scrollableSubscriptionsMap.values()).forEach((subscription) => {
-            subscription.unsubscribe();
-        });
+        Array.from(this._scrollableSubscriptionsMap.values())
+            .forEach((subscription) => subscription.unsubscribe());
+
         this._scrollableSubscriptionsMap.clear();
     }
 }

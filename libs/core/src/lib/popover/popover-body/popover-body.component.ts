@@ -1,7 +1,8 @@
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component, ContentChild,
+    Component,
+    ContentChild,
     ElementRef,
     Renderer2,
     TemplateRef,

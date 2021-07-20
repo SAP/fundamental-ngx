@@ -158,9 +158,9 @@ describe('Verify Textarea component', function() {
             expect(labelAsterisk).toBe('"*"');
         });
 
-        it('should see an error if trying to submit empty mandatory textarea', () => {
+        it('should see an error if trying to click empty mandatory textarea', () => {
             clearValue(detailedTextArea);
-            mouseHoverElement(detailedTextArea);
+            click(detailedTextArea);
             const errorText = getText(detailedTextAreaErrorMessage);
 
             expect(errorText.trim()).toBe('Value is required');

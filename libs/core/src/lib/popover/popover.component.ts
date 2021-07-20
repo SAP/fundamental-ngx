@@ -7,6 +7,7 @@ import {
     ComponentRef,
     ContentChild,
     ElementRef,
+    HostListener,
     Injector,
     Input,
     OnChanges,
@@ -20,17 +21,15 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import {
-    CdkOverlayOrigin,
-    ConnectedPosition,
-} from '@angular/cdk/overlay';
-import { DOWN_ARROW } from '@angular/cdk/keycodes';
+import { CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
+import { DOWN_ARROW, ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/core/utils';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { BasePopoverClass } from './base/base-popover.class';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
 import { PopoverService } from './popover-service/popover.service';
+import { PopoverControlComponent } from './popover-control/popover-control.component';
 import { POPOVER_COMPONENT } from './popover.interface';
 import { PopoverMobileComponent } from './popover-mobile/popover-mobile.component';
 import { PopoverChildContent } from './popover-child-content.interface';
@@ -53,7 +52,7 @@ let cdkPopoverUniqueId = 0;
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [PopoverService],
+    providers: [PopoverService]
 })
 export class PopoverComponent extends BasePopoverClass implements AfterViewInit, AfterContentInit, OnDestroy, OnChanges {
     /** Tooltip for popover */
@@ -91,8 +90,13 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     @ViewChild(CdkOverlayOrigin)
     triggerOrigin: CdkOverlayOrigin;
 
+    /** @hidden */
     @ContentChild(PopoverBodyComponent)
     popoverBody: PopoverBodyComponent;
+
+    /** @hidden */
+    @ContentChild(PopoverControlComponent)
+    popoverControl: PopoverControlComponent;
 
     /** @hidden - template for Dialog body content */
     @ContentChild('popoverBodyContent')
@@ -133,11 +137,14 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
             this._popoverService.initialise(
                 this.trigger || this.triggerOrigin.elementRef,
                 this,
-                this.popoverBody ? {
-                template: this.templateRef,
-                container: this.container,
-                popoverBody: this.popoverBody,
-            } : null);
+                this.popoverBody
+                    ? {
+                          template: this.templateRef,
+                          container: this.container,
+                          popoverBody: this.popoverBody
+                      }
+                    : null
+            );
         }
 
         this._setupView();
@@ -148,6 +155,9 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
         if (this.popoverBody && this.popoverBody.notificationGroup) {
             super.focusTrapped = true;
             super.focusAutoCapture = true;
+        }
+        if (this.popoverControl && this.triggers.includes('click')) {
+            this.popoverControl.makeTabbable();
         }
     }
 
@@ -161,6 +171,21 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
         this._destroyMobileComponent();
         this._destroyEventListeners();
         this._popoverService.onDestroy();
+    }
+
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    onKeyDown(event: KeyboardEvent): void {
+        if (
+            this.popoverControl.elRef.nativeElement.children[0] === document.activeElement &&
+            document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA'
+        ) {
+            if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+                // prevent page scrolling on Space keydown
+                event.preventDefault();
+                this._popoverService.toggle();
+            }
+        }
     }
 
     /** Toggles menu open/close state */
@@ -231,7 +256,7 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
         this._mobileModeComponentRef = this._dynamicComponentService.createDynamicComponent(
             {
                 popoverBodyContentTemplate: this.popoverBodyContentTemplate,
-                popoverFooterContentTemplate: this.popoverFooterContentTemplate,
+                popoverFooterContentTemplate: this.popoverFooterContentTemplate
             } as PopoverChildContent,
             PopoverMobileComponent,
             { container: this._elementRef.nativeElement },
@@ -250,9 +275,7 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
         this._destroyEventListeners();
 
         if (this.trigger && this.mobile) {
-            this._clickEventListener = this._rendered.listen(
-                this.trigger.nativeElement, 'click', () => this.toggle()
-            );
+            this._clickEventListener = this._rendered.listen(this.trigger.nativeElement, 'click', () => this.toggle());
         }
     }
 

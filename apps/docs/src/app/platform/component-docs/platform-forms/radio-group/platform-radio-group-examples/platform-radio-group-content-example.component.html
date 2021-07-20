@@ -53,6 +53,9 @@
                 <fdp-radio-button value="march">March</fdp-radio-button>
                 <fdp-radio-button value="april">April</fdp-radio-button>
             </fdp-radio-group>
+            <fdp-button contentDensity="compact" type="submit" label="Submit"></fdp-button>
+            <fdp-button contentDensity="compact" type="reset" style="margin: 2rem 2rem 0 2rem;" label="Reset"
+                (click)="onReset(myForm)"></fdp-button>
         </fdp-form-field>
 
         <ng-template #i18n let-errors>
@@ -61,9 +64,6 @@
             </ng-container>
         </ng-template>
     </fdp-form-group>
-    <fdp-button contentDensity="compact" type="submit" style="margin-left: 2rem;" label="Submit"></fdp-button>
-    <fdp-button contentDensity="compact" type="reset" style="margin-left: 2rem;" label="Reset"
-        (click)="onReset(myForm)"></fdp-button>
 </form>
 <p style="margin-left: 2rem;">Selected value: {{ form4.controls.radioc4?.value }}</p>
 <br />
