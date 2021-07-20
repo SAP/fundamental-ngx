@@ -7,8 +7,8 @@
     <ng-container *ngIf="loadMore && loadOnScroll">
         <fd-busy-indicator size="l"
             class="fd-busy-indicator-custom fd-list__item--growing" [block]="true" [loading]="_loading" role="alert"
-            [attr.aria-busy]="_loading" [attr.aria-labelledby]='_loading ? "loadingOnScroll" : ""'>
-            <div fd-list fdInfiniteScroll class="fd-list__infinite-scroll" [ngStyle]="{'max-height': maxHeight}"
+            [attr.aria-busy]="_loading" [attr.aria-labelledby]="_loading ? 'loadingOnScroll' : ''">
+            <div fd-list fdInfiniteScroll class="fd-list__infinite-scroll" [style.max-height]="maxHeight"
                 (onScrollAction)="_scrollHandler()" [scrollPercent]="scrollOffsetPercentage">
                 <ng-template *ngIf="_items.length !==0; then thenBlock else elseBlock">
                 </ng-template>
