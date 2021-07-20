@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.134](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.133...v0.31.0-rc.134) (2021-07-20)
+
+
+### Bug Fixes
+
+* **core:** fix empty locale change ([#6040](https://github.com/SAP/fundamental-ngx/issues/6040)) ([ad314d0](https://github.com/SAP/fundamental-ngx/commit/ad314d07ffe25ff2a912090cad881c71ab8c0f64))
+
 ## [0.31.0-rc.133](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.132...v0.31.0-rc.133) (2021-07-20)
 
 
