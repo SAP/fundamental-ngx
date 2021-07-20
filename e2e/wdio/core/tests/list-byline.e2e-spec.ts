@@ -59,7 +59,7 @@ describe('Menu tests', function() {
         listBylinePage.checkRtlSwitch();
     });
 
-    it('should check visual regression for all examples', () => {
+    xit('should check visual regression for all examples', () => {
         listBylinePage.saveExampleBaselineScreenshot();
         expect(listBylinePage.compareWithBaseline()).toBeLessThan(5);
     });

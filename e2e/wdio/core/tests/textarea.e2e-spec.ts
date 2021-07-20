@@ -11,10 +11,10 @@ import {
     getElementPlaceholder,
     mouseHoverElement,
     isElementDisplayed,
-    waitForElDisplayed,
     isElementClickable,
     click,
     sendKeys,
+    waitForPresent,
 } from '../../driver/wdio';
 
 import { sections, states } from '../fixtures/appData/textarea-contents'
@@ -34,11 +34,15 @@ describe('Textarea component test', function () {
     beforeAll(() => {
         textareaPage.open();
     }, 1);
-
-    beforeEach(() => {
+    
+    afterEach(() => {
         refreshPage();
-        waitForElDisplayed(textareaPage.title);
-    }, 2);
+        waitForPresent(textareaPage.title);
+    }, 1);
+
+    it('should check orientation', () => {
+        textareaPage.checkRtlSwitch();
+    });
 
     it('should check setting value in input', () => {
         for (let i = 0; i < sections.length; i++) {
@@ -80,10 +84,6 @@ describe('Textarea component test', function () {
         click(stateExample + textarea, 5);
         sendKeys('test');
         expect(getValue(stateExample + textarea, 5)).toBe('');
-    });
-
-    it('should check orientation', () => {
-        textareaPage.checkRtlSwitch();
     });
 
     it('should check visual regression for all examples', () => {
