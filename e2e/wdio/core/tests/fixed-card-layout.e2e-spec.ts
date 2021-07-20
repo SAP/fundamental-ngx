@@ -109,7 +109,8 @@ describe('Fixed card layout test suite', function() {
             expect(elementDisplayed(placeholderCard)).toBe(true);
         });
 
-        it('should check columns are reactive', () => {
+        // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/3910
+        xit('should check columns are reactive', () => {
             const originalCardColumnsCount = getElementArrayLength(cardColumnArr);
 
             click(navigationMenuBtn);
@@ -118,7 +119,8 @@ describe('Fixed card layout test suite', function() {
             expect(originalCardColumnsCount).not.toEqual(newCardColumnsCount);
         });
 
-        it('should check cards are reactive to columns', () => {
+        // skipped until issue fixed https://github.com/SAP/fundamental-ngx/issues/3910
+        xit('should check cards are reactive to columns', () => {
             const originalLastCardText = getText(cardDivArr, 8);
 
             click(navigationMenuBtn, 0);
