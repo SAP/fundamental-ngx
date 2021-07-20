@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.127](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.126...v0.31.0-rc.127) (2021-07-20)
+
+
+### Bug Fixes
+
+* **platform:** correct forms validation error message ([#5972](https://github.com/SAP/fundamental-ngx/issues/5972)) ([e227560](https://github.com/SAP/fundamental-ngx/commit/e227560b84b3750451b25c8d94f9889e40c3f705))
+
 ## [0.31.0-rc.126](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.125...v0.31.0-rc.126) (2021-07-19)
 
 ## [0.31.0-rc.125](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.124...v0.31.0-rc.125) (2021-07-19)
