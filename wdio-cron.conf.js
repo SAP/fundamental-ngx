@@ -74,6 +74,8 @@ exports.config = {
             './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',
             './e2e/wdio/platform/**/time-picker.e2e-spec.ts',
             './e2e/wdio/platform/**/select.e2e-spec.ts',
+            './e2e/wdio/platform/**/upload-collection.e2e-spec.ts',
+
         ]
     },
     // ============
