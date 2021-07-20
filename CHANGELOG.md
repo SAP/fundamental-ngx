@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.132](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.131...v0.31.0-rc.132) (2021-07-20)
+
+
+### Bug Fixes
+
+* **core:** tabbable popover controls ([#5854](https://github.com/SAP/fundamental-ngx/issues/5854)) ([b1ff832](https://github.com/SAP/fundamental-ngx/commit/b1ff8324fc7b51fdc0da2f78d5cde2138c773eb9))
+
 ## [0.31.0-rc.131](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.130...v0.31.0-rc.131) (2021-07-20)
 
 
