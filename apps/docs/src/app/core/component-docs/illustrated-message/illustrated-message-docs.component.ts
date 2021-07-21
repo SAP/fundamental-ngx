@@ -11,6 +11,13 @@ import * as illustratedMessageDialogTsCode from '!raw-loader!./examples/illustra
 import * as illustratedMessageSpotSrc from '!raw-loader!./examples/illustrated-message-spot-example.component.html';
 import * as illustratedMessageSpotTsCode from '!raw-loader!./examples/illustrated-message-spot-example.component.ts';
 
+import * as illustration from '!raw-loader!../../../../assets/images/sapIllus-Dialog-NoMail.svg';
+import * as illustrationSceneNoMail from '!raw-loader!../../../../assets/images/sapIllus-Scene-NoMail.svg';
+
+import * as illustrationDialogNoMail from '!raw-loader!../../../../assets/images/sapIllus-Dialog-NoMail.svg';
+
+import * as illustrationSpotNoMail from '!raw-loader!../../../../assets/images/sapIllus-Spot-NoMail.svg';
+
 @Component({
     selector: 'app-illustrated-message',
     templateUrl: './illustrated-message-docs.component.html'
@@ -28,6 +35,18 @@ export class IllustratedMessageDocsComponent {
             code: illustratedMessageTsCode,
             fileName: 'illustrated-message-example',
             component: 'IllustratedMessageExampleComponent'
+        },
+        {
+            language: 'svg',
+            code: illustration,
+            fileName: 'sapIllus-Dialog-NoMail',
+            path: 'src/assets/images'
+        },
+        {
+            language: 'svg',
+            code: illustrationSceneNoMail,
+            fileName: 'sapIllus-Scene-NoMail',
+            path: 'src/assets/images'
         }
     ];
 
@@ -42,6 +61,12 @@ export class IllustratedMessageDocsComponent {
             code: illustratedMessageDialogTsCode,
             fileName: 'illustrated-message-dialog-example',
             component: 'IllustratedMessageDialogExampleComponent'
+        },
+        {
+            language: 'svg',
+            code: illustrationDialogNoMail,
+            fileName: 'sapIllus-Dialog-NoMail',
+            path: 'src/assets/images'
         }
     ];
 
@@ -56,6 +81,12 @@ export class IllustratedMessageDocsComponent {
             code: illustratedMessageSpotTsCode,
             fileName: 'illustrated-message-spot-example',
             component: 'IllustratedMessageSpotExampleComponent'
+        },
+        {
+            language: 'svg',
+            code: illustrationSpotNoMail,
+            fileName: 'sapIllus-Spot-NoMail',
+            path: 'src/assets/images'
         }
     ];
 }
