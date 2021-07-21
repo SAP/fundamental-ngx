@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.136](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.135...v0.31.0-rc.136) (2021-07-21)
+
+
+### Bug Fixes
+
+* **core:** check if component been destroyed before ([#6033](https://github.com/SAP/fundamental-ngx/issues/6033)) ([f77759c](https://github.com/SAP/fundamental-ngx/commit/f77759c6e990c43bf2cdc2f569fb50841cb126bd))
+
 ## [0.31.0-rc.135](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.134...v0.31.0-rc.135) (2021-07-21)
 
 ## [0.31.0-rc.134](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.133...v0.31.0-rc.134) (2021-07-20)
