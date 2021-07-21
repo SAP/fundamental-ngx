@@ -48,7 +48,7 @@ import { HintPlacement, LabelLayout } from '../form-options';
 import { FormFieldGroup } from '../form-field-group';
 import { Field, FieldGroup, FieldColumn, isFieldChild, isFieldGroupChild, getField } from '../form-helpers';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from './constants';
-import { filter, map, startWith } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,
@@ -354,7 +354,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     /** @hidden */
     private _listenFormFieldColumnChange(): void {
         this.formGroupChildren.forEach((field: FormFieldComponent) =>
-            field.onColumnChange?.subscribe((_) => {
+            field.onColumnChange?.pipe(takeUntil(this._destroyed)).subscribe((_) => {
                 this._updateFieldByColumn();
                 this._cd.markForCheck();
             })

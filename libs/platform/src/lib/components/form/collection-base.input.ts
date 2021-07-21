@@ -1,12 +1,12 @@
 import { Input, Directive, OnInit } from '@angular/core';
-import { BaseInput } from './base.input';
-import { isSelectItem } from '../../domain/data-model';
-import { isFunction, isJsObject, isString } from '../../utils/lang';
-import { SelectItem } from '../../domain/data-model';
-import { fromEvent } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
-import { InlineLayout } from './../form/form-options';
+import { fromEvent } from 'rxjs';
 
+import { InlineLayout, RESPONSIVE_BREAKPOINTS } from './../form/form-options';
+import { isFunction, isJsObject, isString } from '../../utils/lang';
+import { isSelectItem } from '../../domain/data-model';
+import { SelectItem } from '../../domain/data-model';
+import { BaseInput } from './base.input';
 
 /**
  * Defines specific behavior for Input controls which deals with list of values including:
@@ -68,16 +68,31 @@ export abstract class CollectionBaseInput extends BaseInput implements OnInit {
         this._inlineLayout = layout;
     }
 
+    /** @hidden */
     private _inlineLayout: InlineLayout;
+
+    /** @hidden */
     private _isInline: boolean;
+
+    /** @hidden */
     private _xlIsInline: boolean;
+
+    /** @hidden */
     private _lgIsInline: boolean;
+
+    /** @hidden */
     private _mdIsInline: boolean;
+
+    /** @hidden */
     private _sIsInline: boolean;
+
+    /** @hidden */
     private _isInLineLayoutEnabled = true;
 
+    /** @hidden */
     ngOnInit(): void {
         this._setFieldLayout();
+        super.ngOnInit();
     }
 
     protected lookupValue(item: any): string {
@@ -112,12 +127,13 @@ export abstract class CollectionBaseInput extends BaseInput implements OnInit {
         }
     }
 
+    /** set values of inline for each screen layout */
     protected _setFieldLayout(): void {
         try {
-            this._xlIsInline = this.inlineLayout['XL'];
-            this._lgIsInline = this.inlineLayout['L'];
+            this._sIsInline = this.inlineLayout['S'] || false;
             this._mdIsInline = this.inlineLayout['M'];
-            this._sIsInline = this.inlineLayout['S'];
+            this._lgIsInline = this.inlineLayout['L'];
+            this._xlIsInline = this.inlineLayout['XL'];
             this._updateLayout();
         } catch (error) {
             this._isInLineLayoutEnabled = false;
@@ -135,13 +151,21 @@ export abstract class CollectionBaseInput extends BaseInput implements OnInit {
         const width = window.innerWidth;
 
         // check if value has changed, then only assign new value.
-        if (width > 0 && width < 600 && this.isInline !== this._sIsInline) {
+        if (width > 0 && width < RESPONSIVE_BREAKPOINTS['S'] && this.isInline !== this._sIsInline) {
             this.isInline = this._sIsInline;
-        } else if (width >= 600 && width < 1024 && this.isInline !== this._mdIsInline) {
+        } else if (
+            width >= RESPONSIVE_BREAKPOINTS['S'] &&
+            width < RESPONSIVE_BREAKPOINTS['M'] &&
+            this.isInline !== this._mdIsInline
+        ) {
             this.isInline = this._mdIsInline;
-        } else if (width >= 1024 && width < 1440 && this.isInline !== this._lgIsInline) {
+        } else if (
+            width >= RESPONSIVE_BREAKPOINTS['M'] &&
+            width < RESPONSIVE_BREAKPOINTS['L'] &&
+            this.isInline !== this._lgIsInline
+        ) {
             this.isInline = this._lgIsInline;
-        } else if (width >= 1440 && this.isInline !== this._xlIsInline) {
+        } else if (width >= RESPONSIVE_BREAKPOINTS['L'] && this.isInline !== this._xlIsInline) {
             this.isInline = this._xlIsInline;
         }
     }

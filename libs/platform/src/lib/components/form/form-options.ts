@@ -21,3 +21,9 @@ export interface InlineLayout {
     M: boolean;
     S: boolean;
 }
+
+export enum RESPONSIVE_BREAKPOINTS {
+    S = 600,
+    M = 1024,
+    L = 1440
+}

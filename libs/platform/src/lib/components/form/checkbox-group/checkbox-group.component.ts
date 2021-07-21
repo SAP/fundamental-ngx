@@ -13,8 +13,7 @@ import {
     Optional,
     Self,
     SkipSelf,
-    Host,
-    OnInit
+    Host
 } from '@angular/core';
 import { NgForm, NgControl } from '@angular/forms';
 
@@ -38,7 +37,7 @@ import { FormField } from '../form-field';
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => CheckboxGroupComponent), multi: true }]
 })
-export class CheckboxGroupComponent extends CollectionBaseInput implements OnInit {
+export class CheckboxGroupComponent extends CollectionBaseInput {
     /**
      * value for selected checkboxes.
      */
@@ -87,10 +86,6 @@ export class CheckboxGroupComponent extends CollectionBaseInput implements OnIni
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
         super(cd, ngControl, ngForm, formField, formControl);
-    }
-
-    ngOnInit(): void {
-        super.ngOnInit();
     }
 
     writeValue(value: any): void {

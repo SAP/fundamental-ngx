@@ -24,7 +24,7 @@ import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 
 import { FormFieldControl } from '../../form-control';
 import { FormField } from '../../form-field';
-import { Column, LabelLayout, HintPlacement, ColumnLayout } from '../../form-options';
+import { Column, ColumnLayout, HintPlacement, LabelLayout, RESPONSIVE_BREAKPOINTS } from '../../form-options';
 import { FormGroupContainer } from '../../form-group';
 import { FormFieldGroup } from '../../form-field-group';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
@@ -397,10 +397,10 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     /** @hidden */
     private _setColumnNumber(): void {
         try {
-            this._xlColumnNumber = this.columnLayout['XL'];
-            this._lgColumnNumber = this.columnLayout['L'];
-            this._mdColumnNumber = this.columnLayout['M'];
             this._sColumnNumber = this.columnLayout['S'] || 1;
+            this._mdColumnNumber = this.columnLayout['M'] || this._sColumnNumber;
+            this._lgColumnNumber = this.columnLayout['L'] || this._mdColumnNumber;
+            this._xlColumnNumber = this.columnLayout['XL'] || this._lgColumnNumber;
         } catch (error) {
             this._isColumnLayoutEnabled = false;
         }
@@ -425,16 +425,24 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
         if (this._isColumnLayoutEnabled) {
             // check if value has changed, then only assign new value.
-            if (width > 0 && width < 600 && this._sColumnNumber !== this.column) {
+            if (width > 0 && width < RESPONSIVE_BREAKPOINTS['S'] && this._sColumnNumber !== this.column) {
                 this.column = this._sColumnNumber;
                 columnUpdated = true;
-            } else if (width >= 600 && width < 1024 && this._mdColumnNumber !== this.column) {
+            } else if (
+                width >= RESPONSIVE_BREAKPOINTS['S'] &&
+                width < RESPONSIVE_BREAKPOINTS['M'] &&
+                this._mdColumnNumber !== this.column
+            ) {
                 this.column = this._mdColumnNumber;
                 columnUpdated = true;
-            } else if (width >= 1024 && width < 1440 && this._lgColumnNumber !== this.column) {
+            } else if (
+                width >= RESPONSIVE_BREAKPOINTS['M'] &&
+                width < RESPONSIVE_BREAKPOINTS['L'] &&
+                this._lgColumnNumber !== this.column
+            ) {
                 this.column = this._lgColumnNumber;
                 columnUpdated = true;
-            } else if (width >= 1440 && this._xlColumnNumber !== this.column) {
+            } else if (width >= RESPONSIVE_BREAKPOINTS['L'] && this._xlColumnNumber !== this.column) {
                 this.column = this._xlColumnNumber;
                 columnUpdated = true;
             }
