@@ -3,10 +3,9 @@ name: scheduled-daily-build
 on:
   schedule:
     # Cron time is UTC, 22:00UTC will be 01:00 EEST
-    - cron:  '15 11 * * *'
+    - cron: '38 11 * * *'
     branches:
       - main
-
 
 env:
   NX_BRANCH: ${{ github.event.number }}
@@ -88,4 +87,4 @@ jobs:
         env:
           CAP_SLUG: ${{ matrix.browser }}
         if: ${{ needs.firebase_preview.outputs.output_url }}
-        run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.suite }} --baseUrl=${{ needs.firebase_preview.outputs.output_url }}/fundamental-ngx
+        run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio-cron.conf.js --${{ matrix.suite }} --baseUrl=${{ needs.firebase_preview.outputs.output_url }}/fundamental-ngx
