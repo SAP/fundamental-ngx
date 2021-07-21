@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 import { SelectItem } from '../../../../domain/data-model';
 import { InputType } from '../../input/input.component';
-import { HintPlacement, LabelLayout } from '../../form-options';
+import { ColumnLayout, HintPlacement, InlineLayout, LabelLayout } from '../../form-options';
 import { ContentDensity } from '../../form-control';
 
 export type DynamicFormItemChoices = number | string | SelectItem;
@@ -133,6 +133,12 @@ export interface DynamicFormItemGuiOptions {
      * Index of column if form has multi-column layout
      */
     column?: number;
+
+    /** column arrangement for form-field based on screen size */
+    columnLayout?: ColumnLayout;
+
+    /** inline layout for list based form item */
+    inlineLayout?: InlineLayout;
 
     /**
      * @description

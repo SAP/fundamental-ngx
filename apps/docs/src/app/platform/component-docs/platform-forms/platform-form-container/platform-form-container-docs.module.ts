@@ -13,7 +13,9 @@ import {
     PlatformCheckboxGroupModule,
     PlatformStepInputModule,
     PlatformInputGroupModule,
-    PlatformSwitchModule
+    PlatformSwitchModule,
+    PlatformComboboxModule,
+    PlatformSelectModule
 } from '@fundamental-ngx/platform';
 import { PlatformFormContainerDocsComponent } from './platform-form-container-docs.component';
 import { PlatformFormContainerRecommendedExampleComponent } from './platform-form-container-examples/platform-form-container-recommended-example.component';
@@ -49,6 +51,8 @@ const routes: Routes = [
         PlatformStepInputModule,
         PlatformInputGroupModule,
         PlatformSwitchModule,
+        PlatformComboboxModule,
+        PlatformSelectModule,
         FdpFormGroupModule
     ],
     exports: [RouterModule],

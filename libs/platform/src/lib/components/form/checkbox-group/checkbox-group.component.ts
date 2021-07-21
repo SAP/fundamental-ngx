@@ -13,7 +13,8 @@ import {
     Optional,
     Self,
     SkipSelf,
-    Host
+    Host,
+    NgZone
 } from '@angular/core';
 import { NgForm, NgControl } from '@angular/forms';
 
@@ -83,9 +84,10 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        _ngZone: NgZone
     ) {
-        super(cd, ngControl, ngForm, formField, formControl);
+        super(cd, ngControl, ngForm, formField, formControl, _ngZone);
     }
 
     writeValue(value: any): void {

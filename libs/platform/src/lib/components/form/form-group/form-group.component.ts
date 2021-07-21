@@ -37,18 +37,18 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
-import { KeyValue } from '@angular/common';
-import { Subject } from 'rxjs';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { KeyValue } from '@angular/common';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
-import { FormField } from '../form-field';
+import { Field, FieldGroup, FieldColumn, isFieldChild, isFieldGroupChild, getField } from '../form-helpers';
 import { FormFieldComponent } from './form-field/form-field.component';
 import { FormGroupContainer } from '../form-group';
+import { FormField } from '../form-field';
 import { HintPlacement, LabelLayout } from '../form-options';
 import { FormFieldGroup } from '../form-field-group';
-import { Field, FieldGroup, FieldColumn, isFieldChild, isFieldGroupChild, getField } from '../form-helpers';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from './constants';
-import { takeUntil } from 'rxjs/operators';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,

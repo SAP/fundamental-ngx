@@ -15,6 +15,7 @@ import {
 import { PlatformFormGeneratorObservableExampleComponent } from './platform-form-generator-examples/platform-form-generator-observable-example.component';
 import { PlatformFormGeneratorProgramaticSubmitComponent } from './platform-form-generator-examples/platform-form-generator-programatic-submit.component';
 import { PlatformFormGeneratorCustomErrorExampleComponent } from './platform-form-generator-examples/platform-form-generator-custom-error-example.component';
+import { PlatformFormGeneratorFieldLayoutExampleComponent } from './platform-form-generator-examples/platform-form-generator-field-layout-example.component';
 
 const routes: Routes = [
     {
@@ -48,6 +49,7 @@ const routes: Routes = [
         PlatformFormGeneratorObservableExampleComponent,
         PlatformFormGeneratorProgramaticSubmitComponent,
         PlatformFormGeneratorCustomErrorExampleComponent,
+        PlatformFormGeneratorFieldLayoutExampleComponent,
     ]
 })
 export class PlatformFormGeneratorDocsModule {}

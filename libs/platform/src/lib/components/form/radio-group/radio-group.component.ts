@@ -17,7 +17,8 @@ import {
     ViewChildren,
     forwardRef,
     SkipSelf,
-    Host
+    Host,
+    NgZone
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import { FocusKeyManager } from '@angular/cdk/a11y';
@@ -97,9 +98,10 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        _ngZone: NgZone
     ) {
-        super(_changeDetector, ngControl, ngForm, formField, formControl);
+        super(_changeDetector, ngControl, ngForm, formField, formControl, _ngZone);
         this.id = `radio-group-${nextUniqueId++}`;
     }
 

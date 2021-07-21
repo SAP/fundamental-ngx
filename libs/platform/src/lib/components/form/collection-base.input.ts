@@ -1,9 +1,23 @@
-import { Input, Directive, OnInit } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Host,
+    Input,
+    Directive,
+    Optional,
+    Self,
+    SkipSelf,
+    NgZone,
+    OnInit,
+    OnDestroy
+} from '@angular/core';
+import { NgControl, NgForm } from '@angular/forms';
 import { debounceTime, takeUntil } from 'rxjs/operators';
-import { fromEvent } from 'rxjs';
+import { fromEvent, Observable, Subscription } from 'rxjs';
 
 import { InlineLayout, RESPONSIVE_BREAKPOINTS } from './../form/form-options';
 import { isFunction, isJsObject, isString } from '../../utils/lang';
+import { FormFieldControl } from './form-control';
+import { FormField } from './form-field';
 import { isSelectItem } from '../../domain/data-model';
 import { SelectItem } from '../../domain/data-model';
 import { BaseInput } from './base.input';
@@ -18,7 +32,7 @@ import { BaseInput } from './base.input';
  *
  */
 @Directive()
-export abstract class CollectionBaseInput extends BaseInput implements OnInit {
+export abstract class CollectionBaseInput extends BaseInput implements OnDestroy {
     /**
      * list of values, it can be of type SelectItem or String.
      */
@@ -66,6 +80,7 @@ export abstract class CollectionBaseInput extends BaseInput implements OnInit {
 
     set inlineLayout(layout: InlineLayout) {
         this._inlineLayout = layout;
+        this._setFieldLayout();
     }
 
     /** @hidden */
@@ -90,9 +105,32 @@ export abstract class CollectionBaseInput extends BaseInput implements OnInit {
     private _isInLineLayoutEnabled = true;
 
     /** @hidden */
-    ngOnInit(): void {
-        this._setFieldLayout();
-        super.ngOnInit();
+    private _resizeObservable$: Observable<Event>;
+
+    /** @hidden */
+    private _resizeSubscription$: Subscription;
+
+    constructor(
+        cd: ChangeDetectorRef,
+        @Optional() @Self() readonly ngControl: NgControl,
+        @Optional() @SkipSelf() readonly ngForm: NgForm,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        private _ngZone?: NgZone
+    ) {
+        /**
+         * We do not use Injector.get() approach here because there is a bug
+         * with this signature https://github.com/angular/angular/issues/31776
+         * where "get()" method doesn't take into account "flag" option"
+         *
+         */
+        super(cd, ngControl, ngForm, formField, formControl);
+    }
+
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._resizeSubscription$?.unsubscribe();
+        super.ngOnDestroy();
     }
 
     protected lookupValue(item: any): string {
@@ -130,19 +168,25 @@ export abstract class CollectionBaseInput extends BaseInput implements OnInit {
     /** set values of inline for each screen layout */
     protected _setFieldLayout(): void {
         try {
-            this._sIsInline = this.inlineLayout['S'] || false;
-            this._mdIsInline = this.inlineLayout['M'];
-            this._lgIsInline = this.inlineLayout['L'];
-            this._xlIsInline = this.inlineLayout['XL'];
+            this._sIsInline = !!this.inlineLayout['S'];
+            this._mdIsInline = !!this.inlineLayout['M'];
+            this._lgIsInline = !!this.inlineLayout['L'];
+            this._xlIsInline = !!this.inlineLayout['XL'];
             this._updateLayout();
         } catch (error) {
             this._isInLineLayoutEnabled = false;
         }
 
         if (this._isInLineLayoutEnabled) {
-            fromEvent(window, 'resize')
-                .pipe(debounceTime(50), takeUntil(this._destroyed))
-                .subscribe(() => this._updateLayout());
+            this._resizeObservable$ = fromEvent(window, 'resize');
+            // Unsubscribe previous subcription
+            this._resizeSubscription$?.unsubscribe();
+
+            this._ngZone.runOutsideAngular(() => {
+                this._resizeSubscription$ = this._resizeObservable$
+                    ?.pipe(debounceTime(50))
+                    .subscribe(() => this._updateLayout());
+            });
         }
     }
 

@@ -15,16 +15,17 @@ import {
     Host,
     SkipSelf,
     Provider,
-    forwardRef
+    forwardRef,
+    NgZone
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
-import { fromEvent, Subject } from 'rxjs';
+import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 
+import { Column, ColumnLayout, HintPlacement, LabelLayout, RESPONSIVE_BREAKPOINTS } from '../../form-options';
 import { FormFieldControl } from '../../form-control';
 import { FormField } from '../../form-field';
-import { Column, ColumnLayout, HintPlacement, LabelLayout, RESPONSIVE_BREAKPOINTS } from '../../form-options';
 import { FormGroupContainer } from '../../form-group';
 import { FormFieldGroup } from '../../form-field-group';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
@@ -87,7 +88,14 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** object for placing field in column in each screen layout */
     @Input()
-    columnLayout: ColumnLayout;
+    get columnLayout(): ColumnLayout {
+        return this._columnLayout;
+    }
+
+    set columnLayout(layout: ColumnLayout) {
+        this._columnLayout = layout;
+        this._setLayout();
+    }
 
     /**
      * This is in most of the cases set from parent container (form-group)
@@ -186,10 +194,20 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     private _sColumnNumber = 1;
 
     /** @hidden */
+    private _columnLayout: ColumnLayout;
+
+    /** @hidden */
+    private _resizeObservable$: Observable<Event>;
+
+    /** @hidden */
+    private _resizeSubscription$: Subscription;
+
+    /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef,
         @Optional() formGroupContainer: FormGroupContainer,
-        @Optional() @SkipSelf() @Host() readonly formFieldGroup: FormFieldGroup
+        @Optional() @SkipSelf() @Host() readonly formFieldGroup: FormFieldGroup,
+        @Optional() private _ngZone: NgZone
     ) {
         // provides capability to make a field disabled. useful in reactive form approach.
         this.formControl = new FormControl({ value: null, disabled: this.disabled });
@@ -213,7 +231,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this._setLayout();
         this._cd.markForCheck();
     }
 
@@ -412,9 +429,15 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         this._updateLayout();
 
         if (this._isColumnLayoutEnabled) {
-            fromEvent(window, 'resize')
-                .pipe(debounceTime(50), takeUntil(this._destroyed))
-                .subscribe(() => this._updateLayout());
+            this._resizeObservable$ = fromEvent(window, 'resize');
+            // Unsubscribe previous subcription
+            this._resizeSubscription$?.unsubscribe();
+
+            this._ngZone.runOutsideAngular(() => {
+                this._resizeSubscription$ = this._resizeObservable$
+                    ?.pipe(debounceTime(50))
+                    .subscribe(() => this._updateLayout());
+            });
         }
     }
 

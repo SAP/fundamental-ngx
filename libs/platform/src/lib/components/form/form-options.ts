@@ -9,17 +9,17 @@ export type Column = 1 | 2 | 3 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export type Status = 'success' | 'error' | 'warning' | 'default' | 'information';
 
 export interface ColumnLayout {
-    XL: number;
-    L: number;
-    M: number;
-    S: number;
+    XL?: number;
+    L?: number;
+    M?: number;
+    S?: number;
 }
 
 export interface InlineLayout {
-    XL: boolean;
-    L: boolean;
-    M: boolean;
-    S: boolean;
+    XL?: boolean;
+    L?: boolean;
+    M?: boolean;
+    S?: boolean;
 }
 
 export enum RESPONSIVE_BREAKPOINTS {
