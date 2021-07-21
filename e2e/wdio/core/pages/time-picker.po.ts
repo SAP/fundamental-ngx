@@ -2,7 +2,7 @@ import { CoreBaseComponentPo } from './core-base-component.po';
 import { click, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class TimePickerPo extends CoreBaseComponentPo {
-    url = '/timePicker';
+    url = '/time-picker';
 
     defaultExample = 'fd-time-picker-example ';
     formattingExample = 'fd-time-picker-format-example ';
