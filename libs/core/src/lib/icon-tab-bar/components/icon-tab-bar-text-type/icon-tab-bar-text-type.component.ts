@@ -1,11 +1,10 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { IconTabBarClass } from '../../icon-tab-bar.class';
-import { cloneDeep } from '../../../utils/functions/clone-deep';
 import { IconTabBarItem, IconTabBarSubItem } from '../../types';
 import { UNIQUE_KEY_SEPARATOR } from '../../constants';
-import { FdDNDEvent } from '@fundamental-ngx/core';
 import { OverflowItemsDirective } from '../../../utils/directives/overflow-items/overflow-items.directive';
-import { ExtraButtonDirective } from '../../directives/extra-button.directive';
+import { ExtraButtonDirective } from '../../directives/extra-button/extra-button.directive';
+import { FdDNDEvent } from '../../dnd/dnd-container.directive';
 
 
 @Component({

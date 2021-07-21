@@ -2,8 +2,10 @@ import { AfterContentInit, ContentChildren, Directive, ElementRef, EventEmitter,
 import { merge, Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 
-import { DndItemDirective, ElementPosition } from '../dnd-item/dnd-item.directive';
-import { ElementChord, FdDropEvent, LinkPosition } from '../dnd-list/dnd-list.directive';
+import { DndItemDirective, ElementPosition } from '../../utils/drag-and-drop/dnd-item/dnd-item.directive';
+import { ElementChord, LinkPosition } from '../../utils/drag-and-drop/dnd-list/dnd-list.directive';
+import { DndService } from './dnd.service';
+import { DndContainerItemDirective } from './dnd-container-item.directive';
 
 
 export interface FdDNDEvent<T> {
@@ -12,7 +14,8 @@ export interface FdDNDEvent<T> {
 }
 
 @Directive({
-  selector: '[fdDndContainer], [fd-dnd-container]'
+  selector: '[fdDndContainer], [fd-dnd-container]',
+  providers: [DndService]
 })
 export class DndContainerDirective<T> implements AfterContentInit, OnDestroy {
   /**
@@ -46,8 +49,8 @@ export class DndContainerDirective<T> implements AfterContentInit, OnDestroy {
   readonly itemDropped = new EventEmitter<FdDNDEvent<T>>();
 
   /** @hidden */
-  @ContentChildren(DndItemDirective)
-  dndItems: QueryList<DndItemDirective>;
+  @ContentChildren(DndContainerItemDirective)
+  dndItems: QueryList<DndContainerItemDirective>;
 
   /** @hidden */
   private _elementsCoordinates: ElementChord[];
@@ -68,10 +71,10 @@ export class DndContainerDirective<T> implements AfterContentInit, OnDestroy {
   private readonly _onDestroy$ = new Subject<void>();
 
   /** @hidden  */
-  private _dndItemReference: DndItemDirective[];
+  private _dndItemReference: DndContainerItemDirective[];
 
   /** @hidden  */
-  private _dndItemReference2: DndItemDirective[] = [];
+  private _dndItemReference2: DndContainerItemDirective[] = [];
 
   /** @hidden */
   private _draggable = true;
@@ -84,10 +87,6 @@ export class DndContainerDirective<T> implements AfterContentInit, OnDestroy {
             startWith(0),
         )
         .subscribe(() => this._refreshQueryList());
-  }
-
-  infoChanges(): void {
-    // this.dndItems.notifyOnChanges();
   }
 
   /** @hidden */
@@ -142,16 +141,13 @@ export class DndContainerDirective<T> implements AfterContentInit, OnDestroy {
   dragStart(index: number): void {
     const draggedItemElement = this._dndItemReference[index].elementRef;
     /** Counting all of the elements's chords */
-    this._elementsCoordinates = this._dndItemReference.map((item: DndItemDirective) =>
+    this._elementsCoordinates = this._dndItemReference.map((item: DndContainerItemDirective) =>
         item.getElementCoordinates(this._isBefore(draggedItemElement, item.elementRef), this.gridMode)
     );
   }
 
   /** Method called, when element is released */
   dragEnd(draggedItemIndex: number, item?: any): void {
-    console.log(draggedItemIndex, item);
-    this._dndItemReference2;
-    debugger;
     const items = this.items.slice();
     const replacedItemIndex = this._closestItemIndex;
     const draggedItem = items[draggedItemIndex];
@@ -220,7 +216,7 @@ export class DndContainerDirective<T> implements AfterContentInit, OnDestroy {
     this._refresh$.next();
 
     this._dndItemReference = this.dndItems.toArray();
-debugger;
+// debugger;
     this._changeDraggableState(this._draggable);
 
     this.dndItems.forEach((item, index) => {
@@ -263,11 +259,11 @@ debugger;
     }
   }
 
-  addDnDItem(item: DndItemDirective): void {
+  addDnDItem(item: DndContainerItemDirective): void {
     this._dndItemReference2.push(item);
   }
 
-  removeDnDItem(item: DndItemDirective): void {
+  removeDnDItem(item: DndContainerItemDirective): void {
     this._dndItemReference2 = this._dndItemReference2.filter(dir => dir === item);
   }
 }

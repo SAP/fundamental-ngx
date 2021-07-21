@@ -3,7 +3,7 @@ import { IconTabBarClass } from '../../icon-tab-bar.class';
 import { IconTabBarItem } from '../../types';
 import { cloneDeep } from '../../../utils/functions/clone-deep';
 import { ChangedOverflowItemsEvent, OverflowItemsDirective } from '../../../utils/directives/overflow-items/overflow-items.directive';
-import { ExtraButtonDirective } from '../../directives/extra-button.directive';
+import { ExtraButtonDirective } from '../../directives/extra-button/extra-button.directive';
 
 @Component({
     selector: 'fd-icon-tab-bar-process-type',

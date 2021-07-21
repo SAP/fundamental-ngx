@@ -2,7 +2,6 @@ import { AfterContentInit, Directive, ElementRef, EventEmitter, Input, OnDestroy
 import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
 import { ElementChord, LinkPosition } from '../dnd-list/dnd-list.directive';
 import { Subscription } from 'rxjs';
-import { DndContainerDirective } from '../dnd-container/dnd-container.directive';
 
 export interface ElementPosition {
     x: number;
@@ -22,9 +21,6 @@ export interface ElementPosition {
 export class DndItemDirective implements AfterContentInit, OnDestroy {
     @Input()
     containerSelector?: string;
-
-    @Input()
-    dndItemData: { uid: string };
 
     /** Event thrown when the element is moved by 1px */
     @Output()
@@ -80,11 +76,7 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     private _replaceIndicator: HTMLElement;
 
     /** @hidden */
-    constructor(
-        public elementRef: ElementRef,
-        private _dragDrop: DragDrop,
-        private dnd: DndContainerDirective<any>,
-    ) {}
+    constructor(public elementRef: ElementRef, private _dragDrop: DragDrop) {}
 
     /** @hidden */
     getElementCoordinates(isBefore: boolean, gridMode: boolean): ElementChord {
@@ -107,12 +99,10 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     /** @hidden */
     ngAfterContentInit(): void {
         this._setCDKDrag();
-        this.dnd.addDnDItem(this);
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this.dnd.removeDnDItem(this);
         this._subscriptions.unsubscribe();
     }
 
@@ -269,8 +259,6 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     /** @hidden */
     private _setCDKDrag(): void {
         this._dragRef = this._dragDrop.createDrag(this.elementRef);
-        this._dragRef.wipre() =
-        debugger;
         this._dragRef.disabled = !this._draggable;
         this._subscriptions.add(
             this._dragRef.moved.subscribe(event => this.onCdkMove(event.pointerPosition))

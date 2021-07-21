@@ -13,7 +13,7 @@
     <li *ngFor='let item of tabs'
         [ngClass]='item.cssClasses'
         data-overflowItem
-        fd-dnd-item
+        fd-dnd-container-item
         [dndItemData]="item"
         class='fd-icon-tab-bar__item'
         [attr.aria-hidden]='item.hidden'
