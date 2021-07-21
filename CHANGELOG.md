@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.138](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.137...v0.31.0-rc.138) (2021-07-21)
+
+
+### Bug Fixes
+
+* **core,platform:** fix a11y issues for slider ([#5683](https://github.com/SAP/fundamental-ngx/issues/5683)) ([486f327](https://github.com/SAP/fundamental-ngx/commit/486f327615c5586c52742b9ccbf3902a8d715a05))
+
 ## [0.31.0-rc.137](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.136...v0.31.0-rc.137) (2021-07-21)
 
 
