@@ -101,8 +101,9 @@ describe('slider test suite', function() {
             const startMinValue = startValuesArr[0];
             const startMaxValue = startValuesArr[1];
 
-            clickAndMoveElement(rangeExamples + sliderHandles, -50, 0);
-            clickAndMoveElement(rangeExamples + sliderHandles, 50, 0, 1);
+            clickAndMoveElement(rangeExamples + sliderHandles, -75, 0);
+            scrollIntoView(rangeExamples);
+            clickAndMoveElement(rangeExamples + sliderHandles, 75, 0, 1);
             const endValuesArr = getText(rangeExamples + valueLabels).split('\n');
             const endMinValue = endValuesArr[0];
             const endMaxValue = endValuesArr[1];
