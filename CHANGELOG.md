@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.137](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.136...v0.31.0-rc.137) (2021-07-21)
+
+
+### Bug Fixes
+
+* **platform:** remove anchor from list item for multi-input value help ([#6006](https://github.com/SAP/fundamental-ngx/issues/6006)) ([3de8d52](https://github.com/SAP/fundamental-ngx/commit/3de8d526afb1cc9da0d7663f066aac5c434603d1))
+
 ## [0.31.0-rc.136](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.135...v0.31.0-rc.136) (2021-07-21)
 
 
