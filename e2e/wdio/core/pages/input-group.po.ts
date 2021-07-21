@@ -2,7 +2,7 @@ import { CoreBaseComponentPo } from './core-base-component.po';
 import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class InputGroupPo extends CoreBaseComponentPo {
-    url = '/inputGroup';
+    url = '/input-group';
 
     inputFields = '.fd-input-group__input';
     inputGroupSearchText = 'fd-input-group~small';

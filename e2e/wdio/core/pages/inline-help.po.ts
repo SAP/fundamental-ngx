@@ -2,7 +2,7 @@ import { CoreBaseComponentPo } from './core-base-component.po';
 import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class InlineHelpPo extends CoreBaseComponentPo {
-    private url = '/inlineHelp';
+    private url = '/inline-help';
     root = '#page-content';
     defaultInlineHelp = 'fd-inline-help-example span';
     inlineHelpIcons = 'fd-inline-help-example fd-icon';

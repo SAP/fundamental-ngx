@@ -1,4 +1,4 @@
-<fd-docs-section-title id="calendar-standard" componentName="calendar"> Standard Calendar </fd-docs-section-title>
+<fd-docs-section-title id="standard" componentName="calendar"> Standard Calendar </fd-docs-section-title>
 <description>
     This example also features <strong>blocked</strong> and <strong>disabled</strong> days. <br /><br />
     You can use two-way data binding or simply ngModel to select a date or range of dates on a calendar. Calendars
@@ -18,11 +18,11 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="calendar-mobile" componentName="calendar"> Mobile Calendar </fd-docs-section-title>
+<fd-docs-section-title id="mobile" componentName="calendar"> Mobile Calendar </fd-docs-section-title>
 <description>
     Calendar component has a dedicated mode for mobile devices. When used in mobile mode, the calendar should be wrapped
     inside a dialog component. Examples of various dialog usages can be found
-    <a fd-link [routerLink]="'/core/dialog'">here</a>. The mobile calendar can be used in landscape or portrait mode.
+    <a fd-link routerLink="/core/dialog">here</a>. The mobile calendar can be used in landscape or portrait mode.
 </description>
 <component-example>
     <fd-calendar-mobile-example></fd-calendar-mobile-example>
@@ -31,7 +31,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="calendar-options" componentName="calendar"> Calendar Options </fd-docs-section-title>
+<fd-docs-section-title id="options" componentName="calendar"> Calendar Options </fd-docs-section-title>
 <description>
     Calendar has an extensive set of customization options, such as displaying the week number or applying compact mode
     for desktop devices. By default the calendar will look to the <code>ContentDensityService</code> for compact mode
@@ -45,7 +45,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="calendar-range-hover" componentName="calendar">
+<fd-docs-section-title id="range-hover" componentName="calendar">
     Mark Range Days on Hover
 </fd-docs-section-title>
 <description>
@@ -59,7 +59,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="calendar-special" componentName="calendar">
+<fd-docs-section-title id="special" componentName="calendar">
     Calendar with Special Days
 </fd-docs-section-title>
 <description>
@@ -75,7 +75,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="calendar-grid" componentName="calendar"> Calendar Years Grid </fd-docs-section-title>
+<fd-docs-section-title id="grid" componentName="calendar"> Calendar Years Grid </fd-docs-section-title>
 <description>
     Year Grid and Aggregated Year Grid can be customized by passing <code>[yearGrid]</code> and
     <code>[aggregatedYearGrid]</code>
@@ -88,7 +88,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="calendar-range" componentName="calendar"> Range Selection Calendar </fd-docs-section-title>
+<fd-docs-section-title id="range" componentName="calendar"> Range Selection Calendar </fd-docs-section-title>
 <description>
     Allows the selection of a range of dates. Only the first and last days of the range are passed back.
     <br /><br />
@@ -103,7 +103,7 @@
 <code-example [exampleFiles]="calendarRangeSource"></code-example>
 
 <separator></separator>
-<fd-docs-section-title id="calendar-prog-dateChange" componentName="calendar">
+<fd-docs-section-title id="programmatic-date-change" componentName="calendar">
     Programmatic Date Change
 </fd-docs-section-title>
 <description>
@@ -117,7 +117,7 @@
 <code-example [exampleFiles]="calendarProgrammaticallySource"></code-example>
 
 <separator></separator>
-<fd-docs-section-title id="calendar-mondayStart" componentName="calendar">
+<fd-docs-section-title id="monday-start" componentName="calendar">
     Monday Start Calendar
 </fd-docs-section-title>
 <description>
@@ -131,7 +131,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="calendar-internationalization" componentName="calendar">
+<fd-docs-section-title id="internationalization" componentName="calendar">
     Internationalization
 </fd-docs-section-title>
 <description>
@@ -148,7 +148,7 @@
 
 <!-- Moment i18n example is commented here cause there is no DatetimeAdapter<Moment> yet -->
 <!-- <fd-docs-section-title
-    id="calendar-internationalization-momentJs"
+    id="internationalization-momentJs"
     componentName="calendar"
 >
     Internationalization With Moment.js
@@ -166,7 +166,7 @@
 
 <separator></separator> -->
 
-<fd-docs-section-title id="calendar-reactiveForm" componentName="calendar">
+<fd-docs-section-title id="reactiveForm" componentName="calendar">
     Calendar in Reactive Form
 </fd-docs-section-title>
 <description>The Calendar component may also be used within Angular Reactive Forms.</description>
