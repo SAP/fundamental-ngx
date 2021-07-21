@@ -1,8 +1,10 @@
 import { AfterContentInit, Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ElementChord, LinkPosition } from '../../utils/drag-and-drop/dnd-list/dnd-list.directive';
-import { DragRef } from '../CDK-12-dnd/drag-ref';
+// import { DragRef } from '../CDK-12-dnd/drag-ref';
 import { DndService } from './dnd.service';
+import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
+import { DndContainerDirective } from './dnd-container.directive';
 
 interface ElementPosition {
   x: number;
@@ -55,7 +57,7 @@ export class DndContainerItemDirective implements AfterContentInit, OnDestroy {
   /** @hidden
    * Drag reference, object created from DND CDK Service
    */
-  private _dragRef: DragRef;
+   _dragRef: DragRef;
 
   /** @hidden */
   private _draggable = true;
@@ -75,7 +77,8 @@ export class DndContainerItemDirective implements AfterContentInit, OnDestroy {
   /** @hidden */
   constructor(
       public elementRef: ElementRef,
-      private _dragDrop: DndService,
+      private _dragDrop: DragDrop,
+      private _dndContainer: DndContainerDirective<any>,
       ) {}
 
   /** @hidden */
@@ -98,11 +101,13 @@ export class DndContainerItemDirective implements AfterContentInit, OnDestroy {
 
   /** @hidden */
   ngAfterContentInit(): void {
+    this._dndContainer.addDnDItem(this);
     this._setCDKDrag();
   }
 
   /** @hidden */
   ngOnDestroy(): void {
+    this._dndContainer.removeDnDItem(this);
     this._subscriptions.unsubscribe();
   }
 
@@ -258,6 +263,7 @@ export class DndContainerItemDirective implements AfterContentInit, OnDestroy {
 
   /** @hidden */
   private _setCDKDrag(): void {
+    // this._dragRef = this._dragDrop.createDrag(this.elementRef.nativeElement);
     this._dragRef = this._dragDrop.createDrag(this.elementRef.nativeElement);
     this._dragRef.disabled = !this._draggable;
     this._subscriptions.add(

@@ -1,7 +1,6 @@
 import { Observable, Subject } from 'rxjs';
 import { Directive, NgZone } from '@angular/core';
 import { isFakeMousedownFromScreenReader, isFakeTouchstartFromScreenReader } from '@angular/cdk/a11y';
-import { Point } from '../CDK-12-dnd/drag-ref';
 
 /**
  * Time in milliseconds for which to ignore mouse events, after
@@ -17,6 +16,32 @@ export class DndRef {
     onStartHandler = this._onStart.bind(this);
     onMoveHandler = this._onMove.bind(this);
     onEndHandler = this._onEnd.bind(this);
+    /**
+     * Amount of milliseconds to wait after the user has put their
+     * pointer down before starting to drag the element.
+     */
+    private _start$$: Subject<any> = new Subject<any>();
+    private _move$$: Subject<any> = new Subject<any>();
+    private _end$$: Subject<any> = new Subject<any>();
+    private _isDragging = false;
+    /**
+     * Time at which the last touch event occurred. Used to avoid firing the same
+     * events multiple times on touch devices where the browser will fire a fake
+     * mouse event for each touch event, after a certain time.
+     */
+    private _lastTouchEventTime: number;
+    /** Time at which the last dragging sequence was started. */
+    private _dragStartTime: number;
+    /** Time at which the last dragging sequence was started. */
+    private _isTouchEvent = false;
+
+    constructor(
+        private _el: HTMLElement,
+        private _document: Document,
+        private _ngZone: NgZone
+    ) {
+        this._init();
+    }
 
     get start$(): Observable<any> {
         return this._start$$.asObservable();
@@ -28,31 +53,6 @@ export class DndRef {
 
     get end$(): Observable<any> {
         return this._end$$.asObservable();
-    }
-    /**
-     * Amount of milliseconds to wait after the user has put their
-     * pointer down before starting to drag the element.
-     */
-    private _start$$: Subject<any> = new Subject<any>();
-    private _move$$: Subject<any> = new Subject<any>();
-    private _end$$: Subject<any> = new Subject<any>();
-
-    private _isDragging = false;
-    /**
-     * Time at which the last touch event occurred. Used to avoid firing the same
-     * events multiple times on touch devices where the browser will fire a fake
-     * mouse event for each touch event, after a certain time.
-     */
-    private _lastTouchEventTime: number;
-
-    /** Time at which the last dragging sequence was started. */
-    private _dragStartTime: number;
-
-    constructor(
-        private _el: HTMLElement,
-        private _ngZone: NgZone
-    ) {
-        this._init();
     }
 
     private _init(): void {
@@ -68,6 +68,7 @@ export class DndRef {
     }
 
     private _onMove(event: MouseEvent | TouchEvent): void {
+
     }
 
     private _onEnd(): void {
@@ -75,6 +76,7 @@ export class DndRef {
 
     private _initializeDragSequence(referenceElement: HTMLElement, event: MouseEvent | TouchEvent): void {
         const isTouchSequence = isTouchEvent(event);
+        this._isTouchEvent = isTouchSequence;
         const isAuxiliaryMouseButton = !isTouchSequence && (event as MouseEvent).button !== 0;
         const isSyntheticEvent = !isTouchSequence && this._lastTouchEventTime &&
             this._lastTouchEventTime + MOUSE_EVENT_IGNORE_TIME > Date.now();
@@ -90,6 +92,27 @@ export class DndRef {
 
         // ToDo: Remove subscription and add new ones
         this._dragStartTime = Date.now();
+        this._removeListeners();
+
+        this._ngZone.runOutsideAngular(() => {
+            const movingEventName = isTouchSequence ? 'touchmove' : 'mousemove';
+            const endEventName = isTouchSequence ? 'touchend' : 'mouseup';
+            this._document.addEventListener(movingEventName, this.onMoveHandler);
+            this._document.addEventListener(endEventName, this.onEndHandler);
+        });
+    }
+
+    private _removeListeners(all = false): void {
+        const movingEventName = this._isTouchEvent ? 'touchmove' : 'mousemove';
+        const endEventName = this._isTouchEvent ? 'touchend' : 'mouseup';
+        this._ngZone.runOutsideAngular(() => {
+            this._document.removeEventListener(movingEventName, this.onMoveHandler);
+            this._document.removeEventListener(endEventName, this.onEndHandler);
+            if (all) {
+                this._document.removeEventListener('mousedown', this.onStartHandler);
+                this._document.removeEventListener('touchstart', this.onStartHandler);
+            }
+        });
     }
 }
 

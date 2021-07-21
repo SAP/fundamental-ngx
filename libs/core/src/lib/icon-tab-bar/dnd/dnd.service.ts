@@ -1,6 +1,7 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Inject, Injectable, NgZone } from '@angular/core';
 import { DndRef } from './dnd.ref';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable()
 export class DndService {
@@ -12,12 +13,13 @@ export class DndService {
   }
 
   constructor(
-      private _ngZone: NgZone
+      private _ngZone: NgZone,
+      @Inject(DOCUMENT) private _document: any,
   ) {}
 
 
   createDrag(element: HTMLElement): DndRef {
-    const dndRef = new DndRef(element, this._ngZone);
+    const dndRef = new DndRef(element, this._document, this._ngZone);
     const items = this._dndItems$$.getValue();
     items.push(dndRef);
     this._dndItems$$.next(items);

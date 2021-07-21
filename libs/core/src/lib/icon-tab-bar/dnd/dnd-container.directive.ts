@@ -6,6 +6,8 @@ import { DndItemDirective, ElementPosition } from '../../utils/drag-and-drop/dnd
 import { ElementChord, LinkPosition } from '../../utils/drag-and-drop/dnd-list/dnd-list.directive';
 import { DndService } from './dnd.service';
 import { DndContainerItemDirective } from './dnd-container-item.directive';
+import { DragDrop, DropListRef } from '@angular/cdk/drag-drop';
+// import { DropListRef } from '../CDK-12-dnd/drop-list-ref';
 
 
 export interface FdDNDEvent<T> {
@@ -15,7 +17,7 @@ export interface FdDNDEvent<T> {
 
 @Directive({
   selector: '[fdDndContainer], [fd-dnd-container]',
-  providers: [DndService]
+  providers: [DragDrop]
 })
 export class DndContainerDirective<T> implements AfterContentInit, OnDestroy {
   /**
@@ -79,8 +81,19 @@ export class DndContainerDirective<T> implements AfterContentInit, OnDestroy {
   /** @hidden */
   private _draggable = true;
 
+  private dndList: DropListRef;
+
+  constructor(
+      public elementRef: ElementRef,
+      private _dragDrop: DragDrop,
+  ) {
+  }
+
   /** @hidden */
   ngAfterContentInit(): void {
+    this.dndList = this._dragDrop.createDropList(this.elementRef.nativeElement);
+    this.dndList.autoScrollDisabled = true;
+    this._updateList();
     this._changeDraggableState(this._draggable);
     this.dndItems.changes
         .pipe(
@@ -224,6 +237,7 @@ export class DndContainerDirective<T> implements AfterContentInit, OnDestroy {
       item.started.pipe(takeUntil(refresh$)).subscribe(() => this.dragStart(index));
       item.released.pipe(takeUntil(refresh$)).subscribe(() => this.dragEnd(index, item.dndItemData));
     });
+    debugger;
   }
 
   /**
@@ -265,6 +279,11 @@ export class DndContainerDirective<T> implements AfterContentInit, OnDestroy {
 
   removeDnDItem(item: DndContainerItemDirective): void {
     this._dndItemReference2 = this._dndItemReference2.filter(dir => dir === item);
+  }
+
+  private _updateList(): void {
+    const dndRef = this._dndItemReference2.map(dndItem => dndItem._dragRef);
+    this.dndList.withItems(dndRef);
   }
 }
 
