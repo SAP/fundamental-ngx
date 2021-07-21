@@ -1,7 +1,12 @@
+name: scheduled-daily-build
+
 on:
   schedule:
     # Cron time is UTC, 22:00UTC will be 01:00 EEST
-    - cron:  '0 22 * * *'
+    - cron:  '15 11 * * *'
+    branches:
+      - main
+
 
 env:
   NX_BRANCH: ${{ github.event.number }}
