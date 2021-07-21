@@ -226,7 +226,7 @@ jobs:
       fail-fast: false
       max-parallel: 6
       matrix:
-        suite: ["suite platformA", "suite platformB", "spec core"]
+        suite: ["spec platform", "spec core"]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
