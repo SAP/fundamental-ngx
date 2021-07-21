@@ -1,10 +1,9 @@
-import { AfterContentInit, Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { ElementChord, LinkPosition } from '../../utils/drag-and-drop/dnd-list/dnd-list.directive';
-// import { DragRef } from '../CDK-12-dnd/drag-ref';
-import { DndService } from './dnd.service';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
 import { DndContainerDirective } from './dnd-container.directive';
+import { Subject } from 'rxjs';
+import { DndItemDirective, ElementChord, LinkPosition } from '@fundamental-ngx/core';
+import { takeUntil } from 'rxjs/operators';
 
 interface ElementPosition {
   x: number;
@@ -14,273 +13,57 @@ interface ElementPosition {
 @Directive({
   selector: '[fdDndContainerItem], [fd-dnd-container-item]'
 })
-export class DndContainerItemDirective implements AfterContentInit, OnDestroy {
-  @Input()
-  containerSelector?: string;
+export class DndContainerItemDirective extends DndItemDirective implements AfterViewInit, OnDestroy {
 
   @Input()
   dndItemData: any
 
-  /** Event thrown when the element is moved by 1px */
-  @Output()
-  readonly moved = new EventEmitter<ElementPosition>();
 
-  /** Event thrown when the element is released */
-  @Output()
-  readonly released = new EventEmitter<void>();
-
-  /** Event thrown when the element is started to be dragged */
-  @Output()
-  readonly started = new EventEmitter<void>();
-
-  /**
-   *  Defines if the item is prevented from being moved by other elements.
-   * So nothing can be placed just before and just after it
-   */
-  @Input()
-  stickInPlace = false;
-
-  /** Defines if element is draggable */
-  @Input()
-  set draggable(draggable: boolean) {
-    this._draggable = draggable;
-    this.changeCDKDragState();
-  }
-
-  /** Class added to element, when it's dragged. */
-  @Input()
-  classWhenElementDragged = 'fd-dnd-on-drag';
-
-  /** Defines if every element in list is draggable */
-  listDraggable = true;
+  /** @hidden */
+  private readonly _onDestroy$ = new Subject<void>();
 
   /** @hidden
    * Drag reference, object created from DND CDK Service
    */
-   _dragRef: DragRef;
-
-  /** @hidden */
-  private _draggable = true;
-
-  /** @hidden */
-  private _subscriptions = new Subscription();
-
-  /** @hidden */
-  private _placeholderElement: HTMLElement;
-
-  /** @hidden */
-  private _lineElement: HTMLElement;
-
-  /** @hidden */
-  private _replaceIndicator: HTMLElement;
+   dragRef: DragRef;
 
   /** @hidden */
   constructor(
       public elementRef: ElementRef,
-      private _dragDrop: DragDrop,
-      private _dndContainer: DndContainerDirective<any>,
-      ) {}
-
-  /** @hidden */
-  getElementCoordinates(isBefore: boolean, gridMode: boolean): ElementChord {
-    /** Takes distance from the beginning of window page */
-    const rect = <DOMRect>this.elementRef.nativeElement.getBoundingClientRect();
-
-    const position: LinkPosition = isBefore ? 'before' : 'after';
-
-    /** Vertically distance is counted by distance from top of the side + half of the element height */
-    return {
-      x: rect.left,
-      position: position,
-      y: rect.top,
-      stickToPosition: this.stickInPlace,
-      width: rect.width,
-      height: rect.height
-    };
+      protected _dragDrop: DragDrop,
+      private _dndContainerDir: DndContainerDirective<any>,
+      ) {
+    super(elementRef, _dragDrop)
   }
 
   /** @hidden */
-  ngAfterContentInit(): void {
-    this._dndContainer.addDnDItem(this);
+  ngAfterViewInit(): void {
     this._setCDKDrag();
   }
 
   /** @hidden */
   ngOnDestroy(): void {
-    this._dndContainer.removeDnDItem(this);
-    this._subscriptions.unsubscribe();
+    this._dndContainerDir.removeDragItem(this);
+    this._onDestroy$.next();
+    this._onDestroy$.complete();
+    super.ngOnDestroy();
   }
 
   /** @hidden */
-  onCdkMove(position: ElementPosition): void {
-    this.moved.emit(position);
-  }
+  protected _setCDKDrag(): void {
+    this.dragRef = this._dragDrop.createDrag(this.elementRef);
+    this._dndContainerDir.addDragItem(this);
 
-  /** @hidden */
-  onCdkDragReleased(): void {
-    /** Remove class which is added, when element is dragged */
-    this.elementRef.nativeElement.classList.remove(this.classWhenElementDragged);
-    this.released.emit();
+    this.dragRef.moved
+        .pipe(takeUntil(this._onDestroy$))
+        .subscribe(event => this.onCdkMove(event.pointerPosition))
 
-    /** Resets the position of element. */
-    this._dragRef.reset();
+    this.dragRef.released
+        .pipe(takeUntil(this._onDestroy$))
+        .subscribe(() => this.onCdkDragReleased())
 
-    /** Removes placeholder element */
-    this.removePlaceholder();
-  }
-
-  /** @hidden */
-  onCdkDragStart(): void {
-    /** Adds class */
-    this.elementRef.nativeElement.classList.add(this.classWhenElementDragged);
-    if (!this._placeholderElement) {
-      this.createPlaceholder();
-    }
-    this.started.emit();
-  }
-
-  /** @hidden */
-  removePlaceholder(): void {
-    if (this._placeholderElement && this._placeholderElement.parentNode) {
-      // IE11 workaround
-      this._placeholderElement.parentNode.removeChild(this._placeholderElement);
-      this._placeholderElement = null;
-    }
-  }
-
-  /** @hidden */
-  removeLine(): void {
-    if (this._lineElement && this._lineElement.parentNode) {
-      // IE11 workaround
-      this._lineElement.parentNode.removeChild(this._lineElement);
-      this._lineElement = null;
-    }
-  }
-
-  /** @hidden */
-  removeReplaceIndicator(): void {
-    if (this._replaceIndicator && this._replaceIndicator.parentNode) {
-      // IE11 workaround
-      this._replaceIndicator.parentNode.removeChild(this._replaceIndicator);
-      this._replaceIndicator = null;
-    }
-  }
-
-  /** @hidden */
-  createReplaceIndicator(): void {
-    this._replaceIndicator = document.createElement('DIV');
-    this._replaceIndicator.classList.add('fd-replace-indicator');
-
-    let container = this.elementRef.nativeElement;
-    if (this.containerSelector) {
-      const newContainer = this.elementRef.nativeElement.querySelector(this.containerSelector);
-      if (newContainer) {
-        container = newContainer;
-      }
-    }
-
-    container.appendChild(this._replaceIndicator);
-  }
-
-  /** @hidden */
-  createLine(position: LinkPosition, gridMode: boolean): void {
-    /** Creating of line element */
-    this._lineElement = document.createElement('div');
-    this._lineElement.classList.add('drop-area__line');
-
-    if (gridMode) {
-      this._lineElement.classList.add('drop-area__line--vertical');
-    } else {
-      this._lineElement.classList.add('drop-area__line--horizontal');
-    }
-    if (position === 'after') {
-      this._lineElement.classList.add('after');
-    }
-    if (position === 'before') {
-      this._lineElement.classList.add('before');
-    }
-
-    /** Putting element to the container */
-    let container = this.elementRef.nativeElement;
-    if (this.containerSelector) {
-      const newContainer = this.elementRef.nativeElement.querySelector(this.containerSelector);
-      if (newContainer) {
-        container = newContainer;
-      }
-    }
-
-    container.appendChild(this._lineElement);
-  }
-
-  /** @hidden */
-  changeCDKDragState(): void {
-    if (this._dragRef) {
-      this._dragRef.disabled = !(this._draggable && this.listDraggable);
-    }
-  }
-
-  /** @hidden */
-  private createPlaceholder(): void {
-    /** Cloning container element */
-    this._placeholderElement = this.elementRef.nativeElement.cloneNode(true);
-
-    this._placeholderElement.classList.add('fd-dnd-placeholder');
-    this._setPlaceholderStyles();
-
-    /** Including element to the container
-     *  IE11 equivalent to `this.element.nativeElement.after(clone);`
-     */
-    this._placeAfter(this.elementRef.nativeElement, this._placeholderElement);
-  }
-
-  /** @hidden */
-  private _setPlaceholderStyles(): void {
-    const offset = this._getOffsetToParent(this.elementRef.nativeElement);
-
-    this._placeholderElement.style.top = offset.y + 'px';
-    this._placeholderElement.style.left = offset.x + 'px';
-    this._placeholderElement.style.position = 'absolute';
-    this._placeholderElement.style.zIndex = '0';
-    this._placeholderElement.style.opacity = '0.3';
-
-    this._placeholderElement.style.width = this.elementRef.nativeElement.offsetWidth + 'px';
-    this._placeholderElement.style.height = this.elementRef.nativeElement.offsetHeight + 'px';
-  }
-
-  /** @hidden */
-  private _getOffsetToParent(element: Element): { x: number, y: number } {
-    const parentElement = element.parentElement;
-
-    const parentTop = parentElement.getBoundingClientRect().top;
-    const parentLeft = parentElement.getBoundingClientRect().left;
-
-    return {
-      x: Math.abs(element.getBoundingClientRect().left - parentLeft),
-      y: Math.abs(element.getBoundingClientRect().top - parentTop)
-    }
-
-  }
-
-  /** @hidden */
-  private _setCDKDrag(): void {
-    // this._dragRef = this._dragDrop.createDrag(this.elementRef.nativeElement);
-    this._dragRef = this._dragDrop.createDrag(this.elementRef.nativeElement);
-    this._dragRef.disabled = !this._draggable;
-    this._subscriptions.add(
-        this._dragRef.moved.subscribe(event => this.onCdkMove(event.pointerPosition))
-    );
-    this._subscriptions.add(
-        this._dragRef.released.subscribe(() => this.onCdkDragReleased())
-    )
-    this._subscriptions.add(
-        this._dragRef.started.subscribe(() => this.onCdkDragStart())
-    );
-  }
-
-  /** IE11 equivalent of Node.after() Method */
-  private _placeAfter(element: Element, cloneNode: Node): void {
-    const docFrag = document.createDocumentFragment();
-    docFrag.appendChild(cloneNode);
-    element.parentNode.insertBefore(docFrag, element.nextSibling)
+    this.dragRef.started
+        .pipe(takeUntil(this._onDestroy$))
+        .subscribe(() => this.onCdkDragStart())
   }
 }

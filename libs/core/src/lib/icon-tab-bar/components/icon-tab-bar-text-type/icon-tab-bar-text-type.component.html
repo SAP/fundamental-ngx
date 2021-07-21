@@ -5,9 +5,8 @@
     itemSelector='[data-overflowItem]'
     [isRtl]="isRtl"
     [offset]='100'
-    [items]="tabs"
     fd-dnd-container
-    (itemDropped)="onDrop($event)"
+    (dropped)="onDrop($event)"
     (changed)='onChangeSize($event)'
 >
     <li *ngFor='let item of tabs'

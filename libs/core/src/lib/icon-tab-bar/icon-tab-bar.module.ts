@@ -12,6 +12,7 @@ import { IconTabBarPopoverComponent } from './components/popovers/icon-tab-bar-p
 import { TextTypePopoverComponent } from './components/popovers/text-type-popover/text-type-popover.component';
 import { DndContainerDirective } from './dnd/dnd-container.directive';
 import { DndContainerItemDirective } from './dnd/dnd-container-item.directive';
+import { DndContainerGroupDirective } from './dnd/dnd-container-group.directive';
 
 
 
@@ -27,6 +28,7 @@ import { DndContainerItemDirective } from './dnd/dnd-container-item.directive';
         TextTypePopoverComponent,
         DndContainerDirective,
         DndContainerItemDirective,
+        DndContainerGroupDirective,
     ],
     imports: [
         CommonModule,

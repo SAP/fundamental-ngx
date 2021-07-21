@@ -76,7 +76,10 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     private _replaceIndicator: HTMLElement;
 
     /** @hidden */
-    constructor(public elementRef: ElementRef, private _dragDrop: DragDrop) {}
+    constructor(
+        public elementRef: ElementRef,
+        protected _dragDrop: DragDrop,
+        ) {}
 
     /** @hidden */
     getElementCoordinates(isBefore: boolean, gridMode: boolean): ElementChord {
@@ -257,7 +260,7 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     }
 
     /** @hidden */
-    private _setCDKDrag(): void {
+    protected _setCDKDrag(): void {
         this._dragRef = this._dragDrop.createDrag(this.elementRef);
         this._dragRef.disabled = !this._draggable;
         this._subscriptions.add(

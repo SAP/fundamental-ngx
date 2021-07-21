@@ -4,7 +4,7 @@ import { IconTabBarItem, IconTabBarSubItem } from '../../types';
 import { UNIQUE_KEY_SEPARATOR } from '../../constants';
 import { OverflowItemsDirective } from '../../../utils/directives/overflow-items/overflow-items.directive';
 import { ExtraButtonDirective } from '../../directives/extra-button/extra-button.directive';
-import { FdDNDEvent } from '../../dnd/dnd-container.directive';
+import { FdDnDEvent } from '../../dnd/dnd-container.directive';
 
 
 @Component({
@@ -42,7 +42,8 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass implements OnIn
         super.selectExtraItem(selectedItem as IconTabBarItem);
     }
 
-    onDrop({leftNewSibling, draggableItem}: FdDNDEvent<IconTabBarItem>): void {
+    onDrop({leftNewSibling, draggableItem}: FdDnDEvent<IconTabBarItem>): void {
+        debugger;
         const leftItemMapArr = leftNewSibling.uniqueKey.split(UNIQUE_KEY_SEPARATOR);
         const dragItemMapArr = draggableItem.uniqueKey.split(UNIQUE_KEY_SEPARATOR);
         const leftArr = this.test(leftNewSibling.uniqueKey);

@@ -36,7 +36,10 @@
             </a>
         </fd-popover-control>
         <fd-popover-body>
-            <ul class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list" role="list">
+            <ul
+                class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list"
+                role="list"
+            >
                 <ng-container [ngTemplateOutletContext]="{level: 1, items: parentTab.subItems}"
                               [ngTemplateOutlet]="subItem"></ng-container>
             </ul>
