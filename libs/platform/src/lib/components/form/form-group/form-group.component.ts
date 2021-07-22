@@ -151,6 +151,11 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
     @Input()
     compact = false;
+    /**
+     *attribute [cozy]="true" to hide class fd-form-layout-grid-container that reset padding 
+     */
+    @Input()
+    cozy = false;
 
     @Input()
     labelLayout: LabelLayout = 'horizontal';
