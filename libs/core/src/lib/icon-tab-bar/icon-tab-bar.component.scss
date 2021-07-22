@@ -66,6 +66,22 @@
   overflow: auto;
 }
 
+.fd-icon-tab-bar-dnd-preview {
+  background: var(--sapObjectHeader_Background, #fff);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  font-size: var(--sapFontSize, 0.875rem);
+  line-height: var(--sapContent_LineHeight, 1.4);
+  padding: 0.875rem 0.188rem;
+  opacity: .8;
+}
+
+.cdk-drag-placeholder {
+  opacity: .3;
+  pointer-events: none;
+}
 
 
 

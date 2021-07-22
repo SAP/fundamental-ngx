@@ -7,6 +7,12 @@ import { ExtraButtonDirective } from '../../directives/extra-button/extra-button
 import { FdDnDEvent } from '../../dnd/dnd-container.directive';
 
 
+interface ItemToReplace {
+    arr: IconTabBarItem[],
+    item: IconTabBarItem,
+    parentUid: string,
+}
+
 @Component({
     selector: 'fd-icon-tab-bar-text-type',
     templateUrl: './icon-tab-bar-text-type.component.html',
@@ -27,12 +33,12 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass implements OnIn
     enableTabReordering = false;
 
     constructor(
-        protected _cd: ChangeDetectorRef,
+        protected _cd: ChangeDetectorRef
     ) {
         super(_cd);
     }
 
-    selectExtraItem(selectedItem: IconTabBarItem|IconTabBarSubItem): void {
+    selectExtraItem(selectedItem: IconTabBarItem | IconTabBarSubItem): void {
         // Check if selected item is subItem
         // Then to find root tab, and pass it to parent method.
         if (selectedItem.uniqueKey.includes(UNIQUE_KEY_SEPARATOR)) {
@@ -42,17 +48,31 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass implements OnIn
         super.selectExtraItem(selectedItem as IconTabBarItem);
     }
 
-    onDrop({leftNewSibling, draggableItem}: FdDnDEvent<IconTabBarItem>): void {
-        debugger;
-        const leftItemMapArr = leftNewSibling.uniqueKey.split(UNIQUE_KEY_SEPARATOR);
-        const dragItemMapArr = draggableItem.uniqueKey.split(UNIQUE_KEY_SEPARATOR);
-        const leftArr = this.test(leftNewSibling.uniqueKey);
-        const dragArr = this.test(draggableItem.uniqueKey);
-        this.replaceItems(draggableItem, leftNewSibling, dragArr, leftArr);
+    onDrop({ draggableItem, replacedItem }: FdDnDEvent<IconTabBarItem>): void {
+        const replacedParsedUidArr = replacedItem.uniqueKey.split(UNIQUE_KEY_SEPARATOR);
+        replacedParsedUidArr.length = replacedParsedUidArr.length - 1;
+        const draggableParsedUidArr = draggableItem.uniqueKey.split(UNIQUE_KEY_SEPARATOR);
+        draggableParsedUidArr.length = draggableParsedUidArr.length - 1;
+
+        const newArr = this._getParentArrByUid(replacedItem.uniqueKey);
+        const previousArr = this._getParentArrByUid(draggableItem.uniqueKey);
+
+        this.replaceItems({
+            replacedItemInfo: {
+                arr: newArr,
+                item: replacedItem,
+                parentUid: replacedParsedUidArr.length ? replacedParsedUidArr.join(UNIQUE_KEY_SEPARATOR) : ''
+            },
+            draggableItemInfo: {
+                arr: previousArr,
+                item: draggableItem,
+                parentUid: draggableParsedUidArr.length ? draggableParsedUidArr.join(UNIQUE_KEY_SEPARATOR) : ''
+            },
+        });
     }
 
 
-    test(uid: string, arr: any[] = this.tabs): IconTabBarItem[] {
+    _getParentArrByUid(uid: string, arr: any[] = this.tabs): IconTabBarItem[] {
         let result;
         for (let i = 0; i < arr.length; i++) {
             const item = arr[i];
@@ -60,47 +80,49 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass implements OnIn
                 result = arr;
                 break;
             } else if (Array.isArray(item.subItems)) {
-                result = this.test(uid, item.subItems);
+                result = this._getParentArrByUid(uid, item.subItems);
                 if (result) {
                     break;
 
                 }
             }
         }
-        return result
+        return result;
     }
 
 
 
-    replaceItems(draggable: IconTabBarItem, replaced: IconTabBarItem, oldArr: IconTabBarItem[], newArr: IconTabBarItem[]): void {
-        oldArr.splice(draggable.index, 1);
-        const newIndex = replaced ? replaced.index : 0;
-        newArr.splice(newIndex, 0, draggable);
-        // draggable.index = newIndex;
-        // if (replaced) {
-        //     replaced.index = newIndex + 1;
-        // }
-        this.updateIndexes(oldArr);
-        if (oldArr !== newArr) {
-            this.updateIndexes(newArr);
+    replaceItems({ replacedItemInfo, draggableItemInfo }: { replacedItemInfo: ItemToReplace, draggableItemInfo: ItemToReplace }): void {
+        draggableItemInfo.arr.splice(draggableItemInfo.item.index, 1);
+        const newIndex = replacedItemInfo?.item?.index || 0;
+        replacedItemInfo.arr.splice(newIndex, 0, draggableItemInfo.item);
+        this.updateIndexes(draggableItemInfo.arr, draggableItemInfo.parentUid);
+        if (draggableItemInfo.arr !== replacedItemInfo.arr) {
+            this.updateIndexes(replacedItemInfo.arr, replacedItemInfo.parentUid);
         }
 
         setTimeout(() => {
             const extra = this.overflowDirective.getAmountOfExtraItems();
             this.onChangeSize(extra);
         }, 100);
-        setTimeout(_ => this.extraBtnDirective._calculatePosition(), 200)
+        setTimeout(_ => this.extraBtnDirective._calculatePosition(), 200);
     }
 
-    updateIndexes(arr: IconTabBarItem[]|IconTabBarSubItem[], parent?: IconTabBarItem|IconTabBarSubItem): void {
+    updateIndexes(arr: any[], parentUid?: string): void {
         arr.forEach((item, index) => {
             item.index = index;
-            if (parent) {
-                item.uniqueKey = `${parent.uniqueKey}${UNIQUE_KEY_SEPARATOR}${index}`;
+            if (parentUid) {
+                item.uniqueKey = `${parentUid}${UNIQUE_KEY_SEPARATOR}${index}`;
+            } else {
+                item.uniqueKey = `${index}`;
             }
             if (Array.isArray(item.subItems)) {
-                this.updateIndexes(item.subItems, item);
+                this.updateIndexes(item.subItems, item.uniqueKey);
             }
-        })
+        });
+    }
+
+    trackBy(item: IconTabBarItem): string {
+        return item.uniqueKey;
     }
 }

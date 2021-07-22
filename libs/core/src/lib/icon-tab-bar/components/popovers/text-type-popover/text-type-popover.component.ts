@@ -34,4 +34,8 @@ export class TextTypePopoverComponent extends IconTabBarPopoverClass {
     this.popover.close();
     // this._cd.detectChanges();
   }
+
+  trackBy(item: IconTabBarItem): string {
+    return item.uniqueKey;
+  }
 }

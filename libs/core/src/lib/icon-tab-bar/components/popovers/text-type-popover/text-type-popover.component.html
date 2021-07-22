@@ -37,6 +37,7 @@
         </fd-popover-control>
         <fd-popover-body>
             <ul
+                fd-dnd-container
                 class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list"
                 role="list"
             >
@@ -48,13 +49,13 @@
 </ng-container>
 
 <ng-template #subItem let-items="items" let-level="level">
-    <ng-container *ngFor="let item of items">
+    <ng-container *ngFor="let item of items; trackBy:trackBy">
         <li
             [attr.aria-level]="level" class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
             [ngClass]="item.cssClasses"
-            role="listitem"
             fd-dnd-container-item
-            [dndItemData]="{uid: 'hello'}"
+            [dndItemData]="item"
+            role="listitem"
             tabindex="-1">
             <a
                 class="fd-list__link"

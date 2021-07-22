@@ -13,6 +13,7 @@ import { TextTypePopoverComponent } from './components/popovers/text-type-popove
 import { DndContainerDirective } from './dnd/dnd-container.directive';
 import { DndContainerItemDirective } from './dnd/dnd-container-item.directive';
 import { DndContainerGroupDirective } from './dnd/dnd-container-group.directive';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 
@@ -36,6 +37,7 @@ import { DndContainerGroupDirective } from './dnd/dnd-container-group.directive'
         PopoverModule,
         OverflowItemsModule,
         DragAndDropModule,
+        DragDropModule,
     ],
     exports: [
         CommonModule,
