@@ -92,6 +92,10 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     @Input()
     isSummaryStep = false;
 
+    /** If navigation buttons should be visible */
+    @Input()
+    navigationButtons = true;
+
     /**
      * @description Array of visible Wizard Steps.
      */
