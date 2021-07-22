@@ -5,7 +5,7 @@ export class GridListPo extends CoreBaseComponentPo {
     private url = '/grid-list';
     root = '#page-content';
 
-    layoutPattern = 'h2#layoutPattern';
+    layoutPattern = 'h2#layout-pattern';
     moreButton = '.fd-grid-list__more';
     moreButtonItems = '#fd-grid-list-9 fd-grid-list-item';
     footer = '.fd-grid-list__footer';

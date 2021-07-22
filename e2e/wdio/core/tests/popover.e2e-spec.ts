@@ -189,8 +189,11 @@ describe('Popover test suite', function() {
             const optionLength = getElementArrayLength(multiInputOption);
             for (let i = 3; i < optionLength; i++) {
                 click(multiInputOption, i);
+
+                if (i !== (optionLength - 1)) {
+                    click(multiInputButton);
+                }
             }
-            click(multiInputButton);
             const spanLength = getElementArrayLength(multiInputSpan);
             for (let i = 0; i < spanLength; i++) {
                 expect(getText(multiInputSpan, i)).toBe(fruitsTestArr[i]);

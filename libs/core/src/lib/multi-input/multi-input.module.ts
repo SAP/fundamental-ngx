@@ -10,6 +10,7 @@ import { FormModule } from '@fundamental-ngx/core/form';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { LinkModule } from '@fundamental-ngx/core/link';
+import { AutoCompleteModule } from '@fundamental-ngx/core/utils';
 
 @NgModule({
     declarations: [MultiInputComponent],
@@ -23,7 +24,8 @@ import { LinkModule } from '@fundamental-ngx/core/link';
         InputGroupModule,
         FormModule,
         CheckboxModule,
-        LinkModule
+        LinkModule,
+        AutoCompleteModule
     ],
     exports: [MultiInputComponent]
 })

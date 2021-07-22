@@ -17,9 +17,10 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
 import { Platform } from '@angular/cdk/platform';
 import { coerceNumberProperty, _isNumberValue } from '@angular/cdk/coercion';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
@@ -70,11 +71,11 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     @Input()
     class: string;
 
-    /** Id of the element that labels object number. */
+    /** Id of the element that labels slider. */
     @Input()
     ariaLabelledBy: string = null;
 
-    /** Aria label for the object number. */
+    /** Aria label for the slider. */
     @Input()
     ariaLabel: string = null;
 
@@ -180,6 +181,30 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     @Input()
     disabled = false;
 
+    /**
+     * slider current value verbose string.
+     * This will be read only once by screen reader and upon slider value change,
+     * this string will not be read.
+     */
+    @Input()
+    singleSliderCurrentValuePrefix = 'Current value is ';
+
+    /**
+     * @hidden range slider handle 1 current value supporting string
+     * This will be read only once by screen reader and upon slider value change,
+     * this string will not be read.
+     */
+    @Input()
+    rangeSliderHandle1CurrentValuePrefix = 'handle 1 value is ';
+
+    /**
+     * @hidden range slider handle 2 current value supporting string
+     * This will be read only once by screen reader and upon slider value change,
+     * this string will not be read.
+     */
+    @Input()
+    rangeSliderHandle2CurrentValuePrefix = 'handle 2 value is ';
+
     _position: number | number[] = 0;
 
     /** Control value */
@@ -267,6 +292,21 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     /** @hidden */
     _isRtl = false;
 
+    /**
+     * @hidden slider current value supporting string.
+     */
+    _singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
+
+    /**
+     * @hidden range slider handle 1 current value supporting string
+     */
+    _rangeSliderHandle1CurrentValuePrefix = this.rangeSliderHandle1CurrentValuePrefix;
+
+    /**
+     * @hidden range slider handle 2 current value supporting string
+     */
+    _rangeSliderHandle2CurrentValuePrefix = this.rangeSliderHandle2CurrentValuePrefix;
+
     /** @hidden */
     private _min = 0;
 
@@ -285,6 +325,9 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     /** @hidden */
     private _valuesBySteps: number[] = [];
 
+    /** @hidden */
+    private _tooltipOpen = false;
+
     /**
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
@@ -297,6 +340,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         private readonly _cdr: ChangeDetectorRef,
         private readonly _renderer: Renderer2,
         private readonly _platform: Platform,
+        private readonly _liveAnnouncer: LiveAnnouncer,
         @Optional() private readonly _rtlService: RtlService,
         @Optional() private _contentDensityService: ContentDensityService
     ) {}
@@ -341,6 +385,16 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         return this.customValues.length > 0
             ? this.customValues[position as number].label
             : this._popoverValueRef[sliderValueTarget];
+    }
+
+    /** @hidden */
+    get minValue(): string | number {
+        return this.customValues.length > 0 ? this.customValues[this.min as number].label : this.min;
+    }
+
+    /** @hidden */
+    get maxValue(): string | number {
+        return this.customValues.length > 0 ? this.customValues[this.max as number].label : this.max;
     }
 
     @applyCssClass
@@ -443,11 +497,13 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             return;
         }
 
-        const allowedKeys: number[] = [LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW];
+        const allowedKeys: number[] = [LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW, ENTER, SPACE];
         if (!KeyUtil.isKeyCode(event, allowedKeys)) {
             return;
         }
         event.preventDefault();
+
+        this._closeOpenPopupOnClick();
 
         const diff = event.shiftKey ? this.jump : this.step;
         let newValue: number | SliderTickMark | null = null;
@@ -500,11 +556,13 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden */
     _showPopovers(): void {
+        this._tooltipOpen = true;
         this._popovers.forEach((popover) => popover.open());
     }
 
     /** @hidden */
     _hidePopovers(): void {
+        this._tooltipOpen = false;
         const elementsToCheck = [
             this.handle?.nativeElement,
             this.rangeHandle1?.nativeElement,
@@ -552,6 +610,28 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         this._updatePopoversPosition();
     }
 
+    /** @hidden reset default prefix on leaving the slider */
+    onBlur(event: MouseEvent | KeyboardEvent): void {
+        // reset prefix string for slider current value that need to be announced
+        if (this._isRange) {
+            this._rangeSliderHandle1CurrentValuePrefix = this.rangeSliderHandle1CurrentValuePrefix;
+            this._rangeSliderHandle2CurrentValuePrefix = this.rangeSliderHandle2CurrentValuePrefix;
+        } else {
+            this._singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
+        }
+        this._cdr.markForCheck();
+    }
+
+    /** @hidden */
+    private _closeOpenPopupOnClick(): void {
+        if (this._tooltipOpen) {
+            this._popovers.forEach((popover) => popover.close());
+        } else {
+            this._popovers.forEach((popover) => popover.open());
+        }
+        this._tooltipOpen = !this._tooltipOpen;
+    }
+
     /** @hidden */
     private _updatePopoversPosition(): void {
         this._cdr.detectChanges();
@@ -582,6 +662,14 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         if (newValue < this.min) {
             newValue = this.min;
         }
+
+        if (this._isRange) {
+            this._rangeSliderHandle1CurrentValuePrefix = '';
+            this._rangeSliderHandle2CurrentValuePrefix = '';
+        } else {
+            this._singleSliderCurrentValuePrefix = '';
+        }
+        this._cdr.markForCheck();
 
         const stepDiffArray = this._valuesBySteps
             .map((stepValue) => ({ diff: Math.abs(stepValue - newValue), value: stepValue }))
@@ -614,18 +702,25 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** @hidden */
     private _constructRangeModelValue(): number[] | SliderTickMark[] {
+        let rangeLowerValue: number | string;
+        let rangeHigherValue: number | string;
         let rangeValue: number[] | SliderTickMark[] = [
             Math.min(this._handle1Value, this._handle2Value),
             Math.max(this._handle1Value, this._handle2Value)
         ];
+
+        rangeLowerValue = rangeValue[0];
+        rangeHigherValue = rangeValue[1];
 
         if (this.customValues.length > 0) {
             const min = this.customValues[rangeValue[0]] || this.customValues[0];
             const max = this.customValues[rangeValue[1]] || this.customValues[this.customValues.length - 1];
 
             rangeValue = [min, max];
+            rangeLowerValue = rangeValue[0].label;
+            rangeHigherValue = rangeValue[1].label;
         }
-
+        this._liveAnnouncer.announce('range value between ' + rangeLowerValue + ' and ' + rangeHigherValue, 'polite');
         return rangeValue;
     }
 
