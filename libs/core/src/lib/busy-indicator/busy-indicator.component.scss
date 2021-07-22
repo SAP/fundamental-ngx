@@ -21,7 +21,7 @@
             outline-style: var(--sapContent_FocusStyle, dotted);
         }
 
-        &[tabindex="-1"] {
+        &[tabindex='-1'] {
             outline: none;
         }
 

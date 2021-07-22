@@ -43,7 +43,11 @@ export class BusyIndicatorComponent {
 
     /** Aria label attribute value. */
     @Input()
-    ariaLabel = 'Loading';
+    ariaLabel: string;
+
+    /** add loading label value */
+    @Input()
+    label: string;
 
     /** Aria live attribute value. */
     @Input()
@@ -53,7 +57,8 @@ export class BusyIndicatorComponent {
     @ViewChild('fakeFocusElement')
     fakeFocusElement: ElementRef;
 
-    constructor(private _elementRef: ElementRef) { }
+    /** @hidden */
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden If focus escapes busy container focus element after wrapped content */
     @HostListener('keydown', ['$event'])
