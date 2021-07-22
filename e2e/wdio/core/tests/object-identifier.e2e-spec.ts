@@ -1,15 +1,11 @@
 import { ObjectIdentifierPo } from '../pages/object-identifier.po';
 import {
-    click,
-    getElementAriaLabel,
     getElementArrayLength,
-    getElementTitle,
+    isElementClickable,
     refreshPage,
     scrollIntoView,
     waitForPresent
 } from '../../driver/wdio';
-import { checkElArrIsClickable } from '../../helper/assertion-helper';
-
 
 describe('Object identifier test suite', function() {
     const objectIdentifierPage = new ObjectIdentifierPo();
@@ -22,20 +18,16 @@ describe('Object identifier test suite', function() {
         objectIdentifierPage.open();
     }, 1);
 
-    it('Verify each marker is clickable', () => {
-        checkElArrIsClickable(identifier);
-    });
-
     afterEach(() => {
         refreshPage();
         waitForPresent(identifier);
     }, 1);
 
     it('Verify each identifier is clickable', () => {
-        const arr = getElementArrayLength(identifier);
-        for (let i = 0; i < arr; i++) {
-            scrollIntoView(identifier, i);
-            click(identifier, i);
+        const linkElementArr = getElementArrayLength(clickableLinks);
+        for (let i = 0; i < linkElementArr; i++) {
+            scrollIntoView(clickableLinks, i);
+            expect(isElementClickable(clickableLinks, i)).toBe(true);
         }
     });
 

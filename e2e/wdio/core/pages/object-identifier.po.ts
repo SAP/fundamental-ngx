@@ -3,7 +3,7 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class ObjectIdentifierPo extends CoreBaseComponentPo {
     private url = '/object-identifier';
-    root = '#page-content';
+
 
     identifier = '.fd-object-identifier';
     clickableLinks = 'fd-link fd-object-identifier__link';
