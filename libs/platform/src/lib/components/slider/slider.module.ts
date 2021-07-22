@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { SliderModule } from '@fundamental-ngx/core';
+import { SliderModule } from '@fundamental-ngx/core/slider';
 
 import { SliderComponent } from './slider.component';
 

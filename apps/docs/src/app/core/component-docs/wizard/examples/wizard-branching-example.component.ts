@@ -1,6 +1,7 @@
-import { Component, ElementRef, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
+import { RadioButtonComponent } from '@fundamental-ngx/core/radio';
 
 @Component({
     selector: 'fd-wizard-branching-example',
@@ -11,13 +12,19 @@ import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
         class: 'fd-wizard-example'
     }
 })
-export class WizardBranchingExampleComponent implements OnInit {
+export class WizardBranchingExampleComponent {
     /**
      * documentation related property
      * provides access to the HTML element with "overlay" reference
      */
     @ViewChild('overlay')
     overlay: ElementRef<HTMLElement>;
+
+    @ViewChild('bankButton')
+    bankButton: RadioButtonComponent;
+
+    @ViewChild('creditButton')
+    creditButton: RadioButtonComponent;
 
     /**
      * documentation related property
@@ -37,10 +44,6 @@ export class WizardBranchingExampleComponent implements OnInit {
 
     constructor(private _dialogService: DialogService) {}
 
-    ngOnInit(): void {
-        this.oldPayment = this.paymentSelection;
-    }
-
     statusChanged(stepNumber: number, event: WizardStepStatus): void {
         if (event === 'current') {
             this.goToStep(stepNumber);
@@ -48,21 +51,28 @@ export class WizardBranchingExampleComponent implements OnInit {
     }
 
     paymentSelectionChanged(dialog: TemplateRef<any>): void {
-        if (this.oldPayment !== this.paymentSelection) {
-            if (!this.init) {
-                const dialogRef = this._dialogService.open(dialog, { responsivePadding: true });
+        if (this.init && this.paymentSelection) {
+            this.oldPayment = this.paymentSelection;
+            this.init = false;
+        } else if (this.oldPayment !== this.paymentSelection) {
+            const dialogRef = this._dialogService.open(dialog, { responsivePadding: true });
 
-                dialogRef.afterClosed.subscribe(
+            dialogRef.afterClosed
+                .subscribe(
                     () => {
                         this.oldPayment = this.paymentSelection;
                     },
                     () => {
                         this.paymentSelection = this.oldPayment;
                     }
-                );
-            } else {
-                this.init = false;
-            }
+                )
+                .add(() => {
+                    setTimeout(() => {
+                        this.paymentSelection === 'bank'
+                            ? this.bankButton.inputElement.nativeElement.focus()
+                            : this.creditButton.inputElement.nativeElement.focus();
+                    });
+                });
         }
     }
 

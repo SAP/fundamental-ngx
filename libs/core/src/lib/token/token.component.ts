@@ -61,6 +61,10 @@ export class TokenComponent implements OnInit, OnDestroy {
     @Output()
     readonly onCloseClick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
+    /** Emitted when token should be removed */
+    @Output()
+    readonly onRemove: EventEmitter<void> = new EventEmitter<void>();
+
     /** Emitted when a token is clicked. */
     @Output()
     onTokenClick: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();

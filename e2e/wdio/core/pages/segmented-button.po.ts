@@ -2,7 +2,7 @@ import { CoreBaseComponentPo } from './core-base-component.po';
 import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class SegmentedButtonPo extends CoreBaseComponentPo {
-    url = '/segmentedButton';
+    url = '/segmented-button';
 
    defaultExample = 'fd-segmented-button-default-example ';
    toggleExample = 'fd-segmented-button-toggle-example ';

@@ -2,7 +2,7 @@ import { CoreBaseComponentPo } from './core-base-component.po';
 import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class BusyIndicatorPo extends CoreBaseComponentPo {
-    private url = '/busyIndicator';
+    private url = '/busy-indicator';
     componentExample = '.docs-tile-content-example';
     root = '#page-content';
     enableDisableButton = 'fd-busy-indicator ~ button';

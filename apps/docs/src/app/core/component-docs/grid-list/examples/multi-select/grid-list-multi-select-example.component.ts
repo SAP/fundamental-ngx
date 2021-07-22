@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { GridListItemOutputEvent } from '@fundamental-ngx/core/grid-list';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { GridListComponent, GridListItemOutputEvent } from '@fundamental-ngx/core/grid-list';
 
 interface GridListItem {
     id: number;
@@ -18,6 +18,10 @@ interface GridListItem {
     encapsulation: ViewEncapsulation.None
 })
 export class GridListMultiSelectExampleComponent {
+
+    @ViewChild(GridListComponent)
+    grid: GridListComponent<GridListItem>;
+
     list: GridListItem[] = [
         {
             id: 1,
@@ -76,5 +80,9 @@ export class GridListMultiSelectExampleComponent {
 
     navigate(event: GridListItemOutputEvent<number>): void {
         alert('Navigation event value is: ' + event.value);
+    }
+
+    clearSelection(): void {
+        this.grid.clearSelection();
     }
 }

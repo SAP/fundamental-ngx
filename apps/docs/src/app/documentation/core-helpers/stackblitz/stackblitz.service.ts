@@ -59,6 +59,9 @@ export class StackblitzService {
                 generatedFiles = this.handleTsFile(example);
             } else if (example.language === 'scss') {
                 generatedFiles = this.handleScssFile(example);
+            } else if (example.path !== undefined) {
+                defaultProjectInfo.files[`${example.path}/${example.fileName}.${example.language}`] = example.code.default;
+                return;
             }
 
             if (generatedFiles.html) {
@@ -88,10 +91,17 @@ export class StackblitzService {
             : stackBlitzFiles[0].selector;
 
         defaultProjectInfo.files['src/index.html'] = `
-            <link rel="stylesheet" href="node_modules/fundamental-styles/dist/fonts.css"></link>
-            <link rel="stylesheet" href="node_modules/fundamental-styles/dist/icon.css"></link>
-            <${mainFileSelector}></${mainFileSelector}>
-        `;
+<html>
+    <head>
+        <link rel="stylesheet"
+        href="node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_fiori_3/css_variables.css" />
+        <link rel="stylesheet" href="node_modules/fundamental-styles/dist/fonts.css" />
+        <link rel="stylesheet" href="node_modules/fundamental-styles/dist/icon.css" />
+    </head>
+    <body>
+        <${mainFileSelector}></${mainFileSelector}>
+    </body>
+</html>`;
 
         sdk.openProject(<any>defaultProjectInfo);
     }

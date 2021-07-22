@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChild,
     ElementRef,
     Renderer2,
     TemplateRef,
@@ -19,6 +20,7 @@ import { PopoverFlippedXDirection } from '@fundamental-ngx/core/shared';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { PopoverPosition } from '@fundamental-ngx/core/shared';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
+import { NotificationGroupComponent } from '@fundamental-ngx/core/notification';
 
 /**
  * A component used to enforce a certain layout for the popover.
@@ -41,6 +43,10 @@ export class PopoverBodyComponent {
     /** @hidden */
     @ViewChild(CdkTrapFocus)
     _cdkTrapFocus: CdkTrapFocus;
+
+    /** @hidden */
+    @ContentChild(NotificationGroupComponent)
+    notificationGroup: NotificationGroupComponent;
 
     /** Whether the popover should have an arrow. */
     _noArrow = true;
@@ -123,7 +129,9 @@ export class PopoverBodyComponent {
 
     /** @hidden */
     detectChanges(): void {
-        this._changeDetectorRef.detectChanges();
+        if (!this._changeDetectorRef['destroyed']) {
+            this._changeDetectorRef.detectChanges();
+        }
     }
 
     /** @hidden */

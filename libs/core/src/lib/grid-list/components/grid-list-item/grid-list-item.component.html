@@ -1,4 +1,5 @@
 <div
+    #gridListItem
     [id]="id"
     tabindex="0"
     class="fd-grid-list__item"
@@ -151,8 +152,8 @@
         class="fd-radio__label fd-grid-list__radio-label"
         [for]="id + '-radio'"
         tabindex="-1"
-        (mouseover)="_setActive(false)"
-        (mouseout)="_setActive(true)"
+        (mouseover)="_setActive($event, false)"
+        (mouseout)="_setActive($event, true)"
     ></label>
 </ng-template>
 

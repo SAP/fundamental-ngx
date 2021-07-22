@@ -34,6 +34,16 @@ export class GridListSelectionService<T> {
     }
 
     /** @hidden */
+    clearSelection(): void {
+        this._selectedItems.added = [];
+        this._selectedItems.index = [];
+        this._selectedItems.removed = this._selectedItems.selection;
+        this._selectedItems.selection = [];
+
+        this._selectedItemsObs.next(this._selectedItems);
+    }
+
+    /** @hidden */
     setSelectedItem(item: T, componentIndex: number, action?: GridListSelectionActions): void {
         if (!action) {
             this._selectedItems.added = [item];

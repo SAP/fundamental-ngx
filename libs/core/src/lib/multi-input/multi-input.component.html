@@ -54,7 +54,8 @@
                 *ngFor="let token of selected"
                 [compact]="compact"
                 [disabled]="disabled"
-                (onCloseClick)="handleSelect(false, token, $event)"
+                (onCloseClick)="_handleSelect(false, token, true, $event)"
+                (onRemove)="_handleSelect(false, token, false)"
             >
                 <span [innerHtml]="token | displayFnPipe: displayFn"></span>
             </fd-token>
@@ -62,7 +63,12 @@
                    class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
                    fd-form-control
                    fd-input-group-input
+                   fd-auto-complete
                    #searchInputElement
+                   [displayFn]="displayFn"
+                   [inputText]="searchTerm"
+                   [options]="dropdownValues"
+                   [enable]="autoComplete && !mobile"
                    [placeholder]="placeholder"
                    [ngModel]="searchTerm"
                    [compact]="compact"
@@ -94,11 +100,12 @@
         <li
             *ngFor="let value of displayedValues"
             fd-list-item
+            (click)="openChangeHandle(false)"
             [selected]="selected.indexOf(value) !== -1"
         >
             <fd-checkbox
                 [compact]="compact"
-                (ngModelChange)="handleSelect($event, value)"
+                (ngModelChange)="_handleSelect($event, value)"
                 [ngModel]="selected.indexOf(value) !== -1">
             </fd-checkbox>
             <ng-container
