@@ -1,24 +1,2 @@
 @import '~fundamental-styles/dist/input';
 @import '~fundamental-styles/dist/step-input';
-
-.fd-input {
-
-    &.fd-step-input__input.is-hover,
-    &.fd-step-input__input:hover {
-        z-index: auto;
-    }
-}
-
-.fd-step-input {
-    &--without-buttons {
-        &>.fd-input {
-            margin-bottom: 0;
-        }
-
-        &>.fd-step-input__button {
-            width: auto;
-            padding-left: 6px;
-            padding-right: 6px;
-        }
-    }
-}
