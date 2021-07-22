@@ -1,0 +1,41 @@
+Exception in NSApplicationAWT:
+ java.lang.NullPointerException
+	at java.desktop/sun.lwawt.macosx.CPlatformComponent.setBounds(CPlatformComponent.java:66)
+	at java.desktop/sun.lwawt.LWComponentPeer.setBounds(LWComponentPeer.java:595)
+	at java.desktop/sun.lwawt.LWWindowPeer.notifyReshape(LWWindowPeer.java:730)
+	at java.desktop/sun.lwawt.macosx.CPlatformWindow.deliverMoveResizeEvent(CPlatformWindow.java:1178)
+
+0   CoreFoundation                      0x00007fff206346af __exceptionPreprocess + 242
+1   libobjc.A.dylib                     0x00007fff2036c3c9 objc_exception_throw + 48
+2   CoreFoundation                      0x00007fff2065ca9a -[NSException raise] + 9
+3   JavaNativeFoundation                0x00007fff6f8b306b JNFCallVoidMethod + 215
+4   libawt_lwawt.dylib                  0x000000011fa89937 -[AWTWindow _deliverMoveResizeEvent] + 359
+5   CoreFoundation                      0x00007fff205affec __CFNOTIFICATIONCENTER_IS_CALLING_OUT_TO_AN_OBSERVER__ + 12
+6   CoreFoundation                      0x00007fff2064b89b ___CFXRegistrationPost_block_invoke + 49
+7   CoreFoundation                      0x00007fff2064b80f _CFXRegistrationPost + 454
+8   CoreFoundation                      0x00007fff20580bde _CFXNotificationPost + 723
+9   Foundation                          0x00007fff212efabe -[NSNotificationCenter postNotificationName:object:userInfo:] + 59
+10  AppKit                              0x00007fff22e2d365 -[NSWindow _setFrameCommon:display:fromServer:] + 4848
+11  AppKit                              0x00007fff22f648dc -[NSWindow _setFrameAfterMove:] + 768
+12  AppKit                              0x00007fff22f64450 -[NSWindow _windowMovedToRect:] + 167
+13  AppKit                              0x00007fff22f64256 -[NSWindow _windowMoved:] + 1086
+14  AppKit                              0x00007fff22f63df5 -[NSWindow _internalHandleAppKitDefinedEvent:] + 239
+15  AppKit                              0x00007fff22f63030 -[NSWindow(NSEventRouting) _reallySendEvent:isDelayedEvent:] + 3706
+16  AppKit                              0x00007fff22f61f9a -[NSWindow(NSEventRouting) sendEvent:] + 347
+17  libawt_lwawt.dylib                  0x000000011fa87ef4 -[AWTWindow_Normal sendEvent:] + 86
+18  AppKit                              0x00007fff22f60cda -[NSApplication(NSEvent) sendEvent:] + 2742
+19  libosxapp.dylib                     0x000000010582d89e -[NSApplicationAWT sendEvent:] + 450
+20  AppKit                              0x00007fff23238f1e -[NSApplication _handleEvent:] + 65
+21  AppKit                              0x00007fff22dc96af -[NSApplication run] + 623
+22  libosxapp.dylib                     0x000000010582d50b +[NSApplicationAWT runAWTLoopWithApp:] + 222
+23  libawt_lwawt.dylib                  0x000000011fab8985 +[AWTStarter starter:headless:] + 834
+24  JavaNativeFoundation                0x00007fff6f8b670f +[JNFRunLoop _performCopiedBlock:] + 15
+25  Foundation                          0x00007fff213664d9 __NSThreadPerformPerform + 204
+26  CoreFoundation                      0x00007fff205baa0c __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE0_PERFORM_FUNCTION__ + 17
+27  CoreFoundation                      0x00007fff205ba974 __CFRunLoopDoSource0 + 180
+28  CoreFoundation                      0x00007fff205ba6ef __CFRunLoopDoSources0 + 248
+29  CoreFoundation                      0x00007fff205b9121 __CFRunLoopRun + 890
+30  CoreFoundation                      0x00007fff205b86ce CFRunLoopRunSpecific + 563
+31  webstorm                            0x000000010495bbf5 main + 332
+32  libdyld.dylib                       0x00007fff204dd621 start + 1
+33  ???                                 0x0000000000000004 0x0 + 4

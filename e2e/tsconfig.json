@@ -1,5 +1,12 @@
 {
   "compilerOptions": {
+    "target": "es5",
+    "lib": ["es5", "dom"],
+    "types": ["cypress"]
+  },
+  "include": ["**/*.ts"],
+
+  "compilerOptions": {
     "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -10,10 +17,12 @@
       "@wdio/sync",
       "@wdio/jasmine-framework",
       "wdio-image-comparison-service",
-      "axe-core"
+      "axe-core",
+      "cypress"
     ]
   },
   "includes": [
-    "wdio/**/*.ts"
+    "wdio/**/*.ts",
+    "**/*.ts"
   ]
 }
