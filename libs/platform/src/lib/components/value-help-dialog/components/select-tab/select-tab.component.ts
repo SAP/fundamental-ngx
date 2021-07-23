@@ -16,6 +16,9 @@ import { InfiniteScrollDirective } from '@fundamental-ngx/core';
 import { ContentDensity } from '../../../table/enums';
 import { VhdFilter, VdhTableSelection } from '../../models';
 import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
+
+let randomId = 0;
+
 @Component({
   selector: 'fdp-select-tab',
   templateUrl: './select-tab.component.html',
@@ -24,6 +27,11 @@ import { VhdBaseTab } from '../base-tab/vhd-base-tab.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, AfterViewInit {
+  protected defaultId = `fd-select-tab-title-id-${randomId++}`;
+
+  @Input()
+  selectTitleId: string = this.defaultId;
+
   @Input()
   selected: T[] = [];
 

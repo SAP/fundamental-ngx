@@ -31,7 +31,7 @@
                     i18n-aria-label="@@platformI18nValueHelpDialog.SelectionBarLabel"
                     *ngIf="!isMobileAdvancedSearchActive"
                 >
-                    <h5 fd-title class="selected-and-condition-title">
+                    <h5 fd-title class="selected-and-condition-title" [id]="id+'-selected-item'">
                         <ng-container *ngIf="hasSelectedAndConditions; else noItemsPanelTitle">
                             <ng-container i18n="@@platformI18nValueHelpDialog.SelectedAndConditionLabel"
                                 >Selected Items and Conditions
@@ -42,7 +42,7 @@
 
                     <div class="fdp-value-help-dialog__tokens-wrapper">
                         <div class="fdp-value-help-dialog__tokens">
-                            <fd-toolbar size="compact" [shouldOverflow]="true">
+                            <fd-toolbar size="compact" [shouldOverflow]="true" tabindex="0" [attr.aria-labelledby]="id+'-selected-item'">
                                 <!-- Selected items -->
                                 <fd-token
                                     fd-toolbar-item
@@ -50,6 +50,7 @@
                                     class="fdp-value-help-dialog__selection-token"
                                     [compact]="true"
                                     (onCloseClick)="removeSelected(selectedIndex)"
+                                    tabindex="0"
                                     *ngFor="
                                         let item of selectedItems;
                                         index as selectedIndex;
@@ -63,6 +64,7 @@
                                     class="fdp-value-help-dialog__selection-token"
                                     [compact]="true"
                                     (onCloseClick)="removeCondition(conditionIndex)"
+                                    tabindex="0"
                                     *ngFor="
                                         let item of validConditions;
                                         index as conditionIndex;
@@ -83,6 +85,7 @@
                             fd-button
                             [disabled]="!hasSelectedAndConditions"
                             fdType="transparent"
+                            title="clear selected items"
                             glyph="decline"
                             i18n-aria-label="@@platformI18nValueHelpDialog.ClearSelectedAriaLabel"
                             aria-label="clear selected items"
@@ -127,9 +130,7 @@
 </ng-template>
 
 <ng-template #noItemsPanelTitle>
-    <ng-container i18n="@@platformI18nValueHelpDialog.Selected.EmptyLabel"
-        >No Items or Conditions Selected</ng-container
-    >
+    <ng-container i18n="@@platformI18nValueHelpDialog.Selected.EmptyLabel">No Items or Conditions Selected</ng-container>
 </ng-template>
 
 <ng-template #advancedSearchContent>
@@ -322,7 +323,12 @@
         <h5 fd-title>{{ title }}</h5>
     </ng-container>
     <ng-container *ngIf="selectedTab !== type">
-        <a fd-list-link (click)="switchTab(type)" i18n-title="@@platformI18nValueHelpDialog.selectTab.title" title="Open dialog">
+        <a
+            fd-list-link
+            (click)="switchTab(type)"
+            i18n-title="@@platformI18nValueHelpDialog.selectTab.openDialog"
+            title="Open dialog"
+        >
             <span fd-list-title>{{ title }}</span>
             <i fd-list-icon glyph="navigation-right-arrow"></i>
         </a>

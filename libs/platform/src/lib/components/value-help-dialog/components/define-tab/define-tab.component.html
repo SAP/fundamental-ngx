@@ -15,7 +15,6 @@
                 [name]="uid + '-' + type + '-strategy-' + item.id"
                 [(ngModel)]="item.strategy"
                 (valueChange)="_filterChanged()"
-                [attr.aria-label]="'Select a strategy from dropdown'"
                 [attr.aria-labelledby]="titleId">
                 <ng-container *ngIf="_includeStrategy.length">
                     <li fd-list-group-header>Include</li>
