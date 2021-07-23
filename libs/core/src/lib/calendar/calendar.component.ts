@@ -7,10 +7,12 @@ import {
     HostBinding,
     Inject,
     Input,
+    OnChanges,
     OnDestroy,
     OnInit,
     Optional,
     Output,
+    SimpleChanges,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -81,7 +83,7 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Validator, OnDestroy {
+export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAccessor, Validator, OnDestroy {
     /** @hidden */
     @ViewChild(CalendarDayViewComponent) dayViewComponent: CalendarDayViewComponent<D>;
 
@@ -143,7 +145,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
 
     /** The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on. */
     @Input()
-    startingDayOfWeek: DaysOfWeek = 1;
+    startingDayOfWeek: DaysOfWeek;
 
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
@@ -221,6 +223,9 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     private adapterStartingDayOfWeek: DaysOfWeek;
 
     /** @hidden */
+    private currentStartingDayOfWeek: DaysOfWeek;
+
+    /** @hidden */
     onChange: (_: D | DateRange<D>) => void = () => {};
 
     /** @hidden */
@@ -285,10 +290,12 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
 
     /** @hidden */
     private _listenToLocaleChanges(): void {
-        this._dateTimeAdapter.localeChanges.subscribe(() => {
-            this.adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
-            this._changeDetectorRef.markForCheck();
-        });
+        this._subscriptions.add(
+            this._dateTimeAdapter.localeChanges.subscribe(() => {
+                this.adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
+                this._changeDetectorRef.markForCheck();
+            })
+        );
     }
 
     /** @hidden */
@@ -300,6 +307,16 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
                     this.compact = density !== 'cozy';
                 })
             );
+        }
+    }
+
+    /** @hidden */
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.startingDayOfWeek) {
+            this.currentStartingDayOfWeek =
+                changes.startingDayOfWeek.currentValue === undefined
+                    ? this.adapterStartingDayOfWeek
+                    : this.startingDayOfWeek;
         }
     }
 
@@ -532,10 +549,6 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
         this.activeView = 'year';
         this.currentlyDisplayed.year = yearsSelected.startYear;
         this._changeDetectorRef.detectChanges();
-    }
-    
-    getWeekStartDay(): DaysOfWeek {
-        return this.startingDayOfWeek === undefined ? this.adapterStartingDayOfWeek : this.startingDayOfWeek;
     }
 
     /** Method that provides information if model selected date/dates have properly types and are valid */

@@ -137,7 +137,10 @@
     }, 
     "moment-adapter": {
       "tags": [
-        "fdm"
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-datetime"
       ]
     },
     "core-breadcrumb": {

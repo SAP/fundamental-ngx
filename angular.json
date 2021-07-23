@@ -266,7 +266,7 @@
       "root": "libs/moment-adapter",
       "sourceRoot": "libs/moment-adapter/src",
       "projectType": "library",
-      "prefix": "fdm",
+      "prefix": "fd",
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",

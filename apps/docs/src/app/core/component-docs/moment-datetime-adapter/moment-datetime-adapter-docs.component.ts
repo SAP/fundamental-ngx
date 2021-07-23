@@ -17,7 +17,6 @@ export class MomentDatetimeAdapterDocsComponent {
     datePickerMomentAdapter: ExampleFile[] = [
         {
             language: 'html',
-            component: 'DatePickerMomentAdapterExampleComponent',
             code: datePickerMomentAdapterSrcHtml,
             fileName: 'date-picker-moment-adapter-example'
         },
@@ -32,7 +31,6 @@ export class MomentDatetimeAdapterDocsComponent {
     momentAdapterOptions: ExampleFile[] = [
         {
             language: 'html',
-            component: 'MomentAdapterOptionsExampleComponent',
             code: momentAdapterOptionsSrcHtml,
             fileName: 'moment-adapter-options-example'
         },
@@ -47,7 +45,6 @@ export class MomentDatetimeAdapterDocsComponent {
     momentDatetimeFormats: ExampleFile[] = [
         {
             language: 'html',
-            component: 'MomentDatetimeFormatsExampleComponent',
             code: momentDatetimeFormatsSrcHtml,
             fileName: 'moment-datetime-formats-example'
         },

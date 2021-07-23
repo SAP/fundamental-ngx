@@ -1,6 +1,6 @@
 import { Inject, Injectable, InjectionToken, LOCALE_ID, Optional } from '@angular/core';
 import moment, { Locale, LongDateFormatSpec, Moment, MomentFormatSpecification, MomentInput } from 'moment';
-import { DatetimeAdapter, DateLocale, MonthLocaleType } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, DateLocale } from '@fundamental-ngx/core/datetime';
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
     return Array.from(new Array(length)).map((_, index) => mapFn(index));
@@ -27,9 +27,12 @@ export function MOMENT_DATE_TIME_ADAPTER_OPTIONS_FACTORY(): MomentDatetimeAdapte
 
 @Injectable()
 export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
-
+    /** @hidden */
     private _momentLocaleData: Locale;
+
+    /** @hidden */
     private _localeData: DateLocale;
+
     public fromNow: undefined;
 
     constructor(
@@ -43,7 +46,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
 
     setLocale(locale: string): void {
         this._momentLocaleData = moment.localeData(locale);
-        
+
         this._localeData = {
             firstDayOfWeek: this._momentLocaleData.firstDayOfWeek(),
             longMonths: this._momentLocaleData.months(),
@@ -101,7 +104,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
         return this.clone(date).week();
     };
 
-    getMonthNames(style: MonthLocaleType): string[] {
+    getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
         switch (style) {
             case 'narrow':
                 return this._localeData.narrowMonths;
@@ -117,7 +120,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
         return range(31, (i) => this.createDate(2017, 0, i + 1).format('D'));
     };
 
-    getDayOfWeekNames(style: MonthLocaleType): string[] {
+    getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
         switch (style) {
             case 'narrow':
                 return this._localeData.narrowDaysOfWeek;
@@ -226,8 +229,8 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
 
     today(): Moment {
         return this._createMomentDate()
-            .locale(this.locale)
-            .startOf('day');
+        .locale(this.locale)
+        .startOf('day');
     };
 
     now(): Moment {
@@ -319,7 +322,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     _prepareFormat(displayFormat: string): string {
         const removeEscapedText = (str: string): string => {
             return str.replace(/ *\[[^\]]*]/g, '');
-        }
+        };
 
         const format = removeEscapedText(displayFormat);
         const longDateFormat: LongDateFormatSpec = (this._momentLocaleData as any)._longDateFormat;
@@ -333,15 +336,16 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
         return format;
     }
 
+    /** @hidden */
     _createMomentDate(
-        date?: MomentInput,
-        format?: MomentFormatSpecification,
-        locale?: string,
-    ): Moment {
+        date?: MomentInput, 
+        format?: MomentFormatSpecification, 
+        locale?: string
+        ): Moment {
         const { strict, useUtc }: MomentDatetimeAdapterOptions = this._options || {};
 
-        return useUtc
-            ? moment.utc(date, format, locale, strict)
+        return useUtc 
+            ? moment.utc(date, format, locale, strict) 
             : moment(date, format, locale, strict);
     }
 }
