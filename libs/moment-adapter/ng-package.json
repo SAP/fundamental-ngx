@@ -9,7 +9,6 @@
         "@angular/cdk",
         "focus-trap",
         "fundamental-styles",
-        "@sap-theming/theming-base-content",
-        "hammerjs"
+        "@sap-theming/theming-base-content"
     ]
 }
