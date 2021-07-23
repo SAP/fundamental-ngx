@@ -1,62 +1,61 @@
-<div fdDndContainerGroup>
-    <ul
-        class="fd-icon-tab-bar__header"
-        role="tablist"
-        fdOverflowItems
-        itemSelector="[data-overflowItem]"
-        [isRtl]="isRtl"
-        [offset]="100"
-        fd-dnd-container
-        orientation="horizontal"
-        (dropped)="onDrop($event)"
-        (changed)="onChangeSize($event)"
+<ul
+    class="fd-icon-tab-bar__header"
+    role="tablist"
+    fdOverflowItems
+    itemSelector="[data-overflowItem]"
+    [isRtl]="isRtl"
+    [offset]="100"
+    fd-dnd-container
+    flipperClass="fd-drag-hover-flipper"
+    nestedClass="fd-drag-hover-nested"
+    (dropped)="onDrop($event)"
+    (changed)="onChangeSize($event)"
+>
+    <li *ngFor="let item of tabs; trackBy:trackBy"
+        [ngClass]="item.cssClasses"
+        data-overflowItem
+        fd-dnd-container-item
+        [dndItemData]="item"
+        class="fd-icon-tab-bar__item"
+        [attr.aria-hidden]="item.hidden"
+        role="presentation"
     >
-        <li *ngFor="let item of tabs; trackBy:trackBy"
-            [ngClass]="item.cssClasses"
-            data-overflowItem
-            fd-dnd-container-item
-            [dndItemData]="item"
-            class="fd-icon-tab-bar__item"
-            [attr.aria-hidden]="item.hidden"
-            role="presentation"
+        <a
+            class="fd-icon-tab-bar__tab"
+            role="tab"
+            *ngIf="!item.subItems"
+            (click)="selectItem(item, $event)"
+            [attr.aria-selected]="item.uniqueKey === selectedItemKey"
         >
-            <a
-                class="fd-icon-tab-bar__tab"
-                role="tab"
-                *ngIf="!item.subItems"
-                (click)="selectItem(item, $event)"
-                [attr.aria-selected]="item.uniqueKey === selectedItemKey"
-            >
             <span class="fd-icon-tab-bar__tag">
                 {{ item.label }}
                 <ng-container *ngIf="item.counter"> ({{item.counter}})</ng-container>
             </span>
-                <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
-            </a>
-            <ng-container *ngIf="item.subItems">
-                <fd-text-type-popover
-                    [parentTab]="item"
-                    [selectedSubItemKey]="selectedItemKey"
-                    (selectedSubItem)="selectItem($event)"
-                >
-                </fd-text-type-popover>
-            </ng-container>
-        </li>
-        <li
-            *ngIf="extraItems.length"
-            role="presentation"
-            class="fd-icon-tab-bar__item fd-icon-tab-bar__item--extra-btn"
-            fdExtraButton
-            [isRtl]="isRtl"
-            [anchorIndexInsideParent]="lastVisibleTabIndex"
-        >
+            <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
+        </a>
+        <ng-container *ngIf="item.subItems">
             <fd-text-type-popover
-                [items]="extraItems"
-                [isExtraItemsMode]="true"
-                (selectedExtraItem)="selectExtraItem($event)"
+                [parentTab]="item"
+                [selectedSubItemKey]="selectedItemKey"
+                (selectedSubItem)="selectItem($event)"
             >
             </fd-text-type-popover>
-        </li>
-    </ul>
-</div>
+        </ng-container>
+    </li>
+    <li
+        *ngIf="extraItems.length"
+        role="presentation"
+        class="fd-icon-tab-bar__item fd-icon-tab-bar__item--extra-btn"
+        fdExtraButton
+        [isRtl]="isRtl"
+        [anchorIndexInsideParent]="lastVisibleTabIndex"
+    >
+        <fd-text-type-popover
+            [items]="extraItems"
+            [isExtraItemsMode]="true"
+            (selectedExtraItem)="selectExtraItem($event)"
+        >
+        </fd-text-type-popover>
+    </li>
+</ul>
 

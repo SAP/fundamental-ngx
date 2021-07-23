@@ -1,18 +1,19 @@
 import {
-  AfterContentInit,
+  AfterContentInit, AfterViewInit,
   Directive,
   ElementRef,
-  EventEmitter,
+  EventEmitter, Host, Inject,
   Input,
   OnDestroy,
   Optional,
-  Output,
+  Output, Self, SkipSelf,
   ViewContainerRef
 } from '@angular/core';
-import { DragDrop, DragRef, Point } from '@angular/cdk/drag-drop';
-import { DndContainerDirective } from './dnd-container.directive';
+import { DragDrop, DragRef, DropListRef, Point } from '@angular/cdk/drag-drop';
+import { DndContainerDirective, FD_DND_CONTAINER } from './dnd-container.directive';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DndService } from './dnd.service';
 
 type LinkPosition = 'after' | 'before';
 
@@ -27,13 +28,10 @@ export interface ElementChord {
 @Directive({
   selector: '[fdDndContainerItem], [fd-dnd-container-item]'
 })
-export class DndContainerItemDirective implements AfterContentInit, OnDestroy {
+export class DndContainerItemDirective implements AfterViewInit, OnDestroy {
 
   @Input()
   dndItemData: any
-
-  @Input()
-  orientation: 'horizontal'|'vertical' = 'horizontal';
 
   /** Defines if element is draggable */
   @Input()
@@ -69,13 +67,16 @@ export class DndContainerItemDirective implements AfterContentInit, OnDestroy {
   constructor(
       public elementRef: ElementRef,
       protected _dragDrop: DragDrop,
-      protected _vcr: ViewContainerRef,
-      @Optional() private _dndContainerDir: DndContainerDirective<any>,
-      ) {}
+      private _dndService: DndService,
+      @Inject(FD_DND_CONTAINER) @Optional() @SkipSelf() private _dndContainerDir: DndContainerDirective<any>,
+  ) {}
 
   /** @hidden */
-  ngAfterContentInit(): void {
-    this._setCDKDrag();
+  ngAfterViewInit(): void {
+    // this._setCDKDrag();
+    this.dragRef = this._dragDrop.createDrag(this.elementRef);
+    this.dragRef.previewClass = 'fd-icon-tab-bar-dnd-preview';
+    this._dndService.createDrag(this.dragRef);
   }
 
   /** @hidden */
@@ -103,7 +104,7 @@ export class DndContainerItemDirective implements AfterContentInit, OnDestroy {
 
     this.dragRef.started
         .pipe(takeUntil(this._onDestroy$))
-        .subscribe(() => this.onCdkDragStart())
+        .subscribe(() => this.onCdkDragStart());
   }
 
   /** @hidden */
@@ -138,15 +139,20 @@ export class DndContainerItemDirective implements AfterContentInit, OnDestroy {
     /** Takes distance from the beginning of window page */
     const rect = <DOMRect>this.elementRef.nativeElement.getBoundingClientRect();
 
-    const position: LinkPosition = isBefore ? 'before' : 'after';
-
     /** Vertically distance is counted by distance from top of the side + half of the element height */
     return {
       x: rect.left,
-      position: position,
       y: rect.top,
       width: rect.width,
       height: rect.height
     };
+  }
+
+  addClasses(classes: string[]): void {
+    this.elementRef.nativeElement.classList.add(...classes);
+  }
+
+  removeClasses(classes: string[]): void {
+    this.elementRef.nativeElement.classList.remove(...classes);
   }
 }

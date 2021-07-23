@@ -7,11 +7,37 @@
             </button>
         </fd-popover-control>
         <fd-popover-body>
-            <ul class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list" role="list">
-                <ng-container
-                    [ngTemplateOutletContext]="{level: 1, items: items}"
-                    [ngTemplateOutlet]="subItem"
-                >
+            <ul
+                fd-dnd-container
+                orientation="vertical"
+                flipperClass="fd-dnd-container--vertical"
+                class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list fd-dnd-container--vertical"
+                role="list"
+            >
+<!--                <ng-container-->
+<!--                    [ngTemplateOutletContext]="{level: 1, items: items}"-->
+<!--                    [ngTemplateOutlet]="subItem"-->
+<!--                >-->
+<!--                </ng-container>-->
+                <ng-container *ngFor="let item of items">
+                    <li
+                        [attr.aria-level]="1" class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
+                        [ngClass]="item.cssClasses"
+                        fd-dnd-container-item
+                        [dndItemData]="item"
+                        role="listitem"
+                        tabindex="-1">
+                        <a
+                            class="fd-list__link"
+                            tabindex="0"
+                            [attr.aria-selected]="item.uniqueKey === selectedSubItemKey"
+                            (click)="selectItem(item)"
+                        >
+                            <span class="fd-list__title">{{item.label}}</span>
+                            <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
+                            <span *ngIf="item.counter" class="fd-list__counter">({{item.counter}})</span>
+                        </a>
+                    </li>
                 </ng-container>
             </ul>
         </fd-popover-body>
@@ -38,7 +64,10 @@
         <fd-popover-body>
             <ul
                 fd-dnd-container
-                class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list"
+                flipperClass="fd-dnd-container--vertical"
+                nestedClass="fd-drag-hover-nested"
+                orientation="vertical"
+                class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list fd-dnd-container--vertical"
                 role="list"
             >
                 <ng-container [ngTemplateOutletContext]="{level: 1, items: parentTab.subItems}"
