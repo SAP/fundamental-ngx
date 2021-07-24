@@ -87,6 +87,7 @@
   padding: 0.875rem 0.188rem;
   opacity: .8;
   z-index: 9999!important;
+  background: red!important;
 }
 
 .cdk-drag-placeholder {
@@ -127,7 +128,6 @@
 }
 
 .fd-dnd-container--vertical {
-  background: #000!important;
 
   &::before {
     top: auto;

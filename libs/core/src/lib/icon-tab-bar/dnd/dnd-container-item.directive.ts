@@ -1,26 +1,22 @@
 import {
-  AfterContentInit, AfterViewInit,
+  AfterViewInit,
   Directive,
   ElementRef,
-  EventEmitter, Host, Inject,
+  EventEmitter,
   Input,
   OnDestroy,
-  Optional,
-  Output, Self, SkipSelf,
-  ViewContainerRef
+  Output,
 } from '@angular/core';
-import { DragDrop, DragRef, DropListRef, Point } from '@angular/cdk/drag-drop';
-import { DndContainerDirective, FD_DND_CONTAINER } from './dnd-container.directive';
+import { DragDrop, DragRef, Point } from '@angular/cdk/drag-drop';
+import { DndContainerDirective } from './dnd-container.directive';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { DndService } from './dnd.service';
+import { DndContainerGroupDirective } from './dnd-container-group.directive';
 
-type LinkPosition = 'after' | 'before';
 
 export interface ElementChord {
   x: number;
   y: number;
-  position?: LinkPosition;
   width: number;
   height: number;
 }
@@ -32,6 +28,14 @@ export class DndContainerItemDirective implements AfterViewInit, OnDestroy {
 
   @Input()
   dndItemData: any
+
+  /** Direction in which the list is oriented. */
+  @Input()
+  private nestedClass = 'fd-drag-hover-nested';
+
+  /** Direction in which the list is oriented. */
+  @Input()
+  private flipperClass = 'fd-dnd-container--vertical';
 
   /** Defines if element is draggable */
   @Input()
@@ -53,6 +57,9 @@ export class DndContainerItemDirective implements AfterViewInit, OnDestroy {
   readonly started = new EventEmitter<void>();
 
   /** @hidden */
+  isVertical = false;
+
+  /** @hidden */
   private readonly _onDestroy$ = new Subject<void>();
 
   /** @hidden */
@@ -67,22 +74,22 @@ export class DndContainerItemDirective implements AfterViewInit, OnDestroy {
   constructor(
       public elementRef: ElementRef,
       protected _dragDrop: DragDrop,
-      private _dndService: DndService,
-      @Inject(FD_DND_CONTAINER) @Optional() @SkipSelf() private _dndContainerDir: DndContainerDirective<any>,
+      private _dndContainerDir: DndContainerDirective<any>,
+      private _dndContainerGroupDir: DndContainerGroupDirective<any>,
   ) {}
 
   /** @hidden */
   ngAfterViewInit(): void {
-    // this._setCDKDrag();
-    this.dragRef = this._dragDrop.createDrag(this.elementRef);
-    this.dragRef.previewClass = 'fd-icon-tab-bar-dnd-preview';
-    this._dndService.createDrag(this.dragRef);
+    this._setCDKDrag();
+    this.isVertical = this._dndContainerDir.orientation === 'vertical';
+    console.log('this.isVertical', this.isVertical);
   }
 
   /** @hidden */
   ngOnDestroy(): void {
     console.log('ngOnDestroy');
     this._dndContainerDir.removeDragItem(this);
+    this._dndContainerGroupDir.removeDragItem(this);
     this._onDestroy$.next();
     this._onDestroy$.complete();
   }
@@ -93,6 +100,7 @@ export class DndContainerItemDirective implements AfterViewInit, OnDestroy {
     this.dragRef.previewClass = 'fd-icon-tab-bar-dnd-preview';
 
     this._dndContainerDir.addDragItem(this);
+    this._dndContainerGroupDir.addDragItem(this);
 
     this.dragRef.moved
         .pipe(takeUntil(this._onDestroy$))
@@ -135,7 +143,7 @@ export class DndContainerItemDirective implements AfterViewInit, OnDestroy {
   }
 
   /** @hidden */
-  getElementCoordinates(isBefore: boolean): ElementChord {
+  getElementCoordinates(): ElementChord {
     /** Takes distance from the beginning of window page */
     const rect = <DOMRect>this.elementRef.nativeElement.getBoundingClientRect();
 
@@ -148,11 +156,11 @@ export class DndContainerItemDirective implements AfterViewInit, OnDestroy {
     };
   }
 
-  addClasses(classes: string[]): void {
-    this.elementRef.nativeElement.classList.add(...classes);
+  triggerFlipperClass(force: boolean = false): void {
+    this.elementRef.nativeElement.classList.toggle(this.flipperClass, force);
   }
 
-  removeClasses(classes: string[]): void {
-    this.elementRef.nativeElement.classList.remove(...classes);
+  triggerNestedClass(force: boolean = false): void {
+    this.elementRef.nativeElement.classList.toggle(this.nestedClass, force);
   }
 }

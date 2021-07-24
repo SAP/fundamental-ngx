@@ -48,19 +48,25 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass implements OnIn
         super.selectExtraItem(selectedItem as IconTabBarItem);
     }
 
-    onDrop({ draggableItem, replacedItem }: FdDnDEvent<IconTabBarItem>): void {
-        const replacedParsedUidArr = replacedItem.uniqueKey.split(UNIQUE_KEY_SEPARATOR);
+    insertChild({ draggableItem, targetItem }: FdDnDEvent<IconTabBarItem>): void {
+
+        const previousArr = this._getParentArrByUid(draggableItem.uniqueKey);
+
+    }
+
+    replaceItem({ draggableItem, targetItem }: FdDnDEvent<IconTabBarItem>): void {
+        const replacedParsedUidArr = targetItem.uniqueKey.split(UNIQUE_KEY_SEPARATOR);
         replacedParsedUidArr.length = replacedParsedUidArr.length - 1;
         const draggableParsedUidArr = draggableItem.uniqueKey.split(UNIQUE_KEY_SEPARATOR);
         draggableParsedUidArr.length = draggableParsedUidArr.length - 1;
 
-        const newArr = this._getParentArrByUid(replacedItem.uniqueKey);
+        const newArr = this._getParentArrByUid(targetItem.uniqueKey);
         const previousArr = this._getParentArrByUid(draggableItem.uniqueKey);
 
         this.replaceItems({
             replacedItemInfo: {
                 arr: newArr,
-                item: replacedItem,
+                item: targetItem,
                 parentUid: replacedParsedUidArr.length ? replacedParsedUidArr.join(UNIQUE_KEY_SEPARATOR) : ''
             },
             draggableItemInfo: {
@@ -70,7 +76,6 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass implements OnIn
             },
         });
     }
-
 
     _getParentArrByUid(uid: string, arr: any[] = this.tabs): IconTabBarItem[] {
         let result;
@@ -90,7 +95,21 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass implements OnIn
         return result;
     }
 
+    insertItem({ replacedItemInfo, draggableItemInfo }: { replacedItemInfo: ItemToReplace, draggableItemInfo: ItemToReplace }): void {
+        draggableItemInfo.arr.splice(draggableItemInfo.item.index, 1);
+        if (!replacedItemInfo.item.subItems.length) {
+            replacedItemInfo.item.subItems = [];
+        }
+        replacedItemInfo.item.subItems.push(draggableItemInfo.item);
+        this.updateIndexes(draggableItemInfo.arr, draggableItemInfo.parentUid);
+        this.updateIndexes(replacedItemInfo.arr, replacedItemInfo.parentUid);
 
+        setTimeout(() => {
+            const extra = this.overflowDirective.getAmountOfExtraItems();
+            this.onChangeSize(extra);
+        }, 100);
+        setTimeout(_ => this.extraBtnDirective._calculatePosition(), 200);
+    }
 
     replaceItems({ replacedItemInfo, draggableItemInfo }: { replacedItemInfo: ItemToReplace, draggableItemInfo: ItemToReplace }): void {
         draggableItemInfo.arr.splice(draggableItemInfo.item.index, 1);

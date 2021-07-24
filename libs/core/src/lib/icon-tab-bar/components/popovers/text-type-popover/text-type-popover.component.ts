@@ -1,4 +1,13 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ComponentFactoryResolver,
+  EventEmitter,
+  Input, OnChanges,
+  Output,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import { IconTabBarPopoverClass } from '../icon-tab-bar-popover.class';
 import { IconTabBarItem } from '../../../types';
 
@@ -7,7 +16,7 @@ import { IconTabBarItem } from '../../../types';
   templateUrl: './text-type-popover.component.html',
   styleUrls: ['./text-type-popover.component.scss']
 })
-export class TextTypePopoverComponent extends IconTabBarPopoverClass {
+export class TextTypePopoverComponent extends IconTabBarPopoverClass implements OnChanges {
 
   @Input()
   isExtraItemsMode = false;
@@ -21,9 +30,13 @@ export class TextTypePopoverComponent extends IconTabBarPopoverClass {
   @Output()
   selectedSubItem: EventEmitter<any> = new EventEmitter<any>();
 
+  @ViewChild('treeContainer', {read: ViewContainerRef})
+  treeContainer: ViewContainerRef
+
   constructor(
       protected _cd: ChangeDetectorRef,
-  ) {
+      private resolver: ComponentFactoryResolver,
+) {
     super(_cd);
   }
 

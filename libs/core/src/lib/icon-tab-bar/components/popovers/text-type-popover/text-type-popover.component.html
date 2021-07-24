@@ -1,5 +1,5 @@
 <ng-container *ngIf="isExtraItemsMode">
-    <fd-popover [focusAutoCapture]="true" [focusTrapped]="true">
+    <fd-popover [focusAutoCapture]="true" [focusTrapped]="true" #popover>
         <fd-popover-control>
             <button class="fd-icon-tab-bar__overflow">
                 <span class="fd-icon-tab-bar__overflow-text">More</span>
@@ -9,36 +9,40 @@
         <fd-popover-body>
             <ul
                 fd-dnd-container
-                orientation="vertical"
-                flipperClass="fd-dnd-container--vertical"
-                class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list fd-dnd-container--vertical"
+                class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list"
                 role="list"
             >
-<!--                <ng-container-->
-<!--                    [ngTemplateOutletContext]="{level: 1, items: items}"-->
-<!--                    [ngTemplateOutlet]="subItem"-->
-<!--                >-->
-<!--                </ng-container>-->
-                <ng-container *ngFor="let item of items">
-                    <li
-                        [attr.aria-level]="1" class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
-                        [ngClass]="item.cssClasses"
-                        fd-dnd-container-item
-                        [dndItemData]="item"
-                        role="listitem"
-                        tabindex="-1">
-                        <a
-                            class="fd-list__link"
-                            tabindex="0"
-                            [attr.aria-selected]="item.uniqueKey === selectedSubItemKey"
-                            (click)="selectItem(item)"
-                        >
-                            <span class="fd-list__title">{{item.label}}</span>
-                            <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
-                            <span *ngIf="item.counter" class="fd-list__counter">({{item.counter}})</span>
-                        </a>
-                    </li>
+                <ng-container
+                    [ngTemplateOutletContext]="{level: 1, items: items}"
+                    [ngTemplateOutlet]="subItem"
+                >
                 </ng-container>
+                <ng-template #subItem let-items="items" let-level="level">
+                    <ng-container *ngFor="let item of items; trackBy:trackBy">
+                        <li
+                            [attr.aria-level]="level" class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
+                            [ngClass]="item.cssClasses"
+                            fd-dnd-container-item
+                            [dndItemData]="item"
+                            role="listitem"
+                            tabindex="-1">
+                            <a
+                                class="fd-list__link"
+                                tabindex="0"
+                                [attr.aria-selected]="item.uniqueKey === selectedSubItemKey"
+                                (click)="selectItem(item)"
+                            >
+                                <span class="fd-list__title">{{item.label}}</span>
+                                <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
+                                <span *ngIf="item.counter" class="fd-list__counter">({{item.counter}})</span>
+                            </a>
+                        </li>
+                        <ng-container *ngIf="item.subItems && item.subItems.length">
+                            <ng-container [ngTemplateOutletContext]="{level: level + 1, items: item.subItems}"
+                                          [ngTemplateOutlet]="subItem"></ng-container>
+                        </ng-container>
+                    </ng-container>
+                </ng-template>
             </ul>
         </fd-popover-body>
     </fd-popover>
@@ -64,42 +68,38 @@
         <fd-popover-body>
             <ul
                 fd-dnd-container
-                flipperClass="fd-dnd-container--vertical"
-                nestedClass="fd-drag-hover-nested"
-                orientation="vertical"
-                class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list fd-dnd-container--vertical"
+                class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list"
                 role="list"
             >
                 <ng-container [ngTemplateOutletContext]="{level: 1, items: parentTab.subItems}"
                               [ngTemplateOutlet]="subItem"></ng-container>
+                <ng-template #subItem let-items="items" let-level="level">
+                    <ng-container *ngFor="let item of items; trackBy:trackBy">
+                        <li
+                            [attr.aria-level]="level" class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
+                            [ngClass]="item.cssClasses"
+                            fd-dnd-container-item
+                            [dndItemData]="item"
+                            role="listitem"
+                            tabindex="-1">
+                            <a
+                                class="fd-list__link"
+                                tabindex="0"
+                                [attr.aria-selected]="item.uniqueKey === selectedSubItemKey"
+                                (click)="selectItem(item)"
+                            >
+                                <span class="fd-list__title">{{item.label}}</span>
+                                <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
+                                <span *ngIf="item.counter" class="fd-list__counter">({{item.counter}})</span>
+                            </a>
+                        </li>
+                        <ng-container *ngIf="item.subItems && item.subItems.length">
+                            <ng-container [ngTemplateOutletContext]="{level: level + 1, items: item.subItems}"
+                                          [ngTemplateOutlet]="subItem"></ng-container>
+                        </ng-container>
+                    </ng-container>
+                </ng-template>
             </ul>
         </fd-popover-body>
     </fd-popover>
 </ng-container>
-
-<ng-template #subItem let-items="items" let-level="level">
-    <ng-container *ngFor="let item of items; trackBy:trackBy">
-        <li
-            [attr.aria-level]="level" class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
-            [ngClass]="item.cssClasses"
-            fd-dnd-container-item
-            [dndItemData]="item"
-            role="listitem"
-            tabindex="-1">
-            <a
-                class="fd-list__link"
-                tabindex="0"
-                [attr.aria-selected]="item.uniqueKey === selectedSubItemKey"
-                (click)="selectItem(item)"
-            >
-                <span class="fd-list__title">{{item.label}}</span>
-                <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
-                <span *ngIf="item.counter" class="fd-list__counter">({{item.counter}})</span>
-            </a>
-        </li>
-        <ng-container *ngIf="item.subItems && item.subItems.length">
-            <ng-container [ngTemplateOutletContext]="{level: level + 1, items: item.subItems}"
-                          [ngTemplateOutlet]="subItem"></ng-container>
-        </ng-container>
-    </ng-container>
-</ng-template>
