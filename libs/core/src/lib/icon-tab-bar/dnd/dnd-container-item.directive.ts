@@ -82,7 +82,6 @@ export class DndContainerItemDirective implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this._setCDKDrag();
     this.isVertical = this._dndContainerDir.orientation === 'vertical';
-    console.log('this.isVertical', this.isVertical);
   }
 
   /** @hidden */

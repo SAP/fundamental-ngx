@@ -49,6 +49,6 @@ export class TextTypePopoverComponent extends IconTabBarPopoverClass implements 
   }
 
   trackBy(item: IconTabBarItem): string {
-    return item.uniqueKey;
+    return item.label;
   }
 }

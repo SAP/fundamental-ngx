@@ -138,14 +138,14 @@ export class DndContainerGroupDirective<T> implements AfterViewInit, OnDestroy {
   /** Method called, when element is released */
   dragEnd(dragDir: DndContainerItemDirective): void {
     if (this._closestFlipperIndex || this._closestFlipperIndex === 0) {
-      this.dndContainerItemDirectives[this._closestFlipperIndex].triggerNestedClass();
+      this.dndContainerItemDirectives[this._closestFlipperIndex].triggerFlipperClass();
       this.replaced.emit({
         draggableItem: dragDir.dndItemData,
-        targetItem: this.dndContainerItemDirectives[this._closestFlipperIndex + 1].dndItemData
+        targetItem: this.dndContainerItemDirectives[this._closestFlipperIndex].dndItemData
       });
     }
     if (this._closestItemIndex || this._closestItemIndex === 0) {
-      this.dndContainerItemDirectives[this._closestItemIndex].triggerFlipperClass();
+      this.dndContainerItemDirectives[this._closestItemIndex].triggerNestedClass();
       this.insertChild.emit({
         draggableItem: dragDir.dndItemData,
         targetItem: this.dndContainerItemDirectives[this._closestItemIndex].dndItemData
@@ -185,15 +185,16 @@ export class DndContainerGroupDirective<T> implements AfterViewInit, OnDestroy {
     this._elementsCoordinates.forEach((item, index) => {
       if (index !== this._elementsCoordinates.length - 1) {
         const isVertical = this.dndContainerItemDirectives[index].isVertical;
-        if (this.dndContainerItemDirectives[index].dndItemData.uniqueKey.startsWith('0.')) {
-          debugger;
-        }
         this._virtualFlipperCoordinates.push({
-          x: isVertical ? item.x : item.x + item.width,
-          y: isVertical ? (item.y + item.height) - FLIPPER_SIZE.verticalHeight / 2 : item.y,
+          x: isVertical ? item.x : item.x - FLIPPER_SIZE.width,
+          y: isVertical ? item.y + FLIPPER_SIZE.verticalHeight : item.y,
           width: isVertical ? item.width : FLIPPER_SIZE.width,
-          height: isVertical ? FLIPPER_SIZE.height / 2 : FLIPPER_SIZE.height
+          height: isVertical ? FLIPPER_SIZE.verticalHeight : FLIPPER_SIZE.height
         });
+        // x: isVertical ? item.x : item.x + item.width,
+        //     y: isVertical ? (item.y + item.height) - FLIPPER_SIZE.verticalHeight / 2 : item.y,
+        //     width: isVertical ? item.width : FLIPPER_SIZE.width,
+        //     height: isVertical ? FLIPPER_SIZE.height / 2 : FLIPPER_SIZE.height
       }
     });
   }
