@@ -6,6 +6,8 @@ import { TableColumnResizeService } from '../table-column-resize.service';
 
 export type TableColumnResizableSide = 'end' | 'both';
 
+export const TABLE_CELL_RESIZABLE_THRESHOLD_PX = 4;
+
 /**
  * Tracks mouse movement over the cell if the mouse pointer near the side of the cell, informs resize service.
  */
@@ -70,8 +72,8 @@ export class PlatformTableCellResizableDirective implements AfterViewInit {
         let resizedColumn: string;
 
         const pointerOnLeft = this._isRtl
-            ? (elPosition.right - event.clientX < 4 && this._resizableSide !== 'end')
-            : (event.clientX - elPosition.left < 4 && this._resizableSide !== 'end');
+            ? (elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX && this._resizableSide !== 'end')
+            : (event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX  && this._resizableSide !== 'end');
 
         if (pointerOnLeft) {
             resizerPosition = this._isRtl
@@ -82,8 +84,8 @@ export class PlatformTableCellResizableDirective implements AfterViewInit {
         }
 
         const pointerOnRight = this._isRtl
-            ? (event.clientX - elPosition.left < 4)
-            : (elPosition.right - event.clientX < 4);
+            ? (event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX)
+            : (elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX);
 
         if (pointerOnRight) {
             resizerPosition = this._isRtl
