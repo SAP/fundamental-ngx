@@ -8,7 +8,7 @@
         </fd-popover-control>
         <fd-popover-body>
             <ul
-                fd-dnd-container
+                fdIconBarDndList
                 class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list"
                 role="list"
             >
@@ -22,7 +22,7 @@
                         <li
                             [attr.aria-level]="level" class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
                             [ngClass]="item.cssClasses"
-                            fd-dnd-container-item
+                            fdIconBarDndItem
                             [dndItemData]="item"
                             role="listitem"
                             tabindex="-1">
@@ -67,7 +67,7 @@
         </fd-popover-control>
         <fd-popover-body>
             <ul
-                fd-dnd-container
+                fdIconBarDndList
                 class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list"
                 role="list"
             >
@@ -78,7 +78,7 @@
                         <li
                             [attr.aria-level]="level" class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
                             [ngClass]="item.cssClasses"
-                            fd-dnd-container-item
+                            fdIconBarDndItem
                             [dndItemData]="item"
                             role="listitem"
                             tabindex="-1">

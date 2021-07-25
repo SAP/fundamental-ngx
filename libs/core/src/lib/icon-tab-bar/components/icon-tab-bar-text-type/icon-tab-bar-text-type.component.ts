@@ -4,7 +4,7 @@ import { IconTabBarItem, IconTabBarSubItem } from '../../types';
 import { UNIQUE_KEY_SEPARATOR } from '../../constants';
 import { OverflowItemsDirective } from '../../../utils/directives/overflow-items/overflow-items.directive';
 import { ExtraButtonDirective } from '../../directives/extra-button/extra-button.directive';
-import { FdDnDEvent } from '../../dnd/dnd-container.directive';
+import { FdDnDEvent } from '../../directives/dnd/icon-bar-dnd-container.directive';
 
 
 interface ItemToReplace {
@@ -18,7 +18,7 @@ interface ItemToReplace {
     templateUrl: './icon-tab-bar-text-type.component.html',
     styleUrls: ['./icon-tab-bar-text-type.component.scss']
 })
-export class IconTabBarTextTypeComponent extends IconTabBarClass implements OnInit {
+export class IconTabBarTextTypeComponent extends IconTabBarClass {
 
     @ViewChild(OverflowItemsDirective)
     overflowDirective: OverflowItemsDirective;
@@ -36,11 +36,6 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass implements OnIn
         protected _cd: ChangeDetectorRef
     ) {
         super(_cd);
-    }
-
-    ngOnInit(): void {
-        super.ngOnInit();
-        console.log(this.tabs);
     }
 
     selectExtraItem(selectedItem: IconTabBarItem | IconTabBarSubItem): void {
@@ -177,7 +172,7 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass implements OnIn
             if (Array.isArray(item.subItems)) {
                 item.subItems = this.updateIndexes(item.subItems, item.uniqueKey);
             }
-            return item;
+            return {...item};
         });
 /*        arr.forEach((item, index) => {
             item.index = index;

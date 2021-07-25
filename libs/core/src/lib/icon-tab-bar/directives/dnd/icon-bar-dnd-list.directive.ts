@@ -2,23 +2,21 @@ import { AfterViewInit, Directive, ElementRef, Input, OnDestroy, Optional } from
 import { ReplaySubject, Subject } from 'rxjs';
 
 import { DragDrop, DragRef, DropListRef } from '@angular/cdk/drag-drop';
-import { DndContainerItemDirective } from './dnd-container-item.directive';
+import { IconBarDndItemDirective } from './icon-bar-dnd-item.directive';
 import { debounceTime, takeUntil } from 'rxjs/operators';
-import { DndContainerGroupDirective } from './dnd-container-group.directive';
-
-export interface FdDnDEvent<T> {
-    draggableItem: T;
-    targetItem: T;
-}
+import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive';
 
 @Directive({
-    selector: '[fdDndContainer], [fd-dnd-container]',
+    selector: '[fdIconBarDndList]',
 })
-export class DndContainerDirective<T> implements AfterViewInit, OnDestroy {
+export class IconBarDndListDirective<T> implements AfterViewInit, OnDestroy {
 
     /** Direction in which the list is oriented. */
     @Input()
     orientation: 'horizontal' | 'vertical' = 'vertical';
+
+    @Input()
+    autoScroll = true;
 
     /** @hidden */
     private _dropListRef: DropListRef;
@@ -34,25 +32,19 @@ export class DndContainerDirective<T> implements AfterViewInit, OnDestroy {
     constructor(
         public elementRef: ElementRef,
         private _dragDrop: DragDrop,
-        @Optional() private _dndGroup: DndContainerGroupDirective<T>,
+        @Optional() private _dndContainer: IconBarDndContainerDirective<T>,
     ) {
-    }
-
-    /** @hidden */
-    private _draggable = true;
-
-    /** Defines if drag and drop feature should be enabled for list items */
-    @Input()
-    set draggable(draggable: boolean) {
-        this._draggable = draggable;
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
         this._dropListRef = this._dragDrop.createDropList(this.elementRef.nativeElement);
         this._dropListRef.sortingDisabled = true;
-        this._dropListRef.autoScrollDisabled = true;
+        this._dropListRef.autoScrollDisabled = this.autoScroll;
+        this._dropListRef.disabled = true;
         this._dropListRef.withOrientation(this.orientation);
+
+        this._dndContainer.registerDndList(this);
 
 
         this._dndItems$
@@ -68,15 +60,20 @@ export class DndContainerDirective<T> implements AfterViewInit, OnDestroy {
         this._onDestroy$.next();
         this._onDestroy$.complete();
         this._dropListRef.dispose();
+        this._dndContainer.removeDndList(this);
     }
 
-    addDragItem(dragItem: DndContainerItemDirective): void {
+    addDragItem(dragItem: IconBarDndItemDirective): void {
         this._dragRefItems.push(dragItem.dragRef);
         this._dndItems$.next();
     }
 
-    removeDragItem(dragItem: DndContainerItemDirective): void {
+    removeDragItem(dragItem: IconBarDndItemDirective): void {
         this._dragRefItems = this._dragRefItems.filter(item => item !== dragItem.dragRef);
         this._dndItems$.next();
+    }
+
+    changeDraggableState(draggable: boolean): void {
+        this._dropListRef.disabled = draggable;
     }
 }

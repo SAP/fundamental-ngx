@@ -8,10 +8,10 @@ import {
   Output,
 } from '@angular/core';
 import { DragDrop, DragRef, Point } from '@angular/cdk/drag-drop';
-import { DndContainerDirective } from './dnd-container.directive';
+import { IconBarDndListDirective } from './icon-bar-dnd-list.directive';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { DndContainerGroupDirective } from './dnd-container-group.directive';
+import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive';
 
 
 export interface ElementChord {
@@ -22,38 +22,32 @@ export interface ElementChord {
 }
 
 @Directive({
-  selector: '[fdDndContainerItem], [fd-dnd-container-item]'
+  selector: '[fdIconBarDndItem]'
 })
-export class DndContainerItemDirective implements AfterViewInit, OnDestroy {
+export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
 
   @Input()
   dndItemData: any
 
   /** Direction in which the list is oriented. */
   @Input()
-  private nestedClass = 'fd-drag-hover-nested';
+  private previewClass: string[] = ['fd-icon-tab-bar-dnd-preview'];
 
   /** Direction in which the list is oriented. */
   @Input()
-  private flipperClass = 'fd-dnd-container--vertical';
+  private dndHoveredClass: string[] = ['fd-icon-tab-bar-dnd-hovered'];
 
-  /** Defines if element is draggable */
+  /** Direction in which the list is oriented. */
   @Input()
-  set draggable(draggable: boolean) {
-    this._draggable = draggable;
-    this.changeCDKDragState();
-  }
+  private dndSeparatorClass: string[] = ['fd-icon-tab-dnd-separator', 'fd-icon-tab-dnd-separator--vertical'];
 
   /** Event thrown when the element is moved by 1px */
-  @Output()
   readonly moved = new EventEmitter<Point>();
 
   /** Event thrown when the element is released */
-  @Output()
   readonly released = new EventEmitter<void>();
 
   /** Event thrown when the element is started to be dragged */
-  @Output()
   readonly started = new EventEmitter<void>();
 
   /** @hidden */
@@ -61,9 +55,6 @@ export class DndContainerItemDirective implements AfterViewInit, OnDestroy {
 
   /** @hidden */
   private readonly _onDestroy$ = new Subject<void>();
-
-  /** @hidden */
-  private _draggable = true;
 
   /** @hidden
    * Drag reference, object created from DND CDK Service
@@ -74,14 +65,14 @@ export class DndContainerItemDirective implements AfterViewInit, OnDestroy {
   constructor(
       public elementRef: ElementRef,
       protected _dragDrop: DragDrop,
-      private _dndContainerDir: DndContainerDirective<any>,
-      private _dndContainerGroupDir: DndContainerGroupDirective<any>,
+      private _dndContainerDir: IconBarDndListDirective<any>,
+      private _dndContainerGroupDir: IconBarDndContainerDirective<any>,
   ) {}
 
   /** @hidden */
   ngAfterViewInit(): void {
-    this._setCDKDrag();
     this.isVertical = this._dndContainerDir.orientation === 'vertical';
+    this._setCDKDrag();
   }
 
   /** @hidden */
@@ -96,10 +87,10 @@ export class DndContainerItemDirective implements AfterViewInit, OnDestroy {
   /** @hidden */
   private _setCDKDrag(): void {
     this.dragRef = this._dragDrop.createDrag(this.elementRef);
-    this.dragRef.previewClass = 'fd-icon-tab-bar-dnd-preview';
+    this.dragRef.previewClass = this.previewClass;
 
     this._dndContainerDir.addDragItem(this);
-    this._dndContainerGroupDir.addDragItem(this);
+    this._dndContainerGroupDir.registerDragItem(this);
 
     this.dragRef.moved
         .pipe(takeUntil(this._onDestroy$))
@@ -135,13 +126,6 @@ export class DndContainerItemDirective implements AfterViewInit, OnDestroy {
   }
 
   /** @hidden */
-  changeCDKDragState(): void {
-    if (this.dragRef) {
-      this.dragRef.disabled = !this._draggable;
-    }
-  }
-
-  /** @hidden */
   getElementCoordinates(): ElementChord {
     /** Takes distance from the beginning of window page */
     const rect = <DOMRect>this.elementRef.nativeElement.getBoundingClientRect();
@@ -155,11 +139,15 @@ export class DndContainerItemDirective implements AfterViewInit, OnDestroy {
     };
   }
 
-  triggerFlipperClass(force: boolean = false): void {
-    this.elementRef.nativeElement.classList.toggle(this.flipperClass, force);
+  toggleSeparatorStyles(force: boolean = false): void {
+    force
+        ? this.elementRef.nativeElement.classList.add(...this.dndSeparatorClass)
+        : this.elementRef.nativeElement.classList.remove(...this.dndSeparatorClass);
   }
 
-  triggerNestedClass(force: boolean = false): void {
-    this.elementRef.nativeElement.classList.toggle(this.nestedClass, force);
+  toggleHoveredStyles(force: boolean = false): void {
+    force
+        ? this.elementRef.nativeElement.classList.add(...this.dndHoveredClass)
+        : this.elementRef.nativeElement.classList.remove(...this.dndHoveredClass);
   }
 }

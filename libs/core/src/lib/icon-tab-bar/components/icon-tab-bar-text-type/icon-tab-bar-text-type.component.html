@@ -1,5 +1,5 @@
 <ng-container
-    fdDndContainerGroup
+    fdIconBarDndContainer
     (replaced)="replaceItem($event)"
     (insertChild)="insertChild($event)"
 >
@@ -10,15 +10,15 @@
         itemSelector="[data-overflowItem]"
         [isRtl]="isRtl"
         [offset]="100"
-        fd-dnd-container
+        fdIconBarDndList
         orientation="horizontal"
         (changed)="onChangeSize($event)"
     >
         <li *ngFor="let item of tabs; trackBy:trackBy"
             [ngClass]="item.cssClasses"
             data-overflowItem
-            fd-dnd-container-item
-            flipperClass="fd-drag-hover-flipper"
+            fdIconBarDndItem
+            [dndSeparatorClass]="['fd-icon-tab-dnd-separator']"
             [dndItemData]="item"
             class="fd-icon-tab-bar__item"
             [attr.aria-hidden]="item.hidden"

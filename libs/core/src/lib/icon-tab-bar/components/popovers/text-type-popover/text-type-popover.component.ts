@@ -1,9 +1,8 @@
 import {
   ChangeDetectorRef,
   Component,
-  ComponentFactoryResolver,
   EventEmitter,
-  Input, OnChanges,
+  Input,
   Output,
   ViewChild,
   ViewContainerRef
@@ -16,7 +15,7 @@ import { IconTabBarItem } from '../../../types';
   templateUrl: './text-type-popover.component.html',
   styleUrls: ['./text-type-popover.component.scss']
 })
-export class TextTypePopoverComponent extends IconTabBarPopoverClass implements OnChanges {
+export class TextTypePopoverComponent extends IconTabBarPopoverClass {
 
   @Input()
   isExtraItemsMode = false;
@@ -35,7 +34,6 @@ export class TextTypePopoverComponent extends IconTabBarPopoverClass implements 
 
   constructor(
       protected _cd: ChangeDetectorRef,
-      private resolver: ComponentFactoryResolver,
 ) {
     super(_cd);
   }

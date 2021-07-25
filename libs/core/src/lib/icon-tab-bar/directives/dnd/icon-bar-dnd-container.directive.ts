@@ -1,20 +1,26 @@
-import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { DragDrop, DragRef, Point } from '@angular/cdk/drag-drop';
-import { DndContainerItemDirective, ElementChord } from './dnd-container-item.directive';
+import { IconBarDndItemDirective, ElementChord } from './icon-bar-dnd-item.directive';
 import { Subject } from 'rxjs';
-import { FdDnDEvent } from './dnd-container.directive';
+import { IconBarDndListDirective } from './icon-bar-dnd-list.directive';
 import { takeUntil } from 'rxjs/operators';
-import { FLIPPER_SIZE } from '../constants';
+import { FLIPPER_SIZE } from '../../constants';
+
+export interface FdDnDEvent<T> {
+  draggableItem: T;
+  targetItem: T;
+}
 
 @Directive({
-  selector: '[fdDndContainerGroup]'
+  selector: '[fdIconBarDndContainer]'
 })
-export class DndContainerGroupDirective<T> implements AfterViewInit, OnDestroy {
+export class IconBarDndContainerDirective<T> implements OnDestroy {
 
   /** Defines if drag and drop feature should be enabled for list items */
   @Input()
   set draggable(draggable: boolean) {
     this._draggable = draggable;
+    this._changeDraggableState(draggable);
   }
 
   /** Event that is thrown, when the item is dropped */
@@ -28,7 +34,9 @@ export class DndContainerGroupDirective<T> implements AfterViewInit, OnDestroy {
   /** @hidden */
   private _dragRefItems: DragRef[] = [];
   /** @hidden  */
-  private dndContainerItemDirectives: DndContainerItemDirective[] = [];
+  private dndItemDirectives: IconBarDndItemDirective[] = [];
+  /** @hidden  */
+  private _dndListDirectives: Set<IconBarDndListDirective<T>> = new Set<IconBarDndListDirective<T>>();
   /** @hidden */
   private _elementsCoordinates: ElementChord[];
   /** @hidden */
@@ -53,20 +61,15 @@ export class DndContainerGroupDirective<T> implements AfterViewInit, OnDestroy {
   }
 
   /** @hidden */
-  ngAfterViewInit(): void {
-
-  }
-
-  /** @hidden */
   ngOnDestroy(): void {
     this._onDestroy$.next();
     this._onDestroy$.complete();
   }
 
   /** Method called, when element is started to be dragged */
-  dragStart(draggedItemDir: DndContainerItemDirective): void {
+  dragStart(draggedItemDir: IconBarDndItemDirective): void {
     /** Counting all of the elements's chords */
-    this._elementsCoordinates = this.dndContainerItemDirectives.map((item: DndContainerItemDirective) =>
+    this._elementsCoordinates = this.dndItemDirectives.map((item: IconBarDndItemDirective) =>
         item.getElementCoordinates());
     this._generateVirtualFlipper();
   }
@@ -95,15 +98,15 @@ export class DndContainerGroupDirective<T> implements AfterViewInit, OnDestroy {
     }
 
     if (this._closestItemIndex !== newClosestIndex) {
-      this.dndContainerItemDirectives[this._closestItemIndex]?.triggerNestedClass();
-      this.dndContainerItemDirectives[this._closestFlipperIndex]?.triggerFlipperClass();
+      this.dndItemDirectives[this._closestItemIndex]?.toggleHoveredStyles();
+      this.dndItemDirectives[this._closestFlipperIndex]?.toggleSeparatorStyles();
     }
 
     this._closestItemIndex = newClosestIndex;
 
     if (newClosestIndex !== null) {
       this._closestFlipperIndex = null;
-      this.dndContainerItemDirectives[newClosestIndex].triggerNestedClass(true);
+      this.dndItemDirectives[newClosestIndex].toggleHoveredStyles(true);
       return;
     }
 
@@ -122,33 +125,33 @@ export class DndContainerGroupDirective<T> implements AfterViewInit, OnDestroy {
     }
 
     if (this._closestFlipperIndex !== newClosestFlipperIndex) {
-      this.dndContainerItemDirectives[this._closestItemIndex]?.triggerNestedClass();
-      this.dndContainerItemDirectives[this._closestFlipperIndex]?.triggerFlipperClass();
+      this.dndItemDirectives[this._closestItemIndex]?.toggleHoveredStyles();
+      this.dndItemDirectives[this._closestFlipperIndex]?.toggleSeparatorStyles();
     }
 
     this._closestFlipperIndex = newClosestFlipperIndex;
 
     if (newClosestFlipperIndex !== null) {
       this._closestItemIndex = null;
-      this.dndContainerItemDirectives[newClosestFlipperIndex].triggerFlipperClass(true);
+      this.dndItemDirectives[newClosestFlipperIndex].toggleSeparatorStyles(true);
       return;
     }
   }
 
   /** Method called, when element is released */
-  dragEnd(dragDir: DndContainerItemDirective): void {
+  dragEnd(dragDir: IconBarDndItemDirective): void {
     if (this._closestFlipperIndex || this._closestFlipperIndex === 0) {
-      this.dndContainerItemDirectives[this._closestFlipperIndex].triggerFlipperClass();
+      this.dndItemDirectives[this._closestFlipperIndex].toggleSeparatorStyles();
       this.replaced.emit({
         draggableItem: dragDir.dndItemData,
-        targetItem: this.dndContainerItemDirectives[this._closestFlipperIndex].dndItemData
+        targetItem: this.dndItemDirectives[this._closestFlipperIndex].dndItemData
       });
     }
     if (this._closestItemIndex || this._closestItemIndex === 0) {
-      this.dndContainerItemDirectives[this._closestItemIndex].triggerNestedClass();
+      this.dndItemDirectives[this._closestItemIndex].toggleHoveredStyles();
       this.insertChild.emit({
         draggableItem: dragDir.dndItemData,
-        targetItem: this.dndContainerItemDirectives[this._closestItemIndex].dndItemData
+        targetItem: this.dndItemDirectives[this._closestItemIndex].dndItemData
       });
     }
     /** Reset */
@@ -158,17 +161,25 @@ export class DndContainerGroupDirective<T> implements AfterViewInit, OnDestroy {
     this._closestFlipperIndex = null;
   }
 
-  addDragItem(dragItem: DndContainerItemDirective): void {
+  registerDragItem(dragItem: IconBarDndItemDirective): void {
     this._dragRefItems.push(dragItem.dragRef);
-    this.dndContainerItemDirectives.push(dragItem);
+    this.dndItemDirectives.push(dragItem);
     dragItem.moved.pipe(takeUntil(this._onDestroy$)).subscribe((position: Point) => this.onMove(position));
     dragItem.started.pipe(takeUntil(this._onDestroy$)).subscribe(() => this.dragStart(dragItem));
     dragItem.released.pipe(takeUntil(this._onDestroy$)).subscribe(() => this.dragEnd(dragItem));
   }
 
-  removeDragItem(dragItem: DndContainerItemDirective): void {
+  removeDragItem(dragItem: IconBarDndItemDirective): void {
     this._dragRefItems = this._dragRefItems.filter(item => item !== dragItem.dragRef);
-    this.dndContainerItemDirectives = this.dndContainerItemDirectives.filter(item => item !== dragItem);
+    this.dndItemDirectives = this.dndItemDirectives.filter(item => item !== dragItem);
+  }
+
+  registerDndList(listDir: IconBarDndListDirective<T>): void {
+    this._dndListDirectives.add(listDir);
+  }
+
+  removeDndList(listDir: IconBarDndListDirective<T>): void {
+    this._dndListDirectives.delete(listDir);
   }
 
   _isMouseOnFlipper(element: ElementChord, mousePosition: Point): boolean {
@@ -184,7 +195,7 @@ export class DndContainerGroupDirective<T> implements AfterViewInit, OnDestroy {
   private _generateVirtualFlipper(): void {
     this._elementsCoordinates.forEach((item, index) => {
       if (index !== this._elementsCoordinates.length - 1) {
-        const isVertical = this.dndContainerItemDirectives[index].isVertical;
+        const isVertical = this.dndItemDirectives[index].isVertical;
         this._virtualFlipperCoordinates.push({
           x: isVertical ? item.x : item.x - FLIPPER_SIZE.width,
           y: isVertical ? item.y + FLIPPER_SIZE.verticalHeight : item.y,
@@ -200,12 +211,9 @@ export class DndContainerGroupDirective<T> implements AfterViewInit, OnDestroy {
   }
 
   private _changeDraggableState(draggable: boolean): void {
-    // if (this.dndItems) {
-    //   this.dndItems.forEach((item) => {
-    //     item.listDraggable = draggable;
-    //     item.changeCDKDragState();
-    //   });
-    // }
+    for (const list of this._dndListDirectives) {
+      list.changeDraggableState(draggable);
+    }
   }
 }
 
