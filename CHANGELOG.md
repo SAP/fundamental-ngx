@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.146](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.145...v0.31.0-rc.146) (2021-07-26)
+
+
+### Bug Fixes
+
+* **platform:** remove hardcoded styles for step-input as part of style cleanup ([#6057](https://github.com/SAP/fundamental-ngx/issues/6057)) ([123cac8](https://github.com/SAP/fundamental-ngx/commit/123cac87a4a226d640b1ecc8bd6f8c780133e399))
+
 ## [0.31.0-rc.145](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.144...v0.31.0-rc.145) (2021-07-26)
 
 
