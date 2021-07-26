@@ -102,6 +102,7 @@ export abstract class IconTabBarClass implements OnInit {
     }
 
     _recalculateVisibleItems(extraItems: number): void {
+        debugger;
         this._lastVisibleTabIndex = this._tabs.length - 1 - extraItems;
         this._tabs.forEach(item => {
             item.hidden = false;

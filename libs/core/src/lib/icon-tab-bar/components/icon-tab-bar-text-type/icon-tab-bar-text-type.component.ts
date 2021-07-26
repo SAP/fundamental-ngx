@@ -95,7 +95,7 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
             const extra = this.overflowDirective.getAmountOfExtraItems();
             this._recalculateVisibleItems(extra);
         }, 100);
-        setTimeout(_ => this.extraBtnDirective._calculatePosition(), 200);
+        setTimeout(_ => this.extraBtnDirective.calculatePosition(), 200);
         this._cd.detectChanges();
     }
 
@@ -130,7 +130,7 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
         });
     }
 
-    trackBy(item: IconTabBarItem): string {
+    _trackBy(item: IconTabBarItem): string {
         return item.label;
     }
 }

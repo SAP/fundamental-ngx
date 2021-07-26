@@ -12,7 +12,6 @@ import {
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
-export type ChangedOverflowItemsEvent = 'resize'|'treeChanging'|'init'|'rtlMode'
 
 @Directive({
     selector: '[fdOverflowItems]'
@@ -23,7 +22,7 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
     itemSelector: string;
 
     @Input()
-    offset: number;
+    overflowOffset: number;
 
     @Input()
     isRtl: boolean;
@@ -42,7 +41,8 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes.rtl && !changes.rtl.firstChange) {
+        if (changes.isRtl && !changes.isRtl.firstChange) {
+            console.log('changes');
             this._calculateAmountOfOverflowedItems();
         }
     }
@@ -71,6 +71,7 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
         const contentWidth = this._el.nativeElement.clientWidth
             - parseFloat(computed.paddingLeft)
             - parseFloat(computed.paddingRight);
+        debugger;
         return this._checkWidthWithOffset(arrItems, contentWidth);
     }
 
@@ -82,7 +83,7 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
     private _checkWidthWithOffset(arrItems: HTMLElement[], containerWidth: number, checkWithOffset: boolean = false): number {
         let itemsTotalWidth = 0;
         const parentWidth = checkWithOffset
-            ? containerWidth - this.offset
+            ? containerWidth - this.overflowOffset
             : containerWidth;
 
         arrItems.forEach(item => {

@@ -68,7 +68,7 @@ export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     ngOnDestroy(): void {
-        console.log('ngOnDestroy');
+        // console.log('ngOnDestroy');
         this._dndContainerDir.removeDragItem(this);
         this._dndContainerGroupDir.removeDragItem(this);
         this._onDestroy$.next();

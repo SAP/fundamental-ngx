@@ -9,12 +9,12 @@
         fdOverflowItems
         itemSelector="[data-overflowItem]"
         [isRtl]="isRtl"
-        [offset]="100"
+        [overflowOffset]="100"
         fdIconBarDndList
         orientation="horizontal"
         (changed)="_recalculateVisibleItems($event)"
     >
-        <li *ngFor="let item of _tabs; trackBy:trackBy"
+        <li *ngFor="let item of _tabs; trackBy:_trackBy"
             [ngClass]="item.cssClasses"
             data-overflowItem
             fdIconBarDndItem

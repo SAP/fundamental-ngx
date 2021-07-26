@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { IconTabBarItem } from '../../../../../../../../../libs/core/src/lib/icon-tab-bar/types';
 import { IconTabBarExampleClass } from '../icon-tab-bar-example.class';
 
 @Component({

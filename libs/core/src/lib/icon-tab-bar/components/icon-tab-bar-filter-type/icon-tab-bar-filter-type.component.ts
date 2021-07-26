@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { IconTabBarClass } from '../../icon-tab-bar.class';
 
 @Component({
@@ -7,4 +7,6 @@ import { IconTabBarClass } from '../../icon-tab-bar.class';
 })
 export class IconTabBarFilterTypeComponent extends IconTabBarClass {
 
+    @Input()
+    showTabAll = true;
 }

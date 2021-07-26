@@ -5,7 +5,7 @@
     fdOverflowItems
     [isRtl]="isRtl"
     itemSelector='[data-overflowItem]'
-    [offset]='_offsetOverflowDirective'
+    [overflowOffset]="_offsetOverflowDirective"
     (changed)='_recalculateVisibleItems($event)'
 >
     <li
@@ -61,7 +61,7 @@
         class="fd-icon-tab-bar__item fd-icon-tab-bar__item--extra-btn"
         fdExtraButton
         [isRtl]="isRtl"
-        [offset]="16"
+        [extraButtonOffset]="16"
         [anchorIndexInsideParent]="_anchorIndex"
     >
         <fd-icon-tab-bar-popover

@@ -1,4 +1,14 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Optional, Output, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    Input,
+    OnDestroy,
+    OnInit,
+    Optional,
+    Output,
+    ViewEncapsulation
+} from '@angular/core';
 import { IconTabBarBackground, IconTabBarItem, IconTabBarSize, TabDestinyMode, TabType } from './types';
 import { ContentDensityService, IconFont, RtlService } from '@fundamental-ngx/core';
 import { takeUntil } from 'rxjs/operators';
@@ -71,9 +81,10 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this._onDestroy$))
             .subscribe((isRtl: boolean) => {
                 const shouldDetect = this._isRtl !== null;
+                this._cd.detectChanges();
                 this._isRtl = isRtl;
                 if (shouldDetect) {
-                    setTimeout(() => this._cd.detectChanges(), 100);
+                    // this._cd.detectChanges();
                 }
             });
     }

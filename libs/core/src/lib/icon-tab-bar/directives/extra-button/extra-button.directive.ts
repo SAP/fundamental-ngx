@@ -14,7 +14,7 @@ export class ExtraButtonDirective implements OnChanges, AfterViewInit, OnDestroy
     isRtl: boolean;
 
     @Input()
-    offset = 0;
+    extraButtonOffset = 0;
 
     private _onDestroy$ = new Subject();
 
@@ -24,14 +24,11 @@ export class ExtraButtonDirective implements OnChanges, AfterViewInit, OnDestroy
     }
 
     ngOnChanges(changes: SimpleChanges): void {
+        console.log('changsssssses', changes);
         if (changes.isRtl && !changes.isRtl.firstChange) {
-            this._calculatePosition();
+            debugger;
+            this.calculatePosition();
         }
-    }
-
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     ngAfterViewInit(): void {
@@ -41,12 +38,17 @@ export class ExtraButtonDirective implements OnChanges, AfterViewInit, OnDestroy
                 distinctUntilChanged(),
                 takeUntil(this._onDestroy$),
             )
-            .subscribe((_ =>  this._calculatePosition()));
+            .subscribe((_ =>  this.calculatePosition()));
 
-        setTimeout(() => this._calculatePosition());
+        setTimeout(() => this.calculatePosition());
     }
 
-     _calculatePosition(): void {
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
+    }
+
+     calculatePosition(): void {
         const nativeEl = this._el.nativeElement;
         const parent = nativeEl.parentElement;
 
@@ -62,8 +64,8 @@ export class ExtraButtonDirective implements OnChanges, AfterViewInit, OnDestroy
             : parseInt(computed.marginRight, 10);
 
         const myPositionWithOffset = this.isRtl
-            ? myPosition - margin - this.offset
-            : myPosition + margin + this.offset;
+            ? myPosition - margin - this.extraButtonOffset
+            : myPosition + margin + this.extraButtonOffset;
 
 
         this._el.nativeElement.style.left = `${myPositionWithOffset}px`;

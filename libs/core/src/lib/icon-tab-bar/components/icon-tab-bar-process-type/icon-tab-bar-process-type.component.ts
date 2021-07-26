@@ -56,7 +56,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
                 ? this.recalculateItemsByPrevArr(extra, amountOfPreviousSteps)
                 : this.recalculateItemsByNextArr(extra, amountOfNextSteps);
         }, 100);
-        setTimeout(_ => this.extraBtnDirective._calculatePosition(), 200)
+        setTimeout(_ => this.extraBtnDirective.calculatePosition(), 200)
     }
 
     _recalculateVisibleItems(extraItems: number): void {
