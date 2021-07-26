@@ -18,7 +18,7 @@
                 >
                 </ng-container>
                 <ng-template #subItem let-items="items" let-level="level">
-                    <ng-container *ngFor="let item of items; trackBy:trackBy">
+                    <ng-container *ngFor="let item of items; trackBy:_trackBy">
                         <li
                             [attr.aria-level]="level" class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
                             [ngClass]="item.cssClasses"
@@ -29,8 +29,8 @@
                             <a
                                 class="fd-list__link"
                                 tabindex="0"
-                                [attr.aria-selected]="item.uniqueKey === selectedSubItemKey"
-                                (click)="selectItem(item)"
+                                [attr.aria-selected]="item.uId === selectedSubItemUid"
+                                (click)="_selectItem(item)"
                             >
                                 <span class="fd-list__title">{{item.label}}</span>
                                 <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
@@ -74,7 +74,7 @@
                 <ng-container [ngTemplateOutletContext]="{level: 1, items: parentTab.subItems}"
                               [ngTemplateOutlet]="subItem"></ng-container>
                 <ng-template #subItem let-items="items" let-level="level">
-                    <ng-container *ngFor="let item of items; trackBy:trackBy">
+                    <ng-container *ngFor="let item of items; trackBy:_trackBy">
                         <li
                             [attr.aria-level]="level" class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
                             [ngClass]="item.cssClasses"
@@ -85,8 +85,8 @@
                             <a
                                 class="fd-list__link"
                                 tabindex="0"
-                                [attr.aria-selected]="item.uniqueKey === selectedSubItemKey"
-                                (click)="selectItem(item)"
+                                [attr.aria-selected]="item.uId === selectedSubItemUid"
+                                (click)="_selectItem(item)"
                             >
                                 <span class="fd-list__title">{{item.label}}</span>
                                 <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>

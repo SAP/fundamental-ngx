@@ -1,8 +1,7 @@
 <ng-container
     fdIconBarDndContainer
-    [draggable]="draggable"
-    (replaced)="replaceItem($event)"
-    (insertChild)="insertChild($event)"
+    [draggable]="enableTabReordering"
+    (dropped)="_onDropped($event)"
 >
     <ul
         class="fd-icon-tab-bar__header"
@@ -13,9 +12,9 @@
         [offset]="100"
         fdIconBarDndList
         orientation="horizontal"
-        (changed)="onChangeSize($event)"
+        (changed)="_recalculateVisibleItems($event)"
     >
-        <li *ngFor="let item of tabs; trackBy:trackBy"
+        <li *ngFor="let item of _tabs; trackBy:trackBy"
             [ngClass]="item.cssClasses"
             data-overflowItem
             fdIconBarDndItem
@@ -29,8 +28,8 @@
                 class="fd-icon-tab-bar__tab"
                 role="tab"
                 *ngIf="!item.subItems"
-                (click)="selectItem(item, $event)"
-                [attr.aria-selected]="item.uniqueKey === selectedItemKey"
+                (click)="_selectItem(item, $event)"
+                [attr.aria-selected]="item.uId === _selectedUid"
             >
             <span class="fd-icon-tab-bar__tag">
                 {{ item.label }}
@@ -41,24 +40,24 @@
             <ng-container *ngIf="item.subItems">
                 <fd-text-type-popover
                     [parentTab]="item"
-                    [selectedSubItemKey]="selectedItemKey"
-                    (selectedSubItem)="selectItem($event)"
+                    [selectedSubItemUid]="_selectedUid"
+                    (selectedSubItem)="_selectItem($event)"
                 >
                 </fd-text-type-popover>
             </ng-container>
         </li>
         <li
-            *ngIf="extraItems.length"
+            *ngIf="_extraTabs.length"
             role="presentation"
             class="fd-icon-tab-bar__item fd-icon-tab-bar__item--extra-btn"
             fdExtraButton
             [isRtl]="isRtl"
-            [anchorIndexInsideParent]="lastVisibleTabIndex"
+            [anchorIndexInsideParent]="_lastVisibleTabIndex"
         >
             <fd-text-type-popover
-                [items]="extraItems"
+                [items]="_extraTabs"
                 [isExtraItemsMode]="true"
-                (selectedExtraItem)="selectExtraItem($event)"
+                (selectedExtraItem)="_selectExtraItem($event)"
             >
             </fd-text-type-popover>
         </li>

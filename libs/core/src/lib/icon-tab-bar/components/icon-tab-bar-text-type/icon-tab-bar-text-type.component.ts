@@ -1,11 +1,10 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, ViewChild } from '@angular/core';
 import { IconTabBarClass } from '../../icon-tab-bar.class';
-import { IconTabBarItem, IconTabBarSubItem } from '../../types';
+import { IconTabBarItem } from '../../types';
 import { UNIQUE_KEY_SEPARATOR } from '../../constants';
 import { OverflowItemsDirective } from '../../../utils/directives/overflow-items/overflow-items.directive';
 import { ExtraButtonDirective } from '../../directives/extra-button/extra-button.directive';
 import { FdDnDEvent } from '../../directives/dnd/icon-bar-dnd-container.directive';
-
 
 interface ItemToReplace {
     arr: IconTabBarItem[],
@@ -16,7 +15,6 @@ interface ItemToReplace {
 @Component({
     selector: 'fd-icon-tab-bar-text-type',
     templateUrl: './icon-tab-bar-text-type.component.html',
-    styleUrls: ['./icon-tab-bar-text-type.component.scss']
 })
 export class IconTabBarTextTypeComponent extends IconTabBarClass {
 
@@ -27,13 +25,7 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
     extraBtnDirective: ExtraButtonDirective;
 
     @Input()
-    maxNestingLevel = 0;
-
-    @Input()
-    enableTabReordering = false;
-
-    @Input()
-    draggable = true;
+    enableTabReordering = true;
 
     constructor(
         protected _cd: ChangeDetectorRef
@@ -41,110 +33,77 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
         super(_cd);
     }
 
-    selectExtraItem(selectedItem: IconTabBarItem | IconTabBarSubItem): void {
+    _selectExtraItem(selectedItem: IconTabBarItem): void {
         // Check if selected item is subItem
         // Then to find root tab, and pass it to parent method.
-        if (selectedItem.uniqueKey.includes(UNIQUE_KEY_SEPARATOR)) {
-            const rootTabUniqueKey = selectedItem.uniqueKey.split(UNIQUE_KEY_SEPARATOR)[0];
-            selectedItem = this.tabs.find(tab => tab.uniqueKey === rootTabUniqueKey);
+        if (selectedItem.uId.includes(UNIQUE_KEY_SEPARATOR)) {
+            const rootTabUid = selectedItem.uId.split(UNIQUE_KEY_SEPARATOR)[0];
+            selectedItem = this._tabs.find(tab => tab.uId === rootTabUid);
         }
-        super.selectExtraItem(selectedItem as IconTabBarItem);
+        super._selectExtraItem(selectedItem);
     }
 
-    insertChild({ draggableItem, targetItem }: FdDnDEvent<IconTabBarItem>): void {
-        const replacedParsedUidArr = targetItem.uniqueKey.split(UNIQUE_KEY_SEPARATOR);
+    _onDropped({ draggableItem, targetItem, action }: FdDnDEvent<IconTabBarItem>): void {
+        const replacedParsedUidArr = targetItem.uId.split(UNIQUE_KEY_SEPARATOR);
         replacedParsedUidArr.length = replacedParsedUidArr.length - 1;
-        const draggableParsedUidArr = draggableItem.uniqueKey.split(UNIQUE_KEY_SEPARATOR);
+        const draggableParsedUidArr = draggableItem.uId.split(UNIQUE_KEY_SEPARATOR);
         draggableParsedUidArr.length = draggableParsedUidArr.length - 1;
 
-        const newArr = this._getParentArrByUid(targetItem.uniqueKey);
-        const previousArr = this._getParentArrByUid(draggableItem.uniqueKey);
-        this.insertItem(
-            {
-                replacedItemInfo: {
-                    arr: newArr,
-                    item: targetItem,
-                    parentUid: replacedParsedUidArr.length ? replacedParsedUidArr.join(UNIQUE_KEY_SEPARATOR) : ''
-                },
-                draggableItemInfo: {
-                    arr: previousArr,
-                    item: draggableItem,
-                    parentUid: draggableParsedUidArr.length ? draggableParsedUidArr.join(UNIQUE_KEY_SEPARATOR) : ''
-                },
+        const newArr = this._getParentArrByUid(targetItem.uId);
+        const previousArr = this._getParentArrByUid(draggableItem.uId);
+
+        const dataForAction = {
+            replacedItemInfo: {
+                arr: newArr,
+                item: targetItem,
+                parentUid: replacedParsedUidArr.length ? replacedParsedUidArr.join(UNIQUE_KEY_SEPARATOR) : ''
+            },
+            draggableItemInfo: {
+                arr: previousArr,
+                item: draggableItem,
+                parentUid: draggableParsedUidArr.length ? draggableParsedUidArr.join(UNIQUE_KEY_SEPARATOR) : ''
             }
-        );
+        };
+
+        action === 'replace'
+            ? this._replaceItems(dataForAction)
+            : this._insertItemAsChild(dataForAction);
     }
 
-    replaceItem({ draggableItem, targetItem }: FdDnDEvent<IconTabBarItem>): void {
-        const replacedParsedUidArr = targetItem.uniqueKey.split(UNIQUE_KEY_SEPARATOR);
-        replacedParsedUidArr.length = replacedParsedUidArr.length - 1;
-        const draggableParsedUidArr = draggableItem.uniqueKey.split(UNIQUE_KEY_SEPARATOR);
-        draggableParsedUidArr.length = draggableParsedUidArr.length - 1;
-
-        const newArr = this._getParentArrByUid(targetItem.uniqueKey);
-        const previousArr = this._getParentArrByUid(draggableItem.uniqueKey);
-
-        this.replaceItems(
-            {
-                replacedItemInfo: {
-                    arr: newArr,
-                    item: targetItem,
-                    parentUid: replacedParsedUidArr.length ? replacedParsedUidArr.join(UNIQUE_KEY_SEPARATOR) : ''
-                },
-                draggableItemInfo: {
-                    arr: previousArr,
-                    item: draggableItem,
-                    parentUid: draggableParsedUidArr.length ? draggableParsedUidArr.join(UNIQUE_KEY_SEPARATOR) : ''
-                }
-            }
-        );
-    }
-
-    insertItem({ replacedItemInfo, draggableItemInfo }: { replacedItemInfo: ItemToReplace, draggableItemInfo: ItemToReplace }): void {
+    private _insertItemAsChild(data: { replacedItemInfo: ItemToReplace, draggableItemInfo: ItemToReplace }): void {
+        const { replacedItemInfo, draggableItemInfo } = data;
         draggableItemInfo.arr.splice(draggableItemInfo.item.index, 1);
         if (!replacedItemInfo.item.subItems.length) {
             replacedItemInfo.item.subItems = [];
         }
         replacedItemInfo.item.subItems.push(draggableItemInfo.item);
-        // this.updateIndexes(draggableItemInfo.arr, draggableItemInfo.parentUid);
-        // this.updateIndexes(replacedItemInfo.arr, replacedItemInfo.parentUid);
-        this.tabs = this.updateIndexes(this.tabs);
-
-        setTimeout(() => {
-            const extra = this.overflowDirective.getAmountOfExtraItems();
-            this.onChangeSize(extra);
-        }, 100);
-        setTimeout(_ => this.extraBtnDirective._calculatePosition(), 200);
-        this._cd.detectChanges();
+        this._tabs = this._updateTabsIndexes(this._tabs);
+        this._triggerRecalculationVisibleItems();
     }
 
-    replaceItems({ replacedItemInfo, draggableItemInfo }: { replacedItemInfo: ItemToReplace, draggableItemInfo: ItemToReplace }): void {
+    private _replaceItems(data: { replacedItemInfo: ItemToReplace, draggableItemInfo: ItemToReplace }): void {
+        const { replacedItemInfo, draggableItemInfo } = data;
         draggableItemInfo.arr.splice(draggableItemInfo.item.index, 1);
         const newIndex = replacedItemInfo?.item?.index || 0;
         replacedItemInfo.arr.splice(newIndex, 0, draggableItemInfo.item);
-        // if (draggableItemInfo.parentUid) {
-        //     const dragParentArr = this._getParentArrByUid(draggableItemInfo.parentUid);
-        // }
-        this.tabs = this.updateIndexes(this.tabs);
-
-        // this.updateIndexes(draggableItemInfo.arr, draggableItemInfo.parentUid);
-        // if (draggableItemInfo.arr !== replacedItemInfo.arr) {
-        //     this.updateIndexes(replacedItemInfo.arr, replacedItemInfo.parentUid);
-        // }
-        this._cd.detectChanges();
-
-        setTimeout(() => {
-            const extra = this.overflowDirective.getAmountOfExtraItems();
-            this.onChangeSize(extra);
-        }, 100);
-        setTimeout(_ => this.extraBtnDirective._calculatePosition(), 200);
+        this._tabs = this._updateTabsIndexes(this._tabs);
+        this._triggerRecalculationVisibleItems();
     }
 
-    private _getParentArrByUid(uid: string, arr: any[] = this.tabs): IconTabBarItem[] {
+    private _triggerRecalculationVisibleItems(): void {
+        setTimeout(() => {
+            const extra = this.overflowDirective.getAmountOfExtraItems();
+            this._recalculateVisibleItems(extra);
+        }, 100);
+        setTimeout(_ => this.extraBtnDirective._calculatePosition(), 200);
+        this._cd.detectChanges();
+    }
+
+    private _getParentArrByUid(uid: string, arr: any[] = this._tabs): IconTabBarItem[] {
         let result;
         for (let i = 0; i < arr.length; i++) {
             const item = arr[i];
-            if (item.uniqueKey === uid) {
+            if (item.uId === uid) {
                 result = arr;
                 break;
             } else if (Array.isArray(item.subItems)) {
@@ -158,31 +117,17 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
         return result;
     }
 
-
-    updateIndexes(arr: any[], parentUid?: string): any[] {
+    private _updateTabsIndexes(arr: IconTabBarItem[], parentUid?: string): IconTabBarItem[] {
         return arr.map((item, index) => {
             item.index = index;
-            if (parentUid) {
-                item.uniqueKey = `${parentUid}${UNIQUE_KEY_SEPARATOR}${index}`;
-            } else {
-                item.uniqueKey = `${index}`;
-            }
+            item.uId = parentUid
+                ? `${parentUid}${UNIQUE_KEY_SEPARATOR}${index}`
+                : `${index}`;
             if (Array.isArray(item.subItems)) {
-                item.subItems = this.updateIndexes(item.subItems, item.uniqueKey);
+                item.subItems = this._updateTabsIndexes(item.subItems, item.uId);
             }
             return {...item};
         });
-/*        arr.forEach((item, index) => {
-            item.index = index;
-            if (parentUid) {
-                item.uniqueKey = `${parentUid}${UNIQUE_KEY_SEPARATOR}${index}`;
-            } else {
-                item.uniqueKey = `${index}`;
-            }
-            if (Array.isArray(item.subItems)) {
-                this.updateIndexes(item.subItems, item.uniqueKey);
-            }
-        });*/
     }
 
     trackBy(item: IconTabBarItem): string {

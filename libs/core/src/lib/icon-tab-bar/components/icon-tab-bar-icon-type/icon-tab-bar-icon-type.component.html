@@ -5,9 +5,9 @@
     [isRtl]="isRtl"
     itemSelector='[data-overflowItem]'
     [offset]='100'
-    (changed)='onChangeSize($event)'
+    (changed)='_recalculateVisibleItems($event)'
 >
-    <li *ngFor="let item of tabs"
+    <li *ngFor="let item of _tabs"
         [ngClass]="item.cssClasses"
         data-overflowItem
         [attr.aria-hidden]='item.hidden'
@@ -18,8 +18,8 @@
             aria-selected="true"
             class="fd-icon-tab-bar__tab"
             role="tab"
-            [attr.aria-selected]="item.uniqueKey === selectedItemKey"
-            (click)="selectItem(item)"
+            [attr.aria-selected]="item.uId === _selectedUid"
+            (click)="_selectItem(item)"
         >
             <div class="fd-icon-tab-bar__container">
                         <span class="fd-icon-tab-bar__icon">
@@ -34,13 +34,13 @@
         </a>
     </li>
     <li
-        *ngIf="extraItems.length"
+        *ngIf="_extraTabs.length"
         role="presentation"
         class="fd-icon-tab-bar__item fd-icon-tab-bar__item--extra-btn"
         fdExtraButton
         [isRtl]="isRtl"
-        [anchorIndexInsideParent]="lastVisibleTabIndex"
+        [anchorIndexInsideParent]="_lastVisibleTabIndex"
     >
-        <fd-icon-tab-bar-popover [items]="extraItems" (selectedExtraItem)="selectExtraItem($event)"></fd-icon-tab-bar-popover>
+        <fd-icon-tab-bar-popover [items]="_extraTabs" (selectedExtraItem)="_selectExtraItem($event)"></fd-icon-tab-bar-popover>
     </li>
 </ul>

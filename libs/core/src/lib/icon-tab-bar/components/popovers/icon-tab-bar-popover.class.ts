@@ -23,11 +23,11 @@ export abstract class IconTabBarPopoverClass implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.items) {
-            this._setStyles();
+            this._setStyles(this.items);
         }
     }
 
-    private _setStyles(items: any[] = this.items): void {
+    protected _setStyles(items: any[] = []): void {
         items.forEach(item => {
             if (item.color) {
                 item.cssClasses = [`fd-list__item--${item.color}`];
@@ -38,7 +38,7 @@ export abstract class IconTabBarPopoverClass implements OnChanges {
         });
     }
 
-    selectItem(selectedItem: IconTabBarItem): void {
+    _selectItem(selectedItem: IconTabBarItem): void {
         this.selectedExtraItem.emit(selectedItem);
         this.popover.close();
         // this._cd.detectChanges();

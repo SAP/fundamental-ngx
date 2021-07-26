@@ -10,12 +10,12 @@ import {
     SimpleChanges
 } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, skip, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 export type ChangedOverflowItemsEvent = 'resize'|'treeChanging'|'init'|'rtlMode'
 
 @Directive({
-    selector: '[fdOverflowItems], [fd-overflow-items]'
+    selector: '[fdOverflowItems]'
 })
 export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestroy {
 
@@ -28,11 +28,13 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
     @Input()
     isRtl: boolean;
 
+    @Input()
+    itemCssBlockValue = 'flex';
+
     @Output()
     changed: EventEmitter<number> = new EventEmitter<number>();
 
     private _onDestroy$ = new Subject();
-    itemsLength = 0;
 
     constructor(
         private _el: ElementRef,
@@ -41,7 +43,7 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.rtl && !changes.rtl.firstChange) {
-            this.calculateAmountOfOverflowedItems('rtlMode');
+            this._calculateAmountOfOverflowedItems();
         }
     }
 
@@ -52,9 +54,14 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
                 distinctUntilChanged(),
                 takeUntil(this._onDestroy$),
             )
-            .subscribe((_) => this.calculateAmountOfOverflowedItems('resize'));
+            .subscribe((_) => this._calculateAmountOfOverflowedItems());
 
-        this.calculateAmountOfOverflowedItems('init');
+        this._calculateAmountOfOverflowedItems();
+    }
+
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     getAmountOfExtraItems(): number {
@@ -64,15 +71,15 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
         const contentWidth = this._el.nativeElement.clientWidth
             - parseFloat(computed.paddingLeft)
             - parseFloat(computed.paddingRight);
-        return this.checkWidthWithOffset(arrItems, contentWidth);
+        return this._checkWidthWithOffset(arrItems, contentWidth);
     }
 
-    private calculateAmountOfOverflowedItems(event: ChangedOverflowItemsEvent): void {
+    private _calculateAmountOfOverflowedItems(): void {
         const extra = this.getAmountOfExtraItems()
         this.changed.emit(extra);
     }
 
-    private checkWidthWithOffset(arrItems: HTMLElement[], containerWidth: number, checkWithOffset: boolean = false): number {
+    private _checkWidthWithOffset(arrItems: HTMLElement[], containerWidth: number, checkWithOffset: boolean = false): number {
         let itemsTotalWidth = 0;
         const parentWidth = checkWithOffset
             ? containerWidth - this.offset
@@ -80,7 +87,7 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
 
         arrItems.forEach(item => {
             item.hidden = true;
-            item.style.display = 'flex';
+            item.style.display = this.itemCssBlockValue;
         });
 
         for (let i = 0; i < arrItems.length; i++) {
@@ -95,7 +102,7 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
                 this._clearTempStyles(arrItems);
                 return checkWithOffset
                     ? arrItems.length - i
-                    : this.checkWidthWithOffset(arrItems, containerWidth, true);
+                    : this._checkWidthWithOffset(arrItems, containerWidth, true);
             }
         }
 
@@ -108,10 +115,5 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
             item.hidden = false;
             item.style.removeProperty('display');
         });
-    }
-
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 }

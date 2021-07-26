@@ -6,7 +6,6 @@ import { IconTabBarPopoverClass } from '../icon-tab-bar-popover.class';
 @Component({
     selector: 'fd-icon-tab-bar-popover',
     templateUrl: './icon-tab-bar-popover.component.html',
-    styleUrls: ['./icon-tab-bar-popover.component.scss']
 })
 export class IconTabBarPopoverComponent extends IconTabBarPopoverClass {
 

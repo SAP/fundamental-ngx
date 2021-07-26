@@ -1,14 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    EventEmitter,
-    Input, OnDestroy,
-    OnInit,
-    Optional,
-    Output,
-    ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, OnInit, Optional, Output, ViewEncapsulation } from '@angular/core';
 import { IconTabBarBackground, IconTabBarItem, IconTabBarSize, TabDestinyMode, TabType } from './types';
 import { ContentDensityService, IconFont, RtlService } from '@fundamental-ngx/core';
 import { takeUntil } from 'rxjs/operators';
@@ -19,23 +9,21 @@ import { Subject } from 'rxjs';
     templateUrl: './icon-tab-bar.component.html',
     styleUrls: ['./icon-tab-bar.component.scss'],
     // changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None
 })
 export class IconTabBarComponent implements OnInit, OnDestroy {
 
     @Input()
-    type: TabType = 'text';
+    iconTabType: TabType = 'text';
 
     @Input()
-    items: IconTabBarItem[];
-
-    @Input()
-    maxNestingLevel = 0;
+    iconTabItems: IconTabBarItem[];
 
     @Input()
     densityMode: TabDestinyMode = 'cozy';
 
-    @Input() font: IconFont = 'SAP-icons';
+    @Input()
+    iconTabFont: IconFont = 'SAP-icons';
 
     @Input()
     enableTabReordering = false;
@@ -44,15 +32,15 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
     showTabAll = true;
 
     @Input()
-    background: IconTabBarBackground = 'solid';
+    iconTabBackground: IconTabBarBackground = 'solid';
 
     @Input()
-    size: IconTabBarSize;
+    iconTabSize: IconTabBarSize;
 
     @Output()
-    selected: EventEmitter<any> = new EventEmitter<any>();
+    iconTabSelected: EventEmitter<any> = new EventEmitter<any>();
 
-    cssClassForContainer: string[];
+    _cssClassForContainer: string[];
     _isRtl: boolean = null;
 
     private _onDestroy$ = new Subject();
@@ -60,11 +48,14 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
     constructor(
         private _cd: ChangeDetectorRef,
         @Optional() private _contentDensityService: ContentDensityService,
-        @Optional() private _rtlService: RtlService,
+        @Optional() private _rtlService: RtlService
     ) {
     }
 
     ngOnInit(): void {
+        this._cssClassForContainer = this._generateContainerStyles();
+
+        // ToDo: Implement destiny subscription.
         // if (this.densityMode === 'inherit') {
         //     this._contentDensityService._contentDensityListener
         //         .subscribe((density) => {
@@ -81,51 +72,33 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
             .subscribe((isRtl: boolean) => {
                 const shouldDetect = this._isRtl !== null;
                 this._isRtl = isRtl;
-                // if (shouldDetect) {
-                //     setTimeout(() => this._cd.detectChanges(), 100);
-                // }
-        });
-
-        // this.items.forEach((item, index) => {
-        //     item.cssClasses = [];
-        //     item.index = index;
-        //     if (Array.isArray(item.subItems) && item.subItems.length) {
-        //         this.generateId(item);
-        //     }
-        //     if (item.color) {
-        //         item.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
-        //     }
-        // });
-
-        this.cssClassForContainer = [`fd-icon-tab-bar--${this.type}`];
-        if (this.type === 'process' && this.items[0].icon) {
-            this.cssClassForContainer.push('fd-icon-tab-bar--icon');
+                if (shouldDetect) {
+                    setTimeout(() => this._cd.detectChanges(), 100);
+                }
+            });
+    }
+    
+    private _generateContainerStyles(): string[] {
+        const styles = [`fd-icon-tab-bar--${this.iconTabType}`];
+        if (this.iconTabType === 'process' && this.iconTabItems[0].icon) {
+            styles.push('fd-icon-tab-bar--icon');
         }
-        if (this.background !== 'solid') {
-            this.cssClassForContainer.push(`fd-icon-tab-bar--${this.background}`)
+        if (this.iconTabBackground !== 'solid') {
+            styles.push(`fd-icon-tab-bar--${this.iconTabBackground}`);
         }
-        if (this.size) {
-            this.cssClassForContainer.push(`fd-icon-tab-bar--${this.size}`)
+        if (this.iconTabSize) {
+            styles.push(`fd-icon-tab-bar--${this.iconTabSize}`);
         }
         if (this.densityMode === 'compact') {
-            this.cssClassForContainer.push('fd-icon-tab-bar--compact');
+            styles.push('fd-icon-tab-bar--compact');
         }
+            return styles;
+
     }
 
-    // ToDo: поменять как-то айдишники
-    // generateId(parent: IconTabBarItem): void {
-    //     parent.subItems.forEach((item, index) => {
-    //        item.index = parent.index === 0
-    //            ? parent.index * 10 + index
-    //            : 10 + index;
-    //        if (Array.isArray(item.subItems) && item.subItems.length) {
-    //            this.generateId(item);
-    //        }
-    //     });
-    // }
-
-    selectItem(selectedItem: IconTabBarItem): void {
-        this.selected.emit(selectedItem.index)
+    /** @hidden  */
+    _selectItem(selectedItem: IconTabBarItem): void {
+        this.iconTabSelected.emit(selectedItem.index);
     }
 
     ngOnDestroy(): void {

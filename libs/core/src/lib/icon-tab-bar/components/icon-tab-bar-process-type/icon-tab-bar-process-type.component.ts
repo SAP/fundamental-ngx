@@ -2,13 +2,13 @@ import { Component, ViewChild } from '@angular/core';
 import { IconTabBarClass } from '../../icon-tab-bar.class';
 import { IconTabBarItem } from '../../types';
 import { cloneDeep } from '../../../utils/functions/clone-deep';
-import { ChangedOverflowItemsEvent, OverflowItemsDirective } from '../../../utils/directives/overflow-items/overflow-items.directive';
+import { OverflowItemsDirective } from '../../../utils/directives/overflow-items/overflow-items.directive';
 import { ExtraButtonDirective } from '../../directives/extra-button/extra-button.directive';
+import { ICON_TAB_HIDDEN_CSS } from '../../constants';
 
 @Component({
     selector: 'fd-icon-tab-bar-process-type',
     templateUrl: './icon-tab-bar-process-type.component.html',
-    styleUrls: ['./icon-tab-bar-process-type.component.scss']
 })
 export class IconTabBarProcessTypeComponent extends IconTabBarClass {
 
@@ -18,38 +18,38 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
     @ViewChild(ExtraButtonDirective)
     extraBtnDirective: ExtraButtonDirective;
 
+
+    _offsetOverflowDirective = 30;
     _nextSteps: IconTabBarItem[] = [];
-
     _prevSteps: IconTabBarItem[] = [];
+    _showLeftBtn = false;
+    _showRightBtn = false;
 
-    firstVisibleTabIndex = 0;
-    currentStepIndex = 0;
-    offsetForOverflowDirective = 30;
-    showLeftBtn = false;
-    showRightBtn = false;
+    private _firstVisibleTabIndex = 0;
+    private _currentStepIndex = 0;
 
-    selectItem(selectedItem: IconTabBarItem): void {
-        this.currentStepIndex = selectedItem.index;
-        super.selectItem(selectedItem);
+    _selectItem(selectedItem: IconTabBarItem): void {
+        this._currentStepIndex = selectedItem.index;
+        super._selectItem(selectedItem);
     }
 
-    selectExtraItem(selectedItem: IconTabBarItem): void {
-        this.currentStepIndex = selectedItem.index;
+    _selectExtraItem(selectedItem: IconTabBarItem): void {
+        this._currentStepIndex = selectedItem.index;
         let amountOfPreviousSteps;
         let amountOfNextSteps;
         let isLeftStrategy: boolean;
-        if (this.currentStepIndex > this.lastVisibleTabIndex) {
-            amountOfNextSteps = this._nextSteps.length - (this.currentStepIndex - this.lastVisibleTabIndex);
-            this.showRightBtn = !!amountOfNextSteps;
-            this.showLeftBtn = true;
+        if (this._currentStepIndex > this._lastVisibleTabIndex) {
+            amountOfNextSteps = this._nextSteps.length - (this._currentStepIndex - this._lastVisibleTabIndex);
+            this._showRightBtn = !!amountOfNextSteps;
+            this._showLeftBtn = true;
             isLeftStrategy = false;
         } else {
-            amountOfPreviousSteps = this._prevSteps.length - (this.firstVisibleTabIndex - this.currentStepIndex);
-            this.showRightBtn = true;
+            amountOfPreviousSteps = this._prevSteps.length - (this._firstVisibleTabIndex - this._currentStepIndex);
+            this._showRightBtn = true;
             isLeftStrategy = true;
-            this.showLeftBtn = amountOfPreviousSteps;
+            this._showLeftBtn = amountOfPreviousSteps;
         }
-        this.selectItem(selectedItem);
+        this._selectItem(selectedItem);
         setTimeout(() => {
             const extra = this.overflowDirective.getAmountOfExtraItems();
             isLeftStrategy
@@ -57,24 +57,19 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
                 : this.recalculateItemsByNextArr(extra, amountOfNextSteps);
         }, 100);
         setTimeout(_ => this.extraBtnDirective._calculatePosition(), 200)
-        // this._recalculateExtraItems(extraItems, amountOfPreviousSteps);
     }
 
-    onChangeSize(extraItems: number): void {
-        // let extraItems = data.amount;
-        // if (this._prevSteps.length) {
-        //     // Убрать кнопку которая сюда попала.
-        //     extraItems = data.amount - 1;
-        // }
-        const amountOfPrevSteps = this.currentStepIndex > extraItems ? extraItems : this.currentStepIndex;
+    _recalculateVisibleItems(extraItems: number): void {
+        const amountOfPrevSteps = this._currentStepIndex > extraItems ? extraItems : this._currentStepIndex;
         this.recalculateItemsByPrevArr(extraItems, amountOfPrevSteps);
     }
+
     private clearExtraList(): void {
         this._nextSteps = [];
         this._prevSteps = [];
-        this.tabs.forEach(item => {
+        this._tabs.forEach(item => {
             item.hidden = false;
-            item.cssClasses = item.cssClasses.filter(cssClass => cssClass !== 'fd-icon-tab-bar__item--hidden');
+            item.cssClasses = item.cssClasses.filter(cssClass => cssClass !== ICON_TAB_HIDDEN_CSS);
         });
     }
 
@@ -83,39 +78,37 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
         if (!extraItems) {
             return;
         }
-        // const amountOfPreviousSteps = this.currentStepIndex - 1;
-        const visibleAmountOfItems = this.tabs.length - extraItems;
-        for (let i = this.tabs.length - amountOfNextSteps; i < this.tabs.length; i++) {
-            this._nextSteps.push(cloneDeep(this.tabs[i]));
-            this.tabs[i].hidden = true;
-            this.tabs[i].cssClasses.push('fd-icon-tab-bar__item--hidden');
+        const visibleAmountOfItems = this._tabs.length - extraItems;
+        for (let i = this._tabs.length - amountOfNextSteps; i < this._tabs.length; i++) {
+            this._nextSteps.push(cloneDeep(this._tabs[i]));
+            this._tabs[i].hidden = true;
+            this._tabs[i].cssClasses.push(ICON_TAB_HIDDEN_CSS);
         }
 
-        // this.offsetForOverflowDirective = this._prevSteps.length ? 132 : 68;
-        this.showRightBtn = !!this._nextSteps.length;
-        this.firstVisibleTabIndex = this.tabs.length - visibleAmountOfItems - this._nextSteps.length;
-        this.lastVisibleTabIndex = this.tabs.length - amountOfNextSteps - 1;
+        this._showRightBtn = !!this._nextSteps.length;
+        this._firstVisibleTabIndex = this._tabs.length - visibleAmountOfItems - this._nextSteps.length;
+        this._lastVisibleTabIndex = this._tabs.length - amountOfNextSteps - 1;
 
         if (this._nextSteps.length === extraItems) {
             return;
         }
 
         let amountOfPrevSteps = extraItems - this._nextSteps.length;
-        let nextIndex = this.firstVisibleTabIndex - 1;
+        let nextIndex = this._firstVisibleTabIndex - 1;
         while (amountOfPrevSteps > 0) {
-            this._prevSteps.push(cloneDeep(this.tabs[nextIndex]));
-            this.tabs[nextIndex].hidden = true;
-            this.tabs[nextIndex].cssClasses.push('fd-icon-tab-bar__item--hidden');
+            this._prevSteps.push(cloneDeep(this._tabs[nextIndex]));
+            this._tabs[nextIndex].hidden = true;
+            this._tabs[nextIndex].cssClasses.push(ICON_TAB_HIDDEN_CSS);
 
             --nextIndex;
             --amountOfPrevSteps;
         }
         // Добавляю +1 для левой кнопки
-        this.anchorIndex = this._prevSteps.length
+        this._anchorIndex = this._prevSteps.length
             ? this._prevSteps.length + visibleAmountOfItems
             : this._prevSteps.length + visibleAmountOfItems - 1;
 
-        this.showLeftBtn = !!this._prevSteps.length;
+        this._showLeftBtn = !!this._prevSteps.length;
         // this._cd.detectChanges();
     }
 
@@ -124,21 +117,19 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
         if (!extraItems) {
             return;
         }
-        // const amountOfPreviousSteps = this.currentStepIndex - 1;
-        const visibleAmountOfItems = this.tabs.length - extraItems;
+        const visibleAmountOfItems = this._tabs.length - extraItems;
         for (let i = amountOfPreviousSteps - 1; i >= 0; i--) {
-            this._prevSteps.push(cloneDeep(this.tabs[i]));
-            this.tabs[i].hidden = true;
-            this.tabs[i].cssClasses.push('fd-icon-tab-bar__item--hidden');
+            this._prevSteps.push(cloneDeep(this._tabs[i]));
+            this._tabs[i].hidden = true;
+            this._tabs[i].cssClasses.push(ICON_TAB_HIDDEN_CSS);
         }
 
-        // this.offsetForOverflowDirective = this._prevSteps.length ? 132 : 68;
-        this.firstVisibleTabIndex = this._prevSteps.length;
-        this.lastVisibleTabIndex = this._prevSteps.length + visibleAmountOfItems - 1;
-        this.showLeftBtn = !!this._prevSteps.length;
+        this._firstVisibleTabIndex = this._prevSteps.length;
+        this._lastVisibleTabIndex = this._prevSteps.length + visibleAmountOfItems - 1;
+        this._showLeftBtn = !!this._prevSteps.length;
 
         if (this._prevSteps.length === extraItems) {
-            this.showRightBtn = false;
+            this._showRightBtn = false;
             return;
         }
 
@@ -147,65 +138,20 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
             ? this._prevSteps.length + visibleAmountOfItems
             : visibleAmountOfItems;
         while (amountOfNextSteps > 0) {
-            this._nextSteps.push(cloneDeep(this.tabs[nextIndex]));
-            this.tabs[nextIndex].hidden = true;
-            this.tabs[nextIndex].cssClasses.push('fd-icon-tab-bar__item--hidden');
+            this._nextSteps.push(cloneDeep(this._tabs[nextIndex]));
+            this._tabs[nextIndex].hidden = true;
+            this._tabs[nextIndex].cssClasses.push(ICON_TAB_HIDDEN_CSS);
 
             ++nextIndex;
             --amountOfNextSteps;
         }
         // Добавляю +1 для левой кнопки
-        this.anchorIndex = this._prevSteps.length
+        this._anchorIndex = this._prevSteps.length
             ? this._prevSteps.length + visibleAmountOfItems
             : this._prevSteps.length + visibleAmountOfItems - 1;
 
-        this.showRightBtn = !!this._nextSteps.length;
+        this._showRightBtn = !!this._nextSteps.length;
         // this._cd.detectChanges();
-        this.offsetForOverflowDirective = this._nextSteps.length ? 30 : 0;
+        this._offsetOverflowDirective = this._nextSteps.length ? 30 : 0;
     }
-/*
-    private _recalculateExtraItems(extraItems: number, amountOfPreviousSteps: number): void {
-        this.clearExtraList();
-        if (!extraItems) {
-            return;
-        }
-        // const amountOfPreviousSteps = this.currentStepIndex - 1;
-        const visibleAmountOfItems = this.tabs.length - extraItems;
-        for (let i = amountOfPreviousSteps - 1; i >= 0; i--) {
-            this._prevSteps.push(cloneDeep(this.tabs[i]));
-            this.tabs[i].hidden = true;
-            this.tabs[i].cssClasses.push('fd-icon-tab-bar__item--hidden');
-        }
-
-        // this.offsetForOverflowDirective = this._prevSteps.length ? 132 : 68;
-        this.firstVisibleTabIndex = this._prevSteps.length;
-        this.lastVisibleTabIndex = this._prevSteps.length + visibleAmountOfItems - 1;
-        this.showLeftBtn = !!this._prevSteps.length;
-        debugger;
-        if ((this._prevSteps.length + visibleAmountOfItems) === this.tabs.length) {
-            return;
-        }
-
-        let amountOfNextSteps = extraItems - this._prevSteps.length;
-        let nextIndex = this._prevSteps.length
-            ? this._prevSteps.length + visibleAmountOfItems
-            : visibleAmountOfItems;
-        while (amountOfNextSteps > 0) {
-            this._nextSteps.push(cloneDeep(this.tabs[nextIndex]));
-            this.tabs[nextIndex].hidden = true;
-            this.tabs[nextIndex].cssClasses.push('fd-icon-tab-bar__item--hidden');
-
-            ++nextIndex;
-            --amountOfNextSteps;
-        }
-        // Добавляю +1 для левой кнопки
-        this.anchorIndex = this._prevSteps.length
-            ? this._prevSteps.length + visibleAmountOfItems
-            : this._prevSteps.length + visibleAmountOfItems - 1;
-
-        this.showRightBtn = !!this._nextSteps.length;
-        // this._cd.detectChanges();
-    }
-*/
-
 }

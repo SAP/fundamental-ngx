@@ -29,6 +29,11 @@ export class ExtraButtonDirective implements OnChanges, AfterViewInit, OnDestroy
         }
     }
 
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
+    }
+
     ngAfterViewInit(): void {
         fromEvent(window, 'resize')
             .pipe(
@@ -62,10 +67,5 @@ export class ExtraButtonDirective implements OnChanges, AfterViewInit, OnDestroy
 
 
         this._el.nativeElement.style.left = `${myPositionWithOffset}px`;
-    }
-
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 }

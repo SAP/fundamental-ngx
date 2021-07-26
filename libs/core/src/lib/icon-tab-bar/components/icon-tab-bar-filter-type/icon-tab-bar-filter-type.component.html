@@ -5,7 +5,7 @@
     [isRtl]="isRtl"
     itemSelector="[data-overflowItem]"
     [offset]="100"
-    (changed)="onChangeSize($event)"
+    (changed)="_recalculateVisibleItems($event)"
 >
     <li
         *ngIf="showTabAll"
@@ -13,18 +13,18 @@
         role="presentation"
         data-overflowItem
     >
-        <a (click)="selectItem(tabs[0])"
-           [attr.aria-selected]="tabs[0]?.uniqueKey === selectedItemKey"
+        <a (click)="_selectItem(_tabs[0])"
+           [attr.aria-selected]="_tabs[0]?.uId === _selectedUid"
            class="fd-icon-tab-bar__tab"
            role="tab"
         >
             <div class="fd-icon-tab-bar__container fd-icon-tab-bar__container--filter">
-                <span *ngIf="items[0]?.counter" class="fd-icon-tab-bar__filter-counter">{{items[0]?.counter}}</span>
-                <span class="fd-icon-tab-bar__filter-label">{{items[0]?.label}}</span>
+                <span *ngIf="tabsConfig[0]?.counter" class="fd-icon-tab-bar__filter-counter">{{tabsConfig[0]?.counter}}</span>
+                <span class="fd-icon-tab-bar__filter-label">{{tabsConfig[0]?.label}}</span>
             </div>
         </a>
     </li>
-    <li *ngFor="let item of tabs | slice:1"
+    <li *ngFor="let item of _tabs | slice:1"
         [ngClass]="item.cssClasses"
         class="fd-icon-tab-bar__item"
         role="presentation"
@@ -32,8 +32,8 @@
         [attr.aria-hidden]="item.hidden"
     >
         <a
-            (click)="selectItem(item)"
-            [attr.aria-selected]="item.uniqueKey === selectedItemKey"
+            (click)="_selectItem(item)"
+            [attr.aria-selected]="item.uId === _selectedUid"
             aria-selected="true"
             class="fd-icon-tab-bar__tab"
             role="tab"
@@ -48,13 +48,13 @@
         </a>
     </li>
     <li
-        *ngIf="extraItems.length"
+        *ngIf="_extraTabs.length"
         role="presentation"
         class="fd-icon-tab-bar__item fd-icon-tab-bar__item--extra-btn"
         fdExtraButton
         [isRtl]="isRtl"
-        [anchorIndexInsideParent]="lastVisibleTabIndex"
+        [anchorIndexInsideParent]="_lastVisibleTabIndex"
     >
-        <fd-icon-tab-bar-popover [items]="extraItems" (selectedExtraItem)="selectExtraItem($event)"></fd-icon-tab-bar-popover>
+        <fd-icon-tab-bar-popover [items]="_extraTabs" (selectedExtraItem)="_selectExtraItem($event)"></fd-icon-tab-bar-popover>
     </li>
 </ul>

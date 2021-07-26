@@ -9,6 +9,7 @@ import { FLIPPER_SIZE } from '../../constants';
 export interface FdDnDEvent<T> {
   draggableItem: T;
   targetItem: T;
+  action: 'replace'|'insert'
 }
 
 @Directive({
@@ -25,11 +26,7 @@ export class IconBarDndContainerDirective<T> implements OnDestroy {
 
   /** Event that is thrown, when the item is dropped */
   @Output()
-  replaced = new EventEmitter<FdDnDEvent<T>>();
-
-  /** Event that is thrown, when the item is dropped */
-  @Output()
-  insertChild = new EventEmitter<FdDnDEvent<T>>();
+  dropped = new EventEmitter<FdDnDEvent<T>>();
 
   /** @hidden */
   private _dragRefItems: DragRef[] = [];
@@ -83,7 +80,6 @@ export class IconBarDndContainerDirective<T> implements OnDestroy {
 
   /** Method called, when the item is being moved by 1 px */
   onMove(mousePosition: Point): void {
-    // console.log(mousePosition);
     /** Temporary object, to store lowest distance values */
     let newClosestIndex: number = null;
     let newClosestFlipperIndex: number = null;
@@ -117,9 +113,8 @@ export class IconBarDndContainerDirective<T> implements OnDestroy {
       return;
     }
 
-    // Flipper checking
+    // Separator checking
     this._virtualFlipperCoordinates.find((element, index) => {
-      /** Check if element can be replaced */
       const isMouseOnFlipper = this._isMouseOnFlipper(element, mousePosition);
       if (isMouseOnFlipper) {
         newClosestFlipperIndex = index;
@@ -149,16 +144,18 @@ export class IconBarDndContainerDirective<T> implements OnDestroy {
   dragEnd(dragDir: IconBarDndItemDirective): void {
     if (this._closestFlipperIndex || this._closestFlipperIndex === 0) {
       this.dndItemDirectives[this._closestFlipperIndex].toggleSeparatorStyles();
-      this.replaced.emit({
+      this.dropped.emit({
         draggableItem: dragDir.dndItemData,
-        targetItem: this.dndItemDirectives[this._closestFlipperIndex].dndItemData
+        targetItem: this.dndItemDirectives[this._closestFlipperIndex].dndItemData,
+        action: 'replace'
       });
     }
     if (this._closestItemIndex || this._closestItemIndex === 0) {
       this.dndItemDirectives[this._closestItemIndex].toggleHoveredStyles();
-      this.insertChild.emit({
+      this.dropped.emit({
         draggableItem: dragDir.dndItemData,
-        targetItem: this.dndItemDirectives[this._closestItemIndex].dndItemData
+        targetItem: this.dndItemDirectives[this._closestItemIndex].dndItemData,
+        action: 'insert'
       });
     }
     /** Reset */

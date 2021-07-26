@@ -1,14 +1,13 @@
 import { ChangeDetectorRef, Directive, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IconTabBarItem, IconTabBarSubItem, TabConfig } from './types';
+import { IconTabBarItem, TabConfig } from './types';
 import { cloneDeep } from '../utils/functions/clone-deep';
-import { UNIQUE_KEY_SEPARATOR } from './constants';
-import { ChangedOverflowItemsEvent } from '../utils/directives/overflow-items/overflow-items.directive';
+import { ICON_TAB_HIDDEN_CSS, UNIQUE_KEY_SEPARATOR } from './constants';
 
 @Directive()
 export abstract class IconTabBarClass implements OnInit {
 
     @Input()
-    items: TabConfig[];
+    tabsConfig: TabConfig[];
 
     @Input()
     isRtl: boolean;
@@ -16,21 +15,21 @@ export abstract class IconTabBarClass implements OnInit {
     @Output()
     selected: EventEmitter<any> = new EventEmitter<any>();
 
-    selectedItemKey: string;
-    extraItems: IconTabBarItem[] = [];
-    lastVisibleTabIndex: number;
-    anchorIndex: number;
-    tabs: IconTabBarItem[] = [];
+    _selectedUid: string;
+    _extraTabs: IconTabBarItem[] = [];
+    _lastVisibleTabIndex: number;
+    _anchorIndex: number;
+    _tabs: IconTabBarItem[] = [];
 
     constructor(
         protected _cd: ChangeDetectorRef,
     ) {}
 
     ngOnInit(): void {
-        this.tabs = this._generateTabBarItems(this.items);
-        const selectedItem = this.tabs.find(item => item.active);
-        this.selectedItemKey = selectedItem?.uniqueKey;
-        this.lastVisibleTabIndex = this.tabs.length - 1;
+        this._tabs = this._generateTabBarItems(this.tabsConfig);
+        const selectedItem = this._tabs.find(item => item.active);
+        this._selectedUid = selectedItem?.uId;
+        this._lastVisibleTabIndex = this._tabs.length - 1;
     }
 
     private _generateTabBarItems(config: TabConfig[]): IconTabBarItem[] {
@@ -39,83 +38,83 @@ export abstract class IconTabBarClass implements OnInit {
                 ...item,
                 index: index,
                 cssClasses: [],
-                uniqueKey: index.toString(),
+                uId: index.toString(),
                 hidden: false,
                 subItems: null
             };
             if (item.color) {
                 result.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
             }
-            result.subItems = item.subItems?.length ? this.generateSubItems(item.subItems, result) : null
+            result.subItems = item.subItems?.length ? this._generateSubItems(item.subItems, result) : null
             return result;
         });
     }
 
-    private generateSubItems(subItems: TabConfig[], parent: IconTabBarSubItem|IconTabBarItem): IconTabBarSubItem[] {
+    private _generateSubItems(subItems: TabConfig[], parent: IconTabBarItem): IconTabBarItem[] {
         return subItems?.map((item, index) => {
-            const result: IconTabBarSubItem = {
+            const result: IconTabBarItem = {
                 ...item,
                 index: index,
-                uniqueKey: `${parent.uniqueKey}${UNIQUE_KEY_SEPARATOR}${index}`,
+                uId: `${parent.uId}${UNIQUE_KEY_SEPARATOR}${index}`,
                 cssClasses: [],
                 subItems: null,
             };
             if (Array.isArray(item.subItems) && item.subItems.length) {
-                result.subItems = this.generateSubItems(item.subItems, result)
+                result.subItems = this._generateSubItems(item.subItems, result)
             }
             return result
         });
     }
 
-    selectItem(selectedItem: IconTabBarItem, event?: Event): void {
+    _selectItem(selectedItem: IconTabBarItem, event?: Event): void {
         event?.stopPropagation();
-        this.selectedItemKey = selectedItem.uniqueKey;
+        this._selectedUid = selectedItem.uId;
         selectedItem.badge = false;
         this.selected.emit(selectedItem)
     }
 
-    selectExtraItem(selectedItem: IconTabBarItem): void {
-        const deletedItem = <IconTabBarItem>this.tabs.splice(this.lastVisibleTabIndex, 1, selectedItem)[0];
-        this.tabs.splice(selectedItem.index, 1, deletedItem);
+    _selectExtraItem(selectedItem: IconTabBarItem): void {
+        const deletedItem = <IconTabBarItem>this._tabs.splice(this._lastVisibleTabIndex, 1, selectedItem)[0];
+        this._tabs.splice(selectedItem.index, 1, deletedItem);
 
         deletedItem.index = selectedItem.index;
         const itemToPopover = cloneDeep(deletedItem);
         deletedItem.hidden = true;
-        deletedItem.cssClasses.push('fd-icon-tab-bar__item--hidden')
+        deletedItem.cssClasses.push(ICON_TAB_HIDDEN_CSS)
 
         let indexInExtraItems;
-        this.extraItems.forEach((item, index) => {
+        this._extraTabs.forEach((item, index) => {
             if (item.index === selectedItem.index) {
                 indexInExtraItems = index;
             }
         })
 
-        selectedItem.index = this.lastVisibleTabIndex;
+        selectedItem.index = this._lastVisibleTabIndex;
         selectedItem.hidden = false;
         if (selectedItem.color) {
             selectedItem.cssClasses = [`fd-icon-tab-bar__item--${selectedItem.color}`];
         }
-        this.extraItems.splice(indexInExtraItems, 1, itemToPopover);
-        this.extraItems = [...this.extraItems];
+        this._extraTabs.splice(indexInExtraItems, 1, itemToPopover);
+        this._extraTabs = [...this._extraTabs];
 
 
-        this.selectItem(selectedItem);
+        this._selectItem(selectedItem);
     }
 
-    onChangeSize(extraItems: number): void {
-        this.lastVisibleTabIndex = this.tabs.length - 1 - extraItems;
-        this.tabs.forEach(item => {
+    _recalculateVisibleItems(extraItems: number): void {
+        this._lastVisibleTabIndex = this._tabs.length - 1 - extraItems;
+        this._tabs.forEach(item => {
             item.hidden = false;
-            item.cssClasses = item.cssClasses.filter(cssClass => cssClass !== 'fd-icon-tab-bar__item--hidden')
+            item.cssClasses = item.cssClasses.filter(cssClass => cssClass !== ICON_TAB_HIDDEN_CSS)
         });
-        this.extraItems = [];
-        const lastVisibleIndex = this.tabs.length - extraItems - 1;
+        this._extraTabs = [];
+        const lastVisibleIndex = this._tabs.length - extraItems - 1;
 
-        for (let i = this.tabs.length - 1; i > lastVisibleIndex; i--) {
-            const tab = this.tabs[i];
-            this.extraItems.push(cloneDeep(tab));
+        for (let i = this._tabs.length - 1; i > lastVisibleIndex; i--) {
+            const tab = this._tabs[i];
+            this._extraTabs.push(cloneDeep(tab));
             tab.hidden = true;
-            tab.cssClasses.push('fd-icon-tab-bar__item--hidden')
+            tab.cssClasses.push(ICON_TAB_HIDDEN_CSS)
         }
         this._cd.detectChanges();
     }
