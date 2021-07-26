@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.145](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.144...v0.31.0-rc.145) (2021-07-26)
+
+
+### Bug Fixes
+
+* **platform:** default contentdesnsity in angular application ([#5936](https://github.com/SAP/fundamental-ngx/issues/5936)) ([518e40c](https://github.com/SAP/fundamental-ngx/commit/518e40c727ced29015f7b65b24e2cdd4093e2946))
+
 ## [0.31.0-rc.144](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.143...v0.31.0-rc.144) (2021-07-26)
 
 ## [0.31.0-rc.143](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.142...v0.31.0-rc.143) (2021-07-26)
