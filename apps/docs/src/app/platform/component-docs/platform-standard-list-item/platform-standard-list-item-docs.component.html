@@ -1,21 +1,21 @@
-<fd-docs-section-title id="list0" componentName="List">
+<fd-docs-section-title id="no-border" componentName="standard-list-item">
     Standard List Item - Border Less
 </fd-docs-section-title>
-<description>A Standard list without border, setting <code>noBorder="true"</code> will help to achieve this, by
+<description>A Standard list without border, setting <code>[noBorder]="true"</code> will help to achieve this, by
     default its value is false.
     <br><br>
     <i> Note:This documentation shows with Byline and more examples without Byline are covered in
-        <a routerLink="'/platform/list'">list</a> .</i>
+        <a routerLink="/platform/list">list</a> .</i>
 </description>
 <component-example>
     <fdp-non-byline-standard-list-item-example></fdp-non-byline-standard-list-item-example>
 </component-example>
 <code-example [exampleFiles]="sli"></code-example>
 <separator></separator>
-<fd-docs-section-title id="list1" componentName="List">
+<fd-docs-section-title id="byline-no-border" componentName="standard-list-item">
     Standard List Item (ByLine)- Border Less
 </fd-docs-section-title>
-<description>A Standard list without border, setting <code>noBorder="true"</code> will help to achieve this, by
+<description>A Standard list without border, setting <code>[noBorder]="true"</code> will help to achieve this, by
     default its
     value is false. <code>[hasByLine]="true"</code> provides by line features.Below examples show both imperative and
     declarative way
@@ -28,7 +28,7 @@
 <code-example [exampleFiles]="borderLessSLI"></code-example>
 <separator></separator>
 
-<fd-docs-section-title id="list2" componentName="List">
+<fd-docs-section-title id="byline-footer" componentName="standard-list-item">
     Standard List Item (ByLine)- Footer
 </fd-docs-section-title>
 <description>Footer of Standard List. <code>&lt;fdp-list-footer&gt;</code> tag will help to set the footer for the list.
@@ -41,7 +41,7 @@
 <code-example [exampleFiles]="sliWithFooter"></code-example>
 <separator></separator>
 
-<fd-docs-section-title id="list3" componentName="List">
+<fd-docs-section-title id="byline-group-header" componentName="standard-list-item">
     Standard List Item (ByLine)- Group header
 </fd-docs-section-title>
 <description>Standard List with group header. <code>&lt;fdp-list-group-header&gt;</code> tag will help to set the Header
@@ -57,7 +57,7 @@
 <code-example [exampleFiles]="sliWithGroupHeader"></code-example>
 <separator></separator>
 
-<fd-docs-section-title id="list4" componentName="List">
+<fd-docs-section-title id="states" componentName="standard-list-item">
     Standard List Item- Interactive state
 </fd-docs-section-title>
 <description>A simple list. Which shows interactive states of Standard List</description>
@@ -67,11 +67,11 @@
 <code-example [exampleFiles]="simpleSLI"></code-example>
 <separator></separator>
 
-<fd-docs-section-title id="list6" componentName="List">
+<fd-docs-section-title id="byline-secondary-text" componentName="standard-list-item">
     Standard List Item (ByLine)- Secondary text types
 </fd-docs-section-title>
 <description> Property on list item
-    <code> statusType="positive/negative/informative/critical/neutral"</code>
+    <code> statusType="positive | negative | informative | critical | neutral"</code>
     will help to information on what type of text it is.<code>[hasByLine]="true"</code> provides by line features.
 </description>
 <component-example>
@@ -81,7 +81,7 @@
 <separator></separator>
 
 
-<fd-docs-section-title id="list7" componentName="List">
+<fd-docs-section-title id="byline-multi-selection" componentName="standard-list-item">
     Standard List Item (ByLine)- Multi Selection
 </fd-docs-section-title>
 <description>Standard List with Multi Selection Option. <code>selectionMode="multi"</code> will help us to provide
@@ -98,7 +98,7 @@
 <code-example [exampleFiles]="sliWithSelection"></code-example>
 <separator></separator>
 
-<fd-docs-section-title id="list9" componentName="List">
+<fd-docs-section-title id="byline-navigation-multi-selection" componentName="standard-list-item">
     Standard List Item (ByLine)- Navigation Indicator with multiselect
 </fd-docs-section-title>
 <description>Standard List with Navigation Option.<code>[navigated]="true"</code> will enables navigation on click of
@@ -115,11 +115,11 @@
 <code-example [exampleFiles]="sliWithNavigation"></code-example>
 <separator></separator>
 
-<fd-docs-section-title id="list10" componentName="List">
+<fd-docs-section-title id="byline-inverted-secondary-text" componentName="standard-list-item">
     Standard List Item (ByLine)- Inverted Secondary text types
 </fd-docs-section-title>
 <description> Property on list item <code>inverted="true"</code> and
-    <code>statusType="positive/negative/informative/critical/neutral"</code>
+    <code>statusType="positive | negative | informative | critical | neutral"</code>
     will help to information on what type of text and it should be inverted.[hasByLine]="true" provides by line
     features.
 </description>
