@@ -30,6 +30,7 @@ import {
     OnDestroy,
     OnInit,
     Optional,
+    OnChanges,
     Output,
     Provider,
     QueryList,
@@ -38,7 +39,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
 import { KeyValue } from '@angular/common';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 import { FormField } from '../form-field';
@@ -48,6 +49,7 @@ import { FormFieldGroup } from '../form-field-group';
 import { Field, FieldGroup, FieldColumn, isFieldChild, isFieldGroupChild, getField } from '../form-helpers';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from './constants';
 import { filter, map, startWith } from 'rxjs/operators';
+import { ContentDensityService } from 'libs/core/src/lib/public_api';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,
@@ -136,7 +138,7 @@ export const formGroupProvider: Provider = {
     encapsulation: ViewEncapsulation.None,
     providers: [formGroupProvider]
 })
-export class FormGroupComponent implements FormGroupContainer, OnInit, AfterContentInit, AfterViewInit, OnDestroy {
+export class FormGroupComponent implements FormGroupContainer, OnInit, AfterContentInit, AfterViewInit, OnDestroy, OnChanges {
     @Input()
     id: string;
 
@@ -155,7 +157,10 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      *attribute [cozy]="true" to hide class fd-form-layout-grid-container that reset padding 
      */
     @Input()
-    cozy = false;
+    cozy: boolean;
+    /** user's custom classes*/
+    @Input()
+    class: string;
 
     @Input()
     labelLayout: LabelLayout = 'horizontal';
@@ -272,14 +277,32 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
     protected _destroyed = new Subject<void>();
 
-    constructor(private _cd: ChangeDetectorRef, @Optional() private formContainer: ControlContainer) {
+    /** @hidden */
+    private _subscriptions = new Subscription();
+
+    constructor(
+        private _cd: ChangeDetectorRef, 
+        @Optional() private formContainer: ControlContainer, 
+        @Optional() private _contentDensityService: ContentDensityService
+        ) {
         this.formGroup = <FormGroup>(this.formContainer ? this.formContainer.control : new FormGroup({}));
+    }
+    
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
     }
 
     ngOnInit(): void {
         if (!this.formGroup) {
             this.formGroup = new FormGroup({});
         }
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
+                this.buildComponentCssClass();
+            }));
+        }
+        this.buildComponentCssClass();
     }
 
     ngAfterContentInit(): void {
@@ -345,6 +368,14 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
     isFieldGroupRow(row: KeyValue<FieldColumn, FieldGroup>): FieldColumn {
         return row.value instanceof FieldGroup ? row.value.fields : row.value;
+    }
+
+    buildComponentCssClass(): string[] {
+        return [
+            'fd-container',
+            this.cozy ? 'fd-form-layout-grid-container' : '',
+            this.class
+        ];
     }
 
     /** @hidden */

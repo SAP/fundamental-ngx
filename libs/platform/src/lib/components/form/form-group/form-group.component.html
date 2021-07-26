@@ -12,7 +12,7 @@
     <div *ngIf="title" class="fd-form-header">
         <span class="fd-form-header__text">{{ title }}</span>
     </div>
-    <div [ngClass]="{'fd-container': true, 'fd-form-layout-grid-container': !cozy}">
+    <div class="fd-container" [class.fd-form-layout-grid-container]="!cozy">
         <ng-container *ngFor="let row of rows | keyvalue; trackBy: trackByFn">
             <div class="fd-row fd-row--top">
                 <div class="fd-form-group__header" *ngIf="row.value.label">
