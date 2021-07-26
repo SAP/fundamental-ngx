@@ -1,4 +1,15 @@
 
+## [0.31.0-rc.147](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.146...v0.31.0-rc.147) (2021-07-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core:** Removed [hasLabel] property as it was unnecessary.
+
+### Bug Fixes
+
+* **core:** drop hasLabel property and handling the RTL issue in Status Indicator ([#6032](https://github.com/SAP/fundamental-ngx/issues/6032)) ([2f7854b](https://github.com/SAP/fundamental-ngx/commit/2f7854b4c2eed992edae07111807afbd8a22aea1))
+
 ## [0.31.0-rc.146](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.145...v0.31.0-rc.146) (2021-07-26)
 
 
