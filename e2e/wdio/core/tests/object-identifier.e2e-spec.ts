@@ -18,7 +18,7 @@ describe('Object identifier test suite', function() {
         objectIdentifierPage.open();
     }, 1);
 
-    afterEach(() => {
+    beforeEach(() => {
         refreshPage();
         waitForPresent(identifier);
     }, 1);
