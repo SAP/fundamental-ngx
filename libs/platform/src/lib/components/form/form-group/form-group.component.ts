@@ -39,17 +39,15 @@ import {
 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
 import { KeyValue } from '@angular/common';
-import { Subject, Subscription } from 'rxjs';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-
+import { Subject, Subscription } from 'rxjs';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { FormField } from '../form-field';
 import { FormGroupContainer } from '../form-group';
 import { HintPlacement, LabelLayout } from '../form-options';
 import { FormFieldGroup } from '../form-field-group';
 import { Field, FieldGroup, FieldColumn, isFieldChild, isFieldGroupChild, getField } from '../form-helpers';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from './constants';
-import { filter, map, startWith } from 'rxjs/operators';
-import { ContentDensityService } from 'libs/core/src/lib/public_api';
 
 export const formGroupProvider: Provider = {
     provide: FormGroupContainer,
@@ -152,12 +150,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     noLabelLayout = false;
 
     @Input()
-    compact = false;
-    /**
-     *attribute [cozy]="true" to hide class fd-form-layout-grid-container that reset padding 
-     */
-    @Input()
-    cozy: boolean;
+    compact: boolean;
     /** user's custom classes*/
     @Input()
     class: string;
@@ -373,7 +366,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     buildComponentCssClass(): string[] {
         return [
             'fd-container',
-            this.cozy ? 'fd-form-layout-grid-container' : '',
+            !this.compact ? 'fd-form-layout-grid-container' : '',
             this.class
         ];
     }
