@@ -23,12 +23,13 @@ import {
 import { NgControl, NgForm } from '@angular/forms';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { RadioButtonComponent } from './radio/radio.component';
 import { CollectionBaseInput } from '../collection-base.input';
 import { FormFieldControl } from '../form-control';
+import { InlineLayout } from '../form-options';
 import { FormField } from '../form-field';
 
 /**
@@ -57,6 +58,37 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     set value(newValue: any) {
         super.setValue(newValue);
     }
+
+    /**
+     * To Display Radio buttons in a line
+     */
+    @Input()
+    get isInline(): boolean {
+        return this._isInline;
+    }
+
+    set isInline(inline: boolean) {
+        this._isInline = inline;
+        this._cd.markForCheck();
+    }
+
+    /** object to change isInline property based on screen size */
+    @Input()
+    get inlineLayout(): InlineLayout {
+        return this._inlineLayout;
+    }
+
+    set inlineLayout(layout: InlineLayout) {
+        this._inlineLayout = layout;
+        this._setFieldLayout(layout);
+        this.isInline = this._isInlineCurrent;
+    }
+
+    /** @hidden */
+    private _inlineLayout: InlineLayout;
+
+    /** @hidden */
+    private _isInline: boolean;
 
     /**
      * None value radio button created
@@ -103,6 +135,10 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     ) {
         super(_changeDetector, ngControl, ngForm, formField, formControl, _ngZone);
         this.id = `radio-group-${nextUniqueId++}`;
+        // subscribe to _inlineCurrentValue in collection-base-input
+        this._inlineCurrentValue
+            .pipe(distinctUntilChanged())
+            .subscribe((currentInline) => (this.isInline = currentInline));
     }
 
     /**

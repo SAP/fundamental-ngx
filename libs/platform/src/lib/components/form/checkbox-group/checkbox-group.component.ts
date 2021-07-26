@@ -17,11 +17,13 @@ import {
     NgZone
 } from '@angular/core';
 import { NgForm, NgControl } from '@angular/forms';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 import { CollectionBaseInput } from '../collection-base.input';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { PlatformCheckboxChange } from '../checkbox/checkbox.component';
 import { FormFieldControl } from '../form-control';
+import { InlineLayout } from '../form-options';
 import { FormField } from '../form-field';
 
 /**
@@ -47,6 +49,31 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
     }
     set value(selectedValue: any) {
         super.setValue(selectedValue);
+    }
+
+    /**
+     * To Display multiple checkboxes in a line
+     */
+    @Input()
+    get isInline(): boolean {
+        return this._isInline;
+    }
+
+    set isInline(inline: boolean) {
+        this._isInline = inline;
+        this._cd.markForCheck();
+    }
+
+    /** object to change isInline property based on screen size */
+    @Input()
+    get inlineLayout(): InlineLayout {
+        return this._inlineLayout;
+    }
+
+    set inlineLayout(layout: InlineLayout) {
+        this._inlineLayout = layout;
+        this._setFieldLayout(layout);
+        this.isInline = this._isInlineCurrent;
     }
 
     /**
@@ -79,6 +106,12 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
     /** @hidden used for two way binding, when used outside form */
     private _checked: string[];
 
+    /** @hidden */
+    private _inlineLayout: InlineLayout;
+
+    /** @hidden */
+    private _isInline: boolean;
+
     constructor(
         cd: ChangeDetectorRef,
         @Optional() @Self() ngControl: NgControl,
@@ -88,6 +121,10 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
         _ngZone: NgZone
     ) {
         super(cd, ngControl, ngForm, formField, formControl, _ngZone);
+        // subscribe to _inlineCurrentValue in collection-base-input
+        this._inlineCurrentValue
+            .pipe(distinctUntilChanged())
+            .subscribe((currentInline) => (this.isInline = currentInline));
     }
 
     writeValue(value: any): void {

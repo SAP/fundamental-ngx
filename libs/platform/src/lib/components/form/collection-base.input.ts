@@ -1,18 +1,7 @@
-import {
-    ChangeDetectorRef,
-    Host,
-    Input,
-    Directive,
-    Optional,
-    Self,
-    SkipSelf,
-    NgZone,
-    OnInit,
-    OnDestroy
-} from '@angular/core';
+import { ChangeDetectorRef, Host, Input, Directive, Optional, Self, SkipSelf, NgZone, OnDestroy } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
-import { debounceTime, takeUntil } from 'rxjs/operators';
-import { fromEvent, Observable, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs';
 
 import { InlineLayout, RESPONSIVE_BREAKPOINTS } from './../form/form-options';
 import { isFunction, isJsObject, isString } from '../../utils/lang';
@@ -62,32 +51,10 @@ export abstract class CollectionBaseInput extends BaseInput implements OnDestroy
     @Input()
     displayKey: string;
 
-    /** To display all the fields of collection in a line */
-    @Input()
-    set isInline(inline: boolean) {
-        this._isInline = inline;
-        this._cd.markForCheck();
-    }
-    get isInline(): boolean {
-        return this._isInline;
-    }
-
-    /** object to change isInline property based on screen size */
-    @Input()
-    get inlineLayout(): InlineLayout {
-        return this._inlineLayout;
-    }
-
-    set inlineLayout(layout: InlineLayout) {
-        this._inlineLayout = layout;
-        this._setFieldLayout();
-    }
+    protected _inlineCurrentValue = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
-    private _inlineLayout: InlineLayout;
-
-    /** @hidden */
-    private _isInline: boolean;
+    protected _isInlineCurrent: boolean;
 
     /** @hidden */
     private _xlIsInline: boolean;
@@ -118,12 +85,6 @@ export abstract class CollectionBaseInput extends BaseInput implements OnDestroy
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
         private _ngZone?: NgZone
     ) {
-        /**
-         * We do not use Injector.get() approach here because there is a bug
-         * with this signature https://github.com/angular/angular/issues/31776
-         * where "get()" method doesn't take into account "flag" option"
-         *
-         */
         super(cd, ngControl, ngForm, formField, formControl);
     }
 
@@ -166,12 +127,12 @@ export abstract class CollectionBaseInput extends BaseInput implements OnDestroy
     }
 
     /** set values of inline for each screen layout */
-    protected _setFieldLayout(): void {
+    protected _setFieldLayout(inlineLayout: InlineLayout): void {
         try {
-            this._sIsInline = !!this.inlineLayout['S'];
-            this._mdIsInline = !!this.inlineLayout['M'];
-            this._lgIsInline = !!this.inlineLayout['L'];
-            this._xlIsInline = !!this.inlineLayout['XL'];
+            this._sIsInline = !!inlineLayout['S'];
+            this._mdIsInline = !!inlineLayout['M'];
+            this._lgIsInline = !!inlineLayout['L'];
+            this._xlIsInline = !!inlineLayout['XL'];
             this._updateLayout();
         } catch (error) {
             this._isInLineLayoutEnabled = false;
@@ -195,22 +156,26 @@ export abstract class CollectionBaseInput extends BaseInput implements OnDestroy
         const width = window.innerWidth;
 
         // check if value has changed, then only assign new value.
-        if (width > 0 && width < RESPONSIVE_BREAKPOINTS['S'] && this.isInline !== this._sIsInline) {
-            this.isInline = this._sIsInline;
+        if (width > 0 && width < RESPONSIVE_BREAKPOINTS['S'] && this._isInlineCurrent !== this._sIsInline) {
+            this._isInlineCurrent = this._sIsInline;
+            this._inlineCurrentValue.next(this._isInlineCurrent);
         } else if (
             width >= RESPONSIVE_BREAKPOINTS['S'] &&
             width < RESPONSIVE_BREAKPOINTS['M'] &&
-            this.isInline !== this._mdIsInline
+            this._isInlineCurrent !== this._mdIsInline
         ) {
-            this.isInline = this._mdIsInline;
+            this._isInlineCurrent = this._mdIsInline;
+            this._inlineCurrentValue.next(this._isInlineCurrent);
         } else if (
             width >= RESPONSIVE_BREAKPOINTS['M'] &&
             width < RESPONSIVE_BREAKPOINTS['L'] &&
-            this.isInline !== this._lgIsInline
+            this._isInlineCurrent !== this._lgIsInline
         ) {
-            this.isInline = this._lgIsInline;
-        } else if (width >= RESPONSIVE_BREAKPOINTS['L'] && this.isInline !== this._xlIsInline) {
-            this.isInline = this._xlIsInline;
+            this._isInlineCurrent = this._lgIsInline;
+            this._inlineCurrentValue.next(this._isInlineCurrent);
+        } else if (width >= RESPONSIVE_BREAKPOINTS['L'] && this._isInlineCurrent !== this._xlIsInline) {
+            this._isInlineCurrent = this._xlIsInline;
+            this._inlineCurrentValue.next(this._isInlineCurrent);
         }
     }
 }
