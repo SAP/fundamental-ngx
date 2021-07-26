@@ -9,7 +9,6 @@ import { PlatformListModule } from './list.module';
 import { StandardListItemModule } from './standard-list-item/standard-list-item.module';
 import { StandardListItemComponent } from './standard-list-item/standard-list-item.component';
 
-
 const LIST_ELEMENTS: Address[] = [
     { name: 'Name1' },
     { name: 'Name2' },
@@ -60,7 +59,7 @@ describe('ListComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformListModule, StandardListItemModule, RouterTestingModule],
-            declarations: [ListComponentTest, StandardListItemComponent, ListComponent]
+            declarations: [ListComponentTest]
         })
             .compileComponents();
     }));
@@ -75,13 +74,13 @@ describe('ListComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('Should display list container with role as list', () => {
+    it('should display list container with role as list', () => {
         const listContainer = fixture.debugElement.nativeElement.querySelector('ul');
         fixture.detectChanges();
         expect(listContainer.getAttribute('role')).toEqual('list');
     });
 
-    it('Should contain fd-list in list container', () => {
+    it('should contain fd-list in list container', () => {
         const listContainer = fixture.debugElement.nativeElement.querySelector('ul');
         fixture.detectChanges();
         expect(listContainer.classList).toContain('fd-list');
@@ -133,7 +132,7 @@ describe('ListComponent with DataSource', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ListDataSourceTestComponent, StandardListItemComponent, ListComponent],
+            declarations: [ListDataSourceTestComponent],
             imports: [PlatformListModule, StandardListItemModule, RouterTestingModule]
         }).compileComponents();
     }));
@@ -144,8 +143,7 @@ describe('ListComponent with DataSource', () => {
         fixture.detectChanges();
     });
 
-
-    it('should retive the data from datasource', () => {
+    it('should receive the data from datasource', () => {
         fixture.detectChanges();
         const listElement = fixture.debugElement.queryAll(By.css('.fd-list__item'));
         expect(listElement.length).toBe(4);

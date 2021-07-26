@@ -3,7 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { TabsModule, ToolbarModule } from '@fundamental-ngx/core';
+import { ButtonModule, TabsModule, ToolbarModule } from '@fundamental-ngx/core';
 import {
     CLASS_NAME,
     DynamicPageComponent,
@@ -349,7 +349,7 @@ describe('DynamicPageComponent Content Projection', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule],
+                imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ButtonModule],
                 declarations: [HostTestComponent],
                 providers: [DynamicPageService]
             }).compileComponents();
