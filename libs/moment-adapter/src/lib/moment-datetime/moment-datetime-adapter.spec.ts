@@ -271,7 +271,7 @@ describe('MomentDatetimeAdapter', () => {
     });
 
     it('should parse "en" date string', () => {
-        expect(adapter.parse('1/1/2017').format()).toEqual(moment([2017, JAN, 1]).format());
+        expect(adapter.parse('1/1/2017', 'M/D/YYYY').format()).toEqual(moment([2017, JAN, 1]).format());
     });
 
     it('should parse "en" time string', () => {
@@ -293,7 +293,7 @@ describe('MomentDatetimeAdapter', () => {
     });
 
     it('should parse invalid value as invalid', () => {
-        const date = adapter.parse('hello');
+        const date = adapter.parse('hello', 'M/D/YYYY');
         expect(date).not.toBeNull();
         expect(date.isValid()).toBeFalse();
     });

@@ -1,6 +1,6 @@
 import { Inject, Injectable, InjectionToken, LOCALE_ID, Optional } from '@angular/core';
 import moment, { Locale, LongDateFormatSpec, Moment, MomentFormatSpecification, MomentInput } from 'moment';
-import { DatetimeAdapter, DateLocale } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 function range<T>(length: number, mapFn: (index: number) => T): T[] {
     return Array.from(new Array(length)).map((_, index) => mapFn(index));
@@ -349,3 +349,13 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
             : moment(date, format, locale, strict);
     }
 }
+
+interface DateLocale {
+    firstDayOfWeek: number,
+    longMonths: string[],
+    shortMonths: string[],
+    narrowMonths: string[],
+    longDaysOfWeek: string[],
+    shortDaysOfWeek: string[],
+    narrowDaysOfWeek: string[]
+};
