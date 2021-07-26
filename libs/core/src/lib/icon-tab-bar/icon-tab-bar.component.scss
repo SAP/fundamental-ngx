@@ -1,14 +1,20 @@
 @import '~fundamental-styles/dist/icon-tab-bar';
 @import '~fundamental-styles/dist/list.css';
 
-// These styles should move to fundamental/styles repo.
-.fd-icon-tab-bar {
+.cdk-drag-placeholder {
+  opacity: .3;
+  pointer-events: none;
+}
 
+// These styles should move to fundamental/styles repo.
+
+// Main tab bar classes
+.fd-icon-tab-bar {
   &__header {
     position: relative;
     overflow-x: hidden;;
 
-    &--left-padding {
+    &--left-offset {
       padding-left: 3.5rem;
     }
   }
@@ -21,33 +27,22 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    margin: 0!important;
-  }
+    margin: 0;
 
-  &__item--prev-steps {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: 0!important;
+    &--left {
+      left: 0;
+    }
   }
 
   &__separator {
     width: 2rem;
   }
-
-  &__arrow:hover {
-    background: var(--sapButton_Hover_Background,#ebf5fe);
-    border: .0625rem solid var(--sapButton_Hover_BorderColor,#0854a0);
-  }
-
-  //&__item {
-  //  padding-right: 2rem;
-  //  margin-right: 0!important;
-  //}
 }
 
-.fd-list__icon-container {
+// SubTabs classes
+
+// Added new class
+.fd-list__item-icon-container {
   display: flex;
   align-items: center;
   width: 1.25rem;
@@ -55,27 +50,27 @@
 }
 
 .fd-icon-tab-bar__list-item {
-  min-width: 100px;
+  min-width: 7rem;
   width: 100%;
 }
 
 [dir=rtl] {
+  .fd-list__item-icon-container {
+    margin-left: 1rem;
+    margin-right: 0;
+  }
 
   .fd-list__icon {
     justify-content: center;
   }
-
-  .fd-list__icon-container {
-    margin-left: 1rem;
-    margin-right: 0;
-  }
 }
 
 .fd-icon-tab-bar__list {
-  max-height: 300px;
+  max-height: 200rem;
   overflow: auto;
 }
 
+// Drag and drop classes
 .fd-icon-tab-dnd-preview {
   background: var(--sapObjectHeader_Background, #fff);
   display: flex;
@@ -90,12 +85,7 @@
   background: red!important;
 }
 
-.cdk-drag-placeholder {
-  opacity: .3;
-  pointer-events: none;
-}
-
-.fd-icon-tab-bar-dnd-hovered {
+.fd-icon-tab-dnd-hovered {
   background: var(--sapButton_Hover_Background,#ebf5fe)!important;
   outline: .0625rem solid var(--sapButton_Hover_BorderColor,#0854a0)!important;;
 }
@@ -124,16 +114,6 @@
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
 
 .fd-list__item--positive .fd-list__icon [class*=sap-icon],
 .fd-list__item--positive .fd-list__icon[class*=sap-icon],

@@ -25,26 +25,33 @@ export class IconBarDndContainerDirective<T> implements OnDestroy {
 
   /** Event that is thrown, when the item is dropped */
   @Output()
-  readonly replaced = new EventEmitter<FdDnDEvent<T>>();
+  replaced = new EventEmitter<FdDnDEvent<T>>();
 
   /** Event that is thrown, when the item is dropped */
   @Output()
-  readonly insertChild = new EventEmitter<FdDnDEvent<T>>();
+  insertChild = new EventEmitter<FdDnDEvent<T>>();
 
   /** @hidden */
   private _dragRefItems: DragRef[] = [];
+
   /** @hidden  */
   private dndItemDirectives: IconBarDndItemDirective[] = [];
+
   /** @hidden  */
   private _dndListDirectives: Set<IconBarDndListDirective<T>> = new Set<IconBarDndListDirective<T>>();
+
   /** @hidden */
   private _elementsCoordinates: ElementChord[];
+
   /** @hidden */
   private _virtualFlipperCoordinates: ElementChord[] = [];
+
   /** @hidden */
   private _closestItemIndex: number = null;
+
   /** @hidden */
   private _closestFlipperIndex: number = null;
+
   /** @hidden */
   private _lastCursorPosition: Point;
 
@@ -67,7 +74,7 @@ export class IconBarDndContainerDirective<T> implements OnDestroy {
   }
 
   /** Method called, when element is started to be dragged */
-  dragStart(draggedItemDir: IconBarDndItemDirective): void {
+  dragStart(): void {
     /** Counting all of the elements's chords */
     this._elementsCoordinates = this.dndItemDirectives.map((item: IconBarDndItemDirective) =>
         item.getElementCoordinates());
@@ -85,7 +92,7 @@ export class IconBarDndContainerDirective<T> implements OnDestroy {
     this._elementsCoordinates.find((element, index) => {
       /** Check if element can be replaced */
       if (newClosestIndex !== index) {
-        const isMouseOnElement = _isMouseOnElement(element, mousePosition);
+        const isMouseOnElement = this._isMouseOnElement(element, mousePosition);
         if (isMouseOnElement) {
           newClosestIndex = index;
           return true;
@@ -165,7 +172,7 @@ export class IconBarDndContainerDirective<T> implements OnDestroy {
     this._dragRefItems.push(dragItem.dragRef);
     this.dndItemDirectives.push(dragItem);
     dragItem.moved.pipe(takeUntil(this._onDestroy$)).subscribe((position: Point) => this.onMove(position));
-    dragItem.started.pipe(takeUntil(this._onDestroy$)).subscribe(() => this.dragStart(dragItem));
+    dragItem.started.pipe(takeUntil(this._onDestroy$)).subscribe(() => this.dragStart());
     dragItem.released.pipe(takeUntil(this._onDestroy$)).subscribe(() => this.dragEnd(dragItem));
   }
 
@@ -176,22 +183,14 @@ export class IconBarDndContainerDirective<T> implements OnDestroy {
 
   registerDndList(listDir: IconBarDndListDirective<T>): void {
     this._dndListDirectives.add(listDir);
+    listDir.changeDraggableState(this._draggable);
   }
 
   removeDndList(listDir: IconBarDndListDirective<T>): void {
     this._dndListDirectives.delete(listDir);
   }
 
-  _isMouseOnFlipper(element: ElementChord, mousePosition: Point): boolean {
-    const startX = element.x;
-    const endX = element.x + element.width;
-
-    const startY = element.y;
-    const endY = element.y + element.height;
-
-    return _between(mousePosition.x, startX, endX) && _between(mousePosition.y, startY, endY);
-  }
-
+  /** @hidden */
   private _generateVirtualFlipper(): void {
     this._elementsCoordinates.forEach((item, index) => {
       if (index !== this._elementsCoordinates.length - 1) {
@@ -202,29 +201,38 @@ export class IconBarDndContainerDirective<T> implements OnDestroy {
           width: isVertical ? item.width : FLIPPER_SIZE.width,
           height: isVertical ? FLIPPER_SIZE.verticalHeight : FLIPPER_SIZE.height
         });
-        // x: isVertical ? item.x : item.x + item.width,
-        //     y: isVertical ? (item.y + item.height) - FLIPPER_SIZE.verticalHeight / 2 : item.y,
-        //     width: isVertical ? item.width : FLIPPER_SIZE.width,
-        //     height: isVertical ? FLIPPER_SIZE.height / 2 : FLIPPER_SIZE.height
       }
     });
   }
 
+  /** @hidden */
   private _changeDraggableState(draggable: boolean): void {
     for (const list of this._dndListDirectives) {
       list.changeDraggableState(draggable);
     }
   }
-}
 
-function _isMouseOnElement(element: ElementChord, mousePosition: Point, isVertical: boolean = false): boolean {
-  const startX = element.x;
-  const endX = element.x + element.width;
+  /** @hidden */
+  private _isMouseOnFlipper(element: ElementChord, mousePosition: Point): boolean {
+    const startX = element.x;
+    const endX = element.x + element.width;
 
-  const startY = isVertical ? element.y - FLIPPER_SIZE.verticalHeight / 2 : element.y;
-  const endY = element.y + element.height - FLIPPER_SIZE.verticalHeight / 2;
+    const startY = element.y;
+    const endY = element.y + element.height;
 
-  return _between(mousePosition.x, startX, endX) && _between(mousePosition.y, startY, endY);
+    return _between(mousePosition.x, startX, endX) && _between(mousePosition.y, startY, endY);
+  }
+
+  /** @hidden */
+  private _isMouseOnElement(element: ElementChord, mousePosition: Point, isVertical: boolean = false): boolean {
+    const startX = element.x;
+    const endX = element.x + element.width;
+
+    const startY = isVertical ? element.y - FLIPPER_SIZE.verticalHeight / 2 : element.y;
+    const endY = element.y + element.height - FLIPPER_SIZE.verticalHeight / 2;
+
+    return _between(mousePosition.x, startX, endX) && _between(mousePosition.y, startY, endY);
+  }
 }
 
 function _between(x: number, min: number, max: number): boolean {

@@ -32,6 +32,9 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
     @Input()
     enableTabReordering = false;
 
+    @Input()
+    draggable = true;
+
     constructor(
         protected _cd: ChangeDetectorRef
     ) {
@@ -56,7 +59,6 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
 
         const newArr = this._getParentArrByUid(targetItem.uniqueKey);
         const previousArr = this._getParentArrByUid(draggableItem.uniqueKey);
-        debugger;
         this.insertItem(
             {
                 replacedItemInfo: {
@@ -74,7 +76,6 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
     }
 
     replaceItem({ draggableItem, targetItem }: FdDnDEvent<IconTabBarItem>): void {
-        debugger;
         const replacedParsedUidArr = targetItem.uniqueKey.split(UNIQUE_KEY_SEPARATOR);
         replacedParsedUidArr.length = replacedParsedUidArr.length - 1;
         const draggableParsedUidArr = draggableItem.uniqueKey.split(UNIQUE_KEY_SEPARATOR);
@@ -82,7 +83,6 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
 
         const newArr = this._getParentArrByUid(targetItem.uniqueKey);
         const previousArr = this._getParentArrByUid(draggableItem.uniqueKey);
-        debugger;
 
         this.replaceItems(
             {
@@ -105,13 +105,11 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
         if (!replacedItemInfo.item.subItems.length) {
             replacedItemInfo.item.subItems = [];
         }
-        debugger;
         replacedItemInfo.item.subItems.push(draggableItemInfo.item);
         // this.updateIndexes(draggableItemInfo.arr, draggableItemInfo.parentUid);
         // this.updateIndexes(replacedItemInfo.arr, replacedItemInfo.parentUid);
         this.tabs = this.updateIndexes(this.tabs);
 
-        debugger;
         setTimeout(() => {
             const extra = this.overflowDirective.getAmountOfExtraItems();
             this.onChangeSize(extra);

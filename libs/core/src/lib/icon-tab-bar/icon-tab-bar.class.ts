@@ -111,14 +111,12 @@ export abstract class IconTabBarClass implements OnInit {
         this.extraItems = [];
         const lastVisibleIndex = this.tabs.length - extraItems - 1;
 
-        debugger;
         for (let i = this.tabs.length - 1; i > lastVisibleIndex; i--) {
             const tab = this.tabs[i];
             this.extraItems.push(cloneDeep(tab));
             tab.hidden = true;
             tab.cssClasses.push('fd-icon-tab-bar__item--hidden')
         }
-        debugger;
         this._cd.detectChanges();
     }
 }

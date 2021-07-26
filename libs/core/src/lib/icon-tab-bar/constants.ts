@@ -6,4 +6,4 @@ export const FLIPPER_SIZE = {
 };
 export const DRAG_ITEM_FLIPPER_STATE = 'fd-drag-hover-flipper'
 export const DRAG_ITEM_FLIPPER_STATE_VERTICAL = 'fd-dnd-container--vertical'
-export const DRAG_ITEM_NESTED_STATE = 'fd-icon-tab-bar-dnd-hovered';
+export const DRAG_ITEM_NESTED_STATE = 'fd-icon-tab-dnd-hovered';

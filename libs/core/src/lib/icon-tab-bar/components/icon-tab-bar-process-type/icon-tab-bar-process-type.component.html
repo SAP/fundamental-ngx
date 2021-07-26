@@ -1,7 +1,7 @@
 <ul
     class="fd-icon-tab-bar__header"
     role="tablist"
-    [class.fd-icon-tab-bar__header--left-padding]="showLeftBtn"
+    [class.fd-icon-tab-bar__header--left-offset]="showLeftBtn"
     fdOverflowItems
     [isRtl]="isRtl"
     itemSelector='[data-overflowItem]'
@@ -11,7 +11,7 @@
     <li
         *ngIf="showLeftBtn"
         role="presentation"
-        class="fd-icon-tab-bar__item  fd-icon-tab-bar__item--prev-steps"
+        class="fd-icon-tab-bar__item  fd-icon-tab-bar__item--extra-btn fd-icon-tab-bar__item--extra-btn--left"
     >
         <fd-icon-tab-bar-popover
             [items]="_prevSteps"

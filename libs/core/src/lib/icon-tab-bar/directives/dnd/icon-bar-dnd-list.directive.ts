@@ -74,6 +74,6 @@ export class IconBarDndListDirective<T> implements AfterViewInit, OnDestroy {
     }
 
     changeDraggableState(draggable: boolean): void {
-        this._dropListRef.disabled = draggable;
+        this._dropListRef.disabled = !draggable;
     }
 }
