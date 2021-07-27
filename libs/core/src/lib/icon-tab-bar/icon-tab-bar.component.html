@@ -26,7 +26,8 @@
 
 <ng-template #filterType>
     <fd-icon-tab-bar-filter-type
-        [tabsConfig]="iconTabItems" [showTabAll]="showTabAll"
+        [tabsConfig]="iconTabItems"
+        [showTabAll]="showTabAll"
         [isRtl]="_isRtl"
         (selected)="_selectItem($event)"
     ></fd-icon-tab-bar-filter-type>

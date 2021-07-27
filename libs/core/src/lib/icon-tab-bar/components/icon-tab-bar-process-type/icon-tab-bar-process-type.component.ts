@@ -1,22 +1,15 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { IconTabBarClass } from '../../icon-tab-bar.class';
 import { IconTabBarItem } from '../../types';
 import { cloneDeep } from '../../../utils/functions/clone-deep';
-import { OverflowItemsDirective } from '../../../utils/directives/overflow-items/overflow-items.directive';
-import { ExtraButtonDirective } from '../../directives/extra-button/extra-button.directive';
 import { ICON_TAB_HIDDEN_CSS } from '../../constants';
+import { take } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-icon-tab-bar-process-type',
     templateUrl: './icon-tab-bar-process-type.component.html',
 })
 export class IconTabBarProcessTypeComponent extends IconTabBarClass {
-
-    @ViewChild(OverflowItemsDirective)
-    overflowDirective: OverflowItemsDirective;
-
-    @ViewChild(ExtraButtonDirective)
-    extraBtnDirective: ExtraButtonDirective;
 
 
     _offsetOverflowDirective = 30;
@@ -40,23 +33,30 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
         let isLeftStrategy: boolean;
         if (this._currentStepIndex > this._lastVisibleTabIndex) {
             amountOfNextSteps = this._nextSteps.length - (this._currentStepIndex - this._lastVisibleTabIndex);
-            this._showRightBtn = !!amountOfNextSteps;
+            this._showRightBtn = amountOfNextSteps > 0;
             this._showLeftBtn = true;
             isLeftStrategy = false;
         } else {
             amountOfPreviousSteps = this._prevSteps.length - (this._firstVisibleTabIndex - this._currentStepIndex);
             this._showRightBtn = true;
             isLeftStrategy = true;
-            this._showLeftBtn = amountOfPreviousSteps;
+            this._showLeftBtn = amountOfPreviousSteps > 0;
         }
         this._selectItem(selectedItem);
-        setTimeout(() => {
-            const extra = this.overflowDirective.getAmountOfExtraItems();
-            isLeftStrategy
-                ? this.recalculateItemsByPrevArr(extra, amountOfPreviousSteps)
-                : this.recalculateItemsByNextArr(extra, amountOfNextSteps);
-        }, 100);
-        setTimeout(_ => this.extraBtnDirective.calculatePosition(), 200)
+
+        this._ngZone
+            .onMicrotaskEmpty
+            .pipe(take(1))
+            .subscribe(_ => {
+                if (this.overflowDirective) {
+                    const extra = this.overflowDirective.getAmountOfExtraItems();
+                    isLeftStrategy
+                        ? this.recalculateItemsByPrevArr(extra, amountOfPreviousSteps)
+                        : this.recalculateItemsByNextArr(extra, amountOfNextSteps);
+                    this.extraBtnDirective?.calculatePosition();
+                    this._cd.detectChanges();
+                }
+            });
     }
 
     _recalculateVisibleItems(extraItems: number): void {
@@ -109,7 +109,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
             : this._prevSteps.length + visibleAmountOfItems - 1;
 
         this._showLeftBtn = !!this._prevSteps.length;
-        // this._cd.detectChanges();
+        this._cd.detectChanges();
     }
 
     private recalculateItemsByPrevArr(extraItems: number, amountOfPreviousSteps): void {
@@ -151,7 +151,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
             : this._prevSteps.length + visibleAmountOfItems - 1;
 
         this._showRightBtn = !!this._nextSteps.length;
-        // this._cd.detectChanges();
         this._offsetOverflowDirective = this._nextSteps.length ? 30 : 0;
+        this._cd.detectChanges();
     }
 }

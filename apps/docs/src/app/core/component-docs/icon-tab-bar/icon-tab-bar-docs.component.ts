@@ -9,7 +9,12 @@ import * as iconTabBarProcessTypeHtml from '!raw-loader!./examples/icon-tab-bar-
 
 @Component({
     selector: 'fd-icon-tab-bar-docs',
-    templateUrl: './icon-tab-bar-docs.component.html'
+    templateUrl: './icon-tab-bar-docs.component.html',
+    styles: [`
+        .icon-tab-bar-docs-overflow > * {
+            margin-bottom: 10px;
+        }
+    `]
 })
 export class IconTabBarDocsComponent {
 

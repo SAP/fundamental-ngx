@@ -1,10 +1,24 @@
-import { ChangeDetectorRef, Directive, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Directive,
+    EventEmitter,
+    Input,
+    NgZone,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges,
+    ViewChild
+} from '@angular/core';
 import { IconTabBarItem, TabConfig } from './types';
 import { cloneDeep } from '../utils/functions/clone-deep';
 import { ICON_TAB_HIDDEN_CSS, UNIQUE_KEY_SEPARATOR } from './constants';
+import { OverflowItemsDirective } from '../utils/directives/overflow-items/overflow-items.directive';
+import { ExtraButtonDirective } from './directives/extra-button/extra-button.directive';
+import { take, takeUntil } from 'rxjs/operators';
 
 @Directive()
-export abstract class IconTabBarClass implements OnInit {
+export abstract class IconTabBarClass implements OnInit, OnChanges {
 
     @Input()
     tabsConfig: TabConfig[];
@@ -15,6 +29,12 @@ export abstract class IconTabBarClass implements OnInit {
     @Output()
     selected: EventEmitter<any> = new EventEmitter<any>();
 
+    @ViewChild(OverflowItemsDirective)
+    overflowDirective: OverflowItemsDirective;
+
+    @ViewChild(ExtraButtonDirective)
+    extraBtnDirective: ExtraButtonDirective;
+
     _selectedUid: string;
     _extraTabs: IconTabBarItem[] = [];
     _lastVisibleTabIndex: number;
@@ -23,7 +43,14 @@ export abstract class IconTabBarClass implements OnInit {
 
     constructor(
         protected _cd: ChangeDetectorRef,
+        protected _ngZone: NgZone,
     ) {}
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.isRtl && !changes.isRtl.firstChange) {
+            this._triggerRecalculationVisibleItems();
+        }
+    }
 
     ngOnInit(): void {
         this._tabs = this._generateTabBarItems(this.tabsConfig);
@@ -102,7 +129,6 @@ export abstract class IconTabBarClass implements OnInit {
     }
 
     _recalculateVisibleItems(extraItems: number): void {
-        debugger;
         this._lastVisibleTabIndex = this._tabs.length - 1 - extraItems;
         this._tabs.forEach(item => {
             item.hidden = false;
@@ -111,12 +137,26 @@ export abstract class IconTabBarClass implements OnInit {
         this._extraTabs = [];
         const lastVisibleIndex = this._tabs.length - extraItems - 1;
 
-        for (let i = this._tabs.length - 1; i > lastVisibleIndex; i--) {
+        for (let i = lastVisibleIndex + 1; i < this._tabs.length; i++) {
             const tab = this._tabs[i];
             this._extraTabs.push(cloneDeep(tab));
             tab.hidden = true;
             tab.cssClasses.push(ICON_TAB_HIDDEN_CSS)
         }
         this._cd.detectChanges();
+    }
+
+    protected _triggerRecalculationVisibleItems(): void {
+        this._ngZone
+            .onMicrotaskEmpty
+            .pipe(take(1))
+            .subscribe(_ => {
+                if (this.overflowDirective) {
+                    const extra = this.overflowDirective.getAmountOfExtraItems();
+                    this._recalculateVisibleItems(extra);
+                    this.extraBtnDirective?.calculatePosition();
+                    this._cd.detectChanges();
+                }
+            });
     }
 }

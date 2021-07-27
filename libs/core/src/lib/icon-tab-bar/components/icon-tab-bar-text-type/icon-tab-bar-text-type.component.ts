@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, NgZone, ViewChild } from '@angular/core';
 import { IconTabBarClass } from '../../icon-tab-bar.class';
 import { IconTabBarItem } from '../../types';
 import { UNIQUE_KEY_SEPARATOR } from '../../constants';
@@ -18,19 +18,14 @@ interface ItemToReplace {
 })
 export class IconTabBarTextTypeComponent extends IconTabBarClass {
 
-    @ViewChild(OverflowItemsDirective)
-    overflowDirective: OverflowItemsDirective;
-
-    @ViewChild(ExtraButtonDirective)
-    extraBtnDirective: ExtraButtonDirective;
-
     @Input()
     enableTabReordering = true;
 
     constructor(
-        protected _cd: ChangeDetectorRef
+        protected _cd: ChangeDetectorRef,
+        protected _ngZone: NgZone,
     ) {
-        super(_cd);
+        super(_cd, _ngZone);
     }
 
     _selectExtraItem(selectedItem: IconTabBarItem): void {
@@ -88,15 +83,6 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
         replacedItemInfo.arr.splice(newIndex, 0, draggableItemInfo.item);
         this._tabs = this._updateTabsIndexes(this._tabs);
         this._triggerRecalculationVisibleItems();
-    }
-
-    private _triggerRecalculationVisibleItems(): void {
-        setTimeout(() => {
-            const extra = this.overflowDirective.getAmountOfExtraItems();
-            this._recalculateVisibleItems(extra);
-        }, 100);
-        setTimeout(_ => this.extraBtnDirective.calculatePosition(), 200);
-        this._cd.detectChanges();
     }
 
     private _getParentArrByUid(uid: string, arr: any[] = this._tabs): IconTabBarItem[] {

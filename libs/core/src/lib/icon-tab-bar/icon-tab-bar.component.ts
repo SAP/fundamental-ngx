@@ -1,4 +1,5 @@
 import {
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     EventEmitter,
@@ -11,14 +12,14 @@ import {
 } from '@angular/core';
 import { IconTabBarBackground, IconTabBarItem, IconTabBarSize, TabDestinyMode, TabType } from './types';
 import { ContentDensityService, IconFont, RtlService } from '@fundamental-ngx/core';
-import { takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
     selector: 'fd-icon-tab-bar',
     templateUrl: './icon-tab-bar.component.html',
     styleUrls: ['./icon-tab-bar.component.scss'],
-    // changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
 export class IconTabBarComponent implements OnInit, OnDestroy {
@@ -51,7 +52,7 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
     iconTabSelected: EventEmitter<any> = new EventEmitter<any>();
 
     _cssClassForContainer: string[];
-    _isRtl: boolean = null;
+    _isRtl = false;
 
     private _onDestroy$ = new Subject();
 
@@ -65,26 +66,28 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this._cssClassForContainer = this._generateContainerStyles();
 
-        // ToDo: Implement destiny subscription.
-        // if (this.densityMode === 'inherit') {
-        //     this._contentDensityService._contentDensityListener
-        //         .subscribe((density) => {
-        //             debugger;
-        //             this.densityMode = density;
-        //             if (density !== 'compact') {
-        //                 this.cssClassForContainer = this.cssClassForContainer.filter(cssClass => cssClass !== 'fd-icon-tab-bar--compact')
-        //             }
-        //     })
-        // }
+        if (this.densityMode === 'inherit') {
+            this._contentDensityService._contentDensityListener
+                .pipe(
+                    distinctUntilChanged(),
+                    takeUntil(this._onDestroy$),
+                    )
+                .subscribe((density) => {
+                    this.densityMode = density;
+                    if (density !== 'compact') {
+                        this._cssClassForContainer = this._cssClassForContainer.filter(cssClass => cssClass !== 'fd-icon-tab-bar--compact')
+                    } else {
+                        this._cssClassForContainer.push('fd-icon-tab-bar--compact');
+                    }
+            })
+        }
 
         this._rtlService.rtl
             .pipe(takeUntil(this._onDestroy$))
             .subscribe((isRtl: boolean) => {
-                const shouldDetect = this._isRtl !== null;
-                this._cd.detectChanges();
-                this._isRtl = isRtl;
-                if (shouldDetect) {
-                    // this._cd.detectChanges();
+                if (isRtl !== this._isRtl) {
+                    this._isRtl = isRtl;
+                    this._cd.detectChanges();
                 }
             });
     }

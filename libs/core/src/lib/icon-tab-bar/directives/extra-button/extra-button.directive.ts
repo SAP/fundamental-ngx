@@ -1,11 +1,11 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 @Directive({
     selector: '[fdExtraButton]'
 })
-export class ExtraButtonDirective implements OnChanges, AfterViewInit, OnDestroy {
+export class ExtraButtonDirective implements AfterViewInit, OnDestroy {
 
     @Input()
     anchorIndexInsideParent: number;
@@ -23,14 +23,6 @@ export class ExtraButtonDirective implements OnChanges, AfterViewInit, OnDestroy
     ) {
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        console.log('changsssssses', changes);
-        if (changes.isRtl && !changes.isRtl.firstChange) {
-            debugger;
-            this.calculatePosition();
-        }
-    }
-
     ngAfterViewInit(): void {
         fromEvent(window, 'resize')
             .pipe(
@@ -40,7 +32,8 @@ export class ExtraButtonDirective implements OnChanges, AfterViewInit, OnDestroy
             )
             .subscribe((_ =>  this.calculatePosition()));
 
-        setTimeout(() => this.calculatePosition());
+        // setTimeout(() => this.calculatePosition());
+        this.calculatePosition();
     }
 
     ngOnDestroy(): void {

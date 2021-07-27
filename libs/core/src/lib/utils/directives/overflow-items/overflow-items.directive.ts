@@ -1,14 +1,4 @@
-import {
-    AfterViewInit,
-    Directive,
-    ElementRef,
-    EventEmitter,
-    Input,
-    OnChanges,
-    OnDestroy,
-    Output,
-    SimpleChanges
-} from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
@@ -16,7 +6,7 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 @Directive({
     selector: '[fdOverflowItems]'
 })
-export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestroy {
+export class OverflowItemsDirective implements AfterViewInit, OnDestroy {
 
     @Input()
     itemSelector: string;
@@ -36,15 +26,8 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
     private _onDestroy$ = new Subject();
 
     constructor(
-        private _el: ElementRef,
+        private _el: ElementRef
     ) {
-    }
-
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.isRtl && !changes.isRtl.firstChange) {
-            console.log('changes');
-            this._calculateAmountOfOverflowedItems();
-        }
     }
 
     ngAfterViewInit(): void {
@@ -52,7 +35,7 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
             .pipe(
                 debounceTime(50),
                 distinctUntilChanged(),
-                takeUntil(this._onDestroy$),
+                takeUntil(this._onDestroy$)
             )
             .subscribe((_) => this._calculateAmountOfOverflowedItems());
 
@@ -71,12 +54,11 @@ export class OverflowItemsDirective implements OnChanges, AfterViewInit, OnDestr
         const contentWidth = this._el.nativeElement.clientWidth
             - parseFloat(computed.paddingLeft)
             - parseFloat(computed.paddingRight);
-        debugger;
         return this._checkWidthWithOffset(arrItems, contentWidth);
     }
 
     private _calculateAmountOfOverflowedItems(): void {
-        const extra = this.getAmountOfExtraItems()
+        const extra = this.getAmountOfExtraItems();
         this.changed.emit(extra);
     }
 
