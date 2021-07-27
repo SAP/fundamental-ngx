@@ -17,6 +17,7 @@ import { FormModule } from '@fundamental-ngx/core/form';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { MultiInputModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -37,7 +38,8 @@ const routes: Routes = [
         ListModule,
         DialogModule,
         InputGroupModule,
-        A11yModule
+        A11yModule,
+        MultiInputModule
     ],
     exports: [RouterModule],
     declarations: [

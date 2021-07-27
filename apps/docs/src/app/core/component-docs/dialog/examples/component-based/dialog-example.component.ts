@@ -9,6 +9,21 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
             </fd-dialog-header>
 
             <fd-dialog-body>
+
+            <fd-multi-input
+                [dropdownValues]="values"
+                placeholder="Search here..."
+                [displayFn]="displayFunction"
+                [(ngModel)]="selected"
+            ></fd-multi-input>
+
+            <fd-multi-input
+                [dropdownValues]="values2"
+                placeholder="Search here..."
+                [displayFn]="displayFunction"
+                [(ngModel)]="selected2"
+            ></fd-multi-input>
+
                 <p id="fd-dialog-body-1" role="dialog" style="text-align: justify; margin: 0">
                     {{ dialogRef.data.pinnapleDescription }}
                 </p>
@@ -39,4 +54,42 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 })
 export class DialogExampleComponent {
     constructor(public dialogRef: DialogRef) {}
+
+    values = [
+        { name: 'Photo Voltaic', icon: 'photo-voltaic' },
+        { name: 'Settings', icon: 'settings' },
+        { name: 'Heating Cooling', icon: 'heating-cooling' },
+        { name: 'Competitor', icon: 'competitor' },
+        { name: 'Chalkboard', icon: 'chalkboard' },
+        { name: 'Database', icon: 'database' },
+        { name: 'Passenger Train', icon: 'passenger-train' },
+        { name: 'World', icon: 'world' },
+        { name: 'Shield', icon: 'shield' },
+        { name: 'Journey Change', icon: 'journey-change' }
+    ];
+
+    selected = [];
+
+    values2 = [
+        { name: 'Photo Voltaic', icon: 'photo-voltaic' },
+        { name: 'Settings', icon: 'settings' },
+        { name: 'Heating Cooling', icon: 'heating-cooling' },
+        { name: 'Competitor', icon: 'competitor' },
+        { name: 'Chalkboard', icon: 'chalkboard' },
+        { name: 'Database', icon: 'database' },
+        { name: 'Passenger Train', icon: 'passenger-train' },
+        { name: 'World', icon: 'world' },
+        { name: 'Shield', icon: 'shield' },
+        { name: 'Journey Change', icon: 'journey-change' }
+    ];
+
+    selected2 = [];
+
+    displayFunction(item: { name: string; icon: string }): string {
+        if (item) {
+            return item.name;
+        } else {
+            return '';
+        }
+    }
 }
