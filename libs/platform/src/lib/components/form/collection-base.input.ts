@@ -1,9 +1,5 @@
-import { ChangeDetectorRef, Host, Input, Directive, Optional, Self, SkipSelf, NgZone, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Host, Input, Directive, Optional, Self, SkipSelf } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators';
-import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs';
-
-import { InlineLayout, RESPONSIVE_BREAKPOINTS } from './../form/form-options';
 import { isFunction, isJsObject, isString } from '../../utils/lang';
 import { FormFieldControl } from './form-control';
 import { FormField } from './form-field';
@@ -21,7 +17,7 @@ import { BaseInput } from './base.input';
  *
  */
 @Directive()
-export abstract class CollectionBaseInput extends BaseInput implements OnDestroy {
+export abstract class CollectionBaseInput extends BaseInput {
     /**
      * list of values, it can be of type SelectItem or String.
      */
@@ -51,47 +47,14 @@ export abstract class CollectionBaseInput extends BaseInput implements OnDestroy
     @Input()
     displayKey: string;
 
-    protected _inlineCurrentValue = new BehaviorSubject<boolean>(false);
-
-    /** @hidden */
-    protected _isInlineCurrent: boolean;
-
-    /** @hidden */
-    private _xlIsInline: boolean;
-
-    /** @hidden */
-    private _lgIsInline: boolean;
-
-    /** @hidden */
-    private _mdIsInline: boolean;
-
-    /** @hidden */
-    private _sIsInline: boolean;
-
-    /** @hidden */
-    private _isInLineLayoutEnabled = true;
-
-    /** @hidden */
-    private _resizeObservable$: Observable<Event>;
-
-    /** @hidden */
-    private _resizeSubscription$: Subscription;
-
     constructor(
         cd: ChangeDetectorRef,
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @SkipSelf() readonly ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
-        private _ngZone?: NgZone
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
         super(cd, ngControl, ngForm, formField, formControl);
-    }
-
-    /** @hidden */
-    ngOnDestroy(): void {
-        this._resizeSubscription$?.unsubscribe();
-        super.ngOnDestroy();
     }
 
     protected lookupValue(item: any): string {
@@ -123,59 +86,6 @@ export abstract class CollectionBaseInput extends BaseInput implements OnDestroy
             return obj;
         } else {
             return this.objectGet(obj[is[0]], is.slice(1));
-        }
-    }
-
-    /** set values of inline for each screen layout */
-    protected _setFieldLayout(inlineLayout: InlineLayout): void {
-        try {
-            this._sIsInline = !!inlineLayout['S'];
-            this._mdIsInline = !!inlineLayout['M'];
-            this._lgIsInline = !!inlineLayout['L'];
-            this._xlIsInline = !!inlineLayout['XL'];
-            this._updateLayout();
-        } catch (error) {
-            this._isInLineLayoutEnabled = false;
-        }
-
-        if (this._isInLineLayoutEnabled) {
-            this._resizeObservable$ = fromEvent(window, 'resize');
-            // Unsubscribe previous subcription
-            this._resizeSubscription$?.unsubscribe();
-
-            this._ngZone.runOutsideAngular(() => {
-                this._resizeSubscription$ = this._resizeObservable$
-                    ?.pipe(debounceTime(50))
-                    .subscribe(() => this._updateLayout());
-            });
-        }
-    }
-
-    /** @hidden */
-    private _updateLayout(): void {
-        const width = window.innerWidth;
-
-        // check if value has changed, then only assign new value.
-        if (width > 0 && width < RESPONSIVE_BREAKPOINTS['S'] && this._isInlineCurrent !== this._sIsInline) {
-            this._isInlineCurrent = this._sIsInline;
-            this._inlineCurrentValue.next(this._isInlineCurrent);
-        } else if (
-            width >= RESPONSIVE_BREAKPOINTS['S'] &&
-            width < RESPONSIVE_BREAKPOINTS['M'] &&
-            this._isInlineCurrent !== this._mdIsInline
-        ) {
-            this._isInlineCurrent = this._mdIsInline;
-            this._inlineCurrentValue.next(this._isInlineCurrent);
-        } else if (
-            width >= RESPONSIVE_BREAKPOINTS['M'] &&
-            width < RESPONSIVE_BREAKPOINTS['L'] &&
-            this._isInlineCurrent !== this._lgIsInline
-        ) {
-            this._isInlineCurrent = this._lgIsInline;
-            this._inlineCurrentValue.next(this._isInlineCurrent);
-        } else if (width >= RESPONSIVE_BREAKPOINTS['L'] && this._isInlineCurrent !== this._xlIsInline) {
-            this._isInlineCurrent = this._xlIsInline;
-            this._inlineCurrentValue.next(this._isInlineCurrent);
         }
     }
 }

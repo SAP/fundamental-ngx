@@ -1,7 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
-import { OptionItem } from '@fundamental-ngx/platform';
+import { OptionItem, RESPONSIVE_BREAKPOINTS_CONFIG } from '@fundamental-ngx/platform';
+
+const DEFAULT_NEW_BREAKPOINTS_CONFIG = {
+    S: 800,
+    M: 1224,
+    L: 1540
+};
 
 export class Fruit {
     id: string;
@@ -19,7 +25,13 @@ export class Fruit {
     selector: 'fdp-platform-form-isinline-change-example',
     templateUrl: './platform-field-isinline-change-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
+    providers: [
+        {
+            provide: RESPONSIVE_BREAKPOINTS_CONFIG,
+            useValue: DEFAULT_NEW_BREAKPOINTS_CONFIG
+        }
+    ]
 })
 export class PlatformFieldIsInlineChangeExampleComponent {
     form: FormGroup = new FormGroup({});

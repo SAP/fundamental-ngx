@@ -14,16 +14,21 @@ import {
     Self,
     SkipSelf,
     Host,
-    NgZone
+    Inject
 } from '@angular/core';
 import { NgForm, NgControl } from '@angular/forms';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { distinctUntilChanged } from 'rxjs/operators';
 
-import { CollectionBaseInput } from '../collection-base.input';
+import {
+    InLineLayoutCollectionBaseInput,
+    ResponsiveBreakPointConfig,
+    ResponsiveBreakpointsService,
+    RESPONSIVE_BREAKPOINTS_CONFIG
+} from '../inline-layout-collection-base.input';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { PlatformCheckboxChange } from '../checkbox/checkbox.component';
 import { FormFieldControl } from '../form-control';
-import { InlineLayout } from '../form-options';
 import { FormField } from '../form-field';
 
 /**
@@ -40,7 +45,7 @@ import { FormField } from '../form-field';
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => CheckboxGroupComponent), multi: true }]
 })
-export class CheckboxGroupComponent extends CollectionBaseInput {
+export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
     /**
      * value for selected checkboxes.
      */
@@ -62,18 +67,6 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
     set isInline(inline: boolean) {
         this._isInline = inline;
         this._cd.markForCheck();
-    }
-
-    /** object to change isInline property based on screen size */
-    @Input()
-    get inlineLayout(): InlineLayout {
-        return this._inlineLayout;
-    }
-
-    set inlineLayout(layout: InlineLayout) {
-        this._inlineLayout = layout;
-        this._setFieldLayout(layout);
-        this.isInline = this._isInlineCurrent;
     }
 
     /**
@@ -107,21 +100,25 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
     private _checked: string[];
 
     /** @hidden */
-    private _inlineLayout: InlineLayout;
-
-    /** @hidden */
     private _isInline: boolean;
 
     constructor(
         cd: ChangeDetectorRef,
+        readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
+        readonly _breakpointObserver: BreakpointObserver,
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
-        _ngZone: NgZone
+        @Optional()
+        @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
+        readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig
     ) {
-        super(cd, ngControl, ngForm, formField, formControl, _ngZone);
-        // subscribe to _inlineCurrentValue in collection-base-input
+        super(cd, _responsiveBreakpointsService, _breakpointObserver, ngControl, ngForm, formField, formControl);
+
+        this._responsiveBreakPointConfig = _defaultResponsiveBreakPointConfig || new ResponsiveBreakPointConfig();
+
+        // subscribe to _inlineCurrentValue in collection-form-field-inline-layout
         this._inlineCurrentValue
             .pipe(distinctUntilChanged())
             .subscribe((currentInline) => (this.isInline = currentInline));

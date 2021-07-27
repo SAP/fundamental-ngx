@@ -18,18 +18,23 @@ import {
     forwardRef,
     SkipSelf,
     Host,
-    NgZone
+    Inject
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
+import {
+    InLineLayoutCollectionBaseInput,
+    ResponsiveBreakPointConfig,
+    ResponsiveBreakpointsService,
+    RESPONSIVE_BREAKPOINTS_CONFIG
+} from '../inline-layout-collection-base.input';
 import { RadioButtonComponent } from './radio/radio.component';
-import { CollectionBaseInput } from '../collection-base.input';
 import { FormFieldControl } from '../form-control';
-import { InlineLayout } from '../form-options';
 import { FormField } from '../form-field';
 
 /**
@@ -49,7 +54,9 @@ let nextUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => RadioGroupComponent), multi: true }]
 })
-export class RadioGroupComponent extends CollectionBaseInput implements AfterViewInit, AfterContentChecked, OnDestroy {
+export class RadioGroupComponent
+    extends InLineLayoutCollectionBaseInput
+    implements AfterViewInit, AfterContentChecked, OnDestroy {
     /** Value of selected radio button */
     @Input('selected')
     get value(): any {
@@ -71,21 +78,6 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
         this._isInline = inline;
         this._cd.markForCheck();
     }
-
-    /** object to change isInline property based on screen size */
-    @Input()
-    get inlineLayout(): InlineLayout {
-        return this._inlineLayout;
-    }
-
-    set inlineLayout(layout: InlineLayout) {
-        this._inlineLayout = layout;
-        this._setFieldLayout(layout);
-        this.isInline = this._isInlineCurrent;
-    }
-
-    /** @hidden */
-    private _inlineLayout: InlineLayout;
 
     /** @hidden */
     private _isInline: boolean;
@@ -126,16 +118,23 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
     private keyboardEventsManager: FocusKeyManager<RadioButtonComponent>;
 
     constructor(
-        protected _changeDetector: ChangeDetectorRef,
+        protected _cd: ChangeDetectorRef,
+        readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
+        readonly _breakpointObserver: BreakpointObserver,
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
-        _ngZone: NgZone
+        @Optional()
+        @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
+        readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig
     ) {
-        super(_changeDetector, ngControl, ngForm, formField, formControl, _ngZone);
+        super(_cd, _responsiveBreakpointsService, _breakpointObserver, ngControl, ngForm, formField, formControl);
         this.id = `radio-group-${nextUniqueId++}`;
-        // subscribe to _inlineCurrentValue in collection-base-input
+
+        this._responsiveBreakPointConfig = _defaultResponsiveBreakPointConfig || new ResponsiveBreakPointConfig();
+
+        // subscribe to _inlineCurrentValue in inline-layout-collection-base-input
         this._inlineCurrentValue
             .pipe(distinctUntilChanged())
             .subscribe((currentInline) => (this.isInline = currentInline));
@@ -180,7 +179,7 @@ export class RadioGroupComponent extends CollectionBaseInput implements AfterVie
             throw new Error('fdp-radio-button-group must contain a fdp-radio-button');
         }
         this.contentRadioButtons.forEach((button) => (button.stateType = this.status));
-        this._changeDetector.markForCheck();
+        this._cd.markForCheck();
     }
 
     /**

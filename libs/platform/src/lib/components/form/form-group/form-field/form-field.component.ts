@@ -16,14 +16,20 @@ import {
     SkipSelf,
     Provider,
     forwardRef,
-    NgZone
+    Inject
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
-import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
-import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import { Subject } from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
 
-import { Column, ColumnLayout, HintPlacement, LabelLayout, RESPONSIVE_BREAKPOINTS } from '../../form-options';
+import { Column, ColumnLayout, HintPlacement, LabelLayout } from '../../form-options';
+import {
+    ResponsiveBreakPointConfig,
+    ResponsiveBreakpointsService,
+    RESPONSIVE_BREAKPOINTS_CONFIG
+} from '../../inline-layout-collection-base.input';
 import { FormFieldControl } from '../../form-control';
 import { FormField } from '../../form-field';
 import { FormGroupContainer } from '../../form-group';
@@ -94,6 +100,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     set columnLayout(layout: ColumnLayout) {
         this._columnLayout = layout;
+        this._isColumnLayoutEnabled = true;
         this._setLayout();
     }
 
@@ -179,7 +186,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     protected _destroyed = new Subject<void>();
 
     /** @hidden */
-    private _isColumnLayoutEnabled = true;
+    private _isColumnLayoutEnabled = false;
 
     /** @hidden column number for different screen sizes */
     private _xlColumnNumber: number;
@@ -197,17 +204,18 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     private _columnLayout: ColumnLayout;
 
     /** @hidden */
-    private _resizeObservable$: Observable<Event>;
-
-    /** @hidden */
-    private _resizeSubscription$: Subscription;
+    private _responsiveBreakPointConfig: ResponsiveBreakPointConfig;
 
     /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef,
+        private _breakpointObserver: BreakpointObserver,
         @Optional() formGroupContainer: FormGroupContainer,
         @Optional() @SkipSelf() @Host() readonly formFieldGroup: FormFieldGroup,
-        @Optional() private _ngZone: NgZone
+        @Optional()
+        @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
+        readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig,
+        readonly _responsiveBreakpointsService: ResponsiveBreakpointsService
     ) {
         // provides capability to make a field disabled. useful in reactive form approach.
         this.formControl = new FormControl({ value: null, disabled: this.disabled });
@@ -218,12 +226,19 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         // in such case formGroupContainer can be pointed explicitly using
         // component input annotation
         this.formGroupContainer = formGroupContainer;
+        this._responsiveBreakPointConfig = _defaultResponsiveBreakPointConfig || new ResponsiveBreakPointConfig();
     }
 
     /** @hidden */
     ngOnInit(): void {
         if (this.columns && (this.columns < 1 || this.columns > 12)) {
             throw new Error('[columns] accepts numbers between 1 - 12');
+        }
+
+        if (this._isColumnLayoutEnabled) {
+            this._breakpointObserver
+                .observe(this._responsiveBreakpointsService.getBreakpoints(this._responsiveBreakPointConfig))
+                .subscribe((result) => this._breakPointMeet(result));
         }
 
         this.addToFormGroup();
@@ -412,7 +427,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     }
 
     /** @hidden */
-    private _setColumnNumber(): void {
+    private _setLayout(): void {
         try {
             this._sColumnNumber = this.columnLayout['S'] || 1;
             this._mdColumnNumber = this.columnLayout['M'] || this._sColumnNumber;
@@ -423,57 +438,40 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         }
     }
 
-    /** @hidden listen for window resize and set value of column and isInLine based on screen size */
-    private _setLayout(): void {
-        this._setColumnNumber();
-        this._updateLayout();
-
-        if (this._isColumnLayoutEnabled) {
-            this._resizeObservable$ = fromEvent(window, 'resize');
-            // Unsubscribe previous subcription
-            this._resizeSubscription$?.unsubscribe();
-
-            this._ngZone.runOutsideAngular(() => {
-                this._resizeSubscription$ = this._resizeObservable$
-                    ?.pipe(debounceTime(50))
-                    .subscribe(() => this._updateLayout());
-            });
-        }
-    }
-
     /** @hidden */
-    private _updateLayout(): void {
-        let columnUpdated = false;
-        const width = window.innerWidth;
-
+    private _updateLayout(currentBreakingPointName: string): void {
         if (this._isColumnLayoutEnabled) {
-            // check if value has changed, then only assign new value.
-            if (width > 0 && width < RESPONSIVE_BREAKPOINTS['S'] && this._sColumnNumber !== this.column) {
-                this.column = this._sColumnNumber;
-                columnUpdated = true;
-            } else if (
-                width >= RESPONSIVE_BREAKPOINTS['S'] &&
-                width < RESPONSIVE_BREAKPOINTS['M'] &&
-                this._mdColumnNumber !== this.column
-            ) {
-                this.column = this._mdColumnNumber;
-                columnUpdated = true;
-            } else if (
-                width >= RESPONSIVE_BREAKPOINTS['M'] &&
-                width < RESPONSIVE_BREAKPOINTS['L'] &&
-                this._lgColumnNumber !== this.column
-            ) {
-                this.column = this._lgColumnNumber;
-                columnUpdated = true;
-            } else if (width >= RESPONSIVE_BREAKPOINTS['L'] && this._xlColumnNumber !== this.column) {
-                this.column = this._xlColumnNumber;
-                columnUpdated = true;
+            switch (currentBreakingPointName) {
+                case 'S':
+                    this.column = this._sColumnNumber;
+                    break;
+                case 'M':
+                    this.column = this._mdColumnNumber;
+                    break;
+                case 'L':
+                    this.column = this._lgColumnNumber;
+                    break;
+                case 'XL':
+                    this.column = this._xlColumnNumber;
+                    break;
+                default:
+                    this.column = this._xlColumnNumber;
             }
         }
 
-        if (columnUpdated) {
-            // emit column change, so form-group knows it and re-arranges the fields
-            this.onColumnChange.emit(true);
+        // emit column change, so form-group knows it and re-arranges the fields
+        this.onColumnChange.emit(true);
+    }
+
+    /** @hidden when screen size changes from one breakpoint to another */
+    private _breakPointMeet(breakPoints: BreakpointState): void {
+        if (breakPoints.matches) {
+            for (const breakpoint in breakPoints.breakpoints) {
+                if (breakPoints.breakpoints[breakpoint]) {
+                    const breakPointName = this._responsiveBreakpointsService.getBreakpointName(breakpoint);
+                    this._updateLayout(breakPointName);
+                }
+            }
         }
     }
 }

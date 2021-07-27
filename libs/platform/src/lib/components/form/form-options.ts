@@ -14,16 +14,3 @@ export interface ColumnLayout {
     M?: number;
     S?: number;
 }
-
-export interface InlineLayout {
-    XL?: boolean;
-    L?: boolean;
-    M?: boolean;
-    S?: boolean;
-}
-
-export enum RESPONSIVE_BREAKPOINTS {
-    S = 600,
-    M = 1024,
-    L = 1440
-}

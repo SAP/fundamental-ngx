@@ -21,6 +21,7 @@ export * from './form-group/form-field/form-field.component';
 export * from './form-group/form-group.component';
 export * from './form-helpers';
 export * from './form-options';
+export * from './inline-layout-collection-base.input';
 export * from './input-group/public_api';
 export * from './input-message-group-with-template/input-message-group-with-template.component';
 export * from './input/fdp-input.module';
