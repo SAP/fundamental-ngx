@@ -1,5 +1,5 @@
 <div class="table-header">
-    <h5 fd-title role="group">
+    <h5 fd-title>
         <ng-container i18n="@@platformI18nValueHelpDialogDisplayCountLabel">Items</ng-container> ({{
             displayedData.length
         }})
@@ -32,7 +32,6 @@
                         [tristateSelectable]="false"
                         [ngModel]="_selectedAll"
                         (ngModelChange)="_toggleAllRows()"
-						role="checkbox"
                     ></fd-checkbox>
                 </th>
                 <th
@@ -69,7 +68,6 @@
                             [compact]="true"
                             [ngModel]="_selectedMap[row[uniqueKey]]"
                             (change)="_toggleSelectRow(row)"
-							role="checkbox"
                         ></fd-checkbox>
                     </td>
                     <td
