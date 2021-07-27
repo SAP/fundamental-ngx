@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.151](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.150...v0.31.0-rc.151) (2021-07-27)
+
+
+### Bug Fixes
+
+* **core,platform:** fix weird selection behaviour because of using attr.name in radio button ([#6056](https://github.com/SAP/fundamental-ngx/issues/6056)) ([e67ea49](https://github.com/SAP/fundamental-ngx/commit/e67ea49c8647ec75e91c6effa641b4835bd8a109))
+
 ## [0.31.0-rc.150](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.149...v0.31.0-rc.150) (2021-07-26)
 
 ## [0.31.0-rc.149](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.148...v0.31.0-rc.149) (2021-07-26)
