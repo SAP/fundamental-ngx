@@ -1,6 +1,8 @@
 import { ComponentRef } from '@angular/core';
-import { DialogConfig } from '../utils/dialog-config.class';
+
 import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+
+import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogConfigBase } from './dialog-config-base.class';
 import { DialogRefBase } from './dialog-ref-base.class';
 

@@ -1,8 +1,9 @@
 import { AfterContentInit, ContentChildren, Directive, QueryList, TemplateRef } from '@angular/core';
+import { startWith } from 'rxjs/operators';
+
 import { TemplateDirective } from '@fundamental-ngx/core/utils';
 import { ButtonBarComponent } from '@fundamental-ngx/core/bar';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
-import { startWith } from 'rxjs/operators';
 
 @Directive()
 export abstract class DialogFooterBase implements AfterContentInit {

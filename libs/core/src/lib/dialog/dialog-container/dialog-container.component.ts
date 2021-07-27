@@ -10,11 +10,11 @@ import {
     ViewChild,
     ViewContainerRef
 } from '@angular/core';
+
+import { applyCssClass, CssClassBuilder, DynamicComponentContainer } from '@fundamental-ngx/core/utils';
+
 import { DialogRef } from '../utils/dialog-ref.class';
 import { DialogConfig } from '../utils/dialog-config.class';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
-import { DynamicComponentContainer } from '@fundamental-ngx/core/utils';
 import { DialogDefaultComponent } from '../dialog-default/dialog-default.component';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 import { DialogContentType } from '../dialog-service/dialog.service';

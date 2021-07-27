@@ -1,6 +1,7 @@
 /* tslint:disable:no-inferrable-types */
 
 import { DynamicComponentConfig } from '@fundamental-ngx/core/utils';
+
 import { DialogPosition } from '../utils/dialog-position.class';
 
 export class DialogConfigBase<T> implements DynamicComponentConfig {

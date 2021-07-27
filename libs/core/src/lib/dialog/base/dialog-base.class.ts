@@ -1,24 +1,15 @@
-import {
-    AfterViewInit,
-    ChangeDetectorRef,
-    Directive,
-    ElementRef,
-    HostBinding,
-    HostListener,
-    OnDestroy,
-    OnInit
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Directive, ElementRef, HostBinding, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { ESCAPE } from '@angular/cdk/keycodes';
-
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
-import { createFocusTrap, FocusTrap } from 'focus-trap';
 
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+
+import { createFocusTrap, FocusTrap } from 'focus-trap';
 import { DialogConfigBase } from './dialog-config-base.class';
 import { DialogRefBase } from './dialog-ref-base.class';
 import { DialogSize, dialogWidthToSize } from '../utils/dialog-width-to-size';
-import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 
 @Directive()
 export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
@@ -114,7 +105,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
             this._subscriptions.add(
                 this._router.events.pipe(
                     filter(event => event instanceof NavigationStart && this._config.closeOnNavigation)
-                ).subscribe(event => this._ref.dismiss())
+                ).subscribe(() => this._ref.dismiss())
             );
         }
     }
@@ -126,7 +117,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
                 this._focusTrap = createFocusTrap(this.dialogWindow.nativeElement, {
                     clickOutsideDeactivates: this._config.backdropClickCloseable && this._config.hasBackdrop,
                     escapeDeactivates: false,
-                    allowOutsideClick: (event: MouseEvent) => true
+                    allowOutsideClick: () => true
                 });
                 this._focusTrap.activate();
             } catch (e) {}

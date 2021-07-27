@@ -1,4 +1,57 @@
 
+## [0.31.0-rc.152](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.151...v0.31.0-rc.152) (2021-07-27)
+
+
+### Features
+
+* **core:** dialog auto labelling ([#6053](https://github.com/SAP/fundamental-ngx/issues/6053)) ([8cb3613](https://github.com/SAP/fundamental-ngx/commit/8cb36132aeab49380a58f4a7c2be57a9a651ea77))
+
+## [0.31.0-rc.151](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.150...v0.31.0-rc.151) (2021-07-27)
+
+
+### Bug Fixes
+
+* **core,platform:** fix weird selection behaviour because of using attr.name in radio button ([#6056](https://github.com/SAP/fundamental-ngx/issues/6056)) ([e67ea49](https://github.com/SAP/fundamental-ngx/commit/e67ea49c8647ec75e91c6effa641b4835bd8a109))
+
+## [0.31.0-rc.150](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.149...v0.31.0-rc.150) (2021-07-26)
+
+## [0.31.0-rc.149](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.148...v0.31.0-rc.149) (2021-07-26)
+
+## [0.31.0-rc.148](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.147...v0.31.0-rc.148) (2021-07-26)
+
+## [0.31.0-rc.147](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.146...v0.31.0-rc.147) (2021-07-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core:** Removed [hasLabel] property as it was unnecessary.
+
+### Bug Fixes
+
+* **core:** drop hasLabel property and handling the RTL issue in Status Indicator ([#6032](https://github.com/SAP/fundamental-ngx/issues/6032)) ([2f7854b](https://github.com/SAP/fundamental-ngx/commit/2f7854b4c2eed992edae07111807afbd8a22aea1))
+
+## [0.31.0-rc.146](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.145...v0.31.0-rc.146) (2021-07-26)
+
+
+### Bug Fixes
+
+* **platform:** remove hardcoded styles for step-input as part of style cleanup ([#6057](https://github.com/SAP/fundamental-ngx/issues/6057)) ([123cac8](https://github.com/SAP/fundamental-ngx/commit/123cac87a4a226d640b1ecc8bd6f8c780133e399))
+
+## [0.31.0-rc.145](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.144...v0.31.0-rc.145) (2021-07-26)
+
+
+### Bug Fixes
+
+* **platform:** default contentdesnsity in angular application ([#5936](https://github.com/SAP/fundamental-ngx/issues/5936)) ([518e40c](https://github.com/SAP/fundamental-ngx/commit/518e40c727ced29015f7b65b24e2cdd4093e2946))
+
+## [0.31.0-rc.144](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.143...v0.31.0-rc.144) (2021-07-26)
+
+## [0.31.0-rc.143](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.142...v0.31.0-rc.143) (2021-07-26)
+
+## [0.31.0-rc.142](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.141...v0.31.0-rc.142) (2021-07-25)
+
+## [0.31.0-rc.141](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.140...v0.31.0-rc.141) (2021-07-25)
+
 ## [0.31.0-rc.140](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.139...v0.31.0-rc.140) (2021-07-21)
 
 ## [0.31.0-rc.139](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.138...v0.31.0-rc.139) (2021-07-21)

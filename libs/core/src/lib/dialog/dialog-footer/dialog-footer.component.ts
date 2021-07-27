@@ -1,4 +1,5 @@
 import { AfterContentInit, AfterViewInit, Component, Optional } from '@angular/core';
+
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogFooterBase } from '../base/dialog-footer-base.class';
 

@@ -38,10 +38,11 @@ describe('Link component test suite', function() {
     });
 
     it('should check standard links', () => {
-        mouseHoverElement(standardLinks);
+        scrollIntoView(standardLinks);
 
         const arrL = getElementArrayLength(standardLinks);
         for (let i = 0; arrL > i; i++) {
+            scrollIntoView(standardLinks, i);
             expect(getElementTitle(standardLinks, i)).toBe(standardLinksAltTextArray[i]);
             checkLinkData(standardLinks, i);
             expect(isElementClickable(standardLinks, i)).toBe(true);
