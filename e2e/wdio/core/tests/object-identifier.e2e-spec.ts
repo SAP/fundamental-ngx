@@ -27,7 +27,7 @@ describe('Object identifier test suite', function() {
         const linkElementArr = getElementArrayLength(clickableLinks);
         for (let i = 0; i < linkElementArr; i++) {
             scrollIntoView(clickableLinks, i);
-            expect(isElementClickable(clickableLinks, i)).toBe(true);
+            expect(isElementClickable(clickableLinks, i)).toBe(true,'link with index ${i} not clickable');
         }
     });
 
