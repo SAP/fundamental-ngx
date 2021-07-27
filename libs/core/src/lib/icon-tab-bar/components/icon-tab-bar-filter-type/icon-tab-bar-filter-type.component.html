@@ -5,7 +5,7 @@
     [isRtl]="isRtl"
     itemSelector="[data-overflowItem]"
     [overflowOffset]="100"
-    (changed)="_recalculateVisibleItems($event)"
+    (overflowChanged)="_recalculateVisibleItems($event)"
 >
     <li
         *ngIf="showTabAll"

@@ -19,7 +19,10 @@ interface ItemToReplace {
 export class IconTabBarTextTypeComponent extends IconTabBarClass {
 
     @Input()
-    enableTabReordering = true;
+    enableTabReordering = false;
+
+    @Input()
+    layoutMode: 'row'|'column';
 
     constructor(
         protected _cd: ChangeDetectorRef,
@@ -68,7 +71,7 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
     private _insertItemAsChild(data: { replacedItemInfo: ItemToReplace, draggableItemInfo: ItemToReplace }): void {
         const { replacedItemInfo, draggableItemInfo } = data;
         draggableItemInfo.arr.splice(draggableItemInfo.item.index, 1);
-        if (!replacedItemInfo.item.subItems.length) {
+        if (!replacedItemInfo.item.subItems?.length) {
             replacedItemInfo.item.subItems = [];
         }
         replacedItemInfo.item.subItems.push(draggableItemInfo.item);
@@ -117,6 +120,6 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
     }
 
     _trackBy(item: IconTabBarItem): string {
-        return item.label;
+        return item.uId;
     }
 }

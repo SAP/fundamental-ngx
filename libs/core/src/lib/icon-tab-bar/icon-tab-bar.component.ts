@@ -43,6 +43,9 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
     showTabAll = true;
 
     @Input()
+    layoutMode: 'row'|'column' = 'row';
+
+    @Input()
     iconTabBackground: IconTabBarBackground = 'solid';
 
     @Input()
@@ -105,6 +108,9 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
         }
         if (this.densityMode === 'compact') {
             styles.push('fd-icon-tab-bar--compact');
+        }
+        if (this.layoutMode === 'column') {
+            styles.push('fd-icon-tab-bar--counters');
         }
             return styles;
 

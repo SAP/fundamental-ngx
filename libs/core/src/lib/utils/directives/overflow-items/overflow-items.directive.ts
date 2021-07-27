@@ -21,7 +21,7 @@ export class OverflowItemsDirective implements AfterViewInit, OnDestroy {
     itemCssBlockValue = 'flex';
 
     @Output()
-    changed: EventEmitter<number> = new EventEmitter<number>();
+    overflowChanged: EventEmitter<number> = new EventEmitter<number>();
 
     private _onDestroy$ = new Subject();
 
@@ -59,7 +59,7 @@ export class OverflowItemsDirective implements AfterViewInit, OnDestroy {
 
     private _calculateAmountOfOverflowedItems(): void {
         const extra = this.getAmountOfExtraItems();
-        this.changed.emit(extra);
+        this.overflowChanged.emit(extra);
     }
 
     private _checkWidthWithOffset(arrItems: HTMLElement[], containerWidth: number, checkWithOffset: boolean = false): number {

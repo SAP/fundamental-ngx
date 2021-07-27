@@ -6,7 +6,7 @@
     [isRtl]="isRtl"
     itemSelector='[data-overflowItem]'
     [overflowOffset]="_offsetOverflowDirective"
-    (changed)='_recalculateVisibleItems($event)'
+    (overflowChanged)="_recalculateVisibleItems($event)"
 >
     <li
         *ngIf="_showLeftBtn"

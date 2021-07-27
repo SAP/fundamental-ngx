@@ -11,6 +11,18 @@
 </component-example>
 <code-example [exampleFiles]="iconTabBarTextTypeHtml"></code-example>
 
+<h2>Text type tabs (column mode)</h2>
+<description>
+    <p>
+        To use this mode you need to pass input<code class="code-snippet">[layoutMode]="'column'"</code>
+    </p>
+</description>
+<component-example>
+    <fd-icon-tab-bar-text-type-example [textTypeLayoutMode]="'standard'"></fd-icon-tab-bar-text-type-example>
+</component-example>
+<code-example [exampleFiles]="iconTabBarTextTypeHtml"></code-example>
+
+
 
 <h2>Icon type tabs</h2>
 <description>
@@ -100,7 +112,7 @@
     </fd-message-strip>
 </description>
 <component-example>
-    <fd-icon-tab-bar-text-type-example [itemsWithSubItems]="3" [subItemsLevel]="3"></fd-icon-tab-bar-text-type-example>
+    <fd-icon-tab-bar-text-type-example [enableTabReordering]="true"></fd-icon-tab-bar-text-type-example>
 </component-example>
 <code-example [exampleFiles]="iconTabBarTextTypeHtml"></code-example>
 

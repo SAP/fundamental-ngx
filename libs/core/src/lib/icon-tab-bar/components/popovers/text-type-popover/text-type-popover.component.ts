@@ -38,10 +38,9 @@ export class TextTypePopoverComponent extends IconTabBarPopoverClass implements 
             ? this.selectedExtraItem.emit(selectedItem)
             : this.selectedSubItem.emit(selectedItem);
         this.popover.close();
-        // this._cd.detectChanges();
     }
 
     _trackBy(item: IconTabBarItem): string {
-        return item.label;
+        return item.uId;
     }
 }

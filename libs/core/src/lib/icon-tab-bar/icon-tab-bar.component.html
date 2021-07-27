@@ -44,7 +44,9 @@
 <ng-template #textType>
     <fd-icon-tab-bar-text-type
         [tabsConfig]="iconTabItems"
+        [layoutMode]="layoutMode"
         [isRtl]="_isRtl"
+        [enableTabReordering]="enableTabReordering"
         (selected)="_selectItem($event)"
     ></fd-icon-tab-bar-text-type>
 </ng-template>

@@ -1,5 +1,5 @@
 export function cloneDeep(value: any): any {
-    if (!value) {
+    if (!value || typeof value !== 'object') {
         return value;
     }
 

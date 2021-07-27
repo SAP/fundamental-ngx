@@ -9,4 +9,10 @@ export class IconTabBarTextTypeExampleComponent extends IconTabBarExampleClass {
 
     @Input()
     hasIcon = false;
+
+    @Input()
+    textTypeLayoutMode: 'row'|'column' = 'row';
+
+    @Input()
+    enableTabReordering = false;
 }

@@ -13,10 +13,10 @@ export class IconBarDndListDirective<T> implements AfterViewInit, OnDestroy {
 
     /** Direction in which the list is oriented. */
     @Input()
-    orientation: 'horizontal' | 'vertical' = 'vertical';
+    dndOrientation: 'horizontal' | 'vertical' = 'vertical';
 
     @Input()
-    autoScroll = true;
+    dndAutoScroll = true;
 
     /** @hidden */
     private _dropListRef: DropListRef;
@@ -40,9 +40,9 @@ export class IconBarDndListDirective<T> implements AfterViewInit, OnDestroy {
     ngAfterViewInit(): void {
         this._dropListRef = this._dragDrop.createDropList(this.elementRef.nativeElement);
         this._dropListRef.sortingDisabled = true;
-        this._dropListRef.autoScrollDisabled = this.autoScroll;
+        this._dropListRef.autoScrollDisabled = this.dndAutoScroll;
         this._dropListRef.disabled = true;
-        this._dropListRef.withOrientation(this.orientation);
+        this._dropListRef.withOrientation(this.dndOrientation);
 
         this._dndContainer.registerDndList(this);
 

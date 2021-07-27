@@ -37,7 +37,7 @@
                                 <span *ngIf="item.counter" class="fd-list__counter">({{item.counter}})</span>
                             </a>
                         </li>
-                        <ng-container *ngIf="item.subItems && item.subItems.length">
+                        <ng-container *ngIf="item.subItems?.length">
                             <ng-container [ngTemplateOutletContext]="{level: level + 1, items: item.subItems}"
                                           [ngTemplateOutlet]="subItem"></ng-container>
                         </ng-container>
@@ -93,7 +93,7 @@
                                 <span *ngIf="item.counter" class="fd-list__counter">({{item.counter}})</span>
                             </a>
                         </li>
-                        <ng-container *ngIf="item.subItems && item.subItems.length">
+                        <ng-container *ngIf="item.subItems?.length">
                             <ng-container [ngTemplateOutletContext]="{level: level + 1, items: item.subItems}"
                                           [ngTemplateOutlet]="subItem"></ng-container>
                         </ng-container>
