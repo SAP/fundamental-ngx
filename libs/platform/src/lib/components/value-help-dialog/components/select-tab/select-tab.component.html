@@ -1,5 +1,5 @@
 <div class="table-header">
-    <h5 fd-title [id]="selectTitleId" role="group">
+    <h5 fd-title role="group">
         <ng-container i18n="@@platformI18nValueHelpDialogDisplayCountLabel">Items</ng-container> ({{
             displayedData.length
         }})
@@ -20,7 +20,6 @@
         [noBorderX]="mobile"
         [noBorderY]="false"
         role="presentation"
-		[attr.aria-describedby]="selectTitleId"
     >
         <thead fd-table-header>
             <tr fd-table-row *ngIf="displayedData.length && _tableFilters">
