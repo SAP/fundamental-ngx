@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.152](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.151...v0.31.0-rc.152) (2021-07-27)
+
+
+### Features
+
+* **core:** dialog auto labelling ([#6053](https://github.com/SAP/fundamental-ngx/issues/6053)) ([8cb3613](https://github.com/SAP/fundamental-ngx/commit/8cb36132aeab49380a58f4a7c2be57a9a651ea77))
+
 ## [0.31.0-rc.151](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.150...v0.31.0-rc.151) (2021-07-27)
 
 
