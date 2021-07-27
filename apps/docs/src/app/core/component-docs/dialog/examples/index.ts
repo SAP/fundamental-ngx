@@ -11,6 +11,7 @@ import { TemplateBasedDialogExampleComponent } from './template-based/template-b
 import { SecondDialogExampleComponent } from './stacked-dialogs/second-dialog-example.component';
 import { FirstDialogExampleComponent } from './stacked-dialogs/first-dialog-example.component';
 import { DialogExampleComponent } from './component-based/dialog-example.component';
+import { AutoLabelDialogExampleComponent } from './auto-label/auto-label-dialog-example.component';
 
 export * from './component-based/component-based-dialog-example.component';
 export * from './dialog-backdrop-container/dialog-backdrop-container-example.component';
@@ -39,5 +40,6 @@ export const examples = [
     TemplateBasedDialogExampleComponent,
     SecondDialogExampleComponent,
     FirstDialogExampleComponent,
-    DialogExampleComponent
+    DialogExampleComponent,
+    AutoLabelDialogExampleComponent
 ];

@@ -1,4 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogDefaultContent } from '../utils/dialog-default-content.class';
 
@@ -12,7 +13,7 @@ export class DialogDefaultComponent implements AfterViewInit {
 
     /** @hidden */
     _defaultDialogContent: DialogDefaultContent;
-    
+
     /** @hidden */
     _defaultDialogConfiguration: DialogConfig;
 
