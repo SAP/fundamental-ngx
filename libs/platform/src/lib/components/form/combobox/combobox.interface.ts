@@ -15,4 +15,5 @@ export interface ComboboxInterface extends MobileMode {
 
     dialogApprove(): void;
     dialogDismiss(backup: string): void;
+    detectChanges(): void;
 }

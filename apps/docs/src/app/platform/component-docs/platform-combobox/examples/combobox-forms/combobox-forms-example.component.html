@@ -11,4 +11,7 @@
         <p>Selected Item: {{ selectedItem | json }}</p>
         <p>Form Selected Item: {{ customForm.getRawValue() | json }}</p>
     </fdp-form-field>
+    <ng-template #i18n let-errors>
+        <span *ngIf="errors.required">Field is required</span>
+    </ng-template>
 </fdp-form-group>
