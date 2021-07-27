@@ -86,7 +86,7 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
 
     /** The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on. */
     @Input()
-    startingDayOfWeek: DaysOfWeek = 1;
+    startingDayOfWeek: DaysOfWeek;
 
     /**
      * Whether user wants to mark day cells on hover.

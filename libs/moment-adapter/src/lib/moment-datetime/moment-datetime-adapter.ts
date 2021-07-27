@@ -73,7 +73,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     };
 
     getDayOfWeek(date: Moment): number {
-        return this.clone(date).day();
+        return this.clone(date).day() + 1;
     };
 
     getHours(date: Moment): number {
@@ -101,7 +101,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     };
 
     getWeekNumber(date: Moment): number {
-        return this.clone(date).week();
+        return this.clone(date).isoWeek();
     };
 
     getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
@@ -137,7 +137,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     };
 
     getWeekName(date: Moment): string {
-        return this.clone(date).week().toLocaleString(this.locale);
+        return this.clone(date).isoWeek().toLocaleString(this.locale);
     };
 
     getHourNames({ meridian, twoDigit }: { twoDigit: boolean; meridian: boolean }): string[] {

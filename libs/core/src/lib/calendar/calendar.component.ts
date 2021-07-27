@@ -7,12 +7,10 @@ import {
     HostBinding,
     Inject,
     Input,
-    OnChanges,
     OnDestroy,
     OnInit,
     Optional,
     Output,
-    SimpleChanges,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
@@ -83,7 +81,7 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAccessor, Validator, OnDestroy {
+export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Validator, OnDestroy {
     /** @hidden */
     @ViewChild(CalendarDayViewComponent) dayViewComponent: CalendarDayViewComponent<D>;
 
@@ -223,9 +221,6 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
     private adapterStartingDayOfWeek: DaysOfWeek;
 
     /** @hidden */
-    private currentStartingDayOfWeek: DaysOfWeek;
-
-    /** @hidden */
     onChange: (_: D | DateRange<D>) => void = () => {};
 
     /** @hidden */
@@ -310,14 +305,8 @@ export class CalendarComponent<D> implements OnInit, OnChanges, ControlValueAcce
         }
     }
 
-    /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes.startingDayOfWeek) {
-            this.currentStartingDayOfWeek =
-                changes.startingDayOfWeek.currentValue === undefined
-                    ? this.adapterStartingDayOfWeek
-                    : this.startingDayOfWeek;
-        }
+    getWeekStartDay(): DaysOfWeek {
+        return this.startingDayOfWeek === undefined ? this.adapterStartingDayOfWeek : this.startingDayOfWeek;
     }
 
     /** @hidden */
