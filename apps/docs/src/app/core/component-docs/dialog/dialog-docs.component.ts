@@ -284,6 +284,20 @@ export class DialogDocsComponent {
         }
     ];
 
+    dialogInnerPopover: ExampleFile[] = [
+        {
+            language: 'html',
+            code: complexDialogHtml,
+            fileName: 'dialog-complex-example'
+        },
+        {
+            language: 'typescript',
+            code: complexDialogTs,
+            fileName: 'dialog-complex-example',
+            component: 'DialogComplexExampleComponent'
+        }
+    ];
+
     constructor(private _schemaFactory: SchemaFactoryService, private _dialogService: DialogService) {
         this.schema = this._schemaFactory.getComponent('dialog');
     }

@@ -1,5 +1,6 @@
-import { Injectable, Type } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { createFocusTrap, FocusTrap, Options } from 'focus-trap';
+import { uuidv4 } from '../functions/uuidv4-generator';
 
 @Injectable({
     providedIn: 'root'
@@ -10,35 +11,57 @@ export class FocusTrapService {
 
     constructor() { }
 
-    createFocusTrap(component: any,
-                       element: string | HTMLElement | SVGElement | (string | HTMLElement | SVGElement)[],
-                       userOptions?: Options): FocusTrap {
+    createFocusTrap(element: string | HTMLElement | SVGElement | (string | HTMLElement | SVGElement)[],
+                    userOptions?: Options): string {
+
+        const uid = uuidv4();
+
         const trap = createFocusTrap(element, userOptions);
 
-        this.deactivateFocusTrap(component);
+        this._focusTrapInstances.set(uid, trap);
 
-        this._focusTrapInstances.set(component, trap);
+        this.activateFocusTrap(uid);
 
-        this.activateFocusTrap(component);
-
-        return trap;
+        return uid;
     }
 
-    activateFocusTrap(component: any): void {
-        const trap = this._focusTrapInstances.get(component);
+    activateFocusTrap(id: string): void {
+        const trap = this._focusTrapInstances.get(id);
 
         trap?.activate();
     }
 
-    deactivateFocusTrap(component: any): void {
-        const trap = this._focusTrapInstances.get(component);
+    deactivateFocusTrap(id: string): void {
+        const trap = this._focusTrapInstances.get(id);
 
         trap?.deactivate();
 
-        this._focusTrapInstances.delete(component);
+        this._focusTrapInstances.delete(id);
     }
 
     pauseCurrentFocusTrap(): void {
 
+        if (this._focusTrapInstances.size === 0) {
+            return;
+        }
+
+        const trapItem = this._getLastTrapedItem();
+
+        trapItem?.pause();
+    }
+
+    unpauseCurrentFocusTrap(): void {
+
+        if (this._focusTrapInstances.size === 0) {
+            return;
+        }
+
+        const trapItem = this._getLastTrapedItem();
+
+        trapItem?.unpause();
+    }
+
+    private _getLastTrapedItem(): FocusTrap {
+        return Array.from(this._focusTrapInstances).pop()[1];
     }
 }

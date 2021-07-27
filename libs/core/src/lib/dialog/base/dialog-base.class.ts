@@ -13,12 +13,12 @@ import { ESCAPE } from '@angular/cdk/keycodes';
 
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
-import { createFocusTrap, FocusTrap } from 'focus-trap';
+
+import { KeyUtil, RtlService, FocusTrapService } from '@fundamental-ngx/core/utils';
 
 import { DialogConfigBase } from './dialog-config-base.class';
 import { DialogRefBase } from './dialog-ref-base.class';
 import { DialogSize, dialogWidthToSize } from '../utils/dialog-width-to-size';
-import { KeyUtil, RtlService, FocusTrapService } from '@fundamental-ngx/core/utils';
 
 @Directive()
 export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
@@ -36,7 +36,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
     dialogPaddingSize: DialogSize;
 
     /** @hidden */
-    protected _focusTrap: FocusTrap;
+    protected _focusTrapId: string;
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -115,7 +115,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
             this._subscriptions.add(
                 this._router.events.pipe(
                     filter(event => event instanceof NavigationStart && this._config.closeOnNavigation)
-                ).subscribe(event => this._ref.dismiss())
+                ).subscribe(_ => this._ref.dismiss())
             );
         }
     }
@@ -125,10 +125,11 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
         if (this._config.focusTrapped) {
             try {
 
-                this._focusTrap = this._focusTrapService.createFocusTrap(this, this.dialogWindow.nativeElement, {
-                    clickOutsideDeactivates: true,
+                this._focusTrapId = this._focusTrapService.createFocusTrap(this.dialogWindow.nativeElement, {
+                    clickOutsideDeactivates: this._config.backdropClickCloseable && this._config.hasBackdrop,
                     escapeDeactivates: false,
-                    allowOutsideClick: (event: MouseEvent) => true
+                    returnFocusOnDeactivate: false,
+                    allowOutsideClick: (_: MouseEvent) => true
                 });
             } catch (e) {}
         }
@@ -136,7 +137,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _deactivateFocusTrap(): void {
-        this._focusTrapService.deactivateFocusTrap(this);
+        this._focusTrapService.deactivateFocusTrap(this._focusTrapId);
     }
 
     /** @hidden Set dialog window position */

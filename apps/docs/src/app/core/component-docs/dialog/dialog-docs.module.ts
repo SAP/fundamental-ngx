@@ -18,6 +18,7 @@ import { ListModule } from '@fundamental-ngx/core/list';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { MultiInputModule } from '@fundamental-ngx/core';
+import { DialogInnerPopoverComponent, DialogInnerPopoverExampleComponent } from './examples/dialog-inner-popover/dialog-inner-popover.component';
 
 const routes: Routes = [
     {
@@ -45,13 +46,16 @@ const routes: Routes = [
     declarations: [
         examples,
         DialogDocsComponent,
-        DialogDocsHeaderComponent
+        DialogDocsHeaderComponent,
+        DialogInnerPopoverComponent,
+        DialogInnerPopoverExampleComponent
     ],
     entryComponents: [
         DialogExampleComponent,
         FirstDialogExampleComponent,
         SecondDialogExampleComponent,
-        DialogStackedExampleComponent
+        DialogStackedExampleComponent,
+        DialogInnerPopoverExampleComponent
     ],
     providers: [
         DialogService
