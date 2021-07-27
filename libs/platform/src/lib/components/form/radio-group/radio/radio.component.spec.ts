@@ -76,7 +76,7 @@ describe('RadioButtonComponent', () => {
         expect(inputElem.nativeElement.type).toEqual('radio');
         expect(inputElem.nativeElement.getAttribute('id')).toBeTruthy();
         expect(inputElem.nativeElement.getAttribute('ng-reflect-is-disabled')).toEqual('false');
-        expect(inputElem.nativeElement.getAttribute('name')).toEqual('radio');
+        expect(inputElem.nativeElement.getAttribute('ng-reflect-name')).toEqual('radio');
         expect(inputElem.nativeElement.getAttribute('ng-reflect-value')).toEqual('1');
 
         expect(inputElem.nativeElement.classList.contains('fd-radio')).toBeTruthy();
@@ -88,7 +88,7 @@ describe('RadioButtonComponent', () => {
         expect(inputElems[1].nativeElement.type).toEqual('radio');
         expect(inputElems[1].nativeElement.getAttribute('id')).toBeTruthy();
         expect(inputElems[2].nativeElement.getAttribute('ng-reflect-is-disabled')).toBeTruthy();
-        expect(inputElems[1].nativeElement.getAttribute('name')).toEqual('radio');
+        expect(inputElems[1].nativeElement.getAttribute('ng-reflect-name')).toEqual('radio');
         expect(inputElems[1].nativeElement.getAttribute('ng-reflect-value')).toEqual('2');
 
         expect(inputElems[1].nativeElement.classList.contains('fd-radio')).toBeTruthy();
