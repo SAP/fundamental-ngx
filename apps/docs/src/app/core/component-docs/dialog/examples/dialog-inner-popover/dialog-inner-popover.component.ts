@@ -69,20 +69,21 @@ export class DialogInnerPopoverComponent {
             </fd-dialog-header>
 
             <fd-dialog-body>
+                <div id="fd-dialog-body-1" role="document">
+                    <fd-multi-input
+                        [dropdownValues]="firstOptions"
+                        placeholder="Search here..."
+                        [displayFn]="displayFunction"
+                        [(ngModel)]="selected"
+                    ></fd-multi-input>
 
-                <fd-multi-input
-                    [dropdownValues]="firstOptions"
-                    placeholder="Search here..."
-                    [displayFn]="displayFunction"
-                    [(ngModel)]="selected"
-                ></fd-multi-input>
-
-                <fd-multi-input
-                    [dropdownValues]="secondOptions"
-                    placeholder="Search here..."
-                    [displayFn]="displayFunction"
-                    [(ngModel)]="selected2"
-                ></fd-multi-input>
+                    <fd-multi-input
+                        [dropdownValues]="secondOptions"
+                        placeholder="Search here..."
+                        [displayFn]="displayFunction"
+                        [(ngModel)]="selected2"
+                    ></fd-multi-input>
+                </div>
             </fd-dialog-body>
 
             <fd-dialog-footer>

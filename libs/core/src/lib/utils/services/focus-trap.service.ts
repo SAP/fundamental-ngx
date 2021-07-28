@@ -11,6 +11,12 @@ export class FocusTrapService {
 
     constructor() { }
 
+    /**
+     * Creates focus trap instance for defined element
+     * @param element Container for which to create focus trap
+     * @param userOptions Focus-trap specific configuration
+     * @returns {string} Unique ID of focus trap instance
+     */
     createFocusTrap(element: string | HTMLElement | SVGElement | (string | HTMLElement | SVGElement)[],
                     userOptions?: Options): string {
 
@@ -25,12 +31,20 @@ export class FocusTrapService {
         return uid;
     }
 
+    /**
+     * Activates focus trap for defined ID
+     * @param id Unique ID of focus trap instance
+     */
     activateFocusTrap(id: string): void {
         const trap = this._focusTrapInstances.get(id);
 
         trap?.activate();
     }
 
+    /**
+     * Deactivates focus trap for defined ID
+     * @param id Unique ID of focus trap instance
+     */
     deactivateFocusTrap(id: string): void {
         const trap = this._focusTrapInstances.get(id);
 
@@ -39,6 +53,9 @@ export class FocusTrapService {
         this._focusTrapInstances.delete(id);
     }
 
+    /**
+     * Pauses current focus trap.
+     */
     pauseCurrentFocusTrap(): void {
 
         if (this._focusTrapInstances.size === 0) {
@@ -50,6 +67,9 @@ export class FocusTrapService {
         trapItem?.pause();
     }
 
+    /**
+     * Unpauses current focus trap.
+     */
     unpauseCurrentFocusTrap(): void {
 
         if (this._focusTrapInstances.size === 0) {
@@ -61,6 +81,7 @@ export class FocusTrapService {
         trapItem?.unpause();
     }
 
+    /** @hidden */
     private _getLastTrapedItem(): FocusTrap {
         return Array.from(this._focusTrapInstances).pop()[1];
     }

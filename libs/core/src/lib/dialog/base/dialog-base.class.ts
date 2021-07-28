@@ -6,7 +6,6 @@ import { debounceTime, filter } from 'rxjs/operators';
 
 import { KeyUtil, RtlService, FocusTrapService } from '@fundamental-ngx/core/utils';
 
-import { createFocusTrap, FocusTrap } from 'focus-trap';
 import { DialogConfigBase } from './dialog-config-base.class';
 import { DialogRefBase } from './dialog-ref-base.class';
 import { DialogSize, dialogWidthToSize } from '../utils/dialog-width-to-size';

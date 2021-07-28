@@ -34,6 +34,8 @@ import * as objectDialogHtml from '!raw-loader!./examples/dialog-object-example/
 import * as autoLabelTs from '!raw-loader!./examples/auto-label/auto-label-dialog-example.component.ts';
 import * as autoLabelHtml from '!raw-loader!./examples/auto-label/auto-label-dialog-example.component.html';
 
+import * as popoverDialogTs from '!raw-loader!./examples/dialog-inner-popover/dialog-inner-popover.component.ts';
+
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
@@ -303,15 +305,10 @@ export class DialogDocsComponent {
 
     dialogInnerPopover: ExampleFile[] = [
         {
-            language: 'html',
-            code: complexDialogHtml,
-            fileName: 'dialog-complex-example'
-        },
-        {
             language: 'typescript',
-            code: complexDialogTs,
-            fileName: 'dialog-complex-example',
-            component: 'DialogComplexExampleComponent'
+            code: popoverDialogTs,
+            fileName: 'dialog-inner-popover',
+            component: 'DialogInnerPopoverComponent'
         }
     ];
 
