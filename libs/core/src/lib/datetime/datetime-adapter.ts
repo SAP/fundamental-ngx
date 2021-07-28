@@ -1,14 +1,11 @@
+import { Observable, Subject } from 'rxjs';
+
 /**
- * Datetime Adapter is an abstract class that should be implemented by each adopter.
+ * Datetime Adapter is an abstract class that must be implemented by each adapter.
  * It's used to encapsulate a date/time manipulations as result
  * others places that uses it remain date type agnostic.
  *
- * Mostly taken from https://github.com/angular/components/blob/master/src/material/core/datetime/date-adapter.ts
- *
  */
-
-import { Observable, Subject } from 'rxjs';
-
 export abstract class DatetimeAdapter<D> {
     /** current locale */
     protected locale: string;

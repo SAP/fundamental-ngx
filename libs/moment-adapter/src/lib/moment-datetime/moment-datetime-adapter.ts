@@ -25,6 +25,13 @@ export function MOMENT_DATE_TIME_ADAPTER_OPTIONS_FACTORY(): MomentDatetimeAdapte
     };
 }
 
+/**
+ * DatetimeAdapter implementation based on moment.
+ *
+ * This uses moment.js as a date model instance.
+ * It relies on moment implementation for formatting and translation purposes.
+ *
+ */
 @Injectable()
 export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     /** @hidden */
@@ -33,7 +40,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     /** @hidden */
     private _localeData: DateLocale;
 
-    public fromNow: undefined;
+    fromNow: undefined;
 
     constructor(
         @Optional() @Inject(LOCALE_ID) localeId: string,

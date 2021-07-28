@@ -48,5 +48,6 @@ const routes: Routes = [
         MomentAdapterOptionsExampleComponent,
         MomentDatetimeFormatsExampleComponent
     ],
+    providers: [{provide: 'CURRENT_LIB', useValue: 'moment-adapter'}]
 })
 export class MomentDatetimeAdapterDocsModule {}
