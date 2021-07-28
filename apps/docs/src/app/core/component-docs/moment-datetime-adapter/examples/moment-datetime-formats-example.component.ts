@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { DATE_TIME_FORMATS } from '@fundamental-ngx/core';
+import { DatetimeAdapter, DATE_TIME_FORMATS } from '@fundamental-ngx/core';
+import { MomentDatetimeAdapter } from '@fundamental-ngx/moment-adapter';
 import moment, { Moment } from 'moment';
 
 @Component({
@@ -26,6 +27,10 @@ import moment, { Moment } from 'moment';
                 rangeDelimiter: ' - '
             },
         },
+        { 
+            provide: DatetimeAdapter, 
+            useClass: MomentDatetimeAdapter 
+        }
     ]
 })
 export class MomentDatetimeFormatsExampleComponent {

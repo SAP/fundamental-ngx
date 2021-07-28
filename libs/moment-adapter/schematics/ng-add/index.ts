@@ -55,7 +55,7 @@ export function addCoreSchematic(options: any): Rule {
  */
 function addCoreLib(_options: any): Rule {
     return (tree: Tree, context: SchematicContext) => {
-        context.logger.info('***** Adding Platform dependencies to your application *****');
+        context.logger.info('***** Adding Core dependencies to your application *****');
         const dependencies: NodeDependency[] = [];
 
         if (!hasPackage(tree, '@fundamental-ngx/core')) {
