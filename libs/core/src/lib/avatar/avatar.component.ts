@@ -1,5 +1,6 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     HostBinding,
@@ -100,6 +101,14 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         return this._image;
     }
 
+    @Input()
+    set alterIcon(value: string) {
+        this._alterIcon = value;
+    }
+    get alterIcon(): string {
+        return this._alterIcon;
+    }
+
     /** @hidden */
     @HostBinding('style.background-image')
     get bgImage(): string {
@@ -119,6 +128,9 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     private _image: string = null;
 
     /** @hidden */
+    private _alterIcon: string = null;
+
+    /** @hidden */
     private _bgImage: string = null;
 
     /** If a default placeholder should be displayed */
@@ -127,7 +139,10 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(
+        private _elementRef: ElementRef,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -187,9 +202,28 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         this._image = value;
 
         if (value) {
-            this._bgImage = 'url(' + value + ')';
+            this._verifyImageUrl(value);
         } else {
             this._bgImage = null;
         }
+    }
+
+    private _verifyImageUrl(srcValue: string): void {
+        const img = new Image();
+        img.onerror = this._onError.bind(this);
+        img.src = srcValue;
+        this._assignBgImage(srcValue);
+    }
+
+    private _assignBgImage(srcValue: string): void {
+        this._bgImage = 'url(' + srcValue + ')';
+    }
+
+    private _onError(): void {
+        this.abbreviate = null;
+        this._image = null;
+        this.glyph = null;
+
+        this._cdr.detectChanges();
     }
 }
