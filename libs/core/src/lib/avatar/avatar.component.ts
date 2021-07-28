@@ -1,5 +1,6 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     HostBinding,
@@ -121,13 +122,17 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     /** @hidden */
     private _bgImage: string = null;
 
+    /** @hidden */
+    private _tempImageElement: HTMLImageElement;
+
     /** If a default placeholder should be displayed */
     get showDefault(): boolean {
+        console.log('Show Default', !this.abbreviate && !this._image && !this.glyph);
         return !this.abbreviate && !this._image && !this.glyph;
     }
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(private _elementRef: ElementRef, private _cdr: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -187,9 +192,29 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         this._image = value;
 
         if (value) {
-            this._bgImage = 'url(' + value + ')';
+            this._verifyImageUrl(value);
+            // this._bgImage = 'url(' + value + ')';
         } else {
             this._bgImage = null;
         }
+    }
+
+    private _verifyImageUrl(srcValue: string): void {
+        this._tempImageElement = new Image();
+        this._tempImageElement.onerror = this._onError.bind(this);
+        this._tempImageElement.src = srcValue;
+        this._assignBgImage(srcValue);
+    }
+
+    private _assignBgImage(srcValue: string): void {
+        this._bgImage = 'url(' + srcValue + ')';
+    }
+
+    private _onError(): void {
+        this.abbreviate = null;
+        this._image = null;
+        this.glyph = null;
+
+        this._cdr.detectChanges();
     }
 }
