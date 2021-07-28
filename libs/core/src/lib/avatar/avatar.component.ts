@@ -101,6 +101,14 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         return this._image;
     }
 
+    @Input()
+    set alterIcon(value: string) {
+        this._alterIcon = value;
+    }
+    get alterIcon(): string {
+        return this._alterIcon;
+    }
+
     /** @hidden */
     @HostBinding('style.background-image')
     get bgImage(): string {
@@ -120,10 +128,10 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     private _image: string = null;
 
     /** @hidden */
-    private _bgImage: string = null;
+    private _alterIcon: string = null;
 
     /** @hidden */
-    private _tempImageElement: HTMLImageElement;
+    private _bgImage: string = null;
 
     /** If a default placeholder should be displayed */
     get showDefault(): boolean {
@@ -200,9 +208,9 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     private _verifyImageUrl(srcValue: string): void {
-        this._tempImageElement = new Image();
-        this._tempImageElement.onerror = this._onError.bind(this);
-        this._tempImageElement.src = srcValue;
+        const img = new Image();
+        img.onerror = this._onError.bind(this);
+        img.src = srcValue;
         this._assignBgImage(srcValue);
     }
 
