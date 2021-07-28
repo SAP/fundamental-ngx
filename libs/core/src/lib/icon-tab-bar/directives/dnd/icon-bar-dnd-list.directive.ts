@@ -9,7 +9,7 @@ import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive
 @Directive({
     selector: '[fdIconBarDndList]',
 })
-export class IconBarDndListDirective<T> implements AfterViewInit, OnDestroy {
+export class IconBarDndListDirective implements AfterViewInit, OnDestroy {
 
     /** Direction in which the list is oriented. */
     @Input()
@@ -32,7 +32,7 @@ export class IconBarDndListDirective<T> implements AfterViewInit, OnDestroy {
     constructor(
         public elementRef: ElementRef,
         private _dragDrop: DragDrop,
-        @Optional() private _dndContainer: IconBarDndContainerDirective<T>,
+        @Optional() private _dndContainer: IconBarDndContainerDirective,
     ) {
     }
 

@@ -1,4 +1,4 @@
-import { IconTabBarItem, SemanticColor } from '../../../../../../../../libs/core/src/lib/icon-tab-bar/types';
+import { SemanticColor, TabConfig } from '../../../../../../../../libs/core/src/lib/icon-tab-bar/types';
 import { Directive, Input, OnInit } from '@angular/core';
 
 @Directive()
@@ -20,7 +20,7 @@ export abstract class IconTabBarExampleClass implements OnInit {
     @Input()
     subItemsLevel = 1;
 
-    items: IconTabBarItem[] = [];
+    items: TabConfig[] = [];
 
     private icons = [
         'accelerated',
@@ -47,7 +47,7 @@ export abstract class IconTabBarExampleClass implements OnInit {
         this.items = this._generateItems();
     }
 
-    protected _generateItems(): IconTabBarItem[] {
+    protected _generateItems(): TabConfig[] {
         const items = [];
         for (let i = 0; i < this.tabsLength; i++) {
             const icon = this.icons[i];
@@ -62,7 +62,7 @@ export abstract class IconTabBarExampleClass implements OnInit {
         return items;
     }
 
-    protected _generateSubItems(level: number = this.subItemsLevel): IconTabBarItem[] {
+    protected _generateSubItems(level: number = this.subItemsLevel): TabConfig[] {
         if (!this.itemsWithSubItems || !level) {
             return null;
         }

@@ -10,7 +10,7 @@ import {
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { IconTabBarBackground, IconTabBarItem, IconTabBarSize, TabDestinyMode, TabType } from './types';
+import { IconTabBarBackground, IconTabBarItem, IconTabBarSize, TabConfig, TabDestinyMode, TabType } from './types';
 import { ContentDensityService, IconFont, RtlService } from '@fundamental-ngx/core';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -28,7 +28,7 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
     iconTabType: TabType = 'text';
 
     @Input()
-    iconTabItems: IconTabBarItem[];
+    tabsConfig: TabConfig[];
 
     @Input()
     densityMode: TabDestinyMode = 'cozy';
@@ -52,7 +52,10 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
     iconTabSize: IconTabBarSize;
 
     @Output()
-    iconTabSelected: EventEmitter<any> = new EventEmitter<any>();
+    iconTabSelected: EventEmitter<IconTabBarItem> = new EventEmitter<IconTabBarItem>();
+
+    @Output()
+    iconTabReordered: EventEmitter<IconTabBarItem[]> = new EventEmitter<IconTabBarItem[]>();
 
     _cssClassForContainer: string[];
     _isRtl = false;
@@ -62,7 +65,7 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
     constructor(
         private _cd: ChangeDetectorRef,
         @Optional() private _contentDensityService: ContentDensityService,
-        @Optional() private _rtlService: RtlService
+        @Optional() private _rtlService: RtlService,
     ) {
     }
 
@@ -94,10 +97,16 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
                 }
             });
     }
+
+
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
+    }
     
     private _generateContainerStyles(): string[] {
         const styles = [`fd-icon-tab-bar--${this.iconTabType}`];
-        if (this.iconTabType === 'process' && this.iconTabItems[0].icon) {
+        if (this.iconTabType === 'process' && this.tabsConfig[0].icon) {
             styles.push('fd-icon-tab-bar--icon');
         }
         if (this.iconTabBackground !== 'solid') {
@@ -117,12 +126,12 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
     }
 
     /** @hidden  */
-    _selectItem(selectedItem: IconTabBarItem): void {
-        this.iconTabSelected.emit(selectedItem.index);
+    _onReorder(event: IconTabBarItem[]): void {
+        this.iconTabReordered.emit(event);
     }
 
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
+    /** @hidden  */
+    _selectItem(selectedItem: IconTabBarItem): void {
+        this.iconTabSelected.emit(selectedItem);
     }
 }

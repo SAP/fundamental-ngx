@@ -5,28 +5,30 @@ import { Subject } from 'rxjs';
 import { IconBarDndListDirective } from './icon-bar-dnd-list.directive';
 import { takeUntil } from 'rxjs/operators';
 import { FLIPPER_SIZE } from '../../constants';
+import { IconTabBarItem } from '../../types';
 
-export interface FdDnDEvent<T> {
-  draggableItem: T;
-  targetItem: T;
+export interface FdDnDEvent {
+  draggableItem: IconTabBarItem;
+  targetItem: IconTabBarItem;
   action: 'replace'|'insert'
 }
 
 @Directive({
   selector: '[fdIconBarDndContainer]'
 })
-export class IconBarDndContainerDirective<T> implements OnDestroy {
+export class IconBarDndContainerDirective implements OnDestroy {
 
   /** Defines if drag and drop feature should be enabled for list items */
   @Input()
   set draggable(draggable: boolean) {
+    debugger;
     this._draggable = draggable;
     this._changeDraggableState(draggable);
   }
 
   /** Event that is thrown, when the item is dropped */
   @Output()
-  dropped = new EventEmitter<FdDnDEvent<T>>();
+  dropped = new EventEmitter<FdDnDEvent>();
 
   /** @hidden */
   private _dragRefItems: DragRef[] = [];
@@ -35,7 +37,7 @@ export class IconBarDndContainerDirective<T> implements OnDestroy {
   private dndItemDirectives: IconBarDndItemDirective[] = [];
 
   /** @hidden  */
-  private _dndListDirectives: Set<IconBarDndListDirective<T>> = new Set<IconBarDndListDirective<T>>();
+  private _dndListDirectives: Set<IconBarDndListDirective> = new Set<IconBarDndListDirective>();
 
   /** @hidden */
   private _elementsCoordinates: ElementChord[];
@@ -178,12 +180,12 @@ export class IconBarDndContainerDirective<T> implements OnDestroy {
     this.dndItemDirectives = this.dndItemDirectives.filter(item => item !== dragItem);
   }
 
-  registerDndList(listDir: IconBarDndListDirective<T>): void {
+  registerDndList(listDir: IconBarDndListDirective): void {
     this._dndListDirectives.add(listDir);
     listDir.changeDraggableState(this._draggable);
   }
 
-  removeDndList(listDir: IconBarDndListDirective<T>): void {
+  removeDndList(listDir: IconBarDndListDirective): void {
     this._dndListDirectives.delete(listDir);
   }
 

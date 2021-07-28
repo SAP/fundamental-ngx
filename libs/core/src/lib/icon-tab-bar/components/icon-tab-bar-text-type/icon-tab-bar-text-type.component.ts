@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, NgZone, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, NgZone, Output, ViewChild } from '@angular/core';
 import { IconTabBarClass } from '../../icon-tab-bar.class';
 import { IconTabBarItem } from '../../types';
 import { UNIQUE_KEY_SEPARATOR } from '../../constants';
@@ -24,6 +24,9 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
     @Input()
     layoutMode: 'row'|'column';
 
+    @Output()
+    reordered: EventEmitter<IconTabBarItem[]> = new EventEmitter<IconTabBarItem[]>();
+
     constructor(
         protected _cd: ChangeDetectorRef,
         protected _ngZone: NgZone,
@@ -41,7 +44,7 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
         super._selectExtraItem(selectedItem);
     }
 
-    _onDropped({ draggableItem, targetItem, action }: FdDnDEvent<IconTabBarItem>): void {
+    _onDropped({ draggableItem, targetItem, action }: FdDnDEvent): void {
         const replacedParsedUidArr = targetItem.uId.split(UNIQUE_KEY_SEPARATOR);
         replacedParsedUidArr.length = replacedParsedUidArr.length - 1;
         const draggableParsedUidArr = draggableItem.uId.split(UNIQUE_KEY_SEPARATOR);
@@ -66,6 +69,8 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
         action === 'replace'
             ? this._replaceItems(dataForAction)
             : this._insertItemAsChild(dataForAction);
+
+        this.reordered.emit(this._tabs);
     }
 
     private _insertItemAsChild(data: { replacedItemInfo: ItemToReplace, draggableItemInfo: ItemToReplace }): void {

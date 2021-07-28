@@ -27,7 +27,7 @@
             <a
                 class="fd-icon-tab-bar__tab"
                 role="tab"
-                *ngIf="!item.subItems"
+                *ngIf="!item.subItems?.length"
                 (click)="_selectItem(item, $event)"
                 [attr.aria-selected]="item.uId === _selectedUid"
             >
@@ -41,7 +41,7 @@
                 </ng-template>
                 <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
             </a>
-            <ng-container *ngIf="item.subItems">
+            <ng-container *ngIf="item.subItems?.length">
                 <fd-text-type-popover
                     [parentTab]="item"
                     [selectedSubItemUid]="_selectedUid"

@@ -18,7 +18,7 @@
 
 <ng-template #processType>
     <fd-icon-tab-bar-process-type
-        [tabsConfig]="iconTabItems"
+        [tabsConfig]="tabsConfig"
         [isRtl]="_isRtl"
         (selected)="_selectItem($event)"
     ></fd-icon-tab-bar-process-type>
@@ -26,7 +26,7 @@
 
 <ng-template #filterType>
     <fd-icon-tab-bar-filter-type
-        [tabsConfig]="iconTabItems"
+        [tabsConfig]="tabsConfig"
         [showTabAll]="showTabAll"
         [isRtl]="_isRtl"
         (selected)="_selectItem($event)"
@@ -35,7 +35,7 @@
 
 <ng-template #iconType>
     <fd-icon-tab-bar-icon-type
-        [tabsConfig]="iconTabItems"
+        [tabsConfig]="tabsConfig"
         [isRtl]="_isRtl"
         (selected)="_selectItem($event)"
     ></fd-icon-tab-bar-icon-type>
@@ -43,10 +43,11 @@
 
 <ng-template #textType>
     <fd-icon-tab-bar-text-type
-        [tabsConfig]="iconTabItems"
+        [tabsConfig]="tabsConfig"
         [layoutMode]="layoutMode"
         [isRtl]="_isRtl"
         [enableTabReordering]="enableTabReordering"
+        (reordered)="_onReorder($event)"
         (selected)="_selectItem($event)"
     ></fd-icon-tab-bar-text-type>
 </ng-template>

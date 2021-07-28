@@ -8,7 +8,7 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 export class ExtraButtonDirective implements AfterViewInit, OnDestroy {
 
     @Input()
-    anchorIndexInsideParent: number;
+    anchorIndexInsideParent = 0;
 
     @Input()
     isRtl: boolean;

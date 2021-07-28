@@ -47,12 +47,22 @@ export abstract class IconTabBarClass implements OnInit, OnChanges {
     ) {}
 
     ngOnChanges(changes: SimpleChanges): void {
+        debugger;
+        if (changes.tabsConfig && !changes.tabsConfig.firstChange) {
+            this._initTabs();
+            this._triggerRecalculationVisibleItems();
+            return;
+        }
         if (changes.isRtl && !changes.isRtl.firstChange) {
             this._triggerRecalculationVisibleItems();
         }
     }
 
     ngOnInit(): void {
+        this._initTabs();
+    }
+
+    private _initTabs(): void {
         this._tabs = this._generateTabBarItems(this.tabsConfig);
         const selectedItem = this._tabs.find(item => item.active);
         this._selectedUid = selectedItem?.uId;

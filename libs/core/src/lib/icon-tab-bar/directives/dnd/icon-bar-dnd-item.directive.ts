@@ -55,8 +55,8 @@ export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
     constructor(
         public elementRef: ElementRef,
         protected _dragDrop: DragDrop,
-        private _dndContainerDir: IconBarDndListDirective<any>,
-        private _dndContainerGroupDir: IconBarDndContainerDirective<any>
+        private _dndContainerDir: IconBarDndListDirective,
+        private _dndContainerGroupDir: IconBarDndContainerDirective
     ) {
     }
 
@@ -64,6 +64,7 @@ export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
     ngAfterViewInit(): void {
         this.isVertical = this._dndContainerDir.dndOrientation === 'vertical';
         this._setCDKDrag();
+        debugger;
     }
 
     /** @hidden */
@@ -77,16 +78,19 @@ export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
     /** @hidden */
     onCdkDragStart(): void {
         /** Adds class */
+        debugger;
         this.started.emit();
     }
 
     /** @hidden */
     onCdkMove(position: Point): void {
+        debugger;
         this.moved.emit(position);
     }
 
     /** @hidden */
     onCdkDragReleased(): void {
+        debugger;
         this.released.emit();
     }
 
