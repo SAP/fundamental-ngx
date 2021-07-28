@@ -220,10 +220,31 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     private _onError(): void {
+        if (!this._alterIcon) {
+            this._showDefaultIcon();
+        } else {
+            // split alterIcon string
+            // check by priority from left to right
+            const options = this._alterIcon.split('|');
+            options.forEach(this._processAlterIconOptions);
+        }
+
+        this._cdr.detectChanges();
+    }
+
+    private _showDefaultIcon(): void {
         this.abbreviate = null;
         this._image = null;
         this.glyph = null;
+    }
 
-        this._cdr.detectChanges();
+    private _processAlterIconOptions(option: string): void {
+        if (option === 'content') {}
+
+        if (option === 'alt') {}
+
+        if (option === 'custom') {}
+
+        if (option === 'default-icon') {}
     }
 }
