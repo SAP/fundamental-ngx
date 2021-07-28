@@ -31,6 +31,7 @@ import { generateMessageStripeData } from '../helpers/generate-message-stripe-da
 import { UploadCollectionDataSource } from '../domain/upload-collection-data-source';
 
 export type FdpUploadCollectionDataSource = UploadCollectionDataSource;
+let randomId = 0;
 
 @Component({
     selector: 'fdp-upload-collection',
@@ -40,7 +41,7 @@ export type FdpUploadCollectionDataSource = UploadCollectionDataSource;
 })
 export class UploadCollectionComponent {
     @Input()
-    id: string;
+    id = `fdp-upload-collection-id-${randomId++}`;
 
     /** Defines the number of items on the page */
     @Input()
