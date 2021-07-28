@@ -1,6 +1,6 @@
-import { ElementRef, Injectable, OnDestroy, OnInit, Optional } from '@angular/core';
-import { fromEvent, Observable, Subject } from 'rxjs';
-import { delay, takeUntil, takeWhile } from 'rxjs/operators';
+import { ElementRef, Injectable, OnDestroy, Optional } from '@angular/core';
+import { fromEvent, Observable, Subject, Subscription } from 'rxjs';
+import { delay, takeUntil } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
 
@@ -17,12 +17,15 @@ export const TABLE_RESIZER_BORDER_WIDTH = 3;
  * - Calculating the real columns width
  */
 @Injectable()
-export class TableColumnResizeService implements OnInit, OnDestroy {
+export class TableColumnResizeService implements OnDestroy {
     /** @hidden */
-    private _columnsWidthMap = new Map<number, number>();
+    private _columnsWidthMap = new Map<string, number>();
 
     /** @hidden */
-    private _columnsCellMap = new Map<number, ElementRef>();
+    private _columnsCellMap = new Map<string, ElementRef>();
+
+    /** @hidden */
+    private _visibleColumnNames: string[] = [];
 
     /** @hidden */
     private _startX: number;
@@ -34,7 +37,7 @@ export class TableColumnResizeService implements OnInit, OnDestroy {
     private _resizeInProgress = false;
 
     /** @hidden */
-    private _resizedColumnIndex: number;
+    private _resizedColumn: string;
 
     /** @hidden */
     private _resizerPosition: number;
@@ -45,19 +48,22 @@ export class TableColumnResizeService implements OnInit, OnDestroy {
     /** @hidden */
     private _scrollbarWidth: number;
 
+    /** @hidden
+     * Temporary: Prevent from resizing when there are fixed columns. They are positioned absolutely and it breaks all.
+     */
+    private _preventResize = false;
+
     /** @hidden */
     private _scrollLeft = 0;
 
     /** @hidden */
     private _markForCheck = new Subject<void>();
 
-    /** Temporary: Prevent from resizing when there are fixed columns.
-     *  They are positioned absolutely and it breaks all.
-     */
-    private _fixedColumnsPresent: boolean;
-
     /** @hidden */
     private _destroyed = new Subject<void>();
+
+    /** @hidden */
+    private _resizerMoveSubscription = new Subscription();
 
     /** Indicate if resizing process in progress. */
     get resizeInProgress(): boolean {
@@ -66,25 +72,12 @@ export class TableColumnResizeService implements OnInit, OnDestroy {
 
     /** Current column resizer position. */
     get resizerPosition(): number {
-        if (this._resizerPosition == null) {
-            return null;
-        }
-
-        if (this.resizeInProgress) {
-            return this._resizerPosition;
-        }
-
-        const scrollLeftOffset = this._scrollLeft * (this._rtl ? 1 : -1);
-        return this._resizerPosition + this._selectionColumnWidth + scrollLeftOffset;
+        return this._resizerPosition;
     }
 
+    /** Observable to notify to run CD */
     get markForCheck(): Observable<void> {
         return this._markForCheck.asObservable();
-    }
-
-    /** @hidden */
-    private get _preventResize(): boolean {
-        return this._fixedColumnsPresent;
     }
 
     /** @hidden */
@@ -94,12 +87,9 @@ export class TableColumnResizeService implements OnInit, OnDestroy {
 
     /** @hidden */
     constructor(
-        @Optional() private readonly _tableScrollDispatcherService: TableScrollDispatcherService,
+        private readonly _tableScrollDispatcherService: TableScrollDispatcherService,
         @Optional() private readonly _rtlService: RtlService
-    ) { }
-
-    /** @hidden */
-    ngOnInit(): void {
+    ) {
         this._tableScrollDispatcherService?.horizontallyScrolled()
             .pipe(takeUntil(this._destroyed))
             .subscribe(scrollable => this._scrollLeft = scrollable.getScrollLeft());
@@ -111,29 +101,33 @@ export class TableColumnResizeService implements OnInit, OnDestroy {
 
         this._destroyed.next();
         this._destroyed.complete();
+
+        this._resizerMoveSubscription.unsubscribe();
     }
 
     /** Initialize service with data, trigger columns width calculation. */
-    initialize(selectionColumnWidth: number, fixedColumnsPresent: boolean, scrollbarWidth: number): void {
+    setColumnsWidth(
+        visibleColumnNames: string[],
+        freezeColumnsTo: string,
+        selectionColumnWidth: number,
+        scrollbarWidth: number
+    ): void {
+        this._visibleColumnNames = visibleColumnNames;
+        this._preventResize = this._visibleColumnNames.includes(freezeColumnsTo);
         this._selectionColumnWidth = selectionColumnWidth;
-        this._fixedColumnsPresent = fixedColumnsPresent;
         this._scrollbarWidth = scrollbarWidth;
 
+        this._resetColumnsWidth();
         this._calculateColumnsWidth();
     }
 
-    /** Reset previously calculated columns width */
-    resetColumnsWidth(): void {
-        this._columnsWidthMap.clear();
-    }
-
-    /** Try to get the real column width in the next order:
-     *  1. Width from stored widths map.
-     *  2. Width defined by the user (may be changed over time by column resizing).
-     *  3. Literally `auto`.
+    /** Get the column width, try in the next order:
+     *  1. Width from map with calculated widths.
+     *  2. Width defined by the user.
+     *  3. Literally `auto`, means no width set.
      */
-    getColumnWidthStyle(column: TableColumn, columnIndex: number): string {
-        const calculatedWidth = this._columnsWidthMap.get(columnIndex);
+    getColumnWidthStyle(column: TableColumn): string {
+        const calculatedWidth = this._columnsWidthMap.get(column.name);
 
         if (calculatedWidth) {
             return calculatedWidth + 'px';
@@ -146,30 +140,50 @@ export class TableColumnResizeService implements OnInit, OnDestroy {
         return 'auto';
     }
 
+    /** Previous column name */
+    getPreviousColumnName(columnName: string): string {
+        return this._visibleColumnNames[this._visibleColumnNames.findIndex(name => name === columnName) - 1];
+    }
+
     /** Overall previous columns width. Used to calculate offset for the absolute positioned cells. */
-    getPrevColumnsWidth(columnIndex: number): number {
-        if (!this._columnsWidthMap.size) {
+    getPrevColumnsWidth(columnName: string): number {
+        if (!this._columnsWidthMap.size || !columnName) {
             return 0;
         }
 
-        return Array.from(this._columnsWidthMap.values())
-            .slice(0, columnIndex)
-            .reduce((sum, width) => (sum += width), 0);
+        let columnsWidth = 0;
+
+        for (let i = 0; i < this._visibleColumnNames.length; i ++) {
+            const currentColumnName = this._visibleColumnNames[i];
+
+            if (columnName === currentColumnName) {
+                break;
+            }
+
+            columnsWidth += this._columnsWidthMap.get(currentColumnName);
+        }
+
+        return columnsWidth;
     }
 
     /** Register column's cell to get its dimensions in further. */
-    registerColumnCell(index: number, cellElRef: ElementRef): void {
-        this._columnsCellMap.set(index, cellElRef);
+    registerColumnCell(columnName: string, cellElRef: ElementRef): void {
+        this._columnsCellMap.set(columnName, cellElRef);
     }
 
     /** Set the appropriate column resizer position. */
-    setInitialResizerPosition(resizerPosition: number, resizedColumnIndex: number): void {
+    setInitialResizerPosition(resizerPosition: number, resizedColumn: string): void {
         if (this.resizeInProgress || this._preventResize) {
             return;
         }
 
-        this._resizedColumnIndex = resizedColumnIndex;
-        this._resizerPosition = resizerPosition != null ? (resizerPosition - TABLE_RESIZER_BORDER_WIDTH) : null;
+        this._resizedColumn = resizedColumn;
+        this._resizerPosition = null;
+
+        if (resizerPosition != null) {
+            const scrollLeftOffset = this._scrollLeft * (this._rtl ? 1 : -1);
+            this._resizerPosition = resizerPosition + this._selectionColumnWidth - TABLE_RESIZER_BORDER_WIDTH + scrollLeftOffset;
+        }
     }
 
     /** Hide the column resizer. */
@@ -198,6 +212,8 @@ export class TableColumnResizeService implements OnInit, OnDestroy {
 
     /** Handle end resizing. */
     finishResize(event: MouseEvent): void {
+        this._resizerMoveSubscription.unsubscribe();
+
         this._resizeInProgress = false;
         this._resizerPosition = null;
 
@@ -215,15 +231,20 @@ export class TableColumnResizeService implements OnInit, OnDestroy {
 
     /** @hidden */
     private _calculateColumnsWidth(): void {
-        this._columnsCellMap.forEach((cell, index) => {
-            this._columnsWidthMap.set(index, cell.nativeElement.offsetWidth);
+        this._columnsCellMap.forEach((cell, columnName) => {
+            this._columnsWidthMap.set(columnName, cell.nativeElement.offsetWidth);
         });
+    }
+
+    /** @hidden */
+    private _resetColumnsWidth(): void {
+        this._columnsWidthMap.clear();
     }
 
     /** Update column resizer position. */
     private _updateResizerPositionOnMouseMove(): void {
-        fromEvent(document, 'mousemove')
-            .pipe(delay(10), takeWhile(() => this._resizeInProgress))
+        this._resizerMoveSubscription = fromEvent(document, 'mousemove')
+            .pipe(delay(10))
             .subscribe((event: MouseEvent) => {
                 const diffX = this._rtl
                     ? (this._clientStartX - event.clientX)
@@ -237,7 +258,7 @@ export class TableColumnResizeService implements OnInit, OnDestroy {
 
     /** Update columns width after resizing, prevent from having too small columns. */
     private _processResize(diffX: number): void {
-        const columnWidth = this._columnsWidthMap.get(this._resizedColumnIndex);
+        const columnWidth = this._columnsWidthMap.get(this._resizedColumn);
 
         let newDiffX = diffX;
 
@@ -245,6 +266,6 @@ export class TableColumnResizeService implements OnInit, OnDestroy {
             newDiffX = diffX + (TABLE_COLUMN_MIN_WIDTH - (columnWidth + diffX));
         }
 
-        this._columnsWidthMap.set(this._resizedColumnIndex, columnWidth + newDiffX);
+        this._columnsWidthMap.set(this._resizedColumn, columnWidth + newDiffX);
     }
 }
