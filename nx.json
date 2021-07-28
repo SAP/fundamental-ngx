@@ -909,7 +909,8 @@
         "fd"
       ],
       "implicitDependencies": [
-        "core-icon"
+        "core-icon",
+        "core-popover"
       ]
     }
   }

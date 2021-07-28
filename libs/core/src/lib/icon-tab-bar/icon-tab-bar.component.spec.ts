@@ -98,8 +98,13 @@ describe('IconTabBarComponent', () => {
     draggableItem.dispatchEvent(mousedown);
     fixture.detectChanges();
 
+    const mousemove1 = new MouseEvent('mousemove', {clientX: targetCoords.left});
+    draggableItem.dispatchEvent(mousemove1);
+    fixture.detectChanges();
+
+    // Need to move two times because cdk dnd skip first moving
     const mousemove = new MouseEvent('mousemove', targetCenter);
-    fixture.nativeElement.ownerDocument.dispatchEvent(mousemove);
+    draggableItem.dispatchEvent(mousemove);
     fixture.detectChanges();
 
     const mouseup = new MouseEvent('mouseup');
@@ -114,12 +119,11 @@ describe('IconTabBarComponent', () => {
 
 function getElementOffset(el: Element | null): {left: number, top: number} {
   const rect = el?.getBoundingClientRect();
-
   return {
     left: (rect?.left || 0) + window?.scrollX,
     top: (rect?.top || 0) + window?.scrollY,
   };
-};
+}
 
 
 function generateTestItems(length: number, subTabs: boolean = false): TabConfig[] {

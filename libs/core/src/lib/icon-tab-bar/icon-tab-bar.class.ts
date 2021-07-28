@@ -15,7 +15,7 @@ import { cloneDeep } from '../utils/functions/clone-deep';
 import { ICON_TAB_HIDDEN_CSS, UNIQUE_KEY_SEPARATOR } from './constants';
 import { OverflowItemsDirective } from '../utils/directives/overflow-items/overflow-items.directive';
 import { ExtraButtonDirective } from './directives/extra-button/extra-button.directive';
-import { take, takeUntil } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 @Directive()
 export abstract class IconTabBarClass implements OnInit, OnChanges {
