@@ -70,7 +70,7 @@ import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 import { StepInputModule } from '@fundamental-ngx/core/step-input';
 import { GridListModule } from '@fundamental-ngx/core/grid-list';
 import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
-import { MenuModule } from '@fundamental-ngx/core/menu';
+import { MenuModule, MenuMobileModule } from '@fundamental-ngx/core/menu';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { ResizableCardLayoutModule } from '@fundamental-ngx/core/resizable-card-layout';
 
@@ -124,6 +124,7 @@ import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
         LinkModule,
         ListModule,
         MenuModule,
+        MenuMobileModule,
         DialogModule,
         MessageBoxModule,
         MessageStripModule,
