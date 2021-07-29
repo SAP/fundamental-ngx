@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 import { CollectionBaseInput } from './collection-base.input';
 import { FormFieldControl } from './form-control';
@@ -53,38 +53,71 @@ export class ResponsiveBreakpointsService {
     maxWidth = 'max-width';
     unit = 'px';
 
-    getBreakpoints(config: ResponsiveBreakPointConfig): string[] {
+    /** @hidden */
+    constructor(readonly _breakpointObserver: BreakpointObserver) {}
+
+    /** subscribe to get current screen size based on config provided */
+    observeBreakpointByConfig(config: ResponsiveBreakPointConfig): Subject<any> {
+        const breakPointName: Subject<string> = new BehaviorSubject('S');
+
+        this._breakpointObserver.observe(this._getBreakpoints(config)).subscribe((matchValues) => {
+            const breakPoint = this._breakPointMeet(matchValues);
+            breakPointName.next(breakPoint);
+        });
+
+        return breakPointName;
+    }
+
+    /** @hidden when screen size changes from one breakpoint to another */
+    private _breakPointMeet(breakPointMatchess: BreakpointState): string {
+        let breakPointName: string;
+
+        if (breakPointMatchess.matches) {
+            for (const breakpoint in breakPointMatchess.breakpoints) {
+                if (breakPointMatchess.breakpoints[breakpoint]) {
+                    breakPointName = this._getBreakpointName(breakpoint);
+                }
+            }
+        }
+
+        return breakPointName;
+    }
+
+    /** @hidden */
+    private _getBreakpoints(config: ResponsiveBreakPointConfig): string[] {
         let breakPointStr: string;
         this.activeBreakpoints = [];
 
         for (const screenSize of Object.keys(config)) {
             switch (screenSize) {
                 case 'S':
-                    breakPointStr = `(max-width: ${config[screenSize]}${this.unit})`;
+                    breakPointStr = `(${this.maxWidth}: ${config[screenSize]}${this.unit})`;
                     this.activeBreakpoints.push(breakPointStr);
                     this.breakpoints[breakPointStr] = screenSize;
                     break;
                 case 'M':
-                    breakPointStr = `(min-width: ${config['S']}${this.unit}) and (max-width: ${config[screenSize]}${this.unit})`;
+                    breakPointStr = `(${this.minWidth}: ${config['S']}${this.unit}) and (${this.maxWidth}: ${config[screenSize]}${this.unit})`;
                     this.activeBreakpoints.push(breakPointStr);
                     this.breakpoints[breakPointStr] = screenSize;
                     break;
                 case 'L':
-                    breakPointStr = `(min-width: ${config['M']}${this.unit}) and (max-width: ${config[screenSize]}${this.unit})`;
+                    breakPointStr = `(${this.minWidth}: ${config['M']}${this.unit}) and (${this.maxWidth}: ${config[screenSize]}${this.unit})`;
                     this.activeBreakpoints.push(breakPointStr);
                     this.breakpoints[breakPointStr] = screenSize;
 
                     // create entry for XL screen
-                    breakPointStr = `(min-width: ${config[screenSize]}${this.unit})`;
+                    breakPointStr = `(${this.minWidth}: ${config[screenSize]}${this.unit})`;
                     this.activeBreakpoints.push(breakPointStr);
                     this.breakpoints[breakPointStr] = 'XL';
                     break;
             }
         }
+
         return this.activeBreakpoints;
     }
 
-    getBreakpointName(breakpointValue): string {
+    /** @hidden */
+    private _getBreakpointName(breakpointValue): string {
         return this.breakpoints[breakpointValue];
     }
 }
@@ -133,7 +166,6 @@ export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInpu
     constructor(
         cd: ChangeDetectorRef,
         readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
-        readonly _breakpointObserver: BreakpointObserver,
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @SkipSelf() readonly ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
@@ -147,17 +179,20 @@ export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInpu
         this._responsiveBreakPointConfig = _defaultResponsiveBreakPointConfig || new ResponsiveBreakPointConfig();
     }
 
+    /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
 
         if (this._isInLineLayoutEnabled) {
-            this._breakpointObserver
-                .observe(this._responsiveBreakpointsService.getBreakpoints(this._responsiveBreakPointConfig))
-                .subscribe((result) => this._breakPointMeet(result));
+            this._responsiveBreakpointsService
+                .observeBreakpointByConfig(this._responsiveBreakPointConfig)
+                .subscribe((breakPointName) => {
+                    this._updateLayout(breakPointName);
+                });
         }
     }
 
-    /** set values of inline for each screen layout */
+    /** @hidden set values of inline for each screen layout */
     private _setFieldLayout(inlineLayout: InlineLayout): void {
         try {
             this._sIsInline = !!inlineLayout['S'];
@@ -192,18 +227,6 @@ export abstract class InLineLayoutCollectionBaseInput extends CollectionBaseInpu
                 default:
                     this._isInlineCurrent = this._xlIsInline;
                     this._inlineCurrentValue.next(this._isInlineCurrent);
-            }
-        }
-    }
-
-    /** @hidden when screen size changes from one breakpoint to another */
-    private _breakPointMeet(breakPoints: BreakpointState): void {
-        if (breakPoints.matches) {
-            for (const breakpoint in breakPoints.breakpoints) {
-                if (breakPoints.breakpoints[breakpoint]) {
-                    const breakPointName = this._responsiveBreakpointsService.getBreakpointName(breakpoint);
-                    this._updateLayout(breakPointName);
-                }
             }
         }
     }

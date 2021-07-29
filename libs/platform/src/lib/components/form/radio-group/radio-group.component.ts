@@ -23,7 +23,6 @@ import {
 import { NgControl, NgForm } from '@angular/forms';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { UP_ARROW, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW } from '@angular/cdk/keycodes';
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
@@ -120,7 +119,6 @@ export class RadioGroupComponent
     constructor(
         protected _cd: ChangeDetectorRef,
         readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
-        readonly _breakpointObserver: BreakpointObserver,
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
@@ -129,10 +127,8 @@ export class RadioGroupComponent
         @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
         readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig
     ) {
-        super(_cd, _responsiveBreakpointsService, _breakpointObserver, ngControl, ngForm, formField, formControl);
+        super(_cd, _responsiveBreakpointsService, ngControl, ngForm, formField, formControl, _defaultResponsiveBreakPointConfig);
         this.id = `radio-group-${nextUniqueId++}`;
-
-        this._responsiveBreakPointConfig = _defaultResponsiveBreakPointConfig || new ResponsiveBreakPointConfig();
 
         // subscribe to _inlineCurrentValue in inline-layout-collection-base-input
         this._inlineCurrentValue

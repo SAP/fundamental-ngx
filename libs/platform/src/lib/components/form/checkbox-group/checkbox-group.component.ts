@@ -17,7 +17,6 @@ import {
     Inject
 } from '@angular/core';
 import { NgForm, NgControl } from '@angular/forms';
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { distinctUntilChanged } from 'rxjs/operators';
 
 import {
@@ -105,7 +104,6 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
     constructor(
         cd: ChangeDetectorRef,
         readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
-        readonly _breakpointObserver: BreakpointObserver,
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
@@ -114,9 +112,7 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
         @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
         readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig
     ) {
-        super(cd, _responsiveBreakpointsService, _breakpointObserver, ngControl, ngForm, formField, formControl);
-
-        this._responsiveBreakPointConfig = _defaultResponsiveBreakPointConfig || new ResponsiveBreakPointConfig();
+        super(cd, _responsiveBreakpointsService, ngControl, ngForm, formField, formControl, _defaultResponsiveBreakPointConfig);
 
         // subscribe to _inlineCurrentValue in collection-form-field-inline-layout
         this._inlineCurrentValue

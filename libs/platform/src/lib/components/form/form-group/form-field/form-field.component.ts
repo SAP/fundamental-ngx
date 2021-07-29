@@ -20,7 +20,6 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 
@@ -209,7 +208,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef,
-        private _breakpointObserver: BreakpointObserver,
         @Optional() formGroupContainer: FormGroupContainer,
         @Optional() @SkipSelf() @Host() readonly formFieldGroup: FormFieldGroup,
         @Optional()
@@ -236,9 +234,9 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         }
 
         if (this._isColumnLayoutEnabled) {
-            this._breakpointObserver
-                .observe(this._responsiveBreakpointsService.getBreakpoints(this._responsiveBreakPointConfig))
-                .subscribe((result) => this._breakPointMeet(result));
+            this._responsiveBreakpointsService
+                .observeBreakpointByConfig(this._responsiveBreakPointConfig)
+                .subscribe((breakPointName) => this._updateLayout(breakPointName));
         }
 
         this.addToFormGroup();
@@ -461,17 +459,5 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
         // emit column change, so form-group knows it and re-arranges the fields
         this.onColumnChange.emit(true);
-    }
-
-    /** @hidden when screen size changes from one breakpoint to another */
-    private _breakPointMeet(breakPoints: BreakpointState): void {
-        if (breakPoints.matches) {
-            for (const breakpoint in breakPoints.breakpoints) {
-                if (breakPoints.breakpoints[breakpoint]) {
-                    const breakPointName = this._responsiveBreakpointsService.getBreakpointName(breakpoint);
-                    this._updateLayout(breakPointName);
-                }
-            }
-        }
     }
 }
