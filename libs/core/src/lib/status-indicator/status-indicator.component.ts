@@ -76,12 +76,6 @@ export class StatusIndicatorComponent implements OnChanges, AfterViewInit, CssCl
     viewBox: string;
 
     /**
-     * boolean value to define requirement of the label.
-     */
-    @Input()
-    hasLabel: boolean;
-
-    /**
      * boolean value to be marked as a clickable
      */
     @Input()

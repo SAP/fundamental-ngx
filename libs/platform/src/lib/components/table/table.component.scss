@@ -1,3 +1,6 @@
+$fd-table-border: 0.0625rem solid #e4e4e4;
+$fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_BorderColor, #e4e4e4);
+
 .fdp-table {
     @mixin fd-rtl {
         @at-root {
@@ -22,7 +25,7 @@
     @mixin fd-table-nested-cell-padding($levels: 0, $content-density-cozy: false, $include-expand: false) {
         $initial-padding: 1.5rem;
         $level-padding: 0.5rem;
-        /* Padding on third level is unique and different for compact  condensed and cozy */
+        /* Padding on the third level is unique */
         $level-three-padding: if($content-density-cozy, 0.5rem, 0.75rem);
         $expand-padding: if(
             $include-expand,
@@ -39,7 +42,7 @@
                         padding-left: 0.5rem;
                         padding-right: $initial-padding + $expand-padding;
                     }
-                /** As we're started from 0 third level has index 2 */
+                /** Special padding for the third level */
                 } @else if $i == 2  {
                     padding-left: $initial-padding + $level-three-padding + $expand-padding;
 
@@ -96,6 +99,15 @@
             min-width: 2.8rem;
             max-width: 2.8rem;
             padding: 0 !important;
+            border-left: none;
+            border-right: $fd-table-border;
+            border-right: $fd-table-border-var;
+
+            @include fd-rtl {
+                border-right: none;
+                border-left: $fd-table-border;
+                border-left: $fd-table-border-var;
+            }
         }
     }
 
@@ -274,13 +286,21 @@
         background-color: var(--sapList_HeaderBackground, #f2f2f2);
     }
 
+    .fdp-table__header,
+    .fdp-table__body,
+    .fdp-table__body-hs {
+        border: $fd-table-border;
+        border: $fd-table-border-var;
+
+        @include fd-rtl() {
+            border-left: $fd-table-border;
+            border-left: $fd-table-border-var;
+        }
+    }
+
     .fdp-table__header {
         position: relative;
-
         overflow: hidden;
-
-        border: 0.0625rem solid #e4e4e4;
-        border: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_BorderColor, #e4e4e4);
         border-bottom: none;
 
         .fdp-table__scrollbar-mock {
@@ -341,12 +361,6 @@
                 border-bottom: 0;
             }
         }
-    }
-
-    .fdp-table__body,
-    .fdp-table__body-hs {
-        border: 0.0625rem solid #e4e4e4;
-        border: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_BorderColor, #e4e4e4);
     }
 
     .fdp-table__body-hs {

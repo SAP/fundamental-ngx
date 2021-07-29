@@ -379,9 +379,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     _freezableColumns: string[] = [];
 
     /** @hidden */
-    _selectionColumnWidth = 0;
-
-    /** @hidden */
     _tablePadding = 0;
 
     /** @hidden */
@@ -477,6 +474,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     private _dragDropInProgress = false;
 
     /** @hidden */
+    private get _selectionColumnWidth(): number {
+        return this._isShownSelectionColumn ? SELECTION_COLUMN_WIDTH.get(this.contentDensity) : 0;
+    }
+
+    /** @hidden */
     constructor(
         private readonly _ngZone: NgZone,
         private readonly _cdr: ChangeDetectorRef,
@@ -497,7 +499,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         }
 
         if ('selectionMode' in changes || 'freezeColumnsTo' in changes) {
-            this._setFreezableInfo();
+            this.recalculateTableColumnWidth();
         }
     }
 
@@ -523,8 +525,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._listenToColumns();
 
         this._calculateVisibleColumns();
-
-        this._setFreezableInfo();
 
         this._constructTableMetadata();
 
@@ -607,20 +607,21 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** Freeze table to column */
     freezeToColumn(columnName: string): void {
-        this._tableService.freezeTo(columnName);
         this.freezeColumnsTo = columnName;
-        this._setFreezableInfo();
-        this._cdr.markForCheck();
+
+        this._tableService.freezeTo(columnName);
+        this.recalculateTableColumnWidth();
     }
 
     /** Unfreeze column */
     unfreeze(columnName: string): void {
-        const idx = this._freezableColumns.indexOf(columnName);
-        const freezeToName = this._freezableColumns[idx - 1];
-        this._tableService.freezeTo(freezeToName);
-        this.freezeColumnsTo = freezeToName;
-        this._setFreezableInfo();
-        this._cdr.markForCheck();
+        const freezeToColumnIndex = this._freezableColumns.indexOf(columnName);
+        const freezeToPreviousColumnName = this._freezableColumns[freezeToColumnIndex - 1];
+
+        this.freezeColumnsTo = freezeToPreviousColumnName;
+
+        this._tableService.freezeTo(freezeToPreviousColumnName);
+        this.recalculateTableColumnWidth();
     }
 
     /** Search in table */
@@ -728,7 +729,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     recalculateTableColumnWidth(): void {
         this._cdr.detectChanges();
 
-        this._tableColumnResizeService.initialize(this._selectionColumnWidth, !!this.freezeColumnsTo, this._scrollBarWidth);
+        this._tableColumnResizeService.setColumnsWidth(
+            this._visibleColumns.map(column => column.name),
+            this.freezeColumnsTo,
+            this._selectionColumnWidth,
+            this._scrollBarWidth
+        );
         this._setFreezableInfo();
 
         this._cdr.markForCheck();
@@ -900,20 +906,19 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    _getCellStyles(column: TableColumn): { [klass: string]: number } {
-        const styles = {};
-        const columnIndex = this._visibleColumns.indexOf(column);
+    _getCellStyles(column: TableColumn): { [klass: string]: number | string } {
+        const styles: { [property: string]: number | string } = {};
 
         if (this._freezableColumns.includes(column.name)) {
             const key = this._rtl ? 'margin-right.px' : 'margin-left.px';
-            styles[key] = this._selectionColumnWidth + this._tableColumnResizeService.getPrevColumnsWidth(columnIndex);
+            styles[key] = this._selectionColumnWidth + this._tableColumnResizeService.getPrevColumnsWidth(column.name);
         }
 
-        const columnWidth = this._tableColumnResizeService.getColumnWidthStyle(column, columnIndex);
+        const columnWidth = this._tableColumnResizeService.getColumnWidthStyle(column);
         styles['min-width'] = columnWidth;
         styles['max-width'] = columnWidth;
 
-        if (!this._isShownSelectionColumn) {
+        if (!this._isShownSelectionColumn || this.freezeColumnsTo) {
             styles['width'] = columnWidth;
         }
 
@@ -1139,7 +1144,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _listenToTableRowsPipe(): void {
-        let tableSizeSet = false;
+        let columnsWidthSet = false;
 
         this._subscriptions.add(
             this._dataSourceItemsSubject
@@ -1159,11 +1164,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 .subscribe((rows) => {
                     this._setTableRows(rows);
 
-                    if (!tableSizeSet && rows.length) {
+                    if (rows.length && !columnsWidthSet) {
                         this.recalculateTableColumnWidth();
-
-                        tableSizeSet = true;
-
+                        columnsWidthSet = true;
                         return;
                     }
 
@@ -1216,12 +1219,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             this._tableService.groupChange.subscribe((event: GroupChange) => {
                 this._buildGroupRulesMap();
                 this._calculateVisibleColumns();
-
-                /** Some columns have been hidden, need to refresh the layout */
-                this._tableColumnResizeService.resetColumnsWidth();
-                this._cdr.detectChanges();
-
-                /** Then recalculate width for the columns */
                 this.recalculateTableColumnWidth();
 
                 this.groupChange.emit(new TableGroupChangeEvent(this, event.current, event.previous));
@@ -1231,6 +1228,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._subscriptions.add(
             this._tableService.columnsChange.subscribe((event: ColumnsChange) => {
                 this._calculateVisibleColumns();
+
                 this.columnsChange.emit(new TableColumnsChangeEvent(this, event.current, event.previous));
             })
         );
@@ -1337,13 +1335,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _setFreezableInfo(): void {
-        this._freezableColumns = this._getFreezableColumn();
-        this._selectionColumnWidth = this._isShownSelectionColumn ? SELECTION_COLUMN_WIDTH.get(this.contentDensity) : 0;
-        this._tablePadding = this._selectionColumnWidth + this._tableColumnResizeService.getPrevColumnsWidth(this._freezableColumns.length);
+        this._freezableColumns = this._getFreezableColumns();
+
+        const freezeToNextColumnName = this._visibleColumns[this._freezableColumns.length]?.name;
+        this._tablePadding = this._selectionColumnWidth + this._tableColumnResizeService.getPrevColumnsWidth(freezeToNextColumnName);
     }
 
     /** @hidden */
-    private _getFreezableColumn(): string[] {
+    private _getFreezableColumns(): string[] {
         const columnNames: string[] = [];
         const columns = this._visibleColumns;
 
@@ -1356,13 +1355,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 continue;
             }
 
-            if (column.name === this.freezeColumnsTo) {
-                columnNames.push(column.name);
+            columnNames.push(column.name);
 
+            if (column.name === this.freezeColumnsTo) {
                 return columnNames;
             }
-
-            columnNames.push(column.name);
         }
 
         return [];
