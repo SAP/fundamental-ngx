@@ -1,1 +1,1 @@
-export * from './lib/moment-datetime/public_api'
+export * from './lib/public_api';

@@ -1,4 +1,4 @@
-import { DateTimeFormats } from '@fundamental-ngx/core';
+import { DateTimeFormats } from '@fundamental-ngx/core/datetime';
 
 export const MOMENT_DATETIME_FORMATS: DateTimeFormats = {
     parse: {

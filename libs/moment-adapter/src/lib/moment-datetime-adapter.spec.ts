@@ -3,8 +3,10 @@ import { LOCALE_ID } from '@angular/core';
 import { waitForAsync, inject, TestBed } from '@angular/core/testing';
 import moment from 'moment';
 
-import { DatetimeAdapter } from '@fundamental-ngx/core';
-import { MomentDatetimeAdapter, MomentDatetimeModule } from './moment-datetime.module';
+import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+
+import { MomentDatetimeAdapter } from './moment-datetime-adapter';
+import { MomentDatetimeModule } from './moment-datetime.module';
 
 export const JAN = 0, FEB = 1, MAR = 2, APR = 3, MAY = 4, JUN = 5, JUL = 6, AUG = 7, SEP = 8,
     OCT = 9, NOV = 10, DEC = 11;
@@ -39,7 +41,7 @@ describe('MomentDatetimeAdapter', () => {
     });
 
     it('should get day of week', () => {
-        expect(adapter.getDayOfWeek(moment([2017, JAN, 1]))).toBe(0);
+        expect(adapter.getDayOfWeek(moment([2017, JAN, 1]))).toBe(1);
     });
 
     it('should get long month names', () => {

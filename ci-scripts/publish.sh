@@ -2,7 +2,7 @@
 
 set -u -e
 
-PACKAGES=(core platform)
+PACKAGES=(core platform moment-adapter)
 CURRENT_BRANCH=main
 
 git config --global user.email $GH_EMAIL

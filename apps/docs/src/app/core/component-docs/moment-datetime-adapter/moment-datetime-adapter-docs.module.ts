@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {
-    DatePickerModule,
-    DatetimePickerModule,
-    FormModule,
-    InputGroupModule,
-    SegmentedButtonModule
-} from '@fundamental-ngx/core';
-import { MomentDatetimeModule } from '@fundamental-ngx/moment-adapter'
+
+import { FormModule } from '@fundamental-ngx/core/form';
+import { DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
+import { DatePickerModule } from '@fundamental-ngx/core/date-picker';
+import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { MomentDatetimeModule } from '@fundamental-ngx/moment-adapter';
 
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
@@ -17,6 +16,7 @@ import { MomentDatetimeAdapterDocsComponent } from './moment-datetime-adapter-do
 import { DatePickerMomentAdapterExampleComponent } from './examples/date-picker-moment-adapter-example.component';
 import { MomentAdapterOptionsExampleComponent } from './examples/moment-adapter-options-example.component';
 import { MomentDatetimeFormatsExampleComponent } from './examples/moment-datetime-formats-example.component';
+
 
 const routes: Routes = [
     {

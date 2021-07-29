@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DatetimeAdapter } from '@fundamental-ngx/core';
+import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import { MOMENT_DATE_TIME_ADAPTER_OPTIONS, MomentDatetimeAdapter } from '@fundamental-ngx/moment-adapter';
 
 @Component({
