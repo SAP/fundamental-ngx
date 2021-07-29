@@ -20,14 +20,14 @@
                         tabindex="0"
                         (click)="_selectItem(item)"
                     >
-                        <span class="fd-list__item-icon-container">
-                            <span class="fd-list__icon">
+                        <span class="fd-icon-tab-bar__list-item-icon-container">
+                            <span class="fd-list__icon fd-icon-tab-bar__list-item-icon">
                                 <fd-icon [glyph]="item.icon"></fd-icon>
                             </span>
                             <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
                         </span>
-                        <span *ngIf="item.label" class="fd-list__title">{{item.label}}</span>
-                        <span *ngIf="item.counter" class="fd-list__counter">({{item.counter}})</span>
+                        <span *ngIf="item.label" class="fd-list__title fd-icon-tab-bar__list-item-title">{{item.label}}</span>
+                        <span *ngIf="item.counter" class="fd-list__counter fd-icon-tab-bar__list-item-counter">({{item.counter}})</span>
                     </a>
                 </li>
             </ng-container>

@@ -63,7 +63,7 @@ export class IconBarDndListDirective implements AfterViewInit, OnDestroy {
         this._dndContainer.removeDndList(this);
     }
 
-    addDragItem(dragItem: IconBarDndItemDirective): void {
+    registerDragItem(dragItem: IconBarDndItemDirective): void {
         this._dragRefItems.push(dragItem.dragRef);
         this._dndItems$.next();
     }

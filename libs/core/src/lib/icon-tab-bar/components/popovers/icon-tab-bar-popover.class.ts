@@ -30,9 +30,9 @@ export abstract class IconTabBarPopoverClass implements OnChanges {
     }
 
     protected _setStyles(items: any[] = []): void {
-        items.forEach(item => {
+        items.forEach(item=> {
             if (item.color) {
-                item.cssClasses = [`fd-list__item--${item.color}`];
+                item.cssClasses = [`fd-icon-tab-bar__list-item--${item.color}`];
             }
             if (Array.isArray(item.subItems)) {
                 this._setStyles(item.subItems);

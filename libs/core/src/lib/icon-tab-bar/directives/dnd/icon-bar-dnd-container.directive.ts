@@ -21,7 +21,6 @@ export class IconBarDndContainerDirective implements OnDestroy {
   /** Defines if drag and drop feature should be enabled for list items */
   @Input()
   set draggable(draggable: boolean) {
-    debugger;
     this._draggable = draggable;
     this._changeDraggableState(draggable);
   }
@@ -43,16 +42,13 @@ export class IconBarDndContainerDirective implements OnDestroy {
   private _elementsCoordinates: ElementChord[];
 
   /** @hidden */
-  private _virtualFlipperCoordinates: ElementChord[] = [];
+  private _virtualSeparatorsCoordinates: ElementChord[] = [];
 
   /** @hidden */
   private _closestItemIndex: number = null;
 
   /** @hidden */
-  private _closestFlipperIndex: number = null;
-
-  /** @hidden */
-  private _lastCursorPosition: Point;
+  private _closestSeparatorIndex: number = null;
 
   /** @hidden */
   private _draggable = true;
@@ -84,8 +80,7 @@ export class IconBarDndContainerDirective implements OnDestroy {
   onMove(mousePosition: Point): void {
     /** Temporary object, to store lowest distance values */
     let newClosestIndex: number = null;
-    let newClosestFlipperIndex: number = null;
-    this._lastCursorPosition = mousePosition;
+    let newClosestSeparatorIndex: number = null;
 
     this._elementsCoordinates.find((element, index) => {
       /** Check if element can be replaced */
@@ -104,51 +99,51 @@ export class IconBarDndContainerDirective implements OnDestroy {
 
     if (this._closestItemIndex !== newClosestIndex) {
       this.dndItemDirectives[this._closestItemIndex]?.toggleHoveredStyles();
-      this.dndItemDirectives[this._closestFlipperIndex]?.toggleSeparatorStyles();
+      this.dndItemDirectives[this._closestSeparatorIndex]?.toggleSeparatorStyles();
     }
 
     this._closestItemIndex = newClosestIndex;
 
     if (newClosestIndex !== null) {
-      this._closestFlipperIndex = null;
+      this._closestSeparatorIndex = null;
       this.dndItemDirectives[newClosestIndex].toggleHoveredStyles(true);
       return;
     }
 
-    // Separator checking
-    this._virtualFlipperCoordinates.find((element, index) => {
+    // If we aren't on tab then check separator element.
+    this._virtualSeparatorsCoordinates.find((element, index) => {
       const isMouseOnFlipper = this._isMouseOnFlipper(element, mousePosition);
       if (isMouseOnFlipper) {
-        newClosestFlipperIndex = index;
+        newClosestSeparatorIndex = index;
         return true;
       }
     });
 
-    if (newClosestFlipperIndex !== null && newClosestFlipperIndex === this._closestFlipperIndex) {
+    if (newClosestSeparatorIndex !== null && newClosestSeparatorIndex === this._closestSeparatorIndex) {
       return;
     }
 
-    if (this._closestFlipperIndex !== newClosestFlipperIndex) {
+    if (this._closestSeparatorIndex !== newClosestSeparatorIndex) {
       this.dndItemDirectives[this._closestItemIndex]?.toggleHoveredStyles();
-      this.dndItemDirectives[this._closestFlipperIndex]?.toggleSeparatorStyles();
+      this.dndItemDirectives[this._closestSeparatorIndex]?.toggleSeparatorStyles();
     }
 
-    this._closestFlipperIndex = newClosestFlipperIndex;
+    this._closestSeparatorIndex = newClosestSeparatorIndex;
 
-    if (newClosestFlipperIndex !== null) {
+    if (newClosestSeparatorIndex !== null) {
       this._closestItemIndex = null;
-      this.dndItemDirectives[newClosestFlipperIndex].toggleSeparatorStyles(true);
+      this.dndItemDirectives[newClosestSeparatorIndex].toggleSeparatorStyles(true);
       return;
     }
   }
 
   /** Method called, when element is released */
   dragEnd(dragDir: IconBarDndItemDirective): void {
-    if (this._closestFlipperIndex || this._closestFlipperIndex === 0) {
-      this.dndItemDirectives[this._closestFlipperIndex].toggleSeparatorStyles();
+    if (this._closestSeparatorIndex || this._closestSeparatorIndex === 0) {
+      this.dndItemDirectives[this._closestSeparatorIndex].toggleSeparatorStyles();
       this.dropped.emit({
         draggableItem: dragDir.dndItemData,
-        targetItem: this.dndItemDirectives[this._closestFlipperIndex].dndItemData,
+        targetItem: this.dndItemDirectives[this._closestSeparatorIndex].dndItemData,
         action: 'replace'
       });
     }
@@ -162,9 +157,9 @@ export class IconBarDndContainerDirective implements OnDestroy {
     }
     /** Reset */
     this._elementsCoordinates = [];
-    this._virtualFlipperCoordinates = [];
+    this._virtualSeparatorsCoordinates = [];
     this._closestItemIndex = null;
-    this._closestFlipperIndex = null;
+    this._closestSeparatorIndex = null;
   }
 
   registerDragItem(dragItem: IconBarDndItemDirective): void {
@@ -194,7 +189,7 @@ export class IconBarDndContainerDirective implements OnDestroy {
     this._elementsCoordinates.forEach((item, index) => {
       if (index !== this._elementsCoordinates.length - 1) {
         const isVertical = this.dndItemDirectives[index].isVertical;
-        this._virtualFlipperCoordinates.push({
+        this._virtualSeparatorsCoordinates.push({
           x: isVertical ? item.x : item.x - FLIPPER_SIZE.width,
           y: isVertical ? item.y + FLIPPER_SIZE.verticalHeight : item.y,
           width: isVertical ? item.width : FLIPPER_SIZE.width,

@@ -1,12 +1,10 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, NgZone, Output, ViewChild } from '@angular/core';
-import { IconTabBarClass } from '../../icon-tab-bar.class';
+import { ChangeDetectorRef, Component, EventEmitter, Input, NgZone, Output } from '@angular/core';
+import { IconTabBarClass } from '../icon-tab-bar.class';
 import { IconTabBarItem } from '../../types';
 import { UNIQUE_KEY_SEPARATOR } from '../../constants';
-import { OverflowItemsDirective } from '../../../utils/directives/overflow-items/overflow-items.directive';
-import { ExtraButtonDirective } from '../../directives/extra-button/extra-button.directive';
 import { FdDnDEvent } from '../../directives/dnd/icon-bar-dnd-container.directive';
 
-interface ItemToReplace {
+export interface DataForReordering {
     arr: IconTabBarItem[],
     item: IconTabBarItem,
     parentUid: string,
@@ -50,18 +48,18 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
         const draggableParsedUidArr = draggableItem.uId.split(UNIQUE_KEY_SEPARATOR);
         draggableParsedUidArr.length = draggableParsedUidArr.length - 1;
 
-        const newArr = this._getParentArrByUid(targetItem.uId);
-        const previousArr = this._getParentArrByUid(draggableItem.uId);
+        const tabInfoForNewList = this._getTabInfoFromMainList(targetItem.uId);
+        const tabInfoForPrevList = this._getTabInfoFromMainList(draggableItem.uId);
 
         const dataForAction = {
             replacedItemInfo: {
-                arr: newArr,
-                item: targetItem,
+                arr: tabInfoForNewList.parent,
+                item: tabInfoForNewList.tab,
                 parentUid: replacedParsedUidArr.length ? replacedParsedUidArr.join(UNIQUE_KEY_SEPARATOR) : ''
             },
             draggableItemInfo: {
-                arr: previousArr,
-                item: draggableItem,
+                arr: tabInfoForPrevList.parent,
+                item: tabInfoForPrevList.tab,
                 parentUid: draggableParsedUidArr.length ? draggableParsedUidArr.join(UNIQUE_KEY_SEPARATOR) : ''
             }
         };
@@ -73,18 +71,20 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
         this.reordered.emit(this._tabs);
     }
 
-    private _insertItemAsChild(data: { replacedItemInfo: ItemToReplace, draggableItemInfo: ItemToReplace }): void {
+    private _insertItemAsChild(data: { replacedItemInfo: DataForReordering, draggableItemInfo: DataForReordering }): void {
         const { replacedItemInfo, draggableItemInfo } = data;
+        // Remove draggable tab from previous list
         draggableItemInfo.arr.splice(draggableItemInfo.item.index, 1);
         if (!replacedItemInfo.item.subItems?.length) {
             replacedItemInfo.item.subItems = [];
         }
+        // Add tab to subitem of the target tab
         replacedItemInfo.item.subItems.push(draggableItemInfo.item);
         this._tabs = this._updateTabsIndexes(this._tabs);
         this._triggerRecalculationVisibleItems();
     }
 
-    private _replaceItems(data: { replacedItemInfo: ItemToReplace, draggableItemInfo: ItemToReplace }): void {
+    private _replaceItems(data: { replacedItemInfo: DataForReordering, draggableItemInfo: DataForReordering }): void {
         const { replacedItemInfo, draggableItemInfo } = data;
         draggableItemInfo.arr.splice(draggableItemInfo.item.index, 1);
         const newIndex = replacedItemInfo?.item?.index || 0;
@@ -93,18 +93,17 @@ export class IconTabBarTextTypeComponent extends IconTabBarClass {
         this._triggerRecalculationVisibleItems();
     }
 
-    private _getParentArrByUid(uid: string, arr: any[] = this._tabs): IconTabBarItem[] {
-        let result;
+    private _getTabInfoFromMainList(uid: string, arr: any[] = this._tabs): {parent: IconTabBarItem[], tab: IconTabBarItem} {
+        let result: {parent: IconTabBarItem[], tab: IconTabBarItem};
         for (let i = 0; i < arr.length; i++) {
             const item = arr[i];
             if (item.uId === uid) {
-                result = arr;
+                result = {parent: arr, tab: item};
                 break;
             } else if (Array.isArray(item.subItems)) {
-                result = this._getParentArrByUid(uid, item.subItems);
+                result = this._getTabInfoFromMainList(uid, item.subItems);
                 if (result) {
                     break;
-
                 }
             }
         }

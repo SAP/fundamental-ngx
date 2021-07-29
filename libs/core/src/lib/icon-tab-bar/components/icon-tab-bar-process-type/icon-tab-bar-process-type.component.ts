@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IconTabBarClass } from '../../icon-tab-bar.class';
+import { IconTabBarClass } from '../icon-tab-bar.class';
 import { IconTabBarItem } from '../../types';
 import { cloneDeep } from '../../../utils/functions/clone-deep';
 import { ICON_TAB_HIDDEN_CSS } from '../../constants';
