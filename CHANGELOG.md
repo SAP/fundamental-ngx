@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.156](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.155...v0.31.0-rc.156) (2021-07-30)
+
+
+### Features
+
+* **core:** moment date time adapter implementation ([#6000](https://github.com/SAP/fundamental-ngx/issues/6000)) ([94e7b35](https://github.com/SAP/fundamental-ngx/commit/94e7b359d9968f66f6bda7953cab7f1f4fc14331))
+
 ## [0.31.0-rc.155](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.154...v0.31.0-rc.155) (2021-07-30)
 
 
