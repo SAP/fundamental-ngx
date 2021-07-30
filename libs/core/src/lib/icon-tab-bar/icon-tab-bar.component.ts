@@ -132,7 +132,6 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
 
     /** @hidden  */
     _selectItem(selectedItem: IconTabBarItem): void {
-        debugger;
         this.iconTabSelected.emit(selectedItem);
     }
 }

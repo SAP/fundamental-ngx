@@ -4,7 +4,7 @@ import {
     EventEmitter,
     Input,
     NgZone,
-    OnChanges,
+    OnChanges, OnDestroy,
     OnInit,
     Output,
     SimpleChanges,
@@ -15,10 +15,11 @@ import { cloneDeep } from '../../utils/functions/clone-deep';
 import { ICON_TAB_HIDDEN_CSS, UNIQUE_KEY_SEPARATOR } from '../constants';
 import { OverflowItemsDirective } from '../../utils/directives/overflow-items/overflow-items.directive';
 import { ExtraButtonDirective } from '../directives/extra-button/extra-button.directive';
-import { take } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Directive()
-export abstract class IconTabBarClass implements OnInit, OnChanges {
+export abstract class IconTabBarClass implements OnInit, OnChanges, OnDestroy {
 
     @Input()
     tabsConfig: TabConfig[];
@@ -41,6 +42,8 @@ export abstract class IconTabBarClass implements OnInit, OnChanges {
     _anchorIndex: number;
     _tabs: IconTabBarItem[] = [];
 
+    private _onDestroy$ = new Subject();
+
     constructor(
         protected _cd: ChangeDetectorRef,
         protected _ngZone: NgZone,
@@ -59,6 +62,11 @@ export abstract class IconTabBarClass implements OnInit, OnChanges {
 
     ngOnInit(): void {
         this._initTabs();
+    }
+
+    ngOnDestroy(): void {
+        this._onDestroy$.next();
+        this._onDestroy$.complete();
     }
 
     private _initTabs(): void {
@@ -158,7 +166,10 @@ export abstract class IconTabBarClass implements OnInit, OnChanges {
     protected _triggerRecalculationVisibleItems(): void {
         this._ngZone
             .onMicrotaskEmpty
-            .pipe(take(1))
+            .pipe(
+                take(1),
+                takeUntil(this._onDestroy$),
+                )
             .subscribe(_ => {
                 if (this.overflowDirective) {
                     const extra = this.overflowDirective.getAmountOfExtraItems();
