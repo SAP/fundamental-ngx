@@ -13,7 +13,7 @@ import {
     testOptionsArray1, testOptionsArray2, testOptionsArray3, testOptionsArray4, testOptionsArray5, testOptionsArray6
 } from '../fixtures/appData/multi-input-contents';
 
-describe('Multi input test suite', function() {
+xdescribe('Multi input test suite', function() {
     const multiInputPage = new MultiInputPo();
     const {
         activeDropdownButtons, activeInputs, disableInputs, options, multiInputOptions, buttonShowAll, expandedDropdown,

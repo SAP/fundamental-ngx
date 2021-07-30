@@ -21,6 +21,9 @@ export interface DateTimeFormats {
         yearA11yLabel: unknown;
     };
     rangeDelimiter: string;
-}
+};
 
+/**
+ * DateTimeFormats injection token
+ */
 export const DATE_TIME_FORMATS = new InjectionToken<DateTimeFormats>('date-formats');

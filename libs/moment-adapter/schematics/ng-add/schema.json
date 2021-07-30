@@ -1,0 +1,7 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "id": "fundamental-ngx-ng-add",
+    "title": "Fundamental Library moment-adapter ng-add schema",
+    "type": "object",
+    "properties": {}
+}

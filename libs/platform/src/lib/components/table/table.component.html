@@ -72,7 +72,7 @@
                 fd-table-cell
                 role="columnheader"
                 [fdpTableCellResizable]="_getColumnResizableSide(colIdx)"
-                [columnIndex]="colIdx"
+                [columnName]="column.name"
                 [id]="id+'__'+column.name"
                 [attr.aria-colindex]="colIdx"
                 [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.name)"
@@ -336,7 +336,7 @@
                                 *ngFor="let column of _visibleColumns; let colIdx = index"
                                 fd-table-cell
                                 [fdpTableCellResizable]="_getColumnResizableSide(colIdx)"
-                                [columnIndex]="colIdx"
+                                [columnName]="column.name"
                                 role="cell"
                                 [headers]="id+'__'+column.name"
                                 [style.textAlign]="column.align"

@@ -13,10 +13,15 @@
                 fdType="emphasized"
                 label="Interested"
                 [compact]="true"
-                (click)="dialog.close('Continue')" 
-            >
-            </fd-button-bar>
-            <fd-button-bar label="Cancel" [compact]="true" (click)="dialog.dismiss('Cancel')"> </fd-button-bar>
+                (click)="dialog.close('Continue')"
+            ></fd-button-bar>
+
+            <fd-button-bar
+                fdInitialFocus
+                label="Cancel"
+                [compact]="true"
+                (click)="dialog.dismiss('Cancel')"
+            ></fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>
 </ng-template>
