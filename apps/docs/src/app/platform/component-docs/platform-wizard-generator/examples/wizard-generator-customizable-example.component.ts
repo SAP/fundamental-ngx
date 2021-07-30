@@ -135,7 +135,7 @@ export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
                 appendToWizard: false,
                 addSummary: false,
                 responsivePaddings: false,
-                title: this.wizardTitle,
+                wizardTitle: this.wizardTitle,
                 goNextButtonTemplate: this.goNextTemplate,
                 goBackButtonTemplate: this.goBackTemplate,
                 finishButtonTemplate: this.finishTemplate,

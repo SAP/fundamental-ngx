@@ -39,7 +39,7 @@ export interface WizardDialogData {
     /**
      * @description Wizards dialog title configuration.
      */
-    title: WizardTitle;
+    wizardTitle: WizardTitle;
 
     /**
      * @description Text that will be displayed if user clicks on Cancel button.

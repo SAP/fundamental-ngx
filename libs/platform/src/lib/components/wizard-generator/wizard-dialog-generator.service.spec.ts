@@ -125,7 +125,7 @@ describe('WizardDialogGeneratorService', () => {
                 appendToWizard: false,
                 addSummary: false,
                 responsivePaddings: false,
-                title: wizardTitle
+                wizardTitle: wizardTitle
             }
         });
         expect(dialogService.hasOpenDialogs()).toBeTrue();

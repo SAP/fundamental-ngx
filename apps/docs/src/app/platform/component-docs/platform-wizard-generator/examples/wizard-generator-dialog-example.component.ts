@@ -128,7 +128,7 @@ export class WizardGeneratorDialogExampleComponent implements OnDestroy {
                 appendToWizard: false,
                 addSummary: true,
                 responsivePaddings: false,
-                title: this.wizardTitle
+                wizardTitle: this.wizardTitle
             }
         }).afterClosed.pipe(takeUntil(this._onDestroy$))
         .subscribe((wizardValue: WizardGeneratorFormsValue) => {

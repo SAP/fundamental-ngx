@@ -20,7 +20,7 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
     /**
      * @description Wizards dialog title configuration.
      */
-    title: WizardTitle;
+    wizardTitle: WizardTitle;
 
     /**
      * @description Confirmation message when wizard dialog close button has been clicked.
@@ -70,7 +70,7 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
         super(_wizardGeneratorService, _cd);
 
         this.items = this._dialogRef.data.items;
-        this.title = this._dialogRef.data.title;
+        this.wizardTitle = this._dialogRef.data.wizardTitle;
         this.appendToWizard = this._dialogRef.data.appendToWizard;
         this.addSummary = this._dialogRef.data.addSummary;
         this.navigationButtonLabels = this._dialogRef.data.navigationButtonLabels;
