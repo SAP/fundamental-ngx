@@ -142,8 +142,8 @@ describe('List test suite:', function() {
             checkElementText(singleListItems);
             checkElArrIsClickable(singleListItems);
         });
-
-        it('should check selection', () => {
+        // skipped for prod
+        xit('should check selection', () => {
             const listItemId = getAttributeByName(singleListItems, 'id');
 
             expect(getAttributeByName(singleList, altSelectionAttr)).toBe(singleSelect);
@@ -154,7 +154,7 @@ describe('List test suite:', function() {
     });
 
     describe('Navigation Indication examples:', function() {
-        it('should do basic checks', () => {
+        xit('should do basic checks', () => {
             checkElementText(navListItems);
             checkElArrIsClickable(navListItems);
             checkAttributeValueTrue(navList, navIndicator);
