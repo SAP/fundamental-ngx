@@ -22,8 +22,4 @@ export class TimePickerFormExampleComponent {
         time: new FormControl(),
         disabledTime: new FormControl({ value: new FdDate().setTime(12, 34, 10), disabled: true })
     });
-
-    isValid(): boolean {
-        return this.customForm.get('time').valid;
-    }
 }

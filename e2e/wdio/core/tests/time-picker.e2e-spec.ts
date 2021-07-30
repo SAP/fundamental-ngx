@@ -173,7 +173,7 @@ describe('Time-picker component test', function () {
         sendKeys('Enter');
 
         if (section === formattingExample) {
-            expect(getValue(section + timeInput)).toEqual('00:34:00');
+            expect(getValue(section + timeInput)).toEqual(`${value}`);
         }
         if (section !== formattingExample) {
             expect(getValue(section + timeInput)).toEqual(`${value}`);

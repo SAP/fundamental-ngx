@@ -6,7 +6,6 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
-    HostBinding,
     Inject,
     Input,
     OnChanges,
@@ -37,7 +36,7 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
     templateUrl: './time-picker.component.html',
     host: {
         '(blur)': 'onTouched()',
-        class: 'fd-timepicker-custom'
+        class: 'fd-time-picker fd-timepicker-custom'
     },
     providers: [
         {
@@ -57,9 +56,10 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, OnDestroy, Validator {
+export class TimePickerComponent<D>
+    implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, OnDestroy, Validator {
     /**
-     * @Input date time object representation
+     * Date time object representation
      */
     @Input()
     time: D;
@@ -68,11 +68,11 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
     @Input()
     inputId: string;
 
-    /** @Input Uses compact time picker. */
+    /** Uses compact time picker. */
     @Input()
     compact?: boolean;
 
-    /** @Input Disables the component. */
+    /** Disables the component. */
     @Input()
     disabled: boolean;
 
@@ -80,39 +80,40 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
     @Input()
     required = false;
 
-    /** @Input Whether to show spinner buttons */
+    /** Whether to show spinner buttons */
     @Input()
     spinnerButtons = true;
 
     /**
-     * @Input When set to false, uses the 24 hour clock (hours ranging from 0 to 23).
+     * When set to false, uses the 24 hour clock (hours ranging from 0 to 23).
      * Default value based on the current locale format option
      */
     @Input()
     meridian: boolean;
 
     /**
-     * @Input When set to false, hides the input for seconds.
+     * When set to false, hides the input for seconds.
      * Default value based on the current locale format option
      * */
     @Input()
     displaySeconds: boolean;
 
     /**
-     * @Input When set to false, hides the input for minutes.
+     * When set to false, hides the input for minutes.
      * Default value based on the current locale format option
      * */
     @Input()
     displayMinutes: boolean;
 
     /**
-     * @Input When set to false, hides the input for hours.
+     * When set to false, hides the input for hours.
      * Default value based on the current locale format option
      * */
     @Input()
     displayHours: boolean;
 
-    /** @Input Default time picker placeholder which is set dependant on the hours, minutes and seconds.
+    /**
+     * Default time picker placeholder which is set dependant on the hours, minutes and seconds.
      * Otherwise It can be set to a default value
      */
     @Input()
@@ -148,15 +149,17 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
     /** @hidden */
     _messageType: FormStates = null;
 
-    /** The trigger events that will open/close the message box.
-     *  Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp). */
+    /**
+     * The trigger events that will open/close the message box.
+     * Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).
+     */
     @Input()
     set messageTriggers(triggers: string[]) {
         this._messageTriggers = triggers;
         this._popoverFormMessage.triggers = triggers;
     }
     /** @hidden */
-    _messageTriggers: string[] = ['mouseenter', 'mouseleave'];
+    _messageTriggers: string[] = ['focusin', 'focusout'];
 
     /**
      *  The placement of the popover. It can be one of: top, top-start, top-end, bottom,
@@ -188,7 +191,7 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
     buttonFocusable = true;
 
     /**
-     * @Input when set to true, time inputs won't allow to have 1 digit
+     * When set to true, time inputs won't allow to have 1 digit
      * for example 9 will become 09
      * but 12 will be kept as 12.
      */
@@ -214,24 +217,23 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
     isOpenChange = new EventEmitter<boolean>();
 
     /** @hidden */
-    @HostBinding('class.fd-time-picker')
-    timePickerClass = true;
-
-    /** @hidden */
     @ViewChild(TimeComponent)
     child: TimeComponent<D>;
 
     /** @hidden */
-    @ViewChild('inputGroupComponent', { read: ElementRef  })
+    @ViewChild('inputGroupComponent', { read: ElementRef })
     _inputGroupElement: ElementRef;
 
-    /** @hidden Whether the input time is valid(success). Internal use. */
-    isInvalidTimeInput = false;
+    /**
+     * @hidden
+     * Whether the input time is valid(success). Internal use.
+     */
+    _isInvalidTimeInput = false;
 
-    /** @hidden */
-    period: string;
-
-    /** @hidden */
+    /** 
+     * @hidden
+     * Indicates when popover is opened
+     */
     isOpen: boolean;
 
     /** @hidden */
@@ -246,6 +248,12 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
     /** @hidden */
     _displayHours: boolean;
 
+    /**
+     * @hidden
+     * Input field value
+     */
+    _inputTimeValue = '';
+
     /** @hidden */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -255,11 +263,11 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
     /** @hidden */
     onChange: (_: D) => void = () => {};
     /** @hidden */
-    onTouched: Function = () => {};
+    onTouched: () => void = () => {};
 
     /** @hidden */
     get _placeholder(): string {
-        return this.placeholder || this.getPlaceholder();
+        return this.placeholder || this._getPlaceholder();
     }
 
     /** @hidden */
@@ -280,28 +288,35 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
     }
 
     ngOnInit(): void {
-        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
-            this._calculateTimeOptions();
-            this._changeDetectorRef.detectChanges();
-        });
-
         this._calculateTimeOptions();
+        this._formatTimeInputField();
 
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this._changeDetectorRef.markForCheck();
-            }))
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._changeDetectorRef.markForCheck();
+                })
+            );
         }
+
+        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+            this._calculateTimeOptions();
+            this._formatTimeInputField();
+            this._changeDetectorRef.detectChanges();
+        });
     }
 
     ngOnChanges(changes: SimpleChanges): void {
         if (
             ['displayHours', 'displayMinutes', 'displaySeconds', 'meridian', 'displayFormat'].some(
-                (input) => input in changes
+                (change) => change in changes
             )
         ) {
             this._calculateTimeOptions();
+        }
+        if (changes.displayFormat) {
+            this._formatTimeInputField();
         }
     }
 
@@ -321,12 +336,10 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(
-        control: AbstractControl
-    ): {
+    validate(control: AbstractControl): {
         [key: string]: any;
     } {
-        return this.isInvalidTimeInput
+        return this._isInvalidTimeInput
             ? {
                   timeValidation: {
                       valid: false
@@ -357,11 +370,11 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
     }
 
     /** @hidden */
-    getFormattedTime(): string {
+    _getFormattedTime(time = this.time): string {
         let formattedTime = '';
 
         try {
-            formattedTime = this._dateTimeAdapter.format(this.time, this.getDisplayFormat());
+            formattedTime = this._dateTimeAdapter.format(time, this.getDisplayFormat());
         } catch (e) {}
 
         return formattedTime;
@@ -369,9 +382,9 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
 
     /**
      *  @hidden
-     * When the is open state is changed, there should be at least one active item, which by default is hour.
+     *  When the open state is changed, there should be at least one active item, which by default is hour.
      */
-    handleIsOpenChange(isOpen: boolean): void {
+    _handleIsOpenChange(isOpen: boolean): void {
         this.isOpen = isOpen;
         this.isOpenChange.emit(this.isOpen);
         this._changeMessageVisibility();
@@ -381,50 +394,57 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
         }
     }
 
-    /** @hidden */
-    timeInputChanged(timeFromInput: string): void {
-        // parse
-        const time = this._dateTimeAdapter.parse(timeFromInput, this.getParseFormat());
+    /**
+     * @hidden
+     * Time input field changes handler
+     */
+    _timeInputChanged(inputValue: string): void {
+        inputValue = inputValue.trim();
 
-        if (this._dateTimeAdapter.isValid(time)) {
-            this.isInvalidTimeInput = false;
-            this.time = time;
-            this.onChange(time);
-        } else {
-            if (this.allowNull && timeFromInput === '') {
-                this.isInvalidTimeInput = false;
-                this.onChange(time);
-            } else {
-                this.isInvalidTimeInput = true;
-                this.onChange(time);
-            }
+        // check if value has been changed
+        if (this._inputTimeValue === inputValue) {
+            return;
         }
+
+        this._inputTimeValue = inputValue;
+
+        if (inputValue === '') {
+            this.time = null;
+            this._isInvalidTimeInput = !this.allowNull;
+        }
+
+        if (inputValue !== '') {
+            this.time = this._dateTimeAdapter.parse(inputValue, this.getParseFormat());
+            this._isInvalidTimeInput = !this._dateTimeAdapter.isValid(this.time);
+        }
+
+        this.onChange(this.time);
 
         this._changeDetectorRef.detectChanges();
     }
 
     /** @hidden */
-    inputGroupClicked($event: MouseEvent): void {
+    _inputGroupClicked($event: MouseEvent): void {
         if (!this.isOpen && !this.disabled) {
             $event.stopPropagation();
-            this.handleIsOpenChange(true);
+            this._handleIsOpenChange(true);
         }
     }
 
     /** @hidden */
-    addOnButtonClicked(): void {
+    _addOnButtonClicked(): void {
         if (!this.disabled) {
-            this.handleIsOpenChange(!this.isOpen);
+            this._handleIsOpenChange(!this.isOpen);
         }
     }
 
     /** @hidden */
-    popoverClosed(): void {
-        this.handleIsOpenChange(false);
+    _popoverClosed(): void {
+        this._handleIsOpenChange(false);
     }
 
     /** @hidden */
-    getPlaceholder(): string {
+    _getPlaceholder(): string {
         let retVal = '';
 
         if (this._displayHours) {
@@ -444,12 +464,18 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
     }
 
     /** @hidden */
-    timeFromTimeComponentChanged(time: D): void {
+    _timeComponentValueChanged(time: D): void {
+        if (this._dateTimeAdapter.dateTimesEqual(time, this.time)) {
+            return;
+        }
+        this._inputTimeValue = this._getFormattedTime(time);
         this.time = time;
+        this._isInvalidTimeInput = !this._dateTimeAdapter.isValid(time);
         this.onChange(time);
-        this.isInvalidTimeInput = false;
         this._changeDetectorRef.detectChanges();
     }
+
+    // #region ControlValueAccessor
 
     /** @hidden */
     registerOnChange(fn: (time: D) => void): void {
@@ -471,14 +497,21 @@ export class TimePickerComponent<D> implements ControlValueAccessor, OnInit, Aft
     writeValue(time: D): void {
         if (!time) {
             this.time = null;
-            if (!this.allowNull) {
-                this.isInvalidTimeInput = true;
-            }
+            this._inputTimeValue = '';
+            this._isInvalidTimeInput = !this.allowNull;
         } else {
-            this.isInvalidTimeInput = false;
             this.time = time;
+            this._inputTimeValue = this._getFormattedTime(time);
+            this._isInvalidTimeInput = !this._dateTimeAdapter.isValid(time);
         }
         this._changeDetectorRef.markForCheck();
+    }
+
+    // #endregion ControlValueAccessor
+
+    /** @hidden */
+    _formatTimeInputField(time = this.time): string {
+        return (this._inputTimeValue = this._getFormattedTime(time));
     }
 
     /** @hidden */

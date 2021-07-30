@@ -64,12 +64,57 @@ describe('TimePickerComponent', () => {
         expect(retVal).toEqual(newTime);
     });
 
-    it('should set isInvalidTimeInput to true if time format can not be parsed', () => {
-        const newTime = new FdDate().setTime(1, 0, 0);
-        component.time = newTime;
-        component.allowNull = false;
-        component.timeInputChanged('hello');
-        expect(component.isInvalidTimeInput).toBeTruthy();
+    describe('handles input field changes', () => {
+        it('should be in valid state if input value can be parsed', () => {
+            const newTime = new FdDate().setTime(15, 30, 0);
+            component.allowNull = false;
+            component._timeInputChanged('3:30 PM');
+            expect(component.time.toTimeString()).toEqual(newTime.toTimeString());
+            expect(component.time.isDateValid()).toBeTrue();
+            expect(component._isInvalidTimeInput).toBeFalse();
+        });
+        it('should be in invalid state if input value can not be parsed', () => {
+            component.allowNull = false;
+            component._timeInputChanged('hello');
+            expect(component.time.isDateValid()).toBeFalse();
+            expect(component._isInvalidTimeInput).toBeTrue();
+        });
+        
+        describe('input field is empty', () => {
+            it('should set model to "null"', () => {
+                component.time = new FdDate().setTime(15, 40, 0);
+                component._timeInputChanged('');
+                expect(component.time).toBe(null);
+            });
+            it('should be invalid if "allowNull=false"', () => {
+                component.allowNull = false;
+                component._timeInputChanged('');
+                expect(component._isInvalidTimeInput).toBeTrue();
+            });
+            it('should be valid if "allowNull=true"', () => {
+                component.allowNull = true;
+                component._timeInputChanged('');
+                expect(component._isInvalidTimeInput).toBeFalse();
+            });
+        });
+    });
+
+    it('should not fire "onChange" if focus has gone but input field stays the same', () => {
+        const onChangeSpy = spyOn(component, 'onChange');
+        component._timeInputChanged('1:30 PM');
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+        component._timeInputChanged('1:30 PM');
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not fire "onChange" if time component change event brings the same model as the current', () => {
+        const onChangeSpy = spyOn(component, 'onChange');
+        const time = new FdDate().setTime(8, 15, 0);
+        component._timeComponentValueChanged(time);
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+        expect(onChangeSpy).toHaveBeenCalledOnceWith(time);
+        component._timeComponentValueChanged(new FdDate().setTime(8, 15, 0));
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
     });
 
     it('should handle input group click', () => {
@@ -77,20 +122,20 @@ describe('TimePickerComponent', () => {
         component.disabled = false;
         const event = { stopPropagation: function (): void {} };
         spyOn(event, 'stopPropagation').and.callThrough();
-        component.inputGroupClicked(<any>event);
+        component._inputGroupClicked(<any>event);
         expect(event.stopPropagation).toHaveBeenCalled();
         expect(component.isOpen).toBe(true);
     });
 
     it('should handle addon button click', () => {
         component.disabled = false;
-        component.addOnButtonClicked();
+        component._addOnButtonClicked();
         expect(component.isOpen).toBe(true);
     });
 
     it('should handle popover close', () => {
         component.isOpen = true;
-        component.popoverClosed();
+        component._popoverClosed();
         expect(component.isOpen).toBe(false);
     });
 
@@ -100,7 +145,7 @@ describe('TimePickerComponent', () => {
         component.displaySeconds = true;
         component.meridian = true;
         (<any>component)._calculateTimeOptions();
-        let retVal = component.getPlaceholder();
+        let retVal = component._getPlaceholder();
         expect(retVal).toBe('hh:mm:ss am/pm');
 
         component.displayHours = true;
@@ -108,7 +153,7 @@ describe('TimePickerComponent', () => {
         component.displaySeconds = true;
         component.meridian = false;
         (<any>component)._calculateTimeOptions();
-        retVal = component.getPlaceholder();
+        retVal = component._getPlaceholder();
         expect(retVal).toBe('hh:mm:ss');
 
         component.displayHours = true;
@@ -116,7 +161,7 @@ describe('TimePickerComponent', () => {
         component.displaySeconds = false;
         component.meridian = true;
         (<any>component)._calculateTimeOptions();
-        retVal = component.getPlaceholder();
+        retVal = component._getPlaceholder();
         expect(retVal).toBe('hh:mm am/pm');
 
         component.displayHours = true;
@@ -124,20 +169,20 @@ describe('TimePickerComponent', () => {
         component.displaySeconds = false;
         component.meridian = false;
         (<any>component)._calculateTimeOptions();
-        retVal = component.getPlaceholder();
+        retVal = component._getPlaceholder();
         expect(retVal).toBe('hh:mm');
     });
 
     it('should call onChange when time from time picker changes', () => {
         const time = new FdDate().setTime(12, 0, 0);
         spyOn(component, 'onChange');
-        component.timeFromTimeComponentChanged(time);
+        component._timeComponentValueChanged(time);
         expect(component.onChange).toHaveBeenCalledWith(time);
     });
 
     it('should hide message on open', () => {
         const hideSpy = spyOn((<any>component)._popoverFormMessage, 'hide');
-        component.handleIsOpenChange(true);
+        component._handleIsOpenChange(true);
         expect(hideSpy).toHaveBeenCalled();
     });
 
@@ -145,7 +190,7 @@ describe('TimePickerComponent', () => {
         component.isOpen = true;
 
         const showSpy = spyOn((<any>component)._popoverFormMessage, 'show');
-        component.handleIsOpenChange(false);
+        component._handleIsOpenChange(false);
         expect(showSpy).toHaveBeenCalled();
     });
 });
