@@ -79,8 +79,8 @@ describe('Button test suite:', function() {
     });
 
     describe('Verify playground', function() {
-
-        it('verify changing text in label', () => {
+        // skipped for prod
+        xit('verify changing text in label', () => {
             scrollIntoView(inputLabel);
             setValue(inputLabel, 'test');
             expect(getAttributeByName(playgroundButton, 'ng-reflect-label')).toEqual(testText);

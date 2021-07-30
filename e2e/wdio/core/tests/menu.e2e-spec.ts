@@ -14,7 +14,7 @@ import {
 } from '../../driver/wdio';
 import { emptyValuesArr } from '../fixtures/appData/menu-contents';
 
-describe('Menu tests', function() {
+describe('Menu test suite', function() {
     const menuPage = new MenuPo();
     const {
         menuButtonsArr,

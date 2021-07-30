@@ -127,7 +127,7 @@ describe('List test suite:', function() {
             checkElArrIsClickable(multiListItems);
         });
 
-        it('should check selection', () => {
+        xit('should check selection', () => {
             expect(getAttributeByName(multiList, selectionAttr)).toBe(multiSelect);
             expect(getText(multiToolbar)).toBe('0 : Items selected');
             click(multiCheckbox);
@@ -138,7 +138,7 @@ describe('List test suite:', function() {
     });
 
     describe('Single Selection examples:', function() {
-        it('should do basic checks', () => {
+        xit('should do basic checks', () => {
             checkElementText(singleListItems);
             checkElArrIsClickable(singleListItems);
         });
@@ -195,7 +195,7 @@ describe('List test suite:', function() {
     });
 
     describe('Load Data On Button Click examples:', function() {
-        it('should do basic checks', () => {
+        xit('should do basic checks', () => {
             checkElArrIsClickable(loadListItems);
             checkElementText(loadListItems);
             checkAttributeValueTrue(loadList, loadMoreAttr);
@@ -242,7 +242,7 @@ describe('List test suite:', function() {
     });
 
     describe('With No Data examples:', function() {
-        it('should do basic checks and check no data text', () => {
+        xit('should do basic checks and check no data text', () => {
             checkElArrIsClickable(noDataListItems);
             checkAttributeValueTrue(noDataCompactList, altCompactAttribute);
             checkElementTextValue(noDataListItems, noDataText);

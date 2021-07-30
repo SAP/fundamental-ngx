@@ -63,7 +63,7 @@ describe('Combobox component test suit', function() {
             }
         });
 
-        it('verify Hide Addon Button by typing name of option', () => {
+        xit('verify Hide Addon Button by typing name of option', () => {
             setValue(allInputFields, 'Ba', 5);
             click(dropdownOption);
             expect(getAttributeByName(allInputFields, 'ng-reflect-input-text', 5)).toBe(bananaTestText);
@@ -87,7 +87,7 @@ describe('Combobox component test suit', function() {
 
     describe('Check Custom Filter', function() {
 
-        it('verify Combobox as Search Field by choose option typing name of it', () => {
+        xit('verify Combobox as Search Field by choose option typing name of it', () => {
             scrollIntoView(allInputFields, 7);
             click(activeInputButton, 6);
             expect(isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
@@ -119,7 +119,7 @@ describe('Combobox component test suit', function() {
 
     describe('Check Combobox Mobile Mode', function() {
 
-        it('verify Combobox Mobile Mode by choose option in mobile window or typing name of it', () => {
+        xit('verify Combobox Mobile Mode by choose option in mobile window or typing name of it', () => {
             scrollIntoView(allInputFields, 9);
             click(allInputFields, 9);
             click(dropdownOption);
@@ -143,7 +143,7 @@ describe('Combobox component test suit', function() {
         });
     });
 
-    describe('Check Display Object Property', function() {
+    xdescribe('Check Display Object Property', function() {
 
         it('verify Display Object Property by choose option in dropdown or typing name of it', () => {
             scrollIntoView(allInputFields, 10);
@@ -158,7 +158,7 @@ describe('Combobox component test suit', function() {
         });
     });
 
-    describe('Check Open State Control', function() {
+    xdescribe('Check Open State Control', function() {
 
         it('verify Open State Control by choose option in dropdown or typing name of it', () => {
             scrollIntoView(allInputFields, 11);
@@ -180,7 +180,7 @@ describe('Combobox component test suit', function() {
         });
     });
 
-    describe('Check Observable Async Example', function() {
+    xdescribe('Check Observable Async Example', function() {
 
         it('verify Observable Async by choose option in dropdown or typing name of it', () => {
             scrollIntoView(allInputFields, 12);
@@ -195,7 +195,7 @@ describe('Combobox component test suit', function() {
         });
     });
 
-    describe('Check Custom Item Template', function() {
+    xdescribe('Check Custom Item Template', function() {
 
         it('verify Custom Item Template by choose option in dropdown or typing name of it', () => {
             scrollIntoView(allInputFields, 13);
@@ -212,7 +212,7 @@ describe('Combobox component test suit', function() {
         });
     });
 
-    describe('Check Combobox with Two Columns', function() {
+    xdescribe('Check Combobox with Two Columns', function() {
 
         it('verify Combobox with Two Columns by choose option in dropdown or typing name of it', () => {
             scrollIntoView(allInputFields, 14);
@@ -227,7 +227,7 @@ describe('Combobox component test suit', function() {
         });
     });
 
-    describe('Check Combobox with Groups', function() {
+    xdescribe('Check Combobox with Groups', function() {
 
         it('verify Combobox with Groups by choose option in dropdown or typing name of it', () => {
             scrollIntoView(allInputFields, 15);
@@ -242,7 +242,7 @@ describe('Combobox component test suit', function() {
         });
     });
 
-    describe('Check Custom Height Example', function() {
+    xdescribe('Check Custom Height Example', function() {
 
         it('verify Custom Height Example by choose option in dropdown or typing name of it', () => {
             scrollIntoView(allInputFields, 16);
@@ -257,7 +257,7 @@ describe('Combobox component test suit', function() {
         });
     });
 
-    describe('Check Return results including search term', function() {
+    xdescribe('Check Return results including search term', function() {
 
         it('verify Return results including search term by choose option in dropdown or typing name of it', () => {
             scrollIntoView(allInputFields, 17);
@@ -304,7 +304,7 @@ describe('Combobox component test suit', function() {
         });
     });
 
-    fdescribe('Should check visual regression', function() {
+    describe('Should check visual regression', function() {
 
         it('should check visual regression for all examples', () => {
             comboboxPage.saveExampleBaselineScreenshot();

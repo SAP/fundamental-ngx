@@ -27,8 +27,8 @@ describe('Verify Panel', () => {
     beforeEach(() => {
         panelPage.open();
     }, 1);
-
-    it('should have fixed header', () => {
+    // skipped for prod
+    xit('should have fixed header', () => {
         waitForPresent(fixedPanelDescription);
         // Checks that fixed panel has no expand button
         expect(waitForPresent(fixedPanelDescription)).toBe(true);

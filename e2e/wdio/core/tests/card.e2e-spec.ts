@@ -44,7 +44,7 @@ describe('Card test suite:', function() {
         });
     });
 
-    describe('Compact examples:', function() {
+    xdescribe('Compact examples:', function() {
         it('should check its compact and do basic checks', () => {
             checkAttributeValueTrue(compactCardAttr, compactAttr);
             checkElementText(compactCardHeader);
@@ -54,7 +54,7 @@ describe('Card test suite:', function() {
         });
     });
 
-    describe('Card loader examples:', function() {
+    xdescribe('Card loader examples:', function() {
         it('should check loading icon and attributes', () => {
             checkAttributeValueTrue(loaderCardAttr, loaderAttr);
             expect(isElementDisplayed(loaderIcon)).toBe(true);
