@@ -33,6 +33,7 @@ import { PopoverControlComponent } from './popover-control/popover-control.compo
 import { POPOVER_COMPONENT } from './popover.interface';
 import { PopoverMobileComponent } from './popover-mobile/popover-mobile.component';
 import { PopoverChildContent } from './popover-child-content.interface';
+import { SELECT_CLASS_NAMES } from '../select/constants';
 
 let cdkPopoverUniqueId = 0;
 
@@ -178,7 +179,8 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     onKeyDown(event: KeyboardEvent): void {
         if (
             this.popoverControl.elRef.nativeElement.children[0] === document.activeElement &&
-            document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA'
+            document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA' &&
+            !document.activeElement.classList.contains(SELECT_CLASS_NAMES.selectControl)
         ) {
             if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
                 // prevent page scrolling on Space keydown
