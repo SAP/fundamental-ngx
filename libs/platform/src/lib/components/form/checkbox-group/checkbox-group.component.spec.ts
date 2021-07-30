@@ -1,13 +1,14 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChildren, QueryList } from '@angular/core';
 import { FormGroup, FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+
 import { FormModule } from '@fundamental-ngx/core';
 import { FdpFormGroupModule } from './../form-group/fdp-form.module';
 import { CheckboxGroupComponent } from './checkbox-group.component';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { SelectItem } from '../../../domain/data-model';
 import { PlatformCheckboxModule } from '../checkbox/checkbox.module';
-import { By } from '@angular/platform-browser';
 
 @Component({
     selector: 'fdp-cbg-reactive-test',
@@ -98,7 +99,7 @@ describe('CheckboxGroup component Reactive Form Test', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule, ReactiveFormsModule],
-            declarations: [TestReactiveCheckboxGroupComponnet, CheckboxGroupComponent, CheckboxComponent]
+            declarations: [TestReactiveCheckboxGroupComponnet, CheckboxGroupComponent]
         }).compileComponents();
     }));
 
@@ -350,7 +351,7 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule],
-            declarations: [TestTemplateDrivenCheckboxGroupComponnet, CheckboxGroupComponent, CheckboxComponent]
+            declarations: [TestTemplateDrivenCheckboxGroupComponnet, CheckboxGroupComponent]
         }).compileComponents();
     }));
 
@@ -616,7 +617,7 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule, ReactiveFormsModule],
-            declarations: [TestReactiveCheckboxGroupWithData, CheckboxGroupComponent, CheckboxComponent]
+            declarations: [TestReactiveCheckboxGroupWithData, CheckboxGroupComponent]
         }).compileComponents();
     }));
 

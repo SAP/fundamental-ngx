@@ -65,7 +65,7 @@ describe('DynamicPageComponent default values', () => {
             dynamicPageServiceSpy = jasmine.createSpyObj('DynamicPageService', ['expandHeader', 'collapseHeader']);
 
             TestBed.configureTestingModule({
-                imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule],
+                imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ButtonModule],
                 declarations: [TestComponent],
                 providers: [{ provide: DynamicPageService, useValue: dynamicPageServiceSpy }]
             }).compileComponents();

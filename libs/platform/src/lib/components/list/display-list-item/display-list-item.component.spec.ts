@@ -3,7 +3,6 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { ListComponent } from '../list.component';
 import { PlatformListModule } from '../list.module';
 import { DisplayListItemComponent } from './display-list-item.component';
 import { DisplayListItemModule } from './display-list-item.module';
@@ -43,7 +42,7 @@ describe('DisplayListItemComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
-            declarations: [DisplayListItemComponentTest, DisplayListItemComponent, ListComponent]
+            declarations: [DisplayListItemComponentTest]
         })
             .compileComponents();
     }));
@@ -132,8 +131,7 @@ describe('DisplayListItemComponent functions', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
-            declarations: [DisplayListItemComponent, ListComponent]
+            imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule]
         })
             .compileComponents();
     }));
@@ -177,7 +175,7 @@ describe('DisplayListItemComponent Imperative', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
-            declarations: [TestComponentContent, DisplayListItemComponent]
+            declarations: [TestComponentContent]
         }).compileComponents();
     }));
 
