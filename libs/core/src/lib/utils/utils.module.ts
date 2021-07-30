@@ -5,6 +5,7 @@ import { RtlService } from './services/rtl.service';
 import { ThemesService } from './services/themes.service';
 import { KeyboardSupportService } from './services/keyboard-support/keyboard-support.service';
 import { FocusTrapService } from './services/focus-trap.service';
+
 @NgModule({
     imports: [
         CommonModule,

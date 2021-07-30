@@ -125,7 +125,7 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
         @Optional() private _dialogRef: DialogRef,
         @Optional() router: Router,
         @Optional() rtlService: RtlService,
-        @Optional() focusTrapService: FocusTrapService,
+        focusTrapService: FocusTrapService,
         changeDetectorRef: ChangeDetectorRef,
         elementRef: ElementRef
     ) {

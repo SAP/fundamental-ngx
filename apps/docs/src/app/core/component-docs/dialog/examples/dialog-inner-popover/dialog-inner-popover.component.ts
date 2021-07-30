@@ -91,7 +91,7 @@ export class DialogInnerPopoverComponent {
                         label="Interesting"
                         fdType="emphasized"
                         [compact]="true"
-                        (click)="this.dialogRef.close('Continue')">
+                        (click)="this.dialogRef.close('Interesting')">
                 </fd-button-bar>
                 <fd-button-bar
                         label="Cancel"

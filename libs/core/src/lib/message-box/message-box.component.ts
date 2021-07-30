@@ -89,7 +89,7 @@ export class MessageBoxComponent extends DialogBase implements OnInit, OnChanges
         @Optional() private _messageBoxRef: MessageBoxRef,
         @Optional() router: Router,
         @Optional() rtlService: RtlService,
-        @Optional() focusTrapService: FocusTrapService,
+        focusTrapService: FocusTrapService,
         changeDetectorRef: ChangeDetectorRef,
         elementRef: ElementRef
     ) {

@@ -19,7 +19,6 @@ export class FocusTrapService {
      */
     createFocusTrap(element: string | HTMLElement | SVGElement | (string | HTMLElement | SVGElement)[],
                     userOptions?: Options): string {
-
         const uid = uuidv4();
 
         const trap = createFocusTrap(element, userOptions);
@@ -36,9 +35,13 @@ export class FocusTrapService {
      * @param id Unique ID of focus trap instance
      */
     activateFocusTrap(id: string): void {
-        const trap = this._focusTrapInstances.get(id);
+        if (!this._focusTrapExists(id)) {
+            return;
+        }
 
-        trap?.activate();
+        const trap = this.getFocusTrapInstance(id);
+
+        trap.activate();
     }
 
     /**
@@ -46,9 +49,13 @@ export class FocusTrapService {
      * @param id Unique ID of focus trap instance
      */
     deactivateFocusTrap(id: string): void {
-        const trap = this._focusTrapInstances.get(id);
+        if (!this._focusTrapExists(id)) {
+            return;
+        }
 
-        trap?.deactivate();
+        const trap = this.getFocusTrapInstance(id);
+
+        trap.deactivate();
 
         this._focusTrapInstances.delete(id);
     }
@@ -57,7 +64,6 @@ export class FocusTrapService {
      * Pauses current focus trap.
      */
     pauseCurrentFocusTrap(): void {
-
         if (this._focusTrapInstances.size === 0) {
             return;
         }
@@ -71,7 +77,6 @@ export class FocusTrapService {
      * Unpauses current focus trap.
      */
     unpauseCurrentFocusTrap(): void {
-
         if (this._focusTrapInstances.size === 0) {
             return;
         }
@@ -81,8 +86,25 @@ export class FocusTrapService {
         trapItem?.unpause();
     }
 
+    /**
+     * Get focus trap instance by ID.
+     * @param id ID of the instance.
+     * @returns Focus trap instance if exists.
+     */
+    getFocusTrapInstance(id: string): FocusTrap | undefined {
+        return this._focusTrapInstances.get(id);
+    }
+
     /** @hidden */
-    private _getLastTrapedItem(): FocusTrap {
-        return Array.from(this._focusTrapInstances).pop()[1];
+    private _getLastTrapedItem(): FocusTrap | undefined {
+
+        const lastItem = Array.from(this._focusTrapInstances).pop();
+
+        return lastItem ? lastItem[1] : undefined;
+    }
+
+    /** @hidden */
+    private _focusTrapExists(id: string): boolean {
+        return this._focusTrapInstances.has(id);
     }
 }
