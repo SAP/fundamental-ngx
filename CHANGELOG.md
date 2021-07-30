@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.154](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.153...v0.31.0-rc.154) (2021-07-30)
+
+
+### Bug Fixes
+
+* **platform:** combobox in mobile mode ([#6115](https://github.com/SAP/fundamental-ngx/issues/6115)) ([7e35917](https://github.com/SAP/fundamental-ngx/commit/7e35917a6bb1a21b1bb96fc5de6c9981001dd41d))
+
 ## [0.31.0-rc.153](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.152...v0.31.0-rc.153) (2021-07-30)
 
 
