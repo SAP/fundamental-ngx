@@ -66,7 +66,7 @@ describe('Info Label component test suite', () => {
         }
     });
 
-    it('should check info label with text and icon', () => {
+    xit('should check info label with text and icon', () => {
         const labelsWithIconsArr = elementArray(labelsWithTextAndIconArr);
         const labelIconsArr = elementArray(labelsIconArr);
 
@@ -96,7 +96,7 @@ describe('Info Label component test suite', () => {
         }
     });
 
-    it('should check info label with a number or an icon', () => {
+    xit('should check info label with a number or an icon', () => {
         if (browserIsSafari()) {
 
             expect(getText(labelsWithNumberOrIconArr, 1)).toEqual(safariLargeNumberLabel);

@@ -4,7 +4,7 @@ import {
     refreshPage, scrollIntoView, click, getElementArrayLength, isElementClickable, getAttributeByName
 } from '../../driver/wdio';
 
-describe('Menu tests', function() {
+describe('List byline test suite', function() {
     const listBylinePage = new ListBylinePo();
     const { selectionExample, buttonExample, button, checkbox, listItem, radioButton, radioButtonInput } = listBylinePage;
 

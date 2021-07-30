@@ -41,9 +41,8 @@
         [attr.aria-disabled]="disabled"
         [attr.aria-readonly]="readonly"
         [glyphAriaLabel]="ariaLabel"
-        (click)="mobile && onPrimaryButtonClick(false)"
+        (click)="mobile && openInMobileMode()"
     >
-        <ng-container></ng-container>
         <input
             #searchInputElement
             fdp-auto-complete

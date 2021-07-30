@@ -70,7 +70,7 @@ describe('Combobox test suite', function() {
         }
     });
 
-    it('Verify each input while typing', () => {
+    xit('Verify each input while typing', () => {
         if (browserIsIE()) {
             console.log('skip IE');
             return;
@@ -84,7 +84,7 @@ describe('Combobox test suite', function() {
         }
     });
 
-    it('Verify dropdown collapsed after selecting an option', () => {
+    xit('Verify dropdown collapsed after selecting an option', () => {
         if (browserIsIE()) {
             console.log('Skip for IE');
             return;
@@ -96,7 +96,7 @@ describe('Combobox test suite', function() {
         }
     });
 
-    it('Verify selected option is highlighted', () => {
+    xit('Verify selected option is highlighted', () => {
         if (browserIsIE()) {
             console.log('Skip for IE');
             return;
@@ -161,7 +161,7 @@ describe('Combobox test suite', function() {
         }
     });
 
-    it('Verify combobox with two columns while typing', () => {
+    xit('Verify combobox with two columns while typing', () => {
         scrollIntoView(comboboxTwoColumns);
         setValue(comboboxTwoColumns, 'Frui');
         comboBoxPage.selectOption('columns', 'Banana');

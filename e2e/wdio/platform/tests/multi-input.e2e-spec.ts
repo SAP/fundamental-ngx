@@ -15,7 +15,7 @@ import {
 import { placeholderValue } from '../fixtures/appData/file-uploader.page-content';
 import { MultiInputPo } from '../pages/multi-input.po';
 
-describe('Multi input test suite', function() {
+xdescribe('Multi input test suite', function() {
     const multiInputPage: MultiInputPo = new MultiInputPo();
     const {
         mobileMainInput, expandedDropdown, activeDropdownButtons, allDropdownButtons, disabledDropdownButtons,

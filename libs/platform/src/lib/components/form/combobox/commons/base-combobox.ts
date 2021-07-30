@@ -440,15 +440,34 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
      * @hidden
      */
     onPrimaryButtonClick(isOpen: boolean): void {
+        // if it's mobile mode ignore this click
+        if (this.mobile) {
+            return;
+        }
+
         if (!isOpen) {
             this.searchTermChanged('');
         }
 
         this.showList(!isOpen);
 
-        if (this.isOpen) {	
+        if (this.isOpen && this.listComponent) {	
             this.listComponent.setItemActive(0);	
         }
+    }
+
+    /**
+     * Handle click on input group in mobile mode
+     * @hidden
+     */
+    openInMobileMode(): void {
+        // if it's already opened just ignore this click
+        // if it's not mobile mode just ignore this click
+        if (this.isOpen || !this.mobile) {
+            return;
+        }
+        // otherwise show options
+        this.showList(true);
     }
 
     /**

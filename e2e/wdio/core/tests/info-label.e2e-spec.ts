@@ -1,6 +1,6 @@
 import { InfoLabelPo } from '../pages/info-label.po';
 
-describe('Info Label component test suite', () => {
+xdescribe('Info Label component test suite', () => {
     const infoLabelPage = new InfoLabelPo();
 
     beforeEach(() => {

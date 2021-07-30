@@ -18,6 +18,7 @@
     "esModuleInterop": true,
     "paths": {
       "@fundamental-ngx/platform": ["libs/platform/src/index.ts"],
+      "@fundamental-ngx/moment-adapter": ["libs/moment-adapter/src/index.ts"],
       "@fundamental-ngx/core": ["libs/core/src/lib/index.ts"],
       "@fundamental-ngx/core/action-bar": ["libs/core/src/lib/action-bar/index.ts"],
       "@fundamental-ngx/core/action-sheet": ["libs/core/src/lib/action-sheet/index.ts"],
