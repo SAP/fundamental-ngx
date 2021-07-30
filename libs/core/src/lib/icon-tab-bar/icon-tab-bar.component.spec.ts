@@ -82,16 +82,16 @@ describe('IconTabBarComponent', () => {
         fixture.detectChanges();
     });
     it('should create tabs', () => {
-        const infoMessageEl: HTMLElement = fixture.debugElement.nativeElement;
-        const tabs = infoMessageEl.querySelectorAll('.fd-icon-tab-bar__item');
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const tabs = hostEl.querySelectorAll('.fd-icon-tab-bar__item');
         expect(tabs.length).toBeGreaterThan(0);
     });
 
     it('should create tabs with subtabs', () => {
         component.items = generateTestItems(6, true);
         fixture.detectChanges();
-        const infoMessageEl: HTMLElement = fixture.debugElement.nativeElement;
-        const subItemBtn = infoMessageEl.querySelector('.fd-icon-tab-bar__arrow');
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const subItemBtn = hostEl.querySelector('.fd-icon-tab-bar__arrow');
         expect(subItemBtn).toBeTruthy();
     });
 
@@ -99,23 +99,23 @@ describe('IconTabBarComponent', () => {
         component.iconTabType = 'filter';
         component.showTabAll = true;
         fixture.detectChanges();
-        const infoMessageEl: HTMLElement = fixture.debugElement.nativeElement;
-        const tabAllEl = infoMessageEl.querySelector('.fd-icon-tab-bar__container--filter');
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const tabAllEl = hostEl.querySelector('.fd-icon-tab-bar__container--filter');
         expect(tabAllEl).toBeTruthy();
     });
 
     it('should reordering feature available', () => {
         component.enableTabReordering = true;
         fixture.detectChanges();
-        const infoMessageEl: HTMLElement = fixture.debugElement.nativeElement;
-        const tabs = infoMessageEl.querySelectorAll<HTMLElement>('.fd-icon-tab-bar__item');
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const tabs = hostEl.querySelectorAll<HTMLElement>('.fd-icon-tab-bar__item');
         const draggableItem = tabs[0];
         const target = tabs[1];
         const targetCoords = getGetCenterCoordsOfElement(target);
         const initialTabsLength = tabs.length;
 
         emulateDnD(draggableItem, targetCoords);
-        const updateTabsList = infoMessageEl.querySelectorAll<HTMLElement>('.fd-icon-tab-bar__item');
+        const updateTabsList = hostEl.querySelectorAll<HTMLElement>('.fd-icon-tab-bar__item');
 
         expect(updateTabsList.length).toBeLessThan(initialTabsLength);
     });
@@ -125,18 +125,18 @@ describe('IconTabBarComponent', () => {
         component.items = [...component.items];
         fixture.detectChanges();
 
-        const infoMessageEl: HTMLElement = fixture.debugElement.nativeElement;
-        const tabsWithBadge = infoMessageEl.querySelector<HTMLElement>('.fd-icon-tab-bar__badge');
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const tabsWithBadge = hostEl.querySelector<HTMLElement>('.fd-icon-tab-bar__badge');
         tabsWithBadge.click();
         fixture.detectChanges();
-        const emptyResult = infoMessageEl.querySelector<HTMLElement>('.fd-icon-tab-bar__badge');
+        const emptyResult = hostEl.querySelector<HTMLElement>('.fd-icon-tab-bar__badge');
 
         expect(emptyResult).not.toBeTruthy();
     });
 
     it('should emit selected event.', () => {
-        const infoMessageEl: HTMLElement = fixture.debugElement.nativeElement;
-        const someTab = infoMessageEl.querySelector<HTMLElement>('.fd-icon-tab-bar__tab');
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const someTab = hostEl.querySelector<HTMLElement>('.fd-icon-tab-bar__tab');
 
         spyOn(component, 'selected');
         someTab.click();
@@ -149,8 +149,8 @@ describe('IconTabBarComponent', () => {
         component.enableTabReordering = true;
         fixture.detectChanges();
 
-        const infoMessageEl: HTMLElement = fixture.debugElement.nativeElement;
-        const tabs = infoMessageEl.querySelectorAll<HTMLElement>('.fd-icon-tab-bar__item');
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const tabs = hostEl.querySelectorAll<HTMLElement>('.fd-icon-tab-bar__item');
         const draggableItem = tabs[0];
         const target = tabs[1];
         const targetCoords = getGetCenterCoordsOfElement(target);

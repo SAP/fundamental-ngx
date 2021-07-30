@@ -48,7 +48,7 @@
     </fd-popover>
 </ng-container>
 
-<ng-container *ngIf="!isExtraItemsMode">
+<ng-container *ngIf="!isExtraItemsMode && parentTab">
     <fd-popover [focusAutoCapture]="true" [focusTrapped]="true" #popover>
         <fd-popover-control>
             <a

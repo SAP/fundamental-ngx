@@ -30,16 +30,19 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
         this._currentStepIndex = selectedItem.index;
         let amountOfPreviousSteps;
         let amountOfNextSteps;
-        let isLeftStrategy: boolean;
+        // We have to cases (strategy) for overflow extra tabs.
+        // 1) When user click on step inside previous steps popover
+        // 2) When user click on step inside next steps popover
+        let isPreviousStepsStrategy: boolean;
         if (this._currentStepIndex > this._lastVisibleTabIndex) {
             amountOfNextSteps = this._nextSteps.length - (this._currentStepIndex - this._lastVisibleTabIndex);
             this._showRightBtn = amountOfNextSteps > 0;
             this._showLeftBtn = true;
-            isLeftStrategy = false;
+            isPreviousStepsStrategy = false;
         } else {
             amountOfPreviousSteps = this._prevSteps.length - (this._firstVisibleTabIndex - this._currentStepIndex);
             this._showRightBtn = true;
-            isLeftStrategy = true;
+            isPreviousStepsStrategy = true;
             this._showLeftBtn = amountOfPreviousSteps > 0;
         }
         this._selectItem(selectedItem);
@@ -50,7 +53,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
             .subscribe(_ => {
                 if (this.overflowDirective) {
                     const extra = this.overflowDirective.getAmountOfExtraItems();
-                    isLeftStrategy
+                    isPreviousStepsStrategy
                         ? this.recalculateItemsByPrevArr(extra, amountOfPreviousSteps)
                         : this.recalculateItemsByNextArr(extra, amountOfNextSteps);
                     this.extraBtnDirective?.calculatePosition();
@@ -145,7 +148,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
             ++nextIndex;
             --amountOfNextSteps;
         }
-        // Добавляю +1 для левой кнопки
+        // Add +1 for left btn
         this._anchorIndex = this._prevSteps.length
             ? this._prevSteps.length + visibleAmountOfItems
             : this._prevSteps.length + visibleAmountOfItems - 1;

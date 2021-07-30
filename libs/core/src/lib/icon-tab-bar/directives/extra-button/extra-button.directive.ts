@@ -32,7 +32,6 @@ export class ExtraButtonDirective implements AfterViewInit, OnDestroy {
             )
             .subscribe((_ =>  this.calculatePosition()));
 
-        // setTimeout(() => this.calculatePosition());
         this.calculatePosition();
     }
 

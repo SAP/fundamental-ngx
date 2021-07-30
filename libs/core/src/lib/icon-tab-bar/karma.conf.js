@@ -10,7 +10,7 @@ module.exports = function (config) {
         ...baseConfig,
         coverageIstanbulReporter: {
             ...baseConfig.coverageIstanbulReporter,
-            dir: join(__dirname, '../../../../../coverage/libs/core/icon-tabbar-layout')
+            dir: join(__dirname, '../../../../../coverage/libs/core/icon-tab-bar-layout')
         },
         browsers: ['ChromeHeadless']
     });

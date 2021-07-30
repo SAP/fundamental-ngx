@@ -12,7 +12,7 @@ export class OverflowItemsDirective implements AfterViewInit, OnDestroy {
     itemSelector: string;
 
     @Input()
-    overflowOffset: number;
+    overflowOffset = 0;
 
     @Input()
     isRtl: boolean;

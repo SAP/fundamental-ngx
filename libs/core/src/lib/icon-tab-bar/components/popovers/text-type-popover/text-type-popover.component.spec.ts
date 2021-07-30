@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TextTypePopoverComponent } from './text-type-popover.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('TextTypePopoverComponent', () => {
   let component: TextTypePopoverComponent;
@@ -8,7 +9,8 @@ describe('TextTypePopoverComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TextTypePopoverComponent ]
+      declarations: [ TextTypePopoverComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   });

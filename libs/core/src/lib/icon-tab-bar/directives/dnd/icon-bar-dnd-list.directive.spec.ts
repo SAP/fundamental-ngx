@@ -1,35 +1,41 @@
 import { IconBarDndListDirective } from './icon-bar-dnd-list.directive';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IconTabBarModule } from '../../icon-tab-bar.module';
+import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive';
 
 @Component({
-  template: ` <div #directiveElement fdIconBarDndList>fdIconBarDndList Test</div> `
+    template: `
+        <div fdIconBarDndContainer>
+            <div fdIconBarDndList>IconBarDndListDirective Test</div>
+        </div>
+    `
 })
 class TestComponent {
-  @ViewChild(IconBarDndListDirective)
-  directive: IconBarDndListDirective;
+    @ViewChild(IconBarDndListDirective)
+    directive: IconBarDndListDirective;
 }
 
-describe('fdIconBarDndList', () => {
-  let component: TestComponent;
-  let fixture: ComponentFixture<TestComponent>;
+describe('IconBarDndListDirective', () => {
+    let component: TestComponent;
+    let fixture: ComponentFixture<TestComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [TestComponent],
-      imports: [IconTabBarModule]
-    }).compileComponents();
-  }));
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                TestComponent,
+                IconBarDndListDirective,
+                IconBarDndContainerDirective
+            ]
+        }).compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(TestComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    fixture.detectChanges();
-    expect(component.directive).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component.directive).toBeTruthy();
+    });
 });

@@ -32,7 +32,7 @@ export class IconBarDndListDirective implements AfterViewInit, OnDestroy {
     constructor(
         public elementRef: ElementRef,
         private _dragDrop: DragDrop,
-        @Optional() private _dndContainer: IconBarDndContainerDirective,
+        private _dndContainer: IconBarDndContainerDirective,
     ) {
     }
 

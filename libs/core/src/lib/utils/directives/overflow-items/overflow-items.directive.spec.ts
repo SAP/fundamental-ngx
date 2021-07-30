@@ -1,67 +1,78 @@
 import { OverflowItemsDirective } from './overflow-items.directive';
-import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { whenStable } from '@fundamental-ngx/core/tests';
 
 const LIST_ITEM_WIDTH = 100;
 const LIST_WIDTH = 500;
 
 @Component({
+  // tslint:disable-next-line:component-selector
+  selector: 'test-component',
   template: `
-    <div class="list" fdOverflowItems itemSelector="[data-overflowItem]" (overflowChanged)="onOverflowed($event)">
-      <li *ngFor="let item of items" data-overflowItem class="list-item">{{item}}</li>
+    <div #dirRoot class="list" fdOverflowItems itemSelector="[data-overflowItem]" (overflowChanged)="onOverflowed($event)">
+      <div *ngFor="let item of items" data-overflowItem class="list-item">{{item}}</div>
     </div>
   `,
   styles: [`
     .list {
-      padding: 0;
-      margin: 0;
+      position: relative;
       display: flex;
-      list-style: none;
       overflow: hidden;
-      /*width: ${LIST_WIDTH}px;*/
-      width: 500px;
-      height: 50px;
+      width: ${LIST_WIDTH}px;
     }
     .list-item {
       display: block;
       box-sizing: border-box;
-      /*width: ${LIST_ITEM_WIDTH}px;*/
-      width: 100px!important;
-      height: 40px!important;
+      min-width: ${LIST_ITEM_WIDTH}px;
+      height: 40px;
     }
   `],
 })
 class TestComponent {
 
-  @ViewChild(OverflowItemsDirective)
-  dir: OverflowItemsDirective;
+  @Input()
+  items: any[];
+
+  @Output()
+  selected = new EventEmitter();
+
+  onOverflowed(extraItems: number): void {
+    this.selected.emit(extraItems);
+  }
+}
+
+@Component({
+  template: `
+    <test-component [items]="items" (selected)="onOverflowed($event)"></test-component>
+  `,
+})
+class WrapperComponent {
 
   items: any[] = Array(100).fill(0);
 
   currentExtraItems = 0;
 
-  counter = 0;
-
   onOverflowed(extraItems: number): void {
+    debugger;
     this.currentExtraItems = extraItems;
   }
 }
 
 describe('OverflowItemsDirective', () => {
-  let component: TestComponent;
-  let fixture: ComponentFixture<TestComponent>;
+  let component: WrapperComponent;
+  let fixture: ComponentFixture<WrapperComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [TestComponent, OverflowItemsDirective],
+      declarations: [WrapperComponent, TestComponent, OverflowItemsDirective],
     }).compileComponents();
   }));
 
   beforeEach(async () => {
-    fixture = TestBed.createComponent(TestComponent);
+    fixture = TestBed.createComponent(WrapperComponent);
     component = fixture.componentInstance;
-    await whenStable(fixture);
+    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -69,13 +80,16 @@ describe('OverflowItemsDirective', () => {
   });
 
   it('should calculated extra items', () => {
-    fixture.detectChanges();
     expect(component.currentExtraItems).not.toBe(0);
   });
 
-  it('should recalculate on resize page', async () => {
+  it('should recalculate on resize page',  async () => {
     const initialStateOfExtraItems = component.currentExtraItems;
+
+    component.items.push(1231);
     window.dispatchEvent(new Event('resize'));
+    fixture.detectChanges();
+
     await whenStable(fixture);
     const stateOfExtraItemsAfterResize = component.currentExtraItems;
     expect(initialStateOfExtraItems).not.toBe(stateOfExtraItemsAfterResize);

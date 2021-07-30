@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { IconTabBarPopoverComponent } from './icon-tab-bar-popover.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('IconTabBarPopoverComponent', () => {
   let component: IconTabBarPopoverComponent;
@@ -8,7 +9,8 @@ describe('IconTabBarPopoverComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IconTabBarPopoverComponent ]
+      declarations: [ IconTabBarPopoverComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   });

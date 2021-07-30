@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { IconTabBarIconTypeComponent } from './icon-tab-bar-icon-type.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { generateTestItems } from '../../tests-helper';
 
 describe('IconTabBarIconTypeComponent', () => {
   let component: IconTabBarIconTypeComponent;
@@ -8,7 +10,8 @@ describe('IconTabBarIconTypeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IconTabBarIconTypeComponent ]
+      declarations: [ IconTabBarIconTypeComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   });
@@ -16,6 +19,7 @@ describe('IconTabBarIconTypeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(IconTabBarIconTypeComponent);
     component = fixture.componentInstance;
+    component.tabsConfig = generateTestItems(10);
     fixture.detectChanges();
   });
 

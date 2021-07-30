@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { IconTabBarFilterTypeComponent } from './icon-tab-bar-filter-type.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { generateTestItems } from '../../tests-helper';
 
 describe('IconTabBarFilterTypeComponent', () => {
   let component: IconTabBarFilterTypeComponent;
@@ -8,7 +10,8 @@ describe('IconTabBarFilterTypeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IconTabBarFilterTypeComponent ]
+      declarations: [ IconTabBarFilterTypeComponent ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   });
@@ -16,6 +19,7 @@ describe('IconTabBarFilterTypeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(IconTabBarFilterTypeComponent);
     component = fixture.componentInstance;
+    component.tabsConfig = generateTestItems(10);
     fixture.detectChanges();
   });
 
