@@ -19,7 +19,7 @@ describe('Radio button component test', function() {
         refreshPage();
     }, 2);
 
-    it('verify disable radio buttons', () => {
+    xit('verify disable radio buttons', () => {
         const disableRadioButtonsLength = getElementArrayLength(disableRadioButton);
         for (let i = 0; i < disableRadioButtonsLength; i++) {
             if (i <= 5) {
@@ -33,7 +33,7 @@ describe('Radio button component test', function() {
         }
     });
 
-    it('verify that active radio buttons work correctly', () => {
+    xit('verify that active radio buttons work correctly', () => {
         const activeRadioButtonsLength = getElementArrayLength(activeInput);
         for (let i = 0; i < activeRadioButtonsLength; i++) {
             scrollIntoView(activeInput, i);

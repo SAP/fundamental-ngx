@@ -135,7 +135,7 @@ describe('Step input test suite', function() {
         }
     });
 
-    it('Verify when the maximum/minimum values are reached, the Increase/Decrease button and up/down keyboard navigation are disabled.', () => {
+    xit('Verify when the maximum/minimum values are reached, the Increase/Decrease button and up/down keyboard navigation are disabled.', () => {
         scrollIntoView(minMaxButtonIncrement);
         for (let i = 0; i < 20; i++) {
             click(minMaxButtonIncrement);

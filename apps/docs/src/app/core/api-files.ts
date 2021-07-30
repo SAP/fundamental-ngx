@@ -64,14 +64,24 @@ export const API_FILES = {
         'CalendarMonthViewComponent',
         'CalendarYearViewComponent',
         'CalendarHeaderViewComponent',
-        'CalendarI18nLabels'
+        'CalendarI18nLabels',
+        'FdDate',
+        'FdDatetimeAdapter',
     ],
     carousel: ['CarouselComponent', 'CarouselItemComponent', 'CarouselService'],
     combobox: ['ComboboxComponent'],
     checkbox: ['CheckboxComponent'],
     contentDensity: [],
-    datePicker: ['DatePickerComponent'],
-    datetimePicker: ['DatetimePickerComponent'],
+    datePicker: [
+        'DatePickerComponent',
+        'FdDate',
+        'FdDatetimeAdapter',
+    ],
+    datetimePicker: [
+        'DatetimePickerComponent',
+        'FdDate',
+        'FdDatetimeAdapter',
+    ],
     dynamicPage: [
         'DynamicPageComponent',
         'DynamicPageSubheaderComponent',
@@ -157,6 +167,7 @@ export const API_FILES = {
     ],
     messageStrip: ['MessageStripComponent'],
     messageToast: ['MessageToastComponent', 'MessageToastConfig', 'MessageToastService', 'MessageToastRef'],
+    momentDatetimeAdapter: ['MomentDatetimeAdapter'],
     dialog: [
         'DialogService',
         'DialogContainerComponent',
@@ -329,7 +340,11 @@ export const API_FILES = {
         'NumericContentScaleTextDirective'
     ],
     time: ['TimeComponent', 'TimeI18n', 'TimeColumnComponent'],
-    timePicker: ['TimePickerComponent'],
+    timePicker: [
+        'TimePickerComponent',
+        'FdDate',
+        'FdDatetimeAdapter',
+    ],
     title: ['TitleComponent'],
     switch: ['SwitchComponent'],
     stepInput: ['StepInputComponent'],

@@ -23,6 +23,8 @@ export class DocumentationBaseComponent implements OnInit {
 
     utilities = [];
 
+    adapters = [];
+
     sections: SectionInterface[] = [];
 
     smallScreen: boolean = window.innerWidth < SMALL_SCREEN_BREAKPOINT;

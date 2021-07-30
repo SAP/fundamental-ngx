@@ -1,6 +1,13 @@
 import { isValidByParams, toIso8601 } from './fd-date.utils';
 import { INVALID_DATE_ERROR } from '@fundamental-ngx/core/utils';
 
+/**
+ * FdDate class is used to represent date and time.
+ * 
+ * It's a simplified analog of native Date instance.
+ * It gives some convenience methods to work with date or time data.
+ * 
+ */
 export class FdDate {
     /**
      * The year of the date.

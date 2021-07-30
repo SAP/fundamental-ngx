@@ -64,7 +64,7 @@ describe('Datetime picker suite', function() {
         }
     });
 
-    it('Verify From the day view on the calendar, clicking or tapping a year', () => {
+    xit('Verify From the day view on the calendar, clicking or tapping a year', () => {
         sendKeys(['Escape']);
         scrollIntoView(bottomPage);
         click(activeDateTimePickerButton, 1);
@@ -122,7 +122,7 @@ describe('Datetime picker suite', function() {
             .toEqual(date);
     });
 
-    it('verify selected date is showing in blue background', () => {
+    xit('verify selected date is showing in blue background', () => {
         click(activeDateTimePickerButton, 1);
         click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
         click(okButton);
@@ -131,7 +131,7 @@ describe('Datetime picker suite', function() {
             .toContain(getCSSPropertyByName(dateTimePickerPage.dayInCalendarButtonByValue('1'), 'background-color').value);
     });
 
-    it('Verify When the user selects cancel the action is aborted and the input field remains unchanged.', () => {
+    xit('Verify When the user selects cancel the action is aborted and the input field remains unchanged.', () => {
         click(activeDateTimePickerButton);
         click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
         selectHoursAndMinutes();
@@ -156,7 +156,7 @@ describe('Datetime picker suite', function() {
         expect(getValue(compactDateTimePickerInput)).toBe(compactDate);
     });
 
-    it('Verify date time picker with disabled functions', () => {
+    xit('Verify date time picker with disabled functions', () => {
         const activeButtonsArr = elementArray(activeDateTimePickerButton);
         scrollIntoView(activeDateTimePickerButton, activeButtonsArr.length - 1);
         click(activeDateTimePickerButton, activeButtonsArr.length - 1);

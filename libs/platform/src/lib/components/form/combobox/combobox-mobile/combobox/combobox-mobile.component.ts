@@ -107,5 +107,12 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
                 container: this._elementRef.nativeElement
             }
         );
+
+        // Have to fire "detectChanges" to fix "ExpressionChangedAfterItHasBeenCheckedError"
+        this.dialogRef.afterLoaded
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(() => {
+                this._component.detectChanges();
+            });
     }
 }

@@ -1,4 +1,25 @@
 
+## [0.31.0-rc.155](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.154...v0.31.0-rc.155) (2021-07-30)
+
+
+### Bug Fixes
+
+* **core:** fix extra onChange event in the TimePicker component ([#6079](https://github.com/SAP/fundamental-ngx/issues/6079)) ([d6efa43](https://github.com/SAP/fundamental-ngx/commit/d6efa435b9714fac9767e9995a3a9bfeda5da254))
+
+## [0.31.0-rc.154](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.153...v0.31.0-rc.154) (2021-07-30)
+
+
+### Bug Fixes
+
+* **platform:** combobox in mobile mode ([#6115](https://github.com/SAP/fundamental-ngx/issues/6115)) ([7e35917](https://github.com/SAP/fundamental-ngx/commit/7e35917a6bb1a21b1bb96fc5de6c9981001dd41d))
+
+## [0.31.0-rc.153](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.152...v0.31.0-rc.153) (2021-07-30)
+
+
+### Bug Fixes
+
+* **platform:** grouping & frozen columns table layout fix ([#6043](https://github.com/SAP/fundamental-ngx/issues/6043)) ([e30a19b](https://github.com/SAP/fundamental-ngx/commit/e30a19b32dd60815f8593b0ad0b369fb8106fdde))
+
 ## [0.31.0-rc.152](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.151...v0.31.0-rc.152) (2021-07-27)
 
 

@@ -88,7 +88,7 @@ describe('Datetime picker suite', function() {
             }
         });
 
-        it('verify on click on the input field', () => {
+        xit('verify on click on the input field', () => {
             const activeInputsLength = getElementArrayLength(activeDateTimePickerInput);
             for (let i = 0; i < activeInputsLength; i++) {
                 sendKeys(['Escape']);
@@ -98,14 +98,14 @@ describe('Datetime picker suite', function() {
             }
         });
 
-        it('verify date input field have placeholder', () => {
+        xit('verify date input field have placeholder', () => {
             const inputs = elementArray(datePickerInput);
             for (let i = 0; i < inputs.length; i++) {
                 expect(['', null]).not.toContain(getAttributeByName(datePickerInput, 'ng-reflect-model', i));
             }
         });
 
-        it('verify the user can then choose the desired date from the calendar, and the time from the rotating wheel, ' +
+        xit('verify the user can then choose the desired date from the calendar, and the time from the rotating wheel, ' +
             'For the time, it’s possible to select hours, minutes, and even seconds.', () => {
             click(activeDateTimePickerButton, 1);
             click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
@@ -115,7 +115,7 @@ describe('Datetime picker suite', function() {
                 .toEqual(date);
         });
 
-        it('verify when the user selects cancel the action is aborted and the input field remains unchanged.', () => {
+        xit('verify when the user selects cancel the action is aborted and the input field remains unchanged.', () => {
             click(activeDateTimePickerButton, 1);
             click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
             selectHoursMinutesAndPeriod();
@@ -169,7 +169,7 @@ describe('Datetime picker suite', function() {
             }
         });
 
-        it('verify simple datetime picker has correct default date', () => {
+        xit('verify simple datetime picker has correct default date', () => {
             click(activeDateTimePickerButton, 1);
             click(dayInCalendarButtonByValue(currentDay.toString()));
             selectHoursMinutesAndPeriod();
@@ -178,7 +178,7 @@ describe('Datetime picker suite', function() {
                 .toEqual(date2);
         });
 
-        it('verify programmatic change datetime picker has correct default date', () => {
+        xit('verify programmatic change datetime picker has correct default date', () => {
             scrollIntoView(activeDateTimePickerButton, 2);
             click(activeDateTimePickerButton, 2);
             click(dayInCalendarButtonByValue(currentDay.toString()));
@@ -191,7 +191,7 @@ describe('Datetime picker suite', function() {
                 .toEqual(date3);
         });
 
-        it('verify null validity datetime picker has correct default date', () => {
+        xit('verify null validity datetime picker has correct default date', () => {
             scrollIntoView(activeDateTimePickerButton, 3);
             click(activeDateTimePickerButton, 3);
             click(dayInCalendarButtonByValue(currentDay.toString()));
@@ -201,7 +201,7 @@ describe('Datetime picker suite', function() {
                 .toEqual(date2);
         });
 
-        it('verify formatting datetime picker has correct default date', () => {
+        xit('verify formatting datetime picker has correct default date', () => {
             scrollIntoView(activeDateTimePickerButton, 4);
             click(activeDateTimePickerButton, 4);
             click(dayInCalendarButtonByValue(currentDay.toString()));
@@ -211,7 +211,7 @@ describe('Datetime picker suite', function() {
                 .toEqual(date4);
         });
 
-        it('verify date time picker in reactive form has correct default date', () => {
+        xit('verify date time picker in reactive form has correct default date', () => {
             scrollIntoView(activeDateTimePickerButton, 5);
             click(activeDateTimePickerButton, 5);
             click(dayInCalendarButtonByValue(currentDay.toString()));

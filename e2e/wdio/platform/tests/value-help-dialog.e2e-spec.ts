@@ -241,7 +241,7 @@ describe('Value help dialog test suite', function() {
         });
     });
 
-    describe('mobile version examples', function() {
+    xdescribe('mobile version examples', function() {
         it('should check mobile property true', () => {
             expect(getAttributeByName(mobileExampleDialog, mobileAttr)).toBe('true');
         });

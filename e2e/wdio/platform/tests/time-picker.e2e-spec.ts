@@ -93,7 +93,7 @@ describe('Time picker suite', function() {
         }
     });
 
-    it('Verify null validity for basic time picker ', () => {
+    xit('Verify null validity for basic time picker ', () => {
         scrollIntoView(activeTimePickerButton, 4);
         expect(doesItExist(errorBorder)).toBe(false);
         click(setToNullButton);
@@ -114,7 +114,7 @@ describe('Time picker suite', function() {
         expect(getValue(activeTimePickerInput, 9)).toBe(defaultValidTime);
     });
 
-    it('Verify null validity for time picker with template form', () => {
+    xit('Verify null validity for time picker with template form', () => {
         scrollIntoView(activeTimePickerButton, 14);
         expect(doesItExist(errorBorder)).toBe(false);
         click(setToNullButton, 2);
@@ -139,7 +139,7 @@ describe('Time picker suite', function() {
             expect(timePickerPage.compareWithBaseline()).toBeLessThan(5);
         });
 
-        it('should check time picker visual regression', () => {
+        xit('should check time picker visual regression', () => {
             scrollIntoView(activeTimePickerButton);
             click(activeTimePickerButton);
             waitForElDisplayed(timerExpanded);
