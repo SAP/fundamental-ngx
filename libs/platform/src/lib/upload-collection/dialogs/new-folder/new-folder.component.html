@@ -21,12 +21,14 @@
             </label>
             <input
                 fd-form-control
+                fd-initial-focus
                 #formControl
                 type="text"
                 id="name"
                 [(ngModel)]="_newFolderName"
                 i18n-placeholder
                 placeholder="Type here..."
+                ariaLabelledby="fdp-upload-collection-new-folder-title"
             />
             <span
                 *ngIf="_newFolderName.length > _maxFilenameLength"
@@ -52,10 +54,8 @@
         >
         </fd-button-bar>
         <fd-button-bar
-            fd-initial-focus
             i18n-label
             label="Cancel"
-            ariaLabelledby="fdp-upload-collection-new-folder-title"
             (click)="dialogRef.dismiss()"
         >
         </fd-button-bar>
