@@ -14,6 +14,13 @@ import { ANY_LANGUAGE_LETTERS_REGEX, ColorAccent, Size, applyCssClass, getRandom
 
 let avatarUniqueId = 0;
 
+const ALTER_ICON_OPTIONS = {
+    CONTENT: 'content',
+    ALT: 'alt',
+    CUSTOM: 'custom',
+    DEFAULT_ICON: 'default-icon',
+};
+
 @Component({
     // TODO to be discussed
     // tslint:disable-next-line:component-selector
@@ -110,6 +117,14 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         return this._alterIcon;
     }
 
+    @Input()
+    set defaultImage(value: string) {
+        this._defaultImage = value;
+    }
+    get defaultImage(): string {
+        return this._defaultImage;
+    }
+
     /** @hidden */
     @HostBinding('style.background-image')
     get bgImage(): string {
@@ -122,16 +137,10 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         return this.zoomGlyph ? 'button' : 'img';
     }
 
-    _content: any = null;
-
+    /** @hidden */
     @ViewChild('content')
     set content(value: ElementRef) {
-        console.log('Setting content', value);
         this._content = value;
-        // setTimeout(() => {
-        //     console.log('Setting content', value.nativeElement.innerText);
-        //     this._content = value;
-        // }, 0);
     }
 
     /** @hidden */
@@ -142,6 +151,12 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
 
     /** @hidden */
     private _alterIcon: string = null;
+
+    /** @hidden */
+    private _content: ElementRef = null;
+
+    /** @hidden */
+    private _defaultImage: string = null;
 
     /** @hidden */
     private _bgImage: string = null;
@@ -215,53 +230,78 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         this._image = value;
 
         if (value) {
-            this._verifyImageUrl(value);
+            this._verifyImageUrl(value, () => {}, this._onErrorCallback);
         } else {
             this._bgImage = null;
         }
     }
 
-    private _verifyImageUrl(srcValue: string): void {
+    /** @hidden */
+    private _verifyImageUrl(srcValue: string, onLoadCallback: Function, onErrorCallback: Function): void {
         const img = new Image();
-        img.onerror = this._onError.bind(this);
+        img.onload = onLoadCallback.bind(this);
+        img.onerror = onErrorCallback.bind(this);
         img.src = srcValue;
         this._assignBgImage(srcValue);
     }
 
+    /** @hidden */
     private _assignBgImage(srcValue: string): void {
-        this._bgImage = 'url(' + srcValue + ')';
+        this._bgImage = `url(${srcValue})`;
     }
 
-    private _onError(): void {
+    /** @hidden */
+    private _onErrorCallback(): void {
         if (!this._alterIcon) {
             this._showDefaultIcon();
         } else {
-            // split alterIcon string
-            // check by priority from left to right
             const options = this._alterIcon.split('|');
-            // options.forEach(this._processAlterIconOptions.bind(this));
             for (let i = 0; i < options.length; i++) {
                 const option = options[i];
 
-                if (option === 'content') {
-                    this.abbreviate = 'XX';
-                    const el = this._content.nativeElement;
-                    console.log('Element Ref Text', el.innerText);
-                    // debugger;
-                    break;
+                if (option === ALTER_ICON_OPTIONS.CONTENT) {
+                    const contentEl = this._content.nativeElement;
+                    const contentValue = contentEl.innerText.trim()[0];
+                    if (contentValue && contentValue !== '') {
+                        this.abbreviate = contentEl.innerText.trim()[0];
+                        break;
+                    }
+
+                    continue;
                 }
                 
-                if (option === 'alt') {
-                    this.abbreviate = 'YY';
-                    break;
+                if (option === ALTER_ICON_OPTIONS.ALT) {
+                    const altValue = this.elementRef().nativeElement.getAttribute('alt');
+                    if (altValue && altValue !== '') {
+                        this.abbreviate = altValue.trim()[0];
+                        break;
+                    }
+
+                    continue;
                 }
                 
-                if (option === 'custom') {
-                    this.abbreviate = 'SS';
-                    break;
+                if (option === ALTER_ICON_OPTIONS.CUSTOM) {
+                    if (this._defaultImage && this._defaultImage !== '') {
+                        // Check if defaultImage can be loaded successfully
+                        // If not, set default user icon
+                        this._verifyImageUrl(
+                            this._defaultImage, 
+                            () => {
+                                this._assignBgImage(this._defaultImage);
+                                this._cdr.detectChanges();
+                            }, 
+                            () => {
+                                this._showDefaultIcon();
+                                this._cdr.detectChanges();
+                            }
+                        );
+                        break;
+                    }
+
+                    continue;
                 }
                 
-                if (option === 'default-icon') {
+                if (option === ALTER_ICON_OPTIONS.DEFAULT_ICON) {
                     this._showDefaultIcon();
                     break;
                 }
@@ -273,23 +313,10 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         this._cdr.detectChanges();
     }
 
+    /** @hidden */
     private _showDefaultIcon(): void {
         this.abbreviate = null;
         this._image = null;
         this.glyph = null;
-    }
-
-    private _processAlterIconOptions(option: string): void {
-        if (option === 'content') {
-            this.abbreviate = 'XX';
-        } else if (option === 'alt') {
-
-        } else if (option === 'custom') {
-
-        } else if (option === 'default-icon') {
-
-        } else {
-            this._showDefaultIcon();
-        }
     }
 }

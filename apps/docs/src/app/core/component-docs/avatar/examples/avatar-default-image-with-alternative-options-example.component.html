@@ -1,34 +1,43 @@
+<!-- should display "J" from content -->
 <fd-avatar size="xs"
     image="http://example.com/1.jpeg"
     alterIcon="content|alt|custom|default-icon"
     defaultImage="http://picsum.photos/id/1018/400">
-    <!-- <fd-avatar-content>John Doe</fd-avatar-content> -->
     John Doe
 </fd-avatar>
-<fd-avatar size="s" 
+
+<!-- should display "J" from alt -->
+<fd-avatar size="s"
     image="http://example.com/2.jpeg"
-    alterIcon="alt|content|custom|default-icon"
+    alterIcon="content|alt|custom|default-icon"
     defaultImage="http://picsum.photos/id/1018/400"
     alt="John Doe">
 </fd-avatar>
-<fd-avatar size="m" 
+
+<!-- should display defaultImage -->
+<fd-avatar size="m"
     image="ttp://example.com/3.jpeg"
-    alterIcon="alt|content|custom|default-icon"
-    defaultImage="http://picsum.photos/id/1018/400">
+    alterIcon="content|alt|custom|default-icon"
+    defaultImage="https://picsum.photos/200/300.jpg">
 </fd-avatar>
-<fd-avatar size="l" 
+
+<!-- should display default icon, because there's no defaultImage url provided -->
+<fd-avatar size="l"
     image="ttp://example.com/4.jpeg"
-    alterIcon="alt|content|custom|default-icon"
-    defaultImage="http://picsum.photos/id/1018/400">
+    alterIcon="alt|content|custom|default-icon">
 </fd-avatar>
+
+<!-- should display default icon, because defaultImage is not loadable -->
 <fd-avatar size="xl"
     image="http://example.com/5.jpeg"
     alterIcon="custom"
     defaultImage="http://example.com/6.jpeg">
 </fd-avatar>
+
+<!-- should load image -->
 <fd-avatar size="xl"
-    [contain]="true" 
-    image="ttp://example.com/4.jpeg"
+    [contain]="true"
+    image="http://example.com/4.jpeg"
     alterIcon="alt|content|custom|default-icon"
     defaultImage="http://picsum.photos/id/1018/400">
 </fd-avatar>
