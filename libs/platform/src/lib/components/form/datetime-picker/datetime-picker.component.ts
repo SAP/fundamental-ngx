@@ -95,7 +95,7 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
 
     /** The starting day of week for the calendar. */
     @Input()
-    startingDayOfWeek: DaysOfWeek = 1;
+    startingDayOfWeek: DaysOfWeek;
 
     /** Actually shown active view one of 'day' | 'month' | 'year' in calendar component*/
     @Input()
