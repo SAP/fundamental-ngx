@@ -12,7 +12,7 @@
 
     <fd-dialog-body>
         <div fd-form-item>
-            <label fd-form-label for="name">
+            <label fd-form-label for="fdp-upload-collection-new-folder-input">
                 <span i18n="@@platformUploadCollection.NewFolder.InputLabel"> Name of new folder inside of </span>
                 <span *ngIf="_currentFolder">"{{ _currentFolder.name }}"</span>
                 <span *ngIf="!_currentFolder" i18n="@@platformUploadCollection.NewFolder.InputLabel.AllFiles">
@@ -20,15 +20,15 @@
                 </span>:
             </label>
             <input
+                #formControl
                 fd-form-control
                 fd-initial-focus
-                #formControl
+                id="fdp-upload-collection-new-folder-input"
+                aria-labelledby="fdp-upload-collection-new-folder-title fdp-upload-collection-new-folder-input"
                 type="text"
-                id="name"
                 [(ngModel)]="_newFolderName"
                 i18n-placeholder
                 placeholder="Type here..."
-                ariaLabelledby="fdp-upload-collection-new-folder-title"
             />
             <span
                 *ngIf="_newFolderName.length > _maxFilenameLength"
