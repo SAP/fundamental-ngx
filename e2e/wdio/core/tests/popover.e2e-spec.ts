@@ -336,7 +336,7 @@ describe('Popover test suite', function() {
 
     describe('Check Dropdown Popover', function() {
 
-        it('should check disable button', () => {
+        xit('should check disable button', () => {
             scrollIntoView(dropdownButton);
             expect(getAttributeByName(dropdownButton, 'ng-reflect-disabled', 1)).toBe('true');
         });
@@ -373,7 +373,7 @@ describe('Popover test suite', function() {
             }
         });
 
-        it('should check that popover can move around the button', () => {
+        xit('should check that popover can move around the button', () => {
             scrollIntoView(cdkButton);
             click(cdkButton);
             // Origin X

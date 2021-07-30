@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.153](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.152...v0.31.0-rc.153) (2021-07-30)
+
+
+### Bug Fixes
+
+* **platform:** grouping & frozen columns table layout fix ([#6043](https://github.com/SAP/fundamental-ngx/issues/6043)) ([e30a19b](https://github.com/SAP/fundamental-ngx/commit/e30a19b32dd60815f8593b0ad0b369fb8106fdde))
+
 ## [0.31.0-rc.152](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.151...v0.31.0-rc.152) (2021-07-27)
 
 
