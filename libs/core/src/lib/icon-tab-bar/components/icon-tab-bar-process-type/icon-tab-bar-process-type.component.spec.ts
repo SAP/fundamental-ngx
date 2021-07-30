@@ -23,9 +23,9 @@ describe('IconTabBarProcessTypeComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(IconTabBarProcessTypeComponent);
         component = fixture.componentInstance;
-        component['_ngZone'] = fakeOverNgZone as any;
+        component['_ngZone'] = fakeNgZone as any;
         component['_cd'] = fakeCdr as any;
-        
+
         component.tabsConfig = generateTestItems(100);
         fixture.detectChanges();
         component._selectItem(component._tabs[50]); // Select random item
@@ -72,7 +72,7 @@ const fakeOverflowDirective = {
     getAmountOfExtraItems: _ => AMOUNT_OF_EXTRA_TABS
 };
 
-const fakeOverNgZone = {
+const fakeNgZone = {
     onMicrotaskEmpty: {
         pipe: () => of(1)
     }
