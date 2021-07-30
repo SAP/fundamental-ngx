@@ -25,7 +25,7 @@ describe('Display List Item test suite:', function() {
     }, 1);
 
     describe('Display List Item - cozy and comfy examples:', function() {
-        it('should do basic checks', () => {
+        xit('should do basic checks', () => {
             checkElArrIsClickable(displayLinks);
             checkElementText(cozyDisplayTitles);
             checkElementText(comfyDisplayTitles);
@@ -43,7 +43,7 @@ describe('Display List Item test suite:', function() {
     });
 
     describe('Display List Item - declarative examples:', function() {
-        it('should do basic checks', () => {
+        xit('should do basic checks', () => {
             checkElArrIsClickable(declarativeDisplayLinks);
             checkElementTextValue(declarativeDisplayTitles, navTitlesArr);
             expect(getAttributeByName(declarativeSection, borderAttr)).toBe('false');

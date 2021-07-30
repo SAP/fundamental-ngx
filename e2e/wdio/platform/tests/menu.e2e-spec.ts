@@ -48,7 +48,7 @@ describe('Menu component test suite', function() {
         waitForPresent(menuBtnArr);
     }, 1);
 
-    it('should check menu btn styles', () => {
+    xit('should check menu btn styles', () => {
         if (browserIsIEorSafari()) {
             console.log('Skip for IE and Safari');
             return;
@@ -151,7 +151,7 @@ describe('Menu component test suite', function() {
         return;
     });
 
-    it('should check collapsed and expanded states', () => {
+    xit('should check collapsed and expanded states', () => {
         if (browserIsIEorSafari()) {
             console.log('Skip for Safari and IE');
             return;

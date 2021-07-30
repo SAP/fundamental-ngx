@@ -67,7 +67,7 @@ describe('Date picker suite', function() {
         }
     });
 
-    it('Verify By clicking the current year', () => {
+    xit('Verify By clicking the current year', () => {
         sendKeys(['Escape']);
         scrollIntoView(activeButtonDatePicker, 1);
         click(activeButtonDatePicker, 1);
@@ -111,18 +111,19 @@ describe('Date picker suite', function() {
         datePickerPage.checkRtlSwitch();
     });
 
-    it('verify pre-populated single type date-picker', () => {
+    xit('verify pre-populated single type date-picker', () => {
         click(activeButtonDatePicker, 1);
         click(dayInCalendarButtonByValue('1'));
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model')).toEqual(date);
     });
 
-    it('verify single type date-picker:', () => {
+    xit('verify single type date-picker:', () => {
         click(activeButtonDatePicker, 3);
         click(dayInCalendarButtonByValue('1'));
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 2)).toEqual(date1);
     });
-    it('verify pre-populated range type date-picker', () => {
+
+    xit('verify pre-populated range type date-picker', () => {
         click(activeButtonDatePicker, 2);
         click(dayInCalendarButtonByValue('1'));
         click(dayInCalendarButtonByValue('15'));
@@ -130,7 +131,7 @@ describe('Date picker suite', function() {
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 1)).toEqual(date2);
     });
 
-    it('verify range type date-picker', () => {
+    xit('verify range type date-picker', () => {
         click(activeButtonDatePicker, 4);
         click(dayInCalendarButtonByValue('1'));
         click(dayInCalendarButtonByValue('15'));
@@ -138,13 +139,13 @@ describe('Date picker suite', function() {
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 3)).toEqual(date3);
     });
 
-    it('verify birth date date-picker', () => {
+    xit('verify birth date date-picker', () => {
         click(activeButtonDatePicker, 5);
         click(dayInCalendarButtonByValue('1'));
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 4)).toEqual(date1);
     });
 
-    it('verify holiday date-picker', () => {
+    xit('verify holiday date-picker', () => {
         click(activeButtonDatePicker, 6);
         click(dayInCalendarButtonByValue('1'));
         click(dayInCalendarButtonByValue('15'));
@@ -152,13 +153,13 @@ describe('Date picker suite', function() {
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 5)).toEqual(date3);
     });
 
-    it('verify date picker use outside Form', () => {
+    xit('verify date picker use outside Form', () => {
         click(activeButtonDatePicker, 7);
         click(dayInCalendarButtonByValue('1'));
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 6)).toEqual(date1);
     });
 
-    it('verify range date picker outside form', () => {
+    xit('verify range date picker outside form', () => {
         click(activeButtonDatePicker, 8);
         click(dayInCalendarButtonByValue('1'));
         click(dayInCalendarButtonByValue('15'));
@@ -173,13 +174,13 @@ describe('Date picker suite', function() {
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 8)).toEqual(date1);
     });
 
-    it('verify date Picker Formatting date picker with custom output format', () => {
+    xit('verify date Picker Formatting date picker with custom output format', () => {
         click(activeButtonDatePicker, 10);
         click(dayInCalendarButtonByValue('1'));
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 9)).toEqual(date5);
     });
 
-    it('verify date Picker Formatting range date picker custom format', () => {
+    xit('verify date Picker Formatting range date picker custom format', () => {
         click(activeButtonDatePicker, 11);
         click(dayInCalendarButtonByValue('1'));
         click(dayInCalendarButtonByValue('15'));
@@ -187,7 +188,7 @@ describe('Date picker suite', function() {
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 10)).toEqual(date4);
     });
 
-    it('verify internationalization of Date Picker', () => {
+    xit('verify internationalization of Date Picker', () => {
         click(activeButtonDatePicker, 12);
         click(dayInCalendarButtonByValue('1'));
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 11)).toEqual(date7);
@@ -212,7 +213,7 @@ describe('Date picker suite', function() {
         }
     });
 
-   it('verify selected date is showing in blue background', () => {
+   xit('verify selected date is showing in blue background', () => {
         click(activeButtonDatePicker, 1);
         click(dayInCalendarButtonByValue('1'));
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model')).toEqual(date);
@@ -258,7 +259,7 @@ describe('Date picker suite', function() {
         }
     });
 
-    it('verify user is not able select multiple dates', () => {
+    xit('verify user is not able select multiple dates', () => {
         click(activeButtonDatePicker, 1);
         click(dayInCalendarButtonByValue('1'));
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model')).toEqual(date);

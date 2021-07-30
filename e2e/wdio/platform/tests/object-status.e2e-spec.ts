@@ -80,21 +80,21 @@ describe('object status test suite', function() {
         });
     });
 
-    describe('inverted object status example', function() {
+    xdescribe('inverted object status example', function() {
         it('should check status is inverted', () => {
             scrollIntoView(invertedExamples + status);
             checkAttributeValueTrue(invertedExamples + status, invertedAttribute);
         });
     });
 
-    describe('inverted object status with generic indication colors example', function() {
+    xdescribe('inverted object status with generic indication colors example', function() {
         it('should check status is inverted', () => {
             scrollIntoView(invertedIndicationColorExamples + status);
             checkAttributeValueTrue(invertedIndicationColorExamples + status, invertedAttribute);
         });
     });
 
-    describe('object status large design example', function() {
+    xdescribe('object status large design example', function() {
         it('should check large status', () => {
             checkAttributeValueTrue(largeExamples + status, largeStatusAttribute);
         });
