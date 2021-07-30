@@ -7,6 +7,7 @@ import {
     Input,
     OnChanges,
     OnInit,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ANY_LANGUAGE_LETTERS_REGEX, ColorAccent, Size, applyCssClass, getRandomColorAccent, CssClassBuilder } from '@fundamental-ngx/core/utils';
@@ -121,6 +122,18 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         return this.zoomGlyph ? 'button' : 'img';
     }
 
+    _content: any = null;
+
+    @ViewChild('content')
+    set content(value: ElementRef) {
+        console.log('Setting content', value);
+        this._content = value;
+        // setTimeout(() => {
+        //     console.log('Setting content', value.nativeElement.innerText);
+        //     this._content = value;
+        // }, 0);
+    }
+
     /** @hidden */
     abbreviate: string = null;
 
@@ -226,7 +239,35 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
             // split alterIcon string
             // check by priority from left to right
             const options = this._alterIcon.split('|');
-            options.forEach(this._processAlterIconOptions);
+            // options.forEach(this._processAlterIconOptions.bind(this));
+            for (let i = 0; i < options.length; i++) {
+                const option = options[i];
+
+                if (option === 'content') {
+                    this.abbreviate = 'XX';
+                    const el = this._content.nativeElement;
+                    console.log('Element Ref Text', el.innerText);
+                    // debugger;
+                    break;
+                }
+                
+                if (option === 'alt') {
+                    this.abbreviate = 'YY';
+                    break;
+                }
+                
+                if (option === 'custom') {
+                    this.abbreviate = 'SS';
+                    break;
+                }
+                
+                if (option === 'default-icon') {
+                    this._showDefaultIcon();
+                    break;
+                }
+                
+                this._showDefaultIcon();
+            }
         }
 
         this._cdr.detectChanges();
@@ -239,12 +280,16 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     private _processAlterIconOptions(option: string): void {
-        if (option === 'content') {}
+        if (option === 'content') {
+            this.abbreviate = 'XX';
+        } else if (option === 'alt') {
 
-        if (option === 'alt') {}
+        } else if (option === 'custom') {
 
-        if (option === 'custom') {}
+        } else if (option === 'default-icon') {
 
-        if (option === 'default-icon') {}
+        } else {
+            this._showDefaultIcon();
+        }
     }
 }

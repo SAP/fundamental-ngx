@@ -1,10 +1,34 @@
 <fd-avatar size="xs"
     image="http://example.com/1.jpeg"
-    alterIcon="content|alt|default-icon|custom"
+    alterIcon="content|alt|custom|default-icon"
+    defaultImage="http://picsum.photos/id/1018/400">
+    <!-- <fd-avatar-content>John Doe</fd-avatar-content> -->
+    John Doe
+</fd-avatar>
+<fd-avatar size="s" 
+    image="http://example.com/2.jpeg"
+    alterIcon="alt|content|custom|default-icon"
+    defaultImage="http://picsum.photos/id/1018/400"
+    alt="John Doe">
+</fd-avatar>
+<fd-avatar size="m" 
+    image="ttp://example.com/3.jpeg"
+    alterIcon="alt|content|custom|default-icon"
     defaultImage="http://picsum.photos/id/1018/400">
 </fd-avatar>
-<fd-avatar image="http://picsum.photos/id/1018/400" size="s"></fd-avatar>
-<fd-avatar image="http://picsum.photos/id/1018/400" size="m"></fd-avatar>
-<fd-avatar image="http://picsum.photos/id/1018/400" size="l"></fd-avatar>
-<fd-avatar image="http://picsum.photos/id/1018/400" size="xl"></fd-avatar>
-<fd-avatar [contain]="true" image="http://picsum.photos/id/1018/400/500" size="xl"></fd-avatar>
+<fd-avatar size="l" 
+    image="ttp://example.com/4.jpeg"
+    alterIcon="alt|content|custom|default-icon"
+    defaultImage="http://picsum.photos/id/1018/400">
+</fd-avatar>
+<fd-avatar size="xl"
+    image="http://example.com/5.jpeg"
+    alterIcon="custom"
+    defaultImage="http://example.com/6.jpeg">
+</fd-avatar>
+<fd-avatar size="xl"
+    [contain]="true" 
+    image="ttp://example.com/4.jpeg"
+    alterIcon="alt|content|custom|default-icon"
+    defaultImage="http://picsum.photos/id/1018/400">
+</fd-avatar>
