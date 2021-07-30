@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.155](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.154...v0.31.0-rc.155) (2021-07-30)
+
+
+### Bug Fixes
+
+* **core:** fix extra onChange event in the TimePicker component ([#6079](https://github.com/SAP/fundamental-ngx/issues/6079)) ([d6efa43](https://github.com/SAP/fundamental-ngx/commit/d6efa435b9714fac9767e9995a3a9bfeda5da254))
+
 ## [0.31.0-rc.154](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.153...v0.31.0-rc.154) (2021-07-30)
 
 
