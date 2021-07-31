@@ -7,13 +7,12 @@ import { ButtonModule, TabsModule, ToolbarModule } from '@fundamental-ngx/core';
 import {
     CLASS_NAME,
     DynamicPageComponent,
+    DynamicPageContentComponent,
+    DynamicPageHeaderComponent,
     DynamicPageService,
+    DynamicPageTitleComponent,
     PlatformDynamicPageModule
 } from '@fundamental-ngx/platform';
-
-import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
-import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
-import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 
 @Component({
     template: `

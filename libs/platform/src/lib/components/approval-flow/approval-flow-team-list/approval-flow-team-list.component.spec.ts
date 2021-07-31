@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { PlatformApprovalFlowModule } from '@fundamental-ngx/platform';
-import { ApprovalTeam } from '../interfaces';
 
 import { ApprovalFlowTeamListComponent } from './approval-flow-team-list.component';
+import { ApprovalTeam } from '../interfaces';
 
 
 describe('ApprovalFlowTeamListComponent', () => {
@@ -11,7 +12,6 @@ describe('ApprovalFlowTeamListComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ApprovalFlowTeamListComponent],
             imports: [PlatformApprovalFlowModule]
         }).compileComponents();
     });

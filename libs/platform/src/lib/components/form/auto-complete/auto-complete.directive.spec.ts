@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { OptionItem } from '@fundamental-ngx/platform';
+
 import { AutoCompleteDirective } from './auto-complete.directive';
 
 @Component({
@@ -28,7 +29,6 @@ class TestComponent {
         value: 'Strawberry'
     }];
 }
-
 describe('AutoCompleteDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;

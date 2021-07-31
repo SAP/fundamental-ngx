@@ -1,11 +1,12 @@
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Component, ViewChild, ElementRef } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
+
+import { ActionListItemComponent } from '@fundamental-ngx/platform';
 
 import { ListComponent } from '../list.component';
 import { PlatformListModule } from '../list.module';
-import { ActionListItemComponent } from './action-list-item.component';
 
 export interface Action {
     title: string;
@@ -41,7 +42,6 @@ class ActionListItemComponentTest {
     handleKeyboardEvent(event: KeyboardEvent): void {
         this.enterPress = 'Enter is pressed';
     }
-
 }
 
 describe('ActionListItemComponent', () => {
@@ -51,7 +51,7 @@ describe('ActionListItemComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformListModule, RouterTestingModule],
-            declarations: [ActionListItemComponentTest, ActionListItemComponent, ListComponent]
+            declarations: [ActionListItemComponentTest, ActionListItemComponent]
         })
             .compileComponents();
     }));
@@ -65,7 +65,6 @@ describe('ActionListItemComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-
 
     it('Should display list container with role as list', () => {
         const listContainer = fixture.debugElement.query(By.css('ul'));

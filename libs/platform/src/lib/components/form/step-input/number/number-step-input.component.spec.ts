@@ -1,18 +1,18 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { FormGroup, FormControl, ValidatorFn, Validators, ReactiveFormsModule } from '@angular/forms';
 
 import { RtlService } from '@fundamental-ngx/core';
 import {
-    PlatformStepInputModule,
     ContentDensity,
+    FdpFormGroupModule,
     FormFieldComponent,
-    FdpFormGroupModule
+    NumberStepInputChangeEvent,
+    NumberStepInputComponent,
+    PlatformStepInputModule
 } from '@fundamental-ngx/platform';
-
-import { NumberStepInputComponent, NumberStepInputChangeEvent } from './number-step-input.component';
 
 @Component({
     template: `<fdp-number-step-input name="number"></fdp-number-step-input>`
@@ -140,6 +140,7 @@ describe('NumberStepInputComponent main functionality', () => {
     it('Should not allow value be less than minimum', () => {
         const nativeElement: HTMLInputElement = getInputDebugElement().nativeElement;
         const enteredValue = (component.min - 1).toString();
+
         nativeElement.value = enteredValue;
         nativeElement.dispatchEvent(new InputEvent('input'));
         nativeElement.dispatchEvent(new InputEvent('change'));
@@ -152,6 +153,7 @@ describe('NumberStepInputComponent main functionality', () => {
     it('Should not allow value be more than maximum', () => {
         const nativeElement: HTMLInputElement = getInputDebugElement().nativeElement;
         const enteredValue = (component.max + 1).toString();
+
         nativeElement.value = enteredValue;
         nativeElement.dispatchEvent(new InputEvent('input'));
         nativeElement.dispatchEvent(new InputEvent('change'));
@@ -411,7 +413,7 @@ describe('NumberStepInputComponent main functionality', () => {
 /** Usage with form */
 @Component({
     template: `
-        <form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <fdp-form-group #fg1 [formGroup]="form" [object]="initialFormModel">
                 <fdp-form-field
                     #ff

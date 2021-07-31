@@ -1,13 +1,14 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, of } from 'rxjs';
+
+import { StandardListItemComponent, StandardListItemModule } from '@fundamental-ngx/platform';
+
 import { DataProvider, ListDataSource } from '../../domain/public_api';
 import { ListComponent } from './list.component';
 import { PlatformListModule } from './list.module';
-import { StandardListItemModule } from './standard-list-item/standard-list-item.module';
-import { StandardListItemComponent } from './standard-list-item/standard-list-item.component';
 
 const LIST_ELEMENTS: Address[] = [
     { name: 'Name1' },
@@ -41,15 +42,13 @@ export class ListDataProvider extends DataProvider<Address> {
              [navigated]="true"
              [selectionMode]="'multi'"
              [navigationIndicator]="true">
-           <fdp-standard-list-item [title]="Item1"></fdp-standard-list-item></fdp-list>
+           <fdp-standard-list-item title="Item1"></fdp-standard-list-item></fdp-list>
 
     `
 })
 class ListComponentTest {
-
     @ViewChild(ListComponent, { read: ElementRef, static: true })
     listElement: ElementRef;
-
 }
 
 describe('ListComponent', () => {
@@ -60,8 +59,7 @@ describe('ListComponent', () => {
         TestBed.configureTestingModule({
             imports: [PlatformListModule, StandardListItemModule, RouterTestingModule],
             declarations: [ListComponentTest]
-        })
-            .compileComponents();
+        }).compileComponents();
     }));
 
     beforeEach(() => {
@@ -107,7 +105,7 @@ describe('ListComponent', () => {
     it('should contain navigation', () => {
         fixture.detectChanges();
         const listElement = fixture.debugElement.nativeElement.querySelector('ul');
-        expect(listElement.classList).toContain('fd-list--navigation');
+        expect(listElement.classList).toContain('fd-list--navigation-indication');
     });
 });
 

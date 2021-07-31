@@ -1,10 +1,9 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ContentDensity } from '@fundamental-ngx/core';
-import { PlatformInputGroupModule } from './input-group.module';
+
 import { InputGroupAddonBodyComponent } from './addon-body.component';
 
 @Component({
@@ -25,7 +24,6 @@ describe('Input group addon with a text', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformInputGroupModule],
             declarations: [TextAddonHostComponent, InputGroupAddonBodyComponent]
         }).compileComponents();
     }));

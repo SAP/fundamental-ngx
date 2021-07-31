@@ -1,4 +1,5 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
+
 import { HighlightPipe } from './highlight.pipe';
 import { MatchingStrategy, MultiComboboxConfig } from '../multi-combobox.config';
 

@@ -2,15 +2,19 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { BreadcrumbModule, ToolbarModule, ButtonModule } from '@fundamental-ngx/core';
+
+import { BreadcrumbModule, ButtonModule, ToolbarModule } from '@fundamental-ngx/core';
+import {
+    DynamicPageGlobalActionsComponent,
+    DynamicPageKeyInfoComponent,
+    DynamicPageLayoutActionsComponent,
+    DynamicPageService,
+    DynamicPageTitleComponent
+} from '@fundamental-ngx/platform';
+
 import { CLASS_NAME } from '../../constants';
 import { PlatformDynamicPageModule } from '../../dynamic-page.module';
-import { DynamicPageService } from '../../dynamic-page.service';
-import { DynamicPageGlobalActionsComponent } from '../actions/global-actions/dynamic-page-global-actions.component';
-import { DynamicPageLayoutActionsComponent } from '../actions/layout-actions/dynamic-page-layout-actions.component';
-import { DynamicPageKeyInfoComponent } from '../key-info/dynamic-page-key-info.component';
 import { DynamicPageTitleHostComponent } from './dynamic-page-title-host.component';
-import { DynamicPageTitleComponent } from './dynamic-page-title.component';
 
 @Component({
     template: `
@@ -73,7 +77,6 @@ class TestComponent implements AfterViewInit {
         this.cd.detectChanges();
     }
 }
-
 describe('DynamicPageTitleComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
     let pageTitleComponent: DynamicPageTitleComponent;
@@ -110,7 +113,7 @@ describe('DynamicPageTitleComponent', () => {
     });
 
     it('should add tabindex to host', async () => {
-        expect(titleHostComponentDebugElement.attributes['tabindex']).toEqual('0');
+        expect(+titleHostComponentDebugElement.attributes['tabindex']).toEqual(0);
     });
 
     describe('title text', () => {

@@ -1,11 +1,11 @@
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, ViewChild, ElementRef } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { DisplayListItemComponent, DisplayListItemModule } from '@fundamental-ngx/platform';
+
 import { PlatformListModule } from '../list.module';
-import { DisplayListItemComponent } from './display-list-item.component';
-import { DisplayListItemModule } from './display-list-item.module';
 
 export interface Name {
     title: string;
@@ -241,5 +241,4 @@ describe('DisplayListItemComponent Imperative', () => {
         fixture.detectChanges();
         expect(naviationItemsImp[0].nativeElement.classList).toContain('fd-list__item--link');
     });
-
 });
