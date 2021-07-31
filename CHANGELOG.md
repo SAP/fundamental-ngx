@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.158](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.157...v0.31.0-rc.158) (2021-07-31)
+
+
+### Bug Fixes
+
+* **platform:** add attribute option into combobox ([#5772](https://github.com/SAP/fundamental-ngx/issues/5772)) ([ae5c191](https://github.com/SAP/fundamental-ngx/commit/ae5c191b13608d4fae4b045a9f9a2dfb5fff3e6c))
+
 ## [0.31.0-rc.157](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.156...v0.31.0-rc.157) (2021-07-30)
 
 ## [0.31.0-rc.156](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.155...v0.31.0-rc.156) (2021-07-30)
