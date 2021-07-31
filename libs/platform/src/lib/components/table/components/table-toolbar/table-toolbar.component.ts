@@ -21,7 +21,7 @@ let tableToolbarTitleUniqueId = 0;
 
 /**
  * The component that represents a table toolbar.
- * 
+ *
  * ```html
  * <fdp-table-toolbar
  *   title="Order Line Items"
@@ -33,6 +33,7 @@ let tableToolbarTitleUniqueId = 0;
 @Component({
     selector: 'fdp-table-toolbar',
     templateUrl: './table-toolbar.component.html',
+    styles: ['.fdp-table__title { z-index: 2; }'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: TABLE_TOOLBAR, useExisting: TableToolbarComponent }]
 })

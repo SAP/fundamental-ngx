@@ -13,7 +13,14 @@
         [hasTitle]="!!title"
         [size]="_getCozyCompactSize(size)"
     >
-        <label fd-toolbar-label [id]="tableToolbarTitleId">{{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span></label>
+        <label
+            fd-toolbar-label
+            class="fdp-table__title"
+            [id]="tableToolbarTitleId"
+        >
+            {{ title }}
+            <span *ngIf="!hideItemCount">({{ counter }})</span>
+        </label>
 
         <fd-toolbar-spacer></fd-toolbar-spacer>
 

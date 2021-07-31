@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -7,7 +8,6 @@ import {
     ContentChildren,
     EventEmitter,
     HostBinding,
-    HostListener,
     Inject,
     Input,
     NgZone,
@@ -23,31 +23,26 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
-import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
+import { TableRowDirective } from '@fundamental-ngx/core/table';
 
 import { FdDropEvent, RtlService } from '@fundamental-ngx/core/utils';
-import { TableRowDirective } from '@fundamental-ngx/core/table';
+import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
 import { isDataSource } from '../../domain';
 import { getNestedValue } from '../../utils/object';
 
-import { TableService } from './table.service';
+import { TableColumn } from './components/table-column/table-column';
+import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-toolbar/table-toolbar';
+import { DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
+import { TableColumnResizableSide } from './directives';
+import { ArrayTableDataSource } from './domain/array-data-source';
+import { ObservableTableDataSource } from './domain/observable-data-source';
+import { TableDataSource } from './domain/table-data-source';
+import { ContentDensity, FILTER_STRING_STRATEGY, SelectionMode, SortDirection, TableRowType } from './enums';
 
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { SearchInput } from './interfaces/search-field.interface';
-import { ContentDensity, FILTER_STRING_STRATEGY, SelectionMode, SortDirection, TableRowType } from './enums';
-import { DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH } from './constants';
-import { TableDataSource } from './domain/table-data-source';
-import { ArrayTableDataSource } from './domain/array-data-source';
-import { ObservableTableDataSource } from './domain/observable-data-source';
-
-import { TableColumn } from './components/table-column/table-column';
-import { TABLE_TOOLBAR, TableToolbarWithTemplate } from './components/table-toolbar/table-toolbar';
-import { Table } from './table';
-import { TableScrollable, TableScrollDispatcherService } from './table-scroll-dispatcher.service';
-import { getScrollBarWidth } from './utils';
 import {
     ColumnsChange,
     FilterChange,
@@ -65,8 +60,12 @@ import {
     TableRowToggleOpenStateEvent,
     TableSortChangeEvent
 } from './models';
+import { Table } from './table';
 import { TableColumnResizeService } from './table-column-resize.service';
-import { TableColumnResizableSide } from './directives';
+import { TableScrollable, TableScrollDispatcherService } from './table-scroll-dispatcher.service';
+
+import { TableService } from './table.service';
+import { getScrollBarWidth } from './utils';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
@@ -738,17 +737,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._setFreezableInfo();
 
         this._cdr.markForCheck();
-    }
-
-    /** @hidden
-     *  Needs to prevent scrolling and other events on loading.
-     *  TODO: refactor it on keyboard navigation implementation
-     * */
-    @HostListener('keydown', ['$event'])
-    keyDownHandler(event: KeyboardEvent): void {
-        if (this.loading) {
-            event.preventDefault();
-        }
     }
 
     // Private API

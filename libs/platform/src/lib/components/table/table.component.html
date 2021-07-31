@@ -1,14 +1,14 @@
-<!-- Toolbar -->
-<ng-container
-    *ngIf="tableToolbar"
-    [ngTemplateOutlet]="tableToolbar.contentTemplateRef"
-    [ngTemplateOutletContext]="_toolbarContext"
-></ng-container>
-
 <fd-busy-indicator
     [loading]="loading"
     block="true"
 >
+    <!-- Toolbar -->
+    <ng-container
+        *ngIf="tableToolbar"
+        [ngTemplateOutlet]="tableToolbar.contentTemplateRef"
+        [ngTemplateOutletContext]="_toolbarContext"
+    ></ng-container>
+
     <!-- Table Container -->
     <div class="fdp-table__container" role="table">
         <!-- Table header outlet -->
@@ -260,6 +260,7 @@
             fdpTableScroller="horizontal"
         >
             <table
+                *ngIf="!loading"
                 fd-table
                 role="presentation"
                 class="fdp-table__body-table"
