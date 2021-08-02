@@ -1,27 +1,26 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { coerceArray, coerceNumberProperty } from '@angular/cdk/coercion';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     EventEmitter,
     Input,
     OnChanges,
+    OnDestroy,
     OnInit,
     Optional,
     Output,
     SimpleChanges,
-    ViewEncapsulation,
-    TemplateRef, OnDestroy, ChangeDetectorRef
+    TemplateRef,
+    ViewEncapsulation
 } from '@angular/core';
-import {
-    ENTER,
-    SPACE
-} from '@angular/cdk/keycodes';
-import { coerceNumberProperty, coerceArray } from '@angular/cdk/coercion';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { Subscription } from 'rxjs';
-
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { PaginationService } from './pagination.service';
-import { RtlService } from '@fundamental-ngx/core/utils';
 import { Pagination } from './pagination.model';
+import { PaginationService } from './pagination.service';
+
 
 /** Constant representing the default number of items per page. */
 const DEFAULT_ITEMS_PER_PAGE = 10;
@@ -190,6 +189,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     constructor (
         private readonly paginationService: PaginationService,
         private readonly _cd: ChangeDetectorRef,
+        private readonly _liveAnnouncer: LiveAnnouncer,
         @Optional() private readonly _rtlService: RtlService
     ) {}
 
@@ -260,6 +260,8 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
             return;
         }
         this._refreshPages();
+
+        this._liveAnnouncer.announce('Page ' + page + ', current page');
 
         this.pageChangeStart.emit(page);
     }
