@@ -29,9 +29,9 @@ describe('PopoverBodyComponent', () => {
 
     it('should handle escape key', () => {
         spyOn(component.onClose, 'next');
-        const keyboardEvent: any = {key: ESCAPE, keyCode: ESCAPE};
+        const keyboardEvent: any = {key: ESCAPE, keyCode: ESCAPE, stopPropagation: () => {}};
         component._closeOnEscapeKey = true;
-        component.bodyKeydownHandler(keyboardEvent);
+        component.bodyKeyupHandler(keyboardEvent);
         expect(component.onClose.next).toHaveBeenCalled();
     });
 

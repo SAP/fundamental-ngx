@@ -249,14 +249,6 @@ describe('List test suite:', function() {
         });
     });
 
-    describe('With No Separator examples:', function() {
-        it('should do basic checks and check separator', () => {
-            checkElArrIsClickable(noSepListItems);
-            checkElementText(noSepListItems);
-            checkAttributeValueTrue(noSepList, separatorAttr);
-        });
-    });
-
     describe('With Unread Data examples:', function() {
         it('should do basic checks and check unread data', () => {
             checkElArrIsClickable(unreadListItems);

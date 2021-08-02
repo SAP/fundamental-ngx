@@ -15,7 +15,7 @@ import {
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { applyCssClass, CssClassBuilder, RtlService } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@fundamental-ngx/core/utils';
 
 import { dialogFadeNgIf } from './utils/dialog.animations';
 import { DialogConfig } from './utils/dialog-config.class';
@@ -125,10 +125,11 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
         @Optional() private _dialogRef: DialogRef,
         @Optional() router: Router,
         @Optional() rtlService: RtlService,
+        focusTrapService: FocusTrapService,
         changeDetectorRef: ChangeDetectorRef,
         elementRef: ElementRef
     ) {
-        super(router, elementRef, changeDetectorRef, rtlService);
+        super(router, elementRef, changeDetectorRef, rtlService, focusTrapService);
     }
 
     /** @hidden */

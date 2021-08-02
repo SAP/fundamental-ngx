@@ -18,7 +18,8 @@ import {
     QueryList,
     TemplateRef,
     ViewChild,
-    ViewChildren
+    ViewChildren,
+    ViewEncapsulation
 } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
@@ -66,7 +67,8 @@ type CardColumn = CardDefinitionDirective[];
     selector: 'fd-fixed-card-layout',
     templateUrl: './fixed-card-layout.component.html',
     styleUrls: ['./fixed-card-layout.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None
 })
 export class FixedCardLayoutComponent implements OnInit, AfterContentInit, AfterViewInit, AfterViewChecked, OnDestroy {
     /** @hidden */

@@ -19,14 +19,16 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
+import { UP_ARROW, DOWN_ARROW, ESCAPE } from '@angular/cdk/keycodes';
 import { Overlay, OverlayConfig, ConnectedPosition, OverlayRef } from '@angular/cdk/overlay';
+import { FocusKeyManager, FocusableOption, LiveAnnouncer } from '@angular/cdk/a11y';
+import { TemplatePortal } from '@angular/cdk/portal';
 
-import { PopoverComponent } from '@fundamental-ngx/core';
 import { Observable, isObservable, of, Subscription, fromEvent, Subject } from 'rxjs';
 import { map, filter, take, takeUntil, tap } from 'rxjs/operators';
-import { TemplatePortal } from '@angular/cdk/portal';
-import { FocusKeyManager, FocusableOption } from '@angular/cdk/a11y';
-import { RtlService } from '@fundamental-ngx/core';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
+
 import { SearchFieldDataSource } from '../../domain/public_api';
 import { BaseComponent } from '../base';
 
@@ -73,7 +75,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     /**
      * Place holder text for search input field.
      */
-    @Input() placeholder: string;
+    @Input()
+    placeholder: string;
 
     /**
      * List of string values to populate suggestion dropdown selection.
@@ -119,7 +122,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     /**
      * Initial input text.
      */
-    @Input() inputText: string;
+    @Input()
+    inputText: string;
 
     /**
      * List of categories.
@@ -137,44 +141,65 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     /**
      * Set label for category dropdown button.
      */
-    @Input() categoryLabel = 'Category';
+    @Input()
+    categoryLabel = 'Category';
 
     /**
      * Hide display of category label
      */
-    @Input() hideCategoryLabel = false;
+    @Input()
+    hideCategoryLabel = false;
 
     /**
      * Toggle "loading" mode.
      */
-    @Input() isLoading = false;
+    @Input()
+    isLoading = false;
 
     /**
      * ARIA label to specify what the search field is
      * Not shown in the UI, only visible by the screen-readers.
      */
-    @Input() ariaLabel: string;
+    @Input()
+    ariaLabel: string;
 
     /**
      * Id of elements (separated by space) for setting aria-labelledby for search input
      * Not shown in the UI, only visible by the screen-readers.
      */
-    @Input() ariaLabelledby: string; 
+    @Input()
+    ariaLabelledby: string;
+
+    /**
+     * Message announced by screen reader, when search suggestions opens.
+     */
+    @Input()
+    searchSuggestionMessage = 'suggestions found.';
+
+    /**
+     * Second part of message for search suggestion.
+     * direction for navigating the suggestion. This is not necessry in case of 0 suggestion.
+     */
+    @Input()
+    searchSuggestionNavigateMessage = 'use up and down arrows to navigate';
 
     /**
      * Input change event.
      */
-    @Output() inputChange: EventEmitter<SearchInput> = new EventEmitter();
+    @Output()
+    inputChange: EventEmitter<SearchInput> = new EventEmitter();
 
     /**
      * Search submit event.
      */
-    @Output() searchSubmit: EventEmitter<SearchInput> = new EventEmitter();
+    @Output()
+    searchSubmit: EventEmitter<SearchInput> = new EventEmitter();
 
     /**
      * Cancel search event.
      */
-    @Output() cancelSearch: EventEmitter<void> = new EventEmitter();
+    @Output()
+    cancelSearch: EventEmitter<void> = new EventEmitter();
 
     /** @hidden Focus state */
     get isFocused(): boolean {
@@ -216,6 +241,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     public menuId = '';
     public dir = 'ltr';
 
+    private _currentSearchSuggestionAnnoucementMessage = '';
     private _suggestionOverlayRef: OverlayRef;
     private _suggestionPortal: TemplatePortal;
     private _suggestionkeyManager: FocusKeyManager<SearchFieldSuggestionDirective>;
@@ -224,6 +250,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     private _rtlChangeSubscription = Subscription.EMPTY;
     private _outsideClickSubscription = Subscription.EMPTY;
     private _dataSourceSubscription = Subscription.EMPTY;
+    private _suggestionSubscription = Subscription.EMPTY;
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     @ViewChild('categoryDropdown', { static: false }) categoryDropdown: PopoverComponent;
@@ -238,7 +265,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         private _viewContainerRef: ViewContainerRef,
         protected _cd: ChangeDetectorRef,
         private _rtl: RtlService,
-        private readonly elementRef: ElementRef
+        private readonly _elementRef: ElementRef,
+        private _liveAnnouncer: LiveAnnouncer
     ) {
         super(_cd);
     }
@@ -265,23 +293,21 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this._rtlChangeSubscription.unsubscribe();
         this._outsideClickSubscription.unsubscribe();
         this._dataSourceSubscription.unsubscribe();
+        this._suggestionSubscription.unsubscribe();
         this._onDestroy$.next();
     }
 
-    onKeydown($event: KeyboardEvent): void {
-        if (!$event) {
+    onKeydown(event: KeyboardEvent): void {
+        if (!event) {
             return;
         }
-        const code = $event.key;
-        switch (code) {
-            case 'Down':
-            case 'ArrowDown':
-            case 'Up':
-            case 'ArrowUp':
-                if (this._suggestionkeyManager) {
-                    this._suggestionkeyManager.onKeydown($event);
-                }
-                break;
+
+        if (KeyUtil.isKeyCode(event, [UP_ARROW, DOWN_ARROW])) {
+            if (this._suggestionkeyManager) {
+                this._suggestionkeyManager.onKeydown(event);
+            }
+        } else if (KeyUtil.isKeyCode(event, [ESCAPE])) {
+            this.closeSuggestionMenu(true);
         }
     }
 
@@ -289,12 +315,16 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * Capturing value change in input text field of combobox.
      * @hidden
      */
-    onValueChange($event: string): void {
+    onValueChange(event: string): void {
+        // when search result not changed but input text is changed.
+        // again need to announce the result, so clear this message.
+        setTimeout(() => (this._currentSearchSuggestionAnnoucementMessage = ''));
+
         this.inputChange.emit({
-            text: $event,
+            text: event,
             category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
         });
-        const inputStr: string = $event.trim();
+        const inputStr: string = event.trim();
         if (inputStr.length === 0) {
             this.closeSuggestionMenu();
             return;
@@ -309,16 +339,17 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             );
             this.dataSource.match(match);
         }
+        this._updateSearchAnnoucementText();
     }
 
     /**
      * Capturing item selection from dropdown menu of combobox.
      * @hidden
      */
-    onItemClick($event: string): void {
-        this.inputText = $event;
+    onItemClick(event: string): void {
+        this.inputText = event;
         const searchInput: SearchInput = {
-            text: $event,
+            text: event,
             category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
         };
         this.inputChange.emit(searchInput);
@@ -457,9 +488,26 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this._dataSource = dataSource;
     }
 
+    /**
+     * @hidden return count for matching suggestion with input text
+     * @returns number
+     */
+    private _getSuggestionsLength(): number {
+        let count = 0;
+        this._suggestionSubscription = this.dropdownValues$.subscribe((suggestions) => {
+            suggestions?.forEach((suggestion) => {
+                if (this.inputText && suggestion?.toLowerCase().indexOf(this.inputText?.trim()?.toLowerCase()) > -1) {
+                    count++;
+                }
+            });
+        });
+
+        return count;
+    }
+
     /** @hidden */
     private _listenElementEvents(): void {
-        fromEvent(this.elementRef.nativeElement, 'focus', { capture: true })
+        fromEvent(this._elementRef.nativeElement, 'focus', { capture: true })
             .pipe(
                 tap(() => {
                     this._isFocused = true;
@@ -468,7 +516,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
                 takeUntil(this._onDestroy$)
             )
             .subscribe();
-        fromEvent(this.elementRef.nativeElement, 'blur', { capture: true })
+        fromEvent(this._elementRef.nativeElement, 'blur', { capture: true })
             .pipe(
                 tap(() => {
                     this._isFocused = false;
@@ -478,6 +526,19 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             )
             .subscribe();
     }
+
+    /** @hidden */
+    private _updateSearchAnnoucementText(): void {
+        // create search suggestion message with count.
+        const suggestionCount = this._getSuggestionsLength();
+        this._currentSearchSuggestionAnnoucementMessage =
+            suggestionCount +
+            this.searchSuggestionMessage +
+            (suggestionCount > 0 ? this.searchSuggestionNavigateMessage : '');
+        if (this.inputText?.length > 0) {
+            this._liveAnnouncer.announce(this._currentSearchSuggestionAnnoucementMessage);
+        }
+    }
 }
 
 @Pipe({
@@ -485,6 +546,6 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
 })
 export class SuggestionMatchesPipe implements PipeTransform {
     transform(values: string[], match: string): string[] {
-        return values.filter((value) => value.toLowerCase().indexOf(match.trim().toLowerCase()) > -1);
+        return values.filter((value) => value.toLowerCase().indexOf(match?.trim().toLowerCase()) > -1);
     }
 }

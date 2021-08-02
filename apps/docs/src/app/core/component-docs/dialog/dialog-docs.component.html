@@ -210,6 +210,19 @@
 </component-example>
 <code-example [exampleFiles]="customBackdropContainer"></code-example>
 
+<separator></separator>
+
+<fd-docs-section-title id="popover-inside-dialog" componentName="dialog">
+    Dialog with inner popovers
+</fd-docs-section-title>
+<description>
+    Dialog supports inner popovers (dropdown menus, etc.) with focus trap for accessibility.
+</description>
+<component-example>
+    <fd-dialog-inner-popover-example></fd-dialog-inner-popover-example>
+</component-example>
+<code-example [exampleFiles]="dialogInnerPopover"></code-example>
+
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <button fd-button label="Open Dialog" (click)="openDialog(playgroundDialog)"></button>
 </playground>

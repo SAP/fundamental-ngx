@@ -1,4 +1,43 @@
 
+## [0.31.0-rc.164](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.163...v0.31.0-rc.164) (2021-08-02)
+
+## [0.31.0-rc.163](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.162...v0.31.0-rc.163) (2021-08-02)
+
+
+### Bug Fixes
+
+* **core:** dialog inner focus trap ([#6114](https://github.com/SAP/fundamental-ngx/issues/6114)) ([68d541e](https://github.com/SAP/fundamental-ngx/commit/68d541e56b787a886d2334d23a643cd7ea646916))
+
+## [0.31.0-rc.162](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.161...v0.31.0-rc.162) (2021-08-02)
+
+## [0.31.0-rc.161](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.160...v0.31.0-rc.161) (2021-08-02)
+
+## [0.31.0-rc.160](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.159...v0.31.0-rc.160) (2021-08-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core,platform:** Removed [noSeperator] property in list component as it was not necessary, as we have [noBorder] property which has the same functionality.
+
+### Bug Fixes
+
+* **core:** remove css from fixed-card-layout component, use correct class names ([#6009](https://github.com/SAP/fundamental-ngx/issues/6009)) ([95ef84f](https://github.com/SAP/fundamental-ngx/commit/95ef84f4d38dcf2bcfb901979da69ebca9ddd99c))
+* **core,platform:** remove css from list component, use correct class names ([#6010](https://github.com/SAP/fundamental-ngx/issues/6010)) ([b58f36b](https://github.com/SAP/fundamental-ngx/commit/b58f36bc9b435a755c010329da1d5174ed002ab2))
+
+## [0.31.0-rc.159](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.158...v0.31.0-rc.159) (2021-08-02)
+
+
+### Bug Fixes
+
+* **platform:** fix search component keyboard accessibility and screen reader issues ([#5673](https://github.com/SAP/fundamental-ngx/issues/5673)) ([e93a3ff](https://github.com/SAP/fundamental-ngx/commit/e93a3fff2dc3091b6b1e80d5a60b29b092e0db09))
+
+## [0.31.0-rc.158](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.157...v0.31.0-rc.158) (2021-07-31)
+
+
+### Bug Fixes
+
+* **platform:** add attribute option into combobox ([#5772](https://github.com/SAP/fundamental-ngx/issues/5772)) ([ae5c191](https://github.com/SAP/fundamental-ngx/commit/ae5c191b13608d4fae4b045a9f9a2dfb5fff3e6c))
+
 ## [0.31.0-rc.157](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.156...v0.31.0-rc.157) (2021-07-30)
 
 ## [0.31.0-rc.156](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.155...v0.31.0-rc.156) (2021-07-30)
