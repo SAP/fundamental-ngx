@@ -4,9 +4,8 @@ import { ESCAPE } from '@angular/cdk/keycodes';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, filter } from 'rxjs/operators';
 
-import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService, FocusTrapService } from '@fundamental-ngx/core/utils';
 
-import { createFocusTrap, FocusTrap } from 'focus-trap';
 import { DialogConfigBase } from './dialog-config-base.class';
 import { DialogRefBase } from './dialog-ref-base.class';
 import { DialogSize, dialogWidthToSize } from '../utils/dialog-width-to-size';
@@ -27,7 +26,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
     dialogPaddingSize: DialogSize;
 
     /** @hidden */
-    protected _focusTrap: FocusTrap;
+    protected _focusTrapId: string;
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -59,7 +58,8 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
         protected _router: Router,
         protected _elementRef: ElementRef,
         protected _changeDetectorRef: ChangeDetectorRef,
-        protected _rtlService: RtlService
+        protected _rtlService: RtlService,
+        protected _focusTrapService: FocusTrapService
     ) {}
 
     /** @hidden */
@@ -114,21 +114,19 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
     private _trapFocus(): void {
         if (this._config.focusTrapped) {
             try {
-                this._focusTrap = createFocusTrap(this.dialogWindow.nativeElement, {
+
+                this._focusTrapId = this._focusTrapService.createFocusTrap(this.dialogWindow.nativeElement, {
                     clickOutsideDeactivates: this._config.backdropClickCloseable && this._config.hasBackdrop,
                     escapeDeactivates: false,
                     allowOutsideClick: () => true
                 });
-                this._focusTrap.activate();
             } catch (e) {}
         }
     }
 
     /** @hidden */
     private _deactivateFocusTrap(): void {
-        if (this._focusTrap) {
-            this._focusTrap.deactivate();
-        }
+        this._focusTrapService.deactivateFocusTrap(this._focusTrapId);
     }
 
     /** @hidden Set dialog window position */
