@@ -104,7 +104,8 @@ export class BaseWizardGenerator implements OnDestroy {
     /**
      * @description Emits wizard value when it's completed.
      */
-    @Output() wizardFinished: EventEmitter<WizardGeneratorFormsValue> = new EventEmitter();
+    @Output()
+    wizardFinished: EventEmitter<WizardGeneratorFormsValue> = new EventEmitter();
 
     /**
      * @hidden
