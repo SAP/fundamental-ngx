@@ -124,7 +124,7 @@ describe('PlatformSliderComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestSliderComponent, SliderComponent],
+            declarations: [TestSliderComponent],
             imports: [PlatformSliderModule, ReactiveFormsModule, FdpFormGroupModule]
         }).compileComponents();
     });

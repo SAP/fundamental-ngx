@@ -1,9 +1,11 @@
-import { By } from '@angular/platform-browser';
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { Component, ViewChild } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
-import { RadioModule, FormModule } from '@fundamental-ngx/core';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { RadioModule } from '@fundamental-ngx/core/radio';
+
 import { RadioButtonComponent } from './radio.component';
 
 @Component({

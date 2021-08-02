@@ -3,12 +3,11 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { FormModule } from '@fundamental-ngx/core';
+import { FormModule } from '@fundamental-ngx/core/form';
 import { FdpFormGroupModule, SelectItem } from '@fundamental-ngx/platform';
 
 import { RadioGroupComponent } from './radio-group.component';
 import { PlatformRadioGroupModule } from './radio-group.module';
-import { RadioButtonComponent } from './radio/radio.component';
 
 @Component({
     selector: 'fdp-test-reative-fdp-form-group',
@@ -335,7 +334,7 @@ describe('Radio Group Test with Template Driven fdp-form-group', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule],
-            declarations: [TestRadioGroupTemplateDrivenFdpGroup, RadioGroupComponent, RadioButtonComponent]
+            declarations: [TestRadioGroupTemplateDrivenFdpGroup]
         }).compileComponents();
     }));
 

@@ -1,20 +1,28 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DialogRef } from '@fundamental-ngx/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { P13FilteringDialogComponent, FilterDialogData } from './filtering.component';
+import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
+import { PlatformTableModule } from '@fundamental-ngx/platform';
+
+import { FilterDialogData, P13FilteringDialogComponent } from './filtering.component';
 
 describe('PlatformTableP13FilterDialogComponent', () => {
     let component: P13FilteringDialogComponent;
     let fixture: ComponentFixture<P13FilteringDialogComponent>;
+
     const dialogRef = new DialogRef();
     const dialogData: FilterDialogData = { columns: [], collectionFilter: [] };
+
     dialogRef.data = dialogData;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [P13FilteringDialogComponent],
-                providers: [{ provide: DialogRef, useValue: dialogRef }]
+                imports: [PlatformTableModule, BrowserAnimationsModule],
+                providers: [
+                    { provide: DialogRef, useValue: dialogRef },
+                    DialogConfig
+                ]
             }).compileComponents();
         })
     );

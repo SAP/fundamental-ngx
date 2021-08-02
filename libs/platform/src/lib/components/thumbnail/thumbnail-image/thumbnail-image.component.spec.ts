@@ -1,10 +1,12 @@
-import { Component, ViewChild } from '@angular/core'
+import { CommonModule } from '@angular/common';
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
+import { AvatarModule, ButtonModule, CarouselModule, DialogModule } from '@fundamental-ngx/core';
+import { Media } from '@fundamental-ngx/platform';
+
 import { ThumbnailImageComponent } from './thumbnail-image.component';
-import { PlatformThumbnailModule } from '../thumbnail.module';
-import { Media } from '../thumbnail.interfaces';
 
 @Component({
     template: `<fdp-thumbnail-image [mediaList]="mediaList"></fdp-thumbnail-image>`
@@ -25,6 +27,7 @@ class DefaultThumbnailImageTestComponent {
         alt: 'Failed to load http://lorempixel.com/400/400/nature',
         label: 'nature2'
     }];
+
     @ViewChild(ThumbnailImageComponent, { static: true })
     thumbnailImage: ThumbnailImageComponent;
 }
@@ -33,9 +36,10 @@ describe('DefaultThumbnailImageComponent', () => {
     let component: DefaultThumbnailImageTestComponent;
     let fixture: ComponentFixture<DefaultThumbnailImageTestComponent>;
     let thumbNailImageComponent: ThumbnailImageComponent;
+
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformThumbnailModule],
+            imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule],
             declarations: [ThumbnailImageComponent, DefaultThumbnailImageTestComponent]
         }).compileComponents();
     }));
@@ -55,21 +59,22 @@ describe('DefaultThumbnailImageComponent', () => {
         const divElement = fixture.debugElement.query(By.css('div'));
         expect(divElement.nativeElement.classList.contains('fdp-thumbnail-image-container')).toBe(true);
     });
-    it('should emit on thumbNailClicked', () => {
 
-        spyOn(thumbNailImageComponent.thumbnailClicked, 'emit')
+    it('should emit on thumbNailClicked', () => {
+        spyOn(thumbNailImageComponent.thumbnailClicked, 'emit');
+
         thumbNailImageComponent.thumbnailClick(component.mediaList[0]);
+
         expect(thumbNailImageComponent.thumbnailClicked.emit).toHaveBeenCalled();
         expect(thumbNailImageComponent.thumbnailClicked.emit).toHaveBeenCalledWith(component.mediaList[0]);
-
     });
 
     it('should highlight the first thumbnail by default', () => {
         const thumbnails = fixture.debugElement.queryAll(By.css('.fdp-thumbnail-image'));
+
         expect(thumbnails[0].classes['fdp-thumbnail-image--selected']).toBeTruthy();
         expect(thumbnails[1].classes['fdp-thumbnail-image--selected']).toBeFalsy();
     });
-
 });
 
 
@@ -95,8 +100,8 @@ describe('HorizontalThumbnailImageComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformThumbnailModule],
-            declarations: [ThumbnailImageComponent, HorizontalThumbnailImageTestComponent]
+            imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule],
+            declarations: [HorizontalThumbnailImageTestComponent, ThumbnailImageComponent]
         }).compileComponents();
     }));
 
@@ -114,8 +119,6 @@ describe('HorizontalThumbnailImageComponent', () => {
         const divElement = fixture.debugElement.query(By.css('div'));
         expect(divElement.nativeElement.children[0].classList.contains('fdp-thumbnail-image--horizontal')).toBe(true);
     });
-
-
 });
 
 @Component({
@@ -169,10 +172,7 @@ class MoreImagesThumbnailImageTestComponent {
         mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
         alt: 'Failed to load http://lorempixel.com/400/400/nature',
         label: 'rose'
-    }
-
-    ];
-
+    }];
 }
 
 describe('MoreImagesThumbnailImageTestComponent', () => {
@@ -181,8 +181,8 @@ describe('MoreImagesThumbnailImageTestComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PlatformThumbnailModule],
-            declarations: [ThumbnailImageComponent, MoreImagesThumbnailImageTestComponent]
+            imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule],
+            declarations: [MoreImagesThumbnailImageTestComponent, ThumbnailImageComponent]
         }).compileComponents();
     }));
 
@@ -201,11 +201,10 @@ describe('MoreImagesThumbnailImageTestComponent', () => {
         expect(thumbnails[4].classes['fdp-thumbnail-image--overlay']).toBeTruthy();
         expect(thumbnails[1].classes['fdp-thumbnail-image--overlay']).toBeFalsy();
     });
+
     it('should display overflow text after list crosses the max limit', () => {
 
         const overlay = fixture.debugElement.query(By.css('.fdp-thumbnail-overflow'));
         expect(overlay.nativeElement.innerHTML).toEqual('+1');
-
     });
-
 });

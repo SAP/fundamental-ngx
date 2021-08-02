@@ -1,10 +1,9 @@
-import { Component } from '@angular/core'
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { PlatformThumbnailModule } from './thumbnail.module';
 import { Media } from './thumbnail.interfaces';
-import { ThumbnailComponent } from './thumbnail.component';
+import { PlatformThumbnailModule } from './thumbnail.module';
 
 @Component({
     template: `<fdp-thumbnail [mediaList]="mediaList"></fdp-thumbnail>`
@@ -27,7 +26,7 @@ describe('DefaultThumbnailComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformThumbnailModule],
-            declarations: [ThumbnailComponent, DefaultThumbnailTestComponent]
+            declarations: [DefaultThumbnailTestComponent]
         }).compileComponents();
     }));
 
@@ -79,7 +78,7 @@ describe('HorizontalThumbnailComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformThumbnailModule],
-            declarations: [ThumbnailComponent, HorizontalThumbnailTestComponent]
+            declarations: [HorizontalThumbnailTestComponent]
         }).compileComponents();
     }));
 
@@ -116,14 +115,13 @@ class ImageThumbnailTestComponent {
 }
 
 describe('ImageThumbnailComponent', () => {
-
     let component: ImageThumbnailTestComponent;
     let fixture: ComponentFixture<ImageThumbnailTestComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformThumbnailModule],
-            declarations: [ThumbnailComponent, ImageThumbnailTestComponent]
+            declarations: [ImageThumbnailTestComponent]
         }).compileComponents();
     }));
 
@@ -138,12 +136,9 @@ describe('ImageThumbnailComponent', () => {
     });
 
     it('check for loading the Image media', () => {
-
         const videoElement = fixture.debugElement.query(By.css('video'));
         const imageElement = fixture.debugElement.query(By.css('img'));
         expect(imageElement).toBeTruthy();
         expect(videoElement).toBeFalsy();
-
     });
-
 });

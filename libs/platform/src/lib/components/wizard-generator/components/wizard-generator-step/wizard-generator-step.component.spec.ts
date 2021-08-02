@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PlatformWizardGeneratorModule } from '../../wizard-generator.module';
-import { WizardGeneratorService } from '../../wizard-generator.service';
-import { WizardStepForms } from './wizard-generator-step.component';
-import { WizardGeneratorItem } from '@fundamental-ngx/platform';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { PlatformWizardGeneratorModule, WizardGeneratorItem, WizardGeneratorService, WizardStepForms } from '@fundamental-ngx/platform';
 
 const items = [{
     name: 'Product type',
@@ -18,7 +17,7 @@ const items = [{
                     message: 'Select appropriate product type',
                     type: 'select',
                     choices: ['Mobile', 'Tablet', 'Desktop'],
-                    default: 'Mobile',
+                    default: 'Mobile'
                 }
             ]
         }
@@ -27,7 +26,11 @@ const items = [{
 
 @Component({
     template: `
-        <fdp-wizard-generator-step *ngIf="step !== undefined" (formsCreated)="formsCreated($event)" [item]="step"></fdp-wizard-generator-step>
+        <fdp-wizard-generator-step
+            *ngIf="step !== undefined"
+            (formsCreated)="formsCreated($event)"
+            [item]="step"
+        ></fdp-wizard-generator-step>
     `,
     providers: [WizardGeneratorService]
 })
@@ -41,7 +44,8 @@ export class TestComponent {
 
     constructor(
         public wizardGeneratorService: WizardGeneratorService
-    ) { }
+    ) {
+    }
 
     formsCreated(forms: WizardStepForms): void {
         this.forms = forms;
@@ -55,10 +59,8 @@ describe('WizardGeneratorStepComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                PlatformWizardGeneratorModule
-            ],
-            declarations: [ TestComponent ]
+            imports: [PlatformWizardGeneratorModule],
+            declarations: [TestComponent]
         }).compileComponents();
     });
 
