@@ -4050,6 +4050,50 @@
           }
         }
       }
+    },
+    "core-icon-tab-bar": {
+      "projectType": "library",
+      "root": "libs/core/src/lib/icon-tab-bar",
+      "sourceRoot": "libs/core/src/lib/icon-tab-bar",
+      "prefix": "fd",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": [
+            "dist/libs/core/icon-tab-bar"
+          ],
+          "options": {
+            "tsConfig": "libs/core/src/lib/icon-tab-bar/tsconfig.lib.json",
+            "project": "libs/core/src/lib/icon-tab-bar/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/core/src/lib/icon-tab-bar/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/core/src/lib/icon-tab-bar/test.ts",
+            "tsConfig": "libs/core/src/lib/icon-tab-bar/tsconfig.spec.json",
+            "karmaConfig": "libs/core/src/lib/icon-tab-bar/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/core/src/lib/icon-tab-bar/tsconfig.lib.json",
+              "libs/core/src/lib/icon-tab-bar/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "docs",

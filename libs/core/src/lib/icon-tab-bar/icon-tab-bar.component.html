@@ -1,0 +1,53 @@
+<div [ngClass]="_cssClassForContainer" class="fd-icon-tab-bar">
+    <ng-container *ngIf="iconTabType === 'text'">
+        <ng-container *ngTemplateOutlet="textType"></ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="iconTabType === 'icon' || iconTabType === 'icon-only'">
+        <ng-container *ngTemplateOutlet="iconType"></ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="iconTabType === 'filter'">
+        <ng-container *ngTemplateOutlet="filterType"></ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="iconTabType === 'process'">
+        <ng-container *ngTemplateOutlet="processType"></ng-container>
+    </ng-container>
+</div>
+
+<ng-template #processType>
+    <fd-icon-tab-bar-process-type
+        [tabsConfig]="tabsConfig"
+        [isRtl]="_isRtl"
+        (selected)="_selectItem($event)"
+    ></fd-icon-tab-bar-process-type>
+</ng-template>
+
+<ng-template #filterType>
+    <fd-icon-tab-bar-filter-type
+        [tabsConfig]="tabsConfig"
+        [showTabAll]="showTabAll"
+        [isRtl]="_isRtl"
+        (selected)="_selectItem($event)"
+    ></fd-icon-tab-bar-filter-type>
+</ng-template>
+
+<ng-template #iconType>
+    <fd-icon-tab-bar-icon-type
+        [tabsConfig]="tabsConfig"
+        [isRtl]="_isRtl"
+        (selected)="_selectItem($event)"
+    ></fd-icon-tab-bar-icon-type>
+</ng-template>
+
+<ng-template #textType>
+    <fd-icon-tab-bar-text-type
+        [tabsConfig]="tabsConfig"
+        [layoutMode]="layoutMode"
+        [isRtl]="_isRtl"
+        [enableTabReordering]="enableTabReordering"
+        (reordered)="_onReorder($event)"
+        (selected)="_selectItem($event)"
+    ></fd-icon-tab-bar-text-type>
+</ng-template>

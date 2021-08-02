@@ -105,11 +105,11 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/dynamic-page/dynamic-page-docs.module').then((m) => m.DynamicPageDocsModule)
             },
             {
-              path: 'facets',
-              loadChildren: () => import('./component-docs/facets/facet-docs.module').then((m) => m.FacetDocsModule)
+                path: 'facets',
+                loadChildren: () => import('./component-docs/facets/facet-docs.module').then((m) => m.FacetDocsModule)
             },
             {
-              path: 'feed-list-item',
+                path: 'feed-list-item',
                 loadChildren: () =>
                     import('./component-docs/feed-list-item/feed-list-item-docs.module').then((m) => m.FeedListItemDocsModule)
             },
@@ -177,8 +177,8 @@ export const ROUTES: Routes = [
                     )
             },
             {
-              path: 'grid-list',
-              loadChildren: () => import('./component-docs/grid-list/grid-list-docs.module').then((m) => m.GridListDocsModule)
+                path: 'grid-list',
+                loadChildren: () => import('./component-docs/grid-list/grid-list-docs.module').then((m) => m.GridListDocsModule)
             },
             {
                 path: 'icon',
@@ -464,7 +464,14 @@ export const ROUTES: Routes = [
                     import('./component-docs/moment-datetime-adapter/moment-datetime-adapter-docs.module').then(
                         (m) => m.MomentDatetimeAdapterDocsModule
                     )
-            }
+            },
+            {
+                path: 'icon-tab-bar',
+                loadChildren: () =>
+                    import('./component-docs/icon-tab-bar/icon-tab-bar-docs.module').then(
+                        (m) => m.IconTabBarDocsModule
+                    )
+            },
         ]
     }
 ];

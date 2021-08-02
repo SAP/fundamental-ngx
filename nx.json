@@ -911,6 +911,15 @@
         "core-popover",
         "core-menu"
       ]
+    },
+    "core-icon-tab-bar": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-icon",
+        "core-popover"
+      ]
     }
   }
 }
