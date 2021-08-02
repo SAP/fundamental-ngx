@@ -16,7 +16,7 @@ export class DatePickerPo extends CoreBaseComponentPo {
     positionExample = 'fd-date-picker-position-example ';
     disabledExample = 'fd-date-picker-disabled-example ';
 
-    monthes = '.fd-calendar__months';
+    months = '.fd-calendar__months';
     calendarRow = '.fd-calendar__row'
     inputGroup = '.fd-input-group';
     calendarBody = '.fd-calendar__group:nth-child(2) ';

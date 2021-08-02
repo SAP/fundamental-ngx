@@ -22,10 +22,11 @@ import { blockExamples } from '../fixtures/appData/date-picker-contents';
 describe('Datetime picker suite', function () {
     const datePickerPage = new DatePickerPo();
     const {
-        defaultExample, formExample, rangeExample, disabledExample, allowNullExample, formRangeExample, formattingExample, disableFuncExample,
-        internationalExample, rangeDisabledExample, calendar, calendarIcon, calendarInput, calendarItem, selectedTimeLine, currentItem, itemText, inputGroup,
-        frenchButton, germanButton, bulgarianButton, previousMonthButton, nextMonthButton, calendarBody, calendarRow, selectMonthButton, selectYearButton,
-        monthes, buttonText, message
+        defaultExample, formExample, rangeExample, disabledExample, allowNullExample, formRangeExample,
+        formattingExample, disableFuncExample, internationalExample, rangeDisabledExample, calendar, calendarIcon,
+        calendarInput, calendarItem, selectedTimeLine, currentItem, itemText, inputGroup, frenchButton, germanButton,
+        bulgarianButton, previousMonthButton, nextMonthButton, calendarBody, calendarRow, selectMonthButton,
+        selectYearButton, months, buttonText, message
     } = new DatePickerPo();
 
     beforeAll(() => {
@@ -92,7 +93,7 @@ describe('Datetime picker suite', function () {
         const currentDayIndex = getCurrentItemIndex();
         const itemsLength = getElementArrayLength(calendarItem) - 1;
 
-        for (let i = currentDayIndex - 1; i != 0; i--) {
+        for (let i = currentDayIndex - 1; i !== 0; i--) {
             expect(isElementClickable(calendarItem, i)).toBe(false, `previous element is not disabled`);
         }
 
@@ -102,7 +103,7 @@ describe('Datetime picker suite', function () {
 
     })
 
-    it('should check that avaliable only 2 next weeks in range disabled example', () => {
+    it('should check that available only 2 next weeks in range disabled example', () => {
         click(rangeDisabledExample + calendarIcon);
         const currentDayIndex = getCurrentItemIndex();
         const itemsLength = getElementArrayLength(calendarItem) - 1;
@@ -121,20 +122,20 @@ describe('Datetime picker suite', function () {
         }
 
         if (currentDayIndex + 15 > itemsLength) {
-            let lengthDifference = itemsLength - currentDayIndex;
-            let avaliableLengthNextMonth = 15 - lengthDifference;
+            const lengthDifference = itemsLength - currentDayIndex;
+            const availableLengthNextMonth = 15 - lengthDifference;
 
-            for(let i = 0; i < lengthDifference; i++){
+            for (let i = 0; i < lengthDifference; i++) {
                 expect(isElementClickable(calendarItem, i)).toBe(true, `element is disabled`);
             }
 
             click(nextMonthButton);
 
-            for(let i = 0; i < avaliableLengthNextMonth; i++){
+            for (let i = 0; i < availableLengthNextMonth; i++) {
                 expect(isElementClickable(calendarItem, i)).toBe(true, `element is disabled`);
             }
 
-            for(let i = avaliableLengthNextMonth + 1; i < itemsLength; i++){
+            for (let i = availableLengthNextMonth + 1; i < itemsLength; i++) {
                 expect(isElementClickable(calendarItem, i)).toBe(false, `element is not disabled`);
             }
         }
@@ -232,7 +233,7 @@ describe('Datetime picker suite', function () {
     function checkChoosingMonth(section: string): void {
         click(section + calendarIcon);
         click(selectMonthButton);
-        expect(isElementDisplayed(monthes)).toBe(true);
+        expect(isElementDisplayed(months)).toBe(true);
         const firstMonth = getAttributeByName(calendarItem + itemText, 'aria-label');
         click(calendarItem);
         expect(getText(selectMonthButton + buttonText)).toEqual(firstMonth, `month is not chosen`);
@@ -319,5 +320,5 @@ describe('Datetime picker suite', function () {
         section === internationalExample ? click(section + calendarIcon, 3) : click(section + calendarIcon);
         expect(doesItExist(calendar)).toBe(false, `calendar is not closed in ${section} example`);
     }
-    
+
 });
