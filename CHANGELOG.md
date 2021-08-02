@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.159](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.158...v0.31.0-rc.159) (2021-08-02)
+
+
+### Bug Fixes
+
+* **platform:** fix search component keyboard accessibility and screen reader issues ([#5673](https://github.com/SAP/fundamental-ngx/issues/5673)) ([e93a3ff](https://github.com/SAP/fundamental-ngx/commit/e93a3fff2dc3091b6b1e80d5a60b29b092e0db09))
+
 ## [0.31.0-rc.158](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.157...v0.31.0-rc.158) (2021-07-31)
 
 
