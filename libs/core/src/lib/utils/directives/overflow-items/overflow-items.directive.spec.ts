@@ -54,7 +54,6 @@ class WrapperComponent {
   currentExtraItems = 0;
 
   onOverflowed(extraItems: number): void {
-    debugger;
     this.currentExtraItems = extraItems;
   }
 }
