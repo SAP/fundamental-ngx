@@ -1,4 +1,16 @@
 
+## [0.31.0-rc.160](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.159...v0.31.0-rc.160) (2021-08-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core,platform:** Removed [noSeperator] property in list component as it was not necessary, as we have [noBorder] property which has the same functionality.
+
+### Bug Fixes
+
+* **core:** remove css from fixed-card-layout component, use correct class names ([#6009](https://github.com/SAP/fundamental-ngx/issues/6009)) ([95ef84f](https://github.com/SAP/fundamental-ngx/commit/95ef84f4d38dcf2bcfb901979da69ebca9ddd99c))
+* **core,platform:** remove css from list component, use correct class names ([#6010](https://github.com/SAP/fundamental-ngx/issues/6010)) ([b58f36b](https://github.com/SAP/fundamental-ngx/commit/b58f36bc9b435a755c010329da1d5174ed002ab2))
+
 ## [0.31.0-rc.159](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.158...v0.31.0-rc.159) (2021-08-02)
 
 
