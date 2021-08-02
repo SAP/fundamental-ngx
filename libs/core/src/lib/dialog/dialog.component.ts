@@ -13,17 +13,18 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { Subscription } from 'rxjs';
+
+import { applyCssClass, CssClassBuilder, RtlService } from '@fundamental-ngx/core/utils';
+
 import { dialogFadeNgIf } from './utils/dialog.animations';
 import { DialogConfig } from './utils/dialog-config.class';
 import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
 import { DialogBodyComponent } from './dialog-body/dialog-body.component';
 import { DialogFooterComponent } from './dialog-footer/dialog-footer.component';
 import { DialogRef } from './utils/dialog-ref.class';
-import { applyCssClass, RtlService } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { DialogBase } from './base/dialog-base.class';
+import { DialogTitleDirective } from './directives/dialog-title.directive';
 
 /**
  * Dialog component.
@@ -93,6 +94,14 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
     /** @hidden */
     @ContentChild(DialogFooterComponent)
     set dialogFooterConfig(component: DialogFooterComponent) {
+        if (component) {
+            component.dialogConfig = this.dialogConfig;
+        }
+    }
+
+    /** @hidden */
+    @ContentChild(DialogTitleDirective)
+    set dialogTitle(component: DialogTitleDirective) {
         if (component) {
             component.dialogConfig = this.dialogConfig;
         }

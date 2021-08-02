@@ -1,6 +1,7 @@
 import { Component, ElementRef, Optional } from '@angular/core';
+
 import { DialogConfig } from '../utils/dialog-config.class';
-import { DialogRef } from '..//utils/dialog-ref.class';
+import { DialogRef } from '../utils/dialog-ref.class';
 
 /**
  * Applies fundamental layout and styling to the contents of a dialog body.

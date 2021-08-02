@@ -6,7 +6,7 @@ export class DateTimePicker extends BaseComponentPo {
     root = '#page-content';
 
     topPage = 'h1.header';
-    bottomPage = '#datetimePickerDisableFunction ~ code-example button';
+    bottomPage = '#disable-function ~ code-example button';
 
     datePickerInput = 'fd-datetime-picker input';
     datePickerButton = 'fd-datetime-picker button';

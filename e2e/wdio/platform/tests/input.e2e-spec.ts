@@ -116,7 +116,7 @@ describe('Input should ', function() {
         expect(getValue(defaultInput)).toBe('');
     });
 
-    it('check have disabled attr assigned', () => {
+    xit('check have disabled attr assigned', () => {
         waitForElDisplayed(disabledInput);
 
         expect(getAttributeByName(disabledInput, 'ng-reflect-is-disabled')).toBe('true');
@@ -137,7 +137,7 @@ describe('Input should ', function() {
         scrollIntoView(messagesComponentsInput);
         waitForElDisplayed(messagesComponentsInput);
         click(submitBtn);
-        mouseHoverElement(messagesComponentsInput);
+        click(messagesComponentsInput);
         pause(300);
         waitForElDisplayed(errorTextAttr);
         expect(getText(errorTextAttr).trim()).toBe(errorText);

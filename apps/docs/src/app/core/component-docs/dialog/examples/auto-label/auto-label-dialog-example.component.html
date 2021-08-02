@@ -1,0 +1,30 @@
+<ng-template let-dialog let-dialogConfig="dialogConfig" #confirmationDialog>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog" role="dialog">
+        <fd-dialog-header>
+            <h1 id="fd-dialog-header-10" fd-title fd-dialog-title>The History of Pineapple</h1>
+        </fd-dialog-header>
+
+        <fd-dialog-body>
+			<div id="fd-dialog-body-10" role="document">Are you interested in The Great History of Pineapple?</div>
+		</fd-dialog-body>
+
+        <fd-dialog-footer>
+            <fd-button-bar
+                fdType="emphasized"
+                label="Interested"
+                [compact]="true"
+                (click)="dialog.close('Continue')"
+            ></fd-button-bar>
+
+            <fd-button-bar
+                fdInitialFocus
+                label="Cancel"
+                [compact]="true"
+                (click)="dialog.dismiss('Cancel')"
+            ></fd-button-bar>
+        </fd-dialog-footer>
+    </fd-dialog>
+</ng-template>
+
+<button fd-button label="Open from Template" (click)="openDialog(confirmationDialog)"></button>
+<p>{{ confirmationReason }}</p>

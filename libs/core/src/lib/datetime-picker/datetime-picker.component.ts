@@ -17,7 +17,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { Placement } from '@fundamental-ngx/core/shared';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
@@ -383,7 +383,10 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
 
         this._calculateTimeOptions();
 
-        this._dateTimeAdapter.localeChanges.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+        this._dateTimeAdapter.localeChanges.pipe(
+            takeUntil(this._onDestroy$),
+            filter(() => this._inputFieldDate !== '')
+        ).subscribe(() => {
             this._setInput(this.date);
             this._calculateTimeOptions();
             this._changeDetRef.detectChanges();

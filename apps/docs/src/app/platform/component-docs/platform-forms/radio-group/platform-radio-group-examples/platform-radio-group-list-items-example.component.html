@@ -6,6 +6,9 @@
         <fdp-form-field id="radiolo1" rank="1" [required]="true">
             <fdp-radio-group name="radiolo1" [list]="items" [isInline]="true" formControlName="example1">
             </fdp-radio-group>
+            <fdp-button contentDensity="compact" type="submit" label="Submit"></fdp-button>
+            <fdp-button contentDensity="compact" type="reset" style="margin: 2rem 2rem 0 2rem;" label="Reset"
+                (click)="onResetForm1(listform1)"></fdp-button>
         </fdp-form-field>
         <ng-template #i18n let-errors>
             <ng-container *ngIf="errors.required">
@@ -13,9 +16,6 @@
             </ng-container>
         </ng-template>
     </fdp-form-group>
-    <fdp-button contentDensity="compact" type="submit" style="margin-left: 2rem;" label="Submit"></fdp-button>
-    <fdp-button contentDensity="compact" type="reset" style="margin-left: 2rem;" label="Reset"
-        (click)="onResetForm1(listform1)"></fdp-button>
 </form>
 <p style="margin-left: 2rem;">Selected value: {{ form1.controls.example1?.value }}</p>
 <br />
@@ -27,6 +27,9 @@
         <fdp-form-field id="radio-lo2" rank="2" [required]="true">
             <fdp-radio-group name="vertical-radio-group" [list]="items" [isInline]="false" formControlName="example2">
             </fdp-radio-group>
+            <fdp-button contentDensity="compact" type="submit" label="Submit"></fdp-button>
+            <fdp-button contentDensity="compact" type="reset" style="margin: 2rem 2rem 0 2rem;" label="Reset"
+                (click)="onResetForm5(listform2)"></fdp-button>
         </fdp-form-field>
 
         <ng-template #i18n let-errors>
@@ -35,9 +38,6 @@
             </ng-container>
         </ng-template>
     </fdp-form-group>
-    <fdp-button contentDensity="compact" type="submit" style="margin-left: 2rem;" label="Submit"></fdp-button>
-    <fdp-button contentDensity="compact" type="reset" style="margin-left: 2rem;" label="Reset"
-        (click)="onResetForm5(listform2)"></fdp-button>
 </form>
 <br />
 <br />
@@ -65,6 +65,9 @@
             <fdp-radio-group name="work" [list]="items3" title="Work experience" [formControl]="ffr3.formControl">
                 5 year of work experience
             </fdp-radio-group>
+            <fdp-button contentDensity="compact" type="submit" label="Submit"></fdp-button>
+            <fdp-button contentDensity="compact" type="reset" style="margin: 2rem 2rem 0 2rem;" label="Reset"
+                (click)="onResetForm6(listform3)"></fdp-button>
         </fdp-form-field>
 
         <ng-template #i18n let-errors>
@@ -94,9 +97,6 @@
             </span>
         </ng-template>
     </fdp-form-group>
-    <fdp-button contentDensity="compact" type="submit" style="margin-left: 2rem;" label="Submit"></fdp-button>
-    <fdp-button contentDensity="compact" type="reset" style="margin-left: 2rem;" label="Reset"
-        (click)="onResetForm6(listform3)"></fdp-button>
 </form>
 <br />
 <br />

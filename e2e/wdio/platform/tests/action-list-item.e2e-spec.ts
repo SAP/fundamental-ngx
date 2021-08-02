@@ -29,7 +29,7 @@ describe('Action List Item Test Suite:', function() {
             }
         });
 
-        it('should check styles', () => {
+        xit('should check styles', () => {
             checkAttributeValueTrue(actionLists, 'noBorder');
             checkElementTextValue(actionBtns, btnText);
             expect(getAttributeByName(actionSections, 'ng-reflect-compact', 0)).toBe('false');

@@ -16,7 +16,6 @@ import { ListFocusItem } from '../list-focus-item.model';
   selector: '[fdListGroupHeader], [fd-list-group-header]',
   host: {
     '[style.outline]': '"none"',
-    '[class.fd-list__item]' : 'true',
     '[class.fd-list__group-header]': 'true'
   },
   providers: [{

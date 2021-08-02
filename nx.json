@@ -134,6 +134,14 @@
         "fdp"
       ],
       "implicitDependencies": ["core"]
+    }, 
+    "moment-adapter": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-datetime"
+      ]
     },
     "core-breadcrumb": {
       "tags": [
