@@ -41,14 +41,13 @@ export class MenuDocsComponent {
         {
             language: 'html',
             code: menuMobileHtml,
-            fileName: 'menu-mobile-example'
+            fileName: 'menu-mobile-example',
         },
         {
             language: 'typescript',
             code: menuMobileTs,
             fileName: 'menu-mobile-example',
             component: 'MenuMobileExampleComponent',
-            entryComponent: true
         }
     ];
 
