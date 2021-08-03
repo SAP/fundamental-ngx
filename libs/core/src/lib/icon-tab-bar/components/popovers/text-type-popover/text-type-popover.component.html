@@ -21,7 +21,7 @@
                     <ng-container *ngFor="let item of items; trackBy:_trackBy">
                         <li
                             [attr.aria-level]="level" class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
-                            [ngClass]="item.cssClasses"
+                            [class]="item.cssClasses"
                             fdIconBarDndItem
                             [dndItemData]="item"
                             role="listitem"
@@ -77,7 +77,7 @@
                     <ng-container *ngFor="let item of items; trackBy:_trackBy">
                         <li
                             [attr.aria-level]="level" class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
-                            [ngClass]="item.cssClasses"
+                            [class]="item.cssClasses"
                             fdIconBarDndItem
                             [dndItemData]="item"
                             role="listitem"

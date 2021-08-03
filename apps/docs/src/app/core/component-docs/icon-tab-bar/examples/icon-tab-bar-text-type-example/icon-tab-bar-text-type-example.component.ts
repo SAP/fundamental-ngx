@@ -11,7 +11,7 @@ export class IconTabBarTextTypeExampleComponent extends IconTabBarExampleClass {
     hasIcon = false;
 
     @Input()
-    textTypeLayoutMode: 'row'|'column' = 'row';
+    textTypeLayoutMode: 'row' | 'column' = 'row';
 
     @Input()
     enableTabReordering = false;

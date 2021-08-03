@@ -1,12 +1,13 @@
-import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { AfterViewInit, ContentChildren, Directive, ElementRef, EventEmitter, Input, OnDestroy, Output, QueryList } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { OverflowListItemDirective } from './overflow-list-item.directive';
 
 
 @Directive({
-    selector: '[fdOverflowItems]'
+    selector: '[fdOverflowList]'
 })
-export class OverflowItemsDirective implements AfterViewInit, OnDestroy {
+export class OverflowListDirective implements AfterViewInit, OnDestroy {
 
     @Input()
     itemSelector: string;
@@ -22,6 +23,10 @@ export class OverflowItemsDirective implements AfterViewInit, OnDestroy {
 
     @Output()
     overflowChanged: EventEmitter<number> = new EventEmitter<number>();
+
+    /** @hidden */
+    @ContentChildren(OverflowListItemDirective)
+    _overflowItems: QueryList<OverflowListItemDirective>;
 
     private _onDestroy$ = new Subject();
 
@@ -48,13 +53,12 @@ export class OverflowItemsDirective implements AfterViewInit, OnDestroy {
     }
 
     getAmountOfExtraItems(): number {
-        const items = this._el.nativeElement.querySelectorAll(this.itemSelector);
-        const arrItems = [...items];
+        const elements = this._overflowItems.toArray().map(item => item.el.nativeElement);
         const computed = getComputedStyle(this._el.nativeElement);
         const contentWidth = this._el.nativeElement.clientWidth
             - parseFloat(computed.paddingLeft)
             - parseFloat(computed.paddingRight);
-        return this._checkWidthWithOffset(arrItems, contentWidth);
+        return this._checkWidthWithOffset(elements, contentWidth);
     }
 
     private _calculateAmountOfOverflowedItems(): void {

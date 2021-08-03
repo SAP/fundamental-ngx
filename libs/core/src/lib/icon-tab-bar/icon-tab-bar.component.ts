@@ -29,7 +29,7 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
     iconTabType: TabType = 'text';
 
     @Input()
-    tabsConfig: TabConfig[];
+    tabsConfig: TabConfig[] = [];
 
     @Input()
     densityMode: TabDestinyMode = 'cozy';
@@ -41,7 +41,7 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
     enableTabReordering = false;
 
     @Input()
-    showTabAll = true;
+    showTotalTab = true;
 
     @Input()
     layoutMode: 'row'|'column' = 'row';

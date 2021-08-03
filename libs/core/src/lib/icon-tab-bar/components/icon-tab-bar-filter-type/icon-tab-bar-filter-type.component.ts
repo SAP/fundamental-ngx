@@ -1,12 +1,21 @@
 import { Component, Input } from '@angular/core';
-import { IconTabBarClass } from '../icon-tab-bar.class';
+import { IconTabBarBase } from '../icon-tab-bar-base.class';
+import { IconTabBarItem } from '../../types';
 
 @Component({
     selector: 'fd-icon-tab-bar-filter-type',
     templateUrl: './icon-tab-bar-filter-type.component.html',
 })
-export class IconTabBarFilterTypeComponent extends IconTabBarClass {
+export class IconTabBarFilterTypeComponent extends IconTabBarBase {
 
     @Input()
-    showTabAll = true;
+    showTotalTab = true;
+
+    _totalTab: IconTabBarItem;
+
+    protected _initTabs(): void {
+        super._initTabs();
+        this._totalTab = this._tabs[0];
+        this._tabs = this._tabs.slice(1)
+    }
 }

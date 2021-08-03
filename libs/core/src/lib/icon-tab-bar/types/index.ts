@@ -1,2 +1,2 @@
 export * from './common.types';
-export * from './icon-tab-bar-items.inreface';
+export * from './icon-tab-bar-items.interface';

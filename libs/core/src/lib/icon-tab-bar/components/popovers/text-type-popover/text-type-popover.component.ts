@@ -1,12 +1,12 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { IconTabBarPopoverClass } from '../icon-tab-bar-popover.class';
+import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
 import { IconTabBarItem } from '../../../types';
 
 @Component({
     selector: 'fd-text-type-popover',
     templateUrl: './text-type-popover.component.html',
 })
-export class TextTypePopoverComponent extends IconTabBarPopoverClass implements OnChanges {
+export class TextTypePopoverComponent extends IconTabBarPopoverBase implements OnChanges {
 
     @Input()
     isExtraItemsMode = false;

@@ -15,7 +15,7 @@ import { TextTypePopoverComponent } from './components/popovers/text-type-popove
 import { IconBarDndListDirective } from './directives/dnd/icon-bar-dnd-list.directive';
 import { IconBarDndItemDirective } from './directives/dnd/icon-bar-dnd-item.directive';
 import { IconBarDndContainerDirective } from './directives/dnd/icon-bar-dnd-container.directive';
-import { OverflowItemsModule } from '../utils/directives/overflow-items/overflow-items.module';
+import { OverflowListModule } from '../utils/directives/overflow-list/overflow-list.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 import { generateTestItems, getGetCenterCoordsOfElement } from './tests-helper';
@@ -25,7 +25,7 @@ import { generateTestItems, getGetCenterCoordsOfElement } from './tests-helper';
         <fd-icon-tab-bar
             [tabsConfig]="items"
             [enableTabReordering]="enableTabReordering"
-            [showTabAll]="showTabAll"
+            [showTotalTab]="showTotalTab"
             [iconTabType]="iconTabType"
             (iconTabSelected)="selected()"
             (iconTabReordered)="reordered()"
@@ -34,7 +34,7 @@ import { generateTestItems, getGetCenterCoordsOfElement } from './tests-helper';
 class HostComponent {
 
     enableTabReordering = false;
-    showTabAll = false;
+    showTotalTab = false;
     iconTabType: TabType = 'text';
     items: TabConfig[] = [];
 
@@ -70,7 +70,7 @@ describe('IconTabBarComponent', () => {
             imports: [
                 IconModule,
                 PopoverModule,
-                OverflowItemsModule,
+                OverflowListModule,
                 DragDropModule
             ]
         })
@@ -99,7 +99,7 @@ describe('IconTabBarComponent', () => {
 
     it('should create all products tab for filter.', () => {
         component.iconTabType = 'filter';
-        component.showTabAll = true;
+        component.showTotalTab = true;
         fixture.detectChanges();
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
         const tabAllEl = hostEl.querySelector('.fd-icon-tab-bar__container--filter');

@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IconTabBarProcessTypeComponent } from './icon-tab-bar-process-type.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { generateTestItems } from '../../tests-helper';
-import { OverflowItemsDirective } from '../../../utils/directives/overflow-items/overflow-items.directive';
+import { OverflowListDirective } from '../../../utils/directives/overflow-list/overflow-list.directive';
 import { of } from 'rxjs';
 
 const AMOUNT_OF_EXTRA_TABS = 80;
@@ -30,7 +30,7 @@ describe('IconTabBarProcessTypeComponent', () => {
         fixture.detectChanges();
         component._selectItem(component._tabs[50]); // Select random item
         component._lastVisibleTabIndex = 60; // Random big number
-        component.overflowDirective = fakeOverflowDirective as OverflowItemsDirective;
+        component.overflowDirective = fakeOverflowDirective as OverflowListDirective;
         component._recalculateVisibleItems(AMOUNT_OF_EXTRA_TABS);
     });
 

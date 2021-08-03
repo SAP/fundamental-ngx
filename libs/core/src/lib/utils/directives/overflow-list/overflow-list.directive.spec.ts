@@ -1,7 +1,9 @@
-import { OverflowItemsDirective } from './overflow-items.directive';
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+
 import { whenStable } from '@fundamental-ngx/core/tests';
+
+import { OverflowListDirective } from './overflow-list.directive';
 
 const LIST_ITEM_WIDTH = 100;
 const LIST_WIDTH = 500;
@@ -10,9 +12,9 @@ const LIST_WIDTH = 500;
   // tslint:disable-next-line:component-selector
   selector: 'test-component',
   template: `
-    <div #dirRoot class="list" fdOverflowItems itemSelector="[data-overflowItem]" (overflowChanged)="onOverflowed($event)">
-      <div *ngFor="let item of items" data-overflowItem class="list-item">{{item}}</div>
-    </div>
+      <div #dirRoot class="list" fdOverflowList (overflowChanged)="onOverflowed($event)">
+          <div *ngFor="let item of items" fdOverflowListItem class="list-item">{{item}}</div>
+      </div>
   `,
   styles: [`
     .list {
@@ -64,7 +66,7 @@ describe('OverflowItemsDirective', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [WrapperComponent, TestComponent, OverflowItemsDirective],
+      declarations: [WrapperComponent, TestComponent, OverflowListDirective],
     }).compileComponents();
   }));
 

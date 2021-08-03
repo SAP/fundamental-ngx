@@ -6,8 +6,7 @@
     <ul
         class="fd-icon-tab-bar__header"
         role="tablist"
-        fdOverflowItems
-        itemSelector="[data-overflowItem]"
+        fdOverflowList
         [isRtl]="isRtl"
         [overflowOffset]="100"
         fdIconBarDndList
@@ -15,8 +14,8 @@
         (overflowChanged)="_recalculateVisibleItems($event)"
     >
         <li *ngFor="let item of _tabs; trackBy:_trackBy"
-            [ngClass]="item.cssClasses"
-            data-overflowItem
+            [class]="item.cssClasses"
+            fdOverflowListItem
             fdIconBarDndItem
             [dndSeparatorClass]="['fd-icon-tab-bar-dnd-separator']"
             [dndItemData]="item"

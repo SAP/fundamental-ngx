@@ -1,34 +1,33 @@
 <ul
     class="fd-icon-tab-bar__header"
     role="tablist"
-    fdOverflowItems
+    fdOverflowList
     [isRtl]="isRtl"
-    itemSelector="[data-overflowItem]"
     [overflowOffset]="100"
     (overflowChanged)="_recalculateVisibleItems($event)"
 >
     <li
-        *ngIf="showTabAll"
+        *ngIf="showTotalTab"
         class="fd-icon-tab-bar__item"
         role="presentation"
-        data-overflowItem
+        fdOverflowListItem
     >
-        <a (click)="_selectItem(_tabs[0])"
-           [attr.aria-selected]="_tabs[0]?.uId === _selectedUid"
+        <a (click)="_selectItem(_totalTab)"
+           [attr.aria-selected]="_totalTab?.uId === _selectedUid"
            class="fd-icon-tab-bar__tab"
            role="tab"
         >
             <div class="fd-icon-tab-bar__container fd-icon-tab-bar__container--filter">
-                <span *ngIf="tabsConfig[0]?.counter" class="fd-icon-tab-bar__filter-counter">{{tabsConfig[0]?.counter}}</span>
-                <span class="fd-icon-tab-bar__filter-label">{{tabsConfig[0]?.label}}</span>
+                <span *ngIf="_totalTab?.counter" class="fd-icon-tab-bar__filter-counter">{{_totalTab?.counter}}</span>
+                <span class="fd-icon-tab-bar__filter-label">{{_totalTab?.label}}</span>
             </div>
         </a>
     </li>
-    <li *ngFor="let item of _tabs | slice:1"
-        [ngClass]="item.cssClasses"
+    <li *ngFor="let item of _tabs"
+        [class]="item.cssClasses"
         class="fd-icon-tab-bar__item"
         role="presentation"
-        data-overflowItem
+        fdOverflowListItem
         [attr.aria-hidden]="item.hidden"
     >
         <a

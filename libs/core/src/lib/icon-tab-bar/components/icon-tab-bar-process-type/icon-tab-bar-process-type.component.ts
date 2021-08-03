@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IconTabBarClass } from '../icon-tab-bar.class';
+import { IconTabBarBase } from '../icon-tab-bar-base.class';
 import { IconTabBarItem } from '../../types';
 import { cloneDeep } from '../../../utils/functions/clone-deep';
 import { ICON_TAB_HIDDEN_CSS } from '../../constants';
@@ -9,7 +9,7 @@ import { take } from 'rxjs/operators';
     selector: 'fd-icon-tab-bar-process-type',
     templateUrl: './icon-tab-bar-process-type.component.html',
 })
-export class IconTabBarProcessTypeComponent extends IconTabBarClass {
+export class IconTabBarProcessTypeComponent extends IconTabBarBase {
 
 
     _offsetOverflowDirective = 30;
@@ -67,7 +67,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
         this.recalculateItemsByPrevArr(extraItems, amountOfPrevSteps);
     }
 
-    private clearExtraList(): void {
+    private _clearExtraList(): void {
         this._nextSteps = [];
         this._prevSteps = [];
         this._tabs.forEach(item => {
@@ -77,7 +77,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
     }
 
     private recalculateItemsByNextArr(extraItems: number, amountOfNextSteps): void {
-        this.clearExtraList();
+        this._clearExtraList();
         if (!extraItems) {
             return;
         }
@@ -106,7 +106,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
             --nextIndex;
             --amountOfPrevSteps;
         }
-        // Добавляю +1 для левой кнопки
+        // Added +1 for left button
         this._anchorIndex = this._prevSteps.length
             ? this._prevSteps.length + visibleAmountOfItems
             : this._prevSteps.length + visibleAmountOfItems - 1;
@@ -116,7 +116,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarClass {
     }
 
     private recalculateItemsByPrevArr(extraItems: number, amountOfPreviousSteps): void {
-        this.clearExtraList();
+        this._clearExtraList();
         if (!extraItems) {
             return;
         }

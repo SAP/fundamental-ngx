@@ -13,16 +13,16 @@ import {
 import { IconTabBarItem, TabConfig } from '../types';
 import { cloneDeep } from '../../utils/functions/clone-deep';
 import { ICON_TAB_HIDDEN_CSS, UNIQUE_KEY_SEPARATOR } from '../constants';
-import { OverflowItemsDirective } from '../../utils/directives/overflow-items/overflow-items.directive';
+import { OverflowListDirective } from '../../utils/directives/overflow-list/overflow-list.directive';
 import { ExtraButtonDirective } from '../directives/extra-button/extra-button.directive';
 import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Directive()
-export abstract class IconTabBarClass implements OnInit, OnChanges, OnDestroy {
+export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
 
     @Input()
-    tabsConfig: TabConfig[];
+    tabsConfig: TabConfig[] = [];
 
     @Input()
     isRtl: boolean;
@@ -30,8 +30,8 @@ export abstract class IconTabBarClass implements OnInit, OnChanges, OnDestroy {
     @Output()
     selected: EventEmitter<any> = new EventEmitter<any>();
 
-    @ViewChild(OverflowItemsDirective)
-    overflowDirective: OverflowItemsDirective;
+    @ViewChild(OverflowListDirective)
+    overflowDirective: OverflowListDirective;
 
     @ViewChild(ExtraButtonDirective)
     extraBtnDirective: ExtraButtonDirective;
@@ -69,7 +69,7 @@ export abstract class IconTabBarClass implements OnInit, OnChanges, OnDestroy {
         this._onDestroy$.complete();
     }
 
-    private _initTabs(): void {
+    protected _initTabs(): void {
         this._tabs = this._generateTabBarItems(this.tabsConfig);
         const selectedItem = this._tabs.find(item => item.active);
         this._selectedUid = selectedItem?.uId;

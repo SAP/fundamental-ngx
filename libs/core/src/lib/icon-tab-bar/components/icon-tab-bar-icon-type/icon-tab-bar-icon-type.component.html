@@ -1,15 +1,14 @@
 <ul
     class="fd-icon-tab-bar__header"
     role="tablist"
-    fdOverflowItems
+    fdOverflowList
     [isRtl]="isRtl"
-    itemSelector='[data-overflowItem]'
     [overflowOffset]="100"
     (overflowChanged)="_recalculateVisibleItems($event)"
 >
     <li *ngFor="let item of _tabs"
-        [ngClass]="item.cssClasses"
-        data-overflowItem
+        [class]="item.cssClasses"
+        fdOverflowListItem
         [attr.aria-hidden]='item.hidden'
         class="fd-icon-tab-bar__item"
         role="presentation"

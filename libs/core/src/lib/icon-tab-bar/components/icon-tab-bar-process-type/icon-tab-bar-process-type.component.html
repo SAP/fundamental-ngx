@@ -2,9 +2,8 @@
     class="fd-icon-tab-bar__header"
     role="tablist"
     [class.fd-icon-tab-bar__header--left-offset]="_showLeftBtn"
-    fdOverflowItems
+    fdOverflowList
     [isRtl]="isRtl"
-    itemSelector='[data-overflowItem]'
     [overflowOffset]="_offsetOverflowDirective"
     (overflowChanged)="_recalculateVisibleItems($event)"
 >
@@ -21,10 +20,10 @@
         ></fd-icon-tab-bar-popover>
     </li>
     <li *ngFor="let item of _tabs; let index = index"
-        [ngClass]="item.cssClasses"
+        [class]="item.cssClasses"
         class="fd-icon-tab-bar__item"
         role="presentation"
-        data-overflowItem
+        fdOverflowListItem
         [attr.aria-hidden]="item.hidden"
     >
         <a

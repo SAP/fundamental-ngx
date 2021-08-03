@@ -3,7 +3,7 @@ import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { IconTabBarItem } from '../../types';
 
 @Directive()
-export abstract class IconTabBarPopoverClass implements OnChanges {
+export abstract class IconTabBarPopoverBase implements OnChanges {
 
     @ViewChild('popover')
     popover: PopoverComponent;

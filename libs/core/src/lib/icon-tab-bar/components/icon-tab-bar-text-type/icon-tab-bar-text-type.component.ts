@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, NgZone, Output } from '@angular/core';
-import { IconTabBarClass } from '../icon-tab-bar.class';
+import { IconTabBarBase } from '../icon-tab-bar-base.class';
 import { IconTabBarItem } from '../../types';
 import { UNIQUE_KEY_SEPARATOR } from '../../constants';
 import { FdDnDEvent } from '../../directives/dnd/icon-bar-dnd-container.directive';
@@ -14,7 +14,7 @@ export interface DataForReordering {
     selector: 'fd-icon-tab-bar-text-type',
     templateUrl: './icon-tab-bar-text-type.component.html',
 })
-export class IconTabBarTextTypeComponent extends IconTabBarClass {
+export class IconTabBarTextTypeComponent extends IconTabBarBase {
 
     @Input()
     enableTabReordering = false;
