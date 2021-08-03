@@ -23,7 +23,7 @@
     display: none;
   }
 
-  &__item--extra-btn {
+  &__item--overflow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -50,7 +50,6 @@
 }
 
 .fd-icon-tab-bar__list-item {
-  min-width: 7rem;
   width: 100%;
 
   .fd-list__link.is-selected, .fd-list__link[aria-selected=true] {
@@ -66,6 +65,18 @@
 
   .fd-icon-tab-bar__list-item-icon {
     justify-content: center;
+  }
+
+  .fd-icon-tab-bar__item--overflow {
+    &--left {
+      left: auto;
+      right: 0;
+    }
+  }
+
+  .fd-icon-tab-bar__header--left-offset {
+    padding-left: 0;
+    padding-right: 3.5rem;
   }
 }
 
@@ -83,7 +94,6 @@
   justify-content: center;
   font-size: var(--sapFontSize, 0.875rem);
   line-height: var(--sapContent_LineHeight, 1.4);
-  padding: 0.875rem 0.188rem;
   opacity: .8;
   z-index: 9999!important;
 

@@ -11,7 +11,7 @@
     <li
         *ngIf="_showLeftBtn"
         role="presentation"
-        class="fd-icon-tab-bar__item  fd-icon-tab-bar__item--extra-btn fd-icon-tab-bar__item--extra-btn--left"
+        class="fd-icon-tab-bar__item  fd-icon-tab-bar__item--overflow fd-icon-tab-bar__item--overflow--left"
     >
         <fd-icon-tab-bar-popover
             [items]="_prevSteps"
@@ -58,7 +58,7 @@
     <li
         *ngIf="_showRightBtn"
         role="presentation"
-        class="fd-icon-tab-bar__item fd-icon-tab-bar__item--extra-btn"
+        class="fd-icon-tab-bar__item fd-icon-tab-bar__item--overflow"
         fdExtraButton
         [isRtl]="isRtl"
         [extraButtonOffset]="16"
