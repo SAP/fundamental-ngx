@@ -56,8 +56,8 @@ describe('Verify Feed Input component', function() {
         }
     });
 
-    xit('should have example with default avatar assigned', () => {
-        expect(getAttributeByName(feedInputAvatar, 'ng-reflect-glyph', 1)).toContain(default_avatar);
+    it('should have example with default avatar assigned', () => {
+        expect(getAttributeByName(feedInputAvatar, 'glyph', 1)).toContain(default_avatar);
     });
 
     it('should have example with no avatar', () => {

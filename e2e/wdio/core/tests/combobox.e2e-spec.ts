@@ -46,7 +46,7 @@ describe('Combobox component test suit', function() {
         }
     });
 
-    it('verify disable input field', () => {
+    fit('verify disable input field', () => {
         expect(isEnabled(allInputFields, 20)).toBe(false, '');
     });
 

@@ -78,7 +78,7 @@ describe('Toolbar test suite', function() {
 
     });
 
-    xdescribe('Check Toolbar Overflow Priority', function() {
+    describe('Check Toolbar Overflow Priority', function() {
 
         it('should check Toolbar Overflow Priority example', () => {
             checkClickableButton(overflowPriorityButton);
@@ -88,7 +88,7 @@ describe('Toolbar test suite', function() {
         });
     });
 
-    xdescribe('Check Toolbar Overflow Grouping', function() {
+    describe('Check Toolbar Overflow Grouping', function() {
 
         it('should check Toolbar Overflow Grouping example', () => {
             checkClickableButton(overflowGroupingButton);
@@ -105,11 +105,11 @@ describe('Toolbar test suite', function() {
         });
     });
 
-    xdescribe('Should check visual regression', function() {
+    describe('Should check visual regression', function() {
 
         it('should check visual regression for all examples', () => {
             toolbarPage.saveExampleBaselineScreenshot();
-            expect(toolbarPage.compareWithBaseline()).toBeLessThan(5);
+            expect(toolbarPage.compareWithBaseline()).toBeLessThan(7);
         });
     });
 

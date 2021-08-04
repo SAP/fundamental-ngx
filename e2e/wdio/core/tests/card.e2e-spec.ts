@@ -44,9 +44,9 @@ describe('Card test suite:', function() {
         });
     });
 
-    xdescribe('Compact examples:', function() {
+    describe('Compact examples:', function() {
         it('should check its compact and do basic checks', () => {
-            checkAttributeValueTrue(compactCardAttr, compactAttr);
+            expect(getAttributeByName(compactCardAttr, 'class')).toBe(compactAttr);
             checkElementText(compactCardHeader);
             checkElementTextValue(compactCardListItems, cardListItemText);
             checkElArrIsClickable(compactCardHeader);
@@ -54,9 +54,9 @@ describe('Card test suite:', function() {
         });
     });
 
-    xdescribe('Card loader examples:', function() {
+    describe('Card loader examples:', function() {
         it('should check loading icon and attributes', () => {
-            checkAttributeValueTrue(loaderCardAttr, loaderAttr);
+            expect(getAttributeByName(loaderCardAttr, 'aria-label')).toBe(loaderAttr);
             expect(isElementDisplayed(loaderIcon)).toBe(true);
         });
     });
