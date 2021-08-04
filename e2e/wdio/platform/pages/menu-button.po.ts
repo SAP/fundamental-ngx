@@ -5,8 +5,8 @@ export class MenuButtonPo extends BaseComponentPo {
     private url = '/menu-button';
     root = '#page-content';
 
-    btnArrowIconsArr = 'fdp-menu-button fd-icon[glyph=slim-arrow-down]';
-    btnWorldIconArr = 'fdp-menu-button fd-icon[ng-reflect-glyph=world]';
+    btnArrowIconsArr = 'fdp-menu-button .sap-icon--slim-arrow-down';
+    btnWorldIconArr = 'fdp-menu-button .sap-icon--world';
     cozyBtnAttrArr = 'fdp-platform-menu-button-cozy-example fdp-menu-button';
     cozyBtnArr = 'fdp-platform-menu-button-cozy-example button';
     cozySelectedItemLabel = 'fdp-platform-menu-button-cozy-example div';

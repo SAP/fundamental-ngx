@@ -24,6 +24,7 @@ export class SliderPo extends BaseComponentPo {
     sliderTooltipInput = 'fd-popover-body .fd-popover__popper input';
     sliderTooltipInputFF = 'fd-popover-body .fd-slider--tooltip-wrapper input';
     sliderAttr = 'fd-slider';
+    altSliderAttr = 'fdp-slider';
     sliderLabels = '.fd-slider__labels';
     sliderLabel = '.fd-slider__label';
 

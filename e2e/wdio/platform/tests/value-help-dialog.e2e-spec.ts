@@ -4,7 +4,6 @@ import {
     clearValue,
     click,
     doesItExist,
-    getAttributeByName,
     getElementArrayLength,
     getText,
     refreshPage,
@@ -18,7 +17,6 @@ import {
     conditionsValues,
     customLabels,
     inputIDs,
-    mobileAttr
 } from '../fixtures/appData/value-help-dialog-contents';
 import { searchValues, valueOne, valueZero } from '../fixtures/testData/value-help-dialog';
 
@@ -238,12 +236,6 @@ describe('Value help dialog test suite', function() {
             click(footerBtns, 1);
             waitForPresent(inputToken);
             expect(getText(inputToken)).toEqual(selectedItem.toUpperCase());
-        });
-    });
-
-    xdescribe('mobile version examples', function() {
-        it('should check mobile property true', () => {
-            expect(getAttributeByName(mobileExampleDialog, mobileAttr)).toBe('true');
         });
     });
 

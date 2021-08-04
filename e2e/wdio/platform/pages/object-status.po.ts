@@ -17,7 +17,7 @@ export class ObjectStatusPo extends BaseComponentPo {
 
     icons = '.fd-object-status__icon';
     text = '.fd-object-status__text';
-    status = '.fd-object-status';
+    status = 'fdp-object-status';
 
     open(): void {
         super.open(this.url);

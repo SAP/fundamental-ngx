@@ -14,14 +14,14 @@ export const noBorderAttr = 'noborder';
 export const borderStyleAttr = 'border-style';
 export const altBorderStyleAttr = 'border-bottom-style';
 export const compactAttr = 'contentdensity';
-export const altCompactAttribute = 'ng-reflect-compact';
+export const compactClass = 'fd-list--compact';
 export const compactValue = 'compact';
 export const selectionAttr = 'selectionmode';
-export const altSelectionAttr = 'ng-reflect-selection-mode';
+export const ariaMultiSelectable = 'aria-multiselectable';
 export const multiSelect = 'multi';
 export const singleSelect = 'single';
 export const navUrl = '/platform/home';
-export const navIndicator = 'ng-reflect-navigation-indicator';
+export const navIndicator = 'fd-list__link--navigation-indicator';
 export const scrollLoadAttr = 'loadonscroll';
 export const lazyLoadAttr = 'loadMore';
 export const noDataText = [
@@ -29,6 +29,6 @@ export const noDataText = [
     'No Data Found'
 ];
 export const listTypeAttr = 'listtype';
-export const loadMoreAttr = 'ng-reflect-load-more';
+export const loadMoreClass = 'fd-list__item--growing';
 export const separatorAttr = 'ng-reflect-no-border';
 export const itemUnreadStatus = 'unread';

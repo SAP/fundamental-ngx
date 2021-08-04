@@ -5,8 +5,7 @@ export class MenuPo extends BaseComponentPo {
     url = '/menu';
     root = '#page-content';
     menuBtnArr = 'fdp-button button';
-    firstMenuBtn = 'fdp-platform-menu-basic-example button[ng-reflect-label="Button"]';
-    secondMenuBtn = 'fdp-platform-menu-basic-example button[ng-reflect-label="Menu Button"]';
+    menuBtn = 'fdp-platform-menu-basic-example button';
     menuBtnTextArr = 'fdp-button button span';
     menuAvatarBtn = 'fdp-platform-menu-basic-example fd-avatar';
     menuHorizontalAvatarBtn = 'fdp-platform-menu-x-position-example fd-avatar';
