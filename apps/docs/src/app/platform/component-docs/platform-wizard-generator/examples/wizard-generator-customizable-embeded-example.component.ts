@@ -1,27 +1,19 @@
-import { Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { WizardDialogGeneratorService, WizardGeneratorFormsValue, WizardGeneratorItem, WizardTitle } from '@fundamental-ngx/platform';
+import { WizardGeneratorFormsValue, WizardGeneratorItem, WizardTitle } from '@fundamental-ngx/platform';
 
 @Component({
-  selector: 'fdp-wizard-generator-customizable-example',
-  templateUrl: './wizard-generator-customizable-example.component.html'
+  selector: 'fdp-wizard-generator-customizable-embeded-example',
+  templateUrl: './wizard-generator-customizable-embeded-example.component.html'
 })
-export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
-
-    @ViewChild('goNextTemplate') goNextTemplate: TemplateRef<any>;
-    @ViewChild('goBackTemplate') goBackTemplate: TemplateRef<any>;
-    @ViewChild('finishTemplate') finishTemplate: TemplateRef<any>;
-    @ViewChild('cancelTemplate') cancelTemplate: TemplateRef<any>;
-    @ViewChild('confirmationDialogTemplate') confirmationDialogTemplate: TemplateRef<any>;
-
-    wizardValue: WizardGeneratorFormsValue;
+export class WizardGeneratorCustomizableEmbededExampleComponent {
 
     wizardTitle: WizardTitle = {
         size: 2,
         text: 'Checkout'
     };
+
+    wizardValue: WizardGeneratorFormsValue;
 
     stepItems: WizardGeneratorItem[] = [
         {
@@ -113,38 +105,10 @@ export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
         }
     ];
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    constructor() { }
 
-    constructor(
-        private _wizardDialogService: WizardDialogGeneratorService
-    ) { }
-
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
+    wizardFinished(wizardValue: WizardGeneratorFormsValue): void {
+        this.wizardValue = wizardValue;
     }
 
-    openDialog(): void {
-        this._wizardDialogService.open({
-            width: '100%',
-            height: '100%',
-            verticalPadding: false,
-            data: {
-                items: this.stepItems,
-                appendToWizard: false,
-                addSummary: false,
-                responsivePaddings: true,
-                title: this.wizardTitle,
-                goNextButtonTemplate: this.goNextTemplate,
-                goBackButtonTemplate: this.goBackTemplate,
-                finishButtonTemplate: this.finishTemplate,
-                cancelButtonTemplate: this.cancelTemplate,
-                confirmationDialogTemplate: this.confirmationDialogTemplate
-            }
-        }).afterClosed.pipe(takeUntil(this._onDestroy$))
-        .subscribe((wizardValue: WizardGeneratorFormsValue) => {
-            this.wizardValue = wizardValue;
-        }, () => {});
-    }
 }

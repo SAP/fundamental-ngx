@@ -10,6 +10,9 @@ import * as dialogWizardGeneratorTsExample from '!raw-loader!./examples/wizard-g
 import * as customizableWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-customizable-example.component.html';
 import * as customizableWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-customizable-example.component.ts';
 
+import * as customizableEmbededWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-customizable-embeded-example.component.html';
+import * as customizableEmbededWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-customizable-embeded-example.component.ts';
+
 import * as conditionWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-condition-example.component.html';
 import * as conditionWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-condition-example.component.ts';
 
@@ -64,6 +67,20 @@ export class PlatformWizardGeneratorDocsComponent {
             code: customizableWizardGeneratorTsExample,
             fileName: 'wizard-generator-customizable-example',
             component: 'WizardGeneratorCustomizableExampleComponent'
+        }
+    ];
+
+    customizableEmbededExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: customizableEmbededWizardGeneratorHtmlExample,
+            fileName: 'wizard-generator-customizable-embeded-example'
+        },
+        {
+            language: 'typescript',
+            code: customizableEmbededWizardGeneratorTsExample,
+            fileName: 'wizard-generator-customizable-embeded-example',
+            component: 'WizardGeneratorCustomizableEmbededExampleComponent'
         }
     ];
 

@@ -1,0 +1,12 @@
+<fdp-wizard-generator [appendToWizard]="false" [items]="stepItems" [title]="wizardTitle" (wizardFinished)="wizardFinished($event)">
+    <ng-template fdpWizardGeneratorGoNextButton let-goNext="goNext">
+        <fdp-button contentDensity="condensed" buttonType="emphasized" label="Custom next button" (click)="goNext()"></fdp-button>
+    </ng-template>
+    <ng-template fdpWizardGeneratorFinishButton let-finish="finish">
+        <fdp-button contentDensity="condensed" buttonType="emphasized" label="Custom finish button" (click)="finish()"></fdp-button>
+    </ng-template>
+</fdp-wizard-generator>
+
+<p *ngIf="wizardValue">
+    Wizard value: {{ wizardValue | json }}
+</p>
