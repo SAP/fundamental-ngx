@@ -1,14 +1,11 @@
+import { Observable, Subject } from 'rxjs';
+
 /**
- * Datetime Adapter is an abstract class that should be implemented by each adopter.
+ * Datetime Adapter is an abstract class that must be implemented by each adapter.
  * It's used to encapsulate a date/time manipulations as result
  * others places that uses it remain date type agnostic.
  *
- * Mostly taken from https://github.com/angular/components/blob/master/src/material/core/datetime/date-adapter.ts
- *
  */
-
-import { Observable, Subject } from 'rxjs';
-
 export abstract class DatetimeAdapter<D> {
     /** current locale */
     protected locale: string;
@@ -116,6 +113,7 @@ export abstract class DatetimeAdapter<D> {
      * @returns The week number (min 1, max 53).
      */
     abstract getWeekNumber(date: D): number;
+
     /**
      * Gets a list of names for the months.
      * @param style The naming style (e.g. long = 'January', short = 'Jan', narrow = 'J').
@@ -255,15 +253,6 @@ export abstract class DatetimeAdapter<D> {
     abstract addCalendarDays(date: D, days: number): D;
 
     /**
-     * Get Amount of weeks in current month/year
-     * @param year The year of the date
-     * @param month The month of the date
-     * @param firstDayOfWeek The first day of week. 1 - Sunday, 2 - Monday...
-     * @returns Number of weeks in the given month
-     */
-    abstract getAmountOfWeeks(year: number, month: number, firstDayOfWeek: number): number;
-
-    /**
      * Clones the given date.
      * @param date The date to clone
      * @returns A new date equal to the given date.
@@ -344,6 +333,23 @@ export abstract class DatetimeAdapter<D> {
      * @returns String representing how much time has passed since the date param.
      */
     abstract fromNow?(date: D): string;
+
+    /**
+     * Get Amount of weeks in given month/year
+     * @param year The year of the date
+     * @param month The month of the date
+     * @param firstDayOfWeek The first day of week. 1 - Sunday, 2 - Monday...
+     * @returns Number of weeks in the given month
+     */
+    getAmountOfWeeks(year: number, month: number, firstDayOfWeek: number): number {
+        const firstOfMonth = new Date(year, month - 1, 1);
+        const lastOfMonth = new Date(year, month, 0);
+
+        const dayOffset = (firstOfMonth.getDay() - firstDayOfWeek + 8) % 7;
+        const used = dayOffset + lastOfMonth.getDate();
+
+        return Math.ceil(used / 7);
+    }
 
     /**
      * Compares two dates.

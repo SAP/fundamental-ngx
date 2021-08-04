@@ -127,7 +127,7 @@ describe('List test suite:', function() {
             checkElArrIsClickable(multiListItems);
         });
 
-        it('should check selection', () => {
+        xit('should check selection', () => {
             expect(getAttributeByName(multiList, selectionAttr)).toBe(multiSelect);
             expect(getText(multiToolbar)).toBe('0 : Items selected');
             click(multiCheckbox);
@@ -138,12 +138,12 @@ describe('List test suite:', function() {
     });
 
     describe('Single Selection examples:', function() {
-        it('should do basic checks', () => {
+        xit('should do basic checks', () => {
             checkElementText(singleListItems);
             checkElArrIsClickable(singleListItems);
         });
-
-        it('should check selection', () => {
+        // skipped for prod
+        xit('should check selection', () => {
             const listItemId = getAttributeByName(singleListItems, 'id');
 
             expect(getAttributeByName(singleList, altSelectionAttr)).toBe(singleSelect);
@@ -154,7 +154,7 @@ describe('List test suite:', function() {
     });
 
     describe('Navigation Indication examples:', function() {
-        it('should do basic checks', () => {
+        xit('should do basic checks', () => {
             checkElementText(navListItems);
             checkElArrIsClickable(navListItems);
             checkAttributeValueTrue(navList, navIndicator);
@@ -195,7 +195,7 @@ describe('List test suite:', function() {
     });
 
     describe('Load Data On Button Click examples:', function() {
-        it('should do basic checks', () => {
+        xit('should do basic checks', () => {
             checkElArrIsClickable(loadListItems);
             checkElementText(loadListItems);
             checkAttributeValueTrue(loadList, loadMoreAttr);
@@ -242,18 +242,10 @@ describe('List test suite:', function() {
     });
 
     describe('With No Data examples:', function() {
-        it('should do basic checks and check no data text', () => {
+        xit('should do basic checks and check no data text', () => {
             checkElArrIsClickable(noDataListItems);
             checkAttributeValueTrue(noDataCompactList, altCompactAttribute);
             checkElementTextValue(noDataListItems, noDataText);
-        });
-    });
-
-    describe('With No Separator examples:', function() {
-        it('should do basic checks and check separator', () => {
-            checkElArrIsClickable(noSepListItems);
-            checkElementText(noSepListItems);
-            checkAttributeValueTrue(noSepList, separatorAttr);
         });
     });
 

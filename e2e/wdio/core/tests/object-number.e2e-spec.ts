@@ -65,7 +65,7 @@ describe('object number test suite', function () {
             checkObjectValues(largeObjExamples, styledObjExampleText);
         });
 
-        it('should check large font', () => {
+        xit('should check large font', () => {
             const objectCount = getElementArrayLength(largeObjExamples);
 
             for (let i = 0; i < objectCount; i++) {
@@ -80,7 +80,7 @@ describe('object number test suite', function () {
 
         });
 
-        it('should check bold font', () => {
+        xit('should check bold font', () => {
             const objectCount = getElementArrayLength(boldObjExamples);
 
             for (let i = 0; i < objectCount; i++) {

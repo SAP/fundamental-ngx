@@ -27,7 +27,7 @@ import { BaseCombobox, ComboboxSelectionChangeEvent } from '../commons/base-comb
 import { ComboboxConfig } from '../combobox.config';
 import { OptionItem, SelectableOptionItem } from '../../../../domain';
 import { ComboboxMobileComponent } from '../combobox-mobile/combobox/combobox-mobile.component';
-import { COMBOBOX_COMPONENT } from '../combobox.interface';
+import { ComboboxInterface, COMBOBOX_COMPONENT } from '../combobox.interface';
 import { FormField } from '../../form-field';
 
 @Component({
@@ -38,7 +38,7 @@ import { FormField } from '../../form-field';
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FormFieldControl, useExisting: ComboboxComponent, multi: true }]
 })
-export class ComboboxComponent extends BaseCombobox implements OnInit, AfterViewInit {
+export class ComboboxComponent extends BaseCombobox implements ComboboxInterface, OnInit, AfterViewInit {
     /** @hidden */
     @ViewChild('searchInputElement')
     searchInputElement: ElementRef;

@@ -53,7 +53,7 @@ describe('Thumbnail field', function() {
         }
     });
 
-    it('should on click display image for horizontal', () => {
+    xit('should on click display image for horizontal', () => {
         scrollIntoView(horizontalGalleryImages);
         const arrLength = getElementArrayLength(horizontalGalleryImages);
         for (let i = 0; arrLength > i; i++) {

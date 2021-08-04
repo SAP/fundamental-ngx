@@ -112,7 +112,7 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
     }
 
     get state(): Status {
-        if (this.timePickerComponent && this.timePickerComponent.isInvalidTimeInput) {
+        if (this.timePickerComponent && this.timePickerComponent._isInvalidTimeInput) {
             // if any other error from core timePicker
             return 'error';
         }
@@ -183,7 +183,7 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
      */
     handleTimeChange(value: D): void {
         if (this.timePickerComponent) {
-            if (this.timePickerComponent.isInvalidTimeInput) {
+            if (this.timePickerComponent._isInvalidTimeInput) {
                 this.state = 'error';
             } else {
                 this.state = !this.timePickerComponent.time && !this.allowNull ? 'error' : undefined;

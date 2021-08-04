@@ -4,7 +4,7 @@ set -u -e
 
 source .ci-env/flags.sh
 
-PACKAGES=(core platform)
+PACKAGES=(core platform moment-adapter)
 HOTFIX_BRANCH=hotfix_tmp_branch_for_automated_release_do_not_use
 MASTER_BRANCH=main
 OLD_TAG=$(git describe --tags --abbrev=0)

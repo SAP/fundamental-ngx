@@ -2,7 +2,7 @@ import { CoreBaseComponentPo } from './core-base-component.po';
 import { waitForElDisplayed, waitForPresent} from '../../driver/wdio';
 
 export class SplitButtonPo extends CoreBaseComponentPo {
-    private url = '/splitButton';
+    private url = '/split-button';
 
     buttonBehaviorExample = 'fd-split-button-behaviors-example ';
     iconBehaviorExample = 'fd-split-button-icons-example ';

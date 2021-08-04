@@ -190,8 +190,10 @@
 <description>
     <p>
         Use <code>[freezeColumnsTo]="columnName"</code> to freeze columns up to and including.
-        When using it's very important to set the <code>width</code> for the every column
-        as table cells width won't be calculated properly.
+    </p>
+
+    <p>
+        When using this features it's very important to set the <code>width</code> for the every column as table cells width won't be calculated properly.
     </p>
 
     <p>
@@ -507,6 +509,7 @@
             name="description"
             key="description"
             label="Description"
+            width="200px"
         >
         </fdp-column>
 
@@ -515,6 +518,7 @@
             key="price.value"
             label="Price"
             align="end"
+            width="100px"
         >
         </fdp-column>
 
@@ -523,6 +527,7 @@
             key="status"
             label="Status"
             align="center"
+            width="150px"
         >
         </fdp-column>
     </fdp-table>

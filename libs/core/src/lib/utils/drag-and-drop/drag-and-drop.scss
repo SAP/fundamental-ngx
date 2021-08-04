@@ -49,6 +49,10 @@
     box-shadow: 0 0 0 0.0625rem rgba(0, 0, 0, 0.15), 0 0.625rem 1.875rem 0 rgba(0, 0, 0, 0.3)
 }
 
+.cdk-drag-disabled {
+    cursor: default;
+}
+
 .fd-dnd-placeholder {
     top: 0;
     left: 0;

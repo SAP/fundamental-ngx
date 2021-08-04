@@ -5,7 +5,7 @@ import { NotificationRef } from '@fundamental-ngx/core/notification';
     selector: 'fd-notification-example-content',
     template: `
     <fd-message-strip type="success" [dismissible]="false" marginBottom="1rem">
-        A warning message strip.
+        A success message strip.
     </fd-message-strip>
     <fd-notification-body>
         <fd-notification-content>

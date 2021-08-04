@@ -143,7 +143,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
 
     /** The day of the week the calendar should start on. 1 represents Sunday, 2 is Monday, 3 is Tuesday, and so on. */
     @Input()
-    startingDayOfWeek: DaysOfWeek = 1;
+    startingDayOfWeek: DaysOfWeek;
 
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
@@ -218,6 +218,9 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     private _subscriptions = new Subscription();
 
     /** @hidden */
+    private adapterStartingDayOfWeek: DaysOfWeek;
+
+    /** @hidden */
     onChange: (_: D | DateRange<D>) => void = () => {};
 
     /** @hidden */
@@ -274,17 +277,36 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
         }
 
         // set default value
+        this.adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
         this.selectedDate = this._dateTimeAdapter.today();
+        this._changeDetectorRef.markForCheck();
+        this._listenToLocaleChanges();
+    }
+
+    /** @hidden */
+    private _listenToLocaleChanges(): void {
+        this._subscriptions.add(
+            this._dateTimeAdapter.localeChanges.subscribe(() => {
+                this.adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
+                this._changeDetectorRef.markForCheck();
+            })
+        );
     }
 
     /** @hidden */
     ngOnInit(): void {
         this._prepareDisplayedView();
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                })
+            );
         }
+    }
+
+    getWeekStartDay(): DaysOfWeek {
+        return this.startingDayOfWeek === undefined ? this.adapterStartingDayOfWeek : this.startingDayOfWeek;
     }
 
     /** @hidden */
@@ -333,9 +355,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(
-        control: AbstractControl
-    ): {
+    validate(control: AbstractControl): {
         [key: string]: any;
     } {
         return this.isModelValid()
