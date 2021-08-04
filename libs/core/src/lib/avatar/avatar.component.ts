@@ -17,7 +17,7 @@ let avatarUniqueId = 0;
 const ALTER_ICON_OPTIONS = {
     CONTENT: 'content',
     ALT: 'alt',
-    CUSTOM: 'custom',
+    BACKUP: 'backup',
     DEFAULT_ICON: 'default-icon',
 };
 
@@ -118,11 +118,11 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     @Input()
-    set defaultImage(value: string) {
-        this._defaultImage = value;
+    set backupImage(value: string) {
+        this._backupImage = value;
     }
-    get defaultImage(): string {
-        return this._defaultImage;
+    get backupImage(): string {
+        return this._backupImage;
     }
 
     /** @hidden */
@@ -156,7 +156,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     private _content: ElementRef = null;
 
     /** @hidden */
-    private _defaultImage: string = null;
+    private _backupImage: string = null;
 
     /** @hidden */
     private _bgImage: string = null;
@@ -269,7 +269,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
 
                     continue;
                 }
-                
+
                 if (option === ALTER_ICON_OPTIONS.ALT) {
                     const altValue = this.elementRef().nativeElement.getAttribute('alt');
                     if (altValue && altValue !== '') {
@@ -279,17 +279,17 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
 
                     continue;
                 }
-                
-                if (option === ALTER_ICON_OPTIONS.CUSTOM) {
-                    if (this._defaultImage && this._defaultImage !== '') {
-                        // Check if defaultImage can be loaded successfully
+
+                if (option === ALTER_ICON_OPTIONS.BACKUP) {
+                    if (this._backupImage && this._backupImage !== '') {
+                        // Check if backupImage can be loaded successfully
                         // If not, set default user icon
                         this._verifyImageUrl(
-                            this._defaultImage, 
+                            this._backupImage,
                             () => {
-                                this._assignBgImage(this._defaultImage);
+                                this._assignBgImage(this._backupImage);
                                 this._cdr.detectChanges();
-                            }, 
+                            },
                             () => {
                                 this._showDefaultIcon();
                                 this._cdr.detectChanges();
@@ -300,12 +300,12 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
 
                     continue;
                 }
-                
+
                 if (option === ALTER_ICON_OPTIONS.DEFAULT_ICON) {
                     this._showDefaultIcon();
                     break;
                 }
-                
+
                 this._showDefaultIcon();
             }
         }
