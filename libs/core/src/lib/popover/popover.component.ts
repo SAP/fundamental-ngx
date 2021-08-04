@@ -33,7 +33,10 @@ import { PopoverControlComponent } from './popover-control/popover-control.compo
 import { POPOVER_COMPONENT } from './popover.interface';
 import { PopoverMobileComponent } from './popover-mobile/popover-mobile.component';
 import { PopoverChildContent } from './popover-child-content.interface';
-import { SELECT_CLASS_NAMES } from '../select/constants';
+
+export const SELECT_CLASS_NAMES = {
+    selectControl: 'fd-select__control'
+};
 
 let cdkPopoverUniqueId = 0;
 
