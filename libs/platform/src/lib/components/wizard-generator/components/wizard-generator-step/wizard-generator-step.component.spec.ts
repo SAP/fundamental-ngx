@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
-import { PlatformWizardGeneratorModule, WizardGeneratorItem, WizardGeneratorService, WizardStepForms } from '@fundamental-ngx/platform';
+import {
+    DynamicFormGeneratorSelectComponent,
+    PlatformWizardGeneratorModule,
+    WizardGeneratorItem,
+    WizardGeneratorService,
+    WizardStepForms
+} from '@fundamental-ngx/platform';
 
 const items = [{
     name: 'Product type',
@@ -42,11 +48,6 @@ export class TestComponent {
 
     step: WizardGeneratorItem;
 
-    constructor(
-        public wizardGeneratorService: WizardGeneratorService
-    ) {
-    }
-
     formsCreated(forms: WizardStepForms): void {
         this.forms = forms;
     }
@@ -57,17 +58,24 @@ describe('WizardGeneratorStepComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
     let service: WizardGeneratorService;
 
-    beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            imports: [PlatformWizardGeneratorModule],
-            declarations: [TestComponent]
-        }).compileComponents();
-    });
+    beforeEach(waitForAsync(() => {
+        TestBed
+            .configureTestingModule({
+                imports: [PlatformWizardGeneratorModule],
+                declarations: [TestComponent]
+            })
+            .overrideModule(BrowserDynamicTestingModule, {
+                set: {
+                    entryComponents: [DynamicFormGeneratorSelectComponent]
+                }
+            })
+            .compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
-        service = component.wizardGeneratorService;
+        service = fixture.debugElement.injector.get(WizardGeneratorService);
         fixture.detectChanges();
     });
 

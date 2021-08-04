@@ -1,5 +1,6 @@
 import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
+
 import { DynamicFormControl } from './dynamic-form-control';
 
 /**
@@ -34,17 +35,7 @@ export class DynamicFormControlFieldDirective implements OnInit {
     constructor(
         private readonly _templateRef: TemplateRef<any>,
         private readonly _viewContainer: ViewContainerRef
-    ) {
-    }
-
-    /**
-     * @description boolean flag representing if current item should be shown.
-     */
-    @Input()
-    set fdpDynamicFormControlFieldShow(value: boolean) {
-        this.shouldShowFormItem = value;
-        this._updateView();
-    }
+    ) { }
 
     /**
      * @description Form control instance.
@@ -56,6 +47,15 @@ export class DynamicFormControlFieldDirective implements OnInit {
         this._originalValidators = this._control.formItem.validators;
         this._originalAsyncValidators = this._control.formItem.asyncValidators;
 
+        this._updateView();
+    }
+
+    /**
+     * @description boolean flag representing if current item should be shown.
+     */
+    @Input()
+    set fdpDynamicFormControlFieldShow(value: boolean) {
+        this.shouldShowFormItem = value;
         this._updateView();
     }
 

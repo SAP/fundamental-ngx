@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { RtlService } from '@fundamental-ngx/core';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import {
     ContentDensity,
     FdpFormGroupModule,
@@ -40,47 +40,49 @@ describe('NumberStepInputComponent default values', () => {
         stepInputComponent = component.stepInputCmp;
     });
 
-    it('Should render "0" by default', () => {
+    it('should render "0" by default', () => {
         const inputEl: HTMLInputElement = fixture.debugElement.query(By.css('.fd-step-input__input')).nativeElement;
         expect(inputEl.value).toBe('0');
     });
 
-    it('Should have default value of incrementLabel as "Increment"', () => {
+    it('should have default value of incrementLabel as "Increment"', () => {
         expect(stepInputComponent.incrementLabel).toBe('Increment');
     });
 
-    it('Should have default value of decrementLabel as "Decrement"', () => {
+    it('should have default value of decrementLabel as "Decrement"', () => {
         expect(stepInputComponent.decrementLabel).toBe('Decrement');
     });
 
-    it('Should have default step = 1', () => {
+    it('should have default step = 1', () => {
         expect(stepInputComponent.step).toBe(1);
     });
 
-    it('Should have default largerStep = 2', () => {
+    it('should have default largerStep = 2', () => {
         expect(stepInputComponent.largerStep).toBe(2);
     });
 
-    it('Should show increase/decrease buttons', () => {
+    it('should show increase/decrease buttons', () => {
         const buttons = fixture.debugElement.queryAll(By.css('.fd-step-input__button'));
         expect(buttons.length).toBe(2);
     });
 });
 
 @Component({
-    template: `<fdp-number-step-input
-        name="qty"
-        [value]="value"
-        [min]="min"
-        [max]="max"
-        [step]="step"
-        [largerStep]="largerStep"
-        [stepFn]="stepFn"
-        [precision]="precision"
-        [description]="description"
-        [contentDensity]="contentDensity"
-        (valueChange)="onValueChanged($event)"
-    ></fdp-number-step-input>`
+    template: `
+        <fdp-number-step-input
+            name="qty"
+            [value]="value"
+            [min]="min"
+            [max]="max"
+            [step]="step"
+            [largerStep]="largerStep"
+            [stepFn]="stepFn"
+            [precision]="precision"
+            [description]="description"
+            [contentDensity]="contentDensity"
+            (valueChange)="onValueChanged($event)"
+        ></fdp-number-step-input>
+    `
 })
 class NumberStepInputMainFunctionalityHostComponent {
     @ViewChild(NumberStepInputComponent) stepInputCmp: NumberStepInputComponent;
@@ -124,11 +126,11 @@ describe('NumberStepInputComponent main functionality', () => {
         stepInputComponent = component.stepInputCmp;
     });
 
-    it('Should be created', () => {
+    it('should be created', () => {
         expect(stepInputComponent).toBeTruthy();
     });
 
-    it('Should handle "value" input assignment', () => {
+    it('should handle "value" input assignment', () => {
         component.value = 10;
         fixture.detectChanges();
         expect(stepInputComponent.value).toEqual(10);
@@ -137,11 +139,10 @@ describe('NumberStepInputComponent main functionality', () => {
         expect(inputEl.value).toBe('10');
     });
 
-    it('Should not allow value be less than minimum', () => {
+    it('should not allow value be less than minimum', () => {
         const nativeElement: HTMLInputElement = getInputDebugElement().nativeElement;
-        const enteredValue = (component.min - 1).toString();
 
-        nativeElement.value = enteredValue;
+        nativeElement.value = (component.min - 1).toString();
         nativeElement.dispatchEvent(new InputEvent('input'));
         nativeElement.dispatchEvent(new InputEvent('change'));
 
@@ -150,11 +151,10 @@ describe('NumberStepInputComponent main functionality', () => {
         expect(stepInputComponent.value).toEqual(component.min);
     });
 
-    it('Should not allow value be more than maximum', () => {
+    it('should not allow value be more than maximum', () => {
         const nativeElement: HTMLInputElement = getInputDebugElement().nativeElement;
-        const enteredValue = (component.max + 1).toString();
 
-        nativeElement.value = enteredValue;
+        nativeElement.value = (component.max + 1).toString();
         nativeElement.dispatchEvent(new InputEvent('input'));
         nativeElement.dispatchEvent(new InputEvent('change'));
 
@@ -163,7 +163,7 @@ describe('NumberStepInputComponent main functionality', () => {
         expect(stepInputComponent.value).toEqual(component.max);
     });
 
-    it('Should use stepFn if provided to calculate increase step value', () => {
+    it('should use stepFn if provided to calculate increase step value', () => {
         component.stepFn = (value: number, action: 'increase' | 'decrease'): number => {
             return action === 'decrease' ? -1 : 1;
         };
@@ -179,7 +179,7 @@ describe('NumberStepInputComponent main functionality', () => {
         expect(stepInputComponent.value).toEqual(40);
     });
 
-    it('Should use stepFn if provided to calculate decrease step value', () => {
+    it('should use stepFn if provided to calculate decrease step value', () => {
         component.stepFn = (value: number, action: 'increase' | 'decrease'): number => {
             return action === 'decrease' ? -1 : 1;
         };
@@ -195,7 +195,7 @@ describe('NumberStepInputComponent main functionality', () => {
         expect(stepInputComponent.value).toEqual(20);
     });
 
-    it('Should apply decimal precision to format number', () => {
+    it('should apply decimal precision to format number', () => {
         component.value = 25;
         fixture.detectChanges();
 
@@ -213,7 +213,7 @@ describe('NumberStepInputComponent main functionality', () => {
         expect(inputEl.value).toEqual('26.000');
     });
 
-    it('Should show description if provided', () => {
+    it('should show description if provided', () => {
         let descriptionEl = fixture.debugElement.query(By.css('.fd-form-label--unit-description'));
 
         expect(descriptionEl).toBeNull();
@@ -227,30 +227,24 @@ describe('NumberStepInputComponent main functionality', () => {
         expect((descriptionEl.nativeElement as HTMLElement).innerText.trim()).toEqual('PC');
     });
 
-    it('Should handle "compact" mode', () => {
+    it('should handle "compact" mode', () => {
         const hostEl = fixture.debugElement.query(By.css('.fd-step-input'));
-        const decreaseBtn = fixture.debugElement.queryAll(By.css('.fd-step-input__button'))[0];
-        const increaseBtn = fixture.debugElement.queryAll(By.css('.fd-step-input__button'))[1];
         const input = fixture.debugElement.query(By.css('.fd-step-input__input'));
 
         component.contentDensity = 'cozy';
         fixture.detectChanges();
 
         expect(hostEl.classes['fd-step-input--compact']).not.toBeTrue();
-        expect(decreaseBtn.classes['fd-button--compact']).not.toBeTrue();
-        expect(increaseBtn.classes['fd-button--compact']).not.toBeTrue();
         expect(input.classes['fd-input--compact']).not.toBeTrue();
 
         component.contentDensity = 'compact';
         fixture.detectChanges();
 
         expect(hostEl.classes['fd-step-input--compact']).toBeTrue();
-        expect(decreaseBtn.classes['fd-button--compact']).toBeTrue();
-        expect(increaseBtn.classes['fd-button--compact']).toBeTrue();
         expect(input.classes['fd-input--compact']).toBeTrue();
     });
 
-    it('Should decrement by 1 clicking "decrease" button', () => {
+    it('should decrement by 1 clicking "decrease" button', () => {
         const value = 10;
         component.value = value;
         fixture.detectChanges();
@@ -266,7 +260,7 @@ describe('NumberStepInputComponent main functionality', () => {
         expect(component.value).toEqual(value - 1);
     });
 
-    it('Should increment by 1 clicking "increase" button', () => {
+    it('should increment by 1 clicking "increase" button', () => {
         const value = 10;
         component.value = value;
         fixture.detectChanges();
@@ -282,7 +276,7 @@ describe('NumberStepInputComponent main functionality', () => {
         expect(component.value).toEqual(value + 1);
     });
 
-    it('Should increment by step if press "ArrowUp" key', () => {
+    it('should increment by step if press "ArrowUp" key', () => {
         const value = 10;
         const step = 2;
 
@@ -297,7 +291,7 @@ describe('NumberStepInputComponent main functionality', () => {
         expect(component.value).toEqual(value + step);
     });
 
-    it('Should decrement by step if press "ArrowDown" key', () => {
+    it('should decrement by step if press "ArrowDown" key', () => {
         const value = 10;
         const step = 2;
 
@@ -312,7 +306,7 @@ describe('NumberStepInputComponent main functionality', () => {
         expect(component.value).toEqual(value - step);
     });
 
-    it('Should increment by largeStep if press "PageUp" key', () => {
+    it('should increment by largeStep if press "PageUp" key', () => {
         const value = 10;
         const step = 2;
         const largeStep = 4;
@@ -329,7 +323,7 @@ describe('NumberStepInputComponent main functionality', () => {
         expect(component.value).toEqual(value + step * largeStep);
     });
 
-    it('Should decrement by largeStep if press "PageDown" key', () => {
+    it('should decrement by largeStep if press "PageDown" key', () => {
         const value = 10;
         const step = 2;
         const largeStep = 4;
@@ -346,7 +340,7 @@ describe('NumberStepInputComponent main functionality', () => {
         expect(component.value).toEqual(value - step * largeStep);
     });
 
-    it('Should not handle mouse wheel if control not focused', () => {
+    it('should not handle mouse wheel if control not focused', () => {
         const value = 10;
         const step = 2;
 
@@ -363,7 +357,7 @@ describe('NumberStepInputComponent main functionality', () => {
     });
 
     // TODO: Unskip after fix
-    xit('Should handle mouse wheel once control in focus state', () => {
+    xit('should handle mouse wheel once control in focus state', () => {
         const value = 10;
         const step = 2;
 
@@ -390,7 +384,7 @@ describe('NumberStepInputComponent main functionality', () => {
         expect(component.value).toEqual(value);
     });
 
-    it('Should catch changes on "input" event and apply them on "change" event', () => {
+    it('should catch changes on "input" event and apply them on "change" event', () => {
         const value = 10;
         const step = 2;
 
