@@ -45,7 +45,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
     questions: DynamicFormItem[] = [
         {
             type: 'input',
-            name: 'name',
+            name: 'name1',
             message: 'Your name: XL: 1, L: 2, M: 1, S: 2',
             default: 'John',
             guiOptions: {
@@ -66,7 +66,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         {
             type: 'password',
             controlType: 'password',
-            name: 'password',
+            name: 'password1',
             message: 'Password: XL: 1, L: 2, M: 2, S: 1',
             validators: [Validators.required],
             validate: (value: string) => {
@@ -82,7 +82,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         },
         {
             type: 'number',
-            name: 'age',
+            name: 'age1',
             message: () => 'Your age: XL: 1, L: 2, M: 1, S: 1',
             default: '18',
             validators: [Validators.required],
@@ -93,7 +93,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         },
         {
             type: 'editor',
-            name: 'bio',
+            name: 'bio1',
             message: 'Your biography: XL: 2, L: 1, M: 2, S: 1',
             guiOptions: {
                 columnLayout: { XL: 2, L: 1, M: 2, S: 1 },
@@ -102,7 +102,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         },
         {
             type: 'checkbox',
-            name: 'citizenship',
+            name: 'citizenship1',
             message: 'Your citizenship: XL: 2 true, L: 1 false, M: 2 true, S: 1 false',
             guiOptions: {
                 inline: true,
@@ -126,7 +126,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         },
         {
             type: 'list',
-            name: 'department',
+            name: 'department1',
             message: 'Department you work in: column: 2',
             validators: [Validators.required],
             default: 'IT',
@@ -138,7 +138,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         },
         {
             type: 'list',
-            name: 'main_speciality',
+            name: 'main_speciality1',
             message: 'Main speciality: XL: 2, L: 1, M: 1, S: 1',
             validators: [Validators.required],
             choices: async () => {
@@ -156,7 +156,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         },
         {
             type: 'confirm',
-            name: 'agree',
+            name: 'agree1',
             message: 'Do you agree with terms and conditions?: XL: 2, L: 1, M: 2, S: 1',
             choices: ['Yes', 'No'],
             validate: async (value) => {
@@ -170,7 +170,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         },
         {
             type: 'radio',
-            name: 'choose_best_option',
+            name: 'choose_best_option1',
             message: 'Primary front-end framework: XL: 2 false, L: 1 true, M: 1 false, S: 1 true',
             choices: ['Angular', 'React', 'VueJS'],
             guiOptions: {
@@ -184,7 +184,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         },
         {
             type: 'datepicker',
-            name: 'birthday',
+            name: 'birthday1',
             message: 'Your birthday: XL: 1, L: 2, M: 1, S: 1',
             guiOptions: {
                 columnLayout: { XL: 1, L: 2, M: 1, S: 1 },
@@ -200,7 +200,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         },
         {
             type: 'switch',
-            name: 'enable_feature',
+            name: 'enable_feature1',
             message: 'Enable some analytics',
             default: false,
             guiOptions: {
