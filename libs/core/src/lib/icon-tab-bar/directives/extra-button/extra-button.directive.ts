@@ -7,22 +7,34 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 })
 export class ExtraButtonDirective implements AfterViewInit, OnDestroy {
 
+    /**
+     * @description Position inside parent
+     */
     @Input()
     anchorIndexInsideParent = 0;
 
+    /**
+     * @description Flag representing rtl mode
+     */
     @Input()
     isRtl: boolean;
 
+    /**
+     * @description Offset to calculate correct position
+     */
     @Input()
     extraButtonOffset = 0;
 
+    /** @hidden */
     private _onDestroy$ = new Subject();
 
+    /** @hidden */
     constructor(
         private _el: ElementRef,
     ) {
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
         fromEvent(window, 'resize')
             .pipe(
@@ -35,11 +47,16 @@ export class ExtraButtonDirective implements AfterViewInit, OnDestroy {
         this.calculatePosition();
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
+    /**
+     * @hidden
+     * @description Calculate position of extra button
+     */
      calculatePosition(): void {
         const nativeEl = this._el.nativeElement;
         const parent = nativeEl.parentElement;

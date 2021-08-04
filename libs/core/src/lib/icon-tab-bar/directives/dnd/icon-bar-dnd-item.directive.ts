@@ -4,6 +4,7 @@ import { IconBarDndListDirective } from './icon-bar-dnd-list.directive';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive';
+import { IconTabBarItem } from '../../types';
 
 
 export interface ElementChord {
@@ -18,36 +19,54 @@ export interface ElementChord {
 })
 export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
 
+    /**
+     * @description Tab info
+     */
     @Input()
-    dndItemData: any;
+    dndItemData: IconTabBarItem;
 
-    /** Direction in which the list is oriented. */
+    /**
+     * @description Classes for draggable preview
+     */
     @Input()
     previewClass: string[] = ['fd-icon-tab-bar-dnd-preview'];
 
-    /** Direction in which the list is oriented. */
+    /**
+     * @description Classes for hovered state
+     */
     @Input()
     dndHoveredClass: string[] = ['fd-icon-tab-bar-dnd-hovered'];
 
-    /** Direction in which the list is oriented. */
+    /**
+     * @description Classes for separator, when draggable element between two tabs
+     */
     @Input()
     dndSeparatorClass: string[] = ['fd-icon-tab-bar-dnd-separator', 'fd-icon-tab-bar-dnd-separator--vertical'];
 
-    /** Event thrown when the element is moved by 1px */
+    /**
+     * @description Event thrown when the element is moved by 1px
+     */
     readonly moved = new EventEmitter<Point>();
 
-    /** Event thrown when the element is released */
+    /**
+     * @description Event thrown when the element is released
+     */
     readonly released = new EventEmitter<void>();
 
-    /** Event thrown when the element is started to be dragged */
+    /**
+     * @description Event thrown when the element is started to be dragged
+     */
     readonly started = new EventEmitter<void>();
 
     /** @hidden */
     isVertical = false;
-    /** @hidden
-     * Drag reference, object created from DND CDK Service
+
+    /**
+     * @hidden
+     * @description Drag reference, object created from DND CDK Service
      */
     dragRef: DragRef;
+
     /** @hidden */
     private readonly _onDestroy$ = new Subject<void>();
 
@@ -104,12 +123,18 @@ export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
         };
     }
 
+    /**
+     * @description Add/delete separator classes
+     */
     toggleSeparatorStyles(force: boolean = false): void {
         force
             ? this.elementRef.nativeElement.classList.add(...this.dndSeparatorClass)
             : this.elementRef.nativeElement.classList.remove(...this.dndSeparatorClass);
     }
 
+    /**
+     * @description Add/delete hovered state classes
+     */
     toggleHoveredStyles(force: boolean = false): void {
         force
             ? this.elementRef.nativeElement.classList.add(...this.dndHoveredClass)

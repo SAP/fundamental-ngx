@@ -5,30 +5,52 @@ import { IconTabBarItem } from '../../types';
 @Directive()
 export abstract class IconTabBarPopoverBase implements OnChanges {
 
+    /**
+     * @description Reference to PopoverComponent
+     */
     @ViewChild('popover')
     popover: PopoverComponent;
 
+    /**
+     * @description Sub items array
+     */
     @Input()
-    items: IconTabBarItem[];
+    subTabs: IconTabBarItem[];
 
+    /**
+     * @description Should we show separator between subItems
+     */
     @Input()
     isSeparators = false;
 
+    /**
+     * @description Emits when some tab is selected.
+     */
     @Output()
     selectedExtraItem: EventEmitter<IconTabBarItem> = new EventEmitter<IconTabBarItem>();
 
-    isOpen = false;
+    /**
+     * @hidden
+     * @description state of popover
+     */
+    _isOpen = false;
 
+    /** @hidden */
     constructor(
         protected _cd: ChangeDetectorRef,
     ) {}
 
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.items) {
-            this._setStyles(this.items);
+            this._setStyles(this.subTabs);
         }
     }
 
+    /**
+     * @hidden
+     * @description Generate styles for subItems
+     */
     protected _setStyles(items: any[] = []): void {
         items.forEach(item => {
             if (item.color) {
@@ -40,6 +62,10 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
         });
     }
 
+    /**
+     * @hidden
+     * @param selectedItem
+     */
     _selectItem(selectedItem: IconTabBarItem): void {
         this.selectedExtraItem.emit(selectedItem);
         this.popover.close();

@@ -7,9 +7,15 @@ import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
 })
 export class IconTabBarPopoverComponent extends IconTabBarPopoverBase {
 
+    /**
+     * @description Flag representing position inside container left/right
+     */
     @Input()
     leftSide = false;
 
+    /**
+     * @description Label for button
+     */
     @Input()
     label = 'more';
 }

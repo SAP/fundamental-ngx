@@ -9,32 +9,46 @@ import { OverflowListItemDirective } from './overflow-list-item.directive';
 })
 export class OverflowListDirective implements AfterViewInit, OnDestroy {
 
-    @Input()
-    itemSelector: string;
-
+    /**
+     * @description Offset to calculate correct position
+     */
     @Input()
     overflowOffset = 0;
 
+    /**
+     * @description Flag representing rtl mode
+     */
     @Input()
     isRtl: boolean;
 
+    /**
+     * @description value of display property of existed list items
+     */
     @Input()
     itemCssBlockValue = 'flex';
 
+    /**
+     * @description Emits when changed amount of extra items
+     */
     @Output()
     overflowChanged: EventEmitter<number> = new EventEmitter<number>();
 
-    /** @hidden */
+    /**
+     * @description References to QueryList of OverflowListItemDirective
+     */
     @ContentChildren(OverflowListItemDirective)
-    _overflowItems: QueryList<OverflowListItemDirective>;
+    overflowItems: QueryList<OverflowListItemDirective>;
 
+    /** @hidden */
     private _onDestroy$ = new Subject();
 
+    /** @hidden */
     constructor(
         private _el: ElementRef
     ) {
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
         fromEvent(window, 'resize')
             .pipe(
@@ -47,13 +61,17 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
         this._calculateAmountOfOverflowedItems();
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
+    /**
+     * @description Get amount of extra items in current list
+     * */
     getAmountOfExtraItems(): number {
-        const elements = this._overflowItems.toArray().map(item => item.el.nativeElement);
+        const elements = this.overflowItems.toArray().map(item => item.el.nativeElement);
         const computed = getComputedStyle(this._el.nativeElement);
         const contentWidth = this._el.nativeElement.clientWidth
             - parseFloat(computed.paddingLeft)
@@ -61,11 +79,18 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
         return this._checkWidthWithOffset(elements, contentWidth);
     }
 
+    /** @hidden */
     private _calculateAmountOfOverflowedItems(): void {
         const extra = this.getAmountOfExtraItems();
         this.overflowChanged.emit(extra);
     }
 
+    /**
+     * @hidden
+     * @param arrItems
+     * @param containerWidth
+     * @param checkWithOffset
+     * */
     private _checkWidthWithOffset(arrItems: HTMLElement[], containerWidth: number, checkWithOffset: boolean = false): number {
         let itemsTotalWidth = 0;
         const parentWidth = checkWithOffset
@@ -97,6 +122,10 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
         return 0;
     }
 
+    /**
+     * @param arrItems
+     * @hidden
+     * */
     private _clearTempStyles(arrItems: HTMLElement[]): void {
         arrItems.forEach(item => {
             item.hidden = false;

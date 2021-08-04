@@ -11,10 +11,15 @@ import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive
 })
 export class IconBarDndListDirective implements AfterViewInit, OnDestroy {
 
-    /** Direction in which the list is oriented. */
+    /**
+     * @description Direction in which the list is oriented.
+     */
     @Input()
     dndOrientation: 'horizontal' | 'vertical' = 'vertical';
 
+    /**
+     * @description Is disabled autoscroll inside draggable list
+     */
     @Input()
     dndAutoScroll = true;
 
@@ -27,8 +32,10 @@ export class IconBarDndListDirective implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _dragRefItems: DragRef[] = [];
 
+    /** @hidden */
     private readonly _dndItems$ = new ReplaySubject<void>(1);
 
+    /** @hidden */
     constructor(
         public elementRef: ElementRef,
         private _dragDrop: DragDrop,
@@ -63,16 +70,27 @@ export class IconBarDndListDirective implements AfterViewInit, OnDestroy {
         this._dndContainer.removeDndList(this);
     }
 
+    /**
+     * @param dragItem
+     * @description Register IconBarDndItemDirective to current list
+     */
     registerDragItem(dragItem: IconBarDndItemDirective): void {
         this._dragRefItems.push(dragItem.dragRef);
         this._dndItems$.next();
     }
 
+    /**
+     * @param dragItem
+     * @description Remove registered IconBarDndItemDirective to current list
+     */
     removeDragItem(dragItem: IconBarDndItemDirective): void {
         this._dragRefItems = this._dragRefItems.filter(item => item !== dragItem.dragRef);
         this._dndItems$.next();
     }
 
+    /**
+     * @param draggable
+     */
     changeDraggableState(draggable: boolean): void {
         this._dropListRef.disabled = !draggable;
     }

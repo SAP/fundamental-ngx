@@ -16,15 +16,25 @@ export interface DataForReordering {
 })
 export class IconTabBarTextTypeComponent extends IconTabBarBase {
 
+    /**
+     * @description Disable or enable reordering(drag and drop) feature.
+     */
     @Input()
     enableTabReordering = false;
 
+    /**
+     * @description Layout type for tab.
+     */
     @Input()
     layoutMode: 'row'|'column';
 
+    /**
+     * @description Emits when user drop tab.
+     */
     @Output()
     reordered: EventEmitter<IconTabBarItem[]> = new EventEmitter<IconTabBarItem[]>();
 
+    /** @hidden */
     constructor(
         protected _cd: ChangeDetectorRef,
         protected _ngZone: NgZone,
@@ -32,6 +42,10 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
         super(_cd, _ngZone);
     }
 
+    /**
+     * @hidden
+     * @param selectedItem
+     */
     _selectExtraItem(selectedItem: IconTabBarItem): void {
         // Check if selected item is subItem
         // Then to find root tab, and pass it to parent method.
@@ -42,6 +56,12 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
         super._selectExtraItem(selectedItem);
     }
 
+    /**
+     * @hidden
+     * @param draggableItem
+     * @param targetItem
+     * @param action
+     */
     _onDropped({ draggableItem, targetItem, action }: FdDnDEvent): void {
         const replacedParsedUidArr = targetItem.uId.split(UNIQUE_KEY_SEPARATOR);
         replacedParsedUidArr.length = replacedParsedUidArr.length - 1;
@@ -65,12 +85,17 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
         };
 
         action === 'replace'
-            ? this._replaceItems(dataForAction)
+            ? this._replaceAsSibling(dataForAction)
             : this._insertItemAsChild(dataForAction);
 
         this.reordered.emit(this._tabs);
     }
 
+    /**
+     * @hidden
+     * @param data
+     * @description Insert tab into another tab.
+     */
     private _insertItemAsChild(data: { replacedItemInfo: DataForReordering, draggableItemInfo: DataForReordering }): void {
         const { replacedItemInfo, draggableItemInfo } = data;
         // Remove draggable tab from previous list
@@ -84,7 +109,12 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
         this._triggerRecalculationVisibleItems();
     }
 
-    private _replaceItems(data: { replacedItemInfo: DataForReordering, draggableItemInfo: DataForReordering }): void {
+    /**
+     * @hidden
+     * @param data
+     * @description Insert tab between tabs
+     */
+    private _replaceAsSibling(data: { replacedItemInfo: DataForReordering, draggableItemInfo: DataForReordering }): void {
         const { replacedItemInfo, draggableItemInfo } = data;
         draggableItemInfo.arr.splice(draggableItemInfo.item.index, 1);
         const newIndex = replacedItemInfo?.item?.index || 0;
@@ -93,6 +123,13 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
         this._triggerRecalculationVisibleItems();
     }
 
+    /**
+     * @hidden
+     * @param uid
+     * @param arr
+     * @returns {parent, tab}
+     * @description Get tab reference inside main tab array and  reference to parent array.
+     */
     private _getTabInfoFromMainList(uid: string, arr: any[] = this._tabs): {parent: IconTabBarItem[], tab: IconTabBarItem} {
         let result: {parent: IconTabBarItem[], tab: IconTabBarItem};
         for (let i = 0; i < arr.length; i++) {
@@ -110,6 +147,12 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
         return result;
     }
 
+    /**
+     * @hidden
+     * @param arr
+     * @param parentUid
+     * @description Update indexes and uIds.
+     */
     private _updateTabsIndexes(arr: IconTabBarItem[], parentUid?: string): IconTabBarItem[] {
         return arr.map((item, index) => {
             item.index = index;
@@ -123,6 +166,11 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
         });
     }
 
+    /**
+     * @hidden
+     * @param item
+     * @returns uId
+     */
     _trackBy(item: IconTabBarItem): string {
         return item.uId;
     }

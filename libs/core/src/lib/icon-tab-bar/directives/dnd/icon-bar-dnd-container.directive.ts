@@ -18,14 +18,18 @@ export interface FdDnDEvent {
 })
 export class IconBarDndContainerDirective implements OnDestroy {
 
-  /** Defines if drag and drop feature should be enabled for list items */
+  /**
+   * @description Defines if drag and drop feature should be enabled for list items
+   */
   @Input()
   set draggable(draggable: boolean) {
     this._draggable = draggable;
     this._changeDraggableState(draggable);
   }
 
-  /** Event that is thrown, when the item is dropped */
+  /**
+   * @description Event that is thrown, when the item is dropped
+   */
   @Output()
   dropped = new EventEmitter<FdDnDEvent>();
 
@@ -56,6 +60,7 @@ export class IconBarDndContainerDirective implements OnDestroy {
   /** @hidden */
   private readonly _onDestroy$ = new Subject<void>();
 
+  /** @hidden */
   constructor(
       public elementRef: ElementRef,
       private _dragDrop: DragDrop,
@@ -68,17 +73,21 @@ export class IconBarDndContainerDirective implements OnDestroy {
     this._onDestroy$.complete();
   }
 
-  /** Method called, when element is started to be dragged */
+  /**
+   * @description Method called, when element is started to be dragged
+   */
   dragStart(): void {
     /** Counting all of the elements's chords */
     this._elementsCoordinates = this.dndItemDirectives.map((item: IconBarDndItemDirective) =>
         item.getElementCoordinates());
-    this._generateVirtualFlipper();
+    this._generateVirtualSeparators();
   }
 
-  /** Method called, when the item is being moved by 1 px */
+  /**
+   * @param mousePosition
+   * @description Method called, when the item is being moved by 1 px
+   */
   onMove(mousePosition: Point): void {
-    /** Temporary object, to store lowest distance values */
     let newClosestIndex: number = null;
     let newClosestSeparatorIndex: number = null;
 
@@ -137,7 +146,10 @@ export class IconBarDndContainerDirective implements OnDestroy {
     }
   }
 
-  /** Method called, when element is released */
+  /**
+   * @param dragDir
+   * @description Method called, when element is released
+   */
   dragEnd(dragDir: IconBarDndItemDirective): void {
     if (this._closestSeparatorIndex || this._closestSeparatorIndex === 0) {
       this.dndItemDirectives[this._closestSeparatorIndex].toggleSeparatorStyles();
@@ -162,6 +174,10 @@ export class IconBarDndContainerDirective implements OnDestroy {
     this._closestSeparatorIndex = null;
   }
 
+  /**
+   * @param dragItem
+   * @description Register IconBarDndItemDirective to current container
+   */
   registerDragItem(dragItem: IconBarDndItemDirective): void {
     this._dragRefItems.push(dragItem.dragRef);
     this.dndItemDirectives.push(dragItem);
@@ -170,22 +186,36 @@ export class IconBarDndContainerDirective implements OnDestroy {
     dragItem.released.pipe(takeUntil(this._onDestroy$)).subscribe(() => this.dragEnd(dragItem));
   }
 
+  /**
+   * @param dragItem
+   * @description Remove registered IconBarDndItemDirective to current container
+   */
   removeDragItem(dragItem: IconBarDndItemDirective): void {
     this._dragRefItems = this._dragRefItems.filter(item => item !== dragItem.dragRef);
     this.dndItemDirectives = this.dndItemDirectives.filter(item => item !== dragItem);
   }
 
+  /**
+   * @param listDir
+   * @description Register IconBarDndListDirective to current container
+   */
   registerDndList(listDir: IconBarDndListDirective): void {
     this._dndListDirectives.add(listDir);
     listDir.changeDraggableState(this._draggable);
   }
 
+  /**
+   * @param listDir
+   * @description Remove registered IconBarDndListDirective to current container
+   */
   removeDndList(listDir: IconBarDndListDirective): void {
     this._dndListDirectives.delete(listDir);
   }
 
-  /** @hidden */
-  private _generateVirtualFlipper(): void {
+  /**
+   * @description Generate virtual elements as separator between tabs
+   */
+  private _generateVirtualSeparators(): void {
     this._elementsCoordinates.forEach((item, index) => {
       if (index !== this._elementsCoordinates.length - 1) {
         const isVertical = this.dndItemDirectives[index].isVertical;
@@ -229,6 +259,7 @@ export class IconBarDndContainerDirective implements OnDestroy {
   }
 }
 
+/** @hidden */
 function _between(x: number, min: number, max: number): boolean {
   return x >= min && x <= max;
 }

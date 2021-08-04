@@ -23,7 +23,7 @@
             </div>
         </a>
     </li>
-    <li *ngFor="let item of _tabs"
+    <li *ngFor="let item of _filteredTab"
         [class]="item.cssClasses"
         class="fd-icon-tab-bar__item"
         role="presentation"
@@ -54,6 +54,6 @@
         [isRtl]="isRtl"
         [anchorIndexInsideParent]="_lastVisibleTabIndex"
     >
-        <fd-icon-tab-bar-popover [items]="_extraTabs" (selectedExtraItem)="_selectExtraItem($event)"></fd-icon-tab-bar-popover>
+        <fd-icon-tab-bar-popover [subTabs]="_extraTabs" (selectedExtraItem)="_selectExtraItem($event)"></fd-icon-tab-bar-popover>
     </li>
 </ul>

@@ -8,14 +8,25 @@ import { IconTabBarItem } from '../../types';
 })
 export class IconTabBarFilterTypeComponent extends IconTabBarBase {
 
+    /**
+     * @description Boolean flag indicating to show total tab
+     */
     @Input()
     showTotalTab = true;
 
+    /** @hidden */
     _totalTab: IconTabBarItem;
 
+    /** @hidden */
+    _filteredTab: IconTabBarItem[] = [];
+
+    /**
+     * @hidden
+     * @description initialize state of tabs
+     */
     protected _initTabs(): void {
         super._initTabs();
-        this._totalTab = this._tabs[0];
-        this._tabs = this._tabs.slice(1)
+        this._totalTab = this.showTotalTab && this._tabs[0];
+        this._filteredTab = this.showTotalTab ? this._tabs.slice(1) : this._tabs;
     }
 }

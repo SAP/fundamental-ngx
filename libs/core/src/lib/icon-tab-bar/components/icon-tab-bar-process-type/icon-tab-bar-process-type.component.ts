@@ -7,25 +7,54 @@ import { take } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-icon-tab-bar-process-type',
-    templateUrl: './icon-tab-bar-process-type.component.html',
+    templateUrl: './icon-tab-bar-process-type.component.html'
 })
 export class IconTabBarProcessTypeComponent extends IconTabBarBase {
 
-
+    /** @hidden */
     _offsetOverflowDirective = 30;
+
+    /**
+     * @hidden
+     * An array containing extra tabs for the next steps
+     */
     _nextSteps: IconTabBarItem[] = [];
+
+    /**
+     * @hidden
+     * An array containing extra tabs for the next steps
+     */
     _prevSteps: IconTabBarItem[] = [];
+
+    /** @hidden */
     _showLeftBtn = false;
+
+    /** @hidden */
     _showRightBtn = false;
 
+    /** @hidden */
     private _firstVisibleTabIndex = 0;
+
+    /** @hidden */
     private _currentStepIndex = 0;
 
+    /** @hidden */
+    _anchorIndexForExtraBtnDirective: number;
+
+    /**
+     * @hidden
+     * @param selectedItem
+     */
     _selectItem(selectedItem: IconTabBarItem): void {
         this._currentStepIndex = selectedItem.index;
         super._selectItem(selectedItem);
     }
 
+    /**
+     * @hidden
+     * @param selectedItem
+     * @description select extra item inside popover
+     */
     _selectExtraItem(selectedItem: IconTabBarItem): void {
         this._currentStepIndex = selectedItem.index;
         let amountOfPreviousSteps;
@@ -62,11 +91,17 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
             });
     }
 
+    /**
+     * @hidden
+     * @param extraItems
+     * @description recalculate _nextSteps and _prevSteps array if we have extra items
+     */
     _recalculateVisibleItems(extraItems: number): void {
         const amountOfPrevSteps = this._currentStepIndex > extraItems ? extraItems : this._currentStepIndex;
         this.recalculateItemsByPrevArr(extraItems, amountOfPrevSteps);
     }
 
+    /** @hidden */
     private _clearExtraList(): void {
         this._nextSteps = [];
         this._prevSteps = [];
@@ -76,7 +111,14 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
         });
     }
 
-    private recalculateItemsByNextArr(extraItems: number, amountOfNextSteps): void {
+    /**
+     * @hidden
+     * @param extraItems
+     * @param amountOfNextSteps
+     * @description We fill the array of the next steps to the selected tab,
+     * based on this we generate the array of the previous steps if it is necessary
+     */
+    private recalculateItemsByNextArr(extraItems: number, amountOfNextSteps: number): void {
         this._clearExtraList();
         if (!extraItems) {
             return;
@@ -107,7 +149,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
             --amountOfPrevSteps;
         }
         // Added +1 for left button
-        this._anchorIndex = this._prevSteps.length
+        this._anchorIndexForExtraBtnDirective = this._prevSteps.length
             ? this._prevSteps.length + visibleAmountOfItems
             : this._prevSteps.length + visibleAmountOfItems - 1;
 
@@ -115,7 +157,14 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
         this._cd.detectChanges();
     }
 
-    private recalculateItemsByPrevArr(extraItems: number, amountOfPreviousSteps): void {
+    /**
+     * @hidden
+     * @param extraItems
+     * @param amountOfPreviousSteps
+     * @description We fill the array of the previous steps to the selected tab,
+     * based on this we generate the array of the next steps if it is necessary
+     */
+    private recalculateItemsByPrevArr(extraItems: number, amountOfPreviousSteps: number): void {
         this._clearExtraList();
         if (!extraItems) {
             return;
@@ -149,7 +198,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
             --amountOfNextSteps;
         }
         // Add +1 for left btn
-        this._anchorIndex = this._prevSteps.length
+        this._anchorIndexForExtraBtnDirective = this._prevSteps.length
             ? this._prevSteps.length + visibleAmountOfItems
             : this._prevSteps.length + visibleAmountOfItems - 1;
 

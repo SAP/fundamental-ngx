@@ -21,34 +21,58 @@ import { Subject } from 'rxjs';
 @Directive()
 export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
 
+    /**
+     * @description A tab bar configuration that stores the state of each tab. Based on this configuration, a tab bar is representing.
+     */
     @Input()
     tabsConfig: TabConfig[] = [];
 
+    /**
+     * @description Flag representing rtl mode
+     */
     @Input()
     isRtl: boolean;
 
+    /**
+     * @description Emits when some tab is selected.
+     */
     @Output()
-    selected: EventEmitter<any> = new EventEmitter<any>();
+    selected: EventEmitter<IconTabBarItem> = new EventEmitter<IconTabBarItem>();
 
+    /**
+     * @description Reference to OverflowListDirective
+     */
     @ViewChild(OverflowListDirective)
     overflowDirective: OverflowListDirective;
 
+    /**
+     * @description Reference to ExtraButtonDirective
+     */
     @ViewChild(ExtraButtonDirective)
     extraBtnDirective: ExtraButtonDirective;
 
+    /** @hidden */
     _selectedUid: string;
+
+    /** @hidden */
     _extraTabs: IconTabBarItem[] = [];
+
+    /** @hidden */
     _lastVisibleTabIndex: number;
-    _anchorIndex: number;
+
+    /** @hidden */
     _tabs: IconTabBarItem[] = [];
 
+    /** @hidden */
     private _onDestroy$ = new Subject();
 
+    /** @hidden */
     constructor(
         protected _cd: ChangeDetectorRef,
         protected _ngZone: NgZone,
     ) {}
 
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.tabsConfig && !changes.tabsConfig.firstChange) {
             this._initTabs();
@@ -60,15 +84,21 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
         }
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this._initTabs();
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._onDestroy$.next();
         this._onDestroy$.complete();
     }
 
+    /**
+     * @hidden
+     * @description initialize state of tabs
+     */
     protected _initTabs(): void {
         this._tabs = this._generateTabBarItems(this.tabsConfig);
         const selectedItem = this._tabs.find(item => item.active);
@@ -76,6 +106,10 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
         this._lastVisibleTabIndex = this._tabs.length - 1;
     }
 
+    /**
+     * @hidden
+     * @description generate IconTabItems from TabConfig array
+     */
     private _generateTabBarItems(config: TabConfig[]): IconTabBarItem[] {
         return config.map((item, index) => {
             const result: IconTabBarItem = {
@@ -94,6 +128,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
         });
     }
 
+    /** @hidden */
     private _generateSubItems(subItems: TabConfig[], parent: IconTabBarItem): IconTabBarItem[] {
         return subItems?.map((item, index) => {
             const result: IconTabBarItem = {
@@ -110,6 +145,11 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
         });
     }
 
+    /**
+     * @hidden
+     * @param selectedItem
+     * @param event
+     */
     _selectItem(selectedItem: IconTabBarItem, event?: Event): void {
         event?.stopPropagation();
         this._selectedUid = selectedItem.uId;
@@ -117,6 +157,11 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
         this.selected.emit(selectedItem)
     }
 
+    /**
+     * @hidden
+     * @param selectedItem
+     * @description select extra item inside popover
+     */
     _selectExtraItem(selectedItem: IconTabBarItem): void {
         const deletedItem = <IconTabBarItem>this._tabs.splice(this._lastVisibleTabIndex, 1, selectedItem)[0];
         this._tabs.splice(selectedItem.index, 1, deletedItem);
@@ -145,6 +190,11 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
         this._selectItem(selectedItem);
     }
 
+    /**
+     * @hidden
+     * @param extraItems
+     * @description recalculate _nextSteps and _prevSteps array if we have extra items
+     */
     _recalculateVisibleItems(extraItems: number): void {
         this._lastVisibleTabIndex = this._tabs.length - 1 - extraItems;
         this._tabs.forEach(item => {
@@ -163,6 +213,10 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
         this._cd.detectChanges();
     }
 
+    /**
+     * @hidden
+     * @description trigger recalculation items, need to do it asynchronously after dom was rerendered
+     */
     protected _triggerRecalculationVisibleItems(): void {
         this._ngZone
             .onMicrotaskEmpty
