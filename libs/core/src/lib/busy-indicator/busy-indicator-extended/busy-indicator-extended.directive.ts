@@ -30,10 +30,10 @@ export class BusyIndicatorExtendedDirective implements AfterContentInit {
         const hasLabel = this.busyIndicator.label;
         if (hasLabel !== undefined) {
             this.elementRef().nativeElement.parentElement.classList.add('fd-busy-indicator-extended');
-            if (this.elementRef().nativeElement.parentElement.classList.contains(messageToastClass)) {
-                this.elementRef().nativeElement.parentElement.classList.add(
-                    'fd-busy-indicator-extended--message-toast'
-                );
+            const { classList } = this.elementRef().nativeElement.parentElement;
+            classList.add('fd-busy-indicator-extended');
+            if (classList.contains(messageToastClass)) {
+                classList.add('fd-busy-indicator-extended--message-toast');
             }
         }
     }

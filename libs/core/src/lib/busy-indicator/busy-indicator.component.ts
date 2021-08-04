@@ -19,7 +19,7 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        'aria-role': 'progressbar',
+        'role': 'progressbar',
         '[attr.tabindex]': 'loading ? 0 : -1',
         '[attr.aria-busy]': 'loading',
         '[attr.aria-live]': 'ariaLive',
