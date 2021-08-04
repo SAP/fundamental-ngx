@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.170](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.169...v0.31.0-rc.170) (2021-08-04)
+
+
+### Bug Fixes
+
+* **platform:** fix displaying navigation buttons in wizard generator ([#6058](https://github.com/SAP/fundamental-ngx/issues/6058)) ([2e6edd8](https://github.com/SAP/fundamental-ngx/commit/2e6edd88f7aa65765776fa4f3afca908e70cb311))
+
 ## [0.31.0-rc.169](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.168...v0.31.0-rc.169) (2021-08-04)
 
 ## [0.31.0-rc.168](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.167...v0.31.0-rc.168) (2021-08-04)
