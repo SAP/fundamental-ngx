@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.167](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.166...v0.31.0-rc.167) (2021-08-04)
+
+
+### Bug Fixes
+
+* **core:** added exsisted instance of dialog to injector of component ([#6224](https://github.com/SAP/fundamental-ngx/issues/6224)) ([e98ec91](https://github.com/SAP/fundamental-ngx/commit/e98ec9191bd17ca6ff61766b520fb19f75441514))
+
 ## [0.31.0-rc.166](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.165...v0.31.0-rc.166) (2021-08-03)
 
 
