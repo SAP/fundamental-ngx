@@ -11,3 +11,5 @@ export * from './components/wizard-body/wizard-body.component';
 export * from './components/wizard-generator-step/wizard-generator-step.component';
 export * from './components/wizard-summary-step/wizard-summary-step.component';
 export * from './components/wizard-summary-step/wizard-summary-section/wizard-summary-section.component';
+export * from './directives/fdp-wizard-generator-finish-button.directive';
+export * from './directives/fdp-wizard-generator-go-next-button.directive';

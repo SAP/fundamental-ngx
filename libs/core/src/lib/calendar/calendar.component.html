@@ -28,7 +28,7 @@
             [selectedRangeDate]="selectedRangeDate"
             (selectedRangeDateChange)="selectedRangeDateChanged($event)"
             [currentlyDisplayed]="currentlyDisplayed"
-            [startingDayOfWeek]="startingDayOfWeek"
+            [startingDayOfWeek]="getWeekStartDay()"
             [disableFunction]="disableFunction"
             [disableRangeEndFunction]="disableRangeEndFunction"
             [disableRangeStartFunction]="disableRangeStartFunction"

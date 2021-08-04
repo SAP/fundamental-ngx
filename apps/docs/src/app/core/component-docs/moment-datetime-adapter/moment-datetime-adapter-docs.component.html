@@ -1,0 +1,61 @@
+<fd-docs-section-title
+    id="simple"
+    componentName="moment-datetime-adapter"
+>
+    Date Picker example with MomentDatetimeAdapter
+</fd-docs-section-title>
+<description>
+    DateAdapter is a generic class, components such as Datepicker also need to be made generic.
+    When working with these classes (for example as a ViewChild) you should include the appropriate generic type
+    that corresponds to the DateAdapter implementation you are using. For example:
+    <br>
+    <br>
+    <code>@ViewChild(DatePickerComponent) datePicker: DatePickerComponent&lt;<strong>Moment</strong>&gt;</code>;
+</description>
+<component-example>
+    <fd-date-picker-moment-adapter-example></fd-date-picker-moment-adapter-example>
+</component-example>
+<code-example [exampleFiles]="datePickerMomentAdapter"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title
+    id="moment-datetime-options"
+    componentName="moment-datetime-adapter"
+>
+    Locale time zone and strict mode
+</fd-docs-section-title>
+<description>
+    By default the MomentDateAdapter creates dates in your time zone specific locale and in
+    <a href="https://momentjs.com/guides/#/parsing/forgiving-mode/">forgiving mode</a>. You can change the default
+    behaviour by setting <code>useUtc: true</code> and <code>strict: true</code>.
+</description>
+<component-example>
+    <fd-moment-adapter-options-example></fd-moment-adapter-options-example>
+</component-example>
+<code-example [exampleFiles]="momentAdapterOptions"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title
+    id="moment-datetime-formats"
+    componentName="moment-datetime-adapter"
+>
+    MomentDatetime formats
+</fd-docs-section-title>
+<description>
+    The <code>DATE_TIME_FORMATS</code> object is a collection of formats that components such as datepicker,
+    timepicker, etc. uses when parsing and displaying dates. These formats are passed through to
+    the <code>DatetimeAdapter</code>. The <code>MomentDatetimeAdapter</code> has
+    <code>MOMENT_DATETIME_FORMATS</code>, provided in the code of the example.
+    <br>
+    <br>
+    These formats could be customized, but be sure they are compatible with the DatetimeAdapter.
+    <br>
+    You can read more about moment <a href="https://momentjs.com/docs/#/parsing/string-format/">parsing formats</a>,
+    and <a href="https://momentjs.com/docs/#/displaying/format/">display formats</a>.
+</description>
+<component-example>
+    <fd-moment-datetime-formats-example></fd-moment-datetime-formats-example>
+</component-example>
+<code-example [exampleFiles]="momentDatetimeFormats"></code-example>

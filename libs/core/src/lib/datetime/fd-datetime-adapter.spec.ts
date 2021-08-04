@@ -536,7 +536,7 @@ describe('FdDatetimeAdapter with LOCALE_ID override', () => {
         adapter = _adapter;
     }));
 
-    it('should take the default locale id from the MAT_DATE_LOCALE injection token', () => {
+    it('should take the default locale id from the injection token', () => {
         expect(adapter.getDayOfWeekNames('long')).toEqual([
             'søndag',
             'mandag',

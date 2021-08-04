@@ -1,26 +1,27 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
+import { Libraries } from '../utilities/libraries';
 
 @Injectable()
 export class ApiDocsService {
     readonly BASE_URL = 'assets/typedoc/';
 
-    constructor(private httpClient: HttpClient, private router: Router) {}
+    constructor(
+        private httpClient: HttpClient,
+        @Inject('CURRENT_LIB') private currentLib: Libraries
+    ) {}
 
     getComponentHtml(component: string): Observable<string> {
-        const regex = /(\/[^\/\s]+\/)/;
-        const currentLib = regex.exec(this.router.url)[0];
         component = component.toLocaleLowerCase() + '.html';
-        if (currentLib !== null) {
-            return this.httpClient.get<string>(this.BASE_URL + currentLib + 'classes/' + component, {
-                responseType: 'text' as 'json'
-            });
-        } else {
-            return this.httpClient.get<string>(this.BASE_URL + '/core/classes/' + component, {
-                responseType: 'text' as 'json'
-            });
-        }
+        const url = this.buildUrl(this.BASE_URL, this.currentLib || 'core', 'classes', component);
+        return this.httpClient.get<string>(url, {
+            responseType: 'text' as 'json'
+        });
+    }
+
+    private buildUrl(...tokens: string[]): string {
+        return tokens.join('/').replace(/\/+/g, '/');
     }
 }

@@ -30,5 +30,5 @@ export const noDataText = [
 ];
 export const listTypeAttr = 'listtype';
 export const loadMoreAttr = 'ng-reflect-load-more';
-export const separatorAttr = 'noseperator';
+export const separatorAttr = 'ng-reflect-no-border';
 export const itemUnreadStatus = 'unread';

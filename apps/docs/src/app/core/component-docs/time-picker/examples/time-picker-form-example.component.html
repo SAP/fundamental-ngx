@@ -2,9 +2,9 @@
     <div fd-form-item>
         <label fd-form-label required="true">TimePicker</label>
         <fd-time-picker formControlName="time"
-                        [state]="isValid() ? 'success' : 'error'"
+                        [state]="customForm.get('time').valid ? 'success' : 'error'"
                         required="true"
-                        [message]="isValid() ? 'Valid Time' : 'Invalid Time'">
+                        [message]="customForm.get('time').valid ? 'Valid Time' : 'Invalid Time'">
         </fd-time-picker>
         <br />
         Selected Time:

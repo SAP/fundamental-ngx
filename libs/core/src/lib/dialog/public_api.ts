@@ -8,6 +8,7 @@ export * from './dialog-close-button/dialog-close-button.component';
 export * from './dialog-footer-button/dialog-footer-button.component';
 
 export * from './directives/dialog-decisive-button.directive';
+export * from './directives/dialog-title.directive';
 
 export * from './utils/dialog-ref.class';
 export * from './utils/dialog-config.class';

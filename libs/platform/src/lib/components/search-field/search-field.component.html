@@ -8,9 +8,6 @@
         #inputGroup
         class="fdp-search-field__input-group fd-input-group"
         [class.is-focus]="isFocused"
-        [attr.aria-controls]="menuId"
-        [attr.aria-expanded]="showDropdown ? 'true' : 'false'"
-        aria-haspopup="true"
     >
         <span
             class="fd-input-group__addon fd-input-group__addon--button"
@@ -36,6 +33,9 @@
             [attr.disabled]="disabled ? '' : null"
             [attr.aria-label]="ariaLabel"
             [attr.aria-labelledby]="ariaLabelledBy"
+            [attr.aria-controls]="menuId"
+            [attr.aria-expanded]="showDropdown ? 'true' : 'false'"
+            aria-haspopup="true"
             [class.fd-input--compact]="contentDensity === 'compact'"
             (keydown)="onKeydown($event)"
             (keydown.enter)="onSearchSubmit()"
@@ -64,7 +64,7 @@
         >
             <button
                 i18n-title="@@platformSearchFieldSubmitButtonTitle"
-                title="Submit"
+                title="search"
                 class="fdp-search-field__submit fd-input-group__button fd-button fd-button--transparent"
                 [attr.id]="submitId"
                 [attr.disabled]="disabled ? '' : null"
@@ -110,6 +110,8 @@
                     class="fdp-search-field__suggestion-item fd-menu__item fd-menu__link"
                     *ngFor="let value of dropdownValues$ | async | suggestionMatches: inputText"
                     (keydown.enter)="onItemClick(value)"
+                    (keydown.tab)="onItemClick(value)"
+                    (keyup.space)="onItemClick(value); $event.stopPropagation()"
                     (click)="onItemClick(value)"
                     [innerHTML]="value | highlight: inputText:true:true"
                     role="menuitem"

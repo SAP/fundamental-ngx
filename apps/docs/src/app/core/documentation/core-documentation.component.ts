@@ -112,6 +112,10 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/theme-switcher', name: 'Theme Switcher API' }
         ];
 
+        this.adapters = [
+            { url: 'core/moment-datetime-adapter', name: 'Moment DateTime Adapter' },
+        ];
+
         this.sections = [
             {
                 header: 'Guides',
@@ -128,6 +132,10 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             {
                 header: 'Utilities',
                 content: this.utilities
+            },
+            {
+                header: 'Adapters',
+                content: this.adapters
             }
         ];
     }

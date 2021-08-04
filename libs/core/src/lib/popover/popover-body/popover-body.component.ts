@@ -4,6 +4,7 @@ import {
     Component,
     ContentChild,
     ElementRef,
+    HostListener,
     Renderer2,
     TemplateRef,
     ViewChild,
@@ -90,6 +91,16 @@ export class PopoverBodyComponent {
     /** Close event from popover body */
     onClose = new Subject<void>();
 
+    /** Handler escape keydown */
+    @HostListener('keyup', ['$event'])
+    bodyKeyupHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, ESCAPE) && this._closeOnEscapeKey) {
+            // In case if popover belongs to the element inside dialog
+            event.stopPropagation();
+            this.onClose.next();
+        }
+    }
+
     constructor(
         readonly _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
@@ -118,13 +129,6 @@ export class PopoverBodyComponent {
         this._addMarginStyle(arrowDirection);
 
         this.detectChanges();
-    }
-
-    /** Handler escape keydown */
-    bodyKeydownHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, ESCAPE) && this._closeOnEscapeKey) {
-            this.onClose.next();
-        }
     }
 
     /** @hidden */
