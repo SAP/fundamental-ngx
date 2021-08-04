@@ -1,10 +1,12 @@
 import {
     browserIsIE,
     clearValue,
-    click, getAttributeByName,
+    click, doesItExist, getAttributeByName,
     getElementArrayLength,
     getText,
     getTextArr,
+    getValue,
+    isElementDisplayed,
     pause,
     refreshPage,
     scrollIntoView,
@@ -13,7 +15,8 @@ import {
     waitForClickable,
     waitForElDisplayed,
     waitForPresent,
-    waitForUnclickable
+    waitForUnclickable,
+    doubleClick
 } from '../../driver/wdio';
 import { ComboBoxPo } from '../pages/combobox.po';
 import {
@@ -70,7 +73,7 @@ describe('Combobox test suite', function() {
         }
     });
 
-    xit('Verify each input while typing', () => {
+    it('Verify each input while typing', () => {
         if (browserIsIE()) {
             console.log('skip IE');
             return;
@@ -80,11 +83,11 @@ describe('Combobox test suite', function() {
             clearValue(comboBoxInputs(activeTypeNames[i]));
             setValue(comboBoxInputs(activeTypeNames[i]), appleOption.substring(0, 2));
             comboBoxPage.selectOption(activeTypeNames[i], appleOption);
-            waitForElDisplayed(filledComboBoxInputs(activeTypeNames[i], appleOption));
+            expect(getValue(comboBoxInputs(activeTypeNames[i]))).toEqual(appleOption);
         }
     });
 
-    xit('Verify dropdown collapsed after selecting an option', () => {
+    it('Verify dropdown collapsed after selecting an option', () => {
         if (browserIsIE()) {
             console.log('Skip for IE');
             return;
@@ -96,25 +99,26 @@ describe('Combobox test suite', function() {
         }
     });
 
-    xit('Verify selected option is highlighted', () => {
+    it('Verify selected option is highlighted', () => {
         if (browserIsIE()) {
             console.log('Skip for IE');
             return;
         }
         for (let i = 0; i < activeTypeNames.length; i++) {
             comboBoxPage.expandDropdown(activeTypeNames[i]);
+            expect(isElementDisplayed(optionsArray)).toBe(true);
             comboBoxPage.selectOption(activeTypeNames[i], appleOption);
-            expect(optionsArray).not.toBeVisible();
+            expect(doesItExist(optionsArray)).toBe(false);
             comboBoxPage.expandDropdown(activeTypeNames[i]);
             waitForElDisplayed(selectedDropDownOption(appleOption));
             comboBoxPage.selectOption(activeTypeNames[i], bananaOption);
-            expect(optionsArray).not.toBeVisible();
+            expect(doesItExist(optionsArray)).toBe(false);
             comboBoxPage.expandDropdown(activeTypeNames[i]);
             waitForElDisplayed(selectedDropDownOption(bananaOption));
         }
     });
 
-    // Need to debug on different browsers
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6248
     xit('Verify option hint when entering first characters', () => {
         for (let i = 0; i < activeTypeNames.length; i++) {
             scrollIntoView(comboBoxInputs(activeTypeNames[i]));
@@ -161,7 +165,7 @@ describe('Combobox test suite', function() {
         }
     });
 
-    xit('Verify combobox with two columns while typing', () => {
+    it('Verify combobox with two columns while typing', () => {
         scrollIntoView(comboboxTwoColumns);
         setValue(comboboxTwoColumns, 'Frui');
         comboBoxPage.selectOption('columns', 'Banana');

@@ -1,6 +1,6 @@
 import { ActionListItemPo } from '../pages/action-list-item.po';
 import { checkAttributeValueTrue, checkElementTextValue } from '../../helper/assertion-helper';
-import { acceptAlert, click, getAttributeByName, getElementArrayLength, refreshPage, waitForPresent } from '../../driver/wdio';
+import { acceptAlert, click, getAttributeByName, getElementArrayLength, getElementClass, refreshPage, waitForPresent } from '../../driver/wdio';
 import {btnText} from '../fixtures/appData/action-list-item-contents';
 
 describe('Action List Item Test Suite:', function() {
@@ -29,11 +29,11 @@ describe('Action List Item Test Suite:', function() {
             }
         });
 
-        xit('should check styles', () => {
+        it('should check styles', () => {
             checkAttributeValueTrue(actionLists, 'noBorder');
             checkElementTextValue(actionBtns, btnText);
-            expect(getAttributeByName(actionSections, 'ng-reflect-compact', 0)).toBe('false');
-            expect(getAttributeByName(actionSections, 'ng-reflect-compact', 1)).toBe('true');
+            expect(getElementClass(actionSections, 0)).not.toContain('compact');
+            expect(getElementClass(actionSections, 1)).toContain('compact');
         });
     });
 

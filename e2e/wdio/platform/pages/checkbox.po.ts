@@ -16,7 +16,7 @@ export class CheckboxPO extends BaseComponentPo {
     termsAndConditionsCheckbox = 'fdp-platform-tristate-checkbox #termsAndConditions';
     marketingCheckbox = 'fdp-platform-tristate-checkbox #marketing';
     newsletterCheckbox = 'fdp-platform-tristate-checkbox #newsletter';
-    errorCheckboxes = 'fdp-platform-checkbox-error-handling input';
+    errorCheckboxes = 'fdp-platform-checkbox-error-handling .fd-checkbox__label';
     presenceCheckbox = 'fdp-platform-checkbox-error-handling #presence';
     errorExampleTitle = 'fdp-platform-checkbox-error-handling h3';
     submitBtn = 'fdp-platform-checkbox-error-handling button';

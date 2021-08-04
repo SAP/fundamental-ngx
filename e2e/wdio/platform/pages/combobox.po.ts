@@ -5,7 +5,9 @@ import {
     scrollIntoView,
     sendKeys,
     waitForPresent,
-    waitForElDisplayed
+    waitForElDisplayed,
+    getText,
+    getValue
 } from '../../driver/wdio';
 
 export class ComboBoxPo extends BaseComponentPo {
@@ -18,7 +20,7 @@ export class ComboBoxPo extends BaseComponentPo {
     groupHeader = '.fd-list__group-header';
     comboboxWithGroup = 'input[ng-reflect-name="group"]';
     comboboxTwoColumns = '[name="columns"] input';
-    optionsArray = '.fd-list li';
+    optionsArray = '.fd-list__item';
     comboBoxInput = this.comboBoxRoot + ' input';
 
     selectedDropDownOption = (name: string) => {
@@ -45,8 +47,8 @@ export class ComboBoxPo extends BaseComponentPo {
         return `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//input`;
     };
 
-    filledComboBoxInputs = (name: string, option: string) => {
-        return `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//input[@ng-reflect-model='${option}']`;
+    filledComboBoxInputs = (name: string) => {
+        return `//label[@id='fdp-form-label-${name}']/../../fdp-input-message-group//input`;
     };
 
     expandDropdown(type: string): void {
@@ -63,7 +65,7 @@ export class ComboBoxPo extends BaseComponentPo {
         waitForPresent(this.dropDownOption(option));
         scrollIntoView(this.dropDownOption(option));
         click(this.dropDownOption(option));
-        waitForElDisplayed(this.filledComboBoxInputs(type, option));
+        expect(getValue(this.filledComboBoxInputs(type))).toBe(option);
     }
 
     open(): void {

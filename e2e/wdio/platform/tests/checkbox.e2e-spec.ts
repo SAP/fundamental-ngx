@@ -53,12 +53,12 @@ describe('Checkbox test suite', () => {
 
     describe('check binary checkbox used with form examples', () => {
         // TODO: Unskip after fix
-        xit('should check binary checkbox in template driven form', () => {
+        it('should check binary checkbox in template driven form', () => {
 
             waitForElDisplayed(binaryTempCheckbox, 0);
             // check checkbox labels
             for (let i = 0; 3 > i; i++) {
-                checkIfDisabled(binaryTempCheckbox, 'ng-reflect-is-disabled', 'false', i);
+                checkIfDisabled(binaryTempCheckbox, 'aria-disabled', 'false', i);
             }
             if (browserIsIEorSafari()) {
                 console.log('Skip check for Safari and IE');
@@ -66,46 +66,46 @@ describe('Checkbox test suite', () => {
             }
         });
 
-        xit('should check binary checkbox in reactive/model driven form', () => {
+        it('should check binary checkbox in reactive/model driven form', () => {
             if (browserIsIEorSafari()) {
                 console.log('Skip for Safari and IE');
                 return;
             }
 
             for (let i = 3; 6 > i; i++) {
-                checkIfDisabled(binaryTempCheckbox, 'ng-reflect-is-disabled', 'false', i);
+                checkIfDisabled(binaryTempCheckbox, 'aria-disabled', 'false', i);
             }
         });
-        // skipped for prod
-        xit('should check disabled checkbox', () => {
+
+        it('should check disabled checkbox', () => {
             scrollIntoView(disabledBinaryCheckbox);
-            checkIfDisabled(disabledBinaryCheckbox, 'ng-reflect-is-disabled', 'true');
+            checkIfDisabled(disabledBinaryCheckbox, 'aria-disabled', 'true');
         });
     });
 
     describe('Check checkbox used without form examples', () => {
-        xit('should check binary checkbox with value', () => {
+        it('should check binary checkbox with value', () => {
             if (browserIsIEorSafari()) {
                 console.log('Skip for Safari and IE');
                 return;
             }
 
             for (let i = 0; 2 > i; i++) {
-                checkIfDisabled(checkboxWithoutForm, 'ng-reflect-is-disabled', 'false', i);
+                checkIfDisabled(checkboxWithoutForm, 'aria-disabled', 'false', i);
             }
         });
 
-        xit('should check binary checkbox without value', () => {
+        it('should check binary checkbox without value', () => {
             if (browserIsIEorSafari()) {
                 console.log('Skip for Safari and IE');
                 return;
             }
             for (let i = 2; 4 > i; i++) {
-                checkIfDisabled(checkboxWithoutForm, 'ng-reflect-is-disabled', 'false', i);
+                checkIfDisabled(checkboxWithoutForm, 'aria-disabled', 'false', i);
             }
         });
-        // skipped for prod
-        xit('should check disabled checkbox', () => {
+
+        it('should check disabled checkbox', () => {
             // TODO: Fix for Safari and IE
             if (browserIsIEorSafari()) {
                 console.log('Skip for Safari and IE');
@@ -114,18 +114,18 @@ describe('Checkbox test suite', () => {
             waitForPresent(disabledCheckboxWithoutForm);
             scrollIntoView(disabledCheckboxWithoutForm);
             waitForElDisplayed(disabledCheckboxWithoutForm);
-            checkIfDisabled(disabledCheckboxWithoutForm, 'ng-reflect-is-disabled', 'true');
+            checkIfDisabled(disabledCheckboxWithoutForm, 'aria-disabled', 'true');
         });
     });
 
-    xdescribe('Check checkboxes with value property examples', () => {
+    describe('Check checkboxes with value property examples', () => {
         it('should check template driven form', () => {
             if (browserIsIEorSafari()) {
                 console.log('Skip for Safari and IE');
                 return;
             }
             for (let i = 0; 2 > i; i++) {
-                checkIfDisabled(checkboxWithValue, 'ng-reflect-is-disabled', 'false', i);
+                checkIfDisabled(checkboxWithValue, 'aria-disabled', 'false', i);
             }
         });
 
@@ -135,40 +135,40 @@ describe('Checkbox test suite', () => {
                 return;
             }
             for (let i = 2; 4 > i; i++) {
-                checkIfDisabled(checkboxWithValue, 'ng-reflect-is-disabled', 'false', i);
+                checkIfDisabled(checkboxWithValue, 'aria-disabled', 'false', i);
             }
         });
     });
 
     describe('Check Tristate Checkbox With Value Property and Without Value Property', () => {
-        xit('should check reactive form', () => {
+        it('should check reactive form', () => {
             if (browserIsIEorSafari()) {
                 console.log('Skip for Safari and IE');
                 return;
             }
             for (let i = 0; 8 > i; i++) {
-                checkIfDisabled(tristateCheckboxes, 'ng-reflect-is-disabled', 'false', i);
+                checkIfDisabled(tristateCheckboxes, 'aria-disabled', 'false', i);
             }
         });
 
-        xit('should check template form', () => {
+        it('should check template form', () => {
             if (browserIsIEorSafari()) {
                 console.log('Skip for Safari and IE');
                 return;
             }
 
             for (let i = 8; 16 > i; i++) {
-                checkIfDisabled(tristateCheckboxes, 'ng-reflect-is-disabled', 'false', i);
+                checkIfDisabled(tristateCheckboxes, 'aria-disabled', 'false', i);
             }
         });
 
-        xit('should check tristate checkbox with multiple checkboxes', () => {
+        it('should check tristate checkbox with multiple checkboxes', () => {
             if (browserIsIEorSafari()) {
                 console.log('Skip for Safari and IE');
                 return;
             }
             for (let i = 16; 20 > i; i++) {
-                checkIfDisabled(tristateCheckboxes, 'ng-reflect-is-disabled', 'false', i);
+                checkIfDisabled(tristateCheckboxes, 'aria-disabled', 'false', i);
             }
         });
 
@@ -179,14 +179,14 @@ describe('Checkbox test suite', () => {
     });
 
     describe('Checkbox With Form and State Change on Error', () => {
-        xit('should check error handling examples', () => {
+        it('should check error handling examples', () => {
             if (browserIsIEorSafari()) {
                 console.log('Skip for Safari and IE');
                 return;
             }
 
-            scrollIntoView(checkboxPage.submitBtn);
-            click(errorCheckboxes);
+            scrollIntoView(errorCheckboxes, 1);
+            click(errorCheckboxes, 1);
             waitForElDisplayed(checkboxPage.errorTooltip);
             expect(getText(checkboxPage.errorTooltip).trim()).toEqual(checkboxErrorTooltip);
             // TODO improve hover check stability for FF
@@ -220,18 +220,18 @@ describe('Checkbox test suite', () => {
         });
     });
 
-    xdescribe('Check Accessibility on checkbox examples', () => {
+    describe('Check Accessibility on checkbox examples', () => {
         it('should check a11y checkboxes', () => {
             expect(getElementAriaLabel(accessibilityCheckboxes)).toEqual(a11yCheckboxAriaLabel);
             expect(getAttributeByName(accessibilityCheckboxes, 'aria-disabled')).toBe('false');
 
             expect(getAttributeByName(accessibilityCheckboxes, 'aria-labelledby', 1))
-                .toEqual(a11yCheckboxAriaLabelledBy);
+                .toContain(a11yCheckboxAriaLabelledBy);
             expect(getAttributeByName(accessibilityCheckboxes, 'aria-disabled', 1)).toBe('false');
         });
 
         it('should check the disabled accessibility checkbox', () => {
-            checkIfDisabled(disabledAccessibilityCheckbox, 'ng-reflect-is-disabled', 'true');
+            checkIfDisabled(disabledAccessibilityCheckbox, 'aria-disabled', 'true');
             expect(getAttributeByName(disabledAccessibilityCheckbox, 'aria-disabled')).toBe('true');
             expect(getElementTitle(disabledAccessibilityCheckboxLabel)).toEqual(disabledCheckboxTitle);
         });
