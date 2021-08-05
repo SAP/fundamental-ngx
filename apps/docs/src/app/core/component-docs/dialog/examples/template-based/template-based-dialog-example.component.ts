@@ -15,7 +15,7 @@ export class TemplateBasedDialogExampleComponent {
             responsivePadding: true,
             ariaLabelledBy: 'fd-dialog-header-10',
             ariaModel: true,
-            focusTrapped: false
+            focusTrapped: true
         });
 
         dialogRef.afterClosed.subscribe(
