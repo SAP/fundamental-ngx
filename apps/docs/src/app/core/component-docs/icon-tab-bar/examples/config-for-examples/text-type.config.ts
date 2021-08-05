@@ -95,11 +95,6 @@ export const longTextTypeConfig: TabConfig[] = [
         color: null,
     },
     {
-        label: 'Item 13',
-        counter: 95,
-        color: null,
-    },
-    {
         label: 'Item 14',
         counter: 32,
         color: null,

@@ -17,9 +17,6 @@ export class IconTabBarFilterTypeComponent extends IconTabBarBase {
     /** @hidden */
     _totalTab: IconTabBarItem;
 
-    /** @hidden */
-    _filteredTab: IconTabBarItem[] = [];
-
     /**
      * @hidden
      * @description initialize state of tabs
@@ -27,6 +24,5 @@ export class IconTabBarFilterTypeComponent extends IconTabBarBase {
     protected _initTabs(): void {
         super._initTabs();
         this._totalTab = this.showTotalTab && this._tabs[0];
-        this._filteredTab = this.showTotalTab ? this._tabs.slice(1) : this._tabs;
     }
 }

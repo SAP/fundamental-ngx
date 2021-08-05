@@ -91,12 +91,6 @@ export const longIconTypeConfig: TabConfig[] = [
         color: null,
     },
     {
-        icon: 'card',
-        label: 'Item 13',
-        counter: 95,
-        color: null,
-    },
-    {
         icon: 'cancel',
         label: 'Item 14',
         counter: 32,

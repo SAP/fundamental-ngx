@@ -169,6 +169,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
         this._tabs.splice(selectedItem.index, 1, deletedItem);
 
         deletedItem.index = selectedItem.index;
+        deletedItem.uId = `${deletedItem.index}`;
         const itemToPopover = cloneDeep(deletedItem);
         deletedItem.hidden = true;
         deletedItem.cssClasses.push(ICON_TAB_HIDDEN_CSS)
@@ -181,6 +182,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
         })
 
         selectedItem.index = this._lastVisibleTabIndex;
+        selectedItem.uId = `${selectedItem.index}`;
         selectedItem.hidden = false;
         if (selectedItem.color) {
             selectedItem.cssClasses = [`fd-icon-tab-bar__item--${selectedItem.color}`];
@@ -190,6 +192,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
 
 
         this._selectItem(selectedItem);
+        this._triggerRecalculationVisibleItems();
     }
 
     /**

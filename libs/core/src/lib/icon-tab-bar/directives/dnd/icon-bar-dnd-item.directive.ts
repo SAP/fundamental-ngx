@@ -30,19 +30,19 @@ export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
      * @description Classes for draggable preview
      */
     @Input()
-    previewClass: string[] = ['fd-icon-tab-bar-dnd-preview'];
+    previewClass: string[] = ['fd-icon-tab-bar__item--dnd-preview'];
 
     /**
      * @description Classes for hovered state
      */
     @Input()
-    dndHoveredClass: string[] = ['fd-icon-tab-bar-dnd-hovered'];
+    dndHoveredClass: string[] = ['fd-icon-tab-bar__item--dnd-hovered'];
 
     /**
      * @description Classes for separator, when draggable element between two tabs
      */
     @Input()
-    dndSeparatorClass: string[] = ['fd-icon-tab-bar-dnd-separator', 'fd-icon-tab-bar-dnd-separator--vertical'];
+    dndSeparatorClass: string[] = ['fd-icon-tab-bar__item--dnd-separator', 'fd-icon-tab-bar__item--dnd-separator-vertical'];
 
     /**
      * @description Event thrown when the element is moved by 1px
