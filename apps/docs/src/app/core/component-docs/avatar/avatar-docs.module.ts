@@ -16,6 +16,7 @@ import { AvatarPlaceholderExampleComponent } from './examples/avatar-placeholder
 import { AvatarTransparentExampleComponent } from './examples/avatar-transparent-example.component';
 import { AvatarInitialsExampleComponent } from './examples/avatar-initials-example.component';
 import { AvatarZoomIconExampleComponent } from './examples/avatar-zoom-icon-example.component';
+import { AvatarDefaultImageWithAlternativeOptionsExampleComponent } from './examples/avatar-default-image-with-alternative-options-example.component';
 
 const routes: Routes = [
     {
@@ -43,7 +44,8 @@ const routes: Routes = [
         AvatarPlaceholderExampleComponent,
         AvatarTileExampleComponent,
         AvatarTransparentExampleComponent,
-        AvatarZoomIconExampleComponent
+        AvatarZoomIconExampleComponent,
+        AvatarDefaultImageWithAlternativeOptionsExampleComponent,
     ]
 })
 export class AvatarDocsModule {}

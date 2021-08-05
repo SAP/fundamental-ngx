@@ -20,6 +20,8 @@ import * as avatarZoomIconTs from '!raw-loader!./examples/avatar-zoom-icon-examp
 import * as avatarZoomIconHtml from '!raw-loader!./examples/avatar-zoom-icon-example.component.html';
 import * as avatarBordersTs from '!raw-loader!./examples/avatar-borders-example.component.ts';
 import * as avatarBordersHtml from '!raw-loader!./examples/avatar-borders-example.component.html';
+import * as avatarBackgroundWithAlterOptionsImageTs from '!raw-loader!./examples/avatar-default-image-with-alternative-options-example.component.ts';
+import * as avatarBackgroundImageWithAlterOptionsHtml from '!raw-loader!./examples/avatar-default-image-with-alternative-options-example.component.html';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -165,6 +167,20 @@ export class AvatarDocsComponent {
             code: avatarBordersTs,
             fileName: 'avatar-borders-example',
             component: 'AvatarBordersExampleComponent'
+        }
+    ];
+
+    avatarBackgroundImageWithALterOptions: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'avatar-background-image-with-alter-options-example',
+            code: avatarBackgroundImageWithAlterOptionsHtml
+        },
+        {
+            language: 'typescript',
+            code: avatarBackgroundWithAlterOptionsImageTs,
+            fileName: 'avatar-background-image-with-alter-options-example',
+            component: 'AvatarBackgroundImageExampleComponent'
         }
     ];
 }
