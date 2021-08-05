@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.175](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.174...v0.31.0-rc.175) (2021-08-05)
+
+
+### Bug Fixes
+
+* **core:** delete focus from reset options in Select component ([#6242](https://github.com/SAP/fundamental-ngx/issues/6242)) ([e8a672c](https://github.com/SAP/fundamental-ngx/commit/e8a672c93977897a6cb3e8fcd1b6897e7ce7b8f1))
+
 ## [0.31.0-rc.174](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.173...v0.31.0-rc.174) (2021-08-05)
 
 
