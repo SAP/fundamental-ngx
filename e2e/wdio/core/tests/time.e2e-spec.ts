@@ -14,7 +14,7 @@ import {
     saveElementScreenshot,
     scrollIntoView,
     checkElementScreenshot,
-    getElementArrayLength,
+    getElementArrayLength, browserIsFirefox
 } from '../../driver/wdio';
 import { sections } from '../fixtures/appData/time-contents'
 
@@ -102,6 +102,10 @@ describe('Time component test', function () {
     })
 
    it('Should check that click and drag works', () => {
+       // method not working on FF
+       if (browserIsFirefox()) {
+           return;
+       }
         for (let i = 0; i < sections.length; i++) {
             checkScroll(sections[i], 'down');
             refreshPage();
@@ -155,8 +159,8 @@ describe('Time component test', function () {
     function checkScroll(section: string, direction: 'up' | 'down'): void {
         let scrollStep, scrollToHour, scrollToMinute, scrollToSec;
 
-        direction == 'up' ? getElementClass(section + clockArea) === 'fd-time fd-time--compact' ? scrollStep = 50 : scrollStep = 100 : '';
-        direction == 'down' ? getElementClass(section + clockArea) === 'fd-time fd-time--compact' ? scrollStep = -50 : scrollStep = -100 : '';
+        direction === 'up' ? getElementClass(section + clockArea) === 'fd-time fd-time--compact' ? scrollStep = 50 : scrollStep = 100 : '';
+        direction === 'down' ? getElementClass(section + clockArea) === 'fd-time fd-time--compact' ? scrollStep = -50 : scrollStep = -100 : '';
 
         direction === 'up' ? scrollToHour = getText(section + upperhour) : ''
         direction === 'down' ? scrollToHour = getText(section + lowerHour) : ''

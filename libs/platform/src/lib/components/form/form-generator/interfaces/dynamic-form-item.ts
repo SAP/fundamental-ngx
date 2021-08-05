@@ -3,7 +3,8 @@ import { Observable } from 'rxjs';
 
 import { SelectItem } from '../../../../domain/data-model';
 import { InputType } from '../../input/input.component';
-import { HintPlacement, LabelLayout } from '../../form-options';
+import { ColumnLayout, HintPlacement, LabelLayout } from '../../form-options';
+import { InlineLayout } from '../../inline-layout-collection-base.input';
 import { ContentDensity } from '../../form-control';
 
 export type DynamicFormItemChoices = number | string | SelectItem;
@@ -55,17 +56,18 @@ export interface DynamicFormItem {
      * @description
      * Default value of the form item.
      */
-    default?: any | ((formValue?: DynamicFormValue) => any | Promise<any>| Observable<any>);
+    default?: any | ((formValue?: DynamicFormValue) => any | Promise<any> | Observable<any>);
 
     /**
      * @description
      * The list of available options to select.
      * @param formValue raw form item value.
      */
-    choices?: DynamicFormItemChoices[] |
-    ((formValue?: DynamicFormValue) => DynamicFormItemChoices[]
-    | Promise<DynamicFormItemChoices[]>
-    | Observable<DynamicFormItemChoices[]>);
+    choices?:
+        | DynamicFormItemChoices[]
+        | ((
+              formValue?: DynamicFormValue
+          ) => DynamicFormItemChoices[] | Promise<DynamicFormItemChoices[]> | Observable<DynamicFormItemChoices[]>);
 
     /**
      * @description
@@ -76,8 +78,13 @@ export interface DynamicFormItem {
      * @param formValue the form value hash.
      * @returns null or String
      */
-    validate?: (formItemValue?: any, formValue?: DynamicFormValue) =>
-    DynamicFormItemValidationResult | Promise<DynamicFormItemValidationResult> | Observable<DynamicFormItemValidationResult>;
+    validate?: (
+        formItemValue?: any,
+        formValue?: DynamicFormValue
+    ) =>
+        | DynamicFormItemValidationResult
+        | Promise<DynamicFormItemValidationResult>
+        | Observable<DynamicFormItemValidationResult>;
 
     /**
      * @description
@@ -127,12 +134,17 @@ export interface DynamicFormItem {
 }
 
 export interface DynamicFormItemGuiOptions {
-
     /**
      * @description
      * Index of column if form has multi-column layout
      */
     column?: number;
+
+    /** column arrangement for form-field based on screen size */
+    columnLayout?: ColumnLayout;
+
+    /** inline layout for list based form item */
+    inlineLayout?: InlineLayout;
 
     /**
      * @description

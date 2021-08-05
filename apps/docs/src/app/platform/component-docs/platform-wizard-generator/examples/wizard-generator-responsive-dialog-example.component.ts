@@ -129,7 +129,7 @@ export class WizardGeneratorResponsiveDialogExampleComponent implements OnDestro
                 items: this.stepItems,
                 appendToWizard: false,
                 displaySummaryStep: true,
-                responsivePaddings: true,
+                responsivePaddings: false,
                 title: this.wizardTitle
             }
         }).afterClosed.pipe(takeUntil(this._onDestroy$))

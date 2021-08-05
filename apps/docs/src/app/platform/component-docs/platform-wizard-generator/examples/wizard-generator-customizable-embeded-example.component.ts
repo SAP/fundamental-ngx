@@ -1,28 +1,25 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { WizardGeneratorItem, WizardTitle, WizardDialogGeneratorService, WizardGeneratorFormsValue } from '@fundamental-ngx/platform';
+import { WizardGeneratorFormsValue, WizardGeneratorItem, WizardTitle } from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-wizard-generator-dialog-example',
-    templateUrl: './wizard-generator-dialog-example.component.html'
+  selector: 'fdp-wizard-generator-customizable-embeded-example',
+  templateUrl: './wizard-generator-customizable-embeded-example.component.html'
 })
-export class WizardGeneratorDialogExampleComponent implements OnDestroy {
-
-    wizardValue: any;
+export class WizardGeneratorCustomizableEmbededExampleComponent {
 
     wizardTitle: WizardTitle = {
         size: 2,
         text: 'Checkout'
     };
 
-    allowSubscribe = true;
+    wizardValue: WizardGeneratorFormsValue;
 
     stepItems: WizardGeneratorItem[] = [
         {
             name: 'Product type',
             id: 'productTypeStep',
+            icon: 'product',
             formGroups: [
                 {
                     title: '1. Product Type',
@@ -42,6 +39,7 @@ export class WizardGeneratorDialogExampleComponent implements OnDestroy {
         {
             name: 'Customer information',
             id: 'customerInformationStep',
+            icon: 'account',
             formGroups: [
                 {
                     title: '2. Customer Information',
@@ -71,9 +69,10 @@ export class WizardGeneratorDialogExampleComponent implements OnDestroy {
         {
             name: 'Credit Card Details',
             id: 'creditCardStep',
+            icon: 'credit-card',
             formGroups: [
                 {
-                    title: '4. Credit Card Details',
+                    title: '3. Credit Card Details',
                     id: 'cardPayment',
                     formItems: [
                         {
@@ -89,6 +88,7 @@ export class WizardGeneratorDialogExampleComponent implements OnDestroy {
         {
             name: 'Discount',
             id: 'discountStep',
+            icon: 'pie-chart',
             formGroups: [
                 {
                     title: '4. Discount details',
@@ -102,46 +102,13 @@ export class WizardGeneratorDialogExampleComponent implements OnDestroy {
                     ]
                 }
             ]
-        },
-        {
-            name: 'Summary',
-            id: 'summary',
-            summary: true
         }
     ];
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
-    constructor(
-        private _wizardDialogService: WizardDialogGeneratorService
-    ) { }
-
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
-    }
-
-    openDialog(): void {
-
-        this._wizardDialogService.open({
-            width: '100%',
-            height: '100%',
-            verticalPadding: false,
-            data: {
-                items: this.stepItems,
-                appendToWizard: false,
-                displaySummaryStep: true,
-                responsivePaddings: true,
-                title: this.wizardTitle
-            }
-        }).afterClosed.pipe(takeUntil(this._onDestroy$))
-        .subscribe((wizardValue: WizardGeneratorFormsValue) => {
-            this.wizardValue = wizardValue;
-        }, () => {});
-    }
+    constructor() { }
 
     wizardFinished(wizardValue: WizardGeneratorFormsValue): void {
         this.wizardValue = wizardValue;
     }
+
 }

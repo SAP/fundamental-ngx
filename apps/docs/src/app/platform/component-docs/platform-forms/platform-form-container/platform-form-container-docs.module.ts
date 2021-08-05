@@ -13,7 +13,9 @@ import {
     PlatformCheckboxGroupModule,
     PlatformStepInputModule,
     PlatformInputGroupModule,
-    PlatformSwitchModule
+    PlatformSwitchModule,
+    PlatformComboboxModule,
+    PlatformSelectModule
 } from '@fundamental-ngx/platform';
 import { PlatformFormContainerDocsComponent } from './platform-form-container-docs.component';
 import { PlatformFormContainerRecommendedExampleComponent } from './platform-form-container-examples/platform-form-container-recommended-example.component';
@@ -23,6 +25,8 @@ import { PlatformFormContainerComplexExampleComponent } from './platform-form-co
 import { PlatformFormContainerHeaderComponent } from './platform-form-container-header/platform-form-container-header.component';
 import { PlatformFormBasicExampleComponent } from './platform-form-container-examples/platform-form-basic/platform-form-basic-example.component';
 import { PlatformFormGroupExampleComponent } from './platform-form-container-examples/platform-form-group/platform-form-group-example.component';
+import { PlatformFieldColumnChangeExampleComponent } from './platform-form-container-examples/platform-field-layout/platform-field-column-change-example.component';
+import { PlatformFieldIsInlineChangeExampleComponent } from './platform-form-container-examples/platform-field-layout/platform-field-isinline-change-example.component';
 
 const routes: Routes = [
     {
@@ -47,6 +51,8 @@ const routes: Routes = [
         PlatformStepInputModule,
         PlatformInputGroupModule,
         PlatformSwitchModule,
+        PlatformComboboxModule,
+        PlatformSelectModule,
         FdpFormGroupModule
     ],
     exports: [RouterModule],
@@ -59,7 +65,10 @@ const routes: Routes = [
         PlatformFormContainerComplexExampleComponent,
 
         PlatformFormBasicExampleComponent,
-        PlatformFormGroupExampleComponent
+        PlatformFormGroupExampleComponent,
+
+        PlatformFieldColumnChangeExampleComponent,
+        PlatformFieldIsInlineChangeExampleComponent
     ]
 })
 export class PlatformFormContainerDocsModule {}

@@ -1,4 +1,50 @@
 
+## [0.31.0-rc.174](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.173...v0.31.0-rc.174) (2021-08-05)
+
+
+### Bug Fixes
+
+* **core:** add limitation and correct name ([#6200](https://github.com/SAP/fundamental-ngx/issues/6200)) ([24b41b2](https://github.com/SAP/fundamental-ngx/commit/24b41b29a543208bf275df0c6ce4297ad3a04da6))
+
+## [0.31.0-rc.173](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.172...v0.31.0-rc.173) (2021-08-05)
+
+
+### Bug Fixes
+
+* **core:** remove hardcoded style from ngx lib for file uploader ([#6194](https://github.com/SAP/fundamental-ngx/issues/6194)) ([0702915](https://github.com/SAP/fundamental-ngx/commit/0702915b0ae79ebf78772970a0fef0d53632c106))
+
+## [0.31.0-rc.172](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.171...v0.31.0-rc.172) (2021-08-05)
+
+
+### Features
+
+* **platform:** introduce feature to change column and inline value based on form container layout ([#6039](https://github.com/SAP/fundamental-ngx/issues/6039)) ([f358343](https://github.com/SAP/fundamental-ngx/commit/f358343847423f7ee27484baa8c57f9101388b0e))
+
+## [0.31.0-rc.171](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.170...v0.31.0-rc.171) (2021-08-05)
+
+
+### Bug Fixes
+
+* **platform:** correct order for summary items ([#6231](https://github.com/SAP/fundamental-ngx/issues/6231)) ([f596f36](https://github.com/SAP/fundamental-ngx/commit/f596f3665d33e5bc8cdb72d8d4ca3ab77493dd20))
+
+## [0.31.0-rc.170](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.169...v0.31.0-rc.170) (2021-08-04)
+
+
+### Bug Fixes
+
+* **platform:** fix displaying navigation buttons in wizard generator ([#6058](https://github.com/SAP/fundamental-ngx/issues/6058)) ([2e6edd8](https://github.com/SAP/fundamental-ngx/commit/2e6edd88f7aa65765776fa4f3afca908e70cb311))
+
+## [0.31.0-rc.169](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.168...v0.31.0-rc.169) (2021-08-04)
+
+## [0.31.0-rc.168](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.167...v0.31.0-rc.168) (2021-08-04)
+
+## [0.31.0-rc.167](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.166...v0.31.0-rc.167) (2021-08-04)
+
+
+### Bug Fixes
+
+* **core:** added exsisted instance of dialog to injector of component ([#6224](https://github.com/SAP/fundamental-ngx/issues/6224)) ([e98ec91](https://github.com/SAP/fundamental-ngx/commit/e98ec9191bd17ca6ff61766b520fb19f75441514))
+
 ## [0.31.0-rc.166](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.165...v0.31.0-rc.166) (2021-08-03)
 
 

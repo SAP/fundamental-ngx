@@ -15,6 +15,7 @@ import { BarModule, DialogModule } from '@fundamental-ngx/core';
 import { WizardGeneratorResponsiveDialogExampleComponent } from './examples/wizard-generator-responsive-dialog-example.component';
 import { WizardGeneratorVisibleSummaryExampleComponent } from './examples/wizard-generator-visible-summary-example.component';
 import { WizardGeneratorVisibleSummaryBranchingExampleComponent } from './examples/wizard-generator-visible-summary-branching-example.component';
+import { WizardGeneratorCustomizableEmbededExampleComponent } from './examples/wizard-generator-customizable-embeded-example.component';
 
 const routes: Routes = [
     {
@@ -38,7 +39,8 @@ const routes: Routes = [
         WizardGeneratorResponsivePaddingsExampleComponent,
         WizardGeneratorResponsiveDialogExampleComponent,
         WizardGeneratorVisibleSummaryExampleComponent,
-        WizardGeneratorVisibleSummaryBranchingExampleComponent
+        WizardGeneratorVisibleSummaryBranchingExampleComponent,
+        WizardGeneratorCustomizableEmbededExampleComponent
     ],
     imports: [
         RouterModule.forChild(routes),

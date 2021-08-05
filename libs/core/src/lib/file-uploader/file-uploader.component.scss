@@ -1,6 +1,2 @@
 @import '~fundamental-styles/dist/input';
 @import '~fundamental-styles/dist/file-uploader';
-
-.fd-file-uploader .fd-input.is-error {
-    border-color: var(--sapField_InvalidColor, #b00) !important;
-}

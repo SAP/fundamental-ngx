@@ -34,7 +34,7 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      * @description Whether or not apply responsive paddings styling.
      */
     @Input()
-    responsivePaddings = false;
+    responsivePaddings = true;
 
     /**
      * @description Button labels to be used in Wizard navigation
@@ -91,6 +91,10 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      */
     @Input()
     isSummaryStep = false;
+
+    /** If navigation buttons should be visible */
+    @Input()
+    navigationButtons = true;
 
     /**
      * @description Array of visible Wizard Steps.
