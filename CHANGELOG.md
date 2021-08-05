@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.173](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.172...v0.31.0-rc.173) (2021-08-05)
+
+
+### Bug Fixes
+
+* **core:** remove hardcoded style from ngx lib for file uploader ([#6194](https://github.com/SAP/fundamental-ngx/issues/6194)) ([0702915](https://github.com/SAP/fundamental-ngx/commit/0702915b0ae79ebf78772970a0fef0d53632c106))
+
 ## [0.31.0-rc.172](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.171...v0.31.0-rc.172) (2021-08-05)
 
 
