@@ -5,7 +5,7 @@
         </fd-dialog-header>
 
         <fd-dialog-body>
-            <div id="fd-dialog-body-6" role="document">
+            <div id="fd-dialog-body-6" role="dialog">
                 The natural (or most common) pollinator of the pineapple is the hummingbird. Pollination is required for
                 seed formation; the presence of seeds negatively affects the quality of the fruit. In Hawaii, where
                 pineapple is cultivated on an agricultural scale, importation of hummingbirds is prohibited for this
@@ -14,7 +14,7 @@
         </fd-dialog-body>
 
         <fd-dialog-footer>
-            <fd-button-bar fdType="emphasized" label="Interesting" [compact]="true" (click)="dialog.close()">
+            <fd-button-bar fdType="emphasized" label="Interesting" [compact]="true" (click)="dialog.close()" ariaLabel="Interesting Emphasized">
             </fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>
