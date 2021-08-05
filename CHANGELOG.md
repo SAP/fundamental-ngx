@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.174](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.173...v0.31.0-rc.174) (2021-08-05)
+
+
+### Bug Fixes
+
+* **core:** add limitation and correct name ([#6200](https://github.com/SAP/fundamental-ngx/issues/6200)) ([24b41b2](https://github.com/SAP/fundamental-ngx/commit/24b41b29a543208bf275df0c6ce4297ad3a04da6))
+
 ## [0.31.0-rc.173](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.172...v0.31.0-rc.173) (2021-08-05)
 
 
