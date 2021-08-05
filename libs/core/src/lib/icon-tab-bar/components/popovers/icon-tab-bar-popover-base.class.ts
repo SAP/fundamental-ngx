@@ -15,7 +15,7 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
      * @description Sub items array
      */
     @Input()
-    subTabs: IconTabBarItem[];
+    extraTabs: IconTabBarItem[];
 
     /**
      * @description Should we show separator between subItems
@@ -42,8 +42,8 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes.items) {
-            this._setStyles(this.subTabs);
+        if (changes.extraTabs) {
+            this._setStyles(this.extraTabs);
         }
     }
 

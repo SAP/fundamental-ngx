@@ -18,7 +18,7 @@ import { IconBarDndContainerDirective } from './directives/dnd/icon-bar-dnd-cont
 import { OverflowListModule } from '../utils/directives/overflow-list/overflow-list.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
-import { generateTestItems, getGetCenterCoordsOfElement } from './tests-helper';
+import { generateTestConfig, getGetCenterCoordsOfElement } from './tests-helper';
 
 @Component({
     template: `
@@ -80,7 +80,7 @@ describe('IconTabBarComponent', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(HostComponent);
         component = fixture.componentInstance;
-        component.items = generateTestItems(6);
+        component.items = generateTestConfig(6);
         fixture.detectChanges();
     });
     it('should create tabs', () => {
@@ -90,7 +90,7 @@ describe('IconTabBarComponent', () => {
     });
 
     it('should create tabs with subtabs', () => {
-        component.items = generateTestItems(6, true);
+        component.items = generateTestConfig(6, true);
         fixture.detectChanges();
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
         const subItemBtn = hostEl.querySelector('.fd-icon-tab-bar__arrow');

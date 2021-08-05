@@ -13,7 +13,7 @@
         class="fd-icon-tab-bar__item  fd-icon-tab-bar__item--overflow fd-icon-tab-bar__item--overflow-left"
     >
         <fd-icon-tab-bar-popover
-            [subTabs]="_prevSteps"
+            [extraTabs]="_prevSteps"
             [label]="_prevSteps.length.toString()"
             [isSeparators]="true"
             (selectedExtraItem)="_selectExtraItem($event)"
@@ -64,7 +64,7 @@
         [anchorIndexInsideParent]="_anchorIndexForExtraBtnDirective"
     >
         <fd-icon-tab-bar-popover
-            [subTabs]="_nextSteps"
+            [extraTabs]="_nextSteps"
             [isSeparators]="true"
             [label]="_nextSteps.length.toString()"
             (selectedExtraItem)="_selectExtraItem($event)"

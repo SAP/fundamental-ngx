@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { IconTabBarTextTypeComponent } from './icon-tab-bar-text-type.component';
-import { generateTestItems } from '../../tests-helper';
+import { generateTestConfig } from '../../tests-helper';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 
@@ -20,7 +20,7 @@ describe('IconTabBarTextTypeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(IconTabBarTextTypeComponent);
     component = fixture.componentInstance;
-    component.tabsConfig = generateTestItems(10);
+    component.tabsConfig = generateTestConfig(10);
     fixture.detectChanges();
   });
 

@@ -42,7 +42,7 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         super.ngOnChanges(changes);
-        if (changes.parentTab) {
+        if (!this.isExtraItemsMode && changes.parentTab) {
             this._setStyles(this.parentTab.subItems);
         }
     }

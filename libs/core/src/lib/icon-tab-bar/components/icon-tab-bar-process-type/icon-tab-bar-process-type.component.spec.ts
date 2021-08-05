@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { IconTabBarProcessTypeComponent } from './icon-tab-bar-process-type.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { generateTestItems } from '../../tests-helper';
+import { generateTestConfig } from '../../tests-helper';
 import { OverflowListDirective } from '../../../utils/directives/overflow-list/overflow-list.directive';
 import { of } from 'rxjs';
 
@@ -26,7 +26,7 @@ describe('IconTabBarProcessTypeComponent', () => {
         component['_ngZone'] = fakeNgZone as any;
         component['_cd'] = fakeCdr as any;
 
-        component.tabsConfig = generateTestItems(100);
+        component.tabsConfig = generateTestConfig(100);
         fixture.detectChanges();
         component._selectItem(component._tabs[50]); // Select random item
         component._lastVisibleTabIndex = 60; // Random big number
