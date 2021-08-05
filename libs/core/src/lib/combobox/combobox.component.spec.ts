@@ -1,14 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ComboboxComponent } from './combobox.component';
-import { CommonModule } from '@angular/common';
-import { PopoverModule } from '../popover/popover.module';
-import { FormsModule } from '@angular/forms';
-import { ListModule } from '../list/list.module';
-import { PipeModule } from '@fundamental-ngx/core/utils';
-import { InputGroupModule } from '../input-group/input-group.module';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
-import { ButtonModule } from '../button/button.module';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
+
+import { ComboboxComponent, ComboboxModule } from '@fundamental-ngx/core/combobox';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY, DynamicComponentService } from '@fundamental-ngx/core/utils';
 
 describe('ComboboxComponent', () => {
     let component: ComboboxComponent;
@@ -16,8 +9,7 @@ describe('ComboboxComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ComboboxComponent],
-            imports: [InputGroupModule, CommonModule, PopoverModule, FormsModule, ListModule, PipeModule, ButtonModule],
+            imports: [ComboboxModule],
             providers: [DynamicComponentService, ContentDensityService]
         }).compileComponents();
     }));

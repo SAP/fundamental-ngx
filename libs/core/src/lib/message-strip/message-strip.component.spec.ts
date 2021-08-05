@@ -1,8 +1,8 @@
-import { MessageStripComponent } from './message-strip.component';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
-import { ButtonComponent } from '../button/button.component';
-import { ButtonModule } from '../button/button.module';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { MessageStripComponent, MessageStripModule } from '@fundamental-ngx/core/message-strip';
 
 @Component({
     template: `
@@ -22,8 +22,8 @@ describe('MessageStripComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ButtonModule],
-            declarations: [MessageStripComponent, ButtonComponent, TestMessageStripComponent]
+            imports: [ButtonModule, MessageStripModule],
+            declarations: [TestMessageStripComponent]
         }).compileComponents();
     }));
 
@@ -37,14 +37,14 @@ describe('MessageStripComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('Should Add no-icon modifier class', () => {
+    it('should Add no-icon modifier class', () => {
         component.noIcon = true;
         component.buildComponentCssClass();
         fixture.detectChanges();
         expect(component.elementRef().nativeElement.classList.contains('fd-message-strip--no-icon')).toBe(true);
     });
 
-    it('Should apply a type', () => {
+    it('should apply a type', () => {
         component.type = 'success';
         component.buildComponentCssClass();
         fixture.detectChanges();

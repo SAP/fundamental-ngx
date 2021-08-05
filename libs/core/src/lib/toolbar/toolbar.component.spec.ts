@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ViewChild, Component, ViewChildren, QueryList } from '@angular/core';
+import { ToolbarModule } from '@fundamental-ngx/core';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 import { ToolbarComponent } from './toolbar.component';
@@ -16,15 +17,8 @@ describe('ToolbarComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                ToolbarComponent,
-                ToolbarTestComponent,
-                ToolbarItemDirective,
-                ToolbarOverflowPriorityDirective,
-                ToolbarOverflowGroupDirective,
-                ToolbarSpacerComponent,
-                ToolbarSeparatorComponent
-            ]
+            declarations: [ToolbarTestComponent],
+            imports: [ToolbarModule]
         }).compileComponents();
     }));
 

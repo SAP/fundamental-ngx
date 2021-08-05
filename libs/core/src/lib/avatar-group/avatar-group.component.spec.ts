@@ -1,9 +1,8 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ChangeDetectionStrategy, Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
+import { AvatarGroupComponent, AvatarGroupModule, AvatarGroupType } from '@fundamental-ngx/core/avatar-group';
 import { Size } from '@fundamental-ngx/core/utils';
-import { AvatarGroupModule } from './avatar-group.module';
-import { AvatarGroupComponent, AvatarGroupType } from './avatar-group.component';
 
 const NUMBER_OF_ITEMS = 20;
 
@@ -52,7 +51,7 @@ describe('AvatarGroupComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [AvatarGroupTestComponent, AvatarGroupComponent],
+            declarations: [AvatarGroupTestComponent],
             imports: [AvatarGroupModule],
             schemas: [NO_ERRORS_SCHEMA]
         }).overrideComponent(AvatarGroupComponent, {

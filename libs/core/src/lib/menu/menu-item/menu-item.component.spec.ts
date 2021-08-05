@@ -1,11 +1,9 @@
+import { CommonModule } from '@angular/common';
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
-import { MenuItemComponent, SubmenuComponent } from './menu-item.component';
-import { Component, ViewChild } from '@angular/core';
-import { MenuComponent } from '../menu.component';
-import { MenuInteractiveDirective } from '../directives/menu-interactive.directive'
-import { CommonModule } from '@angular/common';
-import { PopoverModule } from '../../popover/popover.module';
+import { MenuComponent, MenuInteractiveDirective, MenuItemComponent, MenuModule, SubmenuComponent } from '@fundamental-ngx/core/menu';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
 
 @Component({
     template: `
@@ -32,10 +30,9 @@ describe('MenuItemComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestMenuItemComponent, MenuComponent, MenuItemComponent, MenuInteractiveDirective],
-            imports: [CommonModule, PopoverModule]
-        })
-            .compileComponents();
+            declarations: [TestMenuItemComponent],
+            imports: [CommonModule, PopoverModule, MenuModule]
+        }).compileComponents();
     }));
 
     beforeEach(() => {

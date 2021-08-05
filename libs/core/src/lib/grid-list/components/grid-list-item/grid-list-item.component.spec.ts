@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { AvatarModule } from '../../../avatar/public_api';
-import { GridListModule } from '../../grid-list.module';
-import { GridListComponent } from '../grid-list/grid-list.component';
-import { ButtonModule } from '../../../button/button.module';
+
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { GridListComponent, GridListModule } from '@fundamental-ngx/core/grid-list';
 
 @Component({
     selector: 'fd-test-grid-list-item',
@@ -107,7 +107,7 @@ describe('GridListItemComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, GridListComponent],
+            declarations: [TestComponent],
             imports: [GridListModule, AvatarModule, ButtonModule]
         }).compileComponents();
     });
