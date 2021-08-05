@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.172](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.171...v0.31.0-rc.172) (2021-08-05)
+
+
+### Features
+
+* **platform:** introduce feature to change column and inline value based on form container layout ([#6039](https://github.com/SAP/fundamental-ngx/issues/6039)) ([f358343](https://github.com/SAP/fundamental-ngx/commit/f358343847423f7ee27484baa8c57f9101388b0e))
+
 ## [0.31.0-rc.171](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.170...v0.31.0-rc.171) (2021-08-05)
 
 
