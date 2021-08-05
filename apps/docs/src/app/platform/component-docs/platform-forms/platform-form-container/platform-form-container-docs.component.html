@@ -24,7 +24,7 @@
     Not recommended form layouts
 </fd-docs-section-title>
 <description
-    >This example shows more possile layout combinations for form container usage that are not recommended</description
+    >This example shows more possible layout combinations for form container usage that are not recommended</description
 >
 <component-example>
     <fdp-platform-form-container-not-recommended-example></fdp-platform-form-container-not-recommended-example>
@@ -55,3 +55,42 @@
     <fdp-platform-form-group-example></fdp-platform-form-group-example>
 </component-example>
 <code-example [exampleFiles]="formContainerGroup"></code-example>
+
+<separator></separator>
+<fd-docs-section-title id="field-column-change" componentName="form-container">Change of column number for a field</fd-docs-section-title>
+<description>
+    To change the column number in form-group-container for a field while screen size changes, property
+    <code>[columnLayout]</code> can be used. it takes object in the form of <code>XL: 3, L: 2, M: 1, S: 1</code>. Here
+    it shows that on <code>L</code> size screen, field should be dispalyed in 2nd column and when scren size changes to
+    <code>XL</code> size then the field will be displayed in 3rd Column(defaults to <code>L</code> layout value when
+    value for <code>XL</code> not provided).
+    <br />
+    <br />
+    In this example, we have used custom break-points for screen sizes. <code>XL screen size >= 1540px</code>,
+    <code>L screen size is between 1224px and 1540px</code>, <code>M screen size is between 800px and 1224px</code>,
+    <code>S screen size is less than 800px</code>.
+</description>
+<component-example>
+    <fdp-platform-form-column-change-example></fdp-platform-form-column-change-example>
+</component-example>
+<code-example [exampleFiles]="formFieldColumnLayout"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="field-inline-change" componentName="form-container">Change of isInline value for a field</fd-docs-section-title>
+<description>
+    To change the isInline value in form-group-container for a field while screen size changes, property
+    <code>[isInlineLayout]</code> can be used. it takes object in the form of
+    <code>XL: true, L: false, M: true, S: false</code>. Here it shows that on <code>L</code> size screen, field should
+    be dispalyed in vertical mode and when scren size changes to <code>XL</code> size then the field will be displayed
+    inline(defaults to <code>L</code> layout value when value for <code>XL</code> not provided).
+    <br />
+    <br />
+    In this example, we have used custom break-points for screen sizes. <code>XL screen size >= 1540px</code>,
+    <code>L screen size is between 1224px and 1540px</code>, <code>M screen size is between 800px and 1224px</code>,
+    <code>S screen size is less than 800px</code>.
+</description>
+<component-example>
+    <fdp-platform-form-isinline-change-example></fdp-platform-form-isinline-change-example>
+</component-example>
+<code-example [exampleFiles]="formFieldInlineLayout"></code-example>

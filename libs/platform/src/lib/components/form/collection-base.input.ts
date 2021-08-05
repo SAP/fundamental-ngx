@@ -1,8 +1,11 @@
-import { Input, Directive } from '@angular/core';
-import { BaseInput } from './base.input';
-import { isSelectItem } from '../../domain/data-model';
+import { ChangeDetectorRef, Host, Input, Directive, Optional, Self, SkipSelf } from '@angular/core';
+import { NgControl, NgForm } from '@angular/forms';
 import { isFunction, isJsObject, isString } from '../../utils/lang';
+import { FormFieldControl } from './form-control';
+import { FormField } from './form-field';
+import { isSelectItem } from '../../domain/data-model';
 import { SelectItem } from '../../domain/data-model';
+import { BaseInput } from './base.input';
 
 /**
  * Defines specific behavior for Input controls which deals with list of values including:
@@ -43,6 +46,16 @@ export abstract class CollectionBaseInput extends BaseInput {
      */
     @Input()
     displayKey: string;
+
+    constructor(
+        cd: ChangeDetectorRef,
+        @Optional() @Self() readonly ngControl: NgControl,
+        @Optional() @SkipSelf() readonly ngForm: NgForm,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+    ) {
+        super(cd, ngControl, ngForm, formField, formControl);
+    }
 
     protected lookupValue(item: any): string {
         if (isSelectItem(item)) {

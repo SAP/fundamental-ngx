@@ -13,11 +13,18 @@ import {
     Optional,
     Self,
     SkipSelf,
-    Host
+    Host,
+    Inject
 } from '@angular/core';
 import { NgForm, NgControl } from '@angular/forms';
+import { distinctUntilChanged } from 'rxjs/operators';
 
-import { CollectionBaseInput } from '../collection-base.input';
+import {
+    InLineLayoutCollectionBaseInput,
+    ResponsiveBreakPointConfig,
+    ResponsiveBreakpointsService,
+    RESPONSIVE_BREAKPOINTS_CONFIG
+} from '../inline-layout-collection-base.input';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { PlatformCheckboxChange } from '../checkbox/checkbox.component';
 import { FormFieldControl } from '../form-control';
@@ -37,7 +44,7 @@ import { FormField } from '../form-field';
     encapsulation: ViewEncapsulation.None,
     providers: [{ provide: FormFieldControl, useExisting: forwardRef(() => CheckboxGroupComponent), multi: true }]
 })
-export class CheckboxGroupComponent extends CollectionBaseInput {
+export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
     /**
      * value for selected checkboxes.
      */
@@ -52,7 +59,14 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
      * To Display multiple checkboxes in a line
      */
     @Input()
-    isInline = false;
+    get isInline(): boolean {
+        return this._isInline;
+    }
+
+    set isInline(inline: boolean) {
+        this._isInline = inline;
+        this._cd.markForCheck();
+    }
 
     /**
      * Establishes two way binding, when checkbox group used outside form.
@@ -84,14 +98,26 @@ export class CheckboxGroupComponent extends CollectionBaseInput {
     /** @hidden used for two way binding, when used outside form */
     private _checked: string[];
 
+    /** @hidden */
+    private _isInline: boolean;
+
     constructor(
         cd: ChangeDetectorRef,
+        readonly _responsiveBreakpointsService: ResponsiveBreakpointsService,
         @Optional() @Self() ngControl: NgControl,
         @Optional() @SkipSelf() ngForm: NgForm,
         @Optional() @SkipSelf() @Host() formField: FormField,
-        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        @Optional()
+        @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
+        readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig
     ) {
-        super(cd, ngControl, ngForm, formField, formControl);
+        super(cd, _responsiveBreakpointsService, ngControl, ngForm, formField, formControl, _defaultResponsiveBreakPointConfig);
+
+        // subscribe to _inlineCurrentValue in collection-form-field-inline-layout
+        this._inlineCurrentValue
+            .pipe(distinctUntilChanged())
+            .subscribe((currentInline) => (this.isInline = currentInline));
     }
 
     writeValue(value: any): void {
