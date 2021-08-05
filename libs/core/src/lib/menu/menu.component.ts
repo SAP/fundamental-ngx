@@ -250,6 +250,7 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
         this._listenOnTriggerRefClicks();
     }
 
+    /** @hidden Listen on menu items change and rebuild menu */
     private _listenOnMenuItemsChange(): void {
         this._subscriptions.add(
              this.menuItems.changes.subscribe(() => this._menuService.rebuildMenu())
