@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.176](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.175...v0.31.0-rc.176) (2021-08-05)
+
+
+### Features
+
+* **core:** add a fallback mechanism for avatar ([#6122](https://github.com/SAP/fundamental-ngx/issues/6122)) ([0b3d389](https://github.com/SAP/fundamental-ngx/commit/0b3d3893040ede61dc60bd50536fe917f778404b))
+
 ## [0.31.0-rc.175](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.174...v0.31.0-rc.175) (2021-08-05)
 
 
