@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.171](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.170...v0.31.0-rc.171) (2021-08-05)
+
+
+### Bug Fixes
+
+* **platform:** correct order for summary items ([#6231](https://github.com/SAP/fundamental-ngx/issues/6231)) ([f596f36](https://github.com/SAP/fundamental-ngx/commit/f596f3665d33e5bc8cdb72d8d4ca3ab77493dd20))
+
 ## [0.31.0-rc.170](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.169...v0.31.0-rc.170) (2021-08-04)
 
 
