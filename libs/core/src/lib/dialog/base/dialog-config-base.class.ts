@@ -29,6 +29,9 @@ export class DialogConfigBase<T> implements DynamicComponentConfig {
     /** Position of the dialog. */
     position?: DialogPosition;
 
+    /** Aria Model for teh dialog component element */
+    ariaModel?: boolean = false;
+
     /** Aria label for the dialog component element. */
     ariaLabel?: string = null;
 
