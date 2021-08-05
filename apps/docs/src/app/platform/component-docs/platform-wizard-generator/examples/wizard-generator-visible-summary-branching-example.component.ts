@@ -5,10 +5,10 @@ import { takeUntil } from 'rxjs/operators';
 import { WizardDialogGeneratorService, WizardGeneratorFormsValue, WizardGeneratorItem, WizardTitle } from '@fundamental-ngx/platform';
 
 @Component({
-  selector: 'fdp-wizard-generator-condition-example',
-  templateUrl: './wizard-generator-condition-example.component.html'
+  selector: 'fdp-wizard-generator-visible-summary-branching-example',
+  templateUrl: './wizard-generator-visible-summary-branching-example.component.html'
 })
-export class WizardGeneratorConditionExampleComponent implements OnDestroy {
+export class WizardGeneratorVisibleSummaryBranchingExampleComponent implements OnDestroy {
 
     wizardTitle: WizardTitle = {
         size: 2,
@@ -157,7 +157,11 @@ export class WizardGeneratorConditionExampleComponent implements OnDestroy {
         {
             name: 'Summary',
             id: 'summary',
-            summary: true
+            summary: true,
+            when: (_completedSteps, answers) => {
+                return answers.paymentMethodStep?.paymentMethodForm?.paymentMethod === 'Bank Transfer' ||
+                answers.paymentMethodStep?.paymentMethodForm?.paymentMethod === 'Credit Card';
+            }
         }
     ];
 

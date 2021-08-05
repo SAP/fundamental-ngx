@@ -76,6 +76,9 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     @Input()
     isSummary = false;
 
+    @Input()
+    displaySummary = false;
+
     /**
      * User-defined validation function which determines if user can navigate between steps.
      */
@@ -145,13 +148,11 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (this.isSummary) {
+        if (this.isSummary && !this.displaySummary) {
             this._summaryInit();
         } else if (this.stepIndicator) {
             this._notSummaryInit();
         }
-        // TODO: remove after next fundamental-styles version
-        this._elRef.nativeElement.style.boxSizing = 'content-box';
     }
 
     /** @hidden */

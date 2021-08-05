@@ -96,10 +96,10 @@ export class BaseWizardGenerator implements OnDestroy {
     contentHeight: string;
 
     /**
-     * @description Boolean flag indicating whether or not to append Summary page as the last step.
+     * @description Boolean flag indicating whether or not to display Summary step in Wizard progress bar.
      */
     @Input()
-    addSummary = true;
+    displaySummaryStep = false;
 
     /**
      * @description Emits wizard value when it's completed.
@@ -151,6 +151,10 @@ export class BaseWizardGenerator implements OnDestroy {
         const currentIndex = this._wizardGeneratorService.getCurrentStepIndex();
 
         return this._visibleItems[currentIndex]?.branching === true;
+    }
+
+    get hasSummaryStep(): boolean {
+        return this._visibleItems.some(i => i.summary === true);
     }
 
     /**
@@ -250,10 +254,6 @@ export class BaseWizardGenerator implements OnDestroy {
             if (steps[currentStepIndex + 1] !== undefined) {
                 steps[currentStepIndex].status = 'completed';
                 steps[currentStepIndex + 1].status = 'current';
-            }
-
-            if (this.addSummary && this.isLastStep && !this.isBranchingStep) {
-                await this._wizardGeneratorService.addSummaryStep();
             }
 
             this._wizardGeneratorService.setVisibleSteps(steps);

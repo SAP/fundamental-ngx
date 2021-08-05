@@ -13,6 +13,8 @@ import { WizardGeneratorCustomizableExampleComponent } from './examples/wizard-g
 import { WizardGeneratorResponsivePaddingsExampleComponent } from './examples/wizard-generator-responsive-paddings-example.component';
 import { BarModule, DialogModule } from '@fundamental-ngx/core';
 import { WizardGeneratorResponsiveDialogExampleComponent } from './examples/wizard-generator-responsive-dialog-example.component';
+import { WizardGeneratorVisibleSummaryExampleComponent } from './examples/wizard-generator-visible-summary-example.component';
+import { WizardGeneratorVisibleSummaryBranchingExampleComponent } from './examples/wizard-generator-visible-summary-branching-example.component';
 
 const routes: Routes = [
     {
@@ -34,7 +36,9 @@ const routes: Routes = [
         WizardGeneratorConditionExampleComponent,
         WizardGeneratorCustomizableExampleComponent,
         WizardGeneratorResponsivePaddingsExampleComponent,
-        WizardGeneratorResponsiveDialogExampleComponent
+        WizardGeneratorResponsiveDialogExampleComponent,
+        WizardGeneratorVisibleSummaryExampleComponent,
+        WizardGeneratorVisibleSummaryBranchingExampleComponent
     ],
     imports: [
         RouterModule.forChild(routes),

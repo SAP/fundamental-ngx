@@ -10,6 +10,7 @@
         [isFirstStep]="isFirstStep"
         [isLastStep]="isLastStep"
         [isSummaryStep]="isSummaryStep"
+        [displaySummaryStep]="displaySummaryStep"
         (statusChange)="stepStatusChanged($event.id, $event.status)"
         (goNext)="goNext()"
         (finish)="finish()"

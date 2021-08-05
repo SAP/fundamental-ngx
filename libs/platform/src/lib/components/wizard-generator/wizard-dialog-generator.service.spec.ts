@@ -123,7 +123,7 @@ describe('WizardDialogGeneratorService', () => {
             data: {
                 items: stepItems,
                 appendToWizard: false,
-                addSummary: false,
+                displaySummaryStep: false,
                 responsivePaddings: false,
                 title: wizardTitle
             }
