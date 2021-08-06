@@ -4,7 +4,8 @@ import {
     EventEmitter,
     Input,
     NgZone,
-    OnChanges, OnDestroy,
+    OnChanges,
+    OnDestroy,
     OnInit,
     Output,
     SimpleChanges,
@@ -13,10 +14,9 @@ import {
 import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
+import { OverflowListDirective, cloneDeep } from '@fundamental-ngx/core/utils';
 import { IconTabBarItem, TabConfig } from '../types';
-import { cloneDeep } from '../../utils/functions/clone-deep';
 import { ICON_TAB_HIDDEN_CSS, UNIQUE_KEY_SEPARATOR } from '../constants';
-import { OverflowListDirective } from '../../utils/directives/overflow-list/overflow-list.directive';
 import { ExtraButtonDirective } from '../directives/extra-button/extra-button.directive';
 
 

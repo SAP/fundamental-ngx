@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IconTabBarProcessTypeComponent } from './icon-tab-bar-process-type.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { generateTestConfig } from '../../tests-helper';
-import { OverflowListDirective } from '../../../utils/directives/overflow-list/overflow-list.directive';
+import { OverflowListDirective } from '@fundamental-ngx/core/utils';
 import { of } from 'rxjs';
 
 const AMOUNT_OF_EXTRA_TABS = 80;

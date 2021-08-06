@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { take } from 'rxjs/operators';
+
 import { IconTabBarBase } from '../icon-tab-bar-base.class';
 import { IconTabBarItem } from '../../types';
-import { cloneDeep } from '../../../utils/functions/clone-deep';
 import { ICON_TAB_HIDDEN_CSS } from '../../constants';
-import { take } from 'rxjs/operators';
+import { cloneDeep } from '@fundamental-ngx/core/utils';
+
 
 @Component({
     selector: 'fd-icon-tab-bar-process-type',
