@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.177](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.176...v0.31.0-rc.177) (2021-08-06)
+
+
+### Bug Fixes
+
+* **core:** add listener to submenu item changes ([#6241](https://github.com/SAP/fundamental-ngx/issues/6241)) ([b594cc9](https://github.com/SAP/fundamental-ngx/commit/b594cc9aa485791b406e86148e5758059816ad74))
+
 ## [0.31.0-rc.176](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.175...v0.31.0-rc.176) (2021-08-05)
 
 
