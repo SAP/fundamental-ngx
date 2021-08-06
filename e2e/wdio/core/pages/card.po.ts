@@ -19,7 +19,7 @@ export class CardPo extends CoreBaseComponentPo {
     compactCardListItems = 'fd-card-compact-example li';
     compactCardAttr = 'fd-card-compact-example fd-card';
     // card loader examples
-    loaderCardAttr = 'fd-card-loader-example fd-card';
+    loaderCardAttr = '.fd-busy-indicator__container';
     loaderIcon = 'fd-card-loader-example fd-busy-indicator';
     // footer examples
     ftCardHeader = 'fd-card-footer-example fd-card-header';
