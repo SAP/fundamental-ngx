@@ -35,7 +35,8 @@ import {
     applyCssClass,
     FocusEscapeDirection,
     KeyUtil,
-    FocusTrapService
+    FocusTrapService,
+    uuidv4
 } from '@fundamental-ngx/core/utils';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
@@ -309,6 +310,9 @@ export class MultiInputComponent implements
                 this.buildComponentCssClass();
             })
         );
+        if (!this.inputId) {
+            this.inputId = uuidv4();
+        }
     }
 
     /** @hidden */
