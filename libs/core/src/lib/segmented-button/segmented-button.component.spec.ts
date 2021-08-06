@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { SegmentedButtonComponent, isSelectedClass, isDisabledClass } from './segmented-button.component';
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
-import { ButtonComponent } from '../button/button.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
+
+import { isDisabledClass, isSelectedClass, SegmentedButtonComponent, SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 
 @Component({
     selector: 'fd-test-component',
@@ -33,7 +33,8 @@ describe('SegmentedButtonComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [SegmentedButtonComponent, TestComponent, ButtonComponent]
+            declarations: [TestComponent],
+            imports: [SegmentedButtonModule]
         }).overrideComponent(ButtonComponent, {
             set: { changeDetection: ChangeDetectionStrategy.Default }
         }).compileComponents();

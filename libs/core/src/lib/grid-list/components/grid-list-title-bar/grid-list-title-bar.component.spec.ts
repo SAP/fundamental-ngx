@@ -1,17 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { GridListTitleBarComponent } from './grid-list-title-bar.component';
+import { GridListModule, GridListTitleBarComponent } from '@fundamental-ngx/core/grid-list';
 
 describe('GridListTitleBarComponent', () => {
   let component: GridListTitleBarComponent;
   let fixture: ComponentFixture<GridListTitleBarComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ GridListTitleBarComponent ]
-    })
-    .compileComponents();
-  });
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      imports: [GridListModule]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GridListTitleBarComponent);

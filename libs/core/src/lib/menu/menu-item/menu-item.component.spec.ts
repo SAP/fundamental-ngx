@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
-import { MenuComponent, MenuInteractiveDirective, MenuItemComponent, MenuModule, SubmenuComponent } from '@fundamental-ngx/core/menu';
+import { MenuComponent, MenuInteractiveDirective, MenuItemComponent, MenuModule } from '@fundamental-ngx/core/menu';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 
 @Component({
@@ -31,7 +31,7 @@ describe('MenuItemComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestMenuItemComponent],
-            imports: [CommonModule, PopoverModule, MenuModule]
+            imports: [MenuModule]
         }).compileComponents();
     }));
 
@@ -164,14 +164,8 @@ describe('MenuItemComponent nested', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                TesNestedMenuItemComponent,
-                MenuInteractiveDirective,
-                MenuItemComponent,
-                SubmenuComponent,
-                MenuComponent
-            ],
-            imports: [CommonModule, PopoverModule]
+            declarations: [TesNestedMenuItemComponent],
+            imports: [CommonModule, PopoverModule, MenuModule]
         })
             .compileComponents();
     }));

@@ -1,7 +1,7 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { AvatarModule } from './avatar.module';
-import { AvatarComponent } from './avatar.component';
+
+import { AvatarComponent, AvatarModule } from '@fundamental-ngx/core/avatar';
 
 @Component({
     selector: 'fd-test-object-status',
@@ -41,7 +41,7 @@ describe('AvatarComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, AvatarComponent],
+            declarations: [TestComponent],
             imports: [AvatarModule]
         }).overrideComponent(AvatarComponent, {
             set: {changeDetection: ChangeDetectionStrategy.Default}

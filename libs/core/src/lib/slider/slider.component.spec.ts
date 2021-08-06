@@ -3,10 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { whenStable } from '../tests';
-
-import { SliderComponent } from './slider.component';
-import { SliderModule } from './slider.module';
+import { SliderComponent, SliderModule } from '@fundamental-ngx/core/slider';
+import { whenStable } from '@fundamental-ngx/core/tests';
 
 @Component({
     selector: 'fd-test-slider',
@@ -79,7 +77,7 @@ describe('SliderComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestSliderComponent, SliderComponent],
+            declarations: [TestSliderComponent],
             imports: [SliderModule, FormsModule]
         }).compileComponents();
     });

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DialogConfig, DialogDefaultComponent, DialogDefaultContent, DialogModule, DialogRef } from '@fundamental-ngx/core/dialog';
 
@@ -9,7 +10,7 @@ describe('DefaultDialogComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DialogModule],
+            imports: [DialogModule, BrowserAnimationsModule],
             providers: [DialogConfig, DialogRef]
         }).compileComponents();
     }));

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GridListFilterBarComponent } from './grid-list-filter-bar.component';
+import { GridListFilterBarComponent, GridListModule } from '@fundamental-ngx/core/grid-list';
 
 describe('GridListFilterBarComponent', () => {
   let component: GridListFilterBarComponent;
@@ -8,7 +8,7 @@ describe('GridListFilterBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GridListFilterBarComponent ]
+      imports: [GridListModule]
     })
     .compileComponents();
   });

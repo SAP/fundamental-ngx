@@ -1,19 +1,10 @@
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-
-import { MenuMobileComponent } from './menu-mobile.component';
 import { Component, ElementRef, Inject, InjectionToken, ViewChild } from '@angular/core';
-import { MenuComponent } from '../menu.component';
-import { MenuInteractiveDirective } from '../directives/menu-interactive.directive';
-import { MenuItemComponent, SubmenuComponent } from '../menu-item/menu-item.component';
-import { PopoverModule } from '../../popover/popover.module';
-import { CommonModule } from '@angular/common';
-import { MenuMobileModule } from './menu-mobile.module';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MenuTitleDirective } from '../directives/menu-title.directive';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MenuComponent, MenuItemComponent, MenuMobileComponent, MenuMobileModule, MenuModule } from '@fundamental-ngx/core/menu';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { getMobileModeViewElements, whenStable } from '@fundamental-ngx/core/tests';
-import { RouterTestingModule } from '@angular/router/testing';
-import { ButtonModule } from '../../button/button.module';
 
 const MOBILE_CONFIG_TEST_TOKEN = new InjectionToken<MobileModeConfig>('For test purposes');
 const MOBILE_CONFIG: MobileModeConfig = { title: 'Test menu title' };
@@ -54,16 +45,9 @@ describe('MenuMobileComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                TesNestedMenuItemComponent,
-                MenuInteractiveDirective,
-                MenuMobileComponent,
-                MenuTitleDirective,
-                MenuItemComponent,
-                SubmenuComponent,
-                MenuComponent
-            ],
-            imports: [CommonModule, PopoverModule, MenuMobileModule, NoopAnimationsModule, RouterTestingModule, ButtonModule],
+            declarations: [TesNestedMenuItemComponent],
+            imports: [MenuModule, MenuMobileModule, BrowserAnimationsModule],
+            providers: [{ provide : MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
         })
             .compileComponents();
     }));

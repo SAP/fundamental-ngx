@@ -1,11 +1,9 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { OverlayModule } from '@angular/cdk/overlay';
 import { A11yModule } from '@angular/cdk/a11y';
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
+import { OverlayModule } from '@angular/cdk/overlay';
 
-import { PopoverModule } from './popover.module';
-import { PopoverComponent } from './popover.component';
-import { PopoverService } from './popover-service/popover.service';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { PopoverComponent, PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
 
 
 describe('PopoverComponent', () => {
@@ -15,7 +13,6 @@ describe('PopoverComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [PopoverComponent],
             imports: [PopoverModule, OverlayModule, A11yModule],
             providers: [
                 { provide: PopoverService, useClass: PopoverServiceStub }
