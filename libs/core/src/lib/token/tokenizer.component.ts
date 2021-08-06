@@ -22,7 +22,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { A, BACKSPACE, DELETE, ENTER, ESCAPE, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
+import { A, BACKSPACE, DELETE, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 import { fromEvent, Subject, Subscription } from 'rxjs';
 import { filter, takeUntil, tap } from 'rxjs/operators';
 import { FormControlComponent } from '@fundamental-ngx/core/form';

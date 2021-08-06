@@ -184,7 +184,7 @@ describe('MultiInputComponent', () => {
         expect(component.selected).toEqual([component.dropdownValues[0]]);
     });
 
-    xit('should focus the input and clear the search term after selection', async() => {
+    it('should focus the input and clear the search term after selection', async() => {
         const inputFocusSpy = spyOn(component.searchInputElement.nativeElement, 'focus');
 
         await fixture.whenStable();
