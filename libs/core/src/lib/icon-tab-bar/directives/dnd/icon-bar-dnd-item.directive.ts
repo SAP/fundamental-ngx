@@ -16,7 +16,8 @@ export interface ElementChord {
 }
 
 @Directive({
-    selector: '[fdIconBarDndItem]'
+    // tslint:disable-next-line:directive-selector
+    selector: '[fdIconBarDndItem, fd-icon-bar-dnd-item]'
 })
 export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
 

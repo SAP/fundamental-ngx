@@ -3,7 +3,8 @@ import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 @Directive({
-    selector: '[fdExtraButton]'
+    // tslint:disable-next-line:directive-selector
+    selector: '[fdExtraButton, fd-extra-button]'
 })
 export class ExtraButtonDirective implements AfterViewInit, OnDestroy {
 

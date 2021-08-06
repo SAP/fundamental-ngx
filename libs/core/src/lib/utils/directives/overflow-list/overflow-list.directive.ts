@@ -5,7 +5,8 @@ import { OverflowListItemDirective } from './overflow-list-item.directive';
 
 
 @Directive({
-    selector: '[fdOverflowList]'
+    // tslint:disable-next-line:directive-selector
+    selector: '[fdOverflowList, fd-overflow-list]'
 })
 export class OverflowListDirective implements AfterViewInit, OnDestroy {
 

@@ -7,7 +7,8 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
 import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive';
 
 @Directive({
-    selector: '[fdIconBarDndList]',
+    // tslint:disable-next-line:directive-selector
+    selector: '[fdIconBarDndList, fd-icon-bar-dnd-list]',
 })
 export class IconBarDndListDirective implements AfterViewInit, OnDestroy {
 
