@@ -1,7 +1,7 @@
 <label fd-label for="multiInputFilter">Multi Input with data filter</label>
 <fd-multi-input
     inputId="multiInputFilter"
-    title="search"
+    [title]="'search'"
     [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
     placeholder="Search here..."
     [(ngModel)]="selected"

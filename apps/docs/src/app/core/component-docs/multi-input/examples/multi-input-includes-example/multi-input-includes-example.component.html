@@ -1,7 +1,7 @@
 <label fd-label for="multiInputInclude">Multi Input including search term</label>
 <fd-multi-input
     inputId="multiInputInclude"
-    title="search"
+    [title]="'search'"
     [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
     placeholder="Search here..."
     [(ngModel)]="selected"

@@ -4,7 +4,7 @@
             <label fd-form-label for="validmultiInput" required="true">Valid Multi Input</label>
             <fd-multi-input
                 inputId="validmultiInput"
-                title="search"
+                [title]="'search'"
                 [state]="isValid() ? 'success' : 'error'"
                 formControlName="selectedValues"
                 [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
@@ -17,7 +17,7 @@
             <label fd-form-label for="disabledmultiInput">Disabled Multi Input</label>
             <fd-multi-input
                 inputId="disabledmultiInput"
-                title="search"
+                [title]="'search'"
                 formControlName="disabledSelectedValues"
                 [dropdownValues]="['Apple', 'Banana', 'Pineapple', 'Tomato']"
                 placeholder="Search Here..."

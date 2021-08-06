@@ -1,7 +1,7 @@
 <label fd-label for="multiInputAsync">Multi Input with async data</label>
 <fd-multi-input
     inputId="multiInputAsync"
-    title="search"
+    [title]="'search'"
     [dropdownValues]="dropdownValues | async"
     placeholder="Search here..."
     [(ngModel)]="selected"
