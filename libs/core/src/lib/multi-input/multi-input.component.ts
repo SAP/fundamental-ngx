@@ -6,6 +6,7 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
+    HostListener,
     Injector,
     Input,
     OnChanges,
@@ -19,7 +20,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DOWN_ARROW, TAB, SPACE, ENTER } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, TAB, SPACE, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Subscription } from 'rxjs';
 
@@ -71,8 +72,7 @@ let inputRandomId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultiInputComponent
-    implements MultiInputInterface, ControlValueAccessor, CssClassBuilder, OnInit, OnChanges, AfterViewInit, OnDestroy
-{
+    implements MultiInputInterface, ControlValueAccessor, CssClassBuilder, OnInit, OnChanges, AfterViewInit, OnDestroy {
     /** Placeholder for the input field. */
     @Input()
     placeholder = '';
@@ -232,6 +232,10 @@ export class MultiInputComponent
     @Input()
     searchSuggestionNavigateMessage = 'use up and down arrows to navigate';
 
+    /** Message for allowing token from values available */
+    @Input()
+    tokenSelectMessage = 'select value from the list';
+
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
     readonly searchTermChange: EventEmitter<string> = new EventEmitter<string>();
@@ -357,6 +361,17 @@ export class MultiInputComponent
         this._subscriptions.unsubscribe();
     }
 
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    keyDown(keyboardEvent: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(keyboardEvent, ESCAPE)) {
+            keyboardEvent.preventDefault();
+
+            // close value help on escape key
+            this.openChangeHandle(false);
+        }
+    }
+
     @applyCssClass
     /** CssClassBuilder interface implementation
      * function must return single string
@@ -441,6 +456,8 @@ export class MultiInputComponent
         this.tokenizer.removeSelectedTokens();
 
         this._changeDetRef.detectChanges();
+
+        // focus on input when mobile dialog opens
         this.inputfield.nativeElement.focus();
     }
 
@@ -478,7 +495,7 @@ export class MultiInputComponent
             this._resetSearchTerm();
         }
 
-        // this.searchInputElement.nativeElement.focus();
+        this.searchInputElement.nativeElement.focus();
 
         // On Mobile mode changes are propagated only on approve.
         this._propagateChange();
@@ -581,13 +598,22 @@ export class MultiInputComponent
 
     /** @hidden */
     private _updateSearchAnnoucementText(): void {
-        // create search suggestion message with count.
-        this.currentSearchSuggestionAnnoucementMessage =
-            this.displayedValues?.length +
-            ' ' +
-            this.searchSuggestionMessage +
-            (this.displayedValues?.length > 0 && !this.mobile ? ',' + this.searchSuggestionNavigateMessage : '');
-        this._liveAnnouncer.announce(this.currentSearchSuggestionAnnoucementMessage, 'polite');
+        if (this.searchTerm) {
+            // create search suggestion message with count.
+            this.currentSearchSuggestionAnnoucementMessage =
+                this.displayedValues?.length +
+                ' ' +
+                this.searchSuggestionMessage +
+                (this.displayedValues?.length > 0 && !this.mobile ? ',' + this.searchSuggestionNavigateMessage : '');
+
+            // message for selecting value from value help
+            if (!this.allowNewTokens) {
+                this.currentSearchSuggestionAnnoucementMessage += !this.allowNewTokens
+                    ? ', ' + this.tokenSelectMessage
+                    : '';
+            }
+            this._liveAnnouncer.announce(this.currentSearchSuggestionAnnoucementMessage, 'polite');
+        }
     }
 
     disableParentFocusTrap(): void {
@@ -604,7 +630,7 @@ export class MultiInputComponent
         this.searchTermChange.emit(this.searchTerm);
         this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
         this._updateSearchAnnoucementText();
-        this._changeDetRef.markForCheck();
+        this._changeDetRef.detectChanges();
     }
 
     /** @hidden */

@@ -6,7 +6,7 @@
                     [mobile]="true"
                     *ngIf="mobileConfig?.hasCloseButton"
                     title="close"
-                    i18n-title="@@platformI18nMobileMultiInputClose"
+                    i18n-title="@@coreI18nMobileMultiInputClose"
                     tabindex="0"
                     (click)="handleDismiss()">
             </button>
@@ -16,7 +16,7 @@
                         <ng-container *ngTemplateOutlet="childContent?.controlTemplate"></ng-container>
                     </fd-bar-element>
                     <fd-bar-element class="custom-multi-input-select-all-bar-element">
-                        <button fd-button  glyph="multiselect-all" fdType="transparent" title="select all" i18n-title="@@platformI18nMobileMultiInputSelectAll"
+                        <button fd-button  glyph="multiselect-all" fdType="transparent" title="select all" i18n-title="@@coreI18nMobileMultiInputSelectAll"
                                 (click)="selectAll()"></button>
                     </fd-bar-element>
                 </div>
@@ -33,14 +33,14 @@
                     fdType="emphasized"
                     [label]="mobileConfig?.approveButtonText"
                     title="approve"
-                    i18n-title="@@platformI18nMobileMultiInputApprove"
+                    i18n-title="@@coreI18nMobileMultiInputApprove"
                     (click)="handleApprove()">
             </fd-button-bar>
             <fd-button-bar
                     *ngIf="mobileConfig?.cancelButtonText"
                     [label]="mobileConfig?.cancelButtonText"
                     title="dismiss"
-                    i18n-title="@@platformI18nMobileMultiInputDismiss"
+                    i18n-title="@@coreI18nMobileMultiInputDismiss"
                     (click)="handleDismiss()">
             </fd-button-bar>
         </fd-dialog-footer>

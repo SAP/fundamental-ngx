@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { MultiInputComponent, MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY, DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
 
-fdescribe('MultiInputComponent', () => {
+describe('MultiInputComponent', () => {
     let component: MultiInputComponent;
     let fixture: ComponentFixture<MultiInputComponent>;
 

@@ -103,7 +103,7 @@
         <li
             *ngFor="let value of displayedValues"
             fd-list-item
-            (click)="openChangeHandle(false)"
+            (click)="!mobile ? openChangeHandle(false): openChangeHandle(true)"
             [selected]="selected.indexOf(value) !== -1"
         >
             <fd-checkbox
