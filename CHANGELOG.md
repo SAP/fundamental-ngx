@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.178](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.177...v0.31.0-rc.178) (2021-08-06)
+
+
+### Bug Fixes
+
+* **core:** extended example, label for the busy indicator ([#6061](https://github.com/SAP/fundamental-ngx/issues/6061)) ([792e468](https://github.com/SAP/fundamental-ngx/commit/792e46804cbe842b341aec23c799a3b74ea8919e))
+
 ## [0.31.0-rc.177](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.176...v0.31.0-rc.177) (2021-08-06)
 
 
