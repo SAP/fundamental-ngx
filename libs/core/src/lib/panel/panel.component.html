@@ -12,6 +12,7 @@
             [attr.aria-controls]="panelContent?.id"
             [attr.aria-label]="expandAriaLabel"
             [attr.aria-labelledby]="expandAriaLabelledBy"
+            [title]="expandAriaLabel"
             (click)="toggleExpand()">
         </button>
     </div>

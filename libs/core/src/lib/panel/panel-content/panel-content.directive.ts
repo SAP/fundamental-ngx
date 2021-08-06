@@ -53,7 +53,4 @@ export class PanelContentDirective {
     @HostBinding('attr.id')
     id: string = 'fd-panel-content-' + panelContentUniqueId++;
 
-    /** Tabindex of the content section. */
-    @HostBinding('attr.tabindex')
-    tabindex = 0;
 }
