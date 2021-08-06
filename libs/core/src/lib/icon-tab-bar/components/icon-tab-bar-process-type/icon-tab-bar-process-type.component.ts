@@ -84,7 +84,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
                     const extra = this.overflowDirective.getAmountOfExtraItems();
                     isPreviousStepsStrategy
                         ? this.recalculateItemsByPrevArr(extra, amountOfPreviousSteps)
-                        : this.recalculateItemsByNextArr(extra, amountOfNextSteps);
+                        : this._recalculateItemsByNextArr(extra, amountOfNextSteps);
                     this.extraBtnDirective?.calculatePosition();
                     this._cd.detectChanges();
                 }
@@ -118,7 +118,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
      * @description We fill the array of the next steps to the selected tab,
      * based on this we generate the array of the previous steps if it is necessary
      */
-    private recalculateItemsByNextArr(extraItems: number, amountOfNextSteps: number): void {
+    private _recalculateItemsByNextArr(extraItems: number, amountOfNextSteps: number): void {
         this._clearExtraList();
         if (!extraItems) {
             return;
