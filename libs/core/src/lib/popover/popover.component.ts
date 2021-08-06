@@ -6,6 +6,7 @@ import {
     Component,
     ComponentRef,
     ContentChild,
+    ContentChildren,
     ElementRef,
     HostListener,
     Injector,
@@ -13,6 +14,7 @@ import {
     OnChanges,
     OnDestroy,
     Optional,
+    QueryList,
     Renderer2,
     SimpleChanges,
     TemplateRef,
@@ -33,6 +35,7 @@ import { PopoverControlComponent } from './popover-control/popover-control.compo
 import { POPOVER_COMPONENT } from './popover.interface';
 import { PopoverMobileComponent } from './popover-mobile/popover-mobile.component';
 import { PopoverChildContent } from './popover-child-content.interface';
+import { ListItemComponent } from '../list/list-item/list-item.component';
 
 let cdkPopoverUniqueId = 0;
 
@@ -106,6 +109,10 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     @ContentChild('popoverFooterContent')
     popoverFooterContentTemplate: TemplateRef<any>;
 
+    /** @hidden Avatar Group items.*/
+    @ContentChildren(ListItemComponent, { descendants: true })
+    listItems: QueryList<ListItemComponent>;
+
     /** @deprecated
      * Left for backward compatibility
      */
@@ -159,6 +166,16 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
         if (this.popoverControl && this.triggers.includes('click')) {
             this.popoverControl.makeTabbable();
         }
+        this.listItems.forEach((li) => {
+            const listItem = this._getHtmlElement(li);
+            const listTitle = listItem.querySelector('.fd-list__title');
+            listTitle.setAttribute('tabindex', '-1');
+        });
+    }
+
+    /** @hidden */
+    private _getHtmlElement(li: ListItemComponent): HTMLElement {
+        return li.elementRef.nativeElement as HTMLElement;
     }
 
     /** @hidden */
