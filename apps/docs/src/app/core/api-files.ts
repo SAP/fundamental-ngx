@@ -55,7 +55,7 @@ export const API_FILES = {
         'DynamicSideContentMainComponent'
     ],
     breadcrumb: ['BreadcrumbComponent', 'BreadcrumbItemDirective', 'BreadcrumbLinkDirective'],
-    busyIndicator: ['BusyIndicatorComponent'],
+    busyIndicator: ['BusyIndicatorComponent', 'BusyIndicatorExtendedDirective'],
     button: ['ButtonComponent'],
     segmentedButton: ['SegmentedButtonComponent'],
     calendar: [

@@ -1,6 +1,4 @@
-<fd-docs-section-title id="default" componentName="busy-indicator">
-    Default Busy Indicator
-</fd-docs-section-title>
+<fd-docs-section-title id="default" componentName="busy-indicator"> Default Busy Indicator </fd-docs-section-title>
 <description>
     Busy Indicator displays loading animation depending on its state. To set Busy Indicator state use
     <code>[loading]</code> property.
@@ -9,10 +7,9 @@
     <fd-busy-indicator-basic-example></fd-busy-indicator-basic-example>
 </component-example>
 <code-example [exampleFiles]="busyIndicatorBasicExample"></code-example>
+<separator></separator>
 
-<fd-docs-section-title id="size" componentName="busy-indicator">
-    Busy Indicator sizes
-</fd-docs-section-title>
+<fd-docs-section-title id="size" componentName="busy-indicator"> Busy Indicator sizes </fd-docs-section-title>
 <description>
     Busy Indicator can be displayed in three different sizes. To change the size use <code>[size]</code> property.
 </description>
@@ -23,12 +20,36 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="wrapper" componentName="busy-indicator">
-    Busy Indicator as wrapper
+<fd-docs-section-title id="label" componentName="busy-indicator"> Busy Indicator with label </fd-docs-section-title>
+<description>
+    Busy Indicator can be displayed with label when loading the content. To add the label use
+    <code>[label]</code> string property.
+</description>
+<component-example>
+    <fd-busy-indicator-label-example></fd-busy-indicator-label-example>
+</component-example>
+<code-example [exampleFiles]="busyIndicatorLabelExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="extended" componentName="busy-indicator">
+    Busy Indicator with message toast
 </fd-docs-section-title>
 <description>
-    Busy Indicator might be used as a wrapper to display elements or sections of the page behind an overflow.
-    Depending of the wrapped element type, use <code>[block]</code> property to manipulate the <code>display</code>
+    Busy Indicator can be displayed with message toast when loading the content. To add the extended busy indicator wrap
+    the <code>fd-busy-indicator</code> component with in <code>fd-busy-indicator-extended</code> directive.
+</description>
+<component-example>
+    <fd-busy-indicator-extended-example></fd-busy-indicator-extended-example>
+</component-example>
+<code-example [exampleFiles]="busyIndicatorExtendedExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="wrapper" componentName="busy-indicator"> Busy Indicator as wrapper </fd-docs-section-title>
+<description>
+    Busy Indicator might be used as a wrapper to display elements or sections of the page behind an overflow. Depending
+    of the wrapped element type, use <code>[block]</code> property to manipulate the <code>display</code>
     property of the Busy Indicator.
 </description>
 <component-example>
