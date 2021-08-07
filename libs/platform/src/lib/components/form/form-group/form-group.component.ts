@@ -317,6 +317,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     ngOnDestroy(): void {
         this._destroyed.next();
         this._destroyed.complete();
+        this._subscriptions.unsubscribe();
     }
 
     addFormField(formField: FormField): void {
