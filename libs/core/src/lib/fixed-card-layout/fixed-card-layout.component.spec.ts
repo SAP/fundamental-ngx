@@ -31,6 +31,7 @@ describe('FixedCardLayoutComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CardModule, FixedCardLayoutModule],
+            declarations: [TestFixedCardLayoutComponent],
             providers: [RtlService]
         }).compileComponents();
     }));

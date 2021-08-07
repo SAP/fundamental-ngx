@@ -3,7 +3,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MessageBoxConfig, MessageBoxContainerComponent, MessageBoxContent, MessageBoxRef } from '@fundamental-ngx/core/message-box';
+import {
+    MessageBoxConfig,
+    MessageBoxContainerComponent,
+    MessageBoxContent,
+    MessageBoxModule,
+    MessageBoxRef
+} from '@fundamental-ngx/core/message-box';
 import { whenStable } from '@fundamental-ngx/core/tests';
 
 @Component({ template: '<ng-template #template></ng-template>' })
@@ -18,9 +24,9 @@ describe('MessageBoxContainerComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [MessageBoxContainerComponent, TestComponent],
+            declarations: [TestComponent],
             providers: [MessageBoxRef, MessageBoxConfig],
-            imports: [NoopAnimationsModule]
+            imports: [MessageBoxModule, NoopAnimationsModule]
         }).overrideModule(BrowserDynamicTestingModule, {
             set: { entryComponents: [TestComponent] }
         }).compileComponents();
