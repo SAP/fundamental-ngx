@@ -216,15 +216,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
         return !this._isEditMode || node.blank || node.space || node.status !== 'not started';
     }
 
-    /** @hidden */
-    _getNodeType(node: ApprovalGraphNode): 'active' | 'inactive' {
-        if (this._isEditMode && this._isCdkDragDisabled(node)) {
-            return 'inactive';
-        }
-
-        return 'active';
-    }
-
     /** @hidden Node click handler */
     _onNodeClick(node: ApprovalNode): void {
         if (this._dragDropInProgress) {
@@ -569,6 +560,8 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     _onNodeDrop(nodeToDrop: ApprovalGraphNode, drag: CdkDrag): void {
         drag.reset();
 
+        setTimeout(() => this._dragDropInProgress = false);
+
         const dropTarget = this._nodeComponents.find(n => n._isAnyDropZoneActive);
 
         if (!dropTarget) {
@@ -655,7 +648,6 @@ export class ApprovalFlowComponent implements OnInit, OnDestroy {
     private _finishDragDropProcess(nodeToDrop: ApprovalGraphNode): void {
         this._approvalProcess.nodes.push(nodeToDrop);
         this._buildView(this._approvalProcess);
-        this._dragDropInProgress = false;
     }
 
     /** @hidden */
