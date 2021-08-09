@@ -16,6 +16,7 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
+import '@angular/localize/init';
 import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { Subscription } from 'rxjs';
 import { Pagination } from './pagination.model';
@@ -261,7 +262,8 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         }
         this._refreshPages();
 
-        this._liveAnnouncer.announce('Page ' + page + ', current page');
+        const currentPageMessage = $localize`:@@corePaginationCurrentPage:Current page`;
+        this._liveAnnouncer.announce(this.pageLabel + ' ' + page + currentPageMessage);
 
         this.pageChangeStart.emit(page);
     }
