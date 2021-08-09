@@ -16,10 +16,10 @@ export const invalidDate = '99/99/9999';
 export function getCurrentMonth(withZero: boolean): string {
     if (withZero) {
         // need to check that month is less than 10 to return with 0, cz not needed to return 010 e.g.
-        if ((date.getMonth() + 1) > 10) {
+        if ((date.getMonth() + 1) < 10) {
             return '0' + (date.getMonth() + 1).toString();
         }
-        if ((date.getMonth() + 1) <= 10) {
+        if ((date.getMonth() + 1) >= 10) {
             return (date.getMonth() + 1).toString();
         }
 
@@ -33,10 +33,10 @@ export function getCurrentMonth(withZero: boolean): string {
 export function getNextDay(withZero: boolean): string {
     if (withZero) {
         // need to check that day number is less than 10 to return with 0, cz not needed to return 010 e.g.
-        if ((date.getDate() + 1) > 10) {
+        if ((date.getDate() + 1) < 10) {
             return '0' + (date.getDate() + 1).toString();
         }
-        if ((date.getDate() + 1) <= 10) {
+        if ((date.getDate() + 1) >= 10) {
             return (date.getDate() + 1).toString();
         }
 
