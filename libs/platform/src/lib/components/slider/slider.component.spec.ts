@@ -139,6 +139,12 @@ describe('PlatformSliderComponent', () => {
         expect(component).toBeTruthy();
     });
 
+    it('handle should be on the center of slider', () => {
+        const handle = fixture.debugElement.query(By.css('.example-1 .fd-slider__handle'));
+
+        expect(handle.nativeElement.style.left).toEqual('50%');
+    });
+
     it('should emit value: "-1"', () => {
         const sliderWidth = fixture.debugElement.query(By.css('.example-1 .fd-slider__inner')).nativeElement.clientWidth;
         const handle = fixture.debugElement.query(By.css('.example-1 .fd-slider__handle'));
