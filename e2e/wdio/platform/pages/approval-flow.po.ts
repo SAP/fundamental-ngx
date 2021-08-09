@@ -4,7 +4,7 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 export class ApprovalFlowPo extends BaseComponentPo {
     url = '/approval-flow';
     root = '#page-content';
-    watchers = 'fdp-approval-flow .approval-flow__watchers';
+    watchers = 'fdp-approval-flow .fdp-approval-flow__watchers';
     watchersTitle = this.watchers + ' p';
     watchersAvatar = this.watchers + ' fd-avatar';
 
@@ -26,27 +26,27 @@ export class ApprovalFlowPo extends BaseComponentPo {
 
     approvalFlow = 'fdp-approval-flow .approval-flow__container';
     selectExample = 'select';
-    approvalFlowNode = '.approval-flow-node__inner';
-    approvalFlowTeamNode = '.approval-flow-node__inner.approval-flow-node__name--members-count';
+    approvalFlowNode = '.fdp-approval-flow-node__inner';
+    approvalFlowTeamNode = this.approvalFlowNode + '.fdp-approval-flow-node__name--members-count';
     approvalFlowNodeAvatar = this.approvalFlowNode + ' fd-avatar';
     approvalFlowNodeStatus = this.approvalFlowNode + ' fdp-object-status';
-    approvalFlowNodeName = this.approvalFlowNode + ' .approval-flow-node__name';
-    approvalFlowNodeDescription = this.approvalFlowNode + ' .approval-flow-node__description';
-    approvalFlowNodeCheckbox = 'fd-checkbox';
-    approvalFlowNodeCheckboxAlt = '//*[contains(@class, "fd-checkbox") and contains(@aria-disabled, "false")]/ancestor::fd-checkbox/label';
-    approvalFlowNodeActionMenu = '.approval-flow-node__edit-controls button';
+    approvalFlowNodeName = this.approvalFlowNode + ' .fdp-approval-flow-node__name';
+    approvalFlowNodeDescription = this.approvalFlowNode + ' .fdp-approval-flow-node__description';
+    approvalFlowNodeCheckbox = '.fd-checkbox__label';
+    approvalFlowNodeCheckboxAlt = '.fd-grid-list__item-input';
+    approvalFlowNodeActionMenu = '.fdp-approval-flow-node__menu-button';
     approvalFlowNodeActionMenuItem = '[role="menuitem"]';
 
     remaindersSendToInput = 'fd-multi-input fd-tokenizer input';
     selectItem = '[role="listitem"]';
-    bottomMenuItems = '.approval-flow__edit-mode-footer button';
+    bottomMenuItems = '.fd-bar__element button';
 
-    addNode = '.approval-flow-node__add';
-    editExampleButton = '.approval-flow__toolbar-controls';
-    addWhatchersInput = '.approval-flow__watchers-input-container input';
+    addNode = '.fdp-approval-flow-node__add';
+    editExampleButton = 'fdp-approval-flow-toolbar-actions';
+    addWhatchersInput = '.fdp-approval-flow__watchers-input-container input';
 
     toastMessageDialog = 'fd-message-toast';
-    flowNavigationArrow = 'button.approval-flow__control--next-slide fd-icon[role="presentation"]';
+    flowNavigationArrow = 'button.fdp-approval-flow-carousel-controls__button--next-slide';
 
     topActionButtons = 'button.fd-button--standard.fd-button--compact';
     messageStrip = 'fd-message-strip';
