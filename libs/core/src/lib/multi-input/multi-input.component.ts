@@ -34,7 +34,8 @@ import {
     RtlService,
     applyCssClass,
     FocusEscapeDirection,
-    KeyUtil
+    KeyUtil,
+    FocusTrapService
 } from '@fundamental-ngx/core/utils';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
@@ -285,7 +286,8 @@ export class MultiInputComponent implements
         private _changeDetRef: ChangeDetectorRef,
         private _dynamicComponentService: DynamicComponentService,
         @Optional() private _rtlService: RtlService,
-        @Optional() private _contentDensityService: ContentDensityService
+        @Optional() private _contentDensityService: ContentDensityService,
+        @Optional() private _focusTrapService: FocusTrapService
     ) { }
 
     /** @hidden */
@@ -413,6 +415,9 @@ export class MultiInputComponent implements
         }
         if (!this.open) {
             this._resetSearchTerm();
+            this.enableParentFocusTrap();
+        } else {
+            this.disableParentFocusTrap();
         }
 
         this.tokenizer.removeSelectedTokens();
@@ -550,6 +555,14 @@ export class MultiInputComponent implements
     /** @hidden */
     _addOnButtonClicked(): void {
         this.openChangeHandle(!this.open);
+    }
+
+    disableParentFocusTrap(): void {
+        this._focusTrapService?.pauseCurrentFocusTrap();
+    }
+
+    enableParentFocusTrap(): void {
+        this._focusTrapService?.unpauseCurrentFocusTrap();
     }
 
     /** @hidden */

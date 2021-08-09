@@ -132,3 +132,33 @@
     <fd-avatar-borders-example></fd-avatar-borders-example>
 </component-example>
 <code-example [exampleFiles]="avatarBorders"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="default-image-alter-options" componentName="avatar">
+    Default image with alter icon options
+</fd-docs-section-title>
+<description>
+    To provide alternative icon options by priority use the <code>[alterIcon]</code> property. <br>
+    There's few options can be set the order priority, Avatar component will process them and display first successful option if <code>[image]</code> url fails to load:
+    <ul>
+        <li>
+            <code>content</code> - Avatar will display first letter from string, provided as component content
+        </li>
+        <li>
+            <code>alt</code> - Avatar will display first letter from string, provided as <code>alt</code> attribute
+        </li>
+        <li>
+            <code>backup</code> - Avatar will display image, provided as <code>backupImage</code>
+        </li>
+        <li>
+            <code>default-icon</code> - Avatar will display user glyph icon
+        </li>
+    </ul>
+    <br>
+    Alternative options can be passed the following way <code>alterIcon="content|alt|backup|default-icon"</code>
+</description>
+<component-example>
+    <fd-avatar-background-image-with-alter-options-example></fd-avatar-background-image-with-alter-options-example>
+</component-example>
+<code-example [exampleFiles]="avatarBackgroundImageWithALterOptions"></code-example>

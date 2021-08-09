@@ -1,4 +1,4 @@
-<fd-docs-section-title id="default" componentName="wizard-generator">
+<fd-docs-section-title id="wizard-default-example" componentName="wizard">
     Default Wizard generator
 </fd-docs-section-title>
 <description>
@@ -39,10 +39,24 @@
     <br><br>
     Buttons appearance can be changed with <code>[navigationButtonLabels]</code> property.
     <br><br>
+    If you want to use completely different style for navigational buttons,
+    you can use special directives: <code>fdpWizardGeneratorGoNextButton, fdpWizardGeneratorFinishButton</code>.
+</description>
+<component-example>
+    <fdp-wizard-generator-customizable-embeded-example></fdp-wizard-generator-customizable-embeded-example>
+</component-example>
+<code-example [exampleFiles]="customizableEmbededExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="dialog-customization" componentName="wizard-generator">
+    Customizable Wizard generator in dialog
+</fd-docs-section-title>
+<description>
     Dialog close confirmation text can be changed with <code>confirmationDialogText, confirmationDialogCloseText, confirmationDialogCancelText</code> properties.
     <br><br>
     If you want to use completely different style for navigational buttons, you can use <code>goNextButtonTemplate, goBackButtonTemplate, finishButtonTemplate, cancelButtonTemplate</code>
-    properties for the dialog wizard, and content-projected html with special directives: <code>fdpWizardGeneratorGoNextButton, fdpWizardGeneratorFinishButton</code>.
+    properties for the dialog wizard.
     <br><br>
     If you want to use your custom confirmation dialog, you can pass it <code>confirmationDialogTemplate</code> property to wizard dialog service.
 </description>
@@ -71,8 +85,8 @@
     Responsive paddings for Wizard generator
 </fd-docs-section-title>
 <description>
-    <p>The default wizard dont have responsive paddings applied for progress bar and content.
-    To enable responsive paddings, you can use <code>[responsivePaddings]="true"</code> input to the wizard generator component.</p>
+    <p>The default wizard have responsive paddings applied for progress bar and content.
+    To disable responsive paddings, you can use <code>[responsivePaddings]="false"</code> input to the wizard generator component.</p>
     <p>Responsive paddings values:</p>
     <table>
         <thead>
@@ -121,7 +135,7 @@
     Responsive paddings for Wizard generator in dialog
 </fd-docs-section-title>
 <description>
-    Use <code>responsivePaddings: true</code> property for dialog config to enable wizard responsive paddings inside dialog.
+    Use <code>responsivePaddings: false</code> property for dialog config to dosable wizard responsive paddings inside dialog.
 </description>
 <component-example>
     <fdp-wizard-generator-responsive-dialog-example></fdp-wizard-generator-responsive-dialog-example>

@@ -69,6 +69,7 @@ export class WizardSummarySectionComponent implements OnInit {
         this._wizardGeneratorService.editStep(this.step.id);
     }
 
+    /** @hidden */
     private _formatStepValue(): void {
 
         if (!this._componentForms) {
@@ -77,7 +78,15 @@ export class WizardSummarySectionComponent implements OnInit {
 
         const formattedStepValue = [];
 
-        for (const [formId, form] of Object.entries(this._componentForms)) {
+        this.step.formGroups.forEach((formGroup) => {
+            const formId = formGroup.id;
+
+            const form = this._componentForms[formId];
+
+            // Form might be skipped due to conditional rendering
+            if (!form) {
+                return;
+            }
 
             const formattedForm: FormattedFormStep = {
                 title: form.title,
@@ -90,7 +99,7 @@ export class WizardSummarySectionComponent implements OnInit {
             };
 
             formattedStepValue.push(formattedForm);
-        }
+        });
 
         this._formattedStepValue = formattedStepValue;
     }

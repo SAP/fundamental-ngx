@@ -36,7 +36,8 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
             providers: [
                 { provide: DialogConfig, useValue: dialogConfig },
                 { provide: DialogRef, useValue: dialogRef },
-                { provide: RtlService, useValue: this._rtlService }
+                { provide: RtlService, useValue: this._rtlService },
+                { provide: DialogService, useValue: this },
             ]
         });
 

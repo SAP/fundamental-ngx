@@ -14,6 +14,9 @@ import * as programaticSubmitSrc from '!raw-loader!./platform-form-generator-exa
 import * as customErrorsHtml from '!raw-loader!./platform-form-generator-examples/platform-form-generator-custom-error-example.component.html';
 import * as customErrorsSrc from '!raw-loader!./platform-form-generator-examples/platform-form-generator-custom-error-example.component.ts';
 
+import * as formFieldLayoutGeneratorhtml from '!raw-loader!./platform-form-generator-examples/platform-form-generator-field-layout-example.component.html';
+import * as formFieldLayoutGeneratorSrc from '!raw-loader!./platform-form-generator-examples/platform-form-generator-field-layout-example.component.ts';
+
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -88,6 +91,20 @@ export class PlatformFormGeneratorDocsComponent {
             code: customErrorsSrc,
             fileName: 'platform-form-generator-custom-error-example',
             component: 'PlatformFormGeneratorCustomErrorExampleComponent'
+        }
+    ];
+
+    formFieldLayoutGenerator: ExampleFile[] = [
+        {
+            language: 'html',
+            code: formFieldLayoutGeneratorhtml,
+            fileName: 'platform-form-generator-field-layout-example'
+        },
+        {
+            language: 'typescript',
+            code: formFieldLayoutGeneratorSrc,
+            fileName: 'platform-form-generator-field-layout-example',
+            component: 'PlatformFormGeneratorFieldLayoutExampleComponent'
         }
     ];
 }

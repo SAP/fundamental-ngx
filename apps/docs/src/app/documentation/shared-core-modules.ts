@@ -6,6 +6,7 @@ import { MenuModule } from '@fundamental-ngx/core/menu';
 import { MessageStripModule } from '@fundamental-ngx/core/message-strip';
 import { SwitchModule } from '@fundamental-ngx/core/switch';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
+import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 
 export const sharedCoreModules = [
     TabsModule,
@@ -15,5 +16,6 @@ export const sharedCoreModules = [
     ButtonModule,
     MessageStripModule,
     FormLabelModule,
-    LinkModule
+    LinkModule,
+    InfoLabelModule
 ];

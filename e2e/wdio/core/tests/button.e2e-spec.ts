@@ -8,7 +8,7 @@ import {
     click,
     sendKeys,
     checkElementScreenshot,
-    saveElementScreenshot,
+    saveElementScreenshot, getText
 } from '../../driver/wdio';
 import {
     testText, fdTypeOptions, iconOptions,
@@ -21,7 +21,7 @@ describe('Button test suite:', function() {
     const buttonPage = new ButtonPo();
     const {
         typeButtons, menuButtons, sizeButtons, iconButtons, stateButton, disableStateButtons, playgroundButton, inputLabel,
-        checkboxMenu, checkboxCompact, dropDownMenu
+        checkboxMenu, checkboxCompact, dropDownMenu, playgroundButtonText
     } = buttonPage;
 
     beforeAll(() => {
@@ -79,11 +79,11 @@ describe('Button test suite:', function() {
     });
 
     describe('Verify playground', function() {
-        // skipped for prod
-        xit('verify changing text in label', () => {
+
+        it('verify changing text in label', () => {
             scrollIntoView(inputLabel);
             setValue(inputLabel, 'test');
-            expect(getAttributeByName(playgroundButton, 'ng-reflect-label')).toEqual(testText);
+            expect(getText(playgroundButtonText)).toEqual(testText);
         });
 
         // skipped due to https://github.com/webdriverio/webdriverio/issues/3605

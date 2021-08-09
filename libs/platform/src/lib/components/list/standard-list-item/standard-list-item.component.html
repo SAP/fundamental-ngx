@@ -1,6 +1,6 @@
 <!--  list item navigation with Arrow-->
 <ng-container *ngIf="navigationIndicator || navigated && !(noDataText!==null && noDataText!== undefined) ">
-    <li #listItem fd-list-item [attr.id]="id" [selected]="_selected" tabindex="-1"
+    <li #listItem [class.fd-list-title__unread]="unRead" fd-list-item [attr.id]="id" [selected]="_selected" tabindex="-1"
         (click)="_onItemClick()" (keydown)="_onKeyDown($event)" (keyup)="_onKeyUp($event)" class="fd-list__item--link"
          [class.fd-list__item--inactive]="listType === 'inactive'" [attr.aria-label]="ariaLabel"
         [attr.aria-level]="ariaLevel" [attr.aria-posinet]="ariaPosinet">
@@ -15,7 +15,7 @@
 
 <!--  list item without navigation and used for simple list display-->
 <ng-container *ngIf="!navigationIndicator && !navigated && !(noDataText!==null && noDataText!== undefined)">
-    <li #listItem fd-list-item [attr.id]="id" [selected]="_selected" (keydown)="_onKeyDown($event)" tabindex="-1"
+    <li #listItem [class.fd-list__item--unread]="unRead" fd-list-item [attr.id]="id" [selected]="_selected" (keydown)="_onKeyDown($event)" tabindex="-1"
          (keyup)="_onKeyUp($event)" [attr.aria-label]="ariaLabel" [attr.aria-level]="ariaLevel"
         [attr.aria-posinet]="ariaPosinet" [class.fd-list__item--inactive]="listType === 'inactive'"
         (click)="_onItemClick()">
@@ -37,14 +37,12 @@
     <fd-avatar class="fd-list__icon" size="s" [image]="avatarSrc" *ngIf="avatarSrc !== null && avatarSrc !== undefined"
         [attr.alt]="avatarTitle" [label]="avatarTitle" role="img">
     </fd-avatar>
-    <span *ngIf="title" fd-list-title [attr.aria-label]="ariaLabel" [attr.nowrap]="titleWrap"
-        [class.fd-list-title__unread]="unRead" [attr.title]="title">{{title}}</span>
+    <span *ngIf="title" fd-list-title [attr.aria-label]="ariaLabel" [attr.nowrap]="titleWrap" [attr.title]="title">{{title}}</span>
     <span fd-list-secondary [attr.aria-label]="secondary" *ngIf="secondary !== null && secondary !== undefined"
-        [attr.title]="secondary" [attr.nowrap]="secondaryWrap" [class.fd-list-title__unread]="unRead">
+        [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
         {{secondary}}
     </span>
-    <span fd-list-secondary class="fd-list__counter" [attr.aria-label]="counter" [class.fd-list-title__unread]="unRead"
-        *ngIf="counter !== null && counter !== undefined" [attr.title]="counter">
+    <span fd-list-secondary class="fd-list__item-counter" [attr.aria-label]="counter" *ngIf="counter !== null && counter !== undefined" [attr.title]="counter">
         {{counter}}
     </span>
     <ng-container *ngTemplateOutlet="actionsTemplate"></ng-container>
@@ -59,21 +57,18 @@
     </fd-avatar>
 
     <div class="fd-list__content">
-        <div *ngIf="title" fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap" [attr.title]="title"
-            [class.fd-list-title__unread]="unRead">
+        <div *ngIf="title" fd-list-title [attr.aria-label]="title" [attr.nowrap]="titleWrap" [attr.title]="title">
             {{title}}</div>
         <div class="fd-list__byline fd-list__byline--2-col">
-            <span *ngIf="description" class="fd-list__byline-left" [attr.aria-label]="description"
-                [class.fd-list-title__unread]="unRead" [attr.title]="description"
+            <span *ngIf="description" class="fd-list__byline-left" [attr.aria-label]="description" [attr.title]="description"
                 [attr.nowrap]="titleWrap">{{description}}</span>
             <span #rt *ngIf="secondary && !inverted" [attr.aria-label]="secondary" class="fd-list__byline-right"
-                [ngClass]="statusType ? 'fd-list__byline-right--' + statusType : ''"
-                [class.fd-list-title__unread]="unRead" [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
+                [ngClass]="statusType ? 'fd-list__byline-right--' + statusType : ''" [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
                 {{secondary}}
             </span>
             <span #rt1 class="fd-list__byline-right" *ngIf="inverted" [attr.aria-label]="secondary"
                 [attr.title]="secondary" [attr.nowrap]="secondaryWrap">
-                <fdp-object-status [status]="statusType" [inverted]="inverted" [class.fd-list-title__unread]="unRead">
+                <fdp-object-status [status]="statusType" [inverted]="inverted">
                     {{secondary}}</fdp-object-status>
             </span>
         </div>

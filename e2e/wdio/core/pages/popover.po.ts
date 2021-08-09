@@ -25,7 +25,7 @@ export class PopoverPo extends CoreBaseComponentPo {
     popoverDialogParagraph = 'fd-multi-input~p';
     clickMeButton = 'fd-dialog-body button';
     popoverDialogMessage = '.fd-popover__popper div';
-    hoverElement = '.fd-popover__control div';
+    hoverElement = 'fd-popover-c-fill .fd-popover__control div';
     triggerButton2 = '#background-ex8 button';
     triggerButton = '#background-ex7 button';
     popoverContainer = '#background-ex7 div';

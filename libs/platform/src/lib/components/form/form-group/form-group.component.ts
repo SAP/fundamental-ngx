@@ -38,16 +38,18 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
-import { KeyValue } from '@angular/common';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { KeyValue } from '@angular/common';
 import { Subject, Subscription } from 'rxjs';
 import { filter, map, startWith } from 'rxjs/operators';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { FormField } from '../form-field';
+import { takeUntil } from 'rxjs/operators';
+import { Field, FieldGroup, FieldColumn, isFieldChild, isFieldGroupChild, getField } from '../form-helpers';
+import { FormFieldComponent } from './form-field/form-field.component';
 import { FormGroupContainer } from '../form-group';
+import { FormField } from '../form-field';
 import { HintPlacement, LabelLayout } from '../form-options';
 import { FormFieldGroup } from '../form-field-group';
-import { Field, FieldGroup, FieldColumn, isFieldChild, isFieldGroupChild, getField } from '../form-helpers';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from './constants';
 
 export const formGroupProvider: Provider = {
@@ -306,7 +308,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         this._updateFieldByColumn();
         this._updateFormFieldsProperties();
         this._listenToFormGroupChildren();
-
+        this._listenFormFieldColumnChange();
         this._cd.markForCheck();
     }
 
@@ -379,6 +381,16 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
             this._updateFieldByColumn();
             this._cd.markForCheck();
         });
+    }
+
+    /** @hidden */
+    private _listenFormFieldColumnChange(): void {
+        this.formGroupChildren.forEach((field: FormFieldComponent) =>
+            field.onColumnChange?.pipe(takeUntil(this._destroyed)).subscribe((_) => {
+                this._updateFieldByColumn();
+                this._cd.markForCheck();
+            })
+        );
     }
 
     /**

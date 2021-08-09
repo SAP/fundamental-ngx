@@ -14,7 +14,7 @@ export class ToolbarPo extends CoreBaseComponentPo {
     overflowGroupingExample = 'fd-toolbar-overflow-grouping-example';
     moreButton = ' [title="More"]';
     overflowBody = '.fd-toolbar__overflow__body';
-    alwaysButton = '[ng-reflect-label="Always"]';
+    alwaysButton = '[label="Always"]';
     overflowGroupingButton = '#background-ex7' + this.button;
     checkbox = '.fd-checkbox__label';
     dropdownMenu = '.fd-select__control.ng-star-inserted';
