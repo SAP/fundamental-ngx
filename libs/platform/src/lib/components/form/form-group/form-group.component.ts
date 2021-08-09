@@ -41,7 +41,6 @@ import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { KeyValue } from '@angular/common';
 import { Subject, Subscription } from 'rxjs';
-import { filter, map, startWith } from 'rxjs/operators';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { takeUntil } from 'rxjs/operators';
 import { Field, FieldGroup, FieldColumn, isFieldChild, isFieldGroupChild, getField } from '../form-helpers';
