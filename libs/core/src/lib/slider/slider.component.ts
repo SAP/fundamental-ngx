@@ -1,3 +1,7 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { _isNumberValue, coerceNumberProperty } from '@angular/cdk/coercion';
+import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
+import { Platform } from '@angular/cdk/platform';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -17,28 +21,14 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-import { Platform } from '@angular/cdk/platform';
-import { coerceNumberProperty, _isNumberValue } from '@angular/cdk/coercion';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
+
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { applyCssClass, ContentDensityService, CssClassBuilder, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
-
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import {
-    SliderControlValue,
-    SliderCustomValue,
-    SliderRangeHandles,
-    SliderTickMark,
-    SliderValueTargets
-} from './slider.model';
 import { MIN_DISTANCE_BETWEEN_TICKS } from './constants';
-import { RtlService } from '@fundamental-ngx/core/utils';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { applyCssClass } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { SliderControlValue, SliderCustomValue, SliderRangeHandles, SliderTickMark, SliderValueTargets } from './slider.model';
 
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -215,7 +205,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
 
     /** Set control value */
     set value(value: SliderControlValue) {
-        if (!this._isValidControlValue(value, this.value)) {
+        if (!this._isValidControlValue(value)) {
             return;
         }
 
@@ -381,7 +371,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     }
 
     /** @hidden */
-    getValuenow(position: number | number[], sliderValueTarget: SliderValueTargets): string | number {
+    getValueNow(position: number | number[], sliderValueTarget: SliderValueTargets): string | number {
         return this.customValues.length > 0
             ? this.customValues[position as number].label
             : this._popoverValueRef[sliderValueTarget];
@@ -461,7 +451,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             return;
         }
 
-        const unsubscribeFromMousemove = this._renderer.listen('document', 'mousemove', (moveEvent) => {
+        const unsubscribeFromMouseMove = this._renderer.listen('document', 'mousemove', (moveEvent) => {
             this._updatePopoversPosition();
 
             if (!this._isRange) {
@@ -485,9 +475,14 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             this.writeValue(this._constructRangeModelValue());
         });
 
-        const unsubscribeFromMouseup = this._renderer.listen('document', 'mouseup', () => {
-            unsubscribeFromMousemove();
-            unsubscribeFromMouseup();
+        const unsubscribeFromMouseUp = this._renderer.listen('document', 'mouseup', () => {
+            unsubscribeFromMouseMove();
+            unsubscribeFromMouseUp();
+        });
+
+        this._onDestroy$.subscribe(() => {
+            unsubscribeFromMouseMove();
+            unsubscribeFromMouseUp();
         });
     }
 
@@ -611,7 +606,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     }
 
     /** @hidden reset default prefix on leaving the slider */
-    onBlur(event: MouseEvent | KeyboardEvent): void {
+    onBlur(): void {
         // reset prefix string for slider current value that need to be announced
         if (this._isRange) {
             this._rangeSliderHandle1CurrentValuePrefix = this.rangeSliderHandle1CurrentValuePrefix;
@@ -619,6 +614,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
         } else {
             this._singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
         }
+
         this._cdr.markForCheck();
     }
 
@@ -852,7 +848,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
     }
 
     /** @hidden */
-    private _isValidControlValue(currentValue: SliderControlValue, previousValue: SliderControlValue): boolean {
+    private _isValidControlValue(currentValue: SliderControlValue): boolean {
         if (!currentValue && currentValue !== 0) {
             return false;
         }
@@ -861,7 +857,7 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             currentValue = coerceNumberProperty(currentValue);
         }
 
-        return previousValue !== currentValue;
+        return this.value !== currentValue;
     }
 
     /** @hidden */
@@ -950,12 +946,10 @@ export class SliderComponent implements OnInit, OnChanges, OnDestroy, ControlVal
             const firstHandlePosition = this.customValues.findIndex((item) => item.value === firstHandle.value);
             const secondHandlePosition = this.customValues.findIndex((item) => item.value === secondHandle.value);
 
-            const indexes = [
+            return [
                 firstHandlePosition >= 0 ? firstHandlePosition : 0,
                 secondHandlePosition >= 0 ? secondHandlePosition : this.customValues.length - 1
             ];
-
-            return indexes;
         } else {
             let firstHandle = value as SliderTickMark;
             if (!this._instanceOfCustomValue(firstHandle)) {

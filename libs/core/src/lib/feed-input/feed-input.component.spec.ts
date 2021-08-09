@@ -64,7 +64,7 @@ describe('FeedInputComponent', () => {
         component.disabled = true;
         fixture.detectChanges();
 
-        expect(hostEl.classes['is-disabled']).toBeTrue();
+        expect(hostEl.nativeElement.className.includes('is-disabled')).toBeTrue();
     })
 
     it('should disabled button by default', () => {

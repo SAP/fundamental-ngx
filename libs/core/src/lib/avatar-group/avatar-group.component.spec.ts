@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { AvatarGroupComponent, AvatarGroupModule, AvatarGroupType } from '@fundamental-ngx/core/avatar-group';
@@ -40,9 +40,13 @@ const NUMBER_OF_ITEMS = 20;
     `
 })
 class AvatarGroupTestComponent {
-    @ViewChild('avatarGroup') avatarGroup: AvatarGroupComponent;
+    @ViewChild('avatarGroup')
+    avatarGroup: AvatarGroupComponent;
+
     items = Array.from(Array(NUMBER_OF_ITEMS).keys());
+
     type: AvatarGroupType = 'group';
+
     size: Size = 's';
 }
 describe('AvatarGroupComponent', () => {
@@ -54,8 +58,6 @@ describe('AvatarGroupComponent', () => {
             declarations: [AvatarGroupTestComponent],
             imports: [AvatarGroupModule],
             schemas: [NO_ERRORS_SCHEMA]
-        }).overrideComponent(AvatarGroupComponent, {
-            set: { changeDetection: ChangeDetectionStrategy.Default }
         }).compileComponents();
     }));
 

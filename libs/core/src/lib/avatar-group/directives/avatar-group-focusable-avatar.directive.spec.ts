@@ -8,7 +8,7 @@ import { AvatarGroupModule } from '@fundamental-ngx/core/avatar-group';
     template: `<fd-avatar #directiveElement fd-avatar-group-focusable-avatar></fd-avatar>`
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: false })
+    @ViewChild('directiveElement', { read: ElementRef })
     ref: ElementRef;
 }
 

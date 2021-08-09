@@ -68,7 +68,7 @@ describe('InputGroup component', () => {
 
     it('Should add class to child input', () => {
         const inputElements = fixture.debugElement.queryAll(By.css('input:not([type="button"])'));
-        expect(inputElements[0].classes['fd-input-group__input']).toBeTrue();
+        expect(inputElements[0].nativeElement.className.includes('fd-input-group__input')).toBeTrue();
     });
 
     it('Should add class when disabled', () => {
@@ -174,7 +174,7 @@ describe('Input group withing platform form', () => {
         const formControl = host.form.get('qty');
         const inputGroupElement = fixture.debugElement.query(By.css('.fd-input-group'));
 
-        expect(inputGroupElement.classes['is-error']).not.toBeTrue();
+        expect(inputGroupElement.nativeElement.className.includes('is-error')).not.toBeTrue();
 
         formControl.markAsTouched();
         await wait(fixture);
@@ -182,7 +182,7 @@ describe('Input group withing platform form', () => {
         await wait(fixture);
 
         expect(formControl.value).toBe(null);
-        expect(inputGroupElement.classes['is-error']).toBeTrue();
+        expect(inputGroupElement.nativeElement.className.includes('is-error')).toBeTrue();
     });
 
     it('should mark form field as touched when gets focused', async () => {

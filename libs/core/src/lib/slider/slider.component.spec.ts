@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, QueryList, ViewChildren } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, QueryList, ViewChildren } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
@@ -7,7 +7,6 @@ import { SliderComponent, SliderModule } from '@fundamental-ngx/core/slider';
 import { whenStable } from '@fundamental-ngx/core/tests';
 
 @Component({
-    selector: 'fd-test-slider',
     template: `
         <fd-slider
             class="example-1"
@@ -18,8 +17,8 @@ import { whenStable } from '@fundamental-ngx/core/tests';
             [showTicks]="true"
             [showTicksLabels]="true"
             tooltipMode="readonly"
-        >
-        </fd-slider>
+        ></fd-slider>
+
         <fd-slider
             class="example-2"
             [(ngModel)]="value2"
@@ -31,6 +30,7 @@ import { whenStable } from '@fundamental-ngx/core/tests';
             [tickmarksBetweenLabels]="2"
             tooltipMode="editable"
         ></fd-slider>
+
         <fd-slider
             class="example-3"
             [(ngModel)]="value3"
@@ -38,11 +38,25 @@ import { whenStable } from '@fundamental-ngx/core/tests';
             [showTicksLabels]="true"
             [customValues]="customValues"
         ></fd-slider>
-        <fd-slider class="example-4" [(ngModel)]="value4" mode="range"></fd-slider>
-        <fd-slider class="example-5" [(ngModel)]="value5" [disabled]="true"> </fd-slider>
-        <fd-slider class="example-6" [(ngModel)]="value6" [cozy]="true"> </fd-slider>
-    `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+
+        <fd-slider
+            class="example-4"
+            [(ngModel)]="value4"
+            mode="range"
+        ></fd-slider>
+
+        <fd-slider
+            class="example-5"
+            [(ngModel)]="value5"
+            [disabled]="true"
+        ></fd-slider>
+
+        <fd-slider
+            class="example-6"
+            [(ngModel)]="value6"
+            [cozy]="true"
+        ></fd-slider>
+    `
 })
 class TestSliderComponent {
     @ViewChildren(SliderComponent)
@@ -75,12 +89,12 @@ describe('SliderComponent', () => {
     let sliders: SliderComponent[];
     let bodyClientWidth = 0;
 
-    beforeEach(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestSliderComponent],
             imports: [SliderModule, FormsModule]
         }).compileComponents();
-    });
+    }));
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(TestSliderComponent);
@@ -104,7 +118,7 @@ describe('SliderComponent', () => {
     it('handle should be on the center of slider', () => {
         const handle = fixture.debugElement.query(By.css('.example-1 .fd-slider__handle'));
 
-        expect(handle.styles.left).toEqual('50%');
+        expect(handle.nativeElement.style.left).toEqual('50%');
     });
 
     it('should emit value: "-0.8"', () => {
@@ -115,8 +129,6 @@ describe('SliderComponent', () => {
 
         const mousemove = new MouseEvent('mousemove', { clientX: getPixelsByPercentage(bodyClientWidth, 10) });
         fixture.nativeElement.ownerDocument.dispatchEvent(mousemove);
-
-        fixture.detectChanges();
 
         expect(component.value1).toEqual(-0.8);
     });
@@ -130,8 +142,6 @@ describe('SliderComponent', () => {
         const mousemove = new MouseEvent('mousemove', { clientX: -50 });
         fixture.nativeElement.ownerDocument.dispatchEvent(mousemove);
 
-        fixture.detectChanges();
-
         expect(component.value1).toEqual(-1);
     });
 
@@ -143,8 +153,6 @@ describe('SliderComponent', () => {
 
         const mousemove = new MouseEvent('mousemove', { clientX: 1000 });
         fixture.nativeElement.ownerDocument.dispatchEvent(mousemove);
-
-        fixture.detectChanges();
 
         expect(component.value1).toEqual(1);
     });
@@ -165,7 +173,7 @@ describe('SliderComponent', () => {
         expect(labels.length).toEqual(6);
     });
 
-    it('should display custome values labels', () => {
+    it('should display custom values labels', () => {
         const labels = fixture.debugElement.queryAll(By.css('.example-3 .fd-slider__label'));
 
         expect(labels.length).toEqual(component.customValues.length);
@@ -176,15 +184,13 @@ describe('SliderComponent', () => {
         const handles = fixture.debugElement.queryAll(By.css('.example-4 .fd-slider__handle'));
         const slider = sliders[3];
 
-        await whenStable(fixture);
-
         expect(slider._isRange).toEqual(true);
         expect(handles.length).toEqual(2);
         expect(slider.value[0]).toEqual(component.value4[0]);
         expect(slider.value[1]).toEqual(component.value4[1]);
     });
 
-    it('range slider second handle should have the ability to be less than the first handle', async () => {
+    it('range slider second handle should have the ability to be less than the first handle', () => {
         const slider = sliders[3];
         const event = { target: slider.rangeHandle2.nativeElement } as any;
         const valueOfFirstHandleBeforeMoving = slider.value[0];
@@ -193,8 +199,6 @@ describe('SliderComponent', () => {
 
         const mousemove = new MouseEvent('mousemove', { clientX: getPixelsByPercentage(bodyClientWidth, 11) });
         fixture.nativeElement.ownerDocument.dispatchEvent(mousemove);
-
-        await whenStable(fixture);
 
         expect(slider.value[1]).toEqual(valueOfFirstHandleBeforeMoving);
     });

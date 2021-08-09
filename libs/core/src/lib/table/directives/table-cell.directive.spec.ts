@@ -45,7 +45,7 @@ describe('TableCellDirective', () => {
     });
 
     it('should assign classes', () => {
-        expect(component.cell.elementRef.nativeElement.classList.length).toBe(1);
+        expect(component.cell.elementRef.nativeElement.classList.length).toBe(2);
 
         component.cell.activable = true;
         component.cell.hoverable = true;
@@ -56,6 +56,6 @@ describe('TableCellDirective', () => {
 
         fixture.detectChanges();
 
-        expect(component.cell.elementRef.nativeElement.classList.length).toBe(7);
+        expect(component.cell.elementRef.nativeElement.classList.length).toBe(8);
     });
 });

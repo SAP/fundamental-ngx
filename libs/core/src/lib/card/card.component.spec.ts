@@ -69,7 +69,7 @@ describe('CardComponent', () => {
 
     it('should add card className to host', () => {
         const cardDebugEl = fixture.debugElement.query(By.directive(CardComponent));
-        expect(cardDebugEl.classes[CLASS_NAME.card]).toBeTrue();
+        expect(cardDebugEl.nativeElement.className.includes(CLASS_NAME.card)).toBeTrue();
     });
 
     describe('badge option', () => {
@@ -129,7 +129,7 @@ describe('CardComponent', () => {
 
             const cardDebugEl = fixture.debugElement.query(By.directive(CardComponent));
 
-            expect(cardDebugEl.classes[CLASS_NAME.cardCompact]).toBeTrue();
+            expect(cardDebugEl.nativeElement.className.includes(CLASS_NAME.cardCompact)).toBeTrue();
         });
     });
 
@@ -143,13 +143,13 @@ describe('CardComponent', () => {
 
             const prevCardType = card.cardType;
             const prevCardTypeModifier = getCardModifierClassNameByCardType(prevCardType);
-            expect(cardDebugEl.classes[prevCardTypeModifier]).toBeTrue();
+            expect(cardDebugEl.nativeElement.className.includes(prevCardTypeModifier)).toBeTrue();
 
             host.cardType = 'analytical';
             const analyticalModifier = getCardModifierClassNameByCardType('analytical');
             fixture.detectChanges();
-            expect(cardDebugEl.classes[analyticalModifier]).toBeTrue();
-            expect(cardDebugEl.classes[prevCardTypeModifier]).not.toBeTrue();
+            expect(cardDebugEl.nativeElement.className.includes(analyticalModifier)).toBeTrue();
+            expect(cardDebugEl.nativeElement.className.includes(prevCardTypeModifier)).not.toBeTrue();
         });
     });
 });

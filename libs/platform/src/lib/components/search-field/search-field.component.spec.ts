@@ -1,20 +1,14 @@
-import { ComponentFixture, TestBed, inject, fakeAsync, tick, waitForAsync } from '@angular/core/testing';
-import {
-    SearchFieldComponent,
-    SearchInput,
-    SuggestionItem,
-    ValueLabelItem,
-    SuggestionMatchesPipe
-} from './search-field.component';
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { createKeyboardEvent } from '../../testing/event-objects';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Observable, of } from 'rxjs';
-import { ENTER, DOWN_ARROW } from '@angular/cdk/keycodes';
-import { PlatformSearchFieldModule } from './search-field.module';
 import { RtlService } from '@fundamental-ngx/core';
+import { Observable, of } from 'rxjs';
 import { DataProvider, SearchFieldDataSource } from '../../domain/public_api';
+import { createKeyboardEvent } from '../../testing/event-objects';
+import { SearchFieldComponent, SearchInput, SuggestionItem, ValueLabelItem } from './search-field.component';
+import { PlatformSearchFieldModule } from './search-field.module';
 
 const CATEGORIES: ValueLabelItem[] = [
     { value: 'Fruits', label: 'Fruits' },
@@ -53,8 +47,7 @@ class SearchFieldDataProvider extends DataProvider<string> {
 }
 
 function getDropdownItems(menu: Element): NodeList {
-    const items = menu.querySelectorAll('.fd-menu__item');
-    return items;
+    return menu.querySelectorAll('.fd-menu__item');
 }
 
 function mouseClickOnElement(el: Element): void {
@@ -112,7 +105,7 @@ class TestComponent {
         this.submitValue = $event;
     }
 
-    onCancelSearch($event): void {
+    onCancelSearch(): void {
         this.isSearchCanceled = true;
     }
 }
@@ -570,7 +563,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         const wrapper = fixture.debugElement.query(By.css('.fdp-search-field'));
-        expect(wrapper.classes['is-loading']).toBeTruthy();
+        expect(wrapper.nativeElement.className.includes('is-loading')).toBeTruthy();
     });
 
     it('should emit a "cancelSearch" event when the user clicks the cancel button while in "loading" state', () => {
@@ -790,7 +783,7 @@ class DataSourceTestComponent implements OnInit {
         this.submitValue = $event;
     }
 
-    onCancelSearch($event): void {
+    onCancelSearch(): void {
         this.isSearchCanceled = true;
     }
 }

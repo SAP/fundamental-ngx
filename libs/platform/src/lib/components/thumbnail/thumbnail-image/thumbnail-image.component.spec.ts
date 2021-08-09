@@ -72,8 +72,8 @@ describe('DefaultThumbnailImageComponent', () => {
     it('should highlight the first thumbnail by default', () => {
         const thumbnails = fixture.debugElement.queryAll(By.css('.fdp-thumbnail-image'));
 
-        expect(thumbnails[0].classes['fdp-thumbnail-image--selected']).toBeTruthy();
-        expect(thumbnails[1].classes['fdp-thumbnail-image--selected']).toBeFalsy();
+        expect(thumbnails[0].nativeElement.className.includes('fdp-thumbnail-image--selected')).toBeTruthy();
+        expect(thumbnails[1].nativeElement.className.includes('fdp-thumbnail-image--selected')).toBeFalsy();
     });
 });
 
@@ -198,8 +198,8 @@ describe('MoreImagesThumbnailImageTestComponent', () => {
 
     it('should display overlay after list crosses the max limit', () => {
         const thumbnails = fixture.debugElement.queryAll(By.css('.fdp-thumbnail-image'));
-        expect(thumbnails[4].classes['fdp-thumbnail-image--overlay']).toBeTruthy();
-        expect(thumbnails[1].classes['fdp-thumbnail-image--overlay']).toBeFalsy();
+        expect(thumbnails[4].nativeElement.className.includes('fdp-thumbnail-image--overlay')).toBeTruthy();
+        expect(thumbnails[1].nativeElement.className.includes('fdp-thumbnail-image--overlay')).toBeFalsy();
     });
 
     it('should display overflow text after list crosses the max limit', () => {
