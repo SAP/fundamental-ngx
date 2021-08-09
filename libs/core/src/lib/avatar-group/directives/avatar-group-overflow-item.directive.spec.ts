@@ -32,10 +32,7 @@ describe('AvatarGroupOverflowItemDirective', () => {
         expect(component).toBeTruthy();
     });
 
-    /** TODO: Fix after https://github.com/angular/angular/issues/43084 will be fixed.
-      * Description: Won't work if app runs View Engine
-      */
-    xit('should assign class', () => {
+    it('should assign class', () => {
         expect(component.ref.nativeElement).toHaveClass('fd-avatar-group__item');
     });
 });
