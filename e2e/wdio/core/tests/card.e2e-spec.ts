@@ -56,7 +56,7 @@ describe('Card test suite:', function() {
 
     describe('Card loader examples:', function() {
         it('should check loading icon and attributes', () => {
-            expect(getAttributeByName(loaderCardAttr, 'aria-label')).toBe(loaderAttr);
+            expect(getAttributeByName(loaderCardAttr, 'title')).toBe(loaderAttr);
             expect(isElementDisplayed(loaderIcon)).toBe(true);
         });
     });

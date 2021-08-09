@@ -8,7 +8,7 @@ export const cardSubtitleText = 'Card Subtitle';
 export const badgeText = 'New';
 export const cardTypeAttr = 'cardtype';
 export const compactAttr = 'fd-card fd-card--list fd-card--compact';
-export const loaderAttr = 'Loading';
+export const loaderAttr = 'loading';
 export const cardListItemText = [
     'item 1',
     'item 2',
