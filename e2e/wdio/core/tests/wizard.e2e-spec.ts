@@ -69,15 +69,17 @@ describe('Wizard component test', function () {
         checkOpenClose(customizableExample);
         checkOpenClose(branchingExample);
         checkOpenClose(ngforExample);
-        checkOpenClose(dialogExample)
+        checkOpenClose(dialogExample);
     });
 
-    it('should check basic way through default example', () => {
+    fit('should check basic way through default example', () => {
         click(defaultExample + button);
         const stepsLength = getElementArrayLength(wizard + step);
 
         for (let i = 0; i < stepsLength; i++) {
-            i !== stepsLength - 1 ? expect(getElementClass(wizard + step, i + 1)).toContain('step--upcoming') : '';
+            if (i !== stepsLength - 1) {
+                expect(getElementClass(wizard + step, i + 1)).toContain('step--upcoming');
+            }
 
             if (i !== 1) {
                 expect(getElementClass(wizard + step, i)).toContain('step--current');
@@ -89,7 +91,9 @@ describe('Wizard component test', function () {
             }
             click(wizard + nextStep, i)
             pause(1000)
-            i !== 0 ? expect(getElementClass(wizard + step, i - 1)).toContain('step--completed') : '';
+            if (i !== 0) {
+                expect(getElementClass(wizard + step, i - 1)).toContain('step--completed');
+            }
         }
         expect(getText(savedName)).toEqual(fullName);
         expect(getText(savedFirstAdress)).toEqual(firstAdress);
@@ -137,7 +141,7 @@ describe('Wizard component test', function () {
         expect(isElementClickable(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toBe(true, 'button is not clickable');
 
         for (let i = 0; i < firstAdressLength; i++) {
-            sendKeys('Backspace')
+            sendKeys('Backspace');
         }
         expect(getElementClass(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toContain('is-disabled');
         expect(isElementClickable(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toBe(false, 'button is clickable');
@@ -183,22 +187,38 @@ describe('Wizard component test', function () {
         expect(wizardPage.compareWithBaseline()).toBeLessThan(5);
     });
 
-    function checkReOpen(section: string, block: string) {
+    function checkReOpen(section: string, block: string): void {
         click(section + button);
-        section === defaultExample ? click(block + nextStep) : click(dialogWizard + buttonsBar + ':nth-child(1) ' + button);
+        if (section === defaultExample) {
+            click(block + nextStep);
+        }
+        if (section !== defaultExample) {
+            click(dialogWizard + buttonsBar + ':nth-child(1) ' + button);
+        }
         setValue(fullNameInput, fullName);
         setValue(firstAdressInput, firstAdress);
         setValue(secAdressInput, secAdress);
-        section === defaultExample ? click(block + exitButton) : click(dialogWizard + buttonsBar + ':nth-child(3) ' + button);
-        click(section + button);
-        section === defaultExample ? click(block + nextStep) : '';
+        if (section === defaultExample) {
+            click(block + exitButton);
+            click(section + button);
+            click(block + nextStep);
+        }
+        if (section !== defaultExample) {
+            click(dialogWizard + buttonsBar + ':nth-child(3) ' + button);
+            click(section + button);
+        }
         expect(getValue(fullNameInput)).toEqual(fullName);
         expect(getValue(firstAdressInput)).toEqual(firstAdress);
         expect(getValue(secAdressInput)).toEqual(secAdress);
-        section === defaultExample ? click(block + exitButton) : click(dialogWizard + buttonsBar + ':nth-child(3) ' + button);
+        if (section === defaultExample) {
+            click(block + exitButton);
+        }
+        if (section !== defaultExample) {
+            click(dialogWizard + buttonsBar + ':nth-child(3) ' + button);
+        }
     }
 
-    function checkOpenClose(section: string) {
+    function checkOpenClose(section: string): void {
         click(section + button);
         if (section !== dialogExample) {
             expect(isElementDisplayed(section + wizard)).toBe(true, `wizard in ${section} did not open`);
@@ -212,21 +232,27 @@ describe('Wizard component test', function () {
             click(dialogWizard + buttonsBar + ':nth-child(2) ' + button);
             expect(doesItExist(dialogWizard)).toBe(false, 'dialog wizard did not close, still exist in DOM');
         }
-    } 
+    }
 
-    function checkStatusStepScroll(section: string, method: 'click' | 'scroll') {
+    function checkStatusStepScroll(section: string, method: 'click' | 'scroll'): void {
         click(section + button);
         const stepsLength = getElementArrayLength(wizard + step);
         for (let i = 0; i < stepsLength; i++) {
             click(wizard + step, i);
             if (i === stepsLength - 1) {
-                method === 'scroll' ? scrollIntoView(contentSection) : '';
-                method === 'click' ? click(wizard + stepContainer) : '';
+                switch (method) {
+                    case 'scroll':
+                        scrollIntoView(contentSection);
+                        break;
+                    case 'click':
+                        click(wizard + stepContainer);
+                        break;
+                }
                 expect(getElementClass(wizard + step, 0)).toContain('step--current');
                 expect(getElementClass(wizard + step, 1)).toContain('step--upcoming');
             }
         }
         click(exitButton);
     }
-    
+
 });
