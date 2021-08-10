@@ -23,6 +23,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DOWN_ARROW, TAB, SPACE, ENTER, ESCAPE } from '@angular/cdk/keycodes';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { Subscription } from 'rxjs';
+import '@angular/localize/init';
 
 import {
     applyCssClass,
@@ -45,7 +46,7 @@ import { TokenizerComponent } from '@fundamental-ngx/core/token';
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 
-let inputRandomId = 0;
+let multiInputUniqueId = 0;
 
 /**
  * Input field with multiple selection enabled. Should be used when a user can select between a
@@ -111,7 +112,7 @@ export class MultiInputComponent
 
     /** Id attribute for input element inside MultiInput component */
     @Input()
-    inputId = `fd-input-id-${inputRandomId++}`;
+    inputId = `fd-input-${multiInputUniqueId++}`;
 
     /** Whether the search term should be highlighted in results. */
     @Input()
@@ -223,18 +224,18 @@ export class MultiInputComponent
      * Message announced by screen reader, when search suggestions opens.
      */
     @Input()
-    searchSuggestionMessage = 'suggestion found';
+    searchSuggestionMessage = $localize`:@@coreMultiInputSuggestion: suggestion found`;
 
     /**
      * Second part of message for search suggestion.
      * direction for navigating the suggestion. This is not necessry in case of 0 suggestion.
      */
     @Input()
-    searchSuggestionNavigateMessage = 'use up and down arrows to navigate';
+    searchSuggestionNavigateMessage = $localize`:@@coreMultiInputSuggestionNav: use up and down arrows to navigate`;
 
     /** Message for allowing token from values available */
     @Input()
-    tokenSelectMessage = 'select value from the list';
+    inputSelectMessage = $localize`:@@coreMultiInputSelection: select value from the list`;
 
     /** Event emitted when the search term changes. Use *$event* to access the new term. */
     @Output()
@@ -281,15 +282,16 @@ export class MultiInputComponent
     tokenizer: TokenizerComponent;
 
     @ViewChild('inputfield', { read: ElementRef })
-    inputfield: ElementRef;
+    inputField: ElementRef;
 
     /** @hidden */
     displayedValues: any[] = [];
 
-    currentSearchSuggestionAnnoucementMessage = '';
-
     /**  @hidden */
     _dir: string;
+
+    /** @hidden */
+    private _currentSearchSuggestionAnnoucementMessage = '';
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -363,7 +365,7 @@ export class MultiInputComponent
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
-    keyDown(keyboardEvent: KeyboardEvent): void {
+    _keyDown(keyboardEvent: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(keyboardEvent, ESCAPE)) {
             keyboardEvent.preventDefault();
 
@@ -462,7 +464,7 @@ export class MultiInputComponent
         this._changeDetRef.detectChanges();
 
         // focus on input when mobile dialog opens
-        this.inputfield.nativeElement.focus();
+        this.inputField.nativeElement.focus();
     }
 
     /** Method that selects all possible options. */
@@ -604,7 +606,7 @@ export class MultiInputComponent
     private _updateSearchAnnoucementText(): void {
         if (this.searchTerm) {
             // create search suggestion message with count.
-            this.currentSearchSuggestionAnnoucementMessage =
+            this._currentSearchSuggestionAnnoucementMessage =
                 this.displayedValues?.length +
                 ' ' +
                 this.searchSuggestionMessage +
@@ -612,11 +614,11 @@ export class MultiInputComponent
 
             // message for selecting value from value help
             if (!this.allowNewTokens) {
-                this.currentSearchSuggestionAnnoucementMessage += !this.allowNewTokens
-                    ? ', ' + this.tokenSelectMessage
+                this._currentSearchSuggestionAnnoucementMessage += !this.allowNewTokens
+                    ? ', ' + this.inputSelectMessage
                     : '';
             }
-            this._liveAnnouncer.announce(this.currentSearchSuggestionAnnoucementMessage, 'polite');
+            this._liveAnnouncer.announce(this._currentSearchSuggestionAnnoucementMessage, 'polite');
         }
     }
 

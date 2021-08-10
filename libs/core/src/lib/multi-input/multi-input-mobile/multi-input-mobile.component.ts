@@ -79,7 +79,7 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
-    keydownHandler(event: KeyboardEvent): void {
+    _keydownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [ESCAPE])) {
             this.handleDismiss();
         }
