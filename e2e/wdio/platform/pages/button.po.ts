@@ -2,26 +2,15 @@ import { BaseComponentPo } from './base-component.po';
 import { waitForPresent } from '../../driver/wdio';
 
 export class ButtonPo extends BaseComponentPo {
-    static checkRtlSwitch() {
-        throw new Error('Method not implemented.');
-    }
-    static compareWithBaseline(): any {
-        throw new Error('Method not implemented.');
-    }
-    static saveExampleBaselineScreenshot() {
-        throw new Error('Method not implemented.');
-    }
     private url = '/menu-button';
-
+    root = '#page-content';
     typeButtons = 'fdp-button-types-example button';
     sizeButtons = 'fdp-button-sizes-example button';
     iconButtons = 'fdp-button-icons-example button';
     stateButton = 'fdp-button-state-example button';
     disableStateButtons = 'fdp-button-state-example button.is-disabled';
     truncatedButton = 'fdp-button-truncate-example button';
-    
-    root = '#page-content';
-    
+
     open(): void {
         super.open(this.url);
         waitForPresent(this.title);

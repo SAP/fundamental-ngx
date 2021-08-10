@@ -58,13 +58,13 @@ describe('Button test suite:', function() {
     describe('Check visual regression basic', function() {
 
         it('should check examples visual regression', () => {
-            ButtonPo.saveExampleBaselineScreenshot();
-            expect(ButtonPo.compareWithBaseline()).toBeLessThan(5);
+            buttonPage.saveExampleBaselineScreenshot();
+            expect(buttonPage.compareWithBaseline()).toBeLessThan(5);
         });
 
         describe('Check orientation', function() {
             it('Verify RTL and LTR orientation', () => {
-                ButtonPo.checkRtlSwitch();
+                buttonPage.checkRtlSwitch();
             });
         });
     });
