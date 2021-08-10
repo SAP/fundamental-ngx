@@ -4,36 +4,98 @@
             <ng-container [ngSwitch]="control.type">
                 <ng-container *ngSwitchCase="'string'">
                     <ng-container *ngIf="control.enum; else noEnum">
-                        <div fd-form-item class="form-group">
-                            <label fd-form-label [attr.for]="'playground' + control.key">{{ control.key }}</label>
-                            <select fd-form-control class="form-control" [attr.id]="'playground' + control.key" [formControl]="control.control">
-                                <option *ngFor="let value of control.enum" [value]="value">{{ value }}</option>
+                        <div
+                            fd-form-item
+                            class="form-group"
+                        >
+                            <label
+                                fd-form-label
+                                [attr.for]="'playground' + control.key"
+                            >{{ control.key }}</label>
+
+                            <select
+                                fd-form-control
+                                class="form-control"
+                                [attr.id]="'playground' + control.key"
+                                [formControl]="control.control"
+                            >
+                                <option
+                                    *ngFor="let value of control.enum; let i = index; let c = count;"
+                                    [value]="value"
+                                    [attr.aria-label]="value + ', option ' + (i + 1) + ' of ' + c"
+                                    i18n-aria-label="@@Docs.SchemaGroup.OptionLabel"
+                                >{{ value }}</option>
                             </select>
                         </div>
                     </ng-container>
+
                     <ng-template #noEnum>
-                        <div fd-form-item class="form-group">
-                            <label fd-form-label [attr.for]="'playground' + control.key">{{ control.key }}</label>
-                            <input fd-form-control type="text" class="form-control" [attr.id]="'playground' + control.key" [formControl]="control.control" />
+                        <div
+                            fd-form-item
+                            class="form-group"
+                        >
+                            <label
+                                fd-form-label
+                                [attr.for]="'playground' + control.key"
+                            >{{ control.key }}</label>
+
+                            <input
+                                fd-form-control
+                                type="text"
+                                class="form-control"
+                                [attr.id]="'playground' + control.key"
+                                [formControl]="control.control"
+                            />
                         </div>
                     </ng-template>
                 </ng-container>
                 <ng-container *ngSwitchCase="'integer'">
                     <ng-container *ngIf="control.enum; else noEnum">
-                        <div fd-form-item class="form-group">
-                            <label fd-form-label [attr.for]="'playground' + control.key">{{ control.key }}</label>
-                            <select class="form-control" [attr.id]="'playground' + control.key" [formControl]="control.control">
-                                <option *ngFor="let value of control.enum" [value]="value">{{ value }}</option>
+                        <div
+                            fd-form-item
+                            class="form-group"
+                        >
+                            <label
+                                fd-form-label
+                                [attr.for]="'playground' + control.key"
+                            >{{ control.key }}</label>
+
+                            <select
+                                class="form-control"
+                                [attr.id]="'playground' + control.key"
+                                [formControl]="control.control"
+                            >
+                                <option
+                                    *ngFor="let value of control.enum; let i = index; let c = count;"
+                                    [value]="value"
+                                    [attr.aria-label]="value + ', option ' + (i + 1) + ' of ' + c"
+                                    i18n-aria-label="@@Docs.SchemaGroup.OptionLabel"
+                                >{{ value }}</option>
                             </select>
                         </div>
                     </ng-container>
+
                     <ng-template #noEnum>
-                        <div fd-form-item class="form-group">
-                            <label fd-form-label [attr.for]="'playground' + control.key">{{ control.key }}</label>
-                            <input fd-form-control type="number" class="form-control" [attr.id]="'playground' + control.key" [formControl]="control.control" />
+                        <div
+                            fd-form-item
+                            class="form-group"
+                        >
+                            <label
+                                fd-form-label
+                                [attr.for]="'playground' + control.key"
+                            >{{ control.key }}</label>
+
+                            <input
+                                fd-form-control
+                                type="number"
+                                class="form-control"
+                                [attr.id]="'playground' + control.key"
+                                [formControl]="control.control"
+                            />
                         </div>
                     </ng-template>
                 </ng-container>
+
                 <ng-container *ngSwitchCase="'boolean'">
                     <div fd-form-item>
                         <fd-checkbox
@@ -44,6 +106,7 @@
                         </fd-checkbox>
                     </div>
                 </ng-container>
+
                 <ng-container *ngSwitchCase="'enum'">
                     <div fd-form-item>
                         <fd-checkbox
@@ -56,9 +119,17 @@
                 </ng-container>
             </ng-container>
         </ng-container>
+
         <ng-template #formGroup>
-            <fieldset fd-fieldset class="schema--inner-group">
-                <legend fd-form-legend class="schema--sub-header">{{ control.key }}</legend>
+            <fieldset
+                fd-fieldset
+                class="schema--inner-group"
+            >
+                <legend
+                    fd-form-legend
+                    class="schema--sub-header"
+                >{{ control.key }}</legend>
+
                 <schema-group
                     [schemaGroup]="control.control"
                     [properties]="properties[control.key].properties"
@@ -68,8 +139,15 @@
     </ng-container>
 
     <ng-container *ngIf="resettable">
-        <fieldset fd-fieldset class="schema--inner-group">
-            <button fd-button (click)="reset()">Reset</button>
+        <fieldset
+            fd-fieldset
+            class="schema--inner-group"
+        >
+            <button
+                fd-button
+                (click)="reset()"
+            >Reset
+            </button>
         </fieldset>
 
     </ng-container>
