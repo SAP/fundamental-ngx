@@ -213,7 +213,7 @@ describe('Table test suite', function() {
 
     describe('Check Table with Non-navigatable Row example', function() {
 
-        fit('should check alert message', () => {
+        it('should check alert message', () => {
             scrollIntoView(tableNavigatableRowExample);
             const rowLength = getElementArrayLength(tableNavigatableRowExample + clickableTableRow);
             for (let i = 0; i < rowLength - 1; i++) {
