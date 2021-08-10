@@ -6,7 +6,6 @@ import {
     Component,
     ComponentRef,
     ContentChild,
-    ContentChildren,
     ElementRef,
     HostListener,
     Injector,
