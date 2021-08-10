@@ -1,4 +1,5 @@
-import { ApprovalNode, ApprovalTeam, ApprovalUser } from '../interfaces';
+import { ApprovalGraphNode, ApprovalNode, ApprovalTeam, ApprovalUser } from '../interfaces';
+import { ApprovalFlowGraph } from '../approval-flow-graph';
 
 export function isNodeApproved(node: ApprovalNode): boolean {
     return node.status === 'approved';
@@ -26,4 +27,38 @@ export function trackByFn(index: number, item: { id: string }): number | string 
     }
 
     return index;
+}
+
+export function getGraphNodes(graph: ApprovalFlowGraph): ApprovalGraphNode[] {
+    return graph.columns.reduce((acc, column) => acc.concat(column.nodes), []);
+}
+
+export function getParentNodes(node: ApprovalNode, nodes: ApprovalNode[]): ApprovalNode[] {
+    return nodes.filter(_node => isNodeTargetsIncludeId(_node, node.id));
+}
+
+export function getBlankApprovalGraphNode(): ApprovalGraphNode {
+    return {
+        id: `blankId${(Math.random() * 1000).toFixed()}`,
+        name: '',
+        targets: [],
+        approvers: [],
+        status: 'not started',
+        blank: true
+    };
+}
+
+export function getSpaceApprovalGraphNode(): ApprovalGraphNode {
+    return {
+        id: `spaceId${(Math.random() * 1000).toFixed()}`,
+        name: '',
+        targets: [],
+        approvers: [],
+        status: 'not started',
+        space: true
+    }
+}
+
+export function isNodeTargetsIncludeId(node: ApprovalNode, id: string): boolean {
+    return node.targets.includes(id);
 }

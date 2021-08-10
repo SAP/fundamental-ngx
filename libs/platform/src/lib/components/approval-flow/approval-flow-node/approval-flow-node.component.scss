@@ -1,340 +1,254 @@
-$block: approval-flow-node;
+$block: fdp-approval-flow-node;
 
-$node-height: 94px;
-$node-height--edit-mode: 126px;
-$node-width: 278px;
+$node-height: 5.875rem;
+$node-height--edit-mode: 7.875rem;
+
+$node-width: 17.375rem;
 $node-margin-bottom: 1rem;
 
-$carousel-marker-height: 11px;
+$carousel-marker-height: 1rem;
+$carousel-marker-width: .25rem;
 $carousel-marker-top: $node-height / 2 - $carousel-marker-height / 2;
 $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-height / 2;
 
-:host {
-    box-sizing: border-box;
+$add-button-size: 1rem;
+
+$border-width: .125rem;
+$border-color: #d9d9d9;
+$border-color-variable: var(--sapGroup_TitleBorderColor, #d9d9d9);
+
+@mixin fd-rtl {
+    @at-root {
+        [dir='rtl'] &,
+        &[dir='rtl'] {
+            @content;
+        }
+    }
+}
+
+@mixin solidNodeLine($line-position) {
+    #{$line-position}: $border-width solid $border-color;
+    #{$line-position}: $border-width solid $border-color-variable;
+
+    border-image: none;
+}
+
+@mixin dashedNodeLine($line-position) {
+    #{$line-position}: $border-width dashed $border-color;
+    #{$line-position}: $border-width dashed $border-color-variable;
+
+    border-image: url("data:image/svg+xml,%3Csvg width='8' height='8' viewBox='0 0 8 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='2' height='2' fill='%23C4C4C4'/%3E%3Crect x='6' y='6' width='2' height='2' fill='%23C4C4C4'/%3E%3Crect x='3' y='6' width='2' height='2' fill='%23C4C4C4'/%3E%3Crect y='6' width='2' height='2' fill='%23C4C4C4'/%3E%3Crect y='3' width='2' height='2' fill='%23C4C4C4'/%3E%3Crect x='6' y='3' width='2' height='2' fill='%23C4C4C4'/%3E%3Crect x='6' width='2' height='2' fill='%23C4C4C4'/%3E%3Crect x='3' width='2' height='2' fill='%23C4C4C4'/%3E%3C/svg%3E%0A") 2 round;
+}
+
+.#{$block} {
     display: block;
+    box-sizing: border-box;
     position: relative;
-    margin-bottom: $node-margin-bottom;
     width: $node-width;
     height: $node-height;
+    margin-bottom: $node-margin-bottom;
 
     &.#{$block}--edit-mode {
         height: $node-height--edit-mode;
 
         .#{$block}__vertical-line-before:before,
         .#{$block}__vertical-line-after:after {
-            top: calc(-1 * (#{$node-height--edit-mode} / 2 + #{$node-margin-bottom}));
+            top: calc((#{$node-height--edit-mode} / 2 + #{$node-margin-bottom}) * -1);
             height: calc(#{$node-height--edit-mode} + #{$node-margin-bottom});
         }
     }
 
-    .#{$block}__vertical-line-before:before,
-    .#{$block}__vertical-line-after:after {
+    .#{$block}__vertical-line-before::before,
+    .#{$block}__vertical-line-after::after {
         content: '';
+        display: block;
         position: absolute;
-        top: calc(-1 * (#{$node-height} / 2 + #{$node-margin-bottom}));
+        top: calc((#{$node-height} / 2 + #{$node-margin-bottom}) * -1);
         height: calc(#{$node-height} + #{$node-margin-bottom});
     }
 
     .#{$block}__vertical-line-before {
-        &:before {
-            border-right: 2px dashed #89919A;
-            border-right: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
-            left: calc(-2rem - 1px);
+        &::before {
+            left: calc(-2rem - #{$border-width} / 2);
+
+            @include dashedNodeLine('border-right');
         }
 
-        &-solid:before {
-            border-right: 1px solid #89919A;
-            border-right: 1px solid var(--sapField_ReadOnly_BorderColor, #89919A);
+        &-solid::before {
+            @include solidNodeLine('border-right');
         }
     }
 
     .#{$block}__vertical-line-after {
-        &:after {
-            border-right: 2px dashed #89919A;
-            border-right: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
-            right: calc(-2rem - 1px);
+        &::after {
+            right: calc(-2rem - #{$border-width} / 2);
+
+            @include dashedNodeLine('border-right');
         }
 
-        &-solid:after {
-            border-right: 1px solid #89919A;
-            border-right: 1px solid var(--sapField_ReadOnly_BorderColor, #89919A);
+        &-solid::after {
+            @include solidNodeLine('border-right');
         }
     }
 
-    &[dir='rtl'] {
+    @include fd-rtl() {
         .#{$block}__vertical-line-before {
-            &:before {
+            &::before {
                 left: auto;
-                right: calc(-2rem - 1px);
+                right: calc(-2rem - #{$border-width} / 2);
             }
         }
 
         .#{$block}__vertical-line-after {
-            &:after {
+            &::after {
                 right: auto;
-                left: calc(-2rem - 1px);
+                left: calc(-2rem - #{$border-width} / 2);
             }
         }
     }
-}
 
-:host:not(.#{$block}--space) {
-    background: #fff;
-    background: var(--sapBaseColor, #fff);
-    border-radius: 4px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, .1), 0 2px 8px rgba(0, 0, 0, .1);
-    cursor: pointer;
-
-    &.#{$block}--blank {
-        background: transparent;
-        box-shadow: none;
-        pointer-events: none;
-        cursor: default;
-
-        &:before {
-            content: '';
-            width: calc(100% + 4rem);
-            height: 0;
-            display: block;
-            position: absolute;
-            left: -2rem;
-            border-top: 2px dashed #89919A;
-            border-top: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
-            top: calc(50% - 1px);
-        }
-
-        &.#{$block}--first-final:before {
-            width: calc(100% + 2rem);
-        }
-
-        &:not(.#{$block}--last-blank) .#{$block}__add--after-all + .#{$block}__drop-zone {
-            width: 100%;
-        }
-    }
-
-    &.#{$block}--line-before:before,
-    &.#{$block}--line-after:after {
-        content: '';
-        width: 2rem;
-        height: 0;
-        display: block;
+    .#{$block}__add {
         position: absolute;
-        border-top: 2px dashed #89919A;
-        border-top: 2px dashed var(--sapField_ReadOnly_BorderColor, #89919A);
-        top: calc(50% - 1px);
+        z-index: 10;
+        margin: calc(#{$node-height--edit-mode} / 2 - #{$add-button-size} / 2 - 1px) auto auto;
+        top: 0;
         bottom: 0;
-        pointer-events: none;
-    }
+        right: 0;
+        left: 0;
+        border-radius: 100%;
+        min-width: $add-button-size;
+        max-width: $add-button-size;
+        min-height: $add-button-size;
+        max-height: $add-button-size;
 
-    &.#{$block}--line-before:before {
-        left: -2rem;
-    }
-
-    &.#{$block}--line-after:after {
-        right: -2rem;
-    }
-
-    &.#{$block}--approved {
-        &.#{$block}--line-after:after,
-        &.#{$block}--blank:before {
-            border-top-style: solid;
-            border-top-width: 1px;
-        }
-    }
-
-    &.#{$block}--parent-approved {
-        &.#{$block}--line-before:before {
-            border-top-style: solid;
-            border-top-width: 1px;
-            left: -2rem;
-        }
-    }
-
-    &.#{$block}--selected {
-        background: #E5F0FA;
-        background: var(--sapList_SelectionBackgroundColor, #E5F0FA);
-        box-shadow: 0 0 0 2px #0854A0;
-        box-shadow: 0 0 0 2px var(--sapContent_DragAndDropActiveColor, #0854A0);
-    }
-
-    &.#{$block}--edit-mode {
-        height: $node-height--edit-mode;
-
-        &.#{$block}--blank {
-            pointer-events: auto;
+        fd-icon {
+            line-height: 1rem;
+            font-size: .7rem;
+            font-weight: 900;
         }
 
-        .#{$block}__carousel-start-marker, .#{$block}__carousel-end-marker {
-            top: $carousel-marker-top--edit-mode;
-        }
-
-        .#{$block}__arrow {
-            display: none;
-        }
-    }
-
-    &.#{$block}--last-in-parallel,
-    &.#{$block}--parallel-start,
-    &.#{$block}--final {
-        .#{$block}__add--after {
-            right: -1.5rem;
-
-            & + .#{$block}__drop-zone {
-                right: -1.8rem;
-            }
-        }
-
-        &:not(.#{$block}--blank) .#{$block}__add--after-all {
-            right: -3.5rem;
-
-            & + .#{$block}__drop-zone {
-                right: -3.8rem;
-            }
-        }
-    }
-
-    &.#{$block}--first-in-parallel,
-    &.#{$block}--parallel-end,
-    &.#{$block}--root {
-        .#{$block}__add--before {
-            left: -1.5rem;
-
-            & + .#{$block}__drop-zone {
-                left: -1.8rem;
-            }
-
-            &-all {
-                left: -3.5rem;
-
-                & + .#{$block}__drop-zone {
-                    left: -3.8rem;
-                }
-            }
-        }
-    }
-
-    &.#{$block}--last-blank {
-        .#{$block}__add--after-all {
-            left: calc(#{$node-width} + 2.5rem);
-
-            & + .#{$block}__drop-zone {
-                left: calc(100% + 2rem);
-            }
-        }
-    }
-
-    &.#{$block}--next-blank {
-        .#{$block}__add--after {
-            right: calc(-4rem - #{$node-width} / 2);
-
-            & + .#{$block}__drop-zone {
-                left: calc(100% + 4rem);
-            }
-        }
-    }
-
-    &.#{$block}--first-root {
-        &.#{$block}--line-before:before {
-            width: 4rem;
-            left: -4rem;
-        }
-
-        .#{$block}__carousel-start-marker {
-            left: -4rem;
-        }
-    }
-
-
-    &.#{$block}--first-final {
-        &.#{$block}--line-after:after {
-            width: 4rem;
-            right: -4rem;
-        }
-
-        .#{$block}__carousel-end-marker {
-            right: -4rem;
-        }
-    }
-
-    &.cdk-drag-dragging {
-        &:before,
-        &:after,
-        .#{$block}__add,
-        .#{$block}__carousel-start-marker,
-        .#{$block}__carousel-end-marker,
-        .#{$block}__vertical-line-before,
-        .#{$block}__vertical-line-after {
-            visibility: hidden;
-        }
-    }
-
-    &[dir='rtl'] {
-        .#{$block}__avatar {
-            margin-right: 0;
-            margin-left: .5rem;
-        }
-
-        .#{$block}__arrow {
-            left: auto;
-            right: -8px;
-            border-width: 4px 8px 4px 0;
-            border-color: transparent #89919A transparent transparent;
-            border-color: transparent var(--sapField_ReadOnly_BorderColor, #89919A) transparent transparent;
-        }
-
-        .#{$block}__carousel-start-marker {
-            left: auto;
-            right: -2rem;
-        }
-
-        .#{$block}__carousel-end-marker {
-            right: auto;
-            left: -2rem;
-        }
-
-        &.#{$block}--line-before:before {
-            left: auto;
-            right: -2rem;
-        }
-
-        &.#{$block}--line-after:after {
-            right: auto;
-            left: -2rem;
-        }
-
-        .#{$block}__name.#{$block}__name--members-count {
-            direction: ltr;
-            text-align: right;
-        }
-
-        .#{$block}__edit-controls {
-            .#{$block}__menu-button {
-                left: .5rem;
-                right: auto;
-            }
-
-            fd-checkbox {
-                right: .3rem;
-                left: auto;
-            }
-        }
-
-        .#{$block}__add--before {
-            right: -2.5rem;
-            left: auto;
-
-            & + .#{$block}__drop-zone {
-                right: -2.8rem;
-            }
-        }
-
-        .#{$block}__add--after {
+        &.#{$block}__add--before {
             left: -2.5rem;
             right: auto;
 
             & + .#{$block}__drop-zone {
                 left: -2.8rem;
-                right: auto;
+            }
+        }
+
+        &.#{$block}__add--after {
+            right: -2.5rem;
+            left: auto;
+
+            & + .#{$block}__drop-zone {
+                right: -2.8rem;
+                left: auto;
+            }
+        }
+    }
+
+    .#{$block}__drop-zone {
+        border-radius: .25rem;
+        position: absolute;
+        height: 100%;
+        z-index: 1;
+
+        &.#{$block}__drop-zone--active {
+            background: #E5F0FA;
+            background: var(--sapList_SelectionBackgroundColor, #E5F0FA);
+            border: $border-width solid #0854A0;
+            border: $border-width solid var(--sapButton_IconColor, #0854A0);
+        }
+
+        &.#{$block}__drop-zone--blank {
+            width: 100%;
+            top: 0;
+        }
+
+        &.#{$block}__drop-zone--partial {
+            width: 10%;
+            left: 0;
+            top: 0;
+        }
+    }
+
+    &:not(.#{$block}--space) {
+        &.#{$block}--blank {
+            background: transparent;
+            box-shadow: none;
+            pointer-events: none;
+            cursor: default;
+
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                width: calc(100% + 4rem);
+                height: 0;
+                left: -2rem;
+                top: calc(50% - #{$border-width} / 2);
+
+                @include dashedNodeLine('border-top');
+            }
+
+            &.#{$block}--first-final:before {
+                width: calc(100% + 2rem);
+            }
+
+            &:not(.#{$block}--last-blank) .#{$block}__add--after-all + .#{$block}__drop-zone {
+                width: 100%;
+            }
+        }
+
+        &.#{$block}--line-before:before,
+        &.#{$block}--line-after:after {
+            content: '';
+            width: 2rem;
+            height: 0;
+            display: block;
+            position: absolute;
+            top: calc(50% - #{$border-width} / 2);
+            bottom: 0;
+            pointer-events: none;
+
+            @include dashedNodeLine('border-top');
+        }
+
+        &.#{$block}--line-before:before {
+            left: -2rem;
+        }
+
+        &.#{$block}--line-after:after {
+            right: -2rem;
+        }
+
+        &.#{$block}--approved {
+            &.#{$block}--line-after:after,
+            &.#{$block}--blank:before {
+                @include solidNodeLine('border-top');
+            }
+        }
+
+        &.#{$block}--parent-approved {
+            &.#{$block}--line-before:before {
+                left: -2rem;
+
+                @include solidNodeLine('border-top');
+            }
+        }
+
+        &.#{$block}--edit-mode {
+            &.#{$block}--blank {
+                pointer-events: auto;
+            }
+
+            .#{$block}__carousel-start-marker,
+            .#{$block}__carousel-end-marker {
+                top: $carousel-marker-top--edit-mode;
+            }
+
+            .#{$block}__arrow {
+                display: none;
             }
         }
 
@@ -342,18 +256,18 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
         &.#{$block}--parallel-start,
         &.#{$block}--final {
             .#{$block}__add--after {
-                left: -1.5rem;
+                right: -1.5rem;
 
                 & + .#{$block}__drop-zone {
-                    left: -1.8rem;
+                    right: -1.8rem;
                 }
             }
 
             &:not(.#{$block}--blank) .#{$block}__add--after-all {
-                left: -3.5rem;
+                right: -3.5rem;
 
                 & + .#{$block}__drop-zone {
-                    left: -3.8rem;
+                    right: -3.8rem;
                 }
             }
         }
@@ -362,17 +276,17 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
         &.#{$block}--parallel-end,
         &.#{$block}--root {
             .#{$block}__add--before {
-                right: -1.5rem;
+                left: -1.5rem;
 
                 & + .#{$block}__drop-zone {
-                    right: -1.8rem;
+                    left: -1.8rem;
                 }
 
                 &-all {
-                    right: -3.5rem;
+                    left: -3.5rem;
 
                     & + .#{$block}__drop-zone {
-                        right: -3.8rem;
+                        left: -3.8rem;
                     }
                 }
             }
@@ -380,192 +294,263 @@ $carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-
 
         &.#{$block}--last-blank {
             .#{$block}__add--after-all {
-                right: calc(#{$node-width} + 2.5rem);
+                left: calc(#{$node-width} + 2.5rem);
 
                 & + .#{$block}__drop-zone {
-                    right: calc(100% + 2rem);
+                    left: calc(100% + 2rem);
                 }
             }
         }
 
         &.#{$block}--next-blank {
             .#{$block}__add--after {
-                left: calc(-4rem - #{$node-width} / 2);
+                right: calc(-4rem - #{$node-width} / 2);
 
                 & + .#{$block}__drop-zone {
-                    right: calc(100% + 4rem);
+                    left: calc(100% + 4rem);
                 }
             }
         }
 
         &.#{$block}--first-root {
             &.#{$block}--line-before:before {
-                left: auto;
-                right: -4rem;
+                width: 4rem;
+                left: -4rem;
             }
 
             .#{$block}__carousel-start-marker {
-                left: auto;
-                right: -4rem;
+                left: -4rem;
             }
         }
 
         &.#{$block}--first-final {
             &.#{$block}--line-after:after {
-                right: auto;
-                left: -4rem;
+                width: 4rem;
+                right: -4rem;
+            }
+
+            .#{$block}__carousel-end-marker {
+                right: -4rem;
+            }
+        }
+
+        &.cdk-drag-dragging {
+            &:before,
+            &:after,
+            .#{$block}__add,
+            .#{$block}__carousel-start-marker,
+            .#{$block}__carousel-end-marker,
+            .#{$block}__vertical-line-before,
+            .#{$block}__vertical-line-after {
+                visibility: hidden;
+            }
+        }
+
+        .#{$block}__inner {
+            display: flex;
+        }
+
+        .#{$block}__avatar {
+            margin-right: 1rem;
+        }
+
+        .#{$block}__name {
+            font-size: 1rem;
+            line-height: 1.25rem;
+            margin-bottom: .1rem;
+            color: #32363a;
+            color: var(--sapTextColor, #32363a);
+        }
+
+        .#{$block}__description {
+            font-size: .875rem;
+            line-height: 1rem;
+            color: #6A6D70;
+            color: var(--sapContent_LabelColor, #6A6D70);
+            margin-bottom: .4rem;
+        }
+
+        .#{$block}__arrow {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: .375rem 0 .375rem .5rem;
+            border-color: transparent transparent transparent $border-color;
+            border-color: transparent transparent transparent $border-color-variable;
+            position: absolute;
+            left: -.5rem;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        .#{$block}__carousel-start-marker,
+        .#{$block}__carousel-end-marker {
+            z-index: 1;
+            background: $border-color;
+            background: $border-color-variable;
+            display: block;
+            position: absolute;
+            width: $carousel-marker-width;
+            height: $carousel-marker-height;
+            top: $carousel-marker-top;
+        }
+
+        .#{$block}__carousel-start-marker {
+            left: -2rem;
+        }
+
+        .#{$block}__carousel-end-marker {
+            right: -2rem;
+        }
+
+        @include fd-rtl() {
+            .#{$block}__avatar {
+                margin-right: 0;
+                margin-left: 1rem;
+            }
+
+            .#{$block}__arrow {
+                left: auto;
+                right: -.5rem;
+                border-width: .375rem .5rem .375rem 0;
+                border-color: transparent $border-color transparent transparent;
+                border-color: transparent $border-color-variable transparent transparent;
+            }
+
+            .#{$block}__carousel-start-marker {
+                left: auto;
+                right: -2rem;
             }
 
             .#{$block}__carousel-end-marker {
                 right: auto;
-                left: -4rem;
+                left: -2rem;
+            }
+
+            &.#{$block}--line-before:before {
+                left: auto;
+                right: -2rem;
+            }
+
+            &.#{$block}--line-after:after {
+                right: auto;
+                left: -2rem;
+            }
+
+            .#{$block}__name.#{$block}__name--members-count {
+                direction: ltr;
+                text-align: right;
+            }
+
+            .#{$block}__add--before {
+                right: -2.5rem;
+                left: auto;
+
+                & + .#{$block}__drop-zone {
+                    right: -2.8rem;
+                }
+            }
+
+            .#{$block}__add--after {
+                left: -2.5rem;
+                right: auto;
+
+                & + .#{$block}__drop-zone {
+                    left: -2.8rem;
+                    right: auto;
+                }
+            }
+
+            &.#{$block}--last-in-parallel,
+            &.#{$block}--parallel-start,
+            &.#{$block}--final {
+                .#{$block}__add--after {
+                    left: -1.5rem;
+
+                    & + .#{$block}__drop-zone {
+                        left: -1.8rem;
+                    }
+                }
+
+                &:not(.#{$block}--blank) .#{$block}__add--after-all {
+                    left: -3.5rem;
+
+                    & + .#{$block}__drop-zone {
+                        left: -3.8rem;
+                    }
+                }
+            }
+
+            &.#{$block}--first-in-parallel,
+            &.#{$block}--parallel-end,
+            &.#{$block}--root {
+                .#{$block}__add--before {
+                    right: -1.5rem;
+
+                    & + .#{$block}__drop-zone {
+                        right: -1.8rem;
+                    }
+
+                    &-all {
+                        right: -3.5rem;
+
+                        & + .#{$block}__drop-zone {
+                            right: -3.8rem;
+                        }
+                    }
+                }
+            }
+
+            &.#{$block}--last-blank {
+                .#{$block}__add--after-all {
+                    right: calc(#{$node-width} + 2.5rem);
+
+                    & + .#{$block}__drop-zone {
+                        right: calc(100% + 2rem);
+                    }
+                }
+            }
+
+            &.#{$block}--next-blank {
+                .#{$block}__add--after {
+                    left: calc(-4rem - #{$node-width} / 2);
+
+                    & + .#{$block}__drop-zone {
+                        right: calc(100% + 4rem);
+                    }
+                }
+            }
+
+            &.#{$block}--first-root {
+                &.#{$block}--line-before:before {
+                    left: auto;
+                    right: -4rem;
+                }
+
+                .#{$block}__carousel-start-marker {
+                    left: auto;
+                    right: -4rem;
+                }
+            }
+
+            &.#{$block}--first-final {
+                &.#{$block}--line-after:after {
+                    right: auto;
+                    left: -4rem;
+                }
+
+                .#{$block}__carousel-end-marker {
+                    right: auto;
+                    left: -4rem;
+                }
+            }
+
+            &.#{$block}--blank {
+                &.#{$block}--first-final:before {
+                    left: 0;
+                }
             }
         }
-
-        &.#{$block}--blank {
-            &.#{$block}--first-final:before {
-                left: 0;
-            }
-        }
-    }
-}
-
-.#{$block}__inner {
-    display: flex;
-    padding: 1rem;
-}
-
-.#{$block}__edit-controls {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 2rem;
-    padding: 0 .5rem 0 0.3rem;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, .15);
-}
-
-.#{$block}__avatar {
-    margin-right: .5rem;
-}
-
-.#{$block}__name {
-    font-size: 1rem;
-    line-height: 1.25rem;
-    margin-bottom: .1rem;
-    color: #32363a;
-    color: var(--sapTextColor, #32363a);
-}
-
-.#{$block}__description {
-    font-size: .875rem;
-    line-height: 1rem;
-    color: #6A6D70;
-    color: var(--sapContent_LabelColor, #6A6D70);
-    margin-bottom: .4rem;
-}
-
-.#{$block}__arrow {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 4px 0 4px 8px;
-    border-color: transparent transparent transparent #89919A;
-    border-color: transparent transparent transparent var(--sapField_ReadOnly_BorderColor, #89919A);
-    position: absolute;
-    left: -8px;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-}
-
-.#{$block}__carousel-start-marker, .#{$block}__carousel-end-marker {
-    z-index: 1;
-    background: #89919A;
-    background: var(--sapField_ReadOnly_BorderColor, #89919A);
-    display: block;
-    position: absolute;
-    width: 4px;
-    height: 11px;
-    top: $carousel-marker-top;
-}
-
-.#{$block}__carousel-start-marker {
-    left: -2rem;
-}
-
-.#{$block}__carousel-end-marker {
-    right: -2rem;
-}
-
-.#{$block}__add {
-    position: absolute;
-    z-index: 10;
-    margin: auto;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    border-radius: 50%;
-    width: 1rem;
-    height: 1rem;
-    padding: 0;
-    background: #fff;
-    background: var(--sapBaseColor, #fff);
-    cursor: pointer;
-    border: 1px solid #0854A0;
-    border: 1px solid var(--sapButton_IconColor, #0854A0);
-    line-height: 0;
-
-    fd-icon {
-        position: relative;
-        font-size: 0.59rem;
-        color: #0854A0;
-        color: var(--sapButton_IconColor, #0854A0);
-        font-weight: 600;
-    }
-
-    &.#{$block}__add--before {
-        left: -2.5rem;
-        right: auto;
-
-        & + .#{$block}__drop-zone {
-            left: -2.8rem;
-        }
-    }
-
-    &.#{$block}__add--after {
-        right: -2.5rem;
-        left: auto;
-
-        & + .#{$block}__drop-zone {
-            right: -2.8rem;
-            left: auto;
-        }
-    }
-}
-
-.#{$block}__drop-zone {
-    border-radius: 4px;
-    position: absolute;
-    height: 100%;
-    z-index: 1;
-
-    &.#{$block}__drop-zone--active {
-        background: #E5F0FA;
-        background: var(--sapList_SelectionBackgroundColor, #E5F0FA);
-        border: 2px solid #0854A0;
-        border: 2px solid var(--sapButton_IconColor, #0854A0);
-    }
-
-    &.#{$block}__drop-zone--blank {
-        width: 100%;
-        top: 0;
-    }
-
-    &.#{$block}__drop-zone--partial {
-        width: 10%;
-        left: 0;
-        top: 0;
     }
 }

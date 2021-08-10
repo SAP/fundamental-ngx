@@ -70,11 +70,11 @@
             ></span>
 
             <button
-                class="fd-grid-list__action-button"
                 *ngIf="type === 'detail' || type === 'detailsAndActive'"
                 fd-button
                 fdType="transparent"
                 glyph="edit"
+                class="fd-grid-list__action-button"
                 i18n-aria-label="coreGridList.Item.Btn.Details|Button aria-label attribute"
                 aria-label="Details"
                 i18n-title="coreGridList.Item.Btn.Details|Button title attribute"
@@ -84,11 +84,11 @@
             ></button>
 
             <button
-                class="fd-grid-list__action-button"
                 *ngIf="selectionMode === 'delete'"
                 fd-button
                 fdType="transparent"
                 glyph="decline"
+                class="fd-grid-list__action-button"
                 i18n-aria-label="coreGridList.Item.Btn.Delete|Button aria-label attribute"
                 aria-label="Delete"
                 i18n-title="coreGridList.Item.Btn.Delete|Button title attribute"
@@ -106,7 +106,7 @@
                 aria-label="Navigation"
                 i18n-title="coreGridList.Item.Btn.Navigation|Button aria-label attribute"
                 title="Navigation"
-                class="fd-grid-list__btn-navigation fd-grid-list__action-button"
+                class="fd-grid-list__action-button fd-grid-list__btn-navigation"
                 [compact]="true"
                 (click)="_onNavigate($event)"
             ></button>

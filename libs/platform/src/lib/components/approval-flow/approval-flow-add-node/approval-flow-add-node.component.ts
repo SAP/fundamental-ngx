@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { forkJoin, Observable, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
@@ -7,10 +7,7 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 
 import { ApprovalFlowAddNodeViewService, VIEW_MODES } from '../services/approval-flow-add-node-view.service';
 import { displayTeamFn, displayUserFn, filterByName, trackByFn } from '../helpers';
-import { ApprovalNode } from '../interfaces/approval-node';
-import { ApprovalDataSource } from '../interfaces/approval-data-source';
-import { ApprovalTeam } from '../interfaces/approval-team';
-import { ApprovalUser } from '../interfaces/approval-user';
+import { ApprovalDataSource, ApprovalNode, ApprovalTeam, ApprovalUser } from '../interfaces';
 
 export interface AddNodeDialogRefData {
     isEdit?: boolean;
@@ -29,13 +26,16 @@ export interface AddNodeDialogFormData {
     toNextSerial: boolean
 }
 
+export type ApprovalFlowNewNodePlacement =
+    'before'
+    | 'after'
+    | 'before-all'
+    | 'after-all';
+
 export type ApprovalFlowNodeTarget =
-    'empty' |
-    'before' |
-    'before-all' |
-    'after-all' |
-    'after' |
-    'parallel';
+    ApprovalFlowNewNodePlacement
+    | 'empty'
+    | 'parallel';
 
 export enum APPROVAL_FLOW_NODE_TYPES {
     SERIAL = 'SERIAL',
@@ -51,8 +51,15 @@ export enum APPROVAL_FLOW_APPROVER_TYPES {
 @Component({
     selector: 'fdp-approval-flow-add-node',
     templateUrl: './approval-flow-add-node.component.html',
-    styleUrls: [ './approval-flow-add-node.component.scss', '../styles/approval-flow-dialog.scss' ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: [
+        '../styles/approval-flow-dialog.scss',
+        './approval-flow-add-node.component.scss'
+    ],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        class: 'fdp-approval-flow-dialog fdp-approval-flow-add-node'
+    }
 })
 export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     /** @hidden */
