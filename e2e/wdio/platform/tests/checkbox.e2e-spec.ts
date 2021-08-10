@@ -11,8 +11,7 @@ import {
     executeScriptBeforeTagAttr,
     getAlertText,
     getAttributeByName,
-    getElementArrayLength, getText,
-    mouseHoverElement,
+    getText,
     refreshPage,
     scrollIntoView,
     waitForPresent,
@@ -52,7 +51,6 @@ describe('Checkbox test suite', () => {
     }, 1);
 
     describe('check binary checkbox used with form examples', () => {
-        // TODO: Unskip after fix
         it('should check binary checkbox in template driven form', () => {
 
             waitForElDisplayed(binaryTempCheckbox, 0);

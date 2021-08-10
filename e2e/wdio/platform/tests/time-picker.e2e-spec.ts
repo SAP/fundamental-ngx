@@ -11,7 +11,7 @@ import {
     waitForElDisplayed,
     waitForPresent, getElementPlaceholder
 } from '../../driver/wdio';
-import { time, text, defaultValidTime } from '../fixtures/testData/time-picker';
+import { time, text, defaultValidTime, altValidTime } from '../fixtures/testData/time-picker';
 import { TimePickerPO } from '../pages/time-picker.po';
 
 describe('Time picker suite', function() {
@@ -109,15 +109,14 @@ describe('Time picker suite', function() {
         expect(getValue(activeTimePickerInput, 5)).toBe(defaultValidTime);
     });
 
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/4853
-    xit('Verify null validity for time picker with reactive form', () => {
+    it('Verify null validity for time picker with reactive form', () => {
         scrollIntoView(activeTimePickerButton, 10);
         expect(doesItExist(errorBorder)).toBe(false);
         click(setToNullButton, 1);
         expect(doesItExist(errorBorder)).toBe(true);
         click(setValidTimeButton, 1);
         expect(doesItExist(errorBorder)).toBe(false);
-        expect(getValue(activeTimePickerInput, 10)).toBe(defaultValidTime);
+        expect(getValue(activeTimePickerInput, 10)).toBe(altValidTime);
     });
 
     it('Verify null validity for time picker with template form', () => {

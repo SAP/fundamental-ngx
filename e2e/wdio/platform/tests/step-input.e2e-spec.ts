@@ -13,7 +13,6 @@ import {
 } from '../../driver/wdio';
 import { StepInputPo } from '../pages/step-input.po';
 import {
-    checkFocused,
     checkIfDisabled,
     checkNotFocused,
     checkTextValueContain,
@@ -123,8 +122,7 @@ describe('Step input test suite', function() {
         }
     });
 
-    // Need to debug on different browsers
-    fit('Verify the value in the field becomes 0 or the minimum if the minimum is larger than 0.', () => {
+    it('Verify the value in the field becomes 0 or the minimum if the minimum is larger than 0.', () => {
         const arr = getElementArrayLength(activeInput);
 
         for (let i = 0; i < arr; i++) {

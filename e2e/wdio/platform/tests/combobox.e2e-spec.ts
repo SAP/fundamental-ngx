@@ -16,7 +16,6 @@ import {
     waitForElDisplayed,
     waitForPresent,
     waitForUnclickable,
-    doubleClick
 } from '../../driver/wdio';
 import { ComboBoxPo } from '../pages/combobox.po';
 import {

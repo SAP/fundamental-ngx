@@ -6,7 +6,6 @@ import {
     sendKeys,
     waitForPresent,
     waitForElDisplayed,
-    getText,
     getValue
 } from '../../driver/wdio';
 
