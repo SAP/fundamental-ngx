@@ -1,4 +1,13 @@
 
+## [0.31.0-rc.181](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.180...v0.31.0-rc.181) (2021-08-10)
+
+
+### Bug Fixes
+
+* **core:** do not preventDefault when activeElement is select control ([#6161](https://github.com/SAP/fundamental-ngx/issues/6161)) ([8580077](https://github.com/SAP/fundamental-ngx/commit/858007765ec89574394b34aea7216fcdda8e305c))
+
+## [0.31.0-rc.180](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.179...v0.31.0-rc.180) (2021-08-09)
+
 ## [0.31.0-rc.179](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.178...v0.31.0-rc.179) (2021-08-09)
 
 ## [0.31.0-rc.178](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.177...v0.31.0-rc.178) (2021-08-06)
