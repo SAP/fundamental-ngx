@@ -98,10 +98,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     @Input()
     noBorder = false;
 
-    /** Whether list component has removed bottom borders */
-    @Input()
-    noSeperator: boolean;
-
     /**Scroll offset percentage to trigger scroll event */
     @Input()
     scrollOffsetPercentage: number;
@@ -405,7 +401,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             item.selectionMode = this.selectionMode;
             item.selectRow = this.selectRow;
             item._hasByLine = this.hasByLine;
-            item._noSeperator = this.noSeperator;
             this.stateChanges.next(item);
         });
 
@@ -452,7 +447,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
                 item.selectRow = this.selectRow;
                 item.selectionMode = this.selectionMode;
                 item._hasByLine = this.hasByLine;
-                item._noSeperator = this.noSeperator;
                 this.stateChanges.next(item);
             });
 

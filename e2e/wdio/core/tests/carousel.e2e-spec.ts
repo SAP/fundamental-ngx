@@ -79,7 +79,8 @@ describe('Carousel test suite', function() {
 
             clickAndDragElement(imgLocationX + 10, imgLocationY + 10, imgLocationX, imgLocationY - 200);
             expect(getAttributeByName(displayedImg, imgSource, 1)).not.toBe(firstImg);
-            expect(getAttributeByName(carouselProperties, verticalAttr, 1)).toBe('true');
+            // in prod mode missed attr: ng-reflect-vertical
+            // expect(getAttributeByName(carouselProperties, verticalAttr, 1)).toBe('true');
         });
     });
 
@@ -103,7 +104,8 @@ describe('Carousel test suite', function() {
         });
 
         it('should check multiple active items shown', () => {
-            expect(getAttributeByName(carouselProperties, visibilityCount, 2)).toBe('3');
+            // in prod mode missed attr: ng-reflect-visible-slides-count
+            // expect(getAttributeByName(carouselProperties, visibilityCount, 2)).toBe('3');
             expect(getElementArrayLength(multiDisplayedCards)).toBe(3);
         });
     });

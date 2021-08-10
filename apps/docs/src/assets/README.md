@@ -17,12 +17,12 @@
 
 ## <a name="1"></a>1. Description
 
-The SAP Fundamental Styles library is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.
+The Fundamental Library Styles is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.
 
-This repository contains 2 libraries,
+This repository contains 2 libraries(npm packages),
 
 * [@fundamental-ngx/core](https://github.com/SAP/fundamental-ngx/tree/main/libs/core):
-The Fundamental-ngx core provides base angular implementation of SAP Fundamental styles to offer developers a rich set of components
+The Fundamental-ngx core provides base angular implementation of Fundamental Library Styles to offer developers a rich set of components
 they can use when building angular applications. Fundamental-ngx core angular components provides the end developer with some degree of flexibility as most of the components allow finer customization directly on the HTML template level.
 
 * [@fundamental-ngx/platform](https://github.com/SAP/fundamental-ngx/tree/main/libs/platform):
@@ -56,6 +56,6 @@ Check out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/mai
 ## Similar Projects
 ## <a name="7"></a>7. Similar Projects
 
-[Fundamental-react](https://github.com/SAP/fundamental-react) - React implementation of SAP Fundamental Styles
+[Fundamental-react](https://github.com/SAP/fundamental-react) - React implementation of Fundamental Library Styles
 
-[Fundamental-vue](https://github.com/SAP/fundamental-vue) - Vue implementation of SAP Fundamental Styles
+[Fundamental-vue](https://github.com/SAP/fundamental-vue) - Vue implementation of Fundamental Library Styles

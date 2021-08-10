@@ -37,7 +37,7 @@ import {
 } from '../fixtures/appData/dialog-contents';
 import { papayaFruit } from '../fixtures/testData/dialog';
 
-describe('dialog test suite', function() {
+xdescribe('dialog test suite', function() {
     const dialogPage = new DialogPo();
     const {
         templateDialog, button, dialog, dialogOutput, componentDialog, objectDialog, stateDialog, busyIndicator,

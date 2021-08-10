@@ -46,7 +46,7 @@ export class BaseWizardGenerator implements OnDestroy {
      * @description Whether or not apply responsive paddings styling.
      */
      @Input()
-     responsivePaddings = false;
+     responsivePaddings = true;
 
     /**
      * @description Button labels to be used in Wizard navigation
@@ -104,7 +104,8 @@ export class BaseWizardGenerator implements OnDestroy {
     /**
      * @description Emits wizard value when it's completed.
      */
-    @Output() wizardFinished: EventEmitter<WizardGeneratorFormsValue> = new EventEmitter();
+    @Output()
+    wizardFinished: EventEmitter<WizardGeneratorFormsValue> = new EventEmitter();
 
     /**
      * @hidden

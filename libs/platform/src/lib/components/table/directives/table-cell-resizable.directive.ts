@@ -6,6 +6,8 @@ import { TableColumnResizeService } from '../table-column-resize.service';
 
 export type TableColumnResizableSide = 'end' | 'both';
 
+export const TABLE_CELL_RESIZABLE_THRESHOLD_PX = 4;
+
 /**
  * Tracks mouse movement over the cell if the mouse pointer near the side of the cell, informs resize service.
  */
@@ -21,9 +23,9 @@ export class PlatformTableCellResizableDirective implements AfterViewInit {
         this._resizableSide = value;
     }
 
-    /** To calculate resized column index */
+    /** Column name */
     @Input()
-    columnIndex: number;
+    columnName: string;
 
     /** @hidden */
     private _resizableSide: TableColumnResizableSide = 'both';
@@ -42,11 +44,11 @@ export class PlatformTableCellResizableDirective implements AfterViewInit {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (this.columnIndex == null) {
+        if (this.columnName == null) {
             return;
         }
 
-        this._tableColumnResizeService?.registerColumnCell(this.columnIndex, this._elRef);
+        this._tableColumnResizeService?.registerColumnCell(this.columnName, this._elRef);
     }
 
     /** @hidden */
@@ -57,51 +59,42 @@ export class PlatformTableCellResizableDirective implements AfterViewInit {
         }
 
         const el = this._elRef.nativeElement;
+        const [resizerPosition, resizedColumn] = this._getResizer(event, el);
 
-        const [resizerPosition, resizedColumnIndex] = this._isRtl
-            ? this._getResizerRtl(event, el)
-            : this._getResizer(event, el);
-
-        this._tableColumnResizeService.setInitialResizerPosition(resizerPosition, resizedColumnIndex);
+        this._tableColumnResizeService.setInitialResizerPosition(resizerPosition, resizedColumn);
     }
 
     /** @hidden */
-    private _getResizer(event: MouseEvent, el: HTMLElement): number[] {
+    private _getResizer(event: MouseEvent, el: HTMLElement): [number, string] {
         const elPosition = el.getBoundingClientRect();
 
         let resizerPosition: number;
-        let resizedColumnIndex: number;
+        let resizedColumn: string;
 
-        if (event.clientX - elPosition.left < 4 && this._resizableSide !== 'end') {
-            resizerPosition = el.offsetLeft;
-            resizedColumnIndex = this.columnIndex - 1;
+        const pointerOnLeft = this._isRtl
+            ? (elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX && this._resizableSide !== 'end')
+            : (event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX  && this._resizableSide !== 'end');
+
+        if (pointerOnLeft) {
+            resizerPosition = this._isRtl
+                ? (el.parentElement.offsetWidth - (el.offsetLeft + el.offsetWidth))
+                : el.offsetLeft;
+
+            resizedColumn = this._tableColumnResizeService.getPreviousColumnName(this.columnName);
         }
 
-        if (elPosition.right - event.clientX < 4) {
-            resizerPosition = el.offsetLeft + el.offsetWidth
-            resizedColumnIndex = this.columnIndex;
+        const pointerOnRight = this._isRtl
+            ? (event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX)
+            : (elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX);
+
+        if (pointerOnRight) {
+            resizerPosition = this._isRtl
+                ? (el.parentElement.offsetWidth - el.offsetLeft)
+                : (el.offsetLeft + el.offsetWidth);
+
+            resizedColumn = this.columnName;
         }
 
-        return [resizerPosition, resizedColumnIndex];
-    }
-
-    /** @hidden */
-    private _getResizerRtl(event: MouseEvent, el: HTMLElement): number[] {
-        const elPosition = el.getBoundingClientRect();
-
-        let resizerPosition: number;
-        let resizedColumnIndex: number;
-
-        if (elPosition.right - event.clientX < 4 && this._resizableSide !== 'end') {
-            resizerPosition = el.parentElement.offsetWidth - (el.offsetLeft + el.offsetWidth);
-            resizedColumnIndex = this.columnIndex - 1;
-        }
-
-        if (event.clientX - elPosition.left < 4) {
-            resizerPosition = el.parentElement.offsetWidth - el.offsetLeft;
-            resizedColumnIndex = this.columnIndex;
-        }
-
-        return [resizerPosition, resizedColumnIndex];
+        return [resizerPosition, resizedColumn];
     }
 }

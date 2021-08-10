@@ -41,9 +41,8 @@
         [attr.aria-disabled]="disabled"
         [attr.aria-readonly]="readonly"
         [glyphAriaLabel]="ariaLabel"
-        (click)="mobile && onPrimaryButtonClick(false)"
+        (click)="mobile && openInMobileMode()"
     >
-        <ng-container></ng-container>
         <input
             #searchInputElement
             fdp-auto-complete
@@ -101,7 +100,7 @@
         <ng-container *ngIf="isGroup">
             <ng-container *ngFor="let group of _suggestions">
                 <ng-container *ngIf="!groupItemTemplate">
-                    <li fd-list-group-header role="group" tabindex="0">
+                    <li fd-list-group-header role="option">
                         <span fd-list-title [attr.title]="group.label" >{{group.label}}</span>
                     </li>
                 </ng-container>

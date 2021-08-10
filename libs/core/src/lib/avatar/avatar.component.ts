@@ -1,16 +1,25 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     HostBinding,
     Input,
     OnChanges,
     OnInit,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ANY_LANGUAGE_LETTERS_REGEX, ColorAccent, Size, applyCssClass, getRandomColorAccent, CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 let avatarUniqueId = 0;
+
+const ALTER_ICON_OPTIONS = {
+    CONTENT: 'content',
+    ALT: 'alt',
+    BACKUP: 'backup',
+    DEFAULT_ICON: 'default-icon',
+};
 
 @Component({
     // TODO to be discussed
@@ -100,6 +109,22 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         return this._image;
     }
 
+    @Input()
+    set alterIcon(value: string) {
+        this._alterIcon = value;
+    }
+    get alterIcon(): string {
+        return this._alterIcon;
+    }
+
+    @Input()
+    set backupImage(value: string) {
+        this._backupImage = value;
+    }
+    get backupImage(): string {
+        return this._backupImage;
+    }
+
     /** @hidden */
     @HostBinding('style.background-image')
     get bgImage(): string {
@@ -113,10 +138,25 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** @hidden */
+    @ViewChild('content')
+    set content(value: ElementRef) {
+        this._content = value;
+    }
+
+    /** @hidden */
     abbreviate: string = null;
 
     /** @hidden */
     private _image: string = null;
+
+    /** @hidden */
+    private _alterIcon: string = null;
+
+    /** @hidden */
+    private _content: ElementRef = null;
+
+    /** @hidden */
+    private _backupImage: string = null;
 
     /** @hidden */
     private _bgImage: string = null;
@@ -127,7 +167,10 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    constructor(
+        private _elementRef: ElementRef,
+        private _cdr: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -187,9 +230,93 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
         this._image = value;
 
         if (value) {
-            this._bgImage = 'url(' + value + ')';
+            this._verifyImageUrl(value, () => {}, this._onErrorCallback);
         } else {
             this._bgImage = null;
         }
+    }
+
+    /** @hidden */
+    private _verifyImageUrl(srcValue: string, onLoadCallback: Function, onErrorCallback: Function): void {
+        const img = new Image();
+        img.onload = onLoadCallback.bind(this);
+        img.onerror = onErrorCallback.bind(this);
+        img.src = srcValue;
+        this._assignBgImage(srcValue);
+    }
+
+    /** @hidden */
+    private _assignBgImage(srcValue: string): void {
+        this._bgImage = `url(${srcValue})`;
+    }
+
+    /** @hidden */
+    private _onErrorCallback(): void {
+        if (!this._alterIcon) {
+            this._showDefaultIcon();
+        } else {
+            const options = this._alterIcon.split('|');
+            for (let i = 0; i < options.length; i++) {
+                const option = options[i];
+
+                if (option === ALTER_ICON_OPTIONS.CONTENT) {
+                    const contentEl = this._content.nativeElement;
+                    const contentValue = contentEl.innerText.trim()[0];
+                    if (contentValue && contentValue !== '') {
+                        this.abbreviate = contentEl.innerText.trim()[0];
+                        break;
+                    }
+
+                    continue;
+                }
+
+                if (option === ALTER_ICON_OPTIONS.ALT) {
+                    const altValue = this.elementRef().nativeElement.getAttribute('alt');
+                    if (altValue && altValue !== '') {
+                        this.abbreviate = altValue.trim()[0];
+                        break;
+                    }
+
+                    continue;
+                }
+
+                if (option === ALTER_ICON_OPTIONS.BACKUP) {
+                    if (this._backupImage && this._backupImage !== '') {
+                        // Check if backupImage can be loaded successfully
+                        // If not, set default user icon
+                        this._verifyImageUrl(
+                            this._backupImage,
+                            () => {
+                                this._assignBgImage(this._backupImage);
+                                this._cdr.detectChanges();
+                            },
+                            () => {
+                                this._showDefaultIcon();
+                                this._cdr.detectChanges();
+                            }
+                        );
+                        break;
+                    }
+
+                    continue;
+                }
+
+                if (option === ALTER_ICON_OPTIONS.DEFAULT_ICON) {
+                    this._showDefaultIcon();
+                    break;
+                }
+
+                this._showDefaultIcon();
+            }
+        }
+
+        this._cdr.detectChanges();
+    }
+
+    /** @hidden */
+    private _showDefaultIcon(): void {
+        this.abbreviate = null;
+        this._image = null;
+        this.glyph = null;
     }
 }

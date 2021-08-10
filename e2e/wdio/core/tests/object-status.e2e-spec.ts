@@ -73,7 +73,8 @@ describe('Object Status test suite', function() {
     });
 
     describe('object status large design examples', function() {
-        it('should check object status is large', () => {
+        // in prod mode missed attr: ng-reflect-large
+        xit('should check object status is large', () => {
             const objectCount = getElementArrayLength(largeExamples);
             for (let i = 0; i < objectCount; i++) {
                 expect(getAttributeByName(largeExamples + status, sizeAttr, i)).toBe('true');

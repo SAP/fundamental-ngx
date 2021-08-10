@@ -119,7 +119,7 @@ describe('Input Group should', function() {
         expect(defaultHeight.height).toBeGreaterThan(compactHeight.height);
     });
 
-    it('check have disabled attr assigned', () => {
+    xit('check have disabled attr assigned', () => {
         waitForPresent(disabledInput);
         waitForElDisplayed(disabledInput);
 

@@ -81,7 +81,7 @@ describe('Menu button test suite', function() {
     });
 
     describe('Check cozy and compact menu button states', function() {
-        it('should check btn states', () => {
+        xit('should check btn states', () => {
             const cozyBtnAttributeArrLength = getElementArrayLength(cozyBtnAttrArr);
             const compactBtnAttributeArrLength = getElementArrayLength(compactBtnAttrArr);
 
@@ -106,7 +106,7 @@ describe('Menu button test suite', function() {
             }
         });
 
-        it('should check compact btn text', () => {
+        xit('should check compact btn text', () => {
             const compactBtnTextArrLength = getElementArrayLength(compactBtnAttrArr);
             const compactBtnArrLength = getElementArrayLength(compactBtnArr);
 
@@ -121,7 +121,7 @@ describe('Menu button test suite', function() {
         });
     });
 
-    describe('Check types of menu buttons', function() {
+    xdescribe('Check types of menu buttons', function() {
 
         it('should check disabled buttons', () => {
             for (let i = 0; 5 > i; i++) {

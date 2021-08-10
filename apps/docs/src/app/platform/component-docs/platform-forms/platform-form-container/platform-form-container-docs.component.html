@@ -1,4 +1,4 @@
-<fd-docs-section-title id="formContainerRecommended" componentName="formContainer">
+<fd-docs-section-title id="recommended" componentName="form-container">
     Recommended form layouts
 </fd-docs-section-title>
 <description>This example shows recommended layouts for form container</description>
@@ -9,7 +9,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="formContainerPossible" componentName="formContainer">
+<fd-docs-section-title id="possible" componentName="form-container">
     Possible form layouts
 </fd-docs-section-title>
 <description>This example shows other possible layout combinations for form container</description>
@@ -20,11 +20,11 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="formContainerNotRecommended" componentName="formContainer">
+<fd-docs-section-title id="not-recommended" componentName="form-container">
     Not recommended form layouts
 </fd-docs-section-title>
 <description
-    >This example shows more possile layout combinations for form container usage that are not recommended</description
+    >This example shows more possible layout combinations for form container usage that are not recommended</description
 >
 <component-example>
     <fdp-platform-form-container-not-recommended-example></fdp-platform-form-container-not-recommended-example>
@@ -33,7 +33,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="formContainerComplex" componentName="formContainer"> Complex form </fd-docs-section-title>
+<fd-docs-section-title id="complex" componentName="form-container"> Complex form </fd-docs-section-title>
 <description>This example shows visualizes various Platform Form components in the form container</description>
 <component-example>
     <fdp-platform-form-container-complex-example></fdp-platform-form-container-complex-example>
@@ -42,16 +42,55 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="formContainerBasic" componentName="formContainer"> Column Binding </fd-docs-section-title>
+<fd-docs-section-title id="column-binding" componentName="form-container"> Column Binding </fd-docs-section-title>
 <description>To bind column use the <code>[column]</code> attribute. The column attribute specify the respective layout for XL size, the rest automatically wrap according to layout pattern.</description>
 <component-example>
     <fdp-platform-form-basic-example></fdp-platform-form-basic-example>
 </component-example>
 <code-example [exampleFiles]="formContainerColumn"></code-example>
 
-<fd-docs-section-title id="formContainerGroup" componentName="formContainer"> Form Field Group </fd-docs-section-title>
+<fd-docs-section-title id="group" componentName="form-container"> Form Field Group </fd-docs-section-title>
 <description>Wrap fields with the <code>[form-field-group]</code> component to group them. You can use <code>[column]</code> and <code>[rank]</code> attribute</description>
 <component-example>
     <fdp-platform-form-group-example></fdp-platform-form-group-example>
 </component-example>
 <code-example [exampleFiles]="formContainerGroup"></code-example>
+
+<separator></separator>
+<fd-docs-section-title id="field-column-change" componentName="form-container">Change of column number for a field</fd-docs-section-title>
+<description>
+    To change the column number in form-group-container for a field while screen size changes, property
+    <code>[columnLayout]</code> can be used. it takes object in the form of <code>XL: 3, L: 2, M: 1, S: 1</code>. Here
+    it shows that on <code>L</code> size screen, field should be dispalyed in 2nd column and when scren size changes to
+    <code>XL</code> size then the field will be displayed in 3rd Column(defaults to <code>L</code> layout value when
+    value for <code>XL</code> not provided).
+    <br />
+    <br />
+    In this example, we have used custom break-points for screen sizes. <code>XL screen size >= 1540px</code>,
+    <code>L screen size is between 1224px and 1540px</code>, <code>M screen size is between 800px and 1224px</code>,
+    <code>S screen size is less than 800px</code>.
+</description>
+<component-example>
+    <fdp-platform-form-column-change-example></fdp-platform-form-column-change-example>
+</component-example>
+<code-example [exampleFiles]="formFieldColumnLayout"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="field-inline-change" componentName="form-container">Change of isInline value for a field</fd-docs-section-title>
+<description>
+    To change the isInline value in form-group-container for a field while screen size changes, property
+    <code>[isInlineLayout]</code> can be used. it takes object in the form of
+    <code>XL: true, L: false, M: true, S: false</code>. Here it shows that on <code>L</code> size screen, field should
+    be dispalyed in vertical mode and when scren size changes to <code>XL</code> size then the field will be displayed
+    inline(defaults to <code>L</code> layout value when value for <code>XL</code> not provided).
+    <br />
+    <br />
+    In this example, we have used custom break-points for screen sizes. <code>XL screen size >= 1540px</code>,
+    <code>L screen size is between 1224px and 1540px</code>, <code>M screen size is between 800px and 1224px</code>,
+    <code>S screen size is less than 800px</code>.
+</description>
+<component-example>
+    <fdp-platform-form-isinline-change-example></fdp-platform-form-isinline-change-example>
+</component-example>
+<code-example [exampleFiles]="formFieldInlineLayout"></code-example>

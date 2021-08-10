@@ -19,7 +19,7 @@
                         <fdp-wizard-generator-step *ngIf="!step.summary" [item]="step"></fdp-wizard-generator-step>
                         <fdp-wizard-summary-step [status]="step.status" *ngIf="step.summary"></fdp-wizard-summary-step>
 
-                        <fd-wizard-next-step *ngIf="appendToWizard">
+                        <fd-wizard-next-step *ngIf="navigationButtons">
                             <ng-container *ngIf="!addSummary && !isLastStep">
                                 <ng-template #defaultGoNextButtonTemplate>
                                     <fdp-button [contentDensity]="navigationButtonLabels.goNext.contentDensity" [buttonType]="navigationButtonLabels.goNext.type" [label]="navigationButtonLabels.goNext.label" (click)="goNext.emit()"></fdp-button>

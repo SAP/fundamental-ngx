@@ -1,15 +1,15 @@
-<div #layout class="fd-fixed-card-group--card-layout" cdkDropListGroup [attr.dir]="dir">
-    <div class="fd-fixed-card-group--card-layout-column" [cdkDropListData]="column" cdkDropList
+<div #layout class="fd-fixed-card-layout__card-layout" cdkDropListGroup [attr.dir]="dir">
+    <div class="fd-fixed-card-layout__card-layout-column" [cdkDropListData]="column" cdkDropList
         *ngFor="let column of columns" [cdkDropListDisabled]="disableDragDrop">
         <ng-container *ngFor="let card of column">
-            <div class="fd-fixed-card-group--card" cdkDrag [cdkDragStartDelay]="dragStartDelay"
-                cdkDragPreviewClass="fd-fixed-card-group--card-preview" [cdkDragData]="card"
+            <div class="fd-fixed-card-layout__card" cdkDrag [cdkDragStartDelay]="dragStartDelay"
+                cdkDragPreviewClass="fd-fixed-card-layout__card-preview" [cdkDragData]="card"
                 (cdkDragDropped)="dragDrop($event)">
                 <fd-fixed-card-layout-item>
                     <ng-container *ngTemplateOutlet="card?.template"> </ng-container>
                 </fd-fixed-card-layout-item>
 
-                <div *cdkDragPlaceholder class="fd-fixed-card-group--card-placeholder">
+                <div *cdkDragPlaceholder class="fd-fixed-card-layout__card-placeholder">
                     <ng-container *ngTemplateOutlet="card?.template"></ng-container>
                 </div>
             </div>

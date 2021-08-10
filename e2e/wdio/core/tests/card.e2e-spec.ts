@@ -3,7 +3,7 @@ import {
     isElementDisplayed,
     getAttributeByName,
     getText,
-    waitForElDisplayed,
+    waitForElDisplayed, getElementClass
 } from '../../driver/wdio';
 import { checkAttributeValueTrue, checkElArrIsClickable, checkElementText, checkElementTextValue } from '../../helper/assertion-helper';
 import {cardTitleArr, compactAttr, analyticsTitle, badgeText, barChartCounterText, barChartItemsText, barChartTitleText, btnText,
@@ -46,7 +46,7 @@ describe('Card test suite:', function() {
 
     describe('Compact examples:', function() {
         it('should check its compact and do basic checks', () => {
-            checkAttributeValueTrue(compactCardAttr, compactAttr);
+            expect(getElementClass(compactCardAttr)).toBe(compactAttr);
             checkElementText(compactCardHeader);
             checkElementTextValue(compactCardListItems, cardListItemText);
             checkElArrIsClickable(compactCardHeader);
@@ -56,7 +56,7 @@ describe('Card test suite:', function() {
 
     describe('Card loader examples:', function() {
         it('should check loading icon and attributes', () => {
-            checkAttributeValueTrue(loaderCardAttr, loaderAttr);
+            expect(getAttributeByName(loaderCardAttr, 'title')).toBe(loaderAttr);
             expect(isElementDisplayed(loaderIcon)).toBe(true);
         });
     });

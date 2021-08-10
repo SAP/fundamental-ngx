@@ -12,6 +12,7 @@ export class ButtonPo extends CoreBaseComponentPo {
     stateButton = 'fd-button-state-example button:nth-child(1)';
     disableStateButtons = 'fd-button-state-example button.is-disabled';
     playgroundButton = 'playground button';
+    playgroundButtonText = 'playground .fd-button__text';
     inputLabel = '.fd-input.form-control';
     dropDownMenu = 'select.form-control.ng-valid';
     checkboxCompact = 'label[for="playgroundcompact"]';

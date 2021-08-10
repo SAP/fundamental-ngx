@@ -39,7 +39,7 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item (ByLine)- Border Less examples:', function() {
-        it('should check border and styles', () => {
+        xit('should check border and styles', () => {
             expect(getAttributeByName(sNoBorderByLineAttr, noBorderAttr))
                 .toBe('true');
             expect(getAttributeByName(sNoBorderByLineSection, compactAttr, 0))
@@ -57,7 +57,7 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item (ByLine)- Footer examples:', function() {
-        it('should check border and footer', () => {
+        xit('should check border and footer', () => {
             checkAttributeValueTrue(sFooterAttr, byLineAttr);
             checkElementDisplayed(sFooter);
             checkElementText(sFooterList);
@@ -71,7 +71,7 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item (ByLine)- Group header examples:', function() {
-        it('should check border', () => {
+        xit('should check border', () => {
             checkAttributeValueTrue(sGroupHeaderAttr, byLineAttr);
         });
 
@@ -83,7 +83,7 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item- Interactive state examples:', function() {
-        it('should check border', () => {
+        xit('should check border', () => {
             checkAttributeValueTrue(sInteractiveAttr, byLineAltAttr);
             const linkCount = getElementArrayLength(sInteractiveLink);
             for (let i = 0; linkCount > i; i++) {
@@ -103,7 +103,7 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item (ByLine)- Secondary text types examples:', function() {
-        it('should check border', () => {
+        xit('should check border', () => {
             checkAttributeValueTrue(sSecTypeAttr, byLineAltAttr);
         });
 
@@ -124,7 +124,7 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item (ByLine)- Multi Selection examples:', function() {
-        it('should check border', () => {
+        xit('should check border', () => {
             checkAttributeValueTrue(sMultiAttr, byLineAltAttr);
         });
 
@@ -147,7 +147,7 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item (ByLine)- Inverted Secondary text types examples:', function() {
-        it('should check border', () => {
+        xit('should check border', () => {
             if (browser.capabilities.browserName === 'internet explorer') {
                 console.log('skip');
             } else {

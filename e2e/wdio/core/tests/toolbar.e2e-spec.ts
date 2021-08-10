@@ -109,7 +109,7 @@ describe('Toolbar test suite', function() {
 
         it('should check visual regression for all examples', () => {
             toolbarPage.saveExampleBaselineScreenshot();
-            expect(toolbarPage.compareWithBaseline()).toBeLessThan(5);
+            expect(toolbarPage.compareWithBaseline()).toBeLessThan(7);
         });
     });
 

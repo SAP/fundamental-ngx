@@ -1,4 +1,5 @@
 import { AfterContentInit, ChangeDetectorRef, Component, Optional } from '@angular/core';
+
 import { DialogConfig } from '../utils/dialog-config.class';
 import { DialogHeaderBase } from '../base/dialog-header-base.class';
 

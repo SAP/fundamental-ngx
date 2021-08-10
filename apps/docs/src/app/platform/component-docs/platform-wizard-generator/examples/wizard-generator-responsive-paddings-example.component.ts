@@ -1,17 +1,12 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { WizardGeneratorFormsValue, WizardGeneratorItem, WizardTitle } from '@fundamental-ngx/platform';
+import { WizardGeneratorFormsValue, WizardGeneratorItem } from '@fundamental-ngx/platform';
 
 @Component({
   selector: 'fdp-wizard-generator-responsive-paddings-example',
   templateUrl: './wizard-generator-responsive-paddings-example.component.html'
 })
 export class WizardGeneratorResponsivePaddingsExampleComponent {
-
-    wizardTitle: WizardTitle = {
-        size: 2,
-        text: 'Checkout'
-    };
 
     wizardValue: WizardGeneratorFormsValue;
 

@@ -15,20 +15,25 @@ import {
     Host,
     SkipSelf,
     Provider,
-    forwardRef
+    forwardRef,
+    Inject
 } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators, AbstractControl } from '@angular/forms';
 import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 
+import { Column, ColumnLayout, HintPlacement, LabelLayout } from '../../form-options';
+import {
+    ResponsiveBreakPointConfig,
+    ResponsiveBreakpointsService,
+    RESPONSIVE_BREAKPOINTS_CONFIG
+} from '../../inline-layout-collection-base.input';
 import { FormFieldControl } from '../../form-control';
 import { FormField } from '../../form-field';
-import { Column, LabelLayout, HintPlacement } from '../../form-options';
 import { FormGroupContainer } from '../../form-group';
 import { FormFieldGroup } from '../../form-field-group';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from '../constants';
-import { FormFieldGroupComponent } from '../form-field-group/form-field-group.component';
 
 const formFieldProvider: Provider = {
     provide: FormField,
@@ -86,6 +91,18 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     @Input()
     column: number;
 
+    /** object for placing field in column in each screen layout */
+    @Input()
+    get columnLayout(): ColumnLayout {
+        return this._columnLayout;
+    }
+
+    set columnLayout(layout: ColumnLayout) {
+        this._columnLayout = layout;
+        this._isColumnLayoutEnabled = true;
+        this._setLayout();
+    }
+
     /**
      * This is in most of the cases set from parent container (form-group)
      */
@@ -142,6 +159,9 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     @Output()
     onChange: EventEmitter<string> = new EventEmitter<string>();
 
+    @Output()
+    onColumnChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
     @ViewChild('renderer', { static: true })
     renderer: TemplateRef<any>;
 
@@ -165,10 +185,35 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     protected _destroyed = new Subject<void>();
 
     /** @hidden */
+    private _isColumnLayoutEnabled = false;
+
+    /** @hidden column number for different screen sizes */
+    private _xlColumnNumber: number;
+
+    /** @hidden */
+    private _lgColumnNumber: number;
+
+    /** @hidden */
+    private _mdColumnNumber: number;
+
+    /** @hidden */
+    private _sColumnNumber = 1;
+
+    /** @hidden */
+    private _columnLayout: ColumnLayout;
+
+    /** @hidden */
+    private _responsiveBreakPointConfig: ResponsiveBreakPointConfig;
+
+    /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef,
         @Optional() formGroupContainer: FormGroupContainer,
-        @Optional() @SkipSelf() @Host() readonly formFieldGroup: FormFieldGroup
+        @Optional() @SkipSelf() @Host() readonly formFieldGroup: FormFieldGroup,
+        @Optional()
+        @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
+        readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig,
+        readonly _responsiveBreakpointsService: ResponsiveBreakpointsService
     ) {
         // provides capability to make a field disabled. useful in reactive form approach.
         this.formControl = new FormControl({ value: null, disabled: this.disabled });
@@ -179,12 +224,19 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         // in such case formGroupContainer can be pointed explicitly using
         // component input annotation
         this.formGroupContainer = formGroupContainer;
+        this._responsiveBreakPointConfig = _defaultResponsiveBreakPointConfig || new ResponsiveBreakPointConfig();
     }
 
     /** @hidden */
     ngOnInit(): void {
         if (this.columns && (this.columns < 1 || this.columns > 12)) {
             throw new Error('[columns] accepts numbers between 1 - 12');
+        }
+
+        if (this._isColumnLayoutEnabled) {
+            this._responsiveBreakpointsService
+                .observeBreakpointByConfig(this._responsiveBreakPointConfig)
+                .subscribe((breakPointName) => this._updateLayout(breakPointName));
         }
 
         this.addToFormGroup();
@@ -354,6 +406,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         if (this.control && this._editable) {
             this.control.id = this.id;
             this.control.required = this.required;
+
             if (this.placeholder) {
                 this.control.placeholder = this.placeholder;
             }
@@ -369,5 +422,42 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         if (this.control.ngControl && !this.id) {
             throw new Error('fdp-form-field must contain [id] binding.');
         }
+    }
+
+    /** @hidden */
+    private _setLayout(): void {
+        try {
+            this._sColumnNumber = this.columnLayout['S'] || 1;
+            this._mdColumnNumber = this.columnLayout['M'] || this._sColumnNumber;
+            this._lgColumnNumber = this.columnLayout['L'] || this._mdColumnNumber;
+            this._xlColumnNumber = this.columnLayout['XL'] || this._lgColumnNumber;
+        } catch (error) {
+            this._isColumnLayoutEnabled = false;
+        }
+    }
+
+    /** @hidden */
+    private _updateLayout(currentBreakingPointName: string): void {
+        if (this._isColumnLayoutEnabled) {
+            switch (currentBreakingPointName) {
+                case 'S':
+                    this.column = this._sColumnNumber;
+                    break;
+                case 'M':
+                    this.column = this._mdColumnNumber;
+                    break;
+                case 'L':
+                    this.column = this._lgColumnNumber;
+                    break;
+                case 'XL':
+                    this.column = this._xlColumnNumber;
+                    break;
+                default:
+                    this.column = this._xlColumnNumber;
+            }
+        }
+
+        // emit column change, so form-group knows it and re-arranges the fields
+        this.onColumnChange.emit(true);
     }
 }

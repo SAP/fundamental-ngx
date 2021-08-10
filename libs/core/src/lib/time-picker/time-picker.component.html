@@ -12,7 +12,7 @@
         <fd-input-group
             #inputGroupComponent
             [compact]="compact"
-            (addOnButtonClicked)="addOnButtonClicked()"
+            (addOnButtonClicked)="_addOnButtonClicked()"
             [button]="true"
             [state]="state"
             [disabled]="disabled"
@@ -26,15 +26,15 @@
                 class="fd-input"
                 fd-input-group-input
                 #inputElement
-                [value]="getFormattedTime()"
                 [compact]="compact"
-                (focusout)="timeInputChanged(inputElement.value)"
+                [value]="_inputTimeValue"
+                (focusout)="_timeInputChanged(inputElement.value)"
+                (keyup.enter)="_timeInputChanged($event.currentTarget.value)"
                 [disabled]="disabled"
                 [attr.id]="inputId"
                 [placeholder]="_placeholder"
                 [attr.aria-label]="timePickerInputLabel"
                 [attr.aria-required]="required"
-                (keyup.enter)="timeInputChanged($event.currentTarget.value)"
             />
         </fd-input-group>
     </fd-popover-control>
@@ -48,9 +48,9 @@
             [tablet]="tablet"
             [compact]="compact"
             [disabled]="disabled"
-            [(ngModel)]="time"
             [keepTwoDigits]="keepTwoDigitsTime"
-            (ngModelChange)="timeFromTimeComponentChanged($event)"
+            [ngModel]="time"
+            (ngModelChange)="_timeComponentValueChanged($event)"
             [meridian]="_meridian"
             [displayHours]="_displayHours"
             [displayMinutes]="_displayMinutes"

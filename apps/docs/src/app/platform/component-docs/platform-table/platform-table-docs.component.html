@@ -1,5 +1,5 @@
 <fd-docs-section-title
-    id="default-table"
+    id="default"
     componentName="table"
 >
     Simple Table
@@ -13,7 +13,7 @@
 <separator></separator>
 
 <fd-docs-section-title
-    id="custom-width-table"
+    id="custom-width"
     componentName="table"
 >
     Custom Column Width & Column Resizing
@@ -37,7 +37,7 @@
 <separator></separator>
 
 <fd-docs-section-title
-    id="actiable-rows-table"
+    id="actiable-rows"
     componentName="table"
 >
     Activable Rows
@@ -58,7 +58,7 @@
 <separator></separator>
 
 <fd-docs-section-title
-    id="custom-columns-table"
+    id="custom-columns"
     componentName="table"
 >
     Custom Column
@@ -116,7 +116,7 @@
 <separator></separator>
 
 <fd-docs-section-title
-    id="sortable-table"
+    id="sortable"
     componentName="table"
 >
     Column Sorting
@@ -133,7 +133,7 @@
 <separator></separator>
 
 <fd-docs-section-title
-    id="filterable-table"
+    id="filterable"
     componentName="table"
 >
     Column Filtering
@@ -160,7 +160,7 @@
 <separator></separator>
 
 <fd-docs-section-title
-    id="groupable-table"
+    id="groupable"
     componentName="table"
 >
     Column Grouping
@@ -182,7 +182,7 @@
 <separator></separator>
 
 <fd-docs-section-title
-    id="freezable-table"
+    id="freezable"
     componentName="table"
 >
     Column Freezing
@@ -190,8 +190,10 @@
 <description>
     <p>
         Use <code>[freezeColumnsTo]="columnName"</code> to freeze columns up to and including.
-        When using it's very important to set the <code>width</code> for the every column
-        as table cells width won't be calculated properly.
+    </p>
+
+    <p>
+        When using this features it's very important to set the <code>width</code> for the every column as table cells width won't be calculated properly.
     </p>
 
     <p>
@@ -206,7 +208,7 @@
 <separator></separator>
 
 <fd-docs-section-title
-    id="loading-table"
+    id="loading"
     componentName="table"
 >
     Loading/Busy State
@@ -222,7 +224,7 @@
 <separator></separator>
 
 <fd-docs-section-title
-    id="page-scrolling-table"
+    id="page-scrolling"
     componentName="table"
 >
     Page Scrolling
@@ -251,7 +253,7 @@
 <separator></separator>
 
 <fd-docs-section-title
-    id="table-initial-state"
+    id="initial-state"
     componentName="table"
 >
     Initial State
@@ -282,7 +284,7 @@
 
 <div style="display: none">
     <fd-docs-section-title
-        id="tree-table"
+        id="tree"
         componentName="table"
     >
         Tree Table
@@ -314,7 +316,7 @@
 </div>
 
 <fd-docs-section-title
-    id="table-P13"
+    id="p13"
     componentName="table"
 >
     Personalization Dialog.
@@ -400,7 +402,7 @@
             Add <code>&lt;fdp-column [filterable]="true"&gt;</code> option to mark a column as filterable.
         </li>
         <li>
-            Add column data type <code>&lt;fdp-column [dataType]="'string' | 'number' | 'date' | 'boolean'"&gt;</code>
+            Add column data type <code>&lt;fdp-column dataType="string | number | date | boolean"&gt;</code>
             to show corresponding filtering ui.
         </li>
     </ul>
@@ -440,7 +442,7 @@
 <separator></separator>
 
 <fd-docs-section-title
-    id="table-navigatable-row"
+    id="navigatable-row"
     componentName="table"
 >
     Making row non-navigatable
@@ -507,6 +509,7 @@
             name="description"
             key="description"
             label="Description"
+            width="200px"
         >
         </fdp-column>
 
@@ -515,6 +518,7 @@
             key="price.value"
             label="Price"
             align="end"
+            width="100px"
         >
         </fdp-column>
 
@@ -523,6 +527,7 @@
             key="status"
             label="Status"
             align="center"
+            width="150px"
         >
         </fdp-column>
     </fdp-table>

@@ -76,8 +76,8 @@ describe('Checkbox test suite', () => {
                 checkIfDisabled(binaryTempCheckbox, 'ng-reflect-is-disabled', 'false', i);
             }
         });
-
-        it('should check disabled checkbox', () => {
+        // skipped for prod
+        xit('should check disabled checkbox', () => {
             scrollIntoView(disabledBinaryCheckbox);
             checkIfDisabled(disabledBinaryCheckbox, 'ng-reflect-is-disabled', 'true');
         });
@@ -104,8 +104,8 @@ describe('Checkbox test suite', () => {
                 checkIfDisabled(checkboxWithoutForm, 'ng-reflect-is-disabled', 'false', i);
             }
         });
-
-        it('should check disabled checkbox', () => {
+        // skipped for prod
+        xit('should check disabled checkbox', () => {
             // TODO: Fix for Safari and IE
             if (browserIsIEorSafari()) {
                 console.log('Skip for Safari and IE');

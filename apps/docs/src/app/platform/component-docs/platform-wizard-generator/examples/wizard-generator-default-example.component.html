@@ -1,4 +1,4 @@
-<fdp-wizard-generator [items]="stepItems" [title]="wizardTitle" (wizardFinished)="wizardFinished($event)"></fdp-wizard-generator>
+<fdp-wizard-generator [items]="stepItems" (wizardFinished)="wizardFinished($event)"></fdp-wizard-generator>
 
 <p *ngIf="wizardValue">
     Wizard value: {{ wizardValue | json }}
