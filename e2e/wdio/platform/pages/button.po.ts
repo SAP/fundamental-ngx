@@ -2,8 +2,7 @@ import { BaseComponentPo } from './base-component.po';
 import { waitForPresent } from '../../driver/wdio';
 
 export class ButtonPo extends BaseComponentPo {
-    private url = '/menu-button';
-    root = '#page-content';
+    private url = '/button';
     typeButtons = 'fdp-button-types-example button';
     sizeButtons = 'fdp-button-sizes-example button';
     iconButtons = 'fdp-button-icons-example button';

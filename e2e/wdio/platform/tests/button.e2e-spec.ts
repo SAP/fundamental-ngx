@@ -2,6 +2,7 @@ import { ButtonPo } from '../pages/button.po';
 import {
     getAttributeByName,
     getElementArrayLength,
+    getElementClass,
     getElementTitle,
     isElementClickable,
     scrollIntoView,
@@ -46,14 +47,14 @@ describe('Button test suite:', function() {
         });
 
         it('verify disable state buttons', () => {
-            expect(getAttributeByName(disableStateButtons, 'aria-disabled')).toEqual('true');
-            expect(getAttributeByName(disableStateButtons, 'disabled', 1)).toEqual('true');
+            expect(getElementClass(disableStateButtons)).toContain('is-disabled', 'button is not disabled');
+            expect(getElementClass(disableStateButtons, 1)).toContain('is-disabled', 'button is not disabled');
         });
 
         it('should check truncated text button', () => {
-            expect(getElementTitle(truncatedButton)).toContain('Looooooooooong Text Button');
-            expect(isElementClickable(truncatedButton)).toBe(true);
-    });
+            expect(getElementTitle(truncatedButton)).toContain('Looooooooooong Text Button', 'Text title is not matching');
+            expect(isElementClickable(truncatedButton)).toBe(true, 'truncated button with index disable');
+        });
 
     describe('Check visual regression basic', function() {
 
