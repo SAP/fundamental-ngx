@@ -11,9 +11,9 @@ export class ToolbarPo extends BaseComponent {
     inputField = 'input.fd-input--compact';
     dropdownMenu = '.fd-select__control.ng-star-inserted';
     dropdownOption = '.fd-list__item.ng-star-inserted';
-    inputFieldText  = 'div.fd-select__text-content';
+    inputFieldText = 'div.fd-select__text-content';
 
     navigateTo(): void {
-        cy.visit(this.baseUrl + this.pageUrl);
+        super.navigateTo(this.pageUrl);
     }
 }

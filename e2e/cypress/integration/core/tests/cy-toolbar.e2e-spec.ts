@@ -1,5 +1,5 @@
-import {ToolbarPo} from '../../../support/core/pages/cy-toolbar.po';
-import {headerTestText, testTextArr, testDate, fruitArr} from '../../../support/core/fixtures/cy-toolbar.content';
+import { ToolbarPo } from '../../../support/core/pages/cy-toolbar.po';
+import { headerTestText, testTextArr, testDate, fruitArr } from '../../../support/core/fixtures/cy-toolbar.content';
 
 
 describe('Toolbar test suite:', () => {
@@ -9,7 +9,13 @@ describe('Toolbar test suite:', () => {
         inputFieldText
     } = toolbarPage;
 
-    beforeEach(() => toolbarPage.navigateTo());
+    before(() => {
+        toolbarPage.navigateTo();
+    });
+
+    afterEach(() => {
+        cy.reload();
+    });
 
     it('verify  text in Toolbar Types example', () => {
         for (let i = 0; i < 5; i++) {

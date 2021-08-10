@@ -127,6 +127,8 @@
     "npm": "6.14.13",
     "raw-loader": "4.0.2",
     "rxjs": "~6.6.6",
+    "sauce-connect-launcher": "1.3.2",
+    "saucectl": "0.60.0",
     "tslib": "2.3.0",
     "web-animations-js": "2.3.2",
     "webdriver-manager": "12.1.7",

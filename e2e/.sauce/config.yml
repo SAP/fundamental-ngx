@@ -1,23 +1,28 @@
 apiVersion: v1alpha
 kind: cypress
-defaults: {}
+defaults: {
+  mode: sauce
+}
 showconsolelog: false
 sauce:
   region: eu-central-1
-  concurrency: 337
+  concurrency: 30
   sauceignore: .sauceignore
+  tunnel:
+#    sauce tunnel ID (Tunnel Name)
+    id: sso-sap-C5315352_tunnel_id
 cypress:
   configFile: cypress.json
   version: 7.7.0
   record: false
   key: ""
 suites:
-- name: cypress - windows 10 - chrome
-  browser: chrome
-  platformName: windows 10
+- name: "cypress test"
+  browser: "chrome"
+  platformName: "Windows 10"
+  screenResolution: "1920x1080"
   config:
-    testFiles:
-    - '**/*.*'
+    testFiles: ["**/*.e2e-spec.ts"]
   mode: sauce
 rootDir: .
 artifacts:
@@ -26,3 +31,7 @@ artifacts:
     - '*'
     when: never
     directory: ./artifacts
+npm:
+  registry: https://registry.npmjs.org
+  packages:
+    "typescript": "4.1.6"

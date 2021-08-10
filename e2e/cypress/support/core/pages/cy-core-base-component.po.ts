@@ -1,9 +1,13 @@
 export class BaseComponent {
     title = 'header .header';
     root = '#page-content';
-    baseUrl = 'http://localhost:4200/fundamental-ngx#/core';
+    coreUrl = '/core';
     exampleAreaContainersArr = '.fd-doc-component';
     rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
+
+    navigateTo(url: string): void {
+        cy.visit(this.coreUrl + url);
+    }
 
     getText(selector: string, expectedValue: string, index?: number): void {
         cy.get(selector).eq(index ? index : 0).contains(expectedValue);

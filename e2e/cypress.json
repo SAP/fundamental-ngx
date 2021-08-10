@@ -1,4 +1,3 @@
 {
-  "viewportWidth": 1400,
-  "viewportHeight": 900
+  "baseUrl": "https://sap.dev:4200/fundamental-ngx#"
 }
