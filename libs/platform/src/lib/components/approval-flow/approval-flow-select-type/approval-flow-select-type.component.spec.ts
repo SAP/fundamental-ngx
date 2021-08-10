@@ -39,8 +39,4 @@ describe('ApprovalFlowSelectTypeComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-
-    it('should init dialog with passed data', () => {
-        expect(component._data.rtl).toEqual(false);
-    });
 });

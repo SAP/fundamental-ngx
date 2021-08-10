@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChild,
     ElementRef,
     EventEmitter,
     HostBinding,
@@ -12,14 +13,17 @@ import {
     Optional,
     Output,
     QueryList,
+    TemplateRef,
     ViewChild,
-    ViewChildren
+    ViewChildren,
+    ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { MenuComponent } from '@fundamental-ngx/core/menu';
 import { ObjectStatus } from '@fundamental-ngx/core/object-status';
+import { GridListItemComponent } from '@fundamental-ngx/core/grid-list';
 
 import { ApprovalFlowDropZoneDirective } from './approval-flow-drop-zone.directive';
 import { ApprovalGraphNode, ApprovalGraphNodeMetadata, ApprovalStatus } from '../interfaces';
@@ -40,10 +44,11 @@ const DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
     templateUrl: './approval-flow-node.component.html',
     styleUrls: ['./approval-flow-node.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
     host: {
         class: 'fdp-approval-flow-node',
-        '[class.approval-flow-node--first-root]': 'meta?.firstOfMultipleRootNodes',
-        '[class.approval-flow-node--first-final]': 'meta?.firstOfMultipleFinalNodes'
+        '[class.fdp-approval-flow-node--first-root]': 'meta?.firstOfMultipleRootNodes',
+        '[class.fdp-approval-flow-node--first-final]': 'meta?.firstOfMultipleFinalNodes'
     }
 })
 export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
@@ -70,58 +75,58 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
 
     /** Whether the node is in edit mode */
     @Input()
-    @HostBinding('class.approval-flow-node--edit-mode')
+    @HostBinding('class.fdp-approval-flow-node--edit-mode')
     isEdit: boolean;
 
     /** Whether the node after is blank */
     @Input()
-    @HostBinding('class.approval-flow-node--next-blank')
+    @HostBinding('class.fdp-approval-flow-node--next-blank')
     isNextNodeBlank: boolean;
 
     /** @hidden */
-    @HostBinding('class.approval-flow-node--blank')
+    @HostBinding('class.fdp-approval-flow-node--blank')
     get _blank(): boolean {
         return this.node?.blank;
     }
 
     /** @hidden */
-    @HostBinding('class.approval-flow-node--space')
+    @HostBinding('class.fdp-approval-flow-node--space')
     get _space(): boolean {
         return this.node?.space;
     }
 
     /** @hidden */
-    @HostBinding('class.approval-flow-node--root')
+    @HostBinding('class.fdp-approval-flow-node--root')
     get _isRoot(): boolean {
         return this.meta?.isRoot
     }
 
     /** @hidden */
-    @HostBinding('class.approval-flow-node--final')
+    @HostBinding('class.fdp-approval-flow-node--final')
     get _isFinal(): boolean {
         return this.meta?.isFinal;
     }
 
     /** @hidden */
-    @HostBinding('class.approval-flow-node--line-before')
+    @HostBinding('class.fdp-approval-flow-node--line-before')
     get _renderLineBefore(): boolean {
         return !this.node?.blank;
     }
 
     /** @hidden */
-    @HostBinding('class.approval-flow-node--line-after')
+    @HostBinding('class.fdp-approval-flow-node--line-after')
     get _renderLineAfter(): boolean {
         return !this.node?.blank || this._isFinal;
     }
 
     /** @hidden */
-    @HostBinding('class.approval-flow-node--approved')
+    @HostBinding('class.fdp-approval-flow-node--approved')
     get _isApproved(): boolean {
         return this.node && isNodeApproved(this.node);
     }
 
     /** @hidden */
-    @HostBinding('class.approval-flow-node--parent-approved')
+    @HostBinding('class.fdp-approval-flow-node--parent-approved')
     get _isParentApproved(): boolean {
         if (!this.meta?.parents?.length) {
             return this.meta?.rootNodesApproved;
@@ -131,47 +136,45 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     /** @hidden */
-    @HostBinding('class.approval-flow-node--selected')
+    @HostBinding('class.fdp-approval-flow-node--selected')
     get _isNodeSelected(): boolean {
         return this.isEdit && this._isSelected;
     }
 
     /** @hidden */
-    @HostBinding('class.approval-flow-node--parallel-start')
+    @HostBinding('class.fdp-approval-flow-node--parallel-start')
     get _isParallelStart(): boolean {
         return Boolean(this.meta?.parallelStart);
     }
 
     /** @hidden */
-    @HostBinding('class.approval-flow-node--parallel-end')
+    @HostBinding('class.fdp-approval-flow-node--parallel-end')
     get _isParallelEnd(): boolean {
         return Boolean(this.meta?.parallelEnd);
     }
 
     /** @hidden */
-    @HostBinding('class.approval-flow-node--first-in-parallel')
+    @HostBinding('class.fdp-approval-flow-node--first-in-parallel')
     get _isFirstInParallel(): boolean {
         return Boolean(this.meta?.isFirstInParallel);
     }
 
     /** @hidden */
-    @HostBinding('class.approval-flow-node--last-in-parallel')
+    @HostBinding('class.fdp-approval-flow-node--last-in-parallel')
     get _isLastInParallel(): boolean {
         return Boolean(this.meta?.isLastInParallel);
     }
 
     /** Whether the node is blank and the final */
-    @HostBinding('class.approval-flow-node--last-blank')
+    @HostBinding('class.fdp-approval-flow-node--last-blank')
     get _lastBlank(): boolean {
         return this._blank && this.node.targets.length === 0;
     }
 
     /** @hidden */
-    @HostBinding('attr.dir')
-    _dir: string;
-
-    /** @hidden */
-    _isSelected = false;
+    get _isSelected(): boolean {
+        return this.node.selected;
+    }
 
     /** @hidden */
     _objectStatus: ObjectStatus;
@@ -182,35 +185,46 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     /** @hidden */
     _dueIn = 0;
 
-    /** Event emitted on node click */
-    @Output() onNodeClick = new EventEmitter<void>();
-
-    /** Event emitted on node checked */
-    @Output() onNodeCheck = new EventEmitter<boolean>();
-
     /** Event emitted on add node button clicked, value is the placement for the new node */
-    @Output() onAdd = new EventEmitter<ApprovalFlowNodeTarget>();
+    @Output()
+    onAdd = new EventEmitter<ApprovalFlowNodeTarget>();
 
     /** Event emitted on edit node button clicked */
-    @Output() onEdit = new EventEmitter<void>();
+    @Output()
+    onEdit = new EventEmitter<void>();
 
     /** Event emitted on delete node button clicked */
-    @Output() onDelete = new EventEmitter<void>();
+    @Output()
+    onDelete = new EventEmitter<void>();
 
     /** @hidden */
-    @ViewChild(MenuComponent) _menu: MenuComponent;
+    @ViewChild(MenuComponent)
+    _menu: MenuComponent;
 
     /** @hidden */
-    @ViewChildren(ApprovalFlowDropZoneDirective) _dropZones: QueryList<ApprovalFlowDropZoneDirective>;
+    @ViewChild('overflowMenuButton')
+    _overflowMenuButton: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChild('nodeContent')
+    _nodeContent: TemplateRef<any>;
+
+    /** @hidden */
+    @ViewChildren(ApprovalFlowDropZoneDirective)
+    _dropZones: QueryList<ApprovalFlowDropZoneDirective>;
+
+    /** @hidden */
+    @ContentChild(GridListItemComponent)
+    _gridListItem: GridListItemComponent<ApprovalGraphNode>;
 
     /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
     constructor(
-        private _elRef: ElementRef,
-        private _cdr: ChangeDetectorRef,
-        @Optional() private _rtlService: RtlService
+        private readonly _elRef: ElementRef,
+        private readonly _cdr: ChangeDetectorRef,
+        @Optional() private readonly _rtlService: RtlService
     ) {}
 
     /** @hidden */
@@ -283,10 +297,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
         this._checkNodeStatus();
 
         this._subscriptions.add(
-            this._rtlService?.rtl.subscribe(isRtl => {
-                this._dir = isRtl ? 'rtl' : 'ltr';
-                this._cdr.detectChanges();
-            })
+            this._rtlService?.rtl.subscribe(() => this._cdr.markForCheck())
         );
     }
 
@@ -301,23 +312,13 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     /** @hidden */
-    _onClick(): void {
-        this.onNodeClick.emit();
-    }
-
-    /** @hidden */
-    _onCheck(isChecked: boolean): void {
-        this.onNodeCheck.emit(isChecked);
-    }
-
-    /** @hidden */
     _onMenuOpen(): void {
         this._menu.refreshPosition();
     }
 
     /** @hidden */
     _focus(): void {
-        this._nativeElement.focus({ preventScroll: true });
+        this._gridListItem?.focus();
     }
 
     /** @hidden */

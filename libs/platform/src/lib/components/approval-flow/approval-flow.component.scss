@@ -1,23 +1,24 @@
-$block: approval-flow;
+$block: fdp-approval-flow;
 
-$column-line-top-offset: 48px;
-$column-line-top-offset--edit-mode: 64px;
+$column-line-top-offset: 3rem;
+$column-line-top-offset--edit-mode: 4rem;
 
-$carousel-controls-height: 94px;
-$carousel-controls-height--edit-mode: 126px;
+$carousel-controls-height: 5.875rem;
+$carousel-controls-height--edit-mode: 7.875rem;
 
-.#{$block} {
-    &__messages {
-        margin-bottom: 1rem;
-
-        fd-message-strip:not(:last-child) {
-            margin-bottom: 1rem;
+@mixin fd-rtl {
+    @at-root {
+        [dir='rtl'] &,
+        &[dir='rtl'] {
+            @content;
         }
     }
+}
 
+.#{$block} {
     &__watchers {
         margin-bottom: .5rem;
-        padding-left: 1rem;
+        padding-left: .5rem;
 
         &-title {
             font-size: .875em;
@@ -38,23 +39,24 @@ $carousel-controls-height--edit-mode: 126px;
             }
         }
 
-        &[dir='rtl'] {
-            padding-right: 1rem;
+        & &-input-container {
+            width: 17.375rem
+        }
+
+        @include fd-rtl() {
+            padding-right: .5rem;
 
             fd-avatar {
                 margin-left: .5rem;
                 margin-right: 0;
             }
         }
-
-        & &-input-container {
-            width: 278px;
-        }
     }
 
     &__container {
+        max-width: 100%;
         position: relative;
-        padding: 0 1rem;
+        padding: 0 .5rem;
 
         &--extra-padding-start {
             padding-left: 2rem;
@@ -64,14 +66,19 @@ $carousel-controls-height--edit-mode: 126px;
             padding-right: 2rem;
         }
 
-        &[dir='rtl'] {
+        @include fd-rtl() {
             &.#{$block}__container--extra-padding-start {
-                padding-left: 1rem;
+                padding-left: .5rem;
                 padding-right: 2rem;
             }
 
             &.#{$block}__container--extra-padding-end {
-                padding-right: 1rem;
+                padding-right: .5rem;
+                padding-left: 2rem;
+            }
+
+            &.#{$block}__container--extra-padding-start.#{$block}__container--extra-padding-end {
+                padding-right: 2rem;
                 padding-left: 2rem;
             }
         }
@@ -80,46 +87,40 @@ $carousel-controls-height--edit-mode: 126px;
     &__graph-container {
         position: relative;
         overflow: hidden;
-        padding-left: 2rem;
         padding-top: .5rem;
-        padding-bottom: 3.5rem;
+        padding-bottom: 2rem;
+        padding-left: 2rem;
 
         &--multiple-root-nodes {
             padding-left: 4rem;
+
+            @include fd-rtl() {
+                padding-right: 2rem;
+            }
         }
 
         &--multiple-final-nodes {
-            padding-right: 4rem;
-        }
-
-        &[dir='rtl'] {
-            &.#{$block}__graph-container--multiple-root-nodes {
-                padding-left: 1rem;
-                padding-right: 2rem;
-            }
-
-            &.#{$block}__graph-container--multiple-final-nodes {
-                padding-right: 1rem;
-                padding-left: 2rem;
-            }
-
-            &.#{$block}__graph-container--multiple-root-nodes.#{$block}__graph-container--multiple-final-nodes {
-                padding-left: 2rem;
-                padding-right: 2rem;
+            @include fd-rtl() {
+                padding-left: 0;
             }
         }
     }
 
-    &__carousel-controls {
+    &-carousel-controls {
         position: absolute;
         display: flex;
         align-items: center;
         width: 100%;
-        height: $carousel-controls-height;
+        height: calc(#{$carousel-controls-height} + 0.5rem);
         padding-top: .5rem;
         left: 0;
 
-        button {
+        &--edit-mode {
+            height: calc(#{$carousel-controls-height--edit-mode} + 0.5rem);
+        }
+
+        &__button--prev-slide,
+        &__button--next-slide {
             position: absolute;
             border: none;
             background: transparent;
@@ -127,50 +128,35 @@ $carousel-controls-height--edit-mode: 126px;
             color: var(--sapContent_LabelColor, #6A6D70);
             display: flex;
             justify-content: space-between;
-            width: 20px;
+            width: 2rem;
             align-items: center;
             cursor: pointer;
-
-            &:focus {
-                outline-offset: 0.0625rem;
-                outline-width: 0.0625rem;
-                outline-style: dotted;
-                outline-color: var(--sapContent_FocusColor, #0854A0);
-            }
 
             fd-icon {
                 font-size: .875rem;
                 color: #0854A0;
                 color: var(--sapButton_IconColor, #0854A0);
                 position: relative;
-                top: 1px;
+                top: 0.0625rem;
             }
         }
 
-        &--edit-mode {
-            height: $carousel-controls-height--edit-mode;
-        }
+        &__button--prev-slide {
+            left: 0;
 
-        &[dir='rtl'] {
-            .#{$block}__control--next-slide {
-                right: auto;
-                left: 0;
-            }
-
-            .#{$block}__control--prev-slide {
+            @include fd-rtl() {
                 left: auto;
                 right: 0;
             }
         }
-    }
 
-    &__control {
-        &--next-slide {
+        &__button--next-slide {
             right: 0;
-        }
 
-        &--prev-slide {
-            left: 0;
+            @include fd-rtl() {
+                left: 0;
+                right: auto;
+            }
         }
     }
 
@@ -181,15 +167,11 @@ $carousel-controls-height--edit-mode: 126px;
         left: 0;
         transition: left .3s;
 
-        .#{$block}__column {
+        &-column {
             margin-right: 4rem;
             position: relative;
-        }
 
-        &[dir='rtl'] {
-            .#{$block}__column {
-                margin-right: 4rem;
-
+            @include fd-rtl() {
                 &:first-child {
                     margin-right: 2rem;
                 }
@@ -200,61 +182,28 @@ $carousel-controls-height--edit-mode: 126px;
             margin-bottom: 1rem;
         }
 
-        fdp-approval-flow-node:focus {
-            outline-offset: 0.0625rem;
-            outline-width: 0.0625rem;
-            outline-style: dotted;
-            outline-color: var(--sapContent_FocusColor, #0854A0);
-        }
-    }
+        .#{$block}__graph-node-inner {
+            padding: 0;
 
-    &__edit-mode-footer {
-        display: flex;
-        justify-content: flex-end;
-        background-color: #fff;
-        background: var(--sapBaseColor, #fff);
-        padding: .5rem;
-        box-shadow: 0 0 0 rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.3);
-        border-radius: 4px;
+            .fd-grid-list__item-toolbar {
+                .fd-toolbar--extra-content {
+                    margin-left: auto;
 
-        .fd-button--emphasized {
-            margin-right: .5rem;
-        }
+                    @include fd-rtl() {
+                        margin-left: 0;
+                        margin-right: auto;
+                    }
+                }
 
-        &[dir='rtl'] {
-            .fd-button--emphasized {
-                margin-left: .5rem;
-                margin-right: auto;
-            }
-        }
-    }
-
-    &__toolbar {
-        display: block;
-        margin-bottom: .5rem;
-
-        &-title {
-            font-size: 1.125rem;
-            font-weight: 400;
-        }
-
-        .fd-toolbar {
-            display: flex;
-            justify-content: space-between;
-
-            .#{$block}__toolbar-controls button:not(:last-child) {
-                margin-right: .5rem;
-            }
-        }
-
-        &[dir='rtl'] {
-            .#{$block}__toolbar-title {
-                padding-right: .5rem;
+                .fd-toolbar--actions {
+                    display: none;
+                }
             }
 
-            .#{$block}__toolbar-controls button:not(:last-child) {
-                margin-left: .5rem;
-                margin-right: auto;
+            &:not(&--edit) {
+                .fd-toolbar.fd-grid-list__item-toolbar {
+                    display: none;
+                }
             }
         }
     }

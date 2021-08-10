@@ -1,0 +1,7 @@
+$block: fdp-approval-flow-messages;
+
+.#{$block} {
+    &__item:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+}

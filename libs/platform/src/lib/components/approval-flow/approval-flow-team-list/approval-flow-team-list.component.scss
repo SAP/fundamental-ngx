@@ -1,6 +1,18 @@
-.approval-flow__team-list {
+$block: fdp-approval-flow-team-list;
+
+@mixin fd-rtl {
+    @at-root {
+        [dir='rtl'] &,
+        &[dir='rtl'] {
+            @content;
+        }
+    }
+}
+
+.#{$block} {
     .fd-form-item {
         position: relative;
+        margin-bottom: 0;
 
         fd-radio-button {
             position: absolute;
@@ -28,7 +40,7 @@
         }
     }
 
-    &[dir="rtl"] {
+    @include fd-rtl() {
         .fd-form-item fd-icon {
             right: auto;
             left: 1rem;
@@ -39,5 +51,4 @@
             padding-left: 0 !important;
         }
     }
-
 }
