@@ -166,16 +166,9 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
         if (this.popoverControl && this.triggers.includes('click')) {
             this.popoverControl.makeTabbable();
         }
-        this.listItems.forEach((li) => {
-            const listItem = this._getHtmlElement(li);
-            const listTitle = listItem.querySelector('.fd-list__title');
-            listTitle.setAttribute('tabindex', '-1');
+        this.listItems.forEach(li => {
+            li.listTitle.elRef.nativeElement.setAttribute('tabindex', '-1');
         });
-    }
-
-    /** @hidden */
-    private _getHtmlElement(li: ListItemComponent): HTMLElement {
-        return li.elementRef.nativeElement as HTMLElement;
     }
 
     /** @hidden */

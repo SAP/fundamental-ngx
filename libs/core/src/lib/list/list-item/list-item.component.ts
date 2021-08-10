@@ -28,6 +28,7 @@ import { LIST_ITEM_COMPONENT, ListItemInterface } from '@fundamental-ngx/core/ut
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import { ListFocusItem } from '../list-focus-item.model';
 import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ListTitleDirective } from '../directives/list-title.directive';
 
 /**
  * The component that represents a list item.
@@ -120,6 +121,10 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     /** @hidden */
     @ContentChildren(ButtonComponent, { descendants: true })
     buttons: QueryList<ButtonComponent>;
+
+    /** @hidden */
+    @ContentChild(ListTitleDirective)
+    listTitle: ListTitleDirective;
 
     /** @hidden Implementation of KeyboardSupportItemInterface | TODO Revisit KeyboardSupportItemInterface*/
     clicked = new EventEmitter<MouseEvent>();

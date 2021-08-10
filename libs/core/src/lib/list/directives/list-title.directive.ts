@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
 
 @Directive({
   selector: '[fd-list-title], [fdListTitle]'
@@ -12,4 +12,7 @@ export class ListTitleDirective {
     @Input()
     @HostBinding('class.fd-list__title--wrap')
     wrap = false;
+
+    /** @hidden */
+    constructor(public elRef: ElementRef) {}
 }
