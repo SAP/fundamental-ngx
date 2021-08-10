@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.183](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.182...v0.31.0-rc.183) (2021-08-10)
+
+
+### Bug Fixes
+
+* **core:** added default unique id for multiinput ([#6260](https://github.com/SAP/fundamental-ngx/issues/6260)) ([69c1745](https://github.com/SAP/fundamental-ngx/commit/69c1745e2fec8a59aaa4fcdeed560dca2303d4e0))
+
 ## [0.31.0-rc.182](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.181...v0.31.0-rc.182) (2021-08-10)
 
 ## [0.31.0-rc.181](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.180...v0.31.0-rc.181) (2021-08-10)
