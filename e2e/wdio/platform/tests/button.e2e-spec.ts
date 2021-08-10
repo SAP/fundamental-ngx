@@ -15,16 +15,13 @@ describe('Button test suite:', function() {
     beforeAll(() => {
         buttonPage.open();
     }, 1);
-
-    it('Verify all buttons are clickable', function() {
-
+    
         it('verify clickable buttons types', () => {
             const typeButtonsLength = getElementArrayLength(typeButtons);
             for (let i = 0; i < typeButtonsLength; i++) {
                 scrollIntoView(typeButtons, i);
                 expect(isElementClickable(typeButtons, i)).toBe(true, 'type button with index ${i} not clickable');
             }
-        });
         });
 
         it('verify clickable size buttons', () => {

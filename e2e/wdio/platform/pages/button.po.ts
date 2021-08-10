@@ -2,6 +2,15 @@ import { BaseComponentPo } from './base-component.po';
 import { waitForPresent } from '../../driver/wdio';
 
 export class ButtonPo extends BaseComponentPo {
+    static checkRtlSwitch() {
+        throw new Error('Method not implemented.');
+    }
+    static compareWithBaseline(): any {
+        throw new Error('Method not implemented.');
+    }
+    static saveExampleBaselineScreenshot() {
+        throw new Error('Method not implemented.');
+    }
     private url = '/menu-button';
 
     typeButtons = 'fdp-button-types-example button';
@@ -12,15 +21,6 @@ export class ButtonPo extends BaseComponentPo {
     truncatedButton = 'fdp-button-truncate-example button';
     
     root = '#page-content';
-    static checkRtlSwitch() {
-        throw new Error('Method not implemented.');
-    }
-    static compareWithBaseline(): any {
-        throw new Error('Method not implemented.');
-    }
-    static saveExampleBaselineScreenshot() {
-        throw new Error('Method not implemented.');
-    }
     
     open(): void {
         super.open(this.url);
