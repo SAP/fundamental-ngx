@@ -50,7 +50,7 @@ export class InputGroupDocsComponent {
                     },
                     state: {
                         type: 'string',
-                        enum: ['success', 'error', 'information', 'warning']
+                        enum: ['', 'success', 'error', 'information', 'warning']
                     }
                 }
             },
@@ -75,6 +75,7 @@ export class InputGroupDocsComponent {
             ngModel: '10000',
             addOnType: 'text',
             addOnText: '€',
+            state: '',
             glyph: '',
             button: false
         },

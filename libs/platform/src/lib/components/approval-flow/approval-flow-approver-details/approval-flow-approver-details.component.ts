@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
@@ -12,14 +12,18 @@ interface DialogRefData {
     allowSendReminder?: boolean;
     approvalFlowDataSource: ApprovalDataSource;
     userDetailsTemplate: TemplateRef<any>;
-    rtl: boolean;
+    rtl?: boolean;
 }
 
 @Component({
     selector: 'fdp-approval-flow-approver-details',
     templateUrl: './approval-flow-approver-details.component.html',
-    styleUrls: ['../styles/approval-flow-dialog.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: [ '../styles/approval-flow-dialog.scss' ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    host: {
+        class: 'fdp-approval-flow-dialog fdp-approval-flow-approver-details'
+    }
 })
 export class ApprovalFlowApproverDetailsComponent implements OnInit {
     /** @hidden */
@@ -48,6 +52,7 @@ export class ApprovalFlowApproverDetailsComponent implements OnInit {
     /** @hidden */
     ngOnInit(): void {
         this._isListMode = this._data.node?.approvers.length > 1;
+
         if (this._isListMode) {
             this._setListItems(this._data.node.approvers);
         } else {
@@ -74,7 +79,6 @@ export class ApprovalFlowApproverDetailsComponent implements OnInit {
         this._isListMode = false;
         this._selectedUsers = [];
         this._cdr.detectChanges();
-
     }
 
     /** @hidden */

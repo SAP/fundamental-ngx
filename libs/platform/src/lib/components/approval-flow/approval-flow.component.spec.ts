@@ -281,9 +281,9 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should properly set node flags (nodes metadata)', () => {
-        const simpleGraphRootNode = component._graph[0].nodes[0];
-        const graphLastColumn = component._graph.length - 1;
-        const simpleGraphFinalNode = component._graph[graphLastColumn].nodes[0];
+        const simpleGraphRootNode = component._graph.columns[0].nodes[0];
+        const graphLastColumnIndex = component._graph.columns.length - 1;
+        const simpleGraphFinalNode = component._graph.columns[graphLastColumnIndex].nodes[0];
 
         expect(component._graphMetadata[simpleGraphRootNode.id].isRoot).toBeTruthy();
         expect(component._graphMetadata[simpleGraphFinalNode.id].isFinal).toBeTruthy();
@@ -298,21 +298,21 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should render approval flow title', () => {
-        const titleEl = fixture.nativeElement.querySelector('.approval-flow__toolbar-title');
+        const titleEl = fixture.nativeElement.querySelector('.fdp-approval-flow__toolbar .fd-toolbar .fd-label');
 
         expect(titleEl).toBeTruthy();
-        expect(titleEl.textContent).toEqual(TEST_APPROVAL_FLOW_TITLE);
+        expect(titleEl.textContent.trim()).toEqual(TEST_APPROVAL_FLOW_TITLE);
 
         const newTitle = `${TEST_APPROVAL_FLOW_TITLE}-changed`;
 
         host.title = newTitle;
         fixture.detectChanges();
 
-        expect(titleEl.textContent).toEqual(newTitle);
+        expect(titleEl.textContent.trim()).toEqual(newTitle);
     });
 
     it('should render watchers list', () => {
-        const watchersContainer = fixture.nativeElement.querySelector('.approval-flow__watchers');
+        const watchersContainer = fixture.nativeElement.querySelector('.fdp-approval-flow__watchers');
 
         expect(watchersContainer).toBeTruthy();
         expect(watchersContainer.querySelectorAll('fd-avatar').length).toEqual(simpleGraph.watchers.length);
@@ -321,7 +321,7 @@ describe('ApprovalFlowComponent', () => {
     it('should call watcher click handler on watcher click', () => {
         spyOn(component, '_onWatcherClick').and.callThrough();
 
-        const watchersContainer = fixture.nativeElement.querySelector('.approval-flow__watchers');
+        const watchersContainer = fixture.nativeElement.querySelector('.fdp-approval-flow__watchers');
         const watcher = watchersContainer.querySelector('fd-avatar');
 
         expect(watcher).toBeTruthy();
@@ -332,19 +332,11 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should render graph', () => {
-        const nodesContainer = fixture.nativeElement.querySelector('.approval-flow__graph');
+        const nodesContainer = fixture.nativeElement.querySelector('.fdp-approval-flow__graph');
 
         expect(nodesContainer).toBeTruthy();
-        expect(nodesContainer.querySelectorAll('.approval-flow__column').length).toEqual(simpleGraph.nodes.length);
+        expect(nodesContainer.querySelectorAll('.fdp-approval-flow__graph-column').length).toEqual(simpleGraph.nodes.length);
         expect(nodesContainer.querySelectorAll('fdp-approval-flow-node').length).toEqual(simpleGraph.nodes.length);
-    });
-
-    it('should call node click handler on node click', () => {
-        spyOn(component, '_onNodeClick').and.callThrough();
-
-        component._nodeComponents.first.onNodeClick.emit();
-
-        expect(component._onNodeClick).toHaveBeenCalled();
     });
 
     it('should send reminders', () => {
@@ -358,7 +350,7 @@ describe('ApprovalFlowComponent', () => {
     it('should call keydown handler if arrow key was pressed', () => {
         spyOn(component, '_onNodeKeyDown').and.callThrough();
 
-        const nodesContainer = fixture.nativeElement.querySelector('.approval-flow__graph');
+        const nodesContainer = fixture.nativeElement.querySelector('.fdp-approval-flow__graph');
 
         expect(nodesContainer).toBeTruthy();
 
@@ -400,7 +392,7 @@ describe('ApprovalFlowComponent', () => {
         const dialogSpy = spyOn(fixture.componentRef.injector.get(DialogService), 'open')
             .and.returnValue({ afterClosed: of(null) } as any);
 
-        component._addNodeFromToolbar('empty');
+        component._addNode(null, 'empty');
 
         expect(dialogSpy).toHaveBeenCalled();
 
@@ -408,24 +400,6 @@ describe('ApprovalFlowComponent', () => {
 
         expect(diagogSpyArgs.nodeTarget).toEqual('empty');
         expect(diagogSpyArgs.showNodeTypeSelect).toEqual(false);
-    });
-
-    it('should calculate toolbar buttons state', () => {
-        const rootNode = simpleGraph.nodes[0];
-        const finalNode = simpleGraph.nodes[2];
-
-        component._onNodeCheck(rootNode);
-
-        expect(component._canAddBefore).toBeFalsy();
-        expect(component._canAddAfter).toBeFalsy();
-        expect(component._canAddParallel).toBeFalsy();
-
-        component._onNodeCheck(rootNode);
-        component._onNodeCheck(finalNode);
-
-        expect(component._canAddBefore).toBeFalsy();
-        expect(component._canAddAfter).toBeFalsy();
-        expect(component._canAddParallel).toBeFalsy();
     });
 
     it('should enter edit mode', () => {
@@ -468,9 +442,7 @@ describe('ApprovalFlowComponent', () => {
         const lastNodeComponent = component._nodeComponents.last
         const sourceNode = lastNodeComponent.node;
 
-        lastNodeComponent._isSelected = true;
-
-        component._addNodeFromToolbar('after');
+        component._addNode(sourceNode, 'after');
 
         expect(dialogSpy).toHaveBeenCalled();
 

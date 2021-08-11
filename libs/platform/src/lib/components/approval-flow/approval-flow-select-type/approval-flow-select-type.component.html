@@ -1,4 +1,4 @@
-<fd-dialog [attr.dir]="_data.rtl ? 'rtl' : 'ltr'">
+<fd-dialog>
     <fd-dialog-header>
         <ng-template fdTemplate="header">
             <p i18n="@@platformApprovalFlowSelectTypeDialogMoveApproverAs">
@@ -12,7 +12,7 @@
             Parallel or serial
         </span>
 
-        <fd-form-group>
+        <fd-form-group class="fdp-approval-flow-select-type__form">
             <div fd-form-item>
                 <fd-radio-button
                     i18n="@@platformApprovalFlowAddNodeDialogNodeTypeParallel"
@@ -24,6 +24,7 @@
                     Parallel approver
                 </fd-radio-button>
             </div>
+
             <div fd-form-item>
                 <fd-radio-button
                     i18n="@@platformApprovalFlowAddNodeDialogNodeTypeSerial"
@@ -36,7 +37,10 @@
                 </fd-radio-button>
             </div>
 
-            <div *ngIf="_nodeType === _nodeTypes.PARALLEL" fd-form-item>
+            <div
+                *ngIf="_nodeType === _nodeTypes.PARALLEL"
+                fd-form-item
+            >
                 <fd-checkbox
                     [(ngModel)]="_toNextSerial"
                     i18n="@@platformApprovalFlowAddToNext">Add to the next serial node</fd-checkbox>

@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     EventEmitter,
@@ -7,8 +8,10 @@ import {
     Output,
     QueryList,
     ViewChild,
-    ViewChildren
+    ViewChildren,
+    ViewEncapsulation
 } from '@angular/core';
+
 import { ApprovalUser } from '../interfaces';
 import { BaseListItem, ListComponent, SelectionChangeEvent } from '../../list/public_api';
 import { StandardListItemComponent } from '../../list/standard-list-item/standard-list-item.component';
@@ -17,18 +20,34 @@ import { trackByFn } from '../helpers';
 @Component({
     selector: 'fdp-approval-flow-user-list',
     templateUrl: './approval-flow-user-list.component.html',
-    styleUrls: ['./approval-flow-user-list.component.scss']
+    styleUrls: ['./approval-flow-user-list.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        class: 'fdp-approval-flow-user-list'
+    }
 })
 export class ApprovalFlowUserListComponent implements AfterViewInit {
-    @Input() users: ApprovalUser[] = [];
-    @Input() selectedUsers: ApprovalUser[] = [];
-    @Input() isSelectable = true;
+    @Input()
+    users: ApprovalUser[] = [];
 
-    @Output() onUserClick = new EventEmitter<ApprovalUser>();
-    @Output() onSelectionChange = new EventEmitter<ApprovalUser[]>();
+    @Input()
+    selectedUsers: ApprovalUser[] = [];
 
-    @ViewChild(ListComponent) list: ListComponent;
-    @ViewChildren(StandardListItemComponent) listItems: QueryList<StandardListItemComponent>;
+    @Input()
+    isSelectable = true;
+
+    @Output()
+    onUserClick = new EventEmitter<ApprovalUser>();
+
+    @Output()
+    onSelectionChange = new EventEmitter<ApprovalUser[]>();
+
+    @ViewChild(ListComponent)
+    list: ListComponent;
+
+    @ViewChildren(StandardListItemComponent)
+    listItems: QueryList<StandardListItemComponent>;
 
     /** @hidden */
     _selectedItems: BaseListItem[] = [];

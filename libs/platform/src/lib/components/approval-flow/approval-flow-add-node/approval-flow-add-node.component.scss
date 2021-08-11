@@ -1,14 +1,12 @@
 $block: fdp-approval-flow-add-node;
 
 .#{$block} {
-    &__dialog {
-        &-body {
-            width: 320px;
-            height: 433px;
+    .fd-dialog__body {
+        width: 20rem;
+        height: 27rem;
 
-            &--auto-height {
-                height: auto;
-            }
+        &--auto-height {
+            height: auto;
         }
     }
 }

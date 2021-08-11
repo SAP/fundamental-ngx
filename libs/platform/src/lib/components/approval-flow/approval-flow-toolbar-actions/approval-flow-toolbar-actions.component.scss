@@ -1,0 +1,23 @@
+$block: fdp-approval-flow-toolbar-actions;
+
+@mixin fd-rtl {
+    @at-root {
+        [dir='rtl'] &,
+        &[dir='rtl'] {
+            @content;
+        }
+    }
+}
+
+.#{$block} {
+    .fd-button:not(:last-child) {
+        margin-right: .5rem;
+    }
+
+    @include fd-rtl() {
+        .fd-button:not(:last-child) {
+            margin-right: 0;
+            margin-left: .5rem;
+        }
+    }
+}

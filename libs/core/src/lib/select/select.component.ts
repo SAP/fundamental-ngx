@@ -697,7 +697,6 @@ export class SelectComponent implements
 
             if (event.isUserInput && this._isOpen) {
                 this.close();
-                this.focus();
             }
         });
 

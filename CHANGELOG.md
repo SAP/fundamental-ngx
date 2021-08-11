@@ -1,4 +1,65 @@
 
+## [0.31.0-rc.187](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.186...v0.31.0-rc.187) (2021-08-11)
+
+
+### Bug Fixes
+
+* **docs:** playground select a11y fixes, refactoring ([#6158](https://github.com/SAP/fundamental-ngx/issues/6158)) ([ef9a510](https://github.com/SAP/fundamental-ngx/commit/ef9a5109e58b4328924e9821dd867d30b90b6beb))
+
+## [0.31.0-rc.186](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.185...v0.31.0-rc.186) (2021-08-10)
+
+## [0.31.0-rc.185](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.184...v0.31.0-rc.185) (2021-08-10)
+
+## [0.31.0-rc.184](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.183...v0.31.0-rc.184) (2021-08-10)
+
+## [0.31.0-rc.183](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.182...v0.31.0-rc.183) (2021-08-10)
+
+
+### Bug Fixes
+
+* **core:** added default unique id for multiinput ([#6260](https://github.com/SAP/fundamental-ngx/issues/6260)) ([69c1745](https://github.com/SAP/fundamental-ngx/commit/69c1745e2fec8a59aaa4fcdeed560dca2303d4e0))
+
+## [0.31.0-rc.182](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.181...v0.31.0-rc.182) (2021-08-10)
+
+## [0.31.0-rc.181](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.180...v0.31.0-rc.181) (2021-08-10)
+
+
+### Bug Fixes
+
+* **core:** do not preventDefault when activeElement is select control ([#6161](https://github.com/SAP/fundamental-ngx/issues/6161)) ([8580077](https://github.com/SAP/fundamental-ngx/commit/858007765ec89574394b34aea7216fcdda8e305c))
+
+## [0.31.0-rc.180](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.179...v0.31.0-rc.180) (2021-08-09)
+
+## [0.31.0-rc.179](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.178...v0.31.0-rc.179) (2021-08-09)
+
+## [0.31.0-rc.178](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.177...v0.31.0-rc.178) (2021-08-06)
+
+
+### Bug Fixes
+
+* **core:** extended example, label for the busy indicator ([#6061](https://github.com/SAP/fundamental-ngx/issues/6061)) ([792e468](https://github.com/SAP/fundamental-ngx/commit/792e46804cbe842b341aec23c799a3b74ea8919e))
+
+## [0.31.0-rc.177](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.176...v0.31.0-rc.177) (2021-08-06)
+
+
+### Bug Fixes
+
+* **core:** add listener to submenu item changes ([#6241](https://github.com/SAP/fundamental-ngx/issues/6241)) ([b594cc9](https://github.com/SAP/fundamental-ngx/commit/b594cc9aa485791b406e86148e5758059816ad74))
+
+## [0.31.0-rc.176](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.175...v0.31.0-rc.176) (2021-08-05)
+
+
+### Features
+
+* **core:** add a fallback mechanism for avatar ([#6122](https://github.com/SAP/fundamental-ngx/issues/6122)) ([0b3d389](https://github.com/SAP/fundamental-ngx/commit/0b3d3893040ede61dc60bd50536fe917f778404b))
+
+## [0.31.0-rc.175](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.174...v0.31.0-rc.175) (2021-08-05)
+
+
+### Bug Fixes
+
+* **core:** delete focus from reset options in Select component ([#6242](https://github.com/SAP/fundamental-ngx/issues/6242)) ([e8a672c](https://github.com/SAP/fundamental-ngx/commit/e8a672c93977897a6cb3e8fcd1b6897e7ce7b8f1))
+
 ## [0.31.0-rc.174](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.173...v0.31.0-rc.174) (2021-08-05)
 
 

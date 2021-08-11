@@ -19,11 +19,12 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        'aria-role': 'progressbar',
+        'role': 'progressbar',
         '[attr.tabindex]': 'loading ? 0 : -1',
         '[attr.aria-busy]': 'loading',
         '[attr.aria-live]': 'ariaLive',
         '[attr.aria-label]': 'ariaLabel',
+        '[attr.title]': 'title',
         '[class.fd-busy-indicator__container]': 'true',
         '[class.fd-busy-indicator__container--inline]': '!block'
     }
@@ -43,7 +44,15 @@ export class BusyIndicatorComponent {
 
     /** Aria label attribute value. */
     @Input()
-    ariaLabel = 'Loading';
+    ariaLabel: string;
+
+    /** title attribute value for tooltip. */
+    @Input()
+    title: string;
+
+    /** add loading label value */
+    @Input()
+    label: string;
 
     /** Aria live attribute value. */
     @Input()
@@ -53,7 +62,8 @@ export class BusyIndicatorComponent {
     @ViewChild('fakeFocusElement')
     fakeFocusElement: ElementRef;
 
-    constructor(private _elementRef: ElementRef) { }
+    /** @hidden */
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden If focus escapes busy container focus element after wrapped content */
     @HostListener('keydown', ['$event'])
