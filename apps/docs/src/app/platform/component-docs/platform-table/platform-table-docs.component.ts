@@ -70,11 +70,11 @@ export class PlatformTableDocsComponent {
                     },
                     selectionMode: {
                         type: 'string',
-                        enum: ['single', 'multiple', 'none']
+                        enum: ['', 'single', 'multiple']
                     },
                     freezeColumnsTo: {
                         type: 'string',
-                        enum: ['none', 'name', 'description', 'price.value']
+                        enum: ['', 'name', 'description', 'price.value']
                     },
                     noHorizontalBorders: {
                         type: 'boolean'
@@ -134,8 +134,8 @@ export class PlatformTableDocsComponent {
     data: any = {
         table: {
             contentDensity: 'compact',
-            selectionMode: 'none',
-            freezeColumnsTo: null,
+            selectionMode: '',
+            freezeColumnsTo: '',
             noHorizontalBorders: false,
             noVerticalBorders: false,
             noBorders: false,
