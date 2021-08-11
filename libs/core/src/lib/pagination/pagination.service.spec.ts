@@ -16,30 +16,45 @@ describe('PaginationService', () => {
         expect(service).toBeTruthy();
     });
 
-    it('should default to 10 pages per page', () => {
-        const pages = service.getPages({ totalItems: 10, itemsPerPage: 10 });
-        expect(pages.length).toEqual(1);
+    describe('getPages', () => {
+        it('should not truncate pages', () => {
+            const pages = service.getPages({ totalItems: 140, itemsPerPage: 20, currentPage: 1 });
+            expect(pages).toEqual([1, 2, 3, 4, 5, 6, 7]);
+        });
+        it('should truncate and has a buffer as the penultimate value', () => {
+            const pages = service.getPages({ totalItems: 160, itemsPerPage: 20, currentPage: 1 });
+            expect(pages).toEqual([1, 2, 3, -1, 8]);
+        });
+
+        it('should truncate and has a buffer as the second value', () => {
+            const pages = service.getPages({ totalItems: 160, itemsPerPage: 20, currentPage: 8 });
+            expect(pages).toEqual([1, -1, 6, 7, 8]);
+        });
+
+        it('should truncate and has a buffers as the second and penultimate values', () => {
+            const pages = service.getPages({ totalItems: 160, itemsPerPage: 20, currentPage: 5 });
+            expect(pages).toEqual([1, -1, 4, 5, 6, -1, 8]);
+        });
     });
 
-    it('should default to first current page', () => {
-        const pagination: Pagination = { totalItems: 10, itemsPerPage: 2 };
-        const pages = service.validate(pagination);
-        expect(pagination.currentPage).toEqual(1);
-    });
+    describe('getTotalPages', () => {
+        it('should return pages count', () => {
+            expect(service.getTotalPages({ totalItems: 50, itemsPerPage: 10 })).toEqual(5);
+            expect(service.getTotalPages({ totalItems: 39, itemsPerPage: 10 })).toEqual(4);
+            expect(service.getTotalPages({ totalItems: 21, itemsPerPage: 10 })).toEqual(3);
+        });
 
-    it('should calc 5 pages', () => {
-        const total = service.getTotalPages({ totalItems: 50, itemsPerPage: 10 });
-        expect(total).toEqual(5);
-    });
+        it('should return 0 if itemsPerPage is 0', () => {
+            const total = service.getTotalPages({ totalItems: 21, itemsPerPage: 0 });
+            expect(total).toEqual(0);
+        });
 
-    it('should calc 4 pages', () => {
-        const total = service.getTotalPages({ totalItems: 39, itemsPerPage: 10 });
-        expect(total).toEqual(4);
-    });
-
-    it('should calc 3 pages', () => {
-        const total = service.getTotalPages({ totalItems: 21, itemsPerPage: 10 });
-        expect(total).toEqual(3);
+        it('should return 0 if itemsPerPage is empty', () => {
+            let total = service.getTotalPages({ totalItems: 21, itemsPerPage: null });
+            expect(total).toEqual(0);
+            total = service.getTotalPages({ totalItems: 21, itemsPerPage: undefined });
+            expect(total).toEqual(0);
+        });
     });
 
     it('should calc 3 pages', () => {
