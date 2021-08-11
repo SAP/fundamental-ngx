@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.189](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.188...v0.31.0-rc.189) (2021-08-11)
+
+
+### Bug Fixes
+
+* **core:** add ariaLabelledby to the popover header for popover component and adding Tabindex to the list items ([#5693](https://github.com/SAP/fundamental-ngx/issues/5693)) ([66d9985](https://github.com/SAP/fundamental-ngx/commit/66d99858dc5ee7c0310eb94bd00a2f010ec9babc))
+
 ## [0.31.0-rc.188](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.187...v0.31.0-rc.188) (2021-08-11)
 
 ## [0.31.0-rc.187](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.186...v0.31.0-rc.187) (2021-08-11)
