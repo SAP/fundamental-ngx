@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.187](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.186...v0.31.0-rc.187) (2021-08-11)
+
+
+### Bug Fixes
+
+* **docs:** playground select a11y fixes, refactoring ([#6158](https://github.com/SAP/fundamental-ngx/issues/6158)) ([ef9a510](https://github.com/SAP/fundamental-ngx/commit/ef9a5109e58b4328924e9821dd867d30b90b6beb))
+
 ## [0.31.0-rc.186](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.185...v0.31.0-rc.186) (2021-08-10)
 
 ## [0.31.0-rc.185](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.184...v0.31.0-rc.185) (2021-08-10)
