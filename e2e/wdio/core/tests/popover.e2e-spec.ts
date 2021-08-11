@@ -410,7 +410,7 @@ describe('Popover test suite', function() {
         popoverPage.checkRtlSwitch();
     });
 
-    describe('visual regression', function() {
+    xdescribe('visual regression', function() {
 
         it('should check examples visual regression', () => {
             popoverPage.saveExampleBaselineScreenshot();

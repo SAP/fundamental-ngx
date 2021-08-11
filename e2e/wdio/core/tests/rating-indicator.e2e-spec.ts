@@ -87,7 +87,7 @@ describe('Rating indicator test suite', function() {
         ratingIndicatorPage.checkRtlSwitch();
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
 
         it('should check examples visual regression', () => {
             ratingIndicatorPage.saveExampleBaselineScreenshot();

@@ -304,7 +304,7 @@ describe('Combobox component test suit', function() {
         });
     });
 
-    describe('Should check visual regression', function() {
+    xdescribe('Should check visual regression', function() {
 
         it('should check visual regression for all examples', () => {
             comboboxPage.saveExampleBaselineScreenshot();

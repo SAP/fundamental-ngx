@@ -122,7 +122,7 @@ describe('Time-picker component test', function () {
         timePickerPage.checkRtlSwitch();
     })
 
-    it('should check visual regression for all examples', () => {
+    xit('should check visual regression for all examples', () => {
         timePickerPage.saveExampleBaselineScreenshot();
         expect(timePickerPage.compareWithBaseline()).toBeLessThan(5);
     })

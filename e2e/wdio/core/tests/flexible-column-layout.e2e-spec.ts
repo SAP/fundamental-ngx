@@ -92,7 +92,7 @@ describe('Flexible column layout component test', function () {
         flexibleColumnLayoutPage.checkRtlSwitch();
     });
 
-    it('should check examples visual regression', () => {
+    xit('should check examples visual regression', () => {
         flexibleColumnLayoutPage.saveExampleBaselineScreenshot();
         expect(flexibleColumnLayoutPage.compareWithBaseline()).toBeLessThan(5);
     });

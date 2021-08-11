@@ -72,7 +72,7 @@ describe('File uploader test suite', function() {
         fileUploaderPage.checkRtlSwitch();
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             fileUploaderPage.saveExampleBaselineScreenshot();
             expect(fileUploaderPage.compareWithBaseline()).toBeLessThan(5);

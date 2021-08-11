@@ -61,7 +61,7 @@ describe('File uploader component test', function() {
         fileUploaderPage.checkRtlSwitch();
     });
 
-    describe('Should check visual regression', function() {
+    xdescribe('Should check visual regression', function() {
 
         it('should check visual regression for all examples', () => {
             fileUploaderPage.saveExampleBaselineScreenshot();

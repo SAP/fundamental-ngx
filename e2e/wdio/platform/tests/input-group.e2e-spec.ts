@@ -174,7 +174,7 @@ describe('Input Group should', function() {
         inputGroupPage.checkRtlSwitch();
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             inputGroupPage.saveExampleBaselineScreenshot();
             expect(inputGroupPage.compareWithBaseline()).toBeLessThan(5);

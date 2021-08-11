@@ -75,7 +75,7 @@ describe('Inline help test suite', function() {
         expect(diff).toBeLessThan(5, `Inline help template has mismatch percentage of ${diff}%`);
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             inlineHelpPage.saveExampleBaselineScreenshot();
             expect(inlineHelpPage.compareWithBaseline()).toBeLessThan(5);

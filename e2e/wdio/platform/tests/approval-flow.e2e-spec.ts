@@ -421,7 +421,7 @@ describe('Approval flow', function() {
         });
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             approvalFlowPage.saveExampleBaselineScreenshot();
             expect(approvalFlowPage.compareWithBaseline()).toBeLessThan(5);

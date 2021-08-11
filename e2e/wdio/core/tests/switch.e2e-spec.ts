@@ -71,7 +71,7 @@ describe('Switch test suite', () => {
         switchPage.checkRtlSwitch();
     });
 
-    it('should check examples visual regression', () => {
+    xit('should check examples visual regression', () => {
         switchPage.saveExampleBaselineScreenshot();
         expect(switchPage.compareWithBaseline()).toBeLessThan(5);
     });

@@ -250,7 +250,7 @@ describe('Pagination test suite:', function() {
         paginationPage.checkRtlSwitch();
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
 
         it('should check examples visual regression', () => {
             paginationPage.saveExampleBaselineScreenshot();

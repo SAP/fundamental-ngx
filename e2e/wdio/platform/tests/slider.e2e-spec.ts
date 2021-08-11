@@ -228,7 +228,7 @@ describe('slider test suite', function() {
         });
     });
 
-    describe('visual regression', function() {
+    xdescribe('visual regression', function() {
         beforeEach(() => {
             refreshPage();
         }, 1);

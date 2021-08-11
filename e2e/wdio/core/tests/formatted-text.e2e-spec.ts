@@ -40,7 +40,7 @@ describe('Formatted text component', function() {
         });
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             formattedTextPage.saveExampleBaselineScreenshot();
             expect(formattedTextPage.compareWithBaseline()).toBeLessThan(5);

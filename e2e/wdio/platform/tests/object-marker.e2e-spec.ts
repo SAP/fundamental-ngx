@@ -37,7 +37,7 @@ describe('Object marker test suite', function() {
         objectMarkerPage.checkRtlSwitch();
     });
 
-    it('should check examples visual regression', () => {
+    xit('should check examples visual regression', () => {
         refreshPage();
         waitForPresent(marker);
         objectMarkerPage.saveExampleBaselineScreenshot();

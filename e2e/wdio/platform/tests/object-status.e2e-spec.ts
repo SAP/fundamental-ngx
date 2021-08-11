@@ -106,7 +106,7 @@ describe('object status test suite', function() {
         });
     });
 
-    describe('Visual regression', function() {
+    xdescribe('Visual regression', function() {
         it('should check examples visual regression', () => {
             refreshPage();
             waitForPresent(defaultExamples + status);

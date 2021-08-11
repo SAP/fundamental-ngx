@@ -39,13 +39,13 @@ describe('dynamic side content test suite', function () {
         });
     });
 
-    describe('Check visual regression', function () {
+    xdescribe('Check visual regression', function () {
         it('should check examples visual regression', () => {
             facetsPage.saveExampleBaselineScreenshot();
             expect(facetsPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
-    
+
     function CheckRaitingIndicator(section: string): void {
         const lengthRI = getElementArrayLength(section + raitingIndicator)
         for(let i = 1; i < lengthRI; i++){

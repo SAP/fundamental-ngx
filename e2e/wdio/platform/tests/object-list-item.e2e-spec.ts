@@ -116,7 +116,7 @@ describe('Object list item suite:', function() {
         });
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             objListPage.saveExampleBaselineScreenshot();
             expect(objListPage.compareWithBaseline()).toBeLessThan(5);

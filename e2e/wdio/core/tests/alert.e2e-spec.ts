@@ -56,7 +56,7 @@ describe('Alert test suite', function() {
         })
     });
 
-    describe('visual regression', function() {
+    xdescribe('visual regression', function() {
 
         it('should check example blocks visual regression', () => {
             alertPage.saveExampleBaselineScreenshot();
