@@ -460,7 +460,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     }
 
     get isEmptyValue(): boolean {
-        return this.inputText.trim().length === 0;
+        return !this.inputText || this.inputText?.trim().length === 0;
     }
 
     /** Get the input text of the input. */
