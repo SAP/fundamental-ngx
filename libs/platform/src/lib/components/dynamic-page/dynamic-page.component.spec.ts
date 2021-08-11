@@ -34,7 +34,7 @@ import {
                 <fdp-dynamic-page-layout-actions>
                     <!-- layout actions -->
                     <fd-toolbar fdType="transparent" [clearBorder]="true">
-                        <button fd-button fdType="transparent" aria-label="Resize" (click)="closePage($event)">
+                        <button fd-button fdType="transparent" aria-label="Resize">
                             <i class="sap-icon--resize"></i>
                         </button>
                     </fd-toolbar>
@@ -101,6 +101,7 @@ describe('DynamicPageComponent default values', () => {
             fixture.detectChanges();
             expect(component.dynamicPageTitleComponent.size).toBe('small');
         });
+
         it('should inherit background styles', async () => {
             fixture.detectChanges();
             expect(component.dynamicPageTitleComponent.background).toBe('');
@@ -122,6 +123,7 @@ describe('DynamicPageComponent default values', () => {
     // TODO: Unskip after fix
     xit('should render content in view', () => {
         fixture.detectChanges();
+
         expect(component.dynamicPageContentComponent.getElementRef().nativeElement.innerText).toBe(
             'DynamicPage Content Text'
         );
@@ -304,7 +306,6 @@ describe('DynamicPageComponent with collapsible set to false', () => {
                                 fd-button
                                 fdType="transparent"
                                 aria-label="Resize"
-                                (click)="closePage($event)"
                                 id="layout-action-button"
                             >
                                 <i class="sap-icon--resize"></i>

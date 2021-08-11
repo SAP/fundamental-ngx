@@ -55,12 +55,15 @@ describe('DatetimePickerComponent', () => {
         expect(component._inputFieldDate).toBeNull();
         expect(component.isOpen).toBe(false);
     });
-    // TODO: Unskip after test
-    xit('should update from input for null value', () => {
-        spyOn(component, 'onChange');
+
+    it('should update from input for null value', () => {
+        spyOn(component, 'onChange').and.callThrough();
+
         component.allowNull = true;
         component.handleInputChange('');
+
         const today = new FdDate();
+
         expect(component.onChange).toHaveBeenCalledWith(null);
         expect(component.date).toEqual(today);
     });

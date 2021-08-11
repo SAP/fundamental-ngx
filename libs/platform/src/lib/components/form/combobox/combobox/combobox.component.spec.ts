@@ -129,8 +129,7 @@ describe('ComboboxComponent default values', () => {
         expect(toggleButton.length).toBe(0);
     });
 
-    // TODO: Unskip after fix
-    xit('should emit a onSelect event when click on a item', () => {
+    it('should emit a onSelect event when click on a item', () => {
         combobox.onPrimaryButtonClick(combobox.isOpen);
         fixture.detectChanges();
 

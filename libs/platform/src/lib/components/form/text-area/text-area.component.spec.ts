@@ -253,8 +253,8 @@ describe('Advanced Textarea', () => {
 
         expect(textareaComponent.textareaElement.nativeElement.style.height).toBe('57px');
     });
-    // TODO: Unskip after fix
-    xit('should handle grow indefinitely if max height is not specified', async () => {
+
+    it('should handle grow indefinitely if max height is not specified', async () => {
         const textareaComponent = host.textareaComponent;
         textareaComponent.contentDensity = 'cozy';
         // textareaComponent.growing = true;

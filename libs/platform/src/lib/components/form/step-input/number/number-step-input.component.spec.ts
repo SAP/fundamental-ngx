@@ -356,8 +356,7 @@ describe('NumberStepInputComponent main functionality', () => {
         expect(component.value).toEqual(value);
     });
 
-    // TODO: Unskip after fix
-    xit('should handle mouse wheel once control in focus state', () => {
+    it('should handle mouse wheel once control in focus state', () => {
         const value = 10;
         const step = 2;
 

@@ -72,7 +72,7 @@ function mouseClickOnElement(el: Element): void {
             [disabled]="disabled"
             (inputChange)="onInputChange($event)"
             (searchSubmit)="onSearchSubmit($event)"
-            (cancelSearch)="onCancelSearch($event)"
+            (cancelSearch)="onCancelSearch()"
         >
         </fdp-search-field>
         <button #outsideButton>Outside</button>
@@ -248,6 +248,7 @@ describe('SearchFieldComponent', () => {
         const categoryLabel = fixture.debugElement.query(By.css('.fdp-search-field__category-label'));
         expect(categoryLabel.nativeElement.textContent).toBe('Category');
     });
+
     // TODO: Unskip after fix
     xit('should allow the user to set the text of the category label', () => {
         host.placeholder = 'Search';
@@ -281,6 +282,7 @@ describe('SearchFieldComponent', () => {
         const categoryDropdown = fixture.debugElement.queryAll(By.css('.fdp-search-field__category-dropdown'));
         expect(categoryDropdown.length).toBe(0);
     });
+
     // TODO: Unskip after test
     xit('should change the category label to the selected category', fakeAsync(() => {
         host.placeholder = 'Search';
@@ -746,7 +748,7 @@ describe('SearchFieldComponent', () => {
             [disabled]="disabled"
             (inputChange)="onInputChange($event)"
             (searchSubmit)="onSearchSubmit($event)"
-            (cancelSearch)="onCancelSearch($event)"
+            (cancelSearch)="onCancelSearch()"
         >
         </fdp-search-field>
         <button #outsideButton>Outside</button>
