@@ -15,7 +15,7 @@
         <fd-popover-control>
             <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
         </fd-popover-control>
-        <fd-popover-body *ngIf="displayedValues && displayedValues.length">
+        <fd-popover-body [hidden]="!displayedValues || !displayedValues.length">
             <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
             <ng-content></ng-content>
         </fd-popover-body>
