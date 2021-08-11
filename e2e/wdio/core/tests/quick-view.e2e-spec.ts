@@ -52,7 +52,7 @@ describe('Quick view  test suite:', function() {
         });
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             quickViewPage.saveExampleBaselineScreenshot();
             expect(quickViewPage.compareWithBaseline()).toBeLessThan(5);

@@ -142,7 +142,7 @@ describe('Input group component test', function() {
         });
     });
 
-    describe('Should check visual regression', function() {
+    xdescribe('Should check visual regression', function() {
 
         it('should check visual regression for all examples', () => {
             inputGroupPage.saveExampleBaselineScreenshot();

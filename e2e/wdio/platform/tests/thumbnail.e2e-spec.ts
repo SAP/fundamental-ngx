@@ -97,7 +97,7 @@ describe('Thumbnail field', function() {
         thumbnailPage.checkRtlSwitch();
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             thumbnailPage.saveExampleBaselineScreenshot();
             expect(thumbnailPage.compareWithBaseline()).toBeLessThan(5);

@@ -138,7 +138,7 @@ describe('Info Label component test suite', () => {
         infoLabelPage.checkRtlSwitch();
     });
 
-    it('should check examples basic visual regression', () => {
+    xit('should check examples basic visual regression', () => {
         infoLabelPage.saveExampleBaselineScreenshot();
         expect(infoLabelPage.compareWithBaseline()).toBeLessThan(5);
     });

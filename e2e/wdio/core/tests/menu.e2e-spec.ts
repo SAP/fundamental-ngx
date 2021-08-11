@@ -140,7 +140,7 @@ describe('Menu test suite', function() {
         });
     });
 
-    it('should check visual regression for all examples', () => {
+    xit('should check visual regression for all examples', () => {
         menuPage.saveExampleBaselineScreenshot();
         expect(menuPage.compareWithBaseline()).toBeLessThan(5);
     });

@@ -34,7 +34,7 @@ describe('Textarea component test', function () {
     beforeAll(() => {
         textareaPage.open();
     }, 1);
-    
+
     afterEach(() => {
         refreshPage();
         waitForPresent(textareaPage.title);
@@ -74,7 +74,7 @@ describe('Textarea component test', function () {
         expect(getText(helpContent)).toEqual('Inline Help');
     });
 
-    it('should check disabled and read only textareas', () => {    
+    it('should check disabled and read only textareas', () => {
         expect(isElementClickable(stateExample + textarea, 4)).toBe(false);
         expect(getAttributeByName(stateExample + textarea, 'disabled', 4)).not.toBe(null);
         expect(isElementClickable(formExample + textarea, 1)).toBe(false);
@@ -86,7 +86,7 @@ describe('Textarea component test', function () {
         expect(getValue(stateExample + textarea, 5)).toBe('');
     });
 
-    it('should check visual regression for all examples', () => {
+    xit('should check visual regression for all examples', () => {
         textareaPage.saveExampleBaselineScreenshot();
         expect(textareaPage.compareWithBaseline()).toBeLessThan(5);
     });

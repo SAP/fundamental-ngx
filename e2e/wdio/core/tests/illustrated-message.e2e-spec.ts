@@ -61,7 +61,7 @@ describe('Illustrated-message test suite', function() {
         });
     });
 
-    describe('visual regression', function() {
+    xdescribe('visual regression', function() {
         it('should check visual regression for all examples', () => {
             illustratedMessagePage.saveExampleBaselineScreenshot();
             expect(illustratedMessagePage.compareWithBaseline()).toBeLessThan(5);

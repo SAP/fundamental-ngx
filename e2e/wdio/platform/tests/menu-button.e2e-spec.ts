@@ -170,7 +170,7 @@ describe('Menu button test suite', function() {
         });
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             menuBtnPage.saveExampleBaselineScreenshot();
             expect(menuBtnPage.compareWithBaseline()).toBeLessThan(5);

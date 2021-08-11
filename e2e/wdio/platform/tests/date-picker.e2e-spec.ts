@@ -268,7 +268,7 @@ describe('Date picker suite', function() {
         expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model')).toEqual(date9);
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             datePickerPage.saveExampleBaselineScreenshot();
             expect(datePickerPage.compareWithBaseline()).toBeLessThan(5);

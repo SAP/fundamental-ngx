@@ -121,7 +121,7 @@ describe('Split menu button test suite', () => {
         spMenuBtnPage.checkRtlSwitch();
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             spMenuBtnPage.saveExampleBaselineScreenshot();
             expect(spMenuBtnPage.compareWithBaseline()).toBeLessThan(5);

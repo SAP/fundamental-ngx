@@ -336,7 +336,7 @@ xdescribe('Checkbox group test suite', () => {
         });
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             checkboxGroupPage.saveExampleBaselineScreenshot();
             expect(checkboxGroupPage.compareWithBaseline()).toBeLessThan(5);
