@@ -8,7 +8,7 @@
     <fdp-form-field #ffr2 id="aggrement" [validators]="validators" hint="this selection is mandatory"
         hintPlacement="left" rank="15" column="2" required="true">
         <fdp-checkbox name="aggrement-cb" [isBinary]="true" title="Agree with terms" [formControl]="ffr2.formControl">
-            Do you Agree with <a href="#"> Terms and Conditions</a>?
+            Do you Agree with <a fd-link href="#"> Terms and Conditions</a>?
         </fdp-checkbox>
     </fdp-form-field>
 
@@ -17,10 +17,10 @@
     </fdp-form-field>
 
     <ng-template #i18n let-errors>
-        <span *ngIf="errors.required">
+        <span *ngIf="errors.required" role="alert" aria-atomic="true">
             Value is required
         </span>
-        <span *ngIf="errors.invalid">
+        <span *ngIf="errors.invalid" role="alert" aria-atomic="true">
             Value is invalid
         </span>
     </ng-template>
