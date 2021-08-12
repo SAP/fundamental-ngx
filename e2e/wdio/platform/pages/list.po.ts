@@ -34,7 +34,7 @@ export class ListPo extends BaseComponentPo {
     multiToolbar = 'fdp-platform-list-with-selection-example fd-toolbar';
     multiCheckbox = 'fdp-platform-list-with-selection-example fd-checkbox';
     // single selection examples
-    singleList = 'fdp-platform-list-with-single-selection-example fdp-list';
+    singleList = 'fdp-platform-list-with-single-selection-example fdp-list ul';
     singleListItems = 'fdp-platform-list-with-single-selection-example li';
     singleToolbar = 'fdp-platform-list-with-single-selection-example fd-toolbar';
     singleRadioBtn = 'fdp-platform-list-with-single-selection-example fd-radio-button';

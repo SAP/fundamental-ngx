@@ -6,13 +6,13 @@ export class PanelPo extends BaseComponentPo {
     url = '/panel';
     root = '#page-content';
 
-    expandablePanelRoot = '#panel-id';
-    expandablePanelBtn = this.expandablePanelRoot + ' button';
-    expandablePanelTitle = this.expandablePanelRoot + ' h5';
-    expandablePanelContent = this.expandablePanelRoot + ' .fd-panel__content';
+    expandablePanelRoot = 'fdp-platform-panel-expandable-example ';
+    expandablePanelBtn = this.expandablePanelRoot + 'button';
+    expandablePanelTitle = this.expandablePanelRoot + 'h5';
+    expandablePanelContent = this.expandablePanelRoot + '.fd-panel__content';
 
-    fixedPanelSection = '[ng-reflect-id="fixed"]';
-    fixedPanelDescription = this.fixedPanelSection + ' + description';
+    fixedPanelSection = 'fdp-panel-fixed-example fd-panel';
+    fixedPanelDescription = 'fdp-panel-fixed-example fdp-panel-content';
 
     compactPanelRoot = '#compact-panel-id';
     compactPanelBtn = this.compactPanelRoot + ' button';
@@ -27,7 +27,7 @@ export class PanelPo extends BaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
-        waitForPresent(this.expandablePanelBtn);
+        waitForPresent(this.title);
     }
 
     getScreenshotFolder(): object {

@@ -1,10 +1,6 @@
 import { StandardListItemPo } from '../pages/standard-list-item.po';
-import { click, getAttributeByName, getCSSPropertyByName, getElementArrayLength, getText } from '../../driver/wdio';
+import { click, getAttributeByName, getCSSPropertyByName, getElementArrayLength, getElementClass, getText } from '../../driver/wdio';
 import {
-    borderAttr,
-    byLineAltAttr,
-    byLineAttr,
-    compactAttr,
     linkAttr,
     noBorderAttr,
     secondaryAttr,
@@ -39,14 +35,10 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item (ByLine)- Border Less examples:', function() {
-        xit('should check border and styles', () => {
+        it('should check border and density', () => {
             expect(getAttributeByName(sNoBorderByLineAttr, noBorderAttr))
                 .toBe('true');
-            expect(getAttributeByName(sNoBorderByLineSection, compactAttr, 0))
-                .toBe('false');
-            expect(getAttributeByName(sNoBorderByLineSection, compactAttr, 1))
-                .toBe('true');
-            checkAttributeValueTrue(sNoBorderByLineAttr, byLineAltAttr);
+            expect(getAttributeByName(sNoBorderByLineAttr, 'contentdensity', 1)).toBe('compact');
         });
 
         it('should check interaction and content', () => {
@@ -57,8 +49,7 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item (ByLine)- Footer examples:', function() {
-        xit('should check border and footer', () => {
-            checkAttributeValueTrue(sFooterAttr, byLineAttr);
+        it('should check border and footer', () => {
             checkElementDisplayed(sFooter);
             checkElementText(sFooterList);
         });
@@ -71,9 +62,6 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item (ByLine)- Group header examples:', function() {
-        xit('should check border', () => {
-            checkAttributeValueTrue(sGroupHeaderAttr, byLineAttr);
-        });
 
         it('should check content and interactions', () => {
             checkElementText(sGroupHeaderList);
@@ -83,8 +71,7 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item- Interactive state examples:', function() {
-        xit('should check border', () => {
-            checkAttributeValueTrue(sInteractiveAttr, byLineAltAttr);
+        it('should check links', () => {
             const linkCount = getElementArrayLength(sInteractiveLink);
             for (let i = 0; linkCount > i; i++) {
                 expect(getAttributeByName(sInteractiveLink, linkAttr, i))
@@ -103,9 +90,6 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item (ByLine)- Secondary text types examples:', function() {
-        xit('should check border', () => {
-            checkAttributeValueTrue(sSecTypeAttr, byLineAltAttr);
-        });
 
         it('should check content and interactions', () => {
             checkElementDisplayed(sSecTypeAvatar);
@@ -124,10 +108,6 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item (ByLine)- Multi Selection examples:', function() {
-        xit('should check border', () => {
-            checkAttributeValueTrue(sMultiAttr, byLineAltAttr);
-        });
-
         it('should check content and basic interactions', () => {
             checkElementDisplayed(sMultiAvatar);
             checkElementDisplayed(sMultiList);
@@ -147,14 +127,6 @@ describe('Standard List Item test suite:', function() {
     });
 
     describe('Standard List Item (ByLine)- Inverted Secondary text types examples:', function() {
-        xit('should check border', () => {
-            if (browser.capabilities.browserName === 'internet explorer') {
-                console.log('skip');
-            } else {
-                checkAttributeValueTrue(sInvtAttr, byLineAltAttr);
-            }
-        });
-
         it('should check content and interactions', () => {
             checkElementDisplayed(sInvtAvatar);
             checkElementDisplayed(sInvtList);

@@ -1,21 +1,17 @@
 import { BaseComponentPo } from './base-component.po';
-import { click, scrollIntoView, sendKeys, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
+import { click, doesItExist, scrollIntoView, sendKeys, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 export class MultiInputPo extends BaseComponentPo {
     private url = '/multi-input';
     root = '#page-content';
-    mobileMainInput = '[ng-reflect-id="fdp-id-mobile"] input';
     expandedDropdown = '.fd-list';
-    activeDropdownButtons = '[ng-reflect-disabled="false"] button[ng-reflect-glyph="value-help"]';
-    allDropdownButtons = 'button[ng-reflect-glyph="value-help"]';
-    disabledDropdownButtons = '[ng-reflect-disabled="true"] button[ng-reflect-glyph="value-help"]';
-    activeInputs = '.fd-multi-input [ng-reflect-disabled="false"] input';
+    activeDropdownButtons = 'button[aria-label="value-help"]';
+    activeInputs = '.fd-input-group.fd-input-group--control input';
     mobileInput = 'div[role="dialog"] input';
-    disabledInputs = '.fdp-multi-input [ng-reflect-disabled="true"] input';
-    filledInput = '[ng-reflect-disabled="false"] .fd-tokenizer__inner';
+    filledInput = '.fd-tokenizer__inner';
     approveButton = '[fdtype="emphasized"]';
     groupHeader = '.fd-list__group-header';
     groupDropdown = '#fdp-id-grouped button';
-    options = 'fdp-standard-list-item';
+    options = 'fdp-standard-list-item .fd-list__title';
     dropdownOptions = 'ul[role=list] [role="listitem"] li ';
     selectedToken = 'span[role=\'button\']';
     dropdownOptionText = this.dropdownOptions + 'span';
@@ -30,7 +26,7 @@ export class MultiInputPo extends BaseComponentPo {
     };
 
     dropDownOption = (name: string) => {
-        return `[ng-reflect-title="${name}"] li`;
+        return doesItExist('fdp-standard-list-item .fd-list__content') ? `//div[@title="${name}"]/../..` : `//span[@title="${name}"]/..`;
     };
 
     expandDropdown(dropDownSelector: string, index: number = 0): void {
@@ -49,7 +45,7 @@ export class MultiInputPo extends BaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
-        waitForPresent(this.allDropdownButtons);
+        waitForPresent(this.title);
     }
 
     getScreenshotFolder(): object {

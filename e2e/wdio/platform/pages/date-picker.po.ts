@@ -8,9 +8,6 @@ export class DatePicker extends BaseComponentPo {
     inputDatePicker = 'fd-date-picker input';
     buttonDatePicker = 'fd-date-picker button';
 
-    activeButtonDatePicker = '[ng-reflect-is-disabled="false"] + span button';
-    activeInputDatePicker = 'fd-popover-control input[ng-reflect-is-disabled="false"]';
-
     calendarExpanded = '.fd-popover__popper fd-calendar';
     calendarYearsSection = '.fd-calendar__content--years';
 

@@ -8,11 +8,11 @@ export class TimePickerPO extends BaseComponentPo {
     setToNullButton = '[label="Set To Null"]';
     setValidTimeButton = '[label="Set Valid Time"]';
     timePickerInput = 'fd-time-picker input';
-    activeTimePickerInput = 'fd-time-picker[ng-reflect-is-disabled="false"] input';
-    activeTimePickerButton = 'fd-time-picker[ng-reflect-is-disabled="false"] button';
+    activeTimePickerInput = 'fd-time-picker input';
+    activeTimePickerButton = 'fdp-time-picker button';
     invalidTimePickerInput = '[name="null-validity"] fd-time-picker.ng-invalid';
     timerExpanded = 'div.fd-time';
-    disabledTimePicker = 'fd-time-picker[ng-reflect-is-disabled="true"]';
+    disabledTimePicker = 'div.fd-input-group.is-disabled';
     disabledInput = this.disabledTimePicker + ' input';
     disabledButton = this.disabledTimePicker + ' button';
     navigationDownArrowButton = 'button[glyph="navigation-down-arrow"]';

@@ -1,17 +1,19 @@
 import { BaseComponentPo } from './base-component.po';
-import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
+import { getElementClass, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class DateTimePicker extends BaseComponentPo {
     url = '/datetime-picker';
     root = '#page-content';
 
+    disabledFunctionExample = 'fdp-platform-datetime-picker-disable-function-example ';
+    
     topPage = 'h1.header';
     bottomPage = '#disable-function ~ code-example button';
 
     datePickerInput = 'fd-datetime-picker input';
     datePickerButton = 'fd-datetime-picker button';
 
-    activeDateTimePickerButton = 'fd-datetime-picker [ng-reflect-is-disabled="false"] + span button';
+    activeDateTimePickerButton = 'fd-datetime-picker span button';
     activeDateTimePickerInput = '[ng-reflect-is-disabled="false"][aria-label="Datetime input"]';
 
     disabledDateTimePickerButton = '.is-disabled button';
@@ -23,6 +25,7 @@ export class DateTimePicker extends BaseComponentPo {
 
     calendarExpanded = '.fd-datetime__container';
     calendarYearsSection = '.fd-calendar__content--years';
+    calendarItem = 'td.fd-calendar__item';
 
     currentDay = '//*[contains(@class, "fd-calendar__item--current") or contains(@class, "is-active")]';
 
@@ -34,12 +37,19 @@ export class DateTimePicker extends BaseComponentPo {
     navigationDownArrowButton = 'button[glyph="navigation-down-arrow"]';
     timeItem = 'span.fd-time__item';
     okButton = 'button[fdtype="emphasized"]';
-    cancelButton = 'button[ng-reflect-label="Cancel"]';
+    cancelButton = 'button[label="Cancel"]';
 
     selectedHours = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[12]';
     selectedMinutes = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[54]';
     period = '//span[contains(text(), " PM ")]/parent::li';
 
+    getCurrentDayIndex = (): number => {
+        for (let i = 0; i < this.calendarItem.length; i++) {
+            if (getElementClass(this.calendarItem, i).includes('is-active')) {
+                return i;
+            }
+        }
+    }
 
     filterCaledarValue = (name: string): string => {
         return `//td[contains(@id,"fd-${name}")]`;
