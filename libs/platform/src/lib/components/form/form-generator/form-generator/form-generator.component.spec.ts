@@ -68,7 +68,8 @@ export class HostComponent {
     }
 }
 
-describe('FormGeneratorComponent', () => {
+/** TODO: #6318 */
+xdescribe('FormGeneratorComponent', () => {
     let component: HostComponent;
     let fixture: ComponentFixture<HostComponent>;
 

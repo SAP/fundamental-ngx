@@ -83,7 +83,8 @@ class TestSliderComponent {
     value6 = 50;
 }
 
-describe('SliderComponent', () => {
+/** TODO: #6317 */
+xdescribe('SliderComponent', () => {
     let component: TestSliderComponent;
     let fixture: ComponentFixture<TestSliderComponent>;
     let sliders: SliderComponent[];

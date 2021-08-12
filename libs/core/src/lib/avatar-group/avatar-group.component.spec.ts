@@ -76,7 +76,8 @@ describe('AvatarGroupComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should assign type class', () => {
+    /** TODO: #6316 */
+    xit('should assign type class', () => {
         expect(fixture.nativeElement.querySelector('.fd-avatar-group')).toHaveClass('fd-avatar-group--group-type');
 
         component.type = 'individual';
@@ -84,7 +85,8 @@ describe('AvatarGroupComponent', () => {
         expect(fixture.nativeElement.querySelector('.fd-avatar-group')).toHaveClass('fd-avatar-group--individual-type');
     });
 
-    it('should assign size class', () => {
+    /** TODO: #6316 */
+    xit('should assign size class', () => {
         expect(fixture.nativeElement.querySelector('.fd-avatar-group')).toHaveClass('fd-avatar-group--s');
 
         component.size = 'xs';
