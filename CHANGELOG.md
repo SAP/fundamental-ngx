@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.191](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.190...v0.31.0-rc.191) (2021-08-12)
+
+
+### Bug Fixes
+
+* **core:** validate itemsPerPage in pagination ([#6303](https://github.com/SAP/fundamental-ngx/issues/6303)) ([0277afd](https://github.com/SAP/fundamental-ngx/commit/0277afd164b969099bb4017662be4680247ab4a0))
+
 ## [0.31.0-rc.190](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.189...v0.31.0-rc.190) (2021-08-12)
 
 ## [0.31.0-rc.189](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.188...v0.31.0-rc.189) (2021-08-11)
