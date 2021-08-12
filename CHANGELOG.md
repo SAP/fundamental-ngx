@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.195](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.194...v0.31.0-rc.195) (2021-08-12)
+
+
+### Bug Fixes
+
+* **docs:** add missing required validators ([#6314](https://github.com/SAP/fundamental-ngx/issues/6314)) ([fb657af](https://github.com/SAP/fundamental-ngx/commit/fb657af16c7aaef83763de51c0f4377c54dc37c4))
+
 ## [0.31.0-rc.194](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.193...v0.31.0-rc.194) (2021-08-12)
 
 
