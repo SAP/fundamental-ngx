@@ -104,9 +104,7 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
         this.dialogRef = this._dialogService.open(this._dialogTemplate, {
             ...this.dialogConfig,
             mobile: true,
-            focusTrapped: false,
             verticalPadding: false,
-            escKeyCloseable: false,
             backdropClickCloseable: false,
             container: this._elementRef.nativeElement,
             ariaLabelledBy: 'fd-dialog-header'

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { KeyUtil } from '../utils/functions';
-import { UP_ARROW, DOWN_ARROW, ENTER, SPACE, HOME, TAB, END, hasModifierKey } from '@angular/cdk/keycodes';
+import { UP_ARROW, DOWN_ARROW, ENTER, SPACE, HOME, TAB, END, ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
 
 import { SelectInterface } from './select.interface';
 import { OptionsInterface } from './options.interface';
@@ -98,7 +98,7 @@ export class SelectKeyManagerService {
         if (KeyUtil.isKeyCode(event, [HOME, END])) {
             event.preventDefault();
             KeyUtil.isKeyCode(event, HOME) ? manager.setFirstItemActive() : manager.setLastItemActive();
-        } else if (isArrowKey && event.altKey) {
+        } else if (isArrowKey && event.altKey || KeyUtil.isKeyCode(event, [ESCAPE])) {
             // Close the select on ALT + arrow key to match the native <select>
             event.preventDefault();
             this._component.close();
