@@ -608,20 +608,18 @@ export class SelectComponent implements
     _getOptionScrollPosition(
         optionIndex: number,
         itemHeight: number,
-        currentScrollPosition: number,
-        panelHeight: number
+        currentScrollPosition: number
     ): number {
-        const offsetHeight = this._options.get(optionIndex)._getHtmlElement().offsetHeight ;
-        const optionHeight = offsetHeight === 0  ? itemHeight : offsetHeight;
+        const offsetHeight = this._options.get(optionIndex)._getHtmlElement().offsetHeight;
+        const optionHeight = offsetHeight === 0 ? itemHeight : offsetHeight;
         const optionOffset = optionIndex * optionHeight;
-        panelHeight = SELECT_PANEL_MAX_HEIGHT;
         if (optionOffset < currentScrollPosition) {
             return optionOffset;
         }
 
-       if (optionOffset + optionHeight > currentScrollPosition + panelHeight) {
-            console.log('sds', optionOffset - panelHeight + optionHeight);
-            return Math.max(0, optionOffset - panelHeight + optionHeight);
+        if (optionOffset + optionHeight > currentScrollPosition + SELECT_PANEL_MAX_HEIGHT) {
+
+            return Math.max(0, optionOffset - SELECT_PANEL_MAX_HEIGHT + optionHeight);
         }
         return currentScrollPosition;
     }

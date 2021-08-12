@@ -34,6 +34,5 @@ export interface SelectInterface extends MobileMode {
     _getItemHeight(): number;
     _getOptionScrollPosition( optionIndex: number,
         optionHeight: number,
-        currentScrollPosition: number,
-        panelHeight: number): void;
+        currentScrollPosition: number): void;
 }

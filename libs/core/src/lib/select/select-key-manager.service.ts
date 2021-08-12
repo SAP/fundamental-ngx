@@ -48,8 +48,7 @@ export class SelectKeyManagerService {
         this._component._optionPanel.nativeElement.scrollTop = this._component._getOptionScrollPosition(
             activeOptionIndex,
             this._component._getItemHeight(),
-            this._component._optionPanel.nativeElement.scrollTop,
-            this._component._calculatedMaxHeight
+            this._component._optionPanel.nativeElement.scrollTop
         );
     }
 
