@@ -83,6 +83,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         {
             type: 'number',
             name: 'age1',
+            controlType: 'number',
             message: () => 'Your age: XL: 1, L: 2, M: 1, S: 1',
             default: '18',
             validators: [Validators.required],
