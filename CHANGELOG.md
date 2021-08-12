@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.194](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.193...v0.31.0-rc.194) (2021-08-12)
+
+
+### Bug Fixes
+
+* **docs:** correct validation hint ([#6309](https://github.com/SAP/fundamental-ngx/issues/6309)) ([69a92c0](https://github.com/SAP/fundamental-ngx/commit/69a92c0696e9f43df4672e680b10dee36f3d7916))
+
 ## [0.31.0-rc.193](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.192...v0.31.0-rc.193) (2021-08-12)
 
 ## [0.31.0-rc.192](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.191...v0.31.0-rc.192) (2021-08-12)
