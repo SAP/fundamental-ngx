@@ -60,10 +60,6 @@
         {{ showLabels ? incrementLabel : '' }}
     </button>
 </div>
-<span
-    *ngIf="description"
-    [id]="id + '__description'"
-    class="fd-form-label fd-form-label--unit-description"
->
+<span *ngIf="description" [id]="id + '__description'" class="fd-form-label fd-form-label--unit-description">
     {{ description }}
 </span>

@@ -156,7 +156,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     }
 
     /** @hidden */
-    _contentDensity = this.config.contentDensity;
+    _contentDensity: ContentDensity = this.config.contentDensity;
 
     /** @hidden */
     isCompact: boolean = this._contentDensity === 'compact';

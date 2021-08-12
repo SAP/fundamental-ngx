@@ -1,8 +1,6 @@
-import { ViewportRuler } from '@angular/cdk/overlay';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChildren,
     ElementRef,
@@ -12,15 +10,15 @@ import {
     OnDestroy,
     OnInit,
     QueryList,
-    SimpleChanges,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { ViewportRuler } from '@angular/cdk/overlay';
+
 import { of, Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import { ColorAccent, Size } from '@fundamental-ngx/core/utils';
-
 import { AvatarGroupItemDirective } from './directives/avatar-group-item.directive';
 
 export type AvatarGroupType = 'group' | 'individual';
@@ -71,7 +69,7 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
     avatarGroupContainer: ElementRef;
 
     /** @hidden */
-    avatarGroupContainerClass: string;
+    rootClassNames: Record<string, boolean | undefined | null>;
 
     /** @hidden */
     get isGroupType(): boolean {
@@ -100,10 +98,7 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
     private _subscription = new Subscription();
 
     /** @hidden */
-    constructor(
-        private readonly _viewportRuler: ViewportRuler,
-        private readonly _cdr: ChangeDetectorRef
-    ) {}
+    constructor(private _viewportRuler: ViewportRuler) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -111,10 +106,8 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
     }
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if ('class' in changes || 'type' in changes || 'size' in changes) {
-            this._assignCssClasses();
-        }
+    ngOnChanges(): void {
+        this._assignCssClasses();
     }
 
     /** @hidden */
@@ -177,7 +170,11 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
 
     /** @hidden */
     private _assignCssClasses(): void {
-        this.avatarGroupContainerClass = `fd-avatar-group fd-avatar-group--${this.type}-type fd-avatar-group--${this.size} ${this.class}`;
-        this._cdr.markForCheck();
+        this.rootClassNames = {
+            'fd-avatar-group': true,
+            [`fd-avatar-group--${this.type}-type`]: true,
+            [`fd-avatar-group--${this.size}`]: true,
+            [this.class]: true
+        };
     }
 }

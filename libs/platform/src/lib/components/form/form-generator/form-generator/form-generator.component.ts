@@ -11,13 +11,13 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { FormGroup, NgForm } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
 
-import { DynamicFormControl } from '../dynamic-form-control';
 import { FormGeneratorService } from '../form-generator.service';
-import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
 import { DynamicFormItem, DynamicFormValue } from '../interfaces/dynamic-form-item';
+import { DynamicFormControl } from '../dynamic-form-control';
+import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
 
 export interface SubmitFormEventResult {
     /**
@@ -28,7 +28,7 @@ export interface SubmitFormEventResult {
      * @description Formatted form value.
      */
     value: DynamicFormValue
-}
+};
 
 /**
  * @description Form Generator component represents a high-level component
@@ -139,7 +139,8 @@ export class FormGeneratorComponent implements OnDestroy {
     constructor(
         private _fgService: FormGeneratorService,
         private _cd: ChangeDetectorRef
-    ) { }
+    ) {
+    }
 
     /**
      * @hidden
@@ -153,6 +154,7 @@ export class FormGeneratorComponent implements OnDestroy {
      * @hidden
      */
     async _onSubmit(): Promise<void> {
+
         this.form.markAllAsTouched();
         this._cd.markForCheck();
 
@@ -191,6 +193,7 @@ export class FormGeneratorComponent implements OnDestroy {
      * @hidden
      */
     private async _generateForm(): Promise<void> {
+
         this.formLoading = true;
 
         const form = await this._fgService.generateForm(this.formItems);
@@ -204,11 +207,11 @@ export class FormGeneratorComponent implements OnDestroy {
         this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
 
         this._formValueSubscription = this.form.valueChanges
-            .pipe(debounceTime(50), takeUntil(this._onDestroy$))
-            .subscribe(async () => {
-                this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
-                this._cd.markForCheck();
-            });
+        .pipe(debounceTime(50), takeUntil(this._onDestroy$))
+        .subscribe(async () => {
+            this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
+            this._cd.markForCheck();
+        });
 
         this.formLoading = false;
 
