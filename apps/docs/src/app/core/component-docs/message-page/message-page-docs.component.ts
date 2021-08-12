@@ -18,8 +18,7 @@ export class MessagePageDocsComponent {
         {
             language: 'html',
             fileName: 'message-page-filter-example',
-            code: messagePageFilterExample,
-            component: 'MessagePageFilterExampleComponent'
+            code: messagePageFilterExample
         },
     ];
 
@@ -27,8 +26,7 @@ export class MessagePageDocsComponent {
         {
             language: 'html',
             fileName: 'message-page-search-example',
-            code: messagePageSearchExample,
-            component: 'MessagePageSearchExampleComponent'
+            code: messagePageSearchExample
         },
     ];
 
@@ -36,8 +34,7 @@ export class MessagePageDocsComponent {
         {
             language: 'html',
             fileName: 'message-page-no-items-example',
-            code: messagePageNoItemsExample,
-            component: 'MessagePageNoItemsExampleComponent'
+            code: messagePageNoItemsExample
         },
     ];
 
@@ -45,8 +42,7 @@ export class MessagePageDocsComponent {
         {
             language: 'html',
             fileName: 'message-page-error-example',
-            code: messagePageErrorExample,
-            component: 'MessagePageErrorExampleComponent'
+            code: messagePageErrorExample
         },
     ];
 
@@ -54,8 +50,7 @@ export class MessagePageDocsComponent {
         {
             language: 'html',
             fileName: 'message-page-actions-example',
-            code: messagePageActionsExample,
-            component: 'MessagePageActionsExampleComponent'
+            code: messagePageActionsExample
         },
     ];
 
@@ -63,8 +58,7 @@ export class MessagePageDocsComponent {
         {
             language: 'html',
             fileName: 'message-page-custom-icon-example',
-            code: messagePageCustomIconExample,
-            component: 'MessagePageCustomIconExampleComponent'
+            code: messagePageCustomIconExample
         },
     ];
 
@@ -72,8 +66,7 @@ export class MessagePageDocsComponent {
         {
             language: 'html',
             fileName: 'message-page-no-icon-example',
-            code: messagePageNoIconExample,
-            component: 'MessagePageNoIconExampleComponent'
+            code: messagePageNoIconExample
         },
     ];
 }
