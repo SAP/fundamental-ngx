@@ -76,6 +76,7 @@ export class PlatformFormGeneratorExampleComponent {
         {
             type: 'number',
             name: 'age',
+            controlType: 'number',
             message: () => 'Your age',
             default: '18',
             validators: [Validators.required],

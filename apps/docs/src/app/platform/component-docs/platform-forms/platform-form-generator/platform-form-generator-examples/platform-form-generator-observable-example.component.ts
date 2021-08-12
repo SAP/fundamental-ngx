@@ -74,6 +74,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         {
             type: 'number',
             name: 'age2',
+            controlType: 'number',
             message: () => of('Your age').pipe(delay(400)),
             default: '18',
             validators: [Validators.required],
