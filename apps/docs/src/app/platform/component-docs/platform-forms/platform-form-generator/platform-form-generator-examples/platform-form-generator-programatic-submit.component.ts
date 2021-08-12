@@ -105,6 +105,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
                     value: 'Ukraine'
                 }
             ]),
+            validators: [Validators.required],
             validate: (input, formValue) => {
                 return input?.length > 0 ? null : 'You need to select some country';
             }
@@ -136,6 +137,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
             name: 'agree3',
             message: 'Do you agree with terms and conditions?',
             choices: ['Yes', 'No'],
+            validators: [Validators.required],
             validate: (value) => of(value === 'Yes' ? null : 'You must agree'),
             guiOptions: {
                 column: 2
@@ -149,6 +151,7 @@ export class PlatformFormGeneratorProgramaticSubmitComponent {
             guiOptions: {
                 column: 2
             },
+            validators: [Validators.required],
             validate: (result: string) => of(result === 'Angular' ? null : 'You should pick Angular')
         },
         {

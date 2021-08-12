@@ -109,6 +109,7 @@ export class PlatformFormGeneratorExampleComponent {
                     }
                 ];
             },
+            validators: [Validators.required],
             validate: (input, formValue) => {
                 return input?.length > 0 ? null : 'You need to select some country';
             }
@@ -146,6 +147,7 @@ export class PlatformFormGeneratorExampleComponent {
             name: 'agree',
             message: 'Do you agree with terms and conditions?',
             choices: ['Yes', 'No'],
+            validators: [Validators.required],
             validate: async (value) => {
                 await dummyAwaitablePromise();
                 return value === 'Yes' ? null : 'You must agree';
@@ -162,6 +164,7 @@ export class PlatformFormGeneratorExampleComponent {
             guiOptions: {
                 column: 2
             },
+            validators: [Validators.required],
             validate: (result: string) => {
                 return result === 'Angular' ? null : 'You should pick Angular';
             }
