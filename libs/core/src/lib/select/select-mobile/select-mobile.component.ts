@@ -106,11 +106,11 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
             mobile: true,
             focusTrapped: true,
             verticalPadding: false,
-            escKeyCloseable: false,
+            escKeyCloseable: true,
             backdropClickCloseable: false,
             container: this._elementRef.nativeElement,
             ariaLabelledBy: 'fd-dialog-header'
         });
-        
+
     }
 }
