@@ -17,6 +17,7 @@ export class PlatformFormGeneratorCustomErrorExampleComponent {
             type: 'input',
             message: 'Custom validation error example',
             name: 'custom_validation_error_example',
+            required: true,
             validate: (value) => value ? null : 'This field needs to be filled',
             guiOptions: {
                 hint: 'Keep it empty to see validation error on submit'
