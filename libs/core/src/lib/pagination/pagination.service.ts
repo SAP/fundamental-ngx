@@ -68,6 +68,9 @@ export class PaginationService {
      * @param pagination An object of type *Pagination*.
      */
     getTotalPages(pagination: Pagination): number {
+        if (!pagination.itemsPerPage) {
+            return 0;
+        }
         return Math.ceil(pagination.totalItems / pagination.itemsPerPage);
     }
 
@@ -77,14 +80,11 @@ export class PaginationService {
      */
     validate(pagination: Pagination): void {
         if (isDevMode()) {
-            if (isNaN(pagination.totalItems) && !pagination.totalItems) {
-                console.warn(`No pages provided in the Pagination object. This warning only appears in development mode.`);
+            if (isNaN(pagination.totalItems) || pagination.totalItems <= 0) {
+                console.warn(`"totalItems" must be a number greater than zero but got "${pagination.totalItems}". This warning only appears in development mode.`);
             }
-            if (isNaN(pagination.itemsPerPage) && pagination.itemsPerPage <= 0) {
-                console.warn(`itemsPerPage must be greater than zero. This warning only appears in development mode.`);
-            }
-            if (!pagination.currentPage) {
-                pagination.currentPage = 1;
+            if (isNaN(pagination.itemsPerPage) || pagination.itemsPerPage <= 0) {
+                console.warn(`"itemsPerPage" must be a number greater than zero but got "${pagination.itemsPerPage}". This warning only appears in development mode.`);
             }
         }
     }
