@@ -73,7 +73,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
                 const passwordPattern = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\\w\\s]).{8,}$');
                 return passwordPattern.test(value)
                     ? null
-                    : 'Minimum eight characters, at least one letter, one number and one special character';
+                    : 'Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character';
             },
             guiOptions: {
                 hint: 'XL: 1, L: 2, M: 2, S: 1',
