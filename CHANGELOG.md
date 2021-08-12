@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.192](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.191...v0.31.0-rc.192) (2021-08-12)
+
+
+### Bug Fixes
+
+* **platform:** add attribute that reset padding to fdp-form-group component ([#6062](https://github.com/SAP/fundamental-ngx/issues/6062)) ([3d453c2](https://github.com/SAP/fundamental-ngx/commit/3d453c2c8be27c94342bbdbf6da94466178e599a))
+
 ## [0.31.0-rc.191](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.190...v0.31.0-rc.191) (2021-08-12)
 
 
