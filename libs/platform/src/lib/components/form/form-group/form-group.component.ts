@@ -30,6 +30,7 @@ import {
     OnDestroy,
     OnInit,
     Optional,
+    OnChanges,
     Output,
     Provider,
     QueryList,
@@ -39,9 +40,9 @@ import {
 import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { KeyValue } from '@angular/common';
+import { Subject, Subscription } from 'rxjs';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-
 import { Field, FieldGroup, FieldColumn, isFieldChild, isFieldGroupChild, getField } from '../form-helpers';
 import { FormFieldComponent } from './form-field/form-field.component';
 import { FormGroupContainer } from '../form-group';
@@ -137,7 +138,7 @@ export const formGroupProvider: Provider = {
     encapsulation: ViewEncapsulation.None,
     providers: [formGroupProvider]
 })
-export class FormGroupComponent implements FormGroupContainer, OnInit, AfterContentInit, AfterViewInit, OnDestroy {
+export class FormGroupComponent implements FormGroupContainer, OnInit, AfterContentInit, AfterViewInit, OnDestroy, OnChanges {
     @Input()
     id: string;
 
@@ -151,7 +152,10 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     noLabelLayout = false;
 
     @Input()
-    compact = false;
+    compact: boolean;
+    /** user's custom classes*/
+    @Input()
+    class: string;
 
     @Input()
     labelLayout: LabelLayout = 'horizontal';
@@ -268,14 +272,32 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
     protected _destroyed = new Subject<void>();
 
-    constructor(private _cd: ChangeDetectorRef, @Optional() private formContainer: ControlContainer) {
+    /** @hidden */
+    private _subscriptions = new Subscription();
+
+    constructor(
+        private _cd: ChangeDetectorRef, 
+        @Optional() private formContainer: ControlContainer, 
+        @Optional() private _contentDensityService: ContentDensityService
+        ) {
         this.formGroup = <FormGroup>(this.formContainer ? this.formContainer.control : new FormGroup({}));
+    }
+    
+    ngOnChanges(): void {
+        this.buildComponentCssClass();
     }
 
     ngOnInit(): void {
         if (!this.formGroup) {
             this.formGroup = new FormGroup({});
         }
+        if (this.compact === undefined && this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
+                this.compact = density !== 'cozy';
+                this.buildComponentCssClass();
+            }));
+        }
+        this.buildComponentCssClass();
     }
 
     ngAfterContentInit(): void {
@@ -296,6 +318,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     ngOnDestroy(): void {
         this._destroyed.next();
         this._destroyed.complete();
+        this._subscriptions.unsubscribe();
     }
 
     addFormField(formField: FormField): void {
@@ -341,6 +364,14 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
 
     isFieldGroupRow(row: KeyValue<FieldColumn, FieldGroup>): FieldColumn {
         return row.value instanceof FieldGroup ? row.value.fields : row.value;
+    }
+
+    buildComponentCssClass(): string[] {
+        return [
+            'fd-container',
+            !this.compact ? 'fd-form-layout-grid-container' : '',
+            this.class
+        ];
     }
 
     /** @hidden */
