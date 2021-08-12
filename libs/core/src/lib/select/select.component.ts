@@ -486,6 +486,7 @@ export class SelectComponent implements
         if (this._controlElementRef) {
             (this._controlElementRef.nativeElement as HTMLElement).focus();
         }
+
     }
 
     /** @hidden */

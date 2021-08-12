@@ -3,7 +3,7 @@
 <ng-template #desktopTemplate>
     <div class="fd-select" [class.fd-select--compact]="compact" (keydown)="_handleKeydown($event)" (click)="toggle()">
         <fd-popover additionalBodyClass="fd-popover-custom-list" [isOpen]="_isOpen" [triggers]="[]"
-            [focusTrapped]="true" [disabled]="disabled || readonly" [appendTo]="appendTo"
+            [focusTrapped]="true" [focusAutoCapture]="true" [disabled]="disabled || readonly" [appendTo]="appendTo"
             [closeOnEscapeKey]="true" [fillControlMode]="'at-least'" [maxWidth]="600"
             [closeOnOutsideClick]="closeOnOutsideClick" (isOpenChange)="_popoverOpenChangeHandle($event)">
 

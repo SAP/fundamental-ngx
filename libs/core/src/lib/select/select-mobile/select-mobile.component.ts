@@ -93,6 +93,7 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
     private _listenOnSelectOpenChange(): void {
         this._subscriptions.add(
             this._component.isOpenChange.subscribe((isOpen) => {
+                this._elementRef.nativeElement.blur();
                 this.dialogRef.hide(!isOpen);
             })
         );
@@ -103,11 +104,13 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
         this.dialogRef = this._dialogService.open(this._dialogTemplate, {
             ...this.dialogConfig,
             mobile: true,
-            focusTrapped: false,
+            focusTrapped: true,
             verticalPadding: false,
             escKeyCloseable: false,
             backdropClickCloseable: false,
-            container: this._elementRef.nativeElement
+            container: this._elementRef.nativeElement,
+            ariaLabelledBy: 'fd-dialog-header'
         });
+        
     }
 }
