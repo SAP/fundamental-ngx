@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { Media } from './thumbnail.interfaces';
-import { PlatformThumbnailModule } from './thumbnail.module';
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { Media, PlatformThumbnailModule } from '@fundamental-ngx/platform';
 
 @Component({
     template: `<fdp-thumbnail [mediaList]="mediaList"></fdp-thumbnail>`
@@ -26,7 +26,8 @@ describe('DefaultThumbnailComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformThumbnailModule],
-            declarations: [DefaultThumbnailTestComponent]
+            declarations: [DefaultThumbnailTestComponent],
+            providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
         }).compileComponents();
     }));
 
@@ -78,7 +79,8 @@ describe('HorizontalThumbnailComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformThumbnailModule],
-            declarations: [HorizontalThumbnailTestComponent]
+            declarations: [HorizontalThumbnailTestComponent],
+            providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
         }).compileComponents();
     }));
 
@@ -121,7 +123,8 @@ describe('ImageThumbnailComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformThumbnailModule],
-            declarations: [ImageThumbnailTestComponent]
+            declarations: [ImageThumbnailTestComponent],
+            providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
         }).compileComponents();
     }));
 

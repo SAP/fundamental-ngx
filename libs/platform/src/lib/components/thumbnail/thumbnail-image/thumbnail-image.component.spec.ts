@@ -3,7 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { AvatarModule, ButtonModule, CarouselModule, DialogModule } from '@fundamental-ngx/core';
+import { AvatarModule, ButtonModule, CarouselModule, DialogModule, RtlService } from '@fundamental-ngx/core';
 import { Media } from '@fundamental-ngx/platform';
 
 import { ThumbnailImageComponent } from './thumbnail-image.component';
@@ -40,7 +40,8 @@ describe('DefaultThumbnailImageComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule],
-            declarations: [ThumbnailImageComponent, DefaultThumbnailImageTestComponent]
+            declarations: [ThumbnailImageComponent, DefaultThumbnailImageTestComponent],
+            providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
         }).compileComponents();
     }));
 
@@ -101,7 +102,8 @@ describe('HorizontalThumbnailImageComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule],
-            declarations: [HorizontalThumbnailImageTestComponent, ThumbnailImageComponent]
+            declarations: [HorizontalThumbnailImageTestComponent, ThumbnailImageComponent],
+            providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
         }).compileComponents();
     }));
 
@@ -182,7 +184,8 @@ describe('MoreImagesThumbnailImageTestComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [CommonModule, AvatarModule, DialogModule, CarouselModule, ButtonModule],
-            declarations: [MoreImagesThumbnailImageTestComponent, ThumbnailImageComponent]
+            declarations: [MoreImagesThumbnailImageTestComponent, ThumbnailImageComponent],
+            providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
         }).compileComponents();
     }));
 

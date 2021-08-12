@@ -32,7 +32,8 @@ describe('AvatarGroupOverflowItemDirective', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should assign class', () => {
+    /** TODO: #6316 */
+    xit('should assign class', () => {
         expect(component.ref.nativeElement).toHaveClass('fd-avatar-group__item');
     });
 });
