@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.196](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.195...v0.31.0-rc.196) (2021-08-12)
+
+
+### Bug Fixes
+
+* **docs:** correct input type for age field ([#6315](https://github.com/SAP/fundamental-ngx/issues/6315)) ([f51b902](https://github.com/SAP/fundamental-ngx/commit/f51b90202b914fed1a59ec8d7d2f3e6b404349f8))
+
 ## [0.31.0-rc.195](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.194...v0.31.0-rc.195) (2021-08-12)
 
 
