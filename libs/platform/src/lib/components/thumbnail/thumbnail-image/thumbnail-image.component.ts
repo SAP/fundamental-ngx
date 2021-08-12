@@ -1,9 +1,7 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Optional, Output, SimpleChanges } from '@angular/core';
-
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnInit, ChangeDetectorRef } from '@angular/core';
 import { DialogService, RtlService } from '@fundamental-ngx/core';
-
-import { ThumbnailDetailsComponent } from '../thumbnail-details/thumbnail-details.component';
 import { Media } from '../thumbnail.interfaces';
+import { ThumbnailDetailsComponent } from '../thumbnail-details/thumbnail-details.component';
 
 @Component({
     selector: 'fdp-thumbnail-image',
@@ -29,11 +27,7 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     thumbnailClicked: EventEmitter<Media> = new EventEmitter();
 
     /** @hidden */
-    constructor(
-        protected _changeDetectorRef: ChangeDetectorRef,
-        private _dialogService: DialogService,
-        @Optional() private _rtlService: RtlService
-    ) { }
+    constructor(protected _changeDetectorRef: ChangeDetectorRef, private _dialogService: DialogService, private _rtlService: RtlService) { }
 
     /** @hidden */
     ngOnInit(): void {
