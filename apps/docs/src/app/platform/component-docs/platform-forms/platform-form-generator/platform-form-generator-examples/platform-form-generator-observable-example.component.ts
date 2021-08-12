@@ -93,6 +93,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
             type: 'checkbox',
             name: 'citizenship2',
             message: 'Your citizenship',
+            validators: [Validators.required],
             guiOptions: {
                 inline: true,
                 column: 2
@@ -136,6 +137,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
             name: 'agree2',
             message: 'Do you agree with terms and conditions?',
             choices: ['Yes', 'No'],
+            validators: [Validators.required],
             validate: (value) => of(value === 'Yes' ? null : 'You must agree'),
             guiOptions: {
                 column: 2
@@ -149,6 +151,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
             guiOptions: {
                 column: 2
             },
+            validators: [Validators.required],
             validate: (result: string) => of(result === 'Angular' ? null : 'You should pick Angular')
         },
         {
