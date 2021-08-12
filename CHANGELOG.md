@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.197](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.196...v0.31.0-rc.197) (2021-08-12)
+
+
+### Bug Fixes
+
+* **core:** fix stackblitz message-page examples ([#6320](https://github.com/SAP/fundamental-ngx/issues/6320)) ([31eeab4](https://github.com/SAP/fundamental-ngx/commit/31eeab469cc5523a18eedbfe6f04c49465c06d0c))
+
 ## [0.31.0-rc.196](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.195...v0.31.0-rc.196) (2021-08-12)
 
 
