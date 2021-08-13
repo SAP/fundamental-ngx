@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.199](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.198...v0.31.0-rc.199) (2021-08-13)
+
+
+### Bug Fixes
+
+* **core:** fix popover rtl mobile mode ([#6333](https://github.com/SAP/fundamental-ngx/issues/6333)) ([ad134ab](https://github.com/SAP/fundamental-ngx/commit/ad134ab464f43a37fbcfe3925a72066d21859126))
+
 ## [0.31.0-rc.198](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.197...v0.31.0-rc.198) (2021-08-13)
 
 
