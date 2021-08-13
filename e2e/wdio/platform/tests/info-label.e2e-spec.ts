@@ -7,7 +7,8 @@ import {
     decimalLabel,
     defaultLabelText,
     infoLabelText,
-    labelContentAlignment,
+    labelContentAlignmentCenter,
+    labelContentAlignmentStart,
     labelIconAttribute,
     labelIconAttributeValue,
     largeNumberLabel,
@@ -46,7 +47,7 @@ describe('Info Label component test suite', () => {
     it('should check default label info', () => {
         expect(getText(defaultLabel).toLowerCase()).toEqual(defaultLabelText.toLowerCase());
         expect(getCSSPropertyByName(defaultLabel, cssAlignmentAttribute).value)
-            .toEqual(labelContentAlignment);
+            .toEqual(labelContentAlignmentCenter);
     });
 
     it('should check info label with text', () => {
@@ -55,18 +56,18 @@ describe('Info Label component test suite', () => {
             for (let i = 0; i < labelsArr.length; i++) {
                 expect(getText(labelsArr[i].selector)).toEqual(safariInfoLabelText);
                 expect(getCSSPropertyByName(labelsWithTextArr, cssAlignmentAttribute, i).value)
-                    .toEqual(labelContentAlignment);
+                    .toEqual(labelContentAlignmentCenter);
             }
         } else {
             for (let i = 0; i < labelsArr.length; i++) {
                 expect(getText(labelsArr[i].selector)).toEqual(infoLabelText);
                 expect(getCSSPropertyByName(labelsWithTextArr, cssAlignmentAttribute, i).value)
-                    .toEqual(labelContentAlignment);
+                    .toEqual(labelContentAlignmentCenter);
             }
         }
     });
 
-    xit('should check info label with text and icon', () => {
+    it('should check info label with text and icon', () => {
         const labelsWithIconsArr = elementArray(labelsWithTextAndIconArr);
         const labelIconsArr = elementArray(labelsIconArr);
 
@@ -74,9 +75,9 @@ describe('Info Label component test suite', () => {
             for (let i = 0; i < labelsWithIconsArr.length; i++) {
                 expect(getText(labelsWithTextAndIconArr, i)).toEqual(safariIconInfoLabelText);
                 expect(getCSSPropertyByName(labelsWithTextAndIconArr, cssAlignmentAttribute, i).value)
-                    .toEqual(labelContentAlignment);
+                    .toEqual(labelContentAlignmentStart);
                 expect(getAttributeByName(labelsWithTextAndIconArr, labelIconAttribute, i))
-                    .toBe(labelIconAttributeValue);
+                    .toBe(labelIconAttributeValue, `failed with index ${i}`);
             }
             for (let i = 0; i < labelIconsArr.length; i++) {
                 expect(waitForElDisplayed(labelsWithTextAndIconArr, i)).toBe(true);
@@ -85,7 +86,7 @@ describe('Info Label component test suite', () => {
             for (let i = 0; i < labelsWithIconsArr.length; i++) {
                 expect(getText(labelsWithTextAndIconArr, i)).toEqual(infoLabelText);
                 expect(getCSSPropertyByName(labelsWithTextAndIconArr, cssAlignmentAttribute, i).value)
-                    .toEqual(labelContentAlignment);
+                    .toEqual(labelContentAlignmentStart);
                 expect(getAttributeByName(labelsWithTextAndIconArr, labelIconAttribute, i))
                     .toBe(labelIconAttributeValue);
 
@@ -96,7 +97,7 @@ describe('Info Label component test suite', () => {
         }
     });
 
-    xit('should check info label with a number or an icon', () => {
+    it('should check info label with a number or an icon', () => {
         if (browserIsSafari()) {
 
             expect(getText(labelsWithNumberOrIconArr, 1)).toEqual(safariLargeNumberLabel);
@@ -138,7 +139,7 @@ describe('Info Label component test suite', () => {
         infoLabelPage.checkRtlSwitch();
     });
 
-    it('should check examples basic visual regression', () => {
+    xit('should check examples basic visual regression', () => {
         infoLabelPage.saveExampleBaselineScreenshot();
         expect(infoLabelPage.compareWithBaseline()).toBeLessThan(5);
     });

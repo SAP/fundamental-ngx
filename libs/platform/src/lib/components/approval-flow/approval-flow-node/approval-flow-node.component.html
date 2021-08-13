@@ -1,45 +1,45 @@
 <div
     *ngIf="meta?.renderVerticalLineBefore"
-    class="approval-flow-node__vertical-line-before"
-    [class.approval-flow-node__vertical-line-before-solid]="_isVerticalLineBeforeSolid"></div>
+    class="fdp-approval-flow-node__vertical-line-before"
+    [class.fdp-approval-flow-node__vertical-line-before-solid]="_isVerticalLineBeforeSolid"></div>
+
 <div
     *ngIf="meta?.renderVerticalLineAfter"
-    class="approval-flow-node__vertical-line-after"
-    [class.approval-flow-node__vertical-line-after-solid]="_isVerticalLineAfterSolid"></div>
-
-<div
-    *ngIf="_isFinal && meta?.nodeIndex === 0"
-    class="approval-flow-node__carousel-end-marker"></div>
+    class="fdp-approval-flow-node__vertical-line-after"
+    [class.fdp-approval-flow-node__vertical-line-after-solid]="_isVerticalLineAfterSolid"></div>
 
 <ng-container *ngIf="!_blank && !_space">
-    <div *ngIf="renderArrow" class="approval-flow-node__arrow"></div>
+    <div *ngIf="renderArrow" class="fdp-approval-flow-node__arrow"></div>
 
     <div
         *ngIf="_isRoot && meta?.nodeIndex === 0"
-        class="approval-flow-node__carousel-start-marker"></div>
+        class="fdp-approval-flow-node__carousel-start-marker"></div>
 
-    <div *ngIf="isEdit" class="approval-flow-node__edit-controls">
-        <fd-checkbox
-            [(ngModel)]="_isSelected"
-            [compact]="true"
-            [disabled]="_isEditActionsAvailable"
-            (ngModelChange)="_onCheck(_isSelected)"
-        ></fd-checkbox>
+    <div
+        *ngIf="_isFinal && meta?.nodeIndex === 0"
+        class="fdp-approval-flow-node__carousel-end-marker"></div>
 
-        <button
-            *ngIf="!this.node?.disableActions"
-            class="approval-flow-node__menu-button"
-            fd-button
-            fdType="transparent"
-            glyph="overflow"
-            [compact]="true"
-            [fdMenuTrigger]="menu"
-            [disabled]="_isEditActionsAvailable"
-        ></button>
-    </div>
+    <ng-content></ng-content>
+</ng-container>
 
-    <div class="approval-flow-node__inner" (click)="_onClick()">
-        <div class="approval-flow-node__avatar">
+<ng-template #overflowMenuButton>
+    <!-- Actually just the fd-grid-item action button but with some hardcode to be used as menu trigger -->
+    <button
+        *ngIf="!node?.disableActions"
+        class="fdp-approval-flow-node__menu-button"
+        fd-button
+        fdType="transparent"
+        glyph="overflow"
+        [compact]="true"
+        [fdMenuTrigger]="menu"
+        [disabled]="_isEditActionsAvailable"
+        (click)="$event.stopPropagation()"
+    ></button>
+</ng-template>
+
+<ng-template #nodeContent>
+    <div class="fdp-approval-flow-node__inner">
+        <div class="fdp-approval-flow-node__avatar">
             <ng-container *ngIf="node.approvers.length === 1">
                 <fd-avatar [image]="node.approvers[0].imgUrl" size="xs" [circle]="true"></fd-avatar>
             </ng-container>
@@ -49,10 +49,10 @@
             </ng-container>
         </div>
 
-        <div class="approval-flow-node__info">
+        <div class="fdp-approval-flow-node__info">
             <div
-                class="approval-flow-node__name"
-                [class.approval-flow-node__name--members-count]="node.approvers.length > 1"
+                class="fdp-approval-flow-node__name"
+                [class.fdp-approval-flow-node__name--members-count]="node.approvers.length > 1"
             >
                 <ng-container *ngIf="node.approvers.length === 1; else multipleApprovers">
                     {{node.approvers[0].name}}
@@ -63,9 +63,9 @@
                 </ng-template>
             </div>
 
-            <div class="approval-flow-node__description" >
+            <div class="fdp-approval-flow-node__description" >
                 <ng-container *ngIf="!node.variousTeams; else variousTeams">
-                    {{ node.approvers.length > 1 ? node.description : node.approvers[0].description }}
+                    {{ node.approvers.length > 1 ? node.description : node.approvers[0]?.description }}
                 </ng-container>
 
                 <ng-template #variousTeams i18n="@@platformApprovalFlowNodeVariousTeams">
@@ -75,8 +75,11 @@
 
             <fdp-object-status
                 [status]="_objectStatus"
-                inverted="true">
-                <ng-container *ngIf="!checkDueDate || !_showDueDateWarning">{{ node.status }}</ng-container>
+                inverted="true"
+            >
+                <ng-container *ngIf="!checkDueDate || !_showDueDateWarning">
+                    {{ node.status }}
+                </ng-container>
 
                 <ng-container *ngIf="checkDueDate && _showDueDateWarning">
                     <ng-container
@@ -100,7 +103,7 @@
             </fdp-object-status>
         </div>
     </div>
-</ng-container>
+</ng-template>
 
 <ng-container *ngIf="_showAddButton && meta?.canAddNodeBeforeAll && !node?.actionsConfig?.disableAddBefore">
     <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before-all' }" ></ng-container>
@@ -120,27 +123,28 @@
 
 <ng-template #addNodeButton let-placement="placement">
     <button
-        class="approval-flow-node__add"
         *ngIf="node.status !== 'approved'"
-        [class.approval-flow-node__add--blank]="_blank"
-        [class.approval-flow-node__add--before]="!_blank && (placement === 'before' || placement === 'before-all')"
-        [class.approval-flow-node__add--before-all]="!_blank && placement === 'before-all'"
-        [class.approval-flow-node__add--after]="!_blank && (placement === 'after' || placement === 'after-all')"
-        [class.approval-flow-node__add--after-all]="placement === 'after-all'"
+        fd-button
+        glyph="add"
+        [compact]="true"
+        class="fdp-approval-flow-node__add"
+        [class.fdp-approval-flow-node__add--blank]="this._blank"
+        [class.fdp-approval-flow-node__add--before]="!this._blank && (placement === 'before' || placement === 'before-all')"
+        [class.fdp-approval-flow-node__add--before-all]="!this._blank && placement === 'before-all'"
+        [class.fdp-approval-flow-node__add--after]="!this._blank && (placement === 'after' || placement === 'after-all')"
+        [class.fdp-approval-flow-node__add--after-all]="placement === 'after-all'"
         [style.visibility]="dropZone.active ? 'hidden' : ''"
         (click)="onAdd.emit(placement)"
-    >
-        <fd-icon glyph="add"></fd-icon>
-    </button>
+    ></button>
 
     <div
         #dropZone="fdp-approval-flow-drop-zone"
         fdp-approval-flow-drop-zone
         [placement]="placement"
-        class="approval-flow-node__drop-zone"
-        [class.approval-flow-node__drop-zone--active]="dropZone.active"
-        [class.approval-flow-node__drop-zone--blank]="isNextNodeBlank"
-        [class.approval-flow-node__drop-zone--partial]="_dropZonePartial(placement)"
+        class="fdp-approval-flow-node__drop-zone"
+        [class.fdp-approval-flow-node__drop-zone--active]="dropZone.active"
+        [class.fdp-approval-flow-node__drop-zone--blank]="isNextNodeBlank"
+        [class.fdp-approval-flow-node__drop-zone--partial]="_dropZonePartial(placement)"
     ></div>
 </ng-template>
 

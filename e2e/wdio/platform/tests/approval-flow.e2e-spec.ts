@@ -1,6 +1,6 @@
 import {
     browserIsFirefox,
-    click,
+    click, clickWithOption,
     doesItExist,
     getElementArrayLength,
     getText,
@@ -309,7 +309,7 @@ describe('Approval flow', function() {
             waitForElDisplayed(editExampleButton);
             click(editExampleButton);
             waitForElDisplayed(approvalFlowNodeCheckbox);
-            browserIsFirefox() ? click(approvalFlowNodeCheckboxAlt, 1) : click(approvalFlowNodeCheckbox, 1);
+            browserIsFirefox() ? click(approvalFlowNodeCheckboxAlt, 3) : click(approvalFlowNodeCheckbox, 1);
             waitForElDisplayed(topActionButtons, 2);
             click(topActionButtons, 2);
             const approvalFlowNodeCountAfterRemove = getElementArrayLength(approvalFlowNode);
@@ -421,7 +421,7 @@ describe('Approval flow', function() {
         });
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             approvalFlowPage.saveExampleBaselineScreenshot();
             expect(approvalFlowPage.compareWithBaseline()).toBeLessThan(5);

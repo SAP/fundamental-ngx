@@ -73,7 +73,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
                 const passwordPattern = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\\w\\s]).{8,}$');
                 return passwordPattern.test(value)
                     ? null
-                    : 'Minimum eight characters, at least one letter, one number and one special character';
+                    : 'Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character';
             },
             guiOptions: {
                 hint: 'XL: 1, L: 2, M: 2, S: 1',
@@ -83,6 +83,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
         {
             type: 'number',
             name: 'age1',
+            controlType: 'number',
             message: () => 'Your age: XL: 1, L: 2, M: 1, S: 1',
             default: '18',
             validators: [Validators.required],
@@ -120,6 +121,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
                     }
                 ];
             },
+            validators: [Validators.required],
             validate: (input, formValue) => {
                 return input?.length > 0 ? null : 'You need to select some country';
             }
@@ -159,6 +161,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
             name: 'agree1',
             message: 'Do you agree with terms and conditions?: XL: 2, L: 1, M: 2, S: 1',
             choices: ['Yes', 'No'],
+            validators: [Validators.required],
             validate: async (value) => {
                 await dummyAwaitablePromise();
                 return value === 'Yes' ? null : 'You must agree';
@@ -178,6 +181,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
                 inlineLayout: { XL: false, L: true, M: false, S: true },
                 hint: 'XL: 2 false, L: 1 true, M: 1 false, S: 1 true'
             },
+            validators: [Validators.required],
             validate: (result: string) => {
                 return result === 'Angular' ? null : 'You should pick Angular';
             }

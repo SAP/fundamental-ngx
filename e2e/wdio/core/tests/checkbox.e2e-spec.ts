@@ -257,7 +257,7 @@ describe('checkbox test suite', function() {
         });
     });
 
-    describe('visual regression', function() {
+    xdescribe('visual regression', function() {
         beforeAll(() => {
             refreshPage();
         }, 1);

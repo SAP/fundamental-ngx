@@ -7,7 +7,7 @@ import {
     doesItExist,
     elementDisplayed,
     getAttributeByName,
-    getElementArrayLength,
+    getElementArrayLength, getElementClass,
     getText,
     mouseHoverElement,
     refreshPage,
@@ -15,7 +15,7 @@ import {
     sendKeys,
     waitForElDisplayed
 } from '../../driver/wdio';
-import { cozyAttribute, disabledAttribute, tickAttribute, tickLabelAttribute } from '../fixtures/appData/slider-content'
+import { densityAttribute, disabledAttribute, tickAttribute, tickLabelAttribute } from '../fixtures/appData/slider-content'
 
 describe('slider test suite', function() {
     const sliderPage = new SliderPo();
@@ -24,7 +24,7 @@ describe('slider test suite', function() {
         sliderLabels, customExamples, rangeExamples, disabledExamples, cozyExamples, playgroundExamples,
         sliderTypeMenu, sliderTypeOptions, sliderInput, firstSliderLabel, lastSliderLabel, secondSliderLabel,
         progressTracker, inputCheckboxes, sliderTicks, sliderTooltipInput, sliderTooltipInputFF, formFieldExamples,
-        formValueLabels
+        formValueLabels, altSliderAttr
     } = sliderPage;
 
     beforeAll(() => {
@@ -70,18 +70,6 @@ describe('slider test suite', function() {
             clickTooltipInput();
             sendKeys(['20', 'Enter']);
             expect(getText(tooltipExamples + valueLabels, 1)).toContain('20');
-        });
-    });
-
-    xdescribe('tick marks and labels examples', function() {
-        it('should check tick marks', () => {
-            scrollIntoView(ticksAndLabelsExamples);
-            expect(getAttributeByName(ticksAndLabelsExamples + sliderAttr, tickAttribute)).toEqual('true');
-        });
-
-        it('should check tick mark labels', () => {
-            expect(getAttributeByName(ticksAndLabelsExamples + sliderAttr, tickLabelAttribute, 1)).toEqual('true');
-            expect(elementDisplayed(ticksAndLabelsExamples + sliderLabels)).toBe(true);
         });
     });
 
@@ -143,17 +131,17 @@ describe('slider test suite', function() {
         });
     });
 
-    xdescribe('disabled examples', function() {
+    describe('disabled examples', function() {
         it('should check range slider is disabled', () => {
             scrollIntoView(disabledExamples);
-            expect(getAttributeByName(disabledExamples + sliderAttr, disabledAttribute)).toBe('true');
+            expect(getElementClass(disabledExamples + sliderAttr)).toContain('is-disabled');
         });
     });
 
     describe('cozy examples', function() {
-        xit('should check cozy property', () => {
+        it('should check cozy property', () => {
             scrollIntoView(cozyExamples);
-            expect(getAttributeByName(cozyExamples + sliderAttr, cozyAttribute)).toBe('true');
+            expect(getAttributeByName(cozyExamples + altSliderAttr, densityAttribute)).toBe('cozy');
         });
 
         it('should check cozy slider', () => {
@@ -228,7 +216,7 @@ describe('slider test suite', function() {
         });
     });
 
-    describe('visual regression', function() {
+    xdescribe('visual regression', function() {
         beforeEach(() => {
             refreshPage();
         }, 1);

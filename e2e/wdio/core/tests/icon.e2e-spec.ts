@@ -7,7 +7,7 @@ describe('Icon test suite', function() {
         iconPage.open();
     }, 1);
 
-    it('should check visual regression for all examples', () => {
+    xit('should check visual regression for all examples', () => {
         iconPage.saveExampleBaselineScreenshot();
         expect(iconPage.compareWithBaseline()).toBeLessThan(5);
     });

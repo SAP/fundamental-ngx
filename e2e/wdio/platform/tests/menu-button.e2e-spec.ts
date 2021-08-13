@@ -1,10 +1,8 @@
 import { MenuButtonPo } from '../pages/menu-button.po';
 import {
-    compactAttr,
+    compactClass,
     cozyAndCompactBtnTextArr,
     disabledState,
-    icon,
-    iconAttr,
     selectedItem,
     tooltipAttr,
     truncatedBtnNoIconTooltipText,
@@ -12,12 +10,11 @@ import {
     truncatedBtnTooltipText
 } from '../fixtures/appData/menu-button-contents';
 import {
-    browserIsIE,
-    browserIsIEorSafari,
+
     click,
     doubleClick,
     getAttributeByName,
-    getElementArrayLength,
+    getElementArrayLength, getElementClass,
     getText,
     isElementDisplayed,
     refreshPage,
@@ -81,19 +78,19 @@ describe('Menu button test suite', function() {
     });
 
     describe('Check cozy and compact menu button states', function() {
-        xit('should check btn states', () => {
-            const cozyBtnAttributeArrLength = getElementArrayLength(cozyBtnAttrArr);
-            const compactBtnAttributeArrLength = getElementArrayLength(compactBtnAttrArr);
+        it('should check btn states', () => {
+            const cozyBtnCount = getElementArrayLength(cozyBtnAttrArr);
+            const compactBtnCount = getElementArrayLength(compactBtnAttrArr);
 
-            for (let i = 0; cozyBtnAttributeArrLength > i; i++) {
-                expect(getAttributeByName(cozyBtnAttrArr, 'ng-reflect-disabled', i)).toBe('false');
+            for (let i = 0; cozyBtnCount > i; i++) {
+                expect(getAttributeByName(cozyBtnArr, 'aria-disabled', i)).toBe('false');
             }
 
-            for (let j = 0; compactBtnAttributeArrLength > j; j++) {
-                expect(getAttributeByName(compactBtnAttrArr, 'ng-reflect-disabled', j)).toBe('false');
+            for (let j = 0; compactBtnCount > j; j++) {
+                expect(getAttributeByName(compactBtnArr, 'aria-disabled', j)).toBe('false');
             }
 
-            for (let k = 0; 13 > k; k++) {
+            for (let k = 0; cozyBtnCount + compactBtnCount > k; k++) {
                 expect(isElementDisplayed(btnWorldIconArr, k)).toBe(true);
             }
         });
@@ -106,7 +103,7 @@ describe('Menu button test suite', function() {
             }
         });
 
-        xit('should check compact btn text', () => {
+        it('should check compact btn text', () => {
             const compactBtnTextArrLength = getElementArrayLength(compactBtnAttrArr);
             const compactBtnArrLength = getElementArrayLength(compactBtnArr);
 
@@ -116,48 +113,23 @@ describe('Menu button test suite', function() {
             }
 
             for (let j = 0; compactBtnArrLength > j; j++) {
-                expect(getAttributeByName(compactBtnArr, compactAttr)).toEqual('true');
+                expect(getElementClass(compactBtnArr, j)).toContain(compactClass);
             }
         });
     });
 
-    xdescribe('Check types of menu buttons', function() {
+    describe('Check types of menu buttons', function() {
 
         it('should check disabled buttons', () => {
             for (let i = 0; 5 > i; i++) {
-                expect(getAttributeByName(menuTypeBtnAttrArr, disabledState, i)).toEqual('true');
-            }
-        });
-
-        it('should check btn with and without icon', () => {
-            waitForElDisplayed(menuTypeBtnArr, 0);
-            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 5)).toBe(icon);
-            expect(getText(menuTypeBtnArr, 5).trim()).toEqual(cozyAndCompactBtnTextArr[0]);
-            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 6)).toBe(null);
-            expect(getText(menuTypeBtnArr, 6).trim()).toEqual(cozyAndCompactBtnTextArr[0]);
-            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 7)).toBe(icon);
-            expect(getText(menuTypeBtnArr, 7).trim()).toBe('');
-        });
-
-        it('should check compact btn with and without icon', () => {
-            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 8)).toBe(icon);
-            expect(getText(menuTypeBtnArr, 8).trim()).toEqual(cozyAndCompactBtnTextArr[0]);
-            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 9)).toBe(null);
-            expect(getText(menuTypeBtnArr, 9).trim()).toEqual(cozyAndCompactBtnTextArr[0]);
-            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 10)).toBe(icon);
-            expect(getText(menuTypeBtnArr, 10).trim()).toBe('');
-
-            for (let i = 8; 11 > i; i++) {
-                expect(getAttributeByName(menuTypeBtnArr, compactAttr, i)).toBe('true');
+                expect(getAttributeByName(menuTypeBtnArr, disabledState, i)).toEqual('true');
             }
         });
 
         it('should check long text menu btn with and without icon', () => {
-            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 11)).toContain(icon);
             expect(getText(menuTypeBtnArr, 11).trim()).toEqual(truncatedBtnText);
             expect(getAttributeByName(menuTypeBtnArr, tooltipAttr, 11))
                 .toContain(truncatedBtnTooltipText);
-            expect(getAttributeByName(menuTypeBtnArr, iconAttr, 12)).toBe(null);
             expect(getText(menuTypeBtnArr, 12).trim()).toEqual(truncatedBtnText);
             expect(getAttributeByName(menuTypeBtnArr, tooltipAttr, 12))
                 .toBe(truncatedBtnNoIconTooltipText);
@@ -170,7 +142,7 @@ describe('Menu button test suite', function() {
         });
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             menuBtnPage.saveExampleBaselineScreenshot();
             expect(menuBtnPage.compareWithBaseline()).toBeLessThan(5);

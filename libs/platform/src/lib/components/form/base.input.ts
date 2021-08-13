@@ -209,6 +209,15 @@ export abstract class BaseInput extends BaseComponent
 
     /** @hidden */
     ngAfterViewInit(): void {
+
+        if (this.ngControl) {
+            this._subscriptions.add(
+                this.ngControl.statusChanges.subscribe(() => {
+                    this.markForCheck();
+                })
+            );
+        }
+
         const labelAndHelpId = `fdp-form-label-${this.id} fdp-form-hint-${this.id}`;
         // if not specified, associate label and inline help ids with the input,
         // else add these ids to the specified ones

@@ -12,11 +12,11 @@ export class StepInputPo extends BaseComponentPo {
     allButtonIncrement = '//button[@title="Increment" and not(ancestor::div[contains(@class, "is-readonly")])]';
     allButtonDecrement = '//button[@title="Decrement" and not(ancestor::div[contains(@class, "is-readonly")])]';
     activeInput = '//input[contains(@class, "fd-step-input__input") and not(ancestor::div[contains(@class, "is-disabled")]) and not (ancestor::div[contains(@class, "is-readonly")])]';
-    reactiveFormInput = 'input#qty';
+    reactiveFormInput = 'input#reactive-form-qty';
     formInput = 'input[name=qty]';
     errorMessage = '.is-error';
-    minMaxButtonDecrement = '[ng-reflect-name="minMaxLimits"] button[title="Decrement"]';
-    minMaxButtonIncrement = '[ng-reflect-name="minMaxLimits"] button[title="Increment"]';
+    minMaxButtonDecrement = '.fd-step-input__button[title="Decrement"][aria-controls="minMaxLimits"]';
+    minMaxButtonIncrement = '.fd-step-input__button[title="Increment"][aria-controls="minMaxLimits"]';
     inputWithoutForm = '//input[contains(@class, "fd-step-input__input") and not (ancestor::div[contains(@class, "is-disabled")]) and not (@name="qty")]';
     quantityText = '.fd-page__content + pre';
     formStatusText = '.fd-page__content + pre ~ pre';

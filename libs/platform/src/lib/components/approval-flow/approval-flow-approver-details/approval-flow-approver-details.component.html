@@ -1,4 +1,4 @@
-<fd-dialog [attr.dir]="_data.rtl ? 'rtl' : 'ltr'">
+<fd-dialog>
     <fd-dialog-header [class.show-search]="!_userToShowDetails && _isListMode">
         <ng-template fdTemplate="header">
             <p>
@@ -9,6 +9,7 @@
                 ></fd-icon>
                 <ng-container *ngIf="_isListMode && !_userToShowDetails; else defaultHeader">{{ _data.node.description }} ({{ _data.node.approvers.length }})</ng-container>
             </p>
+
             <fdp-search-field
                 *ngIf="!_userToShowDetails && _isListMode"
                 i18n-placeholder
@@ -63,7 +64,6 @@
         </fd-dialog-footer-button>
     </fd-dialog-footer>
 </fd-dialog>
-
 
 <ng-template #defaultHeader>
     <ng-container i18n="@@platformApprovalFlowUserDetailHeader">Detail</ng-container>

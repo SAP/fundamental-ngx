@@ -5,11 +5,11 @@ import {
     expandable_panel_header
 } from '../fixtures/appData/panel-page-content';
 import {
-    click,
+    click, doesItExist,
     getCSSPropertyByName,
     getElementSize,
     getText,
-    pause,
+    pause, refreshPage,
     waitForClickable,
     waitForElDisplayed,
     waitForNotDisplayed,
@@ -24,24 +24,27 @@ describe('Verify Panel', () => {
         fixedHeightPanelContent, actionPanelRoot, actionPanelBtn
     } = panelPage;
 
-    beforeEach(() => {
+    beforeAll(() => {
         panelPage.open();
     }, 1);
-    // skipped for prod
-    xit('should have fixed header', () => {
+
+    afterEach(() => {
+        refreshPage();
+        waitForPresent(panelPage.title);
+    }, 1);
+
+    it('should have fixed header', () => {
         waitForPresent(fixedPanelDescription);
-        // Checks that fixed panel has no expand button
         expect(waitForPresent(fixedPanelDescription)).toBe(true);
     });
 
-    xit('should be expandable', () => {
+    it('should be expandable', () => {
         const isVisibleContentBefore = waitForElDisplayed(expandablePanelContent);
-        click(expandablePanelBtn);
-        pause(3000);
-        const isInvisibleVisibleContentAfter = waitForNotDisplayed(expandablePanelContent);
-
         expect(isVisibleContentBefore).toBe(true);
-        expect(isInvisibleVisibleContentAfter).toBe(true);
+
+        click(expandablePanelBtn);
+
+        expect(doesItExist(expandablePanelContent)).toBe(false);
         expect(getText(expandablePanelTitle)).toBe(expandable_panel_header);
     });
 
@@ -73,7 +76,7 @@ describe('Verify Panel', () => {
         });
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             panelPage.saveExampleBaselineScreenshot();
             expect(panelPage.compareWithBaseline()).toBeLessThan(5);

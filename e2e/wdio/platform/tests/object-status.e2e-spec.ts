@@ -1,8 +1,8 @@
 import { ObjectStatusPo } from '../pages/object-status.po';
 import {
     acceptAlert,
-    click,
-    getElementArrayLength,
+    click, getAttributeByName,
+    getElementArrayLength, getElementClass,
     getText,
     refreshPage,
     scrollIntoView,
@@ -80,23 +80,36 @@ describe('object status test suite', function() {
         });
     });
 
-    xdescribe('inverted object status example', function() {
+    describe('inverted object status example', function() {
         it('should check status is inverted', () => {
-            scrollIntoView(invertedExamples + status);
-            checkAttributeValueTrue(invertedExamples + status, invertedAttribute);
+            const statusCount = getElementArrayLength(invertedExamples + status);
+
+            for (let i = 0; i < statusCount; i++) {
+                scrollIntoView(invertedExamples + status);
+                expect(getAttributeByName(invertedExamples + status, invertedAttribute)).toBe('true');
+            }
         });
     });
 
-    xdescribe('inverted object status with generic indication colors example', function() {
+    describe('inverted object status with generic indication colors example', function() {
         it('should check status is inverted', () => {
-            scrollIntoView(invertedIndicationColorExamples + status);
-            checkAttributeValueTrue(invertedIndicationColorExamples + status, invertedAttribute);
+            const statusCount = getElementArrayLength(invertedIndicationColorExamples + status);
+
+            for (let i = 0; i < statusCount; i++) {
+                scrollIntoView(invertedIndicationColorExamples + status);
+                expect(getElementClass(invertedIndicationColorExamples + status + ' span')).toContain('fd-object-status--inverted');
+            }
         });
     });
 
-    xdescribe('object status large design example', function() {
+    describe('object status large design example', function() {
         it('should check large status', () => {
-            checkAttributeValueTrue(largeExamples + status, largeStatusAttribute);
+            const statusCount = getElementArrayLength(largeExamples + status);
+
+            for (let i = 0; i < statusCount; i++) {
+                scrollIntoView(largeExamples + status);
+                expect(getAttributeByName(largeExamples + status, largeStatusAttribute)).toBe('true');
+            }
         });
     });
 
@@ -106,7 +119,7 @@ describe('object status test suite', function() {
         });
     });
 
-    describe('Visual regression', function() {
+    xdescribe('Visual regression', function() {
         it('should check examples visual regression', () => {
             refreshPage();
             waitForPresent(defaultExamples + status);

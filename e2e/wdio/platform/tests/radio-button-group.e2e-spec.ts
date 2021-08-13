@@ -124,7 +124,7 @@ describe('Radio button group  Test Suite', function() {
     });
 
 
-    xit('Verify radio group using FormGroup and FormControl', () => {
+    it('Verify radio group using FormGroup and FormControl', () => {
         scrollIntoView(radioButtonInputByIndex(radioButtonUsingFormGroupAndFormControl));
         click(radioButtonLabelByIndex(radioButtonUsingFormGroupAndFormControl), marchIndex);
         expect(getText(selectedValueLabel, radioButtonUsingFormGroupAndFormControl)).toContain(marchValue);
@@ -151,7 +151,7 @@ describe('Radio button group  Test Suite', function() {
             , ariaChecked)).toBe('true');
     });
 
-    xit('Verify radio group using FormGroup and FormControl', () => {
+    it('Verify radio group using FormGroup and FormControl', () => {
         scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledItem));
         click(radioButtonLabelByIndex(radioButtonWithDisabledItem), marchIndex);
         expect(getText(selectedValueLabel, radioButtonWithDisabledItem)).toContain(marchValue);
@@ -282,7 +282,7 @@ describe('Radio button group  Test Suite', function() {
             , ariaChecked)).toBe('true');
     });
 
-    xit('Verify platform radio buttons Passed as content projection and some radio buttons are disabled', () => {
+    it('Verify platform radio buttons Passed as content projection and some radio buttons are disabled', () => {
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByIndex(radioButtonWithDisabledContentAndFormcontrol));
         scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledContentAndFormcontrol));
@@ -303,7 +303,7 @@ describe('Radio button group  Test Suite', function() {
             , ariaChecked)).toBe('true');
     });
 
-    xit('Verify platform radio button created from list of string values', () => {
+    it('Verify platform radio button created from list of string values', () => {
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByIndex(radioButtonCreatedFromList));
         scrollIntoView(radioButtonInputByIndex(radioButtonCreatedFromList));
@@ -313,7 +313,7 @@ describe('Radio button group  Test Suite', function() {
         }
     });
 
-    xit('Verify platform radio buttons created from list of SelectItem objects and FormContol is disabled', () => {
+    it('Verify platform radio buttons created from list of SelectItem objects and FormContol is disabled', () => {
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByIndex(radioButtonDisabledWithSelectedItem));
         scrollIntoView(radioButtonInputByIndex(radioButtonDisabledWithSelectedItem));
@@ -323,7 +323,7 @@ describe('Radio button group  Test Suite', function() {
         }
     });
 
-    xit('Verify platform radio buttons created from list of SelectItem objects and some items are disabled', () => {
+    it('Verify platform radio buttons created from list of SelectItem objects and some items are disabled', () => {
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByIndex(radioButtonWithDisabledButtonsFromSelectitemObject));
         scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledButtonsFromSelectitemObject));
@@ -339,7 +339,7 @@ describe('Radio button group  Test Suite', function() {
         }
     });
 
-    xit('Verify platform radio buttons passed as content projection and group is disabled', () => {
+    it('Verify platform radio buttons passed as content projection and group is disabled', () => {
         if (browserIsFirefox()) {
             console.log('Skip for FF');
             return;
@@ -353,7 +353,7 @@ describe('Radio button group  Test Suite', function() {
         }
     });
 
-    xit('Verify platform radio buttons passed as content projection and individual radio button is disabled', () => {
+    it('Verify platform radio buttons passed as content projection and individual radio button is disabled', () => {
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByIndex(radioButtonWithIndividualButtonDisabled));
         scrollIntoView(radioButtonInputByIndex(radioButtonWithIndividualButtonDisabled));
@@ -370,7 +370,7 @@ describe('Radio button group  Test Suite', function() {
             , ariaChecked)).toBe('true');
     });
 
-    xit('Verify platform radio buttons created from list of string values and group is disabled', () => {
+    it('Verify platform radio buttons created from list of string values and group is disabled', () => {
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByIndex(radioButtonDisabledCreatedFromList));
         scrollIntoView(radioButtonInputByIndex(radioButtonDisabledCreatedFromList));
@@ -380,7 +380,7 @@ describe('Radio button group  Test Suite', function() {
         }
     });
 
-    xit('Verify platform radio buttons created from list of SelectItem and group is disabled', () => {
+    it('Verify platform radio buttons created from list of SelectItem and group is disabled', () => {
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByIndex(radioButtonDisabledCreatedFromSelectItem));
         scrollIntoView(radioButtonInputByIndex(radioButtonDisabledCreatedFromSelectItem));
@@ -390,7 +390,7 @@ describe('Radio button group  Test Suite', function() {
         }
     });
 
-    xit('Verify platform radio buttons created from list of SelectItem and individual item has disabled property', () => {
+    it('Verify platform radio buttons created from list of SelectItem and individual item has disabled property', () => {
         const radioButtonsLength = getElementArrayLength(radioButtonGroupPage
             .radioButtonInputByIndex(radioButtonWithDisabledItemsCreatedFromSelectItem));
         scrollIntoView(radioButtonInputByIndex(radioButtonWithDisabledItemsCreatedFromSelectItem));

@@ -65,7 +65,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
             validators: [Validators.required],
             validate: (value: string) => {
                 const passwordPattern = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\\w\\s]).{8,}$');
-                return passwordPattern.test(value) ? null : 'Minimum eight characters, at least one letter, one number and one special character'
+                return passwordPattern.test(value) ? null : 'Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character'
             },
             guiOptions: {
                 column: 1
@@ -74,6 +74,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
         {
             type: 'number',
             name: 'age2',
+            controlType: 'number',
             message: () => of('Your age').pipe(delay(400)),
             default: '18',
             validators: [Validators.required],
@@ -93,6 +94,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
             type: 'checkbox',
             name: 'citizenship2',
             message: 'Your citizenship',
+            validators: [Validators.required],
             guiOptions: {
                 inline: true,
                 column: 2
@@ -136,6 +138,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
             name: 'agree2',
             message: 'Do you agree with terms and conditions?',
             choices: ['Yes', 'No'],
+            validators: [Validators.required],
             validate: (value) => of(value === 'Yes' ? null : 'You must agree'),
             guiOptions: {
                 column: 2
@@ -149,6 +152,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
             guiOptions: {
                 column: 2
             },
+            validators: [Validators.required],
             validate: (result: string) => of(result === 'Angular' ? null : 'You should pick Angular')
         },
         {

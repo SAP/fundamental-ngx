@@ -7,7 +7,7 @@ describe('Avatar test suite', function() {
         avatarPage.open();
     }, 1);
 
-    it('should check visual regression for all examples', () => {
+    xit('should check visual regression for all examples', () => {
         avatarPage.saveExampleBaselineScreenshot();
         expect(avatarPage.compareWithBaseline()).toBeLessThan(5);
     });

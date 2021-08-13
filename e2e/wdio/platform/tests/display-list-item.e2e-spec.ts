@@ -1,9 +1,9 @@
 import { DisplayListItemPo } from '../pages/display-list-item.po';
-import { click, getAttributeByName, getCurrentUrl, refreshPage, waitForPresent } from '../../driver/wdio';
+import { click, getCurrentUrl, getElementClass, refreshPage, waitForPresent } from '../../driver/wdio';
 import { checkElArrIsClickable, checkElementText, checkElementTextValue } from '../../helper/assertion-helper';
-import {navTitlesArr, compactAttr, borderAttr, navUrl} from '../fixtures/appData/display-list-item-contents';
+import { navTitlesArr, navUrl } from '../fixtures/appData/display-list-item-contents';
 
-describe('Display List Item test suite:', function() {
+describe('Display List Item test suite:', function () {
     const displayListPage = new DisplayListItemPo();
     const {
         displayLinks,
@@ -24,14 +24,14 @@ describe('Display List Item test suite:', function() {
         waitForPresent(displayLinks);
     }, 1);
 
-    describe('Display List Item - cozy and comfy examples:', function() {
-        xit('should do basic checks', () => {
+    describe('Display List Item - cozy and comfy examples:', function () {
+        it('should do basic checks', () => {
             checkElArrIsClickable(displayLinks);
             checkElementText(cozyDisplayTitles);
             checkElementText(comfyDisplayTitles);
-            expect(getAttributeByName(sections, compactAttr, 0)).toBe('false');
-            expect(getAttributeByName(sections, compactAttr, 1)).toBe('true');
-            expect(getAttributeByName(sections, borderAttr)).toBe('true');
+            expect(getElementClass(sections, 0)).not.toContain('compact');
+            expect(getElementClass(sections, 1)).toContain('compact');
+            expect(getElementClass(sections, 0)).toContain('no-border');
         });
 
         it('should check navigation', () => {
@@ -42,22 +42,22 @@ describe('Display List Item test suite:', function() {
         });
     });
 
-    describe('Display List Item - declarative examples:', function() {
-        xit('should do basic checks', () => {
+    describe('Display List Item - declarative examples:', function () {
+        it('should do basic checks', () => {
             checkElArrIsClickable(declarativeDisplayLinks);
             checkElementTextValue(declarativeDisplayTitles, navTitlesArr);
-            expect(getAttributeByName(declarativeSection, borderAttr)).toBe('false');
-            expect(getAttributeByName(declarativeSection, compactAttr)).toBe('false');
+            expect(getElementClass(declarativeSection)).not.toContain('no-border');
+            expect(getElementClass(declarativeSection)).not.toContain('compact');
         });
     });
 
-    describe('Orientation check:', function() {
+    describe('Orientation check:', function () {
         it('should check RTL and LTR orientation', () => {
             displayListPage.checkRtlSwitch();
         });
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             displayListPage.saveExampleBaselineScreenshot();
             expect(displayListPage.compareWithBaseline()).toBeLessThan(5);

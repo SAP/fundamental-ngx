@@ -12,14 +12,14 @@
     <div *ngIf="title" class="fd-form-header">
         <span class="fd-form-header__text">{{ title }}</span>
     </div>
-    <div class="fd-container fd-form-layout-grid-container">
+    <div class="fd-container fd-form-layout-grid-container" [class.fd-col--compact]="compact">
         <ng-container *ngFor="let row of rows | keyvalue; trackBy: trackByFn">
             <div class="fd-row fd-row--top">
                 <div class="fd-form-group__header" *ngIf="row.value.label">
                     <h1 class="fd-form-group__header-text">{{ row.value.label }}</h1>
                 </div>
                 <ng-container *ngFor="let fields of isFieldGroupRow(row) | keyvalue; trackBy: trackByFn">
-                    <div class="fd-form-group fd-col__form-group fd-col" [ngClass]="xlCol">
+                    <div class="fd-form-group fd-col" [class.fd-col__form-group]="!compact" [class.fd-col--compact]="compact" [ngClass]="xlCol">
                         <div class="fd-form-item fd-row__form-item fd-row">
                             <div
                                 *ngFor="let field of fields.value; trackBy: trackByFieldName"

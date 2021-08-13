@@ -195,7 +195,7 @@ describe('shellbar test suite', function() {
             shellbarPage.checkRtlSwitch();
         });
 
-        it('should check example block visual regression', () => {
+        xit('should check example block visual regression', () => {
             shellbarPage.saveExampleBaselineScreenshot();
             expect(shellbarPage.compareWithBaseline()).toBeLessThan(5);
         });

@@ -20,6 +20,7 @@ import { Subscription } from 'rxjs';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
+
 import { parseLayoutPattern } from '../../helpers';
 import { GridListSelectionActions, GridListSelectionService } from '../../services/grid-list-selection.service';
 import { GridListItemToolbarComponent } from '../grid-list-item-toolbar/grid-list-item-toolbar.component';
@@ -69,7 +70,7 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     @Input()
     status?: GridListItemStatus;
 
-    /** Sets number of subitems */
+    /** Sets number of sub items */
     @Input()
     counter: number;
 
@@ -79,6 +80,10 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
      */
     @Input()
     value?: T;
+
+    /** Whether click on the custom toolbar is disabled */
+    @Input()
+    disableToolbarClick = false;
 
     /** Allows an item to be selected programmatically */
     @Input()
@@ -384,15 +389,34 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
             return false;
         }
 
-        const { classList } = event.target as HTMLElement;
+        const element = event.target as HTMLElement;
+        const { classList } = element;
 
         return (
+            !(this._isToolbarElement(element) && this.disableToolbarClick) &&
             !classList.contains('fd-grid-list__action-button') &&
             !classList.contains('fd-grid-list__radio-label') &&
             !classList.contains('fd-grid-list__radio-input') &&
             !classList.contains('fd-grid-list__checkbox-label') &&
             !classList.contains('fd-grid-list__checkbox-input')
         );
+    }
+
+    /** @hidden */
+    private _isToolbarElement(element: HTMLElement): boolean {
+        if (!this.itemToolbarComponent) {
+            return false;
+        }
+
+        while (!element.parentElement.classList.contains('fd-grid-list__item')) {
+            if (element.classList.contains('fd-toolbar--extra-content')) {
+                return true;
+            }
+
+            element = element.parentElement;
+        }
+
+        return false;
     }
 
     /** @hidden */

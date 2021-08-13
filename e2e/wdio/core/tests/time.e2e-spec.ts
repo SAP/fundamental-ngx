@@ -117,7 +117,7 @@ describe('Time component test', function () {
         timePage.checkRtlSwitch();
     });
 
-    describe('Visual regression', function () {
+    xdescribe('Visual regression', function () {
         it('should check examples except dinamyc changes example', () => {
             const actionSheetCount = getElementArrayLength(exampleAreaContainersArr);
             for (let i = 0; actionSheetCount > i; i++) {

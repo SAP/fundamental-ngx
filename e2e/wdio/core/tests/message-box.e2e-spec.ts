@@ -52,7 +52,7 @@ describe('Message-box test suits', function () {
         messageBoxPage.checkRtlSwitch();
     });
 
-    describe('visual regression', function () {
+    xdescribe('visual regression', function () {
         it('should check examples visual regression', () => {
             refreshPage();
             waitForElDisplayed(messageBoxPage.title);

@@ -76,7 +76,7 @@ describe('product switch test suite', function() {
             productSwitchPage.checkRtlSwitch();
         });
 
-        it('should check examples visual regression', () => {
+        xit('should check examples visual regression', () => {
             productSwitchPage.saveExampleBaselineScreenshot();
             expect(productSwitchPage.compareWithBaseline()).toBeLessThan(5);
         });

@@ -25,7 +25,7 @@ describe('Status indicator component test', function() {
         statusIndicatorPage.checkRtlSwitch();
     });
 
-    describe('Should check visual regression', function() {
+    xdescribe('Should check visual regression', function() {
 
         it('should check visual regression for all examples', () => {
             statusIndicatorPage.saveExampleBaselineScreenshot();

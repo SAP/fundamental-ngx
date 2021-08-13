@@ -176,7 +176,7 @@ describe('multi-combobox test suite', function() {
             multiComboboxPage.checkRtlSwitch();
         });
 
-        it('should check examples visual regression', () => {
+        xit('should check examples visual regression', () => {
             multiComboboxPage.saveExampleBaselineScreenshot();
             expect(multiComboboxPage.compareWithBaseline()).toBeLessThan(5);
         });

@@ -37,4 +37,3 @@ export const customLabels = [
     'not empty'
 ];
 export const basicSearchId = 'value-help-dialog-search';
-export const mobileAttr = 'ng-reflect-mobile';

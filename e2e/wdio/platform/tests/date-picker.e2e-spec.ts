@@ -2,7 +2,7 @@ import {
     click,
     elementArray,
     getAttributeByName,
-    getCSSPropertyByName, getElementPlaceholder,
+    getCSSPropertyByName, getElementClass, getElementPlaceholder,
     getText,
     getValue,
     refreshPage,
@@ -26,13 +26,13 @@ import {
     date9,
     highlightedColor,
     text,
-    year2000
+    year2025
 } from '../fixtures/testData/date-picker';
 
-describe('Date picker suite', function() {
+describe('Date picker suite', function () {
     const datePickerPage: DatePicker = new DatePicker();
     const {
-        inputDatePicker, buttonDatePicker, activeButtonDatePicker, activeInputDatePicker, calendarExpanded,
+        inputDatePicker, buttonDatePicker, /*buttonDatePicker, inputDatePicker, */ calendarExpanded,
         calendarYearsSection, currentDay, buttonGerman, buttonBulgarian, buttonSelectYear, buttonSelectMonth,
         buttonSelectYearsRange, buttonFirstRangeYear, buttonFirstYear, buttonFirstMonth, filterCalendarValue,
         dayInCalendarButtonByValue, yearInCalendarByValue
@@ -58,45 +58,51 @@ describe('Date picker suite', function() {
     });
 
     it('Verify calendar is expanded on click on the date picker button', () => {
-        const activeButtons = elementArray(activeButtonDatePicker);
+        const activeButtons = elementArray(buttonDatePicker);
         for (let i = 1; i < activeButtons.length; i++) {
-            sendKeys(['Escape']);
-            scrollIntoView(activeButtonDatePicker, i);
-            click(activeButtonDatePicker, i);
-            waitForElDisplayed(calendarExpanded);
+            if (!getElementClass(buttonDatePicker, i).includes('is-disabled')) {
+                sendKeys(['Escape']);
+                scrollIntoView(buttonDatePicker, i);
+                click(buttonDatePicker, i);
+                waitForElDisplayed(calendarExpanded);
+            }
         }
     });
 
-    xit('Verify By clicking the current year', () => {
+    it('Verify By clicking the current year', () => {
         sendKeys(['Escape']);
-        scrollIntoView(activeButtonDatePicker, 1);
-        click(activeButtonDatePicker, 1);
+        scrollIntoView(buttonDatePicker, 1);
+        click(buttonDatePicker, 1);
         expect(waitForElDisplayed(calendarExpanded)).toBe(true);
         scrollIntoView(buttonSelectYear);
         click(buttonSelectYear);
         expect(waitForElDisplayed(calendarYearsSection)).toBe(true);
-        click(yearInCalendarByValue(year2000));
-        expect(getText(buttonSelectYear)).toBe(year2000.toString());
+        click(yearInCalendarByValue(year2025));
+        expect(getText(buttonSelectYear)).toBe(year2025.toString());
     });
 
     it('Verify by default today date is focused', () => {
-        const activeButtons = elementArray(activeButtonDatePicker);
+        const activeButtons = elementArray(buttonDatePicker);
         for (let i = 4; i < activeButtons.length; i++) {
-            sendKeys(['Escape']);
-            scrollIntoView(activeButtonDatePicker, i);
-            click(activeButtonDatePicker, i);
-            waitForElDisplayed(calendarExpanded);
-            expect(getText(currentDay, 0)).toBe(new Date().getDate().toString());
+            if (!getElementClass(buttonDatePicker, i).includes('is-disabled')) {
+                sendKeys(['Escape']);
+                scrollIntoView(buttonDatePicker, i);
+                click(buttonDatePicker, i);
+                waitForElDisplayed(calendarExpanded);
+                expect(getText(currentDay, 0)).toBe(new Date().getDate().toString());
+            }
         }
     });
 
     it('Verify on click on the input field ', () => {
-        const activeInputs = elementArray(activeInputDatePicker);
+        const activeInputs = elementArray(inputDatePicker);
         for (let i = 0; i < activeInputs.length; i++) {
-            sendKeys(['Escape']);
-            scrollIntoView(activeInputDatePicker, i);
-            setValue(activeInputDatePicker, text, i);
-            expect(getValue(activeInputDatePicker, i)).toBe(text);
+            if (!getElementClass(buttonDatePicker, i).includes('is-disabled')) {
+                sendKeys(['Escape']);
+                scrollIntoView(inputDatePicker, i);
+                setValue(inputDatePicker, text, i);
+                expect(getValue(inputDatePicker, i)).toBe(text);
+            }
         }
     });
 
@@ -111,164 +117,171 @@ describe('Date picker suite', function() {
         datePickerPage.checkRtlSwitch();
     });
 
-    xit('verify pre-populated single type date-picker', () => {
-        click(activeButtonDatePicker, 1);
+    it('verify pre-populated single type date-picker', () => {
+        click(buttonDatePicker);
         click(dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model')).toEqual(date);
+        expect(getValue(inputDatePicker)).toEqual(date);
     });
 
-    xit('verify single type date-picker:', () => {
-        click(activeButtonDatePicker, 3);
+    it('verify single type date-picker:', () => {
+        click(buttonDatePicker, 3);
         click(dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 2)).toEqual(date1);
+        expect(getValue(inputDatePicker, 3)).toEqual(date1);
     });
 
-    xit('verify pre-populated range type date-picker', () => {
-        click(activeButtonDatePicker, 2);
+    it('verify pre-populated range type date-picker', () => {
+        click(buttonDatePicker, 1);
         click(dayInCalendarButtonByValue('1'));
         click(dayInCalendarButtonByValue('15'));
-        click(activeButtonDatePicker, 2);
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 1)).toEqual(date2);
+        click(buttonDatePicker, 1);
+        expect(getValue(inputDatePicker, 1)).toEqual(date2);
     });
 
-    xit('verify range type date-picker', () => {
-        click(activeButtonDatePicker, 4);
+    it('verify range type date-picker', () => {
+        click(buttonDatePicker, 4);
         click(dayInCalendarButtonByValue('1'));
         click(dayInCalendarButtonByValue('15'));
-        click(activeButtonDatePicker, 4);
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 3)).toEqual(date3);
+        click(buttonDatePicker, 4);
+        expect(getValue(inputDatePicker, 4)).toEqual(date3);
     });
 
-    xit('verify birth date date-picker', () => {
-        click(activeButtonDatePicker, 5);
+    it('verify birth date date-picker', () => {
+        click(buttonDatePicker, 5);
         click(dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 4)).toEqual(date1);
+        expect(getValue(inputDatePicker, 5)).toEqual(date1);
     });
 
-    xit('verify holiday date-picker', () => {
-        click(activeButtonDatePicker, 6);
-        click(dayInCalendarButtonByValue('1'));
-        click(dayInCalendarButtonByValue('15'));
-        click(activeButtonDatePicker, 6);
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 5)).toEqual(date3);
-    });
-
-    xit('verify date picker use outside Form', () => {
-        click(activeButtonDatePicker, 7);
-        click(dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 6)).toEqual(date1);
-    });
-
-    xit('verify range date picker outside form', () => {
-        click(activeButtonDatePicker, 8);
+    it('verify holiday date-picker', () => {
+        click(buttonDatePicker, 6);
         click(dayInCalendarButtonByValue('1'));
         click(dayInCalendarButtonByValue('15'));
-        click(activeButtonDatePicker, 8);
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 7)).toEqual(date3);
+        click(buttonDatePicker, 6);
+        expect(getValue(inputDatePicker, 6)).toEqual(date3);
     });
 
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/4553
-    xit('verify disable parts of Calender for selection', () => {
-        click(activeButtonDatePicker, 9);
+    it('verify date picker use outside Form', () => {
+        click(buttonDatePicker, 8);
         click(dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 8)).toEqual(date1);
+        expect(getValue(inputDatePicker, 8)).toEqual(date1);
     });
 
-    xit('verify date Picker Formatting date picker with custom output format', () => {
-        click(activeButtonDatePicker, 10);
-        click(dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 9)).toEqual(date5);
-    });
-
-    xit('verify date Picker Formatting range date picker custom format', () => {
-        click(activeButtonDatePicker, 11);
+    it('verify range date picker outside form', () => {
+        click(buttonDatePicker, 9);
         click(dayInCalendarButtonByValue('1'));
         click(dayInCalendarButtonByValue('15'));
-        click(activeButtonDatePicker, 11);
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 10)).toEqual(date4);
+        click(buttonDatePicker, 9);
+        expect(getValue(inputDatePicker, 9)).toEqual(date3);
     });
 
-    xit('verify internationalization of Date Picker', () => {
-        click(activeButtonDatePicker, 12);
+    it('verify disable parts of Calender for selection', () => {
+        click(buttonDatePicker, 10);
         click(dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 11)).toEqual(date7);
+        expect(getValue(inputDatePicker, 10)).toEqual(date1);
+    });
+
+    it('verify date Picker Formatting date picker with custom output format', () => {
+        click(buttonDatePicker, 10);
+        click(dayInCalendarButtonByValue('1'));
+        expect(getValue(inputDatePicker, 10)).toEqual(date5);
+    });
+
+    it('verify date Picker Formatting range date picker custom format', () => {
+        click(buttonDatePicker, 12);
+        click(dayInCalendarButtonByValue('1'));
+        click(dayInCalendarButtonByValue('15'));
+        click(buttonDatePicker, 12);
+        expect(getValue(inputDatePicker, 12)).toEqual(date4);
+    });
+
+    it('verify internationalization of Date Picker', () => {
+        click(buttonDatePicker, 13);
+        click(dayInCalendarButtonByValue('1'));
+        expect(getValue(inputDatePicker, 13)).toEqual(date7);
         click(buttonGerman);
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 11)).toEqual(date8);
+        expect(getValue(inputDatePicker, 13)).toEqual(date8);
         click(buttonBulgarian);
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model', 11)).toEqual(date6);
+        expect(getValue(inputDatePicker, 13)).toEqual(date6);
     });
 
     it('verify with the date picker, the user can see a day view, month view, year view, or year ranges.', () => {
-        const buttons = elementArray(activeButtonDatePicker);
+        const buttons = elementArray(buttonDatePicker);
         for (let i = 1; i < buttons.length - 1; i++) {
-            click(activeButtonDatePicker, i);
-            waitForElDisplayed(filterCalendarValue('day'));
-            click(buttonSelectMonth);
-            waitForElDisplayed(filterCalendarValue('month'));
-            click(buttonSelectYear);
-            waitForElDisplayed(filterCalendarValue('year'));
-            click(buttonSelectYearsRange);
-            waitForElDisplayed(filterCalendarValue('aggregated-year'));
-            click(activeButtonDatePicker, i);
+            if (!getElementClass(buttonDatePicker, i).includes('is-disabled')) {
+                click(buttonDatePicker, i);
+                waitForElDisplayed(filterCalendarValue('day'));
+                click(buttonSelectMonth);
+                waitForElDisplayed(filterCalendarValue('month'));
+                click(buttonSelectYear);
+                waitForElDisplayed(filterCalendarValue('year'));
+                click(buttonSelectYearsRange);
+                waitForElDisplayed(filterCalendarValue('aggregated-year'));
+                click(buttonDatePicker, i);
+            }
         }
     });
 
-   xit('verify selected date is showing in blue background', () => {
-        click(activeButtonDatePicker, 1);
+    it('verify selected date is showing in blue background', () => {
+        click(buttonDatePicker);
         click(dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model')).toEqual(date);
-        click(activeButtonDatePicker, 1);
+        expect(getValue(inputDatePicker)).toEqual(date);
+        click(buttonDatePicker);
         expect(highlightedColor)
             .toContain(getCSSPropertyByName(dayInCalendarButtonByValue('1'), 'background-color').value);
     });
 
     it('verify selecting a year range navigates back to the year view', () => {
-        const buttons = elementArray(activeButtonDatePicker);
+        const buttons = elementArray(buttonDatePicker);
         for (let i = 1; i < buttons.length - 1; i++) {
-            click(activeButtonDatePicker, i);
-            click(buttonSelectYear);
-            click(buttonSelectYearsRange);
-            waitForElDisplayed(filterCalendarValue('aggregated-year'));
-            click(buttonFirstRangeYear);
-            waitForElDisplayed(filterCalendarValue('year'));
-            click(activeButtonDatePicker, i);
+            if (!getElementClass(buttonDatePicker, i).includes('is-disabled')) {
+                click(buttonDatePicker, i);
+                click(buttonSelectYear);
+                click(buttonSelectYearsRange);
+                waitForElDisplayed(filterCalendarValue('aggregated-year'));
+                click(buttonFirstRangeYear);
+                waitForElDisplayed(filterCalendarValue('year'));
+                click(buttonDatePicker, i);
+            }
         }
     });
 
     it('verify after the user selects a year, the view changes back to the day view. ', () => {
-        const buttons = elementArray(activeButtonDatePicker);
+        const buttons = elementArray(buttonDatePicker);
         for (let i = 1; i < buttons.length - 1; i++) {
-            click(activeButtonDatePicker, i);
-            click(buttonSelectYear);
-            waitForElDisplayed(filterCalendarValue('year'));
-            click(buttonFirstYear);
-            waitForElDisplayed(filterCalendarValue('day'));
-            click(activeButtonDatePicker, i);
+            if (!getElementClass(buttonDatePicker, i).includes('is-disabled')) {
+                click(buttonDatePicker, i);
+                click(buttonSelectYear);
+                waitForElDisplayed(filterCalendarValue('year'));
+                click(buttonFirstYear);
+                waitForElDisplayed(filterCalendarValue('day'));
+                click(buttonDatePicker, i);
+            }
         }
     });
 
     it('verify after the user selects a month, the view changes back to the day view. ', () => {
-        const buttons = elementArray(activeButtonDatePicker);
+        const buttons = elementArray(buttonDatePicker);
         for (let i = 1; i < buttons.length - 1; i++) {
-            click(activeButtonDatePicker, i);
-            click(buttonSelectMonth);
-            waitForElDisplayed(filterCalendarValue('month'));
-            click(buttonFirstMonth);
-            waitForElDisplayed(filterCalendarValue('day'));
-            click(activeButtonDatePicker, i);
+            if (!getElementClass(buttonDatePicker, i).includes('is-disabled')) {
+                click(buttonDatePicker, i);
+                click(buttonSelectMonth);
+                waitForElDisplayed(filterCalendarValue('month'));
+                click(buttonFirstMonth);
+                waitForElDisplayed(filterCalendarValue('day'));
+                click(buttonDatePicker, i);
+            }
         }
     });
 
-    xit('verify user is not able select multiple dates', () => {
-        click(activeButtonDatePicker, 1);
+    it('verify user is not able select multiple dates', () => {
+        click(buttonDatePicker);
         click(dayInCalendarButtonByValue('1'));
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model')).toEqual(date);
-        click(activeButtonDatePicker, 1);
+        expect(getValue(inputDatePicker)).toEqual(date);
+        click(buttonDatePicker);
         click(dayInCalendarButtonByValue('2'));
-        expect(getAttributeByName(activeInputDatePicker, 'ng-reflect-model')).toEqual(date9);
+        expect(getValue(inputDatePicker)).toEqual(date9);
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             datePickerPage.saveExampleBaselineScreenshot();
             expect(datePickerPage.compareWithBaseline()).toBeLessThan(5);

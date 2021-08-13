@@ -51,4 +51,4 @@ export const springIndex = 1;
 export const marchIndex = 2;
 export const autumnIndex = 3;
 export const ariaChecked = 'aria-checked';
-export const ngReflectIsDisabled = 'ng-reflect-is-disabled';
+export const ngReflectIsDisabled = 'aria-disabled';

@@ -30,7 +30,7 @@
             <fd-avatar size="m" [glyph]="'money-bills'" ariaLabel="money-bills" colorAccent="3"></fd-avatar>
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length" style="min-width: 400px">
-            <div fd-popover-body-header>
+            <div fd-popover-body-header id="popover-bar-simple-header-1">
                 <div fd-bar [barDesign]="'header'">
                     <div fd-bar-left>
                         <fd-button-bar glyph="navigation-left-arrow" fdType="standard"></fd-button-bar>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <ul fd-list>
+            <ul fd-list  aria-labelledby="popover-bar-simple-header-1">
                 <li fd-list-item *ngFor="let option of list1">
                     <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
                 </li>
@@ -51,13 +51,13 @@
             <button fd-button label="Sample"></button>
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length">
-            <div fd-popover-body-header>
+            <div fd-popover-body-header id="popover-bar-simple-header-2">
                 <div fd-bar [barDesign]="'header-with-subheader'" [cozy]="true">
                     <div fd-bar-left>
                         <fd-bar-element>Cozy Header</fd-bar-element>
                     </div>
                 </div>
-                <div fd-bar [barDesign]="'subheader'" [cozy]="true">
+                <div fd-bar [barDesign]="'subheader'" [cozy]="true" id="popover-bar-simple-header-3">
                     <div fd-bar-middle>
                         <fd-bar-element [fullWidth]="true"
                             >SubHeader Middle section with Full Width Element
@@ -65,7 +65,7 @@
                     </div>
                 </div>
             </div>
-            <ul fd-list>
+            <ul fd-list aria-labelledby="popover-bar-simple-header-2 popover-bar-simple-header-3">
                 <li fd-list-item *ngFor="let option of list1">
                     <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
                 </li>

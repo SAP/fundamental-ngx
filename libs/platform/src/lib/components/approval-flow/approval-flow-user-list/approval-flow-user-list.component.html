@@ -1,23 +1,28 @@
 <div
-    class="approval-flow-user-list__selected-count" 
-    *ngIf="_selectedItems.length">
+    class="fdp-approval-flow-user-list__selected-count"
+    *ngIf="_selectedItems.length"
+>
     {{ _selectedItems.length }}
+
     <ng-container
         *ngIf="_selectedItems.length === 1; else multipleItems"
         i18n="@@platformApprovalFlowSelectedUser">
         item selected
     </ng-container>
+
     <ng-template #multipleItems i18n="@@platformApprovalFlowSelectedUsers">
         items selected
     </ng-template>
 </div>
+
 <fdp-list
     [selectionMode]="isSelectable ? 'multi' : 'none'"
     [selection]="isSelectable"
     [hasByLine]="true"
     [(ngModel)]="_selectedItems"
     [selectedItems]="_selectedItems"
-    (selectedItemChange)="_onSelect($event)">
+    (selectedItemChange)="_onSelect($event)"
+>
     <fdp-standard-list-item
         *ngFor="let _user of users; trackBy: _trackByFn"
         [attr.id]="_idPrefix + _user.id"
@@ -26,6 +31,5 @@
         [description]="_user.description"
         [title]="_user.name"
         (click)="$event.stopPropagation(); onUserClick.emit(_user)"
-    >
-    </fdp-standard-list-item>
+    ></fdp-standard-list-item>
 </fdp-list>

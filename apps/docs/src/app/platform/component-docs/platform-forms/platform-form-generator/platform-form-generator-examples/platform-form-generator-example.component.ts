@@ -67,7 +67,7 @@ export class PlatformFormGeneratorExampleComponent {
             validators: [Validators.required],
             validate: (value: string) => {
                 const passwordPattern = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\\w\\s]).{8,}$');
-                return passwordPattern.test(value) ? null : 'Minimum eight characters, at least one letter, one number and one special character'
+                return passwordPattern.test(value) ? null : 'Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character'
             },
             guiOptions: {
                 column: 1
@@ -76,6 +76,7 @@ export class PlatformFormGeneratorExampleComponent {
         {
             type: 'number',
             name: 'age',
+            controlType: 'number',
             message: () => 'Your age',
             default: '18',
             validators: [Validators.required],
@@ -109,6 +110,7 @@ export class PlatformFormGeneratorExampleComponent {
                     }
                 ];
             },
+            validators: [Validators.required],
             validate: (input, formValue) => {
                 return input?.length > 0 ? null : 'You need to select some country';
             }
@@ -146,6 +148,7 @@ export class PlatformFormGeneratorExampleComponent {
             name: 'agree',
             message: 'Do you agree with terms and conditions?',
             choices: ['Yes', 'No'],
+            validators: [Validators.required],
             validate: async (value) => {
                 await dummyAwaitablePromise();
                 return value === 'Yes' ? null : 'You must agree';
@@ -162,6 +165,7 @@ export class PlatformFormGeneratorExampleComponent {
             guiOptions: {
                 column: 2
             },
+            validators: [Validators.required],
             validate: (result: string) => {
                 return result === 'Angular' ? null : 'You should pick Angular';
             }

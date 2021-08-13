@@ -36,7 +36,7 @@ describe('Link test suite', function() {
         });
     });
 
-    describe('visual regression', function() {
+    xdescribe('visual regression', function() {
         it('should check examples visual regression', () => {
             linkPage.saveExampleBaselineScreenshot();
             expect(linkPage.compareWithBaseline()).toBeLessThan(5);

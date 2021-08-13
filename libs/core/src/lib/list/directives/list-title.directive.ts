@@ -1,9 +1,9 @@
-import { Directive, HostBinding, Input } from '@angular/core';
+import { Directive, ElementRef, HostBinding, Input, OnInit } from '@angular/core';
 
 @Directive({
   selector: '[fd-list-title], [fdListTitle]'
 })
-export class ListTitleDirective {
+export class ListTitleDirective implements OnInit {
     /** @hidden */
     @HostBinding('class.fd-list__title')
     fdListTitleClass = true;
@@ -12,4 +12,15 @@ export class ListTitleDirective {
     @Input()
     @HostBinding('class.fd-list__title--wrap')
     wrap = false;
+
+    /** @hidden */
+    constructor(public elRef: ElementRef) {}
+
+    /** @hidden */
+    ngOnInit(): void {
+        const nativeEl = this.elRef.nativeElement;
+        if (nativeEl.tagName === 'A') {
+            nativeEl.setAttribute('tabIndex', '-1');
+        }
+    }
 }

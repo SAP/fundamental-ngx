@@ -160,7 +160,7 @@ describe('Verify Feed Input component', function() {
         feedInputPage.checkRtlSwitch();
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             feedInputPage.saveExampleBaselineScreenshot();
             expect(feedInputPage.compareWithBaseline()).toBeLessThan(5);

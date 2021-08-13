@@ -119,11 +119,11 @@ describe('Input Group should', function() {
         expect(defaultHeight.height).toBeGreaterThan(compactHeight.height);
     });
 
-    xit('check have disabled attr assigned', () => {
+    it('check have disabled attr assigned', () => {
         waitForPresent(disabledInput);
         waitForElDisplayed(disabledInput);
 
-        expect(getAttributeByName(disabledInput, 'ng-reflect-is-disabled')).toBe('true');
+        expect(getAttributeByName(disabledInput, 'disabled')).toBe('true');
         expect(isEnabled(disabledInput)).toBe(false);
     });
 
@@ -142,15 +142,15 @@ describe('Input Group should', function() {
         expect(getValue(withFormInput)).toBe(numeric_value);
     });
 
-    xit('with form input have error tooltip and visual que if empty', () => {
+    it('with form input have error tooltip and visual que if empty', () => {
         waitForElDisplayed(withFormInput);
         scrollIntoView(withFormInput);
         click(withFormInput);
         click(withFormInputButtonAddon);
         mouseHoverElement(withFormInput);
 
-        expect(executeScriptBeforeTagAttr(withFormInputQuestionMark, 'content')).toBe('"?"');
-        expect(executeScriptAfterTagAttr(withFormInputAsterixMark, 'content')).toBe('"*"');
+        expect(executeScriptBeforeTagAttr(withFormInputQuestionMark, 'content')).toBe('""');
+        expect(executeScriptAfterTagAttr(withFormInputAsterixMark, 'content')).toBe('"*"'); 
         // TODO: Uncomment after merge
         /*        if (browserIsSafari()) {
             expect(getText(inputGroupPage.withFormInputErrorTooltip)).toEqual('Value is required');
@@ -159,7 +159,7 @@ describe('Input Group should', function() {
         console.log('Skip hover check for Safari');*/
     });
 
-    xit('with form input have info tooltip', () => {
+    it('with form input have info tooltip', () => {
         if (browserIsIEorSafari()) {
             console.log('Skip for IE and Safari');
             return;
@@ -174,7 +174,7 @@ describe('Input Group should', function() {
         inputGroupPage.checkRtlSwitch();
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             inputGroupPage.saveExampleBaselineScreenshot();
             expect(inputGroupPage.compareWithBaseline()).toBeLessThan(5);

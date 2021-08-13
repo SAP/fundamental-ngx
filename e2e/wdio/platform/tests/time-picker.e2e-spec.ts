@@ -11,7 +11,7 @@ import {
     waitForElDisplayed,
     waitForPresent, getElementPlaceholder
 } from '../../driver/wdio';
-import { time, text, defaultValidTime } from '../fixtures/testData/time-picker';
+import { time, text, defaultValidTime, altValidTime } from '../fixtures/testData/time-picker';
 import { TimePickerPO } from '../pages/time-picker.po';
 
 describe('Time picker suite', function() {
@@ -35,6 +35,9 @@ describe('Time picker suite', function() {
     it('Verify on click on the time picker button', () => {
         const activeButtonsCount = getElementArrayLength(activeTimePickerButton);
         for (let i = 1; i < activeButtonsCount; i++) {
+            if (i === 3 || i === 11 || i === 17) {
+                continue;
+            }
             sendKeys(['Escape']);
             scrollIntoView(activeTimePickerButton, i);
             click(activeTimePickerButton, i);
@@ -69,6 +72,9 @@ describe('Time picker suite', function() {
     it('Verify on click on the input field ', () => {
         const activeInputsCount = getElementArrayLength(activeTimePickerInput);
         for (let i = 0; i < activeInputsCount; i++) {
+            if (i === 3 || i === 11 || i === 17) {
+                continue;
+            }
             sendKeys(['Escape']);
             scrollIntoView(activeTimePickerInput, i);
             setValue(activeTimePickerInput, text, i);
@@ -93,42 +99,41 @@ describe('Time picker suite', function() {
         }
     });
 
-    xit('Verify null validity for basic time picker ', () => {
-        scrollIntoView(activeTimePickerButton, 4);
+    it('Verify null validity for basic time picker ', () => {
+        scrollIntoView(activeTimePickerButton, 5);
         expect(doesItExist(errorBorder)).toBe(false);
         click(setToNullButton);
         expect(doesItExist(errorBorder)).toBe(true);
         click(setValidTimeButton);
         expect(doesItExist(errorBorder)).toBe(false);
-        expect(getValue(activeTimePickerInput, 4)).toBe(defaultValidTime);
+        expect(getValue(activeTimePickerInput, 5)).toBe(defaultValidTime);
     });
 
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/4853
-    xit('Verify null validity for time picker with reactive form', () => {
-        scrollIntoView(activeTimePickerButton, 9);
+    it('Verify null validity for time picker with reactive form', () => {
+        scrollIntoView(activeTimePickerButton, 10);
         expect(doesItExist(errorBorder)).toBe(false);
         click(setToNullButton, 1);
         expect(doesItExist(errorBorder)).toBe(true);
         click(setValidTimeButton, 1);
         expect(doesItExist(errorBorder)).toBe(false);
-        expect(getValue(activeTimePickerInput, 9)).toBe(defaultValidTime);
+        expect(getValue(activeTimePickerInput, 10)).toBe(altValidTime);
     });
 
-    xit('Verify null validity for time picker with template form', () => {
-        scrollIntoView(activeTimePickerButton, 14);
+    it('Verify null validity for time picker with template form', () => {
+        scrollIntoView(activeTimePickerButton, 16);
         expect(doesItExist(errorBorder)).toBe(false);
         click(setToNullButton, 2);
         expect(doesItExist(errorBorder)).toBe(true);
         click(setValidTimeButton, 2);
         expect(doesItExist(errorBorder)).toBe(false);
-        expect(getValue(activeTimePickerInput, 14)).toBe(defaultValidTime);
+        expect(getValue(activeTimePickerInput, 16)).toBe(defaultValidTime);
     });
 
     it('Verify LTR / RTL switcher', () => {
         timePickerPage.checkRtlSwitch();
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         beforeEach(() => {
             refreshPage();
             waitForPresent(timePickerInput);
@@ -139,7 +144,7 @@ describe('Time picker suite', function() {
             expect(timePickerPage.compareWithBaseline()).toBeLessThan(5);
         });
 
-        xit('should check time picker visual regression', () => {
+        it('should check time picker visual regression', () => {
             scrollIntoView(activeTimePickerButton);
             click(activeTimePickerButton);
             waitForElDisplayed(timerExpanded);

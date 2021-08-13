@@ -8,13 +8,12 @@ import {
     executeScriptBeforeTagAttr,
     getAttributeByName,
     getAttributeByNameArr,
-    getElementArrayLength, getElementPlaceholder,
+    getElementArrayLength,
     getElementSize,
     getText,
     getTextArr,
     getValue,
     isEnabled,
-    mouseHoverElement,
     pause,
     refreshPage,
     scrollIntoView,
@@ -32,7 +31,7 @@ import {
 import { autocompleteOption, longLine, number, special_characters, text } from '../fixtures/testData/input';
 import { InputPo } from '../pages/input.po';
 
-describe('Input should ', function() {
+describe('Input should ', function () {
     const inputPage = new InputPo();
     const {
         defaultInput, textInput, numberInput, compactInput, readonlyInput, disabledInput, inlineHelpInput,
@@ -99,7 +98,7 @@ describe('Input should ', function() {
 
     it('wrap the input characters to the next line', () => {
         waitForElDisplayed(defaultInput);
-        const heightBefore = getElementSize(defaultInput, 0, 'height') ;
+        const heightBefore = getElementSize(defaultInput, 0, 'height');
         setValue(defaultInput, longLine);
         const heightAfter = getElementSize(defaultInput, 0, 'height');
 
@@ -116,10 +115,9 @@ describe('Input should ', function() {
         expect(getValue(defaultInput)).toBe('');
     });
 
-    xit('check have disabled attr assigned', () => {
+    it('check have disabled attr assigned', () => {
         waitForElDisplayed(disabledInput);
-
-        expect(getAttributeByName(disabledInput, 'ng-reflect-is-disabled')).toBe('true');
+        expect(getAttributeByName(disabledInput, 'disabled')).toBe('true');
         expect(isEnabled(disabledInput)).toBe(false);
     });
 
@@ -150,8 +148,8 @@ describe('Input should ', function() {
         expect(executeScriptAfterTagAttr(requiredInputLabel, 'content')).toBe('"*"');
     });
 
-    xit('should have visual cue for information', () => {
-        expect(executeScriptBeforeTagAttr(questionMarkSpan, 'content')).toBe('"?"');
+    it('should have visual cue for information', () => {
+        expect(executeScriptBeforeTagAttr(questionMarkSpan, 'content')).toBe('""');
     });
 
     it('should implement autosuggestion', () => {
@@ -179,7 +177,7 @@ describe('Input should ', function() {
         inputPage.checkRtlSwitch();
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check examples visual regression', () => {
             inputPage.saveExampleBaselineScreenshot();
             expect(inputPage.compareWithBaseline()).toBeLessThan(5);

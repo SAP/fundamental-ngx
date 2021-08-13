@@ -31,7 +31,7 @@ describe('Feed list item test suite:', function() {
         expect(alertText).toContain(getAlertText());
     });
 
-    describe('Check visual regression', function() {
+    xdescribe('Check visual regression', function() {
         it('should check basic visual regression', () => {
             feedListItemPage.saveExampleBaselineScreenshot();
             expect(feedListItemPage.compareWithBaseline()).toBeLessThan(5);
