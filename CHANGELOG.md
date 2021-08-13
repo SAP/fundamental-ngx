@@ -1,4 +1,11 @@
 
+## [0.31.0-rc.200](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.199...v0.31.0-rc.200) (2021-08-13)
+
+
+### Bug Fixes
+
+* **core,platform:** add ability to show summary step ([#6244](https://github.com/SAP/fundamental-ngx/issues/6244)) ([9042052](https://github.com/SAP/fundamental-ngx/commit/904205222d7ae3d23f7cb756c4adbff56b600d2b))
+
 ## [0.31.0-rc.199](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.198...v0.31.0-rc.199) (2021-08-13)
 
 
