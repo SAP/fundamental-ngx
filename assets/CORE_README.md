@@ -22,9 +22,9 @@
 
 ## <a name="1"></a>1. Description
 
-The `@fundamental-ngx/core` library is a set of [Angular](https://angular.io/) components built using [SAP Fundamental Styles](https://sap.github.io/fundamental-styles/).
+The `@fundamental-ngx/core` library is a set of [Angular](https://angular.io/) components built using [Fundamental Library Styles](https://sap.github.io/fundamental-styles/).
 
-The SAP Fundamental Styles library is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.
+The Fundamental Library Styles is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.
 
 See [Component Documentation](https://sap.github.io/fundamental-ngx/docs/home) for examples and API details.
 
@@ -72,7 +72,7 @@ For an existing Angular CLI application,
 
     To add the entire library, add the following import to your main application module.
 
-    ```javascript
+    ```typescript
     import { FundamentalNgxCoreModule } from '@fundamental-ngx/core';
 
     @NgModule({
@@ -86,14 +86,20 @@ For an existing Angular CLI application,
 
     For example, to use Switchs, add the following import to your main application module.
 
-    ```javascript
-    import { CheckboxModule } from '@fundamental-ngx/core’';
+    ```typescript
+    import { CheckboxModule } from '@fundamental-ngx/core';
+    ```
+
+    Version 0.31.0 brings new way of importing individual modules, which is prefered way.
+
+    ```typescript
+    import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
     ```
 
     For models prior to 0.10 use `fundamental-ngx`
 
-    ```
-    import { CheckboxModule } from '@fundamental-ngx/core';
+    ```typescript
+    import { CheckboxModule } from 'fundamental-ngx';
 
     @NgModule({
         ...
@@ -132,4 +138,4 @@ Check out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/mai
 
 ## <a name="9"></a>8. Similar Projects
 
-[Fundamental-react](https://github.com/SAP/fundamental-react) - React implementation of SAP Fundamental Styles
+[Fundamental-react](https://github.com/SAP/fundamental-react) - React implementation of Fundamental Library Styles

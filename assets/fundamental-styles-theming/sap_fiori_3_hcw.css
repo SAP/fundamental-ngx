@@ -59,8 +59,10 @@
   --fdDynamicPage_Content_Transparent_Background: var(--sapBackgroundColor);
   /* Token */
   --fdToken_Text_Shadow: none;
-  /* Side-Nav */
+  /* TODO: DEPRECATED Side-Nav */
   --fdSideNav_Text_Shadow: none;
+  /* Vertical-Nav */
+  --fdVerticalNav_Text_Shadow: none;
   /* Time */
   --fdTime_Text_Shadow: none;
   /* Select */
@@ -82,7 +84,7 @@
   --fdButton_Emphasized_Border_Width: 0.125rem;
   /* Input Group */
   --fdInputGroup_Text_Shadow: none;
-  --fdInputGroup_ControlButton_SideBorder: solid 0.0625rem var(--sapList_SelectionBorderColor);
+  --fdInputGroup_ControlButton_SideBorder: solid var(--sapButton_BorderWidth) var(--sapList_SelectionBorderColor);
   /* Input */
   --fdInput_Text_Shadow: none;
   --fdInput_State_Text_Style: italic;
@@ -159,4 +161,55 @@
   --fdSlide_Tile_Indicator_Active_Dot_Color: var(--sapContent_NonInteractiveIconColor);
   --fdSlide_Tile_Indicator_Dot_Border: solid 0.0625rem var(--sapContent_NonInteractiveIconColor);
   --fdSlide_Tile_Indicator_Active_Dot_Border: solid 0.0625rem var(--sapContent_NonInteractiveIconColor);
+  /* Icon Tab Bar */
+  --fdIcon_Tab_Bar_Selection_Bar_Height: 0.313rem;
+  --fdIcon_Tab_Bar_Selection_Color: var(--sapGroup_TitleTextColor);
+  --fdIcon_Tab_Bar_Selection_Bar_Color: var(--sapList_SelectionBorderColor);
+  --fdIcon_Tab_Bar_Icon_Border_Color: var(--sapList_SelectionBorderColor);
+  --fdIcon_Tab_Bar_Semantic_Icon_Display: inline;
+  --fdIcon_Tab_Bar_Semantic_Color_Positive: var(--sapContent_LabelColor);
+  --fdIcon_Tab_Bar_Semantic_Color_Negative: var(--sapContent_LabelColor);
+  --fdIcon_Tab_Bar_Semantic_Color_Critical: var(--sapContent_LabelColor);
+  --fdIcon_Tab_Bar_Semantic_Color_Informative: var(--sapContent_LabelColor);
+  --fdIcon_Tab_Bar_Semantic_Background_Color_Positive: var(--sapSelectedColor);
+  --fdIcon_Tab_Bar_Semantic_Background_Color_Negative: var(--sapSelectedColor);
+  --fdIcon_Tab_Bar_Semantic_Background_Color_Critical: var(--sapSelectedColor);
+  --fdIcon_Tab_Bar_Semantic_Background_Color_Informative: var(--sapSelectedColor);
+  --fdIcon_Tab_Bar_Badge_Color: var(--sapContent_IconColor);
+  --fdIcon_Tab_Bar_Semantic_Badge_Color_Positive: var(--sapContent_IconColor);
+  --fdIcon_Tab_Bar_Semantic_Badge_Color_Negative: var(--sapContent_IconColor);
+  --fdIcon_Tab_Bar_Semantic_Badge_Color_Critical: var(--sapContent_IconColor);
+  --fdIcon_Tab_Bar_Semantic_Badge_Color_Informative: var(--sapContent_IconColor);
+  /* Toolbar */
+  --fdToolbar_Auto_Background: var(--sapToolbar_Background);
+  /* Tool Header */
+  --fdTool_Header_Icon_Color_Default: var(--sapContent_IconColor);
+  --fdTool_Header_Icon_Color_Contrast: var(--sapContent_ContrastIconColor);
+  --fdTool_Header_Icon_Color_Positive: var(--sapPositiveElementColor);
+  --fdTool_Header_Icon_Color_Critical: var(--sapCriticalElementColor);
+  --fdTool_Header_Icon_Color_Negative: var(--sapNegativeElementColor);
+  --fdTool_Header_Icon_Color_Neutral: var(--sapNeutralElementColor);
+  --fdTool_Header_Icon_Color_Inverted_Default: var(--sapShell_TextColor);
+  --fdTool_Header_Icon_Color_Inverted_Contrast: var(--sapShell_TextColor);
+  --fdTool_Header_Icon_Color_Inverted_Positive: var(--sapPositiveElementColor);
+  --fdTool_Header_Icon_Color_Inverted_Critical: var(--sapCriticalElementColor);
+  --fdTool_Header_Icon_Color_Inverted_Negative: var(--sapNegativeElementColor);
+  --fdTool_Header_Icon_Color_Inverted_Neutral: var(--sapNeutralElementColor);
+  --fdTool_Header_Icon_Background_Color_Inverted_Default: transparent;
+  --fdTool_Header_Icon_Background_Color_Inverted_Contrast: transparent;
+  --fdTool_Header_Icon_Background_Color_Inverted_Positive: transparent;
+  --fdTool_Header_Icon_Background_Color_Inverted_Critical: transparent;
+  --fdTool_Header_Icon_Background_Color_Inverted_Negative: transparent;
+  --fdTool_Header_Icon_Background_Color_Inverted_Neutral: transparent;
+  --fdTool_Header_Object_Status_Color_Positive: var(--sapPositiveElementColor);
+  --fdTool_Header_Object_Status_Color_Critical: var(--sapCriticalElementColo);
+  --fdTool_Header_Object_Status_Color_Negative: var(--sapNegativeElementColor);
+  --fdTool_Header_Object_Status_Color_Neutral: var(--sapNeutralElementColor);
+  --fdTool_Header_Object_Status_Color_Informative: var(--sapInformativeElementColor);
+  --fdTool_Header_Object_Status_Text_Color_Inverted: var(--sapContent_ContrastTextColor);
+  --fdTool_Header_Object_Status_Background_Color_Inverted_Positive: var(--sapButton_Success_Background);
+  --fdTool_Header_Object_Status_Background_Color_Inverted_Critical: var(--sapButton_Critical_Backgroundr);
+  --fdTool_Header_Object_Status_Background_Color_Inverted_Negative: var(--sapButton_Negative_Background);
+  --fdTool_Header_Object_Status_Background_Color_Inverted_Neutral: var(--sapButton_Neutral_Background);
+  --fdTool_Header_Object_Status_Background_Color_Inverted_Informative: var(--sapButton_Information_Background);
 }

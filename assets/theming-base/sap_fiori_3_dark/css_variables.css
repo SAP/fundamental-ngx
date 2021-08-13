@@ -2,10 +2,10 @@
 * Copyright (c) 2012-2020 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
 * Theming Engine 1.51.0
-* data:{"Path": "Base.baseLib.sap_fiori_3_dark.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3", "Version": { "Build":"11.1.28.20210316104033", "Source": "11.1.28", "Engine": "1.51.0"}}
+* data:{"Path": "Base.baseLib.sap_fiori_3_dark.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3", "Version": { "Build":"11.1.30.20210602054826", "Source": "11.1.30", "Engine": "1.51.0"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_fiori_3_dark.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3", "Version": { "Build":"11.1.28.20210316104033", "Source": "11.1.28", "Engine": "1.51.0"}}');}
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_fiori_3_dark.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_fiori_3","sap_base_fiori","baseTheme"], "Tags": ["Fiori_3","DarkColorScheme"], "FallbackThemeId": "sap_fiori_3", "Version": { "Build":"11.1.30.20210602054826", "Source": "11.1.30", "Engine": "1.51.0"}}');}
 :root {
   --sapBrandColor: #91c8f6;
   --sapHighlightColor: #91c8f6;
@@ -89,15 +89,15 @@
   --sapIndicationColor_5_Hover_Background: #a9d4f8;
   --sapIndicationColor_5_Active_Background: #c0e0fa;
   --sapIndicationColor_5_TextColor: #29313a;
-  --sapIndicationColor_6: #7FC6C6;
+  --sapIndicationColor_6: #7fc6c6;
   --sapIndicationColor_6_Hover_Background: #91cece;
   --sapIndicationColor_6_Active_Background: #a2d6d6;
   --sapIndicationColor_6_TextColor: #29313a;
-  --sapIndicationColor_7: #B995E0;
+  --sapIndicationColor_7: #b995e0;
   --sapIndicationColor_7_Hover_Background: #c6a9e6;
   --sapIndicationColor_7_Active_Background: #d3bcec;
   --sapIndicationColor_7_TextColor: #29313a;
-  --sapIndicationColor_8: #E269C9;
+  --sapIndicationColor_8: #e269c9;
   --sapIndicationColor_8_Hover_Background: #e67ed1;
   --sapIndicationColor_8_Active_Background: #ea94d8;
   --sapIndicationColor_8_TextColor: #fafafa;
@@ -131,6 +131,7 @@
   --sapContent_Shadow2: 0 0 0 0.0625rem rgba(255,255,255,0.5), 0 0.625rem 1.875rem 0 rgba(0,0,0,0.6);
   --sapContent_Shadow3: 0 0 0 0.0625rem rgba(255,255,255,0.5), 0 1.25rem 5rem 0 rgba(0,0,0,0.6);
   --sapContent_TextShadow: 0 0 0.125rem #000;
+  --sapContent_ContrastTextShadow: none;
   --sapContent_HeaderShadow: 0 0 0.25rem 0 rgba(0,0,0,0.8), inset 0 -0.0625rem 0 0 #3a4552;
   --sapContent_SearchHighlightColor: #058088;
   --sapContent_HelpColor: #57b900;
@@ -147,12 +148,13 @@
   --sapContent_ForegroundTextColor: #fafafa;
   --sapContent_BadgeBackground: #d14242;
   --sapContent_BadgeTextColor: #fff;
-  --sapContent_Placeholderloading_Background: #424f5e;
-  --sapContent_Placeholderloading_Gradient: linear-gradient(to right, #424f5e 0%, #424f5e 35%, #4d5c6d 50%, #424f5e 65%, #424f5e 100%);
+  --sapContent_Placeholderloading_Background: #536376;
+  --sapContent_Placeholderloading_Gradient: linear-gradient(to right, #536376 0%, #536376 20%, #8596aa 50%, #536376 80%, #536376 100%);
   --sapContent_DragAndDropActiveColor: #91c8f6;
   --sapContent_Selected_Background: #91c8f6;
   --sapContent_Selected_TextColor: #29313a;
   --sapContent_Selected_Hover_Background: #83c1f5;
+  --sapContent_Selected_ForegroundColor: #91c8f6;
   --sapContent_Illustrative_Color1: #0a6ed1;
   --sapContent_Illustrative_Color2: #3793d1;
   --sapContent_Illustrative_Color3: #d69522;
@@ -206,26 +208,14 @@
   --sapButton_Active_TextColor: #29313a;
   --sapButton_Emphasized_Background: #1b8dec;
   --sapButton_Emphasized_BorderColor: #1b8dec;
-  --sapButton_Emphasized_TextColor: #fff;
+  --sapButton_Emphasized_TextColor: #fafafa;
   --sapButton_Emphasized_Hover_Background: #2e96ee;
   --sapButton_Emphasized_Hover_BorderColor: #2e96ee;
-  --sapButton_Emphasized_Hover_TextColor: #fff;
+  --sapButton_Emphasized_Hover_TextColor: #fafafa;
   --sapButton_Emphasized_Active_Background: #91c8f6;
   --sapButton_Emphasized_Active_BorderColor: #91c8f6;
+  --sapButton_Emphasized_Active_TextColor: #29313a;
   --sapButton_Emphasized_TextShadow: transparent;
-  --sapButton_Accept_Background: #29313a;
-  --sapButton_Accept_BorderColor: #abe2ab;
-  --sapButton_Accept_Hover_Background: #153c15;
-  --sapButton_Accept_Hover_BorderColor: #abe2ab;
-  --sapButton_Accept_Hover_TextColor: #abe2ab;
-  --sapButton_Accept_Active_Background: #98db98;
-  --sapButton_Accept_Active_BorderColor: #98db98;
-  --sapButton_Accept_TextColor: #abe2ab;
-  --sapButton_Accept_Selected_Background: #98db98;
-  --sapButton_Accept_Selected_BorderColor: #98db98;
-  --sapButton_Accept_Selected_TextColor: #29313a;
-  --sapButton_Accept_Selected_Hover_Background: #abe2ab;
-  --sapButton_Accept_Selected_Hover_BorderColor: #abe2ab;
   --sapButton_Reject_Background: #29313a;
   --sapButton_Reject_BorderColor: #ff8888;
   --sapButton_Reject_Hover_Background: #3b0000;
@@ -233,12 +223,27 @@
   --sapButton_Reject_Hover_TextColor: #f88;
   --sapButton_Reject_Active_Background: #ff6e6e;
   --sapButton_Reject_Active_BorderColor: #ff6e6e;
+  --sapButton_Reject_Active_TextColor: #29313a;
   --sapButton_Reject_TextColor: #f88;
   --sapButton_Reject_Selected_Background: #ff6e6e;
   --sapButton_Reject_Selected_BorderColor: #ff6e6e;
   --sapButton_Reject_Selected_TextColor: #29313a;
   --sapButton_Reject_Selected_Hover_Background: #f88;
   --sapButton_Reject_Selected_Hover_BorderColor: #f88;
+  --sapButton_Accept_Background: #29313a;
+  --sapButton_Accept_BorderColor: #abe2ab;
+  --sapButton_Accept_Hover_Background: #153c15;
+  --sapButton_Accept_Hover_BorderColor: #abe2ab;
+  --sapButton_Accept_Hover_TextColor: #abe2ab;
+  --sapButton_Accept_Active_Background: #98db98;
+  --sapButton_Accept_Active_BorderColor: #98db98;
+  --sapButton_Accept_Active_TextColor: #29313a;
+  --sapButton_Accept_TextColor: #abe2ab;
+  --sapButton_Accept_Selected_Background: #98db98;
+  --sapButton_Accept_Selected_BorderColor: #98db98;
+  --sapButton_Accept_Selected_TextColor: #29313a;
+  --sapButton_Accept_Selected_Hover_Background: #abe2ab;
+  --sapButton_Accept_Selected_Hover_BorderColor: #abe2ab;
   --sapButton_Lite_Background: transparent;
   --sapButton_Lite_BorderColor: transparent;
   --sapButton_Lite_TextColor: #91c8f6;
@@ -254,12 +259,13 @@
   --sapButton_Selected_Hover_BorderColor: #83c1f5;
   --sapButton_Attention_Background: #29313a;
   --sapButton_Attention_BorderColor: #fabd64;
-  --sapButton_Attention_TextColor: #fabd64;
+  --sapButton_Attention_TextColor: #fafafa;
   --sapButton_Attention_Hover_Background: #2b1a01;
   --sapButton_Attention_Hover_BorderColor: #fabd64;
-  --sapButton_Attention_Hover_TextColor: #fabd64;
+  --sapButton_Attention_Hover_TextColor: #fafafa;
   --sapButton_Attention_Active_Background: #f9b24b;
   --sapButton_Attention_Active_BorderColor: #f9b24b;
+  --sapButton_Attention_Active_TextColor: #29313a;
   --sapButton_Attention_Selected_Background: #f9b24b;
   --sapButton_Attention_Selected_BorderColor: #f9b24b;
   --sapButton_Attention_Selected_TextColor: #29313a;
@@ -273,6 +279,7 @@
   --sapButton_Negative_Hover_TextColor: #29313a;
   --sapButton_Negative_Active_Background: #fbb;
   --sapButton_Negative_Active_BorderColor: #fbb;
+  --sapButton_Negative_Active_TextColor: #29313a;
   --sapButton_Critical_Background: #fabd64;
   --sapButton_Critical_BorderColor: #fabd64;
   --sapButton_Critical_TextColor: #29313a;
@@ -281,6 +288,7 @@
   --sapButton_Critical_Hover_TextColor: #29313a;
   --sapButton_Critical_Active_Background: #fcd295;
   --sapButton_Critical_Active_BorderColor: #fcd295;
+  --sapButton_Critical_Active_TextColor: #29313a;
   --sapButton_Success_Background: #abe2ab;
   --sapButton_Success_BorderColor: #abe2ab;
   --sapButton_Success_TextColor: #29313a;
@@ -289,6 +297,7 @@
   --sapButton_Success_Hover_TextColor: #29313a;
   --sapButton_Success_Active_Background: #d1efd1;
   --sapButton_Success_Active_BorderColor: #d1efd1;
+  --sapButton_Success_Active_TextColor: #29313a;
   --sapButton_Information_Background: #91c8f6;
   --sapButton_Information_BorderColor: #91c8f6;
   --sapButton_Information_TextColor: #29313a;
@@ -305,6 +314,7 @@
   --sapButton_Neutral_Hover_TextColor: #29313a;
   --sapButton_Neutral_Active_Background: #eef0f1;
   --sapButton_Neutral_Active_BorderColor: #eef0f1;
+  --sapButton_Neutral_Active_TextColor: #29313a;
   --sapButton_Track_Selected_Background: #062e4f;
   --sapButton_Track_Selected_TextColor: #fafafa;
   --sapButton_Track_Background: #38434f;
@@ -331,12 +341,20 @@
   --sapField_RequiredColor: #e7a1a1;
   --sapField_InvalidColor: #ff8888;
   --sapField_InvalidBackground: #29313a;
+  --sapField_InvalidBorderWidth: .125rem;
+  --sapField_InvalidBorderStyle: solid;
   --sapField_WarningColor: #fabd64;
   --sapField_WarningBackground: #29313a;
+  --sapField_WarningBorderWidth: .125rem;
+  --sapField_WarningBorderStyle: solid;
   --sapField_SuccessColor: #abe2ab;
   --sapField_SuccessBackground: #29313a;
+  --sapField_SuccessBorderWidth: .0625rem;
+  --sapField_SuccessBorderStyle: solid;
   --sapField_InformationColor: #91c8f6;
   --sapField_InformationBackground: #29313a;
+  --sapField_InformationBorderWidth: .125rem;
+  --sapField_InformationBorderStyle: solid;
   --sapGroup_TitleBackground: transparent;
   --sapGroup_TitleBorderColor: #495767;
   --sapGroup_TitleTextColor: #fafafa;
@@ -360,7 +378,7 @@
   --sapList_Hover_SelectionBackground: #395369;
   --sapList_Background: #29313a;
   --sapList_Hover_Background: #2f3943;
-  --sapList_AlternatingBackground: #2d3640;
+  --sapList_AlternatingBackground: #232931;
   --sapList_GroupHeaderBackground: #29313a;
   --sapList_GroupHeaderBorderColor: #64778e;
   --sapList_GroupHeaderTextColor: #fafafa;
@@ -402,6 +420,8 @@
   --sapTile_IconColor: #89a3bd;
   --sapTile_SeparatorColor: #424f5e;
   --sapTile_Interactive_BorderColor: #687d94;
+  --sapTile_OverlayBackground: rgba(0,0,0,0.8);
+  --sapTile_OverlayForegroundColor: #fafafa;
   --sapAccentColor1: #ffc847;
   --sapAccentColor2: #e7a1a1;
   --sapAccentColor3: #f37aa2;
@@ -482,35 +502,35 @@
   --sapChart_Sequence_10: #ee6868;
   --sapChart_Sequence_11: #2f6497;
   --sapChart_Sequence_Neutral: #848f94;
-  --sapFontUrl_SAP-icons_ttf: url('../../../Base/baseLib/sap_fiori_3/fonts/SAP-icons.ttf');
-  --sapFontUrl_SAP-icons_woff: url('../../../Base/baseLib/sap_fiori_3/fonts/SAP-icons.woff');
-  --sapFontUrl_SAP-icons_woff2: url('../../../Base/baseLib/sap_fiori_3/fonts/SAP-icons.woff2');
-  --sapFontUrl_SAP-icons-TNT_ttf: url('../../../Base/baseLib/sap_fiori_3/fonts/SAP-icons-TNT.ttf');
-  --sapFontUrl_SAP-icons-TNT_woff: url('../../../Base/baseLib/sap_fiori_3/fonts/SAP-icons-TNT.woff');
-  --sapFontUrl_SAP-icons-TNT_woff2: url('../../../Base/baseLib/sap_fiori_3/fonts/SAP-icons-TNT.woff2');
-  --sapFontUrl_SAP-icons-Business-Suite_ttf: url('../../../Base/baseLib/sap_fiori_3/fonts/BusinessSuiteInAppSymbols.ttf');
-  --sapFontUrl_SAP-icons-Business-Suite_woff: url('../../../Base/baseLib/sap_fiori_3/fonts/BusinessSuiteInAppSymbols.woff');
-  --sapFontUrl_SAP-icons-Business-Suite_woff2: url('../../../Base/baseLib/sap_fiori_3/fonts/BusinessSuiteInAppSymbols.woff2');
-  --sapFontUrl_72_Regular_woff2: url('../../../Base/baseLib/sap_base_fiori/fonts/72-Regular.woff2');
-  --sapFontUrl_72_Regular_woff: url('../../../Base/baseLib/sap_base_fiori/fonts/72-Regular.woff');
-  --sapFontUrl_72_Bold_woff2: url('../../../Base/baseLib/sap_base_fiori/fonts/72-Bold.woff2');
-  --sapFontUrl_72_Bold_woff: url('../../../Base/baseLib/sap_base_fiori/fonts/72-Bold.woff');
-  --sapFontUrl_72_Light_woff2: url('../../../Base/baseLib/sap_base_fiori/fonts/72-Light.woff2');
-  --sapFontUrl_72_Light_woff: url('../../../Base/baseLib/sap_base_fiori/fonts/72-Light.woff');
-  --sapFontUrl_72_Regular_full_woff2: url('../../../Base/baseLib/sap_base_fiori/fonts/72-Regular-full.woff2');
-  --sapFontUrl_72_Regular_full_woff: url('../../../Base/baseLib/sap_base_fiori/fonts/72-Regular-full.woff');
-  --sapFontUrl_72_Bold_full_woff2: url('../../../Base/baseLib/sap_base_fiori/fonts/72-Bold-full.woff2');
-  --sapFontUrl_72_Bold_full_woff: url('../../../Base/baseLib/sap_base_fiori/fonts/72-Bold-full.woff');
-  --sapFontUrl_72_Light_full_woff2: url('../../../Base/baseLib/sap_base_fiori/fonts/72-Light-full.woff2');
-  --sapFontUrl_72_Light_full_woff: url('../../../Base/baseLib/sap_base_fiori/fonts/72-Light-full.woff');
-  --sapFontUrl_72Mono_Regular_woff2: url('../../../Base/baseLib/sap_base_fiori/fonts/72Mono-Regular.woff2');
-  --sapFontUrl_72Mono_Regular_woff: url('../../../Base/baseLib/sap_base_fiori/fonts/72Mono-Regular.woff');
-  --sapFontUrl_72Mono_Regular_full_woff2: url('../../../Base/baseLib/sap_base_fiori/fonts/72Mono-Regular-full.woff2');
-  --sapFontUrl_72Mono_Regular_full_woff: url('../../../Base/baseLib/sap_base_fiori/fonts/72Mono-Regular-full.woff');
-  --sapFontUrl_72Mono_Bold_woff2: url('../../../Base/baseLib/sap_base_fiori/fonts/72Mono-Bold.woff2');
-  --sapFontUrl_72Mono_Bold_woff: url('../../../Base/baseLib/sap_base_fiori/fonts/72Mono-Bold.woff');
-  --sapFontUrl_72Mono_Bold_full_woff2: url('../../../Base/baseLib/sap_base_fiori/fonts/72Mono-Bold-full.woff2');
-  --sapFontUrl_72Mono_Bold_full_woff: url('../../../Base/baseLib/sap_base_fiori/fonts/72Mono-Bold-full.woff');
+  --sapFontUrl_SAP-icons_ttf: url('../../../Base/baseLib/baseTheme/fonts/SAP-icons.ttf');
+  --sapFontUrl_SAP-icons_woff: url('../../../Base/baseLib/baseTheme/fonts/SAP-icons.woff');
+  --sapFontUrl_SAP-icons_woff2: url('../../../Base/baseLib/baseTheme/fonts/SAP-icons.woff2');
+  --sapFontUrl_SAP-icons-TNT_ttf: url('../../../Base/baseLib/baseTheme/fonts/SAP-icons-TNT.ttf');
+  --sapFontUrl_SAP-icons-TNT_woff: url('../../../Base/baseLib/baseTheme/fonts/SAP-icons-TNT.woff');
+  --sapFontUrl_SAP-icons-TNT_woff2: url('../../../Base/baseLib/baseTheme/fonts/SAP-icons-TNT.woff2');
+  --sapFontUrl_SAP-icons-Business-Suite_ttf: url('../../../Base/baseLib/baseTheme/fonts/BusinessSuiteInAppSymbols.ttf');
+  --sapFontUrl_SAP-icons-Business-Suite_woff: url('../../../Base/baseLib/baseTheme/fonts/BusinessSuiteInAppSymbols.woff');
+  --sapFontUrl_SAP-icons-Business-Suite_woff2: url('../../../Base/baseLib/baseTheme/fonts/BusinessSuiteInAppSymbols.woff2');
+  --sapFontUrl_72_Regular_woff2: url('../../../Base/baseLib/baseTheme/fonts/72-Regular.woff2');
+  --sapFontUrl_72_Regular_woff: url('../../../Base/baseLib/baseTheme/fonts/72-Regular.woff');
+  --sapFontUrl_72_Bold_woff2: url('../../../Base/baseLib/baseTheme/fonts/72-Bold.woff2');
+  --sapFontUrl_72_Bold_woff: url('../../../Base/baseLib/baseTheme/fonts/72-Bold.woff');
+  --sapFontUrl_72_Light_woff2: url('../../../Base/baseLib/baseTheme/fonts/72-Light.woff2');
+  --sapFontUrl_72_Light_woff: url('../../../Base/baseLib/baseTheme/fonts/72-Light.woff');
+  --sapFontUrl_72_Regular_full_woff2: url('../../../Base/baseLib/baseTheme/fonts/72-Regular-full.woff2');
+  --sapFontUrl_72_Regular_full_woff: url('../../../Base/baseLib/baseTheme/fonts/72-Regular-full.woff');
+  --sapFontUrl_72_Bold_full_woff2: url('../../../Base/baseLib/baseTheme/fonts/72-Bold-full.woff2');
+  --sapFontUrl_72_Bold_full_woff: url('../../../Base/baseLib/baseTheme/fonts/72-Bold-full.woff');
+  --sapFontUrl_72_Light_full_woff2: url('../../../Base/baseLib/baseTheme/fonts/72-Light-full.woff2');
+  --sapFontUrl_72_Light_full_woff: url('../../../Base/baseLib/baseTheme/fonts/72-Light-full.woff');
+  --sapFontUrl_72Mono_Regular_woff2: url('../../../Base/baseLib/baseTheme/fonts/72Mono-Regular.woff2');
+  --sapFontUrl_72Mono_Regular_woff: url('../../../Base/baseLib/baseTheme/fonts/72Mono-Regular.woff');
+  --sapFontUrl_72Mono_Regular_full_woff2: url('../../../Base/baseLib/baseTheme/fonts/72Mono-Regular-full.woff2');
+  --sapFontUrl_72Mono_Regular_full_woff: url('../../../Base/baseLib/baseTheme/fonts/72Mono-Regular-full.woff');
+  --sapFontUrl_72Mono_Bold_woff2: url('../../../Base/baseLib/baseTheme/fonts/72Mono-Bold.woff2');
+  --sapFontUrl_72Mono_Bold_woff: url('../../../Base/baseLib/baseTheme/fonts/72Mono-Bold.woff');
+  --sapFontUrl_72Mono_Bold_full_woff2: url('../../../Base/baseLib/baseTheme/fonts/72Mono-Bold-full.woff2');
+  --sapFontUrl_72Mono_Bold_full_woff: url('../../../Base/baseLib/baseTheme/fonts/72Mono-Bold-full.woff');
 }
 .background-image--sapCompanyLogo {
   background-image: var(--sapCompanyLogo);

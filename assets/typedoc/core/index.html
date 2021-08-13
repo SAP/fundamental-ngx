@@ -1,122 +1,68 @@
 <div class="fd-tsdoc-container">
 <div class="tsd-panel tsd-typography">
-	<a href="#fundamental-ngxcore" id="fundamental-ngxcore" style="color: inherit; text-decoration: none;">
-		<h1>@Fundamental-NGX/Core</h1>
+	<a href="#fundamental-library-for-angular" id="fundamental-library-for-angular" style="color: inherit; text-decoration: none;">
+		<h1>Fundamental Library for Angular</h1>
 	</a>
-	<p><a href="//www.npmjs.com/package/@fundamental-ngx/core"><img src="https://badge.fury.io/js/%40fundamental-ngx%2Fcore.svg" alt="npm version"></a>
-		<a href="https://bundlephobia.com/result?p=%40fundamental-ngx%2Fcore"><img src="https://badgen.net/bundlephobia/min/%40fundamental-ngx%2Fcore" alt="Minified Size"></a>
-		<a href="https://bundlephobia.com/result?p=%40fundamental-ngx%2Fcore"><img src="https://badgen.net/bundlephobia/minzip/%40fundamental-ngx%2Fcore" alt="Minzipped Size"></a>
-		<a href="https://travis-ci.org/SAP/fundamental-ngx"><img src="https://travis-ci.org/SAP/fundamental-ngx.svg?branch=main" alt="Build Status"></a>
-		<a href="https://coveralls.io/github/SAP/fundamental-ngx?branch=main"><img src="https://coveralls.io/repos/github/SAP/fundamental-ngx/badge.svg?branch=main" alt="Coverage Status"></a>
-		<a href="https://ui-fundamentals.slack.com"><img src="https://img.shields.io/badge/slack-ui--fundamentals-blue.svg?logo=slack" alt="Slack"></a>
-	<a href="https://api.reuse.software/info/github.com/SAP/fundamental-ngx"><img src="https://api.reuse.software/badge/github.com/SAP/fundamental-ngx" alt="REUSE status"></a></p>
+	<p><a href="https://api.reuse.software/info/github.com/SAP/fundamental-ngx"><img src="https://api.reuse.software/badge/github.com/SAP/fundamental-ngx" alt="REUSE status"></a></p>
+	<a href="https://www.netlify.com">
+		<img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify" />
+	</a>
 	<a href="#content" id="content" style="color: inherit; text-decoration: none;">
 		<h2>Content</h2>
 	</a>
 	<ul>
-		<li>  <a href="#1">1. Description</a></li>
-		<li>  <a href="#2">2. Requirements</a></li>
-		<li>  <a href="#3">3. Versioning</a></li>
-		<li>  <a href="#4">4. Getting Started</a></li>
-		<li>  <a href="#5">5. Known Issues</a></li>
-		<li>  <a href="#6">6. Support</a></li>
-		<li>  <a href="#7">7. Contributing</a></li>
-		<li>  <a href="https://github.com/SAP/fundamental-ngx/blob/main/LICENSE.txt">8. License</a></li>
-		<li>  <a href="#8">9. Similar Projects</a></li>
+		<li><a href="#1">1. Description</a></li>
+		<li><a href="#2">2. Requirements</a></li>
+		<li><a href="#3">3. Known Issues</a></li>
+		<li><a href="#4">4. Support</a></li>
+		<li><a href="#5">5. Contributing</a></li>
+		<li><a href="#6">6. License</a></li>
+		<li><a href="#7">7. Similar Projects</a></li>
 	</ul>
 	<a href="#1-description" id="1-description" style="color: inherit; text-decoration: none;">
 		<h2><a name="1"></a>1. Description</h2>
 	</a>
-	<p>The <code>@fundamental-ngx/core</code> library is a set of <a href="https://angular.io/">Angular</a> components built using <a href="https://sap.github.io/fundamental-styles/">SAP Fundamental Styles</a>.</p>
-	<p>The SAP Fundamental Styles library is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.</p>
-	<p>See <a href="https://sap.github.io/fundamental-ngx/docs/home">Component Documentation</a> for examples and API details.</p>
+	<p>The Fundamental Library Styles is a design system and HTML/CSS component library used to build modern product user experiences with the SAP look and feel.</p>
+	<p>This repository contains 2 libraries(npm packages),</p>
+	<ul>
+		<li><p><a href="https://github.com/SAP/fundamental-ngx/tree/main/libs/core">@fundamental-ngx/core</a>:
+				The Fundamental-ngx core provides base angular implementation of Fundamental Library Styles to offer developers a rich set of components
+			they can use when building angular applications. Fundamental-ngx core angular components provides the end developer with some degree of flexibility as most of the components allow finer customization directly on the HTML template level.</p>
+		</li>
+		<li><p><a href="https://github.com/SAP/fundamental-ngx/tree/main/libs/platform">@fundamental-ngx/platform</a>:
+				The Fundamental-ngx platform is built on top of the core to both enhance existing functionality with additional features
+			which are driven by application requirements and to provide higher abstraction for the components by hiding most of the internal implementation details which boosts productivity.</p>
+		</li>
+	</ul>
 	<a href="#2-requirements" id="2-requirements" style="color: inherit; text-decoration: none;">
 		<h2><a name="2"></a>2. Requirements</h2>
 	</a>
 	<p>To download and use Fundamental Library for Angular, you will first need to install the <a href="https://www.npmjs.com/get-npm">node package manager</a>.</p>
 	<p>Fundamental Library for Angular is intended for use with Angular 8 or newer.</p>
 	<p>Prior knowledge of Angular is recommended, to use the fundamental-ngx library.</p>
-	<a href="#3-versioning" id="3-versioning" style="color: inherit; text-decoration: none;">
-		<h2><a name="3"></a>3. Versioning</h2>
+	<a href="#3-known-issues" id="3-known-issues" style="color: inherit; text-decoration: none;">
+		<h2><a name="3"></a>3. Known Issues</h2>
 	</a>
-	<p>npm package <a href="https://npmjs.com/package/fundamental-ngx">fundamental-ngx</a> version <code>0.10.0</code> is compiled with Angular 7. It supports Angular 6 and 7 versions.
-	This version is not supported by bug fixes.</p>
-	<p>npm package <a href="https://www.npmjs.com/package/@fundamental-ngx/core">@fundamental-ngx/core</a> version <code>0.11.x</code> is compiled with Angular 8.
-	It supports Angular 8 version and newer. This version will have merged some bug-fixes.</p>
-	<p>npm package <a href="https://www.npmjs.com/package/@fundamental-ngx/core">@fundamental-ngx/core</a> versions <code>0.12.y - 0.15.z</code> are compiled with Angular 8.
-	It supports the current Angular 8 version and newer. This version also can be used along with enabled IVY.</p>
-	<p>npm package <a href="https://www.npmjs.com/package/@fundamental-ngx/core">@fundamental-ngx/core</a> versions <code>0.16.y - 0.18.z</code> are compiled with Angular 8.
-	It supports the current Angular 9 version and newer. This version also can be used along with enabled IVY.</p>
-	<p>Check the <a href="https://github.com/SAP/fundamental-ngx/wiki#breaking-changes">Breaking Changes</a> for the latest patches changes.</p>
-	<a href="#4-getting-started" id="4-getting-started" style="color: inherit; text-decoration: none;">
-		<h2><a name="4"></a>4. Getting Started</h2>
-	</a>
-	<p>For an existing Angular CLI application,</p>
-	<ol start="0">
-		<li><p><strong>Video tutorial</strong>
-			<a href="https://www.youtube.com/watch?v=i4VIiuzD2Fg">How to use the Fundamental Core Library</a></p>
-		</li>
-		<li><p><strong>Install Fundamental-NGX.</strong>
-				<code>ng add @fundamental-ngx/core</code>
-			For models prior to 0.10 use <code>fundamental-ngx</code></p>
-			<p> <em>If you do not use the Angular CLI or if this command does not work for you, please see the <a href="https://github.com/SAP/fundamental-ngx/wiki/Full-Installation-Guide">full installation guide</a>.</em></p>
-		</li>
-		<li><p><strong>Edit your tsconfig.</strong>
-			Edit the <code>target</code> in your <code>tsconfig.json</code> to <code>es5</code>. The library is incompatible with later versions.</p>
-		</li>
-		<li><p><strong>Import the modules you want to use.</strong></p>
-			<p> To add the entire library, add the following import to your main application module.</p>
-			<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">FundamentalNgxCoreModule</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@fundamental-ngx/core&#039;</span><span style="color: #000000">;</span>
-
-<span style="color: #000000">@</span><span style="color: #795E26">NgModule</span><span style="color: #000000">({</span>
-<span style="color: #000000">    ...</span>
-<span style="color: #000000">    </span><span style="color: #001080">imports</span><span style="color: #000000">: [</span><span style="color: #001080">FundamentalNgxCoreModule</span><span style="color: #000000">],</span>
-<span style="color: #000000">})</span>
-<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">DemoModule</span><span style="color: #000000"> { }</span>
-</code></pre>
-			<p> To include an individual Angular Fundamental component in your application, you only need to import the relevant module.</p>
-			<p> For example, to use Switchs, add the following import to your main application module.</p>
-			<pre><code class="language-javascript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">CheckboxModule</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@fundamental-ngx/core’&#039;</span><span style="color: #000000">;</span>
-</code></pre>
-			<p> For models prior to 0.10 use <code>fundamental-ngx</code></p>
-			<pre><code><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">CheckboxModule</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@fundamental-ngx/core&#039;</span><span style="color: #000000">;</span>
-
-<span style="color: #000000">@</span><span style="color: #795E26">NgModule</span><span style="color: #000000">({</span>
-<span style="color: #000000">    ...</span>
-<span style="color: #000000">    </span><span style="color: #001080">imports</span><span style="color: #000000">: [</span><span style="color: #001080">CheckboxModule</span><span style="color: #000000">],</span>
-<span style="color: #000000">})</span>
-<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">DemoModule</span><span style="color: #000000"> { }</span>
-</code></pre>
-		</li>
-		<li><p><strong>Provide the RtlService.</strong>
-				In your main application module, add <code>RtlService</code> to the list of providers. This service is needed to ensure proper right-to-left functionality for
-			users with their browser set to an RTL language.</p>
-		</li>
-		<li><p><strong>Provide the ContentDensityService.</strong>
-				In your main application module, you will also need to add <code>ContentDensityService</code> to the list of providers if you wish to manage the content density of
-			you application from a single point.</p>
-		</li>
-		<li><p><strong>Add the component to your HTML.</strong></p>
-			<pre><code class="language-html"><span style="color: #800000">&lt;fd-checkbox</span><span style="color: #000000"> </span><span style="color: #FF0000">label</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;Fundamental Ngx Checkbox&quot;</span><span style="color: #800000">&gt;&lt;/fd-checkbox&gt;</span>
-</code></pre>
-		</li>
-	</ol>
-	<a href="#5-known-issues" id="5-known-issues" style="color: inherit; text-decoration: none;">
-		<h2><a name="5"></a>5. Known Issues</h2>
-	</a>
-	<p>Please see <a href="https://github.com/SAP/fundamental-ngx/issues">Issues</a>.</p>
-	<a href="#6-support" id="6-support" style="color: inherit; text-decoration: none;">
-		<h2><a name="6"></a>6. Support</h2>
+	<ul>
+		<li>Please see <a href="https://github.com/SAP/fundamental-ngx/issues">Issues</a>.</li>
+		<li>Contribution Known <a href="https://github.com/SAP/fundamental-ngx/wiki/Known-Contribution-Issues">Issues</a></li>
+	</ul>
+	<a href="#4-support" id="4-support" style="color: inherit; text-decoration: none;">
+		<h2><a name="4"></a>4. Support</h2>
 	</a>
 	<p>If you encounter an issue, you can <a href="https://github.com/SAP/fundamental-ngx/issues">create a ticket</a>.</p>
-	<a href="#7-contributing" id="7-contributing" style="color: inherit; text-decoration: none;">
-		<h2><a name="7"></a>7. Contributing</h2>
+	<a href="#5-contributing" id="5-contributing" style="color: inherit; text-decoration: none;">
+		<h2><a name="5"></a>5. Contributing</h2>
 	</a>
-	<p>If you want to contribute, please check the <a href="https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> documentation for contribution guidelines. Please follow the <a href="https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit">Angular commit message guidelines</a>.</p>
+	<p>If you want to contribute, please check the <a href="https://github.com/SAP/fundamental-ngx/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> documentation for contribution guidelines. Please follow the <a href="https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit">Angular commit message guidelines</a>.</p>
 	<p>Check out the <a href="https://github.com/SAP/fundamental-ngx/blob/main/NEW_COMPONENT.md">NEW_COMPONENT.md</a> guide on building a new component for the library and creating the necessary documentation for your new component.</p>
-	<a href="#8-similar-projects" id="8-similar-projects" style="color: inherit; text-decoration: none;">
-		<h2><a name="9"></a>8. Similar Projects</h2>
+	<a href="#similar-projects" id="similar-projects" style="color: inherit; text-decoration: none;">
+		<h2>Similar Projects</h2>
 	</a>
-	<p><a href="https://github.com/SAP/fundamental-react">Fundamental-react</a> - React implementation of SAP Fundamental Styles</p>
+	<a href="#7-similar-projects" id="7-similar-projects" style="color: inherit; text-decoration: none;">
+		<h2><a name="7"></a>7. Similar Projects</h2>
+	</a>
+	<p><a href="https://github.com/SAP/fundamental-react">Fundamental-react</a> - React implementation of Fundamental Library Styles</p>
+	<p><a href="https://github.com/SAP/fundamental-vue">Fundamental-vue</a> - Vue implementation of Fundamental Library Styles</p>
 </div>
 </div>

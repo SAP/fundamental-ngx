@@ -12,23 +12,25 @@
 	<ul class="tsd-hierarchy">
 		<li><span class="tsd-signature-type">OnInit</span></li>
 		<li><span class="tsd-signature-type">OnChanges</span></li>
+		<li><span class="tsd-signature-type">OnDestroy</span></li>
 	</ul>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Inputs</h2>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="blank" class="tsd-anchor"></a>
-		<h3>blank</h3>
+		<a name="allnodesincolumnapproved" class="tsd-anchor"></a>
+		<h3>all<wbr>Nodes<wbr>InColumn<wbr>Approved</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">blank<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<div class="tsd-signature tsd-kind-icon">all<wbr>Nodes<wbr>InColumn<wbr>Approved<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L69">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:69</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L74">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:74</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Whether node is blank</p>
+				<p>Whether nodes in column in which current node placed are approved
+				Used to render appropriate vertical line after (dashed/solid)</p>
 			</div>
 		</div>
 	</section>
@@ -39,7 +41,7 @@
 		<div class="tsd-signature tsd-kind-icon">check<wbr>Due<wbr>Date<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L60">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:60</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L65">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:65</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -55,7 +57,7 @@
 		<div class="tsd-signature tsd-kind-icon">due<wbr>Date<wbr>Threshold<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 7</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L64">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:64</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L69">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:69</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -72,12 +74,28 @@
 		<div class="tsd-signature tsd-kind-icon">is<wbr>Edit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L74">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:74</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L79">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:79</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Whether the node is in edit mode</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="isnextnodeblank" class="tsd-anchor"></a>
+		<h3>is<wbr>Next<wbr>Node<wbr>Blank</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">is<wbr>Next<wbr>Node<wbr>Blank<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L84">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:84</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Whether the node after is blank</p>
 			</div>
 		</div>
 	</section>
@@ -88,7 +106,7 @@
 		<div class="tsd-signature tsd-kind-icon">meta<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ApprovalGraphNodeMetadata</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L48">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:48</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L59">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:59</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -104,28 +122,12 @@
 		<div class="tsd-signature tsd-kind-icon">node<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ApprovalGraphNode</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L42">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:42</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L56">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:56</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Approval flow graph node</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="parent" class="tsd-anchor"></a>
-		<h3>parent</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">parent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ApprovalNode</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L45">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:45</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>A reference to a parent node</p>
 			</div>
 		</div>
 	</section>
@@ -136,76 +138,12 @@
 		<div class="tsd-signature tsd-kind-icon">render<wbr>Arrow<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L51">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:51</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L62">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:62</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
 				<p>Whether node element has arrow on the left side pointing to the node</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="rendercarouselendmarker" class="tsd-anchor"></a>
-		<h3>render<wbr>Carousel<wbr>End<wbr>Marker</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">render<wbr>Carousel<wbr>End<wbr>Marker<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L57">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:57</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether node element has carousel end marker. Should be set to &#39;true&#39; for the last node</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="rendercarouselstartmarker" class="tsd-anchor"></a>
-		<h3>render<wbr>Carousel<wbr>Start<wbr>Marker</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">render<wbr>Carousel<wbr>Start<wbr>Marker<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L54">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:54</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether node element has carousel start marker. Should be set to &#39;true&#39; for the first node</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="renderlineafter" class="tsd-anchor"></a>
-		<h3>render<wbr>Line<wbr>After</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">render<wbr>Line<wbr>After<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L84">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:84</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether node element has connection line after the node element</p>
-			</div>
-		</div>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="renderlinebefore" class="tsd-anchor"></a>
-		<h3>render<wbr>Line<wbr>Before</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">render<wbr>Line<wbr>Before<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L79">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:79</a></li>
-			</ul>
-		</aside>
-		<div class="tsd-comment tsd-typography">
-			<div class="lead">
-				<p>Whether node element has connection line before the node element</p>
 			</div>
 		</div>
 	</section>
@@ -216,12 +154,17 @@
 		<a name="onadd" class="tsd-anchor"></a>
 		<h3>on<wbr>Add</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">on<wbr>Add<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<div class="tsd-signature tsd-kind-icon">on<wbr>Add<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ApprovalFlowNodeTarget</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L148">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:148</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L190">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:190</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event emitted on add node button clicked, value is the placement for the new node</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="ondelete" class="tsd-anchor"></a>
@@ -230,9 +173,14 @@
 		<div class="tsd-signature tsd-kind-icon">on<wbr>Delete<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L152">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:152</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L198">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:198</a></li>
 			</ul>
 		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event emitted on delete node button clicked</p>
+			</div>
+		</div>
 	</section>
 	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 		<a name="onedit" class="tsd-anchor"></a>
@@ -241,56 +189,43 @@
 		<div class="tsd-signature tsd-kind-icon">on<wbr>Edit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L150">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:150</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L194">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:194</a></li>
 			</ul>
 		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="onnodecheck" class="tsd-anchor"></a>
-		<h3>on<wbr>Node<wbr>Check</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">on<wbr>Node<wbr>Check<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L146">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:146</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="onnodeclick" class="tsd-anchor"></a>
-		<h3>on<wbr>Node<wbr>Click</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">on<wbr>Node<wbr>Click<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L144">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:144</a></li>
-			</ul>
-		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>Event emitted on edit node button clicked</p>
+			</div>
+		</div>
 	</section>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Properties</h2>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="dropzones" class="tsd-anchor"></a>
-		<h3>drop<wbr>Zones</h3>
+</section>
+<section class="tsd-panel-group tsd-member-group ">
+	<h2>Accessors</h2>
+	<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+		<a name="_lastblank" class="tsd-anchor"></a>
+		<h3>_last<wbr>Blank</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">drop<wbr>Zones<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">QueryList</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ApprovalFlowDropZoneDirective</span><span class="tsd-signature-symbol">&gt;</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L155">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:155</a></li>
-			</ul>
-		</aside>
-	</section>
-	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-		<a name="menu" class="tsd-anchor"></a>
-		<h3>menu</h3>
-		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">menu<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">MenuComponent</span></div>
-		<aside class="tsd-sources">
-			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/ec1e8833f/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L154">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:154</a></li>
-			</ul>
-		</aside>
+		<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+			<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> _lastBlank<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+		</ul>
+		<ul class="tsd-descriptions">
+			<li class="tsd-description">
+				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts#L170">libs/platform/src/lib/components/approval-flow/approval-flow-node/approval-flow-node.component.ts:170</a></li>
+					</ul>
+				</aside>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Whether the node is blank and the final</p>
+					</div>
+				</div>
+				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+			</li>
+		</ul>
 	</section>
 </section>
 </div>
