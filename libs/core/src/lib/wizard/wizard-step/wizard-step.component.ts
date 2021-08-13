@@ -24,7 +24,6 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
 
 import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS } from '../constants';
-import { WizardComponent } from '../wizard.component';
 import { WIZARD, WizardComponentInterface } from '../wizard-injection-token';
 
 @Component({
