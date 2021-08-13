@@ -1,4 +1,12 @@
 
+## [0.31.0-rc.198](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.197...v0.31.0-rc.198) (2021-08-13)
+
+
+### Bug Fixes
+
+* **core:** bug when first typing in combobox that uses objects ([#6307](https://github.com/SAP/fundamental-ngx/issues/6307)) ([615882d](https://github.com/SAP/fundamental-ngx/commit/615882da2e2b3a5ebde06f5e33e50773a8b3c642))
+* **platform:** trigger detection when field state changes ([#6311](https://github.com/SAP/fundamental-ngx/issues/6311)) ([691147f](https://github.com/SAP/fundamental-ngx/commit/691147fce6176257d7c7ea135dcd0034285d8cb9))
+
 ## [0.31.0-rc.197](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.196...v0.31.0-rc.197) (2021-08-12)
 
 
