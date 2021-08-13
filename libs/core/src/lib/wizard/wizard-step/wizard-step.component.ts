@@ -6,9 +6,11 @@ import {
     ContentChild,
     ElementRef,
     EventEmitter,
+    Inject,
     Input,
     OnChanges,
     OnDestroy,
+    Optional,
     Output,
     SimpleChanges,
     ViewChild
@@ -23,6 +25,7 @@ export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
 
 import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS } from '../constants';
 import { WizardComponent } from '../wizard.component';
+import { WIZARD, WizardComponentInterface } from '../wizard-injection-token';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -132,7 +135,7 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     constructor(
         private _elRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
-        private _wizard: WizardComponent
+        @Optional() @Inject(WIZARD) private _wizard: WizardComponentInterface
         ) {}
 
     /** @hidden */
@@ -150,7 +153,7 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (this.isSummary && !this._wizard.displaySummaryStep) {
+        if (this.isSummary && !this._wizard?.displaySummaryStep) {
             this._summaryInit();
         } else if (this.stepIndicator) {
             this._notSummaryInit();
@@ -199,6 +202,8 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
         return this._elRef.nativeElement.clientWidth;
     }
 
+
+
     /** @hidden */
     removeFromDom(): void {
         if (this._elRef.nativeElement.parentNode) {
@@ -210,7 +215,7 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     _summaryInit(): void {
         this._elRef.nativeElement.style.display = 'none';
         this.content.tallContent = true;
-        this.removeFromDom();
+        // this.removeFromDom();
     }
 
     /** @hidden */

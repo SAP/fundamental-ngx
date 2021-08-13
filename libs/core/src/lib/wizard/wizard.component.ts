@@ -23,6 +23,7 @@ import { WizardStepComponent } from './wizard-step/wizard-step.component';
 import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progress-bar.directive';
 import { WizardContentComponent } from './wizard-content/wizard-content.component';
 import { ACTIVE_STEP_STATUS, CURRENT_STEP_STATUS, UPCOMING_STEP_STATUS, COMPLETED_STEP_STATUS } from './constants';
+import { WIZARD } from './wizard-injection-token';
 
 export const STEP_MIN_WIDTH = 168;
 export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';
@@ -53,7 +54,13 @@ export const handleTimeoutReference = () => {
     templateUrl: './wizard.component.html',
     styleUrls: ['./wizard.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: WIZARD,
+            useExisting: WizardComponent
+        }
+    ]
 })
 export class WizardComponent implements AfterViewInit, OnDestroy {
     /**
