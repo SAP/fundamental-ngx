@@ -99,6 +99,11 @@ export class WizardGeneratorResponsiveDialogExampleComponent implements OnDestro
                     ]
                 }
             ]
+        },
+        {
+            name: 'Summary',
+            id: 'summary',
+            summary: true
         }
     ];
 
@@ -123,7 +128,7 @@ export class WizardGeneratorResponsiveDialogExampleComponent implements OnDestro
             data: {
                 items: this.stepItems,
                 appendToWizard: false,
-                addSummary: true,
+                displaySummaryStep: true,
                 responsivePaddings: false,
                 title: this.wizardTitle
             }

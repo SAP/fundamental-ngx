@@ -66,7 +66,7 @@ export interface WizardGeneratorItem {
     /**
      * @description List of forms to render.
      */
-    formGroups: WizardGeneratorFormGroup[];
+    formGroups?: WizardGeneratorFormGroup[];
 
     /**
      * @description Step status.

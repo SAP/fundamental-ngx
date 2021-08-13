@@ -3,7 +3,7 @@
         <h2 fd-title [headerSize]="title.size">{{ title.text }}</h2>
     </fd-dialog-header>
     <fd-dialog-body>
-        <fdp-wizard-body [navigationButtons]="false" [responsivePaddings]="responsivePaddings" [navigationButtonLabels]="navigationButtonLabels" [hidden]="!_wizardCreated" (statusChange)="stepStatusChanged($event.id, $event.status)" [appendToWizard]="appendToWizard" [contentHeight]="contentHeight"></fdp-wizard-body>
+        <fdp-wizard-body [navigationButtons]="false" [displaySummaryStep]="displaySummaryStep" [responsivePaddings]="responsivePaddings" [navigationButtonLabels]="navigationButtonLabels" [hidden]="!_wizardCreated" (statusChange)="stepStatusChanged($event.id, $event.status)" [appendToWizard]="appendToWizard" [contentHeight]="contentHeight"></fdp-wizard-body>
         <div fd-bar barDesign="floating-footer" [class.fd-bar--responsive-paddings]="responsivePaddings" *ngIf="_wizardCreated">
             <div fd-bar-right>
                 <ng-container *ngIf="!isFirstStep">
@@ -18,7 +18,7 @@
                     </ng-template>
                     <ng-template [ngTemplateOutlet]="goNextButtonTemplate || defaultGoNextButtonTemplate" [ngTemplateOutletContext]="{ goNext: _goNextFn }"></ng-template>
                 </ng-container>
-                <ng-container *ngIf="addSummary && isSummaryStep || !addSummary && isLastStep">
+                <ng-container *ngIf="hasSummaryStep && isSummaryStep || !hasSummaryStep && isLastStep">
                     <ng-template #defaultFinishButtonTemplate>
                         <fdp-button class="fd-bar__element" [contentDensity]="navigationButtonLabels.finish.contentDensity" [buttonType]="navigationButtonLabels.finish.type" [label]="navigationButtonLabels.finish.label" (click)="finish()"></fdp-button>
                     </ng-template>

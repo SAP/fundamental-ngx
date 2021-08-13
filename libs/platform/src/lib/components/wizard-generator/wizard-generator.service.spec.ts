@@ -3,12 +3,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Validators } from '@angular/forms';
 import { PlatformFormGeneratorModule } from '../form/form-generator/fdp-form-generator.module';
 import { BaseWizardGenerator } from './base-wizard-generator';
+import { WizardGeneratorItem } from './interfaces/wizard-generator-item.interface';
 
 import { WizardGeneratorService } from './wizard-generator.service';
 
 let shouldShow = false;
 
-const TEST_ITEMS = [{
+const TEST_ITEMS: WizardGeneratorItem[] = [{
     name: () => 'Product type',
     id: 'productTypeStep',
     formGroups: [
@@ -26,6 +27,11 @@ const TEST_ITEMS = [{
             ]
         }
     ]
+},
+{
+    name: 'Summary',
+    id: 'summary',
+    summary: true
 },
 {
     name: 'Customer information',
@@ -139,10 +145,8 @@ describe('WizardGeneratorService', () => {
         expect(service.items[0].name).toEqual('Product type');
     });
 
-    it('should add summary step', async () => {
+    it('should place summary step last', async () => {
         await service.prepareWizardItems(TEST_ITEMS);
-
-        await service.addSummaryStep();
 
         expect(service.items[service.items.length - 1].summary).toBeTrue();
     });
@@ -171,7 +175,7 @@ describe('WizardGeneratorService', () => {
     it('should return visible steps in observable', async (done) => {
 
         service.getVisibleSteps().subscribe((steps) => {
-            expect(steps.length).toEqual(2);
+            expect(steps.length).toEqual(3);
             done();
         });
 
@@ -195,7 +199,7 @@ describe('WizardGeneratorService', () => {
     it('should set visible steps', async(done) => {
         const items = await service.prepareWizardItems(TEST_ITEMS);
         service.getVisibleSteps().subscribe((steps) => {
-            expect(steps.length).toEqual(3);
+            expect(steps.length).toEqual(4);
             done();
         });
 
@@ -220,7 +224,7 @@ describe('WizardGeneratorService', () => {
 
         await service.refreshStepVisibility();
 
-        expect(service.visibleWizardSteps.length).toEqual(3);
+        expect(service.visibleWizardSteps.length).toEqual(4);
 
         shouldShow = false;
     });

@@ -15,6 +15,9 @@ import * as wizardDialogTs from '!raw-loader!./examples/wizard-dialog-example.co
 import * as wizardNgForHtml from '!raw-loader!./examples/wizard-ngfor-example.component.html';
 import * as wizardNgForTs from '!raw-loader!./examples/wizard-ngfor-example.component.ts';
 
+import * as wizardVisibleSummaryHtml from '!raw-loader!./examples/wizard-visible-summary-example.component.html';
+import * as wizardVisibleSummaryTs from '!raw-loader!./examples/wizard-visible-summary-example.component.ts';
+
 @Component({
     selector: 'app-wizard',
     templateUrl: './wizard-docs.component.html'
@@ -107,6 +110,21 @@ export class WizardDocsComponent {
             code: wizardNgForTs,
             fileName: 'wizard-ngfor-example',
             component: 'WizardNgForExampleComponent'
+        }
+    ];
+
+    wizardVisibleSummaryExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: wizardVisibleSummaryHtml,
+            fileName: 'wizard-visible-summary-example',
+            scssFileCode: wizardScss
+        },
+        {
+            language: 'typescript',
+            code: wizardVisibleSummaryTs,
+            fileName: 'wizard-visible-summary-example',
+            component: 'WizardVisibleSummaryExampleComponent'
         }
     ];
 }
