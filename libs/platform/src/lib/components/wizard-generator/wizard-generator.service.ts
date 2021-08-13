@@ -273,6 +273,16 @@ export class WizardGeneratorService {
         return this._submittedFormRawValues[stepId] !== undefined;
     }
 
+    /**
+     *
+     * @returns {Boolean} if steps are untouched, will return true, if yes - false
+     */
+    isStepsUntouched(): boolean {
+        return ![...this.stepsComponents].some(([_, component]) =>
+            component.forms.some((item) => Object.values(item.form.value).some((x) => x !== undefined && x !== ''))
+        );
+    }
+
     editStep(stepId: string): void {
         const stepIndex = this.visibleWizardSteps.findIndex(s => s.id === stepId);
 
