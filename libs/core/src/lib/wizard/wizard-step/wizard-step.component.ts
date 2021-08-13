@@ -22,6 +22,7 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
 
 import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS } from '../constants';
+import { WizardComponent } from '../wizard.component';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -76,9 +77,6 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     @Input()
     isSummary = false;
 
-    @Input()
-    displaySummary = false;
-
     /**
      * User-defined validation function which determines if user can navigate between steps.
      */
@@ -131,7 +129,11 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     _finalStep = false;
 
     /** @hidden */
-    constructor(private _elRef: ElementRef, private _cdRef: ChangeDetectorRef) {}
+    constructor(
+        private _elRef: ElementRef,
+        private _cdRef: ChangeDetectorRef,
+        private _wizard: WizardComponent
+        ) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -148,7 +150,7 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (this.isSummary && !this.displaySummary) {
+        if (this.isSummary && !this._wizard.displaySummaryStep) {
             this._summaryInit();
         } else if (this.stepIndicator) {
             this._notSummaryInit();

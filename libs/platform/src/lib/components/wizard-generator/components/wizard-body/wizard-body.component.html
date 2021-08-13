@@ -9,7 +9,6 @@
                     [branching]="step.branching"
                     [stepClickValidator]="stepClickValidatorFn(i, step)"
                     [isSummary]="step.summary"
-                    [displaySummary]="displaySummaryStep"
                     (statusChange)="stepStatusChanged(step.id, $event)"
                 >
                     <fd-wizard-step-indicator [glyph]="step.icon">
