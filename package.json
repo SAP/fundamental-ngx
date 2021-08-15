@@ -166,7 +166,7 @@
     "axe-core": "4.2.3",
     "axe-html-reporter": "2.2.0",
     "babel-loader": "8.2.2",
-    "chromedriver": "91.0.0",
+    "chromedriver": "92.0.1",
     "codelyzer": "6.0.1",
     "coveralls": "3.1.1",
     "dotenv": "8.2.0",
