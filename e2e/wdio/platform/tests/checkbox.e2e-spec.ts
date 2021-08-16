@@ -47,13 +47,12 @@ describe('Checkbox test suite', () => {
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(checkboxPage.binaryTempCheckbox);
+        waitForPresent(checkboxPage.title);
     }, 1);
 
     describe('check binary checkbox used with form examples', () => {
         it('should check binary checkbox in template driven form', () => {
 
-            waitForElDisplayed(binaryTempCheckbox, 0);
             // check checkbox labels
             for (let i = 0; 3 > i; i++) {
                 checkIfDisabled(binaryTempCheckbox, 'aria-disabled', 'false', i);
@@ -250,5 +249,6 @@ describe('Checkbox test suite', () => {
 });
 
 function checkIfDisabled(element, attribute: string, value: string, index: number = 0): void {
+    scrollIntoView(element, index);
     expect(getAttributeByName(element, attribute, index)).toBe(value);
 }
