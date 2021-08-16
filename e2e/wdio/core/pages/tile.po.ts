@@ -4,7 +4,6 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 export class TilePo extends CoreBaseComponentPo {
     private url = '/tile';
 
-    defaultExample = 'fd-tile-generic-example ';
     columnsExample = 'fd-tile-columns-example ';
     launchExample = 'fd-launch-tile-example ';
     kpiExample = 'fd-kpi-tile-example ';

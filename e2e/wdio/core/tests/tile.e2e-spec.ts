@@ -15,10 +15,10 @@ describe('Tile component test', function () {
         tile,
         fdTile,
         launchExample,
-        kpiExample, 
+        kpiExample,
         feedExample,
         actionExample,
-        closeButton, 
+        closeButton,
         moreButton,
         bagdeExample,
         badge,
@@ -84,7 +84,7 @@ describe('Tile component test', function () {
         expect(getElementClass(columnsTileFooter)).toContain('2-col');
     });
 
-    it('should check visual regression for all examples', () => {
+    xit('should check visual regression for all examples', () => {
         tilePage.saveExampleBaselineScreenshot();
         expect(tilePage.compareWithBaseline()).toBeLessThan(5);
     });
