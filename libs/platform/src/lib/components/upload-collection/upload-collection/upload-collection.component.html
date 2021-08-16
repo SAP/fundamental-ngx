@@ -193,7 +193,7 @@
                                         <span [innerText]="_getItemExtension(item)"></span>
                                     </div>
 
-                                    <fd-form-message [type]="item.sameFilenameState">
+                                    <fd-form-message [type]="item.sameFilenameState" i18n="@@platformUploadCollection.Item.Name.AlreadyExists">
                                         {{ item.type === 'file' ? 'File' : 'Folder' }} already exists with that name.
                                     </fd-form-message>
                                 </fd-form-input-message-group>

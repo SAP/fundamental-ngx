@@ -302,7 +302,7 @@ export class UploadCollectionComponent {
      */
     _fileNameChange(e: FocusEvent, currentItem: UploadCollectionItem): void {
         const input = e.target as HTMLInputElement;
-        const itemName = input.value;
+        const itemName = input.value.trim();
         const newName = currentItem.type === 'file' ? `${itemName}.${currentItem.name.split('.').pop()}` : itemName;
 
         if (currentItem.name === newName) {
@@ -310,12 +310,12 @@ export class UploadCollectionComponent {
         }
 
         if (itemName.length > this.maxFilenameLength) {
-            const reanmedItem = {
+            const renamedItem = {
                 ...currentItem,
                 name: newName
             };
             const payload = {
-                items: [reanmedItem]
+                items: [renamedItem]
             };
             const filenameLengthEvent = new FilenameLengthExceedEvent(this, payload);
 
@@ -365,7 +365,7 @@ export class UploadCollectionComponent {
     /** @hidden */
     _checkName(e: FocusEvent, currentItem: UploadCollectionItem): void {
         const input = e.target as HTMLInputElement;
-        const itemName = input.value;
+        const itemName = input.value.trim();
         const newName = currentItem.type === 'file' ? `${itemName}.${currentItem.name.split('.').pop()}` : itemName;
 
         if (
