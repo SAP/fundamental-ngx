@@ -278,9 +278,7 @@ export class WizardGeneratorService {
      * @returns {Boolean} if steps are untouched, will return true, if yes - false
      */
     isStepsUntouched(): boolean {
-        return ![...this.stepsComponents].some(([_, component]) =>
-            component.forms.some((item) => Object.values(item.form.value).some((x) => x !== undefined && x !== ''))
-        );
+        return ![...this.stepsComponents].some(([_, component]) => component.forms.some((item) => !item.form.pristine));
     }
 
     editStep(stepId: string): void {
