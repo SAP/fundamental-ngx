@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { whenStable } from '@fundamental-ngx/core/tests';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { OverflowListDirective } from './overflow-list.directive';
+import { OverflowListItemDirective } from '@fundamental-ngx/core';
+import { ViewportRuler } from '@angular/cdk/overlay';
 
 const LIST_ITEM_WIDTH = 100;
 const LIST_WIDTH = 500;
@@ -66,7 +66,8 @@ describe('OverflowItemsDirective', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [WrapperComponent, TestComponent, OverflowListDirective],
+      declarations: [WrapperComponent, TestComponent, OverflowListDirective, OverflowListItemDirective],
+      providers: [ViewportRuler]
     }).compileComponents();
   }));
 
@@ -84,15 +85,17 @@ describe('OverflowItemsDirective', () => {
     expect(component.currentExtraItems).not.toBe(0);
   });
 
-  it('should recalculate on resize page',  async () => {
+  it('should recalculate on resize page',  fakeAsync(() => {
     const initialStateOfExtraItems = component.currentExtraItems;
 
     component.items.push(1231);
     window.dispatchEvent(new Event('resize'));
     fixture.detectChanges();
+    tick(60);
 
-    await whenStable(fixture);
-    const stateOfExtraItemsAfterResize = component.currentExtraItems;
-    expect(initialStateOfExtraItems).not.toBe(stateOfExtraItemsAfterResize);
-  });
+    fixture.whenStable().then(() => {
+      const stateOfExtraItemsAfterResize = component.currentExtraItems;
+      expect(initialStateOfExtraItems).not.toBe(stateOfExtraItemsAfterResize);
+    })
+  }));
 });

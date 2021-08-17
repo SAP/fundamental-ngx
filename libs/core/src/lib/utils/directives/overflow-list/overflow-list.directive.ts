@@ -1,6 +1,6 @@
 import { AfterViewInit, ContentChildren, Directive, ElementRef, EventEmitter, Input, OnDestroy, Output, QueryList } from '@angular/core';
-import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, startWith, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { OverflowListItemDirective } from './overflow-list-item.directive';
 import { ViewportRuler } from '@angular/cdk/overlay';
 
