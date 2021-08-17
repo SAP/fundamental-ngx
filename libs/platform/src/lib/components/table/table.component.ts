@@ -31,6 +31,7 @@ import { FdDropEvent, RtlService } from '@fundamental-ngx/core/utils';
 import { TableRowDirective } from '@fundamental-ngx/core/table';
 
 import { isDataSource } from '../../domain';
+import { isFunction, isString } from '../../utils/lang';
 import { getNestedValue } from '../../utils/object';
 
 import { TableService } from './table.service';
@@ -69,6 +70,8 @@ import { TableColumnResizeService } from './table-column-resize.service';
 import { TableColumnResizableSide } from './directives';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
+
+export type TableRowNavigation<T = null> = string | ((row: T) => any)
 
 type TreeLike<T> = T & {
     _children?: TreeLike<T>[];
@@ -244,9 +247,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     @Input()
     relationKey: string;
 
-    /** Whether table row has navigation button. */
+    /** Key of the table row or custom function to be used when navigating.
+      * Set to false to disable navigation for the row.
+      */
     @Input()
-    navigationButton = false;
+    navigation: TableRowNavigation;
 
     /** Whether table row can be clicked */
     @Input()
@@ -427,6 +432,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     _scrollBarWidth = 0;
 
     /** @hidden */
+    get _isShownNavigationColumn(): boolean {
+        return !!this.navigation || this._tableRows.some(row => row.navigation);
+    }
+
+    /** @hidden */
     get _isShownSelectionColumn(): boolean {
         return this.selectionMode !== SelectionMode.NONE;
     }
@@ -500,6 +510,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         if ('selectionMode' in changes || 'freezeColumnsTo' in changes) {
             this.recalculateTableColumnWidth();
+        }
+
+        if ('navigation' in changes) {
+            this._tableRows.forEach(row => row.navigation = getRowNavigation(row.value, this.navigation));
         }
     }
 
@@ -665,64 +679,30 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._isFilteringFromHeaderDisabled = disabled;
     }
 
-    /** Set the navigatable property on a row */
-    setNavigatableRowState(rowIndex: number, state: boolean): void {
+    /** Set the row navigation */
+    setRowNavigation(rowIndex: number, rowNavigation: TableRowNavigation): void {
+        const row = this._tableRows[rowIndex];
+
+        if (!row || !rowNavigation) {
+            return;
+        }
+
+        row.navigation = getRowNavigation(row.value, rowNavigation);
+
+        this._cdr.markForCheck();
+    }
+
+    /** Remove the row navigation */
+    removeRowNavigation(rowIndex: number): void {
         const row = this._tableRows[rowIndex];
 
         if (!row) {
             return;
         }
 
-        this.tableRows.toArray()[rowIndex + 1].navigatable = state;
-        row.navigatable = state;
+        row.navigation = null;
 
-        if (!state) {
-            row.hasNavIndicator = false;
-        }
-
-        this._cdr.detectChanges();
-    }
-
-    /** Set the navigation indicator property on a row */
-    setRowNavigationIndicator(rowIndex: number, state: boolean): void {
-        const row = this._tableRows[rowIndex];
-
-        if (!row) {
-            return;
-        }
-
-        if (row.navigatable) {
-            row.hasNavIndicator = state;
-
-            if (state) {
-                this.navigationButton = false;
-            }
-        }
-
-        this._cdr.detectChanges();
-    }
-
-    /** Set the navigation target property on a row */
-    setRowNavigationTarget(rowIndex: number, target: string): void {
-        const row = this._tableRows[rowIndex];
-
-        if (!row) {
-            return;
-        }
-
-
-        if (row.navigatable) {
-            row.navigationTarget = target;
-        }
-
-        this._cdr.detectChanges();
-    }
-
-    /** Get corresponding arrow icon for navigation indicator */
-    getGlyph(row: TableRow<T>): string {
-        if (row.hasNavIndicator) {
-            return this._rtl ? 'navigation-left-arrow' : 'navigation-right-arrow';
-        }
+        this._cdr.markForCheck();
     }
 
     /** Manually triggers columns width recalculation */
@@ -937,8 +917,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     _onRowClick(row: TableRow<T>): void {
-        if (row.hasNavIndicator) {
-            this._navigateByRowNavigationTarget(row);
+        if (row.navigation) {
+            this._processRowNavigation(row);
         }
 
         if (this.rowsActivable) {
@@ -999,22 +979,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         return cellIndex === 0 && this._isTreeRow(row);
     }
 
-    /**
-     * @hidden
-     * Check if the cell should contain a navigation button
-    */
-    _showNavButton(cellIndex: number, row: TableRow): boolean {
-        return this.navigationButton && cellIndex === this._visibleColumns.length - 1;
-    }
-
-    /**
-     * @hidden
-     * Check if the cell should contain a navigation indicator
-    */
-    _showNavIndicator(cellIndex: number, row: TableRow): boolean {
-        return row.hasNavIndicator && cellIndex === this._visibleColumns.length - 1;
-    }
-
     /** @hidden */
     _dragDropStart(): void {
         this._dragDropInProgress = true;
@@ -1051,12 +1015,18 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    _navigateByRowNavigationTarget(row: TableRow<T>): void {
-        if (!row.navigatable || !row.navigationTarget) {
+    _processRowNavigation(row: TableRow<T>): void {
+        if (!row.navigation) {
             return;
         }
 
-        this.router?.navigate([ row.navigationTarget ]);
+        if (isString(row.navigation)) {
+            this.router?.navigate([ row.navigation ]);
+        }
+
+        if (isFunction(row.navigation)) {
+            (row.navigation as (row: T) => any)(row.value);
+        }
     }
 
     /** @hidden */
@@ -1254,12 +1224,19 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             return this._createTreeTableRowsByDataSourceItems(source);
         }
 
-        return source.map((item: T, index: number) => new TableRow(TableRowType.ITEM, false, index, item));
+        return source
+            .map((item: T, index: number) => {
+                const row = new TableRow(TableRowType.ITEM, false, index, item);
+                row.navigation = getRowNavigation(item, this.navigation);
+
+                return row;
+            });
     }
 
     /** @hidden */
     private _createTreeTableRowsByDataSourceItems(source: T[]): TableRow<T>[] {
         const rows: TableRow<T>[] = [];
+
         source.forEach((item: T, index: number) => {
             const hasChildren = item.hasOwnProperty(this.relationKey)
                 && Array.isArray(item[this.relationKey])
@@ -1267,15 +1244,18 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             const row = new TableRow(hasChildren ? TableRowType.TREE : TableRowType.ITEM, false, index, item);
 
             row.expanded = false;
+            row.navigation = getRowNavigation(item, this.navigation);
             rows.push(row);
 
             if (hasChildren) {
                 const children = this._createTreeTableRowsByDataSourceItems(item[this.relationKey]);
+
                 children.forEach(c => {
                     c.parent = c.parent || row;
                     c.level = c.parent.level + 1;
                     c.hidden = true;
                 });
+
                 rows.push(...children);
             }
         });
@@ -1771,4 +1751,21 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 .subscribe(() => this.recalculateTableColumnWidth())
         )
     }
+}
+
+/** Get row's navigation if navigations is a string or function */
+function getRowNavigation<T>(row: T, rowNavigation: TableRowNavigation): TableRowNavigation {
+    if (!row || !rowNavigation) {
+        return null;
+    }
+
+    if (isString(rowNavigation)) {
+        return row[rowNavigation];
+    }
+
+    if (isFunction(rowNavigation)) {
+        return rowNavigation;
+    }
+
+    return null;
 }

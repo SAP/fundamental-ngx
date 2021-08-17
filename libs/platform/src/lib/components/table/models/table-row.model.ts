@@ -1,4 +1,5 @@
 import { TableRowType } from '../enums';
+import { TableRowNavigation } from '../table.component';
 
 /**
  * Table row entity
@@ -45,14 +46,6 @@ export class TableRow<T = any> {
         /**
          * If the row is navigatable
          */
-        public navigatable = true,
-        /**
-         * If the row has navigation indicator
-         */
-        public hasNavIndicator = false,
-        /**
-         * Navigation target of the row
-         */
-        public navigationTarget: string = ''
+        public navigation: TableRowNavigation | null = null,
     ) {}
 }
