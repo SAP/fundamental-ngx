@@ -67,7 +67,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
 
     /** Whether to move tabs overflowing in the tab bar to the dropdown */
     @Input()
-    collapseOverflow = false;
+    collapseOverflow = true;
 
     /** Limits the maximum number of tabs visible in the tab bar in collapseOverflow mode.
      * Other tabs will be moved to the collapsed tabs dropdown */
