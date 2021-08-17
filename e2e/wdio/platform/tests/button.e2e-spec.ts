@@ -57,7 +57,7 @@ describe('Button test suite:', function() {
 
     describe('Check visual regression basic', function() {
 
-        it('should check examples visual regression', () => {
+        xit('should check examples visual regression', () => {
             buttonPage.saveExampleBaselineScreenshot();
             expect(buttonPage.compareWithBaseline()).toBeLessThan(5);
         });
