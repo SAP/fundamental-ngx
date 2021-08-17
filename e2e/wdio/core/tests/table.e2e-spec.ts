@@ -1,6 +1,7 @@
 import { TablePo } from '../pages/table.po';
 import {
     acceptAlert,
+    browserIsFirefox,
     checkElementScreenshot,
     click,
     getAlertText,
@@ -32,7 +33,7 @@ describe('Table test suite', function() {
         tableRow, tableCell, markAllCheckboxes, tableCheckboxesExample, tableSemanticExample, tablePopinExample,
         clickableTableRow, tableNavigatableRowExample, tablePaginationExample, menuItem, paginationLink, tableResult,
         linkPrevious, linkNext, tableCustomColumnsExample, inputGroup, dialogValue, tableInner, columnSortingInput,
-        tableColumnSortingExample, listItem
+        tableColumnSortingExample, listItem, markAllCheckboxesFF, clickableTableRowFF
     } = tablePage;
 
     beforeAll(() => {
@@ -125,7 +126,8 @@ describe('Table test suite', function() {
         it('should check clickability cancel button', () => {
             scrollIntoView(tableCustomColumnsExample);
             click(tableCustomColumnsExample + button);
-            expect(isElementClickable(dialogContent + button, 3)).toBe(true, 'cancel button not clickable');
+            expect(isElementClickable(dialogContent + button, 3))
+                .toBe(true, 'cancel button not clickable');
         });
     });
 
@@ -168,12 +170,14 @@ describe('Table test suite', function() {
             const checkboxLength = getElementArrayLength(tableCheckboxesExample + markAllCheckboxes);
             for (let i = 0; i < checkboxLength; i++) {
                 scrollIntoView(tableCheckboxesExample + markAllCheckboxes, i);
-                click(tableCheckboxesExample + markAllCheckboxes, i);
+                browserIsFirefox() ? click(tableCheckboxesExample + markAllCheckboxesFF, i) :
+                    click(tableCheckboxesExample + markAllCheckboxes, i);
             }
 
             const checkboxLength_2 = getElementArrayLength(tableCheckboxesExample + tableRow);
             for (let i = 0; i < checkboxLength_2; i++) {
-                expect(getAttributeByName(tableCheckboxesExample + tableRow, 'aria-selected', i)).toBe('true');
+                expect(getAttributeByName(tableCheckboxesExample + tableRow, 'aria-selected', i))
+                    .toBe('true', `row ${i} not selected`);
             }
         });
     });
@@ -182,10 +186,12 @@ describe('Table test suite', function() {
 
         it('should check that checkbox work correctly', () => {
             scrollIntoView(tableSemanticExample);
-            click(tableSemanticExample + markAllCheckboxes);
+            browserIsFirefox() ? click(tableSemanticExample + markAllCheckboxesFF) :
+                click(tableSemanticExample + markAllCheckboxes);
             const checkboxLength = getElementArrayLength(tableSemanticExample + tableRow);
             for (let i = 0; i < checkboxLength; i++) {
-                expect(getAttributeByName(tableSemanticExample + tableRow, 'aria-selected', i)).toBe('true', `element with index ${i} not selected`);
+                expect(getAttributeByName(tableSemanticExample + tableRow, 'aria-selected', i))
+                    .toBe('true', `element with index ${i} not selected`);
             }
         });
     });
@@ -196,17 +202,20 @@ describe('Table test suite', function() {
             scrollIntoView(tablePopinExample);
             const tableRowLength = getElementArrayLength(tablePopinExample + clickableTableRow);
             for (let i = 0; i < tableRowLength; i++) {
-                expect(isElementClickable(tablePopinExample + clickableTableRow, i)).toBe(true, `element with index ${i} not clickable`);
+                expect(isElementClickable(tablePopinExample + clickableTableRow, i))
+                    .toBe(true, `element with index ${i} not clickable`);
             }
         });
 
         it('should check that checkbox work correctly', () => {
             scrollIntoView(tablePopinExample);
-            click(tablePopinExample + markAllCheckboxes);
+            browserIsFirefox() ? click(tablePopinExample + markAllCheckboxesFF) :
+                click(tablePopinExample + markAllCheckboxes);
             const checkboxLength = getElementArrayLength(tablePopinExample + tableRow);
             const startCycle = 20;
             for (let i = startCycle; i < checkboxLength; i++) {
-                expect(getAttributeByName(tablePopinExample + tableRow, 'aria-selected', i)).toBe('true', `element with index ${i} not selected`);
+                expect(getAttributeByName(tablePopinExample + tableRow, 'aria-selected', i))
+                    .toBe('true', `element with index ${i} not selected`);
             }
         });
     });
@@ -221,7 +230,8 @@ describe('Table test suite', function() {
                     continue;
                 }
                 scrollIntoView(tableNavigatableRowExample + clickableTableRow, i);
-                click(tableNavigatableRowExample + clickableTableRow, i);
+                browserIsFirefox() ? click(tableNavigatableRowExample + clickableTableRowFF, i) :
+                    click(tableNavigatableRowExample + clickableTableRow, i);
                 expect(getAlertText()).toBe(alertText);
                 acceptAlert();
             }
@@ -277,7 +287,7 @@ describe('Table test suite', function() {
         tablePage.checkRtlSwitch();
     });
 
-    describe('visual regression', function() {
+    xdescribe('visual regression', function() {
 
         it('should check example blocks visual regression', () => {
             tablePage.saveExampleBaselineScreenshot();
