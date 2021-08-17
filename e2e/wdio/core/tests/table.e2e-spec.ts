@@ -126,7 +126,8 @@ describe('Table test suite', function() {
         it('should check clickability cancel button', () => {
             scrollIntoView(tableCustomColumnsExample);
             click(tableCustomColumnsExample + button);
-            expect(isElementClickable(dialogContent + button, 3)).toBe(true, 'cancel button not clickable');
+            expect(isElementClickable(dialogContent + button, 3))
+                .toBe(true, 'cancel button not clickable');
         });
     });
 
@@ -176,7 +177,7 @@ describe('Table test suite', function() {
             const checkboxLength_2 = getElementArrayLength(tableCheckboxesExample + tableRow);
             for (let i = 0; i < checkboxLength_2; i++) {
                 expect(getAttributeByName(tableCheckboxesExample + tableRow, 'aria-selected', i))
-                    .toBe('true');
+                    .toBe('true', `row ${i} not selected`);
             }
         });
     });
