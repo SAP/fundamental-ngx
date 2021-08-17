@@ -1,20 +1,26 @@
 <fd-panel
     [expanded]="expanded"
     [fixed]="!expandable"
-    [compact]="isCompact"
-    [expandAriaLabel]="expandAriaLabel"
+    [compact]="_isCompact"
+    [expandAriaLabel]="_expandAriaLabel"
+    [expandAriaLabelledBy]="_titleId"
     [attr.aria-disabled]="disabled"
     (expandedChange)="onExpandedChange($event)"
 >
-    <h5 fd-panel-title>{{ title }}</h5>
+    <h5 [id]="_titleId" fd-panel-title>{{ title }}</h5>
 
-    <ng-container *ngIf="panelActionsComponent">
+    <ng-container *ngIf="_panelActionsComponent">
         <fd-toolbar [size]="_contentDensity" [shouldOverflow]="true" fdType="transparent" [clearBorder]="true">
-            <ng-container *ngTemplateOutlet="panelActionsComponent.contentTemplateRef"></ng-container>
+            <ng-container *ngTemplateOutlet="_panelActionsComponent.contentTemplateRef"></ng-container>
         </fd-toolbar>
     </ng-container>
 
-    <div fd-panel-content [height]="panelContentComponent?.contentHeight" [ariaLabelledBy]="panelTitleDirective?.id">
+    <div
+        fd-panel-content
+        [id]="_panelContentComponent?.id"
+        [height]="_panelContentComponent?.contentHeight"
+        [ariaLabelledBy]="_panelTitleDirective?.id"
+    >
         <ng-content select="fdp-panel-content"></ng-content>
     </div>
 </fd-panel>

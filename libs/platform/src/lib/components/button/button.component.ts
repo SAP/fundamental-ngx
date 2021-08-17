@@ -1,8 +1,14 @@
 import {
-    Component, Input, Output, EventEmitter, ElementRef,
-    ChangeDetectorRef, AfterViewInit, HostBinding
+    Component,
+    Input,
+    Output,
+    EventEmitter,
+    ElementRef,
+    ChangeDetectorRef,
+    AfterViewInit,
+    HostBinding
 } from '@angular/core';
-import { GlyphPosition, ButtonType } from '@fundamental-ngx/core';
+import { GlyphPosition, ButtonType } from '@fundamental-ngx/core/button';
 import { BaseComponent } from '../base';
 
 @Component({
@@ -11,14 +17,13 @@ import { BaseComponent } from '../base';
     styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent extends BaseComponent implements AfterViewInit {
-
     /** Position of glyph related to text */
     @Input()
     glyphPosition: GlyphPosition = 'before';
 
     /**
-    * Text rendered inside button component
-    */
+     * Text rendered inside button component
+     */
     @Input()
     label: string;
 
@@ -50,6 +55,27 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
      *  the native HTML button*/
     @Input()
     ariaDisabled: boolean;
+
+    /**
+     * propagate aria-expanded for accessiblity to
+     * the native HTML button
+     */
+    @Input()
+    ariaExpanded: boolean;
+
+    /**
+     * propagate aria-controls for accessiblity to
+     * the native HTML button
+     */
+    @Input()
+    ariaControlsId: string;
+
+    /**
+     * propagate aria-pressed for accessiblity to
+     * the native HTML button
+     */
+    @Input()
+    ariaPressed: boolean;
 
     /** Specifies a name to
      *  the native HTML button */

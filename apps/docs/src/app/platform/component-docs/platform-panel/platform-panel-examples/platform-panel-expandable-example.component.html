@@ -1,4 +1,10 @@
-<fdp-button (click)="expanded = !expanded" [attr.aria-pressed]="expanded" label="Toggle Expand"></fdp-button>
+<fdp-button
+    (click)="expanded = !expanded"
+    [ariaPressed]="expanded"
+    [ariaExpanded]="expanded"
+    ariaControlsId="fdp-panel-content-112"
+    label="Toggle Expand"
+></fdp-button>
 <br />
 <br />
 Expanded value is: {{ expanded }}
@@ -14,7 +20,7 @@ Expanded value is: {{ expanded }}
     [expandable]="true"
     (panelExpandChange)="onExpandChange($event)"
 >
-    <fdp-panel-content>
+    <fdp-panel-content id="fdp-panel-content-112">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ut laoreet lorem. Vestibulum ante ipsum primis
         in faucibus orci luctus et ultrices posuere cubilia curae; Aenean sagittis aliquam justo et suscipit. Nam
         molestie, magna at elementum pulvinar, nisi enim venenatis ante, id convallis mi neque nec risus. Cras blandit

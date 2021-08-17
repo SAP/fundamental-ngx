@@ -1,6 +1,24 @@
-<button #fdButton fd-button [attr.id]="id" [attr.title]="title" [attr.name]="name" [attr.aria-label]="ariaLabel"
-    [glyphPosition]="glyphPosition" [label]="label" [type]="type" [attr.value]="value"
-    [attr.aria-selected]="ariaSelected" [attr.aria-disabled]="ariaDisabled" [compact]="contentDensity ? contentDensity !== 'cozy' : ''"
-    [glyph]="glyph" [disabled]="disabled" (click)="onBtnClick($event)" [fdType]="buttonType" [class.is-disabled]="ariaDisabled"
-    [ngStyle]="{ width: width }">
-</button>
+<button
+    #fdButton
+    fd-button
+    [attr.id]="id"
+    [attr.title]="title"
+    [attr.name]="name"
+    [attr.aria-label]="ariaLabel"
+    [attr.aria-controls]="ariaControlsId"
+    [attr.aria-expanded]="ariaExpanded"
+    [attr.aria-pressed]="ariaPressed"
+    [glyphPosition]="glyphPosition"
+    [label]="label"
+    [type]="type"
+    [attr.value]="value"
+    [attr.aria-selected]="ariaSelected"
+    [attr.aria-disabled]="ariaDisabled"
+    [compact]="contentDensity ? contentDensity !== 'cozy' : ''"
+    [glyph]="glyph"
+    [disabled]="disabled"
+    (click)="onBtnClick($event)"
+    [fdType]="buttonType"
+    [class.is-disabled]="ariaDisabled"
+    [ngStyle]="{ width: width }"
+></button>
