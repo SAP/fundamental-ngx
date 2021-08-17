@@ -24,9 +24,9 @@ describe('PageFooter test suite:', function() {
         });
 
         it('should check pagefooter text', () => {
+            expect(getText(pagefootertext,)).toEqual('1992-2021 @copyright all right reserved.', 'Text is not matching Index');
             expect(getText(pagefootertext, 1)).toEqual('1992-2021 @copyright all right reserved.', 'Text is not matching Index1');
             expect(getText(pagefootertext, 2)).toEqual('1992-2021 @copyright all right reserved.', 'Text is not matching Index2');
-            expect(getText(pagefootertext, 3)).toEqual('1992-2021 @copyright all right reserved.', 'Text is not matching Index3');
         });
 
     describe('Check visual regression basic', function() {
