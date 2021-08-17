@@ -22,7 +22,6 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
@@ -31,7 +30,7 @@ import { FdDropEvent, RtlService } from '@fundamental-ngx/core/utils';
 import { TableRowDirective } from '@fundamental-ngx/core/table';
 
 import { isDataSource } from '../../domain';
-import { isFunction, isString } from '../../utils/lang';
+import { isString } from '../../utils/lang';
 import { getNestedValue } from '../../utils/object';
 
 import { TableService } from './table.service';
@@ -70,8 +69,6 @@ import { TableColumnResizeService } from './table-column-resize.service';
 import { TableColumnResizableSide } from './directives';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
-
-export type TableRowNavigation<T = null> = string | ((row: T) => any)
 
 type TreeLike<T> = T & {
     _children?: TreeLike<T>[];
@@ -247,11 +244,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     @Input()
     relationKey: string;
 
-    /** Key of the table row or custom function to be used when navigating.
-      * Set to false to disable navigation for the row.
-      */
+    /** Whether row is navigatable. */
     @Input()
-    navigation: TableRowNavigation;
+    rowNavigatable: string | boolean;
 
     /** Whether table row can be clicked */
     @Input()
@@ -289,11 +284,13 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     @Output()
     readonly rowsRearrange = new EventEmitter<TableRowsRearrangeEvent<T>>();
 
-    /*
-     * Event fired when row clicked
-     */
+    /* Event fired when row clicked. */
     @Output()
     readonly rowActivate = new EventEmitter<TableRowActivateEvent<T>>();
+
+    /* Event fired when row navigated. */
+    @Output()
+    readonly rowNavigate = new EventEmitter<TableRowActivateEvent<T>>();
 
     /** @hidden */
     @ViewChild('verticalScrollable')
@@ -433,7 +430,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     get _isShownNavigationColumn(): boolean {
-        return !!this.navigation || this._tableRows.some(row => row.navigation);
+        return this._tableRows.some(row => row.navigatable);
     }
 
     /** @hidden */
@@ -496,8 +493,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         private readonly _tableScrollDispatcher: TableScrollDispatcherService,
         private readonly _tableColumnResizeService: TableColumnResizeService,
         @Inject(DOCUMENT) private readonly _document: Document | null,
-        @Optional() private readonly _rtlService: RtlService,
-        @Optional() private readonly router: Router
+        @Optional() private readonly _rtlService: RtlService
     ) {
         super();
     }
@@ -513,7 +509,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         }
 
         if ('navigation' in changes) {
-            this._tableRows.forEach(row => row.navigation = getRowNavigation(row.value, this.navigation));
+            this._tableRows.forEach(row => row.navigatable = this._isRowNavigatable(row.value, this.rowNavigatable));
         }
     }
 
@@ -680,14 +676,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** Set the row navigation */
-    setRowNavigation(rowIndex: number, rowNavigation: TableRowNavigation): void {
+    setRowNavigation(rowIndex: number, rowNavigatable: string | boolean): void {
         const row = this._tableRows[rowIndex];
 
-        if (!row || !rowNavigation) {
+        if (!row) {
             return;
         }
 
-        row.navigation = getRowNavigation(row.value, rowNavigation);
+        row.navigatable = this._isRowNavigatable(row.value, rowNavigatable);
 
         this._cdr.markForCheck();
     }
@@ -700,7 +696,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             return;
         }
 
-        row.navigation = null;
+        row.navigatable = null;
 
         this._cdr.markForCheck();
     }
@@ -916,9 +912,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    _onRowClick(row: TableRow<T>): void {
-        if (row.navigation) {
-            this._processRowNavigation(row);
+    _onRowClick(row: TableRow<T>, event?: KeyboardEvent): void {
+        event?.preventDefault();
+
+        if (row.navigatable) {
+            this._emitRowNavigate(row);
         }
 
         if (this.rowsActivable) {
@@ -1015,18 +1013,13 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    _processRowNavigation(row: TableRow<T>): void {
-        if (!row.navigation) {
+    _emitRowNavigate(row: TableRow<T>): void {
+        if (!row.navigatable) {
             return;
         }
 
-        if (isString(row.navigation)) {
-            this.router?.navigate([ row.navigation ]);
-        }
-
-        if (isFunction(row.navigation)) {
-            (row.navigation as (row: T) => any)(row.value);
-        }
+        const rowIndex = this._tableRows.indexOf(row);
+        this.rowNavigate.emit(new TableRowActivateEvent<T>(rowIndex, row.value));
     }
 
     /** @hidden */
@@ -1227,7 +1220,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         return source
             .map((item: T, index: number) => {
                 const row = new TableRow(TableRowType.ITEM, false, index, item);
-                row.navigation = getRowNavigation(item, this.navigation);
+                row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
 
                 return row;
             });
@@ -1244,7 +1237,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             const row = new TableRow(hasChildren ? TableRowType.TREE : TableRowType.ITEM, false, index, item);
 
             row.expanded = false;
-            row.navigation = getRowNavigation(item, this.navigation);
+            row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
             rows.push(row);
 
             if (hasChildren) {
@@ -1751,21 +1744,17 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 .subscribe(() => this.recalculateTableColumnWidth())
         )
     }
-}
 
-/** Get row's navigation if navigations is a string or function */
-function getRowNavigation<T>(row: T, rowNavigation: TableRowNavigation): TableRowNavigation {
-    if (!row || !rowNavigation) {
-        return null;
+    /** @hidden */
+    private _isRowNavigatable(row: T, rowNavigationDisabled: string | boolean): boolean {
+        if (!row) {
+            return false;
+        }
+
+        if (isString(rowNavigationDisabled)) {
+            return !!row[rowNavigationDisabled];
+        }
+
+        return !!rowNavigationDisabled;
     }
-
-    if (isString(rowNavigation)) {
-        return row[rowNavigation];
-    }
-
-    if (isFunction(rowNavigation)) {
-        return rowNavigation;
-    }
-
-    return null;
 }

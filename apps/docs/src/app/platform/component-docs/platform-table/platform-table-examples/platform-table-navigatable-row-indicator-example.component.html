@@ -3,9 +3,10 @@
     [dataSource]="source"
     contentDensity="compact"
     emptyTableMessage="No data found"
-    navigation="navigation"
+    rowNavigatable="navigatable"
     [noHorizontalBorders]="true"
     [bodyHeight]="'96px'"
+    (rowNavigate)="onRowNavigate($event)"
 >
     <fdp-table-toolbar
         title="Order Items"

@@ -299,12 +299,15 @@
                             fd-table-row
                             fd-dnd-item
                             role="row"
+                            [tabindex]="rowsActivable || !!row.navigatable ? 0 : -1"
                             [class.fdp-table__row--tree]="_isTreeRow(row)"
-                            [hoverable]="_isShownSelectionColumn || !!row.navigation"
-                            [activable]="rowsActivable || !!row.navigation"
+                            [hoverable]="_isShownSelectionColumn || !!row.navigatable"
+                            [activable]="rowsActivable || !!row.navigatable"
                             [attr.aria-selected]="row.checked"
                             [attr.aria-rowindex]="rowIdx"
                             (click)="_onRowClick(row)"
+                            (keydown.enter)="_onRowClick(row)"
+                            (keydown.space)="_onRowClick(row, $event)"
                             (started)="_dragDropStart()"
                         >
                             <!-- Row Selection Cell -->
@@ -377,7 +380,7 @@
 
                             <td *ngIf="_isShownNavigationColumn" fd-table-cell>
                                 <i
-                                    *ngIf="row.navigation"
+                                    *ngIf="row.navigatable"
                                     fd-table-icon
                                     [navigation]="true"
                                     [class]="_rtl ? 'sap-icon--slim-arrow-left' : 'sap-icon--slim-arrow-right'"

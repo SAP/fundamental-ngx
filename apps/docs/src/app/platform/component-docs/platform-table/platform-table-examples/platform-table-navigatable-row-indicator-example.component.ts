@@ -4,6 +4,7 @@ import { FdDate } from '@fundamental-ngx/core/datetime';
 import { TableComponent, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform';
 
 import { Observable, of } from 'rxjs';
+import { TableRowActivateEvent } from '../../../../../../../../libs/platform/src/lib/components/table/models';
 
 @Component({
     selector: 'fdp-platform-table-navigatable-row-indicator-example',
@@ -22,11 +23,15 @@ export class PlatformTableNavigatableRowIndicatorExampleComponent {
     }
 
     setRowNavigation(): void {
-        this.table.setRowNavigation(1, (row: ExampleItem) => alert(`row ${row.name} navigation!`))
+        this.table.setRowNavigation(1, true)
     }
 
     removeRowNavigation(): void {
         this.table.removeRowNavigation(1);
+    }
+
+    onRowNavigate(event: TableRowActivateEvent<ExampleItem>): void {
+        console.log(event);
     }
 }
 
@@ -41,7 +46,7 @@ export interface ExampleItem {
     statusColor?: string;
     date: FdDate;
     verified: boolean;
-    navigation?: string
+    navigatable?: boolean
 }
 
 /**
@@ -100,7 +105,7 @@ const ITEMS: ExampleItem[] = [
         statusColor: 'informative',
         date: new FdDate(2020, 1, 7),
         verified: true,
-        navigation: '/'
+        navigatable: true
     },
     {
         name: 'Astro Laptop 1516',
@@ -125,6 +130,6 @@ const ITEMS: ExampleItem[] = [
         statusColor: 'informative',
         date: new FdDate(2020, 1, 12),
         verified: true,
-        navigation: '/'
+        navigatable: true
     }
 ];

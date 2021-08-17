@@ -1,19 +1,20 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, DebugElement, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, of } from 'rxjs';
 
 import { RtlService } from '@fundamental-ngx/core';
-import { PlatformTableModule } from './table.module';
-import { TableComponent } from './table.component';
-import { FILTER_STRING_STRATEGY, SelectionMode, SortDirection, TableRowType } from './enums';
-import { TableDataProvider, TableDataSource } from './domain';
-import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
-import { TableService } from './table.service';
+
 import { PlatformButtonModule } from '../button/public_api';
+import { TableDataProvider, TableDataSource } from './domain';
+import { FILTER_STRING_STRATEGY, SelectionMode, SortDirection, TableRowType } from './enums';
+import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { TableRowSelectionChangeEvent, TableRowToggleOpenStateEvent } from './models';
+import { TableComponent } from './table.component';
+import { PlatformTableModule } from './table.module';
+import { TableService } from './table.service';
 
 interface SourceItem {
     id: string;
@@ -702,10 +703,9 @@ describe('TableComponent internal', () => {
             });
 
             it('should set and remove navigation', () => {
-                let counter = 0;
-                const rowNavigationFn = (row) => counter++;
+                const spy = spyOn(tableComponent.rowNavigate, 'emit').and.callThrough();
 
-                tableComponent.setRowNavigation(0, rowNavigationFn);
+                tableComponent.setRowNavigation(0, true);
 
                 fixture.detectChanges();
                 calculateTableElementsMetaData();
@@ -715,7 +715,7 @@ describe('TableComponent internal', () => {
 
                 tableRowCells2DArray[0][4].nativeElement.click();
 
-                expect(counter).toEqual(1);
+                expect(spy).toHaveBeenCalled();
 
                 tableComponent.removeRowNavigation(0);
 

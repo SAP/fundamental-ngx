@@ -448,18 +448,15 @@
     Navigatable rows
 </fd-docs-section-title>
 <description>
-    Use <code>navigation</code> property to make rows navigatable, set
+    This example shows navigatable rows.
 
     <ul>
-        <li>String - key for the row item field with route (Requires to include <code>RouterModule</code> to the module imports).</li>
-        <li>Callback - function which will be invoked, will have row item as the parameter.</li>
-    </ul>
-
-    It's also possible to make row navigatable using API:
-
-    <ul>
-        <li>Use <code>table.setRowNavigation(rowIndex: number, rowNavigation: string | (row: T) => any)</code> for setting the navigation.</li>
-        <li>Use <code>table.removeRowNavigation(rowIndex: number)</code> for removing the navigation.</li>
+        <li>
+            Use <code>[rowNavigatable]="true"</code> input property on the table to make rows navigatable.
+            Pass boolean to change navigatable state for all rows.
+            Pass string with the field of the rows which will be used to calculate row's navigatable state.
+        </li>
+        <li>Event <code>(rowNavigate)</code> is emitted when row gets activated.</li>
     </ul>
 </description>
 <component-example>
