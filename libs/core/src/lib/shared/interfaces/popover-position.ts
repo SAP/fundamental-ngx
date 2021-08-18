@@ -82,6 +82,15 @@ export const PopoverFlippedYDirection: {[key: string]: YPositions} = {
     'center': 'center'
 };
 
+export const PopoverFlippedRtlPlacement: {[key: string]: any} = {
+    'left-start': 'right-start',
+    'left': 'right',
+    'left-end': 'right-end',
+    'right-start': 'left-start',
+    'right': 'left',
+    'right-end': 'left-end',
+}
+
 export class PopoverPosition {
 
     static getCdkPlacement(placement: Placement): ConnectedPosition {

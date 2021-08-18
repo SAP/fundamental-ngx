@@ -18,10 +18,14 @@ import {
 } from '@angular/cdk/overlay';
 import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
 
-import { merge, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
+import { from, merge, Observable, of, Subject } from 'rxjs';
+import { distinctUntilChanged, filter, startWith, takeUntil, tap } from 'rxjs/operators';
 
-import { GetDefaultPosition, PopoverPosition } from '@fundamental-ngx/core/shared';
+import {
+    GetDefaultPosition,
+    PopoverFlippedRtlPlacement,
+    PopoverPosition
+} from '@fundamental-ngx/core/shared';
 import { BasePopoverClass } from '../base/base-popover.class';
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { PopoverBodyComponent } from '../popover-body/popover-body.component';
@@ -72,6 +76,9 @@ export class PopoverService extends BasePopoverClass {
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
+    /** @hidden */
+    protected readonly _onClose$: Subject<void> = new Subject<void>();
+
     constructor(
         private _overlay: Overlay,
         private _renderer: Renderer2,
@@ -117,6 +124,7 @@ export class PopoverService extends BasePopoverClass {
             }
             this.isOpen = false;
             this._focusLastActiveElementBeforeOpen();
+            this._onClose$.next();
         }
     }
 
@@ -361,10 +369,24 @@ export class PopoverService extends BasePopoverClass {
         }
 
         if (this.placement) {
-            return [PopoverPosition.getCdkPlacement(this.placement)];
+            return this._getPlacement();
         }
 
         return [];
+    }
+
+    private _getPlacement(): ConnectedPosition[] {
+        if (this._getDirection() === 'rtl') {
+            const placeArr = this.placement.split('-')[0];
+
+            if (placeArr === 'left' || placeArr === 'right') {
+                const changedPlacement = PopoverFlippedRtlPlacement[this.placement];
+
+                return [PopoverPosition.getCdkPlacement(changedPlacement)];
+            }
+        }
+
+        return [PopoverPosition.getCdkPlacement(this.placement)];
     }
 
     /** @hidden */

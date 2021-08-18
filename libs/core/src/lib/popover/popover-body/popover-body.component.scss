@@ -13,6 +13,8 @@ $fd-popover-arrow-color: #89919a;
 $fd-popover-background-color-variable: var(--sapGroup_ContentBackground, #fff) !default;
 $fd-popover-background-color: #fff;
 .fd-popover__popper {
+    overflow: hidden;
+
 	.fd-popover__arrow {
 		box-sizing: border-box;
 		padding: 0;
