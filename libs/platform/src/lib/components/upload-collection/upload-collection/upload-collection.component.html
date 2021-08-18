@@ -177,7 +177,7 @@
 
                         <ng-template #editMode>
                             <div fd-form-item>
-                                <fd-form-input-message-group [triggers]="[]" [isOpen]="item.sameFilenameState">
+                                <fd-form-input-message-group [triggers]="[]" [isOpen]="!!item.sameFilenameState">
                                     <div class="fdp-upload-collection__vertical-align-center">
                                         <input
                                             fd-form-control
