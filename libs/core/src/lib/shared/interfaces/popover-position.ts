@@ -82,7 +82,7 @@ export const PopoverFlippedYDirection: {[key: string]: YPositions} = {
     'center': 'center'
 };
 
-export const PopoverFlippedRtlPlacement: {[key: string]: any} = {
+export const PopoverFlippedRtlPlacement: {[key: string]: Placement} = {
     'left-start': 'right-start',
     'left': 'right',
     'left-end': 'right-end',

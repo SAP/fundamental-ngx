@@ -13,8 +13,6 @@ $fd-popover-arrow-color: #89919a;
 $fd-popover-background-color-variable: var(--sapGroup_ContentBackground, #fff) !default;
 $fd-popover-background-color: #fff;
 .fd-popover__popper {
-    overflow: hidden;
-
 	.fd-popover__arrow {
 		box-sizing: border-box;
 		padding: 0;
@@ -152,6 +150,56 @@ $fd-popover-background-color: #fff;
 			}
 		}
 	}
+
+    .fd-nested-list {
+        border-bottom: none;
+
+        &__item:last-child {
+            .fd-nested-list {
+                &__item:last-child {
+                    .fd-nested-list__link {
+                        border-bottom-right-radius: var(--sapElement_BorderCornerRadius);
+                        border-bottom-left-radius: var(--sapElement_BorderCornerRadius);
+                    }
+                }
+            }
+        }
+    }
+
+    .fd-nested-list__item {
+        &:first-child {
+            .fd-nested-list__content {
+                border-top-right-radius: var(--sapElement_BorderCornerRadius);
+                border-top-left-radius: var(--sapElement_BorderCornerRadius);
+            }
+        }
+
+        &:last-child {
+            .fd-nested-list__content {
+                border-bottom-left-radius: var(--sapElement_BorderCornerRadius);
+                border-bottom-right-radius: var(--sapElement_BorderCornerRadius);
+            }
+        }
+    }
+
+    .fd-side-nav, .fd-nested-list__item {
+        border-right: none;
+
+        &:first-child {
+            border-top-right-radius: var(--sapElement_BorderCornerRadius);
+            border-top-left-radius: var(--sapElement_BorderCornerRadius);
+        }
+
+        &:last-child {
+            border-bottom-right-radius: var(--sapElement_BorderCornerRadius);
+            border-bottom-left-radius: var(--sapElement_BorderCornerRadius);
+        }
+    }
+
+    .fd-nested-list__item:last-child .fd-nested-list__content.is-selected {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0
+    }
 }
 
 .fd-popover-custom {
