@@ -1,12 +1,12 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
-import { FdDate, FdDatetimeModule } from '../datetime';
-import { PipeModule } from '../utils/pipes/pipe.module';
-import { ButtonModule } from '../button/button.module';
-import { TimeComponent } from './time.component';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { TimeComponent, TimeModule } from '@fundamental-ngx/core/time';
+import { PipeModule } from '@fundamental-ngx/core/utils';
+
 import { Meridian } from './models';
-import { TimeModule } from '../time/time.module';
 
 describe('TimeComponent', () => {
     let component: TimeComponent<FdDate>;
@@ -15,8 +15,7 @@ describe('TimeComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [FormsModule, ButtonModule, PipeModule, FdDatetimeModule, TimeModule],
-                declarations: [TimeComponent]
+                imports: [FormsModule, ButtonModule, PipeModule, FdDatetimeModule, TimeModule]
             }).compileComponents();
         })
     );

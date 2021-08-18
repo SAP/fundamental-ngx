@@ -4,13 +4,16 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 
 import { DialogService, RtlService, uuidv4 } from '@fundamental-ngx/core';
+import {
+    FileSizeExceedEvent,
+    PlatformUploadCollectionModule,
+    UploadCollectionComponent,
+    UploadCollectionFile,
+    UploadCollectionItemStatus
+} from '@fundamental-ngx/platform';
 
-import { FileSizeExceedEvent } from '../models/upload-collection-events.models';
-import { UploadCollectionFile, UploadCollectionItemStatus } from '../models/upload-collection.models';
-import { FilesValidatorService } from '../services';
-import { UploadCollectionComponent } from './upload-collection.component';
-import { PlatformUploadCollectionModule } from '../upload-collection.module';
 import { UploadCollectionDataSource } from '../domain';
+import { FilesValidatorService } from '../services';
 import { UploadCollectionDataProviderTest } from './upload-collection-data-provider-test';
 
 interface MockFile extends File {
@@ -25,7 +28,6 @@ describe('UploadCollectionComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [UploadCollectionComponent],
                 imports: [PlatformUploadCollectionModule, RouterModule, RouterTestingModule],
                 providers: [RtlService, DialogService, FilesValidatorService]
             }).compileComponents();
@@ -44,6 +46,7 @@ describe('UploadCollectionComponent', () => {
     });
 
     // toolbar
+
     it('toolbar: should show total number items of current folder', () => {
         expect(component._totalItems).toEqual(2);
         expect(component._getList().length).toEqual(2);

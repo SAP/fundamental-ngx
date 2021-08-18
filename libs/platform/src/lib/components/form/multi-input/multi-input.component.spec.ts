@@ -1,15 +1,13 @@
-import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { DynamicComponentService, RtlService } from '@fundamental-ngx/core';
 
-import { DataProvider, DATA_PROVIDERS } from '../../../domain';
-import { PlatformListModule } from '../../list/list.module';
-import { StandardListItemModule } from '../../list/standard-list-item/standard-list-item.module';
+import { DynamicComponentService, RtlService } from '@fundamental-ngx/core';
+import { FdpFormGroupModule, StandardListItemModule } from '@fundamental-ngx/platform';
+
+import { DATA_PROVIDERS, DataProvider } from '../../../domain';
 import { ContentDensity } from '../form-control';
-import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { PlatformMultiInputComponent } from './multi-input.component';
 import { PlatformMultiInputModule } from './multi-input.module';
 
@@ -56,14 +54,11 @@ describe('PlatformMultiInputComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [PlatformMulitiInputTest, PlatformMultiInputComponent],
+            declarations: [PlatformMulitiInputTest],
             imports: [
-                CommonModule,
-                FormsModule,
                 PlatformMultiInputModule,
                 ReactiveFormsModule,
                 FdpFormGroupModule,
-                PlatformListModule,
                 StandardListItemModule,
                 RouterTestingModule
             ],

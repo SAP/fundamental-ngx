@@ -1,13 +1,13 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
-import { FdDate, FdDatetimeModule } from '../datetime';
-import { PopoverModule } from '../popover/popover.module';
-import { InputGroupModule } from '../input-group/input-group.module';
-import { TimeModule } from '../time/time.module';
-import { ButtonModule } from '../button/button.module';
-
-import { TimePickerComponent } from './time-picker.component';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { FormMessageModule } from '@fundamental-ngx/core/form';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { TimeModule } from '@fundamental-ngx/core/time';
+import { TimePickerComponent } from '@fundamental-ngx/core/time-picker';
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
 
 describe('TimePickerComponent', () => {
@@ -17,7 +17,7 @@ describe('TimePickerComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [FormsModule, PopoverModule, InputGroupModule, ButtonModule, FdDatetimeModule, TimeModule],
+                imports: [FormsModule, PopoverModule, InputGroupModule, ButtonModule, FdDatetimeModule, TimeModule, FormMessageModule],
                 declarations: [TimePickerComponent],
                 providers: [ContentDensityService]
             }).compileComponents();
@@ -120,7 +120,10 @@ describe('TimePickerComponent', () => {
     it('should handle input group click', () => {
         component.isOpen = false;
         component.disabled = false;
-        const event = { stopPropagation: function (): void {} };
+        const event = {
+            stopPropagation: function(): void {
+            }
+        };
         spyOn(event, 'stopPropagation').and.callThrough();
         component._inputGroupClicked(<any>event);
         expect(event.stopPropagation).toHaveBeenCalled();

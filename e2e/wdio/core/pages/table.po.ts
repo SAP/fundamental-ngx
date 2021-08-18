@@ -23,7 +23,9 @@ export class TablePo extends CoreBaseComponentPo {
     tableRow = ' .fd-table__body .fd-table__row';
     tableCell = ' .fd-table__cell';
     markAllCheckboxes = ' .fd-table__header fd-checkbox';
+    markAllCheckboxesFF = ' .fd-table__header fd-checkbox label';
     clickableTableRow = ' .fd-table__row--activable';
+    clickableTableRowFF = ' .fd-table__row--activable .fd-table__cell:nth-of-type(2)';
     menuItem = '.fd-menu__item';
     paginationLink = '.fd-pagination__link.ng-star-inserted';
     tableResult = '.fd-pagination__total';

@@ -2,7 +2,7 @@ import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { ButtonComponent } from './button.component';
+import { ButtonComponent, ButtonModule } from '@fundamental-ngx/core/button';
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
 
 @Component({
@@ -18,7 +18,8 @@ describe('ButtonComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ButtonComponent, TestComponent],
+            imports: [ButtonModule],
+            declarations: [ TestComponent],
             providers: [ContentDensityService]
         });
     }));
@@ -78,7 +79,8 @@ describe('ButtonComponent – Disabled', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ButtonComponent, DisabledTestComponent, AriaDisabledTestComponent]
+            imports: [ButtonModule],
+            declarations: [DisabledTestComponent, AriaDisabledTestComponent]
         });
     }));
 

@@ -1,7 +1,7 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DialogModule } from '@fundamental-ngx/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { TableP13DialogComponent } from './table-p13-dialog.component';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { TableP13DialogComponent } from '@fundamental-ngx/platform';
 
 describe('TableP13DialogComponent', () => {
     let component: TableP13DialogComponent;

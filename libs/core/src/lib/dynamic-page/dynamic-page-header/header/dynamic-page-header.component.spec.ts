@@ -1,12 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { ButtonModule } from '../../../button/button.module';
-import { BreadcrumbModule } from '../../../breadcrumb/breadcrumb.module';
-import { ToolbarModule } from '../../../toolbar/toolbar.module';
-import { DynamicPageModule } from '../../dynamic-page.module';
-import { DynamicPageService } from '../../dynamic-page.service';
-import { ActionSquashBreakpointPx, DynamicPageHeaderComponent } from './dynamic-page-header.component';
+
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import {
+    ActionSquashBreakpointPx,
+    DynamicPageHeaderComponent,
+    DynamicPageModule,
+    DynamicPageService
+} from '@fundamental-ngx/core/dynamic-page';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 
 @Component({
     template: `
@@ -19,11 +23,9 @@ import { ActionSquashBreakpointPx, DynamicPageHeaderComponent } from './dynamic-
                     <a fd-breadcrumb-link [attr.href]="'#'">Shoes</a>
                 </fd-breadcrumb-item>
             </fd-breadcrumb>
-            
+
             <fd-dynamic-page-global-actions></fd-dynamic-page-global-actions>
             <fd-dynamic-page-title-content></fd-dynamic-page-title-content>
-
-            <fd-dynamic-page-key-info></fd-dynamic-page-key-info>
         </fd-dynamic-page-header>`,
     providers: [
         DynamicPageService

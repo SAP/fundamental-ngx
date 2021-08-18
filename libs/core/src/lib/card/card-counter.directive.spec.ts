@@ -2,9 +2,9 @@ import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { ObjectStatus } from '../object-status/object-status.component';
+import { CardCounterDirective } from '@fundamental-ngx/core/card';
+import { ObjectStatus } from '@fundamental-ngx/core/object-status';
 
-import { CardCounterDirective } from './card-counter.directive';
 import { CLASS_NAME } from './constants';
 
 @Component({
@@ -37,26 +37,26 @@ describe('CardCounterComponent', () => {
     });
 
     it('should add className to host', () => {
-        expect(debugElement.classes[CLASS_NAME.cardCounter]).toBeTrue();
+        expect(debugElement.nativeElement.className.includes(CLASS_NAME.cardCounter)).toBeTrue();
     });
 
     describe('object status', () => {
         it('should add className to host', () => {
-            expect(debugElement.classes['fd-object-status']).toBeTrue();
+            expect(debugElement.nativeElement.className.includes('fd-object-status')).toBeTrue();
         });
 
         it('should add corresponding status modifier', () => {
             fixture.componentInstance.status = 'positive';
             fixture.detectChanges();
-            expect(debugElement.classes['fd-object-status--positive']).toBeTrue();
+            expect(debugElement.nativeElement.className.includes('fd-object-status--positive')).toBeTrue();
 
             fixture.componentInstance.status = 'negative';
             fixture.detectChanges();
-            expect(debugElement.classes['fd-object-status--negative']).toBeTrue();
+            expect(debugElement.nativeElement.className.includes('fd-object-status--negative')).toBeTrue();
 
             fixture.componentInstance.status = 'informative';
             fixture.detectChanges();
-            expect(debugElement.classes['fd-object-status--informative']).toBeTrue();
+            expect(debugElement.nativeElement.className.includes('fd-object-status--informative')).toBeTrue();
         });
     });
 });

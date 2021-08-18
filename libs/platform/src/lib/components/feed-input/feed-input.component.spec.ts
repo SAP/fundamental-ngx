@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectionStrategy, DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+
 import { AvatarModule, FormControlModule } from '@fundamental-ngx/core';
 
 import { FeedInputComponent } from './feed-input.component';

@@ -1,16 +1,15 @@
-import { waitForAsync, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
-import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '../datetime';
-import { DatePickerComponent } from './date-picker.component';
-import { PopoverModule } from '../popover/popover.module';
-import { IconModule } from '../icon/icon.module';
-import { CalendarModule } from '../calendar/calendar.module';
-import { ButtonModule } from '../button/button.module';
-import { InputGroupModule } from '../input-group/input-group.module';
-import { DateRange } from '../calendar/models/date-range';
-import { DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { FormMessageModule } from '@fundamental-ngx/core';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CalendarModule, DateRange } from '@fundamental-ngx/core/calendar';
+import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';
+import { DatetimeAdapter, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
 
 describe('DatePickerComponent', () => {
     let component: DatePickerComponent<FdDate>;
@@ -28,7 +27,8 @@ describe('DatePickerComponent', () => {
                     FormsModule,
                     IconModule,
                     InputGroupModule,
-                    ButtonModule
+                    ButtonModule,
+                    FormMessageModule
                 ],
                 providers: [ContentDensityService]
             }).compileComponents();
@@ -77,7 +77,7 @@ describe('DatePickerComponent', () => {
         expect(component.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 
-    it('Should handle single date change and update input', () => {
+    it('should handle single date change and update input', () => {
         spyOn(component, 'onChange');
         spyOn(component.selectedDateChange, 'emit');
         const date = adapter.today();
@@ -89,7 +89,7 @@ describe('DatePickerComponent', () => {
         expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
     });
 
-    it('Should handle range date change and update input', () => {
+    it('should handle range date change and update input', () => {
         spyOn(component, 'onChange');
         spyOn(component.selectedRangeDateChange, 'emit');
         const dateStart = adapter.today();
@@ -103,7 +103,7 @@ describe('DatePickerComponent', () => {
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: dateStart, end: dateLast });
     });
 
-    it('Should handle correct write value for single mode', () => {
+    it('should handle correct write value for single mode', () => {
         const date = adapter.today();
         const dateStr = (<any>component)._formatDate(date);
         component.writeValue(date);
@@ -111,13 +111,13 @@ describe('DatePickerComponent', () => {
         expect(component._inputFieldDate).toBe(dateStr);
     });
 
-    it('Should handle null write value for single mode', () => {
+    it('should handle null write value for single mode', () => {
         component.writeValue(null);
         expect(component.selectedDate).toBeUndefined();
         expect(component._inputFieldDate).toBe('');
     });
 
-    it('Should handle correct write value for range mode', () => {
+    it('should handle correct write value for range mode', () => {
         component.type = 'range';
         const dateStart = adapter.today();
         const dateEnd = adapter.addCalendarDays(dateStart, 10);
@@ -125,7 +125,7 @@ describe('DatePickerComponent', () => {
         expect(component.selectedRangeDate).toEqual({ start: dateStart, end: dateEnd });
     });
 
-    it('Should handle null write value for range mode', () => {
+    it('should handle null write value for range mode', () => {
         component.type = 'range';
         const dateStart = null;
         const dateEnd = null;
@@ -134,7 +134,7 @@ describe('DatePickerComponent', () => {
         expect(component._inputFieldDate).toBe('');
     });
 
-    it('Should register invalid string date and not call event for single mode', () => {
+    it('should register invalid string date and not call event for single mode', () => {
         spyOn(component.selectedDateChange, 'emit');
         component.type = 'single';
         component.dateStringUpdate('hello');
@@ -144,7 +144,7 @@ describe('DatePickerComponent', () => {
         expect(component.isModelValid()).toBe(false);
     });
 
-    it('Should register invalid string date and not call event for range mode', () => {
+    it('should register invalid string date and not call event for range mode', () => {
         spyOn(component.selectedRangeDateChange, 'emit');
         component.type = 'range';
         component.dateStringUpdate('start - end');
@@ -155,7 +155,7 @@ describe('DatePickerComponent', () => {
         expect(component.isModelValid()).toBe(false);
     });
 
-    it('Should handle valid reversed range string date', () => {
+    it('should handle valid reversed range string date', () => {
         spyOn(component.selectedRangeDateChange, 'emit');
         spyOn(component, 'onChange');
         const date1 = new FdDate(2011, 10, 10);
@@ -182,7 +182,7 @@ describe('DatePickerComponent', () => {
         expect(component.onChange).toHaveBeenCalledWith({ start: date2, end: date1 });
     });
 
-    it('Should handle single date blocked by disable function and set invalid', () => {
+    it('should handle single date blocked by disable function and set invalid', () => {
         spyOn(component.selectedDateChange, 'emit');
         spyOn(component, 'onChange');
         component.disableFunction = (_: FdDate) => true;
@@ -199,7 +199,7 @@ describe('DatePickerComponent', () => {
         expect(component.onChange).toHaveBeenCalledWith(date);
     });
 
-    it('Should handle both range dates blocked by disable function and set invalid', () => {
+    it('should handle both range dates blocked by disable function and set invalid', () => {
         spyOn(component.selectedRangeDateChange, 'emit');
         spyOn(component, 'onChange');
         component.type = 'range';
@@ -229,7 +229,7 @@ describe('DatePickerComponent', () => {
         expect(component.onChange).toHaveBeenCalledWith(rangeDateInvalidObject);
     });
 
-    it('Should handle end range date blocked by disable function and set invalid', () => {
+    it('should handle end range date blocked by disable function and set invalid', () => {
         spyOn(component.selectedRangeDateChange, 'emit');
         spyOn(component, 'onChange');
         component.type = 'range';

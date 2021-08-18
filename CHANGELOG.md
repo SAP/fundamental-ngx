@@ -1,4 +1,13 @@
 
+### [0.31.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.5...v0.31.1-rc.6) (2021-08-17)
+
+### [0.31.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.4...v0.31.1-rc.5) (2021-08-17)
+
+
+### Bug Fixes
+
+* **core,platform:** fix a11y for Panel component ([#6259](https://github.com/SAP/fundamental-ngx/issues/6259)) ([200f478](https://github.com/SAP/fundamental-ngx/commit/200f4786dc73b32e7465eb2cecad43a71ef1f9b8))
+
 ### [0.31.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.3...v0.31.1-rc.4) (2021-08-17)
 
 ### [0.31.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.2...v0.31.1-rc.3) (2021-08-16)

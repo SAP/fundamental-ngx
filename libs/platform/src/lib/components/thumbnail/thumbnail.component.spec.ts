@@ -1,10 +1,9 @@
-import { Component } from '@angular/core'
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { PlatformThumbnailModule } from './thumbnail.module';
-import { Media } from './thumbnail.interfaces';
-import { ThumbnailComponent } from './thumbnail.component';
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { Media, PlatformThumbnailModule } from '@fundamental-ngx/platform';
 
 @Component({
     template: `<fdp-thumbnail [mediaList]="mediaList"></fdp-thumbnail>`
@@ -27,7 +26,8 @@ describe('DefaultThumbnailComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformThumbnailModule],
-            declarations: [ThumbnailComponent, DefaultThumbnailTestComponent]
+            declarations: [DefaultThumbnailTestComponent],
+            providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
         }).compileComponents();
     }));
 
@@ -79,7 +79,8 @@ describe('HorizontalThumbnailComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformThumbnailModule],
-            declarations: [ThumbnailComponent, HorizontalThumbnailTestComponent]
+            declarations: [HorizontalThumbnailTestComponent],
+            providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
         }).compileComponents();
     }));
 
@@ -116,14 +117,14 @@ class ImageThumbnailTestComponent {
 }
 
 describe('ImageThumbnailComponent', () => {
-
     let component: ImageThumbnailTestComponent;
     let fixture: ComponentFixture<ImageThumbnailTestComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformThumbnailModule],
-            declarations: [ThumbnailComponent, ImageThumbnailTestComponent]
+            declarations: [ImageThumbnailTestComponent],
+            providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
         }).compileComponents();
     }));
 
@@ -138,12 +139,9 @@ describe('ImageThumbnailComponent', () => {
     });
 
     it('check for loading the Image media', () => {
-
         const videoElement = fixture.debugElement.query(By.css('video'));
         const imageElement = fixture.debugElement.query(By.css('img'));
         expect(imageElement).toBeTruthy();
         expect(videoElement).toBeFalsy();
-
     });
-
 });

@@ -1,7 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import { NestedListExpandIconComponent, NestedListTitleDirective, NestedListIconDirective } from './nested-list-directives';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { NestedItemService } from './nested-item/nested-item.service';
+
+import {
+    NestedItemService,
+    NestedListExpandIconComponent,
+    NestedListIconDirective,
+    NestedListModule,
+    NestedListTitleDirective
+} from '@fundamental-ngx/core/nested-list';
 
 @Component({
     template: `
@@ -30,12 +36,8 @@ describe('NestedListDirectives', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                NestedListExpandIconComponent,
-                NestedListIconDirective,
-                NestedListTitleDirective,
-                TestNestedContainerComponent
-            ],
+            imports: [NestedListModule],
+            declarations: [TestNestedContainerComponent],
             providers: [NestedItemService]
         }).compileComponents();
     }));

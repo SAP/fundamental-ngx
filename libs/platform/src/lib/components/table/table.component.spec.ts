@@ -1,13 +1,11 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Observable, of } from 'rxjs';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Component, DebugElement, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Observable, of } from 'rxjs';
 
-import { ListModule, PopoverModule, RtlService, TableModule, CheckboxModule } from '@fundamental-ngx/core';
-
+import { RtlService } from '@fundamental-ngx/core';
 import { PlatformTableModule } from './table.module';
 import { TableComponent } from './table.component';
 import { FILTER_STRING_STRATEGY, SelectionMode, SortDirection, TableRowType } from './enums';
@@ -16,7 +14,6 @@ import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilt
 import { TableService } from './table.service';
 import { PlatformButtonModule } from '../button/public_api';
 import { TableRowSelectionChangeEvent, TableRowToggleOpenStateEvent } from './models';
-import { TableScrollerDirective, TableScrollableDirective} from './directives';
 
 interface SourceItem {
     id: string;
@@ -62,17 +59,7 @@ describe('TableComponent internal', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [
-                            FormsModule,
-                            ReactiveFormsModule,
-                            TableModule,
-                            CheckboxModule,
-                            PopoverModule,
-                            ListModule,
-                            RouterModule,
-                            RouterTestingModule
-                         ],
-                declarations: [TableComponent, TableScrollerDirective, TableScrollableDirective],
+                imports: [PlatformTableModule],
                 providers: [RtlService]
             }).compileComponents();
         })

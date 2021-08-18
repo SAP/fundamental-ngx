@@ -1,22 +1,25 @@
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+
 import {
     ButtonModule,
     CalendarModule,
     DatetimePickerModule,
     FdDate,
+    FdDatetimeModule,
     FormModule,
     IconModule,
     InputGroupModule,
-    PopoverModule,
-    DatetimePickerComponent,
-    FdDatetimeModule
+    PopoverModule
 } from '@fundamental-ngx/core';
-import { FormFieldComponent, FdpFormGroupModule } from '@fundamental-ngx/platform';
-
-import { PlatformDatetimePickerComponent } from './datetime-picker.component';
+import {
+    FdpFormGroupModule,
+    FormFieldComponent,
+    PlatformDatetimePickerComponent,
+    PlatformDatetimePickerModule
+} from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-test-datetime-picker',
@@ -80,8 +83,9 @@ describe('PlatformDatetimePickerComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [PlatformDatetimePickerComponent, TestDatetimePickerComponent, DatetimePickerComponent],
+                declarations: [TestDatetimePickerComponent],
                 imports: [
+                    PlatformDatetimePickerModule,
                     FdDatetimeModule,
                     CalendarModule,
                     DatetimePickerModule,
