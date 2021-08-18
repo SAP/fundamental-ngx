@@ -317,6 +317,19 @@ describe('FdDatetimeAdapter', () => {
         expect(adapter.parse(timestamp)).toEqual(new FdDate(2017, 1, 1));
     });
 
+    it('should return invalid date', () => {
+        const dateString = 'asdsas 2021';
+        const d = adapter.parse(dateString);
+
+        expect(d.isDateValid()).toBeFalse();
+    });
+
+    it('should parse from string started with month', () => {
+        const dateString = 'Jan 2021';
+
+        expect(adapter.parse(dateString)).toEqual(new FdDate(2021, 1, 1));
+    });
+
     it('should parse Date', () => {
         const date = new FdDate(2017, 1, 1);
         expect(adapter.parse(date)).toEqual(date);

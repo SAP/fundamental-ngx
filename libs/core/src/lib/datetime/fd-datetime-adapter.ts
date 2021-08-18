@@ -220,7 +220,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
          */
         let date = new Date(Date.parse(value));
 
-        if (this._startsInvalidWithString(value)) {
+        if (typeof value === 'string' && this._startsWithInvalidString(value)) {
             // should be Invalid Date if value starts with invalid string
             date = new Date(NaN);
         }
@@ -455,7 +455,7 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         return new Date(Date.parse(dateTimeString));
     }
 
-    private _startsInvalidWithString(value: string): boolean {
+    private _startsWithInvalidString(value: string): boolean {
         let [start] = value.match(/^([^0-9]*)/);
         start = start.trim().toLowerCase();
 
