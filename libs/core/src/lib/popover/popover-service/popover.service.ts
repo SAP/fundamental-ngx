@@ -18,7 +18,7 @@ import {
 } from '@angular/cdk/overlay';
 import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
 
-import { from, merge, Observable, of, Subject } from 'rxjs';
+import {  merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, startWith, takeUntil, tap } from 'rxjs/operators';
 
 import {
@@ -76,9 +76,6 @@ export class PopoverService extends BasePopoverClass {
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    /** @hidden */
-    protected readonly _onClose$: Subject<void> = new Subject<void>();
-
     constructor(
         private _overlay: Overlay,
         private _renderer: Renderer2,
@@ -124,7 +121,6 @@ export class PopoverService extends BasePopoverClass {
             }
             this.isOpen = false;
             this._focusLastActiveElementBeforeOpen();
-            this._onClose$.next();
         }
     }
 
