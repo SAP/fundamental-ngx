@@ -18,8 +18,8 @@ import {
 } from '@angular/cdk/overlay';
 import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
 
-import {  merge, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, startWith, takeUntil, tap } from 'rxjs/operators';
+import { merge, Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
 
 import {
     GetDefaultPosition,
@@ -373,9 +373,9 @@ export class PopoverService extends BasePopoverClass {
 
     private _getPlacement(): ConnectedPosition[] {
         if (this._getDirection() === 'rtl') {
-            const placeArr = this.placement.split('-')[0];
+            const startPlaceStr = this.placement.split('-')[0];
 
-            if (placeArr === 'left' || placeArr === 'right') {
+            if (startPlaceStr === 'left' || startPlaceStr === 'right') {
                 const changedPlacement = PopoverFlippedRtlPlacement[this.placement];
 
                 return [PopoverPosition.getCdkPlacement(changedPlacement)];
