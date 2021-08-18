@@ -1,9 +1,8 @@
-import { Component, DebugElement, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { NotificationGroupListComponent } from './notification-group-list.component';
-import { NotificationGroupHeaderComponent } from '../notification-group-header/notification-group-header.component';
-import { NotificationModule } from '../notification.module';
+import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+
+import { NotificationGroupHeaderComponent, NotificationGroupListComponent, NotificationModule } from '@fundamental-ngx/core/notification';
+
 @Component({
     template: `
         <fd-notification-group-list>
@@ -18,18 +17,17 @@ class TestComponent {
     expanded = false;
 }
 
-describe('FeedInputComponent', () => {
+describe('NotificationGroupListComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
     let notificationGroupHeader;
 
-    beforeEach(async () => {
-        await TestBed.configureTestingModule({
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
             imports: [NotificationModule],
-            declarations: [NotificationGroupListComponent, TestComponent, NotificationGroupHeaderComponent]
-        })
-            .compileComponents();
-    });
+            declarations: [TestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -49,5 +47,5 @@ describe('FeedInputComponent', () => {
         fixture.detectChanges();
 
         expect(notificationGroupHeader.expandedChange.emit).toHaveBeenCalledWith(event.target.value)
-    });  
+    });
 });

@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 
-import { CardContentComponent } from './card-content.component';
+import { CardContentComponent } from '@fundamental-ngx/core/card';
+
 import { CLASS_NAME } from './constants';
 
 describe('CardContentComponent', () => {
@@ -26,6 +27,6 @@ describe('CardContentComponent', () => {
     });
 
     it('should add className to host', () => {
-        expect(fixture.debugElement.classes[CLASS_NAME.cardContent]).toBeTrue();
+        expect(fixture.debugElement.nativeElement.className.includes(CLASS_NAME.cardContent)).toBeTrue();
     });
 });

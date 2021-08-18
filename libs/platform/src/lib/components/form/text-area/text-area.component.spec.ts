@@ -1,14 +1,15 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { TextAreaComponent } from './text-area.component';
-import { FormGroup, ReactiveFormsModule, ValidatorFn, Validators, FormControl } from '@angular/forms';
-import { Component, ViewChild, ElementRef } from '@angular/core';
-import { FormFieldComponent, FdpFormGroupModule } from '@fundamental-ngx/platform';
-import { PlatformTextAreaModule } from './text-area.module';
-import { By } from '@angular/platform-browser';
-import { createKeyboardEvent } from '../../../testing/event-objects';
 import { DELETE } from '@angular/cdk/keycodes';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import '@angular/localize/init';
+import { By } from '@angular/platform-browser';
+
+import { FdpFormGroupModule, FormFieldComponent } from '@fundamental-ngx/platform';
+
+import { createKeyboardEvent } from '../../../testing/event-objects';
+import { TextAreaComponent } from './text-area.component';
+import { PlatformTextAreaModule } from './text-area.module';
 
 @Component({
     selector: 'fdp-test-textarea',
@@ -252,8 +253,8 @@ describe('Advanced Textarea', () => {
 
         expect(textareaComponent.textareaElement.nativeElement.style.height).toBe('57px');
     });
-    // TODO: Unskip after fix
-    xit('should handle grow indefinitely if max height is not specified', async () => {
+
+    it('should handle grow indefinitely if max height is not specified', async () => {
         const textareaComponent = host.textareaComponent;
         textareaComponent.contentDensity = 'cozy';
         // textareaComponent.growing = true;
@@ -308,6 +309,7 @@ describe('Advanced Textarea', () => {
 
         expect(textareaComponent.textareaElement.nativeElement.style.height).toBe('80px'); // without border
     });
+
     it('should call autogrow method', async () => {
         const textareaElement = host.textareaComponent;
         spyOn(textareaElement, 'autoGrowTextArea');

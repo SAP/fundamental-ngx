@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ButtonComponent } from './button.component';
+
 import { ButtonModule } from '@fundamental-ngx/core';
+
+import { ButtonComponent } from './button.component';
 
 describe('ButtonComponent', () => {
     let component: ButtonComponent;
@@ -28,8 +30,8 @@ describe('ButtonComponent', () => {
         component.onBtnClick({});
         expect(component.onBtnClick).toHaveBeenCalled();
     });
-    // TODO: Unskip after fix
-    xit('should not select a button', () => {
+
+    it('should not select a button', () => {
         const element = fixture.debugElement.nativeElement.querySelector('button');
         component.ariaSelected = false;
         fixture.detectChanges();
@@ -42,12 +44,11 @@ describe('ButtonComponent', () => {
         fixture.detectChanges();
         expect(element.disabled).toBeTruthy();
     });
-    // TODO: Unskip after fix
-    xit('should have aria disabled', () => {
+
+    it('should have aria disabled', () => {
         const element = fixture.debugElement.nativeElement.querySelector('button');
         component.ariaDisabled = true;
         fixture.detectChanges();
         expect(element.ariaDisabled).toBeTruthy();
     });
-
 });

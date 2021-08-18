@@ -1,8 +1,10 @@
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ActionButtonGroupComponent } from './action-button-group.component';
-import { Component, ViewChild } from '@angular/core';
+
 import { ActionBarModule } from '@fundamental-ngx/core';
+import { ActionButtonGroupComponent } from '@fundamental-ngx/platform';
+
 @Component({
     selector: 'fdp-action-button-group-component',
     template: `
@@ -31,7 +33,6 @@ describe('ActionButtonGroupComponent', () => {
             declarations: [ActionButtonGroupComponent, ActionButtonGroupTestComponent],
             imports: [ActionBarModule]
         }).compileComponents();
-
     }));
 
     beforeEach(() => {
@@ -48,7 +49,7 @@ describe('ActionButtonGroupComponent', () => {
     it('Check for action-button-group content', () => {
         fixture.detectChanges();
 
-        const actionbuttons = fixture.debugElement.queryAll(By.css('.fd-action-bar__actions'));
-        expect(actionbuttons.length).toBe(1);
+        const actionButtons = fixture.debugElement.queryAll(By.css('.fd-action-bar__actions'));
+        expect(actionButtons.length).toBe(1);
     })
 });

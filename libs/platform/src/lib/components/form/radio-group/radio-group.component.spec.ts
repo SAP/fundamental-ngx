@@ -1,13 +1,13 @@
+import { Component, QueryList, ViewChildren } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, ViewChildren, QueryList } from '@angular/core';
-import { FormControl, ReactiveFormsModule, FormGroup, FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { RadioButtonComponent } from './radio/radio.component';
+
+import { FormModule } from '@fundamental-ngx/core/form';
+import { FdpFormGroupModule, SelectItem } from '@fundamental-ngx/platform';
+
 import { RadioGroupComponent } from './radio-group.component';
-import { FormModule } from '@fundamental-ngx/core';
-import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { PlatformRadioGroupModule } from './radio-group.module';
-import { SelectItem } from '../../../domain/data-model';
 
 @Component({
     selector: 'fdp-test-reative-fdp-form-group',
@@ -98,7 +98,7 @@ describe('Radio Group Test with Reactive fdp-form-group', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule],
-            declarations: [TestRadioGroupReactiveFdpGroup, RadioGroupComponent, RadioButtonComponent]
+            declarations: [TestRadioGroupReactiveFdpGroup]
         }).compileComponents();
     }));
 
@@ -334,7 +334,7 @@ describe('Radio Group Test with Template Driven fdp-form-group', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule],
-            declarations: [TestRadioGroupTemplateDrivenFdpGroup, RadioGroupComponent, RadioButtonComponent]
+            declarations: [TestRadioGroupTemplateDrivenFdpGroup]
         }).compileComponents();
     }));
 

@@ -2,15 +2,19 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { BreadcrumbModule, ToolbarModule, ButtonModule } from '@fundamental-ngx/core';
+
+import { BreadcrumbModule, ButtonModule, ToolbarModule } from '@fundamental-ngx/core';
+import {
+    DynamicPageGlobalActionsComponent,
+    DynamicPageKeyInfoComponent,
+    DynamicPageLayoutActionsComponent,
+    DynamicPageService,
+    DynamicPageTitleComponent
+} from '@fundamental-ngx/platform';
+
 import { CLASS_NAME } from '../../constants';
 import { PlatformDynamicPageModule } from '../../dynamic-page.module';
-import { DynamicPageService } from '../../dynamic-page.service';
-import { DynamicPageGlobalActionsComponent } from '../actions/global-actions/dynamic-page-global-actions.component';
-import { DynamicPageLayoutActionsComponent } from '../actions/layout-actions/dynamic-page-layout-actions.component';
-import { DynamicPageKeyInfoComponent } from '../key-info/dynamic-page-key-info.component';
 import { DynamicPageTitleHostComponent } from './dynamic-page-title-host.component';
-import { DynamicPageTitleComponent } from './dynamic-page-title.component';
 
 @Component({
     template: `
@@ -42,7 +46,7 @@ import { DynamicPageTitleComponent } from './dynamic-page-title.component';
             <fdp-dynamic-page-layout-actions>
                 <!-- layout actions -->
                 <fd-toolbar fdType="transparent" [clearBorder]="true">
-                    <button fd-button fdType="transparent" aria-label="Resize" (click)="closePage($event)">
+                    <button fd-button fdType="transparent" aria-label="Resize">
                         <i class="sap-icon--resize"></i>
                     </button>
                 </fd-toolbar>
@@ -73,7 +77,6 @@ class TestComponent implements AfterViewInit {
         this.cd.detectChanges();
     }
 }
-
 describe('DynamicPageTitleComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
     let pageTitleComponent: DynamicPageTitleComponent;
@@ -106,11 +109,11 @@ describe('DynamicPageTitleComponent', () => {
     });
 
     it('should add correct classes to host', () => {
-        expect(titleHostComponentDebugElement.classes[CLASS_NAME.dynamicPageTitleArea]).toBeTruthy();
+        expect(titleHostComponentDebugElement.nativeElement.className.includes(CLASS_NAME.dynamicPageTitleArea)).toBeTruthy();
     });
 
     it('should add tabindex to host', async () => {
-        expect(titleHostComponentDebugElement.attributes['tabindex']).toEqual('0');
+        expect(+titleHostComponentDebugElement.attributes['tabindex']).toEqual(0);
     });
 
     describe('title text', () => {
@@ -190,17 +193,17 @@ describe('DynamicPageTitleComponent', () => {
                 By.css('.' + CLASS_NAME.dynamicPageActionsContainer)
             );
             expect(toolbarContainer).toBeTruthy();
-            expect(toolbarContainer.classes[CLASS_NAME.dynamicPageActionsContainerMedium]).toBeTruthy();
+            expect(toolbarContainer.nativeElement.className.includes(CLASS_NAME.dynamicPageActionsContainerMedium)).toBeTruthy();
 
             const globalActionsContainer = titleHostComponentDebugElement.query(
                 By.css('.' + CLASS_NAME.dynamicPageGlobalActions)
             );
-            expect(globalActionsContainer.classes[CLASS_NAME.dynamicPageGlobalActionsToolbarMedium]).toBeTruthy();
+            expect(globalActionsContainer.nativeElement.className.includes(CLASS_NAME.dynamicPageGlobalActionsToolbarMedium)).toBeTruthy();
 
             const layoutActionsContainer = titleHostComponentDebugElement.query(
                 By.css('.' + CLASS_NAME.dynamicPageLayoutActions)
             );
-            expect(layoutActionsContainer.classes[CLASS_NAME.dynamicPageLayoutActionsToolbarMedium]).toBeTruthy();
+            expect(layoutActionsContainer.nativeElement.className.includes(CLASS_NAME.dynamicPageLayoutActionsToolbarMedium)).toBeTruthy();
         });
     });
 });

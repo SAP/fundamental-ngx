@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
 import { Component, ViewChild } from '@angular/core';
-import { FormsModule, 
-         ReactiveFormsModule, 
-         FormGroup, 
+import { FormsModule,
+         ReactiveFormsModule,
+         FormGroup,
          FormControl } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -79,7 +79,7 @@ describe('Select Component default values', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, FormsModule, ReactiveFormsModule, CommonModule, PlatformSelectModule],
-            declarations: [SelectStandardComponent, SelectComponent],
+            declarations: [SelectStandardComponent],
             providers: [
                 DynamicComponentService,
                 MenuKeyboardService,
@@ -118,7 +118,6 @@ describe('Select Component default values', () => {
     });
 
     it('should select the options with label', async () => {
-        
         fixture.detectChanges();
         const fdpOptionElems = select._optionItems;
         expect(fdpOptionElems[0].label).toEqual('Apple');
@@ -188,7 +187,7 @@ describe('Select component Reactive Form Test', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, PlatformSelectModule, FormsModule, ReactiveFormsModule],
-            declarations: [TestReactiveSelectComponnet, SelectComponent]
+            declarations: [TestReactiveSelectComponnet]
         }).compileComponents();
     }));
 

@@ -4,14 +4,12 @@ import { NotificationModule } from '../notification.module';
 
 @Component({
     template: `
-        <fd-notification-body #notificationBodyRef [hasMessage]="hasMessage"></fd-notification-body>
+        <fd-notification-body #notificationBodyRef></fd-notification-body>
     `
 })
 class TestComponent {
     @ViewChild('notificationBodyRef', { read: ElementRef })
     notificationBodyRef: ElementRef;
-
-    hasMessage = false;
 }
 
 describe('NotificationBodyComponent', () => {

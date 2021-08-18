@@ -1,9 +1,12 @@
-import { By } from '@angular/platform-browser';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RadioButtonComponent } from './radio.component';
-import { RadioModule, FormModule, FormGroupComponent } from '@fundamental-ngx/core';
-import { FormsModule } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+
+import { FormModule } from '@fundamental-ngx/core/form';
+import { RadioModule } from '@fundamental-ngx/core/radio';
+
+import { RadioButtonComponent } from './radio.component';
 
 @Component({
     template: `
@@ -51,7 +54,7 @@ describe('RadioButtonComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [RadioModule, FormModule, FormsModule],
-            declarations: [RadioButtonComponent, FormGroupComponent, TestRadioButtonComponent]
+            declarations: [RadioButtonComponent, TestRadioButtonComponent]
         }).compileComponents();
     }));
 

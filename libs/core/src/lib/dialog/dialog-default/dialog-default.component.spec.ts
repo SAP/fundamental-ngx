@@ -1,29 +1,19 @@
-import { DialogDefaultComponent } from './dialog-default.component';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ButtonModule } from '../../button/button.module';
-import { DialogDecisiveButtonDirective } from '../directives/dialog-decisive-button.directive';
-import { DialogDefaultContent } from '../utils/dialog-default-content.class';
-import { DialogHeaderComponent } from '../dialog-header/dialog-header.component';
-import { DialogCloseButtonComponent } from '../dialog-close-button/dialog-close-button.component';
-import { DialogConfig } from '../utils/dialog-config.class';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { DialogConfig, DialogDefaultComponent, DialogDefaultContent, DialogModule, DialogRef } from '@fundamental-ngx/core/dialog';
 
 describe('DefaultDialogComponent', () => {
     let component: DialogDefaultComponent;
     let fixture: ComponentFixture<DialogDefaultComponent>;
     let object: DialogDefaultContent;
 
-    beforeEach(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [ButtonModule],
-            declarations: [
-                DialogDefaultComponent,
-                DialogCloseButtonComponent,
-                DialogDecisiveButtonDirective,
-                DialogHeaderComponent
-            ],
-            providers: [DialogConfig]
+            imports: [DialogModule, BrowserAnimationsModule],
+            providers: [DialogConfig, DialogRef]
         }).compileComponents();
-    });
+    }));
 
     beforeEach(() => {
         object = {

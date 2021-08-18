@@ -1,11 +1,10 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CarouselComponent, CarouselModule } from '@fundamental-ngx/core/carousel';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { CarouselModule } from '@fundamental-ngx/core/carousel';
-import { CarouselComponent } from './carousel.component';
-import { CarouselItemComponent } from './carousel-item/carousel-item.component';
-import { ButtonModule } from '../button/button.module';
 
 @Component({
     selector: 'fd-test-carousel',
@@ -128,7 +127,7 @@ describe('CarouselComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [CarouselComponent, CarouselItemComponent, TestCarouselComponent],
+            declarations: [TestCarouselComponent],
             imports: [CarouselModule, ButtonModule]
         }).compileComponents();
     }));
@@ -297,7 +296,7 @@ describe('CarouselComponent Multiple Active Item', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [CarouselComponent, CarouselItemComponent, TestCarouselMultipleActiveItemComponent],
+            declarations: [TestCarouselMultipleActiveItemComponent],
             imports: [CarouselModule]
         }).compileComponents();
     }));
@@ -509,7 +508,7 @@ describe('CarouselComponent looping navigation', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [CarouselComponent, CarouselItemComponent, TestCarouselLoopingNavigationComponent],
+            declarations: [TestCarouselLoopingNavigationComponent],
             imports: [CarouselModule]
         }).compileComponents();
     }));

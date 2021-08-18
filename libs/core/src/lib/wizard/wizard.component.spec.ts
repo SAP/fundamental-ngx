@@ -1,8 +1,7 @@
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
-import { WizardComponent } from './wizard.component';
-import { WizardModule } from './wizard.module';
-import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
+import { WizardComponent, WizardModule } from '@fundamental-ngx/core/wizard';
 
 @Component({
     template: `
@@ -89,65 +88,69 @@ describe('WizardComponent', () => {
         fixture.detectChanges();
     });
 
-    async function wait(componentFixture: ComponentFixture<any>): Promise<any> {
-        componentFixture.detectChanges();
-        await componentFixture.whenStable();
-    }
-
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-    // TODO: Unskip after fix
-    xit('should handle resize - screen getting smaller', () => {
+
+    it('should handle resize - screen getting smaller', fakeAsync(() => {
         component.resizeHandler();
+        tick(10);
 
         expect(component.steps.first.getClassList().contains('fd-wizard__step--no-label')).toBeTruthy();
         expect(component.steps.first.getClassList().contains('fd-wizard__step--stacked')).toBeTruthy();
         expect(component.steps.toArray()[1].getClassList().contains('fd-wizard__step--stacked-top')).toBeTruthy();
-    });
+    }));
 
-    it('should handle resize - screen getting bigger', async () => {
+    it('should handle resize - screen getting bigger', fakeAsync(() => {
         spyOn(element.nativeElement, 'getBoundingClientRect').and.returnValue({ width: 1 });
+
         component.resizeHandler();
+        tick(10);
+
         element.nativeElement.getBoundingClientRect.and.returnValue({ width: 2 });
         step3.nativeElement.style.width = '200px';
-        component.resizeHandler();
 
-        await new Promise(resolve => setTimeout(() => resolve(null), 20));
+        component.resizeHandler();
+        tick(10);
 
         expect(component.steps.first.getClassList().contains('fd-wizard__step--no-label')).toBeFalsy();
         expect(component.steps.first.getClassList().contains('fd-wizard__step--stacked')).toBeFalsy();
         expect(component.steps.toArray()[1].getClassList().contains('fd-wizard__step--stacked-top')).toBeFalsy();
-    });
+    }));
 
-    it('should setContentTemplates', async () => {
+    it('should setContentTemplates', fakeAsync(() => {
         component.ngAfterViewInit();
-
-        await wait(fixture);
+        tick(10);
 
         expect(component.steps.first._stepId).toBe(0);
         expect(component.steps.last._stepId).toBe(3);
         expect(component.steps.first.content.wizardContentId).toBe('0');
         expect(component.steps.first.visited).toBeTruthy();
         expect(component.steps.last._finalStep).toBeTruthy();
-    });
+    }));
 
     it('should handleStepOrStatusChanges', fakeAsync(() => {
         spyOn(component.wrapperContainer.nativeElement, 'scrollTo');
+
         component.ngAfterViewInit();
-        tick();
+        tick(10);
+
         component.steps.first.statusChange.emit();
-        tick(20);
+        tick(10);
 
         expect(component.wrapperContainer.nativeElement.scrollTo).toHaveBeenCalled();
     }));
 
-    it('should handleScrollSpyChange', async () => {
-        component.ngAfterViewInit();
-        await wait(fixture);
+    it('should handleScrollSpyChange', fakeAsync( () => {
         spyOnProperty(step3.nativeElement.children[0], 'id').and.returnValue('2');
+
+        component.ngAfterViewInit();
+        tick(10);
+
         component.scrollSpyChange(step3.nativeElement);
+        tick(10);
+
         expect(component.steps.first.status).toBe('completed');
         expect(component.steps.last.status).toBe('upcoming');
-    });
+    }));
 });
