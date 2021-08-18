@@ -23,7 +23,7 @@
             <fd-popover-body
                 [attr.aria-hidden]="!open"
                 [class.fd-popover__body--hidden]="!displayedValues || !displayedValues.length"
-                [class.fd-popover__popper--no-border-radius]="true">
+                class="fd-popover__popper--no-border-radius">
                 <ng-container *ngTemplateOutlet="list"></ng-container>
                 <ng-content></ng-content>
             </fd-popover-body>
