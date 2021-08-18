@@ -9,6 +9,21 @@ import { range, toIso8601 } from './fd-date.utils';
 
 const AM_DAY_PERIOD_DEFAULT = 'AM';
 const PM_DAY_PERIOD_DEFAULT = 'PM';
+const VALID_MONTH_MIN_LENGTH = 3;
+const VALID_MONTHS = [
+    'january',
+    'february',
+    'march',
+    'april',
+    'may',
+    'june',
+    'july',
+    'august',
+    'september',
+    'october',
+    'november',
+    'december',
+];
 
 /**
  * DatetimeAdapter implementation based on FdDate.
@@ -204,6 +219,12 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
          * so we ignore these parameters.
          */
         let date = new Date(Date.parse(value));
+
+        if (this._startsInvalidWithString(value)) {
+            // should be Invalid Date if value starts with invalid string
+            date = new Date(NaN);
+        }
+
         if (typeof value === 'number') {
             date = new Date(value);
         }
@@ -432,5 +453,13 @@ export class FdDatetimeAdapter extends DatetimeAdapter<FdDate> {
         const dateStr = this.format(this.now(), { year: 'numeric', month: 'numeric', day: 'numeric' });
         const dateTimeString = `${dateStr} ${timeStr}`;
         return new Date(Date.parse(dateTimeString));
+    }
+
+    private _startsInvalidWithString(value: string): boolean {
+        let [start] = value.match(/^([^0-9]*)/);
+        start = start.trim().toLowerCase();
+
+        return start !== ''
+            && (start.length < VALID_MONTH_MIN_LENGTH || !VALID_MONTHS.some(month => month.startsWith(start)));
     }
 }
