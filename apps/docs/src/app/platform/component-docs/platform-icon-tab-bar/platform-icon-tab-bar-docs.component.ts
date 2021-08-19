@@ -23,7 +23,26 @@ import * as iconTypeConfigs from '!raw-loader!./examples/config-for-examples/ico
 
 import * as textTypeConfigs from '!raw-loader!./examples/config-for-examples/text-type.config';
 
+// Duplicate types here, because import for pure files doesn't work for stackblitz  https://github.com/SAP/fundamental-ngx/issues/5351
+export type SemanticColor = 'negative' | 'critical' | 'positive' | 'informative';
 
+export interface TabConfig {
+    icon?: string;
+    label?: string;
+    color?: SemanticColor;
+    counter?: number;
+    active?: boolean;
+    badge?: boolean;
+    subItems?: TabConfig[];
+}
+
+export interface IconTabBarItem extends TabConfig {
+    index: number;
+    uId: string;
+    cssClasses: string[];
+    hidden?: boolean;
+    subItems?: IconTabBarItem[];
+}
 @Component({
     selector: 'fd-icon-tab-bar-docs',
     templateUrl: './platform-icon-tab-bar-docs.component.html',
