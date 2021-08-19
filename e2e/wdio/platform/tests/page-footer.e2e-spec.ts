@@ -5,40 +5,42 @@ import {
     isElementClickable,
     scrollIntoView,
 } from '../../driver/wdio';
+import {
+    footerTextArr
+} from '../fixtures/appData/page-footer-contents';
+import { checkElementTextValue } from '../../helper/assertion-helper';
 
-describe('PageFooter test suite:', function() {
-    const pagefooterPage = new PageFooterPo();
+describe('Page Footer test suite:', function() {
+    const pageFooterPage = new PageFooterPo();
     const {
-        pagefooterclicablelink, pagefootertext  } = pagefooterPage;
+        pageFooterClickableLink, pageFooterText  } = pageFooterPage;
 
     beforeAll(() => {
-        pagefooterPage.open();
+        pageFooterPage.open();
     }, 1);
     
-        it('verify clickable links ', () => {
-            const linksLength = getElementArrayLength(pagefooterclicablelink);
+        it('verify links are clickable', () => {
+            const linksLength = getElementArrayLength(pageFooterClickableLink);
             for (let i = 0; i < linksLength; i++) {
-                scrollIntoView(pagefooterclicablelink, i);
-                expect(isElementClickable(pagefooterclicablelink, i)).toBe(true, 'link with index ${i} not clickable');
+                scrollIntoView(pageFooterClickableLink, i);
+                expect(isElementClickable(pageFooterClickableLink, i)).toBe(true, 'link with index ${i} not clickable');
             }
         });
 
-        it('should check pagefooter text', () => {
-            expect(getText(pagefootertext,)).toEqual('1992-2021 @copyright all right reserved.', 'Text is not matching Index');
-            expect(getText(pagefootertext, 1)).toEqual('1992-2021 @copyright all right reserved.', 'Text is not matching Index1');
-            expect(getText(pagefootertext, 2)).toEqual('1992-2021 @copyright all right reserved.', 'Text is not matching Index2');
+        it('should check page footer text', () => {
+                checkElementTextValue(pageFooterText, footerTextArr);
         });
 
-    describe('Check visual regression basic', function() {
+    xdescribe('Check visual regression basic', function() {
 
         it('should check examples visual regression', () => {
-            pagefooterPage.saveExampleBaselineScreenshot();
-            expect(pagefooterPage.compareWithBaseline()).toBeLessThan(5);
+            pageFooterPage.saveExampleBaselineScreenshot();
+            expect(pageFooterPage.compareWithBaseline()).toBeLessThan(5);
         });
 
     describe('Check orientation', function() {
         it('Verify RTL and LTR orientation', () => {
-            pagefooterPage.checkRtlSwitch();
+            pageFooterPage.checkRtlSwitch();
             });
         });
     });
