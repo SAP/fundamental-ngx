@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.28.4](https://github.com/SAP/fundamental-ngx/compare/v0.28.3...v0.28.4) (2021-08-19)
+
+
+### Bug Fixes
+
+* **core:** fix when typing in combobox with objects ([bbbed9a](https://github.com/SAP/fundamental-ngx/commit/bbbed9aafd68331c2cb0e877d4e3150e238ad56e))
+
 ### [0.28.3](https://github.com/SAP/fundamental-ngx/compare/v0.28.2...v0.28.3) (2021-04-22)
 
 
