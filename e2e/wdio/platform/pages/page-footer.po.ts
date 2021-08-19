@@ -8,6 +8,7 @@ export class PageFooterPo extends BaseComponentPo {
     
     open(): void {
         super.open(this.url);
+        waitForPresent(this.title);
         waitForElDisplayed(this.root);
     }
 
