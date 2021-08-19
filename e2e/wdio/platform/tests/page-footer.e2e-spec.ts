@@ -22,7 +22,7 @@ describe('Page Footer test suite:', function() {
             const linksLength = getElementArrayLength(pageFooterClickableLink);
             for (let i = 0; i < linksLength; i++) {
                 scrollIntoView(pageFooterClickableLink, i);
-                expect(isElementClickable(pageFooterClickableLink, i)).toBe(true, "link with index ${i} not clickable");
+                expect(isElementClickable(pageFooterClickableLink, i)).toBe(true, `link with index ${i} not clickable`);
             }
         });
 
