@@ -134,7 +134,7 @@
         "fdp"
       ],
       "implicitDependencies": ["core"]
-    }, 
+    },
     "moment-adapter": {
       "tags": [
         "fd"
@@ -910,6 +910,18 @@
         "core-utils",
         "core-popover",
         "core-menu"
+      ]
+    },
+    "core-upload-collection": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-button",
+        "core-list",
+        "core-link",
+        "core-object-status",
+        "core-object-marker"
       ]
     }
   }

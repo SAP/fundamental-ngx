@@ -73,6 +73,7 @@ import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-mess
 import { MenuModule, MenuMobileModule } from '@fundamental-ngx/core/menu';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { ResizableCardLayoutModule } from '@fundamental-ngx/core/resizable-card-layout';
+import { UploadCollectionModule } from '@fundamental-ngx/core/upload-collection';
 
 import { PaginationModule } from '@fundamental-ngx/core/pagination';
 import { SelectMobileModule, SelectModule } from '@fundamental-ngx/core/select';
@@ -176,7 +177,8 @@ import { MessagePageModule } from '@fundamental-ngx/core/message-page';
         StatusIndicatorModule,
         GridListModule,
         ResizableCardLayoutModule,
-        MessagePageModule
+        MessagePageModule,
+        UploadCollectionModule
     ],
     providers: []
 })

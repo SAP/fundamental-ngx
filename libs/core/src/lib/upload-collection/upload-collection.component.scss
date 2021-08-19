@@ -1,0 +1,19 @@
+@import '~fundamental-styles/dist/upload-collection';
+
+.fd-upload-collection__status-group {
+
+    .fd-object-status {
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+
+        &:first-child {
+            margin-left: 0;
+            [dir='rtl'] &,
+            &[dir='rtl'] {
+                margin-left: 0.25rem;
+                margin-right: 0;
+            }
+        }
+    }
+
+}

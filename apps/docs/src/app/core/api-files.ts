@@ -383,4 +383,7 @@ export const API_FILES = {
         'ResizableCardLayoutComponent',
         'ResizableCardItemComponent'
     ],
+    uploadCollection: [
+        'UploadCollectionComponent'
+    ]
 };
