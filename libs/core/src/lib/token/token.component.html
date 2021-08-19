@@ -15,5 +15,12 @@
     <span class="fd-token__text no-text-select">
         <ng-content></ng-content>
     </span>
-    <span (click)="closeClickHandler($event)" *ngIf="!readOnly" class="fd-token__close" title="deletable" tabindex="-1"></span>
+    <span
+        (click)="closeClickHandler($event)"
+        *ngIf="!readOnly"
+        class="fd-token__close"
+        i18n-title="@@coreI18nTokenDeletable"
+        title="deletable"
+        tabindex="-1"
+    ></span>
 </span>

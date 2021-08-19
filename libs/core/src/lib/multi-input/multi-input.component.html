@@ -103,7 +103,7 @@
         <li
             *ngFor="let value of displayedValues"
             fd-list-item
-            (click)="!mobile ? openChangeHandle(false): openChangeHandle(true)"
+            (click)="openChangeHandle(!!mobile)"
             [selected]="selected.indexOf(value) !== -1"
         >
             <fd-checkbox
@@ -121,7 +121,7 @@
             class="fd-multi-input-show-all"
             (keyDown)="_showAllKeyDown($event)"
             (click)="_showAllClicked($event)">
-            <a fd-link tabindex="0">Show All ({{ dropdownValues.length }})</a>
+            <a fd-link tabindex="0" i18n="@@coreI18nMultiInputShowList">Show All ({{ dropdownValues.length }})</a>
         </li>
     </ul>
 </ng-template>
