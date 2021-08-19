@@ -1,7 +1,7 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { TimeColumnComponent } from './time-column.component';
-import { CarouselModule } from '@fundamental-ngx/core/carousel';
+import { TimeColumnComponent, TimeModule } from '@fundamental-ngx/core/time';
+
 import { SelectableViewItem } from '../models';
 
 describe('TimeColumnComponent', () => {
@@ -15,8 +15,7 @@ describe('TimeColumnComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [CarouselModule],
-                declarations: [TimeColumnComponent]
+                imports: [TimeModule]
             }).compileComponents();
         })
     );

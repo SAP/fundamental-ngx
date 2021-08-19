@@ -153,6 +153,11 @@ export class WizardGeneratorConditionExampleComponent implements OnDestroy {
                     ]
                 }
             ]
+        },
+        {
+            name: 'Summary',
+            id: 'summary',
+            summary: true
         }
     ];
 
@@ -174,7 +179,7 @@ export class WizardGeneratorConditionExampleComponent implements OnDestroy {
             data: {
                 items: this.stepItems,
                 appendToWizard: false,
-                addSummary: false,
+                displaySummaryStep: true,
                 responsivePaddings: true,
                 title: this.wizardTitle
             }

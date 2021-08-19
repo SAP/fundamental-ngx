@@ -23,6 +23,7 @@ import { WizardStepComponent } from './wizard-step/wizard-step.component';
 import { WizardProgressBarDirective } from './wizard-progress-bar/wizard-progress-bar.directive';
 import { WizardContentComponent } from './wizard-content/wizard-content.component';
 import { ACTIVE_STEP_STATUS, CURRENT_STEP_STATUS, UPCOMING_STEP_STATUS, COMPLETED_STEP_STATUS } from './constants';
+import { WIZARD } from './wizard-injection-token';
 
 export const STEP_MIN_WIDTH = 168;
 export const STEP_STACKED_TOP_CLASS = 'fd-wizard__step--stacked-top';
@@ -53,7 +54,13 @@ export const handleTimeoutReference = () => {
     templateUrl: './wizard.component.html',
     styleUrls: ['./wizard.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [
+        {
+            provide: WIZARD,
+            useExisting: WizardComponent
+        }
+    ]
 })
 export class WizardComponent implements AfterViewInit, OnDestroy {
     /**
@@ -76,6 +83,9 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     @Input()
     @HostBinding('class.fd-wizard--responsive-paddings')
     responsivePaddings = false;
+
+    @Input()
+    displaySummaryStep = false;
 
     /** @hidden */
     @ContentChildren(WizardStepComponent, { descendants: true })
@@ -168,12 +178,12 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
      * navigation and the wizard footer, and calculating the height based on their presence.
      */
     private _calculateContentHeight(): number {
-        let shellbarHeight,
+        let shellbarHeight: number,
             wizardNavHeight = 0,
-            wizardFooterHeight,
-            dialogOffset;
+            wizardFooterHeight: number,
+            dialogOffset: number;
         shellbarHeight = this._getShellbarHeight();
-        if (!this._isCurrentStepSummary()) {
+        if (!this._isCurrentStepSummary() || this.displaySummaryStep) {
             wizardNavHeight = this._getWizardNavHeight();
         }
         wizardFooterHeight = this._getWizardFooterHeight();
@@ -293,7 +303,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         const currentStep = this._getCurrentStep();
         if (
             currentStep &&
-            !currentStep.isSummary &&
+            (!currentStep.isSummary || this.displaySummaryStep) &&
             currentStep.wizardLabel &&
             currentStep.getStepClientWidth() < STEP_MIN_WIDTH
         ) {
@@ -310,7 +320,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         const steps = this.steps.toArray();
         for (const step of steps) {
             if (step.content) {
-                if (!step.isSummary) {
+                if (!step.isSummary || this.displaySummaryStep) {
                     step.content.tallContent = false;
                 }
                 step.content.wizardContentId = _stepId.toString();
@@ -349,7 +359,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
                     if (isCurrentStep) {
                         break;
                     }
-                } else if (this.appendToWizard && !step.isSummary) {
+                } else if (this.appendToWizard && (!step.isSummary || this.displaySummaryStep)) {
                     this.contentTemplates.push(step.content.contentTemplate);
                 }
             }
@@ -367,7 +377,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         if (this.appendToWizard) {
             _fromScrollToCurrentStep = true;
             this.steps.forEach((step, index) => {
-                if (step.status === CURRENT_STEP_STATUS && !step.isSummary) {
+                if (step.status === CURRENT_STEP_STATUS && (!step.isSummary || this.displaySummaryStep)) {
                     const child = <HTMLElement>this.wrapperContainer.nativeElement.children[index];
                     const wizardNavigationHeight = this._elRef.nativeElement.querySelector(
                         '.' + WIZARD_NAVIGATION_CLASS
@@ -392,7 +402,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         stepsArray = stepsArray.filter((step) => {
             return !step.hasLabel(STEP_NO_LABEL_CLASS);
         });
-        if (this.steps.last.isSummary) {
+        if (this.steps.last.isSummary && !this.displaySummaryStep) {
             stepsArray.pop();
         }
         if (stepsArray.length > 1) {
@@ -451,7 +461,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _handleStepOrStatusChanges(): void {
-        if (this._isCurrentStepSummary()) {
+        if (this._isCurrentStepSummary() && !this.displaySummaryStep) {
             this.progressBar.visible = false;
             this._showSummary();
         } else {
@@ -462,7 +472,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         setTimeout(() => {
             this._cdRef.detectChanges();
             this.resizeHandler();
-            if (!this._isCurrentStepSummary()) {
+            if (!this._isCurrentStepSummary() || this.displaySummaryStep) {
                 this._scrollToCurrentStep();
             }
         });
@@ -473,7 +483,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     private _setFinalStep(): void {
         const lastNonSummaryStep = this._getLastNonSummaryStep();
         if (lastNonSummaryStep) {
-            if (this.steps.last.isSummary) {
+            if (this.steps.last.isSummary && !this.displaySummaryStep) {
                 this.steps.last.removeFromDom();
             }
             if (lastNonSummaryStep.content) {
@@ -556,9 +566,10 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     private _getLastNonSummaryStep(): WizardStepComponent {
-        if (this.steps.last.isSummary) {
+        if (this.steps.last.isSummary && !this.displaySummaryStep) {
             return this.steps.toArray()[this.steps.length - 2];
         }
+
         return this.steps.last;
     }
 

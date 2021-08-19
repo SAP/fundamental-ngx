@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { QuickViewGroupComponent } from './quick-view-group.component';
+import { QuickViewGroupComponent, QuickViewModule } from '@fundamental-ngx/core/quick-view';
 
 describe('QuickViewGroupComponent', () => {
     let component: QuickViewGroupComponent;
@@ -8,7 +8,7 @@ describe('QuickViewGroupComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [QuickViewGroupComponent]
+            imports: [QuickViewModule]
         }).compileComponents();
     }));
 

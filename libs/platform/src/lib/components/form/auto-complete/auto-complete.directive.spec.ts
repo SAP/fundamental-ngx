@@ -1,8 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { OptionItem } from '@fundamental-ngx/platform';
-import { AutoCompleteDirective } from './auto-complete.directive';
+import { AutoCompleteDirective, OptionItem } from '@fundamental-ngx/platform';
 
 @Component({
     template: '<input [options]="options" fdp-auto-complete>'
@@ -28,7 +27,6 @@ class TestComponent {
         value: 'Strawberry'
     }];
 }
-
 describe('AutoCompleteDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
@@ -47,13 +45,11 @@ describe('AutoCompleteDirective', () => {
         directive = fixture.componentInstance.autoCompleteDirective;
     });
 
-    // TODO: Unskip after fix
-    xit('should create', () => {
+    it('should create', () => {
         expect(component).toBeTruthy();
     });
 
-    // TODO: Unskip after fix
-    xit('should complete Apple word and send event with close force', () => {
+    it('should complete Apple word and send event with close force', () => {
         spyOn(directive.onComplete, 'emit');
 
         directive.inputText = 'ap';
@@ -70,8 +66,7 @@ describe('AutoCompleteDirective', () => {
         });
     });
 
-    // TODO: Unskip after fix
-    xit('should complete Apple word and send event with outclose force', () => {
+    it('should complete Apple word and send event with outclose force', () => {
         spyOn(directive.onComplete, 'emit');
 
         directive.inputText = 'ap';
@@ -88,8 +83,7 @@ describe('AutoCompleteDirective', () => {
         });
     });
 
-    // TODO: Unskip after fix
-    xit('should stop completing word', () => {
+    it('should stop completing word', () => {
         spyOn(directive.onComplete, 'emit');
 
         directive.inputText = 'ap';

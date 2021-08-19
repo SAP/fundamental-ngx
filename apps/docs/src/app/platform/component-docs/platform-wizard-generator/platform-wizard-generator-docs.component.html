@@ -4,7 +4,7 @@
 <description>
     The default wizard displays a walkthrough screen with forms split into sections.
     Once the user fills all of the necessary input fields, and presses the "Next step" button, new step will appear.
-    A summary page can be created by adding the <code>[addSummary]="true"</code> input to the wizard generator component.
+    A summary step can be added by providing additional step with <code>summary: true</code> property to the wizard generator metadata.
 </description>
 <component-example>
     <fdp-wizard-generator-default-example></fdp-wizard-generator-default-example>
@@ -130,6 +130,38 @@
     <fdp-wizard-generator-responsive-paddings-example></fdp-wizard-generator-responsive-paddings-example>
 </component-example>
 <code-example [exampleFiles]="responsivePaddingsExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="visible-summary" componentName="wizard-generator">
+    Visible summary step in progress bar
+</fd-docs-section-title>
+<description>
+    By default, Wizard generator doesn't show Summary step in the wizard progress bar section.
+    Developers can configure visibility of the summary step by providing <code>[displaySummaryStep]="true"</code>
+    property of <code>&lt;fdp-wizard-generator /&gt;</code>.
+</description>
+<component-example>
+    <fdp-wizard-generator-visible-summary-example></fdp-wizard-generator-visible-summary-example>
+</component-example>
+<code-example [exampleFiles]="visibleSummaryExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="visible-summary-with-branching" componentName="wizard-generator">
+    Visible summary step with branching
+</fd-docs-section-title>
+<description>
+    As per design specification, no steps should be visible after branching step, until it's completed.
+    This means that developers should configure appropriate condidions for steps visibility.
+    Same applies to the summary step, if it should be visible in wizard progress bar.
+</description>
+<component-example>
+    <fdp-wizard-generator-visible-summary-branching-example></fdp-wizard-generator-visible-summary-branching-example>
+</component-example>
+<code-example [exampleFiles]="visibleBranchingSummaryExample"></code-example>
+
+<separator></separator>
 
 <fd-docs-section-title id="responsive-paddings-in-dialog" componentName="wizard-generator">
     Responsive paddings for Wizard generator in dialog

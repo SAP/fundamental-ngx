@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PlatformFormGeneratorModule } from '../../../form/form-generator/fdp-form-generator.module';
-import { WizardGeneratorService } from '../../wizard-generator.service';
 
-import { WizardGeneratorComponent } from './wizard-generator.component';
+import { PlatformWizardGeneratorModule, WizardGeneratorComponent, WizardGeneratorService } from '@fundamental-ngx/platform';
 
 describe('WizardGeneratorComponent', () => {
     let component: WizardGeneratorComponent;
@@ -10,11 +8,9 @@ describe('WizardGeneratorComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PlatformFormGeneratorModule],
-            declarations: [ WizardGeneratorComponent ],
+            imports: [PlatformWizardGeneratorModule],
             providers: [WizardGeneratorService]
-        })
-        .compileComponents();
+        }).compileComponents();
     });
 
     beforeEach(() => {

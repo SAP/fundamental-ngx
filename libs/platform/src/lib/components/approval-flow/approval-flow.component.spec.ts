@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, ViewChild } from '@angular/core';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RIGHT_ARROW } from '@angular/cdk/keycodes';
+import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Observable, of } from 'rxjs';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
 import { DialogService } from '@fundamental-ngx/core/dialog';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import {
     ApprovalDataSource,
     ApprovalFlowComponent,
@@ -263,8 +263,11 @@ describe('ApprovalFlowComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [PlatformApprovalFlowModule, NoopAnimationsModule],
-            declarations: [ApprovalFlowComponent, TestPlatformApprovalFlowComponent],
+            imports: [
+                PlatformApprovalFlowModule,
+                BrowserAnimationsModule
+            ],
+            declarations: [TestPlatformApprovalFlowComponent],
             providers: [RtlService]
         }).compileComponents();
     });

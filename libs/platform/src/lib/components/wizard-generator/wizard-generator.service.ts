@@ -128,6 +128,14 @@ export class WizardGeneratorService {
             return item;
         }));
 
+        // Summary step must be the last one in array
+        const summaryStepIndex = newItems.findIndex(i => i.summary === true);
+
+        if (summaryStepIndex !== -1 && summaryStepIndex !== (newItems.length - 1)) {
+            newItems.splice(newItems.length - 1, 0, newItems.splice(summaryStepIndex, 1)[0]);
+        }
+
+        // If no current step found, set first as current.
         if (newItems.findIndex(i => i.status === 'current') === -1) {
             newItems[0].status = 'current';
         }
@@ -276,24 +284,6 @@ export class WizardGeneratorService {
         });
 
         this.setVisibleSteps(this.visibleWizardSteps);
-    }
-
-    async addSummaryStep(): Promise<void> {
-
-        if (this.items.find(i => i.summary)) {
-            return;
-        }
-
-        const summaryStep = {
-            name: 'Summary',
-            id: 'summaryStep',
-            formGroups: [],
-            summary: true
-        };
-
-        this.items.push(summaryStep);
-
-        await this.refreshStepVisibility();
     }
 
     /**

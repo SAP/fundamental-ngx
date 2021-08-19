@@ -1,17 +1,8 @@
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { waitForAsync, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { DatetimePickerComponent } from './datetime-picker.component';
-import { IconModule } from '../icon/icon.module';
-import { PopoverModule } from '../popover/popover.module';
-import { CalendarModule } from '../calendar/calendar.module';
-import { TimeModule } from '../time/time.module';
-import { FdDate, FdDatetimeModule } from '../datetime';
-import { ButtonModule } from '../button/button.module';
-import { InputGroupModule } from '../input-group/input-group.module';
-import { DateTimeFormats, DATE_TIME_FORMATS } from '../datetime/datetime-formats';
-import { INVALID_DATE_ERROR } from '@fundamental-ngx/core';
+import { DATE_TIME_FORMATS, DateTimeFormats, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { DatetimePickerComponent, DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
+import { INVALID_DATE_ERROR } from '@fundamental-ngx/core/utils';
 
 describe('DatetimePickerComponent', () => {
     let component: DatetimePickerComponent<FdDate>;
@@ -21,18 +12,7 @@ describe('DatetimePickerComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [DatetimePickerComponent],
-                imports: [
-                    CommonModule,
-                    IconModule,
-                    PopoverModule,
-                    FdDatetimeModule,
-                    CalendarModule,
-                    FormsModule,
-                    TimeModule,
-                    InputGroupModule,
-                    ButtonModule
-                ]
+                imports: [DatetimePickerModule, FdDatetimeModule]
             }).compileComponents();
         })
     );
@@ -75,12 +55,15 @@ describe('DatetimePickerComponent', () => {
         expect(component._inputFieldDate).toBeNull();
         expect(component.isOpen).toBe(false);
     });
-    // TODO: Unskip after test
-    xit('should update from input for null value', () => {
-        spyOn(component, 'onChange');
+
+    it('should update from input for null value', () => {
+        spyOn(component, 'onChange').and.callThrough();
+
         component.allowNull = true;
         component.handleInputChange('');
+
         const today = new FdDate();
+
         expect(component.onChange).toHaveBeenCalledWith(null);
         expect(component.date).toEqual(today);
     });

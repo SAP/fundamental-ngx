@@ -45,8 +45,7 @@ class SimpleMenuComponent {
     }
 }
 
-// TODO: Unskip after fix
-xdescribe('Simple Menu', () => {
+describe('Simple Menu', () => {
     let component: SimpleMenuComponent;
     let fixture: ComponentFixture<SimpleMenuComponent>;
     let overlayContainerEl: HTMLElement;

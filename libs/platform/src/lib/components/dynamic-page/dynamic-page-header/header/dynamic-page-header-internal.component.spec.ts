@@ -1,8 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
-import { DynamicPageService } from '../../dynamic-page.service';
 import { By } from '@angular/platform-browser';
+
+import { DynamicPageService } from '@fundamental-ngx/platform';
+
 import { DynamicPageHeaderInternalComponent } from './dynamic-page-header-internal.component';
 import { DynamicPageConfig } from '../../dynamic-page.config';
 

@@ -1,13 +1,8 @@
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, TemplateRef, ViewChild, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 
-import { BusyIndicatorExtendedDirective } from './busy-indicator-extended.directive';
-import { MessageToastService } from '../../message-toast/message-toast-service/message-toast.service';
-import { MessageToastComponent } from '../../message-toast/message-toast.component';
-import { MessageToastContainerComponent } from '../../message-toast/message-toast-utils/message-toast-container.component';
-import { BusyIndicatorComponent } from '../busy-indicator.component';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { MessageToastComponent, MessageToastModule, MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 @Component({
     template: `<ng-template #testTemplate let-messageToast>
@@ -20,34 +15,16 @@ class TestComponent {
     @ViewChild('testTemplate', { static: true }) templateRef: TemplateRef<any>;
 }
 
-@NgModule({
-    declarations: [
-        MessageToastComponent,
-        MessageToastContainerComponent,
-        BusyIndicatorComponent,
-        BusyIndicatorExtendedDirective,
-        TestComponent
-    ],
-    imports: [CommonModule, BrowserModule],
-    providers: [MessageToastService],
-    entryComponents: [
-        MessageToastComponent,
-        MessageToastContainerComponent,
-        BusyIndicatorComponent,
-        BusyIndicatorExtendedDirective,
-        TestComponent
-    ]
-})
-class TestModule {}
-
-describe('BusyIndicatorExtenedDirective', () => {
+describe('BusyIndicatorExtendedDirective', () => {
     let messageComponent: MessageToastComponent;
     let fixture: ComponentFixture<MessageToastComponent>;
 
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [TestModule]
+                declarations: [TestComponent],
+                imports: [BusyIndicatorModule, MessageToastModule],
+                providers: [MessageToastService],
             }).compileComponents();
         })
     );
@@ -63,12 +40,13 @@ describe('BusyIndicatorExtenedDirective', () => {
     });
 
     it('should assign classes', () => {
-        messageComponent.open();
         spyOn<any>(messageComponent, '_loadFromComponent').and.callThrough();
+
         messageComponent.childContent = TestBed.createComponent(TestComponent).componentInstance.templateRef;
+        messageComponent.open();
         messageComponent.ngOnInit();
         messageComponent.ngAfterViewInit();
-        console.log('message component', fixture.nativeElement.classList);
+
         expect(fixture.nativeElement.classList.contains('fd-busy-indicator-extended--message-toast')).toBe(true);
         expect(fixture.nativeElement.classList.contains('fd-busy-indicator-extended')).toBe(true);
     });

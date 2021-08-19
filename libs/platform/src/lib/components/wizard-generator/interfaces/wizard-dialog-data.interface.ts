@@ -32,9 +32,9 @@ export interface WizardDialogData {
     contentHeight?: string;
 
     /**
-     * @description Boolean flag indicating whether or not to append Summary page as the last step.
+     * @description Boolean flag indicating whether or not to display Summary step in Wizard progress bar.
      */
-    addSummary: boolean;
+    displaySummaryStep: boolean;
 
     /**
      * @description Wizards dialog title configuration.

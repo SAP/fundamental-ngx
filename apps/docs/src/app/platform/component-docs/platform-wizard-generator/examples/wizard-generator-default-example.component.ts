@@ -93,6 +93,11 @@ export class WizardGeneratorDefaultExampleComponent {
                     ]
                 }
             ]
+        },
+        {
+            name: 'Summary',
+            id: 'summary',
+            summary: true
         }
     ];
 

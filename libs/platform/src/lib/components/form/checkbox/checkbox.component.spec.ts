@@ -1,11 +1,12 @@
-import { By } from '@angular/platform-browser';
-import { FormGroup, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, QueryList, ViewChildren } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+
+import { CheckboxModule, FormModule } from '@fundamental-ngx/core';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform';
 
 import { CheckboxComponent } from './checkbox.component';
-import { Component, ViewChildren, QueryList } from '@angular/core';
-import { CheckboxModule, FormModule } from '@fundamental-ngx/core';
-import { FdpFormGroupModule } from './../form-group/fdp-form.module';
 
 @Component({
     selector: 'fdp-test-checkbox',
@@ -104,7 +105,6 @@ class TestCheckboxComponent {
         disabledcheckbox: new FormControl({ value: [], disabled: true })
     });
 }
-
 describe('Checkbox test Component', () => {
     let host: TestCheckboxComponent;
     let fixture: ComponentFixture<TestCheckboxComponent>;

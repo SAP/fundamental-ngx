@@ -1,6 +1,7 @@
-import { HighlightPipe } from './highlight.pipe';
-import { ComboboxConfig, MatchingStrategy } from '../combobox.config';
 import { TestBed, waitForAsync } from '@angular/core/testing';
+
+import { ComboboxConfig, MatchingStrategy } from '../combobox.config';
+import { HighlightPipe } from './highlight.pipe';
 
 describe('Pipe: Highlight', () => {
     let pipe: HighlightPipe;

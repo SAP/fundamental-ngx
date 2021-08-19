@@ -1,13 +1,14 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { AvatarGroupModule } from '../avatar-group.module';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { AvatarGroupModule } from '@fundamental-ngx/core/avatar-group';
 
 @Component({
     template: `<fd-avatar #directiveElement fd-avatar-group-popover-control></fd-avatar>`
 })
 class TestComponent {
-    @ViewChild('directiveElement', { static: false })
+    @ViewChild('directiveElement', { read: ElementRef })
     ref: ElementRef;
 }
 
@@ -18,7 +19,7 @@ describe('AvatarGroupPopoverControlDirective', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent],
-            imports: [AvatarGroupModule]
+            imports: [AvatarGroupModule, AvatarModule]
         }).compileComponents();
     }));
 

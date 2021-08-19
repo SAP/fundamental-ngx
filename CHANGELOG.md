@@ -1,4 +1,39 @@
 
+### [0.31.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.5...v0.31.1-rc.6) (2021-08-17)
+
+### [0.31.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.4...v0.31.1-rc.5) (2021-08-17)
+
+
+### Bug Fixes
+
+* **core,platform:** fix a11y for Panel component ([#6259](https://github.com/SAP/fundamental-ngx/issues/6259)) ([200f478](https://github.com/SAP/fundamental-ngx/commit/200f4786dc73b32e7465eb2cecad43a71ef1f9b8))
+
+### [0.31.1-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.3...v0.31.1-rc.4) (2021-08-17)
+
+### [0.31.1-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.2...v0.31.1-rc.3) (2021-08-16)
+
+### [0.31.1-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.1...v0.31.1-rc.2) (2021-08-16)
+
+### [0.31.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.0...v0.31.1-rc.1) (2021-08-16)
+
+### [0.31.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.31.0...v0.31.1-rc.0) (2021-08-14)
+
+## [0.31.0](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.200...v0.31.0) (2021-08-13)
+
+## [0.31.0-rc.200](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.199...v0.31.0-rc.200) (2021-08-13)
+
+
+### Bug Fixes
+
+* **core,platform:** add ability to show summary step ([#6244](https://github.com/SAP/fundamental-ngx/issues/6244)) ([9042052](https://github.com/SAP/fundamental-ngx/commit/904205222d7ae3d23f7cb756c4adbff56b600d2b))
+
+## [0.31.0-rc.199](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.198...v0.31.0-rc.199) (2021-08-13)
+
+
+### Bug Fixes
+
+* **core:** fix popover rtl mobile mode ([#6333](https://github.com/SAP/fundamental-ngx/issues/6333)) ([ad134ab](https://github.com/SAP/fundamental-ngx/commit/ad134ab464f43a37fbcfe3925a72066d21859126))
+
 ## [0.31.0-rc.198](https://github.com/SAP/fundamental-ngx/compare/v0.31.0-rc.197...v0.31.0-rc.198) (2021-08-13)
 
 

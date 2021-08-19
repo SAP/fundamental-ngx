@@ -1,18 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { MultiInputComponent } from './multi-input.component';
-import { CommonModule } from '@angular/common';
-import { TokenModule } from '../token/token.module';
-import { FormsModule } from '@angular/forms';
-import { MenuModule } from '../menu/menu.module';
-import { PopoverModule } from '../popover/popover.module';
-import { PipeModule } from '../utils/pipes/pipe.module';
-import { InputGroupModule } from '../input-group/input-group.module';
-import { CheckboxModule } from '../checkbox/checkbox.module';
-import { ListModule } from '../list/list.module';
-import { DynamicComponentService } from '../utils/dynamic-component/dynamic-component.service';
-import { RtlService } from '../utils/services/rtl.service';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
+import { MultiInputComponent, MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY, DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
 
 describe('MultiInputComponent', () => {
     let component: MultiInputComponent;
@@ -20,18 +9,7 @@ describe('MultiInputComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [MultiInputComponent],
-            imports: [
-                CommonModule,
-                TokenModule,
-                FormsModule,
-                MenuModule,
-                ListModule,
-                PopoverModule,
-                PipeModule,
-                CheckboxModule,
-                InputGroupModule
-            ],
+            imports: [MultiInputModule],
             providers: [
                 DynamicComponentService,
                 RtlService,

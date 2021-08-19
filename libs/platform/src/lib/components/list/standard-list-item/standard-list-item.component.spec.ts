@@ -1,13 +1,13 @@
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ElementRef, ViewChild, Component } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { RouterTestingModule } from '@angular/router/testing';
 import { By } from '@angular/platform-browser';
-import { DataProvider, ListDataSource } from '../../../domain/public_api';
-import { PlatformListModule } from '../list.module';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Observable, of } from 'rxjs';
+
+import { DataProvider, ListDataSource, StandardListItemComponent, StandardListItemModule } from '@fundamental-ngx/platform';
+
 import { ListComponent } from '../list.component';
-import { StandardListItemComponent } from './standard-list-item.component';
-import { StandardListItemModule } from './standard-list-item.module';
+import { PlatformListModule } from '../list.module';
 
 const LIST_ELEMENTS: Address[] = [
     { name: 'City1' },
@@ -36,7 +36,7 @@ export class ListDataProvider extends DataProvider<Address> {
     selector: 'fdp-standard-list-item-test',
     template: `
     <fdp-list #componentElement>
-           <fdp-standard-list-item [title]="Title1"></fdp-standard-list-item></fdp-list>
+           <fdp-standard-list-item title="Title1"></fdp-standard-list-item></fdp-list>
 
     `
 })
@@ -45,14 +45,13 @@ class StandardListItemComponentTest {
     ref: ElementRef;
 }
 
-
 describe('StandardListItemComponent', () => {
     let component: StandardListItemComponentTest;
     let fixture: ComponentFixture<StandardListItemComponentTest>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [StandardListItemComponentTest, StandardListItemComponent, ListComponent],
+            declarations: [StandardListItemComponentTest],
             imports: [StandardListItemModule, PlatformListModule, RouterTestingModule]
         }).compileComponents();
     }));
@@ -108,7 +107,7 @@ describe('Standard  List Item Component with DataSource', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [StandardListItemDataSourceTestComponent, StandardListItemComponent, ListComponent],
+            declarations: [StandardListItemDataSourceTestComponent],
             imports: [PlatformListModule, StandardListItemModule, RouterTestingModule]
         }).compileComponents();
     }));

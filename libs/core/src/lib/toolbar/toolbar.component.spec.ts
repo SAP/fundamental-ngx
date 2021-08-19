@@ -1,13 +1,9 @@
+import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ViewChild, Component, ViewChildren, QueryList } from '@angular/core';
 
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { ToolbarComponent } from './toolbar.component';
-import { ToolbarItemDirective } from './toolbar-item.directive';
-import { ToolbarSpacerComponent } from './toolbar-spacer.component';
-import { ToolbarSeparatorComponent } from './toolbar-separator.component';
-import { ToolbarOverflowPriorityDirective } from './toolbar-overflow-priority.directive';
-import { ToolbarOverflowGroupDirective } from './toolbar-overflow-group.directive';
+import { ToolbarComponent, ToolbarItemDirective, ToolbarModule } from '@fundamental-ngx/core/toolbar';
 
 describe('ToolbarComponent', () => {
     let toolbar: ToolbarComponent;
@@ -16,15 +12,8 @@ describe('ToolbarComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                ToolbarComponent,
-                ToolbarTestComponent,
-                ToolbarItemDirective,
-                ToolbarOverflowPriorityDirective,
-                ToolbarOverflowGroupDirective,
-                ToolbarSpacerComponent,
-                ToolbarSeparatorComponent
-            ]
+            declarations: [ToolbarTestComponent],
+            imports: [ToolbarModule, ButtonModule]
         }).compileComponents();
     }));
 
@@ -56,15 +45,8 @@ describe('ToolbarComponent - Prioritization', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                ToolbarComponent,
-                ToolbarOverflowPriorityTestComponent,
-                ToolbarItemDirective,
-                ToolbarOverflowPriorityDirective,
-                ToolbarOverflowGroupDirective,
-                ToolbarSpacerComponent,
-                ToolbarSeparatorComponent
-            ]
+            imports: [ToolbarModule, ButtonModule],
+            declarations: [ToolbarOverflowPriorityTestComponent]
         }).compileComponents();
     }));
 
@@ -102,15 +84,8 @@ describe('ToolbarComponent - Prioritization and Grouping', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                ToolbarComponent,
-                ToolbarOverflowGroupingTestComponent,
-                ToolbarItemDirective,
-                ToolbarOverflowPriorityDirective,
-                ToolbarOverflowGroupDirective,
-                ToolbarSpacerComponent,
-                ToolbarSeparatorComponent
-            ]
+            imports: [ToolbarModule, ButtonModule],
+            declarations: [ToolbarOverflowGroupingTestComponent]
         }).compileComponents();
     }));
 

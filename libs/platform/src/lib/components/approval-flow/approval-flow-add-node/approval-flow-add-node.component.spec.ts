@@ -1,15 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of } from 'rxjs';
 
 import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
-import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { PlatformApprovalFlowModule } from '../approval-flow.module';
 
-import { AddNodeDialogRefData, APPROVAL_FLOW_APPROVER_TYPES, ApprovalFlowAddNodeComponent } from './approval-flow-add-node.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestApprovalFlowDataSource } from '../approval-flow.component.spec';
+import { PlatformApprovalFlowModule } from '../approval-flow.module';
 import { ApprovalNode, ApprovalTeam } from '../interfaces';
 import { ApprovalFlowAddNodeViewService } from '../services/approval-flow-add-node-view.service';
+import { APPROVAL_FLOW_APPROVER_TYPES, ApprovalFlowAddNodeComponent } from './approval-flow-add-node.component';
 
 const node: ApprovalNode = {
     id: 'id1',
@@ -26,20 +25,17 @@ describe('ApprovalFlowAddNodeComponent', () => {
     const dialogRef = new DialogRef();
     const dialogConfig = new DialogConfig();
     const approvalFlowDataSource = new TestApprovalFlowDataSource();
-    const dialogData: AddNodeDialogRefData = {
+
+    dialogRef.data = {
         approvalFlowDataSource: approvalFlowDataSource,
         userDetailsTemplate: null,
         rtl: false,
         node: node
     };
 
-    dialogRef.data = dialogData;
-
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ApprovalFlowAddNodeComponent],
             imports: [
-                FdDatetimeModule,
                 PlatformApprovalFlowModule,
                 BrowserAnimationsModule
             ],

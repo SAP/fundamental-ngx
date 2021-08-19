@@ -20,6 +20,7 @@ import { FormGroupModule, FormModule } from '@fundamental-ngx/core/form';
 import { TitleModule } from '@fundamental-ngx/core/title';
 import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { WizardVisibleSummaryExampleComponent } from './examples/wizard-visible-summary-example.component';
 
 const routes: Routes = [
     {
@@ -55,7 +56,8 @@ const routes: Routes = [
         WizardMobileExampleComponent,
         WizardBranchingExampleComponent,
         WizardDialogExampleComponent,
-        WizardNgForExampleComponent
+        WizardNgForExampleComponent,
+        WizardVisibleSummaryExampleComponent
     ]
 })
 export class WizardDocsModule {}

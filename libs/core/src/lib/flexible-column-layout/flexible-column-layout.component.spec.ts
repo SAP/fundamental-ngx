@@ -105,7 +105,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         const separators = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__separator'));
         expect(separators.length).toBe(0);
     });
-    // TODO: Unskip after fix
+
     it('ONE_COLUMN_END_FULL_SCREEN should render one column', async () => {
         await whenStable(fixture);
 
@@ -120,8 +120,8 @@ describe('FlexibleColumnLayoutComponent', () => {
         const separators = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__separator'));
         expect(separators.length).toBe(0);
     });
-    // TODO: Unskip after fix
-    xit('TWO_COLUMNS_START_EXPANDED should render 2 columns, start expanded, mid open', async () => {
+
+    it('TWO_COLUMNS_START_EXPANDED should render 2 columns, start expanded, mid open', async () => {
         await whenStable(fixture);
         viewport.set(1023, 900);
 
@@ -138,8 +138,8 @@ describe('FlexibleColumnLayoutComponent', () => {
         const separators = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__separator'));
         expect(separators.length).toBe(1);
     });
-    // TODO: Unskip after fix
-    xit('TWO_COLUMNS_MID_EXPANDED should render 2 columns, start open, mid expanded', async () => {
+
+    it('TWO_COLUMNS_MID_EXPANDED should render 2 columns, start open, mid expanded', async () => {
         await whenStable(fixture);
         viewport.set(1023, 900);
 
@@ -156,6 +156,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         const separators = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__separator'));
         expect(separators.length).toBe(1);
     });
+
     // TODO: Unskip after fix
     xit('TWO_COLUMNS_END_EXPANDED should render 2 columns, mid open, end expanded', async () => {
         await whenStable(fixture);
@@ -174,8 +175,8 @@ describe('FlexibleColumnLayoutComponent', () => {
         const separators = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__separator'));
         expect(separators.length).toBe(1);
     });
-    // TODO: unskip after fix
-    xit('THREE_COLUMNS_MID_EXPANDED should render 3 columns, start open, mid expanded, end open', async () => {
+
+    it('THREE_COLUMNS_MID_EXPANDED should render 3 columns, start open, mid expanded, end open', async () => {
         await whenStable(fixture);
         viewport.set(1300, 900);
 
@@ -194,8 +195,8 @@ describe('FlexibleColumnLayoutComponent', () => {
         const separators = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__separator'));
         expect(separators.length).toBe(2);
     });
-    // TODO: Unskip after fix
-    xit('THREE_COLUMNS_END_EXPANDED should render 3 columns, start open, mid open, end expanded', async () => {
+
+    it('THREE_COLUMNS_END_EXPANDED should render 3 columns, start open, mid open, end expanded', async () => {
         await whenStable(fixture);
         viewport.set(1300, 900);
 
@@ -214,6 +215,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         const separators = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__separator'));
         expect(separators.length).toBe(1);
     });
+
     // TODO: Unskip after fix
     xit('THREE_COLUMNS_START_MINIMIZED should render 3 columns, start minimized, mid expanded, end open', async () => {
         await whenStable(fixture);
@@ -233,8 +235,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         expect(separators.length).toBe(2);
     });
 
-    // TODO: Unskip after fix
-    xit('THREE_COLUMNS_END_MINIMIZED should render 3 columns, start open, mid expanded, end minimized', async () => {
+    it('THREE_COLUMNS_END_MINIMIZED should render 3 columns, start open, mid expanded, end minimized', async () => {
         await whenStable(fixture);
 
         testComponent.layout = THREE_COLUMNS_END_MINIMIZED;
@@ -250,6 +251,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         const separators = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__separator'));
         expect(separators.length).toBe(2);
     });
+
     // TODO: Unskip after fix
     xit('THREE_COLUMNS_MID_EXPANDED should render THREE_COLUMNS_START_MINIMIZED in MD screen', async () => {
         await whenStable(fixture);
@@ -268,6 +270,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         const separators = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__separator'));
         expect(separators.length).toBe(2);
     });
+
     // TODO: Unskip after fix
     xit('THREE_COLUMNS_END_EXPANDED should render TWO_COLUMNS_END_EXPANDED in MD screen', async () => {
         await whenStable(fixture);

@@ -102,6 +102,11 @@ export class WizardGeneratorDialogExampleComponent implements OnDestroy {
                     ]
                 }
             ]
+        },
+        {
+            name: 'Summary',
+            id: 'summary',
+            summary: true
         }
     ];
 
@@ -126,7 +131,7 @@ export class WizardGeneratorDialogExampleComponent implements OnDestroy {
             data: {
                 items: this.stepItems,
                 appendToWizard: false,
-                addSummary: true,
+                displaySummaryStep: true,
                 responsivePaddings: true,
                 title: this.wizardTitle
             }

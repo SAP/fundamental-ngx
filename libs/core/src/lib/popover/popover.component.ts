@@ -24,7 +24,7 @@ import {
 import { CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 import { DOWN_ARROW, ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { BasePopoverClass } from './base/base-popover.class';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
@@ -127,6 +127,7 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
         private _popoverService: PopoverService,
         private _cdr: ChangeDetectorRef,
         private _rendered: Renderer2,
+        @Optional() private _rtlService: RtlService,
         @Optional() private _dynamicComponentService: DynamicComponentService
     ) {
         super();
@@ -270,7 +271,8 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
             {
                 injector: Injector.create({
                     providers: [{ provide: POPOVER_COMPONENT, useValue: this }]
-                })
+                }),
+                services: [this._rtlService]
             }
         );
 

@@ -4,7 +4,7 @@
             <h2 fd-title headerSize="2">Checkout</h2>
         </fd-dialog-header>
         <fd-dialog-body>
-            <fd-wizard [appendToWizard]="false">
+            <fd-wizard [appendToWizard]="false" [displaySummaryStep]="true">
                 <fd-wizard-navigation>
                     <ul fd-wizard-progress-bar size="sm">
                         <li
@@ -144,7 +144,14 @@
                                     </div>
                             </fd-wizard-content>
                         </li>
-                        <li fd-wizard-step [status]="summaryStatus" [isSummary]="true" (statusChange)="statusChanged(5, $event)">
+                        <li
+                            fd-wizard-step
+                            [status]="summaryStatus"
+                            [isSummary]="true"
+                            label="Summary"
+                            (statusChange)="statusChanged(5, $event)"
+                        >
+                            <fd-wizard-step-indicator>5</fd-wizard-step-indicator>
                             <fd-wizard-content size="sm">
                                 <h4 class="fd-title fd-title--h4">1. Product Type</h4>
                                 <fd-layout-grid style="margin-bottom: 2rem">

@@ -72,7 +72,6 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
         this.items = this._dialogRef.data.items;
         this.title = this._dialogRef.data.title;
         this.appendToWizard = this._dialogRef.data.appendToWizard;
-        this.addSummary = this._dialogRef.data.addSummary;
         this.navigationButtonLabels = this._dialogRef.data.navigationButtonLabels;
         this.contentHeight = this._dialogRef.data.contentHeight;
         this.responsivePaddings = this._dialogRef.data.responsivePaddings;
@@ -81,6 +80,7 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
         this.finishButtonTemplate = this._dialogRef.data.finishButtonTemplate;
         this.cancelButtonTemplate = this._dialogRef.data.cancelButtonTemplate;
         this.confirmationDialogTemplate = this._dialogRef.data.confirmationDialogTemplate;
+        this.displaySummaryStep = this._dialogRef.data.displaySummaryStep || false;
 
         if (this._dialogRef.data.confirmationDialogText) {
             this.confirmationDialogText = this._dialogRef.data.confirmationDialogText;
