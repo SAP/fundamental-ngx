@@ -1,14 +1,13 @@
 import { ComboboxPo } from '../pages/combobox.po';
 import {
-    acceptAlert,
-    click, getAlertText,
+    clearValue,
+    click,
     getAttributeByName,
-    getElementArrayLength, getText, isElementClickable, isElementDisplayed, isEnabled,
-    refreshPage, scrollIntoView, setValue
+    getElementArrayLength, getText, getValue, isElementClickable, isElementDisplayed, isEnabled,
+    refreshPage, scrollIntoView, sendKeys, setValue
 } from '../../driver/wdio';
 
 import {
-    alertTestText,
     appleTestText,
     bananaTestText,
     placeholderTestText,
@@ -17,7 +16,6 @@ import {
     titleTestText,
     capsSearchTermAppleText,
     capsSearchTermTomatoText,
-    openStateAlertTestText,
     settingsTestText,
     searchTermOneUsdTestText,
     searchTermHalfUsdTestText, reactiveFormTestText1, reactiveFormTestText2
@@ -63,10 +61,10 @@ describe('Combobox component test suit', function() {
             }
         });
 
-        xit('verify Hide Addon Button by typing name of option', () => {
+        it('verify Hide Addon Button by typing name of option', () => {
             setValue(allInputFields, 'Ba', 5);
             click(dropdownOption);
-            expect(getAttributeByName(allInputFields, 'ng-reflect-input-text', 5)).toBe(bananaTestText);
+            expect(getValue(allInputFields, 5)).toBe(bananaTestText);
         });
     });
 
@@ -74,7 +72,7 @@ describe('Combobox component test suit', function() {
 
         it('verify Combobox as Search Field by choose option in dropdown or typing name of it', () => {
             scrollIntoView(allInputFields, 6);
-            click(activeInputButton, 5);
+            click(activeInputButton, 4);
             expect(isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
             click(dropdownOption);
             expect(getText(smallText, 6)).toBe(searchTermAppleText);
@@ -87,16 +85,16 @@ describe('Combobox component test suit', function() {
 
     describe('Check Custom Filter', function() {
 
-        xit('verify Combobox as Search Field by choose option typing name of it', () => {
+        it('verify Combobox as Search Field by choose option typing name of it', () => {
             scrollIntoView(allInputFields, 7);
-            click(activeInputButton, 6);
+            click(activeInputButton, 5);
             expect(isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
             click(dropdownOption);
-            expect(getAttributeByName(allInputFields, 'ng-reflect-input-text', 7)).toBe(appleTestText);
+            expect(getValue(allInputFields, 7)).toBe(appleTestText);
 
             setValue(allInputFields, 'Ba', 7);
             click(dropdownOption);
-            expect(getAttributeByName(allInputFields, 'ng-reflect-input-text', 7)).toBe(bananaTestText);
+            expect(getValue(allInputFields, 7)).toBe(bananaTestText);
         });
     });
 
@@ -104,9 +102,7 @@ describe('Combobox component test suit', function() {
 
         it('verify Custom Search Function by choose option in dropdown or typing name of it', () => {
             scrollIntoView(allInputFields, 8);
-            click(activeInputButton, 7);
-            expect(getAlertText()).toBe(alertTestText);
-            acceptAlert();
+            click(activeInputButton, 6);
             expect(isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
             click(dropdownOption);
             expect(getText(smallText_2)).toBe(searchTermAppleText);
@@ -119,18 +115,18 @@ describe('Combobox component test suit', function() {
 
     describe('Check Combobox Mobile Mode', function() {
 
-        xit('verify Combobox Mobile Mode by choose option in mobile window or typing name of it', () => {
+        it('verify Combobox Mobile Mode by choose option in mobile window or typing name of it', () => {
             scrollIntoView(allInputFields, 9);
             click(allInputFields, 9);
             click(dropdownOption);
             click(mobileButton, 1);
-            expect(getAttributeByName(allInputFields, 'ng-reflect-input-text', 9)).toBe(appleTestText);
+            expect(getValue(allInputFields, 9)).toBe(appleTestText);
 
             click(allInputFields, 9);
             setValue(allInputFields, 'Ba', 9);
             click(dropdownOption);
             click(mobileButton, 1);
-            expect(getAttributeByName(allInputFields, 'ng-reflect-input-text', 9)).toBe(bananaTestText);
+            expect(getValue(allInputFields, 9)).toBe(bananaTestText);
         });
 
         it('verify Combobox Mobile Mode has clickable buttons cancel, close and has header', () => {
@@ -143,63 +139,58 @@ describe('Combobox component test suit', function() {
         });
     });
 
-    xdescribe('Check Display Object Property', function() {
+    describe('Check Display Object Property', function() {
 
         it('verify Display Object Property by choose option in dropdown or typing name of it', () => {
             scrollIntoView(allInputFields, 10);
-            click(activeInputButton, 8);
+            click(activeInputButton, 7);
             expect(isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
             click(dropdownOption);
             expect(getText(smallText_2, 1)).toBe(capsSearchTermAppleText);
 
-            setValue(allInputFields, 'To', 10);
+            clearValue(allInputFields, 10);
+            click(allInputFields, 10);
+            sendKeys('To');
             click(dropdownOption);
             expect(getText(smallText_2, 1)).toBe(capsSearchTermTomatoText);
         });
     });
 
-    xdescribe('Check Open State Control', function() {
+    describe('Check Open State Control', function() {
 
         it('verify Open State Control by choose option in dropdown or typing name of it', () => {
             scrollIntoView(allInputFields, 11);
             click(activeInputButton, 9);
-            expect(getAlertText()).toBe(openStateAlertTestText[0]);
-            acceptAlert();
             expect(isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
             click(dropdownOption);
-            expect(getAlertText()).toBe(openStateAlertTestText[1]);
-            acceptAlert();
-            expect(getAttributeByName(allInputFields, 'ng-reflect-input-text', 11)).toBe(appleTestText);
-
+            expect(getValue(allInputFields, 12)).toBe(appleTestText);
             click(activeInputButton, 9);
-            acceptAlert();
-            setValue(allInputFields, 'Ba', 11);
+            setValue(allInputFields, 'Ba', 12);
             click(dropdownOption);
-            acceptAlert();
-            expect(getAttributeByName(allInputFields, 'ng-reflect-input-text', 11)).toBe(bananaTestText);
+            expect(getValue(allInputFields, 12)).toBe(bananaTestText);
         });
     });
 
-    xdescribe('Check Observable Async Example', function() {
+    describe('Check Observable Async Example', function() {
 
         it('verify Observable Async by choose option in dropdown or typing name of it', () => {
             scrollIntoView(allInputFields, 12);
-            click(activeInputButton, 10);
+            click(activeInputButton, 9);
             expect(isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
             click(dropdownOption);
-            expect(getAttributeByName(allInputFields, 'ng-reflect-input-text', 12)).toBe(appleTestText);
+            expect(getValue(allInputFields, 12)).toBe(appleTestText);
 
             setValue(allInputFields, 'Ba', 12);
             click(dropdownOption);
-            expect(getAttributeByName(allInputFields, 'ng-reflect-input-text', 12)).toBe(bananaTestText);
+            expect(getValue(allInputFields, 12)).toBe(bananaTestText);
         });
     });
 
-    xdescribe('Check Custom Item Template', function() {
+    describe('Check Custom Item Template', function() {
 
         it('verify Custom Item Template by choose option in dropdown or typing name of it', () => {
             scrollIntoView(allInputFields, 13);
-            click(activeInputButton, 11);
+            click(activeInputButton, 10);
             expect(isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
             click(dropdownOption);
             expect(getText(smallText_2, 2)).toBe(settingsTestText[0]);
@@ -212,11 +203,11 @@ describe('Combobox component test suit', function() {
         });
     });
 
-    xdescribe('Check Combobox with Two Columns', function() {
+    describe('Check Combobox with Two Columns', function() {
 
         it('verify Combobox with Two Columns by choose option in dropdown or typing name of it', () => {
-            scrollIntoView(allInputFields, 14);
-            click(activeInputButton, 12);
+            scrollIntoView(allInputFields, 13);
+            click(activeInputButton, 11);
             expect(isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
             click(dropdownOption);
             expect(getText(smallText_2, 4)).toBe(searchTermOneUsdTestText);
@@ -227,48 +218,48 @@ describe('Combobox component test suit', function() {
         });
     });
 
-    xdescribe('Check Combobox with Groups', function() {
+    describe('Check Combobox with Groups', function() {
 
         it('verify Combobox with Groups by choose option in dropdown or typing name of it', () => {
             scrollIntoView(allInputFields, 15);
-            click(activeInputButton, 13);
+            click(activeInputButton, 12);
             expect(isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
-            click(dropdownOption, 1);
+            click(dropdownOption);
             expect(getText(smallText_2, 5)).toBe(searchTermAppleText);
 
             setValue(allInputFields, 'Pi', 15);
-            click(dropdownOption, 1);
+            click(dropdownOption);
             expect(getText(smallText_2, 5)).toBe(searchPineappleText);
         });
     });
 
-    xdescribe('Check Custom Height Example', function() {
+    describe('Check Custom Height Example', function() {
 
         it('verify Custom Height Example by choose option in dropdown or typing name of it', () => {
-            scrollIntoView(allInputFields, 16);
+            scrollIntoView(allInputFields, 17);
             click(activeInputButton, 14);
             expect(isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
             click(dropdownOption);
-            expect(getAttributeByName(allInputFields, 'ng-reflect-input-text', 16)).toBe(appleTestText);
-
-            setValue(allInputFields, 'Ba', 16);
-            click(dropdownOption);
-            expect(getAttributeByName(allInputFields, 'ng-reflect-input-text', 16)).toBe(bananaTestText);
-        });
-    });
-
-    xdescribe('Check Return results including search term', function() {
-
-        it('verify Return results including search term by choose option in dropdown or typing name of it', () => {
-            scrollIntoView(allInputFields, 17);
-            click(activeInputButton, 15);
-            expect(isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
-            click(dropdownOption);
-            expect(getAttributeByName(allInputFields, 'ng-reflect-input-text', 17)).toBe(appleTestText);
+            expect(getValue(allInputFields, 17)).toBe(appleTestText);
 
             setValue(allInputFields, 'Ba', 17);
             click(dropdownOption);
-            expect(getAttributeByName(allInputFields, 'ng-reflect-input-text', 17)).toBe(bananaTestText);
+            expect(getValue(allInputFields, 17)).toBe(bananaTestText);
+        });
+    });
+
+    describe('Check Return results including search term', function() {
+
+        it('verify Return results including search term by choose option in dropdown or typing name of it', () => {
+            scrollIntoView(allInputFields, 17);
+            click(activeInputButton, 14);
+            expect(isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
+            click(dropdownOption);
+            expect(getValue(allInputFields, 17)).toBe(appleTestText);
+
+            setValue(allInputFields, 'Ba', 17);
+            click(dropdownOption);
+            expect(getValue(allInputFields, 17)).toBe(bananaTestText);
         });
     });
 

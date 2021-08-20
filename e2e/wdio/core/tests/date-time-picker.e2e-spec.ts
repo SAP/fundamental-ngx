@@ -1,8 +1,10 @@
 import {
+    browserIsFirefox,
     click,
     elementArray,
     getAttributeByName,
     getElementArrayLength,
+    getElementClass,
     getText,
     getValue, isElementClickable,
     isElementDisplayed,
@@ -26,14 +28,14 @@ import {
     currentDay,
 } from '../fixtures/appData/date-time-picker-contents';
 
-describe('Datetime picker suite', function() {
+describe('Datetime picker suite', function () {
     const dateTimePickerPage = new DateTimePicker();
     const {
-        datePickerInput, datePickerButton, activeDateTimePickerButton, calendarExpanded,
-        activeDateTimePickerInput, topPage, selectYearButton, selectMonthButton, calendarYearsSection, disabledDateTimePickerButton,
+        datePickerButton, calendarExpanded,
+        datePickerInput, topPage, selectYearButton, selectMonthButton, calendarYearsSection, disabledDateTimePickerButton,
         disabledDateTimePickerInput, okButton, filterCalendarValue, buttonSelectYearsRange, buttonFirstRangeYear, buttonFirstYear,
         buttonFirstMonth, selectedHours, selectedMinutes, navigationDownArrowButton, navigationUpArrowButton, timeItem, period,
-        cancelButton, buttonChange, optionButton, activeDay, dayInCalendarButtonByValue, getOptionByName
+        cancelButton, buttonChange, optionButton, activeDay, dayInCalendarButtonByValue, getOptionById, datePickerGroup, calendarItem
     } = new DateTimePicker();
 
     beforeAll(() => {
@@ -45,202 +47,219 @@ describe('Datetime picker suite', function() {
         waitForPresent(datePickerInput);
     }, 1);
 
-        it('verify in all the form factor user is able to see the date picker button and input field', () => {
-            const buttonsLength = getElementArrayLength(datePickerButton);
-            const inputsLength = getElementArrayLength(datePickerInput);
-            expect(buttonsLength).toEqual(inputsLength);
-            for (let i = 1; i < buttonsLength; i++) {
-                expect(isElementDisplayed(datePickerButton, i)).toBe(true, 'date picker button is not displayed when it should be');
-                expect(isElementDisplayed(datePickerInput, i)).toBe(true, 'date picker input is not displayed when it should be');
-            }
-        });
+    it('verify in all the form factor user is able to see the date picker button and input field', () => {
+        const buttonsLength = getElementArrayLength(datePickerButton);
+        const inputsLength = getElementArrayLength(datePickerInput);
+        expect(buttonsLength).toEqual(inputsLength);
+        for (let i = 1; i < buttonsLength; i++) {
+            expect(isElementDisplayed(datePickerButton, i)).toBe(true, 'date picker button is not displayed when it should be');
+            expect(isElementDisplayed(datePickerInput, i)).toBe(true, 'date picker input is not displayed when it should be');
+        }
+    });
 
-        it('verify calendar by clicking on the date time picker button', () => {
-            const activeButtonsLength = getElementArrayLength(activeDateTimePickerButton);
-            for (let i = 1; i < activeButtonsLength; i++) {
+    it('verify calendar by clicking on the date time picker button', () => {
+        const activeButtonsLength = getElementArrayLength(datePickerButton);
+        for (let i = 1; i < activeButtonsLength; i++) {
+            if (!getElementClass(datePickerGroup, i).includes('is-disabled')) {
                 sendKeys(['Escape']);
-                scrollIntoView(activeDateTimePickerButton, i);
-                click(activeDateTimePickerButton, i);
+                scrollIntoView(datePickerButton, i);
+                click(datePickerButton, i);
                 expect(isElementDisplayed(calendarExpanded)).toBe(true, 'calendar is not expanded when it should be');
             }
-        });
+        }
+    });
 
-        it('verify from the day view on the calendar, clicking or tapping a year', () => {
-            sendKeys(['Escape']);
-            click(activeDateTimePickerButton, 1);
-            expect(waitForElDisplayed(calendarExpanded)).toBe(true, 'calendar is not expanded when it should be');
-            scrollIntoView(topPage);
-            scrollIntoView(selectYearButton);
-            click(selectYearButton);
-            expect(waitForElDisplayed(calendarYearsSection)).toBe(true, 'calendar years section is not displayed when it should be');
-            click(dateTimePickerPage.yearInCalendarByValue(year2030));
-            expect(getText(selectYearButton)).toBe(year2030.toString());
-        });
+    it('verify from the day view on the calendar, clicking or tapping a year', () => {
+        sendKeys(['Escape']);
+        click(datePickerButton, 1);
+        expect(waitForElDisplayed(calendarExpanded)).toBe(true, 'calendar is not expanded when it should be');
+        scrollIntoView(topPage);
+        scrollIntoView(selectYearButton);
+        click(selectYearButton);
+        expect(waitForElDisplayed(calendarYearsSection)).toBe(true, 'calendar years section is not displayed when it should be');
+        click(dateTimePickerPage.yearInCalendarByValue(year2030));
+        expect(getText(selectYearButton)).toBe(year2030.toString());
+    });
 
-        it('verify by default today date is focused', () => {
-            const activeButtonsLength = getElementArrayLength(activeDateTimePickerButton);
-            for (let i = 1; i < activeButtonsLength; i++) {
+    it('verify by default today date is focused', () => {
+        const activeButtonsLength = getElementArrayLength(datePickerButton);
+        for (let i = 1; i < activeButtonsLength; i++) {
+            if (!getElementClass(datePickerGroup, i).includes('is-disabled')) {
                 sendKeys(['Escape']);
-                scrollIntoView(activeDateTimePickerButton, i);
-                click(activeDateTimePickerButton, i);
+                scrollIntoView(datePickerButton, i);
+                click(datePickerButton, i);
                 expect(isElementDisplayed(calendarExpanded)).toBe(true, 'calendar is not expanded when it should be');
                 expect(getText(activeDay)).toBe(new Date().getDate().toString());
             }
-        });
+        }
+    });
 
-        xit('verify on click on the input field', () => {
-            const activeInputsLength = getElementArrayLength(activeDateTimePickerInput);
-            for (let i = 0; i < activeInputsLength; i++) {
+    it('verify on click on the input field', () => {
+        const activeInputsLength = getElementArrayLength(datePickerInput);
+        for (let i = 0; i < activeInputsLength; i++) {
+            if (!getElementClass(datePickerGroup, i).includes('is-disabled')) {
                 sendKeys(['Escape']);
-                scrollIntoView(activeDateTimePickerInput, i);
-                setValue(activeDateTimePickerInput, testText, i);
-                expect(getValue(activeDateTimePickerInput, i)).toBe(testText);
+                scrollIntoView(datePickerInput, i);
+                setValue(datePickerInput, testText, i);
+                expect(getValue(datePickerInput, i)).toBe(testText);
             }
-        });
+        }
+    });
 
-        xit('verify date input field have placeholder', () => {
-            const inputs = elementArray(datePickerInput);
-            for (let i = 0; i < inputs.length; i++) {
-                expect(['', null]).not.toContain(getAttributeByName(datePickerInput, 'ng-reflect-model', i));
+    it('verify date input field have placeholder', () => {
+        const inputs = elementArray(datePickerInput);
+        for (let i = 0; i < inputs.length; i++) {
+            if (!getElementClass(datePickerGroup, i).includes('is-disabled')) {
+                expect(['', null]).not.toContain(getValue(datePickerInput, i));
             }
-        });
+        }
+    });
 
-        xit('verify the user can then choose the desired date from the calendar, and the time from the rotating wheel, ' +
-            'For the time, it’s possible to select hours, minutes, and even seconds.', () => {
-            click(activeDateTimePickerButton, 1);
+    it('verify the user can then choose the desired date from the calendar, and the time from the rotating wheel, ' +
+        'For the time, it’s possible to select hours, minutes, and even seconds.', () => {
+            click(datePickerButton);
             click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
             selectHoursMinutesAndPeriod();
             click(okButton);
-            expect(getAttributeByName(activeDateTimePickerInput, 'ng-reflect-model'))
+            expect(getValue(datePickerInput))
                 .toEqual(date);
         });
 
-        xit('verify when the user selects cancel the action is aborted and the input field remains unchanged.', () => {
-            click(activeDateTimePickerButton, 1);
-            click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
-            selectHoursMinutesAndPeriod();
-            click(cancelButton);
-            expect(getAttributeByName(activeDateTimePickerInput, 'ng-reflect-model'))
-                .not.toEqual(date);
-        });
+    it('verify when the user selects cancel the action is aborted and the input field remains unchanged.', () => {
+        click(datePickerButton);
+        click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
+        selectHoursMinutesAndPeriod();
+        click(cancelButton);
+        expect(getValue(datePickerInput))
+            .not.toEqual(date);
+    });
 
-        it('verify disabled date time picker', () => {
-            const disabledButtonsArr = elementArray(disabledDateTimePickerButton);
-            for (let i = 0; i < disabledButtonsArr.length; i++) {
+    it('verify disabled date time picker', () => {
+        const disabledButtonsArr = elementArray(disabledDateTimePickerButton);
+        for (let i = 0; i < disabledButtonsArr.length; i++) {
+            if (!getElementClass(datePickerGroup, i).includes('is-disabled')) {
                 expect(isElementClickable(disabledDateTimePickerButton, i)).toBe(false, 'Date time picker button is not disabled when it should be');
                 expect(isElementClickable(disabledDateTimePickerInput, i)).toBe(false, 'Date time input is not disabled when it should be');
             }
-        });
+        }
+    });
 
-        it('verify selecting a year range navigates back to the year view', () => {
-            const activeButtonsLength = getElementArrayLength(activeDateTimePickerButton);
-            for (let i = 1; i < activeButtonsLength; i++) {
-                click(activeDateTimePickerButton, i);
+    it('verify selecting a year range navigates back to the year view', () => {
+        const activeButtonsLength = getElementArrayLength(datePickerButton);
+        for (let i = 1; i < activeButtonsLength; i++) {
+            if (!getElementClass(datePickerGroup, i).includes('is-disabled')) {
+                click(datePickerButton, i);
                 click(selectYearButton);
                 click(buttonSelectYearsRange);
                 waitForElDisplayed(filterCalendarValue('aggregated-year'));
                 click(buttonFirstRangeYear);
                 waitForElDisplayed(filterCalendarValue('year'));
-                click(activeDateTimePickerButton, i);
+                click(datePickerButton, i);
             }
-        });
+        }
+    });
 
-        it('verify after the user selects a year, the view changes back to the day view', () => {
-            const activeButtonsLength = getElementArrayLength(activeDateTimePickerButton);
-            for (let i = 1; i < activeButtonsLength; i++) {
-                click(activeDateTimePickerButton, i);
+    it('verify after the user selects a year, the view changes back to the day view', () => {
+        const activeButtonsLength = getElementArrayLength(datePickerButton);
+        for (let i = 1; i < activeButtonsLength; i++) {
+            if (!getElementClass(datePickerGroup, i).includes('is-disabled')) {
+                click(datePickerButton, i);
                 click(selectYearButton);
                 waitForElDisplayed(filterCalendarValue('year'));
                 click(buttonFirstYear);
                 waitForElDisplayed(filterCalendarValue('day'));
-                click(activeDateTimePickerButton, i);
+                click(datePickerButton, i);
             }
-        });
+        }
+    });
 
-        it('verify after the user selects a month, the view changes back to the day view', () => {
-            const activeButtonsLength = getElementArrayLength(activeDateTimePickerButton);
-            for (let i = 1; i < activeButtonsLength; i++) {
-                click(activeDateTimePickerButton, i);
+    it('verify after the user selects a month, the view changes back to the day view', () => {
+        const activeButtonsLength = getElementArrayLength(datePickerButton);
+        for (let i = 1; i < activeButtonsLength; i++) {
+            if (!getElementClass(datePickerGroup, i).includes('is-disabled')) {
+                click(datePickerButton, i);
                 click(selectMonthButton);
                 waitForElDisplayed(filterCalendarValue('month'));
                 click(buttonFirstMonth);
                 waitForElDisplayed(filterCalendarValue('day'));
-                click(activeDateTimePickerButton, i);
+                click(datePickerButton, i);
             }
-        });
+        }
+    });
 
-        xit('verify simple datetime picker has correct default date', () => {
-            click(activeDateTimePickerButton, 1);
-            click(dayInCalendarButtonByValue(currentDay.toString()));
-            selectHoursMinutesAndPeriod();
-            click(okButton);
-            expect(getAttributeByName(activeDateTimePickerInput, 'ng-reflect-model'))
-                .toEqual(date2);
-        });
+    it('verify simple datetime picker has correct default date', () => {
+        click(datePickerButton);
+        click(dayInCalendarButtonByValue(currentDay.toString()));
+        selectHoursMinutesAndPeriod();
+        click(okButton);
+        expect(getValue(datePickerInput))
+            .toEqual(date2);
+    });
 
-        xit('verify programmatic change datetime picker has correct default date', () => {
-            scrollIntoView(activeDateTimePickerButton, 2);
-            click(activeDateTimePickerButton, 2);
-            click(dayInCalendarButtonByValue(currentDay.toString()));
-            selectHoursMinutesAndPeriod();
-            click(okButton);
-            expect(getAttributeByName(activeDateTimePickerInput, 'ng-reflect-model', 1))
-                .toEqual(date2);
-            click(buttonChange);
-            expect(getAttributeByName(activeDateTimePickerInput, 'ng-reflect-model', 1))
-                .toEqual(date3);
-        });
+    it('verify programmatic change datetime picker has correct default date', () => {
+        scrollIntoView(datePickerButton, 1);
+        click(datePickerButton, 1);
+        click(dayInCalendarButtonByValue(currentDay.toString()));
+        selectHoursMinutesAndPeriod();
+        click(okButton);
+        expect(getValue(datePickerInput, 1))
+            .toEqual(date2);
+        click(buttonChange);
+        expect(getValue(datePickerInput, 1))
+            .toEqual(date3);
+    });
 
-        xit('verify null validity datetime picker has correct default date', () => {
-            scrollIntoView(activeDateTimePickerButton, 3);
-            click(activeDateTimePickerButton, 3);
-            click(dayInCalendarButtonByValue(currentDay.toString()));
-            selectHoursMinutesAndPeriod();
-            click(okButton);
-            expect(getAttributeByName(activeDateTimePickerInput, 'ng-reflect-model', 2))
-                .toEqual(date2);
-        });
+    it('verify null validity datetime picker has correct default date', () => {
+        scrollIntoView(datePickerButton, 2);
+        click(datePickerButton, 2);
+        click(dayInCalendarButtonByValue(currentDay.toString()));
+        selectHoursMinutesAndPeriod();
+        click(okButton);
+        expect(getValue(datePickerInput, 2))
+            .toEqual(date2);
+    });
 
-        xit('verify formatting datetime picker has correct default date', () => {
-            scrollIntoView(activeDateTimePickerButton, 4);
-            click(activeDateTimePickerButton, 4);
-            click(dayInCalendarButtonByValue(currentDay.toString()));
-            selectHoursAndMinutes();
-            click(okButton);
-            expect(getAttributeByName(activeDateTimePickerInput, 'ng-reflect-model', 3))
-                .toEqual(date4);
-        });
+    it('verify formatting datetime picker has correct default date', () => {
+        scrollIntoView(datePickerButton, 3);
+        click(datePickerButton, 3);
+        click(dayInCalendarButtonByValue(currentDay.toString()));
+        selectHoursAndMinutes();
+        click(okButton);
+        expect(getValue(datePickerInput, 3))
+            .toEqual(date4);
+    });
 
-        xit('verify date time picker in reactive form has correct default date', () => {
-            scrollIntoView(activeDateTimePickerButton, 5);
-            click(activeDateTimePickerButton, 5);
-            click(dayInCalendarButtonByValue(currentDay.toString()));
-            selectHoursMinutesAndPeriod();
-            click(okButton);
-            expect(getAttributeByName(activeDateTimePickerInput, 'ng-reflect-model', 4))
-                .toEqual(date2);
-        });
+    it('verify date time picker in reactive form has correct default date', () => {
+        scrollIntoView(datePickerButton, 5);
+        click(datePickerButton, 5);
+        click(dayInCalendarButtonByValue(currentDay.toString()));
+        selectHoursMinutesAndPeriod();
+        click(okButton);
+        expect(getValue(datePickerInput, 5))
+            .toEqual(date2);
+    });
 
-        // skipped due to https://github.com/SAP/fundamental-ngx/issues/5088
-        xit('verify date time picker i18n example', () => {
-            scrollIntoView(activeDateTimePickerButton, 6);
-            for (let i = 0; i < i18n.length; i++) {
+    it('verify date time picker i18n example', () => {
+        scrollIntoView(datePickerButton, 7);
+        for (let i = 0; i < i18n.length; i++) {
+            // skipped due to https://github.com/SAP/fundamental-ngx/issues/6304
+            if (!browserIsFirefox && i !== 4) {
                 click(optionButton);
-                click(getOptionByName(i18n[i]));
-                click(activeDateTimePickerButton, 6);
+                click(getOptionById(i18n[i]));
+                click(datePickerButton, 7);
                 waitForElDisplayed(calendarExpanded);
                 scrollIntoView(dayInCalendarButtonByValue(currentDay.toString()));
-                click(dayInCalendarButtonByValue(currentDay.toString()));
                 selectHoursAndMinutes();
                 click(okButton);
-                expect(getAttributeByName(activeDateTimePickerInput, 'ng-reflect-model', 5))
+                expect(getValue(datePickerInput, 7))
                     .toContain(dates[i]);
             }
-        });
+        }
+    });
 
-        it('should check LTR and RTL orientation', () => {
-            dateTimePickerPage.checkRtlSwitch();
-        });
+    it('should check LTR and RTL orientation', () => {
+        dateTimePickerPage.checkRtlSwitch();
+    });
 
     function selectHoursAndMinutes(hour: number = 11, minute: number = 1): void {
         while (getText(selectedHours) !== hour.toString()) {
