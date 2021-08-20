@@ -23,7 +23,6 @@ import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operato
 
 import {
     GetDefaultPosition,
-    PopoverFlippedRtlPlacement,
     PopoverPosition
 } from '@fundamental-ngx/core/shared';
 import { BasePopoverClass } from '../base/base-popover.class';
