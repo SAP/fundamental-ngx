@@ -159,26 +159,28 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     private _handleNoListMoreThanSeven(event: KeyboardEvent, target: HTMLElement, i: number): void {
+        const nextIndexByColumn = 4;
         const { children } = target.parentElement;
         if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
-            (<HTMLElement>children[i + 4])?.focus();
+            (<HTMLElement>children[i + nextIndexByColumn])?.focus();
         }
 
         if (KeyUtil.isKeyCode(event, UP_ARROW)) {
-            (<HTMLElement>children[i - 4])?.focus();
+            (<HTMLElement>children[i - nextIndexByColumn])?.focus();
         }
     }
 
     /** @hidden */
     private _handleNoListLessThanSeven(event: KeyboardEvent, target: HTMLElement, i: number): void {
+        const nextIndexByColumn = 3;
         const { children } = target.parentElement;
 
         if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
-            (<HTMLElement>children[i + 3])?.focus();
+            (<HTMLElement>children[i + nextIndexByColumn])?.focus();
         }
 
         if (KeyUtil.isKeyCode(event, UP_ARROW)) {
-            (<HTMLElement>children[i - 3])?.focus();
+            (<HTMLElement>children[i - nextIndexByColumn])?.focus();
         }
     }
 
