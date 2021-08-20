@@ -100,6 +100,7 @@ export class SelectKeyManagerService {
         } else if (isArrowKey && event.altKey || KeyUtil.isKeyCode(event, [ESCAPE])) {
             // Close the select on ALT + arrow key to match the native <select>
             event.preventDefault();
+            this._component.blur();
             this._component.close();
             // When user is typing do nothing,
             // because the typing sequence can include the space key.
@@ -111,6 +112,7 @@ export class SelectKeyManagerService {
         ) {
             event.preventDefault();
             manager.activeItem._selectViaInteraction();
+            this._component.blur();
         } else if (
             !isTyping &&
             KeyUtil.isKeyCode(event, [TAB]) &&

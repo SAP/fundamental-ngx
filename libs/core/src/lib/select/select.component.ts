@@ -489,6 +489,13 @@ export class SelectComponent implements
 
     }
 
+    /** Blurs select control. */
+    blur(): void {
+        if (this._controlElementRef) {
+            (this._controlElementRef.nativeElement as HTMLElement).blur();
+        }
+    }
+
     /** @hidden */
     registerOnChange(fn: any): void {
         this.onChange = fn;
