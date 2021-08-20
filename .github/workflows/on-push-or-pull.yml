@@ -9,7 +9,7 @@ on:
 env:
   NX_BRANCH: ${{ github.event.number }}
   NX_RUN_GROUP: ${{ github.run_id }}
-#  NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
+  NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
 
   MOZ_HEALESS: 1
 
@@ -123,16 +123,16 @@ jobs:
           npx nx build docs --base-href="fundamental-ngx" --runner cloud
 
   # build build-pack-library
-  build-pack-library:
-    needs: install
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: ${{ env.CACHE_NODE_MODULES_PATH }}
-          key: node_modules-${{ hashFiles('**/package-lock.json') }}
-      - run: npm run build-pack-library
+#  build-pack-library:
+#    needs: install
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - uses: actions/cache@v2
+#        with:
+#          path: ${{ env.CACHE_NODE_MODULES_PATH }}
+#          key: node_modules-${{ hashFiles('**/package-lock.json') }}
+#      - run: npm run build-pack-library
 
   # run unit tests core
   unit-test-core:
@@ -148,7 +148,7 @@ jobs:
         with:
           path: dist/libs/core
           key: dist-core-${{ github.run_id }}
-      - run: npx ng test core --watch false --code-coverage true --browsers=ChromeHeadless
+      - run: npx nx test core --watch false --code-coverage true --browsers=ChromeHeadless --runner cloud
       - run: npm run test:coveralls
 
   # run unit tests core
@@ -165,7 +165,7 @@ jobs:
         with:
           path: dist/libs/platform
           key: dist-platform-${{ github.run_id }}
-      - run: npx ng test platform --watch false --code-coverage true --browsers=ChromeHeadless
+      - run: npx nx test platform --watch false --code-coverage true --browsers=ChromeHeadless --runner cloud
       - run: npm run test:coveralls
 
   # run linting
@@ -182,8 +182,8 @@ jobs:
         with:
           path: ${{ env.CACHE_NODE_MODULES_PATH }}
           key: node_modules-${{ hashFiles('**/package-lock.json') }}
-#      - run: npm run lint -- --runner cloud
-      - run: npx ng lint ${{ matrix.lib }}
+      - run: npm run lint -- --runner cloud
+#      - run: npx ng lint ${{ matrix.lib }}
 
   # firebase deploy preview
   firebase_preview:
