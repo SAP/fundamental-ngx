@@ -13,7 +13,7 @@ export class MultiInputPo extends BaseComponentPo {
     groupDropdown = '#fdp-id-grouped button';
     options = 'fdp-standard-list-item .fd-list__title';
     dropdownOptions = 'ul[role=list] [role="listitem"] li ';
-    selectedToken = 'span[role=\'button\']';
+    selectedToken = 'span[role=\'option\']';
     dropdownOptionText = this.dropdownOptions + 'span';
     dropdownOptionTextValueHelp = '[role="option"]';
 
