@@ -1,8 +1,8 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     EventEmitter,
-    HostListener,
     Input,
     OnDestroy,
     OnInit,
@@ -11,12 +11,16 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
+import { ViewportRuler } from '@angular/cdk/scrolling';
 import { Subscription } from 'rxjs';
 
 import { FdDropEvent, RtlService } from '@fundamental-ngx/core/utils';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 
 import { ProductSwitchItem } from './product-switch.item';
+
+const containerWidthPxSmallMode = 588;
+const containerWidthPx = 776;
 
 @Component({
     selector: 'fd-product-switch-body',
@@ -47,7 +51,7 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     readonly itemClicked: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
-    private _istMode: boolean;
+    private _listMode: boolean;
 
     /** @hidden */
     private _isRtl = false;
@@ -55,23 +59,29 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     /** @hidden */
     private _subscriptions = new Subscription();
 
-    constructor(@Optional() private readonly _rtlService: RtlService) {}
+    constructor(
+        private _viewportRuler: ViewportRuler,
+        @Optional() private readonly _rtlService: RtlService,
+        private readonly _cdr: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
         this._subscriptions.add(this._rtlService?.rtl.subscribe((isRtl) => (this._isRtl = isRtl)));
+        this._subscriptions.add(
+            this._viewportRuler.change().subscribe((event) => {
+                const { innerWidth } = <Window>event.target;
+                this._checkSize(innerWidth);
+            })
+        );
 
-        this._checkSize();
-    }
-
-    ngOnDestroy(): void {
-        this._subscriptions.unsubscribe();
+        const { width } = this._viewportRuler.getViewportSize();
+        this._checkSize(width);
     }
 
     /** @hidden */
-    @HostListener('window:resize', [])
-    onResize(): void {
-        this._checkSize();
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
     }
 
     /** @hidden */
@@ -115,16 +125,18 @@ export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     _isListMode(): boolean {
-        return this._istMode || this.forceListMode;
+        return this._listMode || this.forceListMode;
     }
 
     /** @hidden */
-    private _checkSize(): void {
+    private _checkSize(width: number): void {
         if (this._isSmallMode()) {
-            this._istMode = window.innerWidth < 588;
+            this._listMode = width < containerWidthPxSmallMode;
         } else {
-            this._istMode = window.innerWidth < 776;
+            this._listMode = width < containerWidthPx;
         }
+
+        this._cdr.markForCheck();
     }
 
     /** @hidden */
