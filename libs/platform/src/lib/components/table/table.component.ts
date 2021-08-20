@@ -244,7 +244,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     @Input()
     relationKey: string;
 
-    /** Whether row is navigatable. */
+    /** Whether row is navigatable.
+      * Pass boolean value to set state for the all rows.
+      * Pass string value with the key of the row item's field to compute state for every single row.
+      */
     @Input()
     rowNavigatable: string | boolean;
 
@@ -360,10 +363,19 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * @hidden
      * Group Rules Map. Where key is column key and value is associated group rule
      */
-    _groupRulesMapSubject: BehaviorSubject<Map<string, CollectionGroup>> = new BehaviorSubject(new Map());
+    _groupRulesMapSubject = new BehaviorSubject<Map<string, CollectionGroup>>(new Map());
+
     /** @hidden */
     get _groupRulesMap(): Map<string, CollectionGroup> {
         return this._groupRulesMapSubject.getValue();
+    }
+
+    /** @hidden */
+    _isShownNavigationColumnSubject = new BehaviorSubject<boolean>(false);
+
+    /** @hidden */
+    get _isShownNavigationColumn(): boolean {
+        return this._isShownNavigationColumnSubject.getValue();
     }
 
     /**
@@ -427,11 +439,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     _scrollBarWidth = 0;
-
-    /** @hidden */
-    get _isShownNavigationColumn(): boolean {
-        return this._tableRows.some(row => row.navigatable);
-    }
 
     /** @hidden */
     get _isShownSelectionColumn(): boolean {
@@ -508,8 +515,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             this.recalculateTableColumnWidth();
         }
 
-        if ('navigation' in changes) {
+        if ('rowNavigatable' in changes) {
             this._tableRows.forEach(row => row.navigatable = this._isRowNavigatable(row.value, this.rowNavigatable));
+
+            this._calculateIsShownNavigationColumn();
         }
     }
 
@@ -685,6 +694,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         row.navigatable = this._isRowNavigatable(row.value, rowNavigatable);
 
+        this._calculateIsShownNavigationColumn();
+
         this._cdr.markForCheck();
     }
 
@@ -697,6 +708,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         }
 
         row.navigatable = null;
+
+        this._calculateIsShownNavigationColumn();
 
         this._cdr.markForCheck();
     }
@@ -1127,6 +1140,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 .subscribe((rows) => {
                     this._setTableRows(rows);
 
+                    this._calculateIsShownNavigationColumn();
+
                     if (rows.length && !columnsWidthSet) {
                         this.recalculateTableColumnWidth();
                         columnsWidthSet = true;
@@ -1304,6 +1319,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     private _calculateTableColumnsLength(): void {
         this._tableColumnsLength = this._visibleColumns.length + (this._isShownSelectionColumn ? 1 : 0);
+    }
+
+    /** @hidden */
+    private _calculateIsShownNavigationColumn(): void {
+        this._isShownNavigationColumnSubject.next(this._tableRows.some(tableRow => tableRow.navigatable));
     }
 
     /** @hidden */

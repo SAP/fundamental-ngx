@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
-import { TableComponent, TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform';
-
-import { Observable, of } from 'rxjs';
-import { TableRowActivateEvent } from '../../../../../../../../libs/platform/src/lib/components/table/models';
+import { TableComponent, TableDataProvider, TableDataSource, TableState, TableRowActivateEvent } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-platform-table-navigatable-row-indicator-example',
