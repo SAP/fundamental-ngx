@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output, ViewEncapsula
     template: `
         <button *ngIf="!editMode" (click)="editClicked()" fd-button fdType="transparent" glyph="edit" aria-label="edit"></button>
         <button *ngIf="!editMode" (click)="deleteClicked()" fd-button fdType="transparent" glyph="decline" aria-label="delete"></button>
-        <button *ngIf="editMode" (click)="okClicked()" fd-button fdType="transparent" aria-label="ok">Ok</button>
+        <button *ngIf="editMode" [disabled]="okDisabled" (click)="okClicked()" fd-button fdType="transparent" aria-label="ok">Ok</button>
         <button *ngIf="editMode" (click)="cancelClicked()" fd-button fdType="transparent" aria-label="cancel">Cancel</button>
     `,
     encapsulation: ViewEncapsulation.None,
@@ -16,6 +16,9 @@ export class UploadCollectionButtonGroupComponent {
 
     /** @hidden */
     editMode = false;
+
+    /** @hidden */
+    okDisabled = false;
 
     /** Event emitted when the dragged file exits the dropzone. */
     @Output()

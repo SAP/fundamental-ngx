@@ -1,18 +1,71 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
 
 @Component({
     selector: 'fd-upload-collection-form-item',
     host: { class: 'fd-upload-collection__form-item' },
     template: `
-        <a href="#" *ngIf="!editMode" fd-link fd-list-title fd-upload-collection-title>File_Name.extension</a>
-        <input *ngIf="editMode" class="fd-input" type="text" placeholder="Filename">
-        <span *ngIf="editMode" class="fd-upload-collection__extension">.jpg</span>
+        <input
+            *ngIf="editMode"
+            fd-form-control
+            required
+            style="pointer-events: all;"
+            class="fd-input"
+            type="text"
+            placeholder="Filename"
+            [(ngModel)]="fileName"
+            [state]="!fileName ? 'error' : null"
+        />
+        <span *ngIf="editMode" class="fd-upload-collection__extension">.{{ extension }}</span>
     `,
     encapsulation: ViewEncapsulation.None
 })
-export class UploadCollectionFormItemComponent {
-
+export class UploadCollectionFormItemComponent implements ControlValueAccessor {
     /** @hidden */
+    @Input()
     editMode = false;
 
+    /** @hidden */
+    fileNameValue: string;
+
+    /** @hidden */
+    extension: string;
+
+    /** Event emitted when the dragged file exits the dropzone. */
+    @Output()
+    readonly fileNameChanged = new EventEmitter<string>();
+
+    /** Get the value of the text input. */
+    get fileName(): string {
+        return this.fileNameValue;
+    }
+
+    /** Set the value of the text input. */
+    set fileName(value) {
+        this.fileNameValue = value;
+        this.onChange(value);
+        this.onTouched();
+        this.fileNameChanged.emit(value);
+    }
+
+    /** @hidden */
+    onChange: any = () => {};
+
+    /** @hidden */
+    onTouched: any = () => {};
+
+    /** @hidden */
+    writeValue(value: any): void {
+        this.fileName = value;
+    }
+
+    /** @hidden */
+    registerOnChange(fn): void {
+        this.onChange = fn;
+    }
+
+    /** @hidden */
+    registerOnTouched(fn): void {
+        this.onTouched = fn;
+    }
 }

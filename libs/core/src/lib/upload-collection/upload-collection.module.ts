@@ -15,6 +15,8 @@ import { UploadCollectionButtonGroupComponent } from './upload-collection-button
 import { ButtonModule } from '../button/button.module';
 import { UploadCollectionFormItemComponent } from './upload-collection-form-item.component';
 import { LinkModule } from '../link/link.module';
+import { FormsModule } from '@angular/forms';
+import { FormControlModule } from '@fundamental-ngx/core/form';
 
 @NgModule({
     declarations: [
@@ -29,7 +31,7 @@ import { LinkModule } from '../link/link.module';
         UploadCollectionTitleContainerDirective,
         UploadCollectionFormItemComponent
     ],
-    imports: [CommonModule, ListModule, ButtonModule, LinkModule],
+    imports: [CommonModule, ListModule, ButtonModule, LinkModule, FormsModule, FormControlModule],
     exports: [
         UploadCollectionComponent,
         UploadCollectionItemDirective,
