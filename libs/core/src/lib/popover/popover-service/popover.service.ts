@@ -365,24 +365,10 @@ export class PopoverService extends BasePopoverClass {
         }
 
         if (this.placement) {
-            return this._getPlacement();
+            return [PopoverPosition.getCdkPlacement(this.placement, this._getDirection())]
         }
 
         return [];
-    }
-
-    private _getPlacement(): ConnectedPosition[] {
-        if (this._getDirection() === 'rtl') {
-            const startPlaceStr = this.placement.split('-')[0];
-
-            if (startPlaceStr === 'left' || startPlaceStr === 'right') {
-                const changedPlacement = PopoverFlippedRtlPlacement[this.placement];
-
-                return [PopoverPosition.getCdkPlacement(changedPlacement)];
-            }
-        }
-
-        return [PopoverPosition.getCdkPlacement(this.placement)];
     }
 
     /** @hidden */
