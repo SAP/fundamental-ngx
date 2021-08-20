@@ -203,8 +203,8 @@ jobs:
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ env.FIREBASE_SERVICE_ACCOUNT_TOKEN }}'
-          projectId: valorkin-fundamental-ngx
-          target: valorkin-fundamental-ngx
+          projectId: fundamental-ngx-gh
+          target: fundamental-ngx-gh
           channelId: ${{ env.FIREBASE_CHANNEL }}
           expires: 7d
 

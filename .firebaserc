@@ -1,12 +1,12 @@
 {
 "projects": {
-    "default": "valorkin-fundamental-ngx"
+    "default": "fundamental-ngx-gh"
   },
   "targets": {
-    "valorkin-fundamental-ngx": {
+    "fundamental-ngx-gh": {
       "hosting": {
-        "valorkin-fundamental-ngx": [
-          "valorkin-fundamental-ngx"
+        "fundamental-ngx-gh": [
+          "fundamental-ngx-gh"
         ]
       }
     }
