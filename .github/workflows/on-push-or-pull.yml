@@ -9,21 +9,16 @@ on:
 env:
   NX_BRANCH: ${{ github.event.number }}
   NX_RUN_GROUP: ${{ github.run_id }}
-  # temp valorkin token NX_CLOUD_AUTH_TOKEN
-  NX_CLOUD_AUTH_TOKEN: YmYyYzM5MjQtM2VjYi00NjQ1LThiMWMtNTQ3ZjkyZDBkZDExfHJlYWQtd3JpdGU=
 #  NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
 
   MOZ_HEALESS: 1
 
-  SAUCE_USERNAME: sso-sap-C5315352
-  SAUCE_ACCESS_KEY: 2f6f7c59-5dd2-4542-b8c3-36d1b38c3f9a
-#  SAUCE_USERNAME: ${{secrets.SAUCE_USERNAME}}
-#  SAUCE_ACCESS_KEY: ${{secrets.SAUCE_ACCESS_KEY}}
+  SAUCE_USERNAME: ${{secrets.SAUCE_USERNAME}}
+  SAUCE_ACCESS_KEY: ${{secrets.SAUCE_ACCESS_KEY}}
 
 
   FIREBASE_CHANNEL: ${{ fromJSON('["", "live"]')[!github.base_ref] }}
-  #  FIREBASE_SERVICE_ACCOUNT_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOKEN }}
-  FIREBASE_SERVICE_ACCOUNT_TOKEN: '{"type":"service_account","project_id":"valorkin-fundamental-ngx","private_key_id":"cd2e4c2a268fadaa407299b61319cb3a7b07e3c1","private_key":"-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCKJ0rXfE3CmHlS\nL9ThXZshgdvOBScx50J/n78EYQiabBl0O8zIeWFcLJkwQFHdWLZ+Sz/yWbnAme+I\nCpoUft32jPikNqZ+Z0ZDh+7WKCg3KXLbZnrg6808tyW9WNRUum5efRMzPmUjz4xa\nXtbGMBfddb5huBwGUtozeyZHmw+vinVYxdz2b5XcXCwMekZE5oXQof0n8KjALoOF\nK0NgbBJg3DrFvyFVtULp/8lhVpXtn8HVQQuXMy1afzlFiGEcd9/f3HiUabTIZoNA\nG6fyVxDjHs4wy5d3lFtG2sExLE4ZrM20ET/HbfR1Br80+nzslDYqeXz5JC58GKp4\nxwoHIQBzAgMBAAECggEAGueaCKsZjasZ/Wp5P8Z1/qmGf/G691n9NlOK5LRs833X\n2y4GLIiO8F9zGdV82+l56NCIzI6ywRJ5dnnyFcm7Oler2HcYJ4e/REmFtsktQ8jb\nqGSly4XAe3GDdQOGnlWMRvR+t70P/1BdGgBcPU6CZ0uV3vv24ThjbCEwjENjY6D/\nB2gk7Phnt4MleMhRzKsQDVZrpKlk2xzFH4jAZA5Xhx2tojIQ9jxN8OPda4TV82We\nav68uvG78Vs8fzg9STgwBVG3wY7QPDVEJTwbOwGsUx0jUVQlMubxiWwp3c/3QpFl\nqQjW3SCL2tw/XffEcPBVphKDXTBJtfPWV04V58qOkQKBgQC8zEieVapz8vbwcuWU\n+4Opax5lbbYK5meV0UnkriUknSb1oRA/7CflnXPn1ufPe33rS2QHhNsY4+ydGhAF\nw8E92qrkeQUwZRPeiBFW0Ij86RAcTb7xGpPZQZ6TVJPOTWVpuoRezow/YiIOnNPO\nUazjPfRzMrRrNFHK2NDjusrfeQKBgQC7VCm3b1cuTyb+Q5ixRFB0DAF/PCnwI2/+\nFXwoqf+cZm8xSdYmoFhjRbsH9tInLkjf5K7Jq1EkYyxMFtX1D8sMDoF87zvNuDK5\nXlskKOhOppEaa3RWytYtP4Jvu4sjnu9FcBperR1MyMHIzMz0WkLgdwRMHOS5EOhD\noY6/GjPISwKBgQCxGtlMXoQlfNgVO1MObNpXhTrgXwiUNQsayVeOA6aoMBup88sw\ni7HpfciKxVhzlB7NKM3PF9wH/1epEBfTsIyIH6aL6NLrUQZQjEfnrnuy9Fa+llf2\nCL6E4T+GaaK1tnjZs7QU06FQnBfiqU8vjgKmsSmtHvWMU2oe5UEfP8yr0QKBgDsJ\nZTRIRKN1koZja0XCj9Bi0D33CgiCQpNC1iRCnyn9JmHUMUdvFSwEF9OEt+pdLd5R\nxbwM37+l+ZnpQHjBB26/S5PCGYjV2jaNRA/7TGstF2HKJ5oKxsDv2P25jzokpqet\nksHvsOI4CsprsNP5dkYjfBk4qeShLXHTApe7fEJNAoGADOcOSed74gOPdgWoFg83\nSIOtLn5xF95p/lqpU3g5aHeFtCYEMN7ScWXho1uXRGJSdH+WJe4HAFfgrslIK5rE\nzvYxOuzmW7aMUegjZImt5umhv4jRun/VF4mkp6DkxDhabtVDjiHMN3ISbd0XTZOL\nN/Izv2Z53+OYSoAs4pieG90=\n-----END PRIVATE KEY-----\n","client_email":"sap-funtik-inline-key@valorkin-fundamental-ngx.iam.gserviceaccount.com","client_id":"110310975513730864060","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_x509_cert_url":"https://www.googleapis.com/robot/v1/metadata/x509/sap-funtik-inline-key%40valorkin-fundamental-ngx.iam.gserviceaccount.com"}'
+  FIREBASE_SERVICE_ACCOUNT_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOKEN }}
 
   CACHE_NODE_MODULES_PATH: |
     ~/.npm
