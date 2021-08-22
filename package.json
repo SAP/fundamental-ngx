@@ -187,7 +187,7 @@
     "karma-sauce-launcher": "4.3.6",
     "karma-sourcemap-loader": "0.3.8",
     "karma-spec-reporter": "0.0.32",
-    "karma-typescript": "5.0.3",
+    "karma-typescript": "5.5.2",
     "karma-typescript-angular2-transform": "latest",
     "karma-webpack": "5.0.0",
     "nan": "2.14.2",
