@@ -147,7 +147,7 @@
     "@commitlint/cli": "12.1.4",
     "@commitlint/config-conventional": "13.1.0",
     "@commitlint/travis-cli": "13.1.0",
-    "@nrwl/cli": "11.1.5",
+    "@nrwl/cli": "12.7.2",
     "@nrwl/schematics": "8.12.11",
     "@nrwl/tao": "11.5.1",
     "@nrwl/workspace": "11.5.2",
