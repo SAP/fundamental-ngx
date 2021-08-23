@@ -1,4 +1,20 @@
 
+### [0.31.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.8...v0.31.1-rc.9) (2021-08-20)
+
+
+### Bug Fixes
+
+* **platform:** wizard-generator, skip notification about save progress if nothing change ([#6335](https://github.com/SAP/fundamental-ngx/issues/6335)) ([529738f](https://github.com/SAP/fundamental-ngx/commit/529738f5db3b9babe30a4e88bf035108918318b3))
+
+### [0.31.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.7...v0.31.1-rc.8) (2021-08-20)
+
+
+### Bug Fixes
+
+* **platform:** table imports fix ([#6366](https://github.com/SAP/fundamental-ngx/issues/6366)) ([a7b5a92](https://github.com/SAP/fundamental-ngx/commit/a7b5a9209fb2600511b9b3f6ba83d6c4a9d9459e))
+
+### [0.31.1-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.6...v0.31.1-rc.7) (2021-08-18)
+
 ### [0.31.1-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.5...v0.31.1-rc.6) (2021-08-17)
 
 ### [0.31.1-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.4...v0.31.1-rc.5) (2021-08-17)

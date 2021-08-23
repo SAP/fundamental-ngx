@@ -1,6 +1,6 @@
 import { PaginationPo } from '../pages/pagination.po';
 import {
-    click, getAttributeByName, getElementArrayLength, getText, getValue, pause,
+    click, doesItExist, getElementArrayLength, getText, getValue, 
     refreshPage, scrollIntoView, setValue,
     waitForPresent
 } from '../../driver/wdio';
@@ -17,7 +17,7 @@ describe('Pagination test suite:', function() {
     const {
         standardButton, basicPaginationDiv, basicPaginationPages, itemPaginationPages, totalPagination,
         linkPrevious, linkNext, selectPaginationPages, dropdownButton, dropDownOption, toggledButton,
-        playgroundInputFields, playgroundPages, playgroundLabel, playgroundExamples
+        playgroundInputFields, playgroundPages, playgroundLabel, playgroundExamples, playground, page
     } = paginationPage;
 
     beforeAll(() => {
@@ -29,8 +29,7 @@ describe('Pagination test suite:', function() {
         waitForPresent(standardButton);
     }, 1);
 
-    // discussed with Sean
-    xdescribe('Check Basic Pagination example', function() {
+    describe('Check Basic Pagination example', function() {
 
         it('should check selected pages by clicking each option', () => {
             scrollIntoView(standardButton);
@@ -226,15 +225,13 @@ describe('Pagination test suite:', function() {
             expect(pagesLength).toEqual(actualItems);
         });
 
-        xit('should check that filling all fields by 0 pages are not displayed', () => {
+        it('should check that filling all fields by 0 pages are not displayed', () => {
             scrollIntoView(playgroundInputFields);
             setValue(playgroundInputFields, '0');
             setValue(playgroundInputFields, '0', 1);
             setValue(playgroundInputFields, '0', 2);
 
-            expect(getAttributeByName(playgroundExamples, 'ng-reflect-total-items')).toBe('0');
-            expect(getAttributeByName(playgroundExamples, 'ng-reflect-items-per-page')).toBe('0');
-            expect(getAttributeByName(playgroundExamples, 'ng-reflect-current-page')).toBe('0');
+            expect(doesItExist(playgroundPages)).toBe(false, 'playground pages still exist')
         });
 
         it('should check that all text labels are displayed', () => {

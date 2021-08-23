@@ -25,14 +25,10 @@ export const searchTermAppleText = 'Search Term: Apple';
 export const searchPineappleText = 'Search Term: Pineapple';
 export const appleTestText = 'Apple';
 export const bananaTestText = 'Banana';
-export const alertTestText = 'Custom Function Called';
 export const titleTestText = 'Title';
 export const capsSearchTermAppleText = 'Search Term: APPLE';
 export const capsSearchTermTomatoText = 'Search Term: TOMATO';
-export const openStateAlertTestText = [
-    'Combobox Opened',
-    'Combobox Closed'
-];
+
 export const settingsTestText = [
     'Search Term: Photo Voltaic',
     'Returned from itemClicked Event: { "item": { "name": "Photo Voltaic", "icon": "photo-voltaic" }, "index": 0 }',

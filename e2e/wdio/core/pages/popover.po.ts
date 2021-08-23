@@ -6,6 +6,7 @@ export class PopoverPo extends CoreBaseComponentPo {
 
     avatar = '.fd-avatar--circle';
     popover = 'ul.fd-list';
+    button = '.fd-button';
     option = 'li.fd-list__item';
     icon = 'fd-icon.sap-icon--menu2';
     iconMoney = 'i.sap-icon--money-bills ';
@@ -38,6 +39,11 @@ export class PopoverPo extends CoreBaseComponentPo {
     dropdownOption = '#cdk-overlay-6 li.fd-list__item';
     cdkButton = '#background-ex9 button';
     segmentButton = '.fd-segmented-button';
+    startButton = this.button + '[value="start"]';
+    bottomButton = this.button + '[value="bottom"]';
+    centerButton = this.button + '[value="center"]';
+    topButton = this.button + '[value="top"]';
+    endButton = this.button + '[value="end"]';
 
     open(): void {
         super.open(this.url);
