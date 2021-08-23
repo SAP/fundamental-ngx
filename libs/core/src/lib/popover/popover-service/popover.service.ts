@@ -19,7 +19,7 @@ import {
 import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
 
 import { merge, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, startWith, takeUntil, tap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
 
 import { GetDefaultPosition, PopoverPosition } from '@fundamental-ngx/core/shared';
 import { BasePopoverClass } from '../base/base-popover.class';
