@@ -107,7 +107,7 @@ describe('Datetime picker suite', function () {
 
     })
 
-    it('should check that available only 2 next weeks in range disabled example', () => {
+    xit('should check that available only 2 next weeks in range disabled example', () => {
         click(rangeDisabledExample + calendarIcon);
         const currentDayIndex = getCurrentItemIndex();
         const itemsLength = getElementArrayLength(currentMonthCalendarItem) - 1;
