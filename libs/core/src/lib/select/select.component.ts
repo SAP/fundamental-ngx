@@ -769,7 +769,10 @@ export class SelectComponent implements
                 this.selectOptionsListTemplate,
                 SelectMobileComponent,
                 { container: this._elementRef.nativeElement },
-                { injector: Injector.create({ providers: [{ provide: SELECT_COMPONENT, useValue: this }] }) }
+                { 
+                    injector: Injector.create({ providers: [{ provide: SELECT_COMPONENT, useValue: this }] }),
+                    services: [this._rtlService]
+                }
             )
         }
     }
