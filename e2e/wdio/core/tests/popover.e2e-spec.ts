@@ -1,7 +1,7 @@
 import { PopoverPo } from '../pages/popover.po';
 import {
     click, getAttributeByName,
-    getElementArrayLength, getText, isElementClickable, isElementDisplayed,
+    getElementArrayLength, getElementClass, getText, isElementClickable, isElementDisplayed,
     refreshPage, scrollIntoView
 } from '../../driver/wdio';
 
@@ -27,7 +27,8 @@ describe('Popover test suite', function() {
         simplePopoverButton, popoverMessage, headerPopoverButton, placementPopoverButton, programmaticControlButton,
         popoverDialogsButton, multiInputButton, multiInputOption, multiInputSpan, popoverDialogsHeader, popoverDialogParagraph,
         clickMeButton, popoverDialogMessage, hoverElement, triggerButton2, triggerButton, popoverContainer, scrollButton,
-        scrollMessage, plusButton, dynamicOption, dropdownButton, dropdownOption, dynamicSubOption, cdkButton, segmentButton
+        scrollMessage, plusButton, dynamicOption, dropdownButton, dropdownOption, dynamicSubOption, cdkButton, segmentButton,
+        topButton, endButton, centerButton, startButton, bottomButton
     } = popoverPage;
 
     beforeAll(() => {
@@ -336,9 +337,9 @@ describe('Popover test suite', function() {
 
     describe('Check Dropdown Popover', function() {
 
-        xit('should check disable button', () => {
+        it('should check disable button', () => {
             scrollIntoView(dropdownButton);
-            expect(getAttributeByName(dropdownButton, 'ng-reflect-disabled', 1)).toBe('true');
+            expect(getElementClass(dropdownButton, 1)).toContain('is-disabled');
         });
 
         it('should check that buttons have dropdown and options', () => {
@@ -373,36 +374,36 @@ describe('Popover test suite', function() {
             }
         });
 
-        xit('should check that popover can move around the button', () => {
+        it('should check that popover can move around the button', () => {
             scrollIntoView(cdkButton);
-            click(cdkButton);
             // Origin X
-            expect(getAttributeByName(segmentButton, 'ng-reflect-model')).toBe('start');
-            click(cdkButton, 1);
-            expect(getAttributeByName(segmentButton, 'ng-reflect-model')).toBe('center');
-            click(cdkButton, 2);
-            expect(getAttributeByName(segmentButton, 'ng-reflect-model')).toBe('end');
+            click(startButton);
+            expect(getElementClass(startButton)).toContain('toggled');
+            click(centerButton)
+            expect(getElementClass(centerButton)).toContain('toggled');
+            click(endButton);
+            expect(getElementClass(endButton)).toContain('toggled');
             // Origin Y
-            click(cdkButton, 3);
-            expect(getAttributeByName(segmentButton, 'ng-reflect-model', 1)).toBe('bottom');
-            click(cdkButton, 4);
-            expect(getAttributeByName(segmentButton, 'ng-reflect-model', 1)).toBe('center');
-            click(cdkButton, 5);
-            expect(getAttributeByName(segmentButton, 'ng-reflect-model', 1)).toBe('top');
-            // Overlay X
-            click(cdkButton, 6);
-            expect(getAttributeByName(segmentButton, 'ng-reflect-model', 2)).toBe('start');
-            click(cdkButton, 7);
-            expect(getAttributeByName(segmentButton, 'ng-reflect-model', 2)).toBe('center');
-            click(cdkButton, 8);
-            expect(getAttributeByName(segmentButton, 'ng-reflect-model', 2)).toBe('end');
-            // Overlay Y
-            click(cdkButton, 9);
-            expect(getAttributeByName(segmentButton, 'ng-reflect-model', 3)).toBe('bottom');
-            click(cdkButton, 10);
-            expect(getAttributeByName(segmentButton, 'ng-reflect-model', 3)).toBe('center');
-            click(cdkButton, 11);
-            expect(getAttributeByName(segmentButton, 'ng-reflect-model', 3)).toBe('top');
+            click(bottomButton);
+            expect(getElementClass(bottomButton)).toContain('toggled');
+            click(centerButton, 1)
+            expect(getElementClass(centerButton, 1)).toContain('toggled');
+            click(topButton);
+            expect(getElementClass(topButton)).toContain('toggled');
+            // // Overlay X
+            click(startButton, 1);
+            expect(getElementClass(startButton, 1)).toContain('toggled');
+            click(centerButton, 2)
+            expect(getElementClass(centerButton, 2)).toContain('toggled');
+            click(endButton, 1);
+            expect(getElementClass(endButton, 1)).toContain('toggled');
+            // // Overlay Y
+            click(bottomButton, 1);
+            expect(getElementClass(bottomButton, 1)).toContain('toggled');
+            click(centerButton, 3)
+            expect(getElementClass(centerButton, 3)).toContain('toggled');
+            click(topButton, 1);
+            expect(getElementClass(topButton, 1)).toContain('toggled');
         });
     });
 
