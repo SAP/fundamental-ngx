@@ -128,11 +128,16 @@ $fd-popover-background-color: #fff;
 			bottom: $fd-popover-arrow-offset;
 		}
 	}
+}
 
-    .fd-popover__popper--no-border-radius & {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-    }
+.fd-popover__popper--no-border-top-radius {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.fd-popover__popper--no-border-bottom-radius {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 

@@ -23,6 +23,9 @@ import { PopoverPosition } from '@fundamental-ngx/core/shared';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { NotificationGroupComponent } from '@fundamental-ngx/core/notification';
 
+const NO_BORDER_TOP_RADIUS_CLASS = 'fd-popover__popper--no-border-top-radius';
+const NO_BORDER_BOTTOM_RADIUS_CLASS = 'fd-popover__popper--no-border-bottom-radius';
+
 /**
  * A component used to enforce a certain layout for the popover.
  * ```html
@@ -79,6 +82,9 @@ export class PopoverBodyComponent {
     /** Classes added to arrow element */
     _arrowClasses: string[] = [];
 
+    /** No Border Radius class(es) */
+    _angleClass: string = null;
+
     /** Additional style to put margin into body component, to give a place for arrow */
     _marginStyle: string = null;
 
@@ -127,6 +133,18 @@ export class PopoverBodyComponent {
 
         this._removeOldMarginsStyle();
         this._addMarginStyle(arrowDirection);
+
+        this.detectChanges();
+    }
+
+    _setAngleStyles(position: ConnectionPositionPair): void {
+        if (position.overlayY === 'top') {
+            this._angleClass = NO_BORDER_TOP_RADIUS_CLASS;
+        }
+
+        if (position.overlayY === 'bottom') {
+            this._angleClass = NO_BORDER_BOTTOM_RADIUS_CLASS;
+        }
 
         this.detectChanges();
     }

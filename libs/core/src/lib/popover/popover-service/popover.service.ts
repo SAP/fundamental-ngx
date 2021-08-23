@@ -19,7 +19,7 @@ import {
 import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
 
 import { merge, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, filter, startWith, takeUntil, tap } from 'rxjs/operators';
 
 import { GetDefaultPosition, PopoverPosition } from '@fundamental-ngx/core/shared';
 import { BasePopoverClass } from '../base/base-popover.class';
@@ -265,7 +265,6 @@ export class PopoverService extends BasePopoverClass {
 
     /** @hidden */
     private _getPositionStrategy(forcedPositions?: ConnectedPosition[]): FlexibleConnectedPositionStrategy {
-
         let resultPosition = forcedPositions ? forcedPositions : this._getPositions();
 
         if (!this.fixedPosition) {
@@ -301,16 +300,24 @@ export class PopoverService extends BasePopoverClass {
     /** @hidden */
     private _listenForPositionChange(positionChange: Observable<ConnectedOverlayPositionChange>): void {
         this._placementRefresh$.next();
-        positionChange
-            .pipe(
-                takeUntil(this._placementRefresh$),
-                filter(() => !this.noArrow && !!this._getPopoverBody()),
-                distinctUntilChanged(
-                    (previous, current) =>
-                        previous.connectionPair === current.connectionPair
-                ))
-            .subscribe(event => this._getPopoverBody()._setArrowStyles(event.connectionPair, this._getDirection()))
-        ;
+
+        const observer = positionChange
+            .pipe(takeUntil(this._placementRefresh$));
+
+        // popover cases
+        observer.pipe(
+            filter(() => !this.noArrow && !!this._getPopoverBody()),
+            distinctUntilChanged(
+                (previous, current) =>
+                    previous.connectionPair === current.connectionPair
+            )
+        ).subscribe(event => this._getPopoverBody()._setArrowStyles(event.connectionPair, this._getDirection()));
+
+        // non popover cases, like: combobox, multi-input etc.
+        observer.pipe(
+            filter(() => this.noArrow && !!this._getPopoverBody()),
+            distinctUntilChanged((prev, current) => prev.connectionPair.overlayY === current.connectionPair.overlayY)
+        ).subscribe((change: ConnectedOverlayPositionChange) => this._getPopoverBody()._setAngleStyles(change.connectionPair));
     }
 
     /** Subscribe to close events from CDK Overlay, to throw proper events, change values */
