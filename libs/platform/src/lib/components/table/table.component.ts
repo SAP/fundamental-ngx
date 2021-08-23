@@ -249,7 +249,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
       * Pass string value with the key of the row item's field to compute state for every single row.
       */
     @Input()
-    rowNavigatable: string | boolean;
+    rowNavigatable: string | boolean = false;
 
     /** Whether table row can be clicked */
     @Input()
@@ -1766,15 +1766,16 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    private _isRowNavigatable(row: T, rowNavigationDisabled: string | boolean): boolean {
+    private _isRowNavigatable(row: T, rowNavigatable: string | boolean): boolean {
         if (!row) {
             return false;
         }
 
-        if (isString(rowNavigationDisabled)) {
-            return !!row[rowNavigationDisabled];
+        /** If key of the of the row's item field passed */
+        if (isString(rowNavigatable)) {
+            return !!row[rowNavigatable];
         }
 
-        return !!rowNavigationDisabled;
+        return !!rowNavigatable;
     }
 }
