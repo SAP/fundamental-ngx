@@ -177,16 +177,26 @@
 
                         <ng-template #editMode>
                             <div fd-form-item>
-                                <input
-                                    fd-form-control
-                                    [value]="_getItemName(item)"
-                                    (blur)="_fileNameChange($event, item)"
-                                    type="text"
-                                    i18n-placeholder
-                                    placeholder="Enter a name"
-                                    compact="true"
-                                />
-                                <span [innerText]="_getItemExtension(item)"></span>
+                                <fd-form-input-message-group [triggers]="[]" [isOpen]="!!item.sameFilenameState">
+                                    <div class="fdp-upload-collection__vertical-align-center">
+                                        <input
+                                            fd-form-control
+                                            [value]="_getItemName(item)"
+                                            (blur)="_fileNameChange($event, item)"
+                                            (input)="_checkName($event, item)"
+                                            type="text"
+                                            i18n-placeholder
+                                            placeholder="Enter a name"
+                                            compact="true"
+                                            [state]="item.sameFilenameState"
+                                        />
+                                        <span [innerText]="_getItemExtension(item)"></span>
+                                    </div>
+
+                                    <fd-form-message [type]="item.sameFilenameState" i18n="@@platformUploadCollection.Item.Name.AlreadyExists">
+                                        {{ item.type === 'file' ? 'File' : 'Folder' }} already exists with that name.
+                                    </fd-form-message>
+                                </fd-form-input-message-group>
                             </div>
                         </ng-template>
                     </fdp-table-cell>
