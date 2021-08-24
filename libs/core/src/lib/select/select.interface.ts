@@ -30,10 +30,10 @@ export interface SelectInterface extends MobileMode {
     close(forceClose?: boolean): void;
     open(): void;
     focus(): void;
+    blur(): void;
     _isRtl(): boolean;
     _getItemHeight(): number;
     _getOptionScrollPosition( optionIndex: number,
         optionHeight: number,
-        currentScrollPosition: number,
-        panelHeight: number): void;
+        currentScrollPosition: number): void;
 }

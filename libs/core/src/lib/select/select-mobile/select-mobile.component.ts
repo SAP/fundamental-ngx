@@ -7,6 +7,7 @@ import {
     OnInit,
     Optional,
     TemplateRef,
+    HostListener,
     ViewChild,
     ChangeDetectionStrategy
 } from '@angular/core';
@@ -14,12 +15,14 @@ import { Subscription } from 'rxjs';
 
 import { SELECT_COMPONENT, SelectInterface } from '../select.interface';
 import { DialogService } from '@fundamental-ngx/core/dialog';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import {
     MOBILE_MODE_CONFIG,
     MobileModeConfigToken,
     MobileModeBase,
     MobileModeControl
 } from '@fundamental-ngx/core/mobile-mode';
+import { ESCAPE } from '@angular/cdk/keycodes';
 
 /**
  * This component provides extended mobile support for Select component to render list of option since full screen
@@ -45,6 +48,11 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
     /** @hidden */
     private _subscriptions = new Subscription();
 
+    @HostListener('keydown', ['$event']) onItemKeydown(event: KeyboardEvent): void {
+        if (event && (KeyUtil.isKeyCode(event, [ESCAPE]))) {
+            this._component.close(true);
+        }
+    }
     constructor(
         _elementRef: ElementRef,
         _dialogService: DialogService,
@@ -93,6 +101,7 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
     private _listenOnSelectOpenChange(): void {
         this._subscriptions.add(
             this._component.isOpenChange.subscribe((isOpen) => {
+                this._elementRef.nativeElement.blur();
                 this.dialogRef.hide(!isOpen);
             })
         );
@@ -103,11 +112,11 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
         this.dialogRef = this._dialogService.open(this._dialogTemplate, {
             ...this.dialogConfig,
             mobile: true,
-            focusTrapped: false,
             verticalPadding: false,
-            escKeyCloseable: false,
             backdropClickCloseable: false,
-            container: this._elementRef.nativeElement
+            container: this._elementRef.nativeElement,
+            ariaLabelledBy: 'fd-dialog-header'
         });
+
     }
 }
