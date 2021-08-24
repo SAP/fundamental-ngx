@@ -1,4 +1,11 @@
 
+### [0.31.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.13...v0.31.1-rc.14) (2021-08-24)
+
+
+### Bug Fixes
+
+* **platform:** add sameFilenameAllowed ([#6349](https://github.com/SAP/fundamental-ngx/issues/6349)) ([ee9f309](https://github.com/SAP/fundamental-ngx/commit/ee9f309b1290cfe4e4f0171a7661a2bba24af44f))
+
 ### [0.31.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.12...v0.31.1-rc.13) (2021-08-24)
 
 
