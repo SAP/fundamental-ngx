@@ -1,6 +1,6 @@
 import { DatePickerPo } from '../../pages/date-picker.po'
 const {
-    calendarItem
+    altCalendarItem
 } = new DatePickerPo();
 import {
     getElementArrayLength,
@@ -48,8 +48,8 @@ export function getNextDay(withZero: boolean): string {
 }
 
 export function getCurrentItemIndex(): number {
-    for (let i = 0; i < getElementArrayLength(calendarItem) - 1; i++) {
-        if (getElementClass(calendarItem, i).includes('is-active')) {
+    for (let i = 0; i < getElementArrayLength(altCalendarItem) - 1; i++) {
+        if (getElementClass(altCalendarItem, i).includes('is-active')) {
             return i;
         }
     }

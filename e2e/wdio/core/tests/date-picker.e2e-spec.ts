@@ -26,7 +26,7 @@ describe('Datetime picker suite', function () {
         formattingExample, disableFuncExample, internationalExample, rangeDisabledExample, calendar, calendarIcon,
         calendarInput, calendarItem, selectedTimeLine, currentItem, itemText, inputGroup, frenchButton, germanButton,
         bulgarianButton, previousMonthButton, nextMonthButton, calendarBody, calendarRow, selectMonthButton,
-        selectYearButton, months, buttonText, message
+        selectYearButton, months, buttonText, message, currentMonthCalendarItem
     } = new DatePickerPo();
 
     beforeAll(() => {
@@ -106,10 +106,10 @@ describe('Datetime picker suite', function () {
     it('should check that available only 2 next weeks in range disabled example', () => {
         click(rangeDisabledExample + calendarIcon);
         const currentDayIndex = getCurrentItemIndex();
-        const itemsLength = getElementArrayLength(calendarItem) - 1;
+        const itemsLength = getElementArrayLength(currentMonthCalendarItem) - 1;
 
-        for (let i = currentDayIndex - 1; i != 0; i--) {
-            expect(isElementClickable(calendarItem, i)).toBe(false, `element is not disabled`);
+        for (let i = currentDayIndex - 1; i !== 0; i--) {
+            expect(isElementClickable(calendarItem, i)).toBe(false, `previous day not disabled`);
         }
         if (currentDayIndex + 15 <= itemsLength) {
             for (let i = currentDayIndex; i < currentDayIndex + 15; i++) {
@@ -125,21 +125,20 @@ describe('Datetime picker suite', function () {
             const lengthDifference = itemsLength - currentDayIndex;
             const availableLengthNextMonth = 15 - lengthDifference;
 
-            for (let i = 0; i < lengthDifference; i++) {
-                expect(isElementClickable(calendarItem, i)).toBe(true, `element is disabled`);
+            for (let i = currentDayIndex; i < lengthDifference; i++) {
+                expect(isElementClickable(currentMonthCalendarItem, i)).toBe(true, `element ${i} is disabled`);
             }
 
             click(nextMonthButton);
 
             for (let i = 0; i < availableLengthNextMonth; i++) {
-                expect(isElementClickable(calendarItem, i)).toBe(true, `element is disabled`);
+                expect(isElementClickable(currentMonthCalendarItem, i)).toBe(true, `element ${i} is disabled`);
             }
 
             for (let i = availableLengthNextMonth + 1; i < itemsLength; i++) {
-                expect(isElementClickable(calendarItem, i)).toBe(false, `element is not disabled`);
+                expect(isElementClickable(currentMonthCalendarItem, i)).toBe(false, `element ${i} is not disabled`);
             }
         }
-
     });
 
     it('should check marking of weekends', () => {
