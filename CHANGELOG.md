@@ -1,4 +1,11 @@
 
+### [0.31.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.14...v0.31.1-rc.15) (2021-08-24)
+
+
+### Bug Fixes
+
+* **platform:** fix dynamic-form-control-field directive that fixes stackblitz examples ([#6323](https://github.com/SAP/fundamental-ngx/issues/6323)) ([df6c28e](https://github.com/SAP/fundamental-ngx/commit/df6c28e43585e479879c5b49b9419ced374d969f))
+
 ### [0.31.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.13...v0.31.1-rc.14) (2021-08-24)
 
 
