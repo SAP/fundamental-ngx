@@ -55,8 +55,8 @@ describe('Datetime picker suite', function () {
             waitForElDisplayed(datePickerInput, i);
         }
     });
-// failed
-    xit('Verify on click on the date picker button', () => {
+
+    it('Verify on click on the date picker button', () => {
         const activeButtons = elementArray(activeDateTimePickerButton);
         for (let i = 1; i < activeButtons.length; i++) {
             if (!getElementClass(activeDateTimePickerButton, i).includes('is-disabled')) {
@@ -81,9 +81,7 @@ describe('Datetime picker suite', function () {
         expect(getText(selectYearButton)).toBe(year2030.toString());
     });
 
-
-// failed
-    xit('Verify by default today date is focused', () => {
+    it('Verify by default today date is focused', () => {
         const activeButtons = elementArray(activeDateTimePickerButton);
         for (let i = 0; i < activeButtons.length; i++) {
             if (i !== 2 && i !== 7) {  // other default days in these calendars
@@ -137,8 +135,8 @@ describe('Datetime picker suite', function () {
         expect(highlightedColor)
             .toContain(getCSSPropertyByName(dateTimePickerPage.dayInCalendarButtonByValue('1'), 'background-color').value);
     });
-// failed
-    xit('Verify When the user selects cancel the action is aborted and the input field remains unchanged.', () => {
+
+    it('Verify When the user selects cancel the action is aborted and the input field remains unchanged.', () => {
         click(activeDateTimePickerButton);
         click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
         selectHoursAndMinutes();

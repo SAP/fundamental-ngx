@@ -26,11 +26,7 @@ describe('Datetime picker suite', function () {
         formattingExample, disableFuncExample, internationalExample, rangeDisabledExample, calendar, calendarIcon,
         calendarInput, calendarItem, selectedTimeLine, currentItem, itemText, inputGroup, frenchButton, germanButton,
         bulgarianButton, previousMonthButton, nextMonthButton, calendarBody, calendarRow, selectMonthButton,
-<<<<<<< HEAD
         selectYearButton, months, buttonText, message, currentMonthCalendarItem
-=======
-        selectYearButton, months, buttonText, message
->>>>>>> test(e2e): commit files
     } = new DatePickerPo();
 
     beforeAll(() => {
@@ -107,7 +103,7 @@ describe('Datetime picker suite', function () {
 
     })
 
-    xit('should check that available only 2 next weeks in range disabled example', () => {
+    it('should check that available only 2 next weeks in range disabled example', () => {
         click(rangeDisabledExample + calendarIcon);
         const currentDayIndex = getCurrentItemIndex();
         const itemsLength = getElementArrayLength(currentMonthCalendarItem) - 1;
