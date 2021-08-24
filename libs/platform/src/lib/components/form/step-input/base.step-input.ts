@@ -1,5 +1,5 @@
 import { Input, Output, EventEmitter, Renderer2, Directive, OnInit, ChangeDetectorRef } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { takeUntil, switchMap, map } from 'rxjs/operators';
 import { NgForm, NgControl } from '@angular/forms';
 
@@ -362,24 +362,26 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
         this._align$
             .asObservable()
             .pipe(
-                switchMap((align) =>
-                    this._rtlService.rtl.pipe(
-                        map(
-                            (isRtl): StepInputAlign => {
-                                if (!ALIGN_INPUT_OPTIONS_LIST.includes(align)) {
-                                    return null;
-                                }
-                                if (isRtl && align === StepInputAlign.Left) {
-                                    return StepInputAlign.Right;
-                                }
-                                if (isRtl && align === StepInputAlign.Right) {
-                                    return StepInputAlign.Left;
-                                }
-                                return align;
+                switchMap((align) => {
+                    if (!this._rtlService) {
+                        return of(align);
+                    }
+
+                    return this._rtlService.rtl.pipe(
+                        map((isRtl): StepInputAlign => {
+                            if (!ALIGN_INPUT_OPTIONS_LIST.includes(align)) {
+                                return null;
                             }
-                        )
-                    )
-                ),
+                            if (isRtl && align === StepInputAlign.Left) {
+                                return StepInputAlign.Right;
+                            }
+                            if (isRtl && align === StepInputAlign.Right) {
+                                return StepInputAlign.Left;
+                            }
+                            return align;
+                        })
+                    );
+                }),
                 takeUntil(this._destroyed)
             )
             .subscribe((align) => {
