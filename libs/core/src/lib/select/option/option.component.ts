@@ -55,7 +55,7 @@ export class FdOptionSelectionChange {
         '[attr.aria-selected]': 'selected',
         '[class.is-focus]': 'active',
         '[attr.id]': 'id',
-        '[tabindex]': 'disabled ? -1 : 0',
+        '[tabindex]': '-1',
         role: 'option',
         '(click)': '_selectViaInteraction()',
         '(keydown)': '_handleKeydown($event)'

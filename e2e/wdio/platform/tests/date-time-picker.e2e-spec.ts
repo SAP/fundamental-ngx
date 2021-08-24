@@ -1,8 +1,9 @@
 import {
     click,
     elementArray,
-    getAttributeByName,
-    getCSSPropertyByName, getElementClass, getElementPlaceholder,
+    getCSSPropertyByName,
+    getElementClass,
+    getElementPlaceholder,
     getText,
     getValue,
     refreshPage,
@@ -30,7 +31,7 @@ const {
     activeDateTimePickerInput, disabledDateTimePickerInput, disabledDateTimePickerButton, cancelButton,
     okButton, selectedHours, selectedMinutes, navigationUpArrowButton, period,
     navigationDownArrowButton, timeItem, topPage, bottomPage, firstYearButton, firstMonthButton, selectMonthButton,
-    disabledFunctionExample
+    disabledFunctionExample, calendarContainer,
 } = new DateTimePicker();
 
 describe('Datetime picker suite', function () {
@@ -163,6 +164,7 @@ describe('Datetime picker suite', function () {
     it('Verify date time picker with disabled functions', () => {
         scrollIntoView(disabledFunctionExample + datePickerButton);
         click(disabledFunctionExample + datePickerButton);
+        waitForElDisplayed(calendarContainer);
         waitForUnclickable(dateTimePickerPage.dayInDisabledFunctionsCalendarByIndex((dateTimePickerPage.getCurrentDayIndex() - 1).toString()));
     });
 

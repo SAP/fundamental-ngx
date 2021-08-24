@@ -1,4 +1,36 @@
 
+### [0.31.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.14...v0.31.1-rc.15) (2021-08-24)
+
+
+### Bug Fixes
+
+* **platform:** fix dynamic-form-control-field directive that fixes stackblitz examples ([#6323](https://github.com/SAP/fundamental-ngx/issues/6323)) ([df6c28e](https://github.com/SAP/fundamental-ngx/commit/df6c28e43585e479879c5b49b9419ced374d969f))
+
+### [0.31.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.13...v0.31.1-rc.14) (2021-08-24)
+
+
+### Bug Fixes
+
+* **platform:** add sameFilenameAllowed ([#6349](https://github.com/SAP/fundamental-ngx/issues/6349)) ([ee9f309](https://github.com/SAP/fundamental-ngx/commit/ee9f309b1290cfe4e4f0171a7661a2bba24af44f))
+
+### [0.31.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.12...v0.31.1-rc.13) (2021-08-24)
+
+
+### Bug Fixes
+
+* **core:** select component reading the selected option and correct tab order to access the element in mobile mode ([#5385](https://github.com/SAP/fundamental-ngx/issues/5385)) ([b97d076](https://github.com/SAP/fundamental-ngx/commit/b97d07654106c4b7612f38edd2ad619a26afc875))
+
+### [0.31.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.11...v0.31.1-rc.12) (2021-08-24)
+
+
+### Bug Fixes
+
+* **core,platform:** checkbox a11y issues fix ([#6312](https://github.com/SAP/fundamental-ngx/issues/6312)) ([4576a82](https://github.com/SAP/fundamental-ngx/commit/4576a82c41d62742a816bac5f8e33f9cb2c86acd))
+
+### [0.31.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.10...v0.31.1-rc.11) (2021-08-24)
+
+### [0.31.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.9...v0.31.1-rc.10) (2021-08-23)
+
 ### [0.31.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.8...v0.31.1-rc.9) (2021-08-20)
 
 

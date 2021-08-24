@@ -11,7 +11,7 @@
 
     <ng-template #i18n let-errors>
         <ng-container *ngIf="errors.required">
-            <span>Value is required.</span>
+            <span role="alert" aria-atomic="true">Value is required.</span>
         </ng-container>
     </ng-template>
 </fdp-form-group>
@@ -26,7 +26,7 @@
 
     <ng-template #i18n let-errors>
         <ng-container *ngIf="errors.required">
-            <span>Value is required.</span>
+            <span role="alert" aria-atomic="true">Value is required.</span>
         </ng-container>
     </ng-template>
 </fdp-form-group>
@@ -58,28 +58,28 @@
 
 
     <ng-template #i18n let-errors>
-        <span *ngIf="errors.required">
+        <span *ngIf="errors.required" role="alert" aria-atomic="true">
             Value is required
         </span>
-        <span *ngIf="errors.invalid">
+        <span *ngIf="errors.invalid" role="alert" aria-atomic="true">
             Value is invalid
         </span>
     </ng-template>
 
     <ng-template #graduation let-errors>
-        <span *ngIf="errors.required">
+        <span *ngIf="errors.required" role="alert" aria-atomic="true">
             Graduation is mandatory
         </span>
     </ng-template>
 
     <ng-template #engineering let-errors>
-        <span *ngIf="errors.required">
+        <span *ngIf="errors.required" role="alert" aria-atomic="true">
             Engineering is mandatory
         </span>
     </ng-template>
 
     <ng-template #work let-errors>
-        <span *ngIf="errors.required">
+        <span *ngIf="errors.required" role="alert" aria-atomic="true">
             Minimum 5 years of work experience required
         </span>
 
@@ -95,7 +95,7 @@
 
     <ng-template #i18n let-errors>
         <ng-container *ngIf="errors.required">
-            <span>Value is required.</span>
+            <span role="alert" aria-atomic="true">Value is required.</span>
         </ng-container>
     </ng-template>
 </fdp-form-group>

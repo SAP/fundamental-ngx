@@ -2,12 +2,13 @@ import { Component, ViewChild, ElementRef, Input, Output, EventEmitter, ViewEnca
 import { Subscription } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 
-import { DialogService, DialogConfig, uuidv4 } from '@fundamental-ngx/core';
+import { DialogService, DialogConfig } from '@fundamental-ngx/core/dialog';
+import { uuidv4 } from '@fundamental-ngx/core/utils';
 
 import { TableRowSelectionChangeEvent } from '../../table/public_api';
 
 import { NewFolderComponent } from '../dialogs/new-folder/new-folder.component';
-import {  MoveToComponent } from '../dialogs/move-to/move-to.component';
+import { MoveToComponent } from '../dialogs/move-to/move-to.component';
 import { FilesValidatorService, FilesValidatorOutput } from '../services/files-validator.service';
 import {
     UploadCollectionFile,
@@ -157,6 +158,13 @@ export class UploadCollectionComponent {
     showSearch = true;
 
     /**
+     * Allows to use the same name for a file when editing the file name.
+     * 'Same name' refers to an already existing file name in the list.
+     * */
+    @Input()
+    sameFileNameAllowed = false;
+
+    /**
      * The event is triggered when the file type or the MIME type don't match the permitted types
      * (only if the fileTypes property or the mimeTypes property are provided by the application).
      */
@@ -292,18 +300,22 @@ export class UploadCollectionComponent {
     /**@hidden
      * Opens the file selector.
      */
-    _fileNameChange(e: FocusEvent, item: UploadCollectionItem): void {
+    _fileNameChange(e: FocusEvent, currentItem: UploadCollectionItem): void {
         const input = e.target as HTMLInputElement;
-        const itemName = input.value;
-        const newName = item.type === 'file' ? `${itemName}.${item.name.split('.').pop()}` : itemName;
+        const itemName = input.value.trim();
+        const newName = currentItem.type === 'file' ? `${itemName}.${currentItem.name.split('.').pop()}` : itemName;
+
+        if (currentItem.name === newName) {
+            return;
+        }
 
         if (itemName.length > this.maxFilenameLength) {
-            const reanmedItem = {
-                ...item,
+            const renamedItem = {
+                ...currentItem,
                 name: newName
             };
             const payload = {
-                items: [reanmedItem]
+                items: [renamedItem]
             };
             const filenameLengthEvent = new FilenameLengthExceedEvent(this, payload);
 
@@ -314,12 +326,16 @@ export class UploadCollectionComponent {
             return;
         }
 
+        if (currentItem.sameFilenameState) {
+            return;
+        }
+
         const data = {
             parentFolderId: this._getCurrentFolderId(),
             fileName: newName,
-            item: { ...item }
+            item: { ...currentItem }
         };
-        item.status = UploadCollectionItemStatus.LOADING;
+        currentItem.status = UploadCollectionItemStatus.LOADING;
 
         this.dataSource
             .fileRenamed(data)
@@ -344,6 +360,22 @@ export class UploadCollectionComponent {
                     });
                 }
             });
+    }
+
+    /** @hidden */
+    _checkName(e: FocusEvent, currentItem: UploadCollectionItem): void {
+        const input = e.target as HTMLInputElement;
+        const itemName = input.value.trim();
+        const newName = currentItem.type === 'file' ? `${itemName}.${currentItem.name.split('.').pop()}` : itemName;
+        const nameAlreadyExists = this._getList().some((item) => currentItem.documentId !== item.documentId && item.name === newName);
+
+        if (!this.sameFileNameAllowed && nameAlreadyExists) {
+            currentItem.sameFilenameState = 'error';
+
+            return;
+        }
+
+        currentItem.sameFilenameState = null;
     }
 
     /** @hidden
@@ -646,6 +678,11 @@ export class UploadCollectionComponent {
 
     /** @hidden */
     _onRowSelectionChange(data: TableRowSelectionChangeEvent<UploadCollectionItem>): void {
+        if (!this.sameFileNameAllowed) {
+            const removedItem = data.removed[0];
+            this._clearItemSameFilenameState(removedItem);
+        }
+
         this.selectedItems = data.selection;
     }
 
@@ -995,5 +1032,18 @@ export class UploadCollectionComponent {
         const itemsPerPage = this._itemsPerPage as number;
         this._countShowedItems = this._currentPage * itemsPerPage - itemsPerPage + 1;
         this._countNotShowedItems = this._countShowedItems + this._visibleList.length - 1;
+    }
+
+    /** @hidden */
+    private _clearItemSameFilenameState(currentItem: UploadCollectionItem): void {
+        if (!currentItem) {
+            return;
+        }
+
+        this._getList().forEach((item) => {
+            if (item.documentId === currentItem.documentId) {
+                item.sameFilenameState = null;
+            }
+        });
     }
 }
