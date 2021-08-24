@@ -1,4 +1,11 @@
 
+### [0.31.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.12...v0.31.1-rc.13) (2021-08-24)
+
+
+### Bug Fixes
+
+* **core:** select component reading the selected option and correct tab order to access the element in mobile mode ([#5385](https://github.com/SAP/fundamental-ngx/issues/5385)) ([b97d076](https://github.com/SAP/fundamental-ngx/commit/b97d07654106c4b7612f38edd2ad619a26afc875))
+
 ### [0.31.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.11...v0.31.1-rc.12) (2021-08-24)
 
 
