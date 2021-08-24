@@ -1,4 +1,11 @@
 
+### [0.31.1-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.11...v0.31.1-rc.12) (2021-08-24)
+
+
+### Bug Fixes
+
+* **core,platform:** checkbox a11y issues fix ([#6312](https://github.com/SAP/fundamental-ngx/issues/6312)) ([4576a82](https://github.com/SAP/fundamental-ngx/commit/4576a82c41d62742a816bac5f8e33f9cb2c86acd))
+
 ### [0.31.1-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.10...v0.31.1-rc.11) (2021-08-24)
 
 ### [0.31.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.9...v0.31.1-rc.10) (2021-08-23)
