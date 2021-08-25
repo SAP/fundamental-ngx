@@ -770,8 +770,12 @@ export class SelectComponent implements
                 SelectMobileComponent,
                 { container: this._elementRef.nativeElement },
                 { 
-                    injector: Injector.create({ providers: [{ provide: SELECT_COMPONENT, useValue: this }] }),
-                    services: [this._rtlService]
+                    injector: Injector.create({
+                        providers: [
+                            { provide: SELECT_COMPONENT, useValue: this },
+                            { provide: RtlService, useValue: this._rtlService }
+                        ]
+                    })
                 }
             )
         }
