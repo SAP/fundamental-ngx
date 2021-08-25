@@ -397,7 +397,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         for (let i = 0; capacityLeft > requiredFreeSpace && this._tabArray.length > i && tabsLimit > i; i++) {
             const width = this._tabArray[i].headerWidth;
 
-            if (capacityLeft - width > requiredFreeSpace) {
+            if (capacityLeft - width >= requiredFreeSpace) {
                 this._numbOfVisibleTabs++;
             }
             capacityLeft -= width;
