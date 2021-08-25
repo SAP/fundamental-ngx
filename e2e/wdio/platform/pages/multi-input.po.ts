@@ -15,7 +15,7 @@ export class MultiInputPo extends BaseComponentPo {
     dropdownOptions = 'ul[role=list] [role="listitem"] li ';
     selectedToken = 'span[role=\'option\']';
     dropdownOptionText = this.dropdownOptions + 'span';
-    dropdownOptionTextValueHelp = '[role="option"]';
+    dropdownOptionTextValueHelp = 'fd-dialog-body [role="option"]';
 
     crossButton = (option: string) => {
         return `//span[text() = '${option}']/following-sibling::span`;

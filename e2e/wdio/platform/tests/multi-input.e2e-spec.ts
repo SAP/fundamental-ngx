@@ -132,7 +132,7 @@ describe('Multi input test suite', function() {
         setValue(activeInputs, optionsArr[1].substring(0, 3), 1);
         let filteredOptions = getElementArrayLength(dropdownOptions);
         for (let j = 0; j < filteredOptions; j++) {
-            const dropdownOption = getText(dropdownOptionTextValueHelp, j);
+            const dropdownOption = getText(dropdownOptionText, j);
             expect(dropdownOption).toContain(optionsArr[1].substring(0, 3));
         }
         scrollIntoView(multiInputPage.activeInputs, 0);
