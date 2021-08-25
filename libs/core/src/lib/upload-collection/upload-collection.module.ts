@@ -4,7 +4,7 @@ import {
     UploadCollectionDescriptionDirective,
     UploadCollectionStatusGroupDirective,
     UploadCollectionTextSeparatorDirective,
-    UploadCollectionThumbnailDirective,
+    UploadCollectionThumbnailDirective, UploadCollectionTitleContainerDirective,
     UploadCollectionTitleDirective
 } from './upload-collection-simple.directives';
 import { ListModule } from '../list/list.module';
@@ -27,7 +27,8 @@ import { UploadCollectionItemDirective } from './upload-collection-item.directiv
         UploadCollectionTextSeparatorDirective,
         UploadCollectionStatusGroupDirective,
         UploadCollectionButtonGroupComponent,
-        UploadCollectionFormItemComponent
+        UploadCollectionFormItemComponent,
+        UploadCollectionTitleContainerDirective
     ],
     imports: [CommonModule, ListModule, ButtonModule, LinkModule, FormsModule, FormControlModule],
     exports: [
@@ -39,7 +40,8 @@ import { UploadCollectionItemDirective } from './upload-collection-item.directiv
         UploadCollectionTextSeparatorDirective,
         UploadCollectionStatusGroupDirective,
         UploadCollectionButtonGroupComponent,
-        UploadCollectionFormItemComponent
+        UploadCollectionFormItemComponent,
+        UploadCollectionTitleContainerDirective
     ]
 })
 export class UploadCollectionModule {}

@@ -1,4 +1,4 @@
-import { ContentChildren, Directive, ElementRef, QueryList } from '@angular/core';
+import { ContentChildren, Directive, ElementRef, HostBinding, Input, QueryList } from '@angular/core';
 import { ObjectMarkerComponent } from '@fundamental-ngx/core/object-marker';
 
 @Directive({
@@ -37,3 +37,17 @@ export class UploadCollectionTextSeparatorDirective {}
     host: { class: 'fd-upload-collection__status-group' }
 })
 export class UploadCollectionStatusGroupDirective {}
+
+@Directive({
+    // tslint:disable-next-line: directive-selector
+    selector: '[fd-upload-collection-title-container]',
+})
+export class UploadCollectionTitleContainerDirective {
+    /** @hidden */
+    @ContentChildren(ObjectMarkerComponent)
+    objectMarkerComponents: QueryList<ObjectMarkerComponent>;
+
+    /** Whether or not this is in edit mode. */
+    @HostBinding('class.fd-upload-collection__title-container')
+    applyContainerClass = true;
+}

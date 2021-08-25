@@ -2,7 +2,7 @@ import { AfterContentInit, ContentChild, Directive, EventEmitter, Input, OnDestr
 import { UploadCollectionFormItemComponent } from './upload-collection-form-item.component';
 import { UploadCollectionButtonGroupComponent } from './upload-collection-button-group.component';
 import { Subscription } from 'rxjs';
-import { UploadCollectionTitleDirective } from './upload-collection-simple.directives';
+import { UploadCollectionTitleContainerDirective, UploadCollectionTitleDirective } from './upload-collection-simple.directives';
 
 @Directive({
     // tslint:disable-next-line: directive-selector
@@ -29,6 +29,10 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
     /** @hidden */
     @ContentChild(UploadCollectionButtonGroupComponent)
     buttonGroupComponent: UploadCollectionButtonGroupComponent;
+
+    /** @hidden */
+    @ContentChild(UploadCollectionTitleContainerDirective)
+    titleContainerDirective: UploadCollectionTitleContainerDirective;
 
     /** Event emitted when the user changes a file name. */
     @Output()
@@ -75,11 +79,13 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         this._subscriptions.add(
             this.buttonGroupComponent.editClicked.subscribe((event) => {
                 this.formItemComponent.editMode = event;
+                this.titleContainerDirective.applyContainerClass = !event;
                 const styles = [];
-                styles.push();
-                !!event
-                    ? (this.titleDirective.elRef.nativeElement.style.display = 'none')
-                    : (this.titleDirective.elRef.nativeElement.style.display = 'inline-block');
+                styles.push(this.titleDirective.elRef.nativeElement.style);
+                this.titleContainerDirective?.objectMarkerComponents?.forEach(objectMarker => {
+                    styles.push(objectMarker.elementRef().nativeElement.style);
+                });
+                !!event ? styles.forEach(style => style.display = 'none') : styles.forEach(style => style.display = 'inline-block');
                 if (event) {
                     this.formItemComponent.extension = this.extension;
                     this.formItemComponent.fileName = this.fileName;

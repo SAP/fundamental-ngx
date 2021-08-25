@@ -11,8 +11,12 @@
         >
             <span fd-list-thumbnail fd-upload-collection-thumbnail><fd-icon [glyph]="file.icon"></fd-icon></span>
             <div fd-list-content>
-                <a href="#" fd-link fd-list-title fd-upload-collection-title></a>
-                <fd-upload-collection-form-item></fd-upload-collection-form-item>
+                <div fd-upload-collection-title-container>
+                    <a href="#" fd-link fd-list-title fd-upload-collection-title></a>
+                    <fd-upload-collection-form-item></fd-upload-collection-form-item>
+                    <span *ngIf="file.marker1" fd-object-marker [glyph]="file.marker1" title="Favorite" aria-label="Favorite Icon"></span>
+                    <span *ngIf="file.marker2" fd-object-marker [glyph]="file.marker2" title="Flag" aria-label="Favorite Flag"></span>
+                </div>
                 <div fd-upload-collection-description>
                     This is the file description
                     <span fd-upload-collection-text-separator></span>

@@ -7,7 +7,7 @@ import { UploadCollectionItemDirective } from '@fundamental-ngx/core';
 })
 export class UploadCollectionCustomExampleComponent {
     files = [
-        { fileName: 'File_Name_1', extension: 'txt', icon: 'activate', allowEdit: false, allowDelete: false },
+        { fileName: 'File_Name_1', extension: 'txt', icon: 'activate', allowEdit: false, allowDelete: false, marker1: 'flag', marker2: 'add-favorite' },
         {
             fileName: 'File_Name_2',
             extension: 'jpg',

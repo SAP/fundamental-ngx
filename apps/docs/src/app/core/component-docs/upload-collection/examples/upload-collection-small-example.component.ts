@@ -9,7 +9,7 @@ export class UploadCollectionSmallExampleComponent {
     files = [
         { fileName: 'File_Name_1', extension: 'txt', icon: 'activate' },
         { fileName: 'File_Name_2', extension: 'jpg', icon: 'calendar' },
-        { fileName: 'File_Name_3', extension: 'pdf', icon: 'customer' }
+        { fileName: 'File_Name_3', extension: 'pdf', icon: 'customer', marker1: 'flag', marker2: 'add-favorite' }
     ];
 
     @ContentChildren(UploadCollectionItemDirective, { descendants: true })
