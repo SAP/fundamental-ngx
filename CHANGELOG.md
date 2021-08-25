@@ -1,4 +1,11 @@
 
+### [0.31.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.16...v0.31.1-rc.17) (2021-08-25)
+
+
+### Bug Fixes
+
+* **core:** product-switch, fix keyboard navigation and selected item ([#6365](https://github.com/SAP/fundamental-ngx/issues/6365)) ([3c6a00b](https://github.com/SAP/fundamental-ngx/commit/3c6a00b779998386ffe34f0fa307e3cedc8f8081))
+
 ### [0.31.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.15...v0.31.1-rc.16) (2021-08-25)
 
 ### [0.31.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.14...v0.31.1-rc.15) (2021-08-24)
