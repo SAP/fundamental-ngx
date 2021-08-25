@@ -1,0 +1,31 @@
+<button
+    *ngIf="!editMode && allowFileNameEdit"
+    [disabled]="disableFileNameEdit"
+    (click)="editButtonClicked()"
+    fd-button
+    fdType="transparent"
+    glyph="edit"
+    aria-label="edit"
+></button>
+<button
+    *ngIf="!editMode && allowFileDeletion"
+    [disabled]="disableFileDeletion"
+    (click)="deleteButtonClicked()"
+    fd-button
+    fdType="transparent"
+    glyph="decline"
+    aria-label="delete"
+></button>
+<button
+    *ngIf="editMode"
+    [disabled]="okDisabled"
+    (click)="okButtonClicked()"
+    fd-button
+    fdType="transparent"
+    aria-label="ok"
+>
+    {{ okText }}
+</button>
+<button *ngIf="editMode" (click)="cancelButtonClicked()" fd-button fdType="transparent" aria-label="cancel">
+    {{ cancelText }}
+</button>

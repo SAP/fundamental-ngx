@@ -2,14 +2,22 @@ import { Component, ContentChildren, QueryList } from '@angular/core';
 import { UploadCollectionItemDirective } from '@fundamental-ngx/core';
 
 @Component({
-    selector: 'fd-upload-collection-example',
-    templateUrl: './upload-collection-example.component.html'
+    selector: 'fd-upload-collection-custom-example',
+    templateUrl: './upload-collection-custom-example.component.html'
 })
-export class UploadCollectionExampleComponent {
+export class UploadCollectionCustomExampleComponent {
     files = [
-        { fileName: 'File_Name_1', extension: 'txt', icon: 'activate' },
-        { fileName: 'File_Name_2', extension: 'jpg', icon: 'calendar' },
-        { fileName: 'File_Name_3', extension: 'pdf', icon: 'customer' }
+        { fileName: 'File_Name_1', extension: 'txt', icon: 'activate', allowEdit: false, allowDelete: false },
+        {
+            fileName: 'File_Name_2',
+            extension: 'jpg',
+            icon: 'calendar',
+            allowEdit: true,
+            allowDelete: true,
+            disableEdit: true,
+            disableDeletion: true
+        },
+        { fileName: 'File_Name_3', extension: 'pdf', icon: 'customer', allowEdit: true, allowDelete: false }
     ];
 
     @ContentChildren(UploadCollectionItemDirective, { descendants: true })

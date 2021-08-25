@@ -8,7 +8,10 @@ import { UploadCollectionExampleComponent } from './examples/upload-collection-e
 import { UploadCollectionHeaderComponent } from './upload-collection-header/upload-collection-header.component';
 import { UploadCollectionModule } from '@fundamental-ngx/core/upload-collection';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import { ListModule, ObjectMarkerModule, ObjectStatusModule } from '@fundamental-ngx/core';
+import { ListModule, MessagePageModule, ObjectMarkerModule, ObjectStatusModule } from '@fundamental-ngx/core';
+import { UploadCollectionSmallExampleComponent } from './examples/upload-collection-small-example.component';
+import { UploadCollectionCustomExampleComponent } from './examples/upload-collection-custom-example.component';
+import { UploadCollectionEmptyExampleComponent } from './examples/upload-collection-empty-example.component';
 
 const routes: Routes = [
     {
@@ -29,9 +32,17 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         ListModule,
         ObjectStatusModule,
-        ObjectMarkerModule
+        ObjectMarkerModule,
+        MessagePageModule
     ],
     exports: [RouterModule],
-    declarations: [UploadCollectionHeaderComponent, UploadCollectionDocsComponent, UploadCollectionExampleComponent]
+    declarations: [
+        UploadCollectionHeaderComponent,
+        UploadCollectionDocsComponent,
+        UploadCollectionExampleComponent,
+        UploadCollectionSmallExampleComponent,
+        UploadCollectionCustomExampleComponent,
+        UploadCollectionEmptyExampleComponent
+    ]
 })
 export class UploadCollectionDocsModule {}

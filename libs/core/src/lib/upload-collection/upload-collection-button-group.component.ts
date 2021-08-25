@@ -1,49 +1,74 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fd-upload-collection-button-group',
     host: { class: 'fd-upload-collection__button-group' },
-    template: `
-        <button *ngIf="!editMode" (click)="editClicked()" fd-button fdType="transparent" glyph="edit" aria-label="edit"></button>
-        <button *ngIf="!editMode" (click)="deleteClicked()" fd-button fdType="transparent" glyph="decline" aria-label="delete"></button>
-        <button *ngIf="editMode" [disabled]="okDisabled" (click)="okClicked()" fd-button fdType="transparent" aria-label="ok">Ok</button>
-        <button *ngIf="editMode" (click)="cancelClicked()" fd-button fdType="transparent" aria-label="cancel">Cancel</button>
-    `,
+    templateUrl: './upload-collection-button-group.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UploadCollectionButtonGroupComponent {
-
     /** @hidden */
     editMode = false;
 
     /** @hidden */
     okDisabled = false;
 
-    /** Event emitted when the dragged file exits the dropzone. */
+    /** Event emitted when the user clicks the edit button. */
     @Output()
-    readonly emitEditClicked = new EventEmitter<boolean>();
+    readonly editClicked = new EventEmitter<boolean>();
+
+    /** Event emitted when the user clicks the OK button to conform a file name change. */
+    @Output()
+    readonly okClicked = new EventEmitter<any>();
+
+    /** Event emitted when the user clicks the delete button. */
+    @Output()
+    readonly deleteClicked = new EventEmitter<any>();
+
+    /** Whether or not to allow file name editing. Default is true. */
+    @Input()
+    allowFileNameEdit = true;
+
+    /** Whether or not to show the delete button. Default is true. */
+    @Input()
+    allowFileDeletion = true;
+
+    /** Whether or not to disable the file name edit button. Default is false. */
+    @Input()
+    disableFileNameEdit = false;
+
+    /** Whether or not to disable the delete button. Default is false. */
+    @Input()
+    disableFileDeletion = false;
+
+    /** Text for the 'Ok' button. */
+    @Input()
+    okText = 'Ok';
+
+    /** Text for the 'Cancel' button. */
+    @Input()
+    cancelText = 'Cancel';
 
     /** @hidden */
-    editClicked(): void {
-        this.emitEditClicked.emit(true);
+    editButtonClicked(): void {
+        this.editClicked.emit(true);
         this.editMode = true;
     }
 
     /** @hidden */
-    deleteClicked(): void {
-
+    deleteButtonClicked(): void {
+        this.deleteClicked.emit();
     }
 
     /** @hidden */
-    okClicked(): void {
-
+    okButtonClicked(): void {
+        this.okClicked.emit();
     }
 
     /** @hidden */
-    cancelClicked(): void {
-        this.emitEditClicked.emit(false);
+    cancelButtonClicked(): void {
+        this.editClicked.emit(false);
         this.editMode = false;
     }
-
 }

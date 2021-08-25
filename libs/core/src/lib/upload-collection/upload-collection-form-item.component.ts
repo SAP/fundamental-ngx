@@ -4,20 +4,7 @@ import { ControlValueAccessor } from '@angular/forms';
 @Component({
     selector: 'fd-upload-collection-form-item',
     host: { class: 'fd-upload-collection__form-item' },
-    template: `
-        <input
-            *ngIf="editMode"
-            fd-form-control
-            required
-            style="pointer-events: all;"
-            class="fd-input"
-            type="text"
-            placeholder="Filename"
-            [(ngModel)]="fileName"
-            [state]="!fileName ? 'error' : null"
-        />
-        <span *ngIf="editMode" class="fd-upload-collection__extension">.{{ extension }}</span>
-    `,
+    templateUrl: './upload-collection-form-item.component.html',
     encapsulation: ViewEncapsulation.None
 })
 export class UploadCollectionFormItemComponent implements ControlValueAccessor {
