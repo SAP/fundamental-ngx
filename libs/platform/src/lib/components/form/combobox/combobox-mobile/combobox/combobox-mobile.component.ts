@@ -12,13 +12,13 @@ import {
 } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 
+import { DialogService } from '@fundamental-ngx/core/dialog';
 import {
-    DialogService,
     MOBILE_MODE_CONFIG,
     MobileModeBase,
     MobileModeConfigToken,
     MobileModeControl
-} from '@fundamental-ngx/core';
+} from '@fundamental-ngx/core/mobile-mode';
 
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../../combobox.interface';
 
