@@ -29,6 +29,7 @@ export class ToolbarPo extends CoreBaseComponentPo {
     dateTimeButton = '.fd-button--transparent.fd-button--compact';
     okButton = '[fdtype="emphasized"]';
     dateTimeInput = 'input.fd-input--compact';
+    checkboxValue = '.fd-checkbox.ng-valid';
 
     dayInCalendarButtonByValue = (index: string): string => {
         return `//span[contains(.,"${index}")]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
