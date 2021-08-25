@@ -4,7 +4,7 @@ export class MultiInputPo extends BaseComponentPo {
     private url = '/multi-input';
     root = '#page-content';
     expandedDropdown = '.fd-list';
-    activeDropdownButtons = 'button[aria-label="value-help"]';
+    activeDropdownButtons = 'button[aria-label="value help,transparent"]';
     activeInputs = '.fd-input-group.fd-input-group--control input';
     mobileInput = 'div[role="dialog"] input';
     filledInput = '.fd-tokenizer__inner';
