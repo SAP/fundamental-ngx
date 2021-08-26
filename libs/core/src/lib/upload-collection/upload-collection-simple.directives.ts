@@ -1,4 +1,4 @@
-import { ContentChildren, Directive, ElementRef, HostBinding, Input, QueryList } from '@angular/core';
+import { ContentChildren, Directive, ElementRef, HostBinding, QueryList } from '@angular/core';
 import { ObjectMarkerComponent } from '@fundamental-ngx/core/object-marker';
 
 @Directive({

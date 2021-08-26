@@ -7,12 +7,12 @@ import {
     UploadCollectionThumbnailDirective, UploadCollectionTitleContainerDirective,
     UploadCollectionTitleDirective
 } from './upload-collection-simple.directives';
-import { ListModule } from '../list/list.module';
+import { ListModule } from '@fundamental-ngx/core/list';
 import { UploadCollectionComponent } from './upload-collection.component';
 import { UploadCollectionButtonGroupComponent } from './upload-collection-button-group.component';
-import { ButtonModule } from '../button/button.module';
+import { ButtonModule } from '@fundamental-ngx/core-button';
 import { UploadCollectionFormItemComponent } from './upload-collection-form-item.component';
-import { LinkModule } from '../link/link.module';
+import { LinkModule } from '@fundamental-ngx/core/link';
 import { FormsModule } from '@angular/forms';
 import { FormControlModule } from '@fundamental-ngx/core/form';
 import { UploadCollectionItemDirective } from './upload-collection-item.directive';

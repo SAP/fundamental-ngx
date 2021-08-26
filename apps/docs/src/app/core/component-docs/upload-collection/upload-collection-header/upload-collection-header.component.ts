@@ -1,12 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-upload-collection-header',
-    templateUrl: './upload-collection-header.component.html',
-    styleUrls: ['./upload-collection-header.component.css']
+    templateUrl: './upload-collection-header.component.html'
 })
-export class UploadCollectionHeaderComponent implements OnInit {
-    constructor() {}
-
-    ngOnInit(): void {}
-}
+export class UploadCollectionHeaderComponent {}

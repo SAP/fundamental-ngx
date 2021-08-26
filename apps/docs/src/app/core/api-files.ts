@@ -384,6 +384,15 @@ export const API_FILES = {
         'ResizableCardItemComponent'
     ],
     uploadCollection: [
-        'UploadCollectionComponent'
+        'UploadCollectionComponent',
+        'UploadCollectionButtonGroupComponent',
+        'UploadCollectionFormItemComponent',
+        'UploadCollectionItemDirective',
+        'UploadCollectionThumbnailDirective',
+        'UploadCollectionTitleDirective',
+        'UploadCollectionDescriptionDirective',
+        'UploadCollectionTextSeparatorDirective',
+        'UploadCollectionStatusGroupDirective',
+        'UploadCollectionTitleContainerDirective'
     ]
 };

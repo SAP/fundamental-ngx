@@ -4,3 +4,11 @@ export { UploadCollectionButtonGroupComponent } from './upload-collection-button
 export { UploadCollectionItemDirective } from './upload-collection-item.directive';
 export { UploadCollectionFormItemComponent } from './upload-collection-form-item.component';
 export { UploadCollectionComponent } from './upload-collection.component';
+export {
+    UploadCollectionThumbnailDirective,
+    UploadCollectionTitleDirective,
+    UploadCollectionDescriptionDirective,
+    UploadCollectionTextSeparatorDirective,
+    UploadCollectionStatusGroupDirective,
+    UploadCollectionTitleContainerDirective
+} from './upload-collection-simple.directives';
