@@ -1,4 +1,11 @@
 
+### [0.31.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.18...v0.31.1-rc.19) (2021-08-26)
+
+
+### Bug Fixes
+
+* **core:** dynamic-page-subheader, add collapse event ([#6384](https://github.com/SAP/fundamental-ngx/issues/6384)) ([2a0344e](https://github.com/SAP/fundamental-ngx/commit/2a0344ebd5900d87c66e549d2d41d463c2f2ccb5))
+
 ### [0.31.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.17...v0.31.1-rc.18) (2021-08-26)
 
 
