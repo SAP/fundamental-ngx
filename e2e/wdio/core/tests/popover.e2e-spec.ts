@@ -1,7 +1,6 @@
 import { PopoverPo } from '../pages/popover.po';
 import {
-    click, getAttributeByName,
-    getElementArrayLength, getElementClass, getText, isElementClickable, isElementDisplayed,
+    click, getElementArrayLength, getElementClass, getText, isElementClickable, isElementDisplayed,
     refreshPage, scrollIntoView
 } from '../../driver/wdio';
 

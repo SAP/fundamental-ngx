@@ -1,7 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { FormControl, FormGroup} from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
-import { FdpSelectionChangeEvent, OptionItem } from '@fundamental-ngx/platform';
+import { OptionItem } from '@fundamental-ngx/platform/shared';
+import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
 
 @Component({

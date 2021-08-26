@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-import { FdpFormGroupModule, PlatformButtonModule, PlatformFileUploaderModule } from '@fundamental-ngx/platform';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { FdpFormGroupModule, PlatformFileUploaderModule } from '@fundamental-ngx/platform/form';
 
 import { PlatformFileUploaderDocsComponent } from './platform-file-uploader-docs.component';
 import { API_FILES } from '../../api-files';

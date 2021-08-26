@@ -1,5 +1,5 @@
 import { StandardListItemPo } from '../pages/standard-list-item.po';
-import { click, getAttributeByName, getCSSPropertyByName, getElementArrayLength, getElementClass, getText } from '../../driver/wdio';
+import { click, getAttributeByName, getElementArrayLength, getText } from '../../driver/wdio';
 import {
     linkAttr,
     noBorderAttr,
@@ -7,7 +7,6 @@ import {
     secondaryTypes,
 } from '../fixtures/appData/standard-list-item-contents';
 import {
-    checkAttributeValueTrue,
     checkElArrIsClickable,
     checkElementDisplayed,
     checkElementText

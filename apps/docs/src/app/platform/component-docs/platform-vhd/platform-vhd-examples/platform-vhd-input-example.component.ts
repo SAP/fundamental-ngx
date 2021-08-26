@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { VhdDataProvider, VhdValue, VhdValueChangeEvent, ValueHelpDialogDataSource } from '@fundamental-ngx/platform';
+import { VhdDataProvider, VhdValue, VhdValueChangeEvent, ValueHelpDialogDataSource } from '@fundamental-ngx/platform/value-help-dialog';
 
 interface ExampleTestModel {
   id: number;

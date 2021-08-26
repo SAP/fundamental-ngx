@@ -7,7 +7,7 @@ import {
     getElementArrayLength,
     refreshPage,
     scrollIntoView,
-    setValue, waitForPresent
+    setValue
 } from '../../driver/wdio';
 
 describe('Rating indicator test suite', function() {

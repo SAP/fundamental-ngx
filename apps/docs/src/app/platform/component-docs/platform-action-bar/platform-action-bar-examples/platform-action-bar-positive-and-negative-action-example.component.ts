@@ -5,9 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './platform-action-bar-positive-and-negative-action-example.component.html',
     styleUrls: ['./platform-action-bar-positive-and-negative-action-example.component.scss']
 })
-export class PlatformActionBarWithPositiveNegativeActionsExampleComponent {
-
-    onBackBuutonClick(): void {
-        alert('Back button clicked');
-    }
-}
+export class PlatformActionBarWithPositiveNegativeActionsExampleComponent {}

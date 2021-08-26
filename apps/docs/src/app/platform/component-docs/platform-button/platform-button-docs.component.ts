@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 import * as buttonIconsExample from '!raw-loader!./platform-button-examples/platform-button-icons-example.component.html';
@@ -14,7 +14,7 @@ import { Icons } from '../../../documentation/utilities/icons';
     selector: 'app-button',
     templateUrl: './platform-button-docs.component.html'
 })
-export class PlatformButtonDocsComponent implements OnInit {
+export class PlatformButtonDocsComponent {
     static schema: any = {
         properties: {
             properties: {
@@ -117,7 +117,6 @@ export class PlatformButtonDocsComponent implements OnInit {
         this.schema = this.schemaFactory.getComponent('button');
     }
 
-    ngOnInit(): void { }
     onSchemaValues(data): void {
         this.data = data;
     }

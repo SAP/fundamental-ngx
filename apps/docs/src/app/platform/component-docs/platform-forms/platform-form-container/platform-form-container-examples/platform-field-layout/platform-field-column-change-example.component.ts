@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { RESPONSIVE_BREAKPOINTS_CONFIG } from '@fundamental-ngx/platform';
+
+import { RESPONSIVE_BREAKPOINTS_CONFIG } from '@fundamental-ngx/platform/shared';
 
 const DEFAULT_NEW_BREAKPOINTS_CONFIG = {
     S: 800,

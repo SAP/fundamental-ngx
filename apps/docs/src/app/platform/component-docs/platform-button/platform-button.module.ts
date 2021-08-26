@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { API_FILES } from '../../api-files';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
-import { PlatformButtonHeaderComponent } from './platform-button-header/platform-button-header.component';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+
+import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
+import { API_FILES } from '../../api-files';
+
 import { PlatformButtonDocsComponent } from './platform-button-docs.component';
+import { PlatformButtonHeaderComponent } from './platform-button-header/platform-button-header.component';
 import { PlatformButtonTypesExampleComponent } from './platform-button-examples/platform-button-examples.component';
 import { PlatformButtonSizesExampleComponent } from './platform-button-examples/platform-button-examples.component';
 import { PlatformButtonIconsExampleComponent } from './platform-button-examples/platform-button-examples.component';
 import { PlatformButtonStateExampleComponent } from './platform-button-examples/platform-button-examples.component';
 import { PlatformButtonTruncateExampleComponent } from './platform-button-examples/platform-button-examples.component';
-import { PlatformButtonModule } from '@fundamental-ngx/platform';
 
 const routes: Routes = [
     {

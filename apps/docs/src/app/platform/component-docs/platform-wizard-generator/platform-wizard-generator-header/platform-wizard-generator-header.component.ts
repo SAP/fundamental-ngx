@@ -4,6 +4,4 @@ import { Component } from '@angular/core';
     selector: 'fdp-platform-wizard-generator-header',
     templateUrl: './platform-wizard-generator-header.component.html'
 })
-export class PlatformWizardGeneratorHeaderComponent {
-    constructor() { }
-}
+export class PlatformWizardGeneratorHeaderComponent {}

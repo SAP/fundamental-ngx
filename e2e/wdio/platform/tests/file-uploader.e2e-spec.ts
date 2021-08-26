@@ -2,7 +2,6 @@ import {
     browserIsIEorSafari,
     click,
     getAlertText,
-    getAttributeByName,
     getElementArrayLength, getElementPlaceholder, getElementTitle,
     getText,
     refreshPage,

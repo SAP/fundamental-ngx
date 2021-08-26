@@ -1,8 +1,8 @@
 import { Component, AfterViewInit, Renderer2, ElementRef } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { ListDataSource, DataProvider, SelectionChangeEvent } from '@fundamental-ngx/platform';
-
+import { ListDataSource, DataProvider } from '@fundamental-ngx/platform/shared';
+import { SelectionChangeEvent } from '@fundamental-ngx/platform/list';
 
 const LIST_ELEMENTS: Address[] = [
     { name: 'Name1' },
@@ -45,7 +45,4 @@ export class PlatformListWithSelectionExampleComponent implements AfterViewInit 
     _showItemInfo(event: SelectionChangeEvent): void {
         this._selectedItems = event.selectedItems;
     }
-
-    
-
 }

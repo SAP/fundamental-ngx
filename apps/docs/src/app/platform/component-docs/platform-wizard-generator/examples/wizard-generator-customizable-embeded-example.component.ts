@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { WizardGeneratorFormsValue, WizardGeneratorItem, WizardTitle } from '@fundamental-ngx/platform';
+
+import { WizardGeneratorFormsValue, WizardGeneratorItem, WizardTitle } from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
   selector: 'fdp-wizard-generator-customizable-embeded-example',
@@ -104,8 +105,6 @@ export class WizardGeneratorCustomizableEmbededExampleComponent {
             ]
         }
     ];
-
-    constructor() { }
 
     wizardFinished(wizardValue: WizardGeneratorFormsValue): void {
         this.wizardValue = wizardValue;
