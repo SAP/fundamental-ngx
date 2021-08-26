@@ -557,6 +557,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         this._listenToColumnsWidthChange();
 
+        this._listenToFocus();
+
         this._cdr.detectChanges();
     }
 
@@ -1050,8 +1052,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    _getCellNavigationId(rowIdx: number, colIdx: number): TableCellNavigationId {
-        const colIdxAddition = this._isShownSelectionColumn ? 1 : 0;
+    _getCellNavigationId(rowIdx: number, colIdx: number, groupRow = false): TableCellNavigationId {
+        const colIdxAddition = this._isShownSelectionColumn && !groupRow ? 1 : 0;
 
         return `${rowIdx},${colIdx + colIdxAddition}` as TableCellNavigationId;
     }

@@ -97,9 +97,8 @@
                 [id]="id + '__' + column.name"
                 [focusable]="true"
                 [fd-table-cell-selectable]="_getCellNavigationId(0, colIdx)"
-                [fdpTableCellResizable]="_getColumnResizableSide(colIdx)"
+                [fdp-table-cell-resizable]="_getColumnResizableSide(colIdx)"
                 [columnName]="column.name"
-                [columnIndex]="colIdx"
                 [attr.aria-colindex]="colIdx"
                 [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.name)"
                 [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
@@ -353,9 +352,8 @@
                                 [focusable]="true"
                                 [fd-table-cell-selectable]="_getCellNavigationId(rowIdx + 1, colIdx)"
                                 [headers]="id + '__' + column.name"
-                                [fdpTableCellResizable]="_getColumnResizableSide(colIdx)"
+                                [fdp-table-cell-resizable]="_getColumnResizableSide(colIdx)"
                                 [columnName]="column.name"
-                                [columnIndex]="colIdx"
                                 [style.textAlign]="column.align"
                                 [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.name)"
                                 [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
@@ -466,7 +464,7 @@
             role="gridcell"
             class="fd-table__cell--fixed fdp-table__cell--group"
             [focusable]="true"
-            [fd-table-cell-selectable]="_getCellNavigationId(rowIdx + 1, 0)"
+            [fd-table-cell-selectable]="_getCellNavigationId(rowIdx + 1, 0, true)"
             [attr.colspan]="_tableColumnsLength"
             [attr.aria-expanded]="row.expanded"
             [attr.data-nesting-level]="row.level"
@@ -487,7 +485,7 @@
             <!-- Group row template when there are nested groups -->
             <ng-container *ngIf="_groupRulesMap.size != 1">
                 <ng-container
-                    *ngTemplateOutlet="tableHeaderCellContentTemplate; context: {column: _keyToColumnMap.get(row.value?.field)}"
+                    *ngTemplateOutlet="tableHeaderCellContentTemplate; context: { column: _keyToColumnMap.get(row.value?.field) }"
                 ></ng-container>: {{ row.value?.value }}
             </ng-container>
         </td>
