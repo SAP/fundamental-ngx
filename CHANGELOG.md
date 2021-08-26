@@ -1,4 +1,11 @@
 
+### [0.31.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.17...v0.31.1-rc.18) (2021-08-26)
+
+
+### Bug Fixes
+
+* **platform:** rtl service optional everywhere ([#6383](https://github.com/SAP/fundamental-ngx/issues/6383)) ([5453a1c](https://github.com/SAP/fundamental-ngx/commit/5453a1c87d2a1c87dba7c93b8a070f7f0fe59704))
+
 ### [0.31.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.16...v0.31.1-rc.17) (2021-08-25)
 
 
