@@ -62,7 +62,7 @@ export class NumberStepInputComponent extends StepInputComponent {
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
         config: StepInputConfig,
         renderer: Renderer2,
-        rtlService: RtlService,
+        @Optional() rtlService: RtlService,
         @Inject(LOCALE_ID) readonly localeId: string
     ) {
         super(cd, ngControl, ngForm, formField, formControl, config, renderer, rtlService);

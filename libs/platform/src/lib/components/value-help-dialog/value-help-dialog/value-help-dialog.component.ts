@@ -14,7 +14,8 @@ import {
   EventEmitter,
   SimpleChanges,
   ContentChild,
-  ElementRef
+  ElementRef,
+  Optional
 } from '@angular/core';
 import { Subject, Observable, Subscription, isObservable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -248,7 +249,7 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
     private readonly _elementRef: ElementRef,
     private readonly _changeDetectorRef: ChangeDetectorRef,
     private readonly _dialogService: DialogService,
-    private readonly _rtlService: RtlService,
+    @Optional() private readonly _rtlService: RtlService,
   ) {
     /** Default display function for define conditions */
     if (!this.conditionDisplayFn || typeof this.conditionDisplayFn !== 'function') {
@@ -577,12 +578,14 @@ export class PlatformValueHelpDialogComponent<T> implements OnChanges, OnDestroy
         this._updateFilters();
       })
 
-    this._dir = this._rtlService.rtl.getValue() ? 'rtl' : 'ltr';
-    this._rtlService.rtl
-      .pipe(takeUntil(this._destroyed))
-      .subscribe((isRtl: boolean) => {
-          this._dir = isRtl ? 'rtl' : 'ltr';
-      });
+    if (this._rtlService) {
+      this._dir = this._rtlService.rtl.getValue() ? 'rtl' : 'ltr';
+      this._rtlService.rtl
+        .pipe(takeUntil(this._destroyed))
+        .subscribe((isRtl: boolean) => {
+            this._dir = isRtl ? 'rtl' : 'ltr';
+        });
+    }
   }
 
   /** @hidden */

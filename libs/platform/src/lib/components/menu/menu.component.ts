@@ -20,7 +20,6 @@
  */
 import {
     Component,
-    OnInit,
     AfterViewInit,
     ContentChildren,
     QueryList,
@@ -32,7 +31,8 @@ import {
     Input,
     ChangeDetectionStrategy,
     AfterContentInit,
-    ViewEncapsulation
+    ViewEncapsulation,
+    Optional
 } from '@angular/core';
 
 import { FocusKeyManager, FocusOrigin } from '@angular/cdk/a11y';
@@ -58,7 +58,7 @@ let menuIdCounter = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class MenuComponent implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
+export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy {
     private _id: string;
     public menuId: string;
 
@@ -103,14 +103,14 @@ export class MenuComponent implements OnInit, AfterViewInit, AfterContentInit, O
     private _tabSubscription = Subscription.EMPTY;
     private _dirChangeSubscription = Subscription.EMPTY;
 
-    constructor(private _rtl: RtlService) {
-        this._dirChangeSubscription = this._rtl.rtl.subscribe((value: boolean) => {
-            this.direction = value ? 'rtl' : 'ltr';
-            this._setMenuItemCascadeDirection();
-        });
+    constructor(@Optional() private _rtl: RtlService) {
+        if (this._rtl) {
+            this._dirChangeSubscription = this._rtl.rtl.subscribe((value: boolean) => {
+                this.direction = value ? 'rtl' : 'ltr';
+                this._setMenuItemCascadeDirection();
+            });
+        }
     }
-
-    ngOnInit(): void {}
 
     ngAfterViewInit(): void {
         if (!this.menuId) {
