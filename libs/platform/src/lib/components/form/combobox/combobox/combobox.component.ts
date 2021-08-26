@@ -20,7 +20,9 @@ import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { Direction } from '@angular/cdk/bidi';
 import { takeUntil } from 'rxjs/operators';
 
-import { closestElement, DialogConfig, DynamicComponentService, RtlService } from '@fundamental-ngx/core';
+import { DialogConfig } from '@fundamental-ngx/core/dialog';
+import { closestElement, DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
+
 import { ComboBoxDataSource, DATA_PROVIDERS, DataProvider } from '../../../../domain/data-source';
 import { FormFieldControl } from '../../form-control';
 import { BaseCombobox, ComboboxSelectionChangeEvent } from '../commons/base-combobox';

@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { BarModule, ButtonModule, DialogModule } from '@fundamental-ngx/core';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
 
 import { ComboboxMobileComponent } from './combobox/combobox-mobile.component';
 
