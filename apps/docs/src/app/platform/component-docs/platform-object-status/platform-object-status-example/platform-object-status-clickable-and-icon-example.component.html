@@ -4,6 +4,7 @@
     clickable="true"
     (objectStatusClick)="showObjectStatus()"
     label="Negative"
+    title="Negative"
     ariaLabel="Object status Negative Clickable"
 ></fdp-object-status>
 <fdp-object-status
@@ -12,6 +13,7 @@
     clickable="true"
     (objectStatusClick)="showObjectStatus()"
     label="Critical"
+    title="Critical"
     ariaLabel="Object status Critical Clickable"
 ></fdp-object-status>
 <fdp-object-status
@@ -20,6 +22,7 @@
     clickable="true"
     (objectStatusClick)="showObjectStatus()"
     label="Positive"
+    title="Positive"
     ariaLabel="Object status Positive Clickable"
 ></fdp-object-status>
 <fdp-object-status
@@ -28,12 +31,14 @@
     clickable="true"
     (objectStatusClick)="showObjectStatus()"
     label="Informative"
+    title="Informative"
     ariaLabel="Object status Informative Clickable"
 ></fdp-object-status>
 <fdp-object-status
     clickable="true"
     (objectStatusClick)="showObjectStatus()"
     label="Default"
+    title="Default"
     ariaLabel="Object status Default Clickable"
 ></fdp-object-status>
 <br />
@@ -42,8 +47,9 @@
     <fdp-object-status
         [indicationColor]="item"
         [label]="'Indication Color' + item"
+        [title]="'Indication Color' + item"
         clickable="true"
         (objectStatusClick)="showAlert(item)"
-        ariaLabel="Object status indication Color Clickable"
+        [ariaLabel]="'Object status Indication Color' + item + 'Clickable'"
     ></fdp-object-status>
 </ng-container>

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class PlatformObjectStatusClickableAndIconExampleComponent {
     showAlert(index: number): void {
-        alert('you clicked the clickable ObjectStatus' + index);
+        alert('you clicked the clickable ObjectStatus       ' + index);
     }
     showObjectStatus(): void {
         alert('you clicked the clickable ObjectStatus');
