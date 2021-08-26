@@ -18,11 +18,10 @@ import {
     SELECT_MOBILE_CONFIG
 } from '../documentation/utilities/consts';
 import { DocsThemeService } from '../documentation/services/docs-theme.service';
-import { SharedDocumentationPageModule } from '../documentation/shared-documentation-page.module';
 
 @NgModule({
     declarations: [HomeDocsComponent, NewComponentComponent, CoreDocumentationComponent],
-    imports: [SharedDocumentationModule, MarkdownModule.forChild(), RouterModule.forChild(ROUTES), ScrollingModule, SharedDocumentationPageModule],
+    imports: [SharedDocumentationModule, MarkdownModule.forChild(), RouterModule.forChild(ROUTES), ScrollingModule],
     providers: [
         StackblitzService,
         DocsThemeService,
