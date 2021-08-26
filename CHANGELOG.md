@@ -1,4 +1,11 @@
 
+### [0.31.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.19...v0.31.1-rc.20) (2021-08-26)
+
+
+### Bug Fixes
+
+* **core,platform:** combobox, fix accidentally focusing list item ([#6382](https://github.com/SAP/fundamental-ngx/issues/6382)) ([be550d4](https://github.com/SAP/fundamental-ngx/commit/be550d4bbf8d99a7ad6b2000d4a7f0e786c32920))
+
 ### [0.31.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.18...v0.31.1-rc.19) (2021-08-26)
 
 
