@@ -97,9 +97,14 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     @Input()
     itemsPerPageTemplate: TemplateRef<any>;
 
-    /** Label for options for items per page. */
+    /**
+     * Label for options for items per page.
+     * This property is mainly provided to support reading in the right language for screen reader.
+     * Here, Angular i18n's `$localize` tag is used with a default text of `Results per page`.
+     * Application developer is expected to pass in their own value if they use any other localization tool.
+     */
     @Input()
-    itemsPerPageLabel = 'Results per page';
+    itemsPerPageLabel = $localize`:@@corePaginationItemsPerPageLabel:Results per page`;
 
     /** Represents the options for items per page. */
     @Input()
@@ -129,21 +134,50 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     @Input()
     displayTextTemplate: TemplateRef<any>;
 
-    /** Label for the 'previous' page button. */
+    /**
+     * Label for the 'previous' page button.
+     * This property is mainly provided to support reading in the right language for screen reader.
+     * Here, Angular i18n's `$localize` tag is used with a default text of `Previous`.
+     * Application developer is expected to pass in their own value if they use any other localization tool.
+     */
     @Input()
-    previousLabel = 'Previous';
+    previousLabel = $localize`:@@corePaginationPreviousLabel:Previous`;
 
-    /** Label for the 'next' page button. */
+    /**
+     * Label for the 'next' page button.
+     * This property is mainly provided to support reading in the right language for screen reader.
+     * Here, Angular i18n's `$localize` tag is used with a default text of `Next`.
+     * Application developer is expected to pass in their own value if they use any other localization tool.
+     */
     @Input()
-    nextLabel = 'Next';
+    nextLabel = $localize`:@@corePaginationNextLabel:Next`;
 
-    /** Label for the 'Page' page button. */
+    /**
+     * Label for the 'Page' page button.
+     * This property is mainly provided to support reading in the right language for screen reader.
+     * Here, Angular i18n's `$localize` tag is used with a default text of `Page`.
+     * Application developer is expected to pass in their own value if they use any other localization tool.
+     */
     @Input()
-    pageLabel = 'Page';
+    pageLabel = $localize`:@@corePaginationPageLabel:Page `;
 
-    /** Aria label for the navigation element */
+    /**
+     * Aria label for the navigation element
+     * This property is mainly provided to support reading in the right language for screen reader.
+     * Here, Angular i18n's `$localize` tag is used with a default text of `Pagination`.
+     * Application developer is expected to pass in their own value if they use any other localization tool.
+     */
     @Input()
-    ariaLabel = 'Pagination';
+    ariaLabel = $localize`:@@corePaginationAriaLabel:Pagination`;
+
+    /**
+     * The current page label that should be read when a page is selected.
+     * This property is mainly provided to support reading in the right language for screen reader.
+     * Here, Angular i18n's `$localize` tag is used with a default text of `Current page`.
+     * Application developer is expected to pass in their own value if they use any other localization tool.
+     */
+    @Input()
+    currentPageLabel = $localize`:@@corePaginationCurrentPageLabel: Current page`;
 
     /** Event fired when the page is changed. */
     @Output()
@@ -262,8 +296,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         }
         this._refreshPages();
 
-        const currentPageMessage = $localize`:@@corePaginationCurrentPage:Current page`;
-        this._liveAnnouncer.announce(this.pageLabel + ' ' + page + currentPageMessage);
+        this._liveAnnouncer.announce(this.pageLabel + page + this.currentPageLabel);
 
         this.pageChangeStart.emit(page);
     }
