@@ -1,7 +1,11 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DialogRef } from '@fundamental-ngx/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { P13ColumnsDialogComponent, ColumnsDialogData } from './columns.component';
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
+
+import { PlatformTableModule } from '../../../table.module';
+import { ColumnsDialogData, P13ColumnsDialogComponent } from './columns.component';
 
 describe('PlatformTableP13ColumnsDialogComponent', () => {
     let component: P13ColumnsDialogComponent;
@@ -13,8 +17,8 @@ describe('PlatformTableP13ColumnsDialogComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [P13ColumnsDialogComponent],
-                providers: [{ provide: DialogRef, useValue: dialogRef }]
+                providers: [{ provide: DialogRef, useValue: dialogRef }, DialogService, DialogConfig, RtlService],
+                imports: [PlatformTableModule, NoopAnimationsModule]
             }).compileComponents();
         })
     );

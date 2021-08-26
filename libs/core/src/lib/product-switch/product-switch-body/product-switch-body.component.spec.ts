@@ -84,7 +84,7 @@ describe('ProductSwitchBodyComponent', () => {
     });
 
     it('should handle no list keydown arrow right', () => {
-        spyOn(componentInstance, 'isListMode').and.returnValue(false);
+        spyOn(componentInstance, '_isListMode').and.returnValue(false);
         const el = fixture.debugElement.query(By.css('li'));
         const nextEl = el.nativeElement.nextElementSibling;
         el.nativeElement.focus();
@@ -95,7 +95,7 @@ describe('ProductSwitchBodyComponent', () => {
     });
 
     it('should handle no list keydown arrow left', () => {
-        spyOn(componentInstance, 'isListMode').and.returnValue(false);
+        spyOn(componentInstance, '_isListMode').and.returnValue(false);
         const el = fixture.debugElement.query(By.css('li'));
         const nextEl = el.nativeElement.nextElementSibling;
         nextEl.focus();
@@ -106,7 +106,7 @@ describe('ProductSwitchBodyComponent', () => {
     });
 
     it('should handle no list keydown arrow down', () => {
-        spyOn(componentInstance, 'isListMode').and.returnValue(false);
+        spyOn(componentInstance, '_isListMode').and.returnValue(false);
         const el = fixture.debugElement.query(By.css('li'));
         const nextElDown = el.nativeElement.nextElementSibling.nextElementSibling.nextElementSibling;
         el.nativeElement.focus();
@@ -117,7 +117,7 @@ describe('ProductSwitchBodyComponent', () => {
     });
 
     it('should handle no list keydown arrow up', () => {
-        spyOn(componentInstance, 'isListMode').and.returnValue(false);
+        spyOn(componentInstance, '_isListMode').and.returnValue(false);
         const el = fixture.debugElement.query(By.css('li'));
         const nextElDown = el.nativeElement.nextElementSibling.nextElementSibling.nextElementSibling;
         nextElDown.focus();
@@ -128,7 +128,7 @@ describe('ProductSwitchBodyComponent', () => {
     });
 
     it('should handle list arrow up/down', () => {
-        spyOn(componentInstance, 'isListMode').and.returnValue(true);
+        spyOn(componentInstance, '_isListMode').and.returnValue(true);
         const el = fixture.debugElement.query(By.css('li'));
         const nextElDown = el.nativeElement.nextElementSibling;
         el.nativeElement.focus();

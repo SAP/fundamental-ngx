@@ -6,9 +6,11 @@ import {
     ContentChild,
     ElementRef,
     EventEmitter,
+    Inject,
     Input,
     OnChanges,
     OnDestroy,
+    Optional,
     Output,
     SimpleChanges,
     ViewChild
@@ -22,6 +24,7 @@ import { ENTER, SPACE } from '@angular/cdk/keycodes';
 export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
 
 import { CURRENT_STEP_STATUS, COMPLETED_STEP_STATUS } from '../constants';
+import { WIZARD, WizardComponentInterface } from '../wizard-injection-token';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -128,7 +131,11 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     _finalStep = false;
 
     /** @hidden */
-    constructor(private _elRef: ElementRef, private _cdRef: ChangeDetectorRef) {}
+    constructor(
+        private _elRef: ElementRef,
+        private _cdRef: ChangeDetectorRef,
+        @Optional() @Inject(WIZARD) private _wizard: WizardComponentInterface
+        ) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -145,13 +152,11 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
 
     /** @hidden */
     ngAfterViewInit(): void {
-        if (this.isSummary) {
+        if (this.isSummary && !this._wizard?.displaySummaryStep) {
             this._summaryInit();
         } else if (this.stepIndicator) {
             this._notSummaryInit();
         }
-        // TODO: remove after next fundamental-styles version
-        this._elRef.nativeElement.style.boxSizing = 'content-box';
     }
 
     /** @hidden */
@@ -196,6 +201,8 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
         return this._elRef.nativeElement.clientWidth;
     }
 
+
+
     /** @hidden */
     removeFromDom(): void {
         if (this._elRef.nativeElement.parentNode) {
@@ -207,7 +214,7 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     _summaryInit(): void {
         this._elRef.nativeElement.style.display = 'none';
         this.content.tallContent = true;
-        this.removeFromDom();
+        // this.removeFromDom();
     }
 
     /** @hidden */

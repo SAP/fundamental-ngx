@@ -7,10 +7,9 @@ export class DateTimePicker extends CoreBaseComponentPo {
     topPage = 'h1.header';
     datePickerInput = 'fd-datetime-picker input';
     datePickerButton = 'fd-datetime-picker button';
-    activeDateTimePickerButton = '//button[contains(@class, \' fd-input-group__button\') and not (contains(@class, \'is-disabled\'))]';
-    activeDateTimePickerInput = '//component-example//fd-input-group[not (contains(@ng-reflect-disabled, \'true\'))]//input';
+    datePickerGroup = this.root + ' .fd-input-group';
     calendarExpanded = '.fd-datetime__container';
-    buttonChange = 'button[ng-reflect-label="Change"]';
+    buttonChange = 'button[label="Change"]';
     disabledDateTimePickerButton = '.is-disabled button';
     disabledDateTimePickerInput = '.is-disabled input';
     activeDay = '//*[contains(@class, "fd-calendar__item--current") or contains(@class, "is-active")]';
@@ -19,7 +18,7 @@ export class DateTimePicker extends CoreBaseComponentPo {
     selectMonthButton = '.fd-calendar__action:nth-child(2) .fd-button';
     buttonSelectYearsRange = '.fd-calendar__action:nth-child(2) .fd-button';
     okButton = 'button[fdtype="emphasized"]';
-    cancelButton = 'button[ng-reflect-label="Cancel"]';
+    cancelButton = 'button[label="Cancel"]';
     buttonFirstRangeYear = '(//td[contains(@id,"fd-aggregated-year")]/child::span)[1]';
     buttonFirstYear = '(//td[contains(@id,"year")]/child::span)[1]';
     buttonFirstMonth = '(//td[contains(@id,"month")]/child::span)[1]';
@@ -31,13 +30,14 @@ export class DateTimePicker extends CoreBaseComponentPo {
     period = '//span[contains(text(), " PM ")]/parent::li';
     optionButton = 'div.fd-select__control';
     countryOption = 'ul.fd-select-options';
+    calendarItem = '.fd-calendar__table td.fd-calendar__item';
 
     filterCalendarValue = (name: string): string => {
         return `[id*="${name}"]`;
     };
 
-    getOptionByName = (name: string): string => {
-        return `fd-option[ng-reflect-value="${name}"]`;
+    getOptionById = (id: string): string => {
+        return `#${id}`;
     };
 
     dayInCalendarButtonByValue = (index: string): string => {

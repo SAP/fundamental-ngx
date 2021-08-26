@@ -1,11 +1,13 @@
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { FeedInputModule } from './feed-input.module';
-import { FeedInputTextareaDirective} from './directives/feed-input-textarea.directive';
-import { FeedInputButtonDirective } from './directives/feed-input-button.directive';
 
-import { FeedInputComponent } from './feed-input.component';
+import {
+    FeedInputButtonDirective,
+    FeedInputComponent,
+    FeedInputModule,
+    FeedInputTextareaDirective
+} from '@fundamental-ngx/core/feed-input';
 
 @Component({
     template: `
@@ -35,13 +37,12 @@ describe('FeedInputComponent', () => {
     let textareaDirective;
     let buttonDirective;
 
-    beforeEach(async () => {
-        await TestBed.configureTestingModule({
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
             imports: [FeedInputModule],
-            declarations: [FeedInputComponent, TestComponent, FeedInputTextareaDirective, FeedInputButtonDirective]
-        })
-            .compileComponents();
-    });
+            declarations: [TestComponent]
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -63,7 +64,7 @@ describe('FeedInputComponent', () => {
         component.disabled = true;
         fixture.detectChanges();
 
-        expect(hostEl.classes['is-disabled']).toBeTrue();
+        expect(hostEl.nativeElement.className.includes('is-disabled')).toBeTrue();
     })
 
     it('should disabled button by default', () => {

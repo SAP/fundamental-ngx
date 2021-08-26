@@ -10,6 +10,27 @@ import { DynamicFormControl } from './dynamic-form-control';
     selector: '[fdpDynamicFormControlField]'
 })
 export class DynamicFormControlFieldDirective implements OnInit {
+    /**
+     * @description Form control instance.
+     */
+    @Input()
+    set fdpDynamicFormControlField(value: DynamicFormControl) {
+        this._control = value;
+
+        this._originalValidators = this._control.formItem.validators;
+        this._originalAsyncValidators = this._control.formItem.asyncValidators;
+
+        this._updateView();
+    }
+
+    /**
+     * @description boolean flag representing if current item should be shown.
+     */
+    @Input()
+    set fdpDynamicFormControlFieldShow(value: boolean) {
+        this.shouldShowFormItem = value;
+        this._updateView();
+    }
 
     /**
      * @hidden
@@ -31,31 +52,14 @@ export class DynamicFormControlFieldDirective implements OnInit {
      */
     private _componentRemoved = true;
 
-    constructor(
-        private readonly _templateRef: TemplateRef<any>,
-        private readonly _viewContainer: ViewContainerRef
-    ) {
-    }
-
     /**
-     * @description boolean flag representing if current item should be shown.
+     * @hidden
      */
-    @Input()
-    set fdpDynamicFormControlFieldShow(value: boolean) {
-        this.shouldShowFormItem = value;
-        this._updateView();
-    }
+    private _shouldShowFormItem = false;
 
-    /**
-     * @description Form control instance.
-     */
-    @Input()
-    set fdpDynamicFormControlField(value: DynamicFormControl) {
-        this._control = value;
+    constructor(private readonly _templateRef: TemplateRef<any>, private readonly _viewContainer: ViewContainerRef) {}
 
-        this._originalValidators = this._control.formItem.validators;
-        this._originalAsyncValidators = this._control.formItem.asyncValidators;
-
+    ngOnInit(): void {
         this._updateView();
     }
 
@@ -80,15 +84,6 @@ export class DynamicFormControlFieldDirective implements OnInit {
         this._control.updateValueAndValidity({ emitEvent: false });
     }
 
-    /**
-     * @hidden
-     */
-    private _shouldShowFormItem = false;
-
-    ngOnInit(): void {
-        this._updateView();
-    }
-
     private _updateView(): void {
         if (this._shouldShowFormItem && this._componentRemoved) {
             this._viewContainer.createEmbeddedView(this._templateRef);
@@ -98,5 +93,4 @@ export class DynamicFormControlFieldDirective implements OnInit {
             this._componentRemoved = true;
         }
     }
-
 }

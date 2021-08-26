@@ -1,18 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
 
-import { CardModule } from '../card.module';
+import {
+    CardKpiAnalyticsContentDirective,
+    CardKpiAnalyticsDirective,
+    CardKpiAnalyticsLabelDirective,
+    CardKpiHeaderComponent,
+    CardKpiScaleIconDirective,
+    CardKpiScaleTextDirective,
+    CardKpiValueDirective,
+    CardModule
+} from '@fundamental-ngx/core/card';
+
 import { CLASS_NAME } from '../constants';
-
-import { CardKpiHeaderComponent } from './card-kpi-header.component';
-import { CardKpiValueDirective } from './card-kpi-value.directive';
-import { CardKpiScaleIconDirective } from './card-kpi-scale-icon.directive';
-import { CardKpiScaleTextDirective } from './card-kpi-scale-text.directive';
-import { CardKpiAnalyticsDirective } from './card-kpi-analytics.directive';
-import { CardKpiAnalyticsContentDirective } from './card-kpi-analytics-content.directive';
-import { CardKpiAnalyticsLabelDirective } from './card-kpi-analytics-label.directive';
 
 @Component({
     template: `
@@ -57,13 +59,13 @@ describe('CardKpiHeaderComponent', () => {
 
     it('should add className to host', () => {
         const debugEl = fixture.debugElement.query(By.directive(CardKpiHeaderComponent));
-        expect(debugEl.classes[CLASS_NAME.cardAnalyticalArea]).toBeTrue();
+        expect(debugEl.nativeElement.className.includes(CLASS_NAME.cardAnalyticalArea)).toBeTrue();
     });
 
     describe('KPI value option', () => {
         it('should add className to its host element', () => {
             const debugEl = fixture.debugElement.query(By.directive(CardKpiValueDirective));
-            expect(debugEl.classes[CLASS_NAME.cardAnalyticsKpiValue]).toBeTrue();
+            expect(debugEl.nativeElement.className.includes(CLASS_NAME.cardAnalyticsKpiValue)).toBeTrue();
         });
     });
 
@@ -71,14 +73,14 @@ describe('CardKpiHeaderComponent', () => {
         describe('icon', () => {
             it('should add className to its host element', () => {
                 const debugEl = fixture.debugElement.query(By.directive(CardKpiScaleIconDirective));
-                expect(debugEl.classes[CLASS_NAME.cardAnalyticsScaleIcon]).toBeTrue();
+                expect(debugEl.nativeElement.className.includes(CLASS_NAME.cardAnalyticsScaleIcon)).toBeTrue();
             });
         });
 
         describe('text', () => {
             it('should add className to its host element', () => {
                 const debugEl = fixture.debugElement.query(By.directive(CardKpiScaleTextDirective));
-                expect(debugEl.classes[CLASS_NAME.cardAnalyticsScaleText]).toBeTrue();
+                expect(debugEl.nativeElement.className.includes(CLASS_NAME.cardAnalyticsScaleText)).toBeTrue();
             });
         });
     });
@@ -86,20 +88,20 @@ describe('CardKpiHeaderComponent', () => {
     describe('analytics area', () => {
         it('should add className to its host element', () => {
             const debugEl = fixture.debugElement.query(By.directive(CardKpiAnalyticsDirective));
-            expect(debugEl.classes[CLASS_NAME.cardAnalytics]).toBeTrue();
+            expect(debugEl.nativeElement.className.includes(CLASS_NAME.cardAnalytics)).toBeTrue();
         });
 
         describe('label', () => {
             it('should add className to its host element', () => {
                 const debugEl = fixture.debugElement.query(By.directive(CardKpiAnalyticsLabelDirective));
-                expect(debugEl.classes[CLASS_NAME.cardAnalyticsText]).toBeTrue();
+                expect(debugEl.nativeElement.className.includes(CLASS_NAME.cardAnalyticsText)).toBeTrue();
             });
         });
 
         describe('value', () => {
             it('should add className to its host element', () => {
                 const debugEl = fixture.debugElement.query(By.directive(CardKpiAnalyticsContentDirective));
-                expect(debugEl.classes[CLASS_NAME.cardAnalyticsContent]).toBeTrue();
+                expect(debugEl.nativeElement.className.includes(CLASS_NAME.cardAnalyticsContent)).toBeTrue();
             });
         });
     });

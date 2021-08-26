@@ -2,7 +2,8 @@ import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { CardTitleDirective } from './card-title.directive';
+import { CardTitleDirective } from '@fundamental-ngx/core/card';
+
 import { CLASS_NAME } from './constants';
 
 @Component({
@@ -33,6 +34,6 @@ describe('CardTitleComponent', () => {
     });
 
     it('should add className to host', () => {
-        expect(debugElement.classes[CLASS_NAME.cardTitle]).toBeTrue();
+        expect(debugElement.nativeElement.className.includes(CLASS_NAME.cardTitle)).toBeTrue();
     });
 });

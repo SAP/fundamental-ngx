@@ -1,4 +1,4 @@
-<fd-wizard [responsivePaddings]="responsivePaddings" [appendToWizard]="appendToWizard" [contentHeight]="contentHeight" *ngIf="visibleItems">
+<fd-wizard [displaySummaryStep]="displaySummaryStep" [responsivePaddings]="responsivePaddings" [appendToWizard]="appendToWizard" [contentHeight]="contentHeight" *ngIf="visibleItems">
     <fd-wizard-navigation>
         <ul fd-wizard-progress-bar>
             <ng-container *ngFor="let step of visibleItems; let i = index; trackBy: _trackFn">
@@ -7,11 +7,11 @@
                     [label]="step.name"
                     [status]="step.status"
                     [branching]="step.branching"
-                    [stepClickValidator]="stepClickValidatorFn(i)"
+                    [stepClickValidator]="stepClickValidatorFn(i, step)"
                     [isSummary]="step.summary"
                     (statusChange)="stepStatusChanged(step.id, $event)"
                 >
-                    <fd-wizard-step-indicator *ngIf="!step.summary" [glyph]="step.icon">
+                    <fd-wizard-step-indicator [glyph]="step.icon">
                         <ng-container *ngIf="!step.icon">{{ i + 1 }}</ng-container>
                     </fd-wizard-step-indicator>
                     <ng-template></ng-template>
@@ -20,13 +20,13 @@
                         <fdp-wizard-summary-step [status]="step.status" *ngIf="step.summary"></fdp-wizard-summary-step>
 
                         <fd-wizard-next-step *ngIf="navigationButtons">
-                            <ng-container *ngIf="!addSummary && !isLastStep">
+                            <ng-container *ngIf="!hasSummaryStep && !isLastStep">
                                 <ng-template #defaultGoNextButtonTemplate>
                                     <fdp-button [contentDensity]="navigationButtonLabels.goNext.contentDensity" [buttonType]="navigationButtonLabels.goNext.type" [label]="navigationButtonLabels.goNext.label" (click)="goNext.emit()"></fdp-button>
                                 </ng-template>
                                 <ng-template [ngTemplateOutlet]="goNextButtonTemplate || defaultGoNextButtonTemplate" [ngTemplateOutletContext]="{ goNext: _goNextFn }"></ng-template>
                             </ng-container>
-                            <ng-container *ngIf="addSummary && isSummaryStep || !addSummary && isLastStep">
+                            <ng-container *ngIf="hasSummaryStep && isSummaryStep || !hasSummaryStep && isLastStep">
                                 <ng-template #defaultFinishButtonTemplate>
                                     <fdp-button [contentDensity]="navigationButtonLabels.finish.contentDensity" [buttonType]="navigationButtonLabels.finish.type" [label]="navigationButtonLabels.finish.label" (click)="finish.emit()"></fdp-button>
                                 </ng-template>

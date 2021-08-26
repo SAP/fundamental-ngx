@@ -2,7 +2,10 @@ import { AfterContentInit, ContentChild, Directive, EventEmitter, Input, OnDestr
 import { UploadCollectionFormItemComponent } from './upload-collection-form-item.component';
 import { UploadCollectionButtonGroupComponent } from './upload-collection-button-group.component';
 import { Subscription } from 'rxjs';
-import { UploadCollectionTitleContainerDirective, UploadCollectionTitleDirective } from './upload-collection-simple.directives';
+import {
+    UploadCollectionTitleContainerDirective,
+    UploadCollectionTitleDirective
+} from './upload-collection-simple.directives';
 
 @Directive({
     // tslint:disable-next-line: directive-selector
@@ -82,10 +85,12 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
                 this.titleContainerDirective.applyContainerClass = !event;
                 const styles = [];
                 styles.push(this.titleDirective.elRef.nativeElement.style);
-                this.titleContainerDirective?.objectMarkerComponents?.forEach(objectMarker => {
+                this.titleContainerDirective?.objectMarkerComponents?.forEach((objectMarker) => {
                     styles.push(objectMarker.elementRef().nativeElement.style);
                 });
-                !!event ? styles.forEach(style => style.display = 'none') : styles.forEach(style => style.display = 'inline-block');
+                !!event
+                    ? styles.forEach((style) => (style.display = 'none'))
+                    : styles.forEach((style) => (style.display = 'inline-block'));
                 if (event) {
                     this.formItemComponent.extension = this.extension;
                     this.formItemComponent.fileName = this.fileName;

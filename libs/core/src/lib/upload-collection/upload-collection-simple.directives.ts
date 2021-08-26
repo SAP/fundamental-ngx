@@ -40,7 +40,7 @@ export class UploadCollectionStatusGroupDirective {}
 
 @Directive({
     // tslint:disable-next-line: directive-selector
-    selector: '[fd-upload-collection-title-container]',
+    selector: '[fd-upload-collection-title-container]'
 })
 export class UploadCollectionTitleContainerDirective {
     /** @hidden */

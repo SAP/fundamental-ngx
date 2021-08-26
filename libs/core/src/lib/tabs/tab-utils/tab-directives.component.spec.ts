@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { TabIconComponent } from './tab-directives';
+
+import { TabIconComponent, TabsModule } from '@fundamental-ngx/core/tabs';
 
 @Component({
     template: ` <li fd-tab-icon #directiveElement></li> `
@@ -17,7 +18,8 @@ describe('TabIconComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [TestNestedContainerComponent, TabIconComponent]
+            imports: [TabsModule],
+            declarations: [TestNestedContainerComponent]
         }).compileComponents();
     }));
 

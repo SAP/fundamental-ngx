@@ -1,10 +1,9 @@
-import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { OverlayContainer } from '@angular/cdk/overlay';
-import { By } from '@angular/platform-browser';
 import { A } from '@angular/cdk/keycodes';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { Component, ViewChild } from '@angular/core';
+import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
 import { DynamicComponentService, FormModule, RtlService } from '@fundamental-ngx/core';
 import {
@@ -76,8 +75,8 @@ describe('MultiComboboxComponent default values', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, FormsModule, ReactiveFormsModule, CommonModule, PlatformMultiComboboxModule],
-            declarations: [MultiComboboxStandardComponent, MultiComboboxComponent],
+            imports: [FdpFormGroupModule, FormModule, ReactiveFormsModule, PlatformMultiComboboxModule],
+            declarations: [MultiComboboxStandardComponent],
             providers: [
                 DynamicComponentService,
                 RtlService,

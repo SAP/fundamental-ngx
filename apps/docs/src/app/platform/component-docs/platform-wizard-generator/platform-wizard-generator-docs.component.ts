@@ -22,6 +22,12 @@ import * as responsiveWizardGeneratorTsExample from '!raw-loader!./examples/wiza
 import * as responsiveDialogWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-responsive-dialog-example.component.html';
 import * as responsiveDialogWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-responsive-dialog-example.component.ts';
 
+import * as visibleSummaryWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-visible-summary-example.component.html';
+import * as visibleSummaryWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-visible-summary-example.component.ts';
+
+import * as visibleBranchingSummaryWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-visible-summary-branching-example.component.html';
+import * as visibleBranchingSummaryWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-visible-summary-branching-example.component.ts';
+
 @Component({
     selector: 'fdp-platform-wizard-generator-docs',
     templateUrl: './platform-wizard-generator-docs.component.html'
@@ -109,6 +115,34 @@ export class PlatformWizardGeneratorDocsComponent {
             code: responsiveWizardGeneratorTsExample,
             fileName: 'wizard-generator-responsive-paddings-example',
             component: 'WizardGeneratorResponsivePaddingsExampleComponent'
+        }
+    ];
+
+    visibleSummaryExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: visibleSummaryWizardGeneratorHtmlExample,
+            fileName: 'wizard-generator-visible-summary-example'
+        },
+        {
+            language: 'typescript',
+            code: visibleSummaryWizardGeneratorTsExample,
+            fileName: 'wizard-generator-visible-summary-example',
+            component: 'WizardGeneratorVisibleSummaryExampleComponent'
+        }
+    ];
+
+    visibleBranchingSummaryExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: visibleBranchingSummaryWizardGeneratorHtmlExample,
+            fileName: 'wizard-generator-visible-summary-branching-example'
+        },
+        {
+            language: 'typescript',
+            code: visibleBranchingSummaryWizardGeneratorTsExample,
+            fileName: 'wizard-generator-visible-summary-branching-example',
+            component: 'WizardGeneratorVisibleSummaryBranchingExampleComponent'
         }
     ];
 

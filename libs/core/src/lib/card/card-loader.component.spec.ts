@@ -1,7 +1,8 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { CardLoaderComponent } from './card-loader.component';
+import { CardLoaderComponent } from '@fundamental-ngx/core/card';
+
 import { CLASS_NAME } from './constants';
 
 describe('CardLoaderComponent', () => {
@@ -26,6 +27,6 @@ describe('CardLoaderComponent', () => {
     });
 
     it('should add className to host', () => {
-        expect(fixture.debugElement.classes[CLASS_NAME.cardLoader]).toBeTrue();
+        expect(fixture.debugElement.nativeElement.className.includes(CLASS_NAME.cardLoader)).toBeTrue();
     });
 });

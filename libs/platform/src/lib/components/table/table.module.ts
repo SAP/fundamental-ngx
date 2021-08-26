@@ -60,7 +60,7 @@ import { FdpViewSettingsFilterCustomDef } from './directives/table-view-settings
 import { TableScrollableDirective } from './directives/table-scrollable.directive';
 import { TableScrollerDirective } from './directives/table-scroller.directive';
 import { FdpCellSelectableDirective } from './directives/table-cell-selectable.directive';
-import { PlatformTableCellResizableDirective } from './directives';
+import { PlatformTableCellResizableDirective } from './directives/table-cell-resizable.directive';
 import { PlatformTableColumnResizerComponent } from './components/table-column-resizer/table-column-resizer.component';
 
 @NgModule({

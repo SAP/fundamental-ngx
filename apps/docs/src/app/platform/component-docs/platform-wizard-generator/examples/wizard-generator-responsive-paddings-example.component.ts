@@ -93,6 +93,11 @@ export class WizardGeneratorResponsivePaddingsExampleComponent {
                     ]
                 }
             ]
+        },
+        {
+            name: 'Summary',
+            id: 'summary',
+            summary: true
         }
     ];
 

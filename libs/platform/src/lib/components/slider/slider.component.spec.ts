@@ -1,13 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { SliderCustomValue } from '@fundamental-ngx/core';
-
-import { SliderComponent } from './slider.component';
-import { FdpFormGroupModule } from '../form/public_api';
-import { PlatformSliderModule } from './slider.module';
+import { SliderCustomValue } from '@fundamental-ngx/core/slider';
+import { FdpFormGroupModule, PlatformSliderModule } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-test-slider',
@@ -124,7 +121,7 @@ describe('PlatformSliderComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestSliderComponent, SliderComponent],
+            declarations: [TestSliderComponent],
             imports: [PlatformSliderModule, ReactiveFormsModule, FdpFormGroupModule]
         }).compileComponents();
     });
@@ -145,7 +142,7 @@ describe('PlatformSliderComponent', () => {
     it('handle should be on the center of slider', () => {
         const handle = fixture.debugElement.query(By.css('.example-1 .fd-slider__handle'));
 
-        expect(handle.styles.left).toEqual('50%');
+        expect(handle.nativeElement.style.left).toEqual('50%');
     });
 
     it('should emit value: "-1"', () => {
@@ -222,7 +219,7 @@ describe('PlatformSliderComponent', () => {
         expect(handles.length).toEqual(2);
     });
 
-    // TODO investigate and fix - ticket $4893
+    // TODO investigate and fix - ticket #4893
     xit('range slider second handle should have the ability to be less than the first handle', async () => {
         const sliderWidth = fixture.debugElement.query(By.css('.example-4 .fd-slider__inner')).nativeElement.offsetWidth;
         const handles = fixture.debugElement.queryAll(By.css('.example-4 .fd-slider__handle'));

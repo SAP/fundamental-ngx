@@ -1,9 +1,10 @@
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+
+import { InfoLabelModule } from '@fundamental-ngx/core';
 
 import { InfoLabelComponent } from './info-label.component';
-import { Component, ViewChild, DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import { InfoLabelModule } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fdp-test-numeric-info-label',
@@ -38,6 +39,7 @@ describe('InfoLabelComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
     // TODO: Unskip after fix
     xit('Should Add label with color', () => {
         host.color = '2';

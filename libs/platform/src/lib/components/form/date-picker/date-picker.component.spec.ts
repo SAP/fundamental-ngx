@@ -1,18 +1,23 @@
+import { Component, QueryList, ViewChildren } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule, FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import {
     ButtonModule,
     CalendarModule,
+    DatePickerModule,
     DatetimeAdapter,
     FdDate,
     FdDatetimeAdapter,
-    FdDatetimeModule
+    FdDatetimeModule,
+    FormModule,
+    IconModule,
+    InputGroupModule,
+    PopoverModule
 } from '@fundamental-ngx/core';
-import { DatePickerModule, DatePickerComponent as CoreDatePickerComponent } from '@fundamental-ngx/core';
-import { FormModule, IconModule, InputGroupModule, PopoverModule } from '@fundamental-ngx/core';
-import { Component, ViewChildren, QueryList } from '@angular/core';
+import { FdpFormGroupModule, PlatformDatePickerModule } from '@fundamental-ngx/platform';
+
 import { PlatformDatePickerComponent } from './date-picker.component';
-import { FdpFormGroupModule } from './../form-group/fdp-form.module';
 
 @Component({
     selector: 'fdp-test-date-picker',
@@ -76,8 +81,9 @@ describe('TestDatePickerComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [PlatformDatePickerComponent, TestDatePickerComponent, CoreDatePickerComponent],
+                declarations: [TestDatePickerComponent],
                 imports: [
+                    PlatformDatePickerModule,
                     CalendarModule,
                     DatePickerModule,
                     PopoverModule,

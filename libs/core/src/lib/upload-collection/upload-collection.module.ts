@@ -4,7 +4,8 @@ import {
     UploadCollectionDescriptionDirective,
     UploadCollectionStatusGroupDirective,
     UploadCollectionTextSeparatorDirective,
-    UploadCollectionThumbnailDirective, UploadCollectionTitleContainerDirective,
+    UploadCollectionThumbnailDirective,
+    UploadCollectionTitleContainerDirective,
     UploadCollectionTitleDirective
 } from './upload-collection-simple.directives';
 import { ListModule } from '@fundamental-ngx/core/list';

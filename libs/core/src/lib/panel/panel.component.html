@@ -11,7 +11,8 @@
             [attr.aria-expanded]="expanded"
             [attr.aria-controls]="panelContent?.id"
             [attr.aria-label]="expandAriaLabel"
-            [attr.aria-labelledby]="expandAriaLabelledBy"
+            [attr.aria-labelledby]="expandAriaLabelledBy + ' ' + expandId"
+            [title]="expandAriaLabel"
             (click)="toggleExpand()">
         </button>
     </div>

@@ -2,19 +2,20 @@ import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 import {
-    FacetModule,
-    FacetComponent,
     AvatarModule,
+    FacetComponent,
     FacetContentComponent,
+    FacetModule,
     IconModule,
     LinkModule,
     ObjectNumberModule,
     ObjectStatusModule,
     RatingIndicatorModule,
-    TextModule,
+    TextModule
 } from '@fundamental-ngx/core';
-import { FACET_CLASS_NAME } from '../constants';
+import { FACET_CLASS_NAME } from '@fundamental-ngx/core/facets';
 
 @Component({
     template: `
@@ -44,7 +45,7 @@ class TestComponent {
     @ViewChild(FacetContentComponent) facetContentComponent: FacetContentComponent;
 }
 
-describe('Form Facet Component', () => {
+describe('FormFacetComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
     let facetComponent: FacetComponent;
     let component: TestComponent;
@@ -52,7 +53,7 @@ describe('Form Facet Component', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [CommonModule, FacetModule, IconModule, LinkModule],
+                imports: [CommonModule, FacetModule, IconModule, LinkModule, TextModule, RouterTestingModule],
                 declarations: [TestComponent]
             }).compileComponents();
         })

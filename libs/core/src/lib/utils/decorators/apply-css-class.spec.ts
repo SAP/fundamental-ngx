@@ -1,8 +1,8 @@
-import { Component, Directive, OnChanges, OnInit, ElementRef, ViewChild, ContentChild, Renderer2 } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { CommonModule } from '@angular/common';
+import { Component, ContentChild, Directive, ElementRef, OnChanges, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ButtonComponent } from '@fundamental-ngx/core/button';
+import { ButtonComponent, ButtonModule } from '@fundamental-ngx/core/button';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 const TEST_DIRECTIVE_CLASS = 'fd-test-directive';
@@ -73,13 +73,13 @@ export class TestComponent {
 
 describe('ButtonComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
-
-    let testDirectiveInstance: TestDirective, buttonInstance: ButtonComponent;
+    let testDirectiveInstance: TestDirective;
+    let buttonInstance: ButtonComponent;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule],
-            declarations: [TestDirective, ButtonComponent, TestComponent, TestProxyComponent]
+            imports: [CommonModule, ButtonModule],
+            declarations: [TestDirective, TestComponent, TestProxyComponent]
         });
     }));
 

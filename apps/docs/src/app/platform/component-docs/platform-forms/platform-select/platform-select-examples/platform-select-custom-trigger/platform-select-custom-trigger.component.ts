@@ -14,12 +14,11 @@ export class PlatformSelectCustomTriggerComponent {
     selected: string;
 
     autoResizeList = [
-        'The maximum width is the part of the screen furthest to the right.',
+        'Maximum width is part of the screen furthest to the right.',
         'Apple With less price',
         'Banana With bit more big line',
-        'Lorem ipsum dolor sit, amet' + 
-       ' consectetur adipisicing elit.' + 
-        'et tempore cum. Corporis, nobis.' ,
+        'Lorem ipsum dolor sit, amet' +
+       ' consectetur adipisicing elit.',
         'Strawberry',
         'Broccoli',
         'Carrot',

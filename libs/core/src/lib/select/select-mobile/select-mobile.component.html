@@ -1,9 +1,9 @@
 <ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
-    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
+    <fd-dialog tabindex="-1" [dialogConfig]="dialogConfig" [dialogRef]="dialog">
 
         <fd-dialog-header>
-            <h1 *ngIf="mobileConfig.title" fd-title>{{mobileConfig.title}}</h1>
-            <button *ngIf="mobileConfig.hasCloseButton" fd-dialog-close-button [mobile]="true" (click)="_cancel()">
+            <h1 id="fd-dialog-header" *ngIf="mobileConfig.title" fd-title>{{mobileConfig.title}}</h1>
+            <button role="button" *ngIf="mobileConfig.hasCloseButton" aria-label="close" fd-dialog-close-button [mobile]="true" (click)="_cancel()">
             </button>
         </fd-dialog-header>
 

@@ -1,30 +1,8 @@
 import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import {
-    TileActionCloseDirective,
-    TileActionContainerDirective,
-    TileActionIndicatorDirective,
-    TileBackgroundImgDirective,
-    TileContainerDirective,
-    TileContentBylineDirective,
-    TileContentDirective,
-    TileContentTextDirective,
-    TileDotDirective,
-    TileFooterDirective,
-    TileFooterTextDirective,
-    TileHeaderContentDirective,
-    TileHeaderDirective,
-    TileLogoDirective,
-    TilePageIndicatorDirective,
-    TileProfileImgDirective,
-    TileRefreshDirective,
-    TileSectionDirective,
-    TileSlideContainerDirective,
-    TileSubtitleDirective,
-    TileTitleContainerDirective,
-    TileTitleDirective,
-    TileToggleDirective
-} from './tile.directives';
+
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { TileActionCloseDirective, TileActionIndicatorDirective, TileModule, TileRefreshDirective } from '@fundamental-ngx/core/tile';
 
 @Component({
     selector: 'fd-test-component',
@@ -101,32 +79,8 @@ describe('TileDirectives', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                TileHeaderDirective,
-                TileContentDirective,
-                TileFooterDirective,
-                TileTitleDirective,
-                TileSubtitleDirective,
-                TileSectionDirective,
-                TileRefreshDirective,
-                TileFooterTextDirective,
-                TileHeaderContentDirective,
-                TileProfileImgDirective,
-                TileLogoDirective,
-                TileContentBylineDirective,
-                TileContentTextDirective,
-                TileBackgroundImgDirective,
-                TileToggleDirective,
-                TileContainerDirective,
-                TilePageIndicatorDirective,
-                TileDotDirective,
-                TileActionCloseDirective,
-                TileActionIndicatorDirective,
-                TileTitleContainerDirective,
-                TileActionContainerDirective,
-                TileSlideContainerDirective,
-                TestComponent
-            ]
+            imports: [TileModule, ButtonModule],
+            declarations: [TestComponent]
         });
     }));
 

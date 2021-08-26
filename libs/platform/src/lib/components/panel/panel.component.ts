@@ -26,6 +26,8 @@ export class PanelExpandChangeEvent {
     constructor(public source: PanelComponent, public payload: boolean) {}
 }
 
+let platformPanelTitleUniqueId = 0;
+
 /**
  * Fundamental Panel component
  *
@@ -68,7 +70,7 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
     @Input()
     set contentDensity(contentDensity: ContentDensity) {
         this._contentDensity = contentDensity;
-        this.isCompact = contentDensity === 'compact';
+        this._isCompact = contentDensity === 'compact';
     }
 
     /**
@@ -91,28 +93,31 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
      * @hidden
      * Button label based on the current state
      */
-    expandAriaLabel: string;
+    _expandAriaLabel: string;
 
     /** @hidden */
     @ContentChild(PanelActionsComponent)
-    panelActionsComponent: PanelActionsComponent;
+    _panelActionsComponent: PanelActionsComponent;
 
     /** @hidden */
     @ContentChild(PanelContentComponent)
-    panelContentComponent: PanelContentComponent;
+    _panelContentComponent: PanelContentComponent;
 
     /** @hidden */
     @ViewChild(PanelTitleDirective)
-    panelTitleDirective: PanelTitleDirective;
+    _panelTitleDirective: PanelTitleDirective;
 
     /** @hidden */
     _contentDensity: ContentDensity = this._panelConfig.contentDensity;
+
+    /** @hidden id of the title element */
+    _titleId: string = 'fdp-panel-title-' + platformPanelTitleUniqueId++;
 
     /**
      * @hidden
      * Whether "contentDensity" is "compact"
      */
-    isCompact: boolean = this._contentDensity === 'compact';
+    _isCompact: boolean = this._contentDensity === 'compact';
 
     /** @hidden */
     constructor(protected _cd: ChangeDetectorRef, protected _panelConfig: PanelConfig) {
@@ -144,6 +149,6 @@ export class PanelComponent extends BaseComponent implements OnInit, OnChanges {
      * Calculate expandAriaLabel based on panel state
      */
     private _calculateExpandAriaLabel(): void {
-        this.expandAriaLabel = this.expanded ? this.collapseLabel : this.expandLabel;
+        this._expandAriaLabel = this.expanded ? this.collapseLabel : this.expandLabel;
     }
 }

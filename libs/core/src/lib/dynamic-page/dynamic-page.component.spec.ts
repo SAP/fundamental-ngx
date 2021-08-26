@@ -116,5 +116,4 @@ xdescribe('DynamicPageComponent default values', () => {
         const styles = window.getComputedStyle(element);
         expect(styles.height).toBe(size);
     });
-
 });

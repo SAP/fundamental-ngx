@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+
 import { Placement } from '@fundamental-ngx/core/shared';
 import { BasePopoverClass } from '@fundamental-ngx/core/popover';
 
@@ -8,11 +9,11 @@ import { BasePopoverClass } from '@fundamental-ngx/core/popover';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductSwitchComponent extends BasePopoverClass {
-    @Input ()
+    @Input()
     placement: Placement = 'bottom-end';
 
     /** Input to set the aria label */
-    @Input ()
+    @Input()
     ariaLabel = 'Product Switch';
 
     /** Whether the product switch is disabled. */
