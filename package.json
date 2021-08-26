@@ -53,7 +53,7 @@
     "test": "nx test core --watch false --code-coverage true --browsers=ChromeHeadless",
     "test:platform": "nx test platform --watch false --code-coverage true --browsers=ChromeHeadless",
     "test:core:saucelabs": "node --max_old_space_size=4096  ./node_modules/.bin/nx test core --watch false --code-coverage true --karmaConfig=karma.conf-ci.js",
-    "test:platform:saucelabs": "SAUCE_USERNAME='sso-sap-C5324866' SAUCE_ACCESS_KEY='d093b90f-bc61-4982-a437-d86edf68da49' node --max_old_space_size=4096 ./node_modules/.bin/nx test platform --watch false --code-coverage true --karmaConfig=karma.conf-ci.js",
+    "test:platform:saucelabs": "node --max_old_space_size=4096 ./node_modules/.bin/nx test platform --watch false --code-coverage true --karmaConfig=karma.conf-ci.js",
     "active-test": "nx test core --watch true --browsers=ChromeHeadless",
     "test:coveralls": "cat ./coverage/libs/core/lcov.info  | ./node_modules/coveralls/bin/coveralls.js || echo -e \"Coveralls failed.\"",
     "compile-typedoc-all": "npm run compile-typedoc-core && npm run compile-typedoc-platform && npm run compile-typedoc-moment-adapter",
