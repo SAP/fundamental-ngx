@@ -51,19 +51,20 @@ describe('ObjectStatusComponent', () => {
         expect(component).toBeTruthy();
     });
     // TODO: Unskip after fix
-    xit('Should Validate diffrent object states and icon', () => {
+    fit('Should Validate diffrent object states and icon', () => {
         host.status = 'negative';
         host.glyph = 'status-negative';
         fixture.detectChanges();
         let linkElement = fixture.debugElement.query(By.css('span'));
         expect(linkElement.nativeElement.classList.contains('fd-object-status--negative')).toBe(true);
-        expect(linkElement.nativeElement.classList.contains('sap-icon--status-negative')).toBe(true);
+        const iconEl = fixture.debugElement.query(By.css('i.fd-object-status__icon'));
+        expect(iconEl.nativeElement.classList.contains('sap-icon--status-negative')).toBe(true);
         host.status = 'positive';
         host.glyph = 'status-positive';
         fixture.detectChanges();
         linkElement = fixture.debugElement.query(By.css('span'));
         expect(linkElement.nativeElement.classList.contains('fd-object-status--positive')).toBe(true);
-        expect(linkElement.nativeElement.classList.contains('sap-icon--status-positive')).toBe(true);
+        expect(iconEl.nativeElement.classList.contains('sap-icon--status-positive')).toBe(true);
     });
 
     it('Should Validate inverted object states and clickable', () => {

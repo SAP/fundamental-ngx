@@ -19,24 +19,24 @@ module.exports = function (config) {
             platform: 'macOS 10.15',
             version: 'latest'
         },
-        sl_chrome_macOS: {
-            base: 'SauceLabs',
-            browserName: 'chrome',
-            platform: 'macOS 10.15',
-            version: 'latest'
-        },
-        sl_firefox_macOS: {
-            base: 'SauceLabs',
-            platform: 'macOS 10.15',
-            browserName: 'firefox',
-            version: 'latest'
-        },
-        sl_edge_macOS: {
-            base: 'SauceLabs',
-            platform: 'macOS 10.15',
-            browserName: 'MicrosoftEdge',
-            version: 'latest'
-        },
+        // sl_chrome_macOS: {
+        //     base: 'SauceLabs',
+        //     browserName: 'chrome',
+        //     platform: 'macOS 10.15',
+        //     version: 'latest'
+        // },
+        // sl_firefox_macOS: {
+        //     base: 'SauceLabs',
+        //     platform: 'macOS 10.15',
+        //     browserName: 'firefox',
+        //     version: 'latest'
+        // },
+        // sl_edge_macOS: {
+        //     base: 'SauceLabs',
+        //     platform: 'macOS 10.15',
+        //     browserName: 'MicrosoftEdge',
+        //     version: 'latest'
+        // },
 /*        sl_ipad_macOS: {
                     base: 'SauceLabs',
                     platformVersion: '13.2',
@@ -46,24 +46,24 @@ module.exports = function (config) {
                     deviceOrientation: 'portrait',
                     version: 'latest'
         },*/
-        sl_firefox_win: {
-            base: 'SauceLabs',
-            platform: 'windows 10',
-            browserName: 'firefox',
-            version: 'latest'
-        },
-        sl_chrome_win: {
-            base: 'SauceLabs',
-            platform: 'windows 10',
-            browserName: 'chrome',
-            version: 'latest'
-        },
-        sl_edge_win: {
-            base: 'SauceLabs',
-            platform: 'windows 10',
-            browserName: 'MicrosoftEdge',
-            version: 'latest'
-        },
+        // sl_firefox_win: {
+        //     base: 'SauceLabs',
+        //     platform: 'windows 10',
+        //     browserName: 'firefox',
+        //     version: 'latest'
+        // },
+        // sl_chrome_win: {
+        //     base: 'SauceLabs',
+        //     platform: 'windows 10',
+        //     browserName: 'chrome',
+        //     version: 'latest'
+        // },
+        // sl_edge_win: {
+        //     base: 'SauceLabs',
+        //     platform: 'windows 10',
+        //     browserName: 'MicrosoftEdge',
+        //     version: 'latest'
+        // },
         // sl_ie_win: {
         //     base: 'SauceLabs',
         //     platform: 'windows 10',
