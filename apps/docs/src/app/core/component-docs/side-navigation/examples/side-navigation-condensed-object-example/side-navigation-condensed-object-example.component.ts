@@ -33,6 +33,7 @@ export class SideNavigationCondensedObjectExampleComponent {
                     },
                     list: {
                         textOnly: true,
+                        popover: true,
                         items: [
                             {
                                 link: {

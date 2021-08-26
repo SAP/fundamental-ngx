@@ -41,10 +41,6 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
     popoverComponent: PopoverComponent;
 
     /** @hidden */
-    @HostBinding('class.fd-nested-list__popover')
-    popoverClass = true;
-
-    /** @hidden */
     @ContentChild(NestedLinkDirective)
     linkDirective: NestedLinkDirective;
 

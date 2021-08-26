@@ -7,6 +7,7 @@ export interface NestedListItem {
 
 export interface NestedListModel {
     textOnly?: boolean;
+    popover?: boolean;
     items: NestedListItem[];
 }
 

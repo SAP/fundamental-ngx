@@ -35,6 +35,11 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     @HostBinding('class.fd-nested-list--compact')
     compact?: boolean;
 
+    /** set to true, if nested list inside a popover */
+    @Input()
+    @HostBinding('class.fd-nested-list--popover')
+    inPopover: boolean;
+
     /** @hidden */
     @HostBinding('class.fd-nested-list')
     fdNestedListItemClass = true;

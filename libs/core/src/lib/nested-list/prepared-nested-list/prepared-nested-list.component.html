@@ -1,4 +1,4 @@
-<ul fd-nested-list [textOnly]="list?.textOnly">
+<ul fd-nested-list [textOnly]="list?.textOnly" [inPopover]="list?.popover">
     <ng-container *ngFor="let item of list?.items">
         <li *ngIf="item.headerTitle" fd-nested-list-header>
             {{item.headerTitle}}
