@@ -19,6 +19,9 @@ import * as iconTabBarFilterTypeTs from '!raw-loader!./examples/platform-icon-ta
 import * as iconTabBarProcessTypeHtml from '!raw-loader!./examples/platform-icon-tab-bar-process-type-example/platform-icon-tab-bar-process-type-example.component.html';
 import * as iconTabBarProcessTypeTs from '!raw-loader!./examples/platform-icon-tab-bar-process-type-example/platform-icon-tab-bar-process-type-example.component.ts';
 
+import * as iconTabBarConfigurablePaddingsHtml from '!raw-loader!./examples/platform-icon-tab-bar-configurable-paddings-example/platform-icon-tab-bar-configurable-paddings-example.component.html';
+import * as iconTabBarConfigurablePaddingsTs from '!raw-loader!./examples/platform-icon-tab-bar-configurable-paddings-example/platform-icon-tab-bar-configurable-paddings-example.component.ts';
+
 import * as iconTypeConfigs from '!raw-loader!./examples/config-for-examples/icon-type-config';
 
 import * as textTypeConfigs from '!raw-loader!./examples/config-for-examples/text-type.config';
@@ -49,7 +52,7 @@ export interface IconTabBarItem extends TabConfig {
 })
 export class PlatformIconTabBarDocsComponent {
 
-    iconTabBarTextTypeHtml: ExampleFile[] = [
+    iconTabBarTextTypeFiles: ExampleFile[] = [
         {
             language: 'html',
             code: iconTabBarTextTypeHtml,
@@ -68,7 +71,7 @@ export class PlatformIconTabBarDocsComponent {
         }
     ];
 
-    iconTabBarIconOnlyTypeHtml: ExampleFile[] = [
+    iconTabBarIconOnlyTypeFiles: ExampleFile[] = [
         {
             language: 'html',
             code: iconTabBarIconOnlyTypeHtml,
@@ -87,7 +90,7 @@ export class PlatformIconTabBarDocsComponent {
         }
     ];
 
-    iconTabBarIconTypeHtml: ExampleFile[] = [
+    iconTabBarIconTypeFiles: ExampleFile[] = [
         {
             language: 'html',
             code: iconTabBarIconTypeHtml,
@@ -106,7 +109,7 @@ export class PlatformIconTabBarDocsComponent {
         }
     ];
 
-    iconTabBarFilterTypeHtml: ExampleFile[] = [
+    iconTabBarFilterTypeFiles: ExampleFile[] = [
         {
             language: 'html',
             code: iconTabBarFilterTypeHtml,
@@ -125,7 +128,7 @@ export class PlatformIconTabBarDocsComponent {
         }
     ];
 
-    iconTabBarProcessTypeHtml: ExampleFile[] = [
+    iconTabBarProcessTypeFiles: ExampleFile[] = [
         {
             language: 'html',
             code: iconTabBarProcessTypeHtml,
@@ -141,6 +144,25 @@ export class PlatformIconTabBarDocsComponent {
             language: 'typescript',
             code: iconTypeConfigs,
             fileName: 'long-icon-type-config',
+        }
+    ];
+
+    iconTabBarConfigurablePaddingsFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: iconTabBarConfigurablePaddingsHtml,
+            fileName: 'platform-icon-tab-bar-configurable-paddings-example'
+        },
+        {
+            language: 'typescript',
+            code: iconTabBarConfigurablePaddingsTs,
+            fileName: 'platform-icon-tab-bar-configurable-paddings-example',
+            component: 'PlatformIconTabBarConfigurablePaddingsExampleComponent'
+        },
+        {
+            language: 'typescript',
+            code: iconTypeConfigs,
+            fileName: 'icon-type-config',
         }
     ];
 }

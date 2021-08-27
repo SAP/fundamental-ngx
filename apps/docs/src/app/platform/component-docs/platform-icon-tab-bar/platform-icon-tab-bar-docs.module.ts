@@ -12,6 +12,7 @@ import { PlatformIconTabBarFilterTypeExampleComponent } from './examples/platfor
 import { PlatformIconTabBarProcessTypeExampleComponent } from './examples/platform-icon-tab-bar-process-type-example/platform-icon-tab-bar-process-type-example.component';
 import { PlatformIconTabBarIconTypeExampleComponent } from './examples/platform-icon-tab-bar-icon-type-example/platform-icon-tab-bar-icon-type-example.component';
 import { PlatformIconTabBarIconOnlyTypeExampleComponent } from './examples/platform-icon-tab-bar-icon-only-type-example/platform-icon-tab-bar-icon-only-type-example.component';
+import { PlatformIconTabBarConfigurablePaddingsExampleComponent } from './examples/platform-icon-tab-bar-configurable-paddings-example/platform-icon-tab-bar-configurable-paddings-example.component';
 import { API_FILES } from '../../api-files';
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
         PlatformIconTabBarProcessTypeExampleComponent,
         PlatformIconTabBarIconTypeExampleComponent,
         PlatformIconTabBarIconOnlyTypeExampleComponent,
+        PlatformIconTabBarConfigurablePaddingsExampleComponent,
     ],
     imports: [
         RouterModule.forChild(routes),

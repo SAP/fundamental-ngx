@@ -113,7 +113,7 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
         this._cssClassForContainer = this._generateContainerStyles();
 
         if (this.densityMode === 'inherit') {
-            this._contentDensityService._contentDensityListener
+            this._contentDensityService?._contentDensityListener
                 .pipe(
                     distinctUntilChanged(),
                     takeUntil(this._onDestroy$),
@@ -128,7 +128,7 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
             })
         }
 
-        this._rtlService.rtl
+        this._rtlService?.rtl
             .pipe(takeUntil(this._onDestroy$))
             .subscribe((isRtl: boolean) => {
                 if (isRtl !== this._isRtl) {

@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
 import { DragDrop, DragRef, Point } from '@angular/cdk/drag-drop';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -47,17 +47,17 @@ export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
     /**
      * @description Event thrown when the element is moved by 1px
      */
-    readonly moved = new EventEmitter<Point>();
+    readonly moved = new Subject<Point>();
 
     /**
      * @description Event thrown when the element is released
      */
-    readonly released = new EventEmitter<void>();
+    readonly released = new Subject<void>();
 
     /**
      * @description Event thrown when the element is started to be dragged
      */
-    readonly started = new EventEmitter<void>();
+    readonly started = new Subject<void>();
 
     /** @hidden */
     isVertical = false;
@@ -97,17 +97,17 @@ export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
     /** @hidden */
     onCdkDragStart(): void {
         /** Adds class */
-        this.started.emit();
+        this.started.next();
     }
 
     /** @hidden */
     onCdkMove(position: Point): void {
-        this.moved.emit(position);
+        this.moved.next(position);
     }
 
     /** @hidden */
     onCdkDragReleased(): void {
-        this.released.emit();
+        this.released.next();
     }
 
     /** @hidden */
