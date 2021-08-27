@@ -383,4 +383,15 @@ export const API_FILES = {
         'ResizableCardLayoutComponent',
         'ResizableCardItemComponent'
     ],
+    timeline: [
+        'TimelineComponent',
+        'TimelineNodeDefDirective',
+        'TimelineNodeOutletDirective',
+        'TimelineNodeBodyComponent',
+        'TimelineNodeComponent',
+        'TimelineNodeHeaderInfoTitleDirective',
+        'TimelineNodeHeaderInfoTextDirective',
+        'TimelineNodeActionDirective',
+        'TimelineHeaderInfoSubTitleDirective',
+    ],
 };
