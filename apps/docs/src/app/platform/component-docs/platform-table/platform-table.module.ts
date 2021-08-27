@@ -32,7 +32,6 @@ import { PlatformTableP13SortExampleComponent } from './platform-table-examples/
 import { PlatformTableTreeExampleComponent } from './platform-table-examples/platform-table-tree-example.component';
 import { PlatformTableLoadingExampleComponent } from './platform-table-examples/platform-table-loading-example.component';
 import { PlatformTableNavigatableRowIndicatorExampleComponent } from './platform-table-examples/platform-table-navigatable-row-indicator-example.component';
-import { PlatformTableNavigatableRowButtonExampleComponent } from './platform-table-examples/platform-table-navigatable-row-button-example.component';
 import { PlatformTableCustomWidthExampleComponent } from './platform-table-examples/platform-table-custom-width-example.component';
 import { PlatformTableActivableExampleComponent } from './platform-table-examples/platform-table-activable-example.component';
 
@@ -82,9 +81,7 @@ const routes: Routes = [
         PlatformTableTreeExampleComponent,
         PlatformTableLoadingExampleComponent,
         PlatformTableNavigatableRowIndicatorExampleComponent,
-        PlatformTableNavigatableRowButtonExampleComponent,
         PlatformTableCustomWidthExampleComponent,
-        PlatformTableNavigatableRowButtonExampleComponent,
         PlatformTableActivableExampleComponent
     ],
     providers: [RtlService],
