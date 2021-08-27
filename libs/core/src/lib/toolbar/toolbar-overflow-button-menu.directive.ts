@@ -3,9 +3,9 @@ import { ToolbarItemDirective } from './toolbar-item.directive';
 
 @Directive({
     // tslint:disable-next-line: directive-selector
-    selector: '[fd-toolbar-form-label]',
+    selector: '[fd-toolbar-overflow-button-menu]',
     host: {
-        class: 'fd-form-label fd-toolbar__overflow-form-label'
+        class: 'fd-toolbar__overflow-button--menu'
     }
 })
-export class ToolbarFormLabelDirective extends ToolbarItemDirective {}
+export class ToolbarOverflowButtonMenuDirective extends ToolbarItemDirective {}
