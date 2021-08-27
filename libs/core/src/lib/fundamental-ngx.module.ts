@@ -82,6 +82,7 @@ import { WizardModule } from '@fundamental-ngx/core/wizard';
 import { SplitButtonModule } from '@fundamental-ngx/core/split-button';
 import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 import { MessagePageModule } from '@fundamental-ngx/core/message-page';
+import { TimelineModule } from '@fundamental-ngx/core/timeline';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -176,7 +177,8 @@ import { MessagePageModule } from '@fundamental-ngx/core/message-page';
         StatusIndicatorModule,
         GridListModule,
         ResizableCardLayoutModule,
-        MessagePageModule
+        MessagePageModule,
+        TimelineModule,
     ],
     providers: []
 })

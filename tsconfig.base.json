@@ -106,7 +106,8 @@
       "@fundamental-ngx/core/wizard": ["libs/core/src/lib/wizard/index.ts"],
       "@fundamental-ngx/core/mobile-mode": ["libs/core/src/lib/mobile-mode/index.ts"],
       "@fundamental-ngx/core/tests": ["libs/core/src/lib/tests/index.ts"],
-      "@fundamental-ngx/core/message-page": ["libs/core/src/lib/message-page/index.ts"]
+      "@fundamental-ngx/core/message-page": ["libs/core/src/lib/message-page/index.ts"],
+      "@fundamental-ngx/core/timeline": ["libs/core/src/lib/timeline/index.ts"]
     },
     "skipLibCheck": true
   },
