@@ -177,7 +177,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
      * Application developer is expected to pass in their own value if they use any other localization tool.
      */
     @Input()
-    currentPageLabel = $localize`:@@corePaginationCurrentPageLabel: Current page`;
+    currentPageAriaLabel = $localize`:@@corePaginationCurrentPageAriaLabel: Page ${this.currentPage}:page: is current page`;
 
     /** Event fired when the page is changed. */
     @Output()
@@ -296,9 +296,9 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         }
         this._refreshPages();
 
-        this._liveAnnouncer.announce(this.pageLabel + page + this.currentPageLabel);
-
         this.pageChangeStart.emit(page);
+
+        this._liveAnnouncer.announce(this.currentPageAriaLabel);
     }
 
     /**
