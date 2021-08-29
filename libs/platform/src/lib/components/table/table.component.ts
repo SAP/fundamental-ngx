@@ -22,6 +22,7 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
@@ -30,7 +31,6 @@ import { FdDropEvent, RtlService } from '@fundamental-ngx/core/utils';
 import { TableRowDirective } from '@fundamental-ngx/core/table';
 
 import { isDataSource } from '../../domain';
-import { isString } from '../../utils/lang';
 import { getNestedValue } from '../../utils/object';
 
 import { TableService } from './table.service';
@@ -244,12 +244,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     @Input()
     relationKey: string;
 
-    /** Whether row is navigatable.
-      * Pass boolean value to set state for the all rows.
-      * Pass string value with the key of the row item's field to compute state for every single row.
-      */
+    /** Whether table row has navigation button. */
     @Input()
-    rowNavigatable: string | boolean = false;
+    navigationButton = false;
 
     /** Whether table row can be clicked */
     @Input()
@@ -287,13 +284,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     @Output()
     readonly rowsRearrange = new EventEmitter<TableRowsRearrangeEvent<T>>();
 
-    /* Event fired when row clicked. */
+    /*
+     * Event fired when row clicked
+     */
     @Output()
     readonly rowActivate = new EventEmitter<TableRowActivateEvent<T>>();
-
-    /* Event fired when row navigated. */
-    @Output()
-    readonly rowNavigate = new EventEmitter<TableRowActivateEvent<T>>();
 
     /** @hidden */
     @ViewChild('verticalScrollable')
@@ -363,19 +358,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * @hidden
      * Group Rules Map. Where key is column key and value is associated group rule
      */
-    _groupRulesMapSubject = new BehaviorSubject<Map<string, CollectionGroup>>(new Map());
-
+    _groupRulesMapSubject: BehaviorSubject<Map<string, CollectionGroup>> = new BehaviorSubject(new Map());
     /** @hidden */
     get _groupRulesMap(): Map<string, CollectionGroup> {
         return this._groupRulesMapSubject.getValue();
-    }
-
-    /** @hidden */
-    _isShownNavigationColumnSubject = new BehaviorSubject<boolean>(false);
-
-    /** @hidden */
-    get _isShownNavigationColumn(): boolean {
-        return this._isShownNavigationColumnSubject.getValue();
     }
 
     /**
@@ -500,7 +486,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         private readonly _tableScrollDispatcher: TableScrollDispatcherService,
         private readonly _tableColumnResizeService: TableColumnResizeService,
         @Inject(DOCUMENT) private readonly _document: Document | null,
-        @Optional() private readonly _rtlService: RtlService
+        @Optional() private readonly _rtlService: RtlService,
+        @Optional() private readonly router: Router
     ) {
         super();
     }
@@ -513,12 +500,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         if ('selectionMode' in changes || 'freezeColumnsTo' in changes) {
             this.recalculateTableColumnWidth();
-        }
-
-        if ('rowNavigatable' in changes) {
-            this._tableRows.forEach(row => row.navigatable = this._isRowNavigatable(row.value, this.rowNavigatable));
-
-            this._calculateIsShownNavigationColumn();
         }
     }
 
@@ -684,34 +665,64 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._isFilteringFromHeaderDisabled = disabled;
     }
 
-    /** Set the row navigation */
-    setRowNavigation(rowIndex: number, rowNavigatable: string | boolean): void {
+    /** Set the navigatable property on a row */
+    setNavigatableRowState(rowIndex: number, state: boolean): void {
         const row = this._tableRows[rowIndex];
 
         if (!row) {
             return;
         }
 
-        row.navigatable = this._isRowNavigatable(row.value, rowNavigatable);
+        this.tableRows.toArray()[rowIndex + 1].navigatable = state;
+        row.navigatable = state;
 
-        this._calculateIsShownNavigationColumn();
+        if (!state) {
+            row.hasNavIndicator = false;
+        }
 
-        this._cdr.markForCheck();
+        this._cdr.detectChanges();
     }
 
-    /** Remove the row navigation */
-    removeRowNavigation(rowIndex: number): void {
+    /** Set the navigation indicator property on a row */
+    setRowNavigationIndicator(rowIndex: number, state: boolean): void {
         const row = this._tableRows[rowIndex];
 
         if (!row) {
             return;
         }
 
-        row.navigatable = null;
+        if (row.navigatable) {
+            row.hasNavIndicator = state;
 
-        this._calculateIsShownNavigationColumn();
+            if (state) {
+                this.navigationButton = false;
+            }
+        }
 
-        this._cdr.markForCheck();
+        this._cdr.detectChanges();
+    }
+
+    /** Set the navigation target property on a row */
+    setRowNavigationTarget(rowIndex: number, target: string): void {
+        const row = this._tableRows[rowIndex];
+
+        if (!row) {
+            return;
+        }
+
+
+        if (row.navigatable) {
+            row.navigationTarget = target;
+        }
+
+        this._cdr.detectChanges();
+    }
+
+    /** Get corresponding arrow icon for navigation indicator */
+    getGlyph(row: TableRow<T>): string {
+        if (row.hasNavIndicator) {
+            return this._rtl ? 'navigation-left-arrow' : 'navigation-right-arrow';
+        }
     }
 
     /** Manually triggers columns width recalculation */
@@ -925,11 +936,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    _onRowClick(row: TableRow<T>, event?: KeyboardEvent): void {
-        event?.preventDefault();
-
-        if (row.navigatable) {
-            this._emitRowNavigate(row);
+    _onRowClick(row: TableRow<T>): void {
+        if (row.hasNavIndicator) {
+            this._navigateByRowNavigationTarget(row);
         }
 
         if (this.rowsActivable) {
@@ -990,6 +999,22 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         return cellIndex === 0 && this._isTreeRow(row);
     }
 
+    /**
+     * @hidden
+     * Check if the cell should contain a navigation button
+    */
+    _showNavButton(cellIndex: number, row: TableRow): boolean {
+        return this.navigationButton && cellIndex === this._visibleColumns.length - 1;
+    }
+
+    /**
+     * @hidden
+     * Check if the cell should contain a navigation indicator
+    */
+    _showNavIndicator(cellIndex: number, row: TableRow): boolean {
+        return row.hasNavIndicator && cellIndex === this._visibleColumns.length - 1;
+    }
+
     /** @hidden */
     _dragDropStart(): void {
         this._dragDropInProgress = true;
@@ -1026,13 +1051,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    _emitRowNavigate(row: TableRow<T>): void {
-        if (!row.navigatable) {
+    _navigateByRowNavigationTarget(row: TableRow<T>): void {
+        if (!row.navigatable || !row.navigationTarget) {
             return;
         }
 
-        const rowIndex = this._tableRows.indexOf(row);
-        this.rowNavigate.emit(new TableRowActivateEvent<T>(rowIndex, row.value));
+        this.router?.navigate([ row.navigationTarget ]);
     }
 
     /** @hidden */
@@ -1140,8 +1164,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 .subscribe((rows) => {
                     this._setTableRows(rows);
 
-                    this._calculateIsShownNavigationColumn();
-
                     if (rows.length && !columnsWidthSet) {
                         this.recalculateTableColumnWidth();
                         columnsWidthSet = true;
@@ -1232,19 +1254,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             return this._createTreeTableRowsByDataSourceItems(source);
         }
 
-        return source
-            .map((item: T, index: number) => {
-                const row = new TableRow(TableRowType.ITEM, false, index, item);
-                row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
-
-                return row;
-            });
+        return source.map((item: T, index: number) => new TableRow(TableRowType.ITEM, false, index, item));
     }
 
     /** @hidden */
     private _createTreeTableRowsByDataSourceItems(source: T[]): TableRow<T>[] {
         const rows: TableRow<T>[] = [];
-
         source.forEach((item: T, index: number) => {
             const hasChildren = item.hasOwnProperty(this.relationKey)
                 && Array.isArray(item[this.relationKey])
@@ -1252,18 +1267,15 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             const row = new TableRow(hasChildren ? TableRowType.TREE : TableRowType.ITEM, false, index, item);
 
             row.expanded = false;
-            row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
             rows.push(row);
 
             if (hasChildren) {
                 const children = this._createTreeTableRowsByDataSourceItems(item[this.relationKey]);
-
                 children.forEach(c => {
                     c.parent = c.parent || row;
                     c.level = c.parent.level + 1;
                     c.hidden = true;
                 });
-
                 rows.push(...children);
             }
         });
@@ -1319,11 +1331,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     private _calculateTableColumnsLength(): void {
         this._tableColumnsLength = this._visibleColumns.length + (this._isShownSelectionColumn ? 1 : 0);
-    }
-
-    /** @hidden */
-    private _calculateIsShownNavigationColumn(): void {
-        this._isShownNavigationColumnSubject.next(this._tableRows.some(tableRow => tableRow.navigatable));
     }
 
     /** @hidden */
@@ -1763,19 +1770,5 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             this._tableService.tableColumnsWidth$
                 .subscribe(() => this.recalculateTableColumnWidth())
         )
-    }
-
-    /** @hidden */
-    private _isRowNavigatable(row: T, rowNavigatable: string | boolean): boolean {
-        if (!row) {
-            return false;
-        }
-
-        /** If key of the of the row's item field passed */
-        if (isString(rowNavigatable)) {
-            return !!row[rowNavigatable];
-        }
-
-        return !!rowNavigatable;
     }
 }

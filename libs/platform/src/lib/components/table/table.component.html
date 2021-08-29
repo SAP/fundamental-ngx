@@ -67,7 +67,6 @@
                 (ngModelChange)="_toggleAllSelectableRows($event)"
             ></fd-checkbox>
         </th>
-
         <ng-container *ngFor="let column of _visibleColumns; let colIdx = index">
             <th
                 fd-table-cell
@@ -217,12 +216,6 @@
             </th>
         </ng-container>
 
-        <th
-            *ngIf="_isShownNavigationColumn"
-            fd-table-cell
-            role="columnheader"
-        ></th>
-
         <th class="fdp-table__cell--empty"></th>
     </tr>
 </ng-template>
@@ -299,15 +292,13 @@
                             fd-table-row
                             fd-dnd-item
                             role="row"
-                            [tabindex]="rowsActivable || !!row.navigatable ? 0 : -1"
                             [class.fdp-table__row--tree]="_isTreeRow(row)"
-                            [hoverable]="_isShownSelectionColumn || !!row.navigatable"
-                            [activable]="rowsActivable || !!row.navigatable"
+                            [hoverable]="_isShownSelectionColumn || row.hasNavIndicator"
+                            [navigatable]="row.navigatable || rowsActivable"
+                            [activable]="row.hasNavIndicator || rowsActivable"
                             [attr.aria-selected]="row.checked"
                             [attr.aria-rowindex]="rowIdx"
                             (click)="_onRowClick(row)"
-                            (keydown.enter)="_onRowClick(row)"
-                            (keydown.space)="_onRowClick(row, $event)"
                             (started)="_dragDropStart()"
                         >
                             <!-- Row Selection Cell -->
@@ -370,22 +361,29 @@
                                     i18n-title="Toggle row|Toggle tree row children@@platformTableTreeRowToggle"
                                 ></fd-icon>
 
+                                <i
+                                    *ngIf="_showNavIndicator(colIdx, row)"
+                                    fd-table-icon
+                                    [ngClass]="_rtl ? 'sap-icon--slim-arrow-left' : 'sap-icon--slim-arrow-right'"
+                                    class="fdp-table__navigation-indicator"
+                                ></i>
+
+                                <button
+                                    *ngIf="_showNavButton(colIdx, row)"
+                                    class="fd-button fd-button--transparent"
+                                    [disabled]="!row.navigatable"
+                                    (click)="_navigateByRowNavigationTarget(row)"
+                                    (keydown.enter)="_navigateByRowNavigationTarget(row)"
+                                >
+                                    <i [ngClass]="_rtl ? 'sap-icon--navigation-left-arrow' : 'sap-icon--navigation-right-arrow'"></i>
+                                </button>
+
                                 <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
                                     <ng-container *ngTemplateOutlet="column.columnCellTemplate; context:{$implicit: row.value}">
                                     </ng-container>
                                 </ng-container>
 
                                 <ng-template #defaultTableCellTemplate>{{row?.value | valueByPath: column.key}}</ng-template>
-                            </td>
-
-                            <td *ngIf="_isShownNavigationColumn" fd-table-cell>
-                                <i
-                                    *ngIf="row.navigatable"
-                                    fd-table-icon
-                                    [navigation]="true"
-                                    [class]="_rtl ? 'sap-icon--slim-arrow-left' : 'sap-icon--slim-arrow-right'"
-                                    class="fdp-table__navigation-indicator"
-                                ></i>
                             </td>
 
                             <td class="fdp-table__cell--empty"></td>
@@ -425,17 +423,6 @@
                             fd-table-cell
                             role="cell"
                         ></td>
-
-                        <td
-                            *ngIf="_isShownNavigationColumn"
-                            fd-table-cell
-                        >
-                            <i
-                                fd-table-icon
-                                [navigation]="true"
-                                class="fdp-table__navigation-indicator sap-icon--slim-arrow-left"
-                            ></i>
-                        </td>
                     </tr>
                 </tbody>
             </table>

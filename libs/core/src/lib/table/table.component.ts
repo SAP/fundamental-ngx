@@ -4,16 +4,13 @@ import {
     ChangeDetectorRef,
     Component,
     HostBinding,
-    Input,
-    OnDestroy,
-    OnInit,
-    Optional,
+    Input, OnDestroy,
+    OnInit, Optional,
     ViewEncapsulation
 } from '@angular/core';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { Subscription } from 'rxjs';
-
 import { TableService } from './table.service';
+import { Subscription } from 'rxjs';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 /**
  * The component that represents a table.
