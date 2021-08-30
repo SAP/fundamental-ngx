@@ -1,4 +1,11 @@
 
+### [0.31.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.22...v0.31.1-rc.23) (2021-08-30)
+
+
+### Bug Fixes
+
+* **core,platform:** table navigatable rows ([#6357](https://github.com/SAP/fundamental-ngx/issues/6357)) revert ([#6408](https://github.com/SAP/fundamental-ngx/issues/6408)) ([e972c2a](https://github.com/SAP/fundamental-ngx/commit/e972c2af8e9dc36459439d031735c24a0a3d8e88))
+
 ### [0.31.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.21...v0.31.1-rc.22) (2021-08-28)
 
 ### [0.31.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.20...v0.31.1-rc.21) (2021-08-27)
