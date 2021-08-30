@@ -51,7 +51,7 @@ describe('ObjectStatusComponent', () => {
         expect(component).toBeTruthy();
     });
     // TODO: Unskip after fix
-    fit('Should Validate diffrent object states and icon', () => {
+    it('Should Validate diffrent object states and icon', () => {
         host.status = 'negative';
         host.glyph = 'status-negative';
         fixture.detectChanges();
