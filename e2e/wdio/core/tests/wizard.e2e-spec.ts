@@ -72,7 +72,7 @@ describe('Wizard component test', function () {
         checkOpenClose(dialogExample);
     });
 
-    fit('should check basic way through default example', () => {
+    it('should check basic way through default example', () => {
         click(defaultExample + button);
         const stepsLength = getElementArrayLength(wizard + step);
 
@@ -182,7 +182,7 @@ describe('Wizard component test', function () {
         wizardPage.checkRtlSwitch();
     });
 
-    it('should check examples visual regression', () => {
+    xit('should check examples visual regression', () => {
         wizardPage.saveExampleBaselineScreenshot();
         expect(wizardPage.compareWithBaseline()).toBeLessThan(5);
     });
