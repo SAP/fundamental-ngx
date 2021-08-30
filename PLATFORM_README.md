@@ -10,7 +10,7 @@
 ## Description
 
 The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to enhance existing functionality and 
-to provide a higeer abstraction for the components by hiding most of the internal implementation details. The goal is 
+to provide a higher abstraction for the components by hiding most of the internal implementation details. The goal is 
 to create a layer which is closer to application development and not to the library creators.
 
 Since there is a plan to generate UI programatically then components must be instantiable (they cannot be directives).
