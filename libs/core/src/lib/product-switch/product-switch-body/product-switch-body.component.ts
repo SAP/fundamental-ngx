@@ -1,29 +1,35 @@
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     EventEmitter,
-    HostListener,
     Input,
+    OnDestroy,
     OnInit,
+    Optional,
     Output,
     ViewEncapsulation
 } from '@angular/core';
-import { ProductSwitchItem } from './product-switch.item';
-import { FdDropEvent } from '@fundamental-ngx/core/utils';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
+import { ViewportRuler } from '@angular/cdk/scrolling';
+import { Subscription } from 'rxjs';
+
+import { FdDropEvent, RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+
+import { ProductSwitchItem } from './product-switch.item';
+
+const containerWidthPxSmallMode = 588;
+const containerWidthPx = 776;
 
 @Component({
     selector: 'fd-product-switch-body',
     templateUrl: './product-switch-body.component.html',
-    styleUrls: [
-        './product-switch-body.component.scss',
-        '../../utils/drag-and-drop/drag-and-drop.scss'
-    ],
+    styleUrls: ['./product-switch-body.component.scss', '../../utils/drag-and-drop/drag-and-drop.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductSwitchBodyComponent implements OnInit {
+export class ProductSwitchBodyComponent implements OnInit, OnDestroy {
     /** Defines if drag and drop functionality should be included in product switch*/
     @Input()
     dragAndDropEnabled = true;
@@ -31,6 +37,10 @@ export class ProductSwitchBodyComponent implements OnInit {
     /** The product switch's product items. */
     @Input()
     products: ProductSwitchItem[];
+
+    /** Defines if the product switcher should be displayed in list mode, no matter what is the size of window */
+    @Input()
+    forceListMode = false;
 
     /** Event thrown on products array change */
     @Output()
@@ -40,24 +50,44 @@ export class ProductSwitchBodyComponent implements OnInit {
     @Output()
     readonly itemClicked: EventEmitter<void> = new EventEmitter<void>();
 
-    /** Defines if the product switcher should be displayed in list mode, no matter what is the size of window */
-    @Input()
-    forceListMode = false;
+    /** @hidden */
+    private _listMode: boolean;
 
-    /**
-     * @hidden
-     */
-    listMode: boolean;
+    /** @hidden */
+    private _isRtl = false;
+
+    /** @hidden */
+    private _subscriptions = new Subscription();
+
+    constructor(
+        private _viewportRuler: ViewportRuler,
+        @Optional() private readonly _rtlService: RtlService,
+        private readonly _cdr: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
-        this._checkSize();
+        this._subscriptions.add(this._rtlService?.rtl.subscribe((isRtl) => (this._isRtl = isRtl)));
+        this._subscriptions.add(
+            this._viewportRuler.change().subscribe((event) => {
+                const { innerWidth } = <Window>event.target;
+                this._checkSize(innerWidth);
+            })
+        );
+
+        const { width } = this._viewportRuler.getViewportSize();
+        this._checkSize(width);
     }
 
-    /**
-     * @hidden
-     */
-    itemClick(item: ProductSwitchItem, event: any): void {
+    /** @hidden */
+    ngOnDestroy(): void {
+        this._subscriptions.unsubscribe();
+    }
+
+    /** @hidden */
+    _itemClick(item: ProductSwitchItem, event: MouseEvent): void {
+        this.products.forEach((product) => (product.selected = product === item));
+
         this.itemClicked.emit();
         if (item.callback) {
             item.callback(event);
@@ -65,58 +95,59 @@ export class ProductSwitchBodyComponent implements OnInit {
     }
 
     /** Method called on products change */
-    productSwitchItemsChangeHandle(dropEvent: FdDropEvent<ProductSwitchItem>): void {
+    _productSwitchItemsChangeHandle(dropEvent: FdDropEvent<ProductSwitchItem>): void {
         this.productsChange.emit(dropEvent.items);
         this.products = dropEvent.items;
     }
 
     /** @hidden */
-    @HostListener('window:resize', [])
-    onResize(): void {
-        this._checkSize();
-    }
-
-    /** @hidden */
-    keyDownHandle(event: KeyboardEvent): void {
+    _keyDownHandle(event: KeyboardEvent): void {
         const target = <HTMLElement>event.target;
-        const i = Array.from(target.parentElement.children).indexOf(target);
+
         if (!KeyUtil.isKeyCode(event, TAB)) {
             event.preventDefault();
         }
+
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             target.click();
-        } else if (!this.isListMode()) {
+        } else if (!this._isListMode()) {
+            const i = Array.from(target.parentElement.children).indexOf(target);
             this._handleNoListKeydown(event, target, i);
-        } else if (this.isListMode() && KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
+        } else if (this._isListMode() && KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
             this._handleListArrowUpDown(event, target);
         }
     }
 
     /** @hidden */
-    public isSmallMode(): boolean {
-        return this.products && this.products.length < 7;
+    _isSmallMode(): boolean {
+        return this.products?.length < 7;
     }
 
     /** @hidden */
-    public isListMode(): boolean {
-        return this.listMode || this.forceListMode;
+    _isListMode(): boolean {
+        return this._listMode || this.forceListMode;
     }
 
     /** @hidden */
-    private _checkSize(): void {
-        if (this.isSmallMode()) {
-            this.listMode = window.innerWidth < 588;
+    private _checkSize(width: number): void {
+        if (this._isSmallMode()) {
+            this._listMode = width < containerWidthPxSmallMode;
         } else {
-            this.listMode = window.innerWidth < 776;
+            this._listMode = width < containerWidthPx;
         }
+
+        this._cdr.markForCheck();
     }
 
     /** @hidden */
     private _handleNoListKeydown(event: KeyboardEvent, target: HTMLElement, i: number): void {
-        if (KeyUtil.isKeyCode(event, LEFT_ARROW) && target.previousElementSibling) {
-            (<HTMLElement>target.previousElementSibling).focus();
-        } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW) && target.nextElementSibling) {
-            (<HTMLElement>target.nextElementSibling).focus();
+        const previousElementSibling = <HTMLElement>target.previousElementSibling;
+        const nextElementSibling = <HTMLElement>target.nextElementSibling;
+
+        if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
+            this._isRtl ? nextElementSibling?.focus() : previousElementSibling?.focus();
+        } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
+            this._isRtl ? previousElementSibling?.focus() : nextElementSibling?.focus();
         } else if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
             if (this.products.length >= 7) {
                 this._handleNoListMoreThanSeven(event, target, i);
@@ -128,38 +159,40 @@ export class ProductSwitchBodyComponent implements OnInit {
 
     /** @hidden */
     private _handleNoListMoreThanSeven(event: KeyboardEvent, target: HTMLElement, i: number): void {
+        const nextIndexByColumn = 4;
+        const { children } = target.parentElement;
         if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
-            if (target.parentElement.children[i + 4]) {
-                (<HTMLElement>target.parentElement.children[i + 4]).focus();
-            }
+            (<HTMLElement>children[i + nextIndexByColumn])?.focus();
         }
+
         if (KeyUtil.isKeyCode(event, UP_ARROW)) {
-            if (target.parentElement.children[i - 4]) {
-                (<HTMLElement>target.parentElement.children[i - 4]).focus();
-            }
+            (<HTMLElement>children[i - nextIndexByColumn])?.focus();
         }
     }
 
     /** @hidden */
     private _handleNoListLessThanSeven(event: KeyboardEvent, target: HTMLElement, i: number): void {
+        const nextIndexByColumn = 3;
+        const { children } = target.parentElement;
+
         if (KeyUtil.isKeyCode(event, DOWN_ARROW)) {
-            if (target.parentElement.children[i + 3]) {
-                (<HTMLElement>target.parentElement.children[i + 3]).focus();
-            }
+            (<HTMLElement>children[i + nextIndexByColumn])?.focus();
         }
+
         if (KeyUtil.isKeyCode(event, UP_ARROW)) {
-            if (target.parentElement.children[i - 3]) {
-                (<HTMLElement>target.parentElement.children[i - 3]).focus();
-            }
+            (<HTMLElement>children[i - nextIndexByColumn])?.focus();
         }
     }
 
     /** @hidden */
     private _handleListArrowUpDown(event: KeyboardEvent, target: HTMLElement): void {
-        if (this.isListMode() && KeyUtil.isKeyCode(event, DOWN_ARROW) && target.nextElementSibling) {
-            (<HTMLElement>target.nextElementSibling).focus();
-        } else if (this.isListMode() && KeyUtil.isKeyCode(event, UP_ARROW) && target.previousElementSibling) {
-            (<HTMLElement>target.previousElementSibling).focus();
+        const previousElementSibling = <HTMLElement>target.previousElementSibling;
+        const nextElementSibling = <HTMLElement>target.nextElementSibling;
+
+        if (this._isListMode() && KeyUtil.isKeyCode(event, DOWN_ARROW) && nextElementSibling) {
+            nextElementSibling.focus();
+        } else if (this._isListMode() && KeyUtil.isKeyCode(event, UP_ARROW) && previousElementSibling) {
+            previousElementSibling.focus();
         }
     }
 }

@@ -1,8 +1,17 @@
 import {
     Component,
-    OnInit, Input, ViewEncapsulation, Output, EventEmitter, ChangeDetectorRef
+    OnInit,
+    Input,
+    ViewEncapsulation,
+    Output,
+    EventEmitter,
+    ChangeDetectorRef,
+    Optional
 } from '@angular/core';
-import { DialogService, RtlService } from '@fundamental-ngx/core';
+
+import { DialogService } from '@fundamental-ngx/core/dialog';
+import { RtlService } from '@fundamental-ngx/core/utils';
+
 import { BaseComponent } from '../base';
 import { ThumbnailDetailsComponent } from './thumbnail-details/thumbnail-details.component';
 import { Media } from './thumbnail.interfaces';
@@ -13,7 +22,7 @@ export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailCompo
         public source: T,
         /** The new value of a control. */
         public payload: K
-    ) { }
+    ) {}
 }
 
 @Component({
@@ -21,11 +30,8 @@ export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailCompo
     templateUrl: './thumbnail.component.html',
     styleUrls: ['./thumbnail.component.scss'],
     encapsulation: ViewEncapsulation.None
-
 })
 export class ThumbnailComponent extends BaseComponent implements OnInit {
-
-
     /** List of media objects to display. */
     @Input()
     mediaList: Media[];
@@ -45,9 +51,11 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
     public selectedMedia: Media;
 
     /** @hidden */
-    constructor(protected _changeDetectorRef: ChangeDetectorRef,
+    constructor(
+        protected _changeDetectorRef: ChangeDetectorRef,
         private _dialogService: DialogService,
-        private readonly _rtlService: RtlService) {
+        @Optional() private readonly _rtlService: RtlService
+    ) {
         super(_changeDetectorRef);
     }
 
@@ -56,7 +64,7 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
         if (Array.isArray(this.mediaList) && this.mediaList.length > 0) {
             this.selectedMedia = this.mediaList[0];
         }
-        this._setOverlay()
+        this._setOverlay();
     }
 
     thumbnailClickHandle(selectedMedia: Media): void {
@@ -65,7 +73,7 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
     }
 
     openDialog(selectedMedia: Media, mediaList: Media[]): void {
-        mediaList.forEach(item => item.overlayRequired = false);
+        mediaList.forEach((item) => (item.overlayRequired = false));
         const dialogRef = this._dialogService.open(ThumbnailDetailsComponent, {
             backdropClickCloseable: false,
             escKeyCloseable: false,
@@ -93,5 +101,4 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
             this.mediaList[this.maxImagesDisplay - 1].overlayRequired = true;
         }
     }
-
 }

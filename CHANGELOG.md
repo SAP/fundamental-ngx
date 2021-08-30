@@ -1,4 +1,56 @@
 
+### [0.31.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.22...v0.31.1-rc.24) (2021-08-30)
+
+
+### Bug Fixes
+
+* **core,platform:** table navigatable rows ([#6357](https://github.com/SAP/fundamental-ngx/issues/6357)) revert ([#6408](https://github.com/SAP/fundamental-ngx/issues/6408)) ([e972c2a](https://github.com/SAP/fundamental-ngx/commit/e972c2af8e9dc36459439d031735c24a0a3d8e88))
+* **core:** select, fix rtl mode ([#6378](https://github.com/SAP/fundamental-ngx/issues/6378)) ([aaac041](https://github.com/SAP/fundamental-ngx/commit/aaac0418f99830d11aaea97bf7c36aa93b99ba8e))
+
+### [0.31.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.22...v0.31.1-rc.23) (2021-08-30)
+
+
+### Bug Fixes
+
+* **core,platform:** table navigatable rows ([#6357](https://github.com/SAP/fundamental-ngx/issues/6357)) revert ([#6408](https://github.com/SAP/fundamental-ngx/issues/6408)) ([e972c2a](https://github.com/SAP/fundamental-ngx/commit/e972c2af8e9dc36459439d031735c24a0a3d8e88))
+
+### [0.31.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.21...v0.31.1-rc.22) (2021-08-28)
+
+### [0.31.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.20...v0.31.1-rc.21) (2021-08-27)
+
+
+### Bug Fixes
+
+* **core,platform:** table navigatable rows ([#6357](https://github.com/SAP/fundamental-ngx/issues/6357)) ([97d6f3c](https://github.com/SAP/fundamental-ngx/commit/97d6f3c8c0d252ecd86f0634eebd4dcb6282c5ac))
+
+### [0.31.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.19...v0.31.1-rc.20) (2021-08-26)
+
+
+### Bug Fixes
+
+* **core,platform:** combobox, fix accidentally focusing list item ([#6382](https://github.com/SAP/fundamental-ngx/issues/6382)) ([be550d4](https://github.com/SAP/fundamental-ngx/commit/be550d4bbf8d99a7ad6b2000d4a7f0e786c32920))
+
+### [0.31.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.18...v0.31.1-rc.19) (2021-08-26)
+
+
+### Bug Fixes
+
+* **core:** dynamic-page-subheader, add collapse event ([#6384](https://github.com/SAP/fundamental-ngx/issues/6384)) ([2a0344e](https://github.com/SAP/fundamental-ngx/commit/2a0344ebd5900d87c66e549d2d41d463c2f2ccb5))
+
+### [0.31.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.17...v0.31.1-rc.18) (2021-08-26)
+
+
+### Bug Fixes
+
+* **platform:** rtl service optional everywhere ([#6383](https://github.com/SAP/fundamental-ngx/issues/6383)) ([5453a1c](https://github.com/SAP/fundamental-ngx/commit/5453a1c87d2a1c87dba7c93b8a070f7f0fe59704))
+
+### [0.31.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.16...v0.31.1-rc.17) (2021-08-25)
+
+
+### Bug Fixes
+
+* **core:** product-switch, fix keyboard navigation and selected item ([#6365](https://github.com/SAP/fundamental-ngx/issues/6365)) ([3c6a00b](https://github.com/SAP/fundamental-ngx/commit/3c6a00b779998386ffe34f0fa307e3cedc8f8081))
+
 ### [0.31.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.15...v0.31.1-rc.16) (2021-08-25)
 
 ### [0.31.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.14...v0.31.1-rc.15) (2021-08-24)

@@ -12,7 +12,7 @@ import {
     TemplateRef
 } from '@angular/core';
 
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, of, Subject } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
@@ -199,23 +199,25 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
         this._align$
             .asObservable()
             .pipe(
-                switchMap((align) =>
-                    this._rtlService?.rtl.pipe(
-                        map(
-                            (isRtl): ColumnAlignEnum => {
-                                if (isRtl && align === ColumnAlignEnum.Start) {
-                                    return ColumnAlignEnum.End;
-                                }
+                switchMap((align) => {
+                    if (!this._rtlService) {
+                        return of(align);
+                    }
 
-                                if (isRtl && align === ColumnAlignEnum.End) {
-                                    return ColumnAlignEnum.Start;
-                                }
-
-                                return align;
+                    return this._rtlService.rtl.pipe(
+                        map((isRtl): ColumnAlignEnum => {
+                            if (isRtl && align === ColumnAlignEnum.Start) {
+                                return ColumnAlignEnum.End;
                             }
-                        )
-                    )
-                ),
+
+                            if (isRtl && align === ColumnAlignEnum.End) {
+                                return ColumnAlignEnum.Start;
+                            }
+
+                            return align;
+                        })
+                    );
+                }),
                 takeUntil(this._destroyed)
             )
             .subscribe((align) => {
