@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation, Input, ChangeDetectorRef, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, Input, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { MicroProcessFlowItemType } from '../../types';
 
 @Component({
@@ -15,7 +15,7 @@ import { MicroProcessFlowItemType } from '../../types';
       '[class.fd-micro-process-flow__item--last]': '_finalStep === true'
   }
 })
-export class MicroProcessFlowItemComponent implements OnInit {
+export class MicroProcessFlowItemComponent {
 
     @Input()
     state: MicroProcessFlowItemType = 'none';
@@ -31,12 +31,11 @@ export class MicroProcessFlowItemComponent implements OnInit {
         public elRef: ElementRef<HTMLElement>
     ) { }
 
-    ngOnInit(): void {
-    }
-
     setFinalStep(value: boolean): void {
-        this._finalStep = value;
-        this._cd.detectChanges();
+        if (value !== this._finalStep) {
+            this._finalStep = value;
+            this._cd.detectChanges();
+        }
     }
 
 }

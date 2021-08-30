@@ -1,5 +1,4 @@
 import {
-    AfterContentInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -11,7 +10,8 @@ import {
     Optional,
     QueryList,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    AfterViewInit
 } from '@angular/core';
 import { ContentDensityService, RtlService } from '@fundamental-ngx/core/utils';
 import { Subscription } from 'rxjs';
@@ -30,7 +30,7 @@ import { MicroProcessFlowItemComponent } from '../micro-process-flow-item/micro-
         '[class.fd-micro-process-flow--compact]': 'compact === true'
     }
 })
-export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterContentInit {
+export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewInit {
 
     /** Should connector between items be hidden. */
     @Input()
@@ -124,7 +124,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterConten
     }
 
     /** @hidden */
-    ngAfterContentInit(): void {
+    ngAfterViewInit(): void {
         this.listenOnItemsChange();
     }
 
@@ -136,16 +136,13 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterConten
     /** Listens on items change and checks if navigation buttons should be visible. */
     listenOnItemsChange(): void {
         this._subscriptions.add(this.items.changes.pipe(startWith(0)).subscribe(() => {
-            // Fixes expression changed error.
-            setTimeout(() => {
-                this.items.forEach((item) => {
-                    item.setFinalStep(false);
-                });
-
-                this.items.last?.setFinalStep(true);
-                this._setNavigationButtons();
-                this._paginate(0);
+            this.items.forEach((item) => {
+                item.setFinalStep(false);
             });
+
+            this.items.last?.setFinalStep(true);
+            this._setNavigationButtons();
+            this._paginate(0);
         }));
     }
 
