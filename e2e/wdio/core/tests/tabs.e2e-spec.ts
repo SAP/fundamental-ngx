@@ -115,7 +115,7 @@ describe('Tabs test suite', () => {
         tabsPage.checkRtlSwitch();
     });
 
-    it('should check examples visual regression', () => {
+    xit('should check examples visual regression', () => {
         tabsPage.saveExampleBaselineScreenshot();
         expect(tabsPage.compareWithBaseline()).toBeLessThan(5);
     });
