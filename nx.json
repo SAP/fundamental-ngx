@@ -134,7 +134,7 @@
         "fdp"
       ],
       "implicitDependencies": ["core"]
-    }, 
+    },
     "moment-adapter": {
       "tags": [
         "fd"
@@ -910,6 +910,16 @@
         "core-utils",
         "core-popover",
         "core-menu"
+      ]
+    },
+    "core-micro-process-flow": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-shared",
+        "core-popover"
       ]
     }
   }

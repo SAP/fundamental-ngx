@@ -1,0 +1,115 @@
+@mixin fd-rtl {
+    @at-root {
+
+        [dir='rtl'] &,
+        &[dir='rtl'] {
+            @content;
+        }
+    }
+}
+
+@mixin fd-reset-spacing {
+    margin: 0;
+    padding: 0;
+}
+
+@mixin fd-reset {
+    font-size: var(--sapFontSize);
+    line-height: var(--sapContent_LineHeight);
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+
+    &::before,
+    &::after {
+        box-sizing: inherit;
+        font-size: inherit;
+    }
+}
+
+@mixin fd-flex($direction: row) {
+    display: flex;
+    flex-direction: $direction;
+    @content;
+}
+
+@mixin fd-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@mixin fd-flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @content;
+}
+
+@mixin fd-flex-stretch {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+@mixin fd-hover {
+
+    &:hover,
+    &.is-hover {
+        @content;
+    }
+}
+
+@mixin fd-focus() {
+
+    &:focus,
+    &.is-focus {
+        z-index: 5;
+        @content;
+    }
+}
+
+@mixin fd-fiori-focus($offset: -0.1875rem) {
+
+    &:focus,
+    &.is-focus {
+        @if $offset !=0 {
+            outline-offset: $offset;
+        }
+
+        outline-width: var(--sapContent_FocusWidth);
+        outline-color: var(--sapContent_FocusColor);
+        outline-style: var(--sapContent_FocusStyle);
+        @content;
+    }
+}
+
+@mixin fd-micro-process-flow-semantic-state {
+
+    @each $state, $background in $semantic-colors {
+        &--#{$state} {
+            .#{$block}__icon-container {
+                background-color: map-get($background, default);
+                border-color: map-get($background, default);
+
+                .#{$block}__icon {
+                    color: var(--sapContent_ContrastIconColor);
+                }
+
+                @include fd-hover {
+                    background-color: map-get($background, hover);
+                    border-color: map-get($background, hover);
+                }
+
+                @include fd-focus {
+                    background-color: var(--sapHighlightColor);
+                    border-color: var(--sapHighlightColor);
+                }
+            }
+        }
+    }
+}

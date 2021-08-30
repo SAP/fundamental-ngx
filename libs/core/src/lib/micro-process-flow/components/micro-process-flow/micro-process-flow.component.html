@@ -1,0 +1,33 @@
+
+<a
+    tabindex="0"
+    class="fd-micro-process-flow__link-previous"
+    role="button"
+    type="button"
+    (click)="goBack()"
+    *ngIf="_showPreviousButton"
+>
+    <span>{{ _previousItemsCount }}</span>
+</a>
+<div class="fd-micro-process-flow__overflow-container" #container>
+    <div
+        class="fd-micro-process-flow__wrapper"
+        #wrapperContainer
+        [style.transition-property]="'transform'"
+        [style.transition-duration]="transitionSpeed + 's'"
+        [style.transition-timing-function]="transitionTimingFunction"
+    >
+        <ng-content select="fd-micro-process-flow-item"></ng-content>
+    </div>
+</div>
+<a
+    tabindex="0"
+    class="fd-micro-process-flow__link-next"
+    role="button"
+    type="button"
+    (click)="goNext()"
+    *ngIf="_showNextButton"
+    #goNextButton
+>
+    <span>{{ _nextItemsCount }}</span>
+</a>

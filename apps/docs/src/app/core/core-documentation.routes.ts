@@ -271,6 +271,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'micro-process-flow',
+                loadChildren: () =>
+                    import('./component-docs/micro-process-flow/micro-process-flow-docs.module').then(
+                        (m) => m.MicroProcessFlowDocsModule
+                    )
+            },
+            {
                 path: 'multi-input',
                 loadChildren: () =>
                     import('./component-docs/multi-input/multi-input-docs.module').then((m) => m.MultiInputDocsModule)
