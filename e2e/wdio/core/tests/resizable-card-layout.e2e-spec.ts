@@ -95,7 +95,7 @@ describe('Resizable card layout component:', function () {
         resizableCardLayoutPage.checkRtlSwitch();
     });
 
-    it('should check visual regression for all examples', () => {
+    xit('should check visual regression for all examples', () => {
         resizableCardLayoutPage.saveExampleBaselineScreenshot();
         expect(resizableCardLayoutPage.compareWithBaseline()).toBeLessThan(5);
     });
