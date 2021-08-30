@@ -1,6 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { TimelineNodePosition } from '../../types';
-import { TimelineNodeOutletDirective } from '../../directives/timeline-node-outlet.directive';
 
 @Component({
   selector: 'fd-timeline-node',

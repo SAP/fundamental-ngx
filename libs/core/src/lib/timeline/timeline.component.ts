@@ -21,8 +21,6 @@ import { Subject } from 'rxjs';
 
 import { TimelineNodeOutletDirective } from './directives/timeline-node-outlet.directive';
 import { TimelineNodeDefDirective, TimelineNodeOutletContext } from './directives/timeline-node-def.directive';
-import { TimelineNodePositionControlDirective } from './directives/timeline-node-position-control.directive';
-import { TimelineNodeComponent } from './components/timeline-node/timeline-node.component';
 
 @Component({
   selector: 'fd-timeline',

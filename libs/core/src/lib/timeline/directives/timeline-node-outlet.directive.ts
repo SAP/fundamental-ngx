@@ -9,9 +9,4 @@ export class TimelineNodeOutletDirective {
       public viewContainer: ViewContainerRef,
   ) { }
 
-  registerNode(): void {}
-
-  removeNode(): void {}
-
-
 }
