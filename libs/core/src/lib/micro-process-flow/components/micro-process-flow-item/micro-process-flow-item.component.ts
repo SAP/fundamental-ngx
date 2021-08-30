@@ -5,7 +5,7 @@ import { MicroProcessFlowItemType } from '../../types';
   selector: 'fd-micro-process-flow-item',
   templateUrl: './micro-process-flow-item.component.html',
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
   host: {
       class: 'fd-micro-process-flow__item',
       '[class.fd-micro-process-flow__item--positive]': 'state === "positive"',
@@ -16,7 +16,6 @@ import { MicroProcessFlowItemType } from '../../types';
   }
 })
 export class MicroProcessFlowItemComponent {
-
     @Input()
     state: MicroProcessFlowItemType = 'none';
 
