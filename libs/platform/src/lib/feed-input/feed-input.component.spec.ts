@@ -3,7 +3,8 @@ import { ChangeDetectionStrategy, DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { AvatarModule, FormControlModule } from '@fundamental-ngx/core';
+import { FormControlModule } from '@fundamental-ngx/core/form';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
 
 import { FeedInputComponent } from './feed-input.component';
 import { PlatformButtonModule } from '../button/public_api';

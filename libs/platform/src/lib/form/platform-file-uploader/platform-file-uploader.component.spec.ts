@@ -3,12 +3,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import {
-    FdpFormGroupModule,
-    FileUploaderSelectionChangeEvent,
-    PlatformFileUploaderComponent,
-    PlatformFileUploaderModule
-} from '@fundamental-ngx/platform';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+
+import { PlatformFileUploaderModule } from './platform-file-uploader.module';
+import { FileUploaderSelectionChangeEvent, PlatformFileUploaderComponent } from './platform-file-uploader.component';
 
 @Component({
     selector: 'fdp-file-uploader-test',

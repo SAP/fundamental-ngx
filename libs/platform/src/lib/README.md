@@ -87,7 +87,7 @@ For an existing Angular CLI application,
     For example, to use Switchs, add the following import to your main application module.
 
     ```typescript
-    import { PlatformActionBarModule } from '@fundamental-ngx/platform';
+    import { PlatformActionBarModule } from '@fundamental-ngx/platform/action-bar';
     ```
 
     Version 0.31.0 brings new way of importing individual modules, which is prefered way.

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FdSelectChange } from '@fundamental-ngx/core';
+import { FdSelectChange } from '@fundamental-ngx/core/select';
 
 interface Casts {
     name?: string;

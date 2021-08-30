@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { DialogConfig, DialogRef } from '@fundamental-ngx/core';
-import { PlatformThumbnailModule } from '@fundamental-ngx/platform';
+import { DialogConfig, DialogRef } from '@fundamental-ngx/core/dialog';
 
+import { PlatformThumbnailModule } from '../thumbnail.module';
 import { Media } from '../thumbnail.interfaces';
 import { ThumbnailDetailsComponent } from './thumbnail-details.component';
 

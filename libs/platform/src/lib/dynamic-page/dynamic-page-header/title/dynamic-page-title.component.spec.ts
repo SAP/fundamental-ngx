@@ -3,14 +3,14 @@ import { AfterViewInit, ChangeDetectorRef, Component, DebugElement, ElementRef, 
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { BreadcrumbModule, ButtonModule, ToolbarModule } from '@fundamental-ngx/core';
-import {
-    DynamicPageGlobalActionsComponent,
-    DynamicPageKeyInfoComponent,
-    DynamicPageLayoutActionsComponent,
-    DynamicPageService,
-    DynamicPageTitleComponent
-} from '@fundamental-ngx/platform';
+import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { DynamicPageTitleComponent } from '../../dynamic-page-header/title/dynamic-page-title.component';
+import { DynamicPageService } from '../../dynamic-page.service';
+import { DynamicPageKeyInfoComponent } from '../../dynamic-page-header/key-info/dynamic-page-key-info.component';
+import { DynamicPageGlobalActionsComponent } from '../../dynamic-page-header/actions/global-actions/dynamic-page-global-actions.component';
+import { DynamicPageLayoutActionsComponent } from '../../dynamic-page-header/actions/layout-actions/dynamic-page-layout-actions.component';
 
 import { CLASS_NAME } from '../../constants';
 import { PlatformDynamicPageModule } from '../../dynamic-page.module';

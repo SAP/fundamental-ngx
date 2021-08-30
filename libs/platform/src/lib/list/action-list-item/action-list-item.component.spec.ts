@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { ActionListItemComponent } from '@fundamental-ngx/platform';
+import { ActionListItemComponent } from './action-list-item.component';
 
 import { ListComponent } from '../list.component';
 import { PlatformListModule } from '../list.module';

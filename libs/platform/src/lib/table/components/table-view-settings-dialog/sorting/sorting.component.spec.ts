@@ -1,7 +1,7 @@
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core';
+import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
 import { SortingComponent, SortDialogData } from './sorting.component';
 import { PlatformTableModule } from '../../../table.module';
 

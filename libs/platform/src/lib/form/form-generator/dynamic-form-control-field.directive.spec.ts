@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { DynamicFormControlFieldDirective } from '@fundamental-ngx/platform';
+import { DynamicFormControlFieldDirective } from './dynamic-form-control-field.directive';
 
 import { DynamicFormControl } from './dynamic-form-control';
 

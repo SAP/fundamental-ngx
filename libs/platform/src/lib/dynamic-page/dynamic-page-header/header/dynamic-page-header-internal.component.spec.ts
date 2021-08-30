@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-import { DynamicPageService } from '@fundamental-ngx/platform';
+import { DynamicPageService } from '../../dynamic-page.service';
 
 import { DynamicPageHeaderInternalComponent } from './dynamic-page-header-internal.component';
 import { DynamicPageConfig } from '../../dynamic-page.config';

@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
-import { ObjectMarkerModule } from '@fundamental-ngx/core';
 import { By } from '@angular/platform-browser';
+
+import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
 
 import { PlatformObjectMarkerComponent } from './object-marker.component';
 

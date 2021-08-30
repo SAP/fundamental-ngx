@@ -1,8 +1,10 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { LinkComponent } from './link.component';
 import { Component, ViewChild, Input } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { LinkModule } from '@fundamental-ngx/core';
+
+import { LinkModule } from '@fundamental-ngx/core/link';
+
+import { LinkComponent } from './link.component';
 
 /** Standard link functionality tests */
 @Component({

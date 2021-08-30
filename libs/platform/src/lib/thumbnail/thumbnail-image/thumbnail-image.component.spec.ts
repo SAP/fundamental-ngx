@@ -3,7 +3,11 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { AvatarModule, ButtonModule, CarouselModule, DialogModule, RtlService } from '@fundamental-ngx/core';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { CarouselModule } from '@fundamental-ngx/core/carousel';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { RtlService } from '@fundamental-ngx/core/utils';
 import { ThumbnailImageComponent } from './thumbnail-image.component';
 import { Media } from '../thumbnail.interfaces';
 
