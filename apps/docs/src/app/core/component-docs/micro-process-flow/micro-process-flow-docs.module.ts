@@ -11,14 +11,14 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { MicroProcessFlowDocsComponent } from './micro-process-flow-docs.component';
 import { MicroProcessFlowHeaderComponent } from './micro-process-flow-header/micro-process-flow-header.component';
 import { MicroProcessFlowExampleComponent } from './examples/micro-process-flow-example.component';
-import { MicroProcessFlowOtherControlsComponent } from './examples/micro-process-flow-other-controls.component';
+import { MicroProcessFlowOtherControlsExampleComponent } from './examples/micro-process-flow-other-controls-example.component';
 import { StatusIndicatorModule } from '@fundamental-ngx/core/status-indicator';
-import { MicroProcessFlowPopoverComponent } from './examples/micro-process-flow-popover.component';
+import { MicroProcessFlowPopoverExampleComponent } from './examples/micro-process-flow-popover-example.component';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ListModule } from '@fundamental-ngx/core/list';
-import { MicroProcessFlowOverflowComponent } from './examples/micro-process-flow-overflow.component';
+import { MicroProcessFlowOverflowExampleComponent } from './examples/micro-process-flow-overflow-example.component';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import { MicroProcessFlowIndependentComponent } from './examples/micro-process-flow-independent.component';
+import { MicroProcessFlowIndependentItemsExampleComponent } from './examples/micro-process-flow-independent-items-example.component';
 import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
 
 const routes: Routes = [
@@ -37,10 +37,10 @@ const routes: Routes = [
         MicroProcessFlowDocsComponent,
         MicroProcessFlowHeaderComponent,
         MicroProcessFlowExampleComponent,
-        MicroProcessFlowOtherControlsComponent,
-        MicroProcessFlowPopoverComponent,
-        MicroProcessFlowOverflowComponent,
-        MicroProcessFlowIndependentComponent
+        MicroProcessFlowOtherControlsExampleComponent,
+        MicroProcessFlowPopoverExampleComponent,
+        MicroProcessFlowOverflowExampleComponent,
+        MicroProcessFlowIndependentItemsExampleComponent
     ],
     imports: [
         RouterModule.forChild(routes),

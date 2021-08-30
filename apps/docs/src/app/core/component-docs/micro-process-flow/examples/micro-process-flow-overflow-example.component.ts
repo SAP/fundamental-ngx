@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'fd-micro-process-flow-overflow',
-    templateUrl: './micro-process-flow-overflow.component.html',
+    templateUrl: './micro-process-flow-overflow-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MicroProcessFlowOverflowComponent {
+export class MicroProcessFlowOverflowExampleComponent {
 
     items: any[] = [];
 

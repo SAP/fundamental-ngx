@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'fd-micro-process-flow-popover',
-    templateUrl: './micro-process-flow-popover.component.html',
+    templateUrl: './micro-process-flow-popover-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MicroProcessFlowPopoverComponent {
+export class MicroProcessFlowPopoverExampleComponent {
 
     list1 = [
         { text: 'Option 1', url: '#' },
