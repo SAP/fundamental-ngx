@@ -50,7 +50,7 @@ describe('ObjectStatusComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
-    // TODO: Unskip after fix
+
     it('Should Validate diffrent object states and icon', () => {
         host.status = 'negative';
         host.glyph = 'status-negative';
