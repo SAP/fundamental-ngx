@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { TimelineNodePosition } from '../../types';
+import { TimelineNodeOutletDirective } from '../../directives/timeline-node-outlet.directive';
 
 @Component({
   selector: 'fd-timeline-node',
@@ -7,10 +9,27 @@ import { Component, Input } from '@angular/core';
     'class': 'fd-timeline__node-wrapper'
   }
 })
-export class TimelineNodeComponent {
+export class TimelineNodeComponent implements OnInit, OnDestroy {
 
   /* Glyph of the current timeline node.*/
   @Input()
   glyph: string;
+
+  _position: TimelineNodePosition;
+
+  // constructor(
+  //     private _timelineNodeOutletDir: TimelineNodeOutletDirective
+  // ) {
+  // }
+
+  ngOnInit(): void {
+  }
+
+  ngOnDestroy(): void {
+  }
+
+  setPosition(position: TimelineNodePosition): any {
+    this._position = position;
+  }
 
 }

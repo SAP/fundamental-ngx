@@ -15,6 +15,7 @@ import { TimelineNodeComponent } from './components/timeline-node/timeline-node.
 import { TimelineNodeHeaderInfoTitleDirective } from './directives/class-bindings/timeline-node-header-info-title.directive';
 import { TimelineNodeHeaderInfoTextDirective } from './directives/class-bindings/timeline-node-header-info-text.directive';
 import { TimelineHeaderInfoSubTitleDirective } from './directives/class-bindings/timeline-header-info-sub-title.directive';
+import { TimelineNodePositionControlDirective } from './directives/timeline-node-position-control.directive';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { TimelineHeaderInfoSubTitleDirective } from './directives/class-bindings
         TimelineNodeHeaderInfoTitleDirective,
         TimelineNodeHeaderInfoTextDirective,
         TimelineHeaderInfoSubTitleDirective,
+        TimelineNodePositionControlDirective,
     ],
     imports: [
         CommonModule,

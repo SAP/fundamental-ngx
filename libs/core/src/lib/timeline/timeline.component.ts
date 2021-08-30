@@ -21,6 +21,8 @@ import { Subject } from 'rxjs';
 
 import { TimelineNodeOutletDirective } from './directives/timeline-node-outlet.directive';
 import { TimelineNodeDefDirective, TimelineNodeOutletContext } from './directives/timeline-node-def.directive';
+import { TimelineNodePositionControlDirective } from './directives/timeline-node-position-control.directive';
+import { TimelineNodeComponent } from './components/timeline-node/timeline-node.component';
 
 @Component({
   selector: 'fd-timeline',
@@ -44,6 +46,18 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
    */
   @Input()
   trackBy: TrackByFunction<T>;
+
+  /**
+   * Axis for layout
+   */
+  @Input()
+  axis: 'vertical' | 'horizontal' = 'vertical';
+
+  /**
+   * Axis for layout
+   */
+  @Input()
+  layout: 'left' | 'right' | 'top' | 'bottom' | 'double-sided' = 'double-sided';
 
   /* Outlets within the timeline template where the dataNodes will be inserted. */
   /** @hidden */
@@ -74,7 +88,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
 
   /** @hidden */
   ngOnChanges(changes: SimpleChanges): void {
-    if ('dataSource' in changes) {
+    if ('dataSource' in changes && !changes['dataSource'].firstChange) {
       const value = changes['dataSource'].currentValue;
       this.switchDataSource(value);
     }
@@ -82,7 +96,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
 
   /** @hidden */
   ngAfterViewInit(): void {
-    this._renderNodeChanges(this.dataSource);
+    this.switchDataSource(this.dataSource);
   }
 
   /** @hidden */
@@ -136,11 +150,10 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
    */
   /** @hidden */
   private _insertNode(nodeData: T, index: number): void {
-    console.log('_insertNode');
     const node = this._getNodeDef(index);
 
     // Node context that will be provided to created embedded view
-    const context = new TimelineNodeOutletContext<T>(nodeData);
+      const context = new TimelineNodeOutletContext<T>(nodeData);
 
     this._nodeOutlet.viewContainer.createEmbeddedView(node.template, context, index);
   }
