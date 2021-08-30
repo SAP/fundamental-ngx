@@ -36,6 +36,9 @@ import { TimelineNodeDefDirective, TimelineNodeOutletContext } from './directive
 export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
 
+  /**
+   * Data array to render
+   */
   @Input()
   dataSource: T[] = [];
 
@@ -136,7 +139,6 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
    */
   /** @hidden */
   private _insertNode(nodeData: T, index: number): void {
-    console.log('_insertNode');
     const node = this._getNodeDef(index);
 
     // Node context that will be provided to created embedded view

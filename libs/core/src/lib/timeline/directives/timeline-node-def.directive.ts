@@ -17,12 +17,14 @@ export class TimelineNodeOutletContext<T> {
 }
 
 @Directive({
-  selector: '[fdTimelineNodeDef]',
+  selector: '[fdTimelineNodeDef], [fd-timeline-node-def]',
 })
 export class TimelineNodeDefDirective<T> {
 
+  /** Data passed to the template*/
   @Input()
   fdTimelineNodeData: T;
 
+  /** @hidden */
   constructor(public template: TemplateRef<any>) {}
 }
