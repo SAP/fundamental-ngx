@@ -46,7 +46,7 @@ export class PopoverScrollExampleComponent implements OnInit {
     }
 
     refreshRepositionScrollStrategy(): void {
-        this.repositionScrollStrategy = this._overlay.scrollStrategies.reposition({ autoClose: this.autoClose });
+        this.repositionScrollStrategy = this._overlay.scrollStrategies.reposition({ autoClose: this.autoClose, scrollThrottle: this.scrollThrottle });
     }
 
 }
