@@ -131,6 +131,6 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     private _getShellbarSize(): ShellbarSizes {
         const width = window.innerWidth;
-        return width < 599 ? 's' : 'm';
+        return width < 768 ? 's' : 'm';
     }
 }
