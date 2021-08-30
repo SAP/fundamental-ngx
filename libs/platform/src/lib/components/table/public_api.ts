@@ -31,8 +31,7 @@ export {
     TableSearchChangeEvent,
     TableRowSelectionChangeEvent,
     TableRowToggleOpenStateEvent,
-    TableRowsRearrangeEvent,
-    TableRowActivateEvent
+    TableRowsRearrangeEvent
 } from './models';
 
 export { TableDataSource, TableDataProvider, ArrayTableDataSource, ObservableTableDataSource } from './domain';

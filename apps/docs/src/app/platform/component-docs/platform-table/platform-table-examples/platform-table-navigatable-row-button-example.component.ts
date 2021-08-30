@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { FdDate } from '@fundamental-ngx/core';
+import { FdDate } from '@fundamental-ngx/core/datetime';
 import {
     TableDataSource,
     TableDataProvider,
@@ -10,11 +10,11 @@ import {
 } from '@fundamental-ngx/platform';
 
 @Component({
-    selector: 'fdp-platform-table-navigatable-row-indicator-example',
-    templateUrl: './platform-table-navigatable-row-indicator-example.component.html',
+    selector: 'fdp-platform-table-navigatable-row-button-example',
+    templateUrl: './platform-table-navigatable-row-button-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformTableNavigatableRowIndicatorExampleComponent implements AfterViewInit {
+export class PlatformTableNavigatableRowButtonExampleComponent implements AfterViewInit {
 
     source: TableDataSource<ExampleItem>;
 
@@ -26,13 +26,10 @@ export class PlatformTableNavigatableRowIndicatorExampleComponent implements Aft
     }
 
     ngAfterViewInit(): void {
+        this.table.setNavigatableRowState(0, false);
         this.table.setNavigatableRowState(1, false);
-
-        this.table.setRowNavigationIndicator(0, true);
-        this.table.setRowNavigationIndicator(2, true);
-
-        this.table.setRowNavigationTarget(0, '/platform/home');
         this.table.setRowNavigationTarget(2, '/platform/home');
+        this.table.setRowNavigationTarget(3, '/platform/home');
     }
 }
 
@@ -53,11 +50,11 @@ export interface ExampleItem {
  * Table Data Provider Example
  */
  export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
-    items: ExampleItem[] = [...ITEMS];
+    items: ExampleItem[] = ITEMS;
     totalItems = ITEMS.length;
 
     fetch(tableState: TableState): Observable<ExampleItem[]> {
-        this.items = [...ITEMS];
+        this.items = ITEMS;
 
         // apply searching
         if (tableState.searchInput) {
@@ -129,5 +126,17 @@ const ITEMS: ExampleItem[] = [
         statusColor: 'informative',
         date: new FdDate(2020, 1, 12),
         verified: true
+    },
+    {
+        name: 'Beam Breaker B-1',
+        description: 'fermentum donec ut',
+        price: {
+            value: 36.56,
+            currency: 'NZD'
+        },
+        status: 'Stocked on demand',
+        statusColor: 'informative',
+        date: new FdDate(2020, 11, 24),
+        verified: false
     }
 ];
