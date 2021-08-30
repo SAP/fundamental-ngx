@@ -9,8 +9,8 @@
 
 ## Description
 
-The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to enhance existing functionality and
-to provide a higher abstraction for the components by hiding most of the internal implementation details. The goal is
+The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to enhance existing functionality and 
+to provide a higeer abstraction for the components by hiding most of the internal implementation details. The goal is 
 to create a layer which is closer to application development and not to the library creators.
 
 Since there is a plan to generate UI programatically then components must be instantiable (they cannot be directives).
@@ -40,15 +40,15 @@ This `Platform UI library` is not going to be only about UI but it needs to also
 
 This example captures several things:
 
-a). How we abstract form assembly that me as developer I dont deal with layouting of elements for labels, controls, hints, etc..
+a). How we abstract from assembly that me as developer I don't deal with layouting of elements for labels, contrals, hints, etc..
 
-b). Assembly like this gives pretty big space in terms of different layouts that we want to support in the application (1 colum, 2 colums)
+b). Assembly like this gives pretty big space in terms of different layouts that we want to support in the application (1 column, 2 columns)
 
-c). If we need to group information into sections
+c). If we need to group information into sections
 
-d). How we are handling and forms errors
+d). How we are handling and forms errors
 
-e). Dropdown usage. Everything is happening inside the component that manages the iteration of the items we just pass list of values.
+e). Dropdown wsage. Everything is heppening inside the component that manages the iteration of the items we just pass list of values.
 
 ```html
 <fdp-form-group
