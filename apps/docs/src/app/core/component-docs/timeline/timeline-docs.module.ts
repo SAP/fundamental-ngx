@@ -7,7 +7,7 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { TimelineModule } from '@fundamental-ngx/core/timeline';
-import { AvatarModule } from '@fundamental-ngx/core';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
 
 const routes: Routes = [
   {
