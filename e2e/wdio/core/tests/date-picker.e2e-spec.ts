@@ -13,7 +13,7 @@ import {
     refreshPage,
     scrollIntoView,
     setValue,
-    waitForPresent,
+    waitForPresent
 } from '../../driver/wdio';
 import { DatePickerPo } from '../pages/date-picker.po';
 import { currentYear, invalidDate, getCurrentItemIndex, getCurrentMonth, getNextDay } from '../fixtures/testData/date-picker-tags'
@@ -26,7 +26,7 @@ describe('Datetime picker suite', function () {
         formattingExample, disableFuncExample, internationalExample, rangeDisabledExample, calendar, calendarIcon,
         calendarInput, calendarItem, selectedTimeLine, currentItem, itemText, inputGroup, frenchButton, germanButton,
         bulgarianButton, previousMonthButton, nextMonthButton, calendarBody, calendarRow, selectMonthButton,
-        selectYearButton, months, buttonText, message, currentMonthCalendarItem
+        selectYearButton, months, buttonText, message, currentMonthCalendarItem, getCurrentDayIndex, altCalendarItem
     } = new DatePickerPo();
 
     beforeAll(() => {
@@ -306,11 +306,21 @@ describe('Datetime picker suite', function () {
         let chosenDate;
         scrollIntoView(section + calendarIcon);
         click(section + calendarIcon);
-        clickNextElement(currentItem);
-        section === formattingExample ? chosenDate = `${getCurrentMonth(true)}/${getNextDay(true)}/${currentYear.toString().slice(2)}` : chosenDate = `${getCurrentMonth(false)}/${getNextDay(false)}/${currentYear}`;
+        const currentDayIndex = getCurrentDayIndex();
+        const dayCount = getElementArrayLength(currentMonthCalendarItem);
 
-        expect(getValue(section + calendarInput)).toContain(chosenDate, `input does not contain chosen value for ${section}`);
-        click(section + calendarIcon);
+        if (currentDayIndex === dayCount) {
+            click(altCalendarItem, currentDayIndex - 1);
+            click(section + calendarIcon);
+        }
+        if (currentDayIndex !== dayCount) {
+            click(altCalendarItem, currentDayIndex + 1);
+
+            section === formattingExample ? chosenDate = `${getCurrentMonth(true)}/${getNextDay(true)}/${currentYear.toString().slice(2)}` : chosenDate = `${getCurrentMonth(false)}/${getNextDay(false)}/${currentYear}`;
+
+            expect(getValue(section + calendarInput)).toContain(chosenDate, `input does not contain chosen value for ${section}`);
+            click(section + calendarIcon);
+        }
     }
 
     function checkOpenClose(section: string): void {
