@@ -122,7 +122,7 @@ describe('Step input component test suit', function () {
         stepInputPage.checkRtlSwitch();
     });
 
-    it('should check examples visual regression', () => {
+    xit('should check examples visual regression', () => {
         stepInputPage.saveExampleBaselineScreenshot();
         expect(stepInputPage.compareWithBaseline()).toBeLessThan(5);
     });
