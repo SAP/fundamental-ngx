@@ -13,6 +13,12 @@ $fd-popover-arrow-color: #89919a;
 $fd-popover-background-color-variable: var(--sapGroup_ContentBackground, #fff) !default;
 $fd-popover-background-color: #fff;
 $fd-popover-border-radius: var(--sapElement_BorderCornerRadius, .25rem) !default;
+
+@mixin set-border-radius($position, $radius: $fd-popover-border-radius) {
+    border-#{$position}-right-radius: $radius;
+    border-#{$position}-left-radius: $radius;
+}
+
 .fd-popover__popper {
 	.fd-popover__arrow {
 		box-sizing: border-box;
@@ -141,13 +147,11 @@ $fd-popover-border-radius: var(--sapElement_BorderCornerRadius, .25rem) !default
 
 		.fd-list__item {
 			&:first-child {
-				border-top-left-radius: 0.25rem;
-				border-top-right-radius: 0.25rem;
+                @include set-border-radius(top)
 			}
 
 			&:last-child {
-				border-bottom-left-radius: 0.25rem;
-				border-bottom-right-radius: 0.25rem;
+                @include set-border-radius(bottom);
 			}
 		}
 	}
@@ -158,27 +162,23 @@ $fd-popover-border-radius: var(--sapElement_BorderCornerRadius, .25rem) !default
         &__item {
             &:first-child {
                 .fd-nested-list__content {
-                    border-top-right-radius: $fd-popover-border-radius;
-                    border-top-left-radius: $fd-popover-border-radius;
+                    @include set-border-radius(top);
                 }
             }
-            
+
             &:last-child {
                 .fd-nested-list {
                     &__item:last-child {
                         .fd-nested-list__link {
-                            border-bottom-right-radius: $fd-popover-border-radius;
-                            border-bottom-left-radius: $fd-popover-border-radius;
+                            @include set-border-radius(bottom);
                         }
                     }
 
                     &__content {
-                        border-bottom-left-radius: $fd-popover-border-radius;
-                        border-bottom-right-radius: $fd-popover-border-radius;
+                        @include set-border-radius(bottom);
 
                         &.is-selected {
-                            border-bottom-left-radius: 0;
-                            border-bottom-right-radius: 0;
+                            @include set-border-radius(bottom, 0);
                         }
                     }
                 }
@@ -190,13 +190,11 @@ $fd-popover-border-radius: var(--sapElement_BorderCornerRadius, .25rem) !default
         border-right: none;
 
         &:first-child {
-            border-top-right-radius: $fd-popover-border-radius;
-            border-top-left-radius: $fd-popover-border-radius;
+            @include set-border-radius(top);
         }
 
         &:last-child {
-            border-bottom-right-radius: $fd-popover-border-radius;
-            border-bottom-left-radius: $fd-popover-border-radius;
+            @include set-border-radius(bottom);
         }
     }
 }
