@@ -1,11 +1,13 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, QueryList, ViewChildren } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { FormModule, SwitchModule } from '@fundamental-ngx/core';
-import { SwitchComponent, SwitchChangeEvent } from './switch.component';
-import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { SwitchModule } from '@fundamental-ngx/core/switch';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform';
+
+import { SwitchChangeEvent, SwitchComponent } from './switch.component';
 
 @Component({
     selector: 'fdp-test-switch',
@@ -98,14 +100,6 @@ describe('SwitchComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
-    });
-
-    it('should have classes applied', () => {
-        const fdpElem = fixture.debugElement.query(By.css('#switch-0'));
-
-        // fdp-switches
-        expect(fdpElem.nativeElement.getAttribute('ng-reflect-id')).toEqual('switch-0');
-        expect(fdpElem.nativeElement.getAttribute('ng-reflect-name')).toEqual('switch0');
     });
 
     it('should have compact applied', async () => {

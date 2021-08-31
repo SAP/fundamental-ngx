@@ -1,8 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ShellbarUserMenuComponent } from './shellbar-user-menu.component';
-import { MenuModule } from '../../menu/menu.module';
-import { PopoverModule } from '../../popover/popover.module';
+import { ShellbarModule, ShellbarUserMenuComponent } from '@fundamental-ngx/core/shellbar';
 
 describe('UserMenuComponent', () => {
     let component: ShellbarUserMenuComponent;
@@ -10,8 +8,7 @@ describe('UserMenuComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [PopoverModule, MenuModule],
-            declarations: [ShellbarUserMenuComponent]
+            imports: [ShellbarModule]
         }).compileComponents();
     }));
 

@@ -1,10 +1,8 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Component, Type, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { TemplateModule } from '../../utils/directives/template/template.module';
-import { MessageBoxHeaderComponent } from './message-box-header.component';
-import { MessageBoxConfig } from '../utils/message-box-config.class';
-import { BarModule } from '../../bar/bar.module';
+import { BarModule } from '@fundamental-ngx/core/bar';
+import { MessageBoxConfig, MessageBoxHeaderComponent, MessageBoxModule } from '@fundamental-ngx/core/message-box';
 import { whenStable } from '@fundamental-ngx/core/tests';
 
 
@@ -46,10 +44,10 @@ class DefaultHeaderTestComponent {
 describe('MessageBoxHeaderComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [MessageBoxHeaderComponent, CustomHeaderTestComponent, DefaultHeaderTestComponent],
-            imports: [BarModule, TemplateModule],
+            imports: [BarModule, MessageBoxModule],
+            declarations: [CustomHeaderTestComponent, DefaultHeaderTestComponent],
             providers: [{ provide: MessageBoxConfig, useValue: { ...new MessageBoxConfig(), mobile: true } }]
-        });
+        }).compileComponents();
     }));
 
     function setup<V>(testComponent): { fixture: ComponentFixture<V>; component: V } {

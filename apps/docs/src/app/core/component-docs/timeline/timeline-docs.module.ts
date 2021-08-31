@@ -7,23 +7,31 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { TimelineModule } from '@fundamental-ngx/core/timeline';
-import { AvatarModule } from '@fundamental-ngx/core';
-import { TimelineTwoSidesArrangementExampleComponent } from './examples/timeline-two-sides-arrangement-example/timeline-two-sides-arrangement-example.component';
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import {
+    TimelineTwoSidesArrangementExampleComponent
+} from './examples/timeline-two-sides-arrangement-example/timeline-two-sides-arrangement-example.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: TimelineHeaderDocsComponent,
-    children: [
-      { path: '', component: TimelineDocsComponent },
-      { path: 'api', component: ApiComponent, data: { content: API_FILES.timeline } }
-    ]
-  }
+    {
+        path: '',
+        component: TimelineHeaderDocsComponent,
+        children: [
+            { path: '', component: TimelineDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.timeline } }
+        ]
+    }
 ];
 
 @NgModule({
-  declarations: [TimelineDocsComponent, TimelineHeaderDocsComponent, TimelineBasicExampleComponent, TimelineTwoSidesArrangementExampleComponent],
-  imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TimelineModule, AvatarModule],
-  exports: [RouterModule],
+    declarations: [
+        TimelineDocsComponent,
+        TimelineHeaderDocsComponent,
+        TimelineBasicExampleComponent,
+        TimelineTwoSidesArrangementExampleComponent
+    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TimelineModule, AvatarModule],
+    exports: [RouterModule]
 })
-export class TimelineDocsModule { }
+export class TimelineDocsModule {
+}

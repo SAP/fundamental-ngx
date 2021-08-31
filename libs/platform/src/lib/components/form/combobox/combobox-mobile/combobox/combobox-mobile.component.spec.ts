@@ -4,9 +4,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DialogModule, DynamicComponentService, MobileModeConfig } from '@fundamental-ngx/core';
+import { ComboboxMobileComponent } from '@fundamental-ngx/platform';
 
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../../combobox.interface';
-import { ComboboxMobileComponent } from './combobox-mobile.component';
 
 describe('ComboboxMobileComponent', () => {
     let component: ComboboxMobileComponent;

@@ -99,6 +99,11 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
      * @description Cancels Wizard progress and closes the dialog.
      */
     cancel(): void {
+        if (this._wizardGeneratorService.isStepsUntouched()) {
+            this._dialogRef.dismiss();
+
+            return;
+        }
 
         const template = this.confirmationDialogTemplate || this.defaultConfirmationDialogTemplate;
 

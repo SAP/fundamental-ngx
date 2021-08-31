@@ -5,16 +5,15 @@ import {
     EventEmitter,
     Input,
     Output,
-    Renderer2,
     ViewChild,
     ViewEncapsulation,
     HostBinding,
     ChangeDetectorRef
 } from '@angular/core';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 import { DynamicPageConfig } from '../../dynamic-page.config';
 import { DynamicPageService } from '../../dynamic-page.service';
-import { distinctUntilChanged } from 'rxjs/operators';
 
 let dynamicPageSubHeaderId = 0;
 @Component({
@@ -114,14 +113,12 @@ export class DynamicPageSubheaderComponent {
     /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef,
-        private _elementRef: ElementRef<HTMLElement>,
-        private _renderer: Renderer2,
         protected _dynamicPageConfig: DynamicPageConfig,
         private _dynamicPageService: DynamicPageService
     ) {
         this._dynamicPageService.collapsed
             .pipe(distinctUntilChanged())
-            .subscribe(collapsed => this._handleCollapsedChange(collapsed));
+            .subscribe((collapsed) => this._handleCollapsedChange(collapsed));
     }
 
     /**
@@ -130,7 +127,7 @@ export class DynamicPageSubheaderComponent {
      */
     toggleCollapse(): void {
         this._pinned = false;
-        this._handleCollapsedChange(!this._collapsed)
+        this._handleCollapsedChange(!this._collapsed);
     }
 
     /**
@@ -149,6 +146,7 @@ export class DynamicPageSubheaderComponent {
 
         this._collapsed = collapsed;
         this._dynamicPageService.collapsed.next(collapsed);
+        this.collapsedChange.emit(this._collapsed);
         this._cd.detectChanges();
         this._dynamicPageService.subheaderVisibilityChange.next();
     }

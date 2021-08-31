@@ -16,7 +16,8 @@ import {
     Directive,
     ViewChildren,
     QueryList,
-    ViewEncapsulation
+    ViewEncapsulation,
+    Optional
 } from '@angular/core';
 
 import { UP_ARROW, DOWN_ARROW, ESCAPE } from '@angular/cdk/keycodes';
@@ -264,7 +265,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         private _overlay: Overlay,
         private _viewContainerRef: ViewContainerRef,
         protected _cd: ChangeDetectorRef,
-        private _rtl: RtlService,
+        @Optional() private _rtl: RtlService,
         private readonly _elementRef: ElementRef,
         private _liveAnnouncer: LiveAnnouncer
     ) {
@@ -277,10 +278,12 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this.submitId = `${baseId}-submit-${searchFieldIdCount++}`;
         this.menuId = `${baseId}-menu-${searchFieldIdCount++}`;
 
-        this._rtlChangeSubscription = this._rtl.rtl.subscribe((isRtl: boolean) => {
-            this.dir = isRtl ? 'rtl' : 'ltr';
-            this._cd.detectChanges();
-        });
+        if (this._rtl) {
+            this._rtlChangeSubscription = this._rtl.rtl.subscribe((isRtl: boolean) => {
+                this.dir = isRtl ? 'rtl' : 'ltr';
+                this._cd.detectChanges();
+            });
+        }
 
         this._listenElementEvents();
     }

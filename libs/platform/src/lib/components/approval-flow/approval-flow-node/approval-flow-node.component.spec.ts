@@ -1,9 +1,8 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlatformApprovalFlowModule } from '@fundamental-ngx/platform';
+import { ApprovalNode, PlatformApprovalFlowModule } from '@fundamental-ngx/platform';
 
-import { ApprovalNode } from '../interfaces';
 import { ApprovalFlowNodeComponent } from './approval-flow-node.component';
 
 const node: ApprovalNode = {
@@ -29,7 +28,6 @@ describe('ApprovalFlowNodeComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ApprovalFlowNodeComponent],
             imports: [PlatformApprovalFlowModule]
         }).compileComponents();
     });

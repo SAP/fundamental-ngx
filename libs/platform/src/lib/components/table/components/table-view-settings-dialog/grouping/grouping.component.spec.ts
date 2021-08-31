@@ -1,7 +1,9 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DialogRef } from '@fundamental-ngx/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core';
 import { GroupingComponent, GroupDialogData } from './grouping.component';
+import { PlatformTableModule } from '../../../table.module';
 
 describe('PlatformTableGroupDialogComponent', () => {
     let component: GroupingComponent;
@@ -13,8 +15,8 @@ describe('PlatformTableGroupDialogComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [GroupingComponent],
-                providers: [{ provide: DialogRef, useValue: dialogRef }]
+                imports: [PlatformTableModule, NoopAnimationsModule],
+                providers: [{ provide: DialogRef, useValue: dialogRef }, DialogService, DialogConfig]
             }).compileComponents();
         })
     );

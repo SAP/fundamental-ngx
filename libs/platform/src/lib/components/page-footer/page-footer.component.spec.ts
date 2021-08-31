@@ -1,14 +1,13 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PlatformLinkModule } from '../link/link.module';
 
-import { PlatformFooterComponent } from './page-footer.component';
-import { PlatformPageFooterModule } from './page-footer.module';
+import { PlatformFooterComponent, PlatformLinkModule, PlatformPageFooterModule } from '@fundamental-ngx/platform';
 
 @Component({
     selector: 'fdp-footer-test',
     template: `
-        <fdp-page-footer [logo]="logo" [content]="content" [copyright]="copyright"></fdp-page-footer>
+        <fdp-page-footer [logo]="logo" [content]="content"></fdp-page-footer>
+
         <ng-template #logo>
             <img id="fd-logo-1" src="/assets/images/logo-sap.svg" alt="" />
         </ng-template>
@@ -21,10 +20,6 @@ import { PlatformPageFooterModule } from './page-footer.module';
             <fdp-link id="fd-link-test-3" href="/" title="footer link Privacy Statement">Privacy Statement</fdp-link>
             <fdp-link id="fd-link-test-4" href="/" title="footer link Cookie Statement">Cookie Statement</fdp-link>
             <fdp-link id="fd-link-test-5" href="/" title="footer link Participant Team">Participant Team</fdp-link>
-        </ng-template>
-
-        <ng-template #copyright>
-            <span>1996-2021 Ariba Inc. All Rights Reserved</span>
         </ng-template>
     `
 })
@@ -41,7 +36,7 @@ describe('FooterComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             imports: [PlatformPageFooterModule, PlatformLinkModule],
-            declarations: [PlatformFooterComponent, PlatformFooterTestComponent]
+            declarations: [PlatformFooterTestComponent]
         }).compileComponents();
     });
 

@@ -33,15 +33,11 @@ import {
 import { fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
 import { filter, takeUntil, tap } from 'rxjs/operators';
 
-import {
-    DialogConfig,
-    FocusEscapeDirection,
-    KeyUtil,
-    ListComponent,
-    MobileModeConfig,
-    TemplateDirective,
-    closestElement
-} from '@fundamental-ngx/core';
+import { FocusEscapeDirection, KeyUtil, TemplateDirective, closestElement } from '@fundamental-ngx/core/utils';
+import { DialogConfig } from '@fundamental-ngx/core/dialog';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { ListComponent } from '@fundamental-ngx/core/list';
+
 import {
     ArrayComboBoxDataSource,
     ComboBoxDataSource,

@@ -1,14 +1,11 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ChangeDetectionStrategy, Component, Inject, ViewChild } from '@angular/core';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 
-import { SelectComponent } from '../select.component';
-import { SelectMobileModule } from './select-mobile.module';
-import { SelectModule } from '../select.module';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { whenStable } from '@fundamental-ngx/core/tests';
-import { getMobileModeViewElements, MOBILE_CONFIG_TEST_TOKEN } from '@fundamental-ngx/core/tests';
+import { SelectComponent, SelectMobileModule, SelectModule } from '@fundamental-ngx/core/select';
+import { getMobileModeViewElements, MOBILE_CONFIG_TEST_TOKEN, whenStable } from '@fundamental-ngx/core/tests';
 
 const MOBILE_CONFIG: MobileModeConfig = { title: 'TITLE', hasCloseButton: true };
 
@@ -37,11 +34,12 @@ describe('SelectComponent in mobile mode', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComponent],
-            imports: [SelectModule, SelectMobileModule, BrowserAnimationsModule, RouterTestingModule]
+            imports: [SelectModule, SelectMobileModule, BrowserAnimationsModule, RouterTestingModule],
+            providers: [{ provide: MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
         }).overrideComponent(
             SelectComponent,
             { set: { changeDetection: ChangeDetectionStrategy.Default } }
-        )
+        );
     }));
 
     function setup(mobileConfig: MobileModeConfig = MOBILE_CONFIG): void {
@@ -51,7 +49,6 @@ describe('SelectComponent in mobile mode', () => {
         testComponent = fixture.componentInstance;
         fixture.detectChanges();
     }
-
 
     it('should create', async () => {
         setup();

@@ -1,12 +1,11 @@
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, ViewChild, ElementRef } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { ListComponent } from '../list.component';
+import { DisplayListItemComponent, DisplayListItemModule } from '@fundamental-ngx/platform';
+
 import { PlatformListModule } from '../list.module';
-import { DisplayListItemComponent } from './display-list-item.component';
-import { DisplayListItemModule } from './display-list-item.module';
 
 export interface Name {
     title: string;
@@ -43,7 +42,7 @@ describe('DisplayListItemComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
-            declarations: [DisplayListItemComponentTest, DisplayListItemComponent, ListComponent]
+            declarations: [DisplayListItemComponentTest]
         })
             .compileComponents();
     }));
@@ -132,8 +131,7 @@ describe('DisplayListItemComponent functions', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
-            declarations: [DisplayListItemComponent, ListComponent]
+            imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule]
         })
             .compileComponents();
     }));
@@ -177,7 +175,7 @@ describe('DisplayListItemComponent Imperative', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
-            declarations: [TestComponentContent, DisplayListItemComponent]
+            declarations: [TestComponentContent]
         }).compileComponents();
     }));
 
@@ -243,5 +241,4 @@ describe('DisplayListItemComponent Imperative', () => {
         fixture.detectChanges();
         expect(naviationItemsImp[0].nativeElement.classList).toContain('fd-list__item--link');
     });
-
 });

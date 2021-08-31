@@ -19,14 +19,17 @@
 </ng-template>
 
 <ng-template #selectInputControlTemplate>
-    <div class="fd-select__control" role="listbox" #selectControl [ngClass]="state ? 'is-' + state : ''"
+    <div class="fd-select__control" role="list" #selectControl [ngClass]="state ? 'is-' + state : ''"
         [class.is-active]="_isOpen" [class.is-expanded]="_isOpen" [class.is-disabled]="disabled"
         [class.is-readonly]="readonly" [attr.tabindex]="_tabIndex" [attr.id]="controlId" [attr.aria-active]="_isOpen"
+        aria-live="polite"
+        [attr.aria-selected]="selected?.selected"
         [attr.aria-expanded]="_isOpen" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly"
         [attr.aria-controls]="controlId + '-list-box'" [attr.aria-haspopup]="!(this.readonly || this.disabled)"
-        [attr.aria-label]="ariaLabel" [attr.aria-labelledby]="ariaLabelledBy" [attr.aria-required]="required"
+        [attr.aria-required]="required"
+        [attr.title]="triggerValue" [attr.aria-label]="triggerValue" [attr.aria-labelledby]="triggerValue"
         [attr.aria-activedescendant]="_getAriaActiveDescendant()" (focus)="_onFocus()" (blur)="_onBlur()">
-        <div class="fd-select__text-content">
+        <div  role="listitem" class="fd-select__text-content"  [attr.aria-label]="triggerValue">
             <ng-container [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
                 [ngTemplateOutletContext]="{ $implicit: triggerValue, selected: selected }">
             </ng-container>
@@ -44,8 +47,8 @@
 <ng-template #selectOptionsListTemplate>
     <ul #optionPanel fd-list class="fd-select-options" role="listbox" tabindex="-1" [compact]="compact"
         [mobileMode]="mobile" [dropdownMode]="true" [hasMessage]="!!stateMessage" [attr.id]="controlId + '-list-box'"
-        [style.max-height]="maxHeight || calculatedMaxHeight + 'px'" [attr.tooltip]="triggerValue" [attr.aria-label]="triggerValue">
-        <li *ngIf="stateMessage" fd-list-message tabindex="-1" role="presentation" [type]="state">
+        [style.max-height]="maxHeight || calculatedMaxHeight + 'px'" [attr.tooltip]="triggerValue">
+        <li *ngIf="stateMessage" [attr.aria-label]="stateMessage" fd-list-message tabindex="-1" role="presentation" [type]="state">
             {{stateMessage}}
         </li>
 

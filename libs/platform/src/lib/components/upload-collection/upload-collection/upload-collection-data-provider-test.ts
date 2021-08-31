@@ -1,7 +1,7 @@
-import { uuidv4 } from '@fundamental-ngx/core';
 import { Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { UploadCollectionDataProvider } from '../domain';
+
+import { uuidv4 } from '@fundamental-ngx/core';
 import {
     CancelUploadNewFileEvent,
     DeleteEvent,
@@ -10,14 +10,14 @@ import {
     MoveToEvent,
     NewFolderEvent,
     UpdateVersionEvent,
-    UploadCollectionNewItem,
-    UploadEvent
-} from '../models/upload-collection-events.models';
-import {
     UploadCollectionFile,
     UploadCollectionItem,
-    UploadCollectionItemStatus
-} from '../models/upload-collection.models';
+    UploadCollectionItemStatus,
+    UploadCollectionNewItem,
+    UploadEvent
+} from '@fundamental-ngx/platform';
+
+import { UploadCollectionDataProvider } from '../domain';
 
 const dataSource: UploadCollectionItem[] = [
     {

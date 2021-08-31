@@ -2,11 +2,10 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { Component, Inject, InjectionToken, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { MobileModeConfig } from '@fundamental-ngx/core';
+
 import { DialogRef } from '@fundamental-ngx/core/dialog';
-import { PopoverComponent, PopoverModule } from '../public_api';
-import { PopoverMobileComponent } from './popover-mobile.component';
-import { PopoverMobileModule } from './popover-mobile.module';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+import { PopoverComponent, PopoverMobileComponent, PopoverMobileModule, PopoverModule } from '@fundamental-ngx/core/popover';
 
 const MOBILE_CONFIG_TEST_TOKEN = new InjectionToken<MobileModeConfig>('For test purposes');
 const MOBILE_CONFIG: MobileModeConfig = { title: 'Test popover title' };
@@ -41,12 +40,9 @@ describe('PopoverMobileComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                TestPopoverWrapperComponent,
-                PopoverComponent,
-                PopoverMobileComponent,
-            ],
+            declarations: [TestPopoverWrapperComponent],
             imports: [PopoverModule, OverlayModule, A11yModule, PopoverMobileModule],
+            providers: [{ provide: MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
         })
         .compileComponents();
     }));
@@ -54,8 +50,6 @@ describe('PopoverMobileComponent', () => {
     beforeEach(() => setup());
 
     function setup(mobileConfig: MobileModeConfig = MOBILE_CONFIG): void {
-        TestBed.overrideProvider(MOBILE_CONFIG_TEST_TOKEN, { useValue: mobileConfig });
-        TestBed.compileComponents();
         fixture = TestBed.createComponent(TestPopoverWrapperComponent);
         fixture.detectChanges();
         popoverComponent = fixture.componentInstance.popoverComponent;

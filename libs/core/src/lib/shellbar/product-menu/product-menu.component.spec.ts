@@ -1,9 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { ProductMenuComponent } from './product-menu.component';
-import { PopoverModule } from '../../popover/popover.module';
-import { MenuModule } from '../../menu/menu.module';
-import { IconModule } from '../../icon/icon.module';
+import { ProductMenuComponent, ShellbarModule } from '@fundamental-ngx/core/shellbar';
 
 describe('ProductMenuComponent', () => {
     let component: ProductMenuComponent;
@@ -11,8 +8,7 @@ describe('ProductMenuComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [ProductMenuComponent],
-            imports: [PopoverModule, MenuModule, IconModule]
+            imports: [ShellbarModule]
         }).compileComponents();
     }));
 

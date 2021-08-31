@@ -3,17 +3,16 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { TabsModule, ToolbarModule } from '@fundamental-ngx/core';
+import { ButtonModule, TabsModule, ToolbarModule } from '@fundamental-ngx/core';
 import {
     CLASS_NAME,
     DynamicPageComponent,
+    DynamicPageContentComponent,
+    DynamicPageHeaderComponent,
     DynamicPageService,
+    DynamicPageTitleComponent,
     PlatformDynamicPageModule
 } from '@fundamental-ngx/platform';
-
-import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
-import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
-import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-page-title.component';
 
 @Component({
     template: `
@@ -35,7 +34,7 @@ import { DynamicPageTitleComponent } from './dynamic-page-header/title/dynamic-p
                 <fdp-dynamic-page-layout-actions>
                     <!-- layout actions -->
                     <fd-toolbar fdType="transparent" [clearBorder]="true">
-                        <button fd-button fdType="transparent" aria-label="Resize" (click)="closePage($event)">
+                        <button fd-button fdType="transparent" aria-label="Resize">
                             <i class="sap-icon--resize"></i>
                         </button>
                     </fd-toolbar>
@@ -65,7 +64,7 @@ describe('DynamicPageComponent default values', () => {
             dynamicPageServiceSpy = jasmine.createSpyObj('DynamicPageService', ['expandHeader', 'collapseHeader']);
 
             TestBed.configureTestingModule({
-                imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule],
+                imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ButtonModule],
                 declarations: [TestComponent],
                 providers: [{ provide: DynamicPageService, useValue: dynamicPageServiceSpy }]
             }).compileComponents();
@@ -102,6 +101,7 @@ describe('DynamicPageComponent default values', () => {
             fixture.detectChanges();
             expect(component.dynamicPageTitleComponent.size).toBe('small');
         });
+
         it('should inherit background styles', async () => {
             fixture.detectChanges();
             expect(component.dynamicPageTitleComponent.background).toBe('');
@@ -123,6 +123,7 @@ describe('DynamicPageComponent default values', () => {
     // TODO: Unskip after fix
     xit('should render content in view', () => {
         fixture.detectChanges();
+
         expect(component.dynamicPageContentComponent.getElementRef().nativeElement.innerText).toBe(
             'DynamicPage Content Text'
         );
@@ -305,7 +306,6 @@ describe('DynamicPageComponent with collapsible set to false', () => {
                                 fd-button
                                 fdType="transparent"
                                 aria-label="Resize"
-                                (click)="closePage($event)"
                                 id="layout-action-button"
                             >
                                 <i class="sap-icon--resize"></i>
@@ -349,7 +349,7 @@ describe('DynamicPageComponent Content Projection', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule],
+                imports: [CommonModule, PlatformDynamicPageModule, ToolbarModule, ButtonModule],
                 declarations: [HostTestComponent],
                 providers: [DynamicPageService]
             }).compileComponents();

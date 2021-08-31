@@ -1,10 +1,9 @@
 import { EventEmitter } from '@angular/core';
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { SearchInput } from '../../interfaces/search-field.interface';
+import { PlatformTableModule, SearchInput } from '@fundamental-ngx/platform';
 
 import { Table } from '../../table';
-
 import { TableToolbarComponent } from './table-toolbar.component';
 
 class TableComponentMock
@@ -33,7 +32,7 @@ describe('TableToolbarComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [TableToolbarComponent],
+                imports: [PlatformTableModule],
                 providers: [
                     {
                         provide: Table,

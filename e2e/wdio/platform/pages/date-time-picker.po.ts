@@ -6,7 +6,7 @@ export class DateTimePicker extends BaseComponentPo {
     root = '#page-content';
 
     disabledFunctionExample = 'fdp-platform-datetime-picker-disable-function-example ';
-    
+
     topPage = 'h1.header';
     bottomPage = '#disable-function ~ code-example button';
 
@@ -26,6 +26,8 @@ export class DateTimePicker extends BaseComponentPo {
     calendarExpanded = '.fd-datetime__container';
     calendarYearsSection = '.fd-calendar__content--years';
     calendarItem = 'td.fd-calendar__item';
+    altCalendarItem = 'table td.fd-calendar__item';
+    currentMonthCalendarItem = '//td[not(contains(@class, \'fd-calendar__item--other-month\'))]';
 
     currentDay = '//*[contains(@class, "fd-calendar__item--current") or contains(@class, "is-active")]';
 
@@ -38,14 +40,15 @@ export class DateTimePicker extends BaseComponentPo {
     timeItem = 'span.fd-time__item';
     okButton = 'button[fdtype="emphasized"]';
     cancelButton = 'button[label="Cancel"]';
+    calendarContainer = 'div.fd-datetime__container';
 
     selectedHours = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[12]';
     selectedMinutes = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[54]';
     period = '//span[contains(text(), " PM ")]/parent::li';
 
     getCurrentDayIndex = (): number => {
-        for (let i = 0; i < this.calendarItem.length; i++) {
-            if (getElementClass(this.calendarItem, i).includes('is-active')) {
+        for (let i = 0; i < this.currentMonthCalendarItem.length; i++) {
+            if (getElementClass(this.currentMonthCalendarItem, i).includes('current')) {
                 return i;
             }
         }

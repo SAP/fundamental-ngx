@@ -1,15 +1,14 @@
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, of } from 'rxjs';
-import { By } from '@angular/platform-browser';
 
-import { DataProvider, ListDataSource } from '../../../domain/public_api';
+import { DataProvider, ListDataSource, ObjectListItemComponent } from '@fundamental-ngx/platform';
+
 import { ListComponent } from '../list.component';
 import { PlatformListModule } from '../list.module';
 import { ObjectListItemModule } from './object-list-item.module';
-import { ObjectListItemComponent } from './object-list-item.component';
-import { ObjectListItemRowComponent } from './object-list-item-row.component';
 
 @Component({
     selector: 'fdp-test-fdp-display-list-item',
@@ -47,7 +46,7 @@ describe('ObjectListItemComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformListModule, ObjectListItemModule, RouterTestingModule],
-            declarations: [ObjectListItemComponentTest, ObjectListItemComponent, ListComponent, ObjectListItemRowComponent]
+            declarations: [ObjectListItemComponentTest]
         })
             .compileComponents();
     }));
@@ -360,7 +359,7 @@ describe('Object  List Item Component with DataSource', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [PlatformListModule, RouterTestingModule, ObjectListItemModule],
-            declarations: [ObjectListItemDataSourceTestComponent, ObjectListItemComponent, ListComponent, ObjectListItemRowComponent]
+            declarations: [ObjectListItemDataSourceTestComponent]
         }).compileComponents();
     }));
 

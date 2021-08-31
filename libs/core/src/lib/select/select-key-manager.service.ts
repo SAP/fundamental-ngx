@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { UP_ARROW, DOWN_ARROW, ENTER, SPACE, HOME, END, hasModifierKey } from '@angular/cdk/keycodes';
+import { UP_ARROW, DOWN_ARROW, ENTER, SPACE, HOME, TAB, END, ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
 
 import { SelectInterface } from './select.interface';
 import { OptionsInterface } from './options.interface';
@@ -48,8 +48,7 @@ export class SelectKeyManagerService {
         this._component._optionPanel.nativeElement.scrollTop = this._component._getOptionScrollPosition(
             activeOptionIndex,
             this._component._getItemHeight(),
-            this._component._optionPanel.nativeElement.scrollTop,
-            this._component._calculatedMaxHeight
+            this._component._optionPanel.nativeElement.scrollTop
         );
     }
 
@@ -98,9 +97,10 @@ export class SelectKeyManagerService {
         if (KeyUtil.isKeyCode(event, [HOME, END])) {
             event.preventDefault();
             KeyUtil.isKeyCode(event, HOME) ? manager.setFirstItemActive() : manager.setLastItemActive();
-        } else if (isArrowKey && event.altKey) {
+        } else if (isArrowKey && event.altKey || KeyUtil.isKeyCode(event, [ESCAPE])) {
             // Close the select on ALT + arrow key to match the native <select>
             event.preventDefault();
+            this._component.blur();
             this._component.close();
             // When user is typing do nothing,
             // because the typing sequence can include the space key.
@@ -112,6 +112,13 @@ export class SelectKeyManagerService {
         ) {
             event.preventDefault();
             manager.activeItem._selectViaInteraction();
+            this._component.blur();
+        } else if (
+            !isTyping &&
+            KeyUtil.isKeyCode(event, [TAB]) &&
+           this._component.mobile
+        ) {
+            event.preventDefault();
         } else {
             manager.onKeydown(event);
         }

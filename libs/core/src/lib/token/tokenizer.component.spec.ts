@@ -1,12 +1,11 @@
+import { Component, ContentChildren, QueryList, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, ViewChild, ContentChildren, QueryList } from '@angular/core';
-import { RtlService } from '../utils/services/rtl.service';
-import { TokenizerInputDirective } from './token-input.directive';
+import { FormControlComponent } from '@fundamental-ngx/core/form';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
-import { FormControlComponent } from '../form/form-control/form-control.component';
-import { TokenComponent, TokenizerComponent } from './public_api';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
+import { TokenComponent, TokenizerComponent, TokenModule } from '@fundamental-ngx/core/token';
+import { ContentDensityService, DEFAULT_CONTENT_DENSITY, RtlService } from '@fundamental-ngx/core/utils';
+
 @Component({
     selector: 'fd-tokenizer-test-component',
     template: `
@@ -18,7 +17,7 @@ import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_
         </fd-tokenizer>
     `
 })
-class TokenizerWrapperComponent {
+class HostComponent {
     compact = undefined;
 
     @ViewChild(TokenizerComponent) tokenizer: TokenizerComponent;
@@ -30,23 +29,18 @@ class TokenizerWrapperComponent {
 
 describe('TokenizerComponent', () => {
     let component: TokenizerComponent;
-    let fixture: ComponentFixture<TokenizerWrapperComponent>;
+    let fixture: ComponentFixture<HostComponent>;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                TokenizerComponent,
-                TokenComponent,
-                TokenizerWrapperComponent,
-                FormControlComponent,
-                TokenizerInputDirective
-            ],
+            imports: [TokenModule],
+            declarations: [HostComponent, FormControlComponent],
             providers: [RtlService, ContentDensityService]
         }).compileComponents();
     }));
 
     beforeEach(async () => {
-        fixture = TestBed.createComponent(TokenizerWrapperComponent);
+        fixture = TestBed.createComponent(HostComponent);
         await whenStable(fixture);
 
         component = fixture.componentInstance.tokenizer;

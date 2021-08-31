@@ -47,8 +47,10 @@ export type SelectControlState = 'error' | 'success' | 'warning' | 'information'
 
 const SELECT_HEADER_IDENTIFIER = '.fd-list__group-header';
 
+export const SELECT_PANEL_MAX_HEIGHT = 250;
+
 /** The height of the select items in `rem` units. */
-export const SELECT_ITEM_HEIGHT_EM = 3;
+export const SELECT_ITEM_HEIGHT_EM = 4;
 
 /**
 * Event object that is emitted when selection is changed
@@ -484,6 +486,14 @@ export class SelectComponent implements
         if (this._controlElementRef) {
             (this._controlElementRef.nativeElement as HTMLElement).focus();
         }
+
+    }
+
+    /** Blurs select control. */
+    blur(): void {
+        if (this._controlElementRef) {
+            (this._controlElementRef.nativeElement as HTMLElement).blur();
+        }
     }
 
     /** @hidden */
@@ -604,16 +614,19 @@ export class SelectComponent implements
     */
     _getOptionScrollPosition(
         optionIndex: number,
-        optionHeight: number,
-        currentScrollPosition: number,
-        panelHeight: number
+        itemHeight: number,
+        currentScrollPosition: number
     ): number {
+        const offsetHeight = this._options.get(optionIndex)._getHtmlElement().offsetHeight;
+        const optionHeight = offsetHeight === 0 ? itemHeight : offsetHeight;
         const optionOffset = optionIndex * optionHeight;
         if (optionOffset < currentScrollPosition) {
             return optionOffset;
         }
-        if (optionOffset + optionHeight > currentScrollPosition + panelHeight) {
-            return Math.max(0, optionOffset - panelHeight + optionHeight);
+
+        if (optionOffset + optionHeight > currentScrollPosition + SELECT_PANEL_MAX_HEIGHT) {
+
+            return Math.max(0, optionOffset - SELECT_PANEL_MAX_HEIGHT + optionHeight);
         }
         return currentScrollPosition;
     }
@@ -769,7 +782,14 @@ export class SelectComponent implements
                 this.selectOptionsListTemplate,
                 SelectMobileComponent,
                 { container: this._elementRef.nativeElement },
-                { injector: Injector.create({ providers: [{ provide: SELECT_COMPONENT, useValue: this }] }) }
+                { 
+                    injector: Injector.create({
+                        providers: [
+                            { provide: SELECT_COMPONENT, useValue: this },
+                            { provide: RtlService, useValue: this._rtlService }
+                        ]
+                    })
+                }
             )
         }
     }

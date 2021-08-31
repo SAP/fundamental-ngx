@@ -1,15 +1,13 @@
-import { CommonModule } from '@angular/common';
-import { By } from '@angular/platform-browser';
-import { Component, ViewChild } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
 import { DynamicComponentService, FormModule, MenuKeyboardService, RtlService } from '@fundamental-ngx/core';
+import { DATA_PROVIDERS, DataProvider, FdpFormGroupModule, isOptionItem } from '@fundamental-ngx/platform';
 
-import { isOptionItem } from '../../../../domain/data-model';
-import { DATA_PROVIDERS, DataProvider } from '../../../../domain/data-source';
-import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
 import { ContentDensity } from '../../form-control';
 import { PlatformComboboxModule } from '../combobox.module';
 import { ComboboxSelectionChangeEvent } from '../commons/base-combobox';
@@ -73,7 +71,7 @@ describe('ComboboxComponent default values', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FdpFormGroupModule, FormModule, FormsModule, ReactiveFormsModule, CommonModule, PlatformComboboxModule],
-            declarations: [ComboboxStandardComponent, ComboboxComponent],
+            declarations: [ComboboxStandardComponent],
             providers: [
                 DynamicComponentService,
                 MenuKeyboardService,
@@ -131,8 +129,7 @@ describe('ComboboxComponent default values', () => {
         expect(toggleButton.length).toBe(0);
     });
 
-    // TODO: Unskip after fix
-    xit('should emit a onSelect event when click on a item', () => {
+    it('should emit a onSelect event when click on a item', () => {
         combobox.onPrimaryButtonClick(combobox.isOpen);
         fixture.detectChanges();
 

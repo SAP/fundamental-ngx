@@ -333,7 +333,7 @@ describe('SelectComponent', () => {
             triggerControl.dispatchEvent(keyboardEventWithModifier('keydown', ESCAPE));
             await wait(fixture);
 
-            expect(component._isOpen).toBeTruthy();
+            expect(component._isOpen).toBeFalse();
         });
 
         it('should not be selectabe if option is disabled so that when we' +

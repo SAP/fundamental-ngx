@@ -1,18 +1,21 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { TableModule } from '../table.module';
-import { TableCellDirective } from './table-cell.directive';
+
+import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
+import { TableCellDirective, TableModule } from '@fundamental-ngx/core/table';
 
 @Component({
     template: `
-            <td fd-table-cell>
-                <fd-checkbox></fd-checkbox>
-            </td>
-            <td fd-table-cell [key]="key">{{key}}</td>
+        <td fd-table-cell>
+            <fd-checkbox></fd-checkbox>
+        </td>
+        <td
+            fd-table-cell
+            [key]="key"
+        >{{key}}</td>
     `
 })
 class TestComponent {
-
     key = 'key1';
 
     @ViewChild(TableCellDirective)
@@ -26,11 +29,11 @@ describe('TableCellDirective', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [TestComponent],
-            imports: [TableModule]
+            imports: [TableModule, CheckboxModule]
         }).compileComponents();
     }));
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -42,8 +45,7 @@ describe('TableCellDirective', () => {
     });
 
     it('should assign classes', () => {
-
-        expect(component.cell.elementRef.nativeElement.classList.length).toBe(1);
+        expect(component.cell.elementRef.nativeElement.classList.length).toBe(2);
 
         component.cell.activable = true;
         component.cell.hoverable = true;
@@ -54,6 +56,6 @@ describe('TableCellDirective', () => {
 
         fixture.detectChanges();
 
-        expect(component.cell.elementRef.nativeElement.classList.length).toBe(7);
+        expect(component.cell.elementRef.nativeElement.classList.length).toBe(8);
     });
 });

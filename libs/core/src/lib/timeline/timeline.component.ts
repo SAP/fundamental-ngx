@@ -36,6 +36,9 @@ import { TimelineNodeDefDirective, TimelineNodeOutletContext } from './directive
 export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
 
+  /**
+   * Data array to render
+   */
   @Input()
   dataSource: T[] = [];
 

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogCloseButtonComponent } from './dialog-close-button.component';
+import { DialogCloseButtonComponent, DialogModule } from '@fundamental-ngx/core/dialog';
 
 describe('DialogCloseButtonComponent', () => {
   let component: DialogCloseButtonComponent;
@@ -8,7 +8,7 @@ describe('DialogCloseButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DialogCloseButtonComponent ]
+      imports: [ DialogModule ]
     })
     .compileComponents();
   });

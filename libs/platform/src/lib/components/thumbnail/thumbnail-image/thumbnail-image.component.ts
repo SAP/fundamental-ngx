@@ -1,5 +1,18 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnInit, ChangeDetectorRef } from '@angular/core';
-import { DialogService, RtlService } from '@fundamental-ngx/core';
+import {
+    Component,
+    Input,
+    Output,
+    EventEmitter,
+    OnChanges,
+    SimpleChanges,
+    OnInit,
+    ChangeDetectorRef,
+    Optional
+} from '@angular/core';
+
+import { DialogService } from '@fundamental-ngx/core/dialog';
+import { RtlService } from '@fundamental-ngx/core/utils';
+
 import { Media } from '../thumbnail.interfaces';
 import { ThumbnailDetailsComponent } from '../thumbnail-details/thumbnail-details.component';
 
@@ -9,7 +22,6 @@ import { ThumbnailDetailsComponent } from '../thumbnail-details/thumbnail-detail
     styleUrls: ['./thumbnail-image.component.scss']
 })
 export class ThumbnailImageComponent implements OnChanges, OnInit {
-
     /** media list obejct contains group of Media object.*/
     @Input()
     mediaList: Media[];
@@ -27,7 +39,11 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     thumbnailClicked: EventEmitter<Media> = new EventEmitter();
 
     /** @hidden */
-    constructor(protected _changeDetectorRef: ChangeDetectorRef, private _dialogService: DialogService, private _rtlService: RtlService) { }
+    constructor(
+        protected _changeDetectorRef: ChangeDetectorRef,
+        private _dialogService: DialogService,
+        @Optional() private _rtlService: RtlService
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -36,9 +52,8 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-
         if (changes.mediaList && Array.isArray(this.mediaList)) {
-            const alreadySelected: boolean = this.mediaList.some(image => image.selected);
+            const alreadySelected: boolean = this.mediaList.some((image) => image.selected);
             if (!alreadySelected) {
                 this.mediaList[0].selected = true;
             }
@@ -46,13 +61,10 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         this._changeDetectorRef.detectChanges();
     }
 
-
-
-
     /** Opens the Dialog when the imgaes croses the maximum number of images to display */
     openDialog(selectedMedia: Media, mediaList: Media[]): void {
-        this.mediaList.forEach(item => item.selected = false);
-        this.mediaList.forEach(item => item.overlayRequired = false);
+        this.mediaList.forEach((item) => (item.selected = false));
+        this.mediaList.forEach((item) => (item.overlayRequired = false));
         selectedMedia.selected = true;
         const dialogRef = this._dialogService.open(ThumbnailDetailsComponent, {
             backdropClickCloseable: false,
@@ -66,11 +78,9 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
         });
     }
 
-
-
     /** @hidden */
     thumbnailClick(selectedMedia: Media): void {
-        this.mediaList.forEach(item => item.selected = false);
+        this.mediaList.forEach((item) => (item.selected = false));
         selectedMedia.selected = true;
         this.thumbnailClicked.emit(selectedMedia);
     }
@@ -85,5 +95,4 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
             this.mediaList[this.maxImages - 1].overlayRequired = true;
         }
     }
-
 }

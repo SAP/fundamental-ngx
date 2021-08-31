@@ -1,5 +1,4 @@
-import { Directive, Input, TemplateRef, ViewChild } from '@angular/core';
-import { TimelineNodeComponent } from '../components/timeline-node/timeline-node.component';
+import { Directive, Input, TemplateRef } from '@angular/core';
 
 /** Context provided to the timeline node component. */
 export class TimelineNodeOutletContext<T> {
@@ -18,15 +17,14 @@ export class TimelineNodeOutletContext<T> {
 }
 
 @Directive({
-  selector: '[fdTimelineNodeDef]',
+  selector: '[fdTimelineNodeDef], [fd-timeline-node-def]',
 })
 export class TimelineNodeDefDirective<T> {
 
+  /** Data passed to the template*/
   @Input()
   fdTimelineNodeData: T;
 
-  @ViewChild(TimelineNodeComponent)
-  timelineNode: TimelineNodeComponent;
-
+  /** @hidden */
   constructor(public template: TemplateRef<any>) {}
 }
