@@ -26,7 +26,7 @@ export class UploadCollectionDescriptionDirective {}
 
 @Directive({
     // tslint:disable-next-line: directive-selector
-    selector: '[fd-upload-collection-text-separator]',
+    selector: '[fd-upload-collection-text-separator], fd-upload-collection-text-separator',
     host: { class: 'fd-upload-collection__text-separator' }
 })
 export class UploadCollectionTextSeparatorDirective {}

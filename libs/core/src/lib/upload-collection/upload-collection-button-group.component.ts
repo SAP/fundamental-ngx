@@ -50,6 +50,18 @@ export class UploadCollectionButtonGroupComponent {
     @Input()
     cancelText = 'Cancel';
 
+    /** Text for the 'Edit' aria-label. */
+    @Input()
+    editAriaLabel = 'Edit';
+
+    /** Text for the 'Delete' aria-label. */
+    @Input()
+    deleteAriaLabel = 'Delete';
+
+    /** Text for the 'Ok' aria-label. */
+    @Input()
+    okAriaLabel = 'Edit';
+
     /** @hidden */
     editButtonClicked(): void {
         this.editClicked.emit(true);

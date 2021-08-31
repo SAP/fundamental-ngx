@@ -4,11 +4,9 @@
  * Licensed under Apache License 2.0 (https://github.com/SAP/fundamental-styles/blob/main/LICENSE)
  */
 .fd-upload-collection .fd-upload-collection__item {
-    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }
 .fd-upload-collection__thumbnail {
-    -ms-flex-item-align: start;
     align-self: flex-start;
 }
 .fd-upload-collection__button-group {

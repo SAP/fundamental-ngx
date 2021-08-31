@@ -74,14 +74,14 @@ describe('UploadCollectionItemDirective', () => {
 
     it('should set the fileName and extension', () => {
         component.item.ngAfterContentInit();
-        expect(component.item.titleDirective.elRef.nativeElement.innerHTML).toEqual('File_Name.txt');
+        expect(component.item._titleDirective.elRef.nativeElement.innerHTML).toEqual('File_Name.txt');
     });
 
     it('should handle the delete button subscriptions', fakeAsync(() => {
         spyOn(component.item.deleteClicked, 'emit');
         component.item.ngAfterContentInit();
         tick(1);
-        component.item.buttonGroupComponent.deleteClicked.emit();
+        component.item._buttonGroupComponent.deleteClicked.emit();
         tick(1);
         fixture.detectChanges();
         expect(component.item.deleteClicked.emit).toHaveBeenCalled();
@@ -91,29 +91,29 @@ describe('UploadCollectionItemDirective', () => {
         spyOn(component.item.fileNameChanged, 'emit');
         component.item.ngAfterContentInit();
         tick(1);
-        component.item.formItemComponent.fileName = 'newName';
-        component.item.buttonGroupComponent.okClicked.emit();
+        component.item._formItemComponent.fileName = 'newName';
+        component.item._buttonGroupComponent.okClicked.emit();
         tick(1);
         fixture.detectChanges();
-        expect(component.item.titleDirective.elRef.nativeElement.style.display).toEqual('inline-block');
-        expect(component.item.titleDirective.elRef.nativeElement.innerHTML).toEqual('newName.txt');
+        expect(component.item._titleDirective.elRef.nativeElement.style.display).toEqual('inline-block');
+        expect(component.item._titleDirective.elRef.nativeElement.innerHTML).toEqual('newName.txt');
         expect(component.item.fileNameChanged.emit).toHaveBeenCalled();
         expect(component.item.fileName).toEqual('newName');
-        expect(component.item.formItemComponent.editMode).toBeFalse();
-        expect(component.item.buttonGroupComponent.editMode).toBeFalse();
+        expect(component.item._formItemComponent.editMode).toBeFalse();
+        expect(component.item._buttonGroupComponent.editMode).toBeFalse();
     }));
 
     it('should handle editClicked subscription', fakeAsync(() => {
         component.item.ngAfterContentInit();
         tick(1);
-        component.item.formItemComponent.fileName = 'newName';
-        component.item.formItemComponent.extension = 'jpg';
-        component.item.buttonGroupComponent.editClicked.emit(true);
+        component.item._formItemComponent.fileName = 'newName';
+        component.item._formItemComponent._extension = 'jpg';
+        component.item._buttonGroupComponent.editClicked.emit(true);
         tick(1);
         fixture.detectChanges();
-        expect(component.item.formItemComponent.editMode).toBeTruthy();
-        expect(component.item.titleDirective.elRef.nativeElement.style.display).toBe('none');
-        expect(component.item.formItemComponent.fileName).toEqual('File_Name');
-        expect(component.item.formItemComponent.extension).toEqual('txt');
+        expect(component.item._formItemComponent.editMode).toBeTruthy();
+        expect(component.item._titleDirective.elRef.nativeElement.style.display).toBe('none');
+        expect(component.item._formItemComponent.fileName).toEqual('File_Name');
+        expect(component.item._formItemComponent._extension).toEqual('txt');
     }));
 });

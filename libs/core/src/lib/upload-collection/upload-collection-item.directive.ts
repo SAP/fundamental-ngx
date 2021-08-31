@@ -23,19 +23,19 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
 
     /** @hidden */
     @ContentChild(UploadCollectionFormItemComponent)
-    formItemComponent: UploadCollectionFormItemComponent;
+    _formItemComponent: UploadCollectionFormItemComponent;
 
     /** @hidden */
     @ContentChild(UploadCollectionTitleDirective)
-    titleDirective: UploadCollectionTitleDirective;
+    _titleDirective: UploadCollectionTitleDirective;
 
     /** @hidden */
     @ContentChild(UploadCollectionButtonGroupComponent)
-    buttonGroupComponent: UploadCollectionButtonGroupComponent;
+    _buttonGroupComponent: UploadCollectionButtonGroupComponent;
 
     /** @hidden */
     @ContentChild(UploadCollectionTitleContainerDirective)
-    titleContainerDirective: UploadCollectionTitleContainerDirective;
+    _titleContainerDirective: UploadCollectionTitleContainerDirective;
 
     /** Event emitted when the user changes a file name. */
     @Output()
@@ -50,7 +50,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.titleDirective.elRef.nativeElement.innerHTML = this.fileName + '.' + this.extension;
+        this._titleDirective.elRef.nativeElement.innerHTML = this.fileName + '.' + this.extension;
         this._handleDeleteClickedSubscription();
         this._handleOkClickedSubscription();
         this._handleEditClickedSubscription();
@@ -64,13 +64,13 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
     /** @hidden */
     private _handleOkClickedSubscription(): void {
         this._subscriptions.add(
-            this.buttonGroupComponent.okClicked.subscribe(() => {
-                if (this.formItemComponent.fileName && this.formItemComponent.fileName !== '') {
-                    this.fileName = this.formItemComponent.fileName;
-                    this.titleDirective.elRef.nativeElement.style.display = 'inline-block';
-                    this.titleDirective.elRef.nativeElement.innerHTML = this.fileName + '.' + this.extension;
-                    this.formItemComponent.editMode = false;
-                    this.buttonGroupComponent.editMode = false;
+            this._buttonGroupComponent.okClicked.subscribe(() => {
+                if (this._formItemComponent.fileName && this._formItemComponent.fileName !== '') {
+                    this.fileName = this._formItemComponent.fileName;
+                    this._titleDirective.elRef.nativeElement.style.display = 'inline-block';
+                    this._titleDirective.elRef.nativeElement.innerHTML = this.fileName + '.' + this.extension;
+                    this._formItemComponent.editMode = false;
+                    this._buttonGroupComponent.editMode = false;
                     this.fileNameChanged.emit(this);
                 }
             })
@@ -80,20 +80,20 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
     /** @hidden */
     private _handleEditClickedSubscription(): void {
         this._subscriptions.add(
-            this.buttonGroupComponent.editClicked.subscribe((event) => {
-                this.formItemComponent.editMode = event;
-                this.titleContainerDirective.applyContainerClass = !event;
+            this._buttonGroupComponent.editClicked.subscribe((event) => {
+                this._formItemComponent.editMode = event;
+                this._titleContainerDirective.applyContainerClass = !event;
                 const styles = [];
-                styles.push(this.titleDirective.elRef.nativeElement.style);
-                this.titleContainerDirective?.objectMarkerComponents?.forEach((objectMarker) => {
+                styles.push(this._titleDirective.elRef.nativeElement.style);
+                this._titleContainerDirective?.objectMarkerComponents?.forEach((objectMarker) => {
                     styles.push(objectMarker.elementRef().nativeElement.style);
                 });
                 !!event
                     ? styles.forEach((style) => (style.display = 'none'))
                     : styles.forEach((style) => (style.display = 'inline-block'));
                 if (event) {
-                    this.formItemComponent.extension = this.extension;
-                    this.formItemComponent.fileName = this.fileName;
+                    this._formItemComponent._extension = this.extension;
+                    this._formItemComponent.fileName = this.fileName;
                 }
             })
         );
@@ -102,7 +102,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
     /** @hidden */
     private _handleDeleteClickedSubscription(): void {
         this._subscriptions.add(
-            this.buttonGroupComponent.deleteClicked.subscribe(() => {
+            this._buttonGroupComponent.deleteClicked.subscribe(() => {
                 this.deleteClicked.emit(this);
             })
         );

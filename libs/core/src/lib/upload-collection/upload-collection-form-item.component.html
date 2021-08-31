@@ -5,8 +5,8 @@
     style="pointer-events: all"
     class="fd-input"
     type="text"
-    placeholder="Filename"
+    [attr.placeholder]="placeholder"
     [(ngModel)]="fileName"
     [state]="!fileName ? 'error' : null"
 />
-<span *ngIf="editMode" class="fd-upload-collection__extension">.{{ extension }}</span>
+<span *ngIf="editMode" class="fd-upload-collection__extension">.{{ _extension }}</span>

@@ -5,7 +5,7 @@
     fd-button
     fdType="transparent"
     glyph="edit"
-    aria-label="edit"
+    [attr.aria-label]="editAriaLabel"
 ></button>
 <button
     *ngIf="!editMode && allowFileDeletion"
@@ -14,7 +14,7 @@
     fd-button
     fdType="transparent"
     glyph="decline"
-    aria-label="delete"
+    [attr.aria-label]="deleteAriaLabel"
 ></button>
 <button
     *ngIf="editMode"
@@ -22,7 +22,7 @@
     (click)="okButtonClicked()"
     fd-button
     fdType="transparent"
-    aria-label="ok"
+    [attr.aria-label]="okAriaLabel"
 >
     {{ okText }}
 </button>
