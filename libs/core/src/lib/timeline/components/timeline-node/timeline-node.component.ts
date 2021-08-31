@@ -1,5 +1,6 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { TimelineNodePosition } from '../../types';
+import { TimelinePositionControlService } from '../../services/timeline-position-control.service';
 
 @Component({
   selector: 'fd-timeline-node',
@@ -16,19 +17,29 @@ export class TimelineNodeComponent implements OnInit, OnDestroy {
 
   _position: TimelineNodePosition;
 
-  // constructor(
-  //     private _timelineNodeOutletDir: TimelineNodeOutletDirective
-  // ) {
-  // }
+  _cssClasses: string[];
+
+  constructor(
+      public el: ElementRef,
+      private _timelinePositionControl: TimelinePositionControlService
+  ) {
+  }
 
   ngOnInit(): void {
+    this._timelinePositionControl.registerNode(this);
   }
 
   ngOnDestroy(): void {
+    this._timelinePositionControl.removeNode(this);
   }
 
   setPosition(position: TimelineNodePosition): any {
     this._position = position;
+  }
+
+  setClasses(classes: string[]): void {
+    console.log(classes);
+    this._cssClasses = classes;
   }
 
 }

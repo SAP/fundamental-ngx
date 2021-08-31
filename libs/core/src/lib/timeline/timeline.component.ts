@@ -21,6 +21,8 @@ import { Subject } from 'rxjs';
 
 import { TimelineNodeOutletDirective } from './directives/timeline-node-outlet.directive';
 import { TimelineNodeDefDirective, TimelineNodeOutletContext } from './directives/timeline-node-def.directive';
+import { TimelinePositionControlService } from './services/timeline-position-control.service';
+import { TimelineAxis, TimeLinePositionStrategy, TimelineSidePosition } from './types';
 
 @Component({
   selector: 'fd-timeline',
@@ -28,6 +30,7 @@ import { TimelineNodeDefDirective, TimelineNodeOutletContext } from './directive
   styleUrls: ['./timeline.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [TimelinePositionControlService],
   host: {
     role: 'timeline',
     'arial-label': 'timeline'
@@ -52,13 +55,13 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
    * Axis for layout
    */
   @Input()
-  axis: 'vertical' | 'horizontal' = 'vertical';
+  axis: TimelineAxis = 'vertical';
 
   /**
    * Axis for layout
    */
   @Input()
-  layout: 'left' | 'right' | 'top' | 'bottom' | 'double-sided' = 'double-sided';
+  layout: TimelineSidePosition = 'double';
 
   /* Outlets within the timeline template where the dataNodes will be inserted. */
   /** @hidden */
@@ -79,7 +82,8 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
   /** @hidden */
   constructor(
       private _differs: IterableDiffers,
-      private _cd: ChangeDetectorRef
+      private _cd: ChangeDetectorRef,
+      private _timelinePositionControlService: TimelinePositionControlService,
   ) { }
 
   /** @hidden */
@@ -89,6 +93,9 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
 
   /** @hidden */
   ngOnChanges(changes: SimpleChanges): void {
+    if ('axis' in changes || 'layout' in changes) {
+      this._setPositionStrategy();
+    }
     if ('dataSource' in changes && !changes['dataSource'].firstChange) {
       const value = changes['dataSource'].currentValue;
       this.switchDataSource(value);
@@ -97,6 +104,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
 
   /** @hidden */
   ngAfterViewInit(): void {
+    this._setPositionStrategy();
     this.switchDataSource(this.dataSource);
   }
 
@@ -143,6 +151,11 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
     });
 
     this._cd.detectChanges();
+    this._timelinePositionControlService.calculatePositions();
+  }
+
+  private _setPositionStrategy(): void {
+    this._timelinePositionControlService.setStrategy(`${this.axis}-${this.layout}` as TimeLinePositionStrategy);
   }
 
   /**
