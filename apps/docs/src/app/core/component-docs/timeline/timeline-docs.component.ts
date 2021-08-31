@@ -14,18 +14,18 @@ export class TimelineDocsComponent {
         {
             language: 'html',
             code: timelineBasicExampleHtml,
-            fileName: 'timeline-basic-example'
+            name: 'timeline-basic-example.html'
         },
         {
             language: 'typescript',
             code: timelineBasicExampleTs,
-            fileName: 'fd-timeline-basic-example',
+            name: 'timeline-basic-example.ts',
             component: 'TimelineBasicExampleComponent'
         },
         {
             language: 'typescript',
             code: timelineBasicDataExampleTs,
-            fileName: 'fd-timeline-basic-data-example'
+            name: 'timeline-basic-data-example.ts'
         }
     ];
 }
