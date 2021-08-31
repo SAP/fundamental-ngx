@@ -89,6 +89,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/token', name: 'Token' },
             { url: 'core/toolbar', name: 'Toolbar' },
             { url: 'core/object-number', name: 'Object Number' },
+            { url: 'core/vertical-navigation', name: 'Vertical Navigation'},
             { url: 'core/wizard', name: 'Wizard' },
             { url: 'core/grid-list', name: 'Grid List' },
             { url: 'core/slider', name: 'Slider' }

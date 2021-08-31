@@ -126,7 +126,8 @@
         "core-message-toast",
         "core-multi-input",
         "core-wizard",
-        "core-tree"
+        "core-tree",
+        "core-vertical-navigation"
       ]
     },
     "platform": {
@@ -134,7 +135,7 @@
         "fdp"
       ],
       "implicitDependencies": ["core"]
-    }, 
+    },
     "moment-adapter": {
       "tags": [
         "fd"
@@ -910,6 +911,14 @@
         "core-utils",
         "core-popover",
         "core-menu"
+      ]
+    },
+    "core-vertical-navigation": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+
       ]
     }
   }

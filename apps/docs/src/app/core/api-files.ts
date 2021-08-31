@@ -383,4 +383,8 @@ export const API_FILES = {
         'ResizableCardLayoutComponent',
         'ResizableCardItemComponent'
     ],
+    verticalNavigation: [
+        'VerticalNavigationComponent',
+        'VerticalNavigationMainNavigationComponent'
+    ]
 };
