@@ -113,6 +113,10 @@ export class PopoverBodyComponent {
         private _renderer2: Renderer2
     ) {}
 
+    _getAdditionalClasses(): string {
+        return `${this._additionalBodyClass} ${this._angleClass}`;
+    }
+
     /** @hidden */
     _setArrowStyles(position: ConnectionPositionPair, rtl: 'rtl' | 'ltr'): void {
 

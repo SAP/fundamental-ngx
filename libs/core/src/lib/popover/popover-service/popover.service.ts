@@ -314,7 +314,7 @@ export class PopoverService extends BasePopoverClass {
             )
         ).subscribe(event => this._getPopoverBody()._setArrowStyles(event.connectionPair, this._getDirection()));
 
-        // non popover cases, like: combobox, multi-input etc.
+        // handle no arrow cases
         observer.pipe(
             filter(() => this.noArrow && !!this._getPopoverBody()),
             distinctUntilChanged((prev, current) => prev.connectionPair.overlayY === current.connectionPair.overlayY)
