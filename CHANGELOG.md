@@ -1,4 +1,18 @@
 
+## [0.32.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.29...v0.32.0-rc.0) (2021-08-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core,platform:** Table (core, platform) navigatable rows feature refactored, see documentation & breaking changes wiki.
+* [navigatable] input prop removed from core table
+* [navigationButton] input prop removed from platform table
+* setNavigatableRowState, setRowNavigationIndicator, setRowNavigationTarget methods removed from platform table
+
+### Bug Fixes
+
+* **core,platform:** table navigatable rows ([#6423](https://github.com/SAP/fundamental-ngx/issues/6423)) ([b541b9d](https://github.com/SAP/fundamental-ngx/commit/b541b9d85a8e6f850c3a2edd1ab6a84091d2bf72))
+
 ### [0.31.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.28...v0.31.1-rc.29) (2021-08-31)
 
 ### [0.31.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.27...v0.31.1-rc.28) (2021-08-31)
