@@ -1,6 +1,6 @@
 {
   "name": "fundamental-ngx",
-  "version": "0.31.1-rc.24",
+  "version": "0.31.1-rc.25",
   "license": "Apache-2.0",
   "main": "dist/libs/core/index.js",
   "description": "Fundamental Library for Angular is a themable Fiori 3 Angular component library.",
@@ -173,7 +173,7 @@
     "fs-extra": "9.1.0",
     "github-assistant": "0.3.3",
     "husky": "6.0.0",
-    "jasmine-core": "3.6.0",
+    "jasmine-core": "3.9.0",
     "jasmine-marbles": "0.8.1",
     "jasmine-spec-reporter": "6.0.0",
     "karma": "5.2.3",
