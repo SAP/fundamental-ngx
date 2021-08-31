@@ -26,7 +26,7 @@ import { TimelineAxis, TimeLinePositionStrategy, TimelineSidePosition } from './
 
 @Component({
   selector: 'fd-timeline',
-  template: `<ng-container fdTimelineNodeOutlet></ng-container>`,
+  template: `<div fdTimelineNodeOutlet></div>`,
   styleUrls: ['./timeline.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -152,6 +152,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
 
     this._cd.detectChanges();
     this._timelinePositionControlService.calculatePositions();
+    this._cd.detectChanges();
   }
 
   private _setPositionStrategy(): void {

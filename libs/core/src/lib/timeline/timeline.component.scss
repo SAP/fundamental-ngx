@@ -3,6 +3,11 @@
 // These styles will move to fundamental/styles
 $line-width: 1.5rem;
 
+fd-timeline {
+  position: relative;
+  display: block;
+}
+
 .fd-timeline__node-container {
   @include fd-set-position-left(0);
   position: absolute;
