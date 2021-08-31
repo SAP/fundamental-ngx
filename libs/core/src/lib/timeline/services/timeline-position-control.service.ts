@@ -1,11 +1,8 @@
 import { Injectable, NgZone } from '@angular/core';
 import { TimelineNodeComponent } from '../components/timeline-node/timeline-node.component';
 import { Subject } from 'rxjs';
-import { BaseStrategy } from './position-strategies/base-strategy';
 import { TimeLinePositionStrategy } from '../types';
-import { PositionStrategyFactory } from './position-strategies/position-strategy-factory';
 import { VerticalRightSideStrategy } from './position-strategies/vertical-right-side-strategy';
-import { take } from 'rxjs/operators';
 
 @Injectable()
 export class TimelinePositionControlService {
