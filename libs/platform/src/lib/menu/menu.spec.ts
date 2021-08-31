@@ -234,7 +234,7 @@ describe('Simple Menu', () => {
         const menuEl = overlayContainerEl.querySelector('.fd-menu');
 
         // check to see if first item is focused
-        const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
+        const items = overlayContainerEl.querySelectorAll('.fd-menu__link');
         expect(items[0]).toBe(document.activeElement);
 
         /**
@@ -278,7 +278,7 @@ describe('Simple Menu', () => {
         expect(menuEl.length).toBe(1);
 
         // check to see if first item is focused
-        const items = overlayContainerEl.querySelectorAll('.fd-menu__item');
+        const items = overlayContainerEl.querySelectorAll('.fd-menu__link');
         expect(items[0]).toBe(document.activeElement);
 
         /**

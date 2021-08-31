@@ -6,8 +6,8 @@
         [class.fd-menu--compact]="contentDensity === 'compact'"
         tabindex="0"
         role="menu"
-        (click)="onClick($event)"
-        (keydown)="onKeydown($event)"
+        (click)="_onClick($event)"
+        (keydown)="_onKeydown($event)"
     >
         <div class="fd-menu__list">
             <ng-content></ng-content>
