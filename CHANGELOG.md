@@ -1,4 +1,11 @@
 
+### [0.31.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.26...v0.31.1-rc.27) (2021-08-31)
+
+
+### Bug Fixes
+
+* **core:** fixing the accessibility for the dialog component ([#6297](https://github.com/SAP/fundamental-ngx/issues/6297)) ([1655868](https://github.com/SAP/fundamental-ngx/commit/165586850d1790f06e430fd8f1452e663608de52))
+
 ### [0.31.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.25...v0.31.1-rc.26) (2021-08-31)
 
 
