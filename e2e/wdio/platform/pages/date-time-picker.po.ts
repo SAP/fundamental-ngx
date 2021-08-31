@@ -27,6 +27,7 @@ export class DateTimePicker extends BaseComponentPo {
     calendarYearsSection = '.fd-calendar__content--years';
     calendarItem = 'td.fd-calendar__item';
     altCalendarItem = 'table td.fd-calendar__item';
+    currentMonthCalendarItem = '//td[not(contains(@class, \'fd-calendar__item--other-month\'))]';
 
     currentDay = '//*[contains(@class, "fd-calendar__item--current") or contains(@class, "is-active")]';
 
@@ -46,8 +47,8 @@ export class DateTimePicker extends BaseComponentPo {
     period = '//span[contains(text(), " PM ")]/parent::li';
 
     getCurrentDayIndex = (): number => {
-        for (let i = 0; i < this.altCalendarItem.length; i++) {
-            if (getElementClass(this.altCalendarItem, i).includes('current')) {
+        for (let i = 0; i < this.currentMonthCalendarItem.length; i++) {
+            if (getElementClass(this.currentMonthCalendarItem, i).includes('current')) {
                 return i;
             }
         }

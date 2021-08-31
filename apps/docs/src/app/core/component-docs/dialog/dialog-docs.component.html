@@ -230,12 +230,12 @@
 <ng-template let-dialog let-dialogConfig="dialogConfig" #playgroundDialog>
     <fd-dialog [dialogRef]="dialog" [dialogConfig]="dialogConfig">
         <fd-dialog-header>
-            <h1 fd-title>Playground Dialog</h1>
-            <button fd-dialog-close-button (click)="dialog.dismiss()"></button>
+            <h1 fd-title id="fd-dialog-header-11">Playground Dialog</h1>
+            <button fd-dialog-close-button (click)="dialog.dismiss()" title="close"></button>
         </fd-dialog-header>
 
         <fd-dialog-body>
-            This is the dialog playground body text!
+            <p id="fd-dialog-body-11" role="dialog">This is the dialog playground body text!</p>
         </fd-dialog-body>
 
         <fd-dialog-footer>
@@ -243,7 +243,8 @@
                     fdType="emphasized"
                     label="Close"
                     [compact]="true"
-                    (click)="dialog.close()">
+                    (click)="dialog.close()"
+                    ariaLabel="Close Emphasized">
             </fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>
