@@ -1,4 +1,11 @@
 
+### [0.31.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.25...v0.31.1-rc.26) (2021-08-31)
+
+
+### Bug Fixes
+
+* **core:** fix Pagination component a11y to announce currently chosen page ([#6196](https://github.com/SAP/fundamental-ngx/issues/6196)) ([26eb696](https://github.com/SAP/fundamental-ngx/commit/26eb69616883e8562effed5808bf360dda6dcd3c))
+
 ### [0.31.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.24...v0.31.1-rc.25) (2021-08-30)
 
 ### [0.31.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.22...v0.31.1-rc.24) (2021-08-30)
