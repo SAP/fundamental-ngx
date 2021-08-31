@@ -128,7 +128,9 @@ export class DialogDocsComponent {
             minHeight: '',
             maxHeight: '',
             minWidth: '',
-            maxWidth: ''
+            maxWidth: '',
+            ariaLabelledBy: 'fd-dialog-header-11',
+            ariaDescribedBy: 'fd-dialog-body-11',
         }
     };
 

@@ -41,7 +41,8 @@ export class ComponentBasedDialogExampleComponent {
             width: '400px',
             ariaLabelledBy: 'fd-dialog-header-1',
             ariaDescribedBy: 'fd-dialog-body-1',
-            responsivePadding: true
+            responsivePadding: true,
+            focusTrapped: true
         });
 
         dialogRef.afterClosed.subscribe(
