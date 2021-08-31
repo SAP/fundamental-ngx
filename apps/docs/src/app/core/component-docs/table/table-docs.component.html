@@ -165,13 +165,11 @@
 <separator></separator>
 
 <fd-docs-section-title id="with-row-unnavigatable" componentName="table">
-    Table with Non-navigatable Row
+    Table with navigatable rows
 </fd-docs-section-title>
 <description>
-    A row can be non-navigatable by setting the property <code>[navigatable]="false"</code>.<br><br>
-    If only some of the table rows are navigatable, you should indicate them with an arrow icon.<br>
-    To hide the arrow icon, leave out the <code>[glyph]</code> property, and set <code>[navigation]="false"</code> for the <code>fd-table-icon</code> directive.<br><br>
-    When a row uses button for navigation, the button will be disabled when the row becomes non-navigatable. <br><br> 
+    To represent that the row is navigatable put icon or button to the last column and set <code>[activable]</code> and <code>[hoverable]</code> properties of the row
+    Hide navigation icons for the non-navigatable rows. Disable navigation buttons for the non-navigatable rows.
     Upon navigation event, either the user is taken to a new page, or the event is handled by an implementation such as <code>(click)="myFunction()"</code>
 </description>
 <component-example>

@@ -445,12 +445,19 @@
     id="navigatable-row"
     componentName="table"
 >
-    Making row non-navigatable
+    Navigatable rows
 </fd-docs-section-title>
 <description>
-    Setting a row's <code>navigatable</code> property to <code>false</code> will make the row non-navigatable. When the row is non-navigatable, the row's navigation indicator will hide.<br>
-    To show navigation indicator on a navigatable row, set the row's <code>navigationIndicator</code> property to <code>true</code> and set the row's <code>navigationTarget</code> property to guide navigation.<br>
-    Using this feature requires `RouterModule` to be provided in the host application.
+    This example shows navigatable rows.
+
+    <ul>
+        <li>
+            Use <code>[rowNavigatable]="true"</code> input property on the table to make rows navigatable.
+            Pass boolean to change navigatable state for all rows.
+            Pass string with the field of the rows which will be used to calculate row's navigatable state.
+        </li>
+        <li>Event <code>(rowNavigate)</code> is emitted when row gets activated.</li>
+    </ul>
 </description>
 <component-example>
     <fdp-platform-table-navigatable-row-indicator-example></fdp-platform-table-navigatable-row-indicator-example>
