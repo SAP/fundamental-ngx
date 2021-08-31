@@ -22,7 +22,6 @@
 //         }
 //     }
 // }
-
 /*!
  * Fundamental Library Styles v0.20.0-rc.20
  * Copyright (c) 2021 SAP SE or an SAP affiliate company.
@@ -544,9 +543,36 @@
 .fd-nested-list--popover {
   border-bottom: none
 }
+.fd-nested-list--popover .fd-nested-list__popover-header {
+  border-top-left-radius: .25rem;
+  border-top-right-radius: .25rem;
+  height: 2.75rem;
+  background: #fff;
+  background: var(--sapList_GroupHeaderBackground,#fff);
+  border-bottom: .0625rem solid #d8d8d8;
+  border-bottom: var(--sapList_BorderWidth,.0625rem) solid var(--sapList_GroupHeaderBorderColor,#d8d8d8);
+  color: #32363a;
+  color: var(--sapList_GroupHeaderTextColor,#32363a);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  font-size: .875rem;
+  font-size: var(--sapFontSize,.875rem);
+  font-weight: 700;
+  line-height: 2rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
 .fd-nested-list--popover .fd-nested-list__group-header {
   border-top-left-radius: .25rem;
-  border-top-right-radius: .25rem
+  border-top-right-radius: .25rem;
+  border-bottom: none
 }
 .fd-nested-list--popover .fd-nested-list__item:first-child {
   border-top-left-radius: .25rem;

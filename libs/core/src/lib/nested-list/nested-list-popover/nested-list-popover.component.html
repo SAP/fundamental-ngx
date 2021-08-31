@@ -4,8 +4,8 @@
         <ng-content select="[fd-nested-list-content]"></ng-content>
     </fd-popover-control>
     <fd-popover-body class="fd-nested-list--text-only">
-        <div fd-nested-list [inPopover]="true">
-            <span class="fd-nested-list__group-header">{{title}}</span>
+        <div fd-nested-list class="fd-nested-list--popover">
+            <div class="fd-nested-list__popover-header">{{title}}</div>
         </div>
         <ng-content select="[fd-nested-list]"></ng-content>
         <ng-content select="fd-prepared-nested-list"></ng-content>
