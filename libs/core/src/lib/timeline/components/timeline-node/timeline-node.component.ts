@@ -15,4 +15,7 @@ export class TimelineNodeComponent {
     @Input()
     glyph: string;
 
+    /* Aria label value for internalization.*/
+    @Input()
+    ariaLabel = 'timelineitem';
 }
