@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, NgZone, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ViewportRuler } from '@angular/cdk/overlay';
@@ -33,6 +33,7 @@ export class ExtraButtonDirective implements AfterViewInit, OnDestroy {
     constructor(
         private _el: ElementRef,
         private _viewportRuler: ViewportRuler,
+        private _ngZone: NgZone,
     ) {
     }
 
@@ -40,7 +41,8 @@ export class ExtraButtonDirective implements AfterViewInit, OnDestroy {
     ngAfterViewInit(): void {
         this._viewportRuler.change(50)
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe(() => this.calculatePosition());
+            // ViewportRuler invoked out of zone, that is why I need to invoke function in zone
+            .subscribe(() => this._ngZone.run(() => this.calculatePosition()));
 
         this.calculatePosition();
     }

@@ -1,4 +1,15 @@
-import { AfterViewInit, ContentChildren, Directive, ElementRef, EventEmitter, Input, OnDestroy, Output, QueryList } from '@angular/core';
+import {
+    AfterViewInit,
+    ContentChildren,
+    Directive,
+    ElementRef,
+    EventEmitter,
+    Input,
+    NgZone,
+    OnDestroy,
+    Output,
+    QueryList
+} from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { OverflowListItemDirective } from './overflow-list-item.directive';
@@ -47,6 +58,7 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
     constructor(
         private _el: ElementRef,
         private _viewportRuler: ViewportRuler,
+        private _ngZone: NgZone,
     ) {
     }
 
@@ -54,7 +66,8 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
     ngAfterViewInit(): void {
         this._viewportRuler.change(50)
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe(() => this._calculateAmountOfOverflowedItems());
+            // ViewportRuler invoked out of zone, that is why I need to invoke function in zone
+            .subscribe(() => this._ngZone.run(() => this._calculateAmountOfOverflowedItems()));
 
         this._calculateAmountOfOverflowedItems();
     }
