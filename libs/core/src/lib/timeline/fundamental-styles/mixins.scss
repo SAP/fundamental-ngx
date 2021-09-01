@@ -79,6 +79,15 @@ $fd-namespace: fd !default;
   }
 }
 
+@mixin fd-set-position-right($right) {
+    right: $right;
+
+    @include fd-rtl() {
+        right: auto;
+        left: $right;
+    }
+}
+
 @mixin fd-set-padding-left($left: 0) {
   padding-left: $left;
 
@@ -86,6 +95,24 @@ $fd-namespace: fd !default;
     padding-right: $left;
     padding-left: 0;
   }
+}
+
+@mixin fd-set-padding-left($left: 0) {
+    padding-left: $left;
+
+    @include fd-rtl() {
+        padding-right: $left;
+        padding-left: 0;
+    }
+}
+
+@mixin fd-set-padding-right($right: 0) {
+    padding-right: $right;
+
+    @include fd-rtl() {
+        padding-right: 0;
+        padding-left: $right;
+    }
 }
 
 // These mixins ensure that all state selectors — ARIA, pseudos, `is` fallbacks — get applied properly.

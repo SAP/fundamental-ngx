@@ -3,11 +3,6 @@
 // These styles will move to fundamental/styles
 $line-width: 1.5rem;
 
-fd-timeline {
-  position: relative;
-  display: block;
-}
-
 .fd-timeline__node-container {
     @include fd-set-position-left(0);
     position: absolute;
@@ -37,14 +32,16 @@ fd-timeline {
 
 .fd-timeline__post {
     flex-grow: 1;
+    @include fd-set-margin-right(1rem);
+
+    &--left {
+        margin-right: 0;
+        @include fd-set-margin-left(1rem);
+    }
 }
 
 .fd-timeline__connecting-line:first-child {
     flex: 0 0 1rem;
-}
-
-.fd-timeline__post--left {
-    @include fd-set-margin-left(1rem);
 }
 
 .fd-timeline__node--icon {
@@ -55,4 +52,29 @@ fd-timeline {
             justify-content: center;
         }
     }
+}
+
+// New Styles
+
+fd-timeline {
+    position: relative;
+    display: block;
+}
+
+.fd-timeline__node-wrapper {
+    box-sizing: border-box;
+
+    &--left {
+        padding-left: 0;
+        @include fd-set-padding-right($line-width);
+
+        .fd-timeline__node-container {
+            left: auto;
+            @include fd-set-position-right(0);
+        }
+    }
+}
+
+.fd-timeline__node-container {
+    background: inherit;
 }
