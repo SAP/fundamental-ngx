@@ -2,9 +2,3 @@
 @import '~fundamental-styles/dist/checkbox';
 @import '~fundamental-styles/dist/layout-grid';
 @import '~fundamental-styles/dist/list-grid';
-
-// can be removed, once fd-toolbar css removed from ngx.
-// currently fd-toolbar.component.scss is overriding the behaviour.
-.fd-grid-list__highlight {
-    z-index: 1;
-}
