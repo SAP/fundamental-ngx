@@ -36,7 +36,7 @@ import { TimelineNodePositionControlDirective } from './directives/timeline-node
     imports: [
         CommonModule,
         IconModule,
-        TextModule,
+        TextModule
     ],
     exports: [
         TimelineComponent,
@@ -48,7 +48,7 @@ import { TimelineNodePositionControlDirective } from './directives/timeline-node
         TimelineNodeComponent,
         TimelineNodeHeaderInfoTitleDirective,
         TimelineNodeHeaderInfoTextDirective,
-        TimelineHeaderInfoSubTitleDirective,
+        TimelineHeaderInfoSubTitleDirective
     ]
 })
 export class TimelineModule {

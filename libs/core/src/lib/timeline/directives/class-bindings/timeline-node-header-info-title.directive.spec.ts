@@ -4,35 +4,35 @@ import { TimelineModule } from '@fundamental-ngx/core';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
 describe('TimelineNodeHeaderInfoTitleDirective', () => {
-  let component: TestComponent;
-  let fixture: ComponentFixture<TestComponent>;
+    let component: TestComponent;
+    let fixture: ComponentFixture<TestComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [TestComponent],
-      imports: [TimelineModule]
-    }).compileComponents();
-  }));
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent],
+            imports: [TimelineModule]
+        }).compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(TestComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create an instance', () => {
-    expect(component.ref.nativeElement).toBeTruthy();
-  });
+    it('should create an instance', () => {
+        expect(component.ref.nativeElement).toBeTruthy();
+    });
 
-  it('should assign class', () => {
-    expect(component.ref.nativeElement.className.includes('fd-timeline__post-header-title')).toBe(true);
-  });
+    it('should assign class', () => {
+        expect(component.ref.nativeElement.className.includes('fd-timeline__post-header-title')).toBe(true);
+    });
 });
 
 @Component({
-  template: `<span #directiveElement fdTimelineNodeHeaderInfoTitle>Notification Footer Content Test</span>`
+    template: `<span #directiveElement fdTimelineNodeHeaderInfoTitle>Notification Footer Content Test</span>`
 })
 class TestComponent {
-  @ViewChild('directiveElement')
-  ref: ElementRef;
+    @ViewChild('directiveElement')
+    ref: ElementRef;
 }
