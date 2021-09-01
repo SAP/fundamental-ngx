@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
 import { ElementChord, LinkPosition } from '../dnd-list/dnd-list.directive';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 export interface ElementPosition {
