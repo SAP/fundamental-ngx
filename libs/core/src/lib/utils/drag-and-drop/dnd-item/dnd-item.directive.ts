@@ -85,9 +85,6 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     private _replaceIndicator: HTMLElement;
 
     /** @hidden */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
-    /** @hidden */
     constructor(public elementRef: ElementRef, private _dragDrop: DragDrop) {}
 
     /** @hidden */
