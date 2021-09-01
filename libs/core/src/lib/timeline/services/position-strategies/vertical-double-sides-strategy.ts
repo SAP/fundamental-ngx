@@ -39,6 +39,7 @@ export class VerticalDoubleSidesStrategy extends BaseStrategy {
                 this.previousRightElBottom = el.offsetTop + el.offsetHeight;
             }
         });
+        this.fitLine(nodes);
     }
 
     private _initTopPosition(): number {
@@ -52,5 +53,18 @@ export class VerticalDoubleSidesStrategy extends BaseStrategy {
 
     private _convertRemToPixels(rem: number = 1): number {
         return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
+    }
+
+    private fitLine(nodes: TimelineNodeComponent[]): void {
+        let prev;
+        nodes.forEach((node, index) => {
+            const el = node.el.nativeElement;
+            if (prev) {
+                const height = el.offsetTop - prev.el.nativeElement.offsetTop - 10;
+                const result = height > 0 ? height : 0;
+                prev.lastLine.nativeElement.style.height = result + 'px';
+            }
+            prev = node;
+        });
     }
 }

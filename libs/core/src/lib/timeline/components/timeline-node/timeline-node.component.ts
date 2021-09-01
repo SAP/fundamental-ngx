@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TimelineNodePosition } from '../../types';
 import { TimelinePositionControlService } from '../../services/timeline-position-control.service';
 
@@ -14,6 +14,9 @@ export class TimelineNodeComponent implements OnInit, OnDestroy {
   /* Glyph of the current timeline node.*/
   @Input()
   glyph: string;
+
+  @ViewChild('lastLine')
+  lastLine: ElementRef;
 
   _position: TimelineNodePosition;
 
@@ -41,5 +44,4 @@ export class TimelineNodeComponent implements OnInit, OnDestroy {
     console.log(classes);
     this._cssClasses = classes;
   }
-
 }

@@ -3,7 +3,7 @@
     <div class="fd-timeline__node" [class.fd-timeline__node--icon]="!!glyph">
         <fd-icon *ngIf="glyph" [glyph]="glyph"></fd-icon>
     </div>
-    <div class="fd-timeline__connecting-line"></div>
+    <div #lastLine class="fd-timeline__connecting-line"></div>
 </div>
 <div [class]="_cssClasses" tabindex="0" role="timelineitem" aria-label="timelineitem" class="fd-timeline__post">
     <ng-content></ng-content>
