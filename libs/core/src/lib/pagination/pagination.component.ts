@@ -86,9 +86,6 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         return this._itemsPerPage;
     }
     set itemsPerPage(value: number) {
-        if (!this._initialItemsPerPage) {
-            this._initialItemsPerPage = value;
-        }
         value = Math.floor(coerceNumberProperty(value, DEFAULT_ITEMS_PER_PAGE));
         this._itemsPerPage = Math.min(value, this.totalItems);
     }
