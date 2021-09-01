@@ -18,13 +18,15 @@ import { NestedListStateService } from './nested-list-state.service';
 import { RouterModule } from '@angular/router';
 import { NestedListContentDirective } from './nested-content/nested-list-content.directive';
 import { IconModule } from '@fundamental-ngx/core/icon';
+import { BarModule } from '@fundamental-ngx/core/bar';
 
 @NgModule({
     imports: [
         CommonModule,
         PopoverModule,
         RouterModule,
-        IconModule
+        IconModule,
+        BarModule
     ],
     declarations: [
         NestedListDirective,
