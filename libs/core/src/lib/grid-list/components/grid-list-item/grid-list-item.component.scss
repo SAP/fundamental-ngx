@@ -1,13 +1,4 @@
 // these css are related to drag and drop
-@mixin fd-rtl {
-    @at-root {
-        [dir='rtl'] &,
-        &[dir='rtl'] {
-            @content;
-        }
-    }
-}
-
 @mixin grabbing-cursor {
     cursor: -webkit-grabbing;
     cursor: -moz-grabbing;
