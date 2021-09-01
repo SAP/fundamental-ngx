@@ -1,4 +1,31 @@
 
+## [0.32.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.32.0-rc.0...v0.32.0-rc.1) (2021-09-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core:** Added new directives for toolbar overflow as part of style cleanup fd-toolbar-overflow-button, fd-toolbar-overflow-button-menu
+
+Before
+Toolbar overflow button
+<button fd-toolbar-item fd-button label="Button" [compact]="true"></button>
+
+After
+Toolbar overflow button
+<button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button" [compact]="true"></button>
+
+Before
+Toolbar overflow menu button
+<button fd-toolbar-item fd-button label="Button" [fdMenu]="true" [compact]="true"></button>
+
+After
+Toolbar overflow menu button
+<button fd-toolbar-item fd-button fd-toolbar-overflow-button fd-toolbar-overflow-button-menu label="Button" [fdMenu]="true" [compact]="true"></button>
+
+### Bug Fixes
+
+* **core:** remove hardcoded style from ngx for toolbar component ([#6396](https://github.com/SAP/fundamental-ngx/issues/6396)) ([68ae34a](https://github.com/SAP/fundamental-ngx/commit/68ae34adc2407cffb4b569d602fcba8a781d80fc))
+
 ## [0.32.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.29...v0.32.0-rc.0) (2021-08-31)
 
 
