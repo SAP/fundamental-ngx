@@ -252,8 +252,6 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
             this.currentPage = changes.currentPage.currentValue;
         }
 
-        this._refreshPages();
-
         const pagination = this.getPaginationObject();
         const totalPages = this.paginationService.getTotalPages(pagination);
         if (!this.currentPage || this.currentPage < 1) {
@@ -261,6 +259,8 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         } else if (this.currentPage > totalPages) {
             this.currentPage = totalPages;
         }
+
+        this._refreshPages();
     }
 
     /** @hidden */
