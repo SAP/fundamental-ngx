@@ -1,5 +1,5 @@
 <ng-container *ngIf="isExtraItemsMode">
-    <fd-popover [focusAutoCapture]="true" [focusTrapped]="true" #popover>
+    <fd-popover placement="bottom-end" [focusAutoCapture]="true" [focusTrapped]="true" #popover>
         <fd-popover-control>
             <button class="fd-icon-tab-bar__overflow">
                 <span class="fd-icon-tab-bar__overflow-text">More</span>
@@ -49,7 +49,7 @@
 </ng-container>
 
 <ng-container *ngIf="!isExtraItemsMode && parentTab">
-    <fd-popover [focusAutoCapture]="true" [focusTrapped]="true" #popover>
+    <fd-popover placement="bottom-end" [focusAutoCapture]="true" [focusTrapped]="true" #popover>
         <fd-popover-control>
             <a
                 aria-selected="false"
