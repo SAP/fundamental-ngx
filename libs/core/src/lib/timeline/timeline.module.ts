@@ -29,12 +29,12 @@ import { TimelineHeaderInfoSubTitleDirective } from './directives/class-bindings
         TimelineNodeComponent,
         TimelineNodeHeaderInfoTitleDirective,
         TimelineNodeHeaderInfoTextDirective,
-        TimelineHeaderInfoSubTitleDirective,
+        TimelineHeaderInfoSubTitleDirective
     ],
     imports: [
         CommonModule,
         IconModule,
-        TextModule,
+        TextModule
     ],
     exports: [
         TimelineComponent,
@@ -46,7 +46,7 @@ import { TimelineHeaderInfoSubTitleDirective } from './directives/class-bindings
         TimelineNodeComponent,
         TimelineNodeHeaderInfoTitleDirective,
         TimelineNodeHeaderInfoTextDirective,
-        TimelineHeaderInfoSubTitleDirective,
+        TimelineHeaderInfoSubTitleDirective
     ]
 })
 export class TimelineModule {

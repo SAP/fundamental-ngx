@@ -137,7 +137,7 @@ class TimelineTestAppWithTrackBy extends TimelineTestApp {
 
     enableTrackBy = false;
 
-    trackBy (index: number, item: any): string {
+    trackBy(index: number, item: any): string {
         return item.title;
     };
 }
