@@ -19,7 +19,7 @@ export class DialogInnerPopoverComponent {
             data: {
                 title: `Pineapple Fun Facts`,
                 firstOptions: [
-                        { name: 'Photo Voltaic', icon: 'photo-voltaic' },
+                    { name: 'Photo Voltaic', icon: 'photo-voltaic' },
                     { name: 'Settings', icon: 'settings' },
                     { name: 'Heating Cooling', icon: 'heating-cooling' },
                     { name: 'Competitor', icon: 'competitor' },
@@ -69,7 +69,7 @@ export class DialogInnerPopoverComponent {
             </fd-dialog-header>
 
             <fd-dialog-body>
-                <div id="fd-dialog-body-1" role="document">
+                <div id="fd-dialog-body-1" role="listbox">
                     <fd-multi-input
                         [dropdownValues]="firstOptions"
                         placeholder="Search here..."
@@ -91,14 +91,16 @@ export class DialogInnerPopoverComponent {
                         label="Interesting"
                         fdType="emphasized"
                         [compact]="true"
-                        (click)="this.dialogRef.close('Interesting')">
+                        (click)="dialogRef.close('Interesting')"
+                        ariaLabel="Interesting Emphasized">
                 </fd-button-bar>
                 <fd-button-bar
                         label="Cancel"
                         fdInitialFocus
                         fdType="transparent"
                         [compact]="true"
-                        (click)="this.dialogRef.dismiss('Cancel')">
+                        (click)="dialogRef.dismiss('Cancel')"
+                        ariaLabel="Cancel">
                 </fd-button-bar>
             </fd-dialog-footer>
         </fd-dialog>

@@ -22,6 +22,18 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
         scrollbar-width: none;
     }
 
+    @mixin fdp-table-focus() {
+        &:focus {
+            outline-offset: -0.1875rem;
+            outline-width: 0.0625rem;
+            outline-width: var(--sapContent_FocusWidth, 0.0625rem);
+            outline-color: #000;
+            outline-color: var(--sapContent_FocusColor, #000);
+            outline-style: dotted;
+            outline-style: var(--sapContent_FocusStyle, dotted);
+        }
+    }
+
     @mixin fd-table-nested-cell-padding($levels: 0, $content-density-cozy: false, $include-expand: false) {
         $initial-padding: 1.5rem;
         $level-padding: 0.5rem;
@@ -75,14 +87,9 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
         border-spacing: 0;
     }
 
-    .fd-table__body:focus {
-        outline-offset: -0.1875rem;
-        outline-width: 0.0625rem;
-        outline-width: var(--sapContent_FocusWidth, 0.0625rem);
-        outline-color: #000;
-        outline-color: var(--sapContent_FocusColor, #000);
-        outline-style: dotted;
-        outline-style: var(--sapContent_FocusStyle, dotted);
+    .fd-table__body,
+    .fd-table__row {
+        @include fdp-table-focus();
     }
 
     .fd-table__body,
@@ -137,13 +144,7 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
 
         /** Temporary style for navigation indicator until column width can fit content */
         .fdp-table__navigation-indicator {
-            justify-content: flex-end;
-            padding-right: 5px;
-
-            [dir='rtl'] & {
-                padding-left: 5px;
-                padding-right: 0;
-            }
+            margin: auto;
         }
     }
 
