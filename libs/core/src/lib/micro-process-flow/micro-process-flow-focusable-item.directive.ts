@@ -1,5 +1,4 @@
-import { Directive, ElementRef, Host, HostListener, Inject, OnInit, Optional, SkipSelf } from '@angular/core';
-import { MicroProcessFlowComponent } from './components/micro-process-flow/micro-process-flow.component';
+import { Directive, ElementRef, HostListener, Inject, OnInit, Optional } from '@angular/core';
 import { MicroProcessFlowComponentInterface, MICRO_PROCESS_FLOW } from './injection-tokens';
 
 @Directive({
