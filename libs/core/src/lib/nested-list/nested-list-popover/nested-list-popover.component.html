@@ -3,12 +3,10 @@
         <ng-content select="[fd-nested-list-link]"></ng-content>
         <ng-content select="[fd-nested-list-content]"></ng-content>
     </fd-popover-control>
-    <fd-popover-body>
-        <div fd-popover-body-header>
-            <div fd-bar>
-                <div fd-bar-left>
-                    <fd-bar-element>{{title}}</fd-bar-element>
-                </div>
+    <fd-popover-body class="fd-nested-list--text-only">
+        <div class="fd-nested-list fd-nested-list--popover">
+            <div class="fd-nested-list__popover-header">
+                <span class="fd-nested-list__title">{{title}}</span>
             </div>
         </div>
         <ng-content select="[fd-nested-list]"></ng-content>
