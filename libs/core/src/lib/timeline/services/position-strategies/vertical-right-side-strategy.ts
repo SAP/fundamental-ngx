@@ -10,7 +10,11 @@ export class VerticalRightSideStrategy extends BaseStrategy {
 
     calculatePosition(nodes: TimelineNodeComponent[]): void {
         nodes.forEach(node => {
-            node.setClasses(['fd-timeline__post--right']);
+            const el = node.el.nativeElement;
+            const dotPosition = el.offsetTop + this.arrowOffset;
+            node.lastLine.nativeElement.style.height = el.offsetHeight + el.offsetTop - dotPosition + 'px';
+
+            node.setClasses(['fd-timeline__post--left']);
         })
     }
 }

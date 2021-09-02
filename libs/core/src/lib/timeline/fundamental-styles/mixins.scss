@@ -318,3 +318,8 @@ $fd-namespace: fd !default;
   margin-top: $value;
   margin-bottom: $value;
 }
+
+@mixin fd-set-margins-x-equal($value: 0) {
+    margin-left: $value;
+    margin-right: $value;
+}

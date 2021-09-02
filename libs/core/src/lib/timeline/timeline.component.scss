@@ -10,10 +10,94 @@ $line-width: 1.5rem;
     width: $line-width;
 }
 
+.fd-timeline__post {
+    flex-grow: 1;
+    @include fd-set-margin-left(1rem);
+
+    @include fd-after() {
+        @include fd-timeline-arrow-rotate(225deg);
+
+        top: $fd-timeline-arrow-offset;
+        left: $fd-timeline-post-arrow-offset;
+    }
+
+    @include fd-after-rtl() {
+        @include fd-timeline-arrow-rotate(45deg);
+
+        left: auto;
+        right: $fd-timeline-post-arrow-offset;
+    }
+}
+
 .fd-timeline__node-wrapper {
     @include fd-flex();
     @include fd-set-padding-left($line-width);
     position: relative;
+    box-sizing: border-box;
+
+    &--left {
+        padding-left: 0;
+        @include fd-set-padding-right($line-width);
+
+        .fd-timeline__post {
+            margin-left: 0;
+            @include fd-set-margin-right(1rem);
+
+            @include fd-after() {
+                @include fd-timeline-arrow-rotate(45deg);
+
+                top: $fd-timeline-arrow-offset;
+                right: $fd-timeline-post-arrow-offset;
+            }
+
+            @include fd-rtl() {
+                &::after {
+                    @include fd-timeline-arrow-rotate(225deg);
+
+                    right: auto;
+                    left: $fd-timeline-post-arrow-offset;
+                }
+            }
+        }
+
+        .fd-timeline__node-container {
+            left: auto;
+            @include fd-set-position-right(0);
+        }
+    }
+
+    &--left {
+        padding-left: 0;
+        @include fd-set-padding-right($line-width);
+
+        .fd-timeline__post {
+            margin-left: 0;
+            @include fd-set-margin-right(1rem);
+
+            @include fd-after() {
+                @include fd-timeline-arrow-rotate(45deg);
+
+                top: $fd-timeline-arrow-offset;
+                right: $fd-timeline-post-arrow-offset;
+                left: auto;;
+                bottom: auto;
+            }
+
+            @include fd-rtl() {
+                &::after {
+                    @include fd-timeline-arrow-rotate(225deg);
+
+                    right: auto;
+                    left: $fd-timeline-post-arrow-offset;
+                }
+            }
+        }
+
+        .fd-timeline__node-container {
+            left: auto;
+            @include fd-set-position-right(0);
+        }
+    }
 }
 
 .fd-timeline__node-wrapper:last-child {
@@ -28,20 +112,6 @@ $line-width: 1.5rem;
 
 .fd-timeline__post-header-title {
     margin-right: 0.3rem;
-}
-
-.fd-timeline__post {
-    flex-grow: 1;
-    @include fd-set-margin-right(1rem);
-
-    &--left {
-        margin-right: 0;
-        @include fd-set-margin-left(1rem);
-    }
-}
-
-.fd-timeline__connecting-line:first-child {
-    flex: 0 0 1rem;
 }
 
 .fd-timeline__node--icon {
@@ -59,22 +129,4 @@ $line-width: 1.5rem;
 fd-timeline {
     position: relative;
     display: block;
-}
-
-.fd-timeline__node-wrapper {
-    box-sizing: border-box;
-
-    &--left {
-        padding-left: 0;
-        @include fd-set-padding-right($line-width);
-
-        .fd-timeline__node-container {
-            left: auto;
-            @include fd-set-position-right(0);
-        }
-    }
-}
-
-.fd-timeline__node-container {
-    background: inherit;
 }

@@ -8,11 +8,9 @@ export class VerticalDoubleSidesStrategy extends BaseStrategy {
     previousLeftElBottom = 0;
     previousRightElBottom = 0;
 
-    arrowOffset: number;
 
     constructor() {
         super();
-        this.arrowOffset = this._convertRemToPixels();
     }
 
     getCoords(): TimelineNodePosition {
@@ -30,7 +28,6 @@ export class VerticalDoubleSidesStrategy extends BaseStrategy {
                 this.previousLeftElTop = el.offsetTop;
                 this.previousLeftElBottom = el.offsetTop + el.offsetHeight;
                 el.classList.add('fd-timeline__node-wrapper--left');
-                node.setClasses(['fd-timeline__post--right']);
             } else {
                 el.style.position = 'absolute';
                 el.style.left = (parentWidth / 2 - lineWidth) + 'px';
@@ -51,20 +48,21 @@ export class VerticalDoubleSidesStrategy extends BaseStrategy {
         }
     }
 
-    private _convertRemToPixels(rem: number = 1): number {
-        return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
-    }
-
     private fitLine(nodes: TimelineNodeComponent[]): void {
         let prev;
         nodes.forEach((node, index) => {
             const el = node.el.nativeElement;
-            if (prev) {
-                const height = el.offsetTop - prev.el.nativeElement.offsetTop - 10;
+            if (index % 2 === 0) {
+                prev = node;
+            } else {
+                const height = el.offsetTop - prev.el.nativeElement.offsetTop;
                 const result = height > 0 ? height : 0;
                 prev.lastLine.nativeElement.style.height = result + 'px';
+                prev.lastLine.nativeElement.style.opacity = '0';
+
+                const dotPosition = el.offsetTop + this.arrowOffset;
+                node.lastLine.nativeElement.style.height = prev.el.nativeElement.offsetTop + prev.el.nativeElement.offsetHeight - dotPosition + 'px';
             }
-            prev = node;
         });
     }
 }

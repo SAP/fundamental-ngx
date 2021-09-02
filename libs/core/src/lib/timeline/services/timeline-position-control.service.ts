@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { TimeLinePositionStrategy } from '../types';
 import { VerticalRightSideStrategy } from './position-strategies/vertical-right-side-strategy';
 import { VerticalDoubleSidesStrategy } from './position-strategies/vertical-double-sides-strategy';
+import { VerticalLeftSideStrategy } from './position-strategies/vertical-left-side-strategy';
 
 @Injectable()
 export class TimelinePositionControlService {
@@ -15,7 +16,9 @@ export class TimelinePositionControlService {
   private readonly _destroyed = new Subject<void>();
 
   // private _positionStrategy: BaseStrategy;
-  private _positionStrategy: VerticalDoubleSidesStrategy;
+  private _positionStrategy: VerticalRightSideStrategy;
+  // private _positionStrategy: VerticalLeftSideStrategy;
+  // private _positionStrategy: VerticalDoubleSidesStrategy;
 
   constructor(
       private _ngZone: NgZone,
@@ -26,7 +29,9 @@ export class TimelinePositionControlService {
   }
 
   setStrategy(strategy: TimeLinePositionStrategy): void {
-    this._positionStrategy = new VerticalDoubleSidesStrategy();
+    // this._positionStrategy = new VerticalDoubleSidesStrategy();
+    this._positionStrategy = new VerticalRightSideStrategy();
+    // this._positionStrategy = new VerticalLeftSideStrategy();
     // this._positionStrategy = PositionStrategyFactory.getStrategy(strategy);
   }
 

@@ -1,4 +1,4 @@
-<fd-timeline [dataSource]="data">
+<fd-timeline *ngIf="canShowComponent" [dataSource]="data">
 
     <fd-timeline-node *fdTimelineNodeDef="let node">
 
