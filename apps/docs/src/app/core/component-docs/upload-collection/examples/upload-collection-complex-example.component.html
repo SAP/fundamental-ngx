@@ -16,11 +16,12 @@
         [(ngModel)]="uploaderFiles"
     >
     </fd-file-uploader>
-    <button fd-button compact="true" (click)="alert('Download button clicked')">Download</button>
-    <button fd-button compact="true" [disabled]="noFilesSelected()" (click)="alert('Download multiple button clicked')">
-        Download Multiple
+    <button fd-button compact="true" [disabled]="getFilesSelected() === 0" (click)="alert('Download button clicked')">
+        Download
     </button>
-    <button fd-button compact="true" [disabled]="noFilesSelected()" (click)="deleteMultiple()">Delete Multiple</button>
+    <button fd-button compact="true" [disabled]="getFilesSelected() < 2" (click)="deleteMultiple()">
+        Delete Multiple
+    </button>
 </fd-toolbar>
 
 <fd-upload-collection [selection]="true">
@@ -82,7 +83,7 @@
     </li>
 </fd-upload-collection>
 
-<fd-message-page glyph="attachment" *ngIf="!files.length">
+<fd-message-page glyph="attachment" *ngIf="!files.length" style="margin-top: 30px">
     <fd-message-page-title>No files found. </fd-message-page-title>
     <fd-message-page-subtitle> Use the "Upload" button to upload files. </fd-message-page-subtitle>
 </fd-message-page>

@@ -37,16 +37,18 @@ export class UploadCollectionComplexExampleComponent {
     }
 
     selectedFilesChanged(newFiles: File[]): void {
-        newFiles.forEach((file) => {
-            this.files.push({
-                fileName: file.name.split('.')[0],
-                extension: file.name.split('.')[1],
-                icon: 'attachment',
-                selected: false
+        if (newFiles && newFiles.length) {
+            newFiles.forEach((file) => {
+                this.files.push({
+                    fileName: file.name.split('.')[0],
+                    extension: file.name.split('.')[1],
+                    icon: 'attachment',
+                    selected: false
+                });
             });
-        });
-        this.uploaderFiles = [];
-        this.fileUploader.validFiles = [];
+            this.uploaderFiles = [];
+            this.fileUploader.selectHandler([]);
+        }
     }
 
     openDeleteDialog(event: UploadCollectionItemDirective, file: any, dialog: TemplateRef<any>): void {
@@ -75,13 +77,13 @@ export class UploadCollectionComplexExampleComponent {
         this.files = this.files.filter((file) => file.selected === false);
     }
 
-    noFilesSelected(): boolean {
-        let foundSelected = false;
+    getFilesSelected(): number {
+        let foundSelected = 0;
         this.files.forEach((file) => {
             if (file.selected) {
-                foundSelected = true;
+                foundSelected++;
             }
         });
-        return !foundSelected;
+        return foundSelected;
     }
 }
