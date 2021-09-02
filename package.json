@@ -131,7 +131,7 @@
     "npm": "6.14.13",
     "raw-loader": "4.0.2",
     "rxjs": "~6.6.6",
-    "tslib": "2.3.0",
+    "tslib": "2.3.1",
     "web-animations-js": "2.3.2",
     "webdriver-manager": "12.1.7",
     "zone.js": "0.11.4"
