@@ -5,7 +5,7 @@
     Individual upload collection items emit events when the user performs an action such as deletion or file renaming.
     It is the responsibility of the application developer to handle these events properly. These examples simply throw
     an alert when the user performs an action. See the <code>fd-upload-collection-item</code> API documentation for
-    specific information about these events.
+    specific information about these events. <br /><br />
 </description>
 
 <component-example>
@@ -39,6 +39,17 @@
     <fd-upload-collection-custom-example></fd-upload-collection-custom-example>
 </component-example>
 <code-example [exampleFiles]="uploadCollectionCustom"></code-example>
+
+<h2>Upload Collection - Complex Example</h2>
+<description>
+    The upload collection can be used along with a variety of other components such as the file uploader, toolbar,
+    dialog, button, search input, sorting/filtering functionality etc. to facilitate a smooth user experience. Here in
+    this example we have added selection and the ability to upload files, or delete multiple files at a time.
+</description>
+<component-example>
+    <fd-upload-collection-custom-example></fd-upload-collection-custom-example>
+</component-example>
+<code-example [exampleFiles]="uploadCollectionComplex"></code-example>
 
 <separator></separator>
 

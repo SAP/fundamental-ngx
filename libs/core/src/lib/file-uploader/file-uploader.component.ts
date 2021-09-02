@@ -125,6 +125,10 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     @Input()
     fileLimit: number;
 
+    /** Whether or not to hide the input, leaving only the upload/browse button. */
+    @Input()
+    inputHidden = false;
+
     /*** It stores the valid files  */
     validFiles: File[] = [];
 

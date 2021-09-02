@@ -26,6 +26,12 @@
 >
     {{ okText }}
 </button>
-<button *ngIf="editMode" (click)="cancelButtonClicked()" fd-button fdType="transparent" aria-label="cancel">
+<button
+    *ngIf="editMode"
+    (click)="cancelButtonClicked()"
+    fd-button
+    fdType="transparent"
+    [attr.aria-label]="cancelAriaLabel"
+>
     {{ cancelText }}
 </button>

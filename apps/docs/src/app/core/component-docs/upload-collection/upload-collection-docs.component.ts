@@ -6,6 +6,8 @@ import * as uploadCollectionSmallHtml from '!raw-loader!./examples/upload-collec
 import * as uploadCollectionSmallTs from '!raw-loader!./examples/upload-collection-small-example.component.ts';
 import * as uploadCollectionCustomHtml from '!raw-loader!./examples/upload-collection-custom-example.component.html';
 import * as uploadCollectionCustomTs from '!raw-loader!./examples/upload-collection-custom-example.component.ts';
+import * as uploadCollectionComplexHtml from '!raw-loader!./examples/upload-collection-complex-example.component.html';
+import * as uploadCollectionComplexTs from '!raw-loader!./examples/upload-collection-complex-example.component.ts';
 import * as uploadCollectionEmptyHtml from '!raw-loader!./examples/upload-collection-empty-example.component.html';
 import * as uploadCollectionEmptyTs from '!raw-loader!./examples/upload-collection-empty-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
@@ -58,6 +60,21 @@ export class UploadCollectionDocsComponent {
             code: uploadCollectionCustomTs,
             fileName: 'upload-collection-custom-example',
             component: 'UploadCollectionCustomExampleComponent'
+        }
+    ];
+    uploadCollectionComplex: ExampleFile[] = [
+        {
+            language: 'html',
+            code: uploadCollectionComplexHtml,
+            typescriptFileCode: uploadCollectionComplexTs,
+            fileName: 'upload-collection-complex-example',
+            component: 'UploadCollectionComplexExampleComponent'
+        },
+        {
+            language: 'TypeScript',
+            code: uploadCollectionComplexTs,
+            fileName: 'upload-collection-complex-example',
+            component: 'UploadCollectionComplexExampleComponent'
         }
     ];
     uploadCollectionEmpty: ExampleFile[] = [
