@@ -8,3 +8,5 @@ export * from './toolbar-form-label.directive';
 export * from './toolbar-overflow-priority.directive';
 export * from './toolbar-form-label.directive';
 export * from './toolbar-overflow-group.directive'
+export * from './toolbar-overflow-button.directive';
+export * from './toolbar-overflow-button-menu.directive';

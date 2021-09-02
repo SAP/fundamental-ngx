@@ -11,8 +11,8 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { TableCellDirective } from './table-cell.directive';
 import { TableService } from '../table.service';
+import { TableCellDirective } from './table-cell.directive';
 
 export const HIDDEN_CLASS_NAME = 'fd-table-hidden';
 
@@ -33,26 +33,12 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     /** Whether or not the table row is activable */
     @HostBinding('class.fd-table__row--activable')
     @Input()
-    set activable(val: boolean) {
-        if (this.navigatable) {
-            this._activable = val;
-        }
-    }
-    get activable(): boolean {
-        return this._activable;
-    }
+    activable = false;
 
     /** Whether or not the table row is hoverable */
     @HostBinding('class.fd-table__row--hoverable')
     @Input()
-    set hoverable(val: boolean) {
-        if (this.navigatable) {
-            this._hoverable = val;
-        }
-    }
-    get hoverable(): boolean {
-        return this._hoverable;
-    }
+    hoverable = false;
 
     /** Whether or not the table row is focusable */
     @HostBinding('class.fd-table__row--focusable')
@@ -68,31 +54,6 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     @HostBinding('class.fd-table__row--secondary')
     @Input()
     secondary = false;
-
-    /** Whether or not the table row is navigatable */
-    @Input()
-    set navigatable(val: boolean) {
-        this._navigatable = val;
-
-        if (!val) {
-            this._hoverable = false;
-            this._activable = false;
-        }
-
-        this._changeDetRef.markForCheck();
-    }
-    get navigatable(): boolean {
-        return this._navigatable;
-    }
-
-     /** @hidden */
-     private _activable = false;
-
-     /** @hidden */
-     private _hoverable = false;
-
-     /** @hidden */
-     private _navigatable = true;
 
     /** @hidden */
     propagateKeysSubscription: Subscription;

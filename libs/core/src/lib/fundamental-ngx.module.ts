@@ -82,7 +82,8 @@ import { WizardModule } from '@fundamental-ngx/core/wizard';
 import { SplitButtonModule } from '@fundamental-ngx/core/split-button';
 import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 import { MessagePageModule } from '@fundamental-ngx/core/message-page';
-import { MicroProcessFlowModule } from './micro-process-flow';
+import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
+import { TimelineModule } from '@fundamental-ngx/core/timeline';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -178,7 +179,8 @@ import { MicroProcessFlowModule } from './micro-process-flow';
         GridListModule,
         ResizableCardLayoutModule,
         MessagePageModule,
-        MicroProcessFlowModule
+        MicroProcessFlowModule,
+        TimelineModule,
     ],
     providers: []
 })

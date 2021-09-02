@@ -912,6 +912,16 @@
         "core-menu"
       ]
     },
+    "core-timeline": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-icon",
+        "core-text"
+      ]
+    },
     "core-micro-process-flow": {
       "tags": [
         "fd"
