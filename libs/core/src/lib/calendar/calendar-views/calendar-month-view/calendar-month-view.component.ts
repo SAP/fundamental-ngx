@@ -16,10 +16,11 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import { DateTimeFormats, DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+
 import { CalendarService } from '../../calendar.service';
 import { CalendarMonth } from '../../models/calendar-month';
+import { AbstractActiveCalendarCellStrategy, DefaultActiveCalendarCellStrategy } from '../../models/common';
 
 /** Component representing the month view of the calendar. */
 @Component({
@@ -43,7 +44,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
 
     /** A function that handles escape focus */
     @Input()
-    focusEscapeFunction: () => void;
+    focusEscapeFunction: (event: KeyboardEvent) => void;
 
     /** A year the month view is referring to */
     @Input()
@@ -67,6 +68,9 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
 
     /** @hidden */
     private _initiated = false;
+
+    /** @hidden */
+    private _activeCellStrategy: AbstractActiveCalendarCellStrategy<CalendarMonth> = new DefaultActiveCalendarCellStrategy();
 
     constructor(
         private _eRef: ElementRef,
@@ -121,16 +125,28 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     }
 
     /** Method for handling the keyboard events (a11y) */
-    onKeydownMonthHandler(event, index: number): void {
+    onKeydownMonthHandler(event: KeyboardEvent, index: number): void {
         this._calendarService.onKeydownHandler(event, index);
     }
 
     /** Method that allows to focus elements inside this component */
-    focusElement(elementSelector: string): void {
+    focusElementBySelector(elementSelector: string): void {
         const elementToFocus: HTMLElement = this._eRef.nativeElement.querySelector(elementSelector);
-        if (elementToFocus) {
+        if (elementToFocus?.focus) {
             elementToFocus.focus();
         }
+    }
+
+    /**
+     * Set focus on month cell.
+     * It can be a selected cell, current month cell or first cell in the list
+     */
+     setFocusOnCell(): void {
+        const cellToFocus = new DefaultActiveCalendarCellStrategy().getActiveCell(this._getMonthList());
+        if (!cellToFocus?.id) {
+            return;
+        }
+        this.focusElementBySelector(`#${cellToFocus.id}`);
     }
 
     /** Method returning id of month cell */
@@ -198,7 +214,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
 
         this._calendarService.onFocusIdChange
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe((index) => this.focusElement('#' + this.getId(index)));
+            .subscribe((index) => this._focusOnCellByIndex(index));
 
         this._calendarService.onKeySelect
             .pipe(takeUntil(this._onDestroy$))
@@ -208,5 +224,10 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     /** Returns transformed 1d array from 2d month grid. */
     private _getMonthList(): CalendarMonth[] {
         return [].concat.apply([], this.calendarMonthListGrid);
+    }
+
+    /** @hidden */
+    private _focusOnCellByIndex(index: number): void {
+        this.focusElementBySelector(`#${this.getId(index)}`);
     }
 }

@@ -1,20 +1,38 @@
-export interface CalendarDay<D> {
+import { AbstractActiveCalendarCellStrategy, BaseCalendarCell } from './common';
+export interface CalendarDay<D> extends BaseCalendarCell {
     date: D;
-    label: string;
     weekDay: number;
     weekend: boolean;
-    disabled?: boolean;
-    monthStatus?: string;
+    monthStatus?: 'previous' | 'current' | 'next';
+    specialNumber?: number;
     blocked?: boolean;
-    selected?: boolean;
     selectedFirst?: boolean;
+    selectedLast?: boolean;
     selectedRange?: boolean;
     hoverRange?: boolean;
-    selectedLast?: boolean;
-    today?: boolean;
     isTabIndexed?: boolean;
-    ariaLabel?: string;
-    id?: string;
-    index?: number;
-    specialNumber?: number;
+}
+
+/**
+ * Active Calendar Day cell strategy
+ */
+export class ActiveCalendarDayCellStrategy<D = unknown> extends AbstractActiveCalendarCellStrategy<CalendarDay<D>> {
+    /**
+     * Calculate which table cell should be active
+     */
+    getActiveCell(cells: CalendarDay<D>[]): CalendarDay<D> | null {
+        const selected = cells.find((cell) => cell.selected);
+        if (selected) {
+            return selected;
+        }
+        const current = cells.find((cell) => cell.current);
+        if (current) {
+            return current;
+        }
+        const fistDayInMonth = cells.find((cell) => cell.monthStatus === 'current');
+        if (fistDayInMonth) {
+            return fistDayInMonth;
+        }
+        return cells[0] || null;
+    }
 }

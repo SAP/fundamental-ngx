@@ -14,12 +14,13 @@ import {
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
+import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+
 import { CalendarI18nLabels } from '../i18n/calendar-i18n-labels';
 import { FdCalendarView } from '../calendar.component';
 import { CalendarCurrent } from '../models/calendar-current';
 import { CalendarYearGrid } from '../models/calendar-year-grid';
 import { CalendarService } from '../calendar.service';
-import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 /**
  * Internal use only.

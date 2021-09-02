@@ -2,6 +2,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
     forwardRef,
     HostBinding,
@@ -15,25 +16,25 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
-import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import { DatetimeAdapter, DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 
 import { DateRange } from './models/date-range';
 import { CalendarCurrent } from './models/calendar-current';
-import { SpecialDayRule } from '@fundamental-ngx/core/shared';
 import { CalendarYearGrid } from './models/calendar-year-grid';
 import { AggregatedYear } from './models/aggregated-year';
 import { CalendarDayViewComponent } from './calendar-views/calendar-day-view/calendar-day-view.component';
 import { CalendarYearViewComponent } from './calendar-views/calendar-year-view/calendar-year-view.component';
+import { CalendarMonthViewComponent } from './calendar-views/calendar-month-view/calendar-month-view.component';
 import { CalendarService } from './calendar.service';
 import { createMissingDateImplementationError } from './calendar-errors';
 import {
     CalendarAggregatedYearViewComponent
     // Comment to fix max-line-length error
 } from './calendar-views/calendar-aggregated-year-view/calendar-aggregated-year-view.component';
-import { Subscription } from 'rxjs';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 let calendarUniqueId = 0;
 
@@ -83,13 +84,20 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 })
 export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Validator, OnDestroy {
     /** @hidden */
-    @ViewChild(CalendarDayViewComponent) dayViewComponent: CalendarDayViewComponent<D>;
+    @ViewChild(CalendarDayViewComponent)
+    dayViewComponent: CalendarDayViewComponent<D>;
 
     /** @hidden */
-    @ViewChild(CalendarYearViewComponent) yearViewComponent: CalendarYearViewComponent<D>;
+    @ViewChild(CalendarMonthViewComponent)
+    monthViewComponent: CalendarMonthViewComponent<D>;
 
     /** @hidden */
-    @ViewChild(CalendarAggregatedYearViewComponent) aggregatedYearViewComponent: CalendarAggregatedYearViewComponent<D>;
+    @ViewChild(CalendarYearViewComponent)
+    yearViewComponent: CalendarYearViewComponent<D>;
+
+    /** @hidden */
+    @ViewChild(CalendarAggregatedYearViewComponent)
+    aggregatedYearViewComponent: CalendarAggregatedYearViewComponent<D>;
 
     /** @hidden */
     @HostBinding('class.fd-calendar')
@@ -220,11 +228,14 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     /** @hidden */
     private adapterStartingDayOfWeek: DaysOfWeek;
 
-    /** @hidden */
-    onChange: (_: D | DateRange<D>) => void = () => {};
-
-    /** @hidden */
-    onTouched: () => void = () => {};
+    /** That allows to define function that should happen, when focus should normally escape of component */
+    @Input()
+    escapeFocusFunction: Function = (): void => {
+        const elementToFocus: HTMLElement = (this._elementRef.nativeElement as HTMLElement).querySelector(
+            `#${this.id}-left-arrow`
+        );
+        elementToFocus?.focus();
+    };
 
     /**
      * Function used to disable certain dates in the calendar.
@@ -253,17 +264,16 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
         return false;
     };
 
-    /** That allows to define function that should happen, when focus should normally escape of component */
-    @Input()
-    escapeFocusFunction: Function = (): void => {
-        if (document.getElementById(this.id + '-left-arrow')) {
-            document.getElementById(this.id + '-left-arrow').focus();
-        }
-    };
+    /** @hidden */
+    onChange: (_: D | DateRange<D>) => void = () => {};
+
+    /** @hidden */
+    onTouched: () => void = () => {};
 
     /** @hidden */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
+        private _elementRef: ElementRef,
         @Optional() private _contentDensityService: ContentDensityService,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
@@ -384,10 +394,27 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
 
     /**
      * Method that handle active view change and throws event.
+     *
+     * Fired by calendar header component.
      */
     handleActiveViewChange(activeView: FdCalendarView): void {
+        if (activeView === this.activeView) {
+            return;
+        }
+
         this.activeView = activeView;
+
         this.activeViewChange.emit(activeView);
+
+        if (activeView === 'month') {
+            this.onMonthViewSelected();
+        }
+        if (activeView === 'year') {
+            this.onYearViewSelected();
+        }
+        if (activeView === 'aggregatedYear') {
+            this.onYearsRangeViewSelected();
+        }
     }
 
     /**
@@ -522,22 +549,44 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     handleMonthViewChange(month: number): void {
         this.currentlyDisplayed = { month: month, year: this.currentlyDisplayed.year };
         this.activeView = 'day';
+        this.onDaysViewSelected();
         this.activeViewChange.emit(this.activeView);
-        this._changeDetectorRef.detectChanges();
-        this.dayViewComponent.focusActiveDay();
     }
 
     selectedYear(yearSelected: number): void {
         this.activeView = 'day';
         this.currentlyDisplayed.year = yearSelected;
-        this._changeDetectorRef.detectChanges();
-        this.dayViewComponent.focusActiveDay();
+        this.onDaysViewSelected();
     }
 
     selectedYears(yearsSelected: AggregatedYear): void {
         this.activeView = 'year';
         this.currentlyDisplayed.year = yearsSelected.startYear;
+        this.onYearViewSelected();
+    }
+
+    /** @hidden */
+    onDaysViewSelected(): void {
         this._changeDetectorRef.detectChanges();
+        this.dayViewComponent?.setFocusOnCell();
+    }
+
+    /** @hidden */
+    onMonthViewSelected(): void {
+        this._changeDetectorRef.detectChanges();
+        this.monthViewComponent?.setFocusOnCell();
+    }
+
+    /** @hidden */
+    onYearViewSelected(): void {
+        this._changeDetectorRef.detectChanges();
+        this.yearViewComponent?.setFocusOnCell();
+    }
+
+    /** @hidden */
+    onYearsRangeViewSelected(): void {
+        this._changeDetectorRef.detectChanges();
+        this.aggregatedYearViewComponent?.setFocusOnCell();
     }
 
     /** Method that provides information if model selected date/dates have properly types and are valid */

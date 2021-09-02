@@ -12,6 +12,7 @@
                 #landscapeCalendar
                 [mobileLandscape]="true"
                 [ngModel]="datePicked"
+                [escapeFocusFunction]="noop"
                 (closeClicked)="dialog.close()"
             ></fd-calendar>
         </fd-dialog-body>
@@ -58,6 +59,7 @@
                 #portraitCalendar
                 [mobilePortrait]="true"
                 [ngModel]="datePicked"
+                [escapeFocusFunction]="noop"
                 (closeClicked)="dialog.close()"
             ></fd-calendar>
         </fd-dialog-body>

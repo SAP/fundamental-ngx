@@ -1,7 +1,6 @@
 <fd-calendar-header
     [currentlyDisplayed]="currentlyDisplayed"
     [activeView]="activeView"
-    (activeViewChange)="handleActiveViewChange($event)"
     [id]="id"
     [calendarYearGrid]="yearGrid"
     [compact]="compact"
@@ -9,6 +8,7 @@
     (closeClicked)="closeClicked.emit()"
     (nextClicked)="handleNextArrowClick()"
     (previousClicked)="handlePreviousArrowClick()"
+    (activeViewChange)="handleActiveViewChange($event)"
 ></fd-calendar-header>
 <ng-container [ngSwitch]="activeView">
     <div
@@ -50,11 +50,11 @@
         ></fd-calendar-month-view>
         <fd-calendar-year-view
             *ngSwitchCase="'year'"
-            (yearClicked)="selectedYear($event)"
             [yearSelected]="currentlyDisplayed.year"
             [yearViewGrid]="yearGrid"
             [id]="id"
             [focusEscapeFunction]="escapeFocusFunction"
+            (yearClicked)="selectedYear($event)"
         >
         </fd-calendar-year-view>
         <fd-calendar-aggregated-year-view

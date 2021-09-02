@@ -17,8 +17,8 @@
             <th
                 class="fd-calendar__item fd-calendar__item--side-helper"
                 role="columnheader"
-                [attr.aria-label]="day"
-                *ngFor="let day of shortWeekDays"
+                [attr.aria-label]="longWeekDays[i]"
+                *ngFor="let day of shortWeekDays; index as i"
             >
                 <span
                     class="fd-calendar__text"
@@ -59,7 +59,7 @@
                     'is-active': cell.selectedLast || cell.selectedFirst || cell.selected,
                     'fd-calendar__item--range':
                         (cell.selectedRange || cell.hoverRange) && !cell.selectedFirst && !cell.selectedLast,
-                    'fd-calendar__item--current': cell.today,
+                    'fd-calendar__item--current': cell.current,
                     'fd-calendar__item--weekend': cell.weekend && markWeekends && cell.monthStatus === 'current',
                     'fd-calendar__item--other-month': cell.monthStatus !== 'current',
                     'is-disabled': cell.disabled
