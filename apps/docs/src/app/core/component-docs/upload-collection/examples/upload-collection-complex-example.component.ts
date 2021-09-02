@@ -72,11 +72,7 @@ export class UploadCollectionComplexExampleComponent {
     }
 
     deleteMultiple(): void {
-        this.files.forEach((file) => {
-            if (file.selected) {
-                this.files.splice(this.files.indexOf(file), 1);
-            }
-        });
+        this.files = this.files.filter((file) => file.selected === false);
     }
 
     noFilesSelected(): boolean {
