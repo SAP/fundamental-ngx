@@ -188,7 +188,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
             this._paginate(elementIndexToScroll);
 
             // Force browset not to scroll to the element since it's done with pagination function.
-            this.items.get(this.previousItemsCount)?.focusableElement?.focus({
+            this.items.get(this._getPreviousItemsCount())?.focusableElement?.focus({
                 preventScroll: true
             });
         }
@@ -308,7 +308,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
             return;
         }
 
-        this.previousItemsCount = this.previousItemsCount + offset;
+        this.previousItemsCount = this._focusedElementIndex = this.previousItemsCount + offset;
 
         // We need to set prev button first.
         this._setNavigationButtons();
