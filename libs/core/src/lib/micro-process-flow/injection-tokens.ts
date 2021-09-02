@@ -1,6 +1,8 @@
 import { InjectionToken } from '@angular/core';
+import { Subject } from 'rxjs';
 
 export interface MicroProcessFlowComponentInterface {
+    canItemsReceiveFocus: Subject<boolean>;
     setFocusedElementIndex(elm: HTMLElement): void;
 }
 

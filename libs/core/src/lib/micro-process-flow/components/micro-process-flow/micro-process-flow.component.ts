@@ -16,8 +16,8 @@ import {
     HostListener
 } from '@angular/core';
 import { ContentDensityService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
-import { Subscription } from 'rxjs';
-import { startWith } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime, startWith } from 'rxjs/operators';
 import { MicroProcessFlowFocusableItemDirective } from '../../micro-process-flow-focusable-item.directive';
 import { MicroProcessFlowItemComponent } from '../micro-process-flow-item/micro-process-flow-item.component';
 import { MICRO_PROCESS_FLOW } from '../../injection-tokens';
@@ -76,6 +76,9 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
      */
     nextItemsCount = 0;
 
+    /** Indicating whether or not any element is focused */
+    canItemsReceiveFocus = new Subject<boolean>();
+
     /** Should show next button. */
     get showNextButton(): boolean {
         return this.nextItemsCount > 0;
@@ -125,6 +128,16 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
 
     /** @hidden */
     ngOnInit(): void {
+
+        // If any element is currently focused, disable ability to navigate bentween items with tab.
+        this._subscriptions.add(this.canItemsReceiveFocus.pipe(debounceTime(10)).subscribe((value) => {
+            if (value) {
+                this._setFocusableVisibleItems();
+            } else {
+                this._disableFocusableItems();
+            }
+        }));
+
         if (this._rtl) {
             this._subscriptions.add(this._rtl.rtl.subscribe((value) => {
                 this._isRtl = value;
@@ -299,7 +312,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
 
         // We need to set prev button first.
         this._setNavigationButtons();
-        this._setFocusableItems();
+        this._setFocusableVisibleItems();
 
         const currentItem = this.items.get(this.previousItemsCount);
         const containerWidth = this._container.nativeElement.offsetWidth;
@@ -315,7 +328,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
         this._wrapperContainer.nativeElement.style.transform = `translateX(${elmOffset * this._paginationDirection}px)`;
 
         this._setNavigationButtons();
-        this._setFocusableItems();
+        this._setFocusableVisibleItems();
     }
 
     /**
@@ -330,9 +343,13 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
             .reduce((width, item) => item.elRef.nativeElement.offsetWidth + width, 0);
     }
 
-    /** @hidden */
-    private _setFocusableItems(): void {
+    private _disableFocusableItems(): void {
         this.items.forEach((item) => item.focusableElement?.setFocusable(false));
+    }
+
+    /** @hidden */
+    private _setFocusableVisibleItems(): void {
+        this._disableFocusableItems();
 
         const containerWidth = this._container.nativeElement.offsetWidth;
 

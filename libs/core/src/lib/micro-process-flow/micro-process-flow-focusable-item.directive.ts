@@ -36,5 +36,11 @@ export class MicroProcessFlowFocusableItemDirective implements OnInit {
     @HostListener('focus')
     onFocus(): void {
         this._microProcessFlow?.setFocusedElementIndex(this.elRef.nativeElement);
+        this._microProcessFlow?.canItemsReceiveFocus.next(false);
+    }
+
+    @HostListener('blur')
+    onBlur(): void {
+        this._microProcessFlow?.canItemsReceiveFocus.next(true);
     }
 }
