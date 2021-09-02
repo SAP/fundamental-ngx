@@ -50,6 +50,13 @@
     @content;
 }
 
+@mixin fd-flex-justify-content-start {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    @content;
+}
+
 @mixin fd-flex-stretch {
     display: flex;
     justify-content: center;
@@ -73,6 +80,15 @@
     }
 }
 
+// ACTIVE state (press and hold)
+@mixin fd-active {
+
+    &:active,
+    &.is-active {
+        @content;
+    }
+}
+
 @mixin fd-fiori-focus($offset: -0.1875rem) {
 
     &:focus,
@@ -88,9 +104,68 @@
     }
 }
 
+@mixin fd-set-padding-left-after($left: 0) {
+
+    &:after {
+        padding-left: $left;
+    }
+
+    @include fd-rtl() {
+        &:after {
+            padding-right: $left;
+            padding-left: 0;
+        }
+    }
+}
+
+@mixin fd-set-padding-right-before($right: 0) {
+
+    &:before {
+        padding-right: $right;
+    }
+
+    @include fd-rtl() {
+        &:before {
+            padding-right: 0;
+            padding-left: $right;
+        }
+    }
+}
+
+@mixin fd-micro-process-flow-navigation-icon($direction: previous, $icon-previous: "\e067", $icon-next: "\e066", $padding: 0.313rem) {
+    @if $direction==previous {
+        &:before {
+            content: $icon-previous;
+        }
+
+        @include fd-set-padding-right-before($padding);
+
+        @include fd-rtl() {
+            &:before {
+                content: $icon-next;
+            }
+        }
+    }
+
+    @else {
+        &:after {
+            content: $icon-next;
+        }
+
+        @include fd-set-padding-left-after($padding);
+
+        @include fd-rtl() {
+            &:after {
+                content: $icon-previous;
+            }
+        }
+    }
+}
+
 @mixin fd-micro-process-flow-semantic-state {
 
-    @each $state, $background in $semantic-colors {
+    @each $state,
+    $background in $fd-micro-process-flow-semantic-colors {
         &--#{$state} {
             .#{$block}__icon-container {
                 background-color: map-get($background, default);
@@ -105,11 +180,29 @@
                     border-color: map-get($background, hover);
                 }
 
-                @include fd-focus {
+                @include fd-active {
                     background-color: var(--sapHighlightColor);
                     border-color: var(--sapHighlightColor);
                 }
             }
         }
+    }
+}
+
+@mixin fd-set-padding-left($left: 0) {
+    padding-left: $left;
+
+    @include fd-rtl() {
+        padding-right: $left;
+        padding-left: 0;
+    }
+}
+
+@mixin fd-set-padding-right($right: 0) {
+    padding-right: $right;
+
+    @include fd-rtl() {
+        padding-right: 0;
+        padding-left: $right;
     }
 }

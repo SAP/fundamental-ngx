@@ -1,5 +1,5 @@
+import { ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE } from '@angular/cdk/keycodes';
 import {
-    AfterContentInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -11,12 +11,16 @@ import {
     Optional,
     QueryList,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
+    AfterViewInit,
+    HostListener
 } from '@angular/core';
-import { ContentDensityService, RtlService } from '@fundamental-ngx/core/utils';
+import { ContentDensityService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { Subscription } from 'rxjs';
 import { startWith } from 'rxjs/operators';
+import { MicroProcessFlowFocusableItemDirective } from '../../micro-process-flow-focusable-item.directive';
 import { MicroProcessFlowItemComponent } from '../micro-process-flow-item/micro-process-flow-item.component';
+import { MICRO_PROCESS_FLOW } from '../../injection-tokens';
 
 @Component({
     selector: 'fd-micro-process-flow',
@@ -26,11 +30,17 @@ import { MicroProcessFlowItemComponent } from '../micro-process-flow-item/micro-
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         class: 'fd-micro-process-flow',
-        '[class.fd-micro-process-flow--independent-steps]': 'independentSteps === true',
-        '[class.fd-micro-process-flow--compact]': 'compact === true'
-    }
+        '[class.fd-micro-process-flow--independent-steps]': 'independentSteps',
+        '[class.fd-micro-process-flow--compact]': 'compact'
+    },
+    providers: [
+        {
+            provide: MICRO_PROCESS_FLOW,
+            useExisting: MicroProcessFlowComponent
+        }
+    ]
 })
-export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterContentInit {
+export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewInit {
 
     /** Should connector between items be hidden. */
     @Input()
@@ -40,9 +50,9 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterConten
     @Input()
     compact: boolean;
 
-    /** Pagination transition speed */
+    /** Pagination transition speed in milliseconds */
     @Input()
-    transitionSpeed = 0.3;
+    transitionSpeed = 300;
 
     /** Pagination transition effect */
     @Input()
@@ -52,20 +62,28 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterConten
     @ContentChildren(MicroProcessFlowItemComponent)
     items: QueryList<MicroProcessFlowItemComponent>;
 
-    /** Previous items outside the viewport. */
-    _previousItemsCount = 0;
+    /** Micro process flow items. */
+    @ContentChildren(MicroProcessFlowFocusableItemDirective, {descendants: true})
+    focusableItems: QueryList<MicroProcessFlowFocusableItemDirective>;
 
-    /** Next items outside the viewport. */
-    _nextItemsCount = 0;
+    /**
+     * Previous items outside the viewport.
+     */
+    previousItemsCount = 0;
+
+    /**
+     * Next items outside the viewport.
+     */
+    nextItemsCount = 0;
 
     /** Should show next button. */
-    get _showNextButton(): boolean {
-        return this._nextItemsCount > 0;
+    get showNextButton(): boolean {
+        return this.nextItemsCount > 0;
     }
 
     /** Should show previous button. */
-    get _showPreviousButton(): boolean {
-        return this._previousItemsCount > 0;
+    get showPreviousButton(): boolean {
+        return this.previousItemsCount > 0;
     }
 
     /** @hidden */
@@ -81,9 +99,6 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterConten
     private _goNextButton: ElementRef<HTMLElement>;
 
     /** @hidden */
-    private _currentOffset = 0;
-
-    /** @hidden */
     private _isRtl = false;
 
     /** @hidden */
@@ -93,6 +108,13 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterConten
 
     /** @hidden */
     private _subscriptions = new Subscription();
+
+    /** @hidden */
+    private _navigationKeys = [LEFT_ARROW, RIGHT_ARROW];
+
+    private _actionKeys = [SPACE, ENTER];
+
+    private _focusedElementIndex = -1;
 
     /** @hidden */
     constructor(
@@ -107,7 +129,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterConten
             this._subscriptions.add(this._rtl.rtl.subscribe((value) => {
                 this._isRtl = value;
 
-                if (this._showPreviousButton) {
+                if (this.showPreviousButton) {
                     this._paginate(0);
                 }
             }));
@@ -124,7 +146,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterConten
     }
 
     /** @hidden */
-    ngAfterContentInit(): void {
+    ngAfterViewInit(): void {
         this.listenOnItemsChange();
     }
 
@@ -133,19 +155,42 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterConten
         this._subscriptions.unsubscribe();
     }
 
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    handleKeyboardEvent(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, this._navigationKeys)) {
+            const isRightKey = KeyUtil.isKeyCode(event, RIGHT_ARROW);
+            const direction = isRightKey ? 1 : -1;
+            event.stopImmediatePropagation();
+
+            const elementIndexToScroll = this._getPreviousItemsCount()  + direction;
+            const elementExists = this.items.get(elementIndexToScroll);
+
+            if (!elementExists) {
+                return;
+            }
+
+            this.previousItemsCount = 0;
+
+            this._paginate(elementIndexToScroll);
+
+            // Force browset not to scroll to the element since it's done with pagination function.
+            this.items.get(this.previousItemsCount)?.focusableElement?.focus({
+                preventScroll: true
+            });
+        }
+    }
+
     /** Listens on items change and checks if navigation buttons should be visible. */
     listenOnItemsChange(): void {
         this._subscriptions.add(this.items.changes.pipe(startWith(0)).subscribe(() => {
-            // Fixes expression changed error.
-            setTimeout(() => {
-                this.items.forEach((item) => {
-                    item.setFinalStep(false);
-                });
-
-                this.items.last?.setFinalStep(true);
-                this._setNavigationButtons();
-                this._paginate(0);
+            this.items.forEach((item) => {
+                item.setLastItem(false);
             });
+
+            this.items.last?.setLastItem(true);
+            this._setNavigationButtons();
+            this._paginate(0);
         }));
     }
 
@@ -170,7 +215,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterConten
 
         const containerWidth = this._container.nativeElement.offsetWidth;
         const itemsWidth = this._wrapperContainer.nativeElement.offsetWidth;
-        const nextButtonWidth = this._goNextButton?.nativeElement.offsetWidth;
+        const nextButtonWidth = this._goNextButton?.nativeElement.offsetWidth || 0;
 
         if (itemsWidth < containerWidth) {
             return;
@@ -179,15 +224,15 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterConten
         // Skip previously shown items out of the calculation.
         const itemsToDisplay = this.items
             .toArray()
-            .slice(this._previousItemsCount)
+            .slice(this.previousItemsCount)
             .map((i) => i.elRef);
 
         // Check if all items can be fitted inside the container if we remove 'next' button.
-        if (this._previousItemsCount > 0) {
+        if (this.previousItemsCount > 0) {
             const remainingWidth = itemsToDisplay.reduce((width, elm) => elm.nativeElement.offsetWidth + width, 0);
 
             if (remainingWidth <= nextButtonWidth + containerWidth) {
-                this._nextItemsCount = 0;
+                this.nextItemsCount = 0;
                 this._cd.detectChanges();
                 return;
             }
@@ -195,6 +240,28 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterConten
 
         this._setNextItemsCount(itemsToDisplay, containerWidth);
         this._cd.detectChanges();
+    }
+
+    /**
+     * Sets last focused element index.
+     * @param elm Focused HTML element.
+     */
+    setFocusedElementIndex(elm: HTMLElement): void {
+        this._focusedElementIndex = this.focusableItems.toArray().findIndex((item) => {
+            return item.elRef.nativeElement === elm;
+        });
+    }
+
+    /**
+     * Navigates to a specific page when the user presses 'Space' or 'Enter' key.
+     * @param offset How much items needs to be scrolled relatively to the hidden previous items.
+     * @param event The keyboard event.
+     */
+    onKeypressHandler(offset: number, event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, this._actionKeys)) {
+            event.preventDefault();
+            this._paginate(offset);
+        }
     }
 
     /**
@@ -212,13 +279,14 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterConten
             if (newVisibleItemsWidth <= containerWidth) {
                 visibleItemsWidth = newVisibleItemsWidth;
             } else {
-                this._nextItemsCount = itemsToDisplay.length - index;
+                this.nextItemsCount = itemsToDisplay.length - index;
                 break;
             }
         }
     }
 
     /**
+     * @hidden
      * Performs scrolling to the defined element based on the offset argument.
      * @param offset How much items needs to be scrolled relatively to the hidden previous items.
      */
@@ -227,20 +295,68 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterConten
             return;
         }
 
-        this._previousItemsCount = this._previousItemsCount + offset;
+        this.previousItemsCount = this.previousItemsCount + offset;
 
+        // We need to set prev button first.
         this._setNavigationButtons();
+        this._setFocusableItems();
 
-        const currentItem = this.items.get(this._previousItemsCount);
+        const currentItem = this.items.get(this.previousItemsCount);
+        const containerWidth = this._container.nativeElement.offsetWidth;
+        const wrapperContainerWidth = this._wrapperContainer.nativeElement.offsetWidth;
 
-        if (!currentItem) {
-            return;
+        if (!currentItem || containerWidth >= wrapperContainerWidth) {
+            // Cancel pagination and revert previous items count back.
+            this.previousItemsCount = this.previousItemsCount - offset;
         }
 
-        const elmOffset = currentItem.elRef.nativeElement.offsetWidth;
-        this._currentOffset = this._currentOffset + (elmOffset * offset);
-        this._wrapperContainer.nativeElement.style.transform = `translateX(${this._currentOffset * this._paginationDirection}px)`;
+        const elmOffset = this._getPreviousItemsWidth();
+
+        this._wrapperContainer.nativeElement.style.transform = `translateX(${elmOffset * this._paginationDirection}px)`;
 
         this._setNavigationButtons();
+        this._setFocusableItems();
+    }
+
+    /**
+     * @hidden
+     * Calculates total width of previously shown items.
+     * @returns {Number} total width of previously shown items.
+     */
+    private _getPreviousItemsWidth(): number {
+        return this.items
+            .toArray()
+            .slice(0, this.previousItemsCount)
+            .reduce((width, item) => item.elRef.nativeElement.offsetWidth + width, 0);
+    }
+
+    /** @hidden */
+    private _setFocusableItems(): void {
+        this.items.forEach((item) => item.focusableElement?.setFocusable(false));
+
+        const containerWidth = this._container.nativeElement.offsetWidth;
+
+        const itemsToDisplay = this.items
+        .toArray()
+        .slice(this.previousItemsCount);
+
+        let visibleItemsWidth = 0;
+        let newVisibleItemsWidth = 0;
+
+        for (const item of itemsToDisplay) {
+            newVisibleItemsWidth = visibleItemsWidth + item.elRef.nativeElement.offsetWidth;
+
+            if (newVisibleItemsWidth <= containerWidth) {
+                visibleItemsWidth = newVisibleItemsWidth;
+                item.focusableElement?.setFocusable(true);
+            } else {
+                break;
+            }
+        }
+    }
+
+    /** @hidden */
+    private _getPreviousItemsCount(): number {
+        return this._focusedElementIndex === -1 ? this.previousItemsCount : this._focusedElementIndex;
     }
 }

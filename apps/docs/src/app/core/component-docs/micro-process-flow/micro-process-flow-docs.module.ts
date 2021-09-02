@@ -20,6 +20,8 @@ import { MicroProcessFlowOverflowExampleComponent } from './examples/micro-proce
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { MicroProcessFlowIndependentItemsExampleComponent } from './examples/micro-process-flow-independent-items-example.component';
 import { InfoLabelModule } from '@fundamental-ngx/core/info-label';
+import { MicroProcessFlowCustomWidthExampleComponent } from './examples/micro-process-flow-custom-width-example.component';
+import { MicroProcessFlowObjectBetweenNodesExampleComponent } from './examples/micro-process-flow-object-between-nodes-example.component';
 
 const routes: Routes = [
     {
@@ -40,7 +42,9 @@ const routes: Routes = [
         MicroProcessFlowOtherControlsExampleComponent,
         MicroProcessFlowPopoverExampleComponent,
         MicroProcessFlowOverflowExampleComponent,
-        MicroProcessFlowIndependentItemsExampleComponent
+        MicroProcessFlowIndependentItemsExampleComponent,
+        MicroProcessFlowCustomWidthExampleComponent,
+        MicroProcessFlowObjectBetweenNodesExampleComponent
     ],
     imports: [
         RouterModule.forChild(routes),

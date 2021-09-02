@@ -1,13 +1,18 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
+interface ExampleItem {
+    state: string;
+    icon: string;
+}
+
 @Component({
-    selector: 'fd-micro-process-flow-overflow',
+    selector: 'fd-micro-process-flow-overflow-example',
     templateUrl: './micro-process-flow-overflow-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MicroProcessFlowOverflowExampleComponent {
 
-    items: any[] = [];
+    items: ExampleItem[] = [];
 
     constructor() {
         const states = ['positive', 'information', 'negative', 'critical'];

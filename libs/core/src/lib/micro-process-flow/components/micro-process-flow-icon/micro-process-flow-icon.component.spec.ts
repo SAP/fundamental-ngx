@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MicroProcessFlowIconComponent } from './micro-process-flow-icon.component';
 import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
 
 const ICON_NAME = 'add';

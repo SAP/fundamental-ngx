@@ -4,53 +4,42 @@
 // TODO: Move all styles to fundamental-styles library
 
 .#{$block} {
-    @include fd-reset();
-    @include fd-flex();
+    @include fd-reset;
+    @include fd-flex;
 
-    max-width: $max-container-width;
-    overflow: hidden;
+    max-width: $fd-micro-process-flow-max-container-width;
 
     &--independent-steps {
-        .#{$block}__connector {
-            &:before {
-                border-color: transparent;
-            }
+        .#{$block}__connector:before {
+            border-color: transparent;
         }
     }
 }
 
 .#{$block}__wrapper {
-    @include fd-reset();
-    @include fd-flex();
-
-    //transition: transform .3s ease;
+    @include fd-reset;
+    @include fd-flex;
+    transition-property: transform;
 }
 
 .#{$block}__overflow-container {
-    @include fd-reset();
-    @include fd-flex();
+    @include fd-reset;
+    @include fd-flex;
+
     width: 100%;
     overflow: hidden;
 }
 
 .#{$block}__link-previous, .#{$block}__link-next {
-    @include fd-reset();
-    @include fd-flex();
-    justify-content: flex-start;
-    align-items: stretch;
+    @include fd-reset;
+    @include fd-flex-justify-content-start;
+    @include fd-fiori-focus;
 
-    min-width: 2rem;
     cursor: pointer;
-
-    span {
-        @include fd-reset();
-        color: var(--sapGroup_TitleTextColor);
-        text-shadow: var(--sapContent_TextShadow);
-        font-size: var(--sapFontSize);
-        @include fd-flex();
-        justify-content: center;
-        align-items: center;
-    }
+    color: var(--sapGroup_TitleTextColor);
+    text-shadow: var(--sapContent_TextShadow);
+    font-size: var(--sapFontSize);
+    padding: 0 0.313rem;
 
     &:before, &:after {
         font-family: SAP-icons;
@@ -58,56 +47,32 @@
         text-decoration: inherit;
         text-transform: none;
         text-rendering: optimizeLegibility;
-        @include fd-flex();
-        justify-content: center;
-        align-items: center;
-
         color: var(--sapButton_TextColor);
+        @include fd-flex-center;
     }
 
     @include fd-hover {
-        color: var(--sapButton_Hover_TextColor);
+        &:before, &:after {
+            color: var(--sapButton_Hover_TextColor);
+        }
     }
 }
 
 .#{$block}__link-previous {
-
-    &:before {
-        content: "\e067";
-        padding-right: 0.313rem;
-    }
-
-    @include fd-rtl() {
-        padding-right: 0;
-        padding-left: 0.313rem;
-        &:before {
-            content: "\e066";
-        }
-    }
+    @include fd-micro-process-flow-navigation-icon();
 }
 
 .#{$block}__link-next {
     justify-content: flex-end;
-
-    &:after {
-        content: "\e066";
-        padding-left: 0.313rem;
-    }
-
-    @include fd-rtl() {
-        &:after {
-            padding-left: 0;
-            padding-right: 0.313rem;
-            content: "\e067";
-        }
-    }
+    @include fd-micro-process-flow-navigation-icon(next);
 }
 
 .#{$block}__item {
     @include fd-reset;
     @include fd-flex-stretch;
-    margin: 0.1625rem 0;
 
+    margin: 0.1625rem 0;
+    padding-left: $fd-micro-process-flow-item-padding;
     justify-content: flex-start;
     position: relative;
 
@@ -118,14 +83,18 @@
     }
 }
 
+.#{$block}__focusable-item {
+    @include fd-fiori-focus($fd-micro-process-flow-outline-offset);
+}
+
 .#{$block}__icon-container {
     @include fd-reset;
     @include fd-flex-center;
 
-    min-width: $item-min-width;
-    min-height: $item-min-width;
+    min-width: $fd-micro-process-flow-item-min-width;
+    min-height: $fd-micro-process-flow-item-min-width;
     background-color: var(--sapNeutralBackground);
-    border: 1px solid var(--sapNeutralBorderColor);
+    border: 0.0625rem solid var(--sapNeutralBorderColor);
     border-radius: 50%;
 
     .#{$block}__icon {
@@ -133,7 +102,7 @@
         font-size: var(--sapFontLargeSize);
     }
 
-    @include fd-fiori-focus(0.0625rem) {
+    @include fd-active {
         background-color: var(--sapHighlightColor);
         border-color: var(--sapHighlightColor);
 
@@ -145,10 +114,10 @@
 
 .#{$block}__content {
     @include fd-reset;
-    @include fd-flex-center;
+    @include fd-flex-justify-content-start;
 
-    min-width: $item-min-width;
-    min-height: $item-min-width;
+    min-width: $fd-micro-process-flow-item-min-width;
+    min-height: $fd-micro-process-flow-item-min-width;
     width: 100%;
 }
 
@@ -159,17 +128,19 @@
 .#{$block}__connector {
     @include fd-reset;
     @include fd-flex-center;
-    width: $item-connector-width;
-    margin-left: $item-padding;
-    margin-right: $item-padding;
+
+    min-width: $fd-micro-process-flow-item-connector-width;
+    height: 100%;
+    margin-left: $fd-micro-process-flow-item-padding;
     position: relative;
     flex-grow: 1;
 
     &:before {
         content: "";
         display: block;
-        border-bottom: 1px solid var(--sapContent_ForegroundBorderColor);
+        border-bottom: 0.0625rem solid var(--sapContent_ForegroundBorderColor);
         width: 100%;
+        position: absolute;
     }
 
     &--intermediate {
@@ -180,24 +151,27 @@
             top: 0;
             left: 50%;
             bottom: 0;
-            margin-left: -$intermediary-indicator-width / 2;
-            width: $intermediary-indicator-width;
+            margin-left: -$fd-micro-process-flow-intermediary-indicator-width / 2;
+            width: $fd-micro-process-flow-intermediary-indicator-width;
             background: var(--sapNegativeElementColor);
         }
+    }
+    .#{$block}__intermediary-item {
+        line-height: 1;
     }
 }
 
 .#{$block}--compact {
-    max-width: $max-container-compact-width;
+    max-width: $fd-micro-process-flow-max-container-compact-width;
 
     .#{$block}__content {
-        min-width: $item-compact-min-width;
-        min-height: $item-compact-min-width;
+        min-width: $fd-micro-process-flow-item-compact-min-width;
+        min-height: $fd-micro-process-flow-item-compact-min-width;
     }
 
     .#{$block}__icon-container {
-        min-width: $item-compact-min-width;
-        min-height: $item-compact-min-width;
+        min-width: $fd-micro-process-flow-item-compact-min-width;
+        min-height: $fd-micro-process-flow-item-compact-min-width;
 
         .#{$block}__icon {
             font-size: var(--sapFontSmallSize);
@@ -205,10 +179,6 @@
     }
 
     .#{$block}__connector {
-        width: $item-connector-compact-width;
+        width: $fd-micro-process-flow-item-connector-compact-width;
     }
-}
-
-.#{$block}--indenepdent-steps {
-
 }

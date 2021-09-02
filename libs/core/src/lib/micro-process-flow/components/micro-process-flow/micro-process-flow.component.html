@@ -5,16 +5,16 @@
     role="button"
     type="button"
     (click)="goBack()"
-    *ngIf="_showPreviousButton"
+    (keypress)="onKeypressHandler(-1, $event)"
+    *ngIf="showPreviousButton"
 >
-    <span>{{ _previousItemsCount }}</span>
+    {{ previousItemsCount }}
 </a>
 <div class="fd-micro-process-flow__overflow-container" #container>
     <div
         class="fd-micro-process-flow__wrapper"
         #wrapperContainer
-        [style.transition-property]="'transform'"
-        [style.transition-duration]="transitionSpeed + 's'"
+        [style.transition-duration]="transitionSpeed + 'ms'"
         [style.transition-timing-function]="transitionTimingFunction"
     >
         <ng-content select="fd-micro-process-flow-item"></ng-content>
@@ -26,8 +26,9 @@
     role="button"
     type="button"
     (click)="goNext()"
-    *ngIf="_showNextButton"
+    (keypress)="onKeypressHandler(1, $event)"
+    *ngIf="showNextButton"
     #goNextButton
 >
-    <span>{{ _nextItemsCount }}</span>
+    {{ nextItemsCount }}
 </a>

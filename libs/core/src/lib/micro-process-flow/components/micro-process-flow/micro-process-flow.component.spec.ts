@@ -1,10 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
 import { MicroProcessFlowComponent } from './micro-process-flow.component';
 
 @Component({
     selector: 'fd-test-micro-process-flow',
+    changeDetection: ChangeDetectionStrategy.OnPush,
     template: `
         <fd-micro-process-flow #microProcessFlow>
             <fd-micro-process-flow-item *ngFor="let item of items">
@@ -46,9 +47,9 @@ describe('MicroProcessFlowComponent', () => {
         component.microProcessFlow.goNext();
         fixture.detectChanges();
 
-        const previousItemsCount = fixture.nativeElement.querySelector('.fd-micro-process-flow__link-previous span').innerText;
+        const previousItemsCount = fixture.nativeElement.querySelector('.fd-micro-process-flow__link-previous').innerText;
         expect(previousItemsCount).toEqual('1');
-        expect(component.microProcessFlow._previousItemsCount).toEqual(1);
+        expect(component.microProcessFlow.previousItemsCount).toEqual(1);
     });
 
     it('should paginate one step back', () => {
@@ -56,7 +57,7 @@ describe('MicroProcessFlowComponent', () => {
         component.microProcessFlow.goBack();
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('.fd-micro-process-flow__link-previous span')).toBeNull();
-        expect(component.microProcessFlow._previousItemsCount).toEqual(0);
+        expect(fixture.nativeElement.querySelector('.fd-micro-process-flow__link-previous')).toBeNull();
+        expect(component.microProcessFlow.previousItemsCount).toEqual(0);
     });
 });

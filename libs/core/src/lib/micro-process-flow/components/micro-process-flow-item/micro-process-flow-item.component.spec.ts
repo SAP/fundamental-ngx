@@ -24,14 +24,14 @@ describe('MicroProcessFlowItemComponent', () => {
     });
 
     it('should hide connector', () => {
-        component.setFinalStep(true);
+        component.setLastItem(true);
         fixture.detectChanges();
 
         expect(fixture.nativeElement.querySelector('.fd-micro-process-flow__connector')).toBeNull();
     });
 
     it('should show connector', () => {
-        component.setFinalStep(false);
+        component.setLastItem(false);
         fixture.detectChanges();
 
         expect(fixture.nativeElement.querySelector('.fd-micro-process-flow__connector')).toBeTruthy();

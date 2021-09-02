@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-    selector: 'fd-micro-process-flow-other-controls',
+    selector: 'fd-micro-process-flow-other-controls-example',
     templateUrl: './micro-process-flow-other-controls-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })

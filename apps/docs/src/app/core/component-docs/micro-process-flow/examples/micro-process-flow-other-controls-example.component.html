@@ -2,6 +2,7 @@
 <fd-micro-process-flow>
     <fd-micro-process-flow-item>
         <fd-status-indicator
+            fd-micro-process-flow-focusable-item
             id="status_icon_21"
             status="positive"
             fillPercentage="100"
@@ -19,6 +20,7 @@
     </fd-micro-process-flow-item>
     <fd-micro-process-flow-item state="positive" [intermediate]="true">
         <fd-status-indicator
+            fd-micro-process-flow-focusable-item
             id="status_icon_22"
             status="positive"
             fillPercentage="100"
@@ -36,6 +38,7 @@
     </fd-micro-process-flow-item>
     <fd-micro-process-flow-item state="information">
         <fd-status-indicator
+            fd-micro-process-flow-focusable-item
             id="status_icon_23"
             status="critical"
             fillPercentage="60"
@@ -53,6 +56,7 @@
     </fd-micro-process-flow-item>
     <fd-micro-process-flow-item state="negative">
         <fd-status-indicator
+            fd-micro-process-flow-focusable-item
             id="status_icon_24"
             status="negative"
             fillPercentage="30"
@@ -70,6 +74,7 @@
     </fd-micro-process-flow-item>
     <fd-micro-process-flow-item state="critical">
         <fd-status-indicator
+            fd-micro-process-flow-focusable-item
             id="status_icon_25"
             [clickable]="false"
             ariaLabel=" Euro Status Indicator default size"
@@ -88,28 +93,23 @@
 <p>Avatar example:</p>
 <fd-micro-process-flow>
     <fd-micro-process-flow-item>
-        <fd-avatar colorAccent="1" glyph="customer"></fd-avatar>
+        <fd-avatar fd-micro-process-flow-focusable-item colorAccent="1" glyph="customer"></fd-avatar>
     </fd-micro-process-flow-item>
-    <fd-micro-process-flow-item state="positive">
-        <fd-avatar colorAccent="2" glyph="customer"></fd-avatar>
+    <fd-micro-process-flow-item >
+        <fd-avatar fd-micro-process-flow-focusable-item colorAccent="2" glyph="customer"></fd-avatar>
     </fd-micro-process-flow-item>
-    <fd-micro-process-flow-item state="information">
-        <fd-avatar colorAccent="3" glyph="customer"></fd-avatar>
-    </fd-micro-process-flow-item>
-    <fd-micro-process-flow-item state="negative">
-        <fd-avatar colorAccent="4" glyph="customer"></fd-avatar>
-    </fd-micro-process-flow-item>
-    <fd-micro-process-flow-item state="critical">
-        <fd-avatar colorAccent="5" glyph="customer"></fd-avatar>
+    <fd-micro-process-flow-item>
+        <fd-avatar fd-micro-process-flow-focusable-item colorAccent="3" glyph="customer"></fd-avatar>
     </fd-micro-process-flow-item>
 </fd-micro-process-flow>
 <p>Label example:</p>
 <fd-micro-process-flow>
     <fd-micro-process-flow-item *ngFor="let item of ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']">
         <fd-info-label
+            fd-micro-process-flow-focusable-item
             type="icon"
             glyph="hide"
-            label="Info label"
+            [label]="'Info label ' + item"
             [color]="item"
             title="Info Label with Icon"
         ></fd-info-label>

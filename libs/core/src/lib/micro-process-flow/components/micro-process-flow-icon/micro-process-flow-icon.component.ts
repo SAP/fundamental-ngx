@@ -5,7 +5,10 @@ import { IconFont } from '@fundamental-ngx/core/icon';
     selector: 'fd-micro-process-flow-icon',
     templateUrl: './micro-process-flow-icon.component.html',
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        class: 'fd-micro-process-flow__icon-container'
+    }
 })
 export class MicroProcessFlowIconComponent {
 
@@ -27,7 +30,4 @@ export class MicroProcessFlowIconComponent {
     /** Aria-label for Icon. */
     @Input()
     ariaLabel: string = null;
-
-    /** @hidden */
-    constructor() {}
 }

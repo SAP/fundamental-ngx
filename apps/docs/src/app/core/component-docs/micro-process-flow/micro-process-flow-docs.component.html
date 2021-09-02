@@ -20,7 +20,7 @@
         provide <code>[independentSteps]="true"</code> for the <code>fd-micro-process-flow</code> component.</p>
 </description>
 <component-example>
-    <fd-micro-process-flow-independent></fd-micro-process-flow-independent>
+    <fd-micro-process-flow-independent-items-example></fd-micro-process-flow-independent-items-example>
 </component-example>
 <code-example [exampleFiles]="independentExample"></code-example>
 
@@ -50,7 +50,7 @@
     </ul>
 </description>
 <component-example>
-    <fd-micro-process-flow-other-controls></fd-micro-process-flow-other-controls>
+    <fd-micro-process-flow-other-controls-example></fd-micro-process-flow-other-controls-example>
 </component-example>
 <code-example [exampleFiles]="customControlsExample"></code-example>
 
@@ -63,7 +63,7 @@
     <p>Information displayed in micro flow process items can be extended by adding popovers with additional context:</p>
 </description>
 <component-example>
-    <fd-micro-process-flow-popover></fd-micro-process-flow-popover>
+    <fd-micro-process-flow-popover-example></fd-micro-process-flow-popover-example>
 </component-example>
 <code-example [exampleFiles]="popoverExample"></code-example>
 
@@ -81,6 +81,38 @@
     <p>Developers can also pass custom easing function and provide different transition time</p>
 </description>
 <component-example>
-    <fd-micro-process-flow-overflow></fd-micro-process-flow-overflow>
+    <fd-micro-process-flow-overflow-example></fd-micro-process-flow-overflow-example>
 </component-example>
 <code-example [exampleFiles]="overflowExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="micro-process-flow-overflow" componentName="micro-process-flow">
+    Objects Inserted Between Nodes
+</fd-docs-section-title>
+<description>
+    <p>
+        Developers can add custom elements inside connector line element
+        by providing element with <code>fd-micro-process-flow-intermediary-item</code> directive.
+    </p>
+</description>
+<component-example>
+    <fd-micro-process-flow-object-between-nodes-example></fd-micro-process-flow-object-between-nodes-example>
+</component-example>
+<code-example [exampleFiles]="objectBetweenNodesExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="micro-process-flow-overflow" componentName="micro-process-flow">
+    Custom Node width
+</fd-docs-section-title>
+<description>
+    <p>
+        By default, width of the item container calculated based on the actual item width and connector line.
+        This can be easily changed by providing width to the <code>fd-micro-process-flow-item</code> element in order to set width manually.
+    </p>
+</description>
+<component-example>
+    <fd-micro-process-flow-custom-width-example></fd-micro-process-flow-custom-width-example>
+</component-example>
+<code-example [exampleFiles]="customWidthExample"></code-example>
