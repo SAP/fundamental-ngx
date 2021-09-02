@@ -66,6 +66,13 @@ export type Placement = 'auto-start'
     | 'left'
     | 'left-start';
 
+export type RtlPlacement = 'left'
+    | 'left-start'
+    | 'left-end'
+    | 'right'
+    | 'right-start'
+    | 'right-end';
+
 export type XPositions = 'start' | 'center' | 'end';
 export type YPositions = 'top' | 'center' | 'bottom';
 export type ArrowPosition = 'top' | 'bottom' | 'start' | 'end' | 'center';
@@ -82,13 +89,30 @@ export const PopoverFlippedYDirection: {[key: string]: YPositions} = {
     'center': 'center'
 };
 
+export const PopoverFlippedRtlPlacement: {[key in RtlPlacement]: RtlPlacement} = {
+    'left-start': 'right-start',
+    'left': 'right',
+    'left-end': 'right-end',
+    'right-start': 'left-start',
+    'right': 'left',
+    'right-end': 'left-end',
+}
+
 export class PopoverPosition {
 
-    static getCdkPlacement(placement: Placement): ConnectedPosition {
+    static getCdkPlacement(placement: Placement, direction?: 'rtl' | 'ltr'): ConnectedPosition {
         const resultCdkPlacement = popoverPlacementMap[placement];
 
         if (!resultCdkPlacement && isDevMode()) {
             throw new Error('Invalid function argument. Check if "placement" is type of Placement Union');
+        }
+
+        if (direction === 'rtl') {
+            const startPlaceStr = placement.split('-')[0];
+
+            if (startPlaceStr === 'left' || startPlaceStr === 'right') {
+                return popoverPlacementMap[PopoverFlippedRtlPlacement[placement]];
+            }
         }
 
         return resultCdkPlacement;
