@@ -16,12 +16,12 @@ import {
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
-import { DateTimeFormats, DATE_TIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import { DateTimeFormats, DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 import { CalendarService } from '../../calendar.service';
 import { AggregatedYear, CalendarAggregatedYear } from '../../models/aggregated-year';
 import { CalendarYearGrid } from '../../models/calendar-year-grid';
+import { DefaultActiveCalendarCellStrategy } from '../../models/common';
 
 @Component({
     selector: 'fd-calendar-aggregated-year-view',
@@ -55,7 +55,7 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
 
     /** Function that is called when the focus would escape the element. */
     @Input()
-    focusEscapeFunction: () => void;
+    focusEscapeFunction: (event: KeyboardEvent) => void;
 
     /** Parameter holding the year that is currently selected. */
     @Input()
@@ -82,9 +82,6 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
 
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
-    /** @hidden */
-    private _newFocusedYearId: string;
 
     /** @hidden */
     private _initiated = false;
@@ -162,15 +159,24 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
         this._constructYearsGrid();
     }
 
-    /** Method allowing focusing on elements within this component. */
-    focusYearElement(): void {
-        if (this._newFocusedYearId) {
-            const elementToFocus: HTMLElement = this._eRef.nativeElement.querySelector('#' + this._newFocusedYearId);
-            this._newFocusedYearId = '';
-            if (elementToFocus) {
-                elementToFocus.focus();
-            }
+    /** Method that allows to focus elements inside this component */
+    focusElementBySelector(elementSelector: string): void {
+        const elementToFocus: HTMLElement = this._eRef.nativeElement.querySelector(elementSelector);
+        if (elementToFocus?.focus) {
+            elementToFocus.focus();
         }
+    }
+
+    /**
+     * Set focus on month cell.
+     * It can be a selected cell, current month cell or first cell in the list
+     */
+     setFocusOnCell(): void {
+        const cellToFocus = new DefaultActiveCalendarCellStrategy().getActiveCell(this._getYearsList());
+        if (!cellToFocus?.id) {
+            return;
+        }
+        this.focusElementBySelector(`#${cellToFocus.id}`);
     }
 
     /** Method returning index of aggregated year index cell */
@@ -231,8 +237,6 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
         });
 
         this._changeDetectorRef.detectChanges();
-
-        this.focusYearElement();
     }
 
     /** Returns year name as a string. */
@@ -317,24 +321,31 @@ export class CalendarAggregatedYearViewComponent<D> implements OnInit, OnDestroy
         this._calendarService.rowAmount = this.aggregatedYearsViewGrid.rows;
         this._calendarService.colAmount = this.aggregatedYearsViewGrid.cols;
 
-        this._calendarService.onFocusIdChange.pipe(takeUntil(this._onDestroy$)).subscribe((index) => {
-            this._newFocusedYearId = this.getId(index);
-            this.focusYearElement();
-        });
         this._calendarService.focusEscapeFunction = this.focusEscapeFunction;
+
+        this._calendarService.onFocusIdChange.pipe(takeUntil(this._onDestroy$)).subscribe((index) => {
+            this._focusOnCellByIndex(index);
+        });
 
         this._calendarService.onKeySelect
             .pipe(takeUntil(this._onDestroy$))
             .subscribe((index) => this.selectYear(this._getYearsList()[index]));
 
         this._calendarService.onListStartApproach.pipe(takeUntil(this._onDestroy$)).subscribe((index) => {
-            this._newFocusedYearId = this.getId(index);
             this.loadPreviousYearsList();
+            this._changeDetectorRef.detectChanges();
+            this._focusOnCellByIndex(index);
         });
 
         this._calendarService.onListEndApproach.pipe(takeUntil(this._onDestroy$)).subscribe((index) => {
-            this._newFocusedYearId = this.getId(index);
             this.loadNextYearsList();
+            this._changeDetectorRef.detectChanges();
+            this._focusOnCellByIndex(index);
         });
+    }
+
+    /** @hidden */
+    private _focusOnCellByIndex(index: number): void {
+        this.focusElementBySelector(`#${this.getId(index)}`);
     }
 }
