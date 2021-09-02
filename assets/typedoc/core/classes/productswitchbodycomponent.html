@@ -11,6 +11,7 @@
 	<h3>Implements</h3>
 	<ul class="tsd-hierarchy">
 		<li><span class="tsd-signature-type">OnInit</span></li>
+		<li><span class="tsd-signature-type">OnDestroy</span></li>
 	</ul>
 </section>
 <section class="tsd-panel-group tsd-member-group ">
@@ -22,7 +23,7 @@
 		<div class="tsd-signature tsd-kind-icon">drag<wbr>And<wbr>Drop<wbr>Enabled<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts#L29">libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts:29</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts#L35">libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts:35</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -38,7 +39,7 @@
 		<div class="tsd-signature tsd-kind-icon">force<wbr>List<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts#L45">libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts:45</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts#L43">libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts:43</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -54,7 +55,7 @@
 		<div class="tsd-signature tsd-kind-icon">products<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ProductSwitchItem</span><span class="tsd-signature-symbol">[]</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts#L33">libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts:33</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts#L39">libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts:39</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -73,7 +74,7 @@
 		<div class="tsd-signature tsd-kind-icon">item<wbr>Clicked<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts#L41">libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts:41</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts#L51">libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts:51</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -89,7 +90,7 @@
 		<div class="tsd-signature tsd-kind-icon">products<wbr>Change<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts#L37">libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts:37</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts#L47">libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts:47</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -106,12 +107,27 @@
 		<h3>constructor</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">new <wbr>Product<wbr>Switch<wbr>Body<wbr>Component<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ProductSwitchBodyComponent</span></li>
+			<li class="tsd-signature tsd-kind-icon">new <wbr>Product<wbr>Switch<wbr>Body<wbr>Component<span class="tsd-signature-symbol">(</span>_viewportRuler<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ViewportRuler</span>, _rtlService<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RtlService</span>, _cdr<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ChangeDetectorRef</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ProductSwitchBodyComponent</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
+					<ul>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts#L60">libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts:60</a></li>
+					</ul>
 				</aside>
+				<h4 class="tsd-parameters-title">Parameters</h4>
+				<ul class="tsd-parameters">
+					<li>
+						<h5>_viewportRuler: <span class="tsd-signature-type">ViewportRuler</span></h5>
+					</li>
+					<li>
+						<h5>_rtlService: <span class="tsd-signature-type">RtlService</span></h5>
+					</li>
+					<li>
+						<h5>_cdr: <span class="tsd-signature-type">ChangeDetectorRef</span></h5>
+					</li>
+				</ul>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ProductSwitchBodyComponent</span></h4>
 			</li>
 		</ul>
@@ -120,17 +136,17 @@
 <section class="tsd-panel-group tsd-member-group ">
 	<h2>Methods</h2>
 	<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-		<a name="productswitchitemschangehandle" class="tsd-anchor"></a>
-		<h3>product<wbr>Switch<wbr>Items<wbr>Change<wbr>Handle</h3>
+		<a name="_productswitchitemschangehandle" class="tsd-anchor"></a>
+		<h3>_product<wbr>Switch<wbr>Items<wbr>Change<wbr>Handle</h3>
 		<!-- {log decorators} -->
 		<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-			<li class="tsd-signature tsd-kind-icon">product<wbr>Switch<wbr>Items<wbr>Change<wbr>Handle<span class="tsd-signature-symbol">(</span>dropEvent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdDropEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ProductSwitchItem</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+			<li class="tsd-signature tsd-kind-icon">_product<wbr>Switch<wbr>Items<wbr>Change<wbr>Handle<span class="tsd-signature-symbol">(</span>dropEvent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">FdDropEvent</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ProductSwitchItem</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 		</ul>
 		<ul class="tsd-descriptions">
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts#L68">libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts:68</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts#L98">libs/core/src/lib/product-switch/product-switch-body/product-switch-body.component.ts:98</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">

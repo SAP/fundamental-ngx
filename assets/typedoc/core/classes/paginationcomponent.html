@@ -35,15 +35,37 @@
 		<a name="arialabel" class="tsd-anchor"></a>
 		<h3>aria<wbr>Label</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;Pagination&#x27;</span></div>
+		<div class="tsd-signature tsd-kind-icon">aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L146">libs/core/src/lib/pagination/pagination.component.ts:146</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L171">libs/core/src/lib/pagination/pagination.component.ts:171</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Aria label for the navigation element</p>
+				<p>Aria label for the navigation element
+					This property is mainly provided to support reading in the right language for screen reader.
+					Here, Angular i18n&#39;s <code>$localize</code> tag is used with a default text of <code>Pagination</code>.
+				Application developer is expected to pass in their own value if they use any other localization tool.</p>
+			</div>
+		</div>
+	</section>
+	<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+		<a name="currentpagearialabel" class="tsd-anchor"></a>
+		<h3>current<wbr>Page<wbr>Aria<wbr>Label</h3>
+		<!-- {log decorators} -->
+		<div class="tsd-signature tsd-kind-icon">current<wbr>Page<wbr>Aria<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
+		<aside class="tsd-sources">
+			<ul>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L180">libs/core/src/lib/pagination/pagination.component.ts:180</a></li>
+			</ul>
+		</aside>
+		<div class="tsd-comment tsd-typography">
+			<div class="lead">
+				<p>The current page label that should be read when a page is selected.
+					This property is mainly provided to support reading in the right language for screen reader.
+					Here, Angular i18n&#39;s <code>$localize</code> tag is used with a default text of <code>Current page</code>.
+				Application developer is expected to pass in their own value if they use any other localization tool.</p>
 			</div>
 		</div>
 	</section>
@@ -54,7 +76,7 @@
 		<div class="tsd-signature tsd-kind-icon">display<wbr>Text<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L130">libs/core/src/lib/pagination/pagination.component.ts:130</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L135">libs/core/src/lib/pagination/pagination.component.ts:135</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -71,7 +93,7 @@
 		<div class="tsd-signature tsd-kind-icon">display<wbr>Total<wbr>Items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L123">libs/core/src/lib/pagination/pagination.component.ts:123</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L128">libs/core/src/lib/pagination/pagination.component.ts:128</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -87,7 +109,7 @@
 		<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L68">libs/core/src/lib/pagination/pagination.component.ts:68</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L68">libs/core/src/lib/pagination/pagination.component.ts:68</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -100,15 +122,18 @@
 		<a name="itemsperpagelabel" class="tsd-anchor"></a>
 		<h3>items<wbr>Per<wbr>Page<wbr>Label</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">items<wbr>Per<wbr>Page<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;Results per page&#x27;</span></div>
+		<div class="tsd-signature tsd-kind-icon">items<wbr>Per<wbr>Page<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L102">libs/core/src/lib/pagination/pagination.component.ts:102</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L107">libs/core/src/lib/pagination/pagination.component.ts:107</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Label for options for items per page.</p>
+				<p>Label for options for items per page.
+					This property is mainly provided to support reading in the right language for screen reader.
+					Here, Angular i18n&#39;s <code>$localize</code> tag is used with a default text of <code>Results per page</code>.
+				Application developer is expected to pass in their own value if they use any other localization tool.</p>
 			</div>
 		</div>
 	</section>
@@ -119,7 +144,7 @@
 		<div class="tsd-signature tsd-kind-icon">items<wbr>Per<wbr>Page<wbr>Template<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">TemplateRef</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L98">libs/core/src/lib/pagination/pagination.component.ts:98</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L98">libs/core/src/lib/pagination/pagination.component.ts:98</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -133,15 +158,18 @@
 		<a name="nextlabel" class="tsd-anchor"></a>
 		<h3>next<wbr>Label</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">next<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;Next&#x27;</span></div>
+		<div class="tsd-signature tsd-kind-icon">next<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L138">libs/core/src/lib/pagination/pagination.component.ts:138</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L153">libs/core/src/lib/pagination/pagination.component.ts:153</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Label for the &#39;next&#39; page button.</p>
+				<p>Label for the &#39;next&#39; page button.
+					This property is mainly provided to support reading in the right language for screen reader.
+					Here, Angular i18n&#39;s <code>$localize</code> tag is used with a default text of <code>Next</code>.
+				Application developer is expected to pass in their own value if they use any other localization tool.</p>
 			</div>
 		</div>
 	</section>
@@ -149,15 +177,18 @@
 		<a name="pagelabel" class="tsd-anchor"></a>
 		<h3>page<wbr>Label</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">page<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;Page&#x27;</span></div>
+		<div class="tsd-signature tsd-kind-icon">page<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L142">libs/core/src/lib/pagination/pagination.component.ts:142</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L162">libs/core/src/lib/pagination/pagination.component.ts:162</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Label for the &#39;Page&#39; page button.</p>
+				<p>Label for the &#39;Page&#39; page button.
+					This property is mainly provided to support reading in the right language for screen reader.
+					Here, Angular i18n&#39;s <code>$localize</code> tag is used with a default text of <code>Page</code>.
+				Application developer is expected to pass in their own value if they use any other localization tool.</p>
 			</div>
 		</div>
 	</section>
@@ -165,15 +196,18 @@
 		<a name="previouslabel" class="tsd-anchor"></a>
 		<h3>previous<wbr>Label</h3>
 		<!-- {log decorators} -->
-		<div class="tsd-signature tsd-kind-icon">previous<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x27;Previous&#x27;</span></div>
+		<div class="tsd-signature tsd-kind-icon">previous<wbr>Label<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L134">libs/core/src/lib/pagination/pagination.component.ts:134</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L144">libs/core/src/lib/pagination/pagination.component.ts:144</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
 			<div class="lead">
-				<p>Label for the &#39;previous&#39; page button.</p>
+				<p>Label for the &#39;previous&#39; page button.
+					This property is mainly provided to support reading in the right language for screen reader.
+					Here, Angular i18n&#39;s <code>$localize</code> tag is used with a default text of <code>Previous</code>.
+				Application developer is expected to pass in their own value if they use any other localization tool.</p>
 			</div>
 		</div>
 	</section>
@@ -184,7 +218,7 @@
 		<div class="tsd-signature tsd-kind-icon">total<wbr>Items<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L72">libs/core/src/lib/pagination/pagination.component.ts:72</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L72">libs/core/src/lib/pagination/pagination.component.ts:72</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -205,7 +239,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L76">libs/core/src/lib/pagination/pagination.component.ts:76</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L76">libs/core/src/lib/pagination/pagination.component.ts:76</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -218,7 +252,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L79">libs/core/src/lib/pagination/pagination.component.ts:79</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L79">libs/core/src/lib/pagination/pagination.component.ts:79</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -248,7 +282,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L85">libs/core/src/lib/pagination/pagination.component.ts:85</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L85">libs/core/src/lib/pagination/pagination.component.ts:85</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -261,7 +295,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L88">libs/core/src/lib/pagination/pagination.component.ts:88</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L88">libs/core/src/lib/pagination/pagination.component.ts:88</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -291,7 +325,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L106">libs/core/src/lib/pagination/pagination.component.ts:106</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L111">libs/core/src/lib/pagination/pagination.component.ts:111</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -304,7 +338,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L109">libs/core/src/lib/pagination/pagination.component.ts:109</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L114">libs/core/src/lib/pagination/pagination.component.ts:114</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -332,7 +366,7 @@
 		<div class="tsd-signature tsd-kind-icon">page<wbr>Change<wbr>Start<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EventEmitter</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 		<aside class="tsd-sources">
 			<ul>
-				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L150">libs/core/src/lib/pagination/pagination.component.ts:150</a></li>
+				<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L184">libs/core/src/lib/pagination/pagination.component.ts:184</a></li>
 			</ul>
 		</aside>
 		<div class="tsd-comment tsd-typography">
@@ -355,7 +389,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L170">libs/core/src/lib/pagination/pagination.component.ts:170</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L204">libs/core/src/lib/pagination/pagination.component.ts:204</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">CurrentShowing</span></h4>
@@ -373,7 +407,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L166">libs/core/src/lib/pagination/pagination.component.ts:166</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L200">libs/core/src/lib/pagination/pagination.component.ts:200</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
@@ -394,7 +428,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L285">libs/core/src/lib/pagination/pagination.component.ts:285</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L322">libs/core/src/lib/pagination/pagination.component.ts:322</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -418,7 +452,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L255">libs/core/src/lib/pagination/pagination.component.ts:255</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L290">libs/core/src/lib/pagination/pagination.component.ts:290</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -456,7 +490,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L277">libs/core/src/lib/pagination/pagination.component.ts:277</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L314">libs/core/src/lib/pagination/pagination.component.ts:314</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -479,7 +513,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L243">libs/core/src/lib/pagination/pagination.component.ts:243</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L278">libs/core/src/lib/pagination/pagination.component.ts:278</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -517,7 +551,7 @@
 			<li class="tsd-description">
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/b898d49a8/libs/core/src/lib/pagination/pagination.component.ts#L270">libs/core/src/lib/pagination/pagination.component.ts:270</a></li>
+						<li>Defined in <a href="https://github.com/SAP/fundamental-ngx/blob/a461abf65/libs/core/src/lib/pagination/pagination.component.ts#L307">libs/core/src/lib/pagination/pagination.component.ts:307</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">

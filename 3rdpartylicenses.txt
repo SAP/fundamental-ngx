@@ -429,6 +429,8 @@ Apache-2.0
 
 @fundamental-ngx/core/time-picker
 
+@fundamental-ngx/core/timeline
+
 @fundamental-ngx/core/title
 
 @fundamental-ngx/core/token
