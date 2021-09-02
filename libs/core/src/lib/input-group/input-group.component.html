@@ -30,12 +30,12 @@
                 [compact]="compact"
                 [id]="_addOnButtonId"
                 [attr.tabindex]="buttonFocusable ? 0 : -1"
-                [attr.title]="iconTitle? iconTitle: (glyphAriaLabel ? glyphAriaLabel: glyph)"
+                [attr.title]="iconTitle || glyphAriaLabel || glyph"
                 [glyph]="glyph"
                 [class.fd-shellbar__button]="inShellbar"
                 [class.is-expanded]="isExpanded"
                 [attr.aria-expanded]="inShellbar ? isExpanded : null"
-                [attr.aria-label]="glyphAriaLabel ? glyphAriaLabel : (glyph ? glyph : addOnText)"
+                [attr.aria-label]="glyphAriaLabel || glyph || addOnText"
                 [attr.aria-controls]="input"
                 [disabled]="disabled"
                 (mousedown)="preventFocus($event)"
@@ -51,8 +51,8 @@
             [id]="_addOnNonButtonId"
             [compact]="compact"
             [placement]="placement"
-            [attr.aria-label]="glyphAriaLabel ? glyphAriaLabel : (glyph ? glyph : addOnText)"
-            [attr.title]="iconTitle? iconTitle: (glyph ? glyph : addOnText)"
+            [attr.aria-label]="glyphAriaLabel || glyph || addOnText"
+            [attr.title]="iconTitle || glyph || addOnText"
         >
             <ng-container *ngIf="!glyph">{{ addOnText }}</ng-container>
             <span *ngIf="glyph" [className]="'sap-icon--' + glyph"></span>
