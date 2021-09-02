@@ -1,4 +1,11 @@
 
+## [0.32.0-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.32.0-rc.1...v0.32.0-rc.2) (2021-09-02)
+
+
+### Features
+
+* **core:** implemented MVP of timeline component ([#6394](https://github.com/SAP/fundamental-ngx/issues/6394)) ([352072e](https://github.com/SAP/fundamental-ngx/commit/352072ee77f122cdb63999c545c53f9281b3173c))
+
 ## [0.32.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.32.0-rc.0...v0.32.0-rc.1) (2021-09-01)
 
 
