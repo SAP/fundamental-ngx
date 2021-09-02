@@ -12,7 +12,10 @@ const INLINE_HELP_CLASS = 'fd-inline-help__content';
     // tslint:disable-next-line:directive-selector
     selector: '[fd-inline-help], [fd-inline-help-template]',
     providers: [PopoverService],
-    host: { '[class.fd-inline-help__trigger]': 'true' }
+    host: {
+        '[class.fd-inline-help__trigger]': 'true',
+        '[attr.aria-label]': 'ariaLabel !== null ? placement !== null ? placement +","+ariaLabel : ariaLabel : " "'
+    }
 })
 export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnChanges {
     /** The trigger events that will open/close the inline help component.
@@ -39,6 +42,9 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
     /** Inline help template to display inside generated popover */
     @Input('fd-inline-help-template')
     inlineHelpTemplate: TemplateRef<any> = null;
+
+    @Input()
+    ariaLabel: string = null;
 
     constructor(
         private _popoverService: PopoverService,
