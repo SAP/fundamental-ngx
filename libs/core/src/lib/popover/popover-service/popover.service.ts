@@ -27,7 +27,6 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 import { PopoverBodyComponent } from '../popover-body/popover-body.component';
 
 const MAX_BODY_SIZE = 99999999;
-const WIDTH_OVERLAY_OFFSET = 4;
 
 export interface PopoverTemplate {
     container: ViewContainerRef;
@@ -378,7 +377,7 @@ export class PopoverService extends BasePopoverClass {
     /** @hidden */
     private _applyWidthOverlay(): void {
         const maxWidthLimit = this.maxWidth ? this.maxWidth : MAX_BODY_SIZE;
-        const width = Math.min(this._getTriggerWidth(), maxWidthLimit) - WIDTH_OVERLAY_OFFSET;
+        const width = Math.min(this._getTriggerWidth(), maxWidthLimit);
         if (this.fillControlMode === 'at-least') {
             this._getPopoverBody()._popoverBodyMinWidth = width;
         } else if (this.fillControlMode === 'equal') {

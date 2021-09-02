@@ -140,6 +140,11 @@ $fd-popover-background-color: #fff;
     border-bottom-right-radius: 0;
 }
 
+.fd-popper__wrapper {
+    margin: auto;
+    width: calc(100% - 0.0625rem * 2);
+}
+
 
 .fd-popover__popper.fd-popover__popper--cdk-custom {
 	position: relative;
