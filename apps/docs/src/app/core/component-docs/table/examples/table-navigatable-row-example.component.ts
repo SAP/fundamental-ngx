@@ -1,24 +1,38 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Component } from '@angular/core';
+
 import { RtlService } from '@fundamental-ngx/core';
-import { map, takeUntil } from 'rxjs/operators';
+
+interface TableIem {
+    column1: string;
+    column2: string;
+    column3: string;
+    date: string;
+    navigatable: boolean;
+}
+
+interface TableMobileItem {
+    name: string;
+    status: string;
+    statusName: string;
+    dateOfExpire: string;
+    price: string;
+    country: string;
+    description: string;
+    navigatable: boolean;
+}
 
 @Component({
     selector: 'fd-table-navigatable-row-example',
     templateUrl: './table-navigatable-row-example.component.html'
 })
-export class TableNavigatableRowExampleComponent implements OnInit, OnDestroy {
-    navigationArrow$: Observable<string>;
+export class TableNavigatableRowExampleComponent {
 
-    navigationButton$: Observable<string>;
-
-    tableRows: any[] = [
+    navigatableRows: TableIem[] = [
         {
             column1: 'user.name@email.com',
             column2: 'Row 1',
             column3: 'Row 1',
             date: '09-07-18',
-            checked: false,
             navigatable: true
         },
         {
@@ -26,7 +40,6 @@ export class TableNavigatableRowExampleComponent implements OnInit, OnDestroy {
             column2: 'Row 2',
             column3: 'Row 2',
             date: '09-07-18',
-            checked: false,
             navigatable: false
         },
         {
@@ -34,36 +47,11 @@ export class TableNavigatableRowExampleComponent implements OnInit, OnDestroy {
             column2: 'Row 3',
             column3: 'Row 3',
             date: '09-07-18',
-            checked: false,
             navigatable: true
         }
     ];
 
-    tableRowsAdditional: any[] = [
-        {
-            column1: 'user.name@email.com',
-            column2: 'Row1',
-            date: '09-07-18',
-            type: 'search',
-            navigatable: true
-        },
-        {
-            column1: 'user.name@email.com',
-            column2: 'Row 2',
-            date: '09-08-18',
-            type: 'cart',
-            navigatable: false
-        },
-        {
-            column1: 'user.name@email.com',
-            column2: 'Row 3',
-            date: '02-14-18',
-            type: 'calendar',
-            navigatable: true
-        }
-    ];
-
-    fruits: any[] = [
+    fruits: TableMobileItem[] = [
         {
             name: 'Banana',
             status: 'positive',
@@ -72,7 +60,6 @@ export class TableNavigatableRowExampleComponent implements OnInit, OnDestroy {
             price: '5 EUR',
             country: 'India',
             description: 'A banana is an elongated, edible fruit – botanically a berry – produced by several kinds of large herbaceous flowering plants in the genus Musa.',
-            checked: false,
             navigatable: true
         },
         {
@@ -83,45 +70,15 @@ export class TableNavigatableRowExampleComponent implements OnInit, OnDestroy {
             price: '5,5 EUR',
             country: 'USA',
             description: 'An apple is an edible fruit produced by an apple tree (Malus domestica). Apple trees are cultivated worldwide and are the most widely grown species in the genus Malus.',
-            checked: false,
             navigatable: false
         }
     ];
 
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    get isRtl(): boolean {
+        return this._rtlService.rtl.getValue();
+    }
 
     constructor(private _rtlService: RtlService) {}
-
-    ngOnInit(): void {
-        this.navigationArrow$ = this._rtlService.rtl.pipe(
-            takeUntil(this._onDestroy$),
-            map((isRtl) => (isRtl ? 'slim-arrow-left' : 'slim-arrow-right'))
-        );
-
-        this.navigationButton$ = this._rtlService.rtl.pipe(
-            takeUntil(this._onDestroy$),
-            map((isRtl) => (isRtl ? 'sap-icon--navigation-left-arrow' : 'sap-icon--navigation-right-arrow'))
-        );
-    }
-
-    ngOnDestroy(): void {
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
-    }
-
-    getGlyph(row: any): string {
-        if (row.navigatable) {
-            let arrowGlyph: string;
-            this.navigationArrow$.subscribe((arrow) => arrowGlyph = arrow);
-            return arrowGlyph;
-        }
-    }
-
-    getClass(): string {   
-        let arrowButton: string;
-        this.navigationButton$.subscribe((arrow) => arrowButton = arrow);
-        return arrowButton;
-    }
 
     alert(row: any): void {
         if (row.navigatable) {

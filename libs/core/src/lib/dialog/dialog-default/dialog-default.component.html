@@ -1,10 +1,12 @@
 <fd-dialog>
     <fd-dialog-header>
-        <h1 fd-title>{{ _defaultDialogContent?.title }}</h1>
-        <button fd-dialog-close-button
-                *ngIf="_defaultDialogContent?.closeButtonCallback"
-                (click)="_closeButtonClicked()">
-        </button>
+        <h1 fd-title [id]="_defaultDialogContent?.titleId">{{ _defaultDialogContent?.title }}</h1>
+        <button
+            fd-dialog-close-button
+            *ngIf="_defaultDialogContent?.closeButtonCallback"
+            [title]="_defaultDialogContent?.closeButtonTitle"
+            (click)="_closeButtonClicked()"
+        ></button>
         <ng-container *ngIf="_defaultDialogContent?.subHeader">
             <ng-template fdTemplate="subheader">
                 <ng-container *ngTemplateOutlet="_defaultDialogContent.subHeader"></ng-container>
@@ -18,18 +20,22 @@
 
     <fd-dialog-footer *ngIf="_showFooter()">
         <fd-button-bar
-                *ngIf="_defaultDialogContent?.approveButton"
-                fdType="emphasized"
-                fd-initial-focus
-                [label]="_defaultDialogContent?.approveButton"
-                [compact]="!_defaultDialogConfiguration.mobile"
-                (click)="_approveButtonClicked()">
+            *ngIf="_defaultDialogContent?.approveButton"
+            fdType="emphasized"
+            fd-initial-focus
+            [label]="_defaultDialogContent?.approveButton"
+            [compact]="!_defaultDialogConfiguration.mobile"
+            (click)="_approveButtonClicked()"
+            [ariaLabel]="_defaultDialogContent?.approveButtonAriaLabel"
+        >
         </fd-button-bar>
         <fd-button-bar
-                *ngIf="_defaultDialogContent?.cancelButton"
-                [label]="_defaultDialogContent?.cancelButton"
-                [compact]="!_defaultDialogConfiguration.mobile"
-                (click)="_cancelButtonClicked()">
+            *ngIf="_defaultDialogContent?.cancelButton"
+            [label]="_defaultDialogContent?.cancelButton"
+            [compact]="!_defaultDialogConfiguration.mobile"
+            (click)="_cancelButtonClicked()"
+            [ariaLabel]="_defaultDialogContent?.closeButtonAriaLabel"
+        >
         </fd-button-bar>
     </fd-dialog-footer>
 </fd-dialog>

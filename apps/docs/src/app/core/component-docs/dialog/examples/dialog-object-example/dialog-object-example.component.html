@@ -1,7 +1,7 @@
 <button fd-button label="Open Dialog From Object" (click)="openDialog()"></button>
 
 <ng-template #dialogContent>
-    <div style="padding: 0 1rem">
+    <div style="padding: 0 1rem" role="dialog">
         You can also create dialog without building whole template.
     </div>
 </ng-template>
@@ -11,9 +11,9 @@
     <div fd-bar-middle>
         <fd-bar-element [fullWidth]="true">
             <fd-input-group glyph="menu"
-                            glyphAriaLabel="Submit"
-                            [button]="true"
-                            [compact]="true">
+                glyphAriaLabel="Submit"
+                [button]="true"
+                [compact]="true">
             </fd-input-group>
         </fd-bar-element>
     </div>

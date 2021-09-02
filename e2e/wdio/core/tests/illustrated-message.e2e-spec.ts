@@ -30,7 +30,7 @@ describe('Illustrated-message test suite', function() {
             expect(elementDisplayed(dialogPopup)).toBe(true, 'dialog not displayed');
         });
 
-        it('should check visual regression dialog popup illustrated message', () => {
+        xit('should check visual regression dialog popup illustrated message', () => {
             saveElementScreenshot(dialogPopup, 'dialogPopup', illustratedMessagePage.getScreenshotFolder());
             expect(checkElementScreenshot(dialogPopup, 'dialogPopup', illustratedMessagePage.getScreenshotFolder()))
                 .toBeLessThan(5, 'the dialogPopup didnt match the baseline screenshot');
