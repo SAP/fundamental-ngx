@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { SelectItem } from '@fundamental-ngx/platform';
+
+import { SelectItem } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-platform-checkbox-group-examples',

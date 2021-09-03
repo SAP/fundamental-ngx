@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fdp-platform-menu-scrolling-example',
@@ -6,6 +6,4 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
     styleUrls: ['./platform-menu-scrolling-example.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class PlatformMenuScrollingExampleComponent implements OnInit {
-    ngOnInit(): void { }
-}
+export class PlatformMenuScrollingExampleComponent {}

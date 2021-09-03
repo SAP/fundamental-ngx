@@ -2,7 +2,6 @@ import {
     browserIsFirefox,
     click,
     elementArray,
-    getAttributeByName,
     getElementArrayLength,
     getElementClass,
     getText,

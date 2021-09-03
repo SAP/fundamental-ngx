@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { PanelExpandChangeEvent } from '@fundamental-ngx/platform';
+
+import { PanelExpandChangeEvent } from '@fundamental-ngx/platform/panel';
 
 @Component({
     selector: 'fdp-platform-panel-expandable-example',

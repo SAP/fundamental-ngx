@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { SuggestionItem, SearchInput } from '@fundamental-ngx/platform';
+
+import { SuggestionItem, SearchInput } from '@fundamental-ngx/platform/search-field';
 
 @Component({
     selector: 'fdp-platform-search-field-basic-example',

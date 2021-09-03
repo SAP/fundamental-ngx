@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fdp-platform-menu-basic-example',
@@ -6,10 +6,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
     styleUrls: ['./platform-menu-basic-example.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class PlatformMenuBasicExampleComponent implements OnInit {
+export class PlatformMenuBasicExampleComponent {
     public item = '';
-
-    ngOnInit(): void {}
 
     onItemSelect(item: string): void {
         this.item = item;

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 @Component({
     selector: 'fdp-platform-standard-list-item-border-less-example',
     templateUrl: './platform-standard-list-item-border-less-example.component.html'

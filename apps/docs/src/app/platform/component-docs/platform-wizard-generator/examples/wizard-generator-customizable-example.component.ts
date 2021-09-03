@@ -2,7 +2,8 @@ import { Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { WizardDialogGeneratorService, WizardGeneratorFormsValue, WizardGeneratorItem, WizardTitle } from '@fundamental-ngx/platform';
+
+import { WizardDialogGeneratorService, WizardGeneratorFormsValue, WizardGeneratorItem, WizardTitle } from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
   selector: 'fdp-wizard-generator-customizable-example',

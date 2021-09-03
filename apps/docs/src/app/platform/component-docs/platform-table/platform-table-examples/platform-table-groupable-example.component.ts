@@ -8,7 +8,7 @@ import {
     TableState,
     TableRowSelectionChangeEvent,
     TableGroupChangeEvent
-} from '@fundamental-ngx/platform';
+} from '@fundamental-ngx/platform/table';
 
 @Component({
     selector: 'fdp-platform-table-groupable-example',

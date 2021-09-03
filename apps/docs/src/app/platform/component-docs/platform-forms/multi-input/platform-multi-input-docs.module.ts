@@ -3,15 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-import {
-    DataProvider,
-    DATA_PROVIDERS,
-    FdpFormGroupModule,
-    PlatformButtonModule,
-    PlatformListModule,
-    PlatformMultiInputModule,
-    StandardListItemModule
-} from '@fundamental-ngx/platform';
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
+import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
+import { DataProvider, DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { FdpFormGroupModule, PlatformMultiInputModule } from '@fundamental-ngx/platform/form';
+import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
 
 import { PlatformMultiInputDocsComponent } from './platform-multi-input-docs.component';
 import { PlatformMultiInputExampleComponent } from './platform-multi-input-example/platform-multi-input-example.component';
@@ -28,9 +26,6 @@ import { SharedDocumentationModule } from '../../../../documentation/shared-docu
 import { MULTI_INPUT_MOBILE_CONFIG } from '../../../../documentation/utilities/consts/mobile-mode-configuration-tokens';
 import { PlatformMultiInputReactiveExampleComponent } from './platform-multi-input-example/platform-multi-input-reactive-example.component';
 import { PlatformMultiInputCompactExampleComponent } from './platform-multi-input-example/platform-multi-input-compact-example.component';
-import { DialogModule } from '@fundamental-ngx/core/dialog';
-import { InputGroupModule } from '@fundamental-ngx/core/input-group';
-import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
 
 const routes: Routes = [
     {

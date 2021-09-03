@@ -1,7 +1,6 @@
 import {
     browserIsFirefox,
-    click, clickWithOption,
-    doesItExist,
+    click, doesItExist,
     getElementArrayLength,
     getText,
     getTextArr,

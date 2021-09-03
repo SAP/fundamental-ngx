@@ -8,7 +8,7 @@ import {
     saveElementScreenshot,
     waitForElDisplayed,
     waitForInvisibilityOf,
-    checkElementScreenshot, scrollIntoView, isElementDisplayed, pause, waitForPresent
+    checkElementScreenshot, isElementDisplayed, pause, waitForPresent
 } from '../../driver/wdio';
 
 describe('Alert test suite', function() {

@@ -59,7 +59,7 @@
     "compile-typedoc-all": "npm run compile-typedoc-core && npm run compile-typedoc-platform && npm run compile-typedoc-moment-adapter",
     "compile-typedoc-core": "rm -rf apps/docs/src/assets/typedoc/core && typedoc --out apps/docs/src/assets/typedoc/core libs/core/src/lib --tsconfig libs/core/src/lib/tsconfig.lib.json --hideGenerator --theme apps/docs/src/fd-typedoc",
     "compile-typedoc-moment-adapter": "rm -rf apps/docs/src/assets/typedoc/moment-adapter && typedoc --out apps/docs/src/assets/typedoc/moment-adapter libs/moment-adapter/src/lib --tsconfig libs/moment-adapter/tsconfig.lib.json --hideGenerator --theme apps/docs/src/fd-typedoc",
-    "compile-typedoc-platform": "rm -rf apps/docs/src/assets/typedoc/platform && typedoc --out apps/docs/src/assets/typedoc/platform libs/platform/src/lib --tsconfig libs/platform/tsconfig.lib.json --hideGenerator --theme apps/docs/src/fd-typedoc",
+    "compile-typedoc-platform": "rm -rf apps/docs/src/assets/typedoc/platform && typedoc --out apps/docs/src/assets/typedoc/platform libs/platform/src/lib --tsconfig libs/platform/src/lib/tsconfig.lib.json --hideGenerator --theme apps/docs/src/fd-typedoc",
     "compile-typedoc-json": "typedoc --json apps/docs/src/assets/typedoc/typedoc.json --hideGenerator --theme apps/docs/src/fd-typedoc libs/core/src/lib",
     "build:schematics": "./node_modules/.bin/tsc -p libs/core/tsconfig.schematics.json && npm run copy:schemas && npm run copy:collection",
     "copy:schemas": "cp libs/core/schematics/ng-add/schema.json dist/libs/core/schematics/ng-add/schema.json",

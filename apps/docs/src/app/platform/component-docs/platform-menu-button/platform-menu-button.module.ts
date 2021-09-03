@@ -4,12 +4,13 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
+import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
+import { PlatformMenuButtonModule } from '@fundamental-ngx/platform/menu-button';
 import { PlatformMenuButtonHeaderComponent } from './platform-menu-button-header/platform-menu-button-header.component';
 import { PlatformMenuButtonDocsComponent } from './platform-menu-button-docs.component';
 import { PlatformMenuButtonCompactExampleComponent } from './platform-menu-button-examples/platform-menu-button-compact-examples.component';
 import { PlatformMenuButtonCozyExampleComponent } from './platform-menu-button-examples/platform-menu-button-cozy-examples.component';
 import { PlatformMenuButtonExampleComponent } from './platform-menu-button-examples/platform-menu-button-examples.component';
-import { PlatformMenuButtonModule, PlatformMenuModule } from '@fundamental-ngx/platform';
 
 const routes: Routes = [
     {

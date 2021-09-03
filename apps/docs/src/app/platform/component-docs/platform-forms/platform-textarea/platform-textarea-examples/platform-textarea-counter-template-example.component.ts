@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { ValidatorFn, Validators } from '@angular/forms';
     templateUrl: './platform-textarea-counter-template-example.component.html',
     encapsulation: ViewEncapsulation.None
 })
-export class PlatformTextareaCounterTemplateExampleComponent implements OnInit {
+export class PlatformTextareaCounterTemplateExampleComponent {
     private textareaValidator: ValidatorFn[];
     tValue =
         'Lorem ipsum dolor st amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat';
@@ -14,6 +14,4 @@ export class PlatformTextareaCounterTemplateExampleComponent implements OnInit {
     constructor() {
         this.textareaValidator = [Validators.maxLength(10)];
     }
-
-    ngOnInit(): void {}
 }

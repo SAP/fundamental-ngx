@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FileUploaderSelectionChangeEvent } from '@fundamental-ngx/platform';
+
+import { FileUploaderSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-file-uploader-compact-example',

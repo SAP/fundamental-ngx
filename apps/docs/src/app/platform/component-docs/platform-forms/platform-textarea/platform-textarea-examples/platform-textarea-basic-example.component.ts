@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
     templateUrl: './platform-textarea-basic-example.component.html',
     encapsulation: ViewEncapsulation.None
 })
-export class PlatformTextareaBasicExampleComponent implements OnInit {
+export class PlatformTextareaBasicExampleComponent {
     form: FormGroup;
     data: ReadonlyDescriptionObject;
 
@@ -22,7 +22,6 @@ export class PlatformTextareaBasicExampleComponent implements OnInit {
                 'This is a readonly description where you can scroll down to read but cannot edit anything.'
         );
     }
-    ngOnInit(): void {}
 }
 class ReadonlyDescriptionObject {
     constructor(public readonlyDescription: string) {}
