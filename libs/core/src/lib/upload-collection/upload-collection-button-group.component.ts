@@ -67,23 +67,35 @@ export class UploadCollectionButtonGroupComponent {
     cancelAriaLabel = 'Cancel';
 
     /** @hidden */
-    editButtonClicked(): void {
+    editButtonClicked(event?: MouseEvent): void {
+        if (event) {
+            event.stopPropagation();
+        }
         this.editClicked.emit(true);
         this.editMode = true;
     }
 
     /** @hidden */
-    deleteButtonClicked(): void {
+    deleteButtonClicked(event?: MouseEvent): void {
+        if (event) {
+            event.stopPropagation();
+        }
         this.deleteClicked.emit();
     }
 
     /** @hidden */
-    okButtonClicked(): void {
+    okButtonClicked(event?: MouseEvent): void {
+        if (event) {
+            event.stopPropagation();
+        }
         this.okClicked.emit();
     }
 
     /** @hidden */
-    cancelButtonClicked(): void {
+    cancelButtonClicked(event?: MouseEvent): void {
+        if (event) {
+            event.stopPropagation();
+        }
         this.editClicked.emit(false);
         this.editMode = false;
     }

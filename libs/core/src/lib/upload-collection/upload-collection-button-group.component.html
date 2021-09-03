@@ -1,7 +1,7 @@
 <button
     *ngIf="!editMode && allowFileNameEdit"
     [disabled]="disableFileNameEdit"
-    (click)="editButtonClicked()"
+    (click)="editButtonClicked($event)"
     fd-button
     fdType="transparent"
     glyph="edit"
@@ -10,7 +10,7 @@
 <button
     *ngIf="!editMode && allowFileDeletion"
     [disabled]="disableFileDeletion"
-    (click)="deleteButtonClicked()"
+    (click)="deleteButtonClicked($event)"
     fd-button
     fdType="transparent"
     glyph="decline"
@@ -19,7 +19,7 @@
 <button
     *ngIf="editMode"
     [disabled]="okDisabled"
-    (click)="okButtonClicked()"
+    (click)="okButtonClicked($event)"
     fd-button
     fdType="transparent"
     [attr.aria-label]="okAriaLabel"
@@ -28,7 +28,7 @@
 </button>
 <button
     *ngIf="editMode"
-    (click)="cancelButtonClicked()"
+    (click)="cancelButtonClicked($event)"
     fd-button
     fdType="transparent"
     [attr.aria-label]="cancelAriaLabel"

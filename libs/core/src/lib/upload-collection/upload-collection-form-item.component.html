@@ -8,5 +8,6 @@
     [attr.placeholder]="placeholder"
     [(ngModel)]="fileName"
     [state]="!fileName ? 'error' : null"
+    (click)="$event.stopPropagation()"
 />
 <span *ngIf="editMode" class="fd-upload-collection__extension">.{{ _extension }}</span>
