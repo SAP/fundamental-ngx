@@ -10,18 +10,19 @@ export class HorizontalTopSideStrategy extends BaseStrategy {
 
     calculatePosition(nodes: TimelineNodeComponent[]): any {
         let prevEdge = 0;
+        const parentHeight = nodes[0].el.nativeElement.parentElement.clientHeight;
         nodes.forEach(node => {
             const el = node.el.nativeElement;
             el.classList.add('fd-timeline__node-wrapper--horizontal');
             el.classList.add('fd-timeline__node-wrapper--top');
             el.style.width = this.horizontalNodeWidth + 'px';
             el.style.left = prevEdge + 'px';
+            el.style.top =  parentHeight - el.offsetHeight - 24 + 'px';
 
 
             prevEdge += 320;
 
-            const dotPosition = el._leftOffset + this.arrowOffset;
-            node.lastLine.nativeElement.style.width = this.horizontalNodeWidth + el.offsetLeft - dotPosition + 'px';
+            node.lastLine.nativeElement.style.flexGrow = 1;
         });
     }
 }

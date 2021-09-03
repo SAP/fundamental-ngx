@@ -36,7 +36,8 @@ import { takeUntil } from 'rxjs/operators';
     providers: [TimelinePositionControlService],
     host: {
         role: 'timeline',
-        'arial-label': 'timeline'
+        'arial-label': 'timeline',
+        'class': 'fd-timeline'
     }
 })
 export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, AfterViewInit {
@@ -64,7 +65,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
      * Axis for layout
      */
     @Input()
-    layout: TimelineSidePosition = 'top';
+    layout: TimelineSidePosition = 'double';
 
     /* Outlets within the timeline template where the dataNodes will be inserted. */
     /** @hidden */
