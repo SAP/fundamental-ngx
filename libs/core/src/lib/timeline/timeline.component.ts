@@ -10,7 +10,7 @@ import {
     IterableDiffers,
     OnChanges,
     OnDestroy,
-    OnInit,
+    OnInit, Optional,
     QueryList,
     SimpleChanges,
     TrackByFunction,
@@ -23,6 +23,8 @@ import { TimelineNodeOutletDirective } from './directives/timeline-node-outlet.d
 import { TimelineNodeDefDirective, TimelineNodeOutletContext } from './directives/timeline-node-def.directive';
 import { TimelinePositionControlService } from './services/timeline-position-control.service';
 import { TimelineAxis, TimeLinePositionStrategy, TimelineSidePosition } from './types';
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-timeline',
@@ -56,13 +58,13 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
      * Axis for layout
      */
     @Input()
-    axis: TimelineAxis = 'vertical';
+    axis: TimelineAxis = 'horizontal';
 
     /**
      * Axis for layout
      */
     @Input()
-    layout: TimelineSidePosition = 'double';
+    layout: TimelineSidePosition = 'top';
 
     /* Outlets within the timeline template where the dataNodes will be inserted. */
     /** @hidden */
@@ -77,6 +79,8 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
     /** Differ used to find the changes in the data provided by the data source. */
     private _dataDiffer: IterableDiffer<T>;
 
+    private _isRtl: boolean = null;
+
     /** @hidden */
     private readonly _onDestroy = new Subject<void>();
 
@@ -85,12 +89,22 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
         private _differs: IterableDiffers,
         private _cd: ChangeDetectorRef,
         private _timelinePositionControlService: TimelinePositionControlService,
+        @Optional() private _rtlService: RtlService,
     ) {
     }
 
     /** @hidden */
     ngOnInit(): void {
         this._dataDiffer = this._differs.find([]).create(this.trackBy);
+
+        this._rtlService?.rtl
+            .pipe(takeUntil(this._onDestroy))
+            .subscribe(rtl => {
+                if (this._isRtl !== null) {
+                    this._timelinePositionControlService.switchRtlMode(rtl);
+                }
+                this._isRtl = rtl;
+            })
     }
 
     /** @hidden */
@@ -158,7 +172,10 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
     }
 
     private _setPositionStrategy(): void {
-        this._timelinePositionControlService.setStrategy(`${this.axis}-${this.layout}` as TimeLinePositionStrategy);
+        this._timelinePositionControlService.setStrategy(`${this.axis}-${this.layout}` as TimeLinePositionStrategy,
+            {
+                isRtl: this._isRtl,
+            });
     }
 
     /**

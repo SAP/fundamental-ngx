@@ -1,17 +1,25 @@
-import { TimelineNodePosition } from '../../types';
+import { TimelineNodeComponent } from '../../components/timeline-node/timeline-node.component';
 
 export abstract class BaseStrategy {
 
     arrowOffset = 30;
+    horizontalNodeWidth = 320;
 
-    abstract getCoords(): any;
+    protected _isRtl = false;
 
-    constructor() {
+    constructor(options) {
+        this._isRtl = options.isRtl;
         // this.arrowOffset = this._convertRemToPixels(1.8);
     }
 
     // ToDO: add memorizing pattern
-    private _convertRemToPixels(rem: number = 1): number {
+    static convertRemToPixels(rem: number = 1): number {
         return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
     }
+
+    switchRtlMode(isRtl: boolean): void {
+        this._isRtl = isRtl;
+    }
+
+    calculatePosition(nodes: TimelineNodeComponent[]): any {}
 }

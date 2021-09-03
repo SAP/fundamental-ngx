@@ -332,12 +332,12 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
         @include fd-reset();
         @include fd-timeline-set-border();
 
-        width: 0.0625rem;
-        margin: auto;
-
-        &:first-child {
-            height: 1rem;
-        }
+        //width: 0.0625rem;
+        //margin: auto;
+        //
+        //&:first-child {
+        //    height: 1rem;
+        //}
     }
 
     &__posts {
@@ -357,7 +357,6 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
         height: auto;
         padding: 0.5rem;
         position: relative;
-        margin-bottom: 2rem;
         border-radius: 0.25rem;
         border: $fd-timeline-post-border;
         background: $fd-timeline-post-background;
@@ -408,33 +407,33 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
         //    }
         //}
 
-        &--top {
-            @include fd-after() {
-                @include fd-timeline-arrow-rotate(315deg);
-
-                left: $fd-timeline-arrow-offset;
-                top: $fd-timeline-post-arrow-offset;
-            }
-
-            @include fd-after-rtl() {
-                left: auto;
-                right: $fd-timeline-arrow-offset;
-            }
-        }
-
-        &--bottom {
-            @include fd-after() {
-                @include fd-timeline-arrow-rotate(135deg);
-
-                left: $fd-timeline-arrow-offset;
-                bottom: $fd-timeline-post-arrow-offset;
-            }
-
-            @include fd-after-rtl() {
-                left: auto;
-                right: $fd-timeline-arrow-offset;
-            }
-        }
+        //&--top {
+        //    @include fd-after() {
+        //        @include fd-timeline-arrow-rotate(315deg);
+        //
+        //        left: $fd-timeline-arrow-offset;
+        //        top: $fd-timeline-post-arrow-offset;
+        //    }
+        //
+        //    @include fd-after-rtl() {
+        //        left: auto;
+        //        right: $fd-timeline-arrow-offset;
+        //    }
+        //}
+        //
+        //&--bottom {
+        //    @include fd-after() {
+        //        @include fd-timeline-arrow-rotate(135deg);
+        //
+        //        left: $fd-timeline-arrow-offset;
+        //        bottom: $fd-timeline-post-arrow-offset;
+        //    }
+        //
+        //    @include fd-after-rtl() {
+        //        left: auto;
+        //        right: $fd-timeline-arrow-offset;
+        //    }
+        //}
     }
 
     &__post-header-container {

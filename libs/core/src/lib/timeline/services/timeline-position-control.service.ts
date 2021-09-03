@@ -1,57 +1,52 @@
 import { Injectable, NgZone } from '@angular/core';
 import { TimelineNodeComponent } from '../components/timeline-node/timeline-node.component';
 import { Subject } from 'rxjs';
-import { TimeLinePositionStrategy } from '../types';
-import { VerticalRightSideStrategy } from './position-strategies/vertical-right-side-strategy';
-import { VerticalDoubleSidesStrategy } from './position-strategies/vertical-double-sides-strategy';
-import { VerticalLeftSideStrategy } from './position-strategies/vertical-left-side-strategy';
+import { StrategyOptions, TimeLinePositionStrategy } from '../types';
+import { BaseStrategy } from './position-strategies/base-strategy';
+import { PositionStrategyFactory } from './position-strategies/position-strategy-factory';
 
 @Injectable()
 export class TimelinePositionControlService {
 
-  private _unsortedItems = new Set<TimelineNodeComponent>();
+    private _unsortedItems = new Set<TimelineNodeComponent>();
+    private _nodeItems: TimelineNodeComponent[] = [];
+    private readonly _destroyed = new Subject<void>();
+    private _positionStrategy: BaseStrategy;
 
-  private _nodeItems: TimelineNodeComponent[] = [];
+    constructor(
+        private _ngZone: NgZone
+    ) {
+    }
 
-  private readonly _destroyed = new Subject<void>();
+    calculatePositions(): void {
+        this._positionStrategy.calculatePosition(this._nodeItems);
+    }
 
-  // private _positionStrategy: BaseStrategy;
-  private _positionStrategy: VerticalRightSideStrategy;
-  // private _positionStrategy: VerticalLeftSideStrategy;
-  // private _positionStrategy: VerticalDoubleSidesStrategy;
+    setStrategy(strategy: TimeLinePositionStrategy, options: Partial<StrategyOptions> = {}): void {
+        this._positionStrategy = PositionStrategyFactory.getStrategy(strategy, options);
+    }
 
-  constructor(
-      private _ngZone: NgZone,
-  ) { }
+    registerNode(node: TimelineNodeComponent): void {
+        this._unsortedItems.add(node);
+        this._nodeItems.push(node);
+    }
 
-  calculatePositions(): void {
-    this._positionStrategy.calculatePosition(this._nodeItems);
-  }
+    removeNode(node: TimelineNodeComponent): void {
+        this._unsortedItems.delete(node);
+        this._nodeItems = this._nodeItems.filter(item => item !== node);
+    }
 
-  setStrategy(strategy: TimeLinePositionStrategy): void {
-    // this._positionStrategy = new VerticalDoubleSidesStrategy();
-    this._positionStrategy = new VerticalRightSideStrategy();
-    // this._positionStrategy = new VerticalLeftSideStrategy();
-    // this._positionStrategy = PositionStrategyFactory.getStrategy(strategy);
-  }
+    moveNode(previousIndex: number, currentIndex: number): void {
 
-  registerNode(node: TimelineNodeComponent): void {
-    this._unsortedItems.add(node);
-    this._nodeItems.push(node);
-  }
+    }
 
-  removeNode(node: TimelineNodeComponent): void {
-    this._unsortedItems.delete(node);
-    this._nodeItems = this._nodeItems.filter(item => item !== node);
-  }
+    switchRtlMode(isRtl: boolean): void {
+        this._positionStrategy.switchRtlMode(isRtl);
+    }
 
-  moveNode(previousIndex: number, currentIndex: number): void {
-
-  }
-
-  destroy(): void {
-    this._unsortedItems.clear();
-    this._destroyed.next();
-    this._destroyed.complete();
-  }
+    destroy(): void {
+        this._unsortedItems.clear();
+        this._destroyed.next();
+        this._destroyed.complete();
+    }
 }
