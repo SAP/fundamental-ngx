@@ -3,7 +3,6 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 import * as timelineBasicExampleTs from '!raw-loader!./examples/timeline-basic-example/timeline-basic-example.component.ts';
 import * as timelineBasicDataExampleTs from '!raw-loader!./examples/timeline-basic-example/timeline-example-data.ts';
 import * as timelineBasicExampleHtml from '!raw-loader!./examples/timeline-basic-example/timeline-basic-example.component.html';
-import { ThemesService } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-timeline-docs',

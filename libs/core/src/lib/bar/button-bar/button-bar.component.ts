@@ -23,7 +23,7 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
               [compact]="compact"
               [fdType]="fdType"
               [label]="label"
-              [attr.title]="ariaLabel"
+              [attr.title]="title"
               [attr.aria-label]="ariaLabel"
               [fdMenu]="fdMenu"
               [disabled]="disabled"
@@ -45,10 +45,15 @@ export class ButtonBarComponent extends BaseButton implements OnInit, OnDestroy 
     @Input()
     fdType: ButtonType = 'transparent';
 
+    /** adding title to the button */
+    @Input()
+    title: string;
+
     /** Whether or not the button is compact. */
     @Input()
     compact?: boolean;
 
+    /** Aria label attribute value. */
     @Input()
     ariaLabel: string;
 

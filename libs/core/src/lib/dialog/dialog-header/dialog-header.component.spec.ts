@@ -80,7 +80,7 @@ describe('DialogHeaderComponent', () => {
         component.dialogHeaderRef.dialogConfig.mobile = true;
 
         await wait(fixture);
-        const footerEl = fixture.nativeElement.querySelector('header');
+        const footerEl = fixture.nativeElement.querySelector('[fd-bar]');
 
         expect(footerEl).toHaveClass('fd-dialog__header');
         expect(footerEl).toHaveClass('fd-bar--cozy');

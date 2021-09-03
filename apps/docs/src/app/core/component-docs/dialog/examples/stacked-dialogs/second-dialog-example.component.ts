@@ -6,11 +6,11 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
         <fd-dialog>
             <fd-dialog-header>
                 <h1 id="fd-dialog-header-9" fd-title>Second Dialog</h1>
-                <button fd-dialog-close-button (click)="dialogRef.dismiss()"></button>
+                <button fd-dialog-close-button (click)="dialogRef.dismiss()" title="close"></button>
             </fd-dialog-header>
 
             <fd-dialog-body>
-                <div id="fd-dialog-body-9" role="document">
+                <div id="fd-dialog-body-9" role="dialog">
                     This is the second dialog!<br />
                     It is completely independent from the first dialog and can be controlled separately!
                 </div>
@@ -23,6 +23,7 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
                     label="Close"
                     [compact]="true"
                     (click)="dialogRef.close()"
+                    ariaLabel="Close Emphasized"
                 >
                 </fd-button-bar>
             </fd-dialog-footer>

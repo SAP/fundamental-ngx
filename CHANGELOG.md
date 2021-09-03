@@ -1,4 +1,65 @@
 
+## [0.32.0-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.32.0-rc.0...v0.32.0-rc.1) (2021-09-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core:** Added new directives for toolbar overflow as part of style cleanup fd-toolbar-overflow-button, fd-toolbar-overflow-button-menu
+
+Before
+Toolbar overflow button
+<button fd-toolbar-item fd-button label="Button" [compact]="true"></button>
+
+After
+Toolbar overflow button
+<button fd-toolbar-item fd-button fd-toolbar-overflow-button label="Button" [compact]="true"></button>
+
+Before
+Toolbar overflow menu button
+<button fd-toolbar-item fd-button label="Button" [fdMenu]="true" [compact]="true"></button>
+
+After
+Toolbar overflow menu button
+<button fd-toolbar-item fd-button fd-toolbar-overflow-button fd-toolbar-overflow-button-menu label="Button" [fdMenu]="true" [compact]="true"></button>
+
+### Bug Fixes
+
+* **core:** remove hardcoded style from ngx for toolbar component ([#6396](https://github.com/SAP/fundamental-ngx/issues/6396)) ([68ae34a](https://github.com/SAP/fundamental-ngx/commit/68ae34adc2407cffb4b569d602fcba8a781d80fc))
+
+## [0.32.0-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.29...v0.32.0-rc.0) (2021-08-31)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core,platform:** Table (core, platform) navigatable rows feature refactored, see documentation & breaking changes wiki.
+* [navigatable] input prop removed from core table
+* [navigationButton] input prop removed from platform table
+* setNavigatableRowState, setRowNavigationIndicator, setRowNavigationTarget methods removed from platform table
+
+### Bug Fixes
+
+* **core,platform:** table navigatable rows ([#6423](https://github.com/SAP/fundamental-ngx/issues/6423)) ([b541b9d](https://github.com/SAP/fundamental-ngx/commit/b541b9d85a8e6f850c3a2edd1ab6a84091d2bf72))
+
+### [0.31.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.28...v0.31.1-rc.29) (2021-08-31)
+
+### [0.31.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.27...v0.31.1-rc.28) (2021-08-31)
+
+### [0.31.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.26...v0.31.1-rc.27) (2021-08-31)
+
+
+### Bug Fixes
+
+* **core:** fixing the accessibility for the dialog component ([#6297](https://github.com/SAP/fundamental-ngx/issues/6297)) ([1655868](https://github.com/SAP/fundamental-ngx/commit/165586850d1790f06e430fd8f1452e663608de52))
+
+### [0.31.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.25...v0.31.1-rc.26) (2021-08-31)
+
+
+### Bug Fixes
+
+* **core:** fix Pagination component a11y to announce currently chosen page ([#6196](https://github.com/SAP/fundamental-ngx/issues/6196)) ([26eb696](https://github.com/SAP/fundamental-ngx/commit/26eb69616883e8562effed5808bf360dda6dcd3c))
+
+### [0.31.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.24...v0.31.1-rc.25) (2021-08-30)
+
 ### [0.31.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.31.1-rc.22...v0.31.1-rc.24) (2021-08-30)
 
 
