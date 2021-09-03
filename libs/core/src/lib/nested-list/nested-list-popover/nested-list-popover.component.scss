@@ -562,6 +562,8 @@
   height: 2.75rem;
   padding-right: 1rem;
   padding-left: 1rem;
+  font-size: var(--sapFontLargeSize);
+  color: var(--sapList_TextColor);
   display: flex;
   align-items: center;
 }
@@ -1801,11 +1803,13 @@
   padding-right: 10.75rem;
 }
 
+.fd-nested-list--compact .fd-nested-list__popover-header,
 .fd-nested-list--compact .fd-nested-list__link,
 .fd-nested-list--compact .fd-nested-list__content {
   height: 2rem;
 }
 
+.fd-nested-list--compact .fd-nested-list__popover-header,
 .fd-nested-list--compact .fd-nested-list__title {
   font-size: var(--sapFontSize);
 }

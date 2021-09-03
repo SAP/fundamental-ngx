@@ -36,6 +36,10 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
     @Input()
     title = '';
 
+    /** In case the user wants put compact mode in this list */
+    @Input()
+    compact?: boolean;
+
     /** @hidden */
     @ViewChild(PopoverComponent)
     popoverComponent: PopoverComponent;
