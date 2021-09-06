@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.0...v0.32.1-rc.1) (2021-09-06)
+
+
+### Bug Fixes
+
+* **core,platform:** fix a11y for Upload Collection ([#6118](https://github.com/SAP/fundamental-ngx/issues/6118)) ([3e9241f](https://github.com/SAP/fundamental-ngx/commit/3e9241fa7a8c5fb096d0a33bd6775c5f846ce73a))
+
 ### [0.32.1-rc.0](https://github.com/SAP/fundamental-ngx/compare/v0.32.0...v0.32.1-rc.0) (2021-09-06)
 
 
