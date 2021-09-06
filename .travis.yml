@@ -11,7 +11,7 @@ services:
 git:
   depth: false
 script:
-  - travis_wait 20 npm run build-all
+  - travis_wait 60 npm run build-all
 jobs:
   include:
     - stage: "Lint and Test"
