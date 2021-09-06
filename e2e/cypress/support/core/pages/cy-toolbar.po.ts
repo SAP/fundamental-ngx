@@ -23,7 +23,6 @@ export class ToolbarPo extends BaseComponent {
     overflowBody = '.fd-toolbar__overflow__body';
     alwaysButton = '[ng-reflect-label="Always"]';
 
-
     navigateTo(): void {
         super.navigateTo(this.pageUrl);
     }
