@@ -3,6 +3,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, startWith } from 'rxjs/operators';
 
 export type ContentDensity = 'cozy' | 'condensed' | 'compact';
+export enum ContentDensityEnum {
+    COMPACT = 'compact',
+    COZY = 'cozy',
+    CONDENSED = 'condensed'
+}
 export const DEFAULT_CONTENT_DENSITY: ContentDensity = 'cozy';
 
 /**

@@ -11,7 +11,7 @@ import {
     SortDirection,
     TableDataProvider,
     TableState
-} from '@fundamental-ngx/platform';
+} from '@fundamental-ngx/platform/table';
 
 import { ITEMS, ExampleItem } from './platform-table-data-items-example';
 

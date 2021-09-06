@@ -6,7 +6,7 @@ import {
     FdpFormGroupModule,
     PlatformMultiComboboxMobileModule,
     PlatformMultiComboboxModule
-} from '@fundamental-ngx/platform';
+} from '@fundamental-ngx/platform/form';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';

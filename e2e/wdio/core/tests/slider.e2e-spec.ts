@@ -8,8 +8,7 @@ import {
     elementDisplayed,
     getAttributeByName,
     getElementArrayLength,
-    getText, isElementClickable, isEnabled,
-    mouseHoverElement, refreshPage,
+    getText, mouseHoverElement, refreshPage,
     scrollIntoView,
     sendKeys,
     waitForElDisplayed

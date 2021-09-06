@@ -5,16 +5,15 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
 
+import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
+import { PlatformObjectAttributeModule } from '@fundamental-ngx/platform/object-attribute';
 import { PlatformObjectAttributeHeaderComponent } from './platform-object-attribute-header/platform-object-attribute-header.component';
 import { PlatformObjectAttributeDocsComponent } from './platform-object-attribute-docs.component';
 import {
     PlatformObjectAttributeExampleComponent,
     PlatformObjectAttributeTruncateExampleComponent
 } from './platform-object-attribute-examples/platform-object-attribute-examples.component';
-import {
-    PlatformObjectAttributeLinkExampleComponent
-} from './platform-object-attribute-examples/platform-object-attribute-link-example.component';
-import { PlatformObjectAttributeModule, PlatformLinkModule } from '@fundamental-ngx/platform';
+import { PlatformObjectAttributeLinkExampleComponent } from './platform-object-attribute-examples/platform-object-attribute-link-example.component';
 
 const routes: Routes = [
     {

@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
-import { DATA_PROVIDERS } from '@fundamental-ngx/platform';
+
+import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-platform-multi-input-reactive-example',

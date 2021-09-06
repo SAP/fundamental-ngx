@@ -8,7 +8,6 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    Inject,
     Injector,
     Input,
     OnDestroy,

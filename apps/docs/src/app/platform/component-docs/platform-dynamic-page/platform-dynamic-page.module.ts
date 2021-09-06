@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
-
-import { PlatformButtonModule, PlatformDynamicPageModule } from '@fundamental-ngx/platform';
+import { PlatformButtonModule} from '@fundamental-ngx/platform/button';
+import { PlatformDynamicPageModule } from '@fundamental-ngx/platform/dynamic-page';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';

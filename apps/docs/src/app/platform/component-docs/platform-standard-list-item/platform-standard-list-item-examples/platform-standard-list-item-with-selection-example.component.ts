@@ -1,7 +1,7 @@
 import { Component, Renderer2, ElementRef, AfterViewInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ListDataSource, DataProvider } from '@fundamental-ngx/platform';
 
+import { ListDataSource, DataProvider } from '@fundamental-ngx/platform/shared';
 
 const LIST_ELEMENTS: Address[] = [
     {

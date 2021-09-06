@@ -3,7 +3,6 @@ import { LOCALE_ID } from '@angular/core';
 import { waitForAsync, inject, TestBed } from '@angular/core/testing';
 
 import { DatetimeAdapter, FdDatetimeAdapter, FdDatetimeAdapterModule, FdDate } from './index';
-import { INVALID_DATE_ERROR } from '@fundamental-ngx/core';
 
 describe('FdDatetimeAdapter', () => {
     let platform: Platform;

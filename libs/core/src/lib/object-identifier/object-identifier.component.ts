@@ -8,9 +8,7 @@ import {
     QueryList,
     AfterContentInit,
     ChangeDetectorRef,
-    OnDestroy,
-    OnChanges,
-    SimpleChanges
+    OnDestroy
 } from '@angular/core';
 import { LinkComponent } from '@fundamental-ngx/core/link';
 import { startWith, takeUntil } from 'rxjs/operators';

@@ -1,4 +1,5 @@
-import {  Directive } from '@angular/core';
+import { Directive } from '@angular/core';
+
 import { ToolbarItemDirective } from './toolbar-item.directive';
 
 @Directive({

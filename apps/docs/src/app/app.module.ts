@@ -1,11 +1,11 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { MarkdownModule } from 'ngx-markdown';
 
-import { AppComponent } from './app.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
     {

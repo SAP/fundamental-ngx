@@ -32,6 +32,4 @@ export class PlatformMenuButtonDocsComponent {
             fileName: 'platform-menu-button-example'
         }
     ];
-
-    constructor() {}
 }

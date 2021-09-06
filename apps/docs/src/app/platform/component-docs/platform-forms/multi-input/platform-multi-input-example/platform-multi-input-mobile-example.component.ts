@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { DATA_PROVIDERS } from '@fundamental-ngx/platform';
+import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 
 export interface User {
     state: string;
