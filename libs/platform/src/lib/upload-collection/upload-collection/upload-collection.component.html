@@ -15,7 +15,7 @@
     <!-- Toolbar -->
     <fd-toolbar class="fdp-upload-collection__toolbar">
         <div #responsiveBreadcrumbContainer>
-            <fd-breadcrumb [containerElement]="responsiveBreadcrumbContainer">
+            <fd-breadcrumb [containerElement]="responsiveBreadcrumbContainer" [id]="id+'-breadcrumb'">
                 <fd-breadcrumb-item>
                     <a
                         *ngIf="_breadcrumbList.length > 0"
@@ -52,6 +52,7 @@
                 [(ngModel)]="_searchText"
                 (ngModelChange)="_searchInputChanged()"
                 glyph="search"
+                [ariaLabelledby]="id+'-breadcrumb'"
                 i18n-placeholder
                 placeholder="Search"
             ></fd-input-group>
@@ -285,6 +286,8 @@
                                 contentDensity="compact"
                                 [disabled]="disabled"
                                 type="transparent"
+                                i18n-title="platformUploadCollection.MenuBtn.More|Title attribute"
+                                title="More"
                                 [fdpMenuTriggerFor]="menuActions"
                                 (buttonClicked)="_actionButton(item)"
                             >
@@ -340,12 +343,13 @@
             <!-- Results per page -->
             <div class="fdp-upload-collection__results">
                 <span class="fdp-upload-collection__results--title">
-                    <span i18n="@@platformUploadCollection.ResultsPerPage.Title">Results per page</span>
+                    <span [id]="id+'-results'" i18n="@@platformUploadCollection.ResultsPerPage.Title">Results per page</span>
                     <span *ngIf="_itemsPerPageOptions.length === 0" [innerText]="_itemsPerPage"></span>
                 </span>
                 <fdp-menu-button
                     *ngIf="_itemsPerPageOptions.length > 0"
                     type="ghost"
+                    [ariaLabelledBy]="id+'-results'"
                     contentDensity="compact"
                     [fdpMenuTriggerFor]="itemsPerPageMenu"
                     [label]="itemsPerPage"

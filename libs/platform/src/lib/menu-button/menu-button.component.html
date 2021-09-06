@@ -8,6 +8,8 @@
     [glyph]="icon"
     [disabled]="disabled"
     [attr.aria-disabled]="disabled"
+    [attr.aria-labelledby]="ariaLabelledBy ? ariaLabelledBy + ' ' + id : null"
+    [attr.aria-label]="ariaLabel"
     (click)="onButtonClick($event)"
     [fdType]="type"
     [attr.tabindex]="tabindex"
