@@ -394,6 +394,10 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'splitter',
+                loadChildren: () => import('./component-docs/splitter/splitter-docs.module').then((m) => m.SplitterDocsModule)
+            },
+            {
                 path: 'status-indicator',
                 loadChildren: () =>
                     import('./component-docs/status-indicator/status-indicator-docs.module').then((m) => m.StatusIndicatorDocsModule)

@@ -1,0 +1,28 @@
+<div fd-bar style="margin-bottom: 10px;">
+    <div fd-bar-left>
+        Is the second pane on the canvas: {{ paneOne?.isOnCanvas }} (pane API)
+    </div>
+
+    <div fd-bar-right>
+        <fd-button-bar label="Hide second pane" (click)="hidePaneOne()"></fd-button-bar>
+        <fd-button-bar label="Show second pane" (click)="showPaneOne()"></fd-button-bar>
+    </div>
+</div>
+
+<div style="height: 300px">
+    <fd-splitter [defaultPaneId]="paneTwoId">
+        <fd-splitter-pane-container>
+            <fd-splitter-split-pane [id]="paneOneId" size="300px" #paneOne>
+                Split pane One
+            </fd-splitter-split-pane>
+
+            <fd-splitter-split-pane [id]="paneTwoId" size="300px">
+                Split pane Two
+            </fd-splitter-split-pane>
+
+            <fd-splitter-split-pane>
+                Split pane Three
+            </fd-splitter-split-pane>
+        </fd-splitter-pane-container>
+    </fd-splitter>
+</div>

@@ -77,6 +77,7 @@ export * from '@fundamental-ngx/core/title';
 export * from '@fundamental-ngx/core/feed-input';
 export * from '@fundamental-ngx/core/grid-list';
 export * from '@fundamental-ngx/core/slider';
+export * from '@fundamental-ngx/core/splitter';
 export * from '@fundamental-ngx/core/illustrated-message';
 export * from '@fundamental-ngx/core/text';
 export * from '@fundamental-ngx/core/status-indicator';

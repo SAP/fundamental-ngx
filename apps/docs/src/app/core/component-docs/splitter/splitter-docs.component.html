@@ -1,0 +1,103 @@
+<fd-docs-section-title id="basic" componentName="splitter">Basic</fd-docs-section-title>
+
+<description>
+    This example shows simple splitter usage. Basic input properties.
+
+    <p>
+        <code>fd-splitter</code>:
+    </p>
+
+    <ul>
+        <li>
+            Use <code>[defaultPaneId]</code> input property of the <code>fd-splitter</code> to define main pane.
+            Please make sure the default pane is in the root container (not in nested container).
+        </li>
+    </ul>
+
+    <p>
+        <code>fd-splitter-pane-container</code>:
+    </p>
+
+    <ul>
+        <li>use <code>orientation</code> to set pane orientation. May be <code>vertical</code> (default) or <code>horizontal</code>.</li>
+        <li>listen for <code>(resize)</code> event to get resize information (panes and their updated widths).</li>
+    </ul>
+
+    <p>
+        <code>fd-splitter-split-pane</code>:
+    </p>
+
+    <ul>
+        <li>Use <code>[size]</code> input property of the <code>fd-splitter-split-pane</code> to define pane width.</li>
+        <li>Use <code>[id]</code> input property of the <code>fd-splitter-split-pane</code> to define pane id.</li>
+    </ul>
+</description>
+
+<component-example>
+    <fd-slider-basic-example></fd-slider-basic-example>
+</component-example>
+
+<code-example [exampleFiles]="basic"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="required-parent-width" componentName="splitter">Required parent width</fd-docs-section-title>
+
+<description>
+    Use <code>[requiredParentWidth]</code> (number, pixels) input property of the <code>fd-splitter-split-pane</code> to set minimal required window's width when pane will be shown.
+</description>
+
+<component-example>
+    <fd-slider-required-parent-width-example></fd-slider-required-parent-width-example>
+</component-example>
+
+<code-example [exampleFiles]="requiredParentWidth"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="api" componentName="splitter">API of the Splitter & subcomponents</fd-docs-section-title>
+
+<description>
+    <code>fd-splitter</code> has next API methods:
+
+    <ul>
+        <li>
+            <code>splitter.showPaneOnCanvas(paneId: string)</code> to show certain pane on the canvas.
+        </li>
+
+        <li>
+            <code>splitter.hidePaneFromCanvas(paneId: string)</code> to hide certain pane from the canvas.
+        </li>
+
+        <li>
+            <code>splitter.isPaneOnCanvas(paneId: string)</code> to check whether certain pane is on canvas.
+        </li>
+    </ul>
+
+    <code>fd-splitter-split-pane</code> has next API methods & getters:
+
+    <ul>
+        <li>
+            <code>splitPane.showOnCanvas()</code> to show pane on the canvas.
+        </li>
+
+        <li>
+            <code>splitPane.hideFromCanvas()</code> to hide pane from the canvas.
+        </li>
+
+        <li>
+            <code>splitPane.isOnCanvas</code> to check whether pane is on canvas.
+        </li>
+    </ul>
+</description>
+
+<component-example>
+    <fd-slider-api-example></fd-slider-api-example>
+</component-example>
+
+<code-example [exampleFiles]="basic"></code-example>
+
+<separator></separator>
+
+
+

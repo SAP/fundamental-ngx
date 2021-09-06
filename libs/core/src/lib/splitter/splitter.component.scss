@@ -1,0 +1,227 @@
+@import '~fundamental-styles/dist/slider';
+@import '~fundamental-styles/dist/input';
+
+/** All the splitter component styles goes here to be able to fast migrate it to the Styles library */
+
+$block: fd-splitter;
+
+.#{$block} {
+    @mixin fd-gradient($deg) {
+        background: #0854A0;
+        background: var(--sapUiHighlight, #0854A0);
+        background: linear-gradient($deg, rgba(8, 84,160, 0), rgba(8, 84,160, 1));
+        /** SCSS has rgba(...) function but variables doesn't supported there. */
+    }
+
+    @mixin fd-flex-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @content;
+    }
+
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    &__pane-container,
+    &__pane-container-wrapper,
+    &__pane {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    &__pane-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-grow: 1;
+        overflow: hidden;
+
+        &-wrapper {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        &--root {
+            height: calc(100% - 2.7rem);
+        }
+
+        &--horizontal {
+            flex-direction: column;
+
+            & > .#{$block}__resizer {
+                width: 100%;
+                height: 1rem;
+                cursor: row-resize;
+
+                &.#{$block}__resizer:hover,
+                &.#{$block}__resizer--active {
+                    .#{$block}__resizer-decoration-before,
+                    .#{$block}__resizer-decoration-after {
+                        width: 100%;
+                    }
+                }
+
+                .#{$block}__resizer-decoration-before,
+                .#{$block}__resizer-decoration-after {
+                    width: 4rem;
+                    height: 0.0625rem;
+                }
+
+                .#{$block}__resizer-decoration-before {
+                    @include fd-gradient(90deg);
+                }
+
+                .#{$block}__resizer-decoration-after {
+                    @include fd-gradient(270deg);
+                }
+
+                .#{$block}__resizer-grip {
+                    width: 2rem;
+                    height: 1.5rem;
+                }
+            }
+        }
+
+        &--vertical {
+            flex-direction: row;
+
+            & > .#{$block}__resizer {
+                height: 100%;
+                width: 1rem;
+                cursor: col-resize;
+                flex-direction: column;
+
+                &.#{$block}__resizer:hover,
+                &.#{$block}__resizer--active {
+                    .#{$block}__resizer-decoration-before,
+                    .#{$block}__resizer-decoration-after {
+                        height: 100%;
+                    }
+                }
+
+                .#{$block}__resizer-decoration-before,
+                .#{$block}__resizer-decoration-after {
+                    width: 0.0625rem;
+                    height: 4rem;
+                }
+
+                .#{$block}__resizer-decoration-before {
+                    @include fd-gradient(180deg);
+                }
+
+                .#{$block}__resizer-decoration-after {
+                    @include fd-gradient(0deg);
+                }
+
+                .#{$block}__resizer-grip {
+                    width: 1.5rem;
+                    height: 2rem;
+                }
+            }
+        }
+    }
+
+    &__split-pane {
+        flex-grow: 1;
+        overflow: auto;
+        text-overflow: ellipsis;
+    }
+
+    &__resizer {
+        background-color: #edeff0;
+        background-color: var(--sapUiShellBackground, #edeff0);
+        outline: none;
+
+        @include fd-flex-center();
+
+        .#{$block}__resizer-decoration-before,
+        .#{$block}__resizer-decoration-after {
+            transition: all 0.1s ease-in;
+        }
+
+        &.#{$block}__resizer:active,
+        &.#{$block}__resizer--active {
+            .#{$block}__resizer-decoration-before,
+            .#{$block}__resizer-decoration-after {
+                background: #0854A0;
+                background: var(--sapUiHighlight, #0854A0);
+            }
+        }
+
+        &-grip {
+            flex-shrink: 0;
+
+            @include fd-flex-center();
+
+            &-icon {
+                color: #0854a0;
+                color: var(--sapUiButtonLiteTextColor, #0854a0);
+                line-height: 1rem;
+            }
+        }
+    }
+
+    &__pagination {
+        width: 100%;
+        height: 2.75rem;
+        background: #ffffff;
+        background: var(--sapUiPageFooterBackground, #ffffff);
+        border-top: #d9d9d9;
+        border-top: 0.0625rem solid var(--sapUiPageFooterBorderColor, #d9d9d9);
+        flex-shrink: 0;
+
+        @include fd-flex-center();
+
+        &-item {
+            width: 2.25rem;
+            height: 2.25rem;
+            cursor: pointer;
+            border-radius: 0.25rem;
+            border: none;
+            background: transparent;
+
+            @include fd-flex-center();
+
+            &:hover {
+                background: #f5f5f5;
+                background: var(--sapUiButtonLiteHoverBackground, #f5f5f5);
+            }
+
+            &:active {
+                background: #24529b;
+                background: var(--sapUiButtonLiteActiveBackground, #24529b);
+
+                .#{$block}__pagination-item-dot {
+                    background: #ffffff;
+                    background: var(--sapUiContentContrastIconColor, #ffffff);
+                }
+            }
+
+            &-dot {
+                width: 0.25rem;
+                height: 0.25rem;
+                border-radius: 100%;
+                background: #6a6d70;
+                background: var(--sapUiContentNonInteractiveIconColor, #6a6d70);
+            }
+
+            &--active {
+                &:hover {
+                    background: #f5f5f5;
+                    background: var(--sapUiButtonLiteHoverBackground, #f5f5f5);
+                }
+
+                .#{$block}__pagination-item-dot {
+                    width: 0.5rem;
+                    height: 0.5rem;
+                    background: #0854a0;
+                    background: var(--sapUiContentIconColor, #0854a0)
+                }
+            }
+        }
+    }
+}

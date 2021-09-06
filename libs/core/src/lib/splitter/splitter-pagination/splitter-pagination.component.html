@@ -1,0 +1,10 @@
+<button
+    *ngFor="let page of pages"
+    class="fd-splitter__pagination-item"
+    [class.fd-splitter__pagination-item--active]="page === currentPage"
+    [attr.aria-selected]="page === currentPage"
+    (click)="_changePage(page)"
+    (keydown.enter)="_changePage(page)"
+>
+    <span class="fd-splitter__pagination-item-dot"></span>
+</button>
