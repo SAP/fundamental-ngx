@@ -28,6 +28,7 @@ import { PlatformTextAreaModule } from './text-area.module';
                     [validators]="textareaValidator"
                 >
                     <fdp-textarea
+                        #testFocus
                         formControlName="basicTextarea"
                         name="'basicTextarea'"
                         [growingMaxLines]="3"
@@ -40,6 +41,7 @@ import { PlatformTextAreaModule } from './text-area.module';
                         [height]="'80px'"
                         [wrapType]="'hard'"
                     ></fdp-textarea>
+                    <button class="focus-button" type="button" (click)="testFocus.focus()">Click</button>
                 </fdp-form-field>
                 <ng-template #i18n let-errors>
                     <span *ngIf="errors && errors.required" class="error">This field is required.</span>
@@ -140,6 +142,16 @@ describe('Basic Textarea', () => {
 
         expect(host.result).toEqual({ basicTextarea: 'this is a random note' });
     });
+
+    it('should focus if click on button', async () => {
+        const buttonElement = fixture.debugElement.query(By.css('.focus-button'));
+        buttonElement.nativeElement.click();
+
+        await wait(fixture);
+
+        const textareaElement = fixture.debugElement.query(By.css('textarea'));
+        expect(textareaElement.nativeElement).toBe(document.activeElement);
+    });
 });
 
 describe('Advanced Textarea', () => {
@@ -210,13 +222,13 @@ describe('Advanced Textarea', () => {
         await wait(fixture);
         expect(host.form.get('basicTextarea').disabled).toBe(true);
         expect(textareaElement.setDisabledState).toHaveBeenCalled();
-        textareaElement.textareaElement.nativeElement.click();
+        textareaElement._targetElement.click();
         await wait(fixture);
     });
 
     it('should handle backpress for deleting excess or remaining characters', async () => {
         const textareaComponent = host.textareaComponent;
-        textareaComponent.textareaElement.nativeElement.focus();
+        textareaComponent._targetElement.focus();
         textareaComponent.showExceededText = false;
         textareaComponent.maxLength = 5;
         textareaComponent.value = 'abcdef';
@@ -232,7 +244,7 @@ describe('Advanced Textarea', () => {
         textareaComponent.contentDensity = 'cozy';
         textareaComponent.height = undefined;
         expect(textareaComponent.growingMaxLines).toBe(3);
-        textareaComponent.textareaElement.nativeElement.focus();
+        textareaComponent._targetElement.focus();
 
         textareaComponent.value = '1';
         textareaComponent.value += '\n';
@@ -251,7 +263,7 @@ describe('Advanced Textarea', () => {
         textareaComponent.ngAfterViewInit();
         textareaComponent.handleBackPress(new KeyboardEvent('keyup', { key: '\n' }));
 
-        expect(textareaComponent.textareaElement.nativeElement.style.height).toBe('57px');
+        expect(textareaComponent._targetElement.style.height).toBe('57px');
     });
 
     it('should handle grow indefinitely if max height is not specified', async () => {
@@ -260,8 +272,8 @@ describe('Advanced Textarea', () => {
         // textareaComponent.growing = true;
         textareaComponent.height = undefined;
         textareaComponent.growingMaxLines = undefined;
-        textareaComponent.textareaElement.nativeElement.maxHeight = 'inherit';
-        textareaComponent.textareaElement.nativeElement.focus();
+        textareaComponent._targetElement.style.maxHeight = 'inherit';
+        textareaComponent._targetElement.focus();
         textareaComponent.value = '1';
         textareaComponent.value += '\n';
         textareaComponent.value += '2';
@@ -283,7 +295,7 @@ describe('Advanced Textarea', () => {
         textareaComponent.handleBackPress(new KeyboardEvent('keyup', { key: '\n' }));
         await wait(fixture);
 
-        expect(textareaComponent.textareaElement.nativeElement.scrollHeight).toBe(149);
+        expect(textareaComponent._targetElement.scrollHeight).toBe(149);
     });
 
     it('should handle height given preference', async () => {
@@ -291,7 +303,7 @@ describe('Advanced Textarea', () => {
         textareaComponent.contentDensity = 'cozy';
         await wait(fixture);
 
-        textareaComponent.textareaElement.nativeElement.focus();
+        textareaComponent._targetElement.focus();
         textareaComponent.value = '1';
         textareaComponent.value += '\n';
         textareaComponent.value += '2';
@@ -307,7 +319,7 @@ describe('Advanced Textarea', () => {
 
         await wait(fixture);
 
-        expect(textareaComponent.textareaElement.nativeElement.style.height).toBe('80px'); // without border
+        expect(textareaComponent._targetElement.style.height).toBe('80px'); // without border
     });
 
     it('should call autogrow method', async () => {

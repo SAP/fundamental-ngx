@@ -351,7 +351,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     }
 
     /** @hidden Native element  */
-    private get _targetElement(): HTMLTextAreaElement {
+    get _targetElement(): HTMLTextAreaElement {
         return this._elementRef?.nativeElement;
     }
 
