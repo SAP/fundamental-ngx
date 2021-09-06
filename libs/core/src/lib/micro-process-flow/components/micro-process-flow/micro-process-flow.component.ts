@@ -117,6 +117,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
 
     private _actionKeys = [SPACE, ENTER];
 
+    /** @hidden */
     private _focusedElementIndex = -1;
 
     /** @hidden */
