@@ -7,6 +7,8 @@ import * as BusyIndicatorExtendedHtml from '!raw-loader!./examples/busy-indicato
 import * as BusyIndicatorExtendedTs from '!raw-loader!./examples/busy-indicator-extended-example.component.ts';
 import * as BusyIndicatorWrapperTs from '!raw-loader!./examples/busy-indicator-wrapper-example.component.ts';
 import * as BusyIndicatorWrapperHtml from '!raw-loader!./examples/busy-indicator-wrapper-example.component.html';
+import * as BusyIndicatorAccessibilityTs from '!raw-loader!./examples/busy-indicator-accessibility-example.component.ts';
+import * as BusyIndicatorAccessibilityHtml from '!raw-loader!./examples/busy-indicator-accessibility-example.component.html';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -59,6 +61,19 @@ export class BusyIndicatorDocsComponent {
             code: BusyIndicatorWrapperTs,
             fileName: 'busy-indicator-wrapper-example',
             component: 'BusyIndicatorWrapperExampleComponent'
+        }
+    ];
+    busyIndicatorAccessibilityExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: BusyIndicatorAccessibilityHtml,
+            fileName: 'busy-indicator-accessibility-example'
+        },
+        {
+            language: 'typescript',
+            code: BusyIndicatorAccessibilityTs,
+            fileName: 'busy-indicator-accessibility-example',
+            component: 'BusyIndicatorAccessibilityExampleComponent'
         }
     ];
 }
