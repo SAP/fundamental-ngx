@@ -42,6 +42,8 @@ import { startWith, switchMap } from 'rxjs/operators';
 import { ContentDensity, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { MenuItemComponent } from './menu-item.component';
 
+export type MenuCloseMethod = void | 'mouse' | 'keyboard' | 'tab' | 'arrow';
+
 /**
  * Variables for generating menu IDs.
  * Needed for establishing 'aria-control' between trigger and menu.
@@ -57,9 +59,7 @@ let menuIdCounter = 0;
     encapsulation: ViewEncapsulation.None
 })
 export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy {
-    private _id: string;
-    public menuId: string;
-
+    /** Menu ID */
     @Input()
     get id(): string {
         return this._id;
@@ -78,29 +78,47 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
     /**
      * Horizontal position of menu in relation to trigger element.
      */
-    @Input() xPosition: 'before' | 'after' = 'after';
+    @Input()
+    xPosition: 'before' | 'after' = 'after';
 
     /**
      * The templateRef needs to be available to the menu trigger for
      * opening in a CDK overlay.
      */
-    @ViewChild('menuTemplate', { static: false }) templateRef: TemplateRef<any>;
+    @ViewChild('menuTemplate', { static: false })
+    templateRef: TemplateRef<any>;
 
     /**
      * Child items of the menu.
      */
-    @ContentChildren(MenuItemComponent) menuItems: QueryList<MenuItemComponent>;
+    @ContentChildren(MenuItemComponent)
+    menuItems: QueryList<MenuItemComponent>;
 
     /**
      * Emitted event when menu closes
      */
-    @Output() close: EventEmitter<MenuCloseMethod> = new EventEmitter();
+    @Output()
+    close: EventEmitter<MenuCloseMethod> = new EventEmitter();
 
-    public direction: 'ltr' | 'rtl' = 'ltr';
+    /** Menu direction */
+    direction: 'ltr' | 'rtl' = 'ltr';
+
+    /** @hidden */
+    menuId: string;
+
+    /** @hidden */
+    private _id: string;
+
+    /** @hidden */
     private _keyManager: FocusKeyManager<MenuItemComponent>;
+
+    /** @hidden */
     private _tabSubscription = Subscription.EMPTY;
+
+    /** @hidden */
     private _dirChangeSubscription = Subscription.EMPTY;
 
+    /** @hidden */
     constructor(@Optional() private _rtl: RtlService) {
         if (this._rtl) {
             this._dirChangeSubscription = this._rtl.rtl.subscribe((value: boolean) => {
@@ -110,6 +128,7 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         }
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
         if (!this.menuId) {
             this.menuId = MENU_ID_ROOT + menuIdCounter++;
@@ -122,23 +141,45 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         }
     }
 
+    /** @hidden */
     ngAfterContentInit(): void {
         this._setMenuItemCascadeDirection();
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this.close.complete();
         this._tabSubscription.unsubscribe();
         this._dirChangeSubscription.unsubscribe();
     }
 
-    onKeydown(event: KeyboardEvent): void {
+    /**
+     * Set focus on first item
+     * @param origin FocusOrigin
+     */
+    focusOnFirstItem(origin: FocusOrigin = 'program'): void {
+        this._keyManager.setFocusOrigin(origin).setFirstItemActive();
+    }
+
+    /**
+     * Close menu
+     * @param method menu close method
+     */
+    closeMenu(method: MenuCloseMethod): void {
+        this.close.emit(method);
+    }
+
+    /**
+     * @hidden
+     * Menu keydown handler
+     */
+    _onKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
-            if (this.cascadesRight()) {
+            if (this._cascadesRight()) {
                 this.close.emit('arrow');
             }
         } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
-            if (this.cascadesLeft()) {
+            if (this._cascadesLeft()) {
                 this.close.emit('arrow');
             }
         } else if (KeyUtil.isKeyCode(event, ESCAPE)) {
@@ -151,19 +192,19 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         }
     }
 
-    onClick(event: MouseEvent): void {
+    /**
+     * @hidden
+     * Menu click handler
+     */
+    _onClick(): void {
         this.close.emit('mouse');
     }
 
-    focusOnFirstItem(origin: FocusOrigin = 'program'): void {
-        this._keyManager.setFocusOrigin(origin).setFirstItemActive();
-    }
-
-    closeMenu(method: MenuCloseMethod): void {
-        this.close.emit(method);
-    }
-
-    menuItemHoverChange(): Observable<MenuItemComponent> {
+    /**
+     * @hidden
+     * Get stream of menu items hover change
+     */
+    _menuItemHoverChange(): Observable<MenuItemComponent> {
         const menuItems = this.menuItems.changes as Observable<QueryList<MenuItemComponent>>;
         return menuItems.pipe(
             startWith(this.menuItems),
@@ -171,29 +212,36 @@ export class MenuComponent implements AfterViewInit, AfterContentInit, OnDestroy
         ) as Observable<MenuItemComponent>;
     }
 
+    /** @hidden */
     _setMenuItemCascadeDirection(): void {
         if (!this.menuItems) {
             return;
         }
         // set cascade direction
         this.menuItems.forEach((item) => {
-            item.cascadeDirection = this.cascadesLeft() ? 'left' : 'right';
+            item.cascadeDirection = this._cascadesLeft() ? 'left' : 'right';
         });
     }
 
-    cascadesRight(): boolean {
+    /**
+     * @hidden
+     * Check if cascade menu should appear from right
+     */
+    _cascadesRight(): boolean {
         return (
             (this.xPosition === 'after' && this.direction === 'ltr') ||
             (this.xPosition === 'before' && this.direction === 'rtl')
         );
     }
 
-    cascadesLeft(): boolean {
+    /**
+     * @hidden
+     * Check if cascade menu should appear from left
+     */
+    _cascadesLeft(): boolean {
         return (
             (this.xPosition === 'after' && this.direction === 'rtl') ||
             (this.xPosition === 'before' && this.direction === 'ltr')
         );
     }
 }
-
-export type MenuCloseMethod = void | 'mouse' | 'keyboard' | 'tab' | 'arrow';

@@ -28,13 +28,37 @@ import { MenuItemComponent } from './menu-item.component';
     }
 })
 export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
-    private _overlayRef: OverlayRef;
-    private _portal: TemplatePortal;
-    private outsideClickSubscription: Subscription = Subscription.EMPTY;
-    private menuCloseSubscription: Subscription = Subscription.EMPTY;
-    private parentMenuCloseSubscription: Subscription = Subscription.EMPTY;
-    private menuItemHoverChangeSubscription: Subscription = Subscription.EMPTY;
+    /** Set Menu Component for which this trigger will be associated. */
+    @Input('fdpMenuTriggerFor')
+    get menu(): MenuComponent {
+        return this._menu;
+    }
+    set menu(menu: MenuComponent) {
+        if (this._menu === menu) {
+            return;
+        }
+        this._menu = menu;
+        this._menuCloseSubscription.unsubscribe();
+    }
 
+    /** @hidden */
+    private _menu: MenuComponent;
+    /** @hidden */
+    private _overlayRef: OverlayRef;
+    /** @hidden */
+    private _portal: TemplatePortal;
+    /** @hidden */
+    private _isMenuOpen = false;
+    /** @hidden */
+    private _outsideClickSubscription: Subscription = Subscription.EMPTY;
+    /** @hidden */
+    private _menuCloseSubscription: Subscription = Subscription.EMPTY;
+    /** @hidden */
+    private _parentMenuCloseSubscription: Subscription = Subscription.EMPTY;
+    /** @hidden */
+    private _menuItemHoverChangeSubscription: Subscription = Subscription.EMPTY;
+
+    /** @hidden */
     constructor(
         private _element: ElementRef<HTMLElement>,
         private _overlay: Overlay,
@@ -43,36 +67,14 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         @Optional() private _parentMenu: MenuComponent
     ) {}
 
-    private _menu: MenuComponent;
-
-    /** Set Menu Component for which this trigger will be associated. */
-    @Input('fdpMenuTriggerFor')
-    get menu(): MenuComponent {
-        return this._menu;
-    }
-
-    set menu(menu: MenuComponent) {
-        if (this._menu === menu) {
-            return;
-        }
-        this._menu = menu;
-        this.menuCloseSubscription.unsubscribe();
-    }
-
-    private _isMenuOpen = false;
-
-    /** Flag to determine if associated menu is open. */
-    get isMenuOpen(): boolean {
-        return this._isMenuOpen;
-    }
-
+    /** @hidden */
     ngAfterContentInit(): void {
         if (this._isMenuItem()) {
             // mark menu item as trigger
             this._menuItem.isTrigger = true;
 
             // subscribe to changes of menu item hover state
-            this.menuItemHoverChangeSubscription = this._parentMenu.menuItemHoverChange().subscribe((item) => {
+            this._menuItemHoverChangeSubscription = this._parentMenu._menuItemHoverChange().subscribe((item) => {
                 if (item === this._menuItem) {
                     if (!this.isMenuOpen) {
                         this._menuItem.isSelected = true;
@@ -86,19 +88,29 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         }
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         if (this._overlayRef) {
             this._overlayRef.dispose();
             this._overlayRef = null;
         }
-        this.outsideClickSubscription.unsubscribe();
-        this.menuCloseSubscription.unsubscribe();
-        this.parentMenuCloseSubscription.unsubscribe();
-        this.menuItemHoverChangeSubscription.unsubscribe();
+        this._outsideClickSubscription.unsubscribe();
+        this._menuCloseSubscription.unsubscribe();
+        this._parentMenuCloseSubscription.unsubscribe();
+        this._menuItemHoverChangeSubscription.unsubscribe();
     }
 
-    /** @hidden Handle click on trigger element. */
-    @HostListener('click', ['$event']) onTriggerClick(event: MouseEvent): void {
+    /** Flag to determine if associated menu is open. */
+    get isMenuOpen(): boolean {
+        return this._isMenuOpen;
+    }
+
+    /** 
+     * @hidden 
+     * Handle click on trigger element. 
+     */
+    @HostListener('click', ['$event']) 
+    _onTriggerClick(event: MouseEvent): void {
         // Need to interupt default menu behavior of closing the menu
         if (this._isMenuItem()) {
             event.preventDefault();
@@ -111,8 +123,12 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         }
     }
 
-    /** @hidden Handled keypress which focus is on trigger element. */
-    @HostListener('keydown', ['$event']) onTriggerKeydown(event: KeyboardEvent): void {
+    /** 
+     * @hidden 
+     * Handled keypress which focus is on trigger element. 
+     */
+    @HostListener('keydown', ['$event']) 
+    _onTriggerKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             if (KeyUtil.isKeyCode(event, [SPACE])) {
                 event.preventDefault();
@@ -128,14 +144,14 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
             }
             this.openMenu();
         } else if (KeyUtil.isKeyCode(event, [RIGHT_ARROW])) {
-            if (this._menu.cascadesRight()) {
+            if (this._menu._cascadesRight()) {
                 if (this._menuItem) {
                     this._menuItem.isSelected = true;
                 }
                 this.openMenu();
             }
         } else if (KeyUtil.isKeyCode(event, [LEFT_ARROW])) {
-            if (this._menu.cascadesLeft()) {
+            if (this._menu._cascadesLeft()) {
                 if (this._menuItem) {
                     this._menuItem.isSelected = true;
                 }
@@ -144,7 +160,10 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         }
     }
 
-    /** @hidden Toggle display of associated menu. */
+    /** 
+     * @hidden 
+     * Toggle display of associated menu. 
+     */
     toggleMenu(): void {
         /**
          * Need to add delay here to ensure that any "closeMenu" operation which
@@ -153,11 +172,14 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
          * triggers for the same menu.
          */
         setTimeout(() => {
-            this._isMenuOpen ? this.destroyMenu() : this.openMenu();
+            this._isMenuOpen ? this._destroyMenu() : this.openMenu();
         }, 0);
     }
 
-    /** @hidden open associated menu. */
+    /** 
+     * @hidden 
+     * Open associated menu. 
+     */
     openMenu(): void {
         // create overlay
         const overlayConfig = this._getOverlayConfig();
@@ -168,10 +190,10 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         this._overlayRef.attach(this._portal);
 
         // add subscription to capture clicks outside menu
-        if (this.outsideClickSubscription) {
-            this.outsideClickSubscription.unsubscribe();
+        if (this._outsideClickSubscription) {
+            this._outsideClickSubscription.unsubscribe();
         }
-        this.outsideClickSubscription = fromEvent<MouseEvent>(document, 'click')
+        this._outsideClickSubscription = fromEvent<MouseEvent>(document, 'click')
             .pipe(
                 filter((event) => {
                     const target = event.target as HTMLElement;
@@ -189,11 +211,11 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
             });
 
         // add subscription to menu 'close' event
-        if (this.menuCloseSubscription) {
-            this.menuCloseSubscription.unsubscribe();
+        if (this._menuCloseSubscription) {
+            this._menuCloseSubscription.unsubscribe();
         }
-        this.menuCloseSubscription = this._menu.close.subscribe((method: MenuCloseMethod) => {
-            this.destroyMenu();
+        this._menuCloseSubscription = this._menu.close.subscribe((method: MenuCloseMethod) => {
+            this._destroyMenu();
             // Need to close parent menu if closing of menu was done by terminating action
             if (this._parentMenu && (method === 'keyboard' || method === 'mouse')) {
                 this._parentMenu.closeMenu(method);
@@ -202,10 +224,10 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
 
         // add subscription to parent menu 'close' event
         if (this._parentMenu) {
-            if (this.parentMenuCloseSubscription) {
-                this.parentMenuCloseSubscription.unsubscribe();
+            if (this._parentMenuCloseSubscription) {
+                this._parentMenuCloseSubscription.unsubscribe();
             }
-            this.parentMenuCloseSubscription = this._parentMenu.close.subscribe((method: MenuCloseMethod) => {
+            this._parentMenuCloseSubscription = this._parentMenu.close.subscribe((method: MenuCloseMethod) => {
                 this.closeMenu();
             });
         }
@@ -216,20 +238,30 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         this._isMenuOpen = true;
     }
 
-    /** @hidden close associated menu. */
+    /** 
+     * @hidden 
+     * Close associated menu. 
+     */
     closeMenu(): void {
         this._menu.closeMenu();
     }
 
-    /** @hidden destroy associated menu. */
-    destroyMenu(): void {
+    /** 
+     * @hidden 
+     * destroy associated menu. 
+     */
+    private _destroyMenu(): void {
         if (this._menuItem) {
             this._menuItem.isSelected = false;
         }
         if (!this._overlayRef || !this._isMenuOpen) {
             return;
         }
-        this._element.nativeElement.focus();
+        if (this._menuItem) {
+            this._menuItem.focus();
+        } else {
+            this._element.nativeElement.focus();
+        }
         this._overlayRef.detach();
         this._isMenuOpen = false;
     }
@@ -262,7 +294,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         const subMenuYPadding = 4; // vertical padding of 0.25rem(4px) is needed for sub-menu
 
         if (this._isMenuItem()) {
-            if (this._menu.cascadesLeft()) {
+            if (this._menu._cascadesLeft()) {
                 positions = [
                     {
                         originX: 'start',
@@ -302,7 +334,7 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
                 ];
             }
         } else {
-            if (this._menu.cascadesLeft()) {
+            if (this._menu._cascadesLeft()) {
                 positions = [
                     {
                         originX: 'end',
