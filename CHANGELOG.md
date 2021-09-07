@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.9...v0.32.1-rc.10) (2021-09-07)
+
+
+### Bug Fixes
+
+* **platform:** fix fdp-menu-item extra spaces ([#6424](https://github.com/SAP/fundamental-ngx/issues/6424)) ([08b0c1a](https://github.com/SAP/fundamental-ngx/commit/08b0c1aeca95a7c92c9e8a74226bbff957498c5c))
+
 ### [0.32.1-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.8...v0.32.1-rc.9) (2021-09-07)
 
 ### [0.32.1-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.7...v0.32.1-rc.8) (2021-09-07)
