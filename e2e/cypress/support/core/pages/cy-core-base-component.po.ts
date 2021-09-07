@@ -1,5 +1,5 @@
 import { checkLTROrientation, checkRTLOrientation } from '../../../helper/assertion-helper';
-import { click, getElementArrayLength } from '../../../cypress-methods/cypressio';
+import { click, getElementArrayLength } from '../../../cypress-methods/cypress';
 
 export class BaseComponent {
     title = 'header .header';

@@ -1,4 +1,4 @@
-import { checkAttributeByName, checkCSSPropertyByName } from '../cypress-methods/cypressio';
+import { checkAttributeByName, checkCSSPropertyByName } from '../cypress-methods/cypress';
 
 export function checkRTLOrientation(element: string, index?: number): void {
     checkAttributeByName(element, 'dir', 'rtl', index);

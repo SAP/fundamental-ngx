@@ -56,7 +56,7 @@ export function doubleClick(selector: string, index?: number): void {
 }
 
 export function setValue(selector: string, value: string, index?: number): void {
-    cy.get(selector).clear();
+    cy.get(selector).eq(index ? index : 0).clear();
     cy.get(selector).eq(index ? index : 0).type(value);
 }
 
@@ -97,9 +97,8 @@ export function checkElementTitle(selector: string, expectedValue: string, index
     checkAttributeByName(selector, 'title', expectedValue, index);
 }
 
-export function checkElementPlaceholder( selector: string, expectedValue: string, index?: number): void {
+export function checkElementPlaceholder(selector: string, expectedValue: string, index?: number): void {
     checkAttributeByName(selector, 'placeholder', expectedValue, index);
-
 }
 
 export function checkCSSPropertyByName(selector: string, propertyName: string, expectedValue: string, index?: number): void {
@@ -113,18 +112,13 @@ export function mouseHoverElement(selector: string, index?: number): void {
 export function getElementArrayLength(selector: string): number {
     return Cypress.$(selector).length;
 }
+
 export function focusElement(selector: string, index?: number): void {
     cy.get(selector).eq(index ? index : 0).focus();
 }
 
-// no needed
-export function checkSelectorExist(selector: string, index?: number): void {
-    if (cy.get(selector).eq(index ? index : 0) === undefined) {
-        throw new Error(`Element with index: ${index} for selector: '${selector}' not found.`)
-    }
-}
 export function checkNextElementText(selector: string, expectedValue: string, index?: number): void {
-    cy.get(selector).eq(index ? index : 0).next().contains(expectedValue)
+    cy.get(selector).eq(index ? index : 0).next().contains(expectedValue);
 }
 
 

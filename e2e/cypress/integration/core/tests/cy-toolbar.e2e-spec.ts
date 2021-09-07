@@ -10,7 +10,7 @@ import {
     click,
     checkText,
     checkAttributeByName, doubleClick, setValue, checkIsElementDisplayed, getElementArrayLength, checkSelectorExist
-} from '../../../cypress-methods/cypressio';
+} from '../../../cypress-methods/cypress';
 
 
 describe('Toolbar test suite:', () => {
