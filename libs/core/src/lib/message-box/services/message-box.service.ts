@@ -1,8 +1,10 @@
 import { Inject, Injectable, Injector, Optional, TemplateRef, Type } from '@angular/core';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+
+import { DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
+import { DialogBaseService } from '@fundamental-ngx/core/dialog';
+
 import { MESSAGE_BOX_DEFAULT_CONFIG, MessageBoxConfig } from '../utils/message-box-config.class';
 import { MessageBoxRef } from '../utils/message-box-ref.class';
-import { DialogBaseService } from '@fundamental-ngx/core/dialog';
 import { MessageBoxContainerComponent } from '../message-box-container/message-box-container.component';
 import { MessageBoxContent } from '../utils/message-box-content.class';
 
@@ -11,11 +13,11 @@ export type MessageBoxContentType = Type<any> | TemplateRef<any> | MessageBoxCon
 /** Service used to create a message box. */
 @Injectable()
 export class MessageBoxService extends DialogBaseService<MessageBoxContainerComponent> {
-
     /** @hidden */
     constructor(
         dynamicComponentService: DynamicComponentService,
-        @Optional() @Inject(MESSAGE_BOX_DEFAULT_CONFIG) private _defaultConfig: MessageBoxConfig
+        @Optional() @Inject(MESSAGE_BOX_DEFAULT_CONFIG) private _defaultConfig: MessageBoxConfig,
+        @Optional() private _rtlService: RtlService
     ) {
         super(dynamicComponentService);
     }
@@ -34,12 +36,13 @@ export class MessageBoxService extends DialogBaseService<MessageBoxContainerComp
         const injector = Injector.create({
             providers: [
                 { provide: MessageBoxConfig, useValue: config },
-                { provide: MessageBoxRef, useValue: messageBoxRef }
-            ]
+                { provide: MessageBoxRef, useValue: messageBoxRef },
+                { provide: RtlService, useValue: this._rtlService }
+            ],
+            parent: config.injector
         });
 
-        const component = this._dynamicComponentService.createDynamicComponent<MessageBoxContainerComponent>
-        (
+        const component = this._dynamicComponentService.createDynamicComponent<MessageBoxContainerComponent>(
             content,
             MessageBoxContainerComponent,
             config,
