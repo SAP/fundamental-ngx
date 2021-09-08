@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.14...v0.32.1-rc.15) (2021-09-08)
+
+
+### Bug Fixes
+
+* **core:** overwrite title and aria-label in input-group component ([#6364](https://github.com/SAP/fundamental-ngx/issues/6364)) ([5e93741](https://github.com/SAP/fundamental-ngx/commit/5e93741834dbc867adb0b754320488c22eb6f2dd))
+
 ### [0.32.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.13...v0.32.1-rc.14) (2021-09-08)
 
 
