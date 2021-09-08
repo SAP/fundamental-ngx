@@ -245,7 +245,6 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         if (this._textAreaCharCount > this.maxLength) {
             if (this._isPasted) {
                 this._targetElement.focus();
-                // this._targetElement.setSelectionRange(10, 20);
                 this._targetElement.setSelectionRange(this.maxLength, this._textAreaCharCount);
             }
             this.counterExcessOrRemaining = this.excessText;
