@@ -5,10 +5,10 @@ import {
     getText,
     waitForElDisplayed, getElementClass
 } from '../../driver/wdio';
-import { checkAttributeValueTrue, checkElArrIsClickable, checkElementText, checkElementTextValue } from '../../helper/assertion-helper';
+import { checkElArrIsClickable, checkElementText, checkElementTextValue } from '../../helper/assertion-helper';
 import {cardTitleArr, compactAttr, analyticsTitle, badgeText, barChartCounterText, barChartItemsText, barChartTitleText, btnText,
 cardListItemText, cardSubtitleText, cardTypeAttr, loaderAttr,
-tableCardCountries, tableCardNames, tableCardPrices, tableCardStatuses, tableCardTitle, tableContentsText, tableHeaderText} from '../fixtures/appData/card-content';
+tableCardCountries, tableCardNames, tableCardPrices, tableCardStatuses, tableCardTitle, tableHeaderText} from '../fixtures/appData/card-content';
 
 describe('Card test suite:', function() {
     const cardPage = new CardPo();

@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, NgForm, ValidatorFn, Validators } from '@angular/forms';
 
-import { FileUploaderInvalidChangeEvent, FileUploaderSelectionChangeEvent } from '@fundamental-ngx/platform';
+import { FileUploaderInvalidChangeEvent, FileUploaderSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-file-uploader-reactive-example',

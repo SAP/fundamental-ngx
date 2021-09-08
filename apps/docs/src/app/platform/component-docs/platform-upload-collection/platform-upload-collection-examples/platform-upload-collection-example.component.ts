@@ -7,7 +7,7 @@ import {
     FileSizeExceedEvent,
     TypeMismatchEvent,
     UploadCollectionDataSource
-} from '@fundamental-ngx/platform';
+} from '@fundamental-ngx/platform/upload-collection';
 
 import { PlatformUploadCollectionDataProviderExample } from './platform-upload-collection-base-data-provider';
 

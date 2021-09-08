@@ -9,7 +9,7 @@ import {
   VhdExcludedEntity,
   VhdDefineIncludeStrategy,
   VhdDefineExcludeStrategy
-} from '@fundamental-ngx/platform';
+} from '@fundamental-ngx/platform/value-help-dialog';
 
 interface ExampleTestModel {
   id: number;

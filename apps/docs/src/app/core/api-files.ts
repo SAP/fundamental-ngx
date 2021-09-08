@@ -167,6 +167,7 @@ export const API_FILES = {
     ],
     messageStrip: ['MessageStripComponent'],
     messageToast: ['MessageToastComponent', 'MessageToastConfig', 'MessageToastService', 'MessageToastRef'],
+    microProcessFlow: ['MicroProcessFlowComponent', 'MicroProcessFlowItemComponent', 'MicroProcessFlowIconComponent'],
     momentDatetimeAdapter: ['MomentDatetimeAdapter'],
     dialog: [
         'DialogService',
@@ -394,5 +395,16 @@ export const API_FILES = {
         'UploadCollectionTextSeparatorDirective',
         'UploadCollectionStatusGroupDirective',
         'UploadCollectionTitleContainerDirective'
+    ]
+    timeline: [
+        'TimelineComponent',
+        'TimelineNodeDefDirective',
+        'TimelineNodeOutletDirective',
+        'TimelineNodeBodyComponent',
+        'TimelineNodeComponent',
+        'TimelineNodeHeaderInfoTitleDirective',
+        'TimelineNodeHeaderInfoTextDirective',
+        'TimelineNodeActionDirective',
+        'TimelineHeaderInfoSubTitleDirective',
     ]
 };

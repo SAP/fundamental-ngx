@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, QueryList, ViewChildren } from '@angular/core';
 
 import { TabPanelComponent } from './tab-panel/tab-panel.component';
 import { TabListComponent } from './tab-list.component';

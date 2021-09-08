@@ -1,4 +1,3 @@
-import { BaseComponentPo } from '../../platform/pages/base-component.po';
 import { waitForElDisplayed } from '../../driver/wdio';
 import { CoreBaseComponentPo } from './core-base-component.po';
 

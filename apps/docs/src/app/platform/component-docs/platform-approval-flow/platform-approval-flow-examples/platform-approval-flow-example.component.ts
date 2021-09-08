@@ -10,7 +10,7 @@ import {
     ApprovalStatus,
     ApprovalTeam,
     ApprovalUser
-} from '@fundamental-ngx/platform';
+} from '@fundamental-ngx/platform/approval-flow';
 
 @Component({
     selector: 'fdp-platform-approval-flow-example',

@@ -7,7 +7,10 @@ import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { RtlService } from '@fundamental-ngx/core/utils';
-import { PlatformButtonModule, PlatformInputModule, PlatformSearchFieldModule, PlatformTableModule } from '@fundamental-ngx/platform';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { PlatformInputModule } from '@fundamental-ngx/platform/form';
+import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 
 import { API_FILES } from '../../api-files';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';

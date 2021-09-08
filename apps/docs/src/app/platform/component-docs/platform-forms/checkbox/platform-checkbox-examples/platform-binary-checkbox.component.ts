@@ -1,4 +1,4 @@
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Component, Optional } from '@angular/core';
 
 @Component({

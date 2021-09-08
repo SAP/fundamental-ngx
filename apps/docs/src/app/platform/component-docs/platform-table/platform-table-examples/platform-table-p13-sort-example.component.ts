@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
-import { TableDataSource, TableDataProvider, TableState, SortDirection } from '@fundamental-ngx/platform';
+import { TableDataSource, TableDataProvider, TableState, SortDirection } from '@fundamental-ngx/platform/table';
 
 @Component({
     selector: 'fdp-platform-table-p13-sort-example',

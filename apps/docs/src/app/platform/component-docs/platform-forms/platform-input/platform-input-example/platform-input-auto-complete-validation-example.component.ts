@@ -31,8 +31,6 @@ export class PlatformInputAutoCompleteValidationExampleComponent implements OnIn
     @ViewChild('typeahead')
     typeahead: PopoverComponent;
 
-    constructor() {}
-
     ngOnInit(): void {
         this.options = [];
     }

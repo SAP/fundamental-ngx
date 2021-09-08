@@ -12,4 +12,8 @@ export class ListDndExampleComponent {
     secondValues = [
         1, 2, 3, 4, 5
     ]
+
+    trackByFn(index: number): number {
+        return index;
+    }
 }

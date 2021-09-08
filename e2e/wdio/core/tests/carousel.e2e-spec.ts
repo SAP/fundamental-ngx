@@ -10,9 +10,7 @@ import {
 } from '../../driver/wdio';
 import {
     imgSource,
-    verticalAttr,
     active,
-    visibilityCount,
     numberedPages,
     loadErrorMsg
 } from '../fixtures/appData/carousel-contents';

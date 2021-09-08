@@ -1,0 +1,53 @@
+@import "fundamental-styles/index";
+
+// These styles will move to fundamental/styles
+$line-width: 1.5rem;
+
+.fd-timeline__node-container {
+    @include fd-set-position-left(0);
+    position: absolute;
+    top: 0;
+    width: $line-width;
+}
+
+.fd-timeline__node-wrapper {
+    @include fd-flex();
+    @include fd-set-padding-left($line-width);
+    position: relative;
+}
+
+.fd-timeline__node-wrapper:last-child {
+    .fd-timeline__connecting-line:last-child {
+        visibility: hidden;
+    }
+}
+
+.fd-timeline__post-subheader {
+    display: block;
+}
+
+.fd-timeline__post-header-title {
+    margin-right: 0.3rem;
+}
+
+.fd-timeline__post {
+    flex-grow: 1;
+}
+
+.fd-timeline__connecting-line:first-child {
+    flex: 0 0 1rem;
+}
+
+.fd-timeline__post--left {
+    @include fd-set-margin-left(1rem);
+}
+
+.fd-timeline__node--icon {
+    font-size: 1.375rem;
+
+    [class*="sap-icon"] {
+        @include fd-flex() {
+            justify-content: center;
+        }
+    }
+}

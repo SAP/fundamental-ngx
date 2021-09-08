@@ -1,0 +1,20 @@
+<button
+    fd-button
+    [attr.id]="id"
+    [attr.name]="name"
+    [fdMenu]="true"
+    [label]="label"
+    [compact]="contentDensity === 'compact'"
+    [glyph]="icon"
+    [disabled]="disabled"
+    [attr.aria-disabled]="disabled"
+    [attr.aria-labelledby]="ariaLabelledBy ? ariaLabelledBy + ' ' + id : null"
+    [attr.aria-label]="ariaLabel"
+    (click)="onButtonClick($event)"
+    [fdType]="type"
+    [attr.tabindex]="tabindex"
+    [attr.title]="title"
+    [attr.aria-haspopup]="true"
+>
+    <ng-content></ng-content>
+</button>

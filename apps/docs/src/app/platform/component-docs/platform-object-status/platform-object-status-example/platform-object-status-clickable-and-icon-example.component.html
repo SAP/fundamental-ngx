@@ -44,6 +44,6 @@
         [label]="'Indication Color' + item"
         clickable="true"
         (objectStatusClick)="showAlert(item)"
-        ariaLabel="Object status indication Color Clickable"
+        [ariaLabel]="'Object status Indication Color' + item + 'Clickable'"
     ></fdp-object-status>
 </ng-container>

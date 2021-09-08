@@ -15,7 +15,7 @@ import {
     TableState,
     TableFilterSelectOption,
     TableFilterChangeEvent
-} from '@fundamental-ngx/platform';
+} from '@fundamental-ngx/platform/table';
 
 @Component({
     selector: 'fdp-platform-table-filterable-example',

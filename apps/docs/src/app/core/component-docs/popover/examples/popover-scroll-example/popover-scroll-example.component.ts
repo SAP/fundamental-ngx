@@ -24,6 +24,9 @@ export class PopoverScrollExampleComponent implements OnInit {
     /** Whether to close the overlay once the user has scrolled away completely. */
     autoClose = false;
 
+    /** Time in milliseconds to throttle the scroll events. Use to increase performance. */
+    scrollThrottle = 0;
+
     /**
      * Update the overlay's position on scroll.
      * @param config Configuration to be used inside the scroll strategy.
@@ -37,13 +40,13 @@ export class PopoverScrollExampleComponent implements OnInit {
 
     ngOnInit(): void {
         this.blockScrollStrategy = this._overlay.scrollStrategies.block();
-        this.repositionScrollStrategy = this._overlay.scrollStrategies.reposition({ autoClose: this.autoClose });
+        this.repositionScrollStrategy = this._overlay.scrollStrategies.reposition({ autoClose: this.autoClose, scrollThrottle: this.scrollThrottle });
         this.noopScrollStrategy = this._overlay.scrollStrategies.noop();
         this.closeScrollStrategy = this._overlay.scrollStrategies.close( );
     }
 
     refreshRepositionScrollStrategy(): void {
-        this.repositionScrollStrategy = this._overlay.scrollStrategies.reposition({ autoClose: this.autoClose });
+        this.repositionScrollStrategy = this._overlay.scrollStrategies.reposition({ autoClose: this.autoClose, scrollThrottle: this.scrollThrottle });
     }
 
 }

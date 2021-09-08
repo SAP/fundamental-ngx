@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../../api-files';
 import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
-import { PlatformCheckboxModule, FdpFormGroupModule, PlatformButtonModule, PlatformSliderModule, PlatformFormGeneratorModule } from '@fundamental-ngx/platform';
+
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { PlatformSliderModule } from '@fundamental-ngx/platform/slider';
+import { PlatformCheckboxModule, FdpFormGroupModule, PlatformFormGeneratorModule } from '@fundamental-ngx/platform/form';
 import { PlatformFormGeneratorHeaderComponent } from './platform-form-generator-header/platform-form-generator-header.component';
 import { PlatformFormGeneratorDocsComponent } from './platform-form-generator-docs.component';
 import { PlatformFormGeneratorExampleComponent } from './platform-form-generator-examples/platform-form-generator-example.component';

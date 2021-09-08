@@ -4,7 +4,9 @@ import { ApiComponent } from '../../../../documentation/core-helpers/api/api.com
 import { API_FILES } from '../../../api-files';
 import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
 
-import { PlatformTextAreaModule, FdpFormGroupModule, PlatformButtonModule } from '@fundamental-ngx/platform';
+import { FormMessageModule } from '@fundamental-ngx/core/form';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { PlatformTextAreaModule, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 import { PlatformTextareaHeaderComponent } from './platform-textarea-header/platform-textarea-header.component';
 import { PlatformTextareaDocsComponent } from './platform-textarea-docs.component';
 import { PlatformTextareaBasicExampleComponent } from './platform-textarea-examples/platform-textarea-basic-example.component';
@@ -12,7 +14,6 @@ import { PlatformTextareaCounterExampleComponent } from './platform-textarea-exa
 import { PlatformTextareaCounterTemplateExampleComponent } from './platform-textarea-examples/platform-textarea-counter-template-example.component';
 import { PlatformTextareaAutogrowExampleComponent } from './platform-textarea-examples/platform-textarea-autogrow-example.component';
 import { PlatformTextareaI18nExampleComponent } from './platform-textarea-examples/platform-textarea-i18n-example.component';
-import { FormMessageModule } from '@fundamental-ngx/core/form';
 
 const routes: Routes = [
     {

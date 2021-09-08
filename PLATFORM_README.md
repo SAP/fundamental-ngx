@@ -148,6 +148,13 @@ For an existing Angular CLI application,
 
     Note: Be careful while importing the entire `FundamentalNgxPlatformModule` as it loads all modules; we recommend to only import relevant modules as needed.
 
+
+    Version 0.32.0 brings new way of importing individual modules, which is prefered way.
+
+    ```typescript
+    import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
+    ```
+
     For models prior to 0.11.1 use `fundamental-ngx`
 
     ```javascript

@@ -271,6 +271,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'micro-process-flow',
+                loadChildren: () =>
+                    import('./component-docs/micro-process-flow/micro-process-flow-docs.module').then(
+                        (m) => m.MicroProcessFlowDocsModule
+                    )
+            },
+            {
                 path: 'multi-input',
                 loadChildren: () =>
                     import('./component-docs/multi-input/multi-input-docs.module').then((m) => m.MultiInputDocsModule)
@@ -467,6 +474,13 @@ export const ROUTES: Routes = [
                 loadChildren: () =>
                     import('./component-docs/moment-datetime-adapter/moment-datetime-adapter-docs.module').then(
                         (m) => m.MomentDatetimeAdapterDocsModule
+                    )
+            },
+            {
+                path: 'timeline',
+                loadChildren: () =>
+                    import('./component-docs/timeline/timeline-docs.module').then(
+                        (m) => m.TimelineDocsModule
                     )
             }
         ]

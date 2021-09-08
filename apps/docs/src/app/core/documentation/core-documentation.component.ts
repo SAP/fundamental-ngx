@@ -60,6 +60,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/message-strip', name: 'Message Strip' },
             { url: 'core/message-page', name: 'Message Page' },
             { url: 'core/message-toast', name: 'Message Toast' },
+            { url: 'core/micro-process-flow', name: 'Micro Process Flow' },
             { url: 'core/multi-input', name: 'Multi Input' },
             { url: 'core/notification', name: 'Notification' },
             { url: 'core/object-marker', name: 'Object Marker' },
@@ -92,7 +93,8 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/upload-collection', name: 'Upload Collection' },
             { url: 'core/wizard', name: 'Wizard' },
             { url: 'core/grid-list', name: 'Grid List' },
-            { url: 'core/slider', name: 'Slider' }
+            { url: 'core/slider', name: 'Slider' },
+            { url: 'core/timeline', name: 'Timeline' },
         ];
 
         this.layouts = [

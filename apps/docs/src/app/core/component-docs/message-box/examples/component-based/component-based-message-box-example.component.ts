@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+
 import { MessageBoxService } from '@fundamental-ngx/core/message-box';
+
 import { MessageBoxExampleComponent } from './message-box-example.component';
 
 export interface TextData {
@@ -12,7 +14,12 @@ export interface TextData {
     template: `
         <button fd-button label="Open from Component" (click)="open()"></button>
         <p>{{ closeReason }}</p>
-    `
+    `,
+    providers: [
+        // The MessageBoxService is already provided on the MessageBoxModule module.
+        // We do it at the component level here, due to the limitations of our example generation script.
+        MessageBoxService
+    ]
 })
 export class ComponentBasedMessageBoxExampleComponent {
     closeReason: string;
@@ -31,8 +38,12 @@ export class ComponentBasedMessageBoxExampleComponent {
         });
 
         messageBoxRef.afterClosed.subscribe(
-            (result) => { this.closeReason = 'Message box closed with result: ' + result; },
-            (error) => { this.closeReason = 'Message box dismissed with result: ' + error; }
+            (result) => {
+                this.closeReason = 'Message box closed with result: ' + result;
+            },
+            (error) => {
+                this.closeReason = 'Message box dismissed with result: ' + error;
+            }
         );
     }
 }

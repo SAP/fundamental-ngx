@@ -3,8 +3,7 @@ import {
     ContentChild,
     Directive,
     EventEmitter,
-    HostBinding, HostListener,
-    Input, OnDestroy,
+    HostBinding, Input, OnDestroy,
     Output
 } from '@angular/core';
 import { NestedLinkDirective } from '../nested-link/nested-link.directive';

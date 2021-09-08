@@ -1,0 +1,118 @@
+<fd-docs-section-title id="micro-process-flow-basic" componentName="micro-process-flow">
+    Micro Process Flow
+</fd-docs-section-title>
+<description>
+    <p>The Micro Process Flow control can be used to track the progress of a process.</p>
+    <p>It is best used for linear processes, such as document, order, and approval flows, and can be embedded in tiles, tables, and other containers.</p>
+</description>
+<component-example>
+    <fd-micro-process-flow-example></fd-micro-process-flow-example>
+</component-example>
+<code-example [exampleFiles]="basicExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="micro-process-flow-independent-steps" componentName="micro-process-flow">
+    Independent steps
+</fd-docs-section-title>
+<description>
+    <p>If you don't want to display connector line between items,
+        provide <code>[independentSteps]="true"</code> for the <code>fd-micro-process-flow</code> component.</p>
+</description>
+<component-example>
+    <fd-micro-process-flow-independent-items-example></fd-micro-process-flow-independent-items-example>
+</component-example>
+<code-example [exampleFiles]="independentExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="micro-process-flow-other-elements" componentName="micro-process-flow">
+    Status indicator icons / other controls / custom icons
+</fd-docs-section-title>
+<description>
+    <p>Additionaly, developers can use different components as indicators:</p>
+    <ul>
+        <li>
+            <a routerLink="/core/status-indicator">Status indicator</a>
+        </li>
+        <li>
+            <a routerLink="/core/button">Button</a>
+        </li>
+        <li>
+            <a routerLink="/core/info-label">Label</a>
+        </li>
+        <li>
+            <a routerLink="/core/link">Link</a>
+        </li>
+        <li>
+            <a routerLink="/core/avatar">Avatar</a>
+        </li>
+    </ul>
+</description>
+<component-example>
+    <fd-micro-process-flow-other-controls-example></fd-micro-process-flow-other-controls-example>
+</component-example>
+<code-example [exampleFiles]="customControlsExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="micro-process-flow-popover" componentName="micro-process-flow">
+    Micro process flow with Popover
+</fd-docs-section-title>
+<description>
+    <p>Information displayed in micro flow process items can be extended by adding popovers with additional context:</p>
+</description>
+<component-example>
+    <fd-micro-process-flow-popover-example></fd-micro-process-flow-popover-example>
+</component-example>
+<code-example [exampleFiles]="popoverExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="micro-process-flow-overflow" componentName="micro-process-flow">
+    Micro process flow overflow
+</fd-docs-section-title>
+<description>
+    <p>
+        If combined width of micro process flow is larger than the container width,
+        component will automatically render navigational buttons and set amount of items already shown
+        and how many items left to display.
+    </p>
+    <p>Developers can also pass custom easing function and provide different transition time</p>
+</description>
+<component-example>
+    <fd-micro-process-flow-overflow-example></fd-micro-process-flow-overflow-example>
+</component-example>
+<code-example [exampleFiles]="overflowExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="micro-process-flow-overflow" componentName="micro-process-flow">
+    Objects Inserted Between Nodes
+</fd-docs-section-title>
+<description>
+    <p>
+        Developers can add custom elements inside connector line element
+        by providing element with <code>fd-micro-process-flow-intermediary-item</code> directive.
+    </p>
+</description>
+<component-example>
+    <fd-micro-process-flow-object-between-nodes-example></fd-micro-process-flow-object-between-nodes-example>
+</component-example>
+<code-example [exampleFiles]="objectBetweenNodesExample"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="micro-process-flow-overflow" componentName="micro-process-flow">
+    Custom Node width
+</fd-docs-section-title>
+<description>
+    <p>
+        By default, width of the item container calculated based on the actual item width and connector line.
+        This can be easily changed by providing width to the <code>fd-micro-process-flow-item</code> element in order to set width manually.
+    </p>
+</description>
+<component-example>
+    <fd-micro-process-flow-custom-width-example></fd-micro-process-flow-custom-width-example>
+</component-example>
+<code-example [exampleFiles]="customWidthExample"></code-example>

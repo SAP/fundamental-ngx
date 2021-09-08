@@ -7,6 +7,7 @@ import { LinkDocsComponent } from './link-docs.component';
 import { LinkExampleComponent } from './examples/link-example.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { LinkModule } from '@fundamental-ngx/core/link';
+import { ShellbarModule } from '@fundamental-ngx/core/shellbar';
 
 const routes: Routes = [
     {
@@ -20,7 +21,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, LinkModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, LinkModule, ShellbarModule],
     exports: [RouterModule],
     declarations: [LinkDocsComponent, LinkHeaderComponent, LinkExampleComponent]
 })
