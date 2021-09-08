@@ -16,16 +16,16 @@ export interface BaseCalendarCell {
 /**
  * Calendar active cell strategy
  */
-export abstract class AbstractActiveCalendarCellStrategy<T extends BaseCalendarCell = BaseCalendarCell> {
+export abstract class AbstractCalendarActiveCellStrategy<T extends BaseCalendarCell = BaseCalendarCell> {
     /**
      * Calculate which table cell should be active
      */
     abstract getActiveCell(cells: T[]): T;
 }
 
-export class DefaultActiveCalendarCellStrategy<
+export class DefaultCalendarActiveCellStrategy<
     T extends BaseCalendarCell = BaseCalendarCell
-> extends AbstractActiveCalendarCellStrategy<T> {
+> extends AbstractCalendarActiveCellStrategy<T> {
     /**
      * Calculate which table cell should be active
      */

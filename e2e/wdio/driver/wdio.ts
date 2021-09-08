@@ -428,12 +428,20 @@ export function applyState(state: 'hover' | 'active' | 'focus', selector: string
     }
 }
 
-export function getPreviousElementText(selector: string, index: number = 0): string {
+export function getPreviousElement(selector: string, index: number = 0) {
     checkSelectorExists(selector, index);
-    return $$(selector)[index].previousElement().getText();
+    return $$(selector)[index].previousElement();
+}
+
+export function getNextElement(selector: string, index: number = 0) {
+    checkSelectorExists(selector, index);
+    return $$(selector)[index].nextElement();
+}
+
+export function getPreviousElementText(selector: string, index: number = 0): string {
+    return getPreviousElement(selector, index).getText();
 }
 
 export function getNextElementText(selector: string, index: number = 0): string {
-    checkSelectorExists(selector, index);
-    return $$(selector)[index].nextElement().getText();
+    return getNextElement(selector, index).getText();
 }

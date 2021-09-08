@@ -9,12 +9,14 @@ import {
     OnInit,
     Output,
     SimpleChanges,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 import { CalendarI18nLabels } from '../i18n/calendar-i18n-labels';
 import { FdCalendarView } from '../calendar.component';
@@ -32,7 +34,7 @@ import { CalendarService } from '../calendar.service';
     styleUrls: ['./calendar-header.component.scss'],
     encapsulation: ViewEncapsulation.None,
     host: {
-        '[attr.id]': 'id + "-header"'
+        '[attr.id]': 'viewId'
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -54,7 +56,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
         this._calculateSelectAggregatedYearLabel();
     }
 
-    /** Id */
+    /** Calendar ID */
     @Input()
     id: string;
 
@@ -126,6 +128,81 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
         return this.activeView === 'day';
     }
 
+    /**
+     * Component id
+     */
+    get viewId(): string {
+        return this.id + '-header';
+    }
+
+    /**
+     * @hidden
+     * Previous button id
+     */
+    get _prevButtonId(): string {
+        return this.viewId + '-left-arrow';
+    }
+
+    /**
+     * @hidden
+     * Next button id
+     */
+    get _nextButtonId(): string {
+        return this.viewId + '-right-arrow';
+    }
+
+    /**
+     * @hidden
+     * Month label id
+     */
+    get _monthButtonLabelId(): string {
+        return this.viewId + '-month-label';
+    }
+
+    /**
+     * @hidden
+     * Select month aria label id
+     */
+    get _selectMonthButtonAriaLabelId(): string {
+        return this.viewId + '-select-month-aria-label';
+    }
+
+    /**
+     * @hidden
+     * Year label id
+     */
+    get _yearButtonLabelId(): string {
+        return this.viewId + '-year-label';
+    }
+
+    /**
+     * @hidden
+     * Select year aria label id
+     */
+    get _selectYearButtonAriaLabelId(): string {
+        return this.viewId + '-select-year-aria-label';
+    }
+
+    /**
+     * @hidden
+     * Years range label id
+     */
+    get _yearsRangeButtonLabelId(): string {
+        return this.viewId + '-years-range-label';
+    }
+
+    /**
+     * @hidden
+     * Select years range aria label id
+     */
+    get _selectYearsRangeButtonAriaLabelId(): string {
+        return this.viewId + '-select-years-range-aria-label';
+    }
+
+    /** @hidden */
+    @ViewChild('prevButton')
+    _prevButtonComponent: ButtonComponent;
+
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
@@ -136,7 +213,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     private _amountOfYearsPerPeriod = 1;
 
     constructor(
-        public _calendarI18nLabels: CalendarI18nLabels,
+        private _calendarI18nLabels: CalendarI18nLabels,
         private _changeDetRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
         private _dateTimeAdapter: DatetimeAdapter<D>
@@ -151,16 +228,17 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (
-            changes.currentlyDisplayed && !changes.currentlyDisplayed.firstChange
-            || changes.activeView && !changes.activeView.firstChange
+            (changes.currentlyDisplayed && !changes.currentlyDisplayed.firstChange) ||
+            (changes.activeView && !changes.activeView.firstChange)
         ) {
             this._calculateLabels();
+            this._calculateAriaLabels();
         }
     }
 
     /** @hidden */
     ngOnInit(): void {
-        this._calendarService.leftArrowId = this.id + '-left-arrow';
+        this._calendarService.leftArrowId = this._prevButtonId;
 
         this._calculateMonthNames();
 
@@ -173,7 +251,18 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
         this._listenToCalendarLabelsChanges();
     }
 
-    processViewChange(type: FdCalendarView, event?: MouseEvent): void {
+    /**
+     * Focus on focusable control within the header
+     */
+    focus(): void {
+        if (!this._prevButtonComponent) {
+            return;
+        }
+        this._prevButtonComponent.elementRef().nativeElement.focus();
+    }
+
+    /** @hidden */
+    _processViewChange(type: FdCalendarView, event?: MouseEvent): void {
         if (event) {
             event.stopPropagation();
         }
@@ -183,7 +272,8 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
         this.activeViewChange.emit(this.activeView);
     }
 
-    emitClose(): void {
+    /** @hidden */
+    _emitClose(): void {
         this.closeClicked.emit();
     }
 
@@ -249,7 +339,7 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     private _calculateSelectAggregatedYearAriaLabel(): void {
         this.selectAggregatedYearAriaLabel = this.isOnAggregatedYearsView
             ? this._calendarI18nLabels.dateSelectionLabel
-            : this._calendarI18nLabels.yearSelectionLabel;
+            : this._calendarI18nLabels.yearsRangeSelectionLabel;
     }
 
     /** @hidden */

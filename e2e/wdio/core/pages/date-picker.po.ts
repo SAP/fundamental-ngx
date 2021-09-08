@@ -30,16 +30,17 @@ export class DatePickerPo extends CoreBaseComponentPo {
     selectedItem = '.is-active';
     currentItem = 'td.fd-calendar__item--current ';
     itemText = ' .fd-calendar__text';
-    buttonText = ' .fd-button__text'
     message = '.fd-form-message--';
 
     frenchButton = 'button[label="French"]';
     germanButton = 'button[label="German"]';
     bulgarianButton = 'button[label="Bulgarian"]';
-    nextMonthButton = 'button[aria-label="Next month"]';
-    previousMonthButton = 'button[aria-label="Previous month"]';
-    selectMonthButton = 'button[aria-label="Select month"]';
-    selectYearButton = 'button[aria-label="Select year"]';
+    previousMonthButton = '.fd-calendar__navigation .fd-calendar__action:nth-of-type(1) button';
+    selectMonthButton = '.fd-calendar__navigation .fd-calendar__action:nth-of-type(2) button';
+    selectYearButton = '.fd-calendar__navigation .fd-calendar__action:nth-of-type(3) button';
+    nextMonthButton = '.fd-calendar__navigation .fd-calendar__action:nth-of-type(4) button';
+
+    monthAttributeLabel = 'data-fd-calendar-month';
 
     open(): void {
         super.open(this.url);

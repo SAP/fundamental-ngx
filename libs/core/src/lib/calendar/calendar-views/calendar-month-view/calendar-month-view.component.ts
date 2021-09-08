@@ -20,7 +20,8 @@ import { DateTimeFormats, DATE_TIME_FORMATS, DatetimeAdapter } from '@fundamenta
 
 import { CalendarService } from '../../calendar.service';
 import { CalendarMonth } from '../../models/calendar-month';
-import { AbstractActiveCalendarCellStrategy, DefaultActiveCalendarCellStrategy } from '../../models/common';
+import { DefaultCalendarActiveCellStrategy } from '../../models/common';
+import { CalendarI18nLabels } from '../../i18n/calendar-i18n-labels';
 
 /** Component representing the month view of the calendar. */
 @Component({
@@ -29,7 +30,7 @@ import { AbstractActiveCalendarCellStrategy, DefaultActiveCalendarCellStrategy }
     styleUrls: ['./calendar-month-view.component.scss'],
     encapsulation: ViewEncapsulation.None,
     host: {
-        '[attr.id]': 'id + "-month-view"'
+        '[attr.id]': 'viewId'
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -54,30 +55,38 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     @Output()
     readonly monthClicked: EventEmitter<number> = new EventEmitter<number>();
 
-    /** Month grid table */
-    calendarMonthListGrid: CalendarMonth[][];
+    /**
+     * @hidden
+     * Month grid table
+     */
+    _calendarMonthListGrid: CalendarMonth[][];
 
-    /** A number offset used to achieve the 1-12 representation of the calendar */
+    /**
+     * @hidden
+     * A number offset used to achieve the 1-12 representation of the calendar
+     */
     private readonly _monthOffset: number = 1;
-
+    /** @hidden */
     private readonly _amountOfColPerRow: number = 3;
+    /** @hidden */
     private readonly _amountOfRows: number = 4;
 
-    /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
+    /**
+     * @hidden
+     * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
+     */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
     private _initiated = false;
-
-    /** @hidden */
-    private _activeCellStrategy: AbstractActiveCalendarCellStrategy<CalendarMonth> = new DefaultActiveCalendarCellStrategy();
 
     constructor(
         private _eRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
         private _calendarService: CalendarService,
         @Inject(DATE_TIME_FORMATS) private _dateTimeFormats: DateTimeFormats,
-        private _dateTimeAdapter: DatetimeAdapter<D>
+        private _dateTimeAdapter: DatetimeAdapter<D>,
+        private _calendarI18nLabels: CalendarI18nLabels
     ) {}
 
     /** @hidden */
@@ -115,6 +124,53 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
         return this._monthOffset;
     }
 
+    /** View ID */
+    get viewId(): string {
+        return this.id + '-month-view';
+    }
+
+    /**
+     * @hidden
+     * Today cell label.
+     * Is used in conjunction with cell date itself
+     */
+    get _todayAriaLabel(): string {
+        return this._calendarI18nLabels.todayLabel;
+    }
+
+    /**
+     * @hidden
+     * Selected date cell label.
+     * Is used in conjunction with cell date itself
+     */
+    get _selectedDateAriaLabel(): string {
+        return this._calendarI18nLabels.dateSelectedLabel;
+    }
+
+    /**
+     * @hidden
+     * View description
+     */
+    get _viewRoleDescription(): string {
+        return this._calendarI18nLabels.calendarMonthViewDescription;
+    }
+
+    /**
+     * @hidden
+     * Today cell label ID
+     */
+    get _todayLabelId(): string {
+        return this.viewId + '-today-label';
+    }
+
+    /**
+     * @hidden
+     * Selected date label ID
+     */
+    get _selectedDateLabelId(): string {
+        return this.viewId + '-selected-date-label';
+    }
+
     /** Method for handling the mouse click event when a month is selected  */
     selectMonth(monthCell: CalendarMonth, event?: MouseEvent): void {
         if (event) {
@@ -124,89 +180,111 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
         this.monthClicked.emit(this.monthSelected);
     }
 
-    /** Method for handling the keyboard events (a11y) */
-    onKeydownMonthHandler(event: KeyboardEvent, index: number): void {
+    /**
+     * Set focus on month cell.
+     * It can be a selected cell, current month cell or first cell in the list
+     */
+     setFocusOnCell(): void {
+        const cellToFocus = new DefaultCalendarActiveCellStrategy().getActiveCell(this._getMonthList());
+        if (!cellToFocus?.id) {
+            return;
+        }
+        this._focusElementBySelector(`#${cellToFocus.id}`);
+    }
+
+    /** 
+     * @hidden
+     * Method for handling the keyboard events (a11y) 
+     */
+    _onKeydownMonthHandler(event: KeyboardEvent, index: number): void {
         this._calendarService.onKeydownHandler(event, index);
     }
 
-    /** Method that allows to focus elements inside this component */
-    focusElementBySelector(elementSelector: string): void {
+    /** 
+     * @hidden
+     * Method that allows to focus elements inside this component 
+     */
+    _focusElementBySelector(elementSelector: string): void {
         const elementToFocus: HTMLElement = this._eRef.nativeElement.querySelector(elementSelector);
         if (elementToFocus?.focus) {
             elementToFocus.focus();
         }
     }
 
-    /**
-     * Set focus on month cell.
-     * It can be a selected cell, current month cell or first cell in the list
+    /** 
+     * @hidden
+     * Method returning id of month cell 
      */
-     setFocusOnCell(): void {
-        const cellToFocus = new DefaultActiveCalendarCellStrategy().getActiveCell(this._getMonthList());
-        if (!cellToFocus?.id) {
-            return;
-        }
-        this.focusElementBySelector(`#${cellToFocus.id}`);
-    }
-
-    /** Method returning id of month cell */
-    getIndex(rowIndex: number, colIndex: number): number {
+    _getIndex(rowIndex: number, colIndex: number): number {
         return this._calendarService.getId(rowIndex, colIndex);
     }
 
-    /** Get id of calendar's month item */
-    getId(index: number): string {
-        return this.id + '-fd-month-' + index;
+    /**
+     * @hidden
+     * @param index month grid cell index
+     */
+    _getId(index: number): string {
+        return this.viewId + '-month-' + index;
     }
 
-    /** Method that checks if this is current month */
-    isCurrent(id: number): boolean {
+    /** 
+     * @hidden
+     * Method that checks if this is current month 
+     */
+    _isCurrent(id: number): boolean {
         return id + this._monthOffset === this.currentMonth;
     }
 
-    /** Method that check if this is selected month */
-    isSelected(id: number): boolean {
+    /** 
+     * @hidden
+     * Method that check if this is selected month 
+     */
+    _isSelected(id: number): boolean {
         return id + this._monthOffset === this.monthSelected;
     }
 
-    /** Method that create month grid with required meta data */
+    /** 
+     * @hidden
+     * Method that create month grid with required meta data 
+     */
     private _constructMonthGrid(): void {
         const monthNames: string[] = this._dateTimeAdapter.getMonthNames('short');
 
-        const monthList: CalendarMonth[] = monthNames.map(
-            (monthName, index): CalendarMonth => {
-                const month = index + this.monthOffset;
-                return {
-                    month: month,
-                    label: monthName,
-                    ariaLabel: this._dateTimeAdapter.format(
-                        this._dateTimeAdapter.createDate(this.year, month, 1),
-                        this._dateTimeFormats.display.monthA11yLabel
-                    ),
-                    index: index,
-                    selected: month === this.monthSelected,
-                    current: month === this.currentMonth,
-                    tabIndex: month === this.monthSelected ? 0 : -1
-                };
-            }
-        );
+        const monthList: CalendarMonth[] = monthNames.map((monthName, index): CalendarMonth => {
+            const month = index + this.monthOffset;
+            return {
+                month: month,
+                label: monthName,
+                ariaLabel: this._dateTimeAdapter.format(
+                    this._dateTimeAdapter.createDate(this.year, month, 1),
+                    this._dateTimeFormats.display.monthA11yLabel
+                ),
+                index: index,
+                selected: month === this.monthSelected,
+                current: month === this.currentMonth,
+                tabIndex: month === this.monthSelected ? 0 : -1
+            };
+        });
 
-        this.calendarMonthListGrid = [];
+        this._calendarMonthListGrid = [];
         /** Creating 2d grid */
         while (monthList.length) {
-            this.calendarMonthListGrid.push(monthList.splice(0, this._amountOfColPerRow));
+            this._calendarMonthListGrid.push(monthList.splice(0, this._amountOfColPerRow));
         }
 
-        this.calendarMonthListGrid.forEach((row, rowIndex) => {
+        this._calendarMonthListGrid.forEach((row, rowIndex) => {
             row.forEach((monthCell, colIndex) => {
-                monthCell.id = this.getId(this.getIndex(rowIndex, colIndex));
+                monthCell.id = this._getId(this._getIndex(rowIndex, colIndex));
             });
         });
 
         this._changeDetectorRef.markForCheck();
     }
 
-    /** Method to put configuration and listeners on calendar keyboard service */
+    /** 
+     * @hidden
+     * Method to put configuration and listeners on calendar keyboard service 
+     */
     private _setupKeyboardService(): void {
         this._calendarService.rowAmount = this._amountOfRows;
         this._calendarService.colAmount = this._amountOfColPerRow;
@@ -221,13 +299,16 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
             .subscribe((index) => this.selectMonth(this._getMonthList()[index]));
     }
 
-    /** Returns transformed 1d array from 2d month grid. */
+    /** 
+     * @hidden
+     * Returns transformed 1d array from 2d month grid. 
+     */
     private _getMonthList(): CalendarMonth[] {
-        return [].concat.apply([], this.calendarMonthListGrid);
+        return [].concat.apply([], this._calendarMonthListGrid);
     }
 
     /** @hidden */
     private _focusOnCellByIndex(index: number): void {
-        this.focusElementBySelector(`#${this.getId(index)}`);
+        this._focusElementBySelector(`#${this._getId(index)}`);
     }
 }

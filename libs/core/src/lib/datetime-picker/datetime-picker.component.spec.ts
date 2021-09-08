@@ -92,7 +92,7 @@ describe('DatetimePickerComponent', () => {
         component.writeValue(dateTime);
 
         expect(component.date).toEqual(dateTime);
-        expect(component._calendarComponent.currentlyDisplayed.month).toEqual(dateTime.month);
+        expect(component._calendarComponent._currentlyDisplayed.month).toEqual(dateTime.month);
     });
 
     it('should reset input if time format is invalid', () => {

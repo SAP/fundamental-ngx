@@ -177,9 +177,9 @@ describe('Datetime picker suite', function () {
         scrollIntoView(topPage);
         scrollIntoView(selectYearButton);
         click(selectYearButton);
-        waitForElDisplayed(dateTimePickerPage.filterCaledarValue('year'));
+        waitForElDisplayed(dateTimePickerPage.filterCalendarValue('year'));
         click(firstYearButton);
-        waitForElDisplayed(dateTimePickerPage.filterCaledarValue('day'));
+        waitForElDisplayed(dateTimePickerPage.filterCalendarValue('day'));
         scrollIntoView(datePickerButton, 2);
         click(okButton);
         expect(getValue(datePickerInput, 1))
@@ -195,9 +195,9 @@ describe('Datetime picker suite', function () {
         click(datePickerButton);
         scrollIntoView(topPage);
         click(selectMonthButton);
-        waitForElDisplayed(dateTimePickerPage.filterCaledarValue('month'));
+        waitForElDisplayed(dateTimePickerPage.filterCalendarValue('month'));
         click(firstMonthButton);
-        waitForElDisplayed(dateTimePickerPage.filterCaledarValue('day'));
+        waitForElDisplayed(dateTimePickerPage.filterCalendarValue('day'));
         click(okButton);
         expect(getValue(datePickerInput))
             .toEqual(date);

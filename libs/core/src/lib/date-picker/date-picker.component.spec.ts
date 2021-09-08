@@ -176,8 +176,8 @@ describe('DatePickerComponent', () => {
         component.dateStringUpdate(strDate1 + ' - ' + strDate2);
 
         expect(component._isInvalidDateInput).toBe(false);
-        expect(component._calendarComponent.currentlyDisplayed.month).toBe(date2.month);
-        expect(component._calendarComponent.currentlyDisplayed.year).toBe(date2.year);
+        expect(component._calendarComponent._currentlyDisplayed.month).toBe(date2.month);
+        expect(component._calendarComponent._currentlyDisplayed.year).toBe(date2.year);
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith({ start: date2, end: date1 });
         expect(component.onChange).toHaveBeenCalledWith({ start: date2, end: date1 });
     });
@@ -193,8 +193,8 @@ describe('DatePickerComponent', () => {
         spyOn(adapter, 'parse').and.returnValue(date);
         component.dateStringUpdate(strDate);
         expect(component._isInvalidDateInput).toBe(true);
-        expect(component._calendarComponent.currentlyDisplayed.month).toBe(todayDate.month);
-        expect(component._calendarComponent.currentlyDisplayed.year).toBe(todayDate.year);
+        expect(component._calendarComponent._currentlyDisplayed.month).toBe(todayDate.month);
+        expect(component._calendarComponent._currentlyDisplayed.year).toBe(todayDate.year);
         expect(component.selectedDateChange.emit).toHaveBeenCalledWith(date);
         expect(component.onChange).toHaveBeenCalledWith(date);
     });
@@ -223,8 +223,8 @@ describe('DatePickerComponent', () => {
         component.dateStringUpdate(strDate1 + ' - ' + strDate2);
 
         expect(component._isInvalidDateInput).toBe(true);
-        expect(component._calendarComponent.currentlyDisplayed.month).toBe(todayDate.month);
-        expect(component._calendarComponent.currentlyDisplayed.year).toBe(todayDate.year);
+        expect(component._calendarComponent._currentlyDisplayed.month).toBe(todayDate.month);
+        expect(component._calendarComponent._currentlyDisplayed.year).toBe(todayDate.year);
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith(rangeDateInvalidObject);
         expect(component.onChange).toHaveBeenCalledWith(rangeDateInvalidObject);
     });
@@ -252,8 +252,8 @@ describe('DatePickerComponent', () => {
         component.dateStringUpdate(strDate1 + ' - ' + strDate2);
 
         expect(component._isInvalidDateInput).toBe(true);
-        expect(component._calendarComponent.currentlyDisplayed.month).toBe(date1.month);
-        expect(component._calendarComponent.currentlyDisplayed.year).toBe(date1.year);
+        expect(component._calendarComponent._currentlyDisplayed.month).toBe(date1.month);
+        expect(component._calendarComponent._currentlyDisplayed.year).toBe(date1.year);
         expect(component.selectedRangeDateChange.emit).toHaveBeenCalledWith(rangeDateInvalidObject);
         expect(component.onChange).toHaveBeenCalledWith(rangeDateInvalidObject);
     });

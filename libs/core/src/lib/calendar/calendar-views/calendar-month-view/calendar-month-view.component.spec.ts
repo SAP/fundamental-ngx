@@ -34,8 +34,8 @@ describe('CalendarMonthViewComponent', () => {
     });
 
     it('Should have 12 months', () => {
-        expect(component.calendarMonthListGrid).toBeDefined();
-        const monthList: string[] = [].concat.apply([], component.calendarMonthListGrid);
+        expect(component._calendarMonthListGrid).toBeDefined();
+        const monthList: string[] = [].concat.apply([], component._calendarMonthListGrid);
         expect(monthList.length).toBe(12);
     });
 
@@ -50,7 +50,7 @@ describe('CalendarMonthViewComponent', () => {
 
         expect(element.classList.contains('is-active')).toBe(false);
 
-        component.selectMonth(component.calendarMonthListGrid[0][0]);
+        component.selectMonth(component._calendarMonthListGrid[0][0]);
         (component as any)._constructMonthGrid();
         fixture.detectChanges();
 
@@ -60,51 +60,51 @@ describe('CalendarMonthViewComponent', () => {
     });
 
     it('Should focus the month below with ArrowDown', () => {
-        const focusSpy = spyOn(component, 'focusElement');
+        const focusSpy = spyOn(component, '_focusElementBySelector');
         const event = {
             key: 'ArrowDown',
             preventDefault: () => {}
-        };
-        component.onKeydownMonthHandler(event, testMonth);
-        expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-8');
+        } as KeyboardEvent;
+        component._onKeydownMonthHandler(event, testMonth);
+        expect(focusSpy).toHaveBeenCalledWith('#test-month-view-month-8');
     });
 
     it('Should focus the month above with ArrowUp', () => {
-        const focusSpy = spyOn(component, 'focusElement');
+        const focusSpy = spyOn(component, '_focusElementBySelector');
         const event = {
             key: 'ArrowUp',
             preventDefault: () => {}
-        };
-        component.onKeydownMonthHandler(event, testMonth);
-        expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-2');
+        } as KeyboardEvent;
+        component._onKeydownMonthHandler(event, testMonth);
+        expect(focusSpy).toHaveBeenCalledWith('#test-month-view-month-2');
     });
 
     it('Should focus the month to the left with ArrowLeft', () => {
-        const focusSpy = spyOn(component, 'focusElement');
+        const focusSpy = spyOn(component, '_focusElementBySelector');
         const event = {
             key: 'ArrowLeft',
             preventDefault: () => {}
-        };
-        component.onKeydownMonthHandler(event, testMonth);
-        expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-4');
+        } as KeyboardEvent;
+        component._onKeydownMonthHandler(event, testMonth);
+        expect(focusSpy).toHaveBeenCalledWith('#test-month-view-month-4');
     });
 
     it('Should focus the month to the right with ArrowRight', () => {
-        const focusSpy = spyOn(component, 'focusElement');
+        const focusSpy = spyOn(component, '_focusElementBySelector');
         const event = {
             key: 'ArrowRight',
             preventDefault: () => {}
-        };
-        component.onKeydownMonthHandler(event, testMonth);
-        expect(focusSpy).toHaveBeenCalledWith('#test-fd-month-6');
+        } as KeyboardEvent;
+        component._onKeydownMonthHandler(event, testMonth);
+        expect(focusSpy).toHaveBeenCalledWith('#test-month-view-month-6');
     });
 
     it('Should select a month with Enter', () => {
         const event = {
             key: 'Enter',
             preventDefault: () => {}
-        };
-        component.onKeydownMonthHandler(event, testMonth);
+        } as KeyboardEvent;
+        component._onKeydownMonthHandler(event, testMonth);
         expect(component.monthSelected).toEqual(6);
     });
 
@@ -112,15 +112,15 @@ describe('CalendarMonthViewComponent', () => {
         const event = {
             key: ' ',
             preventDefault: () => {}
-        };
-        component.onKeydownMonthHandler(event, testMonth);
+        } as KeyboardEvent;
+        component._onKeydownMonthHandler(event, testMonth);
         expect(component.monthSelected).toEqual(6);
     });
 
     it('Should generate grid', () => {
-        expect(component.calendarMonthListGrid).toBeDefined();
+        expect(component._calendarMonthListGrid).toBeDefined();
 
-        const sizes: number[] = component.calendarMonthListGrid.map((list) => list.length);
+        const sizes: number[] = component._calendarMonthListGrid.map((list) => list.length);
 
         expect(sizes).toEqual([3, 3, 3, 3]);
     });

@@ -2,7 +2,6 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ElementRef,
     EventEmitter,
     forwardRef,
     HostBinding,
@@ -29,6 +28,7 @@ import { AggregatedYear } from './models/aggregated-year';
 import { CalendarDayViewComponent } from './calendar-views/calendar-day-view/calendar-day-view.component';
 import { CalendarYearViewComponent } from './calendar-views/calendar-year-view/calendar-year-view.component';
 import { CalendarMonthViewComponent } from './calendar-views/calendar-month-view/calendar-month-view.component';
+import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
 import { CalendarService } from './calendar.service';
 import { createMissingDateImplementationError } from './calendar-errors';
 import {
@@ -78,38 +78,12 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
     ],
     host: {
         '(blur)': 'onTouched()',
-        '[attr.id]': 'id'
+        '[attr.id]': 'id',
+        'class': 'fd-calendar fd-has-display-block'
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Validator, OnDestroy {
-    /** @hidden */
-    @ViewChild(CalendarDayViewComponent)
-    dayViewComponent: CalendarDayViewComponent<D>;
-
-    /** @hidden */
-    @ViewChild(CalendarMonthViewComponent)
-    monthViewComponent: CalendarMonthViewComponent<D>;
-
-    /** @hidden */
-    @ViewChild(CalendarYearViewComponent)
-    yearViewComponent: CalendarYearViewComponent<D>;
-
-    /** @hidden */
-    @ViewChild(CalendarAggregatedYearViewComponent)
-    aggregatedYearViewComponent: CalendarAggregatedYearViewComponent<D>;
-
-    /** @hidden */
-    @HostBinding('class.fd-calendar')
-    fdCalendarClass = true;
-
-    /** @hidden */
-    @HostBinding('class.fd-has-display-block')
-    fdHasDisplayBlockClass = true;
-
-    /** Currently displayed days depending on month and year */
-    currentlyDisplayed: CalendarCurrent;
-
     /** The currently selected date model in single mode. */
     @Input()
     selectedDate: D;
@@ -223,18 +197,42 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     readonly closeClicked: EventEmitter<void> = new EventEmitter<void>();
 
     /** @hidden */
+    @ViewChild(CalendarDayViewComponent)
+    _dayViewComponent: CalendarDayViewComponent<D>;
+
+    /** @hidden */
+    @ViewChild(CalendarMonthViewComponent)
+    _monthViewComponent: CalendarMonthViewComponent<D>;
+
+    /** @hidden */
+    @ViewChild(CalendarYearViewComponent)
+    _yearViewComponent: CalendarYearViewComponent<D>;
+
+    /** @hidden */
+    @ViewChild(CalendarAggregatedYearViewComponent)
+    _aggregatedYearViewComponent: CalendarAggregatedYearViewComponent<D>;
+
+    /** @hidden */
+    @ViewChild(CalendarHeaderComponent)
+    _calendarHeaderComponent: CalendarHeaderComponent<D>;
+
+    /** 
+     * @hidden
+     * Currently displayed days depending on month and year 
+     */
+    _currentlyDisplayed: CalendarCurrent;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    private adapterStartingDayOfWeek: DaysOfWeek;
+    private _adapterStartingDayOfWeek: DaysOfWeek;
 
     /** That allows to define function that should happen, when focus should normally escape of component */
     @Input()
-    escapeFocusFunction: Function = (): void => {
-        const elementToFocus: HTMLElement = (this._elementRef.nativeElement as HTMLElement).querySelector(
-            `#${this.id}-left-arrow`
-        );
-        elementToFocus?.focus();
+    escapeFocusFunction: Function = (event?: KeyboardEvent): void => {
+        event?.preventDefault();
+        this._calendarHeaderComponent?.focus();
     };
 
     /**
@@ -273,7 +271,6 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     /** @hidden */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
-        private _elementRef: ElementRef,
         @Optional() private _contentDensityService: ContentDensityService,
         // Use @Optional to avoid angular injection error message and throw our own which is more precise one
         @Optional() private _dateTimeAdapter: DatetimeAdapter<D>,
@@ -287,20 +284,10 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
         }
 
         // set default value
-        this.adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
+        this._adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
         this.selectedDate = this._dateTimeAdapter.today();
         this._changeDetectorRef.markForCheck();
         this._listenToLocaleChanges();
-    }
-
-    /** @hidden */
-    private _listenToLocaleChanges(): void {
-        this._subscriptions.add(
-            this._dateTimeAdapter.localeChanges.subscribe(() => {
-                this.adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
-                this._changeDetectorRef.markForCheck();
-            })
-        );
     }
 
     /** @hidden */
@@ -316,7 +303,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     }
 
     getWeekStartDay(): DaysOfWeek {
-        return this.startingDayOfWeek === undefined ? this.adapterStartingDayOfWeek : this.startingDayOfWeek;
+        return this.startingDayOfWeek === undefined ? this._adapterStartingDayOfWeek : this.startingDayOfWeek;
     }
 
     /** @hidden */
@@ -483,50 +470,50 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
 
     /** Function that allows to switch actual view to next month */
     displayNextMonth(): void {
-        if (this.currentlyDisplayed.month === 12) {
-            this.currentlyDisplayed = { year: this.currentlyDisplayed.year + 1, month: 1 };
+        if (this._currentlyDisplayed.month === 12) {
+            this._currentlyDisplayed = { year: this._currentlyDisplayed.year + 1, month: 1 };
         } else {
-            this.currentlyDisplayed = { year: this.currentlyDisplayed.year, month: this.currentlyDisplayed.month + 1 };
+            this._currentlyDisplayed = { year: this._currentlyDisplayed.year, month: this._currentlyDisplayed.month + 1 };
         }
     }
 
     /** Function that allows to switch actual view to previous month */
     displayPreviousMonth(): void {
-        if (this.currentlyDisplayed.month <= 1) {
-            this.currentlyDisplayed = { year: this.currentlyDisplayed.year - 1, month: 12 };
+        if (this._currentlyDisplayed.month <= 1) {
+            this._currentlyDisplayed = { year: this._currentlyDisplayed.year - 1, month: 12 };
         } else {
-            this.currentlyDisplayed = { year: this.currentlyDisplayed.year, month: this.currentlyDisplayed.month - 1 };
+            this._currentlyDisplayed = { year: this._currentlyDisplayed.year, month: this._currentlyDisplayed.month - 1 };
         }
     }
 
     /** Function that allows to switch actual view to next year */
     displayNextYear(): void {
-        this.currentlyDisplayed = { month: this.currentlyDisplayed.month, year: this.currentlyDisplayed.year + 1 };
+        this._currentlyDisplayed = { month: this._currentlyDisplayed.month, year: this._currentlyDisplayed.year + 1 };
     }
 
     /** Function that allows to switch actual view to previous year */
     displayPreviousYear(): void {
-        this.currentlyDisplayed = { month: this.currentlyDisplayed.month, year: this.currentlyDisplayed.year - 1 };
+        this._currentlyDisplayed = { month: this._currentlyDisplayed.month, year: this._currentlyDisplayed.year - 1 };
     }
 
     /** Function that allows to switch actually displayed list of year to next year list*/
     displayNextYearList(): void {
-        this.yearViewComponent.loadNextYearList();
+        this._yearViewComponent.loadNextYearList();
     }
 
     /** Function that allows to switch actually displayed list of year to previous year list*/
     displayPreviousYearList(): void {
-        this.yearViewComponent.loadPreviousYearList();
+        this._yearViewComponent.loadPreviousYearList();
     }
 
     /** Function that allows to switch actually displayed list of year to next year list*/
     displayNextYearsList(): void {
-        this.aggregatedYearViewComponent.loadNextYearsList();
+        this._aggregatedYearViewComponent.loadNextYearsList();
     }
 
     /** Function that allows to switch actually displayed list of year to previous year list*/
     displayPreviousYearsList(): void {
-        this.aggregatedYearViewComponent.loadPreviousYearsList();
+        this._aggregatedYearViewComponent.loadPreviousYearsList();
     }
 
     /**
@@ -535,7 +522,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      */
     setCurrentlyDisplayed(date: D): void {
         if (this._dateTimeAdapter.isValid(date)) {
-            this.currentlyDisplayed = {
+            this._currentlyDisplayed = {
                 month: this._dateTimeAdapter.getMonth(date),
                 year: this._dateTimeAdapter.getYear(date)
             };
@@ -547,7 +534,7 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      * Function that handles changes from month view child component, changes actual view and changes currently displayed month
      */
     handleMonthViewChange(month: number): void {
-        this.currentlyDisplayed = { month: month, year: this.currentlyDisplayed.year };
+        this._currentlyDisplayed = { month: month, year: this._currentlyDisplayed.year };
         this.activeView = 'day';
         this.onDaysViewSelected();
         this.activeViewChange.emit(this.activeView);
@@ -555,38 +542,38 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
 
     selectedYear(yearSelected: number): void {
         this.activeView = 'day';
-        this.currentlyDisplayed.year = yearSelected;
+        this._currentlyDisplayed.year = yearSelected;
         this.onDaysViewSelected();
     }
 
     selectedYears(yearsSelected: AggregatedYear): void {
         this.activeView = 'year';
-        this.currentlyDisplayed.year = yearsSelected.startYear;
+        this._currentlyDisplayed.year = yearsSelected.startYear;
         this.onYearViewSelected();
     }
 
     /** @hidden */
     onDaysViewSelected(): void {
         this._changeDetectorRef.detectChanges();
-        this.dayViewComponent?.setFocusOnCell();
+        this._dayViewComponent?.setFocusOnCell();
     }
 
     /** @hidden */
     onMonthViewSelected(): void {
         this._changeDetectorRef.detectChanges();
-        this.monthViewComponent?.setFocusOnCell();
+        this._monthViewComponent?.setFocusOnCell();
     }
 
     /** @hidden */
     onYearViewSelected(): void {
         this._changeDetectorRef.detectChanges();
-        this.yearViewComponent?.setFocusOnCell();
+        this._yearViewComponent?.setFocusOnCell();
     }
 
     /** @hidden */
     onYearsRangeViewSelected(): void {
         this._changeDetectorRef.detectChanges();
-        this.aggregatedYearViewComponent?.setFocusOnCell();
+        this._aggregatedYearViewComponent?.setFocusOnCell();
     }
 
     /** Method that provides information if model selected date/dates have properly types and are valid */
@@ -604,6 +591,16 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
         return false;
     }
 
+    /** @hidden */
+    private _listenToLocaleChanges(): void {
+        this._subscriptions.add(
+            this._dateTimeAdapter.localeChanges.subscribe(() => {
+                this._adapterStartingDayOfWeek = (this._dateTimeAdapter.getFirstDayOfWeek() + 1) as DaysOfWeek;
+                this._changeDetectorRef.markForCheck();
+            })
+        );
+    }
+
     /**
      * @hidden
      * Method that sets up the currently displayed variables, like shown month and year.
@@ -611,23 +608,23 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
      */
     private _prepareDisplayedView(): void {
         if (this.calType === 'single' && this._dateTimeAdapter.isValid(this.selectedDate)) {
-            this.currentlyDisplayed = {
+            this._currentlyDisplayed = {
                 year: this._dateTimeAdapter.getYear(this.selectedDate),
                 month: this._dateTimeAdapter.getMonth(this.selectedDate)
             };
         } else if (this.selectedRangeDate && this.selectedRangeDate.start) {
-            this.currentlyDisplayed = {
+            this._currentlyDisplayed = {
                 year: this._dateTimeAdapter.getYear(this.selectedRangeDate.start),
                 month: this._dateTimeAdapter.getMonth(this.selectedRangeDate.start)
             };
         } else if (this.selectedRangeDate && this.selectedRangeDate.end) {
-            this.currentlyDisplayed = {
+            this._currentlyDisplayed = {
                 year: this._dateTimeAdapter.getYear(this.selectedRangeDate.end),
                 month: this._dateTimeAdapter.getMonth(this.selectedRangeDate.end)
             };
         } else {
             const today = this._dateTimeAdapter.today();
-            this.currentlyDisplayed = {
+            this._currentlyDisplayed = {
                 year: this._dateTimeAdapter.getYear(today),
                 month: this._dateTimeAdapter.getMonth(today)
             };

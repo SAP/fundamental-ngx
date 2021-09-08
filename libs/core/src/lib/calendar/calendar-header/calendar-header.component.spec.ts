@@ -29,7 +29,7 @@ describe('Calendar2HeaderComponent', () => {
     it('Should switch to year view, when changed to year and not no year view', () => {
         spyOn(component.activeViewChange, 'emit');
         component.activeView = 'day';
-        component.processViewChange('year');
+        component._processViewChange('year');
         expect(component.activeViewChange.emit).toHaveBeenCalledWith('year');
         expect(component.activeView).toBe('year');
         expect(component.isOnYearView).toBeTruthy();
@@ -38,7 +38,7 @@ describe('Calendar2HeaderComponent', () => {
     it('Should switch to day view, when changed to year and on year view', () => {
         spyOn(component.activeViewChange, 'emit');
         component.activeView = 'year';
-        component.processViewChange('year');
+        component._processViewChange('year');
         expect(component.activeViewChange.emit).toHaveBeenCalledWith('day');
         expect(component.activeView).toBe('day');
     });
@@ -46,7 +46,7 @@ describe('Calendar2HeaderComponent', () => {
     it('Should switch to month view, changed to month and not no month view', () => {
         spyOn(component.activeViewChange, 'emit');
         component.activeView = 'day';
-        component.processViewChange('month');
+        component._processViewChange('month');
         expect(component.activeViewChange.emit).toHaveBeenCalledWith('month');
         expect(component.activeView).toBe('month');
         expect(component.isOnMonthView).toBeTruthy();
