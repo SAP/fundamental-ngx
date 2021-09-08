@@ -29,39 +29,12 @@ import { blockExamples } from '../fixtures/appData/date-picker-contents';
 describe('Datetime picker suite', () => {
     const datePickerPage = new DatePickerPo();
     const {
-        defaultExample,
-        formExample,
-        rangeExample,
-        disabledExample,
-        allowNullExample,
-        formRangeExample,
-        formattingExample,
-        disableFuncExample,
-        internationalExample,
-        rangeDisabledExample,
-        calendar,
-        calendarIcon,
-        calendarInput,
-        calendarItem,
-        selectedTimeLine,
-        currentItem,
-        itemText,
-        inputGroup,
-        frenchButton,
-        germanButton,
-        bulgarianButton,
-        previousMonthButton,
-        nextMonthButton,
-        calendarBody,
-        calendarRow,
-        selectMonthButton,
-        selectYearButton,
-        months,
-        buttonText,
-        message,
-        currentMonthCalendarItem,
-        getCurrentDayIndex,
-        altCalendarItem
+        defaultExample, formExample, rangeExample, disabledExample, allowNullExample, formRangeExample,
+        formattingExample, disableFuncExample, internationalExample, rangeDisabledExample, calendar, calendarIcon,
+        calendarInput, calendarItem, selectedTimeLine, currentItem, inputGroup, frenchButton, germanButton,
+        bulgarianButton, previousMonthButton, nextMonthButton, calendarBody, calendarRow, selectMonthButton,
+        selectYearButton, months, message, currentMonthCalendarItem, getCurrentDayIndex, altCalendarItem,
+        monthAttributeLabel
     } = new DatePickerPo();
 
     beforeAll(() => {
@@ -249,16 +222,16 @@ describe('Datetime picker suite', () => {
         click(section + calendarIcon);
         click(selectMonthButton);
 
-        const previousMonthName = getAttributeByName(calendarItem + itemText, 'aria-label', getCurrentItemIndex() - 1);
-        const nextMonthName = getAttributeByName(calendarItem + itemText, 'aria-label', getCurrentItemIndex() + 1);
+        const previousMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() - 1);
+        const nextMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() + 1);
         click(selectMonthButton);
 
         click(nextMonthButton);
-        expect(getText(selectMonthButton + buttonText)).toEqual(nextMonthName, `next month is not chosen`);
+        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(nextMonthName, `next month is not chosen`);
 
         click(previousMonthButton);
         click(previousMonthButton);
-        expect(getText(selectMonthButton + buttonText)).toEqual(previousMonthName, `previous month is not chosen`);
+        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(previousMonthName, `previous month is not chosen`);
         click(section + calendarIcon);
     }
 
@@ -267,7 +240,7 @@ describe('Datetime picker suite', () => {
         click(selectYearButton);
         const nextYear = getNextElementText(currentItem);
         clickNextElement(currentItem);
-        expect(getText(selectYearButton + buttonText)).toEqual(nextYear);
+        expect(getText(selectYearButton)).toEqual(nextYear);
         click(section + calendarIcon);
     }
 
@@ -275,9 +248,9 @@ describe('Datetime picker suite', () => {
         click(section + calendarIcon);
         click(selectMonthButton);
         expect(isElementDisplayed(months)).toBe(true);
-        const firstMonth = getAttributeByName(calendarItem + itemText, 'aria-label');
+        const firstMonth = getAttributeByName(calendarItem, monthAttributeLabel);
         click(calendarItem);
-        expect(getText(selectMonthButton + buttonText)).toEqual(firstMonth, `month is not chosen`);
+        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(firstMonth, `month is not chosen`);
         click(section + calendarIcon);
     }
 
@@ -376,7 +349,7 @@ describe('Datetime picker suite', () => {
             click(section + calendarIcon);
         }
         if (currentDayIndex !== dayCount) {
-            click(altCalendarItem, currentDayIndex + 1);
+            click(currentMonthCalendarItem, currentDayIndex + 1);
 
             section === formattingExample
                 ? (chosenDate = `${getCurrentMonth(true)}/${getNextDay(true)}/${currentYear.toString().slice(2)}`)

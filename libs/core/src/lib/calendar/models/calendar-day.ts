@@ -1,22 +1,23 @@
-import { AbstractActiveCalendarCellStrategy, BaseCalendarCell } from './common';
+import { AbstractCalendarActiveCellStrategy, BaseCalendarCell } from './common';
 export interface CalendarDay<D> extends BaseCalendarCell {
-    date: D;
-    weekDay: number;
-    weekend: boolean;
-    monthStatus?: 'previous' | 'current' | 'next';
-    specialNumber?: number;
-    blocked?: boolean;
-    selectedFirst?: boolean;
-    selectedLast?: boolean;
-    selectedRange?: boolean;
-    hoverRange?: boolean;
-    isTabIndexed?: boolean;
+    date: D; // date representation
+    weekDay: number; // weeks number in the year
+    weekend: boolean; // to highlight Saturday and Sunday
+    monthStatus?: 'previous' | 'current' | 'next'; // to mark days from sibling months
+    specialNumber?: number; // special day marker flag
+    blocked?: boolean; // blocked date
+    past?: boolean; // date in past
+    selectedFirst?: boolean; // to highlight the first selected date in the range
+    selectedLast?: boolean; // to highlight the last selected date in the range
+    selectedRange?: boolean; // to highlight dates in the range between selectedFirst and selectedLast
+    hoverRange?: boolean; // "true" for days included in date range selection before the the selection is confirmed
+    isTabIndexed?: boolean; // if "true" sets day cell tabindex to "0"
 }
 
 /**
  * Active Calendar Day cell strategy
  */
-export class ActiveCalendarDayCellStrategy<D = unknown> extends AbstractActiveCalendarCellStrategy<CalendarDay<D>> {
+export class ActiveCalendarDayCellStrategy<D = unknown> extends AbstractCalendarActiveCellStrategy<CalendarDay<D>> {
     /**
      * Calculate which table cell should be active
      */

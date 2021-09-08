@@ -191,7 +191,7 @@ describe('Datetime picker suite', () => {
                 click(datePickerButton, i);
                 click(selectYearButton);
                 click(buttonSelectYearsRange);
-                waitForElDisplayed(filterCalendarValue('aggregated-year'));
+                waitForElDisplayed(filterCalendarValue('aggregated-years'));
                 click(buttonFirstRangeYear);
                 waitForElDisplayed(filterCalendarValue('year'));
                 click(datePickerButton, i);

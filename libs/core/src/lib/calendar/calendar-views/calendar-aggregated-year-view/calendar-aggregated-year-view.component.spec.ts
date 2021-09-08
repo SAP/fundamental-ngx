@@ -43,9 +43,9 @@ describe('CalendarAggregatedYearViewComponent', () => {
             key: 'Enter',
             preventDefault: () => {}
         };
-        component.onKeydownYearHandler(event, 6);
+        component._onKeydownYearHandler(event, 6);
         const aggregatedYear: CalendarAggregatedYear = (<any>component)._getYearsList()[6];
-        expect(component.yearsSelected).toEqual(aggregatedYear.years);
+        expect(component._yearsSelected).toEqual(aggregatedYear.years);
     });
 
     it('Should generate proper grid of aggregated years', () => {
@@ -54,7 +54,7 @@ describe('CalendarAggregatedYearViewComponent', () => {
         component.aggregatedYearsViewGrid = { cols: 2, rows: 6, yearMapping: (year) => year.toString() };
         component.ngOnInit();
 
-        const yearsGrid = component.calendarYearListGrid.map((row) => row.map(({ years }) => years));
+        const yearsGrid = component._calendarYearListGrid.map((row) => row.map(({ years }) => years));
         expect(yearsGrid).toEqual([
             [
                 { startYear: 1984, endYear: 1999 },
@@ -84,10 +84,10 @@ describe('CalendarAggregatedYearViewComponent', () => {
     });
 
     it('Should detect if year is between', () => {
-        expect(component.isBetween({ startYear: 2000, endYear: 2015 }, 2010)).toEqual(true);
+        expect(component._isBetween({ startYear: 2000, endYear: 2015 }, 2010)).toEqual(true);
     });
 
     it('Should detect if year is between', () => {
-        expect(component.isBetween({ startYear: 2000, endYear: 2015 }, 2020)).toEqual(false);
+        expect(component._isBetween({ startYear: 2000, endYear: 2015 }, 2020)).toEqual(false);
     });
 });

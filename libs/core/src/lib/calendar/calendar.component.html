@@ -1,5 +1,5 @@
 <fd-calendar-header
-    [currentlyDisplayed]="currentlyDisplayed"
+    [currentlyDisplayed]="_currentlyDisplayed"
     [activeView]="activeView"
     [id]="id"
     [calendarYearGrid]="yearGrid"
@@ -27,7 +27,7 @@
             (selectedDateChange)="selectedDateChanged($event)"
             [selectedRangeDate]="selectedRangeDate"
             (selectedRangeDateChange)="selectedRangeDateChanged($event)"
-            [currentlyDisplayed]="currentlyDisplayed"
+            [currentlyDisplayed]="_currentlyDisplayed"
             [startingDayOfWeek]="getWeekStartDay()"
             [disableFunction]="disableFunction"
             [disableRangeEndFunction]="disableRangeEndFunction"
@@ -42,15 +42,15 @@
         ></fd-calendar-day-view>
         <fd-calendar-month-view
             *ngSwitchCase="'month'"
-            [monthSelected]="currentlyDisplayed?.month"
-            [year]="currentlyDisplayed.year"
+            [monthSelected]="_currentlyDisplayed?.month"
+            [year]="_currentlyDisplayed?.year"
             [id]="id"
             [focusEscapeFunction]="escapeFocusFunction"
             (monthClicked)="handleMonthViewChange($event)"
         ></fd-calendar-month-view>
         <fd-calendar-year-view
             *ngSwitchCase="'year'"
-            [yearSelected]="currentlyDisplayed.year"
+            [yearSelected]="_currentlyDisplayed?.year"
             [yearViewGrid]="yearGrid"
             [id]="id"
             [focusEscapeFunction]="escapeFocusFunction"
@@ -60,7 +60,7 @@
         <fd-calendar-aggregated-year-view
             *ngSwitchCase="'aggregatedYear'"
             (yearsClicked)="selectedYears($event)"
-            [yearSelected]="currentlyDisplayed.year"
+            [yearSelected]="_currentlyDisplayed?.year"
             [yearViewGrid]="yearGrid"
             [aggregatedYearsViewGrid]="aggregatedYearGrid"
             [id]="id"
