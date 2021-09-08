@@ -129,12 +129,6 @@
         "core-tree"
       ]
     },
-    "platform": {
-      "tags": [
-        "fdp"
-      ],
-      "implicitDependencies": ["core"]
-    }, 
     "moment-adapter": {
       "tags": [
         "fd"
@@ -910,6 +904,302 @@
         "core-utils",
         "core-popover",
         "core-menu"
+      ]
+    },
+    "core-timeline": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-icon",
+        "core-text"
+      ]
+    },
+    "platform": {
+      "tags": [],
+      "implicitDependencies": [
+        "core",
+        "platform-shared",
+        "platform-action-bar",
+        "platform-action-button-group",
+        "platform-approval-flow",
+        "platform-button",
+        "platform-dynamic-page",
+        "platform-feed-input",
+        "platform-form",
+        "platform-info-label",
+        "platform-link",
+        "platform-list",
+        "platform-menu",
+        "platform-menu-button",
+        "platform-object-attribute",
+        "platform-object-marker",
+        "platform-object-status",
+        "platform-page-footer",
+        "platform-panel",
+        "platform-search-field",
+        "platform-slider",
+        "platform-split-menu-button",
+        "platform-table",
+        "platform-thumbnail",
+        "platform-upload-collection",
+        "platform-value-help-dialog",
+        "platform-wizard-generator"
+      ]
+    },
+    "platform-shared": {
+      "tags": ["fdp"]
+    },
+    "platform-action-bar": {
+      "tags": ["fdp"],
+      "implicitDependencies": ["core-action-bar", "core-button", "core-utils", "platform-shared"]
+    },
+    "platform-action-button-group": {
+      "tags": ["fdp"],
+      "implicitDependencies": ["core-action-bar"]
+    },
+    "platform-approval-flow": {
+      "tags": ["fdp"],
+      "implicitDependencies": [
+        "core-avatar",
+        "core-button",
+        "core-checkbox",
+        "core-combobox",
+        "core-date-picker",
+        "core-dialog",
+        "core-form",
+        "core-icon",
+        "core-illustrated-message",
+        "core-menu",
+        "core-message-strip",
+        "core-message-toast",
+        "core-multi-input",
+        "core-radio",
+        "core-select",
+        "core-toolbar",
+        "core-utils",
+        "platform-object-status",
+        "platform-search-field",
+        "platform-list"
+      ]
+    },
+    "platform-button": {
+      "tags": ["fdp"],
+      "implicitDependencies": ["core-button", "platform-shared"]
+    },
+    "platform-dynamic-page": {
+      "tags": ["fdp"],
+      "implicitDependencies": ["core-tabs", "platform-button", "platform-shared"]
+    },
+    "platform-feed-input": {
+      "tags": ["fdp"],
+      "implicitDependencies": ["core-avatar", "core-form", "platform-button"]
+    },
+    "platform-form": {
+      "tags": ["fdp"],
+      "implicitDependencies": [
+        "core-bar",
+        "core-button",
+        "core-busy-indicator",
+        "core-calendar",
+        "core-checkbox",
+        "core-datetime",
+        "core-datetime-picker",
+        "core-date-picker",
+        "core-dialog",
+        "core-file-uploader",
+        "core-form",
+        "core-icon",
+        "core-inline-help",
+        "core-input-group",
+        "core-token",
+        "core-time-picker",
+        "core-popover",
+        "core-radio",
+        "core-select",
+        "core-switch",
+        "core-mobile-mode",
+        "core-list",
+        "core-menu",
+        "core-shared",
+        "core-utils",
+        "platform-list",
+        "platform-shared"
+      ]
+    },
+    "platform-info-label": {
+      "tags": ["fdp"],
+      "implicitDependencies": ["core-info-label"]
+    },
+    "platform-link": {
+      "tags": ["fdp"],
+      "implicitDependencies": ["core-link", "core-icon", "platform-shared"]
+    },
+    "platform-list": {
+      "tags": ["fdp"],
+      "implicitDependencies": [
+        "core-avatar",
+        "core-button",
+        "core-checkbox",
+        "core-icon",
+        "core-form",
+        "core-list",
+        "core-radio",
+        "core-busy-indicator",
+        "core-infinite-scroll",
+        "core-object-identifier",
+        "core-object-marker",
+        "core-object-number",
+        "core-utils",
+        "platform-link",
+        "platform-object-status",
+        "platform-object-attribute"
+      ]
+    },
+    "platform-menu": {
+      "tags": ["fdp"],
+      "implicitDependencies": ["core-utils", "platform-shared"]
+    },
+    "platform-menu-button": {
+      "tags": ["fdp"],
+      "implicitDependencies": ["core-button", "platform-menu", "platform-shared"]
+    },
+    "platform-object-attribute": {
+      "tags": ["fdp"]
+    },
+    "platform-object-marker": {
+      "tags": ["fdp"],
+      "implicitDependencies": ["core-object-marker"]
+    },
+    "platform-object-status": {
+      "tags": ["fdp"],
+      "implicitDependencies": ["core-object-status", "core-utils"]
+    },
+    "platform-page-footer": {
+      "tags": ["fdp"]
+    },
+    "platform-panel": {
+      "tags": ["fdp"],
+      "implicitDependencies": ["core-utils", "core-panel", "core-toolbar", "platform-shared"]
+    },
+    "platform-search-field": {
+      "tags": ["fdp"],
+      "implicitDependencies": [
+        "core-icon",
+        "core-combobox",
+        "core-menu",
+        "core-utils",
+        "core-popover",
+        "platform-shared",
+        "platform-menu"
+      ]
+    },
+    "platform-slider": {
+      "tags": ["fdp"],
+      "implicitDependencies": ["core-slider", "platform-shared"]
+    },
+    "platform-split-menu-button": {
+      "tags": ["fdp"],
+      "implicitDependencies": ["core-menu", "core-button", "core-utils", "platform-shared", "platform-menu"]
+    },
+    "platform-table": {
+      "tags": ["fdp"],
+      "implicitDependencies": [
+        "core-busy-indicator",
+        "core-button",
+        "core-checkbox",
+        "core-date-picker",
+        "core-dialog",
+        "core-form",
+        "core-icon",
+        "core-input-group",
+        "core-layout-grid",
+        "core-list",
+        "core-panel",
+        "core-popover",
+        "core-radio",
+        "core-select",
+        "core-table",
+        "core-toolbar",
+        "core-utils",
+        "platform-form",
+        "platform-search-field",
+        "platform-shared"
+      ]
+    },
+    "platform-thumbnail": {
+      "tags": ["fdp"],
+      "implicitDependencies": [
+        "core-avatar",
+        "core-carousel",
+        "core-dialog",
+        "core-button",
+        "core-utils",
+        "platform-shared"
+      ]
+    },
+    "platform-upload-collection": {
+      "tags": ["fdp"],
+      "implicitDependencies": [
+        "core-toolbar",
+        "core-button",
+        "core-input-group",
+        "core-dialog",
+        "core-form",
+        "core-busy-indicator",
+        "core-message-strip",
+        "core-list",
+        "core-icon",
+        "core-breadcrumb",
+        "core-pagination",
+        "core-object-status",
+        "core-file-uploader",
+        "core-utils",
+        "platform-table",
+        "platform-menu",
+        "platform-button",
+        "platform-menu-button",
+        "platform-shared"
+      ]
+    },
+    "platform-value-help-dialog": {
+      "tags": ["fdp"],
+      "implicitDependencies": [
+        "core-token",
+        "core-button",
+        "core-tabs",
+        "core-dialog",
+        "core-form",
+        "core-checkbox",
+        "core-layout-grid",
+        "core-toolbar",
+        "core-table",
+        "core-utils",
+        "core-icon",
+        "core-list",
+        "core-link",
+        "core-bar",
+        "core-select",
+        "core-panel",
+        "core-input-group",
+        "core-popover",
+        "core-infinite-scroll",
+        "platform-shared"
+      ]
+    },
+    "platform-wizard-generator": {
+      "tags": ["fdp"],
+      "implicitDependencies": [
+        "core-dialog",
+        "core-button",
+        "core-wizard",
+        "core-title",
+        "core-layout-grid",
+        "core-form",
+        "core-utils",
+        "platform-form",
+        "platform-shared"
       ]
     }
   }

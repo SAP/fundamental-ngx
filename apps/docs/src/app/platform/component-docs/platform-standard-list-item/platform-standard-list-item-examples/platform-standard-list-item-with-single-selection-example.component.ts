@@ -1,6 +1,8 @@
 import { Component, Renderer2, ElementRef, AfterViewInit } from '@angular/core';
-import { ListDataSource, DataProvider } from '@fundamental-ngx/platform';
 import { Observable, of } from 'rxjs';
+
+import { ListDataSource, DataProvider } from '@fundamental-ngx/platform/shared';
+
 const LIST_ELEMENTS: Address[] = [
     {
         img: 'https://placeimg.com/400/400/nature',

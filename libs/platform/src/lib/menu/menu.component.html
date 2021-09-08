@@ -1,0 +1,16 @@
+<ng-template #menuTemplate>
+    <nav
+        [attr.id]="menuId"
+        [attr.dir]="direction"
+        class="fd-menu"
+        [class.fd-menu--compact]="contentDensity === 'compact'"
+        tabindex="0"
+        role="menu"
+        (click)="_onClick($event)"
+        (keydown)="_onKeydown($event)"
+    >
+        <div class="fd-menu__list">
+            <ng-content></ng-content>
+        </div>
+    </nav>
+</ng-template>

@@ -57,7 +57,7 @@
     label="Informative"
     ariaLabel="Object status Informative large"
 ></fdp-object-status>
-<fdp-object-status large="true" label="Default" ariaLabel="Object status Default large"></fdp-object-status>
+<fdp-object-status large="true" label="Default" title="Default" ariaLabel="Object status Default large"></fdp-object-status>
 
 <br /><br />
 
@@ -141,6 +141,8 @@
     large="true"
     inverted="true"
     (click)="showAlert()"
+    (keydown.enter)="showAlert()"
+    title="Negative"
     ariaLabel="Object status Negative large inverted"
     >Negative</fdp-object-status
 >
@@ -151,6 +153,8 @@
     large="true"
     inverted="true"
     (click)="showAlert()"
+    (keydown.enter)="showAlert()"
+    title="Critical"
     ariaLabel="Object status Critical large inverted"
     >Critical</fdp-object-status
 >
@@ -161,7 +165,9 @@
     large="true"
     inverted="true"
     (click)="showAlert()"
+    (keydown.enter)="showAlert()"
     label="Positive"
+    title="Positive"
     ariaLabel="Object status Positive large inverted"
 ></fdp-object-status>
 <fdp-object-status
@@ -171,6 +177,7 @@
     large="true"
     inverted="true"
     label="Informative"
+    title="Informative"
     ariaLabel="Object status Informative large inverted"
 ></fdp-object-status>
 <fdp-object-status
@@ -178,5 +185,6 @@
     large="true"
     inverted="true"
     label="Default"
+    title="Default"
     ariaLabel="Object status default large inverted"
 ></fdp-object-status>

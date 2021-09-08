@@ -1,7 +1,6 @@
 import {
     click,
     elementArray,
-    getAttributeByName,
     getCSSPropertyByName, getElementClass, getElementPlaceholder,
     getText,
     getValue,

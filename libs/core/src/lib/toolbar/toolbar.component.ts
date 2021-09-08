@@ -18,7 +18,7 @@ import {
 } from '@angular/core';
 
 import { Observable, of, fromEvent, Subscription } from 'rxjs';
-import { delay, tap, debounceTime, takeWhile, distinctUntilChanged, filter } from 'rxjs/operators';
+import { delay, debounceTime, takeWhile, distinctUntilChanged, filter } from 'rxjs/operators';
 
 import { OVERFLOW_PRIORITY_SCORE } from '@fundamental-ngx/core/utils';
 import { CssClassBuilder } from '@fundamental-ngx/core/utils';

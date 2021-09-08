@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import * as ObjectMarkerExample from '!raw-loader!./examples/object-marker-example.component.html';
 import * as ObjectMarkerIconandText from '!raw-loader!./examples/object-marker-Icon-text-example.component.html';

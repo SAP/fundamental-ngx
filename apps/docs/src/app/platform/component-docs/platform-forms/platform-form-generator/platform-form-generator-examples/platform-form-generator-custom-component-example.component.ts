@@ -7,7 +7,7 @@ import {
     FormGeneratorService,
     DynamicFormItem,
     DynamicFormValue
-} from '@fundamental-ngx/platform';
+} from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-form-generator-slider',

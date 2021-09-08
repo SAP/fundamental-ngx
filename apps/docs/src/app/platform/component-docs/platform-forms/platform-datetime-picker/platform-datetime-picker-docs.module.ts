@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
-import { FdpFormGroupModule, PlatformDatetimePickerModule } from '@fundamental-ngx/platform';
+import { FdpFormGroupModule, PlatformDatetimePickerModule } from '@fundamental-ngx/platform/form';
 
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';

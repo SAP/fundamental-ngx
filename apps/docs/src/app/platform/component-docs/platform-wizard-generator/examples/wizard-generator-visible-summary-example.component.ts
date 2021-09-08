@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { Validators } from '@angular/forms';
-import { WizardGeneratorFormsValue, WizardGeneratorItem } from '@fundamental-ngx/platform';
+import { WizardGeneratorFormsValue, WizardGeneratorItem } from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
   selector: 'fdp-wizard-generator-visible-summary-example',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessageToastService } from '@fundamental-ngx/core';
+import { MessageToastService } from '@fundamental-ngx/core/message-toast';
 
 @Component({
     selector: 'fd-busy-indicator-extended-example',

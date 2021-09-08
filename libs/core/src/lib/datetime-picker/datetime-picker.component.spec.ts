@@ -1,6 +1,6 @@
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { DATE_TIME_FORMATS, DateTimeFormats, FdDate, FdDatetimeAdapter, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
+import { DATE_TIME_FORMATS, DateTimeFormats, FdDate, FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent, DatetimePickerModule } from '@fundamental-ngx/core/datetime-picker';
 import { INVALID_DATE_ERROR } from '@fundamental-ngx/core/utils';
 

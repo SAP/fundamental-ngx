@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NumberStepInputChangeEvent } from '@fundamental-ngx/platform';
+
+import { NumberStepInputChangeEvent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-platform-number-step-input-example',

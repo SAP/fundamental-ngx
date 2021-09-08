@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { ComboboxSelectionChangeEvent, DATA_PROVIDERS } from '@fundamental-ngx/platform';
+import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
+import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-combobox-mobile-example',

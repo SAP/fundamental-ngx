@@ -9,7 +9,7 @@ import {
   VhdExcludedEntity,
   VhdDefineIncludeStrategy,
   VhdDefineExcludeStrategy
-} from '@fundamental-ngx/platform';
+} from '@fundamental-ngx/platform/value-help-dialog';
 
 interface ExampleTestModel {
   id: number;
@@ -67,7 +67,7 @@ export class PlatformVhdStrategyLabelExampleComponent implements OnInit {
       ...(value.conditions || []).map(item => this.conditionDisplayFn(item)),
     ];
   }).bind(this);
-  
+
   conditionDisplayFn = (item: VhdIncludedEntity | VhdExcludedEntity) => {
     const value = (() => {
       switch (item.strategy) {

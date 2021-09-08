@@ -464,6 +464,13 @@ export const ROUTES: Routes = [
                     import('./component-docs/moment-datetime-adapter/moment-datetime-adapter-docs.module').then(
                         (m) => m.MomentDatetimeAdapterDocsModule
                     )
+            },
+            {
+                path: 'timeline',
+                loadChildren: () =>
+                    import('./component-docs/timeline/timeline-docs.module').then(
+                        (m) => m.TimelineDocsModule
+                    )
             }
         ]
     }
