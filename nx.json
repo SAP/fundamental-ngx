@@ -916,6 +916,16 @@
         "core-text"
       ]
     },
+    "core-micro-process-flow": {
+      "tags": [
+        "fd"
+      ],
+      "implicitDependencies": [
+        "core-utils",
+        "core-shared",
+        "core-popover"
+      ]
+    },
     "platform": {
       "tags": [],
       "implicitDependencies": [

@@ -107,6 +107,7 @@
       "@fundamental-ngx/core/tests": ["libs/core/src/lib/tests/index.ts"],
       "@fundamental-ngx/core/message-page": ["libs/core/src/lib/message-page/index.ts"],
       "@fundamental-ngx/core/timeline": ["libs/core/src/lib/timeline/index.ts"],
+      "@fundamental-ngx/core/micro-process-flow": ["libs/core/src/lib/micro-process-flow/index.ts"],
       "@fundamental-ngx/platform": ["libs/platform/src/lib/index.ts"],
       "@fundamental-ngx/platform/shared": ["libs/platform/src/lib/shared/index.ts"],
       "@fundamental-ngx/platform/action-bar": ["libs/platform/src/lib/action-bar/index.ts"],
