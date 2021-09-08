@@ -1,12 +1,4 @@
-@mixin fd-rtl {
-    @at-root {
-        [dir='rtl'] &,
-        &[dir='rtl'] {
-            @content;
-        }
-    }
-}
-
+// these css are related to drag and drop
 @mixin grabbing-cursor {
     cursor: -webkit-grabbing;
     cursor: -moz-grabbing;
@@ -33,40 +25,6 @@
             &.after {
                 right: -0.55rem;
             }
-        }
-
-        .fd-toolbar {
-            &--actions {
-                margin-left: auto;
-
-                > * {
-                    margin-left: 0.5rem;
-
-                    @include fd-rtl() {
-                        margin-left: 0;
-                        margin-right: 0.5rem;
-                    }
-                }
-
-                @include fd-rtl() {
-                    margin-left: 0;
-                    margin-right: auto;
-                }
-            }
-
-            .fd-grid-list__item-input,
-            &--actions,
-            &--extra-content {
-                display: flex;
-                align-items: center;
-                height: 100%;
-            }
-        }
-    }
-
-    &__btn-navigation {
-        @include fd-rtl() {
-            transform: rotate(180deg);
         }
     }
 }
