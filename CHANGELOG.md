@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.14](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.13...v0.32.1-rc.14) (2021-09-08)
+
+
+### Bug Fixes
+
+* **core:** remove grid list component css from Ngx ([#6425](https://github.com/SAP/fundamental-ngx/issues/6425)) ([9698e43](https://github.com/SAP/fundamental-ngx/commit/9698e4362c7188c01b68e4fd732ca48ac8d51b25))
+
 ### [0.32.1-rc.13](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.12...v0.32.1-rc.13) (2021-09-08)
 
 
