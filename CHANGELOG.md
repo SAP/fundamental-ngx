@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.15...v0.32.1-rc.16) (2021-09-08)
+
+
+### Features
+
+* **core:** micro process flow ([#6418](https://github.com/SAP/fundamental-ngx/issues/6418)) ([1989644](https://github.com/SAP/fundamental-ngx/commit/1989644c9d6f4735743980672f79070c98c220c7))
+
 ### [0.32.1-rc.15](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.14...v0.32.1-rc.15) (2021-09-08)
 
 
