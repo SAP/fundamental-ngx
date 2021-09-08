@@ -88,11 +88,21 @@
         (onSelect)="_overflowingTabHeaderClickHandler(tab.panel)">
         <div fd-menu-interactive>
             <ng-container
-                *ngTemplateOutlet="tab.titleTemplate || textTitle; context: { $implicit: tab.title }"></ng-container>
+                *ngTemplateOutlet="
+                    !tab.titleTemplate && mode === 'icon-only' ? iconOnlyTemplate : tab.titleTemplate || textTitle;
+                    context: { $implicit: tab }
+                "
+            ></ng-container>
         </div>
     </li>
 </fd-menu>
 
-<ng-template #textTitle let-text>
-    <span fd-menu-title>{{text}}</span>
+<ng-template #textTitle let-tab>
+    <span fd-menu-title>{{ tab.title }}</span>
+</ng-template>
+
+<ng-template #iconOnlyTemplate let-tab>
+    <span fd-tab-icon [icon]="tab.glyph">
+        <p fd-tab-count>{{ tab.count }}</p>
+    </span>
 </ng-template>
