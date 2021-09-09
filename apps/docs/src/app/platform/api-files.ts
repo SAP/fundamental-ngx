@@ -101,4 +101,13 @@ export const API_FILES = {
         'WizardSummaryStepComponent',
         'WizardSummarySectionComponent'
     ],
+    iconTabBar: [
+        'IconTabBarComponent',
+        'IconTabBarTextTypeComponent',
+        'IconTabBarIconTypeComponent',
+        'IconTabBarProcessTypeComponent',
+        'IconTabBarFilterTypeComponent',
+        'IconTabBarPopoverComponent',
+        'TextTypePopoverComponent',
+    ],
 };
