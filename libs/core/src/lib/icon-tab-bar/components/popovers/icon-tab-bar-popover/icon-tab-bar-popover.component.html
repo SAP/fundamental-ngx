@@ -1,0 +1,36 @@
+<fd-popover [focusAutoCapture]="true" [focusTrapped]="true" #popover>
+    <fd-popover-control>
+        <button class="fd-icon-tab-bar__overflow">
+            <span class="fd-icon-tab-bar__overflow-text">{{label}}</span>
+            <i class="sap-icon--slim-arrow-down" role="presentation"></i>
+        </button>
+    </fd-popover-control>
+    <fd-popover-body>
+        <ul class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list" role="list">
+            <ng-container *ngFor="let item of items">
+                <li *ngIf="isSeparators" tabindex="-1" class="fd-icon-tab-bar__icon-separator">
+                    <fd-icon glyph="process"></fd-icon>
+                </li>
+                <li class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
+                    role="listitem"
+                    [ngClass]="item.cssClasses"
+                    tabindex="-1">
+                    <a
+                        class="fd-list__link"
+                        tabindex="0"
+                        (click)="_selectItem(item)"
+                    >
+                        <span class="fd-icon-tab-bar__list-item-icon-container">
+                            <span class="fd-list__icon fd-icon-tab-bar__list-item-icon">
+                                <fd-icon [glyph]="item.icon"></fd-icon>
+                            </span>
+                            <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
+                        </span>
+                        <span *ngIf="item.label" class="fd-list__title fd-icon-tab-bar__list-item-title">{{item.label}}</span>
+                        <span *ngIf="item.counter" class="fd-list__counter fd-icon-tab-bar__list-item-counter">({{item.counter}})</span>
+                    </a>
+                </li>
+            </ng-container>
+        </ul>
+    </fd-popover-body>
+</fd-popover>

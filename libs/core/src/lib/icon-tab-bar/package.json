@@ -1,0 +1,11 @@
+{
+    "name": "@fundamental-ngx/core/icon-tabbar-layout",
+    "version": "VERSION_PLACEHOLDER",
+    "peerDependencies": {
+        "@angular/common": "^11.2.14",
+        "@angular/core": "^11.2.14"
+    },
+    "dependencies": {
+        "tslib": "^2.0.0"
+    }
+}

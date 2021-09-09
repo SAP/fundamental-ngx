@@ -1,0 +1,69 @@
+<ng-container
+    fdIconBarDndContainer
+    [draggable]="enableTabReordering"
+    (dropped)="_onDropped($event)"
+>
+    <ul
+        class="fd-icon-tab-bar__header"
+        role="tablist"
+        fdOverflowItems
+        itemSelector="[data-overflowItem]"
+        [isRtl]="isRtl"
+        [overflowOffset]="100"
+        fdIconBarDndList
+        dndOrientation="horizontal"
+        (overflowChanged)="_recalculateVisibleItems($event)"
+    >
+        <li *ngFor="let item of _tabs; trackBy:_trackBy"
+            [ngClass]="item.cssClasses"
+            data-overflowItem
+            fdIconBarDndItem
+            [dndSeparatorClass]="['fd-icon-tab-bar-dnd-separator']"
+            [dndItemData]="item"
+            class="fd-icon-tab-bar__item"
+            [attr.aria-hidden]="item.hidden"
+            role="presentation"
+        >
+            <a
+                class="fd-icon-tab-bar__tab"
+                role="tab"
+                *ngIf="!item.subItems?.length"
+                (click)="_selectItem(item, $event)"
+                [attr.aria-selected]="item.uId === _selectedUid"
+            >
+                <span *ngIf="layoutMode === 'row'; else columnsMode" class="fd-icon-tab-bar__tag">
+                    {{ item.label }}
+                    <ng-container *ngIf="item.counter"> ({{item.counter}})</ng-container>
+                </span>
+                <ng-template #columnsMode>
+                    <span class="fd-icon-tab-bar__counter">{{item.counter}}</span>
+                    <span class="fd-icon-tab-bar__tag">{{ item.label }}</span>
+                </ng-template>
+                <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
+            </a>
+            <ng-container *ngIf="item.subItems?.length">
+                <fd-text-type-popover
+                    [parentTab]="item"
+                    [selectedSubItemUid]="_selectedUid"
+                    (selectedSubItem)="_selectItem($event)"
+                >
+                </fd-text-type-popover>
+            </ng-container>
+        </li>
+        <li
+            *ngIf="_extraTabs.length"
+            role="presentation"
+            class="fd-icon-tab-bar__item fd-icon-tab-bar__item--extra-btn"
+            fdExtraButton
+            [isRtl]="isRtl"
+            [anchorIndexInsideParent]="_lastVisibleTabIndex"
+        >
+            <fd-text-type-popover
+                [items]="_extraTabs"
+                [isExtraItemsMode]="true"
+                (selectedExtraItem)="_selectExtraItem($event)"
+            >
+            </fd-text-type-popover>
+        </li>
+    </ul>
+</ng-container>
