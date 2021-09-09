@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './platform-action-bar-header.component.html',
     styleUrls: ['./platform-action-bar-header.component.scss']
 })
-export class PlatformActionBarHeaderComponent {
-
-}
+export class PlatformActionBarHeaderComponent {}

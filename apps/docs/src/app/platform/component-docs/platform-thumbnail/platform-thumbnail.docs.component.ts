@@ -6,6 +6,7 @@ import * as horizontalThumbnailHtml from '!raw-loader!./platform-thumbnail-examp
 import * as horizontalThumbnailTs from '!raw-loader!./platform-thumbnail-examples/platform-thumbnail-horizontal-example.component.ts';
 import * as videoThumbnailHtml from '!raw-loader!./platform-thumbnail-examples/platform-thumbnail-video-media-example.component.html';
 import * as videoThumbnailTs from '!raw-loader!./platform-thumbnail-examples/platform-thumbnail-video-media-example.component.ts';
+
 @Component({
     selector: 'app-platform-thumbnail',
     templateUrl: './platform-thumbnail.docs.component.html',

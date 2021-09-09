@@ -11,8 +11,6 @@ import {
     basicExamplesText,
     objStatusExamplesText,
     styledObjExampleText,
-    largeFont,
-    boldAttr,
     objUnitExamplesText,
     objDecimalExamplesText,
     objTruncationText

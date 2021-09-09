@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PlatformCheckboxModule, PlatformCheckboxGroupModule, FdpFormGroupModule } from '@fundamental-ngx/platform';
+import { PlatformCheckboxModule, PlatformCheckboxGroupModule, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../../api-files';
 import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';

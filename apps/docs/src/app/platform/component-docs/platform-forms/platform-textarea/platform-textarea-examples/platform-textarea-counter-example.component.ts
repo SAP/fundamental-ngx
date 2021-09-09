@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, AfterViewInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { ValidatorFn, Validators, FormGroup } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { ValidatorFn, Validators, FormGroup } from '@angular/forms';
     templateUrl: './platform-textarea-counter-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformTextareaCounterExampleComponent implements OnInit, AfterViewInit {
+export class PlatformTextareaCounterExampleComponent implements AfterViewInit {
     form: FormGroup;
     value = 'Lorem ipsum, dolor sit amet';
     private textareaValidator: ValidatorFn[];
@@ -23,8 +23,6 @@ export class PlatformTextareaCounterExampleComponent implements OnInit, AfterVie
             alert('Submitted successfully');
         }
     }
-
-    ngOnInit(): void {}
 
     ngAfterViewInit(): void {
         this._cd.detectChanges();

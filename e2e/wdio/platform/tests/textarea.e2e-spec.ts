@@ -23,7 +23,6 @@ import {
     executeScriptAfterTagAttr,
     executeScriptBeforeTagAttr,
     getAttributeByName,
-    getCSSPropertyByName,
     getElementSize,
     getText,
     getValue,

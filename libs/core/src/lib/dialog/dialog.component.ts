@@ -43,7 +43,8 @@ import { DialogTitleDirective } from './directives/dialog-title.directive';
     templateUrl: './dialog.component.html',
     host: {
         tabindex: '-1',
-        '[@dialog-fade]': ''
+        '[@dialog-fade]': '',
+        role: 'dialog'
     },
     animations: [dialogFadeNgIf],
     encapsulation: ViewEncapsulation.None
@@ -157,7 +158,6 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
     /** @hidden */
     ngAfterViewInit(): void {
         super.ngAfterViewInit();
-        this.dialogWindow.nativeElement.focus();
     }
 
     /** @hidden */

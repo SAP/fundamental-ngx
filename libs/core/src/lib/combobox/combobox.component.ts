@@ -22,22 +22,6 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ListMessageDirective } from '@fundamental-ngx/core/list';
-import { ComboboxItem } from './combobox-item';
-import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
-import { Subject, Subscription } from 'rxjs';
-import { FormStates } from '@fundamental-ngx/core/shared';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { GroupFunction } from '@fundamental-ngx/core/utils';
-import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
-import { KeyUtil, AutoCompleteEvent } from '@fundamental-ngx/core/utils';
-import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
-import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
-import { ListComponent } from '@fundamental-ngx/core/list';
-import { FocusEscapeDirection } from '@fundamental-ngx/core/utils';
-import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import {
     BACKSPACE,
     CONTROL,
@@ -51,7 +35,27 @@ import {
     TAB,
     UP_ARROW
 } from '@angular/cdk/keycodes';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { Subject, Subscription } from 'rxjs';
+
+import { ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
+import {
+    RtlService,
+    GroupFunction,
+    KeyUtil,
+    AutoCompleteEvent,
+    DynamicComponentService,
+    FocusEscapeDirection,
+    ContentDensityService
+} from '@fundamental-ngx/core/utils';
+import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
+import { FormStates, PopoverFillMode } from '@fundamental-ngx/core/shared';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+
+import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
+import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
+import { ComboboxItem } from './combobox-item';
 
 let comboboxUniqueId = 0;
 
@@ -355,7 +359,8 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
         private _elementRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
         private _dynamicComponentService: DynamicComponentService,
-        @Optional() private _contentDensityService: ContentDensityService
+        @Optional() private _contentDensityService: ContentDensityService,
+        @Optional() private _rtlService: RtlService
     ) {}
 
     /** @hidden */
@@ -695,7 +700,10 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
             ComboboxMobileComponent,
             { container: this._elementRef.nativeElement },
-            { injector: Injector.create({ providers: [{ provide: COMBOBOX_COMPONENT, useValue: this }] }) }
+            { injector: Injector.create({ providers: [
+                { provide: COMBOBOX_COMPONENT, useValue: this },
+                { provide: RtlService, useValue: this._rtlService }
+            ] }) }
         );
     }
 }

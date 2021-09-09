@@ -12,7 +12,8 @@ import { PlatformChekboxNoFormComponent } from './platform-checkbox-examples/pla
 import { PlatformChekboxTristateComponent } from './platform-checkbox-examples/platform-tristate-checkbox.component';
 import { PlatformChekboxA11yExampleComponent } from './platform-checkbox-examples/platform-checkbox-a11y.component';
 
-import { PlatformCheckboxModule, FdpFormGroupModule, PlatformButtonModule } from '@fundamental-ngx/platform';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { PlatformCheckboxModule, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 const routes: Routes = [
     {

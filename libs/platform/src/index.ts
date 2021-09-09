@@ -24,6 +24,7 @@ export * from './lib/components/thumbnail/public_api';
 export * from './lib/components/upload-collection/public_api';
 export * from './lib/components/value-help-dialog/public_api';
 export * from './lib/components/wizard-generator/public_api';
+export * from './lib/components/icon-tab-bar/public_api';
 export * from './lib/domain/public_api';
 export * from './lib/platform.config';
 export * from './lib/platform.module';

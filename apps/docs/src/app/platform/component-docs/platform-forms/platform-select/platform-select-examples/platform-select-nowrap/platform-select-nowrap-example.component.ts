@@ -1,5 +1,7 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import { FdpSelectionChangeEvent, OptionItem } from '@fundamental-ngx/platform';
+
+import { OptionItem } from '@fundamental-ngx/platform/shared';
+import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
 export class Fruit {
     id: string;

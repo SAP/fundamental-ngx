@@ -7,11 +7,11 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
         <fd-dialog>
             <fd-dialog-header>
                 <h1 id="fd-dialog-header-8" fd-title>First Dialog</h1>
-                <button fd-dialog-close-button (click)="dialogRef.dismiss('x')"></button>
+                <button fd-dialog-close-button (click)="dialogRef.dismiss('x')" title="close"></button>
             </fd-dialog-header>
 
             <fd-dialog-body>
-                <div id="fd-dialog-body-8" role="document">
+                <div id="fd-dialog-body-8" role="dialog">
                     This is the first dialog!<br />
                     Click the button below to open the second dialog.
                 </div>
@@ -24,6 +24,7 @@ import { SecondDialogExampleComponent } from './second-dialog-example.component'
                     label="Open Second Dialog"
                     [compact]="true"
                     (click)="openDialog()"
+                    ariaLabel="Open Second Dialog Emphasized"
                 >
                 </fd-button-bar>
             </fd-dialog-footer>

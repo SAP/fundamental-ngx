@@ -1,11 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 
-import { FlexibleColumnLayoutModule } from './flexible-column-layout.module';
 import { FlexibleColumnLayoutComponent } from './flexible-column-layout.component';
 import {
     ONE_COLUMN_START_FULL_SCREEN,
@@ -27,7 +25,7 @@ declare var viewport: any;
     template: `
         <fd-flexible-column-layout
             [(layout)]="layout"
-            [backgroundDesign] = "backgroundDesign">
+            [backgroundDesign]="backgroundDesign">
                 <ng-template #startColumn>
                     <div style="height: 800px;">
                         <h2>Start Column</h2>
@@ -157,8 +155,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         expect(separators.length).toBe(1);
     });
 
-    // TODO: Unskip after fix
-    xit('TWO_COLUMNS_END_EXPANDED should render 2 columns, mid open, end expanded', async () => {
+    it('TWO_COLUMNS_END_EXPANDED should render 2 columns, mid open, end expanded', async () => {
         await whenStable(fixture);
         viewport.set(1023, 900);
 
@@ -166,8 +163,8 @@ describe('FlexibleColumnLayoutComponent', () => {
         fixture.detectChanges();
 
          // checks the columns width
-        const midColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[0].nativeElement;
-        const endColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[1].nativeElement;
+        const midColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[1].nativeElement;
+        const endColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[2].nativeElement;
         expect(midColumn.style.width).toBe('33%');
         expect(endColumn.style.width).toBe('67%');
 
@@ -216,8 +213,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         expect(separators.length).toBe(1);
     });
 
-    // TODO: Unskip after fix
-    xit('THREE_COLUMNS_START_MINIMIZED should render 3 columns, start minimized, mid expanded, end open', async () => {
+    it('THREE_COLUMNS_START_MINIMIZED should render 3 columns, start minimized, mid expanded, end open', async () => {
         await whenStable(fixture);
         viewport.set(1023, 900);
 
@@ -225,8 +221,8 @@ describe('FlexibleColumnLayoutComponent', () => {
         fixture.detectChanges();
 
          // checks the columns width
-        const midColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[0].nativeElement;
-        const endColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[1].nativeElement;
+        const midColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[1].nativeElement;
+        const endColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[2].nativeElement;
         expect(midColumn.style.width).toBe('67%');
         expect(endColumn.style.width).toBe('33%');
 
@@ -252,8 +248,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         expect(separators.length).toBe(2);
     });
 
-    // TODO: Unskip after fix
-    xit('THREE_COLUMNS_MID_EXPANDED should render THREE_COLUMNS_START_MINIMIZED in MD screen', async () => {
+    it('THREE_COLUMNS_MID_EXPANDED should render THREE_COLUMNS_START_MINIMIZED in MD screen', async () => {
         await whenStable(fixture);
         viewport.set(1023, 900);
 
@@ -261,8 +256,8 @@ describe('FlexibleColumnLayoutComponent', () => {
         fixture.detectChanges();
 
          // checks the columns width
-        const midColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[0].nativeElement;
-        const endColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[1].nativeElement;
+        const midColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[1].nativeElement;
+        const endColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[2].nativeElement;
         expect(midColumn.style.width).toBe('67%');
         expect(endColumn.style.width).toBe('33%');
 
@@ -271,8 +266,7 @@ describe('FlexibleColumnLayoutComponent', () => {
         expect(separators.length).toBe(2);
     });
 
-    // TODO: Unskip after fix
-    xit('THREE_COLUMNS_END_EXPANDED should render TWO_COLUMNS_END_EXPANDED in MD screen', async () => {
+    it('THREE_COLUMNS_END_EXPANDED should render TWO_COLUMNS_END_EXPANDED in MD screen', async () => {
         await whenStable(fixture);
         viewport.set(1023, 900);
 
@@ -280,8 +274,8 @@ describe('FlexibleColumnLayoutComponent', () => {
         fixture.detectChanges();
 
          // checks the columns width
-        const midColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[0].nativeElement;
-        const endColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[1].nativeElement;
+        const midColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[1].nativeElement;
+        const endColumn: HTMLElement = fixture.debugElement.queryAll(By.css('.fd-flexible-column-layout__column'))[2].nativeElement;
         expect(midColumn.style.width).toBe('33%');
         expect(endColumn.style.width).toBe('67%');
 

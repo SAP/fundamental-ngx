@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { merge, Observable, of } from 'rxjs';
-import { delay, map, tap } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 
+import { uuidv4 } from '@fundamental-ngx/core/utils';
 import {
     CancelUploadNewFileEvent,
     DeleteEvent,
@@ -16,11 +18,9 @@ import {
     UploadCollectionItemStatus,
     UploadCollectionNewItem,
     UploadEvent
-} from '@fundamental-ngx/platform';
+} from '@fundamental-ngx/platform/upload-collection';
 
 import { generateUploadCollectionItems } from './platform-upload-collection-items-generator';
-import { HttpClient } from '@angular/common/http';
-import { uuidv4 } from '@fundamental-ngx/core/utils';
 
 export class PlatformUploadCollectionDataProviderExample extends UploadCollectionDataProvider {
     items: UploadCollectionItem[] = generateUploadCollectionItems(50, 4, 2);

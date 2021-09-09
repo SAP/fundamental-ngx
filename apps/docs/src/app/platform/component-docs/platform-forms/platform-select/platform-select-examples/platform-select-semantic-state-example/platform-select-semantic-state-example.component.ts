@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FdpSelectionChangeEvent, OptionItem } from '@fundamental-ngx/platform';
+
+import { OptionItem } from '@fundamental-ngx/platform/shared';
+import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
 export class Fruit {
     id: string;
@@ -36,7 +38,7 @@ export class PlatformSelectSemanticStateExampleComponent {
             icon: ''
         };
     });
-    
+
     selectedState: string = null;
 
     onSelectState(item: FdpSelectionChangeEvent): void {

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component} from '@angular/core';
 
 @Component({
     selector: 'fd-facet-group-example',

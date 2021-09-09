@@ -13,7 +13,7 @@ export class ToolbarPo extends CoreBaseComponentPo {
     overflowPriorityExample = 'fd-toolbar-overflow-priority-example';
     overflowGroupingExample = 'fd-toolbar-overflow-grouping-example';
     moreButton = ' [title="More"]';
-    overflowBody = '.fd-toolbar__overflow__body';
+    overflowBody = '.fd-toolbar__overflow';
     alwaysButton = '[label="Always"]';
     overflowGroupingButton = '#background-ex7' + this.button;
     checkbox = '.fd-checkbox__label';

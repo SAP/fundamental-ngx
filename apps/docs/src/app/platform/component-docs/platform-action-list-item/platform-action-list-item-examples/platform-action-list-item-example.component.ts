@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ActionChangeEvent } from '@fundamental-ngx/platform';
+import { ActionChangeEvent } from '@fundamental-ngx/platform/list';
 
 import { Action } from './platform-action-list-item-border-less-example.component';
 

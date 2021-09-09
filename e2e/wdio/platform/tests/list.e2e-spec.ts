@@ -21,14 +21,11 @@ import {
     noBorderAttr,
     noDataText,
     scrollLoadAttr,
-    selectionAttr,
-    separatorAttr,
-    singleSelect
+    selectionAttr
 } from '../fixtures/appData/list-contents';
 import {
     acceptAlert,
     browserIsIE,
-    browserIsSafari,
     browserIsSafariorFF,
     click,
     getAlertText,

@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ButtonModule } from '@fundamental-ngx/core';
 
+import { ButtonModule } from '@fundamental-ngx/core/button';
 import { isDisabledClass, isSelectedClass, SegmentedButtonComponent, SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 
 @Component({

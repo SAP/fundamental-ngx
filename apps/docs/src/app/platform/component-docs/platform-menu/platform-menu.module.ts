@@ -6,6 +6,9 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
 import { PlatformMenuHeaderComponent } from './platform-menu-header/platform-menu-header.component';
 import { PlatformMenuDocsComponent } from './platform-menu-docs.component';
 import { PlatformMenuBasicExampleComponent } from './platform-menu-examples/platform-menu-basic-example.component';
@@ -13,8 +16,6 @@ import { PlatformMenuCascadeExampleComponent } from './platform-menu-examples/pl
 import { PlatformMenuScrollingExampleComponent } from './platform-menu-examples/platform-menu-scrolling-example.component';
 import { PlatformMenuXPositionExampleComponent } from './platform-menu-examples/platform-menu-x-position-example.component';
 import { PlatformMenuWithIconsExampleComponent } from './platform-menu-examples/platform-menu-with-icons-example.component';
-import { PlatformMenuModule, PlatformButtonModule, } from '@fundamental-ngx/platform';
-import { AvatarModule } from '@fundamental-ngx/core/avatar';
 
 const routes: Routes = [
     {

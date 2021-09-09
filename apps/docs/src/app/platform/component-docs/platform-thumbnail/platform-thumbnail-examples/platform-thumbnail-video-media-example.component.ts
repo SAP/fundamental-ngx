@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Media } from '@fundamental-ngx/platform';
+
+import { Media } from '@fundamental-ngx/platform/thumbnail';
 
 @Component({
     selector: 'fdp-platform-thumbnail-video-media-example',

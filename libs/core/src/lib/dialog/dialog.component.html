@@ -30,6 +30,7 @@
     [attr.aria-label]="dialogConfig.ariaLabel"
     [attr.aria-labelledby]="dialogConfig.ariaLabelledBy"
     [attr.aria-describedby]="dialogConfig.ariaDescribedBy"
+    [attr.aria-modal]="dialogConfig.ariaModal"
     (cdkDragStarted)="isDragged = true"
     (cdkDragEnded)="isDragged = false"
     (onResizeEnd)="adjustResponsivePadding()"

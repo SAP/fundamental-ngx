@@ -83,6 +83,8 @@ import { SplitButtonModule } from '@fundamental-ngx/core/split-button';
 import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 import { MessagePageModule } from '@fundamental-ngx/core/message-page';
 import { VerticalNavigationModule } from '@fundamental-ngx/core/vertical-navigation';
+import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
+import { TimelineModule } from '@fundamental-ngx/core/timeline';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -178,7 +180,9 @@ import { VerticalNavigationModule } from '@fundamental-ngx/core/vertical-navigat
         GridListModule,
         ResizableCardLayoutModule,
         MessagePageModule,
-        VerticalNavigationModule
+        VerticalNavigationModule,
+        MicroProcessFlowModule,
+        TimelineModule
     ],
     providers: []
 })

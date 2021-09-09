@@ -4,10 +4,10 @@ import { ApiComponent } from '../../../../documentation/core-helpers/api/api.com
 import { API_FILES } from '../../../api-files';
 import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
 
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import {
     PlatformTextAreaModule,
     FdpFormGroupModule,
-    PlatformButtonModule,
     PlatformRadioGroupModule,
     PlatformInputModule,
     PlatformCheckboxGroupModule,
@@ -16,7 +16,7 @@ import {
     PlatformSwitchModule,
     PlatformComboboxModule,
     PlatformSelectModule
-} from '@fundamental-ngx/platform';
+} from '@fundamental-ngx/platform/form';
 import { PlatformFormContainerDocsComponent } from './platform-form-container-docs.component';
 import { PlatformFormContainerRecommendedExampleComponent } from './platform-form-container-examples/platform-form-container-recommended-example.component';
 import { PlatformFormContainerPossibleExampleComponent } from './platform-form-container-examples/platform-form-container-possible-example.component';

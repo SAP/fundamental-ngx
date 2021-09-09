@@ -1,5 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import {
     TableColumnFreezeEvent,
     TableDataSource,
@@ -7,7 +9,7 @@ import {
     TableGroupChangeEvent,
     TableRowSelectionChangeEvent,
     TableSortChangeEvent
-} from '@fundamental-ngx/platform';
+} from '@fundamental-ngx/platform/table';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Schema } from '../../../schema/models/schema.model';
@@ -50,8 +52,6 @@ import * as platformTableNavigatableRowTsSrc from '!raw-loader!./platform-table-
 
 import { TableDataProviderExample } from './platform-table-examples/platform-table-data-provider-example';
 import { ExampleItem } from './platform-table-examples/platform-table-data-items-example';
-import { RtlService } from '@fundamental-ngx/core/utils';
-import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fdp-table-docs',

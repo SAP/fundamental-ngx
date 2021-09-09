@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { ListDataSource, DataProvider } from '@fundamental-ngx/platform';
 import { Observable, of } from 'rxjs';
+
+import { ListDataSource, DataProvider } from '@fundamental-ngx/platform/shared';
 
 export interface User {
     firstName: string;

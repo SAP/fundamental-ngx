@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { SwitchConfig } from '@fundamental-ngx/platform';
+
+import { SwitchConfig } from '@fundamental-ngx/platform/form';
 
 export const switchConfigFactory = SwitchConfig.createProviderFactory({
     contentDensity: 'compact'

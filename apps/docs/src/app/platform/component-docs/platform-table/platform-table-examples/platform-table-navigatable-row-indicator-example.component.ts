@@ -1,20 +1,15 @@
-import { Component, AfterViewInit, ChangeDetectionStrategy, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { FdDate } from '@fundamental-ngx/core';
-import {
-    TableDataSource,
-    TableDataProvider,
-    TableState,
-    TableComponent
-} from '@fundamental-ngx/platform';
+import { FdDate } from '@fundamental-ngx/core/datetime';
+import { TableComponent, TableDataProvider, TableDataSource, TableState, TableRowActivateEvent } from '@fundamental-ngx/platform/table';
 
 @Component({
     selector: 'fdp-platform-table-navigatable-row-indicator-example',
     templateUrl: './platform-table-navigatable-row-indicator-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformTableNavigatableRowIndicatorExampleComponent implements AfterViewInit {
+export class PlatformTableNavigatableRowIndicatorExampleComponent {
 
     source: TableDataSource<ExampleItem>;
 
@@ -25,14 +20,16 @@ export class PlatformTableNavigatableRowIndicatorExampleComponent implements Aft
         this.source = new TableDataSource(new TableDataProviderExample());
     }
 
-    ngAfterViewInit(): void {
-        this.table.setNavigatableRowState(1, false);
+    setRowNavigation(): void {
+        this.table.setRowNavigation(1, true)
+    }
 
-        this.table.setRowNavigationIndicator(0, true);
-        this.table.setRowNavigationIndicator(2, true);
+    removeRowNavigation(): void {
+        this.table.removeRowNavigation(1);
+    }
 
-        this.table.setRowNavigationTarget(0, '/platform/home');
-        this.table.setRowNavigationTarget(2, '/platform/home');
+    onRowNavigate(event: TableRowActivateEvent<ExampleItem>): void {
+        console.log(event);
     }
 }
 
@@ -47,6 +44,7 @@ export interface ExampleItem {
     statusColor?: string;
     date: FdDate;
     verified: boolean;
+    navigatable?: boolean
 }
 
 /**
@@ -104,7 +102,8 @@ const ITEMS: ExampleItem[] = [
         status: 'Stocked on demand',
         statusColor: 'informative',
         date: new FdDate(2020, 1, 7),
-        verified: true
+        verified: true,
+        navigatable: true
     },
     {
         name: 'Astro Laptop 1516',
@@ -128,6 +127,7 @@ const ITEMS: ExampleItem[] = [
         status: 'Stocked on demand',
         statusColor: 'informative',
         date: new FdDate(2020, 1, 12),
-        verified: true
+        verified: true,
+        navigatable: true
     }
 ];

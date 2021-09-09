@@ -13,7 +13,7 @@ import {
     SortDirection,
     TableDataProvider,
     TableState
-} from '@fundamental-ngx/platform';
+} from '@fundamental-ngx/platform/table';
 
 @Component({
     selector: 'fdp-platform-table-initial-state-example',

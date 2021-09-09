@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
+import { delay, finalize } from 'rxjs/operators';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
-import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx/platform';
-import { delay, finalize } from 'rxjs/operators';
+import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx/platform/table';
 
 @Component({
     selector: 'fdp-platform-table-page-scrolling-example',

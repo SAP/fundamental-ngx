@@ -28,7 +28,7 @@
                         (keypress)="onKeypressHandler(page, $event)"
                         (click)="goToPage(page, $event)"
                         *ngIf="page !== -1; else more"
-                        [attr.aria-current]="currentPage == page"
+                        [attr.aria-current]="currentPage === page ? 'page': undefined"
                         [attr.aria-label]="pageLabel +' '+ page"
                     >
                         {{ page }}
