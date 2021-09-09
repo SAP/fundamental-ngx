@@ -61,12 +61,15 @@ export class BusyIndicatorComponent {
     @Input()
     ariaLive: 'assertive' | 'polite' | null = 'polite';
 
+    /** minumim progress value for accessibility purpose */
     @Input()
     ariaValueMin: number;
 
+    /** maximum progress value for accessibility purpose */
     @Input()
     ariaValueMax: number;
 
+    /** current progress value for accessibility purpose */
     @Input()
     ariaValueNow: number;
 
