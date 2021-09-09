@@ -109,7 +109,8 @@
                 "core-message-toast",
                 "core-multi-input",
                 "core-wizard",
-                "core-tree"
+                "core-tree",
+                "core-upload-collection"
             ]
         },
         "moment-adapter": {
@@ -511,6 +512,7 @@
             "tags": ["fd"],
             "implicitDependencies": ["core-utils", "core-shared", "core-popover"]
         },
+
         "core-upload-collection": {
             "tags": ["fd"],
             "implicitDependencies": [
@@ -521,6 +523,7 @@
                 "core-object-marker"
             ]
         },
+
         "platform": {
             "tags": [],
             "implicitDependencies": [
@@ -550,7 +553,8 @@
                 "platform-thumbnail",
                 "platform-upload-collection",
                 "platform-value-help-dialog",
-                "platform-wizard-generator"
+                "platform-wizard-generator",
+                "platform-icon-tab-bar"
             ]
         },
         "platform-shared": {
@@ -806,6 +810,10 @@
                 "platform-form",
                 "platform-shared"
             ]
+        },
+        "platform-icon-tab-bar": {
+            "tags": ["fdp"],
+            "implicitDependencies": ["core-icon", "core-popover", "core-utils"]
         }
     }
 }

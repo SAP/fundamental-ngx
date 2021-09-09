@@ -103,6 +103,9 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     @Input()
     disabled: boolean;
 
+    /** Whether the input group is readonly. */
+    @Input()
+    readonly: boolean;
     /**
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.

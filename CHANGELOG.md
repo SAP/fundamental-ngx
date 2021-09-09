@@ -1,4 +1,36 @@
 
+### [0.32.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.21...v0.32.1-rc.22) (2021-09-09)
+
+
+### Bug Fixes
+
+* **platform:** fix a11y issue for platform object attribute component ([#6473](https://github.com/SAP/fundamental-ngx/issues/6473)) ([84e29b0](https://github.com/SAP/fundamental-ngx/commit/84e29b0e4141e4e14125f085bc8b113035fdb6b0))
+
+### [0.32.1-rc.21](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.20...v0.32.1-rc.21) (2021-09-09)
+
+### [0.32.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.19...v0.32.1-rc.20) (2021-09-09)
+
+
+### Bug Fixes
+
+* **core,platform:** fix combobox readonly mode style ([#6470](https://github.com/SAP/fundamental-ngx/issues/6470)) ([7dddf8e](https://github.com/SAP/fundamental-ngx/commit/7dddf8e95c934748825039827d49b674d38bb6c7))
+
+### [0.32.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.18...v0.32.1-rc.19) (2021-09-09)
+
+
+### Bug Fixes
+
+* **core:** combobox, fix rtl mode for mobile ([#6442](https://github.com/SAP/fundamental-ngx/issues/6442)) ([4fc7cb7](https://github.com/SAP/fundamental-ngx/commit/4fc7cb7b1f8171441d8d14c4ada9c467c807f2aa))
+
+### [0.32.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.17...v0.32.1-rc.18) (2021-09-09)
+
+
+### Features
+
+* **platform:** implement icon-tab-bar component ([#6193](https://github.com/SAP/fundamental-ngx/issues/6193)) ([34af039](https://github.com/SAP/fundamental-ngx/commit/34af039867e880c507da72a56de71d58623199b0))
+
+### [0.32.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.16...v0.32.1-rc.17) (2021-09-09)
+
 ### [0.32.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.15...v0.32.1-rc.16) (2021-09-08)
 
 
