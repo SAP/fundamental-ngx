@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UploadCollectionFormItemComponent } from './public_api';
+import { UploadCollectionFormItemComponent } from '../public_api';
 
 describe('UploadCollectionFormItemComponent', () => {
     let component: UploadCollectionFormItemComponent;

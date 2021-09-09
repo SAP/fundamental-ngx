@@ -1,6 +1,6 @@
 import { AfterContentInit, ContentChild, Directive, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
-import { UploadCollectionFormItemComponent } from './upload-collection-form-item.component';
-import { UploadCollectionButtonGroupComponent } from './upload-collection-button-group.component';
+import { UploadCollectionFormItemComponent } from './upload-collection-form-item/upload-collection-form-item.component';
+import { UploadCollectionButtonGroupComponent } from './upload-collection-button-group/upload-collection-button-group.component';
 import { Subscription } from 'rxjs';
 import {
     UploadCollectionTitleContainerDirective,
