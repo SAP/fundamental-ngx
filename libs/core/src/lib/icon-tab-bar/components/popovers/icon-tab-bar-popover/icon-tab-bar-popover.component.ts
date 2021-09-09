@@ -1,6 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { IconTabBarItem } from '../../../types';
-import { PopoverComponent } from '@fundamental-ngx/core';
+import { Component, Input } from '@angular/core';
 import { IconTabBarPopoverClass } from '../icon-tab-bar-popover.class';
 
 @Component({

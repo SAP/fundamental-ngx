@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-import { IconModule, PopoverModule } from '@fundamental-ngx/core';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { IconModule } from '@fundamental-ngx/core/icon';
 import { OverflowItemsModule } from '../utils/directives/overflow-items/overflow-items.module';
 
 import { IconTabBarComponent } from './icon-tab-bar.component';
@@ -40,7 +41,6 @@ import { IconBarDndListDirective } from './directives/dnd/icon-bar-dnd-list.dire
         DragDropModule,
     ],
     exports: [
-        CommonModule,
         IconTabBarComponent,
     ]
 })

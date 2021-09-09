@@ -11,7 +11,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { IconTabBarBackground, IconTabBarItem, IconTabBarSize, TabConfig, TabDestinyMode, TabType } from './types';
-import { ContentDensityService, IconFont, RtlService } from '@fundamental-ngx/core';
+import { ContentDensityService, RtlService } from '@fundamental-ngx/core/utils';
+import { IconFont, } from '@fundamental-ngx/core/icon';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 

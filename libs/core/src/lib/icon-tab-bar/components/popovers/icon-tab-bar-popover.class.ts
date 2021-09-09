@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Directive, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
-import { PopoverComponent } from '@fundamental-ngx/core';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { IconTabBarItem } from '../../types';
 
 @Directive()

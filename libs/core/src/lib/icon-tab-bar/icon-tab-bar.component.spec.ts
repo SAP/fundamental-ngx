@@ -2,7 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { IconTabBarComponent } from './icon-tab-bar.component';
 import { TabConfig, TabType } from './types';
-import { ContentDensityService, IconModule, PopoverModule, RtlService } from '@fundamental-ngx/core';
+import { ContentDensityService, RtlService } from '@fundamental-ngx/core/utils';
+import { PopoverModule } from '@fundamental-ngx/core/popover';
+import { IconModule } from '@fundamental-ngx/core/icon';
 import { IconTabBarTextTypeComponent } from './components/icon-tab-bar-text-type/icon-tab-bar-text-type.component';
 import { ExtraButtonDirective } from './directives/extra-button/extra-button.directive';
 import { IconTabBarIconTypeComponent } from './components/icon-tab-bar-icon-type/icon-tab-bar-icon-type.component';
