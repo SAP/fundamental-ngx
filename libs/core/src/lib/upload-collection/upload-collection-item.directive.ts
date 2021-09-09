@@ -83,7 +83,9 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         this._subscriptions.add(
             this._buttonGroupComponent.editClicked.subscribe((event) => {
                 this._formItemComponent.editMode = event;
-                this._titleContainerDirective.applyContainerClass = !event;
+                if (this._titleContainerDirective) {
+                    this._titleContainerDirective.applyContainerClass = !event;
+                }
                 const styles = [];
                 styles.push(this._titleDirective.elRef.nativeElement.style);
                 this._titleContainerDirective?.objectMarkerComponents?.forEach((objectMarker) => {
