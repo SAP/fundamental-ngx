@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 
 import { WizardGeneratorItem, WizardStepFormsValue } from '../../../interfaces/wizard-generator-item.interface';
 import { WizardGeneratorService } from '../../../wizard-generator.service';
@@ -46,19 +47,18 @@ export class WizardSummarySectionComponent implements OnInit {
 
     /** @hidden */
     constructor(
-        private _wizardGeneratorService: WizardGeneratorService
+        private _wizardGeneratorService: WizardGeneratorService,
+        private _formGeneratorService: FormGeneratorService,
+        private _cd: ChangeDetectorRef
     ) { }
 
     /**
      * @hidden
      */
-    ngOnInit(): void {
-
+    async ngOnInit(): Promise<void> {
         const component = this._wizardGeneratorService.stepsComponents.get(this.step.id);
-
         this._componentForms = component?.getForms();
-
-        this._formatStepValue();
+        await this._formatStepValue();
     }
 
     /**
@@ -71,15 +71,14 @@ export class WizardSummarySectionComponent implements OnInit {
     }
 
     /** @hidden */
-    private _formatStepValue(): void {
-
+    private async _formatStepValue(): Promise<void> {
         if (!this._componentForms) {
             return;
         }
 
         const formattedStepValue = [];
 
-        this.step.formGroups.forEach((formGroup) => {
+        for (const formGroup of this.step.formGroups) {
             const formId = formGroup.id;
 
             const form = this._componentForms[formId];
@@ -89,19 +88,23 @@ export class WizardSummarySectionComponent implements OnInit {
                 return;
             }
 
+            const formattedFormValue = await this._formGeneratorService.getFormValue(form.form, true);
+
             const formattedForm: FormattedFormStep = {
                 title: form.title,
-                items: Object.entries(this.stepValue[formId]).map(([key, value]) => {
+                items: Object.keys(this.stepValue[formId]).map((key) => {
                     return {
                         label: form.form.controls[key].formItem.message as string,
-                        value: value
+                        value: formattedFormValue[key]
                     }
                 })
             };
 
             formattedStepValue.push(formattedForm);
-        });
+        }
 
         this._formattedStepValue = formattedStepValue;
+
+        this._cd.detectChanges();
     }
 }

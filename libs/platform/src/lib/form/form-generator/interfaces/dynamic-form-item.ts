@@ -106,9 +106,19 @@ export interface DynamicFormItem {
      * @description Transforms raw form item value.
      * @param formItemValue raw form item value.
      * @param formValue the form value hash.
+     * @param formItem @see DynamicFormItem
      * @returns updated form item value to be used in the form value hash.
      */
-    transformer?: (formItemValue?: any, formValue?: DynamicFormValue) => any | Promise<any>;
+    transformer?: (formItemValue?: any, formValue?: DynamicFormValue, formItem?: DynamicFormItem) => any | Promise<any>;
+
+    /**
+     * @description Transforms raw form item value for render purposes.
+     * @param formItemValue raw form item value.
+     * @param formValue the form value hash.
+     * @param formItem @see DynamicFormItem
+     * @returns updated form item value to be used in the form value hash for rendering purposes.
+     */
+    valueRenderer?: (formItemValue?: any, formValue?: DynamicFormValue, formItem?: DynamicFormItem) => any | Promise<any>;
 
     /**
      * @description Should return true or false depending on whether or not this form item should be asked.
@@ -153,6 +163,8 @@ export interface DynamicFormItemGuiOptions {
     hintPlacement?: HintPlacement;
 
     layout?: LabelLayout;
+
+    noLabelLayout?: boolean;
 
     /**
      * @description

@@ -7,30 +7,47 @@
 </ng-template>
 <fd-busy-indicator [loading]="formLoading" block="true">
     <form (ngSubmit)="_onSubmit()" #generatorForm="ngForm">
-        <fdp-form-group *ngIf="form" [i18Strings]="i18n" [mainTitle]="mainTitle" [formGroup]="form" [columnLayout]="columnLayout">
-            <ng-container *ngFor="let field of formControlItems; trackBy: _trackFn; index as i;">
-                <ng-container *fdpDynamicFormControlField="field; show: shouldShowFields[field.formItem.name] !== false">
+        <fdp-form-group
+            *ngIf="form"
+            [i18Strings]="i18n"
+            [mainTitle]="mainTitle"
+            [formGroup]="form"
+            [columnLayout]="columnLayout"
+            [labelLayout]="labelLayout"
+            [unifiedLayout]="unifiedLayout"
+        >
+            <ng-container *ngFor="let field of formControlItems; trackBy: _trackFn; index as i">
+                <ng-container
+                    *fdpDynamicFormControlField="field; show: shouldShowFields[field.formItem.name] !== false"
+                >
                     <fdp-form-field
-                    [hint]="field.formItem?.guiOptions?.hint"
-                    [hintPlacement]="field.formItem?.guiOptions?.hintPlacement || 'left'"
-                    [placeholder]="field.formItem?.placeholder || (field.formItem?.useMessageAsPlaceholder && field.formItem?.message)"
-                    [id]="field.formItem?.name"
-                    [i18Strings]="i18n"
-                    [column]="field.formItem?.guiOptions?.column || 1"
-                    [columnLayout]="field.formItem?.guiOptions?.columnLayout"
-                    [label]="field.formItem?.message"
-                    [validators]="field.formItem?.validators"
-                    [required]="field.formItem?.required"
-                    [rank]="i"
-                    #formField>
-                    <ng-container
-                        [formField]="formField"
-                        [form]="form"
-                        fdpDynamicFormControl
-                        [name]="field.formItem.name"
-                        [formItem]="field.formItem">
-                    </ng-container>
-                </fdp-form-field>
+                        [hint]="field.formItem?.guiOptions?.hint"
+                        [hintPlacement]="field.formItem?.guiOptions?.hintPlacement || 'left'"
+                        [placeholder]="
+                            field.formItem?.placeholder ||
+                            (field.formItem?.useMessageAsPlaceholder && field.formItem?.message)
+                        "
+                        [id]="field.formItem?.name"
+                        [i18Strings]="i18n"
+                        [column]="field.formItem?.guiOptions?.column || 1"
+                        [columnLayout]="field.formItem?.guiOptions?.columnLayout"
+                        [label]="field.formItem?.message"
+                        [validators]="field.formItem?.validators"
+                        [required]="field.formItem?.required"
+                        [rank]="i"
+                        [labelLayout]="field.formItem?.guiOptions?.layout"
+                        [noLabelLayout]="field.formItem?.guiOptions?.noLabelLayout || false"
+                        #formField
+                    >
+                        <ng-container
+                            [formField]="formField"
+                            [form]="form"
+                            fdpDynamicFormControl
+                            [name]="field.formItem.name"
+                            [formItem]="field.formItem"
+                        >
+                        </ng-container>
+                    </fdp-form-field>
                 </ng-container>
             </ng-container>
             <fdp-form-field [column]="1" [rank]="formControlItems.length + 1">
