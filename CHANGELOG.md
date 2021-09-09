@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.20](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.19...v0.32.1-rc.20) (2021-09-09)
+
+
+### Bug Fixes
+
+* **core,platform:** fix combobox readonly mode style ([#6470](https://github.com/SAP/fundamental-ngx/issues/6470)) ([7dddf8e](https://github.com/SAP/fundamental-ngx/commit/7dddf8e95c934748825039827d49b674d38bb6c7))
+
 ### [0.32.1-rc.19](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.18...v0.32.1-rc.19) (2021-09-09)
 
 
