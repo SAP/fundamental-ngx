@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.18](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.17...v0.32.1-rc.18) (2021-09-09)
+
+
+### Features
+
+* **platform:** implement icon-tab-bar component ([#6193](https://github.com/SAP/fundamental-ngx/issues/6193)) ([34af039](https://github.com/SAP/fundamental-ngx/commit/34af039867e880c507da72a56de71d58623199b0))
+
 ### [0.32.1-rc.17](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.16...v0.32.1-rc.17) (2021-09-09)
 
 ### [0.32.1-rc.16](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.15...v0.32.1-rc.16) (2021-09-08)
