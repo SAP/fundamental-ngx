@@ -955,7 +955,8 @@
         "platform-thumbnail",
         "platform-upload-collection",
         "platform-value-help-dialog",
-        "platform-wizard-generator"
+        "platform-wizard-generator",
+        "platform-icon-tab-bar"
       ]
     },
     "platform-shared": {
@@ -1210,6 +1211,14 @@
         "core-utils",
         "platform-form",
         "platform-shared"
+      ]
+    },
+    "platform-icon-tab-bar": {
+      "tags": ["fdp"],
+      "implicitDependencies": [
+        "core-icon",
+        "core-popover",
+        "core-utils"
       ]
     }
   }
