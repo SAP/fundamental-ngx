@@ -160,10 +160,13 @@ export interface DynamicFormItemGuiOptions {
      */
     hint?: string;
 
+    /** Define hint placement */
     hintPlacement?: HintPlacement;
 
+    /** Define form field label placement. */
     layout?: LabelLayout;
 
+    /** Flag indicating that label should be hidden */
     noLabelLayout?: boolean;
 
     /**
