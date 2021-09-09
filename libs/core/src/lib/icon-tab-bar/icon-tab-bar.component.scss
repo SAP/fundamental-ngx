@@ -6,6 +6,15 @@
   pointer-events: none;
 }
 
+.fd-icon-tab-bar__item--hidden {
+  display: none;
+}
+
+.fd-icon-tab-bar__list {
+  max-height: 20rem;
+  overflow: auto;
+}
+
 // These styles should move to fundamental/styles repo.
 
 // Main tab bar classes
@@ -29,13 +38,9 @@
     transform: translateY(-50%);
     margin: 0;
 
-    &--left {
+    &-left {
       left: 0;
     }
-  }
-
-  &__separator {
-    width: 2rem;
   }
 }
 
@@ -55,34 +60,6 @@
   .fd-list__link.is-selected, .fd-list__link[aria-selected=true] {
     border-bottom: none;
   }
-}
-
-[dir=rtl] {
-  .fd-icon-tab-bar__list-item-icon-container {
-    margin-left: 1rem;
-    margin-right: 0;
-  }
-
-  .fd-icon-tab-bar__list-item-icon {
-    justify-content: center;
-  }
-
-  .fd-icon-tab-bar__item--overflow {
-    &--left {
-      left: auto;
-      right: 0;
-    }
-  }
-
-  .fd-icon-tab-bar__header--left-offset {
-    padding-left: 0;
-    padding-right: 3.5rem;
-  }
-}
-
-.fd-icon-tab-bar__list {
-  max-height: 20rem;
-  overflow: auto;
 }
 
 // Drag and drop classes
@@ -123,12 +100,51 @@
 
     &::before {
       top: auto;
+      right: auto;
       bottom: .25rem;
       left: 0;
       width: 100%;
       height: 0.125rem;
     }
   }
+}
+
+
+[dir=rtl] {
+  .fd-icon-tab-bar__list-item-icon-container {
+    margin-left: 0.5rem;
+    margin-right: 0;
+  }
+
+  .fd-icon-tab-bar__list-item-icon {
+    justify-content: center;
+  }
+
+  .fd-icon-tab-bar__item--overflow {
+    &-left {
+      left: auto;
+      right: 0;
+    }
+  }
+
+  .fd-icon-tab-bar__header--left-offset {
+    padding-left: 0;
+    padding-right: 3.5rem;
+  }
+
+  .fd-icon-tab-bar-dnd-separator {
+
+    &::before {
+      //right: -0.5rem;
+      //left: auto;
+    }
+  }
+}
+
+.fd-icon-tab-bar__list-item-icon [class*=sap-icon],
+.fd-icon-tab-bar__list-item-icon [class*=sap-icon]:last-child {
+  margin: 0!important;
+  width: auto!important;
 }
 
 .fd-icon-tab-bar__list-item--positive .fd-icon-tab-bar__list-item-icon [class*=sap-icon],

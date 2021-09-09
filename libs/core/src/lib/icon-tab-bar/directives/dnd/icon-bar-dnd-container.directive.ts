@@ -217,15 +217,13 @@ export class IconBarDndContainerDirective implements OnDestroy {
    */
   private _generateVirtualSeparators(): void {
     this._elementsCoordinates.forEach((item, index) => {
-      if (index !== this._elementsCoordinates.length - 1) {
-        const isVertical = this.dndItemDirectives[index].isVertical;
-        this._virtualSeparatorsCoordinates.push({
-          x: isVertical ? item.x : item.x - FLIPPER_SIZE.width,
-          y: isVertical ? item.y + FLIPPER_SIZE.verticalHeight : item.y,
-          width: isVertical ? item.width : FLIPPER_SIZE.width,
-          height: isVertical ? FLIPPER_SIZE.verticalHeight : FLIPPER_SIZE.height
-        });
-      }
+      const isVertical = this.dndItemDirectives[index].isVertical;
+      this._virtualSeparatorsCoordinates.push({
+        x: isVertical ? item.x : item.x - FLIPPER_SIZE.width,
+        y: isVertical ? item.y + FLIPPER_SIZE.verticalHeight : item.y,
+        width: isVertical ? item.width : FLIPPER_SIZE.width,
+        height: isVertical ? FLIPPER_SIZE.verticalHeight : FLIPPER_SIZE.height
+      });
     });
   }
 

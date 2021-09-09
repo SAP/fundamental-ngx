@@ -1,8 +1,9 @@
 import { AfterViewInit, Directive, ElementRef, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { DragDrop, DragRef, Point } from '@angular/cdk/drag-drop';
-import { IconBarDndListDirective } from './icon-bar-dnd-list.directive';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
+import { IconBarDndListDirective } from './icon-bar-dnd-list.directive';
 import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive';
 import { IconTabBarItem } from '../../types';
 
@@ -122,6 +123,7 @@ export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
             height: rect.height
         };
     }
+
 
     /**
      * @description Add/delete separator classes

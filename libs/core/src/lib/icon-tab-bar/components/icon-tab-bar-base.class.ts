@@ -10,13 +10,15 @@ import {
     SimpleChanges,
     ViewChild
 } from '@angular/core';
+import { take, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+
 import { IconTabBarItem, TabConfig } from '../types';
 import { cloneDeep } from '../../utils/functions/clone-deep';
 import { ICON_TAB_HIDDEN_CSS, UNIQUE_KEY_SEPARATOR } from '../constants';
 import { OverflowListDirective } from '../../utils/directives/overflow-list/overflow-list.directive';
 import { ExtraButtonDirective } from '../directives/extra-button/extra-button.directive';
-import { take, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+
 
 @Directive()
 export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {

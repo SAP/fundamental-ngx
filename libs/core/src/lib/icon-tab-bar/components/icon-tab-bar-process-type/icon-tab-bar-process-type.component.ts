@@ -203,7 +203,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
             : this._prevSteps.length + visibleAmountOfItems - 1;
 
         this._showRightBtn = !!this._nextSteps.length;
-        this._offsetOverflowDirective = this._nextSteps.length ? 30 : 0;
+        this._offsetOverflowDirective = this._nextSteps.length ? 70 : 0;
         this._cd.detectChanges();
     }
 }
