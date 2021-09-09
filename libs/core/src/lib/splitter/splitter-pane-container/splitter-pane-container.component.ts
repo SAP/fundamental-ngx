@@ -271,12 +271,12 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
     private _updatePages(): void {
         this._pages = [];
 
-        const offCanvasPages = this._panes.filter(pane => !pane.isOnCanvas).map(pane => pane.id);
+        const offCanvasDemandPages = this._panes.filter(pane => !pane.isOnCanvas && pane.demandPane).map(pane => pane.id);
         let newPage = ROOT_PAGE;
 
-        if (offCanvasPages.length) {
-            this._pages = offCanvasPages;
-            newPage = offCanvasPages[0];
+        if (offCanvasDemandPages.length) {
+            this._pages = offCanvasDemandPages;
+            newPage = offCanvasDemandPages[0];
 
             if (this._panesOnCanvas.length > 1) {
                 this._pages.unshift(ROOT_PAGE);

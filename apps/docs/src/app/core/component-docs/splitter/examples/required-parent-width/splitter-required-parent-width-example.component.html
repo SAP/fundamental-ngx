@@ -17,17 +17,17 @@
                 <br />
 
                 <span *ngIf="paneTwo.isOnCanvas">
-                    Will go off-canvas on browser window's width < 1000px
+                    Will go off-canvas on browser window's width < 1000px, will be present on the pagination bar
                 </span>
             </fd-splitter-split-pane>
 
-            <fd-splitter-split-pane [requiredParentWidth]="1100" #paneThree>
+            <fd-splitter-split-pane [requiredParentWidth]="1100" [demandPane]="false" #paneThree>
                 Split pane Three
 
                 <br />
 
                 <span *ngIf="paneThree.isOnCanvas">
-                    Will go off-canvas on browser window's width < 1100px
+                    Will go off-canvas on browser window's width < 1100px, won't be present on the pagination bar
                 </span>
             </fd-splitter-split-pane>
         </fd-splitter-pane-container>

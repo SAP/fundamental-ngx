@@ -51,6 +51,10 @@ export class SplitterSplitPaneComponent implements OnInit, AfterViewInit, OnDest
     @Input()
     requiredParentWidth: number;
 
+    /** Whether pane is reachable using pagination bar when is off-canvas. */
+    @Input()
+    demandPane = true;
+
     /** Event emitted when the pane appears on/disappears out of canvas. */
     @Output()
     readonly toggleOnCanvas = new EventEmitter<boolean>();
