@@ -1,5 +1,5 @@
 {
-    "name": "@fundamental-ngx/core/icon-tabbar-layout",
+    "name": "@fundamental-ngx/core/icon-tab-bar-layout",
     "version": "VERSION_PLACEHOLDER",
     "peerDependencies": {
         "@angular/common": "^11.2.14",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../../../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../../../../dist/libs/core/icon-tabbar-layout",
+  "dest": "../../../../../dist/libs/core/icon-tab-bar-layout",
   "lib": {
     "entryFile": "./public_api.ts"
   }

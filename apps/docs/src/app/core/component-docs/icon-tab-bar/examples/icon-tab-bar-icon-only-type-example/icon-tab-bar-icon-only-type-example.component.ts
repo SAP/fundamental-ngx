@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TabConfig } from '../../../../../../../../../libs/core/src/lib/icon-tab-bar/types';
+import { TabConfig } from '@fundamental-ngx/core/icon-tab-bar';
 import { iconTypeConfig, longIconTypeConfig } from '../config-for-examples/icon-type-config';
+import { cloneDeep } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fd-icon-tab-bar-icon-only-type-example',
@@ -8,11 +9,12 @@ import { iconTypeConfig, longIconTypeConfig } from '../config-for-examples/icon-
 })
 export class IconTabBarIconOnlyTypeExampleComponent implements OnInit {
 
-    @Input() withOverflowExample = false;
+    @Input()
+    withOverflowExample = false;
 
     items: TabConfig[];
 
     ngOnInit(): void {
-        this.items = this.withOverflowExample ? longIconTypeConfig : iconTypeConfig;
+        this.items = this.withOverflowExample ? cloneDeep(longIconTypeConfig) : cloneDeep(iconTypeConfig);
     }
 }

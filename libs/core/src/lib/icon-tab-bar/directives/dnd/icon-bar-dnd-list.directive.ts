@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef, Input, OnDestroy, Optional } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
 import { ReplaySubject, Subject } from 'rxjs';
 
 import { DragDrop, DragRef, DropListRef } from '@angular/cdk/drag-drop';
@@ -7,8 +7,7 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
 import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive';
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
-    selector: '[fdIconBarDndList, fd-icon-bar-dnd-list]',
+    selector: '[fdIconBarDndList], [fd-icon-bar-dnd-list]',
 })
 export class IconBarDndListDirective implements AfterViewInit, OnDestroy {
 

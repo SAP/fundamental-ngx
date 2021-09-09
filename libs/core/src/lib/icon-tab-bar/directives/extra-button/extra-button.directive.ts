@@ -1,10 +1,10 @@
 import { AfterViewInit, Directive, ElementRef, Input, OnDestroy } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { ViewportRuler } from '@angular/cdk/overlay';
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
-    selector: '[fdExtraButton, fd-extra-button]'
+    selector: '[fdExtraButton], [fd-extra-button]'
 })
 export class ExtraButtonDirective implements AfterViewInit, OnDestroy {
 
@@ -32,18 +32,15 @@ export class ExtraButtonDirective implements AfterViewInit, OnDestroy {
     /** @hidden */
     constructor(
         private _el: ElementRef,
+        private _viewportRuler: ViewportRuler,
     ) {
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
-        fromEvent(window, 'resize')
-            .pipe(
-                debounceTime(50),
-                distinctUntilChanged(),
-                takeUntil(this._onDestroy$),
-            )
-            .subscribe((_ =>  this.calculatePosition()));
+        this._viewportRuler.change(50)
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(() => this.calculatePosition());
 
         this.calculatePosition();
     }

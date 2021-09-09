@@ -1,4 +1,4 @@
-import { TabConfig } from '../../../../../../../../../libs/core/src/lib/icon-tab-bar/types';
+import { TabConfig } from '@fundamental-ngx/core/icon-tab-bar';
 
 export const textTypeConfig: TabConfig[] = [
     {
@@ -115,3 +115,4 @@ export const longTextTypeConfig: TabConfig[] = [
         color: null,
     }
 ];
+

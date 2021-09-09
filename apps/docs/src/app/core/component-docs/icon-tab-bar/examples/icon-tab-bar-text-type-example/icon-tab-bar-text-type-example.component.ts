@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TabConfig } from '../../../../../../../../../libs/core/src/lib/icon-tab-bar/types';
+import { TabConfig } from '@fundamental-ngx/core/icon-tab-bar';
 import { longTextTypeConfig, textTypeConfig } from '../config-for-examples/text-type.config';
+import { cloneDeep } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fd-icon-tab-bar-text-type-example',
@@ -14,11 +15,34 @@ export class IconTabBarTextTypeExampleComponent implements OnInit {
     @Input()
     enableTabReordering = false;
 
-    @Input() withOverflowExample = false;
+    @Input()
+    withOverflowExample = false;
+
+    @Input()
+    nested = false;
 
     items: TabConfig[];
 
     ngOnInit(): void {
-        this.items = this.withOverflowExample ? longTextTypeConfig : textTypeConfig;
+        this.items = this.withOverflowExample ? cloneDeep(longTextTypeConfig) : cloneDeep(textTypeConfig);
+        if (this.nested) {
+            this.items[3].subItems = [
+                {
+                    label: 'Item 0',
+                    counter: null,
+                    color: 'critical',
+                },
+                {
+                    label: 'Item 1',
+                    counter: null,
+                    color: null,
+                },
+                {
+                    label: 'Item 2',
+                    counter: null,
+                    color: null,
+                }
+            ];
+        }
     }
 }

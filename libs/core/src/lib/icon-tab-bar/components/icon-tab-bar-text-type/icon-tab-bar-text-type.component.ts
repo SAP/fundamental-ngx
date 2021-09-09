@@ -105,7 +105,7 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
         }
         // Add tab to subitem of the target tab
         replacedItemInfo.item.subItems.push(draggableItemInfo.item);
-        this._tabs = this._updateTabsIndexes(this._tabs);
+        this._tabs = this._updateTabs(this._tabs);
         this._triggerRecalculationVisibleItems();
     }
 
@@ -119,7 +119,7 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
         draggableItemInfo.arr.splice(draggableItemInfo.item.index, 1);
         const newIndex = replacedItemInfo?.item?.index || 0;
         replacedItemInfo.arr.splice(newIndex, 0, draggableItemInfo.item);
-        this._tabs = this._updateTabsIndexes(this._tabs);
+        this._tabs = this._updateTabs(this._tabs);
         this._triggerRecalculationVisibleItems();
     }
 
@@ -151,16 +151,19 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
      * @hidden
      * @param arr
      * @param parentUid
-     * @description Update indexes and uIds.
+     * @description Update indexes, uIds, styles.
      */
-    private _updateTabsIndexes(arr: IconTabBarItem[], parentUid?: string): IconTabBarItem[] {
+    private _updateTabs(arr: IconTabBarItem[], parentUid?: string): IconTabBarItem[] {
         return arr.map((item, index) => {
             item.index = index;
             item.uId = parentUid
                 ? `${parentUid}${UNIQUE_KEY_SEPARATOR}${index}`
                 : `${index}`;
+            if (!parentUid) {
+                item.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
+            }
             if (Array.isArray(item.subItems)) {
-                item.subItems = this._updateTabsIndexes(item.subItems, item.uId);
+                item.subItems = this._updateTabs(item.subItems, item.uId);
             }
             return {...item};
         });

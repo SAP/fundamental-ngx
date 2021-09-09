@@ -16,7 +16,7 @@ import { Subject } from 'rxjs';
 
 import { OverflowListDirective, cloneDeep } from '@fundamental-ngx/core/utils';
 import { IconTabBarItem, TabConfig } from '../types';
-import { ICON_TAB_HIDDEN_CSS, UNIQUE_KEY_SEPARATOR } from '../constants';
+import { ICON_TAB_HIDDEN_CLASS_NAME, UNIQUE_KEY_SEPARATOR } from '../constants';
 import { ExtraButtonDirective } from '../directives/extra-button/extra-button.directive';
 
 
@@ -172,7 +172,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
         deletedItem.uId = `${deletedItem.index}`;
         const itemToPopover = cloneDeep(deletedItem);
         deletedItem.hidden = true;
-        deletedItem.cssClasses.push(ICON_TAB_HIDDEN_CSS)
+        deletedItem.cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME)
 
         let indexInExtraItems;
         this._extraTabs.forEach((item, index) => {
@@ -204,7 +204,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
         this._lastVisibleTabIndex = this._tabs.length - 1 - extraItems;
         this._tabs.forEach(item => {
             item.hidden = false;
-            item.cssClasses = item.cssClasses.filter(cssClass => cssClass !== ICON_TAB_HIDDEN_CSS)
+            item.cssClasses = item.cssClasses.filter(cssClass => cssClass !== ICON_TAB_HIDDEN_CLASS_NAME)
         });
         this._extraTabs = [];
         const lastVisibleIndex = this._tabs.length - extraItems - 1;
@@ -213,7 +213,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
             const tab = this._tabs[i];
             this._extraTabs.push(cloneDeep(tab));
             tab.hidden = true;
-            tab.cssClasses.push(ICON_TAB_HIDDEN_CSS)
+            tab.cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME)
         }
         this._cd.detectChanges();
     }

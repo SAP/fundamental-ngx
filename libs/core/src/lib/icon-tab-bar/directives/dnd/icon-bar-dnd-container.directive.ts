@@ -14,8 +14,7 @@ export interface FdDnDEvent {
 }
 
 @Directive({
-  // tslint:disable-next-line:directive-selector
-  selector: '[fdIconBarDndContainer, fd-icon-bar-dnd-container]'
+  selector: '[fdIconBarDndContainer], [fd-icon-bar-dnd-container]'
 })
 export class IconBarDndContainerDirective implements OnDestroy {
 

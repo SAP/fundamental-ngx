@@ -1,12 +1,12 @@
 import { AfterViewInit, ContentChildren, Directive, ElementRef, EventEmitter, Input, OnDestroy, Output, QueryList } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, startWith, takeUntil } from 'rxjs/operators';
 import { OverflowListItemDirective } from './overflow-list-item.directive';
+import { ViewportRuler } from '@angular/cdk/overlay';
 
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
-    selector: '[fdOverflowList, fd-overflow-list]'
+    selector: '[fdOverflowList], [fd-overflow-list]'
 })
 export class OverflowListDirective implements AfterViewInit, OnDestroy {
 
@@ -45,19 +45,16 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
 
     /** @hidden */
     constructor(
-        private _el: ElementRef
+        private _el: ElementRef,
+        private _viewportRuler: ViewportRuler,
     ) {
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
-        fromEvent(window, 'resize')
-            .pipe(
-                debounceTime(50),
-                distinctUntilChanged(),
-                takeUntil(this._onDestroy$)
-            )
-            .subscribe((_) => this._calculateAmountOfOverflowedItems());
+        this._viewportRuler.change(50)
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(() => this._calculateAmountOfOverflowedItems());
 
         this._calculateAmountOfOverflowedItems();
     }

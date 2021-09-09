@@ -21,7 +21,7 @@ import * as iconTabBarProcessTypeTs from '!raw-loader!./examples/icon-tab-bar-pr
 
 import * as iconTypeConfigs from '!raw-loader!./examples/config-for-examples/icon-type-config';
 
-import * as textTypeConfigs from '!raw-loader!./examples/config-for-examples/icon-type-config';
+import * as textTypeConfigs from '!raw-loader!./examples/config-for-examples/text-type.config';
 
 
 @Component({

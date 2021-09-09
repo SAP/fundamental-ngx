@@ -3,7 +3,7 @@ import { take } from 'rxjs/operators';
 
 import { IconTabBarBase } from '../icon-tab-bar-base.class';
 import { IconTabBarItem } from '../../types';
-import { ICON_TAB_HIDDEN_CSS } from '../../constants';
+import { ICON_TAB_HIDDEN_CLASS_NAME } from '../../constants';
 import { cloneDeep } from '@fundamental-ngx/core/utils';
 
 
@@ -109,7 +109,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
         this._prevSteps = [];
         this._tabs.forEach(item => {
             item.hidden = false;
-            item.cssClasses = item.cssClasses.filter(cssClass => cssClass !== ICON_TAB_HIDDEN_CSS);
+            item.cssClasses = item.cssClasses.filter(cssClass => cssClass !== ICON_TAB_HIDDEN_CLASS_NAME);
         });
     }
 
@@ -129,7 +129,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
         for (let i = this._tabs.length - amountOfNextSteps; i < this._tabs.length; i++) {
             this._nextSteps.push(cloneDeep(this._tabs[i]));
             this._tabs[i].hidden = true;
-            this._tabs[i].cssClasses.push(ICON_TAB_HIDDEN_CSS);
+            this._tabs[i].cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
         }
 
         this._showRightBtn = !!this._nextSteps.length;
@@ -145,7 +145,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
         while (amountOfPrevSteps > 0) {
             this._prevSteps.push(cloneDeep(this._tabs[nextIndex]));
             this._tabs[nextIndex].hidden = true;
-            this._tabs[nextIndex].cssClasses.push(ICON_TAB_HIDDEN_CSS);
+            this._tabs[nextIndex].cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
 
             --nextIndex;
             --amountOfPrevSteps;
@@ -175,7 +175,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
         for (let i = amountOfPreviousSteps - 1; i >= 0; i--) {
             this._prevSteps.push(cloneDeep(this._tabs[i]));
             this._tabs[i].hidden = true;
-            this._tabs[i].cssClasses.push(ICON_TAB_HIDDEN_CSS);
+            this._tabs[i].cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
         }
 
         this._firstVisibleTabIndex = this._prevSteps.length;
@@ -194,7 +194,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
         while (amountOfNextSteps > 0) {
             this._nextSteps.push(cloneDeep(this._tabs[nextIndex]));
             this._tabs[nextIndex].hidden = true;
-            this._tabs[nextIndex].cssClasses.push(ICON_TAB_HIDDEN_CSS);
+            this._tabs[nextIndex].cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
 
             ++nextIndex;
             --amountOfNextSteps;

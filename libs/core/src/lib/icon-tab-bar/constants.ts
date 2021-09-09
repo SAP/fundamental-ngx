@@ -4,4 +4,4 @@ export const FLIPPER_SIZE = {
     height: 44,
     verticalHeight: 20
 };
-export const ICON_TAB_HIDDEN_CSS = 'fd-icon-tab-bar__item--hidden'
+export const ICON_TAB_HIDDEN_CLASS_NAME = 'fd-icon-tab-bar__item--hidden'
