@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
-import { PlatformIconTabBarModule } from '@fundamental-ngx/platform';
 
 import { PlatformIconTabBarDocsComponent } from './platform-icon-tab-bar-docs.component';
 import { PlatformIconTabBarHeaderComponent } from './platform-icon-tab-bar-header/platform-icon-tab-bar-header.component';
@@ -14,6 +13,7 @@ import { PlatformIconTabBarIconTypeExampleComponent } from './examples/platform-
 import { PlatformIconTabBarIconOnlyTypeExampleComponent } from './examples/platform-icon-tab-bar-icon-only-type-example/platform-icon-tab-bar-icon-only-type-example.component';
 import { PlatformIconTabBarConfigurablePaddingsExampleComponent } from './examples/platform-icon-tab-bar-configurable-paddings-example/platform-icon-tab-bar-configurable-paddings-example.component';
 import { API_FILES } from '../../api-files';
+import { PlatformIconTabBarModule } from '../../../../../../../libs/platform/src/lib/icon-tab-bar/icon-tab-bar.module';
 
 const routes: Routes = [
     {
