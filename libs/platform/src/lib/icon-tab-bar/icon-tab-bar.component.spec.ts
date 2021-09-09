@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { IconTabBarComponent } from './icon-tab-bar.component';
 import { TabConfig, TabType } from './types';
-import { ContentDensityService, RtlService } from '@fundamental-ngx/core/utils';
+import { ContentDensityService, OverflowListModule, RtlService } from '@fundamental-ngx/core/utils';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { IconTabBarTextTypeComponent } from './components/icon-tab-bar-text-type/icon-tab-bar-text-type.component';
@@ -15,7 +15,6 @@ import { TextTypePopoverComponent } from './components/popovers/text-type-popove
 import { IconBarDndListDirective } from './directives/dnd/icon-bar-dnd-list.directive';
 import { IconBarDndItemDirective } from './directives/dnd/icon-bar-dnd-item.directive';
 import { IconBarDndContainerDirective } from './directives/dnd/icon-bar-dnd-container.directive';
-import { OverflowListModule } from '../../../../../core/src/lib/utils/directives/overflow-list/overflow-list.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 import { generateTestConfig, getGetCenterCoordsOfElement } from './tests-helper';
