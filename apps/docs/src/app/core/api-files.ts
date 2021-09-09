@@ -395,7 +395,7 @@ export const API_FILES = {
         'UploadCollectionTextSeparatorDirective',
         'UploadCollectionStatusGroupDirective',
         'UploadCollectionTitleContainerDirective'
-    ]
+    ],
     timeline: [
         'TimelineComponent',
         'TimelineNodeDefDirective',

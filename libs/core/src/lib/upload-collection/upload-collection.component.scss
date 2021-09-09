@@ -1,12 +1,14 @@
 /*!
- * Fundamental Library Styles v0.20.0-rc.9
+ * Fundamental Library Styles v0.20.0-rc.26
  * Copyright (c) 2021 SAP SE or an SAP affiliate company.
  * Licensed under Apache License 2.0 (https://github.com/SAP/fundamental-styles/blob/main/LICENSE)
  */
 .fd-upload-collection .fd-upload-collection__item {
+    -ms-flex-wrap: nowrap;
     flex-wrap: nowrap;
 }
 .fd-upload-collection__thumbnail {
+    -ms-flex-item-align: start;
     align-self: flex-start;
 }
 .fd-upload-collection__button-group {
@@ -26,8 +28,8 @@
     border: 0;
     margin-left: 1rem;
 }
-.fd-upload-collection__button-group:after,
-.fd-upload-collection__button-group:before {
+.fd-upload-collection__button-group::after,
+.fd-upload-collection__button-group::before {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
     font-size: inherit;
@@ -67,8 +69,8 @@
     -ms-flex-align: center;
     align-items: center;
 }
-.fd-upload-collection__title-container:after,
-.fd-upload-collection__title-container:before {
+.fd-upload-collection__title-container::after,
+.fd-upload-collection__title-container::before {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
     font-size: inherit;
@@ -87,6 +89,8 @@
 .fd-upload-collection__description,
 .fd-upload-collection__extension,
 .fd-upload-collection__status-group {
+    font-size: 0.875rem;
+    font-size: var(--sapFontSize, 0.875rem);
     line-height: 1.4;
     line-height: var(--sapContent_LineHeight, 1.4);
     color: #32363a;
@@ -108,12 +112,12 @@
     color: #6a6d70;
     color: var(--sapContent_LabelColor, #6a6d70);
 }
-.fd-upload-collection__description:after,
-.fd-upload-collection__description:before,
-.fd-upload-collection__extension:after,
-.fd-upload-collection__extension:before,
-.fd-upload-collection__status-group:after,
-.fd-upload-collection__status-group:before {
+.fd-upload-collection__description::after,
+.fd-upload-collection__description::before,
+.fd-upload-collection__extension::after,
+.fd-upload-collection__extension::before,
+.fd-upload-collection__status-group::after,
+.fd-upload-collection__status-group::before {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
     font-size: inherit;
@@ -133,7 +137,7 @@
     margin-right: 0.375rem;
     margin-left: 0;
 }
-.fd-upload-collection__text-separator:before {
+.fd-upload-collection__text-separator::before {
     font-size: 0.875rem;
     font-size: var(--sapFontSize, 0.875rem);
     line-height: 1.4;
@@ -152,8 +156,8 @@
     color: var(--sapContent_LabelColor, #6a6d70);
     content: '\2022';
 }
-.fd-upload-collection__text-separator:before:after,
-.fd-upload-collection__text-separator:before:before {
+.fd-upload-collection__text-separator::before::after,
+.fd-upload-collection__text-separator::before::before {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
     font-size: inherit;
@@ -174,8 +178,8 @@
     margin: 0;
     border: 0;
 }
-.fd-upload-collection__form-item:after,
-.fd-upload-collection__form-item:before {
+.fd-upload-collection__form-item::after,
+.fd-upload-collection__form-item::before {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
     font-size: inherit;
@@ -204,20 +208,4 @@
 }
 .fd-upload-collection--sm .fd-upload-collection__form-item input {
     width: 75%;
-}
-
-.fd-upload-collection__status-group {
-    .fd-object-status {
-        margin-left: 0.25rem;
-        margin-right: 0.25rem;
-
-        &:first-child {
-            margin-left: 0;
-            [dir='rtl'] &,
-            &[dir='rtl'] {
-                margin-left: 0.25rem;
-                margin-right: 0;
-            }
-        }
-    }
 }

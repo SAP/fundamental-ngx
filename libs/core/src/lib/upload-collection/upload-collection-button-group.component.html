@@ -17,8 +17,8 @@
     [attr.aria-label]="deleteAriaLabel"
 ></button>
 <button
-    *ngIf="editMode"
-    [disabled]="okDisabled"
+    #okButton
+    [style.display]="editMode ? 'inline-flex' : 'none'"
     (click)="okButtonClicked($event)"
     fd-button
     fdType="transparent"

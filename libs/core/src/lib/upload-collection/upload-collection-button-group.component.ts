@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    Input,
+    Output,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
+import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 @Component({
     selector: 'fd-upload-collection-button-group',
@@ -10,9 +19,6 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEn
 export class UploadCollectionButtonGroupComponent {
     /** @hidden */
     editMode = false;
-
-    /** @hidden */
-    okDisabled = false;
 
     /** Event emitted when the user clicks the edit button. */
     @Output()
@@ -65,6 +71,10 @@ export class UploadCollectionButtonGroupComponent {
     /** Text for the 'Cancel' aria-label. */
     @Input()
     cancelAriaLabel = 'Cancel';
+
+    /** @hidden */
+    @ViewChild('okButton')
+    okButton: ButtonComponent;
 
     /** @hidden */
     editButtonClicked(event?: MouseEvent): void {

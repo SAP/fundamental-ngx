@@ -54,6 +54,7 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         this._handleDeleteClickedSubscription();
         this._handleOkClickedSubscription();
         this._handleEditClickedSubscription();
+        this._handleFormItemInputChangedSubscription();
     }
 
     /** @hidden */
@@ -104,6 +105,16 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
         this._subscriptions.add(
             this._buttonGroupComponent.deleteClicked.subscribe(() => {
                 this.deleteClicked.emit(this);
+            })
+        );
+    }
+
+    /** @hidden */
+    private _handleFormItemInputChangedSubscription(): void {
+        this._subscriptions.add(
+            this._formItemComponent.fileNameChanged.subscribe((event) => {
+                this._buttonGroupComponent.okButton.disabled = event === '';
+                this._buttonGroupComponent.okButton.buildComponentCssClass();
             })
         );
     }
