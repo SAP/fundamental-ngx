@@ -14,9 +14,18 @@ export class ListNavigationItemArrowDirective {
 
     /** @hidden */
     @HostBinding('class.sap-icon--navigation-down-arrow')
-    downArrowClass = true;
+    downArrowClass = false;
 
     /** @hidden */
     @HostBinding('class.is-expanded')
     expanded = false;
+
+    /** @hidden */
+    _setExpanded(expanded: boolean): void {
+        if (this.expanded !== expanded) {
+            this.rightArrowClass = !this.rightArrowClass;
+            this.downArrowClass = !this.downArrowClass;
+        }
+        this.expanded = expanded;
+    }
 }

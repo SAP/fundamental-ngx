@@ -9,8 +9,10 @@ import {
 } from './examples/vertical-navigation-default-example.component';
 import { VerticalNavigationModule } from '@fundamental-ngx/core/vertical-navigation';
 import { TableModule } from '@fundamental-ngx/core/table';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { ListModule } from '@fundamental-ngx/core/list';
 import { VerticalNavigationHeaderComponent } from './vertical-navigation-header/vertical-navigation-header.component';
-import { ListModule } from '@fundamental-ngx/core';
+import { VerticalNavigationCondensedExampleComponent } from './examples/vertical-navigation-condensed-example.component';
 
 const routes: Routes = [
     {
@@ -24,11 +26,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, VerticalNavigationModule, TableModule, ListModule],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, VerticalNavigationModule, TableModule, ListModule, IconModule],
     declarations: [
         VerticalNavigationDocsComponent,
         VerticalNavigationHeaderComponent,
-        VerticalNavigationDefaultExampleComponent
+        VerticalNavigationDefaultExampleComponent,
+        VerticalNavigationCondensedExampleComponent
     ]
 })
 export class VerticalNavigationDocsModule {}

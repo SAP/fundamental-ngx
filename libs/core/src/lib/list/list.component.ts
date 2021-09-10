@@ -25,6 +25,7 @@ import {
 import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
 import { ListFocusItem } from './list-focus-item.model';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { ListNavigationItemDirective } from './directives/list-navigation-item.directive';
 
 type FocusItem = ListGroupHeaderDirective | ListItemComponent;
 /**
@@ -105,6 +106,10 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     /** @hidden */
     @ContentChildren(ListItemComponent)
     items: QueryList<ListItemComponent>;
+
+    /** @hidden */
+    @ContentChildren(ListNavigationItemDirective)
+    _navItems: QueryList<ListNavigationItemDirective>;
 
     /** @hidden */
     @ContentChildren(ListFocusItem)

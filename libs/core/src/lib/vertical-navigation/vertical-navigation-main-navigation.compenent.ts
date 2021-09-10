@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, ViewEncapsulation } from '@angular/core';
+import { ListComponent } from '@fundamental-ngx/core/list';
 
 @Component({
     selector: 'fd-vertical-navigation-main-navigation',
@@ -7,4 +8,10 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VerticalNavigationMainNavigationComponent {}
+export class VerticalNavigationMainNavigationComponent {
+
+    /** @hidden */
+    @ContentChild(ListComponent)
+    _list: ListComponent;
+
+}
