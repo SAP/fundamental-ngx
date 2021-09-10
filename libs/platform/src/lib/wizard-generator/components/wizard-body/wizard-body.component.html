@@ -14,10 +14,14 @@
                     <fd-wizard-step-indicator [glyph]="step.icon">
                         <ng-container *ngIf="!step.icon">{{ i + 1 }}</ng-container>
                     </fd-wizard-step-indicator>
-                    <ng-template></ng-template>
                     <fd-wizard-content>
                         <fdp-wizard-generator-step *ngIf="!step.summary" [item]="step"></fdp-wizard-generator-step>
-                        <fdp-wizard-summary-step [status]="step.status" *ngIf="step.summary"></fdp-wizard-summary-step>
+                        <ng-container *ngIf="step.summary">
+                            <ng-template #defaultSummaryStepTemplate>
+                                <fdp-wizard-summary-step [status]="step.status"></fdp-wizard-summary-step>
+                            </ng-template>
+                            <ng-template [ngTemplateOutlet]="summaryPageTemplate || defaultSummaryStepTemplate" [ngTemplateOutletContext]="{ status: step.status }"></ng-template>
+                        </ng-container>
 
                         <fd-wizard-next-step *ngIf="navigationButtons">
                             <ng-container *ngIf="!hasSummaryStep && !isLastStep">

@@ -212,6 +212,10 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     @Input()
     columnLayout: string;
 
+    /** Whether or not all form items should have identical layout provided for form group */
+    @Input()
+    unifiedLayout = true;
+
     /**
      * onSubmit event
      */
@@ -476,11 +480,13 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
      *
      */
     private _updateFormFieldProperties(formField: FormField): void {
-        formField.hintPlacement = this._hintPlacement;
+        if (this.unifiedLayout) {
+            formField.hintPlacement = this._hintPlacement;
+            formField.editable = this.editable;
+            formField.labelLayout = this.labelLayout;
+            formField.noLabelLayout = this.noLabelLayout;
+        }
         formField.i18Strings = formField.i18Strings ? formField.i18Strings : this.i18Strings;
-        formField.editable = this.editable;
-        formField.noLabelLayout = this.noLabelLayout;
-        formField.labelLayout = this.labelLayout;
     }
 
     /**
