@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.23...v0.32.1-rc.24) (2021-09-10)
+
+
+### Features
+
+* **core:** implement upload-collection in fundamental-ngx ([#6392](https://github.com/SAP/fundamental-ngx/issues/6392)) ([bef24d0](https://github.com/SAP/fundamental-ngx/commit/bef24d0b5c73460b3bb8238971ecb93162872255))
+
 ### [0.32.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.22...v0.32.1-rc.23) (2021-09-10)
 
 
