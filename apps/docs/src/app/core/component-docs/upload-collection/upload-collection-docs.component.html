@@ -1,0 +1,61 @@
+<h2>Upload Collection</h2>
+<description
+    >Use the Upload Collection component to display a list of uploads and allow the user to perform actions on the files
+    in that list, such as file name changes or item deletion. <br /><br />
+    Individual upload collection items emit events when the user performs an action such as deletion or file renaming.
+    It is the responsibility of the application developer to handle these events properly. These examples simply throw
+    an alert when the user performs an action. See the <code>fd-upload-collection-item</code> API documentation for
+    specific information about these events. <br /><br />
+</description>
+
+<component-example>
+    <fd-upload-collection-example></fd-upload-collection-example>
+</component-example>
+<code-example [exampleFiles]="uploadCollection"></code-example>
+
+<separator></separator>
+
+<h2>Upload Collection - Small Mode</h2>
+<description
+    >Use the <code>[small]</code> input in addition to a narrower wrapping container for the small upload
+    collection.</description
+>
+<component-example>
+    <fd-upload-collection-small-example></fd-upload-collection-small-example>
+</component-example>
+<code-example [exampleFiles]="uploadCollectionSmall"></code-example>
+
+<separator></separator>
+
+<h2>Upload Collection - Customization</h2>
+<description
+    >Functionality of the upload collection can be customized by removing the file edit/delete buttons, or disabling
+    them. In this example, the first item has no customization options. The second item disables the edit and delete
+    buttons. The third item only has a edit button with no delete option. The edit/delete customization functionality
+    can be removed from an upload collection entirely by removing the <code>fd-upload-collection-button-group</code> and
+    <code>fd-upload-collection-form-item</code> directives.</description
+>
+<component-example>
+    <fd-upload-collection-custom-example></fd-upload-collection-custom-example>
+</component-example>
+<code-example [exampleFiles]="uploadCollectionCustom"></code-example>
+
+<h2>Upload Collection - Complex Example</h2>
+<description>
+    The upload collection can be used along with a variety of other components such as the file uploader, toolbar,
+    dialog, button, search input, sorting/filtering functionality etc. to facilitate a smooth user experience. Here in
+    this example we have added selection and the ability to upload files, or delete multiple files at a time.
+</description>
+<component-example>
+    <fd-upload-collection-complex-example></fd-upload-collection-complex-example>
+</component-example>
+<code-example [exampleFiles]="uploadCollectionComplex"></code-example>
+
+<separator></separator>
+
+<h2>Upload Collection - No Data</h2>
+<description>Use a message page component when the user has yet to upload any files.</description>
+<component-example>
+    <fd-upload-collection-empty-example></fd-upload-collection-empty-example>
+</component-example>
+<code-example [exampleFiles]="uploadCollectionEmpty"></code-example>

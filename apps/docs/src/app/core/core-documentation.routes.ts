@@ -462,6 +462,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/tree/tree-docs.module').then((m) => m.TreeDocsModule)
             },
             {
+                path: 'upload-collection',
+                loadChildren: () => import('./component-docs/upload-collection/upload-collection-docs.module').then((m) => m.UploadCollectionDocsModule)
+            },
+            {
                 path: 'wizard',
                 loadChildren: () => import('./component-docs/wizard/wizard-docs.module').then((m) => m.WizardDocsModule)
             },
