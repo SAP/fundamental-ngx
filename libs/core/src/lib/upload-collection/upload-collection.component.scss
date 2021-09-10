@@ -1,3 +1,21 @@
+.fd-upload-collection__status-group {
+    .fd-object-status {
+        margin-left: 0.25rem;
+        margin-right: 0.25rem;
+
+        &:first-child {
+            margin-left: 0;
+            [dir='rtl'] &,
+            &[dir='rtl'] {
+                margin-left: 0.25rem;
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+// TODO: remove when merged in styles
+
 /*!
  * Fundamental Library Styles v0.20.0-rc.26
  * Copyright (c) 2021 SAP SE or an SAP affiliate company.
