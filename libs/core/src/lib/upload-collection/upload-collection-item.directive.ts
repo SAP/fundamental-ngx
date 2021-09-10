@@ -70,8 +70,8 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
                     this.fileName = this._formItemComponent.fileName;
                     this._titleDirective.elRef.nativeElement.style.display = 'inline-block';
                     this._titleDirective.elRef.nativeElement.innerHTML = this.fileName + '.' + this.extension;
-                    this._formItemComponent.editMode = false;
-                    this._buttonGroupComponent.editMode = false;
+                    this._formItemComponent._editMode = false;
+                    this._buttonGroupComponent._editMode = false;
                     this.fileNameChanged.emit(this);
                 }
             })
@@ -82,13 +82,13 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
     private _handleEditClickedSubscription(): void {
         this._subscriptions.add(
             this._buttonGroupComponent.editClicked.subscribe((event) => {
-                this._formItemComponent.editMode = event;
+                this._formItemComponent._editMode = event;
                 if (this._titleContainerDirective) {
                     this._titleContainerDirective.applyContainerClass = !event;
                 }
                 const styles = [];
                 styles.push(this._titleDirective.elRef.nativeElement.style);
-                this._titleContainerDirective?.objectMarkerComponents?.forEach((objectMarker) => {
+                this._titleContainerDirective?._objectMarkerComponents?.forEach((objectMarker) => {
                     styles.push(objectMarker.elementRef().nativeElement.style);
                 });
                 !!event
@@ -115,8 +115,8 @@ export class UploadCollectionItemDirective implements AfterContentInit, OnDestro
     private _handleFormItemInputChangedSubscription(): void {
         this._subscriptions.add(
             this._formItemComponent.fileNameChanged.subscribe((event) => {
-                this._buttonGroupComponent.okButton.disabled = event === '';
-                this._buttonGroupComponent.okButton.buildComponentCssClass();
+                this._buttonGroupComponent._okButton.disabled = event === '';
+                this._buttonGroupComponent._okButton.buildComponentCssClass();
             })
         );
     }

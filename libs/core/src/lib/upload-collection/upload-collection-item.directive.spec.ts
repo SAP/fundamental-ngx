@@ -99,8 +99,8 @@ describe('UploadCollectionItemDirective', () => {
         expect(component.item._titleDirective.elRef.nativeElement.innerHTML).toEqual('newName.txt');
         expect(component.item.fileNameChanged.emit).toHaveBeenCalled();
         expect(component.item.fileName).toEqual('newName');
-        expect(component.item._formItemComponent.editMode).toBeFalse();
-        expect(component.item._buttonGroupComponent.editMode).toBeFalse();
+        expect(component.item._formItemComponent._editMode).toBeFalse();
+        expect(component.item._buttonGroupComponent._editMode).toBeFalse();
     }));
 
     it('should handle editClicked subscription', fakeAsync(() => {
@@ -111,7 +111,7 @@ describe('UploadCollectionItemDirective', () => {
         component.item._buttonGroupComponent.editClicked.emit(true);
         tick(1);
         fixture.detectChanges();
-        expect(component.item._formItemComponent.editMode).toBeTruthy();
+        expect(component.item._formItemComponent._editMode).toBeTruthy();
         expect(component.item._titleDirective.elRef.nativeElement.style.display).toBe('none');
         expect(component.item._formItemComponent.fileName).toEqual('File_Name');
         expect(component.item._formItemComponent._extension).toEqual('txt');

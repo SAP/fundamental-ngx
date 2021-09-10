@@ -18,7 +18,7 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 })
 export class UploadCollectionButtonGroupComponent {
     /** @hidden */
-    editMode = false;
+    _editMode = false;
 
     /** Event emitted when the user clicks the edit button. */
     @Output()
@@ -74,19 +74,19 @@ export class UploadCollectionButtonGroupComponent {
 
     /** @hidden */
     @ViewChild('okButton')
-    okButton: ButtonComponent;
+    _okButton: ButtonComponent;
 
     /** @hidden */
-    editButtonClicked(event?: MouseEvent): void {
+    _editButtonClicked(event?: MouseEvent): void {
         if (event) {
             event.stopPropagation();
         }
         this.editClicked.emit(true);
-        this.editMode = true;
+        this._editMode = true;
     }
 
     /** @hidden */
-    deleteButtonClicked(event?: MouseEvent): void {
+    _deleteButtonClicked(event?: MouseEvent): void {
         if (event) {
             event.stopPropagation();
         }
@@ -94,7 +94,7 @@ export class UploadCollectionButtonGroupComponent {
     }
 
     /** @hidden */
-    okButtonClicked(event?: MouseEvent): void {
+    _okButtonClicked(event?: MouseEvent): void {
         if (event) {
             event.stopPropagation();
         }
@@ -102,11 +102,11 @@ export class UploadCollectionButtonGroupComponent {
     }
 
     /** @hidden */
-    cancelButtonClicked(event?: MouseEvent): void {
+    _cancelButtonClicked(event?: MouseEvent): void {
         if (event) {
             event.stopPropagation();
         }
         this.editClicked.emit(false);
-        this.editMode = false;
+        this._editMode = false;
     }
 }

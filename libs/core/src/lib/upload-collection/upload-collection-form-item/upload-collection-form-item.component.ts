@@ -14,7 +14,7 @@ export class UploadCollectionFormItemComponent implements ControlValueAccessor {
 
     /** @hidden */
     @Input()
-    editMode = false;
+    _editMode = false;
 
     /** @hidden */
     _fileNameValue: string;

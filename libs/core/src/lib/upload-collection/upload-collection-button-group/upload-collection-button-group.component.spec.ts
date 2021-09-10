@@ -24,28 +24,28 @@ describe('UploadCollectionButtonGroupComponent', () => {
 
     it('should handle editButtonClicked', () => {
         spyOn(component.editClicked, 'emit');
-        component.editButtonClicked();
-        expect(component.editMode).toBeTruthy();
+        component._editButtonClicked();
+        expect(component._editMode).toBeTruthy();
         expect(component.editClicked.emit).toHaveBeenCalledWith(true);
     });
 
     it('should handle deleteButtonClicked', () => {
         spyOn(component.deleteClicked, 'emit');
-        component.deleteButtonClicked();
+        component._deleteButtonClicked();
         expect(component.deleteClicked.emit).toHaveBeenCalled();
     });
 
     it('should handle okButtonClicked', () => {
         spyOn(component.okClicked, 'emit');
-        component.okButtonClicked();
+        component._okButtonClicked();
         expect(component.okClicked.emit).toHaveBeenCalled();
     });
 
     it('should handle editButtonClicked', () => {
-        component.editMode = true;
+        component._editMode = true;
         spyOn(component.editClicked, 'emit');
-        component.cancelButtonClicked();
-        expect(component.editMode).toBeFalsy();
+        component._cancelButtonClicked();
+        expect(component._editMode).toBeFalsy();
         expect(component.editClicked.emit).toHaveBeenCalledWith(false);
     });
 });

@@ -45,7 +45,7 @@ export class UploadCollectionStatusGroupDirective {}
 export class UploadCollectionTitleContainerDirective {
     /** @hidden */
     @ContentChildren(ObjectMarkerComponent)
-    objectMarkerComponents: QueryList<ObjectMarkerComponent>;
+    _objectMarkerComponents: QueryList<ObjectMarkerComponent>;
 
     /** Whether or not this is in edit mode. */
     @HostBinding('class.fd-upload-collection__title-container')
