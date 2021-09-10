@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.22...v0.32.1-rc.23) (2021-09-10)
+
+
+### Bug Fixes
+
+* **platform:** fix wizard generator related issues ([#6489](https://github.com/SAP/fundamental-ngx/issues/6489)) ([2997ddd](https://github.com/SAP/fundamental-ngx/commit/2997ddde32e3fb50892f0ed8aa2155850e9ec1c3))
+
 ### [0.32.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.21...v0.32.1-rc.22) (2021-09-09)
 
 
