@@ -149,7 +149,7 @@
     "@commitlint/travis-cli": "13.1.0",
     "@nrwl/cli": "11.1.5",
     "@nrwl/schematics": "8.12.11",
-    "@nrwl/tao": "11.5.1",
+    "@nrwl/tao": "12.9.0",
     "@nrwl/workspace": "11.5.2",
     "@schematics/angular": "~11.2.11",
     "@types/jasmine": "3.6.6",
