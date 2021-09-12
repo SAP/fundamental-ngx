@@ -112,7 +112,7 @@
     "@angular/platform-browser": "~11.2.14",
     "@angular/platform-browser-dynamic": "~11.2.14",
     "@angular/router": "~11.2.14",
-    "@nrwl/angular": "~11.1.5",
+    "@nrwl/angular": "~12.9.0",
     "@sap-theming/theming-base-content": "11.1.30",
     "@stackblitz/sdk": "1.5.2",
     "@types/google.visualization": "0.0.67",
