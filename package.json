@@ -190,7 +190,7 @@
     "karma-typescript": "5.0.3",
     "karma-typescript-angular2-transform": "latest",
     "karma-webpack": "5.0.0",
-    "nan": "2.14.2",
+    "nan": "2.15.0",
     "ng-packagr": "11.2.4",
     "prettier": "2.3.2",
     "rollup": "2.56.2",
