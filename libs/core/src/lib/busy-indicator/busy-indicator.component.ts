@@ -24,9 +24,6 @@ export type BusyIndicatorSize = 's' | 'm' | 'l';
         '[attr.aria-busy]': 'loading',
         '[attr.aria-live]': 'ariaLive',
         '[attr.aria-label]': 'ariaLabel',
-        '[attr.aria-valuemin]': 'ariaValueMin',
-        '[attr.aria-valuemax]': 'ariaValueMax',
-        '[attr.aria-valuenow]': 'ariaValueNow',
         '[attr.title]': 'title',
         '[class.fd-busy-indicator__container]': 'true',
         '[class.fd-busy-indicator__container--inline]': '!block'
@@ -60,18 +57,6 @@ export class BusyIndicatorComponent {
     /** Aria live attribute value. */
     @Input()
     ariaLive: 'assertive' | 'polite' | null = 'polite';
-
-    /** minumim progress value for accessibility purpose */
-    @Input()
-    ariaValueMin: number;
-
-    /** maximum progress value for accessibility purpose */
-    @Input()
-    ariaValueMax: number;
-
-    /** current progress value for accessibility purpose */
-    @Input()
-    ariaValueNow: number;
 
     /** @hidden */
     @ViewChild('fakeFocusElement')
