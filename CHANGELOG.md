@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.29...v0.32.1-rc.30) (2021-09-13)
+
+
+### Features
+
+* **platform:** custom element for no data message ([#6513](https://github.com/SAP/fundamental-ngx/issues/6513)) ([6dfabe6](https://github.com/SAP/fundamental-ngx/commit/6dfabe670cbdec09c8ca8a8a262eaeda6eed939f))
+
 ### [0.32.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.28...v0.32.1-rc.29) (2021-09-13)
 
 
