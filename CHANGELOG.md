@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.26...v0.32.1-rc.27) (2021-09-13)
+
+
+### Bug Fixes
+
+* **core:** menu, fix close popover on destroy ([#6475](https://github.com/SAP/fundamental-ngx/issues/6475)) ([d644a04](https://github.com/SAP/fundamental-ngx/commit/d644a04e6674e759fb2338319072fe7231564183))
+
 ### [0.32.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.25...v0.32.1-rc.26) (2021-09-13)
 
 
