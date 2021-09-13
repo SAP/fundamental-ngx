@@ -48,9 +48,7 @@ export class AutoCompleteDirective {
     @HostListener('blur')
     handleBlur(): void {
         if (Boolean(this.inputText) && !this.mobile) {
-            const inputTextLength = this.inputText.length;
             this._elementRef.nativeElement.value = this.inputText;
-            this._setSelectionRange(inputTextLength, inputTextLength);
         }
     }
 

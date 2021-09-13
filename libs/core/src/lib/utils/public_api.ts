@@ -11,6 +11,9 @@ export * from './directives/line-clamp/line-clamp.directive';
 export * from './directives/initial-focus/initial-focus.module';
 export * from './directives/auto-complete/auto-complete.directive';
 export * from './directives/auto-complete/auto-complete.module';
+export * from './directives/overflow-list/overflow-list-item.directive';
+export * from './directives/overflow-list/overflow-list.directive';
+export * from './directives/overflow-list/overflow-list.module';
 
 export * from './pipes/pipe.module';
 export * from './pipes/list-group.pipe';

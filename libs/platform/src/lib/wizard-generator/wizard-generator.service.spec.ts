@@ -86,10 +86,10 @@ const TEST_ITEMS: WizardGeneratorItem[] = [{
 
 @Component({
     template: `
-    <ng-container *ngIf="_wizardCreated">
+    <ng-container *ngIf="wizardCreated">
         <fdp-wizard-body
             [navigationButtonLabels]="navigationButtonLabels"
-            [hidden]="!_wizardCreated"
+            [hidden]="!wizardCreated"
             [appendToWizard]="appendToWizard"
             [contentHeight]="contentHeight"
             [isFirstStep]="isFirstStep"

@@ -167,6 +167,7 @@ export const API_FILES = {
     ],
     messageStrip: ['MessageStripComponent'],
     messageToast: ['MessageToastComponent', 'MessageToastConfig', 'MessageToastService', 'MessageToastRef'],
+    microProcessFlow: ['MicroProcessFlowComponent', 'MicroProcessFlowItemComponent', 'MicroProcessFlowIconComponent'],
     momentDatetimeAdapter: ['MomentDatetimeAdapter'],
     dialog: [
         'DialogService',
@@ -383,6 +384,18 @@ export const API_FILES = {
         'ResizableCardLayoutComponent',
         'ResizableCardItemComponent'
     ],
+    uploadCollection: [
+        'UploadCollectionComponent',
+        'UploadCollectionButtonGroupComponent',
+        'UploadCollectionFormItemComponent',
+        'UploadCollectionItemDirective',
+        'UploadCollectionThumbnailDirective',
+        'UploadCollectionTitleDirective',
+        'UploadCollectionDescriptionDirective',
+        'UploadCollectionTextSeparatorDirective',
+        'UploadCollectionStatusGroupDirective',
+        'UploadCollectionTitleContainerDirective'
+    ],
     timeline: [
         'TimelineComponent',
         'TimelineNodeDefDirective',
@@ -393,5 +406,5 @@ export const API_FILES = {
         'TimelineNodeHeaderInfoTextDirective',
         'TimelineNodeActionDirective',
         'TimelineHeaderInfoSubTitleDirective',
-    ],
+    ]
 };

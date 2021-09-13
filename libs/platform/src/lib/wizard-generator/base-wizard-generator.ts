@@ -67,14 +67,14 @@ export class BaseWizardGenerator implements OnDestroy {
     }
 
     set items(items: WizardGeneratorItem[]) {
-        this._wizardCreated = false;
+        this.wizardCreated = false;
         this._wizardGeneratorService.clearWizardStepComponents();
 
         this._wizardGeneratorService.prepareWizardItems(items)
         .then(newItems => {
             this._items = newItems;
             this._visibleItems = newItems;
-            this._wizardCreated = true;
+            this.wizardCreated = true;
             this._cd.detectChanges();
         });
     }
@@ -85,6 +85,10 @@ export class BaseWizardGenerator implements OnDestroy {
      */
     @Input()
     appendToWizard = true;
+
+    /** If navigation buttons should be visible. */
+    @Input()
+    navigationButtons = true;
 
     /**
      * Custom height to use for the wizard's content pane. By default, this value is calc(100vh - 144px), where 144px
@@ -99,6 +103,10 @@ export class BaseWizardGenerator implements OnDestroy {
     @Input()
     displaySummaryStep = false;
 
+    /** Whether or not all form items should have identical layout provided for form group. */
+    @Input()
+    unifiedLayout = true;
+
     /**
      * @description Emits wizard value when it's completed.
      */
@@ -106,9 +114,9 @@ export class BaseWizardGenerator implements OnDestroy {
     wizardFinished: EventEmitter<WizardGeneratorFormsValue> = new EventEmitter();
 
     /**
-     * @hidden
+     * Flag indicating that wizard is ready to be shown
      */
-    _wizardCreated = false;
+    wizardCreated = false;
 
     /**
      * @description Is current step is summary step.
@@ -318,7 +326,7 @@ export class BaseWizardGenerator implements OnDestroy {
     private async _setVisibleSteps(): Promise<void> {
         await this._wizardGeneratorService.refreshStepVisibility();
 
-        this._wizardCreated = true;
+        this.wizardCreated = true;
 
         this._cd.detectChanges();
     }
