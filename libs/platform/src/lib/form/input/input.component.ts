@@ -29,8 +29,7 @@ import {
     Optional,
     Output,
     Self,
-    SkipSelf,
-    ViewChild
+    SkipSelf
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 
@@ -64,10 +63,6 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
     @Input()
     required: boolean;
 
-    /** @hidden */
-    @ViewChild('inputElemRef')
-    inputElemRef: ElementRef;
-
     /** return the value in the text box */
     @Input()
     get value(): any {
@@ -83,7 +78,7 @@ export class InputComponent extends BaseInput implements OnInit, AfterViewInit {
 
     /** @hidden */
     elementRef(): ElementRef<any> {
-        return this.inputElemRef;
+        return this._elementRef;
     }
 
     constructor(
