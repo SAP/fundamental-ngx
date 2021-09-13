@@ -77,7 +77,6 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     /** @hidden */
     ngAfterContentInit(): void {
         if (this._rtlService) {
-            this._isRtl = this._rtlService.rtl.getValue();
             this._subscriptions.add(this._rtlService.rtl.subscribe(isRtl => this._isRtl = isRtl));
         }
 
@@ -89,6 +88,11 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
+    }
+
+    /** @hidden */
+    private get _direction(): number {
+        return this._isRtl ? -1 : 1;
     }
 
     /** @hidden Sets Resize listeners */
@@ -158,7 +162,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
         }
 
         return (event1: MouseEvent, event2: MouseEvent) => {
-            const x = this._isRtl ? event1.screenX - event2.screenX : event2.screenX - event1.screenX;
+            const x = (event2.screenX - event1.screenX) * this._direction;
             const y = event2.screenY - event1.screenY;
 
             return {
