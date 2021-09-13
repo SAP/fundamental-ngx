@@ -7,7 +7,6 @@ import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
-import { ComboboxModule } from '@fundamental-ngx/core/combobox';
 import { DatePickerModule } from '@fundamental-ngx/core/date-picker';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { FormModule } from '@fundamental-ngx/core/form';
@@ -20,7 +19,6 @@ import { MessageToastModule } from '@fundamental-ngx/core/message-toast';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import { RadioModule } from '@fundamental-ngx/core/radio';
 import { SelectModule } from '@fundamental-ngx/core/select';
-import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 
 import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
@@ -68,7 +66,6 @@ import { ApprovalFlowToolbarActionsComponent } from './approval-flow-toolbar-act
         BarModule,
         ButtonModule,
         IconModule,
-        ToolbarModule,
         GridListModule,
         DialogModule,
         MessageToastModule,
@@ -80,7 +77,6 @@ import { ApprovalFlowToolbarActionsComponent } from './approval-flow-toolbar-act
         MessageStripModule,
         CheckboxModule,
         MenuModule,
-        ComboboxModule,
         SelectModule,
         DatePickerModule,
         FormModule,
