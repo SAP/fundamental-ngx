@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.25...v0.32.1-rc.26) (2021-09-13)
+
+
+### Bug Fixes
+
+* **platform:** input, textarea, fix focus ([#6448](https://github.com/SAP/fundamental-ngx/issues/6448)) ([08f7891](https://github.com/SAP/fundamental-ngx/commit/08f789171ea60206bade8fc18967e748d9151744))
+
 ### [0.32.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.24...v0.32.1-rc.25) (2021-09-13)
 
 ### [0.32.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.23...v0.32.1-rc.24) (2021-09-10)
