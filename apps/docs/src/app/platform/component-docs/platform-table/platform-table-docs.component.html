@@ -466,6 +466,23 @@
 
 <separator></separator>
 
+<fd-docs-section-title
+    id="no-data-custom-element"
+    componentName="table"
+>
+    Custom component to render "No data" message
+</fd-docs-section-title>
+<description>
+    This example demonstrates ability to define custom component to display when no items are found.
+    Use <code>fdp-table-no-data-wrapper</code> element to define custom "No data" message.
+</description>
+<component-example>
+    <fdp-platform-table-no-items-template-example></fdp-platform-table-no-items-template-example>
+</component-example>
+<code-example [exampleFiles]="noDataCustomMessageFiles"></code-example>
+
+<separator></separator>
+
 <playground
     [schema]="schema"
     [schemaInitialValues]="data"
