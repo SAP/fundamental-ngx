@@ -165,6 +165,7 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
         this._destroyEventListeners();
         this._menuService.onDestroy();
         this._subscriptions.unsubscribe();
+        this._popoverService.onDestroy();
     }
 
     get trigger(): ElementRef {
