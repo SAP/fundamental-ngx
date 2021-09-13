@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.27...v0.32.1-rc.28) (2021-09-13)
+
+
+### Bug Fixes
+
+* **platform:** vhd, fix row margin ([#6490](https://github.com/SAP/fundamental-ngx/issues/6490)) ([de45fa7](https://github.com/SAP/fundamental-ngx/commit/de45fa70b349f3be44ee24ddfc8eceee1e350c12))
+
 ### [0.32.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.26...v0.32.1-rc.27) (2021-09-13)
 
 
