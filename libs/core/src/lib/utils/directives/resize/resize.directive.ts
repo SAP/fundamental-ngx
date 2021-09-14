@@ -7,6 +7,7 @@ import {
     Input,
     OnChanges,
     OnDestroy,
+    Optional,
     Output,
     SimpleChanges
 } from '@angular/core';
@@ -14,6 +15,7 @@ import { ResizeHandleDirective } from './resize-handle.directive';
 import { fromEvent, merge, Observable, Subscription } from 'rxjs';
 import { filter, map, mapTo, pairwise, takeUntil, tap } from 'rxjs/operators';
 import { closestElement } from '../../functions/closest-element';
+import { RtlService } from '../../services/rtl.service';
 
 interface ResizeMove {
     x: number;
@@ -56,7 +58,10 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    private _isRtl = false;
+
+    /** @hidden */
+    constructor(private _elementRef: ElementRef, @Optional() private _rtlService: RtlService) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -71,6 +76,10 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
 
     /** @hidden */
     ngAfterContentInit(): void {
+        if (this._rtlService) {
+            this._subscriptions.add(this._rtlService.rtl.subscribe(isRtl => this._isRtl = isRtl));
+        }
+
         if (!this.disabled) {
             this._setResizeListeners();
         }
@@ -79,6 +88,11 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
+    }
+
+    /** @hidden */
+    private get _direction(): number {
+        return this._isRtl ? -1 : 1;
     }
 
     /** @hidden Sets Resize listeners */
@@ -147,10 +161,15 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
                 break;
         }
 
-        return (event1: MouseEvent, event2: MouseEvent) => ({
-            x: (event2.screenX - event1.screenX) * verticalModifier,
-            y: (event2.screenY - event1.screenY) * horizontalModifier
-        });
+        return (event1: MouseEvent, event2: MouseEvent) => {
+            const x = (event2.screenX - event1.screenX) * this._direction;
+            const y = event2.screenY - event1.screenY;
+
+            return {
+                x: x * verticalModifier,
+                y: y * horizontalModifier
+            };
+        };
     }
 
     /** @hidden Return boundary container */
