@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.30...v0.32.1-rc.31) (2021-09-14)
+
+
+### Bug Fixes
+
+* **core:** dialog, fix resizable in RTL mode ([#6443](https://github.com/SAP/fundamental-ngx/issues/6443)) ([9446bbb](https://github.com/SAP/fundamental-ngx/commit/9446bbb61ac709509e6dcd7e93919c759c3c159a))
+
 ### [0.32.1-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.29...v0.32.1-rc.30) (2021-09-13)
 
 
