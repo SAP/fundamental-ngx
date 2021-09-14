@@ -17,6 +17,9 @@ import * as customErrorsSrc from '!raw-loader!./platform-form-generator-examples
 import * as formFieldLayoutGeneratorhtml from '!raw-loader!./platform-form-generator-examples/platform-form-generator-field-layout-example.component.html';
 import * as formFieldLayoutGeneratorSrc from '!raw-loader!./platform-form-generator-examples/platform-form-generator-field-layout-example.component.ts';
 
+import * as noColonsForLabelHtml from '!raw-loader!./platform-form-generator-examples/platform-form-generator-no-colons-example.component.html';
+import * as noColonsForLabelSrc from '!raw-loader!./platform-form-generator-examples/platform-form-generator-no-colons-example.component.ts';
+
 import { ExampleFile } from '../../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -105,6 +108,20 @@ export class PlatformFormGeneratorDocsComponent {
             code: formFieldLayoutGeneratorSrc,
             fileName: 'platform-form-generator-field-layout-example',
             component: 'PlatformFormGeneratorFieldLayoutExampleComponent'
+        }
+    ];
+
+    noLabelColonsFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: noColonsForLabelHtml,
+            fileName: 'platform-form-generator-no-colons-example'
+        },
+        {
+            language: 'typescript',
+            code: noColonsForLabelSrc,
+            fileName: 'platform-form-generator-no-colons-example',
+            component: 'PlatformFormGeneratorNoColonsExampleComponent'
         }
     ];
 }
