@@ -2,11 +2,14 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
+    HostBinding,
     Input,
     OnChanges,
     OnInit,
     ViewEncapsulation
 } from '@angular/core';
+import { coerceNumberProperty } from '@angular/cdk/coercion';
+
 import { applyCssClass } from '@fundamental-ngx/core/utils';
 import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 
@@ -57,8 +60,22 @@ export class InfoLabelComponent implements OnInit, OnChanges, CssClassBuilder {
     @Input()
     ariaLabelledBy: string;
 
+    /** tab index attribute */
+    @Input()
+    @HostBinding('attr.tabindex')
+    get tabindex(): number {
+        return this._tabIndex;
+    }
+
+    set tabindex(value: number) {
+        this._tabIndex = coerceNumberProperty(value, -1);
+    }
+
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {}
+    private _tabIndex = 0;
+
+    /** @hidden */
+    constructor(private readonly _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnInit(): void {
