@@ -50,7 +50,7 @@ describe('Token component test', function () {
         it('should check size of tokens in compact example', () => {
             const tokensLength = getElementArrayLength(compactExample + token);
             for (let i = 0; i < tokensLength; i++) {
-                expect(getElementClass(compactExample + token, i)).toContain('compact');
+                expect(getElementClass(compactExample + token, i)).toContain('compact', `token with index ${i} is not compact`);
             }
         });
     });
@@ -63,7 +63,7 @@ describe('Token component test', function () {
         it('should check selected example', () => {
             const tokensLength = getElementArrayLength(selectedExample + token);
             for (let i = 0; i < tokensLength; i++) {
-                expect(getElementClass(selectedExample + token, i)).toContain('selected');
+                expect(getElementClass(selectedExample + token, i)).toContain('selected', `token with index ${i} is not selected by default but should`);
             }
         });
     });
@@ -77,7 +77,7 @@ describe('Token component test', function () {
             const tokensLength = getElementArrayLength(readOnlyExample + token);
             for (let i = 0; i < tokensLength; i++) {
                 click(readOnlyExample + token, i);
-                expect(getElementClass(readOnlyExample + token, i)).not.toContain('selected');
+                expect(getElementClass(readOnlyExample + token, i)).not.toContain('selected', `token with index ${i} selected but should not`);
             }
         });
 
@@ -132,8 +132,8 @@ describe('Token component test', function () {
         setValue(section + input, 'asd');
         sendKeys('Enter');
         const tokensLengthAfter = getElementArrayLength(section + token);
-        expect(tokensLengthAfter).toEqual(tokensLengthBefore + 1);
-        expect(getText(section + token, tokensLengthAfter - 1)).toEqual('asd');
+        expect(tokensLengthAfter).toEqual(tokensLengthBefore + 1, `new token is not created`);
+        expect(getText(section + token, tokensLengthAfter - 1)).toEqual('asd', `token value is not equal entered value`);
     }
 
     function checkSelectingTokens(section: string): void {
@@ -141,7 +141,7 @@ describe('Token component test', function () {
         for (let i = tokensLength; i !== -1; i--) {
             scrollIntoView(section + token, i);
             click(section + token, i);
-            expect(getElementClass(section + token, i)).toContain('selected');
+            expect(getElementClass(section + token, i)).toContain('selected', `token with index ${i} is not selected`);
         }
     }
 
@@ -151,6 +151,6 @@ describe('Token component test', function () {
             scrollIntoView(section + closeBtn, i);
             click(section + closeBtn, i);
         }
-        expect(doesItExist(section + token)).toBe(false);
+        expect(doesItExist(section + token)).toBe(false, 'tokens are not closed');
     }
 });
