@@ -20,7 +20,7 @@ jobs:
       script: commitlint-travis
     - stage: "Lint and Test"
       if: type = pull_request
-      before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
+      before_script: export NODE_OPTIONS='–--max_old_space_size=8192'
       env:
         - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
         - BUILD_ID=$TRAVIS_BUILD_ID
