@@ -13,13 +13,11 @@ import { PlatformActionBarWithLongPageTitleExampleComponent } from './platform-a
 import { PlatformActionBarWithContextualMenuExampleComponent } from './platform-action-bar-examples/platform-action-bar-contextual-menu-example.component';
 import { PlatformActionBarWithPositiveNegativeActionsExampleComponent } from './platform-action-bar-examples/platform-action-bar-positive-and-negative-action-example.component';
 import { PlatformActionBarCozyModeExampleComponent } from './platform-action-bar-examples/platform-action-bar-cozy-mode-example.component';
-import {
-    PlatformActionBarModule,
-    PlatformButtonModule,
-    PlatformMenuModule,
-    PlatformActionButtonGroupModule
-} from '@fundamental-ngx/platform';
 
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
+import { PlatformActionBarModule } from '@fundamental-ngx/platform/action-bar';
+import { PlatformActionButtonGroupModule } from '@fundamental-ngx/platform/action-button-group';
 
 const routes: Routes = [
     {

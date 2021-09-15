@@ -1,0 +1,21 @@
+<ng-container *ngIf="wizardCreated">
+    <fdp-wizard-body
+        [navigationButtonLabels]="navigationButtonLabels"
+        [goNextButtonTemplate]="goNextButtonTemplate"
+        [finishButtonTemplate]="finishButtonTemplate"
+        [summaryPageTemplate]="summaryPageTemplate"
+        [responsivePaddings]="responsivePaddings"
+        [hidden]="!wizardCreated"
+        [appendToWizard]="appendToWizard"
+        [contentHeight]="contentHeight"
+        [isFirstStep]="isFirstStep"
+        [isLastStep]="isLastStep"
+        [isSummaryStep]="isSummaryStep"
+        [displaySummaryStep]="displaySummaryStep"
+        [navigationButtons]="navigationButtons"
+        [unifiedLayout]="unifiedLayout"
+        (statusChange)="stepStatusChanged($event.id, $event.status)"
+        (goNext)="goNext()"
+        (finish)="finish()"
+    ></fdp-wizard-body>
+</ng-container>

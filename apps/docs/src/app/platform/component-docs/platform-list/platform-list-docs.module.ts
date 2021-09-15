@@ -1,9 +1,21 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+
+import { API_FILES } from '../../api-files';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import { API_FILES } from '../../api-files';
+
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
+import { IconModule } from '@fundamental-ngx/core/icon';
+import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
+import { DragAndDropModule } from '@fundamental-ngx/core/utils';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
+import { PlatformInputModule, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 import { PlatformListHeaderComponent } from './platform-list-header/platform-list-header.component';
 import { PlatformListDocsComponent } from './platform-list-docs.component';
 import {
@@ -13,7 +25,6 @@ import {
     PlatformListWithNoSeperatorExampleComponent,
     PlatformListWithUnReadExampleComponent
 } from './platform-list-examples/platform-list-example.component';
-import { PlatformListModule, StandardListItemModule, PlatformInputModule, PlatformButtonModule, FdpFormGroupModule } from '@fundamental-ngx/platform';
 import { PlatformListBorderLessExampleComponent } from './platform-list-examples/platform-list-border-less-example.component';
 import { PlatformListWithButtonsExampleComponent } from './platform-list-examples/platform-list-with-buttons-example.component';
 import { PlatformListWithFooterExampleComponent } from './platform-list-examples/platform-list-with-footer-example.component';
@@ -24,13 +35,6 @@ import { PlatformListWithMoreButtonExampleComponent } from './platform-list-exam
 import { PlatformListWithDeleteButtonExampleComponent } from './platform-list-examples/platform-list-with-delete-button-example.component';
 import { PlatformListWithSelectionExampleComponent } from './platform-list-examples/platform-list-with-selection-example.component';
 import { PlatformListWithSingleSelectionExampleComponent } from './platform-list-examples/platform-list-with-single-selection-example.component';
-import { ScrollingModule } from '@angular/cdk/scrolling';
-import { ButtonModule } from '@fundamental-ngx/core/button';
-import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
-import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
-import { IconModule } from '@fundamental-ngx/core/icon';
-import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
-import { DragAndDropModule } from '@fundamental-ngx/core/utils';
 
 const routes: Routes = [
     {

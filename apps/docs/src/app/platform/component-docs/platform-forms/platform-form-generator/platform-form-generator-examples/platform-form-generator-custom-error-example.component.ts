@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { DynamicFormItem, FormGeneratorComponent, FormGeneratorService } from '@fundamental-ngx/platform';
+
+import { DynamicFormItem, FormGeneratorComponent, FormGeneratorService } from '@fundamental-ngx/platform/form';
 
 @Component({
   selector: 'fdp-platform-form-generator-custom-error-example',

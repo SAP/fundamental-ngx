@@ -6,10 +6,9 @@ import {
     TableDataSource,
     TableDataProvider,
     TableState,
-    TableRowSelectionChangeEvent,
     TableRowToggleOpenStateEvent,
     TableRowsRearrangeEvent
-} from '@fundamental-ngx/platform';
+} from '@fundamental-ngx/platform/table';
 
 @Component({
     selector: 'fdp-platform-table-tree-example',

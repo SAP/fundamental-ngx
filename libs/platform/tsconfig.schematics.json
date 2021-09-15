@@ -17,7 +17,7 @@
         "noUnusedLocals": true,
         "rootDir": "schematics",
         "outDir": "../../dist/libs/platform/schematics",
-        "skipDefaultLibCheck": true,
+        "skipDefaultLibCheck": false,
         "skipLibCheck": true,
         "sourceMap": true,
         "strictNullChecks": true,

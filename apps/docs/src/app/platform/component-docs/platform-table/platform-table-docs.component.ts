@@ -1,5 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 import {
     TableColumnFreezeEvent,
     TableDataSource,
@@ -7,7 +9,7 @@ import {
     TableGroupChangeEvent,
     TableRowSelectionChangeEvent,
     TableSortChangeEvent
-} from '@fundamental-ngx/platform';
+} from '@fundamental-ngx/platform/table';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import { Schema } from '../../../schema/models/schema.model';
@@ -48,10 +50,12 @@ import * as platformTreeTableDefaultTsSrc from '!raw-loader!./platform-table-exa
 import * as platformTableNavigatableRowSrc from '!raw-loader!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.html';
 import * as platformTableNavigatableRowTsSrc from '!raw-loader!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.ts';
 
+import * as platformTableCustomNoDataMessageSrc from '!raw-loader!./platform-table-examples/platform-table-no-items-template-example.component.html';
+import * as platformTableCustomNoDataMessageTsSrc from '!raw-loader!./platform-table-examples/platform-table-no-items-template-example.component.ts';
+import * as illustrationDialogNoMail from '!raw-loader!../../../../assets/images/sapIllus-Dialog-NoMail.svg';
+
 import { TableDataProviderExample } from './platform-table-examples/platform-table-data-provider-example';
 import { ExampleItem } from './platform-table-examples/platform-table-data-items-example';
-import { RtlService } from '@fundamental-ngx/core/utils';
-import { DatetimeAdapter } from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fdp-table-docs',
@@ -424,6 +428,29 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-navigatable-row-indicator-example',
             component: 'PlatformTableNavigatableRowIndicatorExampleComponent',
             name: 'platform-table-navigatable-row-indicator-example.component.ts'
+        }
+    ];
+
+    noDataCustomMessageFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableCustomNoDataMessageSrc,
+            fileName: 'platform-table-no-items-template-example',
+            name: 'platform-table-no-items-template-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: platformTableCustomNoDataMessageTsSrc,
+            fileName: 'platform-table-no-items-template-example',
+            component: 'PlatformTableNoItemsTemplateExampleComponent',
+            name: 'platform-table-no-items-template-example.component.ts'
+        },
+        {
+            language: 'svg',
+            code: illustrationDialogNoMail,
+            fileName: 'sapIllus-Dialog-NoMail',
+            name: 'sapIllus-Dialog-NoMail.svg',
+            path: 'src/assets/images'
         }
     ];
 

@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-standard-list-item-header',
-    templateUrl: './platform-standard-list-item-header.component.html',
-    styleUrls: ['./platform-standard-list-item-header.component.scss']
+    templateUrl: './platform-standard-list-item-header.component.html'
 })
 export class PlatformStandardListItemHeaderComponent { }

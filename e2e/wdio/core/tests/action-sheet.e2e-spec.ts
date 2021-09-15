@@ -8,7 +8,6 @@ import {
     refreshPage,
     saveElementScreenshot,
     scrollIntoView,
-    sendKeys,
     waitForElDisplayed,
     waitForNotDisplayed
 } from '../../driver/wdio';

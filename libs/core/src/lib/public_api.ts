@@ -1,5 +1,3 @@
-
-
 export * from './fundamental-ngx.module';
 
 export * from '@fundamental-ngx/core/action-bar';
@@ -85,5 +83,8 @@ export * from '@fundamental-ngx/core/status-indicator';
 export * from '@fundamental-ngx/core/shared';
 export * from '@fundamental-ngx/core/mobile-mode';
 export * from '@fundamental-ngx/core/resizable-card-layout';
+export * from '@fundamental-ngx/core/upload-collection';
+export * from '@fundamental-ngx/core/micro-process-flow';
+export * from '@fundamental-ngx/core/timeline';
 
 export * from '@fundamental-ngx/core/utils';

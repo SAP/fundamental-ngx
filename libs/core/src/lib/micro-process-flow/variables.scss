@@ -1,0 +1,37 @@
+$block: fd-micro-process-flow;
+
+$fd-micro-process-flow-item-compact-min-width: 1.375rem;
+$fd-micro-process-flow-item-min-width: 1.875rem;
+$fd-micro-process-flow-item-compact-width: 2rem;
+$fd-micro-process-flow-item-width: 2.75rem;
+$fd-micro-process-flow-item-padding: 0.1875rem;
+$fd-micro-process-flow-item-connector-compact-width: 0.625rem;
+$fd-micro-process-flow-item-connector-width: 1.125rem;
+$fd-micro-process-flow-outline-offset: 0.0625rem;
+
+$fd-micro-process-flow-intermediary-indicator-width: 0.25rem;
+
+$fd-micro-process-flow-max-container-visible-items: 8;
+
+$fd-micro-process-flow-max-container-compact-width: $fd-micro-process-flow-item-compact-width * ($fd-micro-process-flow-max-container-visible-items + 1) + $fd-micro-process-flow-outline-offset;
+
+$fd-micro-process-flow-max-container-width: $fd-micro-process-flow-item-width * ($fd-micro-process-flow-max-container-visible-items + 1) + $fd-micro-process-flow-outline-offset;
+
+$fd-micro-process-flow-semantic-colors: (
+    positive: (
+        default: var(--sapPositiveElementColor),
+        hover: var(--sapButton_Success_Hover_Background)
+    ),
+    information: (
+        default: var(--sapInformativeElementColor),
+        hover: var(--sapButton_Information_Hover_Background)
+    ),
+    negative: (
+        default: var(--sapNegativeElementColor),
+        hover: var(--sapButton_Negative_Hover_Background)
+    ),
+    critical: (
+        default: var(--sapCriticalElementColor),
+        hover: var(--sapButton_Critical_Hover_Background)
+    ),
+);

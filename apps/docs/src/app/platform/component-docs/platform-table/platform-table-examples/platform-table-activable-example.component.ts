@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
-import { TableDataProvider, TableDataSource, TableState } from '@fundamental-ngx/platform';
-import { TableRowActivateEvent } from '../../../../../../../../libs/platform/src/lib/components/table/models';
+import { TableDataProvider, TableDataSource, TableRowActivateEvent, TableState, } from '@fundamental-ngx/platform/table';
 
 @Component({
     selector: 'fdp-platform-table-activable-example',

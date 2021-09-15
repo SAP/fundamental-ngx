@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { DATA_PROVIDERS } from '@fundamental-ngx/platform';
+
+import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-platform-multi-input-compact-example',

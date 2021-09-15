@@ -9,7 +9,6 @@ import * as selectMobileTs from '!raw-loader!./platform-select-examples/platform
 
 import * as customTriggerHtml from '!raw-loader!./platform-select-examples/platform-select-custom-trigger/platform-select-custom-trigger.component.html';
 import * as customTriggerTs from '!raw-loader!./platform-select-examples/platform-select-custom-trigger/platform-select-custom-trigger.component.ts';
-import * as customTriggerScss from '!raw-loader!./platform-select-examples/platform-select-custom-trigger/platform-select-custom-trigger.component.scss';
 
 import * as selectFormHtml from '!raw-loader!./platform-select-examples/platform-select-forms/platform-select-forms.component.html';
 import * as selectFormTs from '!raw-loader!./platform-select-examples/platform-select-forms/platform-select-forms.component.ts';

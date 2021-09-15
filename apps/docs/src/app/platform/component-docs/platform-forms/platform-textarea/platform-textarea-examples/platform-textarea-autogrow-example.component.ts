@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ValidatorFn, Validators, FormGroup } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { ValidatorFn, Validators, FormGroup } from '@angular/forms';
     templateUrl: './platform-textarea-autogrow-example.component.html',
     encapsulation: ViewEncapsulation.None
 })
-export class PlatformTextareaAutogrowExampleComponent implements OnInit {
+export class PlatformTextareaAutogrowExampleComponent {
     form: FormGroup;
     private textareaValidator: ValidatorFn[];
     tValue = '1\n2\n3\n4\n5\n6';
@@ -16,6 +16,4 @@ export class PlatformTextareaAutogrowExampleComponent implements OnInit {
 
         this.textareaValidator = [Validators.maxLength(6)];
     }
-
-    ngOnInit(): void {}
 }

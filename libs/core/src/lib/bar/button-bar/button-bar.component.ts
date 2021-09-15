@@ -13,10 +13,12 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 import { Subscription } from 'rxjs';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
+let randomButtonBarId = 0;
 @Component({
   selector: 'fd-button-bar',
   template: `
       <button fd-button
+              [id]="id"
               [type]="type"
               [glyphPosition]="glyphPosition"
               [glyph]="glyph"
@@ -25,6 +27,7 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
               [label]="label"
               [attr.title]="title"
               [attr.aria-label]="ariaLabel"
+              [attr.aria-labelledby]="ariaLabelledby ? ariaLabelledby + ' ' + id : null"
               [fdMenu]="fdMenu"
               [disabled]="disabled"
       >
@@ -56,6 +59,14 @@ export class ButtonBarComponent extends BaseButton implements OnInit, OnDestroy 
     /** Aria label attribute value. */
     @Input()
     ariaLabel: string;
+
+    /** the aria-labelledby ids to be associated with this element */
+    @Input()
+    ariaLabelledby: string;
+
+    /** id for this element */
+    @Input()
+    id = `fd-button-bar-id-${randomButtonBarId++}`;
 
     /** @hidden */
     @HostBinding('class.fd-bar__element')

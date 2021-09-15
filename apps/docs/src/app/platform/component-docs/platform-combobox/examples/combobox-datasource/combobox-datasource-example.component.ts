@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { of } from 'rxjs';
 
-import { ArrayComboBoxDataSource, ComboboxSelectionChangeEvent, DATA_PROVIDERS } from '@fundamental-ngx/platform';
+import { ArrayComboBoxDataSource, DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
+import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-combobox-datasource-example',

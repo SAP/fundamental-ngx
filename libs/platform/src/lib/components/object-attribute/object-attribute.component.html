@@ -1,9 +1,0 @@
-{{label}}
-<ng-content></ng-content>
-<ng-container *ngIf="linkText !== null && linkText !== undefined">
-    <span (click)="onObjectAttributeClick($event)" tabindex="0" [attr.aria-label]="linkText" [attr.title]="linkText"
-        [ngClass]="islink? 'fd-object-attribute--link': ''" role="link" [attr.aria-disabled]="disabled"
-        [attr.disabled]="disabled">
-        {{linkText}}
-    </span>
-</ng-container>
