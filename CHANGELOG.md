@@ -1,4 +1,12 @@
 
+### [0.32.1-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.38...v0.32.1-rc.39) (2021-09-15)
+
+
+### Bug Fixes
+
+* **core:** add temporary style fix for action buttons in Timeline ([#6559](https://github.com/SAP/fundamental-ngx/issues/6559)) ([a845975](https://github.com/SAP/fundamental-ngx/commit/a84597524e4b5aeab46c28794c4229fcd6611b20))
+* **core:** fix bug with pagination itemsPerPage not updating correctly ([#6431](https://github.com/SAP/fundamental-ngx/issues/6431)) ([c4294f7](https://github.com/SAP/fundamental-ngx/commit/c4294f74339567dff279bfa20f9a6b8a4598b60a))
+
 ### [0.32.1-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.37...v0.32.1-rc.38) (2021-09-15)
 
 
