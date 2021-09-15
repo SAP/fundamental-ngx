@@ -198,11 +198,11 @@
     }
 }
 
-@mixin fd-set-padding-right($right: 0) {
-    padding-right: $right;
+@mixin fd-set-margin-left($left: 0) {
+    margin-left: $left;
 
     @include fd-rtl() {
-        padding-right: 0;
-        padding-left: $right;
+        margin-left: 0;
+        margin-right: $left;
     }
 }
