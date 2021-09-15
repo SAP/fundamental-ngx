@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.33...v0.32.1-rc.34) (2021-09-15)
+
+
+### Features
+
+* **platform:** add automatic colons for the labels ([#6528](https://github.com/SAP/fundamental-ngx/issues/6528)) ([75cc019](https://github.com/SAP/fundamental-ngx/commit/75cc0192ac5e0e842926d5152a28fc3e88ac721d))
+
 ### [0.32.1-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.32...v0.32.1-rc.33) (2021-09-14)
 
 ### [0.32.1-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.31...v0.32.1-rc.32) (2021-09-14)

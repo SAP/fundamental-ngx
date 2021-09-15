@@ -185,6 +185,9 @@ export interface DynamicFormItemGuiOptions {
      * @description Object contains additional payload. Useful for custom elements to manipulate it's view.
      */
     additionalData?: any;
+
+    /** If label should be appended with colon. True by default */
+    appendColon?: boolean;
 }
 
 export interface DynamicFormValue {
