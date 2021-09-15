@@ -245,7 +245,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         if (changes && changes.itemsPerPage) {
             this._initialItemsPerPage = changes.itemsPerPage.currentValue;
         }
-        if (changes && changes.totalItems) {
+        if (changes && changes.totalItems && this._initialItemsPerPage) {
             this.itemsPerPage = this._initialItemsPerPage;
         }
         if (changes && changes.currentPage) {
