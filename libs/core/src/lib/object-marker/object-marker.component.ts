@@ -13,7 +13,7 @@ import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 @Component({
     // tslint:disable-next-line:component-selector
     selector: '[fd-object-marker]',
-    template: ` <i class="fd-object-marker__icon" [ngClass]="' sap-icon--' + glyph" *ngIf="glyph"></i>
+    template: ` <i class="fd-object-marker__icon" [ngClass]="' sap-icon--' + glyph" *ngIf="glyph" aria-hidden="true"></i>
         <span *ngIf="label" class="fd-object-marker__text">{{ label }}</span>
         <ng-content></ng-content>`,
     styleUrls: ['./object-marker.component.scss'],
