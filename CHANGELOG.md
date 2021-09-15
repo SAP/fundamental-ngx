@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.37...v0.32.1-rc.38) (2021-09-15)
+
+
+### Bug Fixes
+
+* **core:** rtl fix for connector margin ([#6555](https://github.com/SAP/fundamental-ngx/issues/6555)) ([4124db6](https://github.com/SAP/fundamental-ngx/commit/4124db6821c91d44e2f79106d0a5ca18e62e5f3e))
+
 ### [0.32.1-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.36...v0.32.1-rc.37) (2021-09-15)
 
 ### [0.32.1-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.35...v0.32.1-rc.36) (2021-09-15)
