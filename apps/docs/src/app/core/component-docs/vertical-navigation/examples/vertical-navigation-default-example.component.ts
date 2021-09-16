@@ -1,7 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { ListNavigationItemComponent } from '@fundamental-ngx/core';
 
 @Component({
     selector: 'fd-vertical-navigation-default-example',
     templateUrl: './vertical-navigation-default-example.component.html'
 })
-export class VerticalNavigationDefaultExampleComponent {}
+export class VerticalNavigationDefaultExampleComponent {
+
+    @ViewChild('cal')
+    cal: ListNavigationItemComponent;
+
+    expandCal(): void {
+        this.cal.expanded = true;
+    }
+
+}

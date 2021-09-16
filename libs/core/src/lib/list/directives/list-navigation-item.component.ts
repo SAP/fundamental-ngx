@@ -1,16 +1,30 @@
-import { AfterContentInit, ContentChild, Directive, HostBinding, HostListener, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+    AfterContentInit,
+    Component,
+    ContentChild,
+    HostBinding,
+    HostListener,
+    Input
+} from '@angular/core';
 import { ListComponent } from '../list.component';
 import { ListNavigationItemArrowDirective } from './list-navigation-item-arrow.directive';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 
-@Directive({
-    selector: '[fd-list-navigation-item], [fdListNavigaitonItem]'
+@Component({
+    // tslint:disable-next-line:component-selector
+    selector: '[fd-list-navigation-item], [fdListNavigaitonItem]',
+    template: '<ng-content></ng-content><span *ngIf="indicated || _childIndicatedAndCollapsed()" class="fd-list__navigation-item-indicator"></span>'
 })
-export class ListNavigationItemDirective implements AfterContentInit, OnChanges {
+export class ListNavigationItemComponent implements AfterContentInit {
     /** Whether or not the list item is expanded. */
     @Input()
     @HostBinding('class.is-expanded')
     expanded = false;
+
+    /** Whether or not this list item is indicated for navigation. */
+    @Input()
+    @HostBinding('class.fd-list__navigation-item--indicated')
+    indicated = false;
 
     /** @hidden */
     @HostBinding('class.fd-list__navigation-item')
@@ -53,17 +67,22 @@ export class ListNavigationItemDirective implements AfterContentInit, OnChanges 
     }
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
-        if (changes && changes.expanded) {
-            this._handleExpandedChanges(changes.expanded.currentValue);
-        }
-    }
-
-    /** @hidden */
     @HostListener('click', ['$event'])
     onItemClick(event): void {
         event.stopPropagation();
         this._handleExpandedChanges(!this.expanded);
+    }
+
+    /** @hidden */
+    _childIndicatedAndCollapsed(): boolean {
+        let retVal = false;
+        this._listComponent?._navItems?.forEach(navItem => {
+            if (navItem.indicated && !navItem.expanded) {
+                retVal = true;
+            }
+        });
+
+        return retVal;
     }
 
     /** @hidden */
