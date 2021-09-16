@@ -97,6 +97,10 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
     @Input()
     ariaLabel: string;
 
+    /** Sets the `aria-describedby` attribute to the element. */
+    @Input()
+    ariaDescribedby: string;
+
     /**
      * Defines the type of Grid List Item
      * Types:
@@ -231,6 +235,14 @@ export class GridListItemComponent<T> implements OnChanges, AfterViewInit, OnDes
 
     /** @hidden */
     _index?: number;
+
+    /** @hidden */
+    get posInSet(): number | null {
+        return this._index || this._index === 0 ? this._index + 1 : null;
+    }
+
+    /** @hidden */
+    _totalItemsCount?: number;
 
     /** @hidden */
     private _selectionMode?: GridListSelectionMode;

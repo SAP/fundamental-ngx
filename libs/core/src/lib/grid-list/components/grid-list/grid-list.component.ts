@@ -139,6 +139,10 @@ export class GridListComponent<T> implements OnChanges, AfterContentInit, OnDest
                 component._index = index;
             }
 
+            if (component._totalItemsCount !== components.length) {
+                component._totalItemsCount = components.length;
+            }
+
             if (!component.selectionMode) {
                 component.selectionMode = this.selectionMode;
             }
@@ -151,8 +155,8 @@ export class GridListComponent<T> implements OnChanges, AfterContentInit, OnDest
 
     /** @hidden */
     private _updateGridListItemsProperty(key: string, value: string | string[]): void {
-        this._gridListItems.forEach((componenet) => {
-            componenet[key] = value;
+        this._gridListItems.forEach((component) => {
+            component[key] = value;
         });
     }
 }
