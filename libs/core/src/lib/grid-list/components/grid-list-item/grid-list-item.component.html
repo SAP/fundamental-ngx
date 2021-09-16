@@ -17,6 +17,7 @@
     (mouseover)="_setActive($event, false)"
     (mouseout)="_setActive($event, true)"
     [attr.aria-selected]="selectionMode === 'none' ? null : !!_selectedItem || _selectedItem === 0"
+    [attr.aria-describedby]="ariaDescribedby"
 >
     <span
         *ngIf="status"
@@ -143,6 +144,8 @@
         [id]="id + '-radio'"
         [name]="'fd-grid-list-item-toolbar-' + selectionMode"
         [attr.aria-label]="ariaLabel"
+        [attr.aria-posinset]="posInSet"
+        [attr.aria-setsize]="_totalItemsCount"
         [value]="value"
         [ngModel]="_selectedItem"
         (ngModelChange)="$event && _selectionItem($event)"
@@ -162,6 +165,8 @@
         class="fd-checkbox fd-checkbox--compact fd-grid-list__checkbox-input"
         [id]="id + '-checkbox'"
         [attr.aria-label]="ariaLabel"
+        [attr.aria-posinset]="posInSet"
+        [attr.aria-setsize]="_totalItemsCount"
         [ngModel]="_selectedItem"
         (ngModelChange)="_selectionItem($event)"
     />

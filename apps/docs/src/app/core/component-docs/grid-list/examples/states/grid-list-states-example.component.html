@@ -1,15 +1,15 @@
-<fd-grid-list>
+<fd-grid-list ariaLabel="Products">
     <fd-grid-list-title-bar title="Products">
         <span fd-grid-list-title-bar-additional-title-item>(7)</span>
     </fd-grid-list-title-bar>
 
-    <fd-grid-list-group-header> State: Unread </fd-grid-list-group-header>
+    <fd-grid-list-group-header id="states-group-header-1"> State: Unread </fd-grid-list-group-header>
 
-    <fd-grid-list-item state="unread">
+    <fd-grid-list-item state="unread" ariaDescribedby="states-group-header-1">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
         <div class="fd-grid-list-item-body--container">
-            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
+            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s" ariaLabel="Image 1"></fd-avatar>
             <div class="fd-grid-list-item-body--content">
                 <h6 fd-title>Title 1</h6>
                 <p>Description 1</p>
@@ -24,13 +24,13 @@
         </div>
     </fd-grid-list-item>
 
-    <fd-grid-list-group-header> State: Error </fd-grid-list-group-header>
+    <fd-grid-list-group-header id="states-group-header-2"> State: Error </fd-grid-list-group-header>
 
-    <fd-grid-list-item state="error">
+    <fd-grid-list-item state="error" ariaDescribedby="states-group-header-2">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
         <div class="fd-grid-list-item-body--container">
-            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
+            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s" ariaLabel="Image 2"></fd-avatar>
             <div class="fd-grid-list-item-body--content">
                 <h6 fd-title>Title 2</h6>
                 <p>Description 2</p>
@@ -45,11 +45,11 @@
         </div>
     </fd-grid-list-item>
 
-    <fd-grid-list-item state="error">
+    <fd-grid-list-item state="error" ariaDescribedby="states-group-header-2">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
         <div class="fd-grid-list-item-body--container">
-            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
+            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s" ariaLabel="Image 2.1"></fd-avatar>
             <div class="fd-grid-list-item-body--content">
                 <h6 fd-title>Title 2.1</h6>
                 <p>Description 2.1</p>
@@ -68,13 +68,13 @@
         </fd-grid-list-item-footer-bar>
     </fd-grid-list-item>
 
-    <fd-grid-list-group-header> State: Locked </fd-grid-list-group-header>
+    <fd-grid-list-group-header id="states-group-header-3"> State: Locked </fd-grid-list-group-header>
 
-    <fd-grid-list-item state="locked" (locked)="locked($event)">
+    <fd-grid-list-item state="locked" (locked)="locked($event)" ariaDescribedby="states-group-header-3">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
         <div class="fd-grid-list-item-body--container">
-            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
+            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s" ariaLabel="Image 3"></fd-avatar>
             <div class="fd-grid-list-item-body--content">
                 <h6 fd-title>Title 3</h6>
                 <p>Description 3</p>
@@ -89,11 +89,11 @@
         </div>
     </fd-grid-list-item>
 
-    <fd-grid-list-item state="locked">
+    <fd-grid-list-item state="locked" ariaDescribedby="states-group-header-3">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
         <div class="fd-grid-list-item-body--container">
-            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
+            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s" ariaLabel="Image 3.1"></fd-avatar>
             <div class="fd-grid-list-item-body--content">
                 <h6 fd-title>Title 3.1</h6>
                 <p>Description 3.1</p>
@@ -112,13 +112,13 @@
         </fd-grid-list-item-footer-bar>
     </fd-grid-list-item>
 
-    <fd-grid-list-group-header> State: Draft </fd-grid-list-group-header>
+    <fd-grid-list-group-header id="states-group-header-4"> State: Draft </fd-grid-list-group-header>
 
     <fd-grid-list-item state="draft" (draft)="draft($event)">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
         <div class="fd-grid-list-item-body--container">
-            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
+            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s" ariaLabel="Image 4"></fd-avatar>
             <div class="fd-grid-list-item-body--content">
                 <h6 fd-title>Title 4</h6>
                 <p>Description 4</p>
@@ -133,11 +133,11 @@
         </div>
     </fd-grid-list-item>
 
-    <fd-grid-list-item state="draft">
+    <fd-grid-list-item state="draft" ariaDescribedby="states-group-header-4">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
         <div class="fd-grid-list-item-body--container">
-            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
+            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s" ariaLabel="Image 4.1"></fd-avatar>
             <div class="fd-grid-list-item-body--content">
                 <h6 fd-title>Title 4.1</h6>
                 <p>Description 4.1</p>
