@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.43...v0.32.1-rc.44) (2021-09-16)
+
+
+### Bug Fixes
+
+* **platform:** remove unused module imports ([#6514](https://github.com/SAP/fundamental-ngx/issues/6514)) ([3ce9e0e](https://github.com/SAP/fundamental-ngx/commit/3ce9e0e919a13045beae68906f2f9d29a78e9513))
+
 ### [0.32.1-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.42...v0.32.1-rc.43) (2021-09-16)
 
 
