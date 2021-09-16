@@ -1,4 +1,4 @@
-<fd-grid-list>
+<fd-grid-list ariaLabel="Products">
     <fd-grid-list-title-bar title="Products">
         <span
             fd-grid-list-title-bar-additional-title-item
@@ -10,13 +10,13 @@
         >Grouped by: Company (Company A, Company B)</fd-grid-list-filter-bar
     >
 
-    <fd-grid-list-group-header> Company: Company A </fd-grid-list-group-header>
+    <fd-grid-list-group-header id="group-header-1"> Company: Company A </fd-grid-list-group-header>
 
-    <fd-grid-list-item *ngFor="let item of group1">
+    <fd-grid-list-item *ngFor="let item of group1" ariaDescribedby="group-header-1">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
         <div class="fd-grid-list-item-body--container">
-            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
+            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s" [ariaLabel]="'Image ' + item.id"></fd-avatar>
             <div class="fd-grid-list-item-body--content">
                 <h6 fd-title [innerText]="item.title"></h6>
                 <p [innerText]="item.description"></p>
@@ -31,13 +31,13 @@
         </div>
     </fd-grid-list-item>
 
-    <fd-grid-list-group-header> Company: Company B </fd-grid-list-group-header>
+    <fd-grid-list-group-header id="group-header-2"> Company: Company B </fd-grid-list-group-header>
 
-    <fd-grid-list-item *ngFor="let item of group2">
+    <fd-grid-list-item *ngFor="let item of group2" ariaDescribedby="group-header-2">
         <fd-grid-list-item-toolbar> Custom Text </fd-grid-list-item-toolbar>
 
         <div class="fd-grid-list-item-body--container">
-            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
+            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s" [ariaLabel]="'Image ' + item.id"></fd-avatar>
             <div class="fd-grid-list-item-body--content">
                 <h6 fd-title [innerText]="item.title"></h6>
                 <p [innerText]="item.description"></p>

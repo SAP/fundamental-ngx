@@ -1,5 +1,5 @@
-<fd-grid-list>
-    <fd-grid-list-title-bar [title]="'Products'">
+<fd-grid-list ariaLabel="Products">
+    <fd-grid-list-title-bar title="Products">
         <span fd-grid-list-title-bar-additional-title-item [innerText]="'(' + list.length + ')'"></span>
 
         <fd-grid-list-title-bar-spacer></fd-grid-list-title-bar-spacer>
@@ -41,7 +41,7 @@
         (navigate)="navigate($event)"
     >
         <div class="fd-grid-list-item-body--container">
-            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s"></fd-avatar>
+            <fd-avatar image="https://picsum.photos/id/1062/300/200" size="s" [ariaLabel]="'Image ' + item.id"></fd-avatar>
             <div class="fd-grid-list-item-body--content">
                 <h6 fd-title [innerText]="item.title"></h6>
                 <p [innerText]="item.description"></p>
