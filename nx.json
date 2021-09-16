@@ -60,7 +60,6 @@
                 "core-form",
                 "core-formatted-text",
                 "core-grid-list",
-                "core-illustrated-message",
                 "core-infinite-scroll",
                 "core-info-label",
                 "core-inline-help",
@@ -274,10 +273,6 @@
         "core-grid-list": {
             "tags": ["fd"],
             "implicitDependencies": ["core-utils", "core-toolbar", "core-form"]
-        },
-        "core-illustrated-message": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
         },
         "core-infinite-scroll": {
             "tags": ["fd"],
@@ -565,7 +560,6 @@
                 "core-dialog",
                 "core-form",
                 "core-icon",
-                "core-illustrated-message",
                 "core-menu",
                 "core-message-strip",
                 "core-message-toast",
