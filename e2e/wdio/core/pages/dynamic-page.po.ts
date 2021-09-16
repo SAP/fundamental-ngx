@@ -3,7 +3,7 @@ import { CoreBaseComponentPo } from './core-base-component.po';
 
 export class DynamicPagePo extends CoreBaseComponentPo {
     private url = '/dynamic-page';
-    
+
     defaultExample = 'fd-dynamic-page-basic-example ';
     tabsExample = 'fd-dynamic-page-tabs-example ';
     columnLayoutExample = 'fd-dynamic-page-column-layout-example ';
@@ -26,7 +26,7 @@ export class DynamicPagePo extends CoreBaseComponentPo {
     collapseButton = '.fd-dynamic-page__collapse-button';
     pinButton = '.fd-dynamic-page__pin-button';
     tab = '.fd-dynamic-page .fd-tabs__link';
-    tabsContent = '.fd-tabs__panel ' + this.dynamicPageContent;
+    tabsContent = '.fd-tabs__panel ' + this.dynamicPageContent + 'div:first-of-type';
     flexileColumn = '.fd-flexible-column-layout__column ';
     article = '.fd-dynamic-page-section-example';
     breadcumbLink = '.fd-dynamic-page__breadcrumb-wrapper a';
