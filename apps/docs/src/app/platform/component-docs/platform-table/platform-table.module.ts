@@ -37,6 +37,8 @@ import { PlatformTableLoadingExampleComponent } from './platform-table-examples/
 import { PlatformTableNavigatableRowIndicatorExampleComponent } from './platform-table-examples/platform-table-navigatable-row-indicator-example.component';
 import { PlatformTableCustomWidthExampleComponent } from './platform-table-examples/platform-table-custom-width-example.component';
 import { PlatformTableActivableExampleComponent } from './platform-table-examples/platform-table-activable-example.component';
+import { PlatformTableNoItemsTemplateExampleComponent } from './platform-table-examples/platform-table-no-items-template-example.component';
+import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
 
 const routes: Routes = [
     {
@@ -61,7 +63,8 @@ const routes: Routes = [
         LayoutPanelModule,
         FdDatetimeModule,
         PlatformInputModule,
-        PlatformSearchFieldModule
+        PlatformSearchFieldModule,
+        IllustratedMessageModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -85,7 +88,8 @@ const routes: Routes = [
         PlatformTableLoadingExampleComponent,
         PlatformTableNavigatableRowIndicatorExampleComponent,
         PlatformTableCustomWidthExampleComponent,
-        PlatformTableActivableExampleComponent
+        PlatformTableActivableExampleComponent,
+        PlatformTableNoItemsTemplateExampleComponent
     ],
     providers: [RtlService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

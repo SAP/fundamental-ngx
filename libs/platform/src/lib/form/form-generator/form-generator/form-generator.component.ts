@@ -13,6 +13,7 @@ import {
 import { FormGroup, NgForm } from '@angular/forms';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
+import { LabelLayout } from '@fundamental-ngx/platform/shared';
 
 import { FormGeneratorService } from '../form-generator.service';
 import { DynamicFormItem, DynamicFormValue } from '../interfaces/dynamic-form-item';
@@ -66,7 +67,8 @@ export class FormGeneratorComponent implements OnDestroy {
     /**
      * @description Form main title.
      */
-    @Input() mainTitle: string;
+    @Input()
+    mainTitle: string;
 
     /**
      * @description Specify the column layout in the format `XLn-Ln-Mn-Sn`
@@ -74,7 +76,16 @@ export class FormGeneratorComponent implements OnDestroy {
      * eg: XL2-L2-M2-S1 would create 2-column layouts for XL, L,
      * and M sizes and single-column layout for S size.
      */
-    @Input() columnLayout: string;
+    @Input()
+    columnLayout: string;
+
+    /** Define form field label placement. */
+    @Input()
+    labelLayout: LabelLayout;
+
+    /** Whether or not all form items should have identical layout provided for form group. */
+    @Input()
+    unifiedLayout = true;
 
     /**
      * @description Event which notifies parent component that the form has been successfuly created
@@ -99,7 +110,8 @@ export class FormGeneratorComponent implements OnDestroy {
     /**
      * @description Represents the form instance. @see NgForm
      */
-    @ViewChild(NgForm) ngForm: NgForm;
+    @ViewChild(NgForm)
+    ngForm: NgForm;
 
     /**
      * @description Dynamically generated form. @see FormGeneratorService

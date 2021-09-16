@@ -59,6 +59,7 @@ import { TableScrollerDirective } from './directives/table-scroller.directive';
 import { FdpCellSelectableDirective } from './directives/table-cell-selectable.directive';
 import { PlatformTableCellResizableDirective } from './directives/table-cell-resizable.directive';
 import { PlatformTableColumnResizerComponent } from './components/table-column-resizer/table-column-resizer.component';
+import { NoDataWrapperComponent } from './components/no-data-wrapper/no-data-wrapper.component';
 
 @NgModule({
     imports: [
@@ -122,7 +123,8 @@ import { PlatformTableColumnResizerComponent } from './components/table-column-r
         TableScrollableDirective,
         TableScrollerDirective,
         PlatformTableCellResizableDirective,
-        PlatformTableColumnResizerComponent
+        PlatformTableColumnResizerComponent,
+        NoDataWrapperComponent
     ],
     exports: [
         TableComponent,
@@ -140,7 +142,8 @@ import { PlatformTableColumnResizerComponent } from './components/table-column-r
         TableP13SortComponent,
         TableP13FilterComponent,
         TableP13GroupComponent,
-        TableP13ColumnsComponent
+        TableP13ColumnsComponent,
+        NoDataWrapperComponent
     ],
     entryComponents: [
         SortingComponent,

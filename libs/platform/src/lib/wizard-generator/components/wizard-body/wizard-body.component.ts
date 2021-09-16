@@ -97,6 +97,10 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     @Input()
     navigationButtons = true;
 
+    /** Whether or not all form items should have identical layout provided for form group. */
+    @Input()
+    unifiedLayout = true;
+
     /**
      * @description Array of visible Wizard Steps.
      */

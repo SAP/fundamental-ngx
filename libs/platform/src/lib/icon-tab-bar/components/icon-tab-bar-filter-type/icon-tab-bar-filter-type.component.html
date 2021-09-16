@@ -1,0 +1,58 @@
+<ul
+    class="fd-icon-tab-bar__header"
+    role="tablist"
+    fdOverflowList
+    [isRtl]="isRtl"
+    [overflowOffset]="100"
+    (overflowChanged)="_recalculateVisibleItems($event)"
+>
+    <li
+        *ngIf="showTotalTab"
+        class="fd-icon-tab-bar__item"
+        role="presentation"
+        fdOverflowListItem
+    >
+        <a (click)="_selectItem(_totalTab)"
+           [attr.aria-selected]="_totalTab?.uId === _selectedUid"
+           class="fd-icon-tab-bar__tab"
+           role="tab"
+        >
+            <div class="fd-icon-tab-bar__container fd-icon-tab-bar__container--filter">
+                <span *ngIf="_totalTab?.counter" class="fd-icon-tab-bar__filter-counter">{{_totalTab?.counter}}</span>
+                <span class="fd-icon-tab-bar__filter-label">{{_totalTab?.label}}</span>
+            </div>
+        </a>
+    </li>
+    <li *ngFor="let item of _tabs | slice:1"
+        [class]="item.cssClasses"
+        class="fd-icon-tab-bar__item"
+        role="presentation"
+        fdOverflowListItem
+        [attr.aria-hidden]="item.hidden"
+    >
+        <a
+            (click)="_selectItem(item)"
+            [attr.aria-selected]="item.uId === _selectedUid"
+            class="fd-icon-tab-bar__tab"
+            role="tab"
+        >
+            <div class="fd-icon-tab-bar__container">
+                        <span class="fd-icon-tab-bar__icon">
+                            <fd-icon [glyph]="item.icon"></fd-icon>
+                        </span>
+                <span *ngIf="item.counter" class="fd-icon-tab-bar__counter">{{item.counter}}</span>
+            </div>
+            <div class="fd-icon-tab-bar__label">{{item.label}}</div>
+        </a>
+    </li>
+    <li
+        *ngIf="_extraTabs.length"
+        role="presentation"
+        class="fd-icon-tab-bar__item fd-icon-tab-bar__item--overflow"
+        fdpExtraButton
+        [isRtl]="isRtl"
+        [anchorIndexInsideParent]="_lastVisibleTabIndex"
+    >
+        <fdp-icon-tab-bar-popover [extraTabs]="_extraTabs" (selectedExtraItem)="_selectExtraItem($event)"></fdp-icon-tab-bar-popover>
+    </li>
+</ul>

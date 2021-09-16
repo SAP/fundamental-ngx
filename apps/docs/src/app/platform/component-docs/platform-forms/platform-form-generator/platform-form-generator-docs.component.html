@@ -85,6 +85,8 @@
 </component-example>
 <code-example [exampleFiles]="customErrors"></code-example>
 
+<separator></separator>
+
 <fd-docs-section-title id="field-layout" componentName="form-generator">
     Form Generator with form field column layout and inline layout
 </fd-docs-section-title>
@@ -95,3 +97,17 @@
     <fdp-platform-form-generator-field-layout-example></fdp-platform-form-generator-field-layout-example>
 </component-example>
 <code-example [exampleFiles]="defaultFormGenerator"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="no-colons" componentName="form-generator">
+    Form Generator labels without colons
+</fd-docs-section-title>
+<description>
+    By default, form generator labels rendered with colon at the end of the label.
+    To disable this behaviour please specify <code>appendColon: false</code> in <code>guiOptions</code> object.
+</description>
+<component-example>
+    <fdp-platform-form-generator-no-colons-example></fdp-platform-form-generator-no-colons-example>
+</component-example>
+<code-example [exampleFiles]="noLabelColonsFiles"></code-example>

@@ -405,6 +405,11 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
     .fd-table__empty-table-message {
         padding: 1rem;
         text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+        width: 100%;
     }
 
     .fd-dnd-item {

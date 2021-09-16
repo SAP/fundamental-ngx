@@ -90,6 +90,14 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
         this.confirmationDialogTemplate = this._dialogRef.data.confirmationDialogTemplate;
         this.displaySummaryStep = this._dialogRef.data.displaySummaryStep || false;
 
+        if (this._dialogRef.data.unifiedLayout !== undefined) {
+            this.unifiedLayout = this._dialogRef.data.unifiedLayout;
+        }
+
+        if (this._dialogRef.data.navigationButtons !== undefined) {
+            this.navigationButtons = this._dialogRef.data.navigationButtons;
+        }
+
         if (this._dialogRef.data.confirmationDialogText) {
             this.confirmationDialogText = this._dialogRef.data.confirmationDialogText;
         }
