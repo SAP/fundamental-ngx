@@ -109,8 +109,7 @@
                 "core-message-toast",
                 "core-multi-input",
                 "core-wizard",
-                "core-tree",
-                "core-upload-collection"
+                "core-tree"
             ]
         },
         "moment-adapter": {
@@ -512,18 +511,6 @@
             "tags": ["fd"],
             "implicitDependencies": ["core-utils", "core-shared", "core-popover"]
         },
-
-        "core-upload-collection": {
-            "tags": ["fd"],
-            "implicitDependencies": [
-                "core-button",
-                "core-list",
-                "core-link",
-                "core-object-status",
-                "core-object-marker"
-            ]
-        },
-
         "platform": {
             "tags": [],
             "implicitDependencies": [
@@ -551,7 +538,6 @@
                 "platform-split-menu-button",
                 "platform-table",
                 "platform-thumbnail",
-                "platform-upload-collection",
                 "platform-value-help-dialog",
                 "platform-wizard-generator",
                 "platform-icon-tab-bar"
@@ -745,30 +731,6 @@
                 "core-dialog",
                 "core-button",
                 "core-utils",
-                "platform-shared"
-            ]
-        },
-        "platform-upload-collection": {
-            "tags": ["fdp"],
-            "implicitDependencies": [
-                "core-toolbar",
-                "core-button",
-                "core-input-group",
-                "core-dialog",
-                "core-form",
-                "core-busy-indicator",
-                "core-message-strip",
-                "core-list",
-                "core-icon",
-                "core-breadcrumb",
-                "core-pagination",
-                "core-object-status",
-                "core-file-uploader",
-                "core-utils",
-                "platform-table",
-                "platform-menu",
-                "platform-button",
-                "platform-menu-button",
                 "platform-shared"
             ]
         },
