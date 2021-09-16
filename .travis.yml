@@ -33,22 +33,22 @@ jobs:
       name: Build core pack library
       if: type = pull_request
       before_script: export NODE_OPTIONS='–--max_old_space_size=8192'
-      script: travis_wait 60 npm run build-core-pack-library
+      script: npm run build-core-pack-library
     - stage: "Build library"
       name: Build platform pack library
       if: type = pull_request
       before_script: export NODE_OPTIONS='–--max_old_space_size=8192'
-      script: travis_wait 60 npm run build-platform-pack-library
+      script: npm run build-platform-pack-library
     - stage: "Build library"
       name: Build moment-adapter pack library
       if: type = pull_request
       before_script: export NODE_OPTIONS='–--max_old_space_size=8192'
-      script: travis_wait 60 npm run build-moment-adapter-pack-library
+      script: npm run build-moment-adapter-pack-library
     - stage: "Build schematics"
       name: Build packs schematics
       if: type = pull_request
       before_script: export NODE_OPTIONS='–--max_old_space_size=8192'
-      script: travis_wait 60 npm run build-packs-schematics
+      script: npm run build-packs-schematics
     - stage: "Test"
       name: Sauce Labs - e2e tests - platform
       if: type = pull_request
