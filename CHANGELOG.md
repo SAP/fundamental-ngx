@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.40...v0.32.1-rc.41) (2021-09-16)
+
+
+### Bug Fixes
+
+* **platform:** remove broken properties from wizard generator ([#6536](https://github.com/SAP/fundamental-ngx/issues/6536)) ([55a12f5](https://github.com/SAP/fundamental-ngx/commit/55a12f584a2212cf48fa131d736bfcc090d3c914))
+
 ### [0.32.1-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.39...v0.32.1-rc.40) (2021-09-16)
 
 
