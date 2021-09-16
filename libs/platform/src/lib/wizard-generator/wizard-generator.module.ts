@@ -5,6 +5,7 @@ import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { WizardModule } from '@fundamental-ngx/core/wizard';
 import { TitleModule } from '@fundamental-ngx/core/title';
+import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { FormLabelModule } from '@fundamental-ngx/core/form';
 import { PlatformFormGeneratorModule } from '@fundamental-ngx/platform/form';
@@ -40,7 +41,8 @@ import { WizardGeneratorComponent } from './components/wizard-generator/wizard-g
         PlatformButtonModule,
         LayoutGridModule,
         TitleModule,
-        FormLabelModule
+        FormLabelModule,
+        PlatformLinkModule
     ],
     exports: [
         WizardGeneratorComponent,
