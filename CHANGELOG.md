@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.42...v0.32.1-rc.43) (2021-09-16)
+
+
+### Bug Fixes
+
+* **platform:** add link styling and i18n support ([#6530](https://github.com/SAP/fundamental-ngx/issues/6530)) ([0c74a20](https://github.com/SAP/fundamental-ngx/commit/0c74a202dbabfafd155a7ef8117ce93ee3449514))
+
 ### [0.32.1-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.41...v0.32.1-rc.42) (2021-09-16)
 
 ### [0.32.1-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.40...v0.32.1-rc.41) (2021-09-16)
