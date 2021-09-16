@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.39...v0.32.1-rc.40) (2021-09-16)
+
+
+### Bug Fixes
+
+* **platform:** fix failing unit tests ([#6393](https://github.com/SAP/fundamental-ngx/issues/6393)) ([305ad68](https://github.com/SAP/fundamental-ngx/commit/305ad68e692d0dc8bbda0d8ba6c71dce2b2fdd6e))
+
 ### [0.32.1-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.38...v0.32.1-rc.39) (2021-09-15)
 
 
