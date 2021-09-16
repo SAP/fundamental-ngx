@@ -1,4 +1,80 @@
 
+### [0.32.1-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.38...v0.32.1-rc.39) (2021-09-15)
+
+
+### Bug Fixes
+
+* **core:** add temporary style fix for action buttons in Timeline ([#6559](https://github.com/SAP/fundamental-ngx/issues/6559)) ([a845975](https://github.com/SAP/fundamental-ngx/commit/a84597524e4b5aeab46c28794c4229fcd6611b20))
+* **core:** fix bug with pagination itemsPerPage not updating correctly ([#6431](https://github.com/SAP/fundamental-ngx/issues/6431)) ([c4294f7](https://github.com/SAP/fundamental-ngx/commit/c4294f74339567dff279bfa20f9a6b8a4598b60a))
+
+### [0.32.1-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.37...v0.32.1-rc.38) (2021-09-15)
+
+
+### Bug Fixes
+
+* **core:** rtl fix for connector margin ([#6555](https://github.com/SAP/fundamental-ngx/issues/6555)) ([4124db6](https://github.com/SAP/fundamental-ngx/commit/4124db6821c91d44e2f79106d0a5ca18e62e5f3e))
+
+### [0.32.1-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.36...v0.32.1-rc.37) (2021-09-15)
+
+### [0.32.1-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.35...v0.32.1-rc.36) (2021-09-15)
+
+### [0.32.1-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.34...v0.32.1-rc.35) (2021-09-15)
+
+### [0.32.1-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.33...v0.32.1-rc.34) (2021-09-15)
+
+
+### Features
+
+* **platform:** add automatic colons for the labels ([#6528](https://github.com/SAP/fundamental-ngx/issues/6528)) ([75cc019](https://github.com/SAP/fundamental-ngx/commit/75cc0192ac5e0e842926d5152a28fc3e88ac721d))
+
+### [0.32.1-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.32...v0.32.1-rc.33) (2021-09-14)
+
+### [0.32.1-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.31...v0.32.1-rc.32) (2021-09-14)
+
+### [0.32.1-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.30...v0.32.1-rc.31) (2021-09-14)
+
+
+### Bug Fixes
+
+* **core:** dialog, fix resizable in RTL mode ([#6443](https://github.com/SAP/fundamental-ngx/issues/6443)) ([9446bbb](https://github.com/SAP/fundamental-ngx/commit/9446bbb61ac709509e6dcd7e93919c759c3c159a))
+
+### [0.32.1-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.29...v0.32.1-rc.30) (2021-09-13)
+
+
+### Features
+
+* **platform:** custom element for no data message ([#6513](https://github.com/SAP/fundamental-ngx/issues/6513)) ([6dfabe6](https://github.com/SAP/fundamental-ngx/commit/6dfabe670cbdec09c8ca8a8a262eaeda6eed939f))
+
+### [0.32.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.28...v0.32.1-rc.29) (2021-09-13)
+
+
+### Bug Fixes
+
+* **platform:** form-field, remove unnecessary code ([#6516](https://github.com/SAP/fundamental-ngx/issues/6516)) ([a03b862](https://github.com/SAP/fundamental-ngx/commit/a03b8621f6939dcff452d6fc83c8ed1160a487a9))
+
+### [0.32.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.27...v0.32.1-rc.28) (2021-09-13)
+
+
+### Bug Fixes
+
+* **platform:** vhd, fix row margin ([#6490](https://github.com/SAP/fundamental-ngx/issues/6490)) ([de45fa7](https://github.com/SAP/fundamental-ngx/commit/de45fa70b349f3be44ee24ddfc8eceee1e350c12))
+
+### [0.32.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.26...v0.32.1-rc.27) (2021-09-13)
+
+
+### Bug Fixes
+
+* **core:** menu, fix close popover on destroy ([#6475](https://github.com/SAP/fundamental-ngx/issues/6475)) ([d644a04](https://github.com/SAP/fundamental-ngx/commit/d644a04e6674e759fb2338319072fe7231564183))
+
+### [0.32.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.25...v0.32.1-rc.26) (2021-09-13)
+
+
+### Bug Fixes
+
+* **platform:** input, textarea, fix focus ([#6448](https://github.com/SAP/fundamental-ngx/issues/6448)) ([08f7891](https://github.com/SAP/fundamental-ngx/commit/08f789171ea60206bade8fc18967e748d9151744))
+
+### [0.32.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.24...v0.32.1-rc.25) (2021-09-13)
+
 ### [0.32.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.23...v0.32.1-rc.24) (2021-09-10)
 
 

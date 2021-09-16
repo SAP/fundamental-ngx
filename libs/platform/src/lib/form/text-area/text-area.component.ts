@@ -146,10 +146,6 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     isCompact: boolean = this._contentDensity === 'compact';
 
     /** @hidden */
-    @ViewChild('textareaElement', { read: ElementRef })
-    textareaElement: ElementRef;
-
-    /** @hidden */
     hasTextExceeded = false;
 
     /** @hidden excess character count */
@@ -248,9 +244,8 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     validateLengthOnCustomSet(): void {
         if (this._textAreaCharCount > this.maxLength) {
             if (this._isPasted) {
-                this.textareaElement.nativeElement.focus();
-                // this.textareaElement.nativeElement.setSelectionRange(10, 20);
-                this.textareaElement.nativeElement.setSelectionRange(this.maxLength, this._textAreaCharCount);
+                this._targetElement.focus();
+                this._targetElement.setSelectionRange(this.maxLength, this._textAreaCharCount);
             }
             this.counterExcessOrRemaining = this.excessText;
             this.exceededCharCount = this._textAreaCharCount - this.maxLength;
@@ -281,22 +276,22 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     /** handle auto growing of textarea */
     autoGrowTextArea(): void {
         if (this.growing) {
-            this.textareaElement.nativeElement.style.height = 'inherit';
+            this._targetElement.style.height = 'inherit';
             const textareaTotalHeight = this._getTextareaTotalHeight();
-            const maxHeight = parseInt(this.textareaElement.nativeElement.style.maxHeight as string, 10);
+            const maxHeight = parseInt(this._targetElement.style.maxHeight as string, 10);
             if (maxHeight) {
                 if (textareaTotalHeight <= maxHeight) {
-                    this.textareaElement.nativeElement.style.height = textareaTotalHeight + 'px';
+                    this._targetElement.style.height = textareaTotalHeight + 'px';
                 } else {
                     if (this.height) {
-                        this.textareaElement.nativeElement.style.height = this.height;
+                        this._targetElement.style.height = this.height;
                     } else {
-                        this.textareaElement.nativeElement.style.height = maxHeight + 'px';
+                        this._targetElement.style.height = maxHeight + 'px';
                     }
                 }
             } else {
                 // no bound max height, keep growing
-                this.textareaElement.nativeElement.style.height = textareaTotalHeight + 'px';
+                this._targetElement.style.height = textareaTotalHeight + 'px';
             }
         }
     }
@@ -306,8 +301,8 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
      */
     getTextareaLineHeight(): number {
         // Get the computed styles for the element
-        if (this.textareaElement && this.textareaElement.nativeElement) {
-            const computed = window.getComputedStyle(this.textareaElement.nativeElement);
+        if (this._targetElement) {
+            const computed = window.getComputedStyle(this._targetElement);
 
             // Calculate the height
             return parseInt(computed.getPropertyValue('line-height'), 10);
@@ -354,11 +349,16 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         return this.status as string; // return any other errors found by parent form field
     }
 
+    /** @hidden Native element  */
+    get _targetElement(): HTMLTextAreaElement {
+        return this._elementRef?.nativeElement;
+    }
+
     /** @hidden get the length of the textarea content */
     private _getContentLength(): number {
         let contentLength;
-        if (this.textareaElement) {
-            contentLength = this.textareaElement.nativeElement.value.length;
+        if (this._targetElement) {
+            contentLength = this._targetElement.value.length;
         }
         if (this.value) {
             contentLength = this.value.length;
@@ -369,11 +369,11 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     /** @hidden get the total height including borders and scroll height */
     private _getTextareaTotalHeight(): number {
         // Get the computed styles for the element
-        const computed = window.getComputedStyle(this.textareaElement.nativeElement);
+        const computed = window.getComputedStyle(this._targetElement);
         // Calculate the height
         const height =
             parseInt(computed.getPropertyValue('border-top-width'), 10) +
-            this.textareaElement.nativeElement.scrollHeight +
+            this._targetElement.scrollHeight +
             parseInt(computed.getPropertyValue('border-bottom-width'), 10);
 
         return height;
@@ -381,20 +381,19 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
 
     /** @hidden set initial max height **/
     private _setMaxHeight(): void {
-        if (this.growing && this.textareaElement && this.textareaElement.nativeElement) {
+        if (this.growing && this._targetElement) {
             if (this.growingMaxLines) {
-                this.textareaElement.nativeElement.style.maxHeight =
-                    this.growingMaxLines * this.getTextareaLineHeight() + 'px';
+                this._targetElement.style.maxHeight = this.growingMaxLines * this.getTextareaLineHeight() + 'px';
             }
             if (this.height) {
-                this.textareaElement.nativeElement.style.maxHeight = this.height;
+                this._targetElement.style.maxHeight = this.height;
             }
         } else {
             if (this.growingMaxLines) {
                 // nothing to do here. rows attribute takes care.
             }
             if (this.height) {
-                this.textareaElement.nativeElement.style.height = this.height;
+                this._targetElement.style.height = this.height;
             }
         }
     }
