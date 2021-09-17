@@ -168,7 +168,8 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     private readonly remainingText = 'remaining';
     private readonly excessText = 'excess';
 
-    private get shouldTrackTextLimit(): boolean {
+    /** @hidden */
+    private get _shouldTrackTextLimit(): boolean {
         return this.maxLength > 0 && !this.showExceededText;
     }
 
@@ -206,7 +207,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         this._setMaxHeight();
 
         // don't set any error state if we are not showing counter message
-        if (!this.shouldTrackTextLimit) {
+        if (!this._shouldTrackTextLimit) {
             this.stateType = null;
         }
 
@@ -324,7 +325,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
             this.autoGrowTextArea();
             this.isValueCustomSet = false; // set it to false first time it comes here
         }
-        if (this.shouldTrackTextLimit && KeyUtil.isKeyCode(event, [DELETE, BACKSPACE])) {
+        if (this._shouldTrackTextLimit && KeyUtil.isKeyCode(event, [DELETE, BACKSPACE])) {
             // for the custom value set and showExceededText=false case, on any key press, remove excess characters
             if (this.value) {
                 this._textAreaCharCount = this.value.length;
