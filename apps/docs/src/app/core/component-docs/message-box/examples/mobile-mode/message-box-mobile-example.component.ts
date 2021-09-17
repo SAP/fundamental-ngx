@@ -12,12 +12,15 @@ import { MessageBoxContent, MessageBoxService } from '@fundamental-ngx/core/mess
     ]
 })
 export class MessageBoxMobileExampleComponent {
+    title = 'Fruit facts';
+    content = 'Strawberries have more vitamin C than oranges.';
+
     constructor(private _messageBoxService: MessageBoxService) {}
 
     open(): void {
         const content: MessageBoxContent = {
-            title: 'Fruit facts',
-            content: 'Strawberries have more vitamin C than oranges.',
+            title: this.title,
+            content: this.content,
             approveButton: 'Ok',
             cancelButton: 'Cancel',
             approveButtonCallback: () => messageBoxRef.close('Approved'),
@@ -25,6 +28,9 @@ export class MessageBoxMobileExampleComponent {
             closeButtonCallback: () => messageBoxRef.dismiss('Dismissed')
         };
 
-        const messageBoxRef = this._messageBoxService.open(content, { mobile: true });
+        const messageBoxRef = this._messageBoxService.open(content, {
+            mobile: true,
+            ariaLabelledBy: `fd-message-box-mobile-header fd-message-box-mobile-body`
+        });
     }
 }
