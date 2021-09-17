@@ -108,7 +108,7 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
         this.dialogRef = this._dialogService.open(this._dialogTemplate, {
             ...this.dialogConfig,
             mobile: true,
-            focusTrapped: false,
+            focusTrapped: true,
             verticalPadding: true,
             escKeyCloseable: false,
             backdropClickCloseable: false,
