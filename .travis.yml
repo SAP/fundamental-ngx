@@ -32,7 +32,7 @@ jobs:
       name: Build core pack library
       if: type = pull_request
       before_script: export NODE_OPTIONS='–--max_old_space_size=8192'
-      script: npm run build-pack-library
+      script: bash ./ci-scripts/build.lib.sh
     - stage: "Test"
       name: Sauce Labs - e2e tests - platform
       if: type = pull_request
