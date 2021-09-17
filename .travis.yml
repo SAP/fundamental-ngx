@@ -28,11 +28,26 @@ jobs:
         - SAUCE_USERNAME=$SAUCE_USERNAME
         - SAUCE_ACCESS_KEY=$SAUCE_ACCESS_KEY
       script: bash ./ci-scripts/test-lint.sh && npm run test:coveralls
-    - stage: "Build library"
+    - stage: "Build core"
       name: Build core pack library
       if: type = pull_request
       before_script: export NODE_OPTIONS='–--max_old_space_size=8192'
-      script: bash ./ci-scripts/build.lib.sh
+      script: npm run build-core-pack-library
+    - stage: "Build platform"
+      name: Build platform pack library
+      if: type = pull_request
+      before_script: export NODE_OPTIONS='–--max_old_space_size=8192'
+      script: npm run build-platform-pack-library
+    - stage: "Build moment adapter"
+      name: Build moment adapter pack library
+      if: type = pull_request
+      before_script: export NODE_OPTIONS='–--max_old_space_size=8192'
+      script: npm run build-moment-adapter-pack-library
+    - stage: "Build lib schematics"
+      name: Build schematics
+      if: type = pull_request
+      before_script: export NODE_OPTIONS='–--max_old_space_size=8192'
+      script: npm run build-packs-schematics
     - stage: "Test"
       name: Sauce Labs - e2e tests - platform
       if: type = pull_request
