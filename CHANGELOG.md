@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.46...v0.32.1-rc.47) (2021-09-17)
+
+
+### Bug Fixes
+
+* **platform:** correct delete behaviour for textarea ([#6527](https://github.com/SAP/fundamental-ngx/issues/6527)) ([2498a67](https://github.com/SAP/fundamental-ngx/commit/2498a678153662a417e05a1bf211e95b8beaba13))
+
 ### [0.32.1-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.45...v0.32.1-rc.46) (2021-09-17)
 
 ### [0.32.1-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.44...v0.32.1-rc.45) (2021-09-17)
