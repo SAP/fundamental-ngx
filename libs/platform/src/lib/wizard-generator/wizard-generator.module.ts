@@ -16,9 +16,10 @@ import { DialogWizardGeneratorComponent } from './components/dialog-wizard-gener
 import { WizardDialogGeneratorService } from './wizard-dialog-generator.service';
 import { WizardSummaryStepComponent } from './components/wizard-summary-step/wizard-summary-step.component';
 import { WizardSummarySectionComponent } from './components/wizard-summary-step/wizard-summary-section/wizard-summary-section.component';
-import { FdpWizardGeneratorGoNextButtonDirective } from './directives/fdp-wizard-generator-go-next-button.directive';
-import { FdpWizardGeneratorFinishButtonDirective } from './directives/fdp-wizard-generator-finish-button.directive';
+import { WizardGeneratorGoNextButtonDirective } from './directives/wizard-generator-go-next-button.directive';
+import { WizardGeneratorFinishButtonDirective } from './directives/wizard-generator-finish-button.directive';
 import { WizardGeneratorComponent } from './components/wizard-generator/wizard-generator.component';
+import { WizardGeneratorSummaryStepDirective } from './directives/wizard-generator-summary-step.directive';
 
 @NgModule({
     declarations: [
@@ -28,8 +29,9 @@ import { WizardGeneratorComponent } from './components/wizard-generator/wizard-g
         DialogWizardGeneratorComponent,
         WizardSummaryStepComponent,
         WizardSummarySectionComponent,
-        FdpWizardGeneratorGoNextButtonDirective,
-        FdpWizardGeneratorFinishButtonDirective
+        WizardGeneratorGoNextButtonDirective,
+        WizardGeneratorFinishButtonDirective,
+        WizardGeneratorSummaryStepDirective
     ],
     entryComponents: [DialogWizardGeneratorComponent],
     imports: [
@@ -51,8 +53,9 @@ import { WizardGeneratorComponent } from './components/wizard-generator/wizard-g
         DialogWizardGeneratorComponent,
         WizardSummaryStepComponent,
         WizardSummarySectionComponent,
-        FdpWizardGeneratorGoNextButtonDirective,
-        FdpWizardGeneratorFinishButtonDirective
+        WizardGeneratorGoNextButtonDirective,
+        WizardGeneratorFinishButtonDirective,
+        WizardGeneratorSummaryStepDirective
     ],
     providers: [WizardDialogGeneratorService]
 })

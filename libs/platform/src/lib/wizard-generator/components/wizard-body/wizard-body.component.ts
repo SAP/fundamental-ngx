@@ -88,6 +88,12 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     finishButtonTemplate: TemplateRef<any>;
 
     /**
+     * User-defined template for summary step.
+     */
+    @Input()
+    customsummaryStepTemplate: TemplateRef<any>;
+
+    /**
      * @description Is current step is summary step.
      */
     @Input()

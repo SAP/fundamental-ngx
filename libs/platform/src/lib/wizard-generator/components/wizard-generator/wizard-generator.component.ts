@@ -9,8 +9,9 @@ import {
 
 import { WizardGeneratorService } from '../../wizard-generator.service';
 import { BaseWizardGenerator } from '../../base-wizard-generator';
-import { FdpWizardGeneratorFinishButtonDirective } from '../../directives/fdp-wizard-generator-finish-button.directive';
-import { FdpWizardGeneratorGoNextButtonDirective } from '../../directives/fdp-wizard-generator-go-next-button.directive';
+import { WizardGeneratorFinishButtonDirective } from '../../directives/wizard-generator-finish-button.directive';
+import { WizardGeneratorGoNextButtonDirective } from '../../directives/wizard-generator-go-next-button.directive';
+import { WizardGeneratorSummaryStepDirective } from '../../directives/wizard-generator-summary-step.directive';
 
 @Component({
   selector: 'fdp-wizard-generator',
@@ -23,14 +24,20 @@ export class WizardGeneratorComponent extends BaseWizardGenerator {
     /**
      * User-defined template for "Finish" button.
      */
-    @ContentChild(FdpWizardGeneratorFinishButtonDirective, {read: TemplateRef})
+    @ContentChild(WizardGeneratorFinishButtonDirective, {read: TemplateRef})
     finishButtonTemplate: TemplateRef<any>;
 
     /**
      * User-defined template for "Go Next" button.
      */
-    @ContentChild(FdpWizardGeneratorGoNextButtonDirective, {read: TemplateRef})
+    @ContentChild(WizardGeneratorGoNextButtonDirective, {read: TemplateRef})
     goNextButtonTemplate: TemplateRef<any>;
+
+    /**
+     * User-defined template for Summary step.
+     */
+    @ContentChild(WizardGeneratorSummaryStepDirective, {read: TemplateRef})
+    customsummaryStepTemplate: TemplateRef<any>;
 
     /** @hidden */
     constructor(
