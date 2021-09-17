@@ -1,10 +1,6 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { FormGeneratorService } from '@fundamental-ngx/platform/form';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
-import { WizardStepFormsValue } from '../../../interfaces/wizard-generator-item.interface';
 import { FormattedFormStep, WizardGeneratorSummaryItem } from '../../../interfaces/wizard-generator-summary-item.interface';
-import { WizardGeneratorService } from '../../../wizard-generator.service';
-import { WizardStepForms } from '../../wizard-generator-step/wizard-generator-step.component';
 
 @Component({
     selector: 'fdp-wizard-summary-section',
