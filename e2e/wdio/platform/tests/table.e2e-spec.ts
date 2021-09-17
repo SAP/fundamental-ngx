@@ -122,7 +122,7 @@ describe('Table component test suite', function() {
             }
         });
 
-        fit('should check possible to change description', () => {
+        it('should check possible to change description', () => {
             scrollIntoView(tableCustomColumnExample);
             setValue('[id="fdp-id-15"]', 'test');
             expect(getValue('[id="fdp-id-15"]')).toBe('test');
