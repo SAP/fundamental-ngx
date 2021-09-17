@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { WizardGeneratorFormsValue, WizardGeneratorItem, WizardTitle } from '@fundamental-ngx/platform/wizard-generator';
+import { FormattedFormStep, WizardGeneratorFormsValue, WizardGeneratorItem, WizardTitle } from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
   selector: 'fdp-wizard-generator-customizable-embeded-example',
@@ -103,11 +103,25 @@ export class WizardGeneratorCustomizableEmbededExampleComponent {
                     ]
                 }
             ]
+        },
+        {
+            id: 'summary',
+            summary: true,
+            name: 'Review'
         }
     ];
 
     wizardFinished(wizardValue: WizardGeneratorFormsValue): void {
         this.wizardValue = wizardValue;
+    }
+
+    trackFn(_: number, formattedStep: FormattedFormStep): string {
+        return formattedStep.id;
+    }
+
+    _editStep(event: MouseEvent, stepId: string, callback: (stepId: string) => void): void {
+        event.preventDefault();
+        callback(stepId);
     }
 
 }

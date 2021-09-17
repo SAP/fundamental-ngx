@@ -40,7 +40,14 @@
     Buttons appearance can be changed with <code>[navigationButtonLabels]</code> property.
     <br><br>
     If you want to use completely different style for navigational buttons,
-    you can use special directives: <code>fdpWizardGeneratorGoNextButton, fdpWizardGeneratorFinishButton</code>.
+    you can use special directives: <code>fdp-wizard-generator-go-next-button, fdp-wizard-generator-finish-button</code>.
+    <br><br>
+    To change Summary step view, you can use <code>fdp-wizard-generator-summary-step</code> directive to flag your template as a summary section template.
+    Your template will receive such variables:
+    <ul>
+        <li>steps: Array of object that implements <code>WizardGeneratorSummaryItem</code> interface</li>
+        <li>editStep: Method to edit defined section step</li>
+    </ul>
 </description>
 <component-example>
     <fdp-wizard-generator-customizable-embeded-example></fdp-wizard-generator-customizable-embeded-example>
