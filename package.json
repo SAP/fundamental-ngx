@@ -152,7 +152,7 @@
     "@nrwl/tao": "11.5.1",
     "@nrwl/workspace": "11.5.2",
     "@schematics/angular": "~11.2.11",
-    "@types/jasmine": "3.6.6",
+    "@types/jasmine": "3.9.1",
     "@types/jasminewd2": "2.0.8",
     "@wdio/allure-reporter": "7.7.3",
     "@wdio/cli": "7.7.4",
