@@ -4,7 +4,8 @@
     <!-- Available rate values -->
     <ng-container *ngFor="let rate of _rates; index as i; trackBy: trackByFn">
         <input
-            [attr.aria-label]="(i + 1) + '-star'"
+            [attr.aria-label]="i | ratingStarLabel : _rates.length : allowHalves"
+            role="button"
             type="radio"
             class="fd-rating-indicator__input"
             [disabled]="disabled"
@@ -12,8 +13,8 @@
             name="rating-{{ viewRatingUID }}"
             [value]="rate.value"
             [checked]="viewValue === rate.value"
-            (focus)="onSelect(rate.value)" />
-        <label class="fd-rating-indicator__label" [for]="rate.id">
+            (click)="onSelect(rate.value)" />
+        <label class="fd-rating-indicator__label" [for]="rate.id" aria-hidden="true">
             <i *ngIf="ratedIcon" class="rated" [ngClass]="unratedIcon"></i>
             <i *ngIf="unratedIcon" class="unrated" [ngClass]="ratedIcon"></i>
         </label>
@@ -56,11 +57,12 @@
 <ng-template #zeroRate let-halves="halves">
     <input
         aria-label="Reset to zero"
+        role="button"
         type="radio"
         class="fd-rating-indicator__zero-rating fd-rating-indicator__input"
-        (focus)="onSelect(0)"
+        (click)="onSelect(0)"
         [disabled]="disabled"
         name="rating-{{ viewRatingUID }}{{halves ? '-halves' : '' }}"
         [checked]="viewValue === 0" />
-    <label class="fd-rating-indicator__zero-rating fd-rating-indicator__label"></label>
+    <label class="fd-rating-indicator__zero-rating fd-rating-indicator__label" aria-hidden="true"></label>
 </ng-template>
