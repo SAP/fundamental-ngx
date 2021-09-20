@@ -23,7 +23,7 @@ import {
 } from '@angular/core';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
-import { CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
@@ -62,6 +62,77 @@ class CardDropped {
 }
 
 type CardColumn = CardDefinitionDirective[];
+
+@Directive({ selector: '[fdGroup]' })
+export class DndGroup {
+    /** @hidden */
+    public _onDndItemFocus$ = new Subject<[number, number]>();
+
+    constructor(public cdr: ChangeDetectorRef) {}
+
+    /** add focus after moving elements with keyboard */
+    focusDndItem(groupIndex: number, itemIndex: number): void {
+        this.cdr.detectChanges();
+        this._onDndItemFocus$.next([groupIndex, itemIndex]);
+    }
+}
+
+@Directive({ selector: '[fdItem]' })
+export class DndItem implements OnInit {
+    /** item index in group(column) */
+    @Input()
+    itemIndex: number;
+  
+    /** group(column) index */
+    @Input()
+    groupIndex: number;
+
+    constructor(public dndGroup: DndGroup, public elementRef: ElementRef, public cardLayout: FixedCardLayoutComponent) {
+    }
+
+    /** @hidden */
+    ngOnInit(): void {
+        this.dndGroup._onDndItemFocus$.subscribe(([groupIndex, itemIndex]) => {
+            if (this.groupIndex === groupIndex && this.itemIndex === itemIndex) {
+              this.elementRef.nativeElement.focus();
+            }
+        });
+    }
+    
+    // disabled possibility to move card
+    @HostListener('keyup', ['$event'])
+    onKeyUp(event: KeyboardEvent): void {
+        if (event.key === 'Control') {
+            this.cardLayout._enableKeyboard = false;
+        }
+    }
+
+    // allow card movement using keyboard
+    @HostListener('keydown', ['$event'])
+    onKeyDown(event: KeyboardEvent): void {
+        const group = this.cardLayout.columns[this.groupIndex];
+        if (event.key === 'Control') {
+            this.cardLayout._enableKeyboard = true
+        }
+        if (event.key === 'ArrowRight' && this.cardLayout._enableKeyboard && this.cardLayout.columns.length !== this.groupIndex + 1) {
+            const nextGroup = this.cardLayout.columns[this.groupIndex + 1];
+            const nextGroupIndex = this.groupIndex + 1;
+            transferArrayItem(group, nextGroup, this.itemIndex, 0);   
+            this.dndGroup.focusDndItem(nextGroupIndex, 0);
+        } else if (event.key === 'ArrowDown' && this.cardLayout._enableKeyboard) {         
+            moveItemInArray(group, this.itemIndex, this.itemIndex + 1);
+            this.dndGroup.focusDndItem(this.groupIndex, this.itemIndex + 1);
+        } else if (event.key === 'ArrowUp' && this.cardLayout._enableKeyboard) {
+            moveItemInArray(group, this.itemIndex, this.itemIndex - 1);
+            this.dndGroup.focusDndItem(this.groupIndex, this.itemIndex - 1);
+        } else if (event.key === 'ArrowLeft' && this.cardLayout._enableKeyboard && this.groupIndex) {
+            const nextGroup = this.cardLayout.columns[this.groupIndex - 1];
+            const nextGroupIndex = this.groupIndex - 1;
+            transferArrayItem(group, nextGroup, this.itemIndex, 0);
+            this.dndGroup.focusDndItem(nextGroupIndex, 0);
+        }
+    }
+}
 
 @Component({
     selector: 'fd-fixed-card-layout',
@@ -105,6 +176,9 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** handles rtl service
      * @hidden */
     public dir: string;
+
+    /** @hidden */
+    public _enableKeyboard = false;
 
     /** @hidden Number of Columns in layout */
     private _numberOfColumns: number;
