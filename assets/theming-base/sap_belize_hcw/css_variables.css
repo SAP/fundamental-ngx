@@ -2,10 +2,10 @@
 * Copyright (c) 2012-2020 SAP SE or an SAP affiliate company and Theming Base Content contributors. Licensed under the Apache License, Version 2.0 - see LICENSE.txt.
 *
 * Theming Engine 1.51.0
-* data:{"Path": "Base.baseLib.sap_belize_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize_hcb","sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3","HighContrast"], "FallbackThemeId": "sap_belize", "Version": { "Build":"11.1.30.20210602054826", "Source": "11.1.30", "Engine": "1.51.0"}}
+* data:{"Path": "Base.baseLib.sap_belize_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize_hcb","sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3","HighContrast"], "FallbackThemeId": "sap_belize", "Version": { "Build":"11.1.31.20210826095054", "Source": "11.1.31", "Engine": "1.51.0"}}
 */
 
-.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_belize_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize_hcb","sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3","HighContrast"], "FallbackThemeId": "sap_belize", "Version": { "Build":"11.1.30.20210602054826", "Source": "11.1.30", "Engine": "1.51.0"}}');}
+.sapThemeMetaData-Base-baseLib{background-image: url('data:text/plain;utf-8,{"Path": "Base.baseLib.sap_belize_hcw.css_variables", "PathPattern": "/%frameworkId%/%libId%/%themeId%/%fileId%.css", "Extends": ["sap_belize_hcb","sap_belize","sap_base_fiori","baseTheme"], "Tags": ["Fiori_2","Fiori_3","HighContrast"], "FallbackThemeId": "sap_belize", "Version": { "Build":"11.1.31.20210826095054", "Source": "11.1.31", "Engine": "1.51.0"}}');}
 :root {
   --sapBrandColor: #ec8b46;
   --sapHighlightColor: #ec8b46;
@@ -126,10 +126,10 @@
   --sapContent_ContrastFocusColor: #000;
   --sapContent_ShadowColor: #000;
   --sapContent_ContrastShadowColor: #000;
-  --sapContent_Shadow0: 0 0 1rem 0 rgba(0,0,0,0.5), 0 0 0 2px #000;
-  --sapContent_Shadow1: 0 0.125rem 0.5rem 0 rgba(0,0,0,0.2), 0 0 1rem 0 rgba(0,0,0,0.5), 0 0 0 2px #000;
-  --sapContent_Shadow2: 0 0.25rem 2rem 0 rgba(0,0,0,0.6), 0 0 0 2px #000;
-  --sapContent_Shadow3: 0 0.625rem 4rem 0 rgba(0,0,0,0.8), 0 0 0 2px #000;
+  --sapContent_Shadow0: 0 0 0 0.0625rem #000;
+  --sapContent_Shadow1: 0 0 1rem 0 rgba(0,0,0,0.5), 0 0 0 0.125rem #000;
+  --sapContent_Shadow2: 0 0.25rem 2rem 0 rgba(0,0,0,0.6), 0 0 0 0.125rem #000;
+  --sapContent_Shadow3: 0 0.625rem 4rem 0 rgba(0,0,0,0.8), 0 0 0 0.125rem #000;
   --sapContent_TextShadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
   --sapContent_ContrastTextShadow: none;
   --sapContent_HeaderShadow: inset 0 -0.125rem #000;
@@ -179,7 +179,7 @@
   --sapShell_Active_TextColor: #000;
   --sapShell_Selected_Background: #8fb5ff;
   --sapShell_Selected_TextColor: #000;
-  --sapShell_Selected_Hover_Background: #8fb5ff;
+  --sapShell_Selected_Hover_Background: #ec8b46;
   --sapShell_Favicon: none;
   --sapShell_Navigation_Background: #fff;
   --sapShell_Navigation_SelectedColor: #000;
@@ -394,7 +394,7 @@
   --sapScrollBar_TrackColor: #fff;
   --sapScrollBar_BorderColor: #585858;
   --sapScrollBar_SymbolColor: #000;
-  --sapScrollBar_Dimension: .7rem;
+  --sapScrollBar_Dimension: .75rem;
   --sapScrollBar_Hover_FaceColor: #000;
   --sapPageHeader_Background: #fff;
   --sapPageHeader_BorderColor: #000;

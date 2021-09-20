@@ -363,6 +363,8 @@ Apache-2.0
 
 @fundamental-ngx/core/message-toast
 
+@fundamental-ngx/core/micro-process-flow
+
 @fundamental-ngx/core/mobile-mode
 
 @fundamental-ngx/core/multi-input
@@ -439,6 +441,8 @@ Apache-2.0
 
 @fundamental-ngx/core/tree
 
+@fundamental-ngx/core/upload-collection
+
 @fundamental-ngx/core/utils
 
 @fundamental-ngx/core/wizard
@@ -448,6 +452,60 @@ Apache-2.0
 
 @fundamental-ngx/platform
 Apache-2.0
+
+@fundamental-ngx/platform/action-bar
+
+@fundamental-ngx/platform/action-button-group
+
+@fundamental-ngx/platform/approval-flow
+
+@fundamental-ngx/platform/button
+
+@fundamental-ngx/platform/dynamic-page
+
+@fundamental-ngx/platform/feed-input
+
+@fundamental-ngx/platform/form
+
+@fundamental-ngx/platform/icon-tab-bar
+
+@fundamental-ngx/platform/info-label
+
+@fundamental-ngx/platform/link
+
+@fundamental-ngx/platform/list
+
+@fundamental-ngx/platform/menu
+
+@fundamental-ngx/platform/menu-button
+
+@fundamental-ngx/platform/object-attribute
+
+@fundamental-ngx/platform/object-marker
+
+@fundamental-ngx/platform/object-status
+
+@fundamental-ngx/platform/page-footer
+
+@fundamental-ngx/platform/panel
+
+@fundamental-ngx/platform/search-field
+
+@fundamental-ngx/platform/shared
+
+@fundamental-ngx/platform/slider
+
+@fundamental-ngx/platform/split-menu-button
+
+@fundamental-ngx/platform/table
+
+@fundamental-ngx/platform/thumbnail
+
+@fundamental-ngx/platform/upload-collection
+
+@fundamental-ngx/platform/value-help-dialog
+
+@fundamental-ngx/platform/wizard-generator
 
 @stackblitz/sdk
 MIT
