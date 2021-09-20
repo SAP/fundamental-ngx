@@ -1,4 +1,11 @@
 
+### [0.32.1-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.52...v0.32.1-rc.53) (2021-09-20)
+
+
+### Bug Fixes
+
+* **platform:** rename pipes with the same name ([#6581](https://github.com/SAP/fundamental-ngx/issues/6581)) ([4018eb8](https://github.com/SAP/fundamental-ngx/commit/4018eb82d9eb15b195605c22e92fe82f17180fbf))
+
 ### [0.32.1-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.51...v0.32.1-rc.52) (2021-09-20)
 
 ### [0.32.1-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.50...v0.32.1-rc.51) (2021-09-20)
