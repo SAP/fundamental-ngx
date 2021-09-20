@@ -8,7 +8,7 @@
     [class.fd-grid-list--mode-single-select-right]="selectionMode === 'singleSelectRight'"
     [class.fd-grid-list--mode-multi-select]="selectionMode === 'multiSelect'"
 >
-    <div class="fd-container" role="listbox" [attr.aria-label]="ariaLabel">
+    <form class="fd-container" role="listbox" [attr.aria-label]="ariaLabel">
         <ng-content></ng-content>
-    </div>
+    </form>
 </div>
