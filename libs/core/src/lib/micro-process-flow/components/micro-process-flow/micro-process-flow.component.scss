@@ -72,7 +72,7 @@
     @include fd-flex-stretch;
 
     margin: 0.1625rem 0;
-    padding-left: $fd-micro-process-flow-item-padding;
+    @include fd-set-padding-left($fd-micro-process-flow-item-padding);
     justify-content: flex-start;
     position: relative;
 
@@ -131,7 +131,7 @@
 
     min-width: $fd-micro-process-flow-item-connector-width;
     height: 100%;
-    margin-left: $fd-micro-process-flow-item-padding;
+    @include fd-set-margin-left($fd-micro-process-flow-item-padding);
     position: relative;
     flex-grow: 1;
 

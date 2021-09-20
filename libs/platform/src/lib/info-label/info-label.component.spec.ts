@@ -39,19 +39,18 @@ describe('InfoLabelComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    // TODO: Unskip after fix
-    xit('Should Add label with color', () => {
+    it('Should Add label with color', () => {
         host.color = '2';
         host.glyph = 'hide';
         fixture.detectChanges();
-        let linkElement = fixture.debugElement.query(By.css('span'));
-        expect(linkElement.nativeElement.classList.contains('fd-info-label--accent-color-2')).toBe(true);
+        let hostEl = fixture.debugElement.query(By.css('fd-info-label'));
+        let linkElement = fixture.debugElement.query(By.css('i'));
+        expect(hostEl.nativeElement.classList.contains('fd-info-label--accent-color-2')).toBe(true);
         expect(linkElement.nativeElement.classList.contains('sap-icon--hide')).toBe(true);
-        expect(linkElement.nativeElement.textContent).toContain('Info Label');
         host.color = '4';
         fixture.detectChanges();
-        linkElement = fixture.debugElement.query(By.css('span'));
-        expect(linkElement.nativeElement.classList.contains('fd-info-label--accent-color-4')).toBe(true);
-        expect(linkElement.nativeElement.textContent).toContain('Info Label');
+        hostEl = fixture.debugElement.query(By.css('fd-info-label'));
+        linkElement = fixture.debugElement.query(By.css('i'));
+        expect(hostEl.nativeElement.classList.contains('fd-info-label--accent-color-4')).toBe(true);
     });
 });

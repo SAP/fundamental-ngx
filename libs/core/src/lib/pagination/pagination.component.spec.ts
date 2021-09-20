@@ -107,6 +107,17 @@ describe('Pagination Test', () => {
             fixture.detectChanges();
             expect(component.itemsPerPage).toBe(5);
         });
+        it('should correctly update itemsPerPage after the total has changed', async () => {
+            component.totalItems = 3000;
+            component.itemsPerPage = 25;
+            component.currentPage = 1;
+            fixture.detectChanges();
+            component.totalItems = 10;
+            fixture.detectChanges();
+            component.totalItems = 500;
+            fixture.detectChanges();
+            expect(component.itemsPerPage).toBe(25);
+        });
     });
 
     describe('currentPage', () => {

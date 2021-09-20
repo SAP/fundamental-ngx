@@ -7,8 +7,10 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-generator';
+import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 import { PlatformWizardGeneratorDocsComponent } from './platform-wizard-generator-docs.component';
 import { PlatformWizardGeneratorHeaderComponent } from './platform-wizard-generator-header/platform-wizard-generator-header.component';
 import { WizardGeneratorDefaultExampleComponent } from './examples/wizard-generator-default-example.component';
@@ -56,7 +58,9 @@ const routes: Routes = [
         PlatformWizardGeneratorModule,
         PlatformButtonModule,
         DialogModule,
-        BarModule
+        BarModule,
+        LayoutGridModule,
+        PlatformLinkModule
     ]
 })
 export class PlatformWizardGeneratorDocsModule { }
