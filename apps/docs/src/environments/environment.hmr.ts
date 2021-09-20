@@ -1,7 +1,7 @@
-import { version } from '../../../../package.json';
+import packageInfo from '../../../../package.json';
 
 export const environment = {
     production: false,
     hmr: true,
-    version: version
+    version: packageInfo.version
 };
