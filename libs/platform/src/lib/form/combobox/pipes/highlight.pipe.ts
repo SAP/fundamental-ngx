@@ -6,7 +6,7 @@ import { ComboboxConfig } from '../combobox.config';
 @Pipe({
     name: 'highlight'
 })
-export class HighlightPipe implements PipeTransform {
+export class ComboboxHighlightPipe implements PipeTransform {
     constructor(private readonly comboboxConfig: ComboboxConfig) {
     }
 
