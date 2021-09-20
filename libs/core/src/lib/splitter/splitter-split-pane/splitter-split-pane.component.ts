@@ -1,4 +1,5 @@
 import { TemplatePortal } from '@angular/cdk/portal';
+import { ViewportRuler } from '@angular/cdk/scrolling';
 import { DOCUMENT } from '@angular/common';
 import {
     AfterViewInit,
@@ -16,8 +17,8 @@ import {
     ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { fromEvent, Subject } from 'rxjs';
-import { delay, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { PANE_AUTO_SIZE } from '../constants';
 
@@ -96,6 +97,7 @@ export class SplitterSplitPaneComponent implements OnInit, AfterViewInit, OnDest
     /** @hidden */
     constructor(
         private readonly _viewContainerRef: ViewContainerRef,
+        private readonly _viewportRuler: ViewportRuler,
         @Optional() @Inject(DOCUMENT) private readonly _document: Document | null
     ) {}
 
@@ -144,8 +146,8 @@ export class SplitterSplitPaneComponent implements OnInit, AfterViewInit, OnDest
             return;
         }
 
-        fromEvent(this._window, 'resize')
-            .pipe(delay(10), takeUntil(this._unsubscribe$))
+        this._viewportRuler.change(10)
+            .pipe(takeUntil(this._unsubscribe$))
             .subscribe(() => this._processPaneOnCanvas());
     }
 

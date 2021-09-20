@@ -28,7 +28,7 @@ describe('SplitterResizerComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should resize with mouse', () => {
+    it('should resize with mouse', waitForAsync(async () => {
         const initialValue = 100;
         const changedValue = 150;
 
@@ -45,21 +45,25 @@ describe('SplitterResizerComponent', () => {
         document.dispatchEvent(new MouseEvent('mousemove', { clientX: changedValue }));
         fixture.detectChanges();
 
+        await fixture.whenStable();
+
         const diff = changedValue - initialValue;
         expect(resizeSpy).toHaveBeenCalledWith(diff);
 
         document.dispatchEvent(new MouseEvent('mouseup'));
         fixture.detectChanges();
 
+        await fixture.whenStable();
+
         expect(endResizeSpy).toHaveBeenCalled();
-    });
+    }));
 
     it('should resize with keyboard', () => {
         const startResizeSpy = spyOn(component.startResize, 'emit').and.callThrough();
         const endResizeSpy = spyOn(component.endResize, 'emit').and.callThrough();
         const resizeSpy = spyOn(component.resize, 'emit').and.callThrough();
 
-        component._onKeydown(new KeyboardEvent('keydown', { key: 'ArrowUp' }));
+        component._onKeydown(new KeyboardEvent('keydown', { key: 'ArrowLeft' }));
         fixture.detectChanges();
 
         let initialValue = component._start;
@@ -69,7 +73,7 @@ describe('SplitterResizerComponent', () => {
         expect(resizeSpy).toHaveBeenCalledWith(changedValue);
         expect(endResizeSpy).toHaveBeenCalled();
 
-        component._onKeydown(new KeyboardEvent('keydown', { key: 'ArrowDown' }));
+        component._onKeydown(new KeyboardEvent('keydown', { key: 'ArrowRight' }));
         fixture.detectChanges();
 
         initialValue = component._start;

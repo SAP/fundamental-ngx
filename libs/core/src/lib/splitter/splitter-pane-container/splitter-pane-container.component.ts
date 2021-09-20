@@ -1,4 +1,3 @@
-import { DOCUMENT } from '@angular/common';
 import {
     AfterContentInit,
     AfterViewInit,
@@ -8,7 +7,6 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    Inject,
     Input,
     OnDestroy,
     Optional,
@@ -17,15 +15,16 @@ import {
     SkipSelf,
     ViewEncapsulation
 } from '@angular/core';
-import { fromEvent, Subscription } from 'rxjs';
+import { ViewportRuler } from '@angular/cdk/scrolling';
+import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
 
+import { SplitterComponent } from '../splitter.component';
 import { SplitterPaneResizeEvent } from '../interfaces/splitter-pane-resize-event.interface';
 import { SplitterSplitPaneComponent } from '../splitter-split-pane/splitter-split-pane.component';
 import { PANE_AUTO_SIZE, PANE_NONE_SIZE, RESIZER_SIZE_PX, ROOT_PAGE } from '../constants';
-import { SplitterComponent } from '../splitter.component';
 
 
 export enum SplitterPaneContainerOrientation {
@@ -33,7 +32,6 @@ export enum SplitterPaneContainerOrientation {
     horizontal = 'horizontal'
 }
 
-/** @dynamic */
 @Component({
     selector: 'fd-splitter-pane-container',
     templateUrl: './splitter-pane-container.component.html',
@@ -136,8 +134,8 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         private readonly _cdr: ChangeDetectorRef,
         private readonly _elementRef: ElementRef,
         private readonly _splitter: SplitterComponent,
+        private readonly _viewportRuler: ViewportRuler,
         @Optional() private readonly _rtlService: RtlService,
-        @Optional() @Inject(DOCUMENT) private readonly _document: Document | null,
         @Optional() @SkipSelf() private readonly _parentSplitterPaneContainer: SplitterPaneContainerComponent
     ) {}
 
@@ -344,12 +342,10 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
                 })
         )
 
-        if (this._document) {
-            this._subscription$.add(
-                fromEvent(this._document.defaultView, 'resize')
-                    .subscribe(() => this._resizePanesToFitInContainer())
-            )
-        }
+        this._subscription$.add(
+            this._viewportRuler.change(10)
+                .subscribe(() => this._resizePanesToFitInContainer())
+        );
     }
 
     /** @hidden */
@@ -419,7 +415,6 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
 
         this._cdr.detectChanges();
     }
-
 
     /** @hidden */
     private _getPaneElementSizePx(paneId: string): number {
