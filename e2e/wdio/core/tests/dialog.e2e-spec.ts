@@ -37,26 +37,29 @@ import {
 } from '../fixtures/appData/dialog-contents';
 import { papayaFruit } from '../fixtures/testData/dialog';
 
-xdescribe('dialog test suite', function() {
+describe('dialog test suite', function() {
     const dialogPage = new DialogPo();
     const {
         templateDialog, button, dialog, dialogOutput, componentDialog, objectDialog, stateDialog, busyIndicator,
         configurationDialog, dialogContainer, resizeHandle, positionDialog, mobileDialog, complexDialog, dialogItems,
         searchBar, dialogCartOutput, stackedDialog, playgroundDialog, checkboxes, inputFields, dialogExamples,
-        customDialog, dialogBody
+        customDialog, dialogBody, complexDialogContainer
     } = dialogPage;
 
     beforeAll(() => {
         dialogPage.open();
     }, 1);
 
+    beforeEach(() => {
+        refreshPage();
+        waitForElDisplayed(dialogPage.title);
+    }, 1);
+
     describe('template based dialog example', function() {
         it('should check dialog dismissal and output', () => {
-            const closeBtn = 0;
-            const acceptBtn = 1;
-            const cancelBtn = 2;
+            const acceptBtn = 0;
+            const cancelBtn = 1;
 
-            checkDialogDismissals(templateDialog, button, closeBtn, closeBtnStatus);
             checkDialogDismissals(templateDialog, button, acceptBtn, continueStatus);
             checkDialogDismissals(templateDialog, button, cancelBtn, canceledStatus);
             checkCloseDialogWithEscapeKey(templateDialog, button);
@@ -65,11 +68,9 @@ xdescribe('dialog test suite', function() {
 
     describe('component based dialog example', function() {
         it('should check dialog dismissal and output', () => {
-            const closeBtn = 0;
-            const acceptBtn = 1;
-            const cancelBtn = 2;
+            const acceptBtn = 0;
+            const cancelBtn = 1;
 
-            checkDialogDismissals(componentDialog, button, closeBtn, closeBtnStatus);
             checkDialogDismissals(componentDialog, button, acceptBtn, continueStatus);
             checkDialogDismissals(componentDialog, button, cancelBtn, canceledStatus);
             checkCloseDialogWithEscapeKey(componentDialog, button);
@@ -213,10 +214,10 @@ xdescribe('dialog test suite', function() {
         it('should check resizing dialog', () => {
             openDialog(complexDialog);
             waitForNotDisplayed(busyIndicator);
-            const startStyle = getAttributeByName(dialogContainer, styleAttribute);
+            const startStyle = getAttributeByName(complexDialogContainer, styleAttribute);
 
-            checkResizingDialog();
-            expect(getAttributeByName(dialogContainer, styleAttribute)).not.toBe(startStyle);
+            checkResizingDialog(complexDialogContainer);
+            expect(getAttributeByName(complexDialogContainer, styleAttribute)).not.toBe(startStyle);
             clearAndCloseDialog();
         }, 1);
     });
@@ -458,7 +459,7 @@ xdescribe('dialog test suite', function() {
         });
     });
 
-    describe('visual regression', function() {
+    xdescribe('visual regression', function() {
         const complexExample = 12;
         const stackedExample = 13;
 
@@ -570,15 +571,15 @@ xdescribe('dialog test suite', function() {
         click(dialog + button);
     }
 
-    function checkResizingDialog(): void {
-        const elementStartWidth = getElementSize(dialogContainer, 0, 'width');
-        const elementStartHeight = getElementSize(dialogContainer, 0, 'height');
+    function checkResizingDialog(dContainer: string = dialogContainer): void {
+        const elementStartWidth = getElementSize(dContainer, 0, 'width');
+        const elementStartHeight = getElementSize(dContainer, 0, 'height');
         const handleLocationX = Math.floor(getElementLocation(resizeHandle, 0, 'x'));
         const handleLocationY = Math.floor(getElementLocation(resizeHandle, 0, 'y'));
 
         clickAndDragElement(handleLocationX + 1, handleLocationY + 1, handleLocationX + 110, handleLocationY + 100);
 
-        expect(getElementSize(dialogContainer, 0, 'width')).not.toBe(elementStartWidth);
-        expect(getElementSize(dialogContainer, 0, 'height')).not.toBe(elementStartHeight);
+        expect(getElementSize(dContainer, 0, 'width')).not.toBe(elementStartWidth);
+        expect(getElementSize(dContainer, 0, 'height')).not.toBe(elementStartHeight);
     }
 });
