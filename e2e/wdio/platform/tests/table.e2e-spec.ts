@@ -124,8 +124,8 @@ describe('Table component test suite', function() {
 
         it('should check possible to change description', () => {
             scrollIntoView(tableCustomColumnExample);
-            setValue('[id="fdp-id-15"]', 'test');
-            expect(getValue('[id="fdp-id-15"]')).toBe('test');
+            setValue(tableCustomColumnExample + 'fdp-table-cell input', 'test');
+            expect(getValue(tableCustomColumnExample + 'fdp-table-cell input')).toBe('test');
         });
     });
 
