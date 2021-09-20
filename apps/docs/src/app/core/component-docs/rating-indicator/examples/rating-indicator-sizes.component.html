@@ -2,6 +2,7 @@
     <div class="base-row">
         <strong>Size = {{ size || 'default' }}</strong>
         <fd-rating-indicator
+            ariaLabel="Rating indicator"
             [size]="size"
             totalRatings="111"
             #sampleSize
@@ -11,6 +12,7 @@
     <div class="base-row">
         <strong>And same size = {{ size || 'default' }} with halves</strong>
         <fd-rating-indicator
+            ariaLabel="Rating indicator"
             [size]="size"
             [allowHalves]="true"
             totalRatings="555"
