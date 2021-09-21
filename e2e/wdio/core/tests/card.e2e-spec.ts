@@ -3,7 +3,7 @@ import {
     isElementDisplayed,
     getAttributeByName,
     getText,
-    waitForElDisplayed, getElementClass
+    waitForElDisplayed, getElementClass, scrollIntoView
 } from '../../driver/wdio';
 import { checkElArrIsClickable, checkElementText, checkElementTextValue } from '../../helper/assertion-helper';
 import {cardTitleArr, compactAttr, analyticsTitle, badgeText, barChartCounterText, barChartItemsText, barChartTitleText, btnText,
@@ -78,6 +78,7 @@ describe('Card test suite:', function() {
 
     describe('Analytical card examples:', function() {
         it('should check header', () => {
+            scrollIntoView(kpiCardHeader);
             checkElArrIsClickable(kpiAnalyticsHeader);
             checkElementText(kpiCardHeader);
             expect(getText(kpiCardTitle)).toBe(analyticsTitle);

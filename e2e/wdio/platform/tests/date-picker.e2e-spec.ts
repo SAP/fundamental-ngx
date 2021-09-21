@@ -14,7 +14,7 @@ import {
 import { DatePicker } from '../pages/date-picker.po';
 import {
     date,
-    date1,
+    date1, date10, date11, date12,
     date2,
     date3,
     date4,
@@ -185,21 +185,39 @@ describe('Date picker suite', function () {
     });
 
     it('verify date Picker Formatting range date picker custom format', () => {
+        const currentMonth = new Date().getMonth() + 1;
+
         click(buttonDatePicker, 12);
         click(dayInCalendarButtonByValue('1'));
         click(dayInCalendarButtonByValue('15'));
         click(buttonDatePicker, 12);
-        expect(getValue(inputDatePicker, 12)).toEqual(date4);
+        if (currentMonth < 10) {
+            expect(getValue(inputDatePicker, 12)).toEqual(date4);
+        }
+        if (currentMonth >= 10) {
+            expect(getValue(inputDatePicker, 12)).toEqual(date10);
+        }
     });
 
     it('verify internationalization of Date Picker', () => {
+        const currentMonth = new Date().getMonth() + 1;
+
         click(buttonDatePicker, 13);
         click(dayInCalendarButtonByValue('1'));
-        expect(getValue(inputDatePicker, 13)).toEqual(date7);
-        click(buttonGerman);
-        expect(getValue(inputDatePicker, 13)).toEqual(date8);
-        click(buttonBulgarian);
-        expect(getValue(inputDatePicker, 13)).toEqual(date6);
+        if (currentMonth < 10) {
+            expect(getValue(inputDatePicker, 13)).toEqual(date7);
+            click(buttonGerman);
+            expect(getValue(inputDatePicker, 13)).toEqual(date8);
+            click(buttonBulgarian);
+            expect(getValue(inputDatePicker, 13)).toEqual(date6);
+        }
+        if (currentMonth >= 10) {
+            expect(getValue(inputDatePicker, 13)).toEqual(date11);
+            click(buttonGerman);
+            expect(getValue(inputDatePicker, 13)).toEqual(date8);
+            click(buttonBulgarian);
+            expect(getValue(inputDatePicker, 13)).toEqual(date12);
+        }
     });
 
     it('verify with the date picker, the user can see a day view, month view, year view, or year ranges.', () => {

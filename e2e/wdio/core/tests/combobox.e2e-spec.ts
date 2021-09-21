@@ -1,5 +1,6 @@
 import { ComboboxPo } from '../pages/combobox.po';
 import {
+    acceptAlert,
     clearValue,
     click,
     getAttributeByName,
@@ -103,6 +104,7 @@ describe('Combobox component test suit', function() {
         it('verify Custom Search Function by choose option in dropdown or typing name of it', () => {
             scrollIntoView(allInputFields, 8);
             click(activeInputButton, 6);
+            acceptAlert();
             expect(isElementDisplayed(dropdownPopover)).toBe(true, 'popover not displayed');
             click(dropdownOption);
             expect(getText(smallText_2)).toBe(searchTermAppleText);

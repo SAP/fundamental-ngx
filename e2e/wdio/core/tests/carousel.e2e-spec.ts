@@ -6,7 +6,7 @@ import {
     getText,
     mouseHoverElement,
     scrollIntoView, waitForElDisplayed,
-    clickAndDragElement, getElementClass
+    clickAndDragElement, getElementClass, pause
 } from '../../driver/wdio';
 import {
     imgSource,
@@ -89,6 +89,8 @@ describe('Carousel test suite', function() {
             const originalThirdCard = getText(displayedCards, 2);
 
             click(navBtns, 5);
+            // pause for animation to finish
+            pause(500);
             const newThirdCard = getText(displayedCards, 2);
             expect(getText(displayedCards)).toEqual(originalSecondCard);
             expect(getText(displayedCards, 1)).toEqual(originalThirdCard);
@@ -96,6 +98,8 @@ describe('Carousel test suite', function() {
             expect(getText(displayedCards, 2)).not.toEqual(originalThirdCard);
 
             click(navBtns, 4);
+            // pause for animation to finish
+            pause(500);
             expect(getText(displayedCards)).toEqual(originalFirstCard);
             expect(getText(displayedCards, 1)).toEqual(originalSecondCard);
             expect(getText(displayedCards, 2)).toEqual(originalThirdCard);
@@ -227,8 +231,12 @@ describe('Carousel test suite', function() {
         const firstImg = getAttributeByName(displayedImg, imgSource, imgIndex);
 
         click(navBtns, nextImgBtnIndex);
+        // pause for animation to finish
+        pause(500);
         expect(getAttributeByName(displayedImg, imgSource, imgIndex)).not.toBe(firstImg);
         click(navBtns, nextImgBtnIndex - 1);
+        // pause for animation to finish
+        pause(500);
         expect(getAttributeByName(displayedImg, imgSource, imgIndex)).toBe(firstImg);
     }
 });

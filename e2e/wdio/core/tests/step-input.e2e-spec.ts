@@ -86,7 +86,8 @@ describe('Step input component test suit', function () {
         scrollIntoView(configExample + input, 6);
         click(configExample + plusButton, 6);
         expect(parseFloat(getValue(configExample + input, 6))).toEqual(0.5);
-        doubleClick(configExample + minusButton, 6);
+        click(configExample + minusButton, 6);
+        click(configExample + minusButton, 6);
         expect(parseFloat(getValue(configExample + input, 6))).toEqual(-0.5);
     });
 
@@ -104,7 +105,7 @@ describe('Step input component test suit', function () {
         expect(getElementClass(stateExample + step, 2)).toContain('is-warning');
         expect(getElementClass(stateExample + step, 3)).toContain('is-error');
     });
-    
+
     it('should check entering invalid values in inputs', () => {
         for (let i = 0; i < sections.length; i++) {
             checkInputWithInvalidValues(sections[i]);

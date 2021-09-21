@@ -6,7 +6,7 @@ import {
     getElementClass,
     getText,
     getValue, isElementClickable,
-    isElementDisplayed,
+    isElementDisplayed, pause,
     refreshPage,
     scrollIntoView,
     sendKeys,
@@ -72,7 +72,6 @@ describe('Datetime picker suite', function () {
         sendKeys(['Escape']);
         click(datePickerButton, 1);
         expect(waitForElDisplayed(calendarExpanded)).toBe(true, 'calendar is not expanded when it should be');
-        scrollIntoView(topPage);
         scrollIntoView(selectYearButton);
         click(selectYearButton);
         expect(waitForElDisplayed(calendarYearsSection)).toBe(true, 'calendar years section is not displayed when it should be');
