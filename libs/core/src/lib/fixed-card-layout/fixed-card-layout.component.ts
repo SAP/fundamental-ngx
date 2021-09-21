@@ -21,12 +21,13 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
+import { CONTROL, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { FocusKeyManager } from '@angular/cdk/a11y';
+import { CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
-import { CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { FocusKeyManager } from '@angular/cdk/a11y';
 
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
 
 const CARD_MINIMUM_WIDTH = 320; // in px; 20rem max card size
@@ -66,7 +67,7 @@ type CardColumn = CardDefinitionDirective[];
 @Directive({ selector: '[fdGroup]' })
 export class DndGroup {
     /** @hidden */
-    public _onDndItemFocus$ = new Subject<[number, number]>();
+    _onDndItemFocus$ = new Subject<[number, number]>();
 
     constructor(public cdr: ChangeDetectorRef) {}
 
@@ -87,7 +88,7 @@ export class DndItem implements OnInit {
     @Input()
     groupIndex: number;
 
-    constructor(public dndGroup: DndGroup, public elementRef: ElementRef, public cardLayout: FixedCardLayoutComponent) {
+    constructor(private dndGroup: DndGroup, private elementRef: ElementRef, private cardLayout: FixedCardLayoutComponent) {
     }
 
     /** @hidden */
@@ -102,8 +103,10 @@ export class DndItem implements OnInit {
     // disabled possibility to move card
     @HostListener('keyup', ['$event'])
     onKeyUp(event: KeyboardEvent): void {
-        if (event.key === 'Control') {
+        if (KeyUtil.isKeyCode(event, CONTROL)) {
             this.cardLayout._enableKeyboard = false;
+            this.dndGroup._onDndItemFocus$.unsubscribe();
+            this.dndGroup._onDndItemFocus$ = new Subject<[number, number]>();
         }
     }
 
@@ -111,21 +114,21 @@ export class DndItem implements OnInit {
     @HostListener('keydown', ['$event'])
     onKeyDown(event: KeyboardEvent): void {
         const group = this.cardLayout.columns[this.groupIndex];
-        if (event.key === 'Control') {
+        if (KeyUtil.isKeyCode(event, CONTROL)) {
             this.cardLayout._enableKeyboard = true
         }
-        if (event.key === 'ArrowRight' && this.cardLayout._enableKeyboard && this.cardLayout.columns.length !== this.groupIndex + 1) {
+        if (KeyUtil.isKeyCode(event, RIGHT_ARROW) && this.cardLayout._enableKeyboard && this.cardLayout.columns.length !== this.groupIndex + 1) {
             const nextGroup = this.cardLayout.columns[this.groupIndex + 1];
             const nextGroupIndex = this.groupIndex + 1;
             transferArrayItem(group, nextGroup, this.itemIndex, 0);   
             this.dndGroup.focusDndItem(nextGroupIndex, 0);
-        } else if (event.key === 'ArrowDown' && this.cardLayout._enableKeyboard) {         
+        } else if (KeyUtil.isKeyCode(event, DOWN_ARROW) && this.cardLayout._enableKeyboard) {         
             moveItemInArray(group, this.itemIndex, this.itemIndex + 1);
             this.dndGroup.focusDndItem(this.groupIndex, this.itemIndex + 1);
-        } else if (event.key === 'ArrowUp' && this.cardLayout._enableKeyboard) {
+        } else if (KeyUtil.isKeyCode(event, UP_ARROW) && this.cardLayout._enableKeyboard) {
             moveItemInArray(group, this.itemIndex, this.itemIndex - 1);
             this.dndGroup.focusDndItem(this.groupIndex, this.itemIndex - 1);
-        } else if (event.key === 'ArrowLeft' && this.cardLayout._enableKeyboard && this.groupIndex) {
+        } else if (KeyUtil.isKeyCode(event, LEFT_ARROW) && this.cardLayout._enableKeyboard && this.groupIndex) {
             const nextGroup = this.cardLayout.columns[this.groupIndex - 1];
             const nextGroupIndex = this.groupIndex - 1;
             transferArrayItem(group, nextGroup, this.itemIndex, 0);
@@ -171,14 +174,13 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     cardDraggedDropped: EventEmitter<CardDropped> = new EventEmitter<CardDropped>();
 
     /** Array of CardDefinitionDirective Array.To make Table kind of layout.*/
-    public columns: CardColumn[];
+    columns: CardColumn[];
 
-    /** handles rtl service
-     * @hidden */
-    public dir: string;
+    /** handles rtl service */
+    dir: string;
 
     /** @hidden */
-    public _enableKeyboard = false;
+    _enableKeyboard = false;
 
     /** @hidden Number of Columns in layout */
     private _numberOfColumns: number;
@@ -268,7 +270,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     }
 
     /** Distribute cards on window resize */
-    public updateLayout(): void {
+    updateLayout(): void {
         this._numberOfColumns = this._getNumberOfColumns();
         if (this._previousNumberOfColumns !== this._numberOfColumns) {
             this._previousNumberOfColumns = this._numberOfColumns;
@@ -277,7 +279,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     }
 
     /** Return available width for fd-card-layout */
-    public getWidthAvailable(): number {
+    getWidthAvailable(): number {
         return this.layout.nativeElement.getBoundingClientRect().width;
     }
 
