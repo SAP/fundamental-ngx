@@ -21,9 +21,20 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import { CONTROL, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { 
+    CONTROL, 
+    DOWN_ARROW, 
+    LEFT_ARROW, 
+    RIGHT_ARROW, 
+    UP_ARROW 
+} from '@angular/cdk/keycodes';
 import { FocusKeyManager } from '@angular/cdk/a11y';
-import { CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { 
+    CdkDragDrop, 
+    CdkDropList, 
+    moveItemInArray, 
+    transferArrayItem 
+} from '@angular/cdk/drag-drop';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
@@ -88,8 +99,11 @@ export class DndItem implements OnInit {
     @Input()
     groupIndex: number;
 
-    constructor(private dndGroup: DndGroup, private elementRef: ElementRef, private cardLayout: FixedCardLayoutComponent) {
-    }
+    constructor(
+        private dndGroup: DndGroup, 
+        private elementRef: ElementRef, 
+        private cardLayout: FixedCardLayoutComponent
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -117,18 +131,24 @@ export class DndItem implements OnInit {
         if (KeyUtil.isKeyCode(event, CONTROL)) {
             this.cardLayout._enableKeyboard = true
         }
-        if (KeyUtil.isKeyCode(event, RIGHT_ARROW) && this.cardLayout._enableKeyboard && this.cardLayout.columns.length !== this.groupIndex + 1) {
+        if (KeyUtil.isKeyCode(event, RIGHT_ARROW) 
+        && this.cardLayout._enableKeyboard 
+        && this.cardLayout.columns.length !== this.groupIndex + 1) {
             const nextGroup = this.cardLayout.columns[this.groupIndex + 1];
             const nextGroupIndex = this.groupIndex + 1;
             transferArrayItem(group, nextGroup, this.itemIndex, 0);   
             this.dndGroup.focusDndItem(nextGroupIndex, 0);
-        } else if (KeyUtil.isKeyCode(event, DOWN_ARROW) && this.cardLayout._enableKeyboard) {         
+        } else if (KeyUtil.isKeyCode(event, DOWN_ARROW) 
+        && this.cardLayout._enableKeyboard) {         
             moveItemInArray(group, this.itemIndex, this.itemIndex + 1);
             this.dndGroup.focusDndItem(this.groupIndex, this.itemIndex + 1);
-        } else if (KeyUtil.isKeyCode(event, UP_ARROW) && this.cardLayout._enableKeyboard) {
+        } else if (KeyUtil.isKeyCode(event, UP_ARROW) 
+        && this.cardLayout._enableKeyboard) {
             moveItemInArray(group, this.itemIndex, this.itemIndex - 1);
             this.dndGroup.focusDndItem(this.groupIndex, this.itemIndex - 1);
-        } else if (KeyUtil.isKeyCode(event, LEFT_ARROW) && this.cardLayout._enableKeyboard && this.groupIndex) {
+        } else if (KeyUtil.isKeyCode(event, LEFT_ARROW) 
+        && this.cardLayout._enableKeyboard 
+        && this.groupIndex) {
             const nextGroup = this.cardLayout.columns[this.groupIndex - 1];
             const nextGroupIndex = this.groupIndex - 1;
             transferArrayItem(group, nextGroup, this.itemIndex, 0);
@@ -197,7 +217,10 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden FocusKeyManager instance */
     private _keyboardEventsManager: FocusKeyManager<FixedCardLayoutItemComponent>;
 
-    constructor(private readonly _changeDetector: ChangeDetectorRef, @Optional() private _rtlService: RtlService) {}
+    constructor(
+        private readonly _changeDetector: ChangeDetectorRef, 
+        @Optional() private _rtlService: RtlService
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
