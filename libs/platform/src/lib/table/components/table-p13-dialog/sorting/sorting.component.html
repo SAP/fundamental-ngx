@@ -22,7 +22,7 @@
 
         <div
             class="sort-row"
-            *ngFor="let rule of rules; let i = index"
+            *ngFor="let rule of rules; let i = index; trackBy: _trackByColumnKey"
         >
             <fd-select
                 class="sort-row__select"
@@ -33,7 +33,7 @@
                 i18n-placeholder="@@platformTableP13SortDialogNoneSelectedColumn|Table column select placeholder"
             >
                 <fd-option
-                    *ngFor="let column of columns"
+                    *ngFor="let column of columns | getAvailableSortColumns : rules : rule.columnKey "
                     [value]="column.key"
                 >
                     {{column.label}}
