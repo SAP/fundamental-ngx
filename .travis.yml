@@ -33,7 +33,7 @@ jobs:
       name: build pack library
       if: type = pull_request
       before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
-      script: bash ./ci-scripts/build-lib.sh
+      script: bash ./ci-scripts/build-lib.js
     - stage: "Test"
       name: Sauce Labs - e2e tests - platform
       if: type = pull_request
