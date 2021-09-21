@@ -62,6 +62,8 @@ export class TablePo extends BaseComponentPo {
     optionSingle = '[value="single"]';
     optionMultiple = '[value="multiple"]';
     tableCellFixed = 'thead .fd-table__cell--fixed';
+    playgroundSchemaInput = '.form-control.fd-input';
+    toolbarText = '.fd-label.fd-toolbar__overflow-label';
 
     open(): void {
         super.open(this.url);

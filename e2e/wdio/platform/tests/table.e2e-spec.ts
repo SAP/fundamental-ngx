@@ -59,8 +59,7 @@ describe('Table component test suite', function() {
         footerButtonOk, dialogItem, columnHeader, tableP13SortExample, tableP13FilterExample, tableP13GroupExample,
         popoverDropdownButton, buttonAdd, buttonRemove, dialogInput, expandedButton, tableCustomColumnExample, inputFields,
         playgroundExample, fdpTable, optionCondensed, optionCozy, optionCompact, dropdown, optionSingle, optionMultiple,
-        tableCellFixed, checkbox
-
+       tableCellFixed, checkbox, playgroundSchemaInput, toolbarText
     } = tablePage;
 
     beforeAll(() => {
@@ -103,6 +102,11 @@ describe('Table component test suite', function() {
         it('should check searching table item', () => {
             findElementInTable(tableActivableExample, tableCellArr);
         });
+
+        it('should check activable row', () => {
+            scrollIntoView(tableActivableExample);
+            expect(getElementClass(tableActivableExample + tableRow)).toContain('fd-table__row--activable');
+        });
     });
 
     describe('Check Custom Column', function() {
@@ -142,12 +146,19 @@ describe('Table component test suite', function() {
                 expect(getText(tableSingleRowSelectionExample + tableRow + tableCell, i)).toBe(tableCellArr[i - 1]);
             }
         });
+
+        it('should check searching table item', () => {
+            scrollIntoView(tableSingleRowSelectionExample);
+            click(tableSingleRowSelectionExample + tableRow + tableCell);
+            expect(getAttributeByName(tableSingleRowSelectionExample + tableRow, 'aria-selected'))
+                .toBe('true');
+        });
     });
 
     describe('Check Multi Row Selection', function() {
 
         it('should verify checkboxes', () => {
-            checkCheckbox(tableMultipleRowSelectionExample);
+            checkAllCheckbox(tableMultipleRowSelectionExample);
         });
     });
 
@@ -244,7 +255,7 @@ describe('Table component test suite', function() {
         });
 
         it('should verify checkboxes', () => {
-            checkCheckbox(tableGroupableExample);
+            checkAllCheckbox(tableGroupableExample);
         });
 
         it('should check ascending sorting by name and status', () => {
@@ -289,7 +300,7 @@ describe('Table component test suite', function() {
         });
 
         it('should verify checkboxes', () => {
-            checkCheckbox(tableFreezableExample);
+            checkAllCheckbox(tableFreezableExample);
         });
     });
 
@@ -313,7 +324,7 @@ describe('Table component test suite', function() {
         });
     });
 
-    describe('Check Loading/Busy State', function() {
+    describe('Check Page Scrolling', function() {
 
         it('should check searching table item', () => {
             scrollIntoView(tablePageScrollingExample);
@@ -324,8 +335,19 @@ describe('Table component test suite', function() {
             expect(rowLength).toEqual(1);
             const cellLength = getElementArrayLength(tablePageScrollingExample + tableRow + tableCell);
             for (let i = 0; i < cellLength; i++) {
+                scrollIntoView(tablePageScrollingExample + tableRow + tableCell, i);
                 expect(getText(tablePageScrollingExample + tableRow + tableCell, i)).toBe(tableCellArr2[i]);
             }
+        });
+
+        it('should check scroll', () => {
+            scrollIntoView(tablePageScrollingExample);
+            scrollIntoView(tablePageScrollingExample + tableRow, 40);
+
+            expect(getText(tablePageScrollingExample + tableCellName, 40))
+                .toBe('Product name 40');
+            expect(getText(tablePageScrollingExample + tableCellDescription, 40))
+                .toBe('Product description goes here 40');
         });
     });
 
@@ -527,7 +549,6 @@ describe('Table component test suite', function() {
             click(playgroundExample + dropdown);
             click(optionCondensed);
             expect(getElementClass(playgroundExample + fdpTable)).toContain('fd-table--condensed');
-
         });
 
         it('should should check table content density', () => {
@@ -565,6 +586,16 @@ describe('Table component test suite', function() {
             click(playgroundExample + checkbox, 4);
             expect(isElementDisplayed(playgroundExample + busyIndicator))
                 .toBe(true, 'busy indicator not displayed');
+        });
+
+        it('should check changing title and hide element count', () => {
+            scrollIntoView(playgroundExample);
+            setValue(playgroundExample + playgroundSchemaInput, 'test');
+
+            expect(getText(playgroundExample + toolbarText)).toBe('test (30)');
+
+            click(playgroundExample + checkbox, 5);
+            expect(getText(playgroundExample + toolbarText)).toBe('test');
         });
     });
 
@@ -627,7 +658,7 @@ describe('Table component test suite', function() {
         click(barButton);
     }
 
-    function checkCheckbox(selector): void {
+    function checkAllCheckbox(selector): void {
         scrollIntoView(selector);
         click(selector + 'fd-checkbox');
         const checkboxLength = getElementArrayLength(selector + tableRow);

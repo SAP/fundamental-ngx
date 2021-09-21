@@ -56,5 +56,3 @@ export const testText7 = 'penatibus et magnis';
 export const pharetraTestText = 'pharetra magna vestibulum aliquet';
 export const nuncTestText = 'nunc nisl duis bibendum';
 export const massaTestText = 'massa quis augue luctus tincidunt';
-
-
