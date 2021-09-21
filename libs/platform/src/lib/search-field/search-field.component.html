@@ -1,3 +1,10 @@
+<ng-container *ngTemplateOutlet="mobile ? mobileTemplate : inputFieldTemplate"></ng-container>
+
+<ng-template #mobileTemplate>
+    <ng-container *ngTemplateOutlet="inputFieldTemplate"></ng-container>
+</ng-template>
+
+<ng-template #inputFieldTemplate>
 <div
     class="fdp-search-field"
     [class.with-categories]="showCategoryDropdown"
@@ -37,6 +44,9 @@
             (keydown.enter)="onSearchSubmit()"
             [(ngModel)]="inputText"
             (ngModelChange)="onValueChange($event)"
+            (click)="mobile && openMobileMode()"
+            (focus)="mobile && onFocus()"
+            (blur)="mobile && onBlur()"
         />
         <span
             class="fd-input-group__addon fd-input-group__addon--button"
@@ -49,6 +59,7 @@
                 class="fdp-search-field__clear fd-input-group__button fd-button fd-button--transparent"
                 [attr.disabled]="disabled ? '' : null"
                 [class.fd-button--compact]="contentDensity === 'compact'"
+                [attr.id]="clearId"
                 (click)="clearTextInput()"
             >
                 <fd-icon glyph="decline"></fd-icon>
@@ -57,7 +68,7 @@
         <span
             class="fd-input-group__addon fd-input-group__addon--button"
             [class.fd-input-group__addon--compact]="contentDensity === 'compact'"
-            *ngIf="!isLoading"
+            *ngIf="(isLoading) || (!isLoading && !isSearchDone)"
         >
             <button
                 i18n-title="@@platformSearchFieldSubmitButtonTitle"
@@ -74,7 +85,7 @@
         <span
             class="fd-input-group__addon fd-input-group__addon--button"
             [class.fd-input-group__addon--compact]="contentDensity === 'compact'"
-            *ngIf="isLoading"
+            *ngIf="!isLoading && isRefresh && !isFocused"
         >
             <button
                 i18n-title="@@platformSearchFieldSynchronizeButtonTitle"
@@ -82,23 +93,27 @@
                 class="fdp-search-field__loading fd-input-group__button fd-button fd-button--transparent"
                 [attr.disabled]="disabled ? '' : null"
                 [class.fd-button--compact]="contentDensity === 'compact'"
-                (click)="onSearchSubmit()"
+                [attr.id]="refreshId"
+                (click)="onSearchSubmit(true)"
             >
                 <fd-icon glyph="synchronize"></fd-icon>
             </button>
         </span>
     </div>
 </div>
+</ng-template>
+
 <ng-template #suggestionMenuTemplate>
     <div
-        class="fdp-search-field__suggestion-dropdown fd-popover__body fd-popover__body--no-arrow"
+        class="fdp-search-field__suggestion-dropdown"
         [attr.dir]="dir"
-        *ngIf="(dropdownValues$ | async | suggestionMatches: inputText)?.length > 0"
+        *ngIf="(dropdownValues$ | async | suggestionMatches: inputText: mobile)?.length > 0"
     >
         <nav
             class="fd-menu"
             tabindex="-1"
-            [ngClass]="{ 'fd-menu--compact': contentDensity === 'compact' }"
+            [class.fd-menu--compact]="contentDensity === 'compact'"
+            [class.fd-menu--mobile]="mobile"
             [attr.id]="menuId"
             (keydown)="onKeydown($event)"
         >
@@ -106,7 +121,7 @@
                 <li
                     fdpSearchFieldSuggestion
                     class="fdp-search-field__suggestion-item fd-menu__item fd-menu__link"
-                    *ngFor="let value of dropdownValues$ | async | suggestionMatches: inputText"
+                    *ngFor="let value of dropdownValues$ | async | suggestionMatches: inputText: mobile"
                     (keydown.enter)="onItemClick(value)"
                     (keydown.tab)="onItemClick(value)"
                     (keyup.space)="onItemClick(value); $event.stopPropagation()"

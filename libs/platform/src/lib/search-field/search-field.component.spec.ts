@@ -335,6 +335,7 @@ describe('SearchFieldComponent', () => {
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         host.categories = CATEGORIES;
         host.categoryLabel = 'Category';
+        host.isLoading = true;
 
         fixture.detectChanges();
         let inputField: ElementRef = fixture.debugElement.query(By.css('input.fd-input'));
@@ -580,7 +581,7 @@ describe('SearchFieldComponent', () => {
         host.isLoading = true;
         fixture.detectChanges();
 
-        const cancelButton: ElementRef = fixture.debugElement.query(By.css('.fdp-search-field__loading'));
+        const cancelButton: ElementRef = fixture.debugElement.query(By.css('.fdp-search-field__submit'));
         cancelButton.nativeElement.click();
         fixture.detectChanges();
 

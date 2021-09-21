@@ -5,6 +5,7 @@ import {
     Directive,
     ElementRef,
     EventEmitter,
+    Injector,
     Input,
     OnDestroy,
     OnInit,
@@ -27,9 +28,12 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import { fromEvent, isObservable, Observable, of, Subject, Subscription } from 'rxjs';
 import { filter, map, take, takeUntil, tap } from 'rxjs/operators';
 
-import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { BaseComponent, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
+import { SEARCH_FIELD_COMPONENT } from './search-field-mobile/search-field-mobile.interface';
+import { SearchFieldMobileComponent } from './search-field-mobile/search-field-mobile.component';
+import { MobileModeConfig } from '@fundamental-ngx/core';
 
 export interface SearchInput {
     text: string;
@@ -77,6 +81,27 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      */
     @Input()
     placeholder: string;
+
+    /** Set Mobile Mode */
+    @Input()
+    mobile: boolean;
+
+    /** Search Field Mobile configuration */
+    @Input()
+    mobileConfig: MobileModeConfig
+
+    @Input()
+    autoResize = false;
+
+    /** @hidden
+     * Max width of list container
+     * */
+    maxWidth?: number;
+
+    /** @hidden
+     * Min width of list container
+     * */
+    minWidth?: number;
 
     /**
      * List of string values to populate suggestion dropdown selection.
@@ -201,6 +226,9 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     @Output()
     cancelSearch: EventEmitter<SearchInput> = new EventEmitter();
 
+    @Output()
+    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
     /** @hidden Focus state */
     get isFocused(): boolean {
         return this._isFocused;
@@ -239,13 +267,20 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     public inputId = '';
     public submitId = '';
     public menuId = '';
+    public refreshId = '';
+    public clearId = '';
     public dir = 'ltr';
+
+    isOpen = false;
+
+    isRefresh = true;
 
     private _currentSearchSuggestionAnnoucementMessage = '';
     private _suggestionOverlayRef: OverlayRef;
     private _suggestionPortal: TemplatePortal;
     private _suggestionkeyManager: FocusKeyManager<SearchFieldSuggestionDirective>;
     private _isFocused = false;
+    isSearchDone = false;
 
     private _rtlChangeSubscription = Subscription.EMPTY;
     private _outsideClickSubscription = Subscription.EMPTY;
@@ -257,6 +292,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     @ViewChild('inputGroup', { static: false }) inputGroup: ElementRef<HTMLElement>;
     @ViewChild('inputField', { static: false }) inputField: ElementRef<HTMLElement>;
 
+    @ViewChild('inputFieldTemplate') inputFieldTemplate: TemplateRef<any>;
     @ViewChild('suggestionMenuTemplate', { static: false }) suggestionMenuTemplate: TemplateRef<any>;
     @ViewChildren(SearchFieldSuggestionDirective) suggestionItems: QueryList<SearchFieldSuggestionDirective>;
 
@@ -274,7 +310,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         protected _cd: ChangeDetectorRef,
         @Optional() private _rtl: RtlService,
         private readonly _elementRef: ElementRef,
-        private _liveAnnouncer: LiveAnnouncer
+        private _liveAnnouncer: LiveAnnouncer,
+        readonly _dynamicComponentService: DynamicComponentService,
     ) {
         super(_cd);
     }
@@ -283,6 +320,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         const baseId = 'fdp-search-field';
         this.inputId = `${baseId}-input-${searchFieldIdCount++}`;
         this.submitId = `${baseId}-submit-${searchFieldIdCount++}`;
+        this.refreshId = `${baseId}-refresh-${searchFieldIdCount}`;
+        this.clearId = `${baseId}-clear-${searchFieldIdCount}`;
         this.menuId = `${baseId}-menu-${searchFieldIdCount++}`;
 
         if (this._rtl) {
@@ -293,6 +332,10 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         }
 
         this._listenElementEvents();
+
+        if (this.mobile) {
+            this._setUpMobileMode();
+        }
     }
 
     ngOnDestroy(): void {
@@ -321,6 +364,18 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         }
     }
 
+    /** Capturing focus in mobile mode */
+    onFocus(): void {
+        this._isFocused = true;
+        this._cd.markForCheck();
+    }
+
+    /** Capturing blur in mobile mode */
+    onBlur(): void {
+        this._isFocused = false;
+        this._cd.markForCheck();
+    }
+
     /**
      * Capturing value change in input text field of combobox.
      * @hidden
@@ -329,6 +384,11 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         // when search result not changed but input text is changed.
         // again need to announce the result, so clear this message.
         setTimeout(() => (this._currentSearchSuggestionAnnoucementMessage = ''));
+        this.isSearchDone = false;
+
+        if (this.mobile && !this.isOpen) {
+            this.openMobileMode();
+        }
 
         this.inputChange.emit(this.searchFieldValue);
         const inputStr: string = event.trim();
@@ -336,7 +396,11 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             this.closeSuggestionMenu();
             return;
         }
-        this.openSuggestionMenu();
+
+        if (!this.mobile) {
+            this.openSuggestionMenu();
+        }
+
         if (this.dataSource) {
             const match = new Map();
             match.set('keyword', inputStr);
@@ -358,6 +422,9 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this.inputChange.emit(this.searchFieldValue);
         this.searchSubmit.emit(this.searchFieldValue);
         this.closeSuggestionMenu();
+        if (this.mobile) {
+            this.showDialog(false);
+        }
         this._cd.detectChanges();
     }
 
@@ -365,13 +432,24 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * Callback function which gets executed on keyboard enter of input text field.
      * @hidden
      */
-    onSearchSubmit(): void {
+    onSearchSubmit(isRefresh = false): void {
+        this.isRefresh = isRefresh;
+
         if (this.isLoading) {
             this.cancelSearch.emit();
         } else {
             this.searchSubmit.emit(this.searchFieldValue);
 
-            this.closeSuggestionMenu();
+            this.isRefresh = true;
+            this._isFocused = false;
+
+            if (this.inputText) {
+                this.isSearchDone = true;
+            }
+
+            this.closeSuggestionMenu(false);
+
+            this._cd.markForCheck();
         }
     }
 
@@ -424,6 +502,26 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this.showDropdown = true;
     }
 
+    openMobileMode(): void {
+        this.showDialog(true);
+    }
+
+    dialogApprove(): void {
+        this.onItemClick(this.inputText);
+    }
+
+    dialogDismiss(): void {
+        this.showDialog(false);
+    }
+
+    showDialog(isOpen: boolean): void {
+        if (this.isOpen !== isOpen) {
+            this.isOpen = isOpen;
+
+            this.isOpenChange.emit(isOpen);
+        }
+    }
+
     closeSuggestionMenu(focus = true): void {
         if (!this._suggestionOverlayRef) {
             return;
@@ -440,7 +538,18 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this._cd.detectChanges();
         this.inputChange.emit(this.searchFieldValue);
         this.cancelSearch.emit(this.searchFieldValue);
-        this.closeSuggestionMenu();
+
+        this.isRefresh = true;
+        this._isFocused = false;
+        this.isSearchDone = false;
+
+        this.closeSuggestionMenu(false);
+
+
+
+        // this.closeSuggestionMenu(false);
+        //
+        // this._cd.markForCheck();
     }
 
     _createSuggetionOverlayConfig(): OverlayConfig {
@@ -500,7 +609,23 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     private _listenElementEvents(): void {
         fromEvent(this._elementRef.nativeElement, 'focus', { capture: true })
             .pipe(
-                tap(() => {
+                map((event: MouseEvent) => {
+                    const target = event.target as HTMLElement;
+                    if (!target.id) {
+                        return;
+                    }
+
+                    if (this.refreshId === target.id) {
+                        return;
+                    }
+
+                    if (this.clearId === target.id) {
+                        if (this.isSearchDone) {
+                            return;
+                        }
+                        this._isFocused = false;
+                    }
+
                     this._isFocused = true;
                     this._cd.markForCheck();
                 }),
@@ -530,13 +655,22 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             this._liveAnnouncer.announce(this._currentSearchSuggestionAnnoucementMessage);
         }
     }
+
+    private _setUpMobileMode(): void {
+        this._dynamicComponentService.createDynamicComponent(
+            { inputFieldTemplate: this.inputFieldTemplate, suggestionMenuTemplate: this.suggestionMenuTemplate },
+            SearchFieldMobileComponent,
+            { container: this._elementRef.nativeElement },
+            { injector: Injector.create({ providers: [{ provide: SEARCH_FIELD_COMPONENT, useValue: this }] }) }
+        );
+    }
 }
 
 @Pipe({
     name: 'suggestionMatches'
 })
 export class SuggestionMatchesPipe implements PipeTransform {
-    transform(values: string[], match: string): string[] {
-        return values.filter((value) => value.toLowerCase().indexOf(match?.trim().toLowerCase()) > -1);
+    transform(values: string[], match: string, mobile = false): string[] {
+        return mobile && !match ? values : values.filter((value) => value.toLowerCase().indexOf(match?.trim().toLowerCase()) > -1);
     }
 }

@@ -1,4 +1,6 @@
-<fd-docs-section-title id="simple" componentName="search-field">Search Field </fd-docs-section-title>
+<fd-docs-section-title id="simple" componentName="search-field"
+    >Search Field
+</fd-docs-section-title>
 <description
     >The data for the typeahead dropdown list can be provided via the <code>suggestions</code> property. Data provided
     this manner can either be an array of strings or an Observeable with an array of strings as output. Suggestion data
@@ -19,8 +21,7 @@
     >The Search field <code>ariaLabel</code> property can be used to set ARIA attribute to clarify what search field is.
 </description>
 <description
-    >The Search field <code>ariaLabelledBy</code> property can be used to set ARIA attribute with id of elements which
-    labels search input to clarify what search field is.
+    >The Search field <code>ariaLabelledBy</code> property can be used to set ARIA attribute with id of elements which labels search input to clarify what search field is.
 </description>
 <component-example>
     <fdp-platform-search-field-basic-example></fdp-platform-search-field-basic-example>
@@ -61,3 +62,25 @@
 <code-example [exampleFiles]="searchFieldDataSource"></code-example>
 
 <separator></separator>
+
+<fd-docs-section-title id="mobile" componentName="search-field">
+    Search Field Mobile Mode
+</fd-docs-section-title>
+<description>
+    To use Search-Field in mobile mode:
+    <ul>
+        <li>import <code>PlatformSearchFieldMobileModule</code></li>
+        <li>Set <code>[mobile]</code> property to true</li>
+        <li>Set <code>[mobileConfig]</code> with <code>MobileModeConfig</code> configuration object to customize the
+            look of the control
+        </li>
+    </ul>
+
+    Search-Field Mobile Mode can be configured <strong>globally</strong> by providing <code>MOBILE_MODE_CONFIG</code> token.
+    Check <a routerLink="/core/global-config" fragment="mobile-mode-config">Global Configuration page</a> for more
+    information.
+</description>
+
+<component-example>
+    <fdp-platform-search-field-mobile-example></fdp-platform-search-field-mobile-example>
+</component-example>
