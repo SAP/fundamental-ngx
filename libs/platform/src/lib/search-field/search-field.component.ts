@@ -90,19 +90,6 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     @Input()
     mobileConfig: MobileModeConfig
 
-    @Input()
-    autoResize = false;
-
-    /** @hidden
-     * Max width of list container
-     * */
-    maxWidth?: number;
-
-    /** @hidden
-     * Min width of list container
-     * */
-    minWidth?: number;
-
     /**
      * List of string values to populate suggestion dropdown selection.
      */
