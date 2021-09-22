@@ -1,7 +1,6 @@
 export const continueStatus = 'Continue';
 export const canceledStatus = 'Cancel';
 export const approvedStatus = 'Approved';
-export const closeBtnStatus = 'Close button';
 export const escapeStatus = 'escape';
 export const dismissedStatus = 'Dismissed';
 export const styleAttribute = 'style';

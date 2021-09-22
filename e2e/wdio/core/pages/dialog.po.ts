@@ -24,8 +24,9 @@ export class DialogPo extends CoreBaseComponentPo {
     button = 'button';
     dialogOutput = 'p';
     busyIndicator = 'fd-busy-indicator';
-    disabledDialogContainer = this.dialog + '.cdk-drag-disabled';
+    // works by the same way, just need use different according to specific dialogs
     dialogContainer = this.dialog + '.cdk-drag';
+    dialogContainer2 = this.dialog + '.cdk-drag-disabled';
     resizeHandle = this.dialog + '.fd-dialog__resize-handle';
     dialogItems = this.dialog + 'li';
     searchBar = this.dialog + 'input';

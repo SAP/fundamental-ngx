@@ -26,7 +26,6 @@ import {
     bottomRightPosition,
     canceledStatus,
     classAttribute,
-    closeBtnStatus,
     continueStatus,
     customClass,
     defaultPrice,
@@ -41,7 +40,7 @@ describe('dialog test suite', function () {
     const dialogPage = new DialogPo();
     const {
         templateDialog, button, dialog, dialogOutput, componentDialog, objectDialog, stateDialog, busyIndicator,
-        configurationDialog, disabledDialogContainer, resizeHandle, positionDialog, mobileDialog, complexDialog, dialogItems,
+        configurationDialog, dialogContainer2, resizeHandle, positionDialog, mobileDialog, complexDialog, dialogItems,
         searchBar, dialogCartOutput, stackedDialog, playgroundDialog, checkboxes, inputFields, dialogExamples,
         customDialog, dialogBody, dialogContainer
     } = dialogPage;
@@ -161,7 +160,7 @@ describe('dialog test suite', function () {
         it('should check dialog in bottom right', () => {
             openDialog(positionDialog);
 
-            expect(getAttributeByName(disabledDialogContainer, styleAttribute)).toContain(bottomRightPosition);
+            expect(getAttributeByName(dialogContainer2, styleAttribute)).toContain(bottomRightPosition);
             closeDialog();
         });
     });
@@ -170,7 +169,7 @@ describe('dialog test suite', function () {
         it('should check mobile property', () => {
             openDialog(mobileDialog);
 
-            expect(getAttributeByName(disabledDialogContainer, classAttribute)).toContain(mobileProperty);
+            expect(getAttributeByName(dialogContainer2, classAttribute)).toContain(mobileProperty);
             closeDialog();
         });
     });
@@ -339,28 +338,28 @@ describe('dialog test suite', function () {
         it('should check dialog fullScreen option', () => {
             openDialog(playgroundDialog);
 
-            expect(getAttributeByName(disabledDialogContainer, classAttribute))
+            expect(getAttributeByName(dialogContainer2, classAttribute))
                 .not.toContain(fullscreenClass);
 
             closeDialog();
             click(playgroundDialog + checkboxes, 4);
             openDialog(playgroundDialog);
 
-            expect(getAttributeByName(disabledDialogContainer, classAttribute))
+            expect(getAttributeByName(dialogContainer2, classAttribute))
                 .toContain(fullscreenClass);
         });
 
         it('should check dialog mobile option', () => {
             openDialog(playgroundDialog);
 
-            expect(getAttributeByName(disabledDialogContainer, classAttribute))
+            expect(getAttributeByName(dialogContainer2, classAttribute))
                 .not.toContain(mobileClass);
 
             closeDialog();
             click(playgroundDialog + checkboxes, 5);
             openDialog(playgroundDialog);
 
-            expect(getAttributeByName(disabledDialogContainer, classAttribute))
+            expect(getAttributeByName(dialogContainer2, classAttribute))
                 .toContain(mobileClass);
         });
 
@@ -368,13 +367,13 @@ describe('dialog test suite', function () {
             click(playgroundDialog + checkboxes, 5);
             openDialog(playgroundDialog);
 
-            expect(getAttributeByName(disabledDialogContainer, classAttribute))
+            expect(getAttributeByName(dialogContainer2, classAttribute))
                 .not.toContain(noMobileSpacingClass);
             closeDialog();
             click(playgroundDialog + checkboxes, 6);
             openDialog(playgroundDialog);
 
-            expect(getAttributeByName(disabledDialogContainer, classAttribute))
+            expect(getAttributeByName(dialogContainer2, classAttribute))
                 .toContain(noMobileSpacingClass);
         });
 
@@ -429,8 +428,8 @@ describe('dialog test suite', function () {
             sendKeys('400px');
             openDialog(playgroundDialog);
 
-            expect(getElementSize(disabledDialogContainer, 0, 'width')).toBe(400);
-            expect(getElementSize(disabledDialogContainer, 0, 'height')).toBe(400);
+            expect(getElementSize(dialogContainer2, 0, 'width')).toBe(400);
+            expect(getElementSize(dialogContainer2, 0, 'height')).toBe(400);
         });
 
         it('should check dialog min/max width and height options', () => {
@@ -449,16 +448,16 @@ describe('dialog test suite', function () {
 
             clickAndDragElement(handleXLocation + 1, handleYLocation + 1, handleXLocation + 250, handleYLocation + 250);
 
-            expect(getElementSize(disabledDialogContainer, 0, 'width')).toBe(600);
-            expect(getElementSize(disabledDialogContainer, 0, 'height')).toBe(600);
+            expect(getElementSize(dialogContainer2, 0, 'width')).toBe(600);
+            expect(getElementSize(dialogContainer2, 0, 'height')).toBe(600);
 
             const newHandleXLocation = Math.floor(getElementLocation(resizeHandle, 0, 'x'));
             const newHandleYLocation = Math.floor(getElementLocation(resizeHandle, 0, 'y'));
 
             clickAndDragElement(newHandleXLocation + 1, newHandleYLocation + 1, newHandleXLocation - 300, newHandleYLocation - 300);
 
-            expect(getElementSize(disabledDialogContainer, 0, 'width')).toBe(400);
-            expect(getElementSize(disabledDialogContainer, 0, 'height')).toBe(400);
+            expect(getElementSize(dialogContainer2, 0, 'width')).toBe(400);
+            expect(getElementSize(dialogContainer2, 0, 'height')).toBe(400);
         });
     });
 
@@ -487,29 +486,29 @@ describe('dialog test suite', function () {
                     openDialog(dialogExamples, i);
                     waitForNotDisplayed(busyIndicator);
                     waitForElDisplayed(dialogItems);
-                    saveElementScreenshot(disabledDialogContainer, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
-                    expect(checkElementScreenshot(disabledDialogContainer, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder()))
+                    saveElementScreenshot(dialogContainer2, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
+                    expect(checkElementScreenshot(dialogContainer2, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder()))
                         .toBeLessThan(5, `dialog ${i} screenshot doesn't match baseline`);
                     click(dialog + button, 2);
                     continue;
                 }
                 if (i === stackedExample) {
                     openDialog(dialogExamples, i);
-                    saveElementScreenshot(disabledDialogContainer, `dialog-${i}a-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
-                    expect(checkElementScreenshot(disabledDialogContainer, `dialog-${i}a-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder()))
+                    saveElementScreenshot(dialogContainer2, `dialog-${i}a-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
+                    expect(checkElementScreenshot(dialogContainer2, `dialog-${i}a-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder()))
                         .toBeLessThan(5, `dialog ${i}a screenshot doesn't match baseline`);
                     click(dialog + button, 1);
                     waitForElDisplayed(dialog, 1);
-                    saveElementScreenshot(disabledDialogContainer, `dialog-${i}b-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), 1);
-                    expect(checkElementScreenshot(disabledDialogContainer, `dialog-${i}b-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), 1))
+                    saveElementScreenshot(dialogContainer2, `dialog-${i}b-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), 1);
+                    expect(checkElementScreenshot(dialogContainer2, `dialog-${i}b-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), 1))
                         .toBeLessThan(5, `dialog ${i}b screenshot doesn't match baseline`);
                     click(dialog + button, 3);
                     closeDialog();
                     continue;
                 }
                 openDialog(dialogExamples, i);
-                saveElementScreenshot(disabledDialogContainer, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
-                expect(checkElementScreenshot(disabledDialogContainer, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder()))
+                saveElementScreenshot(dialogContainer2, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
+                expect(checkElementScreenshot(dialogContainer2, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder()))
                     .toBeLessThan(5, `dialog ${i} screenshot doesn't match baseline`);
                 if (doesItExist(dialog) === false) {
                     continue;
@@ -574,15 +573,15 @@ describe('dialog test suite', function () {
         click(dialog + button);
     }
 
-    function checkResizingDialog(dContainer: string = disabledDialogContainer): void {
-        const elementStartWidth = getElementSize(dContainer, 0, 'width');
-        const elementStartHeight = getElementSize(dContainer, 0, 'height');
+    function checkResizingDialog(container: string = dialogContainer2): void {
+        const elementStartWidth = getElementSize(container, 0, 'width');
+        const elementStartHeight = getElementSize(container, 0, 'height');
         const handleLocationX = Math.floor(getElementLocation(resizeHandle, 0, 'x'));
         const handleLocationY = Math.floor(getElementLocation(resizeHandle, 0, 'y'));
 
         clickAndDragElement(handleLocationX + 1, handleLocationY + 1, handleLocationX + 110, handleLocationY + 100);
 
-        expect(getElementSize(dContainer, 0, 'width')).not.toBe(elementStartWidth);
-        expect(getElementSize(dContainer, 0, 'height')).not.toBe(elementStartHeight);
+        expect(getElementSize(container, 0, 'width')).not.toBe(elementStartWidth);
+        expect(getElementSize(container, 0, 'height')).not.toBe(elementStartHeight);
     }
 });
