@@ -18,7 +18,7 @@ import {
 import { NgControl, NgForm } from '@angular/forms';
 import { BACKSPACE, DELETE } from '@angular/cdk/keycodes';
 
-import { ContentDensity } from '@fundamental-ngx/core/utils';
+import { ContentDensity, KeyUtil } from '@fundamental-ngx/core/utils';
 import { BaseInput, FormField, FormFieldControl, Status } from '@fundamental-ngx/platform/shared';
 import { TextAreaConfig } from './text-area.config';
 
@@ -168,6 +168,11 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     private readonly remainingText = 'remaining';
     private readonly excessText = 'excess';
 
+    /** @hidden */
+    private get _shouldTrackTextLimit(): boolean {
+        return this.maxLength > 0 && !this.showExceededText;
+    }
+
     constructor(
         cd: ChangeDetectorRef,
         @Optional() @Self() ngControl: NgControl,
@@ -202,7 +207,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         this._setMaxHeight();
 
         // don't set any error state if we are not showing counter message
-        if (!this.showExceededText) {
+        if (!this._shouldTrackTextLimit) {
             this.stateType = null;
         }
 
@@ -320,7 +325,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
             this.autoGrowTextArea();
             this.isValueCustomSet = false; // set it to false first time it comes here
         }
-        if (!this.showExceededText && (event.keyCode === DELETE || event.keyCode === BACKSPACE)) {
+        if (this._shouldTrackTextLimit && KeyUtil.isKeyCode(event, [DELETE, BACKSPACE])) {
             // for the custom value set and showExceededText=false case, on any key press, remove excess characters
             if (this.value) {
                 this._textAreaCharCount = this.value.length;

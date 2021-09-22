@@ -9,11 +9,11 @@ import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { ComboboxComponent } from './combobox/combobox.component';
-import { HighlightPipe } from './pipes/highlight.pipe';
+import { ComboboxHighlightPipe } from './pipes/highlight.pipe';
 import { PlatformAutoCompleteModule } from '../auto-complete/auto-complete.module';
 
 @NgModule({
-    declarations: [ComboboxComponent, HighlightPipe],
+    declarations: [ComboboxComponent, ComboboxHighlightPipe],
     imports: [
         CommonModule,
         FormsModule,

@@ -82,6 +82,8 @@ export interface WizardDialogData {
      */
     confirmationDialogTemplate?: TemplateRef<any>;
 
+    summaryStepTemplate?: TemplateRef<any>;
+
     /** If navigation buttons should be visible. */
     navigationButtons?: boolean;
 

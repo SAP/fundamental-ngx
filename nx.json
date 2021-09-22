@@ -808,7 +808,8 @@
                 "core-form",
                 "core-utils",
                 "platform-form",
-                "platform-shared"
+                "platform-shared",
+                "platform-link"
             ]
         },
         "platform-icon-tab-bar": {
