@@ -73,6 +73,9 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
      */
     summaryStepTemplate: TemplateRef<any>;
 
+    /** User-defined template for "Review" button */
+    reviewButtonTemplate: TemplateRef<any>;
+
     /** @hidden */
     constructor(
         _wizardGeneratorService: WizardGeneratorService,
@@ -95,6 +98,7 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
         this.confirmationDialogTemplate = this._dialogRef.data.confirmationDialogTemplate;
         this.displaySummaryStep = this._dialogRef.data.displaySummaryStep || false;
         this.summaryStepTemplate = this._dialogRef.data.summaryStepTemplate;
+        this.reviewButtonTemplate = this._dialogRef.data.reviewButtonTemplate;
 
         if (this._dialogRef.data.unifiedLayout !== undefined) {
             this.unifiedLayout = this._dialogRef.data.unifiedLayout;

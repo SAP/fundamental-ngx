@@ -11,7 +11,7 @@ export interface WizardDialogData {
      responsivePaddings: boolean;
 
     /**
-     * @description Button labels to be used in Wizard navigation
+     * @description Button labels to be used in Wizard navigation.
      */
     navigationButtonLabels?: WizardNavigationButtons;
 
@@ -82,7 +82,11 @@ export interface WizardDialogData {
      */
     confirmationDialogTemplate?: TemplateRef<any>;
 
+    /** User-defined template for Summary step. */
     summaryStepTemplate?: TemplateRef<any>;
+
+    /** User-defined template for "Review" button. */
+    reviewButtonTemplate?: TemplateRef<any>;
 
     /** If navigation buttons should be visible. */
     navigationButtons?: boolean;
