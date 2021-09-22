@@ -4,9 +4,7 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { VerticalNavigationDocsComponent } from './vertical-navigation-docs.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import {
-    VerticalNavigationDefaultExampleComponent
-} from './examples/vertical-navigation-default-example.component';
+import { VerticalNavigationDefaultExampleComponent } from './examples/vertical-navigation-default-example.component';
 import { VerticalNavigationModule } from '@fundamental-ngx/core/vertical-navigation';
 import { TableModule } from '@fundamental-ngx/core/table';
 import { IconModule } from '@fundamental-ngx/core/icon';
@@ -26,7 +24,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, VerticalNavigationModule, TableModule, ListModule, IconModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        VerticalNavigationModule,
+        TableModule,
+        ListModule,
+        IconModule
+    ],
     declarations: [
         VerticalNavigationDocsComponent,
         VerticalNavigationHeaderComponent,

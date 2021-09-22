@@ -1,4 +1,12 @@
-import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChildren, Input, QueryList, ViewEncapsulation } from '@angular/core';
+import {
+    AfterContentInit,
+    ChangeDetectionStrategy,
+    Component,
+    ContentChildren,
+    Input,
+    QueryList,
+    ViewEncapsulation
+} from '@angular/core';
 import { ListNavigationItemComponent } from '@fundamental-ngx/core/list';
 
 @Component({
@@ -9,7 +17,6 @@ import { ListNavigationItemComponent } from '@fundamental-ngx/core/list';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VerticalNavigationComponent implements AfterContentInit {
-
     /** Whether or not this component is to be shown in 'condensed' mode. */
     @Input()
     condensed = false;
@@ -21,10 +28,9 @@ export class VerticalNavigationComponent implements AfterContentInit {
     /** @hidden */
     ngAfterContentInit(): void {
         if (this.condensed) {
-            this._navigationItems.forEach(navItem => {
+            this._navigationItems.forEach((navItem) => {
                 navItem._condensed = true;
-            })
+            });
         }
     }
-
 }

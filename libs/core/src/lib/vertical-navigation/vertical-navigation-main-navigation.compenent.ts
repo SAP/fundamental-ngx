@@ -9,9 +9,7 @@ import { ListComponent } from '@fundamental-ngx/core/list';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VerticalNavigationMainNavigationComponent {
-
     /** @hidden */
     @ContentChild(ListComponent)
     _list: ListComponent;
-
 }

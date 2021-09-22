@@ -22,5 +22,4 @@ export class VerticalNavigationDocsComponent {
             fileName: 'vertical-navigation-condensed-example'
         }
     ];
-
 }

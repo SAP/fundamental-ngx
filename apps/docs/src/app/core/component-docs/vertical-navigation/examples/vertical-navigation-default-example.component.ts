@@ -6,12 +6,10 @@ import { ListNavigationItemComponent } from '@fundamental-ngx/core';
     templateUrl: './vertical-navigation-default-example.component.html'
 })
 export class VerticalNavigationDefaultExampleComponent {
-
     @ViewChild('cal')
     cal: ListNavigationItemComponent;
 
     expandCal(): void {
         this.cal.expanded = true;
     }
-
 }

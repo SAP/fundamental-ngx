@@ -6,11 +6,7 @@ import { LinkComponent } from '../link/link.component';
 
 @Component({
     selector: 'fd-test-vertical-navigation',
-    template: `
-        <fd-vertical-navigation>
-
-        </fd-vertical-navigation>
-    `
+    template: ` <fd-vertical-navigation> </fd-vertical-navigation> `
 })
 class TestVerticalNavigationComponent {
     @ViewChild('objectRef', { read: ElementRef })
