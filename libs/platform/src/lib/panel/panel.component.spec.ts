@@ -172,7 +172,6 @@ describe('Simple PanelComponent', () => {
 
     it('Should set the aria-label of the expand/collapse button to the value of collapseLabel if the Panel is expanded', async () => {
         component.expanded = true;
-        component.collapseLabel = 'slim arrow down,transparent';
         fixture.detectChanges();
         const toggleButton: HTMLButtonElement = fixture.debugElement.query(By.css('.fd-panel__button')).nativeElement;
         expect(toggleButton.getAttribute('aria-label')).toBe(component.collapseLabel);
@@ -180,7 +179,6 @@ describe('Simple PanelComponent', () => {
 
     it('Should set the aria-label of the expand/collapse button to the value of collapseLabel if the Panel is expanded', async () => {
         component.expanded = true;
-        component.collapseLabel = 'slim arrow down,transparent';
         fixture.detectChanges();
         const toggleButton: HTMLButtonElement = fixture.debugElement.query(By.css('.fd-panel__button')).nativeElement;
         expect(toggleButton.getAttribute('aria-label')).toBe(component.collapseLabel);
