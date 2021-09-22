@@ -26,7 +26,7 @@ import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
-import { ContentDensityEnum, FdDropEvent, RtlService } from '@fundamental-ngx/core/utils';
+import { ContentDensityEnum, ContentDensityService, FdDropEvent, RtlService } from '@fundamental-ngx/core/utils';
 import { TableRowDirective } from '@fundamental-ngx/core/table';
 
 import { getNestedValue, isDataSource, isString } from '@fundamental-ngx/platform/shared';
@@ -482,6 +482,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     private _dragDropInProgress = false;
 
+    /** @hidden Is used to identify whether the `contentDensity` property was set by the user manually. */
+    private contentDensityManuallySet = false;
+
     /** @hidden */
     private get _selectionColumnWidth(): number {
         return this._isShownSelectionColumn ? SELECTION_COLUMN_WIDTH.get(this.contentDensity) : 0;
@@ -495,13 +498,19 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         private readonly _tableScrollDispatcher: TableScrollDispatcherService,
         private readonly _tableColumnResizeService: TableColumnResizeService,
         @Inject(DOCUMENT) private readonly _document: Document | null,
-        @Optional() private readonly _rtlService: RtlService
+        @Optional() private readonly _rtlService: RtlService,
+        @Optional() private readonly _contentDensityService: ContentDensityService,
     ) {
         super();
+        this._trackContentDensityChanges();
     }
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
+        if (changes.contentDensity?.currentValue) {
+            this.contentDensityManuallySet = true;
+        }
+
         if (!this._viewInitiated) {
             return;
         }
@@ -1772,5 +1781,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         }
 
         return !!rowNavigatable;
+    }
+
+    private _trackContentDensityChanges(): void {
+        this._subscriptions.add(this._contentDensityService._contentDensityListener
+            .pipe(filter(() => !this.contentDensityManuallySet))
+            .subscribe((density) => {
+                this.contentDensity = density as ContentDensityEnum;
+                this._cdr.markForCheck();
+            }))
     }
 }
