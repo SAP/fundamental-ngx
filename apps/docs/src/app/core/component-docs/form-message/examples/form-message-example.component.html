@@ -3,7 +3,13 @@
         Message With Input
     </label>
     <fd-form-input-message-group>
-        <input fd-form-control type="text" id="input-message" placeholder="Field placeholder text" [state]="'information'" />
+        <input 
+            fd-form-control 
+            type="text" 
+            id="input-message" 
+            placeholder="Field placeholder text" 
+            [state]="'information'" 
+            aria-label="This message is triggered by a click event."/>
         <fd-form-message [type]="'information'">
             This message is triggered by a click event.
         </fd-form-message>
@@ -25,11 +31,12 @@
                             [state]="'information'"
                             [button]="true"
                             [addOnText]="'Toggle Message'"
-                            (addOnButtonClicked)="open = !open">
+                            (addOnButtonClicked)="open = !open"
+                            >
             </fd-input-group>
         </fd-popover-control>
         <fd-popover-body>
-            <fd-form-message [type]="'information'">
+            <fd-form-message [type]="'information'" [static]="true">
                 This message is controlled by <code>open</code> variable.
             </fd-form-message>
         </fd-popover-body>
@@ -42,10 +49,11 @@
     </label>
     <fd-form-input-message-group
         [placement]="'bottom'"
-        [triggers]="['mouseenter', 'mouseleave']"
+        [triggers]="['mouseenter', 'mouseleave', 'focusin', 'focusout']"
         [closeOnOutsideClick]="false"
-        [closeOnEscapeKey]="false">
-        <fd-input-group id="group-message" [glyph]="'world'" [state]="'information'" [button]="true"></fd-input-group>
+        [closeOnEscapeKey]="false"
+        aria-label="This message is only triggered by hovering over the InputGroup.">
+        <fd-input-group id="group-message" [glyph]="'world'" [iconTitle]="'Icon title world'" [state]="'information'" [button]="true"></fd-input-group>
         <fd-form-message [type]="'information'">
             This message is only triggered by hovering over the InputGroup.
         </fd-form-message>
@@ -60,8 +68,9 @@
         [triggers]="['focusin', 'focusout']"
         [placement]="'bottom'"
         [closeOnOutsideClick]="false"
-        [closeOnEscapeKey]="false">
-        <textarea fd-form-control id="textarea-message" [state]="'information'"></textarea>
+        [closeOnEscapeKey]="false"
+        aria-label="This message is only triggered by focusing inside the textarea. The message box placement is also changed.">
+        <textarea fd-form-control id="textarea-message" [state]="'information'" ></textarea>
         <fd-form-message [type]="'information'">
             This message is only triggered by focusing inside the textarea. The message box placement is also changed.
         </fd-form-message>
