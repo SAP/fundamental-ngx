@@ -114,7 +114,7 @@ export class DndItem implements OnInit {
         });
     }
     
-    // disabled possibility to move card
+    /** disabled possibility to move card */
     @HostListener('keyup', ['$event'])
     onKeyUp(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, CONTROL)) {
@@ -124,7 +124,7 @@ export class DndItem implements OnInit {
         }
     }
 
-    // allow card movement using keyboard
+    /** allow card movement using keyboard */
     @HostListener('keydown', ['$event'])
     onKeyDown(event: KeyboardEvent): void {
         const group = this.cardLayout.columns[this.groupIndex];
@@ -134,21 +134,25 @@ export class DndItem implements OnInit {
         if (KeyUtil.isKeyCode(event, RIGHT_ARROW) 
         && this.cardLayout._enableKeyboard 
         && this.cardLayout.columns.length !== this.groupIndex + 1) {
+            event.preventDefault();
             const nextGroup = this.cardLayout.columns[this.groupIndex + 1];
             const nextGroupIndex = this.groupIndex + 1;
             transferArrayItem(group, nextGroup, this.itemIndex, 0);   
             this.dndGroup.focusDndItem(nextGroupIndex, 0);
         } else if (KeyUtil.isKeyCode(event, DOWN_ARROW) 
-        && this.cardLayout._enableKeyboard) {         
+        && this.cardLayout._enableKeyboard) { 
+            event.preventDefault();        
             moveItemInArray(group, this.itemIndex, this.itemIndex + 1);
             this.dndGroup.focusDndItem(this.groupIndex, this.itemIndex + 1);
         } else if (KeyUtil.isKeyCode(event, UP_ARROW) 
         && this.cardLayout._enableKeyboard) {
+            event.preventDefault();
             moveItemInArray(group, this.itemIndex, this.itemIndex - 1);
             this.dndGroup.focusDndItem(this.groupIndex, this.itemIndex - 1);
         } else if (KeyUtil.isKeyCode(event, LEFT_ARROW) 
         && this.cardLayout._enableKeyboard 
         && this.groupIndex) {
+            event.preventDefault();
             const nextGroup = this.cardLayout.columns[this.groupIndex - 1];
             const nextGroupIndex = this.groupIndex - 1;
             transferArrayItem(group, nextGroup, this.itemIndex, 0);
