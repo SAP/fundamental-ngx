@@ -56,7 +56,7 @@ exports.config = {
             browserName: 'chrome',
             browserVersion: 'latest',
             'goog:chromeOptions': {
-                args: ['--window-size=1920,1080']
+                args: ['--window-size=1920,1080', '--start-maximized']
             },
         },
     ],
