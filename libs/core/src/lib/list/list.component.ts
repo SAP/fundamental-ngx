@@ -25,7 +25,7 @@ import {
 import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
 import { ListFocusItem } from './list-focus-item.model';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { ListNavigationItemComponent } from './directives/list-navigation-item.component';
+import { ListNavigationItemComponent } from './list-navigation-item/list-navigation-item.component';
 
 type FocusItem = ListGroupHeaderDirective | ListItemComponent;
 /**

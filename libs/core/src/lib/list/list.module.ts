@@ -16,9 +16,10 @@ import { ListBylineRightDirective } from './directives/byline/list-byline-right.
 import { ListContentDirective } from './directives/byline/list-content.directive';
 import { ListThumbnailDirective } from './directives/byline/list-thumbnail.directive';
 import { ListTitleTextDirective } from './directives/list-title-text.directive';
-import { ListNavigationItemComponent } from './directives/list-navigation-item.component';
+import { ListNavigationItemComponent } from './list-navigation-item/list-navigation-item.component';
 import { ListNavigationItemArrowDirective } from './directives/list-navigation-item-arrow.directive';
 import { ListNavigationItemTextDirective } from './directives/list-navigation-item-text.directive';
+import { IconModule } from '@fundamental-ngx/core/icon';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,7 @@ import { ListNavigationItemTextDirective } from './directives/list-navigation-it
         ListNavigationItemArrowDirective,
         ListNavigationItemTextDirective
     ],
-    imports: [CommonModule, FormModule],
+    imports: [CommonModule, FormModule, IconModule],
     exports: [
         ListComponent,
         ListItemComponent,

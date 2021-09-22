@@ -6,14 +6,16 @@ import {
     HostListener,
     Input
 } from '@angular/core';
-import { ListComponent } from '../list.component';
-import { ListNavigationItemArrowDirective } from './list-navigation-item-arrow.directive';
 import { IconComponent } from '@fundamental-ngx/core/icon';
+import { ListComponent } from '../list.component';
+import { ListNavigationItemArrowDirective } from '../directives/list-navigation-item-arrow.directive';
+import { ListNavigationItemTextDirective } from '../directives/list-navigation-item-text.directive';
 
 @Component({
     // tslint:disable-next-line:component-selector
     selector: '[fd-list-navigation-item], [fdListNavigaitonItem]',
-    template: '<ng-content></ng-content><span *ngIf="indicated || _childIndicatedAndCollapsed()" class="fd-list__navigation-item-indicator"></span>'
+    templateUrl: './list-navigation-item.component.html',
+    styleUrls: ['./list-navigation-item.component.scss']
 })
 export class ListNavigationItemComponent implements AfterContentInit {
     /** Whether or not the list item is expanded. */
@@ -55,6 +57,13 @@ export class ListNavigationItemComponent implements AfterContentInit {
     _iconComponent: IconComponent;
 
     /** @hidden */
+    @ContentChild(ListNavigationItemTextDirective)
+    _text: ListNavigationItemTextDirective;
+
+    /** @hidden */
+    _innerText: string;
+
+    /** @hidden */
     ngAfterContentInit(): void {
         if (this._listComponent) {
             this._isExpandable = true;
@@ -64,6 +73,7 @@ export class ListNavigationItemComponent implements AfterContentInit {
         if (this._iconComponent) {
             this._iconComponent._navigationItemIcon = true;
         }
+        this._innerText = this._text.elementRef.nativeElement.innerText;
     }
 
     /** @hidden */
