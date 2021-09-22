@@ -19,7 +19,7 @@
             tabindex="0"
             [attr.aria-selected]="item.uId === _selectedUid"
             (click)="_selectItem(item)"
-            (keydown)="_keyHandlerHandler($event, item)"
+            (keydown)="_keyDownHandler($event, item)"
         >
             <div class="fd-icon-tab-bar__container">
                         <span class="fd-icon-tab-bar__icon">

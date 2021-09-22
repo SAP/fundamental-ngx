@@ -36,6 +36,9 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
     @Input()
     isRtl: boolean;
 
+    /**
+     * @description densityMode setter triggers tabs to re-calculation overflowed tabs
+     */
     @Input()
     set densityMode(value: TabDestinyMode) {
         // Skip first value && value doesn't equal to previous one
@@ -173,7 +176,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
     }
 
     /** @hidden */
-    _keyHandlerHandler(event: any, tab: IconTabBarItem): void {
+    _keyDownHandler(event: KeyboardEvent, tab: IconTabBarItem): void {
         if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             event.preventDefault();
             this._selectItem(tab);

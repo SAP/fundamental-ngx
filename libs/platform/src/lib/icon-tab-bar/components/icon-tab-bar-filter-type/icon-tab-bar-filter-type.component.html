@@ -14,7 +14,7 @@
     >
         <a
             (click)="_selectItem(_totalTab)"
-            (keydown)="_keyHandlerHandler($event, _totalTab)"
+            (keydown)="_keyDownHandler($event, _totalTab)"
             [attr.aria-selected]="_totalTab?.uId === _selectedUid"
             class="fd-icon-tab-bar__tab"
             tabindex="0"
@@ -38,7 +38,7 @@
             [attr.aria-selected]="item.uId === _selectedUid"
             class="fd-icon-tab-bar__tab"
             tabindex="0"
-            (keydown)="_keyHandlerHandler($event, item)"
+            (keydown)="_keyDownHandler($event, item)"
             role="tab"
         >
             <div class="fd-icon-tab-bar__container">

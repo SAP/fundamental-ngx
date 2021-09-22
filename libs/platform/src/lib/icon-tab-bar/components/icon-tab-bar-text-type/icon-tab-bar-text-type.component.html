@@ -29,7 +29,7 @@
                 role="tab"
                 tabindex="0"
                 (click)="_selectItem(item, $event)"
-                (keydown)="_keyHandlerHandler($event, item)"
+                (keydown)="_keyDownHandler($event, item)"
                 [attr.aria-selected]="item.uId === _selectedUid"
             >
                 <span *ngIf="layoutMode === 'row'; else columnsMode" class="fd-icon-tab-bar__tag">

@@ -74,7 +74,7 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
     }
 
     /** @hidden */
-    _keyHandlerHandler(event: any, tab: IconTabBarItem): void {
+    _keyDownHandler(event: KeyboardEvent, tab: IconTabBarItem): void {
         if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             event.preventDefault();
             this._selectItem(tab);

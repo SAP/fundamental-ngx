@@ -28,7 +28,7 @@
     >
         <a
             (click)="_selectItem(item)"
-            (keydown)="_keyHandlerHandler($event, item)"
+            (keydown)="_keyDownHandler($event, item)"
             [attr.aria-selected]="item.uId === _selectedUid"
             class="fd-icon-tab-bar__tab"
             tabindex="0"
