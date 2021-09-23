@@ -932,7 +932,8 @@
         "fd"
       ],
       "implicitDependencies": [
-
+        "core-icon",
+        "core-list"
       ]
     },
     "platform": {

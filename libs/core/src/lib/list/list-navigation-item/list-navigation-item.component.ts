@@ -1,11 +1,4 @@
-import {
-    AfterContentInit,
-    Component,
-    ContentChild,
-    HostBinding,
-    HostListener,
-    Input
-} from '@angular/core';
+import { AfterContentInit, Component, ContentChild, forwardRef, HostBinding, HostListener, Input } from '@angular/core';
 import { IconComponent } from '@fundamental-ngx/core/icon';
 import { ListComponent } from '../list.component';
 import { ListNavigationItemArrowDirective } from '../directives/list-navigation-item-arrow.directive';
@@ -45,7 +38,7 @@ export class ListNavigationItemComponent implements AfterContentInit {
     _condensed = false;
 
     /** @hidden */
-    @ContentChild(ListComponent)
+    @ContentChild(forwardRef(() => ListComponent))
     _listComponent: ListComponent;
 
     /** @hidden */
@@ -86,7 +79,7 @@ export class ListNavigationItemComponent implements AfterContentInit {
     /** @hidden */
     _childIndicatedAndCollapsed(): boolean {
         let retVal = false;
-        this._listComponent?._navItems?.forEach(navItem => {
+        this._listComponent?._navItems?.forEach((navItem) => {
             if (navItem.indicated && !navItem.expanded) {
                 retVal = true;
             }
