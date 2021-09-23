@@ -14,7 +14,7 @@ import {
     isElementClickable,
     sendKeys,
     pause,
-    waitForElDisplayed
+    waitForElDisplayed, waitForPresent
 } from '../../driver/wdio';
 import {
     fullName,
@@ -23,6 +23,7 @@ import {
     update,
     firstAdressLength
 } from '../fixtures/testData/wizard.tags'
+import waitForExist from 'webdriverio/build/commands/element/waitForExist';
 
 describe('Wizard component test', function () {
     const wizardPage = new WizardPo();
@@ -153,13 +154,15 @@ describe('Wizard component test', function () {
         click(radioButton);
         expect(getAttributeByName(radioButton, 'aria-checked')).toBe('true', 'radio button is not selected');
         click(radioButton, 1);
-        expect(isElementDisplayed(dialogContainer)).toBe(true, 'dialog container did not open');
+        // pause for dialog element to be created
+        pause(500);
+        expect(waitForElDisplayed(dialogContainer)).toBe(true, 'dialog container did not open');
         click(cancelButton);
         expect(getAttributeByName(radioButton, 'aria-checked')).toBe('true', 'focus dissapeared');
         click(radioButton, 1);
         click(continueButton);
         expect(getAttributeByName(radioButton, 'aria-checked', 1)).toBe('true', 'focus did not change');
-    });
+    }, 1);
 
     it('should check navigation in mobile example', () => {
         click(mobileExample + nextStep);

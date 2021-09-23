@@ -3,7 +3,7 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class FormGeneratorPo extends BaseComponentPo {
     private url = '/form-generator';
-    
+
     defaultExample = 'fdp-platform-form-generator-example ';
     observableExample = 'fdp-platform-form-generator-observable-example ';
     customExample = 'fdp-platform-form-generator-custom-component-example ';
@@ -25,6 +25,7 @@ export class FormGeneratorPo extends BaseComponentPo {
     formValue = 'p.ng-star-inserted';
     sliderPoint = '.fd-slider__handle';
     validationInput = '.fd-input[aria-labelledby*="validation"]';
+    busyIndicator = 'fd-busy-indicator .fd-busy-indicator--circle-0';
 
     open(): void {
         super.open(this.url);

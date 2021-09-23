@@ -77,7 +77,7 @@ describe('Card test suite:', function() {
     });
 
     describe('Analytical card examples:', function() {
-        fit('should check header', () => {
+        it('should check header', () => {
             scrollIntoView(kpiCardHeader);
             checkElArrIsClickable(kpiAnalyticsHeader);
             checkElementText(kpiCardHeader);
