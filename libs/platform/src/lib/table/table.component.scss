@@ -415,6 +415,23 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
     .fd-dnd-item {
         position: inherit;
     }
+
+    .fd-table__inner__icons {
+        display: flex;
+
+        fd-icon:not(:last-child) {
+            margin-right: 0.25rem;
+        }
+
+        [dir="rtl"] & {
+            fd-icon {
+                margin-right: 0;
+            }
+            fd-icon:not(:last-child) {
+                margin-left: 0.25rem;
+            }
+        }
+    }
 }
 
 /* Need to make it global cause this item is rendered in the overlay */
