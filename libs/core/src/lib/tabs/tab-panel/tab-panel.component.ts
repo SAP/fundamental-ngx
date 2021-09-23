@@ -34,7 +34,8 @@ export class TabPanelStateChange {
         class: 'fd-tabs__panel',
         '[attr.id]': 'id',
         '[class.is-expanded]': 'expanded',
-        '[attr.aria-expanded]': 'expanded ? true : null'
+        '[attr.aria-expanded]': 'expanded ? true : null',
+        '[attr.tabindex]': 'expanded ? "0" : "-1"'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
