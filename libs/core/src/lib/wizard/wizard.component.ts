@@ -334,8 +334,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
             if (
                 step.completed &&
                 this.appendToWizard &&
-                step.content?.nextStep &&
-                step.content?.nextStep.canHide &&
+                step.content?.nextStep?.canHide &&
                 step !== this._getLastNonSummaryStep()
             ) {
                 step.content.nextStep._hideElement();

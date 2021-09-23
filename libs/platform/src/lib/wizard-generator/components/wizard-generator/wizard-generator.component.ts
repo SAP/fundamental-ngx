@@ -26,25 +26,25 @@ export class WizardGeneratorComponent extends BaseWizardGenerator {
      * User-defined template for "Finish" button.
      */
     @ContentChild(WizardGeneratorFinishButtonDirective, {read: TemplateRef})
-    finishButtonTemplate: TemplateRef<any>;
+    finishButtonTemplate: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for "Go Next" button.
      */
     @ContentChild(WizardGeneratorGoNextButtonDirective, {read: TemplateRef})
-    goNextButtonTemplate: TemplateRef<any>;
+    goNextButtonTemplate: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for Summary step.
      */
     @ContentChild(WizardGeneratorSummaryStepDirective, {read: TemplateRef})
-    customSummaryStepTemplate: TemplateRef<any>;
+    customSummaryStepTemplate: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for "Review" button
      */
     @ContentChild(WizardGeneratorReviewButtonDirective, {read: TemplateRef})
-    reviewButtonTemplate: TemplateRef<any>;
+    reviewButtonTemplate: TemplateRef<HTMLElement>;
 
     /** @hidden */
     constructor(

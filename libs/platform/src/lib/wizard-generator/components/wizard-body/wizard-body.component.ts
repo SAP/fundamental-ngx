@@ -84,23 +84,23 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      * User-defined template for "Go Next" button.
      */
     @Input()
-    goNextButtonTemplate: TemplateRef<any>;
+    goNextButtonTemplate: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for "Finish" button.
      */
     @Input()
-    finishButtonTemplate: TemplateRef<any>;
+    finishButtonTemplate: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for summary step.
      */
     @Input()
-    customSummaryStepTemplate: TemplateRef<any>;
+    customSummaryStepTemplate: TemplateRef<HTMLElement>;
 
     /** User-defined template for "Review" button */
     @Input()
-    reviewButtonTemplate: TemplateRef<any>;
+    reviewButtonTemplate: TemplateRef<HTMLElement>;
 
     /**
      * @description Is current step is summary step.
@@ -170,8 +170,6 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
                 this._visibleItems = visibleSteps;
                 this._cd.detectChanges();
             });
-
-        console.log(this);
     }
 
     /**
@@ -218,7 +216,6 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
 
     stepClicked(stepId: string): void {
         const stepIndex = this._wizardGeneratorService.getStepIndex(stepId);
-        console.log(stepIndex);
         this._wizardGeneratorService.setNextStepIndex(stepIndex + 1);
     }
 
