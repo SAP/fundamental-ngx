@@ -56,7 +56,7 @@ exports.config = {
             browserName: 'chrome',
             browserVersion: 'latest',
             'goog:chromeOptions': {
-                args: ['--window-size=1920,1080', '--headless']
+                args: ['--window-size=1920,1080', '--start-maximized']
             },
         },
     ],
@@ -227,6 +227,7 @@ exports.config = {
         }, true);
 
         browser.resetUrl = 'about:blank';
+        browser.setWindowSize(1920, 1080);
     },
 
 //     const processedConfig = await browser.getProcessedConfig();
