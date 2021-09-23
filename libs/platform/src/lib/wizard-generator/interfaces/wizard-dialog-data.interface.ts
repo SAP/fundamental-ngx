@@ -81,4 +81,12 @@ export interface WizardDialogData {
      * User-defined template for cancel confirmation dialog.
      */
     confirmationDialogTemplate?: TemplateRef<any>;
+
+    summaryStepTemplate?: TemplateRef<any>;
+
+    /** If navigation buttons should be visible. */
+    navigationButtons?: boolean;
+
+    /** Whether or not all form items should have identical layout provided for form group. */
+    unifiedLayout?: boolean;
 }

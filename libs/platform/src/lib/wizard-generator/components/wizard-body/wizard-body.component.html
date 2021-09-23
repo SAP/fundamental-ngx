@@ -14,10 +14,9 @@
                     <fd-wizard-step-indicator [glyph]="step.icon">
                         <ng-container *ngIf="!step.icon">{{ i + 1 }}</ng-container>
                     </fd-wizard-step-indicator>
-                    <ng-template></ng-template>
                     <fd-wizard-content>
                         <fdp-wizard-generator-step *ngIf="!step.summary" [item]="step"></fdp-wizard-generator-step>
-                        <fdp-wizard-summary-step [status]="step.status" *ngIf="step.summary"></fdp-wizard-summary-step>
+                        <fdp-wizard-summary-step *ngIf="step.summary" [customsummaryStepTemplate]="customsummaryStepTemplate" [status]="step.status"></fdp-wizard-summary-step>
 
                         <fd-wizard-next-step *ngIf="navigationButtons">
                             <ng-container *ngIf="!hasSummaryStep && !isLastStep">

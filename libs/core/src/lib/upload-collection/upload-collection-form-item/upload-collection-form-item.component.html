@@ -1,0 +1,13 @@
+<input
+    *ngIf="_editMode"
+    fd-form-control
+    required
+    style="pointer-events: all"
+    class="fd-input"
+    type="text"
+    [attr.placeholder]="placeholder"
+    [(ngModel)]="fileName"
+    [state]="!fileName ? 'error' : null"
+    (click)="$event.stopPropagation()"
+/>
+<span *ngIf="_editMode" class="fd-upload-collection__extension">.{{ _extension }}</span>

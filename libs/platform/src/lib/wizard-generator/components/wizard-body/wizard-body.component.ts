@@ -88,6 +88,12 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     finishButtonTemplate: TemplateRef<any>;
 
     /**
+     * User-defined template for summary step.
+     */
+    @Input()
+    customsummaryStepTemplate: TemplateRef<any>;
+
+    /**
      * @description Is current step is summary step.
      */
     @Input()
@@ -96,6 +102,10 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     /** If navigation buttons should be visible */
     @Input()
     navigationButtons = true;
+
+    /** Whether or not all form items should have identical layout provided for form group. */
+    @Input()
+    unifiedLayout = true;
 
     /**
      * @description Array of visible Wizard Steps.

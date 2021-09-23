@@ -7,7 +7,10 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     encapsulation: ViewEncapsulation.None,
     host: {
         'class': 'fd-timeline__post-actions'
-    }
+    },
+    styles: [`.fd-timeline__post-actions button + button { 
+       margin-left: 0.5rem;
+    }`]
 })
 export class TimelineNodeFooterComponent {
 }

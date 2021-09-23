@@ -1,4 +1,161 @@
 
+### [0.32.1](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.54...v0.32.1) (2021-09-20)
+
+### [0.32.1-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.53...v0.32.1-rc.54) (2021-09-20)
+
+### [0.32.1-rc.53](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.52...v0.32.1-rc.53) (2021-09-20)
+
+
+### Bug Fixes
+
+* **platform:** rename pipes with the same name ([#6581](https://github.com/SAP/fundamental-ngx/issues/6581)) ([4018eb8](https://github.com/SAP/fundamental-ngx/commit/4018eb82d9eb15b195605c22e92fe82f17180fbf))
+
+### [0.32.1-rc.52](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.51...v0.32.1-rc.52) (2021-09-20)
+
+### [0.32.1-rc.51](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.50...v0.32.1-rc.51) (2021-09-20)
+
+### [0.32.1-rc.50](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.49...v0.32.1-rc.50) (2021-09-20)
+
+### [0.32.1-rc.49](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.48...v0.32.1-rc.49) (2021-09-19)
+
+### [0.32.1-rc.48](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.47...v0.32.1-rc.48) (2021-09-17)
+
+
+### Features
+
+* **platform:** custom wizard generator summary section ([#6577](https://github.com/SAP/fundamental-ngx/issues/6577)) ([d0de8e8](https://github.com/SAP/fundamental-ngx/commit/d0de8e8db3a1981b9a1f901969f6cbe2cc07eb73))
+
+### [0.32.1-rc.47](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.46...v0.32.1-rc.47) (2021-09-17)
+
+
+### Bug Fixes
+
+* **platform:** correct delete behaviour for textarea ([#6527](https://github.com/SAP/fundamental-ngx/issues/6527)) ([2498a67](https://github.com/SAP/fundamental-ngx/commit/2498a678153662a417e05a1bf211e95b8beaba13))
+
+### [0.32.1-rc.46](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.45...v0.32.1-rc.46) (2021-09-17)
+
+### [0.32.1-rc.45](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.44...v0.32.1-rc.45) (2021-09-17)
+
+### [0.32.1-rc.44](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.43...v0.32.1-rc.44) (2021-09-16)
+
+
+### Bug Fixes
+
+* **platform:** remove unused module imports ([#6514](https://github.com/SAP/fundamental-ngx/issues/6514)) ([3ce9e0e](https://github.com/SAP/fundamental-ngx/commit/3ce9e0e919a13045beae68906f2f9d29a78e9513))
+
+### [0.32.1-rc.43](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.42...v0.32.1-rc.43) (2021-09-16)
+
+
+### Bug Fixes
+
+* **platform:** add link styling and i18n support ([#6530](https://github.com/SAP/fundamental-ngx/issues/6530)) ([0c74a20](https://github.com/SAP/fundamental-ngx/commit/0c74a202dbabfafd155a7ef8117ce93ee3449514))
+
+### [0.32.1-rc.42](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.41...v0.32.1-rc.42) (2021-09-16)
+
+### [0.32.1-rc.41](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.40...v0.32.1-rc.41) (2021-09-16)
+
+
+### Bug Fixes
+
+* **platform:** remove broken properties from wizard generator ([#6536](https://github.com/SAP/fundamental-ngx/issues/6536)) ([55a12f5](https://github.com/SAP/fundamental-ngx/commit/55a12f584a2212cf48fa131d736bfcc090d3c914))
+
+### [0.32.1-rc.40](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.39...v0.32.1-rc.40) (2021-09-16)
+
+
+### Bug Fixes
+
+* **platform:** fix failing unit tests ([#6393](https://github.com/SAP/fundamental-ngx/issues/6393)) ([305ad68](https://github.com/SAP/fundamental-ngx/commit/305ad68e692d0dc8bbda0d8ba6c71dce2b2fdd6e))
+
+### [0.32.1-rc.39](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.38...v0.32.1-rc.39) (2021-09-15)
+
+
+### Bug Fixes
+
+* **core:** add temporary style fix for action buttons in Timeline ([#6559](https://github.com/SAP/fundamental-ngx/issues/6559)) ([a845975](https://github.com/SAP/fundamental-ngx/commit/a84597524e4b5aeab46c28794c4229fcd6611b20))
+* **core:** fix bug with pagination itemsPerPage not updating correctly ([#6431](https://github.com/SAP/fundamental-ngx/issues/6431)) ([c4294f7](https://github.com/SAP/fundamental-ngx/commit/c4294f74339567dff279bfa20f9a6b8a4598b60a))
+
+### [0.32.1-rc.38](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.37...v0.32.1-rc.38) (2021-09-15)
+
+
+### Bug Fixes
+
+* **core:** rtl fix for connector margin ([#6555](https://github.com/SAP/fundamental-ngx/issues/6555)) ([4124db6](https://github.com/SAP/fundamental-ngx/commit/4124db6821c91d44e2f79106d0a5ca18e62e5f3e))
+
+### [0.32.1-rc.37](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.36...v0.32.1-rc.37) (2021-09-15)
+
+### [0.32.1-rc.36](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.35...v0.32.1-rc.36) (2021-09-15)
+
+### [0.32.1-rc.35](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.34...v0.32.1-rc.35) (2021-09-15)
+
+### [0.32.1-rc.34](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.33...v0.32.1-rc.34) (2021-09-15)
+
+
+### Features
+
+* **platform:** add automatic colons for the labels ([#6528](https://github.com/SAP/fundamental-ngx/issues/6528)) ([75cc019](https://github.com/SAP/fundamental-ngx/commit/75cc0192ac5e0e842926d5152a28fc3e88ac721d))
+
+### [0.32.1-rc.33](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.32...v0.32.1-rc.33) (2021-09-14)
+
+### [0.32.1-rc.32](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.31...v0.32.1-rc.32) (2021-09-14)
+
+### [0.32.1-rc.31](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.30...v0.32.1-rc.31) (2021-09-14)
+
+
+### Bug Fixes
+
+* **core:** dialog, fix resizable in RTL mode ([#6443](https://github.com/SAP/fundamental-ngx/issues/6443)) ([9446bbb](https://github.com/SAP/fundamental-ngx/commit/9446bbb61ac709509e6dcd7e93919c759c3c159a))
+
+### [0.32.1-rc.30](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.29...v0.32.1-rc.30) (2021-09-13)
+
+
+### Features
+
+* **platform:** custom element for no data message ([#6513](https://github.com/SAP/fundamental-ngx/issues/6513)) ([6dfabe6](https://github.com/SAP/fundamental-ngx/commit/6dfabe670cbdec09c8ca8a8a262eaeda6eed939f))
+
+### [0.32.1-rc.29](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.28...v0.32.1-rc.29) (2021-09-13)
+
+
+### Bug Fixes
+
+* **platform:** form-field, remove unnecessary code ([#6516](https://github.com/SAP/fundamental-ngx/issues/6516)) ([a03b862](https://github.com/SAP/fundamental-ngx/commit/a03b8621f6939dcff452d6fc83c8ed1160a487a9))
+
+### [0.32.1-rc.28](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.27...v0.32.1-rc.28) (2021-09-13)
+
+
+### Bug Fixes
+
+* **platform:** vhd, fix row margin ([#6490](https://github.com/SAP/fundamental-ngx/issues/6490)) ([de45fa7](https://github.com/SAP/fundamental-ngx/commit/de45fa70b349f3be44ee24ddfc8eceee1e350c12))
+
+### [0.32.1-rc.27](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.26...v0.32.1-rc.27) (2021-09-13)
+
+
+### Bug Fixes
+
+* **core:** menu, fix close popover on destroy ([#6475](https://github.com/SAP/fundamental-ngx/issues/6475)) ([d644a04](https://github.com/SAP/fundamental-ngx/commit/d644a04e6674e759fb2338319072fe7231564183))
+
+### [0.32.1-rc.26](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.25...v0.32.1-rc.26) (2021-09-13)
+
+
+### Bug Fixes
+
+* **platform:** input, textarea, fix focus ([#6448](https://github.com/SAP/fundamental-ngx/issues/6448)) ([08f7891](https://github.com/SAP/fundamental-ngx/commit/08f789171ea60206bade8fc18967e748d9151744))
+
+### [0.32.1-rc.25](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.24...v0.32.1-rc.25) (2021-09-13)
+
+### [0.32.1-rc.24](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.23...v0.32.1-rc.24) (2021-09-10)
+
+
+### Features
+
+* **core:** implement upload-collection in fundamental-ngx ([#6392](https://github.com/SAP/fundamental-ngx/issues/6392)) ([bef24d0](https://github.com/SAP/fundamental-ngx/commit/bef24d0b5c73460b3bb8238971ecb93162872255))
+
+### [0.32.1-rc.23](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.22...v0.32.1-rc.23) (2021-09-10)
+
+
+### Bug Fixes
+
+* **platform:** fix wizard generator related issues ([#6489](https://github.com/SAP/fundamental-ngx/issues/6489)) ([2997ddd](https://github.com/SAP/fundamental-ngx/commit/2997ddde32e3fb50892f0ed8aa2155850e9ec1c3))
+
 ### [0.32.1-rc.22](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.21...v0.32.1-rc.22) (2021-09-09)
 
 

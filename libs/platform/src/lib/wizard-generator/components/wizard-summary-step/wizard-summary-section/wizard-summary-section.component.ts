@@ -1,18 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
-import { WizardGeneratorItem, WizardStepFormsValue } from '../../../interfaces/wizard-generator-item.interface';
-import { WizardGeneratorService } from '../../../wizard-generator.service';
-import { WizardStepForms } from '../../wizard-generator-step/wizard-generator-step.component';
-
-export interface FormattedFormStep {
-    title: string;
-    items: FormattedFormStepItem[];
-}
-
-export interface FormattedFormStepItem {
-    label: string;
-    value: any;
-}
+import { FormattedFormStep, WizardGeneratorSummaryItem } from '../../../interfaces/wizard-generator-summary-item.interface';
 
 @Component({
     selector: 'fdp-wizard-summary-section',
@@ -20,88 +8,32 @@ export interface FormattedFormStepItem {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class WizardSummarySectionComponent implements OnInit {
+export class WizardSummarySectionComponent {
 
     /**
      * @description Current step for the section.
      */
     @Input()
-    step: WizardGeneratorItem;
+    step: WizardGeneratorSummaryItem;
 
     /**
-     * @description Step forms values.
+     * Emits when step edit button clicked.
      */
-    @Input()
-    stepValue: WizardStepFormsValue;
+    @Output()
+    editStep = new EventEmitter<string>();
 
     /**
      * @hidden
-     */
-    _componentForms: WizardStepForms;
-
-    /**
-     * @hidden
-     */
-    _formattedStepValue: FormattedFormStep[] = [];
-
-    /** @hidden */
-    constructor(
-        private _wizardGeneratorService: WizardGeneratorService
-    ) { }
-
-    /**
-     * @hidden
-     */
-    ngOnInit(): void {
-
-        const component = this._wizardGeneratorService.stepsComponents.get(this.step.id);
-
-        this._componentForms = component?.getForms();
-
-        this._formatStepValue();
-    }
-
-    /**
      * @description Sets current step on wizard.
      * @param event Mouse click event to prevent.
      */
-    editStep(event: MouseEvent): void {
+    _editStep(event: MouseEvent): void {
         event.preventDefault();
-        this._wizardGeneratorService.editStep(this.step.id);
+        this.editStep.emit(this.step.id);
     }
 
     /** @hidden */
-    private _formatStepValue(): void {
-
-        if (!this._componentForms) {
-            return;
-        }
-
-        const formattedStepValue = [];
-
-        this.step.formGroups.forEach((formGroup) => {
-            const formId = formGroup.id;
-
-            const form = this._componentForms[formId];
-
-            // Form might be skipped due to conditional rendering
-            if (!form) {
-                return;
-            }
-
-            const formattedForm: FormattedFormStep = {
-                title: form.title,
-                items: Object.entries(this.stepValue[formId]).map(([key, value]) => {
-                    return {
-                        label: form.form.controls[key].formItem.message as string,
-                        value: value
-                    }
-                })
-            };
-
-            formattedStepValue.push(formattedForm);
-        });
-
-        this._formattedStepValue = formattedStepValue;
+    _trackFn(_: number, form: FormattedFormStep): string {
+        return form.id;
     }
 }

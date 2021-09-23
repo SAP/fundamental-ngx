@@ -88,7 +88,7 @@ export function checkValueChanged(oldValue: string, newValue: string): void {
 export function checkElArrIsClickable(element: string): void {
     const elLength = getElementArrayLength(element);
     for (let i = 0; elLength > i; i++) {
-        expect(isElementClickable(element, i)).toBe(true);
+        expect(isElementClickable(element, i)).toBe(true, `element ${i} is not clickable`);
     }
 }
 

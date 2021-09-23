@@ -72,7 +72,7 @@ export * from './multi-combobox/commons/base-multi-combobox';
 export * from './multi-combobox/multi-combobox/multi-combobox.component';
 export * from './multi-combobox/multi-combobox-mobile/multi-combobox-mobile.module';
 export * from './multi-combobox/multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component';
-export { HighlightPipe as ComboboxHighlightPipe } from './multi-combobox/pipes/highlight.pipe';
+export * from './multi-combobox/pipes/highlight.pipe';
 
 export * from './multi-input/base-multi-input';
 export * from './multi-input/multi-input.component';

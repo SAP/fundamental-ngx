@@ -392,6 +392,18 @@ export const API_FILES = {
         'VerticalNavigationMainNavigationComponent',
         'VerticalNavigationGroupHeaderDirective'
     ],
+    uploadCollection: [
+        'UploadCollectionComponent',
+        'UploadCollectionButtonGroupComponent',
+        'UploadCollectionFormItemComponent',
+        'UploadCollectionItemDirective',
+        'UploadCollectionThumbnailDirective',
+        'UploadCollectionTitleDirective',
+        'UploadCollectionDescriptionDirective',
+        'UploadCollectionTextSeparatorDirective',
+        'UploadCollectionStatusGroupDirective',
+        'UploadCollectionTitleContainerDirective'
+    ],
     timeline: [
         'TimelineComponent',
         'TimelineNodeDefDirective',
