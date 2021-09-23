@@ -155,7 +155,7 @@ export class PlatformTableDocsComponent {
             sortable: true,
             filterable: true,
             groupable: true,
-            width: '100px'
+            width: '200px'
         }
     };
 
