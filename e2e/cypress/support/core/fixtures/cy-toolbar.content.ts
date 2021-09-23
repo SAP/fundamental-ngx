@@ -8,8 +8,8 @@ export const testTextArr = [
 ];
 export const testDate = '7/7/2021, 12:00 AM';
 export const fruitArr = [
-    'Apple',
-    'Pineapple',
-    'Tomato',
-    'Strawberry'
+    ' Apple ',
+    ' Pineapple ',
+    ' Tomato ',
+    ' Strawberry '
 ];

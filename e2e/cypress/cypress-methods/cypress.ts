@@ -70,7 +70,7 @@ export function checkValue(selector: string, expectedValue: string, index?: numb
 
 
 export function checkText(selector: string, expectedValue: string, index?: number): void {
-    cy.get(selector).eq(index ? index : 0).contains(expectedValue);
+    cy.get(selector).eq(index ? index : 0).should('have.text', expectedValue);
 }
 
 export function checkIsElementDisplayed(selector: string, index?: number): void {
@@ -118,7 +118,7 @@ export function focusElement(selector: string, index?: number): void {
 }
 
 export function checkNextElementText(selector: string, expectedValue: string, index?: number): void {
-    cy.get(selector).eq(index ? index : 0).next().contains(expectedValue);
+    cy.get(selector).eq(index ? index : 0).next().should('have.text', expectedValue);
 }
 
 

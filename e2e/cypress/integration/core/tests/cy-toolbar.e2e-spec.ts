@@ -9,7 +9,7 @@ import {
     refreshPage,
     click,
     checkText,
-    checkAttributeByName, doubleClick, setValue, checkIsElementDisplayed, getElementArrayLength, checkSelectorExist
+    checkAttributeByName, doubleClick, setValue, checkIsElementDisplayed, getElementArrayLength
 } from '../../../cypress-methods/cypress';
 
 
