@@ -377,4 +377,21 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
     .fd-dnd-item {
         position: inherit;
     }
+
+    .fd-table__inner__icons {
+        display: flex;
+
+        fd-icon:not(:last-child) {
+            margin-right: 0.25rem;
+        }
+
+        [dir="rtl"] & {
+            fd-icon {
+                margin-right: 0;
+            }
+            fd-icon:not(:last-child) {
+                margin-left: 0.25rem;
+            }
+        }
+    }
 }
