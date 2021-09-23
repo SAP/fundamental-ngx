@@ -38,7 +38,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TabsModule, TitleModule, ButtonModule, FormModule, InputGroupModule, SegmentedButtonModule],
+    imports: [RouterModule.forChild(routes),
+    SharedDocumentationPageModule,
+    TabsModule,
+    TitleModule,
+    ButtonModule,
+    FormModule,
+    InputGroupModule,
+    SegmentedButtonModule],
     exports: [RouterModule],
     declarations: [examples, TabsHeaderComponent, TabsDocsComponent]
 })
