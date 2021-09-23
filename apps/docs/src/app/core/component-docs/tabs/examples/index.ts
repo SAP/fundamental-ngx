@@ -16,6 +16,7 @@ import { TabsExampleComponent } from './tabs-example/tabs-example-component';
 import { TabCollapsibleExampleComponent } from './tab-collapsible-example/tab-collapsible-example.component';
 import { TabCollapsibleOverflowExampleComponent } from './tab-collapsible-overflow-example/tab-collapsible-overflow-example.component';
 import { TabFormElementExampleComponent } from './tab-form-element-example/tab-form-element-example.component';
+
 export * from './tab-collapsible-overflow-example/tab-collapsible-overflow-example.component';
 export * from './tab-navigation-mode-example/tab-navigation-mode-example-component';
 export * from './tab-stacked-content-example/tab-stacked-content-example.component';
