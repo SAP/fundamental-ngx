@@ -12,6 +12,7 @@ import { ListModule } from '@fundamental-ngx/core/list';
 import { VerticalNavigationHeaderComponent } from './vertical-navigation-header/vertical-navigation-header.component';
 import { VerticalNavigationCondensedExampleComponent } from './examples/vertical-navigation-condensed-example.component';
 import { VerticalNavigationNoIconsExampleComponent } from './examples/vertical-navigation-no-icons-example.component';
+import { VerticalNavigationGroupingExampleComponent } from './examples/vertical-navigation-grouping-example.component';
 
 const routes: Routes = [
     {
@@ -38,7 +39,8 @@ const routes: Routes = [
         VerticalNavigationHeaderComponent,
         VerticalNavigationDefaultExampleComponent,
         VerticalNavigationCondensedExampleComponent,
-        VerticalNavigationNoIconsExampleComponent
+        VerticalNavigationNoIconsExampleComponent,
+        VerticalNavigationGroupingExampleComponent
     ]
 })
 export class VerticalNavigationDocsModule {}
