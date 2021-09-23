@@ -192,6 +192,7 @@ export class BaseWizardGenerator implements OnDestroy {
     /** @hidden */
     _nextStepIndex: number;
 
+    /** @hidden */
     _stepsOrderChanged = false;
 
     /**

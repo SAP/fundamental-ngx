@@ -33,6 +33,10 @@ export class WizardGeneratorService {
      */
     dependencySteps: any = {};
 
+    /**
+     * @description Whether or not to append the step to the wizard. If false, each step will be displayed on a different page.
+     * Default is true.
+     */
     appendToWizard = true;
 
     /** @hidden */
@@ -337,6 +341,10 @@ export class WizardGeneratorService {
         this.setNextStepIndex(summaryStepIndex);
     }
 
+    /**
+     * Set's current set of step ID's
+     * @param ids step ID's
+     */
     setWizardStepIds(ids: string[]): void {
         if (!this._wizardStepIds.every((stepId, index) => ids[index] === stepId)) {
 
