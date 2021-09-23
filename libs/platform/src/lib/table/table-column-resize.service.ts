@@ -10,6 +10,11 @@ import { TableScrollDispatcherService } from './table-scroll-dispatcher.service'
 
 export const TABLE_RESIZER_BORDER_WIDTH = 3;
 
+enum ColumnWidthChangeSource {
+    WidthInput = 1,
+    Resize
+}
+
 /**
  * Service to handle all things related to column resizing:
  * - Setting resizer
@@ -21,8 +26,11 @@ export class TableColumnResizeService implements OnDestroy {
     /** @hidden */
     private _columnsWidthMap = new Map<string, number>();
 
+    /** @hidden is used to determine which width to rely on */
+    private _columnsWidthChangeSourceMap = new Map<string, ColumnWidthChangeSource>();
+
     /** @hidden */
-    private _columnsCellMap = new Map<string, ElementRef>();
+    private _columnsCellMap = new Map<string, ElementRef<HTMLTableDataCellElement>>();
 
     /** @hidden */
     private _visibleColumnNames: string[] = [];
@@ -116,13 +124,33 @@ export class TableColumnResizeService implements OnDestroy {
         this._calculateColumnsWidth();
     }
 
-    /** Get the column width, try in the next order:
+    /** 
+     *  Get the column width, try in the next order:
      *  1. Width from map with calculated widths.
      *  2. Width defined by the user.
      *  3. Literally `auto`, means no width set.
+     * 
+     *  In case there was a change to the width of the column (from the component input or resize event), 
+     *  corresponding value will be treated as higher priority
      */
     getColumnWidthStyle(column: TableColumn): string {
         const calculatedWidth = this._columnsWidthMap.get(column.name);
+        const changeSource = this._columnsWidthChangeSourceMap.get(column.name);
+
+        if (changeSource) {
+            switch (changeSource) {
+                case ColumnWidthChangeSource.Resize:
+                    if (calculatedWidth) {
+                        return calculatedWidth + 'px';
+                    }
+                    break;
+                case ColumnWidthChangeSource.WidthInput:
+                    if (column.width) {
+                        return column.width;
+                    }
+                    break;
+            }
+        }
 
         if (calculatedWidth) {
             return calculatedWidth + 'px';
@@ -164,6 +192,11 @@ export class TableColumnResizeService implements OnDestroy {
     /** Register column's cell to get its dimensions in further. */
     registerColumnCell(columnName: string, cellElRef: ElementRef): void {
         this._columnsCellMap.set(columnName, cellElRef);
+    }
+
+    /** Register the fact column width input was changed */
+    registerColumnWidthInputChange(columnName: string): void {
+        this._columnsWidthChangeSourceMap.set(columnName, ColumnWidthChangeSource.WidthInput);
     }
 
     /** Set the appropriate column resizer position. */
@@ -262,5 +295,6 @@ export class TableColumnResizeService implements OnDestroy {
         }
 
         this._columnsWidthMap.set(this._resizedColumn, columnWidth + newDiffX);
+        this._columnsWidthChangeSourceMap.set(this._resizedColumn, ColumnWidthChangeSource.Resize);
     }
 }
