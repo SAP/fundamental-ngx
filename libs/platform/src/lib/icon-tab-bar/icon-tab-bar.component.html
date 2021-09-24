@@ -20,6 +20,7 @@
     <fdp-icon-tab-bar-process-type
         [tabsConfig]="tabsConfig"
         [isRtl]="_isRtl"
+        [densityMode]="densityMode"
         (selected)="_selectItem($event)"
     ></fdp-icon-tab-bar-process-type>
 </ng-template>
@@ -29,6 +30,7 @@
         [tabsConfig]="tabsConfig"
         [showTotalTab]="showTotalTab"
         [isRtl]="_isRtl"
+        [densityMode]="densityMode"
         (selected)="_selectItem($event)"
     ></fdp-icon-tab-bar-filter-type>
 </ng-template>
@@ -37,6 +39,7 @@
     <fdp-icon-tab-bar-icon-type
         [tabsConfig]="tabsConfig"
         [isRtl]="_isRtl"
+        [densityMode]="densityMode"
         (selected)="_selectItem($event)"
     ></fdp-icon-tab-bar-icon-type>
 </ng-template>
@@ -46,6 +49,7 @@
         [tabsConfig]="tabsConfig"
         [layoutMode]="layoutMode"
         [isRtl]="_isRtl"
+        [densityMode]="densityMode"
         [enableTabReordering]="enableTabReordering"
         (reordered)="_onReorder($event)"
         (selected)="_selectItem($event)"

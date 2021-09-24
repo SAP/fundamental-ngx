@@ -41,7 +41,7 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
      * @description Destiny mode.
      */
     @Input()
-    densityMode: TabDestinyMode = 'cozy';
+    densityMode: TabDestinyMode = 'inherit';
 
     /**
      * @description Icon font
@@ -125,7 +125,8 @@ export class IconTabBarComponent implements OnInit, OnDestroy {
                     } else {
                         this._cssClassForContainer.push('fd-icon-tab-bar--compact');
                     }
-            })
+                    this._cd.detectChanges();
+                })
         }
 
         this._rtlService?.rtl
