@@ -16,6 +16,10 @@
     <fdp-button class="fd-bar__element" contentDensity="condensed" buttonType="ghost" label="Custom cancel button" (click)="cancel()"></fdp-button>
 </ng-template>
 
+<ng-template let-goNext="goNext" #reviewButtonTemplate>
+    <fdp-button class="fd-bar__element" contentDensity="condensed" buttonType="emphasized" label="Custom review button" (click)="goNext()"></fdp-button>
+</ng-template>
+
 <ng-template #summaryStepTemplate let-steps="steps" let-editStep="editStep">
     <ng-container *ngFor="let step of steps; trackBy: trackFn">
         <h4 fd-title headerSize="4">{{ step.name }} step</h4>

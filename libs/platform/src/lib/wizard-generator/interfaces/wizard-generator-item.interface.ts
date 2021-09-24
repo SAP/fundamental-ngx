@@ -78,4 +78,10 @@ export interface WizardGeneratorItem {
      * @description Is this step is a summary step
      */
     summary?: boolean;
+
+    /**
+     * @hidden
+     * @description Used for internal navigation logic to summary step.
+     */
+    completed?: boolean;
 }

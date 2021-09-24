@@ -31,20 +31,24 @@ export const DEFAULT_WIZARD_NAVIGATION_BUTTONS: WizardNavigationButtons = {
         label: 'Finish',
         contentDensity: 'compact',
         type: 'emphasized'
+    },
+    review: {
+        label: 'Review',
+        contentDensity: 'compact',
+        type: 'emphasized'
     }
-}
+};
 
 /**
  * @description Base Wizard Generator component with necessary inputs and methods.
  */
 @Directive()
 export class BaseWizardGenerator implements OnDestroy {
-
     /**
      * @description Whether or not apply responsive paddings styling.
      */
-     @Input()
-     responsivePaddings = true;
+    @Input()
+    responsivePaddings = true;
 
     /**
      * @description Button labels to be used in Wizard navigation
@@ -70,8 +74,7 @@ export class BaseWizardGenerator implements OnDestroy {
         this.wizardCreated = false;
         this._wizardGeneratorService.clearWizardStepComponents();
 
-        this._wizardGeneratorService.prepareWizardItems(items)
-        .then(newItems => {
+        this._wizardGeneratorService.prepareWizardItems(items).then((newItems) => {
             this._items = newItems;
             this._visibleItems = newItems;
             this.wizardCreated = true;
@@ -84,7 +87,13 @@ export class BaseWizardGenerator implements OnDestroy {
      * Default is true.
      */
     @Input()
-    appendToWizard = true;
+    set appendToWizard(value: boolean) {
+        this._wizardGeneratorService.setOriginalAppendToWizardState(value);
+    }
+
+    get appendToWizard(): boolean {
+        return this._appendToWizard;
+    }
 
     /** If navigation buttons should be visible. */
     @Input()
@@ -149,18 +158,30 @@ export class BaseWizardGenerator implements OnDestroy {
      * @description Whether or not Wizard is currently on the last step
      */
     get isLastStep(): boolean {
-        const lastStep = this.visibleItems[this.visibleItems.length - 1]
+        const lastStep = this.visibleItems[this.visibleItems.length - 1];
         return lastStep?.status === 'current' && !lastStep.branching;
     }
 
+    /**
+     * Whether or not current step is a branching step.
+     */
     get isBranchingStep(): boolean {
         const currentIndex = this._wizardGeneratorService.getCurrentStepIndex();
 
         return this._visibleItems[currentIndex]?.branching === true;
     }
 
-    get hasSummaryStep(): boolean {
-        return this._visibleItems.some(i => i.summary === true);
+    /**
+     * Whether or not the next step is a Summary step.
+     */
+    get isNextStepSummary(): boolean {
+        const nextStep = this.visibleItems[this._nextStepIndex];
+        return nextStep?.summary === true;
+    }
+
+    get isCurrentStepCompleted(): boolean {
+        const currentIndex = this._wizardGeneratorService.getCurrentStepIndex();
+        return this._visibleItems[currentIndex]?.completed === true;
     }
 
     /**
@@ -168,10 +189,19 @@ export class BaseWizardGenerator implements OnDestroy {
      */
     _visibleItems: WizardGeneratorItem[] = [];
 
+    /** @hidden */
+    _nextStepIndex: number;
+
+    /** @hidden */
+    _stepsOrderChanged = false;
+
     /**
      * @hidden
      */
     private _items: WizardGeneratorItem[] = [];
+
+    /** @hidden */
+    private _appendToWizard = false;
 
     /**
      * @hidden
@@ -190,24 +220,45 @@ export class BaseWizardGenerator implements OnDestroy {
     private _navigationButtonLabels = DEFAULT_WIZARD_NAVIGATION_BUTTONS;
 
     /** @hidden */
-    constructor(
-        protected _wizardGeneratorService: WizardGeneratorService,
-        private _cd: ChangeDetectorRef
-    ) {
-        this._wizardGeneratorService.getVisibleSteps()
-        .pipe(debounceTime(10), takeUntil(this._onDestroy$))
-        .subscribe((visibleSteps) => {
-            this.visibleItems = visibleSteps;
-            this._cd.detectChanges();
-        });
+    constructor(protected _wizardGeneratorService: WizardGeneratorService, private _cd: ChangeDetectorRef) {
+        this._wizardGeneratorService
+            .getVisibleSteps()
+            .pipe(debounceTime(10), takeUntil(this._onDestroy$))
+            .subscribe((visibleSteps) => {
+                this.visibleItems = visibleSteps;
+                this._cd.detectChanges();
+            });
 
-        this._wizardGeneratorService.trackStepsComponents()
-        .pipe(debounceTime(10), takeUntil(this._onDestroy$))
-        .subscribe(async (stepsComponents) => {
-            if (stepsComponents.size === this.items?.length) {
-                await this._setVisibleSteps();
-            }
-        });
+        this._wizardGeneratorService
+            .trackStepsComponents()
+            .pipe(debounceTime(10), takeUntil(this._onDestroy$))
+            .subscribe(async (stepsComponents) => {
+                if (stepsComponents.size === this.items?.length) {
+                    await this._setVisibleSteps();
+                }
+            });
+
+        this._wizardGeneratorService
+            .trackAppendToWizardState()
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((value) => {
+                this._appendToWizard = value;
+            });
+
+        this._wizardGeneratorService
+            .trackStepsOrder()
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((newNextStep) => {
+                this._nextStepIndex = newNextStep;
+                this._stepsOrderChanged = true;
+            });
+
+        this._wizardGeneratorService
+            .trackNextStepindex()
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((index) => {
+                this._nextStepIndex = index;
+            });
     }
 
     /**
@@ -223,13 +274,19 @@ export class BaseWizardGenerator implements OnDestroy {
      */
     goBack(): void {
         const currentStepIndex = this._wizardGeneratorService.getCurrentStepIndex();
+        const previousStepIndex = currentStepIndex - 1;
 
-        if (this.visibleItems[currentStepIndex - 1] !== undefined) {
-            this.visibleItems[currentStepIndex].status = 'upcoming';
-            this.visibleItems[currentStepIndex - 1].status = 'current';
+        if (this.visibleItems[previousStepIndex] === undefined) {
+            return;
         }
 
+        this._stepsOrderChanged = false;
+
+        this.visibleItems[currentStepIndex].status = 'upcoming';
+        this.visibleItems[previousStepIndex].status = 'current';
         this._wizardGeneratorService.setVisibleSteps(this.visibleItems);
+
+        this._wizardGeneratorService.setNextStepIndex(currentStepIndex);
 
         this._cd.detectChanges();
     }
@@ -238,34 +295,41 @@ export class BaseWizardGenerator implements OnDestroy {
      * @description Progresses the Wizard one step further.
      */
     async goNext(): Promise<void> {
-
         if (this._formPending) {
             return;
         }
 
         const currentStepIndex = this._wizardGeneratorService.getCurrentStepIndex();
+        const nextStepIndex = this._nextStepIndex;
 
-        this._wizardGeneratorService.validateStepForms()
-        .pipe(takeUntil(this._onDestroy$))
-        .subscribe(async (result) => {
+        this._wizardGeneratorService
+            .validateStepForms()
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(async (result) => {
+                if (!result) {
+                    return;
+                }
 
-            if (!result) {
-                return;
-            }
+                await this._setVisibleSteps();
 
-            await this._setVisibleSteps();
+                const steps = this.visibleItems;
 
-            const steps = this.visibleItems;
+                if (steps[nextStepIndex] === undefined) {
+                    return;
+                }
 
-            if (steps[currentStepIndex + 1] !== undefined) {
+                this._stepsOrderChanged = false;
+
                 steps[currentStepIndex].status = 'completed';
-                steps[currentStepIndex + 1].status = 'current';
-            }
+                steps[currentStepIndex].completed = true;
+                steps[nextStepIndex].status = 'current';
 
-            this._wizardGeneratorService.setVisibleSteps(steps);
+                this._wizardGeneratorService.setVisibleSteps(steps);
 
-            this._cd.detectChanges();
-        });
+                this._wizardGeneratorService.setNextStepIndex(nextStepIndex + 1);
+
+                this._cd.detectChanges();
+            });
     }
 
     /**
@@ -276,34 +340,35 @@ export class BaseWizardGenerator implements OnDestroy {
     submitStepForms(currentStepIndex: string): Observable<WizardStepSubmittedForms> {
         this._formPending = true;
 
-        return this._wizardGeneratorService.submitStepForms(currentStepIndex).pipe(finalize(() => {
-            this._formPending = false;
-        }));
+        return this._wizardGeneratorService.submitStepForms(currentStepIndex).pipe(
+            finalize(() => {
+                this._formPending = false;
+            })
+        );
     }
 
     /**
      * @description Completes the wizard and emits it's formatted value.
      */
     async finish(): Promise<void> {
-
         if (this.isSummaryStep) {
             const wizardResult = await this._wizardGeneratorService.getWizardFormValue(true);
             this.wizardFinished.emit(wizardResult);
             return;
         }
 
-        this._wizardGeneratorService.validateStepForms()
-        .pipe(takeUntil(this._onDestroy$))
-        .subscribe(async (result) => {
+        this._wizardGeneratorService
+            .validateStepForms()
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(async (result) => {
+                if (!result) {
+                    return;
+                }
 
-            if (!result) {
-                return;
-            }
+                const wizardResult = await this._wizardGeneratorService.getWizardFormValue(true);
 
-            const wizardResult = await this._wizardGeneratorService.getWizardFormValue(true);
-
-            this.wizardFinished.emit(wizardResult);
-        });
+                this.wizardFinished.emit(wizardResult);
+            });
     }
 
     /**
@@ -312,8 +377,7 @@ export class BaseWizardGenerator implements OnDestroy {
      * @param status New step status.
      */
     async stepStatusChanged(stepId: string, status: WizardStepStatus): Promise<void> {
-
-        const stepIndex = this._visibleItems.findIndex(s => s.id === stepId);
+        const stepIndex = this._visibleItems.findIndex((s) => s.id === stepId);
 
         this._visibleItems[stepIndex].status = status;
 

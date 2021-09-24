@@ -11,6 +11,7 @@ export * from './components/wizard-summary-step/wizard-summary-section/wizard-su
 export * from './directives/wizard-generator-finish-button.directive';
 export * from './directives/wizard-generator-go-next-button.directive';
 export * from './directives/wizard-generator-summary-step.directive';
+export * from './directives/wizard-generator-review-button.directive';
 export * from './interfaces/wizard-dialog-data.interface'
 export * from './interfaces/wizard-generator-form-group.interface';
 export * from './interfaces/wizard-generator-item.interface';
