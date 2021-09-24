@@ -75,7 +75,7 @@ class CardDropped {
 
 type CardColumn = CardDefinitionDirective[];
 
-@Directive({ selector: '[fdGroup]' })
+@Directive({ selector: '[fdDndGroup]' })
 export class DndGroup {
     /** @hidden */
     _onDndItemFocus$ = new Subject<[number, number]>();
@@ -89,7 +89,7 @@ export class DndGroup {
     }
 }
 
-@Directive({ selector: '[fdItem]' })
+@Directive({ selector: '[fdDndItem]' })
 export class DndItem implements OnInit {
     /** item index in group(column) */
     @Input()
@@ -109,14 +109,14 @@ export class DndItem implements OnInit {
     ngOnInit(): void {
         this.dndGroup._onDndItemFocus$.subscribe(([groupIndex, itemIndex]) => {
             if (this.groupIndex === groupIndex && this.itemIndex === itemIndex) {
-              this.elementRef.nativeElement.focus();
+                this.elementRef.nativeElement.focus();
             }
         });
     }
     
-    /** disabled possibility to move card */
+    /** @hidden disabled possibility to move card */
     @HostListener('keyup', ['$event'])
-    onKeyUp(event: KeyboardEvent): void {
+    _onKeyUp(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, CONTROL)) {
             this.cardLayout._enableKeyboard = false;
             this.dndGroup._onDndItemFocus$.unsubscribe();
@@ -124,39 +124,42 @@ export class DndItem implements OnInit {
         }
     }
 
-    /** allow card movement using keyboard */
+    /** @hidden allow card movement using keyboard */
     @HostListener('keydown', ['$event'])
-    onKeyDown(event: KeyboardEvent): void {
-        const group = this.cardLayout.columns[this.groupIndex];
+    _onKeyDown(event: KeyboardEvent): void {
+        const group = this.cardLayout._columns[this.groupIndex];
         if (KeyUtil.isKeyCode(event, CONTROL)) {
-            this.cardLayout._enableKeyboard = true
+            this.cardLayout._enableKeyboard = true;
         }
         if (KeyUtil.isKeyCode(event, RIGHT_ARROW) 
-        && this.cardLayout._enableKeyboard 
-        && this.cardLayout.columns.length !== this.groupIndex + 1) {
-            event.preventDefault();
-            const nextGroup = this.cardLayout.columns[this.groupIndex + 1];
-            const nextGroupIndex = this.groupIndex + 1;
-            transferArrayItem(group, nextGroup, this.itemIndex, 0);   
-            this.dndGroup.focusDndItem(nextGroupIndex, 0);
-        } else if (KeyUtil.isKeyCode(event, DOWN_ARROW) 
-        && this.cardLayout._enableKeyboard) { 
-            event.preventDefault();        
-            moveItemInArray(group, this.itemIndex, this.itemIndex + 1);
-            this.dndGroup.focusDndItem(this.groupIndex, this.itemIndex + 1);
-        } else if (KeyUtil.isKeyCode(event, UP_ARROW) 
-        && this.cardLayout._enableKeyboard) {
-            event.preventDefault();
-            moveItemInArray(group, this.itemIndex, this.itemIndex - 1);
-            this.dndGroup.focusDndItem(this.groupIndex, this.itemIndex - 1);
-        } else if (KeyUtil.isKeyCode(event, LEFT_ARROW) 
-        && this.cardLayout._enableKeyboard 
-        && this.groupIndex) {
-            event.preventDefault();
-            const nextGroup = this.cardLayout.columns[this.groupIndex - 1];
-            const nextGroupIndex = this.groupIndex - 1;
-            transferArrayItem(group, nextGroup, this.itemIndex, 0);
-            this.dndGroup.focusDndItem(nextGroupIndex, 0);
+            && this.cardLayout._enableKeyboard 
+            && this.cardLayout._columns.length !== this.groupIndex + 1) {
+                event.preventDefault();
+                const nextGroup = this.cardLayout._columns[this.groupIndex + 1];
+                const nextGroupIndex = this.groupIndex + 1;
+                transferArrayItem(group, nextGroup, this.itemIndex, 0);   
+                this.dndGroup.focusDndItem(nextGroupIndex, 0);
+        } 
+        if (KeyUtil.isKeyCode(event, DOWN_ARROW) 
+            && this.cardLayout._enableKeyboard) { 
+                event.preventDefault();        
+                moveItemInArray(group, this.itemIndex, this.itemIndex + 1);
+                this.dndGroup.focusDndItem(this.groupIndex, this.itemIndex + 1);
+        } 
+        if (KeyUtil.isKeyCode(event, UP_ARROW) 
+            && this.cardLayout._enableKeyboard) {
+                event.preventDefault();
+                moveItemInArray(group, this.itemIndex, this.itemIndex - 1);
+                this.dndGroup.focusDndItem(this.groupIndex, this.itemIndex - 1);
+        } 
+        if (KeyUtil.isKeyCode(event, LEFT_ARROW) 
+            && this.cardLayout._enableKeyboard 
+            && this.groupIndex) {
+                event.preventDefault();
+                const nextGroup = this.cardLayout._columns[this.groupIndex - 1];
+                const nextGroupIndex = this.groupIndex - 1;
+                transferArrayItem(group, nextGroup, this.itemIndex, 0);
+                this.dndGroup.focusDndItem(nextGroupIndex, 0);
         }
     }
 }
@@ -197,8 +200,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     @Output()
     cardDraggedDropped: EventEmitter<CardDropped> = new EventEmitter<CardDropped>();
 
-    /** Array of CardDefinitionDirective Array.To make Table kind of layout.*/
-    columns: CardColumn[];
+    /** @hidden Array of CardDefinitionDirective Array.To make Table kind of layout.*/
+    _columns: CardColumn[];
 
     /** handles rtl service */
     dir: string;
@@ -223,7 +226,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
 
     constructor(
         private readonly _changeDetector: ChangeDetectorRef, 
-        @Optional() private _rtlService: RtlService
+        @Optional() private readonly _rtlService: RtlService
     ) {}
 
     /** @hidden */
@@ -240,7 +243,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden */
     ngAfterViewInit(): void {
         /** Create column layout when view is initialized */
-        this.updateLayout();
+        this._updateLayout();
         this._accessibilitySetup();
     }
 
@@ -250,7 +253,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
          * Update column layout when orientation of screen changes.
          * actual width is returned when view is stable. In AfterViewInit, correct value does not come.
          */
-        this.updateLayout();
+        this._updateLayout();
     }
 
     /** @hidden */
@@ -296,8 +299,8 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         );
     }
 
-    /** Distribute cards on window resize */
-    updateLayout(): void {
+    /** @hidden Distribute cards on window resize */
+    private _updateLayout(): void {
         this._numberOfColumns = this._getNumberOfColumns();
         if (this._previousNumberOfColumns !== this._numberOfColumns) {
             this._previousNumberOfColumns = this._numberOfColumns;
@@ -337,7 +340,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     private _listenOnResize(): void {
         fromEvent(window, 'resize')
             .pipe(debounceTime(60), takeUntil(this._onDestroy$))
-            .subscribe(() => this.updateLayout());
+            .subscribe(() => this._updateLayout());
     }
 
     /** @hidden Listen card change and distribute cards on column change */
@@ -374,7 +377,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         // convert latest cards queryList to Array of cards
         this._cardsArray = this.cards.toArray();
         this._initializeColumns(this._numberOfColumns);
-        this._distributeCards(this.columns);
+        this._distributeCards(this._columns);
         this._changeDetector.detectChanges();
     }
 
@@ -382,9 +385,9 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
      * @hidden Initialize columns with empty arrays
      */
     private _initializeColumns(numberOfColumns: number): void {
-        this.columns = [];
+        this._columns = [];
         for (let i = 0; i < numberOfColumns; i++) {
-            this.columns.push([]);
+            this._columns.push([]);
         }
     }
 
