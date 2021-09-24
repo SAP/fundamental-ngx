@@ -18,6 +18,7 @@ import {
     Output,
     QueryList,
     SimpleChanges,
+    TrackByFunction,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
@@ -58,7 +59,8 @@ import {
     TableRowSelectionChangeEvent,
     TableRowsRearrangeEvent,
     TableRowToggleOpenStateEvent,
-    TableSortChangeEvent
+    TableSortChangeEvent,
+    RowComparator
 } from './models';
 import { TableColumnResizeService } from './table-column-resize.service';
 import { TableColumnResizableSide } from './directives/table-cell-resizable.directive';
@@ -250,6 +252,21 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     @Input()
     rowsActivable = false;
 
+    /**
+     * Tracking function that will be used to check the differences in data changes. 
+     * Used similarly to `ngFor` `trackBy` function. 
+     * Accepts a function that takes two parameters, index and item.
+     */
+    @Input()
+    trackBy: TrackByFunction<T>;
+
+    /** 
+     * An optional function, that identifies uniqueness of a particular row.
+     * Table component uses it to be able to preserve selection when data list is changed.
+     */
+    @Input()
+    rowComparator: RowComparator<T>;
+
     /** Event fired when table selection has changed. */
     @Output()
     readonly rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<T>> = new EventEmitter<TableRowSelectionChangeEvent<T>>();
@@ -435,6 +452,13 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     _scrollBarWidth = 0;
 
+    /** 
+     * @hidden
+     * Mappping function for the trackBy, provided by the user. 
+     * Is needed, because we are wrapping user supplied data into a `TableRow` class.
+     */
+    _rowTrackBy: TrackByFunction<TableRow<T>>;
+
     /** @hidden */
     get _isShownSelectionColumn(): boolean {
         return this.selectionMode !== SelectionMode.NONE;
@@ -502,6 +526,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
+        if ('trackBy' in changes) {
+            this._rowTrackBy = typeof this.trackBy === 'function' ? (index, item) => this.trackBy(index, item.value) : undefined;
+        }
+
         if (!this._viewInitiated) {
             return;
         }
@@ -1031,6 +1059,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
+    _columnTrackBy(index: number, column: TableColumn): string {
+        return column.name;
+    }
+
+    /** @hidden */
     private _isDroppedInsideItself(dropRow: TableRow, dragRow: TableRow): boolean {
         const dropRowParents = this._getRowParents(dropRow);
         return !!dropRowParents.find(row => row === dragRow);
@@ -1119,10 +1152,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         this._subscriptions.add(
             this._dataSourceItemsSubject
-                .asObservable()
                 .pipe(
                     // map source items to table rows
-                    switchMap((source: T[]) => of(this._createTableRowsByDataSourceItems(source))),
+                    map((source: T[]) => this._createTableRowsByDataSourceItems(source)),
                     // Insert items to show groups
                     switchMap((rows: TableRow[]) =>
                         this.isTreeTable
@@ -1227,9 +1259,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             return this._createTreeTableRowsByDataSourceItems(source);
         }
 
+        const selectedRowsMap = this._getSelectionStatusByRowValue(source);
+
         return source
             .map((item: T, index: number) => {
-                const row = new TableRow(TableRowType.ITEM, false, index, item);
+                const row = new TableRow(TableRowType.ITEM, !!selectedRowsMap.get(item), index, item);
                 row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
 
                 return row;
@@ -1240,11 +1274,13 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     private _createTreeTableRowsByDataSourceItems(source: T[]): TableRow<T>[] {
         const rows: TableRow<T>[] = [];
 
+        const selectedRowsMap = this._getSelectionStatusByRowValue(source);
+
         source.forEach((item: T, index: number) => {
             const hasChildren = item.hasOwnProperty(this.relationKey)
                 && Array.isArray(item[this.relationKey])
                 && item[this.relationKey].length;
-            const row = new TableRow(hasChildren ? TableRowType.TREE : TableRowType.ITEM, false, index, item);
+            const row = new TableRow(hasChildren ? TableRowType.TREE : TableRowType.ITEM, !!selectedRowsMap.get(item), index, item);
 
             row.expanded = false;
             row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
@@ -1264,6 +1300,30 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         });
 
         return rows;
+    }
+
+    /** 
+     * @hidden
+     * Runs `rowComparator` function against checked rows and compares them with the new `source`
+     * If matched, creates an association between the source item and checked status of corresponding row.
+     * 
+     * @returns `Map` object with the `checked` status for particular source item
+     */
+    private _getSelectionStatusByRowValue(source: T[]): Map<T, boolean> {
+        const rowMap = new Map<T, boolean>();
+        if (
+            (this.selectionMode === SelectionMode.SINGLE || this.selectionMode === SelectionMode.MULTIPLE) &&
+            typeof this.rowComparator === 'function'
+        ) {
+            const checkedRows = this._tableRows.filter((r) => r.checked);
+            checkedRows.forEach((row) => {
+                const found = source.find((e) => this.rowComparator(row.value, e));
+                if (found) {
+                    rowMap.set(found, row.checked);
+                }
+            });
+        }
+        return rowMap;
     }
 
     /** @hidden */

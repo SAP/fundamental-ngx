@@ -68,7 +68,7 @@
             ></fd-checkbox>
         </th>
 
-        <ng-container *ngFor="let column of _visibleColumns; let colIdx = index">
+        <ng-container *ngFor="let column of _visibleColumns; let colIdx = index; trackBy: _columnTrackBy">
             <th
                 fd-table-cell
                 role="columnheader"
@@ -283,7 +283,7 @@
                     (itemDropped)="_dragDropItemDrop($event)"
                 >
                     <ng-container
-                        *ngFor="let row of _tableRowsVisible; let rowIdx = index;"
+                        *ngFor="let row of _tableRowsVisible; let rowIdx = index; trackBy: _rowTrackBy"
                         [ngSwitch]="row.type"
                     >
                         <ng-container
