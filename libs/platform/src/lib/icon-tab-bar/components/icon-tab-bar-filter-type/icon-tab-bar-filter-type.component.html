@@ -12,10 +12,13 @@
         role="presentation"
         fdOverflowListItem
     >
-        <a (click)="_selectItem(_totalTab)"
-           [attr.aria-selected]="_totalTab?.uId === _selectedUid"
-           class="fd-icon-tab-bar__tab"
-           role="tab"
+        <a
+            (click)="_selectItem(_totalTab)"
+            (keydown)="_keyDownHandler($event, _totalTab)"
+            [attr.aria-selected]="_totalTab?.uId === _selectedUid"
+            class="fd-icon-tab-bar__tab"
+            tabindex="0"
+            role="tab"
         >
             <div class="fd-icon-tab-bar__container fd-icon-tab-bar__container--filter">
                 <span *ngIf="_totalTab?.counter" class="fd-icon-tab-bar__filter-counter">{{_totalTab?.counter}}</span>
@@ -34,6 +37,8 @@
             (click)="_selectItem(item)"
             [attr.aria-selected]="item.uId === _selectedUid"
             class="fd-icon-tab-bar__tab"
+            tabindex="0"
+            (keydown)="_keyDownHandler($event, item)"
             role="tab"
         >
             <div class="fd-icon-tab-bar__container">
@@ -53,6 +58,7 @@
         [isRtl]="isRtl"
         [anchorIndexInsideParent]="_lastVisibleTabIndex"
     >
-        <fdp-icon-tab-bar-popover [extraTabs]="_extraTabs" (selectedExtraItem)="_selectExtraItem($event)"></fdp-icon-tab-bar-popover>
+        <fdp-icon-tab-bar-popover [extraTabs]="_extraTabs"
+                                  (selectedExtraItem)="_selectExtraItem($event)"></fdp-icon-tab-bar-popover>
     </li>
 </ul>
