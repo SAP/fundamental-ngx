@@ -38,10 +38,6 @@ describe('Inline help test suite', function() {
     it('Verify inline help input', () => {
         scrollIntoView(exampleAreaContainersArr);
         mouseHoverElement(inlineHelpInput);
-        saveElementScreenshot(inlineHelpInput, `inline-help-input`, inlineHelpPage.getScreenshotFolder());
-        const diff = checkElementScreenshot(exampleAreaContainersArr, `inline-help-input`, inlineHelpPage.getScreenshotFolder());
-
-        expect(diff).toBeLessThan(5, `Inline help input has mismatch percentage of ${diff}%`);
         expect(getAttributeByName(inlineHelpInput, 'fd-inline-help')).toContain('Inline Help Tooltip');
     });
 
