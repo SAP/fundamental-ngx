@@ -1,4 +1,12 @@
 
+### [0.32.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.2...v0.32.2-rc.3) (2021-09-24)
+
+
+### Bug Fixes
+
+* **platform:** icon tab bar sprint 71 defect hunting ([#6691](https://github.com/SAP/fundamental-ngx/issues/6691)) ([7425910](https://github.com/SAP/fundamental-ngx/commit/74259106ee79470c5817349eb5e550ca9e778753))
+* **platform:** table, filtering feature bugs ([#6610](https://github.com/SAP/fundamental-ngx/issues/6610)) ([a6b97a7](https://github.com/SAP/fundamental-ngx/commit/a6b97a7221f4af712c389834f5f8627f4b17b269))
+
 ### [0.32.2-rc.2](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.1...v0.32.2-rc.2) (2021-09-24)
 
 ### [0.32.2-rc.1](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.0...v0.32.2-rc.1) (2021-09-24)
