@@ -1,4 +1,11 @@
 
+### [0.32.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.3...v0.32.2-rc.4) (2021-09-24)
+
+
+### Bug Fixes
+
+* **platform:** replace duplicate i18n ids ([#6720](https://github.com/SAP/fundamental-ngx/issues/6720)) ([acb1449](https://github.com/SAP/fundamental-ngx/commit/acb144908a679c88b0bb001a19c1a4954bc176d1)), closes [#6467](https://github.com/SAP/fundamental-ngx/issues/6467)
+
 ### [0.32.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.2...v0.32.2-rc.3) (2021-09-24)
 
 
