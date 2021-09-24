@@ -515,7 +515,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             return;
         }
 
-        if ('selectionMode' in changes || 'freezeColumnsTo' in changes || 'semanticHighlighting' in changes) {
+        if ('selectionMode' in changes
+            || 'freezeColumnsTo' in changes
+            || 'semanticHighlighting' in changes
+            || 'contentDensity' in changes
+        ) {
             this.recalculateTableColumnWidth();
         }
 
@@ -909,9 +913,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         if (this._freezableColumns.includes(column.name)) {
             const key = this._rtl ? 'margin-right.px' : 'margin-left.px';
-            styles[key] = 
+            styles[key] =
                 this._semanticHighlightingColumnWidth
-                + this._selectionColumnWidth 
+                + this._selectionColumnWidth
                 + this._tableColumnResizeService.getPrevColumnsWidth(column.name);
         }
 
@@ -1344,9 +1348,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         const freezeToNextColumnName = this._visibleColumns[this._freezableColumns.length]?.name;
 
-        this._tablePadding = 
-            this._semanticHighlightingColumnWidth 
-            + this._selectionColumnWidth 
+        this._tablePadding =
+            this._semanticHighlightingColumnWidth
+            + this._selectionColumnWidth
             + this._tableColumnResizeService.getPrevColumnsWidth(freezeToNextColumnName);
     }
 
