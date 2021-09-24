@@ -1,4 +1,11 @@
 
+### [0.32.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.4...v0.32.2-rc.5) (2021-09-24)
+
+
+### Features
+
+* **platform:** wizard generator summary edit button logic ([#6698](https://github.com/SAP/fundamental-ngx/issues/6698)) ([90cb93c](https://github.com/SAP/fundamental-ngx/commit/90cb93cf00d3685899c74ca24ae7f88373953964))
+
 ### [0.32.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.3...v0.32.2-rc.4) (2021-09-24)
 
 
