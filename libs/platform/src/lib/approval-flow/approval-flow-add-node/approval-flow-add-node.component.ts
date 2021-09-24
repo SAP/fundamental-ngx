@@ -355,7 +355,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     /** @hidden */
     _onSearchStringChange(searchString = ''): void {
         this._searchString = searchString;
-
+// debugger;
         if (!searchString) {
             this._setFilteredApprovers(this._approvers);
             this._setFilteredTeams(this._teams || []);
