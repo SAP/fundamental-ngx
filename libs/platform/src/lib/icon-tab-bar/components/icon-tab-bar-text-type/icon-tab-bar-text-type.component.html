@@ -24,10 +24,12 @@
             role="presentation"
         >
             <a
+                *ngIf="!item.subItems?.length"
                 class="fd-icon-tab-bar__tab"
                 role="tab"
-                *ngIf="!item.subItems?.length"
+                tabindex="0"
                 (click)="_selectItem(item, $event)"
+                (keydown)="_keyDownHandler($event, item)"
                 [attr.aria-selected]="item.uId === _selectedUid"
             >
                 <span *ngIf="layoutMode === 'row'; else columnsMode" class="fd-icon-tab-bar__tag">

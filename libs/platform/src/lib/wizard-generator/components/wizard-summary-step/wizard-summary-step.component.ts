@@ -53,7 +53,7 @@ export class WizardSummaryStepComponent {
      * User-defined template for Summary step.
      */
     @Input()
-    customsummaryStepTemplate: TemplateRef<any>;
+    customSummaryStepTemplate: TemplateRef<HTMLElement>;
 
     /**
      * @hidden

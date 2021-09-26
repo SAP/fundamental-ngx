@@ -25,6 +25,7 @@
             [suggestions]="searchSuggestions"
             [ariaLabelledBy]="tableToolbarTitleId"
             (searchSubmit)="submitSearch($event)"
+            (cancelSearch)="submitSearch($event)"
         ></fdp-search-field>
 
         <ng-container *ngIf="tableToolbarActionsComponent">

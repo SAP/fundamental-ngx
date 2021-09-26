@@ -30,7 +30,6 @@ export interface WizardStepChange {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WizardBodyComponent implements OnInit, OnDestroy {
-
     /**
      * @description Whether or not apply responsive paddings styling.
      */
@@ -64,10 +63,16 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     isFirstStep = false;
 
     /**
-     * @description Whether or not Wizard is currently on the last step
+     * @description Whether or not Wizard is currently on the last step.
      */
     @Input()
     isLastStep = false;
+
+    /**
+     * Whether or not next step is a Summary step.
+     */
+    @Input()
+    isNextStepSummary = false;
 
     /**
      * @description Boolean flag indicating whether or not to display Summary step in Wizard progress bar.
@@ -79,19 +84,23 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      * User-defined template for "Go Next" button.
      */
     @Input()
-    goNextButtonTemplate: TemplateRef<any>;
+    goNextButtonTemplate: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for "Finish" button.
      */
     @Input()
-    finishButtonTemplate: TemplateRef<any>;
+    finishButtonTemplate: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for summary step.
      */
     @Input()
-    customsummaryStepTemplate: TemplateRef<any>;
+    customSummaryStepTemplate: TemplateRef<HTMLElement>;
+
+    /** User-defined template for "Review" button */
+    @Input()
+    reviewButtonTemplate: TemplateRef<HTMLElement>;
 
     /**
      * @description Is current step is summary step.
@@ -99,7 +108,7 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     @Input()
     isSummaryStep = false;
 
-    /** If navigation buttons should be visible */
+    /** If navigation buttons should be visible. */
     @Input()
     navigationButtons = true;
 
@@ -140,7 +149,7 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-     private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /**
      * @hidden
@@ -148,22 +157,19 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
     private _visibleItems: WizardGeneratorItem[];
 
     /** @hidden */
-    constructor(
-        private _wizardGeneratorService: WizardGeneratorService,
-        private _cd: ChangeDetectorRef
-    ) {
-    }
+    constructor(private _wizardGeneratorService: WizardGeneratorService, private _cd: ChangeDetectorRef) {}
 
     /**
      * @hidden
      */
     ngOnInit(): void {
-        this._wizardGeneratorService.getVisibleSteps()
-        .pipe(debounceTime(50), takeUntil(this._onDestroy$))
-        .subscribe((visibleSteps) => {
-            this._visibleItems = visibleSteps;
-            this._cd.detectChanges();
-        });
+        this._wizardGeneratorService
+            .getVisibleSteps()
+            .pipe(debounceTime(50), takeUntil(this._onDestroy$))
+            .subscribe((visibleSteps) => {
+                this._visibleItems = visibleSteps;
+                this._cd.detectChanges();
+            });
     }
 
     /**
@@ -191,9 +197,8 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
      * @param index Current step index.
      * @returns {Promise<boolean>} If this step status can be changed.
      */
-    stepClickValidatorFn(index: number, step: WizardGeneratorItem): () => Promise<boolean> {
+    stepClickValidatorFn(index: number): () => Promise<boolean> {
         return async () => {
-
             const currentStepIndex = this._wizardGeneratorService.getCurrentStepIndex();
             const isSummaryStep = this._visibleItems[currentStepIndex]?.summary === true;
 
@@ -201,8 +206,17 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
                 return true;
             }
 
+            if (this._visibleItems.slice(0, index).find(i => !i.completed && !i.summary)) {
+                return false;
+            }
+
             return await this._wizardGeneratorService.validateStepForms(true).toPromise();
-        }
+        };
+    }
+
+    stepClicked(stepId: string): void {
+        const stepIndex = this._wizardGeneratorService.getStepIndex(stepId);
+        this._wizardGeneratorService.setNextStepIndex(stepIndex + 1);
     }
 
     /**

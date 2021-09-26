@@ -19,6 +19,7 @@
                         class="fd-list__link fd-icon-tab-bar__list-link"
                         tabindex="0"
                         (click)="_selectItem(item)"
+                        (keydown)="_keyDownHandler($event, item)"
                     >
                         <span class="fd-icon-tab-bar__list-item-icon-container">
                             <span class="fd-list__icon fd-icon-tab-bar__list-item-icon">

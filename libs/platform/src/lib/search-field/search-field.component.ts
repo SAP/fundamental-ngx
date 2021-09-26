@@ -199,7 +199,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * Cancel search event.
      */
     @Output()
-    cancelSearch: EventEmitter<void> = new EventEmitter();
+    cancelSearch: EventEmitter<SearchInput> = new EventEmitter();
 
     /** @hidden Focus state */
     get isFocused(): boolean {
@@ -259,6 +259,14 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
 
     @ViewChild('suggestionMenuTemplate', { static: false }) suggestionMenuTemplate: TemplateRef<any>;
     @ViewChildren(SearchFieldSuggestionDirective) suggestionItems: QueryList<SearchFieldSuggestionDirective>;
+
+    /** @hidden */
+    get searchFieldValue(): SearchInput {
+        return {
+            text: this.inputText,
+            category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
+        }
+    }
 
     constructor(
         private _overlay: Overlay,
@@ -322,10 +330,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         // again need to announce the result, so clear this message.
         setTimeout(() => (this._currentSearchSuggestionAnnoucementMessage = ''));
 
-        this.inputChange.emit({
-            text: event,
-            category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
-        });
+        this.inputChange.emit(this.searchFieldValue);
         const inputStr: string = event.trim();
         if (inputStr.length === 0) {
             this.closeSuggestionMenu();
@@ -350,12 +355,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      */
     onItemClick(event: string): void {
         this.inputText = event;
-        const searchInput: SearchInput = {
-            text: event,
-            category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
-        };
-        this.inputChange.emit(searchInput);
-        this.searchSubmit.emit(searchInput);
+        this.inputChange.emit(this.searchFieldValue);
+        this.searchSubmit.emit(this.searchFieldValue);
         this.closeSuggestionMenu();
         this._cd.detectChanges();
     }
@@ -368,17 +369,10 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         if (this.isLoading) {
             this.cancelSearch.emit();
         } else {
-            this.searchSubmit.emit({
-                text: this.inputText,
-                category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
-            });
+            this.searchSubmit.emit(this.searchFieldValue);
 
             this.closeSuggestionMenu();
         }
-    }
-
-    onCancelSearch(): void {
-        this.cancelSearch.emit();
     }
 
     /**
@@ -387,10 +381,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      */
     setCurrentCategory(category: ValueLabelItem): void {
         this.currentCategory = category;
-        this.inputChange.emit({
-            text: this.inputText,
-            category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
-        });
+        this.inputChange.emit(this.searchFieldValue);
     }
 
     /**
@@ -447,10 +438,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     clearTextInput(): void {
         this.inputText = '';
         this._cd.detectChanges();
-        this.inputChange.emit({
-            text: '',
-            category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
-        });
+        this.inputChange.emit(this.searchFieldValue);
+        this.cancelSearch.emit(this.searchFieldValue);
         this.closeSuggestionMenu();
     }
 
