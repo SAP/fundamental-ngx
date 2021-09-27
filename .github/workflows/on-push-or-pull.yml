@@ -61,15 +61,21 @@ jobs:
 #        if: steps.cache.outputs.cache-hit != 'true'
       - name: echo
         env:
-         TRAVIS_BRANCH: ${GITHUB_REF}
-         TRAVIS_REPO_SLUG: ${GITHUB_REPOSITORY}
-         TRAVIS_BUILD_NUMBER: $GITHUB_RUN_NUMBER
+         TRAVIS_BRANCH: ${{ $GITHUB_REF }}
+         TRAVIS_REPO_SLUG: ${{ $GITHUB_REPOSITORY }}
+         TRAVIS_BUILD_NUMBER: ${{ $GITHUB_RUN_NUMBER }}
          TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
-         GH_NAME: github.event.pusher.name
-         GH_EMAIL: github.event.pusher.email
+         GH_NAME: ${{ github.event.pusher.name }}
+         GH_EMAIL: ${{ github.event.pusher.email }}
         run: echo "why it doesnt work"
       - run: bash ./ci-scripts/echo.sh
-
+        env:
+          TRAVIS_BRANCH: ${{ $GITHUB_REF }}
+          TRAVIS_REPO_SLUG: ${{ $GITHUB_REPOSITORY }}
+          TRAVIS_BUILD_NUMBER: ${{ $GITHUB_RUN_NUMBER }}
+          TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
+          GH_NAME: ${{ github.event.pusher.name }}
+          GH_EMAIL: ${{ github.event.pusher.email }}
 
   # lint commit name
   commit_lint:
