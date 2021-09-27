@@ -62,11 +62,9 @@ jobs:
         if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
 #      - run: npm ci
 #        if: steps.cache.outputs.cache-hit != 'true'
-      - name: Set env BRANCH
-        run: echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GH_BRANCH
       - name: echo
         env:
-         TRAVIS_BRANCH: ${GH_BRANCH}
+         TRAVIS_BRANCH: ${GITHUB_REF}
          TRAVIS_REPO_SLUG: ${GITHUB_REPOSITORY}
          TRAVIS_BUILD_NUMBER: $GITHUB_RUN_NUMBER
          TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
