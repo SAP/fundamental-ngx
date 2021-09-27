@@ -126,13 +126,12 @@ describe('Notification component test', function () {
         notificationPage.checkRtlSwitch();
     });
 
-    function checkActions(action: string, button: string, index: number): void {
+    function checkActions(action: string, buttonChoice: string, index: number): void {
         scrollIntoView(defaultExample + overflowButton, index);
         click(defaultExample + overflowButton, index);
-        click(button);
+        click(buttonChoice);
         expect(isElementDisplayed(messageToast)).toBe(true);
         expect(getText(messageToast)).toBe(`${action} action performed`)
         waitForNotDisplayed(messageToast);
     }
-
 });
