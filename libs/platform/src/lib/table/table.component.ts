@@ -437,7 +437,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     get _isShownSelectionColumn(): boolean {
-        return this.selectionMode !== SelectionMode.NONE;
+        return this.selectionMode === SelectionMode.SINGLE || this.selectionMode === SelectionMode.MULTIPLE;
     }
 
     /** @hidden */
@@ -506,7 +506,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             return;
         }
 
-        if ('selectionMode' in changes || 'freezeColumnsTo' in changes) {
+        if ('selectionMode' in changes || 'freezeColumnsTo' in changes || 'contentDensity' in changes) {
             this.recalculateTableColumnWidth();
         }
 

@@ -25,7 +25,7 @@ export const DEFAULT_TABLE_STATE: Readonly<TableState> = {
 export const SELECTION_COLUMN_WIDTH: ReadonlyMap<ContentDensity, number> = new Map<ContentDensity, number>([
     [ContentDensity.COZY, 44],
     [ContentDensity.COMPACT, 32],
-    [ContentDensity.CONDENSED, 24]
+    [ContentDensity.CONDENSED, 32]
 ]);
 
 export const TABLE_COLUMN_MIN_WIDTH = 50;
