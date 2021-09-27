@@ -1,4 +1,11 @@
 
+### [0.32.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.6...v0.32.2-rc.7) (2021-09-27)
+
+
+### Bug Fixes
+
+* **core:** message-box, fix a11y issues ([#6578](https://github.com/SAP/fundamental-ngx/issues/6578)) ([1ac73cc](https://github.com/SAP/fundamental-ngx/commit/1ac73cc0a0faa0802a84223b66fd9443bf115e76))
+
 ### [0.32.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.5...v0.32.2-rc.6) (2021-09-27)
 
 
