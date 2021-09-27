@@ -15,18 +15,15 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { applyCssClass, FocusTrapService, RtlService } from '@fundamental-ngx/core/utils';
-import { CssClassBuilder } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder, FocusTrapService, RtlService } from '@fundamental-ngx/core/utils';
+import { DialogBase, dialogFadeNgIf } from '@fundamental-ngx/core/dialog';
+
 import {
     MESSAGE_BOX_CONFIGURABLE_ELEMENT,
     MessageBoxConfig,
     MessageBoxConfigurableElement
 } from './utils/message-box-config.class';
-
 import { MessageBoxRef } from './utils/message-box-ref.class';
-
-import { DialogBase } from '@fundamental-ngx/core/dialog';
-import { dialogFadeNgIf } from '@fundamental-ngx/core/dialog';
 import { CSS_CLASS_NAME } from './utils/const';
 
 /**
@@ -44,7 +41,10 @@ import { CSS_CLASS_NAME } from './utils/const';
     selector: 'fd-message-box',
     templateUrl: './message-box.component.html',
     styleUrls: ['./message-box.component.scss'],
-    host: { tabindex: '-1' },
+    host: { 
+        tabindex: '-1',
+        role: 'dialog'
+     },
     encapsulation: ViewEncapsulation.None,
     animations: [dialogFadeNgIf]
 })
