@@ -50,7 +50,7 @@ jobs:
           key: node_modules-${{ hashFiles('**/package-lock.json') }}
 
       - run: |
-          echo ${github.ref}
+          echo echo $GITHUB_REF | cut -d'/' -f 3
           echo "ci-github-actions" >> $STAGE_NAME
         shell: bash
         if: ${{ github.ref == 'refs/heads/ci-github-actions' }}
