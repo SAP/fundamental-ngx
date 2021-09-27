@@ -48,27 +48,8 @@ jobs:
         with:
           path: ${{ env.CACHE_NODE_MODULES_PATH }}
           key: node_modules-${{ hashFiles('**/package-lock.json') }}
-
-      - run: echo "STAGE_NAME=ci-github-actions" >> $GITHUB_ENV
-        if: ${{ github.ref == 'refs/heads/ci-github-actions' }}
-      - run: echo "STAGE_NAME=Release" >> $GITHUB_ENV
-        if: ${{ github.ref == 'refs/heads/main' }}
-      - run: echo "STAGE_NAME=Pre-release" >> $GITHUB_ENV
-        if: ${{ github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use' }}
-      - run: echo "STAGE_NAME=Hotfix-release" >> $GITHUB_ENV
-        if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
-#      - run: npm ci
-#        if: steps.cache.outputs.cache-hit != 'true'
-      - name: echo me
-        env:
-          TRAVIS_BRANCH: ${{ github.ref }}
-          TRAVIS_REPO_SLUG: ${{ github.repository }}
-          TRAVIS_BUILD_NUMBER: ${{ github.run_number }}
-          TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
-          GH_NAME: ${{ github.event.pusher.name }}
-          GH_EMAIL: ${{ github.event.pusher.email }}
-        run: |
-          bash ./ci-scripts/echo.sh
+      - run: npm ci
+        if: steps.cache.outputs.cache-hit != 'true'
 
   # lint commit name
   commit_lint:
@@ -306,35 +287,55 @@ jobs:
 
 
   # pre-release to npm
-#  npm_publish:
-#    runs-on: ubuntu-latest
-#    needs: install
-#    if: ${{ github.ref == 'refs/heads/main' }}
-#    steps:
-#      - uses: actions/checkout@v2.3.4
-#      - uses: actions/cache@v2
-#        with:
-#          path: ${{ env.CACHE_NODE_MODULES_PATH }}
-#          key: node_modules-${{ hashFiles('**/package-lock.json') }}
-#
-#      - name: ci-scripts/publish.sh
-#        with:
-#          TRAVIS_BRANCH: ${{ ${GITHUB_REF##*/} }}
-#          TRAVIS_REPO_SLUG: ${{ ${GITHUB_REPOSITORY} }}
-#          TRAVIS_BUILD_NUMBER: ${{ $GITHUB_RUN_NUMBER }}
-#          TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
-#          GH_NAME: ${{ ${github.event.pusher.name} }}
-#          GH_EMAIL: ${{ ${github.event.pusher.email} }}
-#        run:  bash ./ci-scripts/publish.sh
-#      - uses: JS-DevTools/npm-publish@v1
-#        with:
-#          package: "dist/libs/core/package.json"
-#          token: ${{ secrets.NPM_TOKEN }}
-#      - uses: JS-DevTools/npm-publish@v1
-#        with:
-#          package: "dist/libs/platform/package.json"
-#          token: ${{ secrets.NPM_TOKEN }}
-#      - uses: JS-DevTools/npm-publish@v1
-#        with:
-#          package: "dist/libs/moment-adapter/package.json"
-#          token: ${{ secrets.NPM_TOKEN }}
+  npm_publish:
+    runs-on: ubuntu-latest
+    needs: install
+    if: ${{ github.ref == 'refs/heads/ci-github-actions'
+      || github.ref == 'refs/heads/main'
+      || github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use'
+      || github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use'
+      }}
+    env:
+      TRAVIS_BRANCH: ${{ github.ref }}
+      TRAVIS_REPO_SLUG: ${{ github.repository }}
+      TRAVIS_BUILD_NUMBER: ${{ github.run_number }}
+      TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
+      GH_NAME: ${{ github.event.pusher.name }}
+      GH_EMAIL: ${{ github.event.pusher.email }}
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - uses: actions/cache@v2
+        with:
+          path: ${{ env.CACHE_NODE_MODULES_PATH }}
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
+
+      - run: echo "STAGE_NAME=Release" >> $GITHUB_ENV
+        if: ${{ github.ref == 'refs/heads/ci-github-actions' }}
+      - run: echo "STAGE_NAME=Release" >> $GITHUB_ENV
+        if: ${{ github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use' }}
+      - run: echo "STAGE_NAME=Pre-release" >> $GITHUB_ENV
+        if: ${{ github.ref == 'refs/heads/main' }}
+      - run: echo "STAGE_NAME=Hotfix-release" >> $GITHUB_ENV
+        if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
+
+      - run: bash ./ci-scripts/publish.sh
+        if: ${{ github.ref == 'refs/heads/ci-github-actions'
+          || github.ref == 'refs/heads/main'
+          || github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use'
+          }}
+
+      - run: bash ./ci-scripts/hotfix-publish.sh
+        if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
+
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          package: "dist/libs/core/package.json"
+          token: ${{ secrets.NPM_TOKEN }}
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          package: "dist/libs/platform/package.json"
+          token: ${{ secrets.NPM_TOKEN }}
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          package: "dist/libs/moment-adapter/package.json"
+          token: ${{ secrets.NPM_TOKEN }}
