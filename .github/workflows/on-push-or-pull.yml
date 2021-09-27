@@ -62,8 +62,8 @@ jobs:
       - name: echo
         env:
          TRAVIS_BRANCH: ${GITHUB_REF}
-         TRAVIS_REPO_SLUG: ${{ $GITHUB_REPOSITORY }}
-         TRAVIS_BUILD_NUMBER: ${{ $GITHUB_RUN_NUMBER }}
+         TRAVIS_REPO_SLUG: ${GITHUB_REPOSITORY}
+         TRAVIS_BUILD_NUMBER: ${GITHUB_RUN_NUMBER }
          TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
          GH_NAME: ${{ github.event.pusher.name }}
          GH_EMAIL: ${{ github.event.pusher.email }}
