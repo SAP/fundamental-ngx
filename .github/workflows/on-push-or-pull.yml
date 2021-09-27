@@ -4,7 +4,10 @@ on:
   pull_request:
   push:
     branches:
+      - ci-github-actions
       - main
+      - tmp_branch_for_automated_release_do_not_use
+      - hotfix_tmp_branch_for_automated_release_do_not_use
 
 env:
   NX_BRANCH: ${{ github.event.number }}
@@ -45,8 +48,25 @@ jobs:
         with:
           path: ${{ env.CACHE_NODE_MODULES_PATH }}
           key: node_modules-${{ hashFiles('**/package-lock.json') }}
-      - run: npm ci
-        if: steps.cache.outputs.cache-hit != 'true'
+
+      - run: echo "ci-github-actions" >> $STAGE_NAME
+        if: ${{ github.ref == 'refs/heads/ci-github-actions' }}
+      - run: echo "Release" >> $STAGE_NAME
+        if: ${{ github.ref == 'refs/heads/main' }}
+      - run: echo "Pre-release" >> $STAGE_NAME
+        if: ${{ github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use' }}
+      - run: echo "Hotfix-release" >> $STAGE_NAME
+        if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
+#      - run: npm ci
+#        if: steps.cache.outputs.cache-hit != 'true'
+      - run: bash ./ci-scripts/echo.sh
+        with:
+         TRAVIS_BRANCH: ${{ ${GITHUB_REF##*/} }}
+         TRAVIS_REPO_SLUG: ${{ ${GITHUB_REPOSITORY} }}
+         TRAVIS_BUILD_NUMBER: ${{ $GITHUB_RUN_NUMBER }}
+         TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
+         GH_NAME: ${{ ${github.event.pusher.name} }}
+         GH_EMAIL: ${{ ${github.event.pusher.email} }}
 
   # lint commit name
   commit_lint:
@@ -94,6 +114,26 @@ jobs:
           key: dist-platform-${{ github.run_id }}
       - run: npx nx build platform --prod --with-deps --runner cloud
 
+  # build moment-adapter
+  build-moment-adapter:
+    needs: build-core
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ${{ env.CACHE_NODE_MODULES_PATH }}
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
+      - uses: actions/cache@v2
+        with:
+          path: dist/libs/core
+          key: dist-core-${{ github.run_id }}
+      - uses: actions/cache@v2
+        with:
+          path: dist/libs/platform
+          key: dist-platform-${{ github.run_id }}
+      - run: npx nx build moment-adapter --configuration=production --with-deps --runner cloud
+
   # build docs
   build-docs:
 #    needs: [build-core, build-platform]
@@ -138,7 +178,6 @@ jobs:
   # run unit tests core
   unit-test-core:
     runs-on: ubuntu-latest
-#    needs: build-core
     needs: install
     steps:
       - uses: actions/checkout@v2
@@ -153,10 +192,9 @@ jobs:
       - run: npx nx test core --watch false --code-coverage true --browsers=ChromeHeadless --runner cloud
       - run: npm run test:coveralls
 
-  # run unit tests core
+  # run unit tests platform
   unit-test-platform:
     runs-on: ubuntu-latest
-#    needs: build-platform
     needs: install
     steps:
       - uses: actions/checkout@v2
@@ -169,6 +207,23 @@ jobs:
           path: dist/libs/platform
           key: dist-platform-${{ github.run_id }}
       - run: npx nx test platform --watch false --code-coverage true --browsers=ChromeHeadless --runner cloud
+      - run: npm run test:coveralls
+
+  # run unit tests moment-adapter
+  unit-test-moment-adapter:
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ${{ env.CACHE_NODE_MODULES_PATH }}
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
+      - uses: actions/cache@v2
+        with:
+          path: dist/libs/platform
+          key: dist-platform-${{ github.run_id }}
+      - run: npx nx test moment-adapter --watch false --code-coverage true --browsers=ChromeHeadless --runner cloud
       - run: npm run test:coveralls
 
   # run linting
@@ -246,3 +301,38 @@ jobs:
           npx ng serve --disable-host-check --ssl --no-watch &
           npx wait-on https://localhost:4200
           TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.suite }}
+
+
+  # pre-release to npm
+  npm_publish:
+    runs-on: ubuntu-latest
+    needs: install
+    if: ${{ github.ref == 'refs/heads/main' }}
+    steps:
+      - uses: actions/checkout@v2.3.4
+      - uses: actions/cache@v2
+        with:
+          path: ${{ env.CACHE_NODE_MODULES_PATH }}
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: ci-scripts/publish.sh
+        with:
+          TRAVIS_BRANCH: ${{ ${GITHUB_REF##*/} }}
+          TRAVIS_REPO_SLUG: ${{ ${GITHUB_REPOSITORY} }}
+          TRAVIS_BUILD_NUMBER: ${{ $GITHUB_RUN_NUMBER }}
+          TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
+          GH_NAME: ${{ ${github.event.pusher.name} }}
+          GH_EMAIL: ${{ ${github.event.pusher.email} }}
+        run:  bash ./ci-scripts/publish.sh
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          package: "dist/libs/core/package.json"
+          token: ${{ secrets.NPM_TOKEN }}
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          package: "dist/libs/platform/package.json"
+          token: ${{ secrets.NPM_TOKEN }}
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          package: "dist/libs/moment-adapter/package.json"
+          token: ${{ secrets.NPM_TOKEN }}

@@ -2,7 +2,7 @@
 
 set -u -e
 
-PACKAGES=(core platform moment-adapter)
+#PACKAGES=(core platform moment-adapter)
 CURRENT_BRANCH=main
 
 git config --global user.email $GH_EMAIL
@@ -40,22 +40,22 @@ fi
 git push --follow-tags "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $CURRENT_BRANCH > /dev/null;
 npm run build-deploy-library
 
-cd dist/libs
-NPM_BIN="$(which npm)"
+#cd dist/libs
+#NPM_BIN="$(which npm)"
 
-for P in ${PACKAGES[@]};
-do
-    echo publish "@fundamental-ngx/${P}"
-    cd ${P}
-    if [[  $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release"  ]]; then
-      $NPM_BIN  publish --tag prerelease --access public
-    elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
-      $NPM_BIN  publish --access public
-    fi
-    cd ..
-done
+#for P in ${PACKAGES[@]};
+#do
+#    echo publish "@fundamental-ngx/${P}"
+#    cd ${P}
+#    if [[  $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release"  ]]; then
+#      $NPM_BIN  publish --tag prerelease --access public
+#    elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
+#      $NPM_BIN  publish --access public
+#    fi
+#    cd ..
+#done
 
-cd ../../
+#cd ../../
 
 
 if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
