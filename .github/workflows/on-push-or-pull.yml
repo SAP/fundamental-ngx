@@ -30,8 +30,8 @@ env:
   TRAVIS_BRANCH: ${{ github.ref }}
   TRAVIS_REPO_SLUG: ${{ github.repository }}
   TRAVIS_BUILD_NUMBER: ${{ github.run_number }}
-  GH_NAME: ${{ github.event.pusher.name }}
-  GH_EMAIL: ${{ github.event.pusher.email }}
+  GH_NAME: ${{ secrets.GH_NAME }}
+  GH_EMAIL: ${{ secrets.GH_EMAIL }}
 
 jobs:
   # one run
