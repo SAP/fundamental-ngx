@@ -633,7 +633,10 @@ export class MultiInputComponent implements
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
             MultiInputMobileComponent,
             { container: this._elementRef.nativeElement },
-            { injector: Injector.create({ providers: [{ provide: MULTI_INPUT_COMPONENT, useValue: this }] }) }
+            { injector: Injector.create({ providers: [
+                { provide: MULTI_INPUT_COMPONENT, useValue: this },
+                { provide: RtlService, useValue: this._rtlService }] })
+            }
         );
     }
 
