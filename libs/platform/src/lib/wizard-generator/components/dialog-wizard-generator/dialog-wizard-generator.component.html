@@ -8,7 +8,8 @@
             [displaySummaryStep]="displaySummaryStep"
             [responsivePaddings]="responsivePaddings"
             [navigationButtonLabels]="navigationButtonLabels"
-            [customsummaryStepTemplate]="summaryStepTemplate"
+            [customSummaryStepTemplate]="summaryStepTemplate"
+            [reviewButtonTemplate]="reviewButtonTemplate"
             [hidden]="!wizardCreated"
             [appendToWizard]="appendToWizard"
             [unifiedLayout]="unifiedLayout"
@@ -47,12 +48,29 @@
                             (click)="goNext()"
                         ></fdp-button>
                     </ng-template>
-                    <ng-template
-                        [ngTemplateOutlet]="goNextButtonTemplate || defaultGoNextButtonTemplate"
-                        [ngTemplateOutletContext]="{ goNext: _goNextFn }"
-                    ></ng-template>
+                    <ng-template #defaultReviewButtonTemplate>
+                        <fdp-button
+                            class="fd-bar__element"
+                            [contentDensity]="navigationButtonLabels.review.contentDensity"
+                            [buttonType]="navigationButtonLabels.review.type"
+                            [label]="navigationButtonLabels.review.label"
+                            (click)="goNext()"
+                        ></fdp-button>
+                    </ng-template>
+                    <ng-template [ngIf]="(isBranchingStep && (!isCurrentStepCompleted || _stepsOrderChanged)) || !isNextStepSummary" [ngIfElse]="reviewButton">
+                        <ng-template
+                            [ngTemplateOutlet]="goNextButtonTemplate || defaultGoNextButtonTemplate"
+                            [ngTemplateOutletContext]="{ goNext: _goNextFn }"
+                        ></ng-template>
+                    </ng-template>
+                    <ng-template #reviewButton>
+                        <ng-template
+                            [ngTemplateOutlet]="reviewButtonTemplate || defaultReviewButtonTemplate"
+                            [ngTemplateOutletContext]="{ goNext: _goNextFn }"
+                        ></ng-template>
+                    </ng-template>
                 </ng-container>
-                <ng-container *ngIf="(hasSummaryStep && isSummaryStep) || (!hasSummaryStep && isLastStep)">
+                <ng-container *ngIf="isLastStep">
                     <ng-template #defaultFinishButtonTemplate>
                         <fdp-button
                             class="fd-bar__element"

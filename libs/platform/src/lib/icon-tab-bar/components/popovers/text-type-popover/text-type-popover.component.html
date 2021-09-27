@@ -87,6 +87,7 @@
                                 tabindex="0"
                                 [attr.aria-selected]="item.uId === selectedSubItemUid"
                                 (click)="_selectItem(item)"
+                                (keydown)="_keyDownHandler($event, item)"
                             >
                                 <span class="fd-list__title fd-icon-tab-bar__list-item-title">{{item.label}}</span>
                                 <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>

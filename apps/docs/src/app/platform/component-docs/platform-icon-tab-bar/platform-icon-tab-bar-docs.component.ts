@@ -56,18 +56,18 @@ export class PlatformIconTabBarDocsComponent {
         {
             language: 'html',
             code: iconTabBarTextTypeHtml,
-            fileName: 'icon-tab-bar-text-type-example'
+            name: 'icon-tab-bar-text-type-example'
         },
         {
             language: 'typescript',
             code: iconTabBarTextTypeTs,
-            fileName: 'icon-tab-bar-text-type-example',
+            name: 'icon-tab-bar-text-type-example',
             component: 'IconTabBarTextTypeExampleComponent'
         },
         {
             language: 'typescript',
             code: textTypeConfigs,
-            fileName: 'long-icon-type-config',
+            name: 'long-icon-type-config',
         }
     ];
 
@@ -75,18 +75,18 @@ export class PlatformIconTabBarDocsComponent {
         {
             language: 'html',
             code: iconTabBarIconOnlyTypeHtml,
-            fileName: 'icon-tab-bar-icon-only-type-example'
+            name: 'icon-tab-bar-icon-only-type-example'
         },
         {
             language: 'typescript',
             code: iconTabBarIconOnlyTypeTs,
-            fileName: 'icon-tab-bar-icon-only-type-example',
+            name: 'icon-tab-bar-icon-only-type-example',
             component: 'IconTabBarIconOnlyTypeExampleComponent'
         },
         {
             language: 'typescript',
             code: iconTypeConfigs,
-            fileName: 'long-icon-type-config',
+            name: 'long-icon-type-config',
         }
     ];
 
@@ -94,18 +94,18 @@ export class PlatformIconTabBarDocsComponent {
         {
             language: 'html',
             code: iconTabBarIconTypeHtml,
-            fileName: 'icon-tab-bar-icon-type-example'
+            name: 'icon-tab-bar-icon-type-example'
         },
         {
             language: 'typescript',
             code: iconTabBarIconTypeTs,
-            fileName: 'icon-tab-bar-icon-type-example',
+            name: 'icon-tab-bar-icon-type-example',
             component: 'IconTabBarIconTypeExampleComponent'
         },
         {
             language: 'typescript',
             code: iconTypeConfigs,
-            fileName: 'long-icon-type-config',
+            name: 'long-icon-type-config',
         }
     ];
 
@@ -113,18 +113,18 @@ export class PlatformIconTabBarDocsComponent {
         {
             language: 'html',
             code: iconTabBarFilterTypeHtml,
-            fileName: 'icon-tab-bar-filter-type-example'
+            name: 'icon-tab-bar-filter-type-example'
         },
         {
             language: 'typescript',
             code: iconTabBarFilterTypeTs,
-            fileName: 'icon-tab-bar-filter-type-example',
+            name: 'icon-tab-bar-filter-type-example',
             component: 'IconTabBarFilterTypeExampleComponent'
         },
         {
             language: 'typescript',
             code: iconTypeConfigs,
-            fileName: 'long-icon-type-config',
+            name: 'long-icon-type-config',
         }
     ];
 
@@ -132,18 +132,18 @@ export class PlatformIconTabBarDocsComponent {
         {
             language: 'html',
             code: iconTabBarProcessTypeHtml,
-            fileName: 'icon-tab-bar-process-type-example'
+            name: 'icon-tab-bar-process-type-example'
         },
         {
             language: 'typescript',
             code: iconTabBarProcessTypeTs,
-            fileName: 'icon-tab-bar-process-type-example',
+            name: 'icon-tab-bar-process-type-example',
             component: 'IconTabBarProcessTypeExampleComponent'
         },
         {
             language: 'typescript',
             code: iconTypeConfigs,
-            fileName: 'long-icon-type-config',
+            name: 'long-icon-type-config',
         }
     ];
 
@@ -151,18 +151,18 @@ export class PlatformIconTabBarDocsComponent {
         {
             language: 'html',
             code: iconTabBarConfigurablePaddingsHtml,
-            fileName: 'platform-icon-tab-bar-configurable-paddings-example'
+            name: 'platform-icon-tab-bar-configurable-paddings-example'
         },
         {
             language: 'typescript',
             code: iconTabBarConfigurablePaddingsTs,
-            fileName: 'platform-icon-tab-bar-configurable-paddings-example',
+            name: 'platform-icon-tab-bar-configurable-paddings-example',
             component: 'PlatformIconTabBarConfigurablePaddingsExampleComponent'
         },
         {
             language: 'typescript',
             code: iconTypeConfigs,
-            fileName: 'icon-type-config',
+            name: 'icon-type-config',
         }
     ];
 }

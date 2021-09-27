@@ -15,11 +15,11 @@ import {
     SimpleChanges,
     ViewChild
 } from '@angular/core';
-import { WizardContentComponent } from '../wizard-content/wizard-content.component';
-import { WizardStepIndicatorComponent } from '../wizard-step-indicator/wizard-step-indicator.component';
 import { Subscription } from 'rxjs';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { WizardContentComponent } from '../wizard-content/wizard-content.component';
+import { WizardStepIndicatorComponent } from '../wizard-step-indicator/wizard-step-indicator.component';
 
 export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
 
@@ -214,7 +214,6 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     _summaryInit(): void {
         this._elRef.nativeElement.style.display = 'none';
         this.content.tallContent = true;
-        // this.removeFromDom();
     }
 
     /** @hidden */

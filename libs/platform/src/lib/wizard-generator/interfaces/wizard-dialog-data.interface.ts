@@ -11,7 +11,7 @@ export interface WizardDialogData {
      responsivePaddings: boolean;
 
     /**
-     * @description Button labels to be used in Wizard navigation
+     * @description Button labels to be used in Wizard navigation.
      */
     navigationButtonLabels?: WizardNavigationButtons;
 
@@ -60,29 +60,33 @@ export interface WizardDialogData {
     /**
      * User-defined template for "Go Next" button.
      */
-    goNextButtonTemplate?: TemplateRef<any>;
+    goNextButtonTemplate?: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for "Go Back" button.
      */
-    goBackButtonTemplate?: TemplateRef<any>;
+    goBackButtonTemplate?: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for "Finish" button.
      */
-    finishButtonTemplate?: TemplateRef<any>;
+    finishButtonTemplate?: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for "Cancel" button.
      */
-    cancelButtonTemplate?: TemplateRef<any>;
+    cancelButtonTemplate?: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for cancel confirmation dialog.
      */
-    confirmationDialogTemplate?: TemplateRef<any>;
+    confirmationDialogTemplate?: TemplateRef<HTMLElement>;
 
-    summaryStepTemplate?: TemplateRef<any>;
+    /** User-defined template for Summary step. */
+    summaryStepTemplate?: TemplateRef<HTMLElement>;
+
+    /** User-defined template for "Review" button. */
+    reviewButtonTemplate?: TemplateRef<HTMLElement>;
 
     /** If navigation buttons should be visible. */
     navigationButtons?: boolean;

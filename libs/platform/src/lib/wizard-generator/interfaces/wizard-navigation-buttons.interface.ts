@@ -18,6 +18,10 @@ export interface WizardNavigationButtons {
      * @description Text for 'Cancel' button.
      */
     cancel?: WizardNavigationButton;
+    /**
+     * @description Text for 'Review' button.
+     */
+    review?: WizardNavigationButton;
 }
 
 export interface WizardNavigationButton {

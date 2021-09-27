@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 import { isFunction, mergeDeep, selectStrategy } from '@fundamental-ngx/platform/shared';
@@ -21,7 +21,6 @@ export type StepsComponents = Map<string, WizardGeneratorStepComponent>;
  */
 @Injectable()
 export class WizardGeneratorService {
-
     items: WizardGeneratorItem[];
 
     /**
@@ -35,6 +34,15 @@ export class WizardGeneratorService {
     dependencySteps: any = {};
 
     /**
+     * @description Whether or not to append the step to the wizard. If false, each step will be displayed on a different page.
+     * Default is true.
+     */
+    appendToWizard = true;
+
+    /** @hidden */
+    _shouldRedirectToSummary = false;
+
+    /**
      * @description Steps that are visible to the user.
      */
     public visibleWizardSteps: WizardGeneratorItem[] = [];
@@ -43,22 +51,31 @@ export class WizardGeneratorService {
     private _visibleWizardSteps$ = new Subject<WizardGeneratorItem[]>();
 
     /** @hidden */
+    private _appendToWizard$ = new BehaviorSubject<boolean>(this.appendToWizard);
+
+    /** @hidden */
     private _stepsComponents$ = new Subject<StepsComponents>();
+
+    /** @hidden */
+    private _stepsOrderChanged$ = new Subject<number>();
+
+    /** @hidden */
+    private _nextStepIndex$ = new BehaviorSubject<number>(1);
 
     /** @hidden */
     private _submittedFormRawValues: WizardGeneratorFormsValue = {};
 
+    private _wizardStepIds: string[] = [];
+
     /** @hidden */
-    constructor(
-        private _formGeneratorService: FormGeneratorService
-    ) { }
+    constructor(private _formGeneratorService: FormGeneratorService) {}
 
     /**
      * @description Returns current step ID in Wizard.
      * @returns {string | null} Current step ID.
      */
     getCurrentStepId(): string | null {
-        const currentStepId = this.visibleWizardSteps?.find(i => i.status === 'current');
+        const currentStepId = this.visibleWizardSteps?.find((i) => i.status === 'current');
 
         return currentStepId?.id;
     }
@@ -69,9 +86,17 @@ export class WizardGeneratorService {
      */
     getCurrentStepIndex(): number {
         const currentStepId = this.getCurrentStepId();
-        const currentStepIndex = this.visibleWizardSteps?.findIndex(i => i.id === currentStepId);
+        return this.getStepIndex(currentStepId);
+    }
 
-        return currentStepIndex > -1 ? currentStepIndex : 0;
+    /**
+     * Searches for the index of the step based on it's ID
+     * @param stepId Step ID
+     * @returns Index in the array of steps for defined step ID.
+     */
+    getStepIndex(stepId: string): number {
+        const stepIndex = this.visibleWizardSteps?.findIndex((i) => i.id === stepId);
+        return stepIndex > -1 ? stepIndex : 0;
     }
 
     /**
@@ -82,14 +107,18 @@ export class WizardGeneratorService {
      * when all visible forms in step are submitted.
      */
     submitStepForms(stepId: string, skipIfUntouched = false): Observable<WizardStepSubmittedForms | null> {
-        return this.stepsComponents.get(stepId).submitForms(skipIfUntouched)
-        .pipe(take(1), map((result) => {
-
-            if (result) {
-                this._submittedFormRawValues[stepId] = result;
-            }
-            return result;
-        }));
+        return this.stepsComponents
+            .get(stepId)
+            .submitForms(skipIfUntouched)
+            .pipe(
+                take(1),
+                map((result) => {
+                    if (result) {
+                        this._submittedFormRawValues[stepId] = result;
+                    }
+                    return result;
+                })
+            );
     }
 
     /**
@@ -98,8 +127,9 @@ export class WizardGeneratorService {
      */
     validateStepForms(skipIfUntouched = false): Observable<boolean> {
         const currentStepId = this.getCurrentStepId();
-        return this.submitStepForms(currentStepId, skipIfUntouched)
-        .pipe(map((result) => result === null || Object.values(result).every(r => r.success)));
+        return this.submitStepForms(currentStepId, skipIfUntouched).pipe(
+            map((result) => result === null || Object.values(result).every((r) => r.success))
+        );
     }
 
     /**
@@ -109,6 +139,8 @@ export class WizardGeneratorService {
     setVisibleSteps(steps: WizardGeneratorItem[]): void {
         this.visibleWizardSteps = steps;
         this._visibleWizardSteps$.next(steps);
+
+        this.setWizardStepIds(steps.map(s => s.id));
     }
 
     /**
@@ -125,35 +157,34 @@ export class WizardGeneratorService {
      * @returns {Promise<WizardGeneratorItem[]>} Array of transformed Wizard steps.
      */
     async prepareWizardItems(items: WizardGeneratorItem[]): Promise<WizardGeneratorItem[]> {
-
-        let newItems = await Promise.all(items.map(async (i, index) => {
-            const item = {...i};
-            item.status = item.status || 'upcoming';
-            item.title = await this._getFormItemPropertyValue(item, index, 'title');
-            item.name = await this._getFormItemPropertyValue(item, index, 'name');
-            return item;
-        }));
+        let newItems = await Promise.all(
+            items.map(async (i, index) => {
+                const item = { ...i };
+                item.status = item.status || 'upcoming';
+                item.title = await this._getFormItemPropertyValue(item, index, 'title');
+                item.name = await this._getFormItemPropertyValue(item, index, 'name');
+                return item;
+            })
+        );
 
         // Summary step must be the last one in array
-        const summaryStepIndex = newItems.findIndex(i => i.summary === true);
+        const summaryStepIndex = newItems.findIndex((i) => i.summary === true);
 
-        if (summaryStepIndex !== -1 && summaryStepIndex !== (newItems.length - 1)) {
+        if (summaryStepIndex !== -1 && summaryStepIndex !== newItems.length - 1) {
             newItems.splice(newItems.length - 1, 0, newItems.splice(summaryStepIndex, 1)[0]);
         }
 
         // If no current step found, set first as current.
-        if (newItems.findIndex(i => i.status === 'current') === -1) {
+        if (newItems.findIndex((i) => i.status === 'current') === -1) {
             newItems[0].status = 'current';
         }
 
         newItems = this._setBranchingSteps(newItems);
 
         this.dependencySteps = newItems.reduce((steps, step) => {
-
             if (step.dependencyFields) {
-
                 for (const [id, forms] of Object.entries(step.dependencyFields)) {
-                    steps[id] = mergeDeep((steps[id] || {}), forms);
+                    steps[id] = mergeDeep(steps[id] || {}, forms);
                 }
             }
 
@@ -170,15 +201,13 @@ export class WizardGeneratorService {
      * @description Runs conditional function for each step to define if step should be shown.
      */
     async refreshStepVisibility(): Promise<void> {
-
         const formValue = await this.getWizardFormValue();
 
         const visibleStepIds: WizardVisibleSteps = {};
 
-        const completedStepIds = this.items.filter(i => i.status === 'completed').map(i => i.id);
+        const completedStepIds = this.items.filter((i) => i.status === 'completed').map((i) => i.id);
 
         for (const item of this.items) {
-
             if (!isFunction(item.when)) {
                 visibleStepIds[item.id] = true;
                 continue;
@@ -189,7 +218,7 @@ export class WizardGeneratorService {
             visibleStepIds[item.id] = await this._getFunctionValue(obj);
         }
 
-        this.setVisibleSteps(this.items.filter(item => visibleStepIds[item.id] === true));
+        this.setVisibleSteps(this.items.filter((item) => visibleStepIds[item.id] === true));
     }
 
     /**
@@ -242,14 +271,13 @@ export class WizardGeneratorService {
      * @returns {WizardGeneratorFormsValue} Wizard form value
      */
     async getWizardFormValue(formatted = false): Promise<WizardGeneratorFormsValue> {
-
         const wizardFormValue: WizardGeneratorFormsValue = {};
 
         if (!this.visibleWizardSteps) {
             return wizardFormValue;
         }
 
-        for (const item of this.visibleWizardSteps.filter(s => !s.summary)) {
+        for (const item of this.visibleWizardSteps.filter((s) => !s.summary)) {
             wizardFormValue[item.id] = {};
 
             const component = this.stepsComponents.get(item.id);
@@ -284,20 +312,75 @@ export class WizardGeneratorService {
      * @returns {Boolean} if steps are untouched, will return true, if yes - false
      */
     isStepsUntouched(): boolean {
-        return [...this.stepsComponents].every(([_, component]) => component.forms.toArray().every((item) => !item.form.touched));
+        return [...this.stepsComponents].every(([_, component]) =>
+            component.forms.toArray().every((item) => !item.form.touched)
+        );
     }
 
+    /**
+     * Reverts wizard to defined step.
+     * @param stepId Step ID to edit
+     */
     editStep(stepId: string): void {
-        const stepIndex = this.visibleWizardSteps.findIndex(s => s.id === stepId);
+        const stepIndex = this.visibleWizardSteps.findIndex((s) => s.id === stepId);
 
         this.visibleWizardSteps = this.visibleWizardSteps.map((step, index) => {
-
             step.status = index === stepIndex ? 'current' : index < stepIndex ? 'completed' : 'upcoming';
 
             return step;
         });
 
+        const summaryStepIndex = this.visibleWizardSteps.findIndex(s => s.summary);
+
+        this._shouldRedirectToSummary = true;
+
+        this._appendToWizard$.next(false);
+
         this.setVisibleSteps(this.visibleWizardSteps);
+
+        this.setNextStepIndex(summaryStepIndex);
+    }
+
+    /**
+     * Set's current set of step ID's
+     * @param ids step ID's
+     */
+    setWizardStepIds(ids: string[]): void {
+        if (!this._wizardStepIds.every((stepId, index) => ids[index] === stepId)) {
+
+            const firstChangedStepIndex = this._wizardStepIds.findIndex((stepId, index) => ids[index] !== stepId);
+
+            this._nextStepIndex$.next(firstChangedStepIndex);
+
+            this._stepsOrderChanged$.next(firstChangedStepIndex);
+        }
+
+        this._wizardStepIds = ids;
+    }
+
+    setNextStepIndex(index: number): void {
+        this._nextStepIndex$.next(index);
+    }
+
+    trackNextStepindex(): Observable<number> {
+        return this._nextStepIndex$.asObservable();
+    }
+
+    trackStepsOrder(): Observable<number> {
+        return this._stepsOrderChanged$.asObservable();
+    }
+
+    setOriginalAppendToWizardState(value: boolean): void {
+        this.appendToWizard = value;
+        this._appendToWizard$.next(this.appendToWizard);
+    }
+
+    restoreAppendToWizardState(): void {
+        this._appendToWizard$.next(this.appendToWizard);
+    }
+
+    trackAppendToWizardState(): Observable<boolean> {
+        return this._appendToWizard$.asObservable();
     }
 
     /**
@@ -307,9 +390,11 @@ export class WizardGeneratorService {
      * @param key
      * @returns
      */
-    private async _getFormItemPropertyValue<T = string>(items: WizardGeneratorItem,
-                                                        index: number,
-                                                        key: keyof WizardGeneratorItem): Promise<T> {
+    private async _getFormItemPropertyValue<T = string>(
+        items: WizardGeneratorItem,
+        index: number,
+        key: keyof WizardGeneratorItem
+    ): Promise<T> {
         let value: any = items[key];
 
         if (typeof value === 'function') {
@@ -350,15 +435,16 @@ export class WizardGeneratorService {
      * @returns
      */
     private _setBranchingSteps(items: WizardGeneratorItem[]): WizardGeneratorItem[] {
-        const branchingItems: string[] = items.filter(i => i.dependencyFields).reduce((stepIds, item) => {
-            stepIds = [...stepIds, ...Object.keys(item.dependencyFields)];
+        const branchingItems: string[] = items
+            .filter((i) => i.dependencyFields)
+            .reduce((stepIds, item) => {
+                stepIds = [...stepIds, ...Object.keys(item.dependencyFields)];
 
-            return stepIds;
-        }, []);
+                return stepIds;
+            }, []);
 
         if (branchingItems.length > 0) {
             items = items.map((item) => {
-
                 item.branching = item.branching || branchingItems.includes(item.id);
                 return item;
             });
