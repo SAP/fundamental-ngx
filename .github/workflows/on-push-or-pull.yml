@@ -49,16 +49,13 @@ jobs:
           path: ${{ env.CACHE_NODE_MODULES_PATH }}
           key: node_modules-${{ hashFiles('**/package-lock.json') }}
 
-      - run: |
-          echo echo $GITHUB_REF | cut -d'/' -f 3
-          echo "ci-github-actions" >> $STAGE_NAME
-        shell: bash
+      - run: echo "STAGE_NAME=ci-github-actions" >> $GITHUB_ENV
         if: ${{ github.ref == 'refs/heads/ci-github-actions' }}
-      - run: echo "Release" >> $STAGE_NAME
+      - run: echo "STAGE_NAME=Release" >> $GITHUB_ENV
         if: ${{ github.ref == 'refs/heads/main' }}
-      - run: echo "Pre-release" >> $STAGE_NAME
+      - run: echo "STAGE_NAME=Pre-release" >> $GITHUB_ENV
         if: ${{ github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use' }}
-      - run: echo "Hotfix-release" >> $STAGE_NAME
+      - run: echo "STAGE_NAME=Hotfix-release" >> $GITHUB_ENV
         if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
 #      - run: npm ci
 #        if: steps.cache.outputs.cache-hit != 'true'
