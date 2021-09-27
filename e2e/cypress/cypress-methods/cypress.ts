@@ -7,7 +7,7 @@ export function currentPlatformName(): string {
 }
 
 export function pause(waitTime): void {
-    cy.pause(waitTime);
+    cy.wait(waitTime);
 }
 
 export function isBrowser(browserName: string): boolean {
