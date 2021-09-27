@@ -60,7 +60,8 @@ jobs:
 #      - run: npm ci
 #        if: steps.cache.outputs.cache-hit != 'true'
       - run: |
-          echo $TRAVIS_BUILD_STAGE_NAME
+          echo $GITHUB_REPOSITORY
+          echo $TRAVIS_REPO_SLUG
           bash ./ci-scripts/echo.sh
         env:
           TRAVIS_BRANCH: ${{ env.GITHUB_REF }}
