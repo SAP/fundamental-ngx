@@ -61,14 +61,16 @@ jobs:
 #        if: steps.cache.outputs.cache-hit != 'true'
       - name: Set env BRANCH
         run: echo "BRANCH=$(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GH_BRANCH
-      - run: bash ./ci-scripts/echo.sh
-        with:
+      - name: echo
+        env:
          TRAVIS_BRANCH: ${GH_BRANCH}
          TRAVIS_REPO_SLUG: ${GITHUB_REPOSITORY}
          TRAVIS_BUILD_NUMBER: $GITHUB_RUN_NUMBER
          TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
          GH_NAME: github.event.pusher.name
          GH_EMAIL: github.event.pusher.email
+      - run: bash ./ci-scripts/echo.sh
+
 
   # lint commit name
   commit_lint:
