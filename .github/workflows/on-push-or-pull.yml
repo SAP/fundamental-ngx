@@ -69,6 +69,7 @@ jobs:
          TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
          GH_NAME: github.event.pusher.name
          GH_EMAIL: github.event.pusher.email
+        run: echo "why it doesnt work"
       - run: bash ./ci-scripts/echo.sh
 
 
