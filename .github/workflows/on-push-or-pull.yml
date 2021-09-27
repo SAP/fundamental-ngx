@@ -49,7 +49,9 @@ jobs:
           path: ${{ env.CACHE_NODE_MODULES_PATH }}
           key: node_modules-${{ hashFiles('**/package-lock.json') }}
 
-      - run: echo "ci-github-actions" >> $STAGE_NAME
+      - run: |
+          echo ${github.ref}
+          echo "ci-github-actions" >> $STAGE_NAME
         if: ${{ github.ref == 'refs/heads/ci-github-actions' }}
       - run: echo "Release" >> $STAGE_NAME
         if: ${{ github.ref == 'refs/heads/main' }}
