@@ -13,7 +13,7 @@
                  [attr.aria-selected]="tab.active">
                 <a
                     fd-tab-link
-                    [attr.tabindex]="0"
+                    [attr.tabindex]= "tab.active ? '0':'-1'"
                     [attr.aria-controls]="tab.id"
                     [attr.aria-label]="tab.ariaLabel || null"
                     [attr.aria-labelledby]="!tab.ariaLabel && tab.ariaLabelledBy ? tab.ariaLabelledBy : null"
