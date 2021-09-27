@@ -61,7 +61,7 @@ jobs:
 #        if: steps.cache.outputs.cache-hit != 'true'
       - name: echo
         env:
-         TRAVIS_BRANCH: ${{ $GITHUB_REF }}
+         TRAVIS_BRANCH: ${GITHUB_REF}
          TRAVIS_REPO_SLUG: ${{ $GITHUB_REPOSITORY }}
          TRAVIS_BUILD_NUMBER: ${{ $GITHUB_RUN_NUMBER }}
          TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
