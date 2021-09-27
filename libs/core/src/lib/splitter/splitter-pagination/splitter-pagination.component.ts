@@ -1,11 +1,15 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { SplitterComponent } from '../splitter.component';
 
 @Component({
     selector: 'fd-splitter-pagination',
     templateUrl: './splitter-pagination.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    host: { class: 'fd-splitter__pagination' }
+    host: {
+        class: 'fd-splitter__pagination',
+        '[attr.role]': '"radiogroup"'
+    }
 })
 export class SplitterPaginationComponent {
     /** Array of pages ids. */
@@ -22,6 +26,14 @@ export class SplitterPaginationComponent {
 
     /** @hidden */
     _pages: string[] = [];
+
+    /** @hidden */
+    get paginationItemAriaLabel(): string {
+        return this._splitter.paginationItemAriaLabel;
+    }
+
+    /** @Hidden */
+    constructor(private readonly _splitter: SplitterComponent) { }
 
     /** @hidden */
     _changePage(page: string): void {

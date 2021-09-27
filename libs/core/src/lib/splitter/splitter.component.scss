@@ -16,11 +16,26 @@ $block: fd-splitter;
         padding: 0;
         margin: 0;
         border: 0;
-    
+
         &::before,
         &::after {
             box-sizing: inherit;
             font-size: inherit;
+        }
+    }
+
+    @mixin fd-focus($offset: -0.1875rem) {
+        &:focus,
+        &.is-focus {
+            @if $offset != 0 {
+                outline-offset: $offset;
+            }
+
+            outline-width: var(--sapContent_FocusWidth);
+            outline-color: var(--sapContent_FocusColor);
+            outline-style: var(--sapContent_FocusStyle);
+
+            @content;
         }
     }
 
@@ -72,6 +87,14 @@ $block: fd-splitter;
     &__pagination-item,
     &__pagination-item-dot {
         @include fd-reset();
+    }
+
+    &__resizer,
+    &__resizer-grip,
+    &__resizer-grip-icon,
+    &__resizer-decoration-before,
+    &__resizer-decoration-after {
+        user-select: none;
     }
 
     &__pane-container,
@@ -188,7 +211,7 @@ $block: fd-splitter;
                 background: var(--sapUiHighlight, #0854A0);
             }
         }
-        
+
         &-grip {
             flex-shrink: 0;
 
@@ -228,7 +251,11 @@ $block: fd-splitter;
                 background: var(--sapUiButtonLiteHoverBackground, #f5f5f5);
             }
 
-            &:active {
+            &:focus {
+                @include fd-focus();
+            }
+
+            &:active:not(.#{$block}__pagination-item--active) {
                 background: #24529b;
                 background: var(--sapUiButtonLiteActiveBackground, #24529b);
 

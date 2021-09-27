@@ -103,6 +103,8 @@ export class SplitterResizerComponent implements OnDestroy {
     /** @hidden */
     @HostListener('mousedown', ['$event'])
     _onMouseDown(event: MouseEvent): void {
+        event.preventDefault();
+
         this._start = this._isHorizontal ? event.clientY : event.clientX;
 
         this.startResize.emit();

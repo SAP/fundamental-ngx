@@ -25,6 +25,10 @@ export class SplitterComponent {
         return this._defaultPaneId;
     }
 
+    /** aria-label for the pagination item. */
+    @Input()
+    paginationItemAriaLabel = 'Section';
+
     /** @hidden */
     _defaultPaneId$ = new Subject<string>();
 
@@ -51,7 +55,7 @@ export class SplitterComponent {
         if (!this._panes.length) {
             return;
         }
-        
+
         const paneToRemove = this._panes.find(pane => pane.id === paneId);
 
         paneToRemove?.hideFromCanvas();
