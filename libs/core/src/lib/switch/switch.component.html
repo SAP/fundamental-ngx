@@ -7,8 +7,8 @@
     [class.is-disabled]="disabled"
     [attr.aria-label]="ariaLabel"
 >
-    <span *ngIf="activeText || inactiveText" class="fd-switch__text">
-        {{ isChecked ? activeText : inactiveText }}
+    <span *ngIf="(isChecked ? activeText : inactiveText) as text" class="fd-switch__text">
+        {{ text }}
     </span>
     <span class="fd-switch__control">
         <input
@@ -25,7 +25,7 @@
             [(ngModel)]="isChecked"
         />
         <div class="fd-switch__slider">
-            <div class="fd-switch__track">
+            <div class="fd-switch__track" aria-hidden="true">
                 <i
                     *ngIf="semantic"
                     role="presentation"
