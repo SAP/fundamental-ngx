@@ -185,7 +185,7 @@ jobs:
         with:
           path: ${{ env.CACHE_NODE_MODULES_PATH }}
           key: node_modules-${{ hashFiles('**/package-lock.json') }}
-      - run: npm run lint ${{ matrix.lib }} -- --runner cloud
+      - run: npx nx lint ${{ matrix.lib }} -- --runner cloud
 
   # firebase deploy preview
   firebase_preview:
@@ -274,6 +274,7 @@ jobs:
 
       - run: bash ./ci-scripts/publish.sh
         env:
+          $GITHUB_TOKEN: ${{ secrets.$GITHUB_TOKEN }}
           TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
         if: ${{ github.ref == 'refs/heads/ci-github-actions'
           || github.ref == 'refs/heads/main'
@@ -282,6 +283,7 @@ jobs:
 
       - run: bash ./ci-scripts/hotfix-publish.sh
         env:
+          $GITHUB_TOKEN: ${{ secrets.$GITHUB_TOKEN }}
           TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
         if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
 
