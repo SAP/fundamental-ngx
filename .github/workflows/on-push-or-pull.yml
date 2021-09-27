@@ -56,7 +56,7 @@ jobs:
           path: ${{ env.CACHE_NODE_MODULES_PATH }}
           key: node_modules-${{ hashFiles('**/package-lock.json') }}
       - run: npm ci
-#        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true'
 
   # lint commit name
   commit_lint:
@@ -251,11 +251,12 @@ jobs:
   npm_publish:
     runs-on: ubuntu-latest
     needs: install
-    if: ${{ github.ref == 'refs/heads/ci-github-actions'
+    if: ${{ !github.base_ref && (
+      github.ref == 'refs/heads/ci-github-actions'
       || github.ref == 'refs/heads/main'
       || github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use'
       || github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use'
-      }}
+      ) }}
     steps:
       - uses: actions/checkout@v2.3.4
       - uses: actions/cache@v2
@@ -274,7 +275,7 @@ jobs:
 
       - run: bash ./ci-scripts/publish.sh
         env:
-          $GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
         if: ${{ github.ref == 'refs/heads/ci-github-actions'
           || github.ref == 'refs/heads/main'
@@ -283,7 +284,7 @@ jobs:
 
       - run: bash ./ci-scripts/hotfix-publish.sh
         env:
-          $GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
         if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
 
