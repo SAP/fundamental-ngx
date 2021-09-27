@@ -306,35 +306,35 @@ jobs:
 
 
   # pre-release to npm
-  npm_publish:
-    runs-on: ubuntu-latest
-    needs: install
-    if: ${{ github.ref == 'refs/heads/main' }}
-    steps:
-      - uses: actions/checkout@v2.3.4
-      - uses: actions/cache@v2
-        with:
-          path: ${{ env.CACHE_NODE_MODULES_PATH }}
-          key: node_modules-${{ hashFiles('**/package-lock.json') }}
-
-      - name: ci-scripts/publish.sh
-        with:
-          TRAVIS_BRANCH: ${{ ${GITHUB_REF##*/} }}
-          TRAVIS_REPO_SLUG: ${{ ${GITHUB_REPOSITORY} }}
-          TRAVIS_BUILD_NUMBER: ${{ $GITHUB_RUN_NUMBER }}
-          TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
-          GH_NAME: ${{ ${github.event.pusher.name} }}
-          GH_EMAIL: ${{ ${github.event.pusher.email} }}
-        run:  bash ./ci-scripts/publish.sh
-      - uses: JS-DevTools/npm-publish@v1
-        with:
-          package: "dist/libs/core/package.json"
-          token: ${{ secrets.NPM_TOKEN }}
-      - uses: JS-DevTools/npm-publish@v1
-        with:
-          package: "dist/libs/platform/package.json"
-          token: ${{ secrets.NPM_TOKEN }}
-      - uses: JS-DevTools/npm-publish@v1
-        with:
-          package: "dist/libs/moment-adapter/package.json"
-          token: ${{ secrets.NPM_TOKEN }}
+#  npm_publish:
+#    runs-on: ubuntu-latest
+#    needs: install
+#    if: ${{ github.ref == 'refs/heads/main' }}
+#    steps:
+#      - uses: actions/checkout@v2.3.4
+#      - uses: actions/cache@v2
+#        with:
+#          path: ${{ env.CACHE_NODE_MODULES_PATH }}
+#          key: node_modules-${{ hashFiles('**/package-lock.json') }}
+#
+#      - name: ci-scripts/publish.sh
+#        with:
+#          TRAVIS_BRANCH: ${{ ${GITHUB_REF##*/} }}
+#          TRAVIS_REPO_SLUG: ${{ ${GITHUB_REPOSITORY} }}
+#          TRAVIS_BUILD_NUMBER: ${{ $GITHUB_RUN_NUMBER }}
+#          TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
+#          GH_NAME: ${{ ${github.event.pusher.name} }}
+#          GH_EMAIL: ${{ ${github.event.pusher.email} }}
+#        run:  bash ./ci-scripts/publish.sh
+#      - uses: JS-DevTools/npm-publish@v1
+#        with:
+#          package: "dist/libs/core/package.json"
+#          token: ${{ secrets.NPM_TOKEN }}
+#      - uses: JS-DevTools/npm-publish@v1
+#        with:
+#          package: "dist/libs/platform/package.json"
+#          token: ${{ secrets.NPM_TOKEN }}
+#      - uses: JS-DevTools/npm-publish@v1
+#        with:
+#          package: "dist/libs/moment-adapter/package.json"
+#          token: ${{ secrets.NPM_TOKEN }}
