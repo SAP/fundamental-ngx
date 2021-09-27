@@ -218,7 +218,7 @@ const users: ApprovalUser[] = [
         imgUrl: 'https://randomuser.me/api/portraits/women/55.jpg'
     }
 ];
-for (let i = 1; i <= 500; i++) {
+for (let i = 1; i <= 1000; i++) {
     const obj = {
         id: 'uid66171' + i,
         name: 'Ella Franklin' + i,
