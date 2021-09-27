@@ -27,6 +27,14 @@ env:
     ~/.npm
     node_modules
 
+# publish scripts variables
+  TRAVIS_BRANCH: ${{ github.ref }}
+  TRAVIS_REPO_SLUG: ${{ github.repository }}
+  TRAVIS_BUILD_NUMBER: ${{ github.run_number }}
+  TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
+  GH_NAME: ${{ github.event.pusher.name }}
+  GH_EMAIL: ${{ github.event.pusher.email }}
+
 jobs:
   # one run
   one_run:
@@ -146,67 +154,22 @@ jobs:
           npm run copy-docs
           npx nx build docs --base-href="fundamental-ngx" --runner cloud
 
-  # build build-pack-library
-#  build-pack-library:
-#    needs: install
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v2
-#      - uses: actions/cache@v2
-#        with:
-#          path: ${{ env.CACHE_NODE_MODULES_PATH }}
-#          key: node_modules-${{ hashFiles('**/package-lock.json') }}
-#      - run: npm run build-pack-library
 
   # run unit tests core
-  unit-test-core:
+  unit-test:
     runs-on: ubuntu-latest
     needs: install
+    strategy:
+      fail-fast: false
+      matrix:
+        lib: [ core, platform, docs, moment-adapter ]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
         with:
           path: ${{ env.CACHE_NODE_MODULES_PATH }}
           key: node_modules-${{ hashFiles('**/package-lock.json') }}
-      - uses: actions/cache@v2
-        with:
-          path: dist/libs/core
-          key: dist-core-${{ github.run_id }}
-      - run: npx nx test core --watch false --code-coverage true --browsers=ChromeHeadless --runner cloud
-      - run: npm run test:coveralls
-
-  # run unit tests platform
-  unit-test-platform:
-    runs-on: ubuntu-latest
-    needs: install
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: ${{ env.CACHE_NODE_MODULES_PATH }}
-          key: node_modules-${{ hashFiles('**/package-lock.json') }}
-      - uses: actions/cache@v2
-        with:
-          path: dist/libs/platform
-          key: dist-platform-${{ github.run_id }}
-      - run: npx nx test platform --watch false --code-coverage true --browsers=ChromeHeadless --runner cloud
-      - run: npm run test:coveralls
-
-  # run unit tests moment-adapter
-  unit-test-moment-adapter:
-    runs-on: ubuntu-latest
-    needs: install
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
-        with:
-          path: ${{ env.CACHE_NODE_MODULES_PATH }}
-          key: node_modules-${{ hashFiles('**/package-lock.json') }}
-      - uses: actions/cache@v2
-        with:
-          path: dist/libs/platform
-          key: dist-platform-${{ github.run_id }}
-      - run: npx nx test moment-adapter --watch false --code-coverage true --browsers=ChromeHeadless --runner cloud
+      - run: npx nx test ${{ matrix.lib }} --watch false --code-coverage true --browsers=ChromeHeadless --runner cloud
       - run: npm run test:coveralls
 
   # run linting
@@ -216,15 +179,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        lib: [ core, platform, docs ]
+        lib: [ core, platform, docs, moment-adapter ]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
         with:
           path: ${{ env.CACHE_NODE_MODULES_PATH }}
           key: node_modules-${{ hashFiles('**/package-lock.json') }}
-      - run: npm run lint -- --runner cloud
-#      - run: npx ng lint ${{ matrix.lib }}
+      - run: npm run lint ${{ matrix.lib }} -- --runner cloud
 
   # firebase deploy preview
   firebase_preview:
@@ -295,13 +257,6 @@ jobs:
       || github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use'
       || github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use'
       }}
-    env:
-      TRAVIS_BRANCH: ${{ github.ref }}
-      TRAVIS_REPO_SLUG: ${{ github.repository }}
-      TRAVIS_BUILD_NUMBER: ${{ github.run_number }}
-      TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
-      GH_NAME: ${{ github.event.pusher.name }}
-      GH_EMAIL: ${{ github.event.pusher.email }}
     steps:
       - uses: actions/checkout@v2.3.4
       - uses: actions/cache@v2
