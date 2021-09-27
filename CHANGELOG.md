@@ -1,4 +1,11 @@
 
+### [0.32.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.11...v0.32.2-rc.12) (2021-09-27)
+
+
+### Bug Fixes
+
+* **platform:** table, fix sorting issue ([#6649](https://github.com/SAP/fundamental-ngx/issues/6649)) ([#6672](https://github.com/SAP/fundamental-ngx/issues/6672)) ([1545338](https://github.com/SAP/fundamental-ngx/commit/1545338548bea26d0233230627632df00fffb93e))
+
 ### [0.32.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.10...v0.32.2-rc.11) (2021-09-27)
 
 ### [0.32.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.9...v0.32.2-rc.10) (2021-09-27)
