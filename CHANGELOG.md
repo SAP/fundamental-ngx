@@ -1,4 +1,11 @@
 
+### [0.32.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.5...v0.32.2-rc.6) (2021-09-27)
+
+
+### Bug Fixes
+
+* **core:** adding accessability label to the inline help component ([#6434](https://github.com/SAP/fundamental-ngx/issues/6434)) ([3357181](https://github.com/SAP/fundamental-ngx/commit/3357181d2d2235e7b4d8b313872583e4029da18a))
+
 ### [0.32.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.4...v0.32.2-rc.5) (2021-09-24)
 
 
