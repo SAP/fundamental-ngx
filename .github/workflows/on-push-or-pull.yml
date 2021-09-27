@@ -31,7 +31,6 @@ env:
   TRAVIS_BRANCH: ${{ github.ref }}
   TRAVIS_REPO_SLUG: ${{ github.repository }}
   TRAVIS_BUILD_NUMBER: ${{ github.run_number }}
-  TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
   GH_NAME: ${{ github.event.pusher.name }}
   GH_EMAIL: ${{ github.event.pusher.email }}
 
@@ -274,12 +273,16 @@ jobs:
         if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
 
       - run: bash ./ci-scripts/publish.sh
+        env:
+          TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
         if: ${{ github.ref == 'refs/heads/ci-github-actions'
           || github.ref == 'refs/heads/main'
           || github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use'
           }}
 
       - run: bash ./ci-scripts/hotfix-publish.sh
+        env:
+          TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
         if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
 
       - uses: JS-DevTools/npm-publish@v1
