@@ -5,8 +5,9 @@ import {
     getElementClass,
     refreshPage,
     waitForPresent,
+    scrollIntoView
 } from '../../driver/wdio';
-import { SideNavigationPo } from '../../core/pages/side-navigation.po';
+import { SideNavigationPo } from '../pages/side-navigation.po';
 import { blockExamples } from '../fixtures/appData/side-navigation-content'
 
 describe('Side-navigation test suite', () => {
@@ -34,7 +35,7 @@ describe('Side-navigation test suite', () => {
                 checkIsSelected(blockExamples[i]);
                 continue;
             }
-            checkIsSelected(blockExamples[i], 1);
+            checkIsSelected(blockExamples[i], 3);
         }
         click(nonSelectableExample + listItemLink);
         expect(getElementClass(nonSelectableExample + listItemLink)).not.toContain('is-selected', 'item is selected');
@@ -72,6 +73,7 @@ describe('Side-navigation test suite', () => {
     });
 
     function checkIsSelected(section: string, i: number = 0, point: string = section + listItemLink): void {
+        scrollIntoView(point, i);
         click(point, i);
         expect(getElementClass(point, i)).toContain('is-selected', 'element is not selected');
     }

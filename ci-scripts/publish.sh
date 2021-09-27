@@ -2,8 +2,8 @@
 
 set -u -e
 
-PACKAGES=(core platform moment-adapter)
-CURRENT_BRANCH=main
+#PACKAGES=(core platform moment-adapter)
+CURRENT_BRANCH=refs/heads/main
 
 git config --global user.email $GH_EMAIL
 git config --global user.name $GH_NAME
@@ -16,10 +16,10 @@ if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release" ]]; then
 
 elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
    echo "################ Running Master deploy tasks ################"
-   CURRENT_BRANCH=main
+   CURRENT_BRANCH=refs/heads/main
 
   # delete temp branch
-  git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$TRAVIS_BRANCH" > /dev/null 2>&1;
+  git push "https://$GITHUB_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$TRAVIS_BRANCH" > /dev/null 2>&1;
   std_ver=$(npm run std-version)
   release_tag=$(echo "$std_ver" | grep "tagging release" | awk '{print $4}')
 
@@ -37,30 +37,30 @@ else
    exit 1
 fi
 
-git push --follow-tags "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $CURRENT_BRANCH > /dev/null;
+git push --follow-tags "https://$GITHUB_TOKEN@github.com/$TRAVIS_REPO_SLUG" $CURRENT_BRANCH > /dev/null;
 npm run build-deploy-library
 
-cd dist/libs
-NPM_BIN="$(which npm)"
+#cd dist/libs
+#NPM_BIN="$(which npm)"
 
-for P in ${PACKAGES[@]};
-do
-    echo publish "@fundamental-ngx/${P}"
-    cd ${P}
-    if [[  $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release"  ]]; then
-      $NPM_BIN  publish --tag prerelease --access public
-    elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
-      $NPM_BIN  publish --access public
-    fi
-    cd ..
-done
+#for P in ${PACKAGES[@]};
+#do
+#    echo publish "@fundamental-ngx/${P}"
+#    cd ${P}
+#    if [[  $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release"  ]]; then
+#      $NPM_BIN  publish --tag prerelease --access public
+#    elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
+#      $NPM_BIN  publish --access public
+#    fi
+#    cd ..
+#done
 
-cd ../../
+#cd ../../
 
 
 if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
     npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch main
     npm run build-docs-github-pages
-    npm run deploy-docs -- --repo "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG"
+    npm run deploy-docs -- --repo "https://$GITHUB_TOKEN@github.com/$TRAVIS_REPO_SLUG"
 fi
 

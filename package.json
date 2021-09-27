@@ -22,9 +22,9 @@
     "copy-app-docs": "cp libs/core/src/lib/README.md apps/docs/src/assets/CORE_README.md && cp PLATFORM_README.md apps/docs/src/assets/PLATFORM_README.md",
     "deploy-docs": "angular-cli-ghpages -d dist/apps/docs --branch gh-pages",
     "sync-versions": "./ci-scripts/sync-version.sh",
-    "e2e:wdio:saucelabs": "TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js",
-    "e2e:wdio:saucelabs:core": "TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --spec core",
-    "e2e:wdio:saucelabs:platform": "TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --spec platform",
+    "e2e:wdio:saucelabs": "TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --baseUrl=\"https://sap.dev:4200/\"",
+    "e2e:wdio:saucelabs:core": "TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --spec core --baseUrl=\"https://sap.dev:4200/\"",
+    "e2e:wdio:saucelabs:platform": "TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --spec platform --baseUrl=\"https://sap.dev:4200/\"",
     "e2e:cron:wdio:saucelabs:core": "TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio-cron.conf.js --spec core",
     "e2e:cron:wdio:saucelabs:platformA": "TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio-cron.conf.js --suite platformA",
     "e2e:cron:wdio:saucelabs:platformB": "TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio-cron.conf.js --suite platformB",
@@ -92,11 +92,11 @@
     "workspace-schematic": "./node_modules/.bin/nx workspace-schematic",
     "help": "./node_modules/.bin/nx help",
     "nx": "nx",
-    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
+    "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "docker-test": "docker run -u $(id -u) --rm -v \"$PWD\":/app trion/ng-cli-karma npm run test",
     "e2e-generate-report": "allure generate allure-results --clean -o allure-report",
     "prepare": "husky install",
-    "std-version": "standard-version --infile ./CHANGELOG.md --releaseCommitMessageFormat \"chore(release): version {{currentTag}} build ${TRAVIS_BUILD_NUMBER} [ci skip]\" --header \"\""
+    "std-version": "standard-version --infile ./CHANGELOG.md --releaseCommitMessageFormat \"chore(release): version {{currentTag}} build ${GITHUB_RUN_NUMBER} [ci skip]\" --header \"\""
   },
   "publishConfig": {
     "registry": "https://repository.hybris.com/api/npm/npm-repository/"
@@ -128,7 +128,6 @@
     "karma-viewport": "1.0.8",
     "moment": "2.29.1",
     "ngx-markdown": "10.1.1",
-    "npm": "6.14.13",
     "raw-loader": "4.0.2",
     "rxjs": "~6.6.6",
     "tslib": "2.3.0",
@@ -148,6 +147,7 @@
     "@commitlint/config-conventional": "13.1.0",
     "@commitlint/travis-cli": "13.1.0",
     "@nrwl/cli": "11.1.5",
+    "@nrwl/nx-cloud": "12.1.8",
     "@nrwl/schematics": "8.12.11",
     "@nrwl/tao": "11.5.1",
     "@nrwl/workspace": "11.5.2",
