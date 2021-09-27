@@ -25,7 +25,7 @@
                 class="fd-list__navigation-item fd-list__navigation-item--condensed"
                 tabindex="0"
             >
-                <span class="fd-list__navigation-item-text">{{ navItem?._innerText }}</span>
+                <span *ngIf="navItem._innerText" class="fd-list__navigation-item-text">{{ navItem._innerText }}</span>
                 <span *ngIf="navItem.indicated" class="fd-list__navigation-item-indicator"></span>
             </li>
         </ul>

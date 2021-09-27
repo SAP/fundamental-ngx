@@ -71,7 +71,7 @@ export class ListNavigationItemComponent implements AfterContentInit {
 
     /** @hidden */
     @HostListener('click', ['$event'])
-    onItemClick(event): void {
+    onItemClick(event: MouseEvent): void {
         event.stopPropagation();
         this._handleExpandedChanges(!this.expanded);
     }
