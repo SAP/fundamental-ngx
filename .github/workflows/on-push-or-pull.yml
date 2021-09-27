@@ -59,7 +59,9 @@ jobs:
         if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
 #      - run: npm ci
 #        if: steps.cache.outputs.cache-hit != 'true'
-      - run: bash ./ci-scripts/echo.sh
+      - run: |
+          echo $TRAVIS_BUILD_STAGE_NAME
+          bash ./ci-scripts/echo.sh
         env:
           TRAVIS_BRANCH: ${{ env.GITHUB_REF }}
           TRAVIS_REPO_SLUG: ${{ env.GITHUB_REPOSITORY }}
