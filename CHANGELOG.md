@@ -1,4 +1,11 @@
 
+### [0.32.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.9...v0.32.2-rc.10) (2021-09-27)
+
+
+### Bug Fixes
+
+* **core:** switch, fix a11y issues ([#6741](https://github.com/SAP/fundamental-ngx/issues/6741)) ([#6554](https://github.com/SAP/fundamental-ngx/issues/6554)) ([6e7bc48](https://github.com/SAP/fundamental-ngx/commit/6e7bc48bfe64510cdade9ecd57a3d9faf2aeb956))
+
 ### [0.32.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.8...v0.32.2-rc.9) (2021-09-27)
 
 
