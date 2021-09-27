@@ -6,7 +6,7 @@ source .ci-env/flags.sh
 
 #PACKAGES=(core platform moment-adapter)
 HOTFIX_BRANCH=hotfix_tmp_branch_for_automated_release_do_not_use
-MASTER_BRANCH=main
+MASTER_BRANCH=refs/heads/main
 OLD_TAG=$(git describe --tags --abbrev=0)
 
 git config --global user.email $GH_EMAIL
