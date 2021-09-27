@@ -52,6 +52,7 @@ jobs:
       - run: |
           echo ${github.ref}
           echo "ci-github-actions" >> $STAGE_NAME
+        shell: bash
         if: ${{ github.ref == 'refs/heads/ci-github-actions' }}
       - run: echo "Release" >> $STAGE_NAME
         if: ${{ github.ref == 'refs/heads/main' }}
