@@ -152,7 +152,6 @@ jobs:
           npm run copy-docs
           npx nx build docs --base-href="fundamental-ngx" --runner cloud
 
-
   # run unit tests core
   unit-test:
     runs-on: ubuntu-latest
