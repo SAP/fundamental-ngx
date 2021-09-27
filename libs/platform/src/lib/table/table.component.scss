@@ -83,11 +83,57 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
             }
         }
 
-        &.fd-table--condensed .fd-table__body .fd-table__row {
-            &,
-            .fd-replace-indicator {
-                height: 1.563rem;
-            }
+        /** Temporary style for navigation indicator until column width can fit content */
+        .fdp-table__navigation-indicator {
+            margin: auto;
+        }
+    }
+
+    .fd-table__cell {
+        box-sizing: border-box;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        @include fd-table-nested-cell-padding(20, true);
+
+        &.fdp-table__cell--tree-no-expand {
+            @include fd-table-nested-cell-padding(20, true, true);
+        }
+
+        .fdp-table__cell--expand {
+            cursor: pointer;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #0854A0;
+            color: var(--sapContent_IconColor, #0854A0);
+            min-width: 2.75rem;
+            max-width: 2.75rem;
+        }
+    }
+
+    .fd-table__row,
+    .fd-table__cell {
+        height: 2.75rem;
+        cursor: default;
+
+        &[tabindex="-1"] {
+            outline: none;
+        }
+    }
+
+    .fdp-table__cell--empty {
+        padding: 0;
+        width: auto;
+    }
+
+    &.fd-table--condensed  {
+        .fd-table__row,
+        .fd-table__cell {
+            // this is required to fix the small difference in height between selection and other columns 
+            height: 1.563rem !important;
         }
     }
 

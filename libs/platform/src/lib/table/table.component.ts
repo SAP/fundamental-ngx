@@ -487,7 +487,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     get _isShownSelectionColumn(): boolean {
-        return this.selectionMode !== SelectionMode.NONE;
+        return this.selectionMode === SelectionMode.SINGLE || this.selectionMode === SelectionMode.MULTIPLE;
     }
 
     /** @hidden */

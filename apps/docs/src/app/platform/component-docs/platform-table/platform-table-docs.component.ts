@@ -70,7 +70,7 @@ import { ExampleItem } from './platform-table-examples/platform-table-data-items
     providers: [RtlService]
 })
 export class PlatformTableDocsComponent {
-    static schema: any = {
+    static schema: Schema = {
         properties: {
             table: {
                 type: 'object',
