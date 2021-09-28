@@ -10,13 +10,17 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import {
-    DialogService,
     MOBILE_MODE_CONFIG,
     MobileModeBase,
     MobileModeConfigToken,
     MobileModeControl
-} from '@fundamental-ngx/core';
-import { SEARCH_FIELD_COMPONENT, SearchFieldMobileInterface } from './search-field-mobile.interface';
+} from '@fundamental-ngx/core/mobile-mode';
+import { DialogService } from '@fundamental-ngx/core/dialog';
+import {
+    SEARCH_FIELD_COMPONENT,
+    SearchFieldChildContent,
+    SearchFieldMobileInterface
+} from './search-field-mobile.interface';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -26,11 +30,7 @@ import { takeUntil } from 'rxjs/operators';
     encapsulation: ViewEncapsulation.None
 })
 export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobileInterface> implements OnInit, OnDestroy {
-    childContent: {
-        inputFieldTemplate: TemplateRef<any>,
-        suggestionMenuTemplate: TemplateRef<any>
-    } = null;
-
+    childContent: SearchFieldChildContent = null;
 
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
@@ -44,20 +44,23 @@ export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobile
         super(elementRef, dialogService, searchFieldComponent, MobileModeControl.SEARCH_FIELD, mobileModes)
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this.listenChanges();
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         super.onDestroy();
     }
 
+    /** @hidden */
     listenChanges(): void {
         this._component.isOpenChange.pipe(
             takeUntil(this._onDestroy$)
         ).subscribe((isOpen) => {
             if (!isOpen) {
-                this.handleDismiss();
+                this._handleDismiss();
 
                 return;
             }
@@ -69,17 +72,18 @@ export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobile
     }
 
     /** @hidden */
-    handleDismiss(): void {
+    _handleDismiss(): void {
         this.dialogRef.close();
         this._component.dialogDismiss();
     }
 
     /** @hidden */
-    handleApprove(): void {
+    _handleApprove(): void {
         this.dialogRef.close();
         this._component.dialogApprove();
     }
 
+    /** @hidden */
     private _open(): void {
         this.dialogRef = this._dialogService.open(this.dialogTemplate,
             {
@@ -87,7 +91,7 @@ export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobile
                 verticalPadding: false,
                 ...this.dialogConfig,
                 backdropClickCloseable: false,
-                escKeyCloseable: false,
+                escKeyCloseable: true,
                 container: this._elementRef.nativeElement
             }
         );

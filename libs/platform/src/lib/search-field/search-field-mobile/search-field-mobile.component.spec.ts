@@ -69,7 +69,7 @@ describe('SearchFieldMobileComponent', () => {
         fixture.detectChanges();
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
         fixture.detectChanges();
-        component.handleApprove();
+        component._handleApprove();
         expect(anyComponent._component.dialogApprove).toHaveBeenCalled();
     });
 
@@ -82,7 +82,7 @@ describe('SearchFieldMobileComponent', () => {
         fixture.detectChanges();
         expect(anyComponent._dialogService.hasOpenDialogs()).toBe(true);
         fixture.detectChanges();
-        component.handleDismiss();
+        component._handleDismiss();
         expect(anyComponent._component.dialogDismiss).toHaveBeenCalledWith();
     });
 })

@@ -5,6 +5,7 @@ import {
     Directive,
     ElementRef,
     EventEmitter,
+    HostListener,
     Injector,
     Input,
     OnDestroy,
@@ -30,10 +31,13 @@ import { filter, map, take, takeUntil, tap } from 'rxjs/operators';
 
 import { DynamicComponentService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { BaseComponent, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
-import { SEARCH_FIELD_COMPONENT } from './search-field-mobile/search-field-mobile.interface';
+import {
+    SEARCH_FIELD_COMPONENT,
+    SearchFieldMobileInterface
+} from './search-field-mobile/search-field-mobile.interface';
 import { SearchFieldMobileComponent } from './search-field-mobile/search-field-mobile.component';
-import { MobileModeConfig } from '@fundamental-ngx/core';
 
 export interface SearchInput {
     text: string;
@@ -75,7 +79,7 @@ let searchFieldIdCount = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class SearchFieldComponent extends BaseComponent implements OnInit, OnDestroy {
+export class SearchFieldComponent extends BaseComponent implements OnInit, OnDestroy, SearchFieldMobileInterface {
     /**
      * Place holder text for search input field.
      */
@@ -213,6 +217,9 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     @Output()
     cancelSearch: EventEmitter<SearchInput> = new EventEmitter();
 
+    /**
+     * Open mobile mode event.
+     */
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -258,16 +265,15 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     public clearId = '';
     public dir = 'ltr';
 
-    isOpen = false;
-
-    isRefresh = true;
+    public isOpen = false;
+    public isRefresh = false;
+    public isSearchDone = false;
 
     private _currentSearchSuggestionAnnoucementMessage = '';
     private _suggestionOverlayRef: OverlayRef;
     private _suggestionPortal: TemplatePortal;
     private _suggestionkeyManager: FocusKeyManager<SearchFieldSuggestionDirective>;
     private _isFocused = false;
-    isSearchDone = false;
 
     private _rtlChangeSubscription = Subscription.EMPTY;
     private _outsideClickSubscription = Subscription.EMPTY;
@@ -307,9 +313,9 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         const baseId = 'fdp-search-field';
         this.inputId = `${baseId}-input-${searchFieldIdCount++}`;
         this.submitId = `${baseId}-submit-${searchFieldIdCount++}`;
-        this.refreshId = `${baseId}-refresh-${searchFieldIdCount}`;
-        this.clearId = `${baseId}-clear-${searchFieldIdCount}`;
         this.menuId = `${baseId}-menu-${searchFieldIdCount++}`;
+
+        this.isRefresh = true;
 
         if (this._rtl) {
             this._rtlChangeSubscription = this._rtl.rtl.subscribe((isRtl: boolean) => {
@@ -337,6 +343,15 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this._onDestroy$.next();
     }
 
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    handleKeydown(event: KeyboardEvent): void {
+        if (this.mobile && this.isOpen && KeyUtil.isKeyCode(event, [ESCAPE])) {
+            this.showDialog(false);
+        }
+    }
+
+    /** Capturing onKeydown of input element */
     onKeydown(event: KeyboardEvent): void {
         if (!event) {
             return;
@@ -372,6 +387,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         // again need to announce the result, so clear this message.
         setTimeout(() => (this._currentSearchSuggestionAnnoucementMessage = ''));
         this.isSearchDone = false;
+        this.isRefresh = false;
 
         if (this.mobile && !this.isOpen) {
             this.openMobileMode();
@@ -412,6 +428,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         if (this.mobile) {
             this.showDialog(false);
         }
+        this.isSearchDone = true;
         this._cd.detectChanges();
     }
 
@@ -598,20 +615,28 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             .pipe(
                 map((event: MouseEvent) => {
                     const target = event.target as HTMLElement;
-                    if (!target.id) {
+                    if (!target.id || target.id.includes('fd-button-bar-id')) {
                         return;
                     }
 
-                    if (this.refreshId === target.id) {
-                        return;
-                    }
+                    // if (!target.id) {
+                    //     return;
+                    // }
 
-                    if (this.clearId === target.id) {
-                        if (this.isSearchDone) {
-                            return;
-                        }
-                        this._isFocused = false;
-                    }
+                    // if (this.refreshId === target.id) {
+                    //     return;
+                    // }
+
+                    // if (this.clearId === target.id) {
+                    //     if (this.isSearchDone) {
+                    //         return;
+                    //     }
+                    //     this._isFocused = false;
+                    // }
+
+                    // if (this.clearId === target.id && !this.isSearchDone) {
+                    //     this._isFocused = false;
+                    // }
 
                     this._isFocused = true;
                     this._cd.markForCheck();
