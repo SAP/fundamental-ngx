@@ -830,6 +830,30 @@
                 "platform-shared",
                 "platform-link"
             ]
+        },
+        "platform-icon-tab-bar": {
+            "tags": ["fdp"],
+            "implicitDependencies": ["core-icon", "core-popover", "core-utils"]
+        },
+        "experimental": {
+            "tags": [],
+            "implicitDependencies": ["core"]
+        },
+        "experimental-tabs": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
+        },
+        "experimental-checkbox": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
+        },
+        "experimental-form": {
+          "tabs": ["fn"],
+          "implicitDependencies": ["core"]
+        },
+        "experimental-switch": {
+          "tabs": ["fn"],
+          "implicitDependencies": ["core"]
         }
     }
 }

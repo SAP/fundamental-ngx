@@ -25,6 +25,7 @@ import { WizardGeneratorCustomizableEmbededExampleComponent } from './examples/w
 import { WizardGeneratorSummaryObjectsExampleComponent } from './examples/wizard-generator-summary-objects-example.component';
 import { WizardGeneratorExternalNavigationExampleComponent } from './examples/wizard-generator-external-navigation-example.component';
 import { WizardGeneratorOnchangeExampleComponent } from './examples/wizard-generator-onchange-example.component';
+import { IconModule } from '@fundamental-ngx/core/icon';
 
 const routes: Routes = [
     {
@@ -62,7 +63,8 @@ const routes: Routes = [
         DialogModule,
         BarModule,
         LayoutGridModule,
-        PlatformLinkModule
+        PlatformLinkModule,
+        IconModule
     ]
 })
 export class PlatformWizardGeneratorDocsModule {}
