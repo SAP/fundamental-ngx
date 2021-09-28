@@ -1,0 +1,25 @@
+import { Component, HostBinding, ViewEncapsulation } from '@angular/core';
+
+/**
+ * Used for easily displaying forms with a margin. Not necessary for fundamental forms to be functional.
+ *
+ * ```html
+ * <div fd-fieldset
+ *     <div fd-form-item>
+ *         ...
+ *     </div>
+ * </div>
+ * ```
+ */
+@Component({
+    // tslint:disable-next-line:component-selector
+    selector: '[fn-fieldset]',
+    template: `<ng-content></ng-content>`,
+    styleUrls: ['./fieldset.component.scss'],
+    encapsulation: ViewEncapsulation.None
+})
+export class ExperimentalFieldsetComponent {
+    /** @hidden */
+    @HostBinding('class.fd-fieldset')
+    fdFieldClass = true;
+}

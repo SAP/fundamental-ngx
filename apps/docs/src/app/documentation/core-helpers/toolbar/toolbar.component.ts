@@ -51,6 +51,12 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
             callback: () => {
                 this._routerService.navigate(['platform/home']);
             }
+        },
+        {
+            name: 'Experimental Docs',
+            callback: () => {
+                this._routerService.navigate(['experimental/home']);
+            }
         }
     ];
 
