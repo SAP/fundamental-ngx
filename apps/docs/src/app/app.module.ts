@@ -17,6 +17,11 @@ const routes: Routes = [
         loadChildren: () =>
             import('./platform/platform-documentation.module').then((m) => m.PlatformDocumentationModule)
     },
+    {
+        path: 'experimental',
+        loadChildren: () =>
+            import('./experimental/experimental-documentation.module').then((m) => m.ExperimentalDocumentationModule)
+    },
     { path: '', redirectTo: 'core', pathMatch: 'full' }
 ];
 

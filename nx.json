@@ -830,6 +830,26 @@
                 "platform-shared",
                 "platform-link"
             ]
+        },
+        "experimental": {
+            "tags": [],
+            "implicitDependencies": ["core"]
+        },
+        "experimental-tabs": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
+        },
+        "experimental-checkbox": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
+        },
+        "experimental-form": {
+          "tabs": ["fn"],
+          "implicitDependencies": ["core"]
+        },
+        "experimental-switch": {
+          "tabs": ["fn"],
+          "implicitDependencies": ["core"]
         }
     }
 }
