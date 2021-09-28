@@ -19,7 +19,7 @@ elif [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
    CURRENT_BRANCH=refs/heads/main
 
   # delete temp branch
-  git push "https://$GITHUB_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$TRAVIS_BRANCH" > /dev/null 2>&1;
+  git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$TRAVIS_BRANCH" > /dev/null 2>&1;
   std_ver=$(npm run std-version)
   release_tag=$(echo "$std_ver" | grep "tagging release" | awk '{print $4}')
 
@@ -37,7 +37,7 @@ else
    exit 1
 fi
 
-git push --follow-tags "https://$GITHUB_TOKEN@github.com/$TRAVIS_REPO_SLUG" $CURRENT_BRANCH > /dev/null;
+git push --follow-tags "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $CURRENT_BRANCH > /dev/null;
 npm run build-deploy-library
 
 #cd dist/libs
@@ -61,6 +61,6 @@ npm run build-deploy-library
 if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Release" ]]; then
     npm run release:create -- --repo $TRAVIS_REPO_SLUG --tag $release_tag --branch main
     npm run build-docs-github-pages
-    npm run deploy-docs -- --repo "https://$GITHUB_TOKEN@github.com/$TRAVIS_REPO_SLUG"
+    npm run deploy-docs -- --repo "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG"
 fi
 

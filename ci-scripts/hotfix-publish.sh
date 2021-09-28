@@ -16,7 +16,7 @@ if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Hotfix-release" ]]; then
   echo "################ Running Hot Fix deploy tasks ################"
 
   # delete temp branch
-  git push "https://$GITHUB_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$HOTFIX_BRANCH" > /dev/null 2>&1;
+  git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" ":$HOTFIX_BRANCH" > /dev/null 2>&1;
 
   std_ver=$(npm run std-version)
 
@@ -36,7 +36,7 @@ else
    exit 1
 fi
 
-git push "https://$GITHUB_TOKEN@github.com/$TRAVIS_REPO_SLUG" $release_tag > /dev/null;
+git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $release_tag > /dev/null;
 npm run build-deploy-library
 
 #cd dist/libs
@@ -72,5 +72,5 @@ if [[ $latest == "true" ]]; then
   git stash
   git checkout $MASTER_BRANCH
   npm run std-version
-  git push "https://$GITHUB_TOKEN@github.com/$TRAVIS_REPO_SLUG" $MASTER_BRANCH > /dev/null;
+  git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $MASTER_BRANCH > /dev/null;
 fi
