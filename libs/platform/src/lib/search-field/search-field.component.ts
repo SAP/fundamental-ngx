@@ -37,7 +37,7 @@ import {
     SEARCH_FIELD_COMPONENT,
     SearchFieldMobileInterface
 } from './search-field-mobile/search-field-mobile.interface';
-import { SearchFieldMobileComponent } from './search-field-mobile/search-field-mobile.component';
+import { SearchFieldMobileComponent } from './search-field-mobile/search-field/search-field-mobile.component';
 
 export interface SearchInput {
     text: string;
@@ -436,9 +436,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
      * Callback function which gets executed on keyboard enter of input text field.
      * @hidden
      */
-    onSearchSubmit(isRefresh = false): void {
-        this.isRefresh = isRefresh;
-
+    onSearchSubmit(): void {
         if (this.isLoading) {
             this.cancelSearch.emit();
         } else {
@@ -452,8 +450,6 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             }
 
             this.closeSuggestionMenu(false);
-
-            this._cd.markForCheck();
         }
     }
 
@@ -548,12 +544,6 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this.isSearchDone = false;
 
         this.closeSuggestionMenu(false);
-
-
-
-        // this.closeSuggestionMenu(false);
-        //
-        // this._cd.markForCheck();
     }
 
     _createSuggetionOverlayConfig(): OverlayConfig {
@@ -618,25 +608,6 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
                     if (!target.id || target.id.includes('fd-button-bar-id')) {
                         return;
                     }
-
-                    // if (!target.id) {
-                    //     return;
-                    // }
-
-                    // if (this.refreshId === target.id) {
-                    //     return;
-                    // }
-
-                    // if (this.clearId === target.id) {
-                    //     if (this.isSearchDone) {
-                    //         return;
-                    //     }
-                    //     this._isFocused = false;
-                    // }
-
-                    // if (this.clearId === target.id && !this.isSearchDone) {
-                    //     this._isFocused = false;
-                    // }
 
                     this._isFocused = true;
                     this._cd.markForCheck();

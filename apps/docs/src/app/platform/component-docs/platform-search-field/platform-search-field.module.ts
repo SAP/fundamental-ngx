@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core';
+import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
 import { SEARCH_FIELD_MOBILE_CONFIG } from '../../../documentation/utilities/consts';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';

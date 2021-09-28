@@ -1,12 +1,14 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { EventEmitter } from '@angular/core';
-import { DialogModule, DynamicComponentService, MobileModeConfig } from '@fundamental-ngx/core';
-import { SearchFieldMobileComponent } from './search-field-mobile.component';
-
-import { SEARCH_FIELD_COMPONENT, SearchFieldMobileInterface } from './search-field-mobile.interface';
-
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Subject } from 'rxjs';
 
+import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+
+import { SEARCH_FIELD_COMPONENT, SearchFieldMobileInterface } from '../search-field-mobile.interface';
+import { SearchFieldMobileComponent } from './search-field-mobile.component';
 
 describe('SearchFieldMobileComponent', () => {
     let component: SearchFieldMobileComponent;
@@ -19,7 +21,7 @@ describe('SearchFieldMobileComponent', () => {
 
     class SearchFieldComponent implements SearchFieldMobileInterface {
         inputText: string;
-        isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+        isOpenChange: Subject<boolean> = new EventEmitter<boolean>();
         mobile = true;
         isOpen = false;
         mobileConfig: MobileModeConfig = {

@@ -20,7 +20,7 @@ import {
     SEARCH_FIELD_COMPONENT,
     SearchFieldChildContent,
     SearchFieldMobileInterface
-} from './search-field-mobile.interface';
+} from '../search-field-mobile.interface';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
