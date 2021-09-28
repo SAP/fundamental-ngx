@@ -270,7 +270,7 @@ jobs:
 
       - run: bash ./ci-scripts/publish.sh
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GHACTIONS }}
           TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
         if: ${{ github.ref == 'refs/heads/main'
           || github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use'
@@ -278,7 +278,7 @@ jobs:
 
       - run: bash ./ci-scripts/hotfix-publish.sh
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GHACTIONS }}
           TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
         if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
 
