@@ -7,6 +7,7 @@ CURRENT_BRANCH=refs/heads/main
 
 git config --global user.email $GH_EMAIL
 git config --global user.name $GH_NAME
+git remote set-url origin "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG"
 
 if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release" ]]; then
    echo "################ Running RC deploy tasks ################"

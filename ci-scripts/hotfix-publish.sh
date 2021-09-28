@@ -11,6 +11,7 @@ OLD_TAG=$(git describe --tags --abbrev=0)
 
 git config --global user.email $GH_EMAIL
 git config --global user.name $GH_NAME
+git remote set-url origin "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG"
 
 if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Hotfix-release" ]]; then
   echo "################ Running Hot Fix deploy tasks ################"
