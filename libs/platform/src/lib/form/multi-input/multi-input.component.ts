@@ -1,5 +1,5 @@
 import { Direction } from '@angular/cdk/bidi';
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ESCAPE, UP_ARROW } from '@angular/cdk/keycodes';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import {
     AfterViewInit,
@@ -45,6 +45,7 @@ import { PlatformMultiInputMobileComponent } from './multi-input-mobile/multi-in
 import { PlatformMultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MULTIINPUT_COMPONENT } from './multi-input.interface';
 import { MultiInputConfig } from './multi-input.config';
+let uniqueHiddenLabel = 0;
 
 @Component({
     selector: 'fdp-multi-input',
@@ -61,6 +62,12 @@ import { MultiInputConfig } from './multi-input.config';
     ]
 })
 export class PlatformMultiInputComponent extends BaseMultiInput implements OnInit, AfterViewInit {
+    protected tokenCountHiddenLabel = `fdp-multi-input-token-count-id-${uniqueHiddenLabel++}`;
+
+    /** token  count hidden label */
+    @Input()
+    tokenHiddenId: string = this.tokenCountHiddenLabel;
+
     /** type Represent the type of input used for the multi Input */
     @Input()
     type: InputType;
@@ -169,6 +176,13 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         super(cd, elementRef, ngControl, ngForm, dialogConfig, _multiInputConfig, formField, formControl);
     }
 
+    /** Display function. Accepts an object of the same type as the
+     * items passed to dropdownValues as argument, and outputs a string.
+     * An arrow function can be used to access the *this* keyword in the calling component.
+     * See multi input examples for details. */
+    @Input()
+    displayFn = (str: string) => str;
+
     /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
@@ -270,10 +284,15 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     /** @hidden */
     removeSelectedTokens(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
-            this.listTemplateDD.listItems.first.focus();
+            if (this.isOpen) {
+                this.listTemplateDD.listItems.first.focus();
+            } else {
+                this.showList(!this.isOpen);
+                this.searchInputElement.nativeElement.focus();
+            }
         }
-        if (KeyUtil.isKeyCode(event, [LEFT_ARROW, RIGHT_ARROW])) {
-            this.tokenizer.focusTokenElement(this.tokenizer.tokenList.length - 1);
+        if (KeyUtil.isKeyCode(event, [ESCAPE])) {
+            this.showList(false);
         }
     }
     /** @hidden Define is selected item selected */

@@ -16,7 +16,7 @@ export class MultiInputConfig {
     /**
      * String matching strategy for typeahead list. Default: 'starts with per term'
      */
-    matchingStrategy: MatchingStrategy = MatchingStrategy.STARTS_WITH_PER_TERM;
+    matchingStrategy: MatchingStrategy = MatchingStrategy.STARTS_WITH;
 
     /**
      * Maps data providers
