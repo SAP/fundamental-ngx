@@ -20,7 +20,7 @@ import { CssClassBuilder } from '@fundamental-ngx/core/utils';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[attr.tabindex]': '0',
+        '[attr.tabindex]': 'clickable ? 0 : -1',
         '[attr.role]': 'clickable ? "link" :""'
     }
 })
