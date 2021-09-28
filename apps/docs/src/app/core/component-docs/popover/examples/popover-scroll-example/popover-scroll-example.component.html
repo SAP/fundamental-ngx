@@ -1,6 +1,6 @@
-<label fd-form-label id="block-scroll-strategy-label">Block Scroll strategy</label>
+<label fd-form-label>Block Scroll strategy</label>
 <fd-popover [scrollStrategy]="blockScrollStrategy">
-    <fd-popover-control><button fd-button label="This popover will stay in same position" aria-describedby="block-scroll-strategy-label"></button></fd-popover-control>
+    <fd-popover-control><button fd-button label="This popover will stay in same position" aria-label="Block Scroll strategy. This popover will stay in same position"></button></fd-popover-control>
     <fd-popover-body>
         <div style="padding: 12px;">
             Start scrolling to see behaviour
@@ -10,9 +10,9 @@
 
 <br><br><br>
 
-<label fd-form-label id="noop-scroll-strategy-label">Noop Scroll strategy</label>
+<label fd-form-label>Noop Scroll strategy</label>
 <fd-popover [scrollStrategy]="noopScrollStrategy">
-    <fd-popover-control><button fd-button label="This popover will stay in same position" aria-describedby="noop-scroll-strategy-label"></button></fd-popover-control>
+    <fd-popover-control><button fd-button label="This popover will stay in same position" aria-label="Noop Scroll strategy. This popover will stay in same position"></button></fd-popover-control>
     <fd-popover-body>
         <div style="padding: 12px;">
             Start scrolling to see behaviour
@@ -22,9 +22,9 @@
 
 <br><br><br>
 
-<label fd-form-label id="close-scroll-strategy-label">Close Scroll strategy</label>
+<label fd-form-label>Close Scroll strategy</label>
 <fd-popover [scrollStrategy]="closeScrollStrategy">
-    <fd-popover-control><button fd-button label="This popover will be closed on scroll" aria-describedby="close-scroll-strategy-label"></button></fd-popover-control>
+    <fd-popover-control><button fd-button label="This popover will be closed on scroll" aria-label="Close Scroll strategy. This popover will be closed on scroll"></button></fd-popover-control>
     <fd-popover-body>
         <div style="padding: 12px;">
             Start scrolling to see behaviour
@@ -34,14 +34,14 @@
 
 <br><br><br>
 
-<label fd-form-label style="display: inline-block;" id="reposition-scroll-strategy-label">Reposition Scroll strategy</label>
+<label fd-form-label style="display: inline-block;">Reposition Scroll strategy</label>
 <fd-checkbox
     [(ngModel)]="autoClose"
     (ngModelChange)="refreshRepositionScrollStrategy()">
     Close the overlay once the user has scrolled away completely?
 </fd-checkbox>
 <fd-popover [scrollStrategy]="repositionScrollStrategy">
-    <fd-popover-control><button fd-button label="This popover will follow this button on scroll" aria-describedby="reposition-scroll-strategy-label"></button></fd-popover-control>
+    <fd-popover-control><button fd-button label="This popover will follow this button on scroll" aria-label="Reposition Scroll strategy. This popover will follow this button on scroll"></button></fd-popover-control>
     <fd-popover-body>
         <div style="padding: 12px;">
             Start scrolling to see behaviour

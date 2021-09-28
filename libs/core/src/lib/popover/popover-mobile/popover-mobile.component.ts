@@ -25,6 +25,8 @@ import { DialogService } from '@fundamental-ngx/core/dialog';
 import { PopoverInterface, POPOVER_COMPONENT } from '../popover.interface';
 import { PopoverChildContent } from '../popover-child-content.interface';
 
+let mobilePopoverUniqueId = 0;
+
 @Component({
     selector: 'fd-popover-mobile',
     templateUrl: './popover-mobile.component.html',
@@ -51,7 +53,15 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     _dialogTemplate: TemplateRef<any>;
 
     /** @hidden */
+    readonly id = 'fd-popover-mobile-' + mobilePopoverUniqueId++;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
+
+    /** @hidden */
+    get titleId(): string {
+        return this.id + '-title';
+    }
 
     /**@hidden */
     constructor(
@@ -114,6 +124,7 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
             backdropClickCloseable: false,
             container: this._elementRef.nativeElement,
             responsivePadding: true,
+            ariaLabelledBy: this.titleId
         });
     }
 }
