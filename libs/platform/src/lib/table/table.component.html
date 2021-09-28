@@ -430,6 +430,12 @@
             >
                 <tbody fd-table-body>
                     <tr fd-table-row role="row">
+                        <th
+                            *ngIf="semanticHighlighting"
+                            fd-table-cell
+                            fd-table-status-indicator
+                        ></th>
+
                         <td
                             *ngIf="_isShownSelectionColumn"
                             fd-table-cell
