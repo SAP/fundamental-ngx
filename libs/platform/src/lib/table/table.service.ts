@@ -137,8 +137,9 @@ export class TableService {
         const prevState = this.getTableState();
         const prevFilterRules = (prevState && prevState.filterBy) || [];
 
-        const newFilterRules: CollectionFilter[] = prevFilterRules
-            .filter((existing) => !fields.includes(existing.field));
+        const newFilterRules: CollectionFilter[] = prevFilterRules.filter(
+            (existing) => !fields.includes(existing.field)
+        );
 
         const state: TableState = { ...prevState, filterBy: newFilterRules };
 

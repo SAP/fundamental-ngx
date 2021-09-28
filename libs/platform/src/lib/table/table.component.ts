@@ -1004,10 +1004,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                 strategy: FILTER_STRING_STRATEGY.CONTAINS,
                 exclude: false
             };
-        
+
             this.addFilter([collectionFilter]);
         } else {
-            this.removeFilter([field])
+            this.removeFilter([field]);
         }
         this._closePopoverForColumnByFieldName(field);
     }

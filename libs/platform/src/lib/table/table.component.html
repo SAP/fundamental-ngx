@@ -88,22 +88,21 @@
                         *ngTemplateOutlet="tableHeaderCellContentTemplate; context: { column: column }"
                     ></ng-container>
 
-                   <div class="fd-table__inner__icons" *ngIf="_sortRulesMap.has(column.key) || _filterRulesMap.has(column.key)">
-                    <fd-icon
-                        *ngIf="_filterRulesMap.has(column.key)"
-                        fd-table-icon
-                        glyph="filter"
-                    ></fd-icon>
-                    <fd-icon
-                        *ngIf="_sortRulesMap.has(column.key)"
-                        fd-table-icon
-                        [glyph]="
-                            _sortRulesMap.get(column.key).direction === SORT_DIRECTION.ASC
-                                ? 'sort-ascending'
-                                : 'sort-descending'
-                        "
-                    ></fd-icon>
-                   </div>
+                    <div
+                        class="fd-table__column-header-icons"
+                        *ngIf="_sortRulesMap.has(column.key) || _filterRulesMap.has(column.key)"
+                    >
+                        <fd-icon *ngIf="_filterRulesMap.has(column.key)" fd-table-icon glyph="filter"></fd-icon>
+                        <fd-icon
+                            *ngIf="_sortRulesMap.has(column.key)"
+                            fd-table-icon
+                            [glyph]="
+                                _sortRulesMap.get(column.key).direction === SORT_DIRECTION.ASC
+                                    ? 'sort-ascending'
+                                    : 'sort-descending'
+                            "
+                        ></fd-icon>
+                    </div>
                 </div>
 
                 <!-- Header menu -->
