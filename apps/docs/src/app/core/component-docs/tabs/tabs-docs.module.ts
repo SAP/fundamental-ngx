@@ -13,6 +13,9 @@ import {
 } from './examples';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { TitleModule } from '@fundamental-ngx/core/title';
+import { ButtonModule } from '@fundamental-ngx/core/button';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
 
 const routes: Routes = [
@@ -35,7 +38,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TabsModule, TitleModule, SegmentedButtonModule],
+    imports: [RouterModule.forChild(routes),
+    SharedDocumentationPageModule,
+    TabsModule,
+    TitleModule,
+    ButtonModule,
+    FormModule,
+    InputGroupModule,
+    SegmentedButtonModule],
     exports: [RouterModule],
     declarations: [examples, TabsHeaderComponent, TabsDocsComponent]
 })

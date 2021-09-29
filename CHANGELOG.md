@@ -1,4 +1,57 @@
 
+### [0.32.2-rc.12](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.11...v0.32.2-rc.12) (2021-09-27)
+
+
+### Bug Fixes
+
+* **platform:** table, fix sorting issue ([#6649](https://github.com/SAP/fundamental-ngx/issues/6649)) ([#6672](https://github.com/SAP/fundamental-ngx/issues/6672)) ([1545338](https://github.com/SAP/fundamental-ngx/commit/1545338548bea26d0233230627632df00fffb93e))
+
+### [0.32.2-rc.11](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.10...v0.32.2-rc.11) (2021-09-27)
+
+### [0.32.2-rc.10](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.9...v0.32.2-rc.10) (2021-09-27)
+
+
+### Bug Fixes
+
+* **core:** switch, fix a11y issues ([#6741](https://github.com/SAP/fundamental-ngx/issues/6741)) ([#6554](https://github.com/SAP/fundamental-ngx/issues/6554)) ([6e7bc48](https://github.com/SAP/fundamental-ngx/commit/6e7bc48bfe64510cdade9ecd57a3d9faf2aeb956))
+
+### [0.32.2-rc.9](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.8...v0.32.2-rc.9) (2021-09-27)
+
+
+### Bug Fixes
+
+* **core:** fix a11y issue for tab component ([#6705](https://github.com/SAP/fundamental-ngx/issues/6705)) ([0fe4f90](https://github.com/SAP/fundamental-ngx/commit/0fe4f9018871077110f87a9f767cb9a048bd84a1))
+
+### [0.32.2-rc.8](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.7...v0.32.2-rc.8) (2021-09-27)
+
+### [0.32.2-rc.7](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.6...v0.32.2-rc.7) (2021-09-27)
+
+
+### Bug Fixes
+
+* **core:** message-box, fix a11y issues ([#6578](https://github.com/SAP/fundamental-ngx/issues/6578)) ([1ac73cc](https://github.com/SAP/fundamental-ngx/commit/1ac73cc0a0faa0802a84223b66fd9443bf115e76))
+
+### [0.32.2-rc.6](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.5...v0.32.2-rc.6) (2021-09-27)
+
+
+### Bug Fixes
+
+* **core:** adding accessability label to the inline help component ([#6434](https://github.com/SAP/fundamental-ngx/issues/6434)) ([3357181](https://github.com/SAP/fundamental-ngx/commit/3357181d2d2235e7b4d8b313872583e4029da18a))
+
+### [0.32.2-rc.5](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.4...v0.32.2-rc.5) (2021-09-24)
+
+
+### Features
+
+* **platform:** wizard generator summary edit button logic ([#6698](https://github.com/SAP/fundamental-ngx/issues/6698)) ([90cb93c](https://github.com/SAP/fundamental-ngx/commit/90cb93cf00d3685899c74ca24ae7f88373953964))
+
+### [0.32.2-rc.4](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.3...v0.32.2-rc.4) (2021-09-24)
+
+
+### Bug Fixes
+
+* **platform:** replace duplicate i18n ids ([#6720](https://github.com/SAP/fundamental-ngx/issues/6720)) ([acb1449](https://github.com/SAP/fundamental-ngx/commit/acb144908a679c88b0bb001a19c1a4954bc176d1)), closes [#6467](https://github.com/SAP/fundamental-ngx/issues/6467)
+
 ### [0.32.2-rc.3](https://github.com/SAP/fundamental-ngx/compare/v0.32.2-rc.2...v0.32.2-rc.3) (2021-09-24)
 
 

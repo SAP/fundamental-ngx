@@ -1,4 +1,4 @@
-<header
+<div
     fd-bar
     class="fd-message-box__header"
     [cozy]="messageBoxConfig.mobile"
@@ -14,7 +14,7 @@
             </fd-bar-element>
         </div>
     </ng-template>
-</header>
+</div>
 
 <div fd-bar *ngIf="subHeaderTemplate" class="fd-message-box__subheader" barDesign="subheader" [cozy]="messageBoxConfig.mobile">
     <ng-container *ngTemplateOutlet="subHeaderTemplate"></ng-container>

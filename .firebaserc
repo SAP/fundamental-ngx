@@ -1,5 +1,14 @@
 {
-   "projects": {
-     "default": "allure-results"
-   }
+"projects": {
+    "default": "fundamental-ngx-gh"
+  },
+  "targets": {
+    "fundamental-ngx-gh": {
+      "hosting": {
+        "fundamental-ngx-gh": [
+          "fundamental-ngx-gh"
+        ]
+      }
+    }
+  }
 }
