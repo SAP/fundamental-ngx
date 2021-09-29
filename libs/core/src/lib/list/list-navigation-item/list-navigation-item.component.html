@@ -21,8 +21,8 @@
         <ul class="fd-list">
             <li
                 *ngFor="let navItem of _listComponent._navItems"
-                [ngClass]="{ 'fd-list__navigation-item--indicated': navItem.indicated }"
                 class="fd-list__navigation-item fd-list__navigation-item--condensed"
+                [class.fd-list__navigation-item--indicated]="navItem.indicated"
                 tabindex="0"
             >
                 <span *ngIf="navItem._innerText" class="fd-list__navigation-item-text">{{ navItem._innerText }}</span>
