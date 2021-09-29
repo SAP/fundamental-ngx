@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, NgZone, Output } from '@angular/core';
 import { IconTabBarBase } from '../icon-tab-bar-base.class';
-import { IconTabBarItem } from '../../types';
+import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { UNIQUE_KEY_SEPARATOR } from '../../constants';
 import { FdDnDEvent } from '../../directives/dnd/icon-bar-dnd-container.directive';
 
