@@ -12,6 +12,14 @@
             (click)="goNext()"
         ></fdp-button>
     </ng-template>
+    <ng-template fdp-wizard-generator-review-button let-goNext="goNext">
+        <fdp-button
+            contentDensity="condensed"
+            buttonType="emphasized"
+            label="Custom review button"
+            (click)="goNext()"
+        ></fdp-button>
+    </ng-template>
     <ng-template fdp-wizard-generator-finish-button let-finish="finish">
         <fdp-button
             contentDensity="condensed"

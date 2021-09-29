@@ -12,14 +12,16 @@ import { MessageBoxContent, MessageBoxService } from '@fundamental-ngx/core/mess
     ]
 })
 export class ObjectBasedMessageBoxExampleComponent {
-    constructor(private _messageBoxService: MessageBoxService) {}
-
+    title = 'Fruit facts';
+    content = 'Strawberries have more vitamin C than oranges.';
     closeReason = '';
+
+    constructor(private _messageBoxService: MessageBoxService) {}
 
     open(): void {
         const content: MessageBoxContent = {
-            title: 'Fruit facts',
-            content: 'Strawberries have more vitamin C than oranges.',
+            title: this.title,
+            content: this.content,
             approveButton: 'Ok',
             cancelButton: 'Cancel',
             approveButtonCallback: () => messageBoxRef.close('Approved'),
@@ -27,7 +29,9 @@ export class ObjectBasedMessageBoxExampleComponent {
             closeButtonCallback: () => messageBoxRef.dismiss('Dismissed')
         };
 
-        const messageBoxRef = this._messageBoxService.open(content);
+        const messageBoxRef = this._messageBoxService.open(content, {
+            ariaLabelledBy: 'fd-message-box-object-based-header fd-message-box-object-based-body',
+        });
 
         messageBoxRef.afterClosed.subscribe(
             (result) => {

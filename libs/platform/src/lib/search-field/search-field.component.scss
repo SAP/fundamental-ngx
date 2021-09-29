@@ -27,6 +27,11 @@
     .fdp-search-field__input-group button.fd-input-group__button {
         border-width: 0;
     }
+
+    .fdp-search-field__input:hover {
+        // overriding background color in order to have outline displayed correctly
+        background: transparent;
+    }
 }
 
 .fdp-search-field__suggestion-dropdown {

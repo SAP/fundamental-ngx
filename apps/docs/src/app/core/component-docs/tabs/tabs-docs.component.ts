@@ -3,6 +3,7 @@ import { Schema } from '../../../schema/models/schema.model';
 import { SchemaFactoryService } from '../../../schema/services/schema-factory/schema-factory.service';
 
 import * as tabSrc from '!raw-loader!./examples/tabs-example/tabs-example.component.html';
+import * as tabForm from '!raw-loader!./examples/tab-form-element-example/tab-form-element-example.component.html';
 import * as tabCounter from '!raw-loader!./examples/tab-counter-example/tab-counter.component.html';
 import * as tabProcess from '!raw-loader!./examples/tab-process-example/tab-process-example.component.html';
 import * as tabIcon from '!raw-loader!./examples/tab-icon-only-example/tab-icon-only-example.component.html';
@@ -141,6 +142,14 @@ export class TabsDocsComponent {
             fileName: 'tabs-example'
         }
     ];
+
+    tabFormExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: tabForm,
+            fileName: 'tab-form-element-example'
+        }
+    ]
 
     tabCounter: ExampleFile[] = [
         {

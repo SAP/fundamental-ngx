@@ -21,8 +21,18 @@ on:
     - cron: '27 22 * * 6'
 
 jobs:
+  # one run
+  one_run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.0
+        with:
+          access_token: ${{ secrets.GITHUB_TOKEN }}
+
   analyze:
     name: Analyze
+    needs: one_run
     runs-on: ubuntu-latest
     permissions:
       actions: read

@@ -296,7 +296,7 @@ describe('Advanced Textarea', () => {
         textareaComponent.handleBackPress(new KeyboardEvent('keyup', { key: '\n' }));
         await wait(fixture);
 
-        expect(textareaComponent._targetElement.scrollHeight).toBe(149);
+        expect(textareaComponent._targetElement.scrollHeight).toBe(153);
     });
 
     it('should handle height given preference', async () => {

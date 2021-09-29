@@ -125,7 +125,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         private _elRef: ElementRef,
         private readonly _cdRef: ChangeDetectorRef,
         @Optional() private _dialogBodyComponent: DialogBodyComponent
-    ) { }
+    ) {}
 
     /** @hidden */
     @HostListener('window:resize')
@@ -138,9 +138,8 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
         }
         this._previousWidth = wizardWidth;
         if (this.contentHeight) {
-            this._elRef.nativeElement.querySelector(
-                '.' + WIZARD_CONTAINER_WRAPPER_CLASS
-            ).style.height = this.contentHeight;
+            this._elRef.nativeElement.querySelector('.' + WIZARD_CONTAINER_WRAPPER_CLASS).style.height =
+                this.contentHeight;
         } else {
             this._setContainerAndTallContentHeight();
         }
@@ -275,7 +274,7 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
     private _setupStepEvents(): void {
         this._stepEventSubscriptions.unsubscribe();
         this._stepEventSubscriptions = new Subscription();
-        this.steps.forEach(step => {
+        this.steps.forEach((step) => {
             this._stepEventSubscriptions.add(
                 step.stepClicked.subscribe((event) => {
                     this._stepClicked(event);
@@ -332,14 +331,19 @@ export class WizardComponent implements AfterViewInit, OnDestroy {
              If the step is completed and appendToWizard is true, hide the nextStep button, unless it's the last step,
              or if there's a summary and it is the second to last step
              */
-            if (step.completed && this.appendToWizard && step.content?.nextStep && step !== this._getLastNonSummaryStep()) {
-                step.content.nextStep._getElRef().nativeElement.style.display = 'none';
+            if (
+                step.completed &&
+                this.appendToWizard &&
+                step.content?.nextStep?.canHide &&
+                step !== this._getLastNonSummaryStep()
+            ) {
+                step.content.nextStep._hideElement();
             } else if (
                 step.content?.nextStep &&
                 ((step.completed && this.appendToWizard) ||
-                (step.visited && step.branching && step.status === CURRENT_STEP_STATUS))
+                    (step.visited && step.branching && step.status === CURRENT_STEP_STATUS))
             ) {
-                step.content.nextStep._getElRef().nativeElement.style.removeProperty('display');
+                step.content.nextStep._showElement();
             }
             if (
                 step.visited ||
