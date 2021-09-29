@@ -80,11 +80,11 @@ export class DndGroup {
     /** @hidden */
     _onDndItemFocus$ = new Subject<[number, number]>();
 
-    constructor(public cdr: ChangeDetectorRef) {}
+    constructor(private _cdr: ChangeDetectorRef) {}
 
     /** add focus after moving elements with keyboard */
     focusDndItem(groupIndex: number, itemIndex: number): void {
-        this.cdr.detectChanges();
+        this._cdr.detectChanges();
         this._onDndItemFocus$.next([groupIndex, itemIndex]);
     }
 }
