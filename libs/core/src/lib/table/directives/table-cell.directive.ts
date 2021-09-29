@@ -14,6 +14,10 @@ import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
     selector: '[fdTableCell], [fd-table-cell]'
 })
 export class TableCellDirective implements AfterContentInit {
+    
+    @HostBinding('attr.aria-label')
+    @Input()
+    ariaLabel: string = null;
 
     /** Whether or not to show the table cell's horizontal borders */
     @HostBinding('class.fd-table__cell--no-horizontal-border')
@@ -73,12 +77,17 @@ export class TableCellDirective implements AfterContentInit {
 
     /** @hidden */
     ngAfterContentInit(): void {
+        const elementRef = this.elementRef.nativeElement;
+        if (elementRef.title && elementRef.textContent && this.ariaLabel === null) {
+            this.ariaLabel = elementRef.title + elementRef.textContent; 
+        } 
+
         if (this._checkboxes && this._checkboxes.length) {
-            this.elementRef.nativeElement.classList.add('fd-table__cell--checkbox');
+            elementRef.classList.add('fd-table__cell--checkbox');
         }
 
         if (this.noData) {
-            this.elementRef.nativeElement.setAttribute('colspan', '100%');
+            elementRef.setAttribute('colspan', '100%');
         }
     }
 }
