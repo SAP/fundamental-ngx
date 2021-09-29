@@ -188,11 +188,18 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
         width: auto;
     }
 
-    &.fd-table--condensed  {
-        .fd-table__row,
-        .fd-table__cell {
-            // this is required to fix the small difference in height between selection and other columns 
-            height: 1.563rem !important;
+    &.fd-table--condensed {
+        .fd-table__body {
+            .fd-table__row, .fd-table__cell {
+                // such specific value is required to fix the small difference in height between selection and other columns 
+                height: 1.563rem;
+            }
+        }
+
+        .fd-table__header {
+            .fd-table__row, .fd-table__cell {
+                height: 2rem;
+            }
         }
     }
 
