@@ -67,6 +67,9 @@ export class BaseDataProvider<T> extends DataProvider<T> {
             value = value.call(item);
         } else if (isJsObject(value)) {
             return this.hasObjectValue(item, pattern);
+        } else if (this._matchingStrategy === MatchingStrategy.STARTS_WITH_PER_TERM) {
+            const reqexp = new RegExp(`(\\s|^)${pattern}`, 'gi');
+            return pattern && value && !!(value.match(reqexp));
         } else if (this._matchingStrategy === MatchingStrategy.STARTS_WITH) {
             return pattern && value && value.toString().toLowerCase().startsWith(pattern.toLowerCase());
         } else if (this._matchingStrategy === MatchingStrategy.CONTAINS) {

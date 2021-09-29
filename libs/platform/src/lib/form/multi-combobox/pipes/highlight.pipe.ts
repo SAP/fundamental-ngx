@@ -16,6 +16,10 @@ export class MultiComboboxHighlightPipe implements PipeTransform {
             return value;
         }
 
+        if (matchingStrategy === MatchingStrategy.STARTS_WITH_PER_TERM) {
+            return this._searchByStrategyStartsWithPerTerm(value, searchText);
+        }
+
         if (matchingStrategy === MatchingStrategy.STARTS_WITH) {
             return this._searchByStrategyStartsWith(value, searchText);
         }
@@ -25,6 +29,12 @@ export class MultiComboboxHighlightPipe implements PipeTransform {
         }
 
         return value;
+    }
+
+    private _searchByStrategyStartsWithPerTerm(value: string, searchText: string): string {
+        const pattern = new RegExp(`(\\s|^)(${searchText})`, 'gi');
+
+        return value.replace(pattern, `$1<strong>$2</strong>`);
     }
 
     private _searchByStrategyStartsWith(value: string, searchText: string): string {
