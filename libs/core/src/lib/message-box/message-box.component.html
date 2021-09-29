@@ -4,15 +4,13 @@
     tabindex="-1"
     aria-modal="true"
     [class]="_messageBoxConfig.dialogPanelClass"
-    [ngClass]="{
-        'fd-message-box__content': true,
-        'fd-message-box__content--s': dialogPaddingSize === 'sm',
-        'fd-message-box__content--m': dialogPaddingSize === 'md',
-        'fd-message-box__content--l': dialogPaddingSize === 'lg',
-        'fd-message-box__content--xl': dialogPaddingSize === 'xl',
-        'fd-message-box__content--mobile': _messageBoxConfig.mobile,
-        'fd-message-box__content--no-mobile-stretch': _messageBoxConfig.mobileOuterSpacing
-    }"
+    [class.fd-message-box__content]="true"
+    [class.fd-message-box__content--s]="dialogPaddingSize === 'sm'"
+    [class.fd-message-box__content--m]="dialogPaddingSize === 'md'"
+    [class.fd-message-box__content--l]="dialogPaddingSize === 'lg'"
+    [class.fd-message-box__content--xl]="dialogPaddingSize === 'xl'"
+    [class.fd-message-box__content--mobile]="_messageBoxConfig.mobile"
+    [class.fd-message-box__content--no-mobile-stretch]="_messageBoxConfig.mobileOuterSpacing"
     [@dialog-fade]
     [attr.id]="_messageBoxConfig.id"
     [attr.aria-label]="_messageBoxConfig.ariaLabel"

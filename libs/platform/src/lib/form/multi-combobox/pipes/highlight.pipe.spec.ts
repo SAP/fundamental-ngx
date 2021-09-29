@@ -1,11 +1,11 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MatchingStrategy } from '@fundamental-ngx/platform/shared';
-import { HighlightPipe } from './highlight.pipe';
+import { MultiComboboxHighlightPipe } from './highlight.pipe';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 
-describe('Pipe: Highlight', () => {
-    let pipe: HighlightPipe;
+describe('Pipe: MultiComboboxHighlightPipe', () => {
+    let pipe: MultiComboboxHighlightPipe;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -13,7 +13,7 @@ describe('Pipe: Highlight', () => {
         }).compileComponents();
 
         const multiComboboxConfig = TestBed.inject(MultiComboboxConfig);
-        pipe = new HighlightPipe(multiComboboxConfig);
+        pipe = new MultiComboboxHighlightPipe(multiComboboxConfig);
     }));
 
     it('create an instance', () => {

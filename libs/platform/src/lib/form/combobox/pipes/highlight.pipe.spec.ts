@@ -1,11 +1,11 @@
 import { TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MatchingStrategy } from '@fundamental-ngx/platform/shared';
-import { HighlightPipe } from './highlight.pipe';
+import { ComboboxHighlightPipe } from './highlight.pipe';
 import { ComboboxConfig} from '../combobox.config';
 
-describe('Pipe: Highlight', () => {
-    let pipe: HighlightPipe;
+describe('Pipe: ComboboxHighlightPipe', () => {
+    let pipe: ComboboxHighlightPipe;
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
@@ -13,7 +13,7 @@ describe('Pipe: Highlight', () => {
         }).compileComponents();
 
         const comboboxConfig = TestBed.inject(ComboboxConfig);
-        pipe = new HighlightPipe(comboboxConfig);
+        pipe = new ComboboxHighlightPipe(comboboxConfig);
     }));
 
     it('create an instance', () => {

@@ -3,12 +3,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { MatchingStrategy } from '@fundamental-ngx/platform/shared';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 
-// TODO: refactor it with HighlightPipe from Combobox and SearchHighlightPipe (https://github.com/SAP/fundamental-ngx/issues/5333)
+// TODO: refactor it with ComboboxHighlightPipe from Combobox and SearchHighlightPipe (https://github.com/SAP/fundamental-ngx/issues/5333)
 // - fundamental-ngx/libs/platform/src/lib/components/form/combobox/pipes/highlight.pipe.ts
 // - fundamental-ngx/libs/core/src/lib/utils/pipes/search-highlight.pipe.ts
 
 @Pipe({ name: 'highlight' })
-export class HighlightPipe implements PipeTransform {
+export class MultiComboboxHighlightPipe implements PipeTransform {
     constructor(private readonly multiComboboxConfig: MultiComboboxConfig) {}
 
     transform(value: string, searchText: string, matchingStrategy: MatchingStrategy = this.multiComboboxConfig.matchingStrategy): string {

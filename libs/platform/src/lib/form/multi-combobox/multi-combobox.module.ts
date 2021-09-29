@@ -14,10 +14,10 @@ import { TokenModule } from '@fundamental-ngx/core/token';
 import { PlatformListModule, StandardListItemModule } from '@fundamental-ngx/platform/list';
 import { MultiComboboxComponent } from './multi-combobox/multi-combobox.component';
 import { PlatformAutoCompleteModule } from '../auto-complete/auto-complete.module';
-import { HighlightPipe } from './pipes/highlight.pipe';
+import { MultiComboboxHighlightPipe } from './pipes/highlight.pipe';
 
 @NgModule({
-    declarations: [MultiComboboxComponent, HighlightPipe],
+    declarations: [MultiComboboxComponent, MultiComboboxHighlightPipe],
     imports: [
         CommonModule,
         FormsModule,

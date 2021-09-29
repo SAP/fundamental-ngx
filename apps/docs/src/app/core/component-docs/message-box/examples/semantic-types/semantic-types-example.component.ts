@@ -12,20 +12,31 @@ import { MessageBoxService, MessageBoxType } from '@fundamental-ngx/core/message
     ]
 })
 export class SemanticTypesExampleComponent {
+    title = 'Fruit facts';
+    content = 'Strawberries have more vitamin C than oranges.';
+    types = '';
+
     constructor(private _messageBoxService: MessageBoxService) {}
 
     open(type: MessageBoxType, showSemanticIcon: boolean = true, customSemanticIcon?: string): void {
+        this.types = `Message box uses the semantic type "${type}" ${customSemanticIcon ? 'with custom icon' : 'with default icon'}`;
         const messageBoxRef = this._messageBoxService.open(
             {
-                title: 'Fruit facts',
-                content: 'Strawberries have more vitamin C than oranges.',
+                title: this.title,
+                content: this.content,
                 approveButton: 'Ok',
                 cancelButton: 'Cancel',
                 approveButtonCallback: () => messageBoxRef.close('Approved'),
                 cancelButtonCallback: () => messageBoxRef.close('Canceled'),
                 closeButtonCallback: () => messageBoxRef.dismiss('Dismissed')
             },
-            { type: type, showSemanticIcon: showSemanticIcon, customSemanticIcon: customSemanticIcon }
+            {
+                type: type,
+                showSemanticIcon: showSemanticIcon,
+                customSemanticIcon: customSemanticIcon,
+                ariaLabelledBy: 'fd-message-box-semantic-types-header fd-message-box-semantic-types-body',
+                ariaDescribedBy: 'fd-message-box-semantic-types-types'
+            }
         );
     }
 }
