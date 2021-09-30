@@ -41,7 +41,7 @@ export class ExperimentalButtonComponent extends BaseButton implements OnChanges
     /** The type of the button. Types include:
      * '' | 'secondary' | 'flat' | 'link' | 'outline' | 'naked'.
      * Leave empty for default (Standard button).'
-     * Default value is set to 'standard'
+     * Default value is set to ''
      */
     @Input()
     fnType: ButtonType = '';

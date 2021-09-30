@@ -16,6 +16,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
         ];
 
         this.components = [
+            { url: 'experimental/button', name: 'Button' },
             { url: 'experimental/tabs', name: 'Tabs' },
         ];
 
