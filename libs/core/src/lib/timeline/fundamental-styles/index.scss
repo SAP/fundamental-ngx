@@ -68,8 +68,6 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
 .#{$block} {
     @include fd-reset();
 
-    //max-width: 30rem;
-
     &--double-sided {
         max-width: 57.5rem;
     }
@@ -267,7 +265,6 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
     }
 
     &__node-container {
-        //height: 100%;
 
         &--horizontal {
             flex-direction: row;
@@ -290,8 +287,6 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
 
     &__node {
         @include fd-reset();
-        //@include fd-set-margins-y-equal(0.25rem);
-        //@include fd-set-margins-x-equal(auto);
         @include fd-timeline-set-node-size(0.375rem);
         background: var(--sapContent_ForegroundBorderColor);
 
@@ -330,13 +325,6 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
     &__connecting-line {
         @include fd-reset();
         @include fd-timeline-set-border();
-
-        //width: 0.0625rem;
-        //margin: auto;
-        //
-        //&:first-child {
-        //    height: 1rem;
-        //}
     }
 
     &__posts {
@@ -371,68 +359,6 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
             border-right: $fd-timeline-post-border;
             background: $fd-timeline-post-background;
         }
-
-        //&--right {
-        //    @include fd-after() {
-        //        @include fd-timeline-arrow-rotate(45deg);
-        //
-        //        top: $fd-timeline-arrow-offset;
-        //        right: $fd-timeline-post-arrow-offset;
-        //    }
-        //
-        //    @include fd-rtl() {
-        //        &::after {
-        //            @include fd-timeline-arrow-rotate(225deg);
-        //
-        //            right: auto;
-        //            left: $fd-timeline-post-arrow-offset;
-        //        }
-        //    }
-        //}
-
-        //&--left {
-        //    @include fd-after() {
-        //        @include fd-timeline-arrow-rotate(225deg);
-        //
-        //        top: $fd-timeline-arrow-offset;
-        //        left: $fd-timeline-post-arrow-offset;
-        //    }
-        //
-        //    @include fd-after-rtl() {
-        //        @include fd-timeline-arrow-rotate(45deg);
-        //
-        //        left: auto;
-        //        right: $fd-timeline-post-arrow-offset;
-        //    }
-        //}
-
-        //&--top {
-        //    @include fd-after() {
-        //        @include fd-timeline-arrow-rotate(315deg);
-        //
-        //        left: $fd-timeline-arrow-offset;
-        //        top: $fd-timeline-post-arrow-offset;
-        //    }
-        //
-        //    @include fd-after-rtl() {
-        //        left: auto;
-        //        right: $fd-timeline-arrow-offset;
-        //    }
-        //}
-        //
-        //&--bottom {
-        //    @include fd-after() {
-        //        @include fd-timeline-arrow-rotate(135deg);
-        //
-        //        left: $fd-timeline-arrow-offset;
-        //        bottom: $fd-timeline-post-arrow-offset;
-        //    }
-        //
-        //    @include fd-after-rtl() {
-        //        left: auto;
-        //        right: $fd-timeline-arrow-offset;
-        //    }
-        //}
     }
 
     &__post-header-container {
