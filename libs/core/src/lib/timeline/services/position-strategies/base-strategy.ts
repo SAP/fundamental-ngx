@@ -69,7 +69,7 @@ export abstract class BaseStrategy {
                     ? parallelNodeEl.offsetTop + this.VERTICAL_TOP_LIST_OFFSET - (prevNode.el.nativeElement.offsetTop + prevNode.el.nativeElement.offsetHeight)
                     : -1;
                 if (diffBetween > 0) {
-                    prevNode.el.nativeElement.style.paddingBottom = `${diffBetween}px`;
+                    prevNode.el.nativeElement.style.marginBottom = `${diffBetween}px`;
                 }
             }
 

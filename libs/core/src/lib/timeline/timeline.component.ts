@@ -7,7 +7,7 @@ import {
     Input,
     IterableChangeRecord,
     IterableDiffer,
-    IterableDiffers,
+    IterableDiffers, NgZone,
     OnChanges,
     OnDestroy,
     OnInit,
@@ -19,6 +19,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Subject } from 'rxjs';
+import { ViewportRuler } from '@angular/cdk/overlay';
+import { takeUntil } from 'rxjs/operators';
 
 import { TimelineFirstListOutletDirective } from './directives/timeline-first-list-outlet.directive';
 import { TimelineNodeDefDirective, TimelineNodeOutletContext } from './directives/timeline-node-def.directive';
@@ -102,6 +104,8 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
         private _differs: IterableDiffers,
         private _cd: ChangeDetectorRef,
         private _timelinePositionControlService: TimelinePositionControlService,
+        private _viewportRuler: ViewportRuler,
+        private _ngZone: NgZone,
     ) {
     }
 
@@ -130,6 +134,10 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
 
     /** @hidden */
     ngAfterViewInit(): void {
+        this._viewportRuler.change(50)
+            .pipe(takeUntil(this._onDestroy))
+            // ViewportRuler invoked out of zone, that is why I need to invoke function in zone
+            .subscribe(() => this._ngZone.run(() => this._timelinePositionControlService.calculatePositions()))
         this._setPositionStrategy();
         this.switchDataSource(this.dataSource);
     }

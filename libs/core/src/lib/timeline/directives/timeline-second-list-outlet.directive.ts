@@ -1,7 +1,7 @@
 import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[fdTimelineSecondListOutlet]'
+  selector: '[fdTimelineSecondListOutlet], [fd-timeline-second-list-outlet]'
 })
 export class TimelineSecondListOutletDirective {
 

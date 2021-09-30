@@ -1,8 +1,8 @@
-export const  TIMELINE_EXAMPLE_DATA = [
+export const TIMELINE_EXAMPLE_DATA = [
     {
         user: {
             name: 'Kie Leech',
-            avatar: null,
+            avatar: null
         },
         date: new Date().toDateString(),
         title: 'Some Title #1',
@@ -13,7 +13,7 @@ export const  TIMELINE_EXAMPLE_DATA = [
     {
         user: {
             name: 'Zainab Zavala',
-            avatar: null,
+            avatar: null
         },
         date: new Date().toDateString(),
         post: null,
@@ -24,7 +24,7 @@ export const  TIMELINE_EXAMPLE_DATA = [
     {
         user: {
             name: 'Mercedes Mays',
-            avatar: null,
+            avatar: null
         },
         date: new Date().toDateString(),
         title: 'Some Title #3',
@@ -35,7 +35,7 @@ export const  TIMELINE_EXAMPLE_DATA = [
     {
         user: {
             name: 'Erico Fileno',
-            avatar: null,
+            avatar: null
         },
         date: new Date().toDateString(),
         title: 'Some Title #4',
@@ -46,12 +46,12 @@ export const  TIMELINE_EXAMPLE_DATA = [
     {
         user: {
             name: 'Jhon Filion',
-            avatar: null,
+            avatar: null
         },
         date: new Date().toDateString(),
         post: null,
         title: 'Some Title #5',
         action: false,
         glyph: 'lead'
-    },
+    }
 ];

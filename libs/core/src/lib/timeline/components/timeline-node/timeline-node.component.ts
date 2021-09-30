@@ -17,19 +17,23 @@ export class TimelineNodeComponent implements OnInit, OnDestroy {
     @Input()
     glyph: string;
 
+    /* Reference to the line of timeline node*/
     @ViewChild('lineEl')
     lineEl: ElementRef;
 
+    /** @hidden */
     constructor(
         public el: ElementRef,
         private _timelinePositionControl: TimelinePositionControlService
     ) {
     }
 
+    /** @hidden */
     ngOnInit(): void {
         this._timelinePositionControl.registerNode(this);
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._timelinePositionControl.removeNode(this);
     }
