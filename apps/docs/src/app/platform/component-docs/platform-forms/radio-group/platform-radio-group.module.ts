@@ -4,13 +4,14 @@ import { ApiComponent } from '../../../../documentation/core-helpers/api/api.com
 import { API_FILES } from '../../../api-files';
 import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
 
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { FdpFormGroupModule, PlatformRadioGroupModule } from '@fundamental-ngx/platform/form';
 import { PlatformRadioGroupHeaderComponent } from './platform-radio-group-header/platform-radio-group-header.component';
 import { PlatformRadioGroupDocsComponent } from './platform-radio-group-docs.component';
 import { PlatformRadioGroupContentExampleComponent } from './platform-radio-group-examples/platform-radio-group-content-examples.component';
 import { PlatformRadioGroupDisabledExampleComponent } from './platform-radio-group-examples/platform-radio-group-disabled-examples.component';
 import { PlatformRadioGroupListExampleComponent } from './platform-radio-group-examples/platform-radio-group-list-examples.component';
 import { PlatformRadioGroupListItemsExampleComponent } from './platform-radio-group-examples/platform-radio-group-list-items-examples.component';
-import { FdpFormGroupModule, PlatformRadioGroupModule, PlatformButtonModule } from '@fundamental-ngx/platform';
 
 const routes: Routes = [
     {

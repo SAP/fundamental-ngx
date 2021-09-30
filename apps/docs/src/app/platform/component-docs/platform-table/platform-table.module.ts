@@ -7,7 +7,10 @@ import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { LayoutPanelModule } from '@fundamental-ngx/core/layout-panel';
 import { FdDatetimeModule } from '@fundamental-ngx/core/datetime';
 import { RtlService } from '@fundamental-ngx/core/utils';
-import { PlatformButtonModule, PlatformInputModule, PlatformSearchFieldModule, PlatformTableModule } from '@fundamental-ngx/platform';
+import { PlatformTableModule } from '@fundamental-ngx/platform/table';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { PlatformInputModule } from '@fundamental-ngx/platform/form';
+import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 
 import { API_FILES } from '../../api-files';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -34,6 +37,8 @@ import { PlatformTableLoadingExampleComponent } from './platform-table-examples/
 import { PlatformTableNavigatableRowIndicatorExampleComponent } from './platform-table-examples/platform-table-navigatable-row-indicator-example.component';
 import { PlatformTableCustomWidthExampleComponent } from './platform-table-examples/platform-table-custom-width-example.component';
 import { PlatformTableActivableExampleComponent } from './platform-table-examples/platform-table-activable-example.component';
+import { PlatformTableNoItemsTemplateExampleComponent } from './platform-table-examples/platform-table-no-items-template-example.component';
+import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
 
 const routes: Routes = [
     {
@@ -58,7 +63,8 @@ const routes: Routes = [
         LayoutPanelModule,
         FdDatetimeModule,
         PlatformInputModule,
-        PlatformSearchFieldModule
+        PlatformSearchFieldModule,
+        IllustratedMessageModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -82,7 +88,8 @@ const routes: Routes = [
         PlatformTableLoadingExampleComponent,
         PlatformTableNavigatableRowIndicatorExampleComponent,
         PlatformTableCustomWidthExampleComponent,
-        PlatformTableActivableExampleComponent
+        PlatformTableActivableExampleComponent,
+        PlatformTableNoItemsTemplateExampleComponent
     ],
     providers: [RtlService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

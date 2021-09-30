@@ -7,8 +7,8 @@ import { PlatformFeedInputHeaderComponent } from './platform-feed-input-header/p
 import { PlatformFeedInputExampleComponent } from './platform-feed-input-examples/platform-feed-input-example/platform-feed-input-example.component';
 import { PlatformFeedInputDocsComponent } from './platform-feed-input-docs.component';
 
+import { PlatformFeedInputModule } from '@fundamental-ngx/platform/feed-input';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-import { PlatformFeedInputModule } from '@fundamental-ngx/platform';
 import { PlatformFeedInputPlaceholderExampleComponent } from './platform-feed-input-examples/platform-feed-input-placeholder-example/platform-feed-input-placeholder-example.component';
 import { PlatformFeedInputNoAvatarExampleComponent } from './platform-feed-input-examples/platform-feed-input-no-avatar-example/platform-feed-input-no-avatar-example.component';
 import { PlatformFeedInputDisabledExampleComponent } from './platform-feed-input-examples/platform-feed-input-disabled-example/platform-feed-input-disabled-example.component';

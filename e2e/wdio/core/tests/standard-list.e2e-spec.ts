@@ -221,9 +221,6 @@ describe('Standard List test suite', function() {
             click(exampleSelector + listItems, i);
             expect(getElementClass(exampleSelector + listItems, i))
                 .toContain('is-selected');
-            saveElementScreenshot(exampleSelector + listItems, tag, standardListPage.getScreenshotFolder(), i);
-            expect(checkElementScreenshot(exampleSelector + listItems, tag, standardListPage.getScreenshotFolder(), i))
-                .toBeLessThan(5, `${listExample} - list item ${i} selected state screenshot doesn't match baseline`);
         }
     }
 

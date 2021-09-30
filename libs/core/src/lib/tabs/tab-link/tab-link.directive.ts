@@ -16,7 +16,7 @@ import { AbstractFdNgxClass } from '@fundamental-ngx/core/utils';
     selector: '[fd-tab-link]',
     host: {
         role: 'tab',
-        tabindex: '0'
+        tabindex: '-1'
     }
 })
 export class TabLinkDirective extends AbstractFdNgxClass {

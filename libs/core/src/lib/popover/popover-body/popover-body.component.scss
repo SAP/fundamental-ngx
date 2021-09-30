@@ -12,6 +12,13 @@ $fd-popover-arrow-color-variable: var(--sapContent_ForegroundBorderColor, #89919
 $fd-popover-arrow-color: #89919a;
 $fd-popover-background-color-variable: var(--sapGroup_ContentBackground, #fff) !default;
 $fd-popover-background-color: #fff;
+$fd-popover-border-radius: var(--sapElement_BorderCornerRadius, .25rem) !default;
+
+@mixin set-border-radius($position, $radius: $fd-popover-border-radius) {
+    border-#{$position}-right-radius: $radius;
+    border-#{$position}-left-radius: $radius;
+}
+
 .fd-popover__popper {
 	.fd-popover__arrow {
 		box-sizing: border-box;
@@ -140,16 +147,56 @@ $fd-popover-background-color: #fff;
 
 		.fd-list__item {
 			&:first-child {
-				border-top-left-radius: 0.25rem;
-				border-top-right-radius: 0.25rem;
+                @include set-border-radius(top)
 			}
 
 			&:last-child {
-				border-bottom-left-radius: 0.25rem;
-				border-bottom-right-radius: 0.25rem;
+                @include set-border-radius(bottom);
 			}
 		}
 	}
+
+    .fd-nested-list {
+        border-bottom: none;
+
+        &__item {
+            &:first-child {
+                .fd-nested-list__content {
+                    @include set-border-radius(top);
+                }
+            }
+
+            &:last-child {
+                .fd-nested-list {
+                    &__item:last-child {
+                        .fd-nested-list__link {
+                            @include set-border-radius(bottom);
+                        }
+                    }
+
+                    &__content {
+                        @include set-border-radius(bottom);
+
+                        &.is-selected {
+                            @include set-border-radius(bottom, 0);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .fd-side-nav, .fd-nested-list__item {
+        border-right: none;
+
+        &:first-child {
+            @include set-border-radius(top);
+        }
+
+        &:last-child {
+            @include set-border-radius(bottom);
+        }
+    }
 }
 
 .fd-popover-custom {

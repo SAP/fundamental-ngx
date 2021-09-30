@@ -1,0 +1,9 @@
+<div class="fd-micro-process-flow__content">
+    <div class="fd-micro-process-flow__content-wrapper">
+        <ng-content></ng-content>
+    </div>
+    <div class="fd-micro-process-flow__connector" *ngIf="!_lastItem"
+    [class.fd-micro-process-flow__connector--intermediate]="intermediate">
+        <ng-content select="[fd-micro-process-flow-intermediary-item]"></ng-content>
+    </div>
+</div>

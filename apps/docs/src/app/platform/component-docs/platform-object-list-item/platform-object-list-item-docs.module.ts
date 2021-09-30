@@ -1,25 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PlatformListModule, ObjectListItemModule, PlatformButtonModule, PlatformObjectStatusModule, PlatformMenuModule } from '@fundamental-ngx/platform';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
 
+import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
+import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
+import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
+import { PlatformMenuModule } from '@fundamental-ngx/platform/menu';
+import { ObjectListItemModule, PlatformListModule } from '@fundamental-ngx/platform/list';
+import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
 import { PlatformObjectListItemHeaderComponent } from './platform-object-list-item-header/platform-object-list-item-header.component';
 import { PlatformObjectListItemDocsComponent } from './platform-object-list-item-docs.component';
-import {
-    PlatformObjectListItemExampleComponent
-} from './platform-object-list-item-examples/platform-object-list-item-example.component';
-
+import { PlatformObjectListItemExampleComponent } from './platform-object-list-item-examples/platform-object-list-item-example.component';
 import { PlatformObjectListItemBorderLessExampleComponent } from './platform-object-list-item-examples/platform-object-list-item-border-less-example.component';
 import { PlatformObjectListItemWithRowSelectionExampleComponent } from './platform-object-list-item-examples/platform-object-list-item-with-row-selection-example.component';
 import { PlatformObjectListItemWithRowNavigationExampleComponent } from './platform-object-list-item-examples/platform-object-list-item-with-row-navigation-example.component';
 import { PlatformObjectListItemWithRowSelectionAndNavigationExampleComponent } from './platform-object-list-item-examples/platform-object-list-item-with-row-selection-and-navigation-example.component';
-import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
-import { ObjectMarkerModule } from '@fundamental-ngx/core/object-marker';
-import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
-
 
 const routes: Routes = [
     {

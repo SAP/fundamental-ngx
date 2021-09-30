@@ -67,7 +67,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
 
     /** Whether to move tabs overflowing in the tab bar to the dropdown */
     @Input()
-    collapseOverflow = false;
+    collapseOverflow = true;
 
     /** Limits the maximum number of tabs visible in the tab bar in collapseOverflow mode.
      * Other tabs will be moved to the collapsed tabs dropdown */
@@ -384,11 +384,12 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
 
     /** @hidden Divides tabs into tabs visible in the header and moved tabs to the dropdown */
     private _hideOverflowingItems(): void {
+        const extraFreeSpace = 1;
         const capacity = getElementCapacity(this.headerContainer);
         const tabsLimit = this.maxVisibleTabs || Number.MAX_SAFE_INTEGER;
         const totalRequiredWidth = this._tabArray.reduce((total, tab) => total + tab.headerWidth, 0);
 
-        this._isCollapsed = totalRequiredWidth > capacity || tabsLimit < this._tabArray.length;
+        this._isCollapsed = totalRequiredWidth > capacity - extraFreeSpace || tabsLimit < this._tabArray.length;
 
         const requiredFreeSpace = this._isCollapsed ? this._overflowTriggerWidth : 0;
         this._numbOfVisibleTabs = 0;
@@ -397,7 +398,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         for (let i = 0; capacityLeft > requiredFreeSpace && this._tabArray.length > i && tabsLimit > i; i++) {
             const width = this._tabArray[i].headerWidth;
 
-            if (capacityLeft - width > requiredFreeSpace) {
+            if (capacityLeft - width >= requiredFreeSpace + extraFreeSpace) {
                 this._numbOfVisibleTabs++;
             }
             capacityLeft -= width;

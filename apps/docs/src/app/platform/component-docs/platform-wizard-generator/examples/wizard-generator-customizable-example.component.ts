@@ -2,7 +2,8 @@ import { Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { WizardDialogGeneratorService, WizardGeneratorFormsValue, WizardGeneratorItem, WizardTitle } from '@fundamental-ngx/platform';
+
+import { WizardDialogGeneratorService, WizardGeneratorFormsValue, WizardGeneratorItem, WizardTitle } from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
   selector: 'fdp-wizard-generator-customizable-example',
@@ -15,6 +16,8 @@ export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
     @ViewChild('finishTemplate') finishTemplate: TemplateRef<any>;
     @ViewChild('cancelTemplate') cancelTemplate: TemplateRef<any>;
     @ViewChild('confirmationDialogTemplate') confirmationDialogTemplate: TemplateRef<any>;
+    @ViewChild('summaryStepTemplate') summaryStepTemplate: TemplateRef<any>;
+    @ViewChild('reviewButtonTemplate') reviewButtonTemplate: TemplateRef<any>;
 
     wizardValue: WizardGeneratorFormsValue;
 
@@ -145,11 +148,18 @@ export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
                 goBackButtonTemplate: this.goBackTemplate,
                 finishButtonTemplate: this.finishTemplate,
                 cancelButtonTemplate: this.cancelTemplate,
-                confirmationDialogTemplate: this.confirmationDialogTemplate
+                confirmationDialogTemplate: this.confirmationDialogTemplate,
+                summaryStepTemplate: this.summaryStepTemplate,
+                reviewButtonTemplate: this.reviewButtonTemplate
             }
         }).afterClosed.pipe(takeUntil(this._onDestroy$))
         .subscribe((wizardValue: WizardGeneratorFormsValue) => {
             this.wizardValue = wizardValue;
         }, () => {});
+    }
+
+    _editStep(event: MouseEvent, stepId: string, callback: (stepId: string) => void): void {
+        event.preventDefault();
+        callback(stepId);
     }
 }

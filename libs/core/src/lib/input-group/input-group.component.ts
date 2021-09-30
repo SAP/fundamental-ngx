@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent, Subject, Subscription } from 'rxjs';
-import { filter, takeUntil, tap } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 
 import { InputGroupAddOnDirective, InputGroupInputDirective } from './input-group-directives';
 import { FormStates } from '@fundamental-ngx/core/shared';
@@ -103,6 +103,9 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     @Input()
     disabled: boolean;
 
+    /** Whether the input group is readonly. */
+    @Input()
+    readonly: boolean;
     /**
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.

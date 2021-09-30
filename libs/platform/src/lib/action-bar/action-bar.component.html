@@ -1,0 +1,29 @@
+<div fd-action-bar>
+    <div fd-action-bar-header>
+        <div fd-action-bar-back *ngIf="showBackButton">
+            <button
+                fd-button
+                [compact]="contentDensity === 'compact'"
+                [fdType]="'transparent'"
+                [attr.aria-label]="backButtonLabel"
+                data-tag="actionbar__back-button"
+                [attr.title]="backButtonLabel"
+                [glyph]="navigationArrow$ | async"
+                (click)="backButtonClick.emit($event)"
+            ></button>
+        </div>
+        <h3 fd-action-bar-title [attr.title]="title" data-tag="actionbar__title">
+            {{ title }}
+        </h3>
+        <ng-content selector="fdp-action-button-group"></ng-content>
+    </div>
+    <p
+        fd-action-bar-description
+        *ngIf="description"
+        [withBackBtn]="showBackButton"
+        [attr.title]="description"
+        data-tag="actionbar__description"
+    >
+        {{ description }}
+    </p>
+</div>

@@ -1,32 +1,20 @@
 import { FormMessagePo } from '../pages/form-message.po';
 import {
-    addIsActiveClass,
-    checkElementScreenshot,
-    click, getAttributeByName, getElementArrayLength, getElementPlaceholder, getImageTagBrowserPlatform, getText,
+    click, getElementPlaceholder, getText,
     getValue,
     isElementClickable, mouseHoverElement,
-    refreshPage, saveElementScreenshot,
-    scrollIntoView, setValue, waitForPresent
+    refreshPage, scrollIntoView, setValue, waitForPresent
 } from '../../driver/wdio';
 
 import {
     testText,
     testMultilineText,
-    input,
-    button,
-    message,
     placeholderText,
     hoverEventMessageInput,
     hoverEventMessageInputGroup,
     clickEventMessage,
     eventMessageTextArea
 } from '../fixtures/appData/form-message-contents';
-
-import {
-    inputFieldTag,
-    buttonTag,
-    messageTag
-} from '../fixtures/testData/form-message-tags';
 
 describe('Form Message test suite:', function() {
 

@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ListDataSource, DataProvider } from '@fundamental-ngx/platform';
+
+import { ListDataSource, DataProvider } from '@fundamental-ngx/platform/shared';
 
 export interface User {
     firstName: string;
@@ -134,6 +135,5 @@ export class ListDataProvider extends DataProvider<User> {
 })
 export class PlatformListWithMoreButtonExampleComponent {
     _dataSource = new ListDataSource<User>(new ListDataProvider());
-
 }
 

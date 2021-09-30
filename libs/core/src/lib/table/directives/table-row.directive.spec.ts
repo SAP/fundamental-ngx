@@ -1,5 +1,5 @@
 import { HIDDEN_CLASS_NAME, TableRowDirective } from './table-row.directive';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TableModule } from '../table.module';
 import { TableService } from '../table.service';

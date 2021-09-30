@@ -112,7 +112,7 @@ export class DndListDirective<T> implements AfterContentInit, OnDestroy {
             if (!element.stickToPosition && closestItemIndex !== index) {
                 const isMouseOnElement = _isMouseOnElement(element, mousePosition);
                 if (isMouseOnElement) {
-                    closestItemIndex = index;    
+                    closestItemIndex = index;
 
                     return element;
                 }

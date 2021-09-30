@@ -271,6 +271,13 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'micro-process-flow',
+                loadChildren: () =>
+                    import('./component-docs/micro-process-flow/micro-process-flow-docs.module').then(
+                        (m) => m.MicroProcessFlowDocsModule
+                    )
+            },
+            {
                 path: 'multi-input',
                 loadChildren: () =>
                     import('./component-docs/multi-input/multi-input-docs.module').then((m) => m.MultiInputDocsModule)
@@ -453,6 +460,10 @@ export const ROUTES: Routes = [
             {
                 path: 'tree',
                 loadChildren: () => import('./component-docs/tree/tree-docs.module').then((m) => m.TreeDocsModule)
+            },
+            {
+                path: 'upload-collection',
+                loadChildren: () => import('./component-docs/upload-collection/upload-collection-docs.module').then((m) => m.UploadCollectionDocsModule)
             },
             {
                 path: 'wizard',

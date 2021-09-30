@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import {
-    ListDataSource, DataProvider,
-    SelectionChangeEvent, BaseListItem
-} from '@fundamental-ngx/platform';
-
+import { DataProvider, ListDataSource } from '@fundamental-ngx/platform/shared';
+import { BaseListItem, SelectionChangeEvent } from '@fundamental-ngx/platform/list';
 
 const LIST_ELEMENTS: Product[] = [
     {
