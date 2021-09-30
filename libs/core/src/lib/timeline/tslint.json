@@ -1,5 +1,5 @@
 {
-  "extends": "../../../../../tslint.json",
+  "extends": "../../../../../../../fundamental-ngx/tslint.json",
   "rules": {
     "directive-selector": [
       true,

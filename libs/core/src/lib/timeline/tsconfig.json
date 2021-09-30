@@ -1,5 +1,5 @@
 {
-  "extends": "../../../../../tsconfig.base.json",
+  "extends": "../../../../../../../fundamental-ngx/tsconfig.base.json",
   "files": [],
   "include": [],
   "references": [

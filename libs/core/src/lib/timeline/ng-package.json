@@ -1,5 +1,5 @@
 {
-  "$schema": "../../../../../node_modules/ng-packagr/ng-package.schema.json",
+  "$schema": "../../../../../../../fundamental-ngx/node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../../../../dist/libs/core/timeline",
   "lib": {
     "entryFile": "./public_api.ts"
