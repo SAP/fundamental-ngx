@@ -1,0 +1,35 @@
+language: node_js
+sudo: required
+node_js: 12.18.4
+cache: npm
+addons:
+  chrome: stable
+  hosts:
+    - sap.dev
+services:
+  - xvfb
+git:
+  depth: false
+script:
+  - travis_wait 60 npm run build-all
+jobs:
+  include:
+    - stage: "Pre-release"
+      if: branch = main AND type = push
+      before_script: export NODE_OPTIONS='–--max_old_space_size=4096'
+      before_deploy:
+        - git checkout main
+        - bash ./ci-scripts/setup-npm.sh
+      deploy:
+        - provider: script
+          script: bash ./ci-scripts/publish.sh
+          skip_cleanup: true
+          on:
+            all_branches: true
+notifications:
+  email:
+    on_failure: always
+    on_success: change
+  slack:
+    rooms:
+      - ui-fundamentals:zVRyxlqkYnQFD7p8QHkWM8Fd#ngx-automated
