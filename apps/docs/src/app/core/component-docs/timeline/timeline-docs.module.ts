@@ -8,9 +8,10 @@ import { API_FILES } from '../../api-files';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { TimelineModule } from '@fundamental-ngx/core/timeline';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
-import {
-    TimelineTwoSidesArrangementExampleComponent
-} from './examples/timeline-two-sides-arrangement-example/timeline-two-sides-arrangement-example.component';
+
+import { TimelineHorizontalAxisExampleComponent, } from './examples/timeline-horizontal-axis-example.component';
+import { TimelineHorizontalDoubleSideExampleComponent } from './examples/timeline-horizontal-double-side-example.component';
+import { TimelineVerticalDoubleSideExampleComponent } from './examples/timeline-vertical-double-side-example.component';
 
 const routes: Routes = [
     {
@@ -28,7 +29,9 @@ const routes: Routes = [
         TimelineDocsComponent,
         TimelineHeaderDocsComponent,
         TimelineBasicExampleComponent,
-        TimelineTwoSidesArrangementExampleComponent
+        TimelineHorizontalAxisExampleComponent,
+        TimelineHorizontalDoubleSideExampleComponent,
+        TimelineVerticalDoubleSideExampleComponent,
     ],
     imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TimelineModule, AvatarModule],
     exports: [RouterModule]

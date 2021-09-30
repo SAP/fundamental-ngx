@@ -54,6 +54,26 @@ describe('TimelineComponent', () => {
 
         expect(nodeWithInitialIndexAttr.length).toBe(0);
     });
+
+    it('should create timeline in a horizontal dimension ', () => {
+        component.axis = 'horizontal';
+        fixture.detectChanges();
+
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const timelineWithHorizontal = hostEl.querySelector('.fd-timeline--horizontal');
+        expect(timelineWithHorizontal).toBeTruthy();
+    });
+
+    it('should create timeline with double side layout ', () => {
+        component.layout = 'double';
+        fixture.detectChanges();
+
+        const hostEl: HTMLElement = fixture.debugElement.nativeElement;
+        const firstList = hostEl.querySelector('.fd-timeline__list--first');
+        const secondList = hostEl.querySelector('.fd-timeline__list--second');
+        expect(firstList.children).toBeGreaterThan(0);
+        expect(secondList.children).toBeGreaterThan(0);
+    });
 });
 
 describe('TimelineComponentWithTrackBy', () => {
@@ -104,7 +124,7 @@ describe('TimelineComponentWithTrackBy', () => {
 @Component({
     template: `
         <div style="width: 300px;">
-            <fd-timeline [dataSource]="data">
+            <fd-timeline [dataSource]="data" [axis]="axis" [layout]="layout">
                 <fd-timeline-node *fdTimelineNodeDef="let node">
                     {{node.title}}
                 </fd-timeline-node>
@@ -119,6 +139,9 @@ class TimelineTestApp {
         { title: 'Title #2' },
         { title: 'Title #3' }
     ];
+
+    axis = 'vertical';
+    layout = 'right';
 }
 
 @Component({

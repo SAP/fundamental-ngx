@@ -1,10 +1,10 @@
 import { BaseStrategy } from './base-strategy';
 import { TimelineNodeComponent } from '../../components/timeline-node/timeline-node.component';
 
-export class HorizontalDoubleSidesStrategy extends BaseStrategy {
+export class VerticalSingleSideStrategy extends BaseStrategy {
 
     /** Calculate styles for timeline nodes */
-    calculateStyles(nodes: TimelineNodeComponent[]): any {
-        this._setStylesForDoubleList(nodes, 'horizontal');
+    calculateStyles(nodes: TimelineNodeComponent[]): void {
+        this._setStylesForSingleList(nodes, 'vertical');
     }
 }

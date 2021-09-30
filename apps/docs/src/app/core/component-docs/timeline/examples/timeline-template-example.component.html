@@ -1,7 +1,7 @@
 <div style="overflow: auto; height: 500px">
-    <fd-timeline *ngIf="canShowComponent" [dataSource]="data">
+    <fd-timeline [dataSource]="data" [axis]="axis" [layout]="layout">
 
-        <fd-timeline-node *fdTimelineNodeDef="let node">
+        <fd-timeline-node *fdTimelineNodeDef="let node" [glyph]="node.glyph">
 
             <fd-timeline-node-header>
                 <fd-avatar [circle]="true" size="xs" [label]="node.user.name" [image]="node.user.avatar"></fd-avatar>
@@ -14,7 +14,7 @@
 
             <fd-timeline-node-body [content]="node.post"></fd-timeline-node-body>
 
-            <fd-timeline-node-footer>
+            <fd-timeline-node-footer *ngIf="node.action">
                 <button fd-button label="Action 1" [fdType]="'transparent'" [compact]="true"></button>
                 <button fd-button label="Action 2" [fdType]="'transparent'" [compact]="true"></button>
             </fd-timeline-node-footer>

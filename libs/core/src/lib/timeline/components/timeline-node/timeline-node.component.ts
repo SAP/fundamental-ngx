@@ -1,47 +1,36 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { TimelineNodePosition } from '../../types';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { TimelinePositionControlService } from '../../services/timeline-position-control.service';
 
 @Component({
-  selector: 'fd-timeline-node',
-  templateUrl: './timeline-node.component.html',
-  host: {
-    'class': 'fd-timeline__node-wrapper'
-  }
+    selector: 'fd-timeline-node',
+    templateUrl: './timeline-node.component.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        'class': 'fd-timeline__node-wrapper',
+        '[class.fd-timeline__node-wrapper--icon]': '!!glyph'
+    }
 })
 export class TimelineNodeComponent implements OnInit, OnDestroy {
 
-  /* Glyph of the current timeline node.*/
-  @Input()
-  glyph: string;
+    /* Glyph of the current timeline node.*/
+    @Input()
+    glyph: string;
 
-  @ViewChild('lastLine')
-  lastLine: ElementRef;
+    @ViewChild('lineEl')
+    lineEl: ElementRef;
 
-  _position: TimelineNodePosition;
+    constructor(
+        public el: ElementRef,
+        private _timelinePositionControl: TimelinePositionControlService
+    ) {
+    }
 
-  _cssClasses: string[];
+    ngOnInit(): void {
+        this._timelinePositionControl.registerNode(this);
+    }
 
-  constructor(
-      public el: ElementRef,
-      private _timelinePositionControl: TimelinePositionControlService
-  ) {
-  }
-
-  ngOnInit(): void {
-    this._timelinePositionControl.registerNode(this);
-  }
-
-  ngOnDestroy(): void {
-    this._timelinePositionControl.removeNode(this);
-  }
-
-  setPosition(position: TimelineNodePosition): any {
-    this._position = position;
-  }
-
-  setClasses(classes: string[]): void {
-    console.log(classes);
-    this._cssClasses = classes;
-  }
+    ngOnDestroy(): void {
+        this._timelinePositionControl.removeNode(this);
+    }
 }
