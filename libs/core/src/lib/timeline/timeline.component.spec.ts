@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 
 import { TimelineModule } from '@fundamental-ngx/core/timeline';
+import { TimelinePositionControlService } from './services/timeline-position-control.service';
+import { TimelineAxis, TimelineSidePosition } from './types';
 
 describe('TimelineComponent', () => {
     let component: TimelineTestApp;
@@ -10,7 +12,8 @@ describe('TimelineComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [TimelineTestApp],
-            imports: [TimelineModule]
+            imports: [TimelineModule],
+            providers: [TimelinePositionControlService]
         })
             .compileComponents();
     });
@@ -57,11 +60,14 @@ describe('TimelineComponent', () => {
 
     it('should create timeline in a horizontal dimension ', () => {
         component.axis = 'horizontal';
+        component.layout = 'top';
         fixture.detectChanges();
 
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
         const timelineWithHorizontal = hostEl.querySelector('.fd-timeline--horizontal');
-        expect(timelineWithHorizontal).toBeTruthy();
+        // const test = hostEl.querySelector('.fd-timeline');
+        // debugger;
+        expect(timelineWithHorizontal).not.toBeNull();
     });
 
     it('should create timeline with double side layout ', () => {
@@ -69,10 +75,10 @@ describe('TimelineComponent', () => {
         fixture.detectChanges();
 
         const hostEl: HTMLElement = fixture.debugElement.nativeElement;
-        const firstList = hostEl.querySelector('.fd-timeline__list--first');
-        const secondList = hostEl.querySelector('.fd-timeline__list--second');
-        expect(firstList.children).toBeGreaterThan(0);
-        expect(secondList.children).toBeGreaterThan(0);
+        const nodesInFirstList = hostEl.querySelectorAll('.fd-timeline__list--first fd-timeline-node');
+        const nodesInSecondList = hostEl.querySelectorAll('.fd-timeline__list--second fd-timeline-node');
+        expect(nodesInFirstList.length).toBeGreaterThan(0);
+        expect(nodesInSecondList.length).toBeGreaterThan(0);
     });
 });
 
@@ -83,7 +89,8 @@ describe('TimelineComponentWithTrackBy', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [TimelineTestApp, TimelineTestAppWithTrackBy],
-            imports: [TimelineModule]
+            imports: [TimelineModule],
+            providers: [TimelinePositionControlService]
         })
             .compileComponents();
     });
@@ -140,8 +147,8 @@ class TimelineTestApp {
         { title: 'Title #3' }
     ];
 
-    axis = 'vertical';
-    layout = 'right';
+    axis: TimelineAxis = 'vertical';
+    layout: TimelineSidePosition = 'right';
 }
 
 @Component({

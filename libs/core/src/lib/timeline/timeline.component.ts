@@ -120,6 +120,7 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
             this._canShowFirstList = this.layout !== 'right' && this.layout !== 'bottom';
             this._canShowSecondList = this.layout !== 'left' && this.layout !== 'top';
             this._setPositionStrategy();
+            this.switchDataSource(this.dataSource);
         }
         if ('dataSource' in changes && !changes['dataSource'].firstChange) {
             const value = changes['dataSource'].currentValue;
