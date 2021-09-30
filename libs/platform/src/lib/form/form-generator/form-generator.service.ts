@@ -26,11 +26,6 @@ export class FormGeneratorService {
       */
      private _validationErrorHints = DEFAULT_VALIDATION_ERRORS;
 
-     /**
-      * @hidden
-      */
-     private _latestAsyncValue: any;
-
     constructor(
         private _fb: FormBuilder
     ) { }
@@ -118,10 +113,11 @@ export class FormGeneratorService {
 
     /**
      * @description Returns form value with applied filters and transformers.
-     * @param form
+     * @param form Form generator form
+     * @param renderValue Whether or not form value will be used for rendering purposes.
      * @returns form value object.
      */
-    async getFormValue(form: DynamicFormGroup): Promise<DynamicFormValue> {
+    async getFormValue(form: DynamicFormGroup, renderValue = false): Promise<DynamicFormValue> {
         const formValue = Object.assign({}, form.value);
 
         for (const [i, control] of Object.entries(form.controls)) {
@@ -134,9 +130,12 @@ export class FormGeneratorService {
             }
 
             if (formItem.transformer) {
+                const obj = formItem.transformer(formValue[i], formValue, formItem);
+                formValue[i] = await this._getFunctionValue(obj);
+            }
 
-                const obj = formItem.transformer(formValue[i]);
-
+            if (renderValue && formItem.valueRenderer) {
+                const obj = formItem.valueRenderer(formValue[i], formValue, formItem);
                 formValue[i] = await this._getFunctionValue(obj);
             }
         }

@@ -20,6 +20,7 @@ import { PlatformFormGeneratorObservableExampleComponent } from './platform-form
 import { PlatformFormGeneratorProgramaticSubmitComponent } from './platform-form-generator-examples/platform-form-generator-programatic-submit.component';
 import { PlatformFormGeneratorCustomErrorExampleComponent } from './platform-form-generator-examples/platform-form-generator-custom-error-example.component';
 import { PlatformFormGeneratorFieldLayoutExampleComponent } from './platform-form-generator-examples/platform-form-generator-field-layout-example.component';
+import { PlatformFormGeneratorNoColonsExampleComponent } from './platform-form-generator-examples/platform-form-generator-no-colons-example.component';
 
 const routes: Routes = [
     {
@@ -54,6 +55,7 @@ const routes: Routes = [
         PlatformFormGeneratorProgramaticSubmitComponent,
         PlatformFormGeneratorCustomErrorExampleComponent,
         PlatformFormGeneratorFieldLayoutExampleComponent,
+        PlatformFormGeneratorNoColonsExampleComponent,
     ]
 })
 export class PlatformFormGeneratorDocsModule {}

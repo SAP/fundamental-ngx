@@ -35,6 +35,7 @@
         [state]="status === 'error' ? 'error' : state"
         [buttonFocusable]="false"
         [disabled]="disabled"
+        [readonly]="readonly"
         [isControl]="true"
         (addOnButtonClicked)="!mobile && onPrimaryButtonClick(_connectedOverlay.open)"
         [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
@@ -94,7 +95,7 @@
         [style.maxHeight]="!mobile && maxHeight"
         [style.minWidth]="!mobile && minWidth + 'px'"
         [style.maxWidth]="autoResize && maxWidth + 'px'"
-    >   
+    >
     <ng-container *ngTemplateOutlet="errorMessageTemplate"></ng-container>
         <ng-content></ng-content>
         <ng-container *ngIf="isGroup">

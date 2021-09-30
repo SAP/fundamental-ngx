@@ -26,6 +26,8 @@ export * from './components/table-toolbar/table-toolbar-actions.component';
 export * from './components/table-view-settings-dialog/table-view-settings-dialog.component';
 export * from './components/table-view-settings-dialog/table-view-settings-filter.component';
 
+export * from './components/no-data-wrapper/no-data-wrapper.component';
+
 export * from './directives/table-cell.directive';
 export * from './directives/table-cell-resizable.directive';
 export * from './directives/table-cell-selectable.directive';

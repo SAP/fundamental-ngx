@@ -7,8 +7,10 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 
 import { BarModule } from '@fundamental-ngx/core/bar';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
+import { LayoutGridModule } from '@fundamental-ngx/core/layout-grid';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-generator';
+import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
 import { PlatformWizardGeneratorDocsComponent } from './platform-wizard-generator-docs.component';
 import { PlatformWizardGeneratorHeaderComponent } from './platform-wizard-generator-header/platform-wizard-generator-header.component';
 import { WizardGeneratorDefaultExampleComponent } from './examples/wizard-generator-default-example.component';
@@ -20,6 +22,8 @@ import { WizardGeneratorResponsiveDialogExampleComponent } from './examples/wiza
 import { WizardGeneratorVisibleSummaryExampleComponent } from './examples/wizard-generator-visible-summary-example.component';
 import { WizardGeneratorVisibleSummaryBranchingExampleComponent } from './examples/wizard-generator-visible-summary-branching-example.component';
 import { WizardGeneratorCustomizableEmbededExampleComponent } from './examples/wizard-generator-customizable-embeded-example.component';
+import { WizardGeneratorSummaryObjectsExampleComponent } from './examples/wizard-generator-summary-objects-example.component';
+import { WizardGeneratorExternalNavigationExampleComponent } from './examples/wizard-generator-external-navigation-example.component';
 
 const routes: Routes = [
     {
@@ -44,7 +48,9 @@ const routes: Routes = [
         WizardGeneratorResponsiveDialogExampleComponent,
         WizardGeneratorVisibleSummaryExampleComponent,
         WizardGeneratorVisibleSummaryBranchingExampleComponent,
-        WizardGeneratorCustomizableEmbededExampleComponent
+        WizardGeneratorCustomizableEmbededExampleComponent,
+        WizardGeneratorSummaryObjectsExampleComponent,
+        WizardGeneratorExternalNavigationExampleComponent
     ],
     imports: [
         RouterModule.forChild(routes),
@@ -52,7 +58,9 @@ const routes: Routes = [
         PlatformWizardGeneratorModule,
         PlatformButtonModule,
         DialogModule,
-        BarModule
+        BarModule,
+        LayoutGridModule,
+        PlatformLinkModule
     ]
 })
 export class PlatformWizardGeneratorDocsModule { }

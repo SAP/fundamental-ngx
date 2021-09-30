@@ -23,7 +23,7 @@ import { WizardGeneratorService } from '../../wizard-generator.service';
 })
 export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
 
-    @ViewChild('defaultConfirmationDialogTemplate') defaultConfirmationDialogTemplate: TemplateRef<any>;
+    @ViewChild('defaultConfirmationDialogTemplate') defaultConfirmationDialogTemplate: TemplateRef<HTMLElement>;
 
     /**
      * @description Wizards dialog title configuration.
@@ -46,27 +46,35 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
     /**
      * User-defined template for "Go Next" button.
      */
-    goNextButtonTemplate: TemplateRef<any>;
+    goNextButtonTemplate: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for "Go Back" button.
      */
-    goBackButtonTemplate: TemplateRef<any>;
+    goBackButtonTemplate: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for "Finish" button.
      */
-    finishButtonTemplate: TemplateRef<any>;
+    finishButtonTemplate: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for "Cancel" button.
      */
-    cancelButtonTemplate: TemplateRef<any>;
+    cancelButtonTemplate: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for cancellation confirmation dialog.
      */
-    confirmationDialogTemplate: TemplateRef<any>;
+    confirmationDialogTemplate: TemplateRef<HTMLElement>;
+
+    /**
+     * User-defined template for summary step.
+     */
+    summaryStepTemplate: TemplateRef<HTMLElement>;
+
+    /** User-defined template for "Review" button */
+    reviewButtonTemplate: TemplateRef<HTMLElement>;
 
     /** @hidden */
     constructor(
@@ -89,6 +97,16 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
         this.cancelButtonTemplate = this._dialogRef.data.cancelButtonTemplate;
         this.confirmationDialogTemplate = this._dialogRef.data.confirmationDialogTemplate;
         this.displaySummaryStep = this._dialogRef.data.displaySummaryStep || false;
+        this.summaryStepTemplate = this._dialogRef.data.summaryStepTemplate;
+        this.reviewButtonTemplate = this._dialogRef.data.reviewButtonTemplate;
+
+        if (this._dialogRef.data.unifiedLayout !== undefined) {
+            this.unifiedLayout = this._dialogRef.data.unifiedLayout;
+        }
+
+        if (this._dialogRef.data.navigationButtons !== undefined) {
+            this.navigationButtons = this._dialogRef.data.navigationButtons;
+        }
 
         if (this._dialogRef.data.confirmationDialogText) {
             this.confirmationDialogText = this._dialogRef.data.confirmationDialogText;

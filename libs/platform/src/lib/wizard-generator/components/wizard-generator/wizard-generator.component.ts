@@ -9,8 +9,10 @@ import {
 
 import { WizardGeneratorService } from '../../wizard-generator.service';
 import { BaseWizardGenerator } from '../../base-wizard-generator';
-import { FdpWizardGeneratorFinishButtonDirective } from '../../directives/fdp-wizard-generator-finish-button.directive';
-import { FdpWizardGeneratorGoNextButtonDirective } from '../../directives/fdp-wizard-generator-go-next-button.directive';
+import { WizardGeneratorFinishButtonDirective } from '../../directives/wizard-generator-finish-button.directive';
+import { WizardGeneratorGoNextButtonDirective } from '../../directives/wizard-generator-go-next-button.directive';
+import { WizardGeneratorSummaryStepDirective } from '../../directives/wizard-generator-summary-step.directive';
+import { WizardGeneratorReviewButtonDirective } from '../../directives/wizard-generator-review-button.directive';
 
 @Component({
   selector: 'fdp-wizard-generator',
@@ -23,14 +25,26 @@ export class WizardGeneratorComponent extends BaseWizardGenerator {
     /**
      * User-defined template for "Finish" button.
      */
-    @ContentChild(FdpWizardGeneratorFinishButtonDirective, {read: TemplateRef})
-    finishButtonTemplate: TemplateRef<any>;
+    @ContentChild(WizardGeneratorFinishButtonDirective, {read: TemplateRef})
+    finishButtonTemplate: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for "Go Next" button.
      */
-    @ContentChild(FdpWizardGeneratorGoNextButtonDirective, {read: TemplateRef})
-    goNextButtonTemplate: TemplateRef<any>;
+    @ContentChild(WizardGeneratorGoNextButtonDirective, {read: TemplateRef})
+    goNextButtonTemplate: TemplateRef<HTMLElement>;
+
+    /**
+     * User-defined template for Summary step.
+     */
+    @ContentChild(WizardGeneratorSummaryStepDirective, {read: TemplateRef})
+    customSummaryStepTemplate: TemplateRef<HTMLElement>;
+
+    /**
+     * User-defined template for "Review" button
+     */
+    @ContentChild(WizardGeneratorReviewButtonDirective, {read: TemplateRef})
+    reviewButtonTemplate: TemplateRef<HTMLElement>;
 
     /** @hidden */
     constructor(

@@ -70,14 +70,14 @@ $block: fd-illustrated-message;
     @include fd-flex(column) {
         align-items: center;
     }
-    
+
     width: 100%;
     max-width: 30rem;
     height: auto;
     padding: 1rem;
     margin-top: 5rem;
     text-align: center;
-    
+
     &__illustration {
         @include fd-reset();
 

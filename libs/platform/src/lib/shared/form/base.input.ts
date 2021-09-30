@@ -121,7 +121,7 @@ export abstract class BaseInput extends BaseComponent
     /**
      * Reference to internal Input element
      */
-    @ViewChild('elemRef', { static: true })
+    @ViewChild('inputElementRef', { static: true, read: ElementRef })
     protected _elementRef: ElementRef;
 
     /**
@@ -293,7 +293,7 @@ export abstract class BaseInput extends BaseComponent
      * variable to this element
      *
      * ```
-     * <input #elemRef fd-form-control ...>
+     * <input #inputElementRef fd-form-control ...>
      * ```
      *
      * and this default behavior used. For other cases implement focus.
