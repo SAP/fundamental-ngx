@@ -848,8 +848,12 @@
           "implicitDependencies": ["core"]
         },
         "experimental-switch": {
-          "tabs": ["fn"],
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
+        },
+        "experimental-search": {
+          "tags": ["fn"],
           "implicitDependencies": ["core"]
-        }
+      }
     }
 }

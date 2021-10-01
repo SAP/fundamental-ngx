@@ -1,74 +1,1394 @@
-@import '~fundamental-styles/dist/form-label';
-
-$form-label-inline-help-placement-space: 0rem;
-
-@mixin rtl() {
-	@at-root {
-		[dir="rtl"] &,
-		&[dir="rtl"] {
-			@content;
-		}
-	}
-}
-
-@mixin left-placed() {
-	left: 0;
-	right: auto;
-}
-
-@mixin right-placed() {
-	right: 0;
-	left: auto;
-}
-
-.fd-form-label {
-	display: inline-block;
-}
-
-.fd-form-label__wrapper {
-	position: relative;
-	display: block;
-	overflow: hidden;
-
-	&--inline-help {
-		display: flex;
-		padding-left: $form-label-inline-help-placement-space;
-
-		@include rtl() {
-			padding-left: 0;
-			padding-right: $form-label-inline-help-placement-space;
-		}
-
-		&--after {
-			padding-left: 0;
-			padding-right: $form-label-inline-help-placement-space;
-
-			@include rtl() {
-				padding-right: 0;
-				padding-left: $form-label-inline-help-placement-space;
-			}
-		}
-	}
-}
-
-.fd-form-label__help {
-	position: relative;
-	top: 50%;
-	transform: translateY(3%);
-	align-items: center;
-	display: flex;
-
-	@include left-placed();
-
-	@include rtl() {
-		@include right-placed();
-	}
-
-	&--after {
-		@include right-placed();
-
-		@include rtl() {
-			@include left-placed();
-		}
-	}
-}
+/*!
+ * Fundamental Library Styles v0.20.0-rc.34
+ * Copyright (c) 2021 SAP SE or an SAP affiliate company.
+ * Licensed under Apache License 2.0 (https://github.com/SAP/fundamental-styles/blob/main/LICENSE)
+ */
+ .fn-text-field {
+    font-family: "72","72full",Arial,Helvetica,sans-serif;
+    font-size: .875rem;
+    line-height: 1.5rem;
+    color: #223548;
+    font-weight: 400;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    flex-direction: column
+  }
+  .fn-text-field::after,
+  .fn-text-field::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
+  }
+  .fn-text-field.is-disabled .fn-text-field__label,
+  .fn-text-field:disabled .fn-text-field__label,
+  .fn-text-field[aria-disabled=true] .fn-text-field__label {
+    color: #8396a8
+  }
+  .fn-text-field.is-disabled [class*=sap-icon],
+  .fn-text-field:disabled [class*=sap-icon],
+  .fn-text-field[aria-disabled=true] [class*=sap-icon] {
+    display: none
+  }
+  .fn-text-field.is-readonly .fn-text-field__label,
+  .fn-text-field[aria-readonly=true] .fn-text-field__label,
+  .fn-text-field[readonly] .fn-text-field__label {
+    color: #223548
+  }
+  .fn-text-field.is-readonly [class*=sap-icon],
+  .fn-text-field[aria-readonly=true] [class*=sap-icon],
+  .fn-text-field[readonly] [class*=sap-icon] {
+    display: none
+  }
+  .fn-text-field [class*=sap-icon] {
+    right: .625rem;
+    top: 0;
+    font-size: .75rem;
+    position: absolute;
+    height: 2rem;
+    line-height: 2rem
+  }
+  .fn-text-field [class*=sap-icon][dir=rtl],
+  [dir=rtl] .fn-text-field [class*=sap-icon] {
+    right: auto;
+    left: .625rem
+  }
+  .fn-text-field__label {
+    font-family: "72","72full",Arial,Helvetica,sans-serif;
+    font-size: .875rem;
+    line-height: 1.5rem;
+    color: #223548;
+    font-weight: 400;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    margin-bottom: .5rem
+  }
+  .fn-text-field__label::after,
+  .fn-text-field__label::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
+  }
+  .fn-text-field__input-container {
+    font-family: "72","72full",Arial,Helvetica,sans-serif;
+    font-size: .875rem;
+    line-height: 1.5rem;
+    color: #223548;
+    font-weight: 400;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    width: 100%;
+    position: relative;
+    height: 2rem;
+    border-radius: .5rem
+  }
+  .fn-text-field__input-container::after,
+  .fn-text-field__input-container::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
+  }
+  .fn-text-field__input {
+    font-family: "72","72full",Arial,Helvetica,sans-serif;
+    font-size: .875rem;
+    line-height: 1.5rem;
+    color: #223548;
+    font-weight: 400;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    width: 100%;
+    height: 2rem;
+    padding: .25rem .75rem;
+    background: #f5f6f7;
+    border-radius: .5rem
+  }
+  .fn-text-field__input::after,
+  .fn-text-field__input::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
+  }
+  .fn-text-field__input::-webkit-input-placeholder {
+    color: #5b738b;
+    font-size: .875rem;
+    line-height: 1.5rem
+  }
+  .fn-text-field__input::-moz-placeholder {
+    color: #5b738b;
+    font-size: .875rem;
+    line-height: 1.5rem
+  }
+  .fn-text-field__input:-ms-input-placeholder {
+    color: #5b738b;
+    font-size: .875rem;
+    line-height: 1.5rem
+  }
+  .fn-text-field__input::-ms-input-placeholder {
+    color: #5b738b;
+    font-size: .875rem;
+    line-height: 1.5rem
+  }
+  .fn-text-field__input::placeholder {
+    color: #5b738b;
+    font-size: .875rem;
+    line-height: 1.5rem
+  }
+  .fn-text-field__input:not(:-moz-placeholder-shown) ~ .fn-text-field__input-border::before {
+    background: #1b90ff
+  }
+  .fn-text-field__input:not(:-ms-input-placeholder) ~ .fn-text-field__input-border::before {
+    background: #1b90ff
+  }
+  .fn-text-field__input:not(:placeholder-shown) ~ .fn-text-field__input-border::before {
+    background: #1b90ff
+  }
+  .fn-text-field__input.is-readonly,
+  .fn-text-field__input[aria-readonly=true],
+  .fn-text-field__input[readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field__input.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field__input[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field__input[readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field__input.is-hover,
+  .fn-text-field__input:hover {
+    -webkit-box-shadow: 0 0 2px rgba(131,150,168,.16),0 8px 16px rgba(131,150,168,.16);
+    box-shadow: 0 0 2px rgba(131,150,168,.16),0 8px 16px rgba(131,150,168,.16);
+    background: #fff
+  }
+  .fn-text-field__input.is-hover + .fn-text-field__input-border::before,
+  .fn-text-field__input:hover + .fn-text-field__input-border::before {
+    background: #8396a8
+  }
+  .fn-text-field__input.is-hover.is-readonly,
+  .fn-text-field__input.is-hover[aria-readonly=true],
+  .fn-text-field__input.is-hover[readonly],
+  .fn-text-field__input:hover.is-readonly,
+  .fn-text-field__input:hover[aria-readonly=true],
+  .fn-text-field__input:hover[readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field__input.is-hover.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field__input.is-hover[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field__input.is-hover[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:hover.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:hover[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:hover[readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field__input.is-hover:not(:-moz-placeholder-shown) ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:hover:not(:-moz-placeholder-shown) ~ .fn-text-field__input-border::before {
+    background: #1b90ff
+  }
+  .fn-text-field__input.is-hover:not(:-ms-input-placeholder) ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:hover:not(:-ms-input-placeholder) ~ .fn-text-field__input-border::before {
+    background: #1b90ff
+  }
+  .fn-text-field__input.is-hover:not(:placeholder-shown) ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:hover:not(:placeholder-shown) ~ .fn-text-field__input-border::before {
+    background: #1b90ff
+  }
+  .fn-text-field__input.is-pressed,
+  .fn-text-field__input[aria-pressed=true] {
+    -webkit-box-shadow: 0 0 2px rgba(131,150,168,.16),0 4px 8px rgba(131,150,168,.16);
+    box-shadow: 0 0 2px rgba(131,150,168,.16),0 4px 8px rgba(131,150,168,.16);
+    background: #fff
+  }
+  .fn-text-field__input.is-pressed + .fn-text-field__input-border::before,
+  .fn-text-field__input[aria-pressed=true] + .fn-text-field__input-border::before {
+    background: #8396a8
+  }
+  .fn-text-field__input.is-pressed.is-readonly,
+  .fn-text-field__input.is-pressed[aria-readonly=true],
+  .fn-text-field__input.is-pressed[readonly],
+  .fn-text-field__input[aria-pressed=true].is-readonly,
+  .fn-text-field__input[aria-pressed=true][aria-readonly=true],
+  .fn-text-field__input[aria-pressed=true][readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field__input.is-pressed.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field__input.is-pressed[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field__input.is-pressed[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field__input[aria-pressed=true].is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field__input[aria-pressed=true][aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field__input[aria-pressed=true][readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field__input.is-active,
+  .fn-text-field__input:active {
+    -webkit-box-shadow: 0 0 2px rgba(131,150,168,.16),0 4px 8px rgba(131,150,168,.16);
+    box-shadow: 0 0 2px rgba(131,150,168,.16),0 4px 8px rgba(131,150,168,.16);
+    background: #fff
+  }
+  .fn-text-field__input.is-active + .fn-text-field__input-border::before,
+  .fn-text-field__input:active + .fn-text-field__input-border::before {
+    background: #8396a8
+  }
+  .fn-text-field__input.is-active.is-readonly,
+  .fn-text-field__input.is-active[aria-readonly=true],
+  .fn-text-field__input.is-active[readonly],
+  .fn-text-field__input:active.is-readonly,
+  .fn-text-field__input:active[aria-readonly=true],
+  .fn-text-field__input:active[readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field__input.is-active.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field__input.is-active[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field__input.is-active[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:active.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:active[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:active[readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field__input.is-focus,
+  .fn-text-field__input:focus {
+    z-index: 5;
+    -webkit-box-shadow: 0 0 2px rgba(27,144,255,.16),0 8px 16px rgba(27,144,255,.16),0 0 0 .125rem #1b90ff;
+    box-shadow: 0 0 2px rgba(27,144,255,.16),0 8px 16px rgba(27,144,255,.16),0 0 0 .125rem #1b90ff;
+    background: #fff;
+    outline: 0
+  }
+  .fn-text-field__input.is-focus + .fn-text-field__input-border::before,
+  .fn-text-field__input:focus + .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field__input.is-focus.is-readonly,
+  .fn-text-field__input.is-focus[aria-readonly=true],
+  .fn-text-field__input.is-focus[readonly],
+  .fn-text-field__input:focus.is-readonly,
+  .fn-text-field__input:focus[aria-readonly=true],
+  .fn-text-field__input:focus[readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field__input.is-focus.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field__input.is-focus[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field__input.is-focus[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:focus.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:focus[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:focus[readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field__input.is-focus.is-hover:not(:-moz-placeholder-shown) ~ .fn-text-field__input-border::before,
+  .fn-text-field__input.is-focus:hover:not(:-moz-placeholder-shown) ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:focus.is-hover:not(:-moz-placeholder-shown) ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:focus:hover:not(:-moz-placeholder-shown) ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field__input.is-focus.is-hover:not(:-ms-input-placeholder) ~ .fn-text-field__input-border::before,
+  .fn-text-field__input.is-focus:hover:not(:-ms-input-placeholder) ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:focus.is-hover:not(:-ms-input-placeholder) ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:focus:hover:not(:-ms-input-placeholder) ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field__input.is-focus.is-hover:not(:placeholder-shown) ~ .fn-text-field__input-border::before,
+  .fn-text-field__input.is-focus:hover:not(:placeholder-shown) ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:focus.is-hover:not(:placeholder-shown) ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:focus:hover:not(:placeholder-shown) ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field__input.is-disabled,
+  .fn-text-field__input:disabled,
+  .fn-text-field__input[aria-disabled=true] {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: #f5f6f7
+  }
+  .fn-text-field__input.is-disabled + .fn-text-field__input-border::before,
+  .fn-text-field__input:disabled + .fn-text-field__input-border::before,
+  .fn-text-field__input[aria-disabled=true] + .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field__input.is-disabled.is-readonly,
+  .fn-text-field__input.is-disabled[aria-readonly=true],
+  .fn-text-field__input.is-disabled[readonly],
+  .fn-text-field__input:disabled.is-readonly,
+  .fn-text-field__input:disabled[aria-readonly=true],
+  .fn-text-field__input:disabled[readonly],
+  .fn-text-field__input[aria-disabled=true].is-readonly,
+  .fn-text-field__input[aria-disabled=true][aria-readonly=true],
+  .fn-text-field__input[aria-disabled=true][readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field__input.is-disabled.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field__input.is-disabled[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field__input.is-disabled[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:disabled.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:disabled[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field__input:disabled[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field__input[aria-disabled=true].is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field__input[aria-disabled=true][aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field__input[aria-disabled=true][readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field__input.is-disabled::-webkit-input-placeholder,
+  .fn-text-field__input:disabled::-webkit-input-placeholder,
+  .fn-text-field__input[aria-disabled=true]::-webkit-input-placeholder {
+    color: #8396a8
+  }
+  .fn-text-field__input.is-disabled::-moz-placeholder,
+  .fn-text-field__input:disabled::-moz-placeholder,
+  .fn-text-field__input[aria-disabled=true]::-moz-placeholder {
+    color: #8396a8
+  }
+  .fn-text-field__input.is-disabled:-ms-input-placeholder,
+  .fn-text-field__input:disabled:-ms-input-placeholder,
+  .fn-text-field__input[aria-disabled=true]:-ms-input-placeholder {
+    color: #8396a8
+  }
+  .fn-text-field__input.is-disabled::-ms-input-placeholder,
+  .fn-text-field__input:disabled::-ms-input-placeholder,
+  .fn-text-field__input[aria-disabled=true]::-ms-input-placeholder {
+    color: #8396a8
+  }
+  .fn-text-field__input.is-disabled::placeholder,
+  .fn-text-field__input:disabled::placeholder,
+  .fn-text-field__input[aria-disabled=true]::placeholder {
+    color: #8396a8
+  }
+  .fn-text-field__input-border {
+    font-family: "72","72full",Arial,Helvetica,sans-serif;
+    font-size: .875rem;
+    line-height: 1.5rem;
+    color: #223548;
+    font-weight: 400;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    pointer-events: none;
+    height: 2rem;
+    border-radius: .5rem
+  }
+  .fn-text-field__input-border::after,
+  .fn-text-field__input-border::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
+  }
+  .fn-text-field__input-border::before {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    width: 100%;
+    height: .125rem;
+    position: absolute;
+    background: #8396a8
+  }
+  .fn-text-field--information [class*=sap-icon] {
+    font-size: 1.125rem;
+    color: #1b90ff
+  }
+  .fn-text-field--information .fn-text-field__label {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: #ebf8ff
+  }
+  .fn-text-field--information .fn-text-field__input + .fn-text-field__input-border::before {
+    background: #1b90ff
+  }
+  .fn-text-field--information .fn-text-field__input.is-readonly,
+  .fn-text-field--information .fn-text-field__input[aria-readonly=true],
+  .fn-text-field--information .fn-text-field__input[readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field--information .fn-text-field__input.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input[readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--information .fn-text-field__input::-webkit-input-placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input::-moz-placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input:-ms-input-placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input::-ms-input-placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input::placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input.is-hover,
+  .fn-text-field--information .fn-text-field__input:hover {
+    -webkit-box-shadow: 0 0 2px rgba(27,144,255,.16),0 8px 16px rgba(27,144,255,.16);
+    box-shadow: 0 0 2px rgba(27,144,255,.16),0 8px 16px rgba(27,144,255,.16);
+    background: #fff
+  }
+  .fn-text-field--information .fn-text-field__input.is-hover + .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input:hover + .fn-text-field__input-border::before {
+    background: #1b90ff
+  }
+  .fn-text-field--information .fn-text-field__input.is-hover.is-readonly,
+  .fn-text-field--information .fn-text-field__input.is-hover[aria-readonly=true],
+  .fn-text-field--information .fn-text-field__input.is-hover[readonly],
+  .fn-text-field--information .fn-text-field__input:hover.is-readonly,
+  .fn-text-field--information .fn-text-field__input:hover[aria-readonly=true],
+  .fn-text-field--information .fn-text-field__input:hover[readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field--information .fn-text-field__input.is-hover.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input.is-hover[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input.is-hover[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input:hover.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input:hover[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input:hover[readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--information .fn-text-field__input.is-hover::-webkit-input-placeholder,
+  .fn-text-field--information .fn-text-field__input:hover::-webkit-input-placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input.is-hover::-moz-placeholder,
+  .fn-text-field--information .fn-text-field__input:hover::-moz-placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input.is-hover:-ms-input-placeholder,
+  .fn-text-field--information .fn-text-field__input:hover:-ms-input-placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input.is-hover::-ms-input-placeholder,
+  .fn-text-field--information .fn-text-field__input:hover::-ms-input-placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input.is-hover::placeholder,
+  .fn-text-field--information .fn-text-field__input:hover::placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input.is-pressed,
+  .fn-text-field--information .fn-text-field__input[aria-pressed=true] {
+    -webkit-box-shadow: 0 0 2px rgba(27,144,255,.16),0 4px 8px rgba(27,144,255,.16);
+    box-shadow: 0 0 2px rgba(27,144,255,.16),0 4px 8px rgba(27,144,255,.16);
+    background: #fff
+  }
+  .fn-text-field--information .fn-text-field__input.is-pressed + .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input[aria-pressed=true] + .fn-text-field__input-border::before {
+    background: #1b90ff
+  }
+  .fn-text-field--information .fn-text-field__input.is-pressed.is-readonly,
+  .fn-text-field--information .fn-text-field__input.is-pressed[aria-readonly=true],
+  .fn-text-field--information .fn-text-field__input.is-pressed[readonly],
+  .fn-text-field--information .fn-text-field__input[aria-pressed=true].is-readonly,
+  .fn-text-field--information .fn-text-field__input[aria-pressed=true][aria-readonly=true],
+  .fn-text-field--information .fn-text-field__input[aria-pressed=true][readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field--information .fn-text-field__input.is-pressed.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input.is-pressed[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input.is-pressed[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input[aria-pressed=true].is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input[aria-pressed=true][aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input[aria-pressed=true][readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--information .fn-text-field__input.is-pressed::-webkit-input-placeholder,
+  .fn-text-field--information .fn-text-field__input[aria-pressed=true]::-webkit-input-placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input.is-pressed::-moz-placeholder,
+  .fn-text-field--information .fn-text-field__input[aria-pressed=true]::-moz-placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input.is-pressed:-ms-input-placeholder,
+  .fn-text-field--information .fn-text-field__input[aria-pressed=true]:-ms-input-placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input.is-pressed::-ms-input-placeholder,
+  .fn-text-field--information .fn-text-field__input[aria-pressed=true]::-ms-input-placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input.is-pressed::placeholder,
+  .fn-text-field--information .fn-text-field__input[aria-pressed=true]::placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input.is-active,
+  .fn-text-field--information .fn-text-field__input:active {
+    -webkit-box-shadow: 0 0 2px rgba(27,144,255,.16),0 4px 8px rgba(27,144,255,.16);
+    box-shadow: 0 0 2px rgba(27,144,255,.16),0 4px 8px rgba(27,144,255,.16);
+    background: #fff
+  }
+  .fn-text-field--information .fn-text-field__input.is-active + .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input:active + .fn-text-field__input-border::before {
+    background: #1b90ff
+  }
+  .fn-text-field--information .fn-text-field__input.is-active.is-readonly,
+  .fn-text-field--information .fn-text-field__input.is-active[aria-readonly=true],
+  .fn-text-field--information .fn-text-field__input.is-active[readonly],
+  .fn-text-field--information .fn-text-field__input:active.is-readonly,
+  .fn-text-field--information .fn-text-field__input:active[aria-readonly=true],
+  .fn-text-field--information .fn-text-field__input:active[readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field--information .fn-text-field__input.is-active.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input.is-active[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input.is-active[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input:active.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input:active[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input:active[readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--information .fn-text-field__input.is-active::-webkit-input-placeholder,
+  .fn-text-field--information .fn-text-field__input:active::-webkit-input-placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input.is-active::-moz-placeholder,
+  .fn-text-field--information .fn-text-field__input:active::-moz-placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input.is-active:-ms-input-placeholder,
+  .fn-text-field--information .fn-text-field__input:active:-ms-input-placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input.is-active::-ms-input-placeholder,
+  .fn-text-field--information .fn-text-field__input:active::-ms-input-placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input.is-active::placeholder,
+  .fn-text-field--information .fn-text-field__input:active::placeholder {
+    color: #0070f2
+  }
+  .fn-text-field--information .fn-text-field__input.is-focus,
+  .fn-text-field--information .fn-text-field__input:focus {
+    z-index: 5;
+    -webkit-box-shadow: 0 0 2px rgba(27,144,255,.16),0 8px 16px rgba(27,144,255,.16),0 0 0 .125rem #1b90ff;
+    box-shadow: 0 0 2px rgba(27,144,255,.16),0 8px 16px rgba(27,144,255,.16),0 0 0 .125rem #1b90ff;
+    background: #fff;
+    outline: 0
+  }
+  .fn-text-field--information .fn-text-field__input.is-focus + .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input:focus + .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--information .fn-text-field__input.is-focus.is-readonly,
+  .fn-text-field--information .fn-text-field__input.is-focus[aria-readonly=true],
+  .fn-text-field--information .fn-text-field__input.is-focus[readonly],
+  .fn-text-field--information .fn-text-field__input:focus.is-readonly,
+  .fn-text-field--information .fn-text-field__input:focus[aria-readonly=true],
+  .fn-text-field--information .fn-text-field__input:focus[readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field--information .fn-text-field__input.is-focus.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input.is-focus[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input.is-focus[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input:focus.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input:focus[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input:focus[readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--information .fn-text-field__input.is-focus::-webkit-input-placeholder,
+  .fn-text-field--information .fn-text-field__input:focus::-webkit-input-placeholder {
+    color: #5b738b
+  }
+  .fn-text-field--information .fn-text-field__input.is-focus::-moz-placeholder,
+  .fn-text-field--information .fn-text-field__input:focus::-moz-placeholder {
+    color: #5b738b
+  }
+  .fn-text-field--information .fn-text-field__input.is-focus:-ms-input-placeholder,
+  .fn-text-field--information .fn-text-field__input:focus:-ms-input-placeholder {
+    color: #5b738b
+  }
+  .fn-text-field--information .fn-text-field__input.is-focus::-ms-input-placeholder,
+  .fn-text-field--information .fn-text-field__input:focus::-ms-input-placeholder {
+    color: #5b738b
+  }
+  .fn-text-field--information .fn-text-field__input.is-focus::placeholder,
+  .fn-text-field--information .fn-text-field__input:focus::placeholder {
+    color: #5b738b
+  }
+  .fn-text-field--information .fn-text-field__input.is-disabled,
+  .fn-text-field--information .fn-text-field__input:disabled,
+  .fn-text-field--information .fn-text-field__input[aria-disabled=true] {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: #f5f6f7
+  }
+  .fn-text-field--information .fn-text-field__input.is-disabled + .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input:disabled + .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input[aria-disabled=true] + .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--information .fn-text-field__input.is-disabled.is-readonly,
+  .fn-text-field--information .fn-text-field__input.is-disabled[aria-readonly=true],
+  .fn-text-field--information .fn-text-field__input.is-disabled[readonly],
+  .fn-text-field--information .fn-text-field__input:disabled.is-readonly,
+  .fn-text-field--information .fn-text-field__input:disabled[aria-readonly=true],
+  .fn-text-field--information .fn-text-field__input:disabled[readonly],
+  .fn-text-field--information .fn-text-field__input[aria-disabled=true].is-readonly,
+  .fn-text-field--information .fn-text-field__input[aria-disabled=true][aria-readonly=true],
+  .fn-text-field--information .fn-text-field__input[aria-disabled=true][readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field--information .fn-text-field__input.is-disabled.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input.is-disabled[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input.is-disabled[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input:disabled.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input:disabled[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input:disabled[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input[aria-disabled=true].is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input[aria-disabled=true][aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--information .fn-text-field__input[aria-disabled=true][readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--information .fn-text-field__input.is-disabled::-webkit-input-placeholder,
+  .fn-text-field--information .fn-text-field__input:disabled::-webkit-input-placeholder,
+  .fn-text-field--information .fn-text-field__input[aria-disabled=true]::-webkit-input-placeholder {
+    color: #8396a8
+  }
+  .fn-text-field--information .fn-text-field__input.is-disabled::-moz-placeholder,
+  .fn-text-field--information .fn-text-field__input:disabled::-moz-placeholder,
+  .fn-text-field--information .fn-text-field__input[aria-disabled=true]::-moz-placeholder {
+    color: #8396a8
+  }
+  .fn-text-field--information .fn-text-field__input.is-disabled:-ms-input-placeholder,
+  .fn-text-field--information .fn-text-field__input:disabled:-ms-input-placeholder,
+  .fn-text-field--information .fn-text-field__input[aria-disabled=true]:-ms-input-placeholder {
+    color: #8396a8
+  }
+  .fn-text-field--information .fn-text-field__input.is-disabled::-ms-input-placeholder,
+  .fn-text-field--information .fn-text-field__input:disabled::-ms-input-placeholder,
+  .fn-text-field--information .fn-text-field__input[aria-disabled=true]::-ms-input-placeholder {
+    color: #8396a8
+  }
+  .fn-text-field--information .fn-text-field__input.is-disabled::placeholder,
+  .fn-text-field--information .fn-text-field__input:disabled::placeholder,
+  .fn-text-field--information .fn-text-field__input[aria-disabled=true]::placeholder {
+    color: #8396a8
+  }
+  .fn-text-field--information.is-disabled .fn-text-field__label,
+  .fn-text-field--information:disabled .fn-text-field__label,
+  .fn-text-field--information[aria-disabled=true] .fn-text-field__label {
+    color: #8396a8
+  }
+  .fn-text-field--information.is-disabled [class*=sap-icon],
+  .fn-text-field--information:disabled [class*=sap-icon],
+  .fn-text-field--information[aria-disabled=true] [class*=sap-icon] {
+    display: none
+  }
+  .fn-text-field--information.is-readonly .fn-text-field__label,
+  .fn-text-field--information[aria-readonly=true] .fn-text-field__label,
+  .fn-text-field--information[readonly] .fn-text-field__label {
+    color: #223548
+  }
+  .fn-text-field--information.is-readonly [class*=sap-icon],
+  .fn-text-field--information[aria-readonly=true] [class*=sap-icon],
+  .fn-text-field--information[readonly] [class*=sap-icon] {
+    display: none
+  }
+  .fn-text-field--warning [class*=sap-icon] {
+    font-size: 1.25rem;
+    color: #f58b00
+  }
+  .fn-text-field--warning .fn-text-field__label {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: #fff8d6
+  }
+  .fn-text-field--warning .fn-text-field__input + .fn-text-field__input-border::before {
+    background: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-readonly,
+  .fn-text-field--warning .fn-text-field__input[aria-readonly=true],
+  .fn-text-field--warning .fn-text-field__input[readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field--warning .fn-text-field__input.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input[readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--warning .fn-text-field__input::-webkit-input-placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input::-moz-placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input:-ms-input-placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input::-ms-input-placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input::placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-hover,
+  .fn-text-field--warning .fn-text-field__input:hover {
+    -webkit-box-shadow: 0 0 2px rgba(255,179,0,.16),0 8px 16px rgba(255,179,0,.16);
+    box-shadow: 0 0 2px rgba(255,179,0,.16),0 8px 16px rgba(255,179,0,.16);
+    background: #fff
+  }
+  .fn-text-field--warning .fn-text-field__input.is-hover + .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input:hover + .fn-text-field__input-border::before {
+    background: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-hover.is-readonly,
+  .fn-text-field--warning .fn-text-field__input.is-hover[aria-readonly=true],
+  .fn-text-field--warning .fn-text-field__input.is-hover[readonly],
+  .fn-text-field--warning .fn-text-field__input:hover.is-readonly,
+  .fn-text-field--warning .fn-text-field__input:hover[aria-readonly=true],
+  .fn-text-field--warning .fn-text-field__input:hover[readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field--warning .fn-text-field__input.is-hover.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input.is-hover[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input.is-hover[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input:hover.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input:hover[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input:hover[readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--warning .fn-text-field__input.is-hover::-webkit-input-placeholder,
+  .fn-text-field--warning .fn-text-field__input:hover::-webkit-input-placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-hover::-moz-placeholder,
+  .fn-text-field--warning .fn-text-field__input:hover::-moz-placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-hover:-ms-input-placeholder,
+  .fn-text-field--warning .fn-text-field__input:hover:-ms-input-placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-hover::-ms-input-placeholder,
+  .fn-text-field--warning .fn-text-field__input:hover::-ms-input-placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-hover::placeholder,
+  .fn-text-field--warning .fn-text-field__input:hover::placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-pressed,
+  .fn-text-field--warning .fn-text-field__input[aria-pressed=true] {
+    -webkit-box-shadow: 0 0 2px rgba(255,179,0,.16),0 4px 8px rgba(255,179,0,.16);
+    box-shadow: 0 0 2px rgba(255,179,0,.16),0 4px 8px rgba(255,179,0,.16);
+    background: #fff
+  }
+  .fn-text-field--warning .fn-text-field__input.is-pressed + .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input[aria-pressed=true] + .fn-text-field__input-border::before {
+    background: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-pressed.is-readonly,
+  .fn-text-field--warning .fn-text-field__input.is-pressed[aria-readonly=true],
+  .fn-text-field--warning .fn-text-field__input.is-pressed[readonly],
+  .fn-text-field--warning .fn-text-field__input[aria-pressed=true].is-readonly,
+  .fn-text-field--warning .fn-text-field__input[aria-pressed=true][aria-readonly=true],
+  .fn-text-field--warning .fn-text-field__input[aria-pressed=true][readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field--warning .fn-text-field__input.is-pressed.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input.is-pressed[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input.is-pressed[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input[aria-pressed=true].is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input[aria-pressed=true][aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input[aria-pressed=true][readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--warning .fn-text-field__input.is-pressed::-webkit-input-placeholder,
+  .fn-text-field--warning .fn-text-field__input[aria-pressed=true]::-webkit-input-placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-pressed::-moz-placeholder,
+  .fn-text-field--warning .fn-text-field__input[aria-pressed=true]::-moz-placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-pressed:-ms-input-placeholder,
+  .fn-text-field--warning .fn-text-field__input[aria-pressed=true]:-ms-input-placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-pressed::-ms-input-placeholder,
+  .fn-text-field--warning .fn-text-field__input[aria-pressed=true]::-ms-input-placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-pressed::placeholder,
+  .fn-text-field--warning .fn-text-field__input[aria-pressed=true]::placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-active,
+  .fn-text-field--warning .fn-text-field__input:active {
+    -webkit-box-shadow: 0 0 2px rgba(255,179,0,.16),0 4px 8px rgba(255,179,0,.16);
+    box-shadow: 0 0 2px rgba(255,179,0,.16),0 4px 8px rgba(255,179,0,.16);
+    background: #fff
+  }
+  .fn-text-field--warning .fn-text-field__input.is-active + .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input:active + .fn-text-field__input-border::before {
+    background: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-active.is-readonly,
+  .fn-text-field--warning .fn-text-field__input.is-active[aria-readonly=true],
+  .fn-text-field--warning .fn-text-field__input.is-active[readonly],
+  .fn-text-field--warning .fn-text-field__input:active.is-readonly,
+  .fn-text-field--warning .fn-text-field__input:active[aria-readonly=true],
+  .fn-text-field--warning .fn-text-field__input:active[readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field--warning .fn-text-field__input.is-active.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input.is-active[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input.is-active[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input:active.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input:active[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input:active[readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--warning .fn-text-field__input.is-active::-webkit-input-placeholder,
+  .fn-text-field--warning .fn-text-field__input:active::-webkit-input-placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-active::-moz-placeholder,
+  .fn-text-field--warning .fn-text-field__input:active::-moz-placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-active:-ms-input-placeholder,
+  .fn-text-field--warning .fn-text-field__input:active:-ms-input-placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-active::-ms-input-placeholder,
+  .fn-text-field--warning .fn-text-field__input:active::-ms-input-placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-active::placeholder,
+  .fn-text-field--warning .fn-text-field__input:active::placeholder {
+    color: #c35500
+  }
+  .fn-text-field--warning .fn-text-field__input.is-focus,
+  .fn-text-field--warning .fn-text-field__input:focus {
+    z-index: 5;
+    -webkit-box-shadow: 0 0 2px rgba(27,144,255,.16),0 8px 16px rgba(27,144,255,.16),0 0 0 .125rem #1b90ff;
+    box-shadow: 0 0 2px rgba(27,144,255,.16),0 8px 16px rgba(27,144,255,.16),0 0 0 .125rem #1b90ff;
+    background: #fff;
+    outline: 0
+  }
+  .fn-text-field--warning .fn-text-field__input.is-focus + .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input:focus + .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--warning .fn-text-field__input.is-focus.is-readonly,
+  .fn-text-field--warning .fn-text-field__input.is-focus[aria-readonly=true],
+  .fn-text-field--warning .fn-text-field__input.is-focus[readonly],
+  .fn-text-field--warning .fn-text-field__input:focus.is-readonly,
+  .fn-text-field--warning .fn-text-field__input:focus[aria-readonly=true],
+  .fn-text-field--warning .fn-text-field__input:focus[readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field--warning .fn-text-field__input.is-focus.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input.is-focus[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input.is-focus[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input:focus.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input:focus[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input:focus[readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--warning .fn-text-field__input.is-focus::-webkit-input-placeholder,
+  .fn-text-field--warning .fn-text-field__input:focus::-webkit-input-placeholder {
+    color: #5b738b
+  }
+  .fn-text-field--warning .fn-text-field__input.is-focus::-moz-placeholder,
+  .fn-text-field--warning .fn-text-field__input:focus::-moz-placeholder {
+    color: #5b738b
+  }
+  .fn-text-field--warning .fn-text-field__input.is-focus:-ms-input-placeholder,
+  .fn-text-field--warning .fn-text-field__input:focus:-ms-input-placeholder {
+    color: #5b738b
+  }
+  .fn-text-field--warning .fn-text-field__input.is-focus::-ms-input-placeholder,
+  .fn-text-field--warning .fn-text-field__input:focus::-ms-input-placeholder {
+    color: #5b738b
+  }
+  .fn-text-field--warning .fn-text-field__input.is-focus::placeholder,
+  .fn-text-field--warning .fn-text-field__input:focus::placeholder {
+    color: #5b738b
+  }
+  .fn-text-field--warning .fn-text-field__input.is-disabled,
+  .fn-text-field--warning .fn-text-field__input:disabled,
+  .fn-text-field--warning .fn-text-field__input[aria-disabled=true] {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: #f5f6f7
+  }
+  .fn-text-field--warning .fn-text-field__input.is-disabled + .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input:disabled + .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input[aria-disabled=true] + .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--warning .fn-text-field__input.is-disabled.is-readonly,
+  .fn-text-field--warning .fn-text-field__input.is-disabled[aria-readonly=true],
+  .fn-text-field--warning .fn-text-field__input.is-disabled[readonly],
+  .fn-text-field--warning .fn-text-field__input:disabled.is-readonly,
+  .fn-text-field--warning .fn-text-field__input:disabled[aria-readonly=true],
+  .fn-text-field--warning .fn-text-field__input:disabled[readonly],
+  .fn-text-field--warning .fn-text-field__input[aria-disabled=true].is-readonly,
+  .fn-text-field--warning .fn-text-field__input[aria-disabled=true][aria-readonly=true],
+  .fn-text-field--warning .fn-text-field__input[aria-disabled=true][readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field--warning .fn-text-field__input.is-disabled.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input.is-disabled[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input.is-disabled[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input:disabled.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input:disabled[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input:disabled[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input[aria-disabled=true].is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input[aria-disabled=true][aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--warning .fn-text-field__input[aria-disabled=true][readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--warning .fn-text-field__input.is-disabled::-webkit-input-placeholder,
+  .fn-text-field--warning .fn-text-field__input:disabled::-webkit-input-placeholder,
+  .fn-text-field--warning .fn-text-field__input[aria-disabled=true]::-webkit-input-placeholder {
+    color: #8396a8
+  }
+  .fn-text-field--warning .fn-text-field__input.is-disabled::-moz-placeholder,
+  .fn-text-field--warning .fn-text-field__input:disabled::-moz-placeholder,
+  .fn-text-field--warning .fn-text-field__input[aria-disabled=true]::-moz-placeholder {
+    color: #8396a8
+  }
+  .fn-text-field--warning .fn-text-field__input.is-disabled:-ms-input-placeholder,
+  .fn-text-field--warning .fn-text-field__input:disabled:-ms-input-placeholder,
+  .fn-text-field--warning .fn-text-field__input[aria-disabled=true]:-ms-input-placeholder {
+    color: #8396a8
+  }
+  .fn-text-field--warning .fn-text-field__input.is-disabled::-ms-input-placeholder,
+  .fn-text-field--warning .fn-text-field__input:disabled::-ms-input-placeholder,
+  .fn-text-field--warning .fn-text-field__input[aria-disabled=true]::-ms-input-placeholder {
+    color: #8396a8
+  }
+  .fn-text-field--warning .fn-text-field__input.is-disabled::placeholder,
+  .fn-text-field--warning .fn-text-field__input:disabled::placeholder,
+  .fn-text-field--warning .fn-text-field__input[aria-disabled=true]::placeholder {
+    color: #8396a8
+  }
+  .fn-text-field--warning.is-disabled .fn-text-field__label,
+  .fn-text-field--warning:disabled .fn-text-field__label,
+  .fn-text-field--warning[aria-disabled=true] .fn-text-field__label {
+    color: #8396a8
+  }
+  .fn-text-field--warning.is-disabled [class*=sap-icon],
+  .fn-text-field--warning:disabled [class*=sap-icon],
+  .fn-text-field--warning[aria-disabled=true] [class*=sap-icon] {
+    display: none
+  }
+  .fn-text-field--warning.is-readonly .fn-text-field__label,
+  .fn-text-field--warning[aria-readonly=true] .fn-text-field__label,
+  .fn-text-field--warning[readonly] .fn-text-field__label {
+    color: #223548
+  }
+  .fn-text-field--warning.is-readonly [class*=sap-icon],
+  .fn-text-field--warning[aria-readonly=true] [class*=sap-icon],
+  .fn-text-field--warning[readonly] [class*=sap-icon] {
+    display: none
+  }
+  .fn-text-field--error [class*=sap-icon] {
+    font-size: 1.25rem;
+    color: #ee3939
+  }
+  .fn-text-field--error .fn-text-field__label {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: #ffeaf4
+  }
+  .fn-text-field--error .fn-text-field__input + .fn-text-field__input-border::before {
+    background: #ee3939
+  }
+  .fn-text-field--error .fn-text-field__input.is-readonly,
+  .fn-text-field--error .fn-text-field__input[aria-readonly=true],
+  .fn-text-field--error .fn-text-field__input[readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field--error .fn-text-field__input.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input[readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--error .fn-text-field__input::-webkit-input-placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input::-moz-placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input:-ms-input-placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input::-ms-input-placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input::placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input.is-hover,
+  .fn-text-field--error .fn-text-field__input:hover {
+    -webkit-box-shadow: 0 0 2px rgba(245,40,40,.16),0 8px 16px rgba(245,40,40,.16);
+    box-shadow: 0 0 2px rgba(245,40,40,.16),0 8px 16px rgba(245,40,40,.16);
+    background: #fff
+  }
+  .fn-text-field--error .fn-text-field__input.is-hover + .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input:hover + .fn-text-field__input-border::before {
+    background: #ee3939
+  }
+  .fn-text-field--error .fn-text-field__input.is-hover.is-readonly,
+  .fn-text-field--error .fn-text-field__input.is-hover[aria-readonly=true],
+  .fn-text-field--error .fn-text-field__input.is-hover[readonly],
+  .fn-text-field--error .fn-text-field__input:hover.is-readonly,
+  .fn-text-field--error .fn-text-field__input:hover[aria-readonly=true],
+  .fn-text-field--error .fn-text-field__input:hover[readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field--error .fn-text-field__input.is-hover.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input.is-hover[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input.is-hover[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input:hover.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input:hover[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input:hover[readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--error .fn-text-field__input.is-hover::-webkit-input-placeholder,
+  .fn-text-field--error .fn-text-field__input:hover::-webkit-input-placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input.is-hover::-moz-placeholder,
+  .fn-text-field--error .fn-text-field__input:hover::-moz-placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input.is-hover:-ms-input-placeholder,
+  .fn-text-field--error .fn-text-field__input:hover:-ms-input-placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input.is-hover::-ms-input-placeholder,
+  .fn-text-field--error .fn-text-field__input:hover::-ms-input-placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input.is-hover::placeholder,
+  .fn-text-field--error .fn-text-field__input:hover::placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input.is-pressed,
+  .fn-text-field--error .fn-text-field__input[aria-pressed=true] {
+    -webkit-box-shadow: 0 0 2px rgba(245,40,40,.16),0 4px 8px rgba(245,40,40,.16);
+    box-shadow: 0 0 2px rgba(245,40,40,.16),0 4px 8px rgba(245,40,40,.16);
+    background: #fff
+  }
+  .fn-text-field--error .fn-text-field__input.is-pressed + .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input[aria-pressed=true] + .fn-text-field__input-border::before {
+    background: #ee3939
+  }
+  .fn-text-field--error .fn-text-field__input.is-pressed.is-readonly,
+  .fn-text-field--error .fn-text-field__input.is-pressed[aria-readonly=true],
+  .fn-text-field--error .fn-text-field__input.is-pressed[readonly],
+  .fn-text-field--error .fn-text-field__input[aria-pressed=true].is-readonly,
+  .fn-text-field--error .fn-text-field__input[aria-pressed=true][aria-readonly=true],
+  .fn-text-field--error .fn-text-field__input[aria-pressed=true][readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field--error .fn-text-field__input.is-pressed.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input.is-pressed[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input.is-pressed[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input[aria-pressed=true].is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input[aria-pressed=true][aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input[aria-pressed=true][readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--error .fn-text-field__input.is-pressed::-webkit-input-placeholder,
+  .fn-text-field--error .fn-text-field__input[aria-pressed=true]::-webkit-input-placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input.is-pressed::-moz-placeholder,
+  .fn-text-field--error .fn-text-field__input[aria-pressed=true]::-moz-placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input.is-pressed:-ms-input-placeholder,
+  .fn-text-field--error .fn-text-field__input[aria-pressed=true]:-ms-input-placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input.is-pressed::-ms-input-placeholder,
+  .fn-text-field--error .fn-text-field__input[aria-pressed=true]::-ms-input-placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input.is-pressed::placeholder,
+  .fn-text-field--error .fn-text-field__input[aria-pressed=true]::placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input.is-active,
+  .fn-text-field--error .fn-text-field__input:active {
+    -webkit-box-shadow: 0 0 2px rgba(245,40,40,.16),0 4px 8px rgba(245,40,40,.16);
+    box-shadow: 0 0 2px rgba(245,40,40,.16),0 4px 8px rgba(245,40,40,.16);
+    background: #fff
+  }
+  .fn-text-field--error .fn-text-field__input.is-active + .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input:active + .fn-text-field__input-border::before {
+    background: #ee3939
+  }
+  .fn-text-field--error .fn-text-field__input.is-active.is-readonly,
+  .fn-text-field--error .fn-text-field__input.is-active[aria-readonly=true],
+  .fn-text-field--error .fn-text-field__input.is-active[readonly],
+  .fn-text-field--error .fn-text-field__input:active.is-readonly,
+  .fn-text-field--error .fn-text-field__input:active[aria-readonly=true],
+  .fn-text-field--error .fn-text-field__input:active[readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field--error .fn-text-field__input.is-active.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input.is-active[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input.is-active[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input:active.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input:active[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input:active[readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--error .fn-text-field__input.is-active::-webkit-input-placeholder,
+  .fn-text-field--error .fn-text-field__input:active::-webkit-input-placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input.is-active::-moz-placeholder,
+  .fn-text-field--error .fn-text-field__input:active::-moz-placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input.is-active:-ms-input-placeholder,
+  .fn-text-field--error .fn-text-field__input:active:-ms-input-placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input.is-active::-ms-input-placeholder,
+  .fn-text-field--error .fn-text-field__input:active::-ms-input-placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input.is-active::placeholder,
+  .fn-text-field--error .fn-text-field__input:active::placeholder {
+    color: #d20a0a
+  }
+  .fn-text-field--error .fn-text-field__input.is-focus,
+  .fn-text-field--error .fn-text-field__input:focus {
+    z-index: 5;
+    -webkit-box-shadow: 0 0 2px rgba(27,144,255,.16),0 8px 16px rgba(27,144,255,.16),0 0 0 .125rem #1b90ff;
+    box-shadow: 0 0 2px rgba(27,144,255,.16),0 8px 16px rgba(27,144,255,.16),0 0 0 .125rem #1b90ff;
+    background: #fff;
+    outline: 0
+  }
+  .fn-text-field--error .fn-text-field__input.is-focus + .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input:focus + .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--error .fn-text-field__input.is-focus.is-readonly,
+  .fn-text-field--error .fn-text-field__input.is-focus[aria-readonly=true],
+  .fn-text-field--error .fn-text-field__input.is-focus[readonly],
+  .fn-text-field--error .fn-text-field__input:focus.is-readonly,
+  .fn-text-field--error .fn-text-field__input:focus[aria-readonly=true],
+  .fn-text-field--error .fn-text-field__input:focus[readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field--error .fn-text-field__input.is-focus.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input.is-focus[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input.is-focus[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input:focus.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input:focus[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input:focus[readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--error .fn-text-field__input.is-focus::-webkit-input-placeholder,
+  .fn-text-field--error .fn-text-field__input:focus::-webkit-input-placeholder {
+    color: #5b738b
+  }
+  .fn-text-field--error .fn-text-field__input.is-focus::-moz-placeholder,
+  .fn-text-field--error .fn-text-field__input:focus::-moz-placeholder {
+    color: #5b738b
+  }
+  .fn-text-field--error .fn-text-field__input.is-focus:-ms-input-placeholder,
+  .fn-text-field--error .fn-text-field__input:focus:-ms-input-placeholder {
+    color: #5b738b
+  }
+  .fn-text-field--error .fn-text-field__input.is-focus::-ms-input-placeholder,
+  .fn-text-field--error .fn-text-field__input:focus::-ms-input-placeholder {
+    color: #5b738b
+  }
+  .fn-text-field--error .fn-text-field__input.is-focus::placeholder,
+  .fn-text-field--error .fn-text-field__input:focus::placeholder {
+    color: #5b738b
+  }
+  .fn-text-field--error .fn-text-field__input.is-disabled,
+  .fn-text-field--error .fn-text-field__input:disabled,
+  .fn-text-field--error .fn-text-field__input[aria-disabled=true] {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: #f5f6f7
+  }
+  .fn-text-field--error .fn-text-field__input.is-disabled + .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input:disabled + .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input[aria-disabled=true] + .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--error .fn-text-field__input.is-disabled.is-readonly,
+  .fn-text-field--error .fn-text-field__input.is-disabled[aria-readonly=true],
+  .fn-text-field--error .fn-text-field__input.is-disabled[readonly],
+  .fn-text-field--error .fn-text-field__input:disabled.is-readonly,
+  .fn-text-field--error .fn-text-field__input:disabled[aria-readonly=true],
+  .fn-text-field--error .fn-text-field__input:disabled[readonly],
+  .fn-text-field--error .fn-text-field__input[aria-disabled=true].is-readonly,
+  .fn-text-field--error .fn-text-field__input[aria-disabled=true][aria-readonly=true],
+  .fn-text-field--error .fn-text-field__input[aria-disabled=true][readonly] {
+    background: #f5f6f7
+  }
+  .fn-text-field--error .fn-text-field__input.is-disabled.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input.is-disabled[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input.is-disabled[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input:disabled.is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input:disabled[aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input:disabled[readonly] ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input[aria-disabled=true].is-readonly ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input[aria-disabled=true][aria-readonly=true] ~ .fn-text-field__input-border::before,
+  .fn-text-field--error .fn-text-field__input[aria-disabled=true][readonly] ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--error .fn-text-field__input.is-disabled::-webkit-input-placeholder,
+  .fn-text-field--error .fn-text-field__input:disabled::-webkit-input-placeholder,
+  .fn-text-field--error .fn-text-field__input[aria-disabled=true]::-webkit-input-placeholder {
+    color: #8396a8
+  }
+  .fn-text-field--error .fn-text-field__input.is-disabled::-moz-placeholder,
+  .fn-text-field--error .fn-text-field__input:disabled::-moz-placeholder,
+  .fn-text-field--error .fn-text-field__input[aria-disabled=true]::-moz-placeholder {
+    color: #8396a8
+  }
+  .fn-text-field--error .fn-text-field__input.is-disabled:-ms-input-placeholder,
+  .fn-text-field--error .fn-text-field__input:disabled:-ms-input-placeholder,
+  .fn-text-field--error .fn-text-field__input[aria-disabled=true]:-ms-input-placeholder {
+    color: #8396a8
+  }
+  .fn-text-field--error .fn-text-field__input.is-disabled::-ms-input-placeholder,
+  .fn-text-field--error .fn-text-field__input:disabled::-ms-input-placeholder,
+  .fn-text-field--error .fn-text-field__input[aria-disabled=true]::-ms-input-placeholder {
+    color: #8396a8
+  }
+  .fn-text-field--error .fn-text-field__input.is-disabled::placeholder,
+  .fn-text-field--error .fn-text-field__input:disabled::placeholder,
+  .fn-text-field--error .fn-text-field__input[aria-disabled=true]::placeholder {
+    color: #8396a8
+  }
+  .fn-text-field--error.is-disabled .fn-text-field__label,
+  .fn-text-field--error:disabled .fn-text-field__label,
+  .fn-text-field--error[aria-disabled=true] .fn-text-field__label {
+    color: #8396a8
+  }
+  .fn-text-field--error.is-disabled [class*=sap-icon],
+  .fn-text-field--error:disabled [class*=sap-icon],
+  .fn-text-field--error[aria-disabled=true] [class*=sap-icon] {
+    display: none
+  }
+  .fn-text-field--error.is-readonly .fn-text-field__label,
+  .fn-text-field--error[aria-readonly=true] .fn-text-field__label,
+  .fn-text-field--error[readonly] .fn-text-field__label {
+    color: #223548
+  }
+  .fn-text-field--error.is-readonly [class*=sap-icon],
+  .fn-text-field--error[aria-readonly=true] [class*=sap-icon],
+  .fn-text-field--error[readonly] [class*=sap-icon] {
+    display: none
+  }
+  .fn-text-field--success.is-disabled .fn-text-field__label,
+  .fn-text-field--success:disabled .fn-text-field__label,
+  .fn-text-field--success[aria-disabled=true] .fn-text-field__label {
+    color: #8396a8
+  }
+  .fn-text-field--success.is-disabled [class*=sap-icon],
+  .fn-text-field--success:disabled [class*=sap-icon],
+  .fn-text-field--success[aria-disabled=true] [class*=sap-icon] {
+    display: none
+  }
+  .fn-text-field--success.is-readonly .fn-text-field__label,
+  .fn-text-field--success[aria-readonly=true] .fn-text-field__label,
+  .fn-text-field--success[readonly] .fn-text-field__label {
+    color: #223548
+  }
+  .fn-text-field--success.is-readonly [class*=sap-icon],
+  .fn-text-field--success[aria-readonly=true] [class*=sap-icon],
+  .fn-text-field--success[readonly] [class*=sap-icon] {
+    display: none
+  }
+  .fn-text-field--success [class*=sap-icon] {
+    display: none
+  }
+  .fn-text-field--success .fn-text-field__input.is-focus,
+  .fn-text-field--success .fn-text-field__input:focus {
+    z-index: 5
+  }
+  .fn-text-field--success .fn-text-field__input.is-focus:not(:-moz-placeholder-shown) ~ .fn-text-field__input-border::before,
+  .fn-text-field--success .fn-text-field__input:focus:not(:-moz-placeholder-shown) ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--success .fn-text-field__input.is-focus:not(:-ms-input-placeholder) ~ .fn-text-field__input-border::before,
+  .fn-text-field--success .fn-text-field__input:focus:not(:-ms-input-placeholder) ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--success .fn-text-field__input.is-focus:not(:placeholder-shown) ~ .fn-text-field__input-border::before,
+  .fn-text-field--success .fn-text-field__input:focus:not(:placeholder-shown) ~ .fn-text-field__input-border::before {
+    background: 0 0
+  }
+  .fn-text-field--success .fn-text-field__input.is-focus:not(:-moz-placeholder-shown) ~ [class*=sap-icon],
+  .fn-text-field--success .fn-text-field__input:focus:not(:-moz-placeholder-shown) ~ [class*=sap-icon] {
+    display: none
+  }
+  .fn-text-field--success .fn-text-field__input.is-focus:not(:-ms-input-placeholder) ~ [class*=sap-icon],
+  .fn-text-field--success .fn-text-field__input:focus:not(:-ms-input-placeholder) ~ [class*=sap-icon] {
+    display: none
+  }
+  .fn-text-field--success .fn-text-field__input.is-focus:not(:placeholder-shown) ~ [class*=sap-icon],
+  .fn-text-field--success .fn-text-field__input:focus:not(:placeholder-shown) ~ [class*=sap-icon] {
+    display: none
+  }
+  .fn-text-field--success .fn-text-field__input:not(:-moz-placeholder-shown) ~ .fn-text-field__input-border::before {
+    background: #36a41d
+  }
+  .fn-text-field--success .fn-text-field__input:not(:-ms-input-placeholder) ~ .fn-text-field__input-border::before {
+    background: #36a41d
+  }
+  .fn-text-field--success .fn-text-field__input:not(:placeholder-shown) ~ .fn-text-field__input-border::before {
+    background: #36a41d
+  }
+  .fn-text-field--success .fn-text-field__input:not(:-moz-placeholder-shown) ~ [class*=sap-icon] {
+    font-size: 1.25rem;
+    display: inline-block;
+    color: #36a41d
+  }
+  .fn-text-field--success .fn-text-field__input:not(:-ms-input-placeholder) ~ [class*=sap-icon] {
+    font-size: 1.25rem;
+    display: inline-block;
+    color: #36a41d
+  }
+  .fn-text-field--success .fn-text-field__input:not(:placeholder-shown) ~ [class*=sap-icon] {
+    font-size: 1.25rem;
+    display: inline-block;
+    color: #36a41d
+  }

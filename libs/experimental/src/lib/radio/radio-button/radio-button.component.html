@@ -1,9 +1,9 @@
 <label
     class="fn-radio"
-    tabindex="0"
-    [attr.tabindex]="tabIndex || 0"
+    [class.is-disabled]="disabled"
+    [tabindex]="disabled ? -1 : (tabIndex || 0)"
     [attr.title]="title"
-    [for]="id"
+    (keydown)="keydownHandler($event)"
     (click)="labelClicked($event)"
 >
     <input

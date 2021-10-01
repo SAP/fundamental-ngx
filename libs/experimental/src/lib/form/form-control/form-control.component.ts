@@ -3,6 +3,7 @@ import {
     Component,
     ElementRef,
     Host,
+    HostBinding,
     Inject,
     Input,
     OnChanges,
@@ -40,11 +41,44 @@ export class ExperimentalFormControlComponent implements CssClassBuilder, OnInit
     @Input()
     set state(value: FormStates) {
         this._state = value;
-        this._formItem.setState(value);
+
+        if (this._formItem) {
+            this._formItem.state = value;
+            this._formItem.updateState();
+        }
     }
 
     get state(): FormStates {
         return this._state;
+    }
+
+    @Input()
+    @HostBinding('disabled')
+    set disabled(value: boolean) {
+        this._disabled = value;
+        if (this._formItem) {
+            this._formItem.disabled = value;
+            this._formItem.updateState();
+        }
+    }
+
+    get disabled(): boolean {
+        return this._disabled;
+    }
+
+    @Input()
+    @HostBinding('readonly')
+    set readonly(value: boolean) {
+        this._readonly = value;
+
+        if (this._formItem) {
+            this._formItem.readonly = value;
+            this._formItem.updateState();
+        }
+    }
+
+    get readonly(): boolean {
+        return this._readonly;
     }
 
     /**
@@ -64,6 +98,10 @@ export class ExperimentalFormControlComponent implements CssClassBuilder, OnInit
     private _subscriptions = new Subscription();
 
     private _state: FormStates;
+
+    private _disabled = false;
+
+    private _readonly = false;
 
     @applyCssClass
     /** CssClassBuilder interface implementation
