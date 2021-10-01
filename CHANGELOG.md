@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.21 (2021-10-01)
+
+
+### Features
+
+* **platform:** table semantic highlighting ([#6716](https://github.com/SAP/fundamental-ngx/issues/6716)) ([b781662](https://github.com/SAP/fundamental-ngx/commit/b781662e0ad244da2a7939c2b0f1acd7e84608b8))
+
 ### 0.32.2-rc.20 (2021-10-01)
 
 
