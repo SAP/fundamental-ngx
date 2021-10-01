@@ -357,10 +357,15 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
             @include hide-scrollbar();
         }
 
-        .fd-table__row:last-of-type {
+        &:not(.fixed-height) .fd-table__row:last-of-type {
             .fd-table__cell {
                 border-bottom: 0;
             }
+        }
+
+        &.fixed-height {
+            background-color: #fff;
+            background-color: var(--sapList_Background, #fff);
         }
     }
 

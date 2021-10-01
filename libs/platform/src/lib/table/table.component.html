@@ -258,6 +258,7 @@
         fdpTableScrollable
         #verticalScrollable="tableScrollable"
         [style.height]="bodyHeight"
+        [class.fixed-height]="!!bodyHeight"
     >
         <div
             *ngIf="_tableRowsVisible.length || loading; else emptyTableTemplate"
