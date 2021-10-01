@@ -1,12 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "types": [
-      "jasmine"
-    ]
-  },
   "angularCompilerOptions": {
     "enableIvy": true
-  },
-  "include": []
+  }
 }
