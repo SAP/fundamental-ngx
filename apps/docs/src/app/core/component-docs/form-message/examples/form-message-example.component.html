@@ -8,9 +8,8 @@
             type="text" 
             id="input-message" 
             placeholder="Field placeholder text" 
-            state="information" 
-            aria-label="This message is triggered by a click event."/>
-        <fd-form-message type="information">
+            state="information"/>
+        <fd-form-message type="information" #label>
             This message is triggered by a click event.
         </fd-form-message>
     </fd-form-input-message-group>
@@ -51,10 +50,9 @@
         placement="bottom"
         [triggers]="['mouseenter', 'mouseleave', 'focusin', 'focusout']"
         [closeOnOutsideClick]="false"
-        [closeOnEscapeKey]="false"
-        aria-label="This message is only triggered by hovering over the InputGroup.">
+        [closeOnEscapeKey]="false">
         <fd-input-group id="group-message" glyph="world" iconTitle="Icon title world" state="information" [button]="true"></fd-input-group>
-        <fd-form-message type="information">
+        <fd-form-message type="information" #label>
             This message is only triggered by hovering over the InputGroup.
         </fd-form-message>
     </fd-form-input-message-group>
@@ -68,13 +66,10 @@
         [triggers]="['focusin', 'focusout']"
         placement="bottom"
         [closeOnOutsideClick]="false"
-        [closeOnEscapeKey]="false"
-        aria-label="This message is only triggered by focusing inside the textarea. The message box placement is also changed.">
+        [closeOnEscapeKey]="false">
         <textarea fd-form-control id="textarea-message" state="information"></textarea>
-        <fd-form-message type="information">
+        <fd-form-message type="information" #label>
             This message is only triggered by focusing inside the textarea. The message box placement is also changed.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
-
-

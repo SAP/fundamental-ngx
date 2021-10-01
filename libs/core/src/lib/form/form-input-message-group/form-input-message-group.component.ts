@@ -1,13 +1,16 @@
 import {
     ChangeDetectionStrategy,
     Component,
+    ContentChild,
     EventEmitter,
+    HostBinding,
     Input,
+    OnInit,
     Output,
     ViewEncapsulation
 } from '@angular/core';
 import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
-
+import { FormMessageComponent } from '../form-message/form-message.component';
 
 @Component({
     selector: 'fd-form-input-message-group',
@@ -16,15 +19,25 @@ import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormInputMessageGroupComponent {
-    /*
+export class FormInputMessageGroupComponent implements OnInit {
+
+    @Input()
+    @HostBinding('attr.aria-label')
+    ariaLabel: string = null;
+
+    /**
+     * use #label to transfer data (nativeElement.textContent), to make aria-Label optional 
+     */    
+    @ContentChild('label', {static: true}) formMessage: FormMessageComponent; 
+
+    /**
      * To allow user to determine what event he wants to trigger the messages to show
      * Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).
      */
     @Input()
     triggers: string[] = ['focusin', 'focusout'];
 
-    /*
+    /**
      * Allows the user to decide if he wants to keep the error message after they click outside
      *  Whether the popover should close when a click is made outside its boundaries.
      */
@@ -60,6 +73,13 @@ export class FormInputMessageGroupComponent {
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    
+    /** @hidden */
+    ngOnInit(): void {
+        if (this.ariaLabel === null && typeof this.formMessage !== 'undefined') {
+            this.ariaLabel = this.formMessage.elementRef().nativeElement.textContent;
+        }
+    }
 
     /**
      * Function is called every time message changes isOpen attribute
