@@ -10,8 +10,6 @@ git config --global user.email $GH_EMAIL
 git config --global user.name $GH_NAME
 git remote set-url origin "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git"
 
-echo $GH_TOKEN | base64
-
 if [[ $TRAVIS_BUILD_STAGE_NAME =~ "Pre-release" ]]; then
    echo "################ Running RC deploy tasks ################"
 
@@ -43,8 +41,6 @@ fi
 
 #git push --follow-tags "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git" $CURRENT_BRANCH > /dev/null;
 git remote -v
-git push --follow-tags origin main -v --no-verify
-git remote set-url origin "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git" -v
 git push --follow-tags origin main -v --no-verify
 npm run build-deploy-library
 
