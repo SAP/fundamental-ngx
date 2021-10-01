@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.19 (2021-10-01)
+
+
+### Features
+
+* **core:** implement vertical navigation ([#6715](https://github.com/SAP/fundamental-ngx/issues/6715)) ([f3e10f4](https://github.com/SAP/fundamental-ngx/commit/f3e10f46a3885bb4b3b82849873d49a5ce933b64))
+
 ### 0.32.2-rc.18 (2021-10-01)
 
 
