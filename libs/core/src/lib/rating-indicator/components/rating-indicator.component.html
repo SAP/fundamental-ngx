@@ -1,10 +1,11 @@
-<div class="fd-rating-indicator__container">
+<!--  role="application" is used in order to let user to change value with left/right arrows in JAWS, since JAWS ovverrides these actions -->
+<div class="fd-rating-indicator__container" role="application" aria-roledescription="Rating indicator">
     <!-- Zero value if we don't have provided value from user, `ratingAverage` or `ratings` -->
     <ng-container *ngTemplateOutlet="zeroRate"></ng-container>
     <!-- Available rate values -->
     <ng-container *ngFor="let rate of _rates; index as i; trackBy: trackByFn">
         <input
-            [attr.aria-label]="i | ratingStarLabel : _rates.length : allowHalves"
+            [attr.aria-label]="i | ratingStarLabel: _rates.length:allowHalves"
             role="button"
             type="radio"
             class="fd-rating-indicator__input"
@@ -13,7 +14,8 @@
             name="rating-{{ viewRatingUID }}"
             [value]="rate.value"
             [checked]="viewValue === rate.value"
-            (click)="onSelect(rate.value)" />
+            (click)="onSelect(rate.value)"
+        />
         <label class="fd-rating-indicator__label" [for]="rate.id" aria-hidden="true">
             <i *ngIf="ratedIcon" class="rated" [ngClass]="unratedIcon"></i>
             <i *ngIf="unratedIcon" class="unrated" [ngClass]="ratedIcon"></i>
@@ -67,7 +69,8 @@
         class="fd-rating-indicator__zero-rating fd-rating-indicator__input"
         (click)="onSelect(0)"
         [disabled]="disabled"
-        name="rating-{{ viewRatingUID }}{{halves ? '-halves' : '' }}"
-        [checked]="viewValue === 0" />
+        name="rating-{{ viewRatingUID }}{{ halves ? '-halves' : '' }}"
+        [checked]="viewValue === 0"
+    />
     <label class="fd-rating-indicator__zero-rating fd-rating-indicator__label" aria-hidden="true"></label>
 </ng-template>

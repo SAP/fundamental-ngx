@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { RatingIndicatorComponent } from './components/rating-indicator.component';
-import {RatingStarLabelPipe} from './pipes/rating-star-label.pipe';
+import { RatingStarLabelPipe } from './pipes/rating-star-label.pipe';
 
 @NgModule({
     declarations: [RatingIndicatorComponent, RatingStarLabelPipe],
