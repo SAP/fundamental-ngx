@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - base64
       - tmp_branch_for_automated_release_do_not_use
       - hotfix_tmp_branch_for_automated_release_do_not_use
 
