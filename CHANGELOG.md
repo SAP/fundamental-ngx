@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.24 (2021-10-01)
+
+
+### Bug Fixes
+
+* **platform:** use placeholder property for form generator ([#6797](https://github.com/SAP/fundamental-ngx/issues/6797)) ([3b161ca](https://github.com/SAP/fundamental-ngx/commit/3b161ca01bb6e501007804872b83ac3326b5e105))
+
 ### 0.32.2-rc.23 (2021-10-01)
 
 ### 0.32.2-rc.22 (2021-10-01)
