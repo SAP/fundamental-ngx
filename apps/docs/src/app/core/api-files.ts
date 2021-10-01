@@ -153,7 +153,10 @@ export const API_FILES = {
         'ListGroupHeaderDirective',
         'ListIconDirective',
         'ListFooterDirective',
-        'ListMessageDirective'
+        'ListMessageDirective',
+        'ListNavigationItemArrowDirective',
+        'ListNavigationItemTextDirective',
+        'ListNavigationItemComponent',
     ],
     menu: [
         'MenuAddonDirective',
@@ -383,6 +386,11 @@ export const API_FILES = {
     resizableCardLayout: [
         'ResizableCardLayoutComponent',
         'ResizableCardItemComponent'
+    ],
+    verticalNavigation: [
+        'VerticalNavigationComponent',
+        'VerticalNavigationMainNavigationComponent',
+        'VerticalNavigationGroupHeaderDirective'
     ],
     uploadCollection: [
         'UploadCollectionComponent',
