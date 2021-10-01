@@ -265,8 +265,8 @@ export abstract class BaseInput extends BaseComponent
      */
     writeValue(value: any): void {
         this._value = value;
-        this.onChange(value);
         this.stateChanges.next('writeValue');
+        this._cd.markForCheck();
     }
 
     get status(): Status {
@@ -330,9 +330,18 @@ export abstract class BaseInput extends BaseComponent
         }
     }
 
-    protected setValue(value: any): void {
+    /**
+     * Used to change the value of a control. 
+     * @param value the value to be applied
+     * @param emitOnChange whether to emit "onChange" event. 
+     * Should be "false", if the change is made programmatically (internally) by the control, "true" otherwise
+     */
+    protected setValue(value: any, emitOnChange = true): void {
         if (value !== this._value) {
             this.writeValue(value);
+            if (emitOnChange) {
+                this.onChange(value);
+            }
             this._cd.markForCheck();
         }
     }
