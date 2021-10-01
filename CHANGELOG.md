@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.20 (2021-10-01)
+
+
+### Bug Fixes
+
+* **core:** pagination a11y ([#6755](https://github.com/SAP/fundamental-ngx/issues/6755)) ([6d2caf7](https://github.com/SAP/fundamental-ngx/commit/6d2caf7ae09af7c30cef4bd2c29b34aacc4fddf2))
+
 ### 0.32.2-rc.19 (2021-10-01)
 
 
