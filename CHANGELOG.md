@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.18 (2021-10-01)
+
+
+### Bug Fixes
+
+* **platform:** table, fix column freezing issue ([#6744](https://github.com/SAP/fundamental-ngx/issues/6744)) ([cef5ae1](https://github.com/SAP/fundamental-ngx/commit/cef5ae167619a8ebc58f9428d8c0b33bc0eaffa6)), closes [#6742](https://github.com/SAP/fundamental-ngx/issues/6742) [#6763](https://github.com/SAP/fundamental-ngx/issues/6763)
+
 ### 0.32.2-rc.17 (2021-10-01)
 
 
