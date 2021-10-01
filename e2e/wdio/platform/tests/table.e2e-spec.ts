@@ -10,12 +10,12 @@ import {
     getText,
     getValue,
     isElementClickable,
-    isElementDisplayed,
+    isElementDisplayed, isEnabled,
     refreshPage,
     scrollIntoView,
     setValue,
     waitForElDisplayed,
-    waitForPresent,
+    waitForPresent
 } from '../../driver/wdio';
 import { checkLtrOrientation, checkRtlOrientation } from '../../helper/assertion-helper';
 import {
@@ -59,7 +59,7 @@ describe('Table component test suite', function() {
         footerButtonOk, dialogItem, columnHeader, tableP13SortExample, tableP13FilterExample, tableP13GroupExample,
         popoverDropdownButton, buttonAdd, buttonRemove, dialogInput, expandedButton, tableCustomColumnExample, inputFields,
         playgroundExample, fdpTable, optionCondensed, optionCozy, optionCompact, dropdown, optionSingle, optionMultiple,
-       tableCellFixed, checkbox, playgroundSchemaInput, toolbarText
+        tableCellFixed, checkbox, playgroundSchemaInput, toolbarText, dropdownList, dropdownOption, dialogButton
     } = tablePage;
 
     beforeAll(() => {
@@ -151,6 +151,17 @@ describe('Table component test suite', function() {
             scrollIntoView(tableSingleRowSelectionExample);
             click(tableSingleRowSelectionExample + tableRow + tableCell);
             expect(getAttributeByName(tableSingleRowSelectionExample + tableRow, 'aria-selected'))
+                .toBe('true');
+        });
+
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/6545
+        xit('should check selected row not gets unselected', () => {
+            scrollIntoView(tableSingleRowSelectionExample);
+            setValue(tableSingleRowSelectionExample + input, 'Astro');
+            click(tableSingleRowSelectionExample + button, 1);
+            click(tableSingleRowSelectionExample + tableCell);
+            click(tableSingleRowSelectionExample + button);
+            expect(getAttributeByName(tableSingleRowSelectionExample + tableRow, 'aria-selected', 1))
                 .toBe('true');
         });
     });
@@ -322,6 +333,16 @@ describe('Table component test suite', function() {
             click(tableLoadingExample + button);
             expect(doesItExist(busyIndicator)).toBe(false, 'busy indicator still displayed');
         });
+
+        // skipped due to https://github.com/SAP/fundamental-ngx/pull/6712
+        xit('should check ', () => {
+            scrollIntoView(tableLoadingExample);
+            click(tableLoadingExample + button);
+            setValue(tableLoadingExample + input, 'Astro');
+            click(tableLoadingExample + button, 2);
+            click(tableLoadingExample + button);
+            expect(isEnabled(tableLoadingExample + button, 1)).toBe(false, 'x button enable');
+        });
     });
 
     describe('Check Page Scrolling', function() {
@@ -440,6 +461,24 @@ describe('Table component test suite', function() {
         it('should check sorting of columns', () => {
             checkSortingColumns(tableP13SortExample, 2);
         });
+
+        it('should check impossible select columns multiple times', () => {
+            scrollIntoView(tableP13SortExample);
+            click(tableP13SortExample + button, 1);
+            click(popoverDropdownButton);
+            expect(isElementDisplayed(dropdownList)).toBe(true);
+            click(dropdownOption);
+
+            click(dialogButton, 1);
+            click(popoverDropdownButton, 2);
+            expect(isElementDisplayed(dropdownList)).toBe(true);
+            click(dropdownOption);
+
+            click(dialogButton, 3);
+            click(popoverDropdownButton, 4);
+            expect(doesItExist(dropdownList)).toBe(false);
+        });
+
     });
 
     describe('Check Filtering by multiple columns', function() {
@@ -597,6 +636,19 @@ describe('Table component test suite', function() {
             click(playgroundExample + checkbox, 5);
             expect(getText(playgroundExample + toolbarText)).toBe('test');
         });
+    });
+
+    it('should check correct operation x button', () => {
+        scrollIntoView(tableDefaultExample);
+        setValue(tableDefaultExample + input, 'Astro');
+        click(tableDefaultExample + button, 1);
+
+        const filterRowCount = getElementArrayLength(tableDefaultExample + tableRow);
+        expect(filterRowCount).toEqual(2);
+
+        click(tableDefaultExample + button);
+        const nonFilterRowCount = getElementArrayLength(tableDefaultExample + tableRow);
+        expect(nonFilterRowCount).toEqual(16);
     });
 
     describe('Check orientation', function() {
