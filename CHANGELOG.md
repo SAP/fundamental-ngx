@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.22 (2021-10-01)
+
+
+### Bug Fixes
+
+* **platform:** table, fix busy state issue ([#6706](https://github.com/SAP/fundamental-ngx/issues/6706)) ([#6712](https://github.com/SAP/fundamental-ngx/issues/6712)) ([b5c87a2](https://github.com/SAP/fundamental-ngx/commit/b5c87a25a39741a18424b156ad948f5783f8fd9e))
+
 ### 0.32.2-rc.21 (2021-10-01)
 
 
