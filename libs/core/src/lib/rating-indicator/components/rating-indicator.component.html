@@ -1,4 +1,5 @@
-<div class="fd-rating-indicator__container">
+<!--  role="application" is used in order to let user to change value with left/right arrows in JAWS, since JAWS ovverrides these actions -->
+<div class="fd-rating-indicator__container" role="application" aria-roledescription="Rating indicator">
     <!-- Zero value if we don't have provided value from user, `ratingAverage` or `ratings` -->
     <ng-container *ngTemplateOutlet="zeroRate"></ng-container>
     <!-- Available rate values -->
