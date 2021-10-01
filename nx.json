@@ -1364,6 +1364,10 @@
         "experimental-switch": {
             "tags": ["fn"],
             "implicitDependencies": ["core"]
-        }
+        },
+        "experimental-search": {
+          "tags": ["fn"],
+          "implicitDependencies": ["core"]
+      }
     }
 }

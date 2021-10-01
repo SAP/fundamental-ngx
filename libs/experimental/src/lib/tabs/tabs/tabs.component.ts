@@ -64,24 +64,26 @@ export class TabsComponent implements OnInit, AfterViewInit {
         tabs[this._currentActiveIndex].setActive(false);
         this.tabs.toArray()[index].setActive(true);
         this._currentActiveIndex = index;
-
     }
 
     _tabHeaderKeyHandler(index: number, event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
+            event.preventDefault();
             this.setActiveTab(index);
         } else if (KeyUtil.isKeyCode(event, RIGHT_ARROW)) {
             this._navigate(index, 1);
         } else if (KeyUtil.isKeyCode(event, LEFT_ARROW)) {
             this._navigate(index, -1);
         }
-
-        console.log(event);
     }
 
-    private _navigate(index, direction): void {
-        const item = this.tabItems.get(index + this._direction * direction);
-        item?.focus();
+    private _navigate(index: number, direction: number): void {
+        const nextIndex = index + this._direction * direction;
+        const nextTab = this.tabItems.find((item, index) =>
+            !item.disabled &&
+            (direction === 1 ? index >= nextIndex : index <= nextIndex)
+        );
+        nextTab?.focus();
     }
 
     private _listenToTabsChange(): void {

@@ -5,26 +5,11 @@
  * Names are sorted in the ApiComponent so order does not matter.
  */
 export const API_FILES = {
-    button: [
-        'ButtonComponent'
-    ],
-    tabs: [
-        'TabListComponent',
-        'TabPanelComponent',
-        'TabTitleDirective',
-        'TabNavComponent',
-        'TabLinkDirective',
-        'TabItemDirective',
-        'TabTagDirective',
-        'TabIconComponent',
-        'TabCountDirective',
-        'TabLabelDirective',
-        'TabProcessDirective',
-        'TabHeaderDirective',
-        'TabCounterHeaderDirective',
-        'TabProcessIconDirective',
-        'TabItemExpandComponent',
-        'TabSeparator',
-        'TabInfo'
-    ]
+    button: [],
+    tabs: [],
+    switch: [],
+    radio: [],
+    checkbox: [],
+    input: [],
+    search: []
 };
