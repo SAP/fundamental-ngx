@@ -94,14 +94,6 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnIn
     @Input()
     compact?: boolean;
 
-    /** Enables controls third state. */
-    @Input()
-    tristate: boolean;
-
-    /** Allows to prevent user from manually selecting controls third state. */
-    @Input()
-    tristateSelectable = true;
-
     /** Assigns given class to checkbox label element */
     @Input()
     labelClass: string;
@@ -147,10 +139,8 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnIn
         @Attribute('tabIndexValue') public tabIndexValue: number = 0,
         private _platform: Platform,
         private _changeDetectorRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService,
-        @Optional() @Inject(LIST_ITEM_COMPONENT) private _listItemComponent: ListItemInterface
+        @Optional() private _contentDensityService: ContentDensityService
     ) {
-        console.log(this.tabIndexValue);
         this.tabIndexValue = tabIndexValue;
     }
 
@@ -228,17 +218,16 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnIn
                 break;
             case 'unchecked':
                 this.checkboxValue =
-                    this.tristate && this.tristateSelectable ? this.values.thirdStateValue : this.values.trueValue;
+                    this.values.trueValue;
                 break;
             case 'indeterminate':
             case 'force-checked':
                 this.checkboxValue = this.values.trueValue;
                 this.inputLabel.nativeElement.checked = true;
-                console.log(this.checkboxValue);
                 break;
             default:
                 this.checkboxValue =
-                    this.tristate && this.tristateSelectable ? this.values.thirdStateValue : this.values.trueValue;
+                    this.values.trueValue;
                 break;
         }
         this._setState();
@@ -260,14 +249,10 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnIn
             this.checkboxState = 'checked';
         } else if (this._compare(this.checkboxValue, this.values.falseValue)) {
             this.checkboxState = 'unchecked';
-        } else if (this.tristate && this._compare(this.checkboxValue, this.values.thirdStateValue)) {
-            this.checkboxState = 'indeterminate';
         } else if (!this.checkboxValue) {
             this.checkboxState = 'unchecked';
         }
         this._previousState = this.checkboxState;
-
-        console.log(this.checkboxState);
     }
 
     /** @hidden */
@@ -290,11 +275,6 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnIn
     /** @hidden Compares values */
     private _compare(val1: any, val2: any): boolean {
         return typeof val1 === 'object' ? compareObjects(val1, val2) : val1 === val2;
-    }
-
-    /** @hidden Determines event source based on key code */
-    private _isSpaceBarEvent(event: KeyboardEvent): boolean {
-        return KeyUtil.isKeyCode(event, SPACE);
     }
 
     /** Method to trigger change detection in component */

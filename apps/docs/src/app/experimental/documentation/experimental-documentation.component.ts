@@ -16,7 +16,12 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
         ];
 
         this.components = [
+            { url: 'experimental/checkbox', name: 'Checkbox' },
+            { url: 'experimental/input', name: 'Input' },
             { url: 'experimental/tabs', name: 'Tabs' },
+            { url: 'experimental/search', name: 'Search' },
+            { url: 'experimental/switch', name: 'Switch' },
+            { url: 'experimental/radio', name: 'Radio button' },
         ];
 
         this.sections = [

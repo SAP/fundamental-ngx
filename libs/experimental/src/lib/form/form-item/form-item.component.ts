@@ -32,7 +32,6 @@ export enum STATE_ICON {
     // tslint:disable-next-line: component-selector
     selector: 'fn-form-item',
     templateUrl: './form-item.component.html',
-    styleUrls: ['./form-item.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -40,12 +39,15 @@ export class ExperimentalFormItemComponent implements CssClassBuilder, OnInit, O
     @HostBinding('class.is-disabled')
     disabled = false;
 
+    @HostBinding('class.is-readonly')
+    readonly = false;
+
     @Input()
     class: string;
 
     _icon: string;
 
-    private _state: FormStates;
+    state: FormStates;
 
     constructor(private _elementRef: ElementRef) {}
 
@@ -64,25 +66,39 @@ export class ExperimentalFormItemComponent implements CssClassBuilder, OnInit, O
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        return ['fn-text-field', this._getStateClass(), this.class];
+        return ['fn-text-field', this._getStateClass(), this._getDisabledClass(), this._getReadonlyClass(), this.class];
     }
 
     _getStateClass(): string {
-        return this._state ? 'fn-text-field--' + this._state : '';
+        return this.state ? 'fn-text-field--' + this.state : '';
+    }
+
+    _getDisabledClass(): string {
+        return this.disabled ? 'is-disabled' : '';
+    }
+
+    _getReadonlyClass(): string {
+        return this.readonly ? 'is-readonly' : '';
     }
 
     setState(state: FormStates): void {
-        this._state = state;
+        this.state = state;
         this.setStateIcon();
         this.buildComponentCssClass();
     }
 
     setStateIcon(): void {
-        this._icon = STATE_ICON[this._state] || '';
+        this._icon = STATE_ICON[this.state] || '';
     }
 
     /** @hidden */
     elementRef(): ElementRef<any> {
         return this._elementRef;
+    }
+
+    /** @hidden */
+    updateState(): void {
+        this.setStateIcon();
+        this.buildComponentCssClass();
     }
 }

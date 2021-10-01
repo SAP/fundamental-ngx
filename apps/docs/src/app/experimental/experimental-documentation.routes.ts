@@ -10,8 +10,28 @@ export const ROUTES: Routes = [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeDocsComponent },
             {
+                path: 'checkbox',
+                loadChildren: () => import('./component-docs/checkbox/checkbox-docs.module').then((m) => m.CheckboxDocsModule)
+            },
+            {
                 path: 'tabs',
                 loadChildren: () => import('./component-docs/tabs/tabs-docs.module').then((m) => m.TabsDocsModule)
+            },
+            {
+                path: 'switch',
+                loadChildren: () => import('./component-docs/switch/switch-docs.module').then((m) => m.SwitchDocsModule)
+            },
+            {
+                path: 'radio',
+                loadChildren: () => import('./component-docs/radio/radio-docs.module').then((m) => m.RadioDocsModule)
+            },
+            {
+                path: 'input',
+                loadChildren: () => import('./component-docs/input/input-docs.module').then((m) => m.InputDocsModule)
+            },
+            {
+                path: 'search',
+                loadChildren: () => import('./component-docs/search/search-docs.module').then((m) => m.SearchDocsModule)
             }
         ]
     }
