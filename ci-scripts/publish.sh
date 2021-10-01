@@ -42,7 +42,10 @@ else
 fi
 
 #git push --follow-tags "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git" $CURRENT_BRANCH > /dev/null;
-git push --follow-tags origin main -v
+git remote -v
+git push --follow-tags origin main -v --no-verify
+git remote set-url origin "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git" -v
+git push --follow-tags origin main -v --no-verify
 npm run build-deploy-library
 
 #cd dist/libs
