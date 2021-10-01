@@ -54,11 +54,19 @@
 <!-- Table Header Columns -->
 <ng-template #tableHeaderRowTemplate>
     <tr fd-table-row>
+        <th 
+            *ngIf="semanticHighlighting"
+            class="fd-table__cell--fixed"
+            fd-table-cell
+            fd-table-status-indicator
+        ></th>
+
         <th
             *ngIf="_isShownSelectionColumn"
             fd-table-cell
             class="fd-table__cell--fixed fdp-table__cell--selection"
             [class.fd-table__cell--checkbox]="selectionMode === SELECTION_MODE.MULTIPLE"
+            [style]="_getSelectionCellStyles()"
         >
             <fd-checkbox
                 *ngIf="selectionMode === SELECTION_MODE.MULTIPLE; else emptyTHTemplate"
@@ -66,7 +74,7 @@
                 [ngModel]="_checkedAll"
                 (ngModelChange)="_toggleAllSelectableRows($event)"
             ></fd-checkbox>
-        </th>
+        </th>        
 
         <ng-container *ngFor="let column of _visibleColumns; let colIdx = index">
             <th
@@ -311,6 +319,14 @@
                             (keydown.space)="_onRowClick(row, $event)"
                             (started)="_dragDropStart()"
                         >
+                            <td
+                                *ngIf="semanticHighlighting"
+                                class="fd-table__cell--fixed"
+                                fd-table-cell
+                                fd-table-status-indicator
+                                [status]="row.value[semanticHighlighting]"
+                            ></td>
+                            
                             <!-- Row Selection Cell -->
                             <ng-container [ngSwitch]="selectionMode">
                                 <ng-container *ngSwitchCase="SELECTION_MODE.SINGLE">
@@ -320,6 +336,7 @@
                                         role="rowheader"
                                         fd-table-cell
                                         fd-table-cell-selectable
+                                        [style]="_getSelectionCellStyles()"
                                         [focusable]="true"
                                         [attr.aria-selected]="row.checked"
                                         (click)="_toggleSelectableRow(row)"
@@ -332,6 +349,7 @@
                                         class="fd-table__cell--fixed fd-table__cell--checkbox fdp-table__cell--selection"
                                         role="cell"
                                         fd-table-cell
+                                        [style]="_getSelectionCellStyles()"
                                     >
                                         <fd-checkbox
                                             [compact]="contentDensity !== CONTENT_DENSITY.COZY"
@@ -413,6 +431,12 @@
             >
                 <tbody fd-table-body>
                     <tr fd-table-row role="row">
+                        <th
+                            *ngIf="semanticHighlighting"
+                            fd-table-cell
+                            fd-table-status-indicator
+                        ></th>
+
                         <td
                             *ngIf="_isShownSelectionColumn"
                             fd-table-cell

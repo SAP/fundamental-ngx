@@ -43,10 +43,7 @@ export class TableColumnResizeService implements OnDestroy {
     private _resizerPosition: number;
 
     /** @hidden */
-    private _selectionColumnWidth: number;
-
-    /** @hidden */
-    private _scrollbarWidth: number;
+    private _offsetWidth: number;
 
     /** @hidden
      * Temporary: Prevent from resizing when there are fixed columns. They are positioned absolutely and it breaks all.
@@ -109,13 +106,11 @@ export class TableColumnResizeService implements OnDestroy {
     setColumnsWidth(
         visibleColumnNames: string[],
         freezeColumnsTo: string,
-        selectionColumnWidth: number,
-        scrollbarWidth: number
+        offsetWidth: number
     ): void {
         this._visibleColumnNames = visibleColumnNames;
         this._preventResize = this._visibleColumnNames.includes(freezeColumnsTo);
-        this._selectionColumnWidth = selectionColumnWidth;
-        this._scrollbarWidth = scrollbarWidth;
+        this._offsetWidth = offsetWidth;
 
         this._resetColumnsWidth();
         this._calculateColumnsWidth();
@@ -182,7 +177,7 @@ export class TableColumnResizeService implements OnDestroy {
 
         if (resizerPosition != null) {
             const scrollLeftOffset = this._scrollLeft * (this._rtl ? 1 : -1);
-            this._resizerPosition = resizerPosition + this._selectionColumnWidth - TABLE_RESIZER_BORDER_WIDTH + scrollLeftOffset;
+            this._resizerPosition = resizerPosition + this._offsetWidth - TABLE_RESIZER_BORDER_WIDTH + scrollLeftOffset;
         }
     }
 
