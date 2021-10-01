@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-set -x
 set -u -e
 
 #PACKAGES=(core platform moment-adapter)
