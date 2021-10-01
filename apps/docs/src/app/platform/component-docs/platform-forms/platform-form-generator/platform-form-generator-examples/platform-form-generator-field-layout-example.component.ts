@@ -47,6 +47,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
             name: 'name1',
             message: 'Your name: XL: 1, L: 2, M: 1, S: 2',
             default: 'John',
+            placeholder: 'Please provide your name',
             guiOptions: {
                 hint: 'Some contextual hint: XL: 1, L: 2, M: 1, S: 2',
                 columnLayout: { XL: 1, L: 2, M: 1, S: 1 },
