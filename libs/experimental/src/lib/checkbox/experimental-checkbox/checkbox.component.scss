@@ -1,5 +1,195 @@
-@import '~fundamental-styles/dist/fn-checkbox';
-
-.fd-checkbox__text:empty {
+/*!
+ * Fundamental Library Styles v0.20.0-rc.34
+ * Copyright (c) 2021 SAP SE or an SAP affiliate company.
+ * Licensed under Apache License 2.0 (https://github.com/SAP/fundamental-styles/blob/main/LICENSE)
+ */
+ .fn-checkbox {
+    font-family: "72","72full",Arial,Helvetica,sans-serif;
+    font-size: .875rem;
+    line-height: 1.5rem;
+    color: #223548;
+    font-weight: 400;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
     margin: 0;
-}
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    cursor: pointer;
+    min-width: 10rem;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    position: relative;
+    padding: .4375rem;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    height: 2rem;
+    border-radius: .5rem
+  }
+  .fn-checkbox::after,
+  .fn-checkbox::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
+  }
+  .fn-checkbox.is-hover,
+  .fn-checkbox:hover {
+    -webkit-box-shadow: 0 0 2px rgba(131,150,168,.16),0 8px 16px rgba(131,150,168,.16);
+    box-shadow: 0 0 2px rgba(131,150,168,.16),0 8px 16px rgba(131,150,168,.16)
+  }
+  .fn-checkbox.is-pressed,
+  .fn-checkbox[aria-pressed=true] {
+    -webkit-box-shadow: 0 0 2px rgba(131,150,168,.16),0 2px 4px rgba(131,150,168,.16);
+    box-shadow: 0 0 2px rgba(131,150,168,.16),0 2px 4px rgba(131,150,168,.16)
+  }
+  .fn-checkbox.is-active,
+  .fn-checkbox:active {
+    -webkit-box-shadow: 0 0 2px rgba(131,150,168,.16),0 2px 4px rgba(131,150,168,.16);
+    box-shadow: 0 0 2px rgba(131,150,168,.16),0 2px 4px rgba(131,150,168,.16)
+  }
+  .fn-checkbox.is-focus,
+  .fn-checkbox:focus {
+    z-index: 5;
+    outline: 0;
+    -webkit-box-shadow: 0 0 2px rgba(27,144,255,.16),0 8px 16px rgba(27,144,255,.16),0 0 0 .125rem #1b90ff;
+    box-shadow: 0 0 2px rgba(27,144,255,.16),0 8px 16px rgba(27,144,255,.16),0 0 0 .125rem #1b90ff
+  }
+  .fn-checkbox.is-disabled,
+  .fn-checkbox:disabled,
+  .fn-checkbox[aria-disabled=true] {
+    cursor: not-allowed;
+    pointer-events: none
+  }
+  .fn-checkbox.is-disabled .fn-checkbox__input ~ .fn-checkbox__checkmark,
+  .fn-checkbox:disabled .fn-checkbox__input ~ .fn-checkbox__checkmark,
+  .fn-checkbox[aria-disabled=true] .fn-checkbox__input ~ .fn-checkbox__checkmark {
+    border-color: #a9b4be
+  }
+  .fn-checkbox.is-disabled .fn-checkbox__input ~ .fn-checkbox__checkmark::after,
+  .fn-checkbox:disabled .fn-checkbox__input ~ .fn-checkbox__checkmark::after,
+  .fn-checkbox[aria-disabled=true] .fn-checkbox__input ~ .fn-checkbox__checkmark::after {
+    color: #a9b4be
+  }
+  .fn-checkbox.is-disabled .fn-checkbox__input ~ .fn-checkbox__label,
+  .fn-checkbox:disabled .fn-checkbox__input ~ .fn-checkbox__label,
+  .fn-checkbox[aria-disabled=true] .fn-checkbox__input ~ .fn-checkbox__label {
+    color: #a9b4be
+  }
+  .fn-checkbox__input {
+    font-family: "72","72full",Arial,Helvetica,sans-serif;
+    font-size: .875rem;
+    line-height: 1.5rem;
+    color: #223548;
+    font-weight: 400;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    cursor: pointer;
+    position: absolute
+  }
+  .fn-checkbox__input::after,
+  .fn-checkbox__input::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
+  }
+  .fn-checkbox__input:checked ~ .fn-checkbox__checkmark {
+    border-color: #1b90ff
+  }
+  .fn-checkbox__input:checked ~ .fn-checkbox__checkmark::after {
+    display: block
+  }
+  .fn-checkbox__input.is-disabled ~ .fn-checkbox__checkmark,
+  .fn-checkbox__input:disabled ~ .fn-checkbox__checkmark,
+  .fn-checkbox__input[aria-disabled=true] ~ .fn-checkbox__checkmark {
+    border-color: #a9b4be
+  }
+  .fn-checkbox__input.is-disabled ~ .fn-checkbox__checkmark::after,
+  .fn-checkbox__input:disabled ~ .fn-checkbox__checkmark::after,
+  .fn-checkbox__input[aria-disabled=true] ~ .fn-checkbox__checkmark::after {
+    color: #a9b4be
+  }
+  .fn-checkbox__input.is-disabled ~ .fn-checkbox__label,
+  .fn-checkbox__input:disabled ~ .fn-checkbox__label,
+  .fn-checkbox__input[aria-disabled=true] ~ .fn-checkbox__label {
+    color: #a9b4be
+  }
+  .fn-checkbox__checkmark {
+    font-family: "72","72full",Arial,Helvetica,sans-serif;
+    font-size: .875rem;
+    line-height: 1.5rem;
+    color: #223548;
+    font-weight: 400;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: .25rem;
+    background-color: #fff;
+    border: .125rem solid #5b738b
+  }
+  .fn-checkbox__checkmark::after,
+  .fn-checkbox__checkmark::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
+  }
+  .fn-checkbox__checkmark::after {
+    display: none;
+    font-size: .75rem;
+    content: "\e05b";
+    color: #1b90ff;
+    font-family: SAP-icons
+  }
+  .fn-checkbox__label {
+    font-family: "72","72full",Arial,Helvetica,sans-serif;
+    font-size: .875rem;
+    line-height: 1.5rem;
+    color: #223548;
+    font-weight: 400;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    margin-left: .75rem
+  }
+  .fn-checkbox__label::after,
+  .fn-checkbox__label::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+    font-size: inherit
+  }
+  .fn-checkbox__label[dir=rtl],
+  [dir=rtl] .fn-checkbox__label {
+    margin-right: .75rem;
+    margin-left: 0
+  }

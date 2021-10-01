@@ -15,7 +15,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { applyCssClass, CssClassBuilder, ContentDensityService } from '@fundamental-ngx/core/utils';
+import { applyCssClass, CssClassBuilder, ContentDensityService, KeyUtil } from '@fundamental-ngx/core/utils';
+import { TAB } from '@angular/cdk/keycodes';
 
 export type stateType = 'success' | 'error' | 'warning' | 'default' | 'information';
 let uniqueId = 0;
@@ -214,6 +215,9 @@ export class ExperimentalRadioButtonComponent
 
     /** @hidden */
     labelClicked(event: MouseEvent | KeyboardEvent): void {
+        if (this.disabled) {
+            return;
+        }
         this.valueChange(this.value);
         this._setFocusOnNativeElement();
         event.stopPropagation();
@@ -237,6 +241,13 @@ export class ExperimentalRadioButtonComponent
         if (this.value === undefined) {
             throw new Error('value field is required');
         }
+    }
+
+    keydownHandler(event: KeyboardEvent): void {
+        if (KeyUtil.isKeyCode(event, TAB)) {
+            return;
+        }
+        this.labelClicked(event);
     }
 
     /** @hidden */

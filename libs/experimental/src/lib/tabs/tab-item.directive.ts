@@ -5,7 +5,7 @@ import { Directive, ElementRef, HostBinding, Input } from '@angular/core';
     host: {
         class: 'fn-tabs__item',
         role: 'tab',
-        tabindex: '0'
+        '[attr.tabindex]': 'disabled ? -1 : 0'
     }
 })
 export class TabItemDirective {

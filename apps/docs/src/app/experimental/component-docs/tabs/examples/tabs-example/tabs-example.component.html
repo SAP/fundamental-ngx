@@ -1,60 +1,21 @@
-<fn-tabs mode="line">
-    <fn-tab title="One"> One </fn-tab>
-    <fn-tab title="Two"> Two </fn-tab>
-    <fn-tab title="Three"> Three </fn-tab>
-    <fn-tab title="Four" [disabled]="true"> Four </fn-tab>
+<p>Default tabs (Group):</p>
+<fn-tabs>
+    <fn-tab title="One"> First tab content </fn-tab>
+    <fn-tab title="Two" [disabled]="true"> Second tab content </fn-tab>
+    <fn-tab title="Three"> Third tab content </fn-tab>
+    <fn-tab title="Four" [disabled]="true"> Fourth tab content </fn-tab>
 </fn-tabs>
-<div>
-    <fn-checkbox label="Option 1" required="true" inputId="defaultCheckbox"></fn-checkbox>
-</div>
-
-<div>
-    <div fn-form-item>
-        <fn-radio-button value="val1" id="radio-1" name="radio-name-1"> Option One </fn-radio-button>
-    </div>
-    <div fn-form-item>
-        <fn-radio-button value="val2" id="radio-2" name="radio-name-1"> Option Two </fn-radio-button>
-    </div>
-    <div fn-form-item>
-        <fn-radio-button value="val3" id="radio-3" name="radio-name-1"> Option Three </fn-radio-button>
-    </div>
-</div>
-
-<div>
-    <h4 fn-form-header>Examples</h4>
-    <br />
-    <fn-form-item>
-        <label fn-form-label for="input-1">Default Input</label>
-        <input fn-form-control type="text" id="input-1" placeholder="Field placeholder text" />
-    </fn-form-item>
-    <fn-form-item>
-        <label fn-form-label [required]="true" for="input-2">Information Input:</label>
-        <input
-            fn-form-control
-            state="information"
-            type="text"
-            id="input-2"
-            placeholder="Field placeholder text"
-            aria-required="true"
-        />
-    </fn-form-item>
-    <fn-form-item>
-        <label fn-form-label for="input-3">Warning Input:</label>
-        <input
-            fn-form-control
-            state="warning"
-            type="text"
-            id="input-3"
-            placeholder="Field placeholder text"
-            aria-required="true"
-        />
-    </fn-form-item>
-    <fn-form-item>
-        <label fn-form-label for="input-4">Error Input:</label>
-        <input fn-form-control state="error" type="text" id="input-4" placeholder="Field placeholder text" aria-required="true" />
-    </fn-form-item>
-</div>
-
-<div>
-    <fn-switch activeText="On" inactiveText="Off"></fn-switch>
-</div>
+<p>Individual tabs</p>
+<fn-tabs mode="individual">
+    <fn-tab title="One"> First tab content </fn-tab>
+    <fn-tab title="Two" [disabled]="true"> Second tab content </fn-tab>
+    <fn-tab title="Three"> Third tab content </fn-tab>
+    <fn-tab title="Four" [disabled]="true"> Fourth tab content </fn-tab>
+</fn-tabs>
+<p>Line tabs</p>
+<fn-tabs mode="line">
+    <fn-tab title="One"> First tab content </fn-tab>
+    <fn-tab title="Two" [disabled]="true"> Second tab content </fn-tab>
+    <fn-tab title="Three"> Third tab content </fn-tab>
+    <fn-tab title="Four" [disabled]="true"> Fourth tab content </fn-tab>
+</fn-tabs>
