@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.17 (2021-10-01)
+
+
+### Bug Fixes
+
+* **docs:** add appropriate anchors to the documentation ([#6798](https://github.com/SAP/fundamental-ngx/issues/6798)) ([2e21687](https://github.com/SAP/fundamental-ngx/commit/2e21687bcfe796bae34c7ab5807b8b59b9edb7ec))
+
 ### 0.32.2-rc.16 (2021-10-01)
 
 ### 0.32.2-rc.15 (2021-10-01)
