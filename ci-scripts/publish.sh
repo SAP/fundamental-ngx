@@ -39,7 +39,8 @@ else
    exit 1
 fi
 
-git push --follow-tags "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git" $CURRENT_BRANCH > /dev/null;
+#git push --follow-tags "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git" $CURRENT_BRANCH > /dev/null;
+git push --follow-tags origin main -v
 npm run build-deploy-library
 
 #cd dist/libs
