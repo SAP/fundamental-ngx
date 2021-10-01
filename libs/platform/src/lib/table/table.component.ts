@@ -511,6 +511,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
+        if ('loading' in changes) {
+            this._tableService.setTableLoading(this.loading);
+        }
+
+        // changes below should be checked only after view is initialized
         if (!this._viewInitiated) {
             return;
         }
