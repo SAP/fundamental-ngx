@@ -8,6 +8,7 @@ import { ExperimentalFormModule } from '@fundamental-ngx/experimental/form';
 import { ExperimentalSwitchModule } from '@fundamental-ngx/experimental/switch';
 import { ExperimentalButtonModule } from '@fundamental-ngx/experimental/button';
 import { ExperimentalSearchModule } from '@fundamental-ngx/experimental/search';
+import { ExperimentalSelectModule } from '@fundamental-ngx/experimental/select';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -18,7 +19,8 @@ import { ExperimentalSearchModule } from '@fundamental-ngx/experimental/search';
         ExperimentalFormModule,
         ExperimentalSwitchModule,
         ExperimentalButtonModule,
-        ExperimentalSearchModule
+        ExperimentalSearchModule,
+        ExperimentalSelectModule
     ],
     providers: []
 })

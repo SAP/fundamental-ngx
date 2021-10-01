@@ -1361,6 +1361,10 @@
             "tags": ["fn"],
             "implicitDependencies": ["core"]
         },
+        "experimental-select": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
+        },
         "experimental-switch": {
             "tags": ["fn"],
             "implicitDependencies": ["core"]

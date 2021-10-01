@@ -4961,6 +4961,46 @@
                 }
             }
         },
+        "experimental-select": {
+            "projectType": "library",
+            "root": "libs/experimental/src/lib/select",
+            "sourceRoot": "libs/experimental/src/lib/select",
+            "prefix": "fn",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/experimental/select"],
+                    "options": {
+                        "tsConfig": "libs/experimental/src/lib/select/tsconfig.lib.json",
+                        "project": "libs/experimental/src/lib/select/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/experimental/src/lib/select/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/experimental/src/lib/select/test.ts",
+                        "tsConfig": "libs/experimental/src/lib/select/tsconfig.spec.json",
+                        "karmaConfig": "libs/experimental/src/lib/select/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/experimental/src/lib/select/tsconfig.lib.json",
+                            "libs/experimental/src/lib/select/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
+        },
         "experimental-tabs": {
             "projectType": "library",
             "root": "libs/experimental/src/lib/tabs",

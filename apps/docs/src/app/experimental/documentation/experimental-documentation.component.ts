@@ -19,6 +19,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'experimental/button', name: 'Button' },
             { url: 'experimental/checkbox', name: 'Checkbox' },
             { url: 'experimental/input', name: 'Input' },
+            { url: 'experimental/select', name: 'Select' },
             { url: 'experimental/tabs', name: 'Tabs' },
             { url: 'experimental/search', name: 'Search' },
             { url: 'experimental/switch', name: 'Switch' },
