@@ -265,7 +265,7 @@ jobs:
       - run: echo "STAGE_NAME=Release" >> $GITHUB_ENV
         if: ${{ github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use' }}
       - run: echo "STAGE_NAME=Pre-release" >> $GITHUB_ENV
-        if: ${{ github.ref == 'refs/heads/main' }}
+        if: ${{ github.ref == 'refs/heads/base64' }}
       - run: echo "STAGE_NAME=Hotfix-release" >> $GITHUB_ENV
         if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
 
@@ -283,15 +283,15 @@ jobs:
           TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
         if: ${{ github.ref == 'refs/heads/hotfix_tmp_branch_for_automated_release_do_not_use' }}
 
-      - uses: JS-DevTools/npm-publish@v1
-        with:
-          package: "dist/libs/core/package.json"
-          token: ${{ secrets.NPM_TOKEN }}
-      - uses: JS-DevTools/npm-publish@v1
-        with:
-          package: "dist/libs/platform/package.json"
-          token: ${{ secrets.NPM_TOKEN }}
-      - uses: JS-DevTools/npm-publish@v1
-        with:
-          package: "dist/libs/moment-adapter/package.json"
-          token: ${{ secrets.NPM_TOKEN }}
+#      - uses: JS-DevTools/npm-publish@v1
+#        with:
+#          package: "dist/libs/core/package.json"
+#          token: ${{ secrets.NPM_TOKEN }}
+#      - uses: JS-DevTools/npm-publish@v1
+#        with:
+#          package: "dist/libs/platform/package.json"
+#          token: ${{ secrets.NPM_TOKEN }}
+#      - uses: JS-DevTools/npm-publish@v1
+#        with:
+#          package: "dist/libs/moment-adapter/package.json"
+#          token: ${{ secrets.NPM_TOKEN }}
