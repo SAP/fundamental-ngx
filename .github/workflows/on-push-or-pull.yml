@@ -273,7 +273,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GHACTIONS }}
           TRAVIS_BUILD_STAGE_NAME: ${{ env.STAGE_NAME }}
-        if: ${{ github.ref == 'refs/heads/main'
+        if: ${{ github.ref == 'refs/heads/base64'
           || github.ref == 'refs/heads/tmp_branch_for_automated_release_do_not_use'
           }}
 
