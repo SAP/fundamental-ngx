@@ -283,6 +283,7 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
     .fdp-table__container {
         position: relative;
         overflow: hidden;
+        outline: none;
     }
 
     @mixin fdp-empty-scrollbar-block() {
