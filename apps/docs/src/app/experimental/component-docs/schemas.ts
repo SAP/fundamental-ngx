@@ -2,9 +2,11 @@ import { Schema } from '../../schema/models/schema.model';
 
 // components
 import { TabsDocsComponent } from './tabs/tabs-docs.component';
+import { ButtonDocsComponent } from './button/button-docs.component';
 
 export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
     tabs: TabsDocsComponent.schema,
+    button: ButtonDocsComponent.schema,
     media: {
         properties: {
             image: {

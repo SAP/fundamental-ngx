@@ -10,6 +10,10 @@ export const ROUTES: Routes = [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeDocsComponent },
             {
+                path: 'button',
+                loadChildren: () => import('./component-docs/button/button-docs.module').then((m) => m.ButtonDocsModule)
+            },
+            {
                 path: 'checkbox',
                 loadChildren: () => import('./component-docs/checkbox/checkbox-docs.module').then((m) => m.CheckboxDocsModule)
             },

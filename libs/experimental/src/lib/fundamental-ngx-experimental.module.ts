@@ -6,6 +6,7 @@ import { ExperimentalCheckboxModule } from '@fundamental-ngx/experimental/checkb
 import { ExperimentalRadioModule } from '@fundamental-ngx/experimental/radio';
 import { ExperimentalFormModule } from '@fundamental-ngx/experimental/form';
 import { ExperimentalSwitchModule } from '@fundamental-ngx/experimental/switch';
+import { ExperimentalButtonModule } from '@fundamental-ngx/experimental/button';
 import { ExperimentalSearchModule } from '@fundamental-ngx/experimental/search';
 
 @NgModule({
@@ -16,6 +17,7 @@ import { ExperimentalSearchModule } from '@fundamental-ngx/experimental/search';
         ExperimentalRadioModule,
         ExperimentalFormModule,
         ExperimentalSwitchModule,
+        ExperimentalButtonModule,
         ExperimentalSearchModule
     ],
     providers: []
