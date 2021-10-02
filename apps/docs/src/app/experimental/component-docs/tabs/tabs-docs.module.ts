@@ -11,7 +11,8 @@ import { ExperimentalCheckboxModule } from '@fundamental-ngx/experimental/checkb
 import { ExperimentalRadioModule } from '@fundamental-ngx/experimental/radio';
 import { ExperimentalFormModule } from '@fundamental-ngx/experimental/form';
 import { ExperimentalSwitchModule } from '@fundamental-ngx/experimental/switch';
-import { ExperimentalSearchModule } from '@fundamental-ngx/experimental/search'
+import { ExperimentalButtonModule } from '@fundamental-ngx/experimental/button';
+import { ExperimentalSearchModule } from '@fundamental-ngx/experimental/search';
 
 const routes: Routes = [
     {
@@ -36,6 +37,7 @@ const routes: Routes = [
         ExperimentalRadioModule,
         ExperimentalFormModule,
         ExperimentalSwitchModule,
+        ExperimentalButtonModule,
         ExperimentalSearchModule
     ],
     exports: [RouterModule],

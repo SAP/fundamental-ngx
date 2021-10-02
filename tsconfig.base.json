@@ -145,7 +145,8 @@
             "@fundamental-ngx/experimental/checkbox": ["libs/experimental/src/lib/checkbox/index.ts"],
             "@fundamental-ngx/experimental/radio": ["libs/experimental/src/lib/radio/index.ts"],
             "@fundamental-ngx/experimental/switch": ["libs/experimental/src/lib/switch/index.ts"],
-            "@fundamental-ngx/experimental/search": ["libs/experimental/src/lib/search/index.ts"]
+            "@fundamental-ngx/experimental/search": ["libs/experimental/src/lib/search/index.ts"],
+            "@fundamental-ngx/experimental/button": ["libs/experimental/src/lib/button/index.ts"],
         },
         "skipLibCheck": true
     },

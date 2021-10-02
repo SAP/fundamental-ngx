@@ -5,10 +5,11 @@
  * Names are sorted in the ApiComponent so order does not matter.
  */
 export const API_FILES = {
+    button: [],
     tabs: [],
     switch: [],
     radio: [],
     checkbox: [],
     input: [],
-    search: [],
+    search: []
 };

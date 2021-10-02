@@ -839,6 +839,10 @@
             "tags": ["fn"],
             "implicitDependencies": ["core"]
         },
+        "experimental-button": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
+        },
         "experimental-checkbox": {
             "tags": ["fn"],
             "implicitDependencies": ["core"]
