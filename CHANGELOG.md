@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.26 (2021-10-02)
+
+
+### Bug Fixes
+
+* **core:** textarea, fix a11y issues ([#6564](https://github.com/SAP/fundamental-ngx/issues/6564)) ([f2e8592](https://github.com/SAP/fundamental-ngx/commit/f2e85920ff645147461145e511af04187bc58c72))
+
 ### 0.32.2-rc.25 (2021-10-02)
 
 
