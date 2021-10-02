@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.25 (2021-10-02)
+
+
+### Bug Fixes
+
+* **core:** fix busy indicator accessibility bugs ([#6472](https://github.com/SAP/fundamental-ngx/issues/6472)) ([ecb782f](https://github.com/SAP/fundamental-ngx/commit/ecb782f9b5ba4d468fa7087d4dfaceb690ffe73d))
+
 ### 0.32.2-rc.24 (2021-10-01)
 
 
