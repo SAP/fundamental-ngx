@@ -43,8 +43,7 @@ import { DialogTitleDirective } from './directives/dialog-title.directive';
     templateUrl: './dialog.component.html',
     host: {
         tabindex: '-1',
-        '[@dialog-fade]': '',
-        role: 'dialog'
+        '[@dialog-fade]': ''
     },
     animations: [dialogFadeNgIf],
     encapsulation: ViewEncapsulation.None
