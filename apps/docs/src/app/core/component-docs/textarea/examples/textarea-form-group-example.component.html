@@ -1,21 +1,21 @@
 <form [formGroup]="customForm">
     <fieldset fd-fieldset>
         <div fd-form-item>
-            <label fd-form-label colon="true" for="textarea-1">Textarea</label>
+            <label fd-form-label colon="true" for="textarea-21">Textarea</label>
             <textarea
                 formControlName="textAreaControl"
                 fd-form-control
-                id="textarea-1"
+                id="textarea-21"
                 placeholder="Field placeholder text"
             ></textarea>
             Textarea Value: {{ customForm.controls.textAreaControl.value }}
         </div>
         <div fd-form-item>
-            <label fd-form-label colon="true" for="textarea-2">Disabled Textarea</label>
+            <label fd-form-label colon="true" for="textarea-22">Disabled Textarea</label>
             <textarea
                 formControlName="disabledTextAreaControl"
                 fd-form-control
-                id="textarea-2"
+                id="textarea-22"
                 placeholder="Field placeholder text"
             ></textarea>
             Textarea Value: {{ customForm.controls.disabledTextAreaControl.value }}
