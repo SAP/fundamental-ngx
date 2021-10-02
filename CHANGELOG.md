@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.27 (2021-10-02)
+
+
+### Bug Fixes
+
+* **core:** popover, fix a11y issues ([#6594](https://github.com/SAP/fundamental-ngx/issues/6594)) ([72c2b4d](https://github.com/SAP/fundamental-ngx/commit/72c2b4d98a9397324d6337ebd6874c0641c53558)), closes [#6580](https://github.com/SAP/fundamental-ngx/issues/6580) [#6757](https://github.com/SAP/fundamental-ngx/issues/6757)
+
 ### 0.32.2-rc.26 (2021-10-02)
 
 
