@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.29 (2021-10-02)
+
+
+### Bug Fixes
+
+* **core:** multi-input, fix rtl mode for mobile view ([#6740](https://github.com/SAP/fundamental-ngx/issues/6740)) ([4ce5159](https://github.com/SAP/fundamental-ngx/commit/4ce5159376cdd5a39cc138bbc5f14dc1ef84b5c5))
+
 ### 0.32.2-rc.28 (2021-10-02)
 
 
