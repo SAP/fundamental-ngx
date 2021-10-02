@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.28 (2021-10-02)
+
+
+### Bug Fixes
+
+* **core:** multi-input, disable browser native autocomplete ([#6727](https://github.com/SAP/fundamental-ngx/issues/6727)) ([1c8e443](https://github.com/SAP/fundamental-ngx/commit/1c8e44364656dc2d611851adcb978588b9399fed))
+
 ### 0.32.2-rc.27 (2021-10-02)
 
 
