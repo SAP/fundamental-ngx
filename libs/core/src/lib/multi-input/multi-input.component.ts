@@ -480,7 +480,7 @@ export class MultiInputComponent implements
                 event.preventDefault();
             }
         }
-        if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW])) {
+        if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, ENTER])) {
             this.openChangeHandle(true);
         }
         if (KeyUtil.isKeyCode(event, ESCAPE)) {
