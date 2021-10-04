@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { MatchingStrategy } from '@fundamental-ngx/platform/shared';
+import { getMatchingStrategyStartsWithPerTermReqexp, MatchingStrategy } from '@fundamental-ngx/platform/shared';
 import { ComboboxConfig } from '../combobox.config';
 
 @Pipe({
@@ -30,9 +30,9 @@ export class ComboboxHighlightPipe implements PipeTransform {
     }
 
     private _searchByStrategyStartsWithPerTerm(value: string, searchText: string): string {
-        const pattern = new RegExp(`(\\s|^)(${searchText})`, 'gi');
+        const reqexp = getMatchingStrategyStartsWithPerTermReqexp(searchText);
 
-        return value.replace(pattern, `$1<strong>$2</strong>`);
+        return value.replace(reqexp, `$1<strong>$2</strong>`);
     }
 
     private _searchByStrategyStartsWith(value: string, searchText: string): string {
