@@ -49,6 +49,8 @@ import * as platformTreeTableDefaultSrc from '!raw-loader!./platform-table-examp
 import * as platformTreeTableDefaultTsSrc from '!raw-loader!./platform-table-examples/platform-table-tree-example.component.ts';
 import * as platformTableNavigatableRowSrc from '!raw-loader!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.html';
 import * as platformTableNavigatableRowTsSrc from '!raw-loader!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.ts';
+import * as platformTableSemanticSrc from '!raw-loader!./platform-table-examples/platform-table-semantic-example.component.html';
+import * as platformTableSemanticTsSrc from '!raw-loader!./platform-table-examples/platform-table-semantic-example.component.ts';
 
 import * as platformTableCustomNoDataMessageSrc from '!raw-loader!./platform-table-examples/platform-table-no-items-template-example.component.html';
 import * as platformTableCustomNoDataMessageTsSrc from '!raw-loader!./platform-table-examples/platform-table-no-items-template-example.component.ts';
@@ -74,7 +76,7 @@ export class PlatformTableDocsComponent {
                     },
                     selectionMode: {
                         type: 'string',
-                        enum: ['', 'single', 'multiple']
+                        enum: ['none', 'single', 'multiple']
                     },
                     freezeColumnsTo: {
                         type: 'string',
@@ -93,6 +95,9 @@ export class PlatformTableDocsComponent {
                         type: 'boolean'
                     },
                     loading: {
+                        type: 'boolean'
+                    },
+                    semanticHighlighting: {
                         type: 'boolean'
                     }
                 }
@@ -138,13 +143,14 @@ export class PlatformTableDocsComponent {
     data: any = {
         table: {
             contentDensity: 'compact',
-            selectionMode: '',
+            selectionMode: 'none',
             freezeColumnsTo: '',
             noHorizontalBorders: false,
             noVerticalBorders: false,
             noBorders: false,
             noBodyBorders: false,
-            loading: false
+            loading: false,
+            semanticHighlighting: false
         },
         'table-toolbar': {
             title: 'Order Line Items',
@@ -451,6 +457,22 @@ export class PlatformTableDocsComponent {
             fileName: 'sapIllus-Dialog-NoMail',
             name: 'sapIllus-Dialog-NoMail.svg',
             path: 'src/assets/images'
+        }
+    ];
+
+    semanticFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableSemanticSrc,
+            fileName: 'platform-table-semantic-example',
+            name: 'platform-table-semantic-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: platformTableSemanticTsSrc,
+            fileName: 'platform-table-semantic-example',
+            component: 'PlatformTableSemanticExampleComponent',
+            name: 'platform-table-semantic-example.component.ts'
         }
     ];
 

@@ -17,9 +17,9 @@
 
 <span class="fd-form-label"
       [class.fd-form-label--required]="required"
-      [class.fd-form-label--colon]="colon"
 >
     <ng-content></ng-content>
+    <ng-container *ngIf="colon">:</ng-container>
 </span>
 
 <ng-container *ngIf="inlineHelpPlacement === 'after' && inlineHelpTitle">

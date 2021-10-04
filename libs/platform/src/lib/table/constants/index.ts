@@ -1,5 +1,6 @@
 import { ContentDensityEnum as ContentDensity } from '@fundamental-ngx/core/utils';
 import { SearchInput } from '@fundamental-ngx/platform/search-field';
+
 import { CollectionPage, TableState } from '../interfaces';
 
 export const DEFAULT_TABLE_PAGE: Readonly<CollectionPage> = {
@@ -21,6 +22,8 @@ export const DEFAULT_TABLE_STATE: Readonly<TableState> = {
     freezeToColumn: null,
     searchInput: DEFAULT_TABLE_SEARCH_INPUT
 };
+
+export const SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH = 6;
 
 export const SELECTION_COLUMN_WIDTH: ReadonlyMap<ContentDensity, number> = new Map<ContentDensity, number>([
     [ContentDensity.COZY, 44],

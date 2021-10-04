@@ -47,7 +47,7 @@
                       [tokenizerFocusable]="false"
                       (moreClickedEvent)="_moreClicked()"
                       class="fd-multi-input-tokenizer-custom"
-                      [class]="compact ? 'fd-multi-input-tokenizer-custom--compact' : ''"
+                      [class.fd-multi-input-tokenizer-custom--compact]="compact"
                       tabindex="-1"
         >
             <fd-token
@@ -61,6 +61,7 @@
             </fd-token>
             <input type="text"
                    class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
+                   autocomplete="off"
                    fd-form-control
                    fd-input-group-input
                    fd-auto-complete
@@ -74,7 +75,7 @@
                    [compact]="compact"
                    [disabled]="disabled"
                    [attr.aria-required]="required"
-                   [ngClass]="{ 'fd-input--compact': compact }"
+                   [class.fd-input--compact]="compact"
                    (ngModelChange)="_handleSearchTermChange($event)"
                    (keydown)="_handleInputKeydown($event)"
                    [ngModelOptions]="{standalone: true}"

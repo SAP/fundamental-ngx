@@ -102,10 +102,8 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
     .fd-table__cell {
         height: 2.75rem;
 
+        .fd-table__cell--status-indicator,
         .fdp-table__cell--selection {
-            min-width: 2.8rem;
-            max-width: 2.8rem;
-            padding: 0 !important;
             border-left: none;
             border-right: $fd-table-border;
             border-right: $fd-table-border-var;
@@ -115,6 +113,12 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
                 border-left: $fd-table-border;
                 border-left: $fd-table-border-var;
             }
+        }
+
+        .fdp-table__cell--selection {
+            min-width: 2.8rem;
+            max-width: 2.8rem;
+            padding: 0 !important;
         }
     }
 
@@ -279,6 +283,7 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
     .fdp-table__container {
         position: relative;
         overflow: hidden;
+        outline: none;
     }
 
     @mixin fdp-empty-scrollbar-block() {
@@ -357,10 +362,15 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
             @include hide-scrollbar();
         }
 
-        .fd-table__row:last-of-type {
+        &:not(.fixed-height) .fd-table__row:last-of-type {
             .fd-table__cell {
                 border-bottom: 0;
             }
+        }
+
+        &.fixed-height {
+            background-color: #fff;
+            background-color: var(--sapList_Background, #fff);
         }
     }
 

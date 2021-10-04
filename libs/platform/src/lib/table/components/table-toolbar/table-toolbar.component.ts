@@ -14,6 +14,8 @@ import { SearchInput, SuggestionItem } from '../../interfaces/search-field.inter
 import { Table } from '../../table';
 import { TableToolbarActionsComponent } from './table-toolbar-actions.component';
 import { TableToolbarWithTemplate, TABLE_TOOLBAR } from './table-toolbar';
+import { TableService } from '../../table.service';
+import { Observable } from 'rxjs';
 
 let tableToolbarTitleUniqueId = 0;
 
@@ -63,7 +65,10 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
     tableToolbarTitleId: string = 'fd-table-tolbar-title-' + tableToolbarTitleUniqueId++;
 
     /** @hidden */
-    constructor(private readonly _cd: ChangeDetectorRef, private readonly _table: Table) {}
+    readonly tableLoading$: Observable<boolean> = this.tableService.tableLoading$;
+
+    /** @hidden */
+    constructor(private readonly _cd: ChangeDetectorRef, private readonly _table: Table, private tableService: TableService) {}
 
     /** @hidden */
     ngAfterViewInit(): void {

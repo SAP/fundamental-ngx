@@ -462,6 +462,13 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/tree/tree-docs.module').then((m) => m.TreeDocsModule)
             },
             {
+                path: 'vertical-navigation',
+                loadChildren: () =>
+                    import('./component-docs/vertical-navigation/vertical-navigation-docs.module').then(
+                        (m) => m.VerticalNavigationDocsModule
+                    )
+            },
+            {
                 path: 'upload-collection',
                 loadChildren: () => import('./component-docs/upload-collection/upload-collection-docs.module').then((m) => m.UploadCollectionDocsModule)
             },

@@ -29,7 +29,7 @@ describe('TableColumnResizeService', () => {
         expect(service.getColumnWidthStyle(tableColumn)).toEqual('auto');
 
         service.registerColumnCell(tableColumn.name, tableColumnCell);
-        service.setColumnsWidth(columnNames, null, 0, 0);
+        service.setColumnsWidth(columnNames, null, 0);
 
         expect(service.getColumnWidthStyle(tableColumn)).toEqual(widthInPixels + 'px');
     });
@@ -44,7 +44,7 @@ describe('TableColumnResizeService', () => {
     it('should set resizer', () => {
         const position = 0;
 
-        service.setColumnsWidth([], null, 0, 0);
+        service.setColumnsWidth([], null, 0);
         service.setInitialResizerPosition(position, 'name');
 
         expect(service.resizerPosition).toEqual(position - TABLE_RESIZER_BORDER_WIDTH);
@@ -60,7 +60,7 @@ describe('TableColumnResizeService', () => {
         const tableColumnCell = { nativeElement: { offsetWidth: initialColumnWidth } } as ElementRef;
 
         service.registerColumnCell(tableColumn.name, tableColumnCell);
-        service.setColumnsWidth(tableColumnNames, null, 0, 0);
+        service.setColumnsWidth(tableColumnNames, null, 0);
         service.setInitialResizerPosition(0, tableColumn.name);
 
         service.startResize({ clientX: clientStartX } as MouseEvent);
@@ -81,7 +81,7 @@ describe('TableColumnResizeService', () => {
         const tableColumnCell = { nativeElement: { offsetWidth: initialColumnWidth } } as ElementRef;
 
         service.registerColumnCell(tableColumn.name, tableColumnCell);
-        service.setColumnsWidth(tableColumnNames, null, 0, 0);
+        service.setColumnsWidth(tableColumnNames, null, 0);
         service.setInitialResizerPosition(0, tableColumn.name);
 
         service.startResize({ clientX: clientStartX } as MouseEvent);

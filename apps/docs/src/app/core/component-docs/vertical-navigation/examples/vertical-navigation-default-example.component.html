@@ -1,0 +1,36 @@
+<fd-vertical-navigation>
+    <li fd-list-navigation-item>
+        <fd-icon glyph="home"></fd-icon>
+        <span fd-list-navigation-item-text> Overview </span>
+    </li>
+    <li fd-list-navigation-item>
+        <fd-icon glyph="calendar"></fd-icon>
+        <span fd-list-navigation-item-text> Calendar Calendar Calendar Calendar </span>
+        <button fd-list-navigation-item-arrow></button>
+        <ul fd-list>
+            <li fd-list-navigation-item>
+                <span fd-list-navigation-item-text>Second level item 1</span>
+            </li>
+            <li fd-list-navigation-item [indicated]="true">
+                <span fd-list-navigation-item-text>Second level item 2 Second level item 2 Second level item 2 </span>
+            </li>
+        </ul>
+    </li>
+    <li fd-list-navigation-item>
+        <fd-icon glyph="customer"></fd-icon>
+        <span fd-list-navigation-item-text> Customers </span>
+        <button fd-list-navigation-item-arrow></button>
+        <ul fd-list>
+            <li fd-list-navigation-item>
+                <span fd-list-navigation-item-text>Second level item 1</span>
+            </li>
+            <li fd-list-navigation-item>
+                <span fd-list-navigation-item-text>Second level item 2</span>
+            </li>
+        </ul>
+    </li>
+    <li fd-list-navigation-item>
+        <fd-icon glyph="shipping-status"></fd-icon>
+        <span fd-list-navigation-item-text> Deliveries </span>
+    </li>
+</fd-vertical-navigation>

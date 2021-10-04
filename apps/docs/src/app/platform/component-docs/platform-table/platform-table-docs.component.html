@@ -483,6 +483,31 @@
 
 <separator></separator>
 
+<fd-docs-section-title
+    id="semantic"
+    componentName="table"
+>
+    Semantic Highlighting
+</fd-docs-section-title>
+<description>
+    <p>
+        This example shows semantic highlighting for the rows.
+    </p>
+
+    <p>
+        Use <code>semanticHighlighting="value"</code> input property on the table to show semantic row's status column.
+        Where <code>value</code> (string) is the key of the table row's item with status.
+        Available statuses are <code>valid, warning, information, error</code>. 
+        Any other statuses will be percieved as "no status".
+    </p>
+</description>
+<component-example>
+    <fdp-platform-table-semantic-example></fdp-platform-table-semantic-example>
+</component-example>
+<code-example [exampleFiles]="semanticFiles"></code-example>
+
+<separator></separator>
+
 <playground
     [schema]="schema"
     [schemaInitialValues]="data"
@@ -498,6 +523,7 @@
         [selectionMode]="data.table.selectionMode"
         [freezeColumnsTo]="data.table.freezeColumnsTo"
         [loading]="data.table.loading"
+        [semanticHighlighting]="data.table.semanticHighlighting && 'semantic'"
         emptyTableMessage="No data found"
         (rowSelectionChange)="onRowSelectionChange($event)"
         (sortChange)="onSortChange($event)"

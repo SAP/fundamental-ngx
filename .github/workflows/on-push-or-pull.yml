@@ -256,6 +256,8 @@ jobs:
       ) }}
     steps:
       - uses: actions/checkout@v2.3.4
+        with:
+          token: ${{ secrets.GHACTIONS }}
       - uses: actions/cache@v2
         with:
           path: ${{ env.CACHE_NODE_MODULES_PATH }}
