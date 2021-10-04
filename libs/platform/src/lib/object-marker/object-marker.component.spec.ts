@@ -63,7 +63,7 @@ describe('PlatformObjectMarkerComponent', () => {
         expect(linkElement.nativeElement.classList.contains('fd-object-marker--link')).toBe(true);
         host.clickable = false;
         fixture.detectChanges();
-        linkElement = fixture.debugElement.query(By.css('span'));
+        linkElement = fixture.debugElement.query(By.css('a'));
         expect(linkElement.nativeElement.classList.contains('fd-object-marker--link')).toBe(false);
     });
 });
