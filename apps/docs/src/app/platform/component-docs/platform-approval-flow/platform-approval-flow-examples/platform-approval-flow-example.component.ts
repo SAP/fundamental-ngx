@@ -218,15 +218,16 @@ const users: ApprovalUser[] = [
         imgUrl: 'https://randomuser.me/api/portraits/women/55.jpg'
     }
 ];
-for (let i = 1; i <= 1000; i++) {
-    const obj = {
-        id: 'uid66171' + i,
-        name: 'Ella Franklin' + i,
-        description: 'Accounting team',
-        imgUrl: 'https://randomuser.me/api/portraits/women/55.jpg'
-    };
-    users.push(obj);
-}
+// const TOTAL = 500;
+// for (let i = 1; i <= TOTAL; i++) {
+//     const obj = {
+//         id: 'uid66171' + i,
+//         name: 'Ella Franklin' + i,
+//         description: 'Accounting team',
+//         imgUrl: 'https://randomuser.me/api/portraits/women/55.jpg'
+//     };
+//     users.push(obj);
+// }
 const usersMap = {};
 users.forEach(u => usersMap[u.id] = u);
 

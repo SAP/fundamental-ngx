@@ -7,8 +7,10 @@ import {
     Input,
     Output,
     QueryList,
+    TemplateRef,
     ViewChild,
     ViewChildren,
+    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 
@@ -48,6 +50,12 @@ export class ApprovalFlowUserListComponent implements AfterViewInit {
     @ViewChildren(StandardListItemComponent)
     listItems: QueryList<StandardListItemComponent>;
 
+    @ViewChild('itemsContainer', { read: ViewContainerRef })
+    container: ViewContainerRef;
+
+    @ViewChild('item', { read: TemplateRef })
+    template: TemplateRef<any>;
+
     /** @hidden */
     _selectedItems: BaseListItem[] = [];
 
@@ -56,6 +64,8 @@ export class ApprovalFlowUserListComponent implements AfterViewInit {
 
     /** @hidden */
     _trackByFn = trackByFn;
+
+    _displayUsers: ApprovalUser[] = [];
 
     /** @hidden */
     constructor(private _cdr: ChangeDetectorRef) {}
@@ -75,6 +85,10 @@ export class ApprovalFlowUserListComponent implements AfterViewInit {
 
             this._cdr.detectChanges();
         }
+        // console.log('AFTER VIEW INIT');
+        // this._renderDataManual(50);
+        // this._renderDataProgressive(1000);
+        // this._collectDataProgressive(1000);
     }
 
     /** @hidden */
@@ -89,5 +103,74 @@ export class ApprovalFlowUserListComponent implements AfterViewInit {
         return items.map(item =>
             this.users.find(user => `${this._idPrefix + user.id}` === item.itemEl.nativeElement.id)
         );
+    }
+
+    // Manual Rendering
+    private _renderDataManual(length: number): void {
+        const start = this.users.length;
+        const end = start + length;
+
+        for (let i = start; i <= end; i++) {
+            const user = this.users[i];
+            console.log('USER', user);
+            this.container.createEmbeddedView(
+                this.template,
+                { item: user }
+            );
+        }
+    }
+
+    private _renderDataProgressive(length: number): void {
+        const ITEMS_RENDERED_AT_ONCE = 50;
+        const INTERVAL_IN_MS = 10;
+
+        let currentIndex = 0;
+        console.log('RENDER DATA PROGRESSIVE');
+        const interval = setInterval(() => {
+            const nextIndex = currentIndex + ITEMS_RENDERED_AT_ONCE;
+            console.log('INITIATE INTERVAL');
+            for (let i = currentIndex; i <= nextIndex; i++) {
+                if (i >= length) {
+                    clearInterval(interval);
+                    break;
+                }
+
+                const context = { item: this.users[i] };
+                const viewRef = this.container.createEmbeddedView(this.template, context);
+                console.log('View Ref', viewRef);
+                console.log('Template', this.template);
+                console.log('Container', this.container);
+            }
+
+            currentIndex += ITEMS_RENDERED_AT_ONCE;
+        }, INTERVAL_IN_MS);
+    }
+
+    private _collectDataProgressive(length: number): void {
+        const ITEMS_RENDERED_AT_ONCE = 100;
+        const INTERVAL_IN_MS = 10;
+
+        let currentIndex = 0;
+        const interval = setInterval(() => {
+            console.log('INTERVAL', currentIndex);
+            const nextIndex = currentIndex + ITEMS_RENDERED_AT_ONCE;
+
+            const collectedUsers = [];
+
+            for (let i = currentIndex; i <= nextIndex; i++) {
+                if (i >= length) {
+                    clearInterval(interval);
+                    break;
+                }
+
+                collectedUsers.push(this.users[i]);
+            }
+
+            currentIndex += ITEMS_RENDERED_AT_ONCE;
+
+            console.log('PUSH COLLECTED USER', collectedUsers);
+            this._displayUsers.push(...collectedUsers);
+            this._cdr.detectChanges();
+        }, INTERVAL_IN_MS);
     }
 }
