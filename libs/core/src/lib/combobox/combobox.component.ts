@@ -289,7 +289,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** @hidden */
     @ViewChild('searchInputElement')
-    searchInputElement: ElementRef;
+    searchInputElement: ElementRef<HTMLInputElement>;
 
     /** @hidden */
     @ViewChild(PopoverComponent)
@@ -305,11 +305,11 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** @hidden */
     @ViewChild('controlTemplate')
-    controlTemplate: TemplateRef<any>;
+    controlTemplate: TemplateRef<HTMLElement>;
 
     /** @hidden */
     @ViewChild('listTemplate')
-    listTemplate: TemplateRef<any>;
+    listTemplate: TemplateRef<HTMLElement>;
 
     /** Keys, that won't trigger the popover's open state, when dispatched on search input */
     readonly nonOpeningKeys: number[] = [
@@ -343,16 +343,13 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     inputTextValue: string;
 
     /** @hidden */
-    private readonly _onDestroy$: Subject<void> = new Subject<void>();
-
-    /** @hidden */
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    onChange: any = () => {};
+    onChange: Function = () => {};
 
     /** @hidden */
-    onTouched: any = () => {};
+    onTouched: Function = () => {};
 
     /** @hidden */
     constructor(
@@ -387,8 +384,6 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-        this._onDestroy$.next();
-        this._onDestroy$.complete();
     }
 
     /** @hidden */
@@ -464,6 +459,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
         this.isOpenChangeHandle(false);
     }
 
+    /** If true value empty */
     get isEmptyValue(): boolean {
         return !this.inputText || this.inputText?.trim().length === 0;
     }
@@ -474,7 +470,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     }
 
     /** Set the input text of the input. */
-    set inputText(value) {
+    set inputText(value: string) {
         this.inputTextValue = value;
         this.inputTextChange.emit(value);
         if (!this.mobile) {
@@ -507,12 +503,12 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     }
 
     /** @hidden */
-    registerOnChange(fn): void {
+    registerOnChange(fn: Function): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn): void {
+    registerOnTouched(fn: Function): void {
         this.onTouched = fn;
     }
 
@@ -641,11 +637,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
                 }
             });
         } else if (typeof searchTerm === 'object') {
-            return contentArray.filter((item) => {
-                if (item === searchTerm) {
-                    return item;
-                }
-            });
+            return contentArray.filter((item) => item === searchTerm);
         }
     }
 
@@ -678,11 +670,6 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
         } else {
             this.displayedValues = this.dropdownValues;
         }
-    }
-
-    /** @hidden */
-    private _hasDisplayedValues(): boolean {
-        return this.open && this.displayedValues && this.displayedValues.length > 0;
     }
 
     /** @hidden */
