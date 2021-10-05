@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.41 (2021-10-05)
+
+
+### Features
+
+* **core:** splitter component ([#6468](https://github.com/SAP/fundamental-ngx/issues/6468)) ([b8c6fee](https://github.com/SAP/fundamental-ngx/commit/b8c6fee24a83f125710b8ed3ec4391896183b761))
+
 ### 0.32.2-rc.40 (2021-10-05)
 
 ### 0.32.2-rc.39 (2021-10-05)
