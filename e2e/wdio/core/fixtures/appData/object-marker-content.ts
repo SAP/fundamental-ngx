@@ -1,7 +1,7 @@
 export const iconStatusesList = [
     ['Favorite', 'Favorite Icon'],
-    ['Flag', 'Favorite Flag'],
-    ['Request', 'Favorite Request'],
-    ['Editable', 'Favorite Editable'],
-    ['Private', 'Favorite Private']
+    ['Flag', 'Flag Icon'],
+    ['Request', 'Request Icon'],
+    ['Editable', 'Editable Icon'],
+    ['Private', 'Private Icon']
 ];
