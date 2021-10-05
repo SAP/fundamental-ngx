@@ -6,7 +6,7 @@ import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATET
     template: `
         <fd-calendar [calType]="'single'" [(ngModel)]="date"> </fd-calendar>
         <br />
-        <div>Selected Date: {{ date }}</div>
+        <div>Selected Date: {{ date | date : 'shortDate' }}</div>
         <button fd-button label="Next Day" (click)="changeDay()"></button>
     `,
     styles: [
