@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { IconTabBarComponent } from './icon-tab-bar.component';
-import { TabConfig, TabType } from './types';
+import { TabConfig } from './interfaces/tab-config.interface';
+import { TabType } from './types';
 import { ContentDensityService, OverflowListModule, RtlService } from '@fundamental-ngx/core/utils';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { IconModule } from '@fundamental-ngx/core/icon';
