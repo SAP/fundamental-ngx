@@ -4,6 +4,7 @@ import { whenStable } from '@fundamental-ngx/core/tests';
 
 import { SplitterModule } from '../splitter.module';
 import { SplitterPaginationComponent } from './splitter-pagination.component';
+import { SplitterComponent } from '@fundamental-ngx/core';
 
 describe('SplitterPaginationComponent', () => {
     let component: SplitterPaginationComponent;
@@ -11,7 +12,8 @@ describe('SplitterPaginationComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [SplitterModule]
+            imports: [SplitterModule],
+            providers: [SplitterComponent]
         }).compileComponents();
     }));
 

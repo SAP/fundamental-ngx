@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { whenStable } from '@fundamental-ngx/core/tests';
 
@@ -28,7 +28,7 @@ describe('SplitterResizerComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should resize with mouse', waitForAsync(async () => {
+    it('should resize with mouse', fakeAsync(async () => {
         const initialValue = 100;
         const changedValue = 150;
 
@@ -43,17 +43,15 @@ describe('SplitterResizerComponent', () => {
         expect(startResizeSpy).toHaveBeenCalled();
 
         document.dispatchEvent(new MouseEvent('mousemove', { clientX: changedValue }));
-        fixture.detectChanges();
 
-        await fixture.whenStable();
+        tick(10);
+        fixture.detectChanges();
 
         const diff = changedValue - initialValue;
         expect(resizeSpy).toHaveBeenCalledWith(diff);
 
         document.dispatchEvent(new MouseEvent('mouseup'));
         fixture.detectChanges();
-
-        await fixture.whenStable();
 
         expect(endResizeSpy).toHaveBeenCalled();
     }));
