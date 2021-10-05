@@ -14,7 +14,7 @@ import {
     isElementClickable,
     sendKeys,
     pause,
-    waitForElDisplayed, waitForPresent
+    waitForElDisplayed
 } from '../../driver/wdio';
 import {
     fullName,
@@ -23,7 +23,6 @@ import {
     update,
     firstAdressLength
 } from '../fixtures/testData/wizard.tags'
-import waitForExist from 'webdriverio/build/commands/element/waitForExist';
 
 describe('Wizard component test', function () {
     const wizardPage = new WizardPo();
@@ -154,15 +153,13 @@ describe('Wizard component test', function () {
         click(radioButton);
         expect(getAttributeByName(radioButton, 'aria-checked')).toBe('true', 'radio button is not selected');
         click(radioButton, 1);
-        // pause for dialog element to be created
-        pause(500);
-        expect(waitForElDisplayed(dialogContainer)).toBe(true, 'dialog container did not open');
+        expect(isElementDisplayed(dialogContainer)).toBe(true, 'dialog container did not open');
         click(cancelButton);
         expect(getAttributeByName(radioButton, 'aria-checked')).toBe('true', 'focus dissapeared');
         click(radioButton, 1);
         click(continueButton);
         expect(getAttributeByName(radioButton, 'aria-checked', 1)).toBe('true', 'focus did not change');
-    }, 1);
+    });
 
     it('should check navigation in mobile example', () => {
         click(mobileExample + nextStep);
@@ -193,11 +190,9 @@ describe('Wizard component test', function () {
     function checkReOpen(section: string, block: string): void {
         click(section + button);
         if (section === defaultExample) {
-            waitForElDisplayed(block + nextStep);
             click(block + nextStep);
         }
         if (section !== defaultExample) {
-            waitForElDisplayed(dialogWizard + buttonsBar + ':nth-child(1) ' + button);
             click(dialogWizard + buttonsBar + ':nth-child(1) ' + button);
         }
         setValue(fullNameInput, fullName);
@@ -206,7 +201,6 @@ describe('Wizard component test', function () {
         if (section === defaultExample) {
             click(block + exitButton);
             click(section + button);
-            waitForElDisplayed(block + nextStep);
             click(block + nextStep);
         }
         if (section !== defaultExample) {
@@ -227,14 +221,14 @@ describe('Wizard component test', function () {
     function checkOpenClose(section: string): void {
         click(section + button);
         if (section !== dialogExample) {
-            expect(waitForElDisplayed(section + wizard)).toBe(true, `wizard in ${section} did not open`);
+            expect(isElementDisplayed(section + wizard)).toBe(true, `wizard in ${section} did not open`);
             expect(getAttributeByName(section + wizard, 'style')).toEqual('width: 100%;')
             click(section + exitButton);
             expect(isElementDisplayed(section + wizard)).toBe(false, `wizard in ${section} did not close`);
             expect(getAttributeByName(section + wizard, 'style')).toEqual('width: 0%;');
         }
         if (section === dialogExample) {
-            expect(waitForElDisplayed(dialogWizard)).toBe(true, 'dialog wizard did not open');
+            expect(isElementDisplayed(dialogWizard)).toBe(true, 'dialog wizard did not open');
             click(dialogWizard + buttonsBar + ':nth-child(2) ' + button);
             expect(doesItExist(dialogWizard)).toBe(false, 'dialog wizard did not close, still exist in DOM');
         }

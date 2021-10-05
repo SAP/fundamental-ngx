@@ -12,7 +12,7 @@ import {
     setValue,
     waitElementToBeClickable,
     waitForElDisappear,
-    waitForElDisplayed, waitForNotPresent,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import { ApprovalFlowPo } from '../pages/approval-flow.po';
@@ -180,7 +180,6 @@ describe('Approval flow', function() {
             expect(isElementDisplayed(toastMessageDialog)).toBe(true);
             expect(getTextArr(toastMessageDialog))
                 .toContain(remainder_text + approvalNodeText);
-            waitForNotPresent(toastMessageDialog);
         }
     });
 

@@ -36,7 +36,7 @@ describe('Input should ', function () {
     const {
         defaultInput, textInput, numberInput, compactInput, readonlyInput, disabledInput, inlineHelpInput,
         messagesComponentsInput, submitBtn, errorTextAttr, requiredInputLabel, questionMarkSpan, inputsLabels, inputsArray,
-        autocompleteInput, autocompleteInputLabel, autocompleteOptions, disabledInputAttribute
+        autocompleteInput, autocompleteInputLabel, autocompleteOptions
     } = inputPage;
 
     beforeAll(() => {
@@ -117,7 +117,7 @@ describe('Input should ', function () {
 
     it('check have disabled attr assigned', () => {
         waitForElDisplayed(disabledInput);
-        expect(getAttributeByName(disabledInputAttribute, 'disabled')).toBe('true');
+        expect(getAttributeByName(disabledInput, 'disabled')).toBe('true');
         expect(isEnabled(disabledInput)).toBe(false);
     });
 

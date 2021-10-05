@@ -85,7 +85,7 @@ describe('Verify Feed Input component', function() {
             waitForPresent(feedInputTextArea, i);
             scrollIntoView(feedInputTextArea, i);
             setValue(feedInputTextArea, four_lines_text, i);
-            scrollIntoView(feedInputButton, i);
+            waitForPresent(feedInputButton, i);
             expect(isEnabled(feedInputButton, i)).toBe(true);
         }
     });

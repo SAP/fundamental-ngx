@@ -16,7 +16,7 @@ import {
     getCSSPropertyByName, getElementAriaLabel,
     getElementSize,
     isElementClickable,
-    mouseHoverElement, pause,
+    mouseHoverElement,
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,
@@ -197,8 +197,6 @@ describe('Verify Switch component', function() {
             const onIconStateBefore = getCSSPropertyByName(semanticSwitchIconOn, 'visibility');
             const offIconStateBefore = getCSSPropertyByName(semanticSwitchIconOff, 'visibility');
             click(semanticSwitchHandel);
-            // pause for animation
-            pause(500);
             // capture after state
             const isCheckedAfter = getAttributeByName(semanticSwitchInput, 'aria-checked');
             const onIconStateAfter = getCSSPropertyByName(semanticSwitchIconOn, 'visibility');
@@ -218,8 +216,6 @@ describe('Verify Switch component', function() {
             const onIconStateBefore = getCSSPropertyByName(semanticCompactSwitchIconOn, 'visibility');
             const offIconStateBefore = getCSSPropertyByName(semanticCompactSwitchIconOff, 'visibility');
             click(semanticCompactSwitchHandel);
-            // pause for animation
-            pause(500);
             // capture after state
             const isCheckedAfter = getAttributeByName(semanticCompactSwitchInput, 'aria-checked');
             const onIconStateAfter = getCSSPropertyByName(semanticCompactSwitchIconOn, 'visibility');

@@ -17,8 +17,7 @@ describe('Multi input test suite', function() {
     const multiInputPage: MultiInputPo = new MultiInputPo();
     const {
         expandedDropdown, activeDropdownButtons, activeInputs, mobileInput, filledInput, approveButton, groupHeader,
-        groupDropdown, options, dropdownOptions, selectedToken, crossButton, dropdownOptionText, dropdownOptionTextValueHelp,
-        header
+        groupDropdown, options, dropdownOptions, selectedToken, crossButton, dropdownOptionText, dropdownOptionTextValueHelp
     } = multiInputPage;
 
     beforeAll(() => {
@@ -43,10 +42,8 @@ describe('Multi input test suite', function() {
             if (i !== mobileExample) {
                 multiInputPage.expandDropdown(activeDropdownButtons, i);
                 const optionsArr = getAttributeByNameArr(options, 'title');
-                scrollIntoView(header, i);
                 multiInputPage.selectOption(optionsArr[0]);
                 multiInputPage.expandDropdown(activeDropdownButtons, i);
-                scrollIntoView(header, i);
                 multiInputPage.selectOption(optionsArr[1]);
                 expect(getText(filledInput, i)).toContain(optionsArr[0]);
                 expect(getText(filledInput, i)).toContain(optionsArr[1]);
@@ -109,7 +106,6 @@ describe('Multi input test suite', function() {
             if (i !== mobileExample) {
                 multiInputPage.expandDropdown(activeDropdownButtons, i);
                 const optionsArr = getAttributeByNameArr(options, 'title');
-                scrollIntoView(header, i);
                 multiInputPage.selectOption(optionsArr[0]);
                 expect(getText(filledInput, i)).toContain(optionsArr[0]);
                 scrollIntoView(crossButton(optionsArr[0]));
@@ -119,7 +115,6 @@ describe('Multi input test suite', function() {
             if (i === mobileExample) {
                 multiInputPage.expandDropdown(activeDropdownButtons, i);
                 const optionsArr = getAttributeByNameArr(options, 'title');
-                scrollIntoView(header, i);
                 multiInputPage.selectOption(optionsArr[0]);
                 click(approveButton);
                 expect(getText(filledInput, i)).toContain(optionsArr[0]);
@@ -170,7 +165,6 @@ describe('Multi input test suite', function() {
                 scrollIntoView(activeDropdownButtons, i)
                 multiInputPage.expandDropdown(activeDropdownButtons, i);
                 const optionsArr = getAttributeByNameArr(options, 'title');
-                scrollIntoView(header, i);
                 multiInputPage.selectOption(optionsArr[0]);
                 expect(getText(filledInput, i)).toContain(optionsArr[0]);
                 expect(getText(filledInput, i).split('\n')[0]).toBe(optionsArr[0]);
@@ -181,7 +175,6 @@ describe('Multi input test suite', function() {
             if (i === mobileExample) {
                 multiInputPage.expandDropdown(activeDropdownButtons, i);
                 const optionsArr = getAttributeByNameArr(options, 'title');
-                scrollIntoView(header, i);
                 multiInputPage.selectOption(optionsArr[0]);
                 click(approveButton);
                 expect(getText(filledInput, i)).toContain(optionsArr[0]);

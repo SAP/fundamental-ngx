@@ -9,7 +9,7 @@ env:
   NX_BRANCH: ${{ github.event.number }}
   NX_RUN_GROUP: ${{ github.run_id }}
   NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
-
+  
   MOZ_HEALESS: 1
 
   SAUCE_USERNAME: ${{secrets.SAUCE_USERNAME}}
@@ -25,6 +25,7 @@ env:
 jobs:
   install:
     runs-on: ubuntu-latest
+    needs: one_run
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2

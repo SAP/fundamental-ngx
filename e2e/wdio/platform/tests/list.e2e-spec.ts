@@ -39,8 +39,7 @@ import {
     scrollIntoView,
     sendKeys,
     waitForElDisplayed,
-    waitForInvisibilityOf,
-    pause
+    waitForInvisibilityOf
 } from '../../driver/wdio';
 
 describe('List test suite:', function() {
@@ -177,7 +176,6 @@ describe('List test suite:', function() {
             checkAttributeValueTrue(vScrollList, scrollLoadAttr);
             checkAttributeValueTrue(vScrollList, lazyLoadAttr);
             refreshPage();
-            waitForElDisplayed(listPage.title);
         });
 
         it('should check scroll', () => {
@@ -190,8 +188,6 @@ describe('List test suite:', function() {
             const itemsStartCount = getElementArrayLength(vScrollListItems);
             click(vScrollListItems);
             sendKeys(['ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown']);
-            // pause to give the browser time to process actions and generate loading icons
-            pause(650);
             expect(waitForElDisplayed(vScrollLoadIcon)).toBe(true);
             waitForInvisibilityOf(vScrollLoadIcon);
             const itemsEndCount = getElementArrayLength(vScrollListItems);

@@ -10,7 +10,6 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,
-    pause
 } from '../../driver/wdio';
 import { TabsPo } from '../pages/tabs.po';
 
@@ -51,8 +50,7 @@ describe('Tabs test suite', () => {
         click(addBtn);
         let newLength = getElementArrayLength(AddExample + fdTab);
         expect(newLength).toBeGreaterThan(originalLength);
-        click(removeBtn);
-        click(removeBtn);
+        doubleClick(removeBtn);
         newLength = getElementArrayLength(AddExample + fdTab);
         expect(originalLength).toBeGreaterThan(newLength);
         for (newLength; newLength !== 1; newLength--) {
