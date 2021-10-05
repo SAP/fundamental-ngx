@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.43 (2021-10-05)
+
+
+### Bug Fixes
+
+* **core:** adding accessability label and reading button type ([#6385](https://github.com/SAP/fundamental-ngx/issues/6385)) ([0ada932](https://github.com/SAP/fundamental-ngx/commit/0ada9328eefedae37f015668537d27e9537269c9))
+
 ### 0.32.2-rc.42 (2021-10-05)
 
 ### 0.32.2-rc.41 (2021-10-05)
