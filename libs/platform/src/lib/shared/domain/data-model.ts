@@ -1,3 +1,6 @@
+import { coerceArray } from '@angular/cdk/coercion';
+import { isBlank } from './../';
+
 /**
  * Interface SelectItem is used to deal with complex object in order to be able to format
  * custom label that is shown in the options.
@@ -75,3 +78,11 @@ export interface MultiInputOption {
 
 export const isOptionItem = isSelectItem;
 export const isSelectableOptionItem = isSelectableItem;
+
+/** 
+ * Wraps the provided value in an array, unless it is an array already.
+ * If `null` or `undefined` is received, will return an empty array.
+ */
+export function coerceArraySafe<T>(value: T | T[]): T[] {
+    return isBlank(value) ? [] : coerceArray(value);
+}

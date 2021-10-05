@@ -96,7 +96,7 @@ export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxIn
             return;
         }
 
-        this._selectedBackup = this._component._selected?.length ? [...this._component._selected] : [];
+        this._selectedBackup = this._component._selectedSuggestions?.length ? [...this._component._selectedSuggestions] : [];
         if (!this._dialogService.hasOpenDialogs()) {
             this._open();
         }

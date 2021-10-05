@@ -332,7 +332,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
     abstract createChangeEvent(value: number): StepInputChangeEvent;
 
     /** Format value for view presentation */
-    abstract formatValue(value: number): string;
+    abstract formatValue(value: number | null): string;
 
     /** Format value for "in focus" mode */
     abstract formatValueInFocusMode(value: number): string;
@@ -418,9 +418,6 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
 
     /** @hidden */
     private _updateViewValue(): void {
-        if (this._value === null) {
-            return;
-        }
         const formatted = this._formatValue();
         this._renderValue(formatted);
     }
