@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.44 (2021-10-05)
+
+
+### Bug Fixes
+
+* **core,platform:** fix a11y issues for object marker component for core and platform lib ([#6535](https://github.com/SAP/fundamental-ngx/issues/6535)) ([ecbf7b8](https://github.com/SAP/fundamental-ngx/commit/ecbf7b8bc9cb647c4ab4e9049b7b0cc589eb1e3d))
+
 ### 0.32.2-rc.43 (2021-10-05)
 
 
