@@ -1,5 +1,5 @@
 <fdp-form-group [formGroup]="customForm">
-    <fdp-form-field id="switch1" label="Form Switch 1" rank="4" required="true">
+    <fdp-form-field id="switch1" label="Form Switch 1" rank="4" required="true" [validators]="validators" [i18Strings]="switchOneErrors">
         <fdp-switch
             name="switch-1"
             ariaLabel="switch-label"
@@ -32,5 +32,11 @@
         </fdp-switch>
     </fdp-form-field>
 </fdp-form-group>
+
+<ng-template #switchOneErrors let-errors>
+    <span *ngIf="errors.required" role="alert" aria-atomic="true">
+       Selection is required
+    </span>
+</ng-template>
 
 <div style="padding-left: 2rem;">form value: {{ customForm.getRawValue() | json }}</div>
