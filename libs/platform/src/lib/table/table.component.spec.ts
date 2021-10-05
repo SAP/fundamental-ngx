@@ -1019,13 +1019,11 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
         let tableComponent: TableComponent<SourceItem>;
 
         let tableBodyRows: DebugElement[] = [];
-        let tableBodyTreeRows: DebugElement[] = [];
         let tableRowTogglerCellsArray: DebugElement[] = [];
 
         const calculateTableElementsMetaData = () => {
             tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
-            tableBodyTreeRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fdp-table__row--tree'));
-            tableRowTogglerCellsArray = tableBodyTreeRows.map((row) => row.query(By.css('.fdp-table__cell--tree')));
+            tableRowTogglerCellsArray = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row .fd-table__cell--expand'));
         };
 
         beforeEach(
@@ -1055,7 +1053,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
         it('should generate rows for provided items', () => {
             expect(tableComponent._tableRows.length).toEqual(totalTreeItems);
 
-            expect(tableBodyTreeRows.length).toEqual(treeItemParentsCount);
+            expect(tableRowTogglerCellsArray.length).toEqual(treeItemParentsCount);
         });
 
         describe('Collapsing/Expanding', () => {
@@ -1220,7 +1218,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
             });
 
             it('should change type for row with 0 children to "item"', () => {
-                expect(tableBodyTreeRows.length).toEqual(treeItemParentsCount);
+                expect(tableRowTogglerCellsArray.length).toEqual(treeItemParentsCount);
 
                 firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
@@ -1236,7 +1234,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 calculateTableElementsMetaData();
 
-                expect(tableBodyTreeRows.length).toEqual(treeItemParentsCount - 1);
+                expect(tableRowTogglerCellsArray.length).toEqual(treeItemParentsCount - 1);
             });
         });
     });
