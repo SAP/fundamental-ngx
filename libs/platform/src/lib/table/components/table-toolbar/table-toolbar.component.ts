@@ -68,7 +68,11 @@ export class TableToolbarComponent implements TableToolbarWithTemplate, AfterVie
     readonly tableLoading$: Observable<boolean> = this.tableService.tableLoading$;
 
     /** @hidden */
-    constructor(private readonly _cd: ChangeDetectorRef, private readonly _table: Table, private tableService: TableService) {}
+    constructor(
+        private readonly _cd: ChangeDetectorRef,
+        private readonly _table: Table,
+        private readonly tableService: TableService
+    ) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
