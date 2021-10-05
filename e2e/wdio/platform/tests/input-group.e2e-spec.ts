@@ -121,8 +121,9 @@ describe('Input Group should', function() {
 
     it('check have disabled attr assigned', () => {
         waitForPresent(disabledInput);
-        scrollIntoView(disabledInput);
+        waitForElDisplayed(disabledInput);
 
+        expect(getAttributeByName(disabledInput, 'disabled')).toBe('true');
         expect(isEnabled(disabledInput)).toBe(false);
     });
 
@@ -149,7 +150,7 @@ describe('Input Group should', function() {
         mouseHoverElement(withFormInput);
 
         expect(executeScriptBeforeTagAttr(withFormInputQuestionMark, 'content')).toBe('""');
-        expect(executeScriptAfterTagAttr(withFormInputAsterixMark, 'content')).toBe('"*"');
+        expect(executeScriptAfterTagAttr(withFormInputAsterixMark, 'content')).toBe('"*"'); 
         // TODO: Uncomment after merge
         /*        if (browserIsSafari()) {
             expect(getText(inputGroupPage.withFormInputErrorTooltip)).toEqual('Value is required');

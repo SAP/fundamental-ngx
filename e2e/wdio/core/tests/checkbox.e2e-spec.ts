@@ -12,7 +12,7 @@ import {
 import {
     acceptAllTrue,
     allMarkedFalse,
-    allMarkedTrue, altCustomLabel, customLabel,
+    allMarkedTrue, customLabel,
     customLabelsArr,
     emptyDataArr,
     emptyString, stateClassesArr
@@ -198,7 +198,7 @@ describe('checkbox test suite', function() {
             const textArr = getText(customLabelCheckbox).split('\n');
             const checkboxLabelText = textArr[0];
 
-            expect([customLabel, altCustomLabel]).toContain(checkboxLabelText);
+            expect(checkboxLabelText).toEqual(customLabel, 'custom label does not match');
         });
 
         it('should check the checkbox and link are clickable', () => {

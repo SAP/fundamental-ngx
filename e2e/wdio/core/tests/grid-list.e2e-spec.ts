@@ -9,7 +9,7 @@ import {
     scrollIntoView,
     waitForClickable,
     waitForElDisplayed,
-    getElementClass, acceptAlert
+    getElementClass
 } from '../../driver/wdio';
 import {
     text,
@@ -67,7 +67,6 @@ describe('Grid-list test suite', function() {
         for (let i = 0; i < itemsArrayLength; i++) {
             scrollIntoView(deleteItemButton);
             click(deleteItemButton);
-            acceptAlert();
             productsQuantityFromTitle = getText(deleteModeTitle).replace(/\D/g, '');
             const newArray = elementArray(gridListItemsByMode('delete'));
             expect(productsQuantityFromTitle).toEqual(newArray.length.toString());

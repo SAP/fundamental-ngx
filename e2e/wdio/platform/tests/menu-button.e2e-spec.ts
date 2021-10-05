@@ -61,8 +61,7 @@ describe('Menu button test suite', function() {
         });
 
         it('should check close menu by clicking menu btn', () => {
-            click(cozyBtnArr);
-            click(cozyBtnArr);
+            doubleClick(cozyBtnArr);
             expect(isElementDisplayed(menuItemOverlay)).toBe(false);
 
         });

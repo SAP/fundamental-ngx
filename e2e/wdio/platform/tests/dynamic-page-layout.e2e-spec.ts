@@ -8,7 +8,7 @@ import {
     refreshPage,
     scrollIntoView,
     waitForClickable,
-    waitForElDisplayed, waitForNotDisplayed,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import { DynamicPageLayoutPo } from '../pages/dynamic-page-layout.po';
@@ -62,7 +62,7 @@ describe('Dynamic Page Layout test suite:', function() {
             waitForElDisplayed(dynamicPage);
             waitForElDisplayed(dynamicPageCollapsibleHeader);
             click(dynamicPageCollapseIcon);
-            expect(waitForNotDisplayed(dynamicPageCollapsibleHeader)).toBe(true);
+            expect(elementDisplayed(dynamicPageCollapsibleHeader)).toBe(false);
         });
 
         it('should verify dynamic page is collapsible by click on header', () => {
@@ -181,7 +181,7 @@ describe('Dynamic Page Layout test suite:', function() {
             click(openColumnButton);
             waitForElDisplayed(columnSectionHeader);
             click(dynamicPageCollapseIcon);
-            expect(waitForNotDisplayed(dynamicPageCollapsibleHeader)).toBe(true);
+            expect(elementDisplayed(dynamicPageCollapsibleHeader)).toBe(false);
         });
 
         it('should verify dynamic page is collapsible by click on header', () => {
