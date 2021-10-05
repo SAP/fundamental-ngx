@@ -35,12 +35,13 @@ describe('Inline help test suite', function() {
         }
     });
 
-    xit('Verify inline help input', () => {
+    it('Verify inline help input', () => {
         scrollIntoView(exampleAreaContainersArr);
         mouseHoverElement(inlineHelpInput);
         expect(getAttributeByName(inlineHelpInput, 'fd-inline-help')).toContain('Inline Help Tooltip');
     });
 
+    // skip due to visual regression
     xit('Verify button inline help', () => {
         scrollIntoView(exampleAreaContainersArr, 1);
         click(inlineHelpButton);
@@ -52,6 +53,7 @@ describe('Inline help test suite', function() {
         expect(getAttributeByName(inlineHelpButton, 'fd-inline-help')).toContain('Inline Help Tooltip');
     });
 
+    // skip due to visual regression
     xit('Verify styled inline help icon', () => {
         scrollIntoView(exampleAreaContainersArr, 2);
         mouseHoverElement(inlineHelpStyledIcon);
@@ -62,6 +64,7 @@ describe('Inline help test suite', function() {
         expect(getAttributeByName(inlineHelpStyledIcon, 'fd-inline-help')).toContain('Inline Help Tooltip');
     });
 
+    // skip due to visual regression
     xit('Verify template inline help example', () => {
         scrollIntoView(exampleAreaContainersArr, 3);
         mouseHoverElement(inlineHelpTemplateExample);
