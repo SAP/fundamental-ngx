@@ -13,9 +13,9 @@ import { DateRange } from '@fundamental-ngx/core/calendar';
         >
         </fd-calendar>
         <br />
-        <div>Selected First Date: {{ selected.start }}</div>
+        <div>Selected First Date: {{ selected.start | date : 'shortDate' }}</div>
         <br />
-        <div>Selected Last Date: {{ selected.end }}</div>`,
+        <div>Selected Last Date: {{ selected.end | date : 'shortDate' }}</div>`,
     providers: [
         {
             provide: DatetimeAdapter,
