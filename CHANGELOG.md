@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.38 (2021-10-05)
+
+
+### Bug Fixes
+
+* **platform:** icon-tab-bar types & interfaces for using jest ([#6772](https://github.com/SAP/fundamental-ngx/issues/6772)) ([00dd8ce](https://github.com/SAP/fundamental-ngx/commit/00dd8ce0d8ba33871204186f00de90377553ca33))
+
 ### 0.32.2-rc.37 (2021-10-05)
 
 ### 0.32.2-rc.36 (2021-10-05)
