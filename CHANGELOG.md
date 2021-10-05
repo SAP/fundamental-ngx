@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.39 (2021-10-05)
+
+
+### Bug Fixes
+
+* **platform:** input touched state ([#6728](https://github.com/SAP/fundamental-ngx/issues/6728)) ([aa259c6](https://github.com/SAP/fundamental-ngx/commit/aa259c6957f96f6bc0610c9024e16cf928c1e1e9))
+
 ### 0.32.2-rc.38 (2021-10-05)
 
 
