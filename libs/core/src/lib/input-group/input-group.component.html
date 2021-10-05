@@ -36,7 +36,7 @@
                 [class.fd-shellbar__button]="inShellbar"
                 [class.is-expanded]="isExpanded"
                 [attr.aria-expanded]="inShellbar ? isExpanded : null"
-                [attr.aria-label]="glyphAriaLabel || glyph || addOnText"
+                [ariaLabel]="glyphAriaLabel || glyph || addOnText"
                 [attr.aria-controls]="input"
                 [disabled]="disabled"
                 (mousedown)="preventFocus($event)"
