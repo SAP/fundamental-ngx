@@ -45,6 +45,7 @@ import { ListComponent } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import {
     ArrayComboBoxDataSource,
+    coerceArraySafe,
     CollectionBaseInput,
     ComboBoxDataSource,
     FormField,
@@ -171,11 +172,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     }
 
     set value(value: any) {
-        if (!value) {
-            return;
-        }
-
-        const selectedItems = Array.isArray(value) ? value : [value];
+        const selectedItems = coerceArraySafe(value);
         this.setAsSelected(this._convertToOptionItems(selectedItems));
         super.setValue(value);
     }
@@ -374,11 +371,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
-        if (!value) {
-            return;
-        }
-
-        const selectedItems = Array.isArray(value) ? value : [value];
+        const selectedItems = coerceArraySafe(value);
         this.setAsSelected(this._convertToOptionItems(selectedItems));
         super.writeValue(value);
     }

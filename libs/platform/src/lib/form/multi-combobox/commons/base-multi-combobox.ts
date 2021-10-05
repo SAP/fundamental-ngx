@@ -41,6 +41,7 @@ import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 import {
     ArrayMultiComboBoxDataSource,
+    coerceArraySafe,
     CollectionBaseInput,
     FormField,
     FormFieldControl,
@@ -57,14 +58,13 @@ import {
     SelectableOptionItem
 } from '@fundamental-ngx/platform/shared';
 import { ListConfig } from '@fundamental-ngx/platform/list';
-import { MultiComboboxComponent } from '../multi-combobox/multi-combobox.component';
 import { TextAlignment } from '../../combobox';
 
 export type FdpMultiComboboxDataSource<T> = MultiComboBoxDataSource<T> | Observable<T[]> | T[];
 
 export class MultiComboboxSelectionChangeEvent {
     constructor(
-        public source: MultiComboboxComponent,
+        public source: BaseMultiCombobox,
         public selectedItems: SelectableOptionItem['value'] // Contains selected items
     ) {}
 }
@@ -144,12 +144,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
 
     @Input()
     set value(value: any) {
-        if (!value) {
-            return;
-        }
-
-        const selectedItems = Array.isArray(value) ? value : [value];
-        super.setValue(selectedItems);
+        this.selectedItems = coerceArraySafe(value);
+        super.setValue(this.selectedItems);
+        this._setSelectedSuggestions();
+        this.emitChangeEvent();
     }
     get value(): any {
         return super.getValue();
@@ -261,7 +259,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     /** @hidden
      * List of selected suggestions
      * */
-    _selected: SelectableOptionItem[];
+    _selectedSuggestions: SelectableOptionItem[];
 
     /** @hidden
      * Max width of list container
@@ -365,11 +363,6 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     }
 
     /** @hidden
-     * Method to emit change event
-     */
-    abstract emitChangeEvent<K>(value: K): void;
-
-    /** @hidden
      * Method to set input text as item label.
      * */
     abstract setInputTextFromOptionItem(item: SelectableOptionItem): void;
@@ -386,12 +379,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
-        if (!value) {
-            return;
-        }
-
-        const selectedItems = Array.isArray(value) ? value : [value];
-        super.writeValue(selectedItems);
+        this.selectedItems = coerceArraySafe(value);
+        super.writeValue(this.selectedItems);
+        this._setSelectedSuggestions();
+        this.emitChangeEvent();
     }
 
     /** @hidden */
@@ -510,6 +501,37 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         }
     }
 
+    /** 
+     * @hidden
+     * Method to emit change event
+     */
+    emitChangeEvent(): void {
+        const event = new MultiComboboxSelectionChangeEvent(this, this.value);
+
+        this.selectionChange.emit(event);
+    }
+
+    /** @hidden */
+    protected _setSelectedSuggestions(): void {
+        this._selectedSuggestions = [];
+
+        if (!this.selectedItems?.length) {
+            return;
+        }
+
+        for (let i = 0; i <= this.selectedItems.length; i++) {
+            const selectedItem = this.selectedItems[i];
+            const idx = this._flatSuggestions.findIndex(item => (item.label === selectedItem) || (item.value === selectedItem));
+            if (idx !== -1) {
+                this._selectedSuggestions.push(this._flatSuggestions[idx]);
+                this._flatSuggestions[idx].selected = true;
+            }
+        }
+
+        this._cd.markForCheck();
+    }
+
+
     /** @hidden */
     protected get ds(): MultiComboBoxDataSource<any> {
         return <MultiComboBoxDataSource<any>>this.dataSource;
@@ -523,7 +545,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     /** @hidden
      * Method that picks other value moved from current one by offset, called only when Multi Combobox is closed */
     private _chooseOtherItem(offset: number): void {
-        if (this._selected?.length === this._flatSuggestions.length) {
+        if (this._selectedSuggestions?.length === this._flatSuggestions.length) {
             this.inputText = '';
             return;
         }
@@ -537,7 +559,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
             this.setInputTextFromOptionItem(item);
         }
 
-        const selectedIndex = this._selected.findIndex(value => value.label === item?.label);
+        const selectedIndex = this._selectedSuggestions.findIndex(value => value.label === item?.label);
         if (selectedIndex !== -1) {
             this._chooseOtherItem(offset);
         }
@@ -550,7 +572,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
 
     /** @hidden
      *  Map grouped values to array. */
-    protected _flatGroups(items: SelectableOptionItem[]): SelectableOptionItem[] {
+    protected _flattenGroups(items: SelectableOptionItem[]): SelectableOptionItem[] {
         return items.reduce((result: SelectableOptionItem[], item: SelectableOptionItem) => result.concat(item.children), []);
     }
 
@@ -592,7 +614,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
             )
             .subscribe(data => {
                 this._suggestions = this._convertToOptionItems(data);
-                this._flatSuggestions = this.isGroup ? this._flatGroups(this._suggestions) : this._suggestions;
+                this._flatSuggestions = this.isGroup ? this._flattenGroups(this._suggestions) : this._suggestions;
 
                 this.stateChanges.next('initDataSource.open().');
 

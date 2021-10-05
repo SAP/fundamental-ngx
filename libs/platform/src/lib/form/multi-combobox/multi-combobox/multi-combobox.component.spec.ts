@@ -175,14 +175,14 @@ describe('MultiComboboxComponent default values', () => {
         fixture.detectChanges();
 
         expect(item.selected).toBeTrue();
-        expect(multiCombobox._selected.length).toEqual(1);
+        expect(multiCombobox._selectedSuggestions.length).toEqual(1);
         expect(propagateChangeSpy).toHaveBeenCalled();
 
         multiCombobox.toggleSelection(item);
         fixture.detectChanges();
 
         expect(item.selected).toBeFalse();
-        expect(multiCombobox._selected.length).toEqual(0);
+        expect(multiCombobox._selectedSuggestions.length).toEqual(0);
         expect(propagateChangeSpy).toHaveBeenCalled();
     });
 
@@ -202,12 +202,12 @@ describe('MultiComboboxComponent default values', () => {
         overlayContainerEl.querySelector('.fd-list__item').dispatchEvent(selectEvent);
         fixture.detectChanges();
 
-        expect(multiCombobox._selected.length).toEqual(component.dataSource.length);
+        expect(multiCombobox._selectedSuggestions.length).toEqual(component.dataSource.length);
 
         overlayContainerEl.querySelector('.fd-list__item').dispatchEvent(unselectEvent);
         fixture.detectChanges();
 
-        expect(multiCombobox._selected.length).toEqual(0);
+        expect(multiCombobox._selectedSuggestions.length).toEqual(0);
     });
 });
 

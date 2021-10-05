@@ -45,7 +45,7 @@
         (keydown)="navigateByTokens($event)"
     >
         <fd-tokenizer
-            *ngIf="_selected"
+            *ngIf="_selectedSuggestions"
             [compact]="isCompact"
             [tokenizerFocusable]="false"
             class="fdp-multi-combobox-tokenizer-custom"
@@ -55,7 +55,7 @@
             <fd-token [compact]="isCompact"
                       [readOnly]="disabled"
                       (onCloseClick)="removeToken(token, $event)"
-                      *ngFor="let token of _selected">
+                      *ngFor="let token of _selectedSuggestions">
                 {{ token.label }}
             </fd-token>
 
