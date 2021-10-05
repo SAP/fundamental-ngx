@@ -91,7 +91,7 @@ export interface MatchingBy {
 
 /** Matching Strategy: StartsWithPerTerm - Reqexp */
 export function getMatchingStrategyStartsWithPerTermReqexp(value: string): RegExp {
-    return new RegExp(`(\\s|^)${value}`, 'gi');
+    return new RegExp(`(\\s|^)(${value})`, 'gi');
 }
 
 export function isDataSource(value: any): value is DataSource<any> {
