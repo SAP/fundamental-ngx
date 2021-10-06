@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.53 (2021-10-06)
+
+
+### Bug Fixes
+
+* **platform:** add export for multi-input config ([#6849](https://github.com/SAP/fundamental-ngx/issues/6849)) ([5b45ac7](https://github.com/SAP/fundamental-ngx/commit/5b45ac75ce71e73d2a35e53353be4348f1dab726))
+
 ### 0.32.2-rc.52 (2021-10-06)
 
 
