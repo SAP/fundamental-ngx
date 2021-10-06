@@ -7,7 +7,7 @@ import {
     isElementDisplayed,
     pause,
     refreshPage,
-    waitForElDisplayed,
+    waitForElDisplayed, waitForNotDisplayed
 } from '../../driver/wdio';
 
 describe('Flexible column layout component test', function () {
@@ -61,10 +61,12 @@ describe('Flexible column layout component test', function () {
     it('should check collapsible area', () => {
         click(dynamicExample + button);
         click(columnButton);
+        // pause for animation
+        pause(500);
         click(collapsButton);
-        expect(isElementDisplayed(collapsibleHeader, 0)).toBe(false, 'collapsible area is not visible');
+        expect(waitForNotDisplayed(collapsibleHeader, 0)).toBe(true, 'collapsible area is not visible');
         click(collapsButton);
-        expect(isElementDisplayed(collapsibleHeader, 0)).toBe(true, 'collapsible area is visible');
+        expect(waitForElDisplayed(collapsibleHeader, 0)).toBe(true, 'collapsible area is visible');
     });
 
     it('should check pin in dynamic example', () => {
