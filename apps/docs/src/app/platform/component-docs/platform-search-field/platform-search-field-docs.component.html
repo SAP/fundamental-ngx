@@ -23,6 +23,10 @@
 <description
     >The Search field <code>ariaLabelledBy</code> property can be used to set ARIA attribute with id of elements which labels search input to clarify what search field is.
 </description>
+<description
+    >A refresh button in the search field makes it possible to utilize search and refresh together in one field.
+    If the Refresh button is available, the user can update the list without triggering a new search. This is usually needed when backend data changes quickly and often.
+</description>
 <component-example>
     <fdp-platform-search-field-basic-example></fdp-platform-search-field-basic-example>
 </component-example>
@@ -84,3 +88,4 @@
 <component-example>
     <fdp-platform-search-field-mobile-example></fdp-platform-search-field-mobile-example>
 </component-example>
+<code-example [exampleFiles]="searchFieldMobileMode"></code-example>
