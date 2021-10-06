@@ -305,6 +305,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     /** @hidden */
     _exitUserDetailsMode(): void {
         this.viewService.setCurrentView(this.viewService.team ? VIEW_MODES.VIEW_TEAM_MEMBERS : VIEW_MODES.SELECT_USER);
+
         this._userToShowDetails = undefined;
         this._userToShowDetailsData$ = undefined;
 
