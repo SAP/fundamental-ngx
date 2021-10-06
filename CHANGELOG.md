@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.51 (2021-10-06)
+
+
+### Bug Fixes
+
+* **platform:** pass property from wizard to form ([#6831](https://github.com/SAP/fundamental-ngx/issues/6831)) ([8f96986](https://github.com/SAP/fundamental-ngx/commit/8f969864b73809314207305a40353531a7eb89a5))
+
 ### 0.32.2-rc.50 (2021-10-06)
 
 
