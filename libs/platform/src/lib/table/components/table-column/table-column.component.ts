@@ -24,6 +24,7 @@ import { FdpHeaderCellDef } from '../../directives/table-header.directive';
 
 import { TableColumn } from './table-column';
 import { TableService } from '../../table.service';
+import { TableColumnResizeService } from '../../table-column-resize.service';
 
 enum ColumnAlignEnum {
     Start = 'left',
@@ -124,6 +125,7 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     }
     set width(value: string) {
         this._width = value;
+        this._tableColumnResizeService.registerColumnWidthInputChange(this.name);
         this._tableService?.recalculateColumnsWidth();
     }
 
@@ -158,7 +160,8 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     /** @hidden */
     constructor(
         @Optional() @Host() private readonly _tableService: TableService,
-        @Optional() private readonly _rtlService: RtlService
+        @Optional() private readonly _rtlService: RtlService,
+        private readonly _tableColumnResizeService: TableColumnResizeService
     ) {
         super();
     }
