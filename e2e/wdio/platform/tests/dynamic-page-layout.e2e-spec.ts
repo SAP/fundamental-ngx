@@ -164,7 +164,6 @@ describe('Dynamic Page Layout test suite:', function() {
 
             expect(elementDisplayed(dynamicPageCollapsibleHeader)).toBe(true);
         });
-
     });
 
     describe('Flexible Column Layout', function() {
