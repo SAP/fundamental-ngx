@@ -305,7 +305,6 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     /** @hidden */
     _exitUserDetailsMode(): void {
         this.viewService.setCurrentView(this.viewService.team ? VIEW_MODES.VIEW_TEAM_MEMBERS : VIEW_MODES.SELECT_USER);
-// debugger;
         this._userToShowDetails = undefined;
         this._userToShowDetailsData$ = undefined;
 
@@ -364,7 +363,6 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         }
 
         if (this.viewService.isSelectUserMode) {
-            // debugger;
             const filtered = this._approvers.filter(user => filterByName(user, searchString));
             this._setFilteredApprovers(filtered);
         }

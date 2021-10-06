@@ -15,39 +15,7 @@
     </ng-template>
 </div>
 
-<!-- <ul>
-    <cdk-virtual-scroll-viewport itemSize="50">
-        <li *cdkVirtualFor="let _user of users; trackBy: _trackByFn">
-            {{ _user.name }}
-        </li>
-    </cdk-virtual-scroll-viewport>
-</ul> -->
-
-<!-- Progressive Rendering -->
-<!-- <fdp-list
-    [selectionMode]="isSelectable ? 'multi' : 'none'"
-    [selection]="isSelectable"
-    [hasByLine]="true"
-    [(ngModel)]="_selectedItems"
-    [selectedItems]="_selectedItems"
-    (selectedItemChange)="_onSelect($event)"
-    >
-    <ng-container #itemsContainer></ng-container>
-</fdp-list>
-
-<ng-template #item let-item="item">
-    <fdp-standard-list-item
-        [attr.id]="_idPrefix + item.id"
-        [avatarSrc]="item.imgUrl"
-        [avatarTitle]="item.name"
-        [description]="item.description"
-        [title]="item.name"
-        (click)="$event.stopPropagation(); onUserClick.emit(item)"
-    ></fdp-standard-list-item>
-</ng-template> -->
-
-<!-- Progressive Collection -->
-<!-- <fdp-list
+<fdp-list
     [selectionMode]="isSelectable ? 'multi' : 'none'"
     [selection]="isSelectable"
     [hasByLine]="true"
@@ -64,26 +32,4 @@
         [title]="_user.name"
         (click)="$event.stopPropagation(); onUserClick.emit(_user)"
     ></fdp-standard-list-item>
-</fdp-list> -->
-
-<!-- Default / Without Optimization -->
-<fdp-list
-    [selectionMode]="isSelectable ? 'multi' : 'none'"
-    [selection]="isSelectable"
-    [hasByLine]="true"
-    [(ngModel)]="_selectedItems"
-    [selectedItems]="_selectedItems"
-    (selectedItemChange)="_onSelect($event)"
->
-    <ng-container>
-        <fdp-standard-list-item
-            *ngFor="let _user of users; trackBy: _trackByFn"
-            [attr.id]="_idPrefix + _user.id"
-            [avatarSrc]="_user.imgUrl"
-            [avatarTitle]="_user.name"
-            [description]="_user.description"
-            [title]="_user.name"
-            (click)="$event.stopPropagation(); onUserClick.emit(_user)"
-        ></fdp-standard-list-item>
-    </ng-container>
 </fdp-list>
