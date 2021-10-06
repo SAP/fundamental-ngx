@@ -28,7 +28,7 @@ describe('Pipe: MultiComboboxHighlightPipe', () => {
         expect(result2).toEqual('Apple <strong>t</strong>est <strong>t</strong>ext message');
 
         const result3 = pipe.transform('Apple test message', 'mes', MatchingStrategy.STARTS_WITH_PER_TERM);
-        expect(result3).toEqual('Apple test <strong>mess</strong>sage');
+        expect(result3).toEqual('Apple test <strong>mes</strong>sage');
 
         const result4 = pipe.transform('Apple', 'a', MatchingStrategy.STARTS_WITH_PER_TERM);
         expect(result4).toEqual('<strong>A</strong>pple');
