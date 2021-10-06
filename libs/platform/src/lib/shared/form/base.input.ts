@@ -277,7 +277,10 @@ export abstract class BaseInput extends BaseComponent
             this.focused = isFocused;
             this.stateChanges.next('_onFocusChanged');
         }
-        this.onTouched();
+
+        if (!isFocused) {
+            this.onTouched();
+        }
     }
 
     /**
@@ -313,7 +316,7 @@ export abstract class BaseInput extends BaseComponent
         const oldState = this.status === 'error';
         const parent = this.ngForm;
         const control = this.ngControl ? (this.ngControl.control as FormControl) : null;
-        const newState = !!(control && control.invalid && (control.touched || (parent && parent.submitted)));
+        const newState = !!(control && control.invalid && (control.dirty || control.touched || (parent && parent.submitted)));
 
         if (newState !== oldState) {
             this._status = newState ? 'error' : this.state === 'error' ? 'default' : this.state;

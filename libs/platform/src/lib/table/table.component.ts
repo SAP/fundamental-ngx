@@ -27,7 +27,7 @@ import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject, isObservable, merge, Observable, of, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap } from 'rxjs/operators';
 
-import { ContentDensityEnum, FdDropEvent, RtlService } from '@fundamental-ngx/core/utils';
+import { ContentDensityEnum, ContentDensityService, FdDropEvent, RtlService } from '@fundamental-ngx/core/utils';
 import { TableRowDirective } from '@fundamental-ngx/core/table';
 
 import { getNestedValue, isDataSource, isString } from '@fundamental-ngx/platform/shared';
@@ -128,7 +128,8 @@ let tableUniqueId = 0;
         '[class.fd-table--condensed]': 'contentDensity === CONTENT_DENSITY.CONDENSED',
         '[class.fd-table--no-horizontal-borders]': 'noHorizontalBorders || noBorders',
         '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders',
-        '[class.fdp-table--tree]': '_rowsDraggable'
+        '[class.fd-table--tree]': 'isTreeTable',
+        '[class.fd-table--group]': '_isGroupTable'
     }
 })
 export class TableComponent<T = any> extends Table implements AfterViewInit, OnDestroy, OnChanges, OnInit {
@@ -464,6 +465,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     _rowTrackBy: TrackByFunction<TableRow<T>>;
 
     /** @hidden */
+    _isGroupTable = false;
+
+    /** @hidden */
     get _isShownSelectionColumn(): boolean {
         return this.selectionMode !== SelectionMode.NONE;
     }
@@ -510,6 +514,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     private _dragDropInProgress = false;
 
+    /** @hidden Is used to identify whether the `contentDensity` property was set by the user manually. */
+    private contentDensityManuallySet = false;
+
     /** @hidden */
     private get _selectionColumnWidth(): number {
         return this._isShownSelectionColumn ? SELECTION_COLUMN_WIDTH.get(this.contentDensity) : 0;
@@ -528,9 +535,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         private readonly _tableScrollDispatcher: TableScrollDispatcherService,
         private readonly _tableColumnResizeService: TableColumnResizeService,
         @Inject(DOCUMENT) private readonly _document: Document | null,
-        @Optional() private readonly _rtlService: RtlService
+        @Optional() private readonly _rtlService: RtlService,
+        @Optional() private readonly _contentDensityService: ContentDensityService,
     ) {
         super();
+        this._trackContentDensityChanges();
     }
 
     /** @hidden */
@@ -539,11 +548,15 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             this._tableService.setTableLoading(this.loading);
         }
 
-        // changes below should be checked only after view is initialized
         if ('trackBy' in changes) {
             this._rowTrackBy = typeof this.trackBy === 'function' ? (index, item) => this.trackBy(index, item.value) : undefined;
         }
 
+        if (changes.contentDensity?.currentValue) {
+            this.contentDensityManuallySet = true;
+        }
+
+        // changes below should be checked only after view is initialized
         if (!this._viewInitiated) {
             return;
         }
@@ -566,6 +579,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     ngOnInit(): void {
         this._calculateScrollbarWidth();
+
+        this._isGroupTable = this.initialGroupBy?.length > 0;
     }
 
     /** @hidden */
@@ -1259,6 +1274,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._subscriptions.add(
             this._tableService.columnsChange.subscribe((event: ColumnsChange) => {
                 this._calculateVisibleColumns();
+                this.recalculateTableColumnWidth();
 
                 this.columnsChange.emit(new TableColumnsChangeEvent(this, event.current, event.previous));
             })
@@ -1458,6 +1474,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     private _buildGroupRulesMap(state = this.getTableState()): void {
         const groupMap = new Map(state.groupBy.map((rule) => [rule.field, rule]));
         this._groupRulesMapSubject.next(groupMap);
+        this._isGroupTable = groupMap.size > 0;
     }
 
     /** @hidden */
@@ -1862,5 +1879,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         }
 
         return !!rowNavigatable;
+    }
+
+    private _trackContentDensityChanges(): void {
+        this._subscriptions.add(this._contentDensityService._contentDensityListener
+            .pipe(filter(() => !this.contentDensityManuallySet))
+            .subscribe((density) => {
+                this.contentDensity = density as ContentDensityEnum;
+                this._cdr.markForCheck();
+            }))
     }
 }

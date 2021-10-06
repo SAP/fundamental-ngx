@@ -1,4 +1,58 @@
 
+### 0.32.2-rc.47 (2021-10-06)
+
+
+### Bug Fixes
+
+* **platform:** table, fix content density and width issues ([#6713](https://github.com/SAP/fundamental-ngx/issues/6713)) ([1dba4f5](https://github.com/SAP/fundamental-ngx/commit/1dba4f510e628ed9b38eaf6cc84a2dbfeb0cf0b8))
+
+### 0.32.2-rc.46 (2021-10-06)
+
+### 0.32.2-rc.45 (2021-10-06)
+
+### 0.32.2-rc.44 (2021-10-05)
+
+
+### Bug Fixes
+
+* **core,platform:** fix a11y issues for object marker component for core and platform lib ([#6535](https://github.com/SAP/fundamental-ngx/issues/6535)) ([ecbf7b8](https://github.com/SAP/fundamental-ngx/commit/ecbf7b8bc9cb647c4ab4e9049b7b0cc589eb1e3d))
+
+### 0.32.2-rc.43 (2021-10-05)
+
+
+### Bug Fixes
+
+* **core:** adding accessability label and reading button type ([#6385](https://github.com/SAP/fundamental-ngx/issues/6385)) ([0ada932](https://github.com/SAP/fundamental-ngx/commit/0ada9328eefedae37f015668537d27e9537269c9))
+
+### 0.32.2-rc.42 (2021-10-05)
+
+### 0.32.2-rc.41 (2021-10-05)
+
+
+### Features
+
+* **core:** splitter component ([#6468](https://github.com/SAP/fundamental-ngx/issues/6468)) ([b8c6fee](https://github.com/SAP/fundamental-ngx/commit/b8c6fee24a83f125710b8ed3ec4391896183b761))
+
+### 0.32.2-rc.40 (2021-10-05)
+
+### 0.32.2-rc.39 (2021-10-05)
+
+
+### Bug Fixes
+
+* **platform:** input touched state ([#6728](https://github.com/SAP/fundamental-ngx/issues/6728)) ([aa259c6](https://github.com/SAP/fundamental-ngx/commit/aa259c6957f96f6bc0610c9024e16cf928c1e1e9))
+
+### 0.32.2-rc.38 (2021-10-05)
+
+
+### Bug Fixes
+
+* **platform:** icon-tab-bar types & interfaces for using jest ([#6772](https://github.com/SAP/fundamental-ngx/issues/6772)) ([00dd8ce](https://github.com/SAP/fundamental-ngx/commit/00dd8ce0d8ba33871204186f00de90377553ca33))
+
+### 0.32.2-rc.37 (2021-10-05)
+
+### 0.32.2-rc.36 (2021-10-05)
+
 ### 0.32.2-rc.35 (2021-10-04)
 
 ### 0.32.2-rc.34 (2021-10-04)

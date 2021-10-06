@@ -16,7 +16,9 @@ import { Subject } from 'rxjs';
 
 import { OverflowListDirective, cloneDeep, KeyUtil } from '@fundamental-ngx/core/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { IconTabBarItem, TabConfig, TabDestinyMode } from '../types';
+import { IconTabBarItem } from '../interfaces/icon-tab-bar-item.interface';
+import { TabConfig } from '../interfaces/tab-config.interface';
+import { TabDestinyMode } from '../types';
 import { ICON_TAB_HIDDEN_CLASS_NAME, UNIQUE_KEY_SEPARATOR } from '../constants';
 import { ExtraButtonDirective } from '../directives/extra-button/extra-button.directive';
 

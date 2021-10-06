@@ -8,7 +8,7 @@ import {
     saveElementScreenshot,
     waitForElDisplayed,
     waitForInvisibilityOf,
-    checkElementScreenshot, isElementDisplayed, pause, waitForPresent
+    checkElementScreenshot, isElementDisplayed, pause, waitForPresent, waitForNotDisplayed
 } from '../../driver/wdio';
 
 describe('Alert test suite', function() {
@@ -83,12 +83,12 @@ describe('Alert test suite', function() {
             expect(waitForElDisplayed(popupAlert)).toBe(true);
 
             if (doesItExist(popupAlert + button) === false) {
-                waitForInvisibilityOf(popupAlert);
+                waitForNotDisplayed(popupAlert, 0, 12000);
                 continue;
             }
             click(popupAlert + button);
             // the pause gives the alert time to close before checking if it still exists
-            pause(250);
+            pause(750);
             expect(doesItExist(popupAlert)).toBe(false);
         }
     }
