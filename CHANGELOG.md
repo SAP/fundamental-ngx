@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.52 (2021-10-06)
+
+
+### Bug Fixes
+
+* **core:** adding keyboard accessabitlity to the multi input component ([#6790](https://github.com/SAP/fundamental-ngx/issues/6790)) ([3468ae8](https://github.com/SAP/fundamental-ngx/commit/3468ae8290bed55f6614a76f534a50f128727123))
+
 ### 0.32.2-rc.51 (2021-10-06)
 
 
