@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.50 (2021-10-06)
+
+
+### Bug Fixes
+
+* **platform:** table, preserve row selection on data changed ([#6724](https://github.com/SAP/fundamental-ngx/issues/6724)) ([0b7fd9f](https://github.com/SAP/fundamental-ngx/commit/0b7fd9ff479cef733b4a7637d27eacb85f8717f7))
+
 ### 0.32.2-rc.49 (2021-10-06)
 
 
