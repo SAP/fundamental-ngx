@@ -5,7 +5,6 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 @Component({
     selector: 'app-tag',
     templateUrl: './tag-docs.component.html',
-    styleUrls: ['tag-docs.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class TagDocsComponent {
@@ -13,7 +12,7 @@ export class TagDocsComponent {
         {
             language: 'html',
             code: tagSrc,
-            fileName: 'search-example'
+            fileName: 'tag-example'
         }
     ];
 }

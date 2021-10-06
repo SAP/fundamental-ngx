@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 export type TagColorType = 'grey' | 'blue' | 'teal' | 'green' | 'mango' | 'red' | 'pink' | 'indigo';
 
@@ -6,9 +6,10 @@ export type TagColorType = 'grey' | 'blue' | 'teal' | 'green' | 'mango' | 'red' 
   selector: 'fn-tag',
   templateUrl: './tag.component.html',
   styleUrls: ['./tag.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None
 })
-export class ExperimentalTagComponent implements OnInit {
+export class ExperimentalTagComponent {
 
   /** 
   * The color of the tag. 
@@ -20,10 +21,4 @@ export class ExperimentalTagComponent implements OnInit {
   /** Whether the Tag is disabled. */
   @Input()
   disabled: boolean;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

@@ -3,7 +3,7 @@
     [ngClass]="'fn-tag--' + color"
     [class.is-disabled]="disabled"
     role="button" 
-    tabindex="0"
+    [tabIndex]="disabled ? -1 : 0"
 >
     <ng-content></ng-content>
 </div>

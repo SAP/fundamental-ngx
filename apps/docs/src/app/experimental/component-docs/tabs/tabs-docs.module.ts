@@ -39,8 +39,7 @@ const routes: Routes = [
         ExperimentalFormModule,
         ExperimentalSwitchModule,
         ExperimentalButtonModule,
-        ExperimentalSearchModule,
-        ExperimentalTagModule
+        ExperimentalSearchModule
     ],
     exports: [RouterModule],
     declarations: [examples, TabsHeaderComponent, TabsDocsComponent]
