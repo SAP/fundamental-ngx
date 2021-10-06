@@ -218,6 +218,7 @@ const users: ApprovalUser[] = [
         imgUrl: 'https://randomuser.me/api/portraits/women/55.jpg'
     }
 ];
+// TODO: need to be rmeoved before merging
 const TOTAL = 5000;
 for (let i = 1; i <= TOTAL; i++) {
     const obj = {
