@@ -158,8 +158,14 @@ describe('Verify Textarea component', function() {
         });
 
         it('should see an error if trying to click empty mandatory textarea', () => {
-            clearValue(detailedTextArea);
+            const textLength = getText('fdp-platform-textarea-counter-example fdp-textarea').length;
+
+            for (let i = 0; i < textLength; i++) {
+                click(detailedTextArea);
+                sendKeys(['Backspace']);
+            }
             click(detailedTextArea);
+            waitForElDisplayed(detailedTextAreaErrorMessage)
             const errorText = getText(detailedTextAreaErrorMessage);
 
             expect(errorText.trim()).toBe('Value is required');

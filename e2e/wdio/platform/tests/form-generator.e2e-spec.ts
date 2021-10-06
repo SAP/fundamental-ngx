@@ -8,11 +8,10 @@ import {
     scrollIntoView,
     getValue,
     sendKeys,
-    isElementDisplayed,
     doesItExist,
     setValue,
     clickAndMoveElement,
-    waitForNotDisplayed, pause
+    pause
 } from '../../driver/wdio';
 import {
     requiredErrorMessage, termsErrorMesssage, frameworkErrorMessage,
@@ -38,7 +37,7 @@ describe('Form generator test suite', function () {
     beforeEach(() => {
         refreshPage();
         if (doesItExist(busyIndicator) === true) {
-            waitForNotDisplayed(busyIndicator);
+            pause(1000);
         }
         waitForElDisplayed(formGeneratorPage.title);
     }, 1);
@@ -155,6 +154,7 @@ describe('Form generator test suite', function () {
     });
 
     function checkPasswordValidation(section: string): void {
+        scrollIntoView(section + passwordInput);
         setValue(section + passwordInput, simplePassword);
         checkValidationMessage(section, passwordInput, passwordConditionsErrorMessage);
         setValue(section + passwordInput, correctPassword);
@@ -201,6 +201,7 @@ describe('Form generator test suite', function () {
             sendKeys('Backspace');
         }
 
+        scrollIntoView(section + submitButton);
         click(section + submitButton);
 
         checkValidationMessage(section, nameInput, requiredErrorMessage);
@@ -223,8 +224,8 @@ describe('Form generator test suite', function () {
     function checkValidationMessage(section: string, item: string, message: string, i: number = 0): void {
         click(section + item, i);
         // pause for element to be created
-        pause(500);
-        expect(isElementDisplayed(errorMessage)).toBe(true, 'error message is not displayed');
+        pause(1000);
+        expect(waitForElDisplayed(errorMessage)).toBe(true, 'error message is not displayed');
         expect(getText(errorMessage)).toEqual(message, 'error message is not match');
     }
 
