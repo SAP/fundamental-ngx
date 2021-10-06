@@ -363,8 +363,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         }
 
         if (this.viewService.isSelectUserMode) {
-            const filtered = this._approvers.filter(user => filterByName(user, searchString));
-            this._setFilteredApprovers(filtered);
+            this._setFilteredApprovers(this._approvers.filter(user => filterByName(user, searchString)));
         }
 
         if (this.viewService.isSelectTeamMode) {
@@ -378,11 +377,6 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
 
     /** @hidden */
     _setFilteredApprovers(users: ApprovalUser[]): void {
-        // const approvers = [
-        //     users[0],
-        //     users[1],
-        //     users[2],
-        // ];
         this._filteredApprovers = [...users];
         this._cdr.detectChanges();
     }

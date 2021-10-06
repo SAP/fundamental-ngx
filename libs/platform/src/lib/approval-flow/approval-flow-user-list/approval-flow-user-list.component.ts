@@ -3,18 +3,13 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ComponentFactoryResolver,
-    ComponentRef,
-    ElementRef,
     EventEmitter,
     Input,
     OnChanges,
     Output,
     QueryList,
-    TemplateRef,
     ViewChild,
     ViewChildren,
-    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 

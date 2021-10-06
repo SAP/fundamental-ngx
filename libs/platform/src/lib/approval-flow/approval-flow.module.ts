@@ -36,7 +36,6 @@ import { ApprovalFlowAddNodeViewService } from './services/approval-flow-add-nod
 import { ApprovalFlowSelectTypeComponent } from './approval-flow-select-type/approval-flow-select-type.component';
 import { ApprovalFlowMessagesComponent } from './approval-flow-messages/approval-flow-messages.component';
 import { ApprovalFlowToolbarActionsComponent } from './approval-flow-toolbar-actions/approval-flow-toolbar-actions.component';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
     declarations: [
@@ -83,8 +82,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
         FormModule,
         DragDropModule,
         RadioModule,
-        IllustratedMessageModule,
-        ScrollingModule,
+        IllustratedMessageModule
     ],
     exports: [
         ApprovalFlowComponent
