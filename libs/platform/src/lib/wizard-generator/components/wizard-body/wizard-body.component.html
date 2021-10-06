@@ -22,7 +22,11 @@
                         <ng-container *ngIf="!step.icon">{{ i + 1 }}</ng-container>
                     </fd-wizard-step-indicator>
                     <fd-wizard-content>
-                        <fdp-wizard-generator-step *ngIf="!step.summary" [item]="step"></fdp-wizard-generator-step>
+                        <fdp-wizard-generator-step
+                            *ngIf="!step.summary"
+                            [unifiedLayout]="unifiedLayout"
+                            [item]="step"
+                        ></fdp-wizard-generator-step>
                         <fdp-wizard-summary-step
                             *ngIf="step.summary"
                             [customSummaryStepTemplate]="customSummaryStepTemplate"
@@ -47,7 +51,13 @@
                                         (click)="goNext.emit()"
                                     ></fdp-button>
                                 </ng-template>
-                                <ng-template [ngIf]="(isBranchingStep && (!isCurrentStepCompleted || _stepsOrderChanged)) || !isNextStepSummary" [ngIfElse]="reviewButton">
+                                <ng-template
+                                    [ngIf]="
+                                        (isBranchingStep && (!isCurrentStepCompleted || _stepsOrderChanged)) ||
+                                        !isNextStepSummary
+                                    "
+                                    [ngIfElse]="reviewButton"
+                                >
                                     <ng-template
                                         [ngTemplateOutlet]="goNextButtonTemplate || defaultGoNextButtonTemplate"
                                         [ngTemplateOutletContext]="{ goNext: _goNextFn }"

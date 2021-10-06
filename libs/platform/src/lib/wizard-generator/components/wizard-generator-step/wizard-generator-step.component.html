@@ -5,6 +5,7 @@
     [mainTitle]="form.title"
     [columnLayout]="form.columnLayout"
     [formItems]="form.formItems"
+    [unifiedLayout]="unifiedLayout"
     (formCreated)="onFormCreated($event, form.id)"
     (formSubmittedStatus)="onFormSubmitted($event, form.id)"
 ></fdp-form-generator>
