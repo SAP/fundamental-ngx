@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.49 (2021-10-06)
+
+
+### Bug Fixes
+
+* **platform:** extend MatchingStrategy ([#6768](https://github.com/SAP/fundamental-ngx/issues/6768)) ([187f733](https://github.com/SAP/fundamental-ngx/commit/187f7335a0c45ce9218c721d276fdc5eabd67461))
+
 ### 0.32.2-rc.48 (2021-10-06)
 
 
