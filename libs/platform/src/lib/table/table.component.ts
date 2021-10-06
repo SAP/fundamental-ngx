@@ -1822,11 +1822,13 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     private _trackContentDensityChanges(): void {
-        this._subscriptions.add(this._contentDensityService._contentDensityListener
-            .pipe(filter(() => !this.contentDensityManuallySet))
-            .subscribe((density) => {
-                this.contentDensity = density as ContentDensityEnum;
-                this._cdr.markForCheck();
-            }))
+        if (this._contentDensityService) {
+            this._subscriptions.add(this._contentDensityService._contentDensityListener
+                .pipe(filter(() => !this.contentDensityManuallySet))
+                .subscribe((density) => {
+                    this.contentDensity = density as ContentDensityEnum;
+                    this._cdr.markForCheck();
+                }))
+        }
     }
 }
