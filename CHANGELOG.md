@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.47 (2021-10-06)
+
+
+### Bug Fixes
+
+* **platform:** table, fix content density and width issues ([#6713](https://github.com/SAP/fundamental-ngx/issues/6713)) ([1dba4f5](https://github.com/SAP/fundamental-ngx/commit/1dba4f510e628ed9b38eaf6cc84a2dbfeb0cf0b8))
+
 ### 0.32.2-rc.46 (2021-10-06)
 
 ### 0.32.2-rc.45 (2021-10-06)
