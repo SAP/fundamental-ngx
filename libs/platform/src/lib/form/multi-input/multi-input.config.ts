@@ -4,10 +4,10 @@ import { ContentDensity } from '@fundamental-ngx/core/utils';
 import { DataProvider, PlatformConfig, MatchingStrategy } from '@fundamental-ngx/platform/shared';
 
 /**
- * Default options for Multi-Combobox
+ * Default options for Multi-Input
  */
 @Injectable({ providedIn: 'root' })
-export class MultiComboboxConfig {
+export class MultiInputConfig {
     /**
      * Content Density of element. 'cozy' | 'compact'
      */
@@ -26,9 +26,9 @@ export class MultiComboboxConfig {
     /**
      * Create Provider factory function
      */
-    static createProviderFactory(obj: Partial<MultiComboboxConfig>): (platformConfig: PlatformConfig) => MultiComboboxConfig {
-        const useFactory = (platformConfig: PlatformConfig): MultiComboboxConfig => {
-            return Object.assign(new MultiComboboxConfig(platformConfig), obj);
+    static createProviderFactory(obj: Partial<MultiInputConfig>): (platformConfig: PlatformConfig) => MultiInputConfig {
+        const useFactory = (platformConfig: PlatformConfig): MultiInputConfig => {
+            return Object.assign(new MultiInputConfig(platformConfig), obj);
         };
         return useFactory;
     }
