@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.48 (2021-10-06)
+
+
+### Bug Fixes
+
+* **platform:** checkbox-group pre-selected output label ([#6774](https://github.com/SAP/fundamental-ngx/issues/6774)) ([d75ea45](https://github.com/SAP/fundamental-ngx/commit/d75ea4597c11d304243523e1c540ca51926e7d4e))
+
 ### 0.32.2-rc.47 (2021-10-06)
 
 
