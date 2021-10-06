@@ -6,7 +6,6 @@ import { ButtonDocsComponent } from './button/button-docs.component';
 
 export const COMPONENT_SCHEMAS: { [name: string]: Schema } = {
     tabs: TabsDocsComponent.schema,
-    button: ButtonDocsComponent.schema,
     media: {
         properties: {
             image: {
