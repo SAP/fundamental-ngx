@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.56 (2021-10-07)
+
+
+### Features
+
+* **platform:** table row class ([#6795](https://github.com/SAP/fundamental-ngx/issues/6795)) ([cc9a4ef](https://github.com/SAP/fundamental-ngx/commit/cc9a4efe6c97d579deafd2973d57ebc903dbdd73))
+
 ### 0.32.2-rc.55 (2021-10-07)
 
 ### 0.32.2-rc.54 (2021-10-06)
