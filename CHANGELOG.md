@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.57 (2021-10-07)
+
+
+### Bug Fixes
+
+* **core:** combobox, fix not accept number 0 as a value ([#6821](https://github.com/SAP/fundamental-ngx/issues/6821)) ([bdcc6cd](https://github.com/SAP/fundamental-ngx/commit/bdcc6cdeb12ee288402f5fa3dd1176f7423d29cd))
+
 ### 0.32.2-rc.56 (2021-10-07)
 
 
