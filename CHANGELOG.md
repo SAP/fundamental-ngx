@@ -1,4 +1,11 @@
 
+### 0.32.2-rc.58 (2021-10-07)
+
+
+### Bug Fixes
+
+* **core:** fix active path when item removed ([#6822](https://github.com/SAP/fundamental-ngx/issues/6822)) ([988842a](https://github.com/SAP/fundamental-ngx/commit/988842aeb21797efbda2f7269926f71e32e7660f))
+
 ### 0.32.2-rc.57 (2021-10-07)
 
 
