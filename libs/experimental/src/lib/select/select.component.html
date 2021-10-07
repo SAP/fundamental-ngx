@@ -1,1 +1,13 @@
-next select works!
+<div class="fn-select">
+    <div class="fn-text-field">
+        <label *ngIf="label" class="fn-text-field__label">{{label}}</label>
+        <div class="fn-text-field__input-container" (click)="selectInputClicked()">
+            <input #selectInput class="fn-text-field__input fn-select__input" type="text" [attr.placeholder]="placeholder" [attr.value]="value" readonly />
+            <div class="fn-text-field__input-border"></div>
+            <span class="sap-icon sap-icon--navigation-down-arrow"></span>
+        </div>
+    </div>
+    <ul *ngIf="opened" class="fn-select__menu" role="listbox" aria-label="Select menu">
+        <ng-content></ng-content>
+    </ul>
+</div>

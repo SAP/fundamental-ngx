@@ -10,12 +10,14 @@ describe('SelectComponent', () => {
     let fixture: ComponentFixture<ExperimentalSelectComponent>;
     let changeDetectorRef: ChangeDetectorRef;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [CommonModule, FormsModule],
-            declarations: [ExperimentalSelectComponent],
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CommonModule, FormsModule],
+                declarations: [ExperimentalSelectComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ExperimentalSelectComponent);

@@ -1,1 +1,17 @@
-<fn-select></fn-select>
+<div style="width: 200px">
+    <fn-select placeholder="Select an option" label="Standard Selector" #selectExample1>
+        <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+    </fn-select>
+</div>
+<br/>
+Example 1 selection: {{selectExample1.value}}
+<br/><br/>
+
+<div style="width: 200px">
+    <fn-select [editable]="true" placeholder="Select an option" label="Editable Selector" #selectExample2>
+        <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+    </fn-select>
+</div>
+<br/>
+Example 2 selection: {{selectExample2.value}}
+<br/><br/>
