@@ -1,0 +1,35 @@
+<div class="base-row">
+    <p>Slider default state: <code>[min]="0" [max]="100" [step]="1"</code></p>
+    <fn-slider [(ngModel)]="value"> </fn-slider>
+    <p>Value: {{ value }}</p>
+    <hr>
+</div>
+
+<div class="base-row">
+    <p>Vertical slider:</p>
+    <div style="height: 500px; width: 50px;">
+        <fn-slider [(ngModel)]="verticalValue" [vertical]="true"> </fn-slider>
+    </div>
+    <p>Value: {{ value }}</p>
+    <hr>
+</div>
+
+<div class="base-row">
+    <p>Slider with negative min value <code>[min]="-100"</code></p>
+    <fn-slider [(ngModel)]="value1" [min]="-100"> </fn-slider>
+    <p>Value: {{ value1 }}</p>
+    <hr>
+</div>
+
+<div class="base-row">
+    <p>Slider with <code>[min]="-50" [max]="50" [step]="5"</code> values.</p>
+    <fn-slider [(ngModel)]="value2" [min]="-50" [max]="50" [step]="5"> </fn-slider>
+    <p>Value: {{ value2 }}</p>
+    <hr>
+</div>
+
+<div class="base-row">
+    <p>Slider with <code>[min]="-1" [max]="1" [step]="0.2"</code> values.</p>
+    <fn-slider [(ngModel)]="value4" [min]="-1" [max]="1" [step]="0.2"> </fn-slider>
+    <p>Value: {{ value4 }}</p>
+</div>
