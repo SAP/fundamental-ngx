@@ -8,6 +8,7 @@ import {
     OnChanges,
     Output,
     QueryList,
+    SimpleChanges,
     ViewChild,
     ViewChildren,
     ViewEncapsulation
@@ -80,8 +81,10 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges {
         }
     }
 
-    ngOnChanges(): void {
-        this._collectDataProgressive();
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes.users) {
+            this._collectDataProgressive();
+        }
     }
 
     /** @hidden */
@@ -99,6 +102,10 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges {
     }
 
     private _collectDataProgressive(): void {
+        if (!this.users?.length) {
+            return;
+        }
+
         const ITEMS_RENDERED_AT_ONCE = 100;
         const INTERVAL_IN_MS = 10;
 
@@ -122,7 +129,7 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges {
             currentIndex += ITEMS_RENDERED_AT_ONCE;
 
             this._displayUsers.push(...collectedUsers);
-            this._cdr.detectChanges();
+            this._cdr.markForCheck();
         }, INTERVAL_IN_MS);
     }
 }
