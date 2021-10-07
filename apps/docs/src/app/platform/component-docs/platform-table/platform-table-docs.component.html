@@ -508,7 +508,29 @@
 <component-example>
     <fdp-platform-table-semantic-example></fdp-platform-table-semantic-example>
 </component-example>
+
 <code-example [exampleFiles]="semanticFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title
+    id="row-class"
+    componentName="table"
+>
+    Row custom CSS class
+</fd-docs-section-title>
+<description>
+    This example demonstrates ability to apply custom CSS classes to the table rows.
+    Use <code>rowsClass</code> input property of the table component to define custom CSS classes.
+    <ul>
+        <li>Pass string (<code>'customClass'</code>) to set custom CSS classes for every row.</li>
+        <li>Pass function (<code>(row) => row.field ? 'customClass' : 'anotherClass'</code>) which returns string to describe own logic. Row will be passed as function's parameter. </li>
+    </ul>
+</description>
+<component-example>
+    <fdp-platform-table-row-class-example></fdp-platform-table-row-class-example>
+</component-example>
+<code-example [exampleFiles]="rowClassTableFiles"></code-example>
 
 <separator></separator>
 

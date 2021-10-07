@@ -29,8 +29,8 @@ import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap }
 
 import { ContentDensityEnum, ContentDensityService, FdDropEvent, RtlService } from '@fundamental-ngx/core/utils';
 import { TableRowDirective } from '@fundamental-ngx/core/table';
+import { getNestedValue, isDataSource, isFunction, isString } from '@fundamental-ngx/platform/shared';
 
-import { getNestedValue, isDataSource, isString } from '@fundamental-ngx/platform/shared';
 import { TableService } from './table.service';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { SearchInput } from './interfaces/search-field.interface';
@@ -66,6 +66,8 @@ import { TableColumnResizeService } from './table-column-resize.service';
 import { TableColumnResizableSide } from './directives/table-cell-resizable.directive';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
+
+export type TableRowClass<T> = string | ((row: T) => string);
 
 type TreeLike<T> = T & {
     _children?: TreeLike<T>[];
@@ -271,6 +273,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      */
     @Input()
     rowComparator: RowComparator<T>;
+
+    /** String or function to calculate additional rows' CSS classes. */
+    @Input()
+    rowsClass: TableRowClass<T>;
 
     /** Event fired when table selection has changed. */
     @Output()
@@ -953,6 +959,13 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     _getSelectionCellStyles(): { [klass: string]: string } {
         const key = this._rtl ? 'right' : 'left';
         return { [key]: this._semanticHighlightingColumnWidth + 'px' };
+    }
+    
+    _getRowClasses(row: TableRow<T>): string {
+        const treeRowClass = this._isTreeRow(row) ? 'fdp-table__row--tree' : '';
+        const rowClasses = this._getRowCustomCssClasses(row);
+
+        return rowClasses.concat(' ', treeRowClass).trim();
     }
 
     /** @hidden */
@@ -1881,6 +1894,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         return !!rowNavigatable;
     }
 
+    /** @hidden */
     private _trackContentDensityChanges(): void {
         if (this._contentDensityService) {
             this._subscriptions.add(this._contentDensityService._contentDensityListener
@@ -1890,5 +1904,24 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                     this._cdr.markForCheck();
                 }))
         }
+    }
+
+    /** @hidden */
+    private _getRowCustomCssClasses(row: TableRow<T>): string {
+        if (!this.rowsClass) {
+            return '';
+        }
+
+        let rowClasses = '';
+
+        if (isString(this.rowsClass)) {
+            rowClasses = this.rowsClass;
+        }
+
+        if (isFunction(this.rowsClass)) {
+            rowClasses = (this.rowsClass as Function)(row.value) || '';
+        }
+
+        return rowClasses.trim();
     }
 }

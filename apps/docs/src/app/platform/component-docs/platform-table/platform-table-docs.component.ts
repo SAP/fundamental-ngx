@@ -51,6 +51,9 @@ import * as platformTableNavigatableRowSrc from '!raw-loader!./platform-table-ex
 import * as platformTableNavigatableRowTsSrc from '!raw-loader!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.ts';
 import * as platformTableSemanticSrc from '!raw-loader!./platform-table-examples/platform-table-semantic-example.component.html';
 import * as platformTableSemanticTsSrc from '!raw-loader!./platform-table-examples/platform-table-semantic-example.component.ts';
+import * as platformTableRowClassSrc from '!raw-loader!./platform-table-examples/platform-table-row-class-example.component.html';
+import * as platformTableRowClassTsSrc from '!raw-loader!./platform-table-examples/platform-table-row-class-example.component.ts';
+
 
 import * as platformTableCustomNoDataMessageSrc from '!raw-loader!./platform-table-examples/platform-table-no-items-template-example.component.html';
 import * as platformTableCustomNoDataMessageTsSrc from '!raw-loader!./platform-table-examples/platform-table-no-items-template-example.component.ts';
@@ -473,6 +476,22 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-semantic-example',
             component: 'PlatformTableSemanticExampleComponent',
             name: 'platform-table-semantic-example.component.ts'
+        }
+    ];
+    
+    rowClassTableFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableRowClassSrc,
+            fileName: 'platform-table-row-class-example',
+            name: 'platform-table-row-class-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: platformTableRowClassTsSrc,
+            fileName: 'platform-table-row-class-example',
+            component: 'PlatformTableRowClassExampleComponent',
+            name: 'platform-table-row-class-example.component.ts'
         }
     ];
 
