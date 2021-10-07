@@ -6,6 +6,7 @@ import {
     EventEmitter,
     Input,
     OnChanges,
+    OnDestroy,
     Output,
     QueryList,
     SimpleChanges,
@@ -17,6 +18,10 @@ import {
 import { BaseListItem, ListComponent, SelectionChangeEvent, StandardListItemComponent } from '@fundamental-ngx/platform/list';
 import { ApprovalUser } from '../interfaces';
 import { trackByFn } from '../helpers';
+import { interval } from 'rxjs';
+
+const ITEMS_RENDERED_AT_ONCE = 100;
+const INTERVAL_IN_MS = 10;
 
 @Component({
     selector: 'fdp-approval-flow-user-list',
@@ -28,7 +33,7 @@ import { trackByFn } from '../helpers';
         class: 'fdp-approval-flow-user-list'
     }
 })
-export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges {
+export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, OnDestroy {
     @Input()
     users: ApprovalUser[] = [];
 
@@ -61,6 +66,8 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges {
 
     _displayUsers: ApprovalUser[] = [];
 
+    private _intervalID?: any;
+
     /** @hidden */
     constructor(private _cdr: ChangeDetectorRef) {}
 
@@ -87,6 +94,10 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges {
         }
     }
 
+    ngOnDestroy(): void {
+        this._killInterval();
+    }
+
     /** @hidden */
     _onSelect(event: SelectionChangeEvent): void {
         this._selectedItems = event.selectedItems;
@@ -102,34 +113,46 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges {
     }
 
     private _collectDataProgressive(): void {
+        this._killInterval();
         this._displayUsers = [];
 
         if (!this.users?.length) {
             return;
         }
 
-        const ITEMS_RENDERED_AT_ONCE = 100;
-        const INTERVAL_IN_MS = 10;
+        const collectionTracker = { currentIndex: 0 };
 
-        let currentIndex = 0;
-        const interval = setInterval(() => {
-            const nextIndex = currentIndex + ITEMS_RENDERED_AT_ONCE;
+        this._userCollectorIntervalFn(collectionTracker);
+        this._intervalID = setInterval(
+            this._userCollectorIntervalFn.bind(this),
+            INTERVAL_IN_MS,
+            collectionTracker
+        );
+    }
 
-            const collectedUsers = [];
+    private _userCollectorIntervalFn(tracker: { currentIndex: number }): void {
+        const nextIndex = tracker.currentIndex + ITEMS_RENDERED_AT_ONCE;
 
-            for (let i = currentIndex; i <= nextIndex; i++) {
-                if (i >= this.users.length) {
-                    clearInterval(interval);
-                    break;
-                }
+        const collectedUsers = [];
 
-                collectedUsers.push(this.users[i]);
+        for (let i = tracker.currentIndex; i <= nextIndex; i++) {
+            if (i >= this.users.length) {
+                this._killInterval();
+                break;
             }
 
-            currentIndex += ITEMS_RENDERED_AT_ONCE;
+            collectedUsers.push(this.users[i]);
+        }
 
-            this._displayUsers.push(...collectedUsers);
-            this._cdr.markForCheck();
-        }, INTERVAL_IN_MS);
+        tracker.currentIndex += ITEMS_RENDERED_AT_ONCE;
+
+        this._displayUsers.push(...collectedUsers);
+        this._cdr.markForCheck();
+    }
+
+    private _killInterval(): void {
+        if (this._intervalID) {
+            clearInterval(this._intervalID);
+        }
     }
 }
