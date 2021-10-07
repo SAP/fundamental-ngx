@@ -33,7 +33,7 @@ export class StackblitzDependencies {
 
         this._dependencies.forEach((dep) => {
             if (packageLockInfo.dependencies && packageLockInfo.dependencies[dep]) {
-                _dependencies[dep] = packageLockInfo.dependencies[dep].version;
+                _dependencies[dep] = parseVersion(packageLockInfo.dependencies[dep].version);
             } else {
                 throw new Error('Dependency ' + dep + ' not found in package-lock.json');
             }
