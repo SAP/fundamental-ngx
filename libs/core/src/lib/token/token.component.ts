@@ -60,6 +60,9 @@ export class TokenComponent implements OnInit, OnDestroy {
     @Input()
     readOnly = false;
 
+    @Input()
+    ariaLabel = 'Deletable';
+
     /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
     @Output()
     readonly onCloseClick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();

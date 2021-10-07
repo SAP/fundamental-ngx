@@ -3,7 +3,7 @@
     class="fd-token"
     role="option"
     aria-roledescription="token"
-    tabindex="0"
+    [attr.tabindex]="disabled?'-1':'0'"
     (click)="tokenClickHandler($event)"
     [ngClass]="{
         'fd-token__disabled': disabled,
@@ -17,5 +17,5 @@
     <span class="fd-token__text no-text-select">
         <ng-content></ng-content>
     </span>
-    <span (click)="closeClickHandler($event)" aria-label="Deletable" *ngIf="!readOnly" class="fd-token__close" tabindex="-1"></span>
+    <span (click)="closeClickHandler($event)" [attr.aria-label]="ariaLabel" *ngIf="!readOnly" class="fd-token__close" tabindex="-1"></span>
 </span>
