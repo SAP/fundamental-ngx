@@ -102,14 +102,14 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges {
     }
 
     private _collectDataProgressive(): void {
+        this._displayUsers = [];
+
         if (!this.users?.length) {
             return;
         }
 
         const ITEMS_RENDERED_AT_ONCE = 100;
         const INTERVAL_IN_MS = 10;
-
-        this._displayUsers = [];
 
         let currentIndex = 0;
         const interval = setInterval(() => {
