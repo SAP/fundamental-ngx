@@ -21,6 +21,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'experimental/input', name: 'Input' },
             { url: 'experimental/tabs', name: 'Tabs' },
             { url: 'experimental/search', name: 'Search' },
+            { url: 'experimental/slider', name: 'Slider' },
             { url: 'experimental/switch', name: 'Switch' },
             { url: 'experimental/radio', name: 'Radio button' }
         ];
