@@ -5,7 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 
 import { IconBarDndListDirective } from './icon-bar-dnd-list.directive';
 import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive';
-import { IconTabBarItem } from '../../types';
+import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 
 
 export interface ElementChord {

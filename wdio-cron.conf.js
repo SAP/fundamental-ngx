@@ -127,7 +127,6 @@ exports.config = {
     // Patterns to exclude.
     exclude: [
         './e2e/wdio/**/checkbox-group.e2e-spec.ts',
-        './e2e/wdio/core/**/dialog.e2e-spec.ts',
         './e2e/wdio/core/**/date-picker.e2e-spec.ts',
     ],
     suites: {

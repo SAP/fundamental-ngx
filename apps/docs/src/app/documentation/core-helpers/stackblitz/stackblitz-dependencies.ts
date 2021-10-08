@@ -1,5 +1,6 @@
 import { version } from '../../../../../../../package.json';
 import { dependencies } from '../../../../../../../package-lock.json';
+import { parseVersion } from './utils/parse-version';
 
 export class StackblitzDependencies {
     private static _libDependencies: string[] = ['@fundamental-ngx/platform', '@fundamental-ngx/core'];
@@ -11,6 +12,7 @@ export class StackblitzDependencies {
         '@angular/compiler',
         '@angular/common',
         '@angular/forms',
+        '@angular/localize',
         '@angular/router',
         '@angular/platform-browser',
         '@angular/platform-browser-dynamic',
@@ -27,7 +29,7 @@ export class StackblitzDependencies {
     static GetDependencies(): object {
         const _dependencies: object = {};
 
-        this._libDependencies.forEach((libDep) => (_dependencies[libDep] = version));
+        this._libDependencies.forEach((libDep) => (_dependencies[libDep] = parseVersion(version)));
 
         this._dependencies.forEach((dep) => {
             if (dependencies && dependencies[dep]) {

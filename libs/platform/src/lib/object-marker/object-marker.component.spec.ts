@@ -59,7 +59,7 @@ describe('PlatformObjectMarkerComponent', () => {
     it('Should Validate inverted object states and clickable', () => {
         host.clickable = true;
         fixture.detectChanges();
-        let linkElement = fixture.debugElement.query(By.css('span'));
+        let linkElement = fixture.debugElement.query(By.css('a'));
         expect(linkElement.nativeElement.classList.contains('fd-object-marker--link')).toBe(true);
         host.clickable = false;
         fixture.detectChanges();

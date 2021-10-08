@@ -135,7 +135,8 @@
         "core-wizard",
         "core-tree",
         "core-upload-collection",
-        "core-vertical-navigation"
+        "core-vertical-navigation",
+        "core-splitter"
       ]
     },
     "moment-adapter": {
@@ -958,6 +959,10 @@
         "core-icon",
         "core-list"
       ]
+    },
+    "core-splitter": {
+      "tags": ["fd"],
+      "implicitDependencies": ["core-utils", "core-icon"]
     },
     "platform": {
       "tags": [],

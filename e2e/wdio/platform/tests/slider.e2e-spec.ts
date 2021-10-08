@@ -63,6 +63,7 @@ describe('slider test suite', function() {
         });
 
         it('should check tooltip with input', () => {
+            click(tooltipExamples + sliderHandles, 1);
             mouseHoverElement(tooltipExamples + sliderHandles, 1);
             waitForElDisplayed(sliderTooltipInput);
             clearTooltipInput();

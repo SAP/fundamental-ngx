@@ -11,6 +11,7 @@ import {
     typesBtnTextArr
 } from '../fixtures/appData/split-menu-button-page-contents';
 import {
+    acceptAlert,
     browserIsIEorSafari,
     click,
     elementArray,
@@ -84,6 +85,7 @@ describe('Split menu button test suite', () => {
 
     it('should check btn selections', () => {
         click(typesExSelectionBtnArr);
+        acceptAlert();
         spMenuBtnPage.checkSelectionOutput(typesOutput, standardBtnText);
 
         click(typesExArrowBtnArr);

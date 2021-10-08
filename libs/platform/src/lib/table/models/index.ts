@@ -10,3 +10,4 @@ export * from './table-row.model';
 export * from './table-row-toggle-open-state-event.model';
 export * from './table-rows-rearrange-event.model';
 export * from './table-row-activate-event.model';
+export * from './row-comparator.model';

@@ -19,7 +19,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DOWN_ARROW, TAB, SPACE, ENTER } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, TAB, SPACE, ENTER, UP_ARROW, ESCAPE } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
@@ -479,6 +479,12 @@ export class MultiInputComponent implements
                 this.listComponent.setItemActive(0);
                 event.preventDefault();
             }
+        }
+        if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, ENTER])) {
+            this.openChangeHandle(true);
+        }
+        if (KeyUtil.isKeyCode(event, ESCAPE)) {
+            this.openChangeHandle(false);
         }
 
         if (KeyUtil.isKeyCode(event, TAB) && this.open) {

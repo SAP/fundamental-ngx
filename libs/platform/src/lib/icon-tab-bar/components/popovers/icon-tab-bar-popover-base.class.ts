@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Directive, EventEmitter, Input, OnChanges, Output, S
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { KeyUtil } from '@fundamental-ngx/core';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
-import { IconTabBarItem } from '../../types';
+import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 
 @Directive()
 export abstract class IconTabBarPopoverBase implements OnChanges {

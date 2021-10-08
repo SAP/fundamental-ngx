@@ -37,6 +37,8 @@ describe('Side-navigation test suite', () => {
             }
             checkIsSelected(blockExamples[i], 3);
         }
+
+        scrollIntoView(nonSelectableExample + listItemLink);
         click(nonSelectableExample + listItemLink);
         expect(getElementClass(nonSelectableExample + listItemLink)).not.toContain('is-selected', 'item is selected');
     });

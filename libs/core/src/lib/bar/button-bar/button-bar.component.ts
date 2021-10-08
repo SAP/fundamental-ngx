@@ -26,8 +26,7 @@ let randomButtonBarId = 0;
               [fdType]="fdType"
               [label]="label"
               [attr.title]="title"
-              [attr.aria-label]="ariaLabel"
-              [attr.aria-labelledby]="ariaLabelledby ? ariaLabelledby + ' ' + id : null"
+              [ariaLabel]="ariaLabel"
               [fdMenu]="fdMenu"
               [disabled]="disabled"
       >

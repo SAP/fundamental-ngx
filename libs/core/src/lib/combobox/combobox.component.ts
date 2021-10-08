@@ -444,7 +444,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** @hidden */
     onMenuClickHandler(value: any): void {
-        if (value) {
+        if (value || value === 0) {
             const index: number = this.dropdownValues.findIndex((_value) => _value === value);
             this._handleClickActions(value);
             this.filterHighlight = false;

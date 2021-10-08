@@ -1,4 +1,129 @@
 
+### 0.32.2-rc.58 (2021-10-07)
+
+
+### Bug Fixes
+
+* **core:** fix active path when item removed ([#6822](https://github.com/SAP/fundamental-ngx/issues/6822)) ([988842a](https://github.com/SAP/fundamental-ngx/commit/988842aeb21797efbda2f7269926f71e32e7660f))
+
+### 0.32.2-rc.57 (2021-10-07)
+
+
+### Bug Fixes
+
+* **core:** combobox, fix not accept number 0 as a value ([#6821](https://github.com/SAP/fundamental-ngx/issues/6821)) ([bdcc6cd](https://github.com/SAP/fundamental-ngx/commit/bdcc6cdeb12ee288402f5fa3dd1176f7423d29cd))
+
+### 0.32.2-rc.56 (2021-10-07)
+
+
+### Features
+
+* **platform:** table row class ([#6795](https://github.com/SAP/fundamental-ngx/issues/6795)) ([cc9a4ef](https://github.com/SAP/fundamental-ngx/commit/cc9a4efe6c97d579deafd2973d57ebc903dbdd73))
+
+### 0.32.2-rc.55 (2021-10-07)
+
+### 0.32.2-rc.54 (2021-10-06)
+
+### 0.32.2-rc.53 (2021-10-06)
+
+
+### Bug Fixes
+
+* **platform:** add export for multi-input config ([#6849](https://github.com/SAP/fundamental-ngx/issues/6849)) ([5b45ac7](https://github.com/SAP/fundamental-ngx/commit/5b45ac75ce71e73d2a35e53353be4348f1dab726))
+
+### 0.32.2-rc.52 (2021-10-06)
+
+
+### Bug Fixes
+
+* **core:** adding keyboard accessabitlity to the multi input component ([#6790](https://github.com/SAP/fundamental-ngx/issues/6790)) ([3468ae8](https://github.com/SAP/fundamental-ngx/commit/3468ae8290bed55f6614a76f534a50f128727123))
+
+### 0.32.2-rc.51 (2021-10-06)
+
+
+### Bug Fixes
+
+* **platform:** pass property from wizard to form ([#6831](https://github.com/SAP/fundamental-ngx/issues/6831)) ([8f96986](https://github.com/SAP/fundamental-ngx/commit/8f969864b73809314207305a40353531a7eb89a5))
+
+### 0.32.2-rc.50 (2021-10-06)
+
+
+### Bug Fixes
+
+* **platform:** table, preserve row selection on data changed ([#6724](https://github.com/SAP/fundamental-ngx/issues/6724)) ([0b7fd9f](https://github.com/SAP/fundamental-ngx/commit/0b7fd9ff479cef733b4a7637d27eacb85f8717f7))
+
+### 0.32.2-rc.49 (2021-10-06)
+
+
+### Bug Fixes
+
+* **platform:** extend MatchingStrategy ([#6768](https://github.com/SAP/fundamental-ngx/issues/6768)) ([187f733](https://github.com/SAP/fundamental-ngx/commit/187f7335a0c45ce9218c721d276fdc5eabd67461))
+
+### 0.32.2-rc.48 (2021-10-06)
+
+
+### Bug Fixes
+
+* **platform:** checkbox-group pre-selected output label ([#6774](https://github.com/SAP/fundamental-ngx/issues/6774)) ([d75ea45](https://github.com/SAP/fundamental-ngx/commit/d75ea4597c11d304243523e1c540ca51926e7d4e))
+
+### 0.32.2-rc.47 (2021-10-06)
+
+
+### Bug Fixes
+
+* **platform:** table, fix content density and width issues ([#6713](https://github.com/SAP/fundamental-ngx/issues/6713)) ([1dba4f5](https://github.com/SAP/fundamental-ngx/commit/1dba4f510e628ed9b38eaf6cc84a2dbfeb0cf0b8))
+
+### 0.32.2-rc.46 (2021-10-06)
+
+### 0.32.2-rc.45 (2021-10-06)
+
+### 0.32.2-rc.44 (2021-10-05)
+
+
+### Bug Fixes
+
+* **core,platform:** fix a11y issues for object marker component for core and platform lib ([#6535](https://github.com/SAP/fundamental-ngx/issues/6535)) ([ecbf7b8](https://github.com/SAP/fundamental-ngx/commit/ecbf7b8bc9cb647c4ab4e9049b7b0cc589eb1e3d))
+
+### 0.32.2-rc.43 (2021-10-05)
+
+
+### Bug Fixes
+
+* **core:** adding accessability label and reading button type ([#6385](https://github.com/SAP/fundamental-ngx/issues/6385)) ([0ada932](https://github.com/SAP/fundamental-ngx/commit/0ada9328eefedae37f015668537d27e9537269c9))
+
+### 0.32.2-rc.42 (2021-10-05)
+
+### 0.32.2-rc.41 (2021-10-05)
+
+
+### Features
+
+* **core:** splitter component ([#6468](https://github.com/SAP/fundamental-ngx/issues/6468)) ([b8c6fee](https://github.com/SAP/fundamental-ngx/commit/b8c6fee24a83f125710b8ed3ec4391896183b761))
+
+### 0.32.2-rc.40 (2021-10-05)
+
+### 0.32.2-rc.39 (2021-10-05)
+
+
+### Bug Fixes
+
+* **platform:** input touched state ([#6728](https://github.com/SAP/fundamental-ngx/issues/6728)) ([aa259c6](https://github.com/SAP/fundamental-ngx/commit/aa259c6957f96f6bc0610c9024e16cf928c1e1e9))
+
+### 0.32.2-rc.38 (2021-10-05)
+
+
+### Bug Fixes
+
+* **platform:** icon-tab-bar types & interfaces for using jest ([#6772](https://github.com/SAP/fundamental-ngx/issues/6772)) ([00dd8ce](https://github.com/SAP/fundamental-ngx/commit/00dd8ce0d8ba33871204186f00de90377553ca33))
+
+### 0.32.2-rc.37 (2021-10-05)
+
+### 0.32.2-rc.36 (2021-10-05)
+
+### 0.32.2-rc.35 (2021-10-04)
+
+### 0.32.2-rc.34 (2021-10-04)
+
 ### 0.32.2-rc.33 (2021-10-03)
 
 ### 0.32.2-rc.32 (2021-10-03)

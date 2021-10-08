@@ -12,7 +12,7 @@ interface MenuNode {
     children: MenuNode[];
 }
 
-type MenuMap = Map<MenuItemComponent, MenuNode>
+type MenuMap = Map<MenuItemComponent, MenuNode>;
 
 @Injectable()
 export class MenuService {
@@ -34,7 +34,7 @@ export class MenuService {
     /** @hidden */
     private _destroyKeyboardHandlerListener: () => void;
 
-    constructor(private _renderer: Renderer2) { }
+    constructor(private _renderer: Renderer2) {}
 
     /** Reference to menu component */
     get menu(): MenuComponent {
@@ -43,8 +43,7 @@ export class MenuService {
 
     /** Returns menu mode observable */
     get isMobileMode(): Observable<boolean> {
-        return this._isMobileMode.asObservable()
-            .pipe(distinctUntilChanged())
+        return this._isMobileMode.asObservable().pipe(distinctUntilChanged());
     }
 
     /** Sets menu mode */
@@ -66,7 +65,7 @@ export class MenuService {
         }
 
         if (isActive) {
-            this._addToActivePath(menuItem)
+            this._addToActivePath(menuItem);
         } else {
             this._removeFromActivePath(menuItem);
         }
@@ -92,14 +91,15 @@ export class MenuService {
     rebuildMenu(): void {
         this.menuMap = this._buildMenuMap(this._menu);
 
-        const deadNode = this.activeNodePath.find(node => !this.menuMap.has(node.item));
+        const deadNode = this.activeNodePath.find((node) => !this.menuMap.has(node.item));
         if (deadNode) {
             this.setActive(false, deadNode.item);
         }
 
         const invalidFocusedElement = this.focusedNode && !this.menuMap.get(this.focusedNode.item);
         if (invalidFocusedElement) {
-            this.focusedNode = this.activeNodePath[this.activeNodePath.length - 1] || this.menuMap.get(null).children[0];
+            this.focusedNode =
+                this.activeNodePath[this.activeNodePath.length - 1] || this.menuMap.get(null).children[0];
         }
     }
 
@@ -122,9 +122,7 @@ export class MenuService {
 
     /** @hidden Returns siblings of given node */
     private _nodeSiblings(node: MenuNode): MenuNode[] {
-        return node.parent
-            ? node.parent.children
-            : this.menuMap.get(null).children;
+        return node.parent ? node.parent.children : this.menuMap.get(null).children;
     }
 
     /** @hidden Adds given element to the Active Node Path and setts as active*/
@@ -138,11 +136,12 @@ export class MenuService {
     /** @hidden Removes given element and all its successors from the Active Node Path and setts as inactive*/
     private _removeFromActivePath(menuItem: MenuItemComponent): void {
         const menuNode = this.menuMap.get(menuItem);
-        const pathIndex = this.activeNodePath.indexOf(menuNode);
+        const pathIndex = this.activeNodePath.findIndex((i) => i.item === menuNode.item);
 
         if (pathIndex !== -1) {
-            this.activeNodePath.splice(pathIndex)
-                .forEach(removedActiveNode => removedActiveNode.item.setSelected(false))
+            this.activeNodePath
+                .splice(pathIndex)
+                .forEach((removedActiveNode) => removedActiveNode.item.setSelected(false));
         }
     }
 
@@ -157,49 +156,47 @@ export class MenuService {
      * - Builds Menu Nodes based on Menu Items
      * - Creates Map of the Menu Nodes */
     private _buildMenuMap(menu: MenuComponent): MenuMap {
-
         function buildNode(menuItem: MenuItemComponent): MenuNode {
             return {
                 item: menuItem,
                 parent: null,
                 children: menuItem.submenu
-                    ? menuItem.submenu.menuItems.toArray().map(subMenuItem => buildNode(subMenuItem))
+                    ? menuItem.submenu.menuItems.toArray().map((subMenuItem) => buildNode(subMenuItem))
                     : []
-            }
+            };
         }
 
         function setParents(node: MenuNode, parent: MenuNode): void {
             node.parent = parent;
-            node.children.forEach(childNode => setParents(childNode, node));
+            node.children.forEach((childNode) => setParents(childNode, node));
         }
 
         function toMap(node: MenuNode, map = new Map() as MenuMap): MenuMap {
             map.set(node.item, node);
-            node.children.forEach(childNode => toMap(childNode, map));
+            node.children.forEach((childNode) => toMap(childNode, map));
             return map;
         }
 
         const menuTree: MenuNode = {
             item: null,
             parent: null,
-            children: menu.menuItems.toArray().map(item => buildNode(item))
+            children: menu.menuItems.toArray().map((item) => buildNode(item))
         };
 
         setParents(menuTree, null);
+
         return toMap(menuTree);
     }
 
     /** @hidden Removes active sibling of a given menu item from the Active Path */
     private _removeActiveSibling(menuItem: MenuItemComponent): void {
         const menuNode = this.menuMap.get(menuItem);
-        const activeSibling = menuNode.parent.children.find(childNode => this.activeNodePath.indexOf(childNode) !== -1);
+        const children = menuNode.parent.children.map((i) => i.item);
+        const activeSibling = this.activeNodePath.find((i) => children.includes(i.item));
         const activeParentIndex = this.activeNodePath.indexOf(menuNode.parent);
 
         if (activeSibling) {
-            this._removeFromActivePath(activeParentIndex !== -1
-                ? activeSibling.item
-                : this.activeNodePath[0].item
-            );
+            this._removeFromActivePath(activeParentIndex !== -1 ? activeSibling.item : this.activeNodePath[0].item);
         }
     }
 
@@ -256,16 +253,12 @@ export class MenuService {
 
     /** @hidden Emits an array of active menu items */
     private _emitActivePath(): void {
-        this.menu.activePath.emit(
-            this.activeNodePath.map(node => node.item)
-        );
+        this.menu.activePath.emit(this.activeNodePath.map((node) => node.item));
     }
 
     /** @hidden Depending on direction returns closest enabled sibling of given node */
     private _closestEnabled(node: MenuNode, direction: 'up' | 'down'): MenuNode | null {
-        const siblings = direction === 'up'
-            ? [...this._nodeSiblings(node)].reverse()
-            : this._nodeSiblings(node);
+        const siblings = direction === 'up' ? [...this._nodeSiblings(node)].reverse() : this._nodeSiblings(node);
 
         const startIndex = siblings.indexOf(node) + 1;
 
@@ -276,5 +269,5 @@ export class MenuService {
         }
 
         return null;
-    };
+    }
 }
