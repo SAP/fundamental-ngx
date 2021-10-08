@@ -5,7 +5,7 @@ export class ObjectMarkerPo extends CoreBaseComponentPo {
     private url = '/object-marker';
     root = '#page-content';
 
-    marker = '.fd-object-marker';
+    marker = 'span.fd-object-marker';
     iconOnlyMarkers = 'fd-object-marker-example span';
     clickableMarkers = '[ng-reflect-clickable="true"]';
 

@@ -3,103 +3,6 @@ module.exports = require('./wdio.conf.ts');*/
 const { join } = require('path');
 require('ts-node').register({ transpileOnly: true });
 AllureReporter = require('@wdio/allure-reporter').default;
-
-const allCapabilities = [
-    // {
-    //     browserName: 'internet explorer',
-    //     browserVersion: 'latest',
-    //     platformName: 'Windows 10',
-    //     'sauce:options': {
-    //         screenResolution: '1920x1080',
-    //         name: 'e2e-win-internet-explorer ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-    //         requireWindowFocus: true,
-    //     }
-    // },
-    // {
-    //     slug: 'ms-msedge',
-    //     browserName: 'MicrosoftEdge',
-    //     platformName: 'Windows 10',
-    //     browserVersion: 'latest',
-    //     acceptInsecureCerts: true,
-    //     'sauce:options': {
-    //         screenResolution: '1920x1080',
-    //         name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-    //     }
-    // },
-    // {
-    //     slug: 'osx-msedge',
-    //     browserName: 'MicrosoftEdge',
-    //     platformName: 'macOS 10.15',
-    //     browserVersion: 'latest',
-    //     acceptInsecureCerts: true,
-    //     'sauce:options': {
-    //         screenResolution: '1920x1440',
-    //         name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-    //     }
-    // },
-    // {
-    //     slug: 'ms-firefox',
-    //     browserName: 'firefox',
-    //     platformName: 'Windows 10',
-    //     browserVersion: 'latest',
-    //     acceptInsecureCerts: true,
-    //     'sauce:options': {
-    //         name: 'e2e-win-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-    //         screenResolution: '1920x1080',
-    //     }
-    // },
-    // {
-    //     slug: 'osx-firefox',
-    //     browserName: 'firefox',
-    //     platformName: 'macOS 10.15',
-    //     browserVersion: 'latest',
-    //     acceptInsecureCerts: true,
-    //     'sauce:options': {
-    //         screenResolution: '1920x1440',
-    //         name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-    //     }
-    // },
-    {
-        slug: 'ms-chrome',
-        browserName: 'chrome',
-        platformName: 'Windows 10',
-        browserVersion: 'latest',
-        acceptInsecureCerts: true,
-        'sauce:options': {
-            screenResolution: '1920x1080',
-            name: 'e2e-win-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-        }
-    },
-    // {
-    //     slug: 'osx-chrome',
-    //     browserName: 'chrome',
-    //     platformName: 'macOS 10.15',
-    //     browserVersion: 'latest',
-    //     acceptInsecureCerts: true,
-    //     'sauce:options': {
-    //         name: 'e2e-MAC-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-    //         screenResolution: '1920x1440',
-    //     }
-    // },
-
-    // {
-    //     browserName: 'safari',
-    //     browserVersion: '13.1',
-    //     platformName: 'macOS 10.15',
-    //     'sauce:options': {
-    //         screenResolution: '1920x1440',
-    //         name: 'e2e-MAC-safari ' + process.env.TRAVIS_BUILD_ID,
-    //     }
-    // }
-]
-const capabilities = (process.env.CAP_SLUG
-    ? allCapabilities.filter( item => item.slug === process.env.CAP_SLUG)
-    : allCapabilities)
-    .map(item => {
-        delete item.slug;
-        return item;
-    });
-
 exports.config = {
     //
     // ====================
@@ -108,10 +11,7 @@ exports.config = {
     //
     // WebdriverIO allows it to run your tests in arbitrary locations (e.g. locally or
     // on a remote machine).
-    // runner: 'local',
-    user: process.env.SAUCE_USERNAME,
-    key: process.env.SAUCE_ACCESS_KEY,
-    region: 'eu',
+    runner: 'local',
     //
     // ==================
     // Specify Test Files
@@ -122,14 +22,140 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './e2e/wdio/**/*.e2e-spec.ts',
+         './e2e/wdio/**/*.e2e-spec.ts',
     ],
     // Patterns to exclude.
     exclude: [
         './e2e/wdio/**/checkbox-group.e2e-spec.ts',
-        './e2e/wdio/core/**/dialog.e2e-spec.ts',
         './e2e/wdio/core/**/date-picker.e2e-spec.ts',
     ],
+    suites: {
+        platformA: [
+            './e2e/wdio/platform/**/action-bar.e2e-spec.ts',
+            './e2e/wdio/platform/**/action-list-item.e2e-spec.ts',
+            './e2e/wdio/platform/**/approval-flow.e2e-spec.ts',
+            './e2e/wdio/platform/**/checkbox.e2e-spec.ts',
+            './e2e/wdio/platform/**/checkbox-group.e2e-spec.ts',
+            './e2e/wdio/platform/**/combobox.e2e-spec.ts',
+            './e2e/wdio/platform/**/date-picker.e2e-spec.ts',
+            './e2e/wdio/platform/**/date-time-picker.e2e-spec.ts',
+            './e2e/wdio/platform/**/display-list-item.e2e-spec.ts',
+            './e2e/wdio/platform/**/dynamic-page-layout.e2e-spec.ts',
+            './e2e/wdio/platform/**/feed-input.e2e-spec.ts',
+            './e2e/wdio/platform/**/file-uploader.e2e-spec.ts',
+            './e2e/wdio/platform/**/form-container.e2e-spec.ts',
+            './e2e/wdio/platform/**/form-generator.e2e-spec.ts',
+            './e2e/wdio/platform/**/info-label.e2e-spec.ts',
+            './e2e/wdio/platform/**/input.e2e-spec.ts',
+            './e2e/wdio/platform/**/input-group.e2e-spec.ts',
+            './e2e/wdio/platform/**/link.e2e-spec.ts',
+            './e2e/wdio/platform/**/list.e2e-spec.ts',
+            './e2e/wdio/platform/**/button.e2e-spec.ts',
+            './e2e/wdio/platform/**/page-footer.e2e-spec.ts',
+        ],
+        platformB: [
+            './e2e/wdio/platform/**/menu.e2e-spec.ts',
+            './e2e/wdio/platform/**/menu-button.e2e-spec.ts',
+            './e2e/wdio/platform/**/multi-input.e2e-spec.ts',
+            './e2e/wdio/platform/**/object-list-item.e2e-spec.ts',
+            './e2e/wdio/platform/**/object-marker.e2e-spec.ts',
+            './e2e/wdio/platform/**/object-status.e2e-spec.ts',
+            './e2e/wdio/platform/**/object-attribute.e2e-spec.ts',
+            './e2e/wdio/platform/**/panel.e2e-spec.ts',
+            './e2e/wdio/platform/**/radio-button-group.e2e-spec.ts',
+            './e2e/wdio/platform/**/search.e2e-spec.ts',
+            './e2e/wdio/platform/**/slider.e2e-spec.ts',
+            './e2e/wdio/platform/**/split-menu-button.e2e-spec.ts',
+            './e2e/wdio/platform/**/standard-list-item.e2e-spec.ts',
+            './e2e/wdio/platform/**/step-input.e2e-spec.ts',
+            './e2e/wdio/platform/**/switch.e2e-spec.ts',
+            './e2e/wdio/platform/**/textarea.e2e-spec.ts',
+            './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
+            './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',
+            './e2e/wdio/platform/**/time-picker.e2e-spec.ts',
+        ],
+        coreA: [
+            './e2e/wdio/core/**/action-bar.e2e-spec.ts',
+            './e2e/wdio/core/**/action-sheet.e2e-spec.ts',
+            './e2e/wdio/core/**/alert.e2e-spec.ts',
+            './e2e/wdio/core/**/avatar.e2e-spec.ts',
+            './e2e/wdio/core/**/avatar-group.e2e-spec.ts',
+            './e2e/wdio/core/**/bar.e2e-spec.ts',
+            './e2e/wdio/core/**/breadcrumb.e2e-spec.ts',
+            './e2e/wdio/core/**/busy-indicator.e2e-spec.ts',
+            './e2e/wdio/core/**/button.e2e-spec.ts',
+            './e2e/wdio/core/**/calendar.e2e-spec.ts',
+            './e2e/wdio/core/**/card.e2e-spec.ts',
+            './e2e/wdio/core/**/carousel.e2e-spec.ts',
+            './e2e/wdio/core/**/checkbox.e2e-spec.ts',
+            './e2e/wdio/core/**/combobox.e2e-spec.ts',
+            './e2e/wdio/core/**/date-picker.e2e-spec.ts',
+            './e2e/wdio/core/**/date-time-picker.e2e-spec.ts',
+            './e2e/wdio/core/**/dialog.e2e-spec.ts',
+            './e2e/wdio/core/**/dynamic-page.e2e-spec.ts',
+            './e2e/wdio/core/**/dynamic-side-content.e2e-spec.ts',
+            './e2e/wdio/core/**/facets.e2e-spec.ts',
+            './e2e/wdio/core/**/feed-input.e2e-spec.ts',
+            './e2e/wdio/core/**/feed-list-item.e2e-spec.ts',
+            './e2e/wdio/core/**/file-uploader.e2e-spec.ts',
+            './e2e/wdio/core/**/fixed-card-layout.e2e-spec.ts',
+            './e2e/wdio/core/**/flexible-column-layout.e2e-spec.ts',
+            './e2e/wdio/core/**/form-message.e2e-spec.ts',
+            './e2e/wdio/core/**/formatted-text.e2e-spec.ts',
+            './e2e/wdio/core/**/grid-list.e2e-spec.ts',
+            './e2e/wdio/core/**/icon.e2e-spec.ts',
+            './e2e/wdio/core/**/illustrated-message.e2e-spec.ts',
+            './e2e/wdio/core/**/info-label.e2e-spec.ts',
+            './e2e/wdio/core/**/inline-help.e2e-spec.ts',
+            './e2e/wdio/core/**/input.e2e-spec.ts',
+            './e2e/wdio/core/**/input-group.e2e-spec.ts',
+            './e2e/wdio/core/**/link.e2e-spec.ts',
+            './e2e/wdio/core/**/list-byline.e2e-spec.ts',
+            './e2e/wdio/core/**/menu.e2e-spec.ts',
+            './e2e/wdio/core/**/message-box.e2e-spec.ts',
+            './e2e/wdio/core/**/message-page.e2e-spec.ts',
+            './e2e/wdio/core/**/message-strip.e2e-spec.ts',
+            './e2e/wdio/core/**/message-toast.e2e-spec.ts',
+        ],
+        coreB: [
+            './e2e/wdio/core/**/multi-input.e2e-spec.ts',
+            './e2e/wdio/core/**/notification.e2e-spec.ts',
+            './e2e/wdio/core/**/object-identifier.e2e-spec.ts',
+            './e2e/wdio/core/**/object-marker.e2e-spec.ts',
+            './e2e/wdio/core/**/object-number.e2e-spec.ts',
+            './e2e/wdio/core/**/object-status.e2e-spec.ts',
+            './e2e/wdio/core/**/pagination.e2e-spec.ts',
+            './e2e/wdio/core/**/panel.e2e-spec.ts',
+            './e2e/wdio/core/**/popover.e2e-spec.ts',
+            './e2e/wdio/core/**/product-switch.e2e-spec.ts',
+            './e2e/wdio/core/**/quick-view.e2e-spec.ts',
+            './e2e/wdio/core/**/radio-button.e2e-spec.ts',
+            './e2e/wdio/core/**/rating-indicator.e2e-spec.ts',
+            './e2e/wdio/core/**/resizable-card-layout.e2e-spec.ts',
+            './e2e/wdio/core/**/segmented-button.e2e-spec.ts',
+            './e2e/wdio/core/**/select.e2e-spec.ts',
+            './e2e/wdio/core/**/shellbar.e2e-spec.ts',
+            './e2e/wdio/core/**/side-navigation.e2e-spec.ts',
+            './e2e/wdio/core/**/slider.e2e-spec.ts',
+            './e2e/wdio/core/**/split-button.e2e-spec.ts',
+            './e2e/wdio/core/**/standard-list.e2e-spec.ts',
+            './e2e/wdio/core/**/status-indicator.e2e-spec.ts',
+            './e2e/wdio/core/**/step-input.e2e-spec.ts',
+            './e2e/wdio/core/**/switch.e2e-spec.ts',
+            './e2e/wdio/core/**/table.e2e-spec.ts',
+            './e2e/wdio/core/**/tabs.e2e-spec.ts',
+            './e2e/wdio/core/**/text.e2e-spec.ts',
+            './e2e/wdio/core/**/textarea.e2e-spec.ts',
+            './e2e/wdio/core/**/tile.e2e-spec.ts',
+            './e2e/wdio/core/**/time.e2e-spec.ts',
+            './e2e/wdio/core/**/time-picker.e2e-spec.ts',
+            './e2e/wdio/core/**/timeline.e2e-spec.ts',
+            './e2e/wdio/core/**/title.e2e-spec.ts',
+            './e2e/wdio/core/**/token.e2e-spec.ts',
+            './e2e/wdio/core/**/toolbar.e2e-spec.ts',
+            './e2e/wdio/core/**/wizard.e2e-spec.ts',
+        ],
+    },
     // ============
     // Capabilities
     // ============
@@ -145,13 +171,22 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 20,
+    maxInstances: 8,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities,
+    capabilities: [
+        {
+            browserName: 'chrome',
+            // browserVersion: 'latest',
+            'goog:chromeOptions': {
+                args: ['--window-size=1920,1080', '--start-maximized']
+            },
+        },
+    ],
+
     //
     // ===================
     // Test Configurations
@@ -183,7 +218,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    // baseUrl: 'https://sap.dev:4200/',
+    // baseUrl: 'http://localhost:4200/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 30000,
@@ -201,10 +236,6 @@ exports.config = {
     // commands. Instead, they hook themselves up into the test process.
     // services: ['chromedriver'],
     services: [
-        ['sauce', {
-            sauceConnect: true,
-            connectRetries: 2,
-        }],
         ['image-comparison',
             // The options
             {
@@ -323,7 +354,7 @@ exports.config = {
         }, true);
 
         browser.resetUrl = 'about:blank';
-        browser.maximizeWindow();
+        browser.setWindowSize(1920, 1080);
     },
 
 //     const processedConfig = await browser.getProcessedConfig();

@@ -15,9 +15,9 @@ import * as calendarIntlSrc from '!raw-loader!./examples/calendar-i18n-example.c
 import * as calendarIntlMomentSrc from '!raw-loader!./examples/calendar--i18n-moment-example.component.ts';
 import * as calendarMobileSrc from '!raw-loader!./examples/calendar-mobile-example/calendar-mobile-example.component.ts';
 import * as calendarMobileHtml from '!raw-loader!./examples/calendar-mobile-example/calendar-mobile-example.component.html';
-import * as calendarFormSourceT from '!raw-loader!./examples/calendar-form-example.component.ts';
-import * as calendarFormSourceH from '!raw-loader!./examples/calendar-form-example.component.html';
-import * as calendarFormSourceScss from '!raw-loader!./examples/calendar-form-example.component.scss';
+import * as calendarFormSourceT from '!raw-loader!./examples/calendar-form-example/calendar-form-example.component.ts';
+import * as calendarFormSourceH from '!raw-loader!./examples/calendar-form-example/calendar-form-example.component.html';
+import * as calendarFormSourceScss from '!raw-loader!./examples/calendar-form-example/calendar-form-example.component.scss';
 import * as calendarProgrammaticallySource from '!raw-loader!./examples/calendar-programmatically-change-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 

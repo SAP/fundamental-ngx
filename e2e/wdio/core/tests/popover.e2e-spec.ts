@@ -1,7 +1,7 @@
 import { PopoverPo } from '../pages/popover.po';
 import {
     click, getElementArrayLength, getElementClass, getText, isElementClickable, isElementDisplayed,
-    refreshPage, scrollIntoView
+    refreshPage, scrollIntoView, waitForElDisplayed
 } from '../../driver/wdio';
 
 import {
@@ -211,7 +211,7 @@ describe('Popover test suite', function() {
             scrollIntoView(popoverDialogsButton);
             click(popoverDialogsButton);
             click(clickMeButton);
-            expect(isElementDisplayed(popoverDialogMessage)).toBe(true, 'message not displayed');
+            expect(waitForElDisplayed(popoverDialogMessage)).toBe(true, 'message not displayed');
             expect(getText(popoverDialogMessage)).toBe(buttonsPopoverTestText);
         });
     });

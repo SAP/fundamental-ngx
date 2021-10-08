@@ -51,6 +51,7 @@
                 i18n-title="@@platformSearchFieldClearButtonTitle"
                 title="Clear"
                 class="fdp-search-field__clear fd-input-group__button fd-button fd-button--transparent"
+                [attr.disabled]="disabled ? '' : null"
                 [class.fd-button--compact]="contentDensity === 'compact'"
                 (click)="clearTextInput()"
             >
@@ -83,6 +84,7 @@
                 i18n-title="@@platformSearchFieldSynchronizeButtonTitle"
                 title="Synchronize"
                 class="fdp-search-field__loading fd-input-group__button fd-button fd-button--transparent"
+                [attr.disabled]="disabled ? '' : null"
                 [class.fd-button--compact]="contentDensity === 'compact'"
                 (click)="onSearchSubmit()"
             >

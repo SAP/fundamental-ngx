@@ -118,6 +118,8 @@ describe('Form Container test suite', function() {
         it('should check step input error validation message', () => {
             scrollIntoView(complexExampleInputGroup);
             click(complexExampleInputGroup);
+            click(complexExampleFormGroup);
+            click(complexExampleInputGroup);
             expect(waitForPresent(popover)).toBe(true, 'error message not displayed');
             expect(getText(popover)).toEqual('Value is required');
         });

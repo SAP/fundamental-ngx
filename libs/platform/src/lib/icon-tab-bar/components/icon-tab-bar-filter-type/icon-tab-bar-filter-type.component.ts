@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { IconTabBarBase } from '../icon-tab-bar-base.class';
-import { IconTabBarItem } from '../../types';
+import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 
 @Component({
     selector: 'fdp-icon-tab-bar-filter-type',

@@ -268,17 +268,17 @@ describe('Table test suite', function() {
             const linkLength = getElementArrayLength(paginationLink);
             for (let i = 0; i < linkLength; i++) {
                 click(paginationLink, i);
-                expect(getText(tableResult)).toBe(paginationTestArr[i]);
+                expect(getText(tableResult).trim()).toBe(paginationTestArr[i]);
             }
         });
 
         it('should check selected pages by clicking next and previous link', () => {
             scrollIntoView(tablePaginationExample);
             click(linkNext);
-            expect(getText(tableResult)).toBe(paginationTestArr[3]);
+            expect(getText(tableResult).trim()).toBe(paginationTestArr[3]);
 
             click(linkPrevious);
-            expect(getText(tableResult)).toBe(paginationTestArr[2]);
+            expect(getText(tableResult).trim()).toBe(paginationTestArr[2]);
         });
     });
 

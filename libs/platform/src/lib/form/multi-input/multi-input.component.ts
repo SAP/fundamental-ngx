@@ -32,15 +32,16 @@ import {
     DataProvider,
     FormField,
     FormFieldControl,
-    ListDataSource,
+    MultiInputDataSource,
     MultiInputOption,
     Status
 } from '@fundamental-ngx/platform/shared';
-import { ListComponent, ListConfig, SelectionType } from '@fundamental-ngx/platform/list';
+import { ListComponent, SelectionType } from '@fundamental-ngx/platform/list';
 import { InputType } from '../input/input.component';
 import { BaseMultiInput, MultiInputSelectionChangeEvent } from './base-multi-input';
 import { PlatformMultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
 import { MULTIINPUT_COMPONENT } from './multi-input.interface';
+import { MultiInputConfig } from './multi-input.config';
 import { AutoCompleteEvent } from '../auto-complete/auto-complete.directive';
 
 @Component({
@@ -157,7 +158,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         /** @hidden */
         @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
         /** @hidden */
-        readonly _listConfig: ListConfig,
+        readonly _multiInputConfig: MultiInputConfig,
         /** @hidden */
         @Optional() private _rtlService: RtlService,
         /** @hidden */
@@ -165,17 +166,17 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         /** @hidden */
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
-        super(cd, elementRef, ngControl, ngForm, dialogConfig, _listConfig, formField, formControl);
+        super(cd, elementRef, ngControl, ngForm, dialogConfig, _multiInputConfig, formField, formControl);
     }
 
     /** @hidden */
     ngOnInit(): void {
         super.ngOnInit();
 
-        const providers = this.providers?.size === 0 ? this._listConfig.providers : this.providers;
+        const providers = this.providers?.size === 0 ? this._multiInputConfig.providers : this.providers;
         // if we have both prefer dataSource
         if (!this.dataSource && this.entityClass && providers.has(this.entityClass)) {
-            this.dataSource = new ListDataSource(providers.get(this.entityClass));
+            this.dataSource = new MultiInputDataSource(providers.get(this.entityClass));
         }
     }
 

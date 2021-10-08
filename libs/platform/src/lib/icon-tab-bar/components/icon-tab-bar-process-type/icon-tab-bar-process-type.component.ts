@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { take } from 'rxjs/operators';
 
 import { IconTabBarBase } from '../icon-tab-bar-base.class';
-import { IconTabBarItem } from '../../types';
+import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { ICON_TAB_HIDDEN_CLASS_NAME } from '../../constants';
 import { cloneDeep } from '@fundamental-ngx/core/utils';
 

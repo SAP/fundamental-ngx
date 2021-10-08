@@ -14,9 +14,9 @@ export class MultiComboboxConfig {
     contentDensity: ContentDensity;
 
     /**
-     * String matching strategy for typeahead list. Default: 'starts with'
+     * String matching strategy for typeahead list. Default: 'starts with per term'
      */
-    matchingStrategy: MatchingStrategy = MatchingStrategy.STARTS_WITH;
+    matchingStrategy: MatchingStrategy = MatchingStrategy.STARTS_WITH_PER_TERM;
 
     /**
      * Maps data providers

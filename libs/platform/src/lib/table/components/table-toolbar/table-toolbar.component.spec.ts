@@ -5,6 +5,8 @@ import { SearchInput } from '../../interfaces/search-field.interface';
 import { PlatformTableModule } from '../../table.module';
 import { Table } from '../../table';
 import { TableToolbarComponent } from './table-toolbar.component';
+import { TableService } from '../../table.service';
+import { Subject } from 'rxjs';
 
 class TableComponentMock
     implements
@@ -39,6 +41,12 @@ describe('TableToolbarComponent', () => {
                         useFactory: () => {
                             table = new TableComponentMock();
                             return table;
+                        }
+                    },
+                    {
+                        provide: TableService,
+                        useValue: {
+                            tableLoading$: new Subject<void>()
                         }
                     }
                 ]

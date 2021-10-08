@@ -76,6 +76,7 @@ export * from './multi-combobox/pipes/highlight.pipe';
 
 export * from './multi-input/base-multi-input';
 export * from './multi-input/multi-input.component';
+export * from './multi-input/multi-input.config';
 export * from './multi-input/multi-input.interface';
 export * from './multi-input/multi-input.module';
 export * from './multi-input/multi-input-mobile/multi-input-mobile.component';

@@ -2,7 +2,6 @@
     #table
     [dataSource]="source"
     (filterChange)="logFilterChange($event)"
-    contentDensity="compact"
     emptyTableMessage="No data found"
 >
 
@@ -67,14 +66,12 @@
                     <fdp-input
                         type="number"
                         name="min"
-                        contentDensity="compact"
                         [(ngModel)]="model.min"
                     ></fdp-input>
                     <label>Maximum Price:</label>
                     <fdp-input
                         type="number"
                         name="max"
-                        contentDensity="compact"
                         [(ngModel)]="model.max"
                     ></fdp-input>
                 </fd-layout-panel-body>

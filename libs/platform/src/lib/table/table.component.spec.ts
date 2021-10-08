@@ -12,7 +12,7 @@ import { TableDataProvider, TableDataSource } from './domain';
 import { FILTER_STRING_STRATEGY, SelectionMode, SortDirection, TableRowType } from './enums';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { TableRowSelectionChangeEvent, TableRowToggleOpenStateEvent } from './models';
-import { TableComponent } from './table.component';
+import { TableRowClass, TableComponent } from './table.component';
 import { PlatformTableModule } from './table.module';
 import { TableService } from './table.service';
 
@@ -192,25 +192,26 @@ describe('TableComponent internal', () => {
     @Component({
         template: `
             <fdp-table
-                [dataSource]="source"
-                contentDensity="compact"
-                emptyTableMessage="No data found"
-                [selectionMode]="selection"
+                [dataSource]='source'
+                contentDensity='compact'
+                emptyTableMessage='No data found'
+                [selectionMode]='selection'
+                [rowsClass]='rowsClass'
             >
-                <fdp-table-toolbar title="Order Items" [hideItemCount]="false"></fdp-table-toolbar>
+                <fdp-table-toolbar title='Order Items' [hideItemCount]='false'></fdp-table-toolbar>
 
-                <fdp-column name="name" key="name" label="Name" [width]="customColumnWidth + 'px'"></fdp-column>
+                <fdp-column name='name' key='name' label='Name' [width]="customColumnWidth + 'px'"></fdp-column>
 
-                <fdp-column name="price" key="price.value">
+                <fdp-column name='price' key='price.value'>
                     <fdp-table-header *fdpHeaderCellDef>Price Header</fdp-table-header>
-                    <fdp-table-cell *fdpCellDef="let item"
-                        >{{ item.price.value }} {{ item.price.currency }}</fdp-table-cell
+                    <fdp-table-cell *fdpCellDef='let item'
+                    >{{ item.price.value }} {{ item.price.currency }}</fdp-table-cell
                     >
                 </fdp-column>
 
-                <fdp-column name="status" key="status" label="Status"></fdp-column>
+                <fdp-column name='status' key='status' label='Status'></fdp-column>
 
-                <fdp-column name="verified" key="isVerified" label="Client Verified"></fdp-column>
+                <fdp-column name='verified' key='isVerified' label='Client Verified'></fdp-column>
             </fdp-table>
         `
     })
@@ -221,6 +222,7 @@ describe('TableComponent internal', () => {
         selection: SelectionMode = SelectionMode.NONE;
         /** So big so table column won't grow on any device */
         customColumnWidth = 10000;
+        rowsClass: TableRowClass<any> = 'class';
     }
 
     describe('TableComponent Host', async () => {
@@ -259,7 +261,9 @@ describe('TableComponent internal', () => {
         let tableRowCells2DArray: DebugElement[][] = [];
 
         const calculateTableElementsMetaData = () => {
-            tableHeaderCells = fixture.debugElement.queryAll(By.css('.fdp-table__header .fd-table__row .fd-table__cell'));
+            tableHeaderCells = fixture.debugElement.queryAll(
+                By.css('.fdp-table__header .fd-table__row .fd-table__cell')
+            );
             tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
             tableRowCells2DArray = tableBodyRows.map((row) => row.queryAll(By.css('.fd-table__cell')));
         };
@@ -296,7 +300,7 @@ describe('TableComponent internal', () => {
 
                 it('should be render using column.width option', () => {
                     const nameCell = tableRowCells2DArray[0][0];
-                    expect(nameCell.nativeElement.offsetWidth).toBe(hostComponent.customColumnWidth)
+                    expect(nameCell.nativeElement.offsetWidth).toBe(hostComponent.customColumnWidth);
                 });
 
                 it('should be render using column.key option', () => {
@@ -725,6 +729,37 @@ describe('TableComponent internal', () => {
                 expect(tableHeaderCells.length).toBe(4);
             });
         });
+
+        describe('rows', () => {
+            describe('custom class', () => {
+                it('should apply custom class using string value', () => {
+                    const rowClass = 'rowClass';
+                    hostComponent.rowsClass = rowClass;
+
+                    fixture.detectChanges();
+                    calculateTableElementsMetaData();
+
+                    const rowsClassesAssigned = tableBodyRows.every((row) => {
+                        return row.nativeElement.classList.contains(rowClass);
+                    });
+
+                    expect(rowsClassesAssigned).toBeTrue();
+                });
+
+                it('should apply custom class using function', () => {
+                    hostComponent.rowsClass = (row: SourceItem) => row.status;
+
+                    fixture.detectChanges();
+                    calculateTableElementsMetaData();
+
+                    const rowsClassesAssigned = tableBodyRows.every((row, index) => {
+                        return row.nativeElement.classList.contains(hostComponent.table._tableRows[index].value.status);
+                    });
+
+                    expect(rowsClassesAssigned).toBeTrue();
+                });
+            });
+        });
     });
 })();
 
@@ -1019,13 +1054,11 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
         let tableComponent: TableComponent<SourceItem>;
 
         let tableBodyRows: DebugElement[] = [];
-        let tableBodyTreeRows: DebugElement[] = [];
         let tableRowTogglerCellsArray: DebugElement[] = [];
 
         const calculateTableElementsMetaData = () => {
             tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
-            tableBodyTreeRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fdp-table__row--tree'));
-            tableRowTogglerCellsArray = tableBodyTreeRows.map((row) => row.query(By.css('.fdp-table__cell--tree')));
+            tableRowTogglerCellsArray = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row .fd-table__cell--expand'));
         };
 
         beforeEach(
@@ -1055,7 +1088,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
         it('should generate rows for provided items', () => {
             expect(tableComponent._tableRows.length).toEqual(totalTreeItems);
 
-            expect(tableBodyTreeRows.length).toEqual(treeItemParentsCount);
+            expect(tableRowTogglerCellsArray.length).toEqual(treeItemParentsCount);
         });
 
         describe('Collapsing/Expanding', () => {
@@ -1220,7 +1253,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
             });
 
             it('should change type for row with 0 children to "item"', () => {
-                expect(tableBodyTreeRows.length).toEqual(treeItemParentsCount);
+                expect(tableRowTogglerCellsArray.length).toEqual(treeItemParentsCount);
 
                 firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
@@ -1236,7 +1269,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 calculateTableElementsMetaData();
 
-                expect(tableBodyTreeRows.length).toEqual(treeItemParentsCount - 1);
+                expect(tableRowTogglerCellsArray.length).toEqual(treeItemParentsCount - 1);
             });
         });
     });

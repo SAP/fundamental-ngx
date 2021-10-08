@@ -29,7 +29,7 @@ import {
     UP_ARROW
 } from '@angular/cdk/keycodes';
 
-import { fromEvent, isObservable, Subject, Subscription } from 'rxjs';
+import { fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
@@ -37,7 +37,6 @@ import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from
 import { ListComponent } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import {
-    ArrayListDataSource,
     CollectionBaseInput,
     FormField,
     FormFieldControl,
@@ -46,15 +45,18 @@ import {
     isJsObject,
     isOptionItem,
     isString,
-    ListDataSource,
     MatchingBy,
     MatchingStrategy,
     MultiInputOption,
-    ObservableListDataSource
+    ArrayMultiInputDataSource,
+    ObservableMultiInputDataSource,
+    MultiInputDataSource
 } from '@fundamental-ngx/platform/shared';
-import { FdpListDataSource, ListConfig } from '@fundamental-ngx/platform/list';
 import { PlatformMultiInputComponent } from './multi-input.component';
 import { TextAlignment } from '../combobox';
+import { MultiInputConfig } from './multi-input.config';
+
+export type FdpMultiInputDataSource<T> = MultiInputDataSource<T> | Observable<T[]> | T[];
 
 export class MultiInputSelectionChangeEvent {
     constructor(
@@ -71,11 +73,11 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
 
     /** Datasource for suggestion list */
     @Input()
-    get dataSource(): FdpListDataSource<any> {
+    get dataSource(): FdpMultiInputDataSource<any> {
         return this._dataSource;
     }
 
-    set dataSource(value: FdpListDataSource<any>) {
+    set dataSource(value: FdpMultiInputDataSource<any>) {
         if (value) {
             this._initializeDataSource(value);
         }
@@ -185,7 +187,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     searchInputElement: ElementRef;
 
     /** @hidden */
-    _contentDensity: ContentDensity = this.listConfig.contentDensity;
+    _contentDensity: ContentDensity = this.multiInputConfig.contentDensity;
 
     /**
      * @hidden
@@ -245,12 +247,12 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
      */
     openChange = new Subject<boolean>();
 
-    protected _dataSource: FdpListDataSource<any>;
+    protected _dataSource: FdpMultiInputDataSource<any>;
 
     /** @hidden */
     private _inputTextValue: string;
     /** @hidden */
-    private _matchingStrategy: MatchingStrategy = this.listConfig.matchingStrategy;
+    private _matchingStrategy: MatchingStrategy = this.multiInputConfig.matchingStrategy;
     /** @hidden */
     private _dsSubscription?: Subscription;
     /** @hidden */
@@ -292,7 +294,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @Self() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
-        protected listConfig: ListConfig,
+        protected multiInputConfig: MultiInputConfig,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
@@ -311,7 +313,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
         super.ngOnDestroy();
 
         if (isDataSource(this.dataSource)) {
-            (this.dataSource as ListDataSource<any>).close();
+            (this.dataSource as MultiInputDataSource<any>).close();
         }
 
         if (this._dsSubscription) {
@@ -465,8 +467,8 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     }
 
     /** @hidden */
-    protected get ds(): ListDataSource<any> {
-        return <ListDataSource<any>>this.dataSource;
+    protected get ds(): MultiInputDataSource<any> {
+        return <MultiInputDataSource<any>>this.dataSource;
     }
 
     /** @hidden
@@ -486,11 +488,11 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     }
 
     /** @hidden */
-    private _initializeDataSource(ds: FdpListDataSource<any>): void {
+    private _initializeDataSource(ds: FdpMultiInputDataSource<any>): void {
         this._suggestions = [];
 
         if (isDataSource(this.dataSource)) {
-            (this.dataSource as ListDataSource<any>).close();
+            (this.dataSource as MultiInputDataSource<any>).close();
 
             if (this._dsSubscription) {
                 this._dsSubscription.unsubscribe();
@@ -502,7 +504,7 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     }
 
     /** @hidden */
-    private _openDataStream(ds: FdpListDataSource<any>): ListDataSource<any> {
+    private _openDataStream(ds: FdpMultiInputDataSource<any>): MultiInputDataSource<any> {
         const initDataSource = this._toDataStream(ds);
 
         if (initDataSource === undefined) {
@@ -546,14 +548,18 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     }
 
     /** @hidden */
-    private _toDataStream(ds: FdpListDataSource<any>): ListDataSource<any> | undefined {
-        if (isDataSource(ds)) {
-            return ds as ListDataSource<any>;
-        } else if (Array.isArray(ds)) {
+    private _toDataStream(source: FdpMultiInputDataSource<any>): MultiInputDataSource<any> | undefined {
+        if (isDataSource(source)) {
+            return source as MultiInputDataSource<any>;
+        }
+
+        if (Array.isArray(source)) {
             // default implementation to work on top of arrays
-            return new ArrayListDataSource<any>(ds);
-        } else if (isObservable(ds)) {
-            return new ObservableListDataSource<any>(ds);
+            return new ArrayMultiInputDataSource<any>(source);
+        }
+
+        if (isObservable(source)) {
+            return new ObservableMultiInputDataSource<any>(source);
         }
 
         return undefined;

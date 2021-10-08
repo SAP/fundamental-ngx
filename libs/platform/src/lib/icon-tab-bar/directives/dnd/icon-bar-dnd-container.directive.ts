@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { IconBarDndListDirective } from './icon-bar-dnd-list.directive';
 import { takeUntil } from 'rxjs/operators';
 import { FLIPPER_SIZE } from '../../constants';
-import { IconTabBarItem } from '../../types';
+import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 
 export interface FdDnDEvent {
   draggableItem: IconTabBarItem;
