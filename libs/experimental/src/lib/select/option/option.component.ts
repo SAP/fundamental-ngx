@@ -1,5 +1,5 @@
 import {
-    ChangeDetectionStrategy,
+    ChangeDetectionStrategy, ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -32,7 +32,7 @@ export class ExperimentalOptionComponent {
     value: any;
 
     /** Whether or not this option is selected. */
-    @HostBinding('fn-select__item--selected')
+    @HostBinding('class.fn-select__item--selected')
     @Input()
     selected = false;
 
@@ -52,8 +52,8 @@ export class ExperimentalOptionComponent {
     constructor(private _elRef: ElementRef) {}
 
     focus(): void {
-        this._elRef.nativeElement.classList.add('focus-visible');
         this._elRef.nativeElement.focus();
+        this._elRef.nativeElement.classList.add('focus-visible');
     }
 
 }

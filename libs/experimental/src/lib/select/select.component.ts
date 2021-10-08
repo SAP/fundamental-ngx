@@ -72,7 +72,7 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy 
 
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(event, TAB)) {
+        if (document.activeElement === this.selectInput.nativeElement && KeyUtil.isKeyCode(event, TAB)) {
             this.options.first.focus();
         } else if (this.opened && KeyUtil.isKeyCode(event, ESCAPE)) {
             this.opened = false;
