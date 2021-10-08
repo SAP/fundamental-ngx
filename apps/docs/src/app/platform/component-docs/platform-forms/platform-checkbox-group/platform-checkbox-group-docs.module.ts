@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PlatformCheckboxModule, PlatformCheckboxGroupModule, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { ApiComponent } from '../../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../../api-files';
 import { SharedDocumentationPageModule } from '../../../../documentation/shared-documentation-page.module';
@@ -29,6 +30,7 @@ const routes: Routes = [
         PlatformCheckboxModule,
         PlatformCheckboxGroupModule,
         FdpFormGroupModule,
+        PlatformButtonModule
     ],
     exports: [RouterModule],
     declarations: [

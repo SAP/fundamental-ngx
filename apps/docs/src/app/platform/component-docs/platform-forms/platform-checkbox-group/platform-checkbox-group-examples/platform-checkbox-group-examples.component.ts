@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { SelectItem } from '@fundamental-ngx/platform/shared';
 
@@ -9,6 +9,7 @@ import { SelectItem } from '@fundamental-ngx/platform/shared';
 })
 export class PlatformCheckboxGroupExampleComponent {
     fruits: string[] = ['Apple', 'Banana', 'Grapes'];
+    fruitsObject: { fruitsObject: [] };
     favorites = { fruitsEx: ['banana'] };
     favorites1 = { fruits1: ['Apple'] };
     languages = [
@@ -22,6 +23,13 @@ export class PlatformCheckboxGroupExampleComponent {
     form1 = new FormGroup({});
     form2 = new FormGroup({});
     form3 = new FormGroup({});
+
+    form4 = new FormGroup({
+        apple: new FormControl(false),
+        banana: new FormControl(false),
+        grapes: new FormControl(false)
+    })
+
 }
 
 class LanguageKnown implements SelectItem {

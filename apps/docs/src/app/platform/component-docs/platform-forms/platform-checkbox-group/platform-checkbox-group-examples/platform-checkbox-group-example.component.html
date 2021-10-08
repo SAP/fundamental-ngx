@@ -100,3 +100,52 @@
     </ng-template>
 </fdp-form-group>
 <span style="margin-left: 2rem;">Languages Known: {{ form3.controls.language?.value }}</span>
+
+<h3>Checkbox with same context</h3>
+<fdp-form-group #fg hintPlacement="left" [formGroup]="form4">
+        <fdp-form-field id="apple" hintPlacement="left" rank="1" [validators]="validators"
+                        [i18Strings]="apple">
+            <fdp-checkbox name="apple" [isBinary]="true" title="apple" value="apple"
+                          formControlName="apple"
+                >Apple</fdp-checkbox>
+        </fdp-form-field>
+
+        <fdp-form-field id="banana" hintPlacement="left" rank="2" [validators]="validators"
+                        [i18Strings]="banana">
+            <fdp-checkbox name="engineering" [isBinary]="true" title="banana" value="banana"
+                          formControlName="banana"
+            >Banana</fdp-checkbox>
+        </fdp-form-field>
+
+        <fdp-form-field id="grapes" [validators]="validators" hintPlacement="left" rank="3"
+                        [i18Strings]="grape">
+            <fdp-checkbox name="grapes" [isBinary]="true" title="grapes" value="grapes"
+                          formControlName="grapes"
+            >Grapes</fdp-checkbox>
+        </fdp-form-field>
+
+    <ng-template #i18n let-errors>
+        <ng-container *ngIf="errors.required">
+            <span role="alert" aria-atomic="true">Value is required.</span>
+        </ng-container>
+    </ng-template>
+
+    <ng-template #apple let-errors>
+        <span *ngIf="errors.required" role="alert" aria-atomic="true">
+            Apple is mandatory
+        </span>
+    </ng-template>
+
+    <ng-template #banana let-errors>
+        <span *ngIf="errors.required" role="alert" aria-atomic="true">
+            Banana is mandatory
+        </span>
+    </ng-template>
+
+    <ng-template #grape let-errors>
+        <span *ngIf="errors.required" role="alert" aria-atomic="true">
+            Grape is mandatory
+        </span>
+    </ng-template>
+</fdp-form-group>
+<span style="margin-left: 2rem;">Favorites: {{ form4.getRawValue() | json }}</span>
