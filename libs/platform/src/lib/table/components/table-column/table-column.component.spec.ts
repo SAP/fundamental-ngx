@@ -1,11 +1,11 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { of } from 'rxjs';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { TableColumnComponent } from './table-column.component';
 import { TableColumnResizeService } from '../../table-column-resize.service';
 import { TableColumnResizeServiceMock } from './../../mocks/table-column-resize-mock.service';
-import { ColumnAlign } from '../../enums';
+import { ColumnAlign } from '../../enums/column-align.enum';
 
 describe('TableColumnComponent', () => {
     let component: TableColumnComponent;

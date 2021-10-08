@@ -17,7 +17,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "aot": true,
             "outputPath": "dist/apps/docs",
             "index": "apps/docs/src/index.html",
             "main": "apps/docs/src/main.ts",
@@ -43,8 +42,13 @@
               "apps/docs/src/styles.scss"
             ],
             "scripts": ["node_modules/marked/lib/marked.js"],
-            "showCircularDependencies": false,
-            "allowedCommonJsDependencies": ["moment", "highlight.js", "focus-trap", "@angularclass/hmr"]
+            "allowedCommonJsDependencies": ["moment", "highlight.js", "focus-trap", "@angularclass/hmr"],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -58,7 +62,6 @@
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -78,11 +81,9 @@
                   "with": "apps/docs/src/environments/environment.prod.ts"
                 }
               ],
-              "aot": true,
               "sourceMap": false,
               "namedChunks": false,
-              "vendorChunk": false,
-              "optimization": false
+              "vendorChunk": false
             },
             "hmr": {
               "budgets": [
@@ -95,7 +96,6 @@
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -107,23 +107,22 @@
               ]
             },
             "fr": {
-              "aot": true,
-              "outputPath": "dist/libs/platform/locale/fr",
-              "i18nFile": "apps/docs/src/app/platform/locale/fr/messages.fr.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "fr",
-              "i18nMissingTranslation": "error"
+              "outputPath": "dist/libs/platform/locale",
+              "i18nMissingTranslation": "error",
+              "localize": [
+                  "fr"
+              ]
             },
             "ar": {
-              "aot": true,
-              "outputPath": "dist/libs/platform/locale/ar",
-              "i18nFile": "apps/docs/src/app/platform/locale/ar/messages.ar.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "ar",
-              "i18nMissingTranslation": "error"
+              "outputPath": "dist/libs/platform/locale",
+              "i18nMissingTranslation": "error",
+              "localize": [
+                  "ar"
+              ]
             }
           },
-          "outputs": ["{options.outputPath}"]
+          "outputs": ["{options.outputPath}"],
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -174,6 +173,18 @@
           },
           "outputs": ["coverage/apps/docs/"]
         }
+      },
+      "i18n": {
+          "locales": {
+              "fr": {
+                  "translation": "apps/docs/src/app/platform/locale/fr/messages.fr.xlf",
+                  "baseHref": ""
+              },
+              "ar": {
+                  "translation": "apps/docs/src/app/platform/locale/ar/messages.ar.xlf",
+                  "baseHref": ""
+              }
+          }
       }
     },
     "docs-e2e": {

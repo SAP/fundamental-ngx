@@ -2,8 +2,8 @@
     "name": "@fundamental-ngx/core/illustrated-message",
     "version": "VERSION_PLACEHOLDER",
     "peerDependencies": {
-        "@angular/common": "^11.2.14",
-        "@angular/core": "^11.2.14"
+        "@angular/common": "~12.0.5",
+        "@angular/core": "~12.0.5"
     },
     "dependencies": {
         "tslib": "^2.0.0"

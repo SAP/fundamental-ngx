@@ -22,6 +22,8 @@ env:
     ~/.npm
     node_modules
 
+  NODE_OPTIONS: '--max_old_space_size=4096'
+
 jobs:
   install:
     runs-on: ubuntu-latest

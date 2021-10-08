@@ -1,6 +1,6 @@
-import { version } from '../../../../../../../package.json';
-import { dependencies } from '../../../../../../../package-lock.json';
 import { parseVersion } from './utils/parse-version';
+import packageInfo from '../../../../../../../package.json';
+import packageLockInfo from '../../../../../../../package-lock.json';
 
 export class StackblitzDependencies {
     private static _libDependencies: string[] = ['@fundamental-ngx/platform', '@fundamental-ngx/core'];
@@ -29,11 +29,11 @@ export class StackblitzDependencies {
     static GetDependencies(): object {
         const _dependencies: object = {};
 
-        this._libDependencies.forEach((libDep) => (_dependencies[libDep] = parseVersion(version)));
-
+        this._libDependencies.forEach((libDep) => (_dependencies[libDep] = parseVersion(packageInfo.version)));
+        
         this._dependencies.forEach((dep) => {
-            if (dependencies && dependencies[dep]) {
-                _dependencies[dep] = dependencies[dep].version;
+            if (packageLockInfo.dependencies && packageLockInfo.dependencies[dep]) {
+                _dependencies[dep] = packageLockInfo.dependencies[dep].version;
             } else {
                 throw new Error('Dependency ' + dep + ' not found in package-lock.json');
             }
