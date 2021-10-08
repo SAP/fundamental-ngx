@@ -29,7 +29,7 @@ export class ExperimentalOptionComponent {
 
     /** Value of the option. Similar to how a native select operates. */
     @Input()
-    value: any;
+    value: string | any;
 
     /** Whether or not this option is selected. */
     @HostBinding('class.fn-select__item--selected')
@@ -54,6 +54,14 @@ export class ExperimentalOptionComponent {
     focus(): void {
         this._elRef.nativeElement.focus();
         this._elRef.nativeElement.classList.add('focus-visible');
+    }
+
+    hide(): void {
+        this._elRef.nativeElement.style.display = 'none';
+    }
+
+    show(): void {
+        this._elRef.nativeElement.style.display = 'list-item';
     }
 
 }

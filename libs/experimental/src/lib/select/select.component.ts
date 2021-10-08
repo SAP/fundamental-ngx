@@ -13,6 +13,7 @@ import { ExperimentalOptionComponent } from './option/option.component';
 import { KeyUtil } from '@fundamental-ngx/core';
 import { ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
+import { ControlValueAccessor } from '@angular/forms';
 /**
  * Select component intended to mimic
  * the behaviour of the native select element.
@@ -24,7 +25,7 @@ import { Subscription } from 'rxjs';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy {
+export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy, ControlValueAccessor {
 
     /** Whether or not the select is opened. */
     @Input()
@@ -39,8 +40,7 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy 
     placeholder: string;
 
     /** The select value. */
-    @Input()
-    value: string;
+    private _internalValue: string;
 
     /** Whether or not this select is editable. */
     @Input()
@@ -52,8 +52,27 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy 
     @ViewChild('selectInput', {read: ElementRef})
     selectInput: ElementRef;
 
+    @Input()
+    get value(): any {
+        return this._internalValue;
+    }
+
+    set value(newValue: any) {
+        if (newValue !== this._internalValue) {
+            this.writeValue(newValue);
+            if (this.editable) {
+                this._filterItems();
+            }
+            console.log(this._internalValue);
+        }
+        this._cdRef.detectChanges();
+    }
+
     /** @hidden */
     private _subscriptions = new Subscription();
+
+    /** @hidden */
+    _optionsListEmpty = false;
 
     constructor(private _cdRef: ChangeDetectorRef, private _elRef: ElementRef) {
     }
@@ -91,6 +110,7 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy 
     }
 
     selectInputClicked(): void {
+        this.onTouched();
         this.opened = !this.opened;
     }
 
@@ -101,6 +121,44 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy 
         this.value = clickedOption.value;
         this.opened = false;
         this._cdRef.markForCheck();
+    }
+
+    /** @hidden */
+    onChange: Function = () => { };
+
+    /** @hidden */
+    onTouched: Function = () => { };
+
+    /** @hidden */
+    registerOnChange(fn: any): void {
+        this.onChange = fn;
+    }
+
+    /** @hidden */
+    registerOnTouched(fn: any): void {
+        this.onTouched = fn;
+    }
+
+    /** @hidden
+     *  from ControlValue Accessor
+     */
+    writeValue(value: any): void {
+        this._internalValue = value;
+    }
+
+    /** @hidden */
+    private _filterItems(): void {
+        let visibleOptions = 0;
+        this.options.forEach(option => {
+            if (!option.value.toLowerCase().startsWith(this._internalValue.toLowerCase())) {
+                option.hide();
+            } else {
+                visibleOptions++;
+                option.show();
+            }
+        });
+
+        visibleOptions > 0 ? this._optionsListEmpty  = false : this._optionsListEmpty = true;
     }
 
 }

@@ -7,6 +7,7 @@ import { SelectHeaderComponent } from './select-header/select-header.component';
 import { SelectDocsComponent } from './select-docs.component';
 import { examples } from './examples';
 import { ExperimentalSelectModule } from '@fundamental-ngx/experimental/select';
+import { FormModule } from '@fundamental-ngx/core';
 
 const routes: Routes = [
     {
@@ -26,7 +27,8 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
-        ExperimentalSelectModule
+        ExperimentalSelectModule,
+        FormModule
     ],
     exports: [RouterModule],
     declarations: [examples, SelectHeaderComponent, SelectDocsComponent]
