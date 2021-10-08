@@ -1,4 +1,13 @@
 
+## 0.33.0-rc.0 (2021-10-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core, platform:** angular 12 migration
+
+* **core, platform:** Ng 12 migration ([#6700](https://github.com/SAP/fundamental-ngx/issues/6700)) ([36dde7b](https://github.com/SAP/fundamental-ngx/commit/36dde7b0d1dfa42b749e251679cf514d2ed6fab0))
+
 ### 0.32.2-rc.58 (2021-10-07)
 
 
