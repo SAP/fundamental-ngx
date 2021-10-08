@@ -10,30 +10,24 @@ import {
     OnDestroy,
     OnInit,
     Optional,
-    QueryList,
     Renderer2,
     ViewChild,
-    ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DOWN_ARROW, ENTER, LEFT_ARROW, RIGHT_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-import { Platform } from '@angular/cdk/platform';
 import { coerceNumberProperty, _isNumberValue } from '@angular/cdk/coercion';
-import { LiveAnnouncer } from '@angular/cdk/a11y';
 
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { SliderControlValue, SliderCustomValue, SliderTickMark, SliderValueTargets } from './slider.model';
 import {
-    SliderControlValue,
-    SliderCustomValue,
-    SliderRangeHandles,
-    SliderTickMark,
-    SliderValueTargets
-} from './slider.model';
-import { RtlService, applyCssClass, CssClassBuilder, ContentDensityService, KeyUtil } from '@fundamental-ngx/core/utils';
+    RtlService,
+    applyCssClass,
+    CssClassBuilder,
+    KeyUtil
+} from '@fundamental-ngx/core/utils';
 
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -49,22 +43,23 @@ let sliderId = 0;
     styleUrls: ['./slider.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [SLIDER_VALUE_ACCESSOR]
+    providers: [SLIDER_VALUE_ACCESSOR],
+    host: {
+        class: 'fn-slider'
+    }
 })
-export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor, CssClassBuilder {
-    /** Slider id, it has some default value if not set,  */
+export class ExperimentalSliderComponent
+    implements OnInit, OnChanges, OnDestroy, ControlValueAccessor, CssClassBuilder
+{
+    /** Slider id, it has some default value if not set.  */
     @Input()
     @HostBinding('attr.id')
     id = 'fn-slider-id-' + sliderId++;
 
+    /** Whether or not slider should be rendered as vertical. */
     @Input()
     @HostBinding('class.fn-slider--vertical')
     vertical: boolean = false;
-
-    /** Whether to apply cozy mode. */
-    @Input()
-    @HostBinding('class.fn-slider--lg')
-    cozy: boolean = null;
 
     /** User's custom classes */
     @Input()
@@ -148,29 +143,9 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
         this._tickmarksBetweenLabels = coerceNumberProperty(value, this._tickmarksBetweenLabels);
     }
 
-    /**
-     * Slider mode.
-     * Options include: 'single' | 'range'
-     * The default is set to 'single'
-     */
-    @Input()
-    mode: 'single' | 'range' = 'single';
-
     /** Array of custom values to use for Slider. */
     @Input()
     customValues: SliderCustomValue[] = [];
-
-    /** Tooltip can be two types, 'readonly' to display value and 'editable' to make the ability to set and display value. */
-    @Input()
-    tooltipMode: 'readonly' | 'editable';
-
-    /** Hides display of colored progress bar. */
-    @Input()
-    hideProgressBar = false;
-
-    /** Whether the control is disabled. */
-    @Input()
-    disabled = false;
 
     /**
      * slider current value verbose string.
@@ -180,22 +155,7 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
     @Input()
     singleSliderCurrentValuePrefix = 'Current value is ';
 
-    /**
-     * @hidden range slider handle 1 current value supporting string
-     * This will be read only once by screen reader and upon slider value change,
-     * this string will not be read.
-     */
-    @Input()
-    rangeSliderHandle1CurrentValuePrefix = 'handle 1 value is ';
-
-    /**
-     * @hidden range slider handle 2 current value supporting string
-     * This will be read only once by screen reader and upon slider value change,
-     * this string will not be read.
-     */
-    @Input()
-    rangeSliderHandle2CurrentValuePrefix = 'handle 2 value is ';
-
+    /** @hidden */
     _position: number | number[] = 0;
 
     /** Control value */
@@ -210,11 +170,7 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
             return;
         }
 
-        if (this._isRange) {
-            this._initRangeMode(value as number[] | SliderTickMark[]);
-        } else {
-            this._initSingeMode(value as number | SliderTickMark);
-        }
+        this._initSingeMode(value as number | SliderTickMark);
 
         this._value = value;
 
@@ -224,7 +180,7 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
 
     /** @hidden */
     get _popoverValueRef(): number[] {
-        return [this._position as number, this._handle1Value, this._handle2Value];
+        return [this._position as number];
     }
 
     /** @hidden */
@@ -236,40 +192,10 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
     handle: ElementRef<HTMLDivElement>;
 
     /** @hidden */
-    @ViewChild('rangeHandle1', { read: ElementRef })
-    rangeHandle1: ElementRef<HTMLDivElement>;
-
-    /** @hidden */
-    @ViewChild('rangeHandle2', { read: ElementRef })
-    rangeHandle2: ElementRef<HTMLDivElement>;
-
-    /** @hidden */
-    @ViewChildren(PopoverComponent)
-    _popovers: QueryList<PopoverComponent>;
-
-    /** @hidden */
     _value: number | SliderTickMark | SliderTickMark[] | number[] = 0;
 
     /** @hidden */
     _progress = 0;
-
-    /** @hidden */
-    _isRange = false;
-
-    /** @hidden */
-    _handle1Position = 0;
-
-    /** @hidden */
-    _handle2Position = 0;
-
-    /** @hidden */
-    _handle1Value = 0;
-
-    /** @hidden */
-    _handle2Value = 0;
-
-    /** @hidden */
-    _rangeProgress = 0;
 
     /** @hidden */
     _tickMarks: SliderTickMark[] = [];
@@ -278,25 +204,12 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
     _sliderValueTargets = SliderValueTargets;
 
     /** @hidden */
-    _popoverInputFieldClass = `fn-slider-popover-input-${sliderId}`;
-
-    /** @hidden */
     _isRtl = false;
 
     /**
      * @hidden slider current value supporting string.
      */
     _singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
-
-    /**
-     * @hidden range slider handle 1 current value supporting string
-     */
-    _rangeSliderHandle1CurrentValuePrefix = this.rangeSliderHandle1CurrentValuePrefix;
-
-    /**
-     * @hidden range slider handle 2 current value supporting string
-     */
-    _rangeSliderHandle2CurrentValuePrefix = this.rangeSliderHandle2CurrentValuePrefix;
 
     /** @hidden */
     private _min = 0;
@@ -330,10 +243,7 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
         private readonly _elementRef: ElementRef,
         private readonly _cdr: ChangeDetectorRef,
         private readonly _renderer: Renderer2,
-        private readonly _platform: Platform,
-        private readonly _liveAnnouncer: LiveAnnouncer,
         @Optional() private readonly _rtlService: RtlService,
-        @Optional() private _contentDensityService: ContentDensityService
     ) {}
 
     /** @hidden */
@@ -345,16 +255,11 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
         if (this._valuesBySteps.length === 0) {
             this._constructValuesBySteps();
         }
-
-        if (this.cozy === null && this._contentDensityService) {
-            this._subscribeToContentDensity();
-        }
     }
 
     /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
-        this._checkIsInRangeMode();
         this._constructValuesBySteps();
         this._recalcHandlePositions();
     }
@@ -395,11 +300,7 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        return [
-            'fn-slider',
-            this.disabled ? 'is-disabled' : '',
-            this.class
-        ];
+        return ['fn-slider', this.class];
     }
 
     /** @hidden */
@@ -424,54 +325,20 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
     }
 
     /** @hidden */
-    setDisabledState(isDisabled: boolean): void {
-        this.disabled = isDisabled;
-    }
-
-    /** @hidden */
     writeValue(value: SliderControlValue): void {
         this.value = value;
     }
 
     /** @hidden */
     onTrackClick(event: MouseEvent): void {
-        if (this.disabled || this._isRange) {
-            return;
-        }
-
         this.writeValue(this._calculateValueFromPointerPosition(event));
-        this._updatePopoversPosition();
     }
 
     /** @hidden */
     onHandleClick(event: MouseEvent, element: HTMLElement): void {
         event.stopPropagation();
-        if (this.disabled) {
-            return;
-        }
-
         const unsubscribeFromMousemove = this._renderer.listen('document', 'mousemove', (moveEvent) => {
-            this._updatePopoversPosition();
-
-            if (!this._isRange) {
-                this.writeValue(this._calculateValueFromPointerPosition(moveEvent));
-
-                return;
-            }
-
-            let handleIndex: SliderRangeHandles;
-            if (element === this.rangeHandle1.nativeElement) {
-                handleIndex = SliderRangeHandles.First;
-            }
-
-            if (element === this.rangeHandle2.nativeElement) {
-                handleIndex = SliderRangeHandles.Second;
-            }
-
-            const value = this._calculateValueFromPointerPosition(moveEvent, false) as number;
-            this._setRangeHandleValueAndPosition(handleIndex, value);
-
-            this.writeValue(this._constructRangeModelValue());
+            this.writeValue(this._calculateValueFromPointerPosition(moveEvent));
         });
 
         const unsubscribeFromMouseup = this._renderer.listen('document', 'mouseup', () => {
@@ -482,33 +349,15 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
 
     /** @hidden */
     onKeyDown(event: KeyboardEvent, element: HTMLElement): void {
-        if (this.disabled) {
-            return;
-        }
-
         const allowedKeys: number[] = [LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW, ENTER, SPACE];
         if (!KeyUtil.isKeyCode(event, allowedKeys)) {
             return;
         }
         event.preventDefault();
 
-        this._closeOpenPopupOnClick();
-
         const diff = event.shiftKey ? this.jump : this.step;
         let newValue: number | SliderTickMark | null = null;
         let prevValue = this._position as number;
-        let handleIndex: SliderRangeHandles;
-        if (this._isRange) {
-            if (element === this.rangeHandle1.nativeElement) {
-                prevValue = this._handle1Value;
-                handleIndex = SliderRangeHandles.First;
-            }
-
-            if (element === this.rangeHandle2.nativeElement) {
-                prevValue = this._handle2Value;
-                handleIndex = SliderRangeHandles.Second;
-            }
-        }
         if (this.isRtl()) {
             if (KeyUtil.isKeyCode(event, LEFT_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
                 newValue = prevValue + diff;
@@ -531,108 +380,32 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
             return;
         }
 
-        newValue = this._processNewValue(newValue as number, !this._isRange);
+        newValue = this._processNewValue(newValue as number);
 
-        if (!this._isRange) {
-            this.writeValue(newValue);
-        } else {
-            this._setRangeHandleValueAndPosition(handleIndex, newValue as number);
-            this.writeValue(this._constructRangeModelValue());
-        }
-
-        this._updatePopoversPosition();
-    }
-
-    /** @hidden */
-    _showPopovers(): void {
-        this._tooltipOpen = true;
-        this._popovers.forEach((popover) => popover.open());
-    }
-
-    /** @hidden */
-    _hidePopovers(): void {
-        this._tooltipOpen = false;
-        const elementsToCheck = [
-            this.handle?.nativeElement,
-            this.rangeHandle1?.nativeElement,
-            this.rangeHandle2?.nativeElement
-        ];
-        const handleFocused = elementsToCheck.some((el) => document.activeElement === el);
-        const popoverInputFocused = document.activeElement.classList.contains(this._popoverInputFieldClass);
-        if (handleFocused || popoverInputFocused) {
-            const unsubscribeFromBlur = this._renderer.listen(document.activeElement, 'focusout', () => {
-                setTimeout(() => {
-                    unsubscribeFromBlur();
-                    this._hidePopovers();
-                });
-            });
-
-            return;
-        }
-
-        this._popovers.forEach((popover) => popover.close());
+        this.writeValue(newValue);
     }
 
     /** @hidden */
     _updateValueFromInput(value: string, target: SliderValueTargets): void {
         const newValue = this._processNewValue(+value) as number;
-        if (!this._isRange && target === SliderValueTargets.SINGLE_SLIDER) {
+        if (target === SliderValueTargets.SINGLE_SLIDER) {
             this.writeValue(newValue);
             this.handle.nativeElement.focus();
-            this._updatePopoversPosition();
-
-            return;
         }
-
-        if (target === SliderValueTargets.RANGE_SLIDER1) {
-            this._setRangeHandleValueAndPosition(SliderRangeHandles.First, newValue);
-            this.rangeHandle1.nativeElement.focus();
-        }
-
-        if (target === SliderValueTargets.RANGE_SLIDER2) {
-            this._setRangeHandleValueAndPosition(SliderRangeHandles.Second, newValue);
-            this.rangeHandle2.nativeElement.focus();
-        }
-
-        this.writeValue(this._constructRangeModelValue());
-
-        this._updatePopoversPosition();
     }
 
     /** @hidden reset default prefix on leaving the slider */
     onBlur(): void {
         // reset prefix string for slider current value that need to be announced
-        if (this._isRange) {
-            this._rangeSliderHandle1CurrentValuePrefix = this.rangeSliderHandle1CurrentValuePrefix;
-            this._rangeSliderHandle2CurrentValuePrefix = this.rangeSliderHandle2CurrentValuePrefix;
-        } else {
-            this._singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
-        }
+        this._singleSliderCurrentValuePrefix = this.singleSliderCurrentValuePrefix;
         this._cdr.markForCheck();
-    }
-
-    /** @hidden */
-    private _closeOpenPopupOnClick(): void {
-        if (this._tooltipOpen) {
-            this._popovers.forEach((popover) => popover.close());
-        } else {
-            this._popovers.forEach((popover) => popover.open());
-        }
-        this._tooltipOpen = !this._tooltipOpen;
-    }
-
-    /** @hidden */
-    private _updatePopoversPosition(): void {
-        this._cdr.detectChanges();
-
-        this._popovers.forEach((popover) => popover.refreshPosition());
     }
 
     /** @hidden */
     private _calculateValueFromPointerPosition(event: MouseEvent, takeCustomValue = true): number | SliderTickMark {
         const { left, bottom, height, width } = this.trackEl.nativeElement.getBoundingClientRect();
         const coordinates = this.vertical ? event.clientY : event.clientX;
-        const offset =  this.vertical ? bottom : left;
+        const offset = this.vertical ? bottom : left;
         const size = this.vertical ? height : width;
         let percentage = (coordinates - offset) / size;
 
@@ -643,8 +416,6 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
         if (!this.vertical && this._isRtl) {
             percentage = 1 - percentage;
         }
-
-        console.log(percentage);
 
         const newValue = this.min + percentage * (this.max - this.min);
 
@@ -661,12 +432,7 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
             newValue = this.min;
         }
 
-        if (this._isRange) {
-            this._rangeSliderHandle1CurrentValuePrefix = '';
-            this._rangeSliderHandle2CurrentValuePrefix = '';
-        } else {
-            this._singleSliderCurrentValuePrefix = '';
-        }
+        this._singleSliderCurrentValuePrefix = '';
         this._cdr.markForCheck();
 
         const stepDiffArray = this._valuesBySteps
@@ -679,47 +445,6 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
         }
 
         return value;
-    }
-
-    /** @hidden */
-    private _setRangeHandleValueAndPosition(handleIndex: SliderRangeHandles, value: number): void {
-        const position = this._calcProgress(value, true);
-
-        if (handleIndex === SliderRangeHandles.First) {
-            this._handle1Value = value;
-            this._handle1Position = position;
-        }
-
-        if (handleIndex === SliderRangeHandles.Second) {
-            this._handle2Value = value;
-            this._handle2Position = position;
-        }
-
-        this._rangeProgress = Math.abs(this._handle2Position - this._handle1Position);
-    }
-
-    /** @hidden */
-    private _constructRangeModelValue(): number[] | SliderTickMark[] {
-        let rangeLowerValue: number | string;
-        let rangeHigherValue: number | string;
-        let rangeValue: number[] | SliderTickMark[] = [
-            Math.min(this._handle1Value, this._handle2Value),
-            Math.max(this._handle1Value, this._handle2Value)
-        ];
-
-        rangeLowerValue = rangeValue[0];
-        rangeHigherValue = rangeValue[1];
-
-        if (this.customValues.length > 0) {
-            const min = this.customValues[rangeValue[0]] || this.customValues[0];
-            const max = this.customValues[rangeValue[1]] || this.customValues[this.customValues.length - 1];
-
-            rangeValue = [min, max];
-            rangeLowerValue = rangeValue[0].label;
-            rangeHigherValue = rangeValue[1].label;
-        }
-        this._liveAnnouncer.announce('range value between ' + rangeLowerValue + ' and ' + rangeHigherValue, 'polite');
-        return rangeValue;
     }
 
     /** @hidden */
@@ -764,18 +489,7 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
 
     /** @hidden */
     private _recalcHandlePositions(): void {
-        if (this._isRange) {
-            this._handle1Position = this._calcProgress(this._handle1Value);
-            this._handle2Position = this._calcProgress(this._handle2Value);
-            this._rangeProgress = Math.abs(this._handle2Position - this._handle1Position);
-        }
-
         this._progress = this._calcProgress(this._position as number, true);
-    }
-
-    /** @hidden */
-    private _checkIsInRangeMode(): void {
-        this._isRange = this.mode === 'range';
     }
 
     /** @hidden Rtl change subscription */
@@ -787,15 +501,6 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
         this._rtlService.rtl.pipe(takeUntil(this._onDestroy$)).subscribe((isRtl: boolean) => {
             this._isRtl = isRtl;
             this._cdr.markForCheck();
-        });
-    }
-
-    /** @hidden ContentDensity change subscription */
-    private _subscribeToContentDensity(): void {
-        this._contentDensityService?._contentDensityListener.pipe(takeUntil(this._onDestroy$)).subscribe((density) => {
-            this.cozy = density === 'cozy';
-            this.buildComponentCssClass();
-            this._cdr.detectChanges();
         });
     }
 
@@ -838,39 +543,6 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
     }
 
     /** @hidden */
-    private _initRangeMode(value: number[] | SliderTickMark[]): void {
-        if (!(this._handle1Value === 0 && this._handle2Value === 0)) {
-            return;
-        }
-
-        if (this.customValues.length > 0) {
-            this._initRangeModeWithCustomValues(value as SliderTickMark[]);
-
-            return;
-        }
-
-        const firstHandle = coerceNumberProperty(value[0], this.min);
-        const secondHandle = coerceNumberProperty(value[1], this.max);
-
-        this._initRangeModeDefault([firstHandle, secondHandle]);
-    }
-
-    /** @hidden */
-    private _initRangeModeDefault([firstHandle, secondHandle]: number[]): void {
-        this._position = [firstHandle, secondHandle];
-
-        this._setRangeHandleValueAndPosition(SliderRangeHandles.First, firstHandle);
-        this._setRangeHandleValueAndPosition(SliderRangeHandles.Second, secondHandle);
-    }
-
-    /** @hidden */
-    private _initRangeModeWithCustomValues([firstHandle, secondHandle]: SliderTickMark[]): void {
-        const value = this._getCustomValuesPosition([firstHandle, secondHandle]) || [this.min, this.max];
-
-        this._initRangeModeDefault(value as number[]);
-    }
-
-    /** @hidden */
     private _getCustomValuesPosition(value: SliderTickMark | SliderTickMark[]): number | number[] {
         this.min = 0;
         this.max = this.customValues.length - 1;
@@ -882,7 +554,7 @@ export class ExperimentalSliderComponent implements OnInit, OnChanges, OnDestroy
     /** @hidden */
     private _getCustomValuesPositions(value: SliderTickMark | SliderTickMark[]): number | number[] {
         if (!value || (value as SliderTickMark[]).length === 0) {
-            return this._isRange ? [0, this.customValues.length - 1] : 0;
+            return 0;
         }
 
         if (Array.isArray(value)) {
