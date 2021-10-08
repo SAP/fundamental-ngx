@@ -22,12 +22,7 @@ import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { SliderControlValue, SliderCustomValue, SliderTickMark, SliderValueTargets } from './slider.model';
-import {
-    RtlService,
-    applyCssClass,
-    CssClassBuilder,
-    KeyUtil
-} from '@fundamental-ngx/core/utils';
+import { RtlService, applyCssClass, CssClassBuilder, KeyUtil } from '@fundamental-ngx/core/utils';
 
 export const SLIDER_VALUE_ACCESSOR = {
     provide: NG_VALUE_ACCESSOR,
@@ -121,7 +116,7 @@ export class ExperimentalSliderComponent
         this._step = value;
     }
 
-    /** Jump value. */
+    /** Jump value. When using keyboard arrows and shift, it will be used instead of step */
     @Input()
     get jump(): number {
         return this._jump;
@@ -229,9 +224,6 @@ export class ExperimentalSliderComponent
     /** @hidden */
     private _valuesBySteps: number[] = [];
 
-    /** @hidden */
-    private _tooltipOpen = false;
-
     /**
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
@@ -243,7 +235,7 @@ export class ExperimentalSliderComponent
         private readonly _elementRef: ElementRef,
         private readonly _cdr: ChangeDetectorRef,
         private readonly _renderer: Renderer2,
-        @Optional() private readonly _rtlService: RtlService,
+        @Optional() private readonly _rtlService: RtlService
     ) {}
 
     /** @hidden */
@@ -348,7 +340,7 @@ export class ExperimentalSliderComponent
     }
 
     /** @hidden */
-    onKeyDown(event: KeyboardEvent, element: HTMLElement): void {
+    onKeyDown(event: KeyboardEvent): void {
         const allowedKeys: number[] = [LEFT_ARROW, RIGHT_ARROW, UP_ARROW, DOWN_ARROW, ENTER, SPACE];
         if (!KeyUtil.isKeyCode(event, allowedKeys)) {
             return;

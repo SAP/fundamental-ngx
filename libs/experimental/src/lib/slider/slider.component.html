@@ -14,6 +14,7 @@
             [attr.aria-labelledby]="ariaLabelledBy"
             [attr.aria-valuemin]="'value is ' + minValue"
             [attr.aria-valuemax]="'value is ' + maxValue"
+            tabindex="0"
             [attr.aria-valuenow]="
                 _singleSliderCurrentValuePrefix + getValuenow(_position, _sliderValueTargets.SINGLE_SLIDER)
             "
@@ -30,7 +31,7 @@
             i18n-aria-valuetext="@@slider.single.valuetext.details|Slider valuetext attribute"
             (mousedown)="onHandleClick($event, handle)"
             (blur)="onBlur()"
-            (keydown)="onKeyDown($event, handle)"
+            (keydown)="onKeyDown($event)"
         >
             <span class="sap-icon sap-icon--megamenu"></span>
             <span class="sap-icon sap-icon--megamenu"></span>
