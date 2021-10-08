@@ -64,9 +64,11 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
     /** @hidden */
     _trackByFn = trackByFn;
 
+    /** @hidden */
     _displayUsers: ApprovalUser[] = [];
 
-    private _intervalID?: any;
+    /** @hidden */
+    private _intervalID?: number;
 
     /** @hidden */
     constructor(private _cdr: ChangeDetectorRef) {}
@@ -123,7 +125,7 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
         const collectionTracker = { currentIndex: 0 };
 
         this._userCollectorIntervalFn(collectionTracker);
-        this._intervalID = setInterval(
+        this._intervalID = window.setInterval(
             this._userCollectorIntervalFn.bind(this),
             INTERVAL_IN_MS,
             collectionTracker
