@@ -20,7 +20,7 @@ export class PlatformCheckboxGroupListComponent {
     form3 = new FormGroup({
         sports: new FormControl(['cycling', 'running'])
     });
-    form4= new FormGroup({}, { updateOn: 'submit' });
+    form4 = new FormGroup({}, { updateOn: 'submit' });
 
     // template driven
     countrySeason = '';
