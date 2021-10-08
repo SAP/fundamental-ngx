@@ -63,7 +63,7 @@ export * from './models/filter-change-event.model';
 export * from './models/group-change-event.model';
 export * from './models/page-change-event.model';
 export * from './models/search-change-event.model';
-export { SelectionChangeEvent as TableSelectionChangeEvent, TableRowSelectionChangeEvent } from './models/selection-change-event.model';
+export * from './models/selection-change-event.model';
 export * from './models/sort-change-event.model';
 export * from './models/table-row.model';
 export * from './models/table-row-activate-event.model';
