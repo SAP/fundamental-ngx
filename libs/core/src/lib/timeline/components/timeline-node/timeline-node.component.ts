@@ -17,6 +17,9 @@ export class TimelineNodeComponent implements OnInit, OnDestroy {
     @Input()
     glyph: string;
 
+    @Input()
+    ariaLabel = 'timelineitem';
+
     /* Reference to the line of timeline node*/
     @ViewChild('lineEl')
     lineEl: ElementRef;
