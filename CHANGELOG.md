@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.1 (2021-10-10)
+
+
+### Bug Fixes
+
+* **platform:** named imports removing ([#6865](https://github.com/SAP/fundamental-ngx/issues/6865)) ([a115c51](https://github.com/SAP/fundamental-ngx/commit/a115c516c8c4b54eb58dfcb86c4c3efe8004fefc))
+
 ## 0.33.0-rc.0 (2021-10-08)
 
 
