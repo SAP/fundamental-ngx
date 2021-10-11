@@ -301,4 +301,3 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
         }));
     }
 }
-
