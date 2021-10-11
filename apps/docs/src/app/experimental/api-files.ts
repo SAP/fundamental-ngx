@@ -11,5 +11,6 @@ export const API_FILES = {
     radio: [],
     checkbox: [],
     input: [],
-    search: []
+    search: [],
+    slider: []
 };

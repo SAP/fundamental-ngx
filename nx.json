@@ -109,9 +109,9 @@
                 "core-multi-input",
                 "core-wizard",
                 "core-tree",
-                "core-upload-collection",
                 "core-vertical-navigation",
-                "core-splitter"
+                "core-splitter",
+                "core-upload-collection"
             ]
         },
         "core-action-bar": {
@@ -309,21 +309,9 @@
             "tags": ["fd"],
             "implicitDependencies": ["core-utils"]
         },
-        "core-message-toast": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
-        },
-        "core-micro-process-flow": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-shared", "core-popover"]
-        },
         "core-mobile-mode": {
             "tags": ["fd"],
             "implicitDependencies": ["core-utils", "core-dialog"]
-        },
-        "core-multi-input": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
         },
         "core-nested-list": {
             "tags": ["fd"],
@@ -479,10 +467,6 @@
             "tags": ["fd"],
             "implicitDependencies": ["core-utils", "core-time", "core-popover"]
         },
-        "core-timeline": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-icon", "core-text"]
-        },
         "core-title": {
             "tags": ["fd"],
             "implicitDependencies": ["core-icon", "core-utils"]
@@ -495,20 +479,6 @@
             "tags": ["fd"],
             "implicitDependencies": ["core-utils", "core-popover", "core-button"]
         },
-        "core-tree": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-popover", "core-menu"]
-        },
-        "core-upload-collection": {
-            "tags": ["fd"],
-            "implicitDependencies": [
-                "core-button",
-                "core-list",
-                "core-link",
-                "core-object-status",
-                "core-object-marker"
-            ]
-        },
         "core-utils": {
             "tags": [],
             "implicitDependencies": ["core-shared"]
@@ -516,6 +486,14 @@
         "core-vertical-navigation": {
             "tags": ["fd"],
             "implicitDependencies": ["core-utils", "core-icon", "core-list"]
+        },
+        "core-message-toast": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
+        },
+        "core-multi-input": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-wizard": {
             "tags": ["fd"],
@@ -538,6 +516,28 @@
         "moment-adapter": {
             "tags": ["fd"],
             "implicitDependencies": ["core-datetime"]
+        },
+        "core-tree": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-popover", "core-menu"]
+        },
+        "core-timeline": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-icon", "core-text"]
+        },
+        "core-micro-process-flow": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-shared", "core-popover"]
+        },
+        "core-upload-collection": {
+            "tags": ["fd"],
+            "implicitDependencies": [
+                "core-button",
+                "core-list",
+                "core-link",
+                "core-object-status",
+                "core-object-marker"
+            ]
         },
         "platform": {
             "tags": [],
@@ -648,10 +648,6 @@
                 "platform-list",
                 "platform-shared"
             ]
-        },
-        "platform-icon-tab-bar": {
-            "tags": ["fdp"],
-            "implicitDependencies": ["core-icon", "core-popover", "core-utils"]
         },
         "platform-info-label": {
             "tags": ["fdp"],
@@ -864,8 +860,12 @@
             "implicitDependencies": ["core"]
         },
         "experimental-search": {
-          "tags": ["fn"],
-          "implicitDependencies": ["core"]
-      }
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
+        },
+        "experimental-slider": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
+        }
     }
 }
