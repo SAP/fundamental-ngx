@@ -843,6 +843,10 @@
             "tags": ["fn"],
             "implicitDependencies": ["core"]
         },
+        "experimental-tag": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
+        },
         "experimental-button": {
             "tags": ["fn"],
             "implicitDependencies": ["core"]
