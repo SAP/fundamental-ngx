@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.3 (2021-10-11)
+
+
+### Features
+
+* **platform:** table no outer borders ([#6861](https://github.com/SAP/fundamental-ngx/issues/6861)) ([72a8cf1](https://github.com/SAP/fundamental-ngx/commit/72a8cf1dfac35fcd1b643bd9417be950bae60659))
+
 ## 0.33.0-rc.2 (2021-10-11)
 
 ## 0.33.0-rc.1 (2021-10-10)
