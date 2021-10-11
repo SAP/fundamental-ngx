@@ -530,7 +530,25 @@
 <component-example>
     <fdp-platform-table-row-class-example></fdp-platform-table-row-class-example>
 </component-example>
+
 <code-example [exampleFiles]="rowClassTableFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title
+    id="no-outer-borders"
+    componentName="table"
+>
+    No outer borders
+</fd-docs-section-title>
+<description>
+    Use <code>no-outer-borders</code> input property on the fdp-table to disable outer borders.
+</description>
+<component-example>
+    <fdp-platform-table-no-outer-borders-example></fdp-platform-table-no-outer-borders-example>
+</component-example>
+
+<code-example [exampleFiles]="noDataCustomMessageFiles"></code-example>
 
 <separator></separator>
 
@@ -545,6 +563,7 @@
         [noBodyBorders]="data.table.noBodyBorders"
         [noHorizontalBorders]="data.table.noHorizontalBorders"
         [noVerticalBorders]="data.table.noVerticalBorders"
+        [noOuterBorders]="data.table.noOuterBorders"
         [contentDensity]="data.table.contentDensity"
         [selectionMode]="data.table.selectionMode"
         [freezeColumnsTo]="data.table.freezeColumnsTo"

@@ -36,6 +36,7 @@
         >
             <table
                 class="fdp-table__header-table"
+                [class.fd-table--no-outer-border]="noOuterBorders"
                 fd-table
                 role="prsentation"
             >
@@ -282,6 +283,7 @@
                 fd-table
                 role="presentation"
                 class="fdp-table__body-table"
+                [class.fd-table--no-outer-border]="noOuterBorders"
             >
                 <tbody
                     fd-table-body

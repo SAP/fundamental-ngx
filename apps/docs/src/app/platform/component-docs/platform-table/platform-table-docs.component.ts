@@ -53,8 +53,8 @@ import * as platformTableSemanticSrc from '!raw-loader!./platform-table-examples
 import * as platformTableSemanticTsSrc from '!raw-loader!./platform-table-examples/platform-table-semantic-example.component.ts';
 import * as platformTableRowClassSrc from '!raw-loader!./platform-table-examples/platform-table-row-class-example.component.html';
 import * as platformTableRowClassTsSrc from '!raw-loader!./platform-table-examples/platform-table-row-class-example.component.ts';
-
-
+import * as platformTableNoOuterBordersSrc from '!raw-loader!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.html';
+import * as platformTableNoOuterBordersTsSrc from '!raw-loader!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.ts';
 import * as platformTableCustomNoDataMessageSrc from '!raw-loader!./platform-table-examples/platform-table-no-items-template-example.component.html';
 import * as platformTableCustomNoDataMessageTsSrc from '!raw-loader!./platform-table-examples/platform-table-no-items-template-example.component.ts';
 import * as illustrationDialogNoMail from '!raw-loader!../../../../assets/images/sapIllus-Dialog-NoMail.svg';
@@ -95,6 +95,9 @@ export class PlatformTableDocsComponent {
                         type: 'boolean'
                     },
                     noBodyBorders: {
+                        type: 'boolean'
+                    },
+                    noOuterBorders: {
                         type: 'boolean'
                     },
                     loading: {
@@ -152,8 +155,9 @@ export class PlatformTableDocsComponent {
             noVerticalBorders: false,
             noBorders: false,
             noBodyBorders: false,
-            loading: false,
-            semanticHighlighting: false
+            semanticHighlighting: false,
+            noOuterBorders: false,
+            loading: false
         },
         'table-toolbar': {
             title: 'Order Line Items',
@@ -492,6 +496,22 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-row-class-example',
             component: 'PlatformTableRowClassExampleComponent',
             name: 'platform-table-row-class-example.component.ts'
+        }
+    ];
+    
+    noOuterBordersFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableNoOuterBordersSrc,
+            fileName: 'platform-table-no-outer-borders-example',
+            name: 'platform-table-no-outer-borders-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: platformTableNoOuterBordersTsSrc,
+            fileName: 'platform-table-no-outer-borders-example',
+            component: 'PlatformTableNoOuterBordersExampleComponent',
+            name: 'platform-table-no-outer-borders-example.component.ts'
         }
     ];
 
