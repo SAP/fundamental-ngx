@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { ContentDensity } from '@fundamental-ngx/core/utils';
 import { InlineLayout, ColumnLayout, HintPlacement, LabelLayout, SelectItem } from '@fundamental-ngx/platform/shared';
 import { InputType } from '../../input/input.component';
-import { FormGeneratorService } from '../form-generator.service';
 import { DynamicFormGroup } from './dynamic-form-group';
 
 export type DynamicFormItemChoices = number | string | SelectItem;
