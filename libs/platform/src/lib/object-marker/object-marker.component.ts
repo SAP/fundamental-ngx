@@ -19,6 +19,10 @@ export class PlatformObjectMarkerComponent {
     @Input()
     label: string;
 
+     /** link for setting href value */
+     @Input()
+     link: string;
+
     /** Sets control aria-label attribute value */
     @Input()
     ariaLabel: string = null;

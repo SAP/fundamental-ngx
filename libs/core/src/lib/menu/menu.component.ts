@@ -259,7 +259,7 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
              if (m.submenu && m.submenu.menuItems) {
                  this._subscriptions.add(m.submenu.menuItems.changes.subscribe(() => this._menuService.rebuildMenu()));
              }
-         })
+         });
     }
 
     /**

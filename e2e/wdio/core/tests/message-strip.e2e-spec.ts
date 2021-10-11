@@ -75,7 +75,7 @@ describe('Message-strip test suite', function() {
         messageStripPage.checkRtlSwitch();
     });
 
-    it('should check examples visual regression', () => {
+    xit('should check examples visual regression', () => {
         messageStripPage.saveExampleBaselineScreenshot();
         expect(messageStripPage.compareWithBaseline()).toBeLessThan(5);
     });

@@ -50,7 +50,7 @@ describe('product switch test suite', function() {
             click(shellbarButton);
             const originalCardData = getText(shellbarSwitchItems, 4);
 
-            clickAndMoveElement(shellbarSwitchItems, 50, 0, 4);
+            clickAndMoveElement(shellbarSwitchItems, 150, 0, 4);
 
             expect(getText(shellbarSwitchItems, 4)).not.toEqual(originalCardData);
         });

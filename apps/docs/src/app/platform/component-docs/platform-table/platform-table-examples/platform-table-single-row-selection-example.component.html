@@ -1,6 +1,7 @@
 <fdp-table
        [dataSource]="source"
-       contentDensity="compact"
+       [trackBy]="trackBy"
+       [rowComparator]="rowComparator"
        selectionMode="single"
        emptyTableMessage="No data found"
        (rowSelectionChange)="onRowSelectionChange($event)">

@@ -1,0 +1,33 @@
+<ng-container *ngIf="!expanded || !_isExpandable || !_condensed || !_listComponent">
+    <ng-content></ng-content
+    ><span *ngIf="indicated || _childIndicatedAndCollapsed()" class="fd-list__navigation-item-indicator"></span>
+</ng-container>
+<ng-container *ngIf="expanded && _isExpandable && _condensed && _listComponent">
+    <div
+        class="fd-popover__body fd-popover__body--no-arrow fd-list__navigation-item-popover--first-level"
+        aria-hidden="false"
+    >
+        <ul class="fd-list">
+            <li class="fd-list__navigation-item fd-list__navigation-item--condensed">
+                <fd-icon class="fd-list__navigation-item-icon" [glyph]="_iconComponent.glyph"></fd-icon>
+                <span class="fd-list__navigation-item-text">{{ _innerText }}</span>
+            </li>
+        </ul>
+    </div>
+    <div
+        class="fd-popover__body fd-popover__body--no-arrow fd-list__navigation-item-popover--second-level"
+        aria-hidden="false"
+    >
+        <ul class="fd-list">
+            <li
+                *ngFor="let navItem of _listComponent._navItems"
+                class="fd-list__navigation-item fd-list__navigation-item--condensed"
+                [class.fd-list__navigation-item--indicated]="navItem.indicated"
+                tabindex="0"
+            >
+                <span *ngIf="navItem._innerText" class="fd-list__navigation-item-text">{{ navItem._innerText }}</span>
+                <span *ngIf="navItem.indicated" class="fd-list__navigation-item-indicator"></span>
+            </li>
+        </ul>
+    </div>
+</ng-container>

@@ -1,11 +1,24 @@
 <span
     fd-object-marker
     [glyph]="glyph"
+    *ngIf="!clickable"
+    [attr.aria-label]="ariaLabel"
+    [attr.aria-hidden]="ariaHidden"
+    [attr.title]="title"
+    [label]="label"
+>
+<ng-content></ng-content>
+</span>
+<a  
+    *ngIf="clickable" 
+    [attr.href]="link"
+    fd-object-marker
+    [glyph]="glyph"
     [clickable]="clickable"
     [attr.aria-label]="ariaLabel"
     [attr.aria-hidden]="ariaHidden"
     [attr.title]="title"
     [label]="label"
 >
-    <ng-content></ng-content>
-</span>
+<ng-content></ng-content>
+</a>

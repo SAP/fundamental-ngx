@@ -49,7 +49,12 @@ import * as platformTreeTableDefaultSrc from '!raw-loader!./platform-table-examp
 import * as platformTreeTableDefaultTsSrc from '!raw-loader!./platform-table-examples/platform-table-tree-example.component.ts';
 import * as platformTableNavigatableRowSrc from '!raw-loader!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.html';
 import * as platformTableNavigatableRowTsSrc from '!raw-loader!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.ts';
-
+import * as platformTableSemanticSrc from '!raw-loader!./platform-table-examples/platform-table-semantic-example.component.html';
+import * as platformTableSemanticTsSrc from '!raw-loader!./platform-table-examples/platform-table-semantic-example.component.ts';
+import * as platformTableRowClassSrc from '!raw-loader!./platform-table-examples/platform-table-row-class-example.component.html';
+import * as platformTableRowClassTsSrc from '!raw-loader!./platform-table-examples/platform-table-row-class-example.component.ts';
+import * as platformTableNoOuterBordersSrc from '!raw-loader!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.html';
+import * as platformTableNoOuterBordersTsSrc from '!raw-loader!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.ts';
 import * as platformTableCustomNoDataMessageSrc from '!raw-loader!./platform-table-examples/platform-table-no-items-template-example.component.html';
 import * as platformTableCustomNoDataMessageTsSrc from '!raw-loader!./platform-table-examples/platform-table-no-items-template-example.component.ts';
 import * as illustrationDialogNoMail from '!raw-loader!../../../../assets/images/sapIllus-Dialog-NoMail.svg';
@@ -74,7 +79,7 @@ export class PlatformTableDocsComponent {
                     },
                     selectionMode: {
                         type: 'string',
-                        enum: ['', 'single', 'multiple']
+                        enum: ['none', 'single', 'multiple']
                     },
                     freezeColumnsTo: {
                         type: 'string',
@@ -92,7 +97,13 @@ export class PlatformTableDocsComponent {
                     noBodyBorders: {
                         type: 'boolean'
                     },
+                    noOuterBorders: {
+                        type: 'boolean'
+                    },
                     loading: {
+                        type: 'boolean'
+                    },
+                    semanticHighlighting: {
                         type: 'boolean'
                     }
                 }
@@ -138,12 +149,14 @@ export class PlatformTableDocsComponent {
     data: any = {
         table: {
             contentDensity: 'compact',
-            selectionMode: '',
+            selectionMode: 'none',
             freezeColumnsTo: '',
             noHorizontalBorders: false,
             noVerticalBorders: false,
             noBorders: false,
             noBodyBorders: false,
+            semanticHighlighting: false,
+            noOuterBorders: false,
             loading: false
         },
         'table-toolbar': {
@@ -155,7 +168,7 @@ export class PlatformTableDocsComponent {
             sortable: true,
             filterable: true,
             groupable: true,
-            width: '100px'
+            width: '200px'
         }
     };
 
@@ -451,6 +464,54 @@ export class PlatformTableDocsComponent {
             fileName: 'sapIllus-Dialog-NoMail',
             name: 'sapIllus-Dialog-NoMail.svg',
             path: 'src/assets/images'
+        }
+    ];
+
+    semanticFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableSemanticSrc,
+            fileName: 'platform-table-semantic-example',
+            name: 'platform-table-semantic-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: platformTableSemanticTsSrc,
+            fileName: 'platform-table-semantic-example',
+            component: 'PlatformTableSemanticExampleComponent',
+            name: 'platform-table-semantic-example.component.ts'
+        }
+    ];
+    
+    rowClassTableFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableRowClassSrc,
+            fileName: 'platform-table-row-class-example',
+            name: 'platform-table-row-class-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: platformTableRowClassTsSrc,
+            fileName: 'platform-table-row-class-example',
+            component: 'PlatformTableRowClassExampleComponent',
+            name: 'platform-table-row-class-example.component.ts'
+        }
+    ];
+    
+    noOuterBordersFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableNoOuterBordersSrc,
+            fileName: 'platform-table-no-outer-borders-example',
+            name: 'platform-table-no-outer-borders-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: platformTableNoOuterBordersTsSrc,
+            fileName: 'platform-table-no-outer-borders-example',
+            component: 'PlatformTableNoOuterBordersExampleComponent',
+            name: 'platform-table-no-outer-borders-example.component.ts'
         }
     ];
 

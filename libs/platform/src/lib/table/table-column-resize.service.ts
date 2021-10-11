@@ -10,6 +10,11 @@ import { TableScrollDispatcherService } from './table-scroll-dispatcher.service'
 
 export const TABLE_RESIZER_BORDER_WIDTH = 3;
 
+enum ColumnWidthChangeSource {
+    WidthInput = 1,
+    Resize
+}
+
 /**
  * Service to handle all things related to column resizing:
  * - Setting resizer
@@ -21,8 +26,11 @@ export class TableColumnResizeService implements OnDestroy {
     /** @hidden */
     private _columnsWidthMap = new Map<string, number>();
 
+    /** @hidden is used to determine which width to rely on */
+    private _columnsWidthChangeSourceMap = new Map<string, ColumnWidthChangeSource>();
+
     /** @hidden */
-    private _columnsCellMap = new Map<string, ElementRef>();
+    private _columnsCellMap = new Map<string, ElementRef<HTMLTableDataCellElement>>();
 
     /** @hidden */
     private _visibleColumnNames: string[] = [];
@@ -43,10 +51,7 @@ export class TableColumnResizeService implements OnDestroy {
     private _resizerPosition: number;
 
     /** @hidden */
-    private _selectionColumnWidth: number;
-
-    /** @hidden */
-    private _scrollbarWidth: number;
+    private _offsetWidth: number;
 
     /** @hidden
      * Temporary: Prevent from resizing when there are fixed columns. They are positioned absolutely and it breaks all.
@@ -109,25 +114,43 @@ export class TableColumnResizeService implements OnDestroy {
     setColumnsWidth(
         visibleColumnNames: string[],
         freezeColumnsTo: string,
-        selectionColumnWidth: number,
-        scrollbarWidth: number
+        offsetWidth: number
     ): void {
         this._visibleColumnNames = visibleColumnNames;
         this._preventResize = this._visibleColumnNames.includes(freezeColumnsTo);
-        this._selectionColumnWidth = selectionColumnWidth;
-        this._scrollbarWidth = scrollbarWidth;
+        this._offsetWidth = offsetWidth;
 
         this._resetColumnsWidth();
         this._calculateColumnsWidth();
     }
 
-    /** Get the column width, try in the next order:
+    /** 
+     *  Get the column width, try in the next order:
      *  1. Width from map with calculated widths.
      *  2. Width defined by the user.
      *  3. Literally `auto`, means no width set.
+     * 
+     *  In case there was a change to the width of the column (from the component input or resize event), 
+     *  corresponding value will be treated as higher priority
      */
     getColumnWidthStyle(column: TableColumn): string {
         const calculatedWidth = this._columnsWidthMap.get(column.name);
+        const changeSource = this._columnsWidthChangeSourceMap.get(column.name);
+
+        if (changeSource) {
+            switch (changeSource) {
+                case ColumnWidthChangeSource.Resize:
+                    if (calculatedWidth) {
+                        return calculatedWidth + 'px';
+                    }
+                    break;
+                case ColumnWidthChangeSource.WidthInput:
+                    if (column.width) {
+                        return column.width;
+                    }
+                    break;
+            }
+        }
 
         if (calculatedWidth) {
             return calculatedWidth + 'px';
@@ -171,6 +194,11 @@ export class TableColumnResizeService implements OnDestroy {
         this._columnsCellMap.set(columnName, cellElRef);
     }
 
+    /** Register the fact column width input was changed */
+    registerColumnWidthInputChange(columnName: string): void {
+        this._columnsWidthChangeSourceMap.set(columnName, ColumnWidthChangeSource.WidthInput);
+    }
+
     /** Set the appropriate column resizer position. */
     setInitialResizerPosition(resizerPosition: number, resizedColumn: string): void {
         if (this.resizeInProgress || this._preventResize) {
@@ -182,7 +210,7 @@ export class TableColumnResizeService implements OnDestroy {
 
         if (resizerPosition != null) {
             const scrollLeftOffset = this._scrollLeft * (this._rtl ? 1 : -1);
-            this._resizerPosition = resizerPosition + this._selectionColumnWidth - TABLE_RESIZER_BORDER_WIDTH + scrollLeftOffset;
+            this._resizerPosition = resizerPosition + this._offsetWidth - TABLE_RESIZER_BORDER_WIDTH + scrollLeftOffset;
         }
     }
 
@@ -267,5 +295,6 @@ export class TableColumnResizeService implements OnDestroy {
         }
 
         this._columnsWidthMap.set(this._resizedColumn, columnWidth + newDiffX);
+        this._columnsWidthChangeSourceMap.set(this._resizedColumn, ColumnWidthChangeSource.Resize);
     }
 }

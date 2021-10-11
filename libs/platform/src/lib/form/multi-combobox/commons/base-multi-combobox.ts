@@ -56,9 +56,9 @@ import {
     ObservableMultiComboBoxDataSource,
     SelectableOptionItem
 } from '@fundamental-ngx/platform/shared';
-import { ListConfig } from '@fundamental-ngx/platform/list';
 import { MultiComboboxComponent } from '../multi-combobox/multi-combobox.component';
 import { TextAlignment } from '../../combobox';
+import { MultiComboboxConfig } from '../multi-combobox.config';
 
 export type FdpMultiComboboxDataSource<T> = MultiComboBoxDataSource<T> | Observable<T[]> | T[];
 
@@ -209,7 +209,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     selectedItemTemplate: TemplateRef<any>;
 
     /** @hidden */
-    _contentDensity: ContentDensity = this.listConfig.contentDensity;
+    _contentDensity: ContentDensity = this.multiComboboxConfig.contentDensity;
 
     /**
      * @hidden
@@ -293,7 +293,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     /** @hidden */
     private _inputTextValue: string;
     /** @hidden */
-    private _matchingStrategy: MatchingStrategy = this.listConfig.matchingStrategy;
+    private _matchingStrategy: MatchingStrategy = this.multiComboboxConfig.matchingStrategy;
     /** @hidden */
     private _dsSubscription?: Subscription;
     /** @hidden */
@@ -337,7 +337,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @SkipSelf() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
-        protected listConfig: ListConfig,
+        protected multiComboboxConfig: MultiComboboxConfig,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
@@ -621,13 +621,17 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     }
 
     /** @hidden */
-    private _toDataStream(ds: FdpMultiComboboxDataSource<any>): MultiComboBoxDataSource<any> | undefined {
-        if (isDataSource(ds)) {
-            return ds as MultiComboBoxDataSource<any>;
-        } else if (Array.isArray(ds)) {
-            return new ArrayMultiComboBoxDataSource<any>(ds);
-        } else if (isObservable(ds)) {
-            return new ObservableMultiComboBoxDataSource<any>(ds);
+    private _toDataStream(source: FdpMultiComboboxDataSource<any>): MultiComboBoxDataSource<any> | undefined {
+        if (isDataSource(source)) {
+            return source as MultiComboBoxDataSource<any>;
+        }
+
+        if (Array.isArray(source)) {
+            return new ArrayMultiComboBoxDataSource<any>(source);
+        }
+
+        if (isObservable(source)) {
+            return new ObservableMultiComboBoxDataSource<any>(source);
         }
 
         return undefined;

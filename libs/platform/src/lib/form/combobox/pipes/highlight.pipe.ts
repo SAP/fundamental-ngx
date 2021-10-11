@@ -1,18 +1,21 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { MatchingStrategy } from '@fundamental-ngx/platform/shared';
+import { getMatchingStrategyStartsWithPerTermReqexp, MatchingStrategy } from '@fundamental-ngx/platform/shared';
 import { ComboboxConfig } from '../combobox.config';
 
 @Pipe({
     name: 'highlight'
 })
 export class ComboboxHighlightPipe implements PipeTransform {
-    constructor(private readonly comboboxConfig: ComboboxConfig) {
-    }
+    constructor(private readonly comboboxConfig: ComboboxConfig) {}
 
     transform(value: string, searchText: string, matchingStrategy: MatchingStrategy = this.comboboxConfig.matchingStrategy): string {
         if (!(value && searchText)) {
             return value;
+        }
+
+        if (matchingStrategy === MatchingStrategy.STARTS_WITH_PER_TERM) {
+            return this._searchByStrategyStartsWithPerTerm(value, searchText);
         }
 
         if (matchingStrategy === MatchingStrategy.STARTS_WITH) {
@@ -24,6 +27,12 @@ export class ComboboxHighlightPipe implements PipeTransform {
         }
 
         return value;
+    }
+
+    private _searchByStrategyStartsWithPerTerm(value: string, searchText: string): string {
+        const reqexp = getMatchingStrategyStartsWithPerTermReqexp(searchText);
+
+        return value.replace(reqexp, `$1<strong>$2</strong>`);
     }
 
     private _searchByStrategyStartsWith(value: string, searchText: string): string {

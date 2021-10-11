@@ -45,6 +45,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
             name: 'name2',
             message: 'Your name',
             default: 'John',
+            placeholder: () => of('Please provide your name').pipe(delay(400)),
             guiOptions: {
                 hint: 'Some contextual hint',
                 column: 1

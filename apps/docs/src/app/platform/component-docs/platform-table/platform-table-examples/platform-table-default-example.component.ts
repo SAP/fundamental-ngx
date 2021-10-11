@@ -15,12 +15,17 @@ export class PlatformTableDefaultExampleComponent {
         this.source = new TableDataSource(new TableDataProviderExample());
     }
 
+    trackBy(index: number, item: ExampleItem): number {
+        return item.id;
+    }
+
     alert(message: string): void {
         alert(message);
     }
 }
 
 export interface ExampleItem {
+    id: number;
     name: string;
     description: string;
     price: {
@@ -80,6 +85,7 @@ function getNestedValue<T extends {}>(key: string, object: T): any {
 // Example items
 const ITEMS: ExampleItem[] = [
     {
+        id: 1,
         name: '10 Portable DVD player',
         description: 'diam neque vestibulum eget vulputate',
         price: {
@@ -92,6 +98,7 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
+        id: 2,
         name: 'Astro Laptop 1516',
         description: 'pede malesuada',
         price: {
@@ -104,6 +111,7 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
+        id: 3,
         name: 'Astro Phone 6',
         description: 'penatibus et magnis',
         price: {
@@ -116,6 +124,7 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
+        id: 4,
         name: 'Beam Breaker B-1',
         description: 'fermentum donec ut',
         price: {
@@ -128,6 +137,7 @@ const ITEMS: ExampleItem[] = [
         verified: false
     },
     {
+        id: 5,
         name: 'Beam Breaker B-2',
         description: 'sapien in sapien iaculis congue',
         price: {
@@ -139,6 +149,7 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
+        id: 6,
         name: 'Benda Laptop 1408',
         description: 'suspendisse potenti cras in',
         price: {
@@ -151,6 +162,7 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
+        id: 7,
         name: 'Bending Screen 21HD',
         description: 'nunc nisl duis bibendum',
         price: {
@@ -163,6 +175,7 @@ const ITEMS: ExampleItem[] = [
         verified: false
     },
     {
+        id: 8,
         name: 'Blaster Extreme',
         description: 'quisque ut',
         price: {
@@ -175,6 +188,7 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
+        id: 9,
         name: 'Broad Screen 22HD',
         description: 'ultrices posuere',
         price: {
@@ -187,6 +201,7 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
+        id: 10,
         name: 'Camcorder View',
         description: 'integer ac leo pellentesque',
         price: {
@@ -199,6 +214,7 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
+        id: 11,
         name: 'Cepat Tablet 10.5',
         description: 'rutrum rutrum neque aenean auctor',
         price: {
@@ -210,6 +226,7 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
+        id: 12,
         name: 'Ergo Mousepad',
         description: 'tortor duis mattis egestas',
         price: {
@@ -222,6 +239,7 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
+        id: 13,
         name: 'Ergo Screen E-I',
         description: 'massa quis augue luctus tincidunt',
         price: {
@@ -234,6 +252,7 @@ const ITEMS: ExampleItem[] = [
         verified: true
     },
     {
+        id: 14,
         name: 'Ergo Screen E-II',
         description: 'orci eget',
         price: {
@@ -245,6 +264,7 @@ const ITEMS: ExampleItem[] = [
         verified: false
     },
     {
+        id: 15,
         name: 'Gaming Monster',
         description: 'cubilia curae',
         price: {
@@ -256,6 +276,7 @@ const ITEMS: ExampleItem[] = [
         verified: false
     },
     {
+        id: 16,
         name: 'Gaming Monster Pro',
         description: 'pharetra magna vestibulum aliquet',
         price: {

@@ -20,13 +20,15 @@ import { CssClassBuilder } from '@fundamental-ngx/core/utils';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[attr.tabindex]': 'clickable ? 0 : -1'
+        '[attr.tabindex]': 'clickable ? 0 : -1',
+        '[attr.role]': 'clickable ? "link" :""'
     }
 })
 export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
     @Input()
     class: string;
+    
     /** Glyph (icon) of the Object Status.*/
     @Input()
     glyph: string;

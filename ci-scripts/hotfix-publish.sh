@@ -37,7 +37,7 @@ else
    exit 1
 fi
 
-git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $release_tag > /dev/null;
+git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git" $release_tag > /dev/null;
 npm run build-deploy-library
 
 #cd dist/libs
@@ -73,5 +73,5 @@ if [[ $latest == "true" ]]; then
   git stash
   git checkout $MASTER_BRANCH
   npm run std-version
-  git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG" $MASTER_BRANCH > /dev/null;
+  git push "https://$GH_TOKEN@github.com/$TRAVIS_REPO_SLUG.git" $MASTER_BRANCH > /dev/null;
 fi

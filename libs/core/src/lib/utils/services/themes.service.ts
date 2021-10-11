@@ -49,6 +49,10 @@ export class ThemesService {
         {
             id: 'sap_fiori_3_light_dark',
             name: 'Light Dark'
+        },
+        {
+            id: 'sap_horizon',
+            name: 'Horizon'
         }
     ];
 

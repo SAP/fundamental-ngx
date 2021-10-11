@@ -5,7 +5,7 @@ import { Observable, of, isObservable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { isFunction, isJsObject, objectToName, objectValues } from '../utils/lang';
-import { DataProvider, MatchBy, MatchingStrategy } from './data-source';
+import { DataProvider, getMatchingStrategyStartsWithPerTermReqexp, MatchBy, MatchingStrategy } from './data-source';
 
 /**
  * In Memory implementation of DataProvider that supports fulltext search
@@ -67,6 +67,9 @@ export class BaseDataProvider<T> extends DataProvider<T> {
             value = value.call(item);
         } else if (isJsObject(value)) {
             return this.hasObjectValue(item, pattern);
+        } else if (this._matchingStrategy === MatchingStrategy.STARTS_WITH_PER_TERM) {
+            const reqexp = getMatchingStrategyStartsWithPerTermReqexp(value);
+            return pattern && value && !!(value.match(reqexp));
         } else if (this._matchingStrategy === MatchingStrategy.STARTS_WITH) {
             return pattern && value && value.toString().toLowerCase().startsWith(pattern.toLowerCase());
         } else if (this._matchingStrategy === MatchingStrategy.CONTAINS) {

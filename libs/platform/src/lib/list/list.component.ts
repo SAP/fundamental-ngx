@@ -26,17 +26,19 @@ import { FocusKeyManager } from '@angular/cdk/a11y';
 import { NgControl, NgForm } from '@angular/forms';
 import { SelectionModel } from '@angular/cdk/collections';
 import { DOWN_ARROW, ENTER, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-import { of, Subject, Subscription } from 'rxjs';
+import { isObservable, Observable, of, Subject, Subscription } from 'rxjs';
 import { delay, takeUntil, tap } from 'rxjs/operators';
 
 import { closestElement, ContentDensity, KeyUtil } from '@fundamental-ngx/core/utils';
 import {
+    ArrayListDataSource,
     BaseComponent,
     CollectionBaseInput,
     FormField,
     FormFieldControl,
     isDataSource,
-    ListDataSource
+    ListDataSource,
+    ObservableListDataSource
 } from '@fundamental-ngx/platform/shared';
 import { BaseListItem, ListItemDef } from './base-list-item';
 import { ListConfig } from './list.config';
@@ -45,7 +47,7 @@ export type SelectionType = 'none' | 'multi' | 'single' | 'delete';
 export type ListType = 'inactive' | 'active' | 'detail';
 let nextListId = 0;
 let nextListGrpHeaderId = 0;
-export type FdpListDataSource<T> = ListDataSource<T> | T[];
+export type FdpListDataSource<T> = ListDataSource<T> | Observable<T[]> | T[];
 
 export class SelectionChangeEvent {
     selectedItems: BaseListItem[];
@@ -593,15 +595,25 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
                 this._dsSubscription = null;
             }
         }
-        // Convert ListDataSource<T> | T[] as DataSource
+        // Convert ListDataSource<T> | Observable<T[]> | T[] as DataSource
         this._dataSource = this._openDataStream(ds);
     }
 
     /** @hidden */
-    private _toDataStream(ds: FdpListDataSource<any>): ListDataSource<any> {
-        if (isDataSource(ds)) {
-            return ds;
+    private _toDataStream(source: FdpListDataSource<any>): ListDataSource<any> {
+        if (isDataSource(source)) {
+            return <ListDataSource<any>>source;
         }
+
+        if (Array.isArray(source)) {
+            // default implementation to work on top of arrays
+            return new ArrayListDataSource<any>(source);
+        }
+
+        if (isObservable(source)) {
+            return new ObservableListDataSource<any>(source);
+        }
+
         return undefined;
     }
 

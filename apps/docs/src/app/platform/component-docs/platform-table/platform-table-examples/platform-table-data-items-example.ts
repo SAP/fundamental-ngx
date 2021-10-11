@@ -10,7 +10,8 @@ export interface ExampleItem {
     status: string;
     statusColor?: string;
     date: FdDate;
-    verified: boolean;
+    verified: boolean
+    semantic?: string;
 }
 
 // Example items
@@ -25,7 +26,8 @@ export const ITEMS: ExampleItem[] = [
         status: 'Stocked on demand',
         statusColor: 'informative',
         date: new FdDate(2020, 1, 7),
-        verified: true
+        verified: true,
+        semantic: 'valid'
     },
     {
         name: 'Astro Laptop 1516',
@@ -49,7 +51,8 @@ export const ITEMS: ExampleItem[] = [
         status: 'Stocked on demand',
         statusColor: 'informative',
         date: new FdDate(2020, 1, 12),
-        verified: true
+        verified: true,
+        semantic: 'warning'
     },
     {
         name: 'Beam Breaker B-1',
@@ -72,7 +75,8 @@ export const ITEMS: ExampleItem[] = [
         },
         status: 'No info',
         date: new FdDate(2020, 10, 23),
-        verified: true
+        verified: true,
+        semantic: 'information'
     },
     {
         name: 'Benda Laptop 1408',
@@ -96,7 +100,8 @@ export const ITEMS: ExampleItem[] = [
         status: 'Available',
         statusColor: 'positive',
         date: new FdDate(2020, 8, 14),
-        verified: false
+        verified: false,
+        semantic: 'error'
     },
     {
         name: 'Blaster Extreme',
@@ -120,7 +125,8 @@ export const ITEMS: ExampleItem[] = [
         status: 'Available',
         statusColor: 'positive',
         date: new FdDate(2020, 5, 4),
-        verified: true
+        verified: true,
+        semantic: 'valid'
     },
     {
         name: 'Camcorder View',
@@ -143,7 +149,8 @@ export const ITEMS: ExampleItem[] = [
         },
         status: 'No info',
         date: new FdDate(2020, 5, 6),
-        verified: true
+        verified: true,
+        semantic: 'warning'
     },
     {
         name: 'Ergo Mousepad',
@@ -167,7 +174,8 @@ export const ITEMS: ExampleItem[] = [
         status: 'Stocked on demand',
         statusColor: 'informative',
         date: new FdDate(2020, 3, 23),
-        verified: true
+        verified: true,
+        semantic: 'information'
     },
     {
         name: 'Ergo Screen E-II',
@@ -189,7 +197,8 @@ export const ITEMS: ExampleItem[] = [
         },
         status: 'No info',
         date: new FdDate(2020, 9, 20),
-        verified: false
+        verified: false,
+        semantic: 'error'
     },
     {
         name: 'Gaming Monster Pro',

@@ -83,6 +83,10 @@
     </p>
 
     <p>
+        If both selection and search is used in a table, use <code>rowComparator</code> in order to preserve selection after search is changed
+    </p>
+
+    <p>
         Consider that in the table with selection column the overall columns width cannot be less than table container.
     </p>
 </description>
@@ -483,6 +487,71 @@
 
 <separator></separator>
 
+<fd-docs-section-title
+    id="semantic"
+    componentName="table"
+>
+    Semantic Highlighting
+</fd-docs-section-title>
+<description>
+    <p>
+        This example shows semantic highlighting for the rows.
+    </p>
+
+    <p>
+        Use <code>semanticHighlighting="value"</code> input property on the table to show semantic row's status column.
+        Where <code>value</code> (string) is the key of the table row's item with status.
+        Available statuses are <code>valid, warning, information, error</code>. 
+        Any other statuses will be percieved as "no status".
+    </p>
+</description>
+<component-example>
+    <fdp-platform-table-semantic-example></fdp-platform-table-semantic-example>
+</component-example>
+
+<code-example [exampleFiles]="semanticFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title
+    id="row-class"
+    componentName="table"
+>
+    Row custom CSS class
+</fd-docs-section-title>
+<description>
+    This example demonstrates ability to apply custom CSS classes to the table rows.
+    Use <code>rowsClass</code> input property of the table component to define custom CSS classes.
+    <ul>
+        <li>Pass string (<code>'customClass'</code>) to set custom CSS classes for every row.</li>
+        <li>Pass function (<code>(row) => row.field ? 'customClass' : 'anotherClass'</code>) which returns string to describe own logic. Row will be passed as function's parameter. </li>
+    </ul>
+</description>
+<component-example>
+    <fdp-platform-table-row-class-example></fdp-platform-table-row-class-example>
+</component-example>
+
+<code-example [exampleFiles]="rowClassTableFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title
+    id="no-outer-borders"
+    componentName="table"
+>
+    No outer borders
+</fd-docs-section-title>
+<description>
+    Use <code>no-outer-borders</code> input property on the fdp-table to disable outer borders.
+</description>
+<component-example>
+    <fdp-platform-table-no-outer-borders-example></fdp-platform-table-no-outer-borders-example>
+</component-example>
+
+<code-example [exampleFiles]="noDataCustomMessageFiles"></code-example>
+
+<separator></separator>
+
 <playground
     [schema]="schema"
     [schemaInitialValues]="data"
@@ -494,10 +563,12 @@
         [noBodyBorders]="data.table.noBodyBorders"
         [noHorizontalBorders]="data.table.noHorizontalBorders"
         [noVerticalBorders]="data.table.noVerticalBorders"
+        [noOuterBorders]="data.table.noOuterBorders"
         [contentDensity]="data.table.contentDensity"
         [selectionMode]="data.table.selectionMode"
         [freezeColumnsTo]="data.table.freezeColumnsTo"
         [loading]="data.table.loading"
+        [semanticHighlighting]="data.table.semanticHighlighting && 'semantic'"
         emptyTableMessage="No data found"
         (rowSelectionChange)="onRowSelectionChange($event)"
         (sortChange)="onSortChange($event)"

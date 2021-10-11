@@ -14,8 +14,7 @@ import { Subscription } from 'rxjs';
 import { TableService } from '../table.service';
 import { TableCellDirective } from './table-cell.directive';
 
-export const HIDDEN_CLASS_NAME = 'fd-table-hidden';
-
+export const HIDDEN_CLASS_NAME = 'fd-table--hidden';
 
 @Directive({
     selector: '[fdTableRow], [fd-table-row]'

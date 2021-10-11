@@ -21,7 +21,7 @@
                     fd-button
                     class="fd-dynamic-page__collapse-button"
                     aria-haspopup="true"
-                    [attr.aria-label]="collapsed ? expandLabel : collapseLabel"
+                    [ariaLabel]="collapsed ? expandLabel : collapseLabel"
                     [attr.title]="collapsed ? expandLabel : collapseLabel"
                     [attr.aria-expanded]="!collapsed"
                     [attr.aria-controls]="id"
@@ -33,7 +33,7 @@
                 <button
                     fd-button
                     class="fd-dynamic-page__pin-button"
-                    [attr.aria-label]="_pinned ? unpinAriaLabel : pinAriaLabel"
+                    [ariaLabel]="_pinned ? unpinAriaLabel : pinAriaLabel"
                     [attr.title]="_pinned ? unpinAriaLabel : pinAriaLabel"
                     [attr.aria-selected]="_pinned"
                     (click)="togglePinned()"

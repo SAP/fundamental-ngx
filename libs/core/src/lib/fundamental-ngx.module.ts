@@ -74,7 +74,7 @@ import { MenuModule, MenuMobileModule } from '@fundamental-ngx/core/menu';
 import { TabsModule } from '@fundamental-ngx/core/tabs';
 import { ResizableCardLayoutModule } from '@fundamental-ngx/core/resizable-card-layout';
 import { UploadCollectionModule } from '@fundamental-ngx/core/upload-collection';
-
+import { SplitterModule } from '@fundamental-ngx/core/splitter';
 import { PaginationModule } from '@fundamental-ngx/core/pagination';
 import { SelectMobileModule, SelectModule } from '@fundamental-ngx/core/select';
 import { ShellbarModule } from '@fundamental-ngx/core/shellbar';
@@ -83,8 +83,10 @@ import { WizardModule } from '@fundamental-ngx/core/wizard';
 import { SplitButtonModule } from '@fundamental-ngx/core/split-button';
 import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
 import { MessagePageModule } from '@fundamental-ngx/core/message-page';
+import { VerticalNavigationModule } from '@fundamental-ngx/core/vertical-navigation';
 import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
 import { TimelineModule } from '@fundamental-ngx/core/timeline';
+
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -174,12 +176,14 @@ import { TimelineModule } from '@fundamental-ngx/core/timeline';
         MessageToastModule,
         DynamicSideContentModule,
         SliderModule,
+        SplitterModule,
         OnlyDigitsModule,
         IllustratedMessageModule,
         StatusIndicatorModule,
         GridListModule,
         ResizableCardLayoutModule,
         MessagePageModule,
+        VerticalNavigationModule,
         UploadCollectionModule,
         MicroProcessFlowModule,
         TimelineModule
