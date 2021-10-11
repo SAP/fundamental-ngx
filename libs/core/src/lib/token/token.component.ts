@@ -60,8 +60,13 @@ export class TokenComponent implements OnInit, OnDestroy {
     @Input()
     readOnly = false;
 
+    /**label for close icon */
     @Input()
-    ariaLabel = 'Deletable';
+    deleteButtonLabel = 'Deletable';
+
+    /**role description for token */
+    @Input()
+    ariaRoleDescription = 'token';
 
     /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
     @Output()

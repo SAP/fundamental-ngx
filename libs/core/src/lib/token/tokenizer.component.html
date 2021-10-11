@@ -2,7 +2,7 @@
     class="fd-tokenizer fd-tokenizer--scrollable"
     tabindex="0"
     role="listbox"
-    aria-roledescription="tokenizer"
+    [attr.aria-roledescription]="ariaRoleDescription"
     [class.is-focus]="_tokenizerHasFocus"
     [class.fd-tokenizer--compact]="compact"
 >
