@@ -40,6 +40,10 @@ export const ROUTES: Routes = [
             {
                 path: 'search',
                 loadChildren: () => import('./component-docs/search/search-docs.module').then((m) => m.SearchDocsModule)
+            },
+            {
+                path: 'slider',
+                loadChildren: () => import('./component-docs/slider/slider-docs.module').then((m) => m.SliderDocsModule)
             }
         ]
     }

@@ -8,6 +8,7 @@ import { ExperimentalFormModule } from '@fundamental-ngx/experimental/form';
 import { ExperimentalSwitchModule } from '@fundamental-ngx/experimental/switch';
 import { ExperimentalButtonModule } from '@fundamental-ngx/experimental/button';
 import { ExperimentalSearchModule } from '@fundamental-ngx/experimental/search';
+import { ExperimentalSliderModule } from '@fundamental-ngx/experimental/slider';
 import { ExperimentalTagModule } from '@fundamental-ngx/experimental/tag';
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ExperimentalTagModule } from '@fundamental-ngx/experimental/tag';
         ExperimentalSwitchModule,
         ExperimentalButtonModule,
         ExperimentalSearchModule,
+        ExperimentalSliderModule,
         ExperimentalTagModule
     ],
     providers: []
