@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.7 (2021-10-11)
+
+
+### Bug Fixes
+
+* **core:** dialog, keep only 1 non-transparent overlay ([#6852](https://github.com/SAP/fundamental-ngx/issues/6852)) ([f7e1024](https://github.com/SAP/fundamental-ngx/commit/f7e10247da4d54b4893608b1010018be0786ea2e))
+
 ## 0.33.0-rc.6 (2021-10-11)
 
 
