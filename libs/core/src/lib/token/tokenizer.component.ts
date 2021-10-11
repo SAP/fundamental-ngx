@@ -55,7 +55,7 @@ export class TokenizerComponent
 
     /** role description for tokenizer component */
     @Input()
-    ariaRoleDescription="tokenizer"
+    ariaRoleDescription = 'tokenizer';
 
     /** @hidden */
     @ContentChildren(forwardRef(() => TokenComponent))
