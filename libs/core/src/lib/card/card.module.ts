@@ -13,7 +13,7 @@ import { CardSecondSubtitleDirective } from './card-second-subtitle.directive';
 import { CardCounterDirective } from './card-counter.directive';
 import { CardContentComponent } from './card-content.component';
 import { CardLoaderComponent } from './card-loader.component';
-import { CardFooterComponent } from './card-footer.component';
+
 import { CardKpiHeaderComponent } from './kpi/card-kpi-header.component';
 import { CardKpiValueDirective } from './kpi/card-kpi-value.directive';
 import { CardKpiScaleIconDirective } from './kpi/card-kpi-scale-icon.directive';
@@ -28,11 +28,9 @@ const components = [
     CardContentComponent,
     CardTitleDirective,
     CardSubtitleDirective,
-    CardFooterComponent,
     CardSecondSubtitleDirective,
     CardCounterDirective,
     CardLoaderComponent,
-
     CardKpiHeaderComponent,
     CardKpiValueDirective,
     CardKpiScaleIconDirective,
