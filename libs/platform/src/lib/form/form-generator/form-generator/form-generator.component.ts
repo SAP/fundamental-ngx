@@ -20,6 +20,8 @@ import { DynamicFormItem, DynamicFormValue } from '../interfaces/dynamic-form-it
 import { DynamicFormControl } from '../dynamic-form-control';
 import { DynamicFormGroup } from '../interfaces/dynamic-form-group';
 
+let formUniqueId = 0;
+
 export interface SubmitFormEventResult {
     /**
      * @description Indicator if validation has been passed.
@@ -28,7 +30,7 @@ export interface SubmitFormEventResult {
     /**
      * @description Formatted form value.
      */
-    value: DynamicFormValue
+    value: DynamicFormValue;
 }
 
 /**
@@ -42,12 +44,15 @@ export interface SubmitFormEventResult {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormGeneratorComponent implements OnDestroy {
-
     /**
      * @description Renderer for the custom html code passed into the component.
      */
     @ViewChild('renderer', { static: false })
     renderer: TemplateRef<any>;
+
+    /** @description Unique form name */
+    @Input()
+    formName = `fdp-form-generator-${formUniqueId++}`;
 
     /**
      * @description List of @see DynamicFormItem representing the list of items
@@ -56,10 +61,10 @@ export class FormGeneratorComponent implements OnDestroy {
     @Input()
     get formItems(): DynamicFormItem[] {
         return this._formItems;
-    };
+    }
 
     set formItems(formItems: DynamicFormItem[]) {
-        this._formItems = formItems.map(i => ({...i}));
+        this._formItems = formItems.map((i) => ({ ...i }));
 
         this._generateForm();
     }
@@ -125,7 +130,7 @@ export class FormGeneratorComponent implements OnDestroy {
     /**
      * Set of flags representing if particular form item should be visible to the user.
      */
-    shouldShowFields: {[key: string]: boolean} = {};
+    shouldShowFields: { [key: string]: boolean } = {};
 
     /**
      * Flag representing that form is loading
@@ -148,11 +153,7 @@ export class FormGeneratorComponent implements OnDestroy {
      */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    constructor(
-        private _fgService: FormGeneratorService,
-        private _cd: ChangeDetectorRef
-    ) {
-    }
+    constructor(private _fgService: FormGeneratorService, private _cd: ChangeDetectorRef) {}
 
     /**
      * @hidden
@@ -166,20 +167,19 @@ export class FormGeneratorComponent implements OnDestroy {
      * @hidden
      */
     async _onSubmit(): Promise<void> {
-
         this.form.markAllAsTouched();
         this._cd.markForCheck();
 
         // stop here if form is invalid
         if (this.form.invalid || this.form.pending) {
-            this.formSubmittedStatus.emit({success: false, value: null});
+            this.formSubmittedStatus.emit({ success: false, value: null });
             return;
         }
 
         const formValue = await this._fgService.getFormValue(this.form);
 
         this.formSubmitted.emit(formValue);
-        this.formSubmittedStatus.emit({success: true, value: formValue});
+        this.formSubmittedStatus.emit({ success: true, value: formValue });
 
         this.form.markAsPristine();
     }
@@ -187,8 +187,8 @@ export class FormGeneratorComponent implements OnDestroy {
     /**
      * @hidden
      */
-    _getErrors(errors: {[key: string]: any}): {type: string; value: any}[] {
-        return Object.entries(errors).map(e => {
+    _getErrors(errors: { [key: string]: any }): { type: string; value: any }[] {
+        return Object.entries(errors).map((e) => {
             const errorType = e[0];
             let errorValue = e[1];
 
@@ -197,7 +197,7 @@ export class FormGeneratorComponent implements OnDestroy {
             if (defaultErrorValue) {
                 errorValue = defaultErrorValue;
             }
-            return {type: errorType, value: errorValue};
+            return { type: errorType, value: errorValue };
         });
     }
 
@@ -205,10 +205,9 @@ export class FormGeneratorComponent implements OnDestroy {
      * @hidden
      */
     private async _generateForm(): Promise<void> {
-
         this.formLoading = true;
 
-        const form = await this._fgService.generateForm(this.formItems);
+        const form = await this._fgService.generateForm(this.formName, this.formItems);
 
         this._formValueSubscription?.unsubscribe();
 
@@ -219,11 +218,11 @@ export class FormGeneratorComponent implements OnDestroy {
         this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
 
         this._formValueSubscription = this.form.valueChanges
-        .pipe(debounceTime(50), takeUntil(this._onDestroy$))
-        .subscribe(async () => {
-            this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
-            this._cd.markForCheck();
-        });
+            .pipe(debounceTime(50), takeUntil(this._onDestroy$))
+            .subscribe(async () => {
+                this.shouldShowFields = await this._fgService.checkVisibleFormItems(this.form);
+                this._cd.markForCheck();
+            });
 
         this.formLoading = false;
 

@@ -4,6 +4,7 @@
     *ngFor="let form of item.formGroups; let i = index"
     [mainTitle]="form.title"
     [columnLayout]="form.columnLayout"
+    [formName]="form.id"
     [formItems]="form.formItems"
     [unifiedLayout]="unifiedLayout"
     (formCreated)="onFormCreated($event, form.id)"
