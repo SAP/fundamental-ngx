@@ -120,5 +120,8 @@ export function focusElement(selector: string, index?: number): void {
 export function checkNextElementText(selector: string, expectedValue: string, index?: number): void {
     cy.get(selector).eq(index ? index : 0).next().should('have.text', expectedValue);
 }
+export function scrollIntoView(selector: string, index?: number): void {
+    cy.get(selector).eq(index ? index : 0).scrollIntoView();
+}
 
 

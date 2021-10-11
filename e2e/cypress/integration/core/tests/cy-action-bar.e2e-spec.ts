@@ -4,7 +4,8 @@ import {
     checkText,
     click,
     getElementArrayLength,
-    refreshPage
+    refreshPage,
+    scrollIntoView
 } from '../../../cypress-methods/cypress';
 import {
     descriptionLongText,
@@ -74,6 +75,12 @@ describe('Action Bar test suite:', () => {
 
     it('should check RTL and LTR orientation', () => {
         actionBarPage.checkRtlSwitch();
+        scrollIntoView('.fd-doc-component', 0);
+        cy.get('.fd-doc-component').eq(0).screenshot('action-bar-example-' + 0);
+    });
+
+    it('should check examples visual regression', () => {
+        actionBarPage.checkVisualRegression();
     });
 
     function checkClickableButton(selector: string): void {

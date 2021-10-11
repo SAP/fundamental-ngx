@@ -1,5 +1,6 @@
 {
-  "baseUrl": "https://sap.dev:4200/fundamental-ngx#",
+  "baseUrl": "http://localhost:4200/fundamental-ngx#",
   "viewportWidth": 1920,
-  "viewportHeight": 1080
+  "viewportHeight": 1080,
+  "video": false
 }

@@ -1,5 +1,5 @@
 import { checkLTROrientation, checkRTLOrientation } from '../../../helper/assertion-helper';
-import { click, getElementArrayLength } from '../../../cypress-methods/cypress';
+import { click, currentBrowserName, getElementArrayLength, scrollIntoView } from '../../../cypress-methods/cypress';
 
 export class BaseComponent {
     title = 'header .header';
@@ -10,6 +10,14 @@ export class BaseComponent {
 
     navigateTo(url: string): void {
         cy.visit(this.coreUrl + url);
+    }
+
+    checkVisualRegression(areas: string = this.exampleAreaContainersArr): void {
+        const areasLength = getElementArrayLength(areas);
+        for (let i = 0; i < areasLength; i++) {
+            scrollIntoView(areas, i);
+            cy.get(areas).eq(i).matchImageSnapshot('action-bar-example-' + i + '-' + currentBrowserName());
+        }
     }
 
     checkRtlSwitch(switchers: string = this.rtlSwitcherArr, areas: string = this.exampleAreaContainersArr, index?: number): void {
