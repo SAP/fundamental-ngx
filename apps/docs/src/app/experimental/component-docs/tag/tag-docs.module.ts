@@ -3,26 +3,25 @@ import { RouterModule, Routes } from '@angular/router';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
-import { TabsHeaderComponent } from './tabs-header/tabs-header.component';
-import { TabsDocsComponent } from './tabs-docs.component';
+import { TagHeaderComponent } from './tag-header/tag-header.component';
+import { TagDocsComponent } from './tag-docs.component';
 import { examples } from './examples';
-import { ExperimentalTabsModule } from '@fundamental-ngx/experimental/tabs';
+import { ExperimentalTagModule } from '@fundamental-ngx/experimental/tag';
 import { ExperimentalCheckboxModule } from '@fundamental-ngx/experimental/checkbox';
 import { ExperimentalRadioModule } from '@fundamental-ngx/experimental/radio';
 import { ExperimentalFormModule } from '@fundamental-ngx/experimental/form';
 import { ExperimentalSwitchModule } from '@fundamental-ngx/experimental/switch';
 import { ExperimentalButtonModule } from '@fundamental-ngx/experimental/button';
 import { ExperimentalSearchModule } from '@fundamental-ngx/experimental/search';
-import { ExperimentalTagModule } from '@fundamental-ngx/experimental/tag';
 
 const routes: Routes = [
     {
         path: '',
-        component: TabsHeaderComponent,
+        component: TagHeaderComponent,
         children: [
             {
                 path: '',
-                component: TabsDocsComponent
+                component: TagDocsComponent
             },
             { path: 'api', component: ApiComponent, data: { content: API_FILES.tabs } }
         ]
@@ -33,7 +32,7 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
-        ExperimentalTabsModule,
+        ExperimentalTagModule,
         ExperimentalCheckboxModule,
         ExperimentalRadioModule,
         ExperimentalFormModule,
@@ -42,6 +41,6 @@ const routes: Routes = [
         ExperimentalSearchModule
     ],
     exports: [RouterModule],
-    declarations: [examples, TabsHeaderComponent, TabsDocsComponent]
+    declarations: [examples, TagHeaderComponent, TagDocsComponent]
 })
-export class TabsDocsModule {}
+export class TagDocsModule {}
