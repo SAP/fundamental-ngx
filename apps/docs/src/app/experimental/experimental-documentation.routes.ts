@@ -22,6 +22,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/tabs/tabs-docs.module').then((m) => m.TabsDocsModule)
             },
             {
+                path: 'tag',
+                loadChildren: () => import('./component-docs/tag/tag-docs.module').then((m) => m.TagDocsModule)
+            },
+            {
                 path: 'switch',
                 loadChildren: () => import('./component-docs/switch/switch-docs.module').then((m) => m.SwitchDocsModule)
             },
