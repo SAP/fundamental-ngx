@@ -148,6 +148,7 @@
             "@fundamental-ngx/experimental/search": ["libs/experimental/src/lib/search/index.ts"],
             "@fundamental-ngx/experimental/button": ["libs/experimental/src/lib/button/index.ts"],
             "@fundamental-ngx/experimental/tag": ["libs/experimental/src/lib/tag/index.ts"],
+            "@fundamental-ngx/experimental/slider": ["libs/experimental/src/lib/slider/index.ts"],
         },
         "skipLibCheck": true
     },

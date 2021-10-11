@@ -860,8 +860,12 @@
             "implicitDependencies": ["core"]
         },
         "experimental-search": {
-          "tags": ["fn"],
-          "implicitDependencies": ["core"]
-      }
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
+        },
+        "experimental-slider": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core"]
+        }
     }
 }
