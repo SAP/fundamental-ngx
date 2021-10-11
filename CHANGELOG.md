@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.6 (2021-10-11)
+
+
+### Features
+
+* **core,platform:** bring horizon theme ([#6873](https://github.com/SAP/fundamental-ngx/issues/6873)) ([4f650c4](https://github.com/SAP/fundamental-ngx/commit/4f650c48e58505efc6a954a33944f05449c6102d))
+
 ## 0.33.0-rc.5 (2021-10-11)
 
 ## 0.33.0-rc.4 (2021-10-11)
