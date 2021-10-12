@@ -10,11 +10,13 @@ import { ColumnsChange, FilterChange, FreezeChange, GroupChange, PageChange, Sea
 @Injectable()
 export class TableService {
     private _tableStateSubject$: BehaviorSubject<TableState> = new BehaviorSubject(DEFAULT_TABLE_STATE);
+    private _tableLoadingSubject$: BehaviorSubject<boolean> = new BehaviorSubject(false);
     private _markForCheck$: Subject<void> = new Subject<void>();
     private _tableColumnsWidth$ = new Subject<void>();
 
     readonly tableColumnsWidth$ = this._tableColumnsWidth$.asObservable();
     readonly tableState$ = this._tableStateSubject$.asObservable();
+    readonly tableLoading$ = this._tableLoadingSubject$.asObservable();
     readonly tableStateChanges$ = this.tableState$.pipe(skip(1));
 
     readonly searchChange: EventEmitter<SearchChange> = new EventEmitter<SearchChange>();
@@ -38,6 +40,11 @@ export class TableService {
     /** Set current state/settings of the Table. */
     setTableState(state: TableState): void {
         this._tableStateSubject$.next(state);
+    }
+
+    /** Set current loading state of the Table. */
+    setTableLoading(isLoading: boolean): void {
+        this._tableLoadingSubject$.next(isLoading);
     }
 
     /** Notify about changes in table subcomponents (mostly table column) */

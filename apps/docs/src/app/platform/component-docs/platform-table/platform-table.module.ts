@@ -11,6 +11,7 @@ import { PlatformTableModule } from '@fundamental-ngx/platform/table';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformInputModule } from '@fundamental-ngx/platform/form';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
+import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
 
 import { API_FILES } from '../../api-files';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -38,7 +39,9 @@ import { PlatformTableNavigatableRowIndicatorExampleComponent } from './platform
 import { PlatformTableCustomWidthExampleComponent } from './platform-table-examples/platform-table-custom-width-example.component';
 import { PlatformTableActivableExampleComponent } from './platform-table-examples/platform-table-activable-example.component';
 import { PlatformTableNoItemsTemplateExampleComponent } from './platform-table-examples/platform-table-no-items-template-example.component';
-import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
+import { PlatformTableSemanticExampleComponent } from './platform-table-examples/platform-table-semantic-example.component';
+import { PlatformTableRowClassExampleComponent } from './platform-table-examples/platform-table-row-class-example.component';
+import { PlatformTableNoOuterBordersExampleComponent } from './platform-table-examples/platform-table-no-outer-borders-example.component';
 
 const routes: Routes = [
     {
@@ -89,7 +92,10 @@ const routes: Routes = [
         PlatformTableNavigatableRowIndicatorExampleComponent,
         PlatformTableCustomWidthExampleComponent,
         PlatformTableActivableExampleComponent,
-        PlatformTableNoItemsTemplateExampleComponent
+        PlatformTableNoItemsTemplateExampleComponent,
+        PlatformTableSemanticExampleComponent,
+        PlatformTableRowClassExampleComponent,
+        PlatformTableNoOuterBordersExampleComponent
     ],
     providers: [RtlService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

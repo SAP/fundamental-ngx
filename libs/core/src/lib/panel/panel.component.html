@@ -10,7 +10,7 @@
             [class.is-expanded]="expanded"
             [attr.aria-expanded]="expanded"
             [attr.aria-controls]="panelContent?.id"
-            [attr.aria-label]="expandAriaLabel"
+            [ariaLabel]="expandAriaLabel"
             [attr.aria-labelledby]="expandAriaLabelledBy + ' ' + expandId"
             [title]="expandAriaLabel"
             (click)="toggleExpand()">

@@ -1,7 +1,6 @@
 <fdp-table
     #table
     [dataSource]="source"
-    contentDensity="compact"
     emptyTableMessage="No data found"
     rowNavigatable="navigatable"
     [noHorizontalBorders]="true"
@@ -18,13 +17,11 @@
 
             <fdp-button
                 label="Set"
-                contentDensity="compact"
                 (click)="setRowNavigation()"
             ></fdp-button>
 
             <fdp-button
                 label="Remove"
-                contentDensity="compact"
                 (click)="removeRowNavigation()"
             ></fdp-button>
         </fdp-table-toolbar-actions>

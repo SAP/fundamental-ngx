@@ -63,30 +63,54 @@ const formGroupChildProvider: Provider = {
     providers: [formFieldProvider, formGroupChildProvider]
 })
 export class FormFieldComponent implements FormField, AfterContentInit, AfterViewInit, OnDestroy, OnInit {
+    /** Form field label */
     @Input()
     label: string;
 
+    /**
+     * Form field id
+     */
     @Input()
     id: string;
 
+    /**
+     * Defines hint placement
+     */
     @Input()
     hintPlacement: HintPlacement = 'right';
 
+    /** Hint to be placed next to label */
     @Input()
     hint: string;
 
+    /**
+     * Define form field label placement
+     */
     @Input()
     labelLayout: LabelLayout = 'vertical';
 
+    /**
+     * Indicates when form field label should not be displayed
+     */
     @Input()
     noLabelLayout = false;
 
+    /**
+     * The list of validators applied to the form field.
+     */
     @Input()
     validators: Array<ValidatorFn> = [Validators.nullValidator];
 
+    /**
+     * Rank is used for ordering.
+     * Than lower number then higher priority
+     */
     @Input()
     rank: number;
 
+    /**
+     * Placeholder for the field
+     */
     @Input()
     placeholder: string;
 
@@ -107,11 +131,13 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     }
 
     /**
+     * Translations template reference.
      * This is in most of the cases set from parent container (form-group)
      */
     @Input()
     i18Strings: TemplateRef<any>;
 
+    /** Set when form field is a mandatory one. */
     @Input()
     get required(): boolean {
         return this._required;
@@ -121,6 +147,9 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         this._required = coerceBooleanProperty(value);
     }
 
+    /**
+     * Indicates if field is editable
+     */
     @Input()
     get editable(): boolean {
         return this._editable;
@@ -130,12 +159,12 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         const newVal = coerceBooleanProperty(value);
         if (this._editable !== newVal) {
             this._editable = value;
-            this.updateControlProperties();
+            this._updateControlProperties();
         }
     }
 
     /**
-     * custom width in columns must be between 1 - 12
+     * Form field custom width in columns must be between 1 - 12
      */
     @Input()
     get columns(): Column {
@@ -159,12 +188,18 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     @Input()
     formGroupContainer: FormGroupContainer;
 
+    /** Emits whenever formFieldControl's state changes */
     @Output()
     onChange: EventEmitter<string> = new EventEmitter<string>();
 
+    /** Emits whenever column layout is changed */
     @Output()
     onColumnChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+    /**
+     * @hidden
+     * Form field template reference
+     */
     @ViewChild('renderer', { static: true })
     renderer: TemplateRef<any>;
 
@@ -179,9 +214,16 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      */
     public formControl: FormControl;
 
+    /** @hidden */
     protected _columns: Column = 6;
+    
+    /** @hidden */
     protected _editable = true;
+    
+    /** @hidden */
     protected _formGroup: FormGroup;
+    
+    /** @hidden */
     protected _required = false;
 
     /** @hidden */
@@ -242,7 +284,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
                 .subscribe((breakPointName) => this._updateLayout(breakPointName));
         }
 
-        this.addToFormGroup();
+        this._addToFormGroup();
     }
 
     /** @hidden */
@@ -252,14 +294,14 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this.updateControlProperties();
-        this.validateErrorHandler();
+        this._updateControlProperties();
+        this._validateErrorHandler();
         this._cd.detectChanges();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-        this.removeFromFormGroup();
+        this._removeFromFormGroup();
         this._destroyed.next();
         this._destroyed.complete();
     }
@@ -281,7 +323,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         this.control = formFieldControl;
 
         formFieldControl.stateChanges.pipe(startWith(null), takeUntil(this._destroyed)).subscribe((s) => {
-            this.updateControlProperties();
+            this._updateControlProperties();
             // need to call explicitly detectChanges() instead of markForCheck before the
             // modified validation state of the control passes over checked phase
             this.onChange.emit('stateChanges');
@@ -322,7 +364,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
                 control.updateValueAndValidity({ emitEvent: false });
             });
 
-            this.addControlToFormGroup(formFieldControl?.ngControl?.control);
+            this._addControlToFormGroup(formFieldControl?.ngControl?.control);
         }
 
         this._cd.markForCheck();
@@ -339,18 +381,18 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
         this.control = null;
 
-        this.removeControlFromFormGroup();
+        this._removeControlFromFormGroup();
     }
 
     /** @hidden */
-    private validateErrorHandler(): void {
-        if (this._editable && this.control && this.hasValidators() && !this.i18Strings) {
+    private _validateErrorHandler(): void {
+        if (this._editable && this.control && this._hasValidators() && !this.i18Strings) {
             throw new Error('Validation strings are required for the any provided validations.');
         }
     }
 
     /** @hidden */
-    private hasValidators(): boolean {
+    private _hasValidators(): boolean {
         return this.validators && this.validators.length > 1;
     }
 
@@ -358,7 +400,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      * @hidden
      * Add FormField to FormGroup
      */
-    private addToFormGroup(): void {
+    private _addToFormGroup(): void {
         if (!this.formGroupContainer || this.formFieldGroup) {
             return;
         }
@@ -370,7 +412,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      * @hidden
      * Remove FormField from FormGroup
      */
-    private removeFromFormGroup(): void {
+    private _removeFromFormGroup(): void {
         if (!this.formGroupContainer) {
             return;
         }
@@ -381,7 +423,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      * @hidden
      * Add FormControl from FormGroup
      */
-    private addControlToFormGroup(control: AbstractControl): void {
+    private _addControlToFormGroup(control: AbstractControl): void {
         if (!this.formGroupContainer) {
             return;
         }
@@ -392,7 +434,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
      * @hidden
      * Remove FormControl from FormGroup
      */
-    private removeControlFromFormGroup(): void {
+    private _removeControlFromFormGroup(): void {
         if (!this.formGroupContainer) {
             return;
         }
@@ -400,12 +442,13 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
     }
 
     /**
+     * @hidden
      * Need to be able to set these properties on every level.
      *  - Global FormGroup Level as well each field
      *
      *  Todo: use more elegant way to set these properties.
      */
-    private updateControlProperties(): void {
+    private _updateControlProperties(): void {
         if (this.control && this._editable) {
             this.control.id = this.id;
             this.control.required = this.required;
@@ -413,17 +456,6 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
             if (this.placeholder) {
                 this.control.placeholder = this.placeholder;
             }
-        }
-    }
-
-    /** @hidden */
-    private validateFieldControlComponent(): void {
-        if (!this.control) {
-            throw new Error('fdp-form-field must contain component implemented FormFieldControl.');
-        }
-
-        if (this.control.ngControl && !this.id) {
-            throw new Error('fdp-form-field must contain [id] binding.');
         }
     }
 

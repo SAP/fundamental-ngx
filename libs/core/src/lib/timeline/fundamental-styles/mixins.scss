@@ -70,6 +70,24 @@ $fd-namespace: fd !default;
   }
 }
 
+@mixin fd-set-margin-bottom($bottom: 0) {
+    margin-bottom: $bottom;
+
+    @include fd-rtl() {
+        margin-bottom: 0;
+        margin-top: $bottom;
+    }
+}
+
+@mixin fd-set-margin-top($top: 0) {
+    margin-top: $top;
+
+    @include fd-rtl() {
+        margin-top: 0;
+        margin-bottom: $top;
+    }
+}
+
 @mixin fd-set-position-left($left) {
   left: $left;
 
@@ -79,6 +97,33 @@ $fd-namespace: fd !default;
   }
 }
 
+@mixin fd-set-position-right($right) {
+    right: $right;
+
+    @include fd-rtl() {
+        right: auto;
+        left: $right;
+    }
+}
+
+@mixin fd-set-position-top($top) {
+    top: $top;
+
+    @include fd-rtl() {
+        top: auto;
+        bottom: $top;
+    }
+}
+
+@mixin fd-set-position-bottom($bottom) {
+    bottom: $bottom;
+
+    @include fd-rtl() {
+        bottom: auto;
+        top: $bottom;
+    }
+}
+
 @mixin fd-set-padding-left($left: 0) {
   padding-left: $left;
 
@@ -86,6 +131,42 @@ $fd-namespace: fd !default;
     padding-right: $left;
     padding-left: 0;
   }
+}
+
+@mixin fd-set-padding-left($left: 0) {
+    padding-left: $left;
+
+    @include fd-rtl() {
+        padding-right: $left;
+        padding-left: 0;
+    }
+}
+
+@mixin fd-set-padding-right($right: 0) {
+    padding-right: $right;
+
+    @include fd-rtl() {
+        padding-right: 0;
+        padding-left: $right;
+    }
+}
+
+@mixin fd-set-padding-top($top: 0) {
+    padding-top: $top;
+
+    @include fd-rtl() {
+        padding-top: 0;
+        padding-bottom: $top;
+    }
+}
+
+@mixin fd-set-padding-bottom($bottom: 0) {
+    padding-bottom: $bottom;
+
+    @include fd-rtl() {
+        padding-bottom: 0;
+        padding-top: $bottom;
+    }
 }
 
 // These mixins ensure that all state selectors — ARIA, pseudos, `is` fallbacks — get applied properly.
@@ -290,4 +371,9 @@ $fd-namespace: fd !default;
 @mixin fd-set-margins-y-equal($value: 0) {
   margin-top: $value;
   margin-bottom: $value;
+}
+
+@mixin fd-set-margins-x-equal($value: 0) {
+    margin-left: $value;
+    margin-right: $value;
 }

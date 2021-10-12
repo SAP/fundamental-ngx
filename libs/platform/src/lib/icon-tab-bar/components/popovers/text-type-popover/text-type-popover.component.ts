@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
-import { IconTabBarItem } from '../../../types';
+import { IconTabBarItem } from '../../../interfaces/icon-tab-bar-item.interface';
 
 @Component({
     selector: 'fdp-text-type-popover',

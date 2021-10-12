@@ -1,4 +1,5 @@
-import { IconTabBarItem, TabConfig } from './types';
+import { IconTabBarItem } from './interfaces/icon-tab-bar-item.interface';
+import { TabConfig } from './interfaces/tab-config.interface';
 import { UNIQUE_KEY_SEPARATOR } from './constants';
 
 export function getGetCenterCoordsOfElement(el: HTMLElement | null): { clientX: number, clientY: number } {

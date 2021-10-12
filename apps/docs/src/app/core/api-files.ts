@@ -153,7 +153,10 @@ export const API_FILES = {
         'ListGroupHeaderDirective',
         'ListIconDirective',
         'ListFooterDirective',
-        'ListMessageDirective'
+        'ListMessageDirective',
+        'ListNavigationItemArrowDirective',
+        'ListNavigationItemTextDirective',
+        'ListNavigationItemComponent',
     ],
     menu: [
         'MenuAddonDirective',
@@ -350,6 +353,11 @@ export const API_FILES = {
     switch: ['SwitchComponent'],
     stepInput: ['StepInputComponent'],
     slider: ['SliderComponent'],
+    splitter: [
+        'SplitterComponent',
+        'SplitterPaneContainerComponent',
+        'SplitterSplitPaneComponent'
+    ],
     token: ['TokenComponent', 'TokenizerComponent'],
     toolbar: [
         'ToolbarComponent',
@@ -383,6 +391,11 @@ export const API_FILES = {
     resizableCardLayout: [
         'ResizableCardLayoutComponent',
         'ResizableCardItemComponent'
+    ],
+    verticalNavigation: [
+        'VerticalNavigationComponent',
+        'VerticalNavigationMainNavigationComponent',
+        'VerticalNavigationGroupHeaderDirective'
     ],
     uploadCollection: [
         'UploadCollectionComponent',

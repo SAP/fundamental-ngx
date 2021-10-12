@@ -5,5 +5,7 @@
         "esModuleInterop": true,
         "outDir": "../../dist/out-tsc",
         "types": ["node"]
-    }
+    },
+    "exclude": ["**/*.spec.ts"],
+    "include": ["**/*.ts"]
 }

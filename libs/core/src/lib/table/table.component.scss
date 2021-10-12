@@ -4,22 +4,8 @@
     width: 100%;
 }
 
-.fd-table-hidden {
-    display: none;
-}
-
 .fd-table__cell--checkbox {
 	.fd-checkbox__label {
 		margin: 0;
-	}
-}
-
-.fd-table__text {
-	word-break: break-word;
-	overflow: hidden;
-	text-overflow: ellipsis;
-
-	&--no-wrap {
-		white-space: nowrap;
 	}
 }

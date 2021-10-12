@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { ContentDensity } from '@fundamental-ngx/core/utils';
-import { DataProvider, MatchingStrategy } from '@fundamental-ngx/platform/shared';
+import { DataProvider } from '@fundamental-ngx/platform/shared';
 
 /**
  * Default options for platform List
@@ -12,11 +12,6 @@ export class ListConfig {
      * Content Density of element. 'cozy' | 'compact'
      */
     contentDensity: ContentDensity;
-
-    /**
-     * String matching strategy for typeahead list. Default: 'starts with'
-     */
-    matchingStrategy: MatchingStrategy = MatchingStrategy.STARTS_WITH;
 
     /**
      * Maps data providers

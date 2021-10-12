@@ -26,6 +26,7 @@ env:
     ~/.npm
     node_modules
 
+  NODE_OPTIONS: '--max_old_space_size=4096'
 # publish scripts variables
   TRAVIS_BRANCH: ${{ github.ref }}
   TRAVIS_REPO_SLUG: ${{ github.repository }}
@@ -206,9 +207,9 @@ jobs:
           projectId: fundamental-ngx-gh
           target: fundamental-ngx-gh
           channelId: ${{ env.FIREBASE_CHANNEL }}
-          expires: 7d
+          expires: 3d
 
-  # run e2e tests on saucelabs
+  # run e2e tests
   e2e_smoke:
     runs-on: ubuntu-latest
     needs: firebase_preview
@@ -219,11 +220,14 @@ jobs:
       # leaving the Dashboard hanging ...
       # https://github.com/cypress-io/github-action/issues/48
       fail-fast: false
-      max-parallel: 6
+#      max-parallel: 6
       matrix:
-        suite: ["spec platform", "spec core"]
+        suite: ["suite platformA", "suite platformB", "suite coreA", "suite coreB"]
     steps:
       - uses: actions/checkout@v2
+      - uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: stable
       - uses: actions/cache@v2
         with:
           path: ${{ env.CACHE_NODE_MODULES_PATH }}
@@ -233,16 +237,23 @@ jobs:
         env:
           CAP_SLUG: ${{ matrix.browser }}
         if: ${{ needs.firebase_preview.outputs.output_url }}
-        run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.suite }} --baseUrl=${{ needs.firebase_preview.outputs.output_url }}/fundamental-ngx
+        run: |
+          export DISPLAY=:99
+          chrome --version
+          sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 & # optional
+          TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.suite }} --baseUrl=${{ needs.firebase_preview.outputs.output_url }}/fundamental-ngx
 
       - name: smoke e2e on local
         env:
           CAP_SLUG: ${{ matrix.browser }}
         if: ${{ !needs.firebase_preview.outputs.output_url }}
         run: |
-          npx ng serve --disable-host-check --ssl --no-watch &
-          npx wait-on https://localhost:4200
-          TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.suite }}
+          npx ng serve --no-watch --aot --prod &
+          npx wait-on http://localhost:4200
+          export DISPLAY=:99
+          chrome --version
+          sudo Xvfb -ac :99 -screen 0 1920x1080x24 > /dev/null 2>&1 & # optional
+          TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio.conf.js --${{ matrix.suite }} --baseUrl="http://localhost:4200/"
 
 
   # pre-release to npm
@@ -256,6 +267,8 @@ jobs:
       ) }}
     steps:
       - uses: actions/checkout@v2.3.4
+        with:
+          token: ${{ secrets.GHACTIONS }}
       - uses: actions/cache@v2
         with:
           path: ${{ env.CACHE_NODE_MODULES_PATH }}

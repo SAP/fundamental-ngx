@@ -52,6 +52,10 @@ export class WizardGeneratorStepComponent implements OnDestroy {
     @Input()
     item: WizardGeneratorItem;
 
+    /** Whether or not all form items should have identical layout provided for form group. */
+    @Input()
+    unifiedLayout = true;
+
     /**
      * @description Emits when all forms in the step has been submited
      */

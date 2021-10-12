@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     host: {
         'class': 'fd-timeline__post-actions'
     },
-    styles: [`.fd-timeline__post-actions button + button { 
+    styles: [`.fd-timeline__post-actions button + button {
        margin-left: 0.5rem;
     }`]
 })

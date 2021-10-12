@@ -3,6 +3,7 @@ import { click, doesItExist, scrollIntoView, sendKeys, waitForElDisplayed, waitF
 export class MultiInputPo extends BaseComponentPo {
     private url = '/multi-input';
     root = '#page-content';
+    header = 'h2';
     expandedDropdown = '.fd-list';
     activeDropdownButtons = 'button[aria-label="value-help"]';
     activeInputs = '.fd-input-group.fd-input-group--control input';

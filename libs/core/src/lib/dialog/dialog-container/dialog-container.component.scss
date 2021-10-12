@@ -1,0 +1,4 @@
+:host:not(:first-of-type) ::ng-deep .fd-dialog::before {
+    // keeping only 1 dialog with non-transparent overlay
+    opacity: 0;
+}

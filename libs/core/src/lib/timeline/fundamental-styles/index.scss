@@ -17,467 +17,392 @@ $fd-timeline-post-border: 0.0625rem solid var(--sapGroup_ContentBorderColor) !de
 $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !default;
 
 @mixin fd-timeline-group-icon($color) {
-  [class*='sap-icon'] {
-    color: $color;
+    [class*='sap-icon'] {
+        color: $color;
 
-    @content;
-  }
+        @content;
+    }
 }
 
 @mixin fd-timeline-fake-outline() {
-  &:focus,
-  &.is-focus {
-    outline: none;
+    &:focus,
+    &.is-focus {
+        outline: none;
 
-    &::before {
-      content: '';
-      display: block;
-      position: absolute;
-      top: $fd-timeline-group-offset;
-      left: $fd-timeline-group-offset;
-      right: $fd-timeline-group-offset;
-      bottom: $fd-timeline-group-offset;
-      border: var(--sapContent_FocusWidth) var(--sapContent_FocusStyle) var(--sapContent_FocusColor);
+        &::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: $fd-timeline-group-offset;
+            left: $fd-timeline-group-offset;
+            right: $fd-timeline-group-offset;
+            bottom: $fd-timeline-group-offset;
+            border: var(--sapContent_FocusWidth) var(--sapContent_FocusStyle) var(--sapContent_FocusColor);
+        }
     }
-  }
 }
 
 @mixin fd-timeline-fake-outline-overwrite() {
-  &:focus,
-  &.is-focus {
-    &::before {
-      @content;
+    &:focus,
+    &.is-focus {
+        &::before {
+            @content;
+        }
     }
-  }
 }
 
 @mixin fd-timeline-arrow-rotate($deg) {
-  transform: translateX(0) translateY(0) rotate($deg);
+    transform: translateX(0) translateY(0) rotate($deg);
 }
 
 @mixin fd-timeline-set-node-size($size) {
-  width: $size;
-  height: $size;
-  border-radius: 50%;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
 }
 
 @mixin fd-timeline-set-border($type: solid, $color: var(--sapContent_ForegroundBorderColor)) {
-  border: 0.0625rem $type $color;
+    border: 0.0625rem $type $color;
 }
 
 .#{$block} {
-  @include fd-reset();
-
-  max-width: 30rem;
-
-  &--double-sided {
-    max-width: 57.5rem;
-  }
-
-  &__container {
     @include fd-reset();
 
-    margin-top: 1rem;
-  }
-
-  &__group {
-    @include fd-reset();
-
-    margin-bottom: 1rem;
-    list-style-type: none;
-
-    &--collapsed {
-      margin-bottom: 2rem;
-    }
-  }
-
-  &__group-header-container {
-    @include fd-reset();
-    @include fd-flex-vertical-center();
-
-    &--horizontal {
-      width: auto;
-      height: 100%;
-      flex-direction: column;
-      align-items: flex-start;
-
-      .#{$block}__group-header-bar {
-        @include fd-reset-margins();
-        @include fd-set-margin-left(1.25rem);
-
-        margin-top: $fd-timeline-group-header-bar-offset;
-      }
-    }
-  }
-
-  &__group-header {
-    @include fd-reset();
-    @include fd-flex-vertical-center();
-    @include fd-timeline-fake-outline();
-    @include fd-set-margin-right($fd-timeline-group-header-bar-offset);
-
-    cursor: pointer;
-    width: fit-content;
-    position: relative;
-    height: $fd-timeline-group-height;
-    background: var(--sapButton_Selected_Background);
-    border-radius: var(--sapElement_BorderCornerRadius);
-    border: 0.0625rem solid var(--sapButton_Selected_BorderColor);
-
-    @include fd-hover() {
-      background: var(--sapButton_Selected_Hover_Background);
-      border-color: var(--sapButton_Selected_Hover_BorderColor);
+    &--double-sided {
+        max-width: 57.5rem;
     }
 
-    @include fd-active() {
-      background: var(--sapButton_Selected_Background);
-      border-color: var(--sapButton_Selected_BorderColor);
-    }
-
-    &--collapsed {
-      @include fd-timeline-fake-outline-overwrite() {
-        left: $fd-timeline-group-offset;
-        right: $fd-timeline-group-offset-double;
-      }
-
-      @include fd-rtl() {
-        @include fd-timeline-fake-outline-overwrite() {
-          right: $fd-timeline-group-offset;
-          left: $fd-timeline-group-offset-double;
-        }
-      }
-
-      background: var(--sapButton_Background);
-      border-color: var(--sapButton_BorderColor);
-
-      .#{$block}__group-header-icon {
-        @include fd-timeline-group-icon(var(--sapButton_TextColor));
-
-        @include fd-rtl() {
-          transform: rotate(180deg);
-        }
-      }
-
-      .#{$block}__group-header-text {
-        color: var(--sapButton_Hover_TextColor);
-      }
-
-      @include fd-hover() {
-        background: var(--sapButton_Hover_Background);
-        border-color: var(--sapButton_Hover_BorderColor);
-
-        @include fd-after() {
-          background: var(--sapButton_Hover_Background);
-          border-color: var(--sapButton_Hover_BorderColor);
-        }
-
-        .#{$block}__group-header-icon {
-          @include fd-timeline-group-icon(var(--sapButton_Hover_TextColor));
-        }
-
-        .#{$block}__group-header-text {
-          color: var(--sapButton_Hover_TextColor);
-        }
-      }
-
-      @include fd-active() {
-        background: var(--sapButton_Active_Background);
-        border-color: var(--sapButton_Active_BorderColor);
-
-        @include fd-after() {
-          background: var(--sapButton_Active_Background);
-          border-color: var(--sapButton_Active_BorderColor);
-        }
-
-        .#{$block}__group-header-icon {
-          @include fd-timeline-group-icon(var(--sapButton_Active_TextColor));
-        }
-
-        .#{$block}__group-header-text {
-          color: var(--sapButton_Active_TextColor);
-        }
-      }
-
-      @include fd-after() {
+    &__container {
         @include fd-reset();
-        @include fd-timeline-arrow-rotate(45deg);
 
-        content: '';
-        position: absolute;
-        width: $fd-timeline-group-arrow-size;
-        height: $fd-timeline-group-arrow-size;
-        right: $fd-timeline-group-arrow-offset;
-        background: var(--sapButton_Background);
-        border-top: $fd-timeline-group-arrow-border;
-        border-right: $fd-timeline-group-arrow-border;
-      }
-
-      @include fd-after-rtl() {
-        @include fd-timeline-arrow-rotate(225deg);
-
-        right: auto;
-        left: $fd-timeline-group-arrow-offset;
-      }
+        margin-top: 1rem;
     }
 
-    &--horizontal {
-      @include fd-timeline-fake-outline-overwrite() {
-        right: $fd-timeline-group-offset;
-        bottom: $fd-timeline-group-offset-double;
-      }
+    &__group {
+        @include fd-reset();
 
-      @include fd-rtl() {
-        @include fd-timeline-fake-outline-overwrite() {
-          left: $fd-timeline-group-offset;
-          right: $fd-timeline-group-offset;
+        margin-bottom: 1rem;
+        list-style-type: none;
+
+        &--collapsed {
+            margin-bottom: 2rem;
         }
-      }
-
-      @include fd-after() {
-        transform: rotate(135deg);
-        left: $fd-timeline-arrow-offset;
-        bottom: $fd-timeline-group-arrow-offset;
-      }
-
-      @include fd-after-rtl() {
-        left: auto;
-        transform: rotate(135deg);
-        right: $fd-timeline-arrow-offset;
-      }
-    }
-  }
-
-  &__group-header-icon {
-    @include fd-reset();
-    @include fd-set-margins-x-equal(0.5rem);
-
-    @include fd-timeline-group-icon(var(--sapButton_Selected_TextColor)) {
-      font-size: 1rem;
-      height: $fd-timeline-group-height;
-      line-height: $fd-timeline-group-height;
-    }
-  }
-
-  &__group-header-text {
-    @include fd-reset();
-    @include fd-set-margin-right(1rem);
-
-    cursor: inherit;
-    color: var(--sapButton_Selected_TextColor);
-  }
-
-  &__node-container {
-    @include fd-flex(column) {
-      align-items: center;
     }
 
-    height: 100%;
+    &__group-header-container {
+        @include fd-reset();
+        @include fd-flex-vertical-center();
 
-    &--horizontal {
-      flex-direction: row;
+        &--horizontal {
+            width: auto;
+            height: 100%;
+            flex-direction: column;
+            align-items: flex-start;
 
-      .#{$block}__node {
-        @include fd-reset-margins-y();
-        @include fd-set-margins-x-equal(0.25rem);
+            .#{$block}__group-header-bar {
+                @include fd-reset-margins();
+                @include fd-set-margin-left(1.25rem);
+
+                margin-top: $fd-timeline-group-header-bar-offset;
+            }
+        }
+    }
+
+    &__group-header {
+        @include fd-reset();
+        @include fd-flex-vertical-center();
+        @include fd-timeline-fake-outline();
+        @include fd-set-margin-right($fd-timeline-group-header-bar-offset);
+
+        cursor: pointer;
+        width: fit-content;
+        position: relative;
+        height: $fd-timeline-group-height;
+        background: var(--sapButton_Selected_Background);
+        border-radius: var(--sapElement_BorderCornerRadius);
+        border: 0.0625rem solid var(--sapButton_Selected_BorderColor);
+
+        @include fd-hover() {
+            background: var(--sapButton_Selected_Hover_Background);
+            border-color: var(--sapButton_Selected_Hover_BorderColor);
+        }
+
+        @include fd-active() {
+            background: var(--sapButton_Selected_Background);
+            border-color: var(--sapButton_Selected_BorderColor);
+        }
+
+        &--collapsed {
+            @include fd-timeline-fake-outline-overwrite() {
+                left: $fd-timeline-group-offset;
+                right: $fd-timeline-group-offset-double;
+            }
+
+            @include fd-rtl() {
+                @include fd-timeline-fake-outline-overwrite() {
+                    right: $fd-timeline-group-offset;
+                    left: $fd-timeline-group-offset-double;
+                }
+            }
+
+            background: var(--sapButton_Background);
+            border-color: var(--sapButton_BorderColor);
+
+            .#{$block}__group-header-icon {
+                @include fd-timeline-group-icon(var(--sapButton_TextColor));
+
+                @include fd-rtl() {
+                    transform: rotate(180deg);
+                }
+            }
+
+            .#{$block}__group-header-text {
+                color: var(--sapButton_Hover_TextColor);
+            }
+
+            @include fd-hover() {
+                background: var(--sapButton_Hover_Background);
+                border-color: var(--sapButton_Hover_BorderColor);
+
+                @include fd-after() {
+                    background: var(--sapButton_Hover_Background);
+                    border-color: var(--sapButton_Hover_BorderColor);
+                }
+
+                .#{$block}__group-header-icon {
+                    @include fd-timeline-group-icon(var(--sapButton_Hover_TextColor));
+                }
+
+                .#{$block}__group-header-text {
+                    color: var(--sapButton_Hover_TextColor);
+                }
+            }
+
+            @include fd-active() {
+                background: var(--sapButton_Active_Background);
+                border-color: var(--sapButton_Active_BorderColor);
+
+                @include fd-after() {
+                    background: var(--sapButton_Active_Background);
+                    border-color: var(--sapButton_Active_BorderColor);
+                }
+
+                .#{$block}__group-header-icon {
+                    @include fd-timeline-group-icon(var(--sapButton_Active_TextColor));
+                }
+
+                .#{$block}__group-header-text {
+                    color: var(--sapButton_Active_TextColor);
+                }
+            }
+
+            @include fd-after() {
+                @include fd-reset();
+                @include fd-timeline-arrow-rotate(45deg);
+
+                content: '';
+                position: absolute;
+                width: $fd-timeline-group-arrow-size;
+                height: $fd-timeline-group-arrow-size;
+                right: $fd-timeline-group-arrow-offset;
+                background: var(--sapButton_Background);
+                border-top: $fd-timeline-group-arrow-border;
+                border-right: $fd-timeline-group-arrow-border;
+            }
+
+            @include fd-after-rtl() {
+                @include fd-timeline-arrow-rotate(225deg);
+
+                right: auto;
+                left: $fd-timeline-group-arrow-offset;
+            }
+        }
+
+        &--horizontal {
+            @include fd-timeline-fake-outline-overwrite() {
+                right: $fd-timeline-group-offset;
+                bottom: $fd-timeline-group-offset-double;
+            }
+
+            @include fd-rtl() {
+                @include fd-timeline-fake-outline-overwrite() {
+                    left: $fd-timeline-group-offset;
+                    right: $fd-timeline-group-offset;
+                }
+            }
+
+            @include fd-after() {
+                transform: rotate(135deg);
+                left: $fd-timeline-arrow-offset;
+                bottom: $fd-timeline-group-arrow-offset;
+            }
+
+            @include fd-after-rtl() {
+                left: auto;
+                transform: rotate(135deg);
+                right: $fd-timeline-arrow-offset;
+            }
+        }
+    }
+
+    &__group-header-icon {
+        @include fd-reset();
+        @include fd-set-margins-x-equal(0.5rem);
+
+        @include fd-timeline-group-icon(var(--sapButton_Selected_TextColor)) {
+            font-size: 1rem;
+            height: $fd-timeline-group-height;
+            line-height: $fd-timeline-group-height;
+        }
+    }
+
+    &__group-header-text {
+        @include fd-reset();
+        @include fd-set-margin-right(1rem);
+
+        cursor: inherit;
+        color: var(--sapButton_Selected_TextColor);
+    }
+
+    &__node-container {
+
+        &--horizontal {
+            flex-direction: row;
+
+            .#{$block}__node {
+                @include fd-reset-margins-y();
+                @include fd-set-margins-x-equal(0.25rem);
+
+                &--grouping {
+                    @include fd-reset-margins();
+                }
+
+                &--icon {
+                    @include fd-reset-margins-y();
+                    @include fd-set-margins-x-equal(0.5rem);
+                }
+            }
+        }
+    }
+
+    &__node {
+        @include fd-reset();
+        @include fd-timeline-set-node-size(0.375rem);
+        background: var(--sapContent_ForegroundBorderColor);
 
         &--grouping {
-          @include fd-reset-margins();
+            @include fd-reset-margins-y();
+            @include fd-timeline-set-border();
+            @include fd-timeline-set-node-size(0.5rem);
+
+            background: transparent;
         }
 
         &--icon {
-          @include fd-reset-margins-y();
-          @include fd-set-margins-x-equal(0.5rem);
+            @include fd-set-margins-y-equal(0.5rem);
+            @include fd-timeline-set-node-size(auto);
+
+            background: transparent;
+
+            [class*="sap-icon"] {
+                line-height: 1;
+                width: $fd-timeline-node-icon-size;
+                height: $fd-timeline-node-icon-size;
+                font-size: $fd-timeline-node-icon-size;
+                color: var(--sapContent_NonInteractiveIconColor);
+            }
         }
-      }
-    }
-  }
-
-  &__node {
-    @include fd-reset();
-    @include fd-set-margins-y-equal(0.25rem);
-    @include fd-timeline-set-node-size(0.375rem);
-
-    background: var(--sapContent_ForegroundBorderColor);
-
-    &--grouping {
-      @include fd-reset-margins-y();
-      @include fd-timeline-set-border();
-      @include fd-timeline-set-node-size(0.5rem);
-
-      background: transparent;
     }
 
-    &--icon {
-      @include fd-set-margins-y-equal(0.5rem);
-      @include fd-timeline-set-node-size(auto);
+    &__group-header-bar {
+        @include fd-reset();
+        @include fd-set-margin-right(0.375rem);
+        @include fd-timeline-set-border($type: dashed);
 
-      background: transparent;
-
-      [class*="sap-icon"] {
-        line-height: 1;
-        width: $fd-timeline-node-icon-size;
-        height: $fd-timeline-node-icon-size;
-        font-size: $fd-timeline-node-icon-size;
-        color: var(--sapContent_NonInteractiveIconColor);
-      }
-    }
-  }
-
-  &__group-header-bar {
-    @include fd-reset();
-    @include fd-set-margin-right(0.375rem);
-    @include fd-timeline-set-border($type: dashed);
-
-    flex: 1;
-  }
-
-  &__connecting-line {
-    @include fd-reset();
-    @include fd-timeline-set-border();
-
-    flex: 1;
-    height: 0.0625rem;
-  }
-
-  &__posts {
-    @include fd-reset();
-
-    list-style-type: none;
-  }
-
-  &__post-container {
-    @include fd-reset();
-    @include fd-flex();
-  }
-
-  &__post {
-    @include fd-reset();
-
-    height: auto;
-    padding: 0.5rem;
-    position: relative;
-    margin-bottom: 2rem;
-    border-radius: 0.25rem;
-    border: $fd-timeline-post-border;
-    background: $fd-timeline-post-background;
-
-    @include fd-after() {
-      @include fd-reset();
-
-      content: '';
-      position: absolute;
-      width: $fd-timeline-post-arrow-size;
-      height: $fd-timeline-post-arrow-size;
-      border-top: $fd-timeline-post-border;
-      border-right: $fd-timeline-post-border;
-      background: $fd-timeline-post-background;
+        flex: 1;
     }
 
-    &--right {
-      @include fd-after() {
-        @include fd-timeline-arrow-rotate(45deg);
+    &__connecting-line {
+        @include fd-reset();
+        @include fd-timeline-set-border();
+    }
 
-        top: $fd-timeline-arrow-offset;
-        right: $fd-timeline-post-arrow-offset;
-      }
+    &__posts {
+        @include fd-reset();
 
-      @include fd-rtl() {
-        &::after {
-          @include fd-timeline-arrow-rotate(225deg);
+        list-style-type: none;
+    }
 
-          right: auto;
-          left: $fd-timeline-post-arrow-offset;
+    &__post-container {
+        @include fd-reset();
+        @include fd-flex();
+    }
+
+    &__post {
+        @include fd-reset();
+
+        height: auto;
+        padding: 0.5rem;
+        position: relative;
+        border-radius: 0.25rem;
+        border: $fd-timeline-post-border;
+        background: $fd-timeline-post-background;
+
+        @include fd-after() {
+            @include fd-reset();
+
+            content: '';
+            position: absolute;
+            width: $fd-timeline-post-arrow-size;
+            height: $fd-timeline-post-arrow-size;
+            border-top: $fd-timeline-post-border;
+            border-right: $fd-timeline-post-border;
+            background: $fd-timeline-post-background;
         }
-      }
     }
 
-    &--left {
-      @include fd-after() {
-        @include fd-timeline-arrow-rotate(225deg);
+    &__post-header-container {
+        @include fd-reset();
+        @include fd-flex-vertical-center();
 
-        top: $fd-timeline-arrow-offset;
-        left: $fd-timeline-post-arrow-offset;
-      }
-
-      @include fd-after-rtl() {
-        @include fd-timeline-arrow-rotate(45deg);
-
-        left: auto;
-        right: $fd-timeline-post-arrow-offset;
-      }
+        margin-bottom: 0.5rem;
     }
 
-    &--top {
-      @include fd-after() {
-        @include fd-timeline-arrow-rotate(315deg);
+    &__post-header {
+        @include fd-reset();
 
-        left: $fd-timeline-arrow-offset;
-        top: $fd-timeline-post-arrow-offset;
-      }
-
-      @include fd-after-rtl() {
-        left: auto;
-        right: $fd-timeline-arrow-offset;
-      }
+        &:not(:first-child) {
+            @include fd-set-margin-left(0.3125rem);
+        }
     }
 
-    &--bottom {
-      @include fd-after() {
-        @include fd-timeline-arrow-rotate(135deg);
+    &__post-header-title {
+        @include fd-reset();
 
-        left: $fd-timeline-arrow-offset;
-        bottom: $fd-timeline-post-arrow-offset;
-      }
-
-      @include fd-after-rtl() {
-        left: auto;
-        right: $fd-timeline-arrow-offset;
-      }
+        font-weight: bold;
     }
-  }
 
-  &__post-header-container {
-    @include fd-reset();
-    @include fd-flex-vertical-center();
-
-    margin-bottom: 0.5rem;
-  }
-
-  &__post-header {
-    @include fd-reset();
-
-    &:not(:first-child) {
-      @include fd-set-margin-left(0.3125rem);
+    &__post-header-text {
+        @include fd-reset();
     }
-  }
 
-  &__post-header-title {
-    @include fd-reset();
+    &__post-subheader {
+        @include fd-reset();
 
-    font-weight: bold;
-  }
-
-  &__post-header-text {
-    @include fd-reset();
-  }
-
-  &__post-subheader {
-    @include fd-reset();
-
-    margin-top: 0.125rem;
-    font-size: var(--sapFontSmallSize);
-    color: var(--sapContent_LabelColor);
-  }
-
-  &__post-content {
-    @include fd-reset();
-  }
-
-  .#{$block}__post-actions {
-    margin-top: 0.5rem;
-
-    button:not(:first-child) {
-      @include fd-set-margin-left(0.5rem);
+        margin-top: 0.125rem;
+        font-size: var(--sapFontSmallSize);
+        color: var(--sapContent_LabelColor);
     }
-  }
+
+    &__post-content {
+        @include fd-reset();
+    }
+
+    .#{$block}__post-actions {
+        margin-top: 0.5rem;
+
+        button:not(:first-child) {
+            @include fd-set-margin-left(0.5rem);
+        }
+    }
 }

@@ -35,7 +35,7 @@ export class BaseButton {
      * Default value is set to ''.
      */
     @Input()
-    glyph = '';
+    glyph: string = null;
 
     /** Whether to apply compact mode to the button. */
     @Input()
@@ -60,6 +60,10 @@ export class BaseButton {
      */
     @Input()
     fdMenu = false;
+
+    /** adding native aria-label to the component */
+    @Input()
+    ariaLabel: string = null;
 
     /**
      * Native disabled attribute of button element

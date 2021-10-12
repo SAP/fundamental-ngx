@@ -1,6 +1,6 @@
 import { PaginationPo } from '../pages/pagination.po';
 import {
-    click, doesItExist, getElementArrayLength, getText, getValue, 
+    click, doesItExist, getElementArrayLength, getText, getValue, pause,
     refreshPage, scrollIntoView, setValue,
     waitForPresent
 } from '../../driver/wdio';
@@ -37,6 +37,8 @@ describe('Pagination test suite:', function() {
             const linksLength = getElementArrayLength(basicPaginationPages);
             for (let i = 0; i < linksLength; i++) {
                 click(basicPaginationPages, i);
+                // pause for the new text to load
+                pause(250);
                 expect(getText(basicPaginationDiv)).toBe(basicPaginationTestArr[i]);
             }
         });
@@ -44,10 +46,16 @@ describe('Pagination test suite:', function() {
         it('should check selected pages by clicking previous and next link', () => {
             scrollIntoView(linkNext);
             click(standardButton);
+            // pause to give browser time to complete action
+            pause(250);
             click(linkNext);
+            // pause for the new text to load
+            pause(250);
             expect(getText(basicPaginationDiv)).toBe(basicPaginationTestArr[1]);
 
             click(linkPrevious);
+            // pause for the new text to load
+            pause(250);
             expect(getText(basicPaginationDiv)).toBe(basicPaginationTestArr[0]);
         });
     });
@@ -59,17 +67,17 @@ describe('Pagination test suite:', function() {
             const linksLength = getElementArrayLength(itemPaginationPages);
             for (let i = 0; i < linksLength; i++) {
                 click(itemPaginationPages, i);
-                expect(getText(totalPagination)).toBe(itemPaginationTestArr[i]);
+                expect(getText(totalPagination).trim()).toBe(itemPaginationTestArr[i]);
             }
         });
 
         it('should check selected pages by clicking previous and next link', () => {
             scrollIntoView(linkNext, 1);
             click(linkNext, 1);
-            expect(getText(totalPagination)).toBe(itemPaginationTestArr[1]);
+            expect(getText(totalPagination).trim()).toBe(itemPaginationTestArr[1]);
 
             click(linkPrevious, 1);
-            expect(getText(totalPagination)).toBe(itemPaginationTestArr[0]);
+            expect(getText(totalPagination).trim()).toBe(itemPaginationTestArr[0]);
         });
     });
 
@@ -80,17 +88,23 @@ describe('Pagination test suite:', function() {
             const linksLength = getElementArrayLength(selectPaginationPages);
             for (let i = 0; i < linksLength - 9; i++) {
                 click(selectPaginationPages, i);
-                expect(getText(totalPagination, 1)).toBe(selectPaginationTestArr1[i]);
+                // pause for the new text to load
+                pause(250);
+                expect(getText(totalPagination, 1).trim()).toBe(selectPaginationTestArr1[i]);
             }
         });
 
         it('should check default property for items per page by clicking previous and next link', () => {
             scrollIntoView(linkNext, 2);
             click(linkNext, 2);
-            expect(getText(totalPagination, 1)).toBe(selectPaginationTestArr1[1]);
+            // pause for the new text to load
+            pause(250);
+            expect(getText(totalPagination, 1).trim()).toBe(selectPaginationTestArr1[1]);
 
             click(linkPrevious, 2);
-            expect(getText(totalPagination, 1)).toBe(selectPaginationTestArr1[0]);
+            // pause for the new text to load
+            pause(250);
+            expect(getText(totalPagination, 1).trim()).toBe(selectPaginationTestArr1[0]);
         });
 
         it('should check default select template for items per page(4) options', () => {
@@ -101,7 +115,9 @@ describe('Pagination test suite:', function() {
                     continue;
                 }
                 click(selectPaginationPages, i);
-                expect(getText(totalPagination, 2)).toBe(selectPaginationTestArr2[i - 4]);
+                // pause for the new text to load
+                pause(250);
+                expect(getText(totalPagination, 2).trim()).toBe(selectPaginationTestArr2[i - 4]);
             }
         });
 
@@ -112,7 +128,9 @@ describe('Pagination test suite:', function() {
             const linksLength = getElementArrayLength(selectPaginationPages);
             for (let i = 4; i < linksLength - 5; i++) {
                 click(selectPaginationPages, i);
-                expect(getText(totalPagination, 2)).toBe(selectPaginationTestArr3[i - 4]);
+                // pause for the new text to load
+                pause(250);
+                expect(getText(totalPagination, 2).trim()).toBe(selectPaginationTestArr3[i - 4]);
             }
         });
 
@@ -123,17 +141,23 @@ describe('Pagination test suite:', function() {
             const linksLength = getElementArrayLength(selectPaginationPages);
             for (let i = 4; i < linksLength - 5; i++) {
                 click(selectPaginationPages, i);
-                expect(getText(totalPagination, 2)).toBe(selectPaginationTestArr4[i - 4]);
+                // pause for the new text to load
+                pause(250);
+                expect(getText(totalPagination, 2).trim()).toBe(selectPaginationTestArr4[i - 4]);
             }
         });
 
         it('should check default select template for items per page options by clicking previous and next link', () => {
             scrollIntoView(linkNext, 3);
             click(linkNext, 3);
-            expect(getText(totalPagination, 2)).toBe(selectPaginationTestArr2[1]);
+            // pause for the new text to load
+            pause(250);
+            expect(getText(totalPagination, 2).trim()).toBe(selectPaginationTestArr2[1]);
 
             click(linkPrevious, 3);
-            expect(getText(totalPagination, 2)).toBe(selectPaginationTestArr2[0]);
+            // pause for the new text to load
+            pause(250);
+            expect(getText(totalPagination, 2).trim()).toBe(selectPaginationTestArr2[0]);
         });
 
         it('should check list of buttons by clicking each option', () => {
@@ -141,17 +165,23 @@ describe('Pagination test suite:', function() {
             const linksLength = getElementArrayLength(selectPaginationPages);
             for (let i = 8; i < linksLength; i++) {
                 click(selectPaginationPages, i);
-                expect(getText(totalPagination, 4)).toBe(selectPaginationTestArr5[i - 8]);
+                // pause for the new text to load
+                pause(250);
+                expect(getText(totalPagination, 4).trim()).toBe(selectPaginationTestArr5[i - 8]);
             }
         });
 
         it('should check list of buttons by clicking by clicking previous and next link', () => {
             scrollIntoView(linkNext, 4);
             click(linkNext, 4);
-            expect(getText(totalPagination, 4)).toBe(selectPaginationTestArr5[1]);
+            // pause for the new text to load
+            pause(250);
+            expect(getText(totalPagination, 4).trim()).toBe(selectPaginationTestArr5[1]);
 
             click(linkPrevious, 4);
-            expect(getText(totalPagination, 4)).toBe(selectPaginationTestArr5[0]);
+            // pause for the new text to load
+            pause(250);
+            expect(getText(totalPagination, 4).trim()).toBe(selectPaginationTestArr5[0]);
         });
 
         it('should check list of buttons(2) by clicking each option', () => {
@@ -163,7 +193,9 @@ describe('Pagination test suite:', function() {
                     continue;
                 }
                 click(selectPaginationPages, i);
-                expect(getText(totalPagination, 4)).toBe(selectPaginationTestArr6[i - 8]);
+                // pause for the new text to load
+                pause(250);
+                expect(getText(totalPagination, 4).trim()).toBe(selectPaginationTestArr6[i - 8]);
             }
         });
 
@@ -176,14 +208,18 @@ describe('Pagination test suite:', function() {
                     continue;
                 }
                 click(selectPaginationPages, i);
-                expect(getText(totalPagination, 4)).toBe(selectPaginationTestArr7[i - 8]);
+                // pause for the new text to load
+                pause(250);
+                expect(getText(totalPagination, 4).trim()).toBe(selectPaginationTestArr7[i - 8]);
             }
         });
 
         it('should check list of buttons(100) by clicking each option', () => {
             scrollIntoView(toggledButton);
             click(toggledButton, 2);
-            expect(getText(totalPagination, 4)).toBe(selectPaginationTestText);
+            // pause for the new text to load
+            pause(250);
+            expect(getText(totalPagination, 4).trim()).toBe(selectPaginationTestText);
         });
     });
 
@@ -208,7 +244,7 @@ describe('Pagination test suite:', function() {
             const itemsLength = getElementArrayLength(playgroundPages);
             for (let i = 0; i < itemsLength; i++) {
                 setValue(playgroundInputFields, playgroundPaginationItemArr[i], 2);
-                expect(getText(totalPagination, 5)).toBe(playgroundPaginationTestText[i]);
+                expect(getText(totalPagination, 5).trim()).toBe(playgroundPaginationTestText[i]);
             }
         });
 

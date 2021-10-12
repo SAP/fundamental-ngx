@@ -1,6 +1,6 @@
-<div *ngFor="let theme of themes">
+<span *ngFor="let theme of themes" style="padding:10px">
     <button fd-button (click)="changeQueryUrl(theme.id)" [label]="theme.name"></button>
-</div>
+</span>
 
 <br><br>
 <label fd-form-label>

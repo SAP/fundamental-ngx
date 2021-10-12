@@ -394,6 +394,10 @@ export const ROUTES: Routes = [
                     )
             },
             {
+                path: 'splitter',
+                loadChildren: () => import('./component-docs/splitter/splitter-docs.module').then((m) => m.SplitterDocsModule)
+            },
+            {
                 path: 'status-indicator',
                 loadChildren: () =>
                     import('./component-docs/status-indicator/status-indicator-docs.module').then((m) => m.StatusIndicatorDocsModule)
@@ -460,6 +464,13 @@ export const ROUTES: Routes = [
             {
                 path: 'tree',
                 loadChildren: () => import('./component-docs/tree/tree-docs.module').then((m) => m.TreeDocsModule)
+            },
+            {
+                path: 'vertical-navigation',
+                loadChildren: () =>
+                    import('./component-docs/vertical-navigation/vertical-navigation-docs.module').then(
+                        (m) => m.VerticalNavigationDocsModule
+                    )
             },
             {
                 path: 'upload-collection',

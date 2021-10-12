@@ -43,6 +43,7 @@ export class PlatformFormGeneratorExampleComponent {
             name: 'name',
             message: 'Your name',
             default: 'John',
+            placeholder: 'Please provide your name',
             guiOptions: {
                 hint: 'Some contextual hint',
                 column: 1

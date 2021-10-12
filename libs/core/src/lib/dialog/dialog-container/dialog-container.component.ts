@@ -22,7 +22,8 @@ import { DialogContentType } from '../dialog-service/dialog.service';
 /** Dialog container where the dialog content is embedded. */
 @Component({
     selector: 'fd-dialog-container',
-    template: '<ng-container #contentContainer></ng-container>'
+    template: '<ng-container #contentContainer></ng-container>',
+    styleUrls: ['./dialog-container.component.scss']
 })
 export class DialogContainerComponent extends DynamicComponentContainer<DialogContentType> implements AfterViewInit, CssClassBuilder {
     /** Custom classes */

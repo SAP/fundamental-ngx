@@ -616,14 +616,18 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         return initDataSource;
     }
     /** @hidden */
-    private _toDataStream(ds: FdpComboBoxDataSource<any>): ComboBoxDataSource<any> | undefined {
-        if (isDataSource(ds)) {
-            return ds as ComboBoxDataSource<any>;
-        } else if (Array.isArray(ds)) {
+    private _toDataStream(source: FdpComboBoxDataSource<any>): ComboBoxDataSource<any> | undefined {
+        if (isDataSource(source)) {
+            return source as ComboBoxDataSource<any>;
+        }
+
+        if (Array.isArray(source)) {
             // default implementation to work on top of arrays
-            return new ArrayComboBoxDataSource<any>(ds);
-        } else if (isObservable(ds)) {
-            return new ObservableComboBoxDataSource<any>(ds);
+            return new ArrayComboBoxDataSource<any>(source);
+        }
+
+        if (isObservable(source)) {
+            return new ObservableComboBoxDataSource<any>(source);
         }
 
         return undefined;

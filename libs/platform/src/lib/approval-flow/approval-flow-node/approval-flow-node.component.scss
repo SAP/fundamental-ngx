@@ -8,8 +8,8 @@ $node-margin-bottom: 1rem;
 
 $carousel-marker-height: 1rem;
 $carousel-marker-width: .25rem;
-$carousel-marker-top: $node-height / 2 - $carousel-marker-height / 2;
-$carousel-marker-top--edit-mode: $node-height--edit-mode / 2 - $carousel-marker-height / 2;
+$carousel-marker-top: $node-height * 0.5 - $carousel-marker-height * 0.5;
+$carousel-marker-top--edit-mode: $node-height--edit-mode * 0.5 - $carousel-marker-height * 0.5;
 
 $add-button-size: 1rem;
 

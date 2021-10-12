@@ -227,13 +227,17 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
 
     /** @hidden */
     private _selectButton(buttonComponent: ButtonComponent): void {
-        buttonComponent.elementRef().nativeElement.classList.add(isSelectedClass);
+        const button = buttonComponent.elementRef().nativeElement;
+        button.classList.add(isSelectedClass);
+        button.setAttribute('aria-pressed', 'true');
         this._changeDetRef.detectChanges();
     }
 
     /** @hidden */
     private _deselectButton(buttonComponent: ButtonComponent): void {
-        buttonComponent.elementRef().nativeElement.classList.remove(isSelectedClass);
+        const button = buttonComponent.elementRef().nativeElement;
+        button.classList.remove(isSelectedClass);
+        button.setAttribute('aria-pressed', 'false');
         this._changeDetRef.detectChanges();
     }
 
