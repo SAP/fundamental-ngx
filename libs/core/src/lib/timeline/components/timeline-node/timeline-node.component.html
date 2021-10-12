@@ -1,10 +1,11 @@
 <div class="fd-timeline__node-container">
-    <div *ngIf="!glyph" class="fd-timeline__connecting-line"></div>
-    <div class="fd-timeline__node" [class.fd-timeline__node--icon]="!!glyph">
-        <fd-icon *ngIf="glyph" [glyph]="glyph"></fd-icon>
+    <div class="fd-timeline__icon-wrapper">
+        <div class="fd-timeline__node" [class.fd-timeline__node--icon]="!!glyph">
+            <fd-icon *ngIf="glyph" [glyph]="glyph"></fd-icon>
+        </div>
     </div>
-    <div class="fd-timeline__connecting-line"></div>
+    <div #lineEl class="fd-timeline__connecting-line"></div>
 </div>
-<div tabindex="0" role="timelineitem" [attr.aria-label]="ariaLabel" class="fd-timeline__post fd-timeline__post--left">
+<div tabindex="0" role="timelineitem" [attr.aria-label]="ariaLabel" class="fd-timeline__post">
     <ng-content></ng-content>
 </div>

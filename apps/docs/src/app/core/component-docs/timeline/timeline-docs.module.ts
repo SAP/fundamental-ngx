@@ -9,20 +9,32 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { TimelineModule } from '@fundamental-ngx/core/timeline';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 
+import { TimelineHorizontalAxisExampleComponent, } from './examples/timeline-horizontal-axis-example.component';
+import { TimelineHorizontalDoubleSideExampleComponent } from './examples/timeline-horizontal-double-side-example.component';
+import { TimelineVerticalDoubleSideExampleComponent } from './examples/timeline-vertical-double-side-example.component';
+
 const routes: Routes = [
-  {
-    path: '',
-    component: TimelineHeaderDocsComponent,
-    children: [
-      { path: '', component: TimelineDocsComponent },
-      { path: 'api', component: ApiComponent, data: { content: API_FILES.timeline } }
-    ]
-  }
+    {
+        path: '',
+        component: TimelineHeaderDocsComponent,
+        children: [
+            { path: '', component: TimelineDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.timeline } }
+        ]
+    }
 ];
 
 @NgModule({
-  declarations: [TimelineDocsComponent, TimelineHeaderDocsComponent, TimelineBasicExampleComponent],
-  imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TimelineModule, AvatarModule],
-  exports: [RouterModule],
+    declarations: [
+        TimelineDocsComponent,
+        TimelineHeaderDocsComponent,
+        TimelineBasicExampleComponent,
+        TimelineHorizontalAxisExampleComponent,
+        TimelineHorizontalDoubleSideExampleComponent,
+        TimelineVerticalDoubleSideExampleComponent,
+    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TimelineModule, AvatarModule],
+    exports: [RouterModule]
 })
-export class TimelineDocsModule { }
+export class TimelineDocsModule {
+}
