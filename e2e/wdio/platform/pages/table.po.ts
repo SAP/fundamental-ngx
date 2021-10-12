@@ -22,12 +22,16 @@ export class TablePo extends BaseComponentPo {
     tableP13FilterExample = 'fdp-platform-table-p13-filter-example ';
     tableP13GroupExample = 'fdp-platform-table-p13-group-example ';
     tableNavigatableRowIndicatorExample = 'fdp-platform-table-navigatable-row-indicator-example ';
+    tableNoItemsTemplateExample = 'fdp-platform-table-no-items-template-example ';
+    tableSemanticExample = 'fdp-platform-table-semantic-example ';
+    tableRowClassExample = 'fdp-platform-table-row-class-example ';
 
     button = 'button';
     buttonSearch = '.fdp-search-field__submit';
     tableRow = '.fd-dnd-item ';
     input = 'input';
-    tableCell = 'td:not(.fdp-table__cell--empty)';
+    tableCell = 'td';
+    tableCellText = '.fd-table__text';
     buttonSortedBy = '.fd-list__item.ng-star-inserted';
     barButton = 'fd-button-bar ' + this.button;
     tableCellDescription = '[headers*="description"]';
@@ -36,7 +40,7 @@ export class TablePo extends BaseComponentPo {
     buttonSortedOrder = 'li.fd-list__item';
     checkbox = '.fd-checkbox__label';
     busyIndicator = 'fd-busy-indicator .fd-busy-indicator';
-    arrowButton = '.fdp-table__cell--expand';
+    arrowButton = '.fd-table__expand';
     filterItem = '.fd-list__item--link';
     filterByColorItem = '.fd-list__item';
     tableCellStatusColor = '[headers*="statusColor"]';
@@ -44,7 +48,7 @@ export class TablePo extends BaseComponentPo {
     dialogCompactInput = 'fd-dialog-body .fd-input--compact';
     dialogItem = '.fd-list__item.ng-star-inserted';
     dialogItemText = '.fd-select-item--active  .fd-list__title';
-    dialogMoveToBottom = '[aria-label="Move to Bottom"]';
+    dialogMoveToBottom = '[title="Move to Bottom"]';
     footerButtonOk = 'fd-dialog-footer-button button';
     columnHeader = '[role="columnheader"] div';
     popoverDropdownButton = 'fd-popover-control button';
@@ -61,7 +65,7 @@ export class TablePo extends BaseComponentPo {
     fdpTable = 'fdp-table';
     optionSingle = '[value="single"]';
     optionMultiple = '[value="multiple"]';
-    tableCellFixed = 'thead .fd-table__cell--fixed';
+    tableCellFixed = '.fd-table__cell';
     playgroundSchemaInput = '.form-control.fd-input';
     toolbarText = '.fd-label.fd-toolbar__overflow-label';
     dropdownList = '.fd-select-options';

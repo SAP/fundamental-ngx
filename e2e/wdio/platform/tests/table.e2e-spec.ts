@@ -10,7 +10,7 @@ import {
     getText,
     getValue,
     isElementClickable,
-    isElementDisplayed, isEnabled,
+    isElementDisplayed, isEnabled, pause,
     refreshPage,
     scrollIntoView,
     setValue,
@@ -50,7 +50,7 @@ import {
 describe('Table component test suite', function() {
     const tablePage = new TablePo();
     const {
-        tableDefaultExample, button, input, tableRow, tableCell, tableCustomWidthExample, tableActivableExample,
+        tableDefaultExample, button, input, tableRow, tableCellText, tableCustomWidthExample, tableActivableExample,
         tableSingleRowSelectionExample, tableSortableExample, buttonSortedBy, barButton, tableCellDescription, tableCellPrice,
         tableCellName, buttonSortedOrder, tableMultipleRowSelectionExample, tableGroupableExample, tableFreezableExample,
         tableLoadingExample, busyIndicator, buttonSearch, tablePageScrollingExample, tableInitialStateExample,
@@ -59,7 +59,8 @@ describe('Table component test suite', function() {
         footerButtonOk, dialogItem, columnHeader, tableP13SortExample, tableP13FilterExample, tableP13GroupExample,
         popoverDropdownButton, buttonAdd, buttonRemove, dialogInput, expandedButton, tableCustomColumnExample, inputFields,
         playgroundExample, fdpTable, optionCondensed, optionCozy, optionCompact, dropdown, optionSingle, optionMultiple,
-        tableCellFixed, checkbox, playgroundSchemaInput, toolbarText, dropdownList, dropdownOption, dialogButton
+        tableCellFixed, checkbox, playgroundSchemaInput, toolbarText, dropdownList, dropdownOption, dialogButton, tableCell,
+        tableNoItemsTemplateExample, tableSemanticExample, tableRowClassExample
     } = tablePage;
 
     beforeAll(() => {
@@ -117,12 +118,12 @@ describe('Table component test suite', function() {
             click(tableCustomColumnExample + button, 1);
             const rowLength = getElementArrayLength(tableCustomColumnExample + tableRow);
             expect(rowLength).toEqual(1);
-            const cellLength = getElementArrayLength(tableCustomColumnExample + tableRow + tableCell);
+            const cellLength = getElementArrayLength(tableCustomColumnExample + tableRow + tableCellText);
             for (let i = 0; i < cellLength; i++) {
                 if (i === 1) {
                     continue;
                 }
-                expect(getText(tableCustomColumnExample + tableRow + tableCell, i)).toBe(tableCellArr6[i]);
+                expect(getText(tableCustomColumnExample + tableRow + tableCellText, i)).toBe(tableCellArr6[i]);
             }
         });
 
@@ -136,15 +137,7 @@ describe('Table component test suite', function() {
     describe('Check Single Row Selection', function() {
 
         it('should check table item single selection', () => {
-            scrollIntoView(tableSingleRowSelectionExample);
-            setValue(tableSingleRowSelectionExample + input, testText);
-            click(tableSingleRowSelectionExample + button, 1);
-            const rowLength = getElementArrayLength(tableSingleRowSelectionExample + tableRow);
-            expect(rowLength).toEqual(1);
-            const cellLength = getElementArrayLength(tableSingleRowSelectionExample + tableRow + tableCell);
-            for (let i = 1; i < cellLength; i++) {
-                expect(getText(tableSingleRowSelectionExample + tableRow + tableCell, i)).toBe(tableCellArr[i - 1]);
-            }
+            findElementInTable(tableSingleRowSelectionExample, tableCellArr);
         });
 
         it('should check table item single selection', () => {
@@ -254,15 +247,8 @@ describe('Table component test suite', function() {
     describe('Check Column Grouping', function() {
 
         it('should check table item single selection', () => {
-            scrollIntoView(tableGroupableExample);
-            setValue(tableGroupableExample + input, testText);
-            click(tableGroupableExample + button, 1);
-            const rowLength = getElementArrayLength(tableGroupableExample + tableRow);
-            expect(rowLength).toEqual(1);
-            const cellLength = getElementArrayLength(tableGroupableExample + tableRow + tableCell);
-            for (let i = 1; i < cellLength; i++) {
-                expect(getText(tableGroupableExample + tableRow + tableCell, i)).toBe(tableCellArr[i - 1]);
-            }
+            findElementInTable(tableGroupableExample, tableCellArr);
+
         });
 
         it('should verify checkboxes', () => {
@@ -304,9 +290,9 @@ describe('Table component test suite', function() {
             click(tableFreezableExample + button, 1);
             const rowLength = getElementArrayLength(tableFreezableExample + tableRow);
             expect(rowLength).toEqual(1);
-            const cellLength = getElementArrayLength(tableFreezableExample + tableRow + tableCell);
-            for (let i = 1; i < cellLength; i++) {
-                expect(getText(tableFreezableExample + tableRow + tableCell, i)).toBe(tableCellArr[i - 1]);
+            const cellLength = getElementArrayLength(tableFreezableExample + tableRow + tableCellText);
+            for (let i = 0; i < cellLength; i++) {
+                expect(getText(tableFreezableExample + tableRow + tableCellText, i)).toBe(tableCellArr[i]);
             }
         });
 
@@ -351,13 +337,14 @@ describe('Table component test suite', function() {
             scrollIntoView(tablePageScrollingExample);
             setValue(tablePageScrollingExample + input, testText2);
             click(tablePageScrollingExample + buttonSearch);
+            pause(500);
             expect(isElementDisplayed(busyIndicator)).toBe(true, 'busy indicator isnt displayed');
             const rowLength = getElementArrayLength(tablePageScrollingExample + tableRow);
             expect(rowLength).toEqual(1);
-            const cellLength = getElementArrayLength(tablePageScrollingExample + tableRow + tableCell);
+            const cellLength = getElementArrayLength(tablePageScrollingExample + tableRow + tableCellText);
             for (let i = 0; i < cellLength; i++) {
-                scrollIntoView(tablePageScrollingExample + tableRow + tableCell, i);
-                expect(getText(tablePageScrollingExample + tableRow + tableCell, i)).toBe(tableCellArr2[i]);
+                scrollIntoView(tablePageScrollingExample + tableRow + tableCellText, i);
+                expect(getText(tablePageScrollingExample + tableRow + tableCellText, i)).toBe(tableCellArr2[i]);
             }
         });
 
@@ -380,16 +367,16 @@ describe('Table component test suite', function() {
             click(tableInitialStateExample + buttonSearch);
             const rowLength = getElementArrayLength(tableInitialStateExample + tableRow);
             expect(rowLength).toEqual(1);
-            const cellLength = getElementArrayLength(tableInitialStateExample + tableRow + tableCell);
+            const cellLength = getElementArrayLength(tableInitialStateExample + tableRow + tableCellText);
             for (let i = 0; i < cellLength; i++) {
-                expect(getText(tableInitialStateExample + tableRow + tableCell, i)).toBe(tableCellArr3[i]);
+                expect(getText(tableInitialStateExample + tableRow + tableCellText, i)).toBe(tableCellArr3[i]);
             }
         });
 
         it('should check cell expanded', () => {
             scrollIntoView(tableInitialStateExample);
-            click(arrowButton);
-            click(arrowButton, 1);
+            click(tableInitialStateExample + arrowButton);
+            click(tableInitialStateExample + arrowButton, 1);
 
             expect(getAttributeByName(tableInitialStateExample + tableCell, 'aria-expanded'))
                 .toBe('false');
@@ -499,8 +486,8 @@ describe('Table component test suite', function() {
 
             const rowLength = getElementArrayLength(tableP13FilterExample + tableRow);
             expect(rowLength).toEqual(1);
-            expect(getText(tableP13FilterExample + tableRow + tableCell)).toBe(testText4);
-            expect(getText(tableP13FilterExample + tableRow + tableCell, 1)).toBe(testText5);
+            expect(getText(tableP13FilterExample + tableRow + tableCellText)).toBe(testText4);
+            expect(getText(tableP13FilterExample + tableRow + tableCellText, 1)).toBe(testText5);
 
         });
 
@@ -564,9 +551,9 @@ describe('Table component test suite', function() {
             click(playgroundExample + buttonSearch);
             const rowLength = getElementArrayLength(playgroundExample + tableRow);
             expect(rowLength).toEqual(1);
-            const cellLength = getElementArrayLength(playgroundExample + tableRow + tableCell);
+            const cellLength = getElementArrayLength(playgroundExample + tableRow + tableCellText);
             for (let i = 0; i < cellLength; i++) {
-                expect(getText(playgroundExample + tableRow + tableCell, i)).toBe(tableCellArr[i]);
+                expect(getText(playgroundExample + tableRow + tableCellText, i)).toBe(tableCellArr[i]);
             }
         });
 
@@ -594,7 +581,7 @@ describe('Table component test suite', function() {
             scrollIntoView(playgroundExample);
             click(playgroundExample + dropdown, 1);
             click(optionSingle);
-            expect(getElementClass(playgroundExample + tableCellFixed)).toContain('fdp-table__cell--selection');
+            expect(getElementClass(playgroundExample + tableCellFixed)).toContain('fd-table__cell--fixed');
 
             click(playgroundExample + dropdown, 1);
             click(optionMultiple);
@@ -633,7 +620,7 @@ describe('Table component test suite', function() {
 
             expect(getText(playgroundExample + toolbarText)).toBe('test (30)');
 
-            click(playgroundExample + checkbox, 5);
+            click(playgroundExample + checkbox, 6);
             expect(getText(playgroundExample + toolbarText)).toBe('test');
         });
     });
@@ -649,6 +636,31 @@ describe('Table component test suite', function() {
         click(tableDefaultExample + button);
         const nonFilterRowCount = getElementArrayLength(tableDefaultExample + tableRow);
         expect(nonFilterRowCount).toEqual(16);
+    });
+
+    describe('Check Custom component to render "No data" message', function() {
+
+        it('should check alert messages', () => {
+            checkAlertMessages(tableNoItemsTemplateExample, 1, 2);
+        });
+    });
+
+    describe('Check Semantic Highlighting', function() {
+
+        it('should check alert messages', () => {
+            checkAlertMessages(tableSemanticExample, 1, 2);
+        });
+
+        it('should check table item single selection', () => {
+            findElementInTable(tableSemanticExample, tableCellArr);
+        });
+    });
+
+    describe('Check Row custom CSS class', function() {
+
+        it('should check table item single selection', () => {
+            findElementInTable(tableRowClassExample, tableCellArr);
+        });
     });
 
     describe('Check orientation', function() {
@@ -698,9 +710,9 @@ describe('Table component test suite', function() {
         click(selector + buttonSearch);
         const rowLength = getElementArrayLength(selector + tableRow);
         expect(rowLength).toEqual(1);
-        const cellLength = getElementArrayLength(selector + tableRow + tableCell);
+        const cellLength = getElementArrayLength(selector + tableRow + tableCellText);
         for (let i = 0; i < cellLength - count; i++) {
-            expect(getText(selector + tableRow + tableCell, i)).toBe(arr[i]);
+            expect(getText(selector + tableRow + tableCellText, i)).toBe(arr[i]);
         }
     }
 
