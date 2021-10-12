@@ -3,7 +3,6 @@
     class="fd-token"
     role="option"
     [attr.aria-roledescription]="ariaRoleDescription"
-    [attr.tabindex]="disabled?'-1':'0'"
     (click)="tokenClickHandler($event)"
     [ngClass]="{
         'fd-token__disabled': disabled,
