@@ -5,7 +5,6 @@ import {
     Component,
     ContentChild,
     ViewChild,
-    ElementRef,
     EventEmitter,
     HostListener,
     Input,
@@ -17,19 +16,26 @@ import {
     ComponentRef,
     QueryList,
     ContentChildren,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    ViewContainerRef
 } from '@angular/core';
+import { Subject, merge, Subscription } from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
+
+import {
+    ContentDensityService,
+    DynamicComponentService,
+    FocusEscapeDirection,
+    KeyboardSupportService
+} from '@fundamental-ngx/core/utils';
+import { Placement } from '@fundamental-ngx/core/shared';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+
+import { ActionSheetMobileModule } from './action-sheet-mobile/action-sheet-mobile.module';
+import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-mobile.component';
 import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.component';
 import { ActionSheetControlComponent } from './action-sheet-control/action-sheet-control.component';
-import { FocusEscapeDirection, KeyboardSupportService } from '@fundamental-ngx/core/utils';
 import { ActionSheetItemComponent, ActionSheetClickEvent } from './action-sheet-item/action-sheet-item.component';
-import { startWith, takeUntil } from 'rxjs/operators';
-import { Subject, merge, Subscription } from 'rxjs';
-import { ActionSheetMobileComponent } from './action-sheet-mobile/action-sheet-mobile.component';
-import { Placement } from '@fundamental-ngx/core/shared';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 @Component({
     selector: 'fd-action-sheet',
@@ -122,9 +128,9 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     private _compact: boolean;
 
     constructor(
-        private _elementRef: ElementRef,
-        private _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>,
-        private _changeDetectionRef: ChangeDetectorRef,
+        private readonly _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>,
+        private readonly _changeDetectionRef: ChangeDetectorRef,
+        private readonly _viewContainerRef: ViewContainerRef,
         @Optional() private _contentDensityService: ContentDensityService,
         @Optional() private _dynamicComponentService: DynamicComponentService
     ) {}
@@ -142,6 +148,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         if (this.mobile) {
             this._setUpMobileMode();
         }
+
         if (this._compact === undefined && this._contentDensityService) {
             this._subscriptions.add(
                 this._contentDensityService._contentDensityListener.subscribe((density) => {
@@ -184,14 +191,17 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden */
     isOpenChangeHandle(isOpen: boolean): void {
         this.isOpen = isOpen;
+
         if (this.mobile && this.actionSheetMobileDynamic) {
             this.actionSheetMobileDynamic.instance.toggleOpenState(this.isOpen);
         }
+
         this.isOpenChange.emit(isOpen);
 
         if (isOpen && !this.mobile) {
             this._setItemActive(0);
         }
+
         this._changeDetectionRef.detectChanges();
     }
 
@@ -233,7 +243,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         );
     }
 
-    /** Set fake focus on element with passed index */
+    /** @hidden Set fake focus on element with passed index */
     private _setItemActive(index: number): void {
         if (this._keyboardSupportService.keyManager) {
             this._keyboardSupportService.keyManager.setActiveItem(index);
@@ -248,11 +258,12 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     }
 
     /** @hidden */
-    private _setUpMobileMode(): void {
-        this.actionSheetMobileDynamic = this._dynamicComponentService.createDynamicComponent(
+    private async _setUpMobileMode(): Promise<void> {
+        this.actionSheetMobileDynamic = await this._dynamicComponentService.createDynamicModule(
             { actionSheetBodyTemplate: this.actionSheetBodyTemplate },
+            ActionSheetMobileModule,
             ActionSheetMobileComponent,
-            { container: this._elementRef.nativeElement }
+            this._viewContainerRef
         );
     }
 }

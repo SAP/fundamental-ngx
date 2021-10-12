@@ -22,12 +22,10 @@ import {
     PlatformMultiInputModule,
     PlatformFileUploaderModule,
     PlatformAutoCompleteModule,
-    PlatformComboboxMobileModule,
     PlatformComboboxModule,
     PlatformSelectModule,
     PlatformDatetimePickerModule,
     PlatformTimePickerModule,
-    PlatformMultiInputMobileModule,
     PlatformDatePickerModule,
     PlatformFormGeneratorModule
 } from '@fundamental-ngx/platform/form';
@@ -91,12 +89,10 @@ import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-
         PlatformMultiInputModule,
         PlatformFileUploaderModule,
         PlatformAutoCompleteModule,
-        PlatformComboboxMobileModule,
         PlatformComboboxModule,
         PlatformSelectModule,
         PlatformDatetimePickerModule,
         PlatformTimePickerModule,
-        PlatformMultiInputMobileModule,
         PlatformDatePickerModule,
         PlatformFormGeneratorModule
     ],

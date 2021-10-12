@@ -13,6 +13,7 @@ import {
     SkipSelf,
     TemplateRef,
     ViewChild,
+    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
@@ -34,6 +35,7 @@ import {
 import { BaseCombobox, ComboboxSelectionChangeEvent } from '../commons/base-combobox';
 import { ComboboxConfig } from '../combobox.config';
 import { ComboboxMobileComponent } from '../combobox-mobile/combobox/combobox-mobile.component';
+import { PlatformComboboxMobileModule } from '../combobox-mobile/combobox-mobile.module';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
 
 @Component({
@@ -74,6 +76,8 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         @Optional() @Self() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
         readonly _dynamicComponentService: DynamicComponentService,
+        private readonly _viewContainerRef: ViewContainerRef,
+        private readonly _injector: Injector,
         @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
         readonly _comboboxConfig: ComboboxConfig,
         @Optional() private _rtlService: RtlService,
@@ -224,21 +228,21 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
     }
 
     /** @hidden */
-    private _setUpMobileMode(): void {
-        this._dynamicComponentService.createDynamicComponent(
+    private async _setUpMobileMode(): Promise<void> {
+        const injector = Injector.create({
+            providers: [{ provide: COMBOBOX_COMPONENT, useValue: this }],
+            parent: this._injector
+        });
+
+        this._dynamicComponentService.createDynamicModule(
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
+            PlatformComboboxMobileModule,
             ComboboxMobileComponent,
-            { container: this.elementRef.nativeElement },
-            {
-                injector: Injector.create({
-                    providers: [
-                        { provide: COMBOBOX_COMPONENT, useValue: this },
-                        { provide: RtlService, useValue: this._rtlService }
-                    ]
-                })
-            }
+            this._viewContainerRef,
+            injector
         );
     }
+
     /** @hidden */
     private _getSelectedOptionItem(text: string): OptionItem | undefined {
         if (!this.isGroup) {
