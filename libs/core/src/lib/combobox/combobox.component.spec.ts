@@ -77,10 +77,11 @@ describe('ComboboxComponent', () => {
     });
 
     it('should registerOnChange and registerOnTouched', () => {
-        component.registerOnChange('function');
-        component.registerOnTouched('function');
-        expect(component.onChange).toBe('function');
-        expect(component.onTouched).toBe('function');
+        const fn = () => {};
+        component.registerOnChange(fn);
+        component.registerOnTouched(fn);
+        expect(component.onChange).toBe(fn);
+        expect(component.onTouched).toBe(fn);
     });
 
     it('should handle input entry on dropdown mode', () => {
