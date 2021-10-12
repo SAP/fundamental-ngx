@@ -85,22 +85,22 @@ describe('FormGeneratorService', () => {
     });
 
     it('should create empty form', async () => {
-        const form = await service.generateForm([]);
+        const form = await service.generateForm('dummyForm', []);
         expect(Object.keys(form.controls).length).toBe(0);
     });
 
     it('should create form with controls', async () => {
-        const form = await service.generateForm(dummyFormItems);
+        const form = await service.generateForm('dummyForm', dummyFormItems);
         expect(form.controls.something).toBeTruthy();
     });
 
     it('should skip unknown form item type', async () => {
-        const form = await service.generateForm(brokenFormItems);
+        const form = await service.generateForm('dummyForm', brokenFormItems);
         expect(form.controls['shouldNotBeInForm']).toBeUndefined();
     });
 
     it('should return transformed form value', async () => {
-        const form = await service.generateForm(dummyFormItems);
+        const form = await service.generateForm('dummyForm', dummyFormItems);
         form.controls.something.setValue('test');
         const formValue = await service.getFormValue(form);
         expect(formValue.something).toEqual('test!!!');
@@ -117,13 +117,13 @@ describe('FormGeneratorService', () => {
     });
 
     it('should check hide second field', async () => {
-        const form = await service.generateForm(dummyFormItemsWithWhenCondition);
+        const form = await service.generateForm('dummyForm', dummyFormItemsWithWhenCondition);
         const visibleItems = await service.checkVisibleFormItems(form);
         expect(visibleItems.shouldBeHidden).toBeTruthy();
     });
 
     it('should check show second field', async () => {
-        const form = await service.generateForm(dummyFormItemsWithWhenCondition);
+        const form = await service.generateForm('dummyForm', dummyFormItemsWithWhenCondition);
         form.controls.shouldBeVisible.setValue(false);
         const visibleItems = await service.checkVisibleFormItems(form);
         expect(visibleItems.shouldBeHidden).toBeFalsy();
