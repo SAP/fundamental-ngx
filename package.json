@@ -30,7 +30,7 @@
     "e2e:cron:wdio:saucelabs:platformB": "TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio-cron.conf.js --suite platformB",
     "e2e:wdio:local": "TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio-local.conf.js",
     "e2e:wdio:a11y": "TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio-a11y.conf.js",
-    "e2e:ci": "ng serve --no-watch --aot wait-on https://localhost:4200 && npm run e2e:wdio",
+    "e2e:ci": "ng serve --no-watch --aot & wait-on https://localhost:4200 && npm run e2e:wdio",
     "e2e:platform:ci": "ng serve --no-watch --aot --configuration production & wait-on https://localhost:4200 && npm run e2e:wdio:platform",
     "e2e:core:ci": "ng serve --no-watch --aot --configuration production & wait-on https://localhost:4200 && npm run e2e:wdio:core",
     "e2e:cron:platformA:ci": "ng serve --disable-host-check --ssl --no-watch --aot --configuration production & wait-on https://localhost:4200 && npm run e2e:cron:wdio:saucelabs:platformA",
