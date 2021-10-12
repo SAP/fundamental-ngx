@@ -19,6 +19,8 @@ import * as platformTableDefaultSrc from '!raw-loader!./platform-table-examples/
 import * as platformTableDefaultTsSrc from '!raw-loader!./platform-table-examples/platform-table-default-example.component.ts';
 import * as platformTableCustomColumnSrc from '!raw-loader!./platform-table-examples/platform-table-custom-column-example.component.html';
 import * as platformTableCustomColumnTsSrc from '!raw-loader!./platform-table-examples/platform-table-custom-column-example.component.ts';
+import * as platformTableCustomWidthSrc from '!raw-loader!./platform-table-examples/platform-table-custom-width-example.component.html';
+import * as platformTableCustomWidthTsSrc from '!raw-loader!./platform-table-examples/platform-table-custom-width-example.component.ts';
 import * as platformTableSingleRowSelectionSrc from '!raw-loader!./platform-table-examples/platform-table-single-row-selection-example.component.html';
 import * as platformTableSingleRowSelectionTsSrc from '!raw-loader!./platform-table-examples/platform-table-single-row-selection-example.component.ts';
 import * as platformTableMultipleRowSelectionSrc from '!raw-loader!./platform-table-examples/platform-table-multiple-row-selection-example.component.html';
@@ -199,6 +201,22 @@ export class PlatformTableDocsComponent {
             language: 'typescript',
             code: platformTableCustomColumnTsSrc,
             fileName: 'platform-table-custom-column-example',
+            component: 'PlatformTableCustomColumnExampleComponent',
+            name: 'platform-table-example.component.ts'
+        }
+    ];
+
+    customWidthFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableCustomWidthSrc,
+            fileName: 'platform-table-custom-width-example',
+            name: 'platform-table-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: platformTableCustomWidthTsSrc,
+            fileName: 'platform-table-custom-width-example',
             component: 'PlatformTableCustomColumnExampleComponent',
             name: 'platform-table-example.component.ts'
         }
