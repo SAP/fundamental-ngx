@@ -152,10 +152,10 @@ jobs:
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ env.FIREBASE_SERVICE_ACCOUNT_TOKEN }}'
-          projectId: valorkin-fundamental-ngx
-          target: valorkin-fundamental-ngx
+          projectId: fundamental-ngx-gh
+          target: fundamental-ngx-gh
           channelId: ${{ env.FIREBASE_CHANNEL }}
-          expires: 7d
+          expires: 1d
 
   e2e_smoke:
     runs-on: ubuntu-latest
@@ -167,7 +167,6 @@ jobs:
       # leaving the Dashboard hanging ...
       # https://github.com/cypress-io/github-action/issues/48
       fail-fast: false
-      max-parallel: 6
       matrix:
         suite: [ "suite platformA", "suite platformB", "spec core" ]
     steps:
@@ -177,7 +176,7 @@ jobs:
           path: ${{ env.CACHE_NODE_MODULES_PATH }}
           key: node_modules-${{ hashFiles('**/package-lock.json') }}
 
-      - name: smoke e2e on firebase
+      - name: smoke e2e on saucelabs with firebase deployment
         env:
           CAP_SLUG: ${{ matrix.browser }}
         if: ${{ needs.firebase_preview.outputs.output_url }}
