@@ -10,12 +10,14 @@ describe('ToolbarComponent', () => {
     let component: ToolbarTestComponent;
     let fixture: ComponentFixture<ToolbarTestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ToolbarTestComponent],
-            imports: [ToolbarModule, ButtonModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [ToolbarTestComponent],
+                imports: [ToolbarModule, ButtonModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(ToolbarTestComponent);
@@ -43,12 +45,14 @@ describe('ToolbarComponent - Prioritization', () => {
     let component: ToolbarOverflowPriorityTestComponent;
     let fixture: ComponentFixture<ToolbarOverflowPriorityTestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ToolbarModule, ButtonModule],
-            declarations: [ToolbarOverflowPriorityTestComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [ToolbarModule, ButtonModule],
+                declarations: [ToolbarOverflowPriorityTestComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(ToolbarOverflowPriorityTestComponent);
@@ -71,9 +75,15 @@ describe('ToolbarComponent - Prioritization', () => {
         expect(toolbar['_normalElements'].length).toBeGreaterThan(0);
         expect(toolbar['_disappearElements'].length).toBeGreaterThan(0);
 
-        expect(toolbar['_overflowElements'].map(el => el.elementRef.nativeElement.textContent)).toEqual(overflowElements);
-        expect(toolbar['_normalElements'].map(el => el.elementRef.nativeElement.textContent)).toEqual(normalElements);
-        expect(toolbar['_disappearElements'].map(el => el.elementRef.nativeElement.textContent)).toEqual(disappearElements);
+        expect(toolbar['_overflowElements'].map((el) => el.elementRef.nativeElement.textContent?.trim())).toEqual(
+            overflowElements
+        );
+        expect(toolbar['_normalElements'].map((el) => el.elementRef.nativeElement.textContent?.trim())).toEqual(
+            normalElements
+        );
+        expect(toolbar['_disappearElements'].map((el) => el.elementRef.nativeElement.textContent?.trim())).toEqual(
+            disappearElements
+        );
     });
 });
 
@@ -82,12 +92,14 @@ describe('ToolbarComponent - Prioritization and Grouping', () => {
     let component: ToolbarOverflowGroupingTestComponent;
     let fixture: ComponentFixture<ToolbarOverflowGroupingTestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ToolbarModule, ButtonModule],
-            declarations: [ToolbarOverflowGroupingTestComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [ToolbarModule, ButtonModule],
+                declarations: [ToolbarOverflowGroupingTestComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(ToolbarOverflowGroupingTestComponent);
@@ -110,9 +122,15 @@ describe('ToolbarComponent - Prioritization and Grouping', () => {
         expect(toolbar['_normalElements'].length).toBeGreaterThan(0);
         expect(toolbar['_disappearElements'].length).toBeGreaterThan(0);
 
-        expect(toolbar['_overflowElements'].map(el => el.elementRef.nativeElement.textContent)).toEqual(overflowElements);
-        expect(toolbar['_normalElements'].map(el => el.elementRef.nativeElement.textContent)).toEqual(normalElements);
-        expect(toolbar['_disappearElements'].map(el => el.elementRef.nativeElement.textContent)).toEqual(disappearElements);
+        expect(toolbar['_overflowElements'].map((el) => el.elementRef.nativeElement.textContent?.trim())).toEqual(
+            overflowElements
+        );
+        expect(toolbar['_normalElements'].map((el) => el.elementRef.nativeElement.textContent?.trim())).toEqual(
+            normalElements
+        );
+        expect(toolbar['_disappearElements'].map((el) => el.elementRef.nativeElement.textContent?.trim())).toEqual(
+            disappearElements
+        );
     });
 });
 
@@ -193,11 +211,21 @@ class ToolbarOverflowPriorityTestComponent {
                 <button fd-toolbar-item fd-button [compact]="true">Button</button>
                 <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="always">Always</button>
                 <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="never">Never</button>
-                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="low" fdOverflowGroup="1">Gr 1 / Low</button>
-                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="low" fdOverflowGroup="2">Gr 2 / Low</button>
-                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="disappear" fdOverflowGroup="2">Gr 2 / Disappear</button>
-                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="low" fdOverflowGroup="2" >Gr 2 / Low</button>
-                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="high" fdOverflowGroup="1">Gr 1 / High</button>
+                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="low" fdOverflowGroup="1">
+                    Gr 1 / Low
+                </button>
+                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="low" fdOverflowGroup="2">
+                    Gr 2 / Low
+                </button>
+                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="disappear" fdOverflowGroup="2">
+                    Gr 2 / Disappear
+                </button>
+                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="low" fdOverflowGroup="2">
+                    Gr 2 / Low
+                </button>
+                <button fd-toolbar-item fd-button [compact]="true" fdOverflowPriority="high" fdOverflowGroup="1">
+                    Gr 1 / High
+                </button>
             </fd-toolbar>
         </div>
     `
