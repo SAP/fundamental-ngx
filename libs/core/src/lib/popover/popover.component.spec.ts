@@ -57,7 +57,7 @@ describe('PopoverComponent', () => {
     it('should call _popoverService.refreshConfiguration from ngOnChanges', () => {
         spyOn(popoverServiceStub, 'refreshConfiguration');
 
-        component.ngOnChanges({});
+        component.ngOnChanges();
 
         expect(popoverServiceStub.refreshConfiguration).toHaveBeenCalled();
     });
