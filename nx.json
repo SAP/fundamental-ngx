@@ -831,41 +831,62 @@
                 "platform-link"
             ]
         },
-        "experimental": {
+        "fn": {
             "tags": [],
-            "implicitDependencies": ["core"]
+            "implicitDependencies": [
+                "core-utils",
+                "core-shared",
+                "core-button",
+                "core-icon",
+                "core-inline-help",
+                "core-popover",
+                "fn-tabs",
+                "fn-tag",
+                "fn-button",
+                "fn-checkbox",
+                "fn-form",
+                "fn-radio",
+                "fn-checkbox",
+                "fn-switch",
+                "fn-search",
+                "fn-slider"
+            ]
         },
-        "experimental-tabs": {
+        "fn-tabs": {
             "tags": ["fn"],
-            "implicitDependencies": ["core"]
+            "implicitDependencies": ["core-utils", "core-shared"]
         },
-        "experimental-tag": {
+        "fn-tag": {
             "tags": ["fn"],
-            "implicitDependencies": ["core"]
+            "implicitDependencies": ["core-utils", "core-shared"]
         },
-        "experimental-button": {
+        "fn-button": {
             "tags": ["fn"],
-            "implicitDependencies": ["core"]
+            "implicitDependencies": ["core-utils", "core-shared", "core-button"]
         },
-        "experimental-checkbox": {
+        "fn-checkbox": {
             "tags": ["fn"],
-            "implicitDependencies": ["core"]
+            "implicitDependencies": ["core-utils", "core-shared"]
         },
-        "experimental-form": {
-          "tabs": ["fn"],
-          "implicitDependencies": ["core"]
-        },
-        "experimental-switch": {
+        "fn-form": {
             "tags": ["fn"],
-            "implicitDependencies": ["core"]
+            "implicitDependencies": ["core-utils", "core-shared", "core-button", "core-icon", "core-inline-help"]
         },
-        "experimental-search": {
+        "fn-radio": {
             "tags": ["fn"],
-            "implicitDependencies": ["core"]
+            "implicitDependencies": ["core-utils", "core-shared"]
         },
-        "experimental-slider": {
+        "fn-switch": {
             "tags": ["fn"],
-            "implicitDependencies": ["core"]
+            "implicitDependencies": ["core-utils", "core-shared"]
+        },
+        "fn-search": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared"]
+        },
+        "fn-slider": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared", "core-popover"]
         }
     }
 }
