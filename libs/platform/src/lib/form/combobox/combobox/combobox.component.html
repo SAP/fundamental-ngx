@@ -78,7 +78,7 @@
                 [attr.aria-readonly]="readonly"
             />
         </fd-input-group>
-        <fd-form-message *ngIf="mobile && isOpen ? null : !!stateMessage" [type]="state" [innerHtml]="stateMessage"></fd-form-message>
+        <fd-form-message *ngIf="!(mobile && isOpen)" [type]="state" [innerHtml]="stateMessage"></fd-form-message>
     </fd-form-input-message-group>
 </ng-template>
 
@@ -96,7 +96,7 @@
         [style.minWidth]="!mobile && minWidth + 'px'"
         [style.maxWidth]="autoResize && maxWidth + 'px'"
     >
-        <fd-form-message *ngIf="!!stateMessage" [type]="state" [innerHtml]="stateMessage"></fd-form-message>
+        <fd-form-message *ngIf="!!state" [type]="state" [innerHtml]="stateMessage"></fd-form-message>
         <ng-content></ng-content>
         <ng-container *ngIf="isGroup">
             <ng-container *ngFor="let group of _suggestions">

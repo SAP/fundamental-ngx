@@ -106,10 +106,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     @Input()
     width: string;
 
-    /** Holds the message with respect to state */
-    @Input()
-    stateMessage: string;
-
     /** Whether the select component is readonly. */
     @Input()
     readonly = false;

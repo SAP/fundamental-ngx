@@ -61,7 +61,7 @@ export abstract class BaseInput extends BaseComponent
         this._state = state || 'default';
     }
 
-    /** State message */
+    /** Holds the message with respect to state */
     @Input()
     stateMessage: string | SafeHtml;
 

@@ -55,11 +55,11 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
 
     /** @hidden */
     @ViewChild('controlTemplate')
-    controlTemplate: TemplateRef<HTMLElement>;
+    controlTemplate: TemplateRef<any>;
 
     /** @hidden */
     @ViewChild('listTemplate')
-    listTemplate: TemplateRef<HTMLElement>;
+    listTemplate: TemplateRef<any>;
 
     /** @hidden */
     _selectedElement?: OptionItem;
