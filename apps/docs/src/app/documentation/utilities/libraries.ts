@@ -1,1 +1,1 @@
-export type Libraries = 'core' | 'platform' | 'moment-adapter' | 'experimental';
+export type Libraries = 'core' | 'platform' | 'moment-adapter' | 'fn';

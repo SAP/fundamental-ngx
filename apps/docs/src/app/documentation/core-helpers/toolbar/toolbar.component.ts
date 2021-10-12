@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Libraries } from '../../utilities/libraries';
 
 import { SafeResourceUrl } from '@angular/platform-browser';
@@ -55,7 +55,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         {
             name: 'Experimental Docs',
             callback: () => {
-                this._routerService.navigate(['experimental/home']);
+                this._routerService.navigate(['fn/home']);
             }
         }
     ];
@@ -70,9 +70,9 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         private _themesService: ThemesService,
         private _docsThemeService: DocsThemeService,
         private _contentDensityService: ContentDensityService,
-        @Inject('CURRENT_LIB') private _currentLib: Libraries,
+        private _route: ActivatedRoute
     ) {
-        this.library = _routerService.routerState.snapshot.url.includes('core') ? 'Core' : 'Platform';
+        this.library = _route.snapshot.data.library || 'Core';
 
         this._docsThemeService.onThemeChange.pipe(
             takeUntil(this._onDestroy$)
