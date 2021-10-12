@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.13 (2021-10-12)
+
+
+### Bug Fixes
+
+* **platform:** switch emits 3 times when changed manually ([#6828](https://github.com/SAP/fundamental-ngx/issues/6828)) ([#6833](https://github.com/SAP/fundamental-ngx/issues/6833)) ([99b8007](https://github.com/SAP/fundamental-ngx/commit/99b800732e4741669751e3bbcff53f3b617410eb))
+
 ## 0.33.0-rc.12 (2021-10-12)
 
 
