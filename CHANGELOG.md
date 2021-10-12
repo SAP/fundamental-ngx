@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.9 (2021-10-12)
+
+
+### Features
+
+* **core:** added main functionality for timeline ([#6778](https://github.com/SAP/fundamental-ngx/issues/6778)) ([860fce1](https://github.com/SAP/fundamental-ngx/commit/860fce11418c531d691bf6ce85ae4105d9f521fe))
+
 ## 0.33.0-rc.8 (2021-10-12)
 
 
