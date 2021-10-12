@@ -13,7 +13,7 @@ import { RadioButtonComponent } from './radio.component';
             #radio1
             id="radio1"
             name="radio"
-            stateType="success"
+            state="success"
             [value]="1"
             [forceRender]="true"
             [(ngModel)]="selectedValue"
@@ -22,7 +22,7 @@ import { RadioButtonComponent } from './radio.component';
             #radio2
             id="radio2"
             name="radio"
-            stateType="error"
+            state="error"
             [value]="2"
             [contentDensity]="'compact'"
             [forceRender]="true"

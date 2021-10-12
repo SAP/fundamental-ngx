@@ -96,8 +96,8 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
 
     /** @hidden */
     get _controlStateClass(): string {
-        const status = this.status;
-        return status ? `is-${status}` : null;
+        const state = this.state;
+        return state ? `is-${state}` : null;
     }
 
     /** @hidden */

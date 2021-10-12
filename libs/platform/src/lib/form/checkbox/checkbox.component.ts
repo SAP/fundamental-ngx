@@ -8,6 +8,7 @@ import {
     forwardRef,
     Host,
     Input,
+    isDevMode,
     NgZone,
     Optional,
     Output,
@@ -19,7 +20,7 @@ import {
 import { NgControl, NgForm } from '@angular/forms';
 
 import { CheckboxComponent as CoreCheckboxComponent } from '@fundamental-ngx/core/checkbox';
-import { BaseInput, FormField, FormFieldControl, Status } from '@fundamental-ngx/platform/shared';
+import { BaseInput, FormField, FormFieldControl, ControlState } from '@fundamental-ngx/platform/shared';
 
 /** Change event object emitted by Platform Checkbox. */
 export class PlatformCheckboxChange {
@@ -103,17 +104,22 @@ export class CheckboxComponent extends BaseInput implements AfterViewInit {
         }
     }
 
-    /** set state of individual checkbox.Used by CBG to set checkbox states */
+    /**
+     * @deprecated
+     * set state of individual checkbox. Used by CBG to set checkbox states */
     @Input()
-    get stateType(): Status {
-        if (this._state) {
-            return this._state;
+    get stateType(): ControlState {
+        if (isDevMode()) {
+            console.warn('"stateType" is deprecated. Use "state" instead');
         }
-        return this.status; // return parent form field status.
+        return super.state;
     }
 
-    set stateType(state: Status) {
-        this._state = state;
+    set stateType(state: ControlState) {
+        if (isDevMode()) {
+            console.warn('"stateType" is deprecated. Use "state" instead');
+        }
+        super.state = state;
     }
 
     /** Emitting checked event for non-form checkbox  */

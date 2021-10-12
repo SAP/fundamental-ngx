@@ -36,7 +36,7 @@ import { PlatformTextAreaModule } from './text-area.module';
                         [contentDensity]="'compact'"
                         [maxLength]="10"
                         [cols]="10"
-                        [stateType]="'error'"
+                        [state]="'error'"
                         [showExceededText]="true"
                         [height]="'80px'"
                         [wrapType]="'hard'"

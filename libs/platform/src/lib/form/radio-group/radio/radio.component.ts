@@ -6,6 +6,7 @@ import {
     EventEmitter,
     Host,
     Input,
+    isDevMode,
     Optional,
     Output,
     Self,
@@ -17,7 +18,7 @@ import { NgControl, NgForm } from '@angular/forms';
 import { FocusableOption } from '@angular/cdk/a11y';
 
 import { RadioButtonComponent as CoreRadioButtonComponent } from '@fundamental-ngx/core/radio';
-import { BaseInput, FormField, FormFieldControl, Status } from '@fundamental-ngx/platform/shared';
+import { BaseInput, ControlState, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 
 let uniqueId = 0;
 
@@ -48,9 +49,23 @@ export class RadioButtonComponent extends BaseInput implements AfterViewInit, Fo
         }
     }
 
-    /** set state of individual radio.Used by RBG to set radio states */
+    /**
+     * @deprecated
+     * set state of individual radio.Used by RBG to set radio states
+     */
     @Input()
-    stateType: Status;
+    get stateType(): ControlState {
+        if (isDevMode()) {
+            console.warn('"stateType" is deprecated. Use "state" instead');
+        }
+        return super.state;
+    }
+    set stateType(state: ControlState) {
+        if (isDevMode()) {
+            console.warn('"stateType" is deprecated. Use "state" instead');
+        }
+        super.state = state;
+    }
 
     /** @hidden
      * used for radio button creation if list value present

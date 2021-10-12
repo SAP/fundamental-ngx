@@ -16,7 +16,7 @@
                             name: name,
                             value: radio.value,
                             contentDensity: contentDensity,
-                            stateType: status,
+                            state: state,
                             disabled: disabled || radio.disabled,
                             ariaLabel: radio.ariaLabel,
                             ariaLabelledBy: radio.ariaLabelledBy,
@@ -40,7 +40,7 @@
                 [name]="name"
                 [value]="'None'"
                 [contentDensity]="contentDensity"
-                [stateType]="status"
+                [state]="state"
                 [disabled]="disabled"
                 [forceRender]="true"
             >
@@ -54,7 +54,7 @@
                 [name]="name"
                 [value]="getLookupValue(item)"
                 [contentDensity]="contentDensity"
-                [stateType]="status"
+                [state]="state"
                 [disabled]="getListItemDisabledValue(item)"
                 [forceRender]="true"
             >

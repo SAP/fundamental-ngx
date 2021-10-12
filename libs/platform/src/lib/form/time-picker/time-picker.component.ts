@@ -18,7 +18,7 @@ import { NgControl, NgForm } from '@angular/forms';
 
 import { TimePickerComponent } from '@fundamental-ngx/core/time-picker';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { BaseInput, FormField, FormFieldControl, Status } from '@fundamental-ngx/platform/shared';
+import { BaseInput, FormField, FormFieldControl, ControlState } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-time-picker',
@@ -105,19 +105,16 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
     placement: Placement = 'bottom-start';
 
     @Input()
-    set state(state: Status) {
-        this._state = state ? state : 'default';
+    set state(state: ControlState) {
+        super.state = state;
     }
 
-    get state(): Status {
+    get state(): ControlState {
         if (this.timePickerComponent && this.timePickerComponent._isInvalidTimeInput) {
             // if any other error from core timePicker
             return 'error';
         }
-        if (this.status) {
-            return this.status;
-        }
-        return this._state;
+        return super.state;
     }
 
     /**
