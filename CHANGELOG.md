@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.10 (2021-10-12)
+
+
+### Bug Fixes
+
+* **platform:** table, add missing doc ([#6707](https://github.com/SAP/fundamental-ngx/issues/6707)) ([#6710](https://github.com/SAP/fundamental-ngx/issues/6710)) ([b0768be](https://github.com/SAP/fundamental-ngx/commit/b0768bed8c7ad5afa5c2dc64f6d90942d2f5b55b))
+
 ## 0.33.0-rc.9 (2021-10-12)
 
 
