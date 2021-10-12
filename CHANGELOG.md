@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.8 (2021-10-12)
+
+
+### Bug Fixes
+
+* **platform:** update API signature per spec ([#6864](https://github.com/SAP/fundamental-ngx/issues/6864)) ([265f575](https://github.com/SAP/fundamental-ngx/commit/265f5753c6386c026fd27fb9d1a85254b18f361c))
+
 ## 0.33.0-rc.7 (2021-10-11)
 
 
