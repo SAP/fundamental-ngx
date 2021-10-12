@@ -186,6 +186,19 @@ jobs:
           key: node_modules-${{ hashFiles('**/package-lock.json') }}
       - run: npx nx lint ${{ matrix.lib }} --runner cloud
 
+  # check formatting
+  check-format:
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ${{ env.CACHE_NODE_MODULES_PATH }}
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
+      - run: git fetch origin main
+      - run: npm run format:check -- --base=origin/main --head=HEAD
+
   # firebase deploy preview
   firebase_preview:
     runs-on: ubuntu-latest
