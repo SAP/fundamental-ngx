@@ -609,7 +609,7 @@ describe('Table component test suite', function() {
 
         it('should check busy indicator appearance', () => {
             scrollIntoView(playgroundExample);
-            click(playgroundExample + checkbox, 4);
+            click(playgroundExample + checkbox, 5);
             expect(isElementDisplayed(playgroundExample + busyIndicator))
                 .toBe(true, 'busy indicator not displayed');
         });
@@ -620,7 +620,7 @@ describe('Table component test suite', function() {
 
             expect(getText(playgroundExample + toolbarText)).toBe('test (30)');
 
-            click(playgroundExample + checkbox, 6);
+            click(playgroundExample + checkbox, 7);
             expect(getText(playgroundExample + toolbarText)).toBe('test');
         });
     });
