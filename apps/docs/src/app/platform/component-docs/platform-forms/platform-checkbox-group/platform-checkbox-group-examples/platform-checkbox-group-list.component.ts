@@ -10,6 +10,7 @@ export class PlatformCheckboxGroupListComponent {
     dishes: string[] = ['Italian', 'Chinese', 'Indian', 'Japanese'];
     sports: string[] = ['cycling', 'running', 'visit gym', 'swimming'];
     phonesList: string[] = ['Samsung', 'Apple', 'OnePlus', 'Redmi'];
+    frameworks: string[] = ['Angular', 'React', 'Vue'];
 
     // data passing to form
     selectedPhones = { phones: ['Samsung', 'OnePlus'] };
@@ -19,6 +20,7 @@ export class PlatformCheckboxGroupListComponent {
     form3 = new FormGroup({
         sports: new FormControl(['cycling', 'running'])
     });
+    form4 = new FormGroup({}, { updateOn: 'submit' });
 
     // template driven
     countrySeason = '';
