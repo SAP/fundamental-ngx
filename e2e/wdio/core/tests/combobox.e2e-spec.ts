@@ -121,13 +121,13 @@ describe('Combobox component test suit', function() {
             scrollIntoView(allInputFields, 9);
             click(allInputFields, 9);
             click(dropdownOption);
-            click(mobileButton, 1);
+            click(mobileButton, 2);
             expect(getValue(allInputFields, 9)).toBe(appleTestText);
 
             click(allInputFields, 9);
-            setValue(allInputFields, 'Ba', 9);
+            setValue(allInputFields, 'Ba', 10);
             click(dropdownOption);
-            click(mobileButton, 1);
+            click(mobileButton, 2);
             expect(getValue(allInputFields, 9)).toBe(bananaTestText);
         });
 
