@@ -11,9 +11,8 @@ import { Component } from '@angular/core';
             >
             </fn-checkbox>
         </div>
-        
-        Value: {{ checkboxValue1 }}
-        <br><br>
+        <p><i>Value: {{ checkboxValue1 }}</i></p>
+
         <div>
             <fn-checkbox
                 label="Banana is the best fruit"
@@ -22,7 +21,7 @@ import { Component } from '@angular/core';
             >
             </fn-checkbox>
         </div>
-        Value: {{ checkboxValue2 }}
+        <p><i>Value: {{ checkboxValue2 }}</i></p>
     `
 })
 export class CheckboxCustomValuesExampleComponent {

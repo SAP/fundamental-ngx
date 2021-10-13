@@ -83,6 +83,13 @@ export class ExperimentalRadioButtonComponent
     @Input()
     disabled = false;
 
+    /** 
+     * If the radio button is used inside a group. 
+     * If set to true the control will take the width of the parent container. 
+     */
+    @Input()
+    isGroup: boolean;
+
     /** The field should be only used with reactive forms
      * Its purpose is to pass a current selected value from froumGroup
      * The field is mandatory when working with reactive forms

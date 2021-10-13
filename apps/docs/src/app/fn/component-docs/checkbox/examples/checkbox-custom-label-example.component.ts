@@ -6,8 +6,7 @@ import { Component } from '@angular/core';
     <div>
         <fn-checkbox [(ngModel)]="checkboxValue"> I accept&nbsp;<a href="#">Terms and conditions</a> </fn-checkbox>
     </div>
-    <br>
-        Value: {{ checkboxValue }}
+    <p><i>Value: {{ checkboxValue }}</i></p>
     `
 })
 export class CheckboxCustomLabelExampleComponent {

@@ -1,6 +1,7 @@
 <label
     class="fn-radio"
     [class.is-disabled]="disabled"
+    [class.fn-radio--group]="isGroup"
     [tabindex]="disabled ? -1 : (tabIndex || 0)"
     [attr.title]="title"
     (keydown)="keydownHandler($event)"
