@@ -19,9 +19,7 @@ import { map } from 'rxjs/operators';
             </fieldset>
         </form>
 
-        <br />
-
-        Form value: {{ registrationForm.getRawValue() | json }}
+        <p><i>Form value: {{ registrationForm.getRawValue() | json }}</i></p>
     `
 })
 export class CheckboxReactiveFormsExampleComponent implements OnInit {

@@ -31,7 +31,7 @@ let componentExampleUniqueId = 0;
 })
 export class ComponentExampleComponent implements OnInit {
     @Input()
-    hasBackground=true;
+    hasBackground = true;
 
     id: string;
     id2: string;
