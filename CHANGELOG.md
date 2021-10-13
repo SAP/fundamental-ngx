@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.15 (2021-10-13)
+
+
+### Features
+
+* **core:** add title for the bar component ([#6834](https://github.com/SAP/fundamental-ngx/issues/6834)) ([#6836](https://github.com/SAP/fundamental-ngx/issues/6836)) ([8897ecf](https://github.com/SAP/fundamental-ngx/commit/8897ecfe48558d7df65f56adf834f43ed0c11a9e))
+
 ## 0.33.0-rc.14 (2021-10-13)
 
 ## 0.33.0-rc.13 (2021-10-12)
