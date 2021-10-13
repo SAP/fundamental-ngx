@@ -1,6 +1,6 @@
 # InputGroup
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.14.
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.5.
 
 ## Code scaffolding
 

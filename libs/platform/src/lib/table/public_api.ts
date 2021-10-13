@@ -57,18 +57,7 @@ export * from './interfaces/search-field.interface';
 export * from './interfaces/selection-value.interface';
 export * from './interfaces/table-state.interface';
 
-export * from './models/column-freeze-event.model';
-export * from './models/columns-change-event.model';
-export * from './models/filter-change-event.model';
-export * from './models/group-change-event.model';
-export * from './models/page-change-event.model';
-export * from './models/search-change-event.model';
-export { SelectionChangeEvent as TableSelectionChangeEvent, TableRowSelectionChangeEvent } from './models/selection-change-event.model';
-export * from './models/sort-change-event.model';
-export * from './models/table-row.model';
-export * from './models/table-row-activate-event.model';
-export * from './models/table-row-toggle-open-state-event.model';
-export * from './models/table-rows-rearrange-event.model';
+export * from './models';
 
 export * from './pipes/value-by-path.pipe';
 

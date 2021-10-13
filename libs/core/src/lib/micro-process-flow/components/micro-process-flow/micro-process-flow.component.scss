@@ -151,7 +151,7 @@
             top: 0;
             left: 50%;
             bottom: 0;
-            margin-left: -$fd-micro-process-flow-intermediary-indicator-width / 2;
+            margin-left: -$fd-micro-process-flow-intermediary-indicator-width * 0.5;
             width: $fd-micro-process-flow-intermediary-indicator-width;
             background: var(--sapNegativeElementColor);
         }

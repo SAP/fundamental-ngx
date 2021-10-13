@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'fdp-switch-forms-example',
@@ -11,4 +11,5 @@ export class SwitchFormsExampleComponent {
         switch2: new FormControl(true),
         switch3: new FormControl(false)
     });
+    validators = [Validators.requiredTrue];
 }

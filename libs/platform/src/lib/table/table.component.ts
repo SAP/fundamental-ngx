@@ -131,7 +131,8 @@ let tableUniqueId = 0;
         '[class.fd-table--no-horizontal-borders]': 'noHorizontalBorders || noBorders',
         '[class.fd-table--no-vertical-borders]': 'noVerticalBorders || noBorders',
         '[class.fd-table--tree]': 'isTreeTable',
-        '[class.fd-table--group]': '_isGroupTable'
+        '[class.fd-table--group]': '_isGroupTable',
+        '[class.fdp-table--no-outer-border]': 'noOuterBorders'
     }
 })
 export class TableComponent<T = any> extends Table implements AfterViewInit, OnDestroy, OnChanges, OnInit {
@@ -219,6 +220,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** Table body without borders, but header with borders. */
     @Input()
     noBodyBorders = false;
+
+    /** Table without outer borders */
+    @Input()
+    noOuterBorders = false;
 
     /** Initial visible columns. Consist of a list of unique column names */
     @Input()

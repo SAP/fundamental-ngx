@@ -1,7 +1,7 @@
+import { TimelineNodeHeaderInfoTextDirective } from './timeline-node-header-info-text.directive';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, ElementRef, ViewChild } from '@angular/core';
-
 import { TimelineModule } from '@fundamental-ngx/core/timeline';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 describe('TimelineNodeHeaderInfoTextDirective', () => {
     let component: TestComponent;

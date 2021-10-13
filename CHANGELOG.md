@@ -1,4 +1,84 @@
 
+## 0.33.0-rc.13 (2021-10-12)
+
+
+### Bug Fixes
+
+* **platform:** switch emits 3 times when changed manually ([#6828](https://github.com/SAP/fundamental-ngx/issues/6828)) ([#6833](https://github.com/SAP/fundamental-ngx/issues/6833)) ([99b8007](https://github.com/SAP/fundamental-ngx/commit/99b800732e4741669751e3bbcff53f3b617410eb))
+
+## 0.33.0-rc.12 (2021-10-12)
+
+
+### Bug Fixes
+
+* **core:** combobox, fix mobile mode ([#6820](https://github.com/SAP/fundamental-ngx/issues/6820)) ([88f6c75](https://github.com/SAP/fundamental-ngx/commit/88f6c75c64f0b384fea28f56e627d0b2c4bcbfaa))
+
+## 0.33.0-rc.11 (2021-10-12)
+
+## 0.33.0-rc.10 (2021-10-12)
+
+
+### Bug Fixes
+
+* **platform:** table, add missing doc ([#6707](https://github.com/SAP/fundamental-ngx/issues/6707)) ([#6710](https://github.com/SAP/fundamental-ngx/issues/6710)) ([b0768be](https://github.com/SAP/fundamental-ngx/commit/b0768bed8c7ad5afa5c2dc64f6d90942d2f5b55b))
+
+## 0.33.0-rc.9 (2021-10-12)
+
+
+### Features
+
+* **core:** added main functionality for timeline ([#6778](https://github.com/SAP/fundamental-ngx/issues/6778)) ([860fce1](https://github.com/SAP/fundamental-ngx/commit/860fce11418c531d691bf6ce85ae4105d9f521fe))
+
+## 0.33.0-rc.8 (2021-10-12)
+
+
+### Bug Fixes
+
+* **platform:** update API signature per spec ([#6864](https://github.com/SAP/fundamental-ngx/issues/6864)) ([265f575](https://github.com/SAP/fundamental-ngx/commit/265f5753c6386c026fd27fb9d1a85254b18f361c))
+
+## 0.33.0-rc.7 (2021-10-11)
+
+
+### Bug Fixes
+
+* **core:** dialog, keep only 1 non-transparent overlay ([#6852](https://github.com/SAP/fundamental-ngx/issues/6852)) ([f7e1024](https://github.com/SAP/fundamental-ngx/commit/f7e10247da4d54b4893608b1010018be0786ea2e))
+
+## 0.33.0-rc.6 (2021-10-11)
+
+
+### Features
+
+* **core,platform:** bring horizon theme ([#6873](https://github.com/SAP/fundamental-ngx/issues/6873)) ([4f650c4](https://github.com/SAP/fundamental-ngx/commit/4f650c48e58505efc6a954a33944f05449c6102d))
+
+## 0.33.0-rc.5 (2021-10-11)
+
+## 0.33.0-rc.4 (2021-10-11)
+
+## 0.33.0-rc.3 (2021-10-11)
+
+
+### Features
+
+* **platform:** table no outer borders ([#6861](https://github.com/SAP/fundamental-ngx/issues/6861)) ([72a8cf1](https://github.com/SAP/fundamental-ngx/commit/72a8cf1dfac35fcd1b643bd9417be950bae60659))
+
+## 0.33.0-rc.2 (2021-10-11)
+
+## 0.33.0-rc.1 (2021-10-10)
+
+
+### Bug Fixes
+
+* **platform:** named imports removing ([#6865](https://github.com/SAP/fundamental-ngx/issues/6865)) ([a115c51](https://github.com/SAP/fundamental-ngx/commit/a115c516c8c4b54eb58dfcb86c4c3efe8004fefc))
+
+## 0.33.0-rc.0 (2021-10-08)
+
+
+### ⚠ BREAKING CHANGES
+
+* **core, platform:** angular 12 migration
+
+* **core, platform:** Ng 12 migration ([#6700](https://github.com/SAP/fundamental-ngx/issues/6700)) ([36dde7b](https://github.com/SAP/fundamental-ngx/commit/36dde7b0d1dfa42b749e251679cf514d2ed6fab0))
+
 ### 0.32.2-rc.58 (2021-10-07)
 
 
