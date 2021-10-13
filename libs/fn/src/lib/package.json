@@ -24,7 +24,9 @@
     "@angular/cdk": "CDK_VER_PLACEHOLDER",
     "@sap-theming/theming-base-content": "THEMING_VER_PLACEHOLDER",
     "focus-trap": "FOCUSTRAP_VER_PLACEHOLDER",
+    "focus-visible": "FOCUSVISIBLE_VER_PLACEHOLDER",
     "fundamental-styles": "FDSTYLES_VER_PLACEHOLDER",
+    "@fundamental-styles/fn": "FDNSTYLES_VER_PLACEHOLDER",
     "tslib": "^2.0.0"
   }
 }

@@ -1,3 +1,4 @@
+import 'focus-visible';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ExperimentalRadioButtonComponent } from './radio-button/radio-button.component';
