@@ -1,5 +1,6 @@
 <label
     class="fn-checkbox"
+    [class.fn-checkbox--group]="isGroup"
     [attr.tabindex]="tabIndexValue || 0"
     (keydown)="keydownHandler($event)"
     (click)="$event.stopPropagation()"

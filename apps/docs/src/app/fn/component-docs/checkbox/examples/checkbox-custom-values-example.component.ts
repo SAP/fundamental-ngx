@@ -11,8 +11,9 @@ import { Component } from '@angular/core';
             >
             </fn-checkbox>
         </div>
+        
         Value: {{ checkboxValue1 }}
-
+        <br><br>
         <div>
             <fn-checkbox
                 label="Banana is the best fruit"

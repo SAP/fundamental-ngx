@@ -1,6 +1,6 @@
 <fd-docs-section-title id="two-way-binding" componentName="switch"> Two-Way Binding </fd-docs-section-title>
-<description>It is possible to two-way bind to the checked property of the fd-switch.</description>
-<component-example>
+<description>It is possible to two-way bind to the <code>checked</code> property of the fn-switch component.</description>
+<component-example [hasBackground]="false">
     <fd-switch-binding-example></fd-switch-binding-example>
 </component-example>
 <code-example [exampleFiles]="switchBinding"></code-example>
@@ -9,7 +9,7 @@
 
 <fd-docs-section-title id="disabled" componentName="switch"> Disabled State </fd-docs-section-title>
 <description>Switch can be in the disabled state, which prevents the user from interacting with it.</description>
-<component-example>
+<component-example [hasBackground]="false">
     <fd-disabled-switch-example></fd-disabled-switch-example>
 </component-example>
 <code-example [exampleFiles]="switchDisable"></code-example>
@@ -20,11 +20,7 @@
     Switch used within Reactive Form
 </fd-docs-section-title>
 <description>It is possible to use the fd-switch component within Angular Reactive Forms</description>
-<component-example>
+<component-example [hasBackground]="false">
     <fd-switch-forms-example></fd-switch-forms-example>
 </component-example>
 <code-example [exampleFiles]="switchFormExample"></code-example>
-
-<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
-    <fn-switch [activeText]="data.properties.activeText" [inactiveText]="data.properties.inactiveText" [disabled]="data.properties.disabled" [(ngModel)]="data.properties.checked"> Example Switch</fn-switch>
-</playground>
