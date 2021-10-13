@@ -58,8 +58,8 @@ import {
     ObservableComboBoxDataSource,
     OptionItem
 } from '@fundamental-ngx/platform/shared';
-import { AutoCompleteEvent } from '@fundamental-ngx/platform/form';
 
+import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { ComboboxComponent } from '../combobox/combobox.component';
 import { ComboboxConfig } from '../combobox.config';
 
