@@ -1,12 +1,6 @@
 <header>Slider</header>
 <description>
-    <p>
-        Slider control represents a numerical range and a handle. The purpose of the control is to enable visual
-        selection of a value in a continuous numerical range by moving an adjustable handle. Slider can also become a
-        Range Slider. A Range Slider is a user interface control that lets the user to select a value range within a
-        predefined numerical interval.
-    </p>
-    <h3>Changing the Value</h3>
+    <p>A slider is a control that enables the user to adjust single values within a specified numerical range.</p>
     <p>If the slider is editable, the hand cursor appears when the user hovers over the grip.</p>
     <p>The user can change the slider setting in two ways:</p>
     <ul>
@@ -16,8 +10,8 @@
         <li>Keyboard Arrows: UP, DOWN, LEFT, RIGHT or SHIFT + UP, DOWN, LEFT, RIGHT</li>
     </ul>
     <p>The grip can be moved with or without increments based on the predefined steps.</p>
+    <p>For vertical slider set the <code>vertical</code> property to true.</p>
 </description>
-<import module="SliderModule" subPackage="slider"></import>
-
+<import module="ExperimentalSliderModule" subPackage="slider"></import>
 <fd-header-tabs></fd-header-tabs>
 <router-outlet></router-outlet>

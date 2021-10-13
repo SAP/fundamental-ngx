@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
     <div>
         <fn-checkbox [(ngModel)]="checkboxValue"> I accept&nbsp;<a href="#">Terms and conditions</a> </fn-checkbox>
     </div>
+    <br>
         Value: {{ checkboxValue }}
     `
 })

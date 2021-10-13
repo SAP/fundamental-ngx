@@ -9,16 +9,13 @@ import { map } from 'rxjs/operators';
             <div>
                 <fn-checkbox formControlName="acceptAll" label="Accept all"></fn-checkbox>
             </div>
-            <fieldset formGroupName="agreements">
-            <div>
-            <fn-checkbox formControlName="termsAndConditions" label="I accept Terms and Conditions"></fn-checkbox>
-            </div>
-            <div>
-                <fn-checkbox formControlName="marketing" label="I want to receive Marketing Materials"></fn-checkbox>
-            </div>
-            <div>
-                <fn-checkbox formControlName="newsletter" label="I want want to sign for a Newsletter"></fn-checkbox>
-            </div>
+            <fieldset formGroupName="agreements" style="display:flex;flex-direction:column;width:400px;">
+                <fn-checkbox [isGroup]="true" formControlName="termsAndConditions" label="I accept Terms and Conditions"></fn-checkbox>
+            
+                <fn-checkbox [isGroup]="true" formControlName="marketing" label="I want to receive Marketing Materials"></fn-checkbox>
+            
+                <fn-checkbox [isGroup]="true" formControlName="newsletter" label="I want want to sign for a Newsletter"></fn-checkbox>
+                
             </fieldset>
         </form>
 

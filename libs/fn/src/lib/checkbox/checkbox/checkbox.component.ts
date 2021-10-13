@@ -16,20 +16,20 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Platform } from '@angular/cdk/platform';
-import { LIST_ITEM_COMPONENT, ListItemInterface, compareObjects, KeyUtil, ContentDensityService } from '@fundamental-ngx/core/utils';
+import { compareObjects, KeyUtil, ContentDensityService } from '@fundamental-ngx/core/utils';
 import { SPACE } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 import { FormStates } from '@fundamental-ngx/core/shared';
 
 let checkboxUniqueId = 0;
 
-interface FdCheckboxValues {
+interface FnCheckboxValues {
     trueValue?: any;
     falseValue?: any;
     thirdStateValue?: any;
 }
 
-type fdCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force-checked';
+type fnCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force-checked';
 
 @Component({
     selector: 'fn-checkbox',
@@ -70,9 +70,16 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnIn
     @Input()
     title: string;
 
+    /** 
+     * If the checkbox is used inside a group. 
+     * If set to true the control will take the width of the parent container. 
+     */
+    @Input()
+    isGroup: boolean;
+
     /** Sets [id] property of input, binds input with input label using [for] property. */
     @Input()
-    inputId = `fd-checkbox-${checkboxUniqueId++}`;
+    inputId = `fn-checkbox-${checkboxUniqueId++}`;
 
     /** State of control, changes visual appearance of control. */
     @Input()
@@ -107,7 +114,7 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnIn
 
     /** Sets values returned by control. */
     @Input('values')
-    set _values(checkboxValues: FdCheckboxValues) {
+    set _values(checkboxValues: FnCheckboxValues) {
         this.values = { ...this.values, ...checkboxValues };
     }
 
@@ -120,13 +127,13 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnIn
     readonly outline = 'none';
 
     /** Values returned by control. */
-    public values: FdCheckboxValues = { trueValue: true, falseValue: false, thirdStateValue: null };
+    public values: FnCheckboxValues = { trueValue: true, falseValue: false, thirdStateValue: null };
     /** Stores current checkbox value. */
     public checkboxValue: any;
     /** Stores current checkbox state. */
-    public checkboxState: fdCheckboxTypes;
+    public checkboxState: fnCheckboxTypes;
     /** @hidden */
-    private _previousState: fdCheckboxTypes;
+    private _previousState: fnCheckboxTypes;
 
     /** @hidden Reference to callback provided by FormControl.*/
     public onTouched = () => {};
@@ -211,7 +218,7 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnIn
      * - emits new control value
      * - updates control state based on new control value
      * */
-    public nextValue(previousValue?: fdCheckboxTypes): void {
+    public nextValue(previousValue?: fnCheckboxTypes): void {
         switch (previousValue || this.checkboxState) {
             case 'checked':
                 this.checkboxValue = this.values.falseValue;
