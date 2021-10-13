@@ -27,12 +27,12 @@ describe('Timeline test suite', function() {
     });
 
     it('should check more button expands section and less button collapses section', () => {
-       const postStartingHeight = getElementSize(timelinePost, 3, 'height');
+       const postStartingHeight = getElementSize(timelinePost, 5, 'height');
 
        click(showButton);
-       const postExpandedHeight = getElementSize(timelinePost, 3, 'height');
+       const postExpandedHeight = getElementSize(timelinePost, 5, 'height');
        click(showButton);
-       const postCollapsedHeight = getElementSize(timelinePost, 3, 'height');
+       const postCollapsedHeight = getElementSize(timelinePost, 5, 'height');
 
        expect(postStartingHeight).toBeLessThan(postExpandedHeight);
        expect(postCollapsedHeight).toBeLessThan(postExpandedHeight);
