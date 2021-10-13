@@ -1,3 +1,4 @@
+import 'focus-visible';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TabsComponent } from './tabs/tabs.component';
@@ -11,5 +12,4 @@ import { TabItemDirective } from './tab-item.directive';
     imports: [CommonModule],
     exports: [TabsComponent, TabComponent, TabTitleComponent, TabContentComponent, TabItemDirective]
 })
-export class ExperimentalTabsModule {
-}
+export class ExperimentalTabsModule {}

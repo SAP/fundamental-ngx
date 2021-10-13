@@ -123,6 +123,7 @@
     "classlist.js": "1.1.20150312",
     "core-js": "3.7.0",
     "focus-trap": "6.6.1",
+    "focus-visible": "5.2.0",
     "fundamental-styles": "v0.20.1-rc.46",
     "highlight.js": "10.7.2",
     "intl": "1.2.5",
