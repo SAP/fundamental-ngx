@@ -9,6 +9,6 @@ export class SelectExampleComponent {
     options: string[] = ['Apple', 'Pineapple', 'Kiwi', 'Tomato', 'Strawberry'];
 
     customForm = new FormGroup({
-        selectControl: new FormControl(this.options[0])
+        selectControl1: new FormControl(this.options[1])
     });
 }

@@ -49,11 +49,18 @@ export class ExperimentalOptionComponent {
         this.optionClicked.emit(this);
     }
 
-    constructor(private _elRef: ElementRef) {}
+    constructor(private _elRef: ElementRef, private _cdRef: ChangeDetectorRef) {}
+
+    /** @hidden */
+    get elementRef(): ElementRef {
+        return this._elRef;
+    }
 
     focus(): void {
-        this._elRef.nativeElement.focus();
-        this._elRef.nativeElement.classList.add('focus-visible');
+        setTimeout(() => {
+            this._elRef.nativeElement.focus();
+            this._elRef.nativeElement.classList.add('focus-visible');
+        });
     }
 
     hide(): void {

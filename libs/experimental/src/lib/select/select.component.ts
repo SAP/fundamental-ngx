@@ -3,7 +3,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ContentChildren, ElementRef,
+    ContentChildren, ElementRef, forwardRef,
     HostListener,
     Input, OnDestroy,
     QueryList, ViewChild,
@@ -11,9 +11,9 @@ import {
 } from '@angular/core';
 import { ExperimentalOptionComponent } from './option/option.component';
 import { KeyUtil } from '@fundamental-ngx/core';
-import { ESCAPE, SPACE, TAB } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
-import { ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 /**
  * Select component intended to mimic
  * the behaviour of the native select element.
@@ -22,6 +22,13 @@ import { ControlValueAccessor } from '@angular/forms';
     selector: 'fn-select',
     templateUrl: './select.component.html',
     styleUrls: ['./select.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => ExperimentalSelectComponent),
+            multi: true
+        }
+    ],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -63,9 +70,8 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
             if (this.editable) {
                 this._filterItems();
             }
-            console.log(this._internalValue);
         }
-        this._cdRef.detectChanges();
+        this.onChange(newValue);
     }
 
     /** @hidden */
@@ -81,8 +87,11 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
         this.options.forEach(option => {
             this._subscriptions.add(option.optionClicked.subscribe(clickedOption => {
                 this.optionClicked(clickedOption);
-            }))
-        })
+            }));
+            if (this._internalValue && option.value === this._internalValue) {
+                setTimeout(() => { option.selected = true; });
+            }
+        });
     }
 
     ngOnDestroy(): void {
@@ -91,15 +100,29 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
 
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
+        event.preventDefault();
         if (document.activeElement === this.selectInput.nativeElement && KeyUtil.isKeyCode(event, TAB)) {
             this.options.first.focus();
         } else if (this.opened && KeyUtil.isKeyCode(event, ESCAPE)) {
             this.opened = false;
-            this.selectInput.nativeElement.blur();
         } else if (!this.opened && document.activeElement === this.selectInput.nativeElement && KeyUtil.isKeyCode(event, SPACE)) {
             this.opened = true;
+        } else if (KeyUtil.isKeyCode(event, ENTER)) {
+            const focusedOption = this._getFocusedOption();
+            if (focusedOption) {
+                this.optionClicked(focusedOption);
+            }
+        } else if (KeyUtil.isKeyCode(event, DOWN_ARROW) || (KeyUtil.isKeyCode(event, UP_ARROW))) {
+            const focusedOption = this._getFocusedOption();
+            if (focusedOption) {
+                const focusedIndex = this.options.toArray().indexOf(focusedOption);
+                const newIndex = KeyUtil.isKeyCode(event, DOWN_ARROW) ? focusedIndex + 1 : focusedIndex - 1;
+                const nextOption = this.options.toArray()[newIndex];
+                if (nextOption) {
+                    nextOption.focus();
+                }
+            }
         }
-        this._cdRef.markForCheck();
     }
 
     @HostListener('document:click', ['$event.target'])
@@ -109,18 +132,22 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
         }
     }
 
-    selectInputClicked(): void {
+    /** Function called when the select input is clicked. */
+    selectInputClicked(event: MouseEvent | KeyboardEvent): void {
+        event.preventDefault();
         this.onTouched();
+        this.selectInput.nativeElement.focus();
         this.opened = !this.opened;
     }
 
+
+    /** Function called when an option is clicked. */
     optionClicked(clickedOption: ExperimentalOptionComponent): void {
         this.options.forEach(option => {
             option === clickedOption ? option.selected = true : option.selected = false;
         });
         this.value = clickedOption.value;
         this.opened = false;
-        this._cdRef.markForCheck();
     }
 
     /** @hidden */
@@ -147,6 +174,18 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
     }
 
     /** @hidden */
+    private _getFocusedOption(): ExperimentalOptionComponent {
+        let retVal = null;
+        this.options.forEach(option => {
+            if (option.elementRef.nativeElement.classList.contains('focus-visible')) {
+                retVal = option;
+            }
+        });
+
+        return retVal;
+    }
+
+    /** @hidden */
     private _filterItems(): void {
         let visibleOptions = 0;
         this.options.forEach(option => {
@@ -156,6 +195,7 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
                 visibleOptions++;
                 option.show();
             }
+            option.selected = option.value.toLowerCase() === this._internalValue.toLowerCase();
         });
 
         visibleOptions > 0 ? this._optionsListEmpty  = false : this._optionsListEmpty = true;
