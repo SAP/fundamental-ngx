@@ -24,12 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
-        ExperimentalSelectModule,
-        FormModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ExperimentalSelectModule, FormModule],
     exports: [RouterModule],
     declarations: [examples, SelectHeaderComponent, SelectDocsComponent]
 })
