@@ -49,16 +49,18 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
     @Input()
     placeholder: string;
 
-    /** The select value. */
+    /** @hidden The select value. */
     private _internalValue: string;
 
     /** Whether or not this select is editable. */
     @Input()
     editable = false;
 
+    /** @hidden */
     @ContentChildren(ExperimentalOptionComponent)
     options: QueryList<ExperimentalOptionComponent>;
 
+    /** @hidden */
     @ViewChild('selectInput', { read: ElementRef })
     selectInput: ElementRef;
 
@@ -85,6 +87,7 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
 
     constructor(private _cdRef: ChangeDetectorRef, private _elRef: ElementRef) {}
 
+    /** @hidden */
     ngAfterContentInit(): void {
         this.options.forEach((option) => {
             this._subscriptions.add(
@@ -100,10 +103,12 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
         });
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
     }
 
+    /** @hidden */
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
         if (
@@ -114,7 +119,7 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
             this.options.forEach((option) => {
                 if (option.elementRef.nativeElement.style.display !== 'none' && !foundFirst) {
                     foundFirst = true;
-                    option.focus();
+                    option._focus();
                 }
             });
         } else if (this.opened && KeyUtil.isKeyCode(event, ESCAPE)) {
@@ -151,12 +156,13 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
                 }
                 const nextOption = visibleOptions[newIndex];
                 if (nextOption) {
-                    nextOption.focus();
+                    nextOption._focus();
                 }
             }
         }
     }
 
+    /** @hidden */
     @HostListener('document:click', ['$event.target'])
     clickOut(target: ElementRef): void {
         if (!this._elRef.nativeElement.contains(target as any) && this.opened) {
@@ -221,10 +227,10 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
         let visibleOptions = 0;
         this.options.forEach((option) => {
             if (!option.value.toLowerCase().startsWith(this._internalValue.toLowerCase())) {
-                option.hide();
+                option._hide();
             } else {
                 visibleOptions++;
-                option.show();
+                option._show();
                 if (!this.opened) {
                     this.opened = true;
                 }

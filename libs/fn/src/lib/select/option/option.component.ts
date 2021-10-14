@@ -23,7 +23,7 @@ import {
     host: {
         role: 'option',
         class: 'fn-select__item',
-        tabindex: '0'
+        '[attr.tabindex]': 'tabindex'
     }
 })
 export class ExperimentalOptionComponent {
@@ -36,14 +36,21 @@ export class ExperimentalOptionComponent {
     @Input()
     selected = false;
 
+    /** The tabindex of the option. Default is 0. */
+    @Input()
+    tabindex = '0';
+
+    /** Event emitted when an option is clicked. Emits an ExperimentalOptionComponent */
     @Output()
     optionClicked: EventEmitter<ExperimentalOptionComponent> = new EventEmitter<ExperimentalOptionComponent>();
 
+    /** @hidden */
     @HostListener('focusout')
     _onBlur(): void {
         this._elRef.nativeElement.classList.remove('focus-visible');
     }
 
+    /** @hidden */
     @HostListener('click')
     _optionClicked(): void {
         this.optionClicked.emit(this);
@@ -56,18 +63,21 @@ export class ExperimentalOptionComponent {
         return this._elRef;
     }
 
-    focus(): void {
+    /** @hidden */
+    _focus(): void {
         setTimeout(() => {
             this._elRef.nativeElement.focus();
             this._elRef.nativeElement.classList.add('focus-visible');
         });
     }
 
-    hide(): void {
+    /** @hidden */
+    _hide(): void {
         this._elRef.nativeElement.style.display = 'none';
     }
 
-    show(): void {
+    /** @hidden */
+    _show(): void {
         this._elRef.nativeElement.style.display = 'list-item';
     }
 }
