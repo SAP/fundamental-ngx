@@ -179,5 +179,5 @@ jobs:
       - name: smoke e2e on saucelabs with firebase deployment
         env:
           CAP_SLUG: ${{ matrix.browser }}
-        if: ${{ needs.firebase_preview.outputs.output_url }}
+#        if: ${{ needs.firebase_preview.outputs.output_url }}
         run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio-cron.conf.js --${{ matrix.suite }} --baseUrl=${{ needs.firebase_preview.outputs.output_url }}/fundamental-ngx
