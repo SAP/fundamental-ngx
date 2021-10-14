@@ -124,6 +124,7 @@ export class MenuComponent
     /** @hidden */
     private _clickEventListener: Function;
 
+    /** @hidden */
     constructor(
         public readonly elementRef: ElementRef,
         @Optional() public readonly dialogConfig: DialogConfig,
@@ -242,7 +243,7 @@ export class MenuComponent
             parent: this._injector
         });
 
-        this._dynamicComponentService.createDynamicModule(
+        await this._dynamicComponentService.createDynamicModule(
             this.menuRootTemplate,
             MenuMobileModule,
             MenuMobileComponent,

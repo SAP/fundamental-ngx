@@ -691,7 +691,7 @@ export class ComboboxComponent
             parent: this._injector
         });
 
-        this._dynamicComponentService.createDynamicModule(
+        await this._dynamicComponentService.createDynamicModule(
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
             ComboboxMobileModule,
             ComboboxMobileComponent,

@@ -26,13 +26,13 @@
                 *ngIf="mobileConfig?.approveButtonText"
                 fdType="emphasized"
                 [label]="mobileConfig?.approveButtonText"
-                (click)="handleApprove()"
+                (click)="_handleApprove()"
             >
             </fd-button-bar>
             <fd-button-bar
                 *ngIf="mobileConfig?.cancelButtonText"
                 [label]="mobileConfig?.cancelButtonText"
-                (click)="handleDismiss()"
+                (click)="_handleDismiss()"
             >
             </fd-button-bar>
         </fd-dialog-footer>

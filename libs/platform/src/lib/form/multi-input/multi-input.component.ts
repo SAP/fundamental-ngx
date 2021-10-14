@@ -325,7 +325,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     }
 
     /** @hidden Handle dialog dismissing, closes popover and sets backup data. */
-    dialogDismiss(term: string): void {
+    _dialogDismiss(term: string): void {
         if (this.selectedValue && term !== this.selectedValue?.label) {
             this.selectedValue = this._getSelectedOptionItem(term);
         }
@@ -335,7 +335,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     }
 
     /** @hidden Handle dialog approval, closes popover and propagates data changes. */
-    dialogApprove(): void {
+    _dialogApprove(): void {
         if (this.selected && this.selectedValue?.label === this.inputText) {
             this._updateModel(this.selectedValue.value);
         } else {
@@ -386,7 +386,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
             parent: this._injector
         });
 
-        this._dynamicComponentService.createDynamicModule(
+        await this._dynamicComponentService.createDynamicModule(
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
             PlatformMultiInputMobileModule,
             PlatformMultiInputMobileComponent,

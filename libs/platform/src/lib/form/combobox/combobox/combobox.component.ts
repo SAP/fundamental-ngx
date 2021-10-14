@@ -164,11 +164,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
             return;
         }
 
-        this._selectedElement = this.isGroup
-            ? selectedItem.children
-                ? selectedItem.children[0]
-                : selectedItem
-            : selectedItem;
+        this._selectedElement = (this.isGroup && selectedItem?.children[0]) || selectedItem;
         this.inputText = this.displayValue(this._selectedElement);
     }
 
@@ -234,7 +230,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
             parent: this._injector
         });
 
-        this._dynamicComponentService.createDynamicModule(
+        await this._dynamicComponentService.createDynamicModule(
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
             PlatformComboboxMobileModule,
             ComboboxMobileComponent,

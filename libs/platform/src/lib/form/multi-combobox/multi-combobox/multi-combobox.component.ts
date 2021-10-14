@@ -372,7 +372,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
             parent: this._injector
         });
 
-        this._dynamicComponentService.createDynamicModule(
+        await this._dynamicComponentService.createDynamicModule(
             { listTemplate: this.listTemplate, controlTemplate: this.mobileControlTemplate },
             PlatformMultiComboboxMobileModule,
             MultiComboboxMobileComponent,
