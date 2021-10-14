@@ -21,6 +21,7 @@ import { Subject } from 'rxjs';
 import { BaseComponent } from '../base';
 import { FormFieldControl, Status } from './form-control';
 import { FormField } from './form-field';
+import { SafeHtml } from '@angular/platform-browser';
 
 let randomId = 0;
 
@@ -59,6 +60,10 @@ export abstract class BaseInput extends BaseComponent
     set state(state: Status) {
         this._state = state || 'default';
     }
+
+    /** Holds the message with respect to state */
+    @Input()
+    stateMessage: string | SafeHtml;
 
     @Input()
     get disabled(): boolean {

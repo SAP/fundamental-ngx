@@ -48,9 +48,13 @@
     <ul #optionPanel fd-list class="fd-select-options" role="listbox" tabindex="-1" [compact]="compact"
         [mobileMode]="mobile" [dropdownMode]="true" [hasMessage]="!!stateMessage" [attr.id]="controlId + '-list-box'"
         [style.max-height]="maxHeight || calculatedMaxHeight + 'px'" [attr.tooltip]="triggerValue">
-        <li *ngIf="stateMessage" [attr.aria-label]="stateMessage" fd-list-message tabindex="-1" role="presentation" [type]="state">
-            {{stateMessage}}
-        </li>
+        <li *ngIf="stateMessage"
+            [attr.aria-label]="stateMessage"
+            fd-list-message
+            tabindex="-1"
+            role="presentation"
+            [type]="state"
+            [innerHtml]="stateMessage"></li>
 
         <ng-content></ng-content>
     </ul>
