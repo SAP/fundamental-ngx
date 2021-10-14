@@ -1,3 +1,6 @@
+declare const $$: any;
+declare const $: any;
+
 export function defaultWaitTime(): number {
     return browser.options.waitforTimeout;
 }
@@ -80,7 +83,12 @@ export function click(selector: string, index: number = 0, waitTime: number = de
     return $$(selector)[index].click();
 }
 
-export function clickWithOption(selector: string, index: number = 0, waitTime: number = defaultWaitTime(), options: object): void {
+export function clickWithOption(
+    selector: string,
+    index: number = 0,
+    waitTime: number = defaultWaitTime(),
+    options: object
+): void {
     checkSelectorExists(selector, index);
     $$(selector)[index].waitForDisplayed({ timeout: waitTime });
     return $$(selector)[index].click(options);
@@ -98,9 +106,15 @@ export function setValue(selector: string, value: string, index: number = 0, wai
     $$(selector)[index].waitForDisplayed({ timeout: waitTime });
     $$(selector)[index].clearValue();
     $$(selector)[index].setValue(value);
-};
+}
 
-export function addValueWithDelay(selector: string, value: string, delay: number = 100, index: number = 0, waitTime = defaultWaitTime()): void {
+export function addValueWithDelay(
+    selector: string,
+    value: string,
+    delay: number = 100,
+    index: number = 0,
+    waitTime = defaultWaitTime()
+): void {
     checkSelectorExists(selector, index);
     $$(selector)[index].waitForDisplayed({ timeout: waitTime });
     const valueArray = Array.from(value);
@@ -125,7 +139,9 @@ export function getValue(selector: string, index: number = 0, waitTime = default
 
 export function getArrValues(selector: string, sliceStart?: number, sliceEnd?: number): string[] {
     checkSelectorExists(selector);
-    return $$(selector).slice(sliceStart, sliceEnd).map((element) => element.getValue());
+    return $$(selector)
+        .slice(sliceStart, sliceEnd)
+        .map((element) => element.getValue());
 }
 
 export function getText(selector: string, index: number = 0, waitTime = defaultWaitTime()): string {
@@ -136,7 +152,9 @@ export function getText(selector: string, index: number = 0, waitTime = defaultW
 
 export function getTextArr(selector: string, sliceStart?: number, sliceEnd?: number): string[] {
     checkSelectorExists(selector);
-    return $$(selector).slice(sliceStart, sliceEnd).map((element) => element.getText());
+    return $$(selector)
+        .slice(sliceStart, sliceEnd)
+        .map((element) => element.getText());
 }
 
 export function waitForElDisplayed(selector: string, index: number = 0, waitTime = defaultWaitTime()): boolean {
@@ -185,11 +203,19 @@ export function isEnabled(selector: string, index: number = 0, waitTime = defaul
 }
 
 // Waits to be empty if text is not passed
-export function waitTextToBePresentInValue(selector: string, text: string = '', index: number = 0, waitTime = defaultWaitTime()): boolean {
+export function waitTextToBePresentInValue(
+    selector: string,
+    text: string = '',
+    index: number = 0,
+    waitTime = defaultWaitTime()
+): boolean {
     checkSelectorExists(selector, index);
-    return $$(selector)[index].waitUntil(function(): boolean {
-        return this.getValue() === text;
-    }, { timeout: waitTime, timeoutMsg: `${text} is not present in element ${selector}` });
+    return $$(selector)[index].waitUntil(
+        function (): boolean {
+            return this.getValue() === text;
+        },
+        { timeout: waitTime, timeoutMsg: `${text} is not present in element ${selector}` }
+    );
 }
 
 // Sends to the active element
@@ -227,13 +253,21 @@ export function getElementPlaceholder(selector: string, index: number = 0): stri
     return $$(selector)[index].getAttribute('placeholder');
 }
 
-export function getAttributeByNameArr(selector: string, attrName: string, sliceStart?: number, sliceEnd?: number): string[] {
+export function getAttributeByNameArr(
+    selector: string,
+    attrName: string,
+    sliceStart?: number,
+    sliceEnd?: number
+): string[] {
     checkSelectorExists(selector);
-    return $$(selector).slice(sliceStart, sliceEnd).map((element) => element.getAttribute(attrName));
+    return $$(selector)
+        .slice(sliceStart, sliceEnd)
+        .map((element) => element.getAttribute(attrName));
 }
 
 // Returns object (assertions needs to be adapted)
-export function getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): WebdriverIO.CSSProperty {
+export function getCSSPropertyByName(selector: string, propertyName: string, index: number = 0): any {
+    // TODO: returns WebdriverIO.CSSProperty
     checkSelectorExists(selector, index);
     return $$(selector)[index].getCSSProperty(propertyName);
 }
@@ -250,30 +284,46 @@ export function clearValue(selector: string, index: number = 0, waitTime = defau
     $$(selector)[index].clearValue();
 }
 
-export function getElementSize(selector: string, index?: number): WebdriverIO.SizeReturn;
+export function getElementSize(selector: string, index?: number): any; // TODO: returns WebdriverIO.SizeReturn;
 export function getElementSize(selector: string, index: number, prop: 'width' | 'height'): number;
-export function getElementSize(selector: string, index: number = 0, prop?: 'width' | 'height'): number | WebdriverIO.SizeReturn {
+export function getElementSize(selector: string, index: number = 0, prop?: 'width' | 'height'): number {
+    // TODO: number | WebdriverIO.SizeReturn;
     checkSelectorExists(selector, index);
     return $$(selector)[index].getSize(prop || void 0);
 }
 
 export function executeScriptBeforeTagAttr(selector: string, attrName: string, index: number = 0): string {
-    return browser.execute(function(selector, attrName, index) {
-        return (window.getComputedStyle(document.querySelectorAll(selector)[index], ':before')[attrName]);
-    }, selector, attrName, index);
+    return browser.execute(
+        (projectedSelector, projectedAttrName, projectedIndex) => {
+            return window.getComputedStyle(document.querySelectorAll(projectedSelector)[projectedIndex], ':before')[
+                projectedAttrName
+            ];
+        },
+        selector,
+        attrName,
+        index
+    );
 }
 
 export function executeScriptAfterTagAttr(selector: string, attrName: string, index: number = 0): string {
-    return browser.execute(function(selector, attrName, index) {
-        return (window.getComputedStyle(document.querySelectorAll(selector)[index], ':after')[attrName]);
-    }, selector, attrName, index);
+    return browser.execute(
+        (projectedSelector, projectedAttrName, projectedIndex) => {
+            return window.getComputedStyle(document.querySelectorAll(projectedSelector)[projectedIndex], ':after')[
+                projectedAttrName
+            ];
+        },
+        selector,
+        attrName,
+        index
+    );
 }
 
 export function getElementArrayLength(selector: string): number {
     return $$(selector).length;
 }
 
-export function elementArray(selector: string): WebdriverIO.ElementArray {
+export function elementArray(selector: string): any {
+    // TODO: returns WebdriverIO.ElementArray
     return $$(selector);
 }
 
@@ -304,9 +354,12 @@ export function isDisplayedInViewport(selector: string, index: number = 0): bool
 }
 
 export function waitElementToBeClickable(selector: string, index: number = 0): void {
-    browser.waitUntil((): boolean => {
-        return $$(selector)[index].isClickable();
-    }, { timeout: defaultWaitTime() });
+    browser.waitUntil(
+        (): boolean => {
+            return $$(selector)[index].isClickable();
+        },
+        { timeout: defaultWaitTime() }
+    );
 }
 
 export function doesItExist(selector: string): boolean {
@@ -317,7 +370,12 @@ export function getCurrentUrl(): string {
     return browser.getUrl();
 }
 
-export function dragAndDrop(elementToDragSelector: string, index: number = 0, targetElementSelector: string, targetIndex: number = 0): void {
+export function dragAndDrop(
+    elementToDragSelector: string,
+    index: number = 0,
+    targetElementSelector: string,
+    targetIndex: number = 0
+): void {
     checkSelectorExists(elementToDragSelector, index);
     checkSelectorExists(targetElementSelector, index);
     $$(elementToDragSelector)[index].scrollIntoView();
@@ -327,7 +385,7 @@ export function dragAndDrop(elementToDragSelector: string, index: number = 0, ta
 export function clickAndMoveElement(selector: string, offsetX: number, offsetY: number, index: number = 0): void {
     checkSelectorExists(selector, index);
     $$(selector)[index].scrollIntoView();
-    $$(selector)[index].dragAndDrop({x: offsetX, y: offsetY});
+    $$(selector)[index].dragAndDrop({ x: offsetX, y: offsetY });
 }
 
 export function isElementDisplayed(selector: string, index: number = 0): boolean {
@@ -361,9 +419,10 @@ export function clickPreviousElement(selector: string, index: number = 0): void 
     $$(selector)[index].previousElement().click();
 }
 
-export function getElementLocation(selector: string, index?: number): WebdriverIO.LocationReturn;
+export function getElementLocation(selector: string, index?: number): any; // TODO: returns WebdriverIO.LocationReturn
 export function getElementLocation(selector: string, index: number, prop: 'x' | 'y'): number;
-export function getElementLocation(selector: string, index: number = 0, prop?: 'x' | 'y'): WebdriverIO.LocationReturn | number {
+export function getElementLocation(selector: string, index: number = 0, prop?: 'x' | 'y'): number {
+    // TODO: returns WebdriverIO.LocationReturn | number
     return $$(selector)[index].getLocation(prop || void 0);
 }
 
@@ -377,23 +436,35 @@ export function addIsActiveClass(selector: string, index: number = 0): void {
     $$(selector)[index].addIsActiveClass();
 }
 
-export function clickAndDragElement(locationX: number, locationY: number, newLocationX: number, newLocationY: number): void {
-    browser.performActions([{
-        'type': 'pointer',
-        'id': 'pointer1',
-        'parameters': { 'pointerType': 'mouse' },
-        'actions': [
-            { 'type': 'pointerMove', 'duration': 600, 'x': locationX, 'y': locationY },
-            { 'type': 'pointerDown', 'button': 0 },
-            { 'type': 'pointerMove', 'duration': 600, 'x': locationX, 'y': locationY },
-            { 'type': 'pointerMove', 'duration': 1000, 'x': newLocationX, 'y': newLocationY },
-            { 'type': 'pointerUp', 'button': 0 },
-            { 'type': 'pause', 'duration': 500 }
-        ]
-    }]);
+export function clickAndDragElement(
+    locationX: number,
+    locationY: number,
+    newLocationX: number,
+    newLocationY: number
+): void {
+    browser.performActions([
+        {
+            type: 'pointer',
+            id: 'pointer1',
+            parameters: { pointerType: 'mouse' },
+            actions: [
+                { type: 'pointerMove', duration: 600, x: locationX, y: locationY },
+                { type: 'pointerDown', button: 0 },
+                { type: 'pointerMove', duration: 600, x: locationX, y: locationY },
+                { type: 'pointerMove', duration: 1000, x: newLocationX, y: newLocationY },
+                { type: 'pointerUp', button: 0 },
+                { type: 'pause', duration: 500 }
+            ]
+        }
+    ]);
 }
 
-export function selectOptionByAttribute(selector: string, attribute: string, attributeValue: string, index: number = 0): void {
+export function selectOptionByAttribute(
+    selector: string,
+    attribute: string,
+    attributeValue: string,
+    index: number = 0
+): void {
     click(selector, index);
     waitForElDisplayed(`${selector} option[${attribute}="${attributeValue}"]`);
     $(`${selector} option[${attribute}="${attributeValue}"]`).click();
@@ -411,7 +482,7 @@ export function checkElementScreenshot(selector: string, tag: string, options?: 
     return browser.checkElement($$(selector)[index], tag, options);
 }
 
-function checkSelectorExists (selector: string, index: number = 0): void {
+function checkSelectorExists(selector: string, index: number = 0): void {
     if ($$(selector)[index] === undefined) {
         throw new Error(`Element with index: ${index} for selector: '${selector}' not found.`);
     }

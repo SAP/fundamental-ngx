@@ -6,7 +6,8 @@ import {
     clickAndMoveElement,
     doesItExist,
     getAttributeByName,
-    getElementArrayLength, getElementClass,
+    getElementArrayLength,
+    getElementClass,
     getText,
     mouseHoverElement,
     refreshPage,
@@ -14,23 +15,45 @@ import {
     sendKeys,
     waitForElDisplayed
 } from '../../driver/wdio';
-import { densityAttribute, disabledAttribute} from '../fixtures/appData/slider-content'
+import { densityAttribute, disabledAttribute } from '../fixtures/appData/slider-content';
 
-describe('slider test suite', function() {
+describe('slider test suite', () => {
     const sliderPage = new SliderPo();
     const {
-        basicExamples, sliderHandles, valueLabels, tooltipExamples, sliderTooltip, ticksAndLabelsExamples, sliderAttr,
-        sliderLabels, customExamples, rangeExamples, disabledExamples, cozyExamples, playgroundExamples,
-        sliderTypeMenu, sliderTypeOptions, sliderInput, firstSliderLabel, lastSliderLabel, secondSliderLabel,
-        progressTracker, inputCheckboxes, sliderTicks, sliderTooltipInput, sliderTooltipInputFF, formFieldExamples,
-        formValueLabels, altSliderAttr
+        basicExamples,
+        sliderHandles,
+        valueLabels,
+        tooltipExamples,
+        sliderTooltip,
+        ticksAndLabelsExamples,
+        sliderAttr,
+        sliderLabels,
+        customExamples,
+        rangeExamples,
+        disabledExamples,
+        cozyExamples,
+        playgroundExamples,
+        sliderTypeMenu,
+        sliderTypeOptions,
+        sliderInput,
+        firstSliderLabel,
+        lastSliderLabel,
+        secondSliderLabel,
+        progressTracker,
+        inputCheckboxes,
+        sliderTicks,
+        sliderTooltipInput,
+        sliderTooltipInputFF,
+        formFieldExamples,
+        formValueLabels,
+        altSliderAttr
     } = sliderPage;
 
     beforeAll(() => {
         sliderPage.open();
     }, 1);
 
-    describe('basic examples', function() {
+    describe('basic examples', () => {
         it('should check slider with default state', () => {
             const startValue = getText(basicExamples + valueLabels);
             clickAndMoveElement(basicExamples + sliderHandles, -50, 0);
@@ -41,7 +64,7 @@ describe('slider test suite', function() {
             const startValue = getText(basicExamples + valueLabels, 1);
             clickAndMoveElement(basicExamples + sliderHandles, -50, 0, 1);
             expect(getText(basicExamples + valueLabels, 1)).not.toEqual(startValue);
-            expect(getText(basicExamples + valueLabels, 1)).toContain(('-'));
+            expect(getText(basicExamples + valueLabels, 1)).toContain('-');
         });
 
         it('should check slider with step by 5', () => {
@@ -55,7 +78,7 @@ describe('slider test suite', function() {
         });
     });
 
-    describe('tooltip examples', function() {
+    describe('tooltip examples', () => {
         it('should check readonly tooltip', () => {
             scrollIntoView(tooltipExamples);
             mouseHoverElement(tooltipExamples + sliderHandles);
@@ -73,7 +96,7 @@ describe('slider test suite', function() {
         });
     });
 
-    describe('custom value examples', function() {
+    describe('custom value examples', () => {
         it('should check custom slider values', () => {
             scrollIntoView(customExamples);
             const startValue = getText(customExamples + valueLabels);
@@ -82,7 +105,7 @@ describe('slider test suite', function() {
         });
     });
 
-    describe('range slider examples', function() {
+    describe('range slider examples', () => {
         it('should check default range slider', () => {
             scrollIntoView(rangeExamples);
             const startValuesArr = getText(rangeExamples + valueLabels).split('\n');
@@ -116,7 +139,7 @@ describe('slider test suite', function() {
         });
     });
 
-    describe('should check form field examples', function() {
+    describe('should check form field examples', () => {
         it('should check single mode output', () => {
             const startValue = getText(formFieldExamples + formValueLabels);
             clickAndMoveElement(formFieldExamples + sliderHandles, -50, 0);
@@ -131,14 +154,14 @@ describe('slider test suite', function() {
         });
     });
 
-    describe('disabled examples', function() {
+    describe('disabled examples', () => {
         it('should check range slider is disabled', () => {
             scrollIntoView(disabledExamples);
             expect(getElementClass(disabledExamples + sliderAttr)).toContain('is-disabled');
         });
     });
 
-    describe('cozy examples', function() {
+    describe('cozy examples', () => {
         it('should check cozy property', () => {
             scrollIntoView(cozyExamples);
             expect(getAttributeByName(cozyExamples + altSliderAttr, densityAttribute)).toBe('cozy');
@@ -151,7 +174,7 @@ describe('slider test suite', function() {
         });
     });
 
-    describe('playground examples', function() {
+    describe('playground examples', () => {
         it('should check slider single and range sliders available', () => {
             scrollIntoView(playgroundExamples);
             expect(getElementArrayLength(playgroundExamples + sliderHandles)).toBe(1);
@@ -210,13 +233,13 @@ describe('slider test suite', function() {
         });
     });
 
-    describe('orientation check', function() {
+    describe('orientation check', () => {
         it('should check RTL/LTR orientations', () => {
             sliderPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('visual regression', function() {
+    xdescribe('visual regression', () => {
         beforeEach(() => {
             refreshPage();
         }, 1);
@@ -228,10 +251,10 @@ describe('slider test suite', function() {
     });
 
     function clickTooltipInput(): void {
-        return (browserIsFirefox() ? click(sliderTooltipInputFF) : click(sliderTooltipInput));
+        return browserIsFirefox() ? click(sliderTooltipInputFF) : click(sliderTooltipInput);
     }
 
     function clearTooltipInput(): void {
-        return (browserIsFirefox() ? clearValue(sliderTooltipInputFF) : clearValue(sliderTooltipInput));
+        return browserIsFirefox() ? clearValue(sliderTooltipInputFF) : clearValue(sliderTooltipInput);
     }
 });

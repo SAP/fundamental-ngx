@@ -2,23 +2,28 @@ import { CheckboxPo } from '../pages/checkbox.po';
 import {
     applyState,
     click,
-    executeScriptBeforeTagAttr, getAttributeByName,
+    executeScriptBeforeTagAttr,
+    getAttributeByName,
     getCSSPropertyByName,
     getElementArrayLength,
-    getText, isElementClickable,
+    getText,
+    isElementClickable,
     refreshPage,
     scrollIntoView
 } from '../../driver/wdio';
 import {
     acceptAllTrue,
     allMarkedFalse,
-    allMarkedTrue, altCustomLabel, customLabel,
+    allMarkedTrue,
+    altCustomLabel,
+    customLabel,
     customLabelsArr,
     emptyDataArr,
-    emptyString, stateClassesArr
+    emptyString,
+    stateClassesArr
 } from '../fixtures/appData/checkbox-content';
 
-describe('checkbox test suite', function() {
+describe('checkbox test suite', () => {
     const checkboxPage = new CheckboxPo();
     const {
         standardCheckbox,
@@ -37,72 +42,94 @@ describe('checkbox test suite', function() {
         checkboxPage.open();
     }, 1);
 
-    describe('standard checkbox examples', function() {
+    describe('standard checkbox examples', () => {
         it('should mark checkbox', () => {
             scrollIntoView(standardCheckbox);
 
-            expect(executeScriptBeforeTagAttr(standardCheckbox + checkboxLabel, 'content'))
-                .toEqual(emptyString, 'mark is present');
+            expect(executeScriptBeforeTagAttr(standardCheckbox + checkboxLabel, 'content')).toEqual(
+                emptyString,
+                'mark is present'
+            );
 
             click(standardCheckbox + checkboxLabel);
 
-            expect(executeScriptBeforeTagAttr(standardCheckbox + checkboxLabel, 'content'))
-                .not.toEqual(emptyString, 'mark is not present');
+            expect(executeScriptBeforeTagAttr(standardCheckbox + checkboxLabel, 'content')).not.toEqual(
+                emptyString,
+                'mark is not present'
+            );
         });
     });
 
-    describe('tristate checkbox examples', function() {
+    describe('tristate checkbox examples', () => {
         it('should check the 3 checkbox marking states', () => {
             scrollIntoView(tristateCheckbox);
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content'))
-                .toEqual(emptyString, 'mark is present');
+            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content')).toEqual(
+                emptyString,
+                'mark is present'
+            );
 
             click(tristateCheckbox + checkboxLabel);
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content'))
-                .not.toEqual(emptyString, 'mark is not present');
+            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content')).not.toEqual(
+                emptyString,
+                'mark is not present'
+            );
 
             click(tristateCheckbox + checkboxLabel);
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content'))
-                .not.toEqual(emptyString, 'mark is not present');
+            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content')).not.toEqual(
+                emptyString,
+                'mark is not present'
+            );
 
             click(tristateCheckbox + checkboxLabel);
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content'))
-                .toEqual(emptyString, 'mark is present');
+            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content')).toEqual(
+                emptyString,
+                'mark is present'
+            );
         });
 
         it('should check 3rd state not markable', () => {
             scrollIntoView(tristateCheckbox);
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1))
-                .not.toEqual(emptyString, 'mark is not present');
+            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1)).not.toEqual(
+                emptyString,
+                'mark is not present'
+            );
 
             click(tristateCheckbox + checkboxLabel, 1);
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1))
-                .not.toEqual(emptyString, 'mark is not present');
+            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1)).not.toEqual(
+                emptyString,
+                'mark is not present'
+            );
 
             click(tristateCheckbox + checkboxLabel, 1);
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1))
-                .toEqual(emptyString, 'mark is present');
+            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1)).toEqual(
+                emptyString,
+                'mark is present'
+            );
 
             click(tristateCheckbox + checkboxLabel, 1);
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1))
-                .not.toEqual(emptyString, 'mark is not present');
+            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1)).not.toEqual(
+                emptyString,
+                'mark is not present'
+            );
 
             click(tristateCheckbox + checkboxLabel, 1);
 
-            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1))
-                .toEqual(emptyString, 'mark is present');
+            expect(executeScriptBeforeTagAttr(tristateCheckbox + checkboxLabel, 'content', 1)).toEqual(
+                emptyString,
+                'mark is present'
+            );
         });
     });
 
-    describe('checkbox custom values examples', function() {
+    describe('checkbox custom values examples', () => {
         it('should check 2 state custom labels', () => {
             scrollIntoView(customValueCheckbox);
             const initialTextArr = getText(customValueCheckbox).split('\n');
@@ -138,7 +165,7 @@ describe('checkbox test suite', function() {
         });
     });
 
-    describe('checkbox with reactive form examples', function() {
+    describe('checkbox with reactive form examples', () => {
         afterEach(() => {
             refreshPage();
         }, 1);
@@ -149,8 +176,9 @@ describe('checkbox test suite', function() {
             click(reactiveFormCheckbox + checkboxLabel);
 
             for (let i = 0; i < checkboxCount; i++) {
-                expect(executeScriptBeforeTagAttr(reactiveFormCheckbox + checkboxLabel, 'content', i))
-                    .not.toEqual(emptyString);
+                expect(executeScriptBeforeTagAttr(reactiveFormCheckbox + checkboxLabel, 'content', i)).not.toEqual(
+                    emptyString
+                );
             }
             const textArr = getText(reactiveFormCheckbox).split('\n');
             const outputValue1 = textArr[5];
@@ -160,8 +188,9 @@ describe('checkbox test suite', function() {
             click(reactiveFormCheckbox + checkboxLabel);
 
             for (let i = 0; i < checkboxCount; i++) {
-                expect(executeScriptBeforeTagAttr(reactiveFormCheckbox + checkboxLabel, 'content', i))
-                    .toEqual(emptyString);
+                expect(executeScriptBeforeTagAttr(reactiveFormCheckbox + checkboxLabel, 'content', i)).toEqual(
+                    emptyString
+                );
             }
             const textArr2 = getText(reactiveFormCheckbox).split('\n');
             const outputValue2 = textArr2[5];
@@ -169,7 +198,7 @@ describe('checkbox test suite', function() {
             expect(outputValue2).toEqual(allMarkedFalse, 'unmarking acceptall doesnt unmark all options');
         });
 
-        it('check that marking 1 option doesn\'t mark accept all box', () => {
+        it("check that marking 1 option doesn't mark accept all box", () => {
             scrollIntoView(reactiveFormCheckbox);
             click(reactiveFormCheckbox + checkboxLabel, 1);
             const textArr = getText(reactiveFormCheckbox).split('\n');
@@ -192,7 +221,7 @@ describe('checkbox test suite', function() {
         });
     });
 
-    describe('checkbox with custom label examples', function() {
+    describe('checkbox with custom label examples', () => {
         it('should have a custom label', () => {
             scrollIntoView(customLabelCheckbox);
             const textArr = getText(customLabelCheckbox).split('\n');
@@ -202,21 +231,18 @@ describe('checkbox test suite', function() {
         });
 
         it('should check the checkbox and link are clickable', () => {
-            expect(isElementClickable(customLabelCheckbox + checkboxLabel))
-                .toBe(true, 'checkbox is not clickable');
-            expect(isElementClickable(customLabelCheckbox + link))
-                .toBe(true, 'link is not clickable');
+            expect(isElementClickable(customLabelCheckbox + checkboxLabel)).toBe(true, 'checkbox is not clickable');
+            expect(isElementClickable(customLabelCheckbox + link)).toBe(true, 'link is not clickable');
         });
     });
 
-    describe('checkbox styling properties examples', function() {
+    describe('checkbox styling properties examples', () => {
         it('should check states', () => {
             scrollIntoView(styledCheckbox);
             const checkboxCount = getElementArrayLength(styledCheckbox + checkbox);
 
             for (let i = 0; i < checkboxCount; i++) {
-                expect(getAttributeByName(styledCheckbox + checkboxInput, 'class', i))
-                    .toContain(stateClassesArr[i]);
+                expect(getAttributeByName(styledCheckbox + checkboxInput, 'class', i)).toContain(stateClassesArr[i]);
             }
         });
 
@@ -227,18 +253,19 @@ describe('checkbox test suite', function() {
                 if (i === 5) {
                     continue;
                 }
-                expect(isElementClickable(styledCheckbox + checkboxLabel, i))
-                    .toBe(true, `checkbox ${i} is not clickable`);
+                expect(isElementClickable(styledCheckbox + checkboxLabel, i)).toBe(
+                    true,
+                    `checkbox ${i} is not clickable`
+                );
             }
         });
 
         it('should check disabled checkbox is not clickable', () => {
-            expect(isElementClickable(styledCheckbox + checkboxLabel, 5))
-                .toBe(false, 'disabled checkbox is clickable');
+            expect(isElementClickable(styledCheckbox + checkboxLabel, 5)).toBe(false, 'disabled checkbox is clickable');
         });
     });
 
-    describe('general checks', function() {
+    describe('general checks', () => {
         it('should check focus style exists', () => {
             const checkboxCount = getElementArrayLength(checkboxInput);
 
@@ -257,7 +284,7 @@ describe('checkbox test suite', function() {
         });
     });
 
-    xdescribe('visual regression', function() {
+    xdescribe('visual regression', () => {
         beforeAll(() => {
             refreshPage();
         }, 1);

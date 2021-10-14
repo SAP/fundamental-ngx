@@ -1,15 +1,29 @@
 import { InputGroupPo } from '../pages/input-group.po';
 import {
-    clearValue, click,
-    getElementArrayLength, getElementPlaceholder, getElementSize, getText, getValue, isElementClickable, isEnabled,
-    refreshPage, scrollIntoView, setValue
+    clearValue,
+    click,
+    getElementArrayLength,
+    getElementPlaceholder,
+    getElementSize,
+    getText,
+    getValue,
+    isElementClickable,
+    isEnabled,
+    refreshPage,
+    scrollIntoView,
+    setValue
 } from '../../driver/wdio';
 import { smallTestText, testText } from '../fixtures/appData/input-group-contents';
 
-describe('Input group component test', function() {
+describe('Input group component test', () => {
     const inputGroupPage = new InputGroupPo();
     const {
-        inputFields, inputGroupSearchText, inputButtons, playgroundCheckbox, playgroundInputField, rightTextAddon,
+        inputFields,
+        inputGroupSearchText,
+        inputButtons,
+        playgroundCheckbox,
+        playgroundInputField,
+        rightTextAddon,
         playgroundInputButton
     } = inputGroupPage;
 
@@ -21,8 +35,7 @@ describe('Input group component test', function() {
         refreshPage();
     }, 2);
 
-    describe('Check all placeholders', function() {
-
+    describe('Check all placeholders', () => {
         it('verify inputs have amount placeholder text', () => {
             const inputLength = getElementArrayLength(inputFields);
             for (let i = 1; i < inputLength - 10; i++) {
@@ -43,15 +56,13 @@ describe('Input group component test', function() {
         });
     });
 
-    describe('Check Input Group Search Component Within Angular Reactive Forms', function() {
-
+    describe('Check Input Group Search Component Within Angular Reactive Forms', () => {
         it('verify that input is disabled', () => {
             expect(isEnabled(inputFields, 11)).toBe(false);
         });
     });
 
-    describe('Check all input fields accept values', function() {
-
+    describe('Check all input fields accept values', () => {
         it('verify eight input fields accept values', () => {
             const inputLength = getElementArrayLength(inputFields);
             for (let i = 1; i < inputLength - 10; i++) {
@@ -95,8 +106,7 @@ describe('Input group component test', function() {
         expect(defaultHeight.height).toBeGreaterThan(compactHeight.height);
     });
 
-    describe('Check playground', function() {
-
+    describe('Check playground', () => {
         it('inline be smaller than the default', () => {
             scrollIntoView(playgroundCheckbox);
             const defaultWidth = getElementSize(inputFields, 18);
@@ -135,15 +145,13 @@ describe('Input group component test', function() {
         });
     });
 
-    describe('Check orientation', function() {
-
+    describe('Check orientation', () => {
         it('should check RTL and LTR orientation', () => {
             inputGroupPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Should check visual regression', function() {
-
+    xdescribe('Should check visual regression', () => {
         it('should check visual regression for all examples', () => {
             inputGroupPage.saveExampleBaselineScreenshot();
             expect(inputGroupPage.compareWithBaseline()).toBeLessThan(5);

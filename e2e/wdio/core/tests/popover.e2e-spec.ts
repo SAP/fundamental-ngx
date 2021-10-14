@@ -1,7 +1,14 @@
 import { PopoverPo } from '../pages/popover.po';
 import {
-    click, getElementArrayLength, getElementClass, getText, isElementClickable, isElementDisplayed,
-    refreshPage, scrollIntoView, waitForElDisplayed
+    click,
+    getElementArrayLength,
+    getElementClass,
+    getText,
+    isElementClickable,
+    isElementDisplayed,
+    refreshPage,
+    scrollIntoView,
+    waitForElDisplayed
 } from '../../driver/wdio';
 
 import {
@@ -16,18 +23,52 @@ import {
     buttonsPopoverTestText,
     hoverTestText,
     containerTestText,
-    triggerTestText, messageTestText
+    triggerTestText,
+    messageTestText
 } from '../fixtures/appData/popover-contents';
 
-describe('Popover test suite', function() {
+describe('Popover test suite', () => {
     const popoverPage = new PopoverPo();
     const {
-        avatar, popover, option, icon, iconMoney, standardMoneyButton, barElement, basicPopoverButton,
-        simplePopoverButton, popoverMessage, headerPopoverButton, placementPopoverButton, programmaticControlButton,
-        popoverDialogsButton, multiInputButton, multiInputOption, multiInputSpan, popoverDialogsHeader, popoverDialogParagraph,
-        clickMeButton, popoverDialogMessage, hoverElement, triggerButton2, triggerButton, popoverContainer, scrollButton,
-        scrollMessage, plusButton, dynamicOption, dropdownButton, dropdownOption, dynamicSubOption, cdkButton, segmentButton,
-        topButton, endButton, centerButton, startButton, bottomButton
+        avatar,
+        popover,
+        option,
+        icon,
+        iconMoney,
+        standardMoneyButton,
+        barElement,
+        basicPopoverButton,
+        simplePopoverButton,
+        popoverMessage,
+        headerPopoverButton,
+        placementPopoverButton,
+        programmaticControlButton,
+        popoverDialogsButton,
+        multiInputButton,
+        multiInputOption,
+        multiInputSpan,
+        popoverDialogsHeader,
+        popoverDialogParagraph,
+        clickMeButton,
+        popoverDialogMessage,
+        hoverElement,
+        triggerButton2,
+        triggerButton,
+        popoverContainer,
+        scrollButton,
+        scrollMessage,
+        plusButton,
+        dynamicOption,
+        dropdownButton,
+        dropdownOption,
+        dynamicSubOption,
+        cdkButton,
+        segmentButton,
+        topButton,
+        endButton,
+        centerButton,
+        startButton,
+        bottomButton
     } = popoverPage;
 
     beforeAll(() => {
@@ -38,8 +79,7 @@ describe('Popover test suite', function() {
         refreshPage();
     }, 1);
 
-    describe('Check Basic Popovers', function() {
-
+    describe('Check Basic Popovers', () => {
         it('should check that avatars have popovers and all options are clickable', () => {
             scrollIntoView(avatar);
             const avatarLength = getElementArrayLength(avatar);
@@ -98,8 +138,7 @@ describe('Popover test suite', function() {
         });
     });
 
-    describe('Check Simple Popover', function() {
-
+    describe('Check Simple Popover', () => {
         it('check that after clicking the button a message with text is displayed', () => {
             scrollIntoView(simplePopoverButton);
             click(simplePopoverButton);
@@ -108,8 +147,7 @@ describe('Popover test suite', function() {
         });
     });
 
-    describe('Check Popover with Header and Footer', function() {
-
+    describe('Check Popover with Header and Footer', () => {
         it('should check that buttons have popovers and all options are clickable', () => {
             scrollIntoView(headerPopoverButton);
             const buttonLength = getElementArrayLength(headerPopoverButton);
@@ -148,8 +186,7 @@ describe('Popover test suite', function() {
         });
     });
 
-    describe('Check Popover Placement', function() {
-
+    describe('Check Popover Placement', () => {
         it('should check that arrow buttons have popovers and all options are clickable', () => {
             scrollIntoView(placementPopoverButton);
             const buttonsLength = getElementArrayLength(placementPopoverButton);
@@ -165,8 +202,7 @@ describe('Popover test suite', function() {
         });
     });
 
-    describe('Check Programmatic Control', function() {
-
+    describe('Check Programmatic Control', () => {
         it('should check that avatar has popover and all options are clickable', () => {
             scrollIntoView(avatar, 2);
             expect(isElementDisplayed(avatar, 2)).toBe(true, `avatar not displayed`);
@@ -180,8 +216,7 @@ describe('Popover test suite', function() {
         });
     });
 
-    describe('Check Popovers in Dialogs', function() {
-
+    describe('Check Popovers in Dialogs', () => {
         it('should check popovers in dialogs example', () => {
             scrollIntoView(popoverDialogsButton);
             click(popoverDialogsButton);
@@ -190,7 +225,7 @@ describe('Popover test suite', function() {
             for (let i = 3; i < optionLength; i++) {
                 click(multiInputOption, i);
 
-                if (i !== (optionLength - 1)) {
+                if (i !== optionLength - 1) {
                     click(multiInputButton);
                 }
             }
@@ -216,16 +251,14 @@ describe('Popover test suite', function() {
         });
     });
 
-    describe('Check Fill Control Width', function() {
-
+    describe('Check Fill Control Width', () => {
         it('should check fill control width example', () => {
             scrollIntoView(hoverElement);
             expect(getText(hoverElement)).toBe(hoverTestText);
         });
     });
 
-    describe('Check Popover Focus Trap', function() {
-
+    describe('Check Popover Focus Trap', () => {
         it('should check that after clicking trigger button appears message with text and container have some text', () => {
             scrollIntoView(triggerButton);
             click(triggerButton);
@@ -235,8 +268,7 @@ describe('Popover test suite', function() {
         });
     });
 
-    describe('Check Popover Focus Trap', function() {
-
+    describe('Check Popover Focus Trap', () => {
         it('should check that after clicking trigger button has popover and all options are clickable', () => {
             scrollIntoView(triggerButton2);
             click(triggerButton2);
@@ -258,11 +290,9 @@ describe('Popover test suite', function() {
             }
             expect(getText(barElement, 1)).toBe(headerTestText);
         });
-
     });
 
-    describe('Check Popover Scroll Example', function() {
-
+    describe('Check Popover Scroll Example', () => {
         it('should check that after clicking messages appears', () => {
             scrollIntoView(scrollButton);
             const buttonLength = getElementArrayLength(scrollButton);
@@ -276,8 +306,7 @@ describe('Popover test suite', function() {
         });
     });
 
-    describe('Check Dynamic Body Height', function() {
-
+    describe('Check Dynamic Body Height', () => {
         it('should check that first dropdown option has clickable suboptions', () => {
             scrollIntoView(plusButton);
             click(plusButton);
@@ -334,8 +363,7 @@ describe('Popover test suite', function() {
         });
     });
 
-    describe('Check Dropdown Popover', function() {
-
+    describe('Check Dropdown Popover', () => {
         it('should check disable button', () => {
             scrollIntoView(dropdownButton);
             expect(getElementClass(dropdownButton, 1)).toContain('is-disabled');
@@ -358,8 +386,7 @@ describe('Popover test suite', function() {
         });
     });
 
-    describe('Check Dropdown Popover', function() {
-
+    describe('Check Dropdown Popover', () => {
         it('should check that arrow button is clickable and it has popover and clickable options', () => {
             scrollIntoView(cdkButton);
             click(cdkButton, 5);
@@ -378,28 +405,28 @@ describe('Popover test suite', function() {
             // Origin X
             click(startButton);
             expect(getElementClass(startButton)).toContain('toggled');
-            click(centerButton)
+            click(centerButton);
             expect(getElementClass(centerButton)).toContain('toggled');
             click(endButton);
             expect(getElementClass(endButton)).toContain('toggled');
             // Origin Y
             click(bottomButton);
             expect(getElementClass(bottomButton)).toContain('toggled');
-            click(centerButton, 1)
+            click(centerButton, 1);
             expect(getElementClass(centerButton, 1)).toContain('toggled');
             click(topButton);
             expect(getElementClass(topButton)).toContain('toggled');
             // // Overlay X
             click(startButton, 1);
             expect(getElementClass(startButton, 1)).toContain('toggled');
-            click(centerButton, 2)
+            click(centerButton, 2);
             expect(getElementClass(centerButton, 2)).toContain('toggled');
             click(endButton, 1);
             expect(getElementClass(endButton, 1)).toContain('toggled');
             // // Overlay Y
             click(bottomButton, 1);
             expect(getElementClass(bottomButton, 1)).toContain('toggled');
-            click(centerButton, 3)
+            click(centerButton, 3);
             expect(getElementClass(centerButton, 3)).toContain('toggled');
             click(topButton, 1);
             expect(getElementClass(topButton, 1)).toContain('toggled');
@@ -410,8 +437,7 @@ describe('Popover test suite', function() {
         popoverPage.checkRtlSwitch();
     });
 
-    xdescribe('visual regression', function() {
-
+    xdescribe('visual regression', () => {
         it('should check examples visual regression', () => {
             popoverPage.saveExampleBaselineScreenshot();
             expect(popoverPage.compareWithBaseline()).toBeLessThan(5);

@@ -7,12 +7,9 @@ import {
     waitForPresent
 } from '../../driver/wdio';
 
-describe('Object identifier test suite', function() {
+describe('Object identifier test suite', () => {
     const objectIdentifierPage = new ObjectIdentifierPo();
-    const {
-        identifier,
-        clickableLinks,
-    } = objectIdentifierPage;
+    const { identifier, clickableLinks } = objectIdentifierPage;
 
     beforeAll(() => {
         objectIdentifierPage.open();
@@ -27,17 +24,17 @@ describe('Object identifier test suite', function() {
         const linkElementArr = getElementArrayLength(clickableLinks);
         for (let i = 0; i < linkElementArr; i++) {
             scrollIntoView(clickableLinks, i);
-            expect(isElementClickable(clickableLinks, i)).toBe(true,'link with index ${i} not clickable');
+            expect(isElementClickable(clickableLinks, i)).toBe(true, 'link with index ${i} not clickable');
         }
     });
 
-    describe('Check orientation', function() {
+    describe('Check orientation', () => {
         it('Verify RTL and LTR orientation', () => {
             objectIdentifierPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             objectIdentifierPage.saveExampleBaselineScreenshot();
             expect(objectIdentifierPage.compareWithBaseline()).toBeLessThan(5);

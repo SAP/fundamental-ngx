@@ -5,17 +5,9 @@ export const iconsArr = [
     'message-warning',
     'message-success',
     'thumb-up'
-]; 
-
-export const buttonClassArr = [
-    'standard',
-    'emphasized',
-    'negative',
-    'attention',
-    'positive',
-    'positive',
-    'positive'
 ];
+
+export const buttonClassArr = ['standard', 'emphasized', 'negative', 'attention', 'positive', 'positive', 'positive'];
 
 export const sectionsArr = [
     'fd-object-based-message-box-example ',

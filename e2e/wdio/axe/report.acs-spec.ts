@@ -10,26 +10,30 @@ describe('Accessibility test', () => {
         const options = { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa'] } };
 
         for (const pageUrl in appURLs) {
-            for (const urls in appURLs[pageUrl]) {
-                open(`/fundamental-ngx#/${pageUrl}${appURLs[pageUrl][urls]}`);
-                waitForPresent(title);
-                execute(axe.source);
+            if (appURLs[pageUrl]) {
+                for (const urls in appURLs[pageUrl]) {
+                    if (appURLs[pageUrl][urls]) {
+                        open(`/fundamental-ngx#/${pageUrl}${appURLs[pageUrl][urls]}`);
+                        waitForPresent(title);
+                        execute(axe.source);
 
-                const results = browser.executeAsync((options, done) => {
-                    axe.run(options, function(err, results) {
-                        if (err) {
-                            done(err);
-                        }
-                        done(results);
-                    });
-                }, options);
+                        const results = browser.executeAsync((opts, done) => {
+                            axe.run(opts, (err, res) => {
+                                if (err) {
+                                    done(err);
+                                }
+                                done(res);
+                            });
+                        }, options);
 
-                createHtmlReport({
-                    results: results,
-                    options: { outputDir: `axe-reports/${pageUrl}`, reportFileName: `index-${urls}.html` }
-                });
-                console.log(`index-${urls}.html report created`)
-                // No expect added for now. Only an audit.
+                        createHtmlReport({
+                            results: results,
+                            options: { outputDir: `axe-reports/${pageUrl}`, reportFileName: `index-${urls}.html` }
+                        });
+                        console.log(`index-${urls}.html report created`);
+                        // No expect added for now. Only an audit.
+                    }
+                }
             }
         }
         console.log(`All report are generated successfully`);

@@ -22,21 +22,31 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
-import {
-    errorText,
-    favoriteColor,
-    labelsArray,
-    placeholdersArray
-} from '../fixtures/appData/input-page-contents';
+import { errorText, favoriteColor, labelsArray, placeholdersArray } from '../fixtures/appData/input-page-contents';
 import { autocompleteOption, longLine, number, special_characters, text } from '../fixtures/testData/input';
 import { InputPo } from '../pages/input.po';
 
-describe('Input should ', function () {
+describe('Input should ', () => {
     const inputPage = new InputPo();
     const {
-        defaultInput, textInput, numberInput, compactInput, readonlyInput, disabledInput, inlineHelpInput,
-        messagesComponentsInput, submitBtn, errorTextAttr, requiredInputLabel, questionMarkSpan, inputsLabels, inputsArray,
-        autocompleteInput, autocompleteInputLabel, autocompleteOptions, disabledInputAttribute
+        defaultInput,
+        textInput,
+        numberInput,
+        compactInput,
+        readonlyInput,
+        disabledInput,
+        inlineHelpInput,
+        messagesComponentsInput,
+        submitBtn,
+        errorTextAttr,
+        requiredInputLabel,
+        questionMarkSpan,
+        inputsLabels,
+        inputsArray,
+        autocompleteInput,
+        autocompleteInputLabel,
+        autocompleteOptions,
+        disabledInputAttribute
     } = inputPage;
 
     beforeAll(() => {
@@ -71,8 +81,7 @@ describe('Input should ', function () {
         addValue(defaultInput, number);
         addValue(defaultInput, special_characters);
 
-        expect(getValue(defaultInput))
-            .toEqual(text + number + special_characters);
+        expect(getValue(defaultInput)).toEqual(text + number + special_characters);
     });
 
     it('impose any filters on the kind of input values the component receives (text)', () => {
@@ -81,8 +90,7 @@ describe('Input should ', function () {
         addValue(textInput, special_characters);
         addValue(textInput, text);
 
-        expect(getValue(textInput))
-            .toEqual(number + special_characters + text); // ???
+        expect(getValue(textInput)).toEqual(number + special_characters + text); // ???
     });
     // TODO: it is not working the same for manual and automation.
     xit('impose any filters on the kind of input values the component receives (number)', () => {
@@ -122,8 +130,7 @@ describe('Input should ', function () {
     });
 
     it('have placeholder', () => {
-        expect(getAttributeByNameArr(inputsArray, 'placeholder', 1))
-            .toEqual(placeholdersArray);
+        expect(getAttributeByNameArr(inputsArray, 'placeholder', 1)).toEqual(placeholdersArray);
     });
 
     it('should have error border color', () => {
@@ -163,7 +170,7 @@ describe('Input should ', function () {
         });
         pause(3000);
         click(autocompleteOptions);
-        expect((getValue(autocompleteInput)).toLowerCase()).toContain(autocompleteOption);
+        expect(getValue(autocompleteInput).toLowerCase()).toContain(autocompleteOption);
     });
 
     it('should compact be smaller than the default', () => {
@@ -177,7 +184,7 @@ describe('Input should ', function () {
         inputPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             inputPage.saveExampleBaselineScreenshot();
             expect(inputPage.compareWithBaseline()).toBeLessThan(5);
