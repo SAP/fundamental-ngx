@@ -5,14 +5,14 @@ import {
     getText,
     getTextArr,
     isElementClickable,
-    isElementDisplayed,
+    isElementDisplayed, pause,
     refreshPage,
     selectOptionByValueAttribute,
     sendKeys,
     setValue,
     waitElementToBeClickable,
     waitForElDisappear,
-    waitForElDisplayed, waitForNotPresent,
+    waitForElDisplayed, waitForNotDisplayed, waitForNotPresent,
     waitForPresent
 } from '../../driver/wdio';
 import { ApprovalFlowPo } from '../pages/approval-flow.po';
@@ -334,7 +334,8 @@ describe('Approval flow', function() {
             expect(approvalFlowNodeCountBefore).toEqual(approvalFlowNodeCountAfterRemove + 1);
         });
 
-        it('should be able to undo added approval node', () => {
+        // skip due to found issue https://github.com/SAP/fundamental-ngx/issues/6903
+        xit('should be able to undo added approval node', () => {
             const approvalFlowNodeCountBefore = getElementArrayLength(approvalFlowNode);
 
             click(editExampleButton);
@@ -349,6 +350,7 @@ describe('Approval flow', function() {
             const approvalFlowNodeCountAfterAdding = getElementArrayLength(approvalFlowNode);
             waitForElDisplayed(messageStripUndoLink);
             click(messageStripUndoLink);
+            waitForNotDisplayed(messageStripUndoLink)
 
             const approvalFlowNodeCountAfterUndo = getElementArrayLength(approvalFlowNode);
 
@@ -356,7 +358,8 @@ describe('Approval flow', function() {
             expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfterUndo);
         });
 
-        it('should be able to cancel undo', () => {
+        // skip due to https://github.com/SAP/fundamental-ngx/issues/6903
+        xit('should be able to cancel undo', () => {
             click(editExampleButton);
             waitForElDisplayed(addNode);
             click(addNode);
