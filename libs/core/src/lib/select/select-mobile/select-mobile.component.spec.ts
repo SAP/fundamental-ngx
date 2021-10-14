@@ -45,10 +45,13 @@ describe('SelectComponent in mobile mode', () => {
         })
     );
 
-    function setup(mobileConfig: MobileModeConfig = MOBILE_CONFIG): void {
+    async function setup(mobileConfig: MobileModeConfig = MOBILE_CONFIG): Promise<void> {
         TestBed.overrideProvider(MOBILE_CONFIG_TEST_TOKEN, { useValue: mobileConfig });
         TestBed.compileComponents();
         fixture = TestBed.createComponent(TestWrapperComponent);
+
+        await whenStable(fixture);
+
         testComponent = fixture.componentInstance;
         fixture.detectChanges();
     }

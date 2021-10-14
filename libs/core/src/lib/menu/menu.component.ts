@@ -243,7 +243,7 @@ export class MenuComponent
             parent: this._injector
         });
 
-        await this._dynamicComponentService.createDynamicModule(
+        this._mobileModeComponentRef = await this._dynamicComponentService.createDynamicModule(
             this.menuRootTemplate,
             MenuMobileModule,
             MenuMobileComponent,
