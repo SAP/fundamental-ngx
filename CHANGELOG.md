@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.21 (2021-10-14)
+
+
+### Features
+
+* **platform:** add onchange callback to form generator items ([#6883](https://github.com/SAP/fundamental-ngx/issues/6883)) ([d3a1255](https://github.com/SAP/fundamental-ngx/commit/d3a1255a7fe5789e983613a39a0e81e29cfc5011))
+
 ## 0.33.0-rc.20 (2021-10-14)
 
 ## 0.33.0-rc.19 (2021-10-14)
