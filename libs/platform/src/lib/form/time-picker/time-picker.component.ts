@@ -27,7 +27,6 @@ import { BaseInput, FormField, FormFieldControl, Status } from '@fundamental-ngx
     providers: [{ provide: FormFieldControl, useExisting: PlatformTimePickerComponent, multi: true }]
 })
 export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit, AfterViewInit, OnDestroy {
-
     /**
      * @Input date time object representation
      */
@@ -174,7 +173,7 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
      */
     handleOpenChange(open: boolean): void {
         this.isOpenChange.emit(open);
-    };
+    }
 
     /**
      * logic to handle validation from both platform forms and core datetiimepicker

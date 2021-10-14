@@ -48,4 +48,4 @@ const routes: Routes = [
         PlatformMenuWithIconsExampleComponent
     ]
 })
-export class PlatformMenuDocsModule { }
+export class PlatformMenuDocsModule {}

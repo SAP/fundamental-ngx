@@ -8,7 +8,12 @@ export const API_FILES = {
     actionbar: ['ActionBarComponent', 'ActionButtonGroupComponent'],
     button: ['ButtonComponent'],
     checkbox: ['CheckboxComponent'],
-    formGenerator: ['FormGeneratorComponent', 'FormGeneratorService', 'DynamicFormControlDirective', 'DynamicFormControlFieldDirective'],
+    formGenerator: [
+        'FormGeneratorComponent',
+        'FormGeneratorService',
+        'DynamicFormControlDirective',
+        'DynamicFormControlFieldDirective'
+    ],
     checkboxGroup: ['CheckboxGroupComponent'],
     datePicker: ['PlatformDatetimePickerComponent'],
     datetimePicker: ['PlatformDatetimePickerComponent'],
@@ -53,12 +58,7 @@ export const API_FILES = {
     ],
     textarea: ['TextAreaComponent'],
     timePicker: ['PlatformTimePickerComponent'],
-    panel: [
-        'PanelComponent',
-        'PanelContentComponent',
-        'PanelActionsComponent',
-        'PanelConfig'
-    ],
+    panel: ['PanelComponent', 'PanelContentComponent', 'PanelActionsComponent', 'PanelConfig'],
     switch: ['SwitchComponent'],
     stepInput: ['NumberStepInputComponent', 'StepInputComponent', 'StepInputConfig'],
     inputGroup: ['InputGroupConfig', 'InputGroupComponent', 'InputGroupAddonComponent', 'InputGroupInputComponent'],
@@ -69,20 +69,8 @@ export const API_FILES = {
     thumbnail: ['ThumbnailComponent'],
     objectAttribute: ['ObjectAttributeComponent'],
     actionlistitem: ['ActionListItemComponent', 'ListComponent', 'ListConfig'],
-    displaylistitem: [
-        'DisplayListItemComponent',
-        'ListComponent',
-        'ListFooter',
-        'ListGroupHeader',
-        'ListConfig'
-    ],
-    objectlistitem: [
-        'ObjectListItemComponent',
-        'ListComponent',
-        'ListFooter',
-        'ListGroupHeader',
-        'ListConfig'
-    ],
+    displaylistitem: ['DisplayListItemComponent', 'ListComponent', 'ListFooter', 'ListGroupHeader', 'ListConfig'],
+    objectlistitem: ['ObjectListItemComponent', 'ListComponent', 'ListFooter', 'ListGroupHeader', 'ListConfig'],
     multiInput: ['PlatformMultiInputComponent'],
     valueHelpDialog: ['PlatformValueHelpDialogComponent', 'VhdFilterComponent', 'VhdSearchComponent'],
     feedInput: ['FeedInputComponent'],
@@ -108,6 +96,6 @@ export const API_FILES = {
         'IconTabBarProcessTypeComponent',
         'IconTabBarFilterTypeComponent',
         'IconTabBarPopoverComponent',
-        'TextTypePopoverComponent',
-    ],
+        'TextTypePopoverComponent'
+    ]
 };

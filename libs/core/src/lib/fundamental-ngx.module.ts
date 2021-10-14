@@ -87,7 +87,6 @@ import { VerticalNavigationModule } from '@fundamental-ngx/core/vertical-navigat
 import { MicroProcessFlowModule } from '@fundamental-ngx/core/micro-process-flow';
 import { TimelineModule } from '@fundamental-ngx/core/timeline';
 
-
 @NgModule({
     imports: [CommonModule, FormsModule],
     exports: [

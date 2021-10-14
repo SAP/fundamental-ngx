@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './platform-list-header.component.html',
     styleUrls: ['./platform-list-header.component.scss']
 })
-export class PlatformListHeaderComponent { }
+export class PlatformListHeaderComponent {}

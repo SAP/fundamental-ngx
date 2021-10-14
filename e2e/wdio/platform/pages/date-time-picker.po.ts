@@ -27,7 +27,7 @@ export class DateTimePicker extends BaseComponentPo {
     calendarYearsSection = '.fd-calendar__content--years';
     calendarItem = 'td.fd-calendar__item';
     altCalendarItem = 'table td.fd-calendar__item';
-    currentMonthCalendarItem = '//td[not(contains(@class, \'fd-calendar__item--other-month\'))]';
+    currentMonthCalendarItem = "//td[not(contains(@class, 'fd-calendar__item--other-month'))]";
 
     currentDay = '//*[contains(@class, "fd-calendar__item--current") or contains(@class, "is-active")]';
 
@@ -52,7 +52,7 @@ export class DateTimePicker extends BaseComponentPo {
                 return i;
             }
         }
-    }
+    };
 
     filterCaledarValue = (name: string): string => {
         return `//td[contains(@id,"fd-${name}")]`;

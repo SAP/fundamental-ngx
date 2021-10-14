@@ -4,7 +4,4 @@ import { RadioFormGroupExampleComponent } from './radio-form-group-example.compo
 export * from './radio-examples.component';
 export * from './radio-form-group-example.component';
 
-export const examples = [
-    RadioExamplesComponent,
-    RadioFormGroupExampleComponent
-];
+export const examples = [RadioExamplesComponent, RadioFormGroupExampleComponent];

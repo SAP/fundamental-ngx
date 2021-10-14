@@ -5,7 +5,8 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 ## Code scaffolding
 
 Run `ng generate component component-name --project mobile-mode` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project mobile-mode`.
-> Note: Don't forget to add `--project mobile-mode` or else it will be added to the default project in your `angular.json` file. 
+
+> Note: Don't forget to add `--project mobile-mode` or else it will be added to the default project in your `angular.json` file.
 
 ## Build
 

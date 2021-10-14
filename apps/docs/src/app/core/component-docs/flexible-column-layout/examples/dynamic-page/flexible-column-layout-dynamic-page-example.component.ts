@@ -6,17 +6,16 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
     styleUrls: ['./flexible-column-layout-dynamic-page-example.component.scss']
 })
 export class FlexibleColumnLayoutDynamicPageExampleComponent {
-
     /**
      * property set by the consuming application (name can vary????????)
      * sets the initial layout of the component to 'OneColumnStartFullScreen'
-     * sets a new layout for the component 
+     * sets a new layout for the component
      */
     localLayout = 'OneColumnStartFullScreen';
 
     /**
      * property set by the consuming application
-     * specifies if the control buttons for Enter/Exit Full Screen and Close 
+     * specifies if the control buttons for Enter/Exit Full Screen and Close
      * are visible in the middle sectioon
      */
     showMidColumnControls = this.localLayout.startsWith('Two') || this.localLayout.includes('FullScreen');
@@ -42,12 +41,12 @@ export class FlexibleColumnLayoutDynamicPageExampleComponent {
 
     /**
      * function set by the consuming application
-     * this function is reacting to events (button clicks) and 
+     * this function is reacting to events (button clicks) and
      * updates the local property which sets a new layout for the component.
      * Available values for the layouts include:
      * 'OneColumnStartFullScreen' | 'OneColumnMidFullScreen' | 'OneColumnEndFullScreen' |
-     * 'TwoColumnsStartExpanded' | 'TwoColumnsMidExpanded' | 'TwoColumnsEndExpanded' | 
-     * 'ThreeColumnsMidExpanded' | 'ThreeColumnsEndExpanded' | 'ThreeColumnsStartMinimized' | 
+     * 'TwoColumnsStartExpanded' | 'TwoColumnsMidExpanded' | 'TwoColumnsEndExpanded' |
+     * 'ThreeColumnsMidExpanded' | 'ThreeColumnsEndExpanded' | 'ThreeColumnsStartMinimized' |
      * 'ThreeColumnsEndMinimized';
      */
     changeLayout(newValue: string): void {

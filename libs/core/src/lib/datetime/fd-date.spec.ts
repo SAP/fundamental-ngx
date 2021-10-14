@@ -66,8 +66,8 @@ describe('FdDate', () => {
     });
 
     it('should be invalid date if day is integer and less than 1', () => {
-        expect(new FdDate(2020, 1, 1).isDateValid()).toBeTrue()
-        expect(new FdDate(2020, 1, 0).isDateValid()).toBeFalse()
+        expect(new FdDate(2020, 1, 1).isDateValid()).toBeTrue();
+        expect(new FdDate(2020, 1, 0).isDateValid()).toBeFalse();
     });
 
     it('should be invalid date if day is integer and not valid for particular month and year', () => {

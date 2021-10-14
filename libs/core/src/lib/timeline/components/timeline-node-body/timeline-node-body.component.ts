@@ -6,11 +6,10 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
-        'class': 'fd-timeline__post-content'
+        class: 'fd-timeline__post-content'
     }
 })
 export class TimelineNodeBodyComponent {
-
     /* Text content of timeline node*/
     @Input()
     content: string;

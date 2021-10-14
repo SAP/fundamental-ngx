@@ -130,7 +130,7 @@ export class DialogDocsComponent {
             minWidth: '',
             maxWidth: '',
             ariaLabelledBy: 'fd-dialog-header-11',
-            ariaDescribedBy: 'fd-dialog-body-11',
+            ariaDescribedBy: 'fd-dialog-body-11'
         }
     };
 

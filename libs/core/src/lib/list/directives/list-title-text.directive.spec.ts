@@ -3,14 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ListModule } from '../list.module';
 
 @Component({
-    template: `
-        <div
-            #componentElement
-            fd-list-title-text
-        >
-            ListTitleComponent
-        </div>
-    `
+    template: ` <div #componentElement fd-list-title-text>ListTitleComponent</div> `
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })

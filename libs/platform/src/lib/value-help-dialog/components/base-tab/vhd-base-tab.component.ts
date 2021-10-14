@@ -3,27 +3,25 @@ import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { VhdTab } from '../../models';
 
 @Component({
-  template: ''
+    template: ''
 })
 export class VhdBaseTab {
-  /** Tab Title */
-  @Input()
-  uid: string;
+    /** Tab Title */
+    @Input()
+    uid: string;
 
-  /** Tab Title */
-  @Input()
-  tabTitle: string;
+    /** Tab Title */
+    @Input()
+    tabTitle: string;
 
-  /** Mobile view */
-  @Input()
-  mobile = false;
+    /** Mobile view */
+    @Input()
+    mobile = false;
 
-  /** @hidden */
-  get type(): VhdTab {
-    return VhdTab.defineConditions
-  }
+    /** @hidden */
+    get type(): VhdTab {
+        return VhdTab.defineConditions;
+    }
 
-  constructor(
-    readonly _changeDetectorRef: ChangeDetectorRef
-  ) {}
+    constructor(readonly _changeDetectorRef: ChangeDetectorRef) {}
 }

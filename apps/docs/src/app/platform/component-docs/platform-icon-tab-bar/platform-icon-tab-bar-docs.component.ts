@@ -5,10 +5,8 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 import * as iconTabBarTextTypeHtml from '!raw-loader!./examples/platform-icon-tab-bar-text-type-example/platform-icon-tab-bar-text-type-example.component.html';
 import * as iconTabBarTextTypeTs from '!raw-loader!./examples/platform-icon-tab-bar-text-type-example/platform-icon-tab-bar-text-type-example.component.ts';
 
-
 import * as iconTabBarIconOnlyTypeHtml from '!raw-loader!./examples/platform-icon-tab-bar-icon-only-type-example/platform-icon-tab-bar-icon-only-type-example.component.html';
 import * as iconTabBarIconOnlyTypeTs from '!raw-loader!./examples/platform-icon-tab-bar-icon-only-type-example/platform-icon-tab-bar-icon-only-type-example.component.ts';
-
 
 import * as iconTabBarIconTypeHtml from '!raw-loader!./examples/platform-icon-tab-bar-icon-type-example/platform-icon-tab-bar-icon-type-example.component.html';
 import * as iconTabBarIconTypeTs from '!raw-loader!./examples/platform-icon-tab-bar-icon-type-example/platform-icon-tab-bar-icon-type-example.component.ts';
@@ -48,10 +46,9 @@ export interface IconTabBarItem extends TabConfig {
 }
 @Component({
     selector: 'fd-icon-tab-bar-docs',
-    templateUrl: './platform-icon-tab-bar-docs.component.html',
+    templateUrl: './platform-icon-tab-bar-docs.component.html'
 })
 export class PlatformIconTabBarDocsComponent {
-
     iconTabBarTextTypeFiles: ExampleFile[] = [
         {
             language: 'html',
@@ -67,7 +64,7 @@ export class PlatformIconTabBarDocsComponent {
         {
             language: 'typescript',
             code: textTypeConfigs,
-            name: 'long-icon-type-config',
+            name: 'long-icon-type-config'
         }
     ];
 
@@ -86,7 +83,7 @@ export class PlatformIconTabBarDocsComponent {
         {
             language: 'typescript',
             code: iconTypeConfigs,
-            name: 'long-icon-type-config',
+            name: 'long-icon-type-config'
         }
     ];
 
@@ -105,7 +102,7 @@ export class PlatformIconTabBarDocsComponent {
         {
             language: 'typescript',
             code: iconTypeConfigs,
-            name: 'long-icon-type-config',
+            name: 'long-icon-type-config'
         }
     ];
 
@@ -124,7 +121,7 @@ export class PlatformIconTabBarDocsComponent {
         {
             language: 'typescript',
             code: iconTypeConfigs,
-            name: 'long-icon-type-config',
+            name: 'long-icon-type-config'
         }
     ];
 
@@ -143,7 +140,7 @@ export class PlatformIconTabBarDocsComponent {
         {
             language: 'typescript',
             code: iconTypeConfigs,
-            name: 'long-icon-type-config',
+            name: 'long-icon-type-config'
         }
     ];
 
@@ -162,7 +159,7 @@ export class PlatformIconTabBarDocsComponent {
         {
             language: 'typescript',
             code: iconTypeConfigs,
-            name: 'icon-type-config',
+            name: 'icon-type-config'
         }
     ];
 }

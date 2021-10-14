@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-
 import * as panelExpandableSrc from '!raw-loader!./examples/panel-expandable-example.component.html';
 import * as panelFixedSrc from '!raw-loader!./examples/panel-fixed-example.component.html';
 import * as panelCompactSrc from '!raw-loader!./examples/panel-compact-example.component.html';

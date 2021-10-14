@@ -10,16 +10,7 @@ import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
 })
 export class ComboboxStandardComponent {
-    dataSource = [
-        'Apple',
-        'Banana',
-        'Pineapple',
-        'Strawberry',
-        'Broccoli',
-        'Carrot',
-        'Jalapeño',
-        'Spinach'
-    ];
+    dataSource = ['Apple', 'Banana', 'Pineapple', 'Strawberry', 'Broccoli', 'Carrot', 'Jalapeño', 'Spinach'];
 
     dataSourceAutoResize = [
         'The maximum width is the part of the screen furthest to the right.',
@@ -41,7 +32,7 @@ export class ComboboxStandardComponent {
     selectedItem6 = null;
 
     onSelect1(item: ComboboxSelectionChangeEvent): void {
-       this.selectedItem1 = item.payload;
+        this.selectedItem1 = item.payload;
     }
 
     onSelect2(item: ComboboxSelectionChangeEvent): void {

@@ -4,10 +4,9 @@ import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 
 @Component({
     selector: 'fdp-icon-tab-bar-filter-type',
-    templateUrl: './icon-tab-bar-filter-type.component.html',
+    templateUrl: './icon-tab-bar-filter-type.component.html'
 })
 export class IconTabBarFilterTypeComponent extends IconTabBarBase {
-
     /**
      * @description Boolean flag indicating to show total tab
      */

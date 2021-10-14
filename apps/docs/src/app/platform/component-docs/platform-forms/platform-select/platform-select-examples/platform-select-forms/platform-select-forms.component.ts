@@ -4,7 +4,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { OptionItem } from '@fundamental-ngx/platform/shared';
 import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
-
 @Component({
     selector: 'fdp-select-forms',
     templateUrl: './platform-select-forms.component.html',

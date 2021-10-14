@@ -1,56 +1,62 @@
-<div class="fd-step-input"
-     [ngClass]="state ? 'is-' + state : ''"
-     [class.is-focus]="focused"
-     [class.is-readonly]="readonly"
-     [class.is-disabled]="disabled"
-     [class.fd-step-input--compact]="compact"
-     [class.fd-step-input--without-buttons]="!hasStepButtons">
-    <button *ngIf="hasStepButtons"
-            fd-button
-            #decrementBtn
-            fdType="transparent"
-            class="fd-step-input__button"
-            tabindex="-1"
-            type="button"
-            [compact]="compact"
-            [disabled]="!canDecrement"
-            [title]="decrementButtonTitle"
-            [glyph]="decrementButtonIcon"
-            (click)="onTouched()">
-    </button>
-    <input #inputElement
-           [name]="name"
-           [id]="inputId"
-           [title]="inputTitle"
-           [value]="viewValue"
-           [disabled]="disabled"
-           [readOnly]="readonly"
-           [placeholder]="placeholder"
-           [class.fd-input--compact]="compact"
-           [attr.aria-label]="ariaLabel"
-           [attr.aria-required]="required"
-           (focusin)="handleFocusIn()"
-           (focusout)="handleFocusOut()"
-           (wheel)="handleScroll($event)"
-           (keydown)="handleKeyDown($event)"
-           (input)="trackInputValue($event)"
-           (change)="updateOnInputChanged()"
-           [style.textAlign]="textAlign"
-           class="fd-input fd-input--no-number-spinner fd-step-input__input"
-           type="text">
-    <button *ngIf="hasStepButtons"
-            fd-button
-            #incrementBtn
-            fdType="transparent"
-            class="fd-step-input__button"
-            tabindex="-1"
-            type="button"
-            [compact]="compact"
-            [disabled]="!canIncrement"
-            [title]="incrementButtonTitle"
-            [glyph]="incrementButtonIcon"
-            (click)="onTouched()">
-    </button>
+<div
+    class="fd-step-input"
+    [ngClass]="state ? 'is-' + state : ''"
+    [class.is-focus]="focused"
+    [class.is-readonly]="readonly"
+    [class.is-disabled]="disabled"
+    [class.fd-step-input--compact]="compact"
+    [class.fd-step-input--without-buttons]="!hasStepButtons"
+>
+    <button
+        *ngIf="hasStepButtons"
+        fd-button
+        #decrementBtn
+        fdType="transparent"
+        class="fd-step-input__button"
+        tabindex="-1"
+        type="button"
+        [compact]="compact"
+        [disabled]="!canDecrement"
+        [title]="decrementButtonTitle"
+        [glyph]="decrementButtonIcon"
+        (click)="onTouched()"
+    ></button>
+    <input
+        #inputElement
+        [name]="name"
+        [id]="inputId"
+        [title]="inputTitle"
+        [value]="viewValue"
+        [disabled]="disabled"
+        [readOnly]="readonly"
+        [placeholder]="placeholder"
+        [class.fd-input--compact]="compact"
+        [attr.aria-label]="ariaLabel"
+        [attr.aria-required]="required"
+        (focusin)="handleFocusIn()"
+        (focusout)="handleFocusOut()"
+        (wheel)="handleScroll($event)"
+        (keydown)="handleKeyDown($event)"
+        (input)="trackInputValue($event)"
+        (change)="updateOnInputChanged()"
+        [style.textAlign]="textAlign"
+        class="fd-input fd-input--no-number-spinner fd-step-input__input"
+        type="text"
+    />
+    <button
+        *ngIf="hasStepButtons"
+        fd-button
+        #incrementBtn
+        fdType="transparent"
+        class="fd-step-input__button"
+        tabindex="-1"
+        type="button"
+        [compact]="compact"
+        [disabled]="!canIncrement"
+        [title]="incrementButtonTitle"
+        [glyph]="incrementButtonIcon"
+        (click)="onTouched()"
+    ></button>
 </div>
 <span *ngIf="canDisplayLabel" class="fd-form-label fd-form-label--unit-description">
     {{ unit || currencySign }}

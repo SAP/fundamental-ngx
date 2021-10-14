@@ -36,8 +36,7 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
     /** Holds the control state of select */
     @Input()
     get selectState(): SelectControlState {
-
-        return this.status as SelectControlState || this._selectState;
+        return (this.status as SelectControlState) || this._selectState;
     }
     set selectState(state: SelectControlState) {
         this._state = state;
@@ -48,10 +47,10 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
     private _selectState: SelectControlState = null;
 
     /**
-    * Directly sets value to the component that at the ends up at writeValue as well fires
-    * change detections
-    *
-    */
+     * Directly sets value to the component that at the ends up at writeValue as well fires
+     * change detections
+     *
+     */
     @Input()
     get value(): any {
         return this._value;
@@ -126,7 +125,6 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
                 listTitle.classList.add('fd-list__title--no-wrap');
             }
         });
-
     }
 
     /** @hidden */
@@ -141,18 +139,19 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
         let secondColumnProportion: number;
 
         totalProportions = firstColumnRatio + secondColumnRatio;
-        firstColumnProportion = Math.round(firstColumnRatio / totalProportions * 100);
+        firstColumnProportion = Math.round((firstColumnRatio / totalProportions) * 100);
         secondColumnProportion = 100 - firstColumnProportion;
 
         // setting option items
         this.select._options.forEach((option) => {
             const optionItem = option._getHtmlElement();
-            optionItem.querySelector('.fd-list__title').setAttribute(
-                'style', 'width: ' + firstColumnProportion + 'rem');
-            optionItem.querySelector('.fd-list__secondary').setAttribute(
-                'style', 'width: ' + secondColumnProportion + 'rem');
+            optionItem
+                .querySelector('.fd-list__title')
+                .setAttribute('style', 'width: ' + firstColumnProportion + 'rem');
+            optionItem
+                .querySelector('.fd-list__secondary')
+                .setAttribute('style', 'width: ' + secondColumnProportion + 'rem');
         });
-
     }
 
     /**
@@ -195,7 +194,6 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
 
         this.selected = selectedItem;
         this.value = this.displayValue(this.selected);
-
     }
 
     /**
@@ -203,8 +201,10 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
      * @hidden
      */
     _isSelectedOptionItem(selectedItem: any): boolean {
-        return this.lookupKey && this.lookupValue(this.selected) === this.lookupValue(selectedItem) ||
-            this.displayValue(this.selected) === this.displayValue(selectedItem);
+        return (
+            (this.lookupKey && this.lookupValue(this.selected) === this.lookupValue(selectedItem)) ||
+            this.displayValue(this.selected) === this.displayValue(selectedItem)
+        );
     }
 
     /**
@@ -249,6 +249,6 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
 
     /** @hidden */
     private _getSelectedOptionItem(text: string): OptionItem | undefined {
-         return this._optionItems.find(item => item.label === text);
+        return this._optionItems.find((item) => item.label === text);
     }
 }

@@ -18,58 +18,73 @@ import * as multiComboboxColumnsTs from '!raw-loader!./examples/multi-combobox-c
     templateUrl: './platform-multi-combobox-docs.component.html'
 })
 export class PlatformMultiComboboxDocsComponent {
-    multiComboboxDatasourceExample: ExampleFile[] = [{
-        language: 'html',
-        fileName: 'multi-combobox-datasource-example',
-        code: multiComboboxDatasourceHtml
-    }, {
-        language: 'typescript',
-        fileName: 'multi-combobox-datasource-example',
-        code: multiComboboxDatasourceTs,
-        component: 'MultiComboboxDatasourceExampleComponent'
-    }];
+    multiComboboxDatasourceExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'multi-combobox-datasource-example',
+            code: multiComboboxDatasourceHtml
+        },
+        {
+            language: 'typescript',
+            fileName: 'multi-combobox-datasource-example',
+            code: multiComboboxDatasourceTs,
+            component: 'MultiComboboxDatasourceExampleComponent'
+        }
+    ];
 
-    multiComboboxMobileExample: ExampleFile[] = [{
-        language: 'html',
-        fileName: 'multi-combobox-mobile-example',
-        code: multiComboboxMobileHtml
-    }, {
-        language: 'typescript',
-        fileName: 'multi-combobox-mobile-example',
-        code: multiComboboxMobileTs,
-        component: 'MultiComboboxMobileExampleComponent'
-    }];
+    multiComboboxMobileExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'multi-combobox-mobile-example',
+            code: multiComboboxMobileHtml
+        },
+        {
+            language: 'typescript',
+            fileName: 'multi-combobox-mobile-example',
+            code: multiComboboxMobileTs,
+            component: 'MultiComboboxMobileExampleComponent'
+        }
+    ];
 
-    multiComboboxGroupExample: ExampleFile[] = [{
-        language: 'html',
-        fileName: 'multi-combobox-group-example',
-        code: multiComboboxGroupHtml
-    }, {
-        language: 'typescript',
-        fileName: 'multi-combobox-group-example',
-        code: multiComboboxGroupTs,
-        component: 'MultiComboboxGroupExampleComponent'
-    }];
+    multiComboboxGroupExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'multi-combobox-group-example',
+            code: multiComboboxGroupHtml
+        },
+        {
+            language: 'typescript',
+            fileName: 'multi-combobox-group-example',
+            code: multiComboboxGroupTs,
+            component: 'MultiComboboxGroupExampleComponent'
+        }
+    ];
 
-    multiComboboxColumnsExample: ExampleFile[] = [{
-        language: 'html',
-        fileName: 'multi-combobox-columns-example',
-        code: multiComboboxColumnsHtml
-    }, {
-        language: 'typescript',
-        fileName: 'multi-combobox-columns-example',
-        code: multiComboboxColumnsTs,
-        component: 'MultiComboboxColumnsExampleComponent'
-    }];
+    multiComboboxColumnsExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'multi-combobox-columns-example',
+            code: multiComboboxColumnsHtml
+        },
+        {
+            language: 'typescript',
+            fileName: 'multi-combobox-columns-example',
+            code: multiComboboxColumnsTs,
+            component: 'MultiComboboxColumnsExampleComponent'
+        }
+    ];
 
-    multiComboboxFormExample: ExampleFile[] = [{
-        language: 'html',
-        fileName: 'multi-combobox-forms-example',
-        code: multiComboboxFormsHtml
-    }, {
-        language: 'typescript',
-        fileName: 'multi-combobox-forms-example',
-        code: multiComboboxFormsTs,
-        component: 'MultiComboboxFormsExampleComponent'
-    }];
+    multiComboboxFormExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'multi-combobox-forms-example',
+            code: multiComboboxFormsHtml
+        },
+        {
+            language: 'typescript',
+            fileName: 'multi-combobox-forms-example',
+            code: multiComboboxFormsTs,
+            component: 'MultiComboboxFormsExampleComponent'
+        }
+    ];
 }

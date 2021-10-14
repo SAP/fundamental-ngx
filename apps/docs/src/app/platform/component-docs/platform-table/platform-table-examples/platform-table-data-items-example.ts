@@ -10,7 +10,7 @@ export interface ExampleItem {
     status: string;
     statusColor?: string;
     date: FdDate;
-    verified: boolean
+    verified: boolean;
     semantic?: string;
 }
 

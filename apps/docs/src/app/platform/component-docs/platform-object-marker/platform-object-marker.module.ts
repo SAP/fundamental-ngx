@@ -22,11 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [
-        PlatformObjectMarkerDocsComponent,
-        ObjectMarkerHeaderComponent,
-        ...COMPONENTS
-    ],
+    declarations: [PlatformObjectMarkerDocsComponent, ObjectMarkerHeaderComponent, ...COMPONENTS],
     exports: [RouterModule],
     imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformObjectMarkerModule]
 })

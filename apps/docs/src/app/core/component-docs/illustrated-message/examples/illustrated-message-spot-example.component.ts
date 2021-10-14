@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
 })
 export class IllustratedMessageSpotExampleComponent {
     spotConfig = {
-        spot: { url: 'assets/images/sapIllus-Spot-NoMail.svg', id: 'sapIllus-Spot-NoEmail'}
-    }
+        spot: { url: 'assets/images/sapIllus-Spot-NoMail.svg', id: 'sapIllus-Spot-NoEmail' }
+    };
 }

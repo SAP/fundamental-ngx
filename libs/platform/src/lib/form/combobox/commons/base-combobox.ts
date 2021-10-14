@@ -769,7 +769,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden Assign custom templates */
     private _assignCustomTemplates(): void {
-        this.customTemplates.forEach(template => {
+        this.customTemplates.forEach((template) => {
             switch (template.getName()) {
                 case 'optionItemTemplate':
                     this.optionItemTemplate = template.templateRef;

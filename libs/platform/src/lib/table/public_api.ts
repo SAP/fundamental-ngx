@@ -60,4 +60,3 @@ export * from './interfaces/table-state.interface';
 export * from './models';
 
 export * from './pipes/value-by-path.pipe';
-

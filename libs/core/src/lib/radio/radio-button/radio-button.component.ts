@@ -36,7 +36,8 @@ let uniqueId = 0;
     ]
 })
 export class RadioButtonComponent
-    implements OnChanges, AfterViewInit, CssClassBuilder, ControlValueAccessor, OnInit, OnDestroy {
+    implements OnChanges, AfterViewInit, CssClassBuilder, ControlValueAccessor, OnInit, OnDestroy
+{
     /** @hidden */
     @ViewChild('inputElement')
     inputElement: ElementRef;

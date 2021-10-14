@@ -19,7 +19,9 @@ export const ROUTES: Routes = [
             {
                 path: 'action-sheet',
                 loadChildren: () =>
-                    import('./component-docs/action-sheet/action-sheet-docs.module').then((m) => m.ActionSheetDocsModule)
+                    import('./component-docs/action-sheet/action-sheet-docs.module').then(
+                        (m) => m.ActionSheetDocsModule
+                    )
             },
             {
                 path: 'alert',
@@ -31,7 +33,10 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'avatar-group',
-                loadChildren: () => import('./component-docs/avatar-group/avatar-group-docs.module').then((m) => m.AvatarGroupDocsModule)
+                loadChildren: () =>
+                    import('./component-docs/avatar-group/avatar-group-docs.module').then(
+                        (m) => m.AvatarGroupDocsModule
+                    )
             },
             {
                 path: 'bar',
@@ -102,16 +107,21 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'dynamic-page',
-                loadChildren: () => import('./component-docs/dynamic-page/dynamic-page-docs.module').then((m) => m.DynamicPageDocsModule)
-            },
-            {
-              path: 'facets',
-              loadChildren: () => import('./component-docs/facets/facet-docs.module').then((m) => m.FacetDocsModule)
-            },
-            {
-              path: 'feed-list-item',
                 loadChildren: () =>
-                    import('./component-docs/feed-list-item/feed-list-item-docs.module').then((m) => m.FeedListItemDocsModule)
+                    import('./component-docs/dynamic-page/dynamic-page-docs.module').then(
+                        (m) => m.DynamicPageDocsModule
+                    )
+            },
+            {
+                path: 'facets',
+                loadChildren: () => import('./component-docs/facets/facet-docs.module').then((m) => m.FacetDocsModule)
+            },
+            {
+                path: 'feed-list-item',
+                loadChildren: () =>
+                    import('./component-docs/feed-list-item/feed-list-item-docs.module').then(
+                        (m) => m.FeedListItemDocsModule
+                    )
             },
             {
                 path: 'dynamic-side-content',
@@ -123,9 +133,7 @@ export const ROUTES: Routes = [
             {
                 path: 'feed-input',
                 loadChildren: () =>
-                    import('./component-docs/feed-input/feed-input-docs.module').then(
-                        (m) => m.FeedInputDocsModule
-                    )
+                    import('./component-docs/feed-input/feed-input-docs.module').then((m) => m.FeedInputDocsModule)
             },
             {
                 path: 'file-uploader',
@@ -177,8 +185,9 @@ export const ROUTES: Routes = [
                     )
             },
             {
-              path: 'grid-list',
-              loadChildren: () => import('./component-docs/grid-list/grid-list-docs.module').then((m) => m.GridListDocsModule)
+                path: 'grid-list',
+                loadChildren: () =>
+                    import('./component-docs/grid-list/grid-list-docs.module').then((m) => m.GridListDocsModule)
             },
             {
                 path: 'icon',
@@ -186,7 +195,10 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'illustrated-message',
-                loadChildren: () => import('./component-docs/illustrated-message/illustrated-message-docs.module').then((m) => m.IllustratedMessageDocsModule)
+                loadChildren: () =>
+                    import('./component-docs/illustrated-message/illustrated-message-docs.module').then(
+                        (m) => m.IllustratedMessageDocsModule
+                    )
             },
             {
                 path: 'info-label',
@@ -236,7 +248,8 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'list-byline',
-                loadChildren: () => import('./component-docs/list-byline/list-byline-docs.module').then((m) => m.ListDocsModule)
+                loadChildren: () =>
+                    import('./component-docs/list-byline/list-byline-docs.module').then((m) => m.ListDocsModule)
             },
             {
                 path: 'menu',
@@ -252,9 +265,7 @@ export const ROUTES: Routes = [
             {
                 path: 'message-box',
                 loadChildren: () =>
-                    import('./component-docs/message-box/message-box-docs.module').then(
-                        (m) => m.MessageBoxDocsModule
-                    )
+                    import('./component-docs/message-box/message-box-docs.module').then((m) => m.MessageBoxDocsModule)
             },
             {
                 path: 'message-page',
@@ -305,7 +316,10 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'object-number',
-                loadChildren: () => import('./component-docs/object-number/object-number-docs.module').then((m) => m.ObjectNumberDocsModule)
+                loadChildren: () =>
+                    import('./component-docs/object-number/object-number-docs.module').then(
+                        (m) => m.ObjectNumberDocsModule
+                    )
             },
             {
                 path: 'object-status',
@@ -338,9 +352,7 @@ export const ROUTES: Routes = [
             {
                 path: 'quick-view',
                 loadChildren: () =>
-                    import('./component-docs/quick-view/quick-view-docs.module').then(
-                        (m) => m.QuickViewDocsModule
-                    )
+                    import('./component-docs/quick-view/quick-view-docs.module').then((m) => m.QuickViewDocsModule)
             },
             {
                 path: 'radio',
@@ -395,12 +407,15 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'splitter',
-                loadChildren: () => import('./component-docs/splitter/splitter-docs.module').then((m) => m.SplitterDocsModule)
+                loadChildren: () =>
+                    import('./component-docs/splitter/splitter-docs.module').then((m) => m.SplitterDocsModule)
             },
             {
                 path: 'status-indicator',
                 loadChildren: () =>
-                    import('./component-docs/status-indicator/status-indicator-docs.module').then((m) => m.StatusIndicatorDocsModule)
+                    import('./component-docs/status-indicator/status-indicator-docs.module').then(
+                        (m) => m.StatusIndicatorDocsModule
+                    )
             },
             {
                 path: 'step-input',
@@ -474,7 +489,10 @@ export const ROUTES: Routes = [
             },
             {
                 path: 'upload-collection',
-                loadChildren: () => import('./component-docs/upload-collection/upload-collection-docs.module').then((m) => m.UploadCollectionDocsModule)
+                loadChildren: () =>
+                    import('./component-docs/upload-collection/upload-collection-docs.module').then(
+                        (m) => m.UploadCollectionDocsModule
+                    )
             },
             {
                 path: 'wizard',
@@ -490,9 +508,7 @@ export const ROUTES: Routes = [
             {
                 path: 'timeline',
                 loadChildren: () =>
-                    import('./component-docs/timeline/timeline-docs.module').then(
-                        (m) => m.TimelineDocsModule
-                    )
+                    import('./component-docs/timeline/timeline-docs.module').then((m) => m.TimelineDocsModule)
             }
         ]
     }

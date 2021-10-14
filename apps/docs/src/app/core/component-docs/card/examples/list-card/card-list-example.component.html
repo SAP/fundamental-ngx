@@ -53,27 +53,35 @@
     <fd-card-header>
         <h2 fd-card-title>Select a movie to see the casts.</h2>
         <h3 fd-card-subtitle>Showing sample data</h3>
-        <span fd-card-counter>4 of {{movies.length}}</span>
+        <span fd-card-counter>4 of {{ movies.length }}</span>
     </fd-card-header>
     <fd-card-content>
         <ul fd-list [byline]="true">
             <li fd-list-item>
-                <fd-select placeholder="Select a movie" [compact]="true" [(value)]="selectedMovie"
-                    (valueChange)="onValueChange($event)">
+                <fd-select
+                    placeholder="Select a movie"
+                    [compact]="true"
+                    [(value)]="selectedMovie"
+                    (valueChange)="onValueChange($event)"
+                >
                     <fd-option *ngFor="let movie of movies" [value]="movie">{{ movie }}</fd-option>
                 </fd-select>
             </li>
             <ng-container *ngFor="let cast of casts">
                 <li fd-list-item>
                     <span fd-list-thumbnail>
-                        <fd-avatar image="http://placeimg.com/100/100/people/1" size="s" ariaLabel="movie actor"
-                            title="movie actor"></fd-avatar>
+                        <fd-avatar
+                            image="http://placeimg.com/100/100/people/1"
+                            size="s"
+                            ariaLabel="movie actor"
+                            title="movie actor"
+                        ></fd-avatar>
                     </span>
                     <div fd-list-content>
-                        <div fd-list-title>{{cast?.name}}</div>
+                        <div fd-list-title>{{ cast?.name }}</div>
                         <div fd-list-byline [twoCol]="true">
-                            <div fd-list-byline-left>{{cast?.nationality}}</div>
-                            <div fd-list-byline-right>{{cast?.age}}</div>
+                            <div fd-list-byline-left>{{ cast?.nationality }}</div>
+                            <div fd-list-byline-right>{{ cast?.age }}</div>
                         </div>
                     </div>
                 </li>

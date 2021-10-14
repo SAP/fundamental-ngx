@@ -65,4 +65,4 @@ const routes: Routes = [
         PlatformLinkModule
     ]
 })
-export class PlatformWizardGeneratorDocsModule { }
+export class PlatformWizardGeneratorDocsModule {}

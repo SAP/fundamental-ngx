@@ -9,7 +9,11 @@ import { ComboboxConfig } from '../combobox.config';
 export class ComboboxHighlightPipe implements PipeTransform {
     constructor(private readonly comboboxConfig: ComboboxConfig) {}
 
-    transform(value: string, searchText: string, matchingStrategy: MatchingStrategy = this.comboboxConfig.matchingStrategy): string {
+    transform(
+        value: string,
+        searchText: string,
+        matchingStrategy: MatchingStrategy = this.comboboxConfig.matchingStrategy
+    ): string {
         if (!(value && searchText)) {
             return value;
         }

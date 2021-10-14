@@ -1,12 +1,13 @@
 <fd-popover
-        *ngIf="!mobile"
-        [placement]="placement"
-        [(isOpen)]="isOpen"
-        (isOpenChange)="isOpenChangeHandle($event)"
-        [noArrow]="noArrow"
-        [focusTrapped]="true"
-        [triggers]="[]"
-        [focusAutoCapture]="true">
+    *ngIf="!mobile"
+    [placement]="placement"
+    [(isOpen)]="isOpen"
+    (isOpenChange)="isOpenChangeHandle($event)"
+    [noArrow]="noArrow"
+    [focusTrapped]="true"
+    [triggers]="[]"
+    [focusAutoCapture]="true"
+>
     <fd-popover-control>
         <ng-container *ngTemplateOutlet="actionSheetControl"></ng-container>
     </fd-popover-control>
@@ -27,5 +28,3 @@
 <ng-template #actionSheetControl>
     <ng-content select="fd-action-sheet-control"></ng-content>
 </ng-template>
-
-

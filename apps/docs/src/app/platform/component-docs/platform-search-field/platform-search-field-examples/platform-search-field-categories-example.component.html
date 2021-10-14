@@ -1,6 +1,11 @@
 <h4>Cozy</h4>
-<fdp-search-field [placeholder]="'Search'" [suggestions]="suggestions" [categories]="categories"
-    (searchSubmit)="onSearchSubmit($event)" (inputChange)="onInputChange($event)"></fdp-search-field>
+<fdp-search-field
+    [placeholder]="'Search'"
+    [suggestions]="suggestions"
+    [categories]="categories"
+    (searchSubmit)="onSearchSubmit($event)"
+    (inputChange)="onInputChange($event)"
+></fdp-search-field>
 <div class="result-block">
     <div class="result-field">
         <label>Input Change Text: </label><span>{{ inputText }}</span>
@@ -16,9 +21,14 @@
     </div>
 </div>
 <h4>Compact</h4>
-<fdp-search-field [placeholder]="'Search'" [suggestions]="suggestions" [categories]="categories"
-    [contentDensity]="'compact'" (searchSubmit)="onCompactSearchSubmit($event)"
-    (inputChange)="onCompactInputChange($event)"></fdp-search-field>
+<fdp-search-field
+    [placeholder]="'Search'"
+    [suggestions]="suggestions"
+    [categories]="categories"
+    [contentDensity]="'compact'"
+    (searchSubmit)="onCompactSearchSubmit($event)"
+    (inputChange)="onCompactInputChange($event)"
+></fdp-search-field>
 <div class="result-block">
     <div class="result-field">
         <label>Input Change Text: </label><span>{{ compactInputText }}</span>

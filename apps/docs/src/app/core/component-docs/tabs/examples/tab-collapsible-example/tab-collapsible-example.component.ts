@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     templateUrl: './tab-collapsible-example.component.html'
 })
 export class TabCollapsibleExampleComponent {
-    tabs: { title: string, content: string }[] = [];
+    tabs: { title: string; content: string }[] = [];
 
     constructor() {
         for (let i = 1; i <= 4; i++) {

@@ -10,7 +10,7 @@ export interface WizardGeneratorFormsValue {
 export interface WizardStepFormsValue {
     [key: string]: {
         [key: string]: any;
-    }
+    };
 }
 
 export interface WizardVisibleSteps {
@@ -48,7 +48,10 @@ export interface WizardGeneratorItem {
      * @description Should return true or false depending on whether or not this step should be visible.
      * @returns Boolean
      */
-    when?: (completedSteps: string[], answers: WizardGeneratorFormsValue) => boolean | Promise<boolean> | Observable<boolean>;
+    when?: (
+        completedSteps: string[],
+        answers: WizardGeneratorFormsValue
+    ) => boolean | Promise<boolean> | Observable<boolean>;
 
     /**
      * @description Object of dependency fields that are used with `when` function

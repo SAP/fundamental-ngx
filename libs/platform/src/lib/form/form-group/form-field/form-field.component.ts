@@ -216,13 +216,13 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     protected _columns: Column = 6;
-    
+
     /** @hidden */
     protected _editable = true;
-    
+
     /** @hidden */
     protected _formGroup: FormGroup;
-    
+
     /** @hidden */
     protected _required = false;
 
@@ -341,7 +341,11 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
         if (formFieldControl?.ngControl?.control) {
             const control = formFieldControl.ngControl.control;
 
-            if (this.required && !this.validators.includes(Validators.required) && !this.validators.includes(Validators.requiredTrue)) {
+            if (
+                this.required &&
+                !this.validators.includes(Validators.required) &&
+                !this.validators.includes(Validators.requiredTrue)
+            ) {
                 this.validators.push(Validators.required);
             }
 

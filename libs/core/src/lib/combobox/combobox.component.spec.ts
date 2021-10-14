@@ -7,12 +7,14 @@ describe('ComboboxComponent', () => {
     let component: ComboboxComponent;
     let fixture: ComponentFixture<ComboboxComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ComboboxModule],
-            providers: [DynamicComponentService, ContentDensityService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [ComboboxModule],
+                providers: [DynamicComponentService, ContentDensityService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ComboboxComponent);
@@ -21,8 +23,7 @@ describe('ComboboxComponent', () => {
             { value: 'value', displayedValue: 'displayedValue' },
             { value: 'value2', displayedValue: 'displayedValue2' }
         ];
-        component.searchFn = () => {
-        };
+        component.searchFn = () => {};
         fixture.detectChanges();
     });
 
@@ -35,8 +36,7 @@ describe('ComboboxComponent', () => {
         component.open = true;
         const event = {
             key: 'Enter',
-            preventDefault: () => {
-            }
+            preventDefault: () => {}
         };
         component.onInputKeydownHandler(<any>event);
         expect(component.searchFn).toHaveBeenCalled();
@@ -65,7 +65,6 @@ describe('ComboboxComponent', () => {
     });
 
     it('should reset displayed values', () => {
-
         component.displayFn = (item: any): string => {
             return item.displayedValue;
         };
@@ -181,9 +180,12 @@ describe('ComboboxComponent', () => {
         (<any>component)._refreshDisplayedValues();
         expect(component.displayedValues.length).toBe(1);
 
-        component.onInputKeydownHandler(<any>
-            { stopPropagation: () => {}, preventDefault: () => {}, altKey: true, key: 'ArrowDown' }
-        );
+        component.onInputKeydownHandler(<any>{
+            stopPropagation: () => {},
+            preventDefault: () => {},
+            altKey: true,
+            key: 'ArrowDown'
+        });
 
         expect(component.displayedValues.length).toBe(2);
         expect(component.open).toBe(true);

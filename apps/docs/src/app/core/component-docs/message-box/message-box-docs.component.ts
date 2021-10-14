@@ -135,5 +135,4 @@ export class MessageBoxDocsComponent {
             component: 'MessageBoxComplexExampleComponent'
         }
     ];
-
 }

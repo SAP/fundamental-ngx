@@ -11,5 +11,4 @@ import { CommonModule } from '@angular/common';
     entryComponents: [MultiInputMobileComponent],
     exports: [MultiInputMobileComponent]
 })
-export class MultiInputMobileModule {
-}
+export class MultiInputMobileModule {}

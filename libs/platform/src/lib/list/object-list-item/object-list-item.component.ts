@@ -21,9 +21,7 @@ import { ObjectListItemRowComponent } from './object-list-item-row.component';
     templateUrl: './object-list-item.component.html',
     styleUrls: ['./object-list-item.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    providers: [
-        { provide: BaseListItem, useExisting: forwardRef(() => ObjectListItemComponent) }
-    ],
+    providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ObjectListItemComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ObjectListItemComponent extends BaseListItem {
@@ -89,8 +87,12 @@ export class ObjectListItemComponent extends BaseListItem {
     isCompact = this._contentDensity === 'compact';
 
     /** @hidden */
-    constructor(_changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef,
-                protected _listConfig: ListConfig, @Optional() protected _router: Router) {
+    constructor(
+        _changeDetectorRef: ChangeDetectorRef,
+        public itemEl: ElementRef,
+        protected _listConfig: ListConfig,
+        @Optional() protected _router: Router
+    ) {
         super(_changeDetectorRef, itemEl, _listConfig, _router);
     }
 }

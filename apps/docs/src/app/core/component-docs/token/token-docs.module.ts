@@ -26,12 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        FormModule,
-        TokenModule,
-        RouterModule.forChild(routes),
-        SharedDocumentationPageModule
-    ],
+    imports: [FormModule, TokenModule, RouterModule.forChild(routes), SharedDocumentationPageModule],
     exports: [RouterModule],
     declarations: [
         TokenDocsComponent,

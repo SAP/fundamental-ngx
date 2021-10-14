@@ -58,5 +58,4 @@ export class ObjectIdentifierDocsComponent {
             fileName: 'object-identifier-table-example'
         }
     ];
-
 }

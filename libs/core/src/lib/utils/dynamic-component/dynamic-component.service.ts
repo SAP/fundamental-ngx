@@ -53,9 +53,7 @@ export class DynamicComponentService {
 
     private _createDependencyMap(services: any[] = []): WeakMap<any, any> {
         const dependencyMap = new WeakMap();
-        services
-            .filter(service => !!service)
-            .forEach((service) => dependencyMap.set(service.constructor, service));
+        services.filter((service) => !!service).forEach((service) => dependencyMap.set(service.constructor, service));
         return dependencyMap;
     }
 

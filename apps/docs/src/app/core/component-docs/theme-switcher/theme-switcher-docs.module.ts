@@ -14,8 +14,8 @@ const routes: Routes = [
         path: '',
         component: ThemeSwitcherHeaderComponent,
         children: [
-            {path: '', component: ThemeSwitcherDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.globalConfig}}
+            { path: '', component: ThemeSwitcherDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.globalConfig } }
         ]
     }
 ];
@@ -23,14 +23,7 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, ObjectStatusModule],
     exports: [RouterModule],
-    declarations: [
-        ThemeSwitcherDocsComponent,
-        ThemeSwitcherHeaderComponent,
-        examples
-    ],
-    providers: [
-        ThemesService
-    ]
+    declarations: [ThemeSwitcherDocsComponent, ThemeSwitcherHeaderComponent, examples],
+    providers: [ThemesService]
 })
-
 export class ThemeSwitcherDocsModule {}

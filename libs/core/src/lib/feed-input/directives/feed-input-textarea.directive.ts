@@ -41,10 +41,7 @@ export class FeedInputTextareaDirective implements OnInit {
     }
 
     /** @hidden */
-    constructor(
-        private readonly _elementRef: ElementRef<HTMLElement>,
-        private _renderer: Renderer2
-    ) {}
+    constructor(private readonly _elementRef: ElementRef<HTMLElement>, private _renderer: Renderer2) {}
 
     /** @hidden */
     get elementRef(): ElementRef<HTMLElement> {
@@ -64,7 +61,7 @@ export class FeedInputTextareaDirective implements OnInit {
         this._renderer.setStyle(this.elementRef.nativeElement, 'height', 'inherit');
 
         const totalHeight = this._getTextareaTotalHeight();
-        this._renderer.setStyle(this.elementRef.nativeElement, 'height', `${ totalHeight }px`);
+        this._renderer.setStyle(this.elementRef.nativeElement, 'height', `${totalHeight}px`);
     }
 
     /** @hidden get line height of textarea */
@@ -72,7 +69,9 @@ export class FeedInputTextareaDirective implements OnInit {
         const lineHeight = window.getComputedStyle(this.elementRef.nativeElement).getPropertyValue('line-height');
 
         if (lineHeight === 'normal') {
-            return parseInt(window.getComputedStyle(this.elementRef.nativeElement).getPropertyValue('font-size'), 10) * 1.1;
+            return (
+                parseInt(window.getComputedStyle(this.elementRef.nativeElement).getPropertyValue('font-size'), 10) * 1.1
+            );
         }
 
         return parseInt(lineHeight, 10);
@@ -82,8 +81,10 @@ export class FeedInputTextareaDirective implements OnInit {
     private _getTextareaTotalHeight(): number {
         const computed = window.getComputedStyle(this._elementRef.nativeElement);
 
-        return parseInt(computed.getPropertyValue('border-top-width'), 10) +
+        return (
+            parseInt(computed.getPropertyValue('border-top-width'), 10) +
             this.elementRef.nativeElement.scrollHeight +
-            parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+            parseInt(computed.getPropertyValue('border-bottom-width'), 10)
+        );
     }
 }

@@ -3,7 +3,7 @@
 <ng-container *ngIf="linkText !== null && linkText !== undefined">
     <span
         (click)="onObjectAttributeClick($event)"
-        [attr.tabindex]="disabled?'-1':'0'"
+        [attr.tabindex]="disabled ? '-1' : '0'"
         [attr.aria-label]="linkText"
         [attr.title]="linkText"
         [ngClass]="islink ? 'fd-object-attribute--link' : ''"

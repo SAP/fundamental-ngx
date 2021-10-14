@@ -3,17 +3,17 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEn
 import { trackByFn } from '../helpers';
 
 export type ApprovalFlowMessageType =
-    'watchersChangeSuccess' |
-    'approverAddSuccess' |
-    'teamAddSuccess' |
-    'nodeEdit' |
-    'nodeRemove' |
-    'nodesRemove' |
-    'teamRemove' |
-    'error';
+    | 'watchersChangeSuccess'
+    | 'approverAddSuccess'
+    | 'teamAddSuccess'
+    | 'nodeEdit'
+    | 'nodeRemove'
+    | 'nodesRemove'
+    | 'teamRemove'
+    | 'error';
 
 export interface ApprovalFlowMessage {
-    type: ApprovalFlowMessageType
+    type: ApprovalFlowMessageType;
 }
 
 @Component({
@@ -23,7 +23,7 @@ export interface ApprovalFlowMessage {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        class: 'fdp-approval-flow-messages',
+        class: 'fdp-approval-flow-messages'
     }
 })
 export class ApprovalFlowMessagesComponent {

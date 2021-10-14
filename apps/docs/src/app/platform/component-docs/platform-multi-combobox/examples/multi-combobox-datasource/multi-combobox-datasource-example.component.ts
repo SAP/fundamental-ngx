@@ -11,16 +11,7 @@ import { MultiComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/for
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
 })
 export class MultiComboboxDatasourceExampleComponent {
-    dataSourceStrings = [
-        'Apple',
-        'Banana',
-        'Pineapple',
-        'Strawberry',
-        'Broccoli',
-        'Carrot',
-        'Jalapeño',
-        'Spinach'
-    ];
+    dataSourceStrings = ['Apple', 'Banana', 'Pineapple', 'Strawberry', 'Broccoli', 'Carrot', 'Jalapeño', 'Spinach'];
 
     dataSource = [
         { name: 'Apple', type: 'Fruits' },
@@ -40,7 +31,12 @@ export class MultiComboboxDatasourceExampleComponent {
     selectedItems2 = [this.dataSource[1]];
     selectedItems3 = null;
     selectedItems4 = null;
-    selectedItems5 = [this.dataSourceStrings[1], this.dataSourceStrings[2], this.dataSourceStrings[3], this.dataSourceStrings[4]];
+    selectedItems5 = [
+        this.dataSourceStrings[1],
+        this.dataSourceStrings[2],
+        this.dataSourceStrings[3],
+        this.dataSourceStrings[4]
+    ];
 
     onSelect1(item: MultiComboboxSelectionChangeEvent): void {
         this.selectedItems1 = item.selectedItems;

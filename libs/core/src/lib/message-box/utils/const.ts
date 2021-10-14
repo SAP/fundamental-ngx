@@ -6,5 +6,5 @@ export const CSS_CLASS_NAME = {
     messageBoxTypeWarning: 'fd-message-box--warning',
     messageBoxTypeSuccess: 'fd-message-box--success',
     messageBoxTypeInformation: 'fd-message-box--information',
-    messageBoxTypeConfirmation: 'fd-message-box--confirmation',
+    messageBoxTypeConfirmation: 'fd-message-box--confirmation'
 };

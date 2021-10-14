@@ -3,11 +3,7 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h4
-                        fd-title
-                        [headerSize]="4"
-                        i18n="@@platformTableP13FilterDialogHeader"
-                    >Filter By</h4>
+                    <h4 fd-title [headerSize]="4" i18n="@@platformTableP13FilterDialogHeader">Filter By</h4>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -20,14 +16,8 @@
 
     <fd-dialog-body>
         <!-- Include Rules -->
-        <fd-panel
-            [compact]="true"
-            [expanded]="_includePanelExpanded"
-        >
-            <div
-                fd-panel-title
-                i18n="@@platformTableP13FilterDialogIncludePanelTitle"
-            >
+        <fd-panel [compact]="true" [expanded]="_includePanelExpanded">
+            <div fd-panel-title i18n="@@platformTableP13FilterDialogIncludePanelTitle">
                 Include <ng-container *ngIf="_validIncludeRulesCount > 0">({{ _validIncludeRulesCount }})</ng-container>
             </div>
             <div fd-panel-content>
@@ -69,14 +59,8 @@
             </div>
         </fd-panel>
         <!-- Exclude Rules -->
-        <fd-panel
-            [compact]="true"
-            [expanded]="_excludePanelExpanded"
-        >
-            <div
-                fd-panel-title
-                i18n="@@platformTableP13FilterDialogExcludePanelTitle"
-            >
+        <fd-panel [compact]="true" [expanded]="_excludePanelExpanded">
+            <div fd-panel-title i18n="@@platformTableP13FilterDialogExcludePanelTitle">
                 Exclude <ng-container *ngIf="_validExcludeRulesCount > 0">({{ _validExcludeRulesCount }})</ng-container>
             </div>
             <div fd-panel-content>
@@ -94,7 +78,9 @@
                             fdType="transparent"
                             glyph="sys-cancel"
                             [compact]="true"
-                            i18n-aria-label="platformTableP13FilterDialogRemoveFilterFromExclude|Button aria-label attribute"
+                            i18n-aria-label="
+                                platformTableP13FilterDialogRemoveFilterFromExclude|Button aria-label attribute
+                            "
                             aria-label="Remove Filter"
                             i18n-title="platformTableP13FilterDialogRemoveFilterFromExclude|Button title attribute"
                             title="Remove Filter"
@@ -117,7 +103,6 @@
                 </fd-layout-grid>
             </div>
         </fd-panel>
-
     </fd-dialog-body>
 
     <fd-dialog-footer>
@@ -130,8 +115,7 @@
                 label="OK"
                 [compact]="true"
                 (click)="confirm()"
-            >
-            </button>
+            ></button>
         </fd-dialog-footer-button>
 
         <fd-dialog-footer-button>
@@ -144,8 +128,7 @@
                 label="Cancel"
                 [compact]="true"
                 (click)="cancel()"
-            >
-            </button>
+            ></button>
         </fd-dialog-footer-button>
     </fd-dialog-footer>
 </fd-dialog>

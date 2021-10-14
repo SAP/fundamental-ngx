@@ -1,28 +1,37 @@
-<fd-docs-section-title id="basic" componentName="value-help-dialog">
-    Basic Value Help Dialog.
-</fd-docs-section-title>
+<fd-docs-section-title id="basic" componentName="value-help-dialog"> Basic Value Help Dialog. </fd-docs-section-title>
 <description>
     <p>Example to demonstrate the basic call Value Help Dialog.</p>
     <p>Basic setup</p>
     <strong>fdp-value-help-dialog</strong>
     <ul>
-        <li>Set <code>[dialogTitle]</code>, it should be string. It will show as header's title of the dialog window.</li>
-        <li>Set <code>[uniqueKey]</code> it should be uniq field from data source. <em>Required field for `selected from list` tab</em></li>
         <li>
-            Set <code>[tokenViewField]</code> or <code>[tokenizerFn]</code> property to render selected item token. <em>Required field for `selected from list` tab</em>
-            <code>[tokenViewField]</code> should be a string equal key from data source. Need to render selected token.
+            Set <code>[dialogTitle]</code>, it should be string. It will show as header's title of the dialog window.
+        </li>
+        <li>
+            Set <code>[uniqueKey]</code> it should be uniq field from data source.
+            <em>Required field for `selected from list` tab</em>
+        </li>
+        <li>
+            Set <code>[tokenViewField]</code> or <code>[tokenizerFn]</code> property to render selected item token.
+            <em>Required field for `selected from list` tab</em> <code>[tokenViewField]</code> should be a string equal
+            key from data source. Need to render selected token.
             <br />
             <code>[tokenizerFn]</code> should be a function. <em>It has higher prio that `tokenViewField`</em>
         </li>
-        <li>Set <code>[dataSource]</code> property to your data source. <em>Required field for `selected from list` tab</em></li>
+        <li>
+            Set <code>[dataSource]</code> property to your data source.
+            <em>Required field for `selected from list` tab</em>
+        </li>
     </ul>
     <strong>fdp-value-help-dialog-filter</strong>
     <ul>
         <li>
-            Set <code>[key]</code> property to string, should be equal to field from data source. <em>Required field.</em>
+            Set <code>[key]</code> property to string, should be equal to field from data source.
+            <em>Required field.</em>
         </li>
         <li>
-            Set <code>[label]</code> property to string, it will show as header in search table. If you skip this field, key will appear instead label.
+            Set <code>[label]</code> property to string, it will show as header in search table. If you skip this field,
+            key will appear instead label.
         </li>
     </ul>
 </description>
@@ -73,15 +82,9 @@
     </ul>
     <p>Set <code>[defineStrategyLabels]</code> for you custom strategy label. All keys are optional</p>
     <ul>
-        <li>Allowed keys:
-            <code>contains</code>,
-            <code>equalTo</code>,
-            <code>between</code>,
-            <code>startsWith</code>,
-            <code>endsWith</code>,
-            <code>lessThan</code>,
-            <code>lessThanEqual</code>,
-            <code>greaterThan</code>,
+        <li>
+            Allowed keys: <code>contains</code>, <code>equalTo</code>, <code>between</code>, <code>startsWith</code>,
+            <code>endsWith</code>, <code>lessThan</code>, <code>lessThanEqual</code>, <code>greaterThan</code>,
             <code>greaterThanEqual</code>,
             <code>empty</code>
         </li>
@@ -99,11 +102,20 @@
 </fd-docs-section-title>
 <description>
     <ul>
-        <li>Set <code>[tokenViewField]</code> property to name from data source fields. It'll use for render custom token in selection panel.</li>
-        <li>Set <code>[tokenizerFn]</code> property to your function. It'll use for render custom token in selection panel.</li>
+        <li>
+            Set <code>[tokenViewField]</code> property to name from data source fields. It'll use for render custom
+            token in selection panel.
+        </li>
+        <li>
+            Set <code>[tokenizerFn]</code> property to your function. It'll use for render custom token in selection
+            panel.
+        </li>
     </ul>
     <p><code>[tokenizerFn]</code> has higher priority than <code>[tokenViewField]</code></p>
-    <p>Example to demonstrate the token display function for selected items panel in the footer of the Value Help Dialog.</p>
+    <p>
+        Example to demonstrate the token display function for selected items panel in the footer of the Value Help
+        Dialog.
+    </p>
 </description>
 <component-example>
     <fdp-platform-vhd-token-example></fdp-platform-vhd-token-example>
@@ -117,9 +129,18 @@
 </fd-docs-section-title>
 <description>
     <ul>
-        <li>Set <code>[searchSelection]</code> property to <strong>multi</strong>, if you want to select multiple rows from search table</li>
-        <li>Set <code>[searchSelection]</code> property to <strong>single</strong>, if you want to select single row from search table without close dialog</li>
-        <li>Set <code>[searchSelection]</code> property to <strong>once</strong>, if you want to select single row from search table and success dialog with this value</li>
+        <li>
+            Set <code>[searchSelection]</code> property to <strong>multi</strong>, if you want to select multiple rows
+            from search table
+        </li>
+        <li>
+            Set <code>[searchSelection]</code> property to <strong>single</strong>, if you want to select single row
+            from search table without close dialog
+        </li>
+        <li>
+            Set <code>[searchSelection]</code> property to <strong>once</strong>, if you want to select single row from
+            search table and success dialog with this value
+        </li>
     </ul>
     <p>Example to demonstrate using Value Help Dialog with input field and single selection.</p>
 </description>
@@ -143,9 +164,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="mobile" componentName="value-help-dialog">
-    Mobile version
-</fd-docs-section-title>
+<fd-docs-section-title id="mobile" componentName="value-help-dialog"> Mobile version </fd-docs-section-title>
 <description>
     <p>Example to demonstrate mobile view for Value Help Dialog.</p>
     <ul>

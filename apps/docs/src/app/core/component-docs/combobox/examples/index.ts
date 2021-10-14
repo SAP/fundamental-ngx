@@ -12,7 +12,7 @@ import { ComboboxOpenControlExampleComponent } from './combobox-open-control-exa
 import { ComboboxSearchFunctionExampleComponent } from './combobox-search-function-example.component';
 import { ComboboxTemplateExampleComponent } from './combobox-template-example.component';
 import { ComboboxIncludesExampleComponent } from './combobox-includes-example.component';
-import { ComboboxSearchFieldExampleComponent } from './combobox-search-field-example.component'
+import { ComboboxSearchFieldExampleComponent } from './combobox-search-field-example.component';
 
 export * from './combobox-mobile/combobox-mobile-example.component';
 export * from './combobox-async-example.component';

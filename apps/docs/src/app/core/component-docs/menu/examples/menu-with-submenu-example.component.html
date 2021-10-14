@@ -1,9 +1,9 @@
 <button fd-button label="Menu with submenu" [fdMenu]="true" [fdMenuTrigger]="menu"></button>
 
 <div style="display: inline-block">
-    <span style="padding-left: .5rem">Active path:</span>
-    <span *ngFor="let active of activePath" style="padding: .5rem">
-        {{active.menuItemTitle.title}}
+    <span style="padding-left: 0.5rem">Active path:</span>
+    <span *ngFor="let active of activePath" style="padding: 0.5rem">
+        {{ active.menuItemTitle.title }}
     </span>
 </div>
 

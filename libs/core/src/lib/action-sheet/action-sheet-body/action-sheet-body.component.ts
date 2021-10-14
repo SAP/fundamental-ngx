@@ -1,10 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    HostListener,
-    Input,
-    ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
 import { ActionSheetItemComponent } from '../action-sheet-item/action-sheet-item.component';
 import { KeyboardSupportService } from '@fundamental-ngx/core/utils';
 
@@ -28,7 +22,6 @@ import { KeyboardSupportService } from '@fundamental-ngx/core/utils';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionSheetBodyComponent {
-
     /** Indicate if items should be in compact or compare mode. **/
     @Input()
     compact = false;
@@ -37,9 +30,7 @@ export class ActionSheetBodyComponent {
     @Input()
     mobile = false;
 
-    constructor(
-        private _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>
-    ) {}
+    constructor(private _keyboardSupportService: KeyboardSupportService<ActionSheetItemComponent>) {}
 
     /** Handler for mouse events */
     @HostListener('click', ['$event'])
@@ -51,7 +42,7 @@ export class ActionSheetBodyComponent {
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
         if (this._keyboardSupportService.keyManager) {
-            this._keyboardSupportService.onKeyDown(event)
+            this._keyboardSupportService.onKeyDown(event);
         }
     }
 }

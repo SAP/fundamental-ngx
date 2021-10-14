@@ -10,16 +10,14 @@ export class PlatformTableNoItemsTemplateExampleComponent {
     source = [];
 
     sceneConfig = {
-        scene: {url: 'assets/images/sapIllus-Scene-NoMail.svg', id: 'sapIllus-Scene-NoMail-1'},
-        dialog: {url: 'assets/images/sapIllus-Dialog-NoMail.svg', id: 'sapIllus-Dialog-NoMail'}
-    }
+        scene: { url: 'assets/images/sapIllus-Scene-NoMail.svg', id: 'sapIllus-Scene-NoMail-1' },
+        dialog: { url: 'assets/images/sapIllus-Dialog-NoMail.svg', id: 'sapIllus-Dialog-NoMail' }
+    };
 
     alert(message: string): void {
         alert(message);
     }
-
 }
-
 
 export interface ExampleItem {
     name: string;

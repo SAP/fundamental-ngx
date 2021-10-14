@@ -5,16 +5,17 @@ import { whenStable } from '@fundamental-ngx/core/tests';
 import { SplitterModule } from '../splitter.module';
 import { SplitterSplitPaneComponent } from './splitter-split-pane.component';
 
-
 describe('SplitterSplitPaneComponent', () => {
     let component: SplitterSplitPaneComponent;
     let fixture: ComponentFixture<SplitterSplitPaneComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [SplitterModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [SplitterModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(SplitterSplitPaneComponent);

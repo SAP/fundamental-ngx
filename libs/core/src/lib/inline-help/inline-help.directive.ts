@@ -42,10 +42,7 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
     @Input('fd-inline-help-template')
     inlineHelpTemplate: TemplateRef<any> = null;
 
-    constructor(
-        private _popoverService: PopoverService,
-        private _elementRef: ElementRef
-    ) {
+    constructor(private _popoverService: PopoverService, private _elementRef: ElementRef) {
         super();
     }
 
@@ -59,7 +56,7 @@ export class InlineHelpDirective extends BasePopoverClass implements OnInit, OnC
             this._popoverService.updateContent(
                 changes['inlineHelpText']?.currentValue,
                 changes['inlineHelpTemplate']?.currentValue
-            )
+            );
         }
 
         this._popoverService.refreshConfiguration(this);

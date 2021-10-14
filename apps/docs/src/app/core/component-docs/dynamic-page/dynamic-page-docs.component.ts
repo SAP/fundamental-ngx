@@ -7,10 +7,9 @@ import * as dynamicPageBasicExampleTsCode from '!raw-loader!./dynamic-page-examp
 import * as dynamicPageTabsExampleTsCode from '!raw-loader!./dynamic-page-examples/dynamic-page-tabs-example/dynamic-page-tabs-example.component.ts';
 import * as dynamicPageTabsExampleHtmlCode from '!raw-loader!./dynamic-page-examples/dynamic-page-tabs-example/dynamic-page-tabs-example.component.html';
 import * as dynamicPageColumnExampleTsCode from '!raw-loader!./dynamic-page-examples/dynamic-page-column-layout-example/dynamic-page-column-layout-example.component.ts';
-import * as dynamicPageColumnExampleHtmlCode from '!raw-loader!./dynamic-page-examples/dynamic-page-column-layout-example/dynamic-page-column-layout-example.component.html'
+import * as dynamicPageColumnExampleHtmlCode from '!raw-loader!./dynamic-page-examples/dynamic-page-column-layout-example/dynamic-page-column-layout-example.component.html';
 import * as dynamicPageResponsiveExampleTsCode from '!raw-loader!./dynamic-page-examples/dynamic-page-responsive-example/dynamic-page-responsive-example.component.ts';
-import * as dynamicPageResponsiveExampleHtmlCode from '!raw-loader!./dynamic-page-examples/dynamic-page-responsive-example/dynamic-page-responsive-example.component.html'
-
+import * as dynamicPageResponsiveExampleHtmlCode from '!raw-loader!./dynamic-page-examples/dynamic-page-responsive-example/dynamic-page-responsive-example.component.html';
 
 @Component({
     selector: 'app-dynamic-page',
@@ -21,7 +20,7 @@ export class DynamicPageDocsComponent {
         {
             language: 'html',
             code: dynamicPageBasicExample,
-            fileName: 'dynamic-page-basic-example',
+            fileName: 'dynamic-page-basic-example'
         },
         {
             language: 'typescript',
@@ -35,7 +34,7 @@ export class DynamicPageDocsComponent {
         {
             language: 'html',
             code: dynamicPageTabsExampleHtmlCode,
-            fileName: 'dynamic-page-tabs-example',
+            fileName: 'dynamic-page-tabs-example'
         },
         {
             language: 'typescript',
@@ -49,7 +48,7 @@ export class DynamicPageDocsComponent {
         {
             language: 'html',
             code: dynamicPageColumnExampleHtmlCode,
-            fileName: 'dynamic-page-column-layout-example',
+            fileName: 'dynamic-page-column-layout-example'
         },
         {
             language: 'typescript',
@@ -63,7 +62,7 @@ export class DynamicPageDocsComponent {
         {
             language: 'html',
             code: dynamicPageResponsiveExampleHtmlCode,
-            fileName: 'dynamic-page-responsive-example',
+            fileName: 'dynamic-page-responsive-example'
         },
         {
             language: 'typescript',

@@ -40,7 +40,6 @@ export class TabPanelStateChange {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabPanelComponent implements OnChanges {
-
     /** Id of the tab. If none is provided, one will be generated. */
     @Input()
     id: string = 'fd-tab-panel' + tabPanelUniqueId++;

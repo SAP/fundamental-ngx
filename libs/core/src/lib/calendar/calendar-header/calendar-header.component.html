@@ -1,11 +1,5 @@
-<header
-    class="fd-calendar__header"
-    aria-live="polite"
->
-    <div
-        class="fd-calendar__navigation"
-        [class.fd-calendar__navigation--main]="mobileLandscape"
-    >
+<header class="fd-calendar__header" aria-live="polite">
+    <div class="fd-calendar__navigation" [class.fd-calendar__navigation--main]="mobileLandscape">
         <div class="fd-calendar__action fd-calendar__action--arrow-left">
             <button
                 fd-button
@@ -30,8 +24,7 @@
                     [label]="selectMonthLabel"
                     [attr.aria-label]="selectMonthAriaLabel"
                     (click)="processViewChange('month', $event)"
-                >
-                </button>
+                ></button>
             </div>
             <div class="fd-calendar__action">
                 <!-- Select year button -->
@@ -43,8 +36,7 @@
                     [label]="selectYearLabel"
                     [attr.aria-label]="selectYearAriaLabel"
                     (click)="processViewChange('year', $event)"
-                >
-                </button>
+                ></button>
             </div>
         </ng-container>
         <ng-container *ngIf="isOnAggregatedYearsView || isOnYearView">
@@ -57,8 +49,7 @@
                     [attr.aria-label]="selectAggregatedYearAriaLabel"
                     (click)="processViewChange('aggregatedYear', $event)"
                     type="button"
-                >
-                </button>
+                ></button>
             </div>
         </ng-container>
         <div class="fd-calendar__action fd-calendar__action--arrow-right">

@@ -50,7 +50,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
             placeholder: 'Please provide your name',
             guiOptions: {
                 hint: 'Some contextual hint: XL: 1, L: 2, M: 1, S: 2',
-                columnLayout: { XL: 1, L: 2, M: 1, S: 1 },
+                columnLayout: { XL: 1, L: 2, M: 1, S: 1 }
             },
             validate: async (value) => {
                 await dummyAwaitablePromise();
@@ -77,7 +77,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
             },
             guiOptions: {
                 hint: 'XL: 1, L: 2, M: 2, S: 1',
-                columnLayout: { XL: 1, L: 2, M: 2, S: 1 },
+                columnLayout: { XL: 1, L: 2, M: 2, S: 1 }
             }
         },
         {
@@ -89,7 +89,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
             validators: [Validators.required],
             guiOptions: {
                 columnLayout: { XL: 1, L: 2, M: 1, S: 1 },
-                hint: 'XL: 1, L: 2, M: 1, S: 1',
+                hint: 'XL: 1, L: 2, M: 1, S: 1'
             }
         },
         {
@@ -98,7 +98,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
             message: 'Your biography: XL: 2, L: 1, M: 2, S: 1',
             guiOptions: {
                 columnLayout: { XL: 2, L: 1, M: 2, S: 1 },
-                hint: 'XL: 2, L: 1, M: 2, S: 1',
+                hint: 'XL: 2, L: 1, M: 2, S: 1'
             }
         },
         {
@@ -109,7 +109,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
                 inline: true,
                 columnLayout: { XL: 2, L: 1, M: 2, S: 1 },
                 inlineLayout: { XL: true, L: false, M: true, S: false },
-                hint: 'XL: 2 true, L: 1 false, M: 2 true, S: 1 false',
+                hint: 'XL: 2 true, L: 1 false, M: 2 true, S: 1 false'
             },
             choices: (formValue) => {
                 return [
@@ -135,7 +135,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
             choices: ['IT', 'Accounting', 'Management'],
             guiOptions: {
                 column: 2,
-                hint: 'column: 2',
+                hint: 'column: 2'
             }
         },
         {
@@ -153,7 +153,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
             },
             guiOptions: {
                 columnLayout: { XL: 2, L: 1, M: 1, S: 1 },
-                hint: 'XL: 2, L: 1, M: 1, S: 1',
+                hint: 'XL: 2, L: 1, M: 1, S: 1'
             }
         },
         {
@@ -168,7 +168,7 @@ export class PlatformFormGeneratorFieldLayoutExampleComponent {
             },
             guiOptions: {
                 columnLayout: { XL: 2, L: 1, M: 2, S: 1 },
-                hint: 'XL: 2, L: 1, M: 2, S: 1',
+                hint: 'XL: 2, L: 1, M: 2, S: 1'
             }
         },
         {

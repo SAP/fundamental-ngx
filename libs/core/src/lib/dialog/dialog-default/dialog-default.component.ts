@@ -10,7 +10,6 @@ import { DialogDefaultContent } from '../utils/dialog-default-content.class';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogDefaultComponent implements AfterViewInit {
-
     /** @hidden */
     _defaultDialogContent: DialogDefaultContent;
 
@@ -18,8 +17,7 @@ export class DialogDefaultComponent implements AfterViewInit {
     _defaultDialogConfiguration: DialogConfig;
 
     /** @hidden */
-    constructor(private _changeDetectorRef: ChangeDetectorRef) {
-    }
+    constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
     /** @hidden
      * TODO: Inspect why DialogDefaultComponents needs change detection re-run to render adjusted content (dialog header title)
@@ -30,9 +28,10 @@ export class DialogDefaultComponent implements AfterViewInit {
 
     /** Whether there is a approve button, or cancel button text */
     _showFooter(): boolean {
-        return this._defaultDialogContent &&
+        return (
+            this._defaultDialogContent &&
             !!(this._defaultDialogContent.cancelButton || this._defaultDialogContent.approveButton)
-        ;
+        );
     }
 
     /** @hidden */

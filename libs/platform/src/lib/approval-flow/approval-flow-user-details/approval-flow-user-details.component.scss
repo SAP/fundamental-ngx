@@ -12,8 +12,7 @@ $block: fdp-approval-flow-user-details;
     }
 
     &__description {
-        color: #6A6D70;
-        color: var(--sapContent_LabelColor, #6A6D70);
+        color: #6a6d70;
+        color: var(--sapContent_LabelColor, #6a6d70);
     }
 }
-

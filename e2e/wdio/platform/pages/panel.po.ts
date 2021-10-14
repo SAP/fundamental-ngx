@@ -2,7 +2,6 @@ import { BaseComponentPo } from './base-component.po';
 import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class PanelPo extends BaseComponentPo {
-
     url = '/panel';
     root = '#page-content';
 

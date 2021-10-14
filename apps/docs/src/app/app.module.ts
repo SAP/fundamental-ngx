@@ -29,8 +29,6 @@ const routes: Routes = [
         MarkdownModule.forRoot({ loader: HttpClient })
     ],
     bootstrap: [AppComponent],
-    providers: [
-        ContentDensityService
-    ]
+    providers: [ContentDensityService]
 })
 export class AppModule {}

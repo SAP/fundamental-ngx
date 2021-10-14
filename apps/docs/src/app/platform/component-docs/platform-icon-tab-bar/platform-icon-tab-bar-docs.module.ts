@@ -35,13 +35,8 @@ const routes: Routes = [
         PlatformIconTabBarProcessTypeExampleComponent,
         PlatformIconTabBarIconTypeExampleComponent,
         PlatformIconTabBarIconOnlyTypeExampleComponent,
-        PlatformIconTabBarConfigurablePaddingsExampleComponent,
+        PlatformIconTabBarConfigurablePaddingsExampleComponent
     ],
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
-        PlatformIconTabBarModule,
-    ]
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformIconTabBarModule]
 })
-export class PlatformIconTabBarDocsModule {
-}
+export class PlatformIconTabBarDocsModule {}

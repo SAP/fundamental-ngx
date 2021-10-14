@@ -7,9 +7,9 @@
         "types": ["node"]
     },
     "files": ["src/main.ts", "src/polyfills.ts"],
-    "include": ["src/*.d.ts",  "**/*.ts"],
+    "include": ["src/*.d.ts", "**/*.ts"],
     "exclude": ["**/*.spec.ts"],
     "angularCompilerOptions": {
-      "enableIvy": true
+        "enableIvy": true
     }
 }

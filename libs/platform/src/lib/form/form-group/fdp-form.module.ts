@@ -13,7 +13,15 @@ import { FormFieldGroupComponent } from './form-field-group/form-field-group.com
 
 @NgModule({
     declarations: [FormGroupComponent, FormFieldComponent, InputMessageGroupWithTemplate, FormFieldGroupComponent],
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, FdFormModule, InlineHelpModule, PopoverModule, IconModule],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        FdFormModule,
+        InlineHelpModule,
+        PopoverModule,
+        IconModule
+    ],
     exports: [FormGroupComponent, FormFieldComponent, InputMessageGroupWithTemplate, FormFieldGroupComponent]
 })
 export class FdpFormGroupModule {}

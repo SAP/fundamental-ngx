@@ -45,11 +45,10 @@ import { ShellbarUserMenuComponent } from '../user-menu/shellbar-user-menu.compo
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[class.fd-shellbar__group]': 'true',
-        '[class.fd-shellbar__group--actions]': 'true',
+        '[class.fd-shellbar__group--actions]': 'true'
     }
 })
 export class ShellbarActionsComponent {
-
     /** The user data. */
     @Input()
     user: ShellbarUser;

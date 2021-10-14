@@ -6,14 +6,15 @@ import {
     getText,
     getTextArr,
     isElementClickable,
-    isElementDisplayed, pause,
+    isElementDisplayed,
+    pause,
     refreshPage,
     selectOptionByValueAttribute,
     sendKeys,
     setValue,
     waitElementToBeClickable,
     waitForElDisappear,
-    waitForNotDisplayed, 
+    waitForNotDisplayed,
     waitForElDisplayed,
     waitForNotPresent,
     waitForPresent
@@ -352,7 +353,7 @@ describe('Approval flow', () => {
             const approvalFlowNodeCountAfterAdding = getElementArrayLength(approvalFlowNode);
             waitForElDisplayed(messageStripUndoLink);
             click(messageStripUndoLink);
-            waitForNotDisplayed(messageStripUndoLink)
+            waitForNotDisplayed(messageStripUndoLink);
 
             const approvalFlowNodeCountAfterUndo = getElementArrayLength(approvalFlowNode);
 

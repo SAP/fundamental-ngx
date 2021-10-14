@@ -10,7 +10,6 @@ import {
 import { DynamicPageBaseActions } from './dynamic-page-base-actions';
 import { DYNAMIC_PAGE_CLASS_NAME } from '../../constants';
 
-
 @Component({
     selector: 'fd-dynamic-page-layout-actions',
     template: '<ng-content></ng-content>',
@@ -18,7 +17,6 @@ import { DYNAMIC_PAGE_CLASS_NAME } from '../../constants';
     encapsulation: ViewEncapsulation.None
 })
 export class DynamicPageLayoutActionsComponent extends DynamicPageBaseActions implements AfterContentInit {
-
     constructor(
         private _elementRef: ElementRef,
         private _renderer: Renderer2,

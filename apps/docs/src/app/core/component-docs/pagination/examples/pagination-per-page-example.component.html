@@ -14,7 +14,7 @@
     <fd-pagination
         fd-toolbar-item
         [totalItems]="totalItems"
-        [itemsPerPageOptions]="[4,8,16]"
+        [itemsPerPageOptions]="[4, 8, 16]"
         [currentPage]="currentPage2"
         (pageChangeStart)="pageChanged2($event)"
         ariaLabel="Pagination with itemsPerPageOptions property"
@@ -33,14 +33,17 @@
     ></fd-pagination>
 
     <ng-template #itemsPerPageCustom let-onSelect="onSelect">
-        <fd-segmented-button [ngModel]="customItemsPerPage" (ngModelChange)="onSelect($event); customItemsPerPage = $event">
-          <button
-            fd-button
-            [label]="count"
-            [attr.aria-label]="'Show ' + count + ' items per page'"
-            [attr.value]="count"
-            *ngFor="let count of [2, 5, 100]">
-          </button>
+        <fd-segmented-button
+            [ngModel]="customItemsPerPage"
+            (ngModelChange)="onSelect($event); customItemsPerPage = $event"
+        >
+            <button
+                fd-button
+                [label]="count"
+                [attr.aria-label]="'Show ' + count + ' items per page'"
+                [attr.value]="count"
+                *ngFor="let count of [2, 5, 100]"
+            ></button>
         </fd-segmented-button>
     </ng-template>
 </div>

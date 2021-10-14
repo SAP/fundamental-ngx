@@ -1,9 +1,7 @@
-<button fd-button (click)="openMobile(dialogTemplate)">
-    Open in mobile mode
-</button>
+<button fd-button (click)="openMobile(dialogTemplate)">Open in mobile mode</button>
 
 <ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
-    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog" style="padding-bottom: 1rem; margin-top: 1rem;">
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog" style="padding-bottom: 1rem; margin-top: 1rem">
         <fd-dialog-header>
             <h1 fd-title>Fixed card layout in mobile display</h1>
             <button fd-dialog-close-button (click)="dialog.dismiss('Close button')"></button>
@@ -18,19 +16,13 @@
                     <fd-card-content>
                         <ul fd-list [noBorder]="true">
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 1
-                                </span>
+                                <span fd-list-title> item 1 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 2
-                                </span>
+                                <span fd-list-title> item 2 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 3
-                                </span>
+                                <span fd-list-title> item 3 </span>
                             </li>
                         </ul>
                     </fd-card-content>
@@ -43,8 +35,14 @@
 
                         <fd-card-kpi-header>
                             <strong fd-card-kpi-value status="positive">21.83</strong>
-                            <span fd-card-kpi-scale-icon glyph="up" aria-label="up arrow" title="up arrow"
-                                fd-object-status status="positive"></span>
+                            <span
+                                fd-card-kpi-scale-icon
+                                glyph="up"
+                                aria-label="up arrow"
+                                title="up arrow"
+                                fd-object-status
+                                status="positive"
+                            ></span>
                             <span fd-card-kpi-scale-text fd-object-status status="positive">K</span>
 
                             <div fd-card-kpi-analytics>
@@ -62,19 +60,13 @@
                     <fd-card-content>
                         <ul fd-list [noBorder]="true">
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 1
-                                </span>
+                                <span fd-list-title> item 1 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 2
-                                </span>
+                                <span fd-list-title> item 2 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 3
-                                </span>
+                                <span fd-list-title> item 3 </span>
                             </li>
                         </ul>
                     </fd-card-content>
@@ -96,43 +88,25 @@
                             </thead>
                             <tbody fd-table-body>
                                 <tr fd-table-row [main]="true" [activable]="true" tabindex="0">
-                                    <td fd-table-cell>
-                                        Banana
-                                    </td>
-                                    <td fd-table-cell>
-                                        India
-                                    </td>
-                                    <td fd-table-cell dir="ltr">
-                                        5 EUR
-                                    </td>
+                                    <td fd-table-cell>Banana</td>
+                                    <td fd-table-cell>India</td>
+                                    <td fd-table-cell dir="ltr">5 EUR</td>
                                     <td fd-table-cell>
                                         <span fd-object-status status="positive">Available</span>
                                     </td>
                                 </tr>
                                 <tr fd-table-row [main]="true" [activable]="true" tabindex="0">
-                                    <td fd-table-cell>
-                                        Pineapple
-                                    </td>
-                                    <td fd-table-cell>
-                                        Mexico
-                                    </td>
-                                    <td fd-table-cell dir="ltr">
-                                        2 EUR
-                                    </td>
+                                    <td fd-table-cell>Pineapple</td>
+                                    <td fd-table-cell>Mexico</td>
+                                    <td fd-table-cell dir="ltr">2 EUR</td>
                                     <td fd-table-cell>
                                         <span fd-object-status status="negative">Out of stock</span>
                                     </td>
                                 </tr>
                                 <tr fd-table-row [main]="true" [activable]="true" tabindex="0">
-                                    <td fd-table-cell>
-                                        Orange
-                                    </td>
-                                    <td fd-table-cell>
-                                        Spain
-                                    </td>
-                                    <td fd-table-cell dir="ltr">
-                                        6 EUR
-                                    </td>
+                                    <td fd-table-cell>Orange</td>
+                                    <td fd-table-cell>Spain</td>
+                                    <td fd-table-cell dir="ltr">6 EUR</td>
                                     <td fd-table-cell>
                                         <span fd-object-status status="informative">Temporary unavailable</span>
                                     </td>
@@ -143,8 +117,11 @@
                 </fd-card>
                 <fd-card *fdCardDef badge="New" cardType="list">
                     <fd-card-header>
-                        <fd-avatar image="http://picsum.photos/id/1018/400" ariaLabel="avatar image"
-                            title="avatar image"></fd-avatar>
+                        <fd-avatar
+                            image="http://picsum.photos/id/1018/400"
+                            ariaLabel="avatar image"
+                            title="avatar image"
+                        ></fd-avatar>
                         <h2 fd-card-title>Card Title</h2>
                         <h3 fd-card-subtitle>Card Subtitle</h3>
                         <span fd-card-counter status="positive">3 of 10</span>
@@ -152,24 +129,16 @@
                     <fd-card-content>
                         <ul fd-list [noBorder]="true">
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 1
-                                </span>
+                                <span fd-list-title> item 1 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 2
-                                </span>
+                                <span fd-list-title> item 2 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 3
-                                </span>
+                                <span fd-list-title> item 3 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 4
-                                </span>
+                                <span fd-list-title> item 4 </span>
                             </li>
                         </ul>
                     </fd-card-content>
@@ -183,29 +152,19 @@
                     <fd-card-content>
                         <ul fd-list [noBorder]="true" [compact]="true">
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 1
-                                </span>
+                                <span fd-list-title> item 1 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 2
-                                </span>
+                                <span fd-list-title> item 2 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 3
-                                </span>
+                                <span fd-list-title> item 3 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 4
-                                </span>
+                                <span fd-list-title> item 4 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 5
-                                </span>
+                                <span fd-list-title> item 5 </span>
                             </li>
                         </ul>
                     </fd-card-content>
@@ -217,19 +176,13 @@
                     <fd-card-content>
                         <ul fd-list [noBorder]="true">
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 1
-                                </span>
+                                <span fd-list-title> item 1 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 2
-                                </span>
+                                <span fd-list-title> item 2 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 3
-                                </span>
+                                <span fd-list-title> item 3 </span>
                             </li>
                         </ul>
                     </fd-card-content>
@@ -251,43 +204,25 @@
                             </thead>
                             <tbody fd-table-body>
                                 <tr fd-table-row [main]="true" [activable]="true" tabindex="0">
-                                    <td fd-table-cell>
-                                        Banana
-                                    </td>
-                                    <td fd-table-cell>
-                                        India
-                                    </td>
-                                    <td fd-table-cell dir="ltr">
-                                        5 EUR
-                                    </td>
+                                    <td fd-table-cell>Banana</td>
+                                    <td fd-table-cell>India</td>
+                                    <td fd-table-cell dir="ltr">5 EUR</td>
                                     <td fd-table-cell>
                                         <span fd-object-status status="positive">Available</span>
                                     </td>
                                 </tr>
                                 <tr fd-table-row [main]="true" [activable]="true" tabindex="0">
-                                    <td fd-table-cell>
-                                        Pineapple
-                                    </td>
-                                    <td fd-table-cell>
-                                        Mexico
-                                    </td>
-                                    <td fd-table-cell dir="ltr">
-                                        2 EUR
-                                    </td>
+                                    <td fd-table-cell>Pineapple</td>
+                                    <td fd-table-cell>Mexico</td>
+                                    <td fd-table-cell dir="ltr">2 EUR</td>
                                     <td fd-table-cell>
                                         <span fd-object-status status="negative">Out of stock</span>
                                     </td>
                                 </tr>
                                 <tr fd-table-row [main]="true" [activable]="true" tabindex="0">
-                                    <td fd-table-cell>
-                                        Orange
-                                    </td>
-                                    <td fd-table-cell>
-                                        Spain
-                                    </td>
-                                    <td fd-table-cell dir="ltr">
-                                        6 EUR
-                                    </td>
+                                    <td fd-table-cell>Orange</td>
+                                    <td fd-table-cell>Spain</td>
+                                    <td fd-table-cell dir="ltr">6 EUR</td>
                                     <td fd-table-cell>
                                         <span fd-object-status status="informative">Temporary unavailable</span>
                                     </td>
@@ -298,8 +233,11 @@
                 </fd-card>
                 <fd-card *fdCardDef badge="New" cardType="list">
                     <fd-card-header>
-                        <fd-avatar image="http://picsum.photos/id/1018/400" ariaLabel="avatar image"
-                            title="avatar image"></fd-avatar>
+                        <fd-avatar
+                            image="http://picsum.photos/id/1018/400"
+                            ariaLabel="avatar image"
+                            title="avatar image"
+                        ></fd-avatar>
                         <h2 fd-card-title>Card Title</h2>
                         <h3 fd-card-subtitle>Card Subtitle</h3>
                         <span fd-card-counter status="positive">3 of 10</span>
@@ -307,24 +245,16 @@
                     <fd-card-content>
                         <ul fd-list [noBorder]="true">
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 1
-                                </span>
+                                <span fd-list-title> item 1 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 2
-                                </span>
+                                <span fd-list-title> item 2 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 3
-                                </span>
+                                <span fd-list-title> item 3 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 4
-                                </span>
+                                <span fd-list-title> item 4 </span>
                             </li>
                         </ul>
                     </fd-card-content>
@@ -338,29 +268,19 @@
                     <fd-card-content>
                         <ul fd-list [noBorder]="true" [compact]="true">
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 1
-                                </span>
+                                <span fd-list-title> item 1 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 2
-                                </span>
+                                <span fd-list-title> item 2 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 3
-                                </span>
+                                <span fd-list-title> item 3 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 4
-                                </span>
+                                <span fd-list-title> item 4 </span>
                             </li>
                             <li fd-list-item>
-                                <span fd-list-title>
-                                    item 5
-                                </span>
+                                <span fd-list-title> item 5 </span>
                             </li>
                         </ul>
                     </fd-card-content>

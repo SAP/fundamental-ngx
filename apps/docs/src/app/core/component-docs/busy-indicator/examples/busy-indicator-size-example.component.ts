@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
     selector: 'fd-busy-indicator-size-example',
     templateUrl: './busy-indicator-size-example.component.html'
 })
-export class BusyIndicatorSizeExampleComponent {
-}
+export class BusyIndicatorSizeExampleComponent {}

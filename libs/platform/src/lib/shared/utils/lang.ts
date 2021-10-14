@@ -52,13 +52,12 @@ export function isObject<T>(item: T): boolean {
     return typeof item === 'object' && !Array.isArray(item) && item !== null;
 }
 
-
 export function isPromise<T = any>(obj: any): obj is Promise<T> {
     // allow any Promise/A+ compliant thenable.
     // It's up to the caller to ensure that obj.then conforms to the spec
     return !!obj && isFunction(obj.then);
 }
 
-export function isSubscribable(obj: any|Observable<any>): obj is Observable<any> {
+export function isSubscribable(obj: any | Observable<any>): obj is Observable<any> {
     return !!obj && isFunction(obj.subscribe);
 }

@@ -15,11 +15,12 @@
         <fd-popover-body>
             <nav class="fd-menu">
                 <ul fd-menu-list class="fd-menu__list">
-                    <li fd-menu-list-item
+                    <li
+                        fd-menu-list-item
                         class="fd-menu__item"
                         *ngFor="let option of options"
                         (click)="onItemClick(option)"
-                        >
+                    >
                         <span class="fd-menu__link">
                             {{ option }}
                         </span>

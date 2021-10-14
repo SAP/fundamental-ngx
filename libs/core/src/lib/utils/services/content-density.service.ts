@@ -19,15 +19,11 @@ export class ContentDensityService {
 
     /** @hidden */
     get _contentDensityListener(): Observable<ContentDensity> {
-        return this.contentDensity.pipe(
-            distinctUntilChanged(),
-            startWith(this.contentDensity.getValue())
-        );
+        return this.contentDensity.pipe(distinctUntilChanged(), startWith(this.contentDensity.getValue()));
     }
 
     /** Content Density BehaviourSubject */
     get contentDensity(): BehaviorSubject<ContentDensity> {
         return this._contentDensity;
     }
-
 }

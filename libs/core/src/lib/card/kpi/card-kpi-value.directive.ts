@@ -29,7 +29,10 @@ export class CardKpiValueDirective implements OnInit, CssClassBuilder {
     @applyCssClass
     /** @hidden */
     buildComponentCssClass(): string[] {
-        return [CLASS_NAME.cardAnalyticsKpiValue, this.status ? `${CLASS_NAME.cardAnalyticsKpiValue}--${this.status}` : ''];
+        return [
+            CLASS_NAME.cardAnalyticsKpiValue,
+            this.status ? `${CLASS_NAME.cardAnalyticsKpiValue}--${this.status}` : ''
+        ];
     }
 
     /** @hidden */

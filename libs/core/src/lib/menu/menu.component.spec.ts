@@ -32,7 +32,6 @@ import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_
     `
 })
 export class TestMenuComponent {
-
     @ViewChild(MenuComponent)
     menu: MenuComponent;
 
@@ -49,13 +48,15 @@ describe('MenuComponent', () => {
     let menuItems: QueryList<MenuItemComponent>;
     let fixture: ComponentFixture<TestMenuComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [MenuModule],
-            declarations: [TestMenuComponent],
-            providers: [ContentDensityService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [MenuModule],
+                declarations: [TestMenuComponent],
+                providers: [ContentDensityService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestMenuComponent);

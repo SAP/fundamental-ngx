@@ -4,9 +4,7 @@ import { ApiComponent } from '../../../documentation/core-helpers/api/api.compon
 import { API_FILES } from '../../api-files';
 import { FormMessageHeaderComponent } from './form-message-header/form-message-header.component';
 import { FormMessageDocsComponent } from './form-message-docs.component';
-import {
-    FormMessageExampleComponent,
-} from './examples/form-message-example.component';
+import { FormMessageExampleComponent } from './examples/form-message-example.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { PopoverModule } from '@fundamental-ngx/core/popover';
@@ -24,12 +22,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, PopoverModule, InputGroupModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        FormModule,
+        PopoverModule,
+        InputGroupModule
+    ],
     exports: [RouterModule],
-    declarations: [
-        FormMessageDocsComponent,
-        FormMessageHeaderComponent,
-        FormMessageExampleComponent,
-    ]
+    declarations: [FormMessageDocsComponent, FormMessageHeaderComponent, FormMessageExampleComponent]
 })
 export class FormMessageDocsModule {}

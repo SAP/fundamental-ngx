@@ -326,7 +326,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
      * But it works only with simple long date formats, combined formats will not be handled,
      * for example these will not be handled: 'MM-DD-YYYY LT', 'L LT'.
      */
-    _prepareFormat(displayFormat: string): string {        
+    _prepareFormat(displayFormat: string): string {
         const format = displayFormat.trim();
         const longDateFormat: LongDateFormatSpec = (this._momentLocaleData as any)._longDateFormat;
 

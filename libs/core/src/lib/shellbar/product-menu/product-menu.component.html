@@ -20,7 +20,11 @@
         [closeOnOutsideClick]="closeOnOutsideClick"
     >
         <li *ngFor="let item of items" (click)="itemClicked(item, $event)" fd-menu-item>
-            <a [attr.href]="item.link ? item.link : null" [attr.target]="item.newTab ? '_blank' : null" fd-menu-interactive>
+            <a
+                [attr.href]="item.link ? item.link : null"
+                [attr.target]="item.newTab ? '_blank' : null"
+                fd-menu-interactive
+            >
                 <span fd-menu-title>{{ item.name }}</span>
                 <fd-icon *ngIf="item.glyph" fd-menu-addon position="after" [glyph]="item.glyph"></fd-icon>
             </a>

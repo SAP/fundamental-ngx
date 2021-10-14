@@ -86,5 +86,4 @@ const routes: Routes = [
         PlatformListWithUnReadExampleComponent
     ]
 })
-export class PlatformListDocsModule {
-}
+export class PlatformListDocsModule {}

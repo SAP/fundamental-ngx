@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
@@ -47,7 +46,7 @@ const routes: Routes = [
         DynamicPageExampleComponent,
         DynamicPageTabsExampleComponent,
         DynamicPageColumnLayoutExampleComponent,
-        DynamicPageResponsiveExampleComponent,
+        DynamicPageResponsiveExampleComponent
     ]
 })
-export class DynamicPageDocsModule { }
+export class DynamicPageDocsModule {}

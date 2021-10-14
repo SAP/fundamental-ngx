@@ -1,4 +1,13 @@
-import { ChangeDetectorRef, Directive, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Directive,
+    EventEmitter,
+    Input,
+    OnChanges,
+    Output,
+    SimpleChanges,
+    ViewChild
+} from '@angular/core';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { KeyUtil } from '@fundamental-ngx/core';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
@@ -6,7 +15,6 @@ import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 
 @Directive()
 export abstract class IconTabBarPopoverBase implements OnChanges {
-
     /**
      * @description Reference to PopoverComponent
      */
@@ -38,9 +46,7 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
     _isOpen = false;
 
     /** @hidden */
-    constructor(
-        protected _cd: ChangeDetectorRef,
-    ) {}
+    constructor(protected _cd: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -54,7 +60,7 @@ export abstract class IconTabBarPopoverBase implements OnChanges {
      * @description Generate styles for subItems
      */
     protected _setStyles(items: any[] = []): void {
-        items.forEach(item => {
+        items.forEach((item) => {
             if (item.color) {
                 item.cssClasses = [`fd-icon-tab-bar__list-item--${item.color}`];
             }

@@ -11,7 +11,7 @@ export class FeedInputPo extends CoreBaseComponentPo {
     feedInputNoAvatar = 'fd-feed-input-no-avatar-example fd-avatar';
     disableInputTextArea = 'textarea[aria-disabled="true"]';
     disableInputButton = '.fd-feed-input.is-disabled button';
-    activeInputTextAreas = '//textarea[not(contains(@aria-disabled, \'true\'))]';
+    activeInputTextAreas = "//textarea[not(contains(@aria-disabled, 'true'))]";
 
     open(): void {
         super.open(this.url);
@@ -31,4 +31,3 @@ export class FeedInputPo extends CoreBaseComponentPo {
         return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }
-

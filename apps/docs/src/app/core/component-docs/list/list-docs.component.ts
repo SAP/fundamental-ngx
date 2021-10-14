@@ -28,7 +28,6 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './list-docs.component.html'
 })
 export class ListDocsComponent {
-
     simpleList: ExampleFile[] = [
         {
             language: 'html',

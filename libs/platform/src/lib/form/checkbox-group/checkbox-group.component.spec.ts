@@ -96,12 +96,14 @@ describe('CheckboxGroup component Reactive Form Test', () => {
     let host: TestReactiveCheckboxGroupComponnet;
     let fixture: ComponentFixture<TestReactiveCheckboxGroupComponnet>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule, ReactiveFormsModule],
-            declarations: [TestReactiveCheckboxGroupComponnet, CheckboxGroupComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule, ReactiveFormsModule],
+                declarations: [TestReactiveCheckboxGroupComponnet, CheckboxGroupComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestReactiveCheckboxGroupComponnet);
@@ -348,12 +350,14 @@ describe('Checkbox Group Component Template driven Form Tests', () => {
     let host: TestTemplateDrivenCheckboxGroupComponnet;
     let fixture: ComponentFixture<TestTemplateDrivenCheckboxGroupComponnet>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule],
-            declarations: [TestTemplateDrivenCheckboxGroupComponnet, CheckboxGroupComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule],
+                declarations: [TestTemplateDrivenCheckboxGroupComponnet, CheckboxGroupComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestTemplateDrivenCheckboxGroupComponnet);
@@ -614,12 +618,14 @@ describe('CheckboxGroup component Reactive Form Test With FormGroup Data', () =>
     let host: TestReactiveCheckboxGroupWithData;
     let fixture: ComponentFixture<TestReactiveCheckboxGroupWithData>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule, ReactiveFormsModule],
-            declarations: [TestReactiveCheckboxGroupWithData, CheckboxGroupComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [FdpFormGroupModule, FormModule, PlatformCheckboxModule, FormsModule, ReactiveFormsModule],
+                declarations: [TestReactiveCheckboxGroupWithData, CheckboxGroupComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestReactiveCheckboxGroupWithData);

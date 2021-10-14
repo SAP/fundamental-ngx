@@ -6,14 +6,7 @@ export const currentDay = new Date().getDate();
 export const testText = 'test';
 export const button = 'button';
 export const input = 'input';
-export const i18n = [
-    'fd-option-0',
-    'fd-option-1',
-    'fd-option-2',
-    'fd-option-3',
-    'fd-option-4',
-    'fd-option-5'
-];
+export const i18n = ['fd-option-0', 'fd-option-1', 'fd-option-2', 'fd-option-3', 'fd-option-4', 'fd-option-5'];
 export const year2030 = 2030;
 export const date = `${currentMonth}/1/${currentYear}, 11:01 PM`;
 export const date2 = `${currentMonth}/${currentDay}/${currentYear}, 11:01 PM`;

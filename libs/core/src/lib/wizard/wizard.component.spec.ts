@@ -69,16 +69,18 @@ describe('WizardComponent', () => {
     let component: WizardComponent;
     let fixture: ComponentFixture<TestWrapperComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [WizardModule]
-        })
-            .overrideComponent(WizardComponent, {
-                set: { changeDetection: ChangeDetectionStrategy.Default }
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestWrapperComponent],
+                imports: [WizardModule]
             })
-            .compileComponents();
-    }));
+                .overrideComponent(WizardComponent, {
+                    set: { changeDetection: ChangeDetectionStrategy.Default }
+                })
+                .compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestWrapperComponent);
@@ -141,7 +143,7 @@ describe('WizardComponent', () => {
         expect(component.wrapperContainer.nativeElement.scrollTo).toHaveBeenCalled();
     }));
 
-    it('should handleScrollSpyChange', fakeAsync( () => {
+    it('should handleScrollSpyChange', fakeAsync(() => {
         spyOnProperty(step3.nativeElement.children[0], 'id').and.returnValue('2');
 
         component.ngAfterViewInit();

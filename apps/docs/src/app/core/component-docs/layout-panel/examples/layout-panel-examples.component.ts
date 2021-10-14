@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
     selector: 'fd-layout-panel-example',
     templateUrl: './layout-panel-example.component.html'
 })
-export class LayoutPanelExampleComponent { }
+export class LayoutPanelExampleComponent {}

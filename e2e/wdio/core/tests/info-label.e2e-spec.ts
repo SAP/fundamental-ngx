@@ -15,5 +15,4 @@ describe('Info Label component test suite', () => {
         infoLabelPage.saveExampleBaselineScreenshot();
         expect(infoLabelPage.compareWithBaseline()).toBeLessThan(5);
     });
-
 });

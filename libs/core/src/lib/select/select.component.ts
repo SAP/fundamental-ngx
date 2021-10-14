@@ -53,10 +53,10 @@ export const SELECT_PANEL_MAX_HEIGHT = 250;
 export const SELECT_ITEM_HEIGHT_EM = 4;
 
 /**
-* Event object that is emitted when selection is changed
-*/
+ * Event object that is emitted when selection is changed
+ */
 export class FdSelectChange {
-    constructor(readonly source: SelectComponent, readonly value: any) { }
+    constructor(readonly source: SelectComponent, readonly value: any) {}
 }
 /**
  * Select component intended to mimic
@@ -70,7 +70,7 @@ export class FdSelectChange {
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[class.fd-select-custom-class]': 'true',
-        '[class.fd-select-custom-class--mobile]': 'mobile',
+        '[class.fd-select-custom-class--mobile]': 'mobile'
     },
     providers: [
         {
@@ -80,15 +80,9 @@ export class FdSelectChange {
         SelectKeyManagerService
     ]
 })
-export class SelectComponent implements
-    ControlValueAccessor,
-    SelectInterface,
-    OnInit,
-    AfterViewInit,
-    AfterContentInit,
-    OnChanges,
-    OnDestroy {
-
+export class SelectComponent
+    implements ControlValueAccessor, SelectInterface, OnInit, AfterViewInit, AfterContentInit, OnChanges, OnDestroy
+{
     /** Id of the control. */
     @Input()
     controlId = `fd-select-${selectUniqueId++}`;
@@ -218,7 +212,7 @@ export class SelectComponent implements
     selectOptionsListTemplate: TemplateRef<any>;
 
     /** @hidden
-    * Reference to root element for the mobile mode dialog */
+     * Reference to root element for the mobile mode dialog */
     @ViewChild('dialogContainer')
     _dialogContainerElementRef: ElementRef;
 
@@ -259,13 +253,13 @@ export class SelectComponent implements
     _selectionModel: SelectionModel<OptionComponent>;
 
     /** @hidden
-    * Triggers when component is destroyed
-    */
+     * Triggers when component is destroyed
+     */
     readonly _destroy = new Subject<void>();
 
     /** @hidden
-    * Combined stream of all of the child options' change events.
-    */
+     * Combined stream of all of the child options' change events.
+     */
     readonly _optionSelectionChanges: Observable<FdOptionSelectionChange> = defer(() => {
         const _options = this._options;
 
@@ -278,8 +272,8 @@ export class SelectComponent implements
     }) as Observable<FdOptionSelectionChange>;
 
     /**
-    * @hidden
-    */
+     * @hidden
+     */
     private _controlElemFontSize = 0;
 
     /** @hidden */
@@ -310,8 +304,8 @@ export class SelectComponent implements
     }
 
     /**
-    * Retrieves selected value if any.
-    */
+     * Retrieves selected value if any.
+     */
     get triggerValue(): string {
         const emptyValue = ' ';
         if (this._selectionModel.isEmpty()) {
@@ -335,12 +329,12 @@ export class SelectComponent implements
     }
 
     /**
-   * Check if we can emit a value. They are 3 different paths where we can emit value:
-   *  - We are not in mobile mode [mobile]=false
-   *  - We are in mobile mode [mobile]=true and mobile dialog as just close X button to dismiss it
-   *  - We are in mobile mode [mobile]=true and mobile dialog has ApproveButton available and
-   *  dialog is closed. (meaning we already clicked this button)
-   */
+     * Check if we can emit a value. They are 3 different paths where we can emit value:
+     *  - We are not in mobile mode [mobile]=false
+     *  - We are in mobile mode [mobile]=true and mobile dialog as just close X button to dismiss it
+     *  - We are in mobile mode [mobile]=true and mobile dialog has ApproveButton available and
+     *  dialog is closed. (meaning we already clicked this button)
+     */
     get canEmitValueChange(): boolean {
         return (
             !this.mobile ||
@@ -391,7 +385,6 @@ export class SelectComponent implements
         @Optional() @Self() private ngControl: NgControl,
         @Optional() private _injector: Injector,
         @Optional() private _contentDensityService: ContentDensityService
-
     ) {
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
@@ -407,10 +400,12 @@ export class SelectComponent implements
         this._initializeCommonBehavior();
 
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this._changeDetectorRef.markForCheck();
-            }))
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._changeDetectorRef.markForCheck();
+                })
+            );
         }
     }
 
@@ -441,10 +436,10 @@ export class SelectComponent implements
     }
 
     /** @hidden */
-    onChange: Function = () => { };
+    onChange: Function = () => {};
 
     /** @hidden */
-    onTouched: Function = () => { };
+    onTouched: Function = () => {};
 
     /** Toggles the open state of the select. */
     toggle(): void {
@@ -486,7 +481,6 @@ export class SelectComponent implements
         if (this._controlElementRef) {
             (this._controlElementRef.nativeElement as HTMLElement).focus();
         }
-
     }
 
     /** Blurs select control. */
@@ -508,7 +502,7 @@ export class SelectComponent implements
 
     /** @hidden
      *  from ControlValue Accessor
-    */
+     */
     writeValue(value: any): void {
         if (this._options) {
             this._setSelectionByValue(value);
@@ -561,11 +555,10 @@ export class SelectComponent implements
     }
 
     /** @hidden
-   * Returns _keyManagerService. */
+     * Returns _keyManagerService. */
     _getKeyService(): SelectKeyManagerService {
         return this._keyManagerService;
     }
-
 
     /** @hidden */
     _setDisabledState(isDisabled: boolean): void {
@@ -590,7 +583,6 @@ export class SelectComponent implements
         this._destroy.complete();
     }
 
-
     /** @hidden */
     _initializeSelection(): void {
         // Defer setting the value in order to avoid the "Expression
@@ -601,22 +593,18 @@ export class SelectComponent implements
     }
 
     /**
-      * Expose expose outside of this mixin to give component ability
-      * to update caluclatedMaxHeight if needed
-      * @hidden
-      */
+     * Expose expose outside of this mixin to give component ability
+     * to update caluclatedMaxHeight if needed
+     * @hidden
+     */
     _updateCalculatedHeight(): void {
         this._calculatedMaxHeight = window.innerHeight * 0.45;
     }
 
     /**
-    * @hidden
-    */
-    _getOptionScrollPosition(
-        optionIndex: number,
-        itemHeight: number,
-        currentScrollPosition: number
-    ): number {
+     * @hidden
+     */
+    _getOptionScrollPosition(optionIndex: number, itemHeight: number, currentScrollPosition: number): number {
         const offsetHeight = this._options.get(optionIndex)._getHtmlElement().offsetHeight;
         const optionHeight = offsetHeight === 0 ? itemHeight : offsetHeight;
         const optionOffset = optionIndex * optionHeight;
@@ -625,7 +613,6 @@ export class SelectComponent implements
         }
 
         if (optionOffset + optionHeight > currentScrollPosition + SELECT_PANEL_MAX_HEIGHT) {
-
             return Math.max(0, optionOffset - SELECT_PANEL_MAX_HEIGHT + optionHeight);
         }
         return currentScrollPosition;
@@ -649,7 +636,7 @@ export class SelectComponent implements
     _isRtl(): boolean {
         if (this._rtlService) {
             this._subscriptions.add(
-                this._rtlService.rtl.subscribe(rtl => {
+                this._rtlService.rtl.subscribe((rtl) => {
                     this._rtl = rtl;
                 })
             );
@@ -672,7 +659,9 @@ export class SelectComponent implements
 
     _handleKeydown(event: KeyboardEvent): void {
         if (!this.disabled && !this.readonly) {
-            this._isOpen ? this._keyManagerService._handleOpenKeydown(event) : this._keyManagerService._handleClosedKeydown(event);
+            this._isOpen
+                ? this._keyManagerService._handleOpenKeydown(event)
+                : this._keyManagerService._handleClosedKeydown(event);
         }
     }
 
@@ -722,23 +711,19 @@ export class SelectComponent implements
             });
     }
 
-
     /**
      * @hidden
      * Invoked when an option is clicked.
      */
     private _onSelect(option: OptionComponent, isUserInput: boolean): void {
         const wasSelected = this._selectionModel.isSelected(option);
-        if ((option.value === null || option.value === undefined) &&
-            this.unselectMissingOption) {
+        if ((option.value === null || option.value === undefined) && this.unselectMissingOption) {
             option._deselect();
             this._selectionModel.clear();
             this._emitSelectChange(option.value);
         } else {
             if (wasSelected !== option.selected) {
-                option.selected ?
-                    this._selectionModel.select(option) :
-                    this._selectionModel.deselect(option);
+                option.selected ? this._selectionModel.select(option) : this._selectionModel.deselect(option);
             }
             if (isUserInput) {
                 this._keyManagerService._keyManager.setActiveItem(option);
@@ -753,9 +738,10 @@ export class SelectComponent implements
     /** @hidden */
     private _emitSelectChange(defaultVal?: any): void {
         if (this.canEmitValueChange) {
-            this._internalValue = (this._selectionModel.selected && this._selectionModel.selected.length !== 0)
-                ? (this.selected as OptionComponent).value
-                : defaultVal;
+            this._internalValue =
+                this._selectionModel.selected && this._selectionModel.selected.length !== 0
+                    ? (this.selected as OptionComponent).value
+                    : defaultVal;
             this.valueChange.emit(this._internalValue);
             this.onChange(this._internalValue);
             this._changeDetectorRef.markForCheck();
@@ -782,7 +768,7 @@ export class SelectComponent implements
                 this.selectOptionsListTemplate,
                 SelectMobileComponent,
                 { container: this._elementRef.nativeElement },
-                { 
+                {
                     injector: Injector.create({
                         providers: [
                             { provide: SELECT_COMPONENT, useValue: this },
@@ -790,7 +776,7 @@ export class SelectComponent implements
                         ]
                     })
                 }
-            )
+            );
         }
     }
 }

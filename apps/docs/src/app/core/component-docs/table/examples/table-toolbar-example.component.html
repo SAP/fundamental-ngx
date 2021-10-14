@@ -1,55 +1,55 @@
 <fd-toolbar>
-    <label fd-toolbar-label>
-        Table Toolbar Label ({{tableRows.length}} rows)
-    </label>
+    <label fd-toolbar-label> Table Toolbar Label ({{ tableRows.length }} rows) </label>
     <fd-toolbar-spacer></fd-toolbar-spacer>
     <fd-input-group
-            glyph="decline"
-            placeholder="Search"
-            [compact]="true"
-            [disabled]="false"
-            [button]="true"
-            [(ngModel)]="searchTerm"
-            (ngModelChange)="searchInputChanged($event)"
-            (addOnButtonClicked)="resetSearch()"
+        glyph="decline"
+        placeholder="Search"
+        [compact]="true"
+        [disabled]="false"
+        [button]="true"
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="searchInputChanged($event)"
+        (addOnButtonClicked)="resetSearch()"
     >
     </fd-input-group>
-    <button fd-toolbar-item
-            fd-button
-            label="Toggle Loading"
-            (click)="loading = !loading"
-            [compact]="true"
-            fdType="transparent"
-            glyph="refresh"></button>
-    <button fd-toolbar-item
-            fd-button
-            label="New Item"
-            (click)="openDialog(newItemDialog)"
-            [compact]="true"
-            fdType="transparent"
-            glyph="add"></button>
+    <button
+        fd-toolbar-item
+        fd-button
+        label="Toggle Loading"
+        (click)="loading = !loading"
+        [compact]="true"
+        fdType="transparent"
+        glyph="refresh"
+    ></button>
+    <button
+        fd-toolbar-item
+        fd-button
+        label="New Item"
+        (click)="openDialog(newItemDialog)"
+        [compact]="true"
+        fdType="transparent"
+        glyph="add"
+    ></button>
 </fd-toolbar>
 <fd-busy-indicator [loading]="loading" [block]="true" size="l">
     <table fd-table>
         <thead fd-table-header>
-        <tr fd-table-row>
-            <th fd-table-cell>Name</th>
-            <th fd-table-cell>Type</th>
-            <th fd-table-cell>Region Harvested</th>
-        </tr>
+            <tr fd-table-row>
+                <th fd-table-cell>Name</th>
+                <th fd-table-cell>Type</th>
+                <th fd-table-cell>Region Harvested</th>
+            </tr>
         </thead>
         <tbody fd-table-body>
-        <tr *ngFor="let row of displayedRows" fd-table-row>
-            <td fd-table-cell>{{ row.column1 }}</td>
-            <td fd-table-cell>{{ row.column2 }}</td>
-            <td fd-table-cell>{{ row.region }}</td>
-        </tr>
+            <tr *ngFor="let row of displayedRows" fd-table-row>
+                <td fd-table-cell>{{ row.column1 }}</td>
+                <td fd-table-cell>{{ row.column2 }}</td>
+                <td fd-table-cell>{{ row.region }}</td>
+            </tr>
 
-        <tr *ngIf="!displayedRows || !displayedRows.length" fd-table-row>
-            <td fd-table-cell [noData]="true">
-                No Results Found!
-            </td>
-        </tr>
+            <tr *ngIf="!displayedRows || !displayedRows.length" fd-table-row>
+                <td fd-table-cell [noData]="true">No Results Found!</td>
+            </tr>
         </tbody>
     </table>
 </fd-busy-indicator>
@@ -65,32 +65,41 @@
                 <div fd-form-set>
                     <div fd-form-item>
                         <label fd-form-label for="input-1">Name</label>
-                        <input fd-form-control formControlName="nameInput" type="text" id="input-1" autocomplete="off"/>
+                        <input
+                            fd-form-control
+                            formControlName="nameInput"
+                            type="text"
+                            id="input-1"
+                            autocomplete="off"
+                        />
                     </div>
                     <div fd-form-item>
                         <label fd-form-label for="input-2">Type</label>
-                        <input fd-form-control formControlName="typeInput" type="text" id="input-2" autocomplete="off"/>
+                        <input
+                            fd-form-control
+                            formControlName="typeInput"
+                            type="text"
+                            id="input-2"
+                            autocomplete="off"
+                        />
                     </div>
                     <div fd-form-item>
                         <label fd-form-label for="input-3">Region Harvested</label>
-                        <input fd-form-control formControlName="regionInput" type="text" id="input-3"
-                               autocomplete="off"/>
+                        <input
+                            fd-form-control
+                            formControlName="regionInput"
+                            type="text"
+                            id="input-3"
+                            autocomplete="off"
+                        />
                     </div>
                 </div>
             </form>
         </fd-dialog-body>
         <fd-dialog-footer>
-            <fd-button-bar
-                    fdType="emphasized"
-                    label="Save"
-                    type="submit"
-                    (click)="dialog.close('Save')">
+            <fd-button-bar fdType="emphasized" label="Save" type="submit" (click)="dialog.close('Save')">
             </fd-button-bar>
-            <fd-button-bar
-                    fd-initial-focus
-                    label="Cancel"
-                    (click)="dialog.dismiss('Cancel')">
-            </fd-button-bar>
+            <fd-button-bar fd-initial-focus label="Cancel" (click)="dialog.dismiss('Cancel')"> </fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>
 </ng-template>

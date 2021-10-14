@@ -9,8 +9,5 @@ export interface Name {
     templateUrl: './platform-list-with-navigation-example.component.html'
 })
 export class PlatformListWithNavigationExampleComponent {
-    items: Name[] = [
-        { 'title': 'Item1' },
-        { 'title': 'Item2' },
-        { 'title': 'Item3' }];
+    items: Name[] = [{ title: 'Item1' }, { title: 'Item2' }, { title: 'Item3' }];
 }

@@ -35,7 +35,7 @@ const routes: Routes = [
         PlatformInputModule,
         PlatformButtonModule,
         SharedDocumentationPageModule,
-        RouterModule.forChild(routes),
+        RouterModule.forChild(routes)
     ],
     exports: [RouterModule],
     declarations: [

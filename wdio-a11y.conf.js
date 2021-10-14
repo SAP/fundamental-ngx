@@ -21,9 +21,7 @@ exports.config = {
     // NPM script (see https://docs.npmjs.com/cli/run-script) then the current working
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
-    specs: [
-        './e2e/wdio/**/*.acs-spec.ts'
-    ],
+    specs: ['./e2e/wdio/**/*.acs-spec.ts'],
     //
     // ============
     // Capabilities
@@ -54,9 +52,9 @@ exports.config = {
             acceptInsecureCerts: true,
             'sauce:options': {
                 name: 'e2e-MAC-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-                screenResolution: '1920x1440',
+                screenResolution: '1920x1440'
             }
-        },
+        }
     ],
     //
     // ===================
@@ -107,9 +105,12 @@ exports.config = {
     // commands. Instead, they hook themselves up into the test process.
     // services: ['chromedriver'],
     services: [
-        ['sauce', {
-            sauceConnect: true
-        }]
+        [
+            'sauce',
+            {
+                sauceConnect: true
+            }
+        ]
     ],
 
     // Framework you want to run your specs with.
@@ -121,26 +122,35 @@ exports.config = {
     framework: 'jasmine',
     //
     // The number of times to retry the entire specfile when it fails as a whole
-     specFileRetries: 0,
+    specFileRetries: 0,
     //
     // Delay in seconds between the spec file retry attempts
-     specFileRetriesDelay: 0,
+    specFileRetriesDelay: 0,
     //
     // Whether or not retried specfiles should be retried immediately or deferred to the end of the queue
-     specFileRetriesDeferred: true,
+    specFileRetriesDeferred: true,
     //
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter.html
     // reporters: ['spec' , []],
 
-    reporters: [['spec', {
-        symbols: { passed: '[PASS]', failed: '[FAIL]' }
-    }], ['allure', {
-        outputDir: 'allure-results',
-        disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: true
-    }]],
+    reporters: [
+        [
+            'spec',
+            {
+                symbols: { passed: '[PASS]', failed: '[FAIL]' }
+            }
+        ],
+        [
+            'allure',
+            {
+                outputDir: 'allure-results',
+                disableWebdriverStepsReporting: true,
+                disableWebdriverScreenshotsReporting: true
+            }
+        ]
+    ],
 
     jasmineNodeOpts: {
         isVerbose: true,
@@ -200,25 +210,29 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    before: function() {
+    before: function () {
         require('ts-node').register({
             project: 'e2e/tsconfig.json'
         });
 
-        browser.addCommand('focus', function() {
-            browser.execute(function(domElement) {
-                domElement.focus();
-            }, this);
-        }, true);
+        browser.addCommand(
+            'focus',
+            function () {
+                browser.execute(function (domElement) {
+                    domElement.focus();
+                }, this);
+            },
+            true
+        );
         browser.resetUrl = 'about:blank';
     }
 
-//     const processedConfig = await browser.getProcessedConfig();
-//
-// // Resize the screens if it is a VM
-// if (!('platformName' in processedConfig.capabilities)) {
-//     await browser.driver.manage().window().setSize(1366, 768);
-// }
+    //     const processedConfig = await browser.getProcessedConfig();
+    //
+    // // Resize the screens if it is a VM
+    // if (!('platformName' in processedConfig.capabilities)) {
+    //     await browser.driver.manage().window().setSize(1366, 768);
+    // }
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name

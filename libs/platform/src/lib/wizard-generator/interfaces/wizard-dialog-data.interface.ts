@@ -8,7 +8,7 @@ export interface WizardDialogData {
     /**
      * @description Whether or not apply responsive paddings styling.
      */
-     responsivePaddings: boolean;
+    responsivePaddings: boolean;
 
     /**
      * @description Button labels to be used in Wizard navigation.

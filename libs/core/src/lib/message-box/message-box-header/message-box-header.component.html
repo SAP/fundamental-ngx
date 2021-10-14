@@ -16,6 +16,12 @@
     </ng-template>
 </div>
 
-<div fd-bar *ngIf="subHeaderTemplate" class="fd-message-box__subheader" barDesign="subheader" [cozy]="messageBoxConfig.mobile">
+<div
+    fd-bar
+    *ngIf="subHeaderTemplate"
+    class="fd-message-box__subheader"
+    barDesign="subheader"
+    [cozy]="messageBoxConfig.mobile"
+>
     <ng-container *ngTemplateOutlet="subHeaderTemplate"></ng-container>
 </div>

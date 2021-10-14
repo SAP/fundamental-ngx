@@ -1,10 +1,4 @@
-export const semanticStatusText = [
-    'Negative',
-    'Critical',
-    'Positive',
-    'Informative',
-    'Default'
-];
+export const semanticStatusText = ['Negative', 'Critical', 'Positive', 'Informative', 'Default'];
 export const indicationColorText = [
     'Indication Color1',
     'Indication Color2',

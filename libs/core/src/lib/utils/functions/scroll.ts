@@ -10,7 +10,7 @@ export function scrollTop(containerElement: Element, distanceToScroll: number): 
         containerElement.scrollTo({
             top: distanceToScroll,
             behavior: 'smooth'
-        })
+        });
     } else {
         containerElement.scrollTop = distanceToScroll;
     }

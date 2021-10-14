@@ -20,7 +20,7 @@ export const dummyFormItemsWithWhenCondition: DynamicFormItem[] = [
         message: 'Should be hidden',
         when: (answers) => answers.shouldBeVisible === true
     }
-]
+];
 
 export const dummyFormItems: DynamicFormItem[] = [
     {
@@ -52,12 +52,14 @@ export const brokenFormItems: DynamicFormItem[] = [
 @Component({
     template: `
         <ng-container [formGroup]="form">
-           <fdp-slider [contentDensity]="formItem.guiOptions?.contentDensity"
-                       [customValues]="formItem.choices"
-                       [showTicks]="formItem.guiOptions?.additionalData?.showTicks"
-                       [showTicksLabels]="formItem.guiOptions?.additionalData?.showTicksLabels"
-                       [name]="name"
-                       [formControlName]="name"></fdp-slider>
+            <fdp-slider
+                [contentDensity]="formItem.guiOptions?.contentDensity"
+                [customValues]="formItem.choices"
+                [showTicks]="formItem.guiOptions?.additionalData?.showTicks"
+                [showTicksLabels]="formItem.guiOptions?.additionalData?.showTicksLabels"
+                [name]="name"
+                [formControlName]="name"
+            ></fdp-slider>
         </ng-container>
     `,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]

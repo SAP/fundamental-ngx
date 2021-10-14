@@ -13,7 +13,6 @@ import { MessageBoxComponent } from './message-box.component';
 import { MessageBoxRef } from './utils/message-box-ref.class';
 import { MessageBoxModule } from './message-box.module';
 
-
 @Component({
     template: `
         <fd-message-box>
@@ -34,8 +33,7 @@ class TemplateTestComponent {
     imports: [CommonModule, BrowserModule, MessageBoxModule, NoopAnimationsModule],
     entryComponents: [TemplateTestComponent]
 })
-class TestModule {
-}
+class TestModule {}
 
 describe('MessageBoxComponent', () => {
     let component: TemplateTestComponent;
@@ -49,16 +47,18 @@ describe('MessageBoxComponent', () => {
     const mockRouter = { events: routerEventsSubject.asObservable() };
     let router: Router;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [TestModule, RouterModule, RouterTestingModule],
-            providers: [
-                { provide: MessageBoxRef, useValue: messageBoxRef },
-                { provide: MessageBoxConfig, useValue: messageBoxConfig },
-                { provide: Router, useValue: mockRouter }
-            ]
-        });
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [TestModule, RouterModule, RouterTestingModule],
+                providers: [
+                    { provide: MessageBoxRef, useValue: messageBoxRef },
+                    { provide: MessageBoxConfig, useValue: messageBoxConfig },
+                    { provide: Router, useValue: mockRouter }
+                ]
+            });
+        })
+    );
 
     function setup(providers: { token: any; provider: { useValue: any } }[] = []): void {
         providers.forEach((provider) => TestBed.overrideProvider(provider.token, provider.provider));
@@ -155,14 +155,18 @@ describe('MessageBoxComponent', () => {
         const customMessageBoxConfig = { ...new MessageBoxConfig(), mobile: true };
         setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
 
-        expect(fixture.nativeElement.querySelector('.fd-message-box__content')).toHaveClass('fd-message-box__content--mobile');
+        expect(fixture.nativeElement.querySelector('.fd-message-box__content')).toHaveClass(
+            'fd-message-box__content--mobile'
+        );
     });
 
     it('should display in mobile mode with no stretch', () => {
         const customMessageBoxConfig = { ...new MessageBoxConfig(), mobileOuterSpacing: true };
         setup([{ token: MessageBoxConfig, provider: { useValue: customMessageBoxConfig } }]);
 
-        expect(fixture.nativeElement.querySelector('.fd-message-box__content')).toHaveClass('fd-message-box__content--no-mobile-stretch');
+        expect(fixture.nativeElement.querySelector('.fd-message-box__content')).toHaveClass(
+            'fd-message-box__content--no-mobile-stretch'
+        );
     });
 
     it('should use custom attributes', () => {

@@ -33,10 +33,13 @@
                 >
                     <h5 fd-title class="selected-and-condition-title">
                         <ng-container *ngIf="hasSelectedAndConditions; else noItemsPanelTitle">
-                            <ng-container i18n="@@platformI18nValueHelpDialog.SelectedAndConditionLabel">Selected Items and Conditions </ng-container> ({{ selectedItems.length + validConditions.length }})
+                            <ng-container i18n="@@platformI18nValueHelpDialog.SelectedAndConditionLabel"
+                                >Selected Items and Conditions
+                            </ng-container>
+                            ({{ selectedItems.length + validConditions.length }})
                         </ng-container>
                     </h5>
-                    
+
                     <div class="fdp-value-help-dialog__tokens-wrapper">
                         <div class="fdp-value-help-dialog__tokens">
                             <fd-toolbar size="compact" [shouldOverflow]="true">
@@ -47,8 +50,12 @@
                                     class="fdp-value-help-dialog__selection-token"
                                     [compact]="true"
                                     (onCloseClick)="removeSelected(selectedIndex)"
-                                    *ngFor="let item of selectedItems; index as selectedIndex; trackBy:_trackBySelectedFn"
-                                >{{ !!tokenizerFn ? (item | displayFnPipe: tokenizerFn) : item[tokenViewField] }}
+                                    *ngFor="
+                                        let item of selectedItems;
+                                        index as selectedIndex;
+                                        trackBy: _trackBySelectedFn
+                                    "
+                                    >{{ !!tokenizerFn ? (item | displayFnPipe: tokenizerFn) : item[tokenViewField] }}
                                 </fd-token>
                                 <fd-token
                                     fd-toolbar-item
@@ -56,9 +63,16 @@
                                     class="fdp-value-help-dialog__selection-token"
                                     [compact]="true"
                                     (onCloseClick)="removeCondition(conditionIndex)"
-                                    *ngFor="let item of validConditions; index as conditionIndex; trackBy:_trackByConditionFn"
+                                    *ngFor="
+                                        let item of validConditions;
+                                        index as conditionIndex;
+                                        trackBy: _trackByConditionFn
+                                    "
                                 >
-                                    <ng-container [ngTemplateOutlet]="conditionValue" [ngTemplateOutletContext]="{ item: item }"></ng-container>
+                                    <ng-container
+                                        [ngTemplateOutlet]="conditionValue"
+                                        [ngTemplateOutletContext]="{ item: item }"
+                                    ></ng-container>
                                 </fd-token>
                             </fd-toolbar>
                         </div>
@@ -71,7 +85,8 @@
                             fdType="transparent"
                             glyph="decline"
                             i18n-aria-label="@@platformI18nValueHelpDialog.ClearSelectedAriaLabel"
-                            aria-label="clear selected items"></button>
+                            aria-label="clear selected items"
+                        ></button>
                     </div>
                 </div>
                 <div class="fdp-value-help-dialog__actions-row">
@@ -93,7 +108,8 @@
                         fdType="emphasized"
                         *ngIf="selectedTab !== _tabTypes.advancedSearch"
                         [compact]="true"
-                        (click)="success()"></button>
+                        (click)="success()"
+                    ></button>
                     <button
                         fd-button
                         data-dismiss-dialog
@@ -102,7 +118,8 @@
                         label="Cancel"
                         fdType="transparent"
                         [compact]="true"
-                        (click)="dismiss()"></button>
+                        (click)="dismiss()"
+                    ></button>
                 </div>
             </ng-template>
         </fd-dialog-footer>
@@ -110,19 +127,21 @@
 </ng-template>
 
 <ng-template #noItemsPanelTitle>
-    <ng-container i18n="@@platformI18nValueHelpDialog.Selected.EmptyLabel">No Items or Conditions Selected</ng-container>
+    <ng-container i18n="@@platformI18nValueHelpDialog.Selected.EmptyLabel"
+        >No Items or Conditions Selected</ng-container
+    >
 </ng-template>
 
 <ng-template #advancedSearchContent>
     <ng-container *ngIf="isSelectionTab">
         <form
             class="fdp-value-help-dialog__row fdp-value-help-dialog__advanced-search"
-            aria-label ="Selectid filters"
+            aria-label="Selectid filters"
             [id]="'advanced-search-' + id"
             (ngSubmit)="search()"
         >
             <fd-layout-grid *ngIf="!mobile || (mobile && !isOpenAdvanced)">
-                <div fdLayoutGridCol="12" colMd="12" [colLg]="mobile ? 12: 6" [colXl]="mobile ? 12: 6">
+                <div fdLayoutGridCol="12" colMd="12" [colLg]="mobile ? 12 : 6" [colXl]="mobile ? 12 : 6">
                     <div fd-form-item>
                         <fd-input-group>
                             <input
@@ -134,16 +153,30 @@
                                 [(ngModel)]="_mainSearch"
                                 name="value-help-dialog-search"
                                 id="value-help-dialog-search"
-                                [placeholder]="searchField.placeholder" />
+                                [placeholder]="searchField.placeholder"
+                            />
 
                             <span fd-input-group-addon [compact]="true" button="true">
-                                <button fd-button title="Search" glyph="search" fdType="transparent" (click)="_searchAction(inputGroupField)"></button>
+                                <button
+                                    fd-button
+                                    title="Search"
+                                    glyph="search"
+                                    fdType="transparent"
+                                    (click)="_searchAction(inputGroupField)"
+                                ></button>
                             </span>
                         </fd-input-group>
                     </div>
                 </div>
 
-                <div fdLayoutGridCol="12" colMd="12" [colLg]="mobile ? 12: 6" [colXl]="mobile ? 12: 6" *ngIf="_hasAdvanced" class="fdp-value-help-dialog__advanced-actions">
+                <div
+                    fdLayoutGridCol="12"
+                    colMd="12"
+                    [colLg]="mobile ? 12 : 6"
+                    [colXl]="mobile ? 12 : 6"
+                    *ngIf="_hasAdvanced"
+                    class="fdp-value-help-dialog__advanced-actions"
+                >
                     <fd-toolbar [clearBorder]="true">
                         <fd-toolbar-spacer></fd-toolbar-spacer>
                         <button
@@ -151,7 +184,13 @@
                             fd-button
                             fdType="transparent"
                             *ngIf="_hasAdvanced"
-                            [label]="mobile ? searchField.advancedSearchLabel : (isOpenAdvanced ? searchField.hideAdvancedSearchLabel : searchField.showAdvancedSearchLabel)"
+                            [label]="
+                                mobile
+                                    ? searchField.advancedSearchLabel
+                                    : isOpenAdvanced
+                                    ? searchField.hideAdvancedSearchLabel
+                                    : searchField.showAdvancedSearchLabel
+                            "
                             [compact]="true"
                             (click)="toggleAdvancedSearch()"
                         ></button>
@@ -173,24 +212,52 @@
                 *ngIf="isOpenAdvanced && _hasAdvanced"
                 class="fdp-value-help-dialog__advanced-filters"
             >
-                <fd-layout-grid [class.fdp-value-help-dialog__with-toggle-all]="filters.length > maxShownInitialFilters">
-                    <ng-container *ngFor="let filter of _displayedFilters | slice : 0 : shownFilterCount + 1; trackBy: _trackByFilterFn">
+                <fd-layout-grid
+                    [class.fdp-value-help-dialog__with-toggle-all]="filters.length > maxShownInitialFilters"
+                >
+                    <ng-container
+                        *ngFor="
+                            let filter of _displayedFilters | slice: 0:shownFilterCount + 1;
+                            trackBy: _trackByFilterFn
+                        "
+                    >
                         <ng-container *ngIf="filter.advanced">
                             <div fdLayoutGridCol="12" colMd="12" colLg="6" colXl="3">
-                                <label class="fd-form-group__header" fd-form-label [for]="'input' + filter.key">{{ filter.label }}:</label>
-                                <input [(ngModel)]="filter.value" fd-form-control [compact]="true" type="text" [name]="'search-by-' + filter.label" [id]="'input' + filter.key" />
+                                <label class="fd-form-group__header" fd-form-label [for]="'input' + filter.key"
+                                    >{{ filter.label }}:</label
+                                >
+                                <input
+                                    [(ngModel)]="filter.value"
+                                    fd-form-control
+                                    [compact]="true"
+                                    type="text"
+                                    [name]="'search-by-' + filter.label"
+                                    [id]="'input' + filter.key"
+                                />
                             </div>
                         </ng-container>
                     </ng-container>
-                    
-                    <div colGrow fdLayoutGridCol="12" colMd="12" colLg="6" colXl="3" *ngIf="filters.length > maxShownInitialFilters" class="fdp-value-help-dialog__toggle-filters">
+
+                    <div
+                        colGrow
+                        fdLayoutGridCol="12"
+                        colMd="12"
+                        colLg="6"
+                        colXl="3"
+                        *ngIf="filters.length > maxShownInitialFilters"
+                        class="fdp-value-help-dialog__toggle-filters"
+                    >
                         <button
                             fd-button
                             fdType="transparent"
                             [compact]="true"
                             (click)="toggleShownFilters()"
                             i18n-label="@@platformI18nValueHelpDialog.ShowAllFilters.Button"
-                            [label]="isShowAllFilters ? searchField.hideAllAdvancedSearchLabel : searchField.showAllAdvancedSearchLabel"
+                            [label]="
+                                isShowAllFilters
+                                    ? searchField.hideAllAdvancedSearchLabel
+                                    : searchField.showAllAdvancedSearchLabel
+                            "
                         ></button>
                     </div>
                 </fd-layout-grid>
@@ -267,10 +334,14 @@
 <ng-template #desktopTabs>
     <nav fd-tab-nav class="fdp-value-help-dialog__tabs" *ngIf="showSelectionTab && showDefineTab">
         <div fd-tab-item (click)="switchTab(_tabTypes.selectFromList)" *ngIf="showSelectionTab">
-            <a fd-tab-link [active]="selectedTab === _tabTypes.selectFromList"><span fd-tab-tag>{{ selectTabTitle }}</span></a>
+            <a fd-tab-link [active]="selectedTab === _tabTypes.selectFromList"
+                ><span fd-tab-tag>{{ selectTabTitle }}</span></a
+            >
         </div>
         <div fd-tab-item (click)="switchTab(_tabTypes.defineConditions)" *ngIf="showDefineTab">
-            <a fd-tab-link [active]="selectedTab === _tabTypes.defineConditions"><span fd-tab-tag>{{ defineTabTitle }}</span></a>
+            <a fd-tab-link [active]="selectedTab === _tabTypes.defineConditions"
+                ><span fd-tab-tag>{{ defineTabTitle }}</span></a
+            >
         </div>
     </nav>
 </ng-template>
@@ -295,20 +366,24 @@
 <ng-template #selectedTabHeader>
     <ng-container [ngSwitch]="selectedTab">
         <ng-container *ngSwitchCase="_tabTypes.selectFromList">
-            <ng-container *ngTemplateOutlet="tabLink, context: {title: 'Select from list', type: selectedTab}"></ng-container>
+            <ng-container
+                *ngTemplateOutlet="tabLink; context: { title: 'Select from list', type: selectedTab }"
+            ></ng-container>
         </ng-container>
         <ng-container *ngSwitchCase="_tabTypes.advancedSearch">
             <ng-container *ngTemplateOutlet="advancedHeader"></ng-container>
         </ng-container>
         <ng-container *ngSwitchCase="_tabTypes.defineConditions">
-            <ng-container *ngTemplateOutlet="tabLink, context: {title: defineTabTitle, type: selectedTab}"></ng-container>
+            <ng-container
+                *ngTemplateOutlet="tabLink; context: { title: defineTabTitle, type: selectedTab }"
+            ></ng-container>
         </ng-container>
     </ng-container>
 </ng-template>
 
 <ng-template #conditionValue let-item="item">
     <span *ngIf="item.strategy !== 'empty' && item.strategy !== 'not_empty'; else emptyCondition">
-        {{ item | displayFnPipe: conditionDisplayFn : _displayedFilters }}
+        {{ item | displayFnPipe: conditionDisplayFn:_displayedFilters }}
     </span>
     <ng-template #emptyCondition>
         <ng-container *ngIf="item.strategy === 'not_empty'; else emptyConditionText">

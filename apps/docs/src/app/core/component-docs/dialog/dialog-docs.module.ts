@@ -18,15 +18,18 @@ import { ListModule } from '@fundamental-ngx/core/list';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
-import { DialogInnerPopoverComponent, DialogInnerPopoverExampleComponent } from './examples/dialog-inner-popover/dialog-inner-popover.component';
+import {
+    DialogInnerPopoverComponent,
+    DialogInnerPopoverExampleComponent
+} from './examples/dialog-inner-popover/dialog-inner-popover.component';
 
 const routes: Routes = [
     {
         path: '',
         component: DialogDocsHeaderComponent,
         children: [
-            {path: '', component: DialogDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.dialog}}
+            { path: '', component: DialogDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.dialog } }
         ]
     }
 ];
@@ -57,8 +60,6 @@ const routes: Routes = [
         DialogStackedExampleComponent,
         DialogInnerPopoverExampleComponent
     ],
-    providers: [
-        DialogService
-    ]
+    providers: [DialogService]
 })
-export class DialogDocsModule { }
+export class DialogDocsModule {}

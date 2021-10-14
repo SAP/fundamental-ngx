@@ -65,17 +65,19 @@ describe('SplitMenuButtonComponent', () => {
     let fixture: ComponentFixture<TestWrapperComponent>;
     let overlayContainerEl: HTMLElement;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ButtonModule, PlatformMenuModule, IconModule],
-            declarations: [TestWrapperComponent, SplitMenuButtonComponent],
-            providers: [RtlService]
-        }).compileComponents();
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [ButtonModule, PlatformMenuModule, IconModule],
+                declarations: [TestWrapperComponent, SplitMenuButtonComponent],
+                providers: [RtlService]
+            }).compileComponents();
 
-        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-            overlayContainerEl = overlayContainer.getContainerElement();
-        })();
-    }));
+            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+                overlayContainerEl = overlayContainer.getContainerElement();
+            })();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestWrapperComponent);

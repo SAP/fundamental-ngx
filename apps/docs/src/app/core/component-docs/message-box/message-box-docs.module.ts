@@ -21,19 +21,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
-        MessageBoxModule,
-        BarModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, MessageBoxModule, BarModule],
     exports: [RouterModule],
-    declarations: [
-        examples,
-        MessageBoxDocsComponent,
-        MessageBoxDocsHeaderComponent,
-    ],
+    declarations: [examples, MessageBoxDocsComponent, MessageBoxDocsHeaderComponent],
     entryComponents: [entryComponents]
 })
-export class MessageBoxDocsModule {
-}
+export class MessageBoxDocsModule {}

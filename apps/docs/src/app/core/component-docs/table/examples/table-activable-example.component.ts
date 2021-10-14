@@ -12,7 +12,7 @@ export class TableActivableExampleComponent implements OnInit {
             {
                 column1: {
                     text: 'Clicking on any cell'
-                } ,
+                },
                 column2: {
                     text: 'On This Row'
                 },
@@ -32,7 +32,7 @@ export class TableActivableExampleComponent implements OnInit {
                 column1: {
                     text: 'Clicking on cell',
                     activable: true
-                } ,
+                },
                 column2: {
                     text: 'On This Row',
                     activable: true
@@ -54,7 +54,7 @@ export class TableActivableExampleComponent implements OnInit {
                 column1: {
                     text: 'Hovering On Any Cell',
                     hoverable: true
-                } ,
+                },
                 column2: {
                     text: 'Will Change',
                     hoverable: true
@@ -75,7 +75,7 @@ export class TableActivableExampleComponent implements OnInit {
             {
                 column1: {
                     text: 'Hovering on Any Cell'
-                } ,
+                },
                 column2: {
                     text: 'On This Row'
                 },

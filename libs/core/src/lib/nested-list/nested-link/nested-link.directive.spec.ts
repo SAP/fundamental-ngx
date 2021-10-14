@@ -23,13 +23,15 @@ describe('NestedLinkDirective', () => {
     let directiveElement: NestedLinkDirective;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [NestedListModule],
-            declarations: [TestNestedContainerComponent],
-            providers: [NestedListStateService, NestedItemService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [NestedListModule],
+                declarations: [TestNestedContainerComponent],
+                providers: [NestedListStateService, NestedItemService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNestedContainerComponent);

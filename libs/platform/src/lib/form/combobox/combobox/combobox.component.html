@@ -78,7 +78,11 @@
                 [attr.aria-readonly]="readonly"
             />
         </fd-input-group>
-        <fd-form-message *ngIf="mobile && isOpen ? null : !!stateMessage" [type]="state" [innerHtml]="stateMessage"></fd-form-message>
+        <fd-form-message
+            *ngIf="mobile && isOpen ? null : !!stateMessage"
+            [type]="state"
+            [innerHtml]="stateMessage"
+        ></fd-form-message>
     </fd-form-input-message-group>
 </ng-template>
 

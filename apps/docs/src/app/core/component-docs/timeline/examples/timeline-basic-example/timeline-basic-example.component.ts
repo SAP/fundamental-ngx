@@ -7,11 +7,9 @@ import { TIMELINE_EXAMPLE_DATA } from './timeline-example-data';
     styleUrls: ['./timeline-basic-example.component.scss']
 })
 export class TimelineBasicExampleComponent {
-
     data = TIMELINE_EXAMPLE_DATA;
 
     trackBy(index: number, item: any): string {
         return item.title;
     }
-
 }

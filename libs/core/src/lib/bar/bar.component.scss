@@ -1,7 +1,6 @@
 @import '~fundamental-styles/dist/bar';
 
 @mixin fd-bar-responsive-paddings() {
-
     @media (max-width: 599px) {
         left: 1rem;
         right: 1rem;
@@ -19,7 +18,7 @@
 }
 
 .fd-bar--responsive-paddings {
-    margin-top: .5rem;
-    margin-bottom: .5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     @include fd-bar-responsive-paddings();
 }

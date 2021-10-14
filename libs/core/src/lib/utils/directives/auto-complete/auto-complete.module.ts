@@ -7,5 +7,4 @@ import { AutoCompleteDirective } from './auto-complete.directive';
     exports: [AutoCompleteDirective],
     declarations: [AutoCompleteDirective]
 })
-export class AutoCompleteModule {
-}
+export class AutoCompleteModule {}

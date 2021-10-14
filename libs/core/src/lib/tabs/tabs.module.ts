@@ -44,7 +44,7 @@ import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.compon
         TabItemExpandComponent,
         TabCounterHeaderDirective,
         TabProcessIconDirective,
-        TabSeparatorDirective,
+        TabSeparatorDirective
     ],
     imports: [CommonModule, IconModule, PopoverModule, ListModule, ButtonModule, MenuModule, ScrollSpyModule],
     exports: [
@@ -65,5 +65,4 @@ import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.compon
         TabSeparatorDirective
     ]
 })
-export class TabsModule {
-}
+export class TabsModule {}

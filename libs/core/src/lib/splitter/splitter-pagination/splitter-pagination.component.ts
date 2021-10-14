@@ -33,7 +33,7 @@ export class SplitterPaginationComponent {
     }
 
     /** @Hidden */
-    constructor(private readonly _splitter: SplitterComponent) { }
+    constructor(private readonly _splitter: SplitterComponent) {}
 
     /** @hidden */
     _changePage(page: string): void {

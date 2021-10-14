@@ -8,6 +8,6 @@ import { PlatformDatePickerComponent } from './date-picker.component';
 @NgModule({
     declarations: [PlatformDatePickerComponent],
     imports: [CommonModule, DatePickerModule, FormsModule, ReactiveFormsModule],
-    exports: [PlatformDatePickerComponent],
+    exports: [PlatformDatePickerComponent]
 })
 export class PlatformDatePickerModule {}

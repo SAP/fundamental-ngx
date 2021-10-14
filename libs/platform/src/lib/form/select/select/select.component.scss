@@ -1,11 +1,9 @@
-@import "~@angular/cdk/overlay-prebuilt";
-@import "~fundamental-styles/dist/select";
+@import '~@angular/cdk/overlay-prebuilt';
+@import '~fundamental-styles/dist/select';
 
 // tem fix, its a bug a fd-form-layout.css file
-@media (min-width: 600px)
-{
-[dir=rtl] .fd-container.fd-form-layout-grid-container
- .fd-row .fd-col-md--10 {
-    text-align: right !important;
- }
+@media (min-width: 600px) {
+    [dir='rtl'] .fd-container.fd-form-layout-grid-container .fd-row .fd-col-md--10 {
+        text-align: right !important;
+    }
 }

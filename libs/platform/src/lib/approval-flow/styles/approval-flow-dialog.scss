@@ -11,8 +11,8 @@ $block: fdp-approval-flow-dialog;
 
 .#{$block} {
     a {
-        color: #0A6ED1;
-        color: var(--sapLinkColor, #0A6ED1);
+        color: #0a6ed1;
+        color: var(--sapLinkColor, #0a6ed1);
     }
 
     .fd-list--byline .fd-list__byline-left {
@@ -34,15 +34,15 @@ $block: fdp-approval-flow-dialog;
 
             p {
                 font-size: 1rem;
-                margin: .65rem 0;
+                margin: 0.65rem 0;
 
                 fd-icon {
-                    font-size: .875rem;
-                    color: #0854A0;
-                    color: var(--sapButton_IconColor, #0854A0);
+                    font-size: 0.875rem;
+                    color: #0854a0;
+                    color: var(--sapButton_IconColor, #0854a0);
                     position: relative;
                     cursor: pointer;
-                    margin-right: .75rem;
+                    margin-right: 0.75rem;
                 }
             }
 
@@ -57,7 +57,7 @@ $block: fdp-approval-flow-dialog;
         }
 
         fd-avatar {
-            margin-right: .652rem;
+            margin-right: 0.652rem;
         }
 
         fd-dialog-body {
@@ -73,11 +73,11 @@ $block: fdp-approval-flow-dialog;
         fdp-standard-list-item {
             .fd-checkbox__label {
                 position: relative;
-                left: .3125rem;
+                left: 0.3125rem;
             }
 
             fd-avatar {
-                margin-left: .1875rem;
+                margin-left: 0.1875rem;
             }
         }
     }
@@ -89,18 +89,18 @@ $block: fdp-approval-flow-dialog;
     @include fd-rtl() {
         fd-dialog-header p fd-icon {
             margin-right: 0;
-            margin-left: .75rem;
+            margin-left: 0.75rem;
         }
 
         fd-avatar {
             margin-right: 0;
-            margin-left: .652rem;
+            margin-left: 0.652rem;
         }
 
         fdp-standard-list-item {
             .fd-checkbox__label {
                 left: auto;
-                right: .3125rem;
+                right: 0.3125rem;
             }
         }
     }

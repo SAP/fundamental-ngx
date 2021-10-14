@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './tab-selection-example.component.html',
     styleUrls: ['tab-selection-example.component.scss']
 })
-export class TabSelectionExampleComponent { }
+export class TabSelectionExampleComponent {}

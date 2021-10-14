@@ -7,7 +7,7 @@ export class FeedListItemPo extends CoreBaseComponentPo {
     paragraphs = '.fd-feed-list__text';
     linkMore = '.fd-link.fd-feed-list__link--more';
     checkbox = 'input[id="toggle-text-righ1"]';
-    links = 'a.fd-link[href*=\'example\']';
+    links = "a.fd-link[href*='example']";
     actionSettingsButton = 'button[glyph="action-settings"]';
     menuButton = 'button[glyph="menu"]';
     menuOption = '.fd-menu__link';

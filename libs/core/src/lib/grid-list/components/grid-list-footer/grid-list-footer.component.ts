@@ -8,5 +8,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GridListFooterComponent {
-}
+export class GridListFooterComponent {}

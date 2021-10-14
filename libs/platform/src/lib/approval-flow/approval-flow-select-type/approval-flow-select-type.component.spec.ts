@@ -12,14 +12,11 @@ describe('ApprovalFlowSelectTypeComponent', () => {
 
     const dialogRef = new DialogRef();
     const dialogConfig = new DialogConfig();
-    dialogRef.data = {  rtl: false };
+    dialogRef.data = { rtl: false };
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                PlatformApprovalFlowModule,
-                BrowserAnimationsModule
-            ],
+            imports: [PlatformApprovalFlowModule, BrowserAnimationsModule],
             providers: [
                 { provide: DialogRef, useValue: dialogRef },
                 { provide: DialogConfig, useValue: dialogConfig }

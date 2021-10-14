@@ -86,13 +86,14 @@ let comboboxUniqueId = 0;
     host: {
         '[class.fd-combobox-custom-class]': 'true',
         '[class.fd-combobox-input]': 'true',
-        '[class.fd-combobox-custom-class--mobile]': 'mobile',
+        '[class.fd-combobox-custom-class--mobile]': 'mobile'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComboboxComponent implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy {
-
+export class ComboboxComponent
+    implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy
+{
     /** Id for the Combobox. */
     @Input()
     comboboxId = `fd-combobox-${comboboxUniqueId++}`;
@@ -367,10 +368,12 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
         }
         this._refreshDisplayedValues();
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this._cdRef.markForCheck();
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._cdRef.markForCheck();
+                })
+            );
         }
     }
 
@@ -423,7 +426,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             event.stopPropagation();
         } else if (this.openOnKeyboardEvent && !event.ctrlKey && !KeyUtil.isKeyCode(event, this.nonOpeningKeys)) {
             this.isOpenChangeHandle(true);
-            if (this.isEmptyValue && (KeyUtil.isKeyType(event, 'control')) && !KeyUtil.isKeyCode(event, BACKSPACE) ) {
+            if (this.isEmptyValue && KeyUtil.isKeyType(event, 'control') && !KeyUtil.isKeyCode(event, BACKSPACE)) {
                 this.listComponent.setItemActive(0);
             }
         }
@@ -558,7 +561,6 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             this.openChange.emit(isOpen);
         }
 
-
         if (!this.open && !this.mobile) {
             this.handleBlur();
             this.searchInputElement.nativeElement.focus();
@@ -632,7 +634,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
                 if (item) {
                     const term = this.displayFn(item).toLocaleLowerCase();
                     let retVal;
-                    this.includes ? retVal = term.includes(searchLower) : retVal = term.startsWith(searchLower);
+                    this.includes ? (retVal = term.includes(searchLower)) : (retVal = term.startsWith(searchLower));
                     return retVal;
                 }
             });
@@ -687,10 +689,14 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
             ComboboxMobileComponent,
             { container: this._elementRef.nativeElement },
-            { injector: Injector.create({ providers: [
-                { provide: COMBOBOX_COMPONENT, useValue: this },
-                { provide: RtlService, useValue: this._rtlService }
-            ] }) }
+            {
+                injector: Injector.create({
+                    providers: [
+                        { provide: COMBOBOX_COMPONENT, useValue: this },
+                        { provide: RtlService, useValue: this._rtlService }
+                    ]
+                })
+            }
         );
     }
 }

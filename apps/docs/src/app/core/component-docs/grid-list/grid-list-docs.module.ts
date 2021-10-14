@@ -38,10 +38,6 @@ const routes: Routes = [
         ButtonModule
     ],
     exports: [RouterModule],
-    declarations: [
-        GridListDocsComponent,
-        GridListHeaderComponent,
-        ...COMPONENTS
-    ]
+    declarations: [GridListDocsComponent, GridListHeaderComponent, ...COMPONENTS]
 })
 export class GridListDocsModule {}

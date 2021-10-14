@@ -57,7 +57,12 @@
                             (click)="goNext()"
                         ></fdp-button>
                     </ng-template>
-                    <ng-template [ngIf]="(isBranchingStep && (!isCurrentStepCompleted || _stepsOrderChanged)) || !isNextStepSummary" [ngIfElse]="reviewButton">
+                    <ng-template
+                        [ngIf]="
+                            (isBranchingStep && (!isCurrentStepCompleted || _stepsOrderChanged)) || !isNextStepSummary
+                        "
+                        [ngIfElse]="reviewButton"
+                    >
                         <ng-template
                             [ngTemplateOutlet]="goNextButtonTemplate || defaultGoNextButtonTemplate"
                             [ngTemplateOutletContext]="{ goNext: _goNextFn }"

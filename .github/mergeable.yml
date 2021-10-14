@@ -1,43 +1,42 @@
-
 version: 2
 mergeable:
-  - when: pull_request.*, pull_request_review.*
-    validate:
-      - do: title
-        must_exclude:
-          regex: ^\[WIP\]
-          message: This is work in progress. Do not merge yet.
-        must_include:
-          regex: ^(feat|docs|chore|fix|test)(\(\w+\))?(:|\().+$
-          message: Semantic release conventions must be followed.
-      - do: description
-        must_exclude:
-          regex: \[ \]
-          message: There are incomplete TODO task(s) unchecked.
-      - do: approvals
-        or:
-          - required:
-              reviewers: [ 'InnaAtanasova' ]
-          - required:
-              reviewers: [ 'droshev' ]
-          - required:
-              reviewers: [ 'fkolar' ]
-          - required:
-              reviewers: [ 'KevinOkamoto' ]     
-          - required:
-              reviewers: [ 'JKMarkowski' ]
-          - required:
-              reviewers: [ 'mikerodonnell89' ]
-          - required:
-              reviewers: [ 'valorkin' ]
-          - min:
-              count: 2
-  - when: schedule.repository
-    validate:
-      - do: stale
-        days: 20
-        type: pull_request
-    pass:
-      - do: comment
-        payload:
-          body: This PR is getting old. Is it still relevant?
+    - when: pull_request.*, pull_request_review.*
+      validate:
+          - do: title
+            must_exclude:
+                regex: ^\[WIP\]
+                message: This is work in progress. Do not merge yet.
+            must_include:
+                regex: ^(feat|docs|chore|fix|test)(\(\w+\))?(:|\().+$
+                message: Semantic release conventions must be followed.
+          - do: description
+            must_exclude:
+                regex: \[ \]
+                message: There are incomplete TODO task(s) unchecked.
+          - do: approvals
+            or:
+                - required:
+                      reviewers: ['InnaAtanasova']
+                - required:
+                      reviewers: ['droshev']
+                - required:
+                      reviewers: ['fkolar']
+                - required:
+                      reviewers: ['KevinOkamoto']
+                - required:
+                      reviewers: ['JKMarkowski']
+                - required:
+                      reviewers: ['mikerodonnell89']
+                - required:
+                      reviewers: ['valorkin']
+                - min:
+                      count: 2
+    - when: schedule.repository
+      validate:
+          - do: stale
+            days: 20
+            type: pull_request
+      pass:
+          - do: comment
+            payload:
+                body: This PR is getting old. Is it still relevant?

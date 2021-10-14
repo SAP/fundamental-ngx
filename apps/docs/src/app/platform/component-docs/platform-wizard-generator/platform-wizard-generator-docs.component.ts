@@ -41,7 +41,6 @@ import * as interactionTsExample from '!raw-loader!./examples/wizard-generator-o
     templateUrl: './platform-wizard-generator-docs.component.html'
 })
 export class PlatformWizardGeneratorDocsComponent {
-
     defaultExample: ExampleFile[] = [
         {
             language: 'html',
@@ -210,5 +209,5 @@ export class PlatformWizardGeneratorDocsComponent {
         }
     ];
 
-    constructor() { }
+    constructor() {}
 }

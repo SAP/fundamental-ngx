@@ -2,8 +2,9 @@
 <div class="fd-docs-overlay-page" *ngIf="visible">
     <fd-dynamic-page size="large" ariaLabel="Example Dynamic Page" [autoResponsive]="false">
         <fd-dynamic-page-header
-                title="Resizable card layout with item config object."
-                subtitle="Here card configuration object is passed at card level.">
+            title="Resizable card layout with item config object."
+            subtitle="Here card configuration object is passed at card level."
+        >
             <fd-breadcrumb>
                 <fd-breadcrumb-item>
                     <a fd-breadcrumb-link href="#">Men</a>
@@ -23,22 +24,22 @@
                 <!-- global actions -->
                 <fd-toolbar fdType="transparent" [clearBorder]="true">
                     <button
-                            fd-toolbar-item
-                            fd-button
-                            [compact]="true"
-                            fdType="positive"
-                            (click)="closePage()"
-                            label="Accept"
-                            title="Accept"
+                        fd-toolbar-item
+                        fd-button
+                        [compact]="true"
+                        fdType="positive"
+                        (click)="closePage()"
+                        label="Accept"
+                        title="Accept"
                     ></button>
                     <button
-                            fd-toolbar-item
-                            fd-button
-                            [compact]="true"
-                            fdType="negative"
-                            (click)="closePage()"
-                            label="Reject"
-                            title="Reject"
+                        fd-toolbar-item
+                        fd-button
+                        [compact]="true"
+                        fdType="negative"
+                        (click)="closePage()"
+                        label="Reject"
+                        title="Reject"
                     ></button>
                     <fd-toolbar-separator></fd-toolbar-separator>
                 </fd-toolbar>
@@ -46,45 +47,30 @@
             <fd-dynamic-page-layout-actions>
                 <!-- layout actions -->
                 <fd-toolbar fdType="transparent" [clearBorder]="true">
-                    <button
-                            fd-button
-                            fdType="transparent"
-                            aria-label="Resize"
-                            title="Resize"
-                    >
+                    <button fd-button fdType="transparent" aria-label="Resize" title="Resize">
                         <i class="sap-icon--resize"></i>
                     </button>
                     <button
-                            fd-button
-                            fdType="transparent"
-                            aria-label="Exit Fullscreen"
-                            (click)="closePage()"
-                            title="Exit Fullscreen"
+                        fd-button
+                        fdType="transparent"
+                        aria-label="Exit Fullscreen"
+                        (click)="closePage()"
+                        title="Exit Fullscreen"
                     >
                         <i class="sap-icon--exitfullscreen"></i>
                     </button>
-                    <button
-                            fd-button
-                            fdType="transparent"
-                            aria-label="Close"
-                            (click)="closePage()"
-                            title="Close"
-                    >
+                    <button fd-button fdType="transparent" aria-label="Close" (click)="closePage()" title="Close">
                         <i class="sap-icon--decline"></i>
                     </button>
                 </fd-toolbar>
             </fd-dynamic-page-layout-actions>
         </fd-dynamic-page-header>
-        <fd-dynamic-page-subheader
-                [collapsible]="true"
-                [pinnable]="true"
-                [collapsed]="false"
-        >
+        <fd-dynamic-page-subheader [collapsible]="true" [pinnable]="true" [collapsed]="false">
             <!-- collapsible header content goes here -->
             <span
-            >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam possimus corrupti architecto
-                        perspiciatis, delectus necessitatibus incidunt numquam asperiores tenetur iure. Cum consequuntur
-                        impedit repellendus esse, facere autem optio consequatur nobis?</span
+                >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam possimus corrupti architecto
+                perspiciatis, delectus necessitatibus incidunt numquam asperiores tenetur iure. Cum consequuntur impedit
+                repellendus esse, facere autem optio consequatur nobis?</span
             >
         </fd-dynamic-page-subheader>
         <fd-dynamic-page-content class="fd-docs-center-align">

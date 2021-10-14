@@ -15,9 +15,7 @@ export class ThemeSwitcherExampleComponent {
     cssUrl: SafeResourceUrl;
     cssCustomUrl: SafeResourceUrl;
 
-    constructor (
-        private _themesService: ThemesService
-    ) {}
+    constructor(private _themesService: ThemesService) {}
 
     selectTheme(selectedTheme: string): void {
         this.cssUrl = this._themesService.setTheme(selectedTheme);
@@ -26,6 +24,6 @@ export class ThemeSwitcherExampleComponent {
         this.themeChanged.emit({
             themeUrl: this.cssCustomUrl,
             customThemeUrl: this.cssUrl
-        })
+        });
     }
 }

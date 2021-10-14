@@ -15,12 +15,10 @@ import { takeUntil } from 'rxjs/operators';
 import { OverflowListItemDirective } from './overflow-list-item.directive';
 import { ViewportRuler } from '@angular/cdk/overlay';
 
-
 @Directive({
     selector: '[fdOverflowList], [fd-overflow-list]'
 })
 export class OverflowListDirective implements AfterViewInit, OnDestroy {
-
     /**
      * @description Offset to calculate correct position
      */
@@ -55,16 +53,12 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
     private _onDestroy$ = new Subject();
 
     /** @hidden */
-    constructor(
-        private _el: ElementRef,
-        private _viewportRuler: ViewportRuler,
-        private _ngZone: NgZone,
-    ) {
-    }
+    constructor(private _el: ElementRef, private _viewportRuler: ViewportRuler, private _ngZone: NgZone) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._viewportRuler.change(50)
+        this._viewportRuler
+            .change(50)
             .pipe(takeUntil(this._onDestroy$))
             // ViewportRuler invoked out of zone, that is why I need to invoke function in zone
             .subscribe(() => this._ngZone.run(() => this._calculateAmountOfOverflowedItems()));
@@ -82,11 +76,10 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
      * @description Get amount of extra items in current list
      * */
     getAmountOfExtraItems(): number {
-        const elements = this.overflowItems.toArray().map(item => item.el.nativeElement);
+        const elements = this.overflowItems.toArray().map((item) => item.el.nativeElement);
         const computed = getComputedStyle(this._el.nativeElement);
-        const contentWidth = this._el.nativeElement.clientWidth
-            - parseFloat(computed.paddingLeft)
-            - parseFloat(computed.paddingRight);
+        const contentWidth =
+            this._el.nativeElement.clientWidth - parseFloat(computed.paddingLeft) - parseFloat(computed.paddingRight);
         return this._checkWidthWithOffset(elements, contentWidth);
     }
 
@@ -102,13 +95,15 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
      * @param containerWidth
      * @param checkWithOffset
      * */
-    private _checkWidthWithOffset(arrItems: HTMLElement[], containerWidth: number, checkWithOffset: boolean = false): number {
+    private _checkWidthWithOffset(
+        arrItems: HTMLElement[],
+        containerWidth: number,
+        checkWithOffset: boolean = false
+    ): number {
         let itemsTotalWidth = 0;
-        const parentWidth = checkWithOffset
-            ? containerWidth - this.overflowOffset
-            : containerWidth;
+        const parentWidth = checkWithOffset ? containerWidth - this.overflowOffset : containerWidth;
 
-        arrItems.forEach(item => {
+        arrItems.forEach((item) => {
             item.hidden = true;
             item.style.display = this.itemCssBlockValue;
         });
@@ -119,7 +114,6 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
             itemsTotalWidth += this.isRtl
                 ? containerWidth - item.offsetLeft - itemsTotalWidth
                 : item.offsetWidth + item.offsetLeft - itemsTotalWidth;
-
 
             if (parentWidth < itemsTotalWidth) {
                 this._clearTempStyles(arrItems);
@@ -138,7 +132,7 @@ export class OverflowListDirective implements AfterViewInit, OnDestroy {
      * @hidden
      * */
     private _clearTempStyles(arrItems: HTMLElement[]): void {
-        arrItems.forEach(item => {
+        arrItems.forEach((item) => {
             item.hidden = false;
             item.style.removeProperty('display');
         });

@@ -1,19 +1,22 @@
 <p class="fd-text" [class.fd-text--pre-wrap]="whitespaces" [style.hyphens]="hyphenation">
-    <span fd-lineclamp
-          class="fd-text__lineclamp"
-          #lineClamp="fdLineClamp"
-          [fdLineclampState]="_isCollapsed"
-          [fdLineClampLines]="maxLines"
-          (lineCountUpdate)="checkLineCount($event)"
+    <span
+        fd-lineclamp
+        class="fd-text__lineclamp"
+        #lineClamp="fdLineClamp"
+        [fdLineclampState]="_isCollapsed"
+        [fdLineClampLines]="maxLines"
+        (lineCountUpdate)="checkLineCount($event)"
     >
         <span fd-lineclamp-target [fdLineClampTargetText]="text" (update)="lineClamp.refreshTarget($event)"></span>
     </span>
 
-    <a fd-link
-       tabindex="0"
-       class="fd-text__link--more"
-       *ngIf="_expandable && _hasMore"
-       (keydown.enter)="toggleTextView()"
-       (click)="toggleTextView()"
-       [innerText]="isCollapsed ? moreLabel : lessLabel"></a>
+    <a
+        fd-link
+        tabindex="0"
+        class="fd-text__link--more"
+        *ngIf="_expandable && _hasMore"
+        (keydown.enter)="toggleTextView()"
+        (click)="toggleTextView()"
+        [innerText]="isCollapsed ? moreLabel : lessLabel"
+    ></a>
 </p>

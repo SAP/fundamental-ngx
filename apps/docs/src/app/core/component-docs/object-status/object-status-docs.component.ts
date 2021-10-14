@@ -34,7 +34,7 @@ export class ObjectStatusDocsComponent {
             fileName: 'object-status-examples',
             component: 'ObjectStatusDefaultExample',
             scssFileCode: objectStatusExamplesScss
-        },
+        }
     ];
 
     ObjectStatusTextExample: ExampleFile[] = [
@@ -50,7 +50,7 @@ export class ObjectStatusDocsComponent {
             language: 'html',
             code: ObjectStatusGenericTextExample,
             fileName: 'object-status-generic-text-example'
-        },
+        }
     ];
 
     ObjectStatusNumericIconExample: ExampleFile[] = [

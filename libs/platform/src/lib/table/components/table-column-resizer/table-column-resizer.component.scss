@@ -8,8 +8,8 @@
     z-index: 999;
     border-left-style: solid;
     border-right-style: solid;
-    border-left: 3px solid var(--sapContent_DragAndDropActiveColor, #0854A0);
-    border-right: 3px solid var(--sapContent_DragAndDropActiveColor, #0854A0);
+    border-left: 3px solid var(--sapContent_DragAndDropActiveColor, #0854a0);
+    border-right: 3px solid var(--sapContent_DragAndDropActiveColor, #0854a0);
     user-select: none;
 
     &--active {

@@ -1,5 +1,5 @@
 export enum VhdTab {
-  selectFromList,
-  defineConditions,
-  advancedSearch,
+    selectFromList,
+    defineConditions,
+    advancedSearch
 }

@@ -1,12 +1,5 @@
-<ng-template
-    let-dialog
-    let-dialogConfig="dialogConfig"
-    #landScapeDialog
->
-    <fd-dialog
-        [dialogConfig]="dialogConfig"
-        [dialogRef]="dialog"
-    >
+<ng-template let-dialog let-dialogConfig="dialogConfig" #landScapeDialog>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-body>
             <fd-calendar
                 #landscapeCalendar
@@ -18,10 +11,11 @@
 
         <fd-dialog-footer>
             <fd-button-bar
-                    fdType="emphasized"
-                    label="Ok"
-                    [compact]="false"
-                    (click)="dialog.close('Continue'); dateChanged(landscapeCalendar.selectedDate)">
+                fdType="emphasized"
+                label="Ok"
+                [compact]="false"
+                (click)="dialog.close('Continue'); dateChanged(landscapeCalendar.selectedDate)"
+            >
             </fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>
@@ -32,25 +26,13 @@
     label="Open Calendar in landscape mobile mode"
     style="margin-right: 10px"
     (click)="openLandScapeDialog(landScapeDialog)"
->
-</button>
+></button>
 
-<ng-template
-    let-dialog
-    let-dialogConfig="dialogConfig"
-    #portraitDialog
->
-    <fd-dialog
-        [dialogConfig]="dialogConfig"
-        [dialogRef]="dialog"
-    >
+<ng-template let-dialog let-dialogConfig="dialogConfig" #portraitDialog>
+    <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
         <fd-dialog-header>
             <h3 fd-title>Pick a date</h3>
-            <button
-                fd-dialog-close-button
-                fd-calendar-close-button
-                (click)="dialog.close()"
-            ></button>
+            <button fd-dialog-close-button fd-calendar-close-button (click)="dialog.close()"></button>
         </fd-dialog-header>
 
         <fd-dialog-body>
@@ -64,10 +46,11 @@
 
         <fd-dialog-footer>
             <fd-button-bar
-                    fdType="emphasized"
-                    label="Ok"
-                    [compact]="false"
-                    (click)="dialog.close('Continue'); dateChanged(portraitCalendar.selectedDate)">
+                fdType="emphasized"
+                label="Ok"
+                [compact]="false"
+                (click)="dialog.close('Continue'); dateChanged(portraitCalendar.selectedDate)"
+            >
             </fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>
@@ -78,9 +61,8 @@
     label="Open Calendar in portrait mobile mode"
     style="margin-right: 10px"
     (click)="openPortraitDialog(portraitDialog)"
->
-</button>
+></button>
 
-<br><br>
+<br /><br />
 
-<div>Selected Date: {{ datePicked | date : 'shortDate' }}</div>
+<div>Selected Date: {{ datePicked | date: 'shortDate' }}</div>

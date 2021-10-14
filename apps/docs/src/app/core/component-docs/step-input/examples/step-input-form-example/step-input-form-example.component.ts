@@ -5,10 +5,13 @@ import { FormControl } from '@angular/forms';
     selector: 'fd-step-input-form-example',
     template: `
         <div class="step-input-example-container">
-
             <div class="step-input-example">
                 <label fd-form-label for="reactive-form-input" required="true">Reactive forms</label>
-                <fd-step-input id="reactive-form-input" required="true" [formControl]="stepInputFormControl1"></fd-step-input>
+                <fd-step-input
+                    id="reactive-form-input"
+                    required="true"
+                    [formControl]="stepInputFormControl1"
+                ></fd-step-input>
                 <table [style.fontSize]="'smaller'">
                     <tr>
                         <td>Value:</td>

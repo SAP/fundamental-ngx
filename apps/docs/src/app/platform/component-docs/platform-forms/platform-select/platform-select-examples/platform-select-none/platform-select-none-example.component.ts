@@ -42,7 +42,7 @@ export class PlatformSelectNoneExampleComponent {
 
     onSelect(item: FdpSelectionChangeEvent): void {
         if (item) {
-         this.selectedValue = item.payload;
+            this.selectedValue = item.payload;
         }
-     }
- }
+    }
+}

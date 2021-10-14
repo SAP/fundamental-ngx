@@ -122,7 +122,6 @@ export class ListDataProvider extends DataProvider<User> {
         if (!!params.get('firstName')) {
             const keyword = params.get('firstName').toLowerCase();
             data = data.filter((user) => user.firstName.toLowerCase().indexOf(keyword) > -1);
-
         }
 
         return of(data);
@@ -131,9 +130,8 @@ export class ListDataProvider extends DataProvider<User> {
 @Component({
     selector: 'fdp-platform-list-with-more-button-example',
     templateUrl: './platform-list-with-more-button-example.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformListWithMoreButtonExampleComponent {
     _dataSource = new ListDataSource<User>(new ListDataProvider());
 }
-

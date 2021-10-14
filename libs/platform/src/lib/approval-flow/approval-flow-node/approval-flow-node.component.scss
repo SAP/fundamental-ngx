@@ -7,13 +7,13 @@ $node-width: 17.375rem;
 $node-margin-bottom: 1rem;
 
 $carousel-marker-height: 1rem;
-$carousel-marker-width: .25rem;
+$carousel-marker-width: 0.25rem;
 $carousel-marker-top: $node-height * 0.5 - $carousel-marker-height * 0.5;
 $carousel-marker-top--edit-mode: $node-height--edit-mode * 0.5 - $carousel-marker-height * 0.5;
 
 $add-button-size: 1rem;
 
-$border-width: .125rem;
+$border-width: 0.125rem;
 $border-color: #d9d9d9;
 $border-color-variable: var(--sapGroup_TitleBorderColor, #d9d9d9);
 
@@ -37,7 +37,8 @@ $border-color-variable: var(--sapGroup_TitleBorderColor, #d9d9d9);
     #{$line-position}: $border-width dashed $border-color;
     #{$line-position}: $border-width dashed $border-color-variable;
 
-    border-image: url("data:image/svg+xml,%3Csvg width='8' height='8' viewBox='0 0 8 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='2' height='2' fill='%23C4C4C4'/%3E%3Crect x='6' y='6' width='2' height='2' fill='%23C4C4C4'/%3E%3Crect x='3' y='6' width='2' height='2' fill='%23C4C4C4'/%3E%3Crect y='6' width='2' height='2' fill='%23C4C4C4'/%3E%3Crect y='3' width='2' height='2' fill='%23C4C4C4'/%3E%3Crect x='6' y='3' width='2' height='2' fill='%23C4C4C4'/%3E%3Crect x='6' width='2' height='2' fill='%23C4C4C4'/%3E%3Crect x='3' width='2' height='2' fill='%23C4C4C4'/%3E%3C/svg%3E%0A") 2 round;
+    border-image: url("data:image/svg+xml,%3Csvg width='8' height='8' viewBox='0 0 8 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='2' height='2' fill='%23C4C4C4'/%3E%3Crect x='6' y='6' width='2' height='2' fill='%23C4C4C4'/%3E%3Crect x='3' y='6' width='2' height='2' fill='%23C4C4C4'/%3E%3Crect y='6' width='2' height='2' fill='%23C4C4C4'/%3E%3Crect y='3' width='2' height='2' fill='%23C4C4C4'/%3E%3Crect x='6' y='3' width='2' height='2' fill='%23C4C4C4'/%3E%3Crect x='6' width='2' height='2' fill='%23C4C4C4'/%3E%3Crect x='3' width='2' height='2' fill='%23C4C4C4'/%3E%3C/svg%3E%0A")
+        2 round;
 }
 
 .#{$block} {
@@ -123,7 +124,7 @@ $border-color-variable: var(--sapGroup_TitleBorderColor, #d9d9d9);
 
         fd-icon {
             line-height: 1rem;
-            font-size: .7rem;
+            font-size: 0.7rem;
             font-weight: 900;
         }
 
@@ -148,16 +149,16 @@ $border-color-variable: var(--sapGroup_TitleBorderColor, #d9d9d9);
     }
 
     .#{$block}__drop-zone {
-        border-radius: .25rem;
+        border-radius: 0.25rem;
         position: absolute;
         height: 100%;
         z-index: 1;
 
         &.#{$block}__drop-zone--active {
-            background: #E5F0FA;
-            background: var(--sapList_SelectionBackgroundColor, #E5F0FA);
-            border: $border-width solid #0854A0;
-            border: $border-width solid var(--sapButton_IconColor, #0854A0);
+            background: #e5f0fa;
+            background: var(--sapList_SelectionBackgroundColor, #e5f0fa);
+            border: $border-width solid #0854a0;
+            border: $border-width solid var(--sapButton_IconColor, #0854a0);
         }
 
         &.#{$block}__drop-zone--blank {
@@ -357,28 +358,28 @@ $border-color-variable: var(--sapGroup_TitleBorderColor, #d9d9d9);
         .#{$block}__name {
             font-size: 1rem;
             line-height: 1.25rem;
-            margin-bottom: .1rem;
+            margin-bottom: 0.1rem;
             color: #32363a;
             color: var(--sapTextColor, #32363a);
         }
 
         .#{$block}__description {
-            font-size: .875rem;
+            font-size: 0.875rem;
             line-height: 1rem;
-            color: #6A6D70;
-            color: var(--sapContent_LabelColor, #6A6D70);
-            margin-bottom: .4rem;
+            color: #6a6d70;
+            color: var(--sapContent_LabelColor, #6a6d70);
+            margin-bottom: 0.4rem;
         }
 
         .#{$block}__arrow {
             width: 0;
             height: 0;
             border-style: solid;
-            border-width: .375rem 0 .375rem .5rem;
+            border-width: 0.375rem 0 0.375rem 0.5rem;
             border-color: transparent transparent transparent $border-color;
             border-color: transparent transparent transparent $border-color-variable;
             position: absolute;
-            left: -.5rem;
+            left: -0.5rem;
             top: 0;
             bottom: 0;
             margin: auto;
@@ -412,8 +413,8 @@ $border-color-variable: var(--sapGroup_TitleBorderColor, #d9d9d9);
 
             .#{$block}__arrow {
                 left: auto;
-                right: -.5rem;
-                border-width: .375rem .5rem .375rem 0;
+                right: -0.5rem;
+                border-width: 0.375rem 0.5rem 0.375rem 0;
                 border-color: transparent $border-color transparent transparent;
                 border-color: transparent $border-color-variable transparent transparent;
             }

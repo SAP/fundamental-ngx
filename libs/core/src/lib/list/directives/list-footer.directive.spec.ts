@@ -3,14 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ListModule } from '../list.module';
 
 @Component({
-    template: `
-        <li
-            #componentElement
-            fd-list-footer
-        >
-            ListFooterDirective
-        </li>
-    `
+    template: ` <li #componentElement fd-list-footer>ListFooterDirective</li> `
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
@@ -21,12 +14,14 @@ describe('ListFooterComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [ListModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [ListModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-
 import * as sizeRatingHtml from '!raw-loader!./examples/rating-indicator-sizes.component.html';
 import * as sizesRatingTs from '!raw-loader!./examples/rating-indicator-sizes.component.ts';
 
