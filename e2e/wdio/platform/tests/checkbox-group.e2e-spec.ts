@@ -93,18 +93,18 @@ describe('Checkbox group test suite', () => {
         });
 
         it('should check template inline checkboxes', () => {
-            checkLabels(stringValueCheckboxLabelArr, seasonsArr, 16, 20);
-            checkCheckboxSelecting(stringValueCheckboxesArr, stringValueCheckboxLabelArr, stringValueoutputLabelsArr, 3, 16, 20, seasonsArr);
+            checkLabels(stringValueCheckboxLabelArr, seasonsArr, 19, 23);
+            checkCheckboxSelecting(stringValueCheckboxesArr, stringValueCheckboxLabelArr, stringValueoutputLabelsArr, 4, 19, 23, seasonsArr);
         });
 
         it('should check template pre-selection based on value passed checkboxes', () => {
-            checkLabels(stringValueCheckboxLabelArr, sportsArr, 20, 24);
-            checkCheckboxSelecting(stringValueCheckboxesArr, stringValueCheckboxLabelArr, stringValueoutputLabelsArr, 4, 20, 24, sportsArr);
+            checkLabels(stringValueCheckboxLabelArr, sportsArr, 23, 27);
+            checkCheckboxSelecting(stringValueCheckboxesArr, stringValueCheckboxLabelArr, stringValueoutputLabelsArr, 5, 23, 27, sportsArr);
         });
 
         it('should check reactive disabled checkboxes', () => {
-            checkLabels(stringValueCheckboxLabelArr, sportsArr, 24, 28);
-            for (let i = 24; 28 > i; i++) {
+            checkLabels(stringValueCheckboxLabelArr, sportsArr, 27, 31);
+            for (let i = 27; 31 > i; i++) {
                 checkIfDisabled(stringValueCheckboxesArr, 'aria-disabled', 'true', i);
             }
         });

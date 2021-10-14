@@ -150,6 +150,7 @@ describe('Wizard component test', function () {
 
     it('should check confirmation changing payment type in branching example', () => {
         click(branchingExample + button);
+        waitForElDisplayed(wizard + nextStep);
         click(wizard + nextStep);
         click(radioButton);
         expect(getAttributeByName(radioButton, 'aria-checked')).toBe('true', 'radio button is not selected');
