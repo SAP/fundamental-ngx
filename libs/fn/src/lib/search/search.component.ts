@@ -7,15 +7,12 @@ import {
     forwardRef,
     Input,
     OnDestroy,
-    OnInit,
-    Optional,
     Output,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 let searchUniqueId = 0;
 
@@ -41,16 +38,16 @@ let searchUniqueId = 0;
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ExperimentalSearchComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class ExperimentalSearchComponent implements ControlValueAccessor, OnDestroy {
     /** @hidden */
     @ViewChild('searchInput')
     inputElement: ElementRef<HTMLInputElement>;
 
+    /** Value for input placeholder */
     @Input()
     placeholder = '';
 
-    @Input()
-    /** return the value in the text box */
+    /** Return the value in the text box */
     @Input()
     get value(): string {
         return this._getValue();
@@ -59,14 +56,6 @@ export class ExperimentalSearchComponent implements ControlValueAccessor, OnInit
     set value(value: string) {
         this._setValue(value);
     }
-
-    /** Optional text for the active state of the search. */
-    @Input()
-    activeText = '';
-
-    /** Optional text for the inactive state of the search. */
-    @Input()
-    inactiveText = '';
 
     /** Whether the search is disabled. */
     @Input()
@@ -80,22 +69,6 @@ export class ExperimentalSearchComponent implements ControlValueAccessor, OnInit
     @Input()
     name: string;
 
-    /** If it is mandatory field */
-    @Input()
-    required = false;
-
-    /** Whether the search is checked. */
-    @Input()
-    checked = false;
-
-    /** Whether the search is semantic */
-    @Input()
-    semantic = false;
-
-    /** Whether the search is compact */
-    @Input()
-    compact?: boolean;
-
     /** aria-label attribute of the inner input element. */
     @Input()
     ariaLabel: string = null;
@@ -103,14 +76,6 @@ export class ExperimentalSearchComponent implements ControlValueAccessor, OnInit
     /** aria-labelledby attribute of the inner input element. */
     @Input()
     ariaLabelledby: string = null;
-
-    /** Semantic Label Accept set for Accessibility */
-    @Input()
-    semanticAcceptLabel = 'Accept';
-
-    /** Semantic Label Decline set for Accessibility */
-    @Input()
-    semanticDeclineLabel = 'Decline';
 
     /**
      * Event fired when the state of the search changes.
@@ -128,24 +93,13 @@ export class ExperimentalSearchComponent implements ControlValueAccessor, OnInit
     /** @hidden */
     onTouched: Function = () => {};
 
+    /** @hidden */
     private _value = '';
 
-    constructor(
-        private readonly _changeDetectorRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService
-    ) {}
-
     /** @hidden */
-    ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.compact = density !== 'cozy';
-                    this._changeDetectorRef.markForCheck();
-                })
-            );
-        }
-    }
+    constructor(
+        private readonly _changeDetectorRef: ChangeDetectorRef
+    ) {}
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -160,11 +114,6 @@ export class ExperimentalSearchComponent implements ControlValueAccessor, OnInit
     /** Get the id of the inner input element of the search. */
     get innerInputId(): string {
         return `${this.id}-input`;
-    }
-
-    /** Get the id of the semantic label element of the search. */
-    get _semanticLabelId(): string {
-        return `${this.id}-semantic-label`;
     }
 
     /**
@@ -193,6 +142,7 @@ export class ExperimentalSearchComponent implements ControlValueAccessor, OnInit
         this.onTouched = fn;
     }
 
+    /** Reset the value in the input. */
     resetValue(): void {
         this._setValue('');
         this.inputElement.nativeElement.focus();
@@ -208,10 +158,12 @@ export class ExperimentalSearchComponent implements ControlValueAccessor, OnInit
         this._changeDetectorRef.detectChanges();
     }
 
+    /** Emit search term */
     emitSearch(): void {
         this.search.emit(this.value);
     }
 
+    /** @hidden */
     private _setValue(value: any): void {
         if (value !== this._value) {
             this.writeValue(value);
@@ -219,6 +171,7 @@ export class ExperimentalSearchComponent implements ControlValueAccessor, OnInit
         }
     }
 
+    /** @hidden */
     private _getValue(): any {
         return this._value;
     }

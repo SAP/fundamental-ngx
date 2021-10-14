@@ -1,16 +1,17 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'fn-tab',
     templateUrl: './tab.component.html',
-    styleUrls: ['./tab.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TabComponent implements OnInit {
+export class TabComponent {
+    /** The value of the tab. */
     @Input()
     title: string;
 
+    /** Whether the tab is active or not. */
     @Input()
     active = false;
 
@@ -20,14 +21,12 @@ export class TabComponent implements OnInit {
     @HostBinding('class.is-disabled')
     disabled = false;
 
-    expanded = false;
-
+    /** @hidden */
     constructor(
         private _cd: ChangeDetectorRef
     ) {}
 
-    ngOnInit(): void {}
-
+    /** A function that sets the active state of the tab. */
     setActive(value: boolean) {
         this.active = value;
         this._cd.detectChanges();

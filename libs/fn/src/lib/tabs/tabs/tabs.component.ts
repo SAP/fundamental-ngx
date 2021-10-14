@@ -5,7 +5,6 @@ import {
     Component,
     ContentChildren,
     Input,
-    OnInit,
     Optional,
     QueryList,
     ViewChildren,
@@ -25,27 +24,37 @@ export type TabMode = 'group' | 'individual' | 'line';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class TabsComponent implements OnInit, AfterViewInit {
-    @Input() mode: TabMode = 'group';
+export class TabsComponent implements AfterViewInit {
+    /** 
+     * The mode of the tabs. 
+     * Options include group(default), individual and line
+     */
+    @Input()
+    mode: TabMode = 'group';
 
+    /** @hidden */
     @ContentChildren(TabComponent)
     tabs: QueryList<TabComponent>;
 
+    /** @hidden */
     @ViewChildren(TabItemDirective)
     tabItems: QueryList<TabItemDirective>;
 
+    /** @hidden */
     _tabsList: TabComponent[] = [];
 
+    /** @hidden */
     private _currentActiveIndex = 0;
 
+    /** @hidden */
     private get _direction(): number {
         return this._rtl?.rtl.getValue() === true ? -1 : 1;
     }
 
+    /** @hidden */
     constructor(private _cd: ChangeDetectorRef, @Optional() private _rtl: RtlService) {}
 
-    ngOnInit(): void {}
-
+    /** @hidden */
     ngAfterViewInit(): void {
         this._tabsList = this.tabs.toArray();
         this.makeActiveTab();
@@ -53,12 +62,14 @@ export class TabsComponent implements OnInit, AfterViewInit {
         this._listenToTabsChange();
     }
 
+    /** A function to make tab active */
     makeActiveTab(): void {
         if (this.tabs.toArray().every((t) => !t.active)) {
             this.tabs.first.setActive(true);
         }
     }
 
+    /** A function to set the active state of the tab */
     setActiveTab(index: number): void {
         const tabs = this.tabs.toArray();
         tabs[this._currentActiveIndex].setActive(false);
@@ -66,6 +77,7 @@ export class TabsComponent implements OnInit, AfterViewInit {
         this._currentActiveIndex = index;
     }
 
+    /** @hidden */
     _tabHeaderKeyHandler(index: number, event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [ENTER, SPACE])) {
             event.preventDefault();
@@ -77,6 +89,7 @@ export class TabsComponent implements OnInit, AfterViewInit {
         }
     }
 
+    /** @hidden */
     private _navigate(index: number, direction: number): void {
         const nextIndex = index + this._direction * direction;
         const nextTab = this.tabItems.find((item, index) =>
@@ -86,6 +99,7 @@ export class TabsComponent implements OnInit, AfterViewInit {
         nextTab?.focus();
     }
 
+    /** @hidden */
     private _listenToTabsChange(): void {
         this.tabs.changes.subscribe(() => {
             this._tabsList = this.tabs.toArray();

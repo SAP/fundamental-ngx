@@ -8,9 +8,11 @@ import { RtlService } from '@fundamental-ngx/core/utils';
     selector: '[fn-slider-position]'
 })
 export class SliderPositionDirective implements OnInit, OnChanges, OnDestroy {
+    /** Slider position */
     @Input()
     position: number;
 
+    /** If the slider is vertical */
     @Input()
     vertical = false;
 

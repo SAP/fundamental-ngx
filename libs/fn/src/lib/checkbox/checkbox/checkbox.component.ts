@@ -6,30 +6,24 @@ import {
     ElementRef,
     forwardRef,
     HostBinding,
-    Inject,
     Input,
     OnDestroy,
-    OnInit,
-    Optional,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Platform } from '@angular/cdk/platform';
-import { compareObjects, KeyUtil, ContentDensityService } from '@fundamental-ngx/core/utils';
+import { compareObjects, KeyUtil } from '@fundamental-ngx/core/utils';
 import { SPACE } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
-import { FormStates } from '@fundamental-ngx/core/shared';
 
 let checkboxUniqueId = 0;
 
 interface FnCheckboxValues {
     trueValue?: any;
     falseValue?: any;
-    thirdStateValue?: any;
 }
 
-type fnCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force-checked';
+type fnCheckboxTypes = 'checked' | 'unchecked' | 'force-checked';
 
 @Component({
     selector: 'fn-checkbox',
@@ -45,7 +39,7 @@ type fnCheckboxTypes = 'checked' | 'unchecked' | 'indeterminate' | 'force-checke
         }
     ]
 })
-export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnDestroy {
     /** @hidden */
     @ViewChild('inputLabel')
     inputLabel: ElementRef;
@@ -81,10 +75,6 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnIn
     @Input()
     inputId = `fn-checkbox-${checkboxUniqueId++}`;
 
-    /** State of control, changes visual appearance of control. */
-    @Input()
-    state: FormStates;
-
     /** Sets [name] property of input. */
     @Input()
     name: string;
@@ -96,10 +86,6 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnIn
     /** Allows to disable/enable control. */
     @Input()
     disabled: boolean;
-
-    /** Allows to minimize control to compact mode. */
-    @Input()
-    compact?: boolean;
 
     /** Assigns given class to checkbox label element */
     @Input()
@@ -127,7 +113,7 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnIn
     readonly outline = 'none';
 
     /** Values returned by control. */
-    public values: FnCheckboxValues = { trueValue: true, falseValue: false, thirdStateValue: null };
+    public values: FnCheckboxValues = { trueValue: true, falseValue: false };
     /** Stores current checkbox value. */
     public checkboxValue: any;
     /** Stores current checkbox state. */
@@ -144,31 +130,14 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnIn
     constructor(
         public elementRef: ElementRef,
         @Attribute('tabIndexValue') public tabIndexValue: number = 0,
-        private _platform: Platform,
-        private _changeDetectorRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService
+        private _changeDetectorRef: ChangeDetectorRef
     ) {
         this.tabIndexValue = tabIndexValue;
     }
 
     /** @hidden */
-    ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this._changeDetectorRef.markForCheck();
-            }));
-        }
-    }
-
-    /** @hidden */
     ngOnDestroy(): void {
         this._subscriptions.unsubscribe();
-    }
-
-    /** @hidden Used to define if control is in 'indeterminate' state.*/
-    get isIndeterminate(): boolean {
-        return this.checkboxState === 'indeterminate';
     }
 
     /** @hidden Used to define if control is in 'checked' / 'unchecked' state. */
@@ -207,12 +176,6 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnIn
         this._detectChanges();
     }
 
-    /** @hidden Updates checkbox Indeterminate state on mouse click on IE11 */
-    public checkByClick(event: MouseEvent): void {
-        this._nextValueEvent(true, event);
-        this.muteKey(event);
-    }
-
     /** @hidden Based on current control state:
      * - sets next control value
      * - emits new control value
@@ -227,7 +190,6 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnIn
                 this.checkboxValue =
                     this.values.trueValue;
                 break;
-            case 'indeterminate':
             case 'force-checked':
                 this.checkboxValue = this.values.trueValue;
                 this.inputLabel.nativeElement.checked = true;
@@ -247,6 +209,7 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnIn
         event.stopPropagation();
         if (KeyUtil.isKeyCode(event, SPACE)) {
             this.nextValue();
+            event.preventDefault();
         }
     }
 
@@ -260,23 +223,6 @@ export class ExperimentalCheckboxComponent implements ControlValueAccessor, OnIn
             this.checkboxState = 'unchecked';
         }
         this._previousState = this.checkboxState;
-    }
-
-    /** @hidden */
-    private _nextValueEvent(triggeredByClick?: boolean, event?: MouseEvent): void {
-        if (this._previousState === 'indeterminate' &&
-            this.checkboxState === 'indeterminate') {
-            this.checkboxState = 'force-checked';
-            this._detectChanges();
-            /** Prevents from keeping the old value */
-            if (triggeredByClick) {
-                this.nextValue('force-checked');
-                if (event) {
-                    this.muteKey(event);
-                    event.preventDefault();
-                }
-            }
-        }
     }
 
     /** @hidden Compares values */

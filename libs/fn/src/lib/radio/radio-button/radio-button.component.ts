@@ -9,17 +9,15 @@ import {
     OnChanges,
     ViewEncapsulation,
     AfterViewInit,
-    OnInit,
     OnDestroy,
-    Optional
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { applyCssClass, CssClassBuilder, ContentDensityService, KeyUtil } from '@fundamental-ngx/core/utils';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { TAB } from '@angular/cdk/keycodes';
 
 export type stateType = 'success' | 'error' | 'warning' | 'default' | 'information';
-let uniqueId = 0;
+let radioUniqueId = 0;
 @Component({
     selector: 'fn-radio-button',
     templateUrl: './radio-button.component.html',
@@ -35,7 +33,7 @@ let uniqueId = 0;
     ]
 })
 export class ExperimentalRadioButtonComponent
-    implements OnChanges, AfterViewInit, CssClassBuilder, ControlValueAccessor, OnInit, OnDestroy {
+    implements OnChanges, AfterViewInit, ControlValueAccessor, OnDestroy {
     /** @hidden */
     @ViewChild('inputElement')
     inputElement: ElementRef;
@@ -61,20 +59,6 @@ export class ExperimentalRadioButtonComponent
      */
     @Input()
     tabIndex: number;
-
-    /** Whether to apply compact mode to the radio button.
-     * Value: true or false
-     * By default field is set to false
-     */
-    @Input()
-    compact?: boolean;
-
-    /** The field to set state of radio button using:
-     * 'success' | 'error' | 'warning' | 'default' | 'information'
-     * by default value is set to 'default'
-     */
-    @Input()
-    state: stateType = 'default';
 
     /** The field is used to tell if radio button should be disabled
      * Value: true or false
@@ -107,10 +91,10 @@ export class ExperimentalRadioButtonComponent
     name: string;
 
     /**
-     * uniqueId to a radio button
+     * radioUniqueId to a radio button
      */
     @Input()
-    id = `radio-id-${uniqueId++}`;
+    id = `fn-radio-${radioUniqueId++}`;
 
     /** Value field stores information about holding value by radio button
      * The field is mandatory
@@ -130,9 +114,6 @@ export class ExperimentalRadioButtonComponent
     }
 
     /** @hidden */
-    class: string;
-
-    /** @hidden */
     currentValue: any;
 
     /** @hidden */
@@ -140,21 +121,8 @@ export class ExperimentalRadioButtonComponent
 
     /** @hidden */
     constructor(
-        private changeDetectionRef: ChangeDetectorRef,
-        @Optional() private _contentDensityService: ContentDensityService
+        private changeDetectionRef: ChangeDetectorRef
     ) {}
-
-    /** @hidden */
-    ngOnInit(): void {
-        if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(
-                this._contentDensityService._contentDensityListener.subscribe((density) => {
-                    this.compact = density !== 'cozy';
-                    this.buildComponentCssClass();
-                })
-            );
-        }
-    }
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -163,13 +131,11 @@ export class ExperimentalRadioButtonComponent
 
     /** @hidden */
     ngOnChanges(): void {
-        this.buildComponentCssClass();
         this._checkMandatoryFields();
     }
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this.buildComponentCssClass();
         this._checkMandatoryFields();
     }
 
@@ -199,20 +165,6 @@ export class ExperimentalRadioButtonComponent
     /** @hidden */
     writeValue(value: any): void {
         this.valueChange(value);
-    }
-    // End implementation
-
-    /** This method is responsible for building a css class based on current state
-     *  It is implementation of CssClassBuilder interface and
-     *  should be used with @applyCssClass decorator
-     */
-    @applyCssClass
-    buildComponentCssClass(): string[] {
-        return [
-            'fd-radio',
-            this.compact ? 'fd-radio--compact' : '',
-            this.state !== 'default' ? `is-${this.state}` : ''
-        ];
     }
 
     /** @hidden */
@@ -250,6 +202,7 @@ export class ExperimentalRadioButtonComponent
         }
     }
 
+    /** Handles tab key event */
     keydownHandler(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, TAB)) {
             return;
