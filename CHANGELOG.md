@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.19 (2021-10-14)
+
+
+### Bug Fixes
+
+* **core,platform:** jest issue ([#6894](https://github.com/SAP/fundamental-ngx/issues/6894)) ([9858290](https://github.com/SAP/fundamental-ngx/commit/985829091a698241d76a88526e07fb360672ab9e))
+
 ## 0.33.0-rc.18 (2021-10-13)
 
 ## 0.33.0-rc.17 (2021-10-13)
