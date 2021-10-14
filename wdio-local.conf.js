@@ -25,7 +25,6 @@ exports.config = {
     ],
     // Patterns to exclude.
     exclude: [
-        './e2e/wdio/**/checkbox-group.e2e-spec.ts',
     ],
     //
     // ============
