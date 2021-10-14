@@ -5,6 +5,7 @@
 CHANGELOG.md
 package.json
 package-lock.json
+*.hbs
 
 # these files are autogenereated and there's no point in taking the time to format them
 /apps/docs/src/assets/typedoc

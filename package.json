@@ -84,8 +84,8 @@
     "format": "./node_modules/.bin/nx format:write",
     "format:write": "./node_modules/.bin/nx format:write",
     "format:check": "./node_modules/.bin/nx format:check",
-    "prettier": "prettier --config ./.prettierrc \"**/*{.ts,.js,.json,.scss,.css,.html,.md}\" --check",
-    "prettier:fix": "prettier --config ./.prettierrc \"**/*{.ts,.js,.json,.scss,.css,.html,.md}\" --write",
+    "prettier": "prettier --config ./.prettierrc \"**/*{.ts,.js,.json,.scss,.css,.html,.md,.yml}\" --check",
+    "prettier:fix": "prettier --config ./.prettierrc \"**/*{.ts,.js,.json,.scss,.css,.html,.md,.yml}\" --write",
     "update": "nx migrate latest",
     "update:check": "ng update",
     "dep-graph": "./node_modules/.bin/nx dep-graph",
@@ -211,7 +211,7 @@
     "webdriverio": "7.5.7"
   },
   "lint-staged": {
-    "*.{js,ts,html,md,scss,css,json}": "prettier --write",
+    "*.{js,ts,html,md,scss,css,json,yml}": "prettier --write",
     "*.ts": "tslint"
   }
 }
