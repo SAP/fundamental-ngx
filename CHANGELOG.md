@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.26 (2021-10-14)
+
+
+### Bug Fixes
+
+* **platform:** baseInput CVAs emit extra event ([#6780](https://github.com/SAP/fundamental-ngx/issues/6780)) ([#6816](https://github.com/SAP/fundamental-ngx/issues/6816)) ([cb2b9dc](https://github.com/SAP/fundamental-ngx/commit/cb2b9dc0ffce9aa730aa0ab93b1a05407c51a29d))
+
 ## 0.33.0-rc.25 (2021-10-14)
 
 ## 0.33.0-rc.24 (2021-10-14)
