@@ -80,8 +80,8 @@ describe('Multi input test suite', function() {
             waitForElDisplayed(expandedDropdown);
         }
     });
-
-    it('Verify A token can be added using suggestions or value help.', () => {
+    // skip until https://github.com/SAP/fundamental-ngx/pull/6765 merged
+    xit('Verify A token can be added using suggestions or value help.', () => {
         const inputQuantity = getElementArrayLength(activeInputs);
         const disabledExample = 5;
 
@@ -130,7 +130,8 @@ describe('Multi input test suite', function() {
         }
     });
 
-    it('Verify When the user starts typing in the input field, the list is filtered', () => {
+    // skip until https://github.com/SAP/fundamental-ngx/pull/6765 merged
+    xit('Verify When the user starts typing in the input field, the list is filtered', () => {
         multiInputPage.expandDropdown(activeDropdownButtons, 1);
         const optionsArr = getAttributeByNameArr(options, 'title');
         click(activeDropdownButtons, 1);
