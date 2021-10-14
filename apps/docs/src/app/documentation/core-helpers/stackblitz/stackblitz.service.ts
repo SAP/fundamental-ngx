@@ -31,13 +31,13 @@ export class StackblitzService {
                 'src/main.ts': maints.default,
                 'src/polyfills.ts': polyfills.default,
                 'src/styles.scss': stylesScss.default,
-                'angular.json': StackblitzDependencies.GetAngularJson()
+                'angular.json': StackblitzDependencies.getAngularJson()
             },
             title: 'Fundamental-NGX Example',
             description: 'Generated for you by fundamental-ngx team',
             template: 'angular-cli',
             tags: ['stackblitz', 'sdk'],
-            dependencies: StackblitzDependencies.GetDependencies()
+            dependencies: StackblitzDependencies.getDependencies()
         };
     }
 
