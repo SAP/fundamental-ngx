@@ -149,8 +149,9 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
         if (this._input.type === 'number') {
             const charStr = event.code.slice(-1);
 
-            if (!charStr.match(/^[0-9]+$/))
+            if (!charStr.match(/^[0-9]+$/)) {
                 event.preventDefault();
+            }
         }
     }
 
