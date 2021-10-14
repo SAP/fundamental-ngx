@@ -12,5 +12,6 @@ export const API_FILES = {
     checkbox: [],
     input: [],
     search: [],
+    select: [],
     slider: []
 };

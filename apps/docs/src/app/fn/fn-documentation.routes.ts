@@ -18,6 +18,10 @@ export const ROUTES: Routes = [
                 loadChildren: () => import('./component-docs/checkbox/checkbox-docs.module').then((m) => m.CheckboxDocsModule)
             },
             {
+                path: 'select',
+                loadChildren: () => import('./component-docs/select/select-docs.module').then((m) => m.SelectDocsModule)
+            },
+            {
                 path: 'tabs',
                 loadChildren: () => import('./component-docs/tabs/tabs-docs.module').then((m) => m.TabsDocsModule)
             },

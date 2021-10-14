@@ -880,6 +880,10 @@
             "tags": ["fn"],
             "implicitDependencies": ["core-utils", "core-shared"]
         },
+        "fn-select": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared"]
+        },
         "fn-search": {
             "tags": ["fn"],
             "implicitDependencies": ["core-utils", "core-shared"]

@@ -22,6 +22,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'fn/tabs', name: 'Tabs' },
             { url: 'fn/tag', name: 'Tag' },
             { url: 'fn/search', name: 'Search' },
+            { url: 'fn/select', name: 'Select' },
             { url: 'fn/slider', name: 'Slider' },
             { url: 'fn/switch', name: 'Switch' },
             { url: 'fn/radio', name: 'Radio button' }
