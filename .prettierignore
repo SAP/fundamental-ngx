@@ -2,6 +2,7 @@
 /dist
 /coverage
 
+CHANGELOG.md
 package.json
 package-lock.json
 
