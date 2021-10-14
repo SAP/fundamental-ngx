@@ -71,10 +71,10 @@ describe('MessageBoxHeaderComponent', () => {
 
         await whenStable(fixture);
 
-        const footerEl = fixture.nativeElement.querySelector('header');
+        const headerEl = fixture.nativeElement.querySelector('.fd-bar');
 
-        expect(footerEl).toHaveClass('fd-message-box__header');
-        expect(footerEl).toHaveClass('fd-bar--cozy');
+        expect(headerEl).toHaveClass('fd-message-box__header');
+        expect(headerEl).toHaveClass('fd-bar--cozy');
     });
 
     it('should use default template', async () => {

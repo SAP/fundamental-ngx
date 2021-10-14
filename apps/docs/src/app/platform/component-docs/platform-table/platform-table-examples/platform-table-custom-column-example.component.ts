@@ -7,7 +7,7 @@ import {
     TableDataProvider,
     TableState,
     TableRowSelectionChangeEvent
-} from '@fundamental-ngx/platform';
+} from '@fundamental-ngx/platform/table';
 
 @Component({
     selector: 'fdp-platform-table-custom-column-example',

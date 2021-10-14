@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, ViewEncapsulation} from '@angular/core';
-import { FdpSelectionChangeEvent} from '@fundamental-ngx/platform';
+
+import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
 @Component({
     selector: 'fdp-select-custom-trigger',

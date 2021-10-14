@@ -1,0 +1,83 @@
+<ng-template
+    let-size="size"
+    let-counter="counter"
+    let-sortable="sortable"
+    let-filterable="filterable"
+    let-groupable="groupable"
+    let-columns="columns"
+    let-titleId="titleId"
+>
+    <fd-toolbar
+        fdType="transparent"
+        [clearBorder]="true"
+        [hasTitle]="!!title"
+        [size]="_getCozyCompactSize(size)"
+    >
+        <label fd-toolbar-label [id]="titleId">{{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span></label>
+
+        <fd-toolbar-spacer></fd-toolbar-spacer>
+
+        <fdp-search-field
+            *ngIf="!hideSearchInput"
+            i18n-placeholder="@@platformTableToolbarSearchPlaceholder"
+            placeholder="Search"
+            [disabled]="tableLoading$ | async"
+            [contentDensity]="_getCozyCompactSize(size)"
+            [suggestions]="searchSuggestions"
+            [ariaLabelledBy]="titleId"
+            (searchSubmit)="submitSearch($event)"
+            (cancelSearch)="submitSearch($event)"
+        ></fdp-search-field>
+
+        <ng-container *ngIf="tableToolbarActionsComponent">
+            <ng-container *ngTemplateOutlet="tableToolbarActionsComponent.contentTemplateRef"></ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="sortable || filterable || groupable || columns">
+            <fd-toolbar-separator
+                fd-toolbar-item
+                *ngIf="tableToolbarActionsComponent"
+            ></fd-toolbar-separator>
+            <fdp-button
+                *ngIf="sortable"
+                glyph="sort"
+                i18n-title="@@platformTableToolbarActionButtonSort"
+                title="sort"
+                buttonType="transparent"
+                [contentDensity]="_getCozyCompactSize(size)"
+                aria-haspopup="modal"
+                (click)="openSorting()"
+            ></fdp-button>
+            <fdp-button
+                *ngIf="filterable"
+                glyph="filter"
+                i18n-title="@@platformTableToolbarActionButtonFilter"
+                title="filter"
+                buttonType="transparent"
+                [contentDensity]="_getCozyCompactSize(size)"
+                aria-haspopup="modal"
+                (click)="openFiltering()"
+            ></fdp-button>
+            <fdp-button
+                *ngIf="groupable"
+                glyph="group-2"
+                i18n-title="@@platformTableToolbarActionButtonGroup"
+                title="group"
+                buttonType="transparent"
+                [contentDensity]="_getCozyCompactSize(size)"
+                aria-haspopup="modal"
+                (click)="openGrouping()"
+            ></fdp-button>
+            <fdp-button
+                *ngIf="columns"
+                glyph="action-settings"
+                i18n-title="@@platformTableToolbarActionButtonColumns"
+                title="columns"
+                buttonType="transparent"
+                [contentDensity]="_getCozyCompactSize(size)"
+                aria-haspopup="modal"
+                (click)="openColumns()"
+            ></fdp-button>
+        </ng-container>
+    </fd-toolbar>
+</ng-template>

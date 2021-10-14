@@ -1,27 +1,28 @@
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { coerceArray, coerceNumberProperty } from '@angular/cdk/coercion';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     EventEmitter,
     Input,
     OnChanges,
+    OnDestroy,
     OnInit,
     Optional,
     Output,
     SimpleChanges,
-    ViewEncapsulation,
-    TemplateRef, OnDestroy, ChangeDetectorRef
+    TemplateRef,
+    ViewEncapsulation
 } from '@angular/core';
-import {
-    ENTER,
-    SPACE
-} from '@angular/cdk/keycodes';
-import { coerceNumberProperty, coerceArray } from '@angular/cdk/coercion';
 import { Subscription } from 'rxjs';
 
-import { KeyUtil } from '@fundamental-ngx/core/utils';
-import { PaginationService } from './pagination.service';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+
 import { Pagination } from './pagination.model';
+import { PaginationService } from './pagination.service';
+
 
 /** Constant representing the default number of items per page. */
 const DEFAULT_ITEMS_PER_PAGE = 10;
@@ -29,7 +30,7 @@ interface CurrentShowing {
     from: number;
     to: number;
     of: number;
-};
+}
 
 let paginationUniqueId = 0;
 
@@ -97,7 +98,10 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     @Input()
     itemsPerPageTemplate: TemplateRef<any>;
 
-    /** Label for options for items per page. */
+    /**
+     * Label for options for items per page.
+     * This property is mainly provided to support reading in the right language for screen reader.
+     */
     @Input()
     itemsPerPageLabel = 'Results per page';
 
@@ -112,7 +116,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
             .map(v => Math.floor(v))
             .filter(v => v > 0 && v < this.totalItems)
             .sort((a, b) => a - b);
-            
+
         if (this._itemsPerPageOptions.some(v => v !== this.itemsPerPage)) {
             this.itemsPerPage = this._itemsPerPageOptions[0];
         }
@@ -129,21 +133,47 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     @Input()
     displayTextTemplate: TemplateRef<any>;
 
-    /** Label for the 'previous' page button. */
+    /**
+     * Label for the 'previous' page button.
+     * This property is mainly provided to support reading in the right language for screen reader.
+     */
     @Input()
     previousLabel = 'Previous';
 
-    /** Label for the 'next' page button. */
+    /**
+     * Label for the 'next' page button.
+     * This property is mainly provided to support reading in the right language for screen reader.
+     */
     @Input()
     nextLabel = 'Next';
 
-    /** Label for the 'Page' page button. */
+    /**
+     * Label for the 'Page' page button.
+     * This property is mainly provided to support reading in the right language for screen reader.
+     */
     @Input()
     pageLabel = 'Page';
 
-    /** Aria label for the navigation element */
+    /**
+     * Aria label for the navigation element
+     * This property is mainly provided to support reading in the right language for screen reader.
+     */
     @Input()
     ariaLabel = 'Pagination';
+
+    /**
+     * The current page label that should be read when a page is selected.
+     * Please use ${currentPage} in the value for replacing with the current page number.
+     * Example: `Page ${currentPage} is selected`.
+     * This property is mainly provided to support reading in the right language for screen reader.
+     */
+    @Input()
+    currentPageAriaLabel = 'Page ${currentPage} is current page';
+
+    /** @hidden */
+    get _currentPageAriaLabel(): string {
+        return this.currentPageAriaLabel.replace(/\${currentPage}/, this.currentPage.toString());
+    }
 
     /** Event fired when the page is changed. */
     @Output()
@@ -182,6 +212,8 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     private _itemsPerPageOptions: number[];
     /** @hidden */
     private _currentPage = 1;
+    /** @hidden */
+    private _initialItemsPerPage: number;
 
     /** @hidden */
     private _subscriptions = new Subscription();
@@ -190,6 +222,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     constructor (
         private readonly paginationService: PaginationService,
         private readonly _cd: ChangeDetectorRef,
+        private readonly _liveAnnouncer: LiveAnnouncer,
         @Optional() private readonly _rtlService: RtlService
     ) {}
 
@@ -205,11 +238,15 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
+        if (changes && changes.itemsPerPage) {
+            this._initialItemsPerPage = changes.itemsPerPage.currentValue;
+        }
+        if (changes && changes.totalItems && this._initialItemsPerPage) {
+            this.itemsPerPage = this._initialItemsPerPage;
+        }
         if (changes && changes.currentPage) {
             this.currentPage = changes.currentPage.currentValue;
         }
-
-        this._refreshPages();
 
         const pagination = this.getPaginationObject();
         const totalPages = this.paginationService.getTotalPages(pagination);
@@ -218,6 +255,8 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         } else if (this.currentPage > totalPages) {
             this.currentPage = totalPages;
         }
+
+        this._refreshPages();
     }
 
     /** @hidden */
@@ -256,12 +295,16 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         if ($event) {
             $event.preventDefault();
         }
+
         if (page > this.paginationService.getTotalPages(this.getPaginationObject()) || page < 1) {
             return;
         }
+
         this._refreshPages();
 
         this.pageChangeStart.emit(page);
+
+        this._liveAnnouncer.announce(this._currentPageAriaLabel);
     }
 
     /**

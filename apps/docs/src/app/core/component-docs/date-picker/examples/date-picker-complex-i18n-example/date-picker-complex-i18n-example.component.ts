@@ -1,6 +1,5 @@
 import { Component, LOCALE_ID, ViewChild } from '@angular/core';
 
-import moment from 'moment';
 // Moment locale data required for this example
 import 'moment/locale/es';
 import 'moment/locale/en-gb';

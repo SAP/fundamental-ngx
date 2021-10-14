@@ -8,13 +8,13 @@ export class ApprovalFlowPo extends BaseComponentPo {
     watchersTitle = this.watchers + ' p';
     watchersAvatar = this.watchers + ' fd-avatar';
 
-    detailsDialog = '[role="dialog"]';
+    detailsDialog = 'fd-dialog-container .fd-dialog--active';
     detailsDialogSearchInput = this.detailsDialog + ' input';
     detailsDialogTeamMember = this.detailsDialog + ' li';
     detailsDialogTeamMemberName = this.detailsDialog + ' .fd-list__title';
     detailsDialogTeamMemberCheckBox = this.detailsDialogTeamMember + ' input ';
     detailsDialogBackIcon = this.detailsDialog + ' fd-icon';
-    detailsDialogHeader = this.detailsDialog + ' header';
+    detailsDialogHeader = ' fd-dialog-container .fd-dialog__header';
     detailsDialogAvatar = this.detailsDialog + ' fd-avatar';
     detailsDialogCancelBtn = this.detailsDialog + ' button.fd-button--transparent.fd-dialog__decisive-button';
     detailsDialogSearchlBtn = this.detailsDialog + ' button.fdp-search-field__submit';

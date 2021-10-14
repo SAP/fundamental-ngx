@@ -1,33 +1,38 @@
 import { Component } from '@angular/core';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
-import * as defaultWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-default-example.component.html';
-import * as defaultWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-default-example.component.ts';
+import * as defaultHtmlExample from '!raw-loader!./examples/wizard-generator-default-example.component.html';
+import * as defaultTsExample from '!raw-loader!./examples/wizard-generator-default-example.component.ts';
 
-import * as dialogWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-dialog-example.component.html';
-import * as dialogWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-dialog-example.component.ts';
+import * as dialogHtmlExample from '!raw-loader!./examples/wizard-generator-dialog-example.component.html';
+import * as dialogTsExample from '!raw-loader!./examples/wizard-generator-dialog-example.component.ts';
 
-import * as customizableWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-customizable-example.component.html';
-import * as customizableWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-customizable-example.component.ts';
+import * as customizableHtmlExample from '!raw-loader!./examples/wizard-generator-customizable-example.component.html';
+import * as customizableTsExample from '!raw-loader!./examples/wizard-generator-customizable-example.component.ts';
 
-import * as customizableEmbededWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-customizable-embeded-example.component.html';
-import * as customizableEmbededWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-customizable-embeded-example.component.ts';
+import * as customizableEmbededHtmlExample from '!raw-loader!./examples/wizard-generator-customizable-embeded-example.component.html';
+import * as customizableEmbededTsExample from '!raw-loader!./examples/wizard-generator-customizable-embeded-example.component.ts';
 
-import * as conditionWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-condition-example.component.html';
-import * as conditionWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-condition-example.component.ts';
+import * as conditionHtmlExample from '!raw-loader!./examples/wizard-generator-condition-example.component.html';
+import * as conditionTsExample from '!raw-loader!./examples/wizard-generator-condition-example.component.ts';
 
-import * as responsiveWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-responsive-paddings-example.component.html';
-import * as responsiveWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-responsive-paddings-example.component.ts';
+import * as responsiveHtmlExample from '!raw-loader!./examples/wizard-generator-responsive-paddings-example.component.html';
+import * as responsiveTsExample from '!raw-loader!./examples/wizard-generator-responsive-paddings-example.component.ts';
 
-import * as responsiveDialogWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-responsive-dialog-example.component.html';
-import * as responsiveDialogWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-responsive-dialog-example.component.ts';
+import * as responsiveDialogHtmlExample from '!raw-loader!./examples/wizard-generator-responsive-dialog-example.component.html';
+import * as responsiveDialogTsExample from '!raw-loader!./examples/wizard-generator-responsive-dialog-example.component.ts';
 
-import * as visibleSummaryWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-visible-summary-example.component.html';
-import * as visibleSummaryWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-visible-summary-example.component.ts';
+import * as visibleSummaryHtmlExample from '!raw-loader!./examples/wizard-generator-visible-summary-example.component.html';
+import * as visibleSummaryTsExample from '!raw-loader!./examples/wizard-generator-visible-summary-example.component.ts';
 
-import * as visibleBranchingSummaryWizardGeneratorHtmlExample from '!raw-loader!./examples/wizard-generator-visible-summary-branching-example.component.html';
-import * as visibleBranchingSummaryWizardGeneratorTsExample from '!raw-loader!./examples/wizard-generator-visible-summary-branching-example.component.ts';
+import * as visibleBranchingSummaryHtmlExample from '!raw-loader!./examples/wizard-generator-visible-summary-branching-example.component.html';
+import * as visibleBranchingSummaryTsExample from '!raw-loader!./examples/wizard-generator-visible-summary-branching-example.component.ts';
 
+import * as externalNavigationHtmlExample from '!raw-loader!./examples/wizard-generator-external-navigation-example.component.html';
+import * as externalNavigationTsExample from '!raw-loader!./examples/wizard-generator-external-navigation-example.component.ts';
+
+import * as summaryObjectsHtmlExample from '!raw-loader!./examples/wizard-generator-summary-objects-example.component.html';
+import * as summaryObjectsTsExample from '!raw-loader!./examples/wizard-generator-summary-objects-example.component.ts';
 @Component({
     selector: 'fdp-platform-wizard-generator-docs',
     templateUrl: './platform-wizard-generator-docs.component.html'
@@ -37,12 +42,12 @@ export class PlatformWizardGeneratorDocsComponent {
     defaultExample: ExampleFile[] = [
         {
             language: 'html',
-            code: defaultWizardGeneratorHtmlExample,
+            code: defaultHtmlExample,
             fileName: 'wizard-generator-default-example'
         },
         {
             language: 'typescript',
-            code: defaultWizardGeneratorTsExample,
+            code: defaultTsExample,
             fileName: 'wizard-generator-default-example',
             component: 'WizardGeneratorDefaultExampleComponent'
         }
@@ -51,12 +56,12 @@ export class PlatformWizardGeneratorDocsComponent {
     dialogExample: ExampleFile[] = [
         {
             language: 'html',
-            code: dialogWizardGeneratorHtmlExample,
+            code: dialogHtmlExample,
             fileName: 'wizard-generator-dialog-example'
         },
         {
             language: 'typescript',
-            code: dialogWizardGeneratorTsExample,
+            code: dialogTsExample,
             fileName: 'wizard-generator-dialog-example',
             component: 'WizardGeneratorDialogExampleComponent'
         }
@@ -65,12 +70,12 @@ export class PlatformWizardGeneratorDocsComponent {
     customizableExample: ExampleFile[] = [
         {
             language: 'html',
-            code: customizableWizardGeneratorHtmlExample,
+            code: customizableHtmlExample,
             fileName: 'wizard-generator-customizable-example'
         },
         {
             language: 'typescript',
-            code: customizableWizardGeneratorTsExample,
+            code: customizableTsExample,
             fileName: 'wizard-generator-customizable-example',
             component: 'WizardGeneratorCustomizableExampleComponent'
         }
@@ -79,12 +84,12 @@ export class PlatformWizardGeneratorDocsComponent {
     customizableEmbededExample: ExampleFile[] = [
         {
             language: 'html',
-            code: customizableEmbededWizardGeneratorHtmlExample,
+            code: customizableEmbededHtmlExample,
             fileName: 'wizard-generator-customizable-embeded-example'
         },
         {
             language: 'typescript',
-            code: customizableEmbededWizardGeneratorTsExample,
+            code: customizableEmbededTsExample,
             fileName: 'wizard-generator-customizable-embeded-example',
             component: 'WizardGeneratorCustomizableEmbededExampleComponent'
         }
@@ -93,12 +98,12 @@ export class PlatformWizardGeneratorDocsComponent {
     branchingExample: ExampleFile[] = [
         {
             language: 'html',
-            code: responsiveWizardGeneratorHtmlExample,
+            code: responsiveHtmlExample,
             fileName: 'wizard-generator-condition-example'
         },
         {
             language: 'typescript',
-            code: conditionWizardGeneratorTsExample,
+            code: conditionTsExample,
             fileName: 'wizard-generator-condition-example',
             component: 'WizardGeneratorConditionExampleComponent'
         }
@@ -107,12 +112,12 @@ export class PlatformWizardGeneratorDocsComponent {
     responsivePaddingsExample: ExampleFile[] = [
         {
             language: 'html',
-            code: conditionWizardGeneratorHtmlExample,
+            code: conditionHtmlExample,
             fileName: 'wizard-generator-responsive-paddings-example'
         },
         {
             language: 'typescript',
-            code: responsiveWizardGeneratorTsExample,
+            code: responsiveTsExample,
             fileName: 'wizard-generator-responsive-paddings-example',
             component: 'WizardGeneratorResponsivePaddingsExampleComponent'
         }
@@ -121,12 +126,12 @@ export class PlatformWizardGeneratorDocsComponent {
     visibleSummaryExample: ExampleFile[] = [
         {
             language: 'html',
-            code: visibleSummaryWizardGeneratorHtmlExample,
+            code: visibleSummaryHtmlExample,
             fileName: 'wizard-generator-visible-summary-example'
         },
         {
             language: 'typescript',
-            code: visibleSummaryWizardGeneratorTsExample,
+            code: visibleSummaryTsExample,
             fileName: 'wizard-generator-visible-summary-example',
             component: 'WizardGeneratorVisibleSummaryExampleComponent'
         }
@@ -135,12 +140,12 @@ export class PlatformWizardGeneratorDocsComponent {
     visibleBranchingSummaryExample: ExampleFile[] = [
         {
             language: 'html',
-            code: visibleBranchingSummaryWizardGeneratorHtmlExample,
+            code: visibleBranchingSummaryHtmlExample,
             fileName: 'wizard-generator-visible-summary-branching-example'
         },
         {
             language: 'typescript',
-            code: visibleBranchingSummaryWizardGeneratorTsExample,
+            code: visibleBranchingSummaryTsExample,
             fileName: 'wizard-generator-visible-summary-branching-example',
             component: 'WizardGeneratorVisibleSummaryBranchingExampleComponent'
         }
@@ -149,14 +154,42 @@ export class PlatformWizardGeneratorDocsComponent {
     responsiveDialogPaddingsExample: ExampleFile[] = [
         {
             language: 'html',
-            code: responsiveDialogWizardGeneratorHtmlExample,
+            code: responsiveDialogHtmlExample,
             fileName: 'wizard-generator-responsive-dialog-example'
         },
         {
             language: 'typescript',
-            code: responsiveDialogWizardGeneratorTsExample,
+            code: responsiveDialogTsExample,
             fileName: 'wizard-generator-responsive-dialog-example',
             component: 'WizardGeneratorResponsiveDialogExampleComponent'
+        }
+    ];
+
+    summaryObjectsExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: summaryObjectsHtmlExample,
+            fileName: 'wizard-generator-summary-objects-example'
+        },
+        {
+            language: 'typescript',
+            code: summaryObjectsTsExample,
+            fileName: 'wizard-generator-summary-objects-example',
+            component: 'WizardGeneratorSummaryObjectsExampleComponent'
+        }
+    ];
+
+    externalNavigationObjectsExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: externalNavigationHtmlExample,
+            fileName: 'wizard-generator-external-navigation-example'
+        },
+        {
+            language: 'typescript',
+            code: externalNavigationTsExample,
+            fileName: 'wizard-generator-external-navigation-example',
+            component: 'WizardGeneratorExternalNavigationExampleComponent'
         }
     ];
 

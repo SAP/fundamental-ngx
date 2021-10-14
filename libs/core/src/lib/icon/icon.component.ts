@@ -46,6 +46,10 @@ export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
     @HostBinding('attr.aria-label')
     ariaLabel: string = null;
 
+    /** Whether or not this icon is for a list navigation item. */
+    @HostBinding('class.fd-list__navigation-item-icon')
+    _navigationItemIcon = false;
+
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 

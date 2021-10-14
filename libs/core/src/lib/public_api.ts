@@ -1,5 +1,3 @@
-
-
 export * from './fundamental-ngx.module';
 
 export * from '@fundamental-ngx/core/action-bar';
@@ -79,11 +77,16 @@ export * from '@fundamental-ngx/core/title';
 export * from '@fundamental-ngx/core/feed-input';
 export * from '@fundamental-ngx/core/grid-list';
 export * from '@fundamental-ngx/core/slider';
+export * from '@fundamental-ngx/core/splitter';
 export * from '@fundamental-ngx/core/illustrated-message';
 export * from '@fundamental-ngx/core/text';
 export * from '@fundamental-ngx/core/status-indicator';
 export * from '@fundamental-ngx/core/shared';
 export * from '@fundamental-ngx/core/mobile-mode';
 export * from '@fundamental-ngx/core/resizable-card-layout';
+export * from '@fundamental-ngx/core/vertical-navigation';
+export * from '@fundamental-ngx/core/upload-collection';
+export * from '@fundamental-ngx/core/micro-process-flow';
+export * from '@fundamental-ngx/core/timeline';
 
 export * from '@fundamental-ngx/core/utils';

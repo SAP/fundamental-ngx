@@ -1,1 +1,8 @@
 @import "~fundamental-styles/dist/list";
+
+// TODO: remove in next fundamental-styles release
+.fd-list__navigation-item--condensed {
+    &.is-expanded {
+        height: 2.75rem;
+    }
+}

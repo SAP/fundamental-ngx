@@ -8,6 +8,8 @@ import { ToolbarItemDirective } from './toolbar-item.directive';
 import { ToolbarSeparatorComponent } from './toolbar-separator.component';
 import { ToolbarSpacerComponent } from './toolbar-spacer.component';
 import { ToolbarLabelDirective } from './toolbar-label.directive';
+import { ToolbarOverflowButtonDirective } from './toolbar-overflow-button.directive';
+import { ToolbarOverflowButtonMenuDirective } from './toolbar-overflow-button-menu.directive';
 import { ToolbarFormLabelDirective } from './toolbar-form-label.directive';
 import { ToolbarOverflowPriorityDirective } from './toolbar-overflow-priority.directive';
 import { ToolbarOverflowGroupDirective } from './toolbar-overflow-group.directive';
@@ -19,6 +21,8 @@ const components = [
     ToolbarSeparatorComponent,
     ToolbarFormLabelDirective,
     ToolbarLabelDirective,
+    ToolbarOverflowButtonDirective,
+    ToolbarOverflowButtonMenuDirective,
     ToolbarOverflowPriorityDirective,
     ToolbarOverflowGroupDirective
 ];

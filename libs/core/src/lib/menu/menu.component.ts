@@ -8,7 +8,6 @@ import {
     ContentChildren,
     ElementRef,
     EventEmitter,
-    Inject,
     Injector,
     Input,
     OnDestroy,
@@ -166,6 +165,7 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
         this._destroyEventListeners();
         this._menuService.onDestroy();
         this._subscriptions.unsubscribe();
+        this._popoverService.onDestroy();
     }
 
     get trigger(): ElementRef {
@@ -259,7 +259,7 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
              if (m.submenu && m.submenu.menuItems) {
                  this._subscriptions.add(m.submenu.menuItems.changes.subscribe(() => this._menuService.rebuildMenu()));
              }
-         })
+         });
     }
 
     /**

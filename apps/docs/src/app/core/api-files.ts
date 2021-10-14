@@ -153,7 +153,10 @@ export const API_FILES = {
         'ListGroupHeaderDirective',
         'ListIconDirective',
         'ListFooterDirective',
-        'ListMessageDirective'
+        'ListMessageDirective',
+        'ListNavigationItemArrowDirective',
+        'ListNavigationItemTextDirective',
+        'ListNavigationItemComponent',
     ],
     menu: [
         'MenuAddonDirective',
@@ -167,6 +170,7 @@ export const API_FILES = {
     ],
     messageStrip: ['MessageStripComponent'],
     messageToast: ['MessageToastComponent', 'MessageToastConfig', 'MessageToastService', 'MessageToastRef'],
+    microProcessFlow: ['MicroProcessFlowComponent', 'MicroProcessFlowItemComponent', 'MicroProcessFlowIconComponent'],
     momentDatetimeAdapter: ['MomentDatetimeAdapter'],
     dialog: [
         'DialogService',
@@ -349,6 +353,11 @@ export const API_FILES = {
     switch: ['SwitchComponent'],
     stepInput: ['StepInputComponent'],
     slider: ['SliderComponent'],
+    splitter: [
+        'SplitterComponent',
+        'SplitterPaneContainerComponent',
+        'SplitterSplitPaneComponent'
+    ],
     token: ['TokenComponent', 'TokenizerComponent'],
     toolbar: [
         'ToolbarComponent',
@@ -383,4 +392,32 @@ export const API_FILES = {
         'ResizableCardLayoutComponent',
         'ResizableCardItemComponent'
     ],
+    verticalNavigation: [
+        'VerticalNavigationComponent',
+        'VerticalNavigationMainNavigationComponent',
+        'VerticalNavigationGroupHeaderDirective'
+    ],
+    uploadCollection: [
+        'UploadCollectionComponent',
+        'UploadCollectionButtonGroupComponent',
+        'UploadCollectionFormItemComponent',
+        'UploadCollectionItemDirective',
+        'UploadCollectionThumbnailDirective',
+        'UploadCollectionTitleDirective',
+        'UploadCollectionDescriptionDirective',
+        'UploadCollectionTextSeparatorDirective',
+        'UploadCollectionStatusGroupDirective',
+        'UploadCollectionTitleContainerDirective'
+    ],
+    timeline: [
+        'TimelineComponent',
+        'TimelineNodeDefDirective',
+        'TimelineNodeOutletDirective',
+        'TimelineNodeBodyComponent',
+        'TimelineNodeComponent',
+        'TimelineNodeHeaderInfoTitleDirective',
+        'TimelineNodeHeaderInfoTextDirective',
+        'TimelineNodeActionDirective',
+        'TimelineHeaderInfoSubTitleDirective',
+    ]
 };

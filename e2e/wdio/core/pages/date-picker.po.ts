@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed, waitForPresent} from '../../driver/wdio';
+import { getElementClass, waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class DatePickerPo extends CoreBaseComponentPo {
     private url = '/date-picker';
@@ -28,7 +28,7 @@ export class DatePickerPo extends CoreBaseComponentPo {
     currentMonthCalendarItem = '//td[not(contains(@class, \'fd-calendar__item--other-month\'))]';
     selectedTimeLine = '> div';
     selectedItem = '.is-active';
-    currentItem = '.fd-calendar__item--current ';
+    currentItem = 'td.fd-calendar__item--current ';
     itemText = ' .fd-calendar__text';
     buttonText = ' .fd-button__text'
     message = '.fd-form-message--';
@@ -45,6 +45,14 @@ export class DatePickerPo extends CoreBaseComponentPo {
         super.open(this.url);
         waitForElDisplayed(this.root);
         waitForPresent(this.title);
+    }
+
+    getCurrentDayIndex = (): number => {
+        for (let i = 0; i < this.currentMonthCalendarItem.length; i++) {
+            if (getElementClass(this.currentMonthCalendarItem, i).includes('current')) {
+                return i;
+            }
+        }
     }
 
     getScreenshotFolder(): object {

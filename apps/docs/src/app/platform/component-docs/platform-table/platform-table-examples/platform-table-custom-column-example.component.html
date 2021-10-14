@@ -1,6 +1,5 @@
 <fdp-table
        [dataSource]="source"
-       contentDensity="compact"
        emptyTableMessage="No data found"
        (rowSelectionChange)="onRowSelectionChange($event)">
 
@@ -27,7 +26,6 @@
                 name="description"
                 placeholder="Enter the description"
                 [(ngModel)]="item.description"
-                contentDensity="compact"
             >
             </fdp-input>
         </fdp-table-cell>

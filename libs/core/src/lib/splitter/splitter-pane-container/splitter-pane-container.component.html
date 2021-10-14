@@ -1,0 +1,56 @@
+<ng-container *ngIf="_isRootContainer; else panesOnCanvasTemplate">
+    <ng-container *ngIf="_defaultPane?.isOnCanvas && _activePanes.length > 1">
+        <ng-container
+            *ngTemplateOutlet="panesTemplate; context: { panes: [ _defaultPane ], showResizer: true }"
+        ></ng-container>
+    </ng-container>
+
+    <div class="fd-splitter__pane-container-wrapper" [style.flex-grow]="_activePanes.length - 1 || 1">
+        <div
+            class="fd-splitter__pane-container"
+            [class.fd-splitter__pane-container--horizontal]="!_isRootContainer && _isHorizontal"
+            [class.fd-splitter__pane-container--vertical]="_isRootContainer || _isVertical"
+            [class.fd-splitter__pane-container--root]="_isRootContainer"
+        >
+            <ng-container *ngTemplateOutlet="
+                panesTemplate;
+                context: { panes: _activePanes | noDefaultPane: _defaultPane?.isOnCanvas && _activePanes.length > 1 }
+            "></ng-container>
+        </div>
+
+        <fd-splitter-pagination
+            *ngIf="_pages.length"
+            [pages]="_pages"
+            [currentPage]="_currentPage"
+            (onPageChange)="_onPageChange($event)"
+        ></fd-splitter-pagination>
+    </div>
+</ng-container>
+
+<ng-template #panesOnCanvasTemplate>
+    <ng-container
+        *ngTemplateOutlet="panesTemplate; context: { panes: _panesOnCanvas }"
+    ></ng-container>
+</ng-template>
+
+<!-- IDE won't recognize types properly below -->
+
+<ng-template #panesTemplate let-panes="panes" let-showResizer="showResizer">
+    <ng-container *ngFor="let pane of panes; let last = last">
+        <section
+            [id]="pane.id"
+            class="fd-splitter__split-pane"
+            [style]="_getPaneStyles(pane)"
+        >
+            <ng-template [cdkPortalOutlet]="pane._content"></ng-template>
+        </section>
+
+        <fd-splitter-resizer
+            *ngIf="!last || showResizer"
+            [orientation]="orientation"
+            (startResize)="_startResize()"
+            (endResize)="_endResize()"
+            (resize)="_onResize(pane.id, $event)"
+        ></fd-splitter-resizer>
+    </ng-container>
+</ng-template>

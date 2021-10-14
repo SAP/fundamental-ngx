@@ -15,5 +15,5 @@ export const examples = [
     BusyIndicatorBasicExampleComponent,
     BusyIndicatorWrapperExampleComponent,
     BusyIndicatorLabelExampleComponent,
-    BusyIndicatorExtendedExampleComponent
+    BusyIndicatorExtendedExampleComponent,
 ];

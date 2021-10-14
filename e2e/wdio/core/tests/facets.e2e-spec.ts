@@ -48,7 +48,7 @@ describe('dynamic side content test suite', function () {
 
     function CheckRaitingIndicator(section: string): void {
         const lengthRI = getElementArrayLength(section + raitingIndicator)
-        for(let i = 1; i < lengthRI; i++){
+        for (let i = 1; i < lengthRI; i++){
         click(section + raitingIndicator, i)
         expect(getText(section + chosenRaitingStars)).toEqual(`(${i} of 5)`)
         }

@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { SliderCustomValue } from '@fundamental-ngx/platform';
+
+import { SliderCustomValue } from '@fundamental-ngx/platform/slider';
+
 @Component({
     selector: 'fdp-slider-custom-values-example',
     templateUrl: './slider-custom-values-example.component.html',

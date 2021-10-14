@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ActionChangeEvent } from '@fundamental-ngx/platform';
+import { ActionChangeEvent } from '@fundamental-ngx/platform/list';
 
 export interface Action {
     title: string;

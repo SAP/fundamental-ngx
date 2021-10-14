@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
 import { environment } from '../../../../environments/environment';
 import { Router } from '@angular/router';
 import { Libraries } from '../../utilities/libraries';
@@ -131,6 +131,6 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     private _getShellbarSize(): ShellbarSizes {
         const width = window.innerWidth;
-        return width < 599 ? 's' : 'm';
+        return width < 768 ? 's' : 'm';
     }
 }

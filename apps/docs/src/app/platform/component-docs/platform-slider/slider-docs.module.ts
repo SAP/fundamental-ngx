@@ -2,11 +2,11 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-import { FdpFormGroupModule, PlatformSliderModule } from '@fundamental-ngx/platform';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { PlatformSliderModule } from '@fundamental-ngx/platform/slider';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
-
 import { API_FILES } from '../../api-files';
 
 import { COMPONENTS } from './examples';

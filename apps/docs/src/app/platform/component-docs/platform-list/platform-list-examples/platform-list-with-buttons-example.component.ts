@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ModifyItemEvent } from '@fundamental-ngx/platform';
+
+import { ModifyItemEvent } from '@fundamental-ngx/platform/list';
 
 @Component({
     selector: 'fdp-platform-list-with-buttons-example',

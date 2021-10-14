@@ -1,0 +1,580 @@
+<!-- Toolbar -->
+<ng-container
+    *ngIf="tableToolbar"
+    [ngTemplateOutlet]="tableToolbar.contentTemplateRef"
+    [ngTemplateOutletContext]="_toolbarContext"
+></ng-container>
+
+<fd-busy-indicator
+    [loading]="loading"
+    block="true"
+>
+    <!-- Table Container -->
+    <div
+        #tableContainer
+        role="grid"
+        class="fdp-table__container"
+        [attr.aria-labelledby]="_tableToolbarTitleId"
+    >
+        <!-- Table header outlet -->
+        <ng-container [ngTemplateOutlet]="tableHeaderTemplate"></ng-container>
+
+        <!-- Table body outlet -->
+        <ng-container [ngTemplateOutlet]="tableBodyTemplate"></ng-container>
+
+        <!-- Table column resizer for visually representing the resizing process -->
+        <fdp-table-column-resizer [style.bottom.px]="_scrollBarWidth"></fdp-table-column-resizer>
+    </div>
+
+    <div #focusableMock tabindex="0" [style.display]="loading ? 'none' : 'block'"></div>
+</fd-busy-indicator>
+
+<!-- Table Header Template -->
+<ng-template #tableHeaderTemplate>
+    <div
+        class="fdp-table__header"
+        [style.padding-left.px]="_rtl ? _scrollBarWidth : 0"
+        [style.padding-right.px]="_rtl ? 0 : _scrollBarWidth"
+    >
+        <div
+            class="fd-table--fixed"
+            [ngStyle]="_getFixedTableStyles()"
+            fdpTableScroller="horizontal"
+        >
+            <table
+                fd-table
+                role="presentation"
+                class="fdp-table__header-table"
+            >
+                <thead
+                    fd-table-header
+                    role="rowgroup"
+                >
+                    <ng-container [ngTemplateOutlet]="tableHeaderRowTemplate"></ng-container>
+                </thead>
+            </table>
+        </div>
+
+        <div
+            class="fdp-table__header-scrollbar-mock"
+            [style.width.px]="_scrollBarWidth"
+        ></div>
+    </div>
+</ng-template>
+
+<!-- Table Header Columns -->
+<ng-template #tableHeaderRowTemplate>
+    <tr
+        fd-table-row
+        role="row"
+    >
+        <th
+            *ngIf="_isShownSelectionColumn"
+            fd-table-cell
+            role="columnheader"
+            class="fd-table__cell--fixed fdp-table__cell--selection"
+            aria-label="Select row"
+            i18n-aria-label="@@platformTableSelectRow"
+            [focusable]="true"
+            [fd-table-cell-selectable]="_firstCellNavigationId"
+            [class.fd-table__cell--checkbox]="selectionMode === SELECTION_MODE.MULTIPLE"
+            (keydown.enter)="_toggleAllSelectableRows()"
+            (keydown.space)="_toggleAllSelectableRows($event)"
+        >
+            <fd-checkbox
+                *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
+                labelClass="fd-table__checkbox-label"
+                [compact]="contentDensity !== CONTENT_DENSITY.COZY"
+                [ngModel]="_checkedAll"
+                aria-label="Toggle selection for all rows"
+                i18n-aria-label="@@platformTableSelectAllRows"
+                (ngModelChange)="_toggleAllSelectableRows()"
+            ></fd-checkbox>
+        </th>
+
+        <ng-container *ngFor="let column of _visibleColumns; let colIdx = index; trackBy: _columnTrackBy">
+            <th
+                fd-table-cell
+                role="columnheader"
+                [id]="id + '__' + column.name"
+                [focusable]="true"
+                [fd-table-cell-selectable]="_getCellNavigationId(0, colIdx)"
+                [fdp-table-cell-resizable]="_getColumnResizableSide(colIdx)"
+                [columnName]="column.name"
+                [attr.aria-colindex]="colIdx"
+                [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.name)"
+                [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
+                [ngStyle]="_getCellStyles(column)"
+                [fdPopoverTrigger]="columnHeaderPopover"
+                [class.fdp-table__item--clickable]="_isColumnHasHeaderMenu(column)"
+                [style.text-align]="column.align"
+                [fdPopoverTrigger]="columnHeaderPopover"
+            >
+                <div
+                    class="fd-table__text fd-table__text--no-wrap"
+                    [class.fd-table__inner]="_sortRulesMap.has(column.key)"
+                >
+                    <ng-container *ngTemplateOutlet="tableHeaderCellContentTemplate; context: { column: column }"></ng-container>
+
+                    <fd-icon
+                        *ngIf="_sortRulesMap.has(column.key)"
+                        fd-table-icon
+                        [glyph]="_sortRulesMap.get(column.key).direction === SORT_DIRECTION.ASC ? 'sort-ascending' : 'sort-descending'"
+                    ></fd-icon>
+                </div>
+
+                <!-- Header menu -->
+                <fd-popover
+                    #columnHeaderPopover
+                    [disabled]="!_isColumnHasHeaderMenu(column)"
+                    [noArrow]="true"
+                    fd-table-popover
+                >
+                    <ul
+                        fd-list
+                        [noBorder]="true"
+                        [compact]="true"
+                    >
+                        <!-- Sorting -->
+                        <ng-container *ngIf="column.sortable">
+                            <li
+                                class="fdp-table__item--clickable"
+                                fd-list-item
+                                (click)="_columnHeaderSortBy(column.key, SORT_DIRECTION.ASC)"
+                                (keyup.enter)="_columnHeaderSortBy(column.key, SORT_DIRECTION.ASC)"
+                            >
+                                <span
+                                    fd-list-icon
+                                    glyph="sort-ascending"
+                                ></span>
+                                <span
+                                    fd-list-title
+                                    i18n="@@platformTableHeaderMenuSortAsc"
+                                >Sort Ascending</span>
+                            </li>
+                            <li
+                                class="fdp-table__item--clickable"
+                                fd-list-item
+                                (click)="_columnHeaderSortBy(column.key, SORT_DIRECTION.DESC)"
+                                (keyup.enter)="_columnHeaderSortBy(column.key, SORT_DIRECTION.DESC)"
+                            >
+                                <span
+                                    fd-list-icon
+                                    glyph="sort-descending"
+                                ></span>
+                                <span
+                                    fd-list-title
+                                    i18n="@@platformTableHeaderMenuSortDesc"
+                                >Sort Descending</span>
+                            </li>
+                        </ng-container>
+
+                        <!-- Grouping -->
+                        <ng-container *ngIf="column.groupable">
+                            <li
+                                class="fdp-table__item--clickable"
+                                fd-list-item
+                                (click)="_columnHeaderGroupBy(column.key)"
+                                (keyup.enter)="_columnHeaderGroupBy(column.key)"
+                            >
+                                <span fd-list-icon></span>
+                                <span
+                                    fd-list-title
+                                    i18n="@@platformTableHeaderMenuGroup"
+                                >Group</span>
+                            </li>
+                        </ng-container>
+
+                        <!-- Freeze -->
+                        <ng-container *ngIf="column.freezable">
+                            <li
+                                *ngIf="!_freezableColumns?.includes(column.name)"
+                                class="fdp-table__item--clickable"
+                                fd-list-item
+                                (click)="freezeToColumn(column.name)"
+                                (keyup.enter)="freezeToColumn(column.name)"
+                            >
+                                <span></span>
+                                <span
+                                    fd-list-title
+                                    i18n="@@platformTableHeaderMenuFreeze"
+                                >Freeze</span>
+                            </li>
+                            <li
+                                *ngIf="_freezableColumns?.includes(column.name)"
+                                class="fdp-table__item--clickable"
+                                fd-list-item
+                                (click)="unfreeze(column.name)"
+                                (keyup.enter)="unfreeze(column.name)"
+                            >
+                                <span></span>
+                                <span
+                                    fd-list-title
+                                    i18n="@@platformTableHeaderMenuUnfreeze"
+                                >Unfreeze</span>
+                            </li>
+                        </ng-container>
+
+                        <!-- Filtering -->
+                        <ng-container *ngIf="column.filterable && !_isFilteringFromHeaderDisabled">
+                            <li fd-list-item>
+                                <i
+                                    fd-list-icon
+                                    glyph="filter"
+                                ></i>
+                                <div
+                                    fd-form-item
+                                    [horizontal]="true"
+                                    (click)="$event.stopPropagation()"
+                                >
+                                    <label
+                                        fd-form-label
+                                        [for]="'fdp-table-column-filtering-' + column.name"
+                                        i18n="@@platformTableHeaderMenuFilter"
+                                    >Filter</label>
+                                    <input
+                                        fd-form-control
+                                        [compact]="true"
+                                        [id]="'fdp-table-column-filtering-' + column.name"
+                                        (keyup.enter)="_columnHeaderFilterBy(column.key, $event.target.value)"
+                                    >
+                                </div>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </fd-popover>
+            </th>
+        </ng-container>
+
+        <th
+            *ngIf="_isShownNavigationColumn"
+            fd-table-cell
+            role="columnheader"
+        ></th>
+
+        <th class="fd-table__cell--mock"></th>
+    </tr>
+</ng-template>
+
+<!-- Column Header Cell Content Template  -->
+<ng-template
+    #tableHeaderCellContentTemplate
+    let-column="column"
+>
+    <ng-container
+        [ngIf]="column?.headerCellTemplate"
+        *ngTemplateOutlet="column.headerCellTemplate"
+    ></ng-container>
+
+    <ng-container
+        [ngIf]="!column?.headerCellTemplate"
+        *ngTemplateOutlet="defaultTableHeaderCellTemplate; context: {column: column}"
+    ></ng-container>
+</ng-template>
+
+<!-- Default Header Cell Content Template  -->
+<ng-template #defaultTableHeaderCellTemplate let-column="column">
+    <span class="fd-table__text fd-table__text--no-wrap">{{ column?.label }}</span>
+</ng-template>
+
+<!-- Table Body Template -->
+<ng-template #tableBodyTemplate>
+    <div
+        class="fdp-table__body"
+        fdpTableScrollable
+        #verticalScrollable="tableScrollable"
+        [style.height]="bodyHeight"
+        [class.fixed-height]="!!bodyHeight"
+    >
+        <div
+            *ngIf="_tableRowsVisible.length || loading; else emptyTableTemplate"
+            fdpTableScrollable
+            fdpTableScroller="horizontal"
+            class="fd-table--fixed"
+            [ngStyle]="_getFixedTableStyles()"
+        >
+            <table
+                fd-table
+                role="presentation"
+                class="fdp-table__body-table"
+            >
+                <tbody
+                    fd-table-body
+                    fd-dnd-list
+                    role="rowgroup"
+                    [noBorderX]="noBodyBorders"
+                    [noBorderY]="noBodyBorders"
+                    [items]="_tableRows"
+                    [draggable]="_rowsDraggable"
+                    [replaceMode]="true"
+                    (itemDropped)="_dragDropItemDrop($event)"
+                >
+                    <ng-container
+                        *ngFor="let row of _tableRowsVisible; let rowIdx = index; trackBy: _rowTrackBy"
+                        [ngSwitch]="row.type"
+                    >
+                        <ng-container
+                            *ngSwitchCase="'group'"
+                            [ngTemplateOutlet]="groupRowTemplate"
+                            [ngTemplateOutletContext]="{row: row, rows: _tableRowsVisible, rowIdx: rowIdx}"
+                        ></ng-container>
+
+                        <!-- Item Row Template -->
+                        <!-- Cannot be placed inside ng-template as it won't be visible for Drag&Drop directive through ContentChildren -->
+                        <tr
+                            *ngSwitchDefault
+                            fd-table-row
+                            fd-dnd-item
+                            role="row"
+                            [class]="_getRowClasses(row)"
+                            [tabindex]="rowsActivable || !!row.navigatable ? 0 : -1"
+                            [hoverable]="_isShownSelectionColumn || !!row.navigatable"
+                            [activable]="rowsActivable || !!row.navigatable"
+                            [navigatable]="row.navigatable || rowsActivable"
+                            [attr.aria-selected]="row.checked"
+                            [attr.aria-rowindex]="rowIdx"
+                            (click)="_onRowClick(row)"
+                            (keydown.enter)="_onRowClick(row)"
+                            (keydown.space)="_onRowClick(row, $event)"
+                            (started)="_dragDropStart()"
+                        >
+                            <td
+                                *ngIf="semanticHighlighting"
+                                class="fd-table__cell--fixed"
+                                fd-table-cell
+                                fd-table-status-indicator
+                                [status]="row.value[semanticHighlighting]"
+                            ></td>
+
+                            <!-- Row Selection Cell -->
+                            <ng-container [ngSwitch]="selectionMode">
+                                <ng-container *ngSwitchCase="SELECTION_MODE.SINGLE">
+                                    <td
+                                        class="fd-table__cell--fixed fd-table__cell--checkbox"
+                                        tabindex="0"
+                                        role="rowheader"
+                                        fd-table-cell
+                                        fd-table-cell-selectable
+                                        [style]="_getSelectionCellStyles()"
+                                        [focusable]="true"
+                                        [attr.aria-selected]="row.checked"
+                                        (click)="_toggleSelectableRow(row)"
+                                        (keydown.enter)="_toggleSelectableRow(row)"
+                                        (keydown.space)="_toggleSelectableRow(row)"
+                                    ></td>
+                                </ng-container>
+
+                                <ng-container *ngSwitchCase="SELECTION_MODE.MULTIPLE">
+                                    <td
+                                        class="fd-table__cell--fixed fd-table__cell--checkbox"
+                                        role="gridcell"
+                                        fd-table-cell
+                                        [style]="_getSelectionCellStyles()"
+                                        [focusable]="true"
+                                        [class.fd-table__cell--checkbox]="selectionMode === SELECTION_MODE.MULTIPLE"
+                                        (click)="_toggleSelectableRow(row)"
+                                        (keydown.enter)="_toggleSelectableRow(row)"
+                                        (keydown.space)="_toggleSelectableRow(row, $event)"
+                                    >
+                                        <fd-checkbox
+                                            [compact]="contentDensity !== CONTENT_DENSITY.COZY"
+                                            labelClass="fd-table__checkbox-label"
+                                            [ngModel]="row.checked"
+                                            (ngModelChange)="_toggleSelectableRow(row)"
+                                        ></fd-checkbox>
+                                    </td>
+                                </ng-container>
+                            </ng-container>
+
+                            <td
+                                *ngFor="let column of _visibleColumns; let colIdx = index"
+                                fd-table-cell
+                                role="gridcell"
+                                [focusable]="true"
+                                [fd-table-cell-selectable]="_getCellNavigationId(rowIdx + 1, colIdx)"
+                                [headers]="id + '__' + column.name"
+                                [fdp-table-cell-resizable]="_getColumnResizableSide(colIdx)"
+                                [columnName]="column.name"
+                                [style.textAlign]="column.align"
+                                [class.fd-table__cell--fixed]="_freezableColumns?.includes(column.name)"
+                                [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
+                                [class.fd-table__cell--expand]="_isTreeRowFirstCell(colIdx, row)"
+                                [ngStyle]="_getCellStyles(column)"
+                                [attr.aria-expanded]="_isTreeRow(row) ? row.expanded : null"
+                                [attr.data-nesting-level]="colIdx === 0 ? (row.level + 1) : null"
+                                [tabindex]="_isTreeRowFirstCell(colIdx, row) ? 0 : -1"
+                                [focusable]="_isTreeRowFirstCell(colIdx, row)"
+                                (click)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row)"
+                                (keydown.enter)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row)"
+                                (keydown.space)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row, $event)"
+                            >
+                                <div class="fd-table__text fd-table__text--no-wrap">
+                                    <span
+                                        *ngIf="_isTreeRowFirstCell(colIdx, row)"
+                                        class="fd-table__expand"
+                                        [class.fd-table__expand--open]="row.expanded"
+                                        aria-hidden="true"></span>
+
+                                    <ng-container *ngIf="column?.columnCellTemplate; else defaultTableCellTemplate">
+                                        <ng-container *ngTemplateOutlet="column.columnCellTemplate; context:{$implicit: row.value}"></ng-container>
+                                    </ng-container>
+
+                                    <ng-template #defaultTableCellTemplate>{{row?.value | valueByPath: column.key}}</ng-template>
+                                </div>
+                            </td>
+
+                            <td *ngIf="_isShownNavigationColumn" fd-table-cell>
+                                <i
+                                    *ngIf="row.navigatable"
+                                    fd-table-icon
+                                    [navigation]="true"
+                                    [class]="_rtl ? 'sap-icon--slim-arrow-left' : 'sap-icon--slim-arrow-right'"
+                                    class="fdp-table__navigation-indicator"
+                                ></i>
+                            </td>
+
+                            <td class="fd-table__cell--mock"></td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Table Body horizontal scroll area -->
+    <div
+        fdpTableScrollable
+        fdpTableScroller="horizontal"
+        class="fdp-table__body-hs"
+        [class.fdp-table__body-hs--empty]="_scrollBarWidth === 0"
+    >
+        <div class="fdp-table__body-hs-spacer">
+            <table
+                *ngIf="_tableRowsVisible.length"
+                fd-table
+                role="presentation"
+                class="fdp-table__body-hs-table"
+            >
+                <tbody fd-table-body>
+                    <tr fd-table-row role="row">
+                        <th
+                            *ngIf="semanticHighlighting"
+                            fd-table-cell
+                            fd-table-status-indicator
+                        ></th>
+
+                        <td
+                            *ngIf="_isShownSelectionColumn"
+                            fd-table-cell
+                            role="gridcell"
+                            class="fd-table__cell--checkbox"
+                            [style.min-width.px]="_selectionColumnWidth"
+                        ></td>
+
+                        <td
+                            *ngFor="let column of _visibleColumns"
+                            [ngStyle]="_getCellStyles(column)"
+                            fd-table-cell
+                            role="gridcell"
+                        ></td>
+
+                        <td
+                            *ngIf="_isShownNavigationColumn"
+                            fd-table-cell
+                        >
+                            <i
+                                fd-table-icon
+                                [navigation]="true"
+                                class="fdp-table__navigation-indicator sap-icon--slim-arrow-left"
+                            ></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</ng-template>
+
+<!-- Group row Template -->
+<ng-template
+    #groupRowTemplate
+    let-row="row"
+    let-rowIdx="rowIdx"
+>
+    <tr
+        role="row"
+        fd-table-row
+        [attr.aria-rowindex]="rowIdx"
+        (click)="_emitRowActivate(row)"
+    >
+        <td
+            fd-table-cell
+            role="gridcell"
+            [focusable]="true"
+            [fd-table-cell-selectable]="_getCellNavigationId(rowIdx + 1, 0, true)"
+            class="fd-table__cell--group fd-table__cell--fixed fd-table__cell--expand"
+            [attr.colspan]="_tableColumnsLength"
+            [attr.aria-expanded]="row.expanded"
+            [attr.data-nesting-level]="row.level + 1"
+            (click)="_toggleGroupRow(row)"
+            (keydown.enter)="_toggleGroupRow(row)"
+            (keydown.space)="_toggleGroupRow(row, $event)"
+        >
+            <span
+                class="fd-table__expand"
+                [class.fd-table__expand--open]="row.expanded"
+                aria-hidden="true"></span>
+
+            <!-- Group row template when no nested groups -->
+            <ng-container *ngIf="_groupRulesMap.size == 1">
+                <div class="fd-table__text fd-table__text--no-wrap">
+                    {{ row.value?.value }} - {{ row.value?.count }}
+                </div>
+            </ng-container>
+
+            <!-- Group row template when there are nested groups -->
+            <ng-container *ngIf="_groupRulesMap.size != 1">
+                <div class="fd-table__text fd-table__text--no-wrap">
+                    <ng-container
+                        *ngTemplateOutlet="tableHeaderCellContentTemplate; context: {column: _keyToColumnMap.get(row.value?.field)}"
+                    ></ng-container>: {{ row.value?.value }}
+                </div>
+            </ng-container>
+        </td>
+    </tr>
+</ng-template>
+
+<!-- Empty Table Message -->
+<ng-template #emptyTableTemplate>
+    <table fd-table class="fdp-table__empty">
+        <tbody
+            fd-table-body
+            role="rowgroup"
+        >
+            <tr
+                fd-table-row
+                role="row"
+            >
+                <td
+                    fd-table-cell
+                    role="gridcell"
+                    class="fd-table__cell--no-data"
+                    [attr.colspan]="_tableColumnsLength"
+                >
+                    <div class="fdp-table__empty-table-message">
+                        <ng-container>
+                            <div #noDataWrapper>
+                                <ng-content select="fdp-table-no-data-wrapper"></ng-content>
+                            </div>
+                            <div
+                                *ngIf="!noDataWrapper.hasChildNodes()"
+                                i18n="@@platformTableEmptyMessage"
+                                [innerText]="emptyTableMessage"
+                            ></div>
+                        </ng-container>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</ng-template>

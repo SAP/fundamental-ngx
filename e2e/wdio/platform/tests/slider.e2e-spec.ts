@@ -5,7 +5,6 @@ import {
     click,
     clickAndMoveElement,
     doesItExist,
-    elementDisplayed,
     getAttributeByName,
     getElementArrayLength, getElementClass,
     getText,
@@ -15,7 +14,7 @@ import {
     sendKeys,
     waitForElDisplayed
 } from '../../driver/wdio';
-import { densityAttribute, disabledAttribute, tickAttribute, tickLabelAttribute } from '../fixtures/appData/slider-content'
+import { densityAttribute, disabledAttribute} from '../fixtures/appData/slider-content'
 
 describe('slider test suite', function() {
     const sliderPage = new SliderPo();
@@ -64,6 +63,7 @@ describe('slider test suite', function() {
         });
 
         it('should check tooltip with input', () => {
+            click(tooltipExamples + sliderHandles, 1);
             mouseHoverElement(tooltipExamples + sliderHandles, 1);
             waitForElDisplayed(sliderTooltipInput);
             clearTooltipInput();

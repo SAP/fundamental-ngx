@@ -1,11 +1,10 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { NgModuleRef, ApplicationRef } from '@angular/core';
+import { createNewHosts } from '@angularclass/hmr';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-
-import { NgModuleRef, ApplicationRef } from '@angular/core';
-import { createNewHosts } from '@angularclass/hmr';
 
 if (environment.production) {
     enableProdMode();

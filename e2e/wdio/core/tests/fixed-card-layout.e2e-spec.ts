@@ -70,12 +70,12 @@ describe('Fixed card layout test suite', function() {
 
         it('should check drag and drop cards swap locations', () => {
             const originalFirstCardText = getText(cardDivArr);
-            const originalSwapCardText = getText(cardDivArr, 4);
+            const originalSwapCardText = getText(cardDivArr, 1);
 
             scrollIntoView(cardDivArr);
-            checkDragAndDrop(cardContentArr, cardDivArr, cardContentArr, 4);
+            checkDragAndDrop(cardContentArr, cardDivArr, cardContentArr, 1);
             const newFirstCardText = getText(cardDivArr);
-            const newSwapCardText = getText(cardDivArr, 4);
+            const newSwapCardText = getText(cardDivArr, 1);
             expect(newFirstCardText).not.toBe(originalFirstCardText);
             expect(newSwapCardText).not.toBe(originalSwapCardText);
         });
@@ -100,7 +100,7 @@ describe('Fixed card layout test suite', function() {
                 'actions': [
                     { 'type': 'pointerMove', 'duration': 0, 'x': clickXLocation, 'y': clickYLocation },
                     { 'type': 'pointerDown', 'button': 0 },
-                    { 'type': 'pause', 'duration': 600 },
+                    { 'type': 'pause', 'duration': 1000 },
                     { 'type': 'pointerMove', 'duration': 600, 'x': startXLocation, 'y': startYLocation },
                     { 'type': 'pointerMove', 'duration': 1000, 'x': endXLocation + 30, 'y': endYLocation + 30 }
                 ]
@@ -167,10 +167,10 @@ describe('Fixed card layout test suite', function() {
             'id': 'pointer1',
             'parameters': { 'pointerType': 'mouse' },
             'actions': [
-                { 'type': 'pointerMove', 'duration': 200, 'x': clickXLocation, 'y': clickYLocation },
+                { 'type': 'pointerMove', 'duration': 200, 'x': clickXLocation + 2, 'y': clickYLocation + 2 },
                 { 'type': 'pointerDown', 'button': 0 },
-                { 'type': 'pause', 'duration': 600 },
-                { 'type': 'pointerMove', 'duration': 600, 'x': startXLocation, 'y': startYLocation },
+                { 'type': 'pause', 'duration': 1000 },
+                { 'type': 'pointerMove', 'duration': 600, 'x': startXLocation + 2, 'y': startYLocation + 2 },
                 { 'type': 'pointerMove', 'duration': 1000, 'x': endXLocation + 40, 'y': endYLocation + 40 },
                 { 'type': 'pointerUp', 'button': 0 }
             ]

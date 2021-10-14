@@ -1,7 +1,7 @@
 import { ComponentFixture, inject, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
-import { FormMessageModule } from '@fundamental-ngx/core';
+import { FormMessageModule } from '@fundamental-ngx/core/form';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CalendarModule, DateRange } from '@fundamental-ngx/core/calendar';
 import { DatePickerComponent } from '@fundamental-ngx/core/date-picker';

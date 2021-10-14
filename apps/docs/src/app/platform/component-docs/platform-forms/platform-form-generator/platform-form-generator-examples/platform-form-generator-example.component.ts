@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
 
-import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform';
+import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 
 export const dummyAwaitablePromise = (timeout = 200) => {
     return new Promise<boolean>((resolve) => {
@@ -43,6 +43,7 @@ export class PlatformFormGeneratorExampleComponent {
             name: 'name',
             message: 'Your name',
             default: 'John',
+            placeholder: 'Please provide your name',
             guiOptions: {
                 hint: 'Some contextual hint',
                 column: 1

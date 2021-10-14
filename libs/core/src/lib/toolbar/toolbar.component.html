@@ -1,11 +1,12 @@
 <div #toolbar>
     <ng-content></ng-content>
-    <span #overflowSpacer class="fd-toolbar__overflow-spacer"></span>
     <ng-container *ngIf="shouldOverflow">
+        <span #overflowSpacer class="fd-toolbar__spacer"></span>
+        <span class="fd-toolbar__separator"></span>
         <fd-popover
                 placement="bottom-end"
                 [noArrow]="true"
-                class="fd-popover fd-toolbar__overflow">
+                class="fd-popover">
             <fd-popover-control>
                 <button
                     *ngIf="overflowVisibility | async"
@@ -19,7 +20,7 @@
                 ></button>
             </fd-popover-control>
             <fd-popover-body>
-                <div class="fd-toolbar__overflow__body" #overflowBody></div>
+                <div class="fd-toolbar__overflow" #overflowBody></div>
             </fd-popover-body>
         </fd-popover>
     </ng-container>

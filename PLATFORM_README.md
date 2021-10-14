@@ -9,11 +9,11 @@
 
 ## Description
 
-The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to enhance existing functionality and
-to provide a higher abstraction for the components by hiding most of the internal implementation details. The goal is
+The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to enhance existing functionality and 
+to provide a higher abstraction for the components by hiding most of the internal implementation details. The goal is 
 to create a layer which is closer to application development and not to the library creators.
 
-Since there is a plan to generate UI programatically then components must be instantiable (they cannot be directives).
+Since there is a plan to generate UI programatically then components must be instantiable (they cannot be directives).
 
 ## Design
 
@@ -28,27 +28,27 @@ As already mentioned above platform the goal is try to be closer to application 
 enterprise use.
 
 -   Defining component model and how we work with data
--   Pre-defined layouts (Dashboard, detail page, main/detail page, Search/result page).
+-   Pre-defined layouts (Dashboard, detail page, main/detail page, Search/result page).
 
 This `Platform UI library` is not going to be only about UI but it needs to also capture other aspects:
 
--   Application state UI
--   Bootstrapping and Configuration
--   Communication with the backend system.
+-   Application state UI
+-   Bootstrapping and Configuration
+-   Communication with the backend system.
 
 ### Example:
 
-This example captures several things:
+This example captures several things:
 
-a). How we abstract form assembly that me as developer I dont deal with layouting of elements for labels, controls, hints, etc..
+a). How we abstract from assembly that me as developer I don't deal with layouting of elements for labels, contrals, hints, etc..
 
-b). Assembly like this gives pretty big space in terms of different layouts that we want to support in the application (1 colum, 2 colums)
+b). Assembly like this gives pretty big space in terms of different layouts that we want to support in the application (1 column, 2 columns)
 
-c). If we need to group information into sections
+c). If we need to group information into sections
 
-d). How we are handling and forms errors
+d). How we are handling and forms errors
 
-e). Dropdown usage. Everything is happening inside the component that manages the iteration of the items we just pass list of values.
+e). Dropdown wsage. Everything is heppening inside the component that manages the iteration of the items we just pass list of values.
 
 ```html
 <fdp-form-group
@@ -65,9 +65,9 @@ e). Dropdown usage. Everything is happening inside the component that 
 
     <fdp-form-field
         reqiuire="true"
-        label="My Favorite Colors"
+        label="My Favorite Colors"
         id="colors"
-        hint="Pick one of your favorite color"
+        hint="Pick one of your favorite color"
         zone="right"
     >
         <fdp-select [list]="myColors"></fdp-select>
@@ -81,15 +81,15 @@ e). Dropdown usage. Everything is happening inside the component that 
 
 ```html
 <fdp-form-group [isFiveZoneLayout]="true" labelLayout="floating" [formGroup]="fg" [errorHanlding]="'navigate'">
-    <fdp-form-section title="Basic Information">
+    <fdp-form-section title="Basic Information">
         <fdp-form-field label="email" id="email" zone="left">
             <fdp-input type="email" placeholder="email" [required]="true"></fdp-input>
         </fdp-form-field>
         <fdp-form-field
             reqiuire="true"
-            label="My Favorite Colors"
+            label="My Favorite Colors"
             id="colors"
-            hint="Pick one of your favorite color"
+            hint="Pick one of your favorite color"
             zone="right"
         >
             <fdp-select [list]="myColors"></fdp-select>
@@ -147,6 +147,13 @@ For an existing Angular CLI application,
     ```
 
     Note: Be careful while importing the entire `FundamentalNgxPlatformModule` as it loads all modules; we recommend to only import relevant modules as needed.
+
+
+    Version 0.32.0 brings new way of importing individual modules, which is prefered way.
+
+    ```typescript
+    import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
+    ```
 
     For models prior to 0.11.1 use `fundamental-ngx`
 

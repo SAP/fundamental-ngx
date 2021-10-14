@@ -5,6 +5,7 @@ export const allMarkedTrue = 'Form value: { \"acceptAll\": true, \"agreements\":
 export const allMarkedFalse = 'Form value: { \"acceptAll\": false, \"agreements\": { \"marketing\": false, \"newsletter\": false, \"termsAndConditions\": false } }';
 export const acceptAllTrue = '\"acceptAll\": true';
 export const customLabel = 'I accept Terms and conditions';
+export const altCustomLabel = 'I accept Terms and conditions';
 export const stateClassesArr = [
     'fd-checkbox ng-untouched',
     'fd-checkbox is-information',

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
-import { PanelConfig, PlatformConfig } from '@fundamental-ngx/platform';
+import { PlatformConfig } from '@fundamental-ngx/platform/shared';
+import { PanelConfig } from '@fundamental-ngx/platform/panel';
 
 export const panelConfigFactory = PanelConfig.createProviderFactory({
     collapseLabel: 'New Default Collapse Label',

@@ -1,5 +1,6 @@
 import { of, Observable } from 'rxjs';
-import { DataProvider } from '@fundamental-ngx/platform';
+
+import { DataProvider } from '@fundamental-ngx/platform/shared';
 
 const DATA = [
     {

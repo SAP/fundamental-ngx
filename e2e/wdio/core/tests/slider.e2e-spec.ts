@@ -8,8 +8,7 @@ import {
     elementDisplayed,
     getAttributeByName,
     getElementArrayLength,
-    getText, isElementClickable, isEnabled,
-    mouseHoverElement, refreshPage,
+    getText, mouseHoverElement, refreshPage,
     scrollIntoView,
     sendKeys,
     waitForElDisplayed
@@ -67,6 +66,7 @@ describe('slider test suite', function() {
         });
 
         it('should check tooltip with input', () => {
+            click(tooltipExamples + sliderHandles, 1);
             mouseHoverElement(tooltipExamples + sliderHandles, 1);
             waitForElDisplayed(sliderTooltipInput);
             clearTooltipInput();

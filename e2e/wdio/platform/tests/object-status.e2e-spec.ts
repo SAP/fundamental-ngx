@@ -15,7 +15,7 @@ import {
     semanticStatusText,
     invertedAttribute
 } from '../fixtures/appData/object-status-contents';
-import { checkAttributeValueTrue, checkElementDisplayed, checkElementTextValue } from '../../helper/assertion-helper';
+import { checkElementDisplayed, checkElementTextValue } from '../../helper/assertion-helper';
 
 describe('object status test suite', function() {
     const objectStatusPage = new ObjectStatusPo();

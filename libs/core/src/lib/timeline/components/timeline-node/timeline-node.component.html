@@ -1,0 +1,10 @@
+<div class="fd-timeline__node-container">
+    <div *ngIf="!glyph" class="fd-timeline__connecting-line"></div>
+    <div class="fd-timeline__node" [class.fd-timeline__node--icon]="!!glyph">
+        <fd-icon *ngIf="glyph" [glyph]="glyph"></fd-icon>
+    </div>
+    <div class="fd-timeline__connecting-line"></div>
+</div>
+<div tabindex="0" role="timelineitem" [attr.aria-label]="ariaLabel" class="fd-timeline__post fd-timeline__post--left">
+    <ng-content></ng-content>
+</div>

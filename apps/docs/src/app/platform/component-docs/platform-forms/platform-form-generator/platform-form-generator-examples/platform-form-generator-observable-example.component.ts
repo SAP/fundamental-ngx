@@ -3,8 +3,8 @@ import { Validators } from '@angular/forms';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform';
 import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 
 export const dummyAwaitablePromise = (timeout = 200) => {
     return new Promise<boolean>((resolve) => {
@@ -45,6 +45,7 @@ export class PlatformFormGeneratorObservableExampleComponent {
             name: 'name2',
             message: 'Your name',
             default: 'John',
+            placeholder: () => of('Please provide your name').pipe(delay(400)),
             guiOptions: {
                 hint: 'Some contextual hint',
                 column: 1

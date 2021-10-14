@@ -1,8 +1,8 @@
 import { Component, Renderer2, ElementRef, AfterViewInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { ListDataSource, DataProvider, SelectionChangeEvent } from '@fundamental-ngx/platform';
-
+import { ListDataSource, DataProvider } from '@fundamental-ngx/platform/shared';
+import { SelectionChangeEvent } from '@fundamental-ngx/platform/list';
 
 const LIST_ELEMENTS: Address[] = [
     { id: '1', name: 'Name1' },
@@ -48,5 +48,4 @@ export class PlatformListWithSingleSelectionExampleComponent implements AfterVie
             this._selectedItem = event.selectedItems[0].id;
         }
     }
-
 }

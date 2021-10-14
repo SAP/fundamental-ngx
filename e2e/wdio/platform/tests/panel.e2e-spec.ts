@@ -9,10 +9,9 @@ import {
     getCSSPropertyByName,
     getElementSize,
     getText,
-    pause, refreshPage,
+    refreshPage,
     waitForClickable,
     waitForElDisplayed,
-    waitForNotDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 

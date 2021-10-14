@@ -14,7 +14,8 @@ export class TemplateBasedDialogExampleComponent {
         const dialogRef = this._dialogService.open(dialog, {
             responsivePadding: true,
             ariaLabelledBy: 'fd-dialog-header-10',
-            ariaDescribedBy: 'fd-dialog-body-10'
+            ariaDescribedBy: 'fd-dialog-body-10',
+            focusTrapped: true
         });
 
         dialogRef.afterClosed.subscribe(

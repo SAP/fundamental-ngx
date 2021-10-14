@@ -42,23 +42,18 @@
               "apps/docs/src/fd-typedoc/assets/css/main.scss",
               "apps/docs/src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/marked/lib/marked.js"
-            ],
+            "scripts": ["node_modules/marked/lib/marked.js"],
             "showCircularDependencies": false,
-            "allowedCommonJsDependencies": [
-              "moment",
-              "highlight.js",
-              "focus-trap",
-              "@angularclass/hmr"
-            ]
+            "allowedCommonJsDependencies": ["moment", "highlight.js", "focus-trap", "@angularclass/hmr"]
           },
           "configurations": {
             "production": {
-              "fileReplacements": [{
-                "replace": "apps/docs/src/environments/environment.ts",
-                "with": "apps/docs/src/environments/environment.prod.ts"
-              }],
+              "fileReplacements": [
+                {
+                  "replace": "apps/docs/src/environments/environment.ts",
+                  "with": "apps/docs/src/environments/environment.prod.ts"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -67,18 +62,22 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "budgets": [{
-                "type": "initial",
-                "maximumWarning": "2mb",
-                "maximumError": "5mb"
-              }]
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
             },
             "production-unoptimized": {
               "tsConfig": "apps/docs/tsconfig.netlify.json",
-              "fileReplacements": [{
-                "replace": "apps/docs/src/environments/environment.ts",
-                "with": "apps/docs/src/environments/environment.prod.ts"
-              }],
+              "fileReplacements": [
+                {
+                  "replace": "apps/docs/src/environments/environment.ts",
+                  "with": "apps/docs/src/environments/environment.prod.ts"
+                }
+              ],
               "aot": true,
               "sourceMap": false,
               "namedChunks": false,
@@ -86,10 +85,12 @@
               "optimization": false
             },
             "hmr": {
-              "budgets": [{
-                "type": "anyComponentStyle",
-                "maximumWarning": "6kb"
-              }],
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -98,10 +99,12 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "fileReplacements": [{
-                "replace": "apps/docs/src/environments/environment.ts",
-                "with": "apps/docs/src/environments/environment.prod.ts"
-              }]
+              "fileReplacements": [
+                {
+                  "replace": "apps/docs/src/environments/environment.ts",
+                  "with": "apps/docs/src/environments/environment.prod.ts"
+                }
+              ]
             },
             "fr": {
               "aot": true,
@@ -120,9 +123,7 @@
               "i18nMissingTranslation": "error"
             }
           },
-          "outputs": [
-            "{options.outputPath}"
-          ]
+          "outputs": ["{options.outputPath}"]
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -153,13 +154,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/docs/tsconfig.app.json",
-              "apps/docs/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "!apps/docs/**"
-            ]
+            "tsConfig": ["apps/docs/tsconfig.app.json", "apps/docs/tsconfig.spec.json"],
+            "exclude": ["!apps/docs/**"]
           }
         },
         "test": {
@@ -174,14 +170,9 @@
               "apps/docs/src/styles.scss"
             ],
             "scripts": [],
-            "assets": [
-              "apps/docs/src/favicon.ico",
-              "apps/docs/src/assets"
-            ]
+            "assets": ["apps/docs/src/favicon.ico", "apps/docs/src/assets"]
           },
-          "outputs": [
-            "coverage/apps/docs/"
-          ]
+          "outputs": ["coverage/apps/docs/"]
         }
       }
     },
@@ -206,59 +197,8 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/docs-e2e/tsconfig.e2e.json",
-            "exclude": [
-              "!apps/docs-e2e/**"
-            ]
+            "exclude": ["!apps/docs-e2e/**"]
           }
-        }
-      }
-    },
-    "platform": {
-      "root": "libs/platform",
-      "sourceRoot": "libs/platform/src",
-      "projectType": "library",
-      "prefix": "fdp",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/angular:package",
-          "options": {
-            "tsConfig": "libs/platform/tsconfig.lib.json",
-            "project": "libs/platform/ng-package.json",
-            "updateBuildableProjectDepsInPackageJson": false
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "libs/platform/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "libs/platform/tsconfig.lib.json",
-              "libs/platform/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "!libs/platform/**"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "libs/platform/src/test.ts",
-            "tsConfig": "libs/platform/tsconfig.spec.json",
-            "karmaConfig": "libs/platform/karma.conf.js"
-          },
-          "outputs": [
-            "coverage/libs/platform"
-          ]
-        }
-      },
-      "schematics": {
-        "@nrwl/schematics:component": {
-          "styleext": "scss"
         }
       }
     },
@@ -284,13 +224,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/moment-adapter/tsconfig.lib.json",
-              "libs/moment-adapter/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "!libs/moment-adapter/**"
-            ]
+            "tsConfig": ["libs/moment-adapter/tsconfig.lib.json", "libs/moment-adapter/tsconfig.spec.json"],
+            "exclude": ["!libs/moment-adapter/**"]
           }
         },
         "test": {
@@ -300,9 +235,7 @@
             "tsConfig": "libs/moment-adapter/tsconfig.spec.json",
             "karmaConfig": "libs/moment-adapter/karma.conf.js"
           },
-          "outputs": [
-            "coverage/libs/moment-adapter"
-          ]
+          "outputs": ["coverage/libs/moment-adapter"]
         }
       },
       "schematics": {
@@ -319,9 +252,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core"
-          ],
+          "outputs": ["dist/libs/core"],
           "options": {
             "tsConfig": "libs/core/src/lib/tsconfig.lib.json",
             "project": "libs/core/src/lib/ng-package.json",
@@ -344,13 +275,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/core/src/lib/tsconfig.lib.json",
-              "libs/core/src/lib/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["libs/core/src/lib/tsconfig.lib.json", "libs/core/src/lib/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -363,9 +289,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/breadcrumb"
-          ],
+          "outputs": ["dist/libs/core/breadcrumb"],
           "options": {
             "tsConfig": "libs/core/src/lib/breadcrumb/tsconfig.lib.json",
             "project": "libs/core/src/lib/breadcrumb/ng-package.json",
@@ -392,9 +316,7 @@
               "libs/core/src/lib/breadcrumb/tsconfig.lib.json",
               "libs/core/src/lib/breadcrumb/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -407,9 +329,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/message-page"
-          ],
+          "outputs": ["dist/libs/core/message-page"],
           "options": {
             "tsConfig": "libs/core/src/lib/message-page/tsconfig.lib.json",
             "project": "libs/core/src/lib/message-page/ng-package.json",
@@ -436,9 +356,7 @@
               "libs/core/src/lib/message-page/tsconfig.lib.json",
               "libs/core/src/lib/message-page/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -451,9 +369,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/nested-list"
-          ],
+          "outputs": ["dist/libs/core/nested-list"],
           "options": {
             "tsConfig": "libs/core/src/lib/nested-list/tsconfig.lib.json",
             "project": "libs/core/src/lib/nested-list/ng-package.json",
@@ -480,9 +396,7 @@
               "libs/core/src/lib/nested-list/tsconfig.lib.json",
               "libs/core/src/lib/nested-list/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -495,9 +409,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/mobile-mode"
-          ],
+          "outputs": ["dist/libs/core/mobile-mode"],
           "options": {
             "tsConfig": "libs/core/src/lib/mobile-mode/tsconfig.lib.json",
             "project": "libs/core/src/lib/mobile-mode/ng-package.json",
@@ -524,9 +436,7 @@
               "libs/core/src/lib/mobile-mode/tsconfig.lib.json",
               "libs/core/src/lib/mobile-mode/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -539,9 +449,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/tests"
-          ],
+          "outputs": ["dist/libs/core/tests"],
           "options": {
             "tsConfig": "libs/core/src/lib/tests/tsconfig.lib.json",
             "project": "libs/core/src/lib/tests/ng-package.json",
@@ -568,9 +476,7 @@
               "libs/core/src/lib/tests/tsconfig.lib.json",
               "libs/core/src/lib/tests/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -583,9 +489,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/icon"
-          ],
+          "outputs": ["dist/libs/core/icon"],
           "options": {
             "tsConfig": "libs/core/src/lib/icon/tsconfig.lib.json",
             "project": "libs/core/src/lib/icon/ng-package.json",
@@ -612,9 +516,7 @@
               "libs/core/src/lib/icon/tsconfig.lib.json",
               "libs/core/src/lib/icon/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -627,9 +529,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/button"
-          ],
+          "outputs": ["dist/libs/core/button"],
           "options": {
             "tsConfig": "libs/core/src/lib/button/tsconfig.lib.json",
             "project": "libs/core/src/lib/button/ng-package.json",
@@ -656,9 +556,7 @@
               "libs/core/src/lib/button/tsconfig.lib.json",
               "libs/core/src/lib/button/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -671,9 +569,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/checkbox"
-          ],
+          "outputs": ["dist/libs/core/checkbox"],
           "options": {
             "tsConfig": "libs/core/src/lib/checkbox/tsconfig.lib.json",
             "project": "libs/core/src/lib/checkbox/ng-package.json",
@@ -700,9 +596,7 @@
               "libs/core/src/lib/checkbox/tsconfig.lib.json",
               "libs/core/src/lib/checkbox/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -715,9 +609,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/dialog"
-          ],
+          "outputs": ["dist/libs/core/dialog"],
           "options": {
             "tsConfig": "libs/core/src/lib/dialog/tsconfig.lib.json",
             "project": "libs/core/src/lib/dialog/ng-package.json",
@@ -744,9 +636,7 @@
               "libs/core/src/lib/dialog/tsconfig.lib.json",
               "libs/core/src/lib/dialog/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -759,9 +649,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/action-bar"
-          ],
+          "outputs": ["dist/libs/core/action-bar"],
           "options": {
             "tsConfig": "libs/core/src/lib/action-bar/tsconfig.lib.json",
             "project": "libs/core/src/lib/action-bar/ng-package.json",
@@ -788,9 +676,7 @@
               "libs/core/src/lib/action-bar/tsconfig.lib.json",
               "libs/core/src/lib/action-bar/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -803,9 +689,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/action-sheet"
-          ],
+          "outputs": ["dist/libs/core/action-sheet"],
           "options": {
             "tsConfig": "libs/core/src/lib/action-sheet/tsconfig.lib.json",
             "project": "libs/core/src/lib/action-sheet/ng-package.json",
@@ -832,9 +716,7 @@
               "libs/core/src/lib/action-sheet/tsconfig.lib.json",
               "libs/core/src/lib/action-sheet/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -847,9 +729,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/alert"
-          ],
+          "outputs": ["dist/libs/core/alert"],
           "options": {
             "tsConfig": "libs/core/src/lib/alert/tsconfig.lib.json",
             "project": "libs/core/src/lib/alert/ng-package.json",
@@ -876,9 +756,7 @@
               "libs/core/src/lib/alert/tsconfig.lib.json",
               "libs/core/src/lib/alert/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -891,9 +769,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/avatar"
-          ],
+          "outputs": ["dist/libs/core/avatar"],
           "options": {
             "tsConfig": "libs/core/src/lib/avatar/tsconfig.lib.json",
             "project": "libs/core/src/lib/avatar/ng-package.json",
@@ -920,9 +796,7 @@
               "libs/core/src/lib/avatar/tsconfig.lib.json",
               "libs/core/src/lib/avatar/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -935,9 +809,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/avatar-group"
-          ],
+          "outputs": ["dist/libs/core/avatar-group"],
           "options": {
             "tsConfig": "libs/core/src/lib/avatar-group/tsconfig.lib.json",
             "project": "libs/core/src/lib/avatar-group/ng-package.json",
@@ -964,9 +836,7 @@
               "libs/core/src/lib/avatar-group/tsconfig.lib.json",
               "libs/core/src/lib/avatar-group/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -979,9 +849,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/bar"
-          ],
+          "outputs": ["dist/libs/core/bar"],
           "options": {
             "tsConfig": "libs/core/src/lib/bar/tsconfig.lib.json",
             "project": "libs/core/src/lib/bar/ng-package.json",
@@ -1008,9 +876,7 @@
               "libs/core/src/lib/bar/tsconfig.lib.json",
               "libs/core/src/lib/bar/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1023,9 +889,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/busy-indicator"
-          ],
+          "outputs": ["dist/libs/core/busy-indicator"],
           "options": {
             "tsConfig": "libs/core/src/lib/busy-indicator/tsconfig.lib.json",
             "project": "libs/core/src/lib/busy-indicator/ng-package.json",
@@ -1052,9 +916,7 @@
               "libs/core/src/lib/busy-indicator/tsconfig.lib.json",
               "libs/core/src/lib/busy-indicator/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1067,9 +929,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/calendar"
-          ],
+          "outputs": ["dist/libs/core/calendar"],
           "options": {
             "tsConfig": "libs/core/src/lib/calendar/tsconfig.lib.json",
             "project": "libs/core/src/lib/calendar/ng-package.json",
@@ -1096,9 +956,7 @@
               "libs/core/src/lib/calendar/tsconfig.lib.json",
               "libs/core/src/lib/calendar/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1111,9 +969,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/card"
-          ],
+          "outputs": ["dist/libs/core/card"],
           "options": {
             "tsConfig": "libs/core/src/lib/card/tsconfig.lib.json",
             "project": "libs/core/src/lib/card/ng-package.json",
@@ -1140,9 +996,7 @@
               "libs/core/src/lib/card/tsconfig.lib.json",
               "libs/core/src/lib/card/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1155,9 +1009,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/carousel"
-          ],
+          "outputs": ["dist/libs/core/carousel"],
           "options": {
             "tsConfig": "libs/core/src/lib/carousel/tsconfig.lib.json",
             "project": "libs/core/src/lib/carousel/ng-package.json",
@@ -1184,9 +1036,7 @@
               "libs/core/src/lib/carousel/tsconfig.lib.json",
               "libs/core/src/lib/carousel/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1199,9 +1049,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/combobox"
-          ],
+          "outputs": ["dist/libs/core/combobox"],
           "options": {
             "tsConfig": "libs/core/src/lib/combobox/tsconfig.lib.json",
             "project": "libs/core/src/lib/combobox/ng-package.json",
@@ -1228,9 +1076,7 @@
               "libs/core/src/lib/combobox/tsconfig.lib.json",
               "libs/core/src/lib/combobox/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1243,9 +1089,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/date-picker"
-          ],
+          "outputs": ["dist/libs/core/date-picker"],
           "options": {
             "tsConfig": "libs/core/src/lib/date-picker/tsconfig.lib.json",
             "project": "libs/core/src/lib/date-picker/ng-package.json",
@@ -1272,9 +1116,7 @@
               "libs/core/src/lib/date-picker/tsconfig.lib.json",
               "libs/core/src/lib/date-picker/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1287,9 +1129,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/datetime"
-          ],
+          "outputs": ["dist/libs/core/datetime"],
           "options": {
             "tsConfig": "libs/core/src/lib/datetime/tsconfig.lib.json",
             "project": "libs/core/src/lib/datetime/ng-package.json",
@@ -1316,9 +1156,7 @@
               "libs/core/src/lib/datetime/tsconfig.lib.json",
               "libs/core/src/lib/datetime/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1331,9 +1169,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/datetime-picker"
-          ],
+          "outputs": ["dist/libs/core/datetime-picker"],
           "options": {
             "tsConfig": "libs/core/src/lib/datetime-picker/tsconfig.lib.json",
             "project": "libs/core/src/lib/datetime-picker/ng-package.json",
@@ -1360,9 +1196,7 @@
               "libs/core/src/lib/datetime-picker/tsconfig.lib.json",
               "libs/core/src/lib/datetime-picker/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1375,9 +1209,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/dynamic-page"
-          ],
+          "outputs": ["dist/libs/core/dynamic-page"],
           "options": {
             "tsConfig": "libs/core/src/lib/dynamic-page/tsconfig.lib.json",
             "project": "libs/core/src/lib/dynamic-page/ng-package.json",
@@ -1404,9 +1236,7 @@
               "libs/core/src/lib/dynamic-page/tsconfig.lib.json",
               "libs/core/src/lib/dynamic-page/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1419,9 +1249,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/dynamic-side-content"
-          ],
+          "outputs": ["dist/libs/core/dynamic-side-content"],
           "options": {
             "tsConfig": "libs/core/src/lib/dynamic-side-content/tsconfig.lib.json",
             "project": "libs/core/src/lib/dynamic-side-content/ng-package.json",
@@ -1448,9 +1276,7 @@
               "libs/core/src/lib/dynamic-side-content/tsconfig.lib.json",
               "libs/core/src/lib/dynamic-side-content/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1463,9 +1289,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/facets"
-          ],
+          "outputs": ["dist/libs/core/facets"],
           "options": {
             "tsConfig": "libs/core/src/lib/facets/tsconfig.lib.json",
             "project": "libs/core/src/lib/facets/ng-package.json",
@@ -1492,9 +1316,7 @@
               "libs/core/src/lib/facets/tsconfig.lib.json",
               "libs/core/src/lib/facets/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1507,9 +1329,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/feed-input"
-          ],
+          "outputs": ["dist/libs/core/feed-input"],
           "options": {
             "tsConfig": "libs/core/src/lib/feed-input/tsconfig.lib.json",
             "project": "libs/core/src/lib/feed-input/ng-package.json",
@@ -1536,9 +1356,7 @@
               "libs/core/src/lib/feed-input/tsconfig.lib.json",
               "libs/core/src/lib/feed-input/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1551,9 +1369,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/feed-list-item"
-          ],
+          "outputs": ["dist/libs/core/feed-list-item"],
           "options": {
             "tsConfig": "libs/core/src/lib/feed-list-item/tsconfig.lib.json",
             "project": "libs/core/src/lib/feed-list-item/ng-package.json",
@@ -1580,9 +1396,7 @@
               "libs/core/src/lib/feed-list-item/tsconfig.lib.json",
               "libs/core/src/lib/feed-list-item/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1595,9 +1409,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/file-uploader"
-          ],
+          "outputs": ["dist/libs/core/file-uploader"],
           "options": {
             "tsConfig": "libs/core/src/lib/file-uploader/tsconfig.lib.json",
             "project": "libs/core/src/lib/file-uploader/ng-package.json",
@@ -1624,9 +1436,7 @@
               "libs/core/src/lib/file-uploader/tsconfig.lib.json",
               "libs/core/src/lib/file-uploader/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1639,9 +1449,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/fixed-card-layout"
-          ],
+          "outputs": ["dist/libs/core/fixed-card-layout"],
           "options": {
             "tsConfig": "libs/core/src/lib/fixed-card-layout/tsconfig.lib.json",
             "project": "libs/core/src/lib/fixed-card-layout/ng-package.json",
@@ -1668,9 +1476,7 @@
               "libs/core/src/lib/fixed-card-layout/tsconfig.lib.json",
               "libs/core/src/lib/fixed-card-layout/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1683,9 +1489,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/flexible-column-layout"
-          ],
+          "outputs": ["dist/libs/core/flexible-column-layout"],
           "options": {
             "tsConfig": "libs/core/src/lib/flexible-column-layout/tsconfig.lib.json",
             "project": "libs/core/src/lib/flexible-column-layout/ng-package.json",
@@ -1712,9 +1516,7 @@
               "libs/core/src/lib/flexible-column-layout/tsconfig.lib.json",
               "libs/core/src/lib/flexible-column-layout/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1727,9 +1529,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/form"
-          ],
+          "outputs": ["dist/libs/core/form"],
           "options": {
             "tsConfig": "libs/core/src/lib/form/tsconfig.lib.json",
             "project": "libs/core/src/lib/form/ng-package.json",
@@ -1756,9 +1556,7 @@
               "libs/core/src/lib/form/tsconfig.lib.json",
               "libs/core/src/lib/form/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1771,9 +1569,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/formatted-text"
-          ],
+          "outputs": ["dist/libs/core/formatted-text"],
           "options": {
             "tsConfig": "libs/core/src/lib/formatted-text/tsconfig.lib.json",
             "project": "libs/core/src/lib/formatted-text/ng-package.json",
@@ -1800,9 +1596,7 @@
               "libs/core/src/lib/formatted-text/tsconfig.lib.json",
               "libs/core/src/lib/formatted-text/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1815,9 +1609,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/grid-list"
-          ],
+          "outputs": ["dist/libs/core/grid-list"],
           "options": {
             "tsConfig": "libs/core/src/lib/grid-list/tsconfig.lib.json",
             "project": "libs/core/src/lib/grid-list/ng-package.json",
@@ -1844,9 +1636,7 @@
               "libs/core/src/lib/grid-list/tsconfig.lib.json",
               "libs/core/src/lib/grid-list/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1859,9 +1649,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/illustrated-message"
-          ],
+          "outputs": ["dist/libs/core/illustrated-message"],
           "options": {
             "tsConfig": "libs/core/src/lib/illustrated-message/tsconfig.lib.json",
             "project": "libs/core/src/lib/illustrated-message/ng-package.json",
@@ -1888,9 +1676,7 @@
               "libs/core/src/lib/illustrated-message/tsconfig.lib.json",
               "libs/core/src/lib/illustrated-message/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1903,9 +1689,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/infinite-scroll"
-          ],
+          "outputs": ["dist/libs/core/infinite-scroll"],
           "options": {
             "tsConfig": "libs/core/src/lib/infinite-scroll/tsconfig.lib.json",
             "project": "libs/core/src/lib/infinite-scroll/ng-package.json",
@@ -1932,9 +1716,7 @@
               "libs/core/src/lib/infinite-scroll/tsconfig.lib.json",
               "libs/core/src/lib/infinite-scroll/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1947,9 +1729,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/info-label"
-          ],
+          "outputs": ["dist/libs/core/info-label"],
           "options": {
             "tsConfig": "libs/core/src/lib/info-label/tsconfig.lib.json",
             "project": "libs/core/src/lib/info-label/ng-package.json",
@@ -1976,9 +1756,7 @@
               "libs/core/src/lib/info-label/tsconfig.lib.json",
               "libs/core/src/lib/info-label/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -1991,9 +1769,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/inline-help"
-          ],
+          "outputs": ["dist/libs/core/inline-help"],
           "options": {
             "tsConfig": "libs/core/src/lib/inline-help/tsconfig.lib.json",
             "project": "libs/core/src/lib/inline-help/ng-package.json",
@@ -2020,9 +1796,7 @@
               "libs/core/src/lib/inline-help/tsconfig.lib.json",
               "libs/core/src/lib/inline-help/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2035,9 +1809,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/input-group"
-          ],
+          "outputs": ["dist/libs/core/input-group"],
           "options": {
             "tsConfig": "libs/core/src/lib/input-group/tsconfig.lib.json",
             "project": "libs/core/src/lib/input-group/ng-package.json",
@@ -2064,9 +1836,7 @@
               "libs/core/src/lib/input-group/tsconfig.lib.json",
               "libs/core/src/lib/input-group/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2079,9 +1849,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/layout-grid"
-          ],
+          "outputs": ["dist/libs/core/layout-grid"],
           "options": {
             "tsConfig": "libs/core/src/lib/layout-grid/tsconfig.lib.json",
             "project": "libs/core/src/lib/layout-grid/ng-package.json",
@@ -2108,9 +1876,7 @@
               "libs/core/src/lib/layout-grid/tsconfig.lib.json",
               "libs/core/src/lib/layout-grid/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2123,9 +1889,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/layout-panel"
-          ],
+          "outputs": ["dist/libs/core/layout-panel"],
           "options": {
             "tsConfig": "libs/core/src/lib/layout-panel/tsconfig.lib.json",
             "project": "libs/core/src/lib/layout-panel/ng-package.json",
@@ -2152,9 +1916,7 @@
               "libs/core/src/lib/layout-panel/tsconfig.lib.json",
               "libs/core/src/lib/layout-panel/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2167,9 +1929,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/link"
-          ],
+          "outputs": ["dist/libs/core/link"],
           "options": {
             "tsConfig": "libs/core/src/lib/link/tsconfig.lib.json",
             "project": "libs/core/src/lib/link/ng-package.json",
@@ -2196,9 +1956,7 @@
               "libs/core/src/lib/link/tsconfig.lib.json",
               "libs/core/src/lib/link/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2211,9 +1969,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/list"
-          ],
+          "outputs": ["dist/libs/core/list"],
           "options": {
             "tsConfig": "libs/core/src/lib/list/tsconfig.lib.json",
             "project": "libs/core/src/lib/list/ng-package.json",
@@ -2240,9 +1996,7 @@
               "libs/core/src/lib/list/tsconfig.lib.json",
               "libs/core/src/lib/list/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2255,9 +2009,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/menu"
-          ],
+          "outputs": ["dist/libs/core/menu"],
           "options": {
             "tsConfig": "libs/core/src/lib/menu/tsconfig.lib.json",
             "project": "libs/core/src/lib/menu/ng-package.json",
@@ -2284,9 +2036,7 @@
               "libs/core/src/lib/menu/tsconfig.lib.json",
               "libs/core/src/lib/menu/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2299,9 +2049,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/message-box"
-          ],
+          "outputs": ["dist/libs/core/message-box"],
           "options": {
             "tsConfig": "libs/core/src/lib/message-box/tsconfig.lib.json",
             "project": "libs/core/src/lib/message-box/ng-package.json",
@@ -2328,9 +2076,7 @@
               "libs/core/src/lib/message-box/tsconfig.lib.json",
               "libs/core/src/lib/message-box/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2343,9 +2089,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/message-strip"
-          ],
+          "outputs": ["dist/libs/core/message-strip"],
           "options": {
             "tsConfig": "libs/core/src/lib/message-strip/tsconfig.lib.json",
             "project": "libs/core/src/lib/message-strip/ng-package.json",
@@ -2372,9 +2116,7 @@
               "libs/core/src/lib/message-strip/tsconfig.lib.json",
               "libs/core/src/lib/message-strip/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2387,9 +2129,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/notification"
-          ],
+          "outputs": ["dist/libs/core/notification"],
           "options": {
             "tsConfig": "libs/core/src/lib/notification/tsconfig.lib.json",
             "project": "libs/core/src/lib/notification/ng-package.json",
@@ -2416,9 +2156,7 @@
               "libs/core/src/lib/notification/tsconfig.lib.json",
               "libs/core/src/lib/notification/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2431,9 +2169,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/object-identifier"
-          ],
+          "outputs": ["dist/libs/core/object-identifier"],
           "options": {
             "tsConfig": "libs/core/src/lib/object-identifier/tsconfig.lib.json",
             "project": "libs/core/src/lib/object-identifier/ng-package.json",
@@ -2460,9 +2196,7 @@
               "libs/core/src/lib/object-identifier/tsconfig.lib.json",
               "libs/core/src/lib/object-identifier/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2475,9 +2209,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/object-marker"
-          ],
+          "outputs": ["dist/libs/core/object-marker"],
           "options": {
             "tsConfig": "libs/core/src/lib/object-marker/tsconfig.lib.json",
             "project": "libs/core/src/lib/object-marker/ng-package.json",
@@ -2504,9 +2236,7 @@
               "libs/core/src/lib/object-marker/tsconfig.lib.json",
               "libs/core/src/lib/object-marker/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2519,9 +2249,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/object-number"
-          ],
+          "outputs": ["dist/libs/core/object-number"],
           "options": {
             "tsConfig": "libs/core/src/lib/object-number/tsconfig.lib.json",
             "project": "libs/core/src/lib/object-number/ng-package.json",
@@ -2548,9 +2276,7 @@
               "libs/core/src/lib/object-number/tsconfig.lib.json",
               "libs/core/src/lib/object-number/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2563,9 +2289,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/object-status"
-          ],
+          "outputs": ["dist/libs/core/object-status"],
           "options": {
             "tsConfig": "libs/core/src/lib/object-status/tsconfig.lib.json",
             "project": "libs/core/src/lib/object-status/ng-package.json",
@@ -2592,9 +2316,7 @@
               "libs/core/src/lib/object-status/tsconfig.lib.json",
               "libs/core/src/lib/object-status/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2607,9 +2329,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/pagination"
-          ],
+          "outputs": ["dist/libs/core/pagination"],
           "options": {
             "tsConfig": "libs/core/src/lib/pagination/tsconfig.lib.json",
             "project": "libs/core/src/lib/pagination/ng-package.json",
@@ -2636,9 +2356,7 @@
               "libs/core/src/lib/pagination/tsconfig.lib.json",
               "libs/core/src/lib/pagination/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2651,9 +2369,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/panel"
-          ],
+          "outputs": ["dist/libs/core/panel"],
           "options": {
             "tsConfig": "libs/core/src/lib/panel/tsconfig.lib.json",
             "project": "libs/core/src/lib/panel/ng-package.json",
@@ -2680,9 +2396,7 @@
               "libs/core/src/lib/panel/tsconfig.lib.json",
               "libs/core/src/lib/panel/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2695,9 +2409,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/popover"
-          ],
+          "outputs": ["dist/libs/core/popover"],
           "options": {
             "tsConfig": "libs/core/src/lib/popover/tsconfig.lib.json",
             "project": "libs/core/src/lib/popover/ng-package.json",
@@ -2724,9 +2436,7 @@
               "libs/core/src/lib/popover/tsconfig.lib.json",
               "libs/core/src/lib/popover/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2739,9 +2449,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/product-switch"
-          ],
+          "outputs": ["dist/libs/core/product-switch"],
           "options": {
             "tsConfig": "libs/core/src/lib/product-switch/tsconfig.lib.json",
             "project": "libs/core/src/lib/product-switch/ng-package.json",
@@ -2768,9 +2476,7 @@
               "libs/core/src/lib/product-switch/tsconfig.lib.json",
               "libs/core/src/lib/product-switch/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2783,9 +2489,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/quick-view"
-          ],
+          "outputs": ["dist/libs/core/quick-view"],
           "options": {
             "tsConfig": "libs/core/src/lib/quick-view/tsconfig.lib.json",
             "project": "libs/core/src/lib/quick-view/ng-package.json",
@@ -2812,9 +2516,7 @@
               "libs/core/src/lib/quick-view/tsconfig.lib.json",
               "libs/core/src/lib/quick-view/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2827,9 +2529,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/radio"
-          ],
+          "outputs": ["dist/libs/core/radio"],
           "options": {
             "tsConfig": "libs/core/src/lib/radio/tsconfig.lib.json",
             "project": "libs/core/src/lib/radio/ng-package.json",
@@ -2856,9 +2556,7 @@
               "libs/core/src/lib/radio/tsconfig.lib.json",
               "libs/core/src/lib/radio/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2871,9 +2569,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/rating-indicator"
-          ],
+          "outputs": ["dist/libs/core/rating-indicator"],
           "options": {
             "tsConfig": "libs/core/src/lib/rating-indicator/tsconfig.lib.json",
             "project": "libs/core/src/lib/rating-indicator/ng-package.json",
@@ -2900,9 +2596,7 @@
               "libs/core/src/lib/rating-indicator/tsconfig.lib.json",
               "libs/core/src/lib/rating-indicator/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2915,9 +2609,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/resizable-card-layout"
-          ],
+          "outputs": ["dist/libs/core/resizable-card-layout"],
           "options": {
             "tsConfig": "libs/core/src/lib/resizable-card-layout/tsconfig.lib.json",
             "project": "libs/core/src/lib/resizable-card-layout/ng-package.json",
@@ -2944,9 +2636,7 @@
               "libs/core/src/lib/resizable-card-layout/tsconfig.lib.json",
               "libs/core/src/lib/resizable-card-layout/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -2959,9 +2649,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/scroll-spy"
-          ],
+          "outputs": ["dist/libs/core/scroll-spy"],
           "options": {
             "tsConfig": "libs/core/src/lib/scroll-spy/tsconfig.lib.json",
             "project": "libs/core/src/lib/scroll-spy/ng-package.json",
@@ -2988,9 +2676,7 @@
               "libs/core/src/lib/scroll-spy/tsconfig.lib.json",
               "libs/core/src/lib/scroll-spy/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3003,9 +2689,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/segmented-button"
-          ],
+          "outputs": ["dist/libs/core/segmented-button"],
           "options": {
             "tsConfig": "libs/core/src/lib/segmented-button/tsconfig.lib.json",
             "project": "libs/core/src/lib/segmented-button/ng-package.json",
@@ -3032,9 +2716,7 @@
               "libs/core/src/lib/segmented-button/tsconfig.lib.json",
               "libs/core/src/lib/segmented-button/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3047,9 +2729,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/select"
-          ],
+          "outputs": ["dist/libs/core/select"],
           "options": {
             "tsConfig": "libs/core/src/lib/select/tsconfig.lib.json",
             "project": "libs/core/src/lib/select/ng-package.json",
@@ -3076,9 +2756,7 @@
               "libs/core/src/lib/select/tsconfig.lib.json",
               "libs/core/src/lib/select/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3091,9 +2769,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/shared"
-          ],
+          "outputs": ["dist/libs/core/shared"],
           "options": {
             "tsConfig": "libs/core/src/lib/shared/tsconfig.lib.json",
             "project": "libs/core/src/lib/shared/ng-package.json",
@@ -3120,9 +2796,7 @@
               "libs/core/src/lib/shared/tsconfig.lib.json",
               "libs/core/src/lib/shared/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3135,9 +2809,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/shellbar"
-          ],
+          "outputs": ["dist/libs/core/shellbar"],
           "options": {
             "tsConfig": "libs/core/src/lib/shellbar/tsconfig.lib.json",
             "project": "libs/core/src/lib/shellbar/ng-package.json",
@@ -3164,9 +2836,7 @@
               "libs/core/src/lib/shellbar/tsconfig.lib.json",
               "libs/core/src/lib/shellbar/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3179,9 +2849,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/side-navigation"
-          ],
+          "outputs": ["dist/libs/core/side-navigation"],
           "options": {
             "tsConfig": "libs/core/src/lib/side-navigation/tsconfig.lib.json",
             "project": "libs/core/src/lib/side-navigation/ng-package.json",
@@ -3208,9 +2876,7 @@
               "libs/core/src/lib/side-navigation/tsconfig.lib.json",
               "libs/core/src/lib/side-navigation/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3223,9 +2889,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/slider"
-          ],
+          "outputs": ["dist/libs/core/slider"],
           "options": {
             "tsConfig": "libs/core/src/lib/slider/tsconfig.lib.json",
             "project": "libs/core/src/lib/slider/ng-package.json",
@@ -3252,9 +2916,7 @@
               "libs/core/src/lib/slider/tsconfig.lib.json",
               "libs/core/src/lib/slider/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3267,9 +2929,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/split-button"
-          ],
+          "outputs": ["dist/libs/core/split-button"],
           "options": {
             "tsConfig": "libs/core/src/lib/split-button/tsconfig.lib.json",
             "project": "libs/core/src/lib/split-button/ng-package.json",
@@ -3296,9 +2956,7 @@
               "libs/core/src/lib/split-button/tsconfig.lib.json",
               "libs/core/src/lib/split-button/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3311,9 +2969,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/status-indicator"
-          ],
+          "outputs": ["dist/libs/core/status-indicator"],
           "options": {
             "tsConfig": "libs/core/src/lib/status-indicator/tsconfig.lib.json",
             "project": "libs/core/src/lib/status-indicator/ng-package.json",
@@ -3340,9 +2996,7 @@
               "libs/core/src/lib/status-indicator/tsconfig.lib.json",
               "libs/core/src/lib/status-indicator/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3355,9 +3009,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/step-input"
-          ],
+          "outputs": ["dist/libs/core/step-input"],
           "options": {
             "tsConfig": "libs/core/src/lib/step-input/tsconfig.lib.json",
             "project": "libs/core/src/lib/step-input/ng-package.json",
@@ -3384,9 +3036,7 @@
               "libs/core/src/lib/step-input/tsconfig.lib.json",
               "libs/core/src/lib/step-input/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3399,9 +3049,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/switch"
-          ],
+          "outputs": ["dist/libs/core/switch"],
           "options": {
             "tsConfig": "libs/core/src/lib/switch/tsconfig.lib.json",
             "project": "libs/core/src/lib/switch/ng-package.json",
@@ -3428,9 +3076,7 @@
               "libs/core/src/lib/switch/tsconfig.lib.json",
               "libs/core/src/lib/switch/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3443,9 +3089,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/table"
-          ],
+          "outputs": ["dist/libs/core/table"],
           "options": {
             "tsConfig": "libs/core/src/lib/table/tsconfig.lib.json",
             "project": "libs/core/src/lib/table/ng-package.json",
@@ -3472,9 +3116,7 @@
               "libs/core/src/lib/table/tsconfig.lib.json",
               "libs/core/src/lib/table/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3487,9 +3129,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/tabs"
-          ],
+          "outputs": ["dist/libs/core/tabs"],
           "options": {
             "tsConfig": "libs/core/src/lib/tabs/tsconfig.lib.json",
             "project": "libs/core/src/lib/tabs/ng-package.json",
@@ -3516,9 +3156,7 @@
               "libs/core/src/lib/tabs/tsconfig.lib.json",
               "libs/core/src/lib/tabs/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3531,9 +3169,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/text"
-          ],
+          "outputs": ["dist/libs/core/text"],
           "options": {
             "tsConfig": "libs/core/src/lib/text/tsconfig.lib.json",
             "project": "libs/core/src/lib/text/ng-package.json",
@@ -3560,9 +3196,7 @@
               "libs/core/src/lib/text/tsconfig.lib.json",
               "libs/core/src/lib/text/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3575,9 +3209,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/tile"
-          ],
+          "outputs": ["dist/libs/core/tile"],
           "options": {
             "tsConfig": "libs/core/src/lib/tile/tsconfig.lib.json",
             "project": "libs/core/src/lib/tile/ng-package.json",
@@ -3604,9 +3236,7 @@
               "libs/core/src/lib/tile/tsconfig.lib.json",
               "libs/core/src/lib/tile/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3619,9 +3249,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/time"
-          ],
+          "outputs": ["dist/libs/core/time"],
           "options": {
             "tsConfig": "libs/core/src/lib/time/tsconfig.lib.json",
             "project": "libs/core/src/lib/time/ng-package.json",
@@ -3648,9 +3276,7 @@
               "libs/core/src/lib/time/tsconfig.lib.json",
               "libs/core/src/lib/time/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3663,9 +3289,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/time-picker"
-          ],
+          "outputs": ["dist/libs/core/time-picker"],
           "options": {
             "tsConfig": "libs/core/src/lib/time-picker/tsconfig.lib.json",
             "project": "libs/core/src/lib/time-picker/ng-package.json",
@@ -3692,9 +3316,7 @@
               "libs/core/src/lib/time-picker/tsconfig.lib.json",
               "libs/core/src/lib/time-picker/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3707,9 +3329,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/title"
-          ],
+          "outputs": ["dist/libs/core/title"],
           "options": {
             "tsConfig": "libs/core/src/lib/title/tsconfig.lib.json",
             "project": "libs/core/src/lib/title/ng-package.json",
@@ -3736,9 +3356,7 @@
               "libs/core/src/lib/title/tsconfig.lib.json",
               "libs/core/src/lib/title/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3751,9 +3369,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/token"
-          ],
+          "outputs": ["dist/libs/core/token"],
           "options": {
             "tsConfig": "libs/core/src/lib/token/tsconfig.lib.json",
             "project": "libs/core/src/lib/token/ng-package.json",
@@ -3780,9 +3396,7 @@
               "libs/core/src/lib/token/tsconfig.lib.json",
               "libs/core/src/lib/token/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3795,9 +3409,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/toolbar"
-          ],
+          "outputs": ["dist/libs/core/toolbar"],
           "options": {
             "tsConfig": "libs/core/src/lib/toolbar/tsconfig.lib.json",
             "project": "libs/core/src/lib/toolbar/ng-package.json",
@@ -3824,9 +3436,7 @@
               "libs/core/src/lib/toolbar/tsconfig.lib.json",
               "libs/core/src/lib/toolbar/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3839,9 +3449,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/utils"
-          ],
+          "outputs": ["dist/libs/core/utils"],
           "options": {
             "tsConfig": "libs/core/src/lib/utils/tsconfig.lib.json",
             "project": "libs/core/src/lib/utils/ng-package.json",
@@ -3868,9 +3476,7 @@
               "libs/core/src/lib/utils/tsconfig.lib.json",
               "libs/core/src/lib/utils/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3883,9 +3489,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/message-toast"
-          ],
+          "outputs": ["dist/libs/core/message-toast"],
           "options": {
             "tsConfig": "libs/core/src/lib/message-toast/tsconfig.lib.json",
             "project": "libs/core/src/lib/message-toast/ng-package.json",
@@ -3912,9 +3516,7 @@
               "libs/core/src/lib/message-toast/tsconfig.lib.json",
               "libs/core/src/lib/message-toast/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3927,9 +3529,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/multi-input"
-          ],
+          "outputs": ["dist/libs/core/multi-input"],
           "options": {
             "tsConfig": "libs/core/src/lib/multi-input/tsconfig.lib.json",
             "project": "libs/core/src/lib/multi-input/ng-package.json",
@@ -3956,9 +3556,7 @@
               "libs/core/src/lib/multi-input/tsconfig.lib.json",
               "libs/core/src/lib/multi-input/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -3971,9 +3569,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/wizard"
-          ],
+          "outputs": ["dist/libs/core/wizard"],
           "options": {
             "tsConfig": "libs/core/src/lib/wizard/tsconfig.lib.json",
             "project": "libs/core/src/lib/wizard/ng-package.json",
@@ -4000,9 +3596,7 @@
               "libs/core/src/lib/wizard/tsconfig.lib.json",
               "libs/core/src/lib/wizard/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -4015,9 +3609,7 @@
       "architect": {
         "build": {
           "builder": "@nrwl/angular:package",
-          "outputs": [
-            "dist/libs/core/tree"
-          ],
+          "outputs": ["dist/libs/core/tree"],
           "options": {
             "tsConfig": "libs/core/src/lib/tree/tsconfig.lib.json",
             "project": "libs/core/src/lib/tree/ng-package.json",
@@ -4044,9 +3636,1331 @@
               "libs/core/src/lib/tree/tsconfig.lib.json",
               "libs/core/src/lib/tree/tsconfig.spec.json"
             ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "core-timeline": {
+      "projectType": "library",
+      "root": "libs/core/src/lib/timeline",
+      "sourceRoot": "libs/core/src/lib/timeline",
+      "prefix": "fd",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/core/timeline"],
+          "options": {
+            "tsConfig": "libs/core/src/lib/timeline/tsconfig.lib.json",
+            "project": "libs/core/src/lib/timeline/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/core/src/lib/timeline/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/core/src/lib/timeline/test.ts",
+            "tsConfig": "libs/core/src/lib/timeline/tsconfig.spec.json",
+            "karmaConfig": "libs/core/src/lib/timeline/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/core/src/lib/timeline/tsconfig.lib.json",
+              "libs/core/src/lib/timeline/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "core-micro-process-flow": {
+      "projectType": "library",
+      "root": "libs/core/src/lib/micro-process-flow",
+      "sourceRoot": "libs/core/src/lib/micro-process-flow",
+      "prefix": "fd",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/core/micro-process-flow"],
+          "options": {
+            "tsConfig": "libs/core/src/lib/micro-process-flow/tsconfig.lib.json",
+            "project": "libs/core/src/lib/micro-process-flow/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/core/src/lib/micro-process-flow/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/core/src/lib/micro-process-flow/test.ts",
+            "tsConfig": "libs/core/src/lib/micro-process-flow/tsconfig.spec.json",
+            "karmaConfig": "libs/core/src/lib/micro-process-flow/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/core/src/lib/micro-process-flow/tsconfig.lib.json",
+              "libs/core/src/lib/micro-process-flow/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "core-upload-collection": {
+      "projectType": "library",
+      "root": "libs/core/src/lib/upload-collection",
+      "sourceRoot": "libs/core/src/lib/upload-collection",
+      "prefix": "fd",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/core/upload-collection"],
+          "options": {
+            "tsConfig": "libs/core/src/lib/upload-collection/tsconfig.lib.json",
+            "project": "libs/core/src/lib/upload-collection/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/core/src/lib/upload-collection/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/core/src/lib/upload-collection/test.ts",
+            "tsConfig": "libs/core/src/lib/upload-collection/tsconfig.spec.json",
+            "karmaConfig": "libs/core/src/lib/upload-collection/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/core/src/lib/upload-collection/tsconfig.lib.json",
+              "libs/core/src/lib/upload-collection/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "core-vertical-navigation": {
+      "projectType": "library",
+      "root": "libs/core/src/lib/vertical-navigation",
+      "sourceRoot": "libs/core/src/lib/vertical-navigation",
+      "prefix": "fd",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": [
+            "dist/libs/core/vertical-navigation"
+          ],
+          "options": {
+            "tsConfig": "libs/core/src/lib/vertical-navigation/tsconfig.lib.json",
+            "project": "libs/core/src/lib/vertical-navigation/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/core/src/lib/vertical-navigation/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/core/src/lib/vertical-navigation/test.ts",
+            "tsConfig": "libs/core/src/lib/vertical-navigation/tsconfig.spec.json",
+            "karmaConfig": "libs/core/src/lib/vertical-navigation/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/core/src/lib/vertical-navigation/tsconfig.lib.json",
+              "libs/core/src/lib/vertical-navigation/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]
+          }
+        }
+      }
+    },
+    "core-splitter": {
+      "projectType": "library",
+      "root": "libs/core/src/lib/splitter",
+      "sourceRoot": "libs/core/src/lib/splitter",
+      "prefix": "fd",
+      "architect": {
+          "build": {
+              "builder": "@nrwl/angular:package",
+              "outputs": ["dist/libs/core/splitter"],
+              "options": {
+                  "tsConfig": "libs/core/src/lib/splitter/tsconfig.lib.json",
+                  "project": "libs/core/src/lib/splitter/ng-package.json",
+                  "updateBuildableProjectDepsInPackageJson": false
+              },
+              "configurations": {
+                  "production": {
+                      "tsConfig": "libs/core/src/lib/splitter/tsconfig.lib.prod.json"
+                  }
+              }
+          },
+          "test": {
+              "builder": "@angular-devkit/build-angular:karma",
+              "options": {
+                  "main": "libs/core/src/lib/splitter/test.ts",
+                  "tsConfig": "libs/core/src/lib/splitter/tsconfig.spec.json",
+                  "karmaConfig": "libs/core/src/lib/splitter/karma.conf.js"
+              }
+          },
+          "lint": {
+              "builder": "@angular-devkit/build-angular:tslint",
+              "options": {
+                  "tsConfig": [
+                      "libs/core/src/lib/splitter/tsconfig.lib.json",
+                      "libs/core/src/lib/splitter/tsconfig.spec.json"
+                  ],
+                  "exclude": ["**/node_modules/**"]
+              }
+          }
+      }
+    },
+    "platform": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib",
+      "sourceRoot": "libs/platform/src/lib",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/fdp"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/test.ts",
+            "tsConfig": "libs/platform/src/lib/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/tsconfig.lib.json",
+              "libs/platform/src/lib/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-shared": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/shared",
+      "sourceRoot": "libs/platform/src/lib/shared",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/shared"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/shared/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/shared/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/shared/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/shared/test.ts",
+            "tsConfig": "libs/platform/src/lib/shared/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/shared/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/shared/tsconfig.lib.json",
+              "libs/platform/src/lib/shared/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-action-bar": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/action-bar",
+      "sourceRoot": "libs/platform/src/lib/action-bar",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/action-bar"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/action-bar/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/action-bar/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/action-bar/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/action-bar/test.ts",
+            "tsConfig": "libs/platform/src/lib/action-bar/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/action-bar/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/action-bar/tsconfig.lib.json",
+              "libs/platform/src/lib/action-bar/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-action-button-group": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/action-button-group",
+      "sourceRoot": "libs/platform/src/lib/action-button-group",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/action-button-group"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/action-button-group/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/action-button-group/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/action-button-group/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/action-button-group/test.ts",
+            "tsConfig": "libs/platform/src/lib/action-button-group/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/action-button-group/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/action-button-group/tsconfig.lib.json",
+              "libs/platform/src/lib/action-button-group/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-approval-flow": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/approval-flow",
+      "sourceRoot": "libs/platform/src/lib/approval-flow",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/approval-flow"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/approval-flow/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/approval-flow/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/approval-flow/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/approval-flow/test.ts",
+            "tsConfig": "libs/platform/src/lib/approval-flow/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/approval-flow/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/approval-flow/tsconfig.lib.json",
+              "libs/platform/src/lib/approval-flow/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-button": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/button",
+      "sourceRoot": "libs/platform/src/lib/button",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/button"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/button/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/button/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/button/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/button/test.ts",
+            "tsConfig": "libs/platform/src/lib/button/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/button/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/button/tsconfig.lib.json",
+              "libs/platform/src/lib/button/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-dynamic-page": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/dynamic-page",
+      "sourceRoot": "libs/platform/src/lib/dynamic-page",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/dynamic-page"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/dynamic-page/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/dynamic-page/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/dynamic-page/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/dynamic-page/test.ts",
+            "tsConfig": "libs/platform/src/lib/dynamic-page/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/dynamic-page/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/dynamic-page/tsconfig.lib.json",
+              "libs/platform/src/lib/dynamic-page/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-feed-input": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/feed-input",
+      "sourceRoot": "libs/platform/src/lib/feed-input",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/feed-input"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/feed-input/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/feed-input/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/feed-input/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/feed-input/test.ts",
+            "tsConfig": "libs/platform/src/lib/feed-input/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/feed-input/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/feed-input/tsconfig.lib.json",
+              "libs/platform/src/lib/feed-input/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-form": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/form",
+      "sourceRoot": "libs/platform/src/lib/form",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/form"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/form/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/form/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/form/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/form/test.ts",
+            "tsConfig": "libs/platform/src/lib/form/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/form/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/form/tsconfig.lib.json",
+              "libs/platform/src/lib/form/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-info-label": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/info-label",
+      "sourceRoot": "libs/platform/src/lib/info-label",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/info-label"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/info-label/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/info-label/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/info-label/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/info-label/test.ts",
+            "tsConfig": "libs/platform/src/lib/info-label/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/info-label/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/info-label/tsconfig.lib.json",
+              "libs/platform/src/lib/info-label/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-link": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/link",
+      "sourceRoot": "libs/platform/src/lib/link",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/link"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/link/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/link/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/link/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/link/test.ts",
+            "tsConfig": "libs/platform/src/lib/link/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/link/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/link/tsconfig.lib.json",
+              "libs/platform/src/lib/link/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-list": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/list",
+      "sourceRoot": "libs/platform/src/lib/list",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/list"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/list/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/list/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/list/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/list/test.ts",
+            "tsConfig": "libs/platform/src/lib/list/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/list/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/list/tsconfig.lib.json",
+              "libs/platform/src/lib/list/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-menu": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/menu",
+      "sourceRoot": "libs/platform/src/lib/menu",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/menu"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/menu/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/menu/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/menu/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/menu/test.ts",
+            "tsConfig": "libs/platform/src/lib/menu/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/menu/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/menu/tsconfig.lib.json",
+              "libs/platform/src/lib/menu/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-menu-button": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/menu-button",
+      "sourceRoot": "libs/platform/src/lib/menu-button",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/menu-button"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/menu-button/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/menu-button/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/menu-button/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/menu-button/test.ts",
+            "tsConfig": "libs/platform/src/lib/menu-button/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/menu-button/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/menu-button/tsconfig.lib.json",
+              "libs/platform/src/lib/menu-button/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-object-attribute": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/object-attribute",
+      "sourceRoot": "libs/platform/src/lib/object-attribute",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/object-attribute"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/object-attribute/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/object-attribute/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/object-attribute/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/object-attribute/test.ts",
+            "tsConfig": "libs/platform/src/lib/object-attribute/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/object-attribute/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/object-attribute/tsconfig.lib.json",
+              "libs/platform/src/lib/object-attribute/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-object-marker": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/object-marker",
+      "sourceRoot": "libs/platform/src/lib/object-marker",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/object-marker"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/object-marker/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/object-marker/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/object-marker/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/object-marker/test.ts",
+            "tsConfig": "libs/platform/src/lib/object-marker/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/object-marker/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/object-marker/tsconfig.lib.json",
+              "libs/platform/src/lib/object-marker/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-object-status": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/object-status",
+      "sourceRoot": "libs/platform/src/lib/object-status",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/object-status"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/object-status/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/object-status/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/object-status/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/object-status/test.ts",
+            "tsConfig": "libs/platform/src/lib/object-status/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/object-status/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/object-status/tsconfig.lib.json",
+              "libs/platform/src/lib/object-status/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-page-footer": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/page-footer",
+      "sourceRoot": "libs/platform/src/lib/page-footer",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/page-footer"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/page-footer/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/page-footer/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/page-footer/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/page-footer/test.ts",
+            "tsConfig": "libs/platform/src/lib/page-footer/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/page-footer/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/page-footer/tsconfig.lib.json",
+              "libs/platform/src/lib/page-footer/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-panel": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/panel",
+      "sourceRoot": "libs/platform/src/lib/panel",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/panel"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/panel/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/panel/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/panel/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/panel/test.ts",
+            "tsConfig": "libs/platform/src/lib/panel/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/panel/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/panel/tsconfig.lib.json",
+              "libs/platform/src/lib/panel/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-search-field": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/search-field",
+      "sourceRoot": "libs/platform/src/lib/search-field",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/search-field"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/search-field/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/search-field/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/search-field/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/search-field/test.ts",
+            "tsConfig": "libs/platform/src/lib/search-field/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/search-field/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/search-field/tsconfig.lib.json",
+              "libs/platform/src/lib/search-field/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-slider": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/slider",
+      "sourceRoot": "libs/platform/src/lib/slider",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/slider"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/slider/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/slider/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/slider/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/slider/test.ts",
+            "tsConfig": "libs/platform/src/lib/slider/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/slider/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/slider/tsconfig.lib.json",
+              "libs/platform/src/lib/slider/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-split-menu-button": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/split-menu-button",
+      "sourceRoot": "libs/platform/src/lib/split-menu-button",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/split-menu-button"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/split-menu-button/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/split-menu-button/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/split-menu-button/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/split-menu-button/test.ts",
+            "tsConfig": "libs/platform/src/lib/split-menu-button/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/split-menu-button/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/split-menu-button/tsconfig.lib.json",
+              "libs/platform/src/lib/split-menu-button/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-table": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/table",
+      "sourceRoot": "libs/platform/src/lib/table",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/table"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/table/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/table/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/table/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/table/test.ts",
+            "tsConfig": "libs/platform/src/lib/table/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/table/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/table/tsconfig.lib.json",
+              "libs/platform/src/lib/table/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-thumbnail": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/thumbnail",
+      "sourceRoot": "libs/platform/src/lib/thumbnail",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/thumbnail"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/thumbnail/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/thumbnail/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/thumbnail/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/thumbnail/test.ts",
+            "tsConfig": "libs/platform/src/lib/thumbnail/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/thumbnail/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/thumbnail/tsconfig.lib.json",
+              "libs/platform/src/lib/thumbnail/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-upload-collection": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/upload-collection",
+      "sourceRoot": "libs/platform/src/lib/upload-collection",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/upload-collection"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/upload-collection/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/upload-collection/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/upload-collection/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/upload-collection/test.ts",
+            "tsConfig": "libs/platform/src/lib/upload-collection/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/upload-collection/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/upload-collection/tsconfig.lib.json",
+              "libs/platform/src/lib/upload-collection/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-value-help-dialog": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/value-help-dialog",
+      "sourceRoot": "libs/platform/src/lib/value-help-dialog",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/value-help-dialog"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/value-help-dialog/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/value-help-dialog/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/value-help-dialog/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/value-help-dialog/test.ts",
+            "tsConfig": "libs/platform/src/lib/value-help-dialog/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/value-help-dialog/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/value-help-dialog/tsconfig.lib.json",
+              "libs/platform/src/lib/value-help-dialog/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-wizard-generator": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/wizard-generator",
+      "sourceRoot": "libs/platform/src/lib/wizard-generator",
+      "prefix": "fdp",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/wizard-generator"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/wizard-generator/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/wizard-generator/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/wizard-generator/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/wizard-generator/test.ts",
+            "tsConfig": "libs/platform/src/lib/wizard-generator/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/wizard-generator/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/wizard-generator/tsconfig.lib.json",
+              "libs/platform/src/lib/wizard-generator/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "platform-icon-tab-bar": {
+      "projectType": "library",
+      "root": "libs/platform/src/lib/icon-tab-bar",
+      "sourceRoot": "libs/platform/src/lib/icon-tab-bar",
+      "prefix": "fd",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "outputs": ["dist/libs/platform/icon-tab-bar"],
+          "options": {
+            "tsConfig": "libs/platform/src/lib/icon-tab-bar/tsconfig.lib.json",
+            "project": "libs/platform/src/lib/icon-tab-bar/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/platform/src/lib/icon-tab-bar/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/platform/src/lib/icon-tab-bar/test.ts",
+            "tsConfig": "libs/platform/src/lib/icon-tab-bar/tsconfig.spec.json",
+            "karmaConfig": "libs/platform/src/lib/icon-tab-bar/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/platform/src/lib/icon-tab-bar/tsconfig.lib.json",
+              "libs/platform/src/lib/icon-tab-bar/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
           }
         }
       }

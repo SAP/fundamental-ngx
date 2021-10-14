@@ -1,5 +1,5 @@
 import { uuidv4 } from '@fundamental-ngx/core/utils';
-import { UploadCollectionFile, UploadCollectionFolder, UploadCollectionItem } from '@fundamental-ngx/platform';
+import { UploadCollectionFile, UploadCollectionFolder, UploadCollectionItem } from '@fundamental-ngx/platform/upload-collection';
 
 const firstNames = [
     'Liam',

@@ -1,6 +1,6 @@
 import { ActionListItemPo } from '../pages/action-list-item.po';
 import { checkAttributeValueTrue, checkElementTextValue } from '../../helper/assertion-helper';
-import { acceptAlert, click, getAttributeByName, getElementArrayLength, getElementClass, refreshPage, waitForPresent } from '../../driver/wdio';
+import { acceptAlert, click, getElementArrayLength, getElementClass, refreshPage, waitForPresent } from '../../driver/wdio';
 import {btnText} from '../fixtures/appData/action-list-item-contents';
 
 describe('Action List Item Test Suite:', function() {

@@ -161,7 +161,7 @@ describe('shellbar test suite', function() {
             openMyApps();
             const originalCardData = getText(myApps, 4);
 
-            clickAndMoveElement(myApps, 50, 0, 4);
+            clickAndMoveElement(myApps, 150, 0, 4);
 
             expect(getText(myApps, 4)).not.toEqual(originalCardData);
         });

@@ -1,0 +1,125 @@
+<fd-dialog class="fdp-table-p13-sorting-dialog">
+    <fd-dialog-header>
+        <ng-template fdTemplate="header">
+            <div fd-bar-left>
+                <fd-bar-element>
+                    <h4
+                        fd-title
+                        [headerSize]="4"
+                        i18n="@@platformTableP13SortDialogHeader"
+                    >Sort</h4>
+                </fd-bar-element>
+            </div>
+            <div fd-bar-right>
+                <fd-bar-element>
+                    <fdp-table-reset-button></fdp-table-reset-button>
+                </fd-bar-element>
+            </div>
+        </ng-template>
+    </fd-dialog-header>
+
+    <fd-dialog-body>
+        <div
+            class="sort-row"
+            *ngFor="let rule of rules; let i = index; trackBy: _trackByColumnKey"
+        >
+            <fd-select
+                class="sort-row__select"
+                [value]="rule.columnKey"
+                (valueChange)="_onRuleColumnKeyChange(rule, $event)"
+                [compact]="true"
+                placeholder="(none)"
+                ariaLabel="Sort by"
+                i18n-ariaLabel="@@platformTableP13SortDialogRuleSortBy"
+                i18n-placeholder="@@platformTableP13SortDialogNoneSelectedColumn|Table column select placeholder"
+            >
+                <fd-option
+                    *ngFor="let column of columns | getAvailableSortColumns : rules : rule.columnKey "
+                    [value]="column.key"
+                >
+                    {{column.label}}
+                </fd-option>
+            </fd-select>
+
+            <fd-select
+                class="sort-row__select"
+                [value]="rule.direction"
+                (valueChange)="_onRuleDirectionChange(rule, $event)"
+                [compact]="true"
+                ariaLabel="Sort direction"
+                i18n-ariaLabel="@@platformTableP13SortDialogRuleSortDirection"
+            >
+                <fd-option
+                    [value]="SORT_DIRECTION.ASC"
+                    i18n="@@platformTableP13SortDialogSortOrderAsc"
+                >
+                    Ascending
+                </fd-option>
+
+                <fd-option
+                    [value]="SORT_DIRECTION.DESC"
+                    i18n="@@platformTableP13SortDialogSortOrderDesc"
+                >
+                    Descending
+                </fd-option>
+            </fd-select>
+
+            <div class="sort-row__actions">
+                <button
+                    fd-button
+                    fdType="transparent"
+                    glyph="sys-cancel"
+                    [compact]="true"
+                    i18n-aria-label="platformTableP13SortDialogRemoveSort|Remove btn aria-label attribute"
+                    aria-label="Remove"
+                    i18n-title="platformTableP13SortDialogRemoveSort|Remove btn title attribute"
+                    title="Remove"
+                    (click)="_removeRule(rule)"
+                ></button>
+
+                <button
+                    fd-button
+                    fdType="transparent"
+                    glyph="add"
+                    [compact]="true"
+                    i18n-aria-label="platformTableP13SortDialogAddNewSort|Add New btn aria-label attribute"
+                    aria-label="Add new"
+                    i18n-title="platformTableP13SortDialogAddNewSort|Add New btn title attribute"
+                    title="Add new"
+                    (click)="_addNew(i)"
+                ></button>
+            </div>
+
+        </div>
+
+    </fd-dialog-body>
+
+    <fd-dialog-footer>
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fdType="emphasized"
+                fd-dialog-decisive-button
+                i18n-label="@@platformTableP13SortDialogConfirmationBtn"
+                label="OK"
+                [compact]="true"
+                (click)="confirm()"
+            >
+            </button>
+        </fd-dialog-footer-button>
+
+        <fd-dialog-footer-button>
+            <button
+                fd-button
+                fdType="transparent"
+                fd-dialog-decisive-button
+                fd-initial-focus
+                i18n-label="@@platformTableP13SortDialogCancelBtn"
+                label="Cancel"
+                [compact]="true"
+                (click)="cancel()"
+            >
+            </button>
+        </fd-dialog-footer-button>
+    </fd-dialog-footer>
+</fd-dialog>

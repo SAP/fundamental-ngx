@@ -1,9 +1,10 @@
 import { Component, ChangeDetectionStrategy, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+
 import {
     DynamicPageCollapseChangeEvent,
     DynamicPageComponent,
     DynamicPageTabChangeEvent
-} from '@fundamental-ngx/platform';
+} from '@fundamental-ngx/platform/dynamic-page';
 import { PlatformDynamicPagePageOverflowService } from './platform-dynamic-page-page-overflow.service';
 
 @Component({

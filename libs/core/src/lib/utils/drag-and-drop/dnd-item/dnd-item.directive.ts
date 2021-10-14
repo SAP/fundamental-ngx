@@ -1,7 +1,16 @@
-import { AfterContentInit, Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import {
+    AfterContentInit,
+    Directive,
+    ElementRef,
+    EventEmitter,
+    Input,
+    OnDestroy,
+    Output
+} from '@angular/core';
 import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
 import { ElementChord, LinkPosition } from '../dnd-list/dnd-list.directive';
 import { Subscription } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 export interface ElementPosition {
     x: number;
@@ -99,6 +108,7 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     /** @hidden */
     ngAfterContentInit(): void {
         this._setCDKDrag();
+        this._listenElementEvents();
     }
 
     /** @hidden */
@@ -128,6 +138,7 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     onCdkDragStart(): void {
         /** Adds class */
         this.elementRef.nativeElement.classList.add(this.classWhenElementDragged);
+
         if (!this._placeholderElement) {
             this.createPlaceholder();
         }
@@ -276,6 +287,18 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
         const docFrag = document.createDocumentFragment();
         docFrag.appendChild(cloneNode);
         element.parentNode.insertBefore(docFrag, element.nextSibling)
+    }
+
+    private _listenElementEvents(): void {
+        this._subscriptions.add(this.released.pipe(
+            // postpone blur
+            delay(0),
+        ).subscribe(() => {
+            if (this.containerSelector) {
+                this.elementRef.nativeElement.children[0].blur();
+            }
+            this.elementRef.nativeElement.blur();
+        }));
     }
 }
 

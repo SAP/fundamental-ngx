@@ -21,7 +21,10 @@ import { ConnectedOverlayPositionChange } from '@angular/cdk/overlay';
 import { merge, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, startWith, takeUntil } from 'rxjs/operators';
 
-import { GetDefaultPosition, PopoverPosition } from '@fundamental-ngx/core/shared';
+import {
+    GetDefaultPosition,
+    PopoverPosition
+} from '@fundamental-ngx/core/shared';
 import { BasePopoverClass } from '../base/base-popover.class';
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { PopoverBodyComponent } from '../popover-body/popover-body.component';
@@ -361,7 +364,7 @@ export class PopoverService extends BasePopoverClass {
         }
 
         if (this.placement) {
-            return [PopoverPosition.getCdkPlacement(this.placement)];
+            return [PopoverPosition.getCdkPlacement(this.placement, this._getDirection())]
         }
 
         return [];
