@@ -6,19 +6,19 @@
 
     <!-- Input -->
     <ng-container *ngIf="_input">
-        <fdp-input
-            [name]="name"
-            [id]="id"
-            [placeholder]="placeholder"
-            [contentDensity]="contentDensity"
-            [type]="_input.type"
-            [disabled]="disabled"
-            [value]="value"
-            [ariaLabel]="ariaLabel"
-            [ariaLabelledBy]="ariaLabelledBy"
-            [required]="required"
-            (input)="_onChangeInputValue($event.target.value)"
-            (focusChange)="_onFocusChanged($event)"
+        <fdp-input [name]="name"
+                   [id]="id"
+                   [placeholder]="placeholder"
+                   [contentDensity]="contentDensity"
+                   [type]="_input.type"
+                   [disabled]="disabled"
+                   [value]="value"
+                   [ariaLabel]="ariaLabel"
+                   [ariaLabelledBy]="ariaLabelledBy"
+                   [required]="required"
+                   (input)="_onChangeInputValue($event.target.value)"
+                   (focusChange)="_onFocusChanged($event)"
+                   (keypress)="_onKeyPress($event)"
         ></fdp-input>
     </ng-container>
 

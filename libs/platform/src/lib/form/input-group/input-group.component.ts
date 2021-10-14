@@ -144,6 +144,17 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
     }
 
     /** @hidden */
+    _onKeyPress(event: KeyboardEvent): void {
+        // prevent typing non-digit chars
+        if (this._input.type === 'number') {
+            const charStr = event.code.slice(-1);
+
+            if (!charStr.match(/^[0-9]+$/))
+                event.preventDefault();
+        }
+    }
+
+    /** @hidden */
     private _listenToChildrenQueryListChanges(): void {
         this._children.changes.pipe(startWith(this._children)).subscribe(() => {
             this._createAddonsGroups();
