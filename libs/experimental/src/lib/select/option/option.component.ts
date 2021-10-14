@@ -1,5 +1,6 @@
 import {
-    ChangeDetectionStrategy, ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ElementRef,
     EventEmitter,
@@ -26,7 +27,6 @@ import {
     }
 })
 export class ExperimentalOptionComponent {
-
     /** Value of the option. Similar to how a native select operates. */
     @Input()
     value: string | any;
@@ -70,5 +70,4 @@ export class ExperimentalOptionComponent {
     show(): void {
         this._elRef.nativeElement.style.display = 'list-item';
     }
-
 }

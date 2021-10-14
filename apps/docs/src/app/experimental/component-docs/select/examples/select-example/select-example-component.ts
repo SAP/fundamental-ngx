@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'fd-select-example',
@@ -7,8 +6,4 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class SelectExampleComponent {
     options: string[] = ['Apple', 'Pineapple', 'Kiwi', 'Tomato', 'Strawberry'];
-
-    customForm = new FormGroup({
-        selectControl1: new FormControl(this.options[1])
-    });
 }

@@ -5,29 +5,3 @@
 </div>
 <br/>
 Example 1 selection: {{selectExample1.value}}
-
-<br/><br/>
-
-<div style="width: 200px">
-    <form [formGroup]="customForm">
-        <fn-select formControlName="selectControl1" placeholder="Select an option" label="Reactive Form Selector">
-            <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
-        </fn-select>
-    </form>
-</div>
-<small style="display: block">Value: {{customForm.controls.selectControl1.value}}</small>
-<small style="display: block">Touched: {{customForm.touched}}</small>
-<small style="display: block">Dirty: {{customForm.dirty}}</small>
-<small style="display: block">Status: {{customForm.status}}</small>
-
-<br/><br/>
-
-<div style="width: 200px">
-    <fn-select [editable]="true" placeholder="Select an option" label="Editable Selector" #selectEditableExample>
-        <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
-    </fn-select>
-</div>
-<br/>
-Editable Example selection: {{selectEditableExample.value}}
-
-<br/><br/>

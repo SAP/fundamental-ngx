@@ -3,10 +3,14 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ContentChildren, ElementRef, forwardRef,
+    ContentChildren,
+    ElementRef,
+    forwardRef,
     HostListener,
-    Input, OnDestroy,
-    QueryList, ViewChild,
+    Input,
+    OnDestroy,
+    QueryList,
+    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ExperimentalOptionComponent } from './option/option.component';
@@ -33,7 +37,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy, ControlValueAccessor {
-
     /** Whether or not the select is opened. */
     @Input()
     opened = false;
@@ -56,7 +59,7 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
     @ContentChildren(ExperimentalOptionComponent)
     options: QueryList<ExperimentalOptionComponent>;
 
-    @ViewChild('selectInput', {read: ElementRef})
+    @ViewChild('selectInput', { read: ElementRef })
     selectInput: ElementRef;
 
     @Input()
@@ -80,16 +83,19 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
     /** @hidden */
     _optionsListEmpty = false;
 
-    constructor(private _cdRef: ChangeDetectorRef, private _elRef: ElementRef) {
-    }
+    constructor(private _cdRef: ChangeDetectorRef, private _elRef: ElementRef) {}
 
     ngAfterContentInit(): void {
-        this.options.forEach(option => {
-            this._subscriptions.add(option.optionClicked.subscribe(clickedOption => {
-                this.optionClicked(clickedOption);
-            }));
+        this.options.forEach((option) => {
+            this._subscriptions.add(
+                option.optionClicked.subscribe((clickedOption) => {
+                    this.optionClicked(clickedOption);
+                })
+            );
             if (this._internalValue && option.value === this._internalValue) {
-                setTimeout(() => { option.selected = true; });
+                setTimeout(() => {
+                    option.selected = true;
+                });
             }
         });
     }
@@ -100,24 +106,50 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
 
     @HostListener('keydown', ['$event'])
     keydownHandler(event: KeyboardEvent): void {
-        event.preventDefault();
-        if (document.activeElement === this.selectInput.nativeElement && KeyUtil.isKeyCode(event, TAB)) {
-            this.options.first.focus();
+        if (
+            document.activeElement === this.selectInput.nativeElement &&
+            (KeyUtil.isKeyCode(event, TAB) || (KeyUtil.isKeyCode(event, DOWN_ARROW) && this.opened))
+        ) {
+            let foundFirst = false;
+            this.options.forEach((option) => {
+                if (option.elementRef.nativeElement.style.display !== 'none' && !foundFirst) {
+                    foundFirst = true;
+                    option.focus();
+                }
+            });
         } else if (this.opened && KeyUtil.isKeyCode(event, ESCAPE)) {
             this.opened = false;
-        } else if (!this.opened && document.activeElement === this.selectInput.nativeElement && KeyUtil.isKeyCode(event, SPACE)) {
+        } else if (
+            !this.opened &&
+            document.activeElement === this.selectInput.nativeElement &&
+            KeyUtil.isKeyCode(event, SPACE)
+        ) {
+            event.preventDefault();
             this.opened = true;
         } else if (KeyUtil.isKeyCode(event, ENTER)) {
             const focusedOption = this._getFocusedOption();
             if (focusedOption) {
                 this.optionClicked(focusedOption);
             }
-        } else if (KeyUtil.isKeyCode(event, DOWN_ARROW) || (KeyUtil.isKeyCode(event, UP_ARROW))) {
+        } else if (
+            KeyUtil.isKeyCode(event, DOWN_ARROW) ||
+            KeyUtil.isKeyCode(event, UP_ARROW) ||
+            KeyUtil.isKeyCode(event, TAB)
+        ) {
             const focusedOption = this._getFocusedOption();
             if (focusedOption) {
-                const focusedIndex = this.options.toArray().indexOf(focusedOption);
-                const newIndex = KeyUtil.isKeyCode(event, DOWN_ARROW) ? focusedIndex + 1 : focusedIndex - 1;
-                const nextOption = this.options.toArray()[newIndex];
+                event.preventDefault();
+                const visibleOptions = this.options.toArray().filter((option) => {
+                    return option.elementRef.nativeElement.style.display !== 'none';
+                });
+                const focusedIndex = visibleOptions.indexOf(focusedOption);
+                let newIndex = focusedIndex;
+                if (KeyUtil.isKeyCode(event, DOWN_ARROW) || (KeyUtil.isKeyCode(event, TAB) && !event.shiftKey)) {
+                    newIndex = focusedIndex + 1;
+                } else if (KeyUtil.isKeyCode(event, UP_ARROW) || (KeyUtil.isKeyCode(event, TAB) && event.shiftKey)) {
+                    newIndex = focusedIndex - 1;
+                }
+                const nextOption = visibleOptions[newIndex];
                 if (nextOption) {
                     nextOption.focus();
                 }
@@ -140,21 +172,20 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
         this.opened = !this.opened;
     }
 
-
     /** Function called when an option is clicked. */
     optionClicked(clickedOption: ExperimentalOptionComponent): void {
-        this.options.forEach(option => {
-            option === clickedOption ? option.selected = true : option.selected = false;
+        this.options.forEach((option) => {
+            option === clickedOption ? (option.selected = true) : (option.selected = false);
         });
         this.value = clickedOption.value;
         this.opened = false;
     }
 
     /** @hidden */
-    onChange: Function = () => { };
+    onChange: Function = () => {};
 
     /** @hidden */
-    onTouched: Function = () => { };
+    onTouched: Function = () => {};
 
     /** @hidden */
     registerOnChange(fn: any): void {
@@ -176,7 +207,7 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
     /** @hidden */
     private _getFocusedOption(): ExperimentalOptionComponent {
         let retVal = null;
-        this.options.forEach(option => {
+        this.options.forEach((option) => {
             if (option.elementRef.nativeElement.classList.contains('focus-visible')) {
                 retVal = option;
             }
@@ -188,17 +219,19 @@ export class ExperimentalSelectComponent implements AfterContentInit, OnDestroy,
     /** @hidden */
     private _filterItems(): void {
         let visibleOptions = 0;
-        this.options.forEach(option => {
+        this.options.forEach((option) => {
             if (!option.value.toLowerCase().startsWith(this._internalValue.toLowerCase())) {
                 option.hide();
             } else {
                 visibleOptions++;
                 option.show();
+                if (!this.opened) {
+                    this.opened = true;
+                }
             }
             option.selected = option.value.toLowerCase() === this._internalValue.toLowerCase();
         });
 
-        visibleOptions > 0 ? this._optionsListEmpty  = false : this._optionsListEmpty = true;
+        visibleOptions > 0 ? (this._optionsListEmpty = false) : (this._optionsListEmpty = true);
     }
-
 }

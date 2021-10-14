@@ -16,8 +16,8 @@
  * Licensed under Apache License 2.0 (https://github.com/SAP/fundamental-styles/blob/main/LICENSE)
  */
 .fn-select {
-    font-family: "72","72full",Arial,Helvetica,sans-serif;
-    font-size: .875rem;
+    font-family: '72', '72full', Arial, Helvetica, sans-serif;
+    font-size: 0.875rem;
     line-height: 1.5rem;
     color: #223548;
     font-weight: 400;
@@ -25,34 +25,34 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    border: 0
+    border: 0;
 }
 .fn-select::after,
 .fn-select::before {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
-    font-size: inherit
+    font-size: inherit;
 }
-.fn-select [class*=sap-icon] {
-    cursor: pointer
+.fn-select [class*='sap-icon'] {
+    cursor: pointer;
 }
 .fn-select__input {
-    padding-left: .75rem;
-    padding-right: 2.5rem
+    padding-left: 0.75rem;
+    padding-right: 2.5rem;
 }
-.fn-select__input[dir=rtl],
-[dir=rtl] .fn-select__input {
-    padding-right: .75rem;
-    padding-left: 2.5rem
+.fn-select__input[dir='rtl'],
+[dir='rtl'] .fn-select__input {
+    padding-right: 0.75rem;
+    padding-left: 2.5rem;
 }
 .fn-select__input.is-readonly,
-.fn-select__input[aria-readonly=true],
+.fn-select__input[aria-readonly='true'],
 .fn-select__input[readonly] {
-    cursor: pointer
+    cursor: pointer;
 }
 .fn-select__menu {
-    font-family: "72","72full",Arial,Helvetica,sans-serif;
-    font-size: .875rem;
+    font-family: '72', '72full', Arial, Helvetica, sans-serif;
+    font-size: 0.875rem;
     line-height: 1.5rem;
     color: #223548;
     font-weight: 400;
@@ -63,22 +63,22 @@
     border: 0;
     width: 100%;
     list-style: none;
-    padding: .25rem;
-    margin-top: .5rem;
+    padding: 0.25rem;
+    margin-top: 0.5rem;
     background: #fff;
-    -webkit-box-shadow: 0 0 2px rgba(131,150,168,.16),0 8px 16px rgba(131,150,168,.16);
-    box-shadow: 0 0 2px rgba(131,150,168,.16),0 8px 16px rgba(131,150,168,.16);
-    border-radius: .5rem
+    -webkit-box-shadow: 0 0 2px rgba(131, 150, 168, 0.16), 0 8px 16px rgba(131, 150, 168, 0.16);
+    box-shadow: 0 0 2px rgba(131, 150, 168, 0.16), 0 8px 16px rgba(131, 150, 168, 0.16);
+    border-radius: 0.5rem;
 }
 .fn-select__menu::after,
 .fn-select__menu::before {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
-    font-size: inherit
+    font-size: inherit;
 }
 .fn-select__item {
-    font-family: "72","72full",Arial,Helvetica,sans-serif;
-    font-size: .875rem;
+    font-family: '72', '72full', Arial, Helvetica, sans-serif;
+    font-size: 0.875rem;
     line-height: 1.5rem;
     color: #223548;
     font-weight: 400;
@@ -89,8 +89,8 @@
     border: 0;
     -webkit-transition: all 250ms ease-in-out;
     transition: all 250ms ease-in-out;
-    margin-top: .125rem;
-    margin-bottom: .125rem;
+    margin-top: 0.125rem;
+    margin-bottom: 0.125rem;
     color: #223548;
     background: #fff;
     width: 100%;
@@ -98,57 +98,57 @@
     overflow: hidden;
     position: relative;
     height: 2rem;
-    border-radius: .25rem;
-    padding: .25rem .5rem
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
 }
 .fn-select__item::after,
 .fn-select__item::before {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
-    font-size: inherit
+    font-size: inherit;
 }
 .fn-select__item::before {
-    background: #fff
+    background: #fff;
 }
 .fn-select__item::before {
     left: 0;
     top: 0;
     content: '';
     height: 100%;
-    width: .125rem;
-    position: absolute
+    width: 0.125rem;
+    position: absolute;
 }
-.fn-select__item::before[dir=rtl],
-[dir=rtl] .fn-select__item::before {
+.fn-select__item::before[dir='rtl'],
+[dir='rtl'] .fn-select__item::before {
     left: auto;
-    right: 0
+    right: 0;
 }
 .fn-select__item.is-hover,
 .fn-select__item:hover {
     color: #223548;
-    background: #f5f6f7
+    background: #f5f6f7;
 }
 .fn-select__item.is-hover::before,
 .fn-select__item:hover::before {
-    background: #d5dadd
+    background: #d5dadd;
 }
 .fn-select__item.is-pressed,
-.fn-select__item[aria-pressed=true] {
+.fn-select__item[aria-pressed='true'] {
     color: #223548;
-    background: #f5f6f7!important
+    background: #f5f6f7 !important;
 }
 .fn-select__item.is-pressed::before,
-.fn-select__item[aria-pressed=true]::before {
-    background: #a9b4be!important
+.fn-select__item[aria-pressed='true']::before {
+    background: #a9b4be !important;
 }
 .fn-select__item.is-active,
 .fn-select__item:active {
     color: #223548;
-    background: #f5f6f7!important
+    background: #f5f6f7 !important;
 }
 .fn-select__item.is-active::before,
 .fn-select__item:active::before {
-    background: #a9b4be!important
+    background: #a9b4be !important;
 }
 .fn-select__item:focus:not(.focus-visible) {
     z-index: 5;
@@ -156,54 +156,54 @@
     background: #fff;
     outline: 0;
     -webkit-box-shadow: none;
-    box-shadow: none
+    box-shadow: none;
 }
 .fn-select__item:focus:not(.focus-visible)::before {
-    background: #fff
+    background: #fff;
 }
 .fn-select__item.focus-visible {
     color: #223548;
     background: #fff;
     outline: 0;
-    -webkit-box-shadow: 0 0 2px rgba(27,144,255,.16),0 4px 8px rgba(27,144,255,.16),0 0 0 .125rem #1b90ff;
-    box-shadow: 0 0 2px rgba(27,144,255,.16),0 4px 8px rgba(27,144,255,.16),0 0 0 .125rem #1b90ff
+    -webkit-box-shadow: 0 0 2px rgba(27, 144, 255, 0.16), 0 4px 8px rgba(27, 144, 255, 0.16), 0 0 0 0.125rem #1b90ff;
+    box-shadow: 0 0 2px rgba(27, 144, 255, 0.16), 0 4px 8px rgba(27, 144, 255, 0.16), 0 0 0 0.125rem #1b90ff;
 }
 .fn-select__item.focus-visible::before {
-    background: #fff
+    background: #fff;
 }
 .fn-select__item--selected {
     color: #0057d2;
-    background: #ebf8ff
+    background: #ebf8ff;
 }
 .fn-select__item--selected::before {
-    background: #1b90ff
+    background: #1b90ff;
 }
 .fn-select__item--selected.is-hover,
 .fn-select__item--selected:hover {
     color: #0040b0;
-    background: #ebf8ff
+    background: #ebf8ff;
 }
 .fn-select__item--selected.is-hover::before,
 .fn-select__item--selected:hover::before {
-    background: #0070f2
+    background: #0070f2;
 }
 .fn-select__item--selected.is-pressed,
-.fn-select__item--selected[aria-pressed=true] {
+.fn-select__item--selected[aria-pressed='true'] {
     color: #002a86;
-    background: #ebf8ff
+    background: #ebf8ff;
 }
 .fn-select__item--selected.is-pressed::before,
-.fn-select__item--selected[aria-pressed=true]::before {
-    background: #0057d2
+.fn-select__item--selected[aria-pressed='true']::before {
+    background: #0057d2;
 }
 .fn-select__item--selected.is-active,
 .fn-select__item--selected:active {
     color: #002a86;
-    background: #ebf8ff
+    background: #ebf8ff;
 }
 .fn-select__item--selected.is-active::before,
 .fn-select__item--selected:active::before {
-    background: #0057d2
+    background: #0057d2;
 }
 .fn-select__item--selected.is-focus,
 .fn-select__item--selected:focus {
@@ -211,10 +211,10 @@
     color: #0057d2;
     background: #ebf8ff;
     outline: 0;
-    -webkit-box-shadow: 0 0 2px rgba(27,144,255,.16),0 4px 8px rgba(27,144,255,.16),0 0 0 .125rem #1b90ff;
-    box-shadow: 0 0 2px rgba(27,144,255,.16),0 4px 8px rgba(27,144,255,.16),0 0 0 .125rem #1b90ff
+    -webkit-box-shadow: 0 0 2px rgba(27, 144, 255, 0.16), 0 4px 8px rgba(27, 144, 255, 0.16), 0 0 0 0.125rem #1b90ff;
+    box-shadow: 0 0 2px rgba(27, 144, 255, 0.16), 0 4px 8px rgba(27, 144, 255, 0.16), 0 0 0 0.125rem #1b90ff;
 }
 .fn-select__item--selected.is-focus::before,
 .fn-select__item--selected:focus::before {
-    background: #1b90ff
+    background: #1b90ff;
 }
