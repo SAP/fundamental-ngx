@@ -126,6 +126,7 @@ describe('Table test suite', function() {
         it('should check clickability cancel button', () => {
             scrollIntoView(tableCustomColumnsExample);
             click(tableCustomColumnsExample + button);
+            waitForElDisplayed(dialogContent);
             expect(isElementClickable(dialogContent + button, 3))
                 .toBe(true, 'cancel button not clickable');
         });
