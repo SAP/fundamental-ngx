@@ -21,16 +21,7 @@
             span {
                 overflow: hidden;
                 text-overflow: ellipsis;
-                &.left-aligned {
-                    // special fix for IE, in which left-aligned span may jump to the right when tabbed over
-                    margin-right: auto;
-                    
-                    [dir="rtl"] &,
-                    &[dir="rtl"] {
-                        margin-right: 0;
-                        margin-left: auto;
-                    }
-                }
+                width: 100%;
             }
         }
 
