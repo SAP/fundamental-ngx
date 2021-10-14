@@ -24,6 +24,7 @@ import { WizardGeneratorVisibleSummaryBranchingExampleComponent } from './exampl
 import { WizardGeneratorCustomizableEmbededExampleComponent } from './examples/wizard-generator-customizable-embeded-example.component';
 import { WizardGeneratorSummaryObjectsExampleComponent } from './examples/wizard-generator-summary-objects-example.component';
 import { WizardGeneratorExternalNavigationExampleComponent } from './examples/wizard-generator-external-navigation-example.component';
+import { WizardGeneratorOnchangeExampleComponent } from './examples/wizard-generator-onchange-example.component';
 
 const routes: Routes = [
     {
@@ -50,7 +51,8 @@ const routes: Routes = [
         WizardGeneratorVisibleSummaryBranchingExampleComponent,
         WizardGeneratorCustomizableEmbededExampleComponent,
         WizardGeneratorSummaryObjectsExampleComponent,
-        WizardGeneratorExternalNavigationExampleComponent
+        WizardGeneratorExternalNavigationExampleComponent,
+        WizardGeneratorOnchangeExampleComponent
     ],
     imports: [
         RouterModule.forChild(routes),
