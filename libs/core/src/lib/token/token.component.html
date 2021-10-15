@@ -16,5 +16,12 @@
     <span class="fd-token__text no-text-select">
         <ng-content></ng-content>
     </span>
-    <span (click)="closeClickHandler($event)" role="button" [attr.aria-label]="deleteButtonLabel" *ngIf="!readOnly" class="fd-token__close" tabindex="-1"></span>
+    <span
+        (click)="closeClickHandler($event)"
+        role="button"
+        [attr.aria-label]="deleteButtonLabel"
+        *ngIf="!readOnly"
+        class="fd-token__close"
+        tabindex="-1"
+    ></span>
 </span>
