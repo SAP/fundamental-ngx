@@ -9,3 +9,13 @@ package-lock.json
 
 # these files are autogenereated and there's no point in taking the time to format them
 /apps/docs/src/assets/typedoc
+
+# e2e
+/e2e/*.map
+allure-report
+allure-results
+unit-tests-allure-report
+libs/core/reports
+.tmp
+e2e/tmp
+axe-reports

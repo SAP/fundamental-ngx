@@ -336,9 +336,9 @@ export abstract class BaseInput
     }
 
     /**
-     * Used to change the value of a control. 
+     * Used to change the value of a control.
      * @param value the value to be applied
-     * @param emitOnChange whether to emit "onChange" event. 
+     * @param emitOnChange whether to emit "onChange" event.
      * Should be "false", if the change is made programmatically (internally) by the control, "true" otherwise
      */
     protected setValue(value: any, emitOnChange = true): void {

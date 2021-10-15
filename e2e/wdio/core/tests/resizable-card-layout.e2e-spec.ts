@@ -147,7 +147,7 @@ describe('Resizable card layout component:', () => {
         cardIndex: number = 0
     ): void {
         if (section === defaultExample && size === 'smaller') {
-            cardIndex = resizeIndex;
+            cardIndex = resizeIndex + 1;
         }
         if (section === configExample && size === 'smaller') {
             cardIndex = resizeIndex;
