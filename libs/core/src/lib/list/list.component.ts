@@ -168,7 +168,7 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
 
     /** @hidden */
     private _listenOnQueryChange(): void {
-        this.items.changes.pipe(startWith(0), takeUntil(this._onDestroy$)).subscribe(() => {
+        this._focusItems.changes.pipe(startWith(0), takeUntil(this._onDestroy$)).subscribe(() => {
             this._recheckLinks();
             this._listenOnItemsClick();
         });
