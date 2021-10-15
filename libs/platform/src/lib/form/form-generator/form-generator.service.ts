@@ -18,7 +18,6 @@ import { DynamicFormGroup } from './interfaces/dynamic-form-group';
  */
 @Injectable()
 export class FormGeneratorService implements OnDestroy {
-
     /**
      * Map of generated forms to access later.
      */
@@ -110,12 +109,13 @@ export class FormGeneratorService implements OnDestroy {
             form.addControl(formItem.name, formControl);
 
             if (formItem.onchange) {
-                formControl.valueChanges.pipe(debounceTime(50), takeUntil(this._onDestroy$))
-                .subscribe(async (value) => {
-                    const obj = formItem.onchange(value, this.forms);
+                formControl.valueChanges
+                    .pipe(debounceTime(50), takeUntil(this._onDestroy$))
+                    .subscribe(async (value) => {
+                        const obj = formItem.onchange(value, this.forms);
 
-                    await this._getFunctionValue(obj);
-                });
+                        await this._getFunctionValue(obj);
+                    });
             }
 
             formControl.updateValueAndValidity({ emitEvent: false });

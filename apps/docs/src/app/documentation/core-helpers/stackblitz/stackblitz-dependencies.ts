@@ -30,7 +30,7 @@ export class StackblitzDependencies {
         const _dependencies: object = {};
 
         this._libDependencies.forEach((libDep) => (_dependencies[libDep] = parseVersion(packageInfo.version)));
-        
+
         this._dependencies.forEach((dep) => {
             if (packageLockInfo.dependencies && packageLockInfo.dependencies[dep]) {
                 _dependencies[dep] = packageLockInfo.dependencies[dep].version;

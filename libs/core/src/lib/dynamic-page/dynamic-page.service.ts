@@ -10,7 +10,7 @@ export class DynamicPageService {
     pinned = new BehaviorSubject<boolean>(false);
 
     /** @hidden */
-    pixelsSizeChanged = new BehaviorSubject<number>(0)
+    pixelsSizeChanged = new BehaviorSubject<number>(0);
 
     /** @hidden */
     subheaderVisibilityChange = new Subject<void>();

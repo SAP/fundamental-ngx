@@ -135,7 +135,7 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
         private _elRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
         @Optional() @Inject(WIZARD) private _wizard: WizardComponentInterface
-        ) {}
+    ) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -180,7 +180,8 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
             this.visited &&
             (!event || KeyUtil.isKeyCode(event, [SPACE, ENTER])) &&
             (!this.stepIndicator || !this.stepIndicator.stackedItems || !this.stepIndicator.stackedItems.length) &&
-            (this.stepClickValidator === undefined || await this.stepClickValidator(this.visited, this.completed) === true)
+            (this.stepClickValidator === undefined ||
+                (await this.stepClickValidator(this.visited, this.completed)) === true)
         ) {
             this.stepClicked.emit(this);
         }
@@ -200,8 +201,6 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     getStepClientWidth(): number {
         return this._elRef.nativeElement.clientWidth;
     }
-
-
 
     /** @hidden */
     removeFromDom(): void {

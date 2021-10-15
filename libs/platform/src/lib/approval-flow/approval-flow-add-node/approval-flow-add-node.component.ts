@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, TemplateRef, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    OnDestroy,
+    OnInit,
+    TemplateRef,
+    ViewEncapsulation
+} from '@angular/core';
 import { forkJoin, Observable, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 
@@ -23,19 +31,12 @@ export interface AddNodeDialogRefData {
 export interface AddNodeDialogFormData {
     node: ApprovalNode;
     nodeType: APPROVAL_FLOW_NODE_TYPES;
-    toNextSerial: boolean
+    toNextSerial: boolean;
 }
 
-export type ApprovalFlowNewNodePlacement =
-    'before'
-    | 'after'
-    | 'before-all'
-    | 'after-all';
+export type ApprovalFlowNewNodePlacement = 'before' | 'after' | 'before-all' | 'after-all';
 
-export type ApprovalFlowNodeTarget =
-    ApprovalFlowNewNodePlacement
-    | 'empty'
-    | 'parallel';
+export type ApprovalFlowNodeTarget = ApprovalFlowNewNodePlacement | 'empty' | 'parallel';
 
 export enum APPROVAL_FLOW_NODE_TYPES {
     SERIAL = 'SERIAL',
@@ -51,10 +52,7 @@ export enum APPROVAL_FLOW_APPROVER_TYPES {
 @Component({
     selector: 'fdp-approval-flow-add-node',
     templateUrl: './approval-flow-add-node.component.html',
-    styleUrls: [
-        '../styles/approval-flow-dialog.scss',
-        './approval-flow-add-node.component.scss'
-    ],
+    styleUrls: ['../styles/approval-flow-dialog.scss', './approval-flow-add-node.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
@@ -164,8 +162,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     get _isMainSubmitButtonDisabled(): boolean {
         const approvers = this._isSingleUserMode ? this._selectedApprovers : this._selectedTeamArray;
 
-        return !approvers.length
-            || (this._checkDueDate && !this._dueDate);
+        return !approvers.length || (this._checkDueDate && !this._dueDate);
     }
 
     /** @hidden */
@@ -178,36 +175,35 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         this._dataSourceSub = forkJoin([
             this._data.approvalFlowDataSource.fetchTeams().pipe(take(1)),
             this._data.approvalFlowDataSource.fetchApprovers().pipe(take(1))
-        ])
-            .subscribe(([teams, approvers]) => {
-                this._teams = teams;
-                this._setFilteredTeams(teams || []);
+        ]).subscribe(([teams, approvers]) => {
+            this._teams = teams;
+            this._setFilteredTeams(teams || []);
 
-                this._approvers = approvers;
-                this._setFilteredApprovers(approvers || []);
+            this._approvers = approvers;
+            this._setFilteredApprovers(approvers || []);
 
-                if (this._data.isEdit) {
-                    this._checkDueDate = this._data.checkDueDate;
+            if (this._data.isEdit) {
+                this._checkDueDate = this._data.checkDueDate;
 
-                    if (this._checkDueDate && this._data.node.dueDate) {
-                        this._dueDate = FdDate.getFdDateByDate(new Date(this._data.node.dueDate));
-                    }
-
-                    this._selectedApprovers = [...this._data.node.approvers];
-
-                    if (this._data.node.approvalTeamId) {
-                        this.viewService.selectTeam(this._teams.find(t => t.id === this._data.node.approvalTeamId));
-
-                        this._selectedTeam = this.viewService.team;
-                        this._selectedTeamArray = [this.viewService.team];
-                        this._approverType = this._data.node.isEveryoneApprovalNeeded
-                            ? this._approverTypes.EVERYONE
-                            : this._approverTypes.ANYONE;
-                    }
-
-                    this._cdr.detectChanges();
+                if (this._checkDueDate && this._data.node.dueDate) {
+                    this._dueDate = FdDate.getFdDateByDate(new Date(this._data.node.dueDate));
                 }
-            });
+
+                this._selectedApprovers = [...this._data.node.approvers];
+
+                if (this._data.node.approvalTeamId) {
+                    this.viewService.selectTeam(this._teams.find((t) => t.id === this._data.node.approvalTeamId));
+
+                    this._selectedTeam = this.viewService.team;
+                    this._selectedTeamArray = [this.viewService.team];
+                    this._approverType = this._data.node.isEveryoneApprovalNeeded
+                        ? this._approverTypes.EVERYONE
+                        : this._approverTypes.ANYONE;
+                }
+
+                this._cdr.detectChanges();
+            }
+        });
 
         this._viewChangeSub = this.viewService.onViewChange.subscribe(() => {
             this._onSearchStringChange('');
@@ -318,7 +314,7 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         this.viewService.selectTeam(team);
         this.viewService.setCurrentView(VIEW_MODES.VIEW_TEAM_MEMBERS);
 
-        this._selectedTeamMembers = this._approvers.filter(user => team.members.includes(user.id));
+        this._selectedTeamMembers = this._approvers.filter((user) => team.members.includes(user.id));
 
         this._setFilteredTeamMembers(this._selectedTeamMembers);
         this._cdr.detectChanges();
@@ -338,7 +334,9 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
     /** @hidden */
     _submit(): void {
         if (!this._isSingleUserMode && this._selectedTeam) {
-            this._data.node.approvers = this._selectedTeam.members.map(memberId => this._approvers.find(a => a.id === memberId));
+            this._data.node.approvers = this._selectedTeam.members.map((memberId) =>
+                this._approvers.find((a) => a.id === memberId)
+            );
         }
 
         if (this._checkDueDate) {
@@ -364,15 +362,15 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         }
 
         if (this.viewService.isSelectUserMode) {
-            this._setFilteredApprovers(this._approvers.filter(user => filterByName(user, searchString)));
+            this._setFilteredApprovers(this._approvers.filter((user) => filterByName(user, searchString)));
         }
 
         if (this.viewService.isSelectTeamMode) {
-            this._setFilteredTeams(this._teams.filter(team => filterByName(team, searchString)));
+            this._setFilteredTeams(this._teams.filter((team) => filterByName(team, searchString)));
         }
 
         if (this.viewService.isTeamMembersMode) {
-            this._setFilteredTeamMembers(this._selectedTeamMembers.filter(user => filterByName(user, searchString)));
+            this._setFilteredTeamMembers(this._selectedTeamMembers.filter((user) => filterByName(user, searchString)));
         }
     }
 
@@ -401,14 +399,14 @@ export class ApprovalFlowAddNodeComponent implements OnInit, OnDestroy {
         }
 
         const teams: string[] = users.reduce((_teams, user) => {
-            const userTeam = this._teams.find(team => team.members.includes(user.id));
+            const userTeam = this._teams.find((team) => team.members.includes(user.id));
 
             if (userTeam && !_teams.includes(userTeam.id)) {
                 _teams.push(userTeam.id);
             }
 
             return _teams;
-        }, [])
+        }, []);
 
         return teams.length > 1;
     }

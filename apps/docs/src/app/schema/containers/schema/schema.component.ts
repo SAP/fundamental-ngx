@@ -60,7 +60,6 @@ export class SchemaComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-
         if (this._resetted && changes.initialValues) {
             this.initialValues = changes.initialValues.currentValue;
             this._resetted = false;
@@ -76,8 +75,7 @@ export class SchemaComponent implements OnInit, OnChanges, OnDestroy {
 
         this.schemaGroup.patchValue(this.initialValues);
 
-        this.schemaGroup.valueChanges
-        .pipe(takeUntil(this._onDestroy$)).subscribe((values) => {
+        this.schemaGroup.valueChanges.pipe(takeUntil(this._onDestroy$)).subscribe((values) => {
             this.onSchemaValues.emit(values);
         });
     }

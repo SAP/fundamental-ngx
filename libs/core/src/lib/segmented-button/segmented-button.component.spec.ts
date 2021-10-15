@@ -2,7 +2,12 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { isDisabledClass, isSelectedClass, SegmentedButtonComponent, SegmentedButtonModule } from '@fundamental-ngx/core/segmented-button';
+import {
+    isDisabledClass,
+    isSelectedClass,
+    SegmentedButtonComponent,
+    SegmentedButtonModule
+} from '@fundamental-ngx/core/segmented-button';
 
 @Component({
     selector: 'fd-test-component',
@@ -34,12 +39,14 @@ describe('SegmentedButtonComponent', () => {
     let component: HostComponent;
     let fixture: ComponentFixture<HostComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [HostComponent],
-            imports: [SegmentedButtonModule, ButtonModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [HostComponent],
+                imports: [SegmentedButtonModule, ButtonModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(HostComponent);
@@ -133,14 +140,14 @@ describe('SegmentedButtonComponent', () => {
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBeTrue();
         expect(component.segmentedButton['_currentValue']).toEqual(['first']);
 
-        component.secondButton.nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: 'Enter'}));
+        component.secondButton.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
         fixture.detectChanges();
 
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBeTrue();
         expect(component.secondButton.nativeElement.classList.contains(isSelectedClass)).toBeTrue();
         expect(component.segmentedButton['_currentValue']).toEqual(['first', 'second']);
 
-        component.thirdButton.nativeElement.dispatchEvent(new KeyboardEvent('keydown', {key: ' '}));
+        component.thirdButton.nativeElement.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
         fixture.detectChanges();
 
         expect(component.firstButton.nativeElement.classList.contains(isSelectedClass)).toBeTrue();

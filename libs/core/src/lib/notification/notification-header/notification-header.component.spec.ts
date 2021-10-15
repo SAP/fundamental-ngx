@@ -8,12 +8,14 @@ describe('NotificationHeaderComponent', () => {
     let component: NotificationHeaderComponent;
     let fixture: ComponentFixture<NotificationHeaderComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ButtonModule],
-            declarations: [NotificationHeaderComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [ButtonModule],
+                declarations: [NotificationHeaderComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(NotificationHeaderComponent);

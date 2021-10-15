@@ -199,5 +199,5 @@ export class TableService {
 
 function setCurrentPageToState(state: TableState, currentPage: number): TableState {
     const newPageState: CollectionPage = { ...state.page, currentPage: currentPage };
-    return { ...state, page: newPageState  };
+    return { ...state, page: newPageState };
 }

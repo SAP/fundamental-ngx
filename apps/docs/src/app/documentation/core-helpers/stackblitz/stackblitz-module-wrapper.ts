@@ -52,7 +52,7 @@ export class StackblitzModuleWrapper {
             .map((file) => file.componentName)
             .join(',\n      ');
 
-return `
+        return `
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { RtlService } from '@fundamental-ngx/core/utils';

@@ -22,7 +22,8 @@ class TableComponentMock
             | 'showFilterSettingsInToolbar'
             | 'showSortSettingsInToolbar'
             | 'showGroupSettingsInToolbar'
-        > {
+        >
+{
     _tableColumnsSubject = new BehaviorSubject<TableColumn[]>([]);
     tableColumnsStream = this._tableColumnsSubject.asObservable();
 

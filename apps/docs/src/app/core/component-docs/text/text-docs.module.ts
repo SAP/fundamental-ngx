@@ -25,11 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
-        TextModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TextModule],
     exports: [RouterModule],
     declarations: [
         TextDocsComponent,

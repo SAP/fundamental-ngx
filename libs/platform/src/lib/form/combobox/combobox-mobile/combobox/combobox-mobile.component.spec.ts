@@ -15,7 +15,10 @@ describe('ComboboxMobileComponent', () => {
     let fixture: ComponentFixture<ComboboxMobileComponent>;
 
     const testComboboxConfigObject: MobileModeConfig = {
-        title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true
+        title: 'title',
+        approveButtonText: 'approve',
+        cancelButtonText: 'cancel',
+        hasCloseButton: true
     };
 
     class ComboboxInputComponent implements ComboboxInterface {
@@ -39,14 +42,18 @@ describe('ComboboxMobileComponent', () => {
         }
     }
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [DialogModule, BrowserAnimationsModule],
-            declarations: [ComboboxMobileComponent],
-            providers: [DynamicComponentService, { provide: COMBOBOX_COMPONENT, useValue: new ComboboxInputComponent() }]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [DialogModule, BrowserAnimationsModule],
+                declarations: [ComboboxMobileComponent],
+                providers: [
+                    DynamicComponentService,
+                    { provide: COMBOBOX_COMPONENT, useValue: new ComboboxInputComponent() }
+                ]
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ComboboxMobileComponent);

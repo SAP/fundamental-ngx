@@ -10,14 +10,16 @@ import { MultiComboboxComponent } from '../../multi-combobox/multi-combobox.comp
 import { MultiComboboxMobileComponent } from '../multi-combobox/multi-combobox-mobile.component';
 import { MULTICOMBOBOX_COMPONENT } from '../../multi-combobox.interface';
 
-
 describe('MultiComboboxMobileComponent', () => {
     let component: MultiComboboxMobileComponent;
     let anyComponent: any;
     let fixture: ComponentFixture<MultiComboboxMobileComponent>;
 
     const testMobileConfigObject: MobileModeConfig = {
-        title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true
+        title: 'title',
+        approveButtonText: 'approve',
+        cancelButtonText: 'cancel',
+        hasCloseButton: true
     };
 
     let multiComboboxInputComponent: Partial<MultiComboboxComponent> = {
@@ -32,16 +34,21 @@ describe('MultiComboboxMobileComponent', () => {
         openChange: new EventEmitter<boolean>()
     };
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [DialogModule, BrowserAnimationsModule],
-            declarations: [MultiComboboxMobileComponent],
-            providers: [DynamicComponentService, {
-                provide: MULTICOMBOBOX_COMPONENT,
-                useValue: multiComboboxInputComponent
-            }]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [DialogModule, BrowserAnimationsModule],
+                declarations: [MultiComboboxMobileComponent],
+                providers: [
+                    DynamicComponentService,
+                    {
+                        provide: MULTICOMBOBOX_COMPONENT,
+                        useValue: multiComboboxInputComponent
+                    }
+                ]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         multiComboboxInputComponent = {
@@ -51,10 +58,8 @@ describe('MultiComboboxMobileComponent', () => {
                 cancelButtonText: 'cancel',
                 hasCloseButton: true
             },
-            dialogDismiss: (backup: SelectableOptionItem[]) => {
-            },
-            dialogApprove: () => {
-            },
+            dialogDismiss: (backup: SelectableOptionItem[]) => {},
+            dialogApprove: () => {},
             openChange: new EventEmitter<boolean>()
         };
         fixture = TestBed.createComponent(MultiComboboxMobileComponent);

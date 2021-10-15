@@ -1,90 +1,33 @@
-<fdp-table
-    #table
-    [dataSource]="source"
-    (filterChange)="logFilterChange($event)"
-    emptyTableMessage="No data found"
->
+<fdp-table #table [dataSource]="source" (filterChange)="logFilterChange($event)" emptyTableMessage="No data found">
+    <fdp-table-toolbar title="Order Line Items" [hideItemCount]="false"> </fdp-table-toolbar>
 
-    <fdp-table-toolbar
-        title="Order Line Items"
-        [hideItemCount]="false"
-    >
-    </fdp-table-toolbar>
+    <fdp-column name="name" key="name" label="Name" align="start" [filterable]="true"> </fdp-column>
 
-    <fdp-column
-        name="name"
-        key="name"
-        label="Name"
-        align="start"
-        [filterable]="true"
-    >
-    </fdp-column>
+    <fdp-column name="description" key="description" label="Description" [filterable]="true"> </fdp-column>
 
-    <fdp-column
-        name="description"
-        key="description"
-        label="Description"
-        [filterable]="true"
-    >
-    </fdp-column>
+    <fdp-column name="price" key="price.value" label="Price" align="end"> </fdp-column>
 
-    <fdp-column
-        name="price"
-        key="price.value"
-        label="Price"
-        align="end"
-    >
-    </fdp-column>
+    <fdp-column name="status" key="status" label="Status" align="center"></fdp-column>
 
-    <fdp-column
-        name="status"
-        key="status"
-        label="Status"
-        align="center"
-    ></fdp-column>
-
-    <fdp-column
-        name="statusColor"
-        key="statusColor"
-        label="Status Color"
-        align="center"
-    >
-    </fdp-column>
+    <fdp-column name="statusColor" key="statusColor" label="Status Color" align="center"> </fdp-column>
 </fdp-table>
 
 <!-- View Settings Dialog-->
 <fdp-table-view-settings-dialog [table]="table">
-    <fdp-table-view-settings-filter
-        column="price"
-        label="Price"
-        type="custom"
-    >
+    <fdp-table-view-settings-filter column="price" label="Price" type="custom">
         <ng-container *fdpViewSettingsFilterCustomDef="let model">
             <fd-layout-panel>
                 <fd-layout-panel-body>
                     <label>Minimum Price:</label>
-                    <fdp-input
-                        type="number"
-                        name="min"
-                        [(ngModel)]="model.min"
-                    ></fdp-input>
+                    <fdp-input type="number" name="min" [(ngModel)]="model.min"></fdp-input>
                     <label>Maximum Price:</label>
-                    <fdp-input
-                        type="number"
-                        name="max"
-                        [(ngModel)]="model.max"
-                    ></fdp-input>
+                    <fdp-input type="number" name="max" [(ngModel)]="model.max"></fdp-input>
                 </fd-layout-panel-body>
             </fd-layout-panel>
         </ng-container>
     </fdp-table-view-settings-filter>
 
-    <fdp-table-view-settings-filter
-        column="status"
-        type="multi-select"
-        label="Status"
-        [values]="statusFilteringValues"
-    >
+    <fdp-table-view-settings-filter column="status" type="multi-select" label="Status" [values]="statusFilteringValues">
     </fdp-table-view-settings-filter>
 
     <fdp-table-view-settings-filter

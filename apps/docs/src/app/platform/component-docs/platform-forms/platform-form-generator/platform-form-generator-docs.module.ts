@@ -8,7 +8,11 @@ import { SharedDocumentationPageModule } from '../../../../documentation/shared-
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformSliderModule } from '@fundamental-ngx/platform/slider';
-import { PlatformCheckboxModule, FdpFormGroupModule, PlatformFormGeneratorModule } from '@fundamental-ngx/platform/form';
+import {
+    PlatformCheckboxModule,
+    FdpFormGroupModule,
+    PlatformFormGeneratorModule
+} from '@fundamental-ngx/platform/form';
 import { PlatformFormGeneratorHeaderComponent } from './platform-form-generator-header/platform-form-generator-header.component';
 import { PlatformFormGeneratorDocsComponent } from './platform-form-generator-docs.component';
 import { PlatformFormGeneratorExampleComponent } from './platform-form-generator-examples/platform-form-generator-example.component';
@@ -55,7 +59,7 @@ const routes: Routes = [
         PlatformFormGeneratorProgramaticSubmitComponent,
         PlatformFormGeneratorCustomErrorExampleComponent,
         PlatformFormGeneratorFieldLayoutExampleComponent,
-        PlatformFormGeneratorNoColonsExampleComponent,
+        PlatformFormGeneratorNoColonsExampleComponent
     ]
 })
 export class PlatformFormGeneratorDocsModule {}

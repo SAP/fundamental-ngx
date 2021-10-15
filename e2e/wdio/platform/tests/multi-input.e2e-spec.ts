@@ -1,7 +1,8 @@
 import {
     click,
     getAttributeByNameArr,
-    getElementArrayLength, getElementPlaceholder,
+    getElementArrayLength,
+    getElementPlaceholder,
     getText,
     refreshPage,
     scrollIntoView,
@@ -13,11 +14,23 @@ import {
 import { placeholderValue } from '../fixtures/appData/file-uploader.page-content';
 import { MultiInputPo } from '../pages/multi-input.po';
 
-describe('Multi input test suite', function() {
+describe('Multi input test suite', () => {
     const multiInputPage: MultiInputPo = new MultiInputPo();
     const {
-        expandedDropdown, activeDropdownButtons, activeInputs, mobileInput, filledInput, approveButton, groupHeader,
-        groupDropdown, options, dropdownOptions, selectedToken, crossButton, dropdownOptionText, dropdownOptionTextValueHelp,
+        expandedDropdown,
+        activeDropdownButtons,
+        activeInputs,
+        mobileInput,
+        filledInput,
+        approveButton,
+        groupHeader,
+        groupDropdown,
+        options,
+        dropdownOptions,
+        selectedToken,
+        crossButton,
+        dropdownOptionText,
+        dropdownOptionTextValueHelp,
         header
     } = multiInputPage;
 
@@ -168,7 +181,7 @@ describe('Multi input test suite', function() {
                 continue;
             }
             if (i !== mobileExample) {
-                scrollIntoView(activeDropdownButtons, i)
+                scrollIntoView(activeDropdownButtons, i);
                 multiInputPage.expandDropdown(activeDropdownButtons, i);
                 const optionsArr = getAttributeByNameArr(options, 'title');
                 scrollIntoView(header, i);
@@ -197,12 +210,11 @@ describe('Multi input test suite', function() {
     it('Verify inputs should have placeholder', () => {
         const activeInputsQuantity = getElementArrayLength(activeInputs);
         for (let i = 0; i < activeInputsQuantity; i++) {
-            expect(placeholderValue).toContain(getElementPlaceholder
-            (activeInputs, i));
+            expect(placeholderValue).toContain(getElementPlaceholder(activeInputs, i));
         }
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             multiInputPage.saveExampleBaselineScreenshot();
             expect(multiInputPage.compareWithBaseline()).toBeLessThan(5);

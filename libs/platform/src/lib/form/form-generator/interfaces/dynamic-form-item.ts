@@ -137,10 +137,7 @@ export interface DynamicFormItem {
      * @param fieldValue Field value.
      * @param formGeneratorService Form generator service instance.
      */
-    onchange?: (
-        fieldValue?: any,
-        forms?: Map<string, DynamicFormGroup>
-    ) => void | Promise<void> | Observable<void>;
+    onchange?: (fieldValue?: any, forms?: Map<string, DynamicFormGroup>) => void | Promise<void> | Observable<void>;
 
     /**
      * @hidden

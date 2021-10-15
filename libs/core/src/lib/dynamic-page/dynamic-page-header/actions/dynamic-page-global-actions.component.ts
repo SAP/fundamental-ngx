@@ -5,7 +5,8 @@ import {
     AfterContentInit,
     ElementRef,
     Renderer2,
-    ChangeDetectorRef, ContentChild
+    ChangeDetectorRef,
+    ContentChild
 } from '@angular/core';
 import { DynamicPageBaseActions } from './dynamic-page-base-actions';
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageResponsiveSize } from '../../constants';
@@ -18,7 +19,6 @@ import { ToolbarComponent } from '@fundamental-ngx/core/toolbar';
     encapsulation: ViewEncapsulation.None
 })
 export class DynamicPageGlobalActionsComponent extends DynamicPageBaseActions implements AfterContentInit {
-
     /** @hidden */
     @ContentChild(ToolbarComponent)
     _toolbarComponent: ToolbarComponent;
@@ -51,6 +51,6 @@ export class DynamicPageGlobalActionsComponent extends DynamicPageBaseActions im
         this._toolbarComponent.detectChanges();
         setTimeout(() => {
             this._toolbarComponent.updateCollapsibleItems();
-        })
+        });
     }
 }

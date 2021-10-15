@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 
-
-
 @Component({
     selector: 'fd-object-status-text-example',
     templateUrl: './object-status-text-example.component.html',

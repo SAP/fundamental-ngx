@@ -3,11 +3,16 @@ import { Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { WizardGeneratorItem, WizardTitle, WizardDialogGeneratorService, WizardGeneratorFormsValue } from '@fundamental-ngx/platform/wizard-generator';
+import {
+    WizardGeneratorItem,
+    WizardTitle,
+    WizardDialogGeneratorService,
+    WizardGeneratorFormsValue
+} from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
-  selector: 'fdp-wizard-generator-responsive-dialog-example',
-  templateUrl: './wizard-generator-responsive-dialog-example.component.html'
+    selector: 'fdp-wizard-generator-responsive-dialog-example',
+    templateUrl: './wizard-generator-responsive-dialog-example.component.html'
 })
 export class WizardGeneratorResponsiveDialogExampleComponent implements OnDestroy {
     wizardValue: any;
@@ -111,9 +116,7 @@ export class WizardGeneratorResponsiveDialogExampleComponent implements OnDestro
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    constructor(
-        private _wizardDialogService: WizardDialogGeneratorService
-    ) { }
+    constructor(private _wizardDialogService: WizardDialogGeneratorService) {}
 
     ngOnDestroy(): void {
         this._onDestroy$.next();
@@ -121,22 +124,26 @@ export class WizardGeneratorResponsiveDialogExampleComponent implements OnDestro
     }
 
     openDialog(): void {
-
-        this._wizardDialogService.open({
-            width: '100%',
-            height: '100%',
-            verticalPadding: false,
-            data: {
-                items: this.stepItems,
-                appendToWizard: false,
-                displaySummaryStep: true,
-                responsivePaddings: false,
-                title: this.wizardTitle
-            }
-        }).afterClosed.pipe(takeUntil(this._onDestroy$))
-        .subscribe((wizardValue: WizardGeneratorFormsValue) => {
-            this.wizardValue = wizardValue;
-        }, () => {});
+        this._wizardDialogService
+            .open({
+                width: '100%',
+                height: '100%',
+                verticalPadding: false,
+                data: {
+                    items: this.stepItems,
+                    appendToWizard: false,
+                    displaySummaryStep: true,
+                    responsivePaddings: false,
+                    title: this.wizardTitle
+                }
+            })
+            .afterClosed.pipe(takeUntil(this._onDestroy$))
+            .subscribe(
+                (wizardValue: WizardGeneratorFormsValue) => {
+                    this.wizardValue = wizardValue;
+                },
+                () => {}
+            );
     }
 
     wizardFinished(wizardValue: WizardGeneratorFormsValue): void {

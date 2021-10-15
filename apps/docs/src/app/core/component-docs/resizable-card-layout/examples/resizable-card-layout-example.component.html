@@ -1,9 +1,7 @@
 <button fd-button (click)="openPage()">Click to open full screen</button>
 <div class="fd-docs-overlay-page" *ngIf="visible">
     <fd-dynamic-page size="large" ariaLabel="Example Dynamic Page" [autoResponsive]="false">
-        <fd-dynamic-page-header
-                title="Resizable card layout."
-                subtitle="Here each card can be assigned properties.">
+        <fd-dynamic-page-header title="Resizable card layout." subtitle="Here each card can be assigned properties.">
             <fd-breadcrumb>
                 <fd-breadcrumb-item>
                     <a fd-breadcrumb-link href="#">Men</a>
@@ -23,22 +21,22 @@
                 <!-- global actions -->
                 <fd-toolbar fdType="transparent" [clearBorder]="true">
                     <button
-                            fd-toolbar-item
-                            fd-button
-                            [compact]="true"
-                            fdType="positive"
-                            (click)="closePage()"
-                            label="Accept"
-                            title="Accept"
+                        fd-toolbar-item
+                        fd-button
+                        [compact]="true"
+                        fdType="positive"
+                        (click)="closePage()"
+                        label="Accept"
+                        title="Accept"
                     ></button>
                     <button
-                            fd-toolbar-item
-                            fd-button
-                            [compact]="true"
-                            fdType="negative"
-                            (click)="closePage()"
-                            label="Reject"
-                            title="Reject"
+                        fd-toolbar-item
+                        fd-button
+                        [compact]="true"
+                        fdType="negative"
+                        (click)="closePage()"
+                        label="Reject"
+                        title="Reject"
                     ></button>
                     <fd-toolbar-separator></fd-toolbar-separator>
                 </fd-toolbar>
@@ -46,55 +44,46 @@
             <fd-dynamic-page-layout-actions>
                 <!-- layout actions -->
                 <fd-toolbar fdType="transparent" [clearBorder]="true">
-                    <button
-                            fd-button
-                            fdType="transparent"
-                            aria-label="Resize"
-                            title="Resize"
-                    >
+                    <button fd-button fdType="transparent" aria-label="Resize" title="Resize">
                         <i class="sap-icon--resize"></i>
                     </button>
                     <button
-                            fd-button
-                            fdType="transparent"
-                            aria-label="Exit Fullscreen"
-                            (click)="closePage()"
-                            title="Exit Fullscreen"
+                        fd-button
+                        fdType="transparent"
+                        aria-label="Exit Fullscreen"
+                        (click)="closePage()"
+                        title="Exit Fullscreen"
                     >
                         <i class="sap-icon--exitfullscreen"></i>
                     </button>
-                    <button
-                            fd-button
-                            fdType="transparent"
-                            aria-label="Close"
-                            (click)="closePage()"
-                            title="Close"
-                    >
+                    <button fd-button fdType="transparent" aria-label="Close" (click)="closePage()" title="Close">
                         <i class="sap-icon--decline"></i>
                     </button>
                 </fd-toolbar>
             </fd-dynamic-page-layout-actions>
         </fd-dynamic-page-header>
-        <fd-dynamic-page-subheader
-                [collapsible]="true"
-                [pinnable]="true"
-                [collapsed]="false"
-        >
+        <fd-dynamic-page-subheader [collapsible]="true" [pinnable]="true" [collapsed]="false">
             <!-- collapsible header content goes here -->
             <span
-            >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam possimus corrupti architecto
-                        perspiciatis, delectus necessitatibus incidunt numquam asperiores tenetur iure. Cum consequuntur
-                        impedit repellendus esse, facere autem optio consequatur nobis?</span
+                >Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam possimus corrupti architecto
+                perspiciatis, delectus necessitatibus incidunt numquam asperiores tenetur iure. Cum consequuntur impedit
+                repellendus esse, facere autem optio consequatur nobis?</span
             >
         </fd-dynamic-page-subheader>
         <fd-dynamic-page-content class="fd-docs-center-align">
             <fd-resizable-card-layout (stepChange)="onStepChange($event)">
-                <fd-resizable-card-item title="card1" [rank]="1" [cardWidthColSpan]="1" [cardHeightRowSpan]="20"
-                    [cardMiniHeaderRowSpan]="miniHeaderRowSpan" [cardMiniContentRowSpan]="miniContentRowSpan">
+                <fd-resizable-card-item
+                    title="card1"
+                    [rank]="1"
+                    [cardWidthColSpan]="1"
+                    [cardHeightRowSpan]="20"
+                    [cardMiniHeaderRowSpan]="miniHeaderRowSpan"
+                    [cardMiniContentRowSpan]="miniContentRowSpan"
+                >
                     <fd-card>
                         <fd-card-header>
                             <h2 fd-card-title>Card Title 1</h2>
-                            <span fd-card-counter> {{card1Data.length}} of {{listData.length}}</span>
+                            <span fd-card-counter> {{ card1Data.length }} of {{ listData.length }}</span>
                         </fd-card-header>
                         <fd-card-content>
                             <ul fd-list [noBorder]="true">
@@ -108,13 +97,19 @@
                     </fd-card>
                 </fd-resizable-card-item>
 
-                <fd-resizable-card-item title="card2" [rank]="2" [cardWidthColSpan]="1" [cardHeightRowSpan]="19"
-                    [cardMiniHeaderRowSpan]="miniHeaderRowSpan" [cardMiniContentRowSpan]="miniContentRowSpan"
-                    [resizable]="false">
+                <fd-resizable-card-item
+                    title="card2"
+                    [rank]="2"
+                    [cardWidthColSpan]="1"
+                    [cardHeightRowSpan]="19"
+                    [cardMiniHeaderRowSpan]="miniHeaderRowSpan"
+                    [cardMiniContentRowSpan]="miniContentRowSpan"
+                    [resizable]="false"
+                >
                     <fd-card>
                         <fd-card-header>
                             <h2 fd-card-title>Card Title 2 - Non Resizable</h2>
-                            <span fd-card-counter> {{initialRows}} of {{listData.length}}</span>
+                            <span fd-card-counter> {{ initialRows }} of {{ listData.length }}</span>
                         </fd-card-header>
                         <fd-card-content>
                             <ul fd-list [noBorder]="true">
@@ -132,12 +127,18 @@
                     </fd-card>
                 </fd-resizable-card-item>
 
-                <fd-resizable-card-item title="card3" [rank]="3" [cardWidthColSpan]="2" [cardHeightRowSpan]="20"
-                    [cardMiniHeaderRowSpan]="card3MiniHeaderRowSpan" [cardMiniContentRowSpan]="miniContentRowSpan">
+                <fd-resizable-card-item
+                    title="card3"
+                    [rank]="3"
+                    [cardWidthColSpan]="2"
+                    [cardHeightRowSpan]="20"
+                    [cardMiniHeaderRowSpan]="card3MiniHeaderRowSpan"
+                    [cardMiniContentRowSpan]="miniContentRowSpan"
+                >
                     <fd-card>
                         <fd-card-header>
                             <h2 fd-card-title>Card Title 3</h2>
-                            <span fd-card-counter> {{card3TableData.length}} of {{tableData.length}}</span>
+                            <span fd-card-counter> {{ card3TableData.length }} of {{ tableData.length }}</span>
                         </fd-card-header>
                         <fd-card-content>
                             <table fd-table>
@@ -165,7 +166,7 @@
                                             <td fd-table-cell>{{ row.tax }}</td>
                                         </ng-container>
 
-                                        <ng-container *ngIf="card3TableColumns.length >=8">
+                                        <ng-container *ngIf="card3TableColumns.length >= 8">
                                             <td fd-table-cell>{{ row.totalWeight }}</td>
                                             <td fd-table-cell>{{ row.totalAmount }}</td>
                                         </ng-container>
@@ -176,12 +177,18 @@
                     </fd-card>
                 </fd-resizable-card-item>
 
-                <fd-resizable-card-item title="card4" [rank]="4" [cardWidthColSpan]="2" [cardHeightRowSpan]="14"
-                    [cardMiniHeaderRowSpan]="miniHeaderRowSpan" [cardMiniContentRowSpan]="miniContentRowSpan">
+                <fd-resizable-card-item
+                    title="card4"
+                    [rank]="4"
+                    [cardWidthColSpan]="2"
+                    [cardHeightRowSpan]="14"
+                    [cardMiniHeaderRowSpan]="miniHeaderRowSpan"
+                    [cardMiniContentRowSpan]="miniContentRowSpan"
+                >
                     <fd-card>
                         <fd-card-header>
                             <h2 fd-card-title>Card Title 4</h2>
-                            <span fd-card-counter> {{card4Data.length}} of {{listData.length}}</span>
+                            <span fd-card-counter> {{ card4Data.length }} of {{ listData.length }}</span>
                         </fd-card-header>
                         <fd-card-content>
                             <ul fd-list [noBorder]="true">
@@ -195,12 +202,18 @@
                     </fd-card>
                 </fd-resizable-card-item>
 
-                <fd-resizable-card-item title="card5" [rank]="5" [cardWidthColSpan]="3" [cardHeightRowSpan]="14"
-                    [cardMiniHeaderRowSpan]="miniHeaderRowSpan" [cardMiniContentRowSpan]="miniContentRowSpan">
+                <fd-resizable-card-item
+                    title="card5"
+                    [rank]="5"
+                    [cardWidthColSpan]="3"
+                    [cardHeightRowSpan]="14"
+                    [cardMiniHeaderRowSpan]="miniHeaderRowSpan"
+                    [cardMiniContentRowSpan]="miniContentRowSpan"
+                >
                     <fd-card>
                         <fd-card-header>
                             <h2 fd-card-title>Card Title 5</h2>
-                            <span fd-card-counter> {{card5Data.length}} of {{listData.length}}</span>
+                            <span fd-card-counter> {{ card5Data.length }} of {{ listData.length }}</span>
                         </fd-card-header>
                         <fd-card-content>
                             <ul fd-list [noBorder]="true">
@@ -214,12 +227,18 @@
                     </fd-card>
                 </fd-resizable-card-item>
 
-                <fd-resizable-card-item title="card6" [rank]="6" [cardWidthColSpan]="4" [cardHeightRowSpan]="14"
-                    [cardMiniHeaderRowSpan]="miniHeaderRowSpan" [cardMiniContentRowSpan]="miniContentRowSpan">
+                <fd-resizable-card-item
+                    title="card6"
+                    [rank]="6"
+                    [cardWidthColSpan]="4"
+                    [cardHeightRowSpan]="14"
+                    [cardMiniHeaderRowSpan]="miniHeaderRowSpan"
+                    [cardMiniContentRowSpan]="miniContentRowSpan"
+                >
                     <fd-card>
                         <fd-card-header>
                             <h2 fd-card-title>Card Title 6</h2>
-                            <span fd-card-counter> {{card6Data.length}} of {{listData.length}}</span>
+                            <span fd-card-counter> {{ card6Data.length }} of {{ listData.length }}</span>
                         </fd-card-header>
                         <fd-card-content>
                             <ul fd-list [noBorder]="true">
@@ -233,12 +252,18 @@
                     </fd-card>
                 </fd-resizable-card-item>
 
-                <fd-resizable-card-item title="card7" [rank]="7" [cardWidthColSpan]="1" [cardHeightRowSpan]="14"
-                    [cardMiniHeaderRowSpan]="miniHeaderRowSpan" [cardMiniContentRowSpan]="miniContentRowSpan">
+                <fd-resizable-card-item
+                    title="card7"
+                    [rank]="7"
+                    [cardWidthColSpan]="1"
+                    [cardHeightRowSpan]="14"
+                    [cardMiniHeaderRowSpan]="miniHeaderRowSpan"
+                    [cardMiniContentRowSpan]="miniContentRowSpan"
+                >
                     <fd-card>
                         <fd-card-header>
                             <h2 fd-card-title>Card Title 7</h2>
-                            <span fd-card-counter> {{card7Data.length}} of {{listData.length}}</span>
+                            <span fd-card-counter> {{ card7Data.length }} of {{ listData.length }}</span>
                         </fd-card-header>
                         <fd-card-content>
                             <ul fd-list [noBorder]="true">

@@ -1,23 +1,21 @@
 <div
     *ngIf="meta?.renderVerticalLineBefore"
     class="fdp-approval-flow-node__vertical-line-before"
-    [class.fdp-approval-flow-node__vertical-line-before-solid]="_isVerticalLineBeforeSolid"></div>
+    [class.fdp-approval-flow-node__vertical-line-before-solid]="_isVerticalLineBeforeSolid"
+></div>
 
 <div
     *ngIf="meta?.renderVerticalLineAfter"
     class="fdp-approval-flow-node__vertical-line-after"
-    [class.fdp-approval-flow-node__vertical-line-after-solid]="_isVerticalLineAfterSolid"></div>
+    [class.fdp-approval-flow-node__vertical-line-after-solid]="_isVerticalLineAfterSolid"
+></div>
 
 <ng-container *ngIf="!_blank && !_space">
     <div *ngIf="renderArrow" class="fdp-approval-flow-node__arrow"></div>
 
-    <div
-        *ngIf="_isRoot && meta?.nodeIndex === 0"
-        class="fdp-approval-flow-node__carousel-start-marker"></div>
+    <div *ngIf="_isRoot && meta?.nodeIndex === 0" class="fdp-approval-flow-node__carousel-start-marker"></div>
 
-    <div
-        *ngIf="_isFinal && meta?.nodeIndex === 0"
-        class="fdp-approval-flow-node__carousel-end-marker"></div>
+    <div *ngIf="_isFinal && meta?.nodeIndex === 0" class="fdp-approval-flow-node__carousel-end-marker"></div>
 
     <ng-content></ng-content>
 </ng-container>
@@ -55,48 +53,37 @@
                 [class.fdp-approval-flow-node__name--members-count]="node.approvers.length > 1"
             >
                 <ng-container *ngIf="node.approvers.length === 1; else multipleApprovers">
-                    {{node.approvers[0].name}}
+                    {{ node.approvers[0].name }}
                 </ng-container>
 
                 <ng-template #multipleApprovers i18n="@@platformApprovalFlowNodeMembers">
-                    {{node.approvers.length}} members
+                    {{ node.approvers.length }} members
                 </ng-template>
             </div>
 
-            <div class="fdp-approval-flow-node__description" >
+            <div class="fdp-approval-flow-node__description">
                 <ng-container *ngIf="!node.variousTeams; else variousTeams">
                     {{ node.approvers.length > 1 ? node.description : node.approvers[0]?.description }}
                 </ng-container>
 
-                <ng-template #variousTeams i18n="@@platformApprovalFlowNodeVariousTeams">
-                    Various teams
-                </ng-template>
+                <ng-template #variousTeams i18n="@@platformApprovalFlowNodeVariousTeams"> Various teams </ng-template>
             </div>
 
-            <fdp-object-status
-                [status]="_objectStatus"
-                inverted="true"
-            >
+            <fdp-object-status [status]="_objectStatus" inverted="true">
                 <ng-container *ngIf="!checkDueDate || !_showDueDateWarning">
                     {{ node.status }}
                 </ng-container>
 
                 <ng-container *ngIf="checkDueDate && _showDueDateWarning">
-                    <ng-container
-                        *ngIf="_dueIn === dueDateThreshold"
-                        i18n="@@platformApprovalFlowNodeStatusDueToday">
+                    <ng-container *ngIf="_dueIn === dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusDueToday">
                         Due today
                     </ng-container>
 
-                    <ng-container
-                        *ngIf="_dueIn < dueDateThreshold"
-                        i18n="@@platformApprovalFlowNodeStatusDueInXDays">
+                    <ng-container *ngIf="_dueIn < dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusDueInXDays">
                         Due in {{ dueDateThreshold - _dueIn }} days
                     </ng-container>
 
-                    <ng-container
-                        *ngIf="_dueIn > dueDateThreshold"
-                        i18n="@@platformApprovalFlowNodeStatusXDaysOverdue">
+                    <ng-container *ngIf="_dueIn > dueDateThreshold" i18n="@@platformApprovalFlowNodeStatusXDaysOverdue">
                         {{ _dueIn - dueDateThreshold }} days overdue
                     </ng-container>
                 </ng-container>
@@ -106,19 +93,33 @@
 </ng-template>
 
 <ng-container *ngIf="_showAddButton && meta?.canAddNodeBeforeAll && !node?.actionsConfig?.disableAddBefore">
-    <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before-all' }" ></ng-container>
+    <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before-all' }"></ng-container>
 </ng-container>
 
 <ng-container *ngIf="_showAddButton && meta?.canAddNodeBefore && !node?.actionsConfig?.disableAddBefore">
-    <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before' }" ></ng-container>
+    <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'before' }"></ng-container>
 </ng-container>
 
-<ng-container *ngIf="_showAddButton && meta?.canAddNodeAfter && meta?.renderAddNodeAfterButton && !node?.actionsConfig?.disableAddAfter">
-    <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'after' }" ></ng-container>
+<ng-container
+    *ngIf="
+        _showAddButton &&
+        meta?.canAddNodeAfter &&
+        meta?.renderAddNodeAfterButton &&
+        !node?.actionsConfig?.disableAddAfter
+    "
+>
+    <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'after' }"></ng-container>
 </ng-container>
 
-<ng-container *ngIf="_showAfterAllAddButton && meta?.canAddNodeAfterAll && meta?.renderAddNodeAfterButton && !node?.actionsConfig?.disableAddAfter">
-    <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'after-all' }" ></ng-container>
+<ng-container
+    *ngIf="
+        _showAfterAllAddButton &&
+        meta?.canAddNodeAfterAll &&
+        meta?.renderAddNodeAfterButton &&
+        !node?.actionsConfig?.disableAddAfter
+    "
+>
+    <ng-container *ngTemplateOutlet="addNodeButton; context: { placement: 'after-all' }"></ng-container>
 </ng-container>
 
 <ng-template #addNodeButton let-placement="placement">
@@ -129,9 +130,13 @@
         [compact]="true"
         class="fdp-approval-flow-node__add"
         [class.fdp-approval-flow-node__add--blank]="this._blank"
-        [class.fdp-approval-flow-node__add--before]="!this._blank && (placement === 'before' || placement === 'before-all')"
+        [class.fdp-approval-flow-node__add--before]="
+            !this._blank && (placement === 'before' || placement === 'before-all')
+        "
         [class.fdp-approval-flow-node__add--before-all]="!this._blank && placement === 'before-all'"
-        [class.fdp-approval-flow-node__add--after]="!this._blank && (placement === 'after' || placement === 'after-all')"
+        [class.fdp-approval-flow-node__add--after]="
+            !this._blank && (placement === 'after' || placement === 'after-all')
+        "
         [class.fdp-approval-flow-node__add--after-all]="placement === 'after-all'"
         [style.visibility]="dropZone.active ? 'hidden' : ''"
         (click)="onAdd.emit(placement)"
@@ -181,11 +186,7 @@
         <div fd-menu-interactive i18n="@@platformApprovalFlowNodeEditApprover">Edit approver</div>
     </li>
 
-    <li
-        *ngIf="!this.node?.actionsConfig?.disableRemove"
-        fd-menu-item
-        (click)="menu.close(); onDelete.emit()"
-    >
+    <li *ngIf="!this.node?.actionsConfig?.disableRemove" fd-menu-item (click)="menu.close(); onDelete.emit()">
         <div fd-menu-interactive i18n="@@platformApprovalFlowNodeRemoveNode">Remove</div>
     </li>
 </fd-menu>

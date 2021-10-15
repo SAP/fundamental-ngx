@@ -3,9 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NotificationModule } from '../notification.module';
 
 @Component({
-    template: `
-        <fd-notification-body #notificationBodyRef></fd-notification-body>
-    `
+    template: ` <fd-notification-body #notificationBodyRef></fd-notification-body> `
 })
 class TestComponent {
     @ViewChild('notificationBodyRef', { read: ElementRef })
@@ -16,12 +14,14 @@ describe('NotificationBodyComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [NotificationModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [NotificationModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

@@ -18,8 +18,8 @@ describe('FeedInputComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [ FormsModule, PlatformButtonModule, AvatarModule, FormControlModule ],
-            declarations: [ FeedInputComponent ]
+            imports: [FormsModule, PlatformButtonModule, AvatarModule, FormControlModule],
+            declarations: [FeedInputComponent]
         })
             .overrideComponent(FeedInputComponent, {
                 set: { changeDetection: ChangeDetectionStrategy.Default }
@@ -46,8 +46,7 @@ describe('FeedInputComponent', () => {
         component.disabled = true;
         fixture.detectChanges();
         fixture.whenStable().then(() => {
-          expect(textareaEl.nativeElement.disabled).toBeTruthy();
-
+            expect(textareaEl.nativeElement.disabled).toBeTruthy();
         });
         expect(buttonEl.nativeElement.disabled).toBeTruthy();
     });
@@ -102,5 +101,5 @@ describe('FeedInputComponent', () => {
         fixture.detectChanges();
 
         expect(component.resize).toHaveBeenCalled();
-    })
+    });
 });

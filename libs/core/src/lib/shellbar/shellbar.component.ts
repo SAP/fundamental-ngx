@@ -14,7 +14,6 @@ import { ComboboxComponent } from '@fundamental-ngx/core/combobox';
 
 export type ShellbarSizes = 's' | 'm' | 'l' | 'xl';
 
-
 /**
  * The shellbar offers consistent, responsive navigation across all products and applications.
  * Includes support for branding, product navigation, search, notifications, and user settings.
@@ -28,7 +27,6 @@ export type ShellbarSizes = 's' | 'm' | 'l' | 'xl';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ShellbarComponent implements AfterContentInit {
-
     /** Size of Shellbar component 's' | 'm' | 'l' | 'xl' */
     @Input()
     size: ShellbarSizes = 'm';

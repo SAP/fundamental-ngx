@@ -25,11 +25,11 @@ import moment, { Moment } from 'moment';
                     yearA11yLabel: 'YYYY'
                 },
                 rangeDelimiter: ' - '
-            },
+            }
         },
-        { 
-            provide: DatetimeAdapter, 
-            useClass: MomentDatetimeAdapter 
+        {
+            provide: DatetimeAdapter,
+            useClass: MomentDatetimeAdapter
         }
     ]
 })

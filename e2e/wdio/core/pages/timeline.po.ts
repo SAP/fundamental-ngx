@@ -14,5 +14,4 @@ export class TimelinePo extends CoreBaseComponentPo {
         waitForElDisplayed(this.root);
         waitForPresent(this.title);
     }
-
 }

@@ -15,24 +15,25 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
 
 let randomButtonBarId = 0;
 @Component({
-  selector: 'fd-button-bar',
-  template: `
-      <button fd-button
-              [id]="id"
-              [type]="type"
-              [glyphPosition]="glyphPosition"
-              [glyph]="glyph"
-              [compact]="compact"
-              [fdType]="fdType"
-              [label]="label"
-              [attr.title]="title"
-              [ariaLabel]="ariaLabel"
-              [fdMenu]="fdMenu"
-              [disabled]="disabled"
-      >
-          <ng-content></ng-content>
-      </button>
-  `
+    selector: 'fd-button-bar',
+    template: `
+        <button
+            fd-button
+            [id]="id"
+            [type]="type"
+            [glyphPosition]="glyphPosition"
+            [glyph]="glyph"
+            [compact]="compact"
+            [fdType]="fdType"
+            [label]="label"
+            [attr.title]="title"
+            [ariaLabel]="ariaLabel"
+            [fdMenu]="fdMenu"
+            [disabled]="disabled"
+        >
+            <ng-content></ng-content>
+        </button>
+    `
 })
 export class ButtonBarComponent extends BaseButton implements OnInit, OnDestroy {
     /** Whether the element should take the whole width of the container. */
@@ -83,20 +84,19 @@ export class ButtonBarComponent extends BaseButton implements OnInit, OnDestroy 
     /** @hidden */
     private _subscriptions = new Subscription();
 
-    constructor(
-        @Optional() private _contentDensityService: ContentDensityService,
-        private _cdRef: ChangeDetectorRef,
-        ) {
+    constructor(@Optional() private _contentDensityService: ContentDensityService, private _cdRef: ChangeDetectorRef) {
         super();
     }
 
     /** @hidden */
     ngOnInit(): void {
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this._cdRef.markForCheck();
-            }))
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._cdRef.markForCheck();
+                })
+            );
         }
     }
 

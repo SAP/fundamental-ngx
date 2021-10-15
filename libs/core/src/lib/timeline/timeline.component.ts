@@ -7,7 +7,8 @@ import {
     Input,
     IterableChangeRecord,
     IterableDiffer,
-    IterableDiffers, NgZone,
+    IterableDiffers,
+    NgZone,
     OnChanges,
     OnDestroy,
     OnInit,
@@ -38,14 +39,12 @@ import { TimelineSecondListOutletDirective } from './directives/timeline-second-
     host: {
         role: 'timeline',
         'arial-label': 'timeline',
-        'class': 'fd-timeline',
+        class: 'fd-timeline',
         '[class.fd-timeline--horizontal]': 'axis === "horizontal"',
-        '[class.fd-timeline--vertical]': 'axis === "vertical"',
+        '[class.fd-timeline--vertical]': 'axis === "vertical"'
     }
 })
 export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, AfterViewInit {
-
-
     /**
      * Data array to render
      */
@@ -95,7 +94,6 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
     private _dataDifferForFirstList: IterableDiffer<T>;
     private _dataDifferForSecondList: IterableDiffer<T>;
 
-
     /** @hidden */
     private readonly _onDestroy = new Subject<void>();
 
@@ -105,9 +103,8 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
         private _cd: ChangeDetectorRef,
         private _timelinePositionControlService: TimelinePositionControlService,
         private _viewportRuler: ViewportRuler,
-        private _ngZone: NgZone,
-    ) {
-    }
+        private _ngZone: NgZone
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -134,10 +131,11 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._viewportRuler.change(50)
+        this._viewportRuler
+            .change(50)
             .pipe(takeUntil(this._onDestroy))
             // ViewportRuler invoked out of zone, that is why I need to invoke function in zone
-            .subscribe(() => this._ngZone.run(() => this._timelinePositionControlService.calculatePositions()))
+            .subscribe(() => this._ngZone.run(() => this._timelinePositionControlService.calculatePositions()));
         this._setPositionStrategy();
         this.switchDataSource(this.dataSource);
     }
@@ -176,18 +174,18 @@ export class TimelineComponent<T> implements OnInit, OnDestroy, OnChanges, After
         if (!changes) {
             return;
         }
-        changes.forEachOperation((item: IterableChangeRecord<T>,
-                                  adjustedPreviousIndex: number | null,
-                                  currentIndex: number | null) => {
-            if (item.previousIndex === null) {
-                this._insertNode(data[currentIndex], currentIndex, vcr);
-            } else if (currentIndex === null) {
-                vcr.remove(adjustedPreviousIndex);
-            } else {
-                const view = vcr.get(adjustedPreviousIndex);
-                vcr.move(view, currentIndex);
+        changes.forEachOperation(
+            (item: IterableChangeRecord<T>, adjustedPreviousIndex: number | null, currentIndex: number | null) => {
+                if (item.previousIndex === null) {
+                    this._insertNode(data[currentIndex], currentIndex, vcr);
+                } else if (currentIndex === null) {
+                    vcr.remove(adjustedPreviousIndex);
+                } else {
+                    const view = vcr.get(adjustedPreviousIndex);
+                    vcr.move(view, currentIndex);
+                }
             }
-        });
+        );
     }
 
     private _setPositionStrategy(): void {

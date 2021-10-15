@@ -14,20 +14,39 @@ import {
     pause
 } from '../../driver/wdio';
 import {
-    requiredErrorMessage, termsErrorMesssage, frameworkErrorMessage,
-    birthdayYearErrorMessage, passwordConditionsErrorMessage
+    requiredErrorMessage,
+    termsErrorMesssage,
+    frameworkErrorMessage,
+    birthdayYearErrorMessage,
+    passwordConditionsErrorMessage
 } from '../fixtures/appData/form-generator-contents';
-import {
-    invalidBirthday, validBirthday, correctPassword, simplePassword
-} from '../fixtures/testData/form-generator';
+import { invalidBirthday, validBirthday, correctPassword, simplePassword } from '../fixtures/testData/form-generator';
 import { FormGeneratorPo } from '../pages/form-generator.po';
 
-describe('Form generator test suite', function () {
+describe('Form generator test suite', () => {
     const formGeneratorPage = new FormGeneratorPo();
     const {
-        errorExample, customExample, defaultExample, observableExample, fieldLayoutExample, programmaticExample,
-        nameInput, passwordInput, ageInput, dateInput, radioButton, checkbox, submitButton, mainSpecialitySelect,
-        calendarInputGroup, errorMessage, radioButtonLabel, sliderPoint, formValue, validationInput, busyIndicator
+        errorExample,
+        customExample,
+        defaultExample,
+        observableExample,
+        fieldLayoutExample,
+        programmaticExample,
+        nameInput,
+        passwordInput,
+        ageInput,
+        dateInput,
+        radioButton,
+        checkbox,
+        submitButton,
+        mainSpecialitySelect,
+        calendarInputGroup,
+        errorMessage,
+        radioButtonLabel,
+        sliderPoint,
+        formValue,
+        validationInput,
+        busyIndicator
     } = formGeneratorPage;
 
     beforeAll(() => {
@@ -109,7 +128,6 @@ describe('Form generator test suite', function () {
     });
 
     describe('Tests for programmatic example', () => {
-
         it('should check validation for required fields', () => {
             checkFormValidation(programmaticExample);
         });
@@ -124,12 +142,11 @@ describe('Form generator test suite', function () {
 
         it('should check birtday year error message', () => {
             checkBirthdayValidation(programmaticExample);
-        })
+        });
 
         it('should check password validation', () => {
             checkPasswordValidation(programmaticExample);
         });
-
     });
 
     it('should check custom controls example', () => {
@@ -210,7 +227,10 @@ describe('Form generator test suite', function () {
         checkValidationMessage(section, calendarInputGroup, requiredErrorMessage);
 
         if (section === defaultExample) {
-            expect(getElementClass(section + mainSpecialitySelect)).toContain('is-error', 'element is not highlited by error');
+            expect(getElementClass(section + mainSpecialitySelect)).toContain(
+                'is-error',
+                'element is not highlited by error'
+            );
         }
 
         for (let i = 0; i < getElementArrayLength(section + radioButton); i++) {
@@ -228,5 +248,4 @@ describe('Form generator test suite', function () {
         expect(waitForElDisplayed(errorMessage)).toBe(true, 'error message is not displayed');
         expect(getText(errorMessage)).toEqual(message, 'error message is not match');
     }
-
 });

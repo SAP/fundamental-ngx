@@ -95,12 +95,14 @@ describe('Radio Group Test with Reactive fdp-form-group', () => {
     let component: TestRadioGroupReactiveFdpGroup;
     let fixture: ComponentFixture<TestRadioGroupReactiveFdpGroup>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule],
-            declarations: [TestRadioGroupReactiveFdpGroup]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [FdpFormGroupModule, FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule],
+                declarations: [TestRadioGroupReactiveFdpGroup]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestRadioGroupReactiveFdpGroup);
@@ -331,12 +333,14 @@ describe('Radio Group Test with Template Driven fdp-form-group', () => {
     let component: TestRadioGroupTemplateDrivenFdpGroup;
     let fixture: ComponentFixture<TestRadioGroupTemplateDrivenFdpGroup>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule],
-            declarations: [TestRadioGroupTemplateDrivenFdpGroup]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [FdpFormGroupModule, FormModule, PlatformRadioGroupModule, FormsModule, ReactiveFormsModule],
+                declarations: [TestRadioGroupTemplateDrivenFdpGroup]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestRadioGroupTemplateDrivenFdpGroup);

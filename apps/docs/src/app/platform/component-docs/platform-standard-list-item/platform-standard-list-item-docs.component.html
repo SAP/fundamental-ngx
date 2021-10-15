@@ -1,11 +1,13 @@
 <fd-docs-section-title id="no-border" componentName="standard-list-item">
     Standard List Item - Border Less
 </fd-docs-section-title>
-<description>A Standard list without border, setting <code>[noBorder]="true"</code> will help to achieve this, by
-    default its value is false.
-    <br><br>
-    <i> Note:This documentation shows with Byline and more examples without Byline are covered in
-        <a routerLink="/platform/list">list</a> .</i>
+<description
+    >A Standard list without border, setting <code>[noBorder]="true"</code> will help to achieve this, by default its
+    value is false. <br /><br />
+    <i>
+        Note:This documentation shows with Byline and more examples without Byline are covered in
+        <a routerLink="/platform/list">list</a> .</i
+    >
 </description>
 <component-example>
     <fdp-non-byline-standard-list-item-example></fdp-non-byline-standard-list-item-example>
@@ -15,13 +17,12 @@
 <fd-docs-section-title id="byline-no-border" componentName="standard-list-item">
     Standard List Item (ByLine)- Border Less
 </fd-docs-section-title>
-<description>A Standard list without border, setting <code>[noBorder]="true"</code> will help to achieve this, by
-    default its
+<description
+    >A Standard list without border, setting <code>[noBorder]="true"</code> will help to achieve this, by default its
     value is false. <code>[hasByLine]="true"</code> provides by line features.Below examples show both imperative and
-    declarative way
-    to bind the list items.
-    Where we can pass list items individually where a number of items are less, and if the items are more
-    we can pass the items in the array as well.</description>
+    declarative way to bind the list items. Where we can pass list items individually where a number of items are less,
+    and if the items are more we can pass the items in the array as well.</description
+>
 <component-example>
     <fdp-platform-standard-list-item-border-less-example></fdp-platform-standard-list-item-border-less-example>
 </component-example>
@@ -31,9 +32,9 @@
 <fd-docs-section-title id="byline-footer" componentName="standard-list-item">
     Standard List Item (ByLine)- Footer
 </fd-docs-section-title>
-<description>Footer of Standard List. <code>&lt;fdp-list-footer&gt;</code> tag will help to set the footer for the list.
-    Below examples show declarative
-    way to use footer.[hasByLine]="true" provides by line features
+<description
+    >Footer of Standard List. <code>&lt;fdp-list-footer&gt;</code> tag will help to set the footer for the list. Below
+    examples show declarative way to use footer.[hasByLine]="true" provides by line features
 </description>
 <component-example>
     <fdp-platform-standard-list-item-with-footer-example></fdp-platform-standard-list-item-with-footer-example>
@@ -44,15 +45,13 @@
 <fd-docs-section-title id="byline-group-header" componentName="standard-list-item">
     Standard List Item (ByLine)- Group header
 </fd-docs-section-title>
-<description>Standard List with group header. <code>&lt;fdp-list-group-header&gt;</code> tag will help to set the Header
-    for the
-    group of list items.Below examples show declarative
-    way to bind the list items and how to bind the group header to them.<code>[hasByLine]="true"</code> provides by line
-    features.
+<description
+    >Standard List with group header. <code>&lt;fdp-list-group-header&gt;</code> tag will help to set the Header for the
+    group of list items.Below examples show declarative way to bind the list items and how to bind the group header to
+    them.<code>[hasByLine]="true"</code> provides by line features.
 </description>
 <component-example>
-    <fdp-standard-list-item-with-group-header-example>
-    </fdp-standard-list-item-with-group-header-example>
+    <fdp-standard-list-item-with-group-header-example> </fdp-standard-list-item-with-group-header-example>
 </component-example>
 <code-example [exampleFiles]="sliWithGroupHeader"></code-example>
 <separator></separator>
@@ -70,7 +69,8 @@
 <fd-docs-section-title id="byline-secondary-text" componentName="standard-list-item">
     Standard List Item (ByLine)- Secondary text types
 </fd-docs-section-title>
-<description> Property on list item
+<description>
+    Property on list item
     <code> statusType="positive | negative | informative | critical | neutral"</code>
     will help to information on what type of text it is.<code>[hasByLine]="true"</code> provides by line features.
 </description>
@@ -80,20 +80,17 @@
 <code-example [exampleFiles]="sliWithSecondaryType"></code-example>
 <separator></separator>
 
-
 <fd-docs-section-title id="byline-multi-selection" componentName="standard-list-item">
     Standard List Item (ByLine)- Multi Selection
 </fd-docs-section-title>
-<description>Standard List with Multi Selection Option. <code>selectionMode="multi"</code> will help us to provide
-    checkbox
-    along with
-    list item.<code>[hasByLine]="true"</code> provides by line features
-    .Below examples show both imperative way to use it.
-    Note:selection of listitem using keyboard can be performed by *space bar* or by *Enter button * (as per Fiori3
-    standards.) </description>
+<description
+    >Standard List with Multi Selection Option. <code>selectionMode="multi"</code> will help us to provide checkbox
+    along with list item.<code>[hasByLine]="true"</code> provides by line features .Below examples show both imperative
+    way to use it. Note:selection of listitem using keyboard can be performed by *space bar* or by *Enter button * (as
+    per Fiori3 standards.)
+</description>
 <component-example>
-    <fdp-platform-standard-list-item-with-selection-example>
-    </fdp-platform-standard-list-item-with-selection-example>
+    <fdp-platform-standard-list-item-with-selection-example> </fdp-platform-standard-list-item-with-selection-example>
 </component-example>
 <code-example [exampleFiles]="sliWithSelection"></code-example>
 <separator></separator>
@@ -101,16 +98,16 @@
 <fd-docs-section-title id="byline-navigation-multi-selection" componentName="standard-list-item">
     Standard List Item (ByLine)- Navigation Indicator with multiselect
 </fd-docs-section-title>
-<description>Standard List with Navigation Option.<code>[navigated]="true"</code> will enables navigation on click of
-    list item,
+<description
+    >Standard List with Navigation Option.<code>[navigated]="true"</code> will enables navigation on click of list item,
     <code>[navigationIndicator]="true"</code> will provide *>* indicator,<code>[hasByLine]="true"</code> provides by
-    line features
-    <code>link="path"</code> will help to get into the desired destination on click of
-    navigation.<code>selectionMode="multi" enables multiselect.</code>
-    Below examples show declarative way to use it.</description>
+    line features <code>link="path"</code> will help to get into the desired destination on click of navigation.<code
+        >selectionMode="multi" enables multiselect.</code
+    >
+    Below examples show declarative way to use it.</description
+>
 <component-example>
-    <fdp-platform-standard-list-item-with-navigation-example>
-    </fdp-platform-standard-list-item-with-navigation-example>
+    <fdp-platform-standard-list-item-with-navigation-example> </fdp-platform-standard-list-item-with-navigation-example>
 </component-example>
 <code-example [exampleFiles]="sliWithNavigation"></code-example>
 <separator></separator>
@@ -118,7 +115,8 @@
 <fd-docs-section-title id="byline-inverted-secondary-text" componentName="standard-list-item">
     Standard List Item (ByLine)- Inverted Secondary text types
 </fd-docs-section-title>
-<description> Property on list item <code>inverted="true"</code> and
+<description>
+    Property on list item <code>inverted="true"</code> and
     <code>statusType="positive | negative | informative | critical | neutral"</code>
     will help to information on what type of text and it should be inverted.[hasByLine]="true" provides by line
     features.

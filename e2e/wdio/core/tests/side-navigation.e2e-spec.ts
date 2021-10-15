@@ -8,16 +8,29 @@ import {
     scrollIntoView
 } from '../../driver/wdio';
 import { SideNavigationPo } from '../pages/side-navigation.po';
-import { blockExamples } from '../fixtures/appData/side-navigation-content'
+import { blockExamples } from '../fixtures/appData/side-navigation-content';
 
 describe('Side-navigation test suite', () => {
     const sideNavigationPage = new SideNavigationPo();
     const {
-        iconsExample, objectExample, condensedExample,
-        threeLevelsExample, pragmaticalyExample, nonSelectableExample,
-        condensedObjectExample, expandArrow, listItemLink,
-        pointContainsSubList, expandedListPoint, expandListExample, listItem, subListItem,
-        subList, expandList, openBtn, selectChildBtn
+        iconsExample,
+        objectExample,
+        condensedExample,
+        threeLevelsExample,
+        pragmaticalyExample,
+        nonSelectableExample,
+        condensedObjectExample,
+        expandArrow,
+        listItemLink,
+        pointContainsSubList,
+        expandedListPoint,
+        expandListExample,
+        listItem,
+        subListItem,
+        subList,
+        expandList,
+        openBtn,
+        selectChildBtn
     } = sideNavigationPage;
 
     beforeAll(() => {
@@ -46,7 +59,6 @@ describe('Side-navigation test suite', () => {
     it('should check that items in expanded list choosing correct', () => {
         checkExpandListIsWorking(condensedObjectExample);
         checkExpandListIsWorking(condensedExample);
-
     });
     it('should check that items in multiple levels list choosing correct', () => {
         checkMultipleLevels(threeLevelsExample);
@@ -55,14 +67,29 @@ describe('Side-navigation test suite', () => {
     });
 
     it('should check work buttons "select child" & "open"', () => {
-        expect(getElementClass(pragmaticalyExample + pointContainsSubList)).toContain('is-selected', 'element with subitems is selected');
+        expect(getElementClass(pragmaticalyExample + pointContainsSubList)).toContain(
+            'is-selected',
+            'element with subitems is selected'
+        );
         expect(getElementClass(pragmaticalyExample + subListItem)).toContain('is-selected', 'element is not selected');
-        expect(getElementClass(pragmaticalyExample + expandArrow)).not.toContain('is-selected', 'expanded menu is not closed');
+        expect(getElementClass(pragmaticalyExample + expandArrow)).not.toContain(
+            'is-selected',
+            'expanded menu is not closed'
+        );
         click(selectChildBtn);
-        expect(getElementClass(pragmaticalyExample + pointContainsSubList)).not.toContain('is-selected', 'element with subitems is selected');
-        expect(getElementClass(pragmaticalyExample + subListItem)).not.toContain('is-selected', 'element is not selected');
+        expect(getElementClass(pragmaticalyExample + pointContainsSubList)).not.toContain(
+            'is-selected',
+            'element with subitems is selected'
+        );
+        expect(getElementClass(pragmaticalyExample + subListItem)).not.toContain(
+            'is-selected',
+            'element is not selected'
+        );
         click(openBtn);
-        expect(getElementClass(pragmaticalyExample + expandArrow)).not.toContain('is-selected', 'expanded menu is not closed');
+        expect(getElementClass(pragmaticalyExample + expandArrow)).not.toContain(
+            'is-selected',
+            'expanded menu is not closed'
+        );
     });
 
     it('should check RTL and LTR orientation', () => {
@@ -99,8 +126,10 @@ describe('Side-navigation test suite', () => {
         for (let i = 0; i < listLength; i++) {
             click(section + subListItem, i);
             expect(getElementClass(section + subListItem, i)).toContain('is-selected', 'element is not selected');
-            expect(getElementClass(section + pointContainsSubList)).toContain('is-selected', 'element with subitems is not selected');
+            expect(getElementClass(section + pointContainsSubList)).toContain(
+                'is-selected',
+                'element with subitems is not selected'
+            );
         }
     }
-
 });

@@ -34,4 +34,4 @@ const routes: Routes = [
         PanelFixedHeightExampleComponent
     ]
 })
-export class PanelDocsModule { }
+export class PanelDocsModule {}

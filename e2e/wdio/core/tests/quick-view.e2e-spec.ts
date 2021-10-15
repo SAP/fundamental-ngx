@@ -4,14 +4,27 @@ import { address, companyName, email, mobile, phone, popoverHeaderValue } from '
 
 const quickViewPage: QuickViewPo = new QuickViewPo();
 const {
-    openDialogButton, popoverWithHeaderButton, popoverHeader, companyAddressLabel, companyPopoverNameLabel,
-    popoverSendReminderButton, popoverWithoutHeaderButton, companyNameLabel, emailLabel, phoneLabel, mobileLabel,
-    avatar, emailPopoverLabel, phonePopoverLabel, popoverAvatar, popoverCancelButton,
-    mobilePopoverLabel, companyPopoverAddressLabel
+    openDialogButton,
+    popoverWithHeaderButton,
+    popoverHeader,
+    companyAddressLabel,
+    companyPopoverNameLabel,
+    popoverSendReminderButton,
+    popoverWithoutHeaderButton,
+    companyNameLabel,
+    emailLabel,
+    phoneLabel,
+    mobileLabel,
+    avatar,
+    emailPopoverLabel,
+    phonePopoverLabel,
+    popoverAvatar,
+    popoverCancelButton,
+    mobilePopoverLabel,
+    companyPopoverAddressLabel
 } = new QuickViewPo();
 
-describe('Quick view  test suite:', function() {
-
+describe('Quick view  test suite:', () => {
     beforeAll(() => {
         quickViewPage.open();
     }, 1);
@@ -46,13 +59,13 @@ describe('Quick view  test suite:', function() {
         click(popoverSendReminderButton);
     });
 
-    describe('check orientation', function() {
+    describe('check orientation', () => {
         it('should check RTL orientation', () => {
             quickViewPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             quickViewPage.saveExampleBaselineScreenshot();
             expect(quickViewPage.compareWithBaseline()).toBeLessThan(5);

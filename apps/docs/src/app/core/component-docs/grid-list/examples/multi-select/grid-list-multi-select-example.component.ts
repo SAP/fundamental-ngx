@@ -5,7 +5,7 @@ interface GridListItem {
     id: number;
     title: string;
     description: string;
-    type?: string,
+    type?: string;
     counter?: number;
     selected?: boolean;
 }
@@ -18,7 +18,6 @@ interface GridListItem {
     encapsulation: ViewEncapsulation.None
 })
 export class GridListMultiSelectExampleComponent {
-
     @ViewChild(GridListComponent)
     grid: GridListComponent<GridListItem>;
 

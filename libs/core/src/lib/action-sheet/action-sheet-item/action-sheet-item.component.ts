@@ -36,12 +36,10 @@ export interface ActionSheetClickEvent {
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        'class': 'fd-action-sheet__item'
+        class: 'fd-action-sheet__item'
     }
 })
-
 export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
-
     /** Sets text of button. */
     @Input()
     label: string;
@@ -77,9 +75,7 @@ export class ActionSheetItemComponent implements KeyboardSupportItemInterface {
     /** @hidden **/
     clicked = new EventEmitter<ActionSheetClickEvent>();
 
-    constructor(
-        private _elementRef: ElementRef
-    ) {}
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     @HostListener('keydown', ['$event'])

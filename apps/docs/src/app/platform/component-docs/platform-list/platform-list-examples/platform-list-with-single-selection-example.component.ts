@@ -8,7 +8,8 @@ const LIST_ELEMENTS: Address[] = [
     { id: '1', name: 'Name1' },
     { id: '2', name: 'Name2' },
     { id: '3', name: 'Name3' },
-    { id: '4', name: 'Name4' }];
+    { id: '4', name: 'Name4' }
+];
 export interface Address {
     id: string;
     name: string;
@@ -39,8 +40,8 @@ export class PlatformListWithSingleSelectionExampleComponent implements AfterVie
 
     ngAfterViewInit(): void {
         const toolbar = this._elementRef.nativeElement.querySelector('fd-toolbar');
-        this._render.setAttribute(toolbar, 'tabindex', '0' );
-        this._render.setStyle(toolbar, 'outline', 'none' );
+        this._render.setAttribute(toolbar, 'tabindex', '0');
+        this._render.setStyle(toolbar, 'outline', 'none');
     }
 
     _showItemInfo(event: SelectionChangeEvent): void {

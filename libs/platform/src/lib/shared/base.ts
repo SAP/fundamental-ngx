@@ -91,10 +91,12 @@ export abstract class BaseComponent implements OnInit, OnDestroy {
     /** @hidden */
     private _setupDensitySubscriptions(): void {
         if (this._contentDensity === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.contentDensity = density;
-                this.markForCheck();
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.contentDensity = density;
+                    this.markForCheck();
+                })
+            );
         }
     }
 

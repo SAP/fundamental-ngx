@@ -21,11 +21,10 @@ import { takeUntil } from 'rxjs/operators';
 @Directive({
     selector: '[fdNestedListContent], [fd-nested-list-content]',
     host: {
-        'tabindex': '0'
+        tabindex: '0'
     }
 })
 export class NestedListContentDirective implements AfterContentInit, OnDestroy {
-
     /** Whether this element is selected*/
     @Input()
     @HostBinding('class.is-selected')
@@ -68,7 +67,7 @@ export class NestedListContentDirective implements AfterContentInit, OnDestroy {
         public changeDetRef: ChangeDetectorRef,
         private _renderer: Renderer2,
         private _elementRef: ElementRef,
-        private _itemService: NestedItemService,
+        private _itemService: NestedItemService
     ) {}
 
     /** @hidden */
@@ -118,15 +117,13 @@ export class NestedListContentDirective implements AfterContentInit, OnDestroy {
     click(): void {
         this.focus();
         if (this.nestedLink) {
-            this.nestedLink.click()
+            this.nestedLink.click();
         }
     }
 
     /** Add subscription for child focusing */
     private _setFocusSubscription(): void {
-        this._itemService.focus.pipe(
-            takeUntil(this.onDestroy$)
-        ).subscribe(() => this.focus());
+        this._itemService.focus.pipe(takeUntil(this.onDestroy$)).subscribe(() => this.focus());
     }
 
     /** Hide link child element from tab key */

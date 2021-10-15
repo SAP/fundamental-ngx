@@ -1,16 +1,13 @@
-<fd-time-picker
-    [allowNull]="false"
-    [formControl]="timeObject"
-    [state]="timeObject.invalid ? 'error' : null">
+<fd-time-picker [allowNull]="false" [formControl]="timeObject" [state]="timeObject.invalid ? 'error' : null">
 </fd-time-picker>
-<br/>
+<br />
 
 Selected Time:
-<ng-container *ngIf="timeObject.value">{{ timeObject.value.hour }}h
-    {{ timeObject.value.minute }}m {{ timeObject.value.second }}s
+<ng-container *ngIf="timeObject.value"
+    >{{ timeObject.value.hour }}h {{ timeObject.value.minute }}m {{ timeObject.value.second }}s
 </ng-container>
 
-<br/>
-<br/>
+<br />
+<br />
 <button fd-button label="Set To Null" (click)="setNull()"></button>
 <button fd-button label="Set Valid Time" (click)="setValid()"></button>

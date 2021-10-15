@@ -6,6 +6,4 @@ import { Directive } from '@angular/core';
         class: 'fd-micro-process-flow__intermediary-item'
     }
 })
-export class MicroProcessFlowIntermediaryItemDirective {
-
-}
+export class MicroProcessFlowIntermediaryItemDirective {}

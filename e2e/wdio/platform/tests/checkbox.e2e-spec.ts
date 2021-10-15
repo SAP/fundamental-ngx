@@ -1,7 +1,10 @@
 import { CheckboxPO } from '../pages/checkbox.po';
 import {
-    markingDisplayStyle, disabledCheckboxTitle, a11yCheckboxAriaLabel,
-    a11yCheckboxAriaLabelledBy, checkboxErrorTooltip
+    markingDisplayStyle,
+    disabledCheckboxTitle,
+    a11yCheckboxAriaLabel,
+    a11yCheckboxAriaLabelledBy,
+    checkboxErrorTooltip
 } from '../fixtures/appData/checkbox-page-contents';
 import {
     acceptAlert,
@@ -22,7 +25,6 @@ import {
 } from '../../driver/wdio';
 
 describe('Checkbox test suite', () => {
-
     const {
         binaryTempCheckbox,
         disabledBinaryCheckbox,
@@ -37,8 +39,7 @@ describe('Checkbox test suite', () => {
         presenceCheckbox,
         accessibilityCheckboxes,
         disabledAccessibilityCheckbox,
-        disabledAccessibilityCheckboxLabel,
-
+        disabledAccessibilityCheckboxLabel
     } = new CheckboxPO();
     const checkboxPage = new CheckboxPO();
     beforeAll(() => {
@@ -52,7 +53,6 @@ describe('Checkbox test suite', () => {
 
     describe('check binary checkbox used with form examples', () => {
         it('should check binary checkbox in template driven form', () => {
-
             // check checkbox labels
             for (let i = 0; 3 > i; i++) {
                 checkIfDisabled(binaryTempCheckbox, 'aria-disabled', 'false', i);
@@ -222,8 +222,9 @@ describe('Checkbox test suite', () => {
             expect(getElementAriaLabel(accessibilityCheckboxes)).toEqual(a11yCheckboxAriaLabel);
             expect(getAttributeByName(accessibilityCheckboxes, 'aria-disabled')).toBe('false');
 
-            expect(getAttributeByName(accessibilityCheckboxes, 'aria-labelledby', 1))
-                .toContain(a11yCheckboxAriaLabelledBy);
+            expect(getAttributeByName(accessibilityCheckboxes, 'aria-labelledby', 1)).toContain(
+                a11yCheckboxAriaLabelledBy
+            );
             expect(getAttributeByName(accessibilityCheckboxes, 'aria-disabled', 1)).toBe('false');
         });
 
@@ -240,7 +241,7 @@ describe('Checkbox test suite', () => {
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             checkboxPage.saveExampleBaselineScreenshot();
             expect(checkboxPage.compareWithBaseline()).toBeLessThan(5);

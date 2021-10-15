@@ -14,13 +14,15 @@ import { ShellbarActionComponent } from '../shellbar-action/shellbar-action.comp
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     // TODO: remove hardcoded styles
-    styles: [`
-        .fd-shellbar__counter--overflowed {
-            position: absolute;
-            right: 0.25rem;
-            top: -0.25rem;
-        }
-    `]
+    styles: [
+        `
+            .fd-shellbar__counter--overflowed {
+                position: absolute;
+                right: 0.25rem;
+                top: -0.25rem;
+            }
+        `
+    ]
 })
 export class ShellbarActionsMobileComponent implements AfterContentChecked {
     /** @hidden */

@@ -13,7 +13,7 @@ export class BaseEntity implements VhdDefineEntityRule {
     type: VhdDefineType;
     key = '*';
     label?: string;
-    strategy: (VhdDefineIncludeStrategy | VhdDefineExcludeStrategy);
+    strategy: VhdDefineIncludeStrategy | VhdDefineExcludeStrategy;
     value = '';
     valueTo = '';
     valid: boolean;

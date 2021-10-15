@@ -109,7 +109,9 @@ describe('DynamicPageTitleComponent', () => {
     });
 
     it('should add correct classes to host', () => {
-        expect(titleHostComponentDebugElement.nativeElement.className.includes(CLASS_NAME.dynamicPageTitleArea)).toBeTruthy();
+        expect(
+            titleHostComponentDebugElement.nativeElement.className.includes(CLASS_NAME.dynamicPageTitleArea)
+        ).toBeTruthy();
     });
 
     it('should add tabindex to host', async () => {
@@ -126,8 +128,9 @@ describe('DynamicPageTitleComponent', () => {
         it('should render it in view', () => {
             component.title = 'Sample';
             fixture.detectChanges();
-            const titleElement: HTMLElement = titleHostComponentDebugElement.query(By.css('.fd-dynamic-page__title'))
-                .nativeElement;
+            const titleElement: HTMLElement = titleHostComponentDebugElement.query(
+                By.css('.fd-dynamic-page__title')
+            ).nativeElement;
             expect(titleElement?.innerText).toBe('Sample');
         });
     });
@@ -142,8 +145,9 @@ describe('DynamicPageTitleComponent', () => {
         it('should render it in view', () => {
             component.subtitle = 'Some subtitle';
             fixture.detectChanges();
-            const titleElement: HTMLElement = titleHostComponentDebugElement.query(By.css('.fd-dynamic-page__subtitle'))
-                .nativeElement;
+            const titleElement: HTMLElement = titleHostComponentDebugElement.query(
+                By.css('.fd-dynamic-page__subtitle')
+            ).nativeElement;
             expect(titleElement?.innerText).toBe('Some subtitle');
         });
     });
@@ -193,17 +197,27 @@ describe('DynamicPageTitleComponent', () => {
                 By.css('.' + CLASS_NAME.dynamicPageActionsContainer)
             );
             expect(toolbarContainer).toBeTruthy();
-            expect(toolbarContainer.nativeElement.className.includes(CLASS_NAME.dynamicPageActionsContainerMedium)).toBeTruthy();
+            expect(
+                toolbarContainer.nativeElement.className.includes(CLASS_NAME.dynamicPageActionsContainerMedium)
+            ).toBeTruthy();
 
             const globalActionsContainer = titleHostComponentDebugElement.query(
                 By.css('.' + CLASS_NAME.dynamicPageGlobalActions)
             );
-            expect(globalActionsContainer.nativeElement.className.includes(CLASS_NAME.dynamicPageGlobalActionsToolbarMedium)).toBeTruthy();
+            expect(
+                globalActionsContainer.nativeElement.className.includes(
+                    CLASS_NAME.dynamicPageGlobalActionsToolbarMedium
+                )
+            ).toBeTruthy();
 
             const layoutActionsContainer = titleHostComponentDebugElement.query(
                 By.css('.' + CLASS_NAME.dynamicPageLayoutActions)
             );
-            expect(layoutActionsContainer.nativeElement.className.includes(CLASS_NAME.dynamicPageLayoutActionsToolbarMedium)).toBeTruthy();
+            expect(
+                layoutActionsContainer.nativeElement.className.includes(
+                    CLASS_NAME.dynamicPageLayoutActionsToolbarMedium
+                )
+            ).toBeTruthy();
         });
     });
 });

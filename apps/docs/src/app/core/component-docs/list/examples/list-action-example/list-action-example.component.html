@@ -3,16 +3,12 @@
         <span fd-list-title>List Group Header</span>
     </li>
     <li fd-list-item *ngFor="let i of items">
-        <span fd-list-title>
-            List Item {{i}}
-        </span>
+        <span fd-list-title> List Item {{ i }} </span>
     </li>
     <li fd-list-item [action]="true" [growing]="true">
         <button fd-list-title (click)="loadMore()">
             <fd-busy-indicator [block]="false" [loading]="loading"></fd-busy-indicator>
-            <span fd-list-title-text>
-                Show More
-            </span>
+            <span fd-list-title-text> Show More </span>
         </button>
     </li>
     <li fd-list-footer>List Footer</li>

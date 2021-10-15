@@ -8,13 +8,14 @@ import {
     refreshPage,
     scrollIntoView,
     waitForClickable,
-    waitForElDisplayed, waitForNotDisplayed,
+    waitForElDisplayed,
+    waitForNotDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import { DynamicPageLayoutPo } from '../pages/dynamic-page-layout.po';
 import { main_button_title } from '../fixtures/appData/dynamic-page-layout-contents';
 
-describe('Dynamic Page Layout test suite:', function() {
+describe('Dynamic Page Layout test suite:', () => {
     const dynamicPageLayoutPage = new DynamicPageLayoutPo();
     const {
         basicExampleButton,
@@ -56,7 +57,7 @@ describe('Dynamic Page Layout test suite:', function() {
         expect(getText(flexibleColumnExampleButton)).toBe(main_button_title);
     });
 
-    describe('Basic', function() {
+    describe('Basic', () => {
         it('should verify dynamic page header is collapsible by click on collapse icon', () => {
             click(basicExampleButton);
             waitForElDisplayed(dynamicPage);
@@ -91,7 +92,7 @@ describe('Dynamic Page Layout test suite:', function() {
     });
 
     // TODO: Needs to be implemented
-    xdescribe('Dynamic Page that snaps on scrolling', function() {
+    xdescribe('Dynamic Page that snaps on scrolling', () => {
         it('is snaps on scrolling', () => {
             click(snapsExampleButton);
             waitForElDisplayed(dynamicPage);
@@ -106,7 +107,7 @@ describe('Dynamic Page Layout test suite:', function() {
         });
     });
 
-    describe('Tabbed', function() {
+    describe('Tabbed', () => {
         it('should verify dynamic page is collapsible by click on header', () => {
             click(basicExampleButton);
             waitForElDisplayed(dynamicPage);
@@ -148,7 +149,7 @@ describe('Dynamic Page Layout test suite:', function() {
         });
     });
 
-    describe('Disabled header', function() {
+    describe('Disabled header', () => {
         it('should have no collapse icon present', () => {
             click(disableHeaderCollapseExampleButton);
             waitForElDisplayed(dynamicPage);
@@ -164,10 +165,9 @@ describe('Dynamic Page Layout test suite:', function() {
 
             expect(elementDisplayed(dynamicPageCollapsibleHeader)).toBe(true);
         });
-
     });
 
-    describe('Flexible Column Layout', function() {
+    describe('Flexible Column Layout', () => {
         it('should be able to open the column section', () => {
             click(flexibleColumnExampleButton);
             waitForElDisplayed(openColumnButton);
@@ -210,7 +210,7 @@ describe('Dynamic Page Layout test suite:', function() {
         });
     });
 
-    describe('Orientation check:', function() {
+    describe('Orientation check:', () => {
         it('should check RTL and LTR orientation', () => {
             dynamicPageLayoutPage.checkRtlSwitch();
         });

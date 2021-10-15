@@ -2,14 +2,9 @@ import { TimelinePo } from '../pages/timeline.po';
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
 import { click, getElementArrayLength, getElementSize } from '../../driver/wdio';
 
-describe('Timeline test suite', function() {
+describe('Timeline test suite', () => {
     const timelinePage = new TimelinePo();
-    const {
-        actionButton,
-        showButton,
-        timelinePost,
-        timelineNode
-    } = timelinePage;
+    const { actionButton, showButton, timelinePost, timelineNode } = timelinePage;
 
     beforeAll(() => {
         timelinePage.open();
@@ -20,22 +15,22 @@ describe('Timeline test suite', function() {
     });
 
     it('should check each timeline post has a node', () => {
-       const nodeCount = getElementArrayLength(timelineNode);
-       const postCount = getElementArrayLength(timelinePost);
+        const nodeCount = getElementArrayLength(timelineNode);
+        const postCount = getElementArrayLength(timelinePost);
 
-       expect(postCount).toEqual(nodeCount);
+        expect(postCount).toEqual(nodeCount);
     });
 
     it('should check more button expands section and less button collapses section', () => {
-       const postStartingHeight = getElementSize(timelinePost, 5, 'height');
+        const postStartingHeight = getElementSize(timelinePost, 5, 'height');
 
-       click(showButton);
-       const postExpandedHeight = getElementSize(timelinePost, 5, 'height');
-       click(showButton);
-       const postCollapsedHeight = getElementSize(timelinePost, 5, 'height');
+        click(showButton);
+        const postExpandedHeight = getElementSize(timelinePost, 5, 'height');
+        click(showButton);
+        const postCollapsedHeight = getElementSize(timelinePost, 5, 'height');
 
-       expect(postStartingHeight).toBeLessThan(postExpandedHeight);
-       expect(postCollapsedHeight).toBeLessThan(postExpandedHeight);
+        expect(postStartingHeight).toBeLessThan(postExpandedHeight);
+        expect(postCollapsedHeight).toBeLessThan(postExpandedHeight);
     });
 
     it('should check RTL mode', () => {

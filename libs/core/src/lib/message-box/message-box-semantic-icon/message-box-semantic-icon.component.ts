@@ -39,22 +39,22 @@ export class MessageBoxSemanticIconComponent implements MessageBoxConfigurableEl
     get _getIcon(): string {
         return this.glyph || this.messageBoxConfig.customSemanticIcon || this._semanticIcon;
     }
-    
+
     /** @hidden */
     get _semanticIcon(): string {
         switch (this.messageBoxConfig.type) {
-           case 'error':
-               return 'message-error';
-           case 'success':
-               return 'message-success';
-           case 'warning':
-               return 'message-warning';
-           case 'information':
-               return 'message-information';
-           case 'confirmation':
-               return 'question-mark';
-           default:
-               return '';
-           }
+            case 'error':
+                return 'message-error';
+            case 'success':
+                return 'message-success';
+            case 'warning':
+                return 'message-warning';
+            case 'information':
+                return 'message-information';
+            case 'confirmation':
+                return 'question-mark';
+            default:
+                return '';
+        }
     }
 }

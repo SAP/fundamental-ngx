@@ -10,21 +10,13 @@ import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/serv
     template: `
         <nav fd-tab-nav>
             <div fd-tab-item>
-                <a fd-tab-link [active]="true">
-                    Link
-                </a>
+                <a fd-tab-link [active]="true"> Link </a>
             </div>
             <div fd-tab-item>
-                <a fd-tab-link #fdTabLink [active]="false">
-                    Link
-                </a>
+                <a fd-tab-link #fdTabLink [active]="false"> Link </a>
             </div>
-            <a fd-tab-link [active]="false">
-                Link
-            </a>
-            <a fd-tab-link *ngIf="showLastTab" [active]="false">
-                Link
-            </a>
+            <a fd-tab-link [active]="false"> Link </a>
+            <a fd-tab-link *ngIf="showLastTab" [active]="false"> Link </a>
         </nav>
     `
 })
@@ -42,13 +34,15 @@ describe('TabNavDirective', () => {
     let component: TabNavComponent;
     let fixture: ComponentFixture<TestNavWrapperComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestNavWrapperComponent],
-            imports: [TabsModule],
-            providers: [ContentDensityService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestNavWrapperComponent],
+                imports: [TabsModule],
+                providers: [ContentDensityService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNavWrapperComponent);

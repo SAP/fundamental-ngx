@@ -51,7 +51,6 @@ let addOnInputRandomId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDestroy {
-
     /** Input template */
     @Input()
     inputTemplate: TemplateRef<any>;
@@ -142,7 +141,7 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     /** @hidden Focus state */
     get isFocused(): boolean {
         return this._isFocused;
-    };
+    }
 
     /** @hidden */
     private _isFocused = false;
@@ -158,7 +157,7 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     addOnElement: InputGroupAddOnDirective;
 
     /** @hidden */
-    constructor (
+    constructor(
         private readonly elementRef: ElementRef,
         private readonly changeDetectorRef: ChangeDetectorRef,
         @Optional() private _contentDensityService: ContentDensityService
@@ -207,10 +206,12 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     ngOnInit(): void {
         this._listenElementEvents();
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this.changeDetectorRef.markForCheck();
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this.changeDetectorRef.markForCheck();
+                })
+            );
         }
     }
 
@@ -264,30 +265,34 @@ export class InputGroupComponent implements ControlValueAccessor, OnInit, OnDest
     /** @hidden
      * calculate the correct ids for input aria-labelledby
      */
-     _getAriaLabelledbyIdsForInput(): string {
-      let ariaLabelledByIds = this.ariaLabelledby ? this.ariaLabelledby + ' ' : '';
-      if (!this.button) {
-          ariaLabelledByIds += this._addOnNonButtonId;
-      }
+    _getAriaLabelledbyIdsForInput(): string {
+        let ariaLabelledByIds = this.ariaLabelledby ? this.ariaLabelledby + ' ' : '';
+        if (!this.button) {
+            ariaLabelledByIds += this._addOnNonButtonId;
+        }
 
-      return ariaLabelledByIds;
+        return ariaLabelledByIds;
     }
 
     /** @hidden */
     private _listenElementEvents(): void {
-        fromEvent(this.elementRef.nativeElement, 'focus', { capture: true }).pipe(
-            tap(() => {
-                this._isFocused = true;
-                this.changeDetectorRef.markForCheck();
-            }),
-            takeUntil(this._onDestroy$)
-        ).subscribe();
-        fromEvent(this.elementRef.nativeElement, 'blur', { capture: true }).pipe(
-            tap(() => {
-                this._isFocused = false;
-                this.changeDetectorRef.markForCheck();
-            }),
-            takeUntil(this._onDestroy$)
-        ).subscribe();
+        fromEvent(this.elementRef.nativeElement, 'focus', { capture: true })
+            .pipe(
+                tap(() => {
+                    this._isFocused = true;
+                    this.changeDetectorRef.markForCheck();
+                }),
+                takeUntil(this._onDestroy$)
+            )
+            .subscribe();
+        fromEvent(this.elementRef.nativeElement, 'blur', { capture: true })
+            .pipe(
+                tap(() => {
+                    this._isFocused = false;
+                    this.changeDetectorRef.markForCheck();
+                }),
+                takeUntil(this._onDestroy$)
+            )
+            .subscribe();
     }
 }

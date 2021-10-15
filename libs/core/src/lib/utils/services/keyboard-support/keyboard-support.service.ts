@@ -9,7 +9,6 @@ import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 export type FocusEscapeDirection = 'up' | 'down';
 
 export class KeyboardSupportService<T> {
-
     /** Subject that is thrown, when focus escapes the list */
     focusEscapeList = new Subject<FocusEscapeDirection>();
 
@@ -30,10 +29,9 @@ export class KeyboardSupportService<T> {
     /** @hidden */
     setKeyboardService(queryList: QueryList<KeyboardSupportItemInterface & T>, wrap?: boolean): void {
         this._keyManager = new FocusKeyManager(queryList).withWrap(wrap).withHomeAndEnd();
-        queryList.changes.pipe(
-            takeUntil(this._onDestroy$),
-            startWith(0)
-        ).subscribe(() => this._refreshEscapeLogic(queryList));
+        queryList.changes
+            .pipe(takeUntil(this._onDestroy$), startWith(0))
+            .subscribe(() => this._refreshEscapeLogic(queryList));
     }
 
     /** @hidden */
@@ -49,15 +47,18 @@ export class KeyboardSupportService<T> {
 
     /** @hidden */
     private _refreshEscapeLogic(queryList: QueryList<KeyboardSupportItemInterface & T>): void {
-
         const createEscapeListener = (
-            listItem: KeyboardSupportItemInterface & T, onKeyCode: number, escapeDirection: FocusEscapeDirection
+            listItem: KeyboardSupportItemInterface & T,
+            onKeyCode: number,
+            escapeDirection: FocusEscapeDirection
         ): void => {
-            listItem.keyDown.pipe(
-                takeUntil(unsubscribe$),
-                filter(event => KeyUtil.isKeyCode(event, onKeyCode)),
-                tap(event => event.preventDefault())
-            ).subscribe(() => this.focusEscapeList.next(escapeDirection));
+            listItem.keyDown
+                .pipe(
+                    takeUntil(unsubscribe$),
+                    filter((event) => KeyUtil.isKeyCode(event, onKeyCode)),
+                    tap((event) => event.preventDefault())
+                )
+                .subscribe(() => this.focusEscapeList.next(escapeDirection));
         };
 
         /** Finish all of the streams, form before */

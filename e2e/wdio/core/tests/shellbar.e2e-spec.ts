@@ -1,24 +1,47 @@
 import { ShellbarPo } from '../pages/shellbar.po';
 import {
-    click, clickAndMoveElement, currentBrowserName,
-    doesItExist, getAlertText,
+    click,
+    clickAndMoveElement,
+    currentBrowserName,
+    doesItExist,
+    getAlertText,
     getCurrentUrl,
     getElementArrayLength,
-    getElementSize, getText,
-    goBack, isAlertOpen,
+    getElementSize,
+    getText,
+    goBack,
+    isAlertOpen,
     isElementClickable,
     isElementDisplayed,
     refreshPage,
-    scrollIntoView, sendKeys,
+    scrollIntoView,
+    sendKeys,
     waitForElDisplayed
 } from '../../driver/wdio';
 
-describe('shellbar test suite', function() {
+describe('shellbar test suite', () => {
     const shellbarPage = new ShellbarPo();
     const {
-        basicExample, shellbarAvatar, popover, popoverMenuItem, shellbarLogoLink, collapsableExample, sizeButtons,
-        collapsableShellbar, searchbarButton, searchField, collapsableShellbarTitle, searchMenuItem, actionButton,
-        myAppsButton, myApps, sideNavExample, sideNavItems, sideNavIcons, sideNavText, sideNavControlBtn
+        basicExample,
+        shellbarAvatar,
+        popover,
+        popoverMenuItem,
+        shellbarLogoLink,
+        collapsableExample,
+        sizeButtons,
+        collapsableShellbar,
+        searchbarButton,
+        searchField,
+        collapsableShellbarTitle,
+        searchMenuItem,
+        actionButton,
+        myAppsButton,
+        myApps,
+        sideNavExample,
+        sideNavItems,
+        sideNavIcons,
+        sideNavText,
+        sideNavControlBtn
     } = shellbarPage;
 
     beforeAll(() => {
@@ -30,7 +53,7 @@ describe('shellbar test suite', function() {
         waitForElDisplayed(shellbarPage.title);
     }, 1);
 
-    describe('Basic example', function() {
+    describe('Basic example', () => {
         it('should open user actions menu on click', () => {
             scrollIntoView(basicExample);
             click(basicExample + shellbarAvatar);
@@ -53,7 +76,7 @@ describe('shellbar test suite', function() {
             }
         });
 
-       it('should check logo navigation', () => {
+        it('should check logo navigation', () => {
             scrollIntoView(basicExample);
 
             checkLinkTarget(basicExample + shellbarLogoLink, '/core/home', 'input[type="text"]');
@@ -62,7 +85,7 @@ describe('shellbar test suite', function() {
         });
     });
 
-    describe('Links with collapsible menu and product switcher example', function() {
+    describe('Links with collapsible menu and product switcher example', () => {
         it('should check the sizes', () => {
             scrollIntoView(collapsableExample);
             click(sizeButtons);
@@ -139,7 +162,6 @@ describe('shellbar test suite', function() {
 
             expect(isElementDisplayed(popover)).toBe(true, 'popover not displayed');
             expect(isElementClickable(popoverMenuItem)).toBe(true, 'menu item not clickable');
-
         });
 
         it('should check apps menu opens on click', () => {
@@ -167,7 +189,7 @@ describe('shellbar test suite', function() {
         });
     });
 
-    describe('shellbar with sidenavigation example', function() {
+    describe('shellbar with sidenavigation example', () => {
         it('should check size nav items clickable', () => {
             scrollIntoView(sideNavExample);
             const navItemCount = getElementArrayLength(sideNavItems);
@@ -190,8 +212,8 @@ describe('shellbar test suite', function() {
         });
     });
 
-    describe('visual regression and orientation', function() {
-        it('should check orientation', function() {
+    describe('visual regression and orientation', () => {
+        it('should check orientation', () => {
             shellbarPage.checkRtlSwitch();
         });
 

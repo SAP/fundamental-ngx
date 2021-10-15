@@ -21,19 +21,21 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 
             <fd-dialog-footer>
                 <fd-button-bar
-                        label="Interesting"
-                        fdType="emphasized"
-                        [compact]="true"
-                        (click)="dialogRef.close('Continue')"
-                        ariaLabel="Interesting Emphasized">
+                    label="Interesting"
+                    fdType="emphasized"
+                    [compact]="true"
+                    (click)="dialogRef.close('Continue')"
+                    ariaLabel="Interesting Emphasized"
+                >
                 </fd-button-bar>
                 <fd-button-bar
-                        label="Cancel"
-                        fdInitialFocus
-                        fdType="transparent"
-                        [compact]="true"
-                        (click)="dialogRef.dismiss('Cancel')"
-                        ariaLabel="Cancel">
+                    label="Cancel"
+                    fdInitialFocus
+                    fdType="transparent"
+                    [compact]="true"
+                    (click)="dialogRef.dismiss('Cancel')"
+                    ariaLabel="Cancel"
+                >
                 </fd-button-bar>
             </fd-dialog-footer>
         </fd-dialog>

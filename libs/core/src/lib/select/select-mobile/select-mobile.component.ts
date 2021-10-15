@@ -34,11 +34,10 @@ import { ESCAPE } from '@angular/cdk/keycodes';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectMobileComponent extends MobileModeBase<SelectInterface> implements OnInit, AfterViewInit, OnDestroy {
-
     /** @hidden
      * from mobile class can not prefix _,
      * to avoid build issues
-    */
+     */
     childContent: TemplateRef<any> = undefined;
 
     /** @hidden */
@@ -49,7 +48,7 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
     private _subscriptions = new Subscription();
 
     @HostListener('keydown', ['$event']) onItemKeydown(event: KeyboardEvent): void {
-        if (event && (KeyUtil.isKeyCode(event, [ESCAPE]))) {
+        if (event && KeyUtil.isKeyCode(event, [ESCAPE])) {
             this._component.close(true);
         }
     }
@@ -57,13 +56,9 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
         _elementRef: ElementRef,
         _dialogService: DialogService,
         @Inject(SELECT_COMPONENT) _selectComponent: SelectInterface,
-        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[],
-
+        @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
     ) {
-        super(_elementRef, _dialogService, _selectComponent,
-            MobileModeControl.SELECT,
-            mobileModes);
-
+        super(_elementRef, _dialogService, _selectComponent, MobileModeControl.SELECT, mobileModes);
     }
 
     /** @hidden */
@@ -117,6 +112,5 @@ export class SelectMobileComponent extends MobileModeBase<SelectInterface> imple
             container: this._elementRef.nativeElement,
             ariaLabelledBy: 'fd-dialog-header'
         });
-
     }
 }

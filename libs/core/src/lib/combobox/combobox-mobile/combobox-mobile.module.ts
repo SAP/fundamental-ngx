@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 @NgModule({
     declarations: [ComboboxMobileComponent],
     imports: [BarModule, DialogModule, ButtonModule, CommonModule],
-    entryComponents: [ ComboboxMobileComponent ],
+    entryComponents: [ComboboxMobileComponent],
     exports: [ComboboxMobileComponent]
 })
 export class ComboboxMobileModule {}

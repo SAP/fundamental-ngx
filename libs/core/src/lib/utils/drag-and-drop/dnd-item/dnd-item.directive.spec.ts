@@ -25,12 +25,14 @@ describe('DndItemDirective', () => {
     let directive: DndItemDirective;
     let fixture: ComponentFixture<TestDndContainerComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [DragDropModule],
-            declarations: [TestDndContainerComponent, DndItemDirective]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [DragDropModule],
+                declarations: [TestDndContainerComponent, DndItemDirective]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestDndContainerComponent);

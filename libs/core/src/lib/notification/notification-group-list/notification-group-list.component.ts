@@ -1,12 +1,12 @@
-import { 
+import {
     AfterContentInit,
-    ChangeDetectionStrategy, 
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component, 
+    Component,
     ContentChild,
     forwardRef,
     OnDestroy,
-    ViewEncapsulation 
+    ViewEncapsulation
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { NotificationGroupHeaderComponent } from '../notification-group-header/notification-group-header.component';
@@ -14,15 +14,15 @@ import { NotificationGroupHeaderComponent } from '../notification-group-header/n
 @Component({
     selector: 'fd-notification-group-list',
     template: `
-    <ng-content select="fd-notification-group-header"></ng-content>
-    <ng-container *ngIf="expanded">
-        <ng-content></ng-content>
-    </ng-container>
+        <ng-content select="fd-notification-group-header"></ng-content>
+        <ng-container *ngIf="expanded">
+            <ng-content></ng-content>
+        </ng-container>
     `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NotificationGroupListComponent  implements AfterContentInit, OnDestroy {
+export class NotificationGroupListComponent implements AfterContentInit, OnDestroy {
     /** @hidden */
     @ContentChild(forwardRef(() => NotificationGroupHeaderComponent))
     groupHeader: NotificationGroupHeaderComponent;
@@ -40,10 +40,10 @@ export class NotificationGroupListComponent  implements AfterContentInit, OnDest
         this.expanded = this.groupHeader.expanded;
 
         this._subscriptions.add(
-            this.groupHeader.expandedChange.subscribe((value => {
+            this.groupHeader.expandedChange.subscribe((value) => {
                 this.expanded = value;
                 this._changeDetectorRef.detectChanges();
-            }))
+            })
         );
     }
 

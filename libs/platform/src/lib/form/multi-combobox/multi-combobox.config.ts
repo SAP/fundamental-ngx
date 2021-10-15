@@ -26,7 +26,9 @@ export class MultiComboboxConfig {
     /**
      * Create Provider factory function
      */
-    static createProviderFactory(obj: Partial<MultiComboboxConfig>): (platformConfig: PlatformConfig) => MultiComboboxConfig {
+    static createProviderFactory(
+        obj: Partial<MultiComboboxConfig>
+    ): (platformConfig: PlatformConfig) => MultiComboboxConfig {
         const useFactory = (platformConfig: PlatformConfig): MultiComboboxConfig => {
             return Object.assign(new MultiComboboxConfig(platformConfig), obj);
         };

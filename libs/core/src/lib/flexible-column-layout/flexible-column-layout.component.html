@@ -1,52 +1,59 @@
-<div 
+<div
     class="fd-flexible-column-layout"
-    [class.fd-flexible-column-layout--translucent]="backgroundDesign==='translucent'"
-    [class.fd-flexible-column-layout--transparent]="backgroundDesign==='transparent'"
+    [class.fd-flexible-column-layout--translucent]="backgroundDesign === 'translucent'"
+    [class.fd-flexible-column-layout--transparent]="backgroundDesign === 'transparent'"
 >
     <!-- Start/Left/First Column -->
-    <div 
+    <div
         class="fd-flexible-column-layout__column"
         [style.width.%]="_columnLayout.start"
         [style.visibility]="_columnLayout.start === 0 ? 'hidden' : 'visible'"
-        [attr.aria-hidden]="_columnLayout.start === 0">
+        [attr.aria-hidden]="_columnLayout.start === 0"
+    >
         <ng-container *ngTemplateOutlet="startColumn"></ng-container>
     </div>
     <!-- Left Separator -->
-    <div 
-        *ngIf="_leftColumnSeparator"
-        class="fd-flexible-column-layout__separator">
-        <button 
-            class="fd-button fd-button--compact fd-button--transparent fd-flexible-column-layout__button" 
-            aria-label="Expand" 
-            (click)="_handleLeftColumnSeparatorClick()">
-            <i [ngClass]="_leftColumnSeparator ? 'sap-icon--slim-arrow-' + _leftColumnSeparator : ''" role="presentation"></i>
+    <div *ngIf="_leftColumnSeparator" class="fd-flexible-column-layout__separator">
+        <button
+            class="fd-button fd-button--compact fd-button--transparent fd-flexible-column-layout__button"
+            aria-label="Expand"
+            (click)="_handleLeftColumnSeparatorClick()"
+        >
+            <i
+                [ngClass]="_leftColumnSeparator ? 'sap-icon--slim-arrow-' + _leftColumnSeparator : ''"
+                role="presentation"
+            ></i>
         </button>
     </div>
     <!-- Middle/Second Column -->
-    <div 
+    <div
         class="fd-flexible-column-layout__column"
         [style.width.%]="_columnLayout.mid"
         [style.visibility]="_columnLayout.mid === 0 ? 'hidden' : 'visible'"
-        [attr.aria-hidden]="_columnLayout.mid === 0">
+        [attr.aria-hidden]="_columnLayout.mid === 0"
+    >
         <ng-container *ngTemplateOutlet="midColumn"></ng-container>
     </div>
     <!-- Right Separator -->
-    <div 
-        *ngIf="_rightColumnSeparator"
-        class="fd-flexible-column-layout__separator">
-        <button 
-            class="fd-button fd-button--compact fd-button--transparent fd-flexible-column-layout__button" 
-            aria-label="Expand" 
-            (click)="_handleRightColumnSeparatorClick()">
-            <i [ngClass]="_rightColumnSeparator ? 'sap-icon--slim-arrow-' + _rightColumnSeparator : ''" role="presentation"></i>
+    <div *ngIf="_rightColumnSeparator" class="fd-flexible-column-layout__separator">
+        <button
+            class="fd-button fd-button--compact fd-button--transparent fd-flexible-column-layout__button"
+            aria-label="Expand"
+            (click)="_handleRightColumnSeparatorClick()"
+        >
+            <i
+                [ngClass]="_rightColumnSeparator ? 'sap-icon--slim-arrow-' + _rightColumnSeparator : ''"
+                role="presentation"
+            ></i>
         </button>
     </div>
     <!-- End/Right/Third Column -->
-    <div 
+    <div
         class="fd-flexible-column-layout__column"
         [style.width.%]="_columnLayout.end"
         [style.visibility]="_columnLayout.end === 0 ? 'hidden' : 'visible'"
-        [attr.aria-hidden]="_columnLayout.end === 0">
+        [attr.aria-hidden]="_columnLayout.end === 0"
+    >
         <ng-container *ngTemplateOutlet="endColumn"></ng-container>
     </div>
 </div>

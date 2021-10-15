@@ -3,7 +3,9 @@ import {
     ContentChild,
     Directive,
     EventEmitter,
-    HostBinding, Input, OnDestroy,
+    HostBinding,
+    Input,
+    OnDestroy,
     Output
 } from '@angular/core';
 import { NestedLinkDirective } from '../nested-link/nested-link.directive';
@@ -19,12 +21,9 @@ let sideNavigationItemUniqueId = 0;
 
 @Directive({
     selector: '[fdNestedItem], [fd-nested-list-item]',
-    providers: [
-        NestedItemService
-    ]
+    providers: [NestedItemService]
 })
 export class NestedItemDirective implements AfterContentInit, NestedItemInterface, OnDestroy {
-
     /** Whether item should be expanded */
     @Input() set expanded(expanded: boolean) {
         if (expanded !== this._expanded) {
@@ -65,7 +64,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     contentItem: NestedListContentDirective;
 
     /** @hidden */
-    constructor (
+    constructor(
         private _itemService: NestedItemService,
         private _keyboardService: NestedListKeyboardService,
         private _stateService: NestedListStateService
@@ -103,7 +102,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     /** Get all of the children item elements */
     get allChildrenItems(): NestedItemInterface[] {
         if (this._itemService && this._itemService.list) {
-            return this._itemService.list.nestedItems.toArray()
+            return this._itemService.list.nestedItems.toArray();
         }
         return [];
     }
@@ -154,7 +153,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
             return true;
         }
         if (this._itemService.list) {
-            return !!this._itemService.list.nestedItems.find(item => item.containsId(id))
+            return !!this._itemService.list.nestedItems.find((item) => item.containsId(id));
         } else {
             return false;
         }
@@ -204,9 +203,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
     /** @hidden */
     private _setUpSubscriptions(): void {
         /** Subscribe to mouse click event, thrown by link item */
-        this._itemService.toggle
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(() => this.toggle());
+        this._itemService.toggle.pipe(takeUntil(this._onDestroy$)).subscribe(() => this.toggle());
 
         /** Subscribe to mouse click event, thrown by link item */
         this._itemService.click
@@ -216,7 +213,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
         /** Subscribe to keyboard event and throw it farther */
         this._itemService.keyDown
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe(keyboardEvent => this.keyboardTriggered.emit(keyboardEvent));
+            .subscribe((keyboardEvent) => this.keyboardTriggered.emit(keyboardEvent));
 
         /** Subscribe to selected state change, it's not triggered, when selectable flag is disabled*/
         this._stateService.onSelected
@@ -224,7 +221,7 @@ export class NestedItemDirective implements AfterContentInit, NestedItemInterfac
                 takeUntil(this._onDestroy$),
                 filter(() => this._stateService.selectable)
             )
-            .subscribe(id => this._selectedChange(id));
+            .subscribe((id) => this._selectedChange(id));
     }
 
     /** @hidden */

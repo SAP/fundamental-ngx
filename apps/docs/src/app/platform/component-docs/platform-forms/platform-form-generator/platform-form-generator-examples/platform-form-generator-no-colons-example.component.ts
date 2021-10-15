@@ -12,11 +12,10 @@ export const dummyAwaitablePromise = (timeout = 200) => {
 };
 
 @Component({
-  selector: 'fdp-platform-form-generator-no-colons-example',
-  templateUrl: './platform-form-generator-no-colons-example.component.html'
+    selector: 'fdp-platform-form-generator-no-colons-example',
+    templateUrl: './platform-form-generator-no-colons-example.component.html'
 })
 export class PlatformFormGeneratorNoColonsExampleComponent {
-
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;
 
     loading = false;
@@ -44,7 +43,7 @@ export class PlatformFormGeneratorNoColonsExampleComponent {
                 column: 1,
                 appendColon: true
             }
-        },
+        }
     ];
 
     onFormCreated(): void {
@@ -65,5 +64,4 @@ export class PlatformFormGeneratorNoColonsExampleComponent {
     submitForm(): void {
         this.formGenerator.submit();
     }
-
 }

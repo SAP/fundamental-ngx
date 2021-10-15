@@ -22,5 +22,4 @@ export class PanelTitleDirective {
     @Input()
     @HostBinding('attr.id')
     id: string = 'fd-panel-title-' + panelTitleUniqueId++;
-
 }

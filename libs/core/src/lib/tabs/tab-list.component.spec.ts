@@ -7,21 +7,12 @@ import { TabsModule } from './tabs.module';
 import { whenStable } from '@fundamental-ngx/core/tests';
 
 @Component({
-    template: `
-        <fd-tab-list>
-            <fd-tab title="Link" id="tab1">
-                Content Link
-            </fd-tab>
-            <fd-tab title="Selected" id="tab2">
-                Content Selected
-            </fd-tab>
-            <fd-tab title="Link" id="tab3">
-                Content Link Two
-            </fd-tab>
-            <fd-tab title="Disabled" id="tab4" *ngIf="showDisabled">
-                Disabled
-            </fd-tab>
-        </fd-tab-list>`
+    template: ` <fd-tab-list>
+        <fd-tab title="Link" id="tab1"> Content Link </fd-tab>
+        <fd-tab title="Selected" id="tab2"> Content Selected </fd-tab>
+        <fd-tab title="Link" id="tab3"> Content Link Two </fd-tab>
+        <fd-tab title="Disabled" id="tab4" *ngIf="showDisabled"> Disabled </fd-tab>
+    </fd-tab-list>`
 })
 class TestTabsComponent {
     @ViewChildren(TabPanelComponent)
@@ -35,12 +26,14 @@ describe('TabListComponent', () => {
     let testComponent: TestTabsComponent;
     let fixture: ComponentFixture<TestTabsComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestTabsComponent],
-            imports: [TabsModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestTabsComponent],
+                imports: [TabsModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestTabsComponent);
@@ -120,11 +113,13 @@ const NUMBER_OF_TABS = 10;
 
 @Component({
     template: `
-        <fd-tab-list style="width: 200px"
-                     [collapsibleTabs]="true"
-                     [collapseOverflow]="true"
-                     [maxVisibleTabs]="maxVisibleTabs">
-            <fd-tab *ngFor="let title of _tabs" [title]="title">{{title}} content</fd-tab>
+        <fd-tab-list
+            style="width: 200px"
+            [collapsibleTabs]="true"
+            [collapseOverflow]="true"
+            [maxVisibleTabs]="maxVisibleTabs"
+        >
+            <fd-tab *ngFor="let title of _tabs" [title]="title">{{ title }} content</fd-tab>
         </fd-tab-list>
     `
 })
@@ -146,14 +141,16 @@ describe('TabListComponent', () => {
     let component: TabListComponent;
     let testComponent: TestCollapsibleTabsComponent;
     let fixture: ComponentFixture<TestCollapsibleTabsComponent>;
-    const groupedTabs = tabList => [tabList._visualOrder.visible, tabList._visualOrder.overflowing];
+    const groupedTabs = (tabList) => [tabList._visualOrder.visible, tabList._visualOrder.overflowing];
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestCollapsibleTabsComponent],
-            imports: [TabsModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestCollapsibleTabsComponent],
+                imports: [TabsModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestCollapsibleTabsComponent);
@@ -196,7 +193,7 @@ describe('TabListComponent', () => {
 
         await whenStable(fixture);
 
-        const someTabActive = component._tabArray.some(tab => tab.active);
+        const someTabActive = component._tabArray.some((tab) => tab.active);
         expect(someTabActive).toBeFalse();
     });
 });

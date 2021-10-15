@@ -1,5 +1,4 @@
-@import "mixins";
-
+@import 'mixins';
 
 $block: #{$fd-namespace}-timeline;
 $fd-timeline-arrow-offset: 1rem !default;
@@ -265,7 +264,6 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
     }
 
     &__node-container {
-
         &--horizontal {
             flex-direction: row;
 
@@ -304,7 +302,7 @@ $fd-timeline-group-arrow-border: 0.0625rem solid var(--sapButton_BorderColor) !d
 
             background: transparent;
 
-            [class*="sap-icon"] {
+            [class*='sap-icon'] {
                 line-height: 1;
                 width: $fd-timeline-node-icon-size;
                 height: $fd-timeline-node-icon-size;

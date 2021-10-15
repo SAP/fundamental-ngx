@@ -25,9 +25,9 @@ export class CheckboxPO extends BaseComponentPo {
     disabledAccessibilityCheckbox = 'fdp-platform-checkbox-a11y #a11y3';
     disabledAccessibilityCheckboxLabel = 'fdp-platform-checkbox-a11y fd-checkbox label[for=a11y3]';
 
-     open(): void {
-         super.open(this.url);
-         waitForPresent(this.binaryTempCheckbox);
+    open(): void {
+        super.open(this.url);
+        waitForPresent(this.binaryTempCheckbox);
     }
 
     getScreenshotFolder(): object {

@@ -19,7 +19,9 @@ export class SemanticTypesExampleComponent {
     constructor(private _messageBoxService: MessageBoxService) {}
 
     open(type: MessageBoxType, showSemanticIcon: boolean = true, customSemanticIcon?: string): void {
-        this.types = `Message box uses the semantic type "${type}" ${customSemanticIcon ? 'with custom icon' : 'with default icon'}`;
+        this.types = `Message box uses the semantic type "${type}" ${
+            customSemanticIcon ? 'with custom icon' : 'with default icon'
+        }`;
         const messageBoxRef = this._messageBoxService.open(
             {
                 title: this.title,

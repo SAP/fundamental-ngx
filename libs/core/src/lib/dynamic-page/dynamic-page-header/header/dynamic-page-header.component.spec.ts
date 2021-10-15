@@ -13,23 +13,20 @@ import {
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 
 @Component({
-    template: `
-        <fd-dynamic-page-header [title]="title" [subtitle]="subtitle" >
-            <fd-breadcrumb>
-                <fd-breadcrumb-item>
-                    <a fd-breadcrumb-link [attr.href]="'#'">Men</a>
-                </fd-breadcrumb-item>
-                <fd-breadcrumb-item>
-                    <a fd-breadcrumb-link [attr.href]="'#'">Shoes</a>
-                </fd-breadcrumb-item>
-            </fd-breadcrumb>
+    template: ` <fd-dynamic-page-header [title]="title" [subtitle]="subtitle">
+        <fd-breadcrumb>
+            <fd-breadcrumb-item>
+                <a fd-breadcrumb-link [attr.href]="'#'">Men</a>
+            </fd-breadcrumb-item>
+            <fd-breadcrumb-item>
+                <a fd-breadcrumb-link [attr.href]="'#'">Shoes</a>
+            </fd-breadcrumb-item>
+        </fd-breadcrumb>
 
-            <fd-dynamic-page-global-actions></fd-dynamic-page-global-actions>
-            <fd-dynamic-page-title-content></fd-dynamic-page-title-content>
-        </fd-dynamic-page-header>`,
-    providers: [
-        DynamicPageService
-    ]
+        <fd-dynamic-page-global-actions></fd-dynamic-page-global-actions>
+        <fd-dynamic-page-title-content></fd-dynamic-page-title-content>
+    </fd-dynamic-page-header>`,
+    providers: [DynamicPageService]
 })
 class TestComponent {
     title = 'Some title ';
@@ -38,9 +35,7 @@ class TestComponent {
     @ViewChild(DynamicPageHeaderComponent)
     header: DynamicPageHeaderComponent;
 
-    constructor(
-        public dynamicPageService: DynamicPageService
-    ) {}
+    constructor(public dynamicPageService: DynamicPageService) {}
 }
 
 describe('DynamicPageTitleComponent', () => {
@@ -67,7 +62,7 @@ describe('DynamicPageTitleComponent', () => {
         expect(fixture).toBeTruthy();
     });
 
-    it('should call set size on depended components', fakeAsync(()  => {
+    it('should call set size on depended components', fakeAsync(() => {
         fixture.detectChanges();
         const breadcrumbSpy = spyOn(header._breadcrumbComponent, 'onResize').and.callThrough();
         const contentToolbarSpy = spyOn(header._contentToolbar, '_setSize').and.callThrough();
@@ -75,7 +70,7 @@ describe('DynamicPageTitleComponent', () => {
 
         header.size = 'small';
 
-        tick(5)
+        tick(5);
 
         expect(breadcrumbSpy).toHaveBeenCalled();
         expect(contentToolbarSpy).toHaveBeenCalledWith('small');
@@ -92,5 +87,5 @@ describe('DynamicPageTitleComponent', () => {
         component.dynamicPageService.pixelsSizeChanged.next(ActionSquashBreakpointPx + 10);
         fixture.detectChanges();
         expect((<any>header)._actionsSquashed).toBeFalse();
-    })
+    });
 });

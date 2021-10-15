@@ -2,7 +2,6 @@ import { BaseComponentPo } from './base-component.po';
 import { waitForElDisplayed } from '../../driver/wdio';
 
 export class SearchPo extends BaseComponentPo {
-
     url = '/search-field';
     root = '#page-content';
 

@@ -26,12 +26,14 @@ describe('NotificationGroupHeaderComponent', () => {
     let button: ElementRef;
     let buttonIcon: ElementRef;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [NotificationModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [NotificationModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -50,12 +52,12 @@ describe('NotificationGroupHeaderComponent', () => {
     it('should change the icon when the button is clicked', () => {
         button = fixture.debugElement.query(By.css('button'));
         buttonIcon = fixture.debugElement.query(By.css('i'));
-        
+
         expect(buttonIcon.nativeElement.classList).toContain('sap-icon--slim-arrow-right');
 
         button.nativeElement.click();
         fixture.detectChanges();
-        
+
         expect(buttonIcon.nativeElement.classList).toContain('sap-icon--slim-arrow-down');
     });
 });

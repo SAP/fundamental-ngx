@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-
 /**
  * Default options for core dynamic-page
  */

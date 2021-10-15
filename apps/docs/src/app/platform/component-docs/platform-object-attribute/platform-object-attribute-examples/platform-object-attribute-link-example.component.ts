@@ -7,8 +7,7 @@ import { Router } from '@angular/router';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformObjectAttributeLinkExampleComponent {
-
-    constructor(private router: Router) { }
+    constructor(private router: Router) {}
 
     navigationClick(): void {
         this.router.navigate(['/platform/home']);

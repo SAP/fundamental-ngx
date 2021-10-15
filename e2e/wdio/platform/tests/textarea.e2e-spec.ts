@@ -37,13 +37,27 @@ import {
     waitTextToBePresentInValue
 } from '../../driver/wdio';
 
-describe('Verify Textarea component', function() {
+describe('Verify Textarea component', () => {
     const textareaPage = new TextareaPo();
     const {
-        basicTextArea, basicTextAreaLabel, basicTextAreaPopoverIcon, basicTextAreaPopoverBody, readOnlyTextAreaLabel,
-        disabledTextArea, disabledTextAreaLabel, growingDisabledTextarea, growingMaxLinesTextarea, growingHeightTextarea,
-        withGrowingAndNoLimitsTextarea, withCharactersMaxNumberTextarea, compactTextArea, compactTextAreaLabel,
-        detailedTextAreaLabel, detailedTextArea, detailedTextAreaErrorMessage, detailedTextAreaCharacterCounter,
+        basicTextArea,
+        basicTextAreaLabel,
+        basicTextAreaPopoverIcon,
+        basicTextAreaPopoverBody,
+        readOnlyTextAreaLabel,
+        disabledTextArea,
+        disabledTextAreaLabel,
+        growingDisabledTextarea,
+        growingMaxLinesTextarea,
+        growingHeightTextarea,
+        withGrowingAndNoLimitsTextarea,
+        withCharactersMaxNumberTextarea,
+        compactTextArea,
+        compactTextAreaLabel,
+        detailedTextAreaLabel,
+        detailedTextArea,
+        detailedTextAreaErrorMessage,
+        detailedTextAreaCharacterCounter,
         noPlatformsFormTextAreaLabel
     } = textareaPage;
     const copyPasteBtn = currentPlatformName() === 'Mac OS X' ? 'Command' : 'Control';
@@ -61,7 +75,7 @@ describe('Verify Textarea component', function() {
     if (browserIsIEorSafari()) {
         console.log('Skip for IE and Safari');
     }
-    describe('has Textarea and', function() {
+    describe('has Textarea and', () => {
         it('should allow the user to enter multiple lines of text', () => {
             setValue(basicTextArea, multiple_lines_text);
             const textareaText = getValue(basicTextArea);
@@ -120,7 +134,7 @@ describe('Verify Textarea component', function() {
         // No example
         /*        xit('should not accept restricted characters (maybe postponed)', async () => {});*/
 
-        describe('placeholder should exhibit standard behaviour', function() {
+        describe('placeholder should exhibit standard behaviour', () => {
             // The standard behaviour of place holder is under browser control, and can't be checked by webDriver,
             // Checking that placeholder is present.
             it('should appear as hint text and remain as long as text area is empty', () => {
@@ -130,7 +144,7 @@ describe('Verify Textarea component', function() {
             });
         });
 
-        describe('if textarea is enabled', function() {
+        describe('if textarea is enabled', () => {
             xit('should be able to perform cut', () => {
                 setValue(basicTextArea, fifty_character_string);
                 sendKeys([copyPasteBtn, 'a']);
@@ -165,7 +179,7 @@ describe('Verify Textarea component', function() {
                 sendKeys(['Backspace']);
             }
             click(detailedTextArea);
-            waitForElDisplayed(detailedTextAreaErrorMessage)
+            waitForElDisplayed(detailedTextAreaErrorMessage);
             const errorText = getText(detailedTextAreaErrorMessage);
 
             expect(errorText.trim()).toBe('Value is required');
@@ -254,7 +268,7 @@ describe('Verify Textarea component', function() {
         });
 
         // Disabled due to changes in inline help - now there is an icon instead of text
-        xdescribe('have a visual cue ', function() {
+        xdescribe('have a visual cue ', () => {
             it('should have ? mark by default', () => {
                 const popoverIconContent = executeScriptBeforeTagAttr(basicTextAreaPopoverIcon, 'content');
                 expect(popoverIconContent).toBe('"?"');
@@ -268,7 +282,7 @@ describe('Verify Textarea component', function() {
             });
         });
 
-        xdescribe('Check visual regression', function() {
+        xdescribe('Check visual regression', () => {
             it('should check examples visual regression', () => {
                 textareaPage.saveExampleBaselineScreenshot();
                 expect(textareaPage.compareWithBaseline()).toBeLessThan(5);

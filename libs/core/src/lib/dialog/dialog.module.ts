@@ -50,14 +50,8 @@ const declarations = [
         BusyIndicatorModule,
         A11yModule
     ],
-    exports: [
-        declarations,
-        BarModule,
-        TitleModule,
-        TemplateModule,
-        InitialFocusModule
-    ],
+    exports: [declarations, BarModule, TitleModule, TemplateModule, InitialFocusModule],
     entryComponents: [DialogContainerComponent, DialogDefaultComponent],
     providers: [DialogService, DynamicComponentService]
 })
-export class DialogModule { }
+export class DialogModule {}

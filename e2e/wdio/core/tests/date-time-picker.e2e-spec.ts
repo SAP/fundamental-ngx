@@ -5,8 +5,10 @@ import {
     getElementArrayLength,
     getElementClass,
     getText,
-    getValue, isElementClickable,
-    isElementDisplayed, pause,
+    getValue,
+    isElementClickable,
+    isElementDisplayed,
+    pause,
     refreshPage,
     scrollIntoView,
     sendKeys,
@@ -24,17 +26,41 @@ import {
     date4,
     dates,
     i18n,
-    currentDay,
+    currentDay
 } from '../fixtures/appData/date-time-picker-contents';
 
-describe('Datetime picker suite', function () {
+describe('Datetime picker suite', () => {
     const dateTimePickerPage = new DateTimePicker();
     const {
-        datePickerButton, calendarExpanded,
-        datePickerInput, topPage, selectYearButton, selectMonthButton, calendarYearsSection, disabledDateTimePickerButton,
-        disabledDateTimePickerInput, okButton, filterCalendarValue, buttonSelectYearsRange, buttonFirstRangeYear, buttonFirstYear,
-        buttonFirstMonth, selectedHours, selectedMinutes, navigationDownArrowButton, navigationUpArrowButton, timeItem, period,
-        cancelButton, buttonChange, optionButton, activeDay, dayInCalendarButtonByValue, getOptionById, datePickerGroup, calendarItem
+        datePickerButton,
+        calendarExpanded,
+        datePickerInput,
+        topPage,
+        selectYearButton,
+        selectMonthButton,
+        calendarYearsSection,
+        disabledDateTimePickerButton,
+        disabledDateTimePickerInput,
+        okButton,
+        filterCalendarValue,
+        buttonSelectYearsRange,
+        buttonFirstRangeYear,
+        buttonFirstYear,
+        buttonFirstMonth,
+        selectedHours,
+        selectedMinutes,
+        navigationDownArrowButton,
+        navigationUpArrowButton,
+        timeItem,
+        period,
+        cancelButton,
+        buttonChange,
+        optionButton,
+        activeDay,
+        dayInCalendarButtonByValue,
+        getOptionById,
+        datePickerGroup,
+        calendarItem
     } = new DateTimePicker();
 
     beforeAll(() => {
@@ -51,8 +77,14 @@ describe('Datetime picker suite', function () {
         const inputsLength = getElementArrayLength(datePickerInput);
         expect(buttonsLength).toEqual(inputsLength);
         for (let i = 1; i < buttonsLength; i++) {
-            expect(isElementDisplayed(datePickerButton, i)).toBe(true, 'date picker button is not displayed when it should be');
-            expect(isElementDisplayed(datePickerInput, i)).toBe(true, 'date picker input is not displayed when it should be');
+            expect(isElementDisplayed(datePickerButton, i)).toBe(
+                true,
+                'date picker button is not displayed when it should be'
+            );
+            expect(isElementDisplayed(datePickerInput, i)).toBe(
+                true,
+                'date picker input is not displayed when it should be'
+            );
         }
     });
 
@@ -74,7 +106,10 @@ describe('Datetime picker suite', function () {
         expect(waitForElDisplayed(calendarExpanded)).toBe(true, 'calendar is not expanded when it should be');
         scrollIntoView(selectYearButton);
         click(selectYearButton);
-        expect(waitForElDisplayed(calendarYearsSection)).toBe(true, 'calendar years section is not displayed when it should be');
+        expect(waitForElDisplayed(calendarYearsSection)).toBe(
+            true,
+            'calendar years section is not displayed when it should be'
+        );
         click(dateTimePickerPage.yearInCalendarByValue(year2030));
         expect(getText(selectYearButton)).toBe(year2030.toString());
     });
@@ -113,31 +148,38 @@ describe('Datetime picker suite', function () {
         }
     });
 
-    it('verify the user can then choose the desired date from the calendar, and the time from the rotating wheel, ' +
-        'For the time, it’s possible to select hours, minutes, and even seconds.', () => {
+    it(
+        'verify the user can then choose the desired date from the calendar, and the time from the rotating wheel, ' +
+            'For the time, it’s possible to select hours, minutes, and even seconds.',
+        () => {
             click(datePickerButton);
             click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
             selectHoursMinutesAndPeriod();
             click(okButton);
-            expect(getValue(datePickerInput))
-                .toEqual(date);
-        });
+            expect(getValue(datePickerInput)).toEqual(date);
+        }
+    );
 
     it('verify when the user selects cancel the action is aborted and the input field remains unchanged.', () => {
         click(datePickerButton);
         click(dateTimePickerPage.dayInCalendarButtonByValue('1'));
         selectHoursMinutesAndPeriod();
         click(cancelButton);
-        expect(getValue(datePickerInput))
-            .not.toEqual(date);
+        expect(getValue(datePickerInput)).not.toEqual(date);
     });
 
     it('verify disabled date time picker', () => {
         const disabledButtonsArr = elementArray(disabledDateTimePickerButton);
         for (let i = 0; i < disabledButtonsArr.length; i++) {
             if (!getElementClass(datePickerGroup, i).includes('is-disabled')) {
-                expect(isElementClickable(disabledDateTimePickerButton, i)).toBe(false, 'Date time picker button is not disabled when it should be');
-                expect(isElementClickable(disabledDateTimePickerInput, i)).toBe(false, 'Date time input is not disabled when it should be');
+                expect(isElementClickable(disabledDateTimePickerButton, i)).toBe(
+                    false,
+                    'Date time picker button is not disabled when it should be'
+                );
+                expect(isElementClickable(disabledDateTimePickerInput, i)).toBe(
+                    false,
+                    'Date time input is not disabled when it should be'
+                );
             }
         }
     });
@@ -190,8 +232,7 @@ describe('Datetime picker suite', function () {
         click(dayInCalendarButtonByValue(currentDay.toString()));
         selectHoursMinutesAndPeriod();
         click(okButton);
-        expect(getValue(datePickerInput))
-            .toEqual(date2);
+        expect(getValue(datePickerInput)).toEqual(date2);
     });
 
     it('verify programmatic change datetime picker has correct default date', () => {
@@ -200,11 +241,9 @@ describe('Datetime picker suite', function () {
         click(dayInCalendarButtonByValue(currentDay.toString()));
         selectHoursMinutesAndPeriod();
         click(okButton);
-        expect(getValue(datePickerInput, 1))
-            .toEqual(date2);
+        expect(getValue(datePickerInput, 1)).toEqual(date2);
         click(buttonChange);
-        expect(getValue(datePickerInput, 1))
-            .toEqual(date3);
+        expect(getValue(datePickerInput, 1)).toEqual(date3);
     });
 
     it('verify null validity datetime picker has correct default date', () => {
@@ -213,8 +252,7 @@ describe('Datetime picker suite', function () {
         click(dayInCalendarButtonByValue(currentDay.toString()));
         selectHoursMinutesAndPeriod();
         click(okButton);
-        expect(getValue(datePickerInput, 2))
-            .toEqual(date2);
+        expect(getValue(datePickerInput, 2)).toEqual(date2);
     });
 
     it('verify formatting datetime picker has correct default date', () => {
@@ -223,8 +261,7 @@ describe('Datetime picker suite', function () {
         click(dayInCalendarButtonByValue(currentDay.toString()));
         selectHoursAndMinutes();
         click(okButton);
-        expect(getValue(datePickerInput, 3))
-            .toEqual(date4);
+        expect(getValue(datePickerInput, 3)).toEqual(date4);
     });
 
     it('verify date time picker in reactive form has correct default date', () => {
@@ -233,8 +270,7 @@ describe('Datetime picker suite', function () {
         click(dayInCalendarButtonByValue(currentDay.toString()));
         selectHoursMinutesAndPeriod();
         click(okButton);
-        expect(getValue(datePickerInput, 5))
-            .toEqual(date2);
+        expect(getValue(datePickerInput, 5)).toEqual(date2);
     });
 
     it('verify date time picker i18n example', () => {
@@ -249,8 +285,7 @@ describe('Datetime picker suite', function () {
                 scrollIntoView(dayInCalendarButtonByValue(currentDay.toString()));
                 selectHoursAndMinutes();
                 click(okButton);
-                expect(getValue(datePickerInput, 7))
-                    .toContain(dates[i]);
+                expect(getValue(datePickerInput, 7)).toContain(dates[i]);
             }
         }
     });

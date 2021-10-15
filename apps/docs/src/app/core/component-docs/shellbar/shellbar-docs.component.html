@@ -1,6 +1,4 @@
-<fd-docs-section-title id="basic" componentName="shellbar">
-    Basic
-</fd-docs-section-title>
+<fd-docs-section-title id="basic" componentName="shellbar"> Basic </fd-docs-section-title>
 <description>
     This example shows the minimum shellbar for a single application product with only user settings. If no user
     thumbnail is available then display initials.
@@ -17,10 +15,12 @@
 </fd-docs-section-title>
 <description>
     The shellbar can have 4 different sizes <code>'s' | 'm' | 'l' | 'xl'</code>, where <code>"m"</code> is default one.
-    <br>
-    When a product has multiple links, the product links should collapse into an overflow menu on mobile screens
-    (<code>s</code> size). All actions, except for the user menu, should be collapsed.
-    <br>
+    <br />
+    When a product has multiple links, the product links should collapse into an overflow menu on mobile screens (<code
+        >s</code
+    >
+    size). All actions, except for the user menu, should be collapsed.
+    <br />
     <code>ProductSwitchComponent</code> and <code>ProductMenuComponent</code> have properties straight from popover
     component, so some customisation can be added, by passing inputs ex. <code>[position="'bottom-end'"</code>.
 </description>
@@ -31,12 +31,13 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="side-nav" componentName="shellbar">
-    Shellbar with SideNavigation
-</fd-docs-section-title>
+<fd-docs-section-title id="side-nav" componentName="shellbar"> Shellbar with SideNavigation </fd-docs-section-title>
 <description>
-    When Shellbar is used together with Vertical Navigation (aka Side Navigation) set the 
-    <code>sideNav</code> property to <b>true</b>. This will remove the responsive paddings applied on different screen sizes and will align vertically the control button with the items in the Side Navigation. The control button, situated on the far left hand-side of the Shellbar, is responsible for switching the modes of the Side Navigation (expanded, condensed and off-screen) and requires the <code>fd-shellbar-side-nav</code> directive.
+    When Shellbar is used together with Vertical Navigation (aka Side Navigation) set the
+    <code>sideNav</code> property to <b>true</b>. This will remove the responsive paddings applied on different screen
+    sizes and will align vertically the control button with the items in the Side Navigation. The control button,
+    situated on the far left hand-side of the Shellbar, is responsible for switching the modes of the Side Navigation
+    (expanded, condensed and off-screen) and requires the <code>fd-shellbar-side-nav</code> directive.
 </description>
 <component-example>
     <fd-shellbar-side-nav-example></fd-shellbar-side-nav-example>
@@ -45,20 +46,12 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="how-it-works" componentName="shellbar">
-    How it works
-</fd-docs-section-title>
+<fd-docs-section-title id="how-it-works" componentName="shellbar"> How it works </fd-docs-section-title>
 <description>
     <ul>
-        <li>
-            The shellbar should be placed inside the shell layout container.
-        </li>
-        <li>
-            The shellbar is fluid and responsive by default with proper margins and padding built in.
-        </li>
-        <li>
-            The shellbar actions are duplicated into the overflow menu on mobile screens.
-        </li>
+        <li>The shellbar should be placed inside the shell layout container.</li>
+        <li>The shellbar is fluid and responsive by default with proper margins and padding built in.</li>
+        <li>The shellbar actions are duplicated into the overflow menu on mobile screens.</li>
         <li>
             Product menu data gets passed as inputs to the <code>&lt;fd-product-menu></code> component. The user, user
             menu and product switcher are passed as inputs to the <code>&lt;fd-shellbar-actions></code> component. Data

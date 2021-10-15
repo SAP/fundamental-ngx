@@ -6,7 +6,7 @@ import {
     TableDataSource,
     TableRowSelectionChangeEvent,
     TableDataProvider,
-    TableState,
+    TableState
 } from '@fundamental-ngx/platform/table';
 
 @Component({

@@ -9,13 +9,7 @@ export enum genericColors {
     '146,90,206',
     '192,57,159'
 }
-export const semanticText = [
-    'Negative',
-    'Critical',
-    'Positive',
-    'Informative',
-    'Default'
-];
+export const semanticText = ['Negative', 'Critical', 'Positive', 'Informative', 'Default'];
 export const genericColorText = [
     'Indication Color',
     'Indication Color',

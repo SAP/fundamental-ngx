@@ -12,7 +12,6 @@ export class NoDefaultPanePipe implements PipeTransform {
             return value;
         }
 
-        return value.filter(pane => pane.id !== this._splitterPaneContainer._defaultPane?.id);
+        return value.filter((pane) => pane.id !== this._splitterPaneContainer._defaultPane?.id);
     }
 }
-

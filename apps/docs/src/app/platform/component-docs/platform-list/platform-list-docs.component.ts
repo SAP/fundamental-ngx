@@ -36,7 +36,7 @@ export class PlatformListDocsComponent {
         {
             language: 'html',
             code: listSrc,
-            fileName: 'platform-list-example',
+            fileName: 'platform-list-example'
         }
     ];
 
@@ -44,7 +44,7 @@ export class PlatformListDocsComponent {
         {
             language: 'html',
             code: borderLessListSrc,
-            fileName: 'platform-list-border-less-example',
+            fileName: 'platform-list-border-less-example'
         },
         {
             language: 'typescript',
@@ -58,7 +58,7 @@ export class PlatformListDocsComponent {
         {
             language: 'html',
             code: listWithDeleteButton,
-            fileName: 'platform-list-with-delete-button-example',
+            fileName: 'platform-list-with-delete-button-example'
         },
         {
             language: 'typescript',
@@ -72,7 +72,7 @@ export class PlatformListDocsComponent {
         {
             language: 'html',
             code: listWithButtonsHtml,
-            fileName: 'platform-list-with-buttons-example',
+            fileName: 'platform-list-with-buttons-example'
         },
         {
             language: 'typescript',
@@ -86,7 +86,7 @@ export class PlatformListDocsComponent {
         {
             language: 'html',
             code: listWithFooter,
-            fileName: 'platform-list-with-footer-example',
+            fileName: 'platform-list-with-footer-example'
         },
         {
             language: 'typescript',
@@ -100,7 +100,7 @@ export class PlatformListDocsComponent {
         {
             language: 'html',
             code: listWithGroupHeader,
-            fileName: 'platform-list-with-group-header-example',
+            fileName: 'platform-list-with-group-header-example'
         }
     ];
 
@@ -108,7 +108,7 @@ export class PlatformListDocsComponent {
         {
             language: 'html',
             code: listWithItemCounter,
-            fileName: 'platform-list-with-item-counter-example',
+            fileName: 'platform-list-with-item-counter-example'
         },
         {
             language: 'typescript',
@@ -122,7 +122,7 @@ export class PlatformListDocsComponent {
         {
             language: 'html',
             code: listWithSelection,
-            fileName: 'platform-list-with-selection-example',
+            fileName: 'platform-list-with-selection-example'
         },
         {
             language: 'typescript',
@@ -136,7 +136,7 @@ export class PlatformListDocsComponent {
         {
             language: 'html',
             code: listWithSingleSelection,
-            fileName: 'platform-list-with-single-selection-example',
+            fileName: 'platform-list-with-single-selection-example'
         },
         {
             language: 'typescript',
@@ -150,7 +150,7 @@ export class PlatformListDocsComponent {
         {
             language: 'html',
             code: listWithNavigation,
-            fileName: 'platform-list-with-navigation-example',
+            fileName: 'platform-list-with-navigation-example'
         },
         {
             language: 'typescript',
@@ -164,7 +164,7 @@ export class PlatformListDocsComponent {
         {
             language: 'html',
             code: listWithInfiniteScroll,
-            fileName: 'platform-list-with-infinite-scroll-example',
+            fileName: 'platform-list-with-infinite-scroll-example'
         },
         {
             language: 'typescript',
@@ -177,7 +177,7 @@ export class PlatformListDocsComponent {
         {
             language: 'html',
             code: listWithMoreButton,
-            fileName: 'platform-list-with-more-button-example',
+            fileName: 'platform-list-with-more-button-example'
         },
         {
             language: 'typescript',
@@ -191,7 +191,7 @@ export class PlatformListDocsComponent {
         {
             language: 'html',
             code: listWithNoData,
-            fileName: 'platform-list-with-nodata-example',
+            fileName: 'platform-list-with-nodata-example'
         }
     ];
 
@@ -199,7 +199,7 @@ export class PlatformListDocsComponent {
         {
             language: 'html',
             code: listWithNoSeperator,
-            fileName: 'platform-list-with-no-seperator-example',
+            fileName: 'platform-list-with-no-seperator-example'
         }
     ];
 
@@ -207,7 +207,7 @@ export class PlatformListDocsComponent {
         {
             language: 'html',
             code: listWithUnRead,
-            fileName: 'platform-list-with-unread-example',
+            fileName: 'platform-list-with-unread-example'
         }
     ];
 }

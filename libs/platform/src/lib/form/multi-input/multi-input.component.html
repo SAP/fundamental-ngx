@@ -1,5 +1,5 @@
 <div class="fd-multi-input">
-        <ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
+    <ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
 </div>
 <ng-template #desktopTemplate>
     <div class="fdp-multi-input" cdkOverlayOrigin #selectTrigger="cdkOverlayOrigin">
@@ -45,9 +45,13 @@
             [class]="contentDensity === 'compact' ? 'fd-multi-input-tokenizer-custom--compact' : ''"
             (moreClickedEvent)="moreClicked()"
         >
-            <fd-token [readOnly]="disabled" [compact]="contentDensity === 'compact'" (onCloseClick)="removeToken(token)" *ngFor="let token of selected">{{
-                token.label
-            }}</fd-token>
+            <fd-token
+                [readOnly]="disabled"
+                [compact]="contentDensity === 'compact'"
+                (onCloseClick)="removeToken(token)"
+                *ngFor="let token of selected"
+                >{{ token.label }}</fd-token
+            >
             <input
                 #searchInputElement
                 type="text"

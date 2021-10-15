@@ -1,18 +1,10 @@
 import { FeedListItemPo } from '../pages/feed-list-item.po';
-import {
-    click, getAlertText,
-    refreshPage,
-    scrollIntoView, waitForPresent
-} from '../../driver/wdio';
+import { click, getAlertText, refreshPage, scrollIntoView, waitForPresent } from '../../driver/wdio';
 import { alertText } from '../fixtures/appData/feed-list-item-contents';
 
-describe('Feed list item test suite:', function() {
-
+describe('Feed list item test suite:', () => {
     const feedListItemPage = new FeedListItemPo();
-    const {
-        paragraphs,
-        actionSettingsButton,
-    } = feedListItemPage;
+    const { paragraphs, actionSettingsButton } = feedListItemPage;
 
     beforeAll(() => {
         feedListItemPage.open();
@@ -31,12 +23,10 @@ describe('Feed list item test suite:', function() {
         expect(alertText).toContain(getAlertText());
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check basic visual regression', () => {
             feedListItemPage.saveExampleBaselineScreenshot();
             expect(feedListItemPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
-
-

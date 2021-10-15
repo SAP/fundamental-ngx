@@ -60,7 +60,6 @@ const routes: Routes = [
         PlatformSelectColumnsExampleComponent,
         PlatformSelectNoneExampleComponent,
         PlatformSelectNoWrapExampleComponent
-
     ]
 })
 export class PlatformSelectDocsModules {}

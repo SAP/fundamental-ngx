@@ -140,7 +140,7 @@ export class WizardGeneratorService {
         this.visibleWizardSteps = steps;
         this._visibleWizardSteps$.next(steps);
 
-        this.setWizardStepIds(steps.map(s => s.id));
+        this.setWizardStepIds(steps.map((s) => s.id));
     }
 
     /**
@@ -330,7 +330,7 @@ export class WizardGeneratorService {
             return step;
         });
 
-        const summaryStepIndex = this.visibleWizardSteps.findIndex(s => s.summary);
+        const summaryStepIndex = this.visibleWizardSteps.findIndex((s) => s.summary);
 
         this._shouldRedirectToSummary = true;
 
@@ -347,7 +347,6 @@ export class WizardGeneratorService {
      */
     setWizardStepIds(ids: string[]): void {
         if (!this._wizardStepIds.every((stepId, index) => ids[index] === stepId)) {
-
             const firstChangedStepIndex = this._wizardStepIds.findIndex((stepId, index) => ids[index] !== stepId);
 
             this._nextStepIndex$.next(firstChangedStepIndex);

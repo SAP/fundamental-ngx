@@ -65,15 +65,9 @@ import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interf
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MultiInputComponent implements
-    MultiInputInterface,
-    ControlValueAccessor,
-    CssClassBuilder,
-    OnInit,
-    OnChanges,
-    AfterViewInit,
-    OnDestroy {
-
+export class MultiInputComponent
+    implements MultiInputInterface, ControlValueAccessor, CssClassBuilder, OnInit, OnChanges, AfterViewInit, OnDestroy
+{
     /** Placeholder for the input field. */
     @Input()
     placeholder = '';
@@ -274,12 +268,10 @@ export class MultiInputComponent implements
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    onChange: Function = () => {
-    };
+    onChange: Function = () => {};
 
     /** @hidden */
-    onTouched: Function = () => {
-    };
+    onTouched: Function = () => {};
 
     /** @hidden */
     constructor(
@@ -289,23 +281,25 @@ export class MultiInputComponent implements
         @Optional() private _rtlService: RtlService,
         @Optional() private _contentDensityService: ContentDensityService,
         @Optional() private _focusTrapService: FocusTrapService
-    ) { }
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this.buildComponentCssClass();
-                this._changeDetRef.markForCheck();
-            }))
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this.buildComponentCssClass();
+                    this._changeDetRef.markForCheck();
+                })
+            );
         }
         this.buildComponentCssClass();
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
         }
         this._subscriptions.add(
-            this._rtlService?.rtl.subscribe(isRtl => {
+            this._rtlService?.rtl.subscribe((isRtl) => {
                 this._dir = isRtl ? 'rtl' : 'ltr';
                 this.buildComponentCssClass();
             })
@@ -352,11 +346,7 @@ export class MultiInputComponent implements
                 icon.style.transform = 'scaleX(-1)';
             }
         }
-        return [
-            'fd-multi-input',
-            'fd-multi-input-custom',
-            this.class
-        ];
+        return ['fd-multi-input', 'fd-multi-input-custom', this.class];
     }
 
     elementRef(): ElementRef<any> {
@@ -402,7 +392,7 @@ export class MultiInputComponent implements
     /** @hidden */
     openChangeHandle(open: boolean): void {
         if (this.disabled) {
-            return ;
+            return;
         }
 
         if (!open && this.open && !this.mobile) {
@@ -553,7 +543,7 @@ export class MultiInputComponent implements
     _moreClicked(): void {
         this.openChangeHandle(true);
         const newDisplayedValues: any[] = [];
-        this.displayedValues.forEach(value => {
+        this.displayedValues.forEach((value) => {
             if (this.selected.indexOf(value) !== -1) {
                 newDisplayedValues.push(value);
             }
@@ -590,7 +580,7 @@ export class MultiInputComponent implements
             if (item) {
                 const term = this.displayFn(item).toLocaleLowerCase();
                 let retVal;
-                this.includes ? retVal = term.includes(searchLower) : retVal = term.startsWith(searchLower);
+                this.includes ? (retVal = term.includes(searchLower)) : (retVal = term.startsWith(searchLower));
                 return retVal;
             }
         });
@@ -629,8 +619,10 @@ export class MultiInputComponent implements
 
     /** @hidden */
     private _shouldPopoverBeUpdated(previousLength: number, currentLength: number): boolean {
-        return !!this.popoverRef && ((previousLength === 0 && currentLength === 1) ||
-            (previousLength === 1 && currentLength === 0));
+        return (
+            !!this.popoverRef &&
+            ((previousLength === 0 && currentLength === 1) || (previousLength === 1 && currentLength === 0))
+        );
     }
 
     /** @hidden */
@@ -639,9 +631,13 @@ export class MultiInputComponent implements
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
             MultiInputMobileComponent,
             { container: this._elementRef.nativeElement },
-            { injector: Injector.create({ providers: [
-                { provide: MULTI_INPUT_COMPONENT, useValue: this },
-                { provide: RtlService, useValue: this._rtlService }] })
+            {
+                injector: Injector.create({
+                    providers: [
+                        { provide: MULTI_INPUT_COMPONENT, useValue: this },
+                        { provide: RtlService, useValue: this._rtlService }
+                    ]
+                })
             }
         );
     }

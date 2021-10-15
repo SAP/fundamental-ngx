@@ -15,7 +15,6 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './tile-docs.component.html'
 })
 export class TileDocsComponent {
-
     genericTile: ExampleFile[] = [
         {
             language: 'html',

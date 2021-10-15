@@ -35,4 +35,4 @@ import { LayoutPanelFooterComponent } from './layout-panel-footer/layout-panel-f
         LayoutPanelFooterComponent
     ]
 })
-export class LayoutPanelModule { }
+export class LayoutPanelModule {}

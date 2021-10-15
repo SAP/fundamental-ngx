@@ -12,10 +12,7 @@ export interface SelectTypeDialogFormData {
 @Component({
     selector: 'fdp-approval-flow-select-type',
     templateUrl: './approval-flow-select-type.component.html',
-    styleUrls: [
-        '../styles/approval-flow-dialog.scss',
-        './approval-flow-select-type.component.scss'
-    ],
+    styleUrls: ['../styles/approval-flow-dialog.scss', './approval-flow-select-type.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
@@ -32,9 +29,7 @@ export class ApprovalFlowSelectTypeComponent {
     _toNextSerial = false;
 
     /** @hidden */
-    constructor(
-        public readonly _dialogRef: DialogRef
-    ) {}
+    constructor(public readonly _dialogRef: DialogRef) {}
 
     /** @hidden */
     _submit(): void {

@@ -17,37 +17,37 @@ $carousel-controls-height--edit-mode: 7.875rem;
 
 .#{$block} {
     &__watchers {
-        margin-bottom: .5rem;
-        padding-left: .5rem;
+        margin-bottom: 0.5rem;
+        padding-left: 0.5rem;
 
         &-title {
-            font-size: .875em;
-            color: #6A6D70;
-            color: var(--sapContent_LabelColor, #6A6D70);
-            margin: 1rem 0 .5rem 0;
+            font-size: 0.875em;
+            color: #6a6d70;
+            color: var(--sapContent_LabelColor, #6a6d70);
+            margin: 1rem 0 0.5rem 0;
         }
 
         fd-avatar {
-            margin-right: .5rem;
+            margin-right: 0.5rem;
             cursor: pointer;
 
             &:focus {
                 outline-offset: 0.0625rem;
                 outline-width: 0.0625rem;
                 outline-style: dotted;
-                outline-color: var(--sapContent_FocusColor, #0854A0);
+                outline-color: var(--sapContent_FocusColor, #0854a0);
             }
         }
 
         & &-input-container {
-            width: 17.375rem
+            width: 17.375rem;
         }
 
         @include fd-rtl() {
-            padding-right: .5rem;
+            padding-right: 0.5rem;
 
             fd-avatar {
-                margin-left: .5rem;
+                margin-left: 0.5rem;
                 margin-right: 0;
             }
         }
@@ -56,7 +56,7 @@ $carousel-controls-height--edit-mode: 7.875rem;
     &__container {
         max-width: 100%;
         position: relative;
-        padding: 0 .5rem;
+        padding: 0 0.5rem;
 
         &--extra-padding-start {
             padding-left: 2rem;
@@ -68,12 +68,12 @@ $carousel-controls-height--edit-mode: 7.875rem;
 
         @include fd-rtl() {
             &.#{$block}__container--extra-padding-start {
-                padding-left: .5rem;
+                padding-left: 0.5rem;
                 padding-right: 2rem;
             }
 
             &.#{$block}__container--extra-padding-end {
-                padding-right: .5rem;
+                padding-right: 0.5rem;
                 padding-left: 2rem;
             }
 
@@ -87,7 +87,7 @@ $carousel-controls-height--edit-mode: 7.875rem;
     &__graph-container {
         position: relative;
         overflow: hidden;
-        padding-top: .5rem;
+        padding-top: 0.5rem;
         padding-bottom: 2rem;
         padding-left: 2rem;
 
@@ -112,7 +112,7 @@ $carousel-controls-height--edit-mode: 7.875rem;
         align-items: center;
         width: 100%;
         height: calc(#{$carousel-controls-height} + 0.5rem);
-        padding-top: .5rem;
+        padding-top: 0.5rem;
         left: 0;
 
         &--edit-mode {
@@ -124,8 +124,8 @@ $carousel-controls-height--edit-mode: 7.875rem;
             position: absolute;
             border: none;
             background: transparent;
-            color: #6A6D70;
-            color: var(--sapContent_LabelColor, #6A6D70);
+            color: #6a6d70;
+            color: var(--sapContent_LabelColor, #6a6d70);
             display: flex;
             justify-content: space-between;
             width: 2rem;
@@ -133,9 +133,9 @@ $carousel-controls-height--edit-mode: 7.875rem;
             cursor: pointer;
 
             fd-icon {
-                font-size: .875rem;
-                color: #0854A0;
-                color: var(--sapButton_IconColor, #0854A0);
+                font-size: 0.875rem;
+                color: #0854a0;
+                color: var(--sapButton_IconColor, #0854a0);
                 position: relative;
                 top: 0.0625rem;
             }
@@ -165,7 +165,7 @@ $carousel-controls-height--edit-mode: 7.875rem;
         align-items: flex-start;
         position: relative;
         left: 0;
-        transition: left .3s;
+        transition: left 0.3s;
 
         &-column {
             margin-right: 4rem;
@@ -210,5 +210,5 @@ $carousel-controls-height--edit-mode: 7.875rem;
 }
 
 .cdk-overlay-container {
-	z-index: 1002 !important;
+    z-index: 1002 !important;
 }

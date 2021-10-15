@@ -4,15 +4,13 @@ import { ListModule } from '../list.module';
 import { ButtonModule } from '../../button/button.module';
 
 @Component({
-    template: ` <li #directiveElement
-                    fd-list-item
-                    [noData]="noData"
-                    [action]="action"
-                    [selected]="selected">
-        <a *ngIf="link" fd-list-link>link</a>
-        <button fd-button #button></button>
-        List Item Test Text
-    </li> `
+    template: `
+        <li #directiveElement fd-list-item [noData]="noData" [action]="action" [selected]="selected">
+            <a *ngIf="link" fd-list-link>link</a>
+            <button fd-button #button></button>
+            List Item Test Text
+        </li>
+    `
 })
 class TestComponent {
     @ViewChild('directiveElement', { read: ElementRef })
@@ -31,12 +29,14 @@ describe('ListItemComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [ListModule, ButtonModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [ListModule, ButtonModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

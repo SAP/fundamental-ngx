@@ -1,4 +1,4 @@
-$fd-upload-collection-font-size: .875rem;
+$fd-upload-collection-font-size: 0.875rem;
 $fd-upload-collection-font-size-var: var(--sapFontSize);
 
 $fd-upload-collection-icon-color: #0854a0;
@@ -10,7 +10,6 @@ $fd-upload-collection-label-color-var: var(--sapContent_LabelColor);
 $fd-upload-collection-drag-and-drop-active-color: #0854a0;
 $fd-upload-collection-drag-and-drop-active-color-var: var(--sapContent_DragAndDropActiveColor);
 
-
 @mixin fd-reset {
     font-size: $fd-upload-collection-font-size;
     font-size: $fd-upload-collection-font-size-var;
@@ -18,7 +17,7 @@ $fd-upload-collection-drag-and-drop-active-color-var: var(--sapContent_DragAndDr
     line-height: var(--sapContent_LineHeight);
     color: #32363a;
     color: var(--sapTextColor);
-    font-family: "72", "72full", Arial, Helvetica, sans-serif;
+    font-family: '72', '72full', Arial, Helvetica, sans-serif;
     font-family: var(--sapFontFamily);
     font-weight: normal;
     -webkit-font-smoothing: antialiased;

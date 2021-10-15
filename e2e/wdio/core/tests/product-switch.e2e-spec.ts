@@ -1,9 +1,11 @@
 import { ProductSwitchPo } from '../pages/product-switch.po';
 import {
     applyState,
-    click, clickAndMoveElement,
+    click,
+    clickAndMoveElement,
     getCSSPropertyByName,
-    getElementArrayLength, getText,
+    getElementArrayLength,
+    getText,
     isElementDisplayed,
     refreshPage,
     waitForElDisplayed
@@ -11,9 +13,9 @@ import {
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
 import { emptyDataArr, focusAttribute } from '../fixtures/appData/product-switch-contents';
 
-describe('product switch test suite', function() {
+describe('product switch test suite', () => {
     const productSwitchPage = new ProductSwitchPo();
-    const {shellbarButton, shellbarSwitchItems, switchItems} = productSwitchPage;
+    const { shellbarButton, shellbarSwitchItems, switchItems } = productSwitchPage;
 
     beforeAll(() => {
         productSwitchPage.open();
@@ -24,7 +26,7 @@ describe('product switch test suite', function() {
         waitForElDisplayed(productSwitchPage.title);
     }, 1);
 
-    describe('shellbar example', function() {
+    describe('shellbar example', () => {
         it('should check ability to open product switch', () => {
             click(shellbarButton);
 
@@ -36,7 +38,7 @@ describe('product switch test suite', function() {
             checkElArrIsClickable(shellbarSwitchItems);
         });
 
-        it('should check items are focusable', function() {
+        it('should check items are focusable', () => {
             click(shellbarButton);
             const itemCount = getElementArrayLength(shellbarSwitchItems);
 
@@ -56,12 +58,12 @@ describe('product switch test suite', function() {
         });
     });
 
-    describe('main checks', function() {
-        it('should check items are clickable', function() {
+    describe('main checks', () => {
+        it('should check items are clickable', () => {
             checkElArrIsClickable(switchItems);
         });
 
-        it('should check items are focusable', function() {
+        it('should check items are focusable', () => {
             const itemCount = getElementArrayLength(switchItems);
 
             for (let i = 0; i < itemCount; i++) {
@@ -71,8 +73,8 @@ describe('product switch test suite', function() {
         });
     });
 
-    describe('visual regression and orientation', function() {
-        it('should check orientation', function() {
+    describe('visual regression and orientation', () => {
+        it('should check orientation', () => {
             productSwitchPage.checkRtlSwitch();
         });
 

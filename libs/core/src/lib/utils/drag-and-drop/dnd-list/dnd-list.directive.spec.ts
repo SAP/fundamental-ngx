@@ -26,12 +26,14 @@ describe('DndListDirective', () => {
     let directive: DndListDirective<string>;
     let elementCoordinates: ElementChord[];
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [DragDropModule],
-            declarations: [DndListDirective, TestDndListComponent, DndItemDirective]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [DragDropModule],
+                declarations: [DndListDirective, TestDndListComponent, DndItemDirective]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestDndListComponent);

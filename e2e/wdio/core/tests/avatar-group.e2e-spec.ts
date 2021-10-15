@@ -1,7 +1,15 @@
 import { AvatarGroupPo } from '../pages/avatar-group.po';
-import { click, doesItExist, getElementSize, isElementDisplayed, refreshPage, scrollIntoView, waitForPresent } from '../../driver/wdio';
+import {
+    click,
+    doesItExist,
+    getElementSize,
+    isElementDisplayed,
+    refreshPage,
+    scrollIntoView,
+    waitForPresent
+} from '../../driver/wdio';
 
-describe('Avatar test suite', function() {
+describe('Avatar test suite', () => {
     const avatarGroupPage = new AvatarGroupPo();
     const {
         firstExampleAvatar,

@@ -1,5 +1,5 @@
-@import "../../mixins.scss";
-@import "../../variables.scss";
+@import '../../mixins.scss';
+@import '../../variables.scss';
 
 // TODO: Move all styles to fundamental-styles library
 
@@ -30,7 +30,8 @@
     overflow: hidden;
 }
 
-.#{$block}__link-previous, .#{$block}__link-next {
+.#{$block}__link-previous,
+.#{$block}__link-next {
     @include fd-reset;
     @include fd-flex-justify-content-start;
     @include fd-fiori-focus;
@@ -41,7 +42,8 @@
     font-size: var(--sapFontSize);
     padding: 0 0.313rem;
 
-    &:before, &:after {
+    &:before,
+    &:after {
         font-family: SAP-icons;
         text-align: center;
         text-decoration: inherit;
@@ -52,7 +54,8 @@
     }
 
     @include fd-hover {
-        &:before, &:after {
+        &:before,
+        &:after {
             color: var(--sapButton_Hover_TextColor);
         }
     }
@@ -136,7 +139,7 @@
     flex-grow: 1;
 
     &:before {
-        content: "";
+        content: '';
         display: block;
         border-bottom: 0.0625rem solid var(--sapContent_ForegroundBorderColor);
         width: 100%;
@@ -145,7 +148,7 @@
 
     &--intermediate {
         &:after {
-            content: "";
+            content: '';
             display: block;
             position: absolute;
             top: 0;

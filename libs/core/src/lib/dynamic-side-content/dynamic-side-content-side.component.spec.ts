@@ -9,12 +9,14 @@ describe('DynamicSideContentSideComponent', () => {
     let fixture: ComponentFixture<DynamicSideContentSideComponent>;
     let component: DynamicSideContentSideComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [CommonModule],
-            declarations: [DynamicSideContentSideComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CommonModule],
+                declarations: [DynamicSideContentSideComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DynamicSideContentSideComponent);

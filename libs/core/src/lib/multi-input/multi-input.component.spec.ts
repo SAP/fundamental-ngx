@@ -1,30 +1,30 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { MultiInputComponent, MultiInputModule } from '@fundamental-ngx/core/multi-input';
-import { ContentDensityService, DEFAULT_CONTENT_DENSITY, DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
+import {
+    ContentDensityService,
+    DEFAULT_CONTENT_DENSITY,
+    DynamicComponentService,
+    RtlService
+} from '@fundamental-ngx/core/utils';
 
 describe('MultiInputComponent', () => {
     let component: MultiInputComponent;
     let fixture: ComponentFixture<MultiInputComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [MultiInputModule],
-            providers: [
-                DynamicComponentService,
-                RtlService,
-                ContentDensityService
-            ]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [MultiInputModule],
+                providers: [DynamicComponentService, RtlService, ContentDensityService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MultiInputComponent);
         component = fixture.componentInstance;
-        component.dropdownValues = [
-            'displayedValue',
-            'displayedValue2'
-        ];
+        component.dropdownValues = ['displayedValue', 'displayedValue2'];
         fixture.detectChanges();
     });
 
@@ -184,7 +184,7 @@ describe('MultiInputComponent', () => {
         expect(component.selected).toEqual([component.dropdownValues[0]]);
     });
 
-    it('should focus the input and clear the search term after selection', async() => {
+    it('should focus the input and clear the search term after selection', async () => {
         const inputFocusSpy = spyOn(component.searchInputElement.nativeElement, 'focus');
 
         await fixture.whenStable();

@@ -105,11 +105,11 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         return this._isMenuOpen;
     }
 
-    /** 
-     * @hidden 
-     * Handle click on trigger element. 
+    /**
+     * @hidden
+     * Handle click on trigger element.
      */
-    @HostListener('click', ['$event']) 
+    @HostListener('click', ['$event'])
     _onTriggerClick(event: MouseEvent): void {
         // Need to interupt default menu behavior of closing the menu
         if (this._isMenuItem()) {
@@ -123,11 +123,11 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         }
     }
 
-    /** 
-     * @hidden 
-     * Handled keypress which focus is on trigger element. 
+    /**
+     * @hidden
+     * Handled keypress which focus is on trigger element.
      */
-    @HostListener('keydown', ['$event']) 
+    @HostListener('keydown', ['$event'])
     _onTriggerKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
             if (KeyUtil.isKeyCode(event, [SPACE])) {
@@ -160,9 +160,9 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         }
     }
 
-    /** 
-     * @hidden 
-     * Toggle display of associated menu. 
+    /**
+     * @hidden
+     * Toggle display of associated menu.
      */
     toggleMenu(): void {
         /**
@@ -176,9 +176,9 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         }, 0);
     }
 
-    /** 
-     * @hidden 
-     * Open associated menu. 
+    /**
+     * @hidden
+     * Open associated menu.
      */
     openMenu(): void {
         // create overlay
@@ -238,17 +238,17 @@ export class MenuTriggerDirective implements OnDestroy, AfterContentInit {
         this._isMenuOpen = true;
     }
 
-    /** 
-     * @hidden 
-     * Close associated menu. 
+    /**
+     * @hidden
+     * Close associated menu.
      */
     closeMenu(): void {
         this._menu.closeMenu();
     }
 
-    /** 
-     * @hidden 
-     * destroy associated menu. 
+    /**
+     * @hidden
+     * destroy associated menu.
      */
     private _destroyMenu(): void {
         if (this._menuItem) {

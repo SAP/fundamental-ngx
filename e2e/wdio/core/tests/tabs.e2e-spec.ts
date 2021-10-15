@@ -15,14 +15,34 @@ import {
 import { TabsPo } from '../pages/tabs.po';
 
 describe('Tabs test suite', () => {
-
     const tabsPage = new TabsPo();
     const {
-        AddExample, tabsExample, FilterExample, ProcessExample, IconOnlyExample, SelectionExample,
-        collapsibleExample, stackendContentExample, collapsibleOverflowExample,
-        fdTab, addBtn, removeBtn, chooseTabsBtn, expandedListItem, moreBtn, tabPanel,
-        modeSelect, iconOnlyMode, compactCheckBox, threeTabsGroup, icon1, collapsibleTab, acceleratedIcon,
-        fdIcon, filterMode, fdTabFF
+        AddExample,
+        tabsExample,
+        FilterExample,
+        ProcessExample,
+        IconOnlyExample,
+        SelectionExample,
+        collapsibleExample,
+        stackendContentExample,
+        collapsibleOverflowExample,
+        fdTab,
+        addBtn,
+        removeBtn,
+        chooseTabsBtn,
+        expandedListItem,
+        moreBtn,
+        tabPanel,
+        modeSelect,
+        iconOnlyMode,
+        compactCheckBox,
+        threeTabsGroup,
+        icon1,
+        collapsibleTab,
+        acceleratedIcon,
+        fdIcon,
+        filterMode,
+        fdTabFF
     } = tabsPage;
 
     beforeAll(() => {
@@ -62,7 +82,6 @@ describe('Tabs test suite', () => {
         const lengthAfterRemoving = getElementArrayLength(AddExample + fdTab);
         // Check that the last tab can not be removed
         expect(lengthAfterRemoving).toEqual(1);
-
     });
 
     it('should check choosing tabs via buttons', () => {
@@ -151,7 +170,6 @@ describe('Tabs test suite', () => {
     }
 
     function clickOnTab(section: string, index: number = 0): void {
-        return (browserIsFirefox() ? click(section + fdTabFF, index) : click(section + fdTab, index));
+        return browserIsFirefox() ? click(section + fdTabFF, index) : click(section + fdTab, index);
     }
-
 });

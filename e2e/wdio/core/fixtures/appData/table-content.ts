@@ -11,11 +11,7 @@ export const componentExampleArr = [
     'fd-table-navigatable-row-example',
     'fd-table-pagination-example'
 ];
-export const tableCellArr = [
-    'Kale',
-    'Vegetable',
-    'Colorado'
-];
+export const tableCellArr = ['Kale', 'Vegetable', 'Colorado'];
 export const alertText = 'Navigation event took place!';
 export const paginationTestArr = [
     'Showing 1-5 of 25',
@@ -26,9 +22,4 @@ export const paginationTestArr = [
 ];
 export const dateTestText = 'date';
 export const testText = 'test';
-export const tableCellArr2 = [
-    'Apple',
-    'Row 1',
-    'Row 1',
-    '09-07-18',
-];
+export const tableCellArr2 = ['Apple', 'Row 1', 'Row 1', '09-07-18'];

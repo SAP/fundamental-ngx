@@ -45,9 +45,7 @@ import { PlatformTextAreaModule } from './text-area.module';
                 </fdp-form-field>
                 <ng-template #i18n let-errors>
                     <span *ngIf="errors && errors.required" class="error">This field is required.</span>
-                    <span *ngIf="errors && errors.maxlength">
-                        Please get your character count under limit.
-                    </span>
+                    <span *ngIf="errors && errors.maxlength"> Please get your character count under limit. </span>
                 </ng-template>
             </fdp-form-group>
             <button type="submit" #submitButton>Submit</button>
@@ -78,12 +76,14 @@ describe('Basic Textarea', () => {
     let fixture: ComponentFixture<BasicTextareaTestWrapperComponent>;
     let host: BasicTextareaTestWrapperComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule],
-            declarations: [BasicTextareaTestWrapperComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule],
+                declarations: [BasicTextareaTestWrapperComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(BasicTextareaTestWrapperComponent);
@@ -158,12 +158,14 @@ describe('Advanced Textarea', () => {
     let fixture: ComponentFixture<BasicTextareaTestWrapperComponent>;
     let host: BasicTextareaTestWrapperComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule],
-            declarations: [BasicTextareaTestWrapperComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformTextAreaModule],
+                declarations: [BasicTextareaTestWrapperComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(BasicTextareaTestWrapperComponent);

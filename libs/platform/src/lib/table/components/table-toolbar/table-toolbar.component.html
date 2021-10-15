@@ -6,14 +6,10 @@
     let-groupable="groupable"
     let-columns="columns"
 >
-
-    <fd-toolbar
-        fdType="transparent"
-        [clearBorder]="true"
-        [hasTitle]="!!title"
-        [size]="_getCozyCompactSize(size)"
-    >
-        <label fd-toolbar-label [id]="tableToolbarTitleId">{{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span></label>
+    <fd-toolbar fdType="transparent" [clearBorder]="true" [hasTitle]="!!title" [size]="_getCozyCompactSize(size)">
+        <label fd-toolbar-label [id]="tableToolbarTitleId"
+            >{{ title }} <span *ngIf="!hideItemCount">({{ counter }})</span></label
+        >
 
         <fd-toolbar-spacer></fd-toolbar-spacer>
 
@@ -34,10 +30,7 @@
         </ng-container>
 
         <ng-container *ngIf="sortable || filterable || groupable || columns">
-            <fd-toolbar-separator
-                fd-toolbar-item
-                *ngIf="tableToolbarActionsComponent"
-            ></fd-toolbar-separator>
+            <fd-toolbar-separator fd-toolbar-item *ngIf="tableToolbarActionsComponent"></fd-toolbar-separator>
             <fdp-button
                 *ngIf="sortable"
                 glyph="sort"

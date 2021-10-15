@@ -7,7 +7,7 @@ import { MenuDocsComponent } from './menu-docs.component';
 import {
     MenuAddonExampleComponent,
     MenuExampleComponent,
-    MenuSeparatorExampleComponent,
+    MenuSeparatorExampleComponent
 } from './examples/menu-examples.component';
 
 import { MenuWithSubmenuExampleComponent } from './examples/menu-with-submenu-example.component';

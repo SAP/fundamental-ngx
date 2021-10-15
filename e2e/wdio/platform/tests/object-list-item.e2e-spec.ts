@@ -12,13 +12,36 @@ import { ObjectListItemPo } from '../pages/object-list-item.po';
 import { checkElArrIsClickable, checkElementDisplayed, checkElementText } from '../../helper/assertion-helper';
 import { navUrl } from '../fixtures/appData/object-list-item-contents';
 
-describe('Object list item suite:', function() {
+describe('Object list item suite:', () => {
     const objListPage = new ObjectListItemPo();
     const {
-        allObjsList, allObjAvatars, allObjNumbers, allObjIcons, allObjTitles, allObjAttrStatusRows, objListAttr, objListItem,
-        obJListIntro, objListAttributes, objListStatuses, objListSelItem, obJListSelIntro, objListSelAttributes,
-        objListSelStatuses, objSelToolbar, objNavLink, objNavList, objNavAttributes, objNavStatuses, objRowNavLink,
-        objRowNavList, objRowNavAttributes, objRowNavStatuses, objRowNavToolbar, objDecIntro, objDecAttributes,
+        allObjsList,
+        allObjAvatars,
+        allObjNumbers,
+        allObjIcons,
+        allObjTitles,
+        allObjAttrStatusRows,
+        objListAttr,
+        objListItem,
+        obJListIntro,
+        objListAttributes,
+        objListStatuses,
+        objListSelItem,
+        obJListSelIntro,
+        objListSelAttributes,
+        objListSelStatuses,
+        objSelToolbar,
+        objNavLink,
+        objNavList,
+        objNavAttributes,
+        objNavStatuses,
+        objRowNavLink,
+        objRowNavList,
+        objRowNavAttributes,
+        objRowNavStatuses,
+        objRowNavToolbar,
+        objDecIntro,
+        objDecAttributes,
         objDecStatuses
     } = objListPage;
 
@@ -31,7 +54,7 @@ describe('Object list item suite:', function() {
         waitForPresent(allObjsList);
     }, 1);
 
-    describe('Basic checks:', function() {
+    describe('Basic checks:', () => {
         it('should check basic interactions and content', () => {
             checkElArrIsClickable(allObjsList);
             checkElementDisplayed(allObjAvatars);
@@ -44,7 +67,7 @@ describe('Object list item suite:', function() {
         });
     });
 
-    describe('Object List Item examples:', function() {
+    describe('Object List Item examples:', () => {
         it('should check content displayed', () => {
             checkElementDisplayed(obJListIntro);
             checkElementDisplayed(objListAttributes);
@@ -52,7 +75,7 @@ describe('Object list item suite:', function() {
         });
     });
 
-    describe('Object List Item With Row Selection examples:', function() {
+    describe('Object List Item With Row Selection examples:', () => {
         it('should check content', () => {
             checkElementDisplayed(obJListSelIntro);
             checkElementDisplayed(objSelToolbar);
@@ -67,7 +90,7 @@ describe('Object list item suite:', function() {
         });
     });
 
-    describe('Object List Item With Navigation examples:', function() {
+    describe('Object List Item With Navigation examples:', () => {
         it('should check content', () => {
             const linkCount = getElementArrayLength(objNavLink);
             for (let i = 0; linkCount > i; i++) {
@@ -85,7 +108,7 @@ describe('Object list item suite:', function() {
         });
     });
 
-    describe('Object List Item With Row Selection And Navigation examples:', function() {
+    describe('Object List Item With Row Selection And Navigation examples:', () => {
         it('should check content', () => {
             const linkCount = getElementArrayLength(objRowNavLink);
             for (let i = 0; linkCount > i; i++) {
@@ -102,7 +125,7 @@ describe('Object list item suite:', function() {
         });
     });
 
-    describe('Object List Item In Declarative examples:', function() {
+    describe('Object List Item In Declarative examples:', () => {
         it('should check content', () => {
             elementDisplayed(objDecAttributes, 0);
             elementDisplayed(objDecStatuses, 0);
@@ -110,13 +133,13 @@ describe('Object list item suite:', function() {
         });
     });
 
-    describe('check orientation', function() {
+    describe('check orientation', () => {
         it('should check RTL and LTR orientation', () => {
             objListPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             objListPage.saveExampleBaselineScreenshot();
             expect(objListPage.compareWithBaseline()).toBeLessThan(5);

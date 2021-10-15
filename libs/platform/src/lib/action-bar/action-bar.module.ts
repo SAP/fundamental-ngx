@@ -10,4 +10,4 @@ import { ActionBarComponent } from './action-bar.component';
     imports: [CommonModule, ButtonModule, ActionBarModule],
     exports: [ActionBarComponent]
 })
-export class PlatformActionBarModule { }
+export class PlatformActionBarModule {}

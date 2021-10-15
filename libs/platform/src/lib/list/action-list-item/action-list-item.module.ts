@@ -8,12 +8,7 @@ import { ActionListItemComponent } from './action-list-item.component';
 
 @NgModule({
     declarations: [ActionListItemComponent],
-    imports: [
-        CommonModule,
-        ListModule,
-        ButtonModule,
-        PlatformLinkModule
-    ],
+    imports: [CommonModule, ListModule, ButtonModule, PlatformLinkModule],
     exports: [ActionListItemComponent]
 })
-export class ActionListItemModule { }
+export class ActionListItemModule {}

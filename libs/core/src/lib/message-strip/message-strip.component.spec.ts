@@ -5,11 +5,7 @@ import { ButtonModule } from '@fundamental-ngx/core/button';
 import { MessageStripComponent, MessageStripModule } from '@fundamental-ngx/core/message-strip';
 
 @Component({
-    template: `
-        <fd-message-strip>
-            A dismissible normal message strip.
-        </fd-message-strip>
-    `
+    template: ` <fd-message-strip> A dismissible normal message strip. </fd-message-strip> `
 })
 class TestMessageStripComponent {
     @ViewChild(MessageStripComponent, { static: true })
@@ -20,12 +16,14 @@ describe('MessageStripComponent', () => {
     let component: MessageStripComponent;
     let fixture: ComponentFixture<TestMessageStripComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ButtonModule, MessageStripModule],
-            declarations: [TestMessageStripComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [ButtonModule, MessageStripModule],
+                declarations: [TestMessageStripComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestMessageStripComponent);

@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'fd-segmented-button-complex-example',
-  templateUrl: './segmented-button-complex-example.component.html'
+    selector: 'fd-segmented-button-complex-example',
+    templateUrl: './segmented-button-complex-example.component.html'
 })
 export class SegmentedButtonComplexExampleComponent {
-
     values: string[] = ['first', 'second', 'third'];
     currentValue = '';
 
@@ -13,5 +12,4 @@ export class SegmentedButtonComplexExampleComponent {
         this.currentValue = value;
         alert(`Current value changed to ${value}`);
     }
-
 }

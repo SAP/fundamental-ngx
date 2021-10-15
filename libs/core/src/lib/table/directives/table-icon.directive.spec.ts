@@ -4,9 +4,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { TableModule } from '../table.module';
 
 @Component({
-    template: `
-        <span fd-table-icon [glyph]="'glyph'" [navigation]="true"></span>
-    `
+    template: ` <span fd-table-icon [glyph]="'glyph'" [navigation]="true"></span> `
 })
 class TestComponent {
     @ViewChild(TableIconDirective)
@@ -17,14 +15,16 @@ describe('TableIconDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [TableModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [TableModule]
+            }).compileComponents();
+        })
+    );
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();

@@ -66,22 +66,14 @@ export const API_FILES = {
         'CalendarHeaderViewComponent',
         'CalendarI18nLabels',
         'FdDate',
-        'FdDatetimeAdapter',
+        'FdDatetimeAdapter'
     ],
     carousel: ['CarouselComponent', 'CarouselItemComponent', 'CarouselService'],
     combobox: ['ComboboxComponent'],
     checkbox: ['CheckboxComponent'],
     contentDensity: [],
-    datePicker: [
-        'DatePickerComponent',
-        'FdDate',
-        'FdDatetimeAdapter',
-    ],
-    datetimePicker: [
-        'DatetimePickerComponent',
-        'FdDate',
-        'FdDatetimeAdapter',
-    ],
+    datePicker: ['DatePickerComponent', 'FdDate', 'FdDatetimeAdapter'],
+    datetimePicker: ['DatetimePickerComponent', 'FdDate', 'FdDatetimeAdapter'],
     dynamicPage: [
         'DynamicPageComponent',
         'DynamicPageSubheaderComponent',
@@ -92,10 +84,7 @@ export const API_FILES = {
         'DynamicPageFooterComponent',
         'DynamicPageContentComponent'
     ],
-    facets: [
-      'FacetComponent',
-      'FacetGroupComponent'
-    ],
+    facets: ['FacetComponent', 'FacetGroupComponent'],
     feedInput: [
         'FeedInputComponent',
         'FeedInputTextareaDirective',
@@ -156,7 +145,7 @@ export const API_FILES = {
         'ListMessageDirective',
         'ListNavigationItemArrowDirective',
         'ListNavigationItemTextDirective',
-        'ListNavigationItemComponent',
+        'ListNavigationItemComponent'
     ],
     menu: [
         'MenuAddonDirective',
@@ -344,20 +333,12 @@ export const API_FILES = {
         'NumericContentScaleTextDirective'
     ],
     time: ['TimeComponent', 'TimeI18n', 'TimeColumnComponent'],
-    timePicker: [
-        'TimePickerComponent',
-        'FdDate',
-        'FdDatetimeAdapter',
-    ],
+    timePicker: ['TimePickerComponent', 'FdDate', 'FdDatetimeAdapter'],
     title: ['TitleComponent'],
     switch: ['SwitchComponent'],
     stepInput: ['StepInputComponent'],
     slider: ['SliderComponent'],
-    splitter: [
-        'SplitterComponent',
-        'SplitterPaneContainerComponent',
-        'SplitterSplitPaneComponent'
-    ],
+    splitter: ['SplitterComponent', 'SplitterPaneContainerComponent', 'SplitterSplitPaneComponent'],
     token: ['TokenComponent', 'TokenizerComponent'],
     toolbar: [
         'ToolbarComponent',
@@ -388,10 +369,7 @@ export const API_FILES = {
         'MessagePageTitleComponent',
         'MessagePageSubtitleComponent'
     ],
-    resizableCardLayout: [
-        'ResizableCardLayoutComponent',
-        'ResizableCardItemComponent'
-    ],
+    resizableCardLayout: ['ResizableCardLayoutComponent', 'ResizableCardItemComponent'],
     verticalNavigation: [
         'VerticalNavigationComponent',
         'VerticalNavigationMainNavigationComponent',
@@ -418,6 +396,6 @@ export const API_FILES = {
         'TimelineNodeHeaderInfoTitleDirective',
         'TimelineNodeHeaderInfoTextDirective',
         'TimelineNodeActionDirective',
-        'TimelineHeaderInfoSubTitleDirective',
+        'TimelineHeaderInfoSubTitleDirective'
     ]
 };

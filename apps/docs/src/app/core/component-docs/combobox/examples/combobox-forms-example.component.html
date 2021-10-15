@@ -9,7 +9,8 @@
                 formControlName="itemOnDropdownMode"
                 required="true"
                 [displayFn]="myDisplayFunction"
-                [dropdownValues]="dropdownValues">
+                [dropdownValues]="dropdownValues"
+            >
                 <li fd-list-message type="information">More information</li>
             </fd-combobox>
             <fd-form-message type="information">More information</fd-form-message>
@@ -18,9 +19,9 @@
 
     <div>
         <small>Touched: {{ customForm.controls.itemOnDropdownMode.touched }}</small>
-        <br/>
+        <br />
         <small>Dirty: {{ customForm.controls.itemOnDropdownMode.dirty }}</small>
-        <br/>
+        <br />
         <small>Json Value: {{ customForm.controls.itemOnDropdownMode.value | json }}</small>
     </div>
 
@@ -32,7 +33,8 @@
                 formControlName="item"
                 placeholder="Type some text..."
                 [displayFn]="myDisplayFunction"
-                [dropdownValues]="dropdownValues">
+                [dropdownValues]="dropdownValues"
+            >
                 <li fd-list-message type="information">More information</li>
             </fd-combobox>
             <fd-form-message type="information">More information</fd-form-message>
@@ -41,9 +43,9 @@
 
     <div>
         <small>Touched: {{ customForm.controls.item.touched }}</small>
-        <br/>
+        <br />
         <small>Dirty: {{ customForm.controls.item.dirty }}</small>
-        <br/>
+        <br />
         <small>Json Value: {{ customForm.controls.item.value | json }}</small>
     </div>
 </div>

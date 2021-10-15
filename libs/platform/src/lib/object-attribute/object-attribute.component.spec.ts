@@ -6,8 +6,7 @@ import { ObjectAttributeComponent } from './object-attribute.component';
 
 @Component({
     selector: 'fdp-object-attribute-test',
-    template: `
-        <fdp-object-attribute label="label1"></fdp-object-attribute> `
+    template: ` <fdp-object-attribute label="label1"></fdp-object-attribute> `
 })
 class TestComponent {}
 
@@ -15,12 +14,14 @@ describe('ObjectAttributeComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ObjectAttributeComponent, TestComponent],
-            providers: []
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [ObjectAttributeComponent, TestComponent],
+                providers: []
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -62,12 +63,14 @@ describe('Content projection', () => {
     let component: ObjectAttributeContentProjectionTesterComponent;
     let fixture: ComponentFixture<ObjectAttributeContentProjectionTesterComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ObjectAttributeComponent, ObjectAttributeContentProjectionTesterComponent],
-            schemas: [NO_ERRORS_SCHEMA]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [ObjectAttributeComponent, ObjectAttributeContentProjectionTesterComponent],
+                schemas: [NO_ERRORS_SCHEMA]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ObjectAttributeContentProjectionTesterComponent);
@@ -86,8 +89,7 @@ describe('Content projection', () => {
 /** testing link */
 @Component({
     selector: 'fdp-object-attribute-test',
-    template: `
-        <fdp-object-attribute linkText="label1" islink="true"></fdp-object-attribute> `
+    template: ` <fdp-object-attribute linkText="label1" islink="true"></fdp-object-attribute> `
 })
 class TestComponentLink {}
 
@@ -95,12 +97,14 @@ describe('ObjectAttributeComponent With Link', () => {
     let component: TestComponentLink;
     let fixture: ComponentFixture<TestComponentLink>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ObjectAttributeComponent, TestComponentLink],
-            providers: []
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [ObjectAttributeComponent, TestComponentLink],
+                providers: []
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponentLink);

@@ -4,11 +4,7 @@ import { Observable, of } from 'rxjs';
 import { ListDataSource, DataProvider } from '@fundamental-ngx/platform/shared';
 import { SelectionChangeEvent } from '@fundamental-ngx/platform/list';
 
-const LIST_ELEMENTS: Address[] = [
-    { name: 'Name1' },
-    { name: 'Name2' },
-    { name: 'Name3' },
-    { name: 'Name4' }];
+const LIST_ELEMENTS: Address[] = [{ name: 'Name1' }, { name: 'Name2' }, { name: 'Name3' }, { name: 'Name4' }];
 export interface Address {
     name: string;
 }
@@ -38,8 +34,8 @@ export class PlatformListWithSelectionExampleComponent implements AfterViewInit 
 
     ngAfterViewInit(): void {
         const toolbar = this._elementRef.nativeElement.querySelector('fd-toolbar');
-        this._render.setAttribute(toolbar, 'tabindex', '0' );
-        this._render.setStyle(toolbar, 'outline', 'none' );
+        this._render.setAttribute(toolbar, 'tabindex', '0');
+        this._render.setStyle(toolbar, 'outline', 'none');
     }
 
     _showItemInfo(event: SelectionChangeEvent): void {

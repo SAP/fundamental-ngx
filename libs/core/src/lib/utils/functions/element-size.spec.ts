@@ -11,7 +11,7 @@ const ELEMENT_DIMENSIONS = { width: 100, margin: 2, padding: 5 };
         '[style.box-sizing]': '"border-box"',
         '[style.width]': `elementDimensions.width + 'px'`,
         '[style.margin]': `elementDimensions.margin + 'px'`,
-        '[style.padding]': `elementDimensions.padding + 'px'`,
+        '[style.padding]': `elementDimensions.padding + 'px'`
     }
 })
 class TestComponent {
@@ -23,11 +23,13 @@ describe('Element size utils', () => {
     let elementRef: ElementRef;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

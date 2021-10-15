@@ -1,4 +1,4 @@
-import { InputGroupFormExampleComponent } from './input-group-form-example/input-group-form-example.component'
+import { InputGroupFormExampleComponent } from './input-group-form-example/input-group-form-example.component';
 import { InputGroupSearchExampleComponent } from './input-group-search-example/input-group-search-example.component';
 import {
     InputGroupButtonExampleComponent,

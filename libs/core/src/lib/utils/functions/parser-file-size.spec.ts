@@ -19,23 +19,21 @@ describe('parserFileSize', () => {
         expect(size === 120);
     });
 
-
     it('should verify diffrent invalid file size of parsing', () => {
         expect((): void => {
-            parserFileSize('KB')
+            parserFileSize('KB');
         }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
 
         expect((): void => {
-            parserFileSize('hb')
+            parserFileSize('hb');
         }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
 
         expect((): void => {
-            parserFileSize('2vf')
+            parserFileSize('2vf');
         }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
 
         expect((): void => {
-            parserFileSize('gb3')
+            parserFileSize('gb3');
         }).toThrow(new Error('FileSizeError - Invalid File size please check.'));
-
     });
 });

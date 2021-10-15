@@ -1,7 +1,13 @@
-import { VhdIncludedEntity, VhdExcludedEntity, VhdFilter, VhdDefineIncludeStrategy, VhdDefineExcludeStrategy } from '../models';
+import {
+    VhdIncludedEntity,
+    VhdExcludedEntity,
+    VhdFilter,
+    VhdDefineIncludeStrategy,
+    VhdDefineExcludeStrategy
+} from '../models';
 
 export const defaultConditionDisplayFn = (item: VhdIncludedEntity | VhdExcludedEntity, filters?: VhdFilter[]) => {
-    const filter = (filters || []).find(f => f.key === item.key);
+    const filter = (filters || []).find((f) => f.key === item.key);
     let value = (() => {
         switch (item.strategy) {
             case VhdDefineIncludeStrategy.empty:
@@ -37,4 +43,4 @@ export const defaultConditionDisplayFn = (item: VhdIncludedEntity | VhdExcludedE
     }
 
     return value;
-}
+};

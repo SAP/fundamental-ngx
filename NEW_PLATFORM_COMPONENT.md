@@ -31,7 +31,7 @@ You can also use `ng generate directive|pipe|service|class|guard|interface|enum|
 Then, generate a 'poster' component in the new module:
 
 `ng generate component /platform/src/lib/components/poster --module=platform/src/lib/components/poster/poster.module`
- 
+
 You can also use `ng generate component component-name --project platform` to generate a new component.
 
 ## Step3: Create an exports array
@@ -69,7 +69,7 @@ The documentation application is importing every component in the Fundamental Li
 
 We must also add `export * from './lib/components/poster/poster.module';` to the `fundamental-ngx/src/public_api.ts` file. The <fdp-poster> component will be an exported member of the fundamental-ngx module as well as the poster module.
 
-##  Step6: Build
+## Step6: Build
 
 Run `ng build platform` to build the project. The build artifacts will be stored in the `dist/` directory.
 
@@ -84,7 +84,6 @@ Run `ng test platform` to execute the unit tests via [Karma](https://karma-runne
 ## Step9: Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
 
 ## Step10: Generating necessary files in documentation folder
 

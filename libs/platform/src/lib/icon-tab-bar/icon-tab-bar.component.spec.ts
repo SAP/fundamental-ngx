@@ -21,35 +21,30 @@ import { Component } from '@angular/core';
 import { generateTestConfig, getGetCenterCoordsOfElement } from './tests-helper';
 
 @Component({
-    template: `
-        <fdp-icon-tab-bar
-            [tabsConfig]="items"
-            [enableTabReordering]="enableTabReordering"
-            [showTotalTab]="showTotalTab"
-            [iconTabType]="iconTabType"
-            (iconTabSelected)="selected()"
-            (iconTabReordered)="reordered()"
-        ></fdp-icon-tab-bar>`
+    template: ` <fdp-icon-tab-bar
+        [tabsConfig]="items"
+        [enableTabReordering]="enableTabReordering"
+        [showTotalTab]="showTotalTab"
+        [iconTabType]="iconTabType"
+        (iconTabSelected)="selected()"
+        (iconTabReordered)="reordered()"
+    ></fdp-icon-tab-bar>`
 })
 class HostComponent {
-
     enableTabReordering = false;
     showTotalTab = false;
     iconTabType: TabType = 'text';
     items: TabConfig[] = [];
 
-    selected(): void {
-    }
+    selected(): void {}
 
-    reordered(): void {
-    }
+    reordered(): void {}
 }
 
 let component: HostComponent;
 let fixture: ComponentFixture<HostComponent>;
 
 describe('IconTabBarComponent', () => {
-
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [
@@ -67,14 +62,8 @@ describe('IconTabBarComponent', () => {
                 IconBarDndContainerDirective
             ],
             providers: [ContentDensityService, RtlService],
-            imports: [
-                IconModule,
-                PopoverModule,
-                OverflowListModule,
-                DragDropModule
-            ]
-        })
-            .compileComponents();
+            imports: [IconModule, PopoverModule, OverflowListModule, DragDropModule]
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -165,13 +154,16 @@ describe('IconTabBarComponent', () => {
 });
 
 // tslint:disable-next-line:max-line-length
-function emulateDnD(draggableItem: HTMLElement, targetCoords: { clientX: number, clientY: number }): void {
+function emulateDnD(draggableItem: HTMLElement, targetCoords: { clientX: number; clientY: number }): void {
     const mousedown = new MouseEvent('mousedown');
     draggableItem.dispatchEvent(mousedown);
     fixture.detectChanges();
 
     // Need to move two times because cdk skip first moving
-    const firstMove = new MouseEvent('mousemove', { clientX: targetCoords.clientX - 50, clientY: targetCoords.clientY - 50 });
+    const firstMove = new MouseEvent('mousemove', {
+        clientX: targetCoords.clientX - 50,
+        clientY: targetCoords.clientY - 50
+    });
     draggableItem.dispatchEvent(firstMove);
     fixture.detectChanges();
     const finalMove = new MouseEvent('mousemove', targetCoords);

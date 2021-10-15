@@ -18,12 +18,8 @@ import { DialogHeaderBase } from '../base/dialog-header-base.class';
     templateUrl: './dialog-header.component.html'
 })
 export class DialogHeaderComponent extends DialogHeaderBase implements AfterContentInit {
-
     /** @hidden */
-    constructor(
-        @Optional() public dialogConfig: DialogConfig,
-        changeDetectorRef: ChangeDetectorRef
-    ) {
+    constructor(@Optional() public dialogConfig: DialogConfig, changeDetectorRef: ChangeDetectorRef) {
         super(changeDetectorRef);
         this.dialogConfig = this.dialogConfig || {};
     }

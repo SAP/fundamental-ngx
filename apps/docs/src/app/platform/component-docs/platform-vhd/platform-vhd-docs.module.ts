@@ -21,7 +21,7 @@ import {
     PlatformVhdInputExampleComponent,
     PlatformVhdMobileExampleComponent,
     PlatformVhdStrategyLabelExampleComponent
-} from './platform-vhd-examples'
+} from './platform-vhd-examples';
 
 const routes: Routes = [
     {
@@ -58,6 +58,5 @@ const routes: Routes = [
         PlatformVhdMobileExampleComponent,
         PlatformVhdStrategyLabelExampleComponent
     ]
-
 })
-export class PlatformVhdDocsModule { }
+export class PlatformVhdDocsModule {}

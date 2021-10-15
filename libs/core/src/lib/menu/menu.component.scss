@@ -1,11 +1,12 @@
-@import "~fundamental-styles/dist/menu";
+@import '~fundamental-styles/dist/menu';
 
 :host {
     display: inline;
 }
 
 fd-menu {
-    .fd-menu__list, .fd-menu__sublist {
+    .fd-menu__list,
+    .fd-menu__sublist {
         flex-wrap: nowrap;
     }
 

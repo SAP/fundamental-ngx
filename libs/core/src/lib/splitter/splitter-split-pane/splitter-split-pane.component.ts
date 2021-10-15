@@ -22,7 +22,6 @@ import { takeUntil } from 'rxjs/operators';
 
 import { PANE_AUTO_SIZE } from '../constants';
 
-
 let paneUniqueId = 0;
 
 /** @dynamic */
@@ -146,7 +145,8 @@ export class SplitterSplitPaneComponent implements OnInit, AfterViewInit, OnDest
             return;
         }
 
-        this._viewportRuler.change(10)
+        this._viewportRuler
+            .change(10)
             .pipe(takeUntil(this._unsubscribe$))
             .subscribe(() => this._processPaneOnCanvas());
     }

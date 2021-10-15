@@ -12,11 +12,24 @@ import {
     waitForPresent
 } from '../../driver/wdio';
 
-describe('multi-combobox test suite', function() {
+describe('multi-combobox test suite', () => {
     const multiComboboxPage = new MultiComboboxPo();
     const {
-        expandButton, token, tokenCloseButton, inputField, listItemCheckbox, listItem, list, selectedListItem,
-        mobileModeExamples, tokenInputField, dialog, dialogButton, dialogListItem, selectedDialogItem, dialogInput
+        expandButton,
+        token,
+        tokenCloseButton,
+        inputField,
+        listItemCheckbox,
+        listItem,
+        list,
+        selectedListItem,
+        mobileModeExamples,
+        tokenInputField,
+        dialog,
+        dialogButton,
+        dialogListItem,
+        selectedDialogItem,
+        dialogInput
     } = multiComboboxPage;
     const mobileExample = 5;
     const nMoreExample = 4;
@@ -32,8 +45,7 @@ describe('multi-combobox test suite', function() {
         waitForPresent(multiComboboxPage.title);
     }, 1);
 
-    describe('Main checks', function() {
-
+    describe('Main checks', () => {
         it('should open and close list by clicking expand button', () => {
             const exampleCount = getElementArrayLength(expandButton);
             for (let i = 0; i < exampleCount; i++) {
@@ -110,7 +122,7 @@ describe('multi-combobox test suite', function() {
                     expect(waitForElDisplayed(list)).toBe(true, `list ${i} not opened`);
                     const listItemText = getTextArr(listItem);
 
-                    listItemText.forEach( element => {
+                    listItemText.forEach((element) => {
                         expect(element.toString().toLowerCase()).toContain(searchValue);
                     });
                 }
@@ -118,7 +130,7 @@ describe('multi-combobox test suite', function() {
         });
     });
 
-    describe('mobile mode examples', function() {
+    describe('mobile mode examples', () => {
         const close = 0;
         const save = 2;
         const cancel = 3;
@@ -153,7 +165,7 @@ describe('multi-combobox test suite', function() {
             sendKeys(searchValue);
             const searchResults = getTextArr(dialogListItem).sort();
 
-            searchResults.forEach( element => {
+            searchResults.forEach((element) => {
                 expect(element.toString().toLowerCase()).toContain(searchValue);
             });
         });
@@ -168,10 +180,9 @@ describe('multi-combobox test suite', function() {
 
             expect(selectedViewItemCount).toBe(2);
         });
-
     });
 
-    describe('orientation and visual regression checks', function() {
+    describe('orientation and visual regression checks', () => {
         it('should check orientation', () => {
             multiComboboxPage.checkRtlSwitch();
         });

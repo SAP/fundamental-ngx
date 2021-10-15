@@ -1,9 +1,11 @@
-<fdp-wizard-generator [appendToWizard]="false" [navigationButtons]="false" [items]="stepItems" (wizardFinished)="wizardFinished($event)"></fdp-wizard-generator>
+<fdp-wizard-generator
+    [appendToWizard]="false"
+    [navigationButtons]="false"
+    [items]="stepItems"
+    (wizardFinished)="wizardFinished($event)"
+></fdp-wizard-generator>
 
-<div
-    fd-bar
-    *ngIf="stepItems.length > 0 && wizardGenerator?.wizardCreated"
->
+<div fd-bar *ngIf="stepItems.length > 0 && wizardGenerator?.wizardCreated">
     <div fd-bar-right>
         <fdp-button
             class="fd-bar__element"

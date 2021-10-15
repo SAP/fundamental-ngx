@@ -1,17 +1,10 @@
 import { TitlePo } from '../pages/title.po';
-import {
-    getElementClass,
-    refreshPage,
-    getAttributeByName,
-    waitForElDisplayed
-} from '../../driver/wdio';
+import { getElementClass, refreshPage, getAttributeByName, waitForElDisplayed } from '../../driver/wdio';
 import { titleLevels, titleLevelsReversed } from '../fixtures/appData/title-contents';
 
-describe('Wizard component test', function () {
+describe('Wizard component test', () => {
     const titlePage = new TitlePo();
-    const {
-        title, semanticExample, visualExample, ellisionExample, wrappingExample, paragraphsBlock
-    } = titlePage;
+    const { title, semanticExample, visualExample, ellisionExample, wrappingExample, paragraphsBlock } = titlePage;
 
     beforeAll(() => {
         titlePage.open();
@@ -58,5 +51,4 @@ describe('Wizard component test', function () {
             expect(getElementClass(section + title, i)).toContain(lvls[i]);
         }
     }
-
 });

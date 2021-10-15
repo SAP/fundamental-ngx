@@ -11,9 +11,7 @@ import { API_FILES } from '../../api-files';
 
 import { PlatformActionListItemHeaderComponent } from './platform-action-list-item-header/platform-action-list-item-header.component';
 import { PlatformActionListItemDocsComponent } from './platform-action-list-item-docs.component';
-import {
-    PlatformActionListItemExampleComponent
-} from './platform-action-list-item-examples/platform-action-list-item-example.component';
+import { PlatformActionListItemExampleComponent } from './platform-action-list-item-examples/platform-action-list-item-example.component';
 import { PlatformActionListItemBorderLessExampleComponent } from './platform-action-list-item-examples/platform-action-list-item-border-less-example.component';
 const routes: Routes = [
     {
@@ -43,5 +41,4 @@ const routes: Routes = [
         PlatformActionListItemBorderLessExampleComponent
     ]
 })
-export class PlatformActionListItemDocsModule {
-}
+export class PlatformActionListItemDocsModule {}

@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    Input,
+    OnDestroy,
+    OnInit,
+    ViewChild,
+    ViewEncapsulation
+} from '@angular/core';
 import { TimelinePositionControlService } from '../../services/timeline-position-control.service';
 
 @Component({
@@ -7,12 +16,11 @@ import { TimelinePositionControlService } from '../../services/timeline-position
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        'class': 'fd-timeline__node-wrapper',
+        class: 'fd-timeline__node-wrapper',
         '[class.fd-timeline__node-wrapper--icon]': '!!glyph'
     }
 })
 export class TimelineNodeComponent implements OnInit, OnDestroy {
-
     /* Glyph of the current timeline node.*/
     @Input()
     glyph: string;
@@ -25,11 +33,7 @@ export class TimelineNodeComponent implements OnInit, OnDestroy {
     lineEl: ElementRef;
 
     /** @hidden */
-    constructor(
-        public el: ElementRef,
-        private _timelinePositionControl: TimelinePositionControlService
-    ) {
-    }
+    constructor(public el: ElementRef, private _timelinePositionControl: TimelinePositionControlService) {}
 
     /** @hidden */
     ngOnInit(): void {

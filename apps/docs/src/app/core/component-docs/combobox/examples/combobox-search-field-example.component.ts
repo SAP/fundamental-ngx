@@ -6,5 +6,19 @@ import { Component } from '@angular/core';
 })
 export class ComboboxSearchFieldExampleComponent {
     searchTerm = '';
-    fruits = ['Apple', 'Pineapple', 'Banana', 'Kiwi', 'Strawberry', 'Blueberry', 'Orange', 'Lemon', 'Raspberry',  'Grapefruit', 'Apricot', 'Avocado', 'Cherry'];
+    fruits = [
+        'Apple',
+        'Pineapple',
+        'Banana',
+        'Kiwi',
+        'Strawberry',
+        'Blueberry',
+        'Orange',
+        'Lemon',
+        'Raspberry',
+        'Grapefruit',
+        'Apricot',
+        'Avocado',
+        'Cherry'
+    ];
 }

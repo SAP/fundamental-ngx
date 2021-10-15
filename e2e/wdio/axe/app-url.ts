@@ -1,4 +1,4 @@
-export const appURLs  = {
+export const appURLs = {
     platform: {
         actionBar: '/action-bar',
         approvalFlow: '/approval-flow',
@@ -112,10 +112,4 @@ export const appURLs  = {
         layoutPanel: '/layout-panel',
         layoutGrid: '/layout-grid'
     }
-
-
-
-
-
-
 };

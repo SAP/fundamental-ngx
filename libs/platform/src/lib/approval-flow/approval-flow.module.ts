@@ -56,9 +56,7 @@ import { ApprovalFlowToolbarActionsComponent } from './approval-flow-toolbar-act
         ApprovalFlowApproverDetailsComponent,
         ApprovalFlowSelectTypeComponent
     ],
-    providers: [
-        ApprovalFlowAddNodeViewService
-    ],
+    providers: [ApprovalFlowAddNodeViewService],
     imports: [
         CommonModule,
         FormsModule,
@@ -84,9 +82,6 @@ import { ApprovalFlowToolbarActionsComponent } from './approval-flow-toolbar-act
         RadioModule,
         IllustratedMessageModule
     ],
-    exports: [
-        ApprovalFlowComponent
-    ]
+    exports: [ApprovalFlowComponent]
 })
-export class PlatformApprovalFlowModule {
-}
+export class PlatformApprovalFlowModule {}

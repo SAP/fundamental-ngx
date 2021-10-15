@@ -3,29 +3,26 @@
 <description>
     This example shows simple splitter usage. Basic input properties.
 
-    <p>
-        <code>fd-splitter</code>:
-    </p>
+    <p><code>fd-splitter</code>:</p>
 
     <ul>
         <li>
-            Use <code>[defaultPaneId]</code> input property of the <code>fd-splitter</code> to define main pane.
-            Please make sure the default pane is in the root container (not in nested container).
+            Use <code>[defaultPaneId]</code> input property of the <code>fd-splitter</code> to define main pane. Please
+            make sure the default pane is in the root container (not in nested container).
         </li>
     </ul>
 
-    <p>
-        <code>fd-splitter-pane-container</code>:
-    </p>
+    <p><code>fd-splitter-pane-container</code>:</p>
 
     <ul>
-        <li>use <code>orientation</code> to set pane orientation. May be <code>vertical</code> (default) or <code>horizontal</code>.</li>
+        <li>
+            use <code>orientation</code> to set pane orientation. May be <code>vertical</code> (default) or
+            <code>horizontal</code>.
+        </li>
         <li>listen for <code>(resize)</code> event to get resize information (panes and their updated widths).</li>
     </ul>
 
-    <p>
-        <code>fd-splitter-split-pane</code>:
-    </p>
+    <p><code>fd-splitter-split-pane</code>:</p>
 
     <ul>
         <li>Use <code>[size]</code> input property of the <code>fd-splitter-split-pane</code> to define pane width.</li>
@@ -46,11 +43,13 @@
 <description>
     <ul>
         <li>
-            Use <code>[requiredParentWidth]</code> (number, pixels) input property of the <code>fd-splitter-split-pane</code> to set minimal required window's width when pane will be shown.
+            Use <code>[requiredParentWidth]</code> (number, pixels) input property of the
+            <code>fd-splitter-split-pane</code> to set minimal required window's width when pane will be shown.
         </li>
 
         <li>
-            Use <code>[demandPane]</code> (boolean) to specify if the pane will be available using the pagination bar when it's off-canvas.
+            Use <code>[demandPane]</code> (boolean) to specify if the pane will be available using the pagination bar
+            when it's off-canvas.
         </li>
     </ul>
 </description>
@@ -69,33 +68,21 @@
     <code>fd-splitter</code> has next API methods:
 
     <ul>
-        <li>
-            <code>splitter.showPaneOnCanvas(paneId: string)</code> to show certain pane on the canvas.
-        </li>
+        <li><code>splitter.showPaneOnCanvas(paneId: string)</code> to show certain pane on the canvas.</li>
 
-        <li>
-            <code>splitter.hidePaneFromCanvas(paneId: string)</code> to hide certain pane from the canvas.
-        </li>
+        <li><code>splitter.hidePaneFromCanvas(paneId: string)</code> to hide certain pane from the canvas.</li>
 
-        <li>
-            <code>splitter.isPaneOnCanvas(paneId: string)</code> to check whether certain pane is on canvas.
-        </li>
+        <li><code>splitter.isPaneOnCanvas(paneId: string)</code> to check whether certain pane is on canvas.</li>
     </ul>
 
     <code>fd-splitter-split-pane</code> has next API methods & getters:
 
     <ul>
-        <li>
-            <code>splitPane.showOnCanvas()</code> to show pane on the canvas.
-        </li>
+        <li><code>splitPane.showOnCanvas()</code> to show pane on the canvas.</li>
 
-        <li>
-            <code>splitPane.hideFromCanvas()</code> to hide pane from the canvas.
-        </li>
+        <li><code>splitPane.hideFromCanvas()</code> to hide pane from the canvas.</li>
 
-        <li>
-            <code>splitPane.isOnCanvas</code> to check whether pane is on canvas.
-        </li>
+        <li><code>splitPane.isOnCanvas</code> to check whether pane is on canvas.</li>
     </ul>
 </description>
 
@@ -106,6 +93,3 @@
 <code-example [exampleFiles]="splitterApi"></code-example>
 
 <separator></separator>
-
-
-

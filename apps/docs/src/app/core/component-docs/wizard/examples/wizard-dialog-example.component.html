@@ -130,18 +130,18 @@
                         >
                             <fd-wizard-step-indicator>4</fd-wizard-step-indicator>
                             <fd-wizard-content size="sm">
-                                    <h3 fd-title>4. Payment</h3>
-                                    <div>
-                                        Sed fermentum, mi et tristique ullamcorper, sapien sapien faucibus sem, quis pretium
-                                        nibh lorem malesuada diam. Nulla quis arcu aliquet, feugiat massa semper, volutpat
-                                        diam. Nam vitae ante posuere, molestie neque sit amet, dapibus velit. Maecenas
-                                        eleifend tempor lorem. Mauris vitae elementum mi, sed eleifend ligula. Nulla tempor
-                                        vulputate dolor, nec dignissim quam convallis ut. Praesent vitae commodo felis, ut
-                                        iaculis felis. Fusce quis eleifend sapien, eget facilisis nibh. Suspendisse est
-                                        velit, scelerisque ut commodo eget, dignissim quis metus. Cras faucibus consequat
-                                        gravida. Curabitur vitae quam felis. Phasellus ac leo eleifend, commodo tortor et,
-                                        varius quam. Aliquam erat volutpat
-                                    </div>
+                                <h3 fd-title>4. Payment</h3>
+                                <div>
+                                    Sed fermentum, mi et tristique ullamcorper, sapien sapien faucibus sem, quis pretium
+                                    nibh lorem malesuada diam. Nulla quis arcu aliquet, feugiat massa semper, volutpat
+                                    diam. Nam vitae ante posuere, molestie neque sit amet, dapibus velit. Maecenas
+                                    eleifend tempor lorem. Mauris vitae elementum mi, sed eleifend ligula. Nulla tempor
+                                    vulputate dolor, nec dignissim quam convallis ut. Praesent vitae commodo felis, ut
+                                    iaculis felis. Fusce quis eleifend sapien, eget facilisis nibh. Suspendisse est
+                                    velit, scelerisque ut commodo eget, dignissim quis metus. Cras faucibus consequat
+                                    gravida. Curabitur vitae quam felis. Phasellus ac leo eleifend, commodo tortor et,
+                                    varius quam. Aliquam erat volutpat
+                                </div>
                             </fd-wizard-content>
                         </li>
                         <li
@@ -227,9 +227,23 @@
             </fd-wizard>
             <div fd-bar barDesign="floating-footer">
                 <div fd-bar-right>
-                    <fd-button-bar *ngIf="step1status !== 'current'" label="Previous Step" (click)="goToStep(currentStep - 1)"></fd-button-bar>
-                    <fd-button-bar *ngIf="summaryStatus !== 'current'" [label]="step4status === 'current' ? 'Review' : 'Next Step'" [disabled]="step2status === 'current' && (fullName === '' || addressLine1 === '')" (click)="goToStep(currentStep + 1)"></fd-button-bar>
-                    <fd-button-bar *ngIf="summaryStatus === 'current'" label="Finish" [disabled]="step2status === 'current' && (fullName === '' || addressLine1 === '')" (click)="dialog.close('Continue')"></fd-button-bar>
+                    <fd-button-bar
+                        *ngIf="step1status !== 'current'"
+                        label="Previous Step"
+                        (click)="goToStep(currentStep - 1)"
+                    ></fd-button-bar>
+                    <fd-button-bar
+                        *ngIf="summaryStatus !== 'current'"
+                        [label]="step4status === 'current' ? 'Review' : 'Next Step'"
+                        [disabled]="step2status === 'current' && (fullName === '' || addressLine1 === '')"
+                        (click)="goToStep(currentStep + 1)"
+                    ></fd-button-bar>
+                    <fd-button-bar
+                        *ngIf="summaryStatus === 'current'"
+                        label="Finish"
+                        [disabled]="step2status === 'current' && (fullName === '' || addressLine1 === '')"
+                        (click)="dialog.close('Continue')"
+                    ></fd-button-bar>
                     <fd-button-bar label="Cancel" (click)="dialog.dismiss('Cancel')"></fd-button-bar>
                 </div>
             </div>

@@ -6,7 +6,6 @@ import { PositionStrategyFactory } from './position-strategies/position-strategy
 
 @Injectable()
 export class TimelinePositionControlService {
-
     /* List of TimelineNodeComponent */
     /** @hidden */
     private _nodeItems: TimelineNodeComponent[] = [];
@@ -31,6 +30,6 @@ export class TimelinePositionControlService {
     }
     /** Remove TimelineNodeComponent */
     removeNode(node: TimelineNodeComponent): void {
-        this._nodeItems = this._nodeItems.filter(item => item !== node);
+        this._nodeItems = this._nodeItems.filter((item) => item !== node);
     }
 }

@@ -494,9 +494,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
             this.showList(false);
         } else if (!event.ctrlKey && !KeyUtil.isKeyCode(event, this._nonOpeningKeys)) {
             this.showList(true);
-            const acceptedKeys =
-                !KeyUtil.isKeyType(event, 'alphabetical') &&
-                !KeyUtil.isKeyType(event, 'numeric');
+            const acceptedKeys = !KeyUtil.isKeyType(event, 'alphabetical') && !KeyUtil.isKeyType(event, 'numeric');
             if (this.isEmptyValue && acceptedKeys) {
                 this.listComponent?.setItemActive(0);
             }
@@ -529,7 +527,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         }
 
         const activeValue: SelectableOptionItem = this._getSelectItemByInputValue(this.inputText);
-        const index: number = this._flatSuggestions.findIndex(value => value === activeValue);
+        const index: number = this._flatSuggestions.findIndex((value) => value === activeValue);
         const position = !this.inputText && offset === -1 ? this._flatSuggestions.length - 1 : index + offset;
         const item: SelectableOptionItem = this._flatSuggestions[position];
 
@@ -537,7 +535,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
             this.setInputTextFromOptionItem(item);
         }
 
-        const selectedIndex = this._selected.findIndex(value => value.label === item?.label);
+        const selectedIndex = this._selected.findIndex((value) => value.label === item?.label);
         if (selectedIndex !== -1) {
             this._chooseOtherItem(offset);
         }
@@ -551,7 +549,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     /** @hidden
      *  Map grouped values to array. */
     protected _flatGroups(items: SelectableOptionItem[]): SelectableOptionItem[] {
-        return items.reduce((result: SelectableOptionItem[], item: SelectableOptionItem) => result.concat(item.children), []);
+        return items.reduce(
+            (result: SelectableOptionItem[], item: SelectableOptionItem) => result.concat(item.children),
+            []
+        );
     }
 
     /** @hidden */
@@ -587,10 +588,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
             .open()
             .pipe(
                 takeUntil(this._destroyed),
-                tap(data => this.isListEmpty = !data?.length),
-                filter(data => !!data.length)
+                tap((data) => (this.isListEmpty = !data?.length)),
+                filter((data) => !!data.length)
             )
-            .subscribe(data => {
+            .subscribe((data) => {
                 this._suggestions = this._convertToOptionItems(data);
                 this._flatSuggestions = this.isGroup ? this._flatGroups(this._suggestions) : this._suggestions;
 

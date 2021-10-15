@@ -22,7 +22,7 @@ export class ListSelectionExampleComponent {
             selected: false,
             label: 'List item 3'
         }
-    ]
+    ];
 
     compactObject = [
         {
@@ -37,5 +37,5 @@ export class ListSelectionExampleComponent {
             selected: false,
             label: 'List item 3'
         }
-    ]
+    ];
 }

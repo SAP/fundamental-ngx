@@ -5,12 +5,12 @@ import {
     getImageTagBrowserPlatform,
     open,
     saveElementScreenshot,
-    scrollIntoView, waitForElDisplayed
+    scrollIntoView,
+    waitForElDisplayed
 } from '../../driver/wdio';
 import { checkLtrOrientation, checkRtlOrientation } from '../../helper/assertion-helper';
 
 export class CoreBaseComponentPo {
-
     title = 'header .header';
     root = '#page-content';
     exampleAreaContainersArr = '.fd-doc-component';
@@ -34,7 +34,12 @@ export class CoreBaseComponentPo {
         for (let i = 0; i < areasArray.length; i++) {
             waitForElDisplayed(this.exampleAreaContainersArr, i);
             scrollIntoView(this.exampleAreaContainersArr, i);
-            saveElementScreenshot(this.exampleAreaContainersArr, `${specName}-example-${i}-core-${getImageTagBrowserPlatform()}`, options, i);
+            saveElementScreenshot(
+                this.exampleAreaContainersArr,
+                `${specName}-example-${i}-core-${getImageTagBrowserPlatform()}`,
+                options,
+                i
+            );
         }
     }
 
@@ -44,7 +49,12 @@ export class CoreBaseComponentPo {
         for (let i = 0; i < areasArray.length; i++) {
             waitForElDisplayed(this.exampleAreaContainersArr, i);
             scrollIntoView(this.exampleAreaContainersArr, i);
-            diff += checkElementScreenshot(this.exampleAreaContainersArr, `${specName}-example-${i}-core-${getImageTagBrowserPlatform()}`, options, i);
+            diff += checkElementScreenshot(
+                this.exampleAreaContainersArr,
+                `${specName}-example-${i}-core-${getImageTagBrowserPlatform()}`,
+                options,
+                i
+            );
         }
         return diff;
     }

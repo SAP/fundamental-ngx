@@ -3,7 +3,7 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class TokenPo extends CoreBaseComponentPo {
     url = '/token';
-    
+
     defaultExample = 'fd-token-example ';
     selectedExample = 'fd-token-selected-example ';
     readOnlyExample = 'fd-token-readonly-example ';

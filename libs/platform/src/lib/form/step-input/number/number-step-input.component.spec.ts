@@ -5,9 +5,9 @@ import { By } from '@angular/platform-browser';
 import { FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 
 import { ContentDensity, RtlService } from '@fundamental-ngx/core/utils';
-import { FdpFormGroupModule } from '../../form-group/fdp-form.module'
-import { FormFieldComponent } from '../../form-group/form-field/form-field.component'
-import { PlatformStepInputModule } from '../step-input.module'
+import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
+import { FormFieldComponent } from '../../form-group/form-field/form-field.component';
+import { PlatformStepInputModule } from '../step-input.module';
 import { NumberStepInputChangeEvent, NumberStepInputComponent } from './number-step-input.component';
 
 @Component({
@@ -21,13 +21,15 @@ describe('NumberStepInputComponent default values', () => {
     let fixture: ComponentFixture<NumberStepInputDefaultValuesHostComponent>;
     let stepInputComponent: NumberStepInputComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformStepInputModule],
-            declarations: [NumberStepInputDefaultValuesHostComponent],
-            providers: [RtlService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CommonModule, PlatformStepInputModule],
+                declarations: [NumberStepInputDefaultValuesHostComponent],
+                providers: [RtlService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(NumberStepInputDefaultValuesHostComponent);
@@ -107,13 +109,15 @@ describe('NumberStepInputComponent main functionality', () => {
         return fixture.debugElement.query(By.css('.fd-step-input__input'));
     };
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformStepInputModule],
-            declarations: [NumberStepInputMainFunctionalityHostComponent],
-            providers: [RtlService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CommonModule, PlatformStepInputModule],
+                declarations: [NumberStepInputMainFunctionalityHostComponent],
+                providers: [RtlService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(NumberStepInputMainFunctionalityHostComponent);
@@ -449,13 +453,15 @@ describe('Basic number Step Input withing platforms form', () => {
     let fixture: ComponentFixture<NumberStepInputFormTestWrapperComponent>;
     let host: NumberStepInputFormTestWrapperComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformStepInputModule],
-            declarations: [NumberStepInputFormTestWrapperComponent],
-            providers: [RtlService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformStepInputModule],
+                declarations: [NumberStepInputFormTestWrapperComponent],
+                providers: [RtlService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(NumberStepInputFormTestWrapperComponent);

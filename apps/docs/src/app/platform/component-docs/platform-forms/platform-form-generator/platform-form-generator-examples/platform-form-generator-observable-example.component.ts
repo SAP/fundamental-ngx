@@ -3,7 +3,13 @@ import { Validators } from '@angular/forms';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import {
+    DatetimeAdapter,
+    DATE_TIME_FORMATS,
+    FdDate,
+    FdDatetimeAdapter,
+    FD_DATETIME_FORMATS
+} from '@fundamental-ngx/core/datetime';
 import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 
 export const dummyAwaitablePromise = (timeout = 200) => {
@@ -31,7 +37,6 @@ export const dummyAwaitablePromise = (timeout = 200) => {
     ]
 })
 export class PlatformFormGeneratorObservableExampleComponent {
-
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;
 
     loading = false;
@@ -66,7 +71,9 @@ export class PlatformFormGeneratorObservableExampleComponent {
             validators: [Validators.required],
             validate: (value: string) => {
                 const passwordPattern = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\\w\\s]).{8,}$');
-                return passwordPattern.test(value) ? null : 'Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character'
+                return passwordPattern.test(value)
+                    ? null
+                    : 'Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character';
             },
             guiOptions: {
                 column: 1
@@ -100,14 +107,15 @@ export class PlatformFormGeneratorObservableExampleComponent {
                 inline: true,
                 column: 2
             },
-            choices: (formValue) => of([
-                'USA',
-                'Germany',
-                {
-                    label: 'Ukraine',
-                    value: 'Ukraine'
-                }
-            ]),
+            choices: (formValue) =>
+                of([
+                    'USA',
+                    'Germany',
+                    {
+                        label: 'Ukraine',
+                        value: 'Ukraine'
+                    }
+                ]),
             validate: (input, formValue) => {
                 return input?.length > 0 ? null : 'You need to select some country';
             }
@@ -164,7 +172,8 @@ export class PlatformFormGeneratorObservableExampleComponent {
                 column: 1
             },
             validators: [Validators.required],
-            validate: (value: FdDate) => of(value !== null && value.year < 2020 ? null : 'You need to be born before 2020'),
+            validate: (value: FdDate) =>
+                of(value !== null && value.year < 2020 ? null : 'You need to be born before 2020'),
             transformer: (value: FdDate) => {
                 return value?.toDateString();
             }
@@ -200,5 +209,4 @@ export class PlatformFormGeneratorObservableExampleComponent {
     submitForm(): void {
         this.formGenerator.submit();
     }
-
 }

@@ -9,7 +9,7 @@ const LIST_ELEMENTS: Product[] = [
         title: 'Notebook Basic 15',
         introductionText: 'First product with discount',
         currency: 'Euro',
-        amount: 87.50,
+        amount: 87.5,
         image: 'http://picsum.photos/id/1018/400',
         gylp1: 'add-favorite',
         gylp2: 'flag',
@@ -32,7 +32,7 @@ const LIST_ELEMENTS: Product[] = [
         title: 'Notebook Basic 16',
         introductionText: 'First product with discount',
         currency: 'Euro',
-        amount: 237.50,
+        amount: 237.5,
         image: 'http://picsum.photos/id/1018/400',
         gylp1: 'request',
         gylp2: 'flag',
@@ -55,7 +55,7 @@ const LIST_ELEMENTS: Product[] = [
         title: 'Notebook Basic 17',
         introductionText: 'No discount',
         currency: 'Euro',
-        amount: 117.50,
+        amount: 117.5,
         image: 'http://picsum.photos/id/1018/400',
         gylp1: 'add-favorite',
         gylp2: 'user-edit',
@@ -78,7 +78,7 @@ const LIST_ELEMENTS: Product[] = [
         title: 'Notebook Basic 18',
         introductionText: '',
         currency: 'Euro',
-        amount: 734.50,
+        amount: 734.5,
         image: 'http://picsum.photos/id/1018/400',
         gylp1: '',
         gylp2: 'private',
@@ -96,7 +96,8 @@ const LIST_ELEMENTS: Product[] = [
         statuslabel2: 'Informative',
         inverted2: true,
         decimal: 2
-    }];
+    }
+];
 
 export interface Product {
     title: string;
@@ -120,7 +121,6 @@ export interface Product {
     decimal: number;
     tip1: string;
     tip2: string;
-
 }
 
 export class ListDataProvider extends DataProvider<Product> {
@@ -148,8 +148,8 @@ export class PlatformObjectListItemWithRowSelectionExampleComponent implements A
 
     ngAfterViewInit(): void {
         const toolbar = this._elementRef.nativeElement.querySelector('fd-toolbar');
-        this._render.setAttribute(toolbar, 'tabindex', '0' );
-        this._render.setStyle(toolbar, 'outline', 'none' );
+        this._render.setAttribute(toolbar, 'tabindex', '0');
+        this._render.setStyle(toolbar, 'outline', 'none');
     }
 
     _showItemInfo(event: SelectionChangeEvent): void {

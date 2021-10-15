@@ -1,73 +1,73 @@
 $fd-namespace: fd !default;
 
 @mixin fd-rtl {
-  @at-root {
-    [dir="rtl"] &,
-    &[dir="rtl"] {
-      @content;
+    @at-root {
+        [dir='rtl'] &,
+        &[dir='rtl'] {
+            @content;
+        }
     }
-  }
 }
 
 @mixin fd-after() {
-  &::after {
-    @content;
-  }
+    &::after {
+        @content;
+    }
 }
 
 @mixin fd-after-rtl() {
-  @include fd-rtl() {
-    &::after {
-      @content;
+    @include fd-rtl() {
+        &::after {
+            @content;
+        }
     }
-  }
 }
 
 // utils
 @mixin fd-reset {
-  font-size: var(--sapFontSize);
-  line-height: var(--sapContent_LineHeight);
-  color: var(--sapTextColor);
-  font-family: var(--sapFontFamily);
-  font-weight: normal;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  border: 0;
+    font-size: var(--sapFontSize);
+    line-height: var(--sapContent_LineHeight);
+    color: var(--sapTextColor);
+    font-family: var(--sapFontFamily);
+    font-weight: normal;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
 
-  &::before,
-  &::after {
-    box-sizing: inherit;
-    font-size: inherit;
-  }
+    &::before,
+    &::after {
+        box-sizing: inherit;
+        font-size: inherit;
+    }
 }
 
 @mixin fd-flex-vertical-center {
-  display: flex;
-  align-items: center;
-  @content;
+    display: flex;
+    align-items: center;
+    @content;
 }
 
 @mixin fd-reset-margins() {
-  margin: 0;
+    margin: 0;
 }
 
 @mixin fd-set-margin-left($left: 0) {
-  margin-left: $left;
+    margin-left: $left;
 
-  @include fd-rtl() {
-    margin-right: $left;
-    margin-left: 0;
-  }
+    @include fd-rtl() {
+        margin-right: $left;
+        margin-left: 0;
+    }
 }
 
 @mixin fd-set-margin-right($right: 0) {
-  margin-right: $right;
+    margin-right: $right;
 
-  @include fd-rtl() {
-    margin-right: 0;
-    margin-left: $right;
-  }
+    @include fd-rtl() {
+        margin-right: 0;
+        margin-left: $right;
+    }
 }
 
 @mixin fd-set-margin-bottom($bottom: 0) {
@@ -89,12 +89,12 @@ $fd-namespace: fd !default;
 }
 
 @mixin fd-set-position-left($left) {
-  left: $left;
+    left: $left;
 
-  @include fd-rtl() {
-    left: auto;
-    right: $left;
-  }
+    @include fd-rtl() {
+        left: auto;
+        right: $left;
+    }
 }
 
 @mixin fd-set-position-right($right) {
@@ -125,12 +125,12 @@ $fd-namespace: fd !default;
 }
 
 @mixin fd-set-padding-left($left: 0) {
-  padding-left: $left;
+    padding-left: $left;
 
-  @include fd-rtl() {
-    padding-right: $left;
-    padding-left: 0;
-  }
+    @include fd-rtl() {
+        padding-right: $left;
+        padding-left: 0;
+    }
 }
 
 @mixin fd-set-padding-left($left: 0) {
@@ -172,98 +172,98 @@ $fd-namespace: fd !default;
 // These mixins ensure that all state selectors — ARIA, pseudos, `is` fallbacks — get applied properly.
 
 @mixin fd-internal-pseudo-element-focus($_offset) {
-  $offset: -$_offset;
+    $offset: -$_offset;
 
-  &::after {
-    border-width: var(--sapContent_FocusWidth);
-    border-color: var(--sapContent_FocusColor);
-    border-style: var(--sapContent_FocusStyle);
-    content: '';
-    position: absolute;
-    pointer-events: none;
-    top: $offset;
-    bottom: $offset;
-    left: $offset;
-    right: $offset;
-    @content;
-  }
+    &::after {
+        border-width: var(--sapContent_FocusWidth);
+        border-color: var(--sapContent_FocusColor);
+        border-style: var(--sapContent_FocusStyle);
+        content: '';
+        position: absolute;
+        pointer-events: none;
+        top: $offset;
+        bottom: $offset;
+        left: $offset;
+        right: $offset;
+        @content;
+    }
 }
 
 // ACTIVE state (press and hold)
 @mixin fd-active {
-  &:active,
-  &.is-active {
-    @content;
-  }
+    &:active,
+    &.is-active {
+        @content;
+    }
 }
 
 // DISABLED state (not editable, not focusable, not submitted with `form`)
 @mixin fd-disabled {
-  &[aria-disabled="true"],
-  &.is-disabled,
-  &:disabled {
-    @content;
-  }
+    &[aria-disabled='true'],
+    &.is-disabled,
+    &:disabled {
+        @content;
+    }
 }
 
 // FOCUS state (tab onto, click into)
 // override params $shadow-var, $shadow-value
 // `.is-focus` is for demo purposes
 @mixin fd-focus() {
-  &:focus,
-  &.is-focus {
-    z-index: 5;
-    @content;
-  }
+    &:focus,
+    &.is-focus {
+        z-index: 5;
+        @content;
+    }
 }
 
 // Newer FOCUS state which follows fiori3 spec (tab onto, click into)
 // `.is-focus` is for demo purposes
 @mixin fd-fiori-focus($offset: -0.1875rem) {
-  &:focus,
-  &.is-focus {
-    @if $offset != 0 {
-      outline-offset: $offset;
-    }
+    &:focus,
+    &.is-focus {
+        @if $offset != 0 {
+            outline-offset: $offset;
+        }
 
-    outline-width: var(--sapContent_FocusWidth);
-    outline-color: var(--sapContent_FocusColor);
-    outline-style: var(--sapContent_FocusStyle);
-    @content;
-  }
+        outline-width: var(--sapContent_FocusWidth);
+        outline-color: var(--sapContent_FocusColor);
+        outline-style: var(--sapContent_FocusStyle);
+        @content;
+    }
 }
 
 // Newer FOCUS state which follows fiori3 spec (tab onto, click into)
 // `.is-focus` is for demo purposes
 // This brings border + pseudo element
 @mixin fd-fiori-pseudo-focus($_offset: -0.0625rem) {
-  &:focus,
-  &.is-focus {
-    @include fd-internal-pseudo-element-focus($_offset) {
-      @content;
+    &:focus,
+    &.is-focus {
+        @include fd-internal-pseudo-element-focus($_offset) {
+            @content;
+        }
     }
-  }
 }
 
 // Focus state, which is not support by IE11. Use it with `fd-fiori-focus` mixin.
 // This brings border + pseudo element
 @mixin fd-fiori-pseudo-focus-within($_offset: -0.0625rem) {
-  &:focus-within {
-    @include fd-internal-pseudo-element-focus($_offset) {
-      @content;
+    &:focus-within {
+        @include fd-internal-pseudo-element-focus($_offset) {
+            @content;
+        }
     }
-  }
 }
 
 // Focus state, which is not support by IE11. Use it with `fd-fiori-focus` mixin.
 @mixin fd-fiori-focus-within($offset: -0.1875rem) {
-  &:focus-within {
-    outline-offset: $offset;
-    outline-width: var(--sapContent_FocusWidth);
-    outline-color: var(--sapContent_FocusColor);
-    outline-style: var(--sapContent_FocusStyle);
-    @content;
-  }
+    &:focus-within {
+        outline-offset: $offset;
+        outline-width: var(--sapContent_FocusWidth);
+        outline-color: var(--sapContent_FocusColor);
+        outline-style: var(--sapContent_FocusStyle);
+        @content;
+    }
 }
 
 // HOVER state (mouseover)
@@ -271,10 +271,10 @@ $fd-namespace: fd !default;
 // `.is-hover` is for demo purposes
 
 @mixin fd-hover {
-  &:hover,
-  &.is-hover {
-    @content;
-  }
+    &:hover,
+    &.is-hover {
+        @content;
+    }
 }
 
 // Empty state
@@ -282,49 +282,49 @@ $fd-namespace: fd !default;
 // `.is-empty` is when empty state can't be applied, because of some internal framework comments
 
 @mixin fd-empty {
-  &:empty,
-  &.is-empty {
-    @content;
-  }
+    &:empty,
+    &.is-empty {
+        @content;
+    }
 }
 
 // PRESSED state (toggle with full press-and-release)
 @mixin fd-pressed {
-  &[aria-pressed="true"],
-  &.is-pressed {
-    @content;
-  }
+    &[aria-pressed='true'],
+    &.is-pressed {
+        @content;
+    }
 }
 
 // READONLY state (not editable, focusable, submitted with `form`)
 @mixin fd-readonly {
-  &[aria-readonly="true"],
-  &.is-readonly,
-  &[readonly] {
-    @content;
-  }
+    &[aria-readonly='true'],
+    &.is-readonly,
+    &[readonly] {
+        @content;
+    }
 }
 
 // SELECTED state (current item in nav)
 @mixin fd-selected {
-  &[aria-selected="true"],
-  &.is-selected {
-    @content;
-  }
+    &[aria-selected='true'],
+    &.is-selected {
+        @content;
+    }
 }
 
 // EXPANDED state
 @mixin fd-expanded {
-  &[aria-expanded="true"],
-  &.is-expanded {
-    @content;
-  }
+    &[aria-expanded='true'],
+    &.is-expanded {
+        @content;
+    }
 }
 
 @mixin fd-navigated {
-  &.is-navigated {
-    @content;
-  }
+    &.is-navigated {
+        @content;
+    }
 }
 
 // COMBO MIXINS
@@ -332,45 +332,45 @@ $fd-namespace: fd !default;
 
 // PRESSED and SELECTED state
 @mixin fd-pressed-selected {
-  &[aria-selected="true"],
-  &.is-selected,
-  &[aria-pressed="true"],
-  &.is-pressed {
-    @content;
-  }
+    &[aria-selected='true'],
+    &.is-selected,
+    &[aria-pressed='true'],
+    &.is-pressed {
+        @content;
+    }
 }
 
 // ACTIVE, PRESSED and SELECTED state
 @mixin fd-active-pressed-selected {
-  &:active,
-  &.is-active,
-  &[aria-selected="true"],
-  &.is-selected,
-  &[aria-pressed="true"],
-  &.is-pressed {
-    @content;
-  }
+    &:active,
+    &.is-active,
+    &[aria-selected='true'],
+    &.is-selected,
+    &[aria-pressed='true'],
+    &.is-pressed {
+        @content;
+    }
 }
 
 @mixin fd-set-margins-x-equal($value: 0) {
-  margin-left: $value;
-  margin-right: $value;
+    margin-left: $value;
+    margin-right: $value;
 }
 
 @mixin fd-flex($direction: row) {
-  display: flex;
-  flex-direction: $direction;
-  @content;
+    display: flex;
+    flex-direction: $direction;
+    @content;
 }
 
 @mixin fd-reset-margins-y() {
-  margin-top: 0;
-  margin-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 @mixin fd-set-margins-y-equal($value: 0) {
-  margin-top: $value;
-  margin-bottom: $value;
+    margin-top: $value;
+    margin-bottom: $value;
 }
 
 @mixin fd-set-margins-x-equal($value: 0) {

@@ -1,13 +1,12 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { WizardGeneratorFormsValue, WizardGeneratorItem } from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
-  selector: 'fdp-wizard-generator-visible-summary-example',
-  templateUrl: './wizard-generator-visible-summary-example.component.html'
+    selector: 'fdp-wizard-generator-visible-summary-example',
+    templateUrl: './wizard-generator-visible-summary-example.component.html'
 })
 export class WizardGeneratorVisibleSummaryExampleComponent {
-
     wizardValue: WizardGeneratorFormsValue;
 
     stepItems: WizardGeneratorItem[] = [
@@ -101,7 +100,7 @@ export class WizardGeneratorVisibleSummaryExampleComponent {
         }
     ];
 
-    constructor() { }
+    constructor() {}
 
     wizardFinished(wizardValue: WizardGeneratorFormsValue): void {
         this.wizardValue = wizardValue;

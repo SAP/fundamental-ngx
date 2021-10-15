@@ -197,10 +197,12 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
         this._setUpViewGrid();
 
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this._changeDetectorRef.markForCheck();
-            }))
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._changeDetectorRef.markForCheck();
+                })
+            );
         }
     }
 
@@ -417,7 +419,7 @@ export class TimeComponent<D> implements OnInit, OnChanges, OnDestroy, AfterView
 
     /** @hidden */
     focusActiveColumnIndicator(): void {
-        this.columns.filter(column => column.active)[0].indicator.nativeElement.focus();
+        this.columns.filter((column) => column.active)[0].indicator.nativeElement.focus();
     }
 
     /** @hidden */

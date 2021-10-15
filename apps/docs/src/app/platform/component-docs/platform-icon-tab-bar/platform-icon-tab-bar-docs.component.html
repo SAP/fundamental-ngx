@@ -1,12 +1,11 @@
-<fd-docs-section-title id="text-type" componentName="icon-tab-bar">
-    Text type tabs
-</fd-docs-section-title>
+<fd-docs-section-title id="text-type" componentName="icon-tab-bar"> Text type tabs </fd-docs-section-title>
 <description>
-  <p>
-      The text-only variant is one of the most common types. It allows longer labels, and can also display counters next to the text to indicate the number of items on the tab page.
-      <br>
-      To use the text type of the tabs you must pass input <code class="code-snippet">[type]="'text'"</code>
-  </p>
+    <p>
+        The text-only variant is one of the most common types. It allows longer labels, and can also display counters
+        next to the text to indicate the number of items on the tab page.
+        <br />
+        To use the text type of the tabs you must pass input <code class="code-snippet">[type]="'text'"</code>
+    </p>
 </description>
 <component-example>
     <fd-icon-tab-bar-text-type-example></fd-icon-tab-bar-text-type-example>
@@ -19,9 +18,7 @@
     Text type tabs (column mode)
 </fd-docs-section-title>
 <description>
-    <p>
-        To use this mode you need to pass input<code class="code-snippet">[layoutMode]="'column'"</code>
-    </p>
+    <p>To use this mode you need to pass input<code class="code-snippet">[layoutMode]="'column'"</code></p>
 </description>
 <component-example>
     <fd-icon-tab-bar-text-type-example textTypeLayoutMode="column"></fd-icon-tab-bar-text-type-example>
@@ -30,14 +27,13 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="icon-type" componentName="icon-tab-bar">
-    Icon type tabs
-</fd-docs-section-title>
+<fd-docs-section-title id="icon-type" componentName="icon-tab-bar"> Icon type tabs </fd-docs-section-title>
 <description>
-    Icon tabs are also common tab types. These round tabs can be populated with any icon from the SAP icon font.
-    Labels are optional. If you decide to use labels, use them for all tabs. You can use counters as needed.
-    <br>
-    To use the icon type of the tabs without labels you must pass input <code class="code-snippet">[type]="'icon-only'"</code>
+    Icon tabs are also common tab types. These round tabs can be populated with any icon from the SAP icon font. Labels
+    are optional. If you decide to use labels, use them for all tabs. You can use counters as needed.
+    <br />
+    To use the icon type of the tabs without labels you must pass input
+    <code class="code-snippet">[type]="'icon-only'"</code>
 </description>
 <component-example>
     <fd-icon-tab-bar-icon-only-type-example></fd-icon-tab-bar-icon-only-type-example>
@@ -59,22 +55,18 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="filter-type" componentName="icon-tab-bar">
-    Filter type tabs
-</fd-docs-section-title>
+<fd-docs-section-title id="filter-type" componentName="icon-tab-bar"> Filter type tabs </fd-docs-section-title>
 <description>
     If you build the tab bar as a filter, it can comprise two parts:
 
     <ul>
         <li>
-            An “all” tab on the left (optional)
-            This tab shows the total number of items, and describes the type of item (for example, 189 Products).
-            To use it pass <code class="code-snippet">[showTabAll]="true"</code>
+            An “all” tab on the left (optional) This tab shows the total number of items, and describes the type of item
+            (for example, 189 Products). To use it pass <code class="code-snippet">[showTabAll]="true"</code>
         </li>
         <li>
-            Tabs for specific filters
-            Use the tab text to indicate the filter attribute.
-            We strongly recommend showing a counter on every tab.
+            Tabs for specific filters Use the tab text to indicate the filter attribute. We strongly recommend showing a
+            counter on every tab.
         </li>
     </ul>
     To use the filter type of the tabs you must pass input <code class="code-snippet">[type]="'filter'"</code>
@@ -86,12 +78,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="process-type" componentName="icon-tab-bar">
-    Process type tabs
-</fd-docs-section-title>
+<fd-docs-section-title id="process-type" componentName="icon-tab-bar"> Process type tabs </fd-docs-section-title>
 <description>
-    You can also use the tab bar to depict a process. In this case, each tab stands for one step.
-    To use the process type of the tabs you must pass input <code class="code-snippet">[type]="'process'"</code>
+    You can also use the tab bar to depict a process. In this case, each tab stands for one step. To use the process
+    type of the tabs you must pass input <code class="code-snippet">[type]="'process'"</code>
 </description>
 <component-example>
     <fd-icon-tab-bar-process-type-example></fd-icon-tab-bar-process-type-example>
@@ -100,18 +90,17 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="nested" componentName="icon-tab-bar">
-    Nested tabs
-</fd-docs-section-title>
+<fd-docs-section-title id="nested" componentName="icon-tab-bar"> Nested tabs </fd-docs-section-title>
 <description>
     <p>
         Nesting allows deeper hierarchies with indentations to indicate the level of each tab.
-        <br>
-        Nested tabs will be displayed automatically if the <code class="code-snippet">tabConfig</code> has the field <code class="code-snippet">subItems</code>
-        <br>
+        <br />
+        Nested tabs will be displayed automatically if the <code class="code-snippet">tabConfig</code> has the field
+        <code class="code-snippet">subItems</code>
+        <br />
     </p>
     <fd-message-strip [dismissible]="false" type="information">
-        This feature is available only for tabs with  <code class="code-snippet">[type]="'text'"</code>
+        This feature is available only for tabs with <code class="code-snippet">[type]="'text'"</code>
     </fd-message-strip>
 </description>
 <component-example>
@@ -121,16 +110,15 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="reordering" componentName="icon-tab-bar">
-    Reordering
-</fd-docs-section-title>
+<fd-docs-section-title id="reordering" componentName="icon-tab-bar"> Reordering </fd-docs-section-title>
 <description>
-   <p>
-       You can allow users to rearrange the tab order in a desktop environment (property: enableTabReordering). If this feature is enabled, users can drag and drop tabs to reorder them, either directly on the tab bar or inside the overflow menu.
-       It is also possible to drag and drop tabs from the tab bar to the overflow menu and vice versa.
-   </p>
+    <p>
+        You can allow users to rearrange the tab order in a desktop environment (property: enableTabReordering). If this
+        feature is enabled, users can drag and drop tabs to reorder them, either directly on the tab bar or inside the
+        overflow menu. It is also possible to drag and drop tabs from the tab bar to the overflow menu and vice versa.
+    </p>
     <fd-message-strip [dismissible]="false" type="information">
-        This feature is available only for tabs with  <code class="code-snippet">[type]="'text'"</code>
+        This feature is available only for tabs with <code class="code-snippet">[type]="'text'"</code>
     </fd-message-strip>
 </description>
 <component-example>
@@ -140,12 +128,11 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="overflow" componentName="icon-tab-bar">
-    Overflowing
-</fd-docs-section-title>
+<fd-docs-section-title id="overflow" componentName="icon-tab-bar"> Overflowing </fd-docs-section-title>
 <description>
     <p>
-        When the screen space does not allow to show all tabs on the main tab bar, an overflow appears on the far right, containing all remaining tabs that do not fit on the screen.
+        When the screen space does not allow to show all tabs on the main tab bar, an overflow appears on the far right,
+        containing all remaining tabs that do not fit on the screen.
     </p>
 </description>
 <component-example class="icon-tab-bar-docs-overflow">
@@ -155,13 +142,11 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="paddings" componentName="icon-tab-bar">
-    Configurable paddings
-</fd-docs-section-title>
+<fd-docs-section-title id="paddings" componentName="icon-tab-bar"> Configurable paddings </fd-docs-section-title>
 <description>
     <p>
-        You can set horizontal paddings by adding a specifying the size of the paddings.
-        Available values: <code>'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'responsive-paddings'</code>
+        You can set horizontal paddings by adding a specifying the size of the paddings. Available values:
+        <code>'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'responsive-paddings'</code>
     </p>
 </description>
 <component-example>

@@ -16,7 +16,6 @@ import { API_FILES } from '../../api-files';
 import { ActionBarModule } from '@fundamental-ngx/core/action-bar';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -39,7 +38,6 @@ const routes: Routes = [
         ActionBarNoBackExampleComponent,
         ActionBarContextualMenuExampleComponent,
         ActionBarLongStringTitleTruncationExampleComponent
-
     ]
 })
-export class ActionBarDocsModule { }
+export class ActionBarDocsModule {}

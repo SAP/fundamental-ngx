@@ -46,6 +46,5 @@ const routes: Routes = [
         FdpFormGroupModule
     ],
     exports: [RouterModule]
-
 })
 export class PlatformDatePickerDocsModule {}

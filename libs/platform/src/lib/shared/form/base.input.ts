@@ -37,8 +37,10 @@ let randomId = 0;
  * that e.g. placeholder will change after component is created
  */
 @Directive()
-export abstract class BaseInput extends BaseComponent
-    implements FormFieldControl<any>, ControlValueAccessor, OnInit, OnChanges, DoCheck, AfterViewInit, OnDestroy {
+export abstract class BaseInput
+    extends BaseComponent
+    implements FormFieldControl<any>, ControlValueAccessor, OnInit, OnChanges, DoCheck, AfterViewInit, OnDestroy
+{
     protected defaultId = `fdp-input-id-${randomId++}`;
     protected _disabled: boolean;
     protected _value: any;
@@ -213,7 +215,6 @@ export abstract class BaseInput extends BaseComponent
 
     /** @hidden */
     ngAfterViewInit(): void {
-
         if (this.ngControl) {
             this._subscriptions.add(
                 this.ngControl.statusChanges.subscribe(() => {
@@ -321,7 +322,11 @@ export abstract class BaseInput extends BaseComponent
         const oldState = this.status === 'error';
         const parent = this.ngForm;
         const control = this.ngControl ? (this.ngControl.control as FormControl) : null;
-        const newState = !!(control && control.invalid && (control.dirty || control.touched || (parent && parent.submitted)));
+        const newState = !!(
+            control &&
+            control.invalid &&
+            (control.dirty || control.touched || (parent && parent.submitted))
+        );
 
         if (newState !== oldState) {
             this._status = newState ? 'error' : this.state === 'error' ? 'default' : this.state;
@@ -331,9 +336,9 @@ export abstract class BaseInput extends BaseComponent
     }
 
     /**
-     * Used to change the value of a control. 
+     * Used to change the value of a control.
      * @param value the value to be applied
-     * @param emitOnChange whether to emit "onChange" event. 
+     * @param emitOnChange whether to emit "onChange" event.
      * Should be "false", if the change is made programmatically (internally) by the control, "true" otherwise
      */
     protected setValue(value: any, emitOnChange = true): void {

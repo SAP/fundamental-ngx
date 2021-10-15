@@ -1,33 +1,17 @@
 import { ActionBarPo } from '../pages/action-bar.po';
 import { checkElArrIsClickable, checkElementTextValue } from '../../helper/assertion-helper';
-import {
-    acceptAlert,
-    click,
-    getAlertText,
-    scrollIntoView,
-    waitForElDisplayed
-} from '../../driver/wdio';
-import {
-    alertMsg,
-    actionBarTitles,
-    actionBarDescriptions
-} from '../fixtures/appData/action-bar-contents';
+import { acceptAlert, click, getAlertText, scrollIntoView, waitForElDisplayed } from '../../driver/wdio';
+import { alertMsg, actionBarTitles, actionBarDescriptions } from '../fixtures/appData/action-bar-contents';
 
-describe('Action Bar Test Suite', function() {
+describe('Action Bar Test Suite', () => {
     const actionBarPage = new ActionBarPo();
-    const {
-        menuItems,
-        actionBtnArr,
-        backBtnArr,
-        descriptions,
-        titles
-    } = new ActionBarPo();
+    const { menuItems, actionBtnArr, backBtnArr, descriptions, titles } = new ActionBarPo();
 
     beforeAll(() => {
         actionBarPage.open();
     }, 1);
 
-    describe('Main checks', function() {
+    describe('Main checks', () => {
         it('should check action buttons', () => {
             checkElArrIsClickable(actionBtnArr);
             click(actionBtnArr, 8);
@@ -58,13 +42,13 @@ describe('Action Bar Test Suite', function() {
         });
     });
 
-    describe('Check orientation', function() {
+    describe('Check orientation', () => {
         it('should check RTL and LTR orientation', () => {
             actionBarPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             actionBarPage.saveExampleBaselineScreenshot();
             expect(actionBarPage.compareWithBaseline()).toBeLessThan(5);

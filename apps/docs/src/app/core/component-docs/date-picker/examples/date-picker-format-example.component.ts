@@ -31,11 +31,11 @@ export const CUSTOM_FD_DATETIME_FORMATS: DateTimeFormats = {
     selector: 'fd-date-picker-format-example',
     template: `
         <fd-date-picker [(ngModel)]="date" placeholder="dd-mm-yyyy"></fd-date-picker>
-        <br/>
+        <br />
         <div>Selected Date: {{ date | dateFormat }}</div>
-        <br/>
+        <br />
         <fd-date-picker placeholder="mm/dd/yy to mm/dd/yy" type="range" [(ngModel)]="selectedRange"></fd-date-picker>
-        <br/>
+        <br />
         <div>Selected First Date: {{ selectedRange?.start | dateFormat }}</div>
         <div>Selected Last Date: {{ selectedRange?.end | dateFormat }}</div>
     `,

@@ -1,18 +1,18 @@
 @import '~fundamental-styles/dist/popover';
-@import "~@angular/cdk/overlay-prebuilt";
+@import '~@angular/cdk/overlay-prebuilt';
 
 $fd-popover-arrow-top-back: -0.5rem !default;
 $fd-popover-arrow-top-front: calc(-0.5rem + 1px) !default;
 
 $fd-popover-arrow-width: 1rem !default;
 $fd-popover-arrow-height: 0.5rem !default;
-$fd-popover-arrow-width-half: $fd-popover-arrow-width*0.5 !default;
+$fd-popover-arrow-width-half: $fd-popover-arrow-width * 0.5 !default;
 $fd-popover-arrow-offset: 0.25rem !default;
 $fd-popover-arrow-color-variable: var(--sapContent_ForegroundBorderColor, #89919a) !default;
 $fd-popover-arrow-color: #89919a;
 $fd-popover-background-color-variable: var(--sapGroup_ContentBackground, #fff) !default;
 $fd-popover-background-color: #fff;
-$fd-popover-border-radius: var(--sapElement_BorderCornerRadius, .25rem) !default;
+$fd-popover-border-radius: var(--sapElement_BorderCornerRadius, 0.25rem) !default;
 
 @mixin set-border-radius($position, $radius: $fd-popover-border-radius) {
     border-#{$position}-right-radius: $radius;
@@ -20,141 +20,140 @@ $fd-popover-border-radius: var(--sapElement_BorderCornerRadius, .25rem) !default
 }
 
 .fd-popover__popper {
-	.fd-popover__arrow {
-		box-sizing: border-box;
-		padding: 0;
-		margin: 0;
-		border: 0;
-		position: absolute;
-		width: 0;
-		height: 0;
-		border-style: solid;
-		border-color: transparent;
-		z-index: 1000000;
+    .fd-popover__arrow {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-color: transparent;
+        z-index: 1000000;
 
-		&::after {
-			position: absolute;
-			content: "";
-			border-style: solid;
-			border-color: transparent;
-		}
+        &::after {
+            position: absolute;
+            content: '';
+            border-style: solid;
+            border-color: transparent;
+        }
 
-		&--bottom,
-		&--top {
-			&::after {
-				margin: 0 (-$fd-popover-arrow-width-half);
-			}
-		}
+        &--bottom,
+        &--top {
+            &::after {
+                margin: 0 (-$fd-popover-arrow-width-half);
+            }
+        }
 
-		&--start,
-		&--end {
-			&::after {
-				margin: (-$fd-popover-arrow-width-half) 0;
-			}
-		}
+        &--start,
+        &--end {
+            &::after {
+                margin: (-$fd-popover-arrow-width-half) 0;
+            }
+        }
 
-		&--bottom {
-			bottom: -$fd-popover-arrow-height;
-			border-width: $fd-popover-arrow-height $fd-popover-arrow-width-half 0 $fd-popover-arrow-width-half;
-			border-top-color: $fd-popover-arrow-color;
-			border-top-color: $fd-popover-arrow-color-variable;
+        &--bottom {
+            bottom: -$fd-popover-arrow-height;
+            border-width: $fd-popover-arrow-height $fd-popover-arrow-width-half 0 $fd-popover-arrow-width-half;
+            border-top-color: $fd-popover-arrow-color;
+            border-top-color: $fd-popover-arrow-color-variable;
 
-			&::after {
-				bottom: 1px;
-				border-width: $fd-popover-arrow-height $fd-popover-arrow-width-half 0 $fd-popover-arrow-width-half;
-				border-top-color: $fd-popover-background-color;
-				border-top-color: $fd-popover-background-color-variable;
-			}
-		}
+            &::after {
+                bottom: 1px;
+                border-width: $fd-popover-arrow-height $fd-popover-arrow-width-half 0 $fd-popover-arrow-width-half;
+                border-top-color: $fd-popover-background-color;
+                border-top-color: $fd-popover-background-color-variable;
+            }
+        }
 
-		&--top {
-			top: -$fd-popover-arrow-height;
-			border-width: 0 $fd-popover-arrow-width-half $fd-popover-arrow-height $fd-popover-arrow-width-half;
-			border-bottom-color: $fd-popover-arrow-color;
-			border-bottom-color: $fd-popover-arrow-color-variable;
+        &--top {
+            top: -$fd-popover-arrow-height;
+            border-width: 0 $fd-popover-arrow-width-half $fd-popover-arrow-height $fd-popover-arrow-width-half;
+            border-bottom-color: $fd-popover-arrow-color;
+            border-bottom-color: $fd-popover-arrow-color-variable;
 
-			&::after {
-				top: 1px;
-				border-width: 0 $fd-popover-arrow-width-half $fd-popover-arrow-height $fd-popover-arrow-width-half;
-				border-bottom-color: $fd-popover-background-color;
-				border-bottom-color: $fd-popover-background-color-variable;
-			}
-		}
+            &::after {
+                top: 1px;
+                border-width: 0 $fd-popover-arrow-width-half $fd-popover-arrow-height $fd-popover-arrow-width-half;
+                border-bottom-color: $fd-popover-background-color;
+                border-bottom-color: $fd-popover-background-color-variable;
+            }
+        }
 
-		&--end {
-			right: -$fd-popover-arrow-height;
-			border-width: $fd-popover-arrow-width-half 0 $fd-popover-arrow-width-half $fd-popover-arrow-height;
-			border-left-color: $fd-popover-arrow-color;
-			border-left-color: $fd-popover-arrow-color-variable;
+        &--end {
+            right: -$fd-popover-arrow-height;
+            border-width: $fd-popover-arrow-width-half 0 $fd-popover-arrow-width-half $fd-popover-arrow-height;
+            border-left-color: $fd-popover-arrow-color;
+            border-left-color: $fd-popover-arrow-color-variable;
 
-			&::after {
-				right: 1px;
-				border-width: $fd-popover-arrow-width-half 0 $fd-popover-arrow-width-half $fd-popover-arrow-height;
-				border-left-color: $fd-popover-background-color;
-				border-left-color: $fd-popover-background-color-variable;
-			}
-		}
+            &::after {
+                right: 1px;
+                border-width: $fd-popover-arrow-width-half 0 $fd-popover-arrow-width-half $fd-popover-arrow-height;
+                border-left-color: $fd-popover-background-color;
+                border-left-color: $fd-popover-background-color-variable;
+            }
+        }
 
-		&--start {
-			left: -$fd-popover-arrow-height;
-			border-width: $fd-popover-arrow-width-half $fd-popover-arrow-height $fd-popover-arrow-width-half 0;
-			border-right-color: $fd-popover-arrow-color;
-			border-right-color: $fd-popover-arrow-color-variable;
+        &--start {
+            left: -$fd-popover-arrow-height;
+            border-width: $fd-popover-arrow-width-half $fd-popover-arrow-height $fd-popover-arrow-width-half 0;
+            border-right-color: $fd-popover-arrow-color;
+            border-right-color: $fd-popover-arrow-color-variable;
 
-			&::after {
-				left: 1px;
-				border-width: $fd-popover-arrow-width-half $fd-popover-arrow-height $fd-popover-arrow-width-half 0;
-				border-right-color: $fd-popover-background-color;
-				border-right-color: $fd-popover-background-color-variable;
-			}
-		}
+            &::after {
+                left: 1px;
+                border-width: $fd-popover-arrow-width-half $fd-popover-arrow-height $fd-popover-arrow-width-half 0;
+                border-right-color: $fd-popover-background-color;
+                border-right-color: $fd-popover-background-color-variable;
+            }
+        }
 
-		&-x--start {
-			left: $fd-popover-arrow-offset;
-		}
+        &-x--start {
+            left: $fd-popover-arrow-offset;
+        }
 
-		&-x--center {
-			left: 50%;
-			transform: translateX(-50%);
-		}
+        &-x--center {
+            left: 50%;
+            transform: translateX(-50%);
+        }
 
-		&-x--end {
-			right: $fd-popover-arrow-offset;
-		}
+        &-x--end {
+            right: $fd-popover-arrow-offset;
+        }
 
-		&-y--top {
-			top: $fd-popover-arrow-offset;
-		}
+        &-y--top {
+            top: $fd-popover-arrow-offset;
+        }
 
-		&-y--center {
-			top: 50%;
-			transform: translateY(-50%);
-		}
+        &-y--center {
+            top: 50%;
+            transform: translateY(-50%);
+        }
 
-		&-y--bottom {
-			bottom: $fd-popover-arrow-offset;
-		}
-	}
+        &-y--bottom {
+            bottom: $fd-popover-arrow-offset;
+        }
+    }
 }
 
-
 .fd-popover__popper.fd-popover__popper--cdk-custom {
-	position: relative;
-	width: 100%;
+    position: relative;
+    width: 100%;
 
-	.fd-list {
-		border-radius: 0.25rem;
+    .fd-list {
+        border-radius: 0.25rem;
 
-		.fd-list__item {
-			&:first-child {
-                @include set-border-radius(top)
-			}
+        .fd-list__item {
+            &:first-child {
+                @include set-border-radius(top);
+            }
 
-			&:last-child {
+            &:last-child {
                 @include set-border-radius(bottom);
-			}
-		}
-	}
+            }
+        }
+    }
 
     .fd-nested-list {
         border-bottom: none;
@@ -186,7 +185,8 @@ $fd-popover-border-radius: var(--sapElement_BorderCornerRadius, .25rem) !default
         }
     }
 
-    .fd-side-nav, .fd-nested-list__item {
+    .fd-side-nav,
+    .fd-nested-list__item {
         border-right: none;
 
         &:first-child {
@@ -200,36 +200,36 @@ $fd-popover-border-radius: var(--sapElement_BorderCornerRadius, .25rem) !default
 }
 
 .fd-popover-custom {
-	display: inline-block;
-	max-width: 100%;
+    display: inline-block;
+    max-width: 100%;
 }
 
 .fd-popover-custom-list {
-	.fd-list {
-		overflow: auto;
-	}
+    .fd-list {
+        overflow: auto;
+    }
 }
 
 .cdk-overlay-container {
-	z-index: 1002;
+    z-index: 1002;
 }
 
 .fd-popover-custom--disabled {
-	.fd-popover__control {
-		cursor: auto;
-	}
+    .fd-popover__control {
+        cursor: auto;
+    }
 }
 
 .cdk-overlay-pane {
-	max-height: initial;
+    max-height: initial;
 }
 
 .fd-popover__popper.fd-inline-help__content {
-	padding: .75rem;
-	font-size: .75rem;
-	font-size: var(--sapFontSmallSize,.75rem);
+    padding: 0.75rem;
+    font-size: 0.75rem;
+    font-size: var(--sapFontSmallSize, 0.75rem);
 }
 
 .fd-popover__body--hidden {
-	display: none !important;
+    display: none !important;
 }

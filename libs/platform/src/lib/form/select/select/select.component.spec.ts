@@ -17,30 +17,29 @@ import { FdpSelectionChangeEvent } from '../commons/base-select';
     selector: 'fdp-select-test',
     template: `
         <fdp-form-group [noLabelLayout]="false" [formGroup]="customForm">
-        <fdp-form-field id="field" rank="4">
-            <fdp-select
-                width="7rem"
-                name="field"
-                placeholder="Select an option"
-                [maxHeight]="maxHeight"
-                [contentDensity]="contentDensity"
-                [list]="fromData"
-                [value]="selectedItem"
-                (selectionChange)="onSelect($event)"
-                formControlName="field"
-            ></fdp-select>
-            <p>Selected Item: {{ selectedItem | json }}</p>
-            <p>Form Selected Item: {{ customForm.getRawValue() | json }}</p>
-        </fdp-form-field>
-    </fdp-form-group>
+            <fdp-form-field id="field" rank="4">
+                <fdp-select
+                    width="7rem"
+                    name="field"
+                    placeholder="Select an option"
+                    [maxHeight]="maxHeight"
+                    [contentDensity]="contentDensity"
+                    [list]="fromData"
+                    [value]="selectedItem"
+                    (selectionChange)="onSelect($event)"
+                    formControlName="field"
+                ></fdp-select>
+                <p>Selected Item: {{ selectedItem | json }}</p>
+                <p>Form Selected Item: {{ customForm.getRawValue() | json }}</p>
+            </fdp-form-field>
+        </fdp-form-group>
     `
 })
 class SelectStandardComponent {
-
     @ViewChild(SelectComponent)
     select: SelectComponent;
 
-       fromData: OptionItem[] = [
+    fromData: OptionItem[] = [
         { label: 'Apple', value: 'A' },
         { label: 'Banana', value: 'B' },
         { label: 'Pineapple', value: 'C' },
@@ -63,7 +62,6 @@ class SelectStandardComponent {
     onSelect(item: FdpSelectionChangeEvent): void {
         this.selectedItem = item.payload;
     }
-
 }
 
 describe('Select Component default values', () => {
@@ -73,12 +71,16 @@ describe('Select Component default values', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, FormsModule, ReactiveFormsModule, CommonModule, PlatformSelectModule],
+            imports: [
+                FdpFormGroupModule,
+                FormModule,
+                FormsModule,
+                ReactiveFormsModule,
+                CommonModule,
+                PlatformSelectModule
+            ],
             declarations: [SelectStandardComponent],
-            providers: [
-                DynamicComponentService,
-                MenuKeyboardService,
-            ]
+            providers: [DynamicComponentService, MenuKeyboardService]
         }).compileComponents();
     }));
 
@@ -127,42 +129,49 @@ describe('Select Component default values', () => {
 @Component({
     selector: 'fdp-select-reactive-test',
     template: `
- <fdp-form-group [noLabelLayout]="false">
-    <fdp-form-field id="columns" label="Two Columns" rank="4">
-        <fdp-select
-            name="columns"
-            [autoResize]="autoResize"
-            width="7rem"
-            firstColumnRatio="2"
-            secondColumnRatio="4"
-            placeholder="Select an option"
-            [list]="option"
-            displayKey="label"
-            secondaryKey="secondaryText"
-            showSecondaryText="true"
-            secondaryTextAlignment="right"
-            (selectionChange)="onSelect($event)"
-        ></fdp-select>
-        <p>Selected Item: {{ selectedItem }}</p>
-    </fdp-form-field>
-</fdp-form-group>
+        <fdp-form-group [noLabelLayout]="false">
+            <fdp-form-field id="columns" label="Two Columns" rank="4">
+                <fdp-select
+                    name="columns"
+                    [autoResize]="autoResize"
+                    width="7rem"
+                    firstColumnRatio="2"
+                    secondColumnRatio="4"
+                    placeholder="Select an option"
+                    [list]="option"
+                    displayKey="label"
+                    secondaryKey="secondaryText"
+                    showSecondaryText="true"
+                    secondaryTextAlignment="right"
+                    (selectionChange)="onSelect($event)"
+                ></fdp-select>
+                <p>Selected Item: {{ selectedItem }}</p>
+            </fdp-form-field>
+        </fdp-form-group>
     `
 })
 class TestReactiveSelectComponnet {
-
     @ViewChild(SelectComponent)
     select: SelectComponent;
 
     option: OptionItem[] = [
-        { label: 'Apple', secondaryText: 'Fruits' , value: 'Apple'},
-        { label: 'Banana', secondaryText: 'Fruits' , value: 'Banana'},
+        { label: 'Apple', secondaryText: 'Fruits', value: 'Apple' },
+        { label: 'Banana', secondaryText: 'Fruits', value: 'Banana' },
         { label: 'Lorem ipsum dolor sit, amet', secondaryText: 'Fruits', value: 'Pineapple' },
-        { label: 'Strawberry', secondaryText: 'Fruits' , value: 'Strawberry'},
-        { label: 'et tempore cum. Corporis,Lorem ipsum dolor sit, amet nobis', secondaryText: 'Vegetables' , value: 'Broccoli'},
-        { label: 'Carrot', secondaryText: 'Vegetables' , value: 'Carrot'},
-        { label: 'Jalapeño', secondaryText: 'Vegetables' , value: 'Jalapeño'},
-        { label: 'Lorem Lorem ipsum dolor sit, ametipsum dolor sit, amet', secondaryText: 'Vegetables', value: 'Spinach' }
-    ]
+        { label: 'Strawberry', secondaryText: 'Fruits', value: 'Strawberry' },
+        {
+            label: 'et tempore cum. Corporis,Lorem ipsum dolor sit, amet nobis',
+            secondaryText: 'Vegetables',
+            value: 'Broccoli'
+        },
+        { label: 'Carrot', secondaryText: 'Vegetables', value: 'Carrot' },
+        { label: 'Jalapeño', secondaryText: 'Vegetables', value: 'Jalapeño' },
+        {
+            label: 'Lorem Lorem ipsum dolor sit, ametipsum dolor sit, amet',
+            secondaryText: 'Vegetables',
+            value: 'Spinach'
+        }
+    ];
 
     selectedItem = null;
     autoResize = false;
@@ -210,18 +219,17 @@ describe('Select component Reactive Form Test', () => {
 
     it('Select items should be display 8 list of OptionItems', () => {
         const items = select._optionItems;
-         expect(items.length).toEqual(8);
+        expect(items.length).toEqual(8);
     });
 
     it('Select display primary and secondary texts', () => {
         const items = select._optionItems;
-         expect(items.length).toEqual(8);
+        expect(items.length).toEqual(8);
 
-         expect(items[0].label).toEqual('Apple');
-         expect(items[0].secondaryText).toEqual('Fruits');
-         expect(items[7].label).toEqual('Lorem Lorem ipsum dolor sit, ametipsum dolor sit, amet');
-         expect(items[7].secondaryText).toEqual('Vegetables');
-         expect(items[7].value).toEqual('Spinach');
+        expect(items[0].label).toEqual('Apple');
+        expect(items[0].secondaryText).toEqual('Fruits');
+        expect(items[7].label).toEqual('Lorem Lorem ipsum dolor sit, ametipsum dolor sit, amet');
+        expect(items[7].secondaryText).toEqual('Vegetables');
+        expect(items[7].value).toEqual('Spinach');
     });
-
 });

@@ -17,27 +17,28 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 @Component({
     selector: 'fd-notification-group-header',
     template: `
-    <button
-        fd-button
-        fdType="transparent"
-        role="button"
-        [compact]="expandCompact"
-        [attr.aria-expanded]="expanded"
-        [attr.aria-label]="expandAriaLabel"
-        [attr.aria-labelledby]="expandAriaLabelledBy"
-        (click)="toggleExpand()">
-        <i [ngClass]="'sap-icon--' + _getButtonIcon()"></i>
-    </button>
-    <div class="fd-notification__content">
-       <ng-content select="fd-notification-header"></ng-content>
-    </div>
-    <ng-content select="fd-notification-actions"></ng-content>
-    <ng-content></ng-content>
+        <button
+            fd-button
+            fdType="transparent"
+            role="button"
+            [compact]="expandCompact"
+            [attr.aria-expanded]="expanded"
+            [attr.aria-label]="expandAriaLabel"
+            [attr.aria-labelledby]="expandAriaLabelledBy"
+            (click)="toggleExpand()"
+        >
+            <i [ngClass]="'sap-icon--' + _getButtonIcon()"></i>
+        </button>
+        <div class="fd-notification__content">
+            <ng-content select="fd-notification-header"></ng-content>
+        </div>
+        <ng-content select="fd-notification-actions"></ng-content>
+        <ng-content></ng-content>
     `,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NotificationGroupHeaderComponent implements OnInit, OnDestroy  {
+export class NotificationGroupHeaderComponent implements OnInit, OnDestroy {
     /** @hidden */
     @HostBinding('class.fd-notification__group-header')
     fdNotificationGroupHeaderClass = true;
@@ -77,10 +78,12 @@ export class NotificationGroupHeaderComponent implements OnInit, OnDestroy  {
     /** @hidden */
     ngOnInit(): void {
         if (this.expandCompact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.expandCompact = density !== 'cozy';
-                this._cdRef.markForCheck();
-            }))
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.expandCompact = density !== 'cozy';
+                    this._cdRef.markForCheck();
+                })
+            );
         }
         this._listenRtl();
     }
@@ -98,18 +101,14 @@ export class NotificationGroupHeaderComponent implements OnInit, OnDestroy  {
 
     /** @hidden */
     _getButtonIcon(): string {
-        return this.expanded
-            ? 'slim-arrow-down'
-            : this._rtl
-                ? 'slim-arrow-left'
-                : 'slim-arrow-right'
+        return this.expanded ? 'slim-arrow-down' : this._rtl ? 'slim-arrow-left' : 'slim-arrow-right';
     }
 
     /** @hidden */
     private _listenRtl(): void {
         if (this._rtlService) {
             this._subscriptions.add(
-                this._rtlService.rtl.subscribe(rtl => {
+                this._rtlService.rtl.subscribe((rtl) => {
                     this._rtl = rtl;
                     this._cdRef.markForCheck();
                 })

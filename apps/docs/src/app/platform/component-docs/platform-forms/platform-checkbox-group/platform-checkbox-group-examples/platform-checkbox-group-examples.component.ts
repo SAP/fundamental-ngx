@@ -28,8 +28,7 @@ export class PlatformCheckboxGroupExampleComponent {
         apple: new FormControl(false),
         banana: new FormControl(false),
         grapes: new FormControl(false)
-    })
-
+    });
 }
 
 class LanguageKnown implements SelectItem {

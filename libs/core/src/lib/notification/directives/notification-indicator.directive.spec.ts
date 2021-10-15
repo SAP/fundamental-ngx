@@ -16,12 +16,14 @@ describe('NotificationIndicatorDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [NotificationModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [NotificationModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -42,6 +44,8 @@ describe('NotificationIndicatorDirective', () => {
         component.type = 'success';
         component.directive.buildComponentCssClass();
         fixture.detectChanges();
-        expect(component.directive.elementRef().nativeElement.classList).toContain('fd-notification__indicator--success');
+        expect(component.directive.elementRef().nativeElement.classList).toContain(
+            'fd-notification__indicator--success'
+        );
     });
 });

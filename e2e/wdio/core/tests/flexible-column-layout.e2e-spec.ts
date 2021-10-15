@@ -7,10 +7,11 @@ import {
     isElementDisplayed,
     pause,
     refreshPage,
-    waitForElDisplayed, waitForNotDisplayed
+    waitForElDisplayed,
+    waitForNotDisplayed
 } from '../../driver/wdio';
 
-describe('Flexible column layout component test', function () {
+describe('Flexible column layout component test', () => {
     const flexibleColumnLayoutPage = new FlexibleColumnLayoutPo();
     const {
         defaultExample,
@@ -181,5 +182,4 @@ describe('Flexible column layout component test', function () {
         click(exitExampleBtn);
         expect(doesItExist(column)).toBe(false);
     }
-
 });

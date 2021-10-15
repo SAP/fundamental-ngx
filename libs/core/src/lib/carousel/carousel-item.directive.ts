@@ -7,7 +7,6 @@ let uniqueCarouselItemId = 0;
     exportAs: 'fdCarouselItem'
 })
 export class CarouselItemDirective {
-
     /** Value of the item , to keep some information inside */
     @Input()
     value: any;
@@ -25,9 +24,7 @@ export class CarouselItemDirective {
     @HostBinding('attr.id')
     id: string = 'carousel-item-id-' + uniqueCarouselItemId++;
 
-    constructor(
-        private _elementRef: ElementRef
-    ) {}
+    constructor(private _elementRef: ElementRef) {}
 
     /** Width of element */
     getWidth(): number {
@@ -43,5 +40,4 @@ export class CarouselItemDirective {
     getElement(): any {
         return this._elementRef.nativeElement;
     }
-
 }

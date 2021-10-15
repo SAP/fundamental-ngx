@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     templateUrl: './tab-collapsible-overflow-example.component.html'
 })
 export class TabCollapsibleOverflowExampleComponent {
-    tabs: { title: string, content: string }[] = [];
+    tabs: { title: string; content: string }[] = [];
 
     constructor() {
         for (let i = 1; i <= 15; i++) {

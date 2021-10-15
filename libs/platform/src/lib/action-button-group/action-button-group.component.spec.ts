@@ -8,17 +8,12 @@ import { ActionButtonGroupComponent } from './action-button-group.component';
 @Component({
     selector: 'fdp-action-button-group-component',
     template: `
-        <fdp-action-button-group  #actionbuttongroup>
-        <button>
-            Save
-        </button>
-        <button>
-            Cancel
-        </button>
+        <fdp-action-button-group #actionbuttongroup>
+            <button>Save</button>
+            <button>Cancel</button>
         </fdp-action-button-group>
     `
 })
-
 class ActionButtonGroupTestComponent {
     @ViewChild('actionbuttongroup') actionbuttongroup: ActionButtonGroupComponent;
 }
@@ -28,12 +23,14 @@ describe('ActionButtonGroupComponent', () => {
     let fixture: ComponentFixture<ActionButtonGroupTestComponent>;
     let actionbuttongroup: ActionButtonGroupComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ActionButtonGroupComponent, ActionButtonGroupTestComponent],
-            imports: [ActionBarModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [ActionButtonGroupComponent, ActionButtonGroupTestComponent],
+                imports: [ActionBarModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ActionButtonGroupTestComponent);
@@ -51,5 +48,5 @@ describe('ActionButtonGroupComponent', () => {
 
         const actionButtons = fixture.debugElement.queryAll(By.css('.fd-action-bar__actions'));
         expect(actionButtons.length).toBe(1);
-    })
+    });
 });

@@ -35,7 +35,12 @@ import { TableService } from './table.service';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { SearchInput } from './interfaces/search-field.interface';
 import { FILTER_STRING_STRATEGY, SelectionMode, SortDirection, TableRowType } from './enums';
-import { DEFAULT_TABLE_STATE, ROW_HEIGHT, SELECTION_COLUMN_WIDTH, SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH } from './constants';
+import {
+    DEFAULT_TABLE_STATE,
+    ROW_HEIGHT,
+    SELECTION_COLUMN_WIDTH,
+    SEMANTIC_HIGHLIGHTING_COLUMN_WIDTH
+} from './constants';
 import { TableDataSource } from './domain/table-data-source';
 import { ArrayTableDataSource } from './domain/array-data-source';
 import { ObservableTableDataSource } from './domain/observable-data-source';
@@ -250,9 +255,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     relationKey: string;
 
     /** Whether row is navigatable.
-      * Pass boolean value to set state for the all rows.
-      * Pass string value with the key of the row item's field to compute state for every single row.
-      */
+     * Pass boolean value to set state for the all rows.
+     * Pass string value with the key of the row item's field to compute state for every single row.
+     */
     @Input()
     rowNavigatable: string | boolean = false;
 
@@ -265,14 +270,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     semanticHighlighting: string;
 
     /**
-     * Tracking function that will be used to check the differences in data changes. 
-     * Used similarly to `ngFor` `trackBy` function. 
+     * Tracking function that will be used to check the differences in data changes.
+     * Used similarly to `ngFor` `trackBy` function.
      * Accepts a function that takes two parameters, index and item.
      */
     @Input()
     trackBy: TrackByFunction<T>;
 
-    /** 
+    /**
      * An optional function, that identifies uniqueness of a particular row.
      * Table component uses it to be able to preserve selection when data list is changed.
      */
@@ -285,7 +290,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** Event fired when table selection has changed. */
     @Output()
-    readonly rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<T>> = new EventEmitter<TableRowSelectionChangeEvent<T>>();
+    readonly rowSelectionChange: EventEmitter<TableRowSelectionChangeEvent<T>> = new EventEmitter<
+        TableRowSelectionChangeEvent<T>
+    >();
 
     /** Event fired when table sort order has changed. */
     @Output()
@@ -468,9 +475,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     _scrollBarWidth = 0;
 
-    /** 
+    /**
      * @hidden
-     * Mappping function for the trackBy, provided by the user. 
+     * Mappping function for the trackBy, provided by the user.
      * Is needed, because we are wrapping user supplied data into a `TableRow` class.
      */
     _rowTrackBy: TrackByFunction<TableRow<T>>;
@@ -485,11 +492,13 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     get _rowsDraggable(): boolean {
-        return this.isTreeTable
-            && !this._sortRulesMap.size
-            && !this._groupRulesMap.size
-            && !this._filterRulesMap.size
-            && !this._freezableColumns.length;
+        return (
+            this.isTreeTable &&
+            !this._sortRulesMap.size &&
+            !this._groupRulesMap.size &&
+            !this._filterRulesMap.size &&
+            !this._freezableColumns.length
+        );
     }
 
     /** @hidden */
@@ -547,7 +556,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         private readonly _tableColumnResizeService: TableColumnResizeService,
         @Inject(DOCUMENT) private readonly _document: Document | null,
         @Optional() private readonly _rtlService: RtlService,
-        @Optional() private readonly _contentDensityService: ContentDensityService,
+        @Optional() private readonly _contentDensityService: ContentDensityService
     ) {
         super();
         this._trackContentDensityChanges();
@@ -560,7 +569,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         }
 
         if ('trackBy' in changes) {
-            this._rowTrackBy = typeof this.trackBy === 'function' ? (index, item) => this.trackBy(index, item.value) : undefined;
+            this._rowTrackBy =
+                typeof this.trackBy === 'function' ? (index, item) => this.trackBy(index, item.value) : undefined;
         }
 
         if (changes.contentDensity?.currentValue) {
@@ -572,16 +582,19 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             return;
         }
 
-        if ('selectionMode' in changes
-            || 'freezeColumnsTo' in changes
-            || 'semanticHighlighting' in changes
-            || 'contentDensity' in changes
+        if (
+            'selectionMode' in changes ||
+            'freezeColumnsTo' in changes ||
+            'semanticHighlighting' in changes ||
+            'contentDensity' in changes
         ) {
             this.recalculateTableColumnWidth();
         }
 
         if ('rowNavigatable' in changes) {
-            this._tableRows.forEach(row => row.navigatable = this._isRowNavigatable(row.value, this.rowNavigatable));
+            this._tableRows.forEach(
+                (row) => (row.navigatable = this._isRowNavigatable(row.value, this.rowNavigatable))
+            );
 
             this._calculateIsShownNavigationColumn();
         }
@@ -786,9 +799,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._cdr.detectChanges();
 
         this._tableColumnResizeService.setColumnsWidth(
-            this._visibleColumns.map(column => column.name),
+            this._visibleColumns.map((column) => column.name),
             this.freezeColumnsTo,
-            this._selectionColumnWidth + this._semanticHighlightingColumnWidth,
+            this._selectionColumnWidth + this._semanticHighlightingColumnWidth
         );
         this._setFreezableInfo();
 
@@ -918,9 +931,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     _emitRowsRearrangeEvent(row: TableRow, previousIndex: number, newIndex: number): void {
         const rows = this._tableRows.map(({ value }) => value);
 
-        this.rowsRearrange.emit(
-            new TableRowsRearrangeEvent(row.value, previousIndex, newIndex, rows)
-        );
+        this.rowsRearrange.emit(new TableRowsRearrangeEvent(row.value, previousIndex, newIndex, rows));
     }
 
     /**
@@ -965,7 +976,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         const key = this._rtl ? 'right' : 'left';
         return { [key]: this._semanticHighlightingColumnWidth + 'px' };
     }
-    
+
     _getRowClasses(row: TableRow<T>): string {
         const treeRowClass = this._isTreeRow(row) ? 'fdp-table__row--tree' : '';
         const rowClasses = this._getRowCustomCssClasses(row);
@@ -980,16 +991,16 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         if (this._freezableColumns.includes(column.name)) {
             const key = this._rtl ? 'margin-right.px' : 'margin-left.px';
             styles[key] =
-                this._semanticHighlightingColumnWidth
-                + this._selectionColumnWidth
-                + this._tableColumnResizeService.getPrevColumnsWidth(column.name);
+                this._semanticHighlightingColumnWidth +
+                this._selectionColumnWidth +
+                this._tableColumnResizeService.getPrevColumnsWidth(column.name);
         }
 
         const columnWidth = this._tableColumnResizeService.getColumnWidthStyle(column);
         styles['min-width'] = columnWidth;
         styles['max-width'] = columnWidth;
 
-        if (!this._isShownSelectionColumn && !this.semanticHighlighting || this.freezeColumnsTo) {
+        if ((!this._isShownSelectionColumn && !this.semanticHighlighting) || this.freezeColumnsTo) {
             styles['width'] = columnWidth;
         }
 
@@ -1081,12 +1092,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     _dragDropItemDrop(event: FdDropEvent<TableRow>): void {
         /** After timeout to make click event handled first */
         this._ngZone.runOutsideAngular(() => {
-            setTimeout(() => this._dragDropInProgress = false);
+            setTimeout(() => (this._dragDropInProgress = false));
         });
 
         if (this.isTreeTable && event.draggedItemIndex !== event.replacedItemIndex) {
-            const dragRow = this._tableRows.find(row => row === this._tableRowsVisible[event.draggedItemIndex]);
-            const dropRow = this._tableRows.find(row => row === this._tableRowsVisible[event.replacedItemIndex]);
+            const dragRow = this._tableRows.find((row) => row === this._tableRowsVisible[event.draggedItemIndex]);
+            const dropRow = this._tableRows.find((row) => row === this._tableRowsVisible[event.replacedItemIndex]);
 
             if (!dragRow || !dropRow || this._isDroppedInsideItself(dropRow, dragRow)) {
                 return;
@@ -1125,7 +1136,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     private _isDroppedInsideItself(dropRow: TableRow, dragRow: TableRow): boolean {
         const dropRowParents = this._getRowParents(dropRow);
-        return !!dropRowParents.find(row => row === dragRow);
+        return !!dropRowParents.find((row) => row === dragRow);
     }
 
     /** @hidden */
@@ -1154,7 +1165,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         }
 
         const children = this._findRowChildren(dragRow);
-        children.forEach(row => {
+        children.forEach((row) => {
             const updatedRowLevel = this._getRowParents(row).length;
             row.level = updatedRowLevel;
         });
@@ -1164,22 +1175,18 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     private _dragDropRearrangeTreeRows(dragRow: TableRow, dropRow: TableRow): void {
         const allRows = this._tableRows;
 
-        const dragRowIndex = allRows.findIndex(row => row === dragRow);
+        const dragRowIndex = allRows.findIndex((row) => row === dragRow);
         const dragRowChildren = this._findRowChildren(dragRow);
 
         const rowsToMove = allRows.splice(dragRowIndex, dragRowChildren.length + 1);
 
-        const dropRowIndex = allRows.findIndex(row => row === dropRow);
+        const dropRowIndex = allRows.findIndex((row) => row === dropRow);
         const dropRowChildren = this._findRowChildren(dropRow);
 
         const rowsBefore = allRows.slice(0, dropRowIndex + dropRowChildren.length + 1);
         const rowsAfter = allRows.slice(dropRowIndex + dropRowChildren.length + 1);
 
-        this._tableRows = [
-            ...rowsBefore,
-            ...rowsToMove,
-            ...rowsAfter
-        ];
+        this._tableRows = [...rowsBefore, ...rowsToMove, ...rowsAfter];
     }
 
     /** @hidden */
@@ -1219,8 +1226,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                         this.isTreeTable
                             ? of(rows)
                             : this._groupRulesMapSubject.pipe(
-                                map((groupRules) => this._groupTableRows(rows, groupRules.values()))
-                            )
+                                  map((groupRules) => this._groupTableRows(rows, groupRules.values()))
+                              )
                     )
                 )
                 .subscribe((rows) => {
@@ -1321,13 +1328,12 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         const selectedRowsMap = this._getSelectionStatusByRowValue(source);
 
-        return source
-            .map((item: T, index: number) => {
-                const row = new TableRow(TableRowType.ITEM, !!selectedRowsMap.get(item), index, item);
-                row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
+        return source.map((item: T, index: number) => {
+            const row = new TableRow(TableRowType.ITEM, !!selectedRowsMap.get(item), index, item);
+            row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
 
-                return row;
-            });
+            return row;
+        });
     }
 
     /** @hidden */
@@ -1337,10 +1343,16 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         const selectedRowsMap = this._getSelectionStatusByRowValue(source);
 
         source.forEach((item: T, index: number) => {
-            const hasChildren = item.hasOwnProperty(this.relationKey)
-                && Array.isArray(item[this.relationKey])
-                && item[this.relationKey].length;
-            const row = new TableRow(hasChildren ? TableRowType.TREE : TableRowType.ITEM, !!selectedRowsMap.get(item), index, item);
+            const hasChildren =
+                item.hasOwnProperty(this.relationKey) &&
+                Array.isArray(item[this.relationKey]) &&
+                item[this.relationKey].length;
+            const row = new TableRow(
+                hasChildren ? TableRowType.TREE : TableRowType.ITEM,
+                !!selectedRowsMap.get(item),
+                index,
+                item
+            );
 
             row.expanded = false;
             row.navigatable = this._isRowNavigatable(item, this.rowNavigatable);
@@ -1349,7 +1361,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             if (hasChildren) {
                 const children = this._createTreeTableRowsByDataSourceItems(item[this.relationKey]);
 
-                children.forEach(c => {
+                children.forEach((c) => {
                     c.parent = c.parent || row;
                     c.level = c.parent.level + 1;
                     c.hidden = true;
@@ -1362,11 +1374,11 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         return rows;
     }
 
-    /** 
+    /**
      * @hidden
      * Runs `rowComparator` function against checked rows and compares them with the new `source`
      * If matched, creates an association between the source item and checked status of corresponding row.
-     * 
+     *
      * @returns `Map` object with the `checked` status for particular source item
      */
     private _getSelectionStatusByRowValue(source: T[]): Map<T, boolean> {
@@ -1419,9 +1431,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     private _calculateVisibleColumns(): void {
         const columnsDefinition = this.getTableColumns();
         const { columns, groupBy } = this.getTableState();
-        const groupedColumnsToHide = groupBy
-            .filter(({ showAsColumn }) => !showAsColumn)
-            .map(({ field }) => field);
+        const groupedColumnsToHide = groupBy.filter(({ showAsColumn }) => !showAsColumn).map(({ field }) => field);
 
         this._visibleColumns = columns // need to start mapping from state.columns list to keep right order
             .map((name) => columnsDefinition.find((column) => column.name === name))
@@ -1438,7 +1448,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _calculateIsShownNavigationColumn(): void {
-        this._isShownNavigationColumnSubject.next(this._tableRows.some(tableRow => tableRow.navigatable));
+        this._isShownNavigationColumnSubject.next(this._tableRows.some((tableRow) => tableRow.navigatable));
     }
 
     /** @hidden */
@@ -1448,9 +1458,9 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         const freezeToNextColumnName = this._visibleColumns[this._freezableColumns.length]?.name;
 
         this._tablePadding =
-            this._semanticHighlightingColumnWidth
-            + this._selectionColumnWidth
-            + this._tableColumnResizeService.getPrevColumnsWidth(freezeToNextColumnName);
+            this._semanticHighlightingColumnWidth +
+            this._selectionColumnWidth +
+            this._tableColumnResizeService.getPrevColumnsWidth(freezeToNextColumnName);
     }
 
     /** @hidden */
@@ -1871,18 +1881,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** @hidden */
     private _listenToColumnPropertiesChange(): void {
-        this._subscriptions.add(
-            this._tableService.markForCheck$
-                .subscribe(() => this._cdr.markForCheck())
-        );
+        this._subscriptions.add(this._tableService.markForCheck$.subscribe(() => this._cdr.markForCheck()));
     }
 
     /** @hidden */
     private _listenToColumnsWidthChange(): void {
         this._subscriptions.add(
-            this._tableService.tableColumnsWidth$
-                .subscribe(() => this.recalculateTableColumnWidth())
-        )
+            this._tableService.tableColumnsWidth$.subscribe(() => this.recalculateTableColumnWidth())
+        );
     }
 
     /** @hidden */
@@ -1902,12 +1908,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     private _trackContentDensityChanges(): void {
         if (this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener
-                .pipe(filter(() => !this.contentDensityManuallySet))
-                .subscribe((density) => {
-                    this.contentDensity = density as ContentDensityEnum;
-                    this._cdr.markForCheck();
-                }))
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener
+                    .pipe(filter(() => !this.contentDensityManuallySet))
+                    .subscribe((density) => {
+                        this.contentDensity = density as ContentDensityEnum;
+                        this._cdr.markForCheck();
+                    })
+            );
         }
     }
 

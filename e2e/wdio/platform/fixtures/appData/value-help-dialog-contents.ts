@@ -1,11 +1,4 @@
-export const inputIDs = [
-    'inputname',
-    'inputcode',
-    'inputcity',
-    'inputzipcode',
-    'inputaddress',
-    'inputnickname'
-];
+export const inputIDs = ['inputname', 'inputcode', 'inputcity', 'inputzipcode', 'inputaddress', 'inputnickname'];
 
 export const conditionsValues = [
     '*0*',

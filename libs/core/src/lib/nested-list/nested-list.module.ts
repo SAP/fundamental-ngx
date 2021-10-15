@@ -20,12 +20,7 @@ import { NestedListContentDirective } from './nested-content/nested-list-content
 import { IconModule } from '@fundamental-ngx/core/icon';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        PopoverModule,
-        RouterModule,
-        IconModule
-    ],
+    imports: [CommonModule, PopoverModule, RouterModule, IconModule],
     declarations: [
         NestedListDirective,
         NestedLinkDirective,
@@ -50,10 +45,6 @@ import { IconModule } from '@fundamental-ngx/core/icon';
         NestedListExpandIconComponent,
         NestedListContentDirective
     ],
-    providers: [
-        MenuKeyboardService,
-        NestedListKeyboardService,
-        NestedListStateService
-    ]
+    providers: [MenuKeyboardService, NestedListKeyboardService, NestedListStateService]
 })
 export class NestedListModule {}

@@ -29,12 +29,14 @@ describe('ScrollSpyDirective', () => {
 
     let directive, directiveInstance;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ScrollSpyDirective, ScrollSpyTestComponent],
-            providers: [{ provide: ElementRef, useClass: MockElementRef }]
-        });
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [ScrollSpyDirective, ScrollSpyTestComponent],
+                providers: [{ provide: ElementRef, useClass: MockElementRef }]
+            });
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ScrollSpyTestComponent);

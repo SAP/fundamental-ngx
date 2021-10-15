@@ -1,9 +1,15 @@
 import { FormMessagePo } from '../pages/form-message.po';
 import {
-    click, getElementPlaceholder, getText,
+    click,
+    getElementPlaceholder,
+    getText,
     getValue,
-    isElementClickable, mouseHoverElement,
-    refreshPage, scrollIntoView, setValue, waitForPresent
+    isElementClickable,
+    mouseHoverElement,
+    refreshPage,
+    scrollIntoView,
+    setValue,
+    waitForPresent
 } from '../../driver/wdio';
 
 import {
@@ -16,10 +22,10 @@ import {
     eventMessageTextArea
 } from '../fixtures/appData/form-message-contents';
 
-describe('Form Message test suite:', function() {
-
+describe('Form Message test suite:', () => {
     const formMessagePage = new FormMessagePo();
-    const { messageWithInput, messageWithInputGroup, buttons, messageInformation, messageWithTextArea, inputFields } = formMessagePage;
+    const { messageWithInput, messageWithInputGroup, buttons, messageInformation, messageWithTextArea, inputFields } =
+        formMessagePage;
 
     beforeAll(() => {
         formMessagePage.open();
@@ -66,12 +72,10 @@ describe('Form Message test suite:', function() {
         expect(getText(messageInformation)).toBe(eventMessageTextArea);
     });
 
-    xdescribe('Check visual regression', function() {
-
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             formMessagePage.saveExampleBaselineScreenshot();
             expect(formMessagePage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
-

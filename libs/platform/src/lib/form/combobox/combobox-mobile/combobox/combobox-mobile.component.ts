@@ -28,7 +28,6 @@ import { COMBOBOX_COMPONENT, ComboboxInterface } from '../../combobox.interface'
     encapsulation: ViewEncapsulation.None
 })
 export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> implements OnInit, OnDestroy {
-
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
@@ -38,8 +37,8 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
      * List element, which will be rendered inside dialog.
      */
     childContent: {
-        listTemplate: TemplateRef<any>,
-        controlTemplate: TemplateRef<any>
+        listTemplate: TemplateRef<any>;
+        controlTemplate: TemplateRef<any>;
     } = null;
 
     /** @hidden */
@@ -88,30 +87,23 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
 
     /** @hidden */
     private _listenOnMultiInputOpenChange(): void {
-        this._component.openChange
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(isOpen => this._toggleDialog(isOpen));
+        this._component.openChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 
     /** @hidden */
     private _open(): void {
-        this.dialogRef = this._dialogService.open(
-            this.dialogTemplate,
-            {
-                mobile: true,
-                verticalPadding: false,
-                ...this.dialogConfig,
-                backdropClickCloseable: false,
-                escKeyCloseable: false,
-                container: this._elementRef.nativeElement
-            }
-        );
+        this.dialogRef = this._dialogService.open(this.dialogTemplate, {
+            mobile: true,
+            verticalPadding: false,
+            ...this.dialogConfig,
+            backdropClickCloseable: false,
+            escKeyCloseable: false,
+            container: this._elementRef.nativeElement
+        });
 
         // Have to fire "detectChanges" to fix "ExpressionChangedAfterItHasBeenCheckedError"
-        this.dialogRef.afterLoaded
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(() => {
-                this._component.detectChanges();
-            });
+        this.dialogRef.afterLoaded.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
+            this._component.detectChanges();
+        });
     }
 }

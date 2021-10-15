@@ -77,7 +77,7 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
     /** @hidden */
     ngAfterContentInit(): void {
         if (this._rtlService) {
-            this._subscriptions.add(this._rtlService.rtl.subscribe(isRtl => this._isRtl = isRtl));
+            this._subscriptions.add(this._rtlService.rtl.subscribe((isRtl) => (this._isRtl = isRtl)));
         }
 
         if (!this.disabled) {
@@ -174,13 +174,12 @@ export class ResizeDirective implements OnChanges, AfterContentInit, OnDestroy {
 
     /** @hidden Return boundary container */
     private _findResizeContainer(): Element {
-        let resizeContainer: Element | null
+        let resizeContainer: Element | null;
         if (typeof this.resizeBoundary === 'string') {
             resizeContainer = closestElement(this.resizeBoundary, this._elementRef.nativeElement);
         } else {
-            resizeContainer = this.resizeBoundary
+            resizeContainer = this.resizeBoundary;
         }
-
 
         if (resizeContainer) {
             return resizeContainer;

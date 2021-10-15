@@ -4,6 +4,4 @@ import { Component } from '@angular/core';
     selector: 'fd-panel-fixed-example',
     templateUrl: './panel-fixed-example.component.html'
 })
-export class PanelFixedExampleComponent {
-    
-}
+export class PanelFixedExampleComponent {}

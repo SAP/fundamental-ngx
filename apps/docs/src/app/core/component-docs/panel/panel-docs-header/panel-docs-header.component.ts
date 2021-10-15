@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './panel-docs-header.component.html',
     styleUrls: ['./panel-docs-header.component.scss']
 })
-export class PanelDocsHeaderComponent { }
+export class PanelDocsHeaderComponent {}

@@ -23,10 +23,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, InputGroupModule],
     exports: [RouterModule],
-    declarations: [
-        examples,
-        InputGroupDocsComponent,
-        InputGroupHeaderComponent
-    ]
+    declarations: [examples, InputGroupDocsComponent, InputGroupHeaderComponent]
 })
-export class InputGroupDocsModules { }
+export class InputGroupDocsModules {}

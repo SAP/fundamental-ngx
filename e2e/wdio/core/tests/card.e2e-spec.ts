@@ -3,29 +3,78 @@ import {
     isElementDisplayed,
     getAttributeByName,
     getText,
-    waitForElDisplayed, getElementClass, scrollIntoView
+    waitForElDisplayed,
+    getElementClass,
+    scrollIntoView
 } from '../../driver/wdio';
 import { checkElArrIsClickable, checkElementText, checkElementTextValue } from '../../helper/assertion-helper';
-import {cardTitleArr, compactAttr, analyticsTitle, badgeText, barChartCounterText, barChartItemsText, barChartTitleText, btnText,
-cardListItemText, cardSubtitleText, cardTypeAttr, loaderAttr,
-tableCardCountries, tableCardNames, tableCardPrices, tableCardStatuses, tableCardTitle, tableHeaderText} from '../fixtures/appData/card-content';
+import {
+    cardTitleArr,
+    compactAttr,
+    analyticsTitle,
+    badgeText,
+    barChartCounterText,
+    barChartItemsText,
+    barChartTitleText,
+    btnText,
+    cardListItemText,
+    cardSubtitleText,
+    cardTypeAttr,
+    loaderAttr,
+    tableCardCountries,
+    tableCardNames,
+    tableCardPrices,
+    tableCardStatuses,
+    tableCardTitle,
+    tableHeaderText
+} from '../fixtures/appData/card-content';
 
-describe('Card test suite:', function() {
+describe('Card test suite:', () => {
     const cardPage = new CardPo();
     const {
-        cardTitle, cardHeader, cardListItems, cardAvatar, cardSubtitle, cardCounter, cardBadge, cardAttr,
-        compactCardHeader, compactCardListItems, compactCardAttr, loaderCardAttr, loaderIcon, ftCardHeader,
-        ftCardListItems, ftFooter, ftButtons, kpiCardHeader, kpiCardTitle, kpiAnalyticsHeaderIcons, kpiAnalyticsHeader,
-        kpiHeaderSubtitle, kpiCardContent, kpiCardChart, tableCardHeader, tableCardTableHeader, tableCardItems,
-        tableCardItemNames, tableCardItemCountries, tableCardItemPrices, tableCardItemStatuses, barChartHeader,
-        barChartTitle, barChartCounter, barChartItems, barCharBars
+        cardTitle,
+        cardHeader,
+        cardListItems,
+        cardAvatar,
+        cardSubtitle,
+        cardCounter,
+        cardBadge,
+        cardAttr,
+        compactCardHeader,
+        compactCardListItems,
+        compactCardAttr,
+        loaderCardAttr,
+        loaderIcon,
+        ftCardHeader,
+        ftCardListItems,
+        ftFooter,
+        ftButtons,
+        kpiCardHeader,
+        kpiCardTitle,
+        kpiAnalyticsHeaderIcons,
+        kpiAnalyticsHeader,
+        kpiHeaderSubtitle,
+        kpiCardContent,
+        kpiCardChart,
+        tableCardHeader,
+        tableCardTableHeader,
+        tableCardItems,
+        tableCardItemNames,
+        tableCardItemCountries,
+        tableCardItemPrices,
+        tableCardItemStatuses,
+        barChartHeader,
+        barChartTitle,
+        barChartCounter,
+        barChartItems,
+        barCharBars
     } = cardPage;
 
     beforeAll(() => {
         cardPage.open();
     }, 1);
 
-    describe('Standard card examples:', function() {
+    describe('Standard card examples:', () => {
         it('should check card header', () => {
             checkElArrIsClickable(cardHeader);
             checkElementTextValue(cardTitle, cardTitleArr);
@@ -44,7 +93,7 @@ describe('Card test suite:', function() {
         });
     });
 
-    describe('Compact examples:', function() {
+    describe('Compact examples:', () => {
         it('should check its compact and do basic checks', () => {
             expect(getElementClass(compactCardAttr)).toBe(compactAttr);
             checkElementText(compactCardHeader);
@@ -54,14 +103,14 @@ describe('Card test suite:', function() {
         });
     });
 
-    describe('Card loader examples:', function() {
+    describe('Card loader examples:', () => {
         it('should check loading icon and attributes', () => {
             expect(getAttributeByName(loaderCardAttr, 'title')).toBe(loaderAttr);
             expect(isElementDisplayed(loaderIcon)).toBe(true);
         });
     });
 
-    describe('Card footer examples:', function() {
+    describe('Card footer examples:', () => {
         it('should do basic checks', () => {
             checkElArrIsClickable(ftCardHeader);
             checkElArrIsClickable(ftCardListItems);
@@ -76,7 +125,7 @@ describe('Card test suite:', function() {
         });
     });
 
-    describe('Analytical card examples:', function() {
+    describe('Analytical card examples:', () => {
         it('should check header', () => {
             scrollIntoView(kpiCardHeader);
             checkElArrIsClickable(kpiAnalyticsHeader);
@@ -92,7 +141,7 @@ describe('Card test suite:', function() {
         });
     });
 
-    describe('Table card examples:', function() {
+    describe('Table card examples:', () => {
         it('should check header', () => {
             checkElArrIsClickable(tableCardHeader);
             expect(getText(tableCardHeader)).toBe(tableCardTitle);
@@ -108,7 +157,7 @@ describe('Card test suite:', function() {
         });
     });
 
-    describe('Bar chart list examples:', function() {
+    describe('Bar chart list examples:', () => {
         it('should check header', () => {
             checkElArrIsClickable(barChartHeader);
             expect(getText(barChartTitle)).toBe(barChartTitleText);
@@ -121,7 +170,7 @@ describe('Card test suite:', function() {
         });
     });
 
-    describe('Check orientation:', function() {
+    describe('Check orientation:', () => {
         it('should check LTR and RTL', () => {
             cardPage.checkRtlSwitch();
         });

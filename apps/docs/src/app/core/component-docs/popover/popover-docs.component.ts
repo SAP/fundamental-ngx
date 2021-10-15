@@ -226,13 +226,13 @@ export class PopoverDocsComponent {
         {
             language: 'html',
             code: mobilePopoverHtmlSrc,
-            fileName: 'popover-mobile-example',
+            fileName: 'popover-mobile-example'
         },
         {
             language: 'typescript',
             component: 'PopoverMobileExampleComponent',
             code: mobilePopoverTsSrc,
-            fileName: 'popover-mobile-example',
-        },
+            fileName: 'popover-mobile-example'
+        }
     ];
 }

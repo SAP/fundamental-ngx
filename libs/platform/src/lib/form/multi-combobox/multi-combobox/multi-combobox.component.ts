@@ -113,8 +113,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
         this._rtlService?.rtl
             .pipe(takeUntil(this._destroyed))
-            .subscribe(isRtl => (this._direction = isRtl ? 'rtl' : 'ltr'));
-
+            .subscribe((isRtl) => (this._direction = isRtl ? 'rtl' : 'ltr'));
 
         this._connectedOverlay?.attach
             .pipe(takeUntil(this._destroyed))
@@ -173,7 +172,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
      *  *select* attribute – if *true* select all, if *false* unselect all
      * */
     handleSelectAllItems(select: boolean): void {
-        this._flatSuggestions.forEach(item => (item.selected = select));
+        this._flatSuggestions.forEach((item) => (item.selected = select));
         this._selected = select ? [...this._flatSuggestions] : [];
 
         this._propagateChange();
@@ -318,7 +317,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
     /** @hidden */
     private _getTokenIndexByLabelOrValue(item: SelectableOptionItem): number {
-        return this._selected.findIndex(token => (token.label === item.label) || (token.value === item.value));
+        return this._selected.findIndex((token) => token.label === item.label || token.value === item.value);
     }
 
     /** @hidden */
@@ -329,7 +328,9 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
         for (let i = 0; i <= this.selectedItems.length; i++) {
             const selectedItem = this.selectedItems[i];
-            const idx = this._flatSuggestions.findIndex(item => (item.label === selectedItem) || (item.value === selectedItem));
+            const idx = this._flatSuggestions.findIndex(
+                (item) => item.label === selectedItem || item.value === selectedItem
+            );
             if (idx !== -1) {
                 this._selected.push(this._flatSuggestions[idx]);
                 this._flatSuggestions[idx].selected = true;

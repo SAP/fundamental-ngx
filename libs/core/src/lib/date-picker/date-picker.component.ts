@@ -69,7 +69,6 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit, ControlValueAccessor, Validator {
-
     /** The type of calendar, 'single' for single date selection or 'range' for a range of dates. */
     @Input()
     type: CalendarType = 'single';
@@ -257,8 +256,8 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
     _calendarComponent: CalendarComponent<D>;
 
     /** @hidden */
-    @ViewChild('inputGroupComponent', { read: ElementRef  })
-    _inputGroupElement: ElementRef
+    @ViewChild('inputGroupComponent', { read: ElementRef })
+    _inputGroupElement: ElementRef;
 
     /** @hidden The value of the input */
     _inputFieldDate: string = null;
@@ -334,10 +333,12 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
             this._changeDetectionRef.detectChanges();
         });
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this._changeDetectionRef.markForCheck();
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._changeDetectionRef.markForCheck();
+                })
+            );
         }
     }
 
@@ -448,9 +449,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(
-        control: AbstractControl
-    ): {
+    validate(control: AbstractControl): {
         [key: string]: any;
     } {
         return this.isModelValid()
@@ -567,7 +566,7 @@ export class DatePickerComponent<D> implements OnInit, OnDestroy, AfterViewInit,
         } else {
             if (!dateStr) {
                 this._isInvalidDateInput = !this.allowNull;
-                this.selectedRangeDate =  {start: null, end: null};
+                this.selectedRangeDate = { start: null, end: null };
                 this._refreshCurrentlyDisplayedCalendarDate(this.selectedRangeDate.start);
                 this.onChange(this.selectedRangeDate);
                 this.selectedRangeDateChange.emit(this.selectedRangeDate);

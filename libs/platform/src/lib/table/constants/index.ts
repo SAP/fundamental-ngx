@@ -11,7 +11,7 @@ export const DEFAULT_TABLE_PAGE: Readonly<CollectionPage> = {
 export const DEFAULT_TABLE_SEARCH_INPUT: Readonly<SearchInput> = {
     text: '',
     category: ''
-}
+};
 
 export const DEFAULT_TABLE_STATE: Readonly<TableState> = {
     sortBy: [],

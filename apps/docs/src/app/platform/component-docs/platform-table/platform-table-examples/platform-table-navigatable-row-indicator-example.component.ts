@@ -2,7 +2,13 @@ import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { FdDate } from '@fundamental-ngx/core/datetime';
-import { TableComponent, TableDataProvider, TableDataSource, TableState, TableRowActivateEvent } from '@fundamental-ngx/platform/table';
+import {
+    TableComponent,
+    TableDataProvider,
+    TableDataSource,
+    TableState,
+    TableRowActivateEvent
+} from '@fundamental-ngx/platform/table';
 
 @Component({
     selector: 'fdp-platform-table-navigatable-row-indicator-example',
@@ -10,7 +16,6 @@ import { TableComponent, TableDataProvider, TableDataSource, TableState, TableRo
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformTableNavigatableRowIndicatorExampleComponent {
-
     source: TableDataSource<ExampleItem>;
 
     @ViewChild(TableComponent)
@@ -21,7 +26,7 @@ export class PlatformTableNavigatableRowIndicatorExampleComponent {
     }
 
     setRowNavigation(): void {
-        this.table.setRowNavigation(1, true)
+        this.table.setRowNavigation(1, true);
     }
 
     removeRowNavigation(): void {
@@ -44,13 +49,13 @@ export interface ExampleItem {
     statusColor?: string;
     date: FdDate;
     verified: boolean;
-    navigatable?: boolean
+    navigatable?: boolean;
 }
 
 /**
  * Table Data Provider Example
  */
- export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
+export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
     items: ExampleItem[] = [...ITEMS];
     totalItems = ITEMS.length;
 
