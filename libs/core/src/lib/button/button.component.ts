@@ -3,6 +3,7 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    HostListener,
     Input,
     OnChanges,
     OnDestroy,
@@ -54,6 +55,12 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
 
     /** @hidden */
     private _subscriptions = new Subscription();
+
+    /** Forces the focus outline around the button, which is not default behavior in Safari. */
+    @HostListener('click', ['$event'])
+    clicked(event: MouseEvent): void {
+        (event.target as HTMLElement).focus();
+    }
 
     /** @hidden */
     constructor(
