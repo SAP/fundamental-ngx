@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.28 (2021-10-15)
+
+
+### Bug Fixes
+
+* **core:** fix a11y issue for token component ([#6824](https://github.com/SAP/fundamental-ngx/issues/6824)) ([8ce8751](https://github.com/SAP/fundamental-ngx/commit/8ce8751ac9bee78043bd0a249dfa8f66b7f1eba6))
+
 ## 0.33.0-rc.27 (2021-10-15)
 
 ## 0.33.0-rc.26 (2021-10-14)
