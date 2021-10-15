@@ -53,6 +53,10 @@ export class TokenizerComponent
     @Input()
     disableKeyboardDeletion = false;
 
+    /** role description for tokenizer component */
+    @Input()
+    ariaRoleDescription = 'tokenizer';
+
     /** @hidden */
     @ContentChildren(forwardRef(() => TokenComponent))
     tokenList: QueryList<TokenComponent>;
