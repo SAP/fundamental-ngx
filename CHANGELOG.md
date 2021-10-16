@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.29 (2021-10-16)
+
+
+### Features
+
+* **fn:** add experimental library to fundamental-ngx ([#6924](https://github.com/SAP/fundamental-ngx/issues/6924)) ([e8537fe](https://github.com/SAP/fundamental-ngx/commit/e8537fec0f1abd5b6539dc7e423e5711f56abaeb))
+
 ## 0.33.0-rc.28 (2021-10-15)
 
 
