@@ -4,7 +4,6 @@ import {
     ElementRef,
     Host,
     HostBinding,
-    Inject,
     Input,
     OnChanges,
     OnDestroy,
