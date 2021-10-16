@@ -849,6 +849,7 @@
                 "fn-checkbox",
                 "fn-switch",
                 "fn-search",
+                "fn-select",
                 "fn-slider"
             ]
         },

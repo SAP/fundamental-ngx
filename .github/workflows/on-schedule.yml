@@ -73,6 +73,42 @@ jobs:
                   key: dist-platform-${{ github.run_id }}
             - run: npx nx build platform --prod --with-deps --runner cloud
 
+    # build moment-adapter
+    build-moment-adapter:
+        needs: build-core
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/cache@v2
+              with:
+                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
+                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
+            - uses: actions/cache@v2
+              with:
+                  path: dist/libs/core
+                  key: dist-core-${{ github.run_id }}
+            - uses: actions/cache@v2
+              with:
+                  path: dist/libs/platform
+                  key: dist-platform-${{ github.run_id }}
+            - run: npx nx build moment-adapter --configuration=production --with-deps --runner cloud
+
+    # build fn
+    build-fn:
+        needs: build-core
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/cache@v2
+              with:
+                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
+                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
+            - uses: actions/cache@v2
+              with:
+                  path: dist/libs/core
+                  key: dist-core-${{ github.run_id }}
+            - run: npx nx build fn --configuration=production --with-deps --runner cloud
+
     # build docs
     build-docs:
         needs: [build-core, build-platform]

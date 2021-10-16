@@ -123,6 +123,22 @@ jobs:
                   key: dist-platform-${{ github.run_id }}
             - run: npx nx build moment-adapter --configuration=production --with-deps --runner cloud
 
+    # build fn
+    build-fn:
+        needs: build-core
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/cache@v2
+              with:
+                  path: ${{ env.CACHE_NODE_MODULES_PATH }}
+                  key: node_modules-${{ hashFiles('**/package-lock.json') }}
+            - uses: actions/cache@v2
+              with:
+                  path: dist/libs/core
+                  key: dist-core-${{ github.run_id }}
+            - run: npx nx build fn --configuration=production --with-deps --runner cloud
+
     # build docs
     build-docs:
         #    needs: [build-core, build-platform]
@@ -176,7 +192,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                lib: [core, platform, docs, moment-adapter]
+                lib: [core, platform, docs, moment-adapter, fn]
         steps:
             - uses: actions/checkout@v2
             - uses: actions/cache@v2
@@ -317,4 +333,8 @@ jobs:
             - uses: JS-DevTools/npm-publish@v1
               with:
                   package: 'dist/libs/moment-adapter/package.json'
+                  token: ${{ secrets.NPM_TOKEN }}
+            - uses: JS-DevTools/npm-publish@v1
+              with:
+                  package: 'dist/libs/fn/package.json'
                   token: ${{ secrets.NPM_TOKEN }}
