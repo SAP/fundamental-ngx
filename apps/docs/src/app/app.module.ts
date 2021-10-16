@@ -10,12 +10,25 @@ import { AppComponent } from './app.component';
 const routes: Routes = [
     {
         path: 'core',
+        data: {
+            library: 'Core'
+        },
         loadChildren: () => import('./core/core-documentation.module').then((m) => m.CoreDocumentationModule)
     },
     {
         path: 'platform',
+        data: {
+            library: 'Platform'
+        },
         loadChildren: () =>
             import('./platform/platform-documentation.module').then((m) => m.PlatformDocumentationModule)
+    },
+    {
+        path: 'fn',
+        data: {
+            library: 'Experimental'
+        },
+        loadChildren: () => import('./fn/fn-documentation.module').then((m) => m.ExperimentalDocumentationModule)
     },
     { path: '', redirectTo: 'core', pathMatch: 'full' }
 ];

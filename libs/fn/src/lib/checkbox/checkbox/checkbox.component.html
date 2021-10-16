@@ -1,0 +1,34 @@
+<label
+    class="fn-checkbox"
+    [class.fn-checkbox--group]="isGroup"
+    [attr.tabindex]="tabIndexValue || 0"
+    (keydown)="keydownHandler($event)"
+    (click)="$event.stopPropagation()"
+>
+    <input
+        #inputLabel
+        type="checkbox"
+        class="fn-checkbox__input"
+        [id]="inputId"
+        [name]="name"
+        [disabled]="disabled"
+        tabindex="-1"
+        [attr.aria-label]="ariaLabel"
+        [attr.aria-labelledby]="ariaLabelledBy"
+        [attr.aria-describedby]="ariaDescribedBy"
+        [attr.aria-disabled]="disabled"
+        [attr.aria-required]="required"
+        [ngModel]="isChecked"
+        (ngModelChange)="nextValue()"
+    />
+    <span class="fn-checkbox__checkmark"></span>
+    <span class="fn-checkbox__label">
+        <ng-container *ngIf="label">
+            {{ label }}
+        </ng-container>
+
+        <ng-container *ngIf="!label">
+            <ng-content></ng-content>
+        </ng-container>
+    </span>
+</label>

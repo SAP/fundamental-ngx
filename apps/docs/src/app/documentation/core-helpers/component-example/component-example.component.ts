@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { NotificationService } from '@fundamental-ngx/core/notification';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { RtlService } from '@fundamental-ngx/core/utils';
@@ -8,7 +8,7 @@ let componentExampleUniqueId = 0;
 @Component({
     selector: 'component-example',
     template: `
-        <div class="docs-tile docs-component docs-tile-example-background" [id]="id">
+        <div class="docs-tile docs-component" [class.docs-tile-example-background]="hasBackground" [id]="id">
             <div class="docs-tile__content docs-tile-content-example">
                 <div class="component-example__features">
                     <rtl-switch [label]="id2"></rtl-switch>
@@ -30,6 +30,9 @@ let componentExampleUniqueId = 0;
     encapsulation: ViewEncapsulation.None
 })
 export class ComponentExampleComponent implements OnInit {
+    @Input()
+    hasBackground = true;
+
     id: string;
     id2: string;
 
