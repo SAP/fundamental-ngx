@@ -54,7 +54,7 @@ export class ExperimentalSliderComponent
     /** Whether or not slider should be rendered as vertical. */
     @Input()
     @HostBinding('class.fn-slider--vertical')
-    vertical: boolean = false;
+    vertical = false;
 
     /** User's custom classes */
     @Input()
@@ -349,7 +349,7 @@ export class ExperimentalSliderComponent
 
         const diff = event.shiftKey ? this.jump : this.step;
         let newValue: number | SliderTickMark | null = null;
-        let prevValue = this._position as number;
+        const prevValue = this._position as number;
         if (this.isRtl()) {
             if (KeyUtil.isKeyCode(event, LEFT_ARROW) || KeyUtil.isKeyCode(event, UP_ARROW)) {
                 newValue = prevValue + diff;

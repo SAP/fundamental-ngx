@@ -51,7 +51,7 @@ export class ExperimentalFormItemComponent implements CssClassBuilder, OnInit, O
 
     constructor(private _elementRef: ElementRef) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.buildComponentCssClass();
     }
 
