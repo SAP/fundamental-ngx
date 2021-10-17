@@ -22,9 +22,13 @@ import { DialogContentType } from '../dialog-service/dialog.service';
 /** Dialog container where the dialog content is embedded. */
 @Component({
     selector: 'fd-dialog-container',
-    template: '<ng-container #contentContainer></ng-container>'
+    template: '<ng-container #contentContainer></ng-container>',
+    styleUrls: ['./dialog-container.component.scss']
 })
-export class DialogContainerComponent extends DynamicComponentContainer<DialogContentType> implements AfterViewInit, CssClassBuilder {
+export class DialogContainerComponent
+    extends DynamicComponentContainer<DialogContentType>
+    implements AfterViewInit, CssClassBuilder
+{
     /** Custom classes */
     @Input()
     set class(userClass: string) {
@@ -58,10 +62,7 @@ export class DialogContainerComponent extends DynamicComponentContainer<DialogCo
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return [
-            this.dialogConfig.containerClass ? this.dialogConfig.containerClass : '',
-            this._class
-        ];
+        return [this.dialogConfig.containerClass ? this.dialogConfig.containerClass : '', this._class];
     }
 
     /** @hidden */

@@ -57,7 +57,6 @@ export class FdpSelectionChangeEvent {
 
 @Directive()
 export abstract class BaseSelect extends CollectionBaseInput implements OnInit, AfterViewInit, OnDestroy {
-
     /** Provides maximum default height for the optionPanel */
     @Input()
     maxHeight = '250px';
@@ -106,16 +105,12 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     @Input()
     width: string;
 
-    /** Holds the message with respect to state */
-    @Input()
-    stateMessage: string;
-
     /** Whether the select component is readonly. */
     @Input()
     readonly = false;
 
     /** Placeholder for the select. Appears in the
-    * triggerbox if no option is selected. */
+     * triggerbox if no option is selected. */
     @Input()
     placeholder: string;
 
@@ -174,8 +169,8 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     minWidth?: number;
 
     /**
-    * Max width of list container
-    * */
+     * Max width of list container
+     * */
     @Input()
     maxWidth?: number;
 
@@ -269,7 +264,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     /** @hidden */
     private _element: HTMLElement = this.elementRef.nativeElement;
 
-
     constructor(
         readonly cd: ChangeDetectorRef,
         protected readonly elementRef: ElementRef,
@@ -284,14 +278,16 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
 
     /** @hidden
      * extended by super class
-    */
+     */
     ngOnInit(): void {
         if (this.contentDensity === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this._isCompact = density !== 'cozy';
-                this.cd.markForCheck();
-            }))
-         }
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this._isCompact = density !== 'cozy';
+                    this.cd.markForCheck();
+                })
+            );
+        }
     }
 
     /** @hidden */
@@ -370,7 +366,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
         }
     }
 
-
     /** @hidden */
     showList(isOpen: boolean): void {
         if (this._isOpen !== isOpen) {
@@ -398,14 +393,12 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
         this.handleOptionItem(value);
     }
 
-
     /** Method passed to list component */
     handleListFocusEscape(direction: FocusEscapeDirection): void {
         if (direction === 'up') {
             this._searchInputElement.nativeElement.focus();
         }
     }
-
 
     /** @hidden */
     private _initWindowResize(): void {
@@ -423,10 +416,9 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
     /** @hidden */
     private _getOptionsListWidth(): void {
         const body = document.body;
-        const rect = this._element
-            .getBoundingClientRect();
+        const rect = this._element.getBoundingClientRect();
         const scrollBarWidth = body.offsetWidth - body.clientWidth;
-        this.maxWidth = (window.innerWidth - scrollBarWidth) - rect.left;
+        this.maxWidth = window.innerWidth - scrollBarWidth - rect.left;
         this.minWidth = rect.width - 2;
     }
 
@@ -466,7 +458,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
             return this._convertObjectsToDefaultOptionItems(items);
         }
     }
-
 
     /**
      * Convert object[] data to Secondary OptionItems Interface
@@ -524,7 +515,7 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
      * Assign custom templates
      * */
     private _assignCustomTemplates(): void {
-        this.customTemplates.forEach(template => {
+        this.customTemplates.forEach((template) => {
             switch (template.getName()) {
                 case '_optionItemTemplate':
                     this._optionItemTemplate = template.templateRef;

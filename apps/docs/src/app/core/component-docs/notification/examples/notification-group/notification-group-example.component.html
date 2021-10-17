@@ -1,4 +1,4 @@
-<div style="min-height: 500px;">
+<div style="min-height: 500px">
     <fd-popover [noArrow]="false">
         <fd-popover-control>
             <button fd-button label="Open Notification Group"></button>
@@ -10,19 +10,30 @@
                         <fd-notification-group-list>
                             <fd-notification-group-header [(expanded)]="expandedByDate">
                                 <fd-notification-header>
-                                    <h2 fd-notification-title [unread]="true">
-                                        New Messages (2)
-                                    </h2>
+                                    <h2 fd-notification-title [unread]="true">New Messages (2)</h2>
                                 </fd-notification-header>
                                 <fd-notification-actions>
-                                    <button fd-button label="Accept All" [compact]="true" *ngIf="expandedByDate"></button>
-                                    <button fd-button fdType="transparent" glyph="decline" title="close" [compact]="true"></button>
+                                    <button
+                                        fd-button
+                                        label="Accept All"
+                                        [compact]="true"
+                                        *ngIf="expandedByDate"
+                                    ></button>
+                                    <button
+                                        fd-button
+                                        fdType="transparent"
+                                        glyph="decline"
+                                        title="close"
+                                        [compact]="true"
+                                    ></button>
                                 </fd-notification-actions>
                             </fd-notification-group-header>
                             <ng-container *ngTemplateOutlet="warningNotifications"></ng-container>
                             <fd-notification-limit>
                                 <h1 fd-notification-limit-title>There are 30 more notifications</h1>
-                                <p fd-notification-limit-description>You need to close or take action on the listed notifications to display more.</p>
+                                <p fd-notification-limit-description>
+                                    You need to close or take action on the listed notifications to display more.
+                                </p>
                             </fd-notification-limit>
                         </fd-notification-group-list>
                     </fd-tab>
@@ -32,13 +43,22 @@
                             <fd-notification-group-header [(expanded)]="expandedByType1">
                                 <fd-notification-header>
                                     <div fd-notification-indicator type="success"></div>
-                                    <h2 fd-notification-title [unread]="true">
-                                        Today (2)
-                                    </h2>
+                                    <h2 fd-notification-title [unread]="true">Today (2)</h2>
                                 </fd-notification-header>
                                 <fd-notification-actions>
-                                    <button fd-button label="Accept All" [compact]="true" *ngIf="expandedByType1"></button>
-                                    <button fd-button fdType="transparent" glyph="decline" title="close" [compact]="true"></button>
+                                    <button
+                                        fd-button
+                                        label="Accept All"
+                                        [compact]="true"
+                                        *ngIf="expandedByType1"
+                                    ></button>
+                                    <button
+                                        fd-button
+                                        fdType="transparent"
+                                        glyph="decline"
+                                        title="close"
+                                        [compact]="true"
+                                    ></button>
                                 </fd-notification-actions>
                             </fd-notification-group-header>
                             <ng-container *ngTemplateOutlet="successNotifications"></ng-container>
@@ -47,13 +67,22 @@
                             <fd-notification-group-header [(expanded)]="expandedByType2">
                                 <fd-notification-header>
                                     <div fd-notification-indicator type="warning"></div>
-                                    <h2 fd-notification-title [unread]="true">
-                                        Today (2)
-                                    </h2>
+                                    <h2 fd-notification-title [unread]="true">Today (2)</h2>
                                 </fd-notification-header>
                                 <fd-notification-actions>
-                                    <button fd-button label="Accept All" [compact]="true" *ngIf="expandedByType2"></button>
-                                    <button fd-button fdType="transparent" glyph="decline" title="close" [compact]="true"></button>
+                                    <button
+                                        fd-button
+                                        label="Accept All"
+                                        [compact]="true"
+                                        *ngIf="expandedByType2"
+                                    ></button>
+                                    <button
+                                        fd-button
+                                        fdType="transparent"
+                                        glyph="decline"
+                                        title="close"
+                                        [compact]="true"
+                                    ></button>
                                 </fd-notification-actions>
                             </fd-notification-group-header>
                             <ng-container *ngTemplateOutlet="warningNotifications"></ng-container>
@@ -63,12 +92,16 @@
                         <fd-notification-group-list>
                             <fd-notification-group-header [(expanded)]="expandedByPriority">
                                 <fd-notification-header>
-                                    <h2 fd-notification-title [unread]="true">
-                                        Orders waiting for approval (3)
-                                    </h2>
+                                    <h2 fd-notification-title [unread]="true">Orders waiting for approval (3)</h2>
                                 </fd-notification-header>
                                 <fd-notification-actions>
-                                    <button fd-button fdType="transparent" glyph="decline" title="close" [compact]="true"></button>
+                                    <button
+                                        fd-button
+                                        fdType="transparent"
+                                        glyph="decline"
+                                        title="close"
+                                        [compact]="true"
+                                    ></button>
                                 </fd-notification-actions>
                             </fd-notification-group-header>
                             <ng-container *ngTemplateOutlet="successNotifications"></ng-container>
@@ -87,16 +120,16 @@
             <fd-notification-header>
                 <div fd-notification-indicator [type]="notification.indicator"></div>
                 <h2 fd-notification-title [unread]="notification.unread">
-                    {{notification.title}}
+                    {{ notification.title }}
                 </h2>
             </fd-notification-header>
             <p fd-notification-paragraph>
-                {{notification.paragraph}}
+                {{ notification.paragraph }}
             </p>
             <fd-notification-footer>
-                <span fd-notification-footer-content>{{notification.footerContent1}}</span>
+                <span fd-notification-footer-content>{{ notification.footerContent1 }}</span>
                 <span fd-notification-separator></span>
-                <span fd-notification-footer-content>{{notification.footerContent2}}</span>
+                <span fd-notification-footer-content>{{ notification.footerContent2 }}</span>
             </fd-notification-footer>
         </fd-notification-content>
         <fd-notification-actions>
@@ -113,16 +146,16 @@
             <fd-notification-header>
                 <div fd-notification-indicator [type]="notification.indicator"></div>
                 <h2 fd-notification-title [unread]="notification.unread">
-                    {{notification.title}}
+                    {{ notification.title }}
                 </h2>
             </fd-notification-header>
             <p fd-notification-paragraph>
-                {{notification.paragraph}}
+                {{ notification.paragraph }}
             </p>
             <fd-notification-footer>
-                <span fd-notification-footer-content>{{notification.footerContent1}}</span>
+                <span fd-notification-footer-content>{{ notification.footerContent1 }}</span>
                 <span fd-notification-separator></span>
-                <span fd-notification-footer-content>{{notification.footerContent2}}</span>
+                <span fd-notification-footer-content>{{ notification.footerContent2 }}</span>
             </fd-notification-footer>
         </fd-notification-content>
         <fd-notification-actions>

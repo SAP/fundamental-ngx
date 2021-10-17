@@ -1,13 +1,23 @@
 <fd-tile type="launch" [action]="true">
-    <button fd-button fd-tile-action-close [compact]="true" fdType="transparent" (click)="window.alert('Close clicked')" title="close"></button>
-    <button fd-button fd-tile-action-indicator [compact]="true" fdType="transparent" (click)="window.alert('More clicked')" title="more"></button>
+    <button
+        fd-button
+        fd-tile-action-close
+        [compact]="true"
+        fdType="transparent"
+        (click)="window.alert('Close clicked')"
+        title="close"
+    ></button>
+    <button
+        fd-button
+        fd-tile-action-indicator
+        [compact]="true"
+        fdType="transparent"
+        (click)="window.alert('More clicked')"
+        title="more"
+    ></button>
     <div fd-tile-header>
-        <h1 fd-tile-title>
-            Launch Tile Title Text
-        </h1>
-        <h2 fd-tile-subtitle>
-            Launch Tile Subtitle
-        </h2>
+        <h1 fd-tile-title>Launch Tile Title Text</h1>
+        <h2 fd-tile-subtitle>Launch Tile Subtitle</h2>
     </div>
     <div fd-tile-content>
         <div fd-numeric-content>

@@ -55,7 +55,8 @@ let nextUniqueId = 0;
 })
 export class RadioGroupComponent
     extends InLineLayoutCollectionBaseInput
-    implements AfterViewInit, AfterContentChecked, OnDestroy {
+    implements AfterViewInit, AfterContentChecked, OnDestroy
+{
     /** Value of selected radio button */
     @Input('selected')
     get value(): any {
@@ -127,7 +128,15 @@ export class RadioGroupComponent
         @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
         readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig
     ) {
-        super(_cd, _responsiveBreakpointsService, ngControl, ngForm, formField, formControl, _defaultResponsiveBreakPointConfig);
+        super(
+            _cd,
+            _responsiveBreakpointsService,
+            ngControl,
+            ngForm,
+            formField,
+            formControl,
+            _defaultResponsiveBreakPointConfig
+        );
         this.id = `radio-group-${nextUniqueId++}`;
 
         // subscribe to _inlineCurrentValue in inline-layout-collection-base-input

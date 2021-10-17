@@ -11,7 +11,7 @@ export class FixedCardLayoutExampleComponent {
     constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
     isHidden(card: string): boolean {
-        return this.cardsHidden.some(_card => _card === card);
+        return this.cardsHidden.some((_card) => _card === card);
     }
 
     update(): void {

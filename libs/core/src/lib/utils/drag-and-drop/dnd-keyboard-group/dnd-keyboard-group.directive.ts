@@ -1,10 +1,15 @@
 import { ChangeDetectorRef, Directive, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 
+/**
+ * This directive is used to provide drag & drop with keyboard support.
+ * It should be used togather with directive fdDndKeyboardItem.
+ */
 @Directive({ selector: '[fdDndKeyboardGroup]' })
 export class DndKeyboardGroupDirective {
+    /** @hidden all groups */
     @Input()
-    groups: any[][];
+    _groups: any[][];
 
     /** @hidden */
     _enableKeyboard = false;
@@ -12,7 +17,7 @@ export class DndKeyboardGroupDirective {
     /** @hidden */
     _onDndItemFocus$ = new Subject<[number, number]>();
 
-    constructor(public cdr: ChangeDetectorRef) {}   
+    constructor(public cdr: ChangeDetectorRef) {}
 
     /** add focus after moving elements with keyboard */
     focusDndItem(groupIndex: number, itemIndex: number): void {

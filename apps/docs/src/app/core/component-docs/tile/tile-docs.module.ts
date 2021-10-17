@@ -31,12 +31,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
-        TileModule,
-        AvatarModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, TileModule, AvatarModule],
     exports: [RouterModule],
     declarations: [
         TileDocsComponent,

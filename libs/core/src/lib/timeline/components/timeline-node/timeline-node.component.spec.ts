@@ -11,8 +11,7 @@ describe('TimelineNodeComponent', () => {
         await TestBed.configureTestingModule({
             declarations: [TimeLineNodeTestApp],
             imports: [TimelineModule]
-        })
-            .compileComponents();
+        }).compileComponents();
     });
 
     beforeEach(() => {

@@ -4,27 +4,38 @@
         authorLink="http://example.com/"
         text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         maxRows="2"
-        ariaLabel="Feed list item example">
+        ariaLabel="Feed list item example"
+    >
         <fd-feed-list-action>
-            <button aria-label="action" fd-button fdType="transparent" [compact]="true" glyph="action-settings" (click)="onClick()"></button>
+            <button
+                aria-label="action"
+                fd-button
+                fdType="transparent"
+                [compact]="true"
+                glyph="action-settings"
+                (click)="onClick()"
+            ></button>
         </fd-feed-list-action>
     </fd-feed-list-item>
 </fd-feed-list>
-<br/>
+<br />
 <fd-feed-list aria-label="Feed List Item with user link example">
     <fd-feed-list-item
         authorTitle="Author with very looong tiiiiiitttttttttttttttleeeeeeeeeeeeeeeeeeeeee"
         authorLink="http://example.com/"
         text="Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry."
         maxRows="2"
-        ariaLabel="Feed list item example">
+        ariaLabel="Feed list item example"
+    >
         <fd-feed-list-action>
             <button
                 aria-label="action"
-                fd-button fdType="transparent"
+                fd-button
+                fdType="transparent"
                 [compact]="true"
                 [fdMenuTrigger]="menu"
-                glyph="menu"></button>
+                glyph="menu"
+            ></button>
             <fd-menu #menu>
                 <li fd-menu-item>
                     <a href="#" fd-menu-interactive>

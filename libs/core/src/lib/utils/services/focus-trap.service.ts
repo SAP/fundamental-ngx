@@ -6,10 +6,9 @@ import { uuidv4 } from '../functions/uuidv4-generator';
     providedIn: 'root'
 })
 export class FocusTrapService {
-
     private _focusTrapInstances: Map<any, FocusTrap> = new Map();
 
-    constructor() { }
+    constructor() {}
 
     /**
      * Creates focus trap instance for defined element
@@ -17,8 +16,10 @@ export class FocusTrapService {
      * @param userOptions Focus-trap specific configuration
      * @returns {string} Unique ID of focus trap instance
      */
-    createFocusTrap(element: string | HTMLElement | SVGElement | (string | HTMLElement | SVGElement)[],
-                    userOptions?: Options): string {
+    createFocusTrap(
+        element: string | HTMLElement | SVGElement | (string | HTMLElement | SVGElement)[],
+        userOptions?: Options
+    ): string {
         const uid = uuidv4();
 
         const trap = createFocusTrap(element, userOptions);
@@ -97,7 +98,6 @@ export class FocusTrapService {
 
     /** @hidden */
     private _getLastTrapedItem(): FocusTrap | undefined {
-
         const lastItem = Array.from(this._focusTrapInstances).pop();
 
         return lastItem ? lastItem[1] : undefined;

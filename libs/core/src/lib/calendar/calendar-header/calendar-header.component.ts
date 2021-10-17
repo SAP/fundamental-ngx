@@ -150,8 +150,8 @@ export class CalendarHeaderComponent<D> implements OnDestroy, OnInit, OnChanges 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (
-            changes.currentlyDisplayed && !changes.currentlyDisplayed.firstChange
-            || changes.activeView && !changes.activeView.firstChange
+            (changes.currentlyDisplayed && !changes.currentlyDisplayed.firstChange) ||
+            (changes.activeView && !changes.activeView.firstChange)
         ) {
             this._calculateLabels();
         }

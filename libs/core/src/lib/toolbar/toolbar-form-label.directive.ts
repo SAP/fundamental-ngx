@@ -8,4 +8,4 @@ import { ToolbarItemDirective } from './toolbar-item.directive';
         class: 'fd-form-label fd-toolbar__overflow-form-label fd-toolbar__overflow-form-label--text'
     }
 })
-export class ToolbarFormLabelDirective extends ToolbarItemDirective { }
+export class ToolbarFormLabelDirective extends ToolbarItemDirective {}

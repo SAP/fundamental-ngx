@@ -14,17 +14,13 @@ import {
     isElementClickable,
     sendKeys,
     pause,
-    waitForElDisplayed
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
-import {
-    fullName,
-    firstAdress,
-    secAdress,
-    update,
-    firstAdressLength
-} from '../fixtures/testData/wizard.tags'
+import { fullName, firstAdress, secAdress, update, firstAdressLength } from '../fixtures/testData/wizard.tags';
+import waitForExist from 'webdriverio/build/commands/element/waitForExist';
 
-describe('Wizard component test', function () {
+describe('Wizard component test', () => {
     const wizardPage = new WizardPo();
     const {
         defaultExample,
@@ -89,8 +85,8 @@ describe('Wizard component test', function () {
                 setValue(firstAdressInput, firstAdress);
                 setValue(secAdressInput, secAdress);
             }
-            click(wizard + nextStep, i)
-            pause(1000)
+            click(wizard + nextStep, i);
+            pause(1000);
             if (i !== 0) {
                 expect(getElementClass(wizard + step, i - 1)).toContain('step--completed');
             }
@@ -99,7 +95,7 @@ describe('Wizard component test', function () {
         expect(getText(savedFirstAdress)).toEqual(firstAdress);
         expect(getText(savedSecAdress)).toEqual(secAdress);
 
-        click(editButton)
+        click(editButton);
         setValue(fullNameInput, fullName + update);
         setValue(firstAdressInput, firstAdress + update);
         setValue(secAdressInput, secAdress + update);
@@ -134,40 +130,61 @@ describe('Wizard component test', function () {
         click(dialogWizard + buttonsBar + ':nth-child(1) ' + button);
 
         expect(getElementClass(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toContain('is-disabled');
-        expect(isElementClickable(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toBe(false, 'button is clickable');
+        expect(isElementClickable(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toBe(
+            false,
+            'button is clickable'
+        );
         setValue(fullNameInput, fullName);
         setValue(firstAdressInput, firstAdress);
         expect(getElementClass(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).not.toContain('is-disabled');
-        expect(isElementClickable(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toBe(true, 'button is not clickable');
+        expect(isElementClickable(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toBe(
+            true,
+            'button is not clickable'
+        );
 
         for (let i = 0; i < firstAdressLength; i++) {
             sendKeys('Backspace');
         }
         expect(getElementClass(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toContain('is-disabled');
-        expect(isElementClickable(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toBe(false, 'button is clickable');
+        expect(isElementClickable(dialogWizard + buttonsBar + ':nth-child(2) ' + button)).toBe(
+            false,
+            'button is clickable'
+        );
     });
 
     it('should check confirmation changing payment type in branching example', () => {
         click(branchingExample + button);
+        waitForElDisplayed(wizard + nextStep);
         click(wizard + nextStep);
         click(radioButton);
         expect(getAttributeByName(radioButton, 'aria-checked')).toBe('true', 'radio button is not selected');
         click(radioButton, 1);
-        expect(isElementDisplayed(dialogContainer)).toBe(true, 'dialog container did not open');
+        // pause for dialog element to be created
+        pause(500);
+        expect(waitForElDisplayed(dialogContainer)).toBe(true, 'dialog container did not open');
         click(cancelButton);
         expect(getAttributeByName(radioButton, 'aria-checked')).toBe('true', 'focus dissapeared');
         click(radioButton, 1);
         click(continueButton);
         expect(getAttributeByName(radioButton, 'aria-checked', 1)).toBe('true', 'focus did not change');
-    });
+    }, 1);
 
     it('should check navigation in mobile example', () => {
         click(mobileExample + nextStep);
-        expect(getElementClass(mobileExample + step, 1)).toContain('step--current', 'you are not moved to the second step');
+        expect(getElementClass(mobileExample + step, 1)).toContain(
+            'step--current',
+            'you are not moved to the second step'
+        );
         click(mobileExample + stepContainer);
-        expect(getElementClass(mobileExample + step, 0)).toContain('step--current', 'you are not moved to the first step');
+        expect(getElementClass(mobileExample + step, 0)).toContain(
+            'step--current',
+            'you are not moved to the first step'
+        );
         click(mobileExample + nextStep);
-        expect(getElementClass(mobileExample + step, 1)).toContain('step--current', 'button did not direct you to the step 2');
+        expect(getElementClass(mobileExample + step, 1)).toContain(
+            'step--current',
+            'button did not direct you to the step 2'
+        );
     });
 
     it('should check compliting form for mobile example', () => {
@@ -190,9 +207,11 @@ describe('Wizard component test', function () {
     function checkReOpen(section: string, block: string): void {
         click(section + button);
         if (section === defaultExample) {
+            waitForElDisplayed(block + nextStep);
             click(block + nextStep);
         }
         if (section !== defaultExample) {
+            waitForElDisplayed(dialogWizard + buttonsBar + ':nth-child(1) ' + button);
             click(dialogWizard + buttonsBar + ':nth-child(1) ' + button);
         }
         setValue(fullNameInput, fullName);
@@ -201,6 +220,7 @@ describe('Wizard component test', function () {
         if (section === defaultExample) {
             click(block + exitButton);
             click(section + button);
+            waitForElDisplayed(block + nextStep);
             click(block + nextStep);
         }
         if (section !== defaultExample) {
@@ -221,14 +241,14 @@ describe('Wizard component test', function () {
     function checkOpenClose(section: string): void {
         click(section + button);
         if (section !== dialogExample) {
-            expect(isElementDisplayed(section + wizard)).toBe(true, `wizard in ${section} did not open`);
-            expect(getAttributeByName(section + wizard, 'style')).toEqual('width: 100%;')
+            expect(waitForElDisplayed(section + wizard)).toBe(true, `wizard in ${section} did not open`);
+            expect(getAttributeByName(section + wizard, 'style')).toEqual('width: 100%;');
             click(section + exitButton);
             expect(isElementDisplayed(section + wizard)).toBe(false, `wizard in ${section} did not close`);
             expect(getAttributeByName(section + wizard, 'style')).toEqual('width: 0%;');
         }
         if (section === dialogExample) {
-            expect(isElementDisplayed(dialogWizard)).toBe(true, 'dialog wizard did not open');
+            expect(waitForElDisplayed(dialogWizard)).toBe(true, 'dialog wizard did not open');
             click(dialogWizard + buttonsBar + ':nth-child(2) ' + button);
             expect(doesItExist(dialogWizard)).toBe(false, 'dialog wizard did not close, still exist in DOM');
         }
@@ -254,5 +274,4 @@ describe('Wizard component test', function () {
         }
         click(exitButton);
     }
-
 });

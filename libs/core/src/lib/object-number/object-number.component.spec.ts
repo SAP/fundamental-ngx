@@ -5,8 +5,14 @@ import { ObjectNumberComponent } from './object-number.component';
 
 @Component({
     selector: 'fd-test-object-number',
-    template: `
-        <fd-object-number [number]="1000.37" [unit]="unit" [decimal]="decimal" [large]="large" [status]="status" [class]="class"></fd-object-number>`
+    template: ` <fd-object-number
+        [number]="1000.37"
+        [unit]="unit"
+        [decimal]="decimal"
+        [large]="large"
+        [status]="status"
+        [class]="class"
+    ></fd-object-number>`
 })
 class TestObjectNumberComponent {
     @ViewChild(ObjectNumberComponent, { static: true })
@@ -23,12 +29,13 @@ describe('ObjectNumberComponent', () => {
     let fixture: ComponentFixture<TestObjectNumberComponent>;
     const numberTextEl = '.fd-object-number__text';
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ObjectNumberComponent, TestObjectNumberComponent]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [ObjectNumberComponent, TestObjectNumberComponent]
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestObjectNumberComponent);
@@ -67,7 +74,9 @@ describe('ObjectNumberComponent', () => {
     it('should display decimals', () => {
         fixture.componentInstance.decimal = 2;
         fixture.detectChanges();
-        expect(component.elementRef().nativeElement.querySelector(numberTextEl).textContent.includes('1,000.37')).toBeTruthy();
+        expect(
+            component.elementRef().nativeElement.querySelector(numberTextEl).textContent.includes('1,000.37')
+        ).toBeTruthy();
     });
 
     it('should not display decimals if [decimal] set to 0', () => {

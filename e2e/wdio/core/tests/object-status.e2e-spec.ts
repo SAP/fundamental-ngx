@@ -1,27 +1,29 @@
 import { ObjectStatusPo } from '../pages/object-status.po';
-import {
-    getAttributeByName,
-    getElementArrayLength,
-    getTextArr,
-    waitForElDisplayed
-} from '../../driver/wdio';
-import {
-    semanticText, genericColorText, objStatusText, sizeAttr
-} from '../fixtures/appData/object-status-contents';
+import { getAttributeByName, getElementArrayLength, getTextArr, waitForElDisplayed } from '../../driver/wdio';
+import { semanticText, genericColorText, objStatusText, sizeAttr } from '../fixtures/appData/object-status-contents';
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
 
-describe('Object Status test suite', function() {
+describe('Object Status test suite', () => {
     const objectStatusPage = new ObjectStatusPo();
     const {
-        iconExamples, textExamples, textAndIconExamples, colorsExamples, clickableExamples, invertedExamples,
-        invertedColorExamples, largeExamples, status, text, icons
+        iconExamples,
+        textExamples,
+        textAndIconExamples,
+        colorsExamples,
+        clickableExamples,
+        invertedExamples,
+        invertedColorExamples,
+        largeExamples,
+        status,
+        text,
+        icons
     } = objectStatusPage;
 
     beforeAll(() => {
         objectStatusPage.open();
     }, 1);
 
-    describe('object status icon only examples', function() {
+    describe('object status icon only examples', () => {
         it('should check icons present', () => {
             const iconCount = getElementArrayLength(iconExamples + icons);
 
@@ -31,25 +33,25 @@ describe('Object Status test suite', function() {
         });
     });
 
-    describe('object status text only examples', function() {
+    describe('object status text only examples', () => {
         it('should check text value', () => {
             checkObjectValues(textExamples + text, semanticText);
         });
     });
 
-    describe('object status with text and icon examples', function() {
+    describe('object status with text and icon examples', () => {
         it('should check text value', () => {
             checkObjectValues(textAndIconExamples + text, semanticText);
         });
     });
 
-    describe('object status with generic indication colors examples', function() {
+    describe('object status with generic indication colors examples', () => {
         it('should check text value', () => {
             checkObjectValues(colorsExamples + text, genericColorText);
         });
     });
 
-    describe('clickable object status examples', function() {
+    describe('clickable object status examples', () => {
         it('should check text value', () => {
             const objTextValues = semanticText.concat(genericColorText);
             checkObjectValues(clickableExamples + text, objTextValues);
@@ -60,19 +62,19 @@ describe('Object Status test suite', function() {
         });
     });
 
-    describe('inverted object status examples', function() {
+    describe('inverted object status examples', () => {
         it('should check text value', () => {
             checkObjectValues(invertedExamples + text, objStatusText);
         });
     });
 
-    describe('inverted object status with generic indication colors examples', function() {
+    describe('inverted object status with generic indication colors examples', () => {
         it('should check text value', () => {
             checkObjectValues(invertedColorExamples + text, genericColorText);
         });
     });
 
-    describe('object status large design examples', function() {
+    describe('object status large design examples', () => {
         // in prod mode missed attr: ng-reflect-large
         xit('should check object status is large', () => {
             const objectCount = getElementArrayLength(largeExamples);
@@ -86,13 +88,13 @@ describe('Object Status test suite', function() {
         });
     });
 
-    describe('check orientation', function() {
+    describe('check orientation', () => {
         it('should check RTL and LTR', () => {
             objectStatusPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             objectStatusPage.saveExampleBaselineScreenshot();
             expect(objectStatusPage.compareWithBaseline()).toBeLessThan(5);

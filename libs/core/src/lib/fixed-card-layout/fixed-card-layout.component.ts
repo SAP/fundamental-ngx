@@ -121,7 +121,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     private _keyboardEventsManager: FocusKeyManager<FixedCardLayoutItemComponent>;
 
     constructor(
-        private readonly _changeDetector: ChangeDetectorRef, 
+        private readonly _changeDetector: ChangeDetectorRef,
         @Optional() private readonly _rtlService: RtlService
     ) {}
 

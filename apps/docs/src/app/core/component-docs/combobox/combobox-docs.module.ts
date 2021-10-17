@@ -15,8 +15,8 @@ const routes: Routes = [
         path: '',
         component: ComboboxHeaderComponent,
         children: [
-            {path: '', component: ComboboxDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.combobox}}
+            { path: '', component: ComboboxDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.combobox } }
         ]
     }
 ];
@@ -28,13 +28,9 @@ const routes: Routes = [
         ComboboxModule,
         ComboboxMobileModule,
         RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
+        SharedDocumentationPageModule
     ],
     exports: [RouterModule],
-    declarations: [
-        examples,
-        ComboboxDocsComponent,
-        ComboboxHeaderComponent,
-    ]
+    declarations: [examples, ComboboxDocsComponent, ComboboxHeaderComponent]
 })
-export class ComboboxDocsModule { }
+export class ComboboxDocsModule {}

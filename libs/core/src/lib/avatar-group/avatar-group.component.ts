@@ -89,9 +89,11 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
     /** @hidden */
     private get _avatarGroupItemWithMarginsWidth(): number {
         const elementStyles = getComputedStyle(this.mainItems?.first?.elementRef?.nativeElement);
-        return this._avatarGroupItemWidth
-            + parseInt(elementStyles.marginLeft, 10)
-            + parseInt(elementStyles.marginRight, 10);
+        return (
+            this._avatarGroupItemWidth +
+            parseInt(elementStyles.marginLeft, 10) +
+            parseInt(elementStyles.marginRight, 10)
+        );
     }
 
     /** @hidden */
@@ -112,7 +114,11 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._subscription.add(of(true).pipe(delay(5)).subscribe(() => this._collapseItems()));
+        this._subscription.add(
+            of(true)
+                .pipe(delay(5))
+                .subscribe(() => this._collapseItems())
+        );
         this._listenForItemChanges();
     }
 
@@ -132,7 +138,7 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
         this.allItemsCount = this.mainItems.length;
         this.overflowItemsCount = 0;
 
-        this.mainItems.forEach(it => (it.elementRef.nativeElement.style.display = 'inline-block'));
+        this.mainItems.forEach((it) => (it.elementRef.nativeElement.style.display = 'inline-block'));
     }
 
     /** @hidden */
@@ -144,16 +150,17 @@ export class AvatarGroupComponent implements OnChanges, OnInit, AfterViewInit, O
         const avatarGroupItemWithMarginsWidth = this._avatarGroupItemWithMarginsWidth;
 
         while (idx < allItemsCounter) {
-            const newContentWidth = idx === 0 && this.isGroupType
-                ? contentWidth + avatarGroupItemWidth
-                : contentWidth + avatarGroupItemWithMarginsWidth;
+            const newContentWidth =
+                idx === 0 && this.isGroupType
+                    ? contentWidth + avatarGroupItemWidth
+                    : contentWidth + avatarGroupItemWithMarginsWidth;
 
             if (newContentWidth >= this._avatarGroupWidth) {
                 // -1 because the last element in the loop will be replaced by the overflow button
                 const newIdx = idx - 1;
                 this.overflowItemsCount = allItemsCounter - newIdx;
                 const mainItemsToHide = this.mainItems.toArray().slice(newIdx);
-                mainItemsToHide.forEach(it => (it.elementRef.nativeElement.style.display = 'none'));
+                mainItemsToHide.forEach((it) => (it.elementRef.nativeElement.style.display = 'none'));
 
                 break;
             }

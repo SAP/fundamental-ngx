@@ -11,71 +11,71 @@
 .fd-dynamic-page__header--not-collapsible {
     .fd-dynamic-page__title-area.is-hover,
     .fd-dynamic-page__title-area:hover {
-		background-color: var(--sapObjectHeader_Background, #fff);
-		cursor: default;
+        background-color: var(--sapObjectHeader_Background, #fff);
+        cursor: default;
     }
 }
 
 .fd-tabs {
-	.fd-dynamic-page__content {
-		display: block;
-		height: auto !important;
-	}
+    .fd-dynamic-page__content {
+        display: block;
+        height: auto !important;
+    }
 }
 
 .fd-dynamic-page {
-	height: 100%;
+    height: 100%;
 
-	 .fd-bar--floating-footer {
-		 z-index: 2;
-	 }
+    .fd-bar--floating-footer {
+        z-index: 2;
+    }
 
-	.fd-tabs-custom {
-		overflow: auto;
-		background-color: #f7f7f7;
-		background-color: var(--sapBackgroundColor, #f7f7f7);
-		flex: 1;
-	}
+    .fd-tabs-custom {
+        overflow: auto;
+        background-color: #f7f7f7;
+        background-color: var(--sapBackgroundColor, #f7f7f7);
+        flex: 1;
+    }
 
-	.fd-dynamic-page__content {
-		flex: 1;
-	}
+    .fd-dynamic-page__content {
+        flex: 1;
+    }
 
-	&--transparent-bg {
-		.fd-tabs-custom {
-			background-color: transparent;
-			background-color: var(--fdDynamicPage_Content_Transparent_Background, transparent);
-		}
-	}
+    &--transparent-bg {
+        .fd-tabs-custom {
+            background-color: transparent;
+            background-color: var(--fdDynamicPage_Content_Transparent_Background, transparent);
+        }
+    }
 
-	&--list-bg {
-		.fd-tabs-custom {
-			background-color: #fff;
-			background-color: var(--fdDynamicPage_Content_List_Background, var(--sapGroup_ContentBackground, #fff));
-		}
-	}
- }
+    &--list-bg {
+        .fd-tabs-custom {
+            background-color: #fff;
+            background-color: var(--fdDynamicPage_Content_List_Background, var(--sapGroup_ContentBackground, #fff));
+        }
+    }
+}
 
 // TODO: Remove after addressing and migrating styles library
 .fd-dynamic-page--xl {
-	.fd-bar--floating-footer {
-		margin: 1rem 3rem;
-	}
+    .fd-bar--floating-footer {
+        margin: 1rem 3rem;
+    }
 }
 
 .fd-dynamic-page--lg,
 .fd-dynamic-page--md {
-	.fd-bar--floating-footer {
-		margin: 1rem 2rem;
-	}
+    .fd-bar--floating-footer {
+        margin: 1rem 2rem;
+    }
 }
 
 .fd-dynamic-page--sm {
-	.fd-bar--floating-footer {
-		margin: 1rem 0.5rem;
-	}
+    .fd-bar--floating-footer {
+        margin: 1rem 0.5rem;
+    }
 
-	.fd-dynamic-page__title-container {
-		align-items: center;
-	}
+    .fd-dynamic-page__title-container {
+        align-items: center;
+    }
 }

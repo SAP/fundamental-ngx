@@ -30,7 +30,8 @@ import { MULTIINPUT_COMPONENT, PlatformMultiInputInterface } from '../multi-inpu
 })
 export class PlatformMultiInputMobileComponent
     extends MobileModeBase<PlatformMultiInputInterface>
-    implements OnInit, OnDestroy {
+    implements OnInit, OnDestroy
+{
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 

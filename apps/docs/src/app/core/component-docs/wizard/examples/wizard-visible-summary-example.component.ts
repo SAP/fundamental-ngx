@@ -3,10 +3,10 @@ import { DialogService } from '@fundamental-ngx/core/dialog';
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
 
 @Component({
-  selector: 'fd-wizard-visible-summary-example',
-  templateUrl: './wizard-visible-summary-example.component.html',
-  styleUrls: ['./wizard-visible-summary-example.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'fd-wizard-visible-summary-example',
+    templateUrl: './wizard-visible-summary-example.component.html',
+    styleUrls: ['./wizard-visible-summary-example.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class WizardVisibleSummaryExampleComponent {
     step1status: WizardStepStatus = 'current';

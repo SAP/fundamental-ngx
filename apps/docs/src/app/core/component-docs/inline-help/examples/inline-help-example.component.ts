@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     templateUrl: './inline-help-example.component.html',
     styles: [
         `
-            .fd-inline-help-example>input {
+            .fd-inline-help-example > input {
                 max-width: 300px;
             }
 

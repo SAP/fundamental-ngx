@@ -1,9 +1,32 @@
 import { Injectable } from '@angular/core';
 
-const firstNames = ['John', 'Sarah', 'Jason', 'Christian', 'Jessica', 'Jonathan', 'Gordon', 'Simon', 'Jason', 'Whitney', 'Chris', 'David'];
+const firstNames = [
+    'John',
+    'Sarah',
+    'Jason',
+    'Christian',
+    'Jessica',
+    'Jonathan',
+    'Gordon',
+    'Simon',
+    'Jason',
+    'Whitney',
+    'Chris',
+    'David'
+];
 const lastNames = ['Doe', 'Parker', 'Goldwell', 'Bow', 'Bale', 'Smith', 'Jason', 'Swan', 'Carter', 'Copper'];
 const positions = ['Marketing Manager', 'Visual Designer', 'Software Developer'];
-const glyphs = ['accidental-leave', 'account', 'activity-individual', 'action-settings', 'add-contact', 'addresses', 'attachment-photo', 'batch-payments', 'calendar'];
+const glyphs = [
+    'accidental-leave',
+    'account',
+    'activity-individual',
+    'action-settings',
+    'add-contact',
+    'addresses',
+    'attachment-photo',
+    'batch-payments',
+    'calendar'
+];
 
 interface PeopleExample {
     id: string;
@@ -42,7 +65,7 @@ export class AvatarGroupDataExampleService {
         return people;
     }
 
-    private _generateImage(): { imageUrl?: string; glyph?: string; } {
+    private _generateImage(): { imageUrl?: string; glyph?: string } {
         const option = Math.floor(Math.random() * 3);
 
         switch (option) {

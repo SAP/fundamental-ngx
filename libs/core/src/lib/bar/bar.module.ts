@@ -10,8 +10,22 @@ import { ButtonBarComponent } from './button-bar/button-bar.component';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @NgModule({
-    declarations: [BarComponent, BarLeftDirective, BarMiddleDirective, BarRightDirective, BarElementDirective, ButtonBarComponent],
+    declarations: [
+        BarComponent,
+        BarLeftDirective,
+        BarMiddleDirective,
+        BarRightDirective,
+        BarElementDirective,
+        ButtonBarComponent
+    ],
     imports: [CommonModule, ButtonModule],
-    exports: [BarComponent, BarLeftDirective, BarMiddleDirective, BarRightDirective, BarElementDirective, ButtonBarComponent]
+    exports: [
+        BarComponent,
+        BarLeftDirective,
+        BarMiddleDirective,
+        BarRightDirective,
+        BarElementDirective,
+        ButtonBarComponent
+    ]
 })
 export class BarModule {}

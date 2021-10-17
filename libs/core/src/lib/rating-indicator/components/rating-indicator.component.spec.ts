@@ -10,11 +10,13 @@ describe('RatingIndicatorComponent', () => {
     let component: RatingIndicatorComponent;
     let fixture: ComponentFixture<RatingIndicatorComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [RatingIndicatorModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [RatingIndicatorModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(RatingIndicatorComponent);

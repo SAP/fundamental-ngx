@@ -18,18 +18,14 @@
 <separator></separator>
 
 <fd-docs-section-title id="sizes" componentName="button"> Button Sizes </fd-docs-section-title>
-<description>
-    Use <code class="code-snippet">[compact]</code> input to explicitly set button size.
-</description>
+<description> Use <code class="code-snippet">[compact]</code> input to explicitly set button size. </description>
 <component-example>
     <fd-button-sizes-example></fd-button-sizes-example>
 </component-example>
 <code-example [exampleFiles]="buttonHtmlSize"></code-example>
 <separator></separator>
 
-<fd-docs-section-title id="icons" componentName="button">
-    Button with Icons
-</fd-docs-section-title>
+<fd-docs-section-title id="icons" componentName="button"> Button with Icons </fd-docs-section-title>
 <description>
     Use
     <code class="code-snippet">[glyph]="'{{ '{' }}icon-name}'"</code> to add an icon to the button.
@@ -40,11 +36,13 @@
 <code-example [exampleFiles]="buttonHtmlIcon"></code-example>
 <separator></separator>
 
-<fd-docs-section-title id="state" componentName="button">
-    Button State
-</fd-docs-section-title>
+<fd-docs-section-title id="state" componentName="button"> Button State </fd-docs-section-title>
 <description>
-    'disabled' and 'selected' states can be achieved through native 'disabled' / 'aria-disabled' and 'aria-selected' attributes. Regarding the disabled buttons there are 2 flavours reflecting two opinions how to make a button disabled. Feel free to check Mozilla Doc for <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/disabled">disabled attribiut</a> and for <a href="https://www.w3.org/TR/wai-aria-1.0/states_and_properties#aria-disabled">aria-disabled</a>.
+    'disabled' and 'selected' states can be achieved through native 'disabled' / 'aria-disabled' and 'aria-selected'
+    attributes. Regarding the disabled buttons there are 2 flavours reflecting two opinions how to make a button
+    disabled. Feel free to check Mozilla Doc for
+    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/disabled">disabled attribiut</a> and for
+    <a href="https://www.w3.org/TR/wai-aria-1.0/states_and_properties#aria-disabled">aria-disabled</a>.
 </description>
 <component-example>
     <fd-button-state-example></fd-button-state-example>
@@ -68,6 +66,6 @@
         [fdMenu]="data.properties.fdMenu"
         [compact]="data.properties.compact"
         [label]="data.properties.label"
-        [glyph]="data.properties.icon">
-    </button>
+        [glyph]="data.properties.icon"
+    ></button>
 </playground>

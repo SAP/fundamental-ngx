@@ -23,10 +23,7 @@ import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.component';
 import { ActionSheetControlComponent } from './action-sheet-control/action-sheet-control.component';
-import {
-    FocusEscapeDirection,
-    KeyboardSupportService
-} from '@fundamental-ngx/core/utils';
+import { FocusEscapeDirection, KeyboardSupportService } from '@fundamental-ngx/core/utils';
 import { ActionSheetItemComponent, ActionSheetClickEvent } from './action-sheet-item/action-sheet-item.component';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { Subject, merge, Subscription } from 'rxjs';
@@ -40,12 +37,9 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
     styleUrls: ['./action-sheet.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    providers: [
-        KeyboardSupportService
-    ]
+    providers: [KeyboardSupportService]
 })
 export class ActionSheetComponent implements AfterContentInit, AfterViewInit, OnDestroy {
-
     /** Whether should be displayed in compact mode **/
     @Input()
     set compact(compact: boolean) {
@@ -55,9 +49,9 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     }
 
     get compact(): boolean {
-      return this._compact;
+        return this._compact;
     }
-    
+
     /** Whether should be displayed in mobile mode **/
     @Input()
     mobile = false;
@@ -135,7 +129,6 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         @Optional() private _dynamicComponentService: DynamicComponentService
     ) {}
 
-
     /** @hidden */
     ngAfterContentInit(): void {
         this._initializeChildrenState();
@@ -150,14 +143,16 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
             this._setUpMobileMode();
         }
         if (this._compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this._compact = density !== 'cozy';
-                this.actionSheetBody.compact = density !== 'cozy';
-                this.actionSheetItems.forEach(item => {
-                    item.compact = density !== 'cozy';
-                    this._changeDetectionRef.markForCheck();
-                });
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this._compact = density !== 'cozy';
+                    this.actionSheetBody.compact = density !== 'cozy';
+                    this.actionSheetItems.forEach((item) => {
+                        item.compact = density !== 'cozy';
+                        this._changeDetectionRef.markForCheck();
+                    });
+                })
+            );
         }
     }
 
@@ -172,7 +167,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     @HostListener('keydown', ['$event'])
     keyDownHandler(event: KeyboardEvent): void {
         if (this.keyboardSupport) {
-            this._keyboardSupportService.onKeyDown(event)
+            this._keyboardSupportService.onKeyDown(event);
         }
     }
 
@@ -210,22 +205,15 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
 
     /** @hidden */
     private _actionControlHandle(): void {
-        this.actionSheetControl.clicked
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(() => this.open());
+        this.actionSheetControl.clicked.pipe(takeUntil(this._onDestroy$)).subscribe(() => this.open());
     }
 
     /** @hidden */
     private _listenOnItemsChange(): void {
-        this.actionSheetItems.changes
-            .pipe(
-                startWith(1),
-                takeUntil(this._onDestroy$)
-            )
-            .subscribe(() => {
-                this._listenOnItemsClick();
-                this._setItemsProperties();
-            });
+        this.actionSheetItems.changes.pipe(startWith(1), takeUntil(this._onDestroy$)).subscribe(() => {
+            this._listenOnItemsClick();
+            this._setItemsProperties();
+        });
     }
 
     /** @hidden */
@@ -233,11 +221,10 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
         /** Finish all of the streams, from before */
         this._onRefresh$.next();
         /** Merge refresh/destroy observables */
-        const refresh$ = merge(this._onRefresh$, this._onDestroy$)
+        const refresh$ = merge(this._onRefresh$, this._onDestroy$);
 
-        this.actionSheetItems.forEach((item, index) => item.clicked
-            .pipe(takeUntil(refresh$))
-            .subscribe((event: ActionSheetClickEvent) => {
+        this.actionSheetItems.forEach((item, index) =>
+            item.clicked.pipe(takeUntil(refresh$)).subscribe((event: ActionSheetClickEvent) => {
                 this._setItemActive(index);
                 if (event.shouldClose) {
                     this.close();
@@ -256,7 +243,7 @@ export class ActionSheetComponent implements AfterContentInit, AfterViewInit, On
     /** @hidden */
     private _setItemsProperties(): void {
         if (this.actionSheetItems) {
-            this.actionSheetItems.forEach(actionSheetItem => actionSheetItem.compact = this._compact);
+            this.actionSheetItems.forEach((actionSheetItem) => (actionSheetItem.compact = this._compact));
         }
     }
 

@@ -3,7 +3,7 @@ import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angul
 import { MenuComponent } from '../menu.component';
 import { Component, EventEmitter, ViewChild } from '@angular/core';
 
-@Component({ template: '<div [fdMenuTrigger]="null"></div>'})
+@Component({ template: '<div [fdMenuTrigger]="null"></div>' })
 class TestComponent {
     @ViewChild(MenuTriggerDirective) menuTrigger: MenuTriggerDirective;
 }
@@ -13,11 +13,13 @@ describe('MenuTriggerDirective', () => {
     let directive: MenuTriggerDirective;
     let menu: Partial<MenuComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent, MenuTriggerDirective]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent, MenuTriggerDirective]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

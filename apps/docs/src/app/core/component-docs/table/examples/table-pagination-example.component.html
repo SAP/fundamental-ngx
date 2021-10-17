@@ -15,10 +15,15 @@
             <td fd-table-cell><fd-icon [glyph]="row.type"></fd-icon></td>
         </tr>
     </tbody>
-    <br/>
+    <br />
     <tfoot fd-table-footer>
-        <button label="Items Per Page" fd-button [fdMenu]="true" [fdMenuTrigger]="itemsPerPageMenu"
-                [ngStyle]="{'margin-left': (rtl$ | async) ? '20px' : '0', 'margin-right': (rtl$ | async) ? '0' : '20px'}"></button>
+        <button
+            label="Items Per Page"
+            fd-button
+            [fdMenu]="true"
+            [fdMenuTrigger]="itemsPerPageMenu"
+            [ngStyle]="{ 'margin-left': (rtl$ | async) ? '20px' : '0', 'margin-right': (rtl$ | async) ? '0' : '20px' }"
+        ></button>
         <fd-pagination
             [totalItems]="totalItems"
             (pageChangeStart)="newPageClicked($event)"

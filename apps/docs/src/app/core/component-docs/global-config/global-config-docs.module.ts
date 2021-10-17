@@ -11,8 +11,8 @@ const routes: Routes = [
         path: '',
         component: GlobalConfigHeaderComponent,
         children: [
-            {path: '', component: GlobalConfigDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.globalConfig}}
+            { path: '', component: GlobalConfigDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.globalConfig } }
         ]
     }
 ];
@@ -22,5 +22,4 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [GlobalConfigDocsComponent, GlobalConfigHeaderComponent]
 })
-export class GlobalConfigDocsModule {
-}
+export class GlobalConfigDocsModule {}

@@ -3,10 +3,10 @@ import { INVALID_DATE_ERROR } from '@fundamental-ngx/core/utils';
 
 /**
  * FdDate class is used to represent date and time.
- * 
+ *
  * It's a simplified analog of native Date instance.
  * It gives some convenience methods to work with date or time data.
- * 
+ *
  */
 export class FdDate {
     /**
@@ -109,7 +109,7 @@ export class FdDate {
             day: day,
             hour: hour,
             minute: minute,
-            second: second,
+            second: second
         });
 
         this.year = this._isValid ? year : NaN;
@@ -135,7 +135,7 @@ export class FdDate {
             day: this.day,
             hour: hour,
             minute: minute,
-            second: second,
+            second: second
         });
 
         this.hour = this._isValid ? hour : NaN;

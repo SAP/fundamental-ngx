@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { iconTypeConfig, longIconTypeConfig} from '../config-for-examples/icon-type-config';
+import { iconTypeConfig, longIconTypeConfig } from '../config-for-examples/icon-type-config';
 import { cloneDeep } from '@fundamental-ngx/core/utils';
 import { TabConfig } from '../../platform-icon-tab-bar-docs.component';
 
@@ -8,7 +8,6 @@ import { TabConfig } from '../../platform-icon-tab-bar-docs.component';
     templateUrl: './platform-icon-tab-bar-icon-type-example.component.html'
 })
 export class PlatformIconTabBarIconTypeExampleComponent implements OnInit {
-
     @Input()
     withOverflowExample = false;
 

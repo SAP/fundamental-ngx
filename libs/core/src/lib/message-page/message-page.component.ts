@@ -31,7 +31,7 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
     @Input()
     type: MessagePageType;
 
-     /**
+    /**
      * Whether the Message Page has an icon.
      * Set to true by default.
      * It's recommended to always show an icon with the Message Page.
@@ -49,7 +49,6 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
             this._glyph = messagePageGlyph;
             this._getMessagePageIcon();
         }
-
     }
 
     /**
@@ -65,7 +64,6 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
      */
     private _glyph = 'documents';
 
-
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}
 
@@ -79,10 +77,7 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        return [
-            'fd-message-page',
-            this.class
-        ];
+        return ['fd-message-page', this.class];
     }
 
     /** @hidden */
@@ -96,11 +91,11 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
         this._getMessagePageIcon();
     }
 
-     /**
-      * @hidden
-      * Determine the icon based on the Message Page type
-      * If no type is specified, the default icon is 'documents'
-      */
+    /**
+     * @hidden
+     * Determine the icon based on the Message Page type
+     * If no type is specified, the default icon is 'documents'
+     */
     private _getMessagePageIcon(): void {
         if (this.type) {
             switch (this.type) {
@@ -117,7 +112,7 @@ export class MessagePageComponent implements OnChanges, OnInit, CssClassBuilder 
                     this._glyph = 'document';
                     break;
                 default:
-                    this._glyph = 'documents'
+                    this._glyph = 'documents';
             }
         }
     }

@@ -42,12 +42,12 @@ export class TimePickerPo extends CoreBaseComponentPo {
     bnFormat = '#fd-option-4';
     arFormat = '#fd-option-5';
 
-    openClock(): void{
-        click(this.localExample + this.clockIcon)
+    openClock(): void {
+        click(this.localExample + this.clockIcon);
     }
 
-    closeClock(): void{
-        click(this.localExample + this.clockIcon)
+    closeClock(): void {
+        click(this.localExample + this.clockIcon);
     }
 
     open(): void {

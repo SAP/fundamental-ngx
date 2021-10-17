@@ -7,15 +7,9 @@ import { PopoverMobileComponent } from './popover-mobile.component';
 
 @NgModule({
     declarations: [PopoverMobileComponent],
-    imports: [
-        CommonModule,
-        DialogModule,
-        ButtonModule,
-    ],
-    exports: [
-        PopoverMobileComponent,
-    ],
+    imports: [CommonModule, DialogModule, ButtonModule],
+    exports: [PopoverMobileComponent],
     providers: [DynamicComponentService],
-    entryComponents: [PopoverMobileComponent],
+    entryComponents: [PopoverMobileComponent]
 })
 export class PopoverMobileModule {}

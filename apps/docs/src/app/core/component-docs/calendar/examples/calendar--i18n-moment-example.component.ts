@@ -15,8 +15,12 @@ import { DatetimeAdapter, FdDate } from '@fundamental-ngx/core/datetime';
 @Component({
     selector: 'fd-calendar-i18n-moment-example',
     template: ` <label fd-form-label for="language">Select language:</label>
-        <fd-segmented-button id="language" style="margin-bottom:20px"
-                             [ngModel]="locale" (ngModelChange)="setLocale($event)">
+        <fd-segmented-button
+            id="language"
+            style="margin-bottom:20px"
+            [ngModel]="locale"
+            (ngModelChange)="setLocale($event)"
+        >
             <button fd-button label="English" value="en-gb"></button>
             <button fd-button label="Persian" value="fa"></button>
             <button fd-button label="German" value="de"></button>

@@ -3,7 +3,7 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class TimePo extends CoreBaseComponentPo {
     private url = '/time';
-   
+
     timeExample = 'fd-time-example ';
     TwelveExample = 'fd-time-12-example ';
     noSpinnersExample = 'fd-time-no-spinners-example ';
@@ -38,7 +38,7 @@ export class TimePo extends CoreBaseComponentPo {
 
     set11HoursBtn = this.programmaticallyExample + '.fd-button--standard';
     timeItem = 'li.fd-time__item';
-    enableTimeRow = this.formExample + 'span.ng-star-inserted'
+    enableTimeRow = this.formExample + 'span.ng-star-inserted';
 
     formExample1Hour = '#fd-time-column-101';
     formExample2Minute = '#fd-time-column-292';

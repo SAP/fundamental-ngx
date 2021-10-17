@@ -16,7 +16,7 @@ import {
     objTruncationText
 } from '../fixtures/appData/object-number-content';
 
-describe('object number test suite', function () {
+describe('object number test suite', () => {
     const objectNumberPage = new ObjectNumberPo();
     const {
         basicExamples,
@@ -26,14 +26,14 @@ describe('object number test suite', function () {
         boldObjExamples,
         unitObjExamples,
         decimalObjExamples,
-        truncationObjExample,
+        truncationObjExample
     } = objectNumberPage;
 
     beforeAll(() => {
         objectNumberPage.open();
     }, 1);
 
-    describe('main checks', function () {
+    describe('main checks', () => {
         it('should check elements displayed and unit property', () => {
             const objectCount = getElementArrayLength(allExamples);
 
@@ -45,20 +45,19 @@ describe('object number test suite', function () {
         });
     });
 
-    describe('basic object number examples', function () {
+    describe('basic object number examples', () => {
         xit('should check values', () => {
             checkObjectValues(basicExamples, basicExamplesText);
-
         });
     });
 
-    describe('object number status examples', function () {
+    describe('object number status examples', () => {
         it('should check object number status examples', () => {
             checkObjectValues(objStatusExamples, objStatusExamplesText);
         });
     });
 
-    describe('large object number examples', function () {
+    describe('large object number examples', () => {
         it('should check values', () => {
             checkObjectValues(largeObjExamples, styledObjExampleText);
         });
@@ -73,10 +72,9 @@ describe('object number test suite', function () {
         });
     });
 
-    describe('bold object number examples', function () {
+    describe('bold object number examples', () => {
         it('should check values', () => {
             checkObjectValues(boldObjExamples, styledObjExampleText);
-
         });
 
         it('should check bold font', () => {
@@ -89,31 +87,31 @@ describe('object number test suite', function () {
         });
     });
 
-    describe('object number units examples', function () {
+    describe('object number units examples', () => {
         it('should check values', () => {
             checkObjectValues(unitObjExamples, objUnitExamplesText);
         });
     });
 
-    describe('object number decimal examples', function () {
+    describe('object number decimal examples', () => {
         it('should check values', () => {
             checkObjectValues(decimalObjExamples, objDecimalExamplesText);
         });
     });
 
-    describe('object number decimal examples', function () {
+    describe('object number decimal examples', () => {
         it('should check values', () => {
             checkObjectValues(truncationObjExample, objTruncationText);
         });
     });
 
-    describe('check orientation', function () {
+    describe('check orientation', () => {
         it('should check RTL and LTR', () => {
             objectNumberPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             objectNumberPage.saveExampleBaselineScreenshot();
             expect(objectNumberPage.compareWithBaseline()).toBeLessThan(5);

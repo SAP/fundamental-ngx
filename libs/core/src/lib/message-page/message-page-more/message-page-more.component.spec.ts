@@ -6,11 +6,13 @@ describe('MessagePageMoreComponent', () => {
     let component: MessagePageMoreComponent;
     let fixture: ComponentFixture<MessagePageMoreComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [MessagePageMoreComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [MessagePageMoreComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MessagePageMoreComponent);

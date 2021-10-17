@@ -8,7 +8,6 @@ import { TabConfig } from '../../platform-icon-tab-bar-docs.component';
     templateUrl: './platform-icon-tab-bar-text-type-example.component.html'
 })
 export class PlatformIconTabBarTextTypeExampleComponent implements OnInit {
-
     @Input()
     textTypeLayoutMode: 'row' | 'column' = 'row';
 
@@ -30,17 +29,17 @@ export class PlatformIconTabBarTextTypeExampleComponent implements OnInit {
                 {
                     label: 'Item 0',
                     counter: null,
-                    color: 'critical',
+                    color: 'critical'
                 },
                 {
                     label: 'Item 1',
                     counter: null,
-                    color: null,
+                    color: null
                 },
                 {
                     label: 'Item 2',
                     counter: null,
-                    color: null,
+                    color: null
                 }
             ];
         }

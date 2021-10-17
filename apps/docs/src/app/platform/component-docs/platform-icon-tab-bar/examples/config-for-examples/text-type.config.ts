@@ -28,7 +28,8 @@ export const textTypeConfig: TabConfig[] = [
         label: 'Item 4',
         counter: 0,
         color: null
-    }, {
+    },
+    {
         label: 'Item 5',
         counter: 34,
         color: 'critical'
@@ -115,4 +116,3 @@ export const longTextTypeConfig: TabConfig[] = [
         color: null
     }
 ];
-

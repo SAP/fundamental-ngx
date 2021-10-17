@@ -16,9 +16,9 @@ import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { fromEvent, Subscription } from 'rxjs';
 
 export interface SvgConfig {
-    scene?: { url: string, id: string };
-    dialog?: { url: string, id: string };
-    spot?: { url: string, id: string };
+    scene?: { url: string; id: string };
+    dialog?: { url: string; id: string };
+    spot?: { url: string; id: string };
 }
 
 let illustratedMessageUniqueId = 0;
@@ -81,7 +81,7 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    constructor (private _elementRef: ElementRef, private _cdRef: ChangeDetectorRef) {}
+    constructor(private _elementRef: ElementRef, private _cdRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnChanges(): void {
@@ -97,10 +97,7 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.type === 'scene') {
-            this._subscriptions.add(
-                fromEvent(window, 'resize')
-                    .subscribe(() => this._constructHref())
-            );
+            this._subscriptions.add(fromEvent(window, 'resize').subscribe(() => this._constructHref()));
         }
     }
 
@@ -120,36 +117,35 @@ export class IllustratedMessageComponent implements AfterViewInit, OnChanges, On
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        return [
-            'fd-illustrated-message',
-            this.type ? `fd-illustrated-message--${this.type}` : '',
-            this.class
-        ];
+        return ['fd-illustrated-message', this.type ? `fd-illustrated-message--${this.type}` : '', this.class];
     }
 
     /** @hidden */
     private _constructHref(): void {
         if (this.svgConfig) {
             switch (this.type) {
-                case 'scene' : {
-                    this._isSmallScreen = window.innerWidth < 600;
+                case 'scene':
+                    {
+                        this._isSmallScreen = window.innerWidth < 600;
 
-                    this._href = this._isSmallScreen ?
-                    `${this.svgConfig.dialog?.url}#${this.svgConfig.dialog?.id}` :
-                    `${this.svgConfig.scene?.url}#${this.svgConfig.scene?.id}`
-                    this._cdRef.detectChanges();
-                }
-                break;
+                        this._href = this._isSmallScreen
+                            ? `${this.svgConfig.dialog?.url}#${this.svgConfig.dialog?.id}`
+                            : `${this.svgConfig.scene?.url}#${this.svgConfig.scene?.id}`;
+                        this._cdRef.detectChanges();
+                    }
+                    break;
 
-                case 'dialog' : {
-                    this._href = `${this.svgConfig.dialog?.url}#${this.svgConfig.dialog?.id}`;
-                }
-                break;
+                case 'dialog':
+                    {
+                        this._href = `${this.svgConfig.dialog?.url}#${this.svgConfig.dialog?.id}`;
+                    }
+                    break;
 
-                case 'spot' : {
-                    this._href = `${this.svgConfig.spot?.url}#${this.svgConfig.spot?.id}`;
-                }
-                break;
+                case 'spot':
+                    {
+                        this._href = `${this.svgConfig.spot?.url}#${this.svgConfig.spot?.id}`;
+                    }
+                    break;
             }
         }
     }

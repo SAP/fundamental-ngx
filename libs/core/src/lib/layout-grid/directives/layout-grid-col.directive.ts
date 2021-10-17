@@ -8,7 +8,6 @@ import { CssClassBuilder } from '@fundamental-ngx/core/utils';
     selector: '[fd-layout-grid-col], [fdLayoutGridCol]'
 })
 export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChanges {
-
     /** Defines the width of the element on the layout grid. */
     @Input()
     fdLayoutGridCol: number;
@@ -17,7 +16,7 @@ export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChange
     @Input()
     set colGrow(value: boolean) {
         this._colGrow = coerceBooleanProperty(value);
-    };
+    }
 
     /** @hidden */
     get colGrow(): boolean {
@@ -97,8 +96,6 @@ export class LayoutGridColDirective implements CssClassBuilder, OnInit, OnChange
 
     /** @hidden */
     getCssClassWithColWidth(classPrefix: string, colWidth: number): string {
-        return colWidth <= GRID_COLUMNS_NUMBER && colWidth >= 1
-            ? classPrefix + colWidth
-            : null;
+        return colWidth <= GRID_COLUMNS_NUMBER && colWidth >= 1 ? classPrefix + colWidth : null;
     }
 }

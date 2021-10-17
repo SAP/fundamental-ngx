@@ -58,7 +58,10 @@ let cdkPopoverUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [PopoverService]
 })
-export class PopoverComponent extends BasePopoverClass implements AfterViewInit, AfterContentInit, OnDestroy, OnChanges {
+export class PopoverComponent
+    extends BasePopoverClass
+    implements AfterViewInit, AfterContentInit, OnDestroy, OnChanges
+{
     /** Tooltip for popover */
     @Input()
     title: string;
@@ -183,7 +186,8 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     onKeyDown(event: KeyboardEvent): void {
         const activeElement = document.activeElement;
         if (
-            this.popoverControl.elRef.nativeElement.children[0] === activeElement &&
+            // popoverControl will be undefined when popover is used from "fdPopoverTrigger"
+            this.popoverControl?.elRef.nativeElement.children[0] === activeElement &&
             activeElement.tagName !== 'INPUT' &&
             activeElement.tagName !== 'TEXTAREA' &&
             !activeElement.classList.contains(SELECT_CLASS_NAMES.selectControl)

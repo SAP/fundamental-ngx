@@ -14,7 +14,6 @@ import { CheckboxComponent } from '@fundamental-ngx/core/checkbox';
     selector: '[fdTableCell], [fd-table-cell]'
 })
 export class TableCellDirective implements AfterContentInit {
-
     /** Whether or not to show the table cell's horizontal borders */
     @HostBinding('class.fd-table__cell--no-horizontal-border')
     @Input()
@@ -67,9 +66,7 @@ export class TableCellDirective implements AfterContentInit {
     @HostBinding('class.fd-table__cell')
     _fdTableCellClass = true;
 
-    constructor (
-        public elementRef: ElementRef
-    ) {}
+    constructor(public elementRef: ElementRef) {}
 
     /** @hidden */
     ngAfterContentInit(): void {

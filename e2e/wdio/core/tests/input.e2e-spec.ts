@@ -1,18 +1,24 @@
 import {
     addValue,
-    clearValue, click, getElementArrayLength,
+    clearValue,
+    click,
+    getElementArrayLength,
     getElementSize,
-    getPreviousElementText, getText,
+    getPreviousElementText,
+    getText,
     getValue,
-    isEnabled, mouseHoverElement,
-    refreshPage, scrollIntoView,
+    isEnabled,
+    mouseHoverElement,
+    refreshPage,
+    scrollIntoView,
     sendKeys,
     setValue,
     waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import {
-    informationInputLabelText, inputMessageText,
+    informationInputLabelText,
+    inputMessageText,
     invalidInputLabelText,
     labelsArray,
     validInputLabelText,
@@ -21,18 +27,48 @@ import {
 import { longLine, number, special_characters, text } from '../fixtures/testData/input';
 import { InputPo } from '../pages/input.po';
 
-describe('Input should ', function() {
+describe('Input should ', () => {
     const inputPage = new InputPo();
-    const { defaultInput, requiredInput, passwordInput, compactInput,
-        inlineHelpRightInput, inlineHelpLeftInput, validInput, invalidInput,
-        warningInput, informationInput, disabledInput, readonlyInput, reactiveDefaultInput,
-        reactiveDisabledInput, reactivePrimaryInput, reactiveSecondaryInput, formMessagePopover,
-        validInputLabel, invalidInputLabel, warningInputLabel, informationInputLabel, addBtn, reactivePrimaryInput2
+    const {
+        defaultInput,
+        requiredInput,
+        passwordInput,
+        compactInput,
+        inlineHelpRightInput,
+        inlineHelpLeftInput,
+        validInput,
+        invalidInput,
+        warningInput,
+        informationInput,
+        disabledInput,
+        readonlyInput,
+        reactiveDefaultInput,
+        reactiveDisabledInput,
+        reactivePrimaryInput,
+        reactiveSecondaryInput,
+        formMessagePopover,
+        validInputLabel,
+        invalidInputLabel,
+        warningInputLabel,
+        informationInputLabel,
+        addBtn,
+        reactivePrimaryInput2
     } = inputPage;
 
-    const inputsArr = [defaultInput, requiredInput, passwordInput, compactInput,
-        inlineHelpRightInput, inlineHelpLeftInput, disabledInput, readonlyInput, reactiveDefaultInput,
-        reactiveDisabledInput, reactivePrimaryInput, reactiveSecondaryInput];
+    const inputsArr = [
+        defaultInput,
+        requiredInput,
+        passwordInput,
+        compactInput,
+        inlineHelpRightInput,
+        inlineHelpLeftInput,
+        disabledInput,
+        readonlyInput,
+        reactiveDefaultInput,
+        reactiveDisabledInput,
+        reactivePrimaryInput,
+        reactiveSecondaryInput
+    ];
 
     beforeAll(() => {
         inputPage.open();
@@ -66,13 +102,12 @@ describe('Input should ', function() {
         addValue(defaultInput, number);
         addValue(defaultInput, special_characters);
 
-        expect(getValue(defaultInput))
-            .toEqual(text + number + special_characters);
+        expect(getValue(defaultInput)).toEqual(text + number + special_characters);
     });
 
     it('wrap the input characters to the next line', () => {
         waitForElDisplayed(defaultInput);
-        const heightBefore = getElementSize(defaultInput, 0, 'height') ;
+        const heightBefore = getElementSize(defaultInput, 0, 'height');
         setValue(defaultInput, longLine);
         const heightAfter = getElementSize(defaultInput, 0, 'height');
 
@@ -120,15 +155,15 @@ describe('Input should ', function() {
     });
 
     it('should add to more input fields by click Add btn', () => {
-     click(addBtn);
-     expect(getElementArrayLength(reactivePrimaryInput2)).toBe(2);
+        click(addBtn);
+        expect(getElementArrayLength(reactivePrimaryInput2)).toBe(2);
     });
 
     it('should check RTL', () => {
         inputPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             inputPage.saveExampleBaselineScreenshot();
             expect(inputPage.compareWithBaseline()).toBeLessThan(5);

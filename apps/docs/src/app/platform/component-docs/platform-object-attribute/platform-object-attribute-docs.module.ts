@@ -42,4 +42,4 @@ const routes: Routes = [
         PlatformObjectAttributeLinkExampleComponent
     ]
 })
-export class PlatformObjectAttributeDocsModule { }
+export class PlatformObjectAttributeDocsModule {}

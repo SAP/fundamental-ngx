@@ -44,5 +44,4 @@ import { SideNavigationModule } from '@fundamental-ngx/core/side-navigation';
         FilterPipe
     ]
 })
-export class SharedDocumentationModule {
-}
+export class SharedDocumentationModule {}

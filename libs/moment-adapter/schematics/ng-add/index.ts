@@ -1,4 +1,4 @@
-import { Rule, SchematicContext, Tree, chain} from '@angular-devkit/schematics';
+import { Rule, SchematicContext, Tree, chain } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 
 /**
@@ -8,9 +8,7 @@ import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
  */
 export function ngAdd(_options: any): Rule {
     return (_tree: Tree, _context: SchematicContext) => {
-        return chain([
-            endInstallTask()
-        ]);
+        return chain([endInstallTask()]);
     };
 }
 

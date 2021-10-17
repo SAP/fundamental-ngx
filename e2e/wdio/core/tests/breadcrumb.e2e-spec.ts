@@ -8,8 +8,7 @@ import {
     waitForPresent
 } from '../../driver/wdio';
 
-describe('Breadcrumb test suite:', function() {
-
+describe('Breadcrumb test suite:', () => {
     const breadcrumbPage: BreadcrumbPo = new BreadcrumbPo();
     const { links, disabledLinks } = breadcrumbPage;
 
@@ -38,13 +37,10 @@ describe('Breadcrumb test suite:', function() {
         }
     });
 
-    xdescribe('Check visual regression', function() {
-
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             breadcrumbPage.saveExampleBaselineScreenshot();
             expect(breadcrumbPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
-
-

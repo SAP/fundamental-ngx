@@ -1,7 +1,7 @@
 import { Directive, HostBinding, Input } from '@angular/core';
 
 @Directive({
-  selector: '[fd-list-link], [fdListLink]'
+    selector: '[fd-list-link], [fdListLink]'
 })
 export class ListLinkDirective {
     /** Defines if navigation indicator arrow should be included inside list item */

@@ -11,11 +11,25 @@
     <fd-tile type="line" [action]="true">
         <div fd-tile-header>
             <h1 fd-tile-title>Line Tile Title sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h1>
-            <h2 fd-tile-subtitle>Line Tile Subtitle aute irure dolor in reprehenderit in voluptate velit esse cillum</h2>
+            <h2 fd-tile-subtitle>
+                Line Tile Subtitle aute irure dolor in reprehenderit in voluptate velit esse cillum
+            </h2>
         </div>
         <div fd-tile-action-container>
-            <button fd-button fd-tile-action-close [compact]="true" [fdType]="'transparent'" (click)="window.alert('Close clicked')"></button>
-            <button fd-button fd-tile-action-indicator [compact]="true" [fdType]="'transparent'" (click)="window.alert('More clicked')"></button>
+            <button
+                fd-button
+                fd-tile-action-close
+                [compact]="true"
+                [fdType]="'transparent'"
+                (click)="window.alert('Close clicked')"
+            ></button>
+            <button
+                fd-button
+                fd-tile-action-indicator
+                [compact]="true"
+                [fdType]="'transparent'"
+                (click)="window.alert('More clicked')"
+            ></button>
         </div>
     </fd-tile>
 </div>

@@ -8,26 +8,45 @@ import {
     scrollIntoView,
     getValue,
     sendKeys,
-    isElementDisplayed,
     doesItExist,
     setValue,
-    clickAndMoveElement
+    clickAndMoveElement,
+    pause
 } from '../../driver/wdio';
 import {
-    requiredErrorMessage, termsErrorMesssage, frameworkErrorMessage,
-    birthdayYearErrorMessage, passwordConditionsErrorMessage
+    requiredErrorMessage,
+    termsErrorMesssage,
+    frameworkErrorMessage,
+    birthdayYearErrorMessage,
+    passwordConditionsErrorMessage
 } from '../fixtures/appData/form-generator-contents';
-import {
-    invalidBirthday,validBirthday, correctPassword, simplePassword
-} from '../fixtures/testData/form-generator';
+import { invalidBirthday, validBirthday, correctPassword, simplePassword } from '../fixtures/testData/form-generator';
 import { FormGeneratorPo } from '../pages/form-generator.po';
 
-describe('Form generator test suite', function () {
+describe('Form generator test suite', () => {
     const formGeneratorPage = new FormGeneratorPo();
     const {
-        errorExample, customExample, defaultExample, observableExample, fieldLayoutExample, programmaticExample,
-        nameInput, passwordInput, ageInput, dateInput, radioButton, checkbox, submitButton, mainSpecialitySelect,
-        calendarInputGroup, errorMessage, radioButtonLabel, sliderPoint, formValue, validationInput
+        errorExample,
+        customExample,
+        defaultExample,
+        observableExample,
+        fieldLayoutExample,
+        programmaticExample,
+        nameInput,
+        passwordInput,
+        ageInput,
+        dateInput,
+        radioButton,
+        checkbox,
+        submitButton,
+        mainSpecialitySelect,
+        calendarInputGroup,
+        errorMessage,
+        radioButtonLabel,
+        sliderPoint,
+        formValue,
+        validationInput,
+        busyIndicator
     } = formGeneratorPage;
 
     beforeAll(() => {
@@ -36,6 +55,9 @@ describe('Form generator test suite', function () {
 
     beforeEach(() => {
         refreshPage();
+        if (doesItExist(busyIndicator) === true) {
+            pause(1000);
+        }
         waitForElDisplayed(formGeneratorPage.title);
     }, 1);
 
@@ -106,7 +128,6 @@ describe('Form generator test suite', function () {
     });
 
     describe('Tests for programmatic example', () => {
-
         it('should check validation for required fields', () => {
             checkFormValidation(programmaticExample);
         });
@@ -121,12 +142,11 @@ describe('Form generator test suite', function () {
 
         it('should check birtday year error message', () => {
             checkBirthdayValidation(programmaticExample);
-        })
+        });
 
         it('should check password validation', () => {
             checkPasswordValidation(programmaticExample);
         });
-
     });
 
     it('should check custom controls example', () => {
@@ -151,6 +171,7 @@ describe('Form generator test suite', function () {
     });
 
     function checkPasswordValidation(section: string): void {
+        scrollIntoView(section + passwordInput);
         setValue(section + passwordInput, simplePassword);
         checkValidationMessage(section, passwordInput, passwordConditionsErrorMessage);
         setValue(section + passwordInput, correctPassword);
@@ -161,7 +182,7 @@ describe('Form generator test suite', function () {
         scrollIntoView(section + dateInput);
         setValue(section + dateInput, invalidBirthday);
         checkValidationMessage(section, calendarInputGroup, birthdayYearErrorMessage);
-        setValue(section + dateInput,validBirthday);
+        setValue(section + dateInput, validBirthday);
         expect(doesItExist(errorMessage)).toBe(false, 'error message exists');
     }
 
@@ -186,15 +207,18 @@ describe('Form generator test suite', function () {
 
         const nameLength = getValue(section + nameInput).length;
         for (let i = 0; i < nameLength; i++) {
+            scrollIntoView(section + nameInput);
             sendKeys('Backspace');
         }
 
         const ageLength = getValue(section + ageInput).length;
         click(section + ageInput);
         for (let i = 0; i < ageLength; i++) {
+            scrollIntoView(section + ageInput);
             sendKeys('Backspace');
         }
 
+        scrollIntoView(section + submitButton);
         click(section + submitButton);
 
         checkValidationMessage(section, nameInput, requiredErrorMessage);
@@ -202,8 +226,11 @@ describe('Form generator test suite', function () {
         checkValidationMessage(section, passwordInput, requiredErrorMessage);
         checkValidationMessage(section, calendarInputGroup, requiredErrorMessage);
 
-        if (section == defaultExample) {
-            expect(getElementClass(section + mainSpecialitySelect)).toContain('is-error', 'element is not highlited by error');
+        if (section === defaultExample) {
+            expect(getElementClass(section + mainSpecialitySelect)).toContain(
+                'is-error',
+                'element is not highlited by error'
+            );
         }
 
         for (let i = 0; i < getElementArrayLength(section + radioButton); i++) {
@@ -216,8 +243,9 @@ describe('Form generator test suite', function () {
 
     function checkValidationMessage(section: string, item: string, message: string, i: number = 0): void {
         click(section + item, i);
-        expect(isElementDisplayed(errorMessage)).toBe(true, 'error message is not displayed');
+        // pause for element to be created
+        pause(1000);
+        expect(waitForElDisplayed(errorMessage)).toBe(true, 'error message is not displayed');
         expect(getText(errorMessage)).toEqual(message, 'error message is not match');
     }
-
 });

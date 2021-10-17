@@ -2,14 +2,17 @@ import { FileUploaderPo } from '../pages/file-uploader.po';
 import {
     getAlertText,
     getAttributeByName,
-    getElementArrayLength, getText, isElementClickable,
+    getElementArrayLength,
+    getText,
+    isElementClickable,
     refreshPage,
-    scrollIntoView, uploadFile
+    scrollIntoView,
+    uploadFile
 } from '../../driver/wdio';
 
 import { placeholderTestTextArr, imagePath, titleValue } from '../fixtures/appData/file-uploader-contents';
 
-describe('File uploader component test', function() {
+describe('File uploader component test', () => {
     const fileUploaderPage = new FileUploaderPo();
     const { fileUploaderInput, browseButton, fileUploaderInputFile, fileSelectedText } = fileUploaderPage;
 
@@ -56,13 +59,11 @@ describe('File uploader component test', function() {
         }
     });
 
-
     it('should check RTL and LTR orientation', () => {
         fileUploaderPage.checkRtlSwitch();
     });
 
-    xdescribe('Should check visual regression', function() {
-
+    xdescribe('Should check visual regression', () => {
         it('should check visual regression for all examples', () => {
             fileUploaderPage.saveExampleBaselineScreenshot();
             expect(fileUploaderPage.compareWithBaseline()).toBeLessThan(5);

@@ -7,7 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileUploaderExampleComponent {
-
     files: File[];
 
     handleFileSelection(files: File[]): void {

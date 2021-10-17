@@ -23,10 +23,6 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, BusyIndicatorModule, FormModule],
     exports: [RouterModule],
-    declarations: [
-        examples,
-        BusyIndicatorDocsComponent,
-        BusyIndicatorHeaderComponent,
-    ]
+    declarations: [examples, BusyIndicatorDocsComponent, BusyIndicatorHeaderComponent]
 })
 export class BusyIndicatorDocsModule {}

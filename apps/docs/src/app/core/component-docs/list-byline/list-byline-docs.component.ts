@@ -5,8 +5,8 @@ import * as bylineNavigationSrcHtml from '!raw-loader!./examples/list-byline-nav
 import * as bylineBorderlessSrcHtml from '!raw-loader!./examples/list-byline-borderless-example/list-byline-borderless-example.component.html';
 import * as bylineSelectionSrcHtml from '!raw-loader!./examples/list-byline-selection-example/list-byline-selection-example.component.html';
 import * as bylineSelectionSrcTs from '!raw-loader!./examples/list-byline-selection-example/list-byline-selection-example.component.ts';
-import * as bylineButtonsTs from '!raw-loader!./examples/list-byline-button-example/list-byline-button-example.component.ts'
-import * as bylineButtonsHtml from '!raw-loader!./examples/list-byline-button-example/list-byline-button-example.component.html'
+import * as bylineButtonsTs from '!raw-loader!./examples/list-byline-button-example/list-byline-button-example.component.ts';
+import * as bylineButtonsHtml from '!raw-loader!./examples/list-byline-button-example/list-byline-button-example.component.html';
 import * as bylineInteractiveTs from '!raw-loader!./examples/list-byline-interactive-example/list-byline-interactive-example.component.ts';
 import * as bylineInteractiveHtml from '!raw-loader!./examples/list-byline-interactive-example/list-byline-interactive-example.component.html';
 import * as bylineWrapTs from '!raw-loader!./examples/list-byline-wrap-example/list-byline-wrap-example.component.ts';
@@ -74,14 +74,13 @@ export class ListBylineDocsComponent {
         {
             language: 'html',
             code: bylineInteractiveHtml,
-            fileName: 'list-byline-interactive-example',
-            
+            fileName: 'list-byline-interactive-example'
         },
         {
             language: 'typescript',
             code: bylineInteractiveTs,
             fileName: 'list-byline-interactive-example',
-            component: 'ListBylineInteractiveExampleComponent',
+            component: 'ListBylineInteractiveExampleComponent'
         }
     ];
 
@@ -89,14 +88,13 @@ export class ListBylineDocsComponent {
         {
             language: 'html',
             code: bylineWrapHtml,
-            fileName: 'list-byline-wrap-example',
-            
+            fileName: 'list-byline-wrap-example'
         },
         {
             language: 'typescript',
             code: bylineWrapTs,
             fileName: 'list-byline-wrap-example',
-            component: 'ListBylineWrapExampleComponent',
+            component: 'ListBylineWrapExampleComponent'
         }
     ];
 }

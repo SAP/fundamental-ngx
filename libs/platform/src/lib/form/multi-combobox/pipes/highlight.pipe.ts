@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { MatchingStrategy } from '@fundamental-ngx/platform/shared';
+import { getMatchingStrategyStartsWithPerTermReqexp, MatchingStrategy } from '@fundamental-ngx/platform/shared';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 
 // TODO: refactor it with ComboboxHighlightPipe from Combobox and SearchHighlightPipe (https://github.com/SAP/fundamental-ngx/issues/5333)
@@ -11,9 +11,17 @@ import { MultiComboboxConfig } from '../multi-combobox.config';
 export class MultiComboboxHighlightPipe implements PipeTransform {
     constructor(private readonly multiComboboxConfig: MultiComboboxConfig) {}
 
-    transform(value: string, searchText: string, matchingStrategy: MatchingStrategy = this.multiComboboxConfig.matchingStrategy): string {
+    transform(
+        value: string,
+        searchText: string,
+        matchingStrategy: MatchingStrategy = this.multiComboboxConfig.matchingStrategy
+    ): string {
         if (!(value && searchText)) {
             return value;
+        }
+
+        if (matchingStrategy === MatchingStrategy.STARTS_WITH_PER_TERM) {
+            return this._searchByStrategyStartsWithPerTerm(value, searchText);
         }
 
         if (matchingStrategy === MatchingStrategy.STARTS_WITH) {
@@ -25,6 +33,12 @@ export class MultiComboboxHighlightPipe implements PipeTransform {
         }
 
         return value;
+    }
+
+    private _searchByStrategyStartsWithPerTerm(value: string, searchText: string): string {
+        const reqexp = getMatchingStrategyStartsWithPerTermReqexp(searchText);
+
+        return value.replace(reqexp, `$1<strong>$2</strong>`);
     }
 
     private _searchByStrategyStartsWith(value: string, searchText: string): string {

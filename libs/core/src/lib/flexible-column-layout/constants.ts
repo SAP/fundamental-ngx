@@ -1,4 +1,3 @@
-  
 export const ONE_COLUMN_START_FULL_SCREEN = 'OneColumnStartFullScreen';
 export const ONE_COLUMN_MID_FULL_SCREEN = 'OneColumnMidFullScreen';
 export const ONE_COLUMN_END_FULL_SCREEN = 'OneColumnEndFullScreen';
@@ -16,9 +15,22 @@ export const LG_SCREEN_SIZE = 'lg';
 
 export type ScreenSize = 'sm' | 'md' | 'lg';
 
-export type FlexibleColumnLayout = 'OneColumnStartFullScreen' | 
-'OneColumnMidFullScreen' | 'OneColumnEndFullScreen' | 'TwoColumnsStartExpanded' | 'TwoColumnsMidExpanded' | 'TwoColumnsEndExpanded' | 'ThreeColumnsMidExpanded' | 'ThreeColumnsEndExpanded' | 'ThreeColumnsStartMinimized' | 'ThreeColumnsEndMinimized';
+export type FlexibleColumnLayout =
+    | 'OneColumnStartFullScreen'
+    | 'OneColumnMidFullScreen'
+    | 'OneColumnEndFullScreen'
+    | 'TwoColumnsStartExpanded'
+    | 'TwoColumnsMidExpanded'
+    | 'TwoColumnsEndExpanded'
+    | 'ThreeColumnsMidExpanded'
+    | 'ThreeColumnsEndExpanded'
+    | 'ThreeColumnsStartMinimized'
+    | 'ThreeColumnsEndMinimized';
 
 export type ColumnSeparatorValue = 'right' | 'left' | null;
 
-export interface FlexibleColumnSettings { start: number; mid: number; end: number; }
+export interface FlexibleColumnSettings {
+    start: number;
+    mid: number;
+    end: number;
+}

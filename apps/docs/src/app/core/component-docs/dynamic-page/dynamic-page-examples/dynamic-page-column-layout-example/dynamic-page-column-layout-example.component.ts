@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
     selector: 'fd-dynamic-page-column-layout-example',
     templateUrl: './dynamic-page-column-layout-example.component.html',
     styles: [
-            `
+        `
             .overlay {
                 height: 100%;
                 width: 100%;
@@ -16,7 +16,7 @@ import { Component } from '@angular/core';
                 overflow-x: hidden;
             }
             .fd-dynamic-page-section-example {
-                min-height: 20vh
+                min-height: 20vh;
             }
         `
     ]

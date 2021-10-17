@@ -21,7 +21,7 @@ export interface DateTimeFormats {
         yearA11yLabel: unknown;
     };
     rangeDelimiter: string;
-};
+}
 
 /**
  * DateTimeFormats injection token

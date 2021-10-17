@@ -1,12 +1,6 @@
 <div class="fd-calendar__months">
-    <table
-        class="fd-calendar__table"
-        role="grid"
-    >
-        <tbody
-            class="fd-calendar__group"
-            role="rowgroup"
-        >
+    <table class="fd-calendar__table" role="grid">
+        <tbody class="fd-calendar__group" role="rowgroup">
             <tr
                 class="fd-calendar__row"
                 role="row"
@@ -25,11 +19,7 @@
                     (keydown)="onKeydownMonthHandler($event, monthCell.index)"
                     (click)="selectMonth(monthCell, $event)"
                 >
-                    <span
-                        role="button"
-                        class="fd-calendar__text"
-                        [attr.aria-label]="monthCell.ariaLabel"
-                    >
+                    <span role="button" class="fd-calendar__text" [attr.aria-label]="monthCell.ariaLabel">
                         {{ monthCell.label }}
                     </span>
                 </td>

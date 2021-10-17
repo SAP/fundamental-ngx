@@ -18,10 +18,7 @@ describe('PlatformTableP13FilterDialogComponent', () => {
         waitForAsync(() => {
             TestBed.configureTestingModule({
                 imports: [PlatformTableModule, BrowserAnimationsModule],
-                providers: [
-                    { provide: DialogRef, useValue: dialogRef },
-                    DialogConfig
-                ]
+                providers: [{ provide: DialogRef, useValue: dialogRef }, DialogConfig]
             }).compileComponents();
         })
     );

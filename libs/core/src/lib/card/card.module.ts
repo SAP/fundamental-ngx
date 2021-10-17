@@ -31,7 +31,6 @@ const components = [
     CardSecondSubtitleDirective,
     CardCounterDirective,
     CardLoaderComponent,
-
     CardKpiHeaderComponent,
     CardKpiValueDirective,
     CardKpiScaleIconDirective,

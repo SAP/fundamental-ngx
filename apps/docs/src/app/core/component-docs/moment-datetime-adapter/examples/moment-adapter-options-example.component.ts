@@ -7,9 +7,7 @@ import { MOMENT_DATE_TIME_ADAPTER_OPTIONS, MomentDatetimeAdapter } from '@fundam
     templateUrl: './moment-adapter-options-example.component.html',
     providers: [
         { provide: DatetimeAdapter, useClass: MomentDatetimeAdapter },
-        { provide: MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true, strict: true } },
+        { provide: MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true, strict: true } }
     ]
 })
-export class MomentAdapterOptionsExampleComponent {
-
-}
+export class MomentAdapterOptionsExampleComponent {}

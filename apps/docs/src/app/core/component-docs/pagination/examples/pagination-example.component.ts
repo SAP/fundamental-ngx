@@ -5,7 +5,8 @@ import { PaginationComponent } from '@fundamental-ngx/core/pagination';
 
 @Component({
     selector: 'fd-pagination-example',
-    template: ` <fd-pagination
+    template: `
+        <fd-pagination
             [displayTotalItems]="false"
             [totalItems]="totalItems"
             (pageChangeStart)="newPageClicked($event)"
@@ -15,7 +16,7 @@ import { PaginationComponent } from '@fundamental-ngx/core/pagination';
         <br /><br />
         <button fd-button label="Go to page 1" (click)="goToPage(1)"></button>
         <div *ngIf="notification">{{ notification }}</div>
-        `
+    `
 })
 export class PaginationExampleComponent {
     totalItems = 50;
@@ -26,25 +27,28 @@ export class PaginationExampleComponent {
     @ViewChild(PaginationComponent) paginationComponent: PaginationComponent;
 
     newPageClicked(event: number): void {
-        this.http.get('assets/pagination-data.json').pipe(
-            tap(() => {
-                this.notification = 'loading...';
-            }),
-            delay(100),
-        ).subscribe(
-            (data) => {
-                /* update the currentPage when the http action is successful */
-                this.currentPage = event;
-                this.notification = 'page change success!';
-            },
-            (error) => {
-                /* do not update the currentPage when the http action fails */
-                this.notification = 'page change error!';
-            },
-            () => {
-                this.notification = 'New page selected: ' + this.currentPage;
-            }
-        );
+        this.http
+            .get('assets/pagination-data.json')
+            .pipe(
+                tap(() => {
+                    this.notification = 'loading...';
+                }),
+                delay(100)
+            )
+            .subscribe(
+                (data) => {
+                    /* update the currentPage when the http action is successful */
+                    this.currentPage = event;
+                    this.notification = 'page change success!';
+                },
+                (error) => {
+                    /* do not update the currentPage when the http action fails */
+                    this.notification = 'page change error!';
+                },
+                () => {
+                    this.notification = 'New page selected: ' + this.currentPage;
+                }
+            );
     }
 
     goToPage(page: number): void {

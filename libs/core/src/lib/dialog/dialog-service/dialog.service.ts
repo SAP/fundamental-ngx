@@ -11,7 +11,6 @@ export type DialogContentType = TemplateRef<any> | Type<any> | DialogDefaultCont
 /** Service used to create a dialog. */
 @Injectable()
 export class DialogService extends DialogBaseService<DialogContainerComponent> {
-
     /** @hidden */
     constructor(
         @Inject(DynamicComponentService) dynamicComponentService: DynamicComponentService,
@@ -37,12 +36,11 @@ export class DialogService extends DialogBaseService<DialogContainerComponent> {
                 { provide: DialogConfig, useValue: dialogConfig },
                 { provide: DialogRef, useValue: dialogRef },
                 { provide: RtlService, useValue: this._rtlService },
-                { provide: DialogService, useValue: this },
+                { provide: DialogService, useValue: this }
             ]
         });
 
-        const component = this._dynamicComponentService.createDynamicComponent<DialogContainerComponent>
-        (
+        const component = this._dynamicComponentService.createDynamicComponent<DialogContainerComponent>(
             content,
             DialogContainerComponent,
             dialogConfig,

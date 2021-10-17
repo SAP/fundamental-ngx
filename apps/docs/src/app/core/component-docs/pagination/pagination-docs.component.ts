@@ -71,7 +71,7 @@ export class PaginationDocsComponent {
         {
             language: 'html',
             code: paginationPerPageHtml,
-            fileName: 'pagination-per-page-example',
+            fileName: 'pagination-per-page-example'
         },
         {
             language: 'typescript',

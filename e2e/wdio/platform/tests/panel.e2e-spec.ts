@@ -5,7 +5,8 @@ import {
     expandable_panel_header
 } from '../fixtures/appData/panel-page-content';
 import {
-    click, doesItExist,
+    click,
+    doesItExist,
     getCSSPropertyByName,
     getElementSize,
     getText,
@@ -18,9 +19,19 @@ import {
 describe('Verify Panel', () => {
     const panelPage = new PanelPo();
     const {
-        expandablePanelRoot, expandablePanelBtn, expandablePanelTitle, expandablePanelContent, fixedPanelSection,
-        fixedPanelDescription, compactPanelRoot, compactPanelBtn, fixedHeightPanelRoot, fixedHeightPanelContentRegion,
-        fixedHeightPanelContent, actionPanelRoot, actionPanelBtn
+        expandablePanelRoot,
+        expandablePanelBtn,
+        expandablePanelTitle,
+        expandablePanelContent,
+        fixedPanelSection,
+        fixedPanelDescription,
+        compactPanelRoot,
+        compactPanelBtn,
+        fixedHeightPanelRoot,
+        fixedHeightPanelContentRegion,
+        fixedHeightPanelContent,
+        actionPanelRoot,
+        actionPanelBtn
     } = panelPage;
 
     beforeAll(() => {
@@ -62,20 +73,18 @@ describe('Verify Panel', () => {
     });
 
     it('should action panel have clickable buttons example ', () => {
-        expect(getText(actionPanelBtn, 0).trim())
-            .toBe(action_panel_edit_button);
+        expect(getText(actionPanelBtn, 0).trim()).toBe(action_panel_edit_button);
         expect(waitForClickable(actionPanelBtn, 0)).toBe(true);
-        expect(getText(actionPanelBtn, 1).trim())
-            .toBe(action_panel_delete_button);
+        expect(getText(actionPanelBtn, 1).trim()).toBe(action_panel_delete_button);
         expect(waitForClickable(actionPanelBtn, 1)).toBe(true);
     });
-    describe('orientation check', function() {
+    describe('orientation check', () => {
         it('should be able to switch to rtl', () => {
             panelPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             panelPage.saveExampleBaselineScreenshot();
             expect(panelPage.compareWithBaseline()).toBeLessThan(5);

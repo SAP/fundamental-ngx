@@ -21,10 +21,9 @@ describe('MicroProcessFlowIconComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [ TestWrapperComponent ],
+            declarations: [TestWrapperComponent],
             imports: [MicroProcessFlowModule]
-        })
-        .compileComponents();
+        }).compileComponents();
     });
 
     beforeEach(() => {

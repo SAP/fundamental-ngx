@@ -16,8 +16,7 @@ describe('IconTabBarProcessTypeComponent', () => {
         await TestBed.configureTestingModule({
             declarations: [IconTabBarProcessTypeComponent],
             schemas: [NO_ERRORS_SCHEMA]
-        })
-            .compileComponents();
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -69,7 +68,7 @@ describe('IconTabBarProcessTypeComponent', () => {
 });
 
 const fakeOverflowDirective = {
-    getAmountOfExtraItems: _ => AMOUNT_OF_EXTRA_TABS
+    getAmountOfExtraItems: (_) => AMOUNT_OF_EXTRA_TABS
 };
 
 const fakeNgZone = {
@@ -79,6 +78,5 @@ const fakeNgZone = {
 };
 
 const fakeCdr = {
-    detectChanges: _ => null
+    detectChanges: (_) => null
 };
-

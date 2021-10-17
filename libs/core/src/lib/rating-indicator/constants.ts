@@ -16,4 +16,4 @@ export enum RatingIndicatorSizeEnum {
     'cozy',
     'compact',
     'condensed'
-};
+}

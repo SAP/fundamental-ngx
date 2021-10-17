@@ -56,9 +56,9 @@ import {
     ObservableMultiComboBoxDataSource,
     SelectableOptionItem
 } from '@fundamental-ngx/platform/shared';
-import { ListConfig } from '@fundamental-ngx/platform/list';
 import { MultiComboboxComponent } from '../multi-combobox/multi-combobox.component';
 import { TextAlignment } from '../../combobox';
+import { MultiComboboxConfig } from '../multi-combobox.config';
 
 export type FdpMultiComboboxDataSource<T> = MultiComboBoxDataSource<T> | Observable<T[]> | T[];
 
@@ -209,7 +209,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     selectedItemTemplate: TemplateRef<any>;
 
     /** @hidden */
-    _contentDensity: ContentDensity = this.listConfig.contentDensity;
+    _contentDensity: ContentDensity = this.multiComboboxConfig.contentDensity;
 
     /**
      * @hidden
@@ -293,7 +293,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     /** @hidden */
     private _inputTextValue: string;
     /** @hidden */
-    private _matchingStrategy: MatchingStrategy = this.listConfig.matchingStrategy;
+    private _matchingStrategy: MatchingStrategy = this.multiComboboxConfig.matchingStrategy;
     /** @hidden */
     private _dsSubscription?: Subscription;
     /** @hidden */
@@ -337,7 +337,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         @Optional() @Self() readonly ngControl: NgControl,
         @Optional() @SkipSelf() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
-        protected listConfig: ListConfig,
+        protected multiComboboxConfig: MultiComboboxConfig,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
     ) {
@@ -494,9 +494,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
             this.showList(false);
         } else if (!event.ctrlKey && !KeyUtil.isKeyCode(event, this._nonOpeningKeys)) {
             this.showList(true);
-            const acceptedKeys =
-                !KeyUtil.isKeyType(event, 'alphabetical') &&
-                !KeyUtil.isKeyType(event, 'numeric');
+            const acceptedKeys = !KeyUtil.isKeyType(event, 'alphabetical') && !KeyUtil.isKeyType(event, 'numeric');
             if (this.isEmptyValue && acceptedKeys) {
                 this.listComponent?.setItemActive(0);
             }
@@ -529,7 +527,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         }
 
         const activeValue: SelectableOptionItem = this._getSelectItemByInputValue(this.inputText);
-        const index: number = this._flatSuggestions.findIndex(value => value === activeValue);
+        const index: number = this._flatSuggestions.findIndex((value) => value === activeValue);
         const position = !this.inputText && offset === -1 ? this._flatSuggestions.length - 1 : index + offset;
         const item: SelectableOptionItem = this._flatSuggestions[position];
 
@@ -537,7 +535,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
             this.setInputTextFromOptionItem(item);
         }
 
-        const selectedIndex = this._selected.findIndex(value => value.label === item?.label);
+        const selectedIndex = this._selected.findIndex((value) => value.label === item?.label);
         if (selectedIndex !== -1) {
             this._chooseOtherItem(offset);
         }
@@ -551,7 +549,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     /** @hidden
      *  Map grouped values to array. */
     protected _flatGroups(items: SelectableOptionItem[]): SelectableOptionItem[] {
-        return items.reduce((result: SelectableOptionItem[], item: SelectableOptionItem) => result.concat(item.children), []);
+        return items.reduce(
+            (result: SelectableOptionItem[], item: SelectableOptionItem) => result.concat(item.children),
+            []
+        );
     }
 
     /** @hidden */
@@ -587,10 +588,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
             .open()
             .pipe(
                 takeUntil(this._destroyed),
-                tap(data => this.isListEmpty = !data?.length),
-                filter(data => !!data.length)
+                tap((data) => (this.isListEmpty = !data?.length)),
+                filter((data) => !!data.length)
             )
-            .subscribe(data => {
+            .subscribe((data) => {
                 this._suggestions = this._convertToOptionItems(data);
                 this._flatSuggestions = this.isGroup ? this._flatGroups(this._suggestions) : this._suggestions;
 
@@ -621,13 +622,17 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
     }
 
     /** @hidden */
-    private _toDataStream(ds: FdpMultiComboboxDataSource<any>): MultiComboBoxDataSource<any> | undefined {
-        if (isDataSource(ds)) {
-            return ds as MultiComboBoxDataSource<any>;
-        } else if (Array.isArray(ds)) {
-            return new ArrayMultiComboBoxDataSource<any>(ds);
-        } else if (isObservable(ds)) {
-            return new ObservableMultiComboBoxDataSource<any>(ds);
+    private _toDataStream(source: FdpMultiComboboxDataSource<any>): MultiComboBoxDataSource<any> | undefined {
+        if (isDataSource(source)) {
+            return source as MultiComboBoxDataSource<any>;
+        }
+
+        if (Array.isArray(source)) {
+            return new ArrayMultiComboBoxDataSource<any>(source);
+        }
+
+        if (isObservable(source)) {
+            return new ObservableMultiComboBoxDataSource<any>(source);
         }
 
         return undefined;

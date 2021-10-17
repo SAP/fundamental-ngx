@@ -1,11 +1,12 @@
 # Breadcrumb
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.14.
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.5.
 
 ## Code scaffolding
 
 Run `ng generate component component-name --project breadcrumb` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project breadcrumb`.
-> Note: Don't forget to add `--project breadcrumb` or else it will be added to the default project in your `angular.json` file. 
+
+> Note: Don't forget to add `--project breadcrumb` or else it will be added to the default project in your `angular.json` file.
 
 ## Build
 

@@ -3,32 +3,27 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ListModule } from '../list.module';
 
 @Component({
-    template: `
-        <span
-            #componentElement
-            fd-list-icon
-            [glyph]="glyph">
-        </span>
-    `
+    template: ` <span #componentElement fd-list-icon [glyph]="glyph"> </span> `
 })
 class TestComponent {
     @ViewChild('componentElement', { read: ElementRef })
     ref: ElementRef;
 
     glyph: string = null;
-
 }
 
 describe('ListTitleComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [ListModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [ListModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

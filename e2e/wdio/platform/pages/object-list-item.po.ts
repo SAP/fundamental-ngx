@@ -16,8 +16,10 @@ export class ObjectListItemPo extends BaseComponentPo {
     objListAttr = 'fdp-platform-object-list-item-border-less-example fdp-list';
     objListItem = 'fdp-platform-object-list-item-border-less-example li';
     obJListIntro = 'fdp-platform-object-list-item-border-less-example .fd-object-list__intro';
-    objListAttributes = 'fdp-platform-object-list-item-border-less-example fdp-object-list-item:first-of-type fdp-object-attribute';
-    objListStatuses = 'fdp-platform-object-list-item-border-less-example fdp-object-list-item:first-of-type .fd-object-status';
+    objListAttributes =
+        'fdp-platform-object-list-item-border-less-example fdp-object-list-item:first-of-type fdp-object-attribute';
+    objListStatuses =
+        'fdp-platform-object-list-item-border-less-example fdp-object-list-item:first-of-type .fd-object-status';
     // obj list item with row selection examples
     objListSelItem = 'fdp-platform-object-list-item-with-row-selection-example li';
     obJListSelIntro = 'fdp-platform-object-list-item-with-row-selection-example .fd-object-list__intro';
@@ -32,7 +34,8 @@ export class ObjectListItemPo extends BaseComponentPo {
     // row selection and navigation examples
     objRowNavLink = 'fdp-platform-object-list-item-with-row-selection-and-navigation-example a';
     objRowNavList = 'fdp-platform-object-list-item-with-row-selection-and-navigation-example li';
-    objRowNavAttributes = 'fdp-platform-object-list-item-with-row-selection-and-navigation-example fdp-object-attribute';
+    objRowNavAttributes =
+        'fdp-platform-object-list-item-with-row-selection-and-navigation-example fdp-object-attribute';
     objRowNavStatuses = 'fdp-platform-object-list-item-with-row-selection-and-navigation-example .fd-object-status';
     objRowNavToolbar = 'fdp-platform-object-list-item-with-row-selection-and-navigation-example fd-toolbar';
     // declarative examples

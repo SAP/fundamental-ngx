@@ -38,5 +38,4 @@ const routes: Routes = [
         SwitchConfigExampleComponent
     ]
 })
-export class PlatformSwitchDocsModule {
-}
+export class PlatformSwitchDocsModule {}

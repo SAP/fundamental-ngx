@@ -7,7 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileUploaderDragDisabledExampleComponent {
-
     files: File[];
     invalidFiles: File[];
 

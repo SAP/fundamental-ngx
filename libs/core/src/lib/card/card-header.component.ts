@@ -76,10 +76,7 @@ export class CardHeaderComponent implements OnInit, OnChanges, CssClassBuilder, 
     @applyCssClass
     /** @hidden */
     buildComponentCssClass(): string[] {
-        return [
-            CLASS_NAME.cardHeader,
-            !this.interactive ? CLASS_NAME.cardHeaderNonInteractive : ''
-        ];
+        return [CLASS_NAME.cardHeader, !this.interactive ? CLASS_NAME.cardHeaderNonInteractive : ''];
     }
 
     /** @hidden */

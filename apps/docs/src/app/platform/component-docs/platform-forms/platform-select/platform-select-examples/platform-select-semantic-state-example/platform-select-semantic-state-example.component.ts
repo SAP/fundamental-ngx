@@ -21,7 +21,6 @@ export class Fruit {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformSelectSemanticStateExampleComponent {
-
     userList = [
         new Fruit('A', 'Apple', 10),
         new Fruit('B', 'orange', 70),

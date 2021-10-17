@@ -48,7 +48,7 @@
     </tbody>
 </table>
 
-<br>
+<br />
 
 <h4 class="table-example-popin-title">Row with navigation button</h4>
 
@@ -117,12 +117,12 @@
                     (click)="alert(fruit)"
                 >
                     <td fd-table-cell>
-                        <p fd-table-text [title]="true">{{fruit.name}}</p>
-                        <p fd-table-text>{{fruit.country}}</p>
+                        <p fd-table-text [title]="true">{{ fruit.name }}</p>
+                        <p fd-table-text>{{ fruit.country }}</p>
                     </td>
 
                     <td fd-table-cell [fitContent]="true">
-                        {{fruit.price}}
+                        {{ fruit.price }}
                     </td>
 
                     <td fd-table-cell [fitContent]="true" [noPadding]="true">
@@ -131,7 +131,8 @@
                             fd-table-icon
                             [glyph]="isRtl ? 'slim-arrow-left' : 'slim-arrow-right'"
                             [navigation]="true"
-                            role="presentation"></i>
+                            role="presentation"
+                        ></i>
                     </td>
                 </tr>
 
@@ -139,17 +140,17 @@
                     <td fd-table-cell colspan="100%">
                         <p fd-table-text>
                             <label fd-form-label>Status:</label>
-                            <span fd-object-status [status]="fruit.status">{{fruit.statusName}}</span>
+                            <span fd-object-status [status]="fruit.status">{{ fruit.statusName }}</span>
                         </p>
 
                         <p fd-table-text>
                             <label fd-form-label>Date Of Expire:</label>
-                            {{fruit.dateOfExpire}}
+                            {{ fruit.dateOfExpire }}
                         </p>
 
                         <p fd-table-text>
                             <label fd-form-label>Description:</label>
-                            {{fruit.description}}
+                            {{ fruit.description }}
                         </p>
                     </td>
                 </tr>

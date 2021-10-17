@@ -1,6 +1,4 @@
-<fd-docs-section-title id="button-behaviors" componentName="split-button">
-    Button Behaviors
-</fd-docs-section-title>
+<fd-docs-section-title id="button-behaviors" componentName="split-button"> Button Behaviors </fd-docs-section-title>
 <description>
     A <code>MenuItemComponent</code> can be passed to the <code>[selected]</code> input to select a menu item. A button
     title and callback function can be provided as an object through the <code>[mainAction]</code> input. This object
@@ -8,9 +6,9 @@
     the first of which is a string for the button title, the second a boolean for whether or not the mainAction should
     not change when another menu option is selected, and the third is a function that will be called when the button is
     clicked. keepMainAction and callback are optional. This title and the corresponding button action will be changed
-    when another option in the menu is selected, unless <code>keepMainAction</code> is set to true.
-    If no <code>[mainAction]</code> is provided, the text and functionality of the first menu item will be set on load.
-    By default, the main action button will keep its original width on load, regardless of the length of the text of the
+    when another option in the menu is selected, unless <code>keepMainAction</code> is set to true. If no
+    <code>[mainAction]</code> is provided, the text and functionality of the first menu item will be set on load. By
+    default, the main action button will keep its original width on load, regardless of the length of the text of the
     selected option. To have the button width change with the text length, set <code>[fixedWidth]="false"</code>.
 </description>
 <component-example>
@@ -18,9 +16,7 @@
 </component-example>
 <code-example [exampleFiles]="buttonSplitBehaviors"></code-example>
 
-<fd-docs-section-title id="button-types" componentName="split-button">
-    Button Types
-</fd-docs-section-title>
+<fd-docs-section-title id="button-types" componentName="split-button"> Button Types </fd-docs-section-title>
 <description>
     The default button type is "action", no modifier is required. Use
     <code class="code-snippet">fdType="standard"</code>
@@ -30,8 +26,8 @@
     <code class="code-snippet">fdType="positive"</code>
     <code class="code-snippet">fdType="negative"</code>
     <code class="code-snippet">fdType="attention"</code>
-    <code class="code-snippet">fdType="transparent"</code>. Leave
-    <code class="code-snippet">fdType=""</code> empty to use Action button.
+    <code class="code-snippet">fdType="transparent"</code>. Leave <code class="code-snippet">fdType=""</code> empty to
+    use Action button.
 </description>
 <component-example>
     <fd-split-button-types-example></fd-split-button-types-example>
@@ -40,9 +36,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="with-icons" componentName="split-button">
-    Buttons with Icons
-</fd-docs-section-title>
+<fd-docs-section-title id="with-icons" componentName="split-button"> Buttons with Icons </fd-docs-section-title>
 <description>
     Use
     <code class="code-snippet">glyph="icon-name"</code> to change an icon of dropdown menu.
@@ -58,8 +52,9 @@
     Programmatic Selection and Open / Close
 </fd-docs-section-title>
 <description>
-    It is possible to control the open state of the popover using <code>MenuComponent.open()</code> and <code>MenuComponent.close()</code>
-    methods. A menu option can also be selected programmatically using the <code>[selected]</code> input.
+    It is possible to control the open state of the popover using <code>MenuComponent.open()</code> and
+    <code>MenuComponent.close()</code> methods. A menu option can also be selected programmatically using the
+    <code>[selected]</code> input.
 </description>
 <component-example>
     <fd-split-button-programmatical-example></fd-split-button-programmatical-example>

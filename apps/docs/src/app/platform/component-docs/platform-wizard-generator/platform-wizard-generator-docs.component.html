@@ -2,9 +2,9 @@
     Default Wizard generator
 </fd-docs-section-title>
 <description>
-    The default wizard displays a walkthrough screen with forms split into sections.
-    Once the user fills all of the necessary input fields, and presses the "Next step" button, new step will appear.
-    A summary step can be added by providing additional step with <code>summary: true</code> property to the wizard generator metadata.
+    The default wizard displays a walkthrough screen with forms split into sections. Once the user fills all of the
+    necessary input fields, and presses the "Next step" button, new step will appear. A summary step can be added by
+    providing additional step with <code>summary: true</code> property to the wizard generator metadata.
 </description>
 <component-example>
     <fdp-wizard-generator-default-example></fdp-wizard-generator-default-example>
@@ -17,9 +17,11 @@
     Wizard generator in dialog
 </fd-docs-section-title>
 <description>
-    The wizard generator can also be used within a dialog by calling <code>open</code> method from <code>WizardDialogGeneratorService</code>
+    The wizard generator can also be used within a dialog by calling <code>open</code> method from
+    <code>WizardDialogGeneratorService</code>
     A Cancel button is displayed in the footer, so the user can exit the wizard at any point during the process.
-    However, if a user exits the wizard after adding their input, they will receive a warning that their information will be lost.
+    However, if a user exits the wizard after adding their input, they will receive a warning that their information
+    will be lost.
 </description>
 <component-example>
     <fdp-wizard-generator-dialog-example></fdp-wizard-generator-dialog-example>
@@ -32,18 +34,18 @@
     Customizable Wizard generator
 </fd-docs-section-title>
 <description>
-    The wizard component can be customized with modifier inputs.
-    Steps can be placed on separate pages, rather than appended to the wizard, by setting the <code>[appendToWizard]</code> input to <code>false</code>.
-    <br><br>
+    The wizard component can be customized with modifier inputs. Steps can be placed on separate pages, rather than
+    appended to the wizard, by setting the <code>[appendToWizard]</code> input to <code>false</code>. <br /><br />
     You can also use icons for the step indicators by adding <code>icon</code> property to the wizard steps object.
-    <br><br>
-    Buttons appearance can be changed with <code>[navigationButtonLabels]</code> property.
-    <br><br>
-    If you want to use completely different style for navigational buttons,
-    you can use special directives: <code>fdp-wizard-generator-go-next-button, fdp-wizard-generator-review-button, fdp-wizard-generator-finish-button</code>.
-    <br><br>
-    To change Summary step view, you can use <code>fdp-wizard-generator-summary-step</code> directive to flag your template as a summary section template.
-    Your template will receive such variables:
+    <br /><br />
+    Buttons appearance can be changed with <code>[navigationButtonLabels]</code> property. <br /><br />
+    If you want to use completely different style for navigational buttons, you can use special directives:
+    <code
+        >fdp-wizard-generator-go-next-button, fdp-wizard-generator-review-button,
+        fdp-wizard-generator-finish-button</code
+    >. <br /><br />
+    To change Summary step view, you can use <code>fdp-wizard-generator-summary-step</code> directive to flag your
+    template as a summary section template. Your template will receive such variables:
     <ul>
         <li>steps: Array of object that implements <code>WizardGeneratorSummaryItem</code> interface</li>
         <li>editStep: Method to edit defined section step</li>
@@ -60,12 +62,18 @@
     Customizable Wizard generator in dialog
 </fd-docs-section-title>
 <description>
-    Dialog close confirmation text can be changed with <code>confirmationDialogText, confirmationDialogCloseText, confirmationDialogCancelText</code> properties.
-    <br><br>
-    If you want to use completely different style for navigational buttons, you can use <code>goNextButtonTemplate, goBackButtonTemplate, reviewButtonTemplate, finishButtonTemplate, cancelButtonTemplate</code>
+    Dialog close confirmation text can be changed with
+    <code>confirmationDialogText, confirmationDialogCloseText, confirmationDialogCancelText</code> properties.
+    <br /><br />
+    If you want to use completely different style for navigational buttons, you can use
+    <code
+        >goNextButtonTemplate, goBackButtonTemplate, reviewButtonTemplate, finishButtonTemplate,
+        cancelButtonTemplate</code
+    >
     properties for the dialog wizard.
-    <br><br>
-    If you want to use your custom confirmation dialog, you can pass it <code>confirmationDialogTemplate</code> property to wizard dialog service.
+    <br /><br />
+    If you want to use your custom confirmation dialog, you can pass it <code>confirmationDialogTemplate</code> property
+    to wizard dialog service.
 </description>
 <component-example>
     <fdp-wizard-generator-customizable-example></fdp-wizard-generator-customizable-example>
@@ -74,12 +82,11 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="branching" componentName="wizard-generator">
-    Branching Wizard
-</fd-docs-section-title>
+<fd-docs-section-title id="branching" componentName="wizard-generator"> Branching Wizard </fd-docs-section-title>
 <description>
-    Developers can configure branching behaviour of the wizard by providing <code>when</code> property function to the wizard generator step
-    and by specifying <code>dependencyFields</code> property of the wizard generator step to reflect which steps are creating branches.
+    Developers can configure branching behaviour of the wizard by providing <code>when</code> property function to the
+    wizard generator step and by specifying <code>dependencyFields</code> property of the wizard generator step to
+    reflect which steps are creating branches.
 </description>
 <component-example>
     <fdp-wizard-generator-condition-example></fdp-wizard-generator-condition-example>
@@ -92,46 +99,52 @@
     Responsive paddings for Wizard generator
 </fd-docs-section-title>
 <description>
-    <p>The default wizard have responsive paddings applied for progress bar and content.
-    To disable responsive paddings, you can use <code>[responsivePaddings]="false"</code> input to the wizard generator component.</p>
+    <p>
+        The default wizard have responsive paddings applied for progress bar and content. To disable responsive
+        paddings, you can use <code>[responsivePaddings]="false"</code> input to the wizard generator component.
+    </p>
     <p>Responsive paddings values:</p>
     <table>
         <thead>
-           <tr>
-              <th style="text-align: left;"><strong>rem</strong></th>
-              <th style="text-align: left;">
-                 <div style="margin-left: 2rem;">
-                    <p><strong>Min-width</strong> </p>
-                 </div>
-              </th>
-              <th style="text-align: left;">
-                 <div style="margin-left: 2rem;"><strong>Max-width</strong> </div>
-              </th>
-           </tr>
+            <tr>
+                <th style="text-align: left"><strong>rem</strong></th>
+                <th style="text-align: left">
+                    <div style="margin-left: 2rem">
+                        <p><strong>Min-width</strong></p>
+                    </div>
+                </th>
+                <th style="text-align: left">
+                    <div style="margin-left: 2rem"><strong>Max-width</strong></div>
+                </th>
+            </tr>
         </thead>
         <tbody>
-           <tr>
-              <td style="text-align: left;">1rem</td>
-              <td style="text-align: left;"><span style="margin-left: 2rem;"><em>n/a</em></span></td>
-              <td style="text-align: left;"><span style="margin-left: 2rem;">599px</span></td>
-           </tr>
-           <tr>
-              <td style="text-align: left;">2rem</td>
-              <td style="text-align: left;"><span style="margin-left: 2rem;">600px</span></td>
-              <td style="text-align: left;"><span style="margin-left: 2rem;">1023px</span></td>
-           </tr>
-           <tr>
-              <td style="text-align: left;">2rem</td>
-              <td style="text-align: left;"><span style="margin-left: 2rem;">1024px</span></td>
-              <td style="text-align: left;"><span style="margin-left: 2rem;">1439px</span></td>
-           </tr>
-           <tr>
-              <td style="text-align: left;">3rem</td>
-              <td style="text-align: left;"><span style="margin-left: 2rem;">1440px</span></td>
-              <td style="text-align: left;"><span style="margin-left: 2rem;"><em>n/a</em></span></td>
-           </tr>
+            <tr>
+                <td style="text-align: left">1rem</td>
+                <td style="text-align: left">
+                    <span style="margin-left: 2rem"><em>n/a</em></span>
+                </td>
+                <td style="text-align: left"><span style="margin-left: 2rem">599px</span></td>
+            </tr>
+            <tr>
+                <td style="text-align: left">2rem</td>
+                <td style="text-align: left"><span style="margin-left: 2rem">600px</span></td>
+                <td style="text-align: left"><span style="margin-left: 2rem">1023px</span></td>
+            </tr>
+            <tr>
+                <td style="text-align: left">2rem</td>
+                <td style="text-align: left"><span style="margin-left: 2rem">1024px</span></td>
+                <td style="text-align: left"><span style="margin-left: 2rem">1439px</span></td>
+            </tr>
+            <tr>
+                <td style="text-align: left">3rem</td>
+                <td style="text-align: left"><span style="margin-left: 2rem">1440px</span></td>
+                <td style="text-align: left">
+                    <span style="margin-left: 2rem"><em>n/a</em></span>
+                </td>
+            </tr>
         </tbody>
-     </table>
+    </table>
 </description>
 <component-example>
     <fdp-wizard-generator-responsive-paddings-example></fdp-wizard-generator-responsive-paddings-example>
@@ -144,9 +157,9 @@
     Visible summary step in progress bar
 </fd-docs-section-title>
 <description>
-    By default, Wizard generator doesn't show Summary step in the wizard progress bar section.
-    Developers can configure visibility of the summary step by providing <code>[displaySummaryStep]="true"</code>
-    property of <code>&lt;fdp-wizard-generator /&gt;</code>.
+    By default, Wizard generator doesn't show Summary step in the wizard progress bar section. Developers can configure
+    visibility of the summary step by providing <code>[displaySummaryStep]="true"</code> property of
+    <code>&lt;fdp-wizard-generator /&gt;</code>.
 </description>
 <component-example>
     <fdp-wizard-generator-visible-summary-example></fdp-wizard-generator-visible-summary-example>
@@ -159,9 +172,9 @@
     Visible summary step with branching
 </fd-docs-section-title>
 <description>
-    As per design specification, no steps should be visible after branching step, until it's completed.
-    This means that developers should configure appropriate condidions for steps visibility.
-    Same applies to the summary step, if it should be visible in wizard progress bar.
+    As per design specification, no steps should be visible after branching step, until it's completed. This means that
+    developers should configure appropriate condidions for steps visibility. Same applies to the summary step, if it
+    should be visible in wizard progress bar.
 </description>
 <component-example>
     <fdp-wizard-generator-visible-summary-branching-example></fdp-wizard-generator-visible-summary-branching-example>
@@ -174,7 +187,8 @@
     Responsive paddings for Wizard generator in dialog
 </fd-docs-section-title>
 <description>
-    Use <code>responsivePaddings: false</code> property for dialog config to dosable wizard responsive paddings inside dialog.
+    Use <code>responsivePaddings: false</code> property for dialog config to dosable wizard responsive paddings inside
+    dialog.
 </description>
 <component-example>
     <fdp-wizard-generator-responsive-dialog-example></fdp-wizard-generator-responsive-dialog-example>
@@ -187,8 +201,8 @@
     Handling complex objects rendering on Summary page
 </fd-docs-section-title>
 <description>
-    If your form field contains some complex object and should be rendered with custom function,
-    you can provide <code>valueRenderer</code> function for particular form item.
+    If your form field contains some complex object and should be rendered with custom function, you can provide
+    <code>valueRenderer</code> function for particular form item.
 </description>
 <component-example>
     <fdp-wizard-generator-summary-objects-example></fdp-wizard-generator-summary-objects-example>
@@ -201,10 +215,22 @@
     External navigation buttons
 </fd-docs-section-title>
 <description>
-    If you want navigation buttons of the Wizard generator to be outside the component,
-    you can use public methods and properties of the Wizard generator itself to implement desired behaviour.
+    If you want navigation buttons of the Wizard generator to be outside the component, you can use public methods and
+    properties of the Wizard generator itself to implement desired behaviour.
 </description>
 <component-example>
     <fdp-wizard-generator-external-navigation-example></fdp-wizard-generator-external-navigation-example>
 </component-example>
 <code-example [exampleFiles]="externalNavigationObjectsExample"></code-example>
+
+<fd-docs-section-title id="onchange-interaction" componentName="wizard-generator">
+    Field on-change interaction
+</fd-docs-section-title>
+<description>
+    If you want to add additional connection between form fields (e.g. set default value of field "B" to be equal to
+    field "A"), you can use <code>onchange</code> property of the formItem object.
+</description>
+<component-example>
+    <fdp-wizard-generator-onchange-example></fdp-wizard-generator-onchange-example>
+</component-example>
+<code-example [exampleFiles]="fieldsInteractionExample"></code-example>

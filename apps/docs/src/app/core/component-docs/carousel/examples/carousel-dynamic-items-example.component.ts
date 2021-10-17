@@ -39,7 +39,7 @@ export class CarouselDynamicItemsExampleComponent implements OnInit, AfterViewIn
     }
 
     isHidden(card: string): boolean {
-        return this.cardsHidden.some(_card => _card === card);
+        return this.cardsHidden.some((_card) => _card === card);
     }
 
     update(): void {

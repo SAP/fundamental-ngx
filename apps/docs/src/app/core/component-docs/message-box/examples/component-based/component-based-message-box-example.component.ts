@@ -30,7 +30,7 @@ export class ComponentBasedMessageBoxExampleComponent {
         const messageBoxRef = this._messageBoxService.open<TextData>(MessageBoxExampleComponent, {
             data: {
                 title: 'Fruit facts',
-                text: 'Coffee beans aren\'t beans. They are fruit pits.'
+                text: "Coffee beans aren't beans. They are fruit pits."
             },
             showSemanticIcon: true,
             customSemanticIcon: 'thumb-up',

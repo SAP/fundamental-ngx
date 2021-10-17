@@ -12,7 +12,7 @@ import {
     ViewChild,
     ViewEncapsulation,
     HostBinding,
-    ChangeDetectorRef,
+    ChangeDetectorRef
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 

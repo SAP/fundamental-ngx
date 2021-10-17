@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import {
+    DatetimeAdapter,
+    DATE_TIME_FORMATS,
+    FdDate,
+    FdDatetimeAdapter,
+    FD_DATETIME_FORMATS
+} from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-date-picker-form-example',
@@ -10,10 +16,13 @@ import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATET
                 <div fd-form-item>
                     <label fd-form-label required="true">Date Picker</label>
                     <fd-date-picker
-                            [state]="isValid() ? 'success' : 'error'"
-                            [message]="isValid() ? 'This is valid(success) DatePicker' : 'This is invalid(error) DatePicker'"
-                            required="true"
-                            formControlName="date">
+                        [state]="isValid() ? 'success' : 'error'"
+                        [message]="
+                            isValid() ? 'This is valid(success) DatePicker' : 'This is invalid(error) DatePicker'
+                        "
+                        required="true"
+                        formControlName="date"
+                    >
                     </fd-date-picker>
                 </div>
                 <br />
@@ -29,9 +38,10 @@ import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATET
             <div fd-form-item>
                 <label fd-form-label>Disabled Date Picker</label>
                 <fd-date-picker
-                        state="information"
-                        message="This is disabled DatePicker"
-                        formControlName="disabledDate">
+                    state="information"
+                    message="This is disabled DatePicker"
+                    formControlName="disabledDate"
+                >
                 </fd-date-picker>
                 <br />
             </div>

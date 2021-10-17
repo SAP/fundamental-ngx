@@ -75,9 +75,9 @@ export abstract class Table {
     /** Toolbar Columns Settings button visibility */
     abstract showColumnSettingsInToolbar(showColumnSettings: boolean): void;
 
-     /** Disable filtering by header column menu */
+    /** Disable filtering by header column menu */
     abstract setHeaderColumnFilteringDisabled(disabled: boolean): void;
 
-     /** Set current page */
+    /** Set current page */
     abstract setCurrentPage(currentPage: number): void;
 }

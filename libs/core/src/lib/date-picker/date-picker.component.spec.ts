@@ -263,7 +263,7 @@ describe('DatePickerComponent', () => {
         component.openCalendar();
         fixture.detectChanges();
         expect(hideSpy).toHaveBeenCalled();
-    })
+    });
 
     it('should show message on close', () => {
         component.isOpen = true;

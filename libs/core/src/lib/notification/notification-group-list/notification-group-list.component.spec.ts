@@ -1,7 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { NotificationGroupHeaderComponent, NotificationGroupListComponent, NotificationModule } from '@fundamental-ngx/core/notification';
+import {
+    NotificationGroupHeaderComponent,
+    NotificationGroupListComponent,
+    NotificationModule
+} from '@fundamental-ngx/core/notification';
 
 @Component({
     template: `
@@ -22,12 +26,14 @@ describe('NotificationGroupListComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
     let notificationGroupHeader;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [NotificationModule],
-            declarations: [TestComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [NotificationModule],
+                declarations: [TestComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -46,6 +52,6 @@ describe('NotificationGroupListComponent', () => {
         notificationGroupHeader.toggleExpand(event);
         fixture.detectChanges();
 
-        expect(notificationGroupHeader.expandedChange.emit).toHaveBeenCalledWith(event.target.value)
+        expect(notificationGroupHeader.expandedChange.emit).toHaveBeenCalledWith(event.target.value);
     });
 });

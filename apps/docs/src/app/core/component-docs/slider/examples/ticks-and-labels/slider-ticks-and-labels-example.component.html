@@ -19,6 +19,14 @@
         To apply tick marks to the slider set <code>[showTicks]</code> as <code>true</code> and
         <code>[showTicksLabels]</code> as <code>true</code>
     </p>
-    <fd-slider [(ngModel)]="value1" [max]="50" tooltipMode="readonly" [tickmarksBetweenLabels]="2" [showTicks]="true" [showTicksLabels]="true"> </fd-slider>
+    <fd-slider
+        [(ngModel)]="value1"
+        [max]="50"
+        tooltipMode="readonly"
+        [tickmarksBetweenLabels]="2"
+        [showTicks]="true"
+        [showTicksLabels]="true"
+    >
+    </fd-slider>
     <p>Value: {{ value1 }}</p>
 </div>

@@ -17,7 +17,10 @@ import {
 } from './public_api';
 
 import { createKeyboardEvent } from '@fundamental-ngx/platform/shared';
-import { AddNodeDialogRefData, APPROVAL_FLOW_NODE_TYPES } from './approval-flow-add-node/approval-flow-add-node.component';
+import {
+    AddNodeDialogRefData,
+    APPROVAL_FLOW_NODE_TYPES
+} from './approval-flow-add-node/approval-flow-add-node.component';
 
 const DAY_IN_MILLISECONDS = 1000 * 60 * 60 * 24;
 const users: ApprovalUser[] = [
@@ -138,7 +141,7 @@ const users: ApprovalUser[] = [
 ];
 
 const usersMap = {};
-users.forEach(u => usersMap[u.id] = u);
+users.forEach((u) => (usersMap[u.id] = u));
 
 const teams: ApprovalTeam[] = [
     {
@@ -216,7 +219,7 @@ export class TestApprovalFlowDataSource implements ApprovalDataSource {
         return of(simpleGraph);
     }
     fetchUser(id: string): Observable<any> {
-        const user = users.find(u => u.id === id);
+        const user = users.find((u) => u.id === id);
 
         return of({
             phone: Math.random().toFixed(13).toString().replace('0.', ''),
@@ -227,7 +230,7 @@ export class TestApprovalFlowDataSource implements ApprovalDataSource {
     updateApproval(approval: ApprovalNode): void {}
     updateApprovals(approvals: ApprovalNode[]): void {}
     sendReminders(members: ApprovalUser[], approval: ApprovalNode): Observable<any> {
-        return of(null)
+        return of(null);
     }
 
     fetchApprovers(): Observable<ApprovalUser[]> {
@@ -247,8 +250,7 @@ const TEST_APPROVAL_FLOW_TITLE = 'Test title';
 
 @Component({
     selector: 'fdp-test-approval-flow',
-    template: `
-        <fdp-approval-flow [title]="title" [dataSource]="dataSource"></fdp-approval-flow>`
+    template: ` <fdp-approval-flow [title]="title" [dataSource]="dataSource"></fdp-approval-flow>`
 })
 class TestPlatformApprovalFlowComponent {
     @ViewChild(ApprovalFlowComponent, { static: true }) component: ApprovalFlowComponent;
@@ -263,10 +265,7 @@ describe('ApprovalFlowComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                PlatformApprovalFlowModule,
-                BrowserAnimationsModule
-            ],
+            imports: [PlatformApprovalFlowModule, BrowserAnimationsModule],
             declarations: [TestPlatformApprovalFlowComponent],
             providers: [RtlService]
         }).compileComponents();
@@ -338,7 +337,9 @@ describe('ApprovalFlowComponent', () => {
         const nodesContainer = fixture.nativeElement.querySelector('.fdp-approval-flow__graph');
 
         expect(nodesContainer).toBeTruthy();
-        expect(nodesContainer.querySelectorAll('.fdp-approval-flow__graph-column').length).toEqual(simpleGraph.nodes.length);
+        expect(nodesContainer.querySelectorAll('.fdp-approval-flow__graph-column').length).toEqual(
+            simpleGraph.nodes.length
+        );
         expect(nodesContainer.querySelectorAll('fdp-approval-flow-node').length).toEqual(simpleGraph.nodes.length);
     });
 
@@ -392,8 +393,9 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should open adding node dialog for the empty graph', () => {
-        const dialogSpy = spyOn(fixture.componentRef.injector.get(DialogService), 'open')
-            .and.returnValue({ afterClosed: of(null) } as any);
+        const dialogSpy = spyOn(fixture.componentRef.injector.get(DialogService), 'open').and.returnValue({
+            afterClosed: of(null)
+        } as any);
 
         component._addNode(null, 'empty');
 
@@ -407,8 +409,7 @@ describe('ApprovalFlowComponent', () => {
 
     it('should enter edit mode', () => {
         const watchers = [];
-        const watchersSpy = spyOn(component.dataSource, 'fetchWatchers')
-            .and.returnValue(of(watchers));
+        const watchersSpy = spyOn(component.dataSource, 'fetchWatchers').and.returnValue(of(watchers));
 
         component._enterEditMode();
 
@@ -418,8 +419,7 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should save edit mode changes', () => {
-        const approvalSpy = spyOn(component.dataSource, 'updateApprovals')
-            .and.callThrough();
+        const approvalSpy = spyOn(component.dataSource, 'updateApprovals').and.callThrough();
 
         component._saveEditModeChanges();
 
@@ -434,15 +434,14 @@ describe('ApprovalFlowComponent', () => {
     });
 
     it('should add node to the graph', () => {
-        const dialogSpy = spyOn(TestBed.inject(DialogService), 'open')
-            .and.returnValue({
-                afterClosed: of({
-                    node: Object.assign({}, simpleGraph.nodes[0], { status: 'not started' }),
-                    nodeType: APPROVAL_FLOW_NODE_TYPES.SERIAL
-                })
-            } as any);
+        const dialogSpy = spyOn(TestBed.inject(DialogService), 'open').and.returnValue({
+            afterClosed: of({
+                node: Object.assign({}, simpleGraph.nodes[0], { status: 'not started' }),
+                nodeType: APPROVAL_FLOW_NODE_TYPES.SERIAL
+            })
+        } as any);
 
-        const lastNodeComponent = component._nodeComponents.last
+        const lastNodeComponent = component._nodeComponents.last;
         const sourceNode = lastNodeComponent.node;
 
         component._addNode(sourceNode, 'after');

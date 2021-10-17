@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed, waitForPresent} from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class NotificationPo extends CoreBaseComponentPo {
     private url = '/notification';
@@ -18,7 +18,7 @@ export class NotificationPo extends CoreBaseComponentPo {
 
     actionSheetItem = '.fd-action-sheet__item';
 
-    approveButton = this.actionSheetItem + '[label="Approve"]'
+    approveButton = this.actionSheetItem + '[label="Approve"]';
     rejectButton = this.actionSheetItem + '[label="Reject"]';
     forwardButton = this.actionSheetItem + '[label="Forward"]';
     cancelButton = this.actionSheetItem + '[label="Cancel"]';

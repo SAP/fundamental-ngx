@@ -32,7 +32,6 @@ import {
     encapsulation: ViewEncapsulation.None
 })
 export class MenuMobileComponent extends MobileModeBase<MenuInterface> implements OnInit, OnDestroy {
-
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
@@ -103,12 +102,10 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
 
     /** @hidden Listens on Active Path changes and updates mobile view */
     private _listenOnActivePathChange(): void {
-        const initialItemPath: MenuItemComponent[] = this._menuService.activeNodePath.map(node => node.item);
+        const initialItemPath: MenuItemComponent[] = this._menuService.activeNodePath.map((node) => node.item);
         this._component.activePath
-            .pipe(
-                takeUntil(this._onDestroy$),
-                startWith(initialItemPath)
-            ).subscribe(items => this._setMenuView(items));
+            .pipe(takeUntil(this._onDestroy$), startWith(initialItemPath))
+            .subscribe((items) => this._setMenuView(items));
     }
 
     /** @hidden Sets menu view, title and isSubmenu flag */
@@ -122,14 +119,15 @@ export class MenuMobileComponent extends MobileModeBase<MenuInterface> implement
 
     /** @hidden Opens/closes the Dialog based on Menu isOpenChange events */
     private _listenOnMenuOpenChange(): void {
-        this._component.isOpenChange.pipe(takeUntil(this._onDestroy$))
-            .subscribe(isOpen => isOpen ? this._openDialog() : this.dialogRef.close())
+        this._component.isOpenChange
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((isOpen) => (isOpen ? this._openDialog() : this.dialogRef.close()));
     }
 
     /** @hidden Sets navigation arrow depending on text direction */
     private _listenOnTextDirection(): void {
         this.navigationIcon$ = this._rtlService
-            ? this._rtlService.rtl.pipe(map(isRtl => isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow'))
+            ? this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'navigation-right-arrow' : 'navigation-left-arrow')))
             : of('navigation-left-arrow');
     }
 

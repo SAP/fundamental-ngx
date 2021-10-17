@@ -1,5 +1,11 @@
-<div class="fd-timeline__node-container">
-    <div class="fd-timeline__connecting-line"></div>
-    <div class="fd-timeline__node"></div>
-    <div class="fd-timeline__connecting-line"></div>
+<div [class.fd-timeline__list--empty]="!_canShowFirstList" class="fd-timeline__list fd-timeline__list--first">
+    <ng-container fdTimelineFirstListOutlet></ng-container>
+</div>
+<div class="fd-timeline__main-line"></div>
+<div
+    [class.fd-timeline__list--empty]="!_canShowSecondList"
+    [class.fd-timeline__list--with-offset]="_canShowFirstList"
+    class="fd-timeline__list fd-timeline__list--second"
+>
+    <ng-container fdTimelineSecondListOutlet></ng-container>
 </div>

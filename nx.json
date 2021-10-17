@@ -14,44 +14,19 @@
         "default": {
             "runner": "@nrwl/workspace/tasks-runners/default",
             "options": {
-                "cacheableOperations": [
-                    "build",
-                    "lint",
-                    "test",
-                    "e2e"
-                ]
+                "cacheableOperations": ["build", "lint", "test", "e2e"]
             }
         },
         "cloud": {
             "runner": "@nrwl/nx-cloud",
             "options": {
-              "strictlyOrderedTargets": [
-                "build",
-                "lint",
-                "test",
-                "e2e"
-              ],
-              "canTrackAnalytics": false,
-              "showUsageWarnings": true
+                "strictlyOrderedTargets": ["build", "lint", "test", "e2e"],
+                "canTrackAnalytics": false,
+                "showUsageWarnings": true
             }
-          }
+        }
     },
     "projects": {
-        "docs": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core",
-                "platform"
-            ]
-        },
-        "docs-e2e": {
-            "tags": [],
-            "implicitDependencies": [
-                "docs"
-            ]
-        },
         "core": {
             "tags": [],
             "implicitDependencies": [
@@ -134,204 +109,69 @@
                 "core-multi-input",
                 "core-wizard",
                 "core-tree",
-                "core-upload-collection"
-            ]
-        },
-        "moment-adapter": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-datetime"
-            ]
-        },
-        "core-breadcrumb": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-menu",
-                "core-popover"
-            ]
-        },
-        "core-message-page": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
-        },
-        "core-nested-list": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-menu",
-                "core-popover",
-                "core-icon"
-            ]
-        },
-        "core-mobile-mode": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-dialog"
-            ]
-        },
-        "core-tests": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-mobile-mode"
-            ]
-        },
-        "core-icon": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
-        },
-        "core-button": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-icon"
-            ]
-        },
-        "core-checkbox": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
-        },
-        "core-dialog": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-title",
-                "core-bar",
-                "core-button",
-                "core-busy-indicator",
-                "core-utils",
-                "core-shared"
+                "core-upload-collection",
+                "core-vertical-navigation",
+                "core-splitter"
             ]
         },
         "core-action-bar": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-action-sheet": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-popover",
-                "core-button",
-                "core-dialog"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-popover", "core-button", "core-dialog"]
         },
         "core-alert": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-button"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-button"]
         },
         "core-avatar": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-avatar-group": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-bar": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-button"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-button"]
+        },
+        "core-breadcrumb": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-menu", "core-popover"]
         },
         "core-busy-indicator": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
+        },
+        "core-button": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-icon"]
         },
         "core-calendar": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-card": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-shared",
-                "core-avatar",
-                "core-object-status",
-                "core-button"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-shared", "core-avatar", "core-object-status", "core-button"]
         },
         "core-carousel": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
+        },
+        "core-checkbox": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-combobox": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-list",
-                "core-menu"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-list", "core-menu"]
         },
         "core-date-picker": {
-            "tags": [
-                "fd"
-            ],
+            "tags": ["fd"],
             "implicitDependencies": [
                 "core-utils",
                 "core-shared",
@@ -344,17 +184,11 @@
             ]
         },
         "core-datetime": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-datetime-picker": {
-            "tags": [
-                "fd"
-            ],
+            "tags": ["fd"],
             "implicitDependencies": [
                 "core-utils",
                 "core-shared",
@@ -364,343 +198,199 @@
                 "core-time"
             ]
         },
-        "core-dynamic-page": {
-            "tags": [
-                "fd"
-            ],
+        "core-dialog": {
+            "tags": ["fd"],
             "implicitDependencies": [
+                "core-title",
+                "core-bar",
+                "core-button",
+                "core-busy-indicator",
                 "core-utils",
-                "core-shared",
-                "core-toolbar",
-                "core-breadcrumb",
-                "core-tabs"
+                "core-shared"
             ]
+        },
+        "core-dynamic-page": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-shared", "core-toolbar", "core-breadcrumb", "core-tabs"]
         },
         "core-dynamic-side-content": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-facets": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-form"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-form"]
         },
         "core-feed-input": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-avatar",
-                "core-form"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-avatar", "core-form"]
         },
         "core-feed-list-item": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-file-uploader": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-form",
-                "core-button"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-form", "core-button"]
         },
         "core-fixed-card-layout": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-flexible-column-layout": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-form": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-inline-help"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-inline-help"]
         },
         "core-formatted-text": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-grid-list": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-toolbar",
-                "core-form"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-toolbar", "core-form"]
+        },
+        "core-icon": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-illustrated-message": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-infinite-scroll": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-info-label": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-inline-help": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-popover"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-popover"]
         },
         "core-input-group": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-layout-grid": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-layout-panel": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-link": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-list": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-form",
-                "core-checkbox"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-form", "core-checkbox"]
         },
         "core-menu": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-list",
-                "core-mobile-mode"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-list", "core-mobile-mode"]
         },
         "core-message-box": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-dialog"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-dialog"]
+        },
+        "core-message-page": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-message-strip": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
+        },
+        "core-message-toast": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
+        },
+        "core-micro-process-flow": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-shared", "core-popover"]
+        },
+        "core-mobile-mode": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-dialog"]
+        },
+        "core-multi-input": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
+        },
+        "core-nested-list": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-menu", "core-popover", "core-icon"]
         },
         "core-notification": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-object-identifier": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-link"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-link"]
         },
         "core-object-marker": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-object-number": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-object-status": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-pagination": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-select"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-select"]
         },
         "core-panel": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-button"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-button"]
         },
         "core-popover": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-mobile-mode"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-mobile-mode"]
         },
         "core-product-switch": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-menu",
-                "core-popover"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-menu", "core-popover"]
         },
         "core-quick-view": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-form",
-                "core-popover",
-                "core-bar"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-form", "core-popover", "core-bar"]
         },
         "core-radio": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-rating-indicator": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-popover"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-popover"]
         },
         "core-resizable-card-layout": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-card"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-card"]
         },
         "core-scroll-spy": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-segmented-button": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-select": {
-            "tags": [
-                "fd"
-            ],
+            "tags": ["fd"],
             "implicitDependencies": [
                 "core-utils",
                 "core-shared",
@@ -711,14 +401,10 @@
             ]
         },
         "core-shared": {
-            "tags": [
-                "fd"
-            ]
+            "tags": ["fd"]
         },
         "core-shellbar": {
-            "tags": [
-                "fd"
-            ],
+            "tags": ["fd"],
             "implicitDependencies": [
                 "core-utils",
                 "core-shared",
@@ -730,70 +416,39 @@
             ]
         },
         "core-side-navigation": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-nested-list"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-nested-list"]
         },
         "core-slider": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-popover"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-popover"]
         },
         "core-split-button": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-menu"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-menu"]
+        },
+        "core-splitter": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-icon"]
         },
         "core-status-indicator": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-step-input": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-button"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-button"]
         },
         "core-switch": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-table": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-checkbox"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-checkbox"]
         },
         "core-tabs": {
-            "tags": [
-                "fd"
-            ],
+            "tags": ["fd"],
             "implicitDependencies": [
                 "core-utils",
                 "core-shared",
@@ -804,100 +459,66 @@
                 "core-checkbox"
             ]
         },
+        "core-tests": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-mobile-mode"]
+        },
         "core-text": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-link"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-link"]
         },
         "core-tile": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
         },
         "core-time": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-shared",
-                "core-carousel",
-                "core-datetime",
-                "core-form"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-shared", "core-carousel", "core-datetime", "core-form"]
         },
         "core-time-picker": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-time",
-                "core-popover"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-time", "core-popover"]
+        },
+        "core-timeline": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-icon", "core-text"]
         },
         "core-title": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-icon",
-                "core-utils"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-icon", "core-utils"]
         },
         "core-token": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-input-group",
-                "core-form"
-            ]
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-input-group", "core-form"]
         },
         "core-toolbar": {
-            "tags": [
-                "fd"
-            ],
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-popover", "core-button"]
+        },
+        "core-tree": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-popover", "core-menu"]
+        },
+        "core-upload-collection": {
+            "tags": ["fd"],
             "implicitDependencies": [
-                "core-utils",
-                "core-popover",
-                "core-button"
+                "core-button",
+                "core-list",
+                "core-link",
+                "core-object-status",
+                "core-object-marker"
             ]
         },
         "core-utils": {
             "tags": [],
-            "implicitDependencies": [
-                "core-shared"
-            ]
+            "implicitDependencies": ["core-shared"]
         },
-        "core-message-toast": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
-        },
-        "core-multi-input": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils"
-            ]
+        "core-vertical-navigation": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-icon", "core-list"]
         },
         "core-wizard": {
-            "tags": [
-                "fd"
-            ],
+            "tags": ["fd"],
             "implicitDependencies": [
                 "core-utils",
                 "core-shared",
@@ -906,47 +527,79 @@
                 "core-action-sheet"
             ]
         },
-        "core-tree": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-popover",
-                "core-menu"
-            ]
+        "docs": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core", "platform"]
         },
-        "core-timeline": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-icon",
-                "core-text"
-            ]
+        "docs-e2e": {
+            "tags": [],
+            "implicitDependencies": ["docs"]
         },
-        "core-micro-process-flow": {
-            "tags": [
-                "fd"
-            ],
+        "fn": {
+            "tags": [],
             "implicitDependencies": [
                 "core-utils",
                 "core-shared",
-                "core-popover"
+                "core-button",
+                "core-icon",
+                "core-inline-help",
+                "core-popover",
+                "fn-tabs",
+                "fn-tag",
+                "fn-button",
+                "fn-checkbox",
+                "fn-form",
+                "fn-radio",
+                "fn-checkbox",
+                "fn-switch",
+                "fn-search",
+                "fn-select",
+                "fn-slider"
             ]
         },
-        "core-upload-collection": {
-            "tags": [
-                "fd"
-            ],
-            "implicitDependencies": [
-                "core-button",
-                "core-list",
-                "core-link",
-                "core-object-status",
-                "core-object-marker"
-            ]
+        "fn-button": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared", "core-button"]
+        },
+        "fn-checkbox": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared"]
+        },
+        "fn-form": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared", "core-button", "core-icon", "core-inline-help"]
+        },
+        "fn-radio": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared"]
+        },
+        "fn-search": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared"]
+        },
+        "fn-select": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared"]
+        },
+        "fn-slider": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared", "core-popover"]
+        },
+        "fn-switch": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared"]
+        },
+        "fn-tabs": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared"]
+        },
+        "fn-tag": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared"]
+        },
+        "moment-adapter": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-datetime"]
         },
         "platform": {
             "tags": [],
@@ -981,34 +634,16 @@
                 "platform-icon-tab-bar"
             ]
         },
-        "platform-shared": {
-            "tags": [
-                "fdp"
-            ]
-        },
         "platform-action-bar": {
-            "tags": [
-                "fdp"
-            ],
-            "implicitDependencies": [
-                "core-action-bar",
-                "core-button",
-                "core-utils",
-                "platform-shared"
-            ]
+            "tags": ["fdp"],
+            "implicitDependencies": ["core-action-bar", "core-button", "core-utils", "platform-shared"]
         },
         "platform-action-button-group": {
-            "tags": [
-                "fdp"
-            ],
-            "implicitDependencies": [
-                "core-action-bar"
-            ]
+            "tags": ["fdp"],
+            "implicitDependencies": ["core-action-bar"]
         },
         "platform-approval-flow": {
-            "tags": [
-                "fdp"
-            ],
+            "tags": ["fdp"],
             "implicitDependencies": [
                 "core-avatar",
                 "core-button",
@@ -1033,38 +668,19 @@
             ]
         },
         "platform-button": {
-            "tags": [
-                "fdp"
-            ],
-            "implicitDependencies": [
-                "core-button",
-                "platform-shared"
-            ]
+            "tags": ["fdp"],
+            "implicitDependencies": ["core-button", "platform-shared"]
         },
         "platform-dynamic-page": {
-            "tags": [
-                "fdp"
-            ],
-            "implicitDependencies": [
-                "core-tabs",
-                "platform-button",
-                "platform-shared"
-            ]
+            "tags": ["fdp"],
+            "implicitDependencies": ["core-tabs", "platform-button", "platform-shared"]
         },
         "platform-feed-input": {
-            "tags": [
-                "fdp"
-            ],
-            "implicitDependencies": [
-                "core-avatar",
-                "core-form",
-                "platform-button"
-            ]
+            "tags": ["fdp"],
+            "implicitDependencies": ["core-avatar", "core-form", "platform-button"]
         },
         "platform-form": {
-            "tags": [
-                "fdp"
-            ],
+            "tags": ["fdp"],
             "implicitDependencies": [
                 "core-bar",
                 "core-button",
@@ -1095,28 +711,20 @@
                 "platform-shared"
             ]
         },
+        "platform-icon-tab-bar": {
+            "tags": ["fdp"],
+            "implicitDependencies": ["core-icon", "core-popover", "core-utils"]
+        },
         "platform-info-label": {
-            "tags": [
-                "fdp"
-            ],
-            "implicitDependencies": [
-                "core-info-label"
-            ]
+            "tags": ["fdp"],
+            "implicitDependencies": ["core-info-label"]
         },
         "platform-link": {
-            "tags": [
-                "fdp"
-            ],
-            "implicitDependencies": [
-                "core-link",
-                "core-icon",
-                "platform-shared"
-            ]
+            "tags": ["fdp"],
+            "implicitDependencies": ["core-link", "core-icon", "platform-shared"]
         },
         "platform-list": {
-            "tags": [
-                "fdp"
-            ],
+            "tags": ["fdp"],
             "implicitDependencies": [
                 "core-avatar",
                 "core-button",
@@ -1137,66 +745,33 @@
             ]
         },
         "platform-menu": {
-            "tags": [
-                "fdp"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "platform-shared"
-            ]
+            "tags": ["fdp"],
+            "implicitDependencies": ["core-utils", "platform-shared"]
         },
         "platform-menu-button": {
-            "tags": [
-                "fdp"
-            ],
-            "implicitDependencies": [
-                "core-button",
-                "platform-menu",
-                "platform-shared"
-            ]
+            "tags": ["fdp"],
+            "implicitDependencies": ["core-button", "platform-menu", "platform-shared"]
         },
         "platform-object-attribute": {
-            "tags": [
-                "fdp"
-            ]
+            "tags": ["fdp"]
         },
         "platform-object-marker": {
-            "tags": [
-                "fdp"
-            ],
-            "implicitDependencies": [
-                "core-object-marker"
-            ]
+            "tags": ["fdp"],
+            "implicitDependencies": ["core-object-marker"]
         },
         "platform-object-status": {
-            "tags": [
-                "fdp"
-            ],
-            "implicitDependencies": [
-                "core-object-status",
-                "core-utils"
-            ]
+            "tags": ["fdp"],
+            "implicitDependencies": ["core-object-status", "core-utils"]
         },
         "platform-page-footer": {
-            "tags": [
-                "fdp"
-            ]
+            "tags": ["fdp"]
         },
         "platform-panel": {
-            "tags": [
-                "fdp"
-            ],
-            "implicitDependencies": [
-                "core-utils",
-                "core-panel",
-                "core-toolbar",
-                "platform-shared"
-            ]
+            "tags": ["fdp"],
+            "implicitDependencies": ["core-utils", "core-panel", "core-toolbar", "platform-shared"]
         },
         "platform-search-field": {
-            "tags": [
-                "fdp"
-            ],
+            "tags": ["fdp"],
             "implicitDependencies": [
                 "core-icon",
                 "core-combobox",
@@ -1207,31 +782,19 @@
                 "platform-menu"
             ]
         },
+        "platform-shared": {
+            "tags": ["fdp"]
+        },
         "platform-slider": {
-            "tags": [
-                "fdp"
-            ],
-            "implicitDependencies": [
-                "core-slider",
-                "platform-shared"
-            ]
+            "tags": ["fdp"],
+            "implicitDependencies": ["core-slider", "platform-shared"]
         },
         "platform-split-menu-button": {
-            "tags": [
-                "fdp"
-            ],
-            "implicitDependencies": [
-                "core-menu",
-                "core-button",
-                "core-utils",
-                "platform-shared",
-                "platform-menu"
-            ]
+            "tags": ["fdp"],
+            "implicitDependencies": ["core-menu", "core-button", "core-utils", "platform-shared", "platform-menu"]
         },
         "platform-table": {
-            "tags": [
-                "fdp"
-            ],
+            "tags": ["fdp"],
             "implicitDependencies": [
                 "core-busy-indicator",
                 "core-button",
@@ -1256,9 +819,7 @@
             ]
         },
         "platform-thumbnail": {
-            "tags": [
-                "fdp"
-            ],
+            "tags": ["fdp"],
             "implicitDependencies": [
                 "core-avatar",
                 "core-carousel",
@@ -1269,9 +830,7 @@
             ]
         },
         "platform-upload-collection": {
-            "tags": [
-                "fdp"
-            ],
+            "tags": ["fdp"],
             "implicitDependencies": [
                 "core-toolbar",
                 "core-button",
@@ -1295,9 +854,7 @@
             ]
         },
         "platform-value-help-dialog": {
-            "tags": [
-                "fdp"
-            ],
+            "tags": ["fdp"],
             "implicitDependencies": [
                 "core-token",
                 "core-button",
@@ -1322,9 +879,7 @@
             ]
         },
         "platform-wizard-generator": {
-            "tags": [
-                "fdp"
-            ],
+            "tags": ["fdp"],
             "implicitDependencies": [
                 "core-dialog",
                 "core-button",
@@ -1336,16 +891,6 @@
                 "platform-form",
                 "platform-shared",
                 "platform-link"
-            ]
-        },
-        "platform-icon-tab-bar": {
-            "tags": [
-                "fdp"
-            ],
-            "implicitDependencies": [
-                "core-icon",
-                "core-popover",
-                "core-utils"
             ]
         }
     }

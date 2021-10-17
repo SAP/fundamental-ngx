@@ -1,22 +1,46 @@
 import { UploadCollectionPo } from '../pages/upload-collection.po';
 
 import {
-    click, getElementArrayLength, getElementPlaceholder, getText, isElementClickable,
-    refreshPage, scrollIntoView, sendKeys, setValue,
+    click,
+    getElementArrayLength,
+    getElementPlaceholder,
+    getText,
+    isElementClickable,
+    refreshPage,
+    scrollIntoView,
+    sendKeys,
+    setValue,
     waitForPresent
 } from '../../driver/wdio';
 import {
     columnHeaderTestArr,
-    paginationTestArr, testFolder1,
+    paginationTestArr,
+    testFolder1,
     testFolderArr
 } from '../fixtures/appData/upload-collection-content';
 
-describe('Upload collection test suite', function() {
+describe('Upload collection test suite', () => {
     const uploadCollectionPage = new UploadCollectionPo();
     const {
-        defaultExample, disableExample, readonlyExample, turnOffExample, buttons, tableItems, menuItem, tablePages,
-        tableResult, linkNext, linkPrevious, inputFields, columnHeaders, tableContent, transparentButton,
-        dialogInputField, dialogCreateButton, tableItemCount, menuButton
+        defaultExample,
+        disableExample,
+        readonlyExample,
+        turnOffExample,
+        buttons,
+        tableItems,
+        menuItem,
+        tablePages,
+        tableResult,
+        linkNext,
+        linkPrevious,
+        inputFields,
+        columnHeaders,
+        tableContent,
+        transparentButton,
+        dialogInputField,
+        dialogCreateButton,
+        tableItemCount,
+        menuButton
     } = uploadCollectionPage;
 
     beforeAll(() => {
@@ -27,7 +51,6 @@ describe('Upload collection test suite', function() {
         refreshPage();
         waitForPresent(defaultExample);
     }, 1);
-
 
     it('should check the possibility of creating table item for Default and Without Pagination and Search examples', () => {
         checkCreatingFolder(defaultExample);
@@ -81,7 +104,6 @@ describe('Upload collection test suite', function() {
         checkClickabilityCancelButton(defaultExample);
         checkClickabilityCancelButton(defaultExample);
     });
-
 
     it('should check orientation', () => {
         uploadCollectionPage.checkRtlSwitch();

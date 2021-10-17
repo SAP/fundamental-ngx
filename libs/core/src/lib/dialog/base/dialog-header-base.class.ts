@@ -42,7 +42,7 @@ export abstract class DialogHeaderBase implements AfterContentInit {
 
     /** @hidden Assign custom templates */
     private _assignCustomTemplates(): void {
-        this.customTemplates.forEach(template => {
+        this.customTemplates.forEach((template) => {
             switch (template.getName()) {
                 case 'header':
                     this.headerTemplate = template.templateRef;

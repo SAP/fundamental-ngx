@@ -2,7 +2,8 @@ import { ActionSheetPo } from '../pages/action-sheet.po';
 import {
     checkElementScreenshot,
     click,
-    getElementArrayLength, getElementClass,
+    getElementArrayLength,
+    getElementClass,
     getImageTagBrowserPlatform,
     getText,
     refreshPage,
@@ -14,15 +15,10 @@ import {
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
 import { alertMessages, compactValue } from '../fixtures/appData/action-sheet-content';
 
-describe('Action sheet test suite', function() {
+describe('Action sheet test suite', () => {
     const actionSheetPage = new ActionSheetPo();
-    const {
-        actionSheetMenuButton,
-        actionSheetList,
-        actionSheetListItems,
-        actionSheetListItemButtons,
-        alertMessage
-    } = actionSheetPage;
+    const { actionSheetMenuButton, actionSheetList, actionSheetListItems, actionSheetListItemButtons, alertMessage } =
+        actionSheetPage;
 
     beforeAll(() => {
         actionSheetPage.open();
@@ -82,13 +78,13 @@ describe('Action sheet test suite', function() {
             }
         }
     });
-    describe('Check orientation', function() {
+    describe('Check orientation', () => {
         it('should check orientation', () => {
             actionSheetPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check basic visual regression', () => {
             actionSheetPage.saveExampleBaselineScreenshot();
             expect(actionSheetPage.compareWithBaseline()).toBeLessThan(5);
@@ -100,11 +96,18 @@ describe('Action sheet test suite', function() {
             for (let i = 0; actionSheetCount > i; i++) {
                 click(actionSheetMenuButton, i);
                 scrollIntoView(actionSheetList);
-                saveElementScreenshot(actionSheetList,
-                    `action-sheet-items-example-${i}-core-${getImageTagBrowserPlatform()}`, actionSheetPage.getScreenshotFolder());
-                expect(checkElementScreenshot(actionSheetList,
-                    `action-sheet-items-example-${i}-core-${getImageTagBrowserPlatform()}`, actionSheetPage.getScreenshotFolder()))
-                    .toBeLessThan(5);
+                saveElementScreenshot(
+                    actionSheetList,
+                    `action-sheet-items-example-${i}-core-${getImageTagBrowserPlatform()}`,
+                    actionSheetPage.getScreenshotFolder()
+                );
+                expect(
+                    checkElementScreenshot(
+                        actionSheetList,
+                        `action-sheet-items-example-${i}-core-${getImageTagBrowserPlatform()}`,
+                        actionSheetPage.getScreenshotFolder()
+                    )
+                ).toBeLessThan(5);
             }
         });
     });

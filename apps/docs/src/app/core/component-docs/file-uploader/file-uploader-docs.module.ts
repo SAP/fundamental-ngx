@@ -38,4 +38,4 @@ const routes: Routes = [
         FileUploaderTruncationExampleComponent
     ]
 })
-export class FileUploaderDocsModule { }
+export class FileUploaderDocsModule {}

@@ -2,7 +2,6 @@ import { ExtraButtonDirective } from './extra-button.directive';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-
 @Component({
     template: `
         <div id="test-container" style="position: relative; display: flex;">
@@ -10,10 +9,16 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
             <div>Some item</div>
             <div>Some item</div>
             <div>Some item</div>
-            <button style="position: absolute;" #directive fdpExtraButton [anchorIndexInsideParent]="anchorIndexInsideParent">
+            <button
+                style="position: absolute;"
+                #directive
+                fdpExtraButton
+                [anchorIndexInsideParent]="anchorIndexInsideParent"
+            >
                 ExtraButtonDirective Test
             </button>
-        </div> `
+        </div>
+    `
 })
 class TestComponent {
     @ViewChild('directive')
@@ -29,14 +34,13 @@ describe('fdExtraButton', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                TestComponent,
-                ExtraButtonDirective
-            ]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent, ExtraButtonDirective]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

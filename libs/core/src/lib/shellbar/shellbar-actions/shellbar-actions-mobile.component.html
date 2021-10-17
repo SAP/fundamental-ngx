@@ -7,22 +7,28 @@
             [fdMenuTrigger]="menu"
             [attr.aria-label]="collapsedItemMenuLabel"
         >
-            <span *ngIf="totalNotifications"
-                  class="fd-counter fd-counter--notification fd-shellbar__counter--notification">
+            <span
+                *ngIf="totalNotifications"
+                class="fd-counter fd-counter--notification fd-shellbar__counter--notification"
+            >
                 {{ totalNotifications }}
             </span>
         </button>
     </div>
 
     <fd-menu #menu [options]="{ placement: 'bottom-end' }" [fillControlMode]="null">
-        <li fd-menu-item *ngFor="let action of shellbarActions" (click)="actionClicked(action, $event)" class="fd-shellbar__action">
+        <li
+            fd-menu-item
+            *ngFor="let action of shellbarActions"
+            (click)="actionClicked(action, $event)"
+            class="fd-shellbar__action"
+        >
             <div fd-menu-interactive>
                 <fd-menu-addon position="before" [glyph]="action.glyph"></fd-menu-addon>
                 <span fd-menu-title>{{ action.label }}</span>
-                <span *ngIf="action.notificationCount"
-                      class="fd-counter fd-shellbar__counter--overflowed">
-                {{ action.notificationCount }}
-            </span>
+                <span *ngIf="action.notificationCount" class="fd-counter fd-shellbar__counter--overflowed">
+                    {{ action.notificationCount }}
+                </span>
             </div>
         </li>
     </fd-menu>

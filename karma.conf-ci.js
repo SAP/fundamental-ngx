@@ -37,7 +37,7 @@ module.exports = function (config) {
             browserName: 'MicrosoftEdge',
             version: 'latest'
         },
-/*        sl_ipad_macOS: {
+        /*        sl_ipad_macOS: {
                     base: 'SauceLabs',
                     platformVersion: '13.2',
                     platformName: 'iOS',
@@ -63,7 +63,7 @@ module.exports = function (config) {
             platform: 'windows 10',
             browserName: 'MicrosoftEdge',
             version: 'latest'
-        },
+        }
         // sl_ie_win: {
         //     base: 'SauceLabs',
         //     platform: 'windows 10',
@@ -109,7 +109,7 @@ module.exports = function (config) {
                 user: process.env.SAUCE_USERNAME,
                 'api-key': process.env.SAUCE_ACCESS_KEY,
                 logfile: 'sauce_connect.log',
-                scVersion: '4.6.2',
+                scVersion: '4.6.2'
             },
             public: 'public',
             idleTimeout: 20000,

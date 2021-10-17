@@ -34,11 +34,7 @@ export class ListMessageDirective implements OnChanges, OnInit, CssClassBuilder 
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        return [
-            'fd-list__message',
-            this.type ? 'fd-list__message--' + this.type : '',
-            this.class
-        ];
+        return ['fd-list__message', this.type ? 'fd-list__message--' + this.type : '', this.class];
     }
 
     /** @hidden */

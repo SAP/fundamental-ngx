@@ -15,7 +15,7 @@
     <!-- Toolbar -->
     <fd-toolbar class="fdp-upload-collection__toolbar">
         <div #responsiveBreadcrumbContainer>
-            <fd-breadcrumb [containerElement]="responsiveBreadcrumbContainer" [id]="id+'-breadcrumb'">
+            <fd-breadcrumb [containerElement]="responsiveBreadcrumbContainer" [id]="id + '-breadcrumb'">
                 <fd-breadcrumb-item>
                     <a
                         *ngIf="_breadcrumbList.length > 0"
@@ -26,7 +26,10 @@
                     >
                         All files
                     </a>
-                    <span *ngIf="_breadcrumbList.length === 0" i18n="@@platformUploadCollection.Breadcrumb.Label.AllFilesWithTotal">
+                    <span
+                        *ngIf="_breadcrumbList.length === 0"
+                        i18n="@@platformUploadCollection.Breadcrumb.Label.AllFilesWithTotal"
+                    >
                         <span>All files</span>
                         (<span [innerText]="_totalItems"></span>)
                     </span>
@@ -52,7 +55,7 @@
                 [(ngModel)]="_searchText"
                 (ngModelChange)="_searchInputChanged()"
                 glyph="search"
-                [ariaLabelledby]="id+'-breadcrumb'"
+                [ariaLabelledby]="id + '-breadcrumb'"
                 i18n-placeholder
                 placeholder="Search"
             ></fd-input-group>
@@ -194,7 +197,10 @@
                                         <span [innerText]="_getItemExtension(item)"></span>
                                     </div>
 
-                                    <fd-form-message [type]="item.sameFilenameState" i18n="@@platformUploadCollection.Item.Name.AlreadyExists">
+                                    <fd-form-message
+                                        [type]="item.sameFilenameState"
+                                        i18n="@@platformUploadCollection.Item.Name.AlreadyExists"
+                                    >
                                         {{ item.type === 'file' ? 'File' : 'Folder' }} already exists with that name.
                                     </fd-form-message>
                                 </fd-form-input-message-group>
@@ -343,13 +349,15 @@
             <!-- Results per page -->
             <div class="fdp-upload-collection__results">
                 <span class="fdp-upload-collection__results--title">
-                    <span [id]="id+'-results'" i18n="@@platformUploadCollection.ResultsPerPage.Title">Results per page</span>
+                    <span [id]="id + '-results'" i18n="@@platformUploadCollection.ResultsPerPage.Title"
+                        >Results per page</span
+                    >
                     <span *ngIf="_itemsPerPageOptions.length === 0" [innerText]="_itemsPerPage"></span>
                 </span>
                 <fdp-menu-button
                     *ngIf="_itemsPerPageOptions.length > 0"
                     type="ghost"
-                    [ariaLabelledBy]="id+'-results'"
+                    [ariaLabelledBy]="id + '-results'"
                     contentDensity="compact"
                     [fdpMenuTriggerFor]="itemsPerPageMenu"
                     [label]="itemsPerPage"
@@ -371,21 +379,41 @@
 
 <fdp-menu #menuActions xPosition="before" contentDensity="compact">
     <fdp-menu-item (itemSelect)="_moveToClicked()">
-        <fd-icon class="fdp-upload-collection__fd-icon" glyph="folder-blank" i18n-title="platformUploadCollection.Icon.MoveTo|Menu Action" title="Move to icon"></fd-icon>
+        <fd-icon
+            class="fdp-upload-collection__fd-icon"
+            glyph="folder-blank"
+            i18n-title="platformUploadCollection.Icon.MoveTo|Menu Action"
+            title="Move to icon"
+        ></fd-icon>
         <span i18n="platformUploadCollection.Btn.MoveTo|Menu Action">Move to</span>
     </fdp-menu-item>
     <ng-container *ngIf="_activeItem?.type === 'file'">
         <fdp-menu-item (itemSelect)="_downloadClicked()">
-            <fd-icon class="fdp-upload-collection__fd-icon" glyph="download" i18n-title="platformUploadCollection.Icon.Download|Menu Action" title="Download icon"></fd-icon>
+            <fd-icon
+                class="fdp-upload-collection__fd-icon"
+                glyph="download"
+                i18n-title="platformUploadCollection.Icon.Download|Menu Action"
+                title="Download icon"
+            ></fd-icon>
             <span i18n="platformUploadCollection.Btn.Download|Menu Action">Download</span>
         </fdp-menu-item>
         <fdp-menu-item (itemSelect)="_openUpdateFileVersion()">
-            <fd-icon class="fdp-upload-collection__fd-icon" glyph="drill-up" i18n-title="platformUploadCollection.Icon.UpdateVersion|Menu Action" title="Update version icon"></fd-icon>
+            <fd-icon
+                class="fdp-upload-collection__fd-icon"
+                glyph="drill-up"
+                i18n-title="platformUploadCollection.Icon.UpdateVersion|Menu Action"
+                title="Update version icon"
+            ></fd-icon>
             <span i18n="platformUploadCollection.Btn.UpdateVersion|Menu Action">Update version</span>
         </fdp-menu-item>
     </ng-container>
     <fdp-menu-item (itemSelect)="_remove()">
-        <fd-icon class="fdp-upload-collection__fd-icon" glyph="delete" i18n-title="platformUploadCollection.Icon.Remove|Menu Action" title="Remove icon"></fd-icon>
+        <fd-icon
+            class="fdp-upload-collection__fd-icon"
+            glyph="delete"
+            i18n-title="platformUploadCollection.Icon.Remove|Menu Action"
+            title="Remove icon"
+        ></fd-icon>
         <span i18n="platformUploadCollection.Btn.Remove|Menu Action">Remove</span>
     </fdp-menu-item>
 </fdp-menu>
@@ -500,7 +528,8 @@
 <ng-template #messageNewFolder let-payload="payload" let-messageStripType="messageStripType">
     <ng-container
         *ngIf="messageStripType === 'error'; else foldersCreated"
-        i18n="@@platformUploadCollection.Message.Create.Failed">
+        i18n="@@platformUploadCollection.Message.Create.Failed"
+    >
         {{ payload.folder.name }} has been failed to create.
     </ng-container>
     <ng-template #foldersCreated i18n="@@platformUploadCollection.Message.Create">
@@ -511,7 +540,8 @@
 <ng-template #messageUpdateVersion let-payload="payload" let-messageStripType="messageStripType">
     <ng-container
         *ngIf="messageStripType === 'error'; else versionUpdated"
-        i18n="@@platformUploadCollection.Message.UpdateVersion.Failed">
+        i18n="@@platformUploadCollection.Message.UpdateVersion.Failed"
+    >
         {{ payload.item.name }} has been failed to update version.
     </ng-container>
     <ng-template #versionUpdated i18n="@@platformUploadCollection.Message.UpdateVersion">
@@ -522,7 +552,8 @@
 <ng-template #messageFileRename let-payload="payload" let-messageStripType="messageStripType">
     <ng-container
         *ngIf="messageStripType === 'error'; else fileRenamed"
-        i18n="@@platformUploadCollection.Message.FileRename.Failed">
+        i18n="@@platformUploadCollection.Message.FileRename.Failed"
+    >
         The file "{{ payload.item.name }}" has been failed to rename to "{{ payload.fileName }}".
     </ng-container>
     <ng-template #fileRenamed i18n="@@platformUploadCollection.Message.FileRename">
@@ -531,9 +562,7 @@
 </ng-template>
 
 <ng-template #messageRemove let-payload="payload" let-messageStripType="messageStripType" let-count="count">
-    <ng-container
-        *ngIf="payload.items.length > 1 && count.folder && count.file"
-    >
+    <ng-container *ngIf="payload.items.length > 1 && count.folder && count.file">
         <ng-container
             *ngIf="messageStripType === 'error'; else foldersAndFilesRemoved"
             i18n="@@platformUploadCollection.Message.Remove.FoldersAndFiles.Failed"
@@ -545,12 +574,11 @@
         </ng-template>
     </ng-container>
 
-    <ng-container
-        *ngIf="payload.items.length > 1 && count.folder && !count.file"
-    >
+    <ng-container *ngIf="payload.items.length > 1 && count.folder && !count.file">
         <ng-container
             *ngIf="messageStripType === 'error'; else foldersRemoved"
-            i18n="@@platformUploadCollection.Message.Remove.Folders.Failed">
+            i18n="@@platformUploadCollection.Message.Remove.Folders.Failed"
+        >
             {{ count.folder }} folders have been failed to remove.
         </ng-container>
         <ng-template #foldersRemoved i18n="@@platformUploadCollection.Message.Remove.Folders">
@@ -558,12 +586,11 @@
         </ng-template>
     </ng-container>
 
-    <ng-container
-        *ngIf="payload.items.length > 1 && count.file && !count.folder"
-    >
+    <ng-container *ngIf="payload.items.length > 1 && count.file && !count.folder">
         <ng-container
             *ngIf="messageStripType === 'error'; else filesRemoved"
-            i18n="@@platformUploadCollection.Message.Remove.Files.Failed">
+            i18n="@@platformUploadCollection.Message.Remove.Files.Failed"
+        >
             {{ count.file }} files have been failed to remove.
         </ng-container>
         <ng-template #filesRemoved i18n="@@platformUploadCollection.Message.Remove.Files">
@@ -574,7 +601,8 @@
     <ng-container *ngIf="payload.items.length === 1">
         <ng-container
             *ngIf="messageStripType === 'error'; else oneItemRemoved"
-            i18n="@@platformUploadCollection.Message.Remove.OneItem.Failed">
+            i18n="@@platformUploadCollection.Message.Remove.OneItem.Failed"
+        >
             {{ payload.items[0].name }} has been failed to remove.
         </ng-container>
         <ng-template #oneItemRemoved i18n="@@platformUploadCollection.Message.Remove.OneItem">
@@ -584,27 +612,21 @@
 </ng-template>
 
 <ng-template #messageMove let-payload="payload" let-messageStripType="messageStripType" let-count="count">
-    <ng-container
-        *ngIf="payload.items.length > 1 && count.folder && count.file"
-    >
+    <ng-container *ngIf="payload.items.length > 1 && count.folder && count.file">
         <ng-container
             *ngIf="messageStripType === 'error'; else filesAndFoldersMovedTo"
             i18n="@@platformUploadCollection.Message.Move.FoldersAndFiles.Failed"
         >
-            {{ count.folder }} folders and {{ count.file}} files have been failed to move to
+            {{ count.folder }} folders and {{ count.file }} files have been failed to move to
         </ng-container>
         <ng-template #filesAndFoldersMovedTo i18n="@@platformUploadCollection.Message.Move.FoldersAndFiles">
-            {{ count.folder }} folders and {{ count.file}} files have been moved to
+            {{ count.folder }} folders and {{ count.file }} files have been moved to
         </ng-template>
 
-        <ng-container *ngIf="payload.to; else allFiles">
-            {{payload.to.name}}
-        </ng-container>.
+        <ng-container *ngIf="payload.to; else allFiles"> {{ payload.to.name }} </ng-container>.
     </ng-container>
 
-    <ng-container
-        *ngIf="payload.items.length > 1 && count.folder && !count.file"
-    >
+    <ng-container *ngIf="payload.items.length > 1 && count.folder && !count.file">
         <ng-container
             *ngIf="messageStripType === 'error'; else foldersMovedTo"
             i18n="@@platformUploadCollection.Message.Move.Folders.Failed"
@@ -614,15 +636,11 @@
         <ng-template #foldersMovedTo i18n="@@platformUploadCollection.Message.Move.Folders">
             {{ count.folder }} folders have been moved to
         </ng-template>
-        
-        <ng-container *ngIf="payload.to; else allFiles">
-            {{payload.to.name}}
-        </ng-container>.
+
+        <ng-container *ngIf="payload.to; else allFiles"> {{ payload.to.name }} </ng-container>.
     </ng-container>
 
-    <ng-container
-        *ngIf="payload.items.length > 1 && count.file && !count.folder"
-    >
+    <ng-container *ngIf="payload.items.length > 1 && count.file && !count.folder">
         <ng-container
             *ngIf="messageStripType === 'error'; else filesMovedTo"
             i18n="@@platformUploadCollection.Message.Move.Files.Failed"
@@ -632,10 +650,8 @@
         <ng-template #filesMovedTo i18n="@@platformUploadCollection.Message.Move.Files">
             {{ count.file }} files have been moved to
         </ng-template>
-        
-        <ng-container *ngIf="payload.to; else allFiles">
-            {{payload.to.name}}
-        </ng-container>.
+
+        <ng-container *ngIf="payload.to; else allFiles"> {{ payload.to.name }} </ng-container>.
     </ng-container>
 
     <ng-container *ngIf="payload.items.length === 1">
@@ -649,9 +665,7 @@
             {{ payload.items[0].name }} have been moved to
         </ng-template>
 
-        <ng-container *ngIf="payload.to; else allFiles">
-            {{payload.to.name}}
-        </ng-container>.
+        <ng-container *ngIf="payload.to; else allFiles"> {{ payload.to.name }} </ng-container>.
     </ng-container>
 </ng-template>
 
@@ -660,11 +674,13 @@
         i18n="@@platformUploadCollection.Message.TypeMismatch.Files"
         *ngIf="payload.items.length > 1 && count.file && !count.folder"
     >
-        {{ count.file }} files have the wrong type. Allowed types: {{ fileTypes.join(', ') }}{{ fileTypes.length && mimeTypes?.length ? ', ' : '' }}{{ mimeTypes.join(', ') }}.
+        {{ count.file }} files have the wrong type. Allowed types: {{ fileTypes.join(', ')
+        }}{{ fileTypes.length && mimeTypes?.length ? ', ' : '' }}{{ mimeTypes.join(', ') }}.
     </ng-container>
 
     <ng-container i18n="@@platformUploadCollection.Message.TypeMismatch.OneItem" *ngIf="payload.items.length === 1">
-        The file "{{ payload.items[0].name }}" has the wrong type. Allowed types: {{ fileTypes.join(', ') }}{{ fileTypes.length && mimeTypes?.length ? ', ' : '' }}{{ mimeTypes.join(', ') }}.
+        The file "{{ payload.items[0].name }}" has the wrong type. Allowed types: {{ fileTypes.join(', ')
+        }}{{ fileTypes.length && mimeTypes?.length ? ', ' : '' }}{{ mimeTypes.join(', ') }}.
     </ng-container>
 </ng-template>
 
@@ -686,14 +702,14 @@
         i18n="@@platformUploadCollection.Message.FilenameLength.Files"
         *ngIf="payload.items.length > 1 && count.file && !count.folder"
     >
-        {{ count.file }} files exceeded the maximum filename length. Allowed filename length: {{ maxFilenameLength }} characters.
+        {{ count.file }} files exceeded the maximum filename length. Allowed filename length:
+        {{ maxFilenameLength }} characters.
     </ng-container>
 
     <ng-container i18n="@@platformUploadCollection.Message.FilenameLength.OneItem" *ngIf="payload.items.length === 1">
-        The name "{{ payload.items[0].name }}" exceeded the maximum filename length. Allowed filename length: {{ maxFilenameLength }} characters.
+        The name "{{ payload.items[0].name }}" exceeded the maximum filename length. Allowed filename length:
+        {{ maxFilenameLength }} characters.
     </ng-container>
 </ng-template>
 
-<ng-template #allFiles i18n="platformUploadCollection.Message.AllFiles">
-    All files
-</ng-template>
+<ng-template #allFiles i18n="platformUploadCollection.Message.AllFiles"> All files </ng-template>

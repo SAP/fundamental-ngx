@@ -3,9 +3,9 @@ import { Observable } from 'rxjs';
 
 /**
  * Reset button.
- * 
+ *
  * Used to reset resettable state by click.
- * 
+ *
  */
 
 export interface Resettable {

@@ -14,9 +14,7 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { DYNAMIC_PAGE_CLASS_NAME, DynamicPageBackgroundType, DynamicPageResponsiveSize } from './constants';
-import {
-    DynamicPageContentComponent
-} from './dynamic-page-content/dynamic-page-content.component';
+import { DynamicPageContentComponent } from './dynamic-page-content/dynamic-page-content.component';
 import { DynamicPageSubheaderComponent } from './dynamic-page-header/subheader/dynamic-page-subheader.component';
 import { DynamicPageHeaderComponent } from './dynamic-page-header/header/dynamic-page-header.component';
 import { DynamicPageService } from './dynamic-page.service';
@@ -181,16 +179,10 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
      * - recheck size depending on width of DynamicPage
      */
     private _listenToLayoutChange(): void {
-        this._columnLayout.layoutChange
-            .pipe(
-                takeUntil(this._onDestroy$),
-                delay(1500)
-            )
-            .subscribe(_ => {
-                this.refreshSize();
-                this._sizeChangeHandle();
-            })
-        ;
+        this._columnLayout.layoutChange.pipe(takeUntil(this._onDestroy$), delay(1500)).subscribe((_) => {
+            this.refreshSize();
+            this._sizeChangeHandle();
+        });
     }
 
     /** @hidden */
@@ -204,11 +196,8 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _listenOnCollapse(): void {
         this._dynamicPageService.subheaderVisibilityChange
-            .pipe(
-                takeUntil(this._onDestroy$)
-            )
-            .subscribe(_ => this._setContainerPositions())
-        ;
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe((_) => this._setContainerPositions());
     }
 
     /**@hidden */
@@ -252,21 +241,17 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
     private _listenOnScroll(element: HTMLElement): void {
         fromEvent(element, 'scroll')
             .pipe(debounceTime(10), takeUntil(this._onDestroy$))
-            .subscribe(_ => {
+            .subscribe((_) => {
                 const collapse = !this._dynamicPageService.pinned.value && element.scrollTop > 0;
                 this._dynamicPageService.collapsed.next(collapse);
-            })
-        ;
+            });
     }
-
 
     /** @hidden Listen for window resize and adjust tab and content positions accordingly */
     private _listenOnResize(): void {
         fromEvent(window, 'resize')
-            .pipe(
-                debounceTime(100),
-                takeUntil(this._onDestroy$)
-            ).subscribe(_ => {
+            .pipe(debounceTime(100), takeUntil(this._onDestroy$))
+            .subscribe((_) => {
                 this._setContainerPositions();
                 this._sizeChangeHandle();
             });
@@ -280,11 +265,7 @@ export class DynamicPageComponent implements AfterViewInit, OnDestroy {
             return;
         }
         const element = this._dynamicPageElement.nativeElement;
-        this._renderer.setStyle(
-            element,
-            'height',
-            this._getCalculatedFullHeight(element)
-        );
+        this._renderer.setStyle(element, 'height', this._getCalculatedFullHeight(element));
     }
 
     /** @hidden */

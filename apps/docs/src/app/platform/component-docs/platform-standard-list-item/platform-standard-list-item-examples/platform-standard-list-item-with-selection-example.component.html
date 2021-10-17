@@ -1,10 +1,23 @@
 <fd-toolbar fdType="info" active="true">
-    <label fd-toolbar-label>{{_selectedItems.length}} : Items selected</label>
+    <label fd-toolbar-label>{{ _selectedItems.length }} : Items selected</label>
 </fd-toolbar>
-<fdp-list selection="true" [dataSource]="_dataSource" selectionMode="multi" [(ngModel)]="_selectedItems"
-    (selectedItemChange)="_showItemInfo($event)" [hasByLine]="true"
-    [ariaMultiselectable]="true" [ariaLabel]="_selectedItems.length > 0 ? _selectedItems.length +'Items selected': '0 Items selected'">
-    <fdp-standard-list-item *fdpItemDef="let address" [avatarSrc]="address.img" [avatarTitle]="address.imgInfo"
-        [description]="address.description" [secondary]="address.info" [title]="address.name">
+<fdp-list
+    selection="true"
+    [dataSource]="_dataSource"
+    selectionMode="multi"
+    [(ngModel)]="_selectedItems"
+    (selectedItemChange)="_showItemInfo($event)"
+    [hasByLine]="true"
+    [ariaMultiselectable]="true"
+    [ariaLabel]="_selectedItems.length > 0 ? _selectedItems.length + 'Items selected' : '0 Items selected'"
+>
+    <fdp-standard-list-item
+        *fdpItemDef="let address"
+        [avatarSrc]="address.img"
+        [avatarTitle]="address.imgInfo"
+        [description]="address.description"
+        [secondary]="address.info"
+        [title]="address.name"
+    >
     </fdp-standard-list-item>
 </fdp-list>

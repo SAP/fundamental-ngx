@@ -1,4 +1,4 @@
-import { SplitButtonPo } from '../pages/split-button.po'
+import { SplitButtonPo } from '../pages/split-button.po';
 import {
     acceptAlert,
     click,
@@ -11,12 +11,17 @@ import {
 } from '../../driver/wdio';
 
 describe('Split-button test suite', () => {
-
     const splitButtonPage = new SplitButtonPo();
     const {
-        mainBtn, splitMenuItem, splitMenu, buttonBehaviorExample,
-        iconBehaviorExample, buttonTypesExample, buttonPragmaticalExample,
-        buttonTemplateExample, arrowDownBtn
+        mainBtn,
+        splitMenuItem,
+        splitMenu,
+        buttonBehaviorExample,
+        iconBehaviorExample,
+        buttonTypesExample,
+        buttonPragmaticalExample,
+        buttonTemplateExample,
+        arrowDownBtn
     } = splitButtonPage;
 
     beforeAll(() => {
@@ -33,7 +38,7 @@ describe('Split-button test suite', () => {
         checkMenuOpens(buttonTypesExample);
         checkMenuOpens(buttonTemplateExample);
         checkMenuOpens(buttonPragmaticalExample);
-        checkMenuOpens(iconBehaviorExample)
+        checkMenuOpens(iconBehaviorExample);
     });
 
     it('Verify split button does not have less than 2 buuttons', () => {

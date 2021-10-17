@@ -1,0 +1,15 @@
+<form [formGroup]="customForm" class="flex-form">
+    <div fn-form-item *ngFor="let value of radioInput.values">
+        <fn-radio-button
+            [selectedValue]="customForm.controls.radioInput.value"
+            [value]="value"
+            [name]="radioInput.name"
+            [formControlName]="radioInput.formControlName"
+        >
+            Option {{ value }}
+        </fn-radio-button>
+    </div>
+    <p>
+        <i>Radio Button Value: {{ customForm.controls.radioInput.value }}</i>
+    </p>
+</form>

@@ -7,7 +7,7 @@ import { CalendarDocsComponent } from './calendar-docs.component';
 import { CalendarRangeExampleComponent } from './examples/calendar-range-example.component';
 import { CalendarSingleExampleComponent } from './examples/calendar-single-example.component';
 import { CalendarMondayStartExampleComponent } from './examples/calendar-monday-start-example.component';
-import { CalendarFormExamplesComponent } from './examples/calendar-form-example.component';
+import { CalendarFormExamplesComponent } from './examples/calendar-form-example/calendar-form-example.component';
 import { CalendarProgrammaticallyChangeExampleComponent } from './examples/calendar-programmatically-change-example.component';
 import { CalendarI18nExampleComponent } from './examples/calendar-i18n-example.component';
 import { CalendarI18nMomentExampleComponent } from './examples/calendar--i18n-moment-example.component';

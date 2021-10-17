@@ -7,13 +7,14 @@
 </a>
 
 ## Content
-* [1. Description](#1)
-* [2. Requirements](#2)
-* [3. Known Issues](#3)
-* [4. Support](#4)
-* [5. Contributing](#5)
-* [6. License](#6)
-* [7. Similar Projects](#7)
+
+-   [1. Description](#1)
+-   [2. Requirements](#2)
+-   [3. Known Issues](#3)
+-   [4. Support](#4)
+-   [5. Contributing](#5)
+-   [6. License](#6)
+-   [7. Similar Projects](#7)
 
 ## <a name="1"></a>1. Description
 
@@ -21,14 +22,13 @@ The Fundamental Library Styles is a design system and HTML/CSS component library
 
 This repository contains 2 libraries(npm packages),
 
-* [@fundamental-ngx/core](https://github.com/SAP/fundamental-ngx/tree/main/libs/core):
-The Fundamental-ngx core provides base angular implementation of Fundamental Library Styles to offer developers a rich set of components
-they can use when building angular applications. Fundamental-ngx core angular components provides the end developer with some degree of flexibility as most of the components allow finer customization directly on the HTML template level.
+-   [@fundamental-ngx/core](https://github.com/SAP/fundamental-ngx/tree/main/libs/core):
+    The Fundamental-ngx core provides base angular implementation of Fundamental Library Styles to offer developers a rich set of components
+    they can use when building angular applications. Fundamental-ngx core angular components provides the end developer with some degree of flexibility as most of the components allow finer customization directly on the HTML template level.
 
-* [@fundamental-ngx/platform](https://github.com/SAP/fundamental-ngx/tree/main/libs/platform):
-The Fundamental-ngx platform is built on top of the core to both enhance existing functionality with additional features
-which are driven by application requirements and to provide higher abstraction for the components by hiding most of the internal implementation details which boosts productivity.
-
+-   [@fundamental-ngx/platform](https://github.com/SAP/fundamental-ngx/tree/main/libs/platform):
+    The Fundamental-ngx platform is built on top of the core to both enhance existing functionality with additional features
+    which are driven by application requirements and to provide higher abstraction for the components by hiding most of the internal implementation details which boosts productivity.
 
 ## <a name="2"></a>2. Requirements
 
@@ -40,8 +40,8 @@ Prior knowledge of Angular is recommended, to use the fundamental-ngx library.
 
 ## <a name="3"></a>3. Known Issues
 
-* Please see [Issues](https://github.com/SAP/fundamental-ngx/issues).
-* Contribution Known [Issues](https://github.com/SAP/fundamental-ngx/wiki/Known-Contribution-Issues)
+-   Please see [Issues](https://github.com/SAP/fundamental-ngx/issues).
+-   Contribution Known [Issues](https://github.com/SAP/fundamental-ngx/wiki/Known-Contribution-Issues)
 
 ## <a name="4"></a>4. Support
 
@@ -54,6 +54,7 @@ If you want to contribute, please check the [CONTRIBUTING.md](https://github.com
 Check out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/main/NEW_COMPONENT.md) guide on building a new component for the library and creating the necessary documentation for your new component.
 
 ## Similar Projects
+
 ## <a name="7"></a>7. Similar Projects
 
 [Fundamental-react](https://github.com/SAP/fundamental-react) - React implementation of Fundamental Library Styles

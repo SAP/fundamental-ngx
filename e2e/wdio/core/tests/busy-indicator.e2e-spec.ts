@@ -10,11 +10,19 @@ import {
     waitForPresent
 } from '../../driver/wdio';
 
-describe('Busy Indicator test suite:', function() {
+describe('Busy Indicator test suite:', () => {
     const busyIndicatorPage: BusyIndicatorPo = new BusyIndicatorPo();
     const {
-        formName, formSurname, formPassword, saveButton, enableDisableButton,
-        saveIndicator, formIndicator, smallIndicator, middleIndicator, largeIndicator,
+        formName,
+        formSurname,
+        formPassword,
+        saveButton,
+        enableDisableButton,
+        saveIndicator,
+        formIndicator,
+        smallIndicator,
+        middleIndicator,
+        largeIndicator
     } = busyIndicatorPage;
     const text = 'test';
 

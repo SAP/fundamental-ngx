@@ -21,11 +21,9 @@ import * as mobileVhdTs from '!raw-loader!./platform-vhd-examples/platform-vhd-m
 
 @Component({
     selector: 'app-platform-vhd',
-    templateUrl: './platform-vhd.docs.component.html',
-
+    templateUrl: './platform-vhd.docs.component.html'
 })
 export class PlatformVhdDocsComponent {
-
     basicValueHelpDialog: ExampleFile[] = [
         {
             language: 'html',

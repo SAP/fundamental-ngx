@@ -410,7 +410,7 @@ describe('FdDatetimeAdapter', () => {
     });
 
     it('should count an invalid date as an invalid date instance', () => {
-        expect(adapter.isValid((NaN as unknown) as FdDate)).toBe(false);
+        expect(adapter.isValid(NaN as unknown as FdDate)).toBe(false);
     });
 
     it('should not throw when attempting to format a date with a year less than 1', () => {

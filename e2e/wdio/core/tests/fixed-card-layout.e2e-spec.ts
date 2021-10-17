@@ -7,10 +7,11 @@ import {
     refreshPage,
     scrollIntoView,
     waitForInvisibilityOf,
-    getElementLocation, waitForPresent
+    getElementLocation,
+    waitForPresent
 } from '../../driver/wdio';
 
-describe('Fixed card layout test suite', function() {
+describe('Fixed card layout test suite', () => {
     const fxdCardLayoutPage = new FixedCardLayoutPo();
     const {
         hideCardBtnArr,
@@ -36,8 +37,7 @@ describe('Fixed card layout test suite', function() {
         waitForPresent(pageHeader);
     }, 1);
 
-    describe('main checks', function() {
-
+    describe('main checks', () => {
         it('should check card can be hidden', () => {
             const cardStartCount = getElementArrayLength(cardDivArr);
 
@@ -93,18 +93,20 @@ describe('Fixed card layout test suite', function() {
             const endXLocation = Math.floor(getElementLocation(locationElement, 4, 'x'));
             const endYLocation = Math.floor(getElementLocation(locationElement, 4, 'y'));
 
-            browser.performActions([{
-                'type': 'pointer',
-                'id': 'pointer1',
-                'parameters': { 'pointerType': 'mouse' },
-                'actions': [
-                    { 'type': 'pointerMove', 'duration': 0, 'x': clickXLocation, 'y': clickYLocation },
-                    { 'type': 'pointerDown', 'button': 0 },
-                    { 'type': 'pause', 'duration': 1000 },
-                    { 'type': 'pointerMove', 'duration': 600, 'x': startXLocation, 'y': startYLocation },
-                    { 'type': 'pointerMove', 'duration': 1000, 'x': endXLocation + 30, 'y': endYLocation + 30 }
-                ]
-            }]);
+            browser.performActions([
+                {
+                    type: 'pointer',
+                    id: 'pointer1',
+                    parameters: { pointerType: 'mouse' },
+                    actions: [
+                        { type: 'pointerMove', duration: 0, x: clickXLocation, y: clickYLocation },
+                        { type: 'pointerDown', button: 0 },
+                        { type: 'pause', duration: 1000 },
+                        { type: 'pointerMove', duration: 600, x: startXLocation, y: startYLocation },
+                        { type: 'pointerMove', duration: 1000, x: endXLocation + 30, y: endYLocation + 30 }
+                    ]
+                }
+            ]);
 
             expect(elementDisplayed(placeholderCard)).toBe(true);
         });
@@ -139,13 +141,13 @@ describe('Fixed card layout test suite', function() {
             expect(newFirstCardText).toBe(originalFirstCardText);
         });
 
-        describe('Check orientation', function() {
+        describe('Check orientation', () => {
             it('should check LTR and RTL orientation', () => {
                 fxdCardLayoutPage.checkRtlSwitch();
             });
         });
 
-        xdescribe('Check visual regression', function() {
+        xdescribe('Check visual regression', () => {
             it('should check examples visual regression', () => {
                 fxdCardLayoutPage.saveExampleBaselineScreenshot();
                 expect(fxdCardLayoutPage.compareWithBaseline()).toBeLessThan(5);
@@ -162,18 +164,20 @@ describe('Fixed card layout test suite', function() {
         const endXLocation = Math.floor(getElementLocation(endLocation, endLocationIndex, 'x'));
         const endYLocation = Math.floor(getElementLocation(endLocation, endLocationIndex, 'y'));
 
-        browser.performActions([{
-            'type': 'pointer',
-            'id': 'pointer1',
-            'parameters': { 'pointerType': 'mouse' },
-            'actions': [
-                { 'type': 'pointerMove', 'duration': 200, 'x': clickXLocation + 2, 'y': clickYLocation + 2 },
-                { 'type': 'pointerDown', 'button': 0 },
-                { 'type': 'pause', 'duration': 1000 },
-                { 'type': 'pointerMove', 'duration': 600, 'x': startXLocation + 2, 'y': startYLocation + 2 },
-                { 'type': 'pointerMove', 'duration': 1000, 'x': endXLocation + 40, 'y': endYLocation + 40 },
-                { 'type': 'pointerUp', 'button': 0 }
-            ]
-        }]);
+        browser.performActions([
+            {
+                type: 'pointer',
+                id: 'pointer1',
+                parameters: { pointerType: 'mouse' },
+                actions: [
+                    { type: 'pointerMove', duration: 200, x: clickXLocation + 2, y: clickYLocation + 2 },
+                    { type: 'pointerDown', button: 0 },
+                    { type: 'pause', duration: 1000 },
+                    { type: 'pointerMove', duration: 600, x: startXLocation + 2, y: startYLocation + 2 },
+                    { type: 'pointerMove', duration: 1000, x: endXLocation + 40, y: endYLocation + 40 },
+                    { type: 'pointerUp', button: 0 }
+                ]
+            }
+        ]);
     }
 });

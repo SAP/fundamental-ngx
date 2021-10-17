@@ -13,7 +13,7 @@ describe('MenuKeyboardService', () => {
             jasmine.createSpyObj('DefaultMenuItem', ['focus', 'click']),
             jasmine.createSpyObj('DefaultMenuItem', ['focus', 'click']),
             jasmine.createSpyObj('DefaultMenuItem', ['focus', 'click'])
-        ]
+        ];
     });
 
     it('should create an instance', () => {
@@ -22,11 +22,11 @@ describe('MenuKeyboardService', () => {
 
     it('should focus items based on arrow navigation', () => {
         const index = 1;
-        service.keyDownHandler(new KeyboardEvent('keydown', {key: 'ArrowDown'}), index, menuItems);
+        service.keyDownHandler(new KeyboardEvent('keydown', { key: 'ArrowDown' }), index, menuItems);
 
         expect(menuItems[index + 1].focus).toHaveBeenCalled();
 
-        service.keyDownHandler(new KeyboardEvent('keydown', {key: 'ArrowUp'}), index, menuItems);
+        service.keyDownHandler(new KeyboardEvent('keydown', { key: 'ArrowUp' }), index, menuItems);
 
         expect(menuItems[index - 1].focus).toHaveBeenCalled();
 
@@ -36,11 +36,11 @@ describe('MenuKeyboardService', () => {
 
     it('should select items with space-bar or enter', () => {
         const index = 0;
-        service.keyDownHandler(new KeyboardEvent('keydown', {key: ' '}), index, menuItems);
+        service.keyDownHandler(new KeyboardEvent('keydown', { key: ' ' }), index, menuItems);
 
         expect(menuItems[index].click).toHaveBeenCalled();
 
-        service.keyDownHandler(new KeyboardEvent('keydown', {key: 'Enter'}), index, menuItems);
+        service.keyDownHandler(new KeyboardEvent('keydown', { key: 'Enter' }), index, menuItems);
 
         expect(menuItems[index].click).toHaveBeenCalledTimes(2);
     });
@@ -49,16 +49,16 @@ describe('MenuKeyboardService', () => {
         const index = 1;
         service.disableKeydownHandling = true;
 
-        service.keyDownHandler(new KeyboardEvent('keydown', {key: 'ArrowDown'}), index, menuItems);
+        service.keyDownHandler(new KeyboardEvent('keydown', { key: 'ArrowDown' }), index, menuItems);
 
         expect(menuItems[index + 1].focus).not.toHaveBeenCalled();
 
-        service.keyDownHandler(new KeyboardEvent('keydown', {key: 'ArrowUp'}), index, menuItems);
+        service.keyDownHandler(new KeyboardEvent('keydown', { key: 'ArrowUp' }), index, menuItems);
 
         expect(menuItems[index - 1].focus).not.toHaveBeenCalled();
 
-        service.keyDownHandler(new KeyboardEvent('keydown', {key: ' '}), index, menuItems);
-        service.keyDownHandler(new KeyboardEvent('keydown', {key: 'Enter'}), index, menuItems);
+        service.keyDownHandler(new KeyboardEvent('keydown', { key: ' ' }), index, menuItems);
+        service.keyDownHandler(new KeyboardEvent('keydown', { key: 'Enter' }), index, menuItems);
 
         expect(menuItems[index].click).not.toHaveBeenCalled();
     });
@@ -66,13 +66,13 @@ describe('MenuKeyboardService', () => {
     it('should call escape functions', () => {
         let index = menuItems.length - 1;
 
-        service.keyDownHandler(new KeyboardEvent('keydown', {key: 'ArrowDown'}), index, menuItems);
+        service.keyDownHandler(new KeyboardEvent('keydown', { key: 'ArrowDown' }), index, menuItems);
 
         expect(service.focusEscapeAfterList).toHaveBeenCalled();
 
         index = 0;
 
-        service.keyDownHandler(new KeyboardEvent('keydown', {key: 'ArrowUp'}), index, menuItems);
+        service.keyDownHandler(new KeyboardEvent('keydown', { key: 'ArrowUp' }), index, menuItems);
 
         expect(service.focusEscapeBeforeList).toHaveBeenCalled();
     });

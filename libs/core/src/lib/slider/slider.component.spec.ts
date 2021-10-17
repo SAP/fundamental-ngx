@@ -39,23 +39,11 @@ import { whenStable } from '@fundamental-ngx/core/tests';
             [customValues]="customValues"
         ></fd-slider>
 
-        <fd-slider
-            class="example-4"
-            [(ngModel)]="value4"
-            mode="range"
-        ></fd-slider>
+        <fd-slider class="example-4" [(ngModel)]="value4" mode="range"></fd-slider>
 
-        <fd-slider
-            class="example-5"
-            [(ngModel)]="value5"
-            [disabled]="true"
-        ></fd-slider>
+        <fd-slider class="example-5" [(ngModel)]="value5" [disabled]="true"></fd-slider>
 
-        <fd-slider
-            class="example-6"
-            [(ngModel)]="value6"
-            [cozy]="true"
-        ></fd-slider>
+        <fd-slider class="example-6" [(ngModel)]="value6" [cozy]="true"></fd-slider>
     `
 })
 class TestSliderComponent {
@@ -90,12 +78,14 @@ xdescribe('SliderComponent', () => {
     let sliders: SliderComponent[];
     let bodyClientWidth = 0;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestSliderComponent],
-            imports: [SliderModule, FormsModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestSliderComponent],
+                imports: [SliderModule, FormsModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(TestSliderComponent);

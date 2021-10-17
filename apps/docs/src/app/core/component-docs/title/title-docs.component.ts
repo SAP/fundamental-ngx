@@ -42,5 +42,4 @@ export class TitleDocsComponent {
             fileName: 'title-wrapping-example'
         }
     ];
-
 }

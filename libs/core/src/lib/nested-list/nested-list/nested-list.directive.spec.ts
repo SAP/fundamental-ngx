@@ -59,13 +59,20 @@ describe('NestedListDirective', () => {
     let level3List: NestedListDirective;
     let level4List: NestedListDirective;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [NestedListModule],
-            declarations: [TestNestedContainerComponent],
-            providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService, ContentDensityService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [NestedListModule],
+                declarations: [TestNestedContainerComponent],
+                providers: [
+                    NestedListKeyboardService,
+                    MenuKeyboardService,
+                    NestedListStateService,
+                    ContentDensityService
+                ]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNestedContainerComponent);
@@ -94,7 +101,7 @@ describe('NestedListDirective', () => {
 
     it('should handle content density when compact input is not provided', () => {
         level1List.compact = undefined;
-        level1List.ngOnInit()
+        level1List.ngOnInit();
         expect(level1List.compact).toBe(DEFAULT_CONTENT_DENSITY !== 'cozy');
     });
 });

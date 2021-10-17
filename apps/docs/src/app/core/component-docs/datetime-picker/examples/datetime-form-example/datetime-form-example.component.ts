@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import {
+    DatetimeAdapter,
+    DATE_TIME_FORMATS,
+    FdDate,
+    FdDatetimeAdapter,
+    FD_DATETIME_FORMATS
+} from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-datetime-form-example',

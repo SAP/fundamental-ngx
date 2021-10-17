@@ -8,7 +8,8 @@
             [button]="true"
             [disabled]="false"
             [(ngModel)]="search"
-            (addOnButtonClicked)="search = ''">
+            (addOnButtonClicked)="search = ''"
+        >
         </fd-input-group>
     </div>
     <div class="fd-docs-sidebar-content">
@@ -35,11 +36,18 @@
                                         </div>
                                         <ul fd-nested-list>
                                             <ng-container *ngFor="let subItem of item.subItems">
-                                                <li fd-nested-list-item
-                                                    *ngIf="subItem.url === 'home' || (subItem | docsSearch: search)">
-                                                    <a tabindex="0" role="button" fd-nested-list-link
-                                                        routerLinkActive="is-selected" [routerLink]="'/' + subItem.url"
-                                                        (keypress)="onKeypressHandler($event)">
+                                                <li
+                                                    fd-nested-list-item
+                                                    *ngIf="subItem.url === 'home' || (subItem | docsSearch: search)"
+                                                >
+                                                    <a
+                                                        tabindex="0"
+                                                        role="button"
+                                                        fd-nested-list-link
+                                                        routerLinkActive="is-selected"
+                                                        [routerLink]="'/' + subItem.url"
+                                                        (keypress)="onKeypressHandler($event)"
+                                                    >
                                                         <span fd-nested-list-title>{{ subItem.name }}</span>
                                                     </a>
                                                 </li>
@@ -49,9 +57,14 @@
                                 </ng-template>
                                 <ng-template #elseBlock>
                                     <li fd-nested-list-item *ngIf="item.url === 'home' || (item | docsSearch: search)">
-                                        <a fd-nested-list-link [routerLink]="'/' + item.url"
-                                            routerLinkActive="is-selected" (keypress)="onKeypressHandler($event)"
-                                            tabindex="0" role="button">
+                                        <a
+                                            fd-nested-list-link
+                                            [routerLink]="'/' + item.url"
+                                            routerLinkActive="is-selected"
+                                            (keypress)="onKeypressHandler($event)"
+                                            tabindex="0"
+                                            role="button"
+                                        >
                                             <span fd-nested-list-title>{{ item.name }}</span>
                                         </a>
                                     </li>

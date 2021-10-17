@@ -42,9 +42,7 @@ export class DateTimeFormatPipe<D> implements PipeTransform {
     name: 'dateFromNow'
 })
 export class DateFromNowPipe<D> implements PipeTransform {
-    constructor(
-        private _dateTimeAdapter: DatetimeAdapter<D>
-    ) {}
+    constructor(private _dateTimeAdapter: DatetimeAdapter<D>) {}
 
     transform(date: D, noDateMessage?: string): string {
         if (this._dateTimeAdapter.fromNow && typeof this._dateTimeAdapter.fromNow !== 'undefined') {

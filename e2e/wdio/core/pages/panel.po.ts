@@ -16,7 +16,7 @@ export class PanelPo extends CoreBaseComponentPo {
         super.open(this.url);
         waitForElDisplayed(this.root);
         waitForElDisplayed(this.title);
-    };
+    }
 
     getScreenshotFolder(): object {
         return super.getScreenshotFolder(this.url);

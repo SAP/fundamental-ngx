@@ -38,8 +38,15 @@
 </component-example>
 <code-example [exampleFiles]="messageStripWidthExample"></code-example>
 
-<playground [schema]="schema" [schemaInitialValues]="data" [resettable]="true" (onReset)="reset()" (onFormChanges)="onSchemaValues($event)">
-    <fd-message-strip *ngIf="shouldShow"
+<playground
+    [schema]="schema"
+    [schemaInitialValues]="data"
+    [resettable]="true"
+    (onReset)="reset()"
+    (onFormChanges)="onSchemaValues($event)"
+>
+    <fd-message-strip
+        *ngIf="shouldShow"
         [type]="data.modifier.type"
         [dismissible]="data.properties.dismissible"
         [noIcon]="data.properties.noIcon"

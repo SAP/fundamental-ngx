@@ -25,7 +25,7 @@ class TestComponent {
     buttonDirective: FeedInputButtonDirective;
 
     disabled = false;
-    maxRows: number
+    maxRows: number;
 }
 
 describe('FeedInputComponent', () => {
@@ -37,12 +37,14 @@ describe('FeedInputComponent', () => {
     let textareaDirective;
     let buttonDirective;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [FeedInputModule],
-            declarations: [TestComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [FeedInputModule],
+                declarations: [TestComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -65,7 +67,7 @@ describe('FeedInputComponent', () => {
         fixture.detectChanges();
 
         expect(hostEl.nativeElement.className.includes('is-disabled')).toBeTrue();
-    })
+    });
 
     it('should disabled button by default', () => {
         expect(buttonEl.attributes['aria-disabled']).toBeTruthy();
@@ -79,7 +81,6 @@ describe('FeedInputComponent', () => {
     });
 
     it('should button enable when textarea have not a value', () => {
-
         textareaEl.triggerEventHandler('keyup', { target: { value: '' } });
         fixture.detectChanges();
 
@@ -92,7 +93,7 @@ describe('FeedInputComponent', () => {
         textareaDirective.onKeyup(event);
         fixture.detectChanges();
 
-        expect(textareaDirective.valueChange.emit).toHaveBeenCalledWith(event.target.value)
+        expect(textareaDirective.valueChange.emit).toHaveBeenCalledWith(event.target.value);
     });
 
     it('should textarea grow by default', () => {

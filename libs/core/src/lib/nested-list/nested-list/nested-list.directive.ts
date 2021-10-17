@@ -24,7 +24,6 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
     selector: '[fdNestedList], [fd-nested-list]'
 })
 export class NestedListDirective implements AfterContentInit, NestedListInterface, OnInit, OnDestroy {
-
     /** In case the user wants to no use icons for items in this list */
     @Input()
     @HostBinding('class.fd-nested-list--text-only')
@@ -71,9 +70,11 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
     /** @hidden */
     ngOnInit(): void {
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                })
+            );
         }
     }
 
@@ -119,7 +120,7 @@ export class NestedListDirective implements AfterContentInit, NestedListInterfac
         }
 
         /** Filter only elements, that has `fd-nested-list` directive attribute */
-        const filteredParentElements = parentElements.filter(_element => _element.hasAttribute('fd-nested-list'));
+        const filteredParentElements = parentElements.filter((_element) => _element.hasAttribute('fd-nested-list'));
         return filteredParentElements.length;
     }
 }

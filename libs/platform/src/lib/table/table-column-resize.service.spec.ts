@@ -29,7 +29,7 @@ describe('TableColumnResizeService', () => {
         expect(service.getColumnWidthStyle(tableColumn)).toEqual('auto');
 
         service.registerColumnCell(tableColumn.name, tableColumnCell);
-        service.setColumnsWidth(columnNames, null, 0, 0);
+        service.setColumnsWidth(columnNames, null, 0);
 
         expect(service.getColumnWidthStyle(tableColumn)).toEqual(widthInPixels + 'px');
     });
@@ -44,7 +44,7 @@ describe('TableColumnResizeService', () => {
     it('should set resizer', () => {
         const position = 0;
 
-        service.setColumnsWidth([], null, 0, 0);
+        service.setColumnsWidth([], null, 0);
         service.setInitialResizerPosition(position, 'name');
 
         expect(service.resizerPosition).toEqual(position - TABLE_RESIZER_BORDER_WIDTH);
@@ -60,15 +60,13 @@ describe('TableColumnResizeService', () => {
         const tableColumnCell = { nativeElement: { offsetWidth: initialColumnWidth } } as ElementRef;
 
         service.registerColumnCell(tableColumn.name, tableColumnCell);
-        service.setColumnsWidth(tableColumnNames, null, 0, 0);
+        service.setColumnsWidth(tableColumnNames, null, 0);
         service.setInitialResizerPosition(0, tableColumn.name);
 
         service.startResize({ clientX: clientStartX } as MouseEvent);
         service.finishResize({ clientX: clientEndX } as MouseEvent);
 
-        expect(service.getColumnWidthStyle(tableColumn)).toEqual(
-            (initialColumnWidth + clientEndX - clientStartX) + 'px'
-        );
+        expect(service.getColumnWidthStyle(tableColumn)).toEqual(initialColumnWidth + clientEndX - clientStartX + 'px');
     });
 
     it('should set min column width if after resize it smaller', () => {
@@ -81,14 +79,12 @@ describe('TableColumnResizeService', () => {
         const tableColumnCell = { nativeElement: { offsetWidth: initialColumnWidth } } as ElementRef;
 
         service.registerColumnCell(tableColumn.name, tableColumnCell);
-        service.setColumnsWidth(tableColumnNames, null, 0, 0);
+        service.setColumnsWidth(tableColumnNames, null, 0);
         service.setInitialResizerPosition(0, tableColumn.name);
 
         service.startResize({ clientX: clientStartX } as MouseEvent);
         service.finishResize({ clientX: clientEndX } as MouseEvent);
 
-        expect(service.getColumnWidthStyle(tableColumn)).toEqual(
-            TABLE_COLUMN_MIN_WIDTH + 'px'
-        );
+        expect(service.getColumnWidthStyle(tableColumn)).toEqual(TABLE_COLUMN_MIN_WIDTH + 'px');
     });
 });

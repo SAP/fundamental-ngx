@@ -2,22 +2,45 @@ import { ToolbarPo } from '../pages/toolbar.po';
 import {
     checkElementScreenshot,
     click,
-    getElementArrayLength, getImageTagBrowserPlatform, getText, getValue,
-    isElementClickable, isElementDisplayed,
-
-    refreshPage, saveElementScreenshot, scrollIntoView, waitForElDisplayed
+    getElementArrayLength,
+    getImageTagBrowserPlatform,
+    getText,
+    getValue,
+    isElementClickable,
+    isElementDisplayed,
+    refreshPage,
+    saveElementScreenshot,
+    scrollIntoView,
+    waitForElDisplayed
 } from '../../driver/wdio';
-import {
-    fruitArr, currentDay, date
-} from '../fixtures/appData/toolbar-contents';
+import { fruitArr, currentDay, date } from '../fixtures/appData/toolbar-contents';
 
-describe('Toolbar test suite', function() {
+describe('Toolbar test suite', () => {
     const toolbarPage = new ToolbarPo();
     const {
-        activeInfoToolbar, overflowButton, overflowPriorityButton, moreButton, overflowBody, alwaysButton,
-        overflowGroupingButton, checkbox, dropdownMenu, dropdownOption, inputFieldText, selectedHours, selectedMinutes,
-        navigationUpArrowButton, navigationDownArrowButton, timeItem, period, dayInCalendarButtonByValue,
-        dateTimeButton, okButton, dateTimeInput, overflowPriorityExample, overflowGroupingExample
+        activeInfoToolbar,
+        overflowButton,
+        overflowPriorityButton,
+        moreButton,
+        overflowBody,
+        alwaysButton,
+        overflowGroupingButton,
+        checkbox,
+        dropdownMenu,
+        dropdownOption,
+        inputFieldText,
+        selectedHours,
+        selectedMinutes,
+        navigationUpArrowButton,
+        navigationDownArrowButton,
+        timeItem,
+        period,
+        dayInCalendarButtonByValue,
+        dateTimeButton,
+        okButton,
+        dateTimeInput,
+        overflowPriorityExample,
+        overflowGroupingExample
     } = toolbarPage;
 
     beforeAll(() => {
@@ -34,8 +57,7 @@ describe('Toolbar test suite', function() {
         expect(isElementClickable(activeInfoToolbar)).toBe(true, 'info active toolbar is not clickable');
     });
 
-    describe('Check Toolbar Overflow example', function() {
-
+    describe('Check Toolbar Overflow example', () => {
         it('verify all buttons are clickable', () => {
             checkClickableButton(overflowButton);
         });
@@ -45,13 +67,31 @@ describe('Toolbar test suite', function() {
             const checkboxTickTag = 'checkbox-tick-';
             scrollIntoView(checkbox);
             click(checkbox);
-            saveElementScreenshot(checkbox, checkboxSquareTag + getImageTagBrowserPlatform(), toolbarPage.getScreenshotFolder());
-            expect(checkElementScreenshot(checkbox, checkboxSquareTag + getImageTagBrowserPlatform(),
-                toolbarPage.getScreenshotFolder())).toBeLessThan(5, `element item state mismatch`);
+            saveElementScreenshot(
+                checkbox,
+                checkboxSquareTag + getImageTagBrowserPlatform(),
+                toolbarPage.getScreenshotFolder()
+            );
+            expect(
+                checkElementScreenshot(
+                    checkbox,
+                    checkboxSquareTag + getImageTagBrowserPlatform(),
+                    toolbarPage.getScreenshotFolder()
+                )
+            ).toBeLessThan(5, `element item state mismatch`);
             click(checkbox);
-            saveElementScreenshot(checkbox, checkboxTickTag + getImageTagBrowserPlatform(), toolbarPage.getScreenshotFolder());
-            expect(checkElementScreenshot(checkbox, checkboxTickTag + getImageTagBrowserPlatform(),
-                toolbarPage.getScreenshotFolder())).toBeLessThan(5, `element item state mismatch`);
+            saveElementScreenshot(
+                checkbox,
+                checkboxTickTag + getImageTagBrowserPlatform(),
+                toolbarPage.getScreenshotFolder()
+            );
+            expect(
+                checkElementScreenshot(
+                    checkbox,
+                    checkboxTickTag + getImageTagBrowserPlatform(),
+                    toolbarPage.getScreenshotFolder()
+                )
+            ).toBeLessThan(5, `element item state mismatch`);
         });
 
         it('verify dropdown menu', () => {
@@ -75,11 +115,9 @@ describe('Toolbar test suite', function() {
             click(okButton);
             expect(getValue(dateTimeInput)).toEqual(date);
         });
-
     });
 
-    describe('Check Toolbar Overflow Priority', function() {
-
+    describe('Check Toolbar Overflow Priority', () => {
         it('should check Toolbar Overflow Priority example', () => {
             checkClickableButton(overflowPriorityButton);
             click(overflowPriorityExample + moreButton);
@@ -88,8 +126,7 @@ describe('Toolbar test suite', function() {
         });
     });
 
-    describe('Check Toolbar Overflow Grouping', function() {
-
+    describe('Check Toolbar Overflow Grouping', () => {
         it('should check Toolbar Overflow Grouping example', () => {
             checkClickableButton(overflowGroupingButton);
             click(overflowGroupingExample + moreButton);
@@ -98,15 +135,13 @@ describe('Toolbar test suite', function() {
         });
     });
 
-    describe('Check orientation', function() {
-
+    describe('Check orientation', () => {
         it('should check RTL and LTR orientation', () => {
             toolbarPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Should check visual regression', function() {
-
+    xdescribe('Should check visual regression', () => {
         it('should check visual regression for all examples', () => {
             toolbarPage.saveExampleBaselineScreenshot();
             expect(toolbarPage.compareWithBaseline()).toBeLessThan(7);
@@ -133,5 +168,3 @@ function checkClickableButton(selector: string): void {
         expect(isElementClickable(selector)).toBe(true, `button with index ${i} not clickable`);
     }
 }
-
-

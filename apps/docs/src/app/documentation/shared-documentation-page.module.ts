@@ -40,14 +40,7 @@ import { CodeSnippetComponent } from './core-helpers/code-snippet/code-snippet.c
         ComponentExampleComponent,
         ExampleBackgroundComponent
     ],
-    imports: [
-        FormsModule,
-        CommonModule,
-        RouterModule,
-        SchemaModule,
-        sharedCoreModules,
-        MarkdownModule.forChild(),
-    ],
+    imports: [FormsModule, CommonModule, RouterModule, SchemaModule, sharedCoreModules, MarkdownModule.forChild()],
     providers: [CopyService, ApiDocsService],
     exports: [
         FormsModule,
@@ -70,5 +63,4 @@ import { CodeSnippetComponent } from './core-helpers/code-snippet/code-snippet.c
         sharedCoreModules
     ]
 })
-export class SharedDocumentationPageModule {
-}
+export class SharedDocumentationPageModule {}

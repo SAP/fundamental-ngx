@@ -1,0 +1,19 @@
+<div style="height: 300px">
+    <fd-splitter defaultPaneId="one">
+        <fd-splitter-pane-container (resize)="onResize($event)">
+            <fd-splitter-split-pane id="one" size="300px"> Split pane One </fd-splitter-split-pane>
+
+            <fd-splitter-split-pane size="300px"> Split pane Two </fd-splitter-split-pane>
+
+            <fd-splitter-split-pane>
+                <fd-splitter-pane-container orientation="horizontal" (resize)="onResize($event)">
+                    <fd-splitter-split-pane size="150px"> Split pane One, nested </fd-splitter-split-pane>
+
+                    <fd-splitter-split-pane size="75px"> Split pane Two, nested </fd-splitter-split-pane>
+
+                    <fd-splitter-split-pane> Split pane Three, nested </fd-splitter-split-pane>
+                </fd-splitter-pane-container>
+            </fd-splitter-split-pane>
+        </fd-splitter-pane-container>
+    </fd-splitter>
+</div>

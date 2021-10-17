@@ -6,11 +6,13 @@ describe('MessagePageTitleComponent', () => {
     let component: MessagePageTitleComponent;
     let fixture: ComponentFixture<MessagePageTitleComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [MessagePageTitleComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [MessagePageTitleComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MessagePageTitleComponent);

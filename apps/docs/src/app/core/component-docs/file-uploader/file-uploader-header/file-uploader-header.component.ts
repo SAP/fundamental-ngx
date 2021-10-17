@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './file-uploader-header.component.html',
     styleUrls: ['./file-uploader-header.component.scss']
 })
-export class FileUploaderHeaderComponent { }
+export class FileUploaderHeaderComponent {}

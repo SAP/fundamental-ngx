@@ -13,7 +13,7 @@ export class DynamicPagePo extends CoreBaseComponentPo {
 
     button = '.fd-button';
     dynamicPage = '.fd-dynamic-page ';
-    dynamicPageBtn = this. dynamicPage + this.button;
+    dynamicPageBtn = this.dynamicPage + this.button;
     acceptButton = this.button + '--positive';
     rejectButton = this.button + '--negative';
     exitButton = this.button + '[aria-label="Exit Fullscreen"]';

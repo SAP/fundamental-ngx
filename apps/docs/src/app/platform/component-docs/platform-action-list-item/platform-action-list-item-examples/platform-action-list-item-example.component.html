@@ -1,17 +1,13 @@
 <h3>Declarative Approach</h3>
 <fdp-list>
-    <fdp-action-list-item title="Action 1" (actionClicked)=_actionedRow($event)>
-    </fdp-action-list-item>
-    <fdp-action-list-item title="Action 2" (actionClicked)=_actionedRow($event)>
-    </fdp-action-list-item>
-    <fdp-action-list-item title="Action 3" (actionClicked)=_actionedRow($event)>
-    </fdp-action-list-item>
-    <fdp-action-list-item title="Action 4" (actionClicked)=_actionedRow($event)>
-    </fdp-action-list-item>
+    <fdp-action-list-item title="Action 1" (actionClicked)="_actionedRow($event)"> </fdp-action-list-item>
+    <fdp-action-list-item title="Action 2" (actionClicked)="_actionedRow($event)"> </fdp-action-list-item>
+    <fdp-action-list-item title="Action 3" (actionClicked)="_actionedRow($event)"> </fdp-action-list-item>
+    <fdp-action-list-item title="Action 4" (actionClicked)="_actionedRow($event)"> </fdp-action-list-item>
 </fdp-list>
 
 <h3>Imperative Approach</h3>
 <fdp-list>
-    <fdp-action-list-item *ngFor="let item of items" [title]="item.title" (actionClicked)=_actionedRow($event)>
+    <fdp-action-list-item *ngFor="let item of items" [title]="item.title" (actionClicked)="_actionedRow($event)">
     </fdp-action-list-item>
 </fdp-list>

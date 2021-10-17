@@ -18,13 +18,11 @@ import {
 import { ListItemComponent } from './list-item/list-item.component';
 import { merge, Subject, Subscription } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
-import {
-    FocusEscapeDirection,
-    KeyboardSupportService
-} from '@fundamental-ngx/core/utils';
+import { FocusEscapeDirection, KeyboardSupportService } from '@fundamental-ngx/core/utils';
 import { ListGroupHeaderDirective } from './directives/list-group-header.directive';
 import { ListFocusItem } from './list-focus-item.model';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { ListNavigationItemComponent } from './list-navigation-item/list-navigation-item.component';
 
 type FocusItem = ListGroupHeaderDirective | ListItemComponent;
 /**
@@ -107,6 +105,10 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
     items: QueryList<ListItemComponent>;
 
     /** @hidden */
+    @ContentChildren(ListNavigationItemComponent)
+    _navItems: QueryList<ListNavigationItemComponent>;
+
+    /** @hidden */
     @ContentChildren(ListFocusItem)
     private _focusItems: QueryList<FocusItem>;
 
@@ -185,7 +187,7 @@ export class ListComponent implements OnInit, AfterContentInit, OnDestroy {
 
     /** @hidden */
     private _recheckLinks(): void {
-        const items = this.items.filter(item => item.link);
+        const items = this.items.filter((item) => item.link);
         this.hasNavigation = items.length > 0;
     }
 

@@ -21,11 +21,13 @@ describe('FormItemComponent', () => {
         debugElement: DebugElement,
         element: HTMLElement;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [FormItemComponent, TestComponent]
-        });
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [FormItemComponent, TestComponent]
+            });
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

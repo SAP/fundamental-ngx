@@ -12,10 +12,9 @@ import { PanelActionsComponent } from './panel-actions/panel-actions.component';
 import { PlatformPanelModule } from './panel.module';
 
 @Component({
-    template: `
-        <fdp-panel title="Panel Title">
-            <fdp-panel-content>Panel Content Text</fdp-panel-content>
-        </fdp-panel>`
+    template: ` <fdp-panel title="Panel Title">
+        <fdp-panel-content>Panel Content Text</fdp-panel-content>
+    </fdp-panel>`
 })
 class PanelWithDefaultValuesComponent {
     @ViewChild(PanelComponent) panel: PanelComponent;
@@ -26,12 +25,14 @@ describe('PanelComponent default values', () => {
     let fixture: ComponentFixture<PanelWithDefaultValuesComponent>;
     let panelComponent: PanelComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformPanelModule],
-            declarations: [PanelWithDefaultValuesComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CommonModule, PlatformPanelModule],
+                declarations: [PanelWithDefaultValuesComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(PanelWithDefaultValuesComponent);
@@ -58,23 +59,22 @@ describe('PanelComponent default values', () => {
 });
 
 @Component({
-    template: `
-        <fdp-panel
-            id="panel-id"
-            [title]="title"
-            [contentDensity]="contentDensity"
-            [expanded]="expanded"
-            [expandable]="expandable"
-            [expandLabel]="expandLabel"
-            [collapseLabel]="collapseLabel"
-            (panelExpandChange)="onExpandChange($event)"
-        >
-            <fdp-panel-actions>
-                <fdp-button label="Apply"></fdp-button>
-            </fdp-panel-actions>
+    template: ` <fdp-panel
+        id="panel-id"
+        [title]="title"
+        [contentDensity]="contentDensity"
+        [expanded]="expanded"
+        [expandable]="expandable"
+        [expandLabel]="expandLabel"
+        [collapseLabel]="collapseLabel"
+        (panelExpandChange)="onExpandChange($event)"
+    >
+        <fdp-panel-actions>
+            <fdp-button label="Apply"></fdp-button>
+        </fdp-panel-actions>
 
-            <fdp-panel-content [contentHeight]="contentHeight">Panel Content Text</fdp-panel-content>
-        </fdp-panel>`
+        <fdp-panel-content [contentHeight]="contentHeight">Panel Content Text</fdp-panel-content>
+    </fdp-panel>`
 })
 class SimplePanelComponent {
     @ViewChild(PanelComponent) panel: PanelComponent;
@@ -99,12 +99,14 @@ describe('Simple PanelComponent', () => {
     let fixture: ComponentFixture<SimplePanelComponent>;
     let panelContentComponent: PanelContentComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformPanelModule, PlatformButtonModule],
-            declarations: [SimplePanelComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CommonModule, PlatformPanelModule, PlatformButtonModule],
+                declarations: [SimplePanelComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SimplePanelComponent);
@@ -164,7 +166,7 @@ describe('Simple PanelComponent', () => {
 
     it('Should set the aria-label of the expand/collapse button to the value of expandLabel if the Panel is collapsed', async () => {
         component.expanded = false;
-        component.expandLabel = 'Collapse Panel';
+        component.expandLabel = 'slim arrow right,transparent';
         fixture.detectChanges();
         const toggleButton: HTMLButtonElement = fixture.debugElement.query(By.css('.fd-panel__button')).nativeElement;
         expect(toggleButton.getAttribute('aria-label')).toBe(component.expandLabel);
@@ -172,7 +174,6 @@ describe('Simple PanelComponent', () => {
 
     it('Should set the aria-label of the expand/collapse button to the value of collapseLabel if the Panel is expanded', async () => {
         component.expanded = true;
-        component.collapseLabel = 'Expand Panel';
         fixture.detectChanges();
         const toggleButton: HTMLButtonElement = fixture.debugElement.query(By.css('.fd-panel__button')).nativeElement;
         expect(toggleButton.getAttribute('aria-label')).toBe(component.collapseLabel);
@@ -180,7 +181,6 @@ describe('Simple PanelComponent', () => {
 
     it('Should set the aria-label of the expand/collapse button to the value of collapseLabel if the Panel is expanded', async () => {
         component.expanded = true;
-        component.collapseLabel = 'Expand Panel';
         fixture.detectChanges();
         const toggleButton: HTMLButtonElement = fixture.debugElement.query(By.css('.fd-panel__button')).nativeElement;
         expect(toggleButton.getAttribute('aria-label')).toBe(component.collapseLabel);

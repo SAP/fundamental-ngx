@@ -9,13 +9,16 @@ export class InputGroupPo extends BaseComponentPo {
     standartInputArr = 'fdp-input-group-standard-example input';
 
     leftAlignedTextInput = 'fdp-input-group-standard-example [name="leftTextAddon"] input';
-    leftAlignedTextInputTextAddon = 'fdp-input-group-standard-example [name="leftTextAddon"] fdp-input-group-addon-body';
+    leftAlignedTextInputTextAddon =
+        'fdp-input-group-standard-example [name="leftTextAddon"] fdp-input-group-addon-body';
 
     rightAlignedTextInput = 'fdp-input-group-standard-example [name="rightTextAddon"] input';
-    rightAlignedTextInputTextAddon = 'fdp-input-group-standard-example [name="rightTextAddon"] fdp-input-group-addon-body';
+    rightAlignedTextInputTextAddon =
+        'fdp-input-group-standard-example [name="rightTextAddon"] fdp-input-group-addon-body';
 
     leftAndRightAlignedTextInput = 'fdp-input-group-standard-example [name="leftAndRightAddonsExample"] input';
-    rightLeftAlignedTextInputTextAddon = 'fdp-input-group-standard-example [name="leftAndRightAddonsExample"] fdp-input-group-addon-body';
+    rightLeftAlignedTextInputTextAddon =
+        'fdp-input-group-standard-example [name="leftAndRightAddonsExample"] fdp-input-group-addon-body';
 
     buttonInput = 'fdp-input-group-standard-example [name="donation"] input';
     buttonInputLeftAndRightTextAddon = 'fdp-input-group-standard-example [name="donation"] fdp-input-group-addon-body';
