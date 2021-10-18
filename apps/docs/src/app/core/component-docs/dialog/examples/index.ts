@@ -8,6 +8,7 @@ import { DialogPositionExampleComponent } from './dialog-position/dialog-positio
 import { DialogStateExample } from './dialog-state/dialog-state-example.component';
 import { DialogStackedExampleComponent } from './stacked-dialogs/dialog-stacked-example.component';
 import { TemplateBasedDialogExampleComponent } from './template-based/template-based-dialog-example.component';
+import { FormDialogExampleComponent } from './dialog-form/form-dialog-example.component';
 import { SecondDialogExampleComponent } from './stacked-dialogs/second-dialog-example.component';
 import { FirstDialogExampleComponent } from './stacked-dialogs/first-dialog-example.component';
 import { DialogExampleComponent } from './component-based/dialog-example.component';
@@ -23,6 +24,7 @@ export * from './dialog-position/dialog-position-example.component';
 export * from './dialog-state/dialog-state-example.component';
 export * from './stacked-dialogs/dialog-stacked-example.component';
 export * from './template-based/template-based-dialog-example.component';
+export * from './dialog-form/form-dialog-example.component';
 export * from './stacked-dialogs/second-dialog-example.component';
 export * from './stacked-dialogs/first-dialog-example.component';
 export * from './component-based/dialog-example.component';
@@ -38,6 +40,7 @@ export const examples = [
     DialogStateExample,
     DialogStackedExampleComponent,
     TemplateBasedDialogExampleComponent,
+    FormDialogExampleComponent,
     SecondDialogExampleComponent,
     FirstDialogExampleComponent,
     DialogExampleComponent,
