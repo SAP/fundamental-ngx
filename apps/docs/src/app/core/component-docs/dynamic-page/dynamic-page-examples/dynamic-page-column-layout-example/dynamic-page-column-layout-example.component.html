@@ -146,6 +146,17 @@
                 <div>
                     <button class="fd-button" (click)="changeLayout('ThreeColumnsMidExpanded')">Open Column 3</button>
                 </div>
+                <fd-tab-list>
+                    <fd-tab *ngFor="let tab of [1, 2, 3, 4]" [title]="'Tab ' + tab">
+                        <div class="fd-dynamic-page-section-example">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </div>
+                    </fd-tab>
+                </fd-tab-list>
             </div>
         </ng-template>
         <ng-template #endColumn>
