@@ -20,8 +20,12 @@
         <div fd-bar barDesign="footer" [cozy]="false">
             <div fd-bar-right>
                 <fd-toolbar size="compact" fdType="transparent" [clearBorder]="true">
-                    <button fd-toolbar-item fd-button fdType="positive" [compact]="true">Approve</button>
-                    <button fd-toolbar-item fd-button fdType="negative" [compact]="true">Reject</button>
+                    <button fd-toolbar-item fd-button fdType="positive" [compact]="true" ariaLabel="Positive action">
+                        Approve
+                    </button>
+                    <button fd-toolbar-item fd-button fdType="negative" [compact]="true" ariaLabel="Negative action">
+                        Reject
+                    </button>
                 </fd-toolbar>
             </div>
         </div>

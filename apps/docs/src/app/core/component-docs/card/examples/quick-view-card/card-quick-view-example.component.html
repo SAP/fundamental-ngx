@@ -30,12 +30,14 @@
                                     [href]="'tel:' + item.value"
                                     [innerText]="item.value"
                                     fd-link
+                                    [attr.aria-label]="item.label + ' number ' + item.value"
                                 ></a>
                                 <a
                                     *ngSwitchCase="'Email'"
                                     [href]="'mailto:' + item.value"
                                     [innerText]="item.value"
                                     fd-link
+                                    [attr.aria-label]="item.label + ' address ' + item.value"
                                 ></a>
                                 <div *ngSwitchDefault [innerText]="item.value"></div>
                             </ng-container>

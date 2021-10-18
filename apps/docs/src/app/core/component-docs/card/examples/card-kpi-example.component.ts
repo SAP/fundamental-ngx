@@ -4,7 +4,8 @@ import {
     ViewChild,
     ElementRef,
     AfterViewInit,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    Renderer2
 } from '@angular/core';
 import { delay, tap } from 'rxjs/operators';
 
@@ -22,7 +23,11 @@ export class CardKpiExampleComponent implements AfterViewInit {
     @ViewChild('chart')
     private chartContainer: ElementRef<HTMLElement>;
 
-    constructor(private googleChartService: GoogleChartService, private changeDetectorRef: ChangeDetectorRef) {}
+    constructor(
+        private googleChartService: GoogleChartService,
+        private changeDetectorRef: ChangeDetectorRef,
+        private renderer: Renderer2
+    ) {}
 
     ngAfterViewInit(): void {
         this.googleChartService
@@ -43,13 +48,26 @@ export class CardKpiExampleComponent implements AfterViewInit {
     }
 
     drawChart(visualization: Visualization): void {
-        const data = visualization.arrayToDataTable([
+        const dataTabel = [
             ['Entities', 'Target', 'Cost', 'Revenue', { role: 'annotation' }],
             ['Weather', 5000, 2500, 3200, ''],
             ['Mechanics', 5000, 2500, 4300, ''],
             ['Software', 5000, 2500, 1250, '']
-        ]);
+        ];
 
+        let labelText = '';
+
+        dataTabel.forEach((dataChart) => {
+            dataChart.forEach((chartData) => {
+                if (typeof chartData !== 'object') {
+                    labelText += ` ${chartData}`;
+                }
+            });
+        });
+
+        const data = visualization.arrayToDataTable(dataTabel);
+
+        this.renderer.setAttribute(this.chartContainer.nativeElement, 'aria-label', labelText);
         // Instantiate and draw our chart, passing in some options.
         const chart = new visualization.ColumnChart(this.chartContainer.nativeElement);
         chart.draw(data, {
