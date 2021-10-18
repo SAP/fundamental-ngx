@@ -7,9 +7,9 @@ import { Subject } from 'rxjs';
  */
 @Directive({ selector: '[fdDndKeyboardGroup]' })
 export class DndKeyboardGroupDirective {
-    /** @hidden all groups */
+    /** all groups is required to be used in transferArrayItem() */
     @Input()
-    _groups: any[][];
+    groups: any[][];
 
     /** @hidden */
     _enableKeyboard = false;

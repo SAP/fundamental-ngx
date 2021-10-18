@@ -4,7 +4,7 @@
     cdkDropListGroup
     [attr.dir]="dir"
     fdDndKeyboardGroup
-    [_groups]="_columns"
+    [groups]="_columns"
 >
     <div
         class="fd-fixed-card-layout__card-layout-column"
@@ -22,8 +22,9 @@
                 [cdkDragData]="card"
                 (cdkDragDropped)="dragDrop($event)"
                 fdDndKeyboardItem
-                [_itemIndex]="index"
-                [_groupIndex]="groupIndex"
+                [dndKeyboardDisabled]="disableDragDrop"
+                [itemIndex]="index"
+                [groupIndex]="groupIndex"
                 tabindex="0"
             >
                 <fd-fixed-card-layout-item>

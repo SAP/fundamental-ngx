@@ -15,7 +15,7 @@ import { DndKeyboardGroupDirective } from '../dnd-keyboard-group/dnd-keyboard-gr
  * template: `<div
  *               cdkDragListGroup
  *               fdDndKeyboardGroup
- *               [_groups]="groups"
+ *               [groups]="groups"
  *           >
  *               <div
  *                   *ngFor="let group of groups; let groupIndex = index"
@@ -26,8 +26,9 @@ import { DndKeyboardGroupDirective } from '../dnd-keyboard-group/dnd-keyboard-gr
  *                       *ngFor="let item of group; let index = index"
  *                       cdkDrag
  *                       fdDndKeyboardItem
- *                       [_itemIndex]="index"
- *                       [_groupIndex]="groupIndex"
+ *                       [itemIndex]="index"
+ *                       [groupIndex]="groupIndex"
+ *                       [dndKeyboardDisabled]="flag for disable/enable keyboard navigation if needed"
  *                       tabindex="0"
  *                   >
  *                       Item #{{ item }}
@@ -44,20 +45,24 @@ import { DndKeyboardGroupDirective } from '../dnd-keyboard-group/dnd-keyboard-gr
  */
 @Directive({ selector: '[fdDndKeyboardItem]' })
 export class DndKeyboardItemDirective implements OnInit {
-    /** @hidden item index in group(column) */
+    /** we can disable keyboard navigation if needed */
     @Input()
-    _itemIndex: number;
+    dndKeyboardDisabled = false;
 
-    /** @hidden group(column) index */
+    /** item index in group(column) */
     @Input()
-    _groupIndex: number;
+    itemIndex: number;
+
+    /** group(column) index */
+    @Input()
+    groupIndex: number;
 
     constructor(private _dndGroup: DndKeyboardGroupDirective, private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnInit(): void {
         this._dndGroup._onDndItemFocus$.subscribe(([groupIndex, itemIndex]) => {
-            if (this._groupIndex === groupIndex && this._itemIndex === itemIndex) {
+            if (this.groupIndex === groupIndex && this.itemIndex === itemIndex) {
                 this._elementRef.nativeElement.focus();
             }
         });
@@ -76,36 +81,36 @@ export class DndKeyboardItemDirective implements OnInit {
     /** @hidden allow card movement using keyboard */
     @HostListener('keydown', ['$event'])
     _onKeyDown(event: KeyboardEvent): void {
-        const group = this._dndGroup._groups[this._groupIndex];
-        if (KeyUtil.isKeyCode(event, CONTROL)) {
+        const group = this._dndGroup.groups[this.groupIndex];
+        if (KeyUtil.isKeyCode(event, CONTROL) && !this.dndKeyboardDisabled) {
             this._dndGroup._enableKeyboard = true;
         }
         if (
             KeyUtil.isKeyCode(event, RIGHT_ARROW) &&
             this._dndGroup._enableKeyboard &&
-            this._dndGroup._groups.length !== this._groupIndex + 1
+            this._dndGroup.groups.length !== this.groupIndex + 1
         ) {
             event.preventDefault();
-            const nextGroup = this._dndGroup._groups[this._groupIndex + 1];
-            const nextGroupIndex = this._groupIndex + 1;
-            transferArrayItem(group, nextGroup, this._itemIndex, 0);
+            const nextGroup = this._dndGroup.groups[this.groupIndex + 1];
+            const nextGroupIndex = this.groupIndex + 1;
+            transferArrayItem(group, nextGroup, this.itemIndex, 0);
             this._dndGroup.focusDndItem(nextGroupIndex, 0);
         }
         if (KeyUtil.isKeyCode(event, DOWN_ARROW) && this._dndGroup._enableKeyboard) {
             event.preventDefault();
-            moveItemInArray(group, this._itemIndex, this._itemIndex + 1);
-            this._dndGroup.focusDndItem(this._groupIndex, this._itemIndex + 1);
+            moveItemInArray(group, this.itemIndex, this.itemIndex + 1);
+            this._dndGroup.focusDndItem(this.groupIndex, this.itemIndex + 1);
         }
         if (KeyUtil.isKeyCode(event, UP_ARROW) && this._dndGroup._enableKeyboard) {
             event.preventDefault();
-            moveItemInArray(group, this._itemIndex, this._itemIndex - 1);
-            this._dndGroup.focusDndItem(this._groupIndex, this._itemIndex - 1);
+            moveItemInArray(group, this.itemIndex, this.itemIndex - 1);
+            this._dndGroup.focusDndItem(this.groupIndex, this.itemIndex - 1);
         }
-        if (KeyUtil.isKeyCode(event, LEFT_ARROW) && this._dndGroup._enableKeyboard && this._groupIndex) {
+        if (KeyUtil.isKeyCode(event, LEFT_ARROW) && this._dndGroup._enableKeyboard && this.groupIndex) {
             event.preventDefault();
-            const nextGroup = this._dndGroup._groups[this._groupIndex - 1];
-            const nextGroupIndex = this._groupIndex - 1;
-            transferArrayItem(group, nextGroup, this._itemIndex, 0);
+            const nextGroup = this._dndGroup.groups[this.groupIndex - 1];
+            const nextGroupIndex = this.groupIndex - 1;
+            transferArrayItem(group, nextGroup, this.itemIndex, 0);
             this._dndGroup.focusDndItem(nextGroupIndex, 0);
         }
     }
