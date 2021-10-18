@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.30 (2021-10-18)
+
+
+### Bug Fixes
+
+* **core,platform:** fix mobile mode implementation ([#6886](https://github.com/SAP/fundamental-ngx/issues/6886)) ([b6add36](https://github.com/SAP/fundamental-ngx/commit/b6add36576f4a8d3cd6241b2472e3eb3f19bfe2b))
+
 ## 0.33.0-rc.29 (2021-10-16)
 
 
