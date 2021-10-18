@@ -50,7 +50,7 @@ describe('Button test suite:', () => {
     });
 
     it('should check truncated text button', () => {
-        expect(getElementTitle(truncatedButton)).toContain('Looooooooooong Text Button', 'Text title is not matching');
+        expect(getElementTitle(truncatedButton)).toContain('Looooooooooong Text', 'Text title is not matching');
         expect(isElementClickable(truncatedButton)).toBe(true, 'truncated button with index disable');
     });
 
