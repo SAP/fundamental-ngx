@@ -13,6 +13,7 @@ import {
     SkipSelf,
     TemplateRef,
     ViewChild,
+    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
@@ -36,6 +37,7 @@ import {
 } from '@fundamental-ngx/platform/shared';
 import { BaseMultiCombobox, MultiComboboxSelectionChangeEvent } from '../commons/base-multi-combobox';
 import { MultiComboboxMobileComponent } from '../multi-combobox-mobile/multi-combobox/multi-combobox-mobile.component';
+import { PlatformMultiComboboxMobileModule } from '../multi-combobox-mobile/multi-combobox-mobile.module';
 import { MULTICOMBOBOX_COMPONENT } from '../multi-combobox.interface';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
@@ -89,6 +91,8 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         readonly _dynamicComponentService: DynamicComponentService,
         @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
         readonly _multiComboboxConfig: MultiComboboxConfig,
+        readonly _viewContainerRef: ViewContainerRef,
+        readonly _injector: Injector,
         @Optional() private _rtlService: RtlService,
         @Optional() @SkipSelf() @Host() formField: FormField,
         @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>
@@ -126,7 +130,8 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         this._setSelectedItems();
     }
 
-    /** @hidden
+    /**
+     * @hidden
      * Method to emit change event
      */
     emitChangeEvent<T>(value: T): void {
@@ -167,9 +172,10 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         }
     }
 
-    /** @hidden
-     *  Method that selects all possible options.
-     *  *select* attribute – if *true* select all, if *false* unselect all
+    /**
+     * @hidden
+     * Method that selects all possible options.
+     * *select* attribute – if *true* select all, if *false* unselect all
      * */
     handleSelectAllItems(select: boolean): void {
         this._flatSuggestions.forEach((item) => (item.selected = select));
@@ -262,7 +268,8 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         }
     }
 
-    /** @hidden
+    /**
+     * @hidden
      * Method to set input text as item label.
      */
     setInputTextFromOptionItem(item: OptionItem): void {
@@ -359,12 +366,18 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
     }
 
     /** @hidden */
-    private _setUpMobileMode(): void {
-        this._dynamicComponentService.createDynamicComponent(
+    private async _setUpMobileMode(): Promise<void> {
+        const injector = Injector.create({
+            providers: [{ provide: MULTICOMBOBOX_COMPONENT, useValue: this }],
+            parent: this._injector
+        });
+
+        await this._dynamicComponentService.createDynamicModule(
             { listTemplate: this.listTemplate, controlTemplate: this.mobileControlTemplate },
+            PlatformMultiComboboxMobileModule,
             MultiComboboxMobileComponent,
-            { container: this.elementRef.nativeElement },
-            { injector: Injector.create({ providers: [{ provide: MULTICOMBOBOX_COMPONENT, useValue: this }] }) }
+            this._viewContainerRef,
+            injector
         );
     }
 }

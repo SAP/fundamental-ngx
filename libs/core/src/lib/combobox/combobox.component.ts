@@ -19,6 +19,7 @@ import {
     SimpleChanges,
     TemplateRef,
     ViewChild,
+    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -35,11 +36,10 @@ import {
     TAB,
     UP_ARROW
 } from '@angular/cdk/keycodes';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
 import {
-    RtlService,
     GroupFunction,
     KeyUtil,
     AutoCompleteEvent,
@@ -53,6 +53,7 @@ import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 
+import { ComboboxMobileModule } from './combobox-mobile/combobox-mobile.module';
 import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
 import { ComboboxItem } from './combobox-item';
@@ -354,11 +355,11 @@ export class ComboboxComponent
 
     /** @hidden */
     constructor(
-        private _elementRef: ElementRef,
-        private _cdRef: ChangeDetectorRef,
-        private _dynamicComponentService: DynamicComponentService,
-        @Optional() private _contentDensityService: ContentDensityService,
-        @Optional() private _rtlService: RtlService
+        private readonly _cdRef: ChangeDetectorRef,
+        private readonly _injector: Injector,
+        private readonly _viewContainerRef: ViewContainerRef,
+        private readonly _dynamicComponentService: DynamicComponentService,
+        @Optional() private _contentDensityService: ContentDensityService
     ) {}
 
     /** @hidden */
@@ -684,19 +685,18 @@ export class ComboboxComponent
     }
 
     /** @hidden */
-    private _setUpMobileMode(): void {
-        this._dynamicComponentService.createDynamicComponent(
+    private async _setUpMobileMode(): Promise<void> {
+        const injector = Injector.create({
+            providers: [{ provide: COMBOBOX_COMPONENT, useValue: this }],
+            parent: this._injector
+        });
+
+        await this._dynamicComponentService.createDynamicModule(
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
+            ComboboxMobileModule,
             ComboboxMobileComponent,
-            { container: this._elementRef.nativeElement },
-            {
-                injector: Injector.create({
-                    providers: [
-                        { provide: COMBOBOX_COMPONENT, useValue: this },
-                        { provide: RtlService, useValue: this._rtlService }
-                    ]
-                })
-            }
+            this._viewContainerRef,
+            injector
         );
     }
 }

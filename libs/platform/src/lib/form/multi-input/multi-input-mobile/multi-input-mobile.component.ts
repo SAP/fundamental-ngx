@@ -67,6 +67,18 @@ export class PlatformMultiInputMobileComponent
     }
 
     /** @hidden */
+    _handleApprove(): void {
+        this.dialogRef.close();
+        this._component._dialogApprove();
+    }
+
+    /** @hidden */
+    _handleDismiss(): void {
+        this.dialogRef.dismiss();
+        this._component._dialogDismiss(this._selectedBackup);
+    }
+
+    /** @hidden */
     private _listenOnMultiInputOpenChange(): void {
         this._component.openChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => this._toggleDialog(isOpen));
     }
@@ -92,17 +104,5 @@ export class PlatformMultiInputMobileComponent
             escKeyCloseable: false,
             container: this._elementRef.nativeElement
         });
-    }
-
-    /** @hidden */
-    handleApprove(): void {
-        this.dialogRef.close();
-        this._component.dialogApprove();
-    }
-
-    /** @hidden */
-    handleDismiss(): void {
-        this.dialogRef.dismiss();
-        this._component.dialogDismiss(this._selectedBackup);
     }
 }

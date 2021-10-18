@@ -6,7 +6,10 @@ import {
     EmbeddedViewRef,
     ComponentRef,
     TemplateRef,
-    Type
+    Type,
+    Compiler,
+    NgModuleFactory,
+    ViewContainerRef
 } from '@angular/core';
 import { DynamicComponentInjector } from './dynamic-component-injector';
 import { DynamicComponentConfig } from './dynamic-component-config';
@@ -18,9 +21,10 @@ import { DynamicComponentConfig } from './dynamic-component-config';
 export class DynamicComponentService {
     /** @hidden */
     constructor(
-        private _componentFactoryResolver: ComponentFactoryResolver,
-        private _applicationRef: ApplicationRef,
-        private _injector: Injector
+        private readonly _componentFactoryResolver: ComponentFactoryResolver,
+        private readonly _applicationRef: ApplicationRef,
+        private readonly _injector: Injector,
+        private readonly _compiler: Compiler
     ) {}
 
     /**
@@ -41,6 +45,35 @@ export class DynamicComponentService {
         const componentRef = this._createComponent<T>(componentType, dependenciesMap, injector);
         this._passExternalContent<T>(componentRef, content);
         this._attachToContainer<T>(componentRef, config);
+
+        return componentRef;
+    }
+
+    /**
+     * Function that creates dynamic component and injects services to allow communication between component and outside
+     * @param content Type of the component content
+     * @param moduleType Type of module that should be compiled.
+     * @param componentType Type of component that should be rendered.
+     * @param containerRef The container that the dynamic component is appended to.
+     * @param injector enables to provide preconfigured component injector
+     */
+    async createDynamicModule<M, C>(
+        content: TemplateRef<any> | Type<any> | string | Object,
+        moduleType: Type<M> | NgModuleFactory<M>,
+        componentType: Type<C>,
+        containerRef: ViewContainerRef,
+        injector?: Injector
+    ): Promise<ComponentRef<C>> {
+        const moduleFactory =
+            moduleType instanceof NgModuleFactory ? moduleType : await this._compiler.compileModuleAsync<M>(moduleType);
+        const moduleRef = moduleFactory.create(injector || this._injector);
+        const componentFactory = moduleRef.componentFactoryResolver.resolveComponentFactory(componentType);
+
+        containerRef.clear();
+
+        const componentRef: ComponentRef<C> = containerRef.createComponent(componentFactory);
+
+        this._passExternalContent<C>(componentRef, content);
 
         return componentRef;
     }

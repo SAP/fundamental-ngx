@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { ListModule } from '@fundamental-ngx/core/list';
+import { FormModule } from '@fundamental-ngx/core/form';
+import { ComboboxModule } from '@fundamental-ngx/core/combobox';
+
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
+import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { API_FILES } from '../../api-files';
 import { ComboboxHeaderComponent } from './combobox-header/combobox-header.component';
 import { ComboboxDocsComponent } from './combobox-docs.component';
-import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
 import { examples } from './examples';
-import { ListModule } from '@fundamental-ngx/core/list';
-import { FormModule } from '@fundamental-ngx/core/form';
-import { ComboboxMobileModule, ComboboxModule } from '@fundamental-ngx/core/combobox';
 
 const routes: Routes = [
     {
@@ -22,14 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        ListModule,
-        FormModule,
-        ComboboxModule,
-        ComboboxMobileModule,
-        RouterModule.forChild(routes),
-        SharedDocumentationPageModule
-    ],
+    imports: [ListModule, FormModule, ComboboxModule, RouterModule.forChild(routes), SharedDocumentationPageModule],
     exports: [RouterModule],
     declarations: [examples, ComboboxDocsComponent, ComboboxHeaderComponent]
 })

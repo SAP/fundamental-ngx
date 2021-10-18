@@ -1,6 +1,6 @@
 import { A11yModule } from '@angular/cdk/a11y';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { Component, Inject, InjectionToken, ViewChild } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
@@ -11,8 +11,8 @@ import {
     PopoverMobileModule,
     PopoverModule
 } from '@fundamental-ngx/core/popover';
+import { MOBILE_CONFIG_TEST_TOKEN, whenStable } from '@fundamental-ngx/core/tests';
 
-const MOBILE_CONFIG_TEST_TOKEN = new InjectionToken<MobileModeConfig>('For test purposes');
 const MOBILE_CONFIG: MobileModeConfig = { title: 'Test popover title' };
 
 @Component({
@@ -55,9 +55,9 @@ describe('PopoverMobileComponent', () => {
 
     beforeEach(() => setup());
 
-    function setup(mobileConfig: MobileModeConfig = MOBILE_CONFIG): void {
+    async function setup(): Promise<void> {
         fixture = TestBed.createComponent(TestPopoverWrapperComponent);
-        fixture.detectChanges();
+        await whenStable(fixture);
         popoverComponent = fixture.componentInstance.popoverComponent;
         popoverMobileComponent = fixture.componentInstance.popoverComponent['_mobileModeComponentRef'].instance;
     }

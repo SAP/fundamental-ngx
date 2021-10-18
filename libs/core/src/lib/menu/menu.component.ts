@@ -18,20 +18,21 @@ import {
     Renderer2,
     TemplateRef,
     ViewChild,
+    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { MenuItemComponent } from './menu-item/menu-item.component';
-import { MenuService } from './services/menu.service';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
-import { MenuMobileComponent } from './menu-mobile/menu-mobile.component';
 import { Subscription } from 'rxjs';
+
+import { ContentDensityService, DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { BasePopoverClass, PopoverService } from '@fundamental-ngx/core/popover';
+
+import { MenuMobileComponent } from './menu-mobile/menu-mobile.component';
+import { MenuMobileModule } from './menu-mobile/menu-mobile.module';
+import { MenuService } from './services/menu.service';
 import { MENU_COMPONENT, MenuInterface } from './menu.interface';
-import { BasePopoverClass } from '@fundamental-ngx/core/popover';
-import { PopoverService } from '@fundamental-ngx/core/popover';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { MenuItemComponent } from './menu-item/menu-item.component';
 
 let menuUniqueId = 0;
 
@@ -123,16 +124,18 @@ export class MenuComponent
     /** @hidden */
     private _clickEventListener: Function;
 
+    /** @hidden */
     constructor(
-        public elementRef: ElementRef,
-        @Optional() public dialogConfig: DialogConfig,
-        private _rendered: Renderer2,
-        private _menuService: MenuService,
-        private _changeDetectorRef: ChangeDetectorRef,
-        private _popoverService: PopoverService,
-        @Optional() private _contentDensityService: ContentDensityService,
-        @Optional() private _rtlService: RtlService,
-        @Optional() private _dynamicComponentService: DynamicComponentService
+        public readonly elementRef: ElementRef,
+        @Optional() public readonly dialogConfig: DialogConfig,
+        private readonly _rendered: Renderer2,
+        private readonly _menuService: MenuService,
+        private readonly _changeDetectorRef: ChangeDetectorRef,
+        private readonly _popoverService: PopoverService,
+        private readonly _injector: Injector,
+        private readonly _viewContainerRef: ViewContainerRef,
+        @Optional() private readonly _contentDensityService: ContentDensityService,
+        @Optional() private readonly _dynamicComponentService: DynamicComponentService
     ) {
         super();
     }
@@ -234,15 +237,18 @@ export class MenuComponent
     }
 
     /** @hidden Open Menu in mobile mode */
-    private _setupMobileMode(): void {
-        this._mobileModeComponentRef = this._dynamicComponentService.createDynamicComponent<MenuMobileComponent>(
+    private async _setupMobileMode(): Promise<void> {
+        const injector = Injector.create({
+            providers: [{ provide: MENU_COMPONENT, useValue: this }],
+            parent: this._injector
+        });
+
+        this._mobileModeComponentRef = await this._dynamicComponentService.createDynamicModule(
             this.menuRootTemplate,
+            MenuMobileModule,
             MenuMobileComponent,
-            { container: this.elementRef.nativeElement },
-            {
-                injector: Injector.create({ providers: [{ provide: MENU_COMPONENT, useValue: this }] }),
-                services: [this._menuService, this._rtlService]
-            }
+            this._viewContainerRef,
+            injector
         );
 
         this._listenOnTriggerRefClicks();

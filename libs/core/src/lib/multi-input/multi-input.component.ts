@@ -16,11 +16,13 @@ import {
     SimpleChanges,
     TemplateRef,
     ViewChild,
+    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DOWN_ARROW, TAB, SPACE, ENTER, UP_ARROW, ESCAPE } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
+
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { FormStates, PopoverFillMode } from '@fundamental-ngx/core/shared';
@@ -38,7 +40,9 @@ import {
     FocusTrapService,
     uuidv4
 } from '@fundamental-ngx/core/utils';
+
 import { MultiInputMobileComponent } from './multi-input-mobile/multi-input-mobile.component';
+import { MultiInputMobileModule } from './multi-input-mobile/multi-input-mobile.module';
 import { MULTI_INPUT_COMPONENT, MultiInputInterface } from './multi-input.interface';
 
 /**
@@ -252,7 +256,7 @@ export class MultiInputComponent
 
     /** @hidden */
     @ViewChild('searchInputElement', { read: ElementRef })
-    searchInputElement: ElementRef;
+    searchInputElement: ElementRef<HTMLInputElement>;
 
     /** @hidden */
     @ViewChild(TokenizerComponent)
@@ -275,12 +279,14 @@ export class MultiInputComponent
 
     /** @hidden */
     constructor(
-        private _elementRef: ElementRef,
-        private _changeDetRef: ChangeDetectorRef,
-        private _dynamicComponentService: DynamicComponentService,
-        @Optional() private _rtlService: RtlService,
-        @Optional() private _contentDensityService: ContentDensityService,
-        @Optional() private _focusTrapService: FocusTrapService
+        private readonly _elementRef: ElementRef,
+        private readonly _changeDetRef: ChangeDetectorRef,
+        private readonly _dynamicComponentService: DynamicComponentService,
+        private readonly _injector: Injector,
+        private readonly _viewContainerRef: ViewContainerRef,
+        @Optional() private readonly _rtlService: RtlService,
+        @Optional() private readonly _contentDensityService: ContentDensityService,
+        @Optional() private readonly _focusTrapService: FocusTrapService
     ) {}
 
     /** @hidden */
@@ -294,16 +300,20 @@ export class MultiInputComponent
                 })
             );
         }
+
         this.buildComponentCssClass();
+
         if (this.dropdownValues) {
             this.displayedValues = this.dropdownValues;
         }
+
         this._subscriptions.add(
             this._rtlService?.rtl.subscribe((isRtl) => {
                 this._dir = isRtl ? 'rtl' : 'ltr';
                 this.buildComponentCssClass();
             })
         );
+
         if (!this.inputId) {
             this.inputId = uuidv4();
         }
@@ -312,7 +322,8 @@ export class MultiInputComponent
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         this.buildComponentCssClass();
-        if (this.shouldFilterValues(changes)) {
+
+        if (this._shouldFilterValues(changes)) {
             this.displayedValues = this.dropdownValues;
             if (this.searchTerm) {
                 this.displayedValues = this.filterFn(this.dropdownValues, this.searchTerm);
@@ -346,20 +357,22 @@ export class MultiInputComponent
                 icon.style.transform = 'scaleX(-1)';
             }
         }
+
         return ['fd-multi-input', 'fd-multi-input-custom', this.class];
     }
 
+    /** @hidden */
     elementRef(): ElementRef<any> {
         return this._elementRef;
     }
 
     /** @hidden */
-    registerOnChange(fn: any): void {
+    registerOnChange(fn: Function): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn: any): void {
+    registerOnTouched(fn: Function): void {
         this.onTouched = fn;
     }
 
@@ -371,6 +384,7 @@ export class MultiInputComponent
         } else {
             this._elementRef.nativeElement.style.pointerEvents = 'auto';
         }
+
         this._changeDetRef.detectChanges();
     }
 
@@ -379,6 +393,7 @@ export class MultiInputComponent
         if (selected) {
             this.selected = selected;
         }
+
         this._changeDetRef.markForCheck();
     }
 
@@ -402,11 +417,13 @@ export class MultiInputComponent
         if (this.open !== open) {
             this.openChange.emit(open);
         }
+
         this.open = open;
 
         if (!this.mobile) {
             this._popoverOpenHandle(open);
         }
+
         if (!this.open) {
             this._resetSearchTerm();
             this.enableParentFocusTrap();
@@ -432,7 +449,7 @@ export class MultiInputComponent
         if (event) {
             event.preventDefault(); // prevent this function from being called twice when checkbox updates
         }
-        const previousLength = this.selected.length;
+
         if (checked) {
             this.selected.push(value);
         } else {
@@ -444,6 +461,7 @@ export class MultiInputComponent
             }
         }
 
+        const previousLength = this.selected.length;
         // Handle popover placement update
         if (this._shouldPopoverBeUpdated(previousLength, this.selected.length)) {
             this.popoverRef.refreshPosition();
@@ -465,14 +483,17 @@ export class MultiInputComponent
             if (event.altKey) {
                 this.openChangeHandle(true);
             }
+
             if (this.listComponent) {
                 this.listComponent.setItemActive(0);
                 event.preventDefault();
             }
         }
+
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, ENTER])) {
             this.openChangeHandle(true);
         }
+
         if (KeyUtil.isKeyCode(event, ESCAPE)) {
             this.openChangeHandle(false);
         }
@@ -489,6 +510,7 @@ export class MultiInputComponent
     _handleSearchTermChange(searchTerm: string): void {
         if (this.searchTerm !== searchTerm) {
             this._applySearchTermChange(searchTerm);
+
             if (!this.open) {
                 this.openChangeHandle(true);
             }
@@ -557,10 +579,12 @@ export class MultiInputComponent
         this.openChangeHandle(!this.open);
     }
 
+    /** @hidden */
     disableParentFocusTrap(): void {
         this._focusTrapService?.pauseCurrentFocusTrap();
     }
 
+    /** @hidden */
     enableParentFocusTrap(): void {
         this._focusTrapService?.unpauseCurrentFocusTrap();
     }
@@ -579,9 +603,8 @@ export class MultiInputComponent
         return contentArray.filter((item) => {
             if (item) {
                 const term = this.displayFn(item).toLocaleLowerCase();
-                let retVal;
-                this.includes ? (retVal = term.includes(searchLower)) : (retVal = term.startsWith(searchLower));
-                return retVal;
+
+                return this.includes ? term.includes(searchLower) : term.startsWith(searchLower);
             }
         });
     }
@@ -601,9 +624,7 @@ export class MultiInputComponent
         return !!str;
     }
 
-    /**
-     * @hidden
-     */
+    /** @hidden */
     private _popoverOpenHandle(open: boolean): void {
         this.open = open;
         this.onTouched();
@@ -626,19 +647,18 @@ export class MultiInputComponent
     }
 
     /** @hidden */
-    private _setUpMobileMode(): void {
-        this._dynamicComponentService.createDynamicComponent(
+    private async _setUpMobileMode(): Promise<void> {
+        const injector = Injector.create({
+            providers: [{ provide: MULTI_INPUT_COMPONENT, useValue: this }],
+            parent: this._injector
+        });
+
+        await this._dynamicComponentService.createDynamicModule(
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
+            MultiInputMobileModule,
             MultiInputMobileComponent,
-            { container: this._elementRef.nativeElement },
-            {
-                injector: Injector.create({
-                    providers: [
-                        { provide: MULTI_INPUT_COMPONENT, useValue: this },
-                        { provide: RtlService, useValue: this._rtlService }
-                    ]
-                })
-            }
+            this._viewContainerRef,
+            injector
         );
     }
 
@@ -650,7 +670,7 @@ export class MultiInputComponent
     }
 
     /** @hidden */
-    private shouldFilterValues(changes): boolean {
-        return this.dropdownValues && (changes.dropdownValues || changes.searchTerm);
+    private _shouldFilterValues(changes: SimpleChanges): boolean {
+        return this.dropdownValues && !!(changes.dropdownValues || changes.searchTerm);
     }
 }
