@@ -188,7 +188,7 @@
                     fd-list-item
                     role="option"
                     tabindex="0"
-                    (click)="!mobile && close()"
+                    (click)="(!mobile)"
                     (keyDown)="onItemKeyDownHandler($event, optionItem, i)"
                     [selected]="optionItem.selected"
                 >
@@ -212,7 +212,7 @@
                 fd-list-item
                 role="option"
                 tabindex="0"
-                (click)="!mobile && close()"
+                (click)="(!mobile)"
                 (keyDown)="onItemKeyDownHandler($event, optionItem, i)"
                 [selected]="optionItem.selected"
             >
