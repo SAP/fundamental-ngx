@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.32 (2021-10-18)
+
+
+### Bug Fixes
+
+* **core:** bring the latest changes for grid layout ([#6946](https://github.com/SAP/fundamental-ngx/issues/6946)) ([91dee5f](https://github.com/SAP/fundamental-ngx/commit/91dee5fc7614f24ba40b446e798cf67464374fb4))
+
 ## 0.33.0-rc.31 (2021-10-18)
 
 ## 0.33.0-rc.30 (2021-10-18)
