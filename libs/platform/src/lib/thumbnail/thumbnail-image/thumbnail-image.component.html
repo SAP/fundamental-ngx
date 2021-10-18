@@ -1,4 +1,4 @@
-<div class="fdp-thumbnail-image-container">
+<div class="fdp-thumbnail-image-container" role="listbox">
     <div
         *ngFor="let image of mediaList | slice: 0:maxImages; let i = index"
         [class]="isHorizontal ? 'fdp-thumbnail-image--horizontal' : 'fdp-thumbnail-image'"
@@ -7,7 +7,9 @@
         (click)="image.overlayRequired ? openDialog(image, mediaList) : thumbnailClick(image)"
         (keydown.enter)="image.overlayRequired ? openDialog(image, mediaList) : thumbnailClick(image)"
         tabindex="0"
-        role="button"
+        role="option"
+        [attr.aria-roledescription]="roleDescription"
+        [attr.aria-selected]="image.selected"
         [attr.title]="image.label"
         [attr.aria-label]="image.label"
     >

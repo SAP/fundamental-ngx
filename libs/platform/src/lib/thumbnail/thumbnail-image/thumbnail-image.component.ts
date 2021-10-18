@@ -33,6 +33,9 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     @Input()
     maxImages = 5;
 
+    @Input()
+    roleDescription = 'Image';
+
     /** Output event for thumbnail image click */
     @Output()
     thumbnailClicked: EventEmitter<Media> = new EventEmitter();
@@ -73,7 +76,8 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
                 mediaList: mediaList,
                 rtl: this._isRtl(),
                 maxImages: this.maxImages
-            }
+            },
+            ariaLabelledBy: 'fdp-thumbnail-dialog-header'
         });
     }
 
