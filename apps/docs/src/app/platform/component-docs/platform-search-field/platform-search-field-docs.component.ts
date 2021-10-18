@@ -83,5 +83,5 @@ export class PlatformSearchFieldDocsComponent {
             component: 'PlatformSearchFieldMobileExampleComponent',
             scssFileCode: platformSearchFieldExampleScss
         }
-    ]
+    ];
 }

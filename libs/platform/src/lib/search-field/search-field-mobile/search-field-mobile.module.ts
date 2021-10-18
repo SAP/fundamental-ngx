@@ -8,12 +8,7 @@ import { SearchFieldMobileComponent } from './search-field/search-field-mobile.c
 
 @NgModule({
     declarations: [SearchFieldMobileComponent],
-    imports: [
-        CommonModule,
-        BarModule,
-        DialogModule,
-        ButtonModule
-    ],
+    imports: [CommonModule, BarModule, DialogModule, ButtonModule],
     exports: [SearchFieldMobileComponent]
 })
 export class PlatformSearchFieldMobileModule {}

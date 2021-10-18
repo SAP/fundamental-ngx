@@ -16,7 +16,8 @@ describe('SearchFieldMobileComponent', () => {
     let fixture: ComponentFixture<SearchFieldMobileComponent>;
 
     const testSearchFieldConfigObject: MobileModeConfig = {
-        approveButtonText: 'OK', hasCloseButton: true
+        approveButtonText: 'OK',
+        hasCloseButton: true
     };
 
     class SearchFieldComponent implements SearchFieldMobileInterface {
@@ -38,14 +39,18 @@ describe('SearchFieldMobileComponent', () => {
         }
     }
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [DialogModule, BrowserAnimationsModule],
-            declarations: [SearchFieldMobileComponent],
-            providers: [DynamicComponentService, { provide: SEARCH_FIELD_COMPONENT, useValue: new SearchFieldComponent() }]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [DialogModule, BrowserAnimationsModule],
+                declarations: [SearchFieldMobileComponent],
+                providers: [
+                    DynamicComponentService,
+                    { provide: SEARCH_FIELD_COMPONENT, useValue: new SearchFieldComponent() }
+                ]
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SearchFieldMobileComponent);
@@ -61,7 +66,6 @@ describe('SearchFieldMobileComponent', () => {
     it('should get multi input config, when it is passed by input', () => {
         expect(anyComponent.mobileConfig).toEqual(testSearchFieldConfigObject);
     });
-
 
     it('should open and close with approve', () => {
         anyComponent._component.mobile = true;
@@ -87,4 +91,4 @@ describe('SearchFieldMobileComponent', () => {
         component._handleDismiss();
         expect(anyComponent._component.dialogDismiss).toHaveBeenCalledWith();
     });
-})
+});

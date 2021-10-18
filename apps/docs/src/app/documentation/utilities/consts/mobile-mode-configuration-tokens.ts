@@ -33,5 +33,5 @@ export const POPOVER_MOBILE_CONFIG: MobileModeConfigToken = {
 
 export const SEARCH_FIELD_MOBILE_CONFIG: MobileModeConfigToken = {
     target: MobileModeControl.SEARCH_FIELD,
-    config: { dialogConfig: MOBILE_DIALOG_PORTRAIT },
+    config: { dialogConfig: MOBILE_DIALOG_PORTRAIT }
 };

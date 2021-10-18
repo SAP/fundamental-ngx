@@ -39,10 +39,7 @@ import { PlatformObjectMarkerModule } from '@fundamental-ngx/platform/object-mar
 import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
 import { PlatformPageFooterModule } from '@fundamental-ngx/platform/page-footer';
 import { PlatformPanelModule } from '@fundamental-ngx/platform/panel';
-import {
-    PlatformSearchFieldModule,
-    PlatformSearchFieldMobileModule
-} from '@fundamental-ngx/platform/search-field';
+import { PlatformSearchFieldModule, PlatformSearchFieldMobileModule } from '@fundamental-ngx/platform/search-field';
 import { PlatformSliderModule } from '@fundamental-ngx/platform/slider';
 import { PlatformSplitMenuButtonModule } from '@fundamental-ngx/platform/split-menu-button';
 import { PlatformTableModule } from '@fundamental-ngx/platform/table';

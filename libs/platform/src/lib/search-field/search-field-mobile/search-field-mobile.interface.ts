@@ -15,6 +15,6 @@ export interface SearchFieldMobileInterface extends MobileMode {
 }
 
 export interface SearchFieldChildContent {
-    inputFieldTemplate: TemplateRef<any>,
-    suggestionMenuTemplate: TemplateRef<any>
+    inputFieldTemplate: TemplateRef<any>;
+    suggestionMenuTemplate: TemplateRef<any>;
 }

@@ -52,7 +52,7 @@ export class PlatformSearchFieldMobileExampleComponent {
 
     mobileConfig: MobileModeConfig = {
         approveButtonText: 'OK',
-        hasCloseButton: true,
+        hasCloseButton: true
     };
 
     onSearchSubmit($event: SearchInput): void {

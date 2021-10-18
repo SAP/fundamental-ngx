@@ -92,7 +92,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
 
     /** Search Field Mobile configuration */
     @Input()
-    mobileConfig: MobileModeConfig
+    mobileConfig: MobileModeConfig;
 
     /**
      * List of string values to populate suggestion dropdown selection.
@@ -304,7 +304,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         @Optional() private _rtl: RtlService,
         private readonly _elementRef: ElementRef,
         private _liveAnnouncer: LiveAnnouncer,
-        readonly _dynamicComponentService: DynamicComponentService,
+        readonly _dynamicComponentService: DynamicComponentService
     ) {
         super(_cd);
     }
@@ -654,6 +654,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
 })
 export class SuggestionMatchesPipe implements PipeTransform {
     transform(values: string[], match: string, mobile = false): string[] {
-        return mobile && !match ? values : values.filter((value) => value.toLowerCase().indexOf(match?.trim().toLowerCase()) > -1);
+        return mobile && !match
+            ? values
+            : values.filter((value) => value.toLowerCase().indexOf(match?.trim().toLowerCase()) > -1);
     }
 }

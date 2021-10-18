@@ -2,7 +2,8 @@ import {
     ChangeDetectionStrategy,
     Component,
     ElementRef,
-    Inject, OnDestroy,
+    Inject,
+    OnDestroy,
     OnInit,
     Optional,
     TemplateRef,
@@ -29,7 +30,10 @@ import { takeUntil } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobileInterface> implements OnInit, OnDestroy {
+export class SearchFieldMobileComponent
+    extends MobileModeBase<SearchFieldMobileInterface>
+    implements OnInit, OnDestroy
+{
     childContent: SearchFieldChildContent = null;
 
     /** @hidden */
@@ -41,7 +45,7 @@ export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobile
         dialogService: DialogService,
         @Optional() @Inject(MOBILE_MODE_CONFIG) mobileModes: MobileModeConfigToken[]
     ) {
-        super(elementRef, dialogService, searchFieldComponent, MobileModeControl.SEARCH_FIELD, mobileModes)
+        super(elementRef, dialogService, searchFieldComponent, MobileModeControl.SEARCH_FIELD, mobileModes);
     }
 
     /** @hidden */
@@ -56,9 +60,7 @@ export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobile
 
     /** @hidden */
     listenChanges(): void {
-        this._component.isOpenChange.pipe(
-            takeUntil(this._onDestroy$)
-        ).subscribe((isOpen) => {
+        this._component.isOpenChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => {
             if (!isOpen) {
                 this._handleDismiss();
 
@@ -68,7 +70,7 @@ export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobile
             if (!this._dialogService.hasOpenDialogs()) {
                 this._open();
             }
-        })
+        });
     }
 
     /** @hidden */
@@ -85,15 +87,13 @@ export class SearchFieldMobileComponent extends MobileModeBase<SearchFieldMobile
 
     /** @hidden */
     private _open(): void {
-        this.dialogRef = this._dialogService.open(this.dialogTemplate,
-            {
-                mobile: true,
-                verticalPadding: false,
-                ...this.dialogConfig,
-                backdropClickCloseable: false,
-                escKeyCloseable: true,
-                container: this._elementRef.nativeElement
-            }
-        );
+        this.dialogRef = this._dialogService.open(this.dialogTemplate, {
+            mobile: true,
+            verticalPadding: false,
+            ...this.dialogConfig,
+            backdropClickCloseable: false,
+            escKeyCloseable: true,
+            container: this._elementRef.nativeElement
+        });
     }
 }

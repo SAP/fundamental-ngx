@@ -36,6 +36,6 @@ const routes: Routes = [
         PlatformSearchFieldDataSourceExampleComponent,
         PlatformSearchFieldMobileExampleComponent
     ],
-    providers: [{ provide: MOBILE_MODE_CONFIG, useValue: SEARCH_FIELD_MOBILE_CONFIG, multi: true }],
+    providers: [{ provide: MOBILE_MODE_CONFIG, useValue: SEARCH_FIELD_MOBILE_CONFIG, multi: true }]
 })
 export class PlatformSearchFieldDocsModule {}
