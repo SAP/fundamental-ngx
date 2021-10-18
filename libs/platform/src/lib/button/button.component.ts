@@ -97,13 +97,6 @@ export class ButtonComponent extends BaseComponent implements AfterViewInit {
     @Output()
     buttonClicked: EventEmitter<any> = new EventEmitter();
 
-    /**
-     * Take host element out of tab order, so that child button can
-     * be properly focused on.
-     */
-    // @HostBinding('attr.tabindex')
-    // tabIndex = '-1';
-
     constructor(protected _changeDetector: ChangeDetectorRef, private _elementRef: ElementRef) {
         super(_changeDetector);
     }
