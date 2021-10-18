@@ -425,7 +425,12 @@ export class ComboboxComponent
         } else if (KeyUtil.isKeyCode(event, this.closingKeys)) {
             this.isOpenChangeHandle(false);
             event.stopPropagation();
-        } else if (this.openOnKeyboardEvent && !event.ctrlKey && !KeyUtil.isKeyCode(event, this.nonOpeningKeys)) {
+        } else if (
+            this.openOnKeyboardEvent &&
+            !event.ctrlKey &&
+            !event.altKey &&
+            !KeyUtil.isKeyCode(event, this.nonOpeningKeys)
+        ) {
             this.isOpenChangeHandle(true);
             if (this.isEmptyValue && KeyUtil.isKeyType(event, 'control') && !KeyUtil.isKeyCode(event, BACKSPACE)) {
                 this.listComponent.setItemActive(0);
