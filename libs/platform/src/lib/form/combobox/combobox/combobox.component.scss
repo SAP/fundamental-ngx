@@ -28,4 +28,10 @@
             max-width: 100%;
         }
     }
+
+    &__count-list-results {
+        position: absolute;
+        opacity: 0;
+        z-index: -1;
+    }
 }
