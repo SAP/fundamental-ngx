@@ -214,7 +214,7 @@
     "webdriverio": "7.5.7"
   },
   "lint-staged": {
-    "*.{js,ts,html,md,scss,css,json,yml}": "prettier --write",
+    "*.{js,ts,html,md,scss,css,json,yml}": "nx format:write --files=",
     "*.ts": "tslint"
   }
 }
