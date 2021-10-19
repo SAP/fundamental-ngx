@@ -146,10 +146,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
 
     @Input()
     set value(value: any) {
-        this.selectedItems = coerceArraySafe(value);
-        super.setValue(this.selectedItems);
-        this._setSelectedSuggestions();
-        this.emitChangeEvent();
+        this.setValue(value, true);
     }
     get value(): any {
         return super.getValue();
@@ -381,10 +378,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
-        this.selectedItems = coerceArraySafe(value);
-        super.writeValue(this.selectedItems);
-        this._setSelectedSuggestions();
-        this.emitChangeEvent();
+        this.setValue(value, false);
     }
 
     /** @hidden */
@@ -505,10 +499,17 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
      * @hidden
      * Method to emit change event
      */
-    emitChangeEvent(): void {
+    _emitChangeEvent(): void {
         const event = new MultiComboboxSelectionChangeEvent(this, this.value);
 
         this.selectionChange.emit(event);
+    }
+
+    protected setValue(value: any, emitOnChange = true): void {
+        this.selectedItems = coerceArraySafe(value);
+        super.setValue(this.selectedItems, emitOnChange);
+        this._setSelectedSuggestions();
+        this._emitChangeEvent();
     }
 
     /** @hidden */

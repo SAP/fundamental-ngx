@@ -150,7 +150,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
      * *select* attribute – if *true* select all, if *false* unselect all
      * */
     handleSelectAllItems(select: boolean): void {
-        this._flatSuggestions.forEach(item => (item.selected = select));
+        this._flatSuggestions.forEach((item) => (item.selected = select));
         this._selectedSuggestions = select ? [...this._flatSuggestions] : [];
 
         this._propagateChange();
@@ -296,7 +296,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
 
     /** @hidden */
     private _getTokenIndexByLabelOrValue(item: SelectableOptionItem): number {
-        return this._selectedSuggestions.findIndex(token => (token.label === item.label) || (token.value === item.value));
+        return this._selectedSuggestions.findIndex((token) => token.label === item.label || token.value === item.value);
     }
 
     /** @hidden */
@@ -306,7 +306,7 @@ export class MultiComboboxComponent extends BaseMultiCombobox implements OnInit,
         // setting value, it will call setValue()
         this.value = selectedItems;
 
-        this.emitChangeEvent();
+        this._emitChangeEvent();
     }
 
     /** @hidden */
