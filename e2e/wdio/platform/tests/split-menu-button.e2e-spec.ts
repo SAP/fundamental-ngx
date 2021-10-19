@@ -17,6 +17,7 @@ import {
     elementArray,
     getAttributeByName,
     getElementArrayLength,
+    getElementSize,
     getElementTitle,
     refreshPage,
     waitForElDisplayed,
@@ -131,6 +132,21 @@ describe('Split menu button test suite', () => {
 
     it('should check RTL orientation', () => {
         spMenuBtnPage.checkRtlSwitch();
+    });
+
+    it('should check menu item density matches button density', () => {
+        const compactButtonHeight = getElementSize(iconExArrowBtnArr, 1, 'height');
+        const cozyButtonHeight = getElementSize(iconExArrowBtnArr, 0, 'height');
+
+        click(iconExArrowBtnArr);
+        const cozyMenuItemHeight = getElementSize(menuItemArr, 0, 'height');
+
+        click(iconExArrowBtnArr);
+        click(iconExArrowBtnArr, 1);
+        const compactMenuItemHeight = getElementSize(menuItemArr, 0, 'height');
+
+        expect(compactButtonHeight).toBeLessThan(cozyButtonHeight);
+        expect(compactMenuItemHeight).toBeLessThan(cozyMenuItemHeight);
     });
 
     xdescribe('Check visual regression', () => {
