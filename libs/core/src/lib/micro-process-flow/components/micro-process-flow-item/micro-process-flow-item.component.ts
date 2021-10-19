@@ -20,8 +20,7 @@ import { MicroProcessFlowItemType } from '../../types';
         '[class.fd-micro-process-flow__item--positive]': 'state === "positive"',
         '[class.fd-micro-process-flow__item--critical]': 'state === "critical"',
         '[class.fd-micro-process-flow__item--negative]': 'state === "negative"',
-        '[class.fd-micro-process-flow__item--information]': 'state === "information"',
-        '[class.fd-micro-process-flow__item--last]': '_finalStep'
+        '[class.fd-micro-process-flow__item--information]': 'state === "information"'
     }
 })
 export class MicroProcessFlowItemComponent {
@@ -29,7 +28,7 @@ export class MicroProcessFlowItemComponent {
     @Input()
     state: MicroProcessFlowItemType = 'none';
 
-    /** Whenter or not display connector line */
+    /** Whether or not display connector line */
     @Input()
     intermediate = false;
 
