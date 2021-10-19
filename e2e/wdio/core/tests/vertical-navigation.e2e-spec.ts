@@ -64,7 +64,7 @@ describe('Vertical navigation component tests', function () {
             expect(isElementDisplayed(condensedExample + hiddenItem)).toBe(false, 'item of expanded list is displayed');
         });
 
-        it('should check that no textx in list items', () => {
+        it('should check that no text in list items', () => {
             const itemLength = getElementArrayLength(condensedExample + listItem);
             for (let i = 0; i < itemLength; i++) {
                 expect(isElementDisplayed(condensedExample + itemText, i)).toBe(
