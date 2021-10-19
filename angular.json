@@ -3806,6 +3806,440 @@
                 }
             }
         },
+        "fn": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib",
+            "sourceRoot": "libs/fn/src/lib",
+            "prefix": "fn",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn"],
+                    "options": {
+                        "tsConfig": "libs/fn/src/lib/tsconfig.lib.json",
+                        "project": "libs/fn/src/lib/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/test.ts",
+                        "tsConfig": "libs/fn/src/lib/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": ["libs/fn/src/lib/tsconfig.lib.json", "libs/fn/src/lib/tsconfig.spec.json"],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
+        },
+        "fn-button": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/button",
+            "sourceRoot": "libs/fn/src/lib/button",
+            "prefix": "fn",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/button"],
+                    "options": {
+                        "tsConfig": "libs/fn/src/lib/button/tsconfig.lib.json",
+                        "project": "libs/fn/src/lib/button/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/button/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/button/test.ts",
+                        "tsConfig": "libs/fn/src/lib/button/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/button/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/fn/src/lib/button/tsconfig.lib.json",
+                            "libs/fn/src/lib/button/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
+        },
+        "fn-checkbox": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/checkbox",
+            "sourceRoot": "libs/fn/src/lib/checkbox",
+            "prefix": "fn",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/checkbox"],
+                    "options": {
+                        "tsConfig": "libs/fn/src/lib/checkbox/tsconfig.lib.json",
+                        "project": "libs/fn/src/lib/checkbox/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/checkbox/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/checkbox/test.ts",
+                        "tsConfig": "libs/fn/src/lib/checkbox/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/checkbox/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/fn/src/lib/checkbox/tsconfig.lib.json",
+                            "libs/fn/src/lib/checkbox/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
+        },
+        "fn-form": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/form",
+            "sourceRoot": "libs/fn/src/lib/form",
+            "prefix": "fd",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/form"],
+                    "options": {
+                        "tsConfig": "libs/fn/src/lib/form/tsconfig.lib.json",
+                        "project": "libs/fn/src/lib/form/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/form/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/form/test.ts",
+                        "tsConfig": "libs/fn/src/lib/form/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/form/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/fn/src/lib/form/tsconfig.lib.json",
+                            "libs/fn/src/lib/form/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
+        },
+        "fn-radio": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/radio",
+            "sourceRoot": "libs/fn/src/lib/radio",
+            "prefix": "fd",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/radio"],
+                    "options": {
+                        "tsConfig": "libs/fn/src/lib/radio/tsconfig.lib.json",
+                        "project": "libs/fn/src/lib/radio/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/radio/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/radio/test.ts",
+                        "tsConfig": "libs/fn/src/lib/radio/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/radio/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/fn/src/lib/radio/tsconfig.lib.json",
+                            "libs/fn/src/lib/radio/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
+        },
+        "fn-search": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/search",
+            "sourceRoot": "libs/fn/src/lib/search",
+            "prefix": "fd",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/search"],
+                    "options": {
+                        "tsConfig": "libs/fn/src/lib/search/tsconfig.lib.json",
+                        "project": "libs/fn/src/lib/search/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/search/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/search/test.ts",
+                        "tsConfig": "libs/fn/src/lib/search/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/search/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/fn/src/lib/search/tsconfig.lib.json",
+                            "libs/fn/src/lib/search/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
+        },
+        "fn-select": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/select",
+            "sourceRoot": "libs/fn/src/lib/select",
+            "prefix": "fd",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/select"],
+                    "options": {
+                        "tsConfig": "libs/fn/src/lib/select/tsconfig.lib.json",
+                        "project": "libs/fn/src/lib/select/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/select/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/select/test.ts",
+                        "tsConfig": "libs/fn/src/lib/select/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/select/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/fn/src/lib/select/tsconfig.lib.json",
+                            "libs/fn/src/lib/select/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
+        },
+        "fn-slider": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/slider",
+            "sourceRoot": "libs/fn/src/lib/slider",
+            "prefix": "fd",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/slider"],
+                    "options": {
+                        "tsConfig": "libs/fn/src/lib/slider/tsconfig.lib.json",
+                        "project": "libs/fn/src/lib/slider/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/slider/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/slider/test.ts",
+                        "tsConfig": "libs/fn/src/lib/slider/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/slider/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/fn/src/lib/slider/tsconfig.lib.json",
+                            "libs/fn/src/lib/slider/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
+        },
+        "fn-switch": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/switch",
+            "sourceRoot": "libs/fn/src/lib/switch",
+            "prefix": "fd",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/switch"],
+                    "options": {
+                        "tsConfig": "libs/fn/src/lib/switch/tsconfig.lib.json",
+                        "project": "libs/fn/src/lib/switch/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/switch/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/switch/test.ts",
+                        "tsConfig": "libs/fn/src/lib/switch/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/switch/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/fn/src/lib/switch/tsconfig.lib.json",
+                            "libs/fn/src/lib/switch/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
+        },
+        "fn-tabs": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/tabs",
+            "sourceRoot": "libs/fn/src/lib/tabs",
+            "prefix": "fn",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/tabs"],
+                    "options": {
+                        "tsConfig": "libs/fn/src/lib/tabs/tsconfig.lib.json",
+                        "project": "libs/fn/src/lib/tabs/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/tabs/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/tabs/test.ts",
+                        "tsConfig": "libs/fn/src/lib/tabs/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/tabs/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/fn/src/lib/tabs/tsconfig.lib.json",
+                            "libs/fn/src/lib/tabs/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
+        },
+        "fn-tag": {
+            "projectType": "library",
+            "root": "libs/fn/src/lib/tag",
+            "sourceRoot": "libs/fn/src/lib/tag",
+            "prefix": "fn",
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/angular:package",
+                    "outputs": ["dist/libs/fn/tag"],
+                    "options": {
+                        "tsConfig": "libs/fn/src/lib/tag/tsconfig.lib.json",
+                        "project": "libs/fn/src/lib/tag/ng-package.json",
+                        "updateBuildableProjectDepsInPackageJson": false
+                    },
+                    "configurations": {
+                        "production": {
+                            "tsConfig": "libs/fn/src/lib/tag/tsconfig.lib.prod.json"
+                        }
+                    }
+                },
+                "test": {
+                    "builder": "@angular-devkit/build-angular:karma",
+                    "options": {
+                        "main": "libs/fn/src/lib/tag/test.ts",
+                        "tsConfig": "libs/fn/src/lib/tag/tsconfig.spec.json",
+                        "karmaConfig": "libs/fn/src/lib/tag/karma.conf.js"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": ["libs/fn/src/lib/tag/tsconfig.lib.json", "libs/fn/src/lib/tag/tsconfig.spec.json"],
+                        "exclude": ["**/node_modules/**"]
+                    }
+                }
+            }
+        },
         "moment-adapter": {
             "root": "libs/moment-adapter",
             "sourceRoot": "libs/moment-adapter/src",
@@ -4963,440 +5397,6 @@
                             "libs/platform/src/lib/wizard-generator/tsconfig.lib.json",
                             "libs/platform/src/lib/wizard-generator/tsconfig.spec.json"
                         ],
-                        "exclude": ["**/node_modules/**"]
-                    }
-                }
-            }
-        },
-        "fn": {
-            "projectType": "library",
-            "root": "libs/fn/src/lib",
-            "sourceRoot": "libs/fn/src/lib",
-            "prefix": "fn",
-            "architect": {
-                "build": {
-                    "builder": "@nrwl/angular:package",
-                    "outputs": ["dist/libs/fn"],
-                    "options": {
-                        "tsConfig": "libs/fn/src/lib/tsconfig.lib.json",
-                        "project": "libs/fn/src/lib/ng-package.json",
-                        "updateBuildableProjectDepsInPackageJson": false
-                    },
-                    "configurations": {
-                        "production": {
-                            "tsConfig": "libs/fn/src/lib/tsconfig.lib.prod.json"
-                        }
-                    }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "libs/fn/src/lib/test.ts",
-                        "tsConfig": "libs/fn/src/lib/tsconfig.spec.json",
-                        "karmaConfig": "libs/fn/src/lib/karma.conf.js"
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": ["libs/fn/src/lib/tsconfig.lib.json", "libs/fn/src/lib/tsconfig.spec.json"],
-                        "exclude": ["**/node_modules/**"]
-                    }
-                }
-            }
-        },
-        "fn-button": {
-            "projectType": "library",
-            "root": "libs/fn/src/lib/button",
-            "sourceRoot": "libs/fn/src/lib/button",
-            "prefix": "fn",
-            "architect": {
-                "build": {
-                    "builder": "@nrwl/angular:package",
-                    "outputs": ["dist/libs/fn/button"],
-                    "options": {
-                        "tsConfig": "libs/fn/src/lib/button/tsconfig.lib.json",
-                        "project": "libs/fn/src/lib/button/ng-package.json",
-                        "updateBuildableProjectDepsInPackageJson": false
-                    },
-                    "configurations": {
-                        "production": {
-                            "tsConfig": "libs/fn/src/lib/button/tsconfig.lib.prod.json"
-                        }
-                    }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "libs/fn/src/lib/button/test.ts",
-                        "tsConfig": "libs/fn/src/lib/button/tsconfig.spec.json",
-                        "karmaConfig": "libs/fn/src/lib/button/karma.conf.js"
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "libs/fn/src/lib/button/tsconfig.lib.json",
-                            "libs/fn/src/lib/button/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
-                    }
-                }
-            }
-        },
-        "fn-tabs": {
-            "projectType": "library",
-            "root": "libs/fn/src/lib/tabs",
-            "sourceRoot": "libs/fn/src/lib/tabs",
-            "prefix": "fn",
-            "architect": {
-                "build": {
-                    "builder": "@nrwl/angular:package",
-                    "outputs": ["dist/libs/fn/tabs"],
-                    "options": {
-                        "tsConfig": "libs/fn/src/lib/tabs/tsconfig.lib.json",
-                        "project": "libs/fn/src/lib/tabs/ng-package.json",
-                        "updateBuildableProjectDepsInPackageJson": false
-                    },
-                    "configurations": {
-                        "production": {
-                            "tsConfig": "libs/fn/src/lib/tabs/tsconfig.lib.prod.json"
-                        }
-                    }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "libs/fn/src/lib/tabs/test.ts",
-                        "tsConfig": "libs/fn/src/lib/tabs/tsconfig.spec.json",
-                        "karmaConfig": "libs/fn/src/lib/tabs/karma.conf.js"
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "libs/fn/src/lib/tabs/tsconfig.lib.json",
-                            "libs/fn/src/lib/tabs/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
-                    }
-                }
-            }
-        },
-        "fn-checkbox": {
-            "projectType": "library",
-            "root": "libs/fn/src/lib/checkbox",
-            "sourceRoot": "libs/fn/src/lib/checkbox",
-            "prefix": "fn",
-            "architect": {
-                "build": {
-                    "builder": "@nrwl/angular:package",
-                    "outputs": ["dist/libs/fn/checkbox"],
-                    "options": {
-                        "tsConfig": "libs/fn/src/lib/checkbox/tsconfig.lib.json",
-                        "project": "libs/fn/src/lib/checkbox/ng-package.json",
-                        "updateBuildableProjectDepsInPackageJson": false
-                    },
-                    "configurations": {
-                        "production": {
-                            "tsConfig": "libs/fn/src/lib/checkbox/tsconfig.lib.prod.json"
-                        }
-                    }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "libs/fn/src/lib/checkbox/test.ts",
-                        "tsConfig": "libs/fn/src/lib/checkbox/tsconfig.spec.json",
-                        "karmaConfig": "libs/fn/src/lib/checkbox/karma.conf.js"
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "libs/fn/src/lib/checkbox/tsconfig.lib.json",
-                            "libs/fn/src/lib/checkbox/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
-                    }
-                }
-            }
-        },
-        "fn-radio": {
-            "projectType": "library",
-            "root": "libs/fn/src/lib/radio",
-            "sourceRoot": "libs/fn/src/lib/radio",
-            "prefix": "fd",
-            "architect": {
-                "build": {
-                    "builder": "@nrwl/angular:package",
-                    "outputs": ["dist/libs/fn/radio"],
-                    "options": {
-                        "tsConfig": "libs/fn/src/lib/radio/tsconfig.lib.json",
-                        "project": "libs/fn/src/lib/radio/ng-package.json",
-                        "updateBuildableProjectDepsInPackageJson": false
-                    },
-                    "configurations": {
-                        "production": {
-                            "tsConfig": "libs/fn/src/lib/radio/tsconfig.lib.prod.json"
-                        }
-                    }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "libs/fn/src/lib/radio/test.ts",
-                        "tsConfig": "libs/fn/src/lib/radio/tsconfig.spec.json",
-                        "karmaConfig": "libs/fn/src/lib/radio/karma.conf.js"
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "libs/fn/src/lib/radio/tsconfig.lib.json",
-                            "libs/fn/src/lib/radio/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
-                    }
-                }
-            }
-        },
-        "fn-form": {
-            "projectType": "library",
-            "root": "libs/fn/src/lib/form",
-            "sourceRoot": "libs/fn/src/lib/form",
-            "prefix": "fd",
-            "architect": {
-                "build": {
-                    "builder": "@nrwl/angular:package",
-                    "outputs": ["dist/libs/fn/form"],
-                    "options": {
-                        "tsConfig": "libs/fn/src/lib/form/tsconfig.lib.json",
-                        "project": "libs/fn/src/lib/form/ng-package.json",
-                        "updateBuildableProjectDepsInPackageJson": false
-                    },
-                    "configurations": {
-                        "production": {
-                            "tsConfig": "libs/fn/src/lib/form/tsconfig.lib.prod.json"
-                        }
-                    }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "libs/fn/src/lib/form/test.ts",
-                        "tsConfig": "libs/fn/src/lib/form/tsconfig.spec.json",
-                        "karmaConfig": "libs/fn/src/lib/form/karma.conf.js"
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "libs/fn/src/lib/form/tsconfig.lib.json",
-                            "libs/fn/src/lib/form/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
-                    }
-                }
-            }
-        },
-        "fn-switch": {
-            "projectType": "library",
-            "root": "libs/fn/src/lib/switch",
-            "sourceRoot": "libs/fn/src/lib/switch",
-            "prefix": "fd",
-            "architect": {
-                "build": {
-                    "builder": "@nrwl/angular:package",
-                    "outputs": ["dist/libs/fn/switch"],
-                    "options": {
-                        "tsConfig": "libs/fn/src/lib/switch/tsconfig.lib.json",
-                        "project": "libs/fn/src/lib/switch/ng-package.json",
-                        "updateBuildableProjectDepsInPackageJson": false
-                    },
-                    "configurations": {
-                        "production": {
-                            "tsConfig": "libs/fn/src/lib/switch/tsconfig.lib.prod.json"
-                        }
-                    }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "libs/fn/src/lib/switch/test.ts",
-                        "tsConfig": "libs/fn/src/lib/switch/tsconfig.spec.json",
-                        "karmaConfig": "libs/fn/src/lib/switch/karma.conf.js"
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "libs/fn/src/lib/switch/tsconfig.lib.json",
-                            "libs/fn/src/lib/switch/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
-                    }
-                }
-            }
-        },
-        "fn-search": {
-            "projectType": "library",
-            "root": "libs/fn/src/lib/search",
-            "sourceRoot": "libs/fn/src/lib/search",
-            "prefix": "fd",
-            "architect": {
-                "build": {
-                    "builder": "@nrwl/angular:package",
-                    "outputs": ["dist/libs/fn/search"],
-                    "options": {
-                        "tsConfig": "libs/fn/src/lib/search/tsconfig.lib.json",
-                        "project": "libs/fn/src/lib/search/ng-package.json",
-                        "updateBuildableProjectDepsInPackageJson": false
-                    },
-                    "configurations": {
-                        "production": {
-                            "tsConfig": "libs/fn/src/lib/search/tsconfig.lib.prod.json"
-                        }
-                    }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "libs/fn/src/lib/search/test.ts",
-                        "tsConfig": "libs/fn/src/lib/search/tsconfig.spec.json",
-                        "karmaConfig": "libs/fn/src/lib/search/karma.conf.js"
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "libs/fn/src/lib/search/tsconfig.lib.json",
-                            "libs/fn/src/lib/search/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
-                    }
-                }
-            }
-        },
-        "fn-select": {
-            "projectType": "library",
-            "root": "libs/fn/src/lib/select",
-            "sourceRoot": "libs/fn/src/lib/select",
-            "prefix": "fd",
-            "architect": {
-                "build": {
-                    "builder": "@nrwl/angular:package",
-                    "outputs": ["dist/libs/fn/select"],
-                    "options": {
-                        "tsConfig": "libs/fn/src/lib/select/tsconfig.lib.json",
-                        "project": "libs/fn/src/lib/select/ng-package.json",
-                        "updateBuildableProjectDepsInPackageJson": false
-                    },
-                    "configurations": {
-                        "production": {
-                            "tsConfig": "libs/fn/src/lib/select/tsconfig.lib.prod.json"
-                        }
-                    }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "libs/fn/src/lib/select/test.ts",
-                        "tsConfig": "libs/fn/src/lib/select/tsconfig.spec.json",
-                        "karmaConfig": "libs/fn/src/lib/select/karma.conf.js"
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "libs/fn/src/lib/select/tsconfig.lib.json",
-                            "libs/fn/src/lib/select/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
-                    }
-                }
-            }
-        },
-        "fn-slider": {
-            "projectType": "library",
-            "root": "libs/fn/src/lib/slider",
-            "sourceRoot": "libs/fn/src/lib/slider",
-            "prefix": "fd",
-            "architect": {
-                "build": {
-                    "builder": "@nrwl/angular:package",
-                    "outputs": ["dist/libs/fn/slider"],
-                    "options": {
-                        "tsConfig": "libs/fn/src/lib/slider/tsconfig.lib.json",
-                        "project": "libs/fn/src/lib/slider/ng-package.json",
-                        "updateBuildableProjectDepsInPackageJson": false
-                    },
-                    "configurations": {
-                        "production": {
-                            "tsConfig": "libs/fn/src/lib/slider/tsconfig.lib.prod.json"
-                        }
-                    }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "libs/fn/src/lib/slider/test.ts",
-                        "tsConfig": "libs/fn/src/lib/slider/tsconfig.spec.json",
-                        "karmaConfig": "libs/fn/src/lib/slider/karma.conf.js"
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": [
-                            "libs/fn/src/lib/slider/tsconfig.lib.json",
-                            "libs/fn/src/lib/slider/tsconfig.spec.json"
-                        ],
-                        "exclude": ["**/node_modules/**"]
-                    }
-                }
-            }
-        },
-        "fn-tag": {
-            "projectType": "library",
-            "root": "libs/fn/src/lib/tag",
-            "sourceRoot": "libs/fn/src/lib/tag",
-            "prefix": "fn",
-            "architect": {
-                "build": {
-                    "builder": "@nrwl/angular:package",
-                    "outputs": ["dist/libs/fn/tag"],
-                    "options": {
-                        "tsConfig": "libs/fn/src/lib/tag/tsconfig.lib.json",
-                        "project": "libs/fn/src/lib/tag/ng-package.json",
-                        "updateBuildableProjectDepsInPackageJson": false
-                    },
-                    "configurations": {
-                        "production": {
-                            "tsConfig": "libs/fn/src/lib/tag/tsconfig.lib.prod.json"
-                        }
-                    }
-                },
-                "test": {
-                    "builder": "@angular-devkit/build-angular:karma",
-                    "options": {
-                        "main": "libs/fn/src/lib/tag/test.ts",
-                        "tsConfig": "libs/fn/src/lib/tag/tsconfig.spec.json",
-                        "karmaConfig": "libs/fn/src/lib/tag/karma.conf.js"
-                    }
-                },
-                "lint": {
-                    "builder": "@angular-devkit/build-angular:tslint",
-                    "options": {
-                        "tsConfig": ["libs/fn/src/lib/tag/tsconfig.lib.json", "libs/fn/src/lib/tag/tsconfig.spec.json"],
                         "exclude": ["**/node_modules/**"]
                     }
                 }

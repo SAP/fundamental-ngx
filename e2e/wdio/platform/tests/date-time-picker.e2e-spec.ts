@@ -12,7 +12,8 @@ import {
     setValue,
     waitForElDisplayed,
     waitForPresent,
-    waitForUnclickable
+    waitForUnclickable,
+    getElementArrayLength
 } from '../../driver/wdio';
 import {
     compactDate,
@@ -53,7 +54,8 @@ const {
     firstMonthButton,
     selectMonthButton,
     disabledFunctionExample,
-    calendarContainer
+    calendarContainer,
+    buttonText
 } = new DateTimePicker();
 
 describe('Datetime picker suite', () => {
@@ -229,6 +231,17 @@ describe('Datetime picker suite', () => {
         click(okButton);
         expect(getValue(datePickerInput)).toEqual(date);
     });
+});
+
+it('should check that OK buttons have correct text', () => {
+    const datepickerButtonsLength = getElementArrayLength(datePickerButton);
+    for (let i = 0; i < datepickerButtonsLength; i++) {
+        if (!getElementClass(datePickerButton, i).includes('disabled')) {
+            click(datePickerButton, i);
+            expect(getText(okButton + buttonText)).toEqual('OK');
+            click(okButton);
+        }
+    }
 });
 
 function selectHoursAndMinutes(hour: number = 1, minute: number = 1): void {

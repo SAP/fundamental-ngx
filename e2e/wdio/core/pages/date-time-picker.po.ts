@@ -31,6 +31,7 @@ export class DateTimePicker extends CoreBaseComponentPo {
     optionButton = 'div.fd-select__control';
     countryOption = 'ul.fd-select-options';
     calendarItem = '.fd-calendar__table td.fd-calendar__item';
+    buttonText = ' .fd-button__text';
 
     filterCalendarValue = (name: string): string => {
         return `[id*="${name}"]`;

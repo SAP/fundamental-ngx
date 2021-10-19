@@ -28,7 +28,15 @@ import {
 import { eight_lines_text, four_lines_text } from '../fixtures/testData/feed-input';
 
 describe('Verify Feed Input component', () => {
-    const { feedInputAvatar, feedInputTextArea, feedInput, feedInputNoAvatar, feedInputButton, feedInputPlaceholder1, feedInputPlaceholder2 } = new FeedInputPo();
+    const {
+        feedInputAvatar,
+        feedInputTextArea,
+        feedInput,
+        feedInputNoAvatar,
+        feedInputButton,
+        feedInputPlaceholder1,
+        feedInputPlaceholder2
+    } = new FeedInputPo();
     const feedInputPage = new FeedInputPo();
 
     beforeAll(() => {
