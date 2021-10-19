@@ -41,7 +41,6 @@
             (addOnButtonClicked)="onPrimaryButtonClick()"
             [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
             [attr.aria-disabled]="disabled"
-            [attr.aria-readonly]="readonly"
             [glyphAriaLabel]="ariaLabel"
             (click)="openInMobileMode()"
         >
