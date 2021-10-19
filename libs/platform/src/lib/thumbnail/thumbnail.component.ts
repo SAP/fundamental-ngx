@@ -76,6 +76,7 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
         const dialogRef = this._dialogService.open(ThumbnailDetailsComponent, {
             backdropClickCloseable: false,
             escKeyCloseable: false,
+            ariaLabelledBy: 'fdp-thumbnail-dialog-header',
             data: {
                 selectedMedia: selectedMedia,
                 mediaList: mediaList,
