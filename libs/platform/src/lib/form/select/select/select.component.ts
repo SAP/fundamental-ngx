@@ -8,6 +8,7 @@ import {
     EventEmitter,
     Host,
     Input,
+    isDevMode,
     OnInit,
     Optional,
     Output,
@@ -18,9 +19,9 @@ import {
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 
-import { FdSelectChange, SelectComponent as CoreSelect, SelectControlState } from '@fundamental-ngx/core/select';
+import { FdSelectChange, SelectComponent as CoreSelect } from '@fundamental-ngx/core/select';
 import { DynamicComponentService } from '@fundamental-ngx/core/utils';
-import { FormField, FormFieldControl, OptionItem } from '@fundamental-ngx/platform/shared';
+import { ControlState, FormField, FormFieldControl, OptionItem } from '@fundamental-ngx/platform/shared';
 import { BaseSelect, FdpSelectionChangeEvent } from '../commons/base-select';
 import { SelectConfig } from '../select.config';
 
@@ -33,18 +34,23 @@ import { SelectConfig } from '../select.config';
     providers: [{ provide: FormFieldControl, useExisting: SelectComponent, multi: true }]
 })
 export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit, AfterViewChecked {
-    /** Holds the control state of select */
-    @Input()
-    get selectState(): SelectControlState {
-        return (this.status as SelectControlState) || this._selectState;
-    }
-    set selectState(state: SelectControlState) {
-        this._state = state;
-    }
     /**
-     * @hidden
+     * @deprecated
+     * Holds the control state of select
      */
-    private _selectState: SelectControlState = null;
+    @Input()
+    get selectState(): ControlState {
+        if (isDevMode()) {
+            console.warn('"selectState" is deprecated. Use "state" instead');
+        }
+        return super.state;
+    }
+    set selectState(state: ControlState) {
+        if (isDevMode()) {
+            console.warn('"selectState" is deprecated. Use "state" instead');
+        }
+        super.state = state;
+    }
 
     /**
      * Directly sets value to the component that at the ends up at writeValue as well fires

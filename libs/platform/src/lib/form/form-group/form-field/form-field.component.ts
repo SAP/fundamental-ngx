@@ -308,7 +308,7 @@ export class FormFieldComponent implements FormField, AfterContentInit, AfterVie
 
     /** @hidden */
     hasErrors(): boolean {
-        return this._editable && this.control?.status === 'error';
+        return this._editable && this.control?.controlInvalid;
     }
 
     /**

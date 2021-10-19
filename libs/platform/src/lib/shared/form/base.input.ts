@@ -6,7 +6,7 @@ import {
     ElementRef,
     Host,
     Input,
-    OnChanges,
+    isDevMode,
     OnDestroy,
     OnInit,
     Optional,
@@ -19,9 +19,11 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
 
 import { BaseComponent } from '../base';
-import { FormFieldControl, Status } from './form-control';
+import { FormFieldControl } from './form-control';
+import { ControlState } from './form-options';
 import { FormField } from './form-field';
 import { SafeHtml } from '@angular/platform-browser';
+import { isValidControlState } from './../utils/form';
 
 let randomId = 0;
 
@@ -39,7 +41,7 @@ let randomId = 0;
 @Directive()
 export abstract class BaseInput
     extends BaseComponent
-    implements FormFieldControl<any>, ControlValueAccessor, OnInit, OnChanges, DoCheck, AfterViewInit, OnDestroy
+    implements FormFieldControl<any>, ControlValueAccessor, OnInit, DoCheck, AfterViewInit, OnDestroy
 {
     protected defaultId = `fdp-input-id-${randomId++}`;
     protected _disabled: boolean;
@@ -53,19 +55,34 @@ export abstract class BaseInput
     /**
      *  The state of the form control - applies css classes.
      *  Can be 'success', 'error', 'warning', 'default', 'information'.
+     *
+     * @default 'default'
      */
     @Input()
-    // state: Status = 'default';
-    get state(): Status {
-        return this._state;
+    get state(): ControlState {
+        if (this._state) {
+            return this._state;
+        }
+        return this.controlInvalid ? 'error' : 'default';
     }
-    set state(state: Status) {
-        this._state = state || 'default';
+
+    set state(state: ControlState) {
+        if (!state || isValidControlState(state)) {
+            this._state = state || 'default';
+        } else if (isDevMode()) {
+            console.warn(`Provided value "${state}" is not a valid option for ControlState type`);
+        }
     }
 
     /** Holds the message with respect to state */
     @Input()
     stateMessage: string | SafeHtml;
+    /**
+     * @hidden
+     *  The state of the form control - applies css classes.
+     *  Can be `success`, `error`, `warning`, `information` or 'default'
+     */
+    protected _state: ControlState;
 
     @Input()
     get disabled(): boolean {
@@ -136,11 +153,15 @@ export abstract class BaseInput
      */
     focused = false;
 
-    /**
-     * See @FormFieldControl
-     */
-    _status: Status;
+    /** Whether control has errors */
+    get controlInvalid(): boolean {
+        return this._controlInvalid;
+    }
 
+    /**
+     * @hidden
+     */
+    private _controlInvalid = false;
     /**
      * See @FormFieldControl
      */
@@ -151,17 +172,8 @@ export abstract class BaseInput
     /** set when input field is mandatory form field */
     required: boolean;
 
-    /**
-     *  The state of the form control - applies css classes.
-     *  Can be `success`, `error`, `warning`, `information` or blank for default.
-     */
-    _state: Status;
-
-    // @formatter:off
     onChange = (_: any) => {};
     onTouched = () => {};
-
-    // @formatter:on
 
     constructor(
         cd: ChangeDetectorRef,
@@ -184,11 +196,6 @@ export abstract class BaseInput
 
         // We have to ignore "formField" if there is "formControl" wrapper
         this.formField = formField && !formControl ? formField : null;
-    }
-
-    ngOnChanges(): void {
-        this._status = this.state;
-        this.stateChanges.next('input: ngOnChanges');
     }
 
     ngOnInit(): void {
@@ -270,10 +277,6 @@ export abstract class BaseInput
         this._cd.markForCheck();
     }
 
-    get status(): Status {
-        return this._status;
-    }
-
     /**
      *
      * Keeps track of element focus
@@ -319,17 +322,12 @@ export abstract class BaseInput
      *  covering non-control errors, errors that happens outside of this control
      */
     protected updateErrorState(): void {
-        const oldState = this.status === 'error';
         const parent = this.ngForm;
         const control = this.ngControl ? (this.ngControl.control as FormControl) : null;
-        const newState = !!(
-            control &&
-            control.invalid &&
-            (control.dirty || control.touched || (parent && parent.submitted))
-        );
+        const newStatusIsError = !!(control?.invalid && (control.dirty || control.touched || parent?.submitted));
 
-        if (newState !== oldState) {
-            this._status = newState ? 'error' : this.state === 'error' ? 'default' : this.state;
+        if (newStatusIsError !== this.controlInvalid) {
+            this._controlInvalid = newStatusIsError;
             this.stateChanges.next('updateErrorState');
             this._cd.markForCheck();
         }
