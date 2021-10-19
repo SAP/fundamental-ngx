@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.33 (2021-10-19)
+
+
+### Bug Fixes
+
+* **platform:** add more cols for labels in form items ([#6949](https://github.com/SAP/fundamental-ngx/issues/6949)) ([5a41d1f](https://github.com/SAP/fundamental-ngx/commit/5a41d1f554133df55811cdc81c2cde6f681ad1a5))
+
 ## 0.33.0-rc.32 (2021-10-18)
 
 
