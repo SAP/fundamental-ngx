@@ -3,7 +3,7 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class IconTabBarPO extends BaseComponentPo {
     url = '/icon-tab-bar';
-    
+
     textExample = '#background-ex0 ';
     columnsExample = '#background-ex1 ';
     iconOnlyExample = '#background-ex2 ';

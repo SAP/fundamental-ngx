@@ -1,6 +1,1 @@
-export const paddingsSizes = [
-    'sm',
-    'lg',
-    'xl',
-    'responsive-paddings'
-];
+export const paddingsSizes = ['sm', 'lg', 'xl', 'responsive-paddings'];

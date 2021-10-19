@@ -7,7 +7,7 @@ import {
     getElementClass,
     getText,
     isElementDisplayed,
-    refreshPage,
+    refreshPage
 } from '../../driver/wdio';
 
 import { paddingsSizes } from '../fixtures/appData/icon-tab-bar-contents';
@@ -55,7 +55,6 @@ describe('Info Label component test suite', () => {
         it('should check that iconName are present in iconName example', () => {
             expect(isElementDisplayed(iconExample + icon)).toBe(true, 'icon is not displayed');
         });
-
     });
 
     describe('Filter example', () => {
@@ -64,7 +63,7 @@ describe('Info Label component test suite', () => {
         });
 
         it('should check that tabs have filter mode', () => {
-            expect(getElementClass(filterExample + tabBar)).toContain('filter', 'tab is not of filter mode')
+            expect(getElementClass(filterExample + tabBar)).toContain('filter', 'tab is not of filter mode');
         });
     });
 
@@ -72,7 +71,6 @@ describe('Info Label component test suite', () => {
         it('should check selecting tabs in columns example', () => {
             checkSelectingTabs(columnsExample);
         });
-
     });
 
     describe('Process example', () => {
@@ -86,7 +84,10 @@ describe('Info Label component test suite', () => {
 
         it('should check quantity of communicators in process example', () => {
             const itemsQuantity = getElementArrayLength(processExample + tabBarItem);
-            expect(getElementArrayLength(processExample + processIcon)).toBe(itemsQuantity - 1, 'wrong quantity of process icons and tabs');
+            expect(getElementArrayLength(processExample + processIcon)).toBe(
+                itemsQuantity - 1,
+                'wrong quantity of process icons and tabs'
+            );
         });
     });
 
@@ -113,10 +114,15 @@ describe('Info Label component test suite', () => {
             expect(isElementDisplayed(expandedList)).toBe(true, 'expanded list is not displayed');
             const itemText = getText(listItem, 1);
             click(listItem, 1);
-            expect(getText(nestedTabsExample + tabBarItem)).toEqual(itemText, 'text is not changed according to selected item');
-            expect(getAttributeByName(nestedTabsExample + tabBarTab, 'aria-selected', 3)).toBe('true', 'tab is not selected');
+            expect(getText(nestedTabsExample + tabBarItem)).toEqual(
+                itemText,
+                'text is not changed according to selected item'
+            );
+            expect(getAttributeByName(nestedTabsExample + tabBarTab, 'aria-selected', 3)).toBe(
+                'true',
+                'tab is not selected'
+            );
         });
-
     });
 
     describe('Reordering example', () => {
@@ -135,11 +141,15 @@ describe('Info Label component test suite', () => {
             click(overflowButton);
             expect(isElementDisplayed(expandedList)).toBe(true, 'expanded list is not displayed');
             const iconName = getElementClass(listItem + icon);
-            const quantityOfDisplayedTabs = getElementArrayLength(overflowingExample + tabBarItem + '[aria-hidden=false]');
+            const quantityOfDisplayedTabs = getElementArrayLength(
+                overflowingExample + tabBarItem + '[aria-hidden=false]'
+            );
             click(listItem);
-            expect(getElementClass(overflowingExample + tabBarItem + icon, quantityOfDisplayedTabs - 1)).toBe(iconName, 'tabs are not replaced');
+            expect(getElementClass(overflowingExample + tabBarItem + icon, quantityOfDisplayedTabs - 1)).toBe(
+                iconName,
+                'tabs are not replaced'
+            );
         });
-
     });
 
     describe('Configurations paddings example', () => {
@@ -149,7 +159,10 @@ describe('Info Label component test suite', () => {
 
         it('should check paddings between tabs', () => {
             for (let i = 0; i < 4; i++) {
-                expect(getElementClass(configuratablePaddingsExample + tabBar, i)).toContain(paddingsSizes[i], `padding is not of ${paddingsSizes[i]} size`);
+                expect(getElementClass(configuratablePaddingsExample + tabBar, i)).toContain(
+                    paddingsSizes[i],
+                    `padding is not of ${paddingsSizes[i]} size`
+                );
             }
         });
     });
@@ -160,13 +173,17 @@ describe('Info Label component test suite', () => {
 
     function checkSelectingTabs(section: string): void {
         let itemsQuantity;
-        section === overflowingExample ? itemsQuantity = getElementArrayLength(overflowingExample + tabBarItem + '[aria-hidden=false]') : itemsQuantity = getElementArrayLength(section + tabBarItem);
+        section === overflowingExample
+            ? (itemsQuantity = getElementArrayLength(overflowingExample + tabBarItem + '[aria-hidden=false]'))
+            : (itemsQuantity = getElementArrayLength(section + tabBarItem));
         for (let i = 0; i < itemsQuantity; i++) {
             if (section !== nestedTabsExample && i !== 3) {
                 click(section + tabBarItem, i);
-                expect(getAttributeByName(section + tabBarTab, 'aria-selected', i)).toBe('true', `tab with index ${i} is not selected`);
+                expect(getAttributeByName(section + tabBarTab, 'aria-selected', i)).toBe(
+                    'true',
+                    `tab with index ${i} is not selected`
+                );
             }
         }
     }
-
 });
