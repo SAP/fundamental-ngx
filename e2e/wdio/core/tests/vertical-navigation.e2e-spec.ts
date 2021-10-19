@@ -5,7 +5,8 @@ import {
     refreshPage,
     isElementDisplayed,
     doesItExist,
-    waitForElDisplayed, waitForPresent,
+    waitForElDisplayed,
+    waitForPresent,
     scrollIntoView,
     isElementClickable
 } from '../../driver/wdio';
@@ -55,19 +56,27 @@ describe('Vertical navigation component tests', function () {
         it('should check expanding list', () => {
             scrollIntoView(condensedExample + listItem);
             click(condensedExample + listItem, 1);
-            expect(isElementDisplayed(condensedExample + hiddenItem)).toBe(true, 'item of expanded list is not displayed');
+            expect(isElementDisplayed(condensedExample + hiddenItem)).toBe(
+                true,
+                'item of expanded list is not displayed'
+            );
             click(condensedExample + listItem, 2);
             expect(isElementDisplayed(condensedExample + hiddenItem)).toBe(false, 'item of expanded list is displayed');
-
         });
 
         it('should check that no textx in list items', () => {
             const itemLength = getElementArrayLength(condensedExample + listItem);
             for (let i = 0; i < itemLength; i++) {
-                expect(isElementDisplayed(condensedExample + itemText, i)).toBe(false, `text is displayed for item with index ${i} but should not`);
+                expect(isElementDisplayed(condensedExample + itemText, i)).toBe(
+                    false,
+                    `text is displayed for item with index ${i} but should not`
+                );
             }
             click(condensedExample + listItem, 1);
-            expect(isElementDisplayed(condensedExample + itemText, 1)).toBe(true, `text is not appeared for item with index 1`);
+            expect(isElementDisplayed(condensedExample + itemText, 1)).toBe(
+                true,
+                `text is not appeared for item with index 1`
+            );
         });
 
         it('should check that items in expanded lists are clickable', () => {
@@ -122,7 +131,10 @@ describe('Vertical navigation component tests', function () {
             click(section + expandArrow, i);
         }
         for (let i = 0; i < hiddenItemsLength; i++) {
-            expect(isElementClickable(section + hiddenItem, i)).toBe(true, `item of expanded list with index ${i} is not clickable`);
+            expect(isElementClickable(section + hiddenItem, i)).toBe(
+                true,
+                `item of expanded list with index ${i} is not clickable`
+            );
         }
     }
 
@@ -136,9 +148,14 @@ describe('Vertical navigation component tests', function () {
     function checkOpenByClickItem(section: string): void {
         scrollIntoView(section + expandableItem);
         click(section + expandableItemText);
-        expect(isElementDisplayed(section + hiddenItem)).toBe(true, 'list is not expanded by clicking on expandable item');
+        expect(isElementDisplayed(section + hiddenItem)).toBe(
+            true,
+            'list is not expanded by clicking on expandable item'
+        );
         click(section + expandableItemText);
-        expect(isElementDisplayed(section + hiddenItem)).toBe(false, 'list is not closed by clicking on expandable item');
+        expect(isElementDisplayed(section + hiddenItem)).toBe(
+            false,
+            'list is not closed by clicking on expandable item'
+        );
     }
-
 });
