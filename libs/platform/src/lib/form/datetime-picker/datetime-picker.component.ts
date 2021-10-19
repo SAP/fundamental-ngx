@@ -120,6 +120,10 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      */
     @Input() keepTwoDigitsTime = false;
 
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be `success`, `error`, `warning`, `information` or blank for default.
+     */
     @Input()
     set state(state: ControlState) {
         super.state = state;

@@ -114,6 +114,10 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     @Input()
     closeOnDateChoose = true;
 
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be `success`, `error`, `warning`, `information` or blank for default.
+     */
     @Input()
     get state(): ControlState {
         if (this.fdDatePickerComponent?._isInvalidDateInput || !this._datePickerValid) {
