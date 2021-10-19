@@ -33,6 +33,7 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     @Input()
     maxImages = 5;
 
+    /**Role description for the thumbnail image  */
     @Input()
     roleDescription = 'Image';
 
