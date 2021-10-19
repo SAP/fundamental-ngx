@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.34 (2021-10-19)
+
+
+### Bug Fixes
+
+* **platform:** use unified "state" binding ([#6888](https://github.com/SAP/fundamental-ngx/issues/6888)) ([484f436](https://github.com/SAP/fundamental-ngx/commit/484f436d37dcfaaa07470388c590a9fdbc0ced9c)), closes [#3223](https://github.com/SAP/fundamental-ngx/issues/3223)
+
 ## 0.33.0-rc.33 (2021-10-19)
 
 
