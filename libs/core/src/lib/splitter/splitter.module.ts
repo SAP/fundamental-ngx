@@ -11,7 +11,6 @@ import { SplitterSplitPaneComponent } from './splitter-split-pane/splitter-split
 import { SplitterComponent } from './splitter.component';
 import { NoDefaultPanePipe } from './pipes';
 
-
 @NgModule({
     declarations: [
         SplitterComponent,
@@ -21,11 +20,7 @@ import { NoDefaultPanePipe } from './pipes';
         SplitterPaginationComponent,
         NoDefaultPanePipe
     ],
-    imports: [
-        CommonModule,
-        IconModule,
-        PortalModule
-    ],
+    imports: [CommonModule, IconModule, PortalModule],
     exports: [
         SplitterComponent,
         SplitterPaneContainerComponent,
@@ -35,5 +30,4 @@ import { NoDefaultPanePipe } from './pipes';
         NoDefaultPanePipe
     ]
 })
-export class SplitterModule {
-}
+export class SplitterModule {}

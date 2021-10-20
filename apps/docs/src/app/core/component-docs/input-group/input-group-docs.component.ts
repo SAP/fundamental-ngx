@@ -130,7 +130,7 @@ export class InputGroupDocsComponent {
         {
             language: 'html',
             code: formInputHtmlSrc,
-            fileName: 'input-group-form-example',
+            fileName: 'input-group-form-example'
         },
         {
             language: 'typescript',
@@ -152,7 +152,7 @@ export class InputGroupDocsComponent {
         {
             language: 'html',
             code: statesInputHtml,
-            fileName: 'input-group-states-example',
+            fileName: 'input-group-states-example'
         }
     ];
 

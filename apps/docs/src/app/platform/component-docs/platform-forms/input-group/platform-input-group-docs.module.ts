@@ -37,7 +37,7 @@ const routes: Routes = [
         FdpFormGroupModule,
         PlatformButtonModule,
         IconModule,
-        PlatformInputGroupModule,
+        PlatformInputGroupModule
     ],
     exports: [RouterModule],
     declarations: [

@@ -13,13 +13,14 @@
                     <button fdInitialFocus fd-button label="Click me!" aria-describedby="fd-dialog-button-1"></button>
                 </fd-popover-control>
                 <fd-popover-body>
-                    <div id="fd-dialog-button-1" style="padding: 12px;">
-                        This is the button's popover!
-                    </div>
+                    <div id="fd-dialog-button-1" style="padding: 12px">This is the button's popover!</div>
                 </fd-popover-body>
             </fd-popover>
             <br /><br />
-            <fd-multi-input [dropdownValues]="['Pineapple', 'Apple', 'Pepper', 'Tomato']" placeholder="select from values"></fd-multi-input>
+            <fd-multi-input
+                [dropdownValues]="['Pineapple', 'Apple', 'Pepper', 'Tomato']"
+                placeholder="select from values"
+            ></fd-multi-input>
             <p>The popover disappears if the attached reference object is outside the view!</p>
         </fd-dialog-body>
     </fd-dialog>

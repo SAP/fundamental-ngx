@@ -5,7 +5,6 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { MessageBoxService } from './message-box.service';
 import { MessageBoxModule } from '../message-box.module';
 
-
 @Component({
     template: `
         <ng-template let-messageBoxRef let-messageBoxConfig="messageBoxConfig" #testTemplate>
@@ -24,9 +23,11 @@ describe('MessageBoxService', () => {
         TestBed.configureTestingModule({
             declarations: [TemplateTestComponent],
             imports: [MessageBoxModule]
-        }).overrideModule(BrowserDynamicTestingModule, {
-            set: { entryComponents: [TemplateTestComponent] }
-        }).compileComponents();
+        })
+            .overrideModule(BrowserDynamicTestingModule, {
+                set: { entryComponents: [TemplateTestComponent] }
+            })
+            .compileComponents();
 
         service = TestBed.inject<MessageBoxService>(MessageBoxService);
     });

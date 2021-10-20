@@ -16,29 +16,42 @@ describe('ComboboxMobileComponent', () => {
     let fixture: ComponentFixture<ComboboxMobileComponent>;
 
     const testComboboxConfigObject: MobileModeConfig = {
-        title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true
+        title: 'title',
+        approveButtonText: 'approve',
+        cancelButtonText: 'cancel',
+        hasCloseButton: true
     };
 
-
     let comboboxInputComponent: Partial<ComboboxComponent> = {
-        mobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
+        mobileConfig: {
+            title: 'title',
+            approveButtonText: 'approve',
+            cancelButtonText: 'cancel',
+            hasCloseButton: true
+        },
         dialogDismiss: (backupArgument: string) => {},
         dialogApprove: () => {},
         openChange: new EventEmitter<boolean>()
     };
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ DialogModule, BrowserAnimationsModule, RouterTestingModule ],
-            declarations: [ComboboxMobileComponent],
-            providers: [ DynamicComponentService, {provide: COMBOBOX_COMPONENT, useValue: comboboxInputComponent} ]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [DialogModule, BrowserAnimationsModule, RouterTestingModule],
+                declarations: [ComboboxMobileComponent],
+                providers: [DynamicComponentService, { provide: COMBOBOX_COMPONENT, useValue: comboboxInputComponent }]
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         comboboxInputComponent = {
-            mobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
+            mobileConfig: {
+                title: 'title',
+                approveButtonText: 'approve',
+                cancelButtonText: 'cancel',
+                hasCloseButton: true
+            },
             dialogDismiss: (backupArgument: string) => {},
             dialogApprove: () => {},
             openChange: new EventEmitter<boolean>()

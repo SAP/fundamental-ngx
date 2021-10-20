@@ -21,5 +21,5 @@ export class ApprovalFlowUserDetailsComponent {
     details: Observable<any>;
 
     @Input()
-    detailsTemplate: TemplateRef<any> ;
+    detailsTemplate: TemplateRef<any>;
 }

@@ -10,11 +10,12 @@ import {
     getCSSPropertyByName,
     getText,
     getTextArr,
-    refreshPage, sendKeys
+    refreshPage,
+    sendKeys
 } from '../../driver/wdio';
 import { emptyValuesArr } from '../fixtures/appData/menu-contents';
 
-describe('Menu test suite', function() {
+describe('Menu test suite', () => {
     const menuPage = new MenuPo();
     const {
         menuButtonsArr,
@@ -45,7 +46,7 @@ describe('Menu test suite', function() {
         waitForElDisplayed(menuPage.title);
     }, 1);
 
-    describe('check all buttons functionality', function() {
+    describe('check all buttons functionality', () => {
         it('should be clickable', () => {
             for (let i = 0; i < buttonsArrLength; i++) {
                 expect(isElementClickable(menuButtonsArr, i)).toBe(true, `Button with index ${i} is not clickable`);
@@ -78,22 +79,19 @@ describe('Menu test suite', function() {
         }
     });
 
-    describe('ability to navigate through menu items with tab and arrow keys', function() {
+    describe('ability to navigate through menu items with tab and arrow keys', () => {
         it('should navigate through menu items when user uses arrow down and arrow up', () => {
             for (let i = 0; i < buttonsArrLength; i++) {
                 click(menuButtonsArr, i);
                 const menuItemsArrLength = getElementArrayLength(menuItemsArr);
                 for (let j = 0; j < menuItemsArrLength - 1; j++) {
                     sendKeys('ArrowDown');
-                    expect(emptyValuesArr)
-                        .not.toContain(getCSSPropertyByName(menuItemsArr, 'outline-style', j + 1));
-
+                    expect(emptyValuesArr).not.toContain(getCSSPropertyByName(menuItemsArr, 'outline-style', j + 1));
                 }
 
                 for (let g = menuItemsArrLength - 1; g > 0; g--) {
                     sendKeys('ArrowUp');
-                    expect(emptyValuesArr)
-                        .not.toContain(getCSSPropertyByName(menuItemsArr, 'outline-style', g - 1));
+                    expect(emptyValuesArr).not.toContain(getCSSPropertyByName(menuItemsArr, 'outline-style', g - 1));
                 }
             }
         });
@@ -104,8 +102,7 @@ describe('Menu test suite', function() {
                 const menuItemsArrLength = getElementArrayLength(menuItemsArr);
                 for (let j = 0; j < menuItemsArrLength - 1; j++) {
                     sendKeys('Tab');
-                    expect(emptyValuesArr)
-                        .not.toContain(getCSSPropertyByName(menuItemsArr, 'outline-style', j + 1));
+                    expect(emptyValuesArr).not.toContain(getCSSPropertyByName(menuItemsArr, 'outline-style', j + 1));
                 }
             }
         });
@@ -118,13 +115,13 @@ describe('Menu test suite', function() {
             mouseHoverElement(submenuItems, i);
             const textItem = getText(submenuItems, i);
             const activePath = getTextArr(submenuActivePath);
-            const booleanExp = activePath.some(el => el.trim() === textItem);
+            const booleanExp = activePath.some((el) => el.trim() === textItem);
             menuItemsArrLength = getElementArrayLength(submenuItems);
             expect(booleanExp).toBe(true, `Active path mismatch with ${textItem} with index ${i}`);
         }
     });
 
-    describe('check dialog popup Mobile Menu example', function() {
+    describe('check dialog popup Mobile Menu example', () => {
         it('should open and close dialog popup Mobile Menu', () => {
             click(btnMobileMenu);
             waitForElDisplayed(dialogMobileMenu);
@@ -149,7 +146,12 @@ describe('Menu test suite', function() {
         menuPage.checkRtlSwitch();
     });
 
-    function checkDialogCascadingMenu(selector: string, btnSelector: string, btnBackSelector: string, previousLength: number): void {
+    function checkDialogCascadingMenu(
+        selector: string,
+        btnSelector: string,
+        btnBackSelector: string,
+        previousLength: number
+    ): void {
         for (let i = 0; i < previousLength; i++) {
             const btnTxt = getText(selector, i);
             click(btnSelector, i);

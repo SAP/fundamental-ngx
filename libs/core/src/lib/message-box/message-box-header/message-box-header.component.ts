@@ -26,24 +26,24 @@ import {
     selector: 'fd-message-box-header',
     templateUrl: './message-box-header.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        { provide: MESSAGE_BOX_CONFIGURABLE_ELEMENT, useExisting: MessageBoxHeaderComponent, multi: true }
-    ]
+    providers: [{ provide: MESSAGE_BOX_CONFIGURABLE_ELEMENT, useExisting: MessageBoxHeaderComponent, multi: true }]
 })
-export class MessageBoxHeaderComponent extends DialogHeaderBase implements AfterContentInit, MessageBoxConfigurableElement {
-
+export class MessageBoxHeaderComponent
+    extends DialogHeaderBase
+    implements AfterContentInit, MessageBoxConfigurableElement
+{
     /** @hidden */
-    constructor(
-        @Optional() public messageBoxConfig: MessageBoxConfig,
-        changeDetectorRef: ChangeDetectorRef
-    ) {
+    constructor(@Optional() public messageBoxConfig: MessageBoxConfig, changeDetectorRef: ChangeDetectorRef) {
         super(changeDetectorRef);
         this.messageBoxConfig = this.messageBoxConfig || {};
     }
 
     /** @hidden */
     get _showSemanticIcon(): boolean {
-        return this.messageBoxConfig.type && this.messageBoxConfig.showSemanticIcon || !!this.messageBoxConfig.customSemanticIcon
+        return (
+            (this.messageBoxConfig.type && this.messageBoxConfig.showSemanticIcon) ||
+            !!this.messageBoxConfig.customSemanticIcon
+        );
     }
 
     /** @hidden */

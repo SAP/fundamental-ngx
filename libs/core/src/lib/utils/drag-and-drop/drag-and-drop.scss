@@ -1,4 +1,3 @@
-
 .cdk-drag-dragging {
     z-index: 15;
     background-color: #fff;
@@ -18,19 +17,19 @@
     border-width: 0.125rem;
     border-style: solid;
     background-color: transparent;
-    border-color: #0854A0;
+    border-color: #0854a0;
     border-color: var(--sapContent_DragAndDropActiveColor);
 
     &::before {
-        content: "";
+        content: '';
         display: block;
         position: absolute;
         width: 100%;
         height: 100%;
         top: 0;
         left: 0;
-        background-color: #0854A0;
-        background-color: var(--sapContent_DragAndDropActiveColor, #0854A0);
+        background-color: #0854a0;
+        background-color: var(--sapContent_DragAndDropActiveColor, #0854a0);
         opacity: 0.5;
     }
 }
@@ -46,7 +45,7 @@
 .cdk-drag-dragging {
     outline: none;
     cursor: grabbing;
-    box-shadow: 0 0 0 0.0625rem rgba(0, 0, 0, 0.15), 0 0.625rem 1.875rem 0 rgba(0, 0, 0, 0.3)
+    box-shadow: 0 0 0 0.0625rem rgba(0, 0, 0, 0.15), 0 0.625rem 1.875rem 0 rgba(0, 0, 0, 0.3);
 }
 
 .cdk-drag-disabled {
@@ -76,8 +75,8 @@
 .drop-area__line {
     z-index: 9999;
     position: absolute;
-    background: #0854A0;
-    background: var(--sapContent_DragAndDropActiveColor, #0854A0);
+    background: #0854a0;
+    background: var(--sapContent_DragAndDropActiveColor, #0854a0);
 
     &--vertical {
         top: 0;
@@ -104,8 +103,8 @@
             height: 0.5rem;
             border-width: 0.125rem;
             border-style: solid;
-            border-color: #0854A0;
-            border-color: var(--sapContent_DragAndDropActiveColor, #0854A0);
+            border-color: #0854a0;
+            border-color: var(--sapContent_DragAndDropActiveColor, #0854a0);
         }
     }
 
@@ -134,8 +133,8 @@
             height: 0.5rem;
             border-width: 0.125rem;
             border-style: solid;
-            border-color: #0854A0;
-            border-color: var(--sapContent_DragAndDropActiveColor, #0854A0);
+            border-color: #0854a0;
+            border-color: var(--sapContent_DragAndDropActiveColor, #0854a0);
         }
     }
 }

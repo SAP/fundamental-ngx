@@ -3,7 +3,7 @@ import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 
 @Component({
     selector: 'fd-combobox-mobile-example',
-    templateUrl: './combobox-mobile-example.component.html',
+    templateUrl: './combobox-mobile-example.component.html'
 })
 export class ComboboxMobileExampleComponent {
     selectedValue = '';

@@ -24,10 +24,12 @@ export class ApprovalFlowDropZoneDirective {
 
         const dropZoneRect = this.elRef.nativeElement.getBoundingClientRect();
 
-        if (dropZoneRect.top + dropZoneRect.height > nodeRect.top
-            && dropZoneRect.left + dropZoneRect.width > nodeRect.left
-            && dropZoneRect.bottom - dropZoneRect.height < nodeRect.bottom
-            && dropZoneRect.right - dropZoneRect.width < nodeRect.right) {
+        if (
+            dropZoneRect.top + dropZoneRect.height > nodeRect.top &&
+            dropZoneRect.left + dropZoneRect.width > nodeRect.left &&
+            dropZoneRect.bottom - dropZoneRect.height < nodeRect.bottom &&
+            dropZoneRect.right - dropZoneRect.width < nodeRect.right
+        ) {
             this.active = true;
         }
     }

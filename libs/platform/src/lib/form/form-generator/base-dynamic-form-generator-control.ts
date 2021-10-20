@@ -19,7 +19,6 @@ export interface BaseDynamicFormGeneratorControlInterface {
     providers: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]
 })
 export abstract class BaseDynamicFormGeneratorControl implements BaseDynamicFormGeneratorControlInterface {
-
     /**
      * @description @see DynamicFormItem
      */

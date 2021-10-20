@@ -11,7 +11,11 @@ import { MultiComboboxConfig } from '../multi-combobox.config';
 export class MultiComboboxHighlightPipe implements PipeTransform {
     constructor(private readonly multiComboboxConfig: MultiComboboxConfig) {}
 
-    transform(value: string, searchText: string, matchingStrategy: MatchingStrategy = this.multiComboboxConfig.matchingStrategy): string {
+    transform(
+        value: string,
+        searchText: string,
+        matchingStrategy: MatchingStrategy = this.multiComboboxConfig.matchingStrategy
+    ): string {
         if (!(value && searchText)) {
             return value;
         }

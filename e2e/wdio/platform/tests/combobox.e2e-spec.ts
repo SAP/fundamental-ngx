@@ -1,7 +1,9 @@
 import {
     browserIsIE,
     clearValue,
-    click, doesItExist, getAttributeByName,
+    click,
+    doesItExist,
+    getAttributeByName,
     getElementArrayLength,
     getText,
     getTextArr,
@@ -15,7 +17,7 @@ import {
     waitForClickable,
     waitForElDisplayed,
     waitForPresent,
-    waitForUnclickable,
+    waitForUnclickable
 } from '../../driver/wdio';
 import { ComboBoxPo } from '../pages/combobox.po';
 import {
@@ -26,12 +28,24 @@ import {
 } from '../fixtures/appData/combobox.page-content';
 import { checkNotFocused, checkTextValueContain } from '../../helper/assertion-helper';
 
-describe('Combobox test suite', function() {
+describe('Combobox test suite', () => {
     const comboBoxPage: ComboBoxPo = new ComboBoxPo();
     const {
-        pageTitle, comboBoxRoot, comboBoxDropdownExpanded, groupHeader, comboboxWithGroup, comboboxTwoColumns,
-        optionsArray, comboBoxInput, selectedDropDownOption, dropDownOption, comboBoxOptionHint, comboBoxButtons,
-        comboBoxExpandedButtons, comboBoxInputs, filledComboBoxInputs
+        pageTitle,
+        comboBoxRoot,
+        comboBoxDropdownExpanded,
+        groupHeader,
+        comboboxWithGroup,
+        comboboxTwoColumns,
+        optionsArray,
+        comboBoxInput,
+        selectedDropDownOption,
+        dropDownOption,
+        comboBoxOptionHint,
+        comboBoxButtons,
+        comboBoxExpandedButtons,
+        comboBoxInputs,
+        filledComboBoxInputs
     } = comboBoxPage;
 
     beforeAll(() => {
@@ -141,7 +155,7 @@ describe('Combobox test suite', function() {
     });
 
     it('Verify navigation by arrow buttons', () => {
-       if (browserIsIE()) {
+        if (browserIsIE()) {
             console.log('Skip for IE');
             return;
         }
@@ -179,7 +193,7 @@ describe('Combobox test suite', function() {
         }
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             comboBoxPage.saveExampleBaselineScreenshot();
             expect(comboBoxPage.compareWithBaseline()).toBeLessThan(5);

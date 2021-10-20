@@ -48,8 +48,6 @@ import { TableService } from './table.service';
         TableTextDirective,
         TableIconDirective
     ],
-    providers: [
-        TableService
-    ]
+    providers: [TableService]
 })
 export class TableModule {}

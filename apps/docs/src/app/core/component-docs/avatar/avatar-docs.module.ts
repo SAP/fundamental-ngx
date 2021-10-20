@@ -45,7 +45,7 @@ const routes: Routes = [
         AvatarTileExampleComponent,
         AvatarTransparentExampleComponent,
         AvatarZoomIconExampleComponent,
-        AvatarDefaultImageWithAlternativeOptionsExampleComponent,
+        AvatarDefaultImageWithAlternativeOptionsExampleComponent
     ]
 })
 export class AvatarDocsModule {}

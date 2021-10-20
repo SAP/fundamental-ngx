@@ -1,5 +1,6 @@
 <div class="fd-feed-input" [class.is-disabled]="disabled">
-    <fd-avatar *ngIf="avatarShow"
+    <fd-avatar
+        *ngIf="avatarShow"
         class="fd-feed-input__thumb"
         size="s"
         role="img"
@@ -15,7 +16,7 @@
     <textarea
         #textAreaElement
         fd-form-control
-        class="fd-textarea  fd-feed-input__textarea"
+        class="fd-textarea fd-feed-input__textarea"
         [disabled]="disabled"
         [placeholder]="placeholder"
         [(ngModel)]="value"

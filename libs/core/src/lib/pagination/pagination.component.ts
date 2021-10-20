@@ -23,7 +23,6 @@ import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { Pagination } from './pagination.model';
 import { PaginationService } from './pagination.service';
 
-
 /** Constant representing the default number of items per page. */
 const DEFAULT_ITEMS_PER_PAGE = 10;
 interface CurrentShowing {
@@ -76,10 +75,10 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     @Input()
     get currentPage(): number {
         return this._currentPage;
-    };
+    }
     set currentPage(value: number) {
         this._currentPage = Math.floor(coerceNumberProperty(value, 1));
-    };
+    }
 
     /** Represents the number of items per page. */
     @Input()
@@ -112,12 +111,12 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     }
     set itemsPerPageOptions(value: number[]) {
         this._itemsPerPageOptions = coerceArray<number>(value)
-            .map(v => coerceNumberProperty(v, 0))
-            .map(v => Math.floor(v))
-            .filter(v => v > 0 && v < this.totalItems)
+            .map((v) => coerceNumberProperty(v, 0))
+            .map((v) => Math.floor(v))
+            .filter((v) => v > 0 && v < this.totalItems)
             .sort((a, b) => a - b);
 
-        if (this._itemsPerPageOptions.some(v => v !== this.itemsPerPage)) {
+        if (this._itemsPerPageOptions.some((v) => v !== this.itemsPerPage)) {
             this.itemsPerPage = this._itemsPerPageOptions[0];
         }
     }
@@ -192,14 +191,14 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     /** @hidden */
     get isFirstPage(): boolean {
         return this.currentPage === 1;
-    };
+    }
     get isLastPage(): boolean {
         return this.currentPage === this.paginationService.getTotalPages(this.getPaginationObject());
-    };
+    }
 
     get currentShowing(): CurrentShowing {
         return this._currentShowing;
-    };
+    }
     /** @hidden */
     private _currentShowing: CurrentShowing = {
         from: 0,
@@ -219,7 +218,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    constructor (
+    constructor(
         private readonly paginationService: PaginationService,
         private readonly _cd: ChangeDetectorRef,
         private readonly _liveAnnouncer: LiveAnnouncer,
@@ -262,10 +261,12 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     /** @hidden */
     ngOnInit(): void {
         if (this._rtlService) {
-            this._subscriptions.add(this._rtlService.rtl.subscribe((value) => {
-                this.rtl = value;
-                this._refreshPages();
-            }));
+            this._subscriptions.add(
+                this._rtlService.rtl.subscribe((value) => {
+                    this.rtl = value;
+                    this._refreshPages();
+                })
+            );
         }
     }
 
@@ -342,8 +343,12 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         }
         this.pages = pages;
 
-        this._currentShowing.from = this.currentPage - 1 === 0 ? 1 : (this.currentPage - 1) * pagination.itemsPerPage + 1;
-        this._currentShowing.to = Math.min((this.currentPage - 1) * pagination.itemsPerPage + pagination.itemsPerPage, this.totalItems);
+        this._currentShowing.from =
+            this.currentPage - 1 === 0 ? 1 : (this.currentPage - 1) * pagination.itemsPerPage + 1;
+        this._currentShowing.to = Math.min(
+            (this.currentPage - 1) * pagination.itemsPerPage + pagination.itemsPerPage,
+            this.totalItems
+        );
         this._currentShowing.of = this.totalItems;
 
         this._cd.markForCheck();

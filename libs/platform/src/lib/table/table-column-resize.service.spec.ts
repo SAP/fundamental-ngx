@@ -66,9 +66,7 @@ describe('TableColumnResizeService', () => {
         service.startResize({ clientX: clientStartX } as MouseEvent);
         service.finishResize({ clientX: clientEndX } as MouseEvent);
 
-        expect(service.getColumnWidthStyle(tableColumn)).toEqual(
-            (initialColumnWidth + clientEndX - clientStartX) + 'px'
-        );
+        expect(service.getColumnWidthStyle(tableColumn)).toEqual(initialColumnWidth + clientEndX - clientStartX + 'px');
     });
 
     it('should set min column width if after resize it smaller', () => {
@@ -87,8 +85,6 @@ describe('TableColumnResizeService', () => {
         service.startResize({ clientX: clientStartX } as MouseEvent);
         service.finishResize({ clientX: clientEndX } as MouseEvent);
 
-        expect(service.getColumnWidthStyle(tableColumn)).toEqual(
-            TABLE_COLUMN_MIN_WIDTH + 'px'
-        );
+        expect(service.getColumnWidthStyle(tableColumn)).toEqual(TABLE_COLUMN_MIN_WIDTH + 'px');
     });
 });

@@ -19,7 +19,7 @@ export class NotificationService {
     constructor(
         private _dynamicComponentService: DynamicComponentService,
         @Optional() private _rtlService: RtlService
-        ) {}
+    ) {}
 
     /**
      * Opens a notification component with a content of type TemplateRef or Component Type

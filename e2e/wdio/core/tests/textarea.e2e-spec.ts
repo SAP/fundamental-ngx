@@ -14,22 +14,14 @@ import {
     isElementClickable,
     click,
     sendKeys,
-    waitForPresent,
+    waitForPresent
 } from '../../driver/wdio';
 
-import { sections, states } from '../fixtures/appData/textarea-contents'
+import { sections, states } from '../fixtures/appData/textarea-contents';
 
-describe('Textarea component test', function () {
+describe('Textarea component test', () => {
     const textareaPage = new TextareaPo();
-    const {
-        defaultExample,
-        formExample,
-        stateExample,
-        textarea,
-        label,
-        helpIcon,
-        helpContent
-    } = textareaPage;
+    const { defaultExample, formExample, stateExample, textarea, label, helpIcon, helpContent } = textareaPage;
 
     beforeAll(() => {
         textareaPage.open();
@@ -102,11 +94,13 @@ describe('Textarea component test', function () {
         const testValue = 'My custom test string';
         const areaLength = getElementArrayLength(section + textarea);
         for (let i = 0; i < areaLength; i++) {
-            if (getAttributeByName(section + textarea, 'disabled', i) == null && getAttributeByName(section + textarea, 'readonly', i) == null) {
+            if (
+                getAttributeByName(section + textarea, 'disabled', i) == null &&
+                getAttributeByName(section + textarea, 'readonly', i) == null
+            ) {
                 setValue(section + textarea, testValue, i);
                 expect(getValue(section + textarea, i)).toEqual(testValue);
             }
         }
     }
-
 });

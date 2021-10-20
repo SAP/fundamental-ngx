@@ -44,7 +44,13 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject, Subscription } from 'rxjs';
 
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
-import { FormField, FormFieldGroup, FormGroupContainer, HintPlacement, LabelLayout } from '@fundamental-ngx/platform/shared';
+import {
+    FormField,
+    FormFieldGroup,
+    FormGroupContainer,
+    HintPlacement,
+    LabelLayout
+} from '@fundamental-ngx/platform/shared';
 import { Field, FieldColumn, FieldGroup, getField, isFieldChild, isFieldGroupChild } from '../form-helpers';
 import { FormFieldComponent } from './form-field/form-field.component';
 import { FORM_GROUP_CHILD_FIELD_TOKEN } from './constants';
@@ -136,7 +142,9 @@ export const formGroupProvider: Provider = {
     encapsulation: ViewEncapsulation.None,
     providers: [formGroupProvider]
 })
-export class FormGroupComponent implements FormGroupContainer, OnInit, AfterContentInit, AfterViewInit, OnDestroy, OnChanges {
+export class FormGroupComponent
+    implements FormGroupContainer, OnInit, AfterContentInit, AfterViewInit, OnDestroy, OnChanges
+{
     @Input()
     id: string;
 
@@ -282,7 +290,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
         private _cd: ChangeDetectorRef,
         @Optional() private formContainer: ControlContainer,
         @Optional() private _contentDensityService: ContentDensityService
-        ) {
+    ) {
         this.formGroup = <FormGroup>(this.formContainer ? this.formContainer.control : new FormGroup({}));
     }
 
@@ -295,10 +303,12 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
             this.formGroup = new FormGroup({});
         }
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this.buildComponentCssClass();
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this.buildComponentCssClass();
+                })
+            );
         }
         this.buildComponentCssClass();
     }
@@ -370,11 +380,7 @@ export class FormGroupComponent implements FormGroupContainer, OnInit, AfterCont
     }
 
     buildComponentCssClass(): string[] {
-        return [
-            'fd-container',
-            !this.compact ? 'fd-form-layout-grid-container' : '',
-            this.class
-        ];
+        return ['fd-container', !this.compact ? 'fd-form-layout-grid-container' : '', this.class];
     }
 
     /** @hidden */

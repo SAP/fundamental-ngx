@@ -75,22 +75,26 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
         console.log('download', data);
 
         const obs = data.items.map((file) => {
-            return this._http.get(file.url, { responseType: 'blob' }).pipe(map(blob => ({
-                blob: blob,
-                file: file
-            })));
+            return this._http.get(file.url, { responseType: 'blob' }).pipe(
+                map((blob) => ({
+                    blob: blob,
+                    file: file
+                }))
+            );
         });
 
-        return merge(...obs).pipe(map(({ file, blob }) => {
-            const a = document.createElement('a');
-            const objectUrl = URL.createObjectURL(blob);
-            a.href = objectUrl;
-            a.download = file.name;
-            a.click();
-            URL.revokeObjectURL(objectUrl);
+        return merge(...obs).pipe(
+            map(({ file, blob }) => {
+                const a = document.createElement('a');
+                const objectUrl = URL.createObjectURL(blob);
+                a.href = objectUrl;
+                a.download = file.name;
+                a.click();
+                URL.revokeObjectURL(objectUrl);
 
-            return null;
-        }));
+                return null;
+            })
+        );
     }
 
     /**

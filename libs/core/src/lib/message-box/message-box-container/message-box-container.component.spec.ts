@@ -27,9 +27,11 @@ describe('MessageBoxContainerComponent', () => {
             declarations: [TestComponent],
             providers: [MessageBoxRef, MessageBoxConfig],
             imports: [MessageBoxModule, NoopAnimationsModule]
-        }).overrideModule(BrowserDynamicTestingModule, {
-            set: { entryComponents: [TestComponent] }
-        }).compileComponents();
+        })
+            .overrideModule(BrowserDynamicTestingModule, {
+                set: { entryComponents: [TestComponent] }
+            })
+            .compileComponents();
     });
 
     beforeEach(() => {

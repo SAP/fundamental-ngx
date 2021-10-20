@@ -16,11 +16,6 @@ import { InputGroupInputComponent } from './input.component';
         InputGroupInputComponent
     ],
     imports: [CommonModule, FormsModule, PlatformInputModule],
-    exports: [
-        PlatformInputModule,
-        InputGroupComponent,
-        InputGroupAddonComponent,
-        InputGroupInputComponent
-    ]
+    exports: [PlatformInputModule, InputGroupComponent, InputGroupAddonComponent, InputGroupInputComponent]
 })
 export class PlatformInputGroupModule {}

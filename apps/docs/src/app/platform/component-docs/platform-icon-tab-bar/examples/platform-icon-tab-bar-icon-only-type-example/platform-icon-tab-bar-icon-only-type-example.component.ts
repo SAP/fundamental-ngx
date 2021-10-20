@@ -5,10 +5,9 @@ import { TabConfig } from '../../platform-icon-tab-bar-docs.component';
 
 @Component({
     selector: 'fd-icon-tab-bar-icon-only-type-example',
-    templateUrl: './platform-icon-tab-bar-icon-only-type-example.component.html',
+    templateUrl: './platform-icon-tab-bar-icon-only-type-example.component.html'
 })
 export class PlatformIconTabBarIconOnlyTypeExampleComponent implements OnInit {
-
     @Input()
     withOverflowExample = false;
 

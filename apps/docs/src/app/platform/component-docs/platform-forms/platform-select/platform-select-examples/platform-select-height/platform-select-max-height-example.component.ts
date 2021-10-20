@@ -49,7 +49,7 @@ export class PlatformSelectMaxHeightExampleComponent {
         new Fruit('B', 'orange', 70),
         new Fruit('C', 'Plums', 10),
         new Fruit('D', 'pineapple', 11),
-        new Fruit('E', 'watermelon', 10),
+        new Fruit('E', 'watermelon', 10)
     ];
     option = this.userList.map<OptionItem>((item) => {
         return {
@@ -62,7 +62,7 @@ export class PlatformSelectMaxHeightExampleComponent {
 
     onSelect(item: FdpSelectionChangeEvent): void {
         if (item) {
-         this.selectedValue = item.payload;
+            this.selectedValue = item.payload;
         }
-     }
- }
+    }
+}

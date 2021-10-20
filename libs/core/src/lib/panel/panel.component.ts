@@ -87,18 +87,22 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
     _subscription = new Subscription();
 
     /** @hidden */
-    constructor(private _cdRef: ChangeDetectorRef,
-                private _elementRef: ElementRef,
-                @Optional() private _contentDensityService: ContentDensityService,
-                @Optional() private _rtlService: RtlService) {}
+    constructor(
+        private _cdRef: ChangeDetectorRef,
+        private _elementRef: ElementRef,
+        @Optional() private _contentDensityService: ContentDensityService,
+        @Optional() private _rtlService: RtlService
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscription.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this.buildComponentCssClass();
-            }))
+            this._subscription.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this.buildComponentCssClass();
+                })
+            );
         }
         this._listenRtl();
         this.buildComponentCssClass();
@@ -135,18 +139,14 @@ export class PanelComponent implements CssClassBuilder, OnChanges, OnInit, OnDes
 
     /** @hidden */
     _getButtonIcon(): string {
-        return this.expanded
-            ? 'slim-arrow-down'
-            : this._rtl
-                ? 'slim-arrow-left'
-                : 'slim-arrow-right'
+        return this.expanded ? 'slim-arrow-down' : this._rtl ? 'slim-arrow-left' : 'slim-arrow-right';
     }
 
     /** @hidden */
     private _listenRtl(): void {
         if (this._rtlService) {
             this._subscription.add(
-                this._rtlService.rtl.subscribe(rtl => {
+                this._rtlService.rtl.subscribe((rtl) => {
                     this._rtl = rtl;
                     this._cdRef.markForCheck();
                 })

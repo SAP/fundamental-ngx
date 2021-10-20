@@ -115,4 +115,3 @@ export * from './text-area/text-area.module';
 
 export * from './time-picker/time-picker.component';
 export * from './time-picker/time-picker.module';
-

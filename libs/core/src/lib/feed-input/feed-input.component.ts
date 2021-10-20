@@ -42,7 +42,8 @@ export class FeedInputComponent implements AfterContentInit, OnDestroy {
         }
 
         this._subscriptions.add(
-            this.textareaElement.valueChange.subscribe((value => this.buttonElement.disabled = !Boolean(value))));
+            this.textareaElement.valueChange.subscribe((value) => (this.buttonElement.disabled = !Boolean(value)))
+        );
     }
 
     /** @hidden */

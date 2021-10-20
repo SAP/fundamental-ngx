@@ -17,7 +17,15 @@ describe('TimePickerComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                imports: [FormsModule, PopoverModule, InputGroupModule, ButtonModule, FdDatetimeModule, TimeModule, FormMessageModule],
+                imports: [
+                    FormsModule,
+                    PopoverModule,
+                    InputGroupModule,
+                    ButtonModule,
+                    FdDatetimeModule,
+                    TimeModule,
+                    FormMessageModule
+                ],
                 declarations: [TimePickerComponent],
                 providers: [ContentDensityService]
             }).compileComponents();
@@ -79,7 +87,7 @@ describe('TimePickerComponent', () => {
             expect(component.time.isDateValid()).toBeFalse();
             expect(component._isInvalidTimeInput).toBeTrue();
         });
-        
+
         describe('input field is empty', () => {
             it('should set model to "null"', () => {
                 component.time = new FdDate().setTime(15, 40, 0);
@@ -121,8 +129,7 @@ describe('TimePickerComponent', () => {
         component.isOpen = false;
         component.disabled = false;
         const event = {
-            stopPropagation: function(): void {
-            }
+            stopPropagation: function (): void {}
         };
         spyOn(event, 'stopPropagation').and.callThrough();
         component._inputGroupClicked(<any>event);

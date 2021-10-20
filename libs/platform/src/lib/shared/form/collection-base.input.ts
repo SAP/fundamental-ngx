@@ -4,7 +4,7 @@ import { NgControl, NgForm } from '@angular/forms';
 import { BaseInput } from './base.input';
 import { FormField } from './form-field';
 import { FormFieldControl } from './form-control';
-import { isFunction, isJsObject, isString, } from '../utils/lang';
+import { isFunction, isJsObject, isString } from '../utils/lang';
 import { isSelectItem, SelectItem } from '../domain/data-model';
 
 /**

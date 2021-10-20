@@ -39,6 +39,4 @@ const routes: Routes = [
     ],
     providers: [RtlService]
 })
-export class PlatformApprovalFlowDocsModule {
-
-}
+export class PlatformApprovalFlowDocsModule {}

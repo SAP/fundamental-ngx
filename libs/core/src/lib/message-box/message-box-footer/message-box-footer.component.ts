@@ -23,13 +23,12 @@ export const MessageBoxButtonClass = 'fd-message-box__decisive-button';
 @Component({
     selector: 'fd-message-box-footer',
     templateUrl: './message-box-footer.component.html',
-    providers: [
-        { provide: MESSAGE_BOX_CONFIGURABLE_ELEMENT, useExisting: MessageBoxFooterComponent, multi: true }
-    ]
+    providers: [{ provide: MESSAGE_BOX_CONFIGURABLE_ELEMENT, useExisting: MessageBoxFooterComponent, multi: true }]
 })
-export class MessageBoxFooterComponent extends DialogFooterBase
-    implements AfterContentInit, AfterViewInit , MessageBoxConfigurableElement {
-
+export class MessageBoxFooterComponent
+    extends DialogFooterBase
+    implements AfterContentInit, AfterViewInit, MessageBoxConfigurableElement
+{
     /** @hidden */
     constructor(@Optional() public messageBoxConfig: MessageBoxConfig) {
         super();

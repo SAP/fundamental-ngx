@@ -12,18 +12,17 @@ import hljs from 'highlight.js/lib';
     `
 })
 export class CodeSnippetComponent implements AfterViewInit {
-
     @Input()
     file: ExampleFile;
 
     @Input()
     standAlone: boolean;
 
-    @ViewChild('code', {read: ElementRef})
+    @ViewChild('code', { read: ElementRef })
     codeContainerRef: ElementRef;
 
     ngAfterViewInit(): void {
         /** Highlight.js init */
-         hljs.highlightBlock(this.codeContainerRef.nativeElement);
+        hljs.highlightBlock(this.codeContainerRef.nativeElement);
     }
 }

@@ -6,7 +6,7 @@ import * as menuMobileTs from '!raw-loader!./examples/menu-mobile-example.compon
 import * as menuMobileHtml from '!raw-loader!./examples/menu-mobile-example.component.html';
 import * as menuSeparatorHtml from '!raw-loader!./examples/menu-separator-example.component.html';
 import * as menuWithSubmenuHtml from '!raw-loader!./examples/menu-with-submenu-example.component.html';
-import * as menuWithSubmenuTs from '!raw-loader!./examples/menu-with-submenu-example.component.ts'
+import * as menuWithSubmenuTs from '!raw-loader!./examples/menu-with-submenu-example.component.ts';
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
 @Component({
@@ -25,7 +25,7 @@ export class MenuDocsComponent {
         {
             language: 'html',
             code: menuAddonHtml,
-            fileName: 'menu-addon-example',
+            fileName: 'menu-addon-example'
         }
     ];
 
@@ -41,13 +41,13 @@ export class MenuDocsComponent {
         {
             language: 'html',
             code: menuMobileHtml,
-            fileName: 'menu-mobile-example',
+            fileName: 'menu-mobile-example'
         },
         {
             language: 'typescript',
             code: menuMobileTs,
             fileName: 'menu-mobile-example',
-            component: 'MenuMobileExampleComponent',
+            component: 'MenuMobileExampleComponent'
         }
     ];
 

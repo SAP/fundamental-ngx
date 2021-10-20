@@ -1,14 +1,9 @@
 import { ActionBarPo } from '../pages/action-bar.po';
-import {
-    waitForElDisplayed
-} from '../../driver/wdio';
+import { waitForElDisplayed } from '../../driver/wdio';
 
-
-describe('Action Bar Test Suite', function() {
+describe('Action Bar Test Suite', () => {
     const actionBarPage = new ActionBarPo();
-    const {
-        actionBarBackButtonBackButton,
-    } = actionBarPage;
+    const { actionBarBackButtonBackButton } = actionBarPage;
 
     beforeAll(() => {
         actionBarPage.open();
@@ -17,17 +12,16 @@ describe('Action Bar Test Suite', function() {
 
     // todo: check buttons are clickable
 
-    describe('Check orientation', function() {
+    describe('Check orientation', () => {
         it('should check RTL and LTR orientation', () => {
             actionBarPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression basic', function() {
+    xdescribe('Check visual regression basic', () => {
         it('should check examples visual regression', () => {
             actionBarPage.saveExampleBaselineScreenshot();
             expect(actionBarPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
-

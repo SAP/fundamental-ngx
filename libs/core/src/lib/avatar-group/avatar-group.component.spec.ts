@@ -21,20 +21,20 @@ const NUMBER_OF_ITEMS = 20;
 
                 <fd-popover [noArrow]="false" placement="bottom">
                     <fd-popover-control>
-                        <button *ngIf="avatarGroup.overflowItemsCount > 0"
-                                fd-button
-                                fd-avatar-group-overflow-button
-                                [size]="size">
-                            <bdi fd-avatar-group-overflow-button-text>
-                                +{{ avatarGroup.overflowItemsCount }}
-                            </bdi>
+                        <button
+                            *ngIf="avatarGroup.overflowItemsCount > 0"
+                            fd-button
+                            fd-avatar-group-overflow-button
+                            [size]="size"
+                        >
+                            <bdi fd-avatar-group-overflow-button-text> +{{ avatarGroup.overflowItemsCount }} </bdi>
                         </button>
                     </fd-popover-control>
 
                     <fd-popover-body>
                         <div class="fd-popover__wrapper">
                             <div fd-avatar-group-overflow-body>
-                                <div *ngFor="let item of items; let idx = index;" fd-avatar-group-overflow-item>
+                                <div *ngFor="let item of items; let idx = index" fd-avatar-group-overflow-item>
                                     <fd-avatar [circle]="true" [border]="true" size="s" [label]="item"></fd-avatar>
                                 </div>
                             </div>
@@ -59,12 +59,14 @@ describe('AvatarGroupComponent', () => {
     let component: AvatarGroupTestComponent;
     let fixture: ComponentFixture<AvatarGroupTestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [AvatarGroupTestComponent],
-            imports: [AvatarGroupModule, PopoverModule, AvatarModule, ButtonModule],
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [AvatarGroupTestComponent],
+                imports: [AvatarGroupModule, PopoverModule, AvatarModule, ButtonModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(AvatarGroupTestComponent);

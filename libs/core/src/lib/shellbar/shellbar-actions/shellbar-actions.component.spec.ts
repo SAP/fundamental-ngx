@@ -6,11 +6,13 @@ describe('ShellbarActionsComponent', () => {
     let component: ShellbarActionsComponent;
     let fixture: ComponentFixture<ShellbarActionsComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ShellbarModule],
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [ShellbarModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ShellbarActionsComponent);

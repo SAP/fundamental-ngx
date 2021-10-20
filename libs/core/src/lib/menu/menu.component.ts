@@ -18,20 +18,21 @@ import {
     Renderer2,
     TemplateRef,
     ViewChild,
+    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
-import { MenuItemComponent } from './menu-item/menu-item.component';
-import { MenuService } from './services/menu.service';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
-import { MenuMobileComponent } from './menu-mobile/menu-mobile.component';
 import { Subscription } from 'rxjs';
+
+import { ContentDensityService, DynamicComponentService } from '@fundamental-ngx/core/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { RtlService } from '@fundamental-ngx/core/utils';
+import { BasePopoverClass, PopoverService } from '@fundamental-ngx/core/popover';
+
+import { MenuMobileComponent } from './menu-mobile/menu-mobile.component';
+import { MenuMobileModule } from './menu-mobile/menu-mobile.module';
+import { MenuService } from './services/menu.service';
 import { MENU_COMPONENT, MenuInterface } from './menu.interface';
-import { BasePopoverClass } from '@fundamental-ngx/core/popover';
-import { PopoverService } from '@fundamental-ngx/core/popover';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { MenuItemComponent } from './menu-item/menu-item.component';
 
 let menuUniqueId = 0;
 
@@ -44,13 +45,12 @@ let menuUniqueId = 0;
     styleUrls: ['menu.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [
-        MenuService,
-        PopoverService
-    ],
+    providers: [MenuService, PopoverService]
 })
-export class MenuComponent extends BasePopoverClass implements MenuInterface, AfterContentInit, AfterViewInit, OnDestroy, OnInit {
-
+export class MenuComponent
+    extends BasePopoverClass
+    implements MenuInterface, AfterContentInit, AfterViewInit, OnDestroy, OnInit
+{
     /** Set menu in mobile mode */
     @Input('mobile')
     set setMobileMode(value: boolean) {
@@ -103,7 +103,7 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
     menuRootTemplate: TemplateRef<any>;
 
     /** @hidden Reference to all menu Items */
-    @ContentChildren(MenuItemComponent, {descendants: true})
+    @ContentChildren(MenuItemComponent, { descendants: true })
     menuItems: QueryList<MenuItemComponent>;
 
     /** Whether use menu in mobile mode */
@@ -124,15 +124,19 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
     /** @hidden */
     private _clickEventListener: Function;
 
-    constructor(public elementRef: ElementRef,
-                @Optional() public dialogConfig: DialogConfig,
-                private _rendered: Renderer2,
-                private _menuService: MenuService,
-                private _changeDetectorRef: ChangeDetectorRef,
-                private _popoverService: PopoverService,
-                @Optional() private _contentDensityService: ContentDensityService,
-                @Optional() private _rtlService: RtlService,
-                @Optional() private _dynamicComponentService: DynamicComponentService) {
+    /** @hidden */
+    constructor(
+        public readonly elementRef: ElementRef,
+        @Optional() public readonly dialogConfig: DialogConfig,
+        private readonly _rendered: Renderer2,
+        private readonly _menuService: MenuService,
+        private readonly _changeDetectorRef: ChangeDetectorRef,
+        private readonly _popoverService: PopoverService,
+        private readonly _injector: Injector,
+        private readonly _viewContainerRef: ViewContainerRef,
+        @Optional() private readonly _contentDensityService: ContentDensityService,
+        @Optional() private readonly _dynamicComponentService: DynamicComponentService
+    ) {
         super();
     }
 
@@ -155,7 +159,7 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._menuService.setMenuMode(this.mobile)
+        this._menuService.setMenuMode(this.mobile);
         this._setupView();
     }
 
@@ -220,10 +224,8 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
     /** @hidden */
     private _setupPopoverService(): void {
         this._subscriptions.add(
-            this._popoverService._onLoad.subscribe(elementRef =>
-                this._manageKeyboardSupport(elementRef)
-            )
-        )
+            this._popoverService._onLoad.subscribe((elementRef) => this._manageKeyboardSupport(elementRef))
+        );
 
         this._popoverService.templateContent = this.menuRootTemplate;
         this._popoverService.initialise(this._externalTrigger, this);
@@ -231,35 +233,35 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
 
     /** @hidden */
     private _manageKeyboardSupport(elementRef: ElementRef): void {
-        this._menuService.addKeyboardSupport(elementRef)
+        this._menuService.addKeyboardSupport(elementRef);
     }
 
     /** @hidden Open Menu in mobile mode */
-    private _setupMobileMode(): void {
-        this._mobileModeComponentRef = this._dynamicComponentService
-            .createDynamicComponent<MenuMobileComponent>(
-                this.menuRootTemplate,
-                MenuMobileComponent,
-                { container: this.elementRef.nativeElement },
-                {
-                    injector: Injector.create({providers: [{ provide: MENU_COMPONENT, useValue: this }]}),
-                    services: [this._menuService, this._rtlService] }
-            )
-        ;
+    private async _setupMobileMode(): Promise<void> {
+        const injector = Injector.create({
+            providers: [{ provide: MENU_COMPONENT, useValue: this }],
+            parent: this._injector
+        });
+
+        this._mobileModeComponentRef = await this._dynamicComponentService.createDynamicModule(
+            this.menuRootTemplate,
+            MenuMobileModule,
+            MenuMobileComponent,
+            this._viewContainerRef,
+            injector
+        );
 
         this._listenOnTriggerRefClicks();
     }
 
     /** @hidden Listen on menu items change and rebuild menu */
     private _listenOnMenuItemsChange(): void {
-        this._subscriptions.add(
-             this.menuItems.changes.subscribe(() => this._menuService.rebuildMenu())
-        );
-       this.menuItems.forEach(m => {
-             if (m.submenu && m.submenu.menuItems) {
-                 this._subscriptions.add(m.submenu.menuItems.changes.subscribe(() => this._menuService.rebuildMenu()));
-             }
-         });
+        this._subscriptions.add(this.menuItems.changes.subscribe(() => this._menuService.rebuildMenu()));
+        this.menuItems.forEach((m) => {
+            if (m.submenu && m.submenu.menuItems) {
+                this._subscriptions.add(m.submenu.menuItems.changes.subscribe(() => this._menuService.rebuildMenu()));
+            }
+        });
     }
 
     /**
@@ -269,9 +271,7 @@ export class MenuComponent extends BasePopoverClass implements MenuInterface, Af
     private _listenOnTriggerRefClicks(): void {
         this._destroyEventListeners();
         if (this.trigger && this.mobile) {
-            this._clickEventListener = this._rendered.listen(
-                this.trigger.nativeElement, 'click', () => this.toggle()
-            );
+            this._clickEventListener = this._rendered.listen(this.trigger.nativeElement, 'click', () => this.toggle());
         }
     }
 

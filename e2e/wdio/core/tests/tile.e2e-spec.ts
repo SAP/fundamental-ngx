@@ -6,10 +6,10 @@ import {
     getAttributeByName,
     isElementDisplayed,
     isElementClickable,
-    waitForPresent,
+    waitForPresent
 } from '../../driver/wdio';
 
-describe('Tile component test', function () {
+describe('Tile component test', () => {
     const tilePage = new TilePo();
     const {
         tile,
@@ -47,7 +47,7 @@ describe('Tile component test', function () {
     it('should check size in default example', () => {
         expect(getAttributeByName(launchTile, 'size', 1)).toBe('s');
         expect(getAttributeByName(launchTile, 'size', 3)).toBe('s');
-    })
+    });
 
     it('should check launch example', () => {
         checkTileType(launchExample, 'launch');
@@ -93,11 +93,10 @@ describe('Tile component test', function () {
         tilePage.checkRtlSwitch();
     });
 
-    function checkTileType(section: string, type: string): void{
+    function checkTileType(section: string, type: string): void {
         const length = getElementArrayLength(section + fdTile);
         for (let i = 0; i < length; i++) {
             expect(getAttributeByName(section + fdTile, 'type', i)).toBe(type);
         }
     }
-
 });

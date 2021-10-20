@@ -13,7 +13,6 @@ export const SELECT_COMPONENT = new InjectionToken<SelectInterface>('SelectInter
  * SelectComponent <==> SelectMobileComponent
  */
 export interface SelectInterface extends MobileMode {
-
     typeaheadDebounceInterval: number;
     selected: OptionComponent;
     mobileConfig: MobileModeConfig;
@@ -33,7 +32,5 @@ export interface SelectInterface extends MobileMode {
     blur(): void;
     _isRtl(): boolean;
     _getItemHeight(): number;
-    _getOptionScrollPosition( optionIndex: number,
-        optionHeight: number,
-        currentScrollPosition: number): void;
+    _getOptionScrollPosition(optionIndex: number, optionHeight: number, currentScrollPosition: number): void;
 }

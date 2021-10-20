@@ -21,7 +21,6 @@ import {
     MobileModeConfigToken
 } from '@fundamental-ngx/core/mobile-mode';
 
-
 @Component({
     selector: 'fd-multi-input-mobile',
     templateUrl: './multi-input-mobile.component.html',
@@ -29,8 +28,10 @@ import {
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterface> implements OnInit, AfterViewInit, OnDestroy {
-
+export class MultiInputMobileComponent
+    extends MobileModeBase<MultiInputInterface>
+    implements OnInit, AfterViewInit, OnDestroy
+{
     /** @hidden */
     @ViewChild('dialogTemplate') dialogTemplate: TemplateRef<any>;
 
@@ -40,8 +41,8 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
      * List element, which will be rendered inside dialog.
      */
     childContent: {
-        listTemplate: TemplateRef<any>,
-        controlTemplate: TemplateRef<any>
+        listTemplate: TemplateRef<any>;
+        controlTemplate: TemplateRef<any>;
     } = null;
 
     /** @hidden */
@@ -102,23 +103,18 @@ export class MultiInputMobileComponent extends MobileModeBase<MultiInputInterfac
 
     /** @hidden */
     private _listenOnMultiInputOpenChange(): void {
-        this._component.openChange
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(isOpen => this._toggleDialog(isOpen));
+        this._component.openChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 
     /** @hidden */
     private _open(): void {
-        this.dialogRef = this._dialogService.open(
-            this.dialogTemplate,
-            {
-                mobile: true,
-                verticalPadding: false,
-                ...this.dialogConfig,
-                backdropClickCloseable: false,
-                escKeyCloseable: false,
-                container: this._elementRef.nativeElement
-            }
-        );
+        this.dialogRef = this._dialogService.open(this.dialogTemplate, {
+            mobile: true,
+            verticalPadding: false,
+            ...this.dialogConfig,
+            backdropClickCloseable: false,
+            escKeyCloseable: false,
+            container: this._elementRef.nativeElement
+        });
     }
 }

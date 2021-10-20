@@ -20,7 +20,6 @@ import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductMenuComponent {
-
     /** Whether the popover should close when the escape key is pressed. */
     @Input()
     closeOnEscapeKey = true;

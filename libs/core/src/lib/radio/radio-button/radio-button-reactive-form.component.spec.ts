@@ -37,12 +37,14 @@ describe('RadioButtonComponent reactive forms', () => {
     let fixture: ComponentFixture<TestRadioButtonComponentReactiveForms>;
     let changeDetectorRef: ChangeDetectorRef;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [FormsModule, ReactiveFormsModule],
-            declarations: [RadioButtonComponent, TestRadioButtonComponentReactiveForms]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [FormsModule, ReactiveFormsModule],
+                declarations: [RadioButtonComponent, TestRadioButtonComponentReactiveForms]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestRadioButtonComponentReactiveForms);
@@ -66,14 +68,14 @@ describe('RadioButtonComponent reactive forms', () => {
         expect(component.radioButton1.value).toEqual(1);
     });
 
-    it('should check second radio', async() => {
-      await fixture.whenStable();
-      new Promise(async () => {
-        component.radioButton2.inputElement.nativeElement.click();
-        await fixture.detectChanges();
-      }).then(() => {
-        expect(component.radioButton1.inputElement.nativeElement.checked).toBeFalsy();
-        expect(component.radioButton2.inputElement.nativeElement.checked).toBeTruthy();
-      });
+    it('should check second radio', async () => {
+        await fixture.whenStable();
+        new Promise(async () => {
+            component.radioButton2.inputElement.nativeElement.click();
+            await fixture.detectChanges();
+        }).then(() => {
+            expect(component.radioButton1.inputElement.nativeElement.checked).toBeFalsy();
+            expect(component.radioButton2.inputElement.nativeElement.checked).toBeTruthy();
+        });
     });
 });

@@ -17,36 +17,33 @@ export interface Name {
 @Component({
     selector: 'fdp-test-fdp-display-list-item',
     template: `
-    <fdp-list partialNavigation="true">
-    <fdp-display-list-item title="title 1" secondary="secondary 1" navigationIndicator="true">
-    </fdp-display-list-item>
-    <fdp-display-list-item title="title 2" secondary="secondary 2">
-    </fdp-display-list-item>
-    <fdp-display-list-item title="title 3" secondary="secondary 3">
-    </fdp-display-list-item>
-    <fdp-display-list-item title="title 4" secondary="secondary 4" navigationIndicator="true">
-    </fdp-display-list-item>
-</fdp-list>
+        <fdp-list partialNavigation="true">
+            <fdp-display-list-item title="title 1" secondary="secondary 1" navigationIndicator="true">
+            </fdp-display-list-item>
+            <fdp-display-list-item title="title 2" secondary="secondary 2"> </fdp-display-list-item>
+            <fdp-display-list-item title="title 3" secondary="secondary 3"> </fdp-display-list-item>
+            <fdp-display-list-item title="title 4" secondary="secondary 4" navigationIndicator="true">
+            </fdp-display-list-item>
+        </fdp-list>
     `
 })
 class DisplayListItemComponentTest {
-
     @ViewChild(DisplayListItemComponent, { read: ElementRef, static: true })
     displayListElement: ElementRef;
-
 }
 
 describe('DisplayListItemComponent', () => {
     let component: DisplayListItemComponentTest;
     let fixture: ComponentFixture<DisplayListItemComponentTest>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
-            declarations: [DisplayListItemComponentTest]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
+                declarations: [DisplayListItemComponentTest]
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DisplayListItemComponentTest);
@@ -125,35 +122,37 @@ describe('DisplayListItemComponent', () => {
     });
 });
 
-
 describe('DisplayListItemComponent functions', () => {
     let component: DisplayListItemComponent;
     let fixture: ComponentFixture<DisplayListItemComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule]
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DisplayListItemComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
-
 });
-
 
 /**Impertive approach testing*/
 @Component({
     selector: 'fdp-test-display-list-item',
     template: `
-    <fdp-list partialNavigation="true">
-    <fdp-display-list-item *ngFor="let item of items" [title]="item.title"
-    [secondary]="item.secondary" [navigationIndicator]="item.navigationIndicator"></fdp-display-list-item>
-</fdp-list>
+        <fdp-list partialNavigation="true">
+            <fdp-display-list-item
+                *ngFor="let item of items"
+                [title]="item.title"
+                [secondary]="item.secondary"
+                [navigationIndicator]="item.navigationIndicator"
+            ></fdp-display-list-item>
+        </fdp-list>
     `
 })
 class TestComponentContent {
@@ -161,11 +160,11 @@ class TestComponentContent {
         { title: 'title 1', secondary: 'secondary 1', navigationIndicator: 'true' },
         { title: 'title 2', secondary: 'secondary 2' },
         { title: 'title 3', secondary: 'secondary 3' },
-        { title: 'title 4', secondary: 'secondary 4', navigationIndicator: 'true' }];
+        { title: 'title 4', secondary: 'secondary 4', navigationIndicator: 'true' }
+    ];
 
     @ViewChild(DisplayListItemComponent)
     displayListItem: DisplayListItemComponent;
-
 }
 
 describe('DisplayListItemComponent Imperative', () => {
@@ -173,12 +172,14 @@ describe('DisplayListItemComponent Imperative', () => {
     let component: DisplayListItemComponent;
     let fixture: ComponentFixture<TestComponentContent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
-            declarations: [TestComponentContent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [DisplayListItemModule, PlatformListModule, RouterTestingModule],
+                declarations: [TestComponentContent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponentContent);
@@ -197,7 +198,6 @@ describe('DisplayListItemComponent Imperative', () => {
     });
 
     it('should create display list items with given values', () => {
-
         const displayListElems = fixture.debugElement.queryAll(By.css('li'));
         expect(displayListElems.length).toEqual(4);
         displayListElems.forEach((listElem) => {
@@ -212,12 +212,10 @@ describe('DisplayListItemComponent Imperative', () => {
     });
 
     it('Title and secondary should to present for all Items', () => {
-
         const li0 = fixture.debugElement.queryAll(By.css('li'))[0];
         const displayElems0 = li0.queryAll(By.css('span'));
         expect(displayElems0[0].nativeElement.getAttribute('title')).toEqual('title 1');
         expect(displayElems0[1].nativeElement.getAttribute('title')).toEqual('secondary 1');
-
 
         const li1 = fixture.debugElement.queryAll(By.css('li'))[1];
         const displayElems1 = li1.queryAll(By.css('span'));
@@ -228,7 +226,6 @@ describe('DisplayListItemComponent Imperative', () => {
         const displayElems2 = li2.queryAll(By.css('span'));
         expect(displayElems2[0].nativeElement.getAttribute('title')).toEqual('title 3');
         expect(displayElems2[1].nativeElement.getAttribute('title')).toEqual('secondary 3');
-
 
         const li3 = fixture.debugElement.queryAll(By.css('li'))[3];
         const displayElems3 = li3.queryAll(By.css('span'));

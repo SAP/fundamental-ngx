@@ -3,7 +3,7 @@ import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class FlexibleColumnLayoutPo extends CoreBaseComponentPo {
     private url = '/flexible-column-layout';
-   
+
     defaultExample = 'fd-flexible-column-layout-example ';
     dynamicExample = 'fd-flexible-column-layout-dynamic-page-example ';
     separator = '.fd-flexible-column-layout__separator ';

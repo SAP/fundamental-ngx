@@ -70,6 +70,6 @@ export class PlatformDatePickerDocsComponent {
             code: datepickerFormatHtml,
             fileName: 'platform-date-picker-format-example',
             component: 'PlatformDatePickerFormatExampleComponent'
-        },
+        }
     ];
 }

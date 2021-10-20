@@ -4,10 +4,11 @@
     [displayFn]="displayFunc"
     [itemTemplate]="columnTemplate"
     [dropdownValues]="dropdownValues"
-    [(ngModel)]="searchTerm">
+    [(ngModel)]="searchTerm"
+>
 </fd-combobox>
 
-<small style="display: block;">Search Term: {{ searchTerm }}</small>
+<small style="display: block">Search Term: {{ searchTerm }}</small>
 
 <ng-template #columnTemplate let-item>
     <span fd-list-title>{{ item.name }}</span>

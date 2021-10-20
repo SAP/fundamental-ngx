@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
     styleUrls: ['./select-programmatic-example.component.scss']
 })
 export class SelectProgrammaticExampleComponent {
-
     options: string[] = ['Apple', 'Pineapple', 'Tomato', 'Strawberry'];
     selectedPosition = 0;
 
@@ -18,11 +17,10 @@ export class SelectProgrammaticExampleComponent {
     }
 
     getPosition(selectedValue: string): number {
-        return this.options.findIndex(item => selectedValue === item);
+        return this.options.findIndex((item) => selectedValue === item);
     }
 
     getNewValue(): string {
-
         this.selectedPosition = this.getPosition(this.selectedValue);
 
         if (this.selectedPosition < this.options.length - 1) {
@@ -32,8 +30,6 @@ export class SelectProgrammaticExampleComponent {
         }
 
         this.newValue = this.options[this.selectedPosition];
-        return this.selectedValue === this.newValue
-            ? this.getNewValue()
-            : this.newValue;
+        return this.selectedValue === this.newValue ? this.getNewValue() : this.newValue;
     }
 }

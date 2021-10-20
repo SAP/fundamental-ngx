@@ -55,7 +55,8 @@ let nextUniqueId = 0;
 })
 export class RadioGroupComponent
     extends InLineLayoutCollectionBaseInput
-    implements AfterViewInit, AfterContentChecked, OnDestroy {
+    implements AfterViewInit, AfterContentChecked, OnDestroy
+{
     /** Value of selected radio button */
     @Input('selected')
     get value(): any {
@@ -127,7 +128,15 @@ export class RadioGroupComponent
         @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
         readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig
     ) {
-        super(_cd, _responsiveBreakpointsService, ngControl, ngForm, formField, formControl, _defaultResponsiveBreakPointConfig);
+        super(
+            _cd,
+            _responsiveBreakpointsService,
+            ngControl,
+            ngForm,
+            formField,
+            formControl,
+            _defaultResponsiveBreakPointConfig
+        );
         this.id = `radio-group-${nextUniqueId++}`;
 
         // subscribe to _inlineCurrentValue in inline-layout-collection-base-input
@@ -174,7 +183,7 @@ export class RadioGroupComponent
         if (!this._validateRadioButtons()) {
             throw new Error('fdp-radio-button-group must contain a fdp-radio-button');
         }
-        this.contentRadioButtons.forEach((button) => (button.stateType = this.status));
+        this.contentRadioButtons.forEach((button) => (button.state = this.state));
         this._cd.markForCheck();
     }
 
@@ -234,7 +243,7 @@ export class RadioGroupComponent
 
             radioButtons.forEach((button, i) => {
                 if (this.list) {
-                    button.stateType = this.status;
+                    button.state = this.state;
                 } else {
                     this._setProperties(button);
                 }
@@ -306,7 +315,7 @@ export class RadioGroupComponent
         if (button) {
             button.name = this.name;
             button.contentDensity = this.contentDensity;
-            button.stateType = this.status;
+            button.state = this.state;
             button.disabled = button.disabled ? button.disabled : this._disabled;
         }
     }

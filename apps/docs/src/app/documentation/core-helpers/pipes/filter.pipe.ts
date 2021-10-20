@@ -9,9 +9,9 @@ export class FilterPipe implements PipeTransform {
             return values;
         }
         if (key) {
-            values = values.filter(item => item[key].toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()));
+            values = values.filter((item) => item[key].toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()));
         } else {
-            values = values.filter(item => item.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()));
+            values = values.filter((item) => item.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase()));
         }
         return values;
     }

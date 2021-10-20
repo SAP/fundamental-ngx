@@ -14,9 +14,7 @@ import { PopoverProgrammaticOpenExampleComponent } from './examples/popover-prog
 import { PopoverExampleComponent } from './examples/popover-simple/popover-example.component';
 
 import { PopoverComplexExampleComponent } from './examples/popover-complex-example/popover-complex-example.component';
-import {
-    PopoverContainerExampleComponent
-} from './examples/popover-container-example/popover-container-example.component';
+import { PopoverContainerExampleComponent } from './examples/popover-container-example/popover-container-example.component';
 import { PopoverScrollExampleComponent } from './examples/popover-scroll-example/popover-scroll-example.component';
 import { PopoverCdkPlacementExampleComponent } from './examples/popover-new-placement/popover-cdk-placement-example.component';
 import { PopoverFocusExampleComponent } from './examples/popover-focus-example/popover-focus-example.component';
@@ -78,7 +76,7 @@ const routes: Routes = [
         PopoverCdkPlacementExampleComponent,
         PopoverFocusExampleComponent,
         PopoverTriggerExampleComponent,
-        PopoverMobileExampleComponent,
+        PopoverMobileExampleComponent
     ]
 })
 export class PopoverDocsModule {}

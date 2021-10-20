@@ -19,7 +19,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ProductSwitchModule } from '@fundamental-ngx/core/product-switch';
 import { ShellbarSidenavDirective } from './shellbar-sidenav.directive';
 import { ShellbarActionsMobileComponent } from './shellbar-actions/shellbar-actions-mobile.component';
-import { AvatarModule } from '@fundamental-ngx/core/avatar'
+import { AvatarModule } from '@fundamental-ngx/core/avatar';
 
 @NgModule({
     declarations: [

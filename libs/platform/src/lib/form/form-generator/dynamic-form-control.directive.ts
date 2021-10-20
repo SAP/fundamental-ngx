@@ -14,7 +14,6 @@ import { FormGeneratorService } from './form-generator.service';
     selector: '[fdpDynamicFormControl]'
 })
 export class DynamicFormControlDirective implements OnInit {
-
     /**
      * @description @see DynamicFormItem
      */
@@ -39,18 +38,18 @@ export class DynamicFormControlDirective implements OnInit {
         private readonly _formGeneratorService: FormGeneratorService,
         private readonly _vcRef: ViewContainerRef,
         private readonly _cfRes: ComponentFactoryResolver
-    ) {
-    }
+    ) {}
 
     ngOnInit(): void {
-
         const foundComponent = this._formGeneratorService.getComponentDefinitionByType(this.formItem.type);
 
         if (!foundComponent) {
             return;
         }
 
-        const componentFactory = this._cfRes.resolveComponentFactory<BaseDynamicFormGeneratorControl>(foundComponent.component);
+        const componentFactory = this._cfRes.resolveComponentFactory<BaseDynamicFormGeneratorControl>(
+            foundComponent.component
+        );
 
         this._vcRef.clear();
 

@@ -23,15 +23,17 @@
 
         <fd-dialog-footer>
             <fd-button-bar
-                    *ngIf="mobileConfig?.approveButtonText"
-                    fdType="emphasized"
-                    [label]="mobileConfig?.approveButtonText"
-                    (click)="handleApprove()">
+                *ngIf="mobileConfig?.approveButtonText"
+                fdType="emphasized"
+                [label]="mobileConfig?.approveButtonText"
+                (click)="_handleApprove()"
+            >
             </fd-button-bar>
             <fd-button-bar
-                    *ngIf="mobileConfig?.cancelButtonText"
-                    [label]="mobileConfig?.cancelButtonText"
-                    (click)="handleDismiss()">
+                *ngIf="mobileConfig?.cancelButtonText"
+                [label]="mobileConfig?.cancelButtonText"
+                (click)="_handleDismiss()"
+            >
             </fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>

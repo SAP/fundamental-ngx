@@ -12,7 +12,7 @@ import { ValueStrategy } from './value-strategy.class';
  * @param obj object to get value from
  * @returns appropriate strategy to retrieve value from the object
  */
-export function selectStrategy(obj: Observable<any>|Promise<any>|Function): SubscriptionStrategy {
+export function selectStrategy(obj: Observable<any> | Promise<any> | Function): SubscriptionStrategy {
     if (isPromise(obj)) {
         return new PromiseStrategy();
     }

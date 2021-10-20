@@ -11,7 +11,6 @@ import { IconFont } from '@fundamental-ngx/core/icon';
     }
 })
 export class MicroProcessFlowIconComponent {
-
     /** The icon name to display. See the icon page for the list of icons
      * here: https://sap.github.io/fundamental-ngx/icon
      */

@@ -19,7 +19,7 @@ export class StepInputPo extends CoreBaseComponentPo {
     plusButton = this.button + ':nth-child(3)';
     text = 'small';
 
-    textForDisabledExample = this.formExample + 'div > div:nth-child(1) > table > tr:nth-child(1) > td:nth-child(2)'
+    textForDisabledExample = this.formExample + 'div > div:nth-child(1) > table > tr:nth-child(1) > td:nth-child(2)';
 
     open(): void {
         super.open(this.url);

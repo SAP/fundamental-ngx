@@ -1,11 +1,6 @@
 <main class="fd-page">
     <div *ngIf="true" class="fd-page__content fd-has-background-color-neutral-2">
-        <fdp-form-group
-            #fg2
-            [formGroup]="form"
-            mainTitle="XL3-L1-M1-S1"
-            columnLayout="XL3-L1-M1-S1"
-        >
+        <fdp-form-group #fg2 [formGroup]="form" mainTitle="XL3-L1-M1-S1" columnLayout="XL3-L1-M1-S1">
             <fdp-form-field
                 #ff1
                 id="basicTextarea12"
@@ -61,12 +56,7 @@
                 <fdp-textarea name="basicTextarea15" [formControl]="ff6.formControl"></fdp-textarea>
             </fdp-form-field>
         </fdp-form-group>
-        <fdp-form-group
-            #fg1
-            [formGroup]="form"
-            mainTitle="XL1-L1-M1-S1"
-            columnLayout="XL1-L1-M1-S1"
-        >
+        <fdp-form-group #fg1 [formGroup]="form" mainTitle="XL1-L1-M1-S1" columnLayout="XL1-L1-M1-S1">
             <fdp-form-field
                 #ff1
                 id="basicTextarea16"

@@ -24,6 +24,6 @@ export class ActionListItemPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'action-list-item'): any {
-       return super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

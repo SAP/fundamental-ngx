@@ -5,14 +5,14 @@
 }
 
 .fd-message-box__header {
-    [class*="sap-icon"] {
+    [class*='sap-icon'] {
         margin-right: 0.5rem;
     }
 }
 
-.fd-message-box__header[dir=rtl],
-[dir=rtl] .fd-message-box__header {
-    [class*="sap-icon"] {
+.fd-message-box__header[dir='rtl'],
+[dir='rtl'] .fd-message-box__header {
+    [class*='sap-icon'] {
         margin-right: 0;
         margin-left: 0.5rem;
     }

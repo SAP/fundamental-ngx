@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
     selector: 'fd-panel-compact-example',
     templateUrl: './panel-compact-example.component.html'
 })
-export class PanelCompactExampleComponent { }
+export class PanelCompactExampleComponent {}

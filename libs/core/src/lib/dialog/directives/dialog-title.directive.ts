@@ -17,7 +17,7 @@ export class DialogTitleDirective implements AfterViewInit {
     id = `fd-dialog-title-` + titleUniqueId++;
 
     /** @hidden */
-    constructor(@Optional() public dialogConfig: DialogConfig) { }
+    constructor(@Optional() public dialogConfig: DialogConfig) {}
 
     /** @hidden */
     ngAfterViewInit(): void {

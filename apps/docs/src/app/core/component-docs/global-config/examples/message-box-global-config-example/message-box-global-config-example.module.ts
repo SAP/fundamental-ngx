@@ -9,4 +9,4 @@ const DEFAULT_CONFIG: MessageBoxConfig = {
 @NgModule({
     providers: [{ provide: MESSAGE_BOX_DEFAULT_CONFIG, useValue: DEFAULT_CONFIG }]
 })
-class MessageBoxGlobalConfigExampleModule { }
+class MessageBoxGlobalConfigExampleModule {}

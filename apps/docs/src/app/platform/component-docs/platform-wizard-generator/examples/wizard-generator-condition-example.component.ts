@@ -3,14 +3,18 @@ import { Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { WizardDialogGeneratorService, WizardGeneratorFormsValue, WizardGeneratorItem, WizardTitle } from '@fundamental-ngx/platform/wizard-generator';
+import {
+    WizardDialogGeneratorService,
+    WizardGeneratorFormsValue,
+    WizardGeneratorItem,
+    WizardTitle
+} from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
-  selector: 'fdp-wizard-generator-condition-example',
-  templateUrl: './wizard-generator-condition-example.component.html'
+    selector: 'fdp-wizard-generator-condition-example',
+    templateUrl: './wizard-generator-condition-example.component.html'
 })
 export class WizardGeneratorConditionExampleComponent implements OnDestroy {
-
     wizardTitle: WizardTitle = {
         size: 2,
         text: 'Checkout'
@@ -89,7 +93,8 @@ export class WizardGeneratorConditionExampleComponent implements OnDestroy {
         {
             name: 'Credit Card Details',
             id: 'creditCardStep',
-            when: (_completedSteps, answers) => answers.paymentMethodStep?.paymentMethodForm?.paymentMethod === 'Credit Card',
+            when: (_completedSteps, answers) =>
+                answers.paymentMethodStep?.paymentMethodForm?.paymentMethod === 'Credit Card',
             dependencyFields: {
                 paymentMethodStep: {
                     paymentMethodForm: ['paymentMethod']
@@ -113,7 +118,8 @@ export class WizardGeneratorConditionExampleComponent implements OnDestroy {
         {
             name: 'Bank Details',
             id: 'bankDetailsStep',
-            when: (_completedSteps, answers) => answers.paymentMethodStep?.paymentMethodForm?.paymentMethod === 'Bank Transfer',
+            when: (_completedSteps, answers) =>
+                answers.paymentMethodStep?.paymentMethodForm?.paymentMethod === 'Bank Transfer',
             dependencyFields: {
                 paymentMethodStep: {
                     paymentMethodForm: ['paymentMethod']
@@ -138,8 +144,10 @@ export class WizardGeneratorConditionExampleComponent implements OnDestroy {
             name: 'Discount',
             id: 'discountStep',
             when: (_completedSteps, answers) => {
-                return answers.paymentMethodStep?.paymentMethodForm?.paymentMethod === 'Bank Transfer' ||
-                answers.paymentMethodStep?.paymentMethodForm?.paymentMethod === 'Credit Card';
+                return (
+                    answers.paymentMethodStep?.paymentMethodForm?.paymentMethod === 'Bank Transfer' ||
+                    answers.paymentMethodStep?.paymentMethodForm?.paymentMethod === 'Credit Card'
+                );
             },
             formGroups: [
                 {
@@ -173,25 +181,29 @@ export class WizardGeneratorConditionExampleComponent implements OnDestroy {
     }
 
     openDialog(): void {
-        this._wizardDialogService.open({
-            width: '100%',
-            height: '100%',
-            verticalPadding: false,
-            data: {
-                items: this.stepItems,
-                appendToWizard: false,
-                displaySummaryStep: true,
-                responsivePaddings: true,
-                title: this.wizardTitle
-            }
-        }).afterClosed.pipe(takeUntil(this._onDestroy$))
-        .subscribe((wizardValue: WizardGeneratorFormsValue) => {
-            this.wizardValue = wizardValue;
-        }, () => {});
+        this._wizardDialogService
+            .open({
+                width: '100%',
+                height: '100%',
+                verticalPadding: false,
+                data: {
+                    items: this.stepItems,
+                    appendToWizard: false,
+                    displaySummaryStep: true,
+                    responsivePaddings: true,
+                    title: this.wizardTitle
+                }
+            })
+            .afterClosed.pipe(takeUntil(this._onDestroy$))
+            .subscribe(
+                (wizardValue: WizardGeneratorFormsValue) => {
+                    this.wizardValue = wizardValue;
+                },
+                () => {}
+            );
     }
 
     wizardFinished(wizardValue: WizardGeneratorFormsValue): void {
         this.wizardValue = wizardValue;
     }
-
 }

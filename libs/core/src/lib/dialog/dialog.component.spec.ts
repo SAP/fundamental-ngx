@@ -47,16 +47,18 @@ describe('DialogComponent', () => {
     const mockRouter = { events: routerEventsSubject.asObservable() };
     let router: Router;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [TestModule, RouterModule, RouterTestingModule],
-            providers: [
-                { provide: DialogRef, useValue: dialogRef },
-                { provide: DialogConfig, useValue: dialogConfig },
-                { provide: Router, useValue: mockRouter }
-            ]
-        });
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [TestModule, RouterModule, RouterTestingModule],
+                providers: [
+                    { provide: DialogRef, useValue: dialogRef },
+                    { provide: DialogConfig, useValue: dialogConfig },
+                    { provide: Router, useValue: mockRouter }
+                ]
+            });
+        })
+    );
 
     function setup(providers: { token: any; provider: { useValue: any } }[] = []): void {
         providers.forEach((provider) => TestBed.overrideProvider(provider.token, provider.provider));
@@ -67,7 +69,7 @@ describe('DialogComponent', () => {
         fixture.detectChanges();
         dialogService = TestBed.inject<DialogService>(DialogService);
         dialogComponent = fixture.componentInstance.dialog;
-        router = TestBed.inject(Router)
+        router = TestBed.inject(Router);
     }
 
     it('should create', () => {

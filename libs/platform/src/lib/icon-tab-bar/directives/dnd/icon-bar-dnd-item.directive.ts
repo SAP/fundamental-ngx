@@ -7,7 +7,6 @@ import { IconBarDndListDirective } from './icon-bar-dnd-list.directive';
 import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 
-
 export interface ElementChord {
     x: number;
     y: number;
@@ -19,7 +18,6 @@ export interface ElementChord {
     selector: '[fdpIconBarDndItem], [fdp-icon-bar-dnd-item]'
 })
 export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
-
     /**
      * @description Tab info
      */
@@ -42,7 +40,10 @@ export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
      * @description Classes for separator, when draggable element between two tabs
      */
     @Input()
-    dndSeparatorClass: string[] = ['fd-icon-tab-bar__item--dnd-separator', 'fd-icon-tab-bar__item--dnd-separator-vertical'];
+    dndSeparatorClass: string[] = [
+        'fd-icon-tab-bar__item--dnd-separator',
+        'fd-icon-tab-bar__item--dnd-separator-vertical'
+    ];
 
     /**
      * @description Event thrown when the element is moved by 1px
@@ -77,8 +78,7 @@ export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
         protected _dragDrop: DragDrop,
         private _dndListDir: IconBarDndListDirective,
         private _dndContainerDir: IconBarDndContainerDirective
-    ) {
-    }
+    ) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -124,7 +124,6 @@ export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
         };
     }
 
-
     /**
      * @description Add/delete separator classes
      */
@@ -153,14 +152,10 @@ export class IconBarDndItemDirective implements AfterViewInit, OnDestroy {
 
         this.dragRef.moved
             .pipe(takeUntil(this._onDestroy$))
-            .subscribe(event => this.onCdkMove(event.pointerPosition));
+            .subscribe((event) => this.onCdkMove(event.pointerPosition));
 
-        this.dragRef.released
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(() => this.onCdkDragReleased());
+        this.dragRef.released.pipe(takeUntil(this._onDestroy$)).subscribe(() => this.onCdkDragReleased());
 
-        this.dragRef.started
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(() => this.onCdkDragStart());
+        this.dragRef.started.pipe(takeUntil(this._onDestroy$)).subscribe(() => this.onCdkDragStart());
     }
 }

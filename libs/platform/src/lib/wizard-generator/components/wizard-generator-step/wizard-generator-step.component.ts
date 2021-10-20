@@ -30,17 +30,16 @@ export interface WizardStepForms {
     [key: string]: {
         title: string;
         form: DynamicFormGroup;
-    }
+    };
 }
 
 @Component({
-  selector: 'fdp-wizard-generator-step',
-  templateUrl: './wizard-generator-step.component.html',
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'fdp-wizard-generator-step',
+    templateUrl: './wizard-generator-step.component.html',
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WizardGeneratorStepComponent implements OnDestroy {
-
     /**
      * @description Step forms components.
      */
@@ -86,18 +85,16 @@ export class WizardGeneratorStepComponent implements OnDestroy {
     /**
      * @hidden
      */
-    private _trackedFields: {[key: string]: string[]};
+    private _trackedFields: { [key: string]: string[] };
 
     /**
      * @hidden
      * An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)
      */
-     private readonly _onDestroy$: Subject<void> = new Subject<void>();
+    private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
     /** @hidden */
-    constructor(
-        private _wizardGeneratorService: WizardGeneratorService
-    ) { }
+    constructor(private _wizardGeneratorService: WizardGeneratorService) {}
 
     /**
      * @hidden
@@ -115,7 +112,7 @@ export class WizardGeneratorStepComponent implements OnDestroy {
      */
     async onFormCreated(form: DynamicFormGroup, key: string): Promise<void> {
         this._forms[key] = {
-            title: (this.item.formGroups.find(g => g.id === key)?.title) as string,
+            title: this.item.formGroups.find((g) => g.id === key)?.title as string,
             form: form
         };
 
@@ -142,7 +139,6 @@ export class WizardGeneratorStepComponent implements OnDestroy {
      * @param index Form index in the step.
      */
     onFormSubmitted(result: SubmitFormEventResult, index: string): void {
-
         this._submittedForms[index] = result;
 
         if (Object.keys(this._submittedForms).length === this.forms.length) {
@@ -171,7 +167,6 @@ export class WizardGeneratorStepComponent implements OnDestroy {
      * @returns Subject, which will return forms value.
      */
     submitForms(skipIfUntouched = false): Subject<WizardStepSubmittedForms | null> {
-
         if (skipIfUntouched && !this._wizardGeneratorService.stepSubmitted(this.item.id)) {
             setTimeout(() => {
                 this._formSubmitted$.next(null);
@@ -183,7 +178,7 @@ export class WizardGeneratorStepComponent implements OnDestroy {
         this._submittedForms = {};
 
         setTimeout(() => {
-            this.forms.forEach(formComponent => {
+            this.forms.forEach((formComponent) => {
                 formComponent.submit();
             });
         });
@@ -202,10 +197,7 @@ export class WizardGeneratorStepComponent implements OnDestroy {
 
         if (this._trackedFields && this._trackedFields[key]) {
             for (const control of Object.values(form.controls)) {
-
-                control.valueChanges
-                .pipe(debounceTime(50), takeUntil(this._onDestroy$))
-                .subscribe(async () => {
+                control.valueChanges.pipe(debounceTime(50), takeUntil(this._onDestroy$)).subscribe(async () => {
                     await this._wizardGeneratorService.refreshStepVisibility();
                 });
             }

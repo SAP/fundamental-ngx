@@ -12,9 +12,7 @@
         </fd-shellbar-logo>
         <fd-product-menu [control]="productMenuControl" [closePopoverOnSelect]="true" [items]="productMenuItems">
         </fd-product-menu>
-        <fd-shellbar-subtitle>
-            Subtitle
-        </fd-shellbar-subtitle>
+        <fd-shellbar-subtitle> Subtitle </fd-shellbar-subtitle>
         <fd-shellbar-actions [user]="user" [userMenu]="userMenu">
             <fd-shellbar-action
                 *ngFor="let action of actions"
@@ -26,9 +24,7 @@
             >
             </fd-shellbar-action>
             <fd-product-switch>
-                <fd-product-switch-body
-                    [products]="productSwitcher"
-                    [forceListMode]="currentSize === 's'">
+                <fd-product-switch-body [products]="productSwitcher" [forceListMode]="currentSize === 's'">
                 </fd-product-switch-body>
             </fd-product-switch>
             <fd-combobox

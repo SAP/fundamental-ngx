@@ -10,19 +10,10 @@ import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
 })
 export class ComboboxStateComponent {
-    dataSource = [
-        'Apple',
-        'Banana',
-        'Pineapple',
-        'Strawberry',
-        'Broccoli',
-        'Carrot',
-        'Jalapeño',
-        'Spinach'
-    ];
+    dataSource = ['Apple', 'Banana', 'Pineapple', 'Strawberry', 'Broccoli', 'Carrot', 'Jalapeño', 'Spinach'];
 
-    states = ['success', 'error', 'warning', 'information'];
-    selectedState: string = null;
+    states = ['Default', 'Success', 'Error', 'Warning', 'Information'];
+    selectedState = this.states[0];
 
     onSelectState(item: ComboboxSelectionChangeEvent): void {
         this.selectedState = item.payload;

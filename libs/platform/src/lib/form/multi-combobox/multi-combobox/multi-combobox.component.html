@@ -52,10 +52,12 @@
             [class]="isCompact ? 'fdp-multi-combobox-tokenizer-custom--compact' : ''"
             (moreClickedEvent)="moreClicked()"
         >
-            <fd-token [compact]="isCompact"
-                      [readOnly]="disabled"
-                      (onCloseClick)="removeToken(token, $event)"
-                      *ngFor="let token of _selected">
+            <fd-token
+                [compact]="isCompact"
+                [readOnly]="disabled"
+                (onCloseClick)="removeToken(token, $event)"
+                *ngFor="let token of _selected"
+            >
                 {{ token.label }}
             </fd-token>
 
@@ -193,7 +195,8 @@
                     <fd-checkbox
                         [compact]="isCompact"
                         (ngModelChange)="toggleSelection(optionItem)"
-                        [ngModel]="optionItem.selected">
+                        [ngModel]="optionItem.selected"
+                    >
                     </fd-checkbox>
                     <ng-container
                         [ngTemplateOutlet]="listItem"
@@ -216,7 +219,8 @@
                 <fd-checkbox
                     [compact]="isCompact"
                     (ngModelChange)="toggleSelection(optionItem)"
-                    [ngModel]="optionItem.selected">
+                    [ngModel]="optionItem.selected"
+                >
                 </fd-checkbox>
                 <ng-container
                     [ngTemplateOutlet]="listItem"
@@ -249,7 +253,11 @@
 
 <ng-template let-optionItem="optionItem" let-index="index" #optionItemSource>
     <ng-container *ngIf="!optionItemTemplate">
-        <span fd-list-title [attr.title]="optionItem.label" [innerHTML]="optionItem.label | highlight: inputText"></span>
+        <span
+            fd-list-title
+            [attr.title]="optionItem.label"
+            [innerHTML]="optionItem.label | highlight: inputText"
+        ></span>
     </ng-container>
 
     <ng-container *ngIf="optionItemTemplate">
@@ -285,7 +293,10 @@
         *ngIf="isSearchInvalid"
         type="error"
         [embedded]="isOpen"
-        i18n="multi-combobox search error message|The error message for this multi-combobox @@platformI18nMultiComboboxSearchErrorMessage">
+        i18n="
+            multi-combobox search error message|The error message for this multi-combobox
+            @@platformI18nMultiComboboxSearchErrorMessage"
+    >
         Invalid entry
     </fd-form-message>
 </ng-template>

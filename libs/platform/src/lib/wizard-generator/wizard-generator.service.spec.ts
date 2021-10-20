@@ -10,104 +10,103 @@ import { WizardGeneratorItem } from './interfaces/wizard-generator-item.interfac
 
 let shouldShow = false;
 
-const TEST_ITEMS: WizardGeneratorItem[] = [{
-    name: () => 'Product type',
-    id: 'productTypeStep',
-    formGroups: [
-        {
-            title: '1. Product Type',
-            id: 'productType',
-            formItems: [
-                {
-                    name: 'product',
-                    message: 'Select appropriate product type',
-                    type: 'select',
-                    choices: ['Mobile', 'Tablet', 'Desktop'],
-                    validators: [Validators.required]
-                }
-            ]
-        }
-    ]
-},
-{
-    name: 'Summary',
-    id: 'summary',
-    summary: true
-},
-{
-    name: 'Customer information',
-    id: 'customerInformationStep',
-    formGroups: [
-        {
-            title: '2. Customer Information',
-            id: 'customerInformation',
-            formItems: [
-                {
-                    name: 'name',
-                    message: 'Name',
-                    type: 'input',
-                    validators: [Validators.required]
-                },
-                {
-                    name: 'address',
-                    message: 'Address Line 1',
-                    type: 'input',
-                    validators: [Validators.required]
-                },
-                {
-                    name: 'address2',
-                    message: 'Address Line 2',
-                    type: 'input'
-                }
-            ]
-        }
-    ]
-},
-{
-    name: 'Payment method',
-    id: 'paymentMethodStep',
-    when: () => shouldShow,
-    formGroups: [
-        {
-            title: '3. Payment method',
-            id: 'paymentMethodForm',
-            formItems: [
-                {
-                    name: 'paymentMethod',
-                    message: 'Select appropriate payment method',
-                    type: 'select',
-                    choices: ['Credit Card', 'Bank Transfer'],
-                    validators: [Validators.required]
-                }
-            ]
-        }
-    ]
-}];
+const TEST_ITEMS: WizardGeneratorItem[] = [
+    {
+        name: () => 'Product type',
+        id: 'productTypeStep',
+        formGroups: [
+            {
+                title: '1. Product Type',
+                id: 'productType',
+                formItems: [
+                    {
+                        name: 'product',
+                        message: 'Select appropriate product type',
+                        type: 'select',
+                        choices: ['Mobile', 'Tablet', 'Desktop'],
+                        validators: [Validators.required]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        name: 'Summary',
+        id: 'summary',
+        summary: true
+    },
+    {
+        name: 'Customer information',
+        id: 'customerInformationStep',
+        formGroups: [
+            {
+                title: '2. Customer Information',
+                id: 'customerInformation',
+                formItems: [
+                    {
+                        name: 'name',
+                        message: 'Name',
+                        type: 'input',
+                        validators: [Validators.required]
+                    },
+                    {
+                        name: 'address',
+                        message: 'Address Line 1',
+                        type: 'input',
+                        validators: [Validators.required]
+                    },
+                    {
+                        name: 'address2',
+                        message: 'Address Line 2',
+                        type: 'input'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        name: 'Payment method',
+        id: 'paymentMethodStep',
+        when: () => shouldShow,
+        formGroups: [
+            {
+                title: '3. Payment method',
+                id: 'paymentMethodForm',
+                formItems: [
+                    {
+                        name: 'paymentMethod',
+                        message: 'Select appropriate payment method',
+                        type: 'select',
+                        choices: ['Credit Card', 'Bank Transfer'],
+                        validators: [Validators.required]
+                    }
+                ]
+            }
+        ]
+    }
+];
 
 @Component({
     template: `
-    <ng-container *ngIf="wizardCreated">
-        <fdp-wizard-body
-            [navigationButtonLabels]="navigationButtonLabels"
-            [hidden]="!wizardCreated"
-            [appendToWizard]="appendToWizard"
-            [contentHeight]="contentHeight"
-            [isFirstStep]="isFirstStep"
-            [isLastStep]="isLastStep"
-            [isSummaryStep]="isSummaryStep"
-            (statusChange)="stepStatusChanged($event.id, $event.status)"
-            (goNext)="goNext()"
-            (finish)="finish()"
-        ></fdp-wizard-body>
-    </ng-container>
+        <ng-container *ngIf="wizardCreated">
+            <fdp-wizard-body
+                [navigationButtonLabels]="navigationButtonLabels"
+                [hidden]="!wizardCreated"
+                [appendToWizard]="appendToWizard"
+                [contentHeight]="contentHeight"
+                [isFirstStep]="isFirstStep"
+                [isLastStep]="isLastStep"
+                [isSummaryStep]="isSummaryStep"
+                (statusChange)="stepStatusChanged($event.id, $event.status)"
+                (goNext)="goNext()"
+                (finish)="finish()"
+            ></fdp-wizard-body>
+        </ng-container>
     `,
     providers: [WizardGeneratorService]
 })
 class WizardGeneratorTestComponent extends BaseWizardGenerator {
-    constructor(
-        public wizardGeneratorService: WizardGeneratorService,
-        _cd: ChangeDetectorRef
-    ) {
+    constructor(public wizardGeneratorService: WizardGeneratorService, _cd: ChangeDetectorRef) {
         super(wizardGeneratorService, _cd);
     }
 }
@@ -134,7 +133,6 @@ describe('WizardGeneratorService', () => {
     });
 
     it('should transform items', async () => {
-
         const prepareSpy = spyOn(service, 'prepareWizardItems').and.callThrough();
         const visibilitySpy = spyOn(service, 'refreshStepVisibility').and.callThrough();
 
@@ -170,11 +168,10 @@ describe('WizardGeneratorService', () => {
 
         const visibleItems = service.visibleWizardSteps;
 
-        expect(visibleItems.findIndex(i => i.id === 'paymentMethodStep')).toEqual(-1);
+        expect(visibleItems.findIndex((i) => i.id === 'paymentMethodStep')).toEqual(-1);
     });
 
     it('should return visible steps in observable', async (done) => {
-
         service.getVisibleSteps().subscribe((steps) => {
             expect(steps.length).toEqual(3);
             done();
@@ -197,7 +194,7 @@ describe('WizardGeneratorService', () => {
         expect(service.getCurrentStepIndex()).toEqual(1);
     });
 
-    it('should set visible steps', async(done) => {
+    it('should set visible steps', async (done) => {
         const items = await service.prepareWizardItems(TEST_ITEMS);
         service.getVisibleSteps().subscribe((steps) => {
             expect(steps.length).toEqual(4);
@@ -207,7 +204,7 @@ describe('WizardGeneratorService', () => {
         service.setVisibleSteps(items);
     });
 
-    it('should clear steps components', async(done) => {
+    it('should clear steps components', async (done) => {
         await service.prepareWizardItems(TEST_ITEMS);
 
         service.trackStepsComponents().subscribe((components) => {
@@ -218,7 +215,7 @@ describe('WizardGeneratorService', () => {
         service.clearWizardStepComponents();
     });
 
-    it('should refresh steps visibility and show new step', async() => {
+    it('should refresh steps visibility and show new step', async () => {
         await service.prepareWizardItems(TEST_ITEMS);
 
         shouldShow = true;

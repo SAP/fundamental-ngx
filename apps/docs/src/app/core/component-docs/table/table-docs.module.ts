@@ -37,14 +37,13 @@ import { PaginationModule } from '@fundamental-ngx/core/pagination';
 import { ObjectStatusModule } from '@fundamental-ngx/core/object-status';
 import { BusyIndicatorModule } from '@fundamental-ngx/core/busy-indicator';
 
-
 const routes: Routes = [
     {
         path: '',
         component: TableDocsHeaderComponent,
         children: [
-            {path: '', component: TableDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.table}}
+            { path: '', component: TableDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.table } }
         ]
     }
 ];
@@ -89,9 +88,6 @@ const routes: Routes = [
         TableFocusableExampleComponent,
         TableNavigatableRowExampleComponent
     ],
-    entryComponents: [
-        TableCustomDialogComponent
-    ]
+    entryComponents: [TableCustomDialogComponent]
 })
-export class TableDocsModule {
-}
+export class TableDocsModule {}

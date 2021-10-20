@@ -22,17 +22,17 @@ export class FlexibleColumnLayoutExampleComponent {
     /**
      * documentation related property
      * sets the initial layout of the component to 'OneColumnStartFullScreen'
-     * sets a new layout for the component 
+     * sets a new layout for the component
      */
     localLayout = 'OneColumnStartFullScreen';
 
     /**
-     * this function is reacting to events (button clicks) and 
+     * this function is reacting to events (button clicks) and
      * updates the local property which sets a new layout for the component.
      * Available values for the layouts include:
      * 'OneColumnStartFullScreen' | 'OneColumnMidFullScreen' | 'OneColumnEndFullScreen' |
-     * 'TwoColumnsStartExpanded' | 'TwoColumnsMidExpanded' | 'TwoColumnsEndExpanded' | 
-     * 'ThreeColumnsMidExpanded' | 'ThreeColumnsEndExpanded' | 'ThreeColumnsStartMinimized' | 
+     * 'TwoColumnsStartExpanded' | 'TwoColumnsMidExpanded' | 'TwoColumnsEndExpanded' |
+     * 'ThreeColumnsMidExpanded' | 'ThreeColumnsEndExpanded' | 'ThreeColumnsStartMinimized' |
      * 'ThreeColumnsEndMinimized';
      */
     changeLayout(newValue: string): void {
@@ -47,7 +47,7 @@ export class FlexibleColumnLayoutExampleComponent {
         this.fullscreen = true;
         this.overlay.nativeElement.style.width = '100%';
     }
-    
+
     /**
      * documentation related function
      * exits the full screen mode of the example

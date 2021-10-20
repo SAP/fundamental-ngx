@@ -20,7 +20,6 @@ export const HIDDEN_CLASS_NAME = 'fd-table--hidden';
     selector: '[fdTableRow], [fd-table-row]'
 })
 export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
-
     /** @hidden */
     @ContentChildren(TableCellDirective)
     cells: QueryList<TableCellDirective>;
@@ -58,15 +57,12 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     propagateKeysSubscription: Subscription;
 
     /** @hidden */
-    constructor(
-        private _changeDetRef: ChangeDetectorRef,
-        private _tableService: TableService
-    ) {}
+    constructor(private _changeDetRef: ChangeDetectorRef, private _tableService: TableService) {}
 
     /** @hidden */
     ngOnInit(): void {
-        this.propagateKeysSubscription = this._tableService.propagateKeys$.subscribe(
-            (keys: string[]) => this._resetCells(keys)
+        this.propagateKeysSubscription = this._tableService.propagateKeys$.subscribe((keys: string[]) =>
+            this._resetCells(keys)
         );
     }
 
@@ -83,10 +79,9 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
     /** @hidden */
     private _resetCells(keys: string[]): void {
         if (this.cells && keys && keys.length > 0) {
-
             this._changeVisibility(keys);
 
-            const sortedCells = this.cells.toArray().sort(((a, b) => this._sortMethod(a, b, keys)));
+            const sortedCells = this.cells.toArray().sort((a, b) => this._sortMethod(a, b, keys));
 
             this.cells.reset(sortedCells);
 
@@ -98,8 +93,7 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
 
     /** @hidden */
     private _sortMethod(a: TableCellDirective, b: TableCellDirective, keys: string[]): number {
-        if (keys.findIndex(_key => _key === a.key) <
-            keys.findIndex(_key => _key === b.key)) {
+        if (keys.findIndex((_key) => _key === a.key) < keys.findIndex((_key) => _key === b.key)) {
             return -1;
         } else {
             return 1;
@@ -108,20 +102,22 @@ export class TableRowDirective implements AfterViewInit, OnDestroy, OnInit {
 
     /** @hidden */
     private _sortNativeElements(): void {
-        this.cells.forEach(cell =>
+        this.cells.forEach((cell) =>
             cell.elementRef.nativeElement.parentNode.appendChild(cell.elementRef.nativeElement)
         );
     }
 
     /** @hidden */
     private _changeVisibility(keys: string[]): void {
-        this.cells.forEach(cell => cell.elementRef.nativeElement.classList.remove(HIDDEN_CLASS_NAME));
-        const notFoundElements: TableCellDirective[] = this.cells.filter(cell => !keys.find(key => key === cell.key));
+        this.cells.forEach((cell) => cell.elementRef.nativeElement.classList.remove(HIDDEN_CLASS_NAME));
+        const notFoundElements: TableCellDirective[] = this.cells.filter(
+            (cell) => !keys.find((key) => key === cell.key)
+        );
         notFoundElements.forEach(this._hideElement);
     }
 
     /** @hidden */
     private _hideElement(element: TableCellDirective): void {
-        element.elementRef.nativeElement.classList.add(HIDDEN_CLASS_NAME)
+        element.elementRef.nativeElement.classList.add(HIDDEN_CLASS_NAME);
     }
 }

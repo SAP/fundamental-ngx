@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 
 export abstract class DynamicComponentContainer<T = TemplateRef<any> | Type<any>> {
-
     /** @hidden */
     abstract containerRef: ViewContainerRef;
 
@@ -20,10 +19,7 @@ export abstract class DynamicComponentContainer<T = TemplateRef<any> | Type<any>
     protected _componentRef: ComponentRef<any> | EmbeddedViewRef<any>;
 
     /** @hidden */
-    constructor(
-        protected _elementRef: ElementRef,
-        protected _componentFactoryResolver: ComponentFactoryResolver
-    ) {}
+    constructor(protected _elementRef: ElementRef, protected _componentFactoryResolver: ComponentFactoryResolver) {}
 
     /** @hidden Load received content */
     protected abstract _loadContent(): void;

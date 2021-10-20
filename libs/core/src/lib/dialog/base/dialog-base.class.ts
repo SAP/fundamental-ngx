@@ -1,4 +1,13 @@
-import { AfterViewInit, ChangeDetectorRef, Directive, ElementRef, HostBinding, HostListener, OnDestroy, OnInit } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    Directive,
+    ElementRef,
+    HostBinding,
+    HostListener,
+    OnDestroy,
+    OnInit
+} from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { fromEvent, Subscription } from 'rxjs';
@@ -12,7 +21,6 @@ import { DialogSize, dialogWidthToSize } from '../utils/dialog-width-to-size';
 
 @Directive()
 export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
-
     /**
      * @hidden
      */
@@ -66,7 +74,7 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
     ngOnInit(): void {
         this._listenAndCloseOnNavigation();
         this._subscriptions.add(
-            this._rtlService?.rtl.subscribe(isRtl => {
+            this._rtlService?.rtl.subscribe((isRtl) => {
                 this._dir = isRtl ? 'rtl' : 'ltr';
                 this._changeDetectorRef.detectChanges();
             })
@@ -89,7 +97,6 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
         this._subscriptions.unsubscribe();
     }
 
-
     /** @hidden Determine dialog padding size based on dialogs window width */
     adjustResponsivePadding(): void {
         if (this._config.responsivePadding) {
@@ -103,9 +110,9 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
     private _listenAndCloseOnNavigation(): void {
         if (this._router) {
             this._subscriptions.add(
-                this._router.events.pipe(
-                    filter(event => event instanceof NavigationStart && this._config.closeOnNavigation)
-                ).subscribe(() => this._ref.dismiss())
+                this._router.events
+                    .pipe(filter((event) => event instanceof NavigationStart && this._config.closeOnNavigation))
+                    .subscribe(() => this._ref.dismiss())
             );
         }
     }
@@ -114,7 +121,6 @@ export abstract class DialogBase implements OnInit, AfterViewInit, OnDestroy {
     private _trapFocus(): void {
         if (this._config.focusTrapped) {
             try {
-
                 this._focusTrapId = this._focusTrapService.createFocusTrap(this.dialogWindow.nativeElement, {
                     clickOutsideDeactivates: this._config.backdropClickCloseable && this._config.hasBackdrop,
                     escapeDeactivates: false,

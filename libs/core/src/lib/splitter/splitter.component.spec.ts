@@ -11,9 +11,7 @@ import { SplitterModule } from './splitter.module';
     template: `
         <fd-splitter>
             <fd-splitter-pane-container>
-                <fd-splitter-split-pane #paneOne [id]="paneOneId">
-                    Pane {{ paneOneId }}
-                </fd-splitter-split-pane>
+                <fd-splitter-split-pane #paneOne [id]="paneOneId"> Pane {{ paneOneId }} </fd-splitter-split-pane>
             </fd-splitter-pane-container>
         </fd-splitter>
     `
@@ -33,12 +31,14 @@ describe('SplitterComponent', () => {
     let splitterComponent: SplitterComponent;
     let fixture: ComponentFixture<SplitterHostComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [SplitterHostComponent],
-            imports: [SplitterModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [SplitterHostComponent],
+                imports: [SplitterModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(SplitterHostComponent);

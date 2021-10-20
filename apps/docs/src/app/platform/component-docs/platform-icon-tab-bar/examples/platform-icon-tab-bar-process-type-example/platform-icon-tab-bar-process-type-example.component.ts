@@ -8,7 +8,6 @@ import { TabConfig } from '../../platform-icon-tab-bar-docs.component';
     templateUrl: './platform-icon-tab-bar-process-type-example.component.html'
 })
 export class PlatformIconTabBarProcessTypeExampleComponent implements OnInit {
-
     @Input()
     withOverflowExample = false;
 

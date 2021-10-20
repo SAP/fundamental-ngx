@@ -15,7 +15,6 @@ import { MicroProcessFlowComponent } from './micro-process-flow.component';
     `
 })
 class TestWrapperComponent {
-
     @ViewChild('microProcessFlow') microProcessFlow: MicroProcessFlowComponent;
 
     items = new Array(50);
@@ -27,10 +26,9 @@ describe('MicroProcessFlowComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-        declarations: [TestWrapperComponent],
-        imports: [MicroProcessFlowModule]
-        })
-        .compileComponents();
+            declarations: [TestWrapperComponent],
+            imports: [MicroProcessFlowModule]
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -47,7 +45,9 @@ describe('MicroProcessFlowComponent', () => {
         component.microProcessFlow.goNext();
         fixture.detectChanges();
 
-        const previousItemsCount = fixture.nativeElement.querySelector('.fd-micro-process-flow__link-previous').innerText;
+        const previousItemsCount = fixture.nativeElement.querySelector(
+            '.fd-micro-process-flow__link-previous'
+        ).innerText;
         expect(previousItemsCount).toEqual('1');
         expect(component.microProcessFlow.previousItemsCount).toEqual(1);
     });

@@ -15,7 +15,7 @@ import { sections, messageTypes, playgroundStates } from '../fixtures/appData/me
 import { customMessage, customWidth } from '../fixtures/testData/message-strip';
 import { MessageStripPo } from '../pages/message-strip.po';
 
-describe('Message-strip test suite', function() {
+describe('Message-strip test suite', () => {
     const messageStripPage = new MessageStripPo();
     const {
         noIconExample,
@@ -42,7 +42,6 @@ describe('Message-strip test suite', function() {
         refreshPage();
         waitForElDisplayed(messageStripPage.title);
     }, 1);
-
 
     it('should check message-box status', () => {
         for (let i = 0; i < sections.length; i++) {
@@ -81,7 +80,6 @@ describe('Message-strip test suite', function() {
     });
 
     describe('playground constructor test', () => {
-
         it('should check choosing states of message-strip', () => {
             for (let i = 0; i < playgroundStates.length; i++) {
                 click(typeSelectionField);

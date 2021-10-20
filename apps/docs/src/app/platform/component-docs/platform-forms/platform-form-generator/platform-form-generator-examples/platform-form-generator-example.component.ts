@@ -1,7 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import {
+    DatetimeAdapter,
+    DATE_TIME_FORMATS,
+    FdDate,
+    FdDatetimeAdapter,
+    FD_DATETIME_FORMATS
+} from '@fundamental-ngx/core/datetime';
 import { DynamicFormItem, DynamicFormValue, FormGeneratorComponent } from '@fundamental-ngx/platform/form';
 
 export const dummyAwaitablePromise = (timeout = 200) => {
@@ -29,7 +35,6 @@ export const dummyAwaitablePromise = (timeout = 200) => {
     ]
 })
 export class PlatformFormGeneratorExampleComponent {
-
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;
 
     loading = false;
@@ -49,7 +54,6 @@ export class PlatformFormGeneratorExampleComponent {
                 column: 1
             },
             validate: async (value) => {
-
                 await dummyAwaitablePromise();
 
                 return value === 'John' ? null : 'Your name should be John';
@@ -68,7 +72,9 @@ export class PlatformFormGeneratorExampleComponent {
             validators: [Validators.required],
             validate: (value: string) => {
                 const passwordPattern = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\\w\\s]).{8,}$');
-                return passwordPattern.test(value) ? null : 'Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character'
+                return passwordPattern.test(value)
+                    ? null
+                    : 'Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character';
             },
             guiOptions: {
                 column: 1
@@ -217,5 +223,4 @@ export class PlatformFormGeneratorExampleComponent {
     submitForm(): void {
         this.formGenerator.submit();
     }
-
 }

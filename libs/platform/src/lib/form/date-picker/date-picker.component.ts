@@ -8,6 +8,7 @@ import {
     Host,
     Inject,
     Input,
+    isDevMode,
     Optional,
     Output,
     Self,
@@ -20,7 +21,7 @@ import { CalendarType, CalendarYearGrid, DateRange, DaysOfWeek, FdCalendarView }
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { DatePickerComponent as FdDatePickerComponent } from '@fundamental-ngx/core/date-picker';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { FormFieldControl, Status, BaseInput, FormField } from '@fundamental-ngx/platform/shared';
+import { FormFieldControl, BaseInput, FormField, ControlState } from '@fundamental-ngx/platform/shared';
 
 /**
  * The Platform date picker component is a wrapper around fd-date-picker using platform form.
@@ -42,12 +43,6 @@ import { FormFieldControl, Status, BaseInput, FormField } from '@fundamental-ngx
     providers: [{ provide: FormFieldControl, useExisting: PlatformDatePickerComponent, multi: true }]
 })
 export class PlatformDatePickerComponent<D> extends BaseInput {
-
-    /**
-     * @hidden
-     */
-     private _datepickerState: Status;
-
     /**
      * date-picker value set as controller value
      */
@@ -123,19 +118,36 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
      *  The state of the form control - applies css classes.
      *  Can be `success`, `error`, `warning`, `information` or blank for default.
      */
-
     @Input()
-    get datepickerState(): Status {
-
-        if (this.fdDatePickerComponent?._isInvalidDateInput) {
+    get state(): ControlState {
+        if (this.fdDatePickerComponent?._isInvalidDateInput || !this._datePickerValid) {
             return 'error';
         }
 
-        return this.status || this._datepickerState;
+        return super.state;
+    }
+    set state(state: ControlState) {
+        super.state = state;
     }
 
-    set datepickerState(state: Status) {
-        this._datepickerState = state ? state : 'default';
+    /**
+     * @deprecated
+     *  The state of the form control - applies css classes.
+     *  Can be `success`, `error`, `warning`, `information` or blank for default.
+     */
+    @Input()
+    get datepickerState(): ControlState {
+        if (isDevMode()) {
+            console.warn('"datepickerState" is deprecated. Use "state" instead');
+        }
+        return this.state;
+    }
+
+    set datepickerState(state: ControlState) {
+        if (isDevMode()) {
+            console.warn('"datepickerState" is deprecated. Use "state" instead');
+        }
+        this.state = state;
     }
 
     /**
@@ -208,6 +220,9 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
     @Output()
     readonly activeViewChange: EventEmitter<FdCalendarView> = new EventEmitter<FdCalendarView>();
 
+    /** @hidden */
+    private _datePickerValid = true;
+
     /**
      * @hidden core date-picker as child
      */
@@ -274,12 +289,12 @@ export class PlatformDatePickerComponent<D> extends BaseInput {
         this.onTouched();
 
         if (this.type === 'single' && !this.value && !this.allowNull) {
-            this.datepickerState = 'error'; // null value in not allowNull should throw error
+            this._datePickerValid = false;
         } else if (this.type === 'range' && !this.allowNull) {
             const dateRange = this.value as DateRange<D>;
-            this.datepickerState = dateRange.start ? 'default' : 'error';
+            this._datePickerValid = !!dateRange.start;
         } else {
-            this.datepickerState = undefined; // resetting to default state
+            this._datePickerValid = true;
         }
 
         this.stateChanges.next('date picker: handleDateInputChange');

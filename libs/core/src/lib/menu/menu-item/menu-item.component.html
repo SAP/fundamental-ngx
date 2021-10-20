@@ -1,12 +1,14 @@
 <ng-content></ng-content>
 
 <ng-container *ngIf="hasPopup">
-    <ul class="fd-menu__sublist"
+    <ul
+        class="fd-menu__sublist"
         role="menu"
         [attr.id]="itemId"
         [attr.aria-hidden]="!submenuVisible"
         [attr.aria-label]="submenu.ariaLabel"
-        [attr.aria-labelledby]="submenu.ariaLabelledby">
+        [attr.aria-labelledby]="submenu.ariaLabelledby"
+    >
         <ng-container *ngTemplateOutlet="submenu.templateRef"></ng-container>
     </ul>
 </ng-container>

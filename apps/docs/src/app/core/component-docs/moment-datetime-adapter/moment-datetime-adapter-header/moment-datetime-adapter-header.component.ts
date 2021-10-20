@@ -7,17 +7,15 @@ import { ExampleFile } from '../../../../documentation/core-helpers/code-example
     templateUrl: './moment-datetime-adapter-header.component.html'
 })
 export class MomentDatetimeAdapterHeaderComponent {
-    installSnippet: ExampleFile =
-        {
-            code: {
-                default: `
+    installSnippet: ExampleFile = {
+        code: {
+            default: `
 npm i @fundamental-ngx/moment-adapter
 
 # using yarn?
 # yarn add @fundamental-ngx/moment-adapter
                     `
-            },
-            language: 'bash'
-        }
-    ;
+        },
+        language: 'bash'
+    };
 }

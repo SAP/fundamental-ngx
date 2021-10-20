@@ -1,4 +1,14 @@
-import { Component, Input, Optional, Output, EventEmitter, OnChanges, SimpleChanges, OnInit, ChangeDetectorRef } from '@angular/core';
+import {
+    Component,
+    Input,
+    Optional,
+    Output,
+    EventEmitter,
+    OnChanges,
+    SimpleChanges,
+    OnInit,
+    ChangeDetectorRef
+} from '@angular/core';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { DialogService } from '@fundamental-ngx/core/dialog';

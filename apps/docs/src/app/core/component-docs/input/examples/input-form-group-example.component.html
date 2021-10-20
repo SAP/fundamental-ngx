@@ -25,7 +25,7 @@
         </div>
     </div>
     <div formArrayName="arr" *ngFor="let a of myForm.get('arr')['controls']; let i = index">
-        <div [formGroupName]="i" style="margin-bottom: 10px;">
+        <div [formGroupName]="i" style="margin-bottom: 10px">
             <div fd-form-set>
                 <div fd-form-item>
                     <label fd-form-label for="form-input-3">Primary Input in Form Array</label>
@@ -53,6 +53,6 @@
         </div>
     </div>
     <br />
-    <button fd-button type="button" label="Add" (click)="addItem()" style="margin-right: 5px;"></button>
+    <button fd-button type="button" label="Add" (click)="addItem()" style="margin-right: 5px"></button>
     <button fd-button type="submit" label="Submit"></button>
 </form>

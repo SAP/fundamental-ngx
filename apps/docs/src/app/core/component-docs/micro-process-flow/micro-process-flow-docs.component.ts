@@ -28,7 +28,6 @@ import * as microProcessFlowObjectBetweenNodesExampleTs from '!raw-loader!./exam
     templateUrl: './micro-process-flow-docs.component.html'
 })
 export class MicroProcessFlowDocsComponent {
-
     basicExample: ExampleFile[] = [
         {
             language: 'html',

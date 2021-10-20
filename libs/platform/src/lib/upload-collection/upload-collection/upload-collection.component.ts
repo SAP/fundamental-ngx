@@ -366,7 +366,9 @@ export class UploadCollectionComponent {
         const input = e.target as HTMLInputElement;
         const itemName = input.value.trim();
         const newName = currentItem.type === 'file' ? `${itemName}.${currentItem.name.split('.').pop()}` : itemName;
-        const nameAlreadyExists = this._getList().some((item) => currentItem.documentId !== item.documentId && item.name === newName);
+        const nameAlreadyExists = this._getList().some(
+            (item) => currentItem.documentId !== item.documentId && item.name === newName
+        );
 
         if (!this.sameFileNameAllowed && nameAlreadyExists) {
             currentItem.sameFilenameState = 'error';

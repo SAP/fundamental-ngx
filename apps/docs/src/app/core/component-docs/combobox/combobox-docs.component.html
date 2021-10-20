@@ -8,7 +8,11 @@
 <separator></separator>
 
 <fd-docs-section-title id="search" componentName="combobox">Combobox as Search Field</fd-docs-section-title>
-<description>Set the <code>isSearch</code> property to true to use Combobox as a Search Field. The input-group addon is changed to 'search' and additional Clear button will appear when the user enters a value in the input field. The Clear button can be hidden by setting the <code>showClearButton</code> to false. By default it's set to true.</description>
+<description
+    >Set the <code>isSearch</code> property to true to use Combobox as a Search Field. The input-group addon is changed
+    to 'search' and additional Clear button will appear when the user enters a value in the input field. The Clear
+    button can be hidden by setting the <code>showClearButton</code> to false. By default it's set to true.</description
+>
 <component-example>
     <fd-combobox-search-field-example></fd-combobox-search-field-example>
 </component-example>
@@ -30,9 +34,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="custom-search" componentName="combobox">
-    Custom Search Function
-</fd-docs-section-title>
+<fd-docs-section-title id="custom-search" componentName="combobox"> Custom Search Function </fd-docs-section-title>
 <description>
     A custom search function can be provided with the <code>[searchFn]</code> input. This function will be called when
     the primary combobox button is clicked, or when the user presses the 'enter' key while focused in the combobox
@@ -49,7 +51,6 @@
 <description>
     To use Combobox in mobile mode:
     <ul>
-        <li>import <code>ComboboxMobileModule</code></li>
         <li>Set <code>[mobile]</code> property to true</li>
         <li>
             Set <code>[mobileConfig]</code> with <code>MobileModeConfig</code> configuration object to customize the
@@ -68,9 +69,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="display-object" componentName="combobox">
-    Display Object Property
-</fd-docs-section-title>
+<fd-docs-section-title id="display-object" componentName="combobox"> Display Object Property </fd-docs-section-title>
 <description>
     The <code>displayFn</code> input can be used to modify how the results are presented within the combobox. In this
     example we are making the results all upper-cased.
@@ -97,9 +96,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="observable-async" componentName="combobox">
-    Observable Async Example
-</fd-docs-section-title>
+<fd-docs-section-title id="observable-async" componentName="combobox"> Observable Async Example </fd-docs-section-title>
 <description>
     The <code>dropdownValues</code> input can accept an Observable with an async pipe, which could be useful for
     autocomplete.
@@ -128,9 +125,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="columns" componentName="combobox">
-    Combobox with Two Columns
-</fd-docs-section-title>
+<fd-docs-section-title id="columns" componentName="combobox"> Combobox with Two Columns </fd-docs-section-title>
 <description>
     The <code>[itemTemplate]</code> input can be used to create a combobox with two columns of information. Note that a
     <code>displayFn</code> is required for this example so the combobox knows how to display the selected item.
@@ -154,9 +149,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="custom-height" componentName="combobox">
-    Custom Height Example
-</fd-docs-section-title>
+<fd-docs-section-title id="custom-height" componentName="combobox"> Custom Height Example </fd-docs-section-title>
 <description> Use the <code>[maxHeight]</code> input to set a maximum height for the results list. </description>
 <component-example>
     <fd-combobox-height-example></fd-combobox-height-example>
@@ -170,8 +163,9 @@
 </fd-docs-section-title>
 <description>
     By default, the combobox will only return results where the result starts with the search term. By setting
-    <code>[includes]="true"</code>, the combobox will return results where the result includes the search term at
-    any place in the string.</description>
+    <code>[includes]="true"</code>, the combobox will return results where the result includes the search term at any
+    place in the string.</description
+>
 <component-example>
     <fd-combobox-includes-example></fd-combobox-includes-example>
 </component-example>

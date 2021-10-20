@@ -157,23 +157,21 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
     private _constructMonthGrid(): void {
         const monthNames: string[] = this._dateTimeAdapter.getMonthNames('short');
 
-        const monthList: CalendarMonth[] = monthNames.map(
-            (monthName, index): CalendarMonth => {
-                const month = index + this.monthOffset;
-                return {
-                    month: month,
-                    label: monthName,
-                    ariaLabel: this._dateTimeAdapter.format(
-                        this._dateTimeAdapter.createDate(this.year, month, 1),
-                        this._dateTimeFormats.display.monthA11yLabel
-                    ),
-                    index: index,
-                    selected: month === this.monthSelected,
-                    current: month === this.currentMonth,
-                    tabIndex: month === this.monthSelected ? 0 : -1
-                };
-            }
-        );
+        const monthList: CalendarMonth[] = monthNames.map((monthName, index): CalendarMonth => {
+            const month = index + this.monthOffset;
+            return {
+                month: month,
+                label: monthName,
+                ariaLabel: this._dateTimeAdapter.format(
+                    this._dateTimeAdapter.createDate(this.year, month, 1),
+                    this._dateTimeFormats.display.monthA11yLabel
+                ),
+                index: index,
+                selected: month === this.monthSelected,
+                current: month === this.currentMonth,
+                tabIndex: month === this.monthSelected ? 0 : -1
+            };
+        });
 
         this.calendarMonthListGrid = [];
         /** Creating 2d grid */

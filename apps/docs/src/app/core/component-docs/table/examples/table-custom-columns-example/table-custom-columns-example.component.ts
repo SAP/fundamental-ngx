@@ -4,8 +4,8 @@ import { TableComponent } from '@fundamental-ngx/core/table';
 import { TableCustomDialogComponent } from './table-custom-dialog.component';
 
 export interface DisplayedColumn {
-    key: string,
-    checked: boolean
+    key: string;
+    checked: boolean;
 }
 
 export interface CellData {
@@ -24,7 +24,6 @@ const CELL_DATA: CellData[] = [
     { column1: 'Row 115', column2: 'Row 225', column3: 'Row 5', date: '11-12-18', type: 'search' }
 ];
 
-
 @Component({
     selector: 'fd-table-custom-columns-example',
     templateUrl: './table-custom-columns-example.component.html'
@@ -38,17 +37,14 @@ export class TableCustomColumnsExampleComponent {
     @ViewChild(TableComponent)
     tableComponent: TableComponent;
 
-    constructor(
-        private _dialogService: DialogService
-    ) {
+    constructor(private _dialogService: DialogService) {
         this.displayedColumns = Object.keys(this.dataSource[0]);
         this.originalDisplayedColumns = [];
 
-        Object.keys(this.dataSource[0]).forEach(key => {
+        Object.keys(this.dataSource[0]).forEach((key) => {
             this.originalDisplayedColumns.push({ key: key, checked: true });
         });
     }
-
 
     openDialog(): void {
         const dialogRef = this._dialogService.open(TableCustomDialogComponent, {
@@ -62,23 +58,20 @@ export class TableCustomColumnsExampleComponent {
             }
         });
 
-
         dialogRef.afterClosed.subscribe(
             (columns) => {
                 this.originalDisplayedColumns = [...columns];
                 this._propagateChangeToDisplayedValue();
             },
             () => {
-                console.log('closed without changes')
+                console.log('closed without changes');
             }
         );
     }
 
     private _propagateChangeToDisplayedValue(): void {
         this.displayedColumns = [
-            ...this.originalDisplayedColumns
-                .filter(_col => _col.checked)
-                .map(_col => _col.key)
+            ...this.originalDisplayedColumns.filter((_col) => _col.checked).map((_col) => _col.key)
         ];
         this.tableComponent.reset(this.displayedColumns);
     }

@@ -1,6 +1,4 @@
-<fd-docs-section-title id="template-as-content" componentName="dialog">
-    Template Based Dialog
-</fd-docs-section-title>
+<fd-docs-section-title id="template-as-content" componentName="dialog"> Template Based Dialog </fd-docs-section-title>
 <description>
     The Dialog can be declared inside the <code>ng-template</code> and opened with DialogService using the template
     reference. Each template based dialog can use the following context values:
@@ -29,9 +27,17 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="component-as-content" componentName="dialog">
-    Component Based Dialog
-</fd-docs-section-title>
+<fd-docs-section-title id="form-dialog" componentName="dialog"> Form </fd-docs-section-title>
+<description> Form Dialog Example </description>
+
+<component-example>
+    <fd-form-dialog-example></fd-form-dialog-example>
+</component-example>
+<code-example [exampleFiles]="formDialog"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="component-as-content" componentName="dialog"> Component Based Dialog </fd-docs-section-title>
 <description>
     To open a component based Dialog provide the component class to the DialogService open method. Inject the
     <code>DialogRef</code> dependency inside the component to access Dialog methods and data. Data available in
@@ -46,12 +52,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="object" componentName="dialog">
-    Object Based Dialog
-</fd-docs-section-title>
+<fd-docs-section-title id="object" componentName="dialog"> Object Based Dialog </fd-docs-section-title>
 <description>
-    The Dialog can be declared inside the <code>DialogDefaultContent</code> and opened with DialogService using the object
-    reference. This allows you to easily create dialogs with customizable optional properties for the following:
+    The Dialog can be declared inside the <code>DialogDefaultContent</code> and opened with DialogService using the
+    object reference. This allows you to easily create dialogs with customizable optional properties for the following:
     <ul>
         <li>title</li>
         <li>content</li>
@@ -59,8 +63,8 @@
         <li>button text</li>
         <li>button callbacks</li>
     </ul>
-     Please note you will need to provide callback functions for the approve/cancel/close
-    buttons if you wish to display them.
+    Please note you will need to provide callback functions for the approve/cancel/close buttons if you wish to display
+    them.
 </description>
 <component-example>
     <fd-dialog-object-example></fd-dialog-object-example>
@@ -69,9 +73,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="state" componentName="dialog">
-    Dialog State
-</fd-docs-section-title>
+<fd-docs-section-title id="state" componentName="dialog"> Dialog State </fd-docs-section-title>
 <description>
     The dialog state can be controlled by using <code>DialogRef</code>, providing such features as:
     <ul>
@@ -88,16 +90,14 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="configuration" componentName="dialog">
-    Dialog Configuration
-</fd-docs-section-title>
+<fd-docs-section-title id="configuration" componentName="dialog"> Dialog Configuration </fd-docs-section-title>
 <description>
     Dialog behavior can be configured using the <code>DialogConfig</code> object passed as an argument to the
     <code>DialogService.open()</code> method. Passing <code>DialogConfig</code> overrides specified behaviours of the
-    Dialog component.
-
-    Dialog can be configured <strong>globally</strong> by providing <code>DIALOG_DEFAULT_CONFIG</code> token.
-    Check <a [routerLink]="['/core/global-config']" fragment="dialog-config">Global Configuration page</a> for more information.
+    Dialog component. Dialog can be configured <strong>globally</strong> by providing
+    <code>DIALOG_DEFAULT_CONFIG</code> token. Check
+    <a [routerLink]="['/core/global-config']" fragment="dialog-config">Global Configuration page</a> for more
+    information.
 </description>
 <component-example>
     <fd-dialog-configuration-example></fd-dialog-configuration-example>
@@ -106,12 +106,11 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="auto-label" componentName="dialog">
-    Label dialog automatically
-</fd-docs-section-title>
+<fd-docs-section-title id="auto-label" componentName="dialog"> Label dialog automatically </fd-docs-section-title>
 <description>
-    Despite dialog can be labelled manually by providing <code>ariaLabelledBy</code> in the configuration
-    it also possible to label dialog automatically, by applying <code>fd-dialog-title</code> directive to any element inside the dialog template.
+    Despite dialog can be labelled manually by providing <code>ariaLabelledBy</code> in the configuration it also
+    possible to label dialog automatically, by applying <code>fd-dialog-title</code> directive to any element inside the
+    dialog template.
 </description>
 <component-example>
     <fd-auto-label-dialog-example></fd-auto-label-dialog-example>
@@ -120,9 +119,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="position" componentName="dialog">
-    Dialog Positioning
-</fd-docs-section-title>
+<fd-docs-section-title id="position" componentName="dialog"> Dialog Positioning </fd-docs-section-title>
 <description>
     The placement of the Dialog on the screen can be customized through the <code>DialogConfig.position</code> property.
 </description>
@@ -133,9 +130,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="mobile" componentName="dialog">
-    Dialog On Mobile Devices
-</fd-docs-section-title>
+<fd-docs-section-title id="mobile" componentName="dialog"> Dialog On Mobile Devices </fd-docs-section-title>
 <description>
     To display the Dialog component in mobile mode, use the <code>DialogConfig.mobile</code> property. Dialog on mobile
     devices uses the full viewport and adjusts its header and footer accordingly. To create additional spacing around
@@ -149,9 +144,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="complex" componentName="dialog">
-    Complex Dialog
-</fd-docs-section-title>
+<fd-docs-section-title id="complex" componentName="dialog"> Complex Dialog </fd-docs-section-title>
 <description>
     To create more complex Dialogs it is possible to provide custom header, subheader and footer templates.<br />
     To provide these custom templates, create an element with one of the following directives:
@@ -172,9 +165,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="stacked" componentName="dialog">
-    Stacked Dialogs
-</fd-docs-section-title>
+<fd-docs-section-title id="stacked" componentName="dialog"> Stacked Dialogs </fd-docs-section-title>
 <description>
     The DialogService supports limitless stacked dialogs. Each can be closed individually and there is no specific
     closing order.
@@ -215,9 +206,7 @@
 <fd-docs-section-title id="popover-inside-dialog" componentName="dialog">
     Dialog with inner popovers
 </fd-docs-section-title>
-<description>
-    Dialog supports inner popovers (dropdown menus, etc.) with focus trap for accessibility.
-</description>
+<description> Dialog supports inner popovers (dropdown menus, etc.) with focus trap for accessibility. </description>
 <component-example>
     <fd-dialog-inner-popover-example></fd-dialog-inner-popover-example>
 </component-example>
@@ -240,11 +229,12 @@
 
         <fd-dialog-footer>
             <fd-button-bar
-                    fdType="emphasized"
-                    label="Close"
-                    [compact]="true"
-                    (click)="dialog.close()"
-                    ariaLabel="Close Emphasized">
+                fdType="emphasized"
+                label="Close"
+                [compact]="true"
+                (click)="dialog.close()"
+                ariaLabel="Close Emphasized"
+            >
             </fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>

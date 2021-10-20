@@ -7,10 +7,9 @@ import { debounceTime, takeUntil } from 'rxjs/operators';
 import { IconBarDndContainerDirective } from './icon-bar-dnd-container.directive';
 
 @Directive({
-    selector: '[fdpIconBarDndList], [fdp-icon-bar-dnd-list]',
+    selector: '[fdpIconBarDndList], [fdp-icon-bar-dnd-list]'
 })
 export class IconBarDndListDirective implements AfterViewInit, OnDestroy {
-
     /**
      * @description Direction in which the list is oriented.
      */
@@ -39,9 +38,8 @@ export class IconBarDndListDirective implements AfterViewInit, OnDestroy {
     constructor(
         public elementRef: ElementRef,
         private _dragDrop: DragDrop,
-        private _dndContainer: IconBarDndContainerDirective,
-    ) {
-    }
+        private _dndContainer: IconBarDndContainerDirective
+    ) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -53,13 +51,9 @@ export class IconBarDndListDirective implements AfterViewInit, OnDestroy {
 
         this._dndContainer.registerDndList(this);
 
-
         this._dndItems$
-            .pipe(
-                debounceTime(100),
-                takeUntil(this._onDestroy$)
-            )
-            .subscribe(_ => this._dropListRef.withItems(this._dragRefItems));
+            .pipe(debounceTime(100), takeUntil(this._onDestroy$))
+            .subscribe((_) => this._dropListRef.withItems(this._dragRefItems));
     }
 
     /** @hidden */
@@ -84,7 +78,7 @@ export class IconBarDndListDirective implements AfterViewInit, OnDestroy {
      * @description Remove registered IconBarDndItemDirective to current list
      */
     removeDragItem(dragItem: IconBarDndItemDirective): void {
-        this._dragRefItems = this._dragRefItems.filter(item => item !== dragItem.dragRef);
+        this._dragRefItems = this._dragRefItems.filter((item) => item !== dragItem.dragRef);
         this._dndItems$.next();
     }
 

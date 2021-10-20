@@ -11,7 +11,7 @@ import {
     waitForNotDisplayed
 } from '../../driver/wdio';
 
-describe('Notification component test', function () {
+describe('Notification component test', () => {
     const notificationPage = new NotificationPo();
     const {
         defaultExample,
@@ -35,7 +35,7 @@ describe('Notification component test', function () {
         notificationHeader,
         overflowButton,
         messageToast,
-        forwardButton,
+        forwardButton
     } = notificationPage;
 
     beforeAll(() => {
@@ -49,7 +49,10 @@ describe('Notification component test', function () {
 
     it('should check notification with avatar, success indicator and unread title', () => {
         expect(isElementDisplayed(defaultExample + avatar)).toBe(true, `avatar does not exist`);
-        expect(isElementDisplayed(defaultExample + notificationIndicator + '--success')).toBe(true, `no success indicator`);
+        expect(isElementDisplayed(defaultExample + notificationIndicator + '--success')).toBe(
+            true,
+            `no success indicator`
+        );
     });
 
     it('should check Notification with error indicator and no avatar', () => {
@@ -82,7 +85,7 @@ describe('Notification component test', function () {
         click(notificationContainer + button);
         expect(getText(openTemplateExample + result)).toContain('Open Button Clicked');
         click(openTemplateExample + button);
-        click(notificationContainer + closeButton)
+        click(notificationContainer + closeButton);
         expect(getText(openTemplateExample + result)).toContain('Close Button Click');
     });
 

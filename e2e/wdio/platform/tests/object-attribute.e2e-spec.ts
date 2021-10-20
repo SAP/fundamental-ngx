@@ -1,15 +1,17 @@
 import { ObjectAttributePo } from '../pages/object-attribute.po';
 import { checkAttributeValueTrue, checkElementTextValue } from '../../helper/assertion-helper';
 import { getAttributeByName, refreshPage, waitForElDisplayed } from '../../driver/wdio';
-import { disabledAttribute, labelAttribute, linkAttribute, linkText, standaloneText } from '../fixtures/appData/object-attribute-contents';
+import {
+    disabledAttribute,
+    labelAttribute,
+    linkAttribute,
+    linkText,
+    standaloneText
+} from '../fixtures/appData/object-attribute-contents';
 
-describe('object attribute test suite', function() {
+describe('object attribute test suite', () => {
     const objectAttributePage = new ObjectAttributePo();
-    const {
-        standaloneTextObject,
-        externalLinkObject,
-        linkObject
-    } = objectAttributePage;
+    const { standaloneTextObject, externalLinkObject, linkObject } = objectAttributePage;
 
     beforeAll(() => {
         objectAttributePage.open();

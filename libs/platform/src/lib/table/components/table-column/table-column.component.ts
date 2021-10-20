@@ -176,11 +176,12 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
     /** Table won't know about column properties update so notify about it manually
      * @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if (this._tableService
-            && (changes.sortable?.currentValue !== changes.sortable?.previousValue
-            || changes.filterable?.currentValue !== changes.filterable?.previousValue
-            || changes.groupable?.currentValue !== changes.groupable?.previousValue
-            || changes.freezable?.currentValue !== changes.freezable?.previousValue)
+        if (
+            this._tableService &&
+            (changes.sortable?.currentValue !== changes.sortable?.previousValue ||
+                changes.filterable?.currentValue !== changes.filterable?.previousValue ||
+                changes.groupable?.currentValue !== changes.groupable?.previousValue ||
+                changes.freezable?.currentValue !== changes.freezable?.previousValue)
         ) {
             this._tableService.markForCheck();
         }

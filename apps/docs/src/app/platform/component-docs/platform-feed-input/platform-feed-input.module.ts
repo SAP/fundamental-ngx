@@ -19,10 +19,10 @@ const routes: Routes = [
         path: '',
         component: PlatformFeedInputHeaderComponent,
         children: [
-            { path: '', component: PlatformFeedInputDocsComponent},
-            { path: 'api', component: ApiComponent, data: { content: API_FILES.feedInput }}
+            { path: '', component: PlatformFeedInputDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.feedInput } }
         ]
-    },
+    }
 ];
 
 @NgModule({
@@ -35,13 +35,7 @@ const routes: Routes = [
         PlatformFeedInputDisabledExampleComponent,
         PlatformFeedInputMaxHeightExampleComponent
     ],
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
-        PlatformFeedInputModule
-    ],
-    exports: [
-        RouterModule
-    ]
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformFeedInputModule],
+    exports: [RouterModule]
 })
 export class PlatformFeedInputDocsModule {}

@@ -37,7 +37,7 @@ const routes: Routes = [
         PlatformInfoLableNumericIconExampleComponent,
         PlatformInfoLableTextExampleComponent,
         PlatformInfoLableTextIconExampleComponent,
-        PlatformInfoLableAriaLabelExampleComponent,
+        PlatformInfoLableAriaLabelExampleComponent
     ]
 })
 export class PlatformInfoLabelDocsModule {}

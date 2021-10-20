@@ -17,7 +17,7 @@ import { CssClassBuilder } from '@fundamental-ngx/core/utils';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NotificationGroupComponent  implements OnChanges, OnInit, CssClassBuilder {
+export class NotificationGroupComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
     @Input()
     class: string;
@@ -27,7 +27,8 @@ export class NotificationGroupComponent  implements OnChanges, OnInit, CssClassB
 
     /** User defined width for the notification */
     @HostBinding('style.width')
-    @Input() width:  string;
+    @Input()
+    width: string;
 
     /** @hidden */
     constructor(private _elementRef: ElementRef) {}

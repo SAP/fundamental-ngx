@@ -1,12 +1,17 @@
-import { Component, ElementRef, Inject, InjectionToken, ViewChild } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MenuComponent, MenuItemComponent, MenuMobileComponent, MenuMobileModule, MenuModule } from '@fundamental-ngx/core/menu';
+import {
+    MenuComponent,
+    MenuItemComponent,
+    MenuMobileComponent,
+    MenuMobileModule,
+    MenuModule
+} from '@fundamental-ngx/core/menu';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
-import { getMobileModeViewElements, whenStable } from '@fundamental-ngx/core/tests';
+import { getMobileModeViewElements, MOBILE_CONFIG_TEST_TOKEN, whenStable } from '@fundamental-ngx/core/tests';
 
-const MOBILE_CONFIG_TEST_TOKEN = new InjectionToken<MobileModeConfig>('For test purposes');
 const MOBILE_CONFIG: MobileModeConfig = { title: 'Test menu title' };
 
 @Component({
@@ -43,22 +48,27 @@ describe('MenuMobileComponent', () => {
     let menuMobile: MenuMobileComponent;
     let fixture: ComponentFixture<TesNestedMenuItemComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TesNestedMenuItemComponent],
-            imports: [MenuModule, MenuMobileModule, BrowserAnimationsModule],
-            providers: [{ provide : MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TesNestedMenuItemComponent],
+                imports: [MenuModule, MenuMobileModule, BrowserAnimationsModule],
+                providers: [{ provide: MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
-    function setup(mobileConfig: MobileModeConfig = MOBILE_CONFIG): void {
+    async function setup(mobileConfig: MobileModeConfig = MOBILE_CONFIG): Promise<void> {
         TestBed.overrideProvider(MOBILE_CONFIG_TEST_TOKEN, { useValue: mobileConfig });
         TestBed.compileComponents();
         fixture = TestBed.createComponent(TesNestedMenuItemComponent);
-        fixture.detectChanges();
+
+        await whenStable(fixture);
+
         menu = fixture.componentInstance.menu;
         menuMobile = fixture.componentInstance.menu['_mobileModeComponentRef'].instance;
+
+        fixture.detectChanges();
     }
 
     it('should create', () => {
@@ -67,85 +77,89 @@ describe('MenuMobileComponent', () => {
         expect(menuMobile).toBeTruthy();
     });
 
-    it('should open in mobile mode', fakeAsync(() => {
+    it('should open in mobile mode', async () => {
         setup();
+
+        await whenStable(fixture);
+
         const openDialogSpy = spyOn<any>(menuMobile, '_openDialog').and.callThrough();
 
         menu.open();
-        fixture.detectChanges();
 
-        tick();
+        await whenStable(fixture);
 
         expect(openDialogSpy).toHaveBeenCalled();
         expect(fixture.nativeElement.querySelector('.fd-dialog--active')).toBeTruthy();
-    }));
+    });
 
-    it('should use custom dialog configuration', fakeAsync(() => {
+    it('should use custom dialog configuration', async () => {
         const customDialogClass = 'test-dialog-class';
 
-        setup({ dialogConfig: { dialogPanelClass: customDialogClass }});
+        setup({ dialogConfig: { dialogPanelClass: customDialogClass } });
+
+        await whenStable(fixture);
 
         menu.open();
-        fixture.detectChanges();
 
-        tick();
+        await whenStable(fixture);
 
         expect(fixture.nativeElement.querySelector('.' + customDialogClass)).toBeTruthy();
-    }));
+    });
 
     it('should open menu sub-level', async () => {
         setup();
+
+        await whenStable(fixture);
+
         menu.open();
 
-        fixture.detectChanges();
-        await fixture.whenStable();
+        await whenStable(fixture);
 
         fixture.nativeElement.querySelector('[fd-menu-interactive]').click();
 
-        fixture.detectChanges();
-        await fixture.whenStable();
+        await whenStable(fixture);
 
         expect(menuMobile.isSubmenu).toBeTrue();
     });
 
     it('should use correct menu title', async () => {
         setup();
+
+        await whenStable(fixture);
+
         menu.open();
 
-        fixture.detectChanges();
-        await fixture.whenStable();
+        await whenStable(fixture);
 
         expect(menuMobile.title).toEqual(MOBILE_CONFIG.title);
 
         fixture.nativeElement.querySelector('[fd-menu-interactive]').click();
 
-        fixture.detectChanges();
-        await fixture.whenStable();
+        await whenStable(fixture);
 
         expect(menuMobile.title).toEqual(fixture.componentInstance.menuItemTitle);
     });
 
     it('should navigate back to parent level', async () => {
         setup();
+
+        await whenStable(fixture);
+
         menu.open();
 
-        fixture.detectChanges();
-        await fixture.whenStable();
+        await whenStable(fixture);
 
         fixture.nativeElement.querySelector('[fd-menu-interactive]').click();
 
-        fixture.detectChanges();
-        await fixture.whenStable();
+        await whenStable(fixture);
 
         expect(menuMobile.isSubmenu).toBeTrue();
         fixture.nativeElement.querySelector('#menu-mobile-navigate-back').click();
 
-        fixture.detectChanges();
-        await fixture.whenStable();
+        await whenStable(fixture);
 
         expect(menuMobile.isSubmenu).toBeFalse();
     });
-
 
     it('should properly render with empty MobileConfig', async () => {
         setup({});
@@ -160,11 +174,10 @@ describe('MenuMobileComponent', () => {
         expect(mobileElements.dialogFooter).toBeFalsy();
         expect(mobileElements.dialogCloseBtn).toBeFalsy();
         expect(mobileElements.footerButtons.length).toEqual(0);
-
     });
 
     it('should properly render title and close button based on MobileConfig', async () => {
-        setup({title: MOBILE_CONFIG.title, hasCloseButton: true});
+        setup({ title: MOBILE_CONFIG.title, hasCloseButton: true });
 
         await whenStable(fixture);
 
@@ -180,7 +193,7 @@ describe('MenuMobileComponent', () => {
     });
 
     it('should properly render approve and dismiss buttons based on MobileConfig', async () => {
-        setup({cancelButtonText: 'APPROVE', approveButtonText: 'DISMISS'});
+        setup({ cancelButtonText: 'APPROVE', approveButtonText: 'DISMISS' });
 
         await whenStable(fixture);
 

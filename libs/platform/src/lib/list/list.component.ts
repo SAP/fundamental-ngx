@@ -54,7 +54,6 @@ export class SelectionChangeEvent {
     index: number;
 }
 
-
 /**
  * The List component represents a container for list item types.
  * It is used to display a list features.
@@ -68,7 +67,6 @@ export class SelectionChangeEvent {
     providers: [{ provide: FormFieldControl, useExisting: ListComponent, multi: true }]
 })
 export class ListComponent extends CollectionBaseInput implements OnInit, AfterViewInit, AfterContentInit, OnDestroy {
-
     /**  An array that holds a list of all selected items**/
     @Input()
     selectedItems: BaseListItem[];
@@ -200,13 +198,15 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     private _itemsSubscription: Subscription | null;
 
     /** @hidden */
-    constructor(protected _changeDetectorRef: ChangeDetectorRef,
-                public itemEl: ElementRef,
-                @Optional() @Self() public ngControl: NgControl,
-                @Optional() @Self() public ngForm: NgForm,
-                @Optional() @SkipSelf() @Host() formField: FormField,
-                @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
-                protected _listConfig?: ListConfig) {
+    constructor(
+        protected _changeDetectorRef: ChangeDetectorRef,
+        public itemEl: ElementRef,
+        @Optional() @Self() public ngControl: NgControl,
+        @Optional() @Self() public ngForm: NgForm,
+        @Optional() @SkipSelf() @Host() formField: FormField,
+        @Optional() @SkipSelf() @Host() formControl: FormFieldControl<any>,
+        protected _listConfig?: ListConfig
+    ) {
         super(_changeDetectorRef, ngControl, ngForm, formField, formControl);
     }
 
@@ -357,19 +357,17 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         if (this.selectionMode === 'multi') {
             this._multiSelect = true;
             this.ariaMultiselectable = true;
-        } else { this._multiSelect = false; }
-        this._selectionModel = new SelectionModel<BaseListItem>(
-            this._multiSelect,
-            this.selectedItems
-        );
+        } else {
+            this._multiSelect = false;
+        }
+        this._selectionModel = new SelectionModel<BaseListItem>(this._multiSelect, this.selectedItems);
 
-        this._selectionModel.changed.subscribe(e => {
+        this._selectionModel.changed.subscribe((e) => {
             this.selectedItems = this._selectionModel.selected;
             const event = new SelectionChangeEvent();
             event.selectedItems = this.selectedItems;
             this.stateChanges.next(event);
             this.selectedItemChange.emit(event);
-
         });
     }
 
@@ -400,7 +398,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             this.stateChanges.next(item);
         });
 
-
         const indicators = this.itemEl.nativeElement.querySelectorAll('fd-busy-indicator');
         indicators.forEach((indicator) => {
             if (indicator) {
@@ -408,7 +405,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
             }
         });
     }
-
 
     /** @hidden */
     /**Setting values from list to list items
@@ -421,7 +417,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
      */
     ngAfterContentInit(): void {
         this._itemsSubscription = this.listItems.changes.subscribe((items) => {
-
             if (this.listItems.length !== 0) {
                 this.listItems.first.listItem.nativeElement.setAttribute('tabindex', 0);
             }
@@ -445,9 +440,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
                 item._hasByLine = this.hasByLine;
                 this.stateChanges.next(item);
             });
-
         });
-
     }
 
     /** @hidden */
@@ -511,25 +504,24 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         this._loading = true;
         of(this._loadNewItems())
             .pipe(
-                tap(data => {
+                tap((data) => {
                     if (data === null || data === undefined) {
                         console.error('===Invalid Response recived===');
                     }
                 }),
                 delay(this.delayTime)
-            ).subscribe(result => {
-            if (result !== null && result !== undefined) {
-                for (let i = this._items.length, j = 0; j < result.length; ++i, ++j) {
-                    this._items[i] = result[j];
+            )
+            .subscribe((result) => {
+                if (result !== null && result !== undefined) {
+                    for (let i = this._items.length, j = 0; j < result.length; ++i, ++j) {
+                        this._items[i] = result[j];
+                    }
                 }
-            }
-            this._loading = false;
-            this.stateChanges.next(this._items);
-            this._changeDetectorRef.markForCheck();
-
-        });
+                this._loading = false;
+                this.stateChanges.next(this._items);
+                this._changeDetectorRef.markForCheck();
+            });
     }
-
 
     /**@hidden
      *  used in tempate to get Selected items from a list
@@ -561,10 +553,12 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         });
         if (el !== null && el.tagName.toLowerCase() === 'a') {
             el.classList.add('is-navigated');
-        } else if (el !== null &&
+        } else if (
+            el !== null &&
             el.tagName.toLowerCase() === 'li' &&
             el.querySelector('a') !== undefined &&
-            el.querySelector('a') !== null) {
+            el.querySelector('a') !== null
+        ) {
             el.querySelector('a').classList.add('is-navigated');
         }
 
@@ -658,7 +652,6 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
         const radio = parent ? parent.querySelector('input') : null;
         this._selectedvalue = radio ? radio.getAttribute('ng-reflect-value') : null;
 
-
         this.listItems.forEach((item) => {
             if (item.radioButtonComponent !== undefined) {
                 item._selected = false;
@@ -675,9 +668,7 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
                 this._selectItem(item);
             }
         });
-
     }
-
 
     private _handleRowSelect(selectedItemId: string): void {
         // handles mutli select on row level without checkbox
@@ -713,10 +704,8 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
                 }
             });
             selectedItemId = '0';
-
         }
     }
-
 
     /** @hidden */
     /**List item with checkbox styles,check,uncheckupdates
@@ -742,24 +731,19 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
 
 @Component({
     selector: 'fdp-list-footer',
-    template: `
-        <li #listfooter class="fd-list__footer" [attr.id]="id" role="option">
-            <ng-content></ng-content>
-        </li>`
+    template: ` <li #listfooter class="fd-list__footer" [attr.id]="id" role="option">
+        <ng-content></ng-content>
+    </li>`
 })
 export class ListFooter extends BaseComponent {}
 
 @Component({
     selector: 'fdp-list-group-header',
-    template: `
-        <li #listItem fd-list-group-header [attr.id]="id" role="option"
-            tabindex="0">
-            <span fd-list-title>{{grpheaderTitle}}</span>
-            <ng-content></ng-content>
-        </li>`,
-    providers: [
-        { provide: BaseListItem, useExisting: forwardRef(() => ListGroupHeader) }
-    ]
+    template: ` <li #listItem fd-list-group-header [attr.id]="id" role="option" tabindex="0">
+        <span fd-list-title>{{ grpheaderTitle }}</span>
+        <ng-content></ng-content>
+    </li>`,
+    providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ListGroupHeader) }]
 })
 export class ListGroupHeader extends BaseListItem implements OnInit {
     /**
@@ -774,4 +758,3 @@ export class ListGroupHeader extends BaseListItem implements OnInit {
         this.id = `fdp-list-${nextListGrpHeaderId++}`;
     }
 }
-

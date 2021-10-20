@@ -6,7 +6,7 @@ import { BarElementDirective } from '@fundamental-ngx/core/bar';
  * Consider using `fd-button-bar`
  */
 @Component({
-  selector: 'fd-message-box-footer-button',
-  template: '<ng-content></ng-content>'
+    selector: 'fd-message-box-footer-button',
+    template: '<ng-content></ng-content>'
 })
-export class MessageBoxFooterButtonComponent extends BarElementDirective { }
+export class MessageBoxFooterButtonComponent extends BarElementDirective {}

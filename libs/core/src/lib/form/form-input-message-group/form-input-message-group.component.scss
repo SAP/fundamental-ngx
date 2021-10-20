@@ -1,28 +1,28 @@
 .fd-popover-container-custom--message {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 .fd-popover-container-custom {
-  border: none;
+    border: none;
 }
 
 .fd-form-input-message-group {
-  // unfortunately, it collides with
-  // fd-popover-custom (the order of included css files)
-  // and has to be overwritten
-  &.fd-popover-custom {
-    display: block;
-  }
+    // unfortunately, it collides with
+    // fd-popover-custom (the order of included css files)
+    // and has to be overwritten
+    &.fd-popover-custom {
+        display: block;
+    }
 
-  .fd-input {
-    display: block;
-  }
+    .fd-input {
+        display: block;
+    }
 }
 
 .fd-popover__popper.fd-popover__popper--input-message-group {
     margin-top: 0 !important;
     z-index: 999;
 
-	.fd-form-message {
-		display: block;
-	}
+    .fd-form-message {
+        display: block;
+    }
 }

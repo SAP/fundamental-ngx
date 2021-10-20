@@ -4,12 +4,17 @@
     </fdp-form-field>
 
     <fdp-form-field #ffl2 id="format2" label="range date picker custom format">
-        <fdp-date-picker name="format2" placeholder="mm/dd/yy // mm/dd/yy" type="range" [formControl]="ffl2.formControl">
+        <fdp-date-picker
+            name="format2"
+            placeholder="mm/dd/yy // mm/dd/yy"
+            type="range"
+            [formControl]="ffl2.formControl"
+        >
         </fdp-date-picker>
     </fdp-form-field>
 </fdp-form-group>
 
-<div>Selected Date: {{ form.controls.format1?.value?.toDateString()}}</div>
+<div>Selected Date: {{ form.controls.format1?.value?.toDateString() }}</div>
 <br />
 <br />
 <div>Selected First Date: {{ form.controls.format2?.value?.start?.toDateString() }}</div>

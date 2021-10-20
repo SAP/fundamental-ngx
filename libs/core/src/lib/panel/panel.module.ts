@@ -7,16 +7,8 @@ import { PanelTitleDirective } from './panel-title/panel-title.directive';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 
 @NgModule({
-    declarations: [
-        PanelComponent,
-        PanelContentDirective,
-        PanelTitleDirective
-    ],
+    declarations: [PanelComponent, PanelContentDirective, PanelTitleDirective],
     imports: [CommonModule, ButtonModule],
-    exports: [
-        PanelComponent,
-        PanelContentDirective,
-        PanelTitleDirective
-    ]
+    exports: [PanelComponent, PanelContentDirective, PanelTitleDirective]
 })
-export class PanelModule { }
+export class PanelModule {}

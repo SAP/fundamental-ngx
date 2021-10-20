@@ -5,35 +5,36 @@ import { By } from '@angular/platform-browser';
 import { LineClampDirective, LineClampTargetDirective } from './line-clamp.directive';
 
 @Component({
-  template: `<div fd-lineclamp [fdLineclampState]="true" [fdLineClampLines]="rows">
-    <div fd-lineclamp-target [fdLineClampTargetText]="text"></div>
-  </div>`
+    template: `<div fd-lineclamp [fdLineclampState]="true" [fdLineClampLines]="rows">
+        <div fd-lineclamp-target [fdLineClampTargetText]="text"></div>
+    </div>`
 })
 class TestComponent {
-  @Input()
-  text: string;
-  @Input()
-  rows: number;
+    @Input()
+    text: string;
+    @Input()
+    rows: number;
 }
 
 describe('LineClampDirective', () => {
-  let component: TestComponent;
-  let fixture: ComponentFixture<TestComponent>;
-  let lineclamp: DebugElement;
+    let component: TestComponent;
+    let fixture: ComponentFixture<TestComponent>;
+    let lineclamp: DebugElement;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-        declarations: [TestComponent, LineClampDirective, LineClampTargetDirective]
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestComponent, LineClampDirective, LineClampTargetDirective]
+        });
+        fixture = TestBed.createComponent(TestComponent);
+        component = fixture.componentInstance;
+        component.rows = 2;
+        component.text =
+            'Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry.';
+        fixture.detectChanges();
+        lineclamp = fixture.debugElement.query(By.directive(LineClampDirective));
     });
-    fixture = TestBed.createComponent(TestComponent);
-    component = fixture.componentInstance;
-    component.rows = 2;
-    component.text = 'Long text, you can toggle view with more/less button. Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
-    fixture.detectChanges();
-    lineclamp = fixture.debugElement.query(By.directive(LineClampDirective));
-  });
 
-  it('should create an instance', () => {
-    expect(lineclamp).toBeTruthy();
-  });
+    it('should create an instance', () => {
+        expect(lineclamp).toBeTruthy();
+    });
 });

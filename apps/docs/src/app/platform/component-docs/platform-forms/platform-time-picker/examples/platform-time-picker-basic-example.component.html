@@ -1,37 +1,37 @@
 <label class="fd-form-label">24-Hour Time Picker</label>
-<br>
+<br />
 <fdp-time-picker name="24-hour" [displayFormat]="displayFormat"></fdp-time-picker>
-<br>
+<br />
 
-<br>
+<br />
 <label class="fd-form-label">12-Hour Time Picker</label>
-<br>
+<br />
 <fdp-time-picker name="12-hour" [meridian]="true"></fdp-time-picker>
-<br>
+<br />
 
-<br>
+<br />
 <label class="fd-form-label">Time Picker Without Seconds</label>
-<br>
+<br />
 <fdp-time-picker name="without-seconds" [displaySeconds]="false"></fdp-time-picker>
-<br>
+<br />
 
-<br>
+<br />
 <label class="fd-form-label">Disabled Time Picker</label>
-<br>
+<br />
 <fdp-time-picker name="disabled" [disabled]="true"></fdp-time-picker>
-<br>
+<br />
 
-<br>
+<br />
 <label class="fd-form-label">Compact Time Picker</label>
-<br>
+<br />
 <fdp-time-picker name="compact" contentDensity="compact"></fdp-time-picker>
-<br>
+<br />
 
-<br>
+<br />
 <label class="fd-form-label">Null Validity</label>
-<br>
+<br />
 <fdp-time-picker name="null-validity" [allowNull]="false" [(ngModel)]="allowNullTimeObject"></fdp-time-picker>
-<br>
-<br>
+<br />
+<br />
 <button fd-button label="Set To Null" (click)="setNull()"></button>
 <button fd-button label="Set Valid Time" (click)="setValid()"></button>

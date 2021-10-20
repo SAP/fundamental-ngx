@@ -1,39 +1,40 @@
 <fd-shellbar [size]="size" class="fd-docs--toolbar">
-    <button fd-shellbar-side-nav
-            fd-button
-            aria-expanded="false"
-            fdType="transparent"
-            glyph="menu2"
-            aria-label="Switch Navigation"
-            [compact]="false"
-            (click)="this.btnClicked.emit()"></button>
+    <button
+        fd-shellbar-side-nav
+        fd-button
+        aria-expanded="false"
+        fdType="transparent"
+        glyph="menu2"
+        aria-label="Switch Navigation"
+        [compact]="false"
+        (click)="this.btnClicked.emit()"
+    ></button>
     <fd-shellbar-logo>
-        <a aria-label="Home"
-           class="fd-shellbar__logo fd-docs--toolbar__home-logo"
-           href="/">
+        <a aria-label="Home" class="fd-shellbar__logo fd-docs--toolbar__home-logo" href="/">
             Fundamental
-            <span class="fd-docs--toolbar__home-logo-framework">
-                NGX
-            </span>
+            <span class="fd-docs--toolbar__home-logo-framework"> NGX </span>
         </a>
     </fd-shellbar-logo>
 
-    <fd-product-menu placement="bottom-start"
-                     [control]="library"
-                     [closePopoverOnSelect]="true"
-                     [items]="items">
+    <fd-product-menu placement="bottom-start" [control]="library" [closePopoverOnSelect]="true" [items]="items">
     </fd-product-menu>
 
     <fd-shellbar-actions [closePopoverOnSelect]>
         <ng-container *ngIf="size === 's'">
-            <button fd-button
-                    class="fd-shellbar__button--menu fd-docs--theme-menu"
-                    fdType="transparent"
-                    [compact]="false"
-                    glyph="settings"
-                    [fdMenuTrigger]="optionsMenu">
-            </button>
-            <fd-menu #optionsMenu [compact]="false" [mobile]="true" [mobileConfig]="{ title: 'Options', hasCloseButton: true }">
+            <button
+                fd-button
+                class="fd-shellbar__button--menu fd-docs--theme-menu"
+                fdType="transparent"
+                [compact]="false"
+                glyph="settings"
+                [fdMenuTrigger]="optionsMenu"
+            ></button>
+            <fd-menu
+                #optionsMenu
+                [compact]="false"
+                [mobile]="true"
+                [mobileConfig]="{ title: 'Options', hasCloseButton: true }"
+            >
                 <li fd-menu-item [submenu]="themeSubmenu">
                     <div fd-menu-interactive>
                         <span fd-menu-title>Themes</span>
@@ -67,64 +68,70 @@
             <fd-submenu #versionSubmenu>
                 <ng-container *ngTemplateOutlet="versionsTemplate"></ng-container>
             </fd-submenu>
-
         </ng-container>
         <ng-container *ngIf="size !== 's'">
-            <button fd-button
-                    class="fd-shellbar__button--menu fd-docs--theme-menu"
-                    fdType="transparent"
-                    [fdMenu]="true"
-                    [fdMenuTrigger]="densityMenu">
+            <button
+                fd-button
+                class="fd-shellbar__button--menu fd-docs--theme-menu"
+                fdType="transparent"
+                [fdMenu]="true"
+                [fdMenuTrigger]="densityMenu"
+            >
                 Content Density
             </button>
 
-            <fd-menu #densityMenu
-                     [fillControlMode]="null"
-                     placement="bottom-end">
+            <fd-menu #densityMenu [fillControlMode]="null" placement="bottom-end">
                 <ng-container *ngTemplateOutlet="densitiesTemplate"></ng-container>
             </fd-menu>
 
-            <button fd-button
-                    glyph="palette"
-                    class="fd-shellbar__button--menu fd-docs--theme-menu"
-                    fdType="transparent"
-                    [fdMenu]="true"
-                    [fdMenuTrigger]="themesMenu">
-            </button>
+            <button
+                fd-button
+                glyph="palette"
+                class="fd-shellbar__button--menu fd-docs--theme-menu"
+                fdType="transparent"
+                [fdMenu]="true"
+                [fdMenuTrigger]="themesMenu"
+            ></button>
 
-            <fd-menu #themesMenu
-                     [fillControlMode]="null"
-                     placement="bottom-end">
+            <fd-menu #themesMenu [fillControlMode]="null" placement="bottom-end">
                 <ng-container *ngTemplateOutlet="themesTemplate"></ng-container>
             </fd-menu>
 
-            <button fd-button fdType="transparent" [fdMenu]="true" [fdMenuTrigger]="versionsMenu"
-                    class="fd-shellbar__button--menu fd-docs--toolbar__version fd-docs--theme-menu">
+            <button
+                fd-button
+                fdType="transparent"
+                [fdMenu]="true"
+                [fdMenuTrigger]="versionsMenu"
+                class="fd-shellbar__button--menu fd-docs--toolbar__version fd-docs--theme-menu"
+            >
                 v {{ version.id }}
             </button>
 
-            <fd-menu #versionsMenu
-                     [fillControlMode]="null"
-                     placement="bottom-end">
+            <fd-menu #versionsMenu [fillControlMode]="null" placement="bottom-end">
                 <ng-container *ngTemplateOutlet="versionsTemplate"></ng-container>
             </fd-menu>
         </ng-container>
 
-        <a href="https://github.com/SAP/fundamental-ngx"
-           title="Find us on Github!"
-           class="fd-button fd-button--standard fd-shellbar__button fd-shellbar__button">
-            <svg class="logo-github logo-github--white"
-                 version="1.1"
-                 id="Capa_1"
-                 xmlns="http://www.w3.org/2000/svg"
-                 x="0px"
-                 y="0px"
-                 width="438.549px"
-                 height="438.549px"
-                 viewBox="0 0 438.549 438.549"
-                 xml:space="preserve">
+        <a
+            href="https://github.com/SAP/fundamental-ngx"
+            title="Find us on Github!"
+            class="fd-button fd-button--standard fd-shellbar__button fd-shellbar__button"
+        >
+            <svg
+                class="logo-github logo-github--white"
+                version="1.1"
+                id="Capa_1"
+                xmlns="http://www.w3.org/2000/svg"
+                x="0px"
+                y="0px"
+                width="438.549px"
+                height="438.549px"
+                viewBox="0 0 438.549 438.549"
+                xml:space="preserve"
+            >
                 <g>
-                    <path d="M409.132,114.573c-19.608-33.596-46.205-60.194-79.798-79.8C295.736,15.166,259.057,5.365,219.271,5.365
+                    <path
+                        d="M409.132,114.573c-19.608-33.596-46.205-60.194-79.798-79.8C295.736,15.166,259.057,5.365,219.271,5.365
         c-39.781,0-76.472,9.804-110.063,29.408c-33.596,19.605-60.192,46.204-79.8,79.8C9.803,148.168,0,184.854,0,224.63
         c0,47.78,13.94,90.745,41.827,128.906c27.884,38.164,63.906,64.572,108.063,79.227c5.14,0.954,8.945,0.283,11.419-1.996
         c2.475-2.282,3.711-5.14,3.711-8.562c0-0.571-0.049-5.708-0.144-15.417c-0.098-9.709-0.144-18.179-0.144-25.406l-6.567,1.136
@@ -143,14 +150,15 @@
         c-6.191,7.521-13.901,13.85-23.131,18.986c-9.232,5.14-18.182,8.85-26.84,11.136c-8.662,2.286-18.415,4.004-29.263,5.146
         c9.894,8.562,14.842,22.077,14.842,40.539v60.237c0,3.422,1.19,6.279,3.572,8.562c2.379,2.279,6.136,2.95,11.276,1.995
         c44.163-14.653,80.185-41.062,108.068-79.226c27.88-38.161,41.825-81.126,41.825-128.906
-        C438.536,184.851,428.728,148.168,409.132,114.573z"></path>
+        C438.536,184.851,428.728,148.168,409.132,114.573z"
+                    ></path>
                 </g>
             </svg>
         </a>
     </fd-shellbar-actions>
 </fd-shellbar>
-<link rel="stylesheet" *ngIf="cssUrl" [href]="cssUrl"/>
-<link rel="stylesheet" *ngIf="customCssUrl" [href]="customCssUrl"/>
+<link rel="stylesheet" *ngIf="cssUrl" [href]="cssUrl" />
+<link rel="stylesheet" *ngIf="customCssUrl" [href]="customCssUrl" />
 
 <ng-template #themesTemplate>
     <li fd-menu-item *ngFor="let theme of themes">

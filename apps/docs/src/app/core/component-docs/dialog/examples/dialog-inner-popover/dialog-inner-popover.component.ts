@@ -9,7 +9,6 @@ import { DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
     `
 })
 export class DialogInnerPopoverComponent {
-
     closeReason: string;
 
     constructor(private _dialogService: DialogService) {}
@@ -58,7 +57,6 @@ export class DialogInnerPopoverComponent {
             }
         );
     }
-
 }
 
 @Component({
@@ -88,19 +86,21 @@ export class DialogInnerPopoverComponent {
 
             <fd-dialog-footer>
                 <fd-button-bar
-                        label="Interesting"
-                        fdType="emphasized"
-                        [compact]="true"
-                        (click)="dialogRef.close('Interesting')"
-                        ariaLabel="Interesting Emphasized">
+                    label="Interesting"
+                    fdType="emphasized"
+                    [compact]="true"
+                    (click)="dialogRef.close('Interesting')"
+                    ariaLabel="Interesting Emphasized"
+                >
                 </fd-button-bar>
                 <fd-button-bar
-                        label="Cancel"
-                        fdInitialFocus
-                        fdType="transparent"
-                        [compact]="true"
-                        (click)="dialogRef.dismiss('Cancel')"
-                        ariaLabel="Cancel">
+                    label="Cancel"
+                    fdInitialFocus
+                    fdType="transparent"
+                    [compact]="true"
+                    (click)="dialogRef.dismiss('Cancel')"
+                    ariaLabel="Cancel"
+                >
                 </fd-button-bar>
             </fd-dialog-footer>
         </fd-dialog>

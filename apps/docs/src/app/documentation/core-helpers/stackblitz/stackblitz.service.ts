@@ -60,7 +60,8 @@ export class StackblitzService {
             } else if (example.language === 'scss') {
                 generatedFiles = this.handleScssFile(example);
             } else if (example.path !== undefined) {
-                defaultProjectInfo.files[`${example.path}/${example.fileName}.${example.language}`] = example.code.default;
+                defaultProjectInfo.files[`${example.path}/${example.fileName}.${example.language}`] =
+                    example.code.default;
                 return;
             }
 

@@ -243,7 +243,7 @@ export class DynamicPageTitleHostComponent implements OnInit, AfterViewInit {
                     if (globalActionsContainerEl) {
                         globalActionsContainerEl.style.order = '2';
                     }
-                    
+
                     if (layoutActionsContainerEl) {
                         layoutActionsContainerEl.style.order = '1';
                     }

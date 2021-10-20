@@ -9,13 +9,15 @@ describe('DialogBodyComponent', () => {
     let component: DialogBodyComponent;
     let fixture: ComponentFixture<DialogBodyComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [BusyIndicatorModule],
-            declarations: [DialogBodyComponent],
-            providers: [DialogConfig, DialogRef]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [BusyIndicatorModule],
+                declarations: [DialogBodyComponent],
+                providers: [DialogConfig, DialogRef]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DialogBodyComponent);

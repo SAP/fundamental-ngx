@@ -29,9 +29,8 @@ import {
     TAB,
     UP_ARROW
 } from '@angular/cdk/keycodes';
-
 import { fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
-import { filter, takeUntil, tap } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 import {
     closestElement,
@@ -57,13 +56,12 @@ import {
     MatchingBy,
     MatchingStrategy,
     ObservableComboBoxDataSource,
-    OptionItem,
-    SelectableOptionItem,
-    Status
+    OptionItem
 } from '@fundamental-ngx/platform/shared';
 
+import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { ComboboxComponent } from '../combobox/combobox.component';
-import { ComboboxConfig, } from '../combobox.config';
+import { ComboboxConfig } from '../combobox.config';
 
 export type TextAlignment = 'left' | 'right';
 export type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | Observable<T[]> | T[];
@@ -80,26 +78,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     /** Provides maximum height for the optionPanel */
     @Input()
     maxHeight = '250px';
-    /** @hidden */
-    _isListEmpty = true;
-    /** @hidden */
-    _isSearchInvalid = false;
-    /**
-     *  The state of the form control - applies css classes.
-     *  Can be 'success', 'error', 'warning', 'default', 'information'.
-     */
-    @Input()
-    // state: Status = 'default';
-    get state(): Status {
-        return this._state;
-    }
-    set state(state: Status) {
-        this._state = state;
-    }
 
-    get isGroup(): boolean {
-                return !!(this.group && this.groupKey);
-             }
     /** Datasource for suggestion list */
     @Input()
     get dataSource(): FdpComboBoxDataSource<any> {
@@ -116,9 +95,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     @Input()
     autoComplete = true;
 
-    /**
-     * content Density of element. 'cozy' | 'compact'
-     */
+    /** content Density of element. 'cozy' | 'compact' */
     @Input()
     set contentDensity(contentDensity: ContentDensity) {
         this._contentDensity = contentDensity;
@@ -192,45 +169,26 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     @ContentChildren(TemplateDirective)
     customTemplates: QueryList<TemplateDirective>;
 
-    /** @hidden */
-    _flatSuggestions: SelectableOptionItem[];
-    /** @hidden
-     * Custom Option item Template
-     * */
-    optionItemTemplate: TemplateRef<any>;
+    /** @hidden Custom Option item Template */
+    optionItemTemplate: TemplateRef<HTMLElement>;
 
-    /** @hidden
-     * Custom Group Header item Template
-     * */
-    groupItemTemplate: TemplateRef<any>;
+    /** @hidden Custom Group Header item Template */
+    groupItemTemplate: TemplateRef<HTMLElement>;
 
-    /** @hidden
-     * Custom Secondary item Template
-     * */
-    secondaryItemTemplate: TemplateRef<any>;
+    /** @hidden Custom Secondary item Template */
+    secondaryItemTemplate: TemplateRef<HTMLElement>;
 
-    /** @hidden
-     * Custom Selected option item Template
-     * */
-    selectedItemTemplate: TemplateRef<any>;
+    /** @hidden Custom Selected option item Template */
+    selectedItemTemplate: TemplateRef<HTMLElement>;
 
     /** @hidden */
-    searchInputElement: ElementRef;
+    searchInputElement: ElementRef<HTMLInputElement>;
 
     /** @hidden */
     _contentDensity: ContentDensity = this.comboboxConfig.contentDensity;
 
-    /**
-     * @hidden
-     * Whether "contentDensity" is "compact"
-     */
+    /** @hidden Whether "contentDensity" is "compact" */
     isCompact: boolean = this._contentDensity === 'compact';
-
-    /** @hidden */
-    controlTemplate: TemplateRef<any>;
-
-    /** @hidden */
-    listTemplate: TemplateRef<any>;
 
     /** Get the input text of the input. */
     get inputText(): string {
@@ -251,38 +209,45 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         return !(this.mobile && this.mobileConfig.approveButtonText);
     }
 
-    /** @hidden
-     * List of matched suggestions
-     * */
+    /** @hidden List of matched suggestions */
     _suggestions: OptionItem[];
 
-    /** @hidden
-     * Max width of list container
-     * */
+    /** @hidden Max width of list container */
     maxWidth?: number;
 
-    /** @hidden
-     * Min width of list container
-     * */
+    /** @hidden Min width of list container */
     minWidth?: number;
 
-    /**
-     * Need for opening mobile version
-     *
-     * @hidden
-     */
+    /** @hidden Need for opening mobile version */
     openChange = new Subject<boolean>();
+
+    /** @hidden */
+    get isGroup(): boolean {
+        return !!(this.group && this.groupKey);
+    }
+
+    /** Is suggestions list empty */
+    get isSuggestionsListEmpty(): boolean {
+        return this._suggestions.length === 0;
+    }
 
     protected _dataSource: FdpComboBoxDataSource<any>;
 
     /** @hidden */
+    private _flatSuggestions: OptionItem[];
+
+    /** @hidden */
     private _inputTextValue: string;
+
     /** @hidden */
     private _matchingStrategy: MatchingStrategy = this.comboboxConfig.matchingStrategy;
+
     /** @hidden */
     private _dsSubscription?: Subscription;
+
     /** @hidden */
     private _element: HTMLElement = this.elementRef.nativeElement;
+
     /** Keys, that won't trigger the popover's open state, when dispatched on search input */
     private readonly _nonOpeningKeys: number[] = [
         ESCAPE,
@@ -305,13 +270,15 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     private _secondaryFn = (value: any) => {
         if (isOptionItem(value)) {
             return value.secondaryText;
-        } else if (isJsObject(value) && this.secondaryKey) {
+        }
+
+        if (isJsObject(value) && this.secondaryKey) {
             const currentItem = this.objectGet(value, this.secondaryKey);
 
             return isFunction(currentItem) ? currentItem() : currentItem;
-        } else {
-            return value;
         }
+
+        return value;
     };
 
     constructor(
@@ -347,24 +314,16 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         }
     }
 
-    /** @hidden
-     * Method to emit change event
-     */
+    /** @hidden Method to emit change event */
     abstract emitChangeEvent<K>(value: K): void;
 
-    /** @hidden
-     * Define is this item selected
-     */
+    /** @hidden Define is this item selected */
     abstract isSelectedOptionItem(selectedItem: OptionItem): boolean;
 
-    /** @hidden
-     * Emit select OptionItem
-     * */
+    /** @hidden Emit select OptionItem */
     abstract selectOptionItem(item: OptionItem): void;
 
-    /** @hidden
-     * Define value as selected
-     * */
+    /** @hidden Define value as selected */
     abstract setAsSelected(item: OptionItem[]): void;
 
     /** Is empty search field */
@@ -383,16 +342,14 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         super.writeValue(value);
     }
 
-    /** @hidden
-     * Close list
-     * */
+    /** @hidden Close list */
     close(event: MouseEvent): void {
         const target = event.target as HTMLInputElement;
         if (target && target.id === this.id) {
             return;
         }
 
-        if (!!closestElement(`#${this.id}-input-group-container`, event.target)) {
+        if (!!closestElement(`#${this.id}-input-group-container`, target)) {
             event.preventDefault();
             event.stopPropagation();
         }
@@ -471,6 +428,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         if (this.isOpen || !this.mobile) {
             return;
         }
+
         // otherwise show options
         this.showList(true);
     }
@@ -479,7 +437,6 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
      * Handle Keydown on Input
      * @hidden
      */
-
     onInputKeydownHandler(event: KeyboardEvent): void {
         if (this.readonly) {
             return;
@@ -525,15 +482,48 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     }
 
     /** @hidden */
+    _onCompleteTerm(event: AutoCompleteEvent): void {
+        if (event.forceClose) {
+            this.toggleSelectionByInputText(event.term);
+            this.showList(false);
+        }
+    }
+
+    /** @hidden */
+    toggleSelectionByInputText(text = this.inputText): void {
+        let optionItem = this._getSelectItemByInputValue(text);
+        if (!optionItem) {
+            optionItem = {
+                label: text,
+                value: text
+            };
+        }
+
+        this.selectOptionItem(optionItem);
+    }
+
+    /** @hidden */
+    protected _getSelectItemByInputValue(displayValue: string): OptionItem | undefined {
+        return this._flatSuggestions.find((value) => value.label === displayValue);
+    }
+
+    /** @hidden */
     protected get ds(): ComboBoxDataSource<any> {
         return <ComboBoxDataSource<any>>this.dataSource;
     }
 
-    /** @hidden
-     * Method that picks other value moved from current one by offset, called only when combobox is closed */
+    /** @hidden Map grouped values to array. */
+    protected _flatGroups(items: OptionItem[]): OptionItem[] {
+        return items.reduce((result: OptionItem[], item: OptionItem) => result.concat(item.children), []);
+    }
+
+    /**
+     * @hidden
+     * Method that picks other value moved from current one by offset, called only when combobox is closed
+     */
     private _chooseOtherItem(offset: number): void {
         const activeValue: OptionItem = this._getSelectItemByValue(this.inputText);
-        const index: number = this._suggestions.findIndex(value => value === activeValue);
+        const index: number = this._suggestions.findIndex((value) => value === activeValue);
 
         if (this._suggestions[index + offset]) {
             this.handleOptionItem(this._suggestions[index + offset]);
@@ -542,7 +532,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden */
     private _getSelectItemByValue(displayValue: string): OptionItem {
-        return this._suggestions.find(value => value.label === displayValue);
+        return this._suggestions.find((value) => value.label === displayValue);
     }
 
     /** @hidden */
@@ -557,14 +547,9 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
                 this._dsSubscription = null;
             }
         }
+
         // Convert whatever comes in as DataSource so we can work with it identically
         this._dataSource = this._openDataStream(ds);
-    }
-
-    /** @hidden
-     *  Map grouped values to array. */
-    protected _flatGroups(items: SelectableOptionItem[]): SelectableOptionItem[] {
-        return items.reduce((result: SelectableOptionItem[], item: SelectableOptionItem) => result.concat(item.children), []);
     }
 
     /** @hidden */
@@ -581,12 +566,8 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
          */
         this._dsSubscription = initDataSource
             .open()
-            .pipe(
-                takeUntil(this._destroyed),
-                tap(data => this._isListEmpty = !data?.length),
-                filter(data => !!data.length)
-            )
-            .subscribe(data => {
+            .pipe(takeUntil(this._destroyed))
+            .subscribe((data) => {
                 this._suggestions = this._convertToOptionItems(data);
                 this._flatSuggestions = this.isGroup ? this._flatGroups(this._suggestions) : this._suggestions;
 
@@ -615,6 +596,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
         return initDataSource;
     }
+
     /** @hidden */
     private _toDataStream(source: FdpComboBoxDataSource<any>): ComboBoxDataSource<any> | undefined {
         if (isDataSource(source)) {
@@ -644,11 +626,13 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
 
     /** @hidden */
     private _getOptionsListWidth(): void {
-        const body = document.body;
-        const rect = (this._element.querySelector('fd-input-group') as HTMLElement).getBoundingClientRect();
-        const scrollBarWidth = body.offsetWidth - body.clientWidth;
-        this.maxWidth = this.autoResize ? window.innerWidth - scrollBarWidth - rect.left : this.minWidth;
-        this.minWidth = rect.width - 2;
+        const { offsetWidth, clientWidth } = document.body;
+        const { width, left } = (this._element.querySelector('fd-input-group') as HTMLElement).getBoundingClientRect();
+        const scrollBarWidth = offsetWidth - clientWidth;
+
+        this.maxWidth = this.autoResize ? window.innerWidth - scrollBarWidth - left : this.minWidth;
+        this.minWidth = width - 2;
+
         this._cd.detectChanges();
     }
 
@@ -712,7 +696,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
             group[keyValue].push(item);
         }
 
-        return Object.keys(group).map(key => {
+        return Object.keys(group).map((key) => {
             const selectItem: OptionItem = {
                 label: key,
                 value: null,
@@ -783,11 +767,9 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
         return selectItems;
     }
 
-    /** @hidden
-     * Assign custom templates
-     * */
+    /** @hidden Assign custom templates */
     private _assignCustomTemplates(): void {
-        this.customTemplates.forEach(template => {
+        this.customTemplates.forEach((template) => {
             switch (template.getName()) {
                 case 'optionItemTemplate':
                     this.optionItemTemplate = template.templateRef;

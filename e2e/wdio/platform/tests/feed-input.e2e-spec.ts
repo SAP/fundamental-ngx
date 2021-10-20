@@ -6,7 +6,9 @@ import {
     getAttributeByName,
     getAttributeByNameArr,
     getCSSPropertyByName,
-    getElementArrayLength, getElementClass, getElementSize,
+    getElementArrayLength,
+    getElementClass,
+    getElementSize,
     isEnabled,
     refreshPage,
     scrollIntoView,
@@ -23,7 +25,7 @@ import {
 } from '../fixtures/appData/feed-input-page-contents';
 import { eight_lines_text, four_lines_text } from '../fixtures/testData/feed-input';
 
-describe('Verify Feed Input component', function() {
+describe('Verify Feed Input component', () => {
     const { feedInputAvatar, feedInputTextArea, feedInput, feedInputNoAvatar, feedInputButton } = new FeedInputPo();
     const feedInputPage = new FeedInputPo();
 
@@ -159,7 +161,7 @@ describe('Verify Feed Input component', function() {
         feedInputPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             feedInputPage.saveExampleBaselineScreenshot();
             expect(feedInputPage.compareWithBaseline()).toBeLessThan(5);

@@ -9,10 +9,7 @@ import { TableCellDirective, TableModule } from '@fundamental-ngx/core/table';
         <td fd-table-cell>
             <fd-checkbox></fd-checkbox>
         </td>
-        <td
-            fd-table-cell
-            [key]="key"
-        >{{key}}</td>
+        <td fd-table-cell [key]="key">{{ key }}</td>
     `
 })
 class TestComponent {
@@ -26,12 +23,14 @@ describe('TableCellDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [TableModule, CheckboxModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [TableModule, CheckboxModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(TestComponent);

@@ -32,7 +32,8 @@ import {
     getAttributeByName,
     getCSSPropertyByName,
     getCurrentUrl,
-    getElementArrayLength, getElementClass,
+    getElementArrayLength,
+    getElementClass,
     getText,
     isElementClickable,
     refreshPage,
@@ -43,23 +44,62 @@ import {
     pause
 } from '../../driver/wdio';
 
-describe('List test suite:', function() {
+describe('List test suite:', () => {
     const listPage = new ListPo();
     const {
-        noBorderListItems, noBorderCompactList, noBorderList, footerListItems, footerCompactList, footer, groupHeader,
-        groupHeaderListItems, groupCompactList, interactiveListItems, counterListItems, counterCompactList,
-        counterTitleItems, counterCounterItem, deletionListItems, deletionBtn, deletionIcon, multiList, multiListItems,
-        multiToolbar, multiCheckbox, singleList, singleListItems, singleToolbar, singleRadioBtn, navList, navListItems,
-        navListLink, vScrollList, vScrollListItems, vScrollLoadIcon, loadList, loadListItems, loadShowMoreBtn,
-        loadIcon, btnList, btnListItems, btnDeleteBtn, btnEditBtn, noDataListItems, noDataCompactList, noSepList,
-        noSepListItems, unreadListAttr, unreadListItems, unreadListItemText
+        noBorderListItems,
+        noBorderCompactList,
+        noBorderList,
+        footerListItems,
+        footerCompactList,
+        footer,
+        groupHeader,
+        groupHeaderListItems,
+        groupCompactList,
+        interactiveListItems,
+        counterListItems,
+        counterCompactList,
+        counterTitleItems,
+        counterCounterItem,
+        deletionListItems,
+        deletionBtn,
+        deletionIcon,
+        multiList,
+        multiListItems,
+        multiToolbar,
+        multiCheckbox,
+        singleList,
+        singleListItems,
+        singleToolbar,
+        singleRadioBtn,
+        navList,
+        navListItems,
+        navListLink,
+        vScrollList,
+        vScrollListItems,
+        vScrollLoadIcon,
+        loadList,
+        loadListItems,
+        loadShowMoreBtn,
+        loadIcon,
+        btnList,
+        btnListItems,
+        btnDeleteBtn,
+        btnEditBtn,
+        noDataListItems,
+        noDataCompactList,
+        noSepList,
+        noSepListItems,
+        unreadListAttr,
+        unreadListItems,
+        unreadListItemText
     } = listPage;
 
     beforeAll(() => {
         listPage.open();
     }, 1);
 
-    describe('Borderless examples:', function() {
+    describe('Borderless examples:', () => {
         it('should do basic checks', () => {
             checkElArrIsClickable(noBorderListItems);
             checkElementText(noBorderListItems);
@@ -72,7 +112,7 @@ describe('List test suite:', function() {
         });
     });
 
-    describe('Footer examples:', function() {
+    describe('Footer examples:', () => {
         it('should do basic checks and check footer', () => {
             checkElArrIsClickable(footerListItems);
             checkElementText(footerListItems);
@@ -81,7 +121,7 @@ describe('List test suite:', function() {
         });
     });
 
-    describe('Group header examples:', function() {
+    describe('Group header examples:', () => {
         it('should do basic checks and check header', () => {
             checkElArrIsClickable(groupHeaderListItems);
             checkElementText(groupHeaderListItems);
@@ -90,14 +130,14 @@ describe('List test suite:', function() {
         });
     });
 
-    describe('Interactive States examples:', function() {
+    describe('Interactive States examples:', () => {
         it('should do basic checks', () => {
             checkElementText(interactiveListItems);
             checkElArrIsClickable(interactiveListItems);
         });
     });
 
-    describe('Item Counter examples:', function() {
+    describe('Item Counter examples:', () => {
         it('should do basic checks and check counter', () => {
             checkElArrIsClickable(counterListItems);
             checkElementText(counterTitleItems);
@@ -106,7 +146,7 @@ describe('List test suite:', function() {
         });
     });
 
-    describe('Deletion button examples:', function() {
+    describe('Deletion button examples:', () => {
         it('should do basic checks', () => {
             checkElArrIsClickable(deletionListItems);
             checkElementText(deletionListItems);
@@ -119,7 +159,7 @@ describe('List test suite:', function() {
         });
     });
 
-    describe('Multi Selection examples:', function() {
+    describe('Multi Selection examples:', () => {
         it('should do basic checks', () => {
             checkElementText(multiListItems);
             checkElArrIsClickable(multiListItems);
@@ -135,7 +175,7 @@ describe('List test suite:', function() {
         });
     });
 
-    describe('Single Selection examples:', function() {
+    describe('Single Selection examples:', () => {
         it('should do basic checks', () => {
             checkElementText(singleListItems);
             checkElArrIsClickable(singleListItems);
@@ -151,7 +191,7 @@ describe('List test suite:', function() {
         });
     });
 
-    describe('Navigation Indication examples:', function() {
+    describe('Navigation Indication examples:', () => {
         it('should do basic checks', () => {
             const navListItemCount = getElementArrayLength(navListItems);
 
@@ -170,7 +210,7 @@ describe('List test suite:', function() {
         });
     });
 
-    describe('Virtual Scroll examples:', function() {
+    describe('Virtual Scroll examples:', () => {
         it('should do basic checks', () => {
             isElementClickable(vScrollListItems);
             checkElementText(vScrollListItems);
@@ -199,13 +239,13 @@ describe('List test suite:', function() {
         });
     });
 
-    describe('Load Data On Button Click examples:', function() {
+    describe('Load Data On Button Click examples:', () => {
         it('should do basic checks', () => {
             const itemCount = getElementArrayLength(loadListItems);
 
             checkElArrIsClickable(loadListItems);
             checkElementText(loadListItems);
-            expect(getElementClass(loadListItems, itemCount - 1)).toContain(loadMoreClass)
+            expect(getElementClass(loadListItems, itemCount - 1)).toContain(loadMoreClass);
         });
 
         it('should check loading on click', () => {
@@ -217,7 +257,7 @@ describe('List test suite:', function() {
         });
     });
 
-    describe('Buttons example:', function() {
+    describe('Buttons example:', () => {
         it('should do basic checks', () => {
             checkElArrIsClickable(btnListItems);
             checkElArrIsClickable(btnDeleteBtn);
@@ -248,15 +288,15 @@ describe('List test suite:', function() {
         });
     });
 
-    describe('With No Data examples:', function() {
+    describe('With No Data examples:', () => {
         it('should do basic checks and check no data text', () => {
             checkElArrIsClickable(noDataListItems);
-            expect(getElementClass(noDataCompactList)).toContain(compactClass)
+            expect(getElementClass(noDataCompactList)).toContain(compactClass);
             checkElementTextValue(noDataListItems, noDataText);
         });
     });
 
-    describe('With Unread Data examples:', function() {
+    describe('With Unread Data examples:', () => {
         it('should do basic checks and check unread data', () => {
             checkElArrIsClickable(unreadListItems);
             checkElementText(unreadListItems);
@@ -264,13 +304,13 @@ describe('List test suite:', function() {
         });
     });
 
-    describe('check orientation', function() {
+    describe('check orientation', () => {
         it('should check RTL and LTR orientation', () => {
             listPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             refreshPage();
             waitForElDisplayed(listPage.title);

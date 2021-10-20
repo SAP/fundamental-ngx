@@ -1,18 +1,20 @@
+import { TimelineNodeHeaderInfoTextDirective } from './timeline-node-header-info-text.directive';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Component, ElementRef, ViewChild } from '@angular/core';
-
 import { TimelineModule } from '@fundamental-ngx/core/timeline';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 
 describe('TimelineNodeHeaderInfoTextDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [TimelineModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [TimelineModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

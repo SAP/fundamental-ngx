@@ -10,11 +10,11 @@ import {
     truncatedBtnTooltipText
 } from '../fixtures/appData/menu-button-contents';
 import {
-
     click,
     doubleClick,
     getAttributeByName,
-    getElementArrayLength, getElementClass,
+    getElementArrayLength,
+    getElementClass,
     getText,
     isElementDisplayed,
     refreshPage,
@@ -22,11 +22,21 @@ import {
     waitForPresent
 } from '../../driver/wdio';
 
-describe('Menu button test suite', function() {
+describe('Menu button test suite', () => {
     const menuBtnPage = new MenuButtonPo();
     const {
-        btnArrowIconsArr, btnWorldIconArr, cozyBtnAttrArr, cozyBtnArr, cozySelectedItemLabel, menuItemArr,
-        menuItemOverlay, compactBtnAttrArr, compactBtnArr, sectionTitle, menuTypeBtnAttrArr, menuTypeBtnArr
+        btnArrowIconsArr,
+        btnWorldIconArr,
+        cozyBtnAttrArr,
+        cozyBtnArr,
+        cozySelectedItemLabel,
+        menuItemArr,
+        menuItemOverlay,
+        compactBtnAttrArr,
+        compactBtnArr,
+        sectionTitle,
+        menuTypeBtnAttrArr,
+        menuTypeBtnArr
     } = menuBtnPage;
 
     beforeAll(() => {
@@ -38,7 +48,7 @@ describe('Menu button test suite', function() {
         waitForPresent(btnArrowIconsArr);
     }, 1);
 
-    describe('Check general menu button states', function() {
+    describe('Check general menu button states', () => {
         it('should check that the arrow icon is present', () => {
             const arrayLength = getElementArrayLength(btnArrowIconsArr);
 
@@ -64,7 +74,6 @@ describe('Menu button test suite', function() {
             click(cozyBtnArr);
             click(cozyBtnArr);
             expect(isElementDisplayed(menuItemOverlay)).toBe(false);
-
         });
 
         it('should check closing menu when clicking outside of menu', () => {
@@ -75,10 +84,9 @@ describe('Menu button test suite', function() {
             click(sectionTitle);
             expect(isElementDisplayed(menuItemOverlay)).toBe(false);
         });
-
     });
 
-    describe('Check cozy and compact menu button states', function() {
+    describe('Check cozy and compact menu button states', () => {
         it('should check btn states', () => {
             const cozyBtnCount = getElementArrayLength(cozyBtnAttrArr);
             const compactBtnCount = getElementArrayLength(compactBtnAttrArr);
@@ -109,8 +117,7 @@ describe('Menu button test suite', function() {
             const compactBtnArrLength = getElementArrayLength(compactBtnArr);
 
             for (let i = 0; compactBtnTextArrLength > i; i++) {
-                expect(getText(compactBtnAttrArr, i).trim())
-                    .toEqual(cozyAndCompactBtnTextArr[i]);
+                expect(getText(compactBtnAttrArr, i).trim()).toEqual(cozyAndCompactBtnTextArr[i]);
             }
 
             for (let j = 0; compactBtnArrLength > j; j++) {
@@ -119,8 +126,7 @@ describe('Menu button test suite', function() {
         });
     });
 
-    describe('Check types of menu buttons', function() {
-
+    describe('Check types of menu buttons', () => {
         it('should check disabled buttons', () => {
             for (let i = 0; 5 > i; i++) {
                 expect(getAttributeByName(menuTypeBtnArr, disabledState, i)).toEqual('true');
@@ -129,25 +135,22 @@ describe('Menu button test suite', function() {
 
         it('should check long text menu btn with and without icon', () => {
             expect(getText(menuTypeBtnArr, 11).trim()).toEqual(truncatedBtnText);
-            expect(getAttributeByName(menuTypeBtnArr, tooltipAttr, 11))
-                .toContain(truncatedBtnTooltipText);
+            expect(getAttributeByName(menuTypeBtnArr, tooltipAttr, 11)).toContain(truncatedBtnTooltipText);
             expect(getText(menuTypeBtnArr, 12).trim()).toEqual(truncatedBtnText);
-            expect(getAttributeByName(menuTypeBtnArr, tooltipAttr, 12))
-                .toBe(truncatedBtnNoIconTooltipText);
+            expect(getAttributeByName(menuTypeBtnArr, tooltipAttr, 12)).toBe(truncatedBtnNoIconTooltipText);
         });
     });
 
-    describe('Check orientations', function() {
+    describe('Check orientations', () => {
         it('should check LTR/RTL orientation', () => {
             menuBtnPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             menuBtnPage.saveExampleBaselineScreenshot();
             expect(menuBtnPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
-})
-;
+});

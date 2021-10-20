@@ -1,11 +1,7 @@
 <div *ngFor="let size of sizes">
     <div class="base-row">
         <strong>Size = {{ size || 'default' }}</strong>
-        <fd-rating-indicator
-            [size]="size"
-            totalRatings="111"
-            #sampleSize
-        ></fd-rating-indicator>
+        <fd-rating-indicator [size]="size" totalRatings="111" #sampleSize></fd-rating-indicator>
         <span>Selected Rate: {{ sampleSize.viewValue }}</span>
     </div>
     <div class="base-row">

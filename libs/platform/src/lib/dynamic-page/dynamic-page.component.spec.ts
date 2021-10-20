@@ -134,8 +134,9 @@ describe('DynamicPageComponent default values', () => {
         dynamicPageComponent.toggleCollapse();
         component.dynamicPage.ngAfterViewInit();
         fixture.detectChanges();
-        const contentEl: HTMLElement = fixture.debugElement.query(By.css('.fd-dynamic-page__collapsible-header'))
-            .nativeElement;
+        const contentEl: HTMLElement = fixture.debugElement.query(
+            By.css('.fd-dynamic-page__collapsible-header')
+        ).nativeElement;
         expect(contentEl.getAttribute('aria-hidden')).toBeTruthy();
     });
 
@@ -274,8 +275,9 @@ describe('DynamicPageComponent with collapsible set to false', () => {
         dynamicPageTitle.nativeElement.click();
         fixture.detectChanges();
 
-        const contentEl: HTMLElement = fixture.debugElement.query(By.css('.fd-dynamic-page__collapsible-header'))
-            .nativeElement;
+        const contentEl: HTMLElement = fixture.debugElement.query(
+            By.css('.fd-dynamic-page__collapsible-header')
+        ).nativeElement;
         expect(contentEl.getAttribute('aria-hidden')).not.toBe('true');
     });
 });
@@ -303,12 +305,7 @@ describe('DynamicPageComponent with collapsible set to false', () => {
                     <fdp-dynamic-page-layout-actions>
                         <!-- layout actions -->
                         <fd-toolbar fdType="transparent" [clearBorder]="true">
-                            <button
-                                fd-button
-                                fdType="transparent"
-                                aria-label="Resize"
-                                id="layout-action-button"
-                            >
+                            <button fd-button fdType="transparent" aria-label="Resize" id="layout-action-button">
                                 <i class="sap-icon--resize"></i>
                             </button>
                         </fd-toolbar>

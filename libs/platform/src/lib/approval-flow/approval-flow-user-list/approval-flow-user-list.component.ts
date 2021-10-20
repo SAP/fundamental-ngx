@@ -15,7 +15,12 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import { BaseListItem, ListComponent, SelectionChangeEvent, StandardListItemComponent } from '@fundamental-ngx/platform/list';
+import {
+    BaseListItem,
+    ListComponent,
+    SelectionChangeEvent,
+    StandardListItemComponent
+} from '@fundamental-ngx/platform/list';
 import { ApprovalUser } from '../interfaces';
 import { trackByFn } from '../helpers';
 import { interval } from 'rxjs';
@@ -76,12 +81,11 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.selectedUsers.length) {
-            const selectedApproversNames = this.selectedUsers.map(approver => approver.name);
+            const selectedApproversNames = this.selectedUsers.map((approver) => approver.name);
 
-            this._selectedItems = this.listItems
-                .filter(item => selectedApproversNames.includes(item.avatarTitle));
+            this._selectedItems = this.listItems.filter((item) => selectedApproversNames.includes(item.avatarTitle));
 
-            this._selectedItems.forEach(item => {
+            this._selectedItems.forEach((item) => {
                 item._selected = true;
                 this.list._selectItem(item);
             });
@@ -109,8 +113,8 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
 
     /** @hidden */
     private _getUsersFromSelectedItems(items: BaseListItem[]): ApprovalUser[] {
-        return items.map(item =>
-            this.users.find(user => `${this._idPrefix + user.id}` === item.itemEl.nativeElement.id)
+        return items.map((item) =>
+            this.users.find((user) => `${this._idPrefix + user.id}` === item.itemEl.nativeElement.id)
         );
     }
 

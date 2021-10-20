@@ -1,12 +1,18 @@
 import { Component } from '@angular/core';
-import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import {
+    DatetimeAdapter,
+    DATE_TIME_FORMATS,
+    FdDate,
+    FdDatetimeAdapter,
+    FD_DATETIME_FORMATS
+} from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-calendar-single-example',
     template: `
         <fd-calendar [calType]="'single'" [(ngModel)]="date" [disableFunction]="myDisableFunction"></fd-calendar>
         <br />
-        <div>Selected Date: {{ date | date : 'shortDate' }}</div>
+        <div>Selected Date: {{ date | date: 'shortDate' }}</div>
         <button fd-button label="Disable Wednesday" (click)="disableWednesday()"></button>
     `,
     styles: [

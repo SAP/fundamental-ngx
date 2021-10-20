@@ -48,7 +48,8 @@
                             <fd-wizard-step-indicator>2</fd-wizard-step-indicator>
                             <fd-wizard-content size="xl">
                                 Please select a payment type:
-                                <fd-radio-button #bankButton
+                                <fd-radio-button
+                                    #bankButton
                                     value="bank"
                                     id="radio-1"
                                     name="radio-name-1"
@@ -57,7 +58,8 @@
                                 >
                                     Bank Transfer
                                 </fd-radio-button>
-                                <fd-radio-button #creditButton
+                                <fd-radio-button
+                                    #creditButton
                                     value="credit"
                                     id="radio-2"
                                     name="radio-name-2"
@@ -122,17 +124,9 @@
         </fd-dialog-body>
 
         <fd-dialog-footer>
-            <fd-button-bar
-                    fdType="emphasized"
-                    label="Continue"
-                    type="submit"
-                    (click)="dialog.close('Continue')">
+            <fd-button-bar fdType="emphasized" label="Continue" type="submit" (click)="dialog.close('Continue')">
             </fd-button-bar>
-            <fd-button-bar
-                    fd-initial-focus
-                    label="Cancel"
-                    (click)="dialog.dismiss()">
-            </fd-button-bar>
+            <fd-button-bar fd-initial-focus label="Cancel" (click)="dialog.dismiss()"> </fd-button-bar>
         </fd-dialog-footer>
     </fd-dialog>
 </ng-template>

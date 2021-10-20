@@ -25,9 +25,7 @@
             </fdp-form-field>
 
             <ng-template #i18n let-errors>
-                <span role="alert" aria-atomic="true" *ngIf="errors.required">
-                    Value is required
-                </span>
+                <span role="alert" aria-atomic="true" *ngIf="errors.required"> Value is required </span>
                 <span role="alert" aria-atomic="true" *ngIf="errors.maxlength">
                     Please get your character count under limit.
                 </span>

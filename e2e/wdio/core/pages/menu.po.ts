@@ -10,7 +10,7 @@ export class MenuPo extends CoreBaseComponentPo {
     btnMenuWithIcons = 'button[label = "Menu with icons"]';
     btnWithSubmenu = 'fd-menu-with-submenu-example button';
     btnMobileMenu = 'fd-menu-mobile-example button';
-    menuItems = '.fd-menu__item'
+    menuItems = '.fd-menu__item';
     menuItemsArr = '.fd-menu__item a';
     submenuItems = 'div.fd-menu__link span';
     dialogMobileMenu = 'div[role="dialog"]';

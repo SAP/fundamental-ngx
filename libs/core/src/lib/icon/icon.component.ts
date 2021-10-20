@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    HostBinding,
+    Input,
+    OnChanges,
+    OnInit,
+    ViewEncapsulation
+} from '@angular/core';
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 export type IconFont = 'SAP-icons' | 'BusinessSuiteInAppSymbols' | 'SAP-icons-TNT';
@@ -25,7 +34,6 @@ const BusinessSuiteInAppSymbol_PREFIX = 'businessSuiteInAppSymbols';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
-
     /** The icon name to display. See the icon page for the list of icons
      * here: https://sap.github.io/fundamental-ngx/icon
      * */
@@ -71,12 +79,11 @@ export class IconComponent implements OnChanges, OnInit, CssClassBuilder {
     buildComponentCssClass(): string[] {
         return [
             this.class,
-            this.glyph && this.font === 'SAP-icons' ?
-            `${SAP_ICONS_PREFIX}--${this.glyph}` : '',
-            this.glyph && this.font === 'SAP-icons-TNT' ?
-            `${SAP_ICONS_PREFIX}-${TNT_PREFIX}--${this.glyph}` : '',
-            this.glyph && this.font === 'BusinessSuiteInAppSymbols' ?
-            `${SAP_ICONS_PREFIX}-${BusinessSuiteInAppSymbol_PREFIX}--${this.glyph}` : '',
+            this.glyph && this.font === 'SAP-icons' ? `${SAP_ICONS_PREFIX}--${this.glyph}` : '',
+            this.glyph && this.font === 'SAP-icons-TNT' ? `${SAP_ICONS_PREFIX}-${TNT_PREFIX}--${this.glyph}` : '',
+            this.glyph && this.font === 'BusinessSuiteInAppSymbols'
+                ? `${SAP_ICONS_PREFIX}-${BusinessSuiteInAppSymbol_PREFIX}--${this.glyph}`
+                : ''
         ];
     }
 

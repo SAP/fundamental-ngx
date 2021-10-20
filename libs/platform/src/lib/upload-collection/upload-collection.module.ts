@@ -29,12 +29,7 @@ import { NewFolderComponent } from './dialogs/new-folder/new-folder.component';
 import { MoveToComponent } from './dialogs/move-to/move-to.component';
 
 @NgModule({
-    declarations: [
-        UploadCollectionComponent,
-        NewFolderComponent,
-        MoveToComponent,
-        UploadCollectionDragnDropDirective
-    ],
+    declarations: [UploadCollectionComponent, NewFolderComponent, MoveToComponent, UploadCollectionDragnDropDirective],
     imports: [
         CommonModule,
         PlatformTableModule,

@@ -1,13 +1,40 @@
 <h3>Checkbox Error Handling</h3>
 <fdp-form-group #fg hintPlacement="left" [formGroup]="customForm" [object]="data" columnLayout="XL2-L1-M1-S1">
-    <fdp-form-field #ffr1 id="presence" [validators]="validators" label="Your presence is necessary"
-        hint="hint text" hintPlacement="left" rank="10" column="1" required="true">
-        <fdp-checkbox name="presence-cb" [isBinary]="true" title="title text" [formControl]="ffr1.formControl"></fdp-checkbox>
+    <fdp-form-field
+        #ffr1
+        id="presence"
+        [validators]="validators"
+        label="Your presence is necessary"
+        hint="hint text"
+        hintPlacement="left"
+        rank="10"
+        column="1"
+        required="true"
+    >
+        <fdp-checkbox
+            name="presence-cb"
+            [isBinary]="true"
+            title="title text"
+            [formControl]="ffr1.formControl"
+        ></fdp-checkbox>
     </fdp-form-field>
 
-    <fdp-form-field #ffr2 id="aggrement" [validators]="validators" hint="hint text"
-        hintPlacement="left" rank="15" column="2" required="true">
-        <fdp-checkbox name="aggrement-cb" [isBinary]="true" title="Do you Agree with Terms and Conditions" [formControl]="ffr2.formControl">
+    <fdp-form-field
+        #ffr2
+        id="aggrement"
+        [validators]="validators"
+        hint="hint text"
+        hintPlacement="left"
+        rank="15"
+        column="2"
+        required="true"
+    >
+        <fdp-checkbox
+            name="aggrement-cb"
+            [isBinary]="true"
+            title="Do you Agree with Terms and Conditions"
+            [formControl]="ffr2.formControl"
+        >
             Do you Agree with <a fd-link href="#"> Terms and Conditions</a>?
         </fdp-checkbox>
     </fdp-form-field>
@@ -17,12 +44,8 @@
     </fdp-form-field>
 
     <ng-template #i18n let-errors>
-        <span *ngIf="errors.required" role="alert" aria-atomic="true">
-            Value is required
-        </span>
-        <span *ngIf="errors.invalid" role="alert" aria-atomic="true">
-            Value is invalid
-        </span>
+        <span *ngIf="errors.required" role="alert" aria-atomic="true"> Value is required </span>
+        <span *ngIf="errors.invalid" role="alert" aria-atomic="true"> Value is invalid </span>
     </ng-template>
 </fdp-form-group>
 

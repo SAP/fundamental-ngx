@@ -32,12 +32,7 @@
                     (ngModelChange)="handleInputChange($event)"
                     (focus)="onTouched()"
                 />
-                <span
-                    fd-input-group-addon
-                    [state]="state"
-                    [compact]="compact"
-                    [button]="true"
-                >
+                <span fd-input-group-addon [state]="state" [compact]="compact" [button]="true">
                     <button
                         [disabled]="disabled"
                         fd-button
@@ -53,11 +48,7 @@
                 </span>
             </fd-input-group>
         </fd-popover-control>
-        <fd-popover-body
-            [attr.aria-expanded]="isOpen"
-            [attr.aria-hidden]="!isOpen"
-            [style.display]="'block'"
-        >
+        <fd-popover-body [attr.aria-expanded]="isOpen" [attr.aria-hidden]="!isOpen" [style.display]="'block'">
             <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
                 {{ _message }}
             </fd-form-message>
@@ -95,15 +86,8 @@
                     (ngModelChange)="handleTimeChange($event)"
                 ></fd-time>
             </div>
-            <div
-                fd-popover-body-footer
-                *ngIf="showFooter"
-            >
-                <div
-                    fd-bar
-                    barDesign="footer"
-                    [cozy]="!compact"
-                >
+            <div fd-popover-body-footer *ngIf="showFooter">
+                <div fd-bar barDesign="footer" [cozy]="!compact">
                     <div fd-bar-right>
                         <fd-bar-element>
                             <button

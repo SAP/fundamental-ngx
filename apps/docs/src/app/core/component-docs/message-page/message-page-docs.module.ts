@@ -17,8 +17,6 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { MessagePageModule } from '@fundamental-ngx/core/message-page';
 import { LinkModule } from '@fundamental-ngx/core/link';
 
-
-
 const routes: Routes = [
     {
         path: '',

@@ -1,5 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FdDate, DatetimeAdapter, FdDatetimeAdapter, DATE_TIME_FORMATS, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import {
+    FdDate,
+    DatetimeAdapter,
+    FdDatetimeAdapter,
+    DATE_TIME_FORMATS,
+    FD_DATETIME_FORMATS
+} from '@fundamental-ngx/core/datetime';
 import { DateRange } from '@fundamental-ngx/core/calendar';
 
 @Component({

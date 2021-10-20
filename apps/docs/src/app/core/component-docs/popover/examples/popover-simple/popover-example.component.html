@@ -1,7 +1,12 @@
 <div class="fd-docs-flex-display-helper">
     <fd-popover [focusTrapped]="true" [focusAutoCapture]="true" title="photo 1 in circle">
         <fd-popover-control>
-            <fd-avatar size="s" [circle]="true" ariaLabel="photo 1 in circle" image="http://picsum.photos/id/1018/400"></fd-avatar>
+            <fd-avatar
+                size="s"
+                [circle]="true"
+                ariaLabel="photo 1 in circle"
+                image="http://picsum.photos/id/1018/400"
+            ></fd-avatar>
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length">
             <ul fd-list>
@@ -38,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <ul fd-list  aria-labelledby="popover-bar-simple-header-1">
+            <ul fd-list aria-labelledby="popover-bar-simple-header-1">
                 <li fd-list-item *ngFor="let option of list1">
                     <a [attr.href]="option.url" fd-list-title>{{ option.text }}</a>
                 </li>
@@ -83,7 +88,12 @@
 
     <fd-popover placement="bottom" [focusTrapped]="true" [focusAutoCapture]="true" title="circle photo">
         <fd-popover-control>
-            <fd-avatar size="s" [circle]="true" ariaLabel="circle photo" image="https://picsum.photos/id/2/400/400"></fd-avatar>
+            <fd-avatar
+                size="s"
+                [circle]="true"
+                ariaLabel="circle photo"
+                image="https://picsum.photos/id/2/400/400"
+            ></fd-avatar>
         </fd-popover-control>
         <fd-popover-body *ngIf="list1 && list1.length">
             <ul fd-list>

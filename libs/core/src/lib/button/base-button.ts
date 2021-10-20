@@ -3,7 +3,6 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
 export type GlyphPosition = 'before' | 'after';
 
-
 export type ButtonType =
     | ''
     | 'standard'
@@ -14,9 +13,7 @@ export type ButtonType =
     | 'ghost'
     | 'transparent'
     | 'emphasized'
-    | 'menu'
-;
-
+    | 'menu';
 
 @Directive()
 export class BaseButton {
@@ -69,17 +66,25 @@ export class BaseButton {
      * Native disabled attribute of button element
      */
     @Input()
-    get disabled(): boolean { return this._disabled; }
+    get disabled(): boolean {
+        return this._disabled;
+    }
 
-    set disabled(value: boolean) { this._disabled = coerceBooleanProperty(value); }
+    set disabled(value: boolean) {
+        this._disabled = coerceBooleanProperty(value);
+    }
 
     /**
      * Native aria-disabled attribute of button element
      */
     @Input('aria-disabled')
-    get ariaDisabled(): boolean { return this._ariaDisabled; }
+    get ariaDisabled(): boolean {
+        return this._ariaDisabled;
+    }
 
-    set ariaDisabled(value: boolean) { this._ariaDisabled = coerceBooleanProperty(value); }
+    set ariaDisabled(value: boolean) {
+        this._ariaDisabled = coerceBooleanProperty(value);
+    }
 
     /** @hidden */
     _disabled: boolean;

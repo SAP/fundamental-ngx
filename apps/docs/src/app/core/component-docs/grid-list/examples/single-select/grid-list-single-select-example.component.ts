@@ -4,7 +4,7 @@ import { GridListItemOutputEvent } from '@fundamental-ngx/core/grid-list';
 interface GridListItem {
     id: number;
     url: string;
-    type?: string,
+    type?: string;
     toolbarText?: string;
     selected?: boolean;
     counter?: number;

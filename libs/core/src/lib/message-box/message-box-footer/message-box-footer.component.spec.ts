@@ -7,7 +7,6 @@ import { MessageBoxConfig } from '../utils/message-box-config.class';
 import { BarModule } from '../../bar/bar.module';
 import { whenStable } from '@fundamental-ngx/core/tests';
 
-
 @Component({
     template: `
         <fd-message-box-footer>
@@ -35,16 +34,18 @@ class DefaultFooterTestComponent {
 }
 
 describe('MessageBoxFooterComponent', () => {
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [MessageBoxFooterComponent, CustomFooterTestComponent, DefaultFooterTestComponent],
-            imports: [BarModule, TemplateModule],
-            providers: [MessageBoxConfig]
-        });
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [MessageBoxFooterComponent, CustomFooterTestComponent, DefaultFooterTestComponent],
+                imports: [BarModule, TemplateModule],
+                providers: [MessageBoxConfig]
+            });
+        })
+    );
 
     function setup<V>(testComponent): { fixture: ComponentFixture<V>; component: V } {
-        const fixture = TestBed.createComponent((testComponent as any) as Type<V>);
+        const fixture = TestBed.createComponent(testComponent as any as Type<V>);
         const component = fixture.componentInstance;
 
         return { fixture: fixture, component: component };

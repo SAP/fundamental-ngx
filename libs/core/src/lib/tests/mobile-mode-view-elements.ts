@@ -15,5 +15,5 @@ export function getMobileModeViewElements(fixture: ComponentFixture<any>): Mobil
         dialogFooter: fixture.nativeElement.querySelector('fd-dialog-footer'),
         dialogCloseBtn: fixture.nativeElement.querySelector('[fd-dialog-close-button]'),
         footerButtons: fixture.nativeElement.querySelectorAll('fd-button-bar')
-    }
+    };
 }

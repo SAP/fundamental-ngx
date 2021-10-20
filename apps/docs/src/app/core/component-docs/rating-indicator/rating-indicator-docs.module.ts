@@ -26,4 +26,4 @@ const routes: Routes = [
     exports: [RouterModule],
     declarations: [RatingIndicatorDocsComponent, RatingIndicatorDocsHeaderComponent, ...examples]
 })
-export class RatingIndicatorDocsModule { }
+export class RatingIndicatorDocsModule {}

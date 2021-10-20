@@ -6,11 +6,14 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
-        'class': 'fd-timeline__post-actions'
+        class: 'fd-timeline__post-actions'
     },
-    styles: [`.fd-timeline__post-actions button + button { 
-       margin-left: 0.5rem;
-    }`]
+    styles: [
+        `
+            .fd-timeline__post-actions button + button {
+                margin-left: 0.5rem;
+            }
+        `
+    ]
 })
-export class TimelineNodeFooterComponent {
-}
+export class TimelineNodeFooterComponent {}

@@ -2,7 +2,13 @@ import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { CardComponent, CardContentComponent, CardModule, CardTitleDirective, CardType } from '@fundamental-ngx/core/card';
+import {
+    CardComponent,
+    CardContentComponent,
+    CardModule,
+    CardTitleDirective,
+    CardType
+} from '@fundamental-ngx/core/card';
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '@fundamental-ngx/core/utils';
 
 import { CLASS_NAME } from './constants';
@@ -41,13 +47,15 @@ describe('CardComponent', () => {
     let host: CardHostTestComponent;
     let card: CardComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [CardModule],
-            declarations: [CardHostTestComponent],
-            providers: [ContentDensityService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CardModule],
+                declarations: [CardHostTestComponent],
+                providers: [ContentDensityService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CardHostTestComponent);

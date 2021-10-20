@@ -56,11 +56,11 @@ export class TableToolbarExampleComponent implements OnInit {
     searchInputChanged(event: string): void {
         const filterRows = (row): boolean => {
             const keys = Object.keys(row);
-            return !!keys.find(key => row[key].toLowerCase().includes(event.toLowerCase()))
-        }
+            return !!keys.find((key) => row[key].toLowerCase().includes(event.toLowerCase()));
+        };
 
         if (event) {
-            this.displayedRows = this.tableRows.filter(row => filterRows(row));
+            this.displayedRows = this.tableRows.filter((row) => filterRows(row));
         } else {
             this.displayedRows = this.tableRows;
         }
@@ -83,12 +83,11 @@ export class TableToolbarExampleComponent implements OnInit {
                     region: this.myForm.get('regionInput').value
                 });
                 this.searchInputChanged(this.searchTerm);
-                this.myForm.setValue({nameInput: '', typeInput: '', regionInput: ''});
+                this.myForm.setValue({ nameInput: '', typeInput: '', regionInput: '' });
             },
             (error) => {
                 this.confirmationReason = 'Dialog dismissed with result: ' + error;
             }
         );
     }
-
 }

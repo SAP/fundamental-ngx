@@ -19,7 +19,7 @@ export class MultiComboboxPo extends BaseComponentPo {
     dialog = '[role="dialog"]';
     dialogButton = this.dialog + ' .fd-button';
     dialogListItem = this.dialog + ' .fd-list__item[role="option"]';
-    selectedDialogItem = this.dialog + ' .fd-list__item.is-selected'
+    selectedDialogItem = this.dialog + ' .fd-list__item.is-selected';
     dialogInput = this.dialog + ' #mobile';
 
     open(): void {

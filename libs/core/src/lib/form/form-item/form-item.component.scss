@@ -1,25 +1,23 @@
 @import '~fundamental-styles/dist/form-item';
 
-
 @mixin rtl() {
-	@at-root {
-		[dir="rtl"] &,
-		&[dir="rtl"] {
-			@content;
-		}
-	}
+    @at-root {
+        [dir='rtl'] &,
+        &[dir='rtl'] {
+            @content;
+        }
+    }
 }
 
 $form-label-margin: 0.5rem;
 
-
 .fd-form-item--horizontal {
-	.fd-form-label__wrapper {
-		margin-right: $form-label-margin;
+    .fd-form-label__wrapper {
+        margin-right: $form-label-margin;
 
-		@include rtl() {
-			margin-left: $form-label-margin;
-			margin-right: 0;
-		}
-	}
+        @include rtl() {
+            margin-left: $form-label-margin;
+            margin-right: 0;
+        }
+    }
 }

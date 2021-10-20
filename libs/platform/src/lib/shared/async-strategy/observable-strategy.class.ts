@@ -6,7 +6,7 @@ import { SubscriptionStrategy } from './subscription-strategy.interface';
  */
 export class ObservableStrategy implements SubscriptionStrategy {
     createSubscription(async: Observable<any>, updateLatestValue: any): Promise<void> {
-        return async.toPromise().then(updateLatestValue, e => {
+        return async.toPromise().then(updateLatestValue, (e) => {
             console.error(e);
         });
     }
