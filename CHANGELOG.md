@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.36 (2021-10-20)
+
+
+### Bug Fixes
+
+* **core:** do not open combobox popover on alt keypress ([#6944](https://github.com/SAP/fundamental-ngx/issues/6944)) ([3beff5e](https://github.com/SAP/fundamental-ngx/commit/3beff5e67e406a7aa43981b6991cff8124996731))
+
 ## 0.33.0-rc.35 (2021-10-19)
 
 ## 0.33.0-rc.34 (2021-10-19)
