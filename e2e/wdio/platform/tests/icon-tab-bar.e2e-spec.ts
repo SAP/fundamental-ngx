@@ -13,6 +13,7 @@ import {
 import { paddingsSizes } from '../fixtures/appData/icon-tab-bar-contents';
 
 describe('Info Label component test suite', () => {
+    const iconTabBarPage = new IconTabBarPO();
     const {
         iconExample,
         textExample,
@@ -35,7 +36,6 @@ describe('Info Label component test suite', () => {
         listItem,
         tabBarTab
     } = new IconTabBarPO();
-    const iconTabBarPage = new IconTabBarPO();
 
     beforeAll(() => {
         iconTabBarPage.open();
