@@ -48,7 +48,6 @@
             [class]="contentDensity === 'compact' ? 'fd-multi-input-tokenizer-custom--compact' : ''"
             (moreClickedEvent)="moreClicked()"
             tabindex="-1"
-            role="listbox"
         >
             <fd-token
                 [readOnly]="disabled"
@@ -57,7 +56,6 @@
                 *ngFor="let token of selected; let i = index"
                 [attr.aria-posinset]="i"
                 [attr.aria-setsize]="selected.length"
-                role="option"
             >
                 <span [innerText]="token.label | displayFnPipe: displayFn"></span>
             </fd-token>
