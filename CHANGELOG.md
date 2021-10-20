@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.40 (2021-10-20)
+
+
+### Bug Fixes
+
+* **core:** using segmented-button with a[fd-button] ([#6600](https://github.com/SAP/fundamental-ngx/issues/6600)) ([3eada9e](https://github.com/SAP/fundamental-ngx/commit/3eada9e581430aafccfe248e017323b0002c69c8)), closes [#6599](https://github.com/SAP/fundamental-ngx/issues/6599)
+
 ## 0.33.0-rc.39 (2021-10-20)
 
 
