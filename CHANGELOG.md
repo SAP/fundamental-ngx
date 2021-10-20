@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.41 (2021-10-20)
+
+
+### Bug Fixes
+
+* **platform:** dynamic page accessibility ([#6900](https://github.com/SAP/fundamental-ngx/issues/6900)) ([cb4b672](https://github.com/SAP/fundamental-ngx/commit/cb4b6729655c9f77cd8de6b697cdc4efdd63a7ac))
+
 ## 0.33.0-rc.40 (2021-10-20)
 
 
