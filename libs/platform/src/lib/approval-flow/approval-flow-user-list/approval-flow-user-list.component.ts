@@ -94,12 +94,14 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
         }
     }
 
+    /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
         if (changes.users) {
             this._collectDataProgressive();
         }
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._killInterval();
     }
@@ -118,6 +120,7 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
         );
     }
 
+    /** @hidden */
     private _collectDataProgressive(): void {
         this._killInterval();
         this._displayUsers = [];
@@ -136,6 +139,7 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
         );
     }
 
+    /** @hidden */
     private _userCollectorIntervalFn(tracker: { currentIndex: number }): void {
         const nextIndex = tracker.currentIndex + ITEMS_RENDERED_AT_ONCE;
 
@@ -156,6 +160,7 @@ export class ApprovalFlowUserListComponent implements AfterViewInit, OnChanges, 
         this._cdr.markForCheck();
     }
 
+    /** @hidden */
     private _killInterval(): void {
         if (this._intervalID) {
             clearInterval(this._intervalID);
