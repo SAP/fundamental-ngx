@@ -159,5 +159,5 @@ describe('TableServiceService', () => {
         service.focusNextTableCell('0,0', new KeyboardEvent('keydown', { key: 'ArrowRight' }));
 
         expect(focusSpy).toHaveBeenCalledTimes(2);
-    })
+    });
 });

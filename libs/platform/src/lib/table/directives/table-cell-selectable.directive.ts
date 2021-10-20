@@ -1,4 +1,13 @@
-import { Directive, ElementRef, HostBinding, HostListener, Inject, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+    Directive,
+    ElementRef,
+    HostBinding,
+    HostListener,
+    Inject,
+    Input,
+    OnChanges,
+    SimpleChanges
+} from '@angular/core';
 import { DOWN_ARROW, ENTER, F2, LEFT_ARROW, MAC_ENTER, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
@@ -32,7 +41,7 @@ export class FdpCellSelectableDirective implements OnChanges {
     ngOnChanges(changes: SimpleChanges): void {
         if ('navigationId' in changes) {
             this._tabindex = this.navigationId === FIRST_CELL_NAVIGATION_ID ? 0 : -1;
-            this._tableService.registerFocusableTableCell(this.navigationId, this)
+            this._tableService.registerFocusableTableCell(this.navigationId, this);
         }
     }
 
@@ -40,8 +49,8 @@ export class FdpCellSelectableDirective implements OnChanges {
     @HostListener('keydown', ['$event'])
     _onKeyDown(event: KeyboardEvent): void {
         if (
-            KeyUtil.isKeyCode(event, F2)
-            || (KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER]) && !this._tableService.isFocusInsideTableCell)
+            KeyUtil.isKeyCode(event, F2) ||
+            (KeyUtil.isKeyCode(event, [ENTER, MAC_ENTER]) && !this._tableService.isFocusInsideTableCell)
         ) {
             this._tableService.processFocusInsideCell(this.navigationId);
         }

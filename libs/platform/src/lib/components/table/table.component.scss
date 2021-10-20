@@ -27,11 +27,7 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
         $level-padding: 0.5rem;
         /* Padding on the third level is unique */
         $level-three-padding: if($content-density-cozy, 0.5rem, 0.75rem);
-        $expand-padding: if(
-            $include-expand,
-            if($content-density-cozy, 2.75rem, 2rem),
-            0
-        );
+        $expand-padding: if($include-expand, if($content-density-cozy, 2.75rem, 2rem), 0);
 
         @for $i from 1 through $levels {
             &[data-nesting-level='#{$i}'] {
@@ -42,8 +38,8 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
                         padding-left: 0.5rem;
                         padding-right: $initial-padding + $expand-padding;
                     }
-                /** Special padding for the third level */
-                } @else if $i == 2  {
+                    /** Special padding for the third level */
+                } @else if $i == 2 {
                     padding-left: $initial-padding + $level-three-padding + $expand-padding;
 
                     @include fd-rtl() {
@@ -51,11 +47,15 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
                         padding-right: $initial-padding + $level-three-padding + $expand-padding;
                     }
                 } @else {
-                    padding-left: $initial-padding + (($i - 2) * $level-padding) + $level-three-padding + $expand-padding;
+                    padding-left: $initial-padding +
+                        (($i - 2) * $level-padding) +
+                        $level-three-padding +
+                        $expand-padding;
 
                     @include fd-rtl() {
                         padding-left: 0.5rem;
-                        padding-right: $initial-padding + (($i - 2) * $level-padding) + $level-three-padding + $expand-padding;
+                        padding-right: $initial-padding + (($i - 2) * $level-padding) + $level-three-padding +
+                            $expand-padding;
                     }
                 }
             }
@@ -155,8 +155,8 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
             justify-content: center;
             align-items: center;
             font-size: 0.75rem;
-            color: #0854A0;
-            color: var(--sapContent_IconColor, #0854A0);
+            color: #0854a0;
+            color: var(--sapContent_IconColor, #0854a0);
             min-width: 2.75rem;
             max-width: 2.75rem;
         }
@@ -167,7 +167,7 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
         height: 2.75rem;
         cursor: default;
 
-        &[tabindex="-1"] {
+        &[tabindex='-1'] {
             outline: none;
         }
     }
@@ -177,7 +177,7 @@ $fd-table-border-var: var(--sapList_BorderWidth, 0.0625rem) solid var(--sapList_
         width: auto;
     }
 
-    &.fd-table--condensed  {
+    &.fd-table--condensed {
         .fd-table__row,
         .fd-table__cell {
             height: 1.563rem;
