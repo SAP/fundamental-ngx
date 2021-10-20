@@ -60,10 +60,6 @@ export class TokenComponent implements OnInit, OnDestroy {
     @Input()
     readOnly = false;
 
-    /** add role to the token. */
-    @Input()
-    role: string;
-
     /**label for close icon */
     @Input()
     deleteButtonLabel = 'Deletable';

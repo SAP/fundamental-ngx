@@ -49,10 +49,6 @@ export class TokenizerComponent
     @Input()
     class: string;
 
-    /** add role to the token. */
-    @Input()
-    role: string;
-
     /** Disables possibility to remove tokens by keyboard */
     @Input()
     disableKeyboardDeletion = false;
