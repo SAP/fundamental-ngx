@@ -1,4 +1,11 @@
 
+### [0.32.2](https://github.com/SAP/fundamental-ngx/compare/v0.32.1...v0.32.2) (2021-10-20)
+
+
+### Bug Fixes
+
+* **core:** remove unused class ([63c701f](https://github.com/SAP/fundamental-ngx/commit/63c701fe91757c9ee6270c9ec7e3b3e4f23063f4))
+
 ### [0.32.1](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.54...v0.32.1) (2021-09-20)
 
 ### [0.32.1-rc.54](https://github.com/SAP/fundamental-ngx/compare/v0.32.1-rc.53...v0.32.1-rc.54) (2021-09-20)
