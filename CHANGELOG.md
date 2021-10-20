@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.39 (2021-10-20)
+
+
+### Bug Fixes
+
+* **platform:** multi-input - adding roles and updating display ([#6765](https://github.com/SAP/fundamental-ngx/issues/6765)) ([119d8e5](https://github.com/SAP/fundamental-ngx/commit/119d8e5cf9e7b21859f220a0eaaadb163aa52ea0))
+
 ## 0.33.0-rc.38 (2021-10-20)
 
 ## 0.33.0-rc.37 (2021-10-20)
