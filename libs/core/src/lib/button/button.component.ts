@@ -108,7 +108,7 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
     /** HasElementRef interface implementation
      * function used by applyCssClass and applyCssStyle decorators
      */
-    public elementRef(): ElementRef<any> {
+    public elementRef(): ElementRef<HTMLButtonElement | HTMLAnchorElement> {
         return this._elementRef;
     }
 

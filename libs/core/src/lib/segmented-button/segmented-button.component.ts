@@ -143,15 +143,15 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
 
         const refresh$ = merge(this._onDestroy$, this._onRefresh$);
 
-        const triggerEvents = merge(
+        const triggerEvents$ = merge(
             fromEvent(htmlElement, 'click'),
-            fromEvent(htmlElement, 'keydown').pipe(
-                filter((event) => KeyUtil.isKeyCode(<KeyboardEvent>event, [ENTER, SPACE])),
-                tap((event) => (<KeyboardEvent>event).preventDefault())
+            fromEvent<KeyboardEvent>(htmlElement, 'keydown').pipe(
+                filter((event) => KeyUtil.isKeyCode(event, [ENTER, SPACE])),
+                tap((event) => event.preventDefault())
             )
         );
 
-        triggerEvents.pipe(takeUntil(refresh$)).subscribe((_) => this._handleTriggerOnButton(buttonComponent));
+        triggerEvents$.pipe(takeUntil(refresh$)).subscribe(() => this._handleTriggerOnButton(buttonComponent));
     }
 
     /** @hidden */
@@ -251,14 +251,18 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
 
         this._buttons.forEach((button) => (button.disabled = disable));
         if (disable) {
-            this._buttons.forEach((button) => button.elementRef().nativeElement.setAttribute('disabled', true));
+            this._buttons.forEach((button) => button.elementRef().nativeElement.setAttribute('disabled', 'true'));
         }
         this._detectChanges();
     }
 
     /** @hidden */
     private _getButtonValue(buttonComponent: ButtonComponent): string {
-        return buttonComponent.elementRef().nativeElement.value;
+        const element = buttonComponent.elementRef().nativeElement;
+        if (element instanceof HTMLButtonElement) {
+            return element.value;
+        }
+        return element.getAttribute('value');
     }
 
     /** @hidden
