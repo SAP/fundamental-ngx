@@ -15,6 +15,8 @@ import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { ThumbnailDetailsComponent } from './thumbnail-details/thumbnail-details.component';
 import { Media } from './thumbnail.interfaces';
 
+let uniqueId = 0;
+
 export class ThumbnailClickedEvent<T extends ThumbnailComponent = ThumbnailComponent, K = Media> {
     constructor(
         /** The source Thumbnail Component of the event. */
@@ -45,6 +47,9 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
     /** Event emitted upon click of a thumbnail. */
     @Output()
     thumbnailClicked: EventEmitter<ThumbnailClickedEvent> = new EventEmitter();
+
+    /** Generate unique id for the thumbnail */
+    thumbnailId: string = 'fd-thumbnail-dialog-header-' + uniqueId++;
 
     /** @hidden Currently selected media. */
     public selectedMedia: Media;
@@ -78,6 +83,7 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
             escKeyCloseable: false,
             ariaLabelledBy: 'fdp-thumbnail-dialog-header',
             data: {
+                thumbnailId: this.thumbnailId,
                 selectedMedia: selectedMedia,
                 mediaList: mediaList,
                 rtl: this._isRtl(),

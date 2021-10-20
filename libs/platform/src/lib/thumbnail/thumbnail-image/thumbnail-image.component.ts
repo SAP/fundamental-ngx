@@ -37,6 +37,9 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     @Input()
     roleDescription = 'Image';
 
+    @Input()
+    thumbnailId: string;
+
     /** Output event for thumbnail image click */
     @Output()
     thumbnailClicked: EventEmitter<Media> = new EventEmitter();
@@ -73,12 +76,13 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
             backdropClickCloseable: false,
             escKeyCloseable: false,
             data: {
+                thumbnailId: this.thumbnailId,
                 selectedMedia: selectedMedia,
                 mediaList: mediaList,
                 rtl: this._isRtl(),
                 maxImages: this.maxImages
             },
-            ariaLabelledBy: 'fdp-thumbnail-dialog-header'
+            ariaLabelledBy: this.thumbnailId
         });
     }
 

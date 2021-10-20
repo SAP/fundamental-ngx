@@ -3,13 +3,12 @@ import { AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit } fro
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
 
-let thumbnailUniqueId = 0;
-
 interface DialogRefData {
     selectedMedia: Media;
     mediaList: Media[];
     rtl: boolean;
     maxImages: number;
+    thumbnailId: string;
 }
 
 @Component({
@@ -23,9 +22,6 @@ export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
 
     /** @hidden Make left navigation button disabled */
     leftButtonDisabled = false;
-
-    /** @hidden Unique id for the thumbnail dialog header */
-    id: string = 'fd-thumbnail-dialog-header' + thumbnailUniqueId++;
 
     /** @hidden Make right navigation button disabled */
     rightButtonDisabled = false;

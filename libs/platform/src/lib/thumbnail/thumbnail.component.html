@@ -1,6 +1,7 @@
 <div class="fdp-thumbnail-container" [class.fdp-thumbnail-container--horizontal]="isHorizontal">
     <fdp-thumbnail-image
         *ngIf="!isHorizontal"
+        [thumbnailId]="thumbnailId"
         [mediaList]="mediaList"
         [maxImages]="maxImagesDisplay"
         [isHorizontal]="isHorizontal"

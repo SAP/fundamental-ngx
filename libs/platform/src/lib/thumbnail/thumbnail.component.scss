@@ -20,6 +20,13 @@
         max-width: $fdp-thumbnail-container-size;
         max-height: $fdp-thumbnail-container-size;
         position: absolute;
+        &:focus,
+        &.is-focus {
+            outline-offset: 0.0625rem;
+            outline-width: var(--sapContent_FocusWidth);
+            outline-color: var(--sapContent_FocusColor);
+            outline-style: var(--sapContent_FocusStyle);
+        }
     }
 
     video {
@@ -28,6 +35,13 @@
         max-width: $fdp-thumbnail-container-size;
         max-height: $fdp-thumbnail-container-size;
         position: absolute;
+        &:focus,
+        &.is-focus {
+            outline-offset: 0.0625rem;
+            outline-width: var(--sapContent_FocusWidth);
+            outline-color: var(--sapContent_FocusColor);
+            outline-style: var(--sapContent_FocusStyle);
+        }
     }
 
     .fdp-media-container {
