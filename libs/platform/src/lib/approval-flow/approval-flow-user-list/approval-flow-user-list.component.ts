@@ -23,7 +23,6 @@ import {
 } from '@fundamental-ngx/platform/list';
 import { ApprovalUser } from '../interfaces';
 import { trackByFn } from '../helpers';
-import { interval } from 'rxjs';
 
 const ITEMS_RENDERED_AT_ONCE = 100;
 const INTERVAL_IN_MS = 10;
