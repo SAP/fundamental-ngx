@@ -1,5 +1,5 @@
-import { ContentDensity } from '../enums';
-import { TableState } from '../interfaces';
+import { ContentDensity } from '@fundamental-ngx/core/utils';
+import { TableState } from '@fundamental-ngx/platform/table';
 
 export const DEFAULT_TABLE_STATE: TableState = {
     sortBy: [],
@@ -20,15 +20,15 @@ export const DEFAULT_TABLE_STATE: TableState = {
 // SIZES
 
 export const SELECTION_COLUMN_WIDTH = new Map<ContentDensity, number>([
-    [ContentDensity.COZY, 44],
-    [ContentDensity.COMPACT, 32],
-    [ContentDensity.CONDENSED, 24]
+    ['cozy', 44],
+    ['compact', 32],
+    ['condensed', 24]
 ]);
 
 export const TABLE_COLUMN_MIN_WIDTH = 50;
 
 export const ROW_HEIGHT = new Map<ContentDensity, number>([
-    [ContentDensity.COZY, 44],
-    [ContentDensity.COMPACT, 32],
-    [ContentDensity.CONDENSED, 24]
+    ['cozy', 44],
+    ['compact', 32],
+    ['condensed', 24]
 ]);
