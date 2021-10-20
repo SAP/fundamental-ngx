@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.37 (2021-10-20)
+
+
+### Bug Fixes
+
+* **core:** list items should re-check and re-listen when this._focusItems changes, not this.items ([#6926](https://github.com/SAP/fundamental-ngx/issues/6926)) ([9be41a3](https://github.com/SAP/fundamental-ngx/commit/9be41a31ecebe2a15a38f300188ec54a3e24f53f))
+
 ## 0.33.0-rc.36 (2021-10-20)
 
 
