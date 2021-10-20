@@ -1,54 +1,19 @@
-<fdp-table
-    #table
-    [dataSource]="source"
->
+<fdp-table #table [dataSource]="source">
     <fdp-table-toolbar title="Order Items"></fdp-table-toolbar>
 
-    <fdp-column
-        name="name"
-        key="name"
-        label="Name"
-        [filterable]="true"
-        dataType="string"
-    >
-    </fdp-column>
+    <fdp-column name="name" key="name" label="Name" [filterable]="true" dataType="string"> </fdp-column>
 
-    <fdp-column
-        name="description"
-        key="description"
-        label="Description"
-    >
-    </fdp-column>
+    <fdp-column name="description" key="description" label="Description"> </fdp-column>
 
-    <fdp-column
-        name="price"
-        key="price.value"
-        label="Price"
-        [filterable]="true"
-        dataType="number"
-    >
-    </fdp-column>
+    <fdp-column name="price" key="price.value" label="Price" [filterable]="true" dataType="number"> </fdp-column>
 
-    <fdp-column
-        name="updatedOn"
-        key="date"
-        label="Updated On"
-        [filterable]="true"
-        dataType="date"
-    >
+    <fdp-column name="updatedOn" key="date" label="Updated On" [filterable]="true" dataType="date">
         <fdp-table-cell *fdpCellDef="let item">
             {{ item.date?.toDateString() }}
         </fdp-table-cell>
     </fdp-column>
 
-    <fdp-column
-        name="verified"
-        key="verified"
-        label="Verified"
-        [filterable]="true"
-        dataType="boolean"
-    >
-    </fdp-column>
+    <fdp-column name="verified" key="verified" label="Verified" [filterable]="true" dataType="boolean"> </fdp-column>
 </fdp-table>
 
 <!-- Connect P13 Dialog to the table -->

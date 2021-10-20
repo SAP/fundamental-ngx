@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 import * as BusyIndicatorHtml from '!raw-loader!./examples/busy-indicator-basic-example.component.html';
 import * as BusyIndicatorSizeHtml from '!raw-loader!./examples/busy-indicator-size-example.component.html';
@@ -11,7 +11,15 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
 
 @Component({
     selector: 'app-busy-indicator-docs',
-    templateUrl: './busy-indicator-docs.component.html'
+    templateUrl: './busy-indicator-docs.component.html',
+    styles: [
+        `
+            .fd-button {
+                margin-right: 8px;
+            }
+        `
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class BusyIndicatorDocsComponent {
     busyIndicatorBasicExample: ExampleFile[] = [

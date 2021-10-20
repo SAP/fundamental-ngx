@@ -6,11 +6,13 @@ describe('LayoutPanelFooterComponent', () => {
     let component: LayoutPanelFooterComponent;
     let fixture: ComponentFixture<LayoutPanelFooterComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [LayoutPanelFooterComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [LayoutPanelFooterComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(LayoutPanelFooterComponent);

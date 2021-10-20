@@ -3,7 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { QuickViewGroupItemContentElementDirective } from './quick-view-group-item-content-element.directive';
 
 @Component({
-    template: ` <div #directiveElement fd-quick-view-group-item-content-element> Element </div> `
+    template: ` <div #directiveElement fd-quick-view-group-item-content-element>Element</div> `
 })
 class TestComponent {
     @ViewChild('directiveElement')
@@ -14,11 +14,13 @@ describe('QuickViewGroupItemContentElementDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent, QuickViewGroupItemContentElementDirective]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent, QuickViewGroupItemContentElementDirective]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

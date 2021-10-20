@@ -10,7 +10,14 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
-import { ANY_LANGUAGE_LETTERS_REGEX, ColorAccent, Size, applyCssClass, getRandomColorAccent, CssClassBuilder } from '@fundamental-ngx/core/utils';
+import {
+    ANY_LANGUAGE_LETTERS_REGEX,
+    ColorAccent,
+    Size,
+    applyCssClass,
+    getRandomColorAccent,
+    CssClassBuilder
+} from '@fundamental-ngx/core/utils';
 
 let avatarUniqueId = 0;
 
@@ -18,7 +25,7 @@ const ALTER_ICON_OPTIONS = {
     CONTENT: 'content',
     ALT: 'alt',
     BACKUP: 'backup',
-    DEFAULT_ICON: 'default-icon',
+    DEFAULT_ICON: 'default-icon'
 };
 
 @Component({
@@ -167,10 +174,7 @@ export class AvatarComponent implements OnChanges, OnInit, CssClassBuilder {
     }
 
     /** @hidden */
-    constructor(
-        private _elementRef: ElementRef,
-        private _cdr: ChangeDetectorRef
-    ) {}
+    constructor(private _elementRef: ElementRef, private _cdr: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnInit(): void {

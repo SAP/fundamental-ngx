@@ -9,7 +9,7 @@ import {
     Optional,
     TemplateRef,
     ViewChild,
-    ViewEncapsulation,
+    ViewEncapsulation
 } from '@angular/core';
 
 import { Subscription } from 'rxjs';
@@ -31,13 +31,13 @@ let mobilePopoverUniqueId = 0;
     selector: 'fd-popover-mobile',
     templateUrl: './popover-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None
 })
 export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> implements OnInit, OnDestroy {
     /** @hidden
      * from mobile class can not prefix _,
      * to avoid build issues
-    */
+     */
     childContent: PopoverChildContent = undefined;
 
     /** Current popover title */
@@ -101,15 +101,13 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     /** @hidden Opens/closes the Dialog based on Popover isOpenChange events */
     private _listenOnPopoverOpenChange(): void {
         this._subscriptions.add(
-            this._component.isOpenChange
-                .pipe(takeUntil(this._onDestroy$))
-                .subscribe((isOpen) => {
-                    if (isOpen) {
-                        this._openDialog();
-                    } else {
-                        this.dialogRef.hide(true);
-                    }
-                })
+            this._component.isOpenChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => {
+                if (isOpen) {
+                    this._openDialog();
+                } else {
+                    this.dialogRef.hide(true);
+                }
+            })
         );
     }
 

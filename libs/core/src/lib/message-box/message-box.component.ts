@@ -41,14 +41,17 @@ import { CSS_CLASS_NAME } from './utils/const';
     selector: 'fd-message-box',
     templateUrl: './message-box.component.html',
     styleUrls: ['./message-box.component.scss'],
-    host: { 
+    host: {
         tabindex: '-1',
         role: 'dialog'
-     },
+    },
     encapsulation: ViewEncapsulation.None,
     animations: [dialogFadeNgIf]
 })
-export class MessageBoxComponent extends DialogBase implements OnInit, OnChanges, AfterViewInit, OnDestroy, CssClassBuilder {
+export class MessageBoxComponent
+    extends DialogBase
+    implements OnInit, OnChanges, AfterViewInit, OnDestroy, CssClassBuilder
+{
     /** Custom classes */
     @Input()
     set class(userClass: string) {
@@ -77,7 +80,7 @@ export class MessageBoxComponent extends DialogBase implements OnInit, OnChanges
      **/
     @ContentChildren(MESSAGE_BOX_CONFIGURABLE_ELEMENT)
     set messageBox(elements: QueryList<MessageBoxConfigurableElement>) {
-        elements.forEach(element => element.messageBoxConfig = this._messageBoxConfig);
+        elements.forEach((element) => (element.messageBoxConfig = this._messageBoxConfig));
     }
 
     /** @hidden */

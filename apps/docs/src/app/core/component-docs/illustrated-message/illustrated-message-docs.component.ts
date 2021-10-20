@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 import * as illustratedMessageSrc from '!raw-loader!./examples/illustrated-message-example.component.html';
 import * as illustratedMessageTsCode from '!raw-loader!./examples/illustrated-message-example.component.ts';
@@ -23,7 +22,6 @@ import * as illustrationSpotNoMail from '!raw-loader!../../../../assets/images/s
     templateUrl: './illustrated-message-docs.component.html'
 })
 export class IllustratedMessageDocsComponent {
-
     illustratedMessageExample: ExampleFile[] = [
         {
             language: 'html',

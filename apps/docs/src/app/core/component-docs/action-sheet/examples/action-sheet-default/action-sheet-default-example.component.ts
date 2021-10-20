@@ -8,7 +8,6 @@ import { MessageToastService } from '@fundamental-ngx/core/message-toast';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionSheetDefaultExampleComponent {
-
     @ViewChild(ActionSheetComponent)
     actionSheetComponent: ActionSheetComponent;
 

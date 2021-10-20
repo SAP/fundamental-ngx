@@ -1,13 +1,7 @@
 import { RadioButtonPo } from '../pages/radio-button.po';
-import {
-    click,
-    getAttributeByName,
-    getElementArrayLength,
-    refreshPage, scrollIntoView
-} from '../../driver/wdio';
+import { click, getAttributeByName, getElementArrayLength, refreshPage, scrollIntoView } from '../../driver/wdio';
 
-
-describe('Radio button component test', function() {
+describe('Radio button component test', () => {
     const radioButtonPage = new RadioButtonPo();
     const { disableRadioButton, activeRadioButton, activeInput, disableDefaultRadioButton } = radioButtonPage;
 
@@ -22,8 +16,8 @@ describe('Radio button component test', function() {
     it('verify disable radio buttons', () => {
         const disableRadioButtonsLength = getElementArrayLength(disableRadioButton);
         for (let i = 0; i < disableRadioButtonsLength; i++) {
-                scrollIntoView(disableRadioButton, i);
-                expect(getAttributeByName(disableRadioButton, 'aria-disabled', i)).toBe('true');
+            scrollIntoView(disableRadioButton, i);
+            expect(getAttributeByName(disableRadioButton, 'aria-disabled', i)).toBe('true');
         }
     });
 
@@ -51,8 +45,7 @@ describe('Radio button component test', function() {
         radioButtonPage.checkRtlSwitch();
     });
 
-    xdescribe('Should check visual regression', function() {
-
+    xdescribe('Should check visual regression', () => {
         it('should check visual regression for all examples', () => {
             radioButtonPage.saveExampleBaselineScreenshot();
             expect(radioButtonPage.compareWithBaseline()).toBeLessThan(5);

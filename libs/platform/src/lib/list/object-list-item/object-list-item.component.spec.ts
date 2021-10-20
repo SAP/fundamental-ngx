@@ -14,19 +14,16 @@ import { ObjectListItemComponent } from './object-list-item.component';
     selector: 'fdp-test-fdp-display-list-item',
     template: `
         <fdp-list [hasObject]="true">
-            <fdp-object-list-item title="title"
-                                  introductionText="introductionText" currency="euro" amount="247">
+            <fdp-object-list-item title="title" introductionText="introductionText" currency="euro" amount="247">
                 <fdp-object-list-item-row attributeLabel="attribute1">
                     <span fd-object-marker glyph="favourite" aria-label="Favourite Icon with Text"></span>
                     <span fd-object-marker glyph="flag" aria-label="Flag Icon with Text"></span>
                 </fdp-object-list-item-row>
                 <fdp-object-list-item-row attributeLabel="attribute2">
-            <span fd-object-status status="positive" glyph="flag"
-                  label="avialable" inverted="true"></span>
+                    <span fd-object-status status="positive" glyph="flag" label="avialable" inverted="true"></span>
                 </fdp-object-list-item-row>
                 <fdp-object-list-item-row attributeLabel="attribute3">
-            <span fd-object-status status="negative" glyph="flag"
-                  label="out of stock" inverted="false"></span>
+                    <span fd-object-status status="negative" glyph="flag" label="out of stock" inverted="false"></span>
                 </fdp-object-list-item-row>
             </fdp-object-list-item>
         </fdp-list>
@@ -41,13 +38,14 @@ describe('ObjectListItemComponent', () => {
     let component: ObjectListItemComponentTest;
     let fixture: ComponentFixture<ObjectListItemComponentTest>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [PlatformListModule, ObjectListItemModule, RouterTestingModule],
-            declarations: [ObjectListItemComponentTest]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformListModule, ObjectListItemModule, RouterTestingModule],
+                declarations: [ObjectListItemComponentTest]
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ObjectListItemComponentTest);
@@ -195,9 +193,7 @@ describe('ObjectListItemComponent', () => {
     });
 });
 
-
 /* DataSource in imperative approach testing */
-
 
 const LIST_ELEMENTS: Product[] = [
     {
@@ -283,7 +279,8 @@ const LIST_ELEMENTS: Product[] = [
         statuslabel2: 'Informative',
         inverted2: true,
         decimal: 2
-    }];
+    }
+];
 
 export interface Product {
     title: string;
@@ -325,25 +322,40 @@ export class ListDataProvider extends DataProvider<Product> {
 @Component({
     selector: 'fdp-object-list-item-datasource-test',
     template: `
-        <fdp-list [hasObject]="true" [dataSource]="_dataSource"
-                  noBorder="true">
-            <fdp-object-list-item *fdpItemDef="let product" [title]="product.title"
-                                  [introductionText]="product.introductionText" [currency]="product.currency"
-                                  [amount]="product.amount"
-                                  [image]="product.image" [decimal]="product.decimal">
+        <fdp-list [hasObject]="true" [dataSource]="_dataSource" noBorder="true">
+            <fdp-object-list-item
+                *fdpItemDef="let product"
+                [title]="product.title"
+                [introductionText]="product.introductionText"
+                [currency]="product.currency"
+                [amount]="product.amount"
+                [image]="product.image"
+                [decimal]="product.decimal"
+            >
                 <fdp-object-list-item-row [attributeLabel]="product.attribute1">
                     <span fd-object-marker glyph="product.gylp1" aria-label="Favourite Icon with Text"></span>
                     <span fd-object-marker glyph="product.gylp2" aria-label="Flag Icon with Text"></span>
                 </fdp-object-list-item-row>
                 <fdp-object-list-item-row [attributeLabel]="product.attribute2">
-            <span fdp-object-status status="product.status1" glyph="product.statusgyph1"
-                  label="product.statuslabel1" inverted="product.inverted1"></span></fdp-object-list-item-row>
+                    <span
+                        fdp-object-status
+                        status="product.status1"
+                        glyph="product.statusgyph1"
+                        label="product.statuslabel1"
+                        inverted="product.inverted1"
+                    ></span
+                ></fdp-object-list-item-row>
                 <fdp-object-list-item-row [attributeLabel]="product.attribute3">
-            <span fd-object-status status="product.status2" glyph="product.statusgyph2"
-                  label="product.statuslabel2" inverted="product.inverted2"></span></fdp-object-list-item-row>
+                    <span
+                        fd-object-status
+                        status="product.status2"
+                        glyph="product.statusgyph2"
+                        label="product.statuslabel2"
+                        inverted="product.inverted2"
+                    ></span
+                ></fdp-object-list-item-row>
             </fdp-object-list-item>
         </fdp-list>
-
     `
 })
 class ObjectListItemDataSourceTestComponent {
@@ -356,12 +368,14 @@ describe('Object  List Item Component with DataSource', () => {
     let component: ObjectListItemDataSourceTestComponent;
     let fixture: ComponentFixture<ObjectListItemDataSourceTestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [PlatformListModule, RouterTestingModule, ObjectListItemModule],
-            declarations: [ObjectListItemDataSourceTestComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformListModule, RouterTestingModule, ObjectListItemModule],
+                declarations: [ObjectListItemDataSourceTestComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ObjectListItemDataSourceTestComponent);

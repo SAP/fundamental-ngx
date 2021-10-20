@@ -9,12 +9,14 @@ const node: ApprovalNode = {
     id: 'ID1',
     name: 'node name',
     description: 'node description',
-    approvers: [{
-        id: 'uid66161',
-        name: 'Jill Fuller',
-        description: 'Accounting team',
-        imgUrl: 'https://randomuser.me/api/portraits/women/64.jpg'
-    }],
+    approvers: [
+        {
+            id: 'uid66161',
+            name: 'Jill Fuller',
+            description: 'Accounting team',
+            imgUrl: 'https://randomuser.me/api/portraits/women/64.jpg'
+        }
+    ],
     status: 'approved',
     targets: [],
     dueDate: new Date(),
@@ -103,7 +105,7 @@ describe('ApprovalFlowNodeComponent', () => {
 
     it('should add parent-approved class if parent node is approved', () => {
         component.meta = {
-            parents: [  { ...node, status: 'approved' } ],
+            parents: [{ ...node, status: 'approved' }],
             isRoot: false,
             isFinal: false,
             parallelStart: false,

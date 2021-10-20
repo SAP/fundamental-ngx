@@ -11,7 +11,6 @@ import { ColumnsChange, FilterChange, FreezeChange, GroupChange, PageChange, Sea
 import { DEFAULT_TABLE_STATE, FIRST_CELL_NAVIGATION_ID } from './constants';
 import { FdpCellSelectableDirective } from './directives';
 
-
 /** Cell navigation id, where first number indicates the row index, second - the column index
  *  Used to register cell for the arrow keys navigation
  *  TODO: Template literal types should be used here but it's broken in TS 4.1.
@@ -326,7 +325,7 @@ export class TableService {
         }
 
         const focusableElements = getFocusableElements(tableContainer);
-        const currFocusElementIndex = focusableElements.findIndex(el => el === document.activeElement);
+        const currFocusElementIndex = focusableElements.findIndex((el) => el === document.activeElement);
 
         if (currFocusElementIndex === 1 && event.shiftKey) {
             this.removeFocusInsideCell();
@@ -341,21 +340,18 @@ export class TableService {
     /** @hidden */
     private _setCurrentPageToState(state: TableState, currentPage: number): TableState {
         const newPageState: CollectionPage = { ...state.page, currentPage: currentPage };
-        return { ...state, page: newPageState  };
+        return { ...state, page: newPageState };
     }
 }
 
 function setCurrentPageToState(state: TableState, currentPage: number): TableState {
     const newPageState: CollectionPage = { ...state.page, currentPage: currentPage };
-    return { ...state, page: newPageState  };
+    return { ...state, page: newPageState };
 }
 
 /** Get all focusable child elements */
 function getFocusableElements(rootElement: any): any[] {
     return [
-        ...rootElement.querySelectorAll(
-            'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])'
-        )
-    ]
-        .filter(el => !el.hasAttribute('disabled') && el.getAttribute('tabindex') !== '-1');
+        ...rootElement.querySelectorAll('a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"])')
+    ].filter((el) => !el.hasAttribute('disabled') && el.getAttribute('tabindex') !== '-1');
 }

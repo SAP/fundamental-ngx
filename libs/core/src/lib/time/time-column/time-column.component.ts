@@ -19,7 +19,7 @@ import {
 import { Subject, Subscription } from 'rxjs';
 import { buffer, debounceTime, map } from 'rxjs/operators';
 import { DOWN_ARROW, SPACE, UP_ARROW } from '@angular/cdk/keycodes';
-import {CarouselDirective} from '@fundamental-ngx/core/carousel';
+import { CarouselDirective } from '@fundamental-ngx/core/carousel';
 import { CarouselItemDirective } from '@fundamental-ngx/core/carousel';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { CarouselConfig, PanEndOutput } from '@fundamental-ngx/core/carousel';
@@ -42,7 +42,8 @@ export interface TimeColumnItemOutput<T> {
     encapsulation: ViewEncapsulation.None
 })
 export class TimeColumnComponent<K, T extends SelectableViewItem<K> = SelectableViewItem<K>>
-    implements AfterViewInit, OnInit, OnDestroy {
+    implements AfterViewInit, OnInit, OnDestroy
+{
     /** items in row */
     @Input()
     rows: T[] = [];

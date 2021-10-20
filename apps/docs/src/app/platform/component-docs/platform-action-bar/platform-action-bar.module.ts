@@ -52,4 +52,4 @@ const routes: Routes = [
         PlatformActionBarCozyModeExampleComponent
     ]
 })
-export class PlatformActionBarDocsModule { }
+export class PlatformActionBarDocsModule {}

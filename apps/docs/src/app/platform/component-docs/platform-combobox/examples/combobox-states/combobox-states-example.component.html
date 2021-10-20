@@ -5,6 +5,7 @@
             placeholder="Select state"
             contentDensity="compact"
             [dataSource]="states"
+            [value]="states[0]"
             (selectionChange)="onSelectState($event)"
         ></fdp-combobox>
     </fdp-form-field>
@@ -13,7 +14,8 @@
             name="combobox-state"
             placeholder="Type some text..."
             contentDensity="compact"
-            [state]="selectedState"
+            [state]="selectedState?.toLowerCase()"
+            [stateMessage]="selectedState + ' state message'"
             [dataSource]="dataSource"
         >
         </fdp-combobox>
@@ -26,6 +28,7 @@
             name="combobox-state"
             placeholder="Type some text..."
             state="success"
+            stateMessage="Success state message"
             contentDensity="compact"
             [dataSource]="dataSource"
         ></fdp-combobox>
@@ -35,6 +38,7 @@
             name="combobox-state"
             placeholder="Type some text..."
             state="error"
+            stateMessage="Error state message"
             contentDensity="compact"
             [dataSource]="dataSource"
         ></fdp-combobox>
@@ -44,6 +48,7 @@
             name="combobox-state"
             placeholder="Type some text..."
             state="warning"
+            stateMessage="Warning state message"
             contentDensity="compact"
             [dataSource]="dataSource"
         ></fdp-combobox>
@@ -53,6 +58,7 @@
             name="combobox-state"
             placeholder="Type some text..."
             state="information"
+            stateMessage="Information state message"
             contentDensity="compact"
             [dataSource]="dataSource"
         ></fdp-combobox>

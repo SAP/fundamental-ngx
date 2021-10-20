@@ -4,7 +4,8 @@ import {
     executeScriptAfterTagAttr,
     executeScriptBeforeTagAttr,
     getAttributeByName,
-    getAttributeByNameArr, getElementPlaceholder,
+    getAttributeByNameArr,
+    getElementPlaceholder,
     getElementSize,
     getText,
     getTextArr,
@@ -27,15 +28,34 @@ import {
 } from '../fixtures/appData/input-group-page-contents';
 import { email_value, numeric_value, string_value } from '../fixtures/testData/input-group';
 
-describe('Input Group should', function() {
+describe('Input Group should', () => {
     const inputGroupPage = new InputGroupPo();
     const {
-        standartInputLabelsArr, standartInputArr, leftAlignedTextInput, leftAlignedTextInputTextAddon, rightAlignedTextInput,
-        rightAlignedTextInputTextAddon, leftAndRightAlignedTextInput, rightLeftAlignedTextInputTextAddon, buttonInput,
-        buttonInputLeftAndRightTextAddon, buttonInputSubmitButton, iconInput, iconInputEmailIcon, compactGroupInput,
-        compactGroupButtonAddon, compactGroupLeftTextAddon, disabledInput, disabledInputButton, withFormInput,
-        withFormInputTextAddon, withFormInputButtonAddon, withFormInputLabel, withFormInputQuestionMark,
-        withFormInputAsterixMark, withFormInputInfoTooltip
+        standartInputLabelsArr,
+        standartInputArr,
+        leftAlignedTextInput,
+        leftAlignedTextInputTextAddon,
+        rightAlignedTextInput,
+        rightAlignedTextInputTextAddon,
+        leftAndRightAlignedTextInput,
+        rightLeftAlignedTextInputTextAddon,
+        buttonInput,
+        buttonInputLeftAndRightTextAddon,
+        buttonInputSubmitButton,
+        iconInput,
+        iconInputEmailIcon,
+        compactGroupInput,
+        compactGroupButtonAddon,
+        compactGroupLeftTextAddon,
+        disabledInput,
+        disabledInputButton,
+        withFormInput,
+        withFormInputTextAddon,
+        withFormInputButtonAddon,
+        withFormInputLabel,
+        withFormInputQuestionMark,
+        withFormInputAsterixMark,
+        withFormInputInfoTooltip
     } = inputGroupPage;
 
     beforeAll(() => {
@@ -54,8 +74,7 @@ describe('Input Group should', function() {
     });
 
     it('have correct placeholder text', () => {
-        expect(getAttributeByNameArr(standartInputArr, 'placeholder'))
-            .toEqual(standardInputPlaceholders);
+        expect(getAttributeByNameArr(standartInputArr, 'placeholder')).toEqual(standardInputPlaceholders);
         expect(getElementPlaceholder(withFormInput)).toEqual(inputWithFormPlaceholder);
     });
 
@@ -173,7 +192,7 @@ describe('Input Group should', function() {
         inputGroupPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             inputGroupPage.saveExampleBaselineScreenshot();
             expect(inputGroupPage.compareWithBaseline()).toBeLessThan(5);

@@ -1,6 +1,6 @@
 import { Directive, Input } from '@angular/core';
 
-export type TableStatuses = 'valid' | 'warning' | 'information' | 'error'
+export type TableStatuses = 'valid' | 'warning' | 'information' | 'error';
 
 @Directive({
     selector: '[fdTableStatusIndicator], [fd-table-status-indicator]',
@@ -9,7 +9,7 @@ export type TableStatuses = 'valid' | 'warning' | 'information' | 'error'
         '[class.fd-table__cell--status-indicator--valid]': 'status === "valid"',
         '[class.fd-table__cell--status-indicator--warning]': 'status === "warning"',
         '[class.fd-table__cell--status-indicator--information]': 'status === "information"',
-        '[class.fd-table__cell--status-indicator--error]': 'status === "error"',
+        '[class.fd-table__cell--status-indicator--error]': 'status === "error"'
     }
 })
 export class TableStatusIndicatorDirective {

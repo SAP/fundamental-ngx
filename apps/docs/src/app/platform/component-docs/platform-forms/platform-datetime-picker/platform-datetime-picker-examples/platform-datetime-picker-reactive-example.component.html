@@ -15,10 +15,7 @@
         placeholder="MM/dd/YYYY, hh:mm"
         label="Date:"
     >
-        <fdp-datetime-picker
-            name="simple"
-            [formControl]="ffl1.formControl"
-        ></fdp-datetime-picker>
+        <fdp-datetime-picker name="simple" [formControl]="ffl1.formControl"></fdp-datetime-picker>
     </fdp-form-field>
 
     <fdp-form-field
@@ -36,28 +33,13 @@
         </fdp-datetime-picker>
     </fdp-form-field>
 
-    <fdp-form-field
-        #ffl6
-        id="storedDate"
-        column="3"
-        required="true"
-        label="Passing datetime through form object:"
-    >
-        <fdp-datetime-picker
-            name="storedDate"
-            placeholder="Pre-filled datetime"
-            [formControl]="ffl6.formControl"
-        >
+    <fdp-form-field #ffl6 id="storedDate" column="3" required="true" label="Passing datetime through form object:">
+        <fdp-datetime-picker name="storedDate" placeholder="Pre-filled datetime" [formControl]="ffl6.formControl">
         </fdp-datetime-picker>
     </fdp-form-field>
 
-    <ng-template 
-        #i18n
-        let-errors
-    >
-        <span *ngIf="errors.required">
-            Value is required
-        </span>
+    <ng-template #i18n let-errors>
+        <span *ngIf="errors.required"> Value is required </span>
     </ng-template>
 </fdp-form-group>
 

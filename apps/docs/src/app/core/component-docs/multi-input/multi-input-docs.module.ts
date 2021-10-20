@@ -16,7 +16,7 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { MultiInputIncludesExampleComponent } from './examples/multi-input-includes-example/multi-input-includes-example.component';
 import { MultiInputCustomItemExampleComponent } from './examples/multi-input-custom-item-example/multi-input-custom-item-example.component';
 import { FormModule } from '@fundamental-ngx/core/form';
-import { MultiInputMobileModule, MultiInputModule } from '@fundamental-ngx/core/multi-input';
+import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { ListModule } from '@fundamental-ngx/core/list';
 
@@ -37,7 +37,6 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         FormModule,
         MultiInputModule,
-        MultiInputMobileModule,
         ListModule,
         IconModule
     ],

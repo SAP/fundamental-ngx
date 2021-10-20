@@ -5,20 +5,16 @@ import { InteractivityChecker } from '@angular/cdk/a11y';
     selector: '[fdInitialFocus], [fd-initial-focus]'
 })
 export class InitialFocusDirective implements AfterViewInit {
-
     /** Whether initial focus functionality should be enabled */
     @Input()
     enabled = true;
 
-    constructor(
-        private _elementRef: ElementRef,
-        private _interactivityChecker: InteractivityChecker
-    ) {}
+    constructor(private _elementRef: ElementRef, private _interactivityChecker: InteractivityChecker) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
         if (this.enabled) {
-            setTimeout(() => this._focusFirstTabbableElement())
+            setTimeout(() => this._focusFirstTabbableElement());
         }
     }
 
@@ -31,8 +27,7 @@ export class InitialFocusDirective implements AfterViewInit {
 
     /** @hidden */
     private _getFirstTabbableElement(root: HTMLElement): HTMLElement | null {
-        if (this._interactivityChecker.isFocusable(root) &&
-            this._interactivityChecker.isTabbable(root)) {
+        if (this._interactivityChecker.isFocusable(root) && this._interactivityChecker.isTabbable(root)) {
             return root;
         }
 
@@ -41,9 +36,10 @@ export class InitialFocusDirective implements AfterViewInit {
         const children = root.children || root.childNodes;
 
         for (let i = 0; i < children.length; i++) {
-            const tabbableChild = children[i].nodeType === document.ELEMENT_NODE ?
-                this._getFirstTabbableElement(children[i] as HTMLElement) :
-                null;
+            const tabbableChild =
+                children[i].nodeType === document.ELEMENT_NODE
+                    ? this._getFirstTabbableElement(children[i] as HTMLElement)
+                    : null;
 
             if (tabbableChild) {
                 return tabbableChild;

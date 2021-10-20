@@ -11,7 +11,6 @@ interface ExampleItem {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MicroProcessFlowOverflowExampleComponent {
-
     items: ExampleItem[] = [];
 
     constructor() {

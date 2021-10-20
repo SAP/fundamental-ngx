@@ -65,9 +65,6 @@ import { NotificationLimitDescriptionDirective } from './directives/notification
         NotificationLimitDescriptionDirective
     ],
     providers: [DynamicComponentService, NotificationService],
-    entryComponents: [
-        NotificationContainer,
-        NotificationComponent
-    ]
+    entryComponents: [NotificationContainer, NotificationComponent]
 })
 export class NotificationModule {}

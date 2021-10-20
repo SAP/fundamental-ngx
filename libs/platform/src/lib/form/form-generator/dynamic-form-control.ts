@@ -4,7 +4,6 @@ import { DynamicAbstractControlOptions } from './interfaces/dynamic-abstract-con
 import { DynamicFormItem } from './interfaces/dynamic-form-item';
 
 export class DynamicFormControl extends FormControl {
-
     public formItem: DynamicFormItem;
 
     /**
@@ -22,10 +21,7 @@ export class DynamicFormControl extends FormControl {
      * @param formItem `DynamicFormItem` object
      *
      */
-    constructor(
-        formState?: any,
-        validatorOrOpts?: DynamicAbstractControlOptions | null
-    ) {
+    constructor(formState?: any, validatorOrOpts?: DynamicAbstractControlOptions | null) {
         super(formState, validatorOrOpts);
         this.formItem = validatorOrOpts.dynamicFormItem;
     }

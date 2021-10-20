@@ -1,4 +1,9 @@
-<div #layout class="fd-resizable-card-layout" [ngClass]="'fd-resizable-card-layout--' + layoutSize"
-    [style.width.px]="layoutWidth" [style.height.px]="layoutHeight">
+<div
+    #layout
+    class="fd-resizable-card-layout"
+    [ngClass]="'fd-resizable-card-layout--' + layoutSize"
+    [style.width.px]="layoutWidth"
+    [style.height.px]="layoutHeight"
+>
     <ng-content></ng-content>
 </div>

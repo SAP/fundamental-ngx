@@ -26,8 +26,15 @@
 <p>Platform radio button created from list of string values</p>
 <fdp-form-group [formGroup]="customForm">
     <fdp-form-field id="radio3" rank="1">
-        <fdp-radio-group name="radio3" [list]="seasons" [isInline]="true" contentDensity="compact" hasNoValue="true"
-            noValueLabel="(No selection)" formControlName="example3">
+        <fdp-radio-group
+            name="radio3"
+            [list]="seasons"
+            [isInline]="true"
+            contentDensity="compact"
+            hasNoValue="true"
+            noValueLabel="(No selection)"
+            formControlName="example3"
+        >
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
@@ -35,8 +42,7 @@
 <p>Platform radio buttons created from list of SelectItem objects and FormContol is disabled</p>
 <fdp-form-group [formGroup]="customForm">
     <fdp-form-field id="radio4" rank="1">
-        <fdp-radio-group name="radio4" [list]="items" [isInline]="true" formControlName="example4">
-        </fdp-radio-group>
+        <fdp-radio-group name="radio4" [list]="items" [isInline]="true" formControlName="example4"> </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>
 
@@ -48,13 +54,18 @@
     </fdp-form-field>
 </fdp-form-group>
 
-<hr/>
+<hr />
 <h3>Disabled Radio Button With Template Driven Form</h3>
 <p>Platform radio buttons passed as content projection and group is disabled</p>
 <fdp-form-group>
     <fdp-form-field id="radio6" rank="1">
-        <fdp-radio-group name="radio6" contentDensity="compact" disabled="true" [isInline]="true"
-            [(ngModel)]="favoriteSeason1">
+        <fdp-radio-group
+            name="radio6"
+            contentDensity="compact"
+            disabled="true"
+            [isInline]="true"
+            [(ngModel)]="favoriteSeason1"
+        >
             <fdp-radio-button value="winter">Winter</fdp-radio-button>
             <fdp-radio-button value="spring">Spring</fdp-radio-button>
             <fdp-radio-button value="summer">Summer</fdp-radio-button>
@@ -78,8 +89,16 @@
 <p>Platform radio buttons created from list of string values and group is disabled</p>
 <fdp-form-group>
     <fdp-form-field id="radio8" rank="1">
-        <fdp-radio-group name="radio8" [list]="seasons" [isInline]="true" contentDensity="compact" disabled="true"
-            hasNoValue="true" noValueLabel="(No selection)" [(ngModel)]="favoriteSeason3">
+        <fdp-radio-group
+            name="radio8"
+            [list]="seasons"
+            [isInline]="true"
+            contentDensity="compact"
+            disabled="true"
+            hasNoValue="true"
+            noValueLabel="(No selection)"
+            [(ngModel)]="favoriteSeason3"
+        >
         </fdp-radio-group>
     </fdp-form-field>
 </fdp-form-group>

@@ -1,7 +1,7 @@
 <ng-container *ngIf="_isRootContainer; else panesOnCanvasTemplate">
     <ng-container *ngIf="_defaultPane?.isOnCanvas && _activePanes.length > 1">
         <ng-container
-            *ngTemplateOutlet="panesTemplate; context: { panes: [ _defaultPane ], showResizer: true }"
+            *ngTemplateOutlet="panesTemplate; context: { panes: [_defaultPane], showResizer: true }"
         ></ng-container>
     </ng-container>
 
@@ -12,10 +12,14 @@
             [class.fd-splitter__pane-container--vertical]="_isRootContainer || _isVertical"
             [class.fd-splitter__pane-container--root]="_isRootContainer"
         >
-            <ng-container *ngTemplateOutlet="
-                panesTemplate;
-                context: { panes: _activePanes | noDefaultPane: _defaultPane?.isOnCanvas && _activePanes.length > 1 }
-            "></ng-container>
+            <ng-container
+                *ngTemplateOutlet="
+                    panesTemplate;
+                    context: {
+                        panes: _activePanes | noDefaultPane: _defaultPane?.isOnCanvas && _activePanes.length > 1
+                    }
+                "
+            ></ng-container>
         </div>
 
         <fd-splitter-pagination
@@ -28,20 +32,14 @@
 </ng-container>
 
 <ng-template #panesOnCanvasTemplate>
-    <ng-container
-        *ngTemplateOutlet="panesTemplate; context: { panes: _panesOnCanvas }"
-    ></ng-container>
+    <ng-container *ngTemplateOutlet="panesTemplate; context: { panes: _panesOnCanvas }"></ng-container>
 </ng-template>
 
 <!-- IDE won't recognize types properly below -->
 
 <ng-template #panesTemplate let-panes="panes" let-showResizer="showResizer">
     <ng-container *ngFor="let pane of panes; let last = last">
-        <section
-            [id]="pane.id"
-            class="fd-splitter__split-pane"
-            [style]="_getPaneStyles(pane)"
-        >
+        <section [id]="pane.id" class="fd-splitter__split-pane" [style]="_getPaneStyles(pane)">
             <ng-template [cdkPortalOutlet]="pane._content"></ng-template>
         </section>
 

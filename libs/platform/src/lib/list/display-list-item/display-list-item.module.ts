@@ -11,15 +11,7 @@ import { DisplayListItemComponent } from './display-list-item.component';
 
 @NgModule({
     declarations: [DisplayListItemComponent],
-    imports: [
-        CommonModule,
-        IconModule,
-        FormsModule,
-        FormModule,
-        ListModule,
-        PlatformLinkModule,
-        RouterModule
-    ],
+    imports: [CommonModule, IconModule, FormsModule, FormModule, ListModule, PlatformLinkModule, RouterModule],
     exports: [DisplayListItemComponent]
 })
-export class DisplayListItemModule { }
+export class DisplayListItemModule {}

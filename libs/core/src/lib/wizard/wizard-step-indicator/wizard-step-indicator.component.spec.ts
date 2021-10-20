@@ -10,23 +10,23 @@ import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../../utils/publ
     template: ` <fd-wizard-step-indicator glyph="accept"></fd-wizard-step-indicator> `
 })
 class TestWrapperComponent {
-
     @ViewChild(WizardStepIndicatorComponent)
     indicator: WizardStepIndicatorComponent;
-
 }
 
 describe('WizardStepIndicatorComponent', () => {
     let component: TestWrapperComponent;
     let fixture: ComponentFixture<TestWrapperComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [WizardModule],
-            providers: [ContentDensityService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestWrapperComponent],
+                imports: [WizardModule],
+                providers: [ContentDensityService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestWrapperComponent);

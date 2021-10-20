@@ -12,9 +12,11 @@ describe('TextComponent', () => {
         await TestBed.configureTestingModule({
             declarations: [TextComponent],
             imports: [PipeModule, LineClampModule]
-        }).overrideComponent(TextComponent, {
-            set: { changeDetection: ChangeDetectionStrategy.Default }
-        }).compileComponents();
+        })
+            .overrideComponent(TextComponent, {
+                set: { changeDetection: ChangeDetectionStrategy.Default }
+            })
+            .compileComponents();
     });
 
     beforeEach(() => {

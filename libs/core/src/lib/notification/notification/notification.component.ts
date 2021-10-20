@@ -31,8 +31,8 @@ import { filter } from 'rxjs/operators';
 @Component({
     selector: 'fd-notification',
     template: `
-    <ng-content></ng-content>
-    <ng-container #vc></ng-container>
+        <ng-content></ng-content>
+        <ng-container #vc></ng-container>
     `,
     styleUrls: ['./notification.component.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -53,11 +53,12 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     /**
      * @hidden
      */
-     _dir: string;
+    _dir: string;
 
     /** User defined width for the notification */
     @HostBinding('style.width')
-    @Input() width:  string;
+    @Input()
+    width: string;
 
     /** Whether the notificatioon is in mobile mode */
     @Input() mobile: boolean;
@@ -105,9 +106,8 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
 
     /** @hidden */
     ngOnInit(): void {
-
         this._subscriptions.add(
-            this._rtlService?.rtl.subscribe(isRtl => {
+            this._rtlService?.rtl.subscribe((isRtl) => {
                 this._dir = isRtl ? 'rtl' : 'ltr';
                 this._cdRef.markForCheck();
             })
@@ -148,9 +148,9 @@ export class NotificationComponent extends AbstractFdNgxClass implements OnInit,
     private _listenAndCloseOnNavigation(): void {
         if (this._router && this._notificationRef) {
             this._subscriptions.add(
-                this._router.events.pipe(
-                    filter(event => event instanceof NavigationStart && this.closeOnNavigation)
-                ).subscribe(() => this._notificationRef.dismiss())
+                this._router.events
+                    .pipe(filter((event) => event instanceof NavigationStart && this.closeOnNavigation))
+                    .subscribe(() => this._notificationRef.dismiss())
             );
         }
     }

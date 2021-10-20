@@ -9,4 +9,4 @@ import { LinkComponent } from './link.component';
     imports: [CommonModule, LinkModule],
     exports: [LinkComponent]
 })
-export class PlatformLinkModule { }
+export class PlatformLinkModule {}

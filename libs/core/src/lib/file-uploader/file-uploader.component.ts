@@ -163,10 +163,12 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
     /** @hidden */
     ngOnInit(): void {
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this._changeDetRef.markForCheck();
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._changeDetRef.markForCheck();
+                })
+            );
         }
     }
 
@@ -237,7 +239,7 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
         this.inputRefText.nativeElement.value = fileName;
         this.inputRefText.nativeElement.title = fileName;
         if (fileName) {
-        this.inputRefText.nativeElement.placeholder = fileName;
+            this.inputRefText.nativeElement.placeholder = fileName;
         } else {
             this.inputRefText.nativeElement.placeholder = this.placeholder;
             this.inputRefText.nativeElement.title = this.placeholder;
@@ -251,7 +253,8 @@ export class FileUploaderComponent implements ControlValueAccessor, OnInit, OnDe
             this.open();
         } else if (KeyUtil.isKeyCode(event, [TAB])) {
             return;
-        } event.preventDefault();
+        }
+        event.preventDefault();
     }
 
     /**

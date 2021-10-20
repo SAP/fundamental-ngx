@@ -1,8 +1,4 @@
-<ng-container
-    fdpIconBarDndContainer
-    [draggable]="enableTabReordering"
-    (dropped)="_onDropped($event)"
->
+<ng-container fdpIconBarDndContainer [draggable]="enableTabReordering" (dropped)="_onDropped($event)">
     <ul
         class="fd-icon-tab-bar__header"
         role="tablist"
@@ -13,7 +9,8 @@
         dndOrientation="horizontal"
         (overflowChanged)="_recalculateVisibleItems($event)"
     >
-        <li *ngFor="let item of _tabs; trackBy:_trackBy"
+        <li
+            *ngFor="let item of _tabs; trackBy: _trackBy"
             [class]="item.cssClasses"
             fdOverflowListItem
             fdpIconBarDndItem
@@ -34,10 +31,10 @@
             >
                 <span *ngIf="layoutMode === 'row'; else columnsMode" class="fd-icon-tab-bar__tag">
                     {{ item.label }}
-                    <ng-container *ngIf="item.counter"> ({{item.counter}})</ng-container>
+                    <ng-container *ngIf="item.counter"> ({{ item.counter }})</ng-container>
                 </span>
                 <ng-template #columnsMode>
-                    <span class="fd-icon-tab-bar__counter">{{item.counter}}</span>
+                    <span class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
                     <span class="fd-icon-tab-bar__tag">{{ item.label }}</span>
                 </ng-template>
                 <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>

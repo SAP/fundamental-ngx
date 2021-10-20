@@ -11,13 +11,13 @@ $block: fdp-approval-flow-toolbar-actions;
 
 .#{$block} {
     .fd-button:not(:last-child) {
-        margin-right: .5rem;
+        margin-right: 0.5rem;
     }
 
     @include fd-rtl() {
         .fd-button:not(:last-child) {
             margin-right: 0;
-            margin-left: .5rem;
+            margin-left: 0.5rem;
         }
     }
 }

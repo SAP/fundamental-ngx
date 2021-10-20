@@ -11,5 +11,5 @@ export interface NestedItemInterface extends DefaultMenuItem {
     linkItem: NestedLinkDirective;
     allChildrenItems: NestedItemInterface[];
     hasChildren: boolean;
-    containsId: (id: string) => boolean
+    containsId: (id: string) => boolean;
 }

@@ -24,7 +24,7 @@ describe('BusyIndicatorExtendedDirective', () => {
             TestBed.configureTestingModule({
                 declarations: [TestComponent],
                 imports: [BusyIndicatorModule, MessageToastModule],
-                providers: [MessageToastService],
+                providers: [MessageToastService]
             }).compileComponents();
         })
     );

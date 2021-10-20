@@ -149,7 +149,7 @@ export class TabsDocsComponent {
             code: tabForm,
             fileName: 'tab-form-element-example'
         }
-    ]
+    ];
 
     tabCounter: ExampleFile[] = [
         {

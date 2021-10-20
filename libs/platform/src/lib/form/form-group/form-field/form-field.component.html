@@ -1,11 +1,17 @@
 <ng-template #renderer>
     <div [horizontal]="labelLayout === 'horizontal'" fd-form-item class="fd-row">
-        <div class="fd-col {{ labelLayout === 'horizontal' ? 'fd-col-md--2 fd-col-lg--4' : 'fd-col-md--12 fd-col-lg--12' }} fd-col-xl--12">
-            <label [id]="'fdp-form-label-' + id"
-                   [required]="editable && required"
-                   fd-form-label
-                   [inlineHelpTitle]="hint"
-                   [inlineHelpBodyPlacement]="hintPlacement">
+        <div
+            class="fd-col {{
+                labelLayout === 'horizontal' ? 'fd-col-md--4 fd-col-lg--4' : 'fd-col-md--12 fd-col-lg--12'
+            }} fd-col-xl--12"
+        >
+            <label
+                [id]="'fdp-form-label-' + id"
+                [required]="editable && required"
+                fd-form-label
+                [inlineHelpTitle]="hint"
+                [inlineHelpBodyPlacement]="hintPlacement"
+            >
                 <span *ngIf="!noLabelLayout">{{ label }}</span>
             </label>
         </div>
@@ -15,7 +21,11 @@
 </ng-template>
 
 <ng-template #withFormMessage>
-    <fdp-input-message-group class="fd-col {{ labelLayout === 'horizontal' ? 'fd-col-md--10 fd-col-lg--8' : 'fd-col-md--12 fd-col-lg--12' }} fd-col-xl--12">
+    <fdp-input-message-group
+        class="fd-col {{
+            labelLayout === 'horizontal' ? 'fd-col-md--8 fd-col-lg--8' : 'fd-col-md--12 fd-col-lg--12'
+        }} fd-col-xl--12"
+    >
         <!--
          Todo: we should extend this on FormGroup Level and have error trigger strategy that will be applied to
          all the field e.g.: [triggers]="['mouseenter', 'mouseleave']"

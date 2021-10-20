@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './platform-approval-flow-header.component.html',
     styleUrls: ['./platform-approval-flow-header.component.scss']
 })
-export class PlatformApprovalFlowHeaderComponent {
-}
+export class PlatformApprovalFlowHeaderComponent {}

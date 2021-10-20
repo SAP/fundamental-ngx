@@ -48,7 +48,12 @@ export function checkMarkingCheckbox(checkboxArray, sliceStart?: number, sliceEn
     expect(afterClickingTwice).toEqual(beforeClicking);
 }
 
-export function checkLabels(arraySelector: string, expectation: string[], sliceStart?: number, sliceEnd?: number): void {
+export function checkLabels(
+    arraySelector: string,
+    expectation: string[],
+    sliceStart?: number,
+    sliceEnd?: number
+): void {
     expect(getTextArr(arraySelector, sliceStart, sliceEnd)).toEqual(expectation);
 }
 
@@ -103,23 +108,47 @@ export function checkTextValueContain(str: string, subStr: string): void {
     expect(str).toContain(subStr);
 }
 
-export function checkElementHoverState(selector: string, tag: string, elementName: string, pageObject, index: number = 0): void {
+export function checkElementHoverState(
+    selector: string,
+    tag: string,
+    elementName: string,
+    pageObject,
+    index: number = 0
+): void {
     applyState('hover', selector, index);
     saveElementScreenshot(selector, tag, pageObject.getScreenshotFolder(), index);
-    expect(checkElementScreenshot(selector, tag, pageObject.getScreenshotFolder(), index))
-        .toBeLessThan(5, `${elementName} ${index} element hover state mismatch`);
+    expect(checkElementScreenshot(selector, tag, pageObject.getScreenshotFolder(), index)).toBeLessThan(
+        5,
+        `${elementName} ${index} element hover state mismatch`
+    );
 }
 
-export function checkElementFocusState(selector: string, tag: string, elementName: string, pageObject, index: number = 0): void {
+export function checkElementFocusState(
+    selector: string,
+    tag: string,
+    elementName: string,
+    pageObject,
+    index: number = 0
+): void {
     applyState('focus', selector, index);
     saveElementScreenshot(selector, tag, pageObject.getScreenshotFolder(), index);
-    expect(checkElementScreenshot(selector, tag, pageObject.getScreenshotFolder(), index))
-        .toBeLessThan(5, `${elementName} ${index} element focus state mismatch`);
+    expect(checkElementScreenshot(selector, tag, pageObject.getScreenshotFolder(), index)).toBeLessThan(
+        5,
+        `${elementName} ${index} element focus state mismatch`
+    );
 }
 
-export function checkElementActiveState(selector: string, tag: string, elementName: string, pageObject, index: number = 0): void {
+export function checkElementActiveState(
+    selector: string,
+    tag: string,
+    elementName: string,
+    pageObject,
+    index: number = 0
+): void {
     applyState('active', selector, index);
     saveElementScreenshot(selector, tag, pageObject.getScreenshotFolder(), index);
-    expect(checkElementScreenshot(selector, tag, pageObject.getScreenshotFolder(), index))
-        .toBeLessThan(5, `${elementName} ${index} element active state mismatch`);
+    expect(checkElementScreenshot(selector, tag, pageObject.getScreenshotFolder(), index)).toBeLessThan(
+        5,
+        `${elementName} ${index} element active state mismatch`
+    );
 }

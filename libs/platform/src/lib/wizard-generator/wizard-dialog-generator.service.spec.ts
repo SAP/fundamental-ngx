@@ -112,10 +112,9 @@ describe('WizardDialogGeneratorService', () => {
 
     it('should be created', () => {
         expect(service).toBeTruthy();
-     });
+    });
 
-    it('should open dialog with wizard', async() => {
-
+    it('should open dialog with wizard', async () => {
         const dialogRef = service.open({
             width: '100%',
             height: '100%',

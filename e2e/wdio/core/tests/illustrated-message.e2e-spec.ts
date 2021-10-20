@@ -6,24 +6,20 @@ import {
     elementDisplayed,
     doesItExist,
     getElementArrayLength,
-    waitForElDisplayed, saveElementScreenshot
+    waitForElDisplayed,
+    saveElementScreenshot
 } from '../../driver/wdio';
 
-describe('Illustrated-message test suite', function() {
+describe('Illustrated-message test suite', () => {
     const illustratedMessagePage = new IllustratedMessagePo();
-    const {
-        sceneAndSpotButtons,
-        buttonDialog,
-        dialogPopup,
-        closePopupSignButton,
-        closePopupButton
-    } = illustratedMessagePage;
+    const { sceneAndSpotButtons, buttonDialog, dialogPopup, closePopupSignButton, closePopupButton } =
+        illustratedMessagePage;
 
     beforeAll(() => {
         illustratedMessagePage.open();
     }, 1);
 
-    describe('check dialog example', function() {
+    describe('check dialog example', () => {
         it('should open dialog popup illustrated message', () => {
             click(buttonDialog);
             waitForElDisplayed(dialogPopup);
@@ -32,8 +28,9 @@ describe('Illustrated-message test suite', function() {
 
         xit('should check visual regression dialog popup illustrated message', () => {
             saveElementScreenshot(dialogPopup, 'dialogPopup', illustratedMessagePage.getScreenshotFolder());
-            expect(checkElementScreenshot(dialogPopup, 'dialogPopup', illustratedMessagePage.getScreenshotFolder()))
-                .toBeLessThan(5, 'the dialogPopup didnt match the baseline screenshot');
+            expect(
+                checkElementScreenshot(dialogPopup, 'dialogPopup', illustratedMessagePage.getScreenshotFolder())
+            ).toBeLessThan(5, 'the dialogPopup didnt match the baseline screenshot');
         });
 
         it('should close dialog popup illustrated message by click on "Close sign X" button', () => {
@@ -48,7 +45,7 @@ describe('Illustrated-message test suite', function() {
         });
     });
 
-    describe('Basic checks', function() {
+    describe('Basic checks', () => {
         it('should check is button clickable', () => {
             const buttonsArrLength = getElementArrayLength(sceneAndSpotButtons);
             for (let i = 0; buttonsArrLength > i; i++) {
@@ -61,11 +58,10 @@ describe('Illustrated-message test suite', function() {
         });
     });
 
-    xdescribe('visual regression', function() {
+    xdescribe('visual regression', () => {
         it('should check visual regression for all examples', () => {
             illustratedMessagePage.saveExampleBaselineScreenshot();
             expect(illustratedMessagePage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
-

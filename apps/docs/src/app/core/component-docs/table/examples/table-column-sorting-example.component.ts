@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 interface ExampleRow {
-    column1: any,
-    column2?: any,
-    column3?: any,
-    date?: any,
-    type?: any
+    column1: any;
+    column2?: any;
+    column3?: any;
+    date?: any;
+    type?: any;
 }
 
 @Component({

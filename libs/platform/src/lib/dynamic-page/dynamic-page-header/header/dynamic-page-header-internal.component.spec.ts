@@ -106,8 +106,9 @@ describe('DynamicPageHeaderInternalComponent', () => {
         it('should be able to collapse the header', async () => {
             component.collapsed = true;
             fixture.detectChanges();
-            const contentEl: HTMLElement = fixture.debugElement.query(By.css('.fd-dynamic-page__collapsible-header'))
-                .nativeElement;
+            const contentEl: HTMLElement = fixture.debugElement.query(
+                By.css('.fd-dynamic-page__collapsible-header')
+            ).nativeElement;
             expect(contentEl.getAttribute('aria-hidden')).toBeTruthy();
         });
 
@@ -126,8 +127,9 @@ describe('DynamicPageHeaderInternalComponent', () => {
             component.pinnable = true;
             await wait(fixture);
 
-            const pinBtn: HTMLButtonElement = fixture.debugElement.query(By.css('.fd-dynamic-page__pin-button'))
-                .nativeElement;
+            const pinBtn: HTMLButtonElement = fixture.debugElement.query(
+                By.css('.fd-dynamic-page__pin-button')
+            ).nativeElement;
             pinBtn.click();
             const contentEl = fixture.debugElement.queryAll(By.css('.fd-dynamic-page__collapsible-header'));
             expect(contentEl.length).toBe(1);

@@ -22,26 +22,28 @@ export class BaseDataProvider<T> extends DataProvider<T> {
         const limit = params.get('limit') || 50;
 
         if (!queryString || queryString === '*') {
-            return observable.pipe(map(items => this.withLimit(items, limit)));
+            return observable.pipe(map((items) => this.withLimit(items, limit)));
         }
 
         const toLowerPattern = queryString.toLowerCase();
 
-        return observable.pipe(map(items => {
-            const result: any[] = [];
+        return observable.pipe(
+            map((items) => {
+                const result: any[] = [];
 
-            for (let i = 0; i < items.length; i++) {
-                const item = items[i];
-                if (this.matches(item, toLowerPattern)) {
-                    result.push(item);
-                    if (result.length >= limit) {
-                        break;
+                for (let i = 0; i < items.length; i++) {
+                    const item = items[i];
+                    if (this.matches(item, toLowerPattern)) {
+                        result.push(item);
+                        if (result.length >= limit) {
+                            break;
+                        }
                     }
                 }
-            }
 
-            return result;
-        }));
+                return result;
+            })
+        );
     }
 
     /**
@@ -68,8 +70,8 @@ export class BaseDataProvider<T> extends DataProvider<T> {
         } else if (isJsObject(value)) {
             return this.hasObjectValue(item, pattern);
         } else if (this._matchingStrategy === MatchingStrategy.STARTS_WITH_PER_TERM) {
-            const reqexp = getMatchingStrategyStartsWithPerTermReqexp(value);
-            return pattern && value && !!(value.match(reqexp));
+            const reqexp = getMatchingStrategyStartsWithPerTermReqexp(pattern);
+            return pattern && value && !!value.match(reqexp);
         } else if (this._matchingStrategy === MatchingStrategy.STARTS_WITH) {
             return pattern && value && value.toString().toLowerCase().startsWith(pattern.toLowerCase());
         } else if (this._matchingStrategy === MatchingStrategy.CONTAINS) {

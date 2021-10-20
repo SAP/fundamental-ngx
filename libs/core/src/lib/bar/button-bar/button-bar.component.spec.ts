@@ -13,8 +13,7 @@ describe('ButtonBarComponent', () => {
             imports: [ButtonModule],
             declarations: [ButtonBarComponent],
             providers: [ContentDensityService]
-        })
-            .compileComponents();
+        }).compileComponents();
     });
 
     beforeEach(() => {

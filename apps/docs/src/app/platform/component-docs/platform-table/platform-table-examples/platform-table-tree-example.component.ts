@@ -45,7 +45,7 @@ export interface ExampleItem {
     statusColor?: string;
     date?: FdDate;
     verified?: boolean;
-    children?: ExampleItem[]
+    children?: ExampleItem[];
 }
 
 /**

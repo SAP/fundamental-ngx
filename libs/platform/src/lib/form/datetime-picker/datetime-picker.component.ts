@@ -20,7 +20,7 @@ import { CalendarYearGrid, DaysOfWeek, FdCalendarView } from '@fundamental-ngx/c
 import { DATE_TIME_FORMATS, DatetimeAdapter, DateTimeFormats } from '@fundamental-ngx/core/datetime';
 import { DatetimePickerComponent } from '@fundamental-ngx/core/datetime-picker';
 import { Placement, SpecialDayRule } from '@fundamental-ngx/core/shared';
-import { BaseInput, FormField, FormFieldControl, Status } from '@fundamental-ngx/platform/shared';
+import { BaseInput, FormField, FormFieldControl, ControlState } from '@fundamental-ngx/platform/shared';
 import { createMissingDateImplementationError } from './errors';
 
 @Component({
@@ -120,17 +120,21 @@ export class PlatformDatetimePickerComponent<D> extends BaseInput implements Aft
      */
     @Input() keepTwoDigitsTime = false;
 
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be `success`, `error`, `warning`, `information` or blank for default.
+     */
     @Input()
-    set state(state: Status) {
-        this._state = state ? state : 'default';
+    set state(state: ControlState) {
+        super.state = state;
     }
 
-    get state(): Status {
+    get state(): ControlState {
         if (this.dateTimePickerComponent?.isInvalidDateInput) {
             // if any other error from core dtp
             return 'error';
         }
-        return this.status || this._state;
+        return super.state;
     }
 
     /**

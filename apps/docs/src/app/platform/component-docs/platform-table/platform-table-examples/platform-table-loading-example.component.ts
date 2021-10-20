@@ -7,11 +7,13 @@ import { TableDataSource, TableDataProvider, TableState } from '@fundamental-ngx
 @Component({
     selector: 'fdp-platform-table-loading-example',
     templateUrl: './platform-table-loading-example.component.html',
-    styles: [`
-        .example-btn-holder {
-            margin-bottom: 16px;
-        }
-    `]
+    styles: [
+        `
+            .example-btn-holder {
+                margin-bottom: 16px;
+            }
+        `
+    ]
 })
 export class PlatformTableLoadingExampleComponent {
     loading = true;

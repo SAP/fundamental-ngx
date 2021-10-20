@@ -13,15 +13,17 @@ describe('OptionComponent', () => {
     const changeDetectorRef = jasmine.createSpyObj('ChangeDetectorRef', ['markForCheck']);
     const elementRef = new ElementRef(null);
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [OptionComponent],
-            providers: [
-                { provide: ChangeDetectorRef, useValue: changeDetectorRef },
-                { provide: ElementRef, useValue: elementRef }
-            ]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [OptionComponent],
+                providers: [
+                    { provide: ChangeDetectorRef, useValue: changeDetectorRef },
+                    { provide: ElementRef, useValue: elementRef }
+                ]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(OptionComponent);
@@ -48,17 +50,14 @@ describe('OptionComponent', () => {
     });
 
     it('should be selectable by click', () => {
-
         component._getHtmlElement().click();
 
         expect(component.selected).toBe(true);
         expect(setSelectedSpy).toHaveBeenCalled();
         expect(keyHandlerSpy).not.toHaveBeenCalled();
-
     });
 
     it('should be selectable by keyboard', () => {
-
         component._getHtmlElement().dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
         component._getHtmlElement().dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
 

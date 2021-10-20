@@ -26,7 +26,6 @@ import { SplitterPaneResizeEvent } from '../interfaces/splitter-pane-resize-even
 import { SplitterSplitPaneComponent } from '../splitter-split-pane/splitter-split-pane.component';
 import { PANE_AUTO_SIZE, PANE_NONE_SIZE, RESIZER_SIZE_PX, ROOT_PAGE } from '../constants';
 
-
 export enum SplitterPaneContainerOrientation {
     vertical = 'vertical',
     horizontal = 'horizontal'
@@ -101,7 +100,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
 
     /** @hidden */
     get _panesOnCanvas(): SplitterSplitPaneComponent[] {
-        return this._directPanes.filter(pane => pane.isOnCanvas);
+        return this._directPanes.filter((pane) => pane.isOnCanvas);
     }
 
     /** @hidden */
@@ -110,12 +109,12 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
             return this._panesOnCanvas;
         }
 
-        return this._panes.filter(pane => pane.id === this._currentPage);
+        return this._panes.filter((pane) => pane.id === this._currentPage);
     }
 
     /** @hidden */
     private get _panesInRightOrderForResize(): SplitterSplitPaneComponent[] {
-        const panes = this._directPanes.filter(pane => pane.id !== this._defaultPane?.id);
+        const panes = this._directPanes.filter((pane) => pane.id !== this._defaultPane?.id);
 
         if (this._defaultPane) {
             panes.unshift(this._defaultPane);
@@ -145,7 +144,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
             this._setDefaultPane();
             this._updatePages();
 
-            this._panes.forEach(pane => {
+            this._panes.forEach((pane) => {
                 this._subscription$.add(pane.toggleOnCanvas.subscribe(() => this._updatePages()));
             });
         }
@@ -189,7 +188,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
         this._paneSizes = [];
         this._initialPaneSizes = [];
 
-        this._panesInRightOrderForResize.forEach(pane => {
+        this._panesInRightOrderForResize.forEach((pane) => {
             const paneSize = this._getPaneElementSizePx(pane.id);
 
             this._paneSizes.push(paneSize);
@@ -224,7 +223,8 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
 
         diff *= this._isRtl && this.orientation === SplitterPaneContainerOrientation.vertical ? -1 : 1;
 
-        const resizedPaneIndex = this._panesInRightOrderForResize.findIndex(pane => pane.id === paneId) + (diff < 0 ? 1 : 0);
+        const resizedPaneIndex =
+            this._panesInRightOrderForResize.findIndex((pane) => pane.id === paneId) + (diff < 0 ? 1 : 0);
         const resizedPane = this._panesInRightOrderForResize[resizedPaneIndex];
 
         let siblingPaneIndex = resizedPaneIndex;
@@ -269,7 +269,9 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
     private _updatePages(): void {
         this._pages = [];
 
-        const offCanvasDemandPages = this._panes.filter(pane => !pane.isOnCanvas && pane.demandPane).map(pane => pane.id);
+        const offCanvasDemandPages = this._panes
+            .filter((pane) => !pane.isOnCanvas && pane.demandPane)
+            .map((pane) => pane.id);
         let newPage = ROOT_PAGE;
 
         if (offCanvasDemandPages.length) {
@@ -312,12 +314,12 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
             this._directPaneSubscription$.unsubscribe();
             this._directPaneSubscription$ = new Subscription();
 
-            this._directPanes.forEach(pane => {
+            this._directPanes.forEach((pane) => {
                 this._directPaneSubscription$.add(
                     pane.toggleOnCanvas.subscribe(() => this._resizePanesToFitInContainer())
                 );
             });
-        }
+        };
 
         let prevDirectPanes = [...this._directPanes];
         const areDirectPanesSame = (panes: QueryList<SplitterSplitPaneComponent>): boolean => {
@@ -325,34 +327,29 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
                 return false;
             }
 
-            return prevDirectPanes.every(prevPane => !!panes.find(pane => pane.id === prevPane.id));
-        }
+            return prevDirectPanes.every((prevPane) => !!panes.find((pane) => pane.id === prevPane.id));
+        };
 
         setDirectPanesSubscription();
 
         this._subscription$.add(
-            this._panes.changes
-                .pipe(filter(panes => !areDirectPanesSame(panes)))
-                .subscribe(panesList => {
-                    prevDirectPanes = panesList.toArray();
+            this._panes.changes.pipe(filter((panes) => !areDirectPanesSame(panes))).subscribe((panesList) => {
+                prevDirectPanes = panesList.toArray();
 
-                    setDirectPanesSubscription()
+                setDirectPanesSubscription();
 
-                    this._resizePanesToFitInContainer(true);
-                })
-        )
-
-        this._subscription$.add(
-            this._viewportRuler.change(10)
-                .subscribe(() => this._resizePanesToFitInContainer())
+                this._resizePanesToFitInContainer(true);
+            })
         );
+
+        this._subscription$.add(this._viewportRuler.change(10).subscribe(() => this._resizePanesToFitInContainer()));
     }
 
     /** @hidden */
     private _setDefaultPane(): void {
         const setDefaultPane = (): void => {
             if (this._splitter.defaultPaneId) {
-                this._defaultPane = this._panes.find(pane => pane.id === this._splitter.defaultPaneId);
+                this._defaultPane = this._panes.find((pane) => pane.id === this._splitter.defaultPaneId);
             }
 
             if (!this._defaultPane) {
@@ -363,20 +360,19 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
             if (this._defaultPane?._content.isAttached) {
                 this._defaultPane._content.detach();
             }
-        }
+        };
 
         setDefaultPane();
 
         this._subscription$.add(
-            this._splitter._defaultPaneId$
-                .subscribe(() => {
-                    this._cdr.detectChanges();
+            this._splitter._defaultPaneId$.subscribe(() => {
+                this._cdr.detectChanges();
 
-                    setDefaultPane();
+                setDefaultPane();
 
-                    this._resizePanesToFitInContainer(true);
-                    this._updatePages();
-                })
+                this._resizePanesToFitInContainer(true);
+                this._updatePages();
+            })
         );
     }
 
@@ -409,7 +405,7 @@ export class SplitterPaneContainerComponent implements AfterContentInit, AfterVi
                 return;
             }
 
-            pane._actualSize = pane.size === PANE_AUTO_SIZE ? PANE_AUTO_SIZE : (paneSize + 'px');
+            pane._actualSize = pane.size === PANE_AUTO_SIZE ? PANE_AUTO_SIZE : paneSize + 'px';
             availableSpacePx -= paneSize;
         });
 

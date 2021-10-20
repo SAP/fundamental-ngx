@@ -10,11 +10,7 @@ import { ListComponent } from '../list.component';
 import { StandardListItemComponent } from './standard-list-item.component';
 import { StandardListItemModule } from './standard-list-item.module';
 
-const LIST_ELEMENTS: Address[] = [
-    { name: 'City1' },
-    { name: 'City2' },
-    { name: 'City3' },
-    { name: 'City4' }];
+const LIST_ELEMENTS: Address[] = [{ name: 'City1' }, { name: 'City2' }, { name: 'City3' }, { name: 'City4' }];
 
 export interface Address {
     name: string;
@@ -38,9 +34,7 @@ export class ListDataProvider extends DataProvider<Address> {
 @Component({
     selector: 'fdp-standard-list-item-test',
     template: `
-    <fdp-list #componentElement>
-           <fdp-standard-list-item title="Title1"></fdp-standard-list-item></fdp-list>
-
+        <fdp-list #componentElement> <fdp-standard-list-item title="Title1"></fdp-standard-list-item></fdp-list>
     `
 })
 class StandardListItemComponentTest {
@@ -52,12 +46,14 @@ describe('StandardListItemComponent', () => {
     let component: StandardListItemComponentTest;
     let fixture: ComponentFixture<StandardListItemComponentTest>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [StandardListItemComponentTest],
-            imports: [StandardListItemModule, PlatformListModule, RouterTestingModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [StandardListItemComponentTest],
+                imports: [StandardListItemModule, PlatformListModule, RouterTestingModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(StandardListItemComponentTest);
@@ -86,7 +82,6 @@ describe('StandardListItemComponent', () => {
         const listElement = fixture.debugElement.nativeElement.querySelector('li');
         expect(listElement.getAttribute('id')).toContain('fdp-list-item-');
     });
-
 });
 
 @Component({
@@ -108,12 +103,14 @@ describe('Standard  List Item Component with DataSource', () => {
     let host: StandardListItemDataSourceTestComponent;
     let fixture: ComponentFixture<StandardListItemDataSourceTestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [StandardListItemDataSourceTestComponent],
-            imports: [PlatformListModule, StandardListItemModule, RouterTestingModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [StandardListItemDataSourceTestComponent],
+                imports: [PlatformListModule, StandardListItemModule, RouterTestingModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(StandardListItemDataSourceTestComponent);

@@ -23,17 +23,45 @@ import {
     componentExampleArr,
     dateTestText,
     paginationTestArr,
-    tableCellArr, tableCellArr2, testText
+    tableCellArr,
+    tableCellArr2,
+    testText
 } from '../fixtures/appData/table-content';
 
-describe('Table test suite', function() {
+describe('Table test suite', () => {
     const tablePage = new TablePo();
     const {
-        tableExample, link, tableToolbarExample, button, busyIndicator, dialogContent, inputField, table,
-        tableRow, tableCell, markAllCheckboxes, tableCheckboxesExample, tableSemanticExample, tablePopinExample,
-        clickableTableRow, tableNavigatableRowExample, tablePaginationExample, menuItem, paginationLink, tableResult,
-        linkPrevious, linkNext, tableCustomColumnsExample, inputGroup, dialogValue, tableInner, columnSortingInput,
-        tableColumnSortingExample, listItem, markAllCheckboxesFF, clickableTableRowFF
+        tableExample,
+        link,
+        tableToolbarExample,
+        button,
+        busyIndicator,
+        dialogContent,
+        inputField,
+        table,
+        tableRow,
+        tableCell,
+        markAllCheckboxes,
+        tableCheckboxesExample,
+        tableSemanticExample,
+        tablePopinExample,
+        clickableTableRow,
+        tableNavigatableRowExample,
+        tablePaginationExample,
+        menuItem,
+        paginationLink,
+        tableResult,
+        linkPrevious,
+        linkNext,
+        tableCustomColumnsExample,
+        inputGroup,
+        dialogValue,
+        tableInner,
+        columnSortingInput,
+        tableColumnSortingExample,
+        listItem,
+        markAllCheckboxesFF,
+        clickableTableRowFF
     } = tablePage;
 
     beforeAll(() => {
@@ -51,8 +79,7 @@ describe('Table test suite', function() {
         }
     });
 
-    describe('Check Table with Toolbar example', function() {
-
+    describe('Check Table with Toolbar example', () => {
         it('should check ability to clear search field', () => {
             scrollIntoView(tableToolbarExample);
             setValue(tableToolbarExample + inputField, testText);
@@ -95,25 +122,40 @@ describe('Table test suite', function() {
         });
     });
 
-    describe('Check Customizable Columns example', function() {
-
+    describe('Check Customizable Columns example', () => {
         it('should check that table sort work correctly', () => {
             scrollIntoView(tableCustomColumnsExample);
             click(tableCustomColumnsExample + button);
             click(dialogContent + button, 1);
             click(dialogContent + button, 2);
-            saveElementScreenshot(tableCustomColumnsExample + table, 'table-sort-down-example-' + getImageTagBrowserPlatform(),
-                tablePage.getScreenshotFolder());
-            expect(checkElementScreenshot(tableCustomColumnsExample + table, 'table-sort-down-example-' + getImageTagBrowserPlatform(),
-                tablePage.getScreenshotFolder())).toBeLessThan(5, `element item state mismatch`);
+            saveElementScreenshot(
+                tableCustomColumnsExample + table,
+                'table-sort-down-example-' + getImageTagBrowserPlatform(),
+                tablePage.getScreenshotFolder()
+            );
+            expect(
+                checkElementScreenshot(
+                    tableCustomColumnsExample + table,
+                    'table-sort-down-example-' + getImageTagBrowserPlatform(),
+                    tablePage.getScreenshotFolder()
+                )
+            ).toBeLessThan(5, `element item state mismatch`);
 
             click(tableCustomColumnsExample + button);
             click(dialogContent + button);
             click(dialogContent + button, 2);
-            saveElementScreenshot(tableCustomColumnsExample + table, 'table-sort-up-example-' + getImageTagBrowserPlatform(),
-                tablePage.getScreenshotFolder());
-            expect(checkElementScreenshot(tableCustomColumnsExample + table, 'table-sort-up-example-' + getImageTagBrowserPlatform(),
-                tablePage.getScreenshotFolder())).toBeLessThan(5, `element item state mismatch`);
+            saveElementScreenshot(
+                tableCustomColumnsExample + table,
+                'table-sort-up-example-' + getImageTagBrowserPlatform(),
+                tablePage.getScreenshotFolder()
+            );
+            expect(
+                checkElementScreenshot(
+                    tableCustomColumnsExample + table,
+                    'table-sort-up-example-' + getImageTagBrowserPlatform(),
+                    tablePage.getScreenshotFolder()
+                )
+            ).toBeLessThan(5, `element item state mismatch`);
         });
 
         it('should check search work correctly', () => {
@@ -126,13 +168,12 @@ describe('Table test suite', function() {
         it('should check clickability cancel button', () => {
             scrollIntoView(tableCustomColumnsExample);
             click(tableCustomColumnsExample + button);
-            expect(isElementClickable(dialogContent + button, 3))
-                .toBe(true, 'cancel button not clickable');
+            waitForElDisplayed(dialogContent);
+            expect(isElementClickable(dialogContent + button, 3)).toBe(true, 'cancel button not clickable');
         });
     });
 
-    describe('Check Column Sorting and Filtering example', function() {
-
+    describe('Check Column Sorting and Filtering example', () => {
         it('should check filter work correctly', () => {
             scrollIntoView(tableInner);
             click(tableInner);
@@ -149,79 +190,102 @@ describe('Table test suite', function() {
             scrollIntoView(tableInner);
             click(tableInner);
             click(listItem, 1);
-            saveElementScreenshot(tableColumnSortingExample + table, 'table-descending-example-' + getImageTagBrowserPlatform(),
-                tablePage.getScreenshotFolder());
-            expect(checkElementScreenshot(tableColumnSortingExample + table, 'table-descending-example-' + getImageTagBrowserPlatform(),
-                tablePage.getScreenshotFolder())).toBeLessThan(5, `element item state mismatch`);
+            saveElementScreenshot(
+                tableColumnSortingExample + table,
+                'table-descending-example-' + getImageTagBrowserPlatform(),
+                tablePage.getScreenshotFolder()
+            );
+            expect(
+                checkElementScreenshot(
+                    tableColumnSortingExample + table,
+                    'table-descending-example-' + getImageTagBrowserPlatform(),
+                    tablePage.getScreenshotFolder()
+                )
+            ).toBeLessThan(5, `element item state mismatch`);
 
             click(tableInner);
             click(listItem);
-            saveElementScreenshot(tableColumnSortingExample + table, 'table-ascending-example-' + getImageTagBrowserPlatform(),
-                tablePage.getScreenshotFolder());
-            expect(checkElementScreenshot(tableColumnSortingExample + table, 'table-ascending-example-' + getImageTagBrowserPlatform(),
-                tablePage.getScreenshotFolder())).toBeLessThan(5, `element item state mismatch`);
+            saveElementScreenshot(
+                tableColumnSortingExample + table,
+                'table-ascending-example-' + getImageTagBrowserPlatform(),
+                tablePage.getScreenshotFolder()
+            );
+            expect(
+                checkElementScreenshot(
+                    tableColumnSortingExample + table,
+                    'table-ascending-example-' + getImageTagBrowserPlatform(),
+                    tablePage.getScreenshotFolder()
+                )
+            ).toBeLessThan(5, `element item state mismatch`);
         });
     });
 
-    describe('Check Table with Checkboxes example', function() {
-
+    describe('Check Table with Checkboxes example', () => {
         it('should check that checkbox work correctly', () => {
             scrollIntoView(tableCheckboxesExample);
             const checkboxLength = getElementArrayLength(tableCheckboxesExample + markAllCheckboxes);
             for (let i = 0; i < checkboxLength; i++) {
                 scrollIntoView(tableCheckboxesExample + markAllCheckboxes, i);
-                browserIsFirefox() ? click(tableCheckboxesExample + markAllCheckboxesFF, i) :
-                    click(tableCheckboxesExample + markAllCheckboxes, i);
+                browserIsFirefox()
+                    ? click(tableCheckboxesExample + markAllCheckboxesFF, i)
+                    : click(tableCheckboxesExample + markAllCheckboxes, i);
             }
 
             const checkboxLength_2 = getElementArrayLength(tableCheckboxesExample + tableRow);
             for (let i = 0; i < checkboxLength_2; i++) {
-                expect(getAttributeByName(tableCheckboxesExample + tableRow, 'aria-selected', i))
-                    .toBe('true', `row ${i} not selected`);
+                expect(getAttributeByName(tableCheckboxesExample + tableRow, 'aria-selected', i)).toBe(
+                    'true',
+                    `row ${i} not selected`
+                );
             }
         });
     });
 
-    describe('Check Table With Semantic Row Highlighting example', function() {
-
+    describe('Check Table With Semantic Row Highlighting example', () => {
         it('should check that checkbox work correctly', () => {
             scrollIntoView(tableSemanticExample);
-            browserIsFirefox() ? click(tableSemanticExample + markAllCheckboxesFF) :
-                click(tableSemanticExample + markAllCheckboxes);
+            browserIsFirefox()
+                ? click(tableSemanticExample + markAllCheckboxesFF)
+                : click(tableSemanticExample + markAllCheckboxes);
             const checkboxLength = getElementArrayLength(tableSemanticExample + tableRow);
             for (let i = 0; i < checkboxLength; i++) {
-                expect(getAttributeByName(tableSemanticExample + tableRow, 'aria-selected', i))
-                    .toBe('true', `element with index ${i} not selected`);
+                expect(getAttributeByName(tableSemanticExample + tableRow, 'aria-selected', i)).toBe(
+                    'true',
+                    `element with index ${i} not selected`
+                );
             }
         });
     });
 
-    describe('Check Pop In Mode on Responsive Table example', function() {
-
+    describe('Check Pop In Mode on Responsive Table example', () => {
         it('should check that table rows are clickable', () => {
             scrollIntoView(tablePopinExample);
             const tableRowLength = getElementArrayLength(tablePopinExample + clickableTableRow);
             for (let i = 0; i < tableRowLength; i++) {
-                expect(isElementClickable(tablePopinExample + clickableTableRow, i))
-                    .toBe(true, `element with index ${i} not clickable`);
+                expect(isElementClickable(tablePopinExample + clickableTableRow, i)).toBe(
+                    true,
+                    `element with index ${i} not clickable`
+                );
             }
         });
 
         it('should check that checkbox work correctly', () => {
             scrollIntoView(tablePopinExample);
-            browserIsFirefox() ? click(tablePopinExample + markAllCheckboxesFF) :
-                click(tablePopinExample + markAllCheckboxes);
+            browserIsFirefox()
+                ? click(tablePopinExample + markAllCheckboxesFF)
+                : click(tablePopinExample + markAllCheckboxes);
             const checkboxLength = getElementArrayLength(tablePopinExample + tableRow);
             const startCycle = 20;
             for (let i = startCycle; i < checkboxLength; i++) {
-                expect(getAttributeByName(tablePopinExample + tableRow, 'aria-selected', i))
-                    .toBe('true', `element with index ${i} not selected`);
+                expect(getAttributeByName(tablePopinExample + tableRow, 'aria-selected', i)).toBe(
+                    'true',
+                    `element with index ${i} not selected`
+                );
             }
         });
     });
 
-    describe('Check Table with Non-navigatable Row example', function() {
-
+    describe('Check Table with Non-navigatable Row example', () => {
         it('should check alert message', () => {
             scrollIntoView(tableNavigatableRowExample);
             const rowLength = getElementArrayLength(tableNavigatableRowExample + clickableTableRow);
@@ -230,8 +294,9 @@ describe('Table test suite', function() {
                     continue;
                 }
                 scrollIntoView(tableNavigatableRowExample + clickableTableRow, i);
-                browserIsFirefox() ? click(tableNavigatableRowExample + clickableTableRowFF, i) :
-                    click(tableNavigatableRowExample + clickableTableRow, i);
+                browserIsFirefox()
+                    ? click(tableNavigatableRowExample + clickableTableRowFF, i)
+                    : click(tableNavigatableRowExample + clickableTableRow, i);
                 expect(getAlertText()).toBe(alertText);
                 acceptAlert();
             }
@@ -245,8 +310,7 @@ describe('Table test suite', function() {
         });
     });
 
-    describe('Check  Table With Pagination example', function() {
-
+    describe('Check  Table With Pagination example', () => {
         it('should check how many table rows display on table', () => {
             scrollIntoView(tablePaginationExample);
             const fiveTableRows = getElementArrayLength(tablePaginationExample + tableRow);
@@ -282,13 +346,11 @@ describe('Table test suite', function() {
         });
     });
 
-
     it('should check RTL/LTR orientations', () => {
         tablePage.checkRtlSwitch();
     });
 
-    xdescribe('visual regression', function() {
-
+    xdescribe('visual regression', () => {
         it('should check example blocks visual regression', () => {
             tablePage.saveExampleBaselineScreenshot();
             expect(tablePage.compareWithBaseline()).toBeLessThan(5);

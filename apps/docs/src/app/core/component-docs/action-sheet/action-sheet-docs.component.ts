@@ -17,7 +17,7 @@ export class ActionSheetDocsComponent {
         {
             language: 'html',
             code: actionSheetCompactSrc,
-            fileName: 'action-sheet-compact-example',
+            fileName: 'action-sheet-compact-example'
         },
         {
             language: 'typescript',
@@ -31,7 +31,7 @@ export class ActionSheetDocsComponent {
         {
             language: 'html',
             code: actionSheetDefaultSrc,
-            fileName: 'action-sheet-default-example',
+            fileName: 'action-sheet-default-example'
         },
         {
             language: 'typescript',
@@ -45,7 +45,7 @@ export class ActionSheetDocsComponent {
         {
             language: 'html',
             code: actionSheetMobileSrc,
-            fileName: 'action-sheet-mobile-example',
+            fileName: 'action-sheet-mobile-example'
         },
         {
             language: 'typescript',

@@ -2,25 +2,37 @@ import {
     checkElementScreenshot,
     click,
     doesItExist,
-    getElementArrayLength, getImageTagBrowserPlatform,
+    getElementArrayLength,
+    getImageTagBrowserPlatform,
     getValue,
-    refreshPage, saveElementScreenshot,
+    refreshPage,
+    saveElementScreenshot,
     scrollIntoView,
-    sendKeys, isEnabled,
+    sendKeys,
+    isEnabled,
     setValue,
     waitForElDisplayed,
-    waitForPresent, getElementPlaceholder
+    waitForPresent,
+    getElementPlaceholder
 } from '../../driver/wdio';
 import { time, text, defaultValidTime, altValidTime } from '../fixtures/testData/time-picker';
 import { TimePickerPO } from '../pages/time-picker.po';
 
-describe('Time picker suite', function() {
+describe('Time picker suite', () => {
     const timePickerPage = new TimePickerPO();
     const {
-        activeTimePickerInput, timePickerInput, timerExpanded,
-        activeTimePickerButton, errorBorder, selectedValue,
-        disabledInput, disabledButton,
-        navigationDownArrowButton, timeItem, setToNullButton, setValidTimeButton,
+        activeTimePickerInput,
+        timePickerInput,
+        timerExpanded,
+        activeTimePickerButton,
+        errorBorder,
+        selectedValue,
+        disabledInput,
+        disabledButton,
+        navigationDownArrowButton,
+        timeItem,
+        setToNullButton,
+        setValidTimeButton
     } = timePickerPage;
 
     beforeAll(() => {
@@ -133,7 +145,7 @@ describe('Time picker suite', function() {
         timePickerPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         beforeEach(() => {
             refreshPage();
             waitForPresent(timePickerInput);
@@ -148,9 +160,18 @@ describe('Time picker suite', function() {
             scrollIntoView(activeTimePickerButton);
             click(activeTimePickerButton);
             waitForElDisplayed(timerExpanded);
-            saveElementScreenshot(timerExpanded, `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`, timePickerPage.getScreenshotFolder());
-            expect(checkElementScreenshot(timerExpanded, `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`, timePickerPage.getScreenshotFolder()))
-                .toBeLessThan(5);
+            saveElementScreenshot(
+                timerExpanded,
+                `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`,
+                timePickerPage.getScreenshotFolder()
+            );
+            expect(
+                checkElementScreenshot(
+                    timerExpanded,
+                    `time-picker-expanded-example-platform-${getImageTagBrowserPlatform()}`,
+                    timePickerPage.getScreenshotFolder()
+                )
+            ).toBeLessThan(5);
         });
     });
 

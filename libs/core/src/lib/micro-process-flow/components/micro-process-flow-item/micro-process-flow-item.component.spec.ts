@@ -8,9 +8,8 @@ describe('MicroProcessFlowItemComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-        declarations: [ MicroProcessFlowItemComponent ]
-        })
-        .compileComponents();
+            declarations: [MicroProcessFlowItemComponent]
+        }).compileComponents();
     });
 
     beforeEach(() => {

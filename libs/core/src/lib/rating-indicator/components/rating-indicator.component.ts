@@ -43,10 +43,10 @@ interface RatingViewItem {
     styleUrls: [
         './rating-indicator.component.scss',
         /*
-        * NOTE: Will be remove this style after merge PR with fix for this issue:
-        * Issue link: https://github.com/SAP/fundamental-styles/issues/1753
-        * PR link: https://github.com/SAP/fundamental-styles/pull/1782
-        */
+         * NOTE: Will be remove this style after merge PR with fix for this issue:
+         * Issue link: https://github.com/SAP/fundamental-styles/issues/1753
+         * PR link: https://github.com/SAP/fundamental-styles/pull/1782
+         */
         './rating-indicator.css'
     ],
     encapsulation: ViewEncapsulation.None,
@@ -160,7 +160,7 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
      * Text divider label between view value and indicator count.
      */
     @Input()
-    dynamicTextIndicator = 'of'
+    dynamicTextIndicator = 'of';
 
     /**
      * Fired when the user sets or changes their rating.
@@ -184,10 +184,7 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     private _hideDynamicText = false;
 
     /** @hidden */
-    constructor(
-        private readonly _elementRef: ElementRef,
-        private readonly _changeDetectorRef: ChangeDetectorRef
-    ) { }
+    constructor(private readonly _elementRef: ElementRef, private readonly _changeDetectorRef: ChangeDetectorRef) {}
     /** @hidden */
     get viewRatingUID(): number {
         return this._ratingUID;
@@ -202,9 +199,9 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     }
 
     /** @hidden */
-    onChange: Function = () => { };
+    onChange: Function = () => {};
     /** @hidden */
-    onTouched: Function = () => { };
+    onTouched: Function = () => {};
 
     /** @hidden */
     ngOnInit(): void {
@@ -216,11 +213,12 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
-        if ('class' in changes
-            || 'size' in changes
-            || 'ratedIcon' in changes
-            || 'unratedIcon' in changes
-            || 'allowHalves' in changes
+        if (
+            'class' in changes ||
+            'size' in changes ||
+            'ratedIcon' in changes ||
+            'unratedIcon' in changes ||
+            'allowHalves' in changes
         ) {
             this.buildComponentCssClass();
         }
@@ -303,7 +301,7 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
     /**
      * @hidden
      * Generate rating items for popover content if rating object was defined
-    */
+     */
     private _generateRatings(): void {
         if (!this.ratings) {
             return;
@@ -313,14 +311,17 @@ export class RatingIndicatorComponent implements OnInit, OnChanges, CssClassBuil
                 const _rate = +rate;
                 return !isNaN(_rate) && !isNaN(+vote) && _rate > 0;
             })
-            .map(([rate, votes ]) => ({ rate: +rate, votes: votes}));
+            .map(([rate, votes]) => ({ rate: +rate, votes: votes }));
         if (ratings.length === 0) {
             return;
         }
-        const {totalVotes, totalRating} = ratings.reduce((total, rating) => ({
-            totalVotes: total.totalVotes + rating.votes,
-            totalRating: total.totalRating + rating.rate * rating.votes
-        }), { totalVotes: 0, totalRating : 0 });
+        const { totalVotes, totalRating } = ratings.reduce(
+            (total, rating) => ({
+                totalVotes: total.totalVotes + rating.votes,
+                totalRating: total.totalRating + rating.rate * rating.votes
+            }),
+            { totalVotes: 0, totalRating: 0 }
+        );
 
         this._ratingItems = ratings;
         this.ratingAverage = totalRating / totalVotes;

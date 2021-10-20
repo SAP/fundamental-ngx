@@ -59,5 +59,4 @@ const routes: Routes = [
         PlatformNonByLineStandardListItemExampleComponent
     ]
 })
-export class PlatformStandardListItemDocsModule {
-}
+export class PlatformStandardListItemDocsModule {}

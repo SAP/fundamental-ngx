@@ -21,7 +21,7 @@ export class PlatformObjectListItemDocsComponent {
         {
             language: 'html',
             code: borderLessOLISrc,
-            fileName: 'platform-object-list-item-border-less-example',
+            fileName: 'platform-object-list-item-border-less-example'
         },
         {
             language: 'typescript',
@@ -35,7 +35,7 @@ export class PlatformObjectListItemDocsComponent {
         {
             language: 'html',
             code: rowSelectionOLISrc,
-            fileName: 'platform-object-list-item-with-row-selection-example',
+            fileName: 'platform-object-list-item-with-row-selection-example'
         },
         {
             language: 'typescript',
@@ -49,7 +49,7 @@ export class PlatformObjectListItemDocsComponent {
         {
             language: 'html',
             code: rowNavigationOLISrc,
-            fileName: 'platform-object-list-item-with-row-navigation-example',
+            fileName: 'platform-object-list-item-with-row-navigation-example'
         },
         {
             language: 'typescript',
@@ -62,7 +62,7 @@ export class PlatformObjectListItemDocsComponent {
         {
             language: 'html',
             code: rowNavigationAndSelectionOLISrc,
-            fileName: 'platform-object-list-item-with-row-selection-and-navigation-example',
+            fileName: 'platform-object-list-item-with-row-selection-and-navigation-example'
         },
         {
             language: 'typescript',
@@ -76,7 +76,7 @@ export class PlatformObjectListItemDocsComponent {
         {
             language: 'html',
             code: declarativeOLISrc,
-            fileName: 'platform-object-list-item-example',
+            fileName: 'platform-object-list-item-example'
         }
     ];
 }

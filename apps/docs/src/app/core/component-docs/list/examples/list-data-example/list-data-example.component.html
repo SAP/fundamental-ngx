@@ -1,7 +1,5 @@
 <fd-toolbar>
-    <label fd-toolbar-label>
-        Filter for list elements
-    </label>
+    <label fd-toolbar-label> Filter for list elements </label>
     <fd-toolbar-spacer></fd-toolbar-spacer>
     <fd-input-group
         glyph="decline"
@@ -18,7 +16,7 @@
     <button fd-button compact="true" glyph="sort-descending" (click)="changeSort(false)"></button>
 </fd-toolbar>
 <ul fd-list>
-    <li fd-list-item *ngFor="let item of displayedItems | sortBy : ascendingSort ; let ind = index">
+    <li fd-list-item *ngFor="let item of displayedItems | sortBy: ascendingSort; let ind = index">
         <span fd-list-title>
             {{ item }}
         </span>
@@ -27,8 +25,6 @@
         </span>
     </li>
     <li fd-list-item noData="true" *ngIf="!displayedItems || displayedItems.length === 0">
-        <span fd-list-title>
-            No results found!
-        </span>
+        <span fd-list-title> No results found! </span>
     </li>
 </ul>

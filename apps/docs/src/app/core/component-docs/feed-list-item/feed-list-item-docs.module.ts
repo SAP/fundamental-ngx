@@ -14,7 +14,6 @@ import { ActionSheetModule } from '@fundamental-ngx/core/action-sheet';
 import { AvatarModule } from '@fundamental-ngx/core/avatar';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
 
-
 const routes: Routes = [
     {
         path: '',
@@ -28,7 +27,8 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forChild(routes), SharedDocumentationPageModule,
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
         FeedListItemModule,
         MenuModule,
         ActionSheetModule,
@@ -36,10 +36,6 @@ const routes: Routes = [
         ToolbarModule
     ],
     exports: [RouterModule],
-    declarations: [
-        FeedListItemHeaderComponent,
-        FeedListItemDocsComponent,
-        ...examples
-    ]
+    declarations: [FeedListItemHeaderComponent, FeedListItemDocsComponent, ...examples]
 })
-export class FeedListItemDocsModule { }
+export class FeedListItemDocsModule {}

@@ -12,34 +12,37 @@
                 class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list"
                 role="list"
             >
-                <ng-container
-                    [ngTemplateOutletContext]="{level: 1, items: extraTabs}"
-                    [ngTemplateOutlet]="subItem"
-                >
+                <ng-container [ngTemplateOutletContext]="{ level: 1, items: extraTabs }" [ngTemplateOutlet]="subItem">
                 </ng-container>
                 <ng-template #subItem let-items="items" let-level="level">
-                    <ng-container *ngFor="let item of items; trackBy:_trackBy">
+                    <ng-container *ngFor="let item of items; trackBy: _trackBy">
                         <li
-                            [attr.aria-level]="level" class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
+                            [attr.aria-level]="level"
+                            class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
                             [class]="item.cssClasses"
                             fdpIconBarDndItem
                             [dndItemData]="item"
                             role="listitem"
-                            tabindex="-1">
+                            tabindex="-1"
+                        >
                             <a
                                 class="fd-list__link fd-icon-tab-bar__list-link"
                                 tabindex="0"
                                 [attr.aria-selected]="item.uId === selectedSubItemUid"
                                 (click)="_selectItem(item)"
                             >
-                                <span class="fd-list__title fd-icon-tab-bar__list-item-title">{{item.label}}</span>
+                                <span class="fd-list__title fd-icon-tab-bar__list-item-title">{{ item.label }}</span>
                                 <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
-                                <span *ngIf="item.counter" class="fd-list__counter fd-icon-tab-bar__list-item-counter">({{item.counter}})</span>
+                                <span *ngIf="item.counter" class="fd-list__counter fd-icon-tab-bar__list-item-counter"
+                                    >({{ item.counter }})</span
+                                >
                             </a>
                         </li>
                         <ng-container *ngIf="item.subItems?.length">
-                            <ng-container [ngTemplateOutletContext]="{level: level + 1, items: item.subItems}"
-                                          [ngTemplateOutlet]="subItem"></ng-container>
+                            <ng-container
+                                [ngTemplateOutletContext]="{ level: level + 1, items: item.subItems }"
+                                [ngTemplateOutlet]="subItem"
+                            ></ng-container>
                         </ng-container>
                     </ng-container>
                 </ng-template>
@@ -51,13 +54,9 @@
 <ng-container *ngIf="!isExtraItemsMode && parentTab">
     <fd-popover placement="bottom-end" [focusAutoCapture]="true" [focusTrapped]="true" #popover>
         <fd-popover-control>
-            <a
-                aria-selected="false"
-                class="fd-icon-tab-bar__tab"
-                role="tab"
-                tabindex="0">
+            <a aria-selected="false" class="fd-icon-tab-bar__tab" role="tab" tabindex="0">
                 <div class="fd-icon-tab-bar__tab-container">
-                    <span class="fd-icon-tab-bar__tag">{{parentTab.label}}</span>
+                    <span class="fd-icon-tab-bar__tag">{{ parentTab.label }}</span>
                     <span class="fd-icon-tab-bar__arrow">
                         <i class="sap-icon--slim-arrow-down" role="presentation"></i>
                     </span>
@@ -71,17 +70,21 @@
                 class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list"
                 role="list"
             >
-                <ng-container [ngTemplateOutletContext]="{level: 1, items: parentTab.subItems}"
-                              [ngTemplateOutlet]="subItem"></ng-container>
+                <ng-container
+                    [ngTemplateOutletContext]="{ level: 1, items: parentTab.subItems }"
+                    [ngTemplateOutlet]="subItem"
+                ></ng-container>
                 <ng-template #subItem let-items="items" let-level="level">
-                    <ng-container *ngFor="let item of items; trackBy:_trackBy">
+                    <ng-container *ngFor="let item of items; trackBy: _trackBy">
                         <li
-                            [attr.aria-level]="level" class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
+                            [attr.aria-level]="level"
+                            class="fd-list__item fd-list__item--link fd-icon-tab-bar__list-item"
                             [class]="item.cssClasses"
                             fdpIconBarDndItem
                             [dndItemData]="item"
                             role="listitem"
-                            tabindex="-1">
+                            tabindex="-1"
+                        >
                             <a
                                 class="fd-list__link fd-icon-tab-bar__list-link"
                                 tabindex="0"
@@ -89,14 +92,18 @@
                                 (click)="_selectItem(item)"
                                 (keydown)="_keyDownHandler($event, item)"
                             >
-                                <span class="fd-list__title fd-icon-tab-bar__list-item-title">{{item.label}}</span>
+                                <span class="fd-list__title fd-icon-tab-bar__list-item-title">{{ item.label }}</span>
                                 <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
-                                <span *ngIf="item.counter" class="fd-list__counter fd-icon-tab-bar__list-item-counter">({{item.counter}})</span>
+                                <span *ngIf="item.counter" class="fd-list__counter fd-icon-tab-bar__list-item-counter"
+                                    >({{ item.counter }})</span
+                                >
                             </a>
                         </li>
                         <ng-container *ngIf="item.subItems?.length">
-                            <ng-container [ngTemplateOutletContext]="{level: level + 1, items: item.subItems}"
-                                          [ngTemplateOutlet]="subItem"></ng-container>
+                            <ng-container
+                                [ngTemplateOutletContext]="{ level: level + 1, items: item.subItems }"
+                                [ngTemplateOutlet]="subItem"
+                            ></ng-container>
                         </ng-container>
                     </ng-container>
                 </ng-template>

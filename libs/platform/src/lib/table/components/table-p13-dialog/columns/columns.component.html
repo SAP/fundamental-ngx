@@ -3,11 +3,7 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h4
-                        fd-title
-                        [headerSize]="4"
-                        i18n="@@platformTableP13ColumnsDialogHeader"
-                    >Columns</h4>
+                    <h4 fd-title [headerSize]="4" i18n="@@platformTableP13ColumnsDialogHeader">Columns</h4>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -19,7 +15,6 @@
     </fd-dialog-header>
 
     <fd-dialog-body>
-
         <fd-toolbar>
             <fdp-search-field
                 i18n-placeholder="@@platformTableP13ColumnsDialogSearchPlaceholder"
@@ -33,21 +28,14 @@
             <fd-toolbar-spacer></fd-toolbar-spacer>
 
             <!-- Show Selected/All -->
-            <button
-                fd-toolbar-item
-                fd-button
-                [compact]="true"
-                fdType="transparent"
-                (click)="_toggleShowAll()"
-            >
+            <button fd-toolbar-item fd-button [compact]="true" fdType="transparent" (click)="_toggleShowAll()">
                 <ng-container
                     *ngIf="(_showAllItemsSubject | async) === true; else showAll"
-                    i18n="@@platformTableP13ColumnsDialogsShowSelected">
+                    i18n="@@platformTableP13ColumnsDialogsShowSelected"
+                >
                     Show Selected
                 </ng-container>
-                <ng-template #showAll i18n="@@platformTableP13ColumnsDialogShowAll">
-                    Show all
-                </ng-template>
+                <ng-template #showAll i18n="@@platformTableP13ColumnsDialogShowAll"> Show all </ng-template>
             </button>
 
             <!-- Active Button Movement -->
@@ -108,10 +96,7 @@
             ></button>
         </fd-toolbar>
 
-        <ul
-            fd-list
-            compact="true"
-        >
+        <ul fd-list compact="true">
             <li fd-list-item>
                 <fd-checkbox
                     [ngModel]="_selectedColumnsCount == _selectableColumns.length"
@@ -119,11 +104,8 @@
                     [disabled]="_selectAllDisabled"
                     compact="true"
                 ></fd-checkbox>
-                <span
-                    fd-list-title
-                    i18n="@@platformTableP13ColumnsDialogSelectAll|Select All checkbox"
-                >
-                    Select All ({{_selectedColumnsCount}}/{{_selectableColumns.length}})
+                <span fd-list-title i18n="@@platformTableP13ColumnsDialogSelectAll|Select All checkbox">
+                    Select All ({{ _selectedColumnsCount }}/{{ _selectableColumns.length }})
                 </span>
             </li>
             <li
@@ -139,11 +121,10 @@
                     compact="true"
                 ></fd-checkbox>
                 <span fd-list-title>
-                    {{item.column.label}}
+                    {{ item.column.label }}
                 </span>
             </li>
         </ul>
-
     </fd-dialog-body>
 
     <fd-dialog-footer>
@@ -156,8 +137,7 @@
                 label="OK"
                 [compact]="true"
                 (click)="confirm()"
-            >
-            </button>
+            ></button>
         </fd-dialog-footer-button>
 
         <fd-dialog-footer-button>
@@ -170,8 +150,7 @@
                 label="Cancel"
                 [compact]="true"
                 (click)="cancel()"
-            >
-            </button>
+            ></button>
         </fd-dialog-footer-button>
     </fd-dialog-footer>
 </fd-dialog>

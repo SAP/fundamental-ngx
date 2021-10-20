@@ -1,11 +1,17 @@
-<fd-popover [placement]="placement$ | async" [triggers]="['click']" [noArrow]="false" [isOpen]="open" (isOpenChange)="handleOpenChange($event)">
+<fd-popover
+    [placement]="placement$ | async"
+    [triggers]="['click']"
+    [noArrow]="false"
+    [isOpen]="open"
+    (isOpenChange)="handleOpenChange($event)"
+>
     <fd-popover-control>
         <ng-content select="[fd-nested-list-link]"></ng-content>
         <ng-content select="[fd-nested-list-content]"></ng-content>
     </fd-popover-control>
     <fd-popover-body class="fd-nested-list--text-only">
         <a fd-nested-list-link class="fd-nested-list__popover-header">
-            <span fd-nested-list-title>{{title}}</span>
+            <span fd-nested-list-title>{{ title }}</span>
         </a>
         <ng-content select="[fd-nested-list]"></ng-content>
         <ng-content select="fd-prepared-nested-list"></ng-content>

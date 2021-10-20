@@ -19,15 +19,12 @@ export class ThemeUrlExampleComponent implements OnDestroy {
     cssCustomUrl: SafeResourceUrl;
     themeFromUrl: ThemeServiceOutput;
 
-    readonly themeQueryParamName = 'customQueryParam'
+    readonly themeQueryParamName = 'customQueryParam';
 
     /** An RxJS Subject that will kill the data stream upon destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    constructor(
-        private _themesService: ThemesService,
-        private _router: Router
-    ) {
+    constructor(private _themesService: ThemesService, private _router: Router) {
         this._listenForThemeChange();
         this._themesService.setThemeByRoute(this.themeQueryParamName);
 
@@ -40,21 +37,19 @@ export class ThemeUrlExampleComponent implements OnDestroy {
     }
 
     changeQueryUrl(param: string): void {
-        this._router.navigate( [], { queryParams: { customQueryParam: param } });
+        this._router.navigate([], { queryParams: { customQueryParam: param } });
     }
 
     private _listenForThemeChange(): void {
-        this._themesService.onThemeQueryParamChange.pipe(
-            takeUntil(this._onDestroy$)
-        ).subscribe(theme => {
+        this._themesService.onThemeQueryParamChange.pipe(takeUntil(this._onDestroy$)).subscribe((theme) => {
             this.cssCustomUrl = theme.customThemeUrl;
             this.cssUrl = theme.themeUrl;
 
             this.themeChanged.emit({
                 themeUrl: this.cssCustomUrl,
                 customThemeUrl: this.cssUrl
-            })
-        })
+            });
+        });
     }
 
     // Method used to directly fetch themes, after page is being loaded. No subscriptions are added there.
@@ -68,7 +63,7 @@ export class ThemeUrlExampleComponent implements OnDestroy {
             this.themeChanged.emit({
                 themeUrl: this.cssCustomUrl,
                 customThemeUrl: this.cssUrl
-            })
+            });
         }
     }
 }

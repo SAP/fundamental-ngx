@@ -5,7 +5,7 @@ export class FormContainerPo extends BaseComponentPo {
     private url = '/form-container';
 
     textArea = '.fd-textarea';
-    checkboxLabel = 'fd-checkbox label'
+    checkboxLabel = 'fd-checkbox label';
     formGroup = 'fdp-form-group';
     popover = '.cdk-overlay-container .cdk-overlay-pane';
     helpIcon = '.fd-form-label__help';

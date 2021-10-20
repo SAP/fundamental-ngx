@@ -46,7 +46,7 @@ export const isDisabledClass = 'is-disabled';
             useExisting: forwardRef(() => SegmentedButtonComponent),
             multi: true
         }
-    ],
+    ]
 })
 export class SegmentedButtonComponent implements AfterContentInit, ControlValueAccessor {
     /** Whether segmented button is on toggle mode, which allows to toggle more than 1 button */
@@ -83,9 +83,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
     /** @hidden */
     onTouched: Function = () => {};
 
-    constructor(
-       private readonly _changeDetRef: ChangeDetectorRef
-    ) {}
+    constructor(private readonly _changeDetRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -133,12 +131,10 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
 
     /** @hidden */
     private _listenToButtonChanges(): void {
-        this._buttons.changes.pipe(startWith(1))
-            .subscribe(_ => {
-                this._onRefresh$.next();
-                this._buttons.forEach(button => this._listenToTriggerEvents(button))
-            })
-        ;
+        this._buttons.changes.pipe(startWith(1)).subscribe((_) => {
+            this._onRefresh$.next();
+            this._buttons.forEach((button) => this._listenToTriggerEvents(button));
+        });
     }
 
     /** @hidden */
@@ -149,14 +145,13 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
 
         const triggerEvents = merge(
             fromEvent(htmlElement, 'click'),
-            fromEvent(htmlElement, 'keydown')
-                .pipe(
-                    filter(event => KeyUtil.isKeyCode(<KeyboardEvent>event, [ENTER, SPACE])),
-                    tap(event => (<KeyboardEvent>event).preventDefault())
-                )
-        )
+            fromEvent(htmlElement, 'keydown').pipe(
+                filter((event) => KeyUtil.isKeyCode(<KeyboardEvent>event, [ENTER, SPACE])),
+                tap((event) => (<KeyboardEvent>event).preventDefault())
+            )
+        );
 
-        triggerEvents.pipe(takeUntil(refresh$)).subscribe(_ => this._handleTriggerOnButton(buttonComponent));
+        triggerEvents.pipe(takeUntil(refresh$)).subscribe((_) => this._handleTriggerOnButton(buttonComponent));
     }
 
     /** @hidden */
@@ -165,8 +160,8 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
             this.onTouched();
 
             if (!this._isButtonSelected(buttonComponent) && !this.toggle) {
-                this._buttons.forEach(button => this._deselectButton(button));
-                this._selectButton(buttonComponent)
+                this._buttons.forEach((button) => this._deselectButton(button));
+                this._selectButton(buttonComponent);
                 this._propagateChange();
                 this._detectChanges();
             }
@@ -187,7 +182,7 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
 
     /** @hidden */
     private _detectChanges(): void {
-        this._buttons.forEach(button => button.detectChanges());
+        this._buttons.forEach((button) => button.detectChanges());
         this._changeDetRef.detectChanges();
     }
 
@@ -205,8 +200,8 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
         if (!this._buttons) {
             return;
         }
-        this._buttons.forEach(button => this._deselectButton(button));
-        this._getButtonsByValues(values).forEach(button => this._selectButton(button));
+        this._buttons.forEach((button) => this._deselectButton(button));
+        this._getButtonsByValues(values).forEach((button) => this._selectButton(button));
     }
 
     /** @hidden */
@@ -216,12 +211,9 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
         }
 
         if (Array.isArray(values)) {
-            return this._buttons
-                .filter(button =>
-                    !!values.find(value => this._getButtonValue(button) === value)
-                );
+            return this._buttons.filter((button) => !!values.find((value) => this._getButtonValue(button) === value));
         } else {
-            return this._buttons.filter(button => this._getButtonValue(button) === values);
+            return this._buttons.filter((button) => this._getButtonValue(button) === values);
         }
     }
 
@@ -257,9 +249,9 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
             return;
         }
 
-        this._buttons.forEach(button => button.disabled = disable)
+        this._buttons.forEach((button) => (button.disabled = disable));
         if (disable) {
-            this._buttons.forEach(button => button.elementRef().nativeElement.setAttribute('disabled', true));
+            this._buttons.forEach((button) => button.elementRef().nativeElement.setAttribute('disabled', true));
         }
         this._detectChanges();
     }
@@ -278,14 +270,12 @@ export class SegmentedButtonComponent implements AfterContentInit, ControlValueA
         }
 
         const resButtons = this._buttons
-            .filter(button => this._isButtonSelected(button))
-            .map(button => this._getButtonValue(button))
-        ;
-
+            .filter((button) => this._isButtonSelected(button))
+            .map((button) => this._getButtonValue(button));
         if (!this.toggle) {
-            return resButtons.length === 1 ? resButtons[0] : null
+            return resButtons.length === 1 ? resButtons[0] : null;
         } else {
-            return resButtons
+            return resButtons;
         }
     }
 }

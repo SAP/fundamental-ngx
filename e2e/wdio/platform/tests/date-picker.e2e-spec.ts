@@ -1,7 +1,9 @@
 import {
     click,
     elementArray,
-    getCSSPropertyByName, getElementClass, getElementPlaceholder,
+    getCSSPropertyByName,
+    getElementClass,
+    getElementPlaceholder,
     getText,
     getValue,
     refreshPage,
@@ -14,7 +16,10 @@ import {
 import { DatePicker } from '../pages/date-picker.po';
 import {
     date,
-    date1, date10, date11, date12,
+    date1,
+    date10,
+    date11,
+    date12,
     date2,
     date3,
     date4,
@@ -28,13 +33,25 @@ import {
     year2025
 } from '../fixtures/testData/date-picker';
 
-describe('Date picker suite', function () {
+describe('Date picker suite', () => {
     const datePickerPage: DatePicker = new DatePicker();
     const {
-        inputDatePicker, buttonDatePicker, /*buttonDatePicker, inputDatePicker, */ calendarExpanded,
-        calendarYearsSection, currentDay, buttonGerman, buttonBulgarian, buttonSelectYear, buttonSelectMonth,
-        buttonSelectYearsRange, buttonFirstRangeYear, buttonFirstYear, buttonFirstMonth, filterCalendarValue,
-        dayInCalendarButtonByValue, yearInCalendarByValue
+        inputDatePicker,
+        buttonDatePicker,
+        /*buttonDatePicker, inputDatePicker, */ calendarExpanded,
+        calendarYearsSection,
+        currentDay,
+        buttonGerman,
+        buttonBulgarian,
+        buttonSelectYear,
+        buttonSelectMonth,
+        buttonSelectYearsRange,
+        buttonFirstRangeYear,
+        buttonFirstYear,
+        buttonFirstMonth,
+        filterCalendarValue,
+        dayInCalendarButtonByValue,
+        yearInCalendarByValue
     } = datePickerPage;
 
     beforeAll(() => {
@@ -242,8 +259,9 @@ describe('Date picker suite', function () {
         click(dayInCalendarButtonByValue('1'));
         expect(getValue(inputDatePicker)).toEqual(date);
         click(buttonDatePicker);
-        expect(highlightedColor)
-            .toContain(getCSSPropertyByName(dayInCalendarButtonByValue('1'), 'background-color').value);
+        expect(highlightedColor).toContain(
+            getCSSPropertyByName(dayInCalendarButtonByValue('1'), 'background-color').value
+        );
     });
 
     it('verify selecting a year range navigates back to the year view', () => {
@@ -298,11 +316,10 @@ describe('Date picker suite', function () {
         expect(getValue(inputDatePicker)).toEqual(date9);
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             datePickerPage.saveExampleBaselineScreenshot();
             expect(datePickerPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
-

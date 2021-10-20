@@ -5,7 +5,7 @@ import { BaseDataProvider, DataProvider, DataSource } from '@fundamental-ngx/pla
 
 export class ValueHelpDialogDataSource<T> implements DataSource<T> {
     dataChanges: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
-    constructor(public dataProvider: DataProvider<T>) { }
+    constructor(public dataProvider: DataProvider<T>) {}
     match(predicate?: string | Map<string, string>): void {
         let searchParam = new Map<string, any>();
         if (typeof predicate === 'string') {
@@ -14,18 +14,19 @@ export class ValueHelpDialogDataSource<T> implements DataSource<T> {
             searchParam = predicate;
         }
 
-        this.dataProvider.fetch(searchParam).pipe(
-            take(1),
-        ).subscribe((result: T[]) => {
-            this.dataChanges.next(result);
-        });
+        this.dataProvider
+            .fetch(searchParam)
+            .pipe(take(1))
+            .subscribe((result: T[]) => {
+                this.dataChanges.next(result);
+            });
     }
 
     open(): Observable<T[]> {
         return this.dataChanges.asObservable();
     }
 
-    close(): void { }
+    close(): void {}
 }
 
 export class ArrayValueHelpDialogDataSource<T> extends ValueHelpDialogDataSource<T> {
@@ -42,7 +43,7 @@ export class ObservableValueHelpDialogDataSource<T> extends ValueHelpDialogDataS
 
 export class VhdDataProvider<R> extends DataProvider<R> {
     constructor(public values: R[]) {
-        super()
+        super();
     }
     fetch(params: Map<string, string>): Observable<R[]> {
         let data = this.values;
@@ -52,10 +53,10 @@ export class VhdDataProvider<R> extends DataProvider<R> {
             return arrayParams.every(([key, value]) => {
                 if (key === '*') {
                     return rowEntries.some(([_rowEntryKey, rowEntryValue]) => {
-                        return String(rowEntryValue).toLowerCase().includes(value.toLowerCase())
+                        return String(rowEntryValue).toLowerCase().includes(value.toLowerCase());
                     });
                 } else {
-                    return String(row[key]).toLowerCase().includes(value.toLowerCase())
+                    return String(row[key]).toLowerCase().includes(value.toLowerCase());
                 }
             });
         };

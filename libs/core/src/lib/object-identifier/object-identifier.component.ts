@@ -17,12 +17,11 @@ import { Subject } from 'rxjs';
 @Component({
     selector: 'fd-object-identifier',
     template: `
-        <p class="fd-object-identifier__title"
-           [class.fd-object-identifier__title--bold]="bold">
+        <p class="fd-object-identifier__title" [class.fd-object-identifier__title--bold]="bold">
             <ng-content></ng-content>
         </p>
         <p class="fd-object-identifier__text" *ngIf="description">
-            {{description}}
+            {{ description }}
         </p>
     `,
     styleUrls: ['./object-identifier.component.scss'],
@@ -30,7 +29,6 @@ import { Subject } from 'rxjs';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy {
-
     /** Description text */
     @Input()
     description: string = null;
@@ -54,9 +52,7 @@ export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy {
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    constructor(
-        private _changeDetectorRef: ChangeDetectorRef
-    ) {}
+    constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
     /** @hidden */
     ngAfterContentInit(): void {
@@ -71,10 +67,9 @@ export class ObjectIdentifierComponent implements AfterContentInit, OnDestroy {
 
     /** @hidden */
     private _listenOnLinkQueryChange(): void {
-        this.linkComponents.changes.pipe(
-            takeUntil(this._onDestroy$),
-            startWith(0)
-        ).subscribe(() => this.linkComponents.forEach(link => this._addIdentifierClass(link)));
+        this.linkComponents.changes
+            .pipe(takeUntil(this._onDestroy$), startWith(0))
+            .subscribe(() => this.linkComponents.forEach((link) => this._addIdentifierClass(link)));
     }
 
     /** @hidden */

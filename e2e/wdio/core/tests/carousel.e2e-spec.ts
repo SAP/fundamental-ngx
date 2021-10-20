@@ -2,20 +2,19 @@ import { CarouselPo } from '../pages/carousel.po';
 import {
     click,
     getAttributeByName,
-    getElementArrayLength, getElementLocation,
+    getElementArrayLength,
+    getElementLocation,
     getText,
     mouseHoverElement,
-    scrollIntoView, waitForElDisplayed,
-    clickAndDragElement, getElementClass, pause
+    scrollIntoView,
+    waitForElDisplayed,
+    clickAndDragElement,
+    getElementClass,
+    pause
 } from '../../driver/wdio';
-import {
-    imgSource,
-    active,
-    numberedPages,
-    loadErrorMsg
-} from '../fixtures/appData/carousel-contents';
+import { imgSource, active, numberedPages, loadErrorMsg } from '../fixtures/appData/carousel-contents';
 
-describe('Carousel test suite', function() {
+describe('Carousel test suite', () => {
     const carouselPage = new CarouselPo();
     const {
         navBtns,
@@ -39,7 +38,7 @@ describe('Carousel test suite', function() {
         carouselPage.open();
     }, 1);
 
-    describe('carousel with one active item example', function() {
+    describe('carousel with one active item example', () => {
         it('should check navigation', () => {
             checkCarouselNavigation(0, 1);
         });
@@ -64,7 +63,7 @@ describe('Carousel test suite', function() {
         });
     });
 
-    describe('carousel with vertical direction example', function() {
+    describe('carousel with vertical direction example', () => {
         it('should check navigation', () => {
             checkCarouselNavigation(1, 3);
         });
@@ -82,7 +81,7 @@ describe('Carousel test suite', function() {
         });
     });
 
-    describe('carousel with multiple active items example', function() {
+    describe('carousel with multiple active items example', () => {
         it('should check navigation', () => {
             const originalFirstCard = getText(displayedCards);
             const originalSecondCard = getText(displayedCards, 1);
@@ -112,7 +111,7 @@ describe('Carousel test suite', function() {
         });
     });
 
-    describe('carousel with dynamic items example', function() {
+    describe('carousel with dynamic items example', () => {
         it('should check hide card btns', () => {
             const originalFirstCard = getText(displayedCards, 3);
             const originalSecondCard = getText(displayedCards, 4);
@@ -140,17 +139,17 @@ describe('Carousel test suite', function() {
         });
     });
 
-    describe('carousel with no page indicator example', function() {
+    describe('carousel with no page indicator example', () => {
         it('should check the page indicator is hidden', () => {
             expect(hiddenPageIndicator).not.toBeVisible();
         });
 
         it('should check navigation', () => {
             checkCarouselNavigation(2, 9);
-        })
+        });
     });
 
-    describe('carousel with hidden nav buttons example', function() {
+    describe('carousel with hidden nav buttons example', () => {
         it('should check nav buttons are hidden', () => {
             expect(hiddenNavBtns).not.toBeVisible();
         });
@@ -166,7 +165,7 @@ describe('Carousel test suite', function() {
         });
     });
 
-    describe('carousel with navigation inside content area example', function() {
+    describe('carousel with navigation inside content area example', () => {
         // skip due to issue https://github.com/SAP/fundamental-ngx/issues/4434
         xit('should check navigation buttons shown on hover', () => {
             mouseHoverElement(displayedImg, 4);
@@ -189,7 +188,7 @@ describe('Carousel test suite', function() {
         });
     });
 
-    describe('carousel with looped navigation example', function() {
+    describe('carousel with looped navigation example', () => {
         // skip because of https://github.com/SAP/fundamental-ngx/issues/4432
         xit('should check loop navigation', () => {
             const firstImg = getAttributeByName(displayedImg, imgSource, 5);
@@ -202,13 +201,13 @@ describe('Carousel test suite', function() {
         });
     });
 
-    describe('carousel error message when no item is loaded example', function() {
+    describe('carousel error message when no item is loaded example', () => {
         it('should check error message', () => {
-            expect(getText(errorMsg)).toBe(loadErrorMsg)
+            expect(getText(errorMsg)).toBe(loadErrorMsg);
         });
     });
 
-    describe('carousel item loading indicator examples', function() {
+    describe('carousel item loading indicator examples', () => {
         // TODO: not working
         it('should check busy indicator visible', () => {
             scrollIntoView(disableLoadingBtn);
@@ -221,7 +220,7 @@ describe('Carousel test suite', function() {
         });
     });
 
-    describe('orientation checks', function() {
+    describe('orientation checks', () => {
         it('should check rtl, ltr orientations', () => {
             carouselPage.checkRtlSwitch();
         });

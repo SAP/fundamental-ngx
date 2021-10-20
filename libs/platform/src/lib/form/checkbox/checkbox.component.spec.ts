@@ -110,12 +110,14 @@ describe('Checkbox test Component', () => {
     let host: TestCheckboxComponent;
     let fixture: ComponentFixture<TestCheckboxComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, CheckboxModule, FormsModule, ReactiveFormsModule],
-            declarations: [TestCheckboxComponent, CheckboxComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [FdpFormGroupModule, FormModule, CheckboxModule, FormsModule, ReactiveFormsModule],
+                declarations: [TestCheckboxComponent, CheckboxComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestCheckboxComponent);
@@ -402,12 +404,14 @@ describe('Checkbox test Component with Template driven form', () => {
     let host: TestCheckboxComponentTemplateDriven;
     let fixture: ComponentFixture<TestCheckboxComponentTemplateDriven>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, CheckboxModule, FormsModule, ReactiveFormsModule],
-            declarations: [TestCheckboxComponentTemplateDriven, CheckboxComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [FdpFormGroupModule, FormModule, CheckboxModule, FormsModule, ReactiveFormsModule],
+                declarations: [TestCheckboxComponentTemplateDriven, CheckboxComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestCheckboxComponentTemplateDriven);

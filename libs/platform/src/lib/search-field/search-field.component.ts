@@ -265,7 +265,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         return {
             text: this.inputText,
             category: this.currentCategory && this.currentCategory.value ? this.currentCategory.value : null
-        }
+        };
     }
 
     constructor(

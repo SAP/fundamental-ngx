@@ -343,17 +343,17 @@ export class CarouselService implements OnDestroy {
 
     /** @hidden */
     private _subscribeToEvents(
-                               events: string[],
-                               element: HTMLElement | Document,
-                               callback: (event: MouseEvent | TouchEvent) => void
+        events: string[],
+        element: HTMLElement | Document,
+        callback: (event: MouseEvent | TouchEvent) => void
     ): void {
-        merge(events.map((e) => fromEvent<MouseEvent | TouchEvent>(element, e, {passive: true})))
-        .forEach((evt: Observable<MouseEvent | TouchEvent>) => {
-            evt.pipe(takeUntil(this._onDestroy$))
-            .subscribe((event) => {
-                callback(event);
-            });
-        });
+        merge(events.map((e) => fromEvent<MouseEvent | TouchEvent>(element, e, { passive: true }))).forEach(
+            (evt: Observable<MouseEvent | TouchEvent>) => {
+                evt.pipe(takeUntil(this._onDestroy$)).subscribe((event) => {
+                    callback(event);
+                });
+            }
+        );
     }
 
     /** @hidden */
@@ -369,7 +369,6 @@ export class CarouselService implements OnDestroy {
 
     /** @hidden */
     private _setupDrag(): void {
-
         const events = ['mousemove', 'touchmove'];
 
         this._subscribeToEvents(events, this._document, (event) => {
@@ -421,7 +420,6 @@ export class CarouselService implements OnDestroy {
 
     /** @hidden */
     private _getDragCoordinate(event: MouseEvent | TouchEvent): number {
-
         let coordinates: Touch | MouseEvent;
 
         if (this._isTouchEvent(event)) {

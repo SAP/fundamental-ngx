@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: 'fd-combobox-template-example',
-    templateUrl: './combobox-template-example.component.html',
+    templateUrl: './combobox-template-example.component.html'
 })
 export class ComboboxTemplateExampleComponent {
     values = [

@@ -7,18 +7,18 @@ import { MessagePageComponent, MessagePageModule } from '@fundamental-ngx/core/m
 @Component({
     selector: 'fd-message-page-test',
     template: `
-    <fd-message-page [type]="type" [glyph]="glyph" [hasIcon]="hasIcon">
-        <fd-message-page-title>{{titleText}}</fd-message-page-title>
-        <fd-message-page-subtitle>
-           {{subtitleText}}
-        </fd-message-page-subtitle>
-        <fd-message-page-actions>
-            {{actionsText}}
-        </fd-message-page-actions>
-        <fd-message-page-more>
-            {{moreText}}
-        </fd-message-page-more>
-    </fd-message-page>
+        <fd-message-page [type]="type" [glyph]="glyph" [hasIcon]="hasIcon">
+            <fd-message-page-title>{{ titleText }}</fd-message-page-title>
+            <fd-message-page-subtitle>
+                {{ subtitleText }}
+            </fd-message-page-subtitle>
+            <fd-message-page-actions>
+                {{ actionsText }}
+            </fd-message-page-actions>
+            <fd-message-page-more>
+                {{ moreText }}
+            </fd-message-page-more>
+        </fd-message-page>
     `
 })
 class TestMessagePageComponent {
@@ -39,12 +39,14 @@ describe('MessagePageComponent', () => {
     let fixture: ComponentFixture<TestMessagePageComponent>;
     let host: TestMessagePageComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [MessagePageModule],
-            declarations: [TestMessagePageComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [MessagePageModule],
+                declarations: [TestMessagePageComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestMessagePageComponent);

@@ -140,6 +140,35 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
         }
     }
 
+    &.#{$block}--no-outer-border {
+        .#{$block}__header,
+        .#{$block}__body,
+        .#{$block}__body-hs {
+            border-left: none;
+            border-right: none;
+
+            @include fd-rtl {
+                border-left: none;
+                border-right: none;
+
+                .fd-table__cell:first-child {
+                    border-right: none;
+                }
+            }
+        }
+
+        .#{$block}__header {
+            &-scrollbar-mock,
+            .fd-table__cell {
+                border-top: none;
+            }
+        }
+
+        .#{$block}__body {
+            border-bottom: none;
+        }
+    }
+
     &__container {
         position: relative;
         overflow: hidden;

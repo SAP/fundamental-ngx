@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    OnInit,
+    TemplateRef,
+    ViewEncapsulation
+} from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
@@ -18,7 +25,7 @@ interface DialogRefData {
 @Component({
     selector: 'fdp-approval-flow-approver-details',
     templateUrl: './approval-flow-approver-details.component.html',
-    styleUrls: [ '../styles/approval-flow-dialog.scss' ],
+    styleUrls: ['../styles/approval-flow-dialog.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
@@ -42,7 +49,7 @@ export class ApprovalFlowApproverDetailsComponent implements OnInit {
     _userToShowDetailsData$: Observable<any>;
 
     /** @hidden */
-    constructor(public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) { }
+    constructor(public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) {}
 
     /** @hidden */
     get _data(): DialogRefData {
@@ -94,6 +101,6 @@ export class ApprovalFlowApproverDetailsComponent implements OnInit {
             return;
         }
 
-        this._setListItems(this._data.node.approvers.filter(user => filterByName(user, searchString)));
+        this._setListItems(this._data.node.approvers.filter((user) => filterByName(user, searchString)));
     }
 }

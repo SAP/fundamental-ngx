@@ -192,26 +192,26 @@ describe('TableComponent internal', () => {
     @Component({
         template: `
             <fdp-table
-                [dataSource]='source'
-                contentDensity='compact'
-                emptyTableMessage='No data found'
-                [selectionMode]='selection'
-                [rowsClass]='rowsClass'
+                [dataSource]="source"
+                contentDensity="compact"
+                emptyTableMessage="No data found"
+                [selectionMode]="selection"
+                [rowsClass]="rowsClass"
             >
-                <fdp-table-toolbar title='Order Items' [hideItemCount]='false'></fdp-table-toolbar>
+                <fdp-table-toolbar title="Order Items" [hideItemCount]="false"></fdp-table-toolbar>
 
-                <fdp-column name='name' key='name' label='Name' [width]="customColumnWidth + 'px'"></fdp-column>
+                <fdp-column name="name" key="name" label="Name" [width]="customColumnWidth + 'px'"></fdp-column>
 
-                <fdp-column name='price' key='price.value'>
+                <fdp-column name="price" key="price.value">
                     <fdp-table-header *fdpHeaderCellDef>Price Header</fdp-table-header>
-                    <fdp-table-cell *fdpCellDef='let item'
-                    >{{ item.price.value }} {{ item.price.currency }}</fdp-table-cell
+                    <fdp-table-cell *fdpCellDef="let item"
+                        >{{ item.price.value }} {{ item.price.currency }}</fdp-table-cell
                     >
                 </fdp-column>
 
-                <fdp-column name='status' key='status' label='Status'></fdp-column>
+                <fdp-column name="status" key="status" label="Status"></fdp-column>
 
-                <fdp-column name='verified' key='isVerified' label='Client Verified'></fdp-column>
+                <fdp-column name="verified" key="isVerified" label="Client Verified"></fdp-column>
             </fdp-table>
         `
     })
@@ -920,7 +920,9 @@ describe('TableComponent internal', () => {
         let tableBodyContainer: DebugElement;
 
         const calculateTableElementsMetaData = () => {
-            tableHeaderCells = fixture.debugElement.queryAll(By.css('.fdp-table__header .fd-table__row .fd-table__cell'));
+            tableHeaderCells = fixture.debugElement.queryAll(
+                By.css('.fdp-table__header .fd-table__row .fd-table__cell')
+            );
             tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
             tableRowCells2DArray = tableBodyRows.map((row) => row.queryAll(By.css('.fd-table__cell')));
             tableBodyContainer = fixture.debugElement.query(By.css('.fdp-table__body'));
@@ -929,7 +931,7 @@ describe('TableComponent internal', () => {
         const tableBodyScrollTop = async (scrollTop) => {
             const container = tableBodyContainer.nativeElement as HTMLElement;
             container.scrollTop = scrollTop;
-            await new Promise(resolve => setTimeout(() => resolve(null), 100));
+            await new Promise((resolve) => setTimeout(() => resolve(null), 100));
             fixture.detectChanges();
             calculateTableElementsMetaData();
         };
@@ -964,14 +966,14 @@ describe('TableComponent internal', () => {
             expect(hostComponent.source.fetch).toHaveBeenCalledTimes(1);
         });
 
-        it('should trigger fetch when scrolled to the bottom', async() => {
+        it('should trigger fetch when scrolled to the bottom', async () => {
             expect(hostComponent.source.fetch).toHaveBeenCalledTimes(1); // 1 means initial fetch
             const container = tableBodyContainer.nativeElement as HTMLElement;
             await tableBodyScrollTop(container.scrollHeight);
             expect(hostComponent.source.fetch).toHaveBeenCalledTimes(2);
         });
 
-        it('should get new 50 items per each request', async() => {
+        it('should get new 50 items per each request', async () => {
             await tableBodyScrollTop(999999);
 
             expect(tableBodyRows.length).toBe(100);
@@ -981,7 +983,7 @@ describe('TableComponent internal', () => {
             expect(tableBodyRows.length).toBe(150);
         });
 
-        it('should stop fetching on scroll if currentPage is the last one', async() => {
+        it('should stop fetching on scroll if currentPage is the last one', async () => {
             await tableBodyScrollTop(999999); // 100
             await tableBodyScrollTop(999999); // 150
             await tableBodyScrollTop(999999); // 200
@@ -1000,13 +1002,13 @@ describe('TableComponent internal', () => {
 })();
 
 interface SourceTreeItem {
-    name: string,
-    children: SourceTreeItem[] | SourceItem[]
+    name: string;
+    children: SourceTreeItem[] | SourceItem[];
 }
 
 const treeItemParentsCount = 10;
 const treeItemsChildrenPerParentCount = 1;
-const totalTreeItems = treeItemParentsCount + (treeItemParentsCount * treeItemsChildrenPerParentCount);
+const totalTreeItems = treeItemParentsCount + treeItemParentsCount * treeItemsChildrenPerParentCount;
 
 const generateTreeItems = (length = 50): SourceTreeItem[] =>
     Array.from(Array(length)).map(
@@ -1058,7 +1060,9 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
         const calculateTableElementsMetaData = () => {
             tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
-            tableRowTogglerCellsArray = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row .fd-table__cell--expand'));
+            tableRowTogglerCellsArray = fixture.debugElement.queryAll(
+                By.css('.fdp-table__body .fd-table__row .fd-table__cell--expand')
+            );
         };
 
         beforeEach(
@@ -1135,9 +1139,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 calculateTableElementsMetaData();
 
-                expect(tableBodyRows.length).toEqual(
-                    treeItemParentsCount + treeItemsChildrenPerParentCount
-                );
+                expect(tableBodyRows.length).toEqual(treeItemParentsCount + treeItemsChildrenPerParentCount);
 
                 secondRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
@@ -1145,9 +1147,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 calculateTableElementsMetaData();
 
-                expect(tableBodyRows.length).toEqual(
-                    treeItemParentsCount + treeItemsChildrenPerParentCount * 2
-                );
+                expect(tableBodyRows.length).toEqual(treeItemParentsCount + treeItemsChildrenPerParentCount * 2);
 
                 firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
@@ -1155,9 +1155,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 calculateTableElementsMetaData();
 
-                expect(tableBodyRows.length).toEqual(
-                    treeItemParentsCount + treeItemsChildrenPerParentCount
-                );
+                expect(tableBodyRows.length).toEqual(treeItemParentsCount + treeItemsChildrenPerParentCount);
 
                 secondRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
@@ -1191,9 +1189,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 calculateTableElementsMetaData();
 
-                expect(tableBodyRows.length).toEqual(
-                    treeItemParentsCount + treeItemsChildrenPerParentCount * 1
-                );
+                expect(tableBodyRows.length).toEqual(treeItemParentsCount + treeItemsChildrenPerParentCount * 1);
             });
 
             it('should emit event after rearranging rows', () => {
@@ -1235,9 +1231,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 calculateTableElementsMetaData();
 
-                expect(tableBodyRows.length).toEqual(
-                    treeItemParentsCount + treeItemsChildrenPerParentCount * 1
-                );
+                expect(tableBodyRows.length).toEqual(treeItemParentsCount + treeItemsChildrenPerParentCount * 1);
 
                 tableComponent._dragDropItemDrop({
                     items: [],

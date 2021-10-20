@@ -5,18 +5,15 @@ export class ListFocusItem implements KeyboardSupportItemInterface {
     /** @hidden Implementation of KeyboardSupportItemInterface */
     keyDown: EventEmitter<KeyboardEvent> = new EventEmitter<KeyboardEvent>();
 
-    constructor (
-      readonly elementRef: ElementRef
-    ) {
-    }
+    constructor(readonly elementRef: ElementRef) {}
 
     /** @hidden */
     click(): void {
-      this.elementRef?.nativeElement?.click();
+        this.elementRef?.nativeElement?.click();
     }
 
     /** @hidden */
     focus(): void {
-      this.elementRef?.nativeElement?.focus();
+        this.elementRef?.nativeElement?.focus();
     }
 }

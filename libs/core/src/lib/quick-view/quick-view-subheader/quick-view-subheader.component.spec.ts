@@ -12,7 +12,6 @@ import { QuickViewModule, QuickViewSubheaderComponent } from '@fundamental-ngx/c
             <fd-quick-view-subheader-title> Subheader Title </fd-quick-view-subheader-title>
             <fd-quick-view-subheader-subtitle> Subheader Subtitle</fd-quick-view-subheader-subtitle>
         </fd-quick-view-subheader>
-
     `
 })
 class TestComponent {}
@@ -21,12 +20,14 @@ describe('QuickViewSubheaderComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [QuickViewModule, AvatarModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [QuickViewModule, AvatarModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

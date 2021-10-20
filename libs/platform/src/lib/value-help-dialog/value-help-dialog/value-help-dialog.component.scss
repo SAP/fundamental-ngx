@@ -1,7 +1,6 @@
 $block: fdp-value-help-dialog;
 
 .#{$block} {
-
     .fd-dialog__body {
         display: flex;
         flex-direction: column;
@@ -50,9 +49,9 @@ $block: fdp-value-help-dialog;
             padding: 0;
         }
     }
-	.fd-bar.fd-bar--cozy {
-		height: auto;
-	}
+    .fd-bar.fd-bar--cozy {
+        height: auto;
+    }
     .fd-dialog__header {
         box-shadow: none;
 
@@ -130,8 +129,8 @@ $block: fdp-value-help-dialog;
         border: 1px solid #89919a;
         border-color: var(--sapContent_ForegroundBorderColor, #89919a);
         margin-right: 0.5rem;
-        border-radius: .25rem;
-        border-radius: var(--sapElement_BorderCornerRadius, .25rem);
+        border-radius: 0.25rem;
+        border-radius: var(--sapElement_BorderCornerRadius, 0.25rem);
         background: none;
 
         fd-toolbar {
@@ -142,13 +141,13 @@ $block: fdp-value-help-dialog;
         &-clear {
             height: auto;
             min-width: 2rem;
-            padding: .125rem 0;
+            padding: 0.125rem 0;
             justify-content: center;
         }
     }
 
     &__actions-row {
-        padding: .5rem 1rem;
+        padding: 0.5rem 1rem;
         display: flex;
         align-items: center;
         justify-content: flex-end;
@@ -157,7 +156,7 @@ $block: fdp-value-help-dialog;
         border-top: 0.0625rem solid var(--sapPageFooter_BorderColor, #d9d9d9);
 
         .fd-button {
-            margin-left: .5rem;
+            margin-left: 0.5rem;
         }
     }
 }

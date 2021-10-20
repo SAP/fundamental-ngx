@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
     templateUrl: './tab-stacked-content-example.component.html'
 })
 export class TabStackedContentExampleComponent {
-    tabs: { title: string, content: string }[] = [];
+    tabs: { title: string; content: string }[] = [];
 
     constructor() {
         for (let i = 1; i <= 5; i++) {

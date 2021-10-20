@@ -12,18 +12,16 @@ export interface ThemeServiceOutput {
 }
 
 export interface Theme {
-    id: string,
-    name: string,
-    description?: string
+    id: string;
+    name: string;
+    description?: string;
 }
-
 
 @Injectable()
 /**
  * Service providing theme switcher functionality.
  */
 export class ThemesService {
-
     /** Available themes */
     themes: Theme[] = [
         {
@@ -49,6 +47,10 @@ export class ThemesService {
         {
             id: 'sap_fiori_3_light_dark',
             name: 'Light Dark'
+        },
+        {
+            id: 'sap_horizon',
+            name: 'Horizon'
         }
     ];
 
@@ -58,11 +60,7 @@ export class ThemesService {
     /** @hidden **/
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    constructor(
-        @Optional() private _activatedRoute: ActivatedRoute,
-        private _sanitizer: DomSanitizer
-    ) {}
-
+    constructor(@Optional() private _activatedRoute: ActivatedRoute, private _sanitizer: DomSanitizer) {}
 
     /**
      * Set theme according to additional URL parameter.
@@ -79,13 +77,13 @@ export class ThemesService {
         this._activatedRoute.queryParams
             .pipe(
                 takeUntil(this._onDestroy$),
-                filter(param => param && param[paramName])
+                filter((param) => param && param[paramName])
             )
-            .subscribe(param => this._propagateThemes(param[paramName]));
+            .subscribe((param) => this._propagateThemes(param[paramName]));
 
         const nativeTheme = this._getNativeParameterByName(paramName);
         if (nativeTheme) {
-            this._propagateThemes(nativeTheme)
+            this._propagateThemes(nativeTheme);
         }
     }
 
@@ -102,7 +100,7 @@ export class ThemesService {
         return {
             themeUrl: this.setTheme(nativeTheme),
             customThemeUrl: this.setCustomTheme(nativeTheme)
-        }
+        };
     }
 
     /** Assign css file corresponding to chosen theme from @sap-theming **/
@@ -131,6 +129,6 @@ export class ThemesService {
         this.onThemeQueryParamChange.next({
             themeUrl: this.setTheme(theme),
             customThemeUrl: this.setCustomTheme(theme)
-        })
+        });
     }
 }

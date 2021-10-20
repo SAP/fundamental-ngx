@@ -1,38 +1,40 @@
+import { TimelineHeaderInfoSubTitleDirective } from './timeline-header-info-sub-title.directive';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
 import { TimelineModule } from '@fundamental-ngx/core/timeline';
 
 describe('TimelineHeaderInfoSubTitleDirective', () => {
-  let component: TestComponent;
-  let fixture: ComponentFixture<TestComponent>;
+    let component: TestComponent;
+    let fixture: ComponentFixture<TestComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [TestComponent],
-      imports: [TimelineModule]
-    }).compileComponents();
-  }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [TimelineModule]
+            }).compileComponents();
+        })
+    );
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(TestComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(TestComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create an instance', () => {
-    expect(component.ref.nativeElement).toBeTruthy();
-  });
+    it('should create an instance', () => {
+        expect(component.ref.nativeElement).toBeTruthy();
+    });
 
-  it('should assign class', () => {
-    expect(component.ref.nativeElement.className.includes('fd-timeline__post-subheader')).toBe(true);
-  });
+    it('should assign class', () => {
+        expect(component.ref.nativeElement.className.includes('fd-timeline__post-subheader')).toBe(true);
+    });
 });
 
 @Component({
-  template: `<span #directiveElement fdTimelineHeaderInfoSubTitle>Notification Footer Content Test</span>`
+    template: `<span #directiveElement fdTimelineHeaderInfoSubTitle>Notification Footer Content Test</span>`
 })
 class TestComponent {
-  @ViewChild('directiveElement')
-  ref: ElementRef;
+    @ViewChild('directiveElement')
+    ref: ElementRef;
 }

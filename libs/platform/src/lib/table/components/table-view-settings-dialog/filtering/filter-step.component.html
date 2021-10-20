@@ -1,16 +1,6 @@
 <ng-template #titleTemplate>
-    <button
-        fd-button
-        compact="true"
-        fdType="transparent"
-        glyph="navigation-left-arrow"
-        (click)="back.emit()"
-    ></button>
-    <h4
-        fd-title
-        [headerSize]="4"
-        i18n="@@platformTableFilterDialogFilterByLabel"
-    >Filter by: {{ filter.label }}</h4>
+    <button fd-button compact="true" fdType="transparent" glyph="navigation-left-arrow" (click)="back.emit()"></button>
+    <h4 fd-title [headerSize]="4" i18n="@@platformTableFilterDialogFilterByLabel">Filter by: {{ filter.label }}</h4>
 </ng-template>
 
 <ng-template #bodyTemplate>
@@ -39,8 +29,6 @@
             ></fdp-filter-custom>
         </ng-container>
 
-        <ng-container *ngSwitchCase="FILTER_TYPE.CATEGORY">
-            Categories list is not implemented
-        </ng-container>
+        <ng-container *ngSwitchCase="FILTER_TYPE.CATEGORY"> Categories list is not implemented </ng-container>
     </ng-container>
 </ng-template>

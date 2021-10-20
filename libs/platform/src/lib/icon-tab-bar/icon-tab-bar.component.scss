@@ -2,28 +2,28 @@
 @import '../../../../../node_modules/fundamental-styles/dist/list.css';
 
 .cdk-drag-placeholder {
-  opacity: .3;
-  pointer-events: none;
+    opacity: 0.3;
+    pointer-events: none;
 }
 
 .fd-icon-tab-bar__item--hidden {
-  display: none;
+    display: none;
 }
 
 .fd-icon-tab-bar__list {
-  max-height: 20rem;
-  overflow: auto;
+    max-height: 20rem;
+    overflow: auto;
 }
 
 // These styles should move to fundamental/styles repo.
 
 .fd-icon-tab-bar__list-item-counter {
-  padding-left: 5px;
+    padding-left: 5px;
 }
 
-[dir=rtl] {
-  .fd-icon-tab-bar__list-item-counter {
-    padding-left: 0;
-    padding-right: 0.25rem;
-  }
+[dir='rtl'] {
+    .fd-icon-tab-bar__list-item-counter {
+        padding-left: 0;
+        padding-right: 0.25rem;
+    }
 }

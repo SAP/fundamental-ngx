@@ -1,7 +1,7 @@
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import { B, DOWN_ARROW, END, ENTER, ESCAPE, HOME, SPACE, TAB, X } from '@angular/cdk/keycodes';
-import { ModifierKeys } from '@angular/cdk/testing'
+import { ModifierKeys } from '@angular/cdk/testing';
 
 import { SelectComponent } from './select.component';
 import { PopoverComponent } from '../popover/popover.component';
@@ -71,20 +71,22 @@ describe('SelectComponent', () => {
     let triggerControl: HTMLElement;
     let _keyService: SelectKeyManagerService;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent, TestFilteringWrapperComponent],
-            imports: [SelectModule],
-            providers: [ContentDensityService]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestWrapperComponent, TestFilteringWrapperComponent],
+                imports: [SelectModule],
+                providers: [ContentDensityService]
+            })
+                .overrideComponent(SelectComponent, {
+                    set: { changeDetection: ChangeDetectionStrategy.Default }
+                })
+                .overrideComponent(PopoverComponent, {
+                    set: { changeDetection: ChangeDetectionStrategy.Default }
+                })
+                .compileComponents();
         })
-            .overrideComponent(SelectComponent, {
-                set: { changeDetection: ChangeDetectionStrategy.Default }
-            })
-            .overrideComponent(PopoverComponent, {
-                set: { changeDetection: ChangeDetectionStrategy.Default }
-            })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestWrapperComponent);
@@ -336,8 +338,10 @@ describe('SelectComponent', () => {
             expect(component._isOpen).toBeFalse();
         });
 
-        it('should not be selectabe if option is disabled so that when we' +
-            ' navigate the item is skipped and value-4 is selected', async () => {
+        it(
+            'should not be selectabe if option is disabled so that when we' +
+                ' navigate the item is skipped and value-4 is selected',
+            async () => {
                 component.value = 'value-2';
                 fixture.componentInstance.disabled = true;
 
@@ -352,7 +356,8 @@ describe('SelectComponent', () => {
                 await wait(fixture);
 
                 expect(component.value).toBe('value-3');
-            });
+            }
+        );
     });
 
     describe('filtering ', () => {

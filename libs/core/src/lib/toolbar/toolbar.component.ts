@@ -127,7 +127,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
 
     /** @hidden */
     private get _overflowBody(): HTMLElement {
-        return this.overflowBody && this.overflowBody.nativeElement as HTMLElement;
+        return this.overflowBody && (this.overflowBody.nativeElement as HTMLElement);
     }
 
     /** @hidden */
@@ -258,7 +258,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
             const itemGroup = this._getElementGroup(toolbarItem);
             const itemPriority = this._getElementPriority(toolbarItem);
             const shouldItemBeRemovedByWidth = this._shouldToolbarItemBeRemovedByWidth(itemWidth, _contentWidth);
-            const shouldAlwaysBeInOverflow = ((itemPriority === OverflowPriorityEnum.ALWAYS) || this.forceOverflow);
+            const shouldAlwaysBeInOverflow = itemPriority === OverflowPriorityEnum.ALWAYS || this.forceOverflow;
             const shouldNeverBeInOverflow = itemPriority === OverflowPriorityEnum.NEVER;
             if ((shouldItemBeRemovedByWidth && !shouldNeverBeInOverflow) || shouldAlwaysBeInOverflow) {
                 if (itemGroup) {
@@ -493,7 +493,7 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
     private _addToolbarItemToOverflow(toolbarItems: ToolbarItemDirective[]): void {
         toolbarItems.forEach((x) => {
             if (this._overflowBody) {
-                this._overflowBody.appendChild(x.elementRef.nativeElement)
+                this._overflowBody.appendChild(x.elementRef.nativeElement);
             }
         });
     }
@@ -505,7 +505,11 @@ export class ToolbarComponent implements OnInit, AfterViewInit, OnDestroy, After
 
         if (this.overflowSpacer) {
             this.toolbarItems.map((x) => {
-                this._renderer.insertBefore(this._toolbar, x.elementRef.nativeElement, this.overflowSpacer.nativeElement);
+                this._renderer.insertBefore(
+                    this._toolbar,
+                    x.elementRef.nativeElement,
+                    this.overflowSpacer.nativeElement
+                );
             });
         }
 

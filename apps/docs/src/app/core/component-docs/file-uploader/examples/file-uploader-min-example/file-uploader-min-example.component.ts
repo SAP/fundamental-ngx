@@ -7,7 +7,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileUploaderMinExampleComponent {
-
     files: File[];
     invalidFiles: File[];
 
@@ -19,5 +18,4 @@ export class FileUploaderMinExampleComponent {
         alert(files.length + ' Invalid files selected ');
         this.invalidFiles = files;
     }
-
 }

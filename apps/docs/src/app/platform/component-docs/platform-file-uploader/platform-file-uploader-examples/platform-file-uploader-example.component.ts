@@ -25,5 +25,4 @@ export class PlatformFileUploaderExampleComponent {
             alert('Invalid file ' + this.invalidFiles.length);
         }
     }
-
 }

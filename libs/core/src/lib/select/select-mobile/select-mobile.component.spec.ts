@@ -11,9 +11,13 @@ const MOBILE_CONFIG: MobileModeConfig = { title: 'TITLE', hasCloseButton: true }
 
 @Component({
     template: `
-        <fd-select placeholder="Select an option" [(value)]="selectedValue" [mobile]="true"
-                   [mobileConfig]="mobileConfig">
-            <fd-option *ngFor="let option of options" [value]="option">{{option}}</fd-option>
+        <fd-select
+            placeholder="Select an option"
+            [(value)]="selectedValue"
+            [mobile]="true"
+            [mobileConfig]="mobileConfig"
+        >
+            <fd-option *ngFor="let option of options" [value]="option">{{ option }}</fd-option>
         </fd-select>
     `
 })
@@ -24,28 +28,30 @@ class TestWrapperComponent {
     @ViewChild(SelectComponent, { static: true })
     selectComponent: SelectComponent;
 
-    constructor(@Inject(MOBILE_CONFIG_TEST_TOKEN) public mobileConfig: MobileModeConfig) { }
+    constructor(@Inject(MOBILE_CONFIG_TEST_TOKEN) public mobileConfig: MobileModeConfig) {}
 }
 
 describe('SelectComponent in mobile mode', () => {
     let testComponent: TestWrapperComponent;
     let fixture: ComponentFixture<TestWrapperComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [SelectModule, SelectMobileModule, BrowserAnimationsModule, RouterTestingModule],
-            providers: [{ provide: MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
-        }).overrideComponent(
-            SelectComponent,
-            { set: { changeDetection: ChangeDetectionStrategy.Default } }
-        );
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestWrapperComponent],
+                imports: [SelectModule, SelectMobileModule, BrowserAnimationsModule, RouterTestingModule],
+                providers: [{ provide: MOBILE_CONFIG_TEST_TOKEN, useValue: MOBILE_CONFIG }]
+            }).overrideComponent(SelectComponent, { set: { changeDetection: ChangeDetectionStrategy.Default } });
+        })
+    );
 
-    function setup(mobileConfig: MobileModeConfig = MOBILE_CONFIG): void {
+    async function setup(mobileConfig: MobileModeConfig = MOBILE_CONFIG): Promise<void> {
         TestBed.overrideProvider(MOBILE_CONFIG_TEST_TOKEN, { useValue: mobileConfig });
         TestBed.compileComponents();
         fixture = TestBed.createComponent(TestWrapperComponent);
+
+        await whenStable(fixture);
+
         testComponent = fixture.componentInstance;
         fixture.detectChanges();
     }
@@ -150,7 +156,6 @@ describe('SelectComponent in mobile mode', () => {
         expect(mobileElements.dialogFooter).toBeFalsy();
         expect(mobileElements.dialogCloseBtn).toBeFalsy();
         expect(mobileElements.footerButtons.length).toEqual(0);
-
     });
 
     it('should emit value on submit', async () => {

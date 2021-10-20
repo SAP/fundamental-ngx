@@ -22,7 +22,6 @@ import { NestedItemService } from '../nested-item/nested-item.service';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PreparedNestedListComponent {
-
     /**
      * @hidden
      * For internal usage.
@@ -54,7 +53,5 @@ export class PreparedNestedListComponent {
     }
 
     /** @hidden */
-    constructor(
-        @Optional() private _nestedItemService: NestedItemService
-    ) {}
+    constructor(@Optional() private _nestedItemService: NestedItemService) {}
 }

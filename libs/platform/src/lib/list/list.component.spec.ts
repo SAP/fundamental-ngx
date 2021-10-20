@@ -10,11 +10,7 @@ import { PlatformListModule } from './list.module';
 import { StandardListItemModule } from './standard-list-item/standard-list-item.module';
 import { StandardListItemComponent } from './standard-list-item/standard-list-item.component';
 
-const LIST_ELEMENTS: Address[] = [
-    { name: 'Name1' },
-    { name: 'Name2' },
-    { name: 'Name3' },
-    { name: 'Name4' }];
+const LIST_ELEMENTS: Address[] = [{ name: 'Name1' }, { name: 'Name2' }, { name: 'Name3' }, { name: 'Name4' }];
 
 export interface Address {
     name: string;
@@ -38,14 +34,16 @@ export class ListDataProvider extends DataProvider<Address> {
 @Component({
     selector: 'fdp-list-test',
     template: `
-    <fdp-list #componentElement
-             [noBorder]="true"
-             [hasByLine]="true"
-             [navigated]="true"
-             [selectionMode]="'multi'"
-             [navigationIndicator]="true">
-           <fdp-standard-list-item title="Item1"></fdp-standard-list-item></fdp-list>
-
+        <fdp-list
+            #componentElement
+            [noBorder]="true"
+            [hasByLine]="true"
+            [navigated]="true"
+            [selectionMode]="'multi'"
+            [navigationIndicator]="true"
+        >
+            <fdp-standard-list-item title="Item1"></fdp-standard-list-item
+        ></fdp-list>
     `
 })
 class ListComponentTest {
@@ -57,12 +55,14 @@ describe('ListComponent', () => {
     let component: ListComponentTest;
     let fixture: ComponentFixture<ListComponentTest>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [PlatformListModule, StandardListItemModule, RouterTestingModule],
-            declarations: [ListComponentTest]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformListModule, StandardListItemModule, RouterTestingModule],
+                declarations: [ListComponentTest]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ListComponentTest);
@@ -130,12 +130,14 @@ describe('ListComponent with DataSource', () => {
     let host: ListDataSourceTestComponent;
     let fixture: ComponentFixture<ListDataSourceTestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ListDataSourceTestComponent],
-            imports: [PlatformListModule, StandardListItemModule, RouterTestingModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [ListDataSourceTestComponent],
+                imports: [PlatformListModule, StandardListItemModule, RouterTestingModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ListDataSourceTestComponent);

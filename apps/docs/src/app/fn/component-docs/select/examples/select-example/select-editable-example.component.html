@@ -1,0 +1,10 @@
+<div style="width: 200px">
+    <fn-select [editable]="true" placeholder="Select an option" label="Editable Selector" #selectEditableExample>
+        <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+    </fn-select>
+</div>
+<br />
+
+<p>
+    <i>Editable Example selection: {{ selectEditableExample.value }}</i>
+</p>

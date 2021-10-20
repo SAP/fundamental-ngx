@@ -5,13 +5,6 @@ export const standardInputLabels = [
     'Button as an addon',
     'Icon as an addon'
 ];
-export const standardInputPlaceholders = [
-    'Enter value',
-    'Enter value',
-    'Enter value',
-    'Enter value',
-    'Email'
-];
+export const standardInputPlaceholders = ['Enter value', 'Enter value', 'Enter value', 'Enter value', 'Email'];
 export const inputWithFormLabel = 'Quantity';
 export const inputWithFormPlaceholder = 'Things quantity';
-

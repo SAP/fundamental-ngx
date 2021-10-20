@@ -1,12 +1,7 @@
 import { FormattedTextPo } from '../pages/formatted-text.po';
-import {
-    browserIsFirefox,
-    getAlertText,
-    refreshPage,
-    waitForElDisplayed
-} from '../../driver/wdio';
+import { browserIsFirefox, getAlertText, refreshPage, waitForElDisplayed } from '../../driver/wdio';
 
-describe('Formatted text component', function() {
+describe('Formatted text component', () => {
     const formattedTextPage = new FormattedTextPo();
     const { inputHtmlText } = new FormattedTextPo();
 
@@ -34,13 +29,13 @@ describe('Formatted text component', function() {
         expect(true).toBe(false, 'Alert is present on the screen ');
     });
 
-    describe('Check orientation', function() {
+    describe('Check orientation', () => {
         it('Verify RTL and LTR orientation', () => {
             formattedTextPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             formattedTextPage.saveExampleBaselineScreenshot();
             expect(formattedTextPage.compareWithBaseline()).toBeLessThan(5);

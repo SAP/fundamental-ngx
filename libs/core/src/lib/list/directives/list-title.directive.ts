@@ -1,7 +1,7 @@
 import { Directive, ElementRef, HostBinding, Input, OnInit } from '@angular/core';
 
 @Directive({
-  selector: '[fd-list-title], [fdListTitle]'
+    selector: '[fd-list-title], [fdListTitle]'
 })
 export class ListTitleDirective implements OnInit {
     /** @hidden */

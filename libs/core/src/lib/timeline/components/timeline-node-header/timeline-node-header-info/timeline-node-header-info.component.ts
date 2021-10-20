@@ -6,8 +6,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     host: {
-        'class': 'fd-timeline__post-header'
+        class: 'fd-timeline__post-header'
     }
 })
-export class TimelineNodeHeaderInfoComponent {
-}
+export class TimelineNodeHeaderInfoComponent {}

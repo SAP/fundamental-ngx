@@ -19,15 +19,15 @@ import { MessageBoxContent } from '../utils/message-box-content.class';
 import { MessageBoxDefaultComponent } from '../message-box-default/message-box-default.component';
 import { MessageBoxContentType } from '../services/message-box.service';
 
-
 /** Message box container where the message box content is embedded. */
 @Component({
     selector: 'fd-message-box-container',
     template: '<ng-container #contentContainer></ng-container>'
 })
-export class MessageBoxContainerComponent extends DynamicComponentContainer<MessageBoxContentType>
-    implements AfterViewInit, CssClassBuilder {
-
+export class MessageBoxContainerComponent
+    extends DynamicComponentContainer<MessageBoxContentType>
+    implements AfterViewInit, CssClassBuilder
+{
     /** Custom classes */
     @Input()
     set class(userClass: string) {
@@ -61,10 +61,7 @@ export class MessageBoxContainerComponent extends DynamicComponentContainer<Mess
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return [
-            this.messageBoxConfig.containerClass ? this.messageBoxConfig.containerClass : '',
-            this._class
-        ];
+        return [this.messageBoxConfig.containerClass ? this.messageBoxConfig.containerClass : '', this._class];
     }
 
     /** @hidden */

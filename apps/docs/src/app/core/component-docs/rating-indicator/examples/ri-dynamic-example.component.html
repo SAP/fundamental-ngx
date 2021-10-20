@@ -9,26 +9,17 @@
     [displayMode]="config.displayMode"
     (ratingChanged)="onRatingChanged($event)"
 ></fd-rating-indicator>
-<div *ngIf="dynamicChangeRate">
-    Value: {{ dynamicChangeRate.viewValue || 0 }}
-</div>
+<div *ngIf="dynamicChangeRate">Value: {{ dynamicChangeRate.viewValue || 0 }}</div>
+<div>IndicatorCapacity: <input [(ngModel)]="config.indicatorCapacity" type="number" min="1" max="7" /></div>
+<div>AllowHalves: <input [(ngModel)]="config.allowHalves" type="checkbox" /></div>
+<div>Disabled: <input [(ngModel)]="config.disabled" type="checkbox" /></div>
+<div>Display Mode: <input [(ngModel)]="config.displayMode" type="checkbox" /></div>
 <div>
-    IndicatorCapacity: <input [(ngModel)]="config.indicatorCapacity" type="number" min="1" max="7" />
-</div>
-<div>
-    AllowHalves: <input [(ngModel)]="config.allowHalves" type="checkbox" />
-</div>
-<div>
-    Disabled: <input [(ngModel)]="config.disabled" type="checkbox" />
-</div>
-<div>
-    Display Mode: <input [(ngModel)]="config.displayMode" type="checkbox" />
-</div>
-<div>
-    Sizes: <select [(ngModel)]="config.size">
-        <option [value]=size *ngFor="let size of sizes">{{ size }}</option>
+    Sizes:
+    <select [(ngModel)]="config.size">
+        <option [value]="size" *ngFor="let size of sizes">{{ size }}</option>
     </select>
 </div>
 <div>
-    <pre>{{ config | json}}</pre>
+    <pre>{{ config | json }}</pre>
 </div>

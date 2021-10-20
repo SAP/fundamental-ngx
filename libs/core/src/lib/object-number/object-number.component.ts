@@ -68,8 +68,7 @@ export class ObjectNumberComponent implements OnInit, OnChanges, CssClassBuilder
     _numberPipeConfig = '';
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) {
-    }
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnChanges(): void {

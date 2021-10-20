@@ -40,7 +40,6 @@ import { NotificationGroupComponent } from '@fundamental-ngx/core/notification';
     styleUrls: ['./popover-body.component.scss']
 })
 export class PopoverBodyComponent {
-
     /** @hidden */
     @ViewChild(CdkTrapFocus)
     _cdkTrapFocus: CdkTrapFocus;
@@ -86,7 +85,7 @@ export class PopoverBodyComponent {
     text: string = null;
 
     /** @hidden template rendered inside popover's body */
-    _templateToDisplay: TemplateRef<any>
+    _templateToDisplay: TemplateRef<any>;
 
     /** Close event from popover body */
     onClose = new Subject<void>();
@@ -109,7 +108,6 @@ export class PopoverBodyComponent {
 
     /** @hidden */
     _setArrowStyles(position: ConnectionPositionPair, rtl: 'rtl' | 'ltr'): void {
-
         this._arrowClasses = [];
 
         const arrowDirection = PopoverPosition.getArrowPosition(position, rtl === 'rtl');
@@ -120,9 +118,9 @@ export class PopoverBodyComponent {
             if (rtl === 'rtl') {
                 _position = PopoverFlippedXDirection[_position];
             }
-            this._arrowClasses.push(`fd-popover__arrow-x--${_position}`)
+            this._arrowClasses.push(`fd-popover__arrow-x--${_position}`);
         } else if (arrowDirection === 'start' || arrowDirection === 'end') {
-            this._arrowClasses.push(`fd-popover__arrow-y--${position.overlayY}`)
+            this._arrowClasses.push(`fd-popover__arrow-y--${position.overlayY}`);
         }
 
         this._removeOldMarginsStyle();
@@ -157,7 +155,6 @@ export class PopoverBodyComponent {
     /** @hidden */
     private _removeOldMarginsStyle(): void {
         const margins = ['margin-top', 'margin-right', 'margin-bottom', 'margin-left'];
-        margins.forEach(margin => this._renderer2.removeStyle(this._elementRef.nativeElement, margin));
+        margins.forEach((margin) => this._renderer2.removeStyle(this._elementRef.nativeElement, margin));
     }
-
 }

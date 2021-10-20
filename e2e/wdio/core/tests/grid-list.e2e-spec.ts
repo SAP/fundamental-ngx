@@ -9,21 +9,30 @@ import {
     scrollIntoView,
     waitForClickable,
     waitForElDisplayed,
-    getElementClass, acceptAlert
+    getElementClass,
+    acceptAlert
 } from '../../driver/wdio';
-import {
-    text,
-    productTitle,
-    textLocked,
-    isSelected,
-} from '../fixtures/appData/grid-list-content';
+import { text, productTitle, textLocked, isSelected } from '../fixtures/appData/grid-list-content';
 
-describe('Grid-list test suite', function() {
+describe('Grid-list test suite', () => {
     const gridListPage = new GridListPo();
     const {
-        layoutPattern, singleSelectItems, multiSelectModeCheckboxes, moreButton, moreButtonItems, footer,
-        gridListItemsByMode, deleteModeTitle, deleteItemButton, lockedStateItemButton, lockedStateItemText,
-        gridListsArray, gridListsTitle, multiSelectModeSelectedItems, singleSelectItemsSelected, dragAndDropItems,
+        layoutPattern,
+        singleSelectItems,
+        multiSelectModeCheckboxes,
+        moreButton,
+        moreButtonItems,
+        footer,
+        gridListItemsByMode,
+        deleteModeTitle,
+        deleteItemButton,
+        lockedStateItemButton,
+        lockedStateItemText,
+        gridListsArray,
+        gridListsTitle,
+        multiSelectModeSelectedItems,
+        singleSelectItemsSelected,
+        dragAndDropItems
     } = gridListPage;
 
     beforeAll(() => {
@@ -80,6 +89,7 @@ describe('Grid-list test suite', function() {
         expect(getText(lockedStateItemText)).toBe(textLocked);
     });
 
+    // tslint:disable-next-line: max-line-length
     it('Verify selecting multiple items in "Multi select mode" component -> Multiple items can be selected. Checkbox should be checked when item is selected', () => {
         const arrayLength = getElementArrayLength(gridListItemsByMode('multiSelect'));
         let selectedArrayLength = getElementArrayLength(multiSelectModeSelectedItems);
@@ -114,14 +124,13 @@ describe('Grid-list test suite', function() {
         }
     });
 
-    describe('Check orientation', function() {
+    describe('Check orientation', () => {
         it('Verify LTR / RTL orientation', () => {
             gridListPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
-
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             gridListPage.saveExampleBaselineScreenshot();
             expect(gridListPage.compareWithBaseline()).toBeLessThan(5);

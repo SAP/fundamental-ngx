@@ -3,9 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NotificationModule } from '../notification.module';
 
 @Component({
-    template: `
-        <fd-notification-group #notificationGroupRef [mobile]="mobile"></fd-notification-group>
-    `
+    template: ` <fd-notification-group #notificationGroupRef [mobile]="mobile"></fd-notification-group> `
 })
 class TestComponent {
     @ViewChild('notificationGroupRef', { read: ElementRef })
@@ -18,12 +16,14 @@ describe('NotificationGroupComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [NotificationModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [NotificationModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -36,7 +36,9 @@ describe('NotificationGroupComponent', () => {
     });
 
     it('should assign class', () => {
-        expect(component.notificationGroupRef.nativeElement.className).toContain('fd-notification fd-notification--group fd-notification-custom-block');
+        expect(component.notificationGroupRef.nativeElement.className).toContain(
+            'fd-notification fd-notification--group fd-notification-custom-block'
+        );
     });
 
     it('should assign additional classes', () => {

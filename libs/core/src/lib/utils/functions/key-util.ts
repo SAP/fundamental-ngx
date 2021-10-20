@@ -71,10 +71,7 @@ export class KeyUtil {
         }
 
         if (event && keyMap.get(keyCode)) {
-            return (
-                keyMap.get(keyCode).some((alias) => alias === event.key) ||
-                keyCode === event.keyCode
-            );
+            return keyMap.get(keyCode).some((alias) => alias === event.key) || keyCode === event.keyCode;
         }
 
         if (isDevMode()) {
@@ -92,7 +89,7 @@ export class KeyUtil {
      * @param event     - KeyboardEvent
      * @param keyType   - Type of key
      * */
-    static isKeyType(event: KeyboardEvent, keyType: 'alphabetical' | 'numeric'| 'control'): boolean {
+    static isKeyType(event: KeyboardEvent, keyType: 'alphabetical' | 'numeric' | 'control'): boolean {
         if (event && keyType) {
             switch (keyType) {
                 case 'numeric':
@@ -103,7 +100,7 @@ export class KeyUtil {
                     return event.code
                         ? event.code.toLowerCase().includes('key')
                         : event.keyCode >= 65 && event.keyCode <= 90;
-                    // some service commands as alt, ctr, insert, print, f4 etc. All except letters, numbers and symbols
+                // some service commands as alt, ctr, insert, print, f4 etc. All except letters, numbers and symbols
                 case 'control':
                     return event.keyCode < 48 || (event.keyCode >= 112 && event.keyCode <= 123);
             }

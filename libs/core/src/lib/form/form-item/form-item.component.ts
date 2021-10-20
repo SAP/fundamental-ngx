@@ -19,7 +19,6 @@ import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulati
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormItemComponent {
-
     /** Whether the form item is inline. */
     @Input()
     @HostBinding('class.fd-form-item--inline')

@@ -37,11 +37,13 @@ describe('ObjectStatusComponent', () => {
     let testComponent: TestObjectStatusComponent;
     let fixture: ComponentFixture<TestObjectStatusComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [ObjectStatusComponent, TestObjectStatusComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [ObjectStatusComponent, TestObjectStatusComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestObjectStatusComponent);

@@ -27,6 +27,6 @@ export class MultiInputNewTokensExampleComponent {
     }
 
     validateFunc(value: string): boolean {
-        return value?.length >= 3
+        return value?.length >= 3;
     }
 }

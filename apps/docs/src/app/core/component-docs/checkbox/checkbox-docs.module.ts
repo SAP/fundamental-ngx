@@ -21,17 +21,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        FormModule,
-        CheckboxModule,
-        RouterModule.forChild(routes),
-        SharedDocumentationPageModule
-    ],
+    imports: [FormModule, CheckboxModule, RouterModule.forChild(routes), SharedDocumentationPageModule],
     exports: [RouterModule],
-    declarations: [
-        examples,
-        CheckboxDocsComponent,
-        CheckboxHeaderComponent,
-    ]
+    declarations: [examples, CheckboxDocsComponent, CheckboxHeaderComponent]
 })
 export class CheckboxDocsModule {}

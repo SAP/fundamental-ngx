@@ -1,6 +1,7 @@
 import {
     clearValue,
-    click, doubleClick,
+    click,
+    doubleClick,
     getElementArrayLength,
     getText,
     getValue,
@@ -19,12 +20,25 @@ import {
     checkValueChanged
 } from '../../helper/assertion-helper';
 
-describe('Step input test suite', function() {
+describe('Step input test suite', () => {
     const stepInputPage: StepInputPo = new StepInputPo();
     const {
-        stepInputRoot, activeButtonIncrement, activeButtonDecrement, allInput, allButtonIncrement, allButtonDecrement,
-        activeInput, reactiveFormInput, formInput, errorMessage, minMaxButtonDecrement,
-        minMaxButtonIncrement, inputWithoutForm, quantityText, formStatusText, fillInput
+        stepInputRoot,
+        activeButtonIncrement,
+        activeButtonDecrement,
+        allInput,
+        allButtonIncrement,
+        allButtonDecrement,
+        activeInput,
+        reactiveFormInput,
+        formInput,
+        errorMessage,
+        minMaxButtonDecrement,
+        minMaxButtonIncrement,
+        inputWithoutForm,
+        quantityText,
+        formStatusText,
+        fillInput
     } = stepInputPage;
 
     beforeAll(() => {
@@ -163,7 +177,7 @@ describe('Step input test suite', function() {
         stepInputPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             stepInputPage.saveExampleBaselineScreenshot();
             expect(stepInputPage.compareWithBaseline()).toBeLessThan(5);

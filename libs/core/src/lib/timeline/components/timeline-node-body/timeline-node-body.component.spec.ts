@@ -10,8 +10,7 @@ describe('TimelineNodeBodyComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [TimelineNodeBodyComponent, TimeLineNodeBodyTestApp]
-        })
-            .compileComponents();
+        }).compileComponents();
     });
 
     beforeEach(() => {

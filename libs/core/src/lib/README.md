@@ -19,6 +19,7 @@
 -   [7. Contributing](#7)
 -   [8. License](https://github.com/SAP/fundamental-ngx/blob/main/LICENSE.txt)
 -   [9. Similar Projects](#8)
+-   [10. Using Jest in the host application](#9)
 
 ## <a name="1"></a>1. Description
 
@@ -38,18 +39,6 @@ Prior knowledge of Angular is recommended, to use the fundamental-ngx library.
 
 ## <a name="3"></a>3. Versioning
 
-npm package [fundamental-ngx](https://npmjs.com/package/fundamental-ngx) version `0.10.0` is compiled with Angular 7. It supports Angular 6 and 7 versions.
-This version is not supported by bug fixes.
-
-npm package [@fundamental-ngx/core](https://www.npmjs.com/package/@fundamental-ngx/core) version `0.11.x` is compiled with Angular 8.
-It supports Angular 8 version and newer. This version will have merged some bug-fixes.
-
-npm package [@fundamental-ngx/core](https://www.npmjs.com/package/@fundamental-ngx/core) versions `0.12.y - 0.15.z` are compiled with Angular 8.
-It supports the current Angular 8 version and newer. This version also can be used along with enabled IVY.
-
-npm package [@fundamental-ngx/core](https://www.npmjs.com/package/@fundamental-ngx/core) versions `0.16.y - 0.18.z` are compiled with Angular 8.
-It supports the current Angular 9 version and newer. This version also can be used along with enabled IVY.
-
 Check the [Breaking Changes](https://github.com/SAP/fundamental-ngx/wiki#breaking-changes) for the latest patches changes.
 
 ## <a name="4"></a>4. Getting Started
@@ -67,7 +56,6 @@ For an existing Angular CLI application,
 
 1. **Edit your tsconfig.**
    Edit the `target` in your `tsconfig.json` to `es5`. The library is incompatible with later versions.
-   
 1. **Import the modules you want to use.**
 
     To add the entire library, add the following import to your main application module.
@@ -107,11 +95,10 @@ For an existing Angular CLI application,
     })
     export class DemoModule { }
     ```
-   
+
 1. **Provide the RtlService.**
    In your main application module, add `RtlService` to the list of providers. This service is needed to ensure proper right-to-left functionality for
    users with their browser set to an RTL language.
-   
 1. **Provide the ContentDensityService.**
    In your main application module, you will also need to add `ContentDensityService` to the list of providers if you wish to manage the content density of
    you application from a single point.
@@ -139,3 +126,21 @@ Check out the [NEW_COMPONENT.md](https://github.com/SAP/fundamental-ngx/blob/mai
 ## <a name="9"></a>8. Similar Projects
 
 [Fundamental-react](https://github.com/SAP/fundamental-react) - React implementation of Fundamental Library Styles
+
+## <a name="10"></a>9. Using Jest in the host application
+
+If you're using Jest with [`jest-preset-angular`](https://www.npmjs.com/package/jest-preset-angular) you may see the following errors:
+
+```bash
+Unexpected value 'FundamentalNgxCoreModule' imported by the module 'DynamicTestModule'. Please add an @NgModule annotation.
+```
+
+This is happens because we publish library compiled with Template Engine (not Ivy) and NGCC doesn't compile it correctly because of settings in the preset.
+
+To fix such errors please add this to your `package.json` and reinstall npm packages.
+
+```json
+"postinstall-ivy": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
+"postinstall-ivy-umd": "ngcc --properties main --create-ivy-entry-points",
+"postinstall": "npm run postinstall-ivy && npm run postinstall-ivy-umd"
+```

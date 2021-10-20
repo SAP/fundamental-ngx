@@ -7,7 +7,6 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
 
 @Directive()
 export abstract class DialogFooterBase implements AfterContentInit {
-
     /** @hidden */
     footerTemplate: TemplateRef<any>;
 
@@ -26,7 +25,7 @@ export abstract class DialogFooterBase implements AfterContentInit {
 
     /** @hidden Assign custom templates */
     private _assignCustomTemplates(): void {
-        const footerTemplate = this.customTemplates.find(template => template.getName() === 'footer');
+        const footerTemplate = this.customTemplates.find((template) => template.getName() === 'footer');
         this.footerTemplate = footerTemplate ? footerTemplate.templateRef : undefined;
     }
 
@@ -37,11 +36,11 @@ export abstract class DialogFooterBase implements AfterContentInit {
                 button.class = button.class + className;
                 button.buildComponentCssClass();
             }
-        }
+        };
 
-        this.buttons.changes.pipe(startWith(1)).subscribe(
-            _ => this.buttons.forEach(button => {
-                addClassToButton(button._buttonComponent)
+        this.buttons.changes.pipe(startWith(1)).subscribe((_) =>
+            this.buttons.forEach((button) => {
+                addClassToButton(button._buttonComponent);
             })
         );
     }

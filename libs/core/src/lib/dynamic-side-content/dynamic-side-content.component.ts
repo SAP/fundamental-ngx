@@ -103,7 +103,11 @@ export class DynamicSideContentComponent implements CssClassBuilder, OnChanges, 
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return [DYNAMIC_SIDE_CONTENT_CLASS_NAME.container, getSizeClassName(this.size), getPositionClassName(this.position)];
+        return [
+            DYNAMIC_SIDE_CONTENT_CLASS_NAME.container,
+            getSizeClassName(this.size),
+            getPositionClassName(this.position)
+        ];
     }
 
     /** @hidden */

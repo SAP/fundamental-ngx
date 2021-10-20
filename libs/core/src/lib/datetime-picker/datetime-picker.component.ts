@@ -13,7 +13,8 @@ import {
     ViewChild,
     ViewEncapsulation,
     Inject,
-    OnChanges, AfterViewInit
+    OnChanges,
+    AfterViewInit
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
@@ -64,7 +65,9 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges, AfterViewInit, ControlValueAccessor, Validator {
+export class DatetimePickerComponent<D>
+    implements OnInit, OnDestroy, OnChanges, AfterViewInit, ControlValueAccessor, Validator
+{
     /** Placeholder for the inner input element. */
     @Input()
     placeholder = '';
@@ -327,19 +330,17 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    onChange = (_: D) => {
-    };
+    onChange = (_: D) => {};
 
     /** @hidden */
-    onTouched = () => {
-    };
+    onTouched = () => {};
 
     /**
      * Function used to disable certain dates in the calendar.
      * @param fdDate FdDate
      */
     @Input()
-    disableFunction = function(_: D): boolean {
+    disableFunction = function (_: D): boolean {
         return false;
     };
 
@@ -383,20 +384,24 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
 
         this._calculateTimeOptions();
 
-        this._dateTimeAdapter.localeChanges.pipe(
-            takeUntil(this._onDestroy$),
-            filter(() => this._inputFieldDate !== '')
-        ).subscribe(() => {
-            this._setInput(this.date);
-            this._calculateTimeOptions();
-            this._changeDetRef.detectChanges();
-        });
+        this._dateTimeAdapter.localeChanges
+            .pipe(
+                takeUntil(this._onDestroy$),
+                filter(() => this._inputFieldDate !== '')
+            )
+            .subscribe(() => {
+                this._setInput(this.date);
+                this._calculateTimeOptions();
+                this._changeDetRef.detectChanges();
+            });
 
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this._changeDetRef.markForCheck();
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._changeDetRef.markForCheck();
+                })
+            );
         }
     }
 
@@ -416,18 +421,16 @@ export class DatetimePickerComponent<D> implements OnInit, OnDestroy, OnChanges,
      * @hidden
      * Function that implements Validator Interface, adds validation support for forms
      */
-    validate(
-        control: AbstractControl
-    ): {
+    validate(control: AbstractControl): {
         [key: string]: any;
     } {
         return this.isCurrentModelValid() && !this._isInvalidDateInput
             ? null
             : {
-                dateValidation: {
-                    valid: false
-                }
-            };
+                  dateValidation: {
+                      valid: false
+                  }
+              };
     }
 
     /** Toggles the popover. */

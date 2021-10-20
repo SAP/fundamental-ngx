@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
 import { Validators } from '@angular/forms';
 
-import { FormattedFormStep, WizardGeneratorFormsValue, WizardGeneratorItem, WizardTitle } from '@fundamental-ngx/platform/wizard-generator';
+import {
+    FormattedFormStep,
+    WizardGeneratorFormsValue,
+    WizardGeneratorItem,
+    WizardTitle
+} from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
-  selector: 'fdp-wizard-generator-customizable-embeded-example',
-  templateUrl: './wizard-generator-customizable-embeded-example.component.html'
+    selector: 'fdp-wizard-generator-customizable-embeded-example',
+    templateUrl: './wizard-generator-customizable-embeded-example.component.html'
 })
 export class WizardGeneratorCustomizableEmbededExampleComponent {
-
     wizardTitle: WizardTitle = {
         size: 2,
         text: 'Checkout'
@@ -123,5 +127,4 @@ export class WizardGeneratorCustomizableEmbededExampleComponent {
         event.preventDefault();
         callback(stepId);
     }
-
 }

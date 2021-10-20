@@ -6,7 +6,7 @@ import { CssClassBuilder } from '@fundamental-ngx/core/utils';
  * Applies a thumb styles
  */
 @Directive({
-    selector: '[fdFeedInputAvatar]',
+    selector: '[fdFeedInputAvatar]'
 })
 export class FeedInputAvatarDirective implements OnInit, OnChanges, CssClassBuilder {
     /** Apply user custom styles */
@@ -17,7 +17,7 @@ export class FeedInputAvatarDirective implements OnInit, OnChanges, CssClassBuil
     @Input()
     placeholder: boolean;
 
-    constructor(private readonly _elementRef: ElementRef<HTMLElement>) { }
+    constructor(private readonly _elementRef: ElementRef<HTMLElement>) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -32,11 +32,7 @@ export class FeedInputAvatarDirective implements OnInit, OnChanges, CssClassBuil
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return [
-            'fd-feed-input__thumb',
-            this.placeholder ? `sap-icon` : '',
-            this.class
-        ];
+        return ['fd-feed-input__thumb', this.placeholder ? `sap-icon` : '', this.class];
     }
 
     /** @hidden */

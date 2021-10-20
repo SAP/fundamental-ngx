@@ -11,16 +11,7 @@ import { ComboboxSelectionChangeEvent } from '@fundamental-ngx/platform/form';
     providers: [{ provide: DATA_PROVIDERS, useValue: new Map() }]
 })
 export class ComboboxDatasourceExampleComponent {
-    dataSourceStrings = [
-        'Apple',
-        'Banana',
-        'Pineapple',
-        'Strawberry',
-        'Broccoli',
-        'Carrot',
-        'Jalapeño',
-        'Spinach'
-    ];
+    dataSourceStrings = ['Apple', 'Banana', 'Pineapple', 'Strawberry', 'Broccoli', 'Carrot', 'Jalapeño', 'Spinach'];
 
     dataSource = [
         { name: 'Apple', type: 'Fruits' },

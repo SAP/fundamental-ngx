@@ -1,9 +1,14 @@
 {
-  "$schema": "../../../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../../../dist/libs/core",
-  "deleteDestPath": true,
-  "lib": {
-    "entryFile": "./public_api.ts"
-  },
-  "allowedNonPeerDependencies": ["@angular/cdk", "@sap-theming/theming-base-content", "focus-trap", "fundamental-styles"]
+    "$schema": "../../../../node_modules/ng-packagr/ng-package.schema.json",
+    "dest": "../../../../dist/libs/core",
+    "deleteDestPath": true,
+    "lib": {
+        "entryFile": "./public_api.ts"
+    },
+    "allowedNonPeerDependencies": [
+        "@angular/cdk",
+        "@sap-theming/theming-base-content",
+        "focus-trap",
+        "fundamental-styles"
+    ]
 }

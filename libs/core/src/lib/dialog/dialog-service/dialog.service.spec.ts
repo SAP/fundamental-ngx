@@ -23,9 +23,11 @@ describe('DialogService', () => {
         TestBed.configureTestingModule({
             declarations: [TemplateTestComponent],
             imports: [DialogModule]
-        }).overrideModule(BrowserDynamicTestingModule, {
-            set: { entryComponents: [TemplateTestComponent] }
-        }).compileComponents();
+        })
+            .overrideModule(BrowserDynamicTestingModule, {
+                set: { entryComponents: [TemplateTestComponent] }
+            })
+            .compileComponents();
 
         service = TestBed.inject<DialogService>(DialogService);
     });

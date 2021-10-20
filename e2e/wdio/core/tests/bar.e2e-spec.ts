@@ -11,11 +11,10 @@ import {
     waitForPresent
 } from '../../driver/wdio';
 
-describe('Bar test suite:', function() {
+describe('Bar test suite:', () => {
     const barPage: BarPo = new BarPo();
-    const {
-        arrowButtons, leftSections, saveCancelButtons, pictures, subMiddleSection, rightSections, middleSections,
-    } = barPage;
+    const { arrowButtons, leftSections, saveCancelButtons, pictures, subMiddleSection, rightSections, middleSections } =
+        barPage;
 
     beforeAll(() => {
         barPage.open();
@@ -71,20 +70,29 @@ describe('Bar test suite:', function() {
         }
     });
 
-    xdescribe('Check visual regression', function() {
-
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             const exampleCount = getElementArrayLength(barPage.exampleAreaContainersArr);
             for (let i = 0; i < exampleCount; i++) {
                 // not working for floating footer example (index 5)
                 if (i !== 5) {
                     scrollIntoView(barPage.exampleAreaContainersArr, i);
-                    saveElementScreenshot(barPage.exampleAreaContainersArr, `bar-example-${i}-core-${getImageTagBrowserPlatform()}`, barPage.getScreenshotFolder(), i);
-                    expect(checkElementScreenshot(barPage.exampleAreaContainersArr, `bar-example-${i}-core-${getImageTagBrowserPlatform()}`, barPage.getScreenshotFolder(), i))
-                        .toBeLessThan(5)
+                    saveElementScreenshot(
+                        barPage.exampleAreaContainersArr,
+                        `bar-example-${i}-core-${getImageTagBrowserPlatform()}`,
+                        barPage.getScreenshotFolder(),
+                        i
+                    );
+                    expect(
+                        checkElementScreenshot(
+                            barPage.exampleAreaContainersArr,
+                            `bar-example-${i}-core-${getImageTagBrowserPlatform()}`,
+                            barPage.getScreenshotFolder(),
+                            i
+                        )
+                    ).toBeLessThan(5);
                 }
             }
         });
     });
 });
-

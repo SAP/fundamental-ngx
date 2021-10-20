@@ -9,11 +9,9 @@ import * as videoThumbnailTs from '!raw-loader!./platform-thumbnail-examples/pla
 
 @Component({
     selector: 'app-platform-thumbnail',
-    templateUrl: './platform-thumbnail.docs.component.html',
-
+    templateUrl: './platform-thumbnail.docs.component.html'
 })
 export class PlatformThumbnailDocsComponent {
-
     basicThumbnail: ExampleFile[] = [
         {
             language: 'html',

@@ -1,0 +1,10 @@
+<div style="width: 200px">
+    <fn-select placeholder="Select an option" label="Standard Selector" #selectExample1>
+        <li fn-option *ngFor="let option of options" [value]="option">{{ option }}</li>
+    </fn-select>
+</div>
+<br />
+
+<p>
+    <i>Example 1 selection: {{ selectExample1.value }}</i>
+</p>

@@ -2,7 +2,6 @@ import { BaseComponentPo } from './base-component.po';
 import { waitForElDisplayed } from '../../driver/wdio';
 
 export class ThumbnailPo extends BaseComponentPo {
-
     url = '/thumbnail';
     root = '#page-content';
 

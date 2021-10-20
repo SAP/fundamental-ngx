@@ -41,9 +41,9 @@ export class InfiniteScrollDirective implements OnInit, OnDestroy {
         const element = this._element.nativeElement;
         const offset: number = element.scrollTop + element.offsetHeight;
         if (this.scrollOffset) {
-            return offset > (element.scrollHeight - this.scrollOffset);
+            return offset > element.scrollHeight - this.scrollOffset;
         } else {
-            return (offset / element.scrollHeight) > this.scrollPercent / 100;
+            return offset / element.scrollHeight > this.scrollPercent / 100;
         }
     }
 

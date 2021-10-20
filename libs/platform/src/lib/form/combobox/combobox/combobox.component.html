@@ -27,59 +27,63 @@
 </ng-template>
 
 <ng-template #controlTemplate>
-    <fd-input-group
-        [id]="id + '-input-group-container'"
-        [compact]="isCompact"
-        [button]="!readonly"
-        [glyph]="!readonly ? 'navigation-down-arrow' : ' '"
-        [state]="status === 'error' ? 'error' : state"
-        [buttonFocusable]="false"
-        [disabled]="disabled"
-        [readonly]="readonly"
-        [isControl]="true"
-        (addOnButtonClicked)="!mobile && onPrimaryButtonClick(_connectedOverlay.open)"
-        [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
-        [attr.aria-disabled]="disabled"
-        [attr.aria-readonly]="readonly"
-        [glyphAriaLabel]="ariaLabel"
-        (click)="mobile && openInMobileMode()"
-    >
-        <input
-            #searchInputElement
-            fdp-auto-complete
-            [options]="_suggestions"
-            [inputText]="inputText"
-            [mobile]="mobile"
-            type="text"
-            role="combobox"
-            autocomplete="off"
-            [attr.aria-label]="ariaLabel"
-            [attr.aria-labelledby]="ariaLabelledBy"
-            [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
-            [attr.aria-owns]="autoComplete && !mobile ? id + '-result' : null"
-            [attr.aria-haspopup]="autoComplete && !mobile"
-            [attr.aria-required]="required"
-            fd-input-group-input
-            tabindex="0"
-            [id]="id"
-            [name]="name"
+    <fd-form-input-message-group>
+        <fd-input-group
+            [id]="id + '-input-group-container'"
             [compact]="isCompact"
-            (keydown)="onInputKeydownHandler($event)"
-            (keyup)="validateOnKeyup($event)"
+            [button]="!readonly"
+            [glyph]="!readonly ? 'navigation-down-arrow' : ' '"
+            [state]="mobile && isOpen ? null : status === 'error' ? 'error' : state"
+            [buttonFocusable]="false"
             [disabled]="disabled"
-            [(ngModel)]="inputText"
-            (ngModelChange)="searchTermChanged()"
-            [placeholder]="placeholder"
-            (focus)="onTouched()"
-            (blur)="!mobile && _onBlur($event)"
-            [attr.aria-expanded]="isOpen && _suggestions.length > 0"
             [readonly]="readonly"
+            [isControl]="true"
+            (addOnButtonClicked)="!mobile && onPrimaryButtonClick(_connectedOverlay.open)"
+            [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
+            [attr.aria-disabled]="disabled"
             [attr.aria-readonly]="readonly"
-        />
-    </fd-input-group>
-    <ng-container *ngIf="!isOpen">
-        <ng-container *ngTemplateOutlet="errorMessageTemplate"></ng-container>
-    </ng-container>
+            [glyphAriaLabel]="ariaLabel"
+            (click)="mobile && openInMobileMode()"
+        >
+            <input
+                #searchInputElement
+                fdp-auto-complete
+                [options]="_suggestions"
+                [inputText]="inputText"
+                [mobile]="mobile"
+                (onComplete)="_onCompleteTerm($event)"
+                type="text"
+                role="combobox"
+                autocomplete="off"
+                [attr.aria-label]="ariaLabel"
+                [attr.aria-labelledby]="ariaLabelledBy"
+                [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
+                [attr.aria-owns]="autoComplete && !mobile ? id + '-result' : null"
+                [attr.aria-haspopup]="autoComplete && !mobile"
+                [attr.aria-required]="required"
+                fd-input-group-input
+                tabindex="0"
+                [id]="id"
+                [name]="name"
+                [compact]="isCompact"
+                (keydown)="onInputKeydownHandler($event)"
+                [disabled]="disabled"
+                [(ngModel)]="inputText"
+                (ngModelChange)="searchTermChanged()"
+                [placeholder]="placeholder"
+                (focus)="onTouched()"
+                (blur)="!mobile && _onBlur($event)"
+                [attr.aria-expanded]="isOpen && _suggestions.length > 0"
+                [readonly]="readonly"
+                [attr.aria-readonly]="readonly"
+            />
+        </fd-input-group>
+        <fd-form-message
+            *ngIf="mobile && isOpen ? null : !!stateMessage"
+            [type]="state"
+            [innerHtml]="stateMessage"
+        ></fd-form-message>
+    </fd-form-input-message-group>
 </ng-template>
 
 <ng-template #listTemplate>
@@ -96,13 +100,13 @@
         [style.minWidth]="!mobile && minWidth + 'px'"
         [style.maxWidth]="autoResize && maxWidth + 'px'"
     >
-    <ng-container *ngTemplateOutlet="errorMessageTemplate"></ng-container>
+        <fd-form-message *ngIf="!!stateMessage" [type]="state" [innerHtml]="stateMessage"></fd-form-message>
         <ng-content></ng-content>
         <ng-container *ngIf="isGroup">
             <ng-container *ngFor="let group of _suggestions">
                 <ng-container *ngIf="!groupItemTemplate">
                     <li fd-list-group-header role="option">
-                        <span fd-list-title [attr.title]="group.label" >{{group.label}}</span>
+                        <span fd-list-title [attr.title]="group.label">{{ group.label }}</span>
                     </li>
                 </ng-container>
 
@@ -200,13 +204,4 @@
             ></ng-container>
         </ng-container>
     </ng-container>
-</ng-template>
-
-<ng-template #errorMessageTemplate>
-    <fd-form-message
-        *ngIf="_isSearchInvalid"
-        type="error"
-        [embedded]="isOpen">
-        Invalid entry
-    </fd-form-message>
 </ng-template>

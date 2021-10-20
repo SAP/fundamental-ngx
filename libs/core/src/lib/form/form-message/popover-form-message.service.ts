@@ -1,13 +1,10 @@
-import {
-    ElementRef, Injectable,
-} from '@angular/core';
+import { ElementRef, Injectable } from '@angular/core';
 import { MessageStates } from './form-message.component';
 import { PopoverService } from '@fundamental-ngx/core/popover';
 import { CSS_CLASS_NAME, getTypeClassName } from './constants';
 
 @Injectable()
 export class PopoverFormMessageService {
-
     /** @hidden */
     private _type: MessageStates;
 
@@ -17,9 +14,7 @@ export class PopoverFormMessageService {
     /** @hidden */
     private _hidden = false;
 
-    constructor(
-        private _popoverService: PopoverService
-    ) {}
+    constructor(private _popoverService: PopoverService) {}
 
     /** @hidden */
     set messageType(type: MessageStates) {
@@ -73,6 +68,6 @@ export class PopoverFormMessageService {
 
     /** @hidden */
     private _shouldBeHidden(): boolean {
-        return this._hidden || !this._message
+        return this._hidden || !this._message;
     }
 }

@@ -1,45 +1,45 @@
 .fdp-thumbnail-container {
-  $fdp-thumbnail-container-size: 33.125rem;
-  $fdp-thumbnail-container-margin: 1rem;
-  display: inline-flex;
-  width: auto;
-  height: auto;
+    $fdp-thumbnail-container-size: 33.125rem;
+    $fdp-thumbnail-container-margin: 1rem;
+    display: inline-flex;
+    width: auto;
+    height: auto;
 
-  &.fdp-thumbnail-container--horizontal {
-    display: block;
+    &.fdp-thumbnail-container--horizontal {
+        display: block;
+        .fdp-media-container {
+            width: $fdp-thumbnail-container-size;
+            height: $fdp-thumbnail-container-size;
+            padding: 0.688rem;
+            margin: 1rem;
+        }
+    }
+    img {
+        width: auto;
+        height: auto;
+        max-width: $fdp-thumbnail-container-size;
+        max-height: $fdp-thumbnail-container-size;
+        position: absolute;
+    }
+
+    video {
+        width: auto;
+        height: auto;
+        max-width: $fdp-thumbnail-container-size;
+        max-height: $fdp-thumbnail-container-size;
+        position: absolute;
+    }
+
     .fdp-media-container {
-      width: $fdp-thumbnail-container-size;
-      height: $fdp-thumbnail-container-size;
-      padding: 0.688rem;
-      margin: 1rem;
+        position: relative;
+        width: $fdp-thumbnail-container-size;
+        height: $fdp-thumbnail-container-size;
+        padding: 0.688rem;
+        margin: 1rem;
+        background-color: var(--sapNeutralBackground);
+        [dir='rtl'] & {
+            margin-left: 0;
+            margin-right: $fdp-thumbnail-container-margin;
+        }
     }
-  }
-  img {
-    width: auto;
-    height: auto;
-    max-width: $fdp-thumbnail-container-size;
-    max-height: $fdp-thumbnail-container-size;
-    position: absolute;
-  }
-
-  video {
-    width: auto;
-    height: auto;
-    max-width: $fdp-thumbnail-container-size;
-    max-height: $fdp-thumbnail-container-size;
-    position: absolute;
-  }
-
-  .fdp-media-container {
-    position: relative;
-    width: $fdp-thumbnail-container-size;
-    height: $fdp-thumbnail-container-size;
-    padding: 0.688rem;
-    margin: 1rem;
-    background-color: var(--sapNeutralBackground);
-    [dir="rtl"] & {
-      margin-left: 0;
-      margin-right: $fdp-thumbnail-container-margin;
-    }
-  }
 }

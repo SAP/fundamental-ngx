@@ -5,7 +5,7 @@ import { BarModule } from '@fundamental-ngx/core/bar';
 import { BreadcrumbModule } from '@fundamental-ngx/core/breadcrumb';
 import { FlexibleColumnLayoutModule } from '@fundamental-ngx/core/flexible-column-layout';
 import { ToolbarModule } from '@fundamental-ngx/core/toolbar';
-import { PlatformButtonModule} from '@fundamental-ngx/platform/button';
+import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformDynamicPageModule } from '@fundamental-ngx/platform/dynamic-page';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -54,4 +54,4 @@ const routes: Routes = [
         PlatformDynamicPageFlexibleColumnExampleComponent
     ]
 })
-export class PlatformDynamicPageDocsModule { }
+export class PlatformDynamicPageDocsModule {}

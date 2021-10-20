@@ -3,13 +3,11 @@ import { Validators } from '@angular/forms';
 
 import { WizardGeneratorFormsValue, WizardGeneratorItem } from '@fundamental-ngx/platform/wizard-generator';
 
-
 @Component({
-  selector: 'fdp-wizard-generator-summary-objects-example',
-  templateUrl: './wizard-generator-summary-objects-example.component.html'
+    selector: 'fdp-wizard-generator-summary-objects-example',
+    templateUrl: './wizard-generator-summary-objects-example.component.html'
 })
 export class WizardGeneratorSummaryObjectsExampleComponent {
-
     wizardValue: WizardGeneratorFormsValue;
 
     stepItems: WizardGeneratorItem[] = [
@@ -30,11 +28,7 @@ export class WizardGeneratorSummaryObjectsExampleComponent {
                                 column: 2
                             },
                             choices: () => {
-                                return [
-                                    'TV',
-                                    'Console',
-                                    'Laptop'
-                                ];
+                                return ['TV', 'Console', 'Laptop'];
                             },
                             validators: [Validators.required],
                             validate: (input) => {
@@ -44,7 +38,7 @@ export class WizardGeneratorSummaryObjectsExampleComponent {
                                 return value.join(', ');
                             }
                         }
-                    ],
+                    ]
                 }
             ]
         },
@@ -122,5 +116,4 @@ export class WizardGeneratorSummaryObjectsExampleComponent {
     wizardFinished(wizardValue: WizardGeneratorFormsValue): void {
         this.wizardValue = wizardValue;
     }
-
 }

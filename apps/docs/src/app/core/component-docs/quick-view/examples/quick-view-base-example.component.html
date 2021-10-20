@@ -10,8 +10,10 @@
             </fd-quick-view-subheader-subtitle>
         </fd-quick-view-subheader>
 
-        <fd-quick-view-group *ngFor="let group of data.groups; let i = index"
-                             [attr.aria-labelledby]="getGroupId(i, group)">
+        <fd-quick-view-group
+            *ngFor="let group of data.groups; let i = index"
+            [attr.aria-labelledby]="getGroupId(i, group)"
+        >
             <fd-quick-view-group-title [id]="getGroupId(i, group)">
                 {{ group.title }}
             </fd-quick-view-group-title>
@@ -21,22 +23,21 @@
                 </fd-quick-view-group-item-label>
                 <fd-quick-view-group-item-content>
                     <ng-container [ngSwitch]="item.label">
-                        <a *ngSwitchCase="item.label === 'Mobile' || item.label === 'Phone' ? item.label : ''"
-                           [href]="'tel:' + item.value"
-                           [innerText]="item.value"
-                           fd-link
-                           fd-quick-view-group-item-content-element
+                        <a
+                            *ngSwitchCase="item.label === 'Mobile' || item.label === 'Phone' ? item.label : ''"
+                            [href]="'tel:' + item.value"
+                            [innerText]="item.value"
+                            fd-link
+                            fd-quick-view-group-item-content-element
                         ></a>
-                        <a *ngSwitchCase="'Email'"
-                           [href]="'mailto:' + item.value"
-                           [innerText]="item.value"
-                           fd-link
-                           fd-quick-view-group-item-content-element
+                        <a
+                            *ngSwitchCase="'Email'"
+                            [href]="'mailto:' + item.value"
+                            [innerText]="item.value"
+                            fd-link
+                            fd-quick-view-group-item-content-element
                         ></a>
-                        <div *ngSwitchDefault
-                             [innerText]="item.value"
-                             fd-quick-view-group-item-content-element
-                        ></div>
+                        <div *ngSwitchDefault [innerText]="item.value" fd-quick-view-group-item-content-element></div>
                     </ng-container>
                 </fd-quick-view-group-item-content>
             </fd-quick-view-group-item>

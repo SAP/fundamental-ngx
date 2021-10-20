@@ -5,23 +5,24 @@ import { AvatarComponent, AvatarModule } from '@fundamental-ngx/core/avatar';
 
 @Component({
     selector: 'fd-test-object-status',
-    template:  `<fd-avatar
-                    [size]="size"
-                    [glyph]="glyph"
-                    [circle]="circle"
-                    [transparent]="transparent"
-                    [placeholder]="placeholder"
-                    [contain]="contain"
-                    [tile]="tile"
-                    [colorAccent]="colorAccent"
-                    [random]="random"
-                    [zoomGlyph]="zoomGlyph"
-                    [border]="border"
-                    [label]="label">
-                </fd-avatar>`
+    template: `<fd-avatar
+        [size]="size"
+        [glyph]="glyph"
+        [circle]="circle"
+        [transparent]="transparent"
+        [placeholder]="placeholder"
+        [contain]="contain"
+        [tile]="tile"
+        [colorAccent]="colorAccent"
+        [random]="random"
+        [zoomGlyph]="zoomGlyph"
+        [border]="border"
+        [label]="label"
+    >
+    </fd-avatar>`
 })
 class TestComponent {
-    size: 'xs' |'s' | 'm' | 'l' | 'xl' = 'm';
+    size: 'xs' | 's' | 'm' | 'l' | 'xl' = 'm';
     glyph: string = null;
     circle = false;
     transparent = false;
@@ -39,14 +40,18 @@ describe('AvatarComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [AvatarModule]
-        }).overrideComponent(AvatarComponent, {
-            set: {changeDetection: ChangeDetectionStrategy.Default}
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [AvatarModule]
+            })
+                .overrideComponent(AvatarComponent, {
+                    set: { changeDetection: ChangeDetectionStrategy.Default }
+                })
+                .compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

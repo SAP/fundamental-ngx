@@ -29,7 +29,6 @@ import { RtlService } from '@fundamental-ngx/core/utils';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NestedListPopoverComponent implements NestedListPopoverInterface, AfterContentInit {
-
     /** @hidden
      * For Internal Usage - Gets information about title, which should be displayed inside popover
      */
@@ -120,7 +119,7 @@ export class NestedListPopoverComponent implements NestedListPopoverInterface, A
     /** @hidden */
     private _createRtlObservable(): void {
         this.placement$ = this._rtlService
-            ? this._rtlService.rtl.pipe(map(isRtl => isRtl ? 'left-start' : 'right-start'))
+            ? this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'left-start' : 'right-start')))
             : of('right-start');
     }
 }

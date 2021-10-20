@@ -8,20 +8,9 @@ import { ActionSheetBodyComponent } from './action-sheet-body/action-sheet-body.
 import { PopoverModule } from '@fundamental-ngx/core/popover';
 import { ButtonModule } from '@fundamental-ngx/core/button';
 
-
-
 @NgModule({
-    imports: [
-        CommonModule,
-        PopoverModule,
-        ButtonModule
-    ],
-    exports: [
-        ActionSheetComponent,
-        ActionSheetControlComponent,
-        ActionSheetItemComponent,
-        ActionSheetBodyComponent
-    ],
+    imports: [CommonModule, PopoverModule, ButtonModule],
+    exports: [ActionSheetComponent, ActionSheetControlComponent, ActionSheetItemComponent, ActionSheetBodyComponent],
     declarations: [
         ActionSheetComponent,
         ActionSheetControlComponent,

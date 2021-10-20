@@ -9,8 +9,8 @@
 
 ## Description
 
-The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to enhance existing functionality and 
-to provide a higher abstraction for the components by hiding most of the internal implementation details. The goal is 
+The `@fundamental-ngx/platform` is built on top of the `@fundamental-ngx/core` to enhance existing functionality and
+to provide a higher abstraction for the components by hiding most of the internal implementation details. The goal is
 to create a layer which is closer to application development and not to the library creators.
 
 Since there is a plan to generate UI programatically then components must be instantiable (they cannot be directives).
@@ -148,7 +148,6 @@ For an existing Angular CLI application,
 
     Note: Be careful while importing the entire `FundamentalNgxPlatformModule` as it loads all modules; we recommend to only import relevant modules as needed.
 
-
     Version 0.32.0 brings new way of importing individual modules, which is prefered way.
 
     ```typescript
@@ -203,7 +202,7 @@ For an existing Angular CLI application,
 
     Note: Due to SAP's needs was disabled support of select & plural i18n features (issue [#5098](https://github.com/SAP/fundamental-ngx/issues/5098)).
     Details how to provide such functionality see in [Wiki](https://github.com/SAP/fundamental-ngx/wiki/Internationalization-Supporting-in-@fundamental-ngx-platform).
-    
+
 ## Tests
 
 Fundamental Library for Angular makes use of Jasmine and Karma for its unit tests.

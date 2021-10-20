@@ -7,7 +7,6 @@ import { PopoverComponent } from './popover.component';
     selector: '[fdPopoverTrigger], [fd-popover-trigger]'
 })
 export class PopoverTriggerDirective implements OnDestroy {
-
     /** Set reference to Popover Component */
     @Input('fdPopoverTrigger')
     set popover(popover: PopoverComponent) {
@@ -34,7 +33,7 @@ export class PopoverTriggerDirective implements OnDestroy {
     private _isExpandedSubscription: Subscription;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) { }
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -47,7 +46,7 @@ export class PopoverTriggerDirective implements OnDestroy {
         if (popover) {
             this._isExpandedSubscription = popover.isOpenChange
                 .pipe(startWith(popover.isOpen))
-                .subscribe(isOpen => this.ariaExpanded = isOpen);
+                .subscribe((isOpen) => (this.ariaExpanded = isOpen));
         }
     }
 

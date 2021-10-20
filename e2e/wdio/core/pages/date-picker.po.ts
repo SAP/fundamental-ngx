@@ -17,7 +17,7 @@ export class DatePickerPo extends CoreBaseComponentPo {
     disabledExample = 'fd-date-picker-disabled-example ';
 
     months = '.fd-calendar__months';
-    calendarRow = '.fd-calendar__row'
+    calendarRow = '.fd-calendar__row';
     inputGroup = '.fd-input-group';
     calendarBody = '.fd-calendar__group:nth-child(2) ';
     calendarInput = '.fd-input';
@@ -25,12 +25,12 @@ export class DatePickerPo extends CoreBaseComponentPo {
     calendar = '.fd-calendar';
     calendarItem = 'td.fd-calendar__item';
     altCalendarItem = 'table td.fd-calendar__item';
-    currentMonthCalendarItem = '//td[not(contains(@class, \'fd-calendar__item--other-month\'))]';
+    currentMonthCalendarItem = "//td[not(contains(@class, 'fd-calendar__item--other-month'))]";
     selectedTimeLine = '> div';
     selectedItem = '.is-active';
     currentItem = 'td.fd-calendar__item--current ';
     itemText = ' .fd-calendar__text';
-    buttonText = ' .fd-button__text'
+    buttonText = ' .fd-button__text';
     message = '.fd-form-message--';
 
     frenchButton = 'button[label="French"]';
@@ -53,7 +53,7 @@ export class DatePickerPo extends CoreBaseComponentPo {
                 return i;
             }
         }
-    }
+    };
 
     getScreenshotFolder(): object {
         return super.getScreenshotFolder(this.url);

@@ -14,7 +14,7 @@ export class FormattedTextPo extends CoreBaseComponentPo {
         waitForPresent(this.inputHtmlText);
         waitForElDisplayed(this.inputHtmlText);
     }
-    
+
     getScreenshotFolder(): object {
         return super.getScreenshotFolder(this.url);
     }

@@ -1,22 +1,44 @@
 import { SelectPo } from '../pages/select.po';
 import {
-    click, getAttributeByName, getElementArrayLength,
-    getText, isElementClickable,
-    refreshPage, scrollIntoView
+    click,
+    getAttributeByName,
+    getElementArrayLength,
+    getText,
+    isElementClickable,
+    refreshPage,
+    scrollIntoView
 } from '../../driver/wdio';
 import {
-    disableSelectModeValueTestText, maxHeightTestText, mobileExampleTestText,
+    disableSelectModeValueTestText,
+    maxHeightTestText,
+    mobileExampleTestText,
     selectWithTwoColumnsTestText,
-    testTextValue, testTextValue6, testTextValue7, titleTestText
+    testTextValue,
+    testTextValue6,
+    testTextValue7,
+    titleTestText
 } from '../fixtures/appData/select-contents';
 
-describe('Select test suite', function() {
+describe('Select test suite', () => {
     const selectPage = new SelectPo();
     const {
-        selectModeExample, displayText, buttons, options, selectedValue_1, selectWithTwoColumnsExample,
-        selectedValue_2, selectSemanticStateExample, selectSemanticStateOption, customControlContentExample,
-        selectMobileExample, mobileCloseButton, mobileTitle, selectMaxHeightExample, selectNoneExample,
-        selectNowrapExample, selectInReactiveForms
+        selectModeExample,
+        displayText,
+        buttons,
+        options,
+        selectedValue_1,
+        selectWithTwoColumnsExample,
+        selectedValue_2,
+        selectSemanticStateExample,
+        selectSemanticStateOption,
+        customControlContentExample,
+        selectMobileExample,
+        mobileCloseButton,
+        mobileTitle,
+        selectMaxHeightExample,
+        selectNoneExample,
+        selectNowrapExample,
+        selectInReactiveForms
     } = selectPage;
 
     beforeAll(() => {
@@ -27,8 +49,7 @@ describe('Select test suite', function() {
         refreshPage();
     }, 2);
 
-    describe('Check Select Modes example', function() {
-
+    describe('Check Select Modes example', () => {
         it('should be able to select the option for default select', () => {
             checkOptions(selectModeExample, 2);
             expect(getText(selectedValue_1)).toBe(testTextValue);
@@ -49,16 +70,14 @@ describe('Select test suite', function() {
         });
     });
 
-    describe('Check Select with Two Columns example', function() {
-
+    describe('Check Select with Two Columns example', () => {
         it('should be able to select the option', () => {
             checkOptions(selectWithTwoColumnsExample, 22);
             expect(getText(selectedValue_2)).toBe(selectWithTwoColumnsTestText);
         });
     });
 
-    describe('Check Select Semantic States example', function() {
-
+    describe('Check Select Semantic States example', () => {
         it('should be able to select the option', () => {
             const selectLength = getElementArrayLength(selectSemanticStateExample + buttons);
             for (let i = 0; i < selectLength; i++) {
@@ -71,15 +90,13 @@ describe('Select test suite', function() {
         });
     });
 
-    describe('Check Custom Control Content With AutoResize example', function() {
-
+    describe('Check Custom Control Content With AutoResize example', () => {
         it('should be able to select the option', () => {
             checkOptions(customControlContentExample, 48);
         });
     });
 
-    describe('Check Select In Mobile Mode example', function() {
-
+    describe('Check Select In Mobile Mode example', () => {
         it('should be able to select the option', () => {
             checkOptions(selectMobileExample, 59);
             expect(getText(selectedValue_2, 1)).toBe(mobileExampleTestText);
@@ -94,32 +111,28 @@ describe('Select test suite', function() {
         });
     });
 
-    describe('Check Select Max Height example', function() {
-
+    describe('Check Select Max Height example', () => {
         it('should be able to select the option', () => {
             checkOptions(selectMaxHeightExample, 64);
             expect(getText(selectedValue_1, 4)).toBe(maxHeightTestText);
         });
     });
 
-    describe('Check No Value Select example', function() {
-
+    describe('Check No Value Select example', () => {
         it('should be able to select the option', () => {
             checkOptions(selectNoneExample, 90);
             expect(getText(selectedValue_1, 5)).toBe(maxHeightTestText);
         });
     });
 
-    describe('Check Do not Wrap the Options example', function() {
-
+    describe('Check Do not Wrap the Options example', () => {
         it('should be able to select the option', () => {
             checkOptions(selectNowrapExample, 95);
             expect(getText(selectedValue_1, 6)).toBe(maxHeightTestText);
         });
     });
 
-    describe('Check Select In A Reactive Form example', function() {
-
+    describe('Check Select In A Reactive Form example', () => {
         it('should be able to select the option', () => {
             checkOptions(selectInReactiveForms, 98);
             expect(getText(selectedValue_2, 2)).toBe(testTextValue6);
@@ -127,15 +140,13 @@ describe('Select test suite', function() {
         });
     });
 
-    describe('Check orientation', function() {
-
+    describe('Check orientation', () => {
         it('should check RTL and LTR', () => {
             selectPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
-
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             selectPage.saveExampleBaselineScreenshot();
             expect(selectPage.compareWithBaseline()).toBeLessThan(5);
@@ -150,4 +161,3 @@ describe('Select test suite', function() {
         expect(textBefore).not.toEqual(textAfter);
     }
 });
-

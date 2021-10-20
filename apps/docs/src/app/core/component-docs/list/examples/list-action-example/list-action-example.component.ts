@@ -16,14 +16,11 @@ export class ListActionExampleComponent {
     loadMore(): void {
         this.loading = true;
         of(this._getNewItems())
-            .pipe(
-                delay(2000)
-            )
-            .subscribe(result => {
+            .pipe(delay(2000))
+            .subscribe((result) => {
                 this.items = this.items.concat(result);
                 this.loading = false;
-            })
-        ;
+            });
     }
 
     _getNewItems(): number[] {

@@ -61,7 +61,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
             { url: 'platform/value-help-dialog', name: 'Value Help Dialog' },
             { url: 'platform/approval-flow', name: 'Approval Flow' },
             { url: 'platform/slider', name: 'Slider' },
-            { url: 'platform/icon-tab-bar', name: 'Icon Tab Bar' },
+            { url: 'platform/icon-tab-bar', name: 'Icon Tab Bar' }
         ];
 
         this.layouts = [
@@ -72,7 +72,7 @@ export class PlatformDocumentationComponent extends DocumentationBaseComponent {
 
         this.utilities = [
             { url: 'platform/form-generator', name: 'Form Generator' },
-            { url: 'platform/wizard-generator', name: 'Wizard Generator' },
+            { url: 'platform/wizard-generator', name: 'Wizard Generator' }
         ];
 
         this.sections = [

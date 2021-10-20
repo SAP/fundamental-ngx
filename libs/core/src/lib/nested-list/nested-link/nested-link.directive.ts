@@ -17,7 +17,6 @@ import { NestedItemService } from '../nested-item/nested-item.service';
     selector: '[fdNestedLink], [fd-nested-list-link]'
 })
 export class NestedLinkDirective {
-
     /** Function that is called on click event dispatch on this element. */
     @Input()
     onClickCallback: Function;
@@ -97,5 +96,4 @@ export class NestedLinkDirective {
     getTitle(): string {
         return this.title && this.title.getInnerText();
     }
-
 }

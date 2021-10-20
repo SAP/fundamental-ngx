@@ -16,17 +16,21 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { DialogModule, DialogService } from '@fundamental-ngx/core/dialog';
+import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { InputGroupModule } from '@fundamental-ngx/core/input-group';
 import { MultiInputModule } from '@fundamental-ngx/core/multi-input';
-import { DialogInnerPopoverComponent, DialogInnerPopoverExampleComponent } from './examples/dialog-inner-popover/dialog-inner-popover.component';
+import {
+    DialogInnerPopoverComponent,
+    DialogInnerPopoverExampleComponent
+} from './examples/dialog-inner-popover/dialog-inner-popover.component';
 
 const routes: Routes = [
     {
         path: '',
         component: DialogDocsHeaderComponent,
         children: [
-            {path: '', component: DialogDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.dialog}}
+            { path: '', component: DialogDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.dialog } }
         ]
     }
 ];
@@ -40,7 +44,8 @@ const routes: Routes = [
         DialogModule,
         InputGroupModule,
         A11yModule,
-        MultiInputModule
+        MultiInputModule,
+        CheckboxModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -57,8 +62,6 @@ const routes: Routes = [
         DialogStackedExampleComponent,
         DialogInnerPopoverExampleComponent
     ],
-    providers: [
-        DialogService
-    ]
+    providers: [DialogService]
 })
-export class DialogDocsModule { }
+export class DialogDocsModule {}

@@ -31,14 +31,14 @@ const LIST_ELEMENTS: Address[] = [
         name: 'Orange',
         description: 'First text item in Byline (Standard text item)',
         info: 'Second text item in Byline (Can be semantic (Status) or not)'
-    }];
+    }
+];
 export interface Address {
     name: string;
     img: string;
     description: string;
     imgInfo: string;
     info: string;
-
 }
 
 export class ListDataProvider extends DataProvider<Address> {
@@ -66,12 +66,11 @@ export class PlatformStandardListItemWithSelectionExampleComponent implements Af
 
     ngAfterViewInit(): void {
         const toolbar = this._elementRef.nativeElement.querySelector('fd-toolbar');
-        this._render.setAttribute(toolbar, 'tabindex', '0' );
-        this._render.setStyle(toolbar, 'outline', 'none' );
+        this._render.setAttribute(toolbar, 'tabindex', '0');
+        this._render.setStyle(toolbar, 'outline', 'none');
     }
 
     _showItemInfo(event: any): void {
         this._selectedItems = event.selectedItems;
     }
-
 }

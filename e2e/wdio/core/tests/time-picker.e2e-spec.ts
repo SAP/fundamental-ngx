@@ -14,15 +14,42 @@ import {
     sendKeys,
     getPreviousElementText,
     clickPreviousElement,
-    waitForElDisplayed,
+    waitForElDisplayed
 } from '../../driver/wdio';
 
-describe('Time-picker component test', function () {
+describe('Time-picker component test', () => {
     const timePickerPage = new TimePickerPo();
-    const { formExample, nullExample, localExample, compactExamle, defaultExample, disabledExample, formattingExample,
-        setToNullButton, setValidTimeButton, inputGroup, timeInput, clockIcon, formatDropDown, timePicker, currentHour, currentMinute,
-        hoursColumn, minutesColumn, thirdColumn, customTimePicker, amButton, pmButton, selectedTime, formatList, arFormat, bgFormat, bnFormat,
-        usFormat, zhFormat, frFormat
+    const {
+        formExample,
+        nullExample,
+        localExample,
+        compactExamle,
+        defaultExample,
+        disabledExample,
+        formattingExample,
+        setToNullButton,
+        setValidTimeButton,
+        inputGroup,
+        timeInput,
+        clockIcon,
+        formatDropDown,
+        timePicker,
+        currentHour,
+        currentMinute,
+        hoursColumn,
+        minutesColumn,
+        thirdColumn,
+        customTimePicker,
+        amButton,
+        pmButton,
+        selectedTime,
+        formatList,
+        arFormat,
+        bgFormat,
+        bnFormat,
+        usFormat,
+        zhFormat,
+        frFormat
     } = timePickerPage;
 
     beforeAll(() => {
@@ -38,24 +65,24 @@ describe('Time-picker component test', function () {
         checkTimePickerFormat(defaultExample);
         checkChoosingTime(defaultExample);
         setValueByKeyboard(defaultExample);
-    })
+    });
 
     it('should check formatting example', () => {
         checkTimePickerFormat(formattingExample);
         checkChoosingTime(formattingExample);
         setValueByKeyboard(formattingExample);
-    })
+    });
 
     it('should check disabled time-pickers', () => {
         expect(getElementClass(disabledExample + inputGroup)).toContain('is-disabled', 'Input is not disabled');
         expect(getElementClass(formExample + inputGroup, 1)).toContain('is-disabled', 'Input is not disabled');
-    })
+    });
 
     it('should check compact example', () => {
         checkTimePickerFormat(compactExamle);
         checkChoosingTime(compactExamle);
         setValueByKeyboard(compactExamle);
-    })
+    });
 
     it('should check null validaty example', () => {
         checkTimePickerFormat(nullExample);
@@ -67,7 +94,7 @@ describe('Time-picker component test', function () {
         expect(getElementClass(nullExample + inputGroup)).not.toContain('is-error', 'Error message is present');
         checkChoosingTime(nullExample);
         setValueByKeyboard(nullExample);
-    })
+    });
 
     it('should check form example', () => {
         checkTimePickerFormat(formExample);
@@ -81,13 +108,13 @@ describe('Time-picker component test', function () {
         click(formExample + clockIcon);
         checkChoosingTime(formExample);
         setValueByKeyboard(formExample);
-    })
+    });
 
     it('should check local example', () => {
         checkTimePickerFormat(localExample);
         checkChoosingTime(localExample);
         setValueByKeyboard(localExample);
-    })
+    });
 
     it('should check countries formats in local example', () => {
         const usInputValue = '3:30 PM';
@@ -116,18 +143,18 @@ describe('Time-picker component test', function () {
         const arAmValue = 'ص';
         const arPmValue = 'م';
         checkCountryFormat(arFormat, arInputValue, arAmValue, arPmValue);
-    })
+    });
 
     it('should check RTL and LTR orientation', () => {
         timePickerPage.checkRtlSwitch();
-    })
+    });
 
     xit('should check visual regression for all examples', () => {
         timePickerPage.saveExampleBaselineScreenshot();
         expect(timePickerPage.compareWithBaseline()).toBeLessThan(5);
-    })
+    });
 
-    function checkCountryFormat(format: string, inputValue?: string, amValue?: string, pmValue?: string) {
+    function checkCountryFormat(format: string, inputValue?: string, amValue?: string, pmValue?: string): void {
         refreshPage();
         click(formatDropDown);
         expect(isElementDisplayed(formatList)).toBe(true);
@@ -144,7 +171,7 @@ describe('Time-picker component test', function () {
         }
     }
 
-    function checkChoosingTime(section: string) {
+    function checkChoosingTime(section: string): void {
         click(section + clockIcon);
         expect(getElementClass(section + clockIcon)).toContain('is-expanded', 'Time picker is not expanded');
         expect(isElementDisplayed(timePicker)).toBe(true);
@@ -166,7 +193,7 @@ describe('Time-picker component test', function () {
         click(section + clockIcon);
     }
 
-    function setValueByKeyboard(section: string) {
+    function setValueByKeyboard(section: string): void {
         const value = '12:34 AM';
         clearValue(section + timeInput);
         setValue(section + timeInput, value);
@@ -180,19 +207,19 @@ describe('Time-picker component test', function () {
         }
     }
 
-    function checkTimePickerFormat(section: string) {
+    function checkTimePickerFormat(section: string): void {
         click(section + clockIcon);
         expect(doesItExist(hoursColumn)).toBe(true, 'Hours column does not exist');
         expect(doesItExist(minutesColumn)).toBe(true, 'Minutes column does not exist');
         if (section === formattingExample) {
-            expect(getElementClass(thirdColumn)).not.toContain('fd-time__wrapper--meridian', 'It is not meridian column');
+            expect(getElementClass(thirdColumn)).not.toContain(
+                'fd-time__wrapper--meridian',
+                'It is not meridian column'
+            );
         }
         if (section !== formattingExample) {
             expect(getElementClass(thirdColumn)).toContain('fd-time__wrapper--meridian', 'It is not meridian column');
         }
         click(section + clockIcon);
     }
-
 });
-
-

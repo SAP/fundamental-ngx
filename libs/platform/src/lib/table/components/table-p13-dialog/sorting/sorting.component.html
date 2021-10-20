@@ -3,11 +3,7 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h4
-                        fd-title
-                        [headerSize]="4"
-                        i18n="@@platformTableP13SortDialogHeader"
-                    >Sort</h4>
+                    <h4 fd-title [headerSize]="4" i18n="@@platformTableP13SortDialogHeader">Sort</h4>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -19,10 +15,7 @@
     </fd-dialog-header>
 
     <fd-dialog-body>
-        <div
-            class="sort-row"
-            *ngFor="let rule of rules; let i = index; trackBy: _trackByColumnKey"
-        >
+        <div class="sort-row" *ngFor="let rule of rules; let i = index; trackBy: _trackByColumnKey">
             <fd-select
                 class="sort-row__select"
                 [value]="rule.columnKey"
@@ -34,10 +27,10 @@
                 i18n-placeholder="@@platformTableP13SortDialogNoneSelectedColumn|Table column select placeholder"
             >
                 <fd-option
-                    *ngFor="let column of columns | getAvailableSortColumns : rules : rule.columnKey "
+                    *ngFor="let column of columns | getAvailableSortColumns: rules:rule.columnKey"
                     [value]="column.key"
                 >
-                    {{column.label}}
+                    {{ column.label }}
                 </fd-option>
             </fd-select>
 
@@ -49,17 +42,10 @@
                 ariaLabel="Sort direction"
                 i18n-ariaLabel="@@platformTableP13SortDialogRuleSortDirection"
             >
-                <fd-option
-                    [value]="SORT_DIRECTION.ASC"
-                    i18n="@@platformTableP13SortDialogSortOrderAsc"
-                >
+                <fd-option [value]="SORT_DIRECTION.ASC" i18n="@@platformTableP13SortDialogSortOrderAsc">
                     Ascending
                 </fd-option>
-
-                <fd-option
-                    [value]="SORT_DIRECTION.DESC"
-                    i18n="@@platformTableP13SortDialogSortOrderDesc"
-                >
+                <fd-option [value]="SORT_DIRECTION.DESC" i18n="@@platformTableP13SortDialogSortOrderDesc">
                     Descending
                 </fd-option>
             </fd-select>
@@ -89,9 +75,7 @@
                     (click)="_addNew(i)"
                 ></button>
             </div>
-
         </div>
-
     </fd-dialog-body>
 
     <fd-dialog-footer>
@@ -104,8 +88,7 @@
                 label="OK"
                 [compact]="true"
                 (click)="confirm()"
-            >
-            </button>
+            ></button>
         </fd-dialog-footer-button>
 
         <fd-dialog-footer-button>
@@ -118,8 +101,7 @@
                 label="Cancel"
                 [compact]="true"
                 (click)="cancel()"
-            >
-            </button>
+            ></button>
         </fd-dialog-footer-button>
     </fd-dialog-footer>
 </fd-dialog>

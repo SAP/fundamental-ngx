@@ -21,7 +21,7 @@ module.exports = () => {
             clearContext: false // leave Jasmine Spec Runner output visible in browser
         },
         coverageReporter: {
-            dir:  'coverage',
+            dir: 'coverage',
             type: 'html'
         },
         reporters: ['progress', 'coverage'],

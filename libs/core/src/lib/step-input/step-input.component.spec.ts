@@ -9,27 +9,29 @@ const initialValue = 100;
 
 @Component({
     template: `
-        <fd-step-input [(value)]="value"
-                       [locale]="locale"
-                       [step]="step"
-                       [compact]="compact"
-                       [state]="state"
-                       [inputTitle]="inputTitle"
-                       [unit]="unit"
-                       [inputId]="inputId"
-                       [ariaLabel]="ariaLabel"
-                       [incrementButtonIcon]="incrementButtonIcon"
-                       [decrementButtonIcon]="decrementButtonIcon"
-                       [incrementButtonTitle]="incrementButtonTitle"
-                       [decrementButtonTitle]="decrementButtonTitle">
+        <fd-step-input
+            [(value)]="value"
+            [locale]="locale"
+            [step]="step"
+            [compact]="compact"
+            [state]="state"
+            [inputTitle]="inputTitle"
+            [unit]="unit"
+            [inputId]="inputId"
+            [ariaLabel]="ariaLabel"
+            [incrementButtonIcon]="incrementButtonIcon"
+            [decrementButtonIcon]="decrementButtonIcon"
+            [incrementButtonTitle]="incrementButtonTitle"
+            [decrementButtonTitle]="decrementButtonTitle"
+        >
         </fd-step-input>
     `
 })
 class TestWrapperComponent {
-    @ViewChild(StepInputComponent, {static: true})
+    @ViewChild(StepInputComponent, { static: true })
     stepInputComponent: StepInputComponent;
 
-    @ViewChild(StepInputComponent, {read: ElementRef, static: true})
+    @ViewChild(StepInputComponent, { read: ElementRef, static: true })
     stepInputElement: ElementRef;
 
     step = 1;
@@ -65,13 +67,15 @@ describe('StepInputComponent', () => {
     let testComponent: TestWrapperComponent;
     let fixture: ComponentFixture<TestWrapperComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestWrapperComponent],
-            imports: [StepInputModule],
-            providers: [ContentDensityService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestWrapperComponent],
+                imports: [StepInputModule],
+                providers: [ContentDensityService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestWrapperComponent);
@@ -242,7 +246,7 @@ describe('StepInputComponent', () => {
     });
 
     it('should format values according to min max value limits', () => {
-        const context = {_max: 10, _min: -10, minFractionDigits: 2 };
+        const context = { _max: 10, _min: -10, minFractionDigits: 2 };
 
         expect(component['_checkValueLimits'].call(context, 12)).toEqual(10);
         expect(component['_checkValueLimits'].call(context, -12)).toEqual(-10);

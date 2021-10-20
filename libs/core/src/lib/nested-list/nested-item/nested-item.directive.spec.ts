@@ -78,7 +78,7 @@ class TestNestedContainerComponent {
     @ViewChild('iconElement', { read: NestedListExpandIconComponent })
     iconElement: NestedListExpandIconComponent;
 
-    @ViewChild('linkElement', {read: NestedLinkDirective })
+    @ViewChild('linkElement', { read: NestedLinkDirective })
     linkDirective: NestedLinkDirective;
 }
 
@@ -93,13 +93,15 @@ describe('NestedItemDirective', () => {
     let fixture: ComponentFixture<TestNestedContainerComponent>;
     let itemService: NestedItemService;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [NestedListModule, PopoverModule],
-            declarations: [TestNestedContainerComponent],
-            providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [NestedListModule, PopoverModule],
+                declarations: [TestNestedContainerComponent],
+                providers: [NestedListKeyboardService, MenuKeyboardService, NestedListStateService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNestedContainerComponent);
@@ -204,15 +206,17 @@ describe('NestedItemDirective', () => {
     });
 
     it('Popover Should handle keyboard event from sub items', () => {
-        spyOn((<any>nestedItemPopoverDirective), '_selectedChange');
+        spyOn(<any>nestedItemPopoverDirective, '_selectedChange');
         fixture.detectChanges();
         popoverSubItemElement.linkItem.onClick(new MouseEvent('click'));
         fixture.detectChanges();
-        expect((<any>nestedItemPopoverDirective)._selectedChange).toHaveBeenCalledWith((<any>popoverSubItemElement)._elementId);
+        expect((<any>nestedItemPopoverDirective)._selectedChange).toHaveBeenCalledWith(
+            (<any>popoverSubItemElement)._elementId
+        );
     });
 
     it('Should handle keyboard event from sub items', () => {
-        spyOn((<any>nestedItemListDirective), '_selectedChange');
+        spyOn(<any>nestedItemListDirective, '_selectedChange');
         fixture.detectChanges();
         subItemElement.linkItem.onClick(new MouseEvent('click'));
         fixture.detectChanges();

@@ -4,17 +4,6 @@ export const sections = [
     'fd-message-strip-width-example '
 ];
 
-export const messageTypes = [
-    'warning',
-    'success',
-    'information',
-    'error'
-];
+export const messageTypes = ['warning', 'success', 'information', 'error'];
 
-export const playgroundStates = [
-    'default',
-    'warning',
-    'error',
-    'success',
-    'information'
-];
+export const playgroundStates = ['default', 'warning', 'error', 'success', 'information'];

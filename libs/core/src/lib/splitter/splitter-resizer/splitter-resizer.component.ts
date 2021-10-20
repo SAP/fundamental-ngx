@@ -23,7 +23,6 @@ import { KeyUtil } from '@fundamental-ngx/core/utils';
 
 import { SplitterPaneContainerOrientation } from '../splitter-pane-container/splitter-pane-container.component';
 
-
 /** @dynamic */
 @Component({
     selector: 'fd-splitter-resizer',
@@ -113,7 +112,7 @@ export class SplitterResizerComponent implements OnDestroy {
     }
 
     /** @hidden */
-    @HostListener('keydown', [ '$event' ])
+    @HostListener('keydown', ['$event'])
     _onKeydown(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
             event.preventDefault();
@@ -184,7 +183,7 @@ export class SplitterResizerComponent implements OnDestroy {
                         const newPosition = this._isHorizontal ? event.clientY : event.clientX;
 
                         this._emitResize(newPosition);
-                        this._cdr.markForCheck()
+                        this._cdr.markForCheck();
                     });
                 });
 
@@ -194,7 +193,7 @@ export class SplitterResizerComponent implements OnDestroy {
                     this._ngZone.run(() => {
                         this.endResize.emit();
                         this._unsubscribe();
-                        this._cdr.markForCheck()
+                        this._cdr.markForCheck();
                     });
                 });
         });

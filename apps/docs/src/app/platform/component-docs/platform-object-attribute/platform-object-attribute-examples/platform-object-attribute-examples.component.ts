@@ -5,12 +5,11 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     templateUrl: './platform-object-attribute-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformObjectAttributeExampleComponent { }
+export class PlatformObjectAttributeExampleComponent {}
 
 @Component({
     selector: 'fdp-object-attribute-truncate-example',
     templateUrl: './platform-object-attribute-truncate-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PlatformObjectAttributeTruncateExampleComponent { }
-
+export class PlatformObjectAttributeTruncateExampleComponent {}
