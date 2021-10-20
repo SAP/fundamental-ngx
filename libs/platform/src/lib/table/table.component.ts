@@ -1914,12 +1914,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
                             this.tableContainer.nativeElement,
                             this.focusableMock.nativeElement
                         );
-
-                        if (!event.shiftKey && !this._tableService.isFocusInsideTableCell) {
-                            shouldDelegateFocus = false;
-
-                            this.focusableMock.nativeElement.focus();
-                        }
                     }
                 })
         );
