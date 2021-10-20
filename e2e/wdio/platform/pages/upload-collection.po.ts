@@ -24,6 +24,9 @@ export class UploadCollectionPo extends BaseComponentPo {
     dialogCreateButton = 'button.fd-dialog__decisive-button';
     tableItemCount = ' span~span';
     menuButton = '.fd-menu__item';
+    checkbox = ' [labelclass="fd-table__checkbox-label"]';
+    busyIndicator = ' .fd-busy-indicator';
+    fileNameLabel = ' .fdp-upload-collection__vertical-align-center span';
 
     open(): void {
         super.open(this.url);

@@ -5,11 +5,14 @@ import {
     getElementArrayLength,
     getElementPlaceholder,
     getText,
+    getValue,
     isElementClickable,
+    pause,
     refreshPage,
     scrollIntoView,
     sendKeys,
     setValue,
+    waitForNotDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import {
@@ -40,7 +43,10 @@ describe('Upload collection test suite', () => {
         dialogInputField,
         dialogCreateButton,
         tableItemCount,
-        menuButton
+        menuButton,
+        checkbox,
+        busyIndicator,
+        fileNameLabel
     } = uploadCollectionPage;
 
     beforeAll(() => {
@@ -105,9 +111,26 @@ describe('Upload collection test suite', () => {
         checkClickabilityCancelButton(defaultExample);
     });
 
+    it('should check renaming folder', () => {
+        checkRenaming(turnOffExample);
+        checkRenaming(defaultExample);
+    });
+
     it('should check orientation', () => {
         uploadCollectionPage.checkRtlSwitch();
     });
+
+    function checkRenaming(selector: string): void {
+        const defaultName = getText(selector + fileNameLabel);
+        scrollIntoView(selector + checkbox);
+        click(selector + checkbox, 1);
+        click(selector + inputFields);
+        sendKeys('Backspace');
+        sendKeys('0');
+        click(selector + checkbox, 1);
+        waitForNotDisplayed(selector + busyIndicator);
+        expect(getText(selector + fileNameLabel)).not.toEqual(defaultName);
+    }
 
     function checkDisplayedItemsPerPage(selector: string): void {
         scrollIntoView(selector + buttons);
