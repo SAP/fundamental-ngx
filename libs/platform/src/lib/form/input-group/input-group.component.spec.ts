@@ -10,10 +10,18 @@ import { FormFieldComponent } from '../form-group/form-field/form-field.componen
 import { FdpFormGroupModule } from '../form-group/fdp-form.module';
 import { PlatformInputGroupModule } from './input-group.module';
 import { InputGroupComponent } from './input-group.component';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
+
+const INPUT_GROUP_IDENTIFIER = 'platform-input-group-unit-test';
 
 @Component({
     template: `
-        <fdp-input-group name="example" [contentDensity]="contentDensity" [disabled]="disabled">
+        <fdp-input-group
+            name="example"
+            [contentDensity]="contentDensity"
+            [disabled]="disabled"
+            id="${INPUT_GROUP_IDENTIFIER}"
+        >
             <fdp-input-group-addon>$</fdp-input-group-addon>
             <fdp-input-group-input></fdp-input-group-input>
             <fdp-input-group-addon>0.00</fdp-input-group-addon>
@@ -204,4 +212,22 @@ describe('Input group within platform form', () => {
 
         expect(formControl.touched).toBeTrue();
     });
+});
+
+runValueAccessorTests<InputGroupComponent, InputGroupHostComponent>({
+    component: InputGroupComponent,
+    testModuleMetadata: {
+        imports: [CommonModule, PlatformButtonModule, PlatformInputGroupModule],
+        declarations: [InputGroupHostComponent]
+    },
+    hostTemplate: {
+        hostComponent: InputGroupHostComponent,
+        getTestingComponent: (fixture) => fixture.componentInstance.inputGroupComponent
+    },
+    supportsOnBlur: true,
+    nativeControlSelector: `input[id="${INPUT_GROUP_IDENTIFIER}"]`,
+    internalValueChangeSetter: (fixture, value) => {
+        fixture.componentInstance.inputGroupComponent.value = value;
+    },
+    getComponentValue: (fixture) => fixture.componentInstance.inputGroupComponent.value
 });

@@ -140,9 +140,9 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/schematics": "~12.0.5",
     "@angular-devkit/build-angular": "~12.0.5",
     "@angular-devkit/core": "~12.0.5",
+    "@angular-devkit/schematics": "~12.0.5",
     "@angular/cli": "~12.0.5",
     "@angular/compiler-cli": "~12.0.5",
     "@angular/language-service": "~12.0.5",
@@ -198,6 +198,7 @@
     "lint-staged": "11.2.3",
     "nan": "2.14.2",
     "ng-packagr": "12.2.1",
+    "ngx-cva-test-suite": "~1.0.4",
     "prettier": "2.4.1",
     "rollup": "2.58.0",
     "standard-version": "9.3.1",
