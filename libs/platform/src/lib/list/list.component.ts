@@ -10,7 +10,6 @@ import {
     EventEmitter,
     forwardRef,
     Host,
-    HostBinding,
     HostListener,
     Input,
     OnDestroy,
