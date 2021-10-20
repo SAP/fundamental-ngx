@@ -2,8 +2,8 @@ import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/cor
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Subject } from 'rxjs';
 import { CONTROL, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
-import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { DndKeyboardGroupDirective } from '../dnd-keyboard-group/dnd-keyboard-group.directive';
+import { KeyUtil } from '../../functions/key-util';
 
 /**
  * This directive is used to provide drag & drop with keyboard support.
