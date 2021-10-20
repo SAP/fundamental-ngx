@@ -57,8 +57,6 @@ import {
     ObservableMultiComboBoxDataSource,
     SelectableOptionItem
 } from '@fundamental-ngx/platform/shared';
-import { MultiComboboxComponent } from '../multi-combobox/multi-combobox.component';
-import { ListConfig } from '@fundamental-ngx/platform/list';
 import { TextAlignment } from '../../combobox';
 import { MultiComboboxConfig } from '../multi-combobox.config';
 
@@ -505,6 +503,12 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
         this.selectionChange.emit(event);
     }
 
+    /**
+     * Used to change the value of a control.
+     * @param value the value to be applied
+     * @param emitOnChange whether to emit "onChange" event.
+     * Should be "false", if the change is made programmatically (internally) by the control, "true" otherwise
+     */
     protected setValue(value: any, emitOnChange = true): void {
         this.selectedItems = coerceArraySafe(value);
         super.setValue(this.selectedItems, emitOnChange);

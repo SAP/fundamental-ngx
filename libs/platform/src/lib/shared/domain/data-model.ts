@@ -1,5 +1,5 @@
 import { coerceArray } from '@angular/cdk/coercion';
-import { isBlank } from './../';
+import { isBlank } from './../utils/lang';
 
 /**
  * Interface SelectItem is used to deal with complex object in order to be able to format
@@ -79,7 +79,7 @@ export interface MultiInputOption {
 export const isOptionItem = isSelectItem;
 export const isSelectableOptionItem = isSelectableItem;
 
-/** 
+/**
  * Wraps the provided value in an array, unless it is an array already.
  * If `null` or `undefined` is received, will return an empty array.
  */
