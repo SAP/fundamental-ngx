@@ -26,7 +26,12 @@ export class UploadCollectionPo extends BaseComponentPo {
     menuButton = '.fd-menu__item';
     checkbox = ' [labelclass="fd-table__checkbox-label"]';
     busyIndicator = ' .fd-busy-indicator';
-    fileNameLabel = ' .fdp-upload-collection__vertical-align-center span';
+    tableItem = ' .fdp-upload-collection__vertical-align-center';
+    fileNameLabel = this.tableItem + ' span';
+    listItem = '.fd-list__item';
+    listItemTitle = '.fd-list__title';
+    moveButton = '.fd-button--emphasized';
+    ghostButton = ' .fd-button--ghost';
 
     open(): void {
         super.open(this.url);

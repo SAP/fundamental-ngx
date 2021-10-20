@@ -5,9 +5,7 @@ import {
     getElementArrayLength,
     getElementPlaceholder,
     getText,
-    getValue,
     isElementClickable,
-    pause,
     refreshPage,
     scrollIntoView,
     sendKeys,
@@ -46,7 +44,12 @@ describe('Upload collection test suite', () => {
         menuButton,
         checkbox,
         busyIndicator,
-        fileNameLabel
+        fileNameLabel,
+        listItemTitle,
+        listItem,
+        moveButton,
+        tableItem,
+        ghostButton
     } = uploadCollectionPage;
 
     beforeAll(() => {
@@ -116,9 +119,42 @@ describe('Upload collection test suite', () => {
         checkRenaming(defaultExample);
     });
 
+    // skipped due to broken layout https://github.com/SAP/fundamental-ngx/issues/6911
+    xit('should check moving folders', () => {
+        checkMovingFolders(defaultExample);
+        checkMovingFolders(turnOffExample);
+    });
+
     it('should check orientation', () => {
         uploadCollectionPage.checkRtlSwitch();
     });
+
+    function checkMovingFolders(selector: string): void {
+        const movedFolderName = getText(selector + fileNameLabel);
+        click(selector + tableItem);
+        click(selector + checkbox, 1);
+        click(selector + ghostButton);
+        const folderName = getText(listItemTitle, 1);
+        click(listItem, 1);
+        click(moveButton);
+        const itemsLength = getElementArrayLength(selector + tableItem);
+        for (let i = 0; i < itemsLength; i++) {
+            scrollIntoView(selector + tableItem, i);
+            if (getText(selector + fileNameLabel, i) === folderName) {
+                click(selector + fileNameLabel, i);
+                break;
+            }
+        }
+        let j = 0;
+        const subItemsLength = getElementArrayLength(selector + tableItem);
+        for (let i = 0; i < subItemsLength; i++) {
+            if (getText(selector + fileNameLabel, i) === movedFolderName) {
+                j = 1;
+                break;
+            }
+        }
+        expect(j).toBe(1);
+    }
 
     function checkRenaming(selector: string): void {
         const defaultName = getText(selector + fileNameLabel);
