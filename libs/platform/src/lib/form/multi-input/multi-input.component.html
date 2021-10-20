@@ -26,10 +26,10 @@
 
 <ng-template #controlTemplate>
     <fd-input-group
-        [button]="!readonly"
+        [button]="true"
         [buttonFocusable]="false"
         [isControl]="true"
-        [glyph]="'value-help'"
+        glyph="value-help"
         [state]="status"
         [disabled]="disabled"
         [compact]="contentDensity === 'compact'"
@@ -37,6 +37,9 @@
         (addOnButtonClicked)="!mobile && addOnButtonClick()"
         (click)="mobile && onPrimaryButtonClick(false)"
     >
+        <span [attr.id]="tokenHiddenId" aria-hidden="true" class="fdp-multi-input__invisible-text"
+            >Contains {{ selected.length || 'no' }} token</span
+        >
         <fd-tokenizer
             *ngIf="selected"
             [compact]="contentDensity === 'compact'"
@@ -44,14 +47,20 @@
             class="fd-multi-input-tokenizer-custom"
             [class]="contentDensity === 'compact' ? 'fd-multi-input-tokenizer-custom--compact' : ''"
             (moreClickedEvent)="moreClicked()"
+            tabindex="-1"
+            role="listbox"
         >
             <fd-token
                 [readOnly]="disabled"
                 [compact]="contentDensity === 'compact'"
                 (onCloseClick)="removeToken(token)"
-                *ngFor="let token of selected"
-                >{{ token.label }}</fd-token
+                *ngFor="let token of selected; let i = index"
+                [attr.aria-posinset]="i"
+                [attr.aria-setsize]="selected.length"
             >
+                <span [innerText]="token.label | displayFnPipe: displayFn"></span>
+            </fd-token>
+
             <input
                 #searchInputElement
                 type="text"
@@ -64,18 +73,23 @@
                 [options]="_suggestions"
                 fd-input-group-input
                 fd-form-control
-                [id]="id"
+                [attr.id]="id"
+                [displayFn]="displayFn"
                 [disabled]="disabled"
                 [(ngModel)]="inputText"
                 (ngModelChange)="searchTermChanged()"
+                [ngModelOptions]="{ standalone: true }"
                 [placeholder]="placeholder"
                 (focus)="onTouched()"
                 [attr.aria-expanded]="isOpen && _suggestions.length > 0"
                 [readonly]="readonly"
+                aria-haspopup="listbox"
                 [attr.aria-readonly]="readonly"
                 [attr.aria-label]="ariaLabel"
                 [attr.aria-labelledby]="ariaLabelledBy"
                 [attr.aria-required]="required"
+                [attr.aria-describedby]="tokenHiddenId"
+                aria-roledescription="Multi Value Input"
             />
         </fd-tokenizer>
     </fd-input-group>
@@ -88,6 +102,8 @@
         [selectionMode]="selectionMode"
         [contentDensity]="contentDensity"
         *ngIf="_suggestions && _suggestions.length"
+        role="listbox"
+        aria-multiselectable="true"
     >
         <ng-container *ngIf="!isGroup">
             <fdp-standard-list-item
@@ -98,6 +114,7 @@
                 (itemSelected)="addToArray(listItem)"
                 [contentDensity]="contentDensity"
                 (buttonClicked)="deleteToken(listItem)"
+                [role]="option"
             >
             </fdp-standard-list-item>
         </ng-container>
@@ -119,6 +136,7 @@
                     [title]="optionItem.label"
                     (itemSelected)="addToArray(optionItem)"
                     (buttonClicked)="deleteToken($event)"
+                    role="option"
                 >
                 </fdp-standard-list-item>
             </ng-container>

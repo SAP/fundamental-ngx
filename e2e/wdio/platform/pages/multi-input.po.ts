@@ -4,7 +4,7 @@ export class MultiInputPo extends BaseComponentPo {
     private url = '/multi-input';
     root = '#page-content';
     header = 'h2';
-    expandedDropdown = '.fd-list';
+    expandedDropdown = 'fdp-list .fd-list';
     activeDropdownButtons = 'button[aria-label="value-help"]';
     activeInputs = '.fd-input-group.fd-input-group--control input';
     mobileInput = 'div[role="dialog"] input';
@@ -19,7 +19,7 @@ export class MultiInputPo extends BaseComponentPo {
     dropdownOptionTextValueHelp = '[role="option"]';
 
     crossButton = (option: string) => {
-        return `//span[text() = '${option}']/following-sibling::span`;
+        return `//span[text() = '${option}']/../following-sibling::span`;
     };
 
     selectedDropDownOption = (name: string) => {

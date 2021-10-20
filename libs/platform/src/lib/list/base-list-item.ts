@@ -161,6 +161,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     itemSelected = new EventEmitter<ModifyItemEvent>();
     /** role */
     @HostBinding('attr.role')
+    @Input()
     role = 'listitem';
     /** Event sent when delete, details or any other action buttons are clicked */
     @Output()

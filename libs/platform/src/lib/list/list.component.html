@@ -16,6 +16,7 @@
     [attr.aria-setsize]="ariaSetsize"
     [attr.aria-label]="ariaLabel"
     [attr.aria-multiselectable]="ariaMultiselectable"
+    [attr.role]="role"
 >
     <ng-container *ngIf="loadMore && loadOnScroll">
         <fd-busy-indicator
@@ -34,6 +35,7 @@
                 [style.max-height]="maxHeight"
                 (onScrollAction)="_scrollHandler()"
                 [scrollPercent]="scrollOffsetPercentage"
+                [attr.role]="role"
             >
                 <ng-template *ngIf="_items.length !== 0; then thenBlock; else elseBlock"> </ng-template>
             </div>
