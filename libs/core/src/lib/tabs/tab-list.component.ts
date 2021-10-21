@@ -19,7 +19,7 @@ import {
 } from '@angular/core';
 import { fromEvent, merge, Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, delay, filter, first, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
-import { getElementCapacity, getElementWidth, KeyUtil } from '@fundamental-ngx/core/utils';
+import { getElementCapacity, getElementWidth, KeyUtil, resizeObservable } from '@fundamental-ngx/core/utils';
 import { TabItemExpandComponent } from './tab-item-expand/tab-item-expand.component';
 import { TabLinkDirective } from './tab-link/tab-link.directive';
 import { TabItemDirective } from './tab-item/tab-item.directive';
@@ -148,6 +148,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     constructor(
         private _tabsService: TabsService,
         private _changeDetectorRef: ChangeDetectorRef,
+        private _elRef: ElementRef,
         @Optional() private _contentDensityService: ContentDensityService
     ) {}
 
@@ -228,8 +229,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     private get _tabPanelsChange$(): Observable<TabPanelComponent[]> {
         return this.tabPanels.changes.pipe(
             startWith(this.tabPanels),
-            takeUntil(this._onDestroy$),
-            map((tabPanels) => tabPanels.toArray())
+            map((tabPanels) => tabPanels.toArray(), takeUntil(this._onDestroy$))
         );
     }
 
@@ -264,7 +264,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     private _listenOnTabPanelsAndSetupStackedContent(): void {
         if (this.stackContent) {
             this._tabPanelsChange$
-                .pipe(delay(0))
+                .pipe(delay(0), takeUntil(this._onDestroy$))
                 .subscribe(() =>
                     this._tabArray.filter((tab) => !tab.panel.disabled).forEach((tab) => tab.panel._expand(true))
                 );
@@ -273,11 +273,16 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
 
     /** @hidden */
     private _listenOnTabPanelsAndUpdateStorageStructures(): void {
-        this._tabPanelsChange$.pipe(map((tabPanels) => tabPanels.map((el) => new TabInfo(el)))).subscribe((tabs) => {
-            this._tabArray = tabs;
-            this._numbOfVisibleTabs = tabs.length;
-            this._resetVisualOrder();
-        });
+        this._tabPanelsChange$
+            .pipe(
+                map((tabPanels) => tabPanels.map((el) => new TabInfo(el))),
+                takeUntil(this._onDestroy$)
+            )
+            .subscribe((tabs) => {
+                this._tabArray = tabs;
+                this._numbOfVisibleTabs = tabs.length;
+                this._resetVisualOrder();
+            });
     }
 
     /** @hidden */
@@ -285,7 +290,8 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         this._tabPanelsChange$
             .pipe(
                 map((tabPanels) => tabPanels.map((el) => el._expandedStateChange.asObservable())),
-                switchMap((tabPanels) => merge(...tabPanels))
+                switchMap((tabPanels) => merge(...tabPanels)),
+                takeUntil(this._onDestroy$)
             )
             .subscribe((event) => this._expandTab(event.target, event.state));
     }
@@ -297,7 +303,8 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
                 filter((_) => !this._tabArray.some((tab) => tab.active)),
                 map((_) => this._tabArray.find((tab) => !tab.disabled)),
                 filter((tab) => !!tab),
-                delay(0)
+                delay(0),
+                takeUntil(this._onDestroy$)
             )
             .subscribe((tab) => this._expandTab(tab.panel, true));
     }
@@ -313,16 +320,16 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     private _listenOnKeyboardTabSelect(): void {
         this._tabsService.tabSelected
             .pipe(
-                takeUntil(this._onDestroy$),
-                map((index) => this._visualOrder.visible[index].panel)
+                map((index) => this._visualOrder.visible[index].panel),
+                takeUntil(this._onDestroy$)
             )
             .subscribe((tabPanel) => this._expandTab(tabPanel, !tabPanel.expanded));
     }
 
     /** @hidden */
     private _listenOnResizeAndHideItems(): void {
-        fromEvent(window, 'resize')
-            .pipe(debounceTime(100), takeUntil(this._onDestroy$))
+        resizeObservable(this._elRef.nativeElement)
+            .pipe(debounceTime(20), takeUntil(this._onDestroy$))
             .subscribe((_) => {
                 this.refreshOverflow();
                 this._detectChanges();
@@ -333,13 +340,14 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
     private _listenOnTabPanelsChangeAndCollapse(): void {
         const $tabHeadersSource = this.tabHeaders.changes.pipe(
             map((tabHeaders) => tabHeaders.toArray()),
-            first()
+            first(),
+            takeUntil(this._onDestroy$)
         );
 
         this.tabPanels.changes
             .pipe(
-                takeUntil(this._onDestroy$),
-                switchMap(() => $tabHeadersSource)
+                switchMap(() => $tabHeadersSource),
+                takeUntil(this._onDestroy$)
             )
             .subscribe((tabHeaders) => {
                 this._cacheTabsWidth(tabHeaders);
@@ -480,7 +488,7 @@ export class TabListComponent implements AfterContentInit, AfterViewInit, OnDest
         if (!(currentScrollPosition === maximumScrollTop && distanceToScroll > maximumScrollTop)) {
             !this._init ? (this._disableScrollSpy = true) : (this._init = false);
             fromEvent(containerElement, 'scroll')
-                .pipe(takeUntil(this._onDestroy$), debounceTime(100), first())
+                .pipe(debounceTime(100), first(), takeUntil(this._onDestroy$))
                 .subscribe(() => (this._disableScrollSpy = false));
             scrollTop(containerElement, distanceToScroll);
         }
