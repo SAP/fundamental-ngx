@@ -10,16 +10,16 @@ export const labelsArray = [
 ];
 export const favoriteColor = 'My';
 export const placeholdersArray = [
-        'Field placeholder text',
-        'Field placeholder text',
-        'Field placeholder text',
-        'Field placeholder text',
-        'Field placeholder text',
-        'Field placeholder text',
-        'Field placeholder text',
-        'Field placeholder text',
-        'Field placeholder text',
-        'Field placeholder text',
-        'Enter the sport name'
-    ];
+    'Field placeholder text',
+    'Field placeholder text',
+    'Field placeholder text',
+    'Field placeholder text',
+    'Field placeholder text',
+    'Field placeholder text',
+    'Field placeholder text',
+    'Field placeholder text',
+    'Field placeholder text',
+    'Field placeholder text',
+    'Enter the sport name'
+];
 export const errorText = 'Pellentesque metus lacus commodo eget justo ut rutrum varius nunc';
