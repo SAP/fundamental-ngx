@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.43 (2021-10-21)
+
+
+### Bug Fixes
+
+* **core:** rely on resize observer instead of window resize event ([#6940](https://github.com/SAP/fundamental-ngx/issues/6940)) ([abb99e5](https://github.com/SAP/fundamental-ngx/commit/abb99e509de0405d22442bb72c714c38c0cca1cd))
+
 ## 0.33.0-rc.42 (2021-10-21)
 
 
