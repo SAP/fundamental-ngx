@@ -7,7 +7,9 @@ import {
     getElementArrayLength,
     refreshPage,
     scrollIntoView,
-    setValue
+    setValue,
+    getValue,
+    sendKeys
 } from '../../driver/wdio';
 
 describe('Rating indicator test suite', () => {
@@ -19,7 +21,10 @@ describe('Rating indicator test suite', () => {
         starsRatingDisplayMode,
         starsRatingDynamicChanges,
         containerDynamicChanges,
-        inputsDynamicChanges
+        inputsDynamicChanges,
+        touchedInputsDynamicChanges,
+        inputsBasicExample,
+        touchedInputsBasicExample
     } = ratingIndicatorPage;
 
     beforeAll(() => {
@@ -50,6 +55,15 @@ describe('Rating indicator test suite', () => {
                     `${starsRatingDisplayMode} ${i} not clickable`
                 );
             }
+        });
+
+        it('should check that minimal value in input is 1', () => {
+            click(inputsBasicExample);
+            for (let i = parseFloat(getValue(inputsBasicExample)); i > 0; i = i - 0.1) {
+                sendKeys('ArrowDown');
+            }
+            sendKeys('ArrowDown');
+            expect(getValue(touchedInputsBasicExample)).toBe('0');
         });
     });
 
@@ -86,6 +100,15 @@ describe('Rating indicator test suite', () => {
                 2,
                 `${starsRatingDisplayMode} stars are not in display mode`
             );
+        });
+
+        it('should check that minimal value in input is 1', () => {
+            click(inputsDynamicChanges);
+            for (let i = parseInt(getValue(inputsDynamicChanges)); i !== 1; i--) {
+                sendKeys('ArrowDown');
+            }
+            sendKeys('ArrowDown');
+            expect(getValue(touchedInputsDynamicChanges)).toBe('1');
         });
     });
 
