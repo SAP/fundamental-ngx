@@ -97,7 +97,7 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
             verticalPadding: false,
             ...this.dialogConfig,
             backdropClickCloseable: false,
-            escKeyCloseable: false,
+            escKeyCloseable: true,
             container: this._elementRef.nativeElement
         });
 
