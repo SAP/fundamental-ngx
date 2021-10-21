@@ -29,5 +29,4 @@ export class InlineHelpPo extends CoreBaseComponentPo {
     compareWithBaseline(specName: string = 'inline-help'): any {
         return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
-
 }

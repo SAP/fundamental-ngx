@@ -1,17 +1,7 @@
 <div class="fd-calendar__years">
-    <table
-        class="fd-calendar__table"
-        role="grid"
-    >
-        <tbody
-            class="fd-calendar__group"
-            role="rowgroup"
-        >
-            <tr
-                class="fd-calendar__row"
-                role="row"
-                *ngFor="let colYears of calendarYearListGrid; let rowIndex = index"
-            >
+    <table class="fd-calendar__table" role="grid">
+        <tbody class="fd-calendar__group" role="rowgroup">
+            <tr class="fd-calendar__row" role="row" *ngFor="let colYears of calendarYearListGrid; let rowIndex = index">
                 <td
                     class="fd-calendar__item"
                     role="gridcell"
@@ -25,11 +15,7 @@
                     (keydown)="onKeydownYearHandler($event, yearCell.index)"
                     (click)="selectYear(yearCell, $event)"
                 >
-                    <span
-                        class="fd-calendar__text"
-                        role="button"
-                        [attr.aria-label]="yearCell.ariaLabel"
-                    >
+                    <span class="fd-calendar__text" role="button" [attr.aria-label]="yearCell.ariaLabel">
                         {{ yearCell.label }}
                     </span>
                 </td>

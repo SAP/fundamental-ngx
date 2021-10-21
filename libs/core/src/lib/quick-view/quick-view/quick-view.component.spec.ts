@@ -28,12 +28,18 @@ import { QuickViewComponent, QuickViewModule } from '@fundamental-ngx/core/quick
                     </fd-quick-view-group-item-label>
                     <fd-quick-view-group-item-content>
                         <ng-container [ngSwitch]="item.label">
-                            <a *ngSwitchCase="item.label === 'Mobile' || item.label === 'Phone' ? item.label : ''"
-                               [href]="'tel:' + item.value"
-                               [innerText]="item.value"
-                               fd-link
+                            <a
+                                *ngSwitchCase="item.label === 'Mobile' || item.label === 'Phone' ? item.label : ''"
+                                [href]="'tel:' + item.value"
+                                [innerText]="item.value"
+                                fd-link
                             ></a>
-                            <a *ngSwitchCase="'Email'" [href]="'mailto:' + item.value" [innerText]="item.value" fd-link></a>
+                            <a
+                                *ngSwitchCase="'Email'"
+                                [href]="'mailto:' + item.value"
+                                [innerText]="item.value"
+                                fd-link
+                            ></a>
                             <div *ngSwitchDefault [innerText]="item.value"></div>
                         </ng-container>
                     </fd-quick-view-group-item-content>
@@ -54,28 +60,38 @@ class TestComponent {
             subtitle: 'Account Manager',
             avatar: 'http://placeimg.com/500/500/people'
         },
-        groups: [{
-            title: 'Contact Details',
-            items: [{
-                label: 'Mobile',
-                value: '+1 605 555 5555'
-            }, {
-                label: 'Phone',
-                value: '+1 316 555 5555'
-            }, {
-                label: 'Email',
-                value: 'michael_adams@example.com'
-            }]
-        }, {
-            title: 'Company',
-            items: [{
-                label: 'Name',
-                value: 'Company A'
-            }, {
-                label: 'Address',
-                value: '718 Main Street, Anytown, SD 57401, USA'
-            }]
-        }]
+        groups: [
+            {
+                title: 'Contact Details',
+                items: [
+                    {
+                        label: 'Mobile',
+                        value: '+1 605 555 5555'
+                    },
+                    {
+                        label: 'Phone',
+                        value: '+1 316 555 5555'
+                    },
+                    {
+                        label: 'Email',
+                        value: 'michael_adams@example.com'
+                    }
+                ]
+            },
+            {
+                title: 'Company',
+                items: [
+                    {
+                        label: 'Name',
+                        value: 'Company A'
+                    },
+                    {
+                        label: 'Address',
+                        value: '718 Main Street, Anytown, SD 57401, USA'
+                    }
+                ]
+            }
+        ]
     };
 }
 
@@ -83,12 +99,14 @@ describe('QuickViewComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [QuickViewModule, AvatarModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [QuickViewModule, AvatarModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

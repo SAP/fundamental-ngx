@@ -6,17 +6,18 @@
     label="Dismiss All"
     [fdType]="'emphasized'"
     (click)="alertService.dismissAll()"
-    [disabled]="!alertService.hasOpenAlerts()">
-</button>
+    [disabled]="!alertService.hasOpenAlerts()"
+></button>
 
 <!-- Defining a template to open -->
 <ng-template let-alert #template>
     <p>{{ alert.data.firstLine }}</p>
     <p>{{ alert.data.secondLine }}</p>
-    <button fd-button
-            label="Click to dismiss"
-            [fdType]="'positive'"
-            [compact]="true"
-            (click)="alert.dismiss('Data passed back')">
-    </button>
+    <button
+        fd-button
+        label="Click to dismiss"
+        [fdType]="'positive'"
+        [compact]="true"
+        (click)="alert.dismiss('Data passed back')"
+    ></button>
 </ng-template>

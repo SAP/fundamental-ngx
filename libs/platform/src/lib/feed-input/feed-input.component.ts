@@ -8,7 +8,7 @@ import {
     ChangeDetectionStrategy,
     AfterViewInit,
     Renderer2,
-    ElementRef,
+    ElementRef
 } from '@angular/core';
 
 @Component({
@@ -55,10 +55,7 @@ export class FeedInputComponent implements AfterViewInit {
     value: string | null;
 
     /** @hidden */
-    constructor(
-        private _renderer: Renderer2
-    ) {
-    }
+    constructor(private _renderer: Renderer2) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -86,7 +83,7 @@ export class FeedInputComponent implements AfterViewInit {
         this._renderer.setStyle(this.textarea.nativeElement, 'height', 'inherit');
 
         const totalHeight = this._getTextareaTotalHeight();
-        this._renderer.setStyle(this.textarea.nativeElement, 'height', `${ totalHeight }px`);
+        this._renderer.setStyle(this.textarea.nativeElement, 'height', `${totalHeight}px`);
     }
 
     /** @hidden get line height of textarea */
@@ -94,7 +91,10 @@ export class FeedInputComponent implements AfterViewInit {
         if (this.textarea && this.textarea.nativeElement) {
             const lineHeight = window.getComputedStyle(this.textarea.nativeElement).getPropertyValue('line-height');
             if (lineHeight === 'normal') {
-                return parseInt(window.getComputedStyle(this.textarea.nativeElement).getPropertyValue('font-size'), 10) * 1.1;
+                return (
+                    parseInt(window.getComputedStyle(this.textarea.nativeElement).getPropertyValue('font-size'), 10) *
+                    1.1
+                );
             }
 
             return parseInt(lineHeight, 10);
@@ -105,8 +105,10 @@ export class FeedInputComponent implements AfterViewInit {
     private _getTextareaTotalHeight(): number {
         const computed = window.getComputedStyle(this.textarea.nativeElement);
 
-        return parseInt(computed.getPropertyValue('border-top-width'), 10) +
+        return (
+            parseInt(computed.getPropertyValue('border-top-width'), 10) +
             this.textarea.nativeElement.scrollHeight +
-            parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+            parseInt(computed.getPropertyValue('border-bottom-width'), 10)
+        );
     }
 }

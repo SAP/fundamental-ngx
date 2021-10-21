@@ -15,11 +15,13 @@ describe('TabItemDirective', () => {
     let directiveElement: TabItemDirective;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestNestedContainerComponent, TabItemDirective]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestNestedContainerComponent, TabItemDirective]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNestedContainerComponent);

@@ -17,7 +17,7 @@ const XL_COL_SIZE = 3;
     `
 })
 class TestNestedContainerComponent {
-    @ViewChild(LayoutGridColDirective, {static: true})
+    @ViewChild(LayoutGridColDirective, { static: true })
     directiveElement: LayoutGridColDirective;
 
     COL_SIZE = COL_SIZE;
@@ -31,11 +31,13 @@ describe('LayoutGridColDirective', () => {
     let directiveElement: LayoutGridColDirective;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestNestedContainerComponent, LayoutGridColDirective, LayoutGridComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestNestedContainerComponent, LayoutGridColDirective, LayoutGridComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNestedContainerComponent);
@@ -48,9 +50,17 @@ describe('LayoutGridColDirective', () => {
         fixture.detectChanges();
 
         expect(directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.col)).toBeTruthy();
-        expect(directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.colSizePrefix + COL_SIZE)).toBeTruthy();
-        expect(directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.mdColSizePrefix + MD_COL_SIZE)).toBeTruthy();
-        expect(directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.lgColSizePrefix + LG_COL_SIZE)).toBeTruthy();
-        expect(directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.xlColSizePrefix + XL_COL_SIZE)).toBeTruthy();
+        expect(
+            directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.colSizePrefix + COL_SIZE)
+        ).toBeTruthy();
+        expect(
+            directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.mdColSizePrefix + MD_COL_SIZE)
+        ).toBeTruthy();
+        expect(
+            directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.lgColSizePrefix + LG_COL_SIZE)
+        ).toBeTruthy();
+        expect(
+            directiveElement.elementRef().nativeElement.classList.contains(CSS_CLASS_NAME.xlColSizePrefix + XL_COL_SIZE)
+        ).toBeTruthy();
     });
 });

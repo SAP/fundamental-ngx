@@ -10,11 +10,18 @@ import {
     waitForPresent
 } from '../../driver/wdio';
 
-describe('Menu component test suite', function() {
+describe('Menu component test suite', () => {
     const menuPage = new MenuPo();
     const {
-        menuBtnArr, menuBtn, menuBtnTextArr, menuItemTextArr, iconMenuIconArr, menuItemOverlay, cascadingMenuBtn,
-        cascadingMenuItemsArr, cascadingVegMenuItemsArr,
+        menuBtnArr,
+        menuBtn,
+        menuBtnTextArr,
+        menuItemTextArr,
+        iconMenuIconArr,
+        menuItemOverlay,
+        cascadingMenuBtn,
+        cascadingMenuItemsArr,
+        cascadingVegMenuItemsArr
     } = menuPage;
 
     beforeAll(() => {
@@ -39,7 +46,6 @@ describe('Menu component test suite', function() {
         }
     });
 
-
     it('should check menu item text', () => {
         click(menuBtnArr);
         checkMenuItemText(menuItemTextArr);
@@ -62,7 +68,7 @@ describe('Menu component test suite', function() {
         menuPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             menuPage.saveExampleBaselineScreenshot();
             expect(menuPage.compareWithBaseline()).toBeLessThan(3);

@@ -1,10 +1,8 @@
-<fd-docs-section-title id="object-based" componentName="message-box">
-    Object based message box
-</fd-docs-section-title>
+<fd-docs-section-title id="object-based" componentName="message-box"> Object based message box </fd-docs-section-title>
 <description>
     The easiest and fastest way to create a simple message box is to use object based approach. Message box content can
-    be declared as a <code>MessageBoxContent</code> and passed as an argument to <code>MessageBoxService</code>.
-    To create a message box with more complex content use template reference as <code>MessageBoxContent.content</code>.
+    be declared as a <code>MessageBoxContent</code> and passed as an argument to <code>MessageBoxService</code>. To
+    create a message box with more complex content use template reference as <code>MessageBoxContent.content</code>.
 </description>
 <component-example>
     <fd-object-based-message-box-example></fd-object-based-message-box-example>
@@ -23,18 +21,17 @@
         <li>MessageBoxRef - <code>implicit</code></li>
         <li>MessageBoxConfig - <code>messageBoxConfig</code></li>
     </ul>
-    The MessageBoxRef and MessageBoxConfig references need to be passed to the message box component when using
-    template based message box. To receive message box dismiss/close reasons subscribe to the <code>afterClosed</code>
+    The MessageBoxRef and MessageBoxConfig references need to be passed to the message box component when using template
+    based message box. To receive message box dismiss/close reasons subscribe to the <code>afterClosed</code>
     observable.
     <ul>
         <li>Use <code>fd-message-box-footer-button</code> to wrap footer buttons and create space between them.</li>
         <li>
-            Add <code>fd-message-box-decisive-button</code> to key buttons like "Save" or "Cancel" to add proper
-            styles.
+            Add <code>fd-message-box-decisive-button</code> to key buttons like "Save" or "Cancel" to add proper styles.
         </li>
         <li>
-            By default after opening the message box first focusable element will be focused. To focus specific
-            element after opening the message box, use <code>fd-initial-focus</code> directive.
+            By default after opening the message box first focusable element will be focused. To focus specific element
+            after opening the message box, use <code>fd-initial-focus</code> directive.
         </li>
     </ul>
 </description>
@@ -61,11 +58,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="semantic-types" componentName="message-box">
-    Semantic types
-</fd-docs-section-title>
+<fd-docs-section-title id="semantic-types" componentName="message-box"> Semantic types </fd-docs-section-title>
 <description>
-    Message box supports various semantic types to visually highlight the type of the message. Use <code>MessageBoxConfig.type</code>
+    Message box supports various semantic types to visually highlight the type of the message. Use
+    <code>MessageBoxConfig.type</code>
     to create various types of message box.
 </description>
 <component-example>
@@ -81,7 +77,7 @@
 <description>
     The placement of the Message box on the screen can be customized through the <code>MessageBoxConfig.position</code>
     property.
-    <br/><br/>
+    <br /><br />
     Message Box can be configured <strong>globally</strong> by providing <code>MESSAGE_BOX_DEFAULT_CONFIG</code> token.
     Check <a [routerLink]="['/core/global-config']" fragment="message-box-config">Global Configuration page</a> for more
     information.
@@ -108,19 +104,18 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="complex-template" componentName="message-box">
-    Complex template
-</fd-docs-section-title>
+<fd-docs-section-title id="complex-template" componentName="message-box"> Complex template </fd-docs-section-title>
 <description>
-    To create more complex message box it is possible to provide custom header, subheader and footer templates.
-    To provide these custom templates, create an element with one of the following directives:
+    To create more complex message box it is possible to provide custom header, subheader and footer templates. To
+    provide these custom templates, create an element with one of the following directives:
     <ul>
         <li>Header - <code>fdTemplate="header"</code></li>
         <li>Subheader - <code>fdTemplate="subheader"</code></li>
         <li>Footer - <code>fdTemplate="footer"</code></li>
     </ul>
     Custom templates are embedded views for the Bar Component so it is possible to use Bar Component features inside
-    them. For complex templates you may use the <code>fd-bar-element</code> as an equivalent of the <code>fd-message-box-footer-button</code>.
+    them. For complex templates you may use the <code>fd-bar-element</code> as an equivalent of the
+    <code>fd-message-box-footer-button</code>.
 </description>
 <component-example>
     <fd-complex-template-example></fd-complex-template-example>

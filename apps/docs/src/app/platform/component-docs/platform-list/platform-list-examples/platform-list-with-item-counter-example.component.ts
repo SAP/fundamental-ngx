@@ -11,7 +11,8 @@ export interface Counter {
 })
 export class PlatformListWithItemCounterExampleComponent {
     items: Counter[] = [
-        { 'title': 'Item1', 'counter': '2134' },
-        { 'title': 'Item2', 'counter': '34562' },
-        { 'title': 'Item3', 'counter': '739' }];
+        { title: 'Item1', counter: '2134' },
+        { title: 'Item2', counter: '34562' },
+        { title: 'Item3', counter: '739' }
+    ];
 }

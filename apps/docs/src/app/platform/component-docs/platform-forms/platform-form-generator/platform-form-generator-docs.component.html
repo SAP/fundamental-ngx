@@ -29,19 +29,20 @@
 </fd-docs-section-title>
 <description>
     If default set of controls is not enough to cover your needs, <code>FormGeneratorService</code> allows to define
-    custom controls and render them for respective question types.
-    In order to make your component work properly, it should follow these requirements:
+    custom controls and render them for respective question types. In order to make your component work properly, it
+    should follow these requirements:
     <ul>
         <li>
             Component <b>must</b> include these
-            <code>viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]</code>,
-            which can be imported from <code>@fundamental-ngx/platform</code>;
+            <code>viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]</code>, which can be imported
+            from <code>@fundamental-ngx/platform</code>;
         </li>
         <li>
-            Component <b>must</b> inherit <code>BaseDynamicFormGeneratorControl</code>,
-            which can be imported from <code>@fundamental-ngx/platform</code>;
+            Component <b>must</b> inherit <code>BaseDynamicFormGeneratorControl</code>, which can be imported from
+            <code>@fundamental-ngx/platform</code>;
         </li>
-        <li>Inner form control should be wrapped with
+        <li>
+            Inner form control should be wrapped with
             <code>&lt;ng-container [formGroup]=&quot;form&quot;&gt;&lt;/ng-control&gt;</code>
             for appropriate binding to work.
         </li>
@@ -76,9 +77,9 @@
         <li>With validation function, which returns string if field is invalid;</li>
         <li>With predefined generic texts</li>
     </ul>
-    If you want to change default validation error messages, you can use <code>addValidationErrorHint</code> method
-    in <code>FormGeneratorService</code>.
-    This will allow you to override default ones, and add new generic validation error messages.
+    If you want to change default validation error messages, you can use <code>addValidationErrorHint</code> method in
+    <code>FormGeneratorService</code>. This will allow you to override default ones, and add new generic validation
+    error messages.
 </description>
 <component-example>
     <fdp-platform-form-generator-custom-error-example></fdp-platform-form-generator-custom-error-example>
@@ -91,7 +92,8 @@
     Form Generator with form field column layout and inline layout
 </fd-docs-section-title>
 <description>
-    This example shows arrangement of form-field based on <code>columnLayout</code> values and <code>inLineLayout</code> values.
+    This example shows arrangement of form-field based on <code>columnLayout</code> values and
+    <code>inLineLayout</code> values.
 </description>
 <component-example>
     <fdp-platform-form-generator-field-layout-example></fdp-platform-form-generator-field-layout-example>
@@ -104,8 +106,8 @@
     Form Generator labels without colons
 </fd-docs-section-title>
 <description>
-    By default, form generator labels rendered with colon at the end of the label.
-    To disable this behaviour please specify <code>appendColon: false</code> in <code>guiOptions</code> object.
+    By default, form generator labels rendered with colon at the end of the label. To disable this behaviour please
+    specify <code>appendColon: false</code> in <code>guiOptions</code> object.
 </description>
 <component-example>
     <fdp-platform-form-generator-no-colons-example></fdp-platform-form-generator-no-colons-example>

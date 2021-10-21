@@ -9,6 +9,5 @@ import { SwitchChangeEvent } from '@fundamental-ngx/platform/form';
 export class SemanticSwitchExampleComponent {
     switched = true;
 
-    onSwitchChange(value: SwitchChangeEvent): void {
-    }
+    onSwitchChange(value: SwitchChangeEvent): void {}
 }

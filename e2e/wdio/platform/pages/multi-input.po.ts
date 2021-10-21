@@ -3,6 +3,7 @@ import { click, doesItExist, scrollIntoView, sendKeys, waitForElDisplayed, waitF
 export class MultiInputPo extends BaseComponentPo {
     private url = '/multi-input';
     root = '#page-content';
+    header = 'h2';
     expandedDropdown = '.fd-list';
     activeDropdownButtons = 'button[aria-label="value-help"]';
     activeInputs = '.fd-input-group.fd-input-group--control input';
@@ -13,7 +14,7 @@ export class MultiInputPo extends BaseComponentPo {
     groupDropdown = '#fdp-id-grouped button';
     options = 'fdp-standard-list-item .fd-list__title';
     dropdownOptions = 'ul[role=list] [role="listitem"] li ';
-    selectedToken = 'span[role=\'button\']';
+    selectedToken = "span[role='button']";
     dropdownOptionText = this.dropdownOptions + 'span';
     dropdownOptionTextValueHelp = '[role="option"]';
 
@@ -26,7 +27,9 @@ export class MultiInputPo extends BaseComponentPo {
     };
 
     dropDownOption = (name: string) => {
-        return doesItExist('fdp-standard-list-item .fd-list__content') ? `//div[@title="${name}"]/../..` : `//span[@title="${name}"]/..`;
+        return doesItExist('fdp-standard-list-item .fd-list__content')
+            ? `//div[@title="${name}"]/../..`
+            : `//span[@title="${name}"]/..`;
     };
 
     expandDropdown(dropDownSelector: string, index: number = 0): void {

@@ -7,7 +7,6 @@ import { ShellbarMenuItem, ShellbarUser, ShellbarUserMenu, ShellbarSizes } from 
     templateUrl: './shellbar-collapsible-example.component.html'
 })
 export class ShellbarCollapsibleExampleComponent {
-
     currentSize: ShellbarSizes = 'm';
 
     sizesWidth = {

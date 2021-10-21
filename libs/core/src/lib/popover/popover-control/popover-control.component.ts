@@ -16,7 +16,6 @@ import { ChangeDetectionStrategy, Component, ElementRef, ViewEncapsulation } fro
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PopoverControlComponent {
-
     /** @hidden */
     constructor(public elRef: ElementRef) {}
 

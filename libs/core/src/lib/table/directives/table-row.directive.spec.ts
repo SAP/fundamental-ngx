@@ -7,18 +7,12 @@ import { TableService } from '../table.service';
 @Component({
     template: `
         <tr #directiveElement fd-table-row id="row">
-            <td fd-table-cell *ngFor="let key of keys" [key]="key">{{key}}</td>
+            <td fd-table-cell *ngFor="let key of keys" [key]="key">{{ key }}</td>
         </tr>
     `
 })
 class TestComponent {
-
-    keys: string[] = [
-        'key1',
-        'key2',
-        'key3',
-        'key4'
-    ];
+    keys: string[] = ['key1', 'key2', 'key3', 'key4'];
 
     @ViewChild(TableRowDirective)
     tableRow: TableRowDirective;
@@ -45,25 +39,26 @@ describe('TableRowDirective', () => {
     };
 
     const getInnerTextFromNodes = (): string[] => {
-        return getElements().map(cell => cell.innerHTML);
+        return getElements().map((cell) => cell.innerHTML);
     };
 
     const getVisibleCells = (): string[] => {
         return getElements()
-            .filter(cell => !cell.classList.contains(HIDDEN_CLASS_NAME))
-            .map(cell => cell.innerHTML)
-        ;
+            .filter((cell) => !cell.classList.contains(HIDDEN_CLASS_NAME))
+            .map((cell) => cell.innerHTML);
     };
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [TableModule],
-            providers: [TableService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [TableModule],
+                providers: [TableService]
+            }).compileComponents();
+        })
+    );
 
-    beforeEach(async() => {
+    beforeEach(async () => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -87,12 +82,7 @@ describe('TableRowDirective', () => {
 
         expect(getInnerTextFromNodes()).toEqual(keys);
 
-        keys = [
-            component.keys[1],
-            component.keys[0],
-            component.keys[3],
-            component.keys[2]
-        ];
+        keys = [component.keys[1], component.keys[0], component.keys[3], component.keys[2]];
 
         (<any>component.tableRow)._resetCells(keys);
 

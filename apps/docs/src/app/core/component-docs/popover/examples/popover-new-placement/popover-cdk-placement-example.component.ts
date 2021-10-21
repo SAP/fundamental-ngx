@@ -15,7 +15,7 @@ export class PopoverCdkPlacementExampleComponent {
     ];
 
     @ViewChild(PopoverComponent)
-    popover: PopoverComponent
+    popover: PopoverComponent;
 
     yPositions: YPositions[] = ['bottom', 'center', 'top'];
     xPositions: XPositions[] = ['start', 'center', 'end'];
@@ -25,7 +25,7 @@ export class PopoverCdkPlacementExampleComponent {
     overlayX: XPositions = 'center';
     overlayY: YPositions = 'center';
 
-    cdkPosition: ConnectionPositionPair[]
+    cdkPosition: ConnectionPositionPair[];
 
     constructor() {
         this.cdkPosition = this._buildCdkPositionObject();
@@ -37,11 +37,13 @@ export class PopoverCdkPlacementExampleComponent {
     }
 
     private _buildCdkPositionObject(): ConnectionPositionPair[] {
-        return [{
-            originX: this.originX,
-            originY: this.originY,
-            overlayX: this.overlayX,
-            overlayY: this.overlayY
-        }];
+        return [
+            {
+                originX: this.originX,
+                originY: this.originY,
+                overlayX: this.overlayX,
+                overlayY: this.overlayY
+            }
+        ];
     }
 }

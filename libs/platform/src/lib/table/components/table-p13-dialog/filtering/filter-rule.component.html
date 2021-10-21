@@ -1,8 +1,5 @@
 <div fdLayoutGridRow>
-    <div
-        fdLayoutGridCol
-        colGrow
-    >
+    <div fdLayoutGridCol colGrow>
         <div fdLayoutGridRow>
             <!-- Column -->
             <fd-select
@@ -14,10 +11,7 @@
                 (ngModelChange)="rule.setColumnKey($event)"
                 (ngModelChange)="_onModelChange()"
             >
-                <fd-option
-                    *ngFor="let column of rule.columns"
-                    [value]="column.key"
-                >{{ column.label }}</fd-option>
+                <fd-option *ngFor="let column of rule.columns" [value]="column.key">{{ column.label }}</fd-option>
             </fd-select>
             <!-- Strategy -->
             <fd-select
@@ -29,92 +23,65 @@
                 (ngModelChange)="rule.setStrategy($event)"
                 (ngModelChange)="_onModelChange()"
             >
-                <fd-option
-                    *ngFor="let strategy of rule.strategies"
-                    [value]="strategy"
-                >
+                <fd-option *ngFor="let strategy of rule.strategies" [value]="strategy">
                     <ng-container [ngSwitch]="strategy">
-                        <span 
-                            *ngSwitchCase="'between'" 
-                            i18n="@@platformTableP13FilterStrategyLabelBetween">
+                        <span *ngSwitchCase="'between'" i18n="@@platformTableP13FilterStrategyLabelBetween">
                             between
                         </span>
 
-                        <span 
-                            *ngSwitchCase="'contains'" 
-                            i18n="@@platformTableP13FilterStrategyLabelContains">
+                        <span *ngSwitchCase="'contains'" i18n="@@platformTableP13FilterStrategyLabelContains">
                             contains
                         </span>
 
-                        <span 
-                            *ngSwitchCase="'beginsWith'" 
-                            i18n="@@platformTableP13FilterStrategyLabelBeginsWith">
+                        <span *ngSwitchCase="'beginsWith'" i18n="@@platformTableP13FilterStrategyLabelBeginsWith">
                             begins with
                         </span>
 
-                        <span 
-                            *ngSwitchCase="'endsWith'" 
-                            i18n="@@platformTableP13FilterStrategyLabelEndsWith">
+                        <span *ngSwitchCase="'endsWith'" i18n="@@platformTableP13FilterStrategyLabelEndsWith">
                             ends with
                         </span>
 
-                        <span 
-                            *ngSwitchCase="'equalTo'" 
-                            i18n="@@platformTableP13FilterStrategyLabelEqualTo">
+                        <span *ngSwitchCase="'equalTo'" i18n="@@platformTableP13FilterStrategyLabelEqualTo">
                             equal to
                         </span>
 
-                        <span 
-                            *ngSwitchCase="'greaterThan'" 
-                            i18n="@@platformTableP13FilterStrategyLabelGreaterThan">
+                        <span *ngSwitchCase="'greaterThan'" i18n="@@platformTableP13FilterStrategyLabelGreaterThan">
                             greater than
                         </span>
 
-                        <span 
-                            *ngSwitchCase="'greaterThanOrEqualTo'" 
-                            i18n="@@platformTableP13FilterStrategyLabelGreaterThanOrEqualTo">
+                        <span
+                            *ngSwitchCase="'greaterThanOrEqualTo'"
+                            i18n="@@platformTableP13FilterStrategyLabelGreaterThanOrEqualTo"
+                        >
                             greater than or equal to
                         </span>
 
-                        <span 
-                            *ngSwitchCase="'lessThan'" 
-                            i18n="@@platformTableP13FilterStrategyLabelLessThan">
+                        <span *ngSwitchCase="'lessThan'" i18n="@@platformTableP13FilterStrategyLabelLessThan">
                             less than
                         </span>
 
-                        <span 
-                            *ngSwitchCase="'lessThanOrEqualTo'" 
-                            i18n="@@platformTableP13FilterStrategyLabelLessThanOrEqualTo">
+                        <span
+                            *ngSwitchCase="'lessThanOrEqualTo'"
+                            i18n="@@platformTableP13FilterStrategyLabelLessThanOrEqualTo"
+                        >
                             less than or equal to
                         </span>
 
-                        <span 
-                            *ngSwitchCase="'after'" 
-                            i18n="@@platformTableP13FilterStrategyLabelAfter">
-                            after
-                        </span>
+                        <span *ngSwitchCase="'after'" i18n="@@platformTableP13FilterStrategyLabelAfter"> after </span>
 
-                        <span 
-                            *ngSwitchCase="'onOrAfter'" 
-                            i18n="@@platformTableP13FilterStrategyLabelOnOrAfter">
+                        <span *ngSwitchCase="'onOrAfter'" i18n="@@platformTableP13FilterStrategyLabelOnOrAfter">
                             on or after
                         </span>
 
-                        <span 
-                            *ngSwitchCase="'before'" 
-                            i18n="@@platformTableP13FilterStrategyLabelBefore">
+                        <span *ngSwitchCase="'before'" i18n="@@platformTableP13FilterStrategyLabelBefore">
                             before
                         </span>
 
-                        <span 
-                            *ngSwitchCase="'beforeOrOn'" 
-                            i18n="@@platformTableP13FilterStrategyLabelBeforeOrOn">
+                        <span *ngSwitchCase="'beforeOrOn'" i18n="@@platformTableP13FilterStrategyLabelBeforeOrOn">
                             before or on
                         </span>
 
-                        <span
-                            *ngSwitchCaseDefault 
-                            i18n="@@platformTableP13FilterStrategyLabelNotDefined">
+                        <span *ngSwitchCaseDefault i18n="@@platformTableP13FilterStrategyLabelNotDefined">
                             Not Defined
                         </span>
                     </ng-container>
@@ -122,52 +89,33 @@
             </fd-select>
         </div>
     </div>
-    <div
-        fdLayoutGridCol
-        colGrow
-    >
-        <div
-            fdLayoutGridRow
-            [ngSwitch]="rule.strategy"
-            ngForm
-        >
+    <div fdLayoutGridCol colGrow>
+        <div fdLayoutGridRow [ngSwitch]="rule.strategy" ngForm>
             <ng-container *ngSwitchCase="FILTER_STRATEGY.BETWEEN">
-                <div
-                    fdLayoutGridCol
-                    colGrow
-                >
+                <div fdLayoutGridCol colGrow>
                     <ng-container
                         [ngTemplateOutlet]="ruleInputTemplate"
-                        [ngTemplateOutletContext]="{valueKey: 'value'}"
+                        [ngTemplateOutletContext]="{ valueKey: 'value' }"
                     ></ng-container>
                 </div>
-                <div
-                    fdLayoutGridCol
-                    colGrow
-                >
+                <div fdLayoutGridCol colGrow>
                     <ng-container
                         [ngTemplateOutlet]="ruleInputTemplate"
-                        [ngTemplateOutletContext]="{valueKey: 'value2'}"
+                        [ngTemplateOutletContext]="{ valueKey: 'value2' }"
                     ></ng-container>
                 </div>
             </ng-container>
             <ng-container *ngSwitchDefault>
-                <div
-                    fdLayoutGridCol
-                    colGrow
-                >
+                <div fdLayoutGridCol colGrow>
                     <ng-container
                         [ngTemplateOutlet]="ruleInputTemplate"
-                        [ngTemplateOutletContext]="{valueKey: 'value'}"
+                        [ngTemplateOutletContext]="{ valueKey: 'value' }"
                     ></ng-container>
                 </div>
             </ng-container>
 
             <!-- Rule Control Based on Data Type -->
-            <ng-template
-                #ruleInputTemplate
-                let-valueKey="valueKey"
-            >
+            <ng-template #ruleInputTemplate let-valueKey="valueKey">
                 <ng-container [ngSwitch]="rule.dataType">
                     <ng-container *ngSwitchCase="DATA_TYPE.DATE">
                         <fd-date-picker
@@ -189,22 +137,11 @@
                             (ngModelChange)="_onModelChange()"
                             required
                         >
-                            <fd-option
-                                [value]="undefined"
-                                i18n="@@platformTableP13FilterBooleanOptionNotDefined"
-                            >
+                            <fd-option [value]="undefined" i18n="@@platformTableP13FilterBooleanOptionNotDefined">
                                 &nbsp;
                             </fd-option>
-                            <fd-option
-                                [value]="true"
-                                i18n="@@platformTableP13FilterBooleanOptionTrue"
-                            >
-                                Yes
-                            </fd-option>
-                            <fd-option
-                                [value]="false"
-                                i18n="@@platformTableP13FilterBooleanOptionFalse"
-                            >
+                            <fd-option [value]="true" i18n="@@platformTableP13FilterBooleanOptionTrue"> Yes </fd-option>
+                            <fd-option [value]="false" i18n="@@platformTableP13FilterBooleanOptionFalse">
                                 No
                             </fd-option>
                         </fd-select>

@@ -22,7 +22,6 @@ export const DialogButtonClass = 'fd-dialog__decisive-button';
     templateUrl: './dialog-footer.component.html'
 })
 export class DialogFooterComponent extends DialogFooterBase implements AfterContentInit, AfterViewInit {
-
     /** @hidden */
     constructor(@Optional() public dialogConfig: DialogConfig) {
         super();

@@ -2,7 +2,8 @@ import {
     browserIsIE,
     click,
     getAttributeByNameArr,
-    getElementArrayLength, getElementSize,
+    getElementArrayLength,
+    getElementSize,
     getText,
     getTextArr,
     isEnabled,
@@ -11,9 +12,9 @@ import {
     waitForElDisplayed
 } from '../../driver/wdio';
 import { SearchPo } from '../pages/search.po';
-import {expected_category, search_placeholder} from '../fixtures/appData/search-page-content';
+import { expected_category, search_placeholder } from '../fixtures/appData/search-page-content';
 
-describe('Search field', function() {
+describe('Search field', () => {
     const {
         searchFields,
         searchIcons,
@@ -102,7 +103,6 @@ describe('Search field', function() {
         expect(getText(cozyWithDataSourceSearch, 3)).not.toContain('test');
     });
 
-
     it('should have autosuggestion after one latter', () => {
         const arrLength = getElementArrayLength(searchFields);
         for (let i = 0; arrLength > i; i++) {
@@ -152,7 +152,7 @@ describe('Search field', function() {
         searchPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             searchPage.saveExampleBaselineScreenshot();
             expect(searchPage.compareWithBaseline()).toBeLessThan(5);

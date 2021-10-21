@@ -33,14 +33,14 @@ export class DatePicker extends BaseComponentPo {
     };
 
     yearInCalendarByValue = (year: number): string => {
-        return `[aria-label="${year}"]`
+        return `[aria-label="${year}"]`;
     };
 
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
         waitForPresent(this.inputDatePicker);
-    };
+    }
 
     getScreenshotFolder(): object {
         return super.getScreenshotFolder(this.url);

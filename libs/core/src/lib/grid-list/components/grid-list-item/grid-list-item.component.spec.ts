@@ -108,12 +108,14 @@ describe('GridListItemComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
     let gridListComponent: GridListComponent<any>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [GridListModule, ButtonModule, AvatarModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [GridListModule, ButtonModule, AvatarModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -135,7 +137,9 @@ describe('GridListItemComponent', () => {
     });
 
     it('should display 4 items with statuses', () => {
-        const itemsWithStatusesLength = fixture.debugElement.queryAll(By.css('.fd-grid-list__item .fd-grid-list__highlight')).length;
+        const itemsWithStatusesLength = fixture.debugElement.queryAll(
+            By.css('.fd-grid-list__item .fd-grid-list__highlight')
+        ).length;
 
         expect(itemsWithStatusesLength).toEqual(4);
     });
@@ -149,7 +153,7 @@ describe('GridListItemComponent', () => {
     it('should throw Detail event if click on Detail button', () => {
         spyOn(component, 'detail');
 
-        const button = fixture.debugElement.query(By.css('.fd-grid-list__item .fd-button[title="Details"]'))
+        const button = fixture.debugElement.query(By.css('.fd-grid-list__item .fd-button[title="Details"]'));
         button.nativeElement.click();
         fixture.detectChanges();
 

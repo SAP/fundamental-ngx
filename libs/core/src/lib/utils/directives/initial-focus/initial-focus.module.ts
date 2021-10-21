@@ -7,5 +7,4 @@ import { InitialFocusDirective } from './initial-focus.directive';
     exports: [InitialFocusDirective],
     declarations: [InitialFocusDirective]
 })
-export class InitialFocusModule {
-}
+export class InitialFocusModule {}

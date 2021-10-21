@@ -10,7 +10,9 @@ import { ResizableCardItemComponent } from './resizable-card-item.component';
 @Component({
     template: `
         <fd-resizable-card-item [config]="config"> 1 </fd-resizable-card-item>
-        <fd-resizable-card-item [cardWidthColSpan]="2" [cardHeightRowSpan]="19" [left]="400" [top]="0"> 2 </fd-resizable-card-item>
+        <fd-resizable-card-item [cardWidthColSpan]="2" [cardHeightRowSpan]="19" [left]="400" [top]="0">
+            2
+        </fd-resizable-card-item>
     `
 })
 class TestResizableCardItemComponent {

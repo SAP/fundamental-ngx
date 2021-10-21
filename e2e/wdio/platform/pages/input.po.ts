@@ -11,6 +11,7 @@ export class InputPo extends BaseComponentPo {
     compactInput = '#input4';
     readonlyInput = '#input5';
     disabledInput = '#input6';
+    disabledInputAttribute = 'fdp-input[name="input6"]';
     passwordInput = '#input8';
     // TODO: same Id create accessibility issue
     inlineHelpInput = '#input7';
@@ -40,6 +41,6 @@ export class InputPo extends BaseComponentPo {
     }
 
     compareWithBaseline(specName: string = 'input'): any {
-       return super.compareWithBaseline(specName, this.getScreenshotFolder());
+        return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
 }

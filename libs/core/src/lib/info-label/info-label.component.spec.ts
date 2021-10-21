@@ -5,17 +5,10 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
     selector: 'fd-test-info-label',
-    template: `
-        <fd-info-label
-            [type]="type"
-            [label]="label"
-            [color]="color"
-            [glyph]="glyph">
-        </fd-info-label>
-    `
+    template: ` <fd-info-label [type]="type" [label]="label" [color]="color" [glyph]="glyph"> </fd-info-label> `
 })
 class TestInfoLabelComponent {
-    @ViewChild(InfoLabelComponent, {static: true, read: ElementRef})
+    @ViewChild(InfoLabelComponent, { static: true, read: ElementRef })
     infoLabelElementRef: ElementRef;
 
     type: string;
@@ -29,11 +22,13 @@ describe('InfoLabelComponent', () => {
     let testComponent: TestInfoLabelComponent;
     let fixture: ComponentFixture<TestInfoLabelComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [InfoLabelComponent, TestInfoLabelComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [InfoLabelComponent, TestInfoLabelComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestInfoLabelComponent);

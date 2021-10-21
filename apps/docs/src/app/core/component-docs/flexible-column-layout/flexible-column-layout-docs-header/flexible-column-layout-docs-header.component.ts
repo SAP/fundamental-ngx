@@ -4,9 +4,11 @@ import { Component } from '@angular/core';
     selector: 'fd-flexible-column-layout-docs-header',
     templateUrl: './flexible-column-layout-docs-header.component.html',
     styles: [
-        `code {
-            color: red;
-        }`
+        `
+            code {
+                color: red;
+            }
+        `
     ]
 })
 export class FlexibleColumnLayoutDocsHeaderComponent {}

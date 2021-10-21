@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
     selector: 'fd-dynamic-page-basic-example',
     templateUrl: './dynamic-page-example.component.html',
     styles: [
-            `
+        `
             .overlay {
                 height: 100%;
                 width: 100%;
@@ -15,7 +15,7 @@ import { Component } from '@angular/core';
                 background-color: rgb(255, 255, 255);
             }
             .fd-dynamic-page-section-example {
-                min-height: 20vh
+                min-height: 20vh;
             }
         `
     ]

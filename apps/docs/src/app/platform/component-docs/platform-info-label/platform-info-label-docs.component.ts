@@ -11,37 +11,36 @@ import * as PlatfromInfoLableAriaLabelExampleScss from '!raw-loader!./platform-i
 import * as PlatfromInfoLableAriaLabelExample from '!raw-loader!./platform-info-label-example/platform-info-label-aria-label-example.component.html';
 
 @Component({
-  selector: 'fd-platform-info-label-docs',
-  templateUrl: './platform-info-label-docs.component.html'
+    selector: 'fd-platform-info-label-docs',
+    templateUrl: './platform-info-label-docs.component.html'
 })
 export class PlatformInfoLabelDocsComponent {
-
     platformDefaultInfoLabelHtmlType: ExampleFile[] = [
         {
             language: 'html',
             code: PlatformInfoLableDefaultExample,
-            fileName: 'platform-info-label-example',
+            fileName: 'platform-info-label-example'
         }
     ];
     platformTextInfoLabelHtmlType: ExampleFile[] = [
         {
             language: 'html',
             code: PlatfromInfoLableTextExample,
-            fileName: 'platform-info-label-example',
+            fileName: 'platform-info-label-example'
         }
     ];
     platformTextAndIconInfoLabelHtmlType: ExampleFile[] = [
         {
             language: 'html',
             code: PlatformTextAndIconInfoLableExample,
-            fileName: 'platform-info-label-example',
+            fileName: 'platform-info-label-example'
         }
     ];
     platformNumericInfoLabelHtmlType: ExampleFile[] = [
         {
             language: 'html',
             code: PlatformInfoLableNumericExample,
-            fileName: 'platform-info-label-numeric-example',
+            fileName: 'platform-info-label-numeric-example'
         }
     ];
     platformAraiaLabelInfoLabelHtmlType: ExampleFile[] = [
@@ -52,5 +51,4 @@ export class PlatformInfoLabelDocsComponent {
             scssFileCode: PlatfromInfoLableAriaLabelExampleScss
         }
     ];
-
 }

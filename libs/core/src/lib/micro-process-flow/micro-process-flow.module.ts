@@ -15,10 +15,7 @@ import { MicroProcessFlowFocusableItemDirective } from './micro-process-flow-foc
         MicroProcessFlowIntermediaryItemDirective,
         MicroProcessFlowFocusableItemDirective
     ],
-    imports: [
-        CommonModule,
-        IconModule
-    ],
+    imports: [CommonModule, IconModule],
     exports: [
         MicroProcessFlowComponent,
         MicroProcessFlowItemComponent,

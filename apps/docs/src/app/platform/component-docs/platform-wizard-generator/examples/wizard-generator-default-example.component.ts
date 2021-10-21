@@ -4,11 +4,10 @@ import { Validators } from '@angular/forms';
 import { WizardGeneratorFormsValue, WizardGeneratorItem } from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
-  selector: 'fdp-wizard-generator-default-example',
-  templateUrl: './wizard-generator-default-example.component.html'
+    selector: 'fdp-wizard-generator-default-example',
+    templateUrl: './wizard-generator-default-example.component.html'
 })
 export class WizardGeneratorDefaultExampleComponent {
-
     wizardValue: WizardGeneratorFormsValue;
 
     stepItems: WizardGeneratorItem[] = [
@@ -105,5 +104,4 @@ export class WizardGeneratorDefaultExampleComponent {
     wizardFinished(wizardValue: WizardGeneratorFormsValue): void {
         this.wizardValue = wizardValue;
     }
-
 }

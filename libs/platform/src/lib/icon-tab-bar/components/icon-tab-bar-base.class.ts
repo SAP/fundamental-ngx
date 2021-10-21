@@ -14,15 +14,16 @@ import {
 import { take, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
-import { OverflowListDirective, cloneDeep } from '@fundamental-ngx/core/utils';
-import { IconTabBarItem, TabConfig } from '../types';
+import { OverflowListDirective, cloneDeep, KeyUtil } from '@fundamental-ngx/core/utils';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { IconTabBarItem } from '../interfaces/icon-tab-bar-item.interface';
+import { TabConfig } from '../interfaces/tab-config.interface';
+import { TabDestinyMode } from '../types';
 import { ICON_TAB_HIDDEN_CLASS_NAME, UNIQUE_KEY_SEPARATOR } from '../constants';
 import { ExtraButtonDirective } from '../directives/extra-button/extra-button.directive';
 
-
 @Directive()
 export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
-
     /**
      * @description A tab bar configuration that stores the state of each tab. Based on this configuration, a tab bar is representing.
      */
@@ -34,6 +35,18 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
      */
     @Input()
     isRtl: boolean;
+
+    /**
+     * @description densityMode setter triggers tabs to re-calculation overflowed tabs
+     */
+    @Input()
+    set densityMode(value: TabDestinyMode) {
+        // Skip first value && value doesn't equal to previous one
+        if (this._densityMode && value !== this._densityMode) {
+            this._triggerRecalculationVisibleItems();
+        }
+        this._densityMode = value;
+    }
 
     /**
      * @description Emits when some tab is selected.
@@ -66,13 +79,13 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
     _tabs: IconTabBarItem[] = [];
 
     /** @hidden */
+    private _densityMode: TabDestinyMode;
+
+    /** @hidden */
     private _onDestroy$ = new Subject();
 
     /** @hidden */
-    constructor(
-        protected _cd: ChangeDetectorRef,
-        protected _ngZone: NgZone,
-    ) {}
+    constructor(protected _cd: ChangeDetectorRef, protected _ngZone: NgZone) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -103,7 +116,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
      */
     protected _initTabs(): void {
         this._tabs = this._generateTabBarItems(this.tabsConfig);
-        const selectedItem = this._tabs.find(item => item.active);
+        const selectedItem = this._tabs.find((item) => item.active);
         this._selectedUid = selectedItem?.uId;
         this._lastVisibleTabIndex = this._tabs.length - 1;
     }
@@ -125,7 +138,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
             if (item.color) {
                 result.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
             }
-            result.subItems = item.subItems?.length ? this._generateSubItems(item.subItems, result) : null
+            result.subItems = item.subItems?.length ? this._generateSubItems(item.subItems, result) : null;
             return result;
         });
     }
@@ -138,12 +151,12 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
                 index: index,
                 uId: `${parent.uId}${UNIQUE_KEY_SEPARATOR}${index}`,
                 cssClasses: [],
-                subItems: null,
+                subItems: null
             };
             if (Array.isArray(item.subItems) && item.subItems.length) {
-                result.subItems = this._generateSubItems(item.subItems, result)
+                result.subItems = this._generateSubItems(item.subItems, result);
             }
-            return result
+            return result;
         });
     }
 
@@ -156,7 +169,15 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
         event?.stopPropagation();
         this._selectedUid = selectedItem.uId;
         selectedItem.badge = false;
-        this.selected.emit(selectedItem)
+        this.selected.emit(selectedItem);
+    }
+
+    /** @hidden */
+    _keyDownHandler(event: KeyboardEvent, tab: IconTabBarItem): void {
+        if (KeyUtil.isKeyCode(event, [SPACE, ENTER])) {
+            event.preventDefault();
+            this._selectItem(tab);
+        }
     }
 
     /**
@@ -172,14 +193,14 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
         deletedItem.uId = `${deletedItem.index}`;
         const itemToPopover = cloneDeep(deletedItem);
         deletedItem.hidden = true;
-        deletedItem.cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME)
+        deletedItem.cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
 
         let indexInExtraItems;
         this._extraTabs.forEach((item, index) => {
             if (item.index === selectedItem.index) {
                 indexInExtraItems = index;
             }
-        })
+        });
 
         selectedItem.index = this._lastVisibleTabIndex;
         selectedItem.uId = `${selectedItem.index}`;
@@ -189,7 +210,6 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
         }
         this._extraTabs.splice(indexInExtraItems, 1, itemToPopover);
         this._extraTabs = [...this._extraTabs];
-
 
         this._selectItem(selectedItem);
         this._triggerRecalculationVisibleItems();
@@ -202,9 +222,9 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
      */
     _recalculateVisibleItems(extraItems: number): void {
         this._lastVisibleTabIndex = this._tabs.length - 1 - extraItems;
-        this._tabs.forEach(item => {
+        this._tabs.forEach((item) => {
             item.hidden = false;
-            item.cssClasses = item.cssClasses.filter(cssClass => cssClass !== ICON_TAB_HIDDEN_CLASS_NAME)
+            item.cssClasses = item.cssClasses.filter((cssClass) => cssClass !== ICON_TAB_HIDDEN_CLASS_NAME);
         });
         this._extraTabs = [];
         const lastVisibleIndex = this._tabs.length - extraItems - 1;
@@ -213,7 +233,7 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
             const tab = this._tabs[i];
             this._extraTabs.push(cloneDeep(tab));
             tab.hidden = true;
-            tab.cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME)
+            tab.cssClasses.push(ICON_TAB_HIDDEN_CLASS_NAME);
         }
         this._cd.detectChanges();
     }
@@ -223,19 +243,13 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, OnDestroy {
      * @description trigger recalculation items, need to do it asynchronously after dom was rerendered
      */
     protected _triggerRecalculationVisibleItems(): void {
-        this._ngZone
-            .onMicrotaskEmpty
-            .pipe(
-                take(1),
-                takeUntil(this._onDestroy$),
-                )
-            .subscribe(_ => {
-                if (this.overflowDirective) {
-                    const extra = this.overflowDirective.getAmountOfExtraItems();
-                    this._recalculateVisibleItems(extra);
-                    this.extraBtnDirective?.calculatePosition();
-                    this._cd.detectChanges();
-                }
-            });
+        this._ngZone.onMicrotaskEmpty.pipe(take(1), takeUntil(this._onDestroy$)).subscribe((_) => {
+            if (this.overflowDirective) {
+                const extra = this.overflowDirective.getAmountOfExtraItems();
+                this._recalculateVisibleItems(extra);
+                this.extraBtnDirective?.calculatePosition();
+                this._cd.detectChanges();
+            }
+        });
     }
 }

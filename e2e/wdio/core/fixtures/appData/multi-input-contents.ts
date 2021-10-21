@@ -8,19 +8,8 @@ export const testOptionsArray1 = [
     'Blueberry',
     'Orange'
 ];
-export const testOptionsArray2 = [
-    'Kiwi',
-    'Apple',
-    'Banana',
-    'Pineapple',
-    'Tomato'
-];
-export const testOptionsArray3 = [
-    'Kiwi',
-    'Strawberry',
-    'Blueberry',
-    'Orange'
-];
+export const testOptionsArray2 = ['Kiwi', 'Apple', 'Banana', 'Pineapple', 'Tomato'];
+export const testOptionsArray3 = ['Kiwi', 'Strawberry', 'Blueberry', 'Orange'];
 export const testOptionsArray4 = [
     'APPLE',
     'BANANA',
@@ -31,12 +20,7 @@ export const testOptionsArray4 = [
     'BLUEBERRY',
     'ORANGE'
 ];
-export const testOptionsArray5 = [
-    'Apple',
-    'Banana',
-    'Pineapple',
-    'Tomato'
-];
+export const testOptionsArray5 = ['Apple', 'Banana', 'Pineapple', 'Tomato'];
 export const testOptionsArray6 = [
     'Photo Voltaic',
     'Competitor',
@@ -45,5 +29,5 @@ export const testOptionsArray6 = [
     'Passenger Train',
     'World',
     'Shield',
-    'Journey Change',
+    'Journey Change'
 ];

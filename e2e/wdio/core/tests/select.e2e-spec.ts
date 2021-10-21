@@ -11,7 +11,7 @@ import {
     waitForInvisibilityOf
 } from '../../driver/wdio';
 
-describe('Select component:', function() {
+describe('Select component:', () => {
     const selectPage = new SelectPo();
     const {
         selectModesExample,
@@ -37,7 +37,7 @@ describe('Select component:', function() {
         refreshPage();
     }, 2);
 
-    describe('Select modes', function() {
+    describe('Select modes', () => {
         it('should be able to select the option for default select', () => {
             if (browserIsFirefox()) {
                 return;
@@ -68,7 +68,7 @@ describe('Select component:', function() {
         });
     });
 
-    describe('Semantic state', function() {
+    describe('Semantic state', () => {
         it('should be able to select the option Success state', () => {
             if (browserIsFirefox()) {
                 return;
@@ -118,7 +118,7 @@ describe('Select component:', function() {
         });
     });
 
-    describe('Custom Control Content', function() {
+    describe('Custom Control Content', () => {
         it('should be able to select the option', () => {
             if (browserIsFirefox()) {
                 return;
@@ -132,7 +132,7 @@ describe('Select component:', function() {
         });
     });
 
-    describe('Extended Options', function() {
+    describe('Extended Options', () => {
         it('should be able to select the option', () => {
             if (browserIsFirefox()) {
                 return;
@@ -146,7 +146,7 @@ describe('Select component:', function() {
         });
     });
 
-    describe('Mobile Mode', function() {
+    describe('Mobile Mode', () => {
         it('should be able to select the option', () => {
             if (browserIsFirefox()) {
                 return;
@@ -160,7 +160,7 @@ describe('Select component:', function() {
         });
     });
 
-    describe('Max Height', function() {
+    describe('Max Height', () => {
         it('should be able to select the option', () => {
             if (browserIsFirefox()) {
                 return;
@@ -174,7 +174,7 @@ describe('Select component:', function() {
         });
     });
 
-    describe('Adding and Removing Options', function() {
+    describe('Adding and Removing Options', () => {
         it('should be able to select the option', () => {
             if (browserIsFirefox()) {
                 return;
@@ -220,7 +220,7 @@ describe('Select component:', function() {
         });
     });
 
-    describe('Programmatic Control', function() {
+    describe('Programmatic Control', () => {
         it('should be able to select the option', () => {
             if (browserIsFirefox()) {
                 return;
@@ -250,17 +250,16 @@ describe('Select component:', function() {
         });
     });
 
-    describe('Check orientation', function() {
+    describe('Check orientation', () => {
         it('should check RTL and LTR', () => {
             selectPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             selectPage.saveExampleBaselineScreenshot();
             expect(selectPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
-

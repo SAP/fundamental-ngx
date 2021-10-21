@@ -2,11 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
-import {
-    FdpFormGroupModule,
-    PlatformMultiComboboxMobileModule,
-    PlatformMultiComboboxModule
-} from '@fundamental-ngx/platform/form';
+import { FdpFormGroupModule, PlatformMultiComboboxModule } from '@fundamental-ngx/platform/form';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -36,8 +32,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         FdpFormGroupModule,
-        PlatformMultiComboboxModule,
-        PlatformMultiComboboxMobileModule
+        PlatformMultiComboboxModule
     ],
     exports: [RouterModule],
     providers: [{ provide: MOBILE_MODE_CONFIG, useValue: MULTI_COMBOBOX_MOBILE_CONFIG, multi: true }],

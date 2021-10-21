@@ -1,7 +1,7 @@
 <ng-container [formGroup]="form">
     <fdp-date-picker
         [contentDensity]="formItem.guiOptions?.contentDensity"
-        [placeholder]="formItem.message"
+        [placeholder]="formItem.placeholder || formItem.message"
         [name]="name"
         [formControlName]="name"
         [allowNull]="false"

@@ -32,7 +32,7 @@ const routes: Routes = [
         SharedDocumentationPageModule,
         PlatformCheckboxModule,
         FdpFormGroupModule,
-        PlatformButtonModule,
+        PlatformButtonModule
     ],
     exports: [RouterModule],
     declarations: [

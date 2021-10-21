@@ -4,13 +4,14 @@ import { fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { Observable, Subject } from 'rxjs';
 
 describe('MenuShortcutDirective', () => {
-    const buildMenuItem = (subject: Subject<boolean>) => ({
-        menuService: {
-            get isMobileMode(): Observable<boolean> {
-                return subject.asObservable()
+    const buildMenuItem = (subject: Subject<boolean>) =>
+        ({
+            menuService: {
+                get isMobileMode(): Observable<boolean> {
+                    return subject.asObservable();
+                }
             }
-        }
-    } as MenuItemComponent);
+        } as MenuItemComponent);
 
     const elementRefMock = {
         nativeElement: {
@@ -23,10 +24,12 @@ describe('MenuShortcutDirective', () => {
     let isMobileSubject: Subject<boolean>;
     let directive: MenuShortcutDirective;
 
-    beforeEach(waitForAsync(() => {
-        isMobileSubject = new Subject<boolean>();
-        directive = new MenuShortcutDirective(buildMenuItem(isMobileSubject), elementRefMock)
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            isMobileSubject = new Subject<boolean>();
+            directive = new MenuShortcutDirective(buildMenuItem(isMobileSubject), elementRefMock);
+        })
+    );
 
     it('should create an instance', () => {
         expect(directive).toBeTruthy();

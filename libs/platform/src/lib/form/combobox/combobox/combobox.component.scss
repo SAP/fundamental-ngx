@@ -14,6 +14,7 @@
 
     &__list {
         overflow: auto;
+
         .fd-list__item {
             justify-content: space-between;
 
@@ -21,6 +22,10 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
+        }
+
+        fd-form-message {
+            max-width: 100%;
         }
     }
 }

@@ -7,7 +7,7 @@ export class ResizableCardLayoutPo extends CoreBaseComponentPo {
     defaultExample = 'fd-resizable-card-layout-example ';
     configExample = 'fd-resizable-card-layout-example-layoutconfig ';
     itemExample = 'fd-resizable-card-layout-example-itemconfig ';
-    
+
     button = '.fd-button';
 
     dynamicPage = '.fd-dynamic-page';

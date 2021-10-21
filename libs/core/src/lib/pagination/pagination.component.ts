@@ -16,12 +16,12 @@ import {
     TemplateRef,
     ViewEncapsulation
 } from '@angular/core';
-import '@angular/localize/init';
-import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { Subscription } from 'rxjs';
+
+import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+
 import { Pagination } from './pagination.model';
 import { PaginationService } from './pagination.service';
-
 
 /** Constant representing the default number of items per page. */
 const DEFAULT_ITEMS_PER_PAGE = 10;
@@ -29,7 +29,7 @@ interface CurrentShowing {
     from: number;
     to: number;
     of: number;
-};
+}
 
 let paginationUniqueId = 0;
 
@@ -75,10 +75,10 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     @Input()
     get currentPage(): number {
         return this._currentPage;
-    };
+    }
     set currentPage(value: number) {
         this._currentPage = Math.floor(coerceNumberProperty(value, 1));
-    };
+    }
 
     /** Represents the number of items per page. */
     @Input()
@@ -100,11 +100,9 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     /**
      * Label for options for items per page.
      * This property is mainly provided to support reading in the right language for screen reader.
-     * Here, Angular i18n's `$localize` tag is used with a default text of `Results per page`.
-     * Application developer is expected to pass in their own value if they use any other localization tool.
      */
     @Input()
-    itemsPerPageLabel = $localize`:@@corePaginationItemsPerPageLabel:Results per page`;
+    itemsPerPageLabel = 'Results per page';
 
     /** Represents the options for items per page. */
     @Input()
@@ -113,12 +111,12 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     }
     set itemsPerPageOptions(value: number[]) {
         this._itemsPerPageOptions = coerceArray<number>(value)
-            .map(v => coerceNumberProperty(v, 0))
-            .map(v => Math.floor(v))
-            .filter(v => v > 0 && v < this.totalItems)
+            .map((v) => coerceNumberProperty(v, 0))
+            .map((v) => Math.floor(v))
+            .filter((v) => v > 0 && v < this.totalItems)
             .sort((a, b) => a - b);
 
-        if (this._itemsPerPageOptions.some(v => v !== this.itemsPerPage)) {
+        if (this._itemsPerPageOptions.some((v) => v !== this.itemsPerPage)) {
             this.itemsPerPage = this._itemsPerPageOptions[0];
         }
     }
@@ -137,47 +135,44 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     /**
      * Label for the 'previous' page button.
      * This property is mainly provided to support reading in the right language for screen reader.
-     * Here, Angular i18n's `$localize` tag is used with a default text of `Previous`.
-     * Application developer is expected to pass in their own value if they use any other localization tool.
      */
     @Input()
-    previousLabel = $localize`:@@corePaginationPreviousLabel:Previous`;
+    previousLabel = 'Previous';
 
     /**
      * Label for the 'next' page button.
      * This property is mainly provided to support reading in the right language for screen reader.
-     * Here, Angular i18n's `$localize` tag is used with a default text of `Next`.
-     * Application developer is expected to pass in their own value if they use any other localization tool.
      */
     @Input()
-    nextLabel = $localize`:@@corePaginationNextLabel:Next`;
+    nextLabel = 'Next';
 
     /**
      * Label for the 'Page' page button.
      * This property is mainly provided to support reading in the right language for screen reader.
-     * Here, Angular i18n's `$localize` tag is used with a default text of `Page`.
-     * Application developer is expected to pass in their own value if they use any other localization tool.
      */
     @Input()
-    pageLabel = $localize`:@@corePaginationPageLabel:Page `;
+    pageLabel = 'Page';
 
     /**
      * Aria label for the navigation element
      * This property is mainly provided to support reading in the right language for screen reader.
-     * Here, Angular i18n's `$localize` tag is used with a default text of `Pagination`.
-     * Application developer is expected to pass in their own value if they use any other localization tool.
      */
     @Input()
-    ariaLabel = $localize`:@@corePaginationAriaLabel:Pagination`;
+    ariaLabel = 'Pagination';
 
     /**
      * The current page label that should be read when a page is selected.
+     * Please use ${currentPage} in the value for replacing with the current page number.
+     * Example: `Page ${currentPage} is selected`.
      * This property is mainly provided to support reading in the right language for screen reader.
-     * Here, Angular i18n's `$localize` tag is used with a default text of `Current page`.
-     * Application developer is expected to pass in their own value if they use any other localization tool.
      */
     @Input()
-    currentPageAriaLabel = $localize`:@@corePaginationCurrentPageAriaLabel: Page ${this.currentPage}:page: is current page`;
+    currentPageAriaLabel = 'Page ${currentPage} is current page';
+
+    /** @hidden */
+    get _currentPageAriaLabel(): string {
+        return this.currentPageAriaLabel.replace(/\${currentPage}/, this.currentPage.toString());
+    }
 
     /** Event fired when the page is changed. */
     @Output()
@@ -196,14 +191,14 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     /** @hidden */
     get isFirstPage(): boolean {
         return this.currentPage === 1;
-    };
+    }
     get isLastPage(): boolean {
         return this.currentPage === this.paginationService.getTotalPages(this.getPaginationObject());
-    };
+    }
 
     get currentShowing(): CurrentShowing {
         return this._currentShowing;
-    };
+    }
     /** @hidden */
     private _currentShowing: CurrentShowing = {
         from: 0,
@@ -223,7 +218,7 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     private _subscriptions = new Subscription();
 
     /** @hidden */
-    constructor (
+    constructor(
         private readonly paginationService: PaginationService,
         private readonly _cd: ChangeDetectorRef,
         private readonly _liveAnnouncer: LiveAnnouncer,
@@ -266,10 +261,12 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
     /** @hidden */
     ngOnInit(): void {
         if (this._rtlService) {
-            this._subscriptions.add(this._rtlService.rtl.subscribe((value) => {
-                this.rtl = value;
-                this._refreshPages();
-            }));
+            this._subscriptions.add(
+                this._rtlService.rtl.subscribe((value) => {
+                    this.rtl = value;
+                    this._refreshPages();
+                })
+            );
         }
     }
 
@@ -299,14 +296,16 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         if ($event) {
             $event.preventDefault();
         }
+
         if (page > this.paginationService.getTotalPages(this.getPaginationObject()) || page < 1) {
             return;
         }
+
         this._refreshPages();
 
         this.pageChangeStart.emit(page);
 
-        this._liveAnnouncer.announce(this.currentPageAriaLabel);
+        this._liveAnnouncer.announce(this._currentPageAriaLabel);
     }
 
     /**
@@ -344,8 +343,12 @@ export class PaginationComponent implements OnChanges, OnInit, OnDestroy {
         }
         this.pages = pages;
 
-        this._currentShowing.from = this.currentPage - 1 === 0 ? 1 : (this.currentPage - 1) * pagination.itemsPerPage + 1;
-        this._currentShowing.to = Math.min((this.currentPage - 1) * pagination.itemsPerPage + pagination.itemsPerPage, this.totalItems);
+        this._currentShowing.from =
+            this.currentPage - 1 === 0 ? 1 : (this.currentPage - 1) * pagination.itemsPerPage + 1;
+        this._currentShowing.to = Math.min(
+            (this.currentPage - 1) * pagination.itemsPerPage + pagination.itemsPerPage,
+            this.totalItems
+        );
         this._currentShowing.of = this.totalItems;
 
         this._cd.markForCheck();

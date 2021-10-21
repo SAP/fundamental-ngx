@@ -16,7 +16,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormHeaderComponent {
-     /** @hidden */
-     @HostBinding('class.fd-form-header')
-     fdFormHeaderClass = true;
+    /** @hidden */
+    @HostBinding('class.fd-form-header')
+    fdFormHeaderClass = true;
 }

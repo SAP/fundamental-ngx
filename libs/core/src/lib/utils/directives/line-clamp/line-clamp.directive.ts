@@ -89,10 +89,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
     private _lineCount: number;
 
     /** @hidden */
-    constructor(
-        private readonly _elementRef: ElementRef,
-        private readonly _renderer: Renderer2
-    ) {}
+    constructor(private readonly _elementRef: ElementRef, private readonly _renderer: Renderer2) {}
 
     /**
      * Root native element of clamping box
@@ -108,12 +105,11 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
         if (this.rootElement) {
             this._checkLineCount();
 
-            this.windowResize$ = fromEvent(window, 'resize').pipe(
-                distinctUntilChanged(),
-                debounceTime(200)
-            ).subscribe({
-                next: () => this._checkLineCount()
-            });
+            this.windowResize$ = fromEvent(window, 'resize')
+                .pipe(distinctUntilChanged(), debounceTime(200))
+                .subscribe({
+                    next: () => this._checkLineCount()
+                });
         }
     }
 
@@ -195,7 +191,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
             this._renderer.setStyle(this.rootElement, 'overflow', 'hidden');
             this._renderer.setStyle(this.rootElement, 'text-overflow', 'ellipsis');
             this._renderer.setStyle(this.rootElement, '-webkit-box-orient', 'vertical');
-            this._renderer.setStyle(this.rootElement, '-webkit-line-clamp', `${ this._lineCount }`);
+            this._renderer.setStyle(this.rootElement, '-webkit-line-clamp', `${this._lineCount}`);
         }
     }
 
@@ -233,7 +229,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
             const padding_bottom = parseInt(style.getPropertyValue('padding-bottom'), 10);
             const border_top = parseInt(style.getPropertyValue('border-top-width'), 10);
             const border_bottom = parseInt(style.getPropertyValue('border-bottom-width'), 10);
-            height = height - padding_top - padding_bottom - border_top - border_bottom
+            height = height - padding_top - padding_bottom - border_top - border_bottom;
         }
         this.refreshClamp();
         this.lineCountUpdate.emit(Math.ceil(height / lineHeight));

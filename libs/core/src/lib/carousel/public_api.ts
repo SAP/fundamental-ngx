@@ -1,4 +1,3 @@
-
 export * from './carousel.module';
 export * from './carousel.directive';
 export * from './carousel.component';

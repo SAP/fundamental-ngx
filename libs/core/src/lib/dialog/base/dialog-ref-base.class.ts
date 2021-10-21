@@ -1,7 +1,6 @@
 import { Observable, Subject } from 'rxjs';
 
 export class DialogRefBase<T, P = any> {
-
     /** @hidden */
     protected readonly _afterClosed = new Subject<any>();
 
@@ -41,5 +40,4 @@ export class DialogRefBase<T, P = any> {
     loaded(): void {
         this._afterLoaded.next();
     }
-
 }

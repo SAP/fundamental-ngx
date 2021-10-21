@@ -204,15 +204,13 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     private _initiateColumns(): void {
         const visibleColumnKeys = this.initialVisibleColumnKeys;
 
-        this._selectableColumns = this.availableColumns
-            .slice()
-            .map(
-                (column, index: number): SelectableColumn => ({
-                    column: column,
-                    selected: visibleColumnKeys.includes(column.key),
-                    active: index === 0
-                })
-            );
+        this._selectableColumns = this.availableColumns.slice().map(
+            (column, index: number): SelectableColumn => ({
+                column: column,
+                selected: visibleColumnKeys.includes(column.key),
+                active: index === 0
+            })
+        );
 
         // keep count of selected
         this._countSelectedColumns();

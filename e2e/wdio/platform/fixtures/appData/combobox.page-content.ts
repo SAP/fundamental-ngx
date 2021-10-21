@@ -16,12 +16,7 @@ export const activeTypeNames = [
     'selectedItemTemplate',
     'field'
 ];
-export const notActiveTypeNames = [
-    'readonly',
-    'disabled'
-];
+export const notActiveTypeNames = ['readonly', 'disabled'];
 
 export const appleOption = 'Apple';
 export const bananaOption = 'Banana';
-
-

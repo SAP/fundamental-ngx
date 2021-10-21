@@ -16,7 +16,7 @@ import { Placement } from '@fundamental-ngx/core/shared';
     templateUrl: './form-label.component.html',
     styleUrls: ['./form-label.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormLabelComponent implements OnChanges {
     /** Whether form is required */

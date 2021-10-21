@@ -13,9 +13,11 @@ $fd-micro-process-flow-intermediary-indicator-width: 0.25rem;
 
 $fd-micro-process-flow-max-container-visible-items: 8;
 
-$fd-micro-process-flow-max-container-compact-width: $fd-micro-process-flow-item-compact-width * ($fd-micro-process-flow-max-container-visible-items + 1) + $fd-micro-process-flow-outline-offset;
+$fd-micro-process-flow-max-container-compact-width: $fd-micro-process-flow-item-compact-width *
+    ($fd-micro-process-flow-max-container-visible-items + 1) + $fd-micro-process-flow-outline-offset;
 
-$fd-micro-process-flow-max-container-width: $fd-micro-process-flow-item-width * ($fd-micro-process-flow-max-container-visible-items + 1) + $fd-micro-process-flow-outline-offset;
+$fd-micro-process-flow-max-container-width: $fd-micro-process-flow-item-width *
+    ($fd-micro-process-flow-max-container-visible-items + 1) + $fd-micro-process-flow-outline-offset;
 
 $fd-micro-process-flow-semantic-colors: (
     positive: (
@@ -33,5 +35,5 @@ $fd-micro-process-flow-semantic-colors: (
     critical: (
         default: var(--sapCriticalElementColor),
         hover: var(--sapButton_Critical_Hover_Background)
-    ),
+    )
 );

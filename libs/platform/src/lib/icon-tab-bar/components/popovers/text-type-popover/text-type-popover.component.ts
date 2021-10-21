@@ -1,13 +1,12 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
-import { IconTabBarItem } from '../../../types';
+import { IconTabBarItem } from '../../../interfaces/icon-tab-bar-item.interface';
 
 @Component({
     selector: 'fdp-text-type-popover',
-    templateUrl: './text-type-popover.component.html',
+    templateUrl: './text-type-popover.component.html'
 })
 export class TextTypePopoverComponent extends IconTabBarPopoverBase implements OnChanges {
-
     /**
      * @description Is extra items mode or subitems mode
      */
@@ -33,9 +32,7 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
     selectedSubItem: EventEmitter<any> = new EventEmitter<any>();
 
     /** @hidden */
-    constructor(
-        protected _cd: ChangeDetectorRef
-    ) {
+    constructor(protected _cd: ChangeDetectorRef) {
         super(_cd);
     }
 
@@ -52,9 +49,7 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
      * @param selectedItem
      */
     _selectItem(selectedItem: IconTabBarItem): void {
-        this.isExtraItemsMode
-            ? this.selectedExtraItem.emit(selectedItem)
-            : this.selectedSubItem.emit(selectedItem);
+        this.isExtraItemsMode ? this.selectedExtraItem.emit(selectedItem) : this.selectedSubItem.emit(selectedItem);
         this.popover.close();
     }
 

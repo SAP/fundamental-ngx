@@ -57,6 +57,6 @@ const routes: Routes = [
         AvatarModule,
         InfoLabelModule
     ],
-    exports: [RouterModule],
+    exports: [RouterModule]
 })
-export class MicroProcessFlowDocsModule { }
+export class MicroProcessFlowDocsModule {}

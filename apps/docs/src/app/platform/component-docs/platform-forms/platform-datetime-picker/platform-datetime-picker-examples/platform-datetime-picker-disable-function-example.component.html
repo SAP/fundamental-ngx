@@ -2,15 +2,9 @@
     #ffg
     [formGroup]="datetimePickerForm"
     mainTitle="Datetime Picker with XL2-L2-M1-S1 form layout"
-    columnLayout="XL2-L2-M1-S1">
-    <fdp-form-field
-        #ffl1
-        id="simple"
-        column="1"
-        required="true"
-        [validators]="requiredDateValidator"
-        label="Date:"
-    >
+    columnLayout="XL2-L2-M1-S1"
+>
+    <fdp-form-field #ffl1 id="simple" column="1" required="true" [validators]="requiredDateValidator" label="Date:">
         <fdp-datetime-picker
             name="simple"
             [formControl]="ffl1.formControl"

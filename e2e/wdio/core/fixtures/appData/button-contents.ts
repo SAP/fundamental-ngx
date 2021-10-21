@@ -11,10 +11,4 @@ export const fdTypeOptions = [
     'emphasized',
     'menu'
 ];
-export const iconOptions = [
-    'accelerated',
-    'accept',
-    'accidental-leave',
-    'account',
-    'accounting-document-verificati'
-];
+export const iconOptions = ['accelerated', 'accept', 'accidental-leave', 'account', 'accounting-document-verificati'];

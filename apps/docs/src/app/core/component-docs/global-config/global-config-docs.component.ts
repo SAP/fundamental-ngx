@@ -27,6 +27,6 @@ export class GlobalConfigDocsComponent {
 
     popoverMobileGlobalConfigExample: ExampleFile = {
         language: 'typescript',
-        code: popoverMobileGlobalConfigExampleSrc,
+        code: popoverMobileGlobalConfigExampleSrc
     };
 }

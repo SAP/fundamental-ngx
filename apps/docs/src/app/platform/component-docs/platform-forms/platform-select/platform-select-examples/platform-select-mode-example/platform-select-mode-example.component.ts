@@ -21,8 +21,7 @@ export class Fruit {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformSelectModeExampleComponent {
-
-   userList = [
+    userList = [
         new Fruit('A', 'Apple', 10),
         new Fruit('B', 'orange', 70),
         new Fruit('C', 'Plums', 10),
@@ -45,10 +44,10 @@ export class PlatformSelectModeExampleComponent {
     selectedValue4 = this.option[3].label;
 
     onSelect1(item: FdpSelectionChangeEvent): void {
-       this.selectedValue1 = item.payload;
+        this.selectedValue1 = item.payload;
     }
 
     onSelect2(item: FdpSelectionChangeEvent): void {
         this.selectedValue2 = item.payload;
-     }
+    }
 }

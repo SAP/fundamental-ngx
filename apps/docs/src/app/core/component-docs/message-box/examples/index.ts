@@ -27,10 +27,7 @@ export const examples = [
     MessageBoxPositionExampleComponent,
     ObjectBasedMessageBoxExampleComponent,
     TemplateBasedMessageBoxExampleComponent,
-    ComponentBasedMessageBoxExampleComponent,
+    ComponentBasedMessageBoxExampleComponent
 ];
 
-export const entryComponents = [
-    MessageBoxExampleComponent,
-    MessageBoxComplexExampleComponent
-];
+export const entryComponents = [MessageBoxExampleComponent, MessageBoxComplexExampleComponent];

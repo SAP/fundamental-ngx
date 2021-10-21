@@ -1,15 +1,26 @@
 <div
     class="fd-tokenizer fd-tokenizer--scrollable"
+    tabindex="0"
+    role="listbox"
+    [attr.aria-roledescription]="ariaRoleDescription"
     [class.is-focus]="_tokenizerHasFocus"
-    [class.fd-tokenizer--compact]="compact">
+    [class.fd-tokenizer--compact]="compact"
+>
     <div class="fd-tokenizer__inner" #tokenizerInner>
         <ng-content select="fd-token"></ng-content>
-        <span (click)="moreClicked()"
-            *ngIf="((moreTokensLeft.length > 0 || moreTokensRight.length > 0) || hiddenCozyTokenCount > 0) && !open && !_tokenizerHasFocus"
+        <span
+            (click)="moreClicked()"
+            *ngIf="
+                (moreTokensLeft.length > 0 || moreTokensRight.length > 0 || hiddenCozyTokenCount > 0) &&
+                !open &&
+                !_tokenizerHasFocus
+            "
             class="fd-tokenizer-more"
             #moreElement
         >
-            <ng-container *ngIf="compact || compactCollapse">{{ moreTokensLeft.length + moreTokensRight.length }} {{ moreTerm }}</ng-container>
+            <ng-container *ngIf="compact || compactCollapse"
+                >{{ moreTokensLeft.length + moreTokensRight.length }} {{ moreTerm }}</ng-container
+            >
             <ng-container *ngIf="!compact && !compactCollapse">{{ hiddenCozyTokenCount }} {{ moreTerm }}</ng-container>
         </span>
         <ng-content select="[fd-form-control]"></ng-content>

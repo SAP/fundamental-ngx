@@ -14,20 +14,19 @@
         "default": {
             "runner": "@nrwl/workspace/tasks-runners/default",
             "options": {
-                "strictlyOrderedTargets": ["build", "lint", "test", "e2e"],
                 "cacheableOperations": ["build", "lint", "test", "e2e"]
+            }
+        },
+        "cloud": {
+            "runner": "@nrwl/nx-cloud",
+            "options": {
+                "strictlyOrderedTargets": ["build", "lint", "test", "e2e"],
+                "canTrackAnalytics": false,
+                "showUsageWarnings": true
             }
         }
     },
     "projects": {
-        "docs": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core", "platform"]
-        },
-        "docs-e2e": {
-            "tags": [],
-            "implicitDependencies": ["docs"]
-        },
         "core": {
             "tags": [],
             "implicitDependencies": [
@@ -110,54 +109,9 @@
                 "core-multi-input",
                 "core-wizard",
                 "core-tree",
-                "core-upload-collection"
-            ]
-        },
-        "moment-adapter": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core-datetime"]
-        },
-        "core-breadcrumb": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-menu", "core-popover"]
-        },
-        "core-message-page": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
-        },
-        "core-nested-list": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-menu", "core-popover", "core-icon"]
-        },
-        "core-mobile-mode": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-dialog"]
-        },
-        "core-tests": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core-mobile-mode"]
-        },
-        "core-icon": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
-        },
-        "core-button": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-icon"]
-        },
-        "core-checkbox": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
-        },
-        "core-dialog": {
-            "tags": ["fd"],
-            "implicitDependencies": [
-                "core-title",
-                "core-bar",
-                "core-button",
-                "core-busy-indicator",
-                "core-utils",
-                "core-shared"
+                "core-upload-collection",
+                "core-vertical-navigation",
+                "core-splitter"
             ]
         },
         "core-action-bar": {
@@ -184,9 +138,17 @@
             "tags": ["fd"],
             "implicitDependencies": ["core-utils", "core-button"]
         },
+        "core-breadcrumb": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-menu", "core-popover"]
+        },
         "core-busy-indicator": {
             "tags": ["fd"],
             "implicitDependencies": ["core-utils"]
+        },
+        "core-button": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-icon"]
         },
         "core-calendar": {
             "tags": ["fd"],
@@ -197,6 +159,10 @@
             "implicitDependencies": ["core-utils", "core-shared", "core-avatar", "core-object-status", "core-button"]
         },
         "core-carousel": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
+        },
+        "core-checkbox": {
             "tags": ["fd"],
             "implicitDependencies": ["core-utils"]
         },
@@ -230,6 +196,17 @@
                 "core-calendar",
                 "core-form",
                 "core-time"
+            ]
+        },
+        "core-dialog": {
+            "tags": ["fd"],
+            "implicitDependencies": [
+                "core-title",
+                "core-bar",
+                "core-button",
+                "core-busy-indicator",
+                "core-utils",
+                "core-shared"
             ]
         },
         "core-dynamic-page": {
@@ -276,6 +253,10 @@
             "tags": ["fd"],
             "implicitDependencies": ["core-utils", "core-toolbar", "core-form"]
         },
+        "core-icon": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
+        },
         "core-illustrated-message": {
             "tags": ["fd"],
             "implicitDependencies": ["core-utils"]
@@ -320,9 +301,33 @@
             "tags": ["fd"],
             "implicitDependencies": ["core-utils", "core-dialog"]
         },
+        "core-message-page": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
+        },
         "core-message-strip": {
             "tags": ["fd"],
             "implicitDependencies": ["core-utils"]
+        },
+        "core-message-toast": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
+        },
+        "core-micro-process-flow": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-shared", "core-popover"]
+        },
+        "core-mobile-mode": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-dialog"]
+        },
+        "core-multi-input": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils"]
+        },
+        "core-nested-list": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-menu", "core-popover", "core-icon"]
         },
         "core-notification": {
             "tags": ["fd"],
@@ -422,6 +427,10 @@
             "tags": ["fd"],
             "implicitDependencies": ["core-utils", "core-menu"]
         },
+        "core-splitter": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-icon"]
+        },
         "core-status-indicator": {
             "tags": ["fd"],
             "implicitDependencies": ["core-utils"]
@@ -450,6 +459,10 @@
                 "core-checkbox"
             ]
         },
+        "core-tests": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-mobile-mode"]
+        },
         "core-text": {
             "tags": ["fd"],
             "implicitDependencies": ["core-utils", "core-link"]
@@ -466,6 +479,10 @@
             "tags": ["fd"],
             "implicitDependencies": ["core-utils", "core-time", "core-popover"]
         },
+        "core-timeline": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-icon", "core-text"]
+        },
         "core-title": {
             "tags": ["fd"],
             "implicitDependencies": ["core-icon", "core-utils"]
@@ -478,17 +495,27 @@
             "tags": ["fd"],
             "implicitDependencies": ["core-utils", "core-popover", "core-button"]
         },
+        "core-tree": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-utils", "core-popover", "core-menu"]
+        },
+        "core-upload-collection": {
+            "tags": ["fd"],
+            "implicitDependencies": [
+                "core-button",
+                "core-list",
+                "core-link",
+                "core-object-status",
+                "core-object-marker"
+            ]
+        },
         "core-utils": {
             "tags": [],
             "implicitDependencies": ["core-shared"]
         },
-        "core-message-toast": {
+        "core-vertical-navigation": {
             "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
-        },
-        "core-multi-input": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils"]
+            "implicitDependencies": ["core-utils", "core-icon", "core-list"]
         },
         "core-wizard": {
             "tags": ["fd"],
@@ -500,30 +527,80 @@
                 "core-action-sheet"
             ]
         },
-        "core-tree": {
+        "docs": {
             "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-popover", "core-menu"]
+            "implicitDependencies": ["core", "platform"]
         },
-        "core-timeline": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-icon", "core-text"]
+        "docs-e2e": {
+            "tags": [],
+            "implicitDependencies": ["docs"]
         },
-        "core-micro-process-flow": {
-            "tags": ["fd"],
-            "implicitDependencies": ["core-utils", "core-shared", "core-popover"]
-        },
-
-        "core-upload-collection": {
-            "tags": ["fd"],
+        "fn": {
+            "tags": [],
             "implicitDependencies": [
+                "core-utils",
+                "core-shared",
                 "core-button",
-                "core-list",
-                "core-link",
-                "core-object-status",
-                "core-object-marker"
+                "core-icon",
+                "core-inline-help",
+                "core-popover",
+                "fn-tabs",
+                "fn-tag",
+                "fn-button",
+                "fn-checkbox",
+                "fn-form",
+                "fn-radio",
+                "fn-checkbox",
+                "fn-switch",
+                "fn-search",
+                "fn-select",
+                "fn-slider"
             ]
         },
-
+        "fn-button": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared", "core-button"]
+        },
+        "fn-checkbox": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared"]
+        },
+        "fn-form": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared", "core-button", "core-icon", "core-inline-help"]
+        },
+        "fn-radio": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared"]
+        },
+        "fn-search": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared"]
+        },
+        "fn-select": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared"]
+        },
+        "fn-slider": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared", "core-popover"]
+        },
+        "fn-switch": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared"]
+        },
+        "fn-tabs": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared"]
+        },
+        "fn-tag": {
+            "tags": ["fn"],
+            "implicitDependencies": ["core-utils", "core-shared"]
+        },
+        "moment-adapter": {
+            "tags": ["fd"],
+            "implicitDependencies": ["core-datetime"]
+        },
         "platform": {
             "tags": [],
             "implicitDependencies": [
@@ -556,9 +633,6 @@
                 "platform-wizard-generator",
                 "platform-icon-tab-bar"
             ]
-        },
-        "platform-shared": {
-            "tags": ["fdp"]
         },
         "platform-action-bar": {
             "tags": ["fdp"],
@@ -637,6 +711,10 @@
                 "platform-shared"
             ]
         },
+        "platform-icon-tab-bar": {
+            "tags": ["fdp"],
+            "implicitDependencies": ["core-icon", "core-popover", "core-utils"]
+        },
         "platform-info-label": {
             "tags": ["fdp"],
             "implicitDependencies": ["core-info-label"]
@@ -703,6 +781,9 @@
                 "platform-shared",
                 "platform-menu"
             ]
+        },
+        "platform-shared": {
+            "tags": ["fdp"]
         },
         "platform-slider": {
             "tags": ["fdp"],
@@ -811,10 +892,6 @@
                 "platform-shared",
                 "platform-link"
             ]
-        },
-        "platform-icon-tab-bar": {
-            "tags": ["fdp"],
-            "implicitDependencies": ["core-icon", "core-popover", "core-utils"]
         }
     }
 }

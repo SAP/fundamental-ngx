@@ -6,7 +6,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MicroProcessFlowPopoverExampleComponent {
-
     list1 = [
         { text: 'Option 1', url: '#' },
         { text: 'Option 2', url: '#' },

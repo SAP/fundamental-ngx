@@ -7,7 +7,6 @@ import { ViewportRuler } from '@angular/cdk/overlay';
     selector: '[fdpExtraButton], [fdp-extra-button]'
 })
 export class ExtraButtonDirective implements AfterViewInit, OnDestroy {
-
     /**
      * @description Position inside parent
      */
@@ -30,16 +29,12 @@ export class ExtraButtonDirective implements AfterViewInit, OnDestroy {
     private _onDestroy$ = new Subject();
 
     /** @hidden */
-    constructor(
-        private _el: ElementRef,
-        private _viewportRuler: ViewportRuler,
-        private _ngZone: NgZone,
-    ) {
-    }
+    constructor(private _el: ElementRef, private _viewportRuler: ViewportRuler, private _ngZone: NgZone) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._viewportRuler.change(50)
+        this._viewportRuler
+            .change(50)
             .pipe(takeUntil(this._onDestroy$))
             // ViewportRuler invoked out of zone, that is why I need to invoke function in zone
             .subscribe(() => this._ngZone.run(() => this.calculatePosition()));
@@ -57,7 +52,7 @@ export class ExtraButtonDirective implements AfterViewInit, OnDestroy {
      * @hidden
      * @description Calculate position of extra button
      */
-     calculatePosition(): void {
+    calculatePosition(): void {
         const nativeEl = this._el.nativeElement;
         const parent = nativeEl.parentElement;
 
@@ -68,14 +63,11 @@ export class ExtraButtonDirective implements AfterViewInit, OnDestroy {
             ? anchor.offsetLeft - nativeEl.offsetWidth
             : anchor.offsetLeft + anchor.offsetWidth;
 
-        const margin = this.isRtl
-            ? parseInt(computed.marginLeft, 10)
-            : parseInt(computed.marginRight, 10);
+        const margin = this.isRtl ? parseInt(computed.marginLeft, 10) : parseInt(computed.marginRight, 10);
 
         const myPositionWithOffset = this.isRtl
             ? myPosition - margin - this.extraButtonOffset
             : myPosition + margin + this.extraButtonOffset;
-
 
         this._el.nativeElement.style.left = `${myPositionWithOffset}px`;
     }

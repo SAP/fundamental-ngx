@@ -16,7 +16,7 @@ export class PlatformActionListItemDocsComponent {
         {
             language: 'html',
             code: aliSrc,
-            fileName: 'platform-action-list-item-example',
+            fileName: 'platform-action-list-item-example'
         },
         {
             language: 'typescript',
@@ -30,7 +30,7 @@ export class PlatformActionListItemDocsComponent {
         {
             language: 'html',
             code: borderLessALISrc,
-            fileName: 'platform-action-list-item-border-less-example',
+            fileName: 'platform-action-list-item-border-less-example'
         },
         {
             language: 'typescript',
@@ -39,5 +39,4 @@ export class PlatformActionListItemDocsComponent {
             fileName: 'platform-action-list-item-border-less-example'
         }
     ];
-
 }

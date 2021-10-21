@@ -24,6 +24,11 @@ const routes: Routes = [
 @NgModule({
     imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, LayoutPanelModule, TableModule],
     exports: [RouterModule],
-    declarations: [LayoutPanelDocsComponent, LayoutPanelExampleComponent, LayoutPanelDocsHeaderComponent, LayoutPanelEdgeBleedExampleComponent]
+    declarations: [
+        LayoutPanelDocsComponent,
+        LayoutPanelExampleComponent,
+        LayoutPanelDocsHeaderComponent,
+        LayoutPanelEdgeBleedExampleComponent
+    ]
 })
-export class LayoutPanelDocsModule { }
+export class LayoutPanelDocsModule {}

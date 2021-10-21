@@ -9,4 +9,4 @@ const DEFAULT_CONFIG: DialogConfig = {
 @NgModule({
     providers: [{ provide: DIALOG_DEFAULT_CONFIG, useValue: DEFAULT_CONFIG }]
 })
-class DialogGlobalConfigExampleModule { }
+class DialogGlobalConfigExampleModule {}

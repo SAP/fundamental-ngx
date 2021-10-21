@@ -46,9 +46,7 @@ export class FileUploaderDragndropDirective {
 
     private elementStateCounter = 0;
 
-    constructor(
-        private _fileUploadService: FileUploaderService,
-    ) {}
+    constructor(private _fileUploadService: FileUploaderService) {}
 
     /** @hidden */
     @HostListener('dragover', ['$event'])
@@ -98,8 +96,11 @@ export class FileUploaderDragndropDirective {
         }
 
         const fileOutput: FileUploadOutput = this._fileUploadService.validateFiles(
-            files, this.minFileSize, this.maxFileSize, this.accept
-        )
+            files,
+            this.minFileSize,
+            this.maxFileSize,
+            this.accept
+        );
 
         this.fileChanged.emit(fileOutput);
     }

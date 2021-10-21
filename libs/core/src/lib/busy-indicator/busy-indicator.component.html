@@ -4,10 +4,10 @@
     <div
         #busyIndicator
         class="fd-busy-indicator"
-        [class.fd-busy-indicator--l] = "size === 'l'"
-        [class.fd-busy-indicator--m] = "size === 'm'"
-        [class.fd-busy-indicator--s] = "size === 's'"
-        [class.fd-busy-indicator--absolute] = "busyIndicator?.previousElementSibling"
+        [class.fd-busy-indicator--l]="size === 'l'"
+        [class.fd-busy-indicator--m]="size === 'm'"
+        [class.fd-busy-indicator--s]="size === 's'"
+        [class.fd-busy-indicator--absolute]="busyIndicator?.previousElementSibling"
     >
         <div class="fd-busy-indicator--circle-0"></div>
         <div class="fd-busy-indicator--circle-1"></div>

@@ -48,7 +48,7 @@ export class CodeExampleComponent implements OnInit {
         private copyService: CopyService,
         private alertService: AlertService,
         private stackBlitzService: StackblitzService
-    ) { }
+    ) {}
 
     openStackBlitz(): void {
         this.stackBlitzService.openCode(this.exampleFiles);
@@ -66,7 +66,7 @@ export class CodeExampleComponent implements OnInit {
     ngOnInit(): void {
         this.smallScreen = window.innerWidth <= 768;
         const scssExamples: ExampleFile[] = [];
-        this.exampleFiles.forEach(file => {
+        this.exampleFiles.forEach((file) => {
             if (file.scssFileCode) {
                 scssExamples.push({
                     code: file.scssFileCode,

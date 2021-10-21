@@ -117,7 +117,7 @@ export class TileTitleContainerDirective {
 }
 
 @Directive({
-    selector: '[fdTileRefresh], [fd-tile-refresh]',
+    selector: '[fdTileRefresh], [fd-tile-refresh]'
 })
 export class TileRefreshDirective implements OnInit, OnChanges, CssClassBuilder {
     /** Glyph */

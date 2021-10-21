@@ -3,9 +3,7 @@ import { ElementRef } from '@angular/core';
 export const pxToNum = (pixels: string): number => Number(pixels.replace('px', '')) || 0;
 
 export const toNativeElement = (element: HTMLElement | ElementRef): HTMLElement =>
-    element instanceof ElementRef
-        ? element.nativeElement
-        : element;
+    element instanceof ElementRef ? element.nativeElement : element;
 
 /** Return elements capacity (width subtract by element padding)
  * @param element - HTMLelement or element reference

@@ -34,12 +34,14 @@ describe('InputGroup component', () => {
     let fixture: ComponentFixture<InputGroupHostComponent>;
     let inputGroupComponent: InputGroupComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [CommonModule, PlatformButtonModule, PlatformInputGroupModule],
-            declarations: [InputGroupHostComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CommonModule, PlatformButtonModule, PlatformInputGroupModule],
+                declarations: [InputGroupHostComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(InputGroupHostComponent);
@@ -122,16 +124,18 @@ class InputGroupFormTestWrapperComponent {
 
     initialFormModel = { qty: 100 };
 }
-describe('Input group withing platform form', () => {
+describe('Input group within platform form', () => {
     let fixture: ComponentFixture<InputGroupFormTestWrapperComponent>;
     let host: InputGroupFormTestWrapperComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformButtonModule, PlatformInputGroupModule],
-            declarations: [InputGroupFormTestWrapperComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [ReactiveFormsModule, FdpFormGroupModule, PlatformButtonModule, PlatformInputGroupModule],
+                declarations: [InputGroupFormTestWrapperComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(InputGroupFormTestWrapperComponent);
@@ -186,13 +190,17 @@ describe('Input group withing platform form', () => {
         expect(inputGroupElement.nativeElement.className.includes('is-error')).toBeTrue();
     });
 
-    it('should mark form field as touched when gets focused', async () => {
+    it('should mark form field as touched when gets blurred', async () => {
         const formControl = host.form.get('qty');
         const inputEl = fixture.debugElement.query(By.css('fdp-input input'));
 
         expect(formControl.touched).not.toBeTrue();
 
         inputEl.nativeElement.focus();
+
+        expect(formControl.touched).toBeFalse();
+
+        inputEl.nativeElement.blur();
 
         expect(formControl.touched).toBeTrue();
     });

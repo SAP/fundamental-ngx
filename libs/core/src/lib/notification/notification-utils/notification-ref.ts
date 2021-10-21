@@ -15,7 +15,6 @@ export class NotificationRef {
      */
     public afterClosed: Observable<any> = this._afterClosed.asObservable();
 
-
     /** Data passed from the calling component to the content.*/
     public data: any;
 

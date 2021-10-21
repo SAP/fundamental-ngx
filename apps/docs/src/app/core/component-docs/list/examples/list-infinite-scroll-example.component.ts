@@ -9,7 +9,6 @@ const ITEMS_AMOUNT_ON_LOAD = 5;
     templateUrl: './list-infinite-scroll-example.component.html'
 })
 export class ListInfiniteScrollExampleComponent {
-
     // List that is displayed to the user
     items = new Array(10).fill('Initially shown items');
 
@@ -19,7 +18,7 @@ export class ListInfiniteScrollExampleComponent {
         this.loading = true;
         of(this._getNewItems())
             .pipe(delay(2000))
-            .subscribe(result => {
+            .subscribe((result) => {
                 this.items = this.items.concat(result);
                 this.loading = false;
             });
@@ -36,6 +35,6 @@ export class ListInfiniteScrollExampleComponent {
 
         return Array(ITEMS_AMOUNT_ON_LOAD)
             .fill(undefined)
-            .map(_ => `Element ${index++}`)
+            .map((_) => `Element ${index++}`);
     }
 }

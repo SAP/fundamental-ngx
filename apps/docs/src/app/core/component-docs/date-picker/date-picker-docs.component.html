@@ -1,24 +1,16 @@
-<fd-docs-section-title
-    id="simple"
-    componentName="date-picker"
->
-    Simple Date Picker
-</fd-docs-section-title>
+<fd-docs-section-title id="simple" componentName="date-picker"> Simple Date Picker </fd-docs-section-title>
 <description>
     You can use two-way data binding to select a date or range of dates on a calendar. Calendars internally utilize an
     interface called <code>CalendarDay</code>, which contains the property <code>date</code>. To select a date you will
     create a new object that contains the property date, whose value is a date instance which DatetimeAdapter
-    implements. Then, using two-way
-    binding syntax, set the selectedDay value to your new date. Note that selecting a day (or range of days) in this
-    manner will override any block/disable functions.
+    implements. Then, using two-way binding syntax, set the selectedDay value to your new date. Note that selecting a
+    day (or range of days) in this manner will override any block/disable functions.
 </description>
 <description>
     The default format for the input is provided via DateTimeFormats. See the 'Formatting' section for details on how to
     change this.
 </description>
-<description>
-    The value for the input only changes the model on blur or an enter/return keystroke.
-</description>
+<description> The value for the input only changes the model on blur or an enter/return keystroke. </description>
 <component-example>
     <fd-date-picker-single-example></fd-date-picker-single-example>
 </component-example>
@@ -26,12 +18,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="range"
-    componentName="date-picker"
->
-    Range Date Picker
-</fd-docs-section-title>
+<fd-docs-section-title id="range" componentName="date-picker"> Range Date Picker </fd-docs-section-title>
 <description>
     Allows the selection of a range of dates. Only the first and last dates are passed back under ngModel.
 </description>
@@ -42,10 +29,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="internationalization"
-    componentName="date-picker"
->
+<fd-docs-section-title id="internationalization" componentName="date-picker">
     Internationalization
 </fd-docs-section-title>
 <description>
@@ -59,12 +43,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="formatting"
-    componentName="date-picker"
->
-    Formatting
-</fd-docs-section-title>
+<fd-docs-section-title id="formatting" componentName="date-picker"> Formatting </fd-docs-section-title>
 <description>
     Providing a custom format for the dates is possible through providing <code>DATE_TIME_FORMATS</code> config. Note
     that when providing a custom format, the <code>[placeholder]</code> input should be set to match the new format as
@@ -78,12 +57,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="null"
-    componentName="date-picker"
->
-    Null Validity
-</fd-docs-section-title>
+<fd-docs-section-title id="null" componentName="date-picker"> Null Validity </fd-docs-section-title>
 <description>
     Null input values are considered valid by default. Use <code>[allowNull]="false"</code> to make them invalid.
 </description>
@@ -94,13 +68,11 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="reactive-form"
-    componentName="date-picker"
->
+<fd-docs-section-title id="reactive-form" componentName="date-picker">
     Date Picker in Reactive Form
 </fd-docs-section-title>
-<description>The date-picker component may also be used within Angular Reactive Forms. The
+<description
+    >The date-picker component may also be used within Angular Reactive Forms. The
     <code>[disableFunction]</code> controls the <code>valid</code> flag. In this example past dates are disabled.
 </description>
 <component-example>
@@ -110,10 +82,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="reactive-form-range"
-    componentName="date-picker"
->
+<fd-docs-section-title id="reactive-form-range" componentName="date-picker">
     Date Picker in Reactive Form with a Range of Dates.
 </fd-docs-section-title>
 <component-example>
@@ -123,10 +92,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="reactive-form-single"
-    componentName="date-picker"
->
+<fd-docs-section-title id="reactive-form-single" componentName="date-picker">
     Single Date Picker in Reactive Form with Disable Function.
 </fd-docs-section-title>
 <description>
@@ -140,10 +106,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="reactive-form-with-disable"
-    componentName="date-picker"
->
+<fd-docs-section-title id="reactive-form-with-disable" componentName="date-picker">
     Range Date Picker in Reactive Form with Disable Functions.
 </fd-docs-section-title>
 <description>
@@ -157,12 +120,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="placement"
-    componentName="date-picker"
->
-    Placement
-</fd-docs-section-title>
+<fd-docs-section-title id="placement" componentName="date-picker"> Placement </fd-docs-section-title>
 <description>
     There is also added <code>[placement]</code> attribute which allows us to decide where popup should be shown.
 </description>
@@ -173,12 +131,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="disabled"
-    componentName="date-picker"
->
-    Disabled State
-</fd-docs-section-title>
+<fd-docs-section-title id="disabled" componentName="date-picker"> Disabled State </fd-docs-section-title>
 <component-example name="ex10">
     <fd-date-picker-disabled-example></fd-date-picker-disabled-example>
 </component-example>

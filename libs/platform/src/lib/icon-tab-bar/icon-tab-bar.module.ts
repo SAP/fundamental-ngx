@@ -18,7 +18,6 @@ import { IconBarDndItemDirective } from './directives/dnd/icon-bar-dnd-item.dire
 import { IconBarDndContainerDirective } from './directives/dnd/icon-bar-dnd-container.directive';
 import { IconBarDndListDirective } from './directives/dnd/icon-bar-dnd-list.directive';
 
-
 @NgModule({
     declarations: [
         IconTabBarComponent,
@@ -31,18 +30,9 @@ import { IconBarDndListDirective } from './directives/dnd/icon-bar-dnd-list.dire
         TextTypePopoverComponent,
         IconBarDndListDirective,
         IconBarDndItemDirective,
-        IconBarDndContainerDirective,
+        IconBarDndContainerDirective
     ],
-    imports: [
-        CommonModule,
-        IconModule,
-        PopoverModule,
-        OverflowListModule,
-        DragDropModule,
-    ],
-    exports: [
-        IconTabBarComponent,
-    ]
+    imports: [CommonModule, IconModule, PopoverModule, OverflowListModule, DragDropModule],
+    exports: [IconTabBarComponent]
 })
-export class PlatformIconTabBarModule {
-}
+export class PlatformIconTabBarModule {}

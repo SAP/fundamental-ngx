@@ -12,7 +12,7 @@ import { TableDataProvider, TableDataSource } from './domain';
 import { FILTER_STRING_STRATEGY, SelectionMode, SortDirection, TableRowType } from './enums';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
 import { TableRowSelectionChangeEvent, TableRowToggleOpenStateEvent } from './models';
-import { TableComponent } from './table.component';
+import { TableRowClass, TableComponent } from './table.component';
 import { PlatformTableModule } from './table.module';
 import { TableService } from './table.service';
 
@@ -196,6 +196,7 @@ describe('TableComponent internal', () => {
                 contentDensity="compact"
                 emptyTableMessage="No data found"
                 [selectionMode]="selection"
+                [rowsClass]="rowsClass"
             >
                 <fdp-table-toolbar title="Order Items" [hideItemCount]="false"></fdp-table-toolbar>
 
@@ -221,6 +222,7 @@ describe('TableComponent internal', () => {
         selection: SelectionMode = SelectionMode.NONE;
         /** So big so table column won't grow on any device */
         customColumnWidth = 10000;
+        rowsClass: TableRowClass<any> = 'class';
     }
 
     describe('TableComponent Host', async () => {
@@ -259,7 +261,9 @@ describe('TableComponent internal', () => {
         let tableRowCells2DArray: DebugElement[][] = [];
 
         const calculateTableElementsMetaData = () => {
-            tableHeaderCells = fixture.debugElement.queryAll(By.css('.fdp-table__header .fd-table__row .fd-table__cell'));
+            tableHeaderCells = fixture.debugElement.queryAll(
+                By.css('.fdp-table__header .fd-table__row .fd-table__cell')
+            );
             tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
             tableRowCells2DArray = tableBodyRows.map((row) => row.queryAll(By.css('.fd-table__cell')));
         };
@@ -296,7 +300,7 @@ describe('TableComponent internal', () => {
 
                 it('should be render using column.width option', () => {
                     const nameCell = tableRowCells2DArray[0][0];
-                    expect(nameCell.nativeElement.offsetWidth).toBe(hostComponent.customColumnWidth)
+                    expect(nameCell.nativeElement.offsetWidth).toBe(hostComponent.customColumnWidth);
                 });
 
                 it('should be render using column.key option', () => {
@@ -725,6 +729,37 @@ describe('TableComponent internal', () => {
                 expect(tableHeaderCells.length).toBe(4);
             });
         });
+
+        describe('rows', () => {
+            describe('custom class', () => {
+                it('should apply custom class using string value', () => {
+                    const rowClass = 'rowClass';
+                    hostComponent.rowsClass = rowClass;
+
+                    fixture.detectChanges();
+                    calculateTableElementsMetaData();
+
+                    const rowsClassesAssigned = tableBodyRows.every((row) => {
+                        return row.nativeElement.classList.contains(rowClass);
+                    });
+
+                    expect(rowsClassesAssigned).toBeTrue();
+                });
+
+                it('should apply custom class using function', () => {
+                    hostComponent.rowsClass = (row: SourceItem) => row.status;
+
+                    fixture.detectChanges();
+                    calculateTableElementsMetaData();
+
+                    const rowsClassesAssigned = tableBodyRows.every((row, index) => {
+                        return row.nativeElement.classList.contains(hostComponent.table._tableRows[index].value.status);
+                    });
+
+                    expect(rowsClassesAssigned).toBeTrue();
+                });
+            });
+        });
     });
 })();
 
@@ -885,7 +920,9 @@ describe('TableComponent internal', () => {
         let tableBodyContainer: DebugElement;
 
         const calculateTableElementsMetaData = () => {
-            tableHeaderCells = fixture.debugElement.queryAll(By.css('.fdp-table__header .fd-table__row .fd-table__cell'));
+            tableHeaderCells = fixture.debugElement.queryAll(
+                By.css('.fdp-table__header .fd-table__row .fd-table__cell')
+            );
             tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
             tableRowCells2DArray = tableBodyRows.map((row) => row.queryAll(By.css('.fd-table__cell')));
             tableBodyContainer = fixture.debugElement.query(By.css('.fdp-table__body'));
@@ -894,7 +931,7 @@ describe('TableComponent internal', () => {
         const tableBodyScrollTop = async (scrollTop) => {
             const container = tableBodyContainer.nativeElement as HTMLElement;
             container.scrollTop = scrollTop;
-            await new Promise(resolve => setTimeout(() => resolve(null), 100));
+            await new Promise((resolve) => setTimeout(() => resolve(null), 100));
             fixture.detectChanges();
             calculateTableElementsMetaData();
         };
@@ -929,14 +966,14 @@ describe('TableComponent internal', () => {
             expect(hostComponent.source.fetch).toHaveBeenCalledTimes(1);
         });
 
-        it('should trigger fetch when scrolled to the bottom', async() => {
+        it('should trigger fetch when scrolled to the bottom', async () => {
             expect(hostComponent.source.fetch).toHaveBeenCalledTimes(1); // 1 means initial fetch
             const container = tableBodyContainer.nativeElement as HTMLElement;
             await tableBodyScrollTop(container.scrollHeight);
             expect(hostComponent.source.fetch).toHaveBeenCalledTimes(2);
         });
 
-        it('should get new 50 items per each request', async() => {
+        it('should get new 50 items per each request', async () => {
             await tableBodyScrollTop(999999);
 
             expect(tableBodyRows.length).toBe(100);
@@ -946,7 +983,7 @@ describe('TableComponent internal', () => {
             expect(tableBodyRows.length).toBe(150);
         });
 
-        it('should stop fetching on scroll if currentPage is the last one', async() => {
+        it('should stop fetching on scroll if currentPage is the last one', async () => {
             await tableBodyScrollTop(999999); // 100
             await tableBodyScrollTop(999999); // 150
             await tableBodyScrollTop(999999); // 200
@@ -965,13 +1002,13 @@ describe('TableComponent internal', () => {
 })();
 
 interface SourceTreeItem {
-    name: string,
-    children: SourceTreeItem[] | SourceItem[]
+    name: string;
+    children: SourceTreeItem[] | SourceItem[];
 }
 
 const treeItemParentsCount = 10;
 const treeItemsChildrenPerParentCount = 1;
-const totalTreeItems = treeItemParentsCount + (treeItemParentsCount * treeItemsChildrenPerParentCount);
+const totalTreeItems = treeItemParentsCount + treeItemParentsCount * treeItemsChildrenPerParentCount;
 
 const generateTreeItems = (length = 50): SourceTreeItem[] =>
     Array.from(Array(length)).map(
@@ -1019,13 +1056,13 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
         let tableComponent: TableComponent<SourceItem>;
 
         let tableBodyRows: DebugElement[] = [];
-        let tableBodyTreeRows: DebugElement[] = [];
         let tableRowTogglerCellsArray: DebugElement[] = [];
 
         const calculateTableElementsMetaData = () => {
             tableBodyRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fd-table__row'));
-            tableBodyTreeRows = fixture.debugElement.queryAll(By.css('.fdp-table__body .fdp-table__row--tree'));
-            tableRowTogglerCellsArray = tableBodyTreeRows.map((row) => row.query(By.css('.fdp-table__cell--tree')));
+            tableRowTogglerCellsArray = fixture.debugElement.queryAll(
+                By.css('.fdp-table__body .fd-table__row .fd-table__cell--expand')
+            );
         };
 
         beforeEach(
@@ -1055,7 +1092,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
         it('should generate rows for provided items', () => {
             expect(tableComponent._tableRows.length).toEqual(totalTreeItems);
 
-            expect(tableBodyTreeRows.length).toEqual(treeItemParentsCount);
+            expect(tableRowTogglerCellsArray.length).toEqual(treeItemParentsCount);
         });
 
         describe('Collapsing/Expanding', () => {
@@ -1102,9 +1139,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 calculateTableElementsMetaData();
 
-                expect(tableBodyRows.length).toEqual(
-                    treeItemParentsCount + treeItemsChildrenPerParentCount
-                );
+                expect(tableBodyRows.length).toEqual(treeItemParentsCount + treeItemsChildrenPerParentCount);
 
                 secondRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
@@ -1112,9 +1147,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 calculateTableElementsMetaData();
 
-                expect(tableBodyRows.length).toEqual(
-                    treeItemParentsCount + treeItemsChildrenPerParentCount * 2
-                );
+                expect(tableBodyRows.length).toEqual(treeItemParentsCount + treeItemsChildrenPerParentCount * 2);
 
                 firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
@@ -1122,9 +1155,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 calculateTableElementsMetaData();
 
-                expect(tableBodyRows.length).toEqual(
-                    treeItemParentsCount + treeItemsChildrenPerParentCount
-                );
+                expect(tableBodyRows.length).toEqual(treeItemParentsCount + treeItemsChildrenPerParentCount);
 
                 secondRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
@@ -1158,9 +1189,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 calculateTableElementsMetaData();
 
-                expect(tableBodyRows.length).toEqual(
-                    treeItemParentsCount + treeItemsChildrenPerParentCount * 1
-                );
+                expect(tableBodyRows.length).toEqual(treeItemParentsCount + treeItemsChildrenPerParentCount * 1);
             });
 
             it('should emit event after rearranging rows', () => {
@@ -1202,9 +1231,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 calculateTableElementsMetaData();
 
-                expect(tableBodyRows.length).toEqual(
-                    treeItemParentsCount + treeItemsChildrenPerParentCount * 1
-                );
+                expect(tableBodyRows.length).toEqual(treeItemParentsCount + treeItemsChildrenPerParentCount * 1);
 
                 tableComponent._dragDropItemDrop({
                     items: [],
@@ -1220,7 +1247,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
             });
 
             it('should change type for row with 0 children to "item"', () => {
-                expect(tableBodyTreeRows.length).toEqual(treeItemParentsCount);
+                expect(tableRowTogglerCellsArray.length).toEqual(treeItemParentsCount);
 
                 firstRowToggler.nativeElement.dispatchEvent(new MouseEvent('click'));
 
@@ -1236,7 +1263,7 @@ class TreeTableDataProviderMock extends TableDataProvider<SourceTreeItem> {
 
                 calculateTableElementsMetaData();
 
-                expect(tableBodyTreeRows.length).toEqual(treeItemParentsCount - 1);
+                expect(tableRowTogglerCellsArray.length).toEqual(treeItemParentsCount - 1);
             });
         });
     });

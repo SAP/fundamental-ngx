@@ -4,7 +4,6 @@ import { Placement, PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 @Directive()
 export class BasePopoverClass {
-
     @Input()
     /** Whether to close the popover on router navigation start. */
     closeOnNavigation = true;
@@ -118,5 +117,4 @@ export class BasePopoverClass {
     /** Event emitted when the state of the isOpen property changes. */
     @Output()
     isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
-
 }

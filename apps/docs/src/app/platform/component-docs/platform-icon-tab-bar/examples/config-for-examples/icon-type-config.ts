@@ -32,7 +32,8 @@ export const iconTypeConfig: TabConfig[] = [
         label: 'Item 4',
         counter: 0,
         color: null
-    }, {
+    },
+    {
         icon: 'appointment',
         label: 'Item 5',
         counter: 34,

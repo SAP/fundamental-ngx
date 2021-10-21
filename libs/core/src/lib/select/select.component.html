@@ -2,11 +2,19 @@
 
 <ng-template #desktopTemplate>
     <div class="fd-select" [class.fd-select--compact]="compact" (keydown)="_handleKeydown($event)" (click)="toggle()">
-        <fd-popover additionalBodyClass="fd-popover-custom-list" [isOpen]="_isOpen" [triggers]="[]"
-            [focusTrapped]="true" [disabled]="disabled || readonly" [appendTo]="appendTo"
-            [closeOnEscapeKey]="true" [fillControlMode]="'at-least'" [maxWidth]="600"
-            [closeOnOutsideClick]="closeOnOutsideClick" (isOpenChange)="_popoverOpenChangeHandle($event)">
-
+        <fd-popover
+            additionalBodyClass="fd-popover-custom-list"
+            [isOpen]="_isOpen"
+            [triggers]="[]"
+            [focusTrapped]="true"
+            [disabled]="disabled || readonly"
+            [appendTo]="appendTo"
+            [closeOnEscapeKey]="true"
+            [fillControlMode]="'at-least'"
+            [maxWidth]="600"
+            [closeOnOutsideClick]="closeOnOutsideClick"
+            (isOpenChange)="_popoverOpenChangeHandle($event)"
+        >
             <fd-popover-control>
                 <ng-container [ngTemplateOutlet]="selectInputControlTemplate"></ng-container>
             </fd-popover-control>
@@ -19,38 +27,79 @@
 </ng-template>
 
 <ng-template #selectInputControlTemplate>
-    <div class="fd-select__control" role="list" #selectControl [ngClass]="state ? 'is-' + state : ''"
-        [class.is-active]="_isOpen" [class.is-expanded]="_isOpen" [class.is-disabled]="disabled"
-        [class.is-readonly]="readonly" [attr.tabindex]="_tabIndex" [attr.id]="controlId" [attr.aria-active]="_isOpen"
+    <div
+        class="fd-select__control"
+        role="list"
+        #selectControl
+        [ngClass]="state ? 'is-' + state : ''"
+        [class.is-active]="_isOpen"
+        [class.is-expanded]="_isOpen"
+        [class.is-disabled]="disabled"
+        [class.is-readonly]="readonly"
+        [attr.tabindex]="_tabIndex"
+        [attr.id]="controlId"
+        [attr.aria-active]="_isOpen"
         aria-live="polite"
         [attr.aria-selected]="selected?.selected"
-        [attr.aria-expanded]="_isOpen" [attr.aria-disabled]="disabled" [attr.aria-readonly]="readonly"
-        [attr.aria-controls]="controlId + '-list-box'" [attr.aria-haspopup]="!(this.readonly || this.disabled)"
+        [attr.aria-expanded]="_isOpen"
+        [attr.aria-disabled]="disabled"
+        [attr.aria-readonly]="readonly"
+        [attr.aria-controls]="controlId + '-list-box'"
+        [attr.aria-haspopup]="!(this.readonly || this.disabled)"
         [attr.aria-required]="required"
-        [attr.title]="triggerValue" [attr.aria-label]="triggerValue" [attr.aria-labelledby]="triggerValue"
-        [attr.aria-activedescendant]="_getAriaActiveDescendant()" (focus)="_onFocus()" (blur)="_onBlur()">
-        <div  role="listitem" class="fd-select__text-content"  [attr.aria-label]="triggerValue">
-            <ng-container [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
-                [ngTemplateOutletContext]="{ $implicit: triggerValue, selected: selected }">
+        [attr.title]="triggerValue"
+        [attr.aria-label]="triggerValue"
+        [attr.aria-labelledby]="triggerValue"
+        [attr.aria-activedescendant]="_getAriaActiveDescendant()"
+        (focus)="_onFocus()"
+        (blur)="_onBlur()"
+    >
+        <div role="listitem" class="fd-select__text-content" [attr.aria-label]="triggerValue">
+            <ng-container
+                [ngTemplateOutlet]="controlTemplate ? controlTemplate : defaultSelectContent"
+                [ngTemplateOutletContext]="{ $implicit: triggerValue, selected: selected }"
+            >
             </ng-container>
 
             <ng-template #defaultSelectContent>
                 {{ triggerValue }}
             </ng-template>
         </div>
-        <button fd-button tabindex="-1" class="fd-button--transparent fd-select__button" *ngIf="!readonly"
-            [disabled]="disabled" [glyph]="glyph">
-        </button>
+        <button
+            fd-button
+            tabindex="-1"
+            class="fd-button--transparent fd-select__button"
+            *ngIf="!readonly"
+            [disabled]="disabled"
+            [glyph]="glyph"
+        ></button>
     </div>
 </ng-template>
 
 <ng-template #selectOptionsListTemplate>
-    <ul #optionPanel fd-list class="fd-select-options" role="listbox" tabindex="-1" [compact]="compact"
-        [mobileMode]="mobile" [dropdownMode]="true" [hasMessage]="!!stateMessage" [attr.id]="controlId + '-list-box'"
-        [style.max-height]="maxHeight || calculatedMaxHeight + 'px'" [attr.tooltip]="triggerValue">
-        <li *ngIf="stateMessage" [attr.aria-label]="stateMessage" fd-list-message tabindex="-1" role="presentation" [type]="state">
-            {{stateMessage}}
-        </li>
+    <ul
+        #optionPanel
+        fd-list
+        class="fd-select-options"
+        role="listbox"
+        tabindex="-1"
+        [compact]="compact"
+        [mobileMode]="mobile"
+        [dropdownMode]="true"
+        [hasMessage]="!!stateMessage"
+        [attr.id]="controlId + '-list-box'"
+        [style.max-height]="maxHeight || calculatedMaxHeight + 'px'"
+        [attr.tooltip]="triggerValue"
+    >
+        <li
+            *ngIf="stateMessage"
+            [attr.aria-label]="stateMessage"
+            fd-list-message
+            tabindex="-1"
+            role="presentation"
+            [type]="state"
+            [innerHtml]="stateMessage"
+        ></li>
 
         <ng-content></ng-content>
     </ul>

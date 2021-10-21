@@ -174,8 +174,12 @@
                                 </fd-wizard-next-step>
                             </fd-wizard-content>
                         </li>
-                        <li fd-wizard-step [status]="summaryStatus" [isSummary]="true"
-                            (statusChange)="statusChanged(5, $event)">
+                        <li
+                            fd-wizard-step
+                            [status]="summaryStatus"
+                            [isSummary]="true"
+                            (statusChange)="statusChanged(5, $event)"
+                        >
                             <fd-wizard-content size="lg">
                                 <h4 class="fd-title fd-title--h4">1. Product Type</h4>
                                 <fd-layout-grid style="margin-bottom: 2rem">

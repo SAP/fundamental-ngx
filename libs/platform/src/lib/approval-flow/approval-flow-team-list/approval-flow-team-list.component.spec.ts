@@ -37,5 +37,5 @@ describe('ApprovalFlowTeamListComponent', () => {
         component._showTeamDetails(approvalTeam);
 
         expect(teamSpy).toHaveBeenCalled();
-    })
+    });
 });

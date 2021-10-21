@@ -9,7 +9,7 @@ import {
     Optional,
     TemplateRef,
     ViewChild,
-    ViewEncapsulation,
+    ViewEncapsulation
 } from '@angular/core';
 
 import { Subscription } from 'rxjs';
@@ -25,17 +25,19 @@ import { DialogService } from '@fundamental-ngx/core/dialog';
 import { PopoverInterface, POPOVER_COMPONENT } from '../popover.interface';
 import { PopoverChildContent } from '../popover-child-content.interface';
 
+let mobilePopoverUniqueId = 0;
+
 @Component({
     selector: 'fd-popover-mobile',
     templateUrl: './popover-mobile.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None
 })
 export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> implements OnInit, OnDestroy {
     /** @hidden
      * from mobile class can not prefix _,
      * to avoid build issues
-    */
+     */
     childContent: PopoverChildContent = undefined;
 
     /** Current popover title */
@@ -51,7 +53,15 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     _dialogTemplate: TemplateRef<any>;
 
     /** @hidden */
+    readonly id = 'fd-popover-mobile-' + mobilePopoverUniqueId++;
+
+    /** @hidden */
     private _subscriptions = new Subscription();
+
+    /** @hidden */
+    get titleId(): string {
+        return this.id + '-title';
+    }
 
     /**@hidden */
     constructor(
@@ -91,15 +101,13 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
     /** @hidden Opens/closes the Dialog based on Popover isOpenChange events */
     private _listenOnPopoverOpenChange(): void {
         this._subscriptions.add(
-            this._component.isOpenChange
-                .pipe(takeUntil(this._onDestroy$))
-                .subscribe((isOpen) => {
-                    if (isOpen) {
-                        this._openDialog();
-                    } else {
-                        this.dialogRef.hide(true);
-                    }
-                })
+            this._component.isOpenChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => {
+                if (isOpen) {
+                    this._openDialog();
+                } else {
+                    this.dialogRef.hide(true);
+                }
+            })
         );
     }
 
@@ -108,12 +116,13 @@ export class PopoverMobileComponent extends MobileModeBase<PopoverInterface> imp
         this.dialogRef = this._dialogService.open(this._dialogTemplate, {
             ...this.dialogConfig,
             mobile: true,
-            focusTrapped: false,
+            focusTrapped: true,
             verticalPadding: true,
             escKeyCloseable: false,
             backdropClickCloseable: false,
             container: this._elementRef.nativeElement,
             responsivePadding: true,
+            ariaLabelledBy: this.titleId
         });
     }
 }

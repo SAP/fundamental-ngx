@@ -1,10 +1,10 @@
 .fd-button.fd-shellbar__button--menu,
-.fd-button.fd-shellbar__button--menu:hover, {
-	color: #d1e8ff;
-	color: var(--sapShell_InteractiveTextColor, #d1e8ff);
+.fd-button.fd-shellbar__button--menu:hover {
+    color: #d1e8ff;
+    color: var(--sapShell_InteractiveTextColor, #d1e8ff);
 }
 
 .fd-button.fd-shellbar__button--menu {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
 }

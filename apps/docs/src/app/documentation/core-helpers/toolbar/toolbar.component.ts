@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import { Component, EventEmitter, Inject, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Libraries } from '../../utilities/libraries';
 
 import { SafeResourceUrl } from '@angular/platform-browser';
@@ -10,7 +10,6 @@ import { debounceTime, startWith, takeUntil } from 'rxjs/operators';
 import { MenuComponent, MenuKeyboardService } from '@fundamental-ngx/core/menu';
 import { ContentDensity, ContentDensityService, ThemesService } from '@fundamental-ngx/core/utils';
 import { ShellbarMenuItem, ShellbarSizes } from '@fundamental-ngx/core/shellbar';
-
 
 @Component({
     selector: 'fd-docs-toolbar',
@@ -51,6 +50,12 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
             callback: () => {
                 this._routerService.navigate(['platform/home']);
             }
+        },
+        {
+            name: 'Experimental Docs',
+            callback: () => {
+                this._routerService.navigate(['fn/home']);
+            }
         }
     ];
 
@@ -65,12 +70,11 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
         private _docsThemeService: DocsThemeService,
         private _contentDensityService: ContentDensityService,
         @Inject('CURRENT_LIB') private _currentLib: Libraries,
+        private _route: ActivatedRoute
     ) {
-        this.library = _routerService.routerState.snapshot.url.includes('core') ? 'Core' : 'Platform';
+        this.library = _route.snapshot.data.library || 'Core';
 
-        this._docsThemeService.onThemeChange.pipe(
-            takeUntil(this._onDestroy$)
-        ).subscribe(theme => {
+        this._docsThemeService.onThemeChange.pipe(takeUntil(this._onDestroy$)).subscribe((theme) => {
             this.cssUrl = theme.themeUrl;
             this.customCssUrl = theme.customThemeUrl;
         });
@@ -78,26 +82,26 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.versions = [
-            {id: '0.30.0', url: 'https://6099b79d6eba2400084bb441--fundamental-ngx.netlify.app/'},
-            {id: '0.29.1', url: 'https://60d4a57fa0ac322070e9bc6e--fundamental-ngx.netlify.app/'},
-            {id: '0.28.0', url: 'https://60386a93e4a7010007247f23--fundamental-ngx.netlify.app/'},
-            {id: '0.27.0', url: 'https://602a61e08b3cf200074fa0b5--fundamental-ngx.netlify.app/'},
-            {id: '0.26.0', url: 'https://600860290fee570007d7f660--fundamental-ngx.netlify.app/'},
-            {id: '0.25.1', url: 'https://5fdb2c4892110a00080b0895--fundamental-ngx.netlify.app/'},
-            {id: '0.24.1', url: 'https://5fbd1c1239f44a000736c439--fundamental-ngx.netlify.app/'},
-            {id: '0.23.0', url: 'https://5f96ff4047c5f300070eb8a1--fundamental-ngx.netlify.app/'},
-            {id: '0.22.0', url: 'https://5f776fb812cfa300086de86a--fundamental-ngx.netlify.app/'},
-            {id: '0.21.0', url: 'https://5f355f63718e9200075585e1--fundamental-ngx.netlify.app/'},
-            {id: '0.20.0', url: 'https://5f0630964a7a370007f93dc4--fundamental-ngx.netlify.app/'},
-            {id: '0.19.0', url: 'https://5ef288ca158ebd0008946f4d--fundamental-ngx.netlify.app/'},
-            {id: '0.18.0', url: 'https://5ec04b7f46b9bd000648f8ec--fundamental-ngx.netlify.app/'},
-            {id: '0.17.0', url: 'https://5e9a135cc7c8e90006047bdf--fundamental-ngx.netlify.app/'},
-            {id: '0.16.0', url: 'https://5e97032838070600063141e4--fundamental-ngx.netlify.app/'},
-            {id: '0.15.0', url: 'https://5e5fe7518009de0008f41fff--fundamental-ngx.netlify.app/'},
-            {id: '0.14.0', url: 'https://5e4f1d0714bc4c000ae3282d--fundamental-ngx.netlify.app/'},
-            {id: '0.13.0', url: 'https://5e25d4d1837fae0009b5c4fa--fundamental-ngx.netlify.app/'},
-            {id: '0.12.0', url: 'https://5db1dc978d2a340009a82d64--fundamental-ngx.netlify.app/'},
-            {id: '0.11.0', url: 'https://5d8a3409acaf8d00070ccd64--fundamental-ngx.netlify.app/'}
+            { id: '0.30.0', url: 'https://6099b79d6eba2400084bb441--fundamental-ngx.netlify.app/' },
+            { id: '0.29.1', url: 'https://60d4a57fa0ac322070e9bc6e--fundamental-ngx.netlify.app/' },
+            { id: '0.28.0', url: 'https://60386a93e4a7010007247f23--fundamental-ngx.netlify.app/' },
+            { id: '0.27.0', url: 'https://602a61e08b3cf200074fa0b5--fundamental-ngx.netlify.app/' },
+            { id: '0.26.0', url: 'https://600860290fee570007d7f660--fundamental-ngx.netlify.app/' },
+            { id: '0.25.1', url: 'https://5fdb2c4892110a00080b0895--fundamental-ngx.netlify.app/' },
+            { id: '0.24.1', url: 'https://5fbd1c1239f44a000736c439--fundamental-ngx.netlify.app/' },
+            { id: '0.23.0', url: 'https://5f96ff4047c5f300070eb8a1--fundamental-ngx.netlify.app/' },
+            { id: '0.22.0', url: 'https://5f776fb812cfa300086de86a--fundamental-ngx.netlify.app/' },
+            { id: '0.21.0', url: 'https://5f355f63718e9200075585e1--fundamental-ngx.netlify.app/' },
+            { id: '0.20.0', url: 'https://5f0630964a7a370007f93dc4--fundamental-ngx.netlify.app/' },
+            { id: '0.19.0', url: 'https://5ef288ca158ebd0008946f4d--fundamental-ngx.netlify.app/' },
+            { id: '0.18.0', url: 'https://5ec04b7f46b9bd000648f8ec--fundamental-ngx.netlify.app/' },
+            { id: '0.17.0', url: 'https://5e9a135cc7c8e90006047bdf--fundamental-ngx.netlify.app/' },
+            { id: '0.16.0', url: 'https://5e97032838070600063141e4--fundamental-ngx.netlify.app/' },
+            { id: '0.15.0', url: 'https://5e5fe7518009de0008f41fff--fundamental-ngx.netlify.app/' },
+            { id: '0.14.0', url: 'https://5e4f1d0714bc4c000ae3282d--fundamental-ngx.netlify.app/' },
+            { id: '0.13.0', url: 'https://5e25d4d1837fae0009b5c4fa--fundamental-ngx.netlify.app/' },
+            { id: '0.12.0', url: 'https://5db1dc978d2a340009a82d64--fundamental-ngx.netlify.app/' },
+            { id: '0.11.0', url: 'https://5d8a3409acaf8d00070ccd64--fundamental-ngx.netlify.app/' }
         ];
 
         this.versions.unshift(this.version);
@@ -108,7 +112,7 @@ export class ToolbarDocsComponent implements OnInit, OnDestroy {
 
         fromEvent(window, 'resize')
             .pipe(startWith(1), debounceTime(60), takeUntil(this._onDestroy$))
-            .subscribe(() => this.size = this._getShellbarSize());
+            .subscribe(() => (this.size = this._getShellbarSize()));
     }
 
     ngOnDestroy(): void {

@@ -41,7 +41,6 @@ import { MICRO_PROCESS_FLOW } from '../../injection-tokens';
     ]
 })
 export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewInit {
-
     /** Should connector between items be hidden. */
     @Input()
     independentSteps = false;
@@ -63,7 +62,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
     items: QueryList<MicroProcessFlowItemComponent>;
 
     /** Micro process flow items. */
-    @ContentChildren(MicroProcessFlowFocusableItemDirective, {descendants: true})
+    @ContentChildren(MicroProcessFlowFocusableItemDirective, { descendants: true })
     focusableItems: QueryList<MicroProcessFlowFocusableItemDirective>;
 
     /**
@@ -125,33 +124,36 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
         private _cd: ChangeDetectorRef,
         @Optional() private _rtl: RtlService,
         @Optional() private _contentDensityService: ContentDensityService
-    ) { }
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
-
         // If any element is currently focused, disable ability to navigate bentween items with tab.
-        this._subscriptions.add(this.canItemsReceiveFocus.pipe(debounceTime(10)).subscribe((value) => {
-            if (value) {
-                this._setFocusableVisibleItems();
-            } else {
-                this._disableFocusableItems();
-            }
-        }));
+        this._subscriptions.add(
+            this.canItemsReceiveFocus.pipe(debounceTime(10)).subscribe((value) => {
+                if (value) {
+                    this._setFocusableVisibleItems();
+                } else {
+                    this._disableFocusableItems();
+                }
+            })
+        );
 
         if (this._rtl) {
-            this._subscriptions.add(this._rtl.rtl.subscribe((value) => {
-                this._isRtl = value;
+            this._subscriptions.add(
+                this._rtl.rtl.subscribe((value) => {
+                    this._isRtl = value;
 
-                if (this.showPreviousButton) {
-                    this._paginate(0);
-                }
-            }));
+                    if (this.showPreviousButton) {
+                        this._paginate(0);
+                    }
+                })
+            );
         }
 
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener
-                .subscribe(density => {
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
                     this.compact = density !== 'cozy';
                     this._paginate(0);
                 })
@@ -177,7 +179,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
             const direction = isRightKey ? 1 : -1;
             event.stopImmediatePropagation();
 
-            const elementIndexToScroll = this._getPreviousItemsCount()  + direction;
+            const elementIndexToScroll = this._getPreviousItemsCount() + direction;
             const elementExists = this.items.get(elementIndexToScroll);
 
             if (!elementExists) {
@@ -197,15 +199,17 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
 
     /** Listens on items change and checks if navigation buttons should be visible. */
     listenOnItemsChange(): void {
-        this._subscriptions.add(this.items.changes.pipe(startWith(0)).subscribe(() => {
-            this.items.forEach((item) => {
-                item.setLastItem(false);
-            });
+        this._subscriptions.add(
+            this.items.changes.pipe(startWith(0)).subscribe(() => {
+                this.items.forEach((item) => {
+                    item.setLastItem(false);
+                });
 
-            this.items.last?.setLastItem(true);
-            this._setNavigationButtons();
-            this._paginate(0);
-        }));
+                this.items.last?.setLastItem(true);
+                this._setNavigationButtons();
+                this._paginate(0);
+            })
+        );
     }
 
     /** Scrolls to the next item. */
@@ -222,7 +226,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
      * Checks if navigation buttons should be visible depending on the amount of items
      * and current pagination offset.
      */
-     private _setNavigationButtons(): void {
+    private _setNavigationButtons(): void {
         if (this._container === undefined) {
             return;
         }
@@ -354,9 +358,7 @@ export class MicroProcessFlowComponent implements OnInit, OnDestroy, AfterViewIn
 
         const containerWidth = this._container.nativeElement.offsetWidth;
 
-        const itemsToDisplay = this.items
-        .toArray()
-        .slice(this.previousItemsCount);
+        const itemsToDisplay = this.items.toArray().slice(this.previousItemsCount);
 
         let visibleItemsWidth = 0;
         let newVisibleItemsWidth = 0;

@@ -26,7 +26,7 @@ export class PaginationService {
         const pages = [];
         this.validate(pagination);
         const totalPages = this.getTotalPages(pagination);
-        if (totalPages <= SIDE_CURRENT_DISPLAY_PAGES * 2 + MIN_CORNER_DISPLAY_PAGES + 1 + 2 ) {
+        if (totalPages <= SIDE_CURRENT_DISPLAY_PAGES * 2 + MIN_CORNER_DISPLAY_PAGES + 1 + 2) {
             for (let i = 1; i <= totalPages; i++) {
                 pages.push(i);
             }
@@ -34,11 +34,12 @@ export class PaginationService {
             for (let i = 1; i <= totalPages; i++) {
                 if (i === pagination.currentPage) {
                     pages.push(i);
-                } else if (pagination.currentPage <= SIDE_CURRENT_DISPLAY_PAGES
-                    && i <= MIN_CORNER_DISPLAY_PAGES + 1) {
+                } else if (pagination.currentPage <= SIDE_CURRENT_DISPLAY_PAGES && i <= MIN_CORNER_DISPLAY_PAGES + 1) {
                     pages.push(i);
-                } else if (pagination.currentPage >= totalPages - SIDE_CURRENT_DISPLAY_PAGES
-                    && i >= totalPages - MIN_CORNER_DISPLAY_PAGES) {
+                } else if (
+                    pagination.currentPage >= totalPages - SIDE_CURRENT_DISPLAY_PAGES &&
+                    i >= totalPages - MIN_CORNER_DISPLAY_PAGES
+                ) {
                     pages.push(i);
                 } else {
                     if (i === 1) {
@@ -47,8 +48,10 @@ export class PaginationService {
                         pages.push(i);
                     }
                     // tslint:disable-next-line
-                    else if (i >= pagination.currentPage - SIDE_CURRENT_DISPLAY_PAGES
-                        && i < pagination.currentPage + SIDE_CURRENT_DISPLAY_PAGES + 1) {
+                    else if (
+                        i >= pagination.currentPage - SIDE_CURRENT_DISPLAY_PAGES &&
+                        i < pagination.currentPage + SIDE_CURRENT_DISPLAY_PAGES + 1
+                    ) {
                         pages.push(i);
                     }
                 }
@@ -81,10 +84,14 @@ export class PaginationService {
     validate(pagination: Pagination): void {
         if (isDevMode()) {
             if (isNaN(pagination.totalItems) || pagination.totalItems <= 0) {
-                console.warn(`"totalItems" must be a number greater than zero but got "${pagination.totalItems}". This warning only appears in development mode.`);
+                console.warn(
+                    `"totalItems" must be a number greater than zero but got "${pagination.totalItems}". This warning only appears in development mode.`
+                );
             }
             if (isNaN(pagination.itemsPerPage) || pagination.itemsPerPage <= 0) {
-                console.warn(`"itemsPerPage" must be a number greater than zero but got "${pagination.itemsPerPage}". This warning only appears in development mode.`);
+                console.warn(
+                    `"itemsPerPage" must be a number greater than zero but got "${pagination.itemsPerPage}". This warning only appears in development mode.`
+                );
             }
         }
     }

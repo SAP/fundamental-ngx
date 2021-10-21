@@ -27,7 +27,7 @@ export class PlatformStandardListItemDocsComponent {
         {
             language: 'html',
             code: sliSrc,
-            fileName: 'platform-standard-list-item-example',
+            fileName: 'platform-standard-list-item-example'
         }
     ];
 
@@ -35,14 +35,14 @@ export class PlatformStandardListItemDocsComponent {
         {
             language: 'html',
             code: sli,
-            fileName: 'platform-non-byline-standard-list-item-example',
+            fileName: 'platform-non-byline-standard-list-item-example'
         }
     ];
     borderLessSLI: ExampleFile[] = [
         {
             language: 'html',
             code: borderLessSLISrc,
-            fileName: 'platform-standard-list-item-border-less-example',
+            fileName: 'platform-standard-list-item-border-less-example'
         },
         {
             language: 'typescript',
@@ -56,7 +56,7 @@ export class PlatformStandardListItemDocsComponent {
         {
             language: 'html',
             code: sliWithSecondaryType,
-            fileName: 'platform-standard-list-item-with-secondary-type-example',
+            fileName: 'platform-standard-list-item-with-secondary-type-example'
         }
     ];
 
@@ -64,7 +64,7 @@ export class PlatformStandardListItemDocsComponent {
         {
             language: 'html',
             code: sliWithInvertedSecondaryType,
-            fileName: 'platform-standard-list-item-with-inverted-secondary-type-example',
+            fileName: 'platform-standard-list-item-with-inverted-secondary-type-example'
         }
     ];
 
@@ -72,7 +72,7 @@ export class PlatformStandardListItemDocsComponent {
         {
             language: 'html',
             code: sliWithFooter,
-            fileName: 'platform-standard-list-item-with-footer-example',
+            fileName: 'platform-standard-list-item-with-footer-example'
         },
         {
             language: 'typescript',
@@ -86,7 +86,7 @@ export class PlatformStandardListItemDocsComponent {
         {
             language: 'html',
             code: sliWithGroupHeader,
-            fileName: 'platform-standard-list-item-with-group-header-example',
+            fileName: 'platform-standard-list-item-with-group-header-example'
         }
     ];
 
@@ -94,7 +94,7 @@ export class PlatformStandardListItemDocsComponent {
         {
             language: 'html',
             code: sliWithSelection,
-            fileName: 'platform-standard-list-item-with-selection-example',
+            fileName: 'platform-standard-list-item-with-selection-example'
         },
         {
             language: 'typescript',
@@ -108,7 +108,7 @@ export class PlatformStandardListItemDocsComponent {
         {
             language: 'html',
             code: sliWithSingleSelection,
-            fileName: 'platform-standard-list-item-with-single-selection-example',
+            fileName: 'platform-standard-list-item-with-single-selection-example'
         },
         {
             language: 'typescript',
@@ -122,7 +122,7 @@ export class PlatformStandardListItemDocsComponent {
         {
             language: 'html',
             code: sliWithNavigation,
-            fileName: 'platform-standard-list-item-with-navigation-example',
+            fileName: 'platform-standard-list-item-with-navigation-example'
         },
         {
             language: 'typescript',
@@ -131,5 +131,4 @@ export class PlatformStandardListItemDocsComponent {
             fileName: 'platform-standard-list-item-with-navigation-example'
         }
     ];
-
 }

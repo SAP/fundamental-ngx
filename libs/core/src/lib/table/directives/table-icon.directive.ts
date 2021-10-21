@@ -2,10 +2,9 @@ import { Directive, ElementRef, HostBinding, Input, OnChanges, OnInit } from '@a
 import { applyCssClass, CssClassBuilder } from '@fundamental-ngx/core/utils';
 
 @Directive({
-  selector: '[fdTableIcon], [fd-table-icon]'
+    selector: '[fdTableIcon], [fd-table-icon]'
 })
 export class TableIconDirective implements OnChanges, CssClassBuilder, OnInit {
-
     /** @hidden */
     @HostBinding('class.fd-table__icon')
     fdTableIconClass = true;

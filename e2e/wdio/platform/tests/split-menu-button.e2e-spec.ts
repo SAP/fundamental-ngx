@@ -11,6 +11,7 @@ import {
     typesBtnTextArr
 } from '../fixtures/appData/split-menu-button-page-contents';
 import {
+    acceptAlert,
     browserIsIEorSafari,
     click,
     elementArray,
@@ -26,8 +27,18 @@ import {
 describe('Split menu button test suite', () => {
     const spMenuBtnPage = new SplitMenuButtonPo();
     const {
-        arrowBtnArr, mainBtnArr, menuOverlay, menuItemArr, behaviorsExSelectionBtnArr, behaviorsExArrowBtnArr,
-        typesExSelectionBtnArr, typesExArrowBtnArr, typesOutput, iconExSelectionBtnArr, iconExArrowBtnArr, iconBtnAttrArr
+        arrowBtnArr,
+        mainBtnArr,
+        menuOverlay,
+        menuItemArr,
+        behaviorsExSelectionBtnArr,
+        behaviorsExArrowBtnArr,
+        typesExSelectionBtnArr,
+        typesExArrowBtnArr,
+        typesOutput,
+        iconExSelectionBtnArr,
+        iconExArrowBtnArr,
+        iconBtnAttrArr
     } = spMenuBtnPage;
 
     beforeAll(() => {
@@ -49,7 +60,7 @@ describe('Split menu button test suite', () => {
         const dropdownArrowBtnArr = getElementArrayLength(arrowBtnArr);
 
         // -1 for last disabled button. on disabled button click, click will be intercepted.
-        for (let i = 0; i < dropdownArrowBtnArr -1; i++) {
+        for (let i = 0; i < dropdownArrowBtnArr - 1; i++) {
             click(arrowBtnArr, i);
             expect(waitForElDisplayed(menuOverlay));
             click(arrowBtnArr, i);
@@ -84,6 +95,7 @@ describe('Split menu button test suite', () => {
 
     it('should check btn selections', () => {
         click(typesExSelectionBtnArr);
+        acceptAlert();
         spMenuBtnPage.checkSelectionOutput(typesOutput, standardBtnText);
 
         click(typesExArrowBtnArr);
@@ -121,11 +133,10 @@ describe('Split menu button test suite', () => {
         spMenuBtnPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             spMenuBtnPage.saveExampleBaselineScreenshot();
             expect(spMenuBtnPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
-

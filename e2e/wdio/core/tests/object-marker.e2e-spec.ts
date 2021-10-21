@@ -8,16 +8,11 @@ import {
     scrollIntoView,
     waitForPresent
 } from '../../driver/wdio';
-import {
-    iconStatusesList,
-} from '../fixtures/appData/object-marker-content';
+import { iconStatusesList } from '../fixtures/appData/object-marker-content';
 
-describe('Object marker test suite', function() {
+describe('Object marker test suite', () => {
     const objectMarkerPage = new ObjectMarkerPo();
-    const {
-        marker,
-        iconOnlyMarkers,
-    } = objectMarkerPage;
+    const { marker, iconOnlyMarkers } = objectMarkerPage;
 
     beforeAll(() => {
         objectMarkerPage.open();
@@ -44,13 +39,13 @@ describe('Object marker test suite', function() {
         }
     });
 
-    describe('Check orientation', function() {
+    describe('Check orientation', () => {
         it('Verify RTL and LTR orientation', () => {
             objectMarkerPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             objectMarkerPage.saveExampleBaselineScreenshot();
             expect(objectMarkerPage.compareWithBaseline()).toBeLessThan(5);

@@ -14,25 +14,15 @@ const routes: Routes = [
         path: '',
         component: RadioHeaderComponent,
         children: [
-            {path: '', component: RadioDocsComponent},
-            {path: 'api', component: ApiComponent, data: {content: API_FILES.form}}
+            { path: '', component: RadioDocsComponent },
+            { path: 'api', component: ApiComponent, data: { content: API_FILES.form } }
         ]
     }
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
-        RadioModule,
-        FormModule,
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, RadioModule, FormModule],
     exports: [RouterModule],
-    declarations: [
-        examples,
-        RadioDocsComponent,
-        RadioHeaderComponent
-    ]
+    declarations: [examples, RadioDocsComponent, RadioHeaderComponent]
 })
-export class RadioDocsModule {
-}
+export class RadioDocsModule {}

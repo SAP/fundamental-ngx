@@ -22,8 +22,7 @@ import { WizardGeneratorService } from '../../wizard-generator.service';
     providers: [WizardGeneratorService]
 })
 export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
-
-    @ViewChild('defaultConfirmationDialogTemplate') defaultConfirmationDialogTemplate: TemplateRef<any>;
+    @ViewChild('defaultConfirmationDialogTemplate') defaultConfirmationDialogTemplate: TemplateRef<HTMLElement>;
 
     /**
      * @description Wizards dialog title configuration.
@@ -46,32 +45,35 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
     /**
      * User-defined template for "Go Next" button.
      */
-    goNextButtonTemplate: TemplateRef<any>;
+    goNextButtonTemplate: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for "Go Back" button.
      */
-    goBackButtonTemplate: TemplateRef<any>;
+    goBackButtonTemplate: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for "Finish" button.
      */
-    finishButtonTemplate: TemplateRef<any>;
+    finishButtonTemplate: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for "Cancel" button.
      */
-    cancelButtonTemplate: TemplateRef<any>;
+    cancelButtonTemplate: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for cancellation confirmation dialog.
      */
-    confirmationDialogTemplate: TemplateRef<any>;
+    confirmationDialogTemplate: TemplateRef<HTMLElement>;
 
     /**
      * User-defined template for summary step.
      */
-    summaryStepTemplate: TemplateRef<any>;
+    summaryStepTemplate: TemplateRef<HTMLElement>;
+
+    /** User-defined template for "Review" button */
+    reviewButtonTemplate: TemplateRef<HTMLElement>;
 
     /** @hidden */
     constructor(
@@ -95,6 +97,7 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
         this.confirmationDialogTemplate = this._dialogRef.data.confirmationDialogTemplate;
         this.displaySummaryStep = this._dialogRef.data.displaySummaryStep || false;
         this.summaryStepTemplate = this._dialogRef.data.summaryStepTemplate;
+        this.reviewButtonTemplate = this._dialogRef.data.reviewButtonTemplate;
 
         if (this._dialogRef.data.unifiedLayout !== undefined) {
             this.unifiedLayout = this._dialogRef.data.unifiedLayout;
@@ -132,17 +135,22 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
         const dialogRef = this._dialogService.open(template, { responsivePadding: true });
 
         dialogRef.afterClosed
-        .pipe(filter((result) => result), takeUntil(this._onDestroy$))
-        .subscribe(() => {
-            this._dialogRef.dismiss();
-        }, () => {});
+            .pipe(
+                filter((result) => result),
+                takeUntil(this._onDestroy$)
+            )
+            .subscribe(
+                () => {
+                    this._dialogRef.dismiss();
+                },
+                () => {}
+            );
     }
 
     /**
      * @description Completes Wizard process, emits Wizard result and closes the dialog.
      */
     async finish(): Promise<void> {
-
         if (this.isSummaryStep) {
             const wizardResult = await this._wizardGeneratorService.getWizardFormValue(true);
             this._dialogRef.close(wizardResult);
@@ -151,15 +159,15 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
 
         const currentStepId = this._wizardGeneratorService.getCurrentStepId();
         this.submitStepForms(currentStepId)
-        .pipe(takeUntil(this._onDestroy$))
-        .subscribe(async (result) => {
-            if (Object.values(result).some(r => !r.success)) {
-                return;
-            }
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(async (result) => {
+                if (Object.values(result).some((r) => !r.success)) {
+                    return;
+                }
 
-            const wizardResult = await this._wizardGeneratorService.getWizardFormValue(true);
-            this._dialogRef.close(wizardResult);
-        });
+                const wizardResult = await this._wizardGeneratorService.getWizardFormValue(true);
+                this._dialogRef.close(wizardResult);
+            });
     }
 
     /**

@@ -51,22 +51,24 @@ describe('NumericContentDirectives', () => {
         debugElement: DebugElement,
         element: HTMLElement;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                NumericContentDirective,
-                NumericContentKpiContainerDirective,
-                NumericContentKpiDirective,
-                NumericContentLaunchIconContainerDirective,
-                NumericContentLaunchIconDirective,
-                NumericContentScaleArrowDirective,
-                NumericContentScaleContainerDirective,
-                NumericContentScaleDirective,
-                NumericContentScaleTextDirective,
-                TestComponent
-            ]
-        });
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [
+                    NumericContentDirective,
+                    NumericContentKpiContainerDirective,
+                    NumericContentKpiDirective,
+                    NumericContentLaunchIconContainerDirective,
+                    NumericContentLaunchIconDirective,
+                    NumericContentScaleArrowDirective,
+                    NumericContentScaleContainerDirective,
+                    NumericContentScaleDirective,
+                    NumericContentScaleTextDirective,
+                    TestComponent
+                ]
+            });
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

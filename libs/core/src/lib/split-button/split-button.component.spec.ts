@@ -33,13 +33,15 @@ describe('SplitButtonComponent', () => {
 
     let component, componentInstance: SplitButtonComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [MenuModule, ButtonModule],
-            declarations: [SplitButtonComponent, TestComponent],
-            providers: [ContentDensityService]
-        });
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [MenuModule, ButtonModule],
+                declarations: [SplitButtonComponent, TestComponent],
+                providers: [ContentDensityService]
+            });
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -116,8 +118,7 @@ describe('SplitButtonComponent', () => {
         const textElement = componentInstance.mainActionBtn?.nativeElement.querySelector('.fd-button__text');
         expect(textElement.classList.contains(splitButtonTextClass));
         componentInstance.compact = true;
-        componentInstance.ngOnChanges(<any>{'compact': true});
+        componentInstance.ngOnChanges(<any>{ compact: true });
         expect(textElement.classList.contains(splitButtonTextCompactClass));
-
-    })
+    });
 });

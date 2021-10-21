@@ -6,9 +6,7 @@ import { Component } from '@angular/core';
     styleUrls: ['./platform-action-bar-cozy-mode-example.component.scss']
 })
 export class PlatformActionBarCozyModeExampleComponent {
-
     onBackBuutonClick(): void {
         alert('Back button clicked');
     }
-
 }

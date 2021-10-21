@@ -44,21 +44,13 @@ export class TableScrollDispatcherService implements OnDestroy {
         this._scrollableSubscriptionsMap.set(
             scrollable,
             new Subscription()
-                .add(
-                    scrollable
-                        .getScrollStream()
-                        .subscribe(() => this._scrollSubject.next(scrollable))
-                )
+                .add(scrollable.getScrollStream().subscribe(() => this._scrollSubject.next(scrollable)))
                 .add(
                     scrollable
                         .getHorizontalScrollStream()
                         .subscribe(() => this._horizontalScrollSubject.next(scrollable))
                 )
-                .add(
-                    scrollable
-                        .getVerticalScrollStream()
-                        .subscribe(() => this._verticalScrollSubject.next(scrollable))
-                )
+                .add(scrollable.getVerticalScrollStream().subscribe(() => this._verticalScrollSubject.next(scrollable)))
         );
     }
 
@@ -87,8 +79,7 @@ export class TableScrollDispatcherService implements OnDestroy {
 
     /** @hidden */
     ngOnDestroy(): void {
-        Array.from(this._scrollableSubscriptionsMap.values())
-            .forEach((subscription) => subscription.unsubscribe());
+        Array.from(this._scrollableSubscriptionsMap.values()).forEach((subscription) => subscription.unsubscribe());
 
         this._scrollableSubscriptionsMap.clear();
     }

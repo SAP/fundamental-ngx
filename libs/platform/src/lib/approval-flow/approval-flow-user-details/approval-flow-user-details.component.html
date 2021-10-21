@@ -1,8 +1,5 @@
 <div class="fdp-approval-flow-user-details__user-info">
-    <fd-avatar
-        [image]="user.imgUrl"
-        size="s">
-    </fd-avatar>
+    <fd-avatar [image]="user.imgUrl" size="s"> </fd-avatar>
 
     <div>
         <div class="fdp-approval-flow-user-details__name">{{ user.name }}</div>
@@ -13,5 +10,6 @@
 <ng-container
     *ngIf="detailsTemplate"
     [ngTemplateOutlet]="detailsTemplate"
-    [ngTemplateOutletContext]="{ data: details | async }">
+    [ngTemplateOutletContext]="{ data: details | async }"
+>
 </ng-container>

@@ -23,7 +23,7 @@ export class SectionsToolbarComponent implements OnInit {
         return window.innerWidth < SMALL_SCREEN_BREAKPOINT;
     }
 
-    constructor() { }
+    constructor() {}
 
     ngOnInit(): void {
         this.onActivate();

@@ -8,12 +8,11 @@ import { FocusEscapeDirection } from '@fundamental-ngx/core/utils';
     templateUrl: './list-keyboard-example.component.html'
 })
 export class ListKeyboardExampleComponent {
-
     @ViewChild(ButtonComponent, { read: ElementRef })
-    button: ElementRef
+    button: ElementRef;
 
     @ViewChild(ListComponent)
-    list: ListComponent
+    list: ListComponent;
 
     handleFocusEscape(direction: FocusEscapeDirection): void {
         if (direction === 'up') {

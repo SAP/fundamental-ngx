@@ -132,7 +132,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
             // when custom value not set, we should set/reset counter to maxlength value when it becomes undefined
             this.exceededCharCount = this.maxLength ? this.maxLength : 0;
             // reset state by resetting value
-            super.writeValue('');
+            super.setValue('');
         }
     }
 

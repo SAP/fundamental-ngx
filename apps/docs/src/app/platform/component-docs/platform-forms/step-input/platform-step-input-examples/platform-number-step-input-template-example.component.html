@@ -11,13 +11,15 @@
                 hintPlacement="left"
                 [validators]="stepInputQtyValidators"
             >
-                <fdp-number-step-input [id]="'quantity-template-driven'" name="qty" [(ngModel)]="qty"></fdp-number-step-input>
+                <fdp-number-step-input
+                    [id]="'quantity-template-driven'"
+                    name="qty"
+                    [(ngModel)]="qty"
+                ></fdp-number-step-input>
             </fdp-form-field>
 
             <ng-template #i18n let-errors>
-                <span *ngIf="errors.required">
-                    Value is required
-                </span>
+                <span *ngIf="errors.required"> Value is required </span>
             </ng-template>
         </fdp-form-group>
     </div>

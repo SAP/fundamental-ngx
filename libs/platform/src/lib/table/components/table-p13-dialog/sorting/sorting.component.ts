@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { DialogRef } from '@fundamental-ngx/core/dialog';
@@ -22,9 +22,14 @@ export interface SortDialogResultData {
     collectionSort: CollectionSort[];
 }
 
+export interface SortRule {
+    columnKey: string;
+    direction: SortDirection;
+}
+
 const NOT_SELECTED_OPTION_VALUE = null;
 
-class SortRule {
+class ValidatedSortRule implements SortRule {
     get isValid(): boolean {
         return this.columnKey !== NOT_SELECTED_OPTION_VALUE && this.direction !== NOT_SELECTED_OPTION_VALUE;
     }
@@ -60,10 +65,10 @@ export class P13SortingDialogComponent implements Resettable {
     readonly initialCollectionSort: CollectionSort[];
 
     /** Sort rules to render */
-    rules: SortRule[] = [];
+    rules: ValidatedSortRule[] = [];
 
     /** @hidden */
-    constructor(private dialogRef: DialogRef) {
+    constructor(private dialogRef: DialogRef, private cdr: ChangeDetectorRef) {
         const { columns, collectionSort }: SortDialogData = this.dialogRef.data;
 
         this.initialCollectionSort = [...collectionSort];
@@ -92,12 +97,12 @@ export class P13SortingDialogComponent implements Resettable {
     }
 
     /** @hidden */
-    _removeRule(rule: SortRule): void {
+    _removeRule(rule: ValidatedSortRule): void {
         this.rules = this.rules.filter((_rule) => _rule !== rule);
 
         // Keep at least one item in the list
         if (this.rules.length === 0) {
-            this.rules.push(new SortRule());
+            this.rules.push(new ValidatedSortRule());
         }
 
         this._onModelChange();
@@ -105,17 +110,18 @@ export class P13SortingDialogComponent implements Resettable {
 
     /** @hidden */
     _addNew(index: number): void {
-        this.rules.splice(index + 1, 0, new SortRule());
+        this.rules.splice(index + 1, 0, new ValidatedSortRule());
     }
 
     /** @hidden */
-    _onRuleColumnKeyChange(rule: SortRule, columnKey: string): void {
+    _onRuleColumnKeyChange(rule: ValidatedSortRule, columnKey: string): void {
         rule.columnKey = columnKey;
         this._onModelChange();
+        this.cdr.detectChanges();
     }
 
     /** @hidden */
-    _onRuleDirectionChange(rule: SortRule, direction: SortDirection): void {
+    _onRuleDirectionChange(rule: ValidatedSortRule, direction: SortDirection): void {
         rule.direction = direction;
         this._onModelChange();
     }
@@ -126,18 +132,23 @@ export class P13SortingDialogComponent implements Resettable {
     }
 
     /** @hidden */
+    _trackByColumnKey(index: number, rule: ValidatedSortRule): string {
+        return rule.columnKey;
+    }
+
+    /** @hidden */
     private _initiateRules(): void {
         this.rules = this._createRules(this.initialCollectionSort);
 
         // Keep at least one item in the list
         if (this.rules.length === 0) {
-            this.rules.push(new SortRule());
+            this.rules.push(new ValidatedSortRule());
         }
     }
 
     /** @hidden */
-    private _createRules(collectionSort: CollectionSort[] = []): SortRule[] {
-        return collectionSort.map(({ field, direction }): SortRule => new SortRule(field, direction));
+    private _createRules(collectionSort: CollectionSort[] = []): ValidatedSortRule[] {
+        return collectionSort.map(({ field, direction }): ValidatedSortRule => new ValidatedSortRule(field, direction));
     }
 
     /** @hidden */
@@ -151,10 +162,10 @@ export class P13SortingDialogComponent implements Resettable {
     }
 
     /** @hidden */
-    private _getUniqueRules(rules: SortRule[]): SortRule[] {
+    private _getUniqueRules(rules: ValidatedSortRule[]): ValidatedSortRule[] {
         return getUniqueListValuesByKey(rules, 'columnKey');
     }
 
     /** @hidden */
-    private _isRuleValid = (rule: SortRule): boolean => rule?.isValid;
+    private _isRuleValid = (rule: ValidatedSortRule): boolean => rule?.isValid;
 }

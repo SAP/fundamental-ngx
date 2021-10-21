@@ -1,4 +1,4 @@
-export const  placeholderTestText = [
+export const placeholderTestText = [
     'Type some text...',
     'Type some text...',
     'Type some text...',
@@ -42,8 +42,4 @@ export const reactiveFormTestText1 = [
     'Dirty: true',
     'Json Value: { "displayedValue": "Apple", "value": "AppleValue" }'
 ];
-export const reactiveFormTestText2 = [
-    'Touched: true',
-    'Dirty: true',
-    'Json Value: "Apple"'
-];
+export const reactiveFormTestText2 = ['Touched: true', 'Dirty: true', 'Json Value: "Apple"'];

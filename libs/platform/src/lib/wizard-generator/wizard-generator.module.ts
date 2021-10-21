@@ -20,6 +20,7 @@ import { WizardGeneratorGoNextButtonDirective } from './directives/wizard-genera
 import { WizardGeneratorFinishButtonDirective } from './directives/wizard-generator-finish-button.directive';
 import { WizardGeneratorComponent } from './components/wizard-generator/wizard-generator.component';
 import { WizardGeneratorSummaryStepDirective } from './directives/wizard-generator-summary-step.directive';
+import { WizardGeneratorReviewButtonDirective } from './directives/wizard-generator-review-button.directive';
 
 @NgModule({
     declarations: [
@@ -31,7 +32,8 @@ import { WizardGeneratorSummaryStepDirective } from './directives/wizard-generat
         WizardSummarySectionComponent,
         WizardGeneratorGoNextButtonDirective,
         WizardGeneratorFinishButtonDirective,
-        WizardGeneratorSummaryStepDirective
+        WizardGeneratorSummaryStepDirective,
+        WizardGeneratorReviewButtonDirective
     ],
     entryComponents: [DialogWizardGeneratorComponent],
     imports: [
@@ -55,8 +57,9 @@ import { WizardGeneratorSummaryStepDirective } from './directives/wizard-generat
         WizardSummarySectionComponent,
         WizardGeneratorGoNextButtonDirective,
         WizardGeneratorFinishButtonDirective,
-        WizardGeneratorSummaryStepDirective
+        WizardGeneratorSummaryStepDirective,
+        WizardGeneratorReviewButtonDirective
     ],
     providers: [WizardDialogGeneratorService]
 })
-export class PlatformWizardGeneratorModule { }
+export class PlatformWizardGeneratorModule {}

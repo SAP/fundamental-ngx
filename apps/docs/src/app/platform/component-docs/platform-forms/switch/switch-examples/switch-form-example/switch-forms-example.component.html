@@ -1,12 +1,20 @@
 <fdp-form-group [formGroup]="customForm">
-    <fdp-form-field id="switch1" label="Form Switch 1" rank="4" required="true">
+    <fdp-form-field
+        id="switch1"
+        label="Form Switch 1"
+        rank="4"
+        required="true"
+        [validators]="validators"
+        [i18Strings]="switchOneErrors"
+    >
         <fdp-switch
             name="switch-1"
             ariaLabel="switch-label"
             ariaLabelledby="switch-label"
             contentDensity="cozy"
             [semantic]="false"
-            formControlName="switch1">
+            formControlName="switch1"
+        >
         </fdp-switch>
     </fdp-form-field>
 
@@ -17,7 +25,8 @@
             ariaLabelledby="switch-label"
             contentDensity="compact"
             [semantic]="true"
-            formControlName="switch2">
+            formControlName="switch2"
+        >
         </fdp-switch>
     </fdp-form-field>
 
@@ -28,9 +37,14 @@
             ariaLabelledby="switch-label"
             contentDensity="compact"
             [semantic]="false"
-            formControlName="switch3">
+            formControlName="switch3"
+        >
         </fdp-switch>
     </fdp-form-field>
 </fdp-form-group>
 
-<div style="padding-left: 2rem;">form value: {{ customForm.getRawValue() | json }}</div>
+<ng-template #switchOneErrors let-errors>
+    <span *ngIf="errors.required" role="alert" aria-atomic="true"> Selection is required </span>
+</ng-template>
+
+<div style="padding-left: 2rem">form value: {{ customForm.getRawValue() | json }}</div>

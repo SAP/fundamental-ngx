@@ -12,7 +12,7 @@ import { isNodeApproved } from '../helpers';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        class: 'fdp-approval-flow-toolbar-actions',
+        class: 'fdp-approval-flow-toolbar-actions'
     }
 })
 export class ApprovalFlowToolbarActionsComponent {
@@ -30,8 +30,8 @@ export class ApprovalFlowToolbarActionsComponent {
         this._selectedNodes = value;
 
         this._canRemoveSelectedNodes =
-            this.selectedNodes.length
-            && this.selectedNodes.every(node => !node.disableActions && !node.actionsConfig?.disableRemove);
+            this.selectedNodes.length &&
+            this.selectedNodes.every((node) => !node.disableActions && !node.actionsConfig?.disableRemove);
     }
     get selectedNodes(): ApprovalGraphNode[] {
         return this._selectedNodes;
@@ -47,7 +47,7 @@ export class ApprovalFlowToolbarActionsComponent {
 
     /** Event emitted when node added */
     @Output()
-    addNode = new EventEmitter<{ node: ApprovalGraphNode, target: ApprovalFlowNodeTarget }>();
+    addNode = new EventEmitter<{ node: ApprovalGraphNode; target: ApprovalFlowNodeTarget }>();
 
     /** Event emitted when selected node edited */
     @Output()
@@ -76,39 +76,43 @@ export class ApprovalFlowToolbarActionsComponent {
     get _canAddBefore(): boolean {
         const node = this._notApprovedSelectedNode;
 
-        return node
-            && !node.disableActions
-            && !node.actionsConfig?.disableAddBefore
-            && this.graphMetadata[node.id].canAddNodeBefore
+        return (
+            node &&
+            !node.disableActions &&
+            !node.actionsConfig?.disableAddBefore &&
+            this.graphMetadata[node.id].canAddNodeBefore
+        );
     }
 
     /** @hidden */
     get _canAddAfter(): boolean {
         const node = this._notApprovedSelectedNode;
 
-        return node
-            && !node.disableActions
-            && !node.actionsConfig?.disableAddAfter
-            && this.graphMetadata[node.id].canAddNodeAfter
+        return (
+            node &&
+            !node.disableActions &&
+            !node.actionsConfig?.disableAddAfter &&
+            this.graphMetadata[node.id].canAddNodeAfter
+        );
     }
 
     /** @hidden */
     get _canAddParallel(): boolean {
         const node = this._notApprovedSelectedNode;
 
-        return this._notApprovedSelectedNode
-            && !node.disableActions
-            && !node.actionsConfig?.disableAddParallel
-            && this.graphMetadata[node.id].canAddParallel;
+        return (
+            this._notApprovedSelectedNode &&
+            !node.disableActions &&
+            !node.actionsConfig?.disableAddParallel &&
+            this.graphMetadata[node.id].canAddParallel
+        );
     }
 
     /** @hidden */
     get _canEditNode(): boolean {
         const node = this._notApprovedSelectedNode;
 
-        return node
-            && !node.disableActions
-            && !node.actionsConfig?.disableEdit;
+        return node && !node.disableActions && !node.actionsConfig?.disableEdit;
     }
 
     /** @hidden */

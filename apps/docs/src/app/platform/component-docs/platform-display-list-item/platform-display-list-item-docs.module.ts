@@ -48,5 +48,4 @@ const routes: Routes = [
         PlatformDisplayListItemWithNavigationExampleComponent
     ]
 })
-export class PlatformDisplayListItemDocsModule { }
-
+export class PlatformDisplayListItemDocsModule {}

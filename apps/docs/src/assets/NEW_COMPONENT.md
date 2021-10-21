@@ -53,10 +53,7 @@ Create an `exports` array in the poster module and add the poster component, lik
 
 Add a new file in the poster lib called `public_api.ts` and add the following:
 
-`
-export * from './poster.module';
-export * from './poster.component';
-`
+`export * from './poster.module'; export * from './poster.component';`
 
 ## Step5: Add export to index.ts
 
@@ -74,7 +71,7 @@ Next let's create a directory for our poster docs.
 
 `mkdir poster`
 
-Create two new files in the `poster` directory, `poster-docs.component.ts` and `poster-docs.component.html`. Then create the directory `examples` as well. 
+Create two new files in the `poster` directory, `poster-docs.component.ts` and `poster-docs.component.html`. Then create the directory `examples` as well.
 
 Next, from the documentation poster directory, create the component `poster-header`.
 
@@ -149,6 +146,7 @@ In `poster-docs.component.html`, we'll provide a brief explanation of the poster
 ```
 
 ## Step11: Add poster-docs.module.ts
+
 Create a new file called `poster-docs.module.ts` in the poster documentation directory and copy/paste the following:
 
 ```TypeScript

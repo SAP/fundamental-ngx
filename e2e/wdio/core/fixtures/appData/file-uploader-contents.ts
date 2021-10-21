@@ -7,7 +7,4 @@ export const placeholderTestTextArr = [
     'Choose File to upload'
 ];
 export const imagePath = 'e2e/wdio/core/fixtures/testData/test-image.jpg';
-export const titleValue = [
-    '1 Files selected successfully!!!',
-    '0 Invalid files selected '
-];
+export const titleValue = ['1 Files selected successfully!!!', '0 Invalid files selected '];

@@ -9,4 +9,4 @@ const SELECT_MOBILE_CONFIG: MobileModeConfigToken = {
 @NgModule({
     providers: [{ provide: MOBILE_MODE_CONFIG, useValue: SELECT_MOBILE_CONFIG, multi: true }]
 })
-class MobileModeGlobalConfigExampleModule { }
+class MobileModeGlobalConfigExampleModule {}

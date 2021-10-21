@@ -15,11 +15,11 @@ import {
     SimpleChanges,
     ViewChild
 } from '@angular/core';
-import { WizardContentComponent } from '../wizard-content/wizard-content.component';
-import { WizardStepIndicatorComponent } from '../wizard-step-indicator/wizard-step-indicator.component';
 import { Subscription } from 'rxjs';
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { ENTER, SPACE } from '@angular/cdk/keycodes';
+import { WizardContentComponent } from '../wizard-content/wizard-content.component';
+import { WizardStepIndicatorComponent } from '../wizard-step-indicator/wizard-step-indicator.component';
 
 export type WizardStepStatus = 'completed' | 'current' | 'upcoming' | 'active';
 
@@ -135,7 +135,7 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
         private _elRef: ElementRef,
         private _cdRef: ChangeDetectorRef,
         @Optional() @Inject(WIZARD) private _wizard: WizardComponentInterface
-        ) {}
+    ) {}
 
     /** @hidden */
     ngOnChanges(changes: SimpleChanges): void {
@@ -180,7 +180,8 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
             this.visited &&
             (!event || KeyUtil.isKeyCode(event, [SPACE, ENTER])) &&
             (!this.stepIndicator || !this.stepIndicator.stackedItems || !this.stepIndicator.stackedItems.length) &&
-            (this.stepClickValidator === undefined || await this.stepClickValidator(this.visited, this.completed) === true)
+            (this.stepClickValidator === undefined ||
+                (await this.stepClickValidator(this.visited, this.completed)) === true)
         ) {
             this.stepClicked.emit(this);
         }
@@ -201,8 +202,6 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
         return this._elRef.nativeElement.clientWidth;
     }
 
-
-
     /** @hidden */
     removeFromDom(): void {
         if (this._elRef.nativeElement.parentNode) {
@@ -214,7 +213,6 @@ export class WizardStepComponent implements OnChanges, AfterViewInit, OnDestroy 
     _summaryInit(): void {
         this._elRef.nativeElement.style.display = 'none';
         this.content.tallContent = true;
-        // this.removeFromDom();
     }
 
     /** @hidden */

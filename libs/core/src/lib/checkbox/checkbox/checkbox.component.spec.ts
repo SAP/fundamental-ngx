@@ -31,13 +31,15 @@ describe('CheckboxComponent', () => {
     let hostComponent: TestCheckboxComponent;
     let fixture: ComponentFixture<TestCheckboxComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [FormsModule],
-            declarations: [CheckboxComponent, TestCheckboxComponent],
-            providers: [ContentDensityService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [FormsModule],
+                declarations: [CheckboxComponent, TestCheckboxComponent],
+                providers: [ContentDensityService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(TestCheckboxComponent);
@@ -93,7 +95,7 @@ describe('CheckboxComponent', () => {
         expect(checkbox.checkboxValue).toBe(true);
     });
 
-    it('should be unchecked on double click', fakeAsync (() => {
+    it('should be unchecked on double click', fakeAsync(() => {
         spyOn(checkbox, 'nextValue');
         checkbox.nextValue();
         tick(15);
@@ -165,12 +167,11 @@ describe('CheckboxComponent', () => {
 
         checkbox.nextValue();
 
-
         expect(hostComponent.value).toBe('No');
         expect(checkbox.checkboxValue).toBe('No');
     });
 
-    it('should use third state', fakeAsync (() => {
+    it('should use third state', fakeAsync(() => {
         checkbox.tristate = true;
         fixture.detectChanges();
 

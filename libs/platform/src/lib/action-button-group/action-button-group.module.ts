@@ -9,4 +9,4 @@ import { ActionButtonGroupComponent } from './action-button-group.component';
     imports: [CommonModule, ActionBarModule],
     exports: [ActionButtonGroupComponent]
 })
-export class PlatformActionButtonGroupModule { }
+export class PlatformActionButtonGroupModule {}

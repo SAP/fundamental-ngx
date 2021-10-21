@@ -1,8 +1,10 @@
 import { ObjectStatusPo } from '../pages/object-status.po';
 import {
     acceptAlert,
-    click, getAttributeByName,
-    getElementArrayLength, getElementClass,
+    click,
+    getAttributeByName,
+    getElementArrayLength,
+    getElementClass,
     getText,
     refreshPage,
     scrollIntoView,
@@ -17,7 +19,7 @@ import {
 } from '../fixtures/appData/object-status-contents';
 import { checkElementDisplayed, checkElementTextValue } from '../../helper/assertion-helper';
 
-describe('object status test suite', function() {
+describe('object status test suite', () => {
     const objectStatusPage = new ObjectStatusPo();
     const {
         defaultExamples,
@@ -37,20 +39,20 @@ describe('object status test suite', function() {
         objectStatusPage.open();
     }, 1);
 
-    describe('default object status example', function() {
+    describe('default object status example', () => {
         it('should check default status', () => {
             expect(getText(defaultExamples + text)).toBe(defaultStatusText);
         });
     });
 
-    describe('object status text only example', function() {
+    describe('object status text only example', () => {
         it('should check text values', () => {
             scrollIntoView(textOnlyExamples + text);
             checkElementTextValue(textOnlyExamples + text, semanticStatusText);
         });
     });
 
-    describe('object status with text and icon example', function() {
+    describe('object status with text and icon example', () => {
         it('should check text values', () => {
             scrollIntoView(textAndIconExamples + text);
             checkElementTextValue(textAndIconExamples + text, semanticStatusText);
@@ -61,14 +63,14 @@ describe('object status test suite', function() {
         });
     });
 
-    describe('object status with generic indication colors example', function() {
+    describe('object status with generic indication colors example', () => {
         it('should check text values', () => {
             scrollIntoView(indicationColorExamples + text);
             checkElementTextValue(indicationColorExamples + text, indicationColorText);
         });
     });
 
-    describe('clickable object status example', function() {
+    describe('clickable object status example', () => {
         it('should check statuses are clickable', () => {
             const statusCount = getElementArrayLength(clickableExamples + status);
 
@@ -80,7 +82,7 @@ describe('object status test suite', function() {
         });
     });
 
-    describe('inverted object status example', function() {
+    describe('inverted object status example', () => {
         it('should check status is inverted', () => {
             const statusCount = getElementArrayLength(invertedExamples + status);
 
@@ -91,18 +93,20 @@ describe('object status test suite', function() {
         });
     });
 
-    describe('inverted object status with generic indication colors example', function() {
+    describe('inverted object status with generic indication colors example', () => {
         it('should check status is inverted', () => {
             const statusCount = getElementArrayLength(invertedIndicationColorExamples + status);
 
             for (let i = 0; i < statusCount; i++) {
                 scrollIntoView(invertedIndicationColorExamples + status);
-                expect(getElementClass(invertedIndicationColorExamples + status + ' span')).toContain('fd-object-status--inverted');
+                expect(getElementClass(invertedIndicationColorExamples + status + ' span')).toContain(
+                    'fd-object-status--inverted'
+                );
             }
         });
     });
 
-    describe('object status large design example', function() {
+    describe('object status large design example', () => {
         it('should check large status', () => {
             const statusCount = getElementArrayLength(largeExamples + status);
 
@@ -113,13 +117,13 @@ describe('object status test suite', function() {
         });
     });
 
-    describe('Orientation check', function() {
+    describe('Orientation check', () => {
         it('should check RTL/LTR', () => {
             objectStatusPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Visual regression', function() {
+    xdescribe('Visual regression', () => {
         it('should check examples visual regression', () => {
             refreshPage();
             waitForPresent(defaultExamples + status);

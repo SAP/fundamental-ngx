@@ -7,17 +7,12 @@ import { LinkComponent } from '../link/link.component';
 @Component({
     selector: 'fd-test-object-identifier',
     template: `
-        <fd-object-identifier
-            #objectRef
-            [medium]="medium"
-            [bold]="bold"
-            [description]="description">
+        <fd-object-identifier #objectRef [medium]="medium" [bold]="bold" [description]="description">
             <a #linkRef fd-link>Link</a>
         </fd-object-identifier>
     `
 })
 class TestObjectIdentifierComponent {
-
     @ViewChild('objectRef', { read: ElementRef })
     objectIdentifierElementRef: ElementRef;
 
@@ -39,15 +34,13 @@ describe('ObjectIdentifierComponent', () => {
     let testComponent: TestObjectIdentifierComponent;
     let fixture: ComponentFixture<TestObjectIdentifierComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                ObjectIdentifierComponent,
-                TestObjectIdentifierComponent,
-                LinkComponent
-            ]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [ObjectIdentifierComponent, TestObjectIdentifierComponent, LinkComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestObjectIdentifierComponent);
@@ -63,7 +56,9 @@ describe('ObjectIdentifierComponent', () => {
     it('Should add medium class', () => {
         testComponent.medium = true;
         fixture.detectChanges();
-        expect(testComponent.objectIdentifierElementRef.nativeElement.classList.contains('fd-object-identifier--medium')).toBeTrue();
+        expect(
+            testComponent.objectIdentifierElementRef.nativeElement.classList.contains('fd-object-identifier--medium')
+        ).toBeTrue();
     });
 
     it('Should add classes to title', () => {

@@ -22,14 +22,14 @@ export class GridListPo extends CoreBaseComponentPo {
     lockedStateItemButton = '[state="locked"] button';
     lockedStateItemText = '[state="locked"] span';
     draftStateItemButton = '[state="draft"] button';
-    draftStateItemText = '[state="draft"] span'
+    draftStateItemText = '[state="draft"] span';
     successStatusIndicator = '[status="success"] span';
     warningStatusIndicator = '[status="warning"] span';
     errorStatusIndicator = '[status="error"] span';
     neutralStatusIndicator = '[status="neutral"] span';
     dragAndDropItems = '#dnd + component-example fd-grid-list-item';
     dragAndDropItemTitles = '#dnd + component-example fd-grid-list-item .fd-title';
-    gridListButtons =  '.docs-tile-content-example button';
+    gridListButtons = '.docs-tile-content-example button';
     gridListItem = 'fd-grid-list-item.ng-star-inserted div.fd-grid-list__item';
     gridListItemUnread = '.fd-grid-list__item--unread';
     gridListItemError = '.fd-grid-list__item--error';
@@ -50,7 +50,7 @@ export class GridListPo extends CoreBaseComponentPo {
         super.open(this.url);
         waitForElDisplayed(this.root);
         waitForElDisplayed(this.layoutPattern);
-    };
+    }
 
     getScreenshotFolder(): object {
         return super.getScreenshotFolder(this.url);

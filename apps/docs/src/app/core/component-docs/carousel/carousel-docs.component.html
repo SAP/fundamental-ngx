@@ -1,6 +1,4 @@
-<fd-docs-section-title id="default" componentName="carousel">
-    Carousel with one active item
-</fd-docs-section-title>
+<fd-docs-section-title id="default" componentName="carousel"> Carousel with one active item </fd-docs-section-title>
 <description>
     By default fd-carousel displays one active item and others remains hidden. Pagination container appears on bottom
     with dot indicators with active dot to show active item.
@@ -8,10 +6,9 @@
     <br />
     <b>Notes:</b><br />
     By Default images used as carousel item will drag on non-touch devices, instead of swiping. To achieve swiping
-    behavior for these images,
-    below solutions can be applied.
+    behavior for these images, below solutions can be applied.
     <ul>
-        <li>use css solution. <code> pointer-events: none</code> </li>
+        <li>use css solution. <code> pointer-events: none</code></li>
         <li>use javascript solution. <code> draggable="false" ondragstart="return false;"</code></li>
     </ul>
 </description>
@@ -20,12 +17,8 @@
 </component-example>
 <code-example [exampleFiles]="carouselSingle"></code-example>
 
-<fd-docs-section-title id="vertical" componentName="carousel">
-    Carousel with vertical direction
-</fd-docs-section-title>
-<description>
-    carousel movement is possible in vertical direction as well.
-</description>
+<fd-docs-section-title id="vertical" componentName="carousel"> Carousel with vertical direction </fd-docs-section-title>
+<description> carousel movement is possible in vertical direction as well. </description>
 <component-example>
     <fd-carousel-vertical-direction-example></fd-carousel-vertical-direction-example>
 </component-example>
@@ -45,9 +38,7 @@
 </component-example>
 <code-example [exampleFiles]="carouselMultiItem"></code-example>
 
-<fd-docs-section-title id="dynamic-items" componentName="carousel">
-    Carousel with dynamic items
-</fd-docs-section-title>
+<fd-docs-section-title id="dynamic-items" componentName="carousel"> Carousel with dynamic items </fd-docs-section-title>
 <description>
     Carousel items can change dynamically, eg: when used inside search page. Carousel will reset when new items are
     added on Carousel.
@@ -86,8 +77,8 @@
 </fd-docs-section-title>
 <description>
     Navigation buttons can be placed in page indicator as well as inside content area.By default navigation button is
-    placed inside page indicator container. For placing navigation button
-    inside content area use <code>navigatorInPageIndicator=false</code>.
+    placed inside page indicator container. For placing navigation button inside content area use
+    <code>navigatorInPageIndicator=false</code>.
 </description>
 <component-example>
     <fd-carousel-content-navigation-example></fd-carousel-content-navigation-example>
@@ -109,9 +100,7 @@
 <fd-docs-section-title id="error-message" componentName="carousel">
     Carousel error message when no item is loaded. Use Message Page component to create the error message.
 </fd-docs-section-title>
-<description>
-    Error message can be displayed as carousel content when loading item is not successful.
-</description>
+<description> Error message can be displayed as carousel content when loading item is not successful. </description>
 <component-example>
     <fd-carousel-error-message-example></fd-carousel-error-message-example>
 </component-example>

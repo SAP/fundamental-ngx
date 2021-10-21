@@ -34,7 +34,7 @@ export function getGraphNodes(graph: ApprovalFlowGraph): ApprovalGraphNode[] {
 }
 
 export function getParentNodes(node: ApprovalNode, nodes: ApprovalNode[]): ApprovalNode[] {
-    return nodes.filter(_node => isNodeTargetsIncludeId(_node, node.id));
+    return nodes.filter((_node) => isNodeTargetsIncludeId(_node, node.id));
 }
 
 export function getBlankApprovalGraphNode(): ApprovalGraphNode {
@@ -56,7 +56,7 @@ export function getSpaceApprovalGraphNode(): ApprovalGraphNode {
         approvers: [],
         status: 'not started',
         space: true
-    }
+    };
 }
 
 export function isNodeTargetsIncludeId(node: ApprovalNode, id: string): boolean {

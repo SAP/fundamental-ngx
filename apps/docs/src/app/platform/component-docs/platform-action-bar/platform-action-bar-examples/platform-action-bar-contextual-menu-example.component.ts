@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
     styleUrls: ['./platform-action-bar-contextual-menu-example.component.scss']
 })
 export class PlatformActionBarWithContextualMenuExampleComponent {
-
     onBackButtonClick(): void {
         alert('Back button clicked');
     }

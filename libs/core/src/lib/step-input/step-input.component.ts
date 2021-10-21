@@ -260,10 +260,12 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
         this._numberFormat = this._getNumberFormat();
         this._buildRegExps();
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this._changeDetectorRef.markForCheck();
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._changeDetectorRef.markForCheck();
+                })
+            );
         }
     }
 
@@ -506,7 +508,7 @@ export class StepInputComponent implements OnInit, AfterViewInit, OnDestroy, Con
     /** @hidden */
     private _getNumberFormat(): NumberFormat {
         if (isDevMode() && this.minFractionDigits > this.maxFractionDigits) {
-            throw new Error('Range error - minFractionDigits can\'t be bigger than maxFractionDigits');
+            throw new Error("Range error - minFractionDigits can't be bigger than maxFractionDigits");
         }
 
         return new NumberFormat(this.locale, {

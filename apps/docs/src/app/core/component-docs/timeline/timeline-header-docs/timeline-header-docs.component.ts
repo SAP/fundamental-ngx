@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
     selector: 'fd-timeline-header-docs',
     templateUrl: './timeline-header-docs.component.html'
 })
-export class TimelineHeaderDocsComponent {
-}
+export class TimelineHeaderDocsComponent {}

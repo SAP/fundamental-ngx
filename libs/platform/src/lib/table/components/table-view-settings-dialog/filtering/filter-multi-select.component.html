@@ -1,18 +1,10 @@
-<ul
-    fd-list
-    compact="true"
-    selection="true"
->
-    <li
-        fd-list-item
-        *ngFor="let option of _selectableOptions"
-        [selected]="option.selected"
-    >
+<ul fd-list compact="true" selection="true">
+    <li fd-list-item *ngFor="let option of _selectableOptions" [selected]="option.selected">
         <fd-checkbox
             [ngModel]="option.selected"
             (ngModelChange)="_onSelectChange(option, $event)"
             compact="true"
         ></fd-checkbox>
-        <span fd-list-title>{{option.label}}</span>
+        <span fd-list-title>{{ option.label }}</span>
     </li>
 </ul>

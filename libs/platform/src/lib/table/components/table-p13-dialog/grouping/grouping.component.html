@@ -3,11 +3,7 @@
         <ng-template fdTemplate="header">
             <div fd-bar-left>
                 <fd-bar-element>
-                    <h4
-                        fd-title
-                        [headerSize]="4"
-                        i18n="@@platformTableP13GroupDialogHeader"
-                    >Group</h4>
+                    <h4 fd-title [headerSize]="4" i18n="@@platformTableP13GroupDialogHeader">Group</h4>
                 </fd-bar-element>
             </div>
             <div fd-bar-right>
@@ -19,11 +15,7 @@
     </fd-dialog-header>
 
     <fd-dialog-body>
-
-        <div
-            class="group-row"
-            *ngFor="let rule of rules; let i = index"
-        >
+        <div class="group-row" *ngFor="let rule of rules; let i = index">
             <fd-select
                 class="group-row__select"
                 [value]="rule.columnKey"
@@ -32,11 +24,8 @@
                 placeholder="(none)"
                 i18n-placeholder="@@platformTableP13GroupDialogNoneSelectedColumn|Table column select placeholder"
             >
-                <fd-option
-                    *ngFor="let column of columns"
-                    [value]="column.key"
-                >
-                    {{column.label}}
+                <fd-option *ngFor="let column of columns" [value]="column.key">
+                    {{ column.label }}
                 </fd-option>
             </fd-select>
 
@@ -74,9 +63,7 @@
                     (click)="_addNew(i)"
                 ></button>
             </div>
-
         </div>
-
     </fd-dialog-body>
 
     <fd-dialog-footer>
@@ -89,8 +76,7 @@
                 label="OK"
                 [compact]="true"
                 (click)="confirm()"
-            >
-            </button>
+            ></button>
         </fd-dialog-footer-button>
 
         <fd-dialog-footer-button>
@@ -103,8 +89,7 @@
                 label="Cancel"
                 [compact]="true"
                 (click)="cancel()"
-            >
-            </button>
+            ></button>
         </fd-dialog-footer-button>
     </fd-dialog-footer>
 </fd-dialog>

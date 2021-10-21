@@ -6,11 +6,13 @@ describe('LayoutPanelFiltersComponent', () => {
     let component: LayoutPanelFiltersComponent;
     let fixture: ComponentFixture<LayoutPanelFiltersComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [LayoutPanelFiltersComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [LayoutPanelFiltersComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(LayoutPanelFiltersComponent);

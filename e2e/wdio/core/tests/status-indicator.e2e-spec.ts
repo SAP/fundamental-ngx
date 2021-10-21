@@ -1,11 +1,7 @@
 import { StatusIndicatorPo } from '../pages/status-indicator.po';
-import {
-    acceptAlert,
-    click, getAlertText,
-    scrollIntoView
-} from '../../driver/wdio';
+import { acceptAlert, click, getAlertText, scrollIntoView } from '../../driver/wdio';
 
-describe('Status indicator component test', function() {
+describe('Status indicator component test', () => {
     const statusIndicatorPage = new StatusIndicatorPo();
     const { statusIcon } = statusIndicatorPage;
 
@@ -25,8 +21,7 @@ describe('Status indicator component test', function() {
         statusIndicatorPage.checkRtlSwitch();
     });
 
-    xdescribe('Should check visual regression', function() {
-
+    xdescribe('Should check visual regression', () => {
         it('should check visual regression for all examples', () => {
             statusIndicatorPage.saveExampleBaselineScreenshot();
             expect(statusIndicatorPage.compareWithBaseline()).toBeLessThan(5);

@@ -3,6 +3,102 @@ module.exports = require('./wdio.conf.ts');*/
 const { join } = require('path');
 require('ts-node').register({ transpileOnly: true });
 AllureReporter = require('@wdio/allure-reporter').default;
+
+const allCapabilities = [
+    // {
+    //     browserName: 'internet explorer',
+    //     browserVersion: 'latest',
+    //     platformName: 'Windows 10',
+    //     'sauce:options': {
+    //         screenResolution: '1920x1080',
+    //         name: 'e2e-win-internet-explorer ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+    //         requireWindowFocus: true,
+    //     }
+    // },
+    {
+        slug: 'ms-msedge',
+        browserName: 'MicrosoftEdge',
+        platformName: 'Windows 10',
+        browserVersion: 'latest',
+        acceptInsecureCerts: true,
+        'sauce:options': {
+            screenResolution: '1920x1080',
+            name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH
+        }
+    },
+    {
+        slug: 'osx-msedge',
+        browserName: 'MicrosoftEdge',
+        platformName: 'macOS 10.15',
+        browserVersion: 'latest',
+        acceptInsecureCerts: true,
+        'sauce:options': {
+            screenResolution: '1920x1440',
+            name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH
+        }
+    },
+    {
+        slug: 'ms-firefox',
+        browserName: 'firefox',
+        platformName: 'Windows 10',
+        browserVersion: 'latest',
+        acceptInsecureCerts: true,
+        'sauce:options': {
+            name: 'e2e-win-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+            screenResolution: '1920x1080'
+        }
+    },
+    {
+        slug: 'osx-firefox',
+        browserName: 'firefox',
+        platformName: 'macOS 10.15',
+        browserVersion: 'latest',
+        acceptInsecureCerts: true,
+        'sauce:options': {
+            screenResolution: '1920x1440',
+            name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH
+        }
+    },
+    {
+        slug: 'ms-chrome',
+        browserName: 'chrome',
+        platformName: 'Windows 10',
+        browserVersion: 'latest',
+        acceptInsecureCerts: true,
+        'sauce:options': {
+            screenResolution: '1920x1080',
+            name: 'e2e-win-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH
+        }
+    },
+    {
+        slug: 'osx-chrome',
+        browserName: 'chrome',
+        platformName: 'macOS 10.15',
+        browserVersion: 'latest',
+        acceptInsecureCerts: true,
+        'sauce:options': {
+            name: 'e2e-MAC-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
+            screenResolution: '1920x1440'
+        }
+    }
+
+    // {
+    //     browserName: 'safari',
+    //     browserVersion: '13.1',
+    //     platformName: 'macOS 10.15',
+    //     'sauce:options': {
+    //         screenResolution: '1920x1440',
+    //         name: 'e2e-MAC-safari ' + process.env.TRAVIS_BUILD_ID,
+    //     }
+    // }
+];
+const capabilities = (
+    process.env.CAP_SLUG ? allCapabilities.filter((item) => item.slug === process.env.CAP_SLUG) : allCapabilities
+).map((item) => {
+    delete item.slug;
+    return item;
+});
+
 exports.config = {
     //
     // ====================
@@ -24,15 +120,9 @@ exports.config = {
     // NPM script (see https://docs.npmjs.com/cli/run-script) then the current working
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
-    specs: [
-        './e2e/wdio/core/**/*.e2e-spec.ts',
-    ],
+    specs: ['./e2e/wdio/**/*.e2e-spec.ts'],
     // Patterns to exclude.
-    exclude: [
-        './e2e/wdio/**/checkbox-group.e2e-spec.ts',
-        './e2e/wdio/core/**/dialog.e2e-spec.ts',
-        './e2e/wdio/core/**/date-picker.e2e-spec.ts',
-    ],
+    exclude: ['./e2e/wdio/core/**/date-picker.e2e-spec.ts'],
     suites: {
         platformA: [
             './e2e/wdio/platform/**/action-bar.e2e-spec.ts',
@@ -55,12 +145,11 @@ exports.config = {
             './e2e/wdio/platform/**/link.e2e-spec.ts',
             './e2e/wdio/platform/**/list.e2e-spec.ts',
             './e2e/wdio/platform/**/button.e2e-spec.ts',
-            './e2e/wdio/platform/**/page-footer.e2e-spec.ts',
+            './e2e/wdio/platform/**/page-footer.e2e-spec.ts'
         ],
         platformB: [
             './e2e/wdio/platform/**/menu.e2e-spec.ts',
             './e2e/wdio/platform/**/menu-button.e2e-spec.ts',
-            './e2e/wdio/platform/**/multi-combobox.e2e-spec.ts',
             './e2e/wdio/platform/**/multi-input.e2e-spec.ts',
             './e2e/wdio/platform/**/object-list-item.e2e-spec.ts',
             './e2e/wdio/platform/**/object-marker.e2e-spec.ts',
@@ -77,10 +166,7 @@ exports.config = {
             './e2e/wdio/platform/**/textarea.e2e-spec.ts',
             './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
             './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',
-            './e2e/wdio/platform/**/time-picker.e2e-spec.ts',
-            './e2e/wdio/platform/**/select.e2e-spec.ts',
-            './e2e/wdio/platform/**/upload-collection.e2e-spec.ts',
-
+            './e2e/wdio/platform/**/time-picker.e2e-spec.ts'
         ]
     },
     // ============
@@ -98,93 +184,13 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 20,
+    maxInstances: 10,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
-    capabilities: [
-        // {
-        //     browserName: 'internet explorer',
-        //     browserVersion: 'latest',
-        //     platformName: 'Windows 10',
-        //     'sauce:options': {
-        //         screenResolution: '1920x1080',
-        //         name: 'e2e-win-internet-explorer ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-        //         requireWindowFocus: true,
-        //     }
-        // },
-        {
-            browserName: 'MicrosoftEdge',
-            browserVersion: 'latest',
-            platformName: 'Windows 10',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1080',
-                name: 'e2e-win-edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
-        {
-            browserName: 'firefox',
-            browserVersion: 'latest',
-            platformName: 'Windows 10',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                name: 'e2e-win-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-                screenResolution: '1920x1080',
-            }
-        },
-        {
-            browserName: 'chrome',
-            browserVersion: 'latest',
-            platformName: 'Windows 10',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1080',
-                name: 'e2e-win-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
-        {
-            browserName: 'chrome',
-            platformName: 'macOS 10.15',
-            browserVersion: 'latest',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                name: 'e2e-MAC-chrome ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-                screenResolution: '1920x1440',
-            }
-        },
-        {
-            browserName: 'firefox',
-            platformName: 'macOS 10.15',
-            browserVersion: 'latest',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1440',
-                name: 'e2e-MAC-firefox ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
-        {
-            browserName: 'MicrosoftEdge',
-            platformName: 'macOS 10.15',
-            browserVersion: 'latest',
-            acceptInsecureCerts: true,
-            'sauce:options': {
-                screenResolution: '1920x1440',
-                name: 'e2e-MAC-Edge ' + process.env.TRAVIS_BUILD_ID + ' ' + process.env.TRAVIS_PULL_REQUEST_BRANCH,
-            }
-        },
-        // {
-        //     browserName: 'safari',
-        //     browserVersion: '13.1',
-        //     platformName: 'macOS 10.15',
-        //     'sauce:options': {
-        //         screenResolution: '1920x1440',
-        //         name: 'e2e-MAC-safari ' + process.env.TRAVIS_BUILD_ID,
-        //     }
-        // }
-    ],
+    capabilities,
     //
     // ===================
     // Test Configurations
@@ -216,7 +222,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'https://sap.dev:4200/',
+    // baseUrl: 'https://sap.dev:4200/',
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 30000,
@@ -234,11 +240,15 @@ exports.config = {
     // commands. Instead, they hook themselves up into the test process.
     // services: ['chromedriver'],
     services: [
-        ['sauce', {
-            sauceConnect: true,
-            connectRetries: 2,
-        }],
-        ['image-comparison',
+        [
+            'sauce',
+            {
+                sauceConnect: true,
+                connectRetries: 2
+            }
+        ],
+        [
+            'image-comparison',
             // The options
             {
                 // Some options, see the docs for more
@@ -246,8 +256,9 @@ exports.config = {
                 formatImageName: '{tag}-{logName}-{width}x{height}',
                 screenshotPath: join(process.cwd(), '.tmp/'),
                 savePerInstance: true,
-                autoSaveBaseline: true,
-            }],
+                autoSaveBaseline: true
+            }
+        ]
     ],
 
     // Framework you want to run your specs with.
@@ -272,13 +283,22 @@ exports.config = {
     // see also: https://webdriver.io/docs/dot-reporter.html
     // reporters: ['spec' , []],
 
-    reporters: [['spec', {
-        symbols: { passed: '[PASS]', failed: '[FAIL]' }
-    }], ['allure', {
-        outputDir: 'allure-results',
-        disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: false
-    }]],
+    reporters: [
+        [
+            'spec',
+            {
+                symbols: { passed: '[PASS]', failed: '[FAIL]' }
+            }
+        ],
+        [
+            'allure',
+            {
+                outputDir: 'allure-results',
+                disableWebdriverStepsReporting: true,
+                disableWebdriverScreenshotsReporting: false
+            }
+        ]
+    ],
 
     jasmineNodeOpts: {
         isVerbose: true,
@@ -338,33 +358,41 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    before: function() {
+    before: function () {
         require('ts-node').register({
             project: 'e2e/tsconfig.json'
         });
 
-        browser.addCommand('focus', function() {
-            browser.execute(function(domElement) {
-                domElement.focus();
-            }, this);
-        }, true);
+        browser.addCommand(
+            'focus',
+            function () {
+                browser.execute(function (domElement) {
+                    domElement.focus();
+                }, this);
+            },
+            true
+        );
 
-        browser.addCommand('addIsActiveClass', function() {
-            browser.execute(function(domElement) {
-                domElement.classList.add('is-active');
-            }, this);
-        }, true);
+        browser.addCommand(
+            'addIsActiveClass',
+            function () {
+                browser.execute(function (domElement) {
+                    domElement.classList.add('is-active');
+                }, this);
+            },
+            true
+        );
 
         browser.resetUrl = 'about:blank';
         browser.maximizeWindow();
     },
 
-//     const processedConfig = await browser.getProcessedConfig();
-//
-// // Resize the screens if it is a VM
-// if (!('platformName' in processedConfig.capabilities)) {
-//     await browser.driver.manage().window().setSize(1366, 768);
-// }
+    //     const processedConfig = await browser.getProcessedConfig();
+    //
+    // // Resize the screens if it is a VM
+    // if (!('platformName' in processedConfig.capabilities)) {
+    //     await browser.driver.manage().window().setSize(1366, 768);
+    // }
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name
@@ -398,13 +426,13 @@ exports.config = {
     /**
      * Function to be executed after a test (in Mocha/Jasmine).
      */
-    afterTest: function(test, context, { error, result, duration, passed, retries }) {
+    afterTest: function (test, context, { error, result, duration, passed, retries }) {
         if (error !== undefined) {
             browser.takeScreenshot();
             const html = browser.getPageSource();
             AllureReporter.addAttachment('page.html', html, 'text/html');
         }
-    },
+    }
 
     /**
      * Hook that gets executed after the suite has ended

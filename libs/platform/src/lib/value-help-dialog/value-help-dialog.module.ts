@@ -31,43 +31,39 @@ import { DefineTabComponent } from './components/define-tab/define-tab.component
 import { ConditionCountMessageDirective } from './directives/condition-count-message.directive';
 
 @NgModule({
-  declarations: [
-    PlatformValueHelpDialogComponent,
-    VhdFilterComponent,
-    VhdSearchComponent,
-    VhdBaseTab,
-    SelectTabComponent,
-    DefineTabComponent,
-    ConditionCountMessageDirective,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
+    declarations: [
+        PlatformValueHelpDialogComponent,
+        VhdFilterComponent,
+        VhdSearchComponent,
+        VhdBaseTab,
+        SelectTabComponent,
+        DefineTabComponent,
+        ConditionCountMessageDirective
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
 
-    DialogModule,
-    TabsModule,
-    ButtonModule,
-    TokenModule,
-    FormModule,
-    LayoutGridModule,
-    ToolbarModule,
-    TableModule,
-    CheckboxModule,
-    PipeModule,
-    IconModule,
-    ListModule,
-    BarModule,
-    LinkModule,
-    SelectModule,
-    PanelModule,
-    InputGroupModule,
-    PopoverModule,
-    InfiniteScrollModule
-  ],
-  exports: [
-    PlatformValueHelpDialogComponent,
-    VhdFilterComponent,
-    VhdSearchComponent,
-  ]
+        DialogModule,
+        TabsModule,
+        ButtonModule,
+        TokenModule,
+        FormModule,
+        LayoutGridModule,
+        ToolbarModule,
+        TableModule,
+        CheckboxModule,
+        PipeModule,
+        IconModule,
+        ListModule,
+        BarModule,
+        LinkModule,
+        SelectModule,
+        PanelModule,
+        InputGroupModule,
+        PopoverModule,
+        InfiniteScrollModule
+    ],
+    exports: [PlatformValueHelpDialogComponent, VhdFilterComponent, VhdSearchComponent]
 })
-export class PlatformValueHelpDialogModule { }
+export class PlatformValueHelpDialogModule {}

@@ -7,10 +7,12 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 
-export const MOBILE_MODE_CONFIG = new InjectionToken<MobileModeConfigToken>('Provides configuration for mobile control');
+export const MOBILE_MODE_CONFIG = new InjectionToken<MobileModeConfigToken>(
+    'Provides configuration for mobile control'
+);
 
 export interface MobileModeConfigToken {
-    target: MobileModeControl,
+    target: MobileModeControl;
     config: MobileModeConfig;
 }
 
@@ -24,7 +26,6 @@ export enum MobileModeControl {
 }
 
 export abstract class MobileModeBase<T extends MobileMode> {
-
     /** @hidden */
     dialogRef: DialogRef;
 
@@ -42,8 +43,8 @@ export abstract class MobileModeBase<T extends MobileMode> {
         protected _dialogService: DialogService,
         protected _component: T,
         protected readonly target: MobileModeControl,
-        private readonly _mobileModes: MobileModeConfigToken[]) {
-
+        private readonly _mobileModes: MobileModeConfigToken[]
+    ) {
         this._mobileModes = this._mobileModes || [];
         this.mobileConfig = this._getMobileModeConfig();
         this.dialogConfig = this.mobileConfig.dialogConfig;
@@ -57,7 +58,7 @@ export abstract class MobileModeBase<T extends MobileMode> {
 
     /** @hidden */
     private _getMobileModeConfig(): MobileModeConfig {
-        const injectedConfig = this._mobileModes.find(mode => mode.target === this.target);
+        const injectedConfig = this._mobileModes.find((mode) => mode.target === this.target);
 
         if (injectedConfig || this._component.mobileConfig) {
             return injectedConfig

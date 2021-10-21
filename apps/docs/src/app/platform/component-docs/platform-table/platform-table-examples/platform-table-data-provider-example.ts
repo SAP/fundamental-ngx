@@ -220,8 +220,8 @@ const filterByString = (item: ExampleItem, filter: CollectionStringFilter): bool
 };
 
 const filterByNumber = (item: ExampleItem, filter: CollectionNumberFilter): boolean => {
-    const filterValue = Number.parseFloat((filter.value as unknown) as string);
-    const filterValue2 = Number.parseFloat((filter.value2 as unknown) as string) || 0;
+    const filterValue = Number.parseFloat(filter.value as unknown as string);
+    const filterValue2 = Number.parseFloat(filter.value2 as unknown as string) || 0;
     const itemValue = Number.parseFloat(getNestedValue(filter.field, item));
     let result = false;
 

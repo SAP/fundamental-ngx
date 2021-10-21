@@ -1,20 +1,20 @@
 version: 2
 updates:
-- package-ecosystem: npm
-  directory: "/"
-  schedule:
-    interval: weekly
-    day: sunday
-    time: "10:00"
-    timezone: Etc/UCT
-  reviewers:
-  - fkolar
-  - InnaAtanasova
-  - KevinOkamoto
-  - mikerodonnell89
-  - droshev
-  ignore:
-  - dependency-name: typescript
-    versions:
-    - 4.2.4
-  open-pull-requests-limit: 10
+    - package-ecosystem: npm
+      directory: '/'
+      schedule:
+          interval: weekly
+          day: sunday
+          time: '10:00'
+          timezone: Etc/UCT
+      reviewers:
+          - fkolar
+          - InnaAtanasova
+          - KevinOkamoto
+          - mikerodonnell89
+          - droshev
+      ignore:
+          - dependency-name: typescript
+            versions:
+                - 4.2.4
+      open-pull-requests-limit: 10

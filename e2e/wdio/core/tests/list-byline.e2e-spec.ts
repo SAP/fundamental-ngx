@@ -1,12 +1,18 @@
 import { ListBylinePo } from '../pages/list-byline.po';
 import {
     waitForElDisplayed,
-    refreshPage, scrollIntoView, click, getElementArrayLength, isElementClickable, getAttributeByName
+    refreshPage,
+    scrollIntoView,
+    click,
+    getElementArrayLength,
+    isElementClickable,
+    getAttributeByName
 } from '../../driver/wdio';
 
-describe('List byline test suite', function() {
+describe('List byline test suite', () => {
     const listBylinePage = new ListBylinePo();
-    const { selectionExample, buttonExample, button, checkbox, listItem, radioButton, radioButtonInput } = listBylinePage;
+    const { selectionExample, buttonExample, button, checkbox, listItem, radioButton, radioButtonInput } =
+        listBylinePage;
 
     beforeAll(() => {
         listBylinePage.open();
@@ -29,13 +35,11 @@ describe('List byline test suite', function() {
         for (let i = 0; i < checkboxLength; i++) {
             scrollIntoView(selectionExample + checkbox, i);
             if (i === 0) {
-                expect(getAttributeByName(selectionExample + listItem, 'aria-selected', i))
-                    .toBe('true');
+                expect(getAttributeByName(selectionExample + listItem, 'aria-selected', i)).toBe('true');
                 continue;
             }
             click(selectionExample + checkbox, i);
-            expect(getAttributeByName(selectionExample + listItem, 'aria-selected', i))
-                .toBe('true');
+            expect(getAttributeByName(selectionExample + listItem, 'aria-selected', i)).toBe('true');
         }
     });
 
@@ -44,8 +48,7 @@ describe('List byline test suite', function() {
         for (let i = 0; i < radioButtonLength; i++) {
             scrollIntoView(selectionExample + radioButton, i);
             click(selectionExample + radioButton, i);
-            expect(getAttributeByName(radioButtonInput, 'aria-checked', i))
-                .toBe('true');
+            expect(getAttributeByName(radioButtonInput, 'aria-checked', i)).toBe('true');
         }
     });
 

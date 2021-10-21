@@ -45,7 +45,7 @@ export class ModifyItemEvent {
 
 @Directive({ selector: '[fdpItemDef]' })
 export class ListItemDef implements ItemDef {
-    constructor(/** @docs-private */ public templateRef: TemplateRef<any>) { }
+    constructor(/** @docs-private */ public templateRef: TemplateRef<any>) {}
 }
 
 /**
@@ -54,7 +54,6 @@ export class ListItemDef implements ItemDef {
  */
 @Directive()
 export class BaseListItem extends BaseComponent implements OnInit, AfterViewChecked {
-
     /** define label for screen reader */
     @Input()
     ariaLabelledBy: string;
@@ -202,14 +201,16 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      * Whether listitem is selected binded to template */
     _selected: boolean;
     /** @hidden
-          * get the focused element for key manager */
+     * get the focused element for key manager */
     _focused: boolean;
 
     /** @hidden */
-    constructor(protected _changeDetectorRef: ChangeDetectorRef,
-                public itemEl: ElementRef,
-                protected _listConfig: ListConfig,
-                @Optional() private router: Router) {
+    constructor(
+        protected _changeDetectorRef: ChangeDetectorRef,
+        public itemEl: ElementRef,
+        protected _listConfig: ListConfig,
+        @Optional() private router: Router
+    ) {
         super(_changeDetectorRef);
     }
 
@@ -235,8 +236,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     set selectionValue(value: string) {
         this._selected = false;
         this._selectionValue = value;
-        if (this._selectionValue !== undefined &&
-            this.selectionValue !== null) {
+        if (this._selectionValue !== undefined && this.selectionValue !== null) {
             this._selected = this.value === this._selectionValue;
         }
     }
@@ -260,9 +260,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
             if (currentitem.parentNode) {
                 currentitem.parentNode.removeAttribute('title');
                 currentitem.parentNode.removeAttribute('aria-label');
-                if (this.selectRow ||
-                    this.selectionMode === 'multi' ||
-                    this.selectionMode === 'single') {
+                if (this.selectRow || this.selectionMode === 'multi' || this.selectionMode === 'single') {
                     currentitem.parentNode.setAttribute('aria-selected', this._selected ? this._selected : false);
                 }
             }
@@ -289,7 +287,6 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
         this._focused = !this._focused;
         this.itemSelected.emit(event);
         this._changeDetectorRef.markForCheck();
-
     }
 
     /** @hidden */
@@ -332,8 +329,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     /** helps to avoid multi rows active class with navigation */
     @HostListener('focusout', ['$event'])
     _onBlur(event: KeyboardEvent): void {
-        if (this.anchor !== undefined &&
-            !(KeyUtil.isKeyCode(event, ENTER) && KeyUtil.isKeyCode(event, SPACE))) {
+        if (this.anchor !== undefined && !(KeyUtil.isKeyCode(event, ENTER) && KeyUtil.isKeyCode(event, SPACE))) {
             this.anchor.nativeElement.classList.remove(IS_ACTIVE_CLASS);
         }
     }
@@ -341,8 +337,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     /** @hidden */
     /**on keydown append active styles on actionable item */
     _onKeyDown(event: KeyboardEvent): void {
-        if (this.anchor !== undefined &&
-            (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE))) {
+        if (this.anchor !== undefined && (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE))) {
             this.anchor.nativeElement.classList.add(IS_ACTIVE_CLASS);
         }
     }
@@ -350,8 +345,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
     /** @hidden */
     /**on keyup remove active styles from actionable item*/
     _onKeyUp(event: KeyboardEvent): void {
-        if (this.anchor !== undefined &&
-            (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE))) {
+        if (this.anchor !== undefined && (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE))) {
             this.anchor.nativeElement.classList.remove(IS_ACTIVE_CLASS);
         }
     }
@@ -372,7 +366,7 @@ export class BaseListItem extends BaseComponent implements OnInit, AfterViewChec
      *  Handles action button click on key press
      */
     _onKeyButtonClick(event: KeyboardEvent, action: 'delete' | 'edit'): void {
-        if ((KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE))) {
+        if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
             this._onActionButtonClick(action);
         }
     }

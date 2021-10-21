@@ -9,8 +9,7 @@ describe('MessageBoxFooterButtonComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [MessageBoxFooterButtonComponent]
-        })
-            .compileComponents();
+        }).compileComponents();
     });
 
     beforeEach(() => {

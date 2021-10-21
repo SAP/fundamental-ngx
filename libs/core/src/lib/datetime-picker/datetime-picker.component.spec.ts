@@ -127,7 +127,7 @@ describe('DatetimePickerComponent', () => {
         const hideSpy = spyOn((<any>component)._popoverFormMessage, 'hide');
         component.openPopover();
         expect(hideSpy).toHaveBeenCalled();
-    })
+    });
 
     it('should show message on close', () => {
         component.isOpen = true;
