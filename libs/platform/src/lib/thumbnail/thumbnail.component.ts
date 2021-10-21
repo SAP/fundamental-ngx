@@ -51,6 +51,7 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
     @Output()
     thumbnailClicked: EventEmitter<ThumbnailClickedEvent> = new EventEmitter();
 
+    /** Reference to thumbnail images component */
     @ViewChild(ThumbnailImageComponent)
     thumbnailImage: ThumbnailImageComponent;
 

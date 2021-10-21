@@ -31,6 +31,7 @@ export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
     /** max limit  */
     maxImages = this.dialogRef.data.maxImages;
 
+    /** Reference to humbnail images component */
     @ViewChild(ThumbnailImageComponent)
     thumbnailImage: ThumbnailImageComponent;
 

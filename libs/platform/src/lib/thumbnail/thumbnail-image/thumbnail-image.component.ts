@@ -47,6 +47,7 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     @Output()
     thumbnailClicked: EventEmitter<Media> = new EventEmitter();
 
+    /** List of thumbnail images reference */
     @ViewChildren('thumbnailImage')
     thumbnailImages: QueryList<ElementRef>;
 
