@@ -15,7 +15,6 @@
 >
     <ul
         class="fd-time__list"
-        aria-live="polite"
         [ngClass]="{'fd-time-column-custom-hidden': !active}"
         [config]="config"
         (click)="indicator.focus()"
@@ -51,8 +50,8 @@
     >
     </div>
     <span
+        aria-live="polite"
         class="fd-time__item fd-time__item--collapsed"
-        [ngClass]="{'fd-time-column-custom-hidden': active}"
     >
         {{ activeValue?.label }}
     </span>
