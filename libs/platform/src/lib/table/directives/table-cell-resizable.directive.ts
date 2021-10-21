@@ -11,8 +11,7 @@ export const TABLE_CELL_RESIZABLE_THRESHOLD_PX = 4;
 /**
  * Tracks mouse movement over the cell if the mouse pointer near the side of the cell, informs resize service.
  */
-// tslint:disable-next-line:directive-selector
-@Directive({ selector: '[fdp-table-cell-resizable]' })
+@Directive({ selector: '[fdpTableCellResizable], [fdp-table-cell-resizable]' })
 export class PlatformTableCellResizableDirective implements AfterViewInit {
     /** First column can be resized only by its end */
     @Input('fdp-table-cell-resizable')

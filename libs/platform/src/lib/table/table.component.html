@@ -58,7 +58,7 @@
             aria-label="Select row"
             i18n-aria-label="@@platformTableSelectRow"
             [focusable]="true"
-            [fd-table-cell-selectable]="_firstCellNavigationId"
+            [fdp-table-cell-selectable]="_firstCellNavigationId"
             [class.fd-table__cell--checkbox]="selectionMode === SELECTION_MODE.MULTIPLE"
             (keydown.enter)="_toggleAllSelectableRows()"
             (keydown.space)="_toggleAllSelectableRows($event)"
@@ -80,7 +80,7 @@
                 role="columnheader"
                 [id]="id + '__' + column.name"
                 [focusable]="true"
-                [fd-table-cell-selectable]="_getCellNavigationId(0, colIdx)"
+                [fdp-table-cell-selectable]="_getCellNavigationId(0, colIdx)"
                 [fdp-table-cell-resizable]="_getColumnResizableSide(colIdx)"
                 [columnName]="column.name"
                 [attr.aria-colindex]="colIdx"
@@ -302,7 +302,7 @@
                                         tabindex="0"
                                         role="rowheader"
                                         fd-table-cell
-                                        fd-table-cell-selectable
+                                        fdp-table-cell-selectable
                                         [style]="_getSelectionCellStyles()"
                                         [focusable]="true"
                                         [attr.aria-selected]="row.checked"
@@ -339,7 +339,7 @@
                                 fd-table-cell
                                 role="gridcell"
                                 [focusable]="true"
-                                [fd-table-cell-selectable]="_getCellNavigationId(rowIdx + 1, colIdx)"
+                                [fdp-table-cell-selectable]="_getCellNavigationId(rowIdx + 1, colIdx)"
                                 [headers]="id + '__' + column.name"
                                 [fdp-table-cell-resizable]="_getColumnResizableSide(colIdx)"
                                 [columnName]="column.name"
@@ -446,7 +446,7 @@
             fd-table-cell
             role="gridcell"
             [focusable]="true"
-            [fd-table-cell-selectable]="_getCellNavigationId(rowIdx + 1, 0, true)"
+            [fdp-table-cell-selectable]="_getCellNavigationId(rowIdx + 1, 0, true)"
             class="fd-table__cell--group fd-table__cell--fixed fd-table__cell--expand"
             [attr.colspan]="_tableColumnsLength"
             [attr.aria-expanded]="row.expanded"

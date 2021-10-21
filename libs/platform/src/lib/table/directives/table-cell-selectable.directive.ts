@@ -18,12 +18,11 @@ import { DOCUMENT } from '@angular/common';
 
 /** @dynamic */
 @Directive({
-    // tslint:disable-next-line:directive-selector
-    selector: '[fdTableCellSelectable], [fd-table-cell-selectable]'
+    selector: '[fdpTableCellSelectable], [fdp-table-cell-selectable]'
 })
 export class FdpCellSelectableDirective implements OnChanges {
     /** Used to register cell as focusable to have ability to navigate over it */
-    @Input('fd-table-cell-selectable')
+    @Input('fdp-table-cell-selectable')
     navigationId: TableCellNavigationId;
 
     /** @hidden */
