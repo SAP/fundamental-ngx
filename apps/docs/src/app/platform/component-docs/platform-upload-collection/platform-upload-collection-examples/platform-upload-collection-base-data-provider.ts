@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { merge, Observable, of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { merge, Observable, of, Subject } from 'rxjs';
+import { delay, map, takeUntil, tap } from 'rxjs/operators';
 
 import { uuidv4 } from '@fundamental-ngx/core/utils';
 import {
@@ -22,9 +22,16 @@ import {
 
 import { generateUploadCollectionItems } from './platform-upload-collection-items-generator';
 
+enum CancelActiveRequest {
+    UPDATE,
+    NEW_FOLDER,
+    UPDATE_VERSION
+}
+
 export class PlatformUploadCollectionDataProviderExample extends UploadCollectionDataProvider {
     items: UploadCollectionItem[] = generateUploadCollectionItems(50, 4, 2);
     private _cancelUploadNewFileIds: (string | number)[] = [];
+    private _activeRequest: CancelActiveRequest = null;
 
     constructor(private readonly _http: HttpClient) {
         super();
@@ -34,38 +41,23 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
     upload({ parentFolderId, items }: UploadEvent): Observable<UploadCollectionItem[]> {
         console.log('upload', parentFolderId, items);
 
-        const newFiles: UploadCollectionNewItem[] = items.map((item) => {
-            delete item.file;
-            item.status = UploadCollectionItemStatus.SUCCESSFUL;
-
-            return {
-                temporaryDocumentId: item.documentId,
-                item: item
-            };
-        });
-
-        this._findParentFolderAndAddNewFiles(parentFolderId, newFiles);
+        this._activeRequest = CancelActiveRequest.UPDATE;
 
         return of(this.items).pipe(
             delay(5000),
-            map((updatedItems) => {
-                const ids = newFiles
-                    .filter((file) => {
-                        const includes = this._cancelUploadNewFileIds.includes(file.item.documentId);
-                        if (includes) {
-                            this._cancelUploadNewFileIds = this._cancelUploadNewFileIds.filter(
-                                (id) => id !== file.item.documentId
-                            );
-                            return true;
-                        }
+            tap(() => {
+                const newFiles: UploadCollectionNewItem[] = items.map((item) => {
+                    delete item.file;
+                    item.status = UploadCollectionItemStatus.SUCCESSFUL;
 
-                        return false;
-                    })
-                    .map((file) => file.item.documentId);
+                    return {
+                        temporaryDocumentId: item.documentId,
+                        item: item
+                    };
+                });
 
-                this._findParentFolderAndRemoveItemsByIds(parentFolderId, ids, updatedItems);
-
-                return updatedItems;
+                this._findParentFolderAndAddNewFiles(parentFolderId, newFiles);
+                this._activeRequest = null;
             })
         );
     }
@@ -132,57 +124,47 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
     /** The method is triggered when the file name is changed. */
     fileRenamed({ parentFolderId, item, fileName }: FileRenamedEvent): Observable<UploadCollectionItem[]> {
         console.log('fileRenamed', parentFolderId, item, fileName);
-        let updatedItem = {
+        const updatedItem = {
             ...item,
-            name: fileName,
-            status: UploadCollectionItemStatus.SUCCESSFUL
+            name: fileName
         };
 
         this._findParentFolderAndUpdateItem(parentFolderId, updatedItem);
 
-        return of(this.items).pipe(
-            delay(5000),
-            map((updatedItems) => {
-                const itemId = item.documentId;
-                const includes = this._cancelUploadNewFileIds.includes(itemId);
-                if (includes) {
-                    updatedItem = { ...updatedItem };
-                    updatedItem.name = item.name;
-                    updatedItem.status = UploadCollectionItemStatus.SUCCESSFUL;
-
-                    this._findParentFolderAndUpdateItem(parentFolderId, updatedItem, updatedItems);
-                    this._cancelUploadNewFileIds = this._cancelUploadNewFileIds.filter((id) => id !== itemId);
-                }
-
-                return updatedItems;
-            })
-        );
+        return of(this.items).pipe(delay(5000));
     }
 
     /** The method is triggered when the new folder added. */
     newFolder({ parentFolderId, folder }: NewFolderEvent): Observable<UploadCollectionItem[]> {
         console.log('newFolder', folder, parentFolderId);
 
-        folder.status = UploadCollectionItemStatus.SUCCESSFUL;
-
-        this._findParentFolderAndAddNewFiles(parentFolderId, [
-            {
-                temporaryDocumentId: folder.documentId,
-                item: folder
-            }
-        ]);
+        this._activeRequest = CancelActiveRequest.NEW_FOLDER;
+        const complete = new Subject();
 
         return of(this.items).pipe(
             delay(5000),
-            map((updatedItems) => {
+            tap(() => {
                 const folderId = folder.documentId;
                 const includes = this._cancelUploadNewFileIds.includes(folderId);
+
                 if (includes) {
                     this._cancelUploadNewFileIds = this._cancelUploadNewFileIds.filter((id) => id !== folderId);
-                    this._findParentFolderAndRemoveItemsByIds(parentFolderId, [folderId], updatedItems);
+                    this._activeRequest = null;
+                    complete.next();
                 }
+            }),
+            takeUntil(complete),
+            tap(() => {
+                const uploadedFile = {
+                    temporaryDocumentId: folder.documentId,
+                    item: {
+                        ...folder,
+                        status: UploadCollectionItemStatus.SUCCESSFUL
+                    }
+                };
 
-                return updatedItems;
+                this._findParentFolderAndAddNewFiles(parentFolderId, [uploadedFile]);
+                this._activeRequest = null;
             })
         );
     }
@@ -191,35 +173,38 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
     updateVersion({ parentFolderId, item, newItem }: UpdateVersionEvent): Observable<UploadCollectionItem[]> {
         console.log('updateVersion', parentFolderId, item);
 
-        let updatedItem: UploadCollectionFile = {
-            ...item,
-            status: UploadCollectionItemStatus.SUCCESSFUL,
-            uploadedOn: new Date(),
-            uploadedBy: {
-                id: Date.now(),
-                name: 'You'
-            },
-            version: +item.version,
-            name: newItem.name,
-            fileSize: newItem.size
-        };
-
-        this._findParentFolderAndUpdateItem(parentFolderId, updatedItem);
+        this._activeRequest = CancelActiveRequest.UPDATE_VERSION;
+        const complete = new Subject();
 
         return of(this.items).pipe(
             delay(5000),
-            map((updatedItems) => {
-                const itemId = updatedItem.documentId;
+            tap(() => {
+                const itemId = item.documentId;
                 const includes = this._cancelUploadNewFileIds.includes(itemId);
                 if (includes) {
-                    updatedItem = { ...item };
-
-                    this._findParentFolderAndUpdateItem(parentFolderId, updatedItem, updatedItems);
                     this._cancelUploadNewFileIds = this._cancelUploadNewFileIds.filter((id) => id !== itemId);
+                    this._activeRequest = null;
+                    complete.next(true);
                 }
+            }),
+            tap(() => {
+                const updatedItem: UploadCollectionFile = {
+                    ...item,
+                    status: UploadCollectionItemStatus.SUCCESSFUL,
+                    uploadedOn: new Date(),
+                    uploadedBy: {
+                        id: Date.now(),
+                        name: 'You'
+                    },
+                    version: +item.version,
+                    name: newItem.name,
+                    fileSize: newItem.size
+                };
 
-                return updatedItems;
-            })
+                this._findParentFolderAndUpdateItem(parentFolderId, updatedItem);
+                this._activeRequest = null;
+            }),
+            takeUntil(complete)
         );
     }
 
@@ -246,7 +231,18 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
         const id = item.documentId;
         this._cancelUploadNewFileIds.push(id);
 
-        this._findParentFolderAndRemoveItemsByIds(parentFolderId, [id]);
+        if (this._activeRequest === CancelActiveRequest.NEW_FOLDER) {
+            this._findParentFolderAndRemoveItemsByIds(parentFolderId, [id]);
+        }
+
+        if (this._activeRequest === CancelActiveRequest.UPDATE) {
+            this._findParentFolderAndRemoveItemsByIds(parentFolderId, [id]);
+        }
+
+        if (this._activeRequest === CancelActiveRequest.UPDATE_VERSION) {
+            item.status = null;
+            this._findParentFolderAndUpdateItem(parentFolderId, item);
+        }
 
         return of(null);
     }
@@ -301,6 +297,9 @@ export class PlatformUploadCollectionDataProviderExample extends UploadCollectio
             const index = items.findIndex((item) => item.documentId === uploadedFile.temporaryDocumentId);
             if (index !== -1) {
                 items[index] = uploadedFile.item;
+            }
+
+            if (uploadedFiles.length > 0) {
                 this._findParentFolderAndAddNewFiles(parentFolderId, uploadedFiles);
             }
 

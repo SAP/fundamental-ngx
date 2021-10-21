@@ -334,7 +334,6 @@ export class UploadCollectionComponent {
             fileName: newName,
             item: { ...currentItem }
         };
-        currentItem.status = UploadCollectionItemStatus.LOADING;
 
         this.dataSource
             .fileRenamed(data)
