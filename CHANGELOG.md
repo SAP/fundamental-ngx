@@ -1,4 +1,41 @@
 
+## 0.33.0-rc.44 (2021-10-21)
+
+## 0.33.0-rc.43 (2021-10-21)
+
+
+### Bug Fixes
+
+* **core:** rely on resize observer instead of window resize event ([#6940](https://github.com/SAP/fundamental-ngx/issues/6940)) ([abb99e5](https://github.com/SAP/fundamental-ngx/commit/abb99e509de0405d22442bb72c714c38c0cca1cd))
+
+## 0.33.0-rc.42 (2021-10-21)
+
+
+### Bug Fixes
+
+* **core:** add possibility to move cards using keyboard in fixed card layout component ([#6598](https://github.com/SAP/fundamental-ngx/issues/6598)) ([386d99b](https://github.com/SAP/fundamental-ngx/commit/386d99b17dabe5d471fb10251db0b0e070a5990c))
+
+## 0.33.0-rc.41 (2021-10-20)
+
+
+### Bug Fixes
+
+* **platform:** dynamic page accessibility ([#6900](https://github.com/SAP/fundamental-ngx/issues/6900)) ([cb4b672](https://github.com/SAP/fundamental-ngx/commit/cb4b6729655c9f77cd8de6b697cdc4efdd63a7ac))
+
+## 0.33.0-rc.40 (2021-10-20)
+
+
+### Bug Fixes
+
+* **core:** using segmented-button with a[fd-button] ([#6600](https://github.com/SAP/fundamental-ngx/issues/6600)) ([3eada9e](https://github.com/SAP/fundamental-ngx/commit/3eada9e581430aafccfe248e017323b0002c69c8)), closes [#6599](https://github.com/SAP/fundamental-ngx/issues/6599)
+
+## 0.33.0-rc.39 (2021-10-20)
+
+
+### Bug Fixes
+
+* **platform:** multi-input - adding roles and updating display ([#6765](https://github.com/SAP/fundamental-ngx/issues/6765)) ([119d8e5](https://github.com/SAP/fundamental-ngx/commit/119d8e5cf9e7b21859f220a0eaaadb163aa52ea0))
+
 ## 0.33.0-rc.38 (2021-10-20)
 
 ## 0.33.0-rc.37 (2021-10-20)

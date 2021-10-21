@@ -1,12 +1,19 @@
-<div #layout class="fd-fixed-card-layout__card-layout" cdkDropListGroup [attr.dir]="dir">
+<div
+    #layout
+    class="fd-fixed-card-layout__card-layout"
+    cdkDropListGroup
+    [attr.dir]="dir"
+    fdDndKeyboardGroup
+    [groups]="_columns"
+>
     <div
         class="fd-fixed-card-layout__card-layout-column"
         [cdkDropListData]="column"
         cdkDropList
-        *ngFor="let column of columns"
+        *ngFor="let column of _columns; let groupIndex = index"
         [cdkDropListDisabled]="disableDragDrop"
     >
-        <ng-container *ngFor="let card of column">
+        <ng-container *ngFor="let card of column; let index = index">
             <div
                 class="fd-fixed-card-layout__card"
                 cdkDrag
@@ -14,6 +21,11 @@
                 cdkDragPreviewClass="fd-fixed-card-layout__card-preview"
                 [cdkDragData]="card"
                 (cdkDragDropped)="dragDrop($event)"
+                fdDndKeyboardItem
+                [dndKeyboardDisabled]="disableDragDrop"
+                [itemIndex]="index"
+                [groupIndex]="groupIndex"
+                tabindex="0"
             >
                 <fd-fixed-card-layout-item>
                     <ng-container *ngTemplateOutlet="card?.template"> </ng-container>

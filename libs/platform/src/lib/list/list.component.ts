@@ -102,6 +102,10 @@ export class ListComponent extends CollectionBaseInput implements OnInit, AfterV
     @Input()
     loadOnScroll: boolean;
 
+    /** define the role to custom requirement */
+    @Input()
+    role = 'list';
+
     /**ListType 'inactive' | 'active' | 'navigation' | 'detail' */
     @Input()
     listType: ListType = 'active';
