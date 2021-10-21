@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.42 (2021-10-21)
+
+
+### Bug Fixes
+
+* **core:** add possibility to move cards using keyboard in fixed card layout component ([#6598](https://github.com/SAP/fundamental-ngx/issues/6598)) ([386d99b](https://github.com/SAP/fundamental-ngx/commit/386d99b17dabe5d471fb10251db0b0e070a5990c))
+
 ## 0.33.0-rc.41 (2021-10-20)
 
 
