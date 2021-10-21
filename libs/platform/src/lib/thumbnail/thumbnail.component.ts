@@ -6,13 +6,16 @@ import {
     OnInit,
     Optional,
     Output,
-    ViewEncapsulation
+    ViewEncapsulation,
+    HostListener,
+    ViewChild
 } from '@angular/core';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 import { BaseComponent } from '@fundamental-ngx/platform/shared';
 import { ThumbnailDetailsComponent } from './thumbnail-details/thumbnail-details.component';
+import { ThumbnailImageComponent } from './thumbnail-image/thumbnail-image.component';
 import { Media } from './thumbnail.interfaces';
 
 let uniqueId = 0;
@@ -48,8 +51,14 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
     @Output()
     thumbnailClicked: EventEmitter<ThumbnailClickedEvent> = new EventEmitter();
 
+    @ViewChild(ThumbnailImageComponent)
+    thumbnailImage: ThumbnailImageComponent;
+
     /** Generate unique id for the thumbnail */
     thumbnailId: string = 'fd-thumbnail-dialog-header-' + uniqueId++;
+
+    /** @hidden Start index of currently active items */
+    currentActiveSlidesStartIndex = 0;
 
     /** @hidden Currently selected media. */
     public selectedMedia: Media;
@@ -58,7 +67,8 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
     constructor(
         protected _changeDetectorRef: ChangeDetectorRef,
         private _dialogService: DialogService,
-        @Optional() private readonly _rtlService: RtlService
+        @Optional() private readonly _rtlService: RtlService,
+        private _cdr: ChangeDetectorRef
     ) {
         super(_changeDetectorRef);
     }
@@ -107,5 +117,41 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
         if (this.mediaList.length > this.maxImagesDisplay) {
             this.mediaList[this.maxImagesDisplay - 1].overlayRequired = true;
         }
+    }
+
+    /** @hidden Transitions to the next image in the thumbnail  */
+    @HostListener('keydown.arrowright', ['$event'])
+    onKeydownArrowRight(event: KeyboardEvent): void {
+        event.preventDefault();
+        this._isRtl() ? this.previous() : this.next();
+    }
+
+    /** @hidden Transitions to the previous image in the thumbnail*/
+    @HostListener('keydown.arrowleft', ['$event'])
+    onKeydownArrowLeft(event: KeyboardEvent): void {
+        event.preventDefault();
+        this._isRtl() ? this.next() : this.previous();
+    }
+
+    /** Transitions to the previous image in the thumbnail. */
+    previous(): void {
+        if (this.currentActiveSlidesStartIndex <= 0) {
+            return;
+        }
+        this.currentActiveSlidesStartIndex = this.currentActiveSlidesStartIndex - 1;
+        const thumbnailImagesArray = this.thumbnailImage.thumbnailImages.toArray();
+        thumbnailImagesArray[this.currentActiveSlidesStartIndex].nativeElement.focus();
+        this._cdr.detectChanges();
+    }
+
+    /** Transitions to the next image in the thumbnail. */
+    next(): void {
+        if (this.currentActiveSlidesStartIndex >= this.maxImagesDisplay - 1) {
+            return;
+        }
+        this.currentActiveSlidesStartIndex = this.currentActiveSlidesStartIndex + 1;
+        const thumbnailImagesArray = this.thumbnailImage.thumbnailImages.toArray();
+        thumbnailImagesArray[this.currentActiveSlidesStartIndex].nativeElement.focus();
+        this._cdr.detectChanges();
     }
 }

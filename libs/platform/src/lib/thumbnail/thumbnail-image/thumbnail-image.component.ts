@@ -7,7 +7,10 @@ import {
     OnChanges,
     SimpleChanges,
     OnInit,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    ViewChildren,
+    QueryList,
+    ElementRef
 } from '@angular/core';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
@@ -44,6 +47,9 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     @Output()
     thumbnailClicked: EventEmitter<Media> = new EventEmitter();
 
+    @ViewChildren('thumbnailImage')
+    thumbnailImages: QueryList<ElementRef>;
+
     /** @hidden */
     constructor(
         protected _changeDetectorRef: ChangeDetectorRef,
@@ -54,6 +60,7 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     /** @hidden */
     ngOnInit(): void {
         this._setOverlay();
+        console.log('length', this.thumbnailImages.length);
     }
 
     /** @hidden */
