@@ -339,10 +339,6 @@ export abstract class BaseSelect extends CollectionBaseInput implements OnInit, 
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
-        if (!value) {
-            return;
-        }
-
         const selectedItems = Array.isArray(value) ? value : [value];
         this._setAsSelected(this._convertToOptionItems(selectedItems));
         super.writeValue(value);
