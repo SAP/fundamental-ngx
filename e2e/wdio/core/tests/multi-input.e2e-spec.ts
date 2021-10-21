@@ -1,12 +1,15 @@
 import {
     click,
+    doesItExist,
     getAttributeByName,
     getElementArrayLength,
     getText,
     isElementDisplayed,
     refreshPage,
     scrollIntoView,
+    sendKeys,
     setValue,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 
@@ -21,7 +24,7 @@ import {
     testOptionsArray6
 } from '../fixtures/appData/multi-input-contents';
 
-xdescribe('Multi input test suite', () => {
+describe('Multi input test suite', () => {
     const multiInputPage = new MultiInputPo();
     const {
         activeDropdownButtons,
@@ -41,7 +44,12 @@ xdescribe('Multi input test suite', () => {
         customFilterOptions,
         asyncExampleOptions,
         tokenOptions,
-        templateOptions
+        templateOptions,
+        simpleExampleTokens,
+        checkboxInput,
+        listItem,
+        popover,
+        compactExampleTokens
     } = multiInputPage;
 
     beforeAll(() => {
@@ -81,6 +89,41 @@ xdescribe('Multi input test suite', () => {
         }
     });
 
+    it('should check enter key doesnt add an empty token', () => {
+        const originalTokenCount = getElementArrayLength(simpleExampleTokens);
+        click(activeInputs);
+        sendKeys(['Enter']);
+        const newTokenCount = getElementArrayLength(simpleExampleTokens);
+
+        expect(newTokenCount).toEqual(originalTokenCount);
+    });
+
+    it('should check multiInput options stay open when clicking checkbox', () => {
+        click(activeDropdownButtons);
+        waitForElDisplayed(popover);
+        click(checkboxInput);
+
+        expect(isElementDisplayed(popover)).toBe(true, 'popover not displayed');
+    });
+
+    it('should check multiInput options close when clicking on list item', () => {
+        click(activeDropdownButtons);
+        waitForElDisplayed(popover);
+        click(listItem);
+
+        expect(doesItExist(popover)).toBe(false, 'popover still displayed');
+    });
+
+    it('should be able to select all tokens and delete with delete key', () => {
+        scrollIntoView(compactExampleTokens);
+        click(activeInputs, 3);
+        sendKeys(['Control', 'a']);
+        sendKeys(['Delete']);
+        const newTokenCount = getElementArrayLength(compactExampleTokens);
+
+        expect(newTokenCount).toEqual(0);
+    });
+
     describe('Check Mobile Mode Multi Input', () => {
         it('verify Simple Multi Input by select each option', () => {
             scrollIntoView(activeDropdownButtons);
@@ -102,7 +145,7 @@ xdescribe('Multi input test suite', () => {
             setValue(activeInputs, 'to', 1);
             scrollIntoView(buttonShowAll);
             click(buttonShowAll);
-            expect(isElementDisplayed(expandedDropdown, 1)).toBe(true);
+            expect(waitForElDisplayed(expandedDropdown, 1)).toBe(true);
             const optionsLength = getElementArrayLength(options);
             for (let i = 8; i < optionsLength; i++) {
                 scrollIntoView(options, i);
