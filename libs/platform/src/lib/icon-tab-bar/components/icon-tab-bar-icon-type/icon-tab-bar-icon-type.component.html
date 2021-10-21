@@ -26,9 +26,11 @@
                 <span class="fd-icon-tab-bar__icon">
                     <fd-icon [glyph]="item.icon"></fd-icon>
                 </span>
-                <span *ngIf="item.counter && !item.label" class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
+                <span *ngIf="item.counter && (!item.label || !showLabel)" class="fd-icon-tab-bar__counter">{{
+                    item.counter
+                }}</span>
             </div>
-            <div *ngIf="item.label" class="fd-icon-tab-bar__details">
+            <div *ngIf="showLabel && item.label" class="fd-icon-tab-bar__details">
                 <span class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
                 <span class="fd-icon-tab-bar__label">{{ item.label }}</span>
             </div>
@@ -43,6 +45,7 @@
         [anchorIndexInsideParent]="_lastVisibleTabIndex"
     >
         <fdp-icon-tab-bar-popover
+            [showItemLabel]="showLabel"
             [extraTabs]="_extraTabs"
             (selectedExtraItem)="_selectExtraItem($event)"
         ></fdp-icon-tab-bar-popover>

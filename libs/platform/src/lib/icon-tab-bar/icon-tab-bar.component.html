@@ -37,6 +37,7 @@
 
 <ng-template #iconType>
     <fdp-icon-tab-bar-icon-type
+        [showLabel]="iconTabType === 'icon'"
         [tabsConfig]="tabsConfig"
         [isRtl]="_isRtl"
         [densityMode]="densityMode"
