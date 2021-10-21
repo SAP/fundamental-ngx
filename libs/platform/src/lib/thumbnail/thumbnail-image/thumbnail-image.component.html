@@ -5,7 +5,7 @@
         [class.fdp-thumbnail-image--selected]="image.selected"
         [class.fdp-thumbnail-image--overlay]="image.overlayRequired"
         (click)="image.overlayRequired ? openDialog(image, mediaList) : thumbnailClick(image)"
-        (keydown.enter)="image.overlayRequired ? openDialog(image, mediaList) : thumbnailClick(image)"
+        (keydown.space)="image.overlayRequired ? openDialog(image, mediaList) : thumbnailClick(image)"
         tabindex="0"
         role="option"
         [attr.aria-roledescription]="roleDescription"
