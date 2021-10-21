@@ -1,13 +1,18 @@
-
 <div class="table-header">
-    <h5 fd-title><ng-container i18n="@@platformI18nValueHelpDialogDisplayCountLabel">Items</ng-container> ({{ displayedData.length }})</h5>
+    <h5 fd-title>
+        <ng-container i18n="@@platformI18nValueHelpDialogDisplayCountLabel">Items</ng-container> ({{
+            displayedData.length
+        }})
+    </h5>
 </div>
-<div class="fdp-value-help-dialog__table-holder table-content"
+<div
+    class="fdp-value-help-dialog__table-holder table-content"
     fdInfiniteScroll
     (onScrollAction)="_showMoreElements()"
     [scrollPercent]="80"
 >
-    <table fd-table
+    <table
+        fd-table
         [compact]="contentTableDensity === _contentDensityOptions.COMPACT"
         [condensed]="contentTableDensity === _contentDensityOptions.CONDENSED"
         [popIn]="mobile"
@@ -28,11 +33,19 @@
                         (ngModelChange)="_toggleAllRows()"
                     ></fd-checkbox>
                 </th>
-                <th fd-table-cell *ngFor="let filter of _tableFilters.main; trackBy: _trackByFilterFn">{{ filter.label }}</th>
+                <th fd-table-cell *ngFor="let filter of _tableFilters.main; trackBy: _trackByFilterFn">
+                    {{ filter.label }}
+                </th>
             </tr>
         </thead>
         <tbody fd-table-body>
-            <ng-container *ngFor="let row of displayedData | slice:_shownFrom:_shownCount; trackBy:_trackByTableRowFn; index as i">
+            <ng-container
+                *ngFor="
+                    let row of displayedData | slice: _shownFrom:_shownCount;
+                    trackBy: _trackByTableRowFn;
+                    index as i
+                "
+            >
                 <tr
                     fd-table-row
                     [hoverable]="!mobile"
@@ -54,7 +67,12 @@
                     <td fd-table-cell *ngFor="let filter of _tableFilters.main">{{ row[filter.key] || '' }}</td>
                 </tr>
 
-                <tr fd-table-row *ngIf="mobile && _tableFilters.secondary.length" [secondary]="true" [attr.aria-selected]="_selectedMap[row[uniqueKey]]">
+                <tr
+                    fd-table-row
+                    *ngIf="mobile && _tableFilters.secondary.length"
+                    [secondary]="true"
+                    [attr.aria-selected]="_selectedMap[row[uniqueKey]]"
+                >
                     <td fd-table-cell></td>
                     <td fd-table-cell colspan="100%" [fitContent]="true">
                         <p fd-table-text *ngFor="let filter of _tableFilters.secondary">
@@ -64,12 +82,21 @@
                     </td>
                 </tr>
             </ng-container>
-            <tr fd-table-row *ngIf="displayedData.length && mobile && _shownCount && _shownCount !== displayedData.length">
+            <tr
+                fd-table-row
+                *ngIf="displayedData.length && mobile && _shownCount && _shownCount !== displayedData.length"
+            >
                 <td colspan="100%">
                     <div fd-bar barDesign="header-with-subheader">
                         <div fd-bar-middle>
                             <fd-bar-element>
-                                <button fd-button fdType="transparent" i18n-label="@@platformI18nValueHelpDialogMoreButton" label="More" (click)="_showMoreElements()"></button>
+                                <button
+                                    fd-button
+                                    fdType="transparent"
+                                    i18n-label="@@platformI18nValueHelpDialogMoreButton"
+                                    label="More"
+                                    (click)="_showMoreElements()"
+                                ></button>
                             </fd-bar-element>
                         </div>
                     </div>

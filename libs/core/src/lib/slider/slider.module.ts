@@ -9,13 +9,7 @@ import { OnlyDigitsModule } from '@fundamental-ngx/core/utils';
 
 @NgModule({
     declarations: [SliderComponent, SliderPositionDirective],
-    imports: [
-        CommonModule,
-        PopoverModule,
-        FormsModule,
-        OnlyDigitsModule
-    ],
+    imports: [CommonModule, PopoverModule, FormsModule, OnlyDigitsModule],
     exports: [SliderComponent]
 })
-export class SliderModule {
-}
+export class SliderModule {}

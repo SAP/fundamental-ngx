@@ -2,23 +2,24 @@ import { MenuTitleDirective } from './menu-title.directive';
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-
-@Component({template: '<div fd-menu-title>{{ menuTitle }}</div>'})
+@Component({ template: '<div fd-menu-title>{{ menuTitle }}</div>' })
 class TestComponent {
     @ViewChild(MenuTitleDirective) menuTitleDirective: MenuTitleDirective;
 
-    menuTitle = 'Test title'
+    menuTitle = 'Test title';
 }
 
 describe('MenuTitleDirective', () => {
     let fixture: ComponentFixture<TestComponent>;
     let directive: MenuTitleDirective;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent, MenuTitleDirective]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent, MenuTitleDirective]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

@@ -7,7 +7,7 @@ import { InfoLabelComponent } from './info-label.component';
 
 @Component({
     selector: 'fdp-test-numeric-info-label',
-    template: `<fdp-info-label [color]="color"  [glyph]="glyph">Info Label</fdp-info-label>`
+    template: `<fdp-info-label [color]="color" [glyph]="glyph">Info Label</fdp-info-label>`
 })
 class TestInfoLabelNumericComponent {
     @ViewChild(InfoLabelComponent, { static: true }) component: InfoLabelComponent;
@@ -21,12 +21,14 @@ describe('InfoLabelComponent', () => {
     let host: TestInfoLabelNumericComponent;
     let fixture: ComponentFixture<TestInfoLabelNumericComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [InfoLabelModule],
-            declarations: [InfoLabelComponent, TestInfoLabelNumericComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [InfoLabelModule],
+                declarations: [InfoLabelComponent, TestInfoLabelNumericComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestInfoLabelNumericComponent);

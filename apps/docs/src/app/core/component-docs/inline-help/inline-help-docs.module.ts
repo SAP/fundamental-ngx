@@ -25,7 +25,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, FormModule, InlineHelpModule, ObjectStatusModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        FormModule,
+        InlineHelpModule,
+        ObjectStatusModule
+    ],
     exports: [RouterModule],
     declarations: [
         InlineHelpDocsComponent,

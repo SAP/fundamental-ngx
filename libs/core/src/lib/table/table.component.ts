@@ -30,7 +30,7 @@ import { TableService } from './table.service';
     styleUrls: ['./table.component.scss'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [ TableService ]
+    providers: [TableService]
 })
 export class TableComponent implements AfterViewInit, OnInit, OnDestroy {
     /** @hidden */
@@ -74,7 +74,7 @@ export class TableComponent implements AfterViewInit, OnInit, OnDestroy {
     /** @hidden */
     private _subscriptions = new Subscription();
 
-    constructor (
+    constructor(
         private _tableService: TableService,
         private _cdr: ChangeDetectorRef,
         @Optional() private _contentDensityService: ContentDensityService
@@ -83,11 +83,13 @@ export class TableComponent implements AfterViewInit, OnInit, OnDestroy {
     /** @hidden */
     ngOnInit(): void {
         if (this.compact === undefined && this.condensed === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density === 'compact';
-                this.condensed = density === 'condensed';
-                this._cdr.detectChanges();
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density === 'compact';
+                    this.condensed = density === 'condensed';
+                    this._cdr.detectChanges();
+                })
+            );
         }
     }
 

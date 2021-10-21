@@ -1,18 +1,22 @@
 import {
     browserIsFirefox,
-    click, doesItExist,
+    click,
+    doesItExist,
     getElementArrayLength,
     getText,
     getTextArr,
     isElementClickable,
     isElementDisplayed,
+    pause,
     refreshPage,
     selectOptionByValueAttribute,
     sendKeys,
     setValue,
     waitElementToBeClickable,
     waitForElDisappear,
-    waitForElDisplayed, waitForNotPresent,
+    waitForNotDisplayed,
+    waitForElDisplayed,
+    waitForNotPresent,
     waitForPresent
 } from '../../driver/wdio';
 import { ApprovalFlowPo } from '../pages/approval-flow.po';
@@ -27,7 +31,7 @@ import {
     watchers_block_title
 } from '../fixtures/appData/approval-flow-contents';
 
-describe('Approval flow', function() {
+describe('Approval flow', () => {
     const approvalFlowPage = new ApprovalFlowPo();
     const {
         selectExample,
@@ -178,8 +182,7 @@ describe('Approval flow', function() {
             waitForElDisappear(detailsDialog);
 
             expect(isElementDisplayed(toastMessageDialog)).toBe(true);
-            expect(getTextArr(toastMessageDialog))
-                .toContain(remainder_text + approvalNodeText);
+            expect(getTextArr(toastMessageDialog)).toContain(remainder_text + approvalNodeText);
             waitForNotPresent(toastMessageDialog);
         }
     });
@@ -198,7 +201,7 @@ describe('Approval flow', function() {
         expect(usersCountAfterSearch).toEqual(1);
     });
 
-    describe('Edit mode', function() {
+    describe('Edit mode', () => {
         it('should be able to add watchers', () => {
             const watchersCountBefore = getElementArrayLength(watchersAvatar);
             click(editExampleButton);
@@ -334,7 +337,8 @@ describe('Approval flow', function() {
             expect(approvalFlowNodeCountBefore).toEqual(approvalFlowNodeCountAfterRemove + 1);
         });
 
-        it('should be able to undo added approval node', () => {
+        // skip due to found issue https://github.com/SAP/fundamental-ngx/issues/6903
+        xit('should be able to undo added approval node', () => {
             const approvalFlowNodeCountBefore = getElementArrayLength(approvalFlowNode);
 
             click(editExampleButton);
@@ -349,6 +353,7 @@ describe('Approval flow', function() {
             const approvalFlowNodeCountAfterAdding = getElementArrayLength(approvalFlowNode);
             waitForElDisplayed(messageStripUndoLink);
             click(messageStripUndoLink);
+            waitForNotDisplayed(messageStripUndoLink);
 
             const approvalFlowNodeCountAfterUndo = getElementArrayLength(approvalFlowNode);
 
@@ -356,7 +361,8 @@ describe('Approval flow', function() {
             expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfterUndo);
         });
 
-        it('should be able to cancel undo', () => {
+        // skip due to https://github.com/SAP/fundamental-ngx/issues/6903
+        xit('should be able to cancel undo', () => {
             click(editExampleButton);
             waitForElDisplayed(addNode);
             click(addNode);
@@ -371,10 +377,9 @@ describe('Approval flow', function() {
 
             expect(doesItExist(messageStrip)).toBe(false);
         });
-
     });
 
-    describe('should be able send remainder to approving team', function() {
+    describe('should be able send remainder to approving team', () => {
         it('should be able send remainder to approving team (full)', () => {
             const arrLength = getElementArrayLength(approvalFlowTeamNode);
             for (let i = 0; arrLength > i; i++) {
@@ -384,14 +389,14 @@ describe('Approval flow', function() {
                 const teamSize = getElementArrayLength(detailsDialogTeamMember);
                 for (let k = 0; teamSize > k; k++) {
                     click(detailsDialogTeamMemberCheckBox, k);
-
                 }
                 click(detailsDialogSendReminderBtn);
                 waitForElDisappear(detailsDialog);
                 waitForPresent(toastMessageDialog);
                 expect(isElementDisplayed(toastMessageDialog)).toBe(true);
-                expect(getText(toastMessageDialog, getElementArrayLength(toastMessageDialog) - 1).trim())
-                    .toBe(`${remainder_text}${approvalNodeText} of ${approvalNodeDescription}`);
+                expect(getText(toastMessageDialog, getElementArrayLength(toastMessageDialog) - 1).trim()).toBe(
+                    `${remainder_text}${approvalNodeText} of ${approvalNodeDescription}`
+                );
             }
         });
 
@@ -409,8 +414,9 @@ describe('Approval flow', function() {
                 waitForElDisappear(detailsDialog);
                 waitForPresent(toastMessageDialog);
                 expect(isElementDisplayed(toastMessageDialog)).toBe(true);
-                expect(getText(toastMessageDialog, getElementArrayLength(toastMessageDialog) - 1).trim())
-                    .toBe(remainder_text + approvalNodeText);
+                expect(getText(toastMessageDialog, getElementArrayLength(toastMessageDialog) - 1).trim()).toBe(
+                    remainder_text + approvalNodeText
+                );
             }
         });
 
@@ -421,7 +427,7 @@ describe('Approval flow', function() {
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             approvalFlowPage.saveExampleBaselineScreenshot();
             expect(approvalFlowPage.compareWithBaseline()).toBeLessThan(5);
@@ -443,4 +449,3 @@ describe('Approval flow', function() {
         expect(getText(detailsDialogHeader)).toBe(details_dialog_header);
     }
 });
-

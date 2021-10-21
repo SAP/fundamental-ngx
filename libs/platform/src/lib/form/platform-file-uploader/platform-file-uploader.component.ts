@@ -5,6 +5,7 @@ import {
     EventEmitter,
     Host,
     Input,
+    isDevMode,
     OnInit,
     Optional,
     Output,
@@ -13,9 +14,8 @@ import {
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 
-import { stateType } from '@fundamental-ngx/core/radio';
 import { ContentDensity } from '@fundamental-ngx/core/utils';
-import { BaseInput, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
+import { BaseInput, ControlState, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 
 export class FileUploaderInvalidChangeEvent {
     constructor(
@@ -80,17 +80,22 @@ export class PlatformFileUploaderComponent extends BaseInput implements OnInit {
     @Input()
     fileLimit: number;
 
-    /** Set state of individual component.Used by CBG to set checkbox states */
+    /**
+     * @deprecated
+     * set state of individual checkbox. Used by CBG to set checkbox states */
     @Input()
-    get stateType(): stateType {
-        if (this._state) {
-            return this._state;
+    get stateType(): ControlState {
+        if (isDevMode()) {
+            console.warn('"stateType" is deprecated. Use "state" instead');
         }
-        return this.status; // return parent form field status.
+        return super.state;
     }
 
-    set stateType(state: stateType) {
-        this._state = state;
+    set stateType(state: ControlState) {
+        if (isDevMode()) {
+            console.warn('"stateType" is deprecated. Use "state" instead');
+        }
+        super.state = state;
     }
 
     /** Event emitted when valid file is uploded. */

@@ -45,7 +45,7 @@ class TestTimePickerComponent {
     @ViewChild('ffl1') timePickerFormField: FormFieldComponent;
     @ViewChild('submitButton') submitButton: ElementRef<HTMLElement>;
 
-    timeObject: FdDate = new FdDate().setTime( 12, 0, 0);
+    timeObject: FdDate = new FdDate().setTime(12, 0, 0);
 
     timePickerForm: FormGroup = new FormGroup({
         timePicker: new FormControl(this.timeObject)
@@ -65,13 +65,7 @@ describe('PlatformTimePickerComponent', () => {
     beforeEach(async () => {
         await TestBed.configureTestingModule({
             declarations: [TestTimePickerComponent],
-            imports: [
-                PlatformTimePickerModule,
-                FdpFormGroupModule,
-                FormsModule,
-                ReactiveFormsModule,
-                FdDatetimeModule
-            ]
+            imports: [PlatformTimePickerModule, FdpFormGroupModule, FormsModule, ReactiveFormsModule, FdDatetimeModule]
         }).compileComponents();
     });
 
@@ -93,7 +87,7 @@ describe('PlatformTimePickerComponent', () => {
     it('should have a label, placeholder and default value', async () => {
         await wait(fixture);
         component.timePickerComponent.ngAfterViewInit();
-        const time: FdDate = new FdDate().setTime( 12, 0, 0);
+        const time: FdDate = new FdDate().setTime(12, 0, 0);
 
         const timePickerLabel = component.timePickerFormField.label;
         expect(timePickerLabel).toBe('Time:');
@@ -110,7 +104,7 @@ describe('PlatformTimePickerComponent', () => {
 
     it('should submit the value', async () => {
         const submitButton = component.submitButton.nativeElement;
-        const time: FdDate = new FdDate().setTime( 12, 0, 0);
+        const time: FdDate = new FdDate().setTime(12, 0, 0);
 
         submitButton.click();
 

@@ -95,9 +95,10 @@ export class TableColumnResizeService implements OnDestroy {
         private readonly _tableScrollDispatcherService: TableScrollDispatcherService,
         @Optional() private readonly _rtlService: RtlService
     ) {
-        this._tableScrollDispatcherService?.horizontallyScrolled()
+        this._tableScrollDispatcherService
+            ?.horizontallyScrolled()
             .pipe(takeUntil(this._destroyed))
-            .subscribe(scrollable => this._scrollLeft = scrollable.getScrollLeft());
+            .subscribe((scrollable) => (this._scrollLeft = scrollable.getScrollLeft()));
     }
 
     /** @hidden */
@@ -111,11 +112,7 @@ export class TableColumnResizeService implements OnDestroy {
     }
 
     /** Initialize service with data, trigger columns width calculation. */
-    setColumnsWidth(
-        visibleColumnNames: string[],
-        freezeColumnsTo: string,
-        offsetWidth: number
-    ): void {
+    setColumnsWidth(visibleColumnNames: string[], freezeColumnsTo: string, offsetWidth: number): void {
         this._visibleColumnNames = visibleColumnNames;
         this._preventResize = this._visibleColumnNames.includes(freezeColumnsTo);
         this._offsetWidth = offsetWidth;
@@ -124,13 +121,13 @@ export class TableColumnResizeService implements OnDestroy {
         this._calculateColumnsWidth();
     }
 
-    /** 
+    /**
      *  Get the column width, try in the next order:
      *  1. Width from map with calculated widths.
      *  2. Width defined by the user.
      *  3. Literally `auto`, means no width set.
-     * 
-     *  In case there was a change to the width of the column (from the component input or resize event), 
+     *
+     *  In case there was a change to the width of the column (from the component input or resize event),
      *  corresponding value will be treated as higher priority
      */
     getColumnWidthStyle(column: TableColumn): string {
@@ -165,7 +162,7 @@ export class TableColumnResizeService implements OnDestroy {
 
     /** Previous column name */
     getPreviousColumnName(columnName: string): string {
-        return this._visibleColumnNames[this._visibleColumnNames.findIndex(name => name === columnName) - 1];
+        return this._visibleColumnNames[this._visibleColumnNames.findIndex((name) => name === columnName) - 1];
     }
 
     /** Overall previous columns width. Used to calculate offset for the absolute positioned cells. */
@@ -176,7 +173,7 @@ export class TableColumnResizeService implements OnDestroy {
 
         let columnsWidth = 0;
 
-        for (let i = 0; i < this._visibleColumnNames.length; i ++) {
+        for (let i = 0; i < this._visibleColumnNames.length; i++) {
             const currentColumnName = this._visibleColumnNames[i];
 
             if (columnName === currentColumnName) {
@@ -246,9 +243,7 @@ export class TableColumnResizeService implements OnDestroy {
         this._resizerPosition = null;
 
         if (this._startX != null) {
-            const diffX = this._rtl
-                ? (this._clientStartX - event.clientX)
-                : (event.clientX - this._clientStartX);
+            const diffX = this._rtl ? this._clientStartX - event.clientX : event.clientX - this._clientStartX;
 
             this._processResize(diffX);
         }
@@ -274,9 +269,7 @@ export class TableColumnResizeService implements OnDestroy {
         this._resizerMoveSubscription = fromEvent(document, 'mousemove')
             .pipe(delay(10))
             .subscribe((event: MouseEvent) => {
-                const diffX = this._rtl
-                    ? (this._clientStartX - event.clientX)
-                    : (event.clientX - this._clientStartX);
+                const diffX = this._rtl ? this._clientStartX - event.clientX : event.clientX - this._clientStartX;
 
                 this._resizerPosition = this._startX + diffX;
 

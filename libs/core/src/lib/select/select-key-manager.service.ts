@@ -7,17 +7,15 @@ import { UP_ARROW, DOWN_ARROW, ENTER, SPACE, HOME, TAB, END, ESCAPE, hasModifier
 import { SelectInterface } from './select.interface';
 import { OptionsInterface } from './options.interface';
 
-
 @Injectable()
 export class SelectKeyManagerService {
-
     _component: SelectInterface;
     _keyManager: ActiveDescendantKeyManager<OptionsInterface>;
 
     /**
-    * Sets up a key manager to listen to keyboard events on the overlay panel.
-    * @hidden
-    */
+     * Sets up a key manager to listen to keyboard events on the overlay panel.
+     * @hidden
+     */
     _initKeyManager(_component: SelectInterface): void {
         this._keyManager = new ActiveDescendantKeyManager<OptionsInterface>(this._component._options)
             .withTypeAhead(this._component.typeaheadDebounceInterval)
@@ -26,11 +24,11 @@ export class SelectKeyManagerService {
             .withAllowedModifierKeys(['shiftKey']);
 
         this._keyManager.tabOut.pipe(takeUntil(this._component._destroy)).subscribe(() => {
-          // tab focus fix for mobile
-        if (!this._component.mobile) {
-            this._component.focus();
-            this._component.close();
-             }
+            // tab focus fix for mobile
+            if (!this._component.mobile) {
+                this._component.focus();
+                this._component.close();
+            }
         });
 
         this._keyManager.change.pipe(takeUntil(this._component._destroy)).subscribe(() => {
@@ -53,15 +51,15 @@ export class SelectKeyManagerService {
     }
 
     /**
-    * Handles keyboard events while the select is closed.
-    * @hidden
-    */
+     * Handles keyboard events while the select is closed.
+     * @hidden
+     */
     _handleClosedKeydown(event: KeyboardEvent): void {
         const isOpenKey = KeyUtil.isKeyCode(event, [ENTER, SPACE]);
         const manager = this._keyManager;
 
         // Open the select on ALT + arrow key to match the native <select>
-        if ((!manager.isTyping() && isOpenKey && !hasModifierKey(event))) {
+        if (!manager.isTyping() && isOpenKey && !hasModifierKey(event)) {
             // prevents the page from scrolling down when pressing space
             event.preventDefault();
             this._component.open();
@@ -80,7 +78,6 @@ export class SelectKeyManagerService {
                 this._component._liveAnnouncer.announce((selectedOption as OptionsInterface).viewValue, 10000);
             }
             manager.onKeydown(event);
-
         }
     }
 
@@ -97,7 +94,7 @@ export class SelectKeyManagerService {
         if (KeyUtil.isKeyCode(event, [HOME, END])) {
             event.preventDefault();
             KeyUtil.isKeyCode(event, HOME) ? manager.setFirstItemActive() : manager.setLastItemActive();
-        } else if (isArrowKey && event.altKey || KeyUtil.isKeyCode(event, [ESCAPE])) {
+        } else if ((isArrowKey && event.altKey) || KeyUtil.isKeyCode(event, [ESCAPE])) {
             // Close the select on ALT + arrow key to match the native <select>
             event.preventDefault();
             this._component.blur();
@@ -113,15 +110,10 @@ export class SelectKeyManagerService {
             event.preventDefault();
             manager.activeItem._selectViaInteraction();
             this._component.blur();
-        } else if (
-            !isTyping &&
-            KeyUtil.isKeyCode(event, [TAB]) &&
-           this._component.mobile
-        ) {
+        } else if (!isTyping && KeyUtil.isKeyCode(event, [TAB]) && this._component.mobile) {
             event.preventDefault();
         } else {
             manager.onKeydown(event);
         }
     }
-
 }

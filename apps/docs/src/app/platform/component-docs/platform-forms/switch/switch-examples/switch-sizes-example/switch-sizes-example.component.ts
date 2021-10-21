@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
     selector: 'fdp-switch-sizes-example',
     templateUrl: './switch-sizes-example.component.html'
 })
-export class SwitchSizesExampleComponent {
-}
+export class SwitchSizesExampleComponent {}

@@ -6,13 +6,11 @@ import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { ICON_TAB_HIDDEN_CLASS_NAME } from '../../constants';
 import { cloneDeep } from '@fundamental-ngx/core/utils';
 
-
 @Component({
     selector: 'fdp-icon-tab-bar-process-type',
     templateUrl: './icon-tab-bar-process-type.component.html'
 })
 export class IconTabBarProcessTypeComponent extends IconTabBarBase {
-
     /** @hidden */
     _offsetOverflowDirective = 30;
 
@@ -78,19 +76,16 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
         }
         this._selectItem(selectedItem);
 
-        this._ngZone
-            .onMicrotaskEmpty
-            .pipe(take(1))
-            .subscribe(_ => {
-                if (this.overflowDirective) {
-                    const extra = this.overflowDirective.getAmountOfExtraItems();
-                    isPreviousStepsStrategy
-                        ? this.recalculateItemsByPrevArr(extra, amountOfPreviousSteps)
-                        : this._recalculateItemsByNextArr(extra, amountOfNextSteps);
-                    this.extraBtnDirective?.calculatePosition();
-                    this._cd.detectChanges();
-                }
-            });
+        this._ngZone.onMicrotaskEmpty.pipe(take(1)).subscribe((_) => {
+            if (this.overflowDirective) {
+                const extra = this.overflowDirective.getAmountOfExtraItems();
+                isPreviousStepsStrategy
+                    ? this.recalculateItemsByPrevArr(extra, amountOfPreviousSteps)
+                    : this._recalculateItemsByNextArr(extra, amountOfNextSteps);
+                this.extraBtnDirective?.calculatePosition();
+                this._cd.detectChanges();
+            }
+        });
     }
 
     /**
@@ -107,9 +102,9 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
     private _clearExtraList(): void {
         this._nextSteps = [];
         this._prevSteps = [];
-        this._tabs.forEach(item => {
+        this._tabs.forEach((item) => {
             item.hidden = false;
-            item.cssClasses = item.cssClasses.filter(cssClass => cssClass !== ICON_TAB_HIDDEN_CLASS_NAME);
+            item.cssClasses = item.cssClasses.filter((cssClass) => cssClass !== ICON_TAB_HIDDEN_CLASS_NAME);
         });
     }
 
@@ -188,9 +183,7 @@ export class IconTabBarProcessTypeComponent extends IconTabBarBase {
         }
 
         let amountOfNextSteps = extraItems - this._prevSteps.length;
-        let nextIndex = this._prevSteps.length
-            ? this._prevSteps.length + visibleAmountOfItems
-            : visibleAmountOfItems;
+        let nextIndex = this._prevSteps.length ? this._prevSteps.length + visibleAmountOfItems : visibleAmountOfItems;
         while (amountOfNextSteps > 0) {
             this._nextSteps.push(cloneDeep(this._tabs[nextIndex]));
             this._tabs[nextIndex].hidden = true;

@@ -26,10 +26,12 @@ describe('ApprovalFlowUserListComponent', () => {
     });
 
     it('should preselect users', async () => {
-        const approvalUsers: ApprovalUser[] = [{
-            id: 'id1',
-            name: 'name1'
-        }];
+        const approvalUsers: ApprovalUser[] = [
+            {
+                id: 'id1',
+                name: 'name1'
+            }
+        ];
 
         component.users = approvalUsers;
         await fixture.whenStable();

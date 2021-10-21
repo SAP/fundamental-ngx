@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 
-import { FormattedFormStep, WizardGeneratorSummaryItem } from '../../../interfaces/wizard-generator-summary-item.interface';
+import {
+    FormattedFormStep,
+    WizardGeneratorSummaryItem
+} from '../../../interfaces/wizard-generator-summary-item.interface';
 
 @Component({
     selector: 'fdp-wizard-summary-section',
@@ -9,7 +12,6 @@ import { FormattedFormStep, WizardGeneratorSummaryItem } from '../../../interfac
     encapsulation: ViewEncapsulation.None
 })
 export class WizardSummarySectionComponent {
-
     /**
      * @description Current step for the section.
      */

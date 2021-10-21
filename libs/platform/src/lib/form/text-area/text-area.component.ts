@@ -4,22 +4,21 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ElementRef,
     Host,
     HostListener,
     Input,
+    isDevMode,
     OnInit,
     Optional,
     Self,
     SkipSelf,
-    ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
 import { BACKSPACE, DELETE } from '@angular/cdk/keycodes';
 
 import { ContentDensity, KeyUtil } from '@fundamental-ngx/core/utils';
-import { BaseInput, FormField, FormFieldControl, Status } from '@fundamental-ngx/platform/shared';
+import { BaseInput, ControlState, FormField, FormFieldControl } from '@fundamental-ngx/platform/shared';
 import { TextAreaConfig } from './text-area.config';
 
 const VALID_WRAP_TYPES = ['hard', 'soft', 'off'];
@@ -109,11 +108,22 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     growing = false;
 
     /**
-     *  The state of the form control - applies css classes when counter exceeds the `maxLength`.
-     *  Can be `error` or `warning`.
-     */
+     * @deprecated
+     * set state of individual checkbox. Used by CBG to set checkbox states */
     @Input()
-    stateType: Status = 'warning';
+    get stateType(): ControlState {
+        if (isDevMode()) {
+            console.warn('"stateType" is deprecated. Use "state" instead');
+        }
+        return super.state;
+    }
+
+    set stateType(state: ControlState) {
+        if (isDevMode()) {
+            console.warn('"stateType" is deprecated. Use "state" instead');
+        }
+        super.state = state;
+    }
 
     /**
      * return: The textarea's value
@@ -132,7 +142,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
             // when custom value not set, we should set/reset counter to maxlength value when it becomes undefined
             this.exceededCharCount = this.maxLength ? this.maxLength : 0;
             // reset state by resetting value
-            super.writeValue('');
+            super.setValue('');
         }
     }
 
@@ -208,7 +218,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
 
         // don't set any error state if we are not showing counter message
         if (!this._shouldTrackTextLimit) {
-            this.stateType = null;
+            this.state = null;
         }
 
         super.ngAfterViewInit();
@@ -341,17 +351,17 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
     /**
      * get the updated state when character count breaches `maxLength`
      */
-    getUpdatedState(): string {
+    getUpdatedState(): ControlState {
         if (this._getContentLength() > this.maxLength) {
             this.hasTextExceeded = true; // set flag for error message to also change accordingly
             this.counterExcessOrRemaining = this.excessText;
 
-            return this.stateType as string;
+            return this.state;
         }
         this.hasTextExceeded = false;
         this.counterExcessOrRemaining = this.remainingText;
 
-        return this.status as string; // return any other errors found by parent form field
+        return this.state; // return any other errors found by parent form field
     }
 
     /** @hidden Native element  */

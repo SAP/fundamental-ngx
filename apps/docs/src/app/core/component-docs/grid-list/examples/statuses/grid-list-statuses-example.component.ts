@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './grid-list-statuses-example.component.html',
     styleUrls: ['./grid-list-statuses-example.component.scss']
 })
-export class GridListStatusesExampleComponent {
-}
+export class GridListStatusesExampleComponent {}

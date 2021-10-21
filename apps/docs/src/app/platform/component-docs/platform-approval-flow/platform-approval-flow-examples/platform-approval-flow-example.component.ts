@@ -18,12 +18,7 @@ import {
 })
 export class PlatformApprovalFlowExampleComponent implements OnDestroy {
     dataSource = new ApprovalFlowExampleDataSource('complex');
-    examples = [
-        'empty',
-        'simple',
-        'medium',
-        'complex'
-    ];
+    examples = ['empty', 'simple', 'medium', 'complex'];
     selectedExample = 'complex';
     checkDueDate = false;
     setNotStartedStatuses = false;
@@ -35,17 +30,9 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
         disableAddParallel: false,
         disableEdit: false,
         disableRemove: false
-    }
-    allStatuses = [
-        'in progress',
-        'not started',
-        'approved',
-        'rejected'
-    ];
-    sendReminderStatuses: ApprovalStatus[] = [
-        'in progress',
-        'not started'
-    ];
+    };
+    allStatuses = ['in progress', 'not started', 'approved', 'rejected'];
+    sendReminderStatuses: ApprovalStatus[] = ['in progress', 'not started'];
 
     private _subscriptions = new Subscription();
 
@@ -56,12 +43,12 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
     toggleNodeActions(state: boolean): void {
         this._subscriptions.add(undefined);
 
-
         this._subscriptions.add(
-            this.dataSource.fetch()
+            this.dataSource
+                .fetch()
                 .pipe(take(1))
-                .subscribe(approvalGraph => {
-                    approvalGraph.nodes.forEach(node => {
+                .subscribe((approvalGraph) => {
+                    approvalGraph.nodes.forEach((node) => {
                         node.disableActions = state;
                     });
 
@@ -72,10 +59,11 @@ export class PlatformApprovalFlowExampleComponent implements OnDestroy {
 
     toggleSpecificNodeAction(field: keyof ApprovalNodeActionsConfig, state: boolean): void {
         this._subscriptions.add(
-            this.dataSource.fetch()
+            this.dataSource
+                .fetch()
                 .pipe(take(1))
-                .subscribe(approvalGraph => {
-                    approvalGraph.nodes.forEach(node => {
+                .subscribe((approvalGraph) => {
+                    approvalGraph.nodes.forEach((node) => {
                         node.actionsConfig = {
                             ...node.actionsConfig,
                             [field]: state
@@ -219,7 +207,7 @@ const users: ApprovalUser[] = [
     }
 ];
 const usersMap = {};
-users.forEach(u => usersMap[u.id] = u);
+users.forEach((u) => (usersMap[u.id] = u));
 
 const teams: ApprovalTeam[] = [
     {
@@ -326,7 +314,14 @@ const mediumGraph: ApprovalProcess = {
             id: 'ID222',
             name: 'node name',
             description: 'Marketing team',
-            approvers: [getUser('uid77111'), getUser('uid09641'), getUser('uid09141'), getUser('uid37866'), getUser('uid99641'), getUser('uid38141')],
+            approvers: [
+                getUser('uid77111'),
+                getUser('uid09641'),
+                getUser('uid09141'),
+                getUser('uid37866'),
+                getUser('uid99641'),
+                getUser('uid38141')
+            ],
             status: 'not started',
             targets: ['ID3'],
             dueDate: daysFromNow(5),
@@ -478,7 +473,7 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
         this.selectedGraph = selectedGraph as GraphTypes;
         const graph = { ...graphs[this.selectedGraph] };
 
-        graph.nodes = graph.nodes.map(n => {
+        graph.nodes = graph.nodes.map((n) => {
             const nodeCopy = { ...n };
 
             if (this.defaultStatus) {
@@ -496,7 +491,7 @@ export class ApprovalFlowExampleDataSource implements ApprovalDataSource {
     }
 
     fetchUser(id: string): Observable<any> {
-        const user = users.find(u => u.id === id);
+        const user = users.find((u) => u.id === id);
 
         return of({
             phone: Math.random().toFixed(13).toString().replace('0.', ''),

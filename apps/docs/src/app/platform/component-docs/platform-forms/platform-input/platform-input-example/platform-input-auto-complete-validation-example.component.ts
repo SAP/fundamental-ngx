@@ -7,13 +7,11 @@ import { PopoverComponent } from '@fundamental-ngx/core/popover';
     styleUrls: ['./platform-input-auto-complete-validation-example.component.scss']
 })
 export class PlatformInputAutoCompleteValidationExampleComponent implements OnInit {
-
     public inputText: string;
     public options: string[];
 
     /** Whether the combobox is opened. */
     public open: boolean;
-
 
     public sportsData: string[] = [
         'American Football',
@@ -45,7 +43,7 @@ export class PlatformInputAutoCompleteValidationExampleComponent implements OnIn
 
     onSearchChange(): void {
         this.options = this.filter(this.inputText);
-        this.open = (this.options.length > 0);
+        this.open = this.options.length > 0;
         this.typeahead.refreshPosition();
     }
 

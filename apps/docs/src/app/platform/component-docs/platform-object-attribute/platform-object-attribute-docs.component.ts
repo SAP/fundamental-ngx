@@ -7,7 +7,6 @@ import * as objectAttributeTruncate from '!raw-loader!./platform-object-attribut
 import * as objectAttributeLink from '!raw-loader!./platform-object-attribute-examples/platform-object-attribute-link-example.component.html';
 import * as objectAttributeLinkTs from '!raw-loader!./platform-object-attribute-examples/platform-object-attribute-link-example.component';
 
-
 @Component({
     selector: 'app-object-attribute',
     templateUrl: './platform-object-attribute-docs.component.html'
@@ -34,7 +33,8 @@ export class PlatformObjectAttributeDocsComponent {
             language: 'html',
             code: objectAttributeLink,
             fileName: 'platform-object-attribute-link-example'
-        }, {
+        },
+        {
             language: 'typescript',
             fileName: 'platform-object-attribute-link-example',
             code: objectAttributeLinkTs,

@@ -6,7 +6,10 @@ import {
     EmbeddedViewRef,
     ComponentRef,
     TemplateRef,
-    Type
+    Type,
+    Compiler,
+    NgModuleFactory,
+    ViewContainerRef
 } from '@angular/core';
 import { DynamicComponentInjector } from './dynamic-component-injector';
 import { DynamicComponentConfig } from './dynamic-component-config';
@@ -18,9 +21,10 @@ import { DynamicComponentConfig } from './dynamic-component-config';
 export class DynamicComponentService {
     /** @hidden */
     constructor(
-        private _componentFactoryResolver: ComponentFactoryResolver,
-        private _applicationRef: ApplicationRef,
-        private _injector: Injector
+        private readonly _componentFactoryResolver: ComponentFactoryResolver,
+        private readonly _applicationRef: ApplicationRef,
+        private readonly _injector: Injector,
+        private readonly _compiler: Compiler
     ) {}
 
     /**
@@ -45,6 +49,35 @@ export class DynamicComponentService {
         return componentRef;
     }
 
+    /**
+     * Function that creates dynamic component and injects services to allow communication between component and outside
+     * @param content Type of the component content
+     * @param moduleType Type of module that should be compiled.
+     * @param componentType Type of component that should be rendered.
+     * @param containerRef The container that the dynamic component is appended to.
+     * @param injector enables to provide preconfigured component injector
+     */
+    async createDynamicModule<M, C>(
+        content: TemplateRef<any> | Type<any> | string | Object,
+        moduleType: Type<M> | NgModuleFactory<M>,
+        componentType: Type<C>,
+        containerRef: ViewContainerRef,
+        injector?: Injector
+    ): Promise<ComponentRef<C>> {
+        const moduleFactory =
+            moduleType instanceof NgModuleFactory ? moduleType : await this._compiler.compileModuleAsync<M>(moduleType);
+        const moduleRef = moduleFactory.create(injector || this._injector);
+        const componentFactory = moduleRef.componentFactoryResolver.resolveComponentFactory(componentType);
+
+        containerRef.clear();
+
+        const componentRef: ComponentRef<C> = containerRef.createComponent(componentFactory);
+
+        this._passExternalContent<C>(componentRef, content);
+
+        return componentRef;
+    }
+
     /** Function that destroys dynamic component */
     public destroyComponent(componentRef: ComponentRef<any>): void {
         this._applicationRef.detachView(componentRef.hostView);
@@ -53,9 +86,7 @@ export class DynamicComponentService {
 
     private _createDependencyMap(services: any[] = []): WeakMap<any, any> {
         const dependencyMap = new WeakMap();
-        services
-            .filter(service => !!service)
-            .forEach((service) => dependencyMap.set(service.constructor, service));
+        services.filter((service) => !!service).forEach((service) => dependencyMap.set(service.constructor, service));
         return dependencyMap;
     }
 

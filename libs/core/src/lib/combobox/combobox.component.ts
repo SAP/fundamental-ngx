@@ -19,6 +19,7 @@ import {
     SimpleChanges,
     TemplateRef,
     ViewChild,
+    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -35,11 +36,10 @@ import {
     TAB,
     UP_ARROW
 } from '@angular/cdk/keycodes';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 import { ListComponent, ListMessageDirective } from '@fundamental-ngx/core/list';
 import {
-    RtlService,
     GroupFunction,
     KeyUtil,
     AutoCompleteEvent,
@@ -53,6 +53,7 @@ import { PopoverComponent } from '@fundamental-ngx/core/popover';
 import { InputGroupComponent } from '@fundamental-ngx/core/input-group';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 
+import { ComboboxMobileModule } from './combobox-mobile/combobox-mobile.module';
 import { ComboboxMobileComponent } from './combobox-mobile/combobox-mobile.component';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from './combobox.interface';
 import { ComboboxItem } from './combobox-item';
@@ -86,13 +87,14 @@ let comboboxUniqueId = 0;
     host: {
         '[class.fd-combobox-custom-class]': 'true',
         '[class.fd-combobox-input]': 'true',
-        '[class.fd-combobox-custom-class--mobile]': 'mobile',
+        '[class.fd-combobox-custom-class--mobile]': 'mobile'
     },
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComboboxComponent implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy {
-
+export class ComboboxComponent
+    implements ComboboxInterface, ControlValueAccessor, OnInit, OnChanges, AfterViewInit, OnDestroy
+{
     /** Id for the Combobox. */
     @Input()
     comboboxId = `fd-combobox-${comboboxUniqueId++}`;
@@ -353,11 +355,11 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
 
     /** @hidden */
     constructor(
-        private _elementRef: ElementRef,
-        private _cdRef: ChangeDetectorRef,
-        private _dynamicComponentService: DynamicComponentService,
-        @Optional() private _contentDensityService: ContentDensityService,
-        @Optional() private _rtlService: RtlService
+        private readonly _cdRef: ChangeDetectorRef,
+        private readonly _injector: Injector,
+        private readonly _viewContainerRef: ViewContainerRef,
+        private readonly _dynamicComponentService: DynamicComponentService,
+        @Optional() private _contentDensityService: ContentDensityService
     ) {}
 
     /** @hidden */
@@ -367,10 +369,12 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
         }
         this._refreshDisplayedValues();
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this._cdRef.markForCheck();
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._cdRef.markForCheck();
+                })
+            );
         }
     }
 
@@ -421,9 +425,14 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
         } else if (KeyUtil.isKeyCode(event, this.closingKeys)) {
             this.isOpenChangeHandle(false);
             event.stopPropagation();
-        } else if (this.openOnKeyboardEvent && !event.ctrlKey && !KeyUtil.isKeyCode(event, this.nonOpeningKeys)) {
+        } else if (
+            this.openOnKeyboardEvent &&
+            !event.ctrlKey &&
+            !event.altKey &&
+            !KeyUtil.isKeyCode(event, this.nonOpeningKeys)
+        ) {
             this.isOpenChangeHandle(true);
-            if (this.isEmptyValue && (KeyUtil.isKeyType(event, 'control')) && !KeyUtil.isKeyCode(event, BACKSPACE) ) {
+            if (this.isEmptyValue && KeyUtil.isKeyType(event, 'control') && !KeyUtil.isKeyCode(event, BACKSPACE)) {
                 this.listComponent.setItemActive(0);
             }
         }
@@ -558,7 +567,6 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
             this.openChange.emit(isOpen);
         }
 
-
         if (!this.open && !this.mobile) {
             this.handleBlur();
             this.searchInputElement.nativeElement.focus();
@@ -632,7 +640,7 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
                 if (item) {
                     const term = this.displayFn(item).toLocaleLowerCase();
                     let retVal;
-                    this.includes ? retVal = term.includes(searchLower) : retVal = term.startsWith(searchLower);
+                    this.includes ? (retVal = term.includes(searchLower)) : (retVal = term.startsWith(searchLower));
                     return retVal;
                 }
             });
@@ -682,15 +690,18 @@ export class ComboboxComponent implements ComboboxInterface, ControlValueAccesso
     }
 
     /** @hidden */
-    private _setUpMobileMode(): void {
-        this._dynamicComponentService.createDynamicComponent(
+    private async _setUpMobileMode(): Promise<void> {
+        const injector = Injector.create({
+            providers: [{ provide: COMBOBOX_COMPONENT, useValue: this }],
+            parent: this._injector
+        });
+
+        await this._dynamicComponentService.createDynamicModule(
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
+            ComboboxMobileModule,
             ComboboxMobileComponent,
-            { container: this._elementRef.nativeElement },
-            { injector: Injector.create({ providers: [
-                { provide: COMBOBOX_COMPONENT, useValue: this },
-                { provide: RtlService, useValue: this._rtlService }
-            ] }) }
+            this._viewContainerRef,
+            injector
         );
     }
 }

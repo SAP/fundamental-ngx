@@ -11,7 +11,7 @@ let panelContentUniqueId = 0;
  */
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-panel-content]',
+    selector: '[fd-panel-content]'
 })
 export class PanelContentDirective {
     /** @hidden */
@@ -52,5 +52,4 @@ export class PanelContentDirective {
     @Input()
     @HostBinding('attr.id')
     id: string = 'fd-panel-content-' + panelContentUniqueId++;
-
 }

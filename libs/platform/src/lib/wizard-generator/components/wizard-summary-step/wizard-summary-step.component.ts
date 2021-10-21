@@ -1,11 +1,21 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    Input,
+    TemplateRef,
+    ViewEncapsulation
+} from '@angular/core';
 
 import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
 import { FormGeneratorService } from '@fundamental-ngx/platform/form';
 import { WizardGeneratorFormsValue, WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
 import { WizardGeneratorService } from '../../wizard-generator.service';
 import { WizardStepForms } from '../wizard-generator-step/wizard-generator-step.component';
-import { WizardGeneratorSummaryItem, FormattedFormStep } from '../../interfaces/wizard-generator-summary-item.interface';
+import {
+    WizardGeneratorSummaryItem,
+    FormattedFormStep
+} from '../../interfaces/wizard-generator-summary-item.interface';
 
 @Component({
     selector: 'fdp-wizard-summary-step',
@@ -14,7 +24,6 @@ import { WizardGeneratorSummaryItem, FormattedFormStep } from '../../interfaces/
     encapsulation: ViewEncapsulation.None
 })
 export class WizardSummaryStepComponent {
-
     /**
      * Formatted wizard value with steps and their forms.
      */
@@ -31,10 +40,12 @@ export class WizardSummaryStepComponent {
     @Input()
     set status(status: WizardStepStatus) {
         if (status === 'current') {
-            this._wizardGeneratorService.getWizardFormValue(true).then(forms => {
+            this._wizardGeneratorService.getWizardFormValue(true).then((forms) => {
                 this._submittedForms = forms;
 
-                this._wizardSteps = this._wizardGeneratorService.items.filter((i) => this._submittedForms[i.id] !== undefined);
+                this._wizardSteps = this._wizardGeneratorService.items.filter(
+                    (i) => this._submittedForms[i.id] !== undefined
+                );
 
                 this._formatWizardValue().then(() => {
                     this._shouldRender = true;
@@ -70,7 +81,7 @@ export class WizardSummaryStepComponent {
         private _wizardGeneratorService: WizardGeneratorService,
         private _formGeneratorService: FormGeneratorService,
         private _cd: ChangeDetectorRef
-    ) { }
+    ) {}
 
     /**
      * Opens defined step for editing.
@@ -94,7 +105,6 @@ export class WizardSummaryStepComponent {
 
     /** @hidden */
     private async _formatWizardValue(): Promise<void> {
-
         this.formattedWizardValue = [];
 
         for (const step of this._wizardSteps) {
@@ -117,8 +127,10 @@ export class WizardSummaryStepComponent {
     }
 
     /** @hidden */
-    private async _formatStepValue(componentForms: WizardStepForms, step: WizardGeneratorItem): Promise<FormattedFormStep[]> {
-
+    private async _formatStepValue(
+        componentForms: WizardStepForms,
+        step: WizardGeneratorItem
+    ): Promise<FormattedFormStep[]> {
         const formattedStepValue: FormattedFormStep[] = [];
 
         for (const formGroup of step.formGroups) {
@@ -140,7 +152,7 @@ export class WizardSummaryStepComponent {
                     return {
                         label: form.form.controls[key].formItem.message as string,
                         value: formattedFormValue[key]
-                    }
+                    };
                 })
             };
 

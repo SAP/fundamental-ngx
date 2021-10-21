@@ -1,13 +1,22 @@
 <div fd-form-item>
     <label fd-form-label for="test-selection-type-single">Selection type: single</label>
     <fd-input-group>
-        <input fd-input-group-input fd-form-control id="test-selection-type-single" [value]="values.single?.name"/>
+        <input fd-input-group-input fd-form-control id="test-selection-type-single" [value]="values.single?.name" />
         <span fd-input-group-addon button="true">
-            <button fd-button aria-label="Open value help dialog" title="Open value help dialog" glyph="value-help" [compact]="true" fdType="transparent" (click)="vhd1.open()"></button>
+            <button
+                fd-button
+                aria-label="Open value help dialog"
+                title="Open value help dialog"
+                glyph="value-help"
+                [compact]="true"
+                fdType="transparent"
+                (click)="vhd1.open()"
+            ></button>
         </span>
     </fd-input-group>
 </div>
-<fdp-value-help-dialog #vhd1
+<fdp-value-help-dialog
+    #vhd1
     dialogTitle="Single select value help dialog"
     uniqueKey="id"
     tokenViewField="name"
@@ -17,9 +26,7 @@
     [dataSource]="dataSource"
     (valueChange)="values.single = $event.selected[0]"
 >
-    <fdp-value-help-dialog-search
-        placeholder="Search..."
-    ></fdp-value-help-dialog-search>
+    <fdp-value-help-dialog-search placeholder="Search..."></fdp-value-help-dialog-search>
     <fdp-value-help-dialog-filter
         *ngFor="let filter of filters; index as i"
         [main]="i < 2"
@@ -31,19 +38,28 @@
 <br />
 <div fd-form-item>
     <label fd-form-label for="test-selection-type-single">Selection type: multi</label>
-    <div style="overflow: auto;">
+    <div style="overflow: auto">
         <ng-container *ngIf="values.multi">
-            <fd-token
-                fd-toolbar-item
-                *ngFor="let item of values.multi"
-                [compact]="true"
-                [readOnly]="true"
-            >{{ item.name }}</fd-token>
+            <fd-token fd-toolbar-item *ngFor="let item of values.multi" [compact]="true" [readOnly]="true">{{
+                item.name
+            }}</fd-token>
         </ng-container>
-        <button fd-toolbar-item fdOverflowPriority="never" [compact]="true" fd-button fd-button aria-label="Open value help dialog" title="Open value help dialog" label="Open and select" glyph="value-help" (click)="vhd2.open()"></button>
+        <button
+            fd-toolbar-item
+            fdOverflowPriority="never"
+            [compact]="true"
+            fd-button
+            fd-button
+            aria-label="Open value help dialog"
+            title="Open value help dialog"
+            label="Open and select"
+            glyph="value-help"
+            (click)="vhd2.open()"
+        ></button>
     </div>
 </div>
-<fdp-value-help-dialog #vhd2
+<fdp-value-help-dialog
+    #vhd2
     dialogTitle="Multi select value help dialog"
     uniqueKey="id"
     tokenViewField="name"
@@ -53,9 +69,7 @@
     [dataSource]="dataSource"
     (valueChange)="values.multi = $event.selected"
 >
-    <fdp-value-help-dialog-search
-        placeholder="Search..."
-    ></fdp-value-help-dialog-search>
+    <fdp-value-help-dialog-search placeholder="Search..."></fdp-value-help-dialog-search>
     <fdp-value-help-dialog-filter
         *ngFor="let filter of filters; index as i"
         [main]="i < 2"
@@ -68,13 +82,23 @@
 <div fd-form-item>
     <label fd-form-label for="test-selection-type-once">Selection type: once</label>
     <fd-input-group>
-        <input fd-input-group-input fd-form-control id="test-selection-type-once" [value]="values.once?.name"/>
+        <input fd-input-group-input fd-form-control id="test-selection-type-once" [value]="values.once?.name" />
         <span fd-input-group-addon button="true">
-            <button fd-button fd-button aria-label="Open value help dialog" title="Open value help dialog" glyph="value-help" [compact]="true" fdType="transparent" (click)="vhd3.open()"></button>
+            <button
+                fd-button
+                fd-button
+                aria-label="Open value help dialog"
+                title="Open value help dialog"
+                glyph="value-help"
+                [compact]="true"
+                fdType="transparent"
+                (click)="vhd3.open()"
+            ></button>
         </span>
     </fd-input-group>
 </div>
-<fdp-value-help-dialog #vhd3
+<fdp-value-help-dialog
+    #vhd3
     dialogTitle="Once select value help dialog"
     uniqueKey="id"
     tokenViewField="name"
@@ -84,9 +108,7 @@
     [dataSource]="dataSource"
     (valueChange)="values.once = $event.selected[0]"
 >
-    <fdp-value-help-dialog-search
-        placeholder="Search..."
-    ></fdp-value-help-dialog-search>
+    <fdp-value-help-dialog-search placeholder="Search..."></fdp-value-help-dialog-search>
     <fdp-value-help-dialog-filter
         *ngFor="let filter of filters; index as i"
         [main]="i < 2"

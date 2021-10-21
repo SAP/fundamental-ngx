@@ -7,7 +7,6 @@ import { ModifyItemEvent } from '@fundamental-ngx/platform/list';
     templateUrl: './platform-list-with-buttons-example.component.html'
 })
 export class PlatformListWithButtonsExampleComponent {
-
     _modifyRow(event: ModifyItemEvent): void {
         const id = event.source.id;
         if (event.action === 'edit') {

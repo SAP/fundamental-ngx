@@ -11,7 +11,6 @@ import {
 import { checkLtrOrientation, checkRtlOrientation } from '../../helper/assertion-helper';
 
 export class BaseComponentPo {
-
     title = 'header .header';
     root = '#page-content';
     exampleAreaContainersArr = '.fd-doc-component';
@@ -29,16 +28,21 @@ export class BaseComponentPo {
             waitForElDisplayed(areas, i);
             checkLtrOrientation(areas, i);
         }
-    };
+    }
 
     saveExampleBaselineScreenshot(specName: string, options: object = {}): void {
         const areasArray = elementArray(this.exampleAreaContainersArr);
         for (let i = 0; i < areasArray.length; i++) {
             waitForElDisplayed(this.exampleAreaContainersArr, i);
             scrollIntoView(this.exampleAreaContainersArr, i);
-            saveElementScreenshot(this.exampleAreaContainersArr, `${specName}-example-${i}-platform-${getImageTagBrowserPlatform()}`, options, i);
+            saveElementScreenshot(
+                this.exampleAreaContainersArr,
+                `${specName}-example-${i}-platform-${getImageTagBrowserPlatform()}`,
+                options,
+                i
+            );
         }
-    };
+    }
 
     compareWithBaseline(specName: string, options: object = {}): any {
         const areasArray = elementArray(this.exampleAreaContainersArr);
@@ -46,16 +50,21 @@ export class BaseComponentPo {
         for (let i = 0; i < areasArray.length; i++) {
             waitForElDisplayed(this.exampleAreaContainersArr, i);
             scrollIntoView(this.exampleAreaContainersArr, i);
-            diff += checkElementScreenshot(this.exampleAreaContainersArr, `${specName}-example-${i}-platform-${getImageTagBrowserPlatform()}`, options, i);
+            diff += checkElementScreenshot(
+                this.exampleAreaContainersArr,
+                `${specName}-example-${i}-platform-${getImageTagBrowserPlatform()}`,
+                options,
+                i
+            );
         }
         return diff;
-    };
+    }
 
     getScreenshotFolder(componentFolder: string): object {
         return { baselineFolder: `${process.cwd()}${this.defaultScreenshotFolder}${componentFolder}` };
-    };
+    }
 
     open(url: string): void {
         return open('fundamental-ngx#/platform' + url);
-    };
+    }
 }

@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
     selector: 'fd-fli-avatar-example',
     templateUrl: './fli-avatar-example.component.html'
 })
-export class FliAvatarExampleComponent { }
+export class FliAvatarExampleComponent {}

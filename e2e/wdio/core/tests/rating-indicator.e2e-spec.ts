@@ -10,8 +10,7 @@ import {
     setValue
 } from '../../driver/wdio';
 
-describe('Rating indicator test suite', function() {
-
+describe('Rating indicator test suite', () => {
     const ratingIndicatorPage = new RatingIndicatorPo();
 
     const {
@@ -27,8 +26,7 @@ describe('Rating indicator test suite', function() {
         ratingIndicatorPage.open();
     }, 1);
 
-    describe('Test rating indicator with predefined ratings object', function() {
-
+    describe('Test rating indicator with predefined ratings object', () => {
         it('verify that amount of stars is 5', () => {
             const lengthOfStars = getElementArrayLength(starsRatingExamples) - 1;
             expect(lengthOfStars).toBe(5);
@@ -47,13 +45,15 @@ describe('Rating indicator test suite', function() {
         it('verify that star is disabled', () => {
             const lengthOfStars = getElementArrayLength(starsRatingDisplayMode);
             for (let i = 1; i < lengthOfStars; i++) {
-                expect(isElementClickable(starsRatingDisplayMode, i)).toBe(false, `${starsRatingDisplayMode} ${i} not clickable`);
+                expect(isElementClickable(starsRatingDisplayMode, i)).toBe(
+                    false,
+                    `${starsRatingDisplayMode} ${i} not clickable`
+                );
             }
         });
     });
 
-    describe('Test dynamic changes', function() {
-
+    describe('Test dynamic changes', () => {
         it('verify that amount of stars changed', () => {
             const starCount = 7;
             scrollIntoView(inputsDynamicChanges);
@@ -73,13 +73,19 @@ describe('Rating indicator test suite', function() {
         it('verify that star is disabled', () => {
             scrollIntoView(inputsDynamicChanges);
             click(inputsDynamicChanges);
-            expect(isElementClickable(starsRatingDynamicChanges)).toBe(false, `${starsRatingDynamicChanges} not clickable`);
+            expect(isElementClickable(starsRatingDynamicChanges)).toBe(
+                false,
+                `${starsRatingDynamicChanges} not clickable`
+            );
         });
 
         it('verify that stars are in display mode', () => {
             scrollIntoView(inputsDynamicChanges);
             click(inputsDynamicChanges);
-            expect(getElementArrayLength(containerDynamicChanges)).toBe(2, `${starsRatingDisplayMode} stars are not in display mode`);
+            expect(getElementArrayLength(containerDynamicChanges)).toBe(
+                2,
+                `${starsRatingDisplayMode} stars are not in display mode`
+            );
         });
     });
 
@@ -87,8 +93,7 @@ describe('Rating indicator test suite', function() {
         ratingIndicatorPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
-
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             ratingIndicatorPage.saveExampleBaselineScreenshot();
             expect(ratingIndicatorPage.compareWithBaseline()).toBeLessThan(5);

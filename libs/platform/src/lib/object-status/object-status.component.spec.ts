@@ -7,17 +7,15 @@ import { ObjectStatusComponent } from './object-status.component';
 
 @Component({
     selector: 'fdp-test-numeric-info-label',
-    template: `
-        <fdp-object-status
-            [status]="status"
-            [glyph]="glyph"
-            [indicationColor]="indicationColor"
-            [clickable]="clickable"
-            [inverted]="inverted"
-            [large]="large"
+    template: ` <fdp-object-status
+        [status]="status"
+        [glyph]="glyph"
+        [indicationColor]="indicationColor"
+        [clickable]="clickable"
+        [inverted]="inverted"
+        [large]="large"
         >Info Label
-        </fdp-object-status
-        >`
+    </fdp-object-status>`
 })
 class TestPlatformObjectStatusComponent {
     @ViewChild(ObjectStatusComponent, { static: true }) component: ObjectStatusComponent;
@@ -36,12 +34,14 @@ describe('ObjectStatusComponent', () => {
     let host: TestPlatformObjectStatusComponent;
     let fixture: ComponentFixture<TestPlatformObjectStatusComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ObjectStatusModule],
-            declarations: [ObjectStatusComponent, TestPlatformObjectStatusComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [ObjectStatusModule],
+                declarations: [ObjectStatusComponent, TestPlatformObjectStatusComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestPlatformObjectStatusComponent);

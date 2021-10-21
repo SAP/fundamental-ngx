@@ -2,7 +2,12 @@ import { Component, DebugElement, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import { TileActionCloseDirective, TileActionIndicatorDirective, TileModule, TileRefreshDirective } from '@fundamental-ngx/core/tile';
+import {
+    TileActionCloseDirective,
+    TileActionIndicatorDirective,
+    TileModule,
+    TileRefreshDirective
+} from '@fundamental-ngx/core/tile';
 
 @Component({
     selector: 'fd-test-component',
@@ -77,12 +82,14 @@ describe('TileDirectives', () => {
         debugElement: DebugElement,
         element: HTMLElement;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [TileModule, ButtonModule],
-            declarations: [TestComponent]
-        });
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [TileModule, ButtonModule],
+                declarations: [TestComponent]
+            });
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

@@ -19,7 +19,8 @@ import {
     scrollIntoView,
     sendKeys,
     waitForElDisplayed,
-    waitForNotDisplayed, waitForNotPresent
+    waitForNotDisplayed,
+    waitForNotPresent
 } from '../../driver/wdio';
 import {
     approvedStatus,
@@ -29,20 +30,47 @@ import {
     continueStatus,
     customClass,
     defaultPrice,
-    dismissedStatus, emptyValuesArr,
-    escapeStatus, fullscreenClass, mobileClass,
-    mobileProperty, noMobileSpacingClass, outlineProperty,
-    styleAttribute, topPaddingProperty
+    dismissedStatus,
+    emptyValuesArr,
+    escapeStatus,
+    fullscreenClass,
+    mobileClass,
+    mobileProperty,
+    noMobileSpacingClass,
+    outlineProperty,
+    styleAttribute,
+    topPaddingProperty
 } from '../fixtures/appData/dialog-contents';
 import { papayaFruit } from '../fixtures/testData/dialog';
 
-describe('dialog test suite', function () {
+describe('dialog test suite', () => {
     const dialogPage = new DialogPo();
     const {
-        templateDialog, button, dialog, dialogOutput, componentDialog, objectDialog, stateDialog, busyIndicator,
-        configurationDialog, dialogContainer2, resizeHandle, positionDialog, mobileDialog, complexDialog, dialogItems,
-        searchBar, dialogCartOutput, stackedDialog, playgroundDialog, checkboxes, inputFields, dialogExamples,
-        customDialog, dialogBody, dialogContainer
+        templateDialog,
+        button,
+        dialog,
+        dialogOutput,
+        componentDialog,
+        objectDialog,
+        stateDialog,
+        busyIndicator,
+        configurationDialog,
+        dialogContainer2,
+        resizeHandle,
+        positionDialog,
+        mobileDialog,
+        complexDialog,
+        dialogItems,
+        searchBar,
+        dialogCartOutput,
+        stackedDialog,
+        playgroundDialog,
+        checkboxes,
+        inputFields,
+        dialogExamples,
+        customDialog,
+        dialogBody,
+        dialogContainer
     } = dialogPage;
 
     beforeAll(() => {
@@ -54,7 +82,7 @@ describe('dialog test suite', function () {
         waitForElDisplayed(dialogPage.title);
     }, 1);
 
-    describe('template based dialog example', function () {
+    describe('template based dialog example', () => {
         it('should check dialog dismissal and output', () => {
             const acceptBtn = 0;
             const cancelBtn = 1;
@@ -65,7 +93,7 @@ describe('dialog test suite', function () {
         });
     });
 
-    describe('component based dialog example', function () {
+    describe('component based dialog example', () => {
         it('should check dialog dismissal and output', () => {
             const acceptBtn = 0;
             const cancelBtn = 1;
@@ -76,7 +104,7 @@ describe('dialog test suite', function () {
         });
     });
 
-    describe('object based dialog example', function () {
+    describe('object based dialog example', () => {
         it('should check dialog dismissal and output', () => {
             const closeBtn = 0;
             const acceptBtn = 2;
@@ -89,7 +117,7 @@ describe('dialog test suite', function () {
         });
     });
 
-    describe('dialog state examples', function () {
+    describe('dialog state examples', () => {
         it('should check auto dismissal', () => {
             const selfDismissingDialogCount = 3;
 
@@ -119,7 +147,7 @@ describe('dialog test suite', function () {
         });
     });
 
-    describe('dialog configuration examples', function () {
+    describe('dialog configuration examples', () => {
         it('should check dialog is draggable', () => {
             if (!browserIsFirefox()) {
                 // dragAndDrop not working correctly on Saucelabs for Edge/Chrome
@@ -130,7 +158,12 @@ describe('dialog test suite', function () {
             const dialogStartLocationX = Math.floor(getElementLocation(dialogContainer, 0, 'x'));
             const dialogStartLocationY = Math.floor(getElementLocation(dialogContainer, 0, 'y'));
 
-            clickAndDragElement(dialogStartLocationX + 20, dialogStartLocationY + 10, dialogStartLocationX - 100, dialogStartLocationY - 50);
+            clickAndDragElement(
+                dialogStartLocationX + 20,
+                dialogStartLocationY + 10,
+                dialogStartLocationX - 100,
+                dialogStartLocationY - 50
+            );
 
             expect(Math.floor(getElementLocation(dialogContainer, 0, 'x'))).not.toBe(dialogStartLocationX);
             expect(Math.floor(getElementLocation(dialogContainer, 0, 'y'))).not.toBe(dialogStartLocationY);
@@ -156,7 +189,7 @@ describe('dialog test suite', function () {
         });
     });
 
-    describe('dialog positioning example', function () {
+    describe('dialog positioning example', () => {
         it('should check dialog in bottom right', () => {
             openDialog(positionDialog);
 
@@ -165,7 +198,7 @@ describe('dialog test suite', function () {
         });
     });
 
-    describe('mobile dialog example', function () {
+    describe('mobile dialog example', () => {
         it('should check mobile property', () => {
             openDialog(mobileDialog);
 
@@ -174,7 +207,7 @@ describe('dialog test suite', function () {
         });
     });
 
-    describe('complex dialog example', function () {
+    describe('complex dialog example', () => {
         it('should check dialog selections', () => {
             if (browserIsFirefox()) {
                 refreshPage();
@@ -224,7 +257,7 @@ describe('dialog test suite', function () {
         }, 1);
     });
 
-    describe('stacked dialogs examples', function () {
+    describe('stacked dialogs examples', () => {
         it('should check that there can be multiple dialogs', () => {
             openDialog(stackedDialog);
 
@@ -240,7 +273,7 @@ describe('dialog test suite', function () {
         });
     });
 
-    describe('custom backdrop and container examples', function () {
+    describe('custom backdrop and container examples', () => {
         it('should check custom backdrop dialog dismissal', () => {
             openDialog(customDialog);
 
@@ -291,7 +324,7 @@ describe('dialog test suite', function () {
         });
     });
 
-    describe('playground examples', function () {
+    describe('playground examples', () => {
         afterEach(() => {
             refreshPage();
             waitForElDisplayed(dialogPage.title);
@@ -338,43 +371,37 @@ describe('dialog test suite', function () {
         it('should check dialog fullScreen option', () => {
             openDialog(playgroundDialog);
 
-            expect(getAttributeByName(dialogContainer2, classAttribute))
-                .not.toContain(fullscreenClass);
+            expect(getAttributeByName(dialogContainer2, classAttribute)).not.toContain(fullscreenClass);
 
             closeDialog();
             click(playgroundDialog + checkboxes, 4);
             openDialog(playgroundDialog);
 
-            expect(getAttributeByName(dialogContainer2, classAttribute))
-                .toContain(fullscreenClass);
+            expect(getAttributeByName(dialogContainer2, classAttribute)).toContain(fullscreenClass);
         });
 
         it('should check dialog mobile option', () => {
             openDialog(playgroundDialog);
 
-            expect(getAttributeByName(dialogContainer2, classAttribute))
-                .not.toContain(mobileClass);
+            expect(getAttributeByName(dialogContainer2, classAttribute)).not.toContain(mobileClass);
 
             closeDialog();
             click(playgroundDialog + checkboxes, 5);
             openDialog(playgroundDialog);
 
-            expect(getAttributeByName(dialogContainer2, classAttribute))
-                .toContain(mobileClass);
+            expect(getAttributeByName(dialogContainer2, classAttribute)).toContain(mobileClass);
         });
 
         it('should check dialog mobileOuterSpacing option', () => {
             click(playgroundDialog + checkboxes, 5);
             openDialog(playgroundDialog);
 
-            expect(getAttributeByName(dialogContainer2, classAttribute))
-                .not.toContain(noMobileSpacingClass);
+            expect(getAttributeByName(dialogContainer2, classAttribute)).not.toContain(noMobileSpacingClass);
             closeDialog();
             click(playgroundDialog + checkboxes, 6);
             openDialog(playgroundDialog);
 
-            expect(getAttributeByName(dialogContainer2, classAttribute))
-                .toContain(noMobileSpacingClass);
+            expect(getAttributeByName(dialogContainer2, classAttribute)).toContain(noMobileSpacingClass);
         });
 
         it('should check dialog draggable option', () => {
@@ -387,7 +414,12 @@ describe('dialog test suite', function () {
             const dialogStartLocationX = Math.floor(getElementLocation(dialogContainer, 0, 'x'));
             const dialogStartLocationY = Math.floor(getElementLocation(dialogContainer, 0, 'y'));
 
-            clickAndDragElement(dialogStartLocationX + 20, dialogStartLocationY + 10, dialogStartLocationX - 100, dialogStartLocationY - 50);
+            clickAndDragElement(
+                dialogStartLocationX + 20,
+                dialogStartLocationY + 10,
+                dialogStartLocationX - 100,
+                dialogStartLocationY - 50
+            );
 
             expect(Math.floor(getElementLocation(dialogContainer, 0, 'x'))).not.toBe(dialogStartLocationX);
             expect(Math.floor(getElementLocation(dialogContainer, 0, 'y'))).not.toBe(dialogStartLocationY);
@@ -408,7 +440,9 @@ describe('dialog test suite', function () {
         it('should check dialog verticalPadding option', () => {
             openDialog(playgroundDialog);
             // tslint:disable-next-line:radix
-            const dialogPaddingValue = parseInt(getCSSPropertyByName(dialogBody, topPaddingProperty).value.replace('px', ''));
+            const dialogPaddingValue = parseInt(
+                getCSSPropertyByName(dialogBody, topPaddingProperty).value.replace('px', '')
+            );
 
             expect(dialogPaddingValue).toBeGreaterThan(0);
 
@@ -416,7 +450,9 @@ describe('dialog test suite', function () {
             click(playgroundDialog + checkboxes, 9);
             openDialog(playgroundDialog);
             // tslint:disable-next-line:radix
-            const newDialogPaddingValue = parseInt(getCSSPropertyByName(dialogBody, topPaddingProperty).value.replace('px', ''));
+            const newDialogPaddingValue = parseInt(
+                getCSSPropertyByName(dialogBody, topPaddingProperty).value.replace('px', '')
+            );
 
             expect(newDialogPaddingValue).toBe(0);
         });
@@ -454,14 +490,19 @@ describe('dialog test suite', function () {
             const newHandleXLocation = Math.floor(getElementLocation(resizeHandle, 0, 'x'));
             const newHandleYLocation = Math.floor(getElementLocation(resizeHandle, 0, 'y'));
 
-            clickAndDragElement(newHandleXLocation + 1, newHandleYLocation + 1, newHandleXLocation - 300, newHandleYLocation - 300);
+            clickAndDragElement(
+                newHandleXLocation + 1,
+                newHandleYLocation + 1,
+                newHandleXLocation - 300,
+                newHandleYLocation - 300
+            );
 
             expect(getElementSize(dialogContainer2, 0, 'width')).toBe(400);
             expect(getElementSize(dialogContainer2, 0, 'height')).toBe(400);
         });
     });
 
-    xdescribe('visual regression', function () {
+    xdescribe('visual regression', () => {
         const complexExample = 12;
         const stackedExample = 13;
 
@@ -486,30 +527,68 @@ describe('dialog test suite', function () {
                     openDialog(dialogExamples, i);
                     waitForNotDisplayed(busyIndicator);
                     waitForElDisplayed(dialogItems);
-                    saveElementScreenshot(dialogContainer2, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
-                    expect(checkElementScreenshot(dialogContainer2, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder()))
-                        .toBeLessThan(5, `dialog ${i} screenshot doesn't match baseline`);
+                    saveElementScreenshot(
+                        dialogContainer2,
+                        `dialog-${i}-${getImageTagBrowserPlatform()}-`,
+                        dialogPage.getScreenshotFolder()
+                    );
+                    expect(
+                        checkElementScreenshot(
+                            dialogContainer2,
+                            `dialog-${i}-${getImageTagBrowserPlatform()}-`,
+                            dialogPage.getScreenshotFolder()
+                        )
+                    ).toBeLessThan(5, `dialog ${i} screenshot doesn't match baseline`);
                     click(dialog + button, 2);
                     continue;
                 }
                 if (i === stackedExample) {
                     openDialog(dialogExamples, i);
-                    saveElementScreenshot(dialogContainer2, `dialog-${i}a-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
-                    expect(checkElementScreenshot(dialogContainer2, `dialog-${i}a-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder()))
-                        .toBeLessThan(5, `dialog ${i}a screenshot doesn't match baseline`);
+                    saveElementScreenshot(
+                        dialogContainer2,
+                        `dialog-${i}a-${getImageTagBrowserPlatform()}-`,
+                        dialogPage.getScreenshotFolder()
+                    );
+                    expect(
+                        checkElementScreenshot(
+                            dialogContainer2,
+                            `dialog-${i}a-${getImageTagBrowserPlatform()}-`,
+                            dialogPage.getScreenshotFolder()
+                        )
+                    ).toBeLessThan(5, `dialog ${i}a screenshot doesn't match baseline`);
                     click(dialog + button, 1);
                     waitForElDisplayed(dialog, 1);
-                    saveElementScreenshot(dialogContainer2, `dialog-${i}b-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), 1);
-                    expect(checkElementScreenshot(dialogContainer2, `dialog-${i}b-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder(), 1))
-                        .toBeLessThan(5, `dialog ${i}b screenshot doesn't match baseline`);
+                    saveElementScreenshot(
+                        dialogContainer2,
+                        `dialog-${i}b-${getImageTagBrowserPlatform()}-`,
+                        dialogPage.getScreenshotFolder(),
+                        1
+                    );
+                    expect(
+                        checkElementScreenshot(
+                            dialogContainer2,
+                            `dialog-${i}b-${getImageTagBrowserPlatform()}-`,
+                            dialogPage.getScreenshotFolder(),
+                            1
+                        )
+                    ).toBeLessThan(5, `dialog ${i}b screenshot doesn't match baseline`);
                     click(dialog + button, 3);
                     closeDialog();
                     continue;
                 }
                 openDialog(dialogExamples, i);
-                saveElementScreenshot(dialogContainer2, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
-                expect(checkElementScreenshot(dialogContainer2, `dialog-${i}-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder()))
-                    .toBeLessThan(5, `dialog ${i} screenshot doesn't match baseline`);
+                saveElementScreenshot(
+                    dialogContainer2,
+                    `dialog-${i}-${getImageTagBrowserPlatform()}-`,
+                    dialogPage.getScreenshotFolder()
+                );
+                expect(
+                    checkElementScreenshot(
+                        dialogContainer2,
+                        `dialog-${i}-${getImageTagBrowserPlatform()}-`,
+                        dialogPage.getScreenshotFolder()
+                    )
+                ).toBeLessThan(5, `dialog ${i} screenshot doesn't match baseline`);
                 if (doesItExist(dialog) === false) {
                     continue;
                 }
@@ -520,9 +599,18 @@ describe('dialog test suite', function () {
         it('should check custom backdrop example', () => {
             openDialog(customDialog);
 
-            saveElementScreenshot(dialog, `dialog-with-custom-backdrop-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
-            expect(checkElementScreenshot(dialog, `dialog-dialog-with-custom-backdrop-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder()))
-                .toBeLessThan(25, `dialog with custom backdrop screenshot doesn't match baseline`);
+            saveElementScreenshot(
+                dialog,
+                `dialog-with-custom-backdrop-${getImageTagBrowserPlatform()}-`,
+                dialogPage.getScreenshotFolder()
+            );
+            expect(
+                checkElementScreenshot(
+                    dialog,
+                    `dialog-dialog-with-custom-backdrop-${getImageTagBrowserPlatform()}-`,
+                    dialogPage.getScreenshotFolder()
+                )
+            ).toBeLessThan(25, `dialog with custom backdrop screenshot doesn't match baseline`);
 
             closeDialog();
         });
@@ -530,15 +618,30 @@ describe('dialog test suite', function () {
         it('should check playground dialog hasBackdrop option', () => {
             openDialog(playgroundDialog);
 
-            saveElementScreenshot(dialog, `dialog-with-hasBackdrop-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder());
-            expect(checkElementScreenshot(dialog, `dialog-dialog-with-hasBackdrop-${getImageTagBrowserPlatform()}-`, dialogPage.getScreenshotFolder()))
-                .toBeLessThan(25, `dialog with hasBackdrop screenshot doesn't match baseline`);
+            saveElementScreenshot(
+                dialog,
+                `dialog-with-hasBackdrop-${getImageTagBrowserPlatform()}-`,
+                dialogPage.getScreenshotFolder()
+            );
+            expect(
+                checkElementScreenshot(
+                    dialog,
+                    `dialog-dialog-with-hasBackdrop-${getImageTagBrowserPlatform()}-`,
+                    dialogPage.getScreenshotFolder()
+                )
+            ).toBeLessThan(25, `dialog with hasBackdrop screenshot doesn't match baseline`);
 
             closeDialog();
         });
     });
 
-    function checkDialogDismissals(exampleSelector: string, dialogSelector: string, dialogButtonIndex: number = 0, expectation: string, selectorIndex: number = 0): void {
+    function checkDialogDismissals(
+        exampleSelector: string,
+        dialogSelector: string,
+        dialogButtonIndex: number = 0,
+        expectation: string,
+        selectorIndex: number = 0
+    ): void {
         scrollIntoView(exampleSelector, selectorIndex);
         click(exampleSelector + dialogSelector, selectorIndex);
         waitForElDisplayed(dialog);
@@ -547,7 +650,11 @@ describe('dialog test suite', function () {
         expect(getText(exampleSelector + dialogOutput)).toContain(expectation);
     }
 
-    function checkCloseDialogWithEscapeKey(exampleSelector: string, dialogSelector: string, selectorIndex: number = 0): void {
+    function checkCloseDialogWithEscapeKey(
+        exampleSelector: string,
+        dialogSelector: string,
+        selectorIndex: number = 0
+    ): void {
         scrollIntoView(exampleSelector, selectorIndex);
         click(exampleSelector + dialogSelector, selectorIndex);
         waitForElDisplayed(dialog);

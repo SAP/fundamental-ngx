@@ -1,4 +1,4 @@
-@import "fundamental-styles/index";
+@import 'fundamental-styles/index';
 
 // These styles will move to fundamental/styles
 $line-container-width: 1.5rem;
@@ -23,13 +23,12 @@ $line-width: 0.0625rem;
 .fd-timeline__node--icon {
     font-size: 1.375rem;
 
-    [class*="sap-icon"] {
+    [class*='sap-icon'] {
         @include fd-flex() {
             justify-content: center;
         }
     }
 }
-
 
 // New Styles
 
@@ -102,7 +101,6 @@ $line-width: 0.0625rem;
         }
 
         .fd-timeline__list {
-
             &--first {
                 align-items: flex-end;
 
@@ -124,7 +122,6 @@ $line-width: 0.0625rem;
                         right: $fd-timeline-arrow-offset;
                     }
                 }
-
             }
 
             &--second {
@@ -154,7 +151,6 @@ $line-width: 0.0625rem;
                 @include fd-set-padding-left(4.688rem);
             }
         }
-
     }
 
     &--vertical {
@@ -205,10 +201,8 @@ $line-width: 0.0625rem;
             flex: 1 0 $vertical-list-with;
 
             &--first {
-
                 .fd-timeline__node-container {
                     @include fd-set-position-right(-$line-container-width);
-
                 }
 
                 .fd-timeline__post {
@@ -230,7 +224,6 @@ $line-width: 0.0625rem;
                         }
                     }
                 }
-
             }
 
             &--second {

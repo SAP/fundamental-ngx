@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
     selector: 'fd-slider-required-parent-width-example',
     templateUrl: './splitter-required-parent-width-example.component.html'
 })
-export class SplitterRequiredParentWidthExampleComponent {
-}
+export class SplitterRequiredParentWidthExampleComponent {}

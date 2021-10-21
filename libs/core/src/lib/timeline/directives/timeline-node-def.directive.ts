@@ -20,12 +20,10 @@ export class TimelineNodeOutletContext<T> {
     selector: '[fdTimelineNodeDef], [fd-timeline-node-def]'
 })
 export class TimelineNodeDefDirective<T> {
-
     /** Data passed to the template*/
     @Input()
     fdTimelineNodeData: T;
 
     /** @hidden */
-    constructor(public template: TemplateRef<any>) {
-    }
+    constructor(public template: TemplateRef<any>) {}
 }

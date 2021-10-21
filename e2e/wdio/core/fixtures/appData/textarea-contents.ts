@@ -5,9 +5,4 @@ export const sections = [
     'fd-textarea-form-group-example '
 ];
 
-export const states = [
-    'success',
-    'error',
-    'warning',
-    'information'
-]
+export const states = ['success', 'error', 'warning', 'information'];

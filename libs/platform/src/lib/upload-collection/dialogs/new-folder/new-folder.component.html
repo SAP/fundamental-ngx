@@ -5,7 +5,8 @@
             fd-dialog-title
             id="fdp-upload-collection-new-folder-title"
             fd-title
-            i18n="@@platformUploadCollection.NewFolder.Title">
+            i18n="@@platformUploadCollection.NewFolder.Title"
+        >
             New folder
         </h1>
     </fd-dialog-header>
@@ -16,8 +17,8 @@
                 <span i18n="@@platformUploadCollection.NewFolder.InputLabel"> Name of new folder inside of </span>
                 <span *ngIf="_currentFolder">"{{ _currentFolder.name }}"</span>
                 <span *ngIf="!_currentFolder" i18n="@@platformUploadCollection.NewFolder.InputLabel.AllFiles">
-                    All files
-                </span>:
+                    All files </span
+                >:
             </label>
             <input
                 #formControl
@@ -52,11 +53,6 @@
             (click)="dialogRef.close(_newFolderName)"
         >
         </fd-button-bar>
-        <fd-button-bar
-            i18n-label
-            label="Cancel"
-            (click)="dialogRef.dismiss()"
-        >
-        </fd-button-bar>
+        <fd-button-bar i18n-label label="Cancel" (click)="dialogRef.dismiss()"> </fd-button-bar>
     </fd-dialog-footer>
 </fd-dialog>

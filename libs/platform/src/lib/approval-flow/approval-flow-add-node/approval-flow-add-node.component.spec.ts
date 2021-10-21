@@ -14,8 +14,8 @@ const node: ApprovalNode = {
     name: 'name',
     approvers: [],
     status: 'not started',
-    targets: [],
-}
+    targets: []
+};
 
 describe('ApprovalFlowAddNodeComponent', () => {
     let component: ApprovalFlowAddNodeComponent;
@@ -34,10 +34,7 @@ describe('ApprovalFlowAddNodeComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [
-                PlatformApprovalFlowModule,
-                BrowserAnimationsModule
-            ],
+            imports: [PlatformApprovalFlowModule, BrowserAnimationsModule],
             providers: [
                 { provide: DialogRef, useValue: dialogRef },
                 { provide: DialogConfig, useValue: dialogConfig }
@@ -59,10 +56,10 @@ describe('ApprovalFlowAddNodeComponent', () => {
         const teams = [];
         const approvers = [];
 
-        const approversSpy = spyOn(component._data.approvalFlowDataSource, 'fetchApprovers')
-            .and.returnValue(of(approvers));
-        const teamsSpy = spyOn(component._data.approvalFlowDataSource, 'fetchTeams')
-            .and.returnValue(of(teams));
+        const approversSpy = spyOn(component._data.approvalFlowDataSource, 'fetchApprovers').and.returnValue(
+            of(approvers)
+        );
+        const teamsSpy = spyOn(component._data.approvalFlowDataSource, 'fetchTeams').and.returnValue(of(teams));
 
         component._data.isEdit = true;
         component._data.nodeTarget = 'before';
@@ -78,9 +75,9 @@ describe('ApprovalFlowAddNodeComponent', () => {
         let team: ApprovalTeam;
         let teamMemberIds: string;
 
-        approvalFlowDataSource.fetchTeams().subscribe(teams => {
+        approvalFlowDataSource.fetchTeams().subscribe((teams) => {
             team = teams[0];
-            teamMemberIds = team.members.map(memberId => memberId).join(',');
+            teamMemberIds = team.members.map((memberId) => memberId).join(',');
         });
 
         component._approverType = APPROVAL_FLOW_APPROVER_TYPES.EVERYONE;
@@ -88,7 +85,7 @@ describe('ApprovalFlowAddNodeComponent', () => {
         component._confirmSelectedTeam();
         component._submit();
 
-        const nodeApprovers = component._data.node.approvers.map(approver => approver.id).join(',');
+        const nodeApprovers = component._data.node.approvers.map((approver) => approver.id).join(',');
         expect(nodeApprovers).toEqual(teamMemberIds);
     });
 
@@ -108,7 +105,7 @@ describe('ApprovalFlowAddNodeComponent', () => {
         let approvalTeam: ApprovalTeam;
         const viewServiceSpy = spyOn(TestBed.inject(ApprovalFlowAddNodeViewService), 'resetView').and.callThrough();
 
-        approvalFlowDataSource.fetchTeams().subscribe(teams => approvalTeam = teams[0]);
+        approvalFlowDataSource.fetchTeams().subscribe((teams) => (approvalTeam = teams[0]));
 
         component._data.isEdit = true;
 

@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
     selector: 'fd-step-input-configuration-example',
     template: `
         <div class="step-input-example-container">
-
             <div class="step-input-example">
                 <label fd-form-label for="min-fraction-input">4 minimal fractional digits</label>
                 <fd-step-input id="min-fraction-input" [minFractionDigits]="4" [(value)]="value1"></fd-step-input>
@@ -31,10 +30,12 @@ import { Component } from '@angular/core';
 
             <div class="step-input-example">
                 <label fd-form-label for="icons-input">Custom icons</label>
-                <fd-step-input id="icons-input"
-                               incrementButtonIcon="arrow-top"
-                               decrementButtonIcon="arrow-bottom"
-                               [(value)]="value5">
+                <fd-step-input
+                    id="icons-input"
+                    incrementButtonIcon="arrow-top"
+                    decrementButtonIcon="arrow-bottom"
+                    [(value)]="value5"
+                >
                 </fd-step-input>
                 <small>Value: {{ value5 }}</small>
             </div>

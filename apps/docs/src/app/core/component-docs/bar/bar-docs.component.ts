@@ -12,6 +12,8 @@ import * as barPageExampleHtml from '!raw-loader!./examples/bar-page-example.com
 import * as barPageExampleTs from '!raw-loader!./examples/bar-page-example.component.ts';
 import * as barPageResponsiveExampleHtml from '!raw-loader!./examples/bar-page-responsive-example.component.html';
 import * as barPageResponsiveExampleTs from '!raw-loader!./examples/bar-page-responsive-example.component.ts';
+import * as barWithTitleExampleHtml from '!raw-loader!./examples/bar-with-title-example.component.html';
+import * as barWithTitleExampleTs from '!raw-loader!./examples/bar-with-title-example.component.ts';
 
 import { ExampleFile } from '../../../documentation/core-helpers/code-example/example-file';
 
@@ -105,6 +107,19 @@ export class BarDocsComponent {
             code: barPageResponsiveExampleTs,
             fileName: 'bar-page-responsive-example',
             component: 'BarPageResponsiveExampleComponent'
+        }
+    ];
+    barTitleExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'bar-with-title-example',
+            code: barWithTitleExampleHtml
+        },
+        {
+            language: 'typescript',
+            code: barWithTitleExampleTs,
+            fileName: 'bar-with-title-example',
+            component: 'BarWithTitleExampleComponent'
         }
     ];
 }

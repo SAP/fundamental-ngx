@@ -5,7 +5,6 @@ import { TabItemState } from '../tab-item/tab-item.directive';
 
 /** @hidden */
 export class TabInfo {
-
     /** Whether the tab is active */
     active: boolean;
 

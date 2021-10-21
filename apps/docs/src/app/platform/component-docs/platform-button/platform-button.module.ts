@@ -27,11 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        RouterModule.forChild(routes),
-        SharedDocumentationPageModule,
-        PlatformButtonModule
-    ],
+    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformButtonModule],
     exports: [RouterModule],
     declarations: [
         PlatformButtonDocsComponent,
@@ -43,4 +39,4 @@ const routes: Routes = [
         PlatformButtonStateExampleComponent
     ]
 })
-export class PlatformButtonDocsModule { }
+export class PlatformButtonDocsModule {}

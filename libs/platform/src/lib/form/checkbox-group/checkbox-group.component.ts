@@ -111,7 +111,15 @@ export class CheckboxGroupComponent extends InLineLayoutCollectionBaseInput {
         @Inject(RESPONSIVE_BREAKPOINTS_CONFIG)
         readonly _defaultResponsiveBreakPointConfig: ResponsiveBreakPointConfig
     ) {
-        super(cd, _responsiveBreakpointsService, ngControl, ngForm, formField, formControl, _defaultResponsiveBreakPointConfig);
+        super(
+            cd,
+            _responsiveBreakpointsService,
+            ngControl,
+            ngForm,
+            formField,
+            formControl,
+            _defaultResponsiveBreakPointConfig
+        );
 
         // subscribe to _inlineCurrentValue in collection-form-field-inline-layout
         this._inlineCurrentValue

@@ -9,6 +9,6 @@ export interface PlatformMultiInputInterface extends MobileMode {
     inputText: string;
     openChange: Subject<boolean>;
 
-    dialogApprove(): void;
-    dialogDismiss(backup: string): void;
+    _dialogApprove(): void;
+    _dialogDismiss(backup: string): void;
 }

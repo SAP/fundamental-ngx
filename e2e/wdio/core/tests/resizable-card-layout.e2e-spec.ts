@@ -10,12 +10,12 @@ import {
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,
-    browserIsFirefox,
+    browserIsFirefox
 } from '../../driver/wdio';
 
-import { blockExamples } from '../fixtures/appData/resizable-card-layout.contents'
+import { blockExamples } from '../fixtures/appData/resizable-card-layout.contents';
 
-describe('Resizable card layout component:', function () {
+describe('Resizable card layout component:', () => {
     const resizableCardLayoutPage = new ResizableCardLayoutPo();
     const {
         defaultExample,
@@ -56,7 +56,7 @@ describe('Resizable card layout component:', function () {
             checkChaningSizeOfCard(itemExample, 'bigger');
             checkChaningSizeOfCard(itemExample, 'smaller');
         }
-    })
+    });
 
     it('should check open-closing examples', () => {
         for (let i = 0; i < blockExamples.length; i++) {
@@ -70,26 +70,26 @@ describe('Resizable card layout component:', function () {
                 checkItemQuantity(blockExamples[i]);
             }
         }
-    })
+    });
 
     it('should check collapsible area', () => {
         for (let i = 0; i < blockExamples.length; i++) {
             checkCollapsibleArea(blockExamples[i], 'collapseButton');
             checkCollapsibleArea(blockExamples[i], 'resizeButton');
         }
-    })
+    });
 
     it('should check pin button working', () => {
         for (let i = 0; i < blockExamples.length; i++) {
             checkPinButtonWorking(blockExamples[i]);
         }
-    })
+    });
 
     it('should check changing position of card above/below', () => {
         for (let i = 0; i < blockExamples.length; i++) {
             checkChanginPositionOfCardAround(blockExamples[i]);
         }
-    })
+    });
 
     it('should check orientation', () => {
         resizableCardLayoutPage.checkRtlSwitch();
@@ -130,7 +130,7 @@ describe('Resizable card layout component:', function () {
         const defaultItemsQuantity = getElementArrayLength(listItem);
         scrollIntoView(horizontalResize);
         clickAndMoveElement(horizontalResize, 0, -100);
-        pause(1000)
+        pause(1000);
         const itemsQuantityAfterChangingSize = getElementArrayLength(listItem);
         expect(getElementArrayLength(listItem)).toBeLessThan(defaultItemsQuantity);
         scrollIntoView(horizontalResize);
@@ -140,20 +140,39 @@ describe('Resizable card layout component:', function () {
         click(closeButton);
     }
 
-    function checkChaningSizeOfCard(section: string, size: 'smaller' | 'bigger', resizeIndex: number = 0, cardIndex: number = 0): void {
-        section == defaultExample && size == 'smaller' ? cardIndex = resizeIndex + 1 : '';
-        section == configExample && size == 'smaller' ? cardIndex = resizeIndex : '';
+    function checkChaningSizeOfCard(
+        section: string,
+        size: 'smaller' | 'bigger',
+        resizeIndex: number = 0,
+        cardIndex: number = 0
+    ): void {
+        if (section === defaultExample && size === 'smaller') {
+            cardIndex = resizeIndex + 1;
+        }
+        if (section === configExample && size === 'smaller') {
+            cardIndex = resizeIndex;
+        }
         click(section + button);
         const defaultSize = getAttributeByName(resizableCard, 'style', cardIndex);
-        size === 'bigger' ? clickAndMoveElement(verticalResize, 200, 0, resizeIndex) : clickAndMoveElement(verticalResize, -200, 0, resizeIndex);
+        size === 'bigger'
+            ? clickAndMoveElement(verticalResize, 200, 0, resizeIndex)
+            : clickAndMoveElement(verticalResize, -200, 0, resizeIndex);
         pause(1500);
         const sizeAfterVerticalMoving = getAttributeByName(resizableCard, 'style', cardIndex);
 
-        expect(sizeAfterVerticalMoving).not.toEqual(defaultSize, `failed try to make card ${size} vertical for ${section}`);
+        expect(sizeAfterVerticalMoving).not.toEqual(
+            defaultSize,
+            `failed try to make card ${size} vertical for ${section}`
+        );
         scrollIntoView(horizontalResize, resizeIndex);
-        size === 'bigger' ? clickAndMoveElement(horizontalResize, 0, 300, resizeIndex) : clickAndMoveElement(horizontalResize, 0, -100, resizeIndex);
+        size === 'bigger'
+            ? clickAndMoveElement(horizontalResize, 0, 300, resizeIndex)
+            : clickAndMoveElement(horizontalResize, 0, -100, resizeIndex);
         pause(1500);
-        expect(getAttributeByName(resizableCard, 'style', cardIndex)).not.toEqual(sizeAfterVerticalMoving, `failed try to make card ${size} horizontal for ${section}`);
+        expect(getAttributeByName(resizableCard, 'style', cardIndex)).not.toEqual(
+            sizeAfterVerticalMoving,
+            `failed try to make card ${size} horizontal for ${section}`
+        );
         click(closeButton);
     }
 
@@ -175,5 +194,4 @@ describe('Resizable card layout component:', function () {
         click(closeButton);
         expect(doesItExist(dynamicHeader)).toBe(false, 'Dynamic page did not close');
     }
-
 });

@@ -9,18 +9,27 @@ import {
 import {
     click,
     getAttributeByName,
-    getCurrentUrl, getElementAriaLabel,
-    getElementArrayLength, getElementClass, getElementTitle,
+    getCurrentUrl,
+    getElementAriaLabel,
+    getElementArrayLength,
+    getElementClass,
+    getElementTitle,
     isElementClickable,
     mouseHoverElement,
     scrollIntoView,
     waitForElDisplayed
 } from '../../driver/wdio';
 
-describe('Link component test suite', function() {
+describe('Link component test suite', () => {
     const linkPage = new LinkPo();
     const {
-        iconLink, standardLinks, emphasizedLink, disabledLink, emphasizedDisabledLink, invertedLink, truncatedLink
+        iconLink,
+        standardLinks,
+        emphasizedLink,
+        disabledLink,
+        emphasizedDisabledLink,
+        invertedLink,
+        truncatedLink
     } = linkPage;
 
     beforeAll(() => {
@@ -50,7 +59,7 @@ describe('Link component test suite', function() {
     });
 
     it('should check emphasized link', () => {
-        const emphasizedLinkAltText = getElementTitle((emphasizedLink));
+        const emphasizedLinkAltText = getElementTitle(emphasizedLink);
 
         scrollIntoView(emphasizedLink);
         mouseHoverElement(emphasizedLink);
@@ -74,7 +83,7 @@ describe('Link component test suite', function() {
         const disabledEmphasizedLinkAltText = getElementTitle(emphasizedDisabledLink);
 
         expect(getElementClass(emphasizedDisabledLink)).toContain('disabled');
-        expect(getElementClass(emphasizedDisabledLink)).toContain( 'emphasized');
+        expect(getElementClass(emphasizedDisabledLink)).toContain('emphasized');
         checkDisabledLinkData(emphasizedDisabledLink);
         expect(disabledEmphasizedLinkAltText).toEqual(defaultLink_alt_text);
         expect(isElementClickable(emphasizedDisabledLink)).toBe(false);
@@ -115,7 +124,7 @@ describe('Link component test suite', function() {
         linkPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             linkPage.saveExampleBaselineScreenshot();
             expect(linkPage.compareWithBaseline()).toBeLessThan(5);

@@ -16,7 +16,6 @@ export class CheckboxPo extends CoreBaseComponentPo {
     checkboxLabel = this.checkbox + ' label';
     link = this.checkbox + ' a';
 
-
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);

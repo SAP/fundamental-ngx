@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
     selector: 'app-object-attribute-header',
     templateUrl: './platform-object-attribute-header.component.html'
 })
-export class PlatformObjectAttributeHeaderComponent { }
+export class PlatformObjectAttributeHeaderComponent {}

@@ -1,10 +1,16 @@
-<div style="text-align: right;">
+<div style="text-align: right">
     <fdp-button [fdpMenuTriggerFor]="basicMenu" label="Button" title="Basic menu"></fdp-button>
     <fdp-button buttonType="menu" [fdpMenuTriggerFor]="basicMenu" label="Menu Button" title="menu button"></fdp-button>
     <fdp-button glyph="menu" [fdpMenuTriggerFor]="basicMenu" title="icon menu"></fdp-button>
-    <fd-avatar style="margin-right: 10px;" title="avatar menu" size="m" image="http://picsum.photos/id/1018/400"
-        [fdpMenuTriggerFor]="basicMenu" tabindex="0"></fd-avatar>
-    <div style="margin-top: 1rem;"><label>Item Selected:</label> {{ item }}</div>
+    <fd-avatar
+        style="margin-right: 10px"
+        title="avatar menu"
+        size="m"
+        image="http://picsum.photos/id/1018/400"
+        [fdpMenuTriggerFor]="basicMenu"
+        tabindex="0"
+    ></fd-avatar>
+    <div style="margin-top: 1rem"><label>Item Selected:</label> {{ item }}</div>
 
     <fdp-menu #basicMenu [xPosition]="'before'" id="basic-menu">
         <fdp-menu-item title="First Item" (itemSelect)="onItemSelect('First Item')">First Item</fdp-menu-item>

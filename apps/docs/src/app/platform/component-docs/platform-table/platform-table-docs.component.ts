@@ -500,7 +500,7 @@ export class PlatformTableDocsComponent {
             name: 'platform-table-semantic-example.component.ts'
         }
     ];
-    
+
     rowClassTableFiles: ExampleFile[] = [
         {
             language: 'html',
@@ -516,7 +516,7 @@ export class PlatformTableDocsComponent {
             name: 'platform-table-row-class-example.component.ts'
         }
     ];
-    
+
     noOuterBordersFiles: ExampleFile[] = [
         {
             language: 'html',

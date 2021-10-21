@@ -25,6 +25,8 @@ export * from './pipes/safe.pipe';
 export * from './drag-and-drop/drag-and-drop.module';
 export * from './drag-and-drop/dnd-list/dnd-list.directive';
 export * from './drag-and-drop/dnd-item/dnd-item.directive';
+export * from './drag-and-drop/dnd-keyboard-group/dnd-keyboard-group.directive';
+export * from './drag-and-drop/dnd-keyboard-item/dnd-keyboard-item.directive';
 
 export * from './interfaces/css-class-builder.interface';
 export * from './interfaces/css-style-builder.interface';

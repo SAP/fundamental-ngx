@@ -15,7 +15,6 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabItemExpandComponent {
-
     /** @hidden Text visible in the trigger */
     @Input()
     label = 'More';

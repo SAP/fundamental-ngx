@@ -43,4 +43,4 @@ const routes: Routes = [
         ButtonMenuExampleComponent
     ]
 })
-export class ButtonDocsModule { }
+export class ButtonDocsModule {}

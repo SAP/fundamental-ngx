@@ -7,3 +7,4 @@ export * from './parser-file-size';
 export * from './scroll';
 export * from './random-color-accent';
 export * from './clone-deep';
+export * from './resize-observable';

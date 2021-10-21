@@ -16,11 +16,9 @@ import { MenuItemComponent } from '@fundamental-ngx/core/menu';
     ]
 })
 export class ButtonSplitProgrammaticalExampleComponent {
-
     selectedOption: MenuItemComponent;
 
     select(option: MenuItemComponent): void {
         this.selectedOption = option;
     }
-
 }

@@ -57,7 +57,8 @@ import { ContentDensityService } from '@fundamental-ngx/core/utils';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TimePickerComponent<D>
-    implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, OnDestroy, Validator {
+    implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, OnDestroy, Validator
+{
     /**
      * Date time object representation
      */
@@ -230,7 +231,7 @@ export class TimePickerComponent<D>
      */
     _isInvalidTimeInput = false;
 
-    /** 
+    /**
      * @hidden
      * Indicates when popover is opened
      */

@@ -90,7 +90,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/token', name: 'Token' },
             { url: 'core/toolbar', name: 'Toolbar' },
             { url: 'core/object-number', name: 'Object Number' },
-            { url: 'core/vertical-navigation', name: 'Vertical Navigation'},
+            { url: 'core/vertical-navigation', name: 'Vertical Navigation' },
             { url: 'core/upload-collection', name: 'Upload Collection' },
             { url: 'core/wizard', name: 'Wizard' },
             { url: 'core/grid-list', name: 'Grid List' },
@@ -117,9 +117,7 @@ export class CoreDocumentationComponent extends DocumentationBaseComponent {
             { url: 'core/theme-switcher', name: 'Theme Switcher API' }
         ];
 
-        this.adapters = [
-            { url: 'core/moment-datetime-adapter', name: 'Moment DateTime Adapter' },
-        ];
+        this.adapters = [{ url: 'core/moment-datetime-adapter', name: 'Moment DateTime Adapter' }];
 
         this.sections = [
             {

@@ -1,6 +1,4 @@
-<fd-docs-section-title id="types" componentName="alert">
-    Alert Types
-</fd-docs-section-title>
+<fd-docs-section-title id="types" componentName="alert"> Alert Types </fd-docs-section-title>
 <description
     >A number of alert types are available. They offer preset styling for different contextual situations.</description
 >
@@ -11,9 +9,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="overlay" componentName="alert">
-    Alert as Overlay
-</fd-docs-section-title>
+<fd-docs-section-title id="overlay" componentName="alert"> Alert as Overlay </fd-docs-section-title>
 <description>
     The <code>AlertService</code> is available for injection and handles most of the work for this usage. It accepts a
     component type, a template ref or a string as the alert content. If a component is provided as content, it should be
@@ -53,7 +49,7 @@
 
 <playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fd-alert
-        style="transition: 0.25s all ease-in-out;"
+        style="transition: 0.25s all ease-in-out"
         [duration]="-1"
         [type]="data.modifier.type"
         [dismissible]="data.properties.dismissible"
@@ -63,7 +59,7 @@
     </fd-alert>
     <fd-alert
         #alert
-        style="margin-top: 12px; transition: 0.25s all ease-in-out;"
+        style="margin-top: 12px; transition: 0.25s all ease-in-out"
         [type]="data.modifier.type"
         [dismissible]="data.properties.dismissible"
         [width]="data.properties.width"
@@ -72,5 +68,5 @@
         [mousePersist]="data.properties.mousePersist"
     >
     </fd-alert>
-    <button style="margin-top: 12px;" fd-button label="Open Dynamic Alert" (click)="alert.open()"></button>
+    <button style="margin-top: 12px" fd-button label="Open Dynamic Alert" (click)="alert.open()"></button>
 </playground>

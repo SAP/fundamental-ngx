@@ -40,6 +40,7 @@ const routes: Routes = [
         IllustratedMessageHeaderComponent,
         IllustratedMessageExampleComponent,
         IllustratedMessageDialogExampleComponent,
-        IllustratedMessageSpotExampleComponent]
+        IllustratedMessageSpotExampleComponent
+    ]
 })
 export class IllustratedMessageDocsModule {}

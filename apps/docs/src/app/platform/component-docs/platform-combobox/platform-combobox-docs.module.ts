@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { IconModule } from '@fundamental-ngx/core/icon';
 import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
-import { PlatformComboboxModule, PlatformComboboxMobileModule, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
+import { PlatformComboboxModule, FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
@@ -36,7 +36,6 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         PlatformComboboxModule,
-        PlatformComboboxMobileModule,
         FdpFormGroupModule,
         IconModule
     ],

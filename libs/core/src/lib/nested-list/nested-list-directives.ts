@@ -23,18 +23,15 @@ import { Observable, of } from 'rxjs';
     selector: '[fdNestedDirectivesHeader], [fd-nested-list-header]'
 })
 export class NestedListHeaderDirective {
-
     /** @hidden */
     @HostBinding('class.fd-nested-list__group-header')
     fdNestedListHeaderClass = true;
-
 }
 
 @Directive({
     selector: '[fdNestedDirectivesIcon], [fd-nested-list-icon]'
 })
 export class NestedListIconDirective implements CssClassBuilder, OnChanges, OnInit {
-
     /** The property allows user to pass additional css classes */
     @Input()
     class = '';
@@ -70,33 +67,25 @@ export class NestedListIconDirective implements CssClassBuilder, OnChanges, OnIn
     @applyCssClass
     /** CssClassBuilder interface implementation */
     buildComponentCssClass(): string[] {
-        return [
-            'fd-nested-list__icon',
-            this.glyph ? `sap-icon--${this.glyph}` : '',
-            this.class
-        ];
+        return ['fd-nested-list__icon', this.glyph ? `sap-icon--${this.glyph}` : '', this.class];
     }
 
     /** HasElementRef interface implementation */
     elementRef(): ElementRef<any> {
         return this._elementRef;
     }
-
 }
 
 @Directive({
     selector: '[fdNestedDirectivesTitle], [fd-nested-list-title]'
 })
 export class NestedListTitleDirective {
-
     /** @hidden */
     @HostBinding('class.fd-nested-list__title')
     fdNestedListTitleClass = true;
 
     /** @hidden */
-    constructor(
-        private elementRef: ElementRef
-    ) {}
+    constructor(private elementRef: ElementRef) {}
 
     /** Returns element's InnerText */
     getInnerText(): string {
@@ -109,17 +98,16 @@ export class NestedListTitleDirective {
     selector: '[fdNestedListExpandIcon], [fd-nested-list-expand-icon]',
     template: `
         <ng-content></ng-content>
-        <fd-icon [glyph]="expanded ? 'navigation-down-arrow' : ( sideArrowIcon$ | async )"></fd-icon>
+        <fd-icon [glyph]="expanded ? 'navigation-down-arrow' : (sideArrowIcon$ | async)"></fd-icon>
     `,
     host: {
         'aria-haspopup': 'true',
-        'tabindex': '-1'
+        tabindex: '-1'
     },
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
 export class NestedListExpandIconComponent {
-
     /** @hidden */
     @HostBinding('class.fd-nested-list__button')
     fdNestedListTitleClass = true;
@@ -139,7 +127,7 @@ export class NestedListExpandIconComponent {
     /** @hidden */
     sideArrowIcon$: Observable<string>;
 
-    constructor (
+    constructor(
         private _itemService: NestedItemService,
         private _changeDetRef: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService
@@ -170,7 +158,7 @@ export class NestedListExpandIconComponent {
     /** @hidden Sets expand arrow depending on text direction */
     private _listenOnTextDirection(): void {
         this.sideArrowIcon$ = this._rtlService
-            ? this._rtlService.rtl.pipe(map(isRtl => isRtl ? 'navigation-left-arrow' : 'navigation-right-arrow'))
+            ? this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'navigation-left-arrow' : 'navigation-right-arrow')))
             : of('navigation-right-arrow');
     }
 }

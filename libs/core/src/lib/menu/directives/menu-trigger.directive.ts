@@ -7,7 +7,6 @@ import { startWith } from 'rxjs/operators';
     selector: '[fdMenuTrigger]'
 })
 export class MenuTriggerDirective implements OnDestroy {
-
     /** Set reference to Menu Component */
     @Input('fdMenuTrigger')
     set menu(menu: MenuComponent) {
@@ -31,7 +30,7 @@ export class MenuTriggerDirective implements OnDestroy {
     private _isExpandedSubscription: Subscription;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef) { }
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngOnDestroy(): void {
@@ -44,7 +43,7 @@ export class MenuTriggerDirective implements OnDestroy {
         if (menu) {
             this._isExpandedSubscription = menu.isOpenChange
                 .pipe(startWith(menu.isOpen))
-                .subscribe(isOpen => this.ariaExpanded = isOpen);
+                .subscribe((isOpen) => (this.ariaExpanded = isOpen));
         }
     }
 

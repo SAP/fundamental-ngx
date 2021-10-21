@@ -6,14 +6,11 @@ import { PopoverModule } from '../../popover/popover.module';
 import { Component } from '@angular/core';
 
 @Component({
-    template: `
-    `,
-    providers: [ PopoverService, PopoverFormMessageService ]
+    template: ``,
+    providers: [PopoverService, PopoverFormMessageService]
 })
-class PopoverFormMessageTestComponent  {
-    constructor(
-        public formService: PopoverFormMessageService
-    ) {}
+class PopoverFormMessageTestComponent {
+    constructor(public formService: PopoverFormMessageService) {}
 }
 describe('PopoverFormMessageService', () => {
     let service: PopoverFormMessageService;
@@ -32,13 +29,13 @@ describe('PopoverFormMessageService', () => {
     });
 
     it('should create', () => {
-        expect(service).toBeTruthy()
+        expect(service).toBeTruthy();
     });
 
     it('should trigger _updatePopover on message change ', () => {
         const updateSpy = spyOn(<any>service, '_updatePopover');
 
-        service.message = 'New Message'
+        service.message = 'New Message';
 
         expect(updateSpy).toHaveBeenCalled();
     });
@@ -46,7 +43,7 @@ describe('PopoverFormMessageService', () => {
     it('should trigger _updatePopover on message type change ', () => {
         const updateSpy = spyOn(<any>service, '_updatePopover');
 
-        service.messageType = 'information'
+        service.messageType = 'information';
 
         expect(updateSpy).toHaveBeenCalled();
     });
@@ -61,7 +58,7 @@ describe('PopoverFormMessageService', () => {
 
         expect(updateSpy).toHaveBeenCalled();
         expect((<any>service)._shouldBeHidden()).toBeTruthy();
-        expect((<any>service)._hidden).toBeTruthy()
+        expect((<any>service)._hidden).toBeTruthy();
     });
 
     it('should trigger _updatePopover and show', () => {

@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
     selector: 'app-action-list-item-header',
     templateUrl: './platform-action-list-item-header.component.html'
 })
-export class PlatformActionListItemHeaderComponent { }
+export class PlatformActionListItemHeaderComponent {}

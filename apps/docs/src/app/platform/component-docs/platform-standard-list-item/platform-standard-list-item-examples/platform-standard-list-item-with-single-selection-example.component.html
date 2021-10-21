@@ -1,10 +1,23 @@
 <fd-toolbar fdType="info" active="true">
-    <label fd-toolbar-label>{{_selectedItems}} : is selected</label>
+    <label fd-toolbar-label>{{ _selectedItems }} : is selected</label>
 </fd-toolbar>
-<fdp-list noBorder="true" selection="true" selectionMode="single" [(selectedItems)]="_selectedItems"
-    (selectedItemChange)="_showItemInfo($event)" [hasByLine]="true"
-    [ariaMultiselectable]="false" [ariaLabel]="_selectedItems ? _selectedItems +'selected': '0 Item selected'">
-    <fdp-standard-list-item *fdpItemDef="let address" [avatarSrc]="address.img" [avatarTitle]="address.imgInfo"
-        [description]="address.description" [secondary]="address.info" [title]="address.name">
+<fdp-list
+    noBorder="true"
+    selection="true"
+    selectionMode="single"
+    [(selectedItems)]="_selectedItems"
+    (selectedItemChange)="_showItemInfo($event)"
+    [hasByLine]="true"
+    [ariaMultiselectable]="false"
+    [ariaLabel]="_selectedItems ? _selectedItems + 'selected' : '0 Item selected'"
+>
+    <fdp-standard-list-item
+        *fdpItemDef="let address"
+        [avatarSrc]="address.img"
+        [avatarTitle]="address.imgInfo"
+        [description]="address.description"
+        [secondary]="address.info"
+        [title]="address.name"
+    >
     </fdp-standard-list-item>
 </fdp-list>

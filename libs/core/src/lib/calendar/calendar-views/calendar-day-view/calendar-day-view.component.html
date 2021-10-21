@@ -1,52 +1,26 @@
-<table
-    class="fd-calendar__table"
-    role="grid"
->
-    <thead
-        class="fd-calendar__group"
-        role="rowgroup"
-    >
-        <tr
-            class="fd-calendar__row"
-            role="row"
-        >
-            <th
-                class="fd-calendar__item fd-calendar__item--side-helper"
-                *ngIf="showWeekNumbers"
-            ></th>
+<table class="fd-calendar__table" role="grid">
+    <thead class="fd-calendar__group" role="rowgroup">
+        <tr class="fd-calendar__row" role="row">
+            <th class="fd-calendar__item fd-calendar__item--side-helper" *ngIf="showWeekNumbers"></th>
             <th
                 class="fd-calendar__item fd-calendar__item--side-helper"
                 role="columnheader"
                 [attr.aria-label]="day"
                 *ngFor="let day of shortWeekDays"
             >
-                <span
-                    class="fd-calendar__text"
-                    role="button"
-                >{{ day }}</span>
+                <span class="fd-calendar__text" role="button">{{ day }}</span>
             </th>
         </tr>
     </thead>
-    <tbody
-        class="fd-calendar__group"
-        role="rowgroup"
-    >
-        <tr
-            class="fd-calendar__row"
-            role="row"
-            *ngFor="let row of dayViewGrid; let rowIndex = index"
-        >
+    <tbody class="fd-calendar__group" role="rowgroup">
+        <tr class="fd-calendar__row" role="row" *ngFor="let row of dayViewGrid; let rowIndex = index">
             <th
                 class="fd-calendar__item fd-calendar__item--side-helper"
                 role="rowheader"
                 scope="row"
                 *ngIf="showWeekNumbers"
             >
-                <span
-                    class="fd-calendar__text"
-                    role="button"
-                    *ngIf="weeks && weeks[rowIndex]"
-                >{{
+                <span class="fd-calendar__text" role="button" *ngIf="weeks && weeks[rowIndex]">{{
                     weeks[rowIndex]
                 }}</span>
             </th>
@@ -72,25 +46,13 @@
                 (mouseenter)="refreshHoverRange(cell)"
                 (keydown)="onKeydownDayHandler($event, cell, getIndex(rowIndex, cellIndex))"
             >
-                <span
-                    class="fd-calendar__text"
-                    role="button"
-                    [attr.aria-label]="cell.ariaLabel"
-                >{{
-                    cell.label
-                }}</span>
+                <span class="fd-calendar__text" role="button" [attr.aria-label]="cell.ariaLabel">{{ cell.label }}</span>
             </td>
         </tr>
-        <tr
-            class="fd-calendar__row"
-            *ngIf="dayViewGrid.length <= 5"
-        >
+        <tr class="fd-calendar__row" *ngIf="dayViewGrid.length <= 5">
             <td class="fd-calendar__item hidden-day"></td>
         </tr>
-        <tr
-            class="fd-calendar__row"
-            *ngIf="dayViewGrid.length === 4"
-        >
+        <tr class="fd-calendar__row" *ngIf="dayViewGrid.length === 4">
             <td class="fd-calendar__item hidden-day"></td>
         </tr>
     </tbody>

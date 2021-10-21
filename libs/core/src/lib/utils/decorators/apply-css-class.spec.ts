@@ -76,18 +76,20 @@ describe('ButtonComponent', () => {
     let testDirectiveInstance: TestDirective;
     let buttonInstance: ButtonComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [CommonModule, ButtonModule],
-            declarations: [TestDirective, TestComponent, TestProxyComponent]
-        });
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CommonModule, ButtonModule],
+                declarations: [TestDirective, TestComponent, TestProxyComponent]
+            });
+        })
+    );
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(TestComponent);
         fixture.detectChanges();
-        buttonInstance = (fixture.componentInstance.element as unknown) as ButtonComponent;
-        testDirectiveInstance = (fixture.componentInstance.element as unknown) as TestDirective;
+        buttonInstance = fixture.componentInstance.element as unknown as ButtonComponent;
+        testDirectiveInstance = fixture.componentInstance.element as unknown as TestDirective;
     });
 
     beforeEach(() => {

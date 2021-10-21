@@ -31,13 +31,15 @@ describe('TokenizerComponent', () => {
     let component: TokenizerComponent;
     let fixture: ComponentFixture<HostComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [TokenModule],
-            declarations: [HostComponent, FormControlComponent],
-            providers: [RtlService, ContentDensityService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [TokenModule],
+                declarations: [HostComponent, FormControlComponent],
+                providers: [RtlService, ContentDensityService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(HostComponent);
@@ -111,11 +113,15 @@ describe('TokenizerComponent', () => {
 
     it('should select using control or command', () => {
         const event = new MouseEvent('click', {
-            'ctrlKey': true
+            ctrlKey: true
         });
         component.ngAfterViewChecked();
-        (component.tokenList.first.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(event);
-        (component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(event);
+        (component.tokenList.first.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(
+            event
+        );
+        (component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(
+            event
+        );
 
         expect(component.tokenList.first.selected).toBeTruthy();
         expect(component.tokenList.last.selected).toBeTruthy();
@@ -124,11 +130,17 @@ describe('TokenizerComponent', () => {
     it('should deselect using control or command', () => {
         component.ngAfterViewChecked();
         const event = new MouseEvent('click', {
-            'ctrlKey': true
+            ctrlKey: true
         });
-        (component.tokenList.first.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(event);
-        (component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(event);
-        (component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(event);
+        (component.tokenList.first.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(
+            event
+        );
+        (component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(
+            event
+        );
+        (component.tokenList.last.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(
+            event
+        );
 
         expect(component.tokenList.first.selected).toBeTruthy();
         expect(component.tokenList.last.selected).toBeFalsy();
@@ -137,10 +149,12 @@ describe('TokenizerComponent', () => {
     it('should select using shift', () => {
         component.ngAfterViewChecked();
         const event = new MouseEvent('click', {
-            'ctrlKey': false,
-            'shiftKey': true
+            ctrlKey: false,
+            shiftKey: true
         });
-        (component.tokenList.first.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(event);
+        (component.tokenList.first.elementRef.nativeElement.querySelector('.fd-token') as HTMLElement).dispatchEvent(
+            event
+        );
 
         expect(component.tokenList.first.selected).toBeTruthy();
     });
@@ -270,5 +284,5 @@ describe('TokenizerComponent', () => {
         await whenStable(fixture);
 
         expect(component.hiddenCozyTokenCount).toBe(3);
-    })
+    });
 });

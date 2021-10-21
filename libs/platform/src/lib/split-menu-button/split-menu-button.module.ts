@@ -8,6 +8,6 @@ import { SplitMenuButtonComponent } from './split-menu-button.component';
 @NgModule({
     declarations: [SplitMenuButtonComponent],
     imports: [ButtonModule, CommonModule, PlatformMenuModule],
-    exports: [SplitMenuButtonComponent],
+    exports: [SplitMenuButtonComponent]
 })
 export class PlatformSplitMenuButtonModule {}

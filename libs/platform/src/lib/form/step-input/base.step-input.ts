@@ -347,7 +347,7 @@ export abstract class StepInputComponent extends BaseInput implements OnInit {
             .pipe(takeUntil(this._destroyed))
             .subscribe(() => {
                 const oldValue = this.isErrorState;
-                this.isErrorState = this.status === 'error';
+                this.isErrorState = this.state === 'error';
                 if (this.isErrorState !== oldValue) {
                     this._cd.markForCheck();
                 }

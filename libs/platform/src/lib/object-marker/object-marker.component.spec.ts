@@ -8,8 +8,7 @@ import { PlatformObjectMarkerComponent } from './object-marker.component';
 
 @Component({
     selector: 'fdp-test-object-marker',
-    template: `
-        <fdp-object-marker [glyph]="glyph" [clickable]="clickable">Object marker</fdp-object-marker>`
+    template: ` <fdp-object-marker [glyph]="glyph" [clickable]="clickable">Object marker</fdp-object-marker>`
 })
 class TestPlatformPlatformObjectMarkerComponent {
     @ViewChild(PlatformObjectMarkerComponent, { static: true }) component: PlatformObjectMarkerComponent;
@@ -24,12 +23,14 @@ describe('PlatformObjectMarkerComponent', () => {
     let host: TestPlatformPlatformObjectMarkerComponent;
     let fixture: ComponentFixture<TestPlatformPlatformObjectMarkerComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ObjectMarkerModule],
-            declarations: [PlatformObjectMarkerComponent, TestPlatformPlatformObjectMarkerComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [ObjectMarkerModule],
+                declarations: [PlatformObjectMarkerComponent, TestPlatformPlatformObjectMarkerComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestPlatformPlatformObjectMarkerComponent);

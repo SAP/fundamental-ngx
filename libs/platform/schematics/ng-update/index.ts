@@ -28,62 +28,62 @@ export function ngUpdate(_options: any): Rule {
  */
 function readTranslationFiles(options: any): any {
     return async (tree: Tree, context: SchematicContext) => {
-      const readFilePromise = new Promise<Tree>((resolve, reject) => {
-        if (options.translations) {
-            try {
-                const angularJsonFile = tree.read('angular.json');
-                if (angularJsonFile) {
-                    const angularJsonFileObject = JSON.parse(angularJsonFile.toString('utf-8'));
-                    const project = options.project
-                        ? options.project
-                        : Object.keys(angularJsonFileObject['projects'])[0];
-                    // set default project path
-                    if (!options.project) {
-                        options.name = project;
-                    }
-                    const projectObject = angularJsonFileObject.projects[project];
-                    // todo get the languages supported from platform, and fetch from a separate file probably
-                    const languages = ['ar', 'fr'];
+        const readFilePromise = new Promise<Tree>((resolve, reject) => {
+            if (options.translations) {
+                try {
+                    const angularJsonFile = tree.read('angular.json');
+                    if (angularJsonFile) {
+                        const angularJsonFileObject = JSON.parse(angularJsonFile.toString('utf-8'));
+                        const project = options.project
+                            ? options.project
+                            : Object.keys(angularJsonFileObject['projects'])[0];
+                        // set default project path
+                        if (!options.project) {
+                            options.name = project;
+                        }
+                        const projectObject = angularJsonFileObject.projects[project];
+                        // todo get the languages supported from platform, and fetch from a separate file probably
+                        const languages = ['ar', 'fr'];
 
-                    let availableLanguages = 0;
-                    languages.forEach((language) => {
-                        if (projectObject.architect.build.configurations[language]) {
-                            availableLanguages++;
-                        }
-                    });
-                    languages.forEach(async (language) => {
-                        if (availableLanguages === 0 || languages.length > availableLanguages) {
-                            if (!projectObject.architect.build.configurations[language]) {
-                                context.logger.info(
-                                    'Adding translations for language "' +
-                                        language +
-                                        '" from ngx/platform to ' +
-                                        project
-                                );
-                                // not present, add the language settings to serve and build configurations in angular.json
-                                await writeToAngularConfig(tree, options, angularJsonFileObject, language);
-                                // create the extraction .xlf files from the platform lib and place in host app's locale folder
-                                await createExtractionFiles(tree, options, language);
+                        let availableLanguages = 0;
+                        languages.forEach((language) => {
+                            if (projectObject.architect.build.configurations[language]) {
+                                availableLanguages++;
                             }
-                        } else {
-                            const languageObject = projectObject.architect.build.configurations[language].i18nFile;
-                            const hostAppXlfContent = tree.read(languageObject.toString());
-                            if (hostAppXlfContent) {
-                                // merge the extraction .xlf files from the platform lib into the host app's files
-                                await updateExtractionFiles(tree, options, hostAppXlfContent, language);
+                        });
+                        languages.forEach(async (language) => {
+                            if (availableLanguages === 0 || languages.length > availableLanguages) {
+                                if (!projectObject.architect.build.configurations[language]) {
+                                    context.logger.info(
+                                        'Adding translations for language "' +
+                                            language +
+                                            '" from ngx/platform to ' +
+                                            project
+                                    );
+                                    // not present, add the language settings to serve and build configurations in angular.json
+                                    await writeToAngularConfig(tree, options, angularJsonFileObject, language);
+                                    // create the extraction .xlf files from the platform lib and place in host app's locale folder
+                                    await createExtractionFiles(tree, options, language);
+                                }
+                            } else {
+                                const languageObject = projectObject.architect.build.configurations[language].i18nFile;
+                                const hostAppXlfContent = tree.read(languageObject.toString());
+                                if (hostAppXlfContent) {
+                                    // merge the extraction .xlf files from the platform lib into the host app's files
+                                    await updateExtractionFiles(tree, options, hostAppXlfContent, language);
+                                }
                             }
-                        }
-                        resolve(tree);
-                    });
+                            resolve(tree);
+                        });
+                    }
+                } catch (e) {
+                    context.logger.log('info', e + '\n🚫 Failed to add translations correctly.');
+                    reject('failed');
                 }
-            } catch (e) {
-                context.logger.log('info', e + '\n🚫 Failed to add translations correctly.');
-                reject('failed');
             }
-        }
-      });
-      tree = await readFilePromise;
-      return tree;
+        });
+        tree = await readFilePromise;
+        return tree;
     };
 }
 

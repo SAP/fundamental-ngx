@@ -5,28 +5,25 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { PopoverComponent, PopoverModule, PopoverService } from '@fundamental-ngx/core/popover';
 
-
 describe('PopoverComponent', () => {
     let component: PopoverComponent;
     let fixture: ComponentFixture<PopoverComponent>;
     let popoverServiceStub: PopoverServiceStub;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [PopoverModule, OverlayModule, A11yModule],
-            providers: [
-                { provide: PopoverService, useClass: PopoverServiceStub }
-            ],
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PopoverModule, OverlayModule, A11yModule],
+                providers: [{ provide: PopoverService, useClass: PopoverServiceStub }]
+            })
+                .overrideComponent(PopoverComponent, {
+                    set: {
+                        providers: [{ provide: PopoverService, useClass: PopoverServiceStub }]
+                    }
+                })
+                .compileComponents();
         })
-        .overrideComponent(PopoverComponent, {
-            set: {
-                providers: [
-                    { provide: PopoverService, useClass: PopoverServiceStub }
-                ],
-            },
-        })
-        .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(PopoverComponent);
@@ -39,7 +36,7 @@ describe('PopoverComponent', () => {
         expect(component).toBeDefined();
     });
 
-    it ('should call close method when isOpen is true', () => {
+    it('should call close method when isOpen is true', () => {
         component.isOpen = true;
         spyOn(component, 'close').and.callFake(() => {});
 
@@ -48,7 +45,7 @@ describe('PopoverComponent', () => {
         expect(component.close).toHaveBeenCalled();
     });
 
-    it ('should call open method when isOpen is false', () => {
+    it('should call open method when isOpen is false', () => {
         component.isOpen = false;
         spyOn(component, 'open').and.callFake(() => {});
 
@@ -57,19 +54,18 @@ describe('PopoverComponent', () => {
         expect(component.open).toHaveBeenCalled();
     });
 
-    it ('should call _popoverService.refreshConfiguration from ngOnChanges', () => {
+    it('should call _popoverService.refreshConfiguration from ngOnChanges', () => {
         spyOn(popoverServiceStub, 'refreshConfiguration');
 
-        component.ngOnChanges({});
+        component.ngOnChanges();
 
         expect(popoverServiceStub.refreshConfiguration).toHaveBeenCalled();
     });
 
-    it ('should open popover', () => {
+    it('should open popover', () => {
         spyOn(popoverServiceStub, 'open');
         spyOn(component.isOpenChange, 'emit');
         component.isOpen = false;
-
 
         component.open();
 
@@ -78,7 +74,7 @@ describe('PopoverComponent', () => {
         expect(component.isOpen).toBe(true);
     });
 
-    it ('should close popover', () => {
+    it('should close popover', () => {
         spyOn(popoverServiceStub, 'close');
         spyOn(component.isOpenChange, 'emit');
         component.isOpen = true;
@@ -90,7 +86,7 @@ describe('PopoverComponent', () => {
         expect(component.isOpen).toBe(false);
     });
 
-    it ('should add ne wposition', () => {
+    it('should add ne wposition', () => {
         spyOn(popoverServiceStub, 'applyNewPosition');
 
         component.applyNewPosition([]);
@@ -98,7 +94,7 @@ describe('PopoverComponent', () => {
         expect(popoverServiceStub.applyNewPosition).toHaveBeenCalled();
     });
 
-    it ('should update popover', () => {
+    it('should update popover', () => {
         spyOn(component, 'refreshPosition');
 
         component.updatePopover();
@@ -106,7 +102,7 @@ describe('PopoverComponent', () => {
         expect(component.refreshPosition).toHaveBeenCalled();
     });
 
-    it ('should refresh position', () => {
+    it('should refresh position', () => {
         spyOn(popoverServiceStub, 'refreshPosition');
 
         component.refreshPosition();
@@ -114,12 +110,12 @@ describe('PopoverComponent', () => {
         expect(popoverServiceStub.refreshPosition).toHaveBeenCalled();
     });
 
-    it ('should trigger keydown handler', () => {
+    it('should trigger keydown handler', () => {
         const event = {
             altKey: 'test-down-arrow',
             keyCode: DOWN_ARROW,
             preventDefault: () => {},
-            stopPropagation: () => {},
+            stopPropagation: () => {}
         } as any;
         component.disabled = false;
         spyOn(component, 'open');

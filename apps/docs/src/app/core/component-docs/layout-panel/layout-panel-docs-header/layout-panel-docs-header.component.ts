@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './layout-panel-docs-header.component.html',
     styleUrls: ['./layout-panel-docs-header.component.scss']
 })
-export class LayoutPanelDocsHeaderComponent { }
+export class LayoutPanelDocsHeaderComponent {}

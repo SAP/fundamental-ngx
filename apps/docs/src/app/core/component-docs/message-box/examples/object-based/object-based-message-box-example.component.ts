@@ -30,7 +30,7 @@ export class ObjectBasedMessageBoxExampleComponent {
         };
 
         const messageBoxRef = this._messageBoxService.open(content, {
-            ariaLabelledBy: 'fd-message-box-object-based-header fd-message-box-object-based-body',
+            ariaLabelledBy: 'fd-message-box-object-based-header fd-message-box-object-based-body'
         });
 
         messageBoxRef.afterClosed.subscribe(

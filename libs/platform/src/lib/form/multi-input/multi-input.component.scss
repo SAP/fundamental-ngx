@@ -11,9 +11,12 @@
 .fdp-multi-input {
     &__list-container {
         &.fd-popover__popper {
-            width: 100% ;
+            width: 100%;
             overflow: hidden;
-			position: relative;
+            position: relative;
         }
     }
+}
+.fdp-multi-input__invisible-text {
+    display: none !important;
 }

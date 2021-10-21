@@ -16,7 +16,8 @@ export class NotificationGroupExampleComponent {
             indicator: 'success',
             title: 'Your leave request has been accepted',
             unread: false,
-            paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+            paragraph:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
             footerContent1: 'SAP Analytics Cloud',
             footerContent2: '7 minutes ago',
             actionButton: 'Accept'
@@ -26,12 +27,13 @@ export class NotificationGroupExampleComponent {
             indicator: 'success',
             title: 'Your leave request has been accepted',
             unread: true,
-            paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+            paragraph:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
             footerContent1: 'SAP Analytics Cloud',
             footerContent2: '7 minutes ago',
             actionButton: 'Accept'
         }
-    ]
+    ];
 
     notificationsWarning = [
         {
@@ -54,5 +56,5 @@ export class NotificationGroupExampleComponent {
             footerContent2: '2 days ago',
             actionButton: 'Accept'
         }
-    ]
+    ];
 }

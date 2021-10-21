@@ -6,8 +6,8 @@ import { SliderModule } from '@fundamental-ngx/core/slider';
 import { SliderComponent } from './slider.component';
 
 @NgModule({
-  declarations: [SliderComponent],
-  imports: [CommonModule, SliderModule, FormsModule],
-  exports: [SliderComponent]
+    declarations: [SliderComponent],
+    imports: [CommonModule, SliderModule, FormsModule],
+    exports: [SliderComponent]
 })
-export class PlatformSliderModule { }
+export class PlatformSliderModule {}

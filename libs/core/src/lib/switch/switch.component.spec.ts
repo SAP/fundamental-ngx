@@ -12,13 +12,15 @@ describe('SwitchComponent', () => {
     let changeDetectorRef: ChangeDetectorRef;
     let input;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [CommonModule, FormsModule],
-            declarations: [SwitchComponent],
-            providers: [ContentDensityService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CommonModule, FormsModule],
+                declarations: [SwitchComponent],
+                providers: [ContentDensityService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SwitchComponent);
@@ -60,14 +62,11 @@ describe('SwitchComponent', () => {
         expect(input.getAttribute('ng-reflect-name')).toEqual(component.name);
     });
 
-
-
     it('should auto-generate id', () => {
         expect(component.id).toBeTruthy();
     });
 
     it('should switch on click', fakeAsync(() => {
-
         const checkedChangeSpy = spyOn(component.checkedChange, 'emit');
 
         component.isChecked = true;

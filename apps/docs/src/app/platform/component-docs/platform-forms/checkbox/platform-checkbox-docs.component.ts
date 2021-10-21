@@ -100,5 +100,5 @@ export class PlatformCheckboxDocsComponent {
             fileName: 'platform-checkbox-a11y',
             component: 'PlatformChekboxA11yExampleComponent'
         }
-    ]
+    ];
 }

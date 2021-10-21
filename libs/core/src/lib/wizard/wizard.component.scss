@@ -1,7 +1,6 @@
 @import '~fundamental-styles/dist/wizard';
 
 @mixin fd-wizard-responsive-paddings() {
-
     @media (max-width: 599px) {
         padding-left: 1rem;
         padding-right: 1rem;
@@ -24,7 +23,7 @@ $block: 'fd-wizard';
     &__label,
     &__optional-text {
         display: block;
-    display: -webkit-box;
+        display: -webkit-box;
     }
 
     &-container-wrapper {
@@ -39,7 +38,6 @@ $block: 'fd-wizard';
             }
 
             .fd-bar--floating-footer {
-
             }
         }
     }

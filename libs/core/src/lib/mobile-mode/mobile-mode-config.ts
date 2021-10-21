@@ -1,7 +1,6 @@
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 
 export interface MobileModeConfig {
-
     /** Dialog Title */
     title?: string;
 

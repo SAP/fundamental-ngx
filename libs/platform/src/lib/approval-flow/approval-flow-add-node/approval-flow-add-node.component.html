@@ -24,18 +24,12 @@
                 </ng-container>
 
                 <ng-container *ngIf="viewService.isTeamMembersMode">
-                    <fd-icon
-                        [glyph]="_headerArrowGlyph"
-                        (click)="_exitTeamMembersMode()"
-                    ></fd-icon>
+                    <fd-icon [glyph]="_headerArrowGlyph" (click)="_exitTeamMembersMode()"></fd-icon>
                     {{ viewService.team.name }} ({{ viewService.team.members.length }})
                 </ng-container>
 
                 <ng-container *ngIf="viewService.isUserDetailsMode">
-                    <fd-icon
-                        [glyph]="_headerArrowGlyph"
-                        (click)="_exitUserDetailsMode()"
-                    ></fd-icon>
+                    <fd-icon [glyph]="_headerArrowGlyph" (click)="_exitUserDetailsMode()"></fd-icon>
                     <ng-container i18n="@@platformApprovalFlowAddNodeDialogUserDetailHeader">Detail</ng-container>
                 </ng-container>
             </p>
@@ -59,18 +53,20 @@
 
                 <fd-select [compact]="true" [(value)]="_nodeType">
                     <ng-container *ngFor="let option of _nodeTypesArray; trackBy: _trackByFn">
-                        <ng-container [ngSwitch]='option'>
+                        <ng-container [ngSwitch]="option">
                             <fd-option
                                 *ngSwitchCase="_nodeTypes.SERIAL"
                                 [value]="option"
-                                i18n="@@platformApprovalFlowAddNodeDialogNodeTypeSerial">
+                                i18n="@@platformApprovalFlowAddNodeDialogNodeTypeSerial"
+                            >
                                 Serial
                             </fd-option>
 
                             <fd-option
                                 *ngSwitchCase="_nodeTypes.PARALLEL"
                                 [value]="option"
-                                i18n="@@platformApprovalFlowAddNodeDialogNodeTypeParallel">
+                                i18n="@@platformApprovalFlowAddNodeDialogNodeTypeParallel"
+                            >
                                 Parallel
                             </fd-option>
                         </ng-container>
@@ -83,25 +79,28 @@
 
                 <fd-select [compact]="true" [(value)]="_approverType">
                     <ng-container *ngFor="let option of _approverTypesArray; trackBy: _trackByFn">
-                        <ng-container [ngSwitch]='option'>
+                        <ng-container [ngSwitch]="option">
                             <fd-option
-                                *ngSwitchCase='_approverTypes.SINGLE_USER'
+                                *ngSwitchCase="_approverTypes.SINGLE_USER"
                                 [value]="option"
-                                i18n="platformApprovalFlowAddNodeDialogApproverTypeUser">
+                                i18n="platformApprovalFlowAddNodeDialogApproverTypeUser"
+                            >
                                 A user
                             </fd-option>
 
                             <fd-option
-                                *ngSwitchCase='_approverTypes.ANYONE'
+                                *ngSwitchCase="_approverTypes.ANYONE"
                                 [value]="option"
-                                i18n="platformApprovalFlowAddNodeDialogApproverTypeTeamAnyone">
+                                i18n="platformApprovalFlowAddNodeDialogApproverTypeTeamAnyone"
+                            >
                                 Anyone on the team
                             </fd-option>
 
                             <fd-option
-                                *ngSwitchCase='_approverTypes.EVERYONE'
+                                *ngSwitchCase="_approverTypes.EVERYONE"
                                 [value]="option"
-                                i18n="platformApprovalFlowAddNodeDialogApproverTypeTeamEveryone">
+                                i18n="platformApprovalFlowAddNodeDialogApproverTypeTeamEveryone"
+                            >
                                 Everyone on the team
                             </fd-option>
                         </ng-container>
@@ -133,9 +132,9 @@
             </div>
 
             <div *ngIf="_nodeType === _nodeTypes.PARALLEL" fd-form-item>
-                <fd-checkbox
-                    [(ngModel)]="_addToNextSerial"
-                    i18n="@@platformApprovalFlowAddToNext">Add to the next serial node</fd-checkbox>
+                <fd-checkbox [(ngModel)]="_addToNextSerial" i18n="@@platformApprovalFlowAddToNext"
+                    >Add to the next serial node</fd-checkbox
+                >
             </div>
 
             <div *ngIf="_checkDueDate" fd-form-item>
@@ -145,7 +144,8 @@
                     type="single"
                     compact="true"
                     [state]="!this._dueDate ? 'error' : ''"
-                    [(ngModel)]="_dueDate">
+                    [(ngModel)]="_dueDate"
+                >
                 </fd-date-picker>
             </div>
         </ng-container>
@@ -189,8 +189,8 @@
                     label="Add"
                     [compact]="true"
                     [disabled]="_isMainSubmitButtonDisabled"
-                    (click)="_submit()">
-                </button>
+                    (click)="_submit()"
+                ></button>
             </fd-dialog-footer-button>
 
             <fd-dialog-footer-button>
@@ -202,8 +202,8 @@
                     i18n-label="platformApprovalFlowDialogButtonCancel"
                     label="Cancel"
                     [compact]="true"
-                    (click)="dialogRef.close()">
-                </button>
+                    (click)="dialogRef.close()"
+                ></button>
             </fd-dialog-footer-button>
         </ng-container>
 
@@ -217,8 +217,8 @@
                         label="Select"
                         [compact]="true"
                         [disabled]="!_selectedApprovers.length"
-                        (click)="_confirmSelectedApprovers()">
-                    </button>
+                        (click)="_confirmSelectedApprovers()"
+                    ></button>
                 </fd-dialog-footer-button>
 
                 <fd-dialog-footer-button>
@@ -229,8 +229,8 @@
                         i18n-label="platformApprovalFlowDialogButtonCancel"
                         label="Cancel"
                         [compact]="true"
-                        (click)="_exitSelectMode()">
-                    </button>
+                        (click)="_exitSelectMode()"
+                    ></button>
                 </fd-dialog-footer-button>
             </ng-container>
 
@@ -243,8 +243,8 @@
                         label="Add"
                         [compact]="true"
                         [disabled]="!_selectedTeam && !viewService.team"
-                        (click)="_confirmSelectedTeam()">
-                    </button>
+                        (click)="_confirmSelectedTeam()"
+                    ></button>
                 </fd-dialog-footer-button>
 
                 <fd-dialog-footer-button>
@@ -255,8 +255,8 @@
                         i18n-label="platformApprovalFlowDialogButtonCancel"
                         label="Cancel"
                         [compact]="true"
-                        (click)="_exitSelectMode()">
-                    </button>
+                        (click)="_exitSelectMode()"
+                    ></button>
                 </fd-dialog-footer-button>
             </ng-container>
 
@@ -269,8 +269,8 @@
                         i18n-label="platformApprovalFlowDialogButtonClose"
                         label="Close"
                         [compact]="true"
-                        (click)="_exitTeamMembersMode()">
-                    </button>
+                        (click)="_exitTeamMembersMode()"
+                    ></button>
                 </fd-dialog-footer-button>
             </ng-container>
 
@@ -283,8 +283,8 @@
                         i18n-label="platformApprovalFlowDialogButtonClose"
                         label="Close"
                         [compact]="true"
-                        (click)="_exitUserDetailsMode()">
-                    </button>
+                        (click)="_exitUserDetailsMode()"
+                    ></button>
                 </fd-dialog-footer-button>
             </ng-container>
         </ng-container>

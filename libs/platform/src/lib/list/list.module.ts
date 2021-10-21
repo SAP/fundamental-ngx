@@ -20,8 +20,7 @@ import { ListItemDef } from './base-list-item';
         ListModule,
         BusyIndicatorModule,
         InfiniteScrollModule
-
     ],
     exports: [ListComponent, ListFooter, ListGroupHeader, ListItemDef]
 })
-export class PlatformListModule { }
+export class PlatformListModule {}

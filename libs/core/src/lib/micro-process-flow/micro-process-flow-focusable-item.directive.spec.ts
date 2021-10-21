@@ -9,7 +9,10 @@ import { MicroProcessFlowComponent } from './components/micro-process-flow/micro
     template: `
         <fd-micro-process-flow>
             <fd-micro-process-flow-item>
-                <fd-micro-process-flow-icon fd-micro-process-flow-focusable-item glyph="product"></fd-micro-process-flow-icon>
+                <fd-micro-process-flow-icon
+                    fd-micro-process-flow-focusable-item
+                    glyph="product"
+                ></fd-micro-process-flow-icon>
             </fd-micro-process-flow-item>
         </fd-micro-process-flow>
     `
@@ -26,12 +29,14 @@ describe('MicroProcessFlowFocusableItemDirective', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [MicroProcessFlowModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [MicroProcessFlowModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

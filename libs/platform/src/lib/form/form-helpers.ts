@@ -17,12 +17,7 @@ export function isFieldGroupChild(child: unknown): child is FormFieldGroupCompon
 }
 
 export function getField(field: FormField): Field {
-    return new Field(
-        field.id,
-        field.rank,
-        field.renderer,
-        field.column,
-    );
+    return new Field(field.id, field.rank, field.renderer, field.column);
 }
 
 export class Field {
@@ -30,13 +25,10 @@ export class Field {
         public name?: string,
         public rank?: number,
         public renderer?: TemplateRef<any>,
-        public column?: number,
+        public column?: number
     ) {}
 }
 
 export class FieldGroup {
-    constructor(
-        public label: string,
-        public fields: FieldColumn,
-    ) {}
+    constructor(public label: string, public fields: FieldColumn) {}
 }

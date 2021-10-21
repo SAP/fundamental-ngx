@@ -273,7 +273,6 @@ describe('ResizableCardLayoutComponent', () => {
 
         expect(cards[3].left).toEqual(352);
         expect(cards[3].top).toEqual(320);
-
     });
 
     it('should layout cards again on changing height of any card', () => {
@@ -384,7 +383,6 @@ describe('ResizableCardLayoutComponent', () => {
 
         expect(cards[3].left).toEqual(352);
         expect(cards[3].top).toEqual(384);
-
 
         // increase width of card 2 again
         const mouseEvent3 = new MouseEvent('changeWidth', { clientX: 7, clientY: 20 });

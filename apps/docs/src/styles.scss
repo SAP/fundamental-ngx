@@ -1,50 +1,50 @@
 // @import url("../../../node_modules/fundamental-styles/dist/fundamental-styles.css");
-@import "~fundamental-styles/dist/info-label.css";
+@import '~fundamental-styles/dist/info-label.css';
+@import '~fundamental-styles/dist/form-layout-grid.css';
 
 $gutter-size: 15px;
 
 @font-face {
-    font-family: "72";
-    src: url("~@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/72-Regular-full.woff")
-        format("woff");
+    font-family: '72';
+    src: url('~@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/72-Regular-full.woff')
+        format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "72";
-    src: url("~@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/72-Light.woff")
-        format("woff");
+    font-family: '72';
+    src: url('~@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/72-Light.woff') format('woff');
     font-weight: 300;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "72";
-    src: url("~@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/72-Bold.woff")
-        format("woff");
+    font-family: '72';
+    src: url('~@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/72-Bold.woff') format('woff');
     font-weight: 700;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "SAP-icons";
-    src: url("~@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/SAP-icons.woff")
-        format("woff");
+    font-family: 'SAP-icons';
+    src: url('~@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/SAP-icons.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "BusinessSuiteInAppSymbols";
-    src: url("~@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/BusinessSuiteInAppSymbols.woff") format("woff");
+    font-family: 'BusinessSuiteInAppSymbols';
+    src: url('~@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/BusinessSuiteInAppSymbols.woff')
+        format('woff');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "SAP-icons-TNT";
-    src: url("~@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/SAP-icons-TNT.woff") format("woff");
+    font-family: 'SAP-icons-TNT';
+    src: url('~@sap-theming/theming-base-content/content/Base/baseLib/baseTheme/fonts/SAP-icons-TNT.woff')
+        format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -66,7 +66,7 @@ body {
 body {
     margin: 0;
     background-color: white;
-    font-family: "72", sans-serif;
+    font-family: '72', sans-serif;
 }
 
 .container {
@@ -133,8 +133,8 @@ fd-card {
     margin-right: 4px;
 
     @at-root {
-        [dir="rtl"] &,
-        &[dir="rtl"] {
+        [dir='rtl'] &,
+        &[dir='rtl'] {
             margin-right: 0;
             margin-left: 4px;
             transform: rotate(180deg);
@@ -145,8 +145,8 @@ fd-card {
 
 .middle-marker-container {
     @at-root {
-        [dir="rtl"] &,
-        &[dir="rtl"] {
+        [dir='rtl'] &,
+        &[dir='rtl'] {
             right: initial !important;
             left: 0 !important;
         }
@@ -293,21 +293,21 @@ body {
 }
 
 .fd-docs--toolbar {
-	.fd-shellbar__product {
-		margin: 0 0.5rem;
-	}
+    .fd-shellbar__product {
+        margin: 0 0.5rem;
+    }
 
-	.fd-shellbar--s {
-		.fd-shellbar__product {
-			margin: 0;
-		}
-	}
+    .fd-shellbar--s {
+        .fd-shellbar__product {
+            margin: 0;
+        }
+    }
 
-	.fd-shellbar__action--mobile {
-		display: none !important;
-	}
+    .fd-shellbar__action--mobile {
+        display: none !important;
+    }
 
-	.fd-shellbar__action--desktop {
-		display: flex !important;
-	}
+    .fd-shellbar__action--desktop {
+        display: flex !important;
+    }
 }

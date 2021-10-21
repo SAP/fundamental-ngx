@@ -33,12 +33,14 @@ import * as externalNavigationTsExample from '!raw-loader!./examples/wizard-gene
 
 import * as summaryObjectsHtmlExample from '!raw-loader!./examples/wizard-generator-summary-objects-example.component.html';
 import * as summaryObjectsTsExample from '!raw-loader!./examples/wizard-generator-summary-objects-example.component.ts';
+
+import * as interactionHtmlExample from '!raw-loader!./examples/wizard-generator-onchange-example.component.html';
+import * as interactionTsExample from '!raw-loader!./examples/wizard-generator-onchange-example.component.ts';
 @Component({
     selector: 'fdp-platform-wizard-generator-docs',
     templateUrl: './platform-wizard-generator-docs.component.html'
 })
 export class PlatformWizardGeneratorDocsComponent {
-
     defaultExample: ExampleFile[] = [
         {
             language: 'html',
@@ -193,5 +195,19 @@ export class PlatformWizardGeneratorDocsComponent {
         }
     ];
 
-    constructor() { }
+    fieldsInteractionExample: ExampleFile[] = [
+        {
+            language: 'html',
+            code: interactionHtmlExample,
+            fileName: 'wizard-generator-onchange-example'
+        },
+        {
+            language: 'typescript',
+            code: interactionTsExample,
+            fileName: 'wizard-generator-onchange-example',
+            component: 'WizardGeneratorOnchangeExampleComponent'
+        }
+    ];
+
+    constructor() {}
 }

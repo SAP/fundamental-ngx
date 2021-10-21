@@ -13,6 +13,7 @@ import {
     SkipSelf,
     TemplateRef,
     ViewChild,
+    ViewContainerRef,
     ViewEncapsulation
 } from '@angular/core';
 import { NgControl, NgForm } from '@angular/forms';
@@ -28,12 +29,13 @@ import {
     DataProvider,
     FormField,
     FormFieldControl,
-    OptionItem,
-    SelectableOptionItem
+    OptionItem
 } from '@fundamental-ngx/platform/shared';
+
 import { BaseCombobox, ComboboxSelectionChangeEvent } from '../commons/base-combobox';
 import { ComboboxConfig } from '../combobox.config';
 import { ComboboxMobileComponent } from '../combobox-mobile/combobox/combobox-mobile.component';
+import { PlatformComboboxMobileModule } from '../combobox-mobile/combobox-mobile.module';
 import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
 
 @Component({
@@ -47,7 +49,7 @@ import { COMBOBOX_COMPONENT, ComboboxInterface } from '../combobox.interface';
 export class ComboboxComponent extends BaseCombobox implements ComboboxInterface, OnInit, AfterViewInit {
     /** @hidden */
     @ViewChild('searchInputElement')
-    searchInputElement: ElementRef;
+    searchInputElement: ElementRef<HTMLInputElement>;
 
     /** @hidden */
     @ViewChild(CdkConnectedOverlay)
@@ -64,21 +66,8 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
     /** @hidden */
     _selectedElement?: OptionItem;
 
-    /** @hidden
-     * List of selected suggestions
-     * */
-    _selected: SelectableOptionItem[] = [];
-
     /** @hidden */
     private _direction: Direction = 'ltr';
-
-    /** @hidden */
-    private _timeout: any;
-
-    /** @hidden */
-    get isGroup(): boolean {
-        return !!(this.group && this.groupKey);
-    }
 
     constructor(
         readonly cd: ChangeDetectorRef,
@@ -87,6 +76,8 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         @Optional() @Self() readonly ngForm: NgForm,
         @Optional() readonly dialogConfig: DialogConfig,
         readonly _dynamicComponentService: DynamicComponentService,
+        private readonly _viewContainerRef: ViewContainerRef,
+        private readonly _injector: Injector,
         @Optional() @Inject(DATA_PROVIDERS) private providers: Map<string, DataProvider<any>>,
         readonly _comboboxConfig: ComboboxConfig,
         @Optional() private _rtlService: RtlService,
@@ -111,7 +102,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
 
         this._rtlService?.rtl
             .pipe(takeUntil(this._destroyed))
-            .subscribe(isRtl => this._direction = isRtl ? 'rtl' : 'ltr');
+            .subscribe((isRtl) => (this._direction = isRtl ? 'rtl' : 'ltr'));
 
         if (this._connectedOverlay) {
             this._connectedOverlay.attach
@@ -134,7 +125,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
             }
         }
 
-        if (this._selectedElement && this._selectedElement.label === this.inputText) {
+        if ((!this._selectedElement && !this.inputText) || this._selectedElement?.label === this.inputText) {
             return;
         }
 
@@ -143,18 +134,14 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         this._updateModel(optionItem ? optionItem.value : this.inputText);
     }
 
-    /** @hidden
-     * Method to emit change event
-     */
+    /** @hidden Method to emit change event */
     emitChangeEvent<T>(modelValue: T): void {
         const event = new ComboboxSelectionChangeEvent(this, modelValue);
 
         this.selectionChange.emit(event);
     }
 
-    /** @hidden
-     * Method to set selected item
-     */
+    /** @hidden Method to set selected item */
     selectOptionItem(item: OptionItem): void {
         if (this.mobile) {
             this._selectedElement = item;
@@ -169,9 +156,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         this.showList(false);
     }
 
-    /** @hidden
-     * Method to set as selected
-     */
+    /** @hidden Method to set as selected */
     setAsSelected(item: OptionItem[]): void {
         const selectedItem = item[0];
 
@@ -179,28 +164,26 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
             return;
         }
 
-        this._selectedElement = this.isGroup ? selectedItem.children ? selectedItem.children[0] : selectedItem : selectedItem;
+        this._selectedElement = (this.isGroup && selectedItem?.children[0]) || selectedItem;
         this.inputText = this.displayValue(this._selectedElement);
     }
 
-    /** @hidden
-     * Define is selected item selected
-     */
+    /** @hidden Define is selected item selected */
     isSelectedOptionItem(selectedItem: any): boolean {
-        return this.lookupKey && this.lookupValue(this._selectedElement) === this.lookupValue(selectedItem) ||
-            this.displayValue(this._selectedElement) === this.displayValue(selectedItem);
+        return (
+            (this.lookupKey && this.lookupValue(this._selectedElement) === this.lookupValue(selectedItem)) ||
+            this.displayValue(this._selectedElement) === this.displayValue(selectedItem)
+        );
     }
 
-    /** @hidden
-     * Define is selected item selected by display value
-     */
+    /** @hidden Define is selected item selected by display value */
     isSelectedOptionItemByDisplayValue(selectedItem: any): boolean {
-        return this._selectedElement && this._selectedElement.label === selectedItem;
+        return this._selectedElement?.label === selectedItem;
     }
 
     /** Handle dialog dismissing, closes popover and sets backup data. */
     dialogDismiss(term: string): void {
-        if (this._selectedElement && term !== this._selectedElement.label) {
+        if (this._selectedElement?.label !== term) {
             this._selectedElement = this._getSelectedOptionItem(term);
         }
 
@@ -210,7 +193,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
 
     /** Handle dialog approval, closes popover and propagates data changes. */
     dialogApprove(): void {
-        if (this._selectedElement && this._selectedElement.label === this.inputText) {
+        if (this._selectedElement?.label === this.inputText) {
             this._updateModel(this._selectedElement.value);
         } else {
             const optionItem = this._getSelectedOptionItem(this.inputText);
@@ -221,9 +204,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         this.showList(false);
     }
 
-    /** @hidden
-     * if not selected update model
-     */
+    /** @hidden if not selected update model */
     private _checkAndUpdate(modelValue: OptionItem): void {
         if (this.isSelectedOptionItem(modelValue)) {
             return;
@@ -234,9 +215,7 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
         this._updateModel(optionItem ? optionItem.value : this.inputText);
     }
 
-    /** @hidden
-     * Update model
-     */
+    /** @hidden Update model */
     private _updateModel(value: any): void {
         // setting value, it will call setValue()
         this.value = value;
@@ -245,18 +224,25 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
     }
 
     /** @hidden */
-    private _setUpMobileMode(): void {
-        this._dynamicComponentService.createDynamicComponent(
+    private async _setUpMobileMode(): Promise<void> {
+        const injector = Injector.create({
+            providers: [{ provide: COMBOBOX_COMPONENT, useValue: this }],
+            parent: this._injector
+        });
+
+        await this._dynamicComponentService.createDynamicModule(
             { listTemplate: this.listTemplate, controlTemplate: this.controlTemplate },
+            PlatformComboboxMobileModule,
             ComboboxMobileComponent,
-            { container: this.elementRef.nativeElement },
-            { injector: Injector.create({ providers: [{ provide: COMBOBOX_COMPONENT, useValue: this }] }) }
+            this._viewContainerRef,
+            injector
         );
     }
+
     /** @hidden */
     private _getSelectedOptionItem(text: string): OptionItem | undefined {
         if (!this.isGroup) {
-            return this._suggestions.find(item => item.label === text);
+            return this._suggestions.find((item) => item.label === text);
         }
 
         return this._suggestions
@@ -265,35 +251,6 @@ export class ComboboxComponent extends BaseCombobox implements ComboboxInterface
 
                 return result;
             }, [])
-            .find(item => item.label === text);
-    }
-
-    /** Handle dialog error */
-    validateOnKeyup(event: KeyboardEvent): void {
-        const isPrintableKey = event.key?.length === 1;
-        if (!event.shiftKey && !isPrintableKey) {
-            return;
-        }
-
-        if (this.inputText && this._isListEmpty) {
-            this.inputText = this.inputText.slice(0, -1);
-            this._isSearchInvalid = true;
-            this.state = 'error';
-            this.inputText ? this.showList(true) : this.showList(false);
-            this.searchTermChanged('');
-
-            if (this._timeout) {
-                clearTimeout(this._timeout);
-            }
-            const threeSeconds = 3000;
-            this._timeout = setTimeout(() => {
-                this._isSearchInvalid = false;
-                this.state = 'default';
-                this.cd.markForCheck();
-            }, threeSeconds);
-        } else {
-            this._isSearchInvalid = false;
-            this.state = 'default';
-        }
+            .find((item) => item.label === text);
     }
 }

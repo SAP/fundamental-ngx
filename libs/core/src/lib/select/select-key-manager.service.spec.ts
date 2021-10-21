@@ -7,17 +7,16 @@ import { SelectModule } from './select.module';
 
 @Component({
     template: `
-    <fd-select [(value)]="value" formControlName="selectControl" (isOpenChange)="onOpen($event)">
-        <fd-option id="option-1" [value]="'value-1'">Test1</fd-option>
-        <fd-option id="option-2" [value]="'value-2'">Test2</fd-option>
-        <fd-option id="option-3" [value]="'value-3'">Test3</fd-option>
-        <fd-option id="option-4" [disabled]="disabled" [value]="'value-4'">Test4</fd-option>
-    </fd-select>
-`,
+        <fd-select [(value)]="value" formControlName="selectControl" (isOpenChange)="onOpen($event)">
+            <fd-option id="option-1" [value]="'value-1'">Test1</fd-option>
+            <fd-option id="option-2" [value]="'value-2'">Test2</fd-option>
+            <fd-option id="option-3" [value]="'value-3'">Test3</fd-option>
+            <fd-option id="option-4" [disabled]="disabled" [value]="'value-4'">Test4</fd-option>
+        </fd-select>
+    `,
     providers: [SelectKeyManagerService]
 })
 class SelectTestComponent {
-
     @ViewChild(SelectComponent, { static: true })
     selectComponent: SelectComponent;
 
@@ -44,7 +43,6 @@ describe('SelectKeyManagerService', () => {
         key: 'ArrowUp'
     });
 
-
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [SelectModule],
@@ -63,7 +61,6 @@ describe('SelectKeyManagerService', () => {
     });
 
     it('should intialize the key manager', () => {
-
         service._initKeyManager(_component.selectComponent);
         fixture.detectChanges();
         expect(service._keyManager).not.toBeUndefined();
@@ -76,7 +73,7 @@ describe('SelectKeyManagerService', () => {
 
         fixture.detectChanges();
 
-        expect((service)._handleClosedKeydown).toHaveBeenCalled();
+        expect(service._handleClosedKeydown).toHaveBeenCalled();
     });
 
     it('should call _handleOpenKeydown on key press', () => {
@@ -88,7 +85,6 @@ describe('SelectKeyManagerService', () => {
 
         fixture.detectChanges();
 
-        expect((service)._handleOpenKeydown).toHaveBeenCalled();
+        expect(service._handleOpenKeydown).toHaveBeenCalled();
     });
-
 });

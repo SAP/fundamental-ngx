@@ -9,7 +9,6 @@ import * as iconBusinessSuiteInAppSymbolsSrc from '!raw-loader!./examples/icon-b
     templateUrl: './icon-docs.component.html'
 })
 export class IconDocsComponent {
-
     iconExample: ExampleFile[] = [
         {
             language: 'html',

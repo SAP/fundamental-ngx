@@ -6,7 +6,7 @@ import {
     ElementRef,
     Host,
     Input,
-    OnChanges,
+    isDevMode,
     OnDestroy,
     OnInit,
     Optional,
@@ -19,8 +19,11 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
 
 import { BaseComponent } from '../base';
-import { FormFieldControl, Status } from './form-control';
+import { FormFieldControl } from './form-control';
+import { ControlState } from './form-options';
 import { FormField } from './form-field';
+import { SafeHtml } from '@angular/platform-browser';
+import { isValidControlState } from './../utils/form';
 
 let randomId = 0;
 
@@ -36,8 +39,10 @@ let randomId = 0;
  * that e.g. placeholder will change after component is created
  */
 @Directive()
-export abstract class BaseInput extends BaseComponent
-    implements FormFieldControl<any>, ControlValueAccessor, OnInit, OnChanges, DoCheck, AfterViewInit, OnDestroy {
+export abstract class BaseInput
+    extends BaseComponent
+    implements FormFieldControl<any>, ControlValueAccessor, OnInit, DoCheck, AfterViewInit, OnDestroy
+{
     protected defaultId = `fdp-input-id-${randomId++}`;
     protected _disabled: boolean;
     protected _value: any;
@@ -50,15 +55,34 @@ export abstract class BaseInput extends BaseComponent
     /**
      *  The state of the form control - applies css classes.
      *  Can be 'success', 'error', 'warning', 'default', 'information'.
+     *
+     * @default 'default'
      */
     @Input()
-    // state: Status = 'default';
-    get state(): Status {
-        return this._state;
+    get state(): ControlState {
+        if (this._state) {
+            return this._state;
+        }
+        return this.controlInvalid ? 'error' : 'default';
     }
-    set state(state: Status) {
-        this._state = state || 'default';
+
+    set state(state: ControlState) {
+        if (!state || isValidControlState(state)) {
+            this._state = state || 'default';
+        } else if (isDevMode()) {
+            console.warn(`Provided value "${state}" is not a valid option for ControlState type`);
+        }
     }
+
+    /** Holds the message with respect to state */
+    @Input()
+    stateMessage: string | SafeHtml;
+    /**
+     * @hidden
+     *  The state of the form control - applies css classes.
+     *  Can be `success`, `error`, `warning`, `information` or 'default'
+     */
+    protected _state: ControlState;
 
     @Input()
     get disabled(): boolean {
@@ -129,11 +153,15 @@ export abstract class BaseInput extends BaseComponent
      */
     focused = false;
 
-    /**
-     * See @FormFieldControl
-     */
-    _status: Status;
+    /** Whether control has errors */
+    get controlInvalid(): boolean {
+        return this._controlInvalid;
+    }
 
+    /**
+     * @hidden
+     */
+    private _controlInvalid = false;
     /**
      * See @FormFieldControl
      */
@@ -144,17 +172,8 @@ export abstract class BaseInput extends BaseComponent
     /** set when input field is mandatory form field */
     required: boolean;
 
-    /**
-     *  The state of the form control - applies css classes.
-     *  Can be `success`, `error`, `warning`, `information` or blank for default.
-     */
-    _state: Status;
-
-    // @formatter:off
     onChange = (_: any) => {};
     onTouched = () => {};
-
-    // @formatter:on
 
     constructor(
         cd: ChangeDetectorRef,
@@ -177,11 +196,6 @@ export abstract class BaseInput extends BaseComponent
 
         // We have to ignore "formField" if there is "formControl" wrapper
         this.formField = formField && !formControl ? formField : null;
-    }
-
-    ngOnChanges(): void {
-        this._status = this.state;
-        this.stateChanges.next('input: ngOnChanges');
     }
 
     ngOnInit(): void {
@@ -208,7 +222,6 @@ export abstract class BaseInput extends BaseComponent
 
     /** @hidden */
     ngAfterViewInit(): void {
-
         if (this.ngControl) {
             this._subscriptions.add(
                 this.ngControl.statusChanges.subscribe(() => {
@@ -260,12 +273,8 @@ export abstract class BaseInput extends BaseComponent
      */
     writeValue(value: any): void {
         this._value = value;
-        this.onChange(value);
         this.stateChanges.next('writeValue');
-    }
-
-    get status(): Status {
-        return this._status;
+        this._cd.markForCheck();
     }
 
     /**
@@ -313,21 +322,29 @@ export abstract class BaseInput extends BaseComponent
      *  covering non-control errors, errors that happens outside of this control
      */
     protected updateErrorState(): void {
-        const oldState = this.status === 'error';
         const parent = this.ngForm;
         const control = this.ngControl ? (this.ngControl.control as FormControl) : null;
-        const newState = !!(control && control.invalid && (control.dirty || control.touched || (parent && parent.submitted)));
+        const newStatusIsError = !!(control?.invalid && (control.dirty || control.touched || parent?.submitted));
 
-        if (newState !== oldState) {
-            this._status = newState ? 'error' : this.state === 'error' ? 'default' : this.state;
+        if (newStatusIsError !== this.controlInvalid) {
+            this._controlInvalid = newStatusIsError;
             this.stateChanges.next('updateErrorState');
             this._cd.markForCheck();
         }
     }
 
-    protected setValue(value: any): void {
+    /**
+     * Used to change the value of a control.
+     * @param value the value to be applied
+     * @param emitOnChange whether to emit "onChange" event.
+     * Should be "false", if the change is made programmatically (internally) by the control, "true" otherwise
+     */
+    protected setValue(value: any, emitOnChange = true): void {
         if (value !== this._value) {
             this.writeValue(value);
+            if (emitOnChange) {
+                this.onChange(value);
+            }
             this._cd.markForCheck();
         }
     }

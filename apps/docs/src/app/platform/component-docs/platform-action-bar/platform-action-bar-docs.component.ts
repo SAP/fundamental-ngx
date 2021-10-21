@@ -27,7 +27,6 @@ import * as cozyModeExampleTs from '!raw-loader!./platform-action-bar-examples/p
     styleUrls: ['./platform-action-bar-docs.component.scss']
 })
 export class PlatformActionBarDocsComponent {
-
     simpleActionBar: ExampleFile[] = [
         {
             language: 'html',
@@ -131,5 +130,4 @@ export class PlatformActionBarDocsComponent {
             fileName: 'platform-action-bar-cozy-mode-example'
         }
     ];
-
 }

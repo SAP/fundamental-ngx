@@ -20,9 +20,7 @@ import { ActionChangeEvent, BaseListItem, IS_ACTIVE_CLASS } from '../base-list-i
 @Component({
     selector: 'fdp-action-list-item',
     templateUrl: './action-list-item.component.html',
-    providers: [
-        { provide: BaseListItem, useExisting: forwardRef(() => ActionListItemComponent) }
-    ],
+    providers: [{ provide: BaseListItem, useExisting: forwardRef(() => ActionListItemComponent) }],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionListItemComponent extends BaseListItem {
@@ -38,8 +36,12 @@ export class ActionListItemComponent extends BaseListItem {
     actionClicked = new EventEmitter<ActionChangeEvent>();
 
     /** @hidden */
-    constructor(_changeDetectorRef: ChangeDetectorRef, public itemEl: ElementRef,
-                protected _listConfig: ListConfig, @Optional() protected _router: Router) {
+    constructor(
+        _changeDetectorRef: ChangeDetectorRef,
+        public itemEl: ElementRef,
+        protected _listConfig: ListConfig,
+        @Optional() protected _router: Router
+    ) {
         super(_changeDetectorRef, itemEl, _listConfig, _router);
     }
 
@@ -67,7 +69,6 @@ export class ActionListItemComponent extends BaseListItem {
         if (KeyUtil.isKeyCode(event, ENTER) || KeyUtil.isKeyCode(event, SPACE)) {
             this.button.nativeElement.classList.remove(IS_ACTIVE_CLASS);
             this._onActionClick(event);
-
         }
     }
 }

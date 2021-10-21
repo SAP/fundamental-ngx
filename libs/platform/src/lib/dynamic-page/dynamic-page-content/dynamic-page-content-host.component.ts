@@ -74,7 +74,7 @@ export class DynamicPageContentHostComponent implements OnInit {
     /** @hidden */
     ngOnInit(): void {
         this._addClassNameToHostElement(CLASS_NAME.dynamicPageContent);
-        
+
         this._addClassNameToHostElement('content-sticker');
 
         if (this.background) {

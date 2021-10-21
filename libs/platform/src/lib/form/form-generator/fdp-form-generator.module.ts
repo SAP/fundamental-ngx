@@ -56,9 +56,6 @@ import { FormGeneratorService } from './form-generator.service';
         BusyIndicatorModule
     ],
     providers: [FormGeneratorService],
-    exports: [
-        FormGeneratorComponent
-    ]
+    exports: [FormGeneratorComponent]
 })
-export class PlatformFormGeneratorModule {
-}
+export class PlatformFormGeneratorModule {}

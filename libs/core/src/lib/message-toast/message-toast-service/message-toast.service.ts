@@ -41,9 +41,12 @@ export class MessageToastService {
 
         // If empty or undefined message toast array, create container
         if (!this._messageToasts || this._messageToasts.length === 0 || !this._messageToastContainerRef) {
-            this._messageToastContainerRef = this._dynamicComponentService.createDynamicComponent<
-                MessageToastContainerComponent
-            >(content, MessageToastContainerComponent, messageToastConfig);
+            this._messageToastContainerRef =
+                this._dynamicComponentService.createDynamicComponent<MessageToastContainerComponent>(
+                    content,
+                    MessageToastContainerComponent,
+                    messageToastConfig
+                );
         }
 
         // Define Container to put backdrop and component to container

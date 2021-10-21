@@ -31,9 +31,7 @@ export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
     maxImages = this.dialogRef.data.maxImages;
 
     /** @hidden */
-    constructor(public dialogRef: DialogRef,
-        private _cdr: ChangeDetectorRef
-    ) { }
+    constructor(public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -61,7 +59,7 @@ export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
         }
         this.currentActiveSlidesStartIndex = this.currentActiveSlidesStartIndex - 1;
         this.dialogRef.data.selectedMedia = this.mediaList[this.currentActiveSlidesStartIndex];
-        this.mediaList.forEach(item => item.selected = false);
+        this.mediaList.forEach((item) => (item.selected = false));
         this.mediaList[this.currentActiveSlidesStartIndex].selected = true;
         this._cdr.detectChanges();
         this._buttonVisibility();
@@ -74,7 +72,7 @@ export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
         }
         this.currentActiveSlidesStartIndex = this.currentActiveSlidesStartIndex + 1;
         this.dialogRef.data.selectedMedia = this.mediaList[this.currentActiveSlidesStartIndex];
-        this.mediaList.forEach(item => item.selected = false);
+        this.mediaList.forEach((item) => (item.selected = false));
         this.mediaList[this.currentActiveSlidesStartIndex].selected = true;
         this._cdr.detectChanges();
         this._buttonVisibility();
@@ -124,7 +122,6 @@ export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
                 this.leftButtonDisabled = true;
                 this.rightButtonDisabled = false;
             }
-
         } else if (this.currentActiveSlidesStartIndex === this.mediaList.length - 1) {
             if (this.dialogRef.data.rtl) {
                 this.leftButtonDisabled = true;

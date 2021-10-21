@@ -1,9 +1,4 @@
-<fd-docs-section-title
-    id="default"
-    componentName="table"
->
-    Simple Table
-</fd-docs-section-title>
+<fd-docs-section-title id="default" componentName="table"> Simple Table </fd-docs-section-title>
 <description>This example shows simple table usage</description>
 <component-example>
     <fdp-platform-table-default-example></fdp-platform-table-default-example>
@@ -12,21 +7,19 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="custom-width"
-    componentName="table"
->
+<fd-docs-section-title id="custom-width" componentName="table">
     Custom Column Width & Column Resizing
 </fd-docs-section-title>
 <description>
     <p>
-        Use <code>width</code> on the table column for setting custom width for the column cells.
-        Setting width in percents (%) currently not supported due to the technical reasons.
-        For the columns without width set it will be calculated automatically based on the body cell content but not header cell content.
+        Use <code>width</code> on the table column for setting custom width for the column cells. Setting width in
+        percents (%) currently not supported due to the technical reasons. For the columns without width set it will be
+        calculated automatically based on the body cell content but not header cell content.
     </p>
 
     <p>
-        Columns width will be recalculated on any <code>width</code> change but you also can use table's method <code>recalculateTableColumnWidth</code> to recalculate it manually.
+        Columns width will be recalculated on any <code>width</code> change but you also can use table's method
+        <code>recalculateTableColumnWidth</code> to recalculate it manually.
     </p>
 </description>
 <component-example>
@@ -36,12 +29,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="actiable-rows"
-    componentName="table"
->
-    Activable Rows
-</fd-docs-section-title>
+<fd-docs-section-title id="actiable-rows" componentName="table"> Activable Rows </fd-docs-section-title>
 <description>
     <p>This example shows activable rows</p>
 
@@ -57,12 +45,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="custom-columns"
-    componentName="table"
->
-    Custom Column
-</fd-docs-section-title>
+<fd-docs-section-title id="custom-columns" componentName="table"> Custom Column </fd-docs-section-title>
 <description>This example shows custom column definition implementation </description>
 <component-example>
     <fdp-platform-table-custom-column-example></fdp-platform-table-custom-column-example>
@@ -71,19 +54,13 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="single-row-selection"
-    componentName="table"
->
-    Single Row Selection
-</fd-docs-section-title>
+<fd-docs-section-title id="single-row-selection" componentName="table"> Single Row Selection </fd-docs-section-title>
 <description>
-    <p>
-        This example shows single row selection
-    </p>
+    <p>This example shows single row selection</p>
 
     <p>
-        If both selection and search is used in a table, use <code>rowComparator</code> in order to preserve selection after search is changed
+        If both selection and search is used in a table, use <code>rowComparator</code> in order to preserve selection
+        after search is changed
     </p>
 
     <p>
@@ -97,19 +74,15 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="multiple-row-selection"
-    componentName="table"
->
+<fd-docs-section-title id="multiple-row-selection" componentName="table">
     Multiple Row Selection
 </fd-docs-section-title>
 <description>
-    <p>
-        This example shows multiple row selection
-    </p>
+    <p>This example shows multiple row selection</p>
 
     <p>
-        Consider that in the table with selection column present the overall columns width cannot be less than table container.
+        Consider that in the table with selection column present the overall columns width cannot be less than table
+        container.
     </p>
 </description>
 <component-example>
@@ -119,12 +92,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="sortable"
-    componentName="table"
->
-    Column Sorting
-</fd-docs-section-title>
+<fd-docs-section-title id="sortable" componentName="table"> Column Sorting </fd-docs-section-title>
 <description>
     Use <code>[sortable]="true"</code> to mark a column as an sortable one.<br />
     In this example <code>Name</code>, <code>Description</code> and <code>Price</code> columns can be sorted.
@@ -136,16 +104,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="filterable"
-    componentName="table"
->
-    Column Filtering
-</fd-docs-section-title>
+<fd-docs-section-title id="filterable" componentName="table"> Column Filtering </fd-docs-section-title>
 <description>
-    There are two ways to add filtering.
-    The first one is to use the column option <code>[filterable]="true"</code>. This will add filter input field in the
-    column header menu.
+    There are two ways to add filtering. The first one is to use the column option <code>[filterable]="true"</code>.
+    This will add filter input field in the column header menu.
     <br />
     The second one is to use <code>fdp-table-view-settings-filter</code> withing
     <code>fdp-table-view-settings-dialog</code>. It gives ability to define filtering type. For now it supports the next
@@ -163,12 +125,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="groupable"
-    componentName="table"
->
-    Column Grouping
-</fd-docs-section-title>
+<fd-docs-section-title id="groupable" componentName="table"> Column Grouping </fd-docs-section-title>
 <description>
     Use <code>[groupable]="true"</code> to mark a column as one that can be used to group by.
     <br />
@@ -185,24 +142,16 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="freezable"
-    componentName="table"
->
-    Column Freezing
-</fd-docs-section-title>
+<fd-docs-section-title id="freezable" componentName="table"> Column Freezing </fd-docs-section-title>
 <description>
-    <p>
-        Use <code>[freezeColumnsTo]="columnName"</code> to freeze columns up to and including.
-    </p>
+    <p>Use <code>[freezeColumnsTo]="columnName"</code> to freeze columns up to and including.</p>
 
     <p>
-        When using this features it's very important to set the <code>width</code> for the every column as table cells width won't be calculated properly.
+        When using this features it's very important to set the <code>width</code> for the every column as table cells
+        width won't be calculated properly.
     </p>
 
-    <p>
-        Consider that currently resizing isn't possible within the table with frozen columns.
-    </p>
+    <p>Consider that currently resizing isn't possible within the table with frozen columns.</p>
 </description>
 <component-example>
     <fdp-platform-table-freezable-example></fdp-platform-table-freezable-example>
@@ -211,15 +160,8 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="loading"
-    componentName="table"
->
-    Loading/Busy State
-</fd-docs-section-title>
-<description>
-    Use <code>[loading]="true|false"</code> to set busy state.
-</description>
+<fd-docs-section-title id="loading" componentName="table"> Loading/Busy State </fd-docs-section-title>
+<description> Use <code>[loading]="true|false"</code> to set busy state. </description>
 <component-example>
     <fdp-platform-table-loading-example></fdp-platform-table-loading-example>
 </component-example>
@@ -227,25 +169,16 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="page-scrolling"
-    componentName="table"
->
-    Page Scrolling
-</fd-docs-section-title>
+<fd-docs-section-title id="page-scrolling" componentName="table"> Page Scrolling </fd-docs-section-title>
 <description>
     In order to get table page scrolling use the next options:
     <ul>
-        <li>
-            Add <code>[pageScrolling]="true"</code> to trigger a fetch once the table is scrolled to the bottom.
-        </li>
+        <li>Add <code>[pageScrolling]="true"</code> to trigger a fetch once the table is scrolled to the bottom.</li>
         <li>
             Add <code>[bodyHeight]="tableBodyHeight"</code> to restrict a table body height so the vertical scrollbar
             can appear.
         </li>
-        <li>
-            Add <code>[pageSize]="itemsPerPage"</code> to specify how many items there are per page.
-        </li>
+        <li>Add <code>[pageSize]="itemsPerPage"</code> to specify how many items there are per page.</li>
     </ul>
     Consider that columns width automatically calculates only after the first set of data comes to the component.
 </description>
@@ -256,27 +189,14 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="initial-state"
-    componentName="table"
->
-    Initial State
-</fd-docs-section-title>
+<fd-docs-section-title id="initial-state" componentName="table"> Initial State </fd-docs-section-title>
 <description>
     To setup initial state use next properties:
     <ul>
-        <li>
-            <code>[initialVisibleColumns]</code> List of column names in order.
-        </li>
-        <li>
-            <code>[initialSortBy]</code> Initial sorting parameters for table state.
-        </li>
-        <li>
-            <code>[initialFilterBy]</code> Initial filtering parameters for table state.
-        </li>
-        <li>
-            <code>[initialGroupBy]</code> Initial grouping parameters for table state.
-        </li>
+        <li><code>[initialVisibleColumns]</code> List of column names in order.</li>
+        <li><code>[initialSortBy]</code> Initial sorting parameters for table state.</li>
+        <li><code>[initialFilterBy]</code> Initial filtering parameters for table state.</li>
+        <li><code>[initialGroupBy]</code> Initial grouping parameters for table state.</li>
     </ul>
 </description>
 <component-example>
@@ -287,29 +207,20 @@
 <separator></separator>
 
 <div style="display: none">
-    <fd-docs-section-title
-        id="tree"
-        componentName="table"
-    >
-        Tree Table
-    </fd-docs-section-title>
+    <fd-docs-section-title id="tree" componentName="table"> Tree Table </fd-docs-section-title>
     <description>
-        This example shows tree table usage.
-        To setup tree table use next properties:
+        This example shows tree table usage. To setup tree table use next properties:
 
         <ul>
-            <li>
-                <code>[isTreeTable]</code> Whether tree mode enabled or no.
-            </li>
-            <li>
-                <code>[relationKey]</code> Name of the field in the object which contains children nodes.
-            </li>
+            <li><code>[isTreeTable]</code> Whether tree mode enabled or no.</li>
+            <li><code>[relationKey]</code> Name of the field in the object which contains children nodes.</li>
         </ul>
 
         <h3>Drag & Drop</h3>
 
-        Tree table supports Drag & Drop by default, so rows can be moved & placed inside other rows.
-        Please consider that Drag & Drop isn't possible yet with <code>[sortable]</code>, <code>[groupable]</code>, <code>[filterable]</code> columns and <code>[freezeColumnsTo]</code> enabled.
+        Tree table supports Drag & Drop by default, so rows can be moved & placed inside other rows. Please consider
+        that Drag & Drop isn't possible yet with <code>[sortable]</code>, <code>[groupable]</code>,
+        <code>[filterable]</code> columns and <code>[freezeColumnsTo]</code> enabled.
     </description>
     <component-example>
         <fdp-platform-table-tree-example></fdp-platform-table-tree-example>
@@ -319,42 +230,25 @@
     <separator></separator>
 </div>
 
-<fd-docs-section-title
-    id="p13"
-    componentName="table"
->
-    Personalization Dialog.
-</fd-docs-section-title>
+<fd-docs-section-title id="p13" componentName="table"> Personalization Dialog. </fd-docs-section-title>
 <description>
     The p13n dialog control provides a dialog for tables that allows the user to personalize one or more of the
     following attributes:
     <ul>
-        <li>
-            Columns (visibility and order of columns)
-        </li>
-        <li>
-            Sorting by multiple columns
-        </li>
-        <li>
-            Filtering by multiple columns
-        </li>
-        <li>
-            Grouping by multiple columns
-        </li>
+        <li>Columns (visibility and order of columns)</li>
+        <li>Sorting by multiple columns</li>
+        <li>Filtering by multiple columns</li>
+        <li>Grouping by multiple columns</li>
     </ul>
 </description>
 
-<fd-docs-section-title
-    id="p13-table-columns"
-    componentName="table"
->
+<fd-docs-section-title id="p13-table-columns" componentName="table">
     Table columns visibility and order
 </fd-docs-section-title>
 <description>
-    To make columns settings available connect <code>&lt;fdp-table-p13-dialog
-        [table]="table"&gt;&lt;/fdp-table-p13-dialog&gt;</code>
-    to a table. Once there is at least one <code>fdp-column</code> definition the columns settings button will be
-    available in the table toolbar.
+    To make columns settings available connect
+    <code>&lt;fdp-table-p13-dialog [table]="table"&gt;&lt;/fdp-table-p13-dialog&gt;</code> to a table. Once there is at
+    least one <code>fdp-column</code> definition the columns settings button will be available in the table toolbar.
 </description>
 <component-example>
     <fdp-platform-table-p13-columns-example></fdp-platform-table-p13-columns-example>
@@ -363,22 +257,17 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="p13-table-sort"
-    componentName="table"
->
-    Sorting by multiple columns
-</fd-docs-section-title>
+<fd-docs-section-title id="p13-table-sort" componentName="table"> Sorting by multiple columns </fd-docs-section-title>
 <description>
     <ul>
         <li>
             Connect your table to p13 columns dialog by adding
-            <code>&lt;fdp-table-p13-dialog
-                [table]="table"&gt;&lt;fdp-table-p13n-sort&gt;&lt;/fdp-table-p13n-sort&gt;&lt;/fdp-table-p13-dialog&gt;</code>
+            <code
+                >&lt;fdp-table-p13-dialog
+                [table]="table"&gt;&lt;fdp-table-p13n-sort&gt;&lt;/fdp-table-p13n-sort&gt;&lt;/fdp-table-p13-dialog&gt;</code
+            >
         </li>
-        <li>
-            Add <code>&lt;fdp-column [sortable]="true"&gt;</code> option to mark a column as sortable.
-        </li>
+        <li>Add <code>&lt;fdp-column [sortable]="true"&gt;</code> option to mark a column as sortable.</li>
     </ul>
     The order of the criteria is exactly the same as the order in which sorting is applied to the table.
 </description>
@@ -389,22 +278,19 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="p13-table-filter"
-    componentName="table"
->
+<fd-docs-section-title id="p13-table-filter" componentName="table">
     Filtering by multiple columns
 </fd-docs-section-title>
 <description>
     <ul>
         <li>
             Connect your table to p13 filtering dialog by adding
-            <code>&lt;fdp-table-p13-dialog
-                [table]="table"&gt;&lt;fdp-table-p13n-filter&gt;&lt;/fdp-table-p13n-filter&gt;&lt;/fdp-table-p13-dialog&gt;</code>
+            <code
+                >&lt;fdp-table-p13-dialog
+                [table]="table"&gt;&lt;fdp-table-p13n-filter&gt;&lt;/fdp-table-p13n-filter&gt;&lt;/fdp-table-p13-dialog&gt;</code
+            >
         </li>
-        <li>
-            Add <code>&lt;fdp-column [filterable]="true"&gt;</code> option to mark a column as filterable.
-        </li>
+        <li>Add <code>&lt;fdp-column [filterable]="true"&gt;</code> option to mark a column as filterable.</li>
         <li>
             Add column data type <code>&lt;fdp-column dataType="string | number | date | boolean"&gt;</code>
             to show corresponding filtering ui.
@@ -420,22 +306,17 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="p13-table-group"
-    componentName="table"
->
-    Grouping by multiple columns
-</fd-docs-section-title>
+<fd-docs-section-title id="p13-table-group" componentName="table"> Grouping by multiple columns </fd-docs-section-title>
 <description>
     <ul>
         <li>
             Connect your table to p13 group dialog by adding
-            <code>&lt;fdp-table-p13-dialog
-                [table]="table"&gt;&lt;fdp-table-p13n-group&gt;&lt;/fdp-table-p13n-group&gt;&lt;/fdp-table-p13-dialog&gt;</code>
+            <code
+                >&lt;fdp-table-p13-dialog
+                [table]="table"&gt;&lt;fdp-table-p13n-group&gt;&lt;/fdp-table-p13n-group&gt;&lt;/fdp-table-p13-dialog&gt;</code
+            >
         </li>
-        <li>
-            Add <code>&lt;fdp-column [groupable]="true"&gt;</code> option to mark a column as groupable.
-        </li>
+        <li>Add <code>&lt;fdp-column [groupable]="true"&gt;</code> option to mark a column as groupable.</li>
     </ul>
 </description>
 <component-example>
@@ -445,20 +326,15 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="navigatable-row"
-    componentName="table"
->
-    Navigatable rows
-</fd-docs-section-title>
+<fd-docs-section-title id="navigatable-row" componentName="table"> Navigatable rows </fd-docs-section-title>
 <description>
     This example shows navigatable rows.
 
     <ul>
         <li>
-            Use <code>[rowNavigatable]="true"</code> input property on the table to make rows navigatable.
-            Pass boolean to change navigatable state for all rows.
-            Pass string with the field of the rows which will be used to calculate row's navigatable state.
+            Use <code>[rowNavigatable]="true"</code> input property on the table to make rows navigatable. Pass boolean
+            to change navigatable state for all rows. Pass string with the field of the rows which will be used to
+            calculate row's navigatable state.
         </li>
         <li>Event <code>(rowNavigate)</code> is emitted when row gets activated.</li>
     </ul>
@@ -470,15 +346,12 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="no-data-custom-element"
-    componentName="table"
->
+<fd-docs-section-title id="no-data-custom-element" componentName="table">
     Custom component to render "No data" message
 </fd-docs-section-title>
 <description>
-    This example demonstrates ability to define custom component to display when no items are found.
-    Use <code>fdp-table-no-data-wrapper</code> element to define custom "No data" message.
+    This example demonstrates ability to define custom component to display when no items are found. Use
+    <code>fdp-table-no-data-wrapper</code> element to define custom "No data" message.
 </description>
 <component-example>
     <fdp-platform-table-no-items-template-example></fdp-platform-table-no-items-template-example>
@@ -487,22 +360,14 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="semantic"
-    componentName="table"
->
-    Semantic Highlighting
-</fd-docs-section-title>
+<fd-docs-section-title id="semantic" componentName="table"> Semantic Highlighting </fd-docs-section-title>
 <description>
-    <p>
-        This example shows semantic highlighting for the rows.
-    </p>
+    <p>This example shows semantic highlighting for the rows.</p>
 
     <p>
         Use <code>semanticHighlighting="value"</code> input property on the table to show semantic row's status column.
-        Where <code>value</code> (string) is the key of the table row's item with status.
-        Available statuses are <code>valid, warning, information, error</code>. 
-        Any other statuses will be percieved as "no status".
+        Where <code>value</code> (string) is the key of the table row's item with status. Available statuses are
+        <code>valid, warning, information, error</code>. Any other statuses will be percieved as "no status".
     </p>
 </description>
 <component-example>
@@ -513,18 +378,16 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="row-class"
-    componentName="table"
->
-    Row custom CSS class
-</fd-docs-section-title>
+<fd-docs-section-title id="row-class" componentName="table"> Row custom CSS class </fd-docs-section-title>
 <description>
-    This example demonstrates ability to apply custom CSS classes to the table rows.
-    Use <code>rowsClass</code> input property of the table component to define custom CSS classes.
+    This example demonstrates ability to apply custom CSS classes to the table rows. Use <code>rowsClass</code> input
+    property of the table component to define custom CSS classes.
     <ul>
         <li>Pass string (<code>'customClass'</code>) to set custom CSS classes for every row.</li>
-        <li>Pass function (<code>(row) => row.field ? 'customClass' : 'anotherClass'</code>) which returns string to describe own logic. Row will be passed as function's parameter. </li>
+        <li>
+            Pass function (<code>(row) => row.field ? 'customClass' : 'anotherClass'</code>) which returns string to
+            describe own logic. Row will be passed as function's parameter.
+        </li>
     </ul>
 </description>
 <component-example>
@@ -535,15 +398,8 @@
 
 <separator></separator>
 
-<fd-docs-section-title
-    id="no-outer-borders"
-    componentName="table"
->
-    No outer borders
-</fd-docs-section-title>
-<description>
-    Use <code>no-outer-borders</code> input property on the fdp-table to disable outer borders.
-</description>
+<fd-docs-section-title id="no-outer-borders" componentName="table"> No outer borders </fd-docs-section-title>
+<description> Use <code>no-outer-borders</code> input property on the fdp-table to disable outer borders. </description>
 <component-example>
     <fdp-platform-table-no-outer-borders-example></fdp-platform-table-no-outer-borders-example>
 </component-example>
@@ -552,11 +408,7 @@
 
 <separator></separator>
 
-<playground
-    [schema]="schema"
-    [schemaInitialValues]="data"
-    (onFormChanges)="onSchemaValues($event)"
->
+<playground [schema]="schema" [schemaInitialValues]="data" (onFormChanges)="onSchemaValues($event)">
     <fdp-table
         [dataSource]="dataSource"
         [noBorders]="data.table.noBorders"
@@ -576,10 +428,7 @@
         (columnFreeze)="onFreezeChange($event)"
         (groupChange)="onGroupChange($event)"
     >
-        <fdp-table-toolbar
-            [title]="data['table-toolbar'].title"
-            [hideItemCount]="data['table-toolbar'].hideItemCount"
-        >
+        <fdp-table-toolbar [title]="data['table-toolbar'].title" [hideItemCount]="data['table-toolbar'].hideItemCount">
             <fdp-table-toolbar-actions>
                 <fdp-button
                     label="Action Button"
@@ -600,30 +449,10 @@
         >
         </fdp-column>
 
-        <fdp-column
-            name="description"
-            key="description"
-            label="Description"
-            width="200px"
-        >
-        </fdp-column>
+        <fdp-column name="description" key="description" label="Description" width="200px"> </fdp-column>
 
-        <fdp-column
-            name="price"
-            key="price.value"
-            label="Price"
-            align="end"
-            width="100px"
-        >
-        </fdp-column>
+        <fdp-column name="price" key="price.value" label="Price" align="end" width="100px"> </fdp-column>
 
-        <fdp-column
-            name="status"
-            key="status"
-            label="Status"
-            align="center"
-            width="150px"
-        >
-        </fdp-column>
+        <fdp-column name="status" key="status" label="Status" align="center" width="150px"> </fdp-column>
     </fdp-table>
 </playground>

@@ -206,7 +206,7 @@ export class WizardBodyComponent implements OnInit, OnDestroy {
                 return true;
             }
 
-            if (this._visibleItems.slice(0, index).find(i => !i.completed && !i.summary)) {
+            if (this._visibleItems.slice(0, index).find((i) => !i.completed && !i.summary)) {
                 return false;
             }
 

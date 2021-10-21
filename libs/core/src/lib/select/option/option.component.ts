@@ -12,15 +12,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import {
-    FocusableOption,
-    FocusOrigin
-} from '@angular/cdk/a11y';
-import {
-    ENTER,
-    hasModifierKey,
-    SPACE
-} from '@angular/cdk/keycodes';
+import { FocusableOption, FocusOrigin } from '@angular/cdk/a11y';
+import { ENTER, hasModifierKey, SPACE } from '@angular/cdk/keycodes';
 
 import { KeyUtil } from '@fundamental-ngx/core/utils';
 import { OptionsInterface } from '../options.interface';
@@ -37,9 +30,8 @@ export class FdOptionSelectionChange {
         readonly source: OptionComponent,
         /** Whether the change in the option's value was a result of a user action. */
         readonly isUserInput = false
-    ) { }
+    ) {}
 }
-
 
 /**
  * Used to represent an option of the select component.
@@ -60,7 +52,8 @@ export class FdOptionSelectionChange {
         '(click)': '_selectViaInteraction()',
         '(keydown)': '_handleKeydown($event)'
     },
-    styles: [`
+    styles: [
+        `
             .fd-list__item[aria-disabled='true'],
             .fd-list__item.is-disabled,
             .fd-list__item:disabled {
@@ -117,7 +110,7 @@ export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOp
     private _active = false;
 
     /** @hidden */
-    constructor(private _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) { }
+    constructor(private _elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {}
 
     /**@hidden
      *  Since select components could be using the option's label to display the selected values
@@ -141,10 +134,10 @@ export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOp
     }
 
     /** @hidden
- * This method sets display styles on the option to make it appear
- * active. This is used by the ActiveDescendantKeyManager so key
- * events will display the proper options as active on arrow key events.
- */
+     * This method sets display styles on the option to make it appear
+     * active. This is used by the ActiveDescendantKeyManager so key
+     * events will display the proper options as active on arrow key events.
+     */
     setActiveStyles(): void {
         if (!this._active) {
             this._active = true;
@@ -167,7 +160,6 @@ export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOp
     /** @hidden
      * Focuses the element. */
     focus(_origin?: FocusOrigin, options?: FocusOptions): void {
-
         const element = this._elementRef.nativeElement;
 
         if (typeof element.focus === 'function') {
@@ -176,8 +168,8 @@ export class OptionComponent implements AfterViewChecked, OnDestroy, FocusableOp
     }
 
     /** @hidden
-   * option value
-   */
+     * option value
+     */
     getLabel(): string {
         return this.viewValue;
     }

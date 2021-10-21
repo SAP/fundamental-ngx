@@ -15,14 +15,14 @@
         background-color: transparent;
     }
 
-	.fd-counter {
-		z-index: 1;
-	}
-
-	.fd-shellbar__group {
-		flex-basis: auto;
+    .fd-counter {
+        z-index: 1;
     }
-    
+
+    .fd-shellbar__group {
+        flex-basis: auto;
+    }
+
     &--side-nav {
         &.fd-shellbar--s,
         &.fd-shellbar--m,
@@ -31,11 +31,11 @@
             padding: 0 0.5rem 0 0;
 
             @at-root {
-                [dir="rtl"] &,
-                &[dir="rtl"] {
+                [dir='rtl'] &,
+                &[dir='rtl'] {
                     padding: 0 0 0 0.5rem;
                 }
-            }   
+            }
         }
     }
 }

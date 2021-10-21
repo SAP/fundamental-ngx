@@ -8,7 +8,6 @@ import { filter } from 'rxjs/operators';
     selector: '[fd-menu-shortcut]'
 })
 export class MenuShortcutDirective implements AfterViewInit, OnDestroy {
-
     /** Hide shortcuts in mobile mode */
     @Input()
     hideOnMobile = true;
@@ -21,9 +20,7 @@ export class MenuShortcutDirective implements AfterViewInit, OnDestroy {
     private _subscriptions: Subscription = new Subscription();
 
     /** @hidden */
-    constructor(private _menuItem: MenuItemComponent,
-                private _elementRef: ElementRef) {
-    }
+    constructor(private _menuItem: MenuItemComponent, private _elementRef: ElementRef) {}
 
     /** @hidden */
     ngAfterViewInit(): void {
@@ -38,15 +35,13 @@ export class MenuShortcutDirective implements AfterViewInit, OnDestroy {
     /** @hidden */
     private _hideOnMobile(): void {
         this._subscriptions.add(
-            this._menuItem.menuService.isMobileMode
-                .pipe(filter(() => this.hideOnMobile))
-                .subscribe(isMobile => {
-                    if (isMobile) {
-                        this._elementRef.nativeElement.style.display = 'none';
-                    } else {
-                        this._elementRef.nativeElement.style.display = null;
-                    }
-                })
+            this._menuItem.menuService.isMobileMode.pipe(filter(() => this.hideOnMobile)).subscribe((isMobile) => {
+                if (isMobile) {
+                    this._elementRef.nativeElement.style.display = 'none';
+                } else {
+                    this._elementRef.nativeElement.style.display = null;
+                }
+            })
         );
     }
 }

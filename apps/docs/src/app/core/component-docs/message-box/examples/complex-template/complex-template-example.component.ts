@@ -17,9 +17,10 @@ export class ComplexTemplateExampleComponent {
     constructor(private _messageBoxService: MessageBoxService) {}
 
     open(): void {
-        this._messageBoxService.open(MessageBoxComplexExampleComponent, { 
+        this._messageBoxService.open(MessageBoxComplexExampleComponent, {
             width: '400px',
-            ariaLabelledBy: 'fd-message-box-complex-template-header fd-message-box-complex-template-header-2 fd-message-box-complex-template-body'
-         });
+            ariaLabelledBy:
+                'fd-message-box-complex-template-header fd-message-box-complex-template-header-2 fd-message-box-complex-template-body'
+        });
     }
 }

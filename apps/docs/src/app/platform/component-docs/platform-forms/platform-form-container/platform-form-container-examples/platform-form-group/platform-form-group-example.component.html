@@ -62,7 +62,6 @@
         >
             <fdp-input name="fieldGroupInput3" [formControl]="f6.formControl"></fdp-input>
         </fdp-form-field>
-
     </fdp-form-field-group>
 
     <fdp-form-field-group label="Group Label Custom 2">
@@ -78,12 +77,7 @@
         >
             <fdp-textarea name="basicTextarea1" [formControl]="ff1.formControl"></fdp-textarea>
         </fdp-form-field>
-        <fdp-form-field
-            #ff8 id="switch1"
-            label="Switch"
-            column="2"
-            rank="10"
-        >
+        <fdp-form-field #ff8 id="switch1" label="Switch" column="2" rank="10">
             <fdp-switch
                 [formControl]="ff8.formControl"
                 name="switch-1"
@@ -115,7 +109,4 @@
     >
         <fdp-input name="basicInput5" [formControl]="f9.formControl"></fdp-input>
     </fdp-form-field>
-
 </fdp-form-group>
-
-

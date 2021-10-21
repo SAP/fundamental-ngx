@@ -2,7 +2,6 @@ import { NgControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { ContentDensity } from '@fundamental-ngx/core/utils';
-import { Status } from './form-options';
 
 export abstract class FormFieldControl<T> {
     /**
@@ -54,10 +53,8 @@ export abstract class FormFieldControl<T> {
      */
     readonly focused: boolean;
 
-    /**
-     * Currently used only to identify if we are in error status
-     */
-    readonly status: Status;
+    /** Whether control has errors */
+    readonly controlInvalid: boolean;
 
     abstract focus(event?: MouseEvent): void;
 
@@ -67,5 +64,3 @@ export abstract class FormFieldControl<T> {
      */
     abstract onContainerClick(event: MouseEvent): void;
 }
-
-export { Status };

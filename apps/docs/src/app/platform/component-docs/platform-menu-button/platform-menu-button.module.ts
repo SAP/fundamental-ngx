@@ -24,7 +24,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformMenuButtonModule, PlatformMenuModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        PlatformMenuButtonModule,
+        PlatformMenuModule
+    ],
     exports: [RouterModule],
     declarations: [
         PlatformMenuButtonDocsComponent,

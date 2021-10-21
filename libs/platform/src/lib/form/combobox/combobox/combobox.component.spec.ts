@@ -69,22 +69,31 @@ describe('ComboboxComponent default values', () => {
     let combobox: ComboboxComponent;
     let overlayContainerEl: HTMLElement;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, FormsModule, ReactiveFormsModule, CommonModule, PlatformComboboxModule],
-            declarations: [ComboboxStandardComponent],
-            providers: [
-                DynamicComponentService,
-                MenuKeyboardService,
-                RtlService,
-                { provide: DATA_PROVIDERS, useClass: DataProvider as any }
-            ]
-        }).compileComponents();
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [
+                    FdpFormGroupModule,
+                    FormModule,
+                    FormsModule,
+                    ReactiveFormsModule,
+                    CommonModule,
+                    PlatformComboboxModule
+                ],
+                declarations: [ComboboxStandardComponent],
+                providers: [
+                    DynamicComponentService,
+                    MenuKeyboardService,
+                    RtlService,
+                    { provide: DATA_PROVIDERS, useClass: DataProvider as any }
+                ]
+            }).compileComponents();
 
-        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-            overlayContainerEl = overlayContainer.getContainerElement();
-        })();
-    }));
+            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+                overlayContainerEl = overlayContainer.getContainerElement();
+            })();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ComboboxStandardComponent);

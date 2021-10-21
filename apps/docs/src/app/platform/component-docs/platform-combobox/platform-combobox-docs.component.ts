@@ -31,91 +31,115 @@ import * as comboboxStatesTs from '!raw-loader!./examples/combobox-states/combob
     templateUrl: './platform-combobox-docs.component.html'
 })
 export class PlatformComboboxDocsComponent {
-    comboboxStandard: ExampleFile[] = [{
-        language: 'html',
-        fileName: 'combobox-standard',
-        code: comboboxStandardHtml
-    }, {
-        language: 'typescript',
-        fileName: 'combobox-standard',
-        code: comboboxStandardTs,
-        component: 'ComboboxStandardComponent'
-    }];
+    comboboxStandard: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'combobox-standard',
+            code: comboboxStandardHtml
+        },
+        {
+            language: 'typescript',
+            fileName: 'combobox-standard',
+            code: comboboxStandardTs,
+            component: 'ComboboxStandardComponent'
+        }
+    ];
 
-    comboboxMobile: ExampleFile[] = [{
-        language: 'html',
-        fileName: 'combobox-mobile-example',
-        code: comboboxMobileHtml
-    }, {
-        language: 'typescript',
-        fileName: 'combobox-mobile-example',
-        code: comboboxMobileTs,
-        component: 'ComboboxMobileExampleComponent'
-    }];
+    comboboxMobile: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'combobox-mobile-example',
+            code: comboboxMobileHtml
+        },
+        {
+            language: 'typescript',
+            fileName: 'combobox-mobile-example',
+            code: comboboxMobileTs,
+            component: 'ComboboxMobileExampleComponent'
+        }
+    ];
 
-    comboboxDatasource: ExampleFile[] = [{
-        language: 'html',
-        fileName: 'combobox-datasource-example',
-        code: comboboxDatasourceHtml
-    }, {
-        language: 'typescript',
-        fileName: 'combobox-datasource-example',
-        code: comboboxDatasourceTs,
-        component: 'ComboboxDatasourceExampleComponent'
-    }];
+    comboboxDatasource: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'combobox-datasource-example',
+            code: comboboxDatasourceHtml
+        },
+        {
+            language: 'typescript',
+            fileName: 'combobox-datasource-example',
+            code: comboboxDatasourceTs,
+            component: 'ComboboxDatasourceExampleComponent'
+        }
+    ];
 
-    comboboxColumns: ExampleFile[] = [{
-        language: 'html',
-        fileName: 'combobox-columns-example',
-        code: comboboxColumnsHtml
-    }, {
-        language: 'typescript',
-        fileName: 'combobox-columns-example',
-        code: comboboxColumnsTs,
-        component: 'ComboboxColumnsExampleComponent'
-    }];
+    comboboxColumns: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'combobox-columns-example',
+            code: comboboxColumnsHtml
+        },
+        {
+            language: 'typescript',
+            fileName: 'combobox-columns-example',
+            code: comboboxColumnsTs,
+            component: 'ComboboxColumnsExampleComponent'
+        }
+    ];
 
-    comboboxGroupExample: ExampleFile[] = [{
-        language: 'html',
-        fileName: 'combobox-group-example',
-        code: comboboxGroupHtml
-    }, {
-        language: 'typescript',
-        fileName: 'combobox-group-example',
-        code: comboboxGroupTs,
-        component: 'ComboboxGroupExampleComponent'
-    }];
+    comboboxGroupExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'combobox-group-example',
+            code: comboboxGroupHtml
+        },
+        {
+            language: 'typescript',
+            fileName: 'combobox-group-example',
+            code: comboboxGroupTs,
+            component: 'ComboboxGroupExampleComponent'
+        }
+    ];
 
-    comboboxTemplatesExample: ExampleFile[] = [{
-        language: 'html',
-        fileName: 'combobox-templates-example',
-        code: comboboxTemplatesHtml
-    }, {
-        language: 'typescript',
-        fileName: 'combobox-templates-example',
-        code: comboboxTemplatesTs,
-        component: 'ComboboxTemplatesExampleComponent'
-    }];
+    comboboxTemplatesExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'combobox-templates-example',
+            code: comboboxTemplatesHtml
+        },
+        {
+            language: 'typescript',
+            fileName: 'combobox-templates-example',
+            code: comboboxTemplatesTs,
+            component: 'ComboboxTemplatesExampleComponent'
+        }
+    ];
 
-    comboboxFormExample: ExampleFile[] = [{
-        language: 'html',
-        fileName: 'combobox-forms-example',
-        code: comboboxFormHtml
-    }, {
-        language: 'typescript',
-        fileName: 'combobox-forms-example',
-        code: comboboxFormTs,
-        component: 'ComboboxFormsExampleComponent'
-    }];
+    comboboxFormExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'combobox-forms-example',
+            code: comboboxFormHtml
+        },
+        {
+            language: 'typescript',
+            fileName: 'combobox-forms-example',
+            code: comboboxFormTs,
+            component: 'ComboboxFormsExampleComponent'
+        }
+    ];
 
-    comboboxStateExample: ExampleFile[] = [{
-        language: 'html',
-        fileName: 'combobox-states-example',
-        code: comboboxStatesHtml
-    }, {
-        language: 'typescript',
-        fileName: 'combobox-states-example',
-        code: comboboxStatesTs,
-        component: 'ComboboxStateComponent'
-    }];
+    comboboxStateExample: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'combobox-states-example',
+            code: comboboxStatesHtml
+        },
+        {
+            language: 'typescript',
+            fileName: 'combobox-states-example',
+            code: comboboxStatesTs,
+            component: 'ComboboxStateComponent'
+        }
+    ];
 }

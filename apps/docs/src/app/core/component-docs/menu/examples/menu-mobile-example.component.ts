@@ -4,5 +4,4 @@ import { Component } from '@angular/core';
     selector: 'fd-menu-mobile-example',
     templateUrl: './menu-mobile-example.component.html'
 })
-export class MenuMobileExampleComponent {
-}
+export class MenuMobileExampleComponent {}

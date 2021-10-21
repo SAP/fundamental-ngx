@@ -25,10 +25,6 @@ import { DocsThemeService } from '../documentation/services/docs-theme.service';
         RouterModule.forChild(ROUTES),
         SchemaModule.forRoot(PLATFORM_COMPONENT_SCHEMAS)
     ],
-    providers: [
-        { provide: 'CURRENT_LIB', useValue: 'platform' },
-        StackblitzService,
-        DocsThemeService
-    ]
+    providers: [{ provide: 'CURRENT_LIB', useValue: 'platform' }, StackblitzService, DocsThemeService]
 })
-export class PlatformDocumentationModule { }
+export class PlatformDocumentationModule {}

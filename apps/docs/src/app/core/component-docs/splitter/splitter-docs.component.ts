@@ -11,7 +11,6 @@ import * as splitterRequiredParentWidthTs from '!raw-loader!./examples/required-
 import * as splitterApiHtml from '!raw-loader!./examples/api/splitter-api-example.component.html';
 import * as splitterApiTs from '!raw-loader!./examples/api/splitter-api-example.component.ts';
 
-
 @Component({
     selector: 'app-splitter',
     templateUrl: './splitter-docs.component.html'

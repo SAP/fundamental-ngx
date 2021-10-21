@@ -1,6 +1,5 @@
 @mixin fd-rtl {
     @at-root {
-
         [dir='rtl'] &,
         &[dir='rtl'] {
             @content;
@@ -64,7 +63,6 @@
 }
 
 @mixin fd-hover {
-
     &:hover,
     &.is-hover {
         @content;
@@ -72,7 +70,6 @@
 }
 
 @mixin fd-focus() {
-
     &:focus,
     &.is-focus {
         z-index: 5;
@@ -82,7 +79,6 @@
 
 // ACTIVE state (press and hold)
 @mixin fd-active {
-
     &:active,
     &.is-active {
         @content;
@@ -90,7 +86,6 @@
 }
 
 @mixin fd-fiori-focus($offset: -0.1875rem) {
-
     &:focus,
     &.is-focus {
         @if $offset !=0 {
@@ -105,7 +100,6 @@
 }
 
 @mixin fd-set-padding-left-after($left: 0) {
-
     &:after {
         padding-left: $left;
     }
@@ -119,7 +113,6 @@
 }
 
 @mixin fd-set-padding-right-before($right: 0) {
-
     &:before {
         padding-right: $right;
     }
@@ -132,7 +125,12 @@
     }
 }
 
-@mixin fd-micro-process-flow-navigation-icon($direction: previous, $icon-previous: "\e067", $icon-next: "\e066", $padding: 0.313rem) {
+@mixin fd-micro-process-flow-navigation-icon(
+    $direction: previous,
+    $icon-previous: '\e067',
+    $icon-next: '\e066',
+    $padding: 0.313rem
+) {
     @if $direction==previous {
         &:before {
             content: $icon-previous;
@@ -145,9 +143,7 @@
                 content: $icon-next;
             }
         }
-    }
-
-    @else {
+    } @else {
         &:after {
             content: $icon-next;
         }
@@ -163,9 +159,7 @@
 }
 
 @mixin fd-micro-process-flow-semantic-state {
-
-    @each $state,
-    $background in $fd-micro-process-flow-semantic-colors {
+    @each $state, $background in $fd-micro-process-flow-semantic-colors {
         &--#{$state} {
             .#{$block}__icon-container {
                 background-color: map-get($background, default);

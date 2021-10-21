@@ -43,7 +43,6 @@ const routes: Routes = [
         ObjectStatusModule,
         PlatformObjectStatusModule,
         PlatformMenuModule
-
     ],
     exports: [RouterModule],
     declarations: [
@@ -54,7 +53,6 @@ const routes: Routes = [
         PlatformObjectListItemExampleComponent,
         PlatformObjectListItemWithRowNavigationExampleComponent,
         PlatformObjectListItemWithRowSelectionAndNavigationExampleComponent
-
     ]
 })
-export class PlatformObjectListItemDocsModule { }
+export class PlatformObjectListItemDocsModule {}

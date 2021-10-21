@@ -19,12 +19,9 @@ import {
         '[class.fd-message-box__body]': 'true',
         '[class.fd-message-box__body--no-vertical-padding]': '!messageBoxConfig.verticalPadding'
     },
-    providers: [
-        { provide: MESSAGE_BOX_CONFIGURABLE_ELEMENT, useExisting: MessageBoxBodyComponent, multi: true }
-    ]
+    providers: [{ provide: MESSAGE_BOX_CONFIGURABLE_ELEMENT, useExisting: MessageBoxBodyComponent, multi: true }]
 })
 export class MessageBoxBodyComponent implements MessageBoxConfigurableElement {
-
     /** @hidden */
     constructor(@Optional() public messageBoxConfig: MessageBoxConfig) {
         this.messageBoxConfig = this.messageBoxConfig || {};

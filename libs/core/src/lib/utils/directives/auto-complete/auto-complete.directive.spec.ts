@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { AutoCompleteDirective } from '@fundamental-ngx/core/utils';
 
 @Component({
-    template: ` <input [options]="values" fd-auto-complete>`
+    template: ` <input [options]="values" fd-auto-complete />`
 })
 class TestComponent {
     @ViewChild(AutoCompleteDirective)
@@ -18,11 +18,13 @@ describe('AutoCompleteDirective', () => {
     let fixture: ComponentFixture<TestComponent>;
     let directive: AutoCompleteDirective;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [AutoCompleteDirective, TestComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [AutoCompleteDirective, TestComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -61,7 +63,7 @@ describe('AutoCompleteDirective', () => {
 
         expect((<any>directive)._elementRef.nativeElement.value).toBe('Apple');
 
-        directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'ArrowLeft' } );
+        directive.handleKeyboardEvent(<any>{ preventDefault: () => {}, key: 'ArrowLeft' });
 
         expect(directive.onComplete.emit).toHaveBeenCalledWith({
             term: 'Apple',

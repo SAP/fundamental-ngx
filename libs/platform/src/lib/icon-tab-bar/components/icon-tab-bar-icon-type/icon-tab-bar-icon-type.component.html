@@ -6,10 +6,11 @@
     [overflowOffset]="100"
     (overflowChanged)="_recalculateVisibleItems($event)"
 >
-    <li *ngFor="let item of _tabs"
+    <li
+        *ngFor="let item of _tabs"
         [class]="item.cssClasses"
         fdOverflowListItem
-        [attr.aria-hidden]='item.hidden'
+        [attr.aria-hidden]="item.hidden"
         class="fd-icon-tab-bar__item"
         role="presentation"
     >
@@ -22,14 +23,14 @@
             (keydown)="_keyDownHandler($event, item)"
         >
             <div class="fd-icon-tab-bar__container">
-                        <span class="fd-icon-tab-bar__icon">
-                            <fd-icon [glyph]="item.icon"></fd-icon>
-                        </span>
-                <span *ngIf="item.counter && !item.label" class="fd-icon-tab-bar__counter">{{item.counter}}</span>
+                <span class="fd-icon-tab-bar__icon">
+                    <fd-icon [glyph]="item.icon"></fd-icon>
+                </span>
+                <span *ngIf="item.counter && !item.label" class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
             </div>
             <div *ngIf="item.label" class="fd-icon-tab-bar__details">
-                <span class="fd-icon-tab-bar__counter">{{item.counter}}</span>
-                <span class="fd-icon-tab-bar__label">{{item.label}}</span>
+                <span class="fd-icon-tab-bar__counter">{{ item.counter }}</span>
+                <span class="fd-icon-tab-bar__label">{{ item.label }}</span>
             </div>
         </a>
     </li>
@@ -41,6 +42,9 @@
         [isRtl]="isRtl"
         [anchorIndexInsideParent]="_lastVisibleTabIndex"
     >
-        <fdp-icon-tab-bar-popover [extraTabs]="_extraTabs" (selectedExtraItem)="_selectExtraItem($event)"></fdp-icon-tab-bar-popover>
+        <fdp-icon-tab-bar-popover
+            [extraTabs]="_extraTabs"
+            (selectedExtraItem)="_selectExtraItem($event)"
+        ></fdp-icon-tab-bar-popover>
     </li>
 </ul>

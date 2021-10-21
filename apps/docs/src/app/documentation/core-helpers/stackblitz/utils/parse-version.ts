@@ -24,8 +24,8 @@ export function parseVersion(versionInput: string): string {
 
     let updatedMinor = +minor;
 
-    if (extra && +patch === 0) {
-        // If provided version is a release candidate, return the closest previous version
+    if (extra || +patch === 0) {
+        // If provided version is a release candidate or it has no previous patch versions, return the closest previous version
         if (updatedMinor > 0) {
             updatedMinor--;
         } else {

@@ -40,19 +40,15 @@ export class WizardNgForExampleComponent {
             status: 'upcoming',
             label: 'Customer Information',
             glyph: 'user-edit',
-            messageStrip:
-                'This is the second step of this particular wizard example.',
-            contentText:
-                'Cras tellus leo, volutpat vitae ullamcorper eu, posuere malesuada nisl.'
+            messageStrip: 'This is the second step of this particular wizard example.',
+            contentText: 'Cras tellus leo, volutpat vitae ullamcorper eu, posuere malesuada nisl.'
         },
         {
             status: 'upcoming',
             label: 'Additional Information',
             glyph: 'paid-leave',
-            messageStrip:
-                'This wizard uses ngFor to iterate over an array to build steps',
-            contentText:
-                'Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar.'
+            messageStrip: 'This wizard uses ngFor to iterate over an array to build steps',
+            contentText: 'Integer pellentesque leo sit amet dui vehicula, quis ullamcorper est pulvinar.'
         }
     ];
 

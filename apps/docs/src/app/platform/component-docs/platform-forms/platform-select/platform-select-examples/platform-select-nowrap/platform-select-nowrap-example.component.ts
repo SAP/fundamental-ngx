@@ -26,7 +26,11 @@ export class PlatformSelectNoWrapExampleComponent {
 
     userList = [
         new Fruit('A', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. ', 10),
-        new Fruit('B', 'Minus eligendi dolore omnis veritatis! Et voluptatibus error, commodi, henderit perspiciatis ', 70),
+        new Fruit(
+            'B',
+            'Minus eligendi dolore omnis veritatis! Et voluptatibus error, commodi, henderit perspiciatis ',
+            70
+        ),
         new Fruit('C', 'Plums', 10),
         new Fruit('D', 'itis fuga sequi eveniet perspiciatis? Velit officiis sunt, debitis eum perspiciatis', 11),
         new Fruit('E', 's. Similique vel ipsam debitis fuga sequi eveniet perspiciatis? Velit officiis sunt, d', 10)
@@ -42,7 +46,7 @@ export class PlatformSelectNoWrapExampleComponent {
 
     onSelect(item: FdpSelectionChangeEvent): void {
         if (item) {
-         this.selectedValue = item.payload;
+            this.selectedValue = item.payload;
         }
-     }
- }
+    }
+}

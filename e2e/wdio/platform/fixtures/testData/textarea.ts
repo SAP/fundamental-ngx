@@ -4,7 +4,6 @@ export const multiple_lines_text = `
     line 3
     line 4`;
 
-
 export const multiple_lines_text_8_lines = `
     line 1
     line 2

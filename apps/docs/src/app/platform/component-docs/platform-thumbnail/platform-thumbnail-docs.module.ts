@@ -9,9 +9,9 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { PlatformThumbnailModule } from '@fundamental-ngx/platform/thumbnail';
 import { PlatformThumbnailDocsComponent } from './platform-thumbnail.docs.component';
 import { PlatformThumbnailHeaderComponent } from './platform-thumbnail-header/platform-thumbnail-header.component';
-import { PlatformThumbnailBasicExampleComponent } from './platform-thumbnail-examples/platform-thumbnail-basic-example.component'
-import { PlatformThumbnailHorizontalExampleComponent } from './platform-thumbnail-examples/platform-thumbnail-horizontal-example.component'
-import { PlatformThumbnailVideoMediaExampleComponent } from './platform-thumbnail-examples/platform-thumbnail-video-media-example.component'
+import { PlatformThumbnailBasicExampleComponent } from './platform-thumbnail-examples/platform-thumbnail-basic-example.component';
+import { PlatformThumbnailHorizontalExampleComponent } from './platform-thumbnail-examples/platform-thumbnail-horizontal-example.component';
+import { PlatformThumbnailVideoMediaExampleComponent } from './platform-thumbnail-examples/platform-thumbnail-video-media-example.component';
 
 const routes: Routes = [
     {
@@ -25,11 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes),
-        CommonModule,
-        SharedDocumentationPageModule,
-        PlatformThumbnailModule
-    ],
+    imports: [RouterModule.forChild(routes), CommonModule, SharedDocumentationPageModule, PlatformThumbnailModule],
     exports: [RouterModule],
     declarations: [
         PlatformThumbnailDocsComponent,
@@ -38,6 +34,5 @@ const routes: Routes = [
         PlatformThumbnailHorizontalExampleComponent,
         PlatformThumbnailVideoMediaExampleComponent
     ]
-
 })
-export class PlatformThumbnailDocsModule { }
+export class PlatformThumbnailDocsModule {}

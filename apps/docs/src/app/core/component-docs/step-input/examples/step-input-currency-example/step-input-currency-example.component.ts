@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
     selector: 'fd-step-input-currency-example',
     template: `
         <div class="step-input-example-container">
-
             <div class="step-input-example">
                 <label fd-form-label for="usa-input">Euro</label>
                 <fd-step-input id="usa-input" [(value)]="value1" mode="currency" currency="EUR"></fd-step-input>
@@ -19,10 +18,15 @@ import { Component } from '@angular/core';
 
             <div class="step-input-example">
                 <label fd-form-label for="override-input">Custom label</label>
-                <fd-step-input id="override-input" [(value)]="value3" mode="currency" currency="USD" unit="Grand"></fd-step-input>
+                <fd-step-input
+                    id="override-input"
+                    [(value)]="value3"
+                    mode="currency"
+                    currency="USD"
+                    unit="Grand"
+                ></fd-step-input>
                 <small>Value: {{ value3 }}</small>
             </div>
-
         </div>
     `
 })

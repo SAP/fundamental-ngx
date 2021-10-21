@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ContentDensity } from '@fundamental-ngx/core/utils';
 import { InlineLayout, ColumnLayout, HintPlacement, LabelLayout, SelectItem } from '@fundamental-ngx/platform/shared';
 import { InputType } from '../../input/input.component';
+import { DynamicFormGroup } from './dynamic-form-group';
 
 export type DynamicFormItemChoices = number | string | SelectItem;
 export type DynamicFormItemValidationResult = null | boolean | string;
@@ -118,7 +119,11 @@ export interface DynamicFormItem {
      * @param formItem @see DynamicFormItem
      * @returns updated form item value to be used in the form value hash for rendering purposes.
      */
-    valueRenderer?: (formItemValue?: any, formValue?: DynamicFormValue, formItem?: DynamicFormItem) => any | Promise<any>;
+    valueRenderer?: (
+        formItemValue?: any,
+        formValue?: DynamicFormValue,
+        formItem?: DynamicFormItem
+    ) => any | Promise<any>;
 
     /**
      * @description Should return true or false depending on whether or not this form item should be asked.
@@ -126,6 +131,13 @@ export interface DynamicFormItem {
      * @returns Boolean
      */
     when?: (formValue?: DynamicFormValue) => boolean | Promise<boolean> | Observable<boolean>;
+
+    /**
+     * @description Callback function that is triggered after field value has been changed
+     * @param fieldValue Field value.
+     * @param formGeneratorService Form generator service instance.
+     */
+    onchange?: (fieldValue?: any, forms?: Map<string, DynamicFormGroup>) => void | Promise<void> | Observable<void>;
 
     /**
      * @hidden

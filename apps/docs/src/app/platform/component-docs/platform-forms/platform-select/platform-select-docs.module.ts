@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { SelectMobileModule, SelectModule } from '@fundamental-ngx/core/select';
+import { SelectModule } from '@fundamental-ngx/core/select';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
@@ -39,7 +39,6 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
         SelectModule,
-        SelectMobileModule,
         DialogModule,
         ListModule,
         FdpFormGroupModule,
@@ -60,7 +59,6 @@ const routes: Routes = [
         PlatformSelectColumnsExampleComponent,
         PlatformSelectNoneExampleComponent,
         PlatformSelectNoWrapExampleComponent
-
     ]
 })
 export class PlatformSelectDocsModules {}

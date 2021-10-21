@@ -17,7 +17,7 @@ export class PlatformDisplayListItemDocsComponent {
         {
             language: 'html',
             code: dliSrc,
-            fileName: 'platform-display-list-item-example',
+            fileName: 'platform-display-list-item-example'
         }
     ];
 
@@ -25,7 +25,7 @@ export class PlatformDisplayListItemDocsComponent {
         {
             language: 'html',
             code: borderLessDLISrc,
-            fileName: 'platform-display-list-item-border-less-example',
+            fileName: 'platform-display-list-item-border-less-example'
         },
         {
             language: 'typescript',
@@ -39,7 +39,7 @@ export class PlatformDisplayListItemDocsComponent {
         {
             language: 'html',
             code: dliWithNavigation,
-            fileName: 'platform-display-list-item-with-navigation-example',
+            fileName: 'platform-display-list-item-with-navigation-example'
         },
         {
             language: 'typescript',
@@ -48,5 +48,4 @@ export class PlatformDisplayListItemDocsComponent {
             fileName: 'platform-display-list-item-with-navigation-example'
         }
     ];
-
 }

@@ -61,22 +61,19 @@
 
     <fd-dialog-footer>
         <fd-button-bar
-                fdType="emphasized"
-                i18n="@@platformUploadCollection.MoveTo.Btn.Confirm"
-                type="submit"
-                [disabled]="
-                    !(
-                        (selectedFolder && originalFolder?.documentId !== selectedFolder.documentId) ||
-                        (!selectedFolder && originalFolder?.documentId !== _currentFolder?.documentId)
-                    )
-                "
-                (click)="_confirm()">
+            fdType="emphasized"
+            i18n="@@platformUploadCollection.MoveTo.Btn.Confirm"
+            type="submit"
+            [disabled]="
+                !(
+                    (selectedFolder && originalFolder?.documentId !== selectedFolder.documentId) ||
+                    (!selectedFolder && originalFolder?.documentId !== _currentFolder?.documentId)
+                )
+            "
+            (click)="_confirm()"
+        >
             Move
         </fd-button-bar>
-        <fd-button-bar
-                i18n="@@platformUploadCollection.MoveTo.Btn.Close"
-                (click)="_close()">
-            Cancel
-        </fd-button-bar>
+        <fd-button-bar i18n="@@platformUploadCollection.MoveTo.Btn.Close" (click)="_close()"> Cancel </fd-button-bar>
     </fd-dialog-footer>
 </fd-dialog>

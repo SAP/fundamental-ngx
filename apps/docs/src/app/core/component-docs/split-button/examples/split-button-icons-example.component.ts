@@ -11,5 +11,4 @@ import { Component } from '@angular/core';
         `
     ]
 })
-export class ButtonSplitTypesIconsComponent {
-}
+export class ButtonSplitTypesIconsComponent {}

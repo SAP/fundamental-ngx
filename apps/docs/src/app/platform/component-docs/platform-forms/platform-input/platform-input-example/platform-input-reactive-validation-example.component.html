@@ -9,13 +9,7 @@
             placeholder="Field placeholder text"
             required="true"
         >
-            <fdp-input
-                name="input9"
-                [formControl]="ffl1.formControl"
-                type="text"
-                ariaLabelledBy="label"
-            >
-            </fdp-input>
+            <fdp-input name="input9" [formControl]="ffl1.formControl" type="text" ariaLabelledBy="label"> </fdp-input>
         </fdp-form-field>
         <fdp-form-field id="button-1" [rank]="10">
             <fdp-button type="submit" (click)="onSubmit()" label="Submit"></fdp-button>

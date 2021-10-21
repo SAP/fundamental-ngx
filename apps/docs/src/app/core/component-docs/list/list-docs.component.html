@@ -1,6 +1,4 @@
-<fd-docs-section-title id="simple" componentName="list">
-    Simple list
-</fd-docs-section-title>
+<fd-docs-section-title id="simple" componentName="list"> Simple list </fd-docs-section-title>
 <description>
     To display a simple list, extend your HTML list implementation with the following directives:
     <ul>
@@ -16,12 +14,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="navigation" componentName="list">
-    Navigation list
-</fd-docs-section-title>
+<fd-docs-section-title id="navigation" componentName="list"> Navigation list </fd-docs-section-title>
 <description>
-    For a standard list with navigation links, add anchor elements with <code>fd-list-link</code> directive.
-    All items should be navigable.
+    For a standard list with navigation links, add anchor elements with <code>fd-list-link</code> directive. All items
+    should be navigable.
 </description>
 <component-example>
     <fd-list-navigation-example></fd-list-navigation-example>
@@ -30,14 +26,11 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="indicator" componentName="list">
-    Navigation indicator
-</fd-docs-section-title>
+<fd-docs-section-title id="indicator" componentName="list"> Navigation indicator </fd-docs-section-title>
 <description>
-    If there is only a subset of list items that are navigable, they should be indicated with a navigation arrow.
-    Do not show arrows if all items are navigable, instead use a standard list with navigation.
-    To add navigation indicators, add a <code>[navigationIndication]="true"</code> property to the
-    <code>fd-list</code> element.
+    If there is only a subset of list items that are navigable, they should be indicated with a navigation arrow. Do not
+    show arrows if all items are navigable, instead use a standard list with navigation. To add navigation indicators,
+    add a <code>[navigationIndication]="true"</code> property to the <code>fd-list</code> element.
 </description>
 <component-example>
     <fd-list-nav-indicator-example></fd-list-nav-indicator-example>
@@ -46,11 +39,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="action" componentName="list">
-    Action list
-</fd-docs-section-title>
+<fd-docs-section-title id="action" componentName="list"> Action list </fd-docs-section-title>
 <description>
-    The action list is used to trigger an action directly from a list of options. To create an action item, add <code>[action]="true"</code>
+    The action list is used to trigger an action directly from a list of options. To create an action item, add
+    <code>[action]="true"</code>
     to the item. The following example features "Show More" button as an action list element.
 </description>
 <component-example>
@@ -60,9 +52,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="sorting-filtering" componentName="list">
-    Filter and sort list
-</fd-docs-section-title>
+<fd-docs-section-title id="sorting-filtering" componentName="list"> Filter and sort list </fd-docs-section-title>
 <description>
     List does not provide functionalities like filtering and sorting data. To implement those features, we recommend
     creating and using pipes to perform operations on a collection of list items. The following example presents a list
@@ -75,9 +65,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="secondary" componentName="list">
-    Secondary item on list
-</fd-docs-section-title>
+<fd-docs-section-title id="secondary" componentName="list"> Secondary item on list </fd-docs-section-title>
 <description>The list component can be customized by adding additional information in additional columns.</description>
 <component-example>
     <fd-list-secondary-example></fd-list-secondary-example>
@@ -86,9 +74,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="icon" componentName="list">
-    List with icons
-</fd-docs-section-title>
+<fd-docs-section-title id="icon" componentName="list"> List with icons </fd-docs-section-title>
 <description>List can display icons on both sides of the list items.</description>
 <component-example>
     <fd-list-icon-example></fd-list-icon-example>
@@ -97,9 +83,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="borderless" componentName="list">
-    Borderless list
-</fd-docs-section-title>
+<fd-docs-section-title id="borderless" componentName="list"> Borderless list </fd-docs-section-title>
 <description>
     It is possible to also remove the borders from the list items by passing <code>[noBorder]="true"</code>.
 </description>
@@ -110,12 +94,9 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="interactive" componentName="list">
-    Interactive list
-</fd-docs-section-title>
+<fd-docs-section-title id="interactive" componentName="list"> Interactive list </fd-docs-section-title>
 <description>
-    The interactive (<code>[interactive]="true"</code>) mode
-    will force list item to handle hover and active states.
+    The interactive (<code>[interactive]="true"</code>) mode will force list item to handle hover and active states.
     Also item list can be marked as selected, by passing <code>[selected]="true"</code>.
 </description>
 <component-example>
@@ -125,9 +106,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="icon-complex" componentName="list">
-    Complex list
-</fd-docs-section-title>
+<fd-docs-section-title id="icon-complex" componentName="list"> Complex list </fd-docs-section-title>
 <description>
     List items can be split into different groups with individual headers, accompanied by a footer at the bottom.
 </description>
@@ -138,9 +117,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="selection" componentName="list">
-    Selection
-</fd-docs-section-title>
+<fd-docs-section-title id="selection" componentName="list"> Selection </fd-docs-section-title>
 <description>
     You can also make the list items selectable by adding specific classes to the list and list items.
     <ul>
@@ -155,12 +132,11 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="keyboard" componentName="list">
-    Keyboard support
-</fd-docs-section-title>
+<fd-docs-section-title id="keyboard" componentName="list"> Keyboard support </fd-docs-section-title>
 <description>
-    By default, list supports keyboard navigation. Keyboard support can be disabled by passing <code>[enableKeyboardSupport]="false"</code>
-    to the list component. To implement custom handling of the list navigation that escapes list boundaries use <code>(focusEscapeList)</code>
+    By default, list supports keyboard navigation. Keyboard support can be disabled by passing
+    <code>[enableKeyboardSupport]="false"</code> to the list component. To implement custom handling of the list
+    navigation that escapes list boundaries use <code>(focusEscapeList)</code>
     as features in the following example.
 </description>
 <component-example>
@@ -170,9 +146,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="dnd" componentName="list">
-    Drag and drop
-</fd-docs-section-title>
+<fd-docs-section-title id="dnd" componentName="list"> Drag and drop </fd-docs-section-title>
 <description>
     To use drag and drop features in your list, import <code>DragAndDropModule</code> and add the
     <code>fd-dnd-list</code> directive to the list element and <code>fd-dnd-item</code> to each list item.
@@ -184,16 +158,13 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="infinite-scroll" componentName="list">
-    Infinite scroll list
-</fd-docs-section-title>
+<fd-docs-section-title id="infinite-scroll" componentName="list"> Infinite scroll list </fd-docs-section-title>
 <description>
-    It is possible to implement an infinite scroll function using the <code>fdInfiniteScroll</code> directive. It allows you to load
-    more data as the user scrolls down the parent element. It is important to remember that the
+    It is possible to implement an infinite scroll function using the <code>fdInfiniteScroll</code> directive. It allows
+    you to load more data as the user scrolls down the parent element. It is important to remember that the
     <code>InfiniteScrollModule</code> is required for this feature.
 </description>
 <component-example>
     <fd-list-infinite-scroll-example></fd-list-infinite-scroll-example>
 </component-example>
 <code-example [exampleFiles]="infiniteScrollCode"></code-example>
-

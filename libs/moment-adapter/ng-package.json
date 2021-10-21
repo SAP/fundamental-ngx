@@ -5,8 +5,5 @@
         "entryFile": "src/index.ts",
         "styleIncludePaths": ["../../node_modules"]
     },
-    "allowedNonPeerDependencies": [
-        "@fundamental-ngx/core",
-        "moment"
-    ]
+    "allowedNonPeerDependencies": ["@fundamental-ngx/core", "moment"]
 }

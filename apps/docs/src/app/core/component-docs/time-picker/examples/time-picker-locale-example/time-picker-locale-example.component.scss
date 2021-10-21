@@ -1,12 +1,13 @@
 .flex {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-  fd-select, fd-time-picker {
-    max-width: 25%;
-  }
+    fd-select,
+    fd-time-picker {
+        max-width: 25%;
+    }
 
-  fd-select {
-    margin-bottom: 0.5rem;
-  }
+    fd-select {
+        margin-bottom: 0.5rem;
+    }
 }

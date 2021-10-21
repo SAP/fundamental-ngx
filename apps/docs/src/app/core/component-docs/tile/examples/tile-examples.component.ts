@@ -10,7 +10,6 @@ export class TileGenericExampleComponent {
     constructor() {
         this.window = window;
     }
-
 }
 
 @Component({
@@ -29,7 +28,6 @@ export class LaunchTileExampleComponent {
     constructor() {
         this.window = window;
     }
-
 }
 
 @Component({
@@ -42,7 +40,6 @@ export class KpiTileExampleComponent {
     constructor() {
         this.window = window;
     }
-
 }
 
 @Component({
@@ -61,7 +58,6 @@ export class ActionTileExampleComponent {
     constructor() {
         this.window = window;
     }
-
 }
 
 @Component({
@@ -74,7 +70,6 @@ export class LineTileExampleComponent {
     constructor() {
         this.window = window;
     }
-
 }
 
 @Component({

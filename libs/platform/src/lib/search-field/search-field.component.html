@@ -4,11 +4,7 @@
     [class.is-loading]="isLoading"
     [class.hide-category-label]="hideCategoryLabel"
 >
-    <div
-        #inputGroup
-        class="fdp-search-field__input-group fd-input-group"
-        [class.is-focus]="isFocused"
-    >
+    <div #inputGroup class="fdp-search-field__input-group fd-input-group" [class.is-focus]="isFocused">
         <span
             class="fd-input-group__addon fd-input-group__addon--button"
             [class.fd-input-group__addon--compact]="contentDensity === 'compact'"

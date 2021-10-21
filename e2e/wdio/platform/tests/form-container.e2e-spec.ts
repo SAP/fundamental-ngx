@@ -18,25 +18,57 @@ import {
 } from '../../driver/wdio';
 import { getRandomString } from '../../helper/common-helper';
 
-describe('Form Container test suite', function() {
+describe('Form Container test suite', () => {
     const formContainerPage = new FormContainerPo();
     const {
-        recommendedExampleFormGroup, recommendedExampleCheckboxLabel, recommendedExampleTextArea, recommendedExampleHelpIcon,
-        popover, possibleExampleTextArea, possibleExampleCheckboxLabel, possibleExampleFormGroup, possibleExampleHelpIcon,
-        notRecommendedExampleTextArea, notRecommendedExampleCheckboxLabel, notRecommendedExampleFormGroup, notRecommendedExampleHelpIcon,
-        complexExampleTextArea, complexExampleCheckboxLabel, complexExampleFormGroup, complexExampleHelpIcon, complexExampleInputGroup,
-        complexExampleSubmitBtn, complexExampleRadioBtn, complexExampleRadioBtnLabel, complexExampleStepInput, complexExampleStepInputBtn,
-        complexExampleSwitch, columnExampleTextArea, formExampleTextArea, formExampleSwitch, formExampleHelpIcon,
-        changeExampleTextArea, changeExampleCheckboxLabel, changeExampleTextAreaLabel, changeExampleHelpIcon,
-        isInlineExampleTextArea, isInlineExampleCheckboxLabel, isInlineExampleHelpIcon, isInlineExampleRadioBtn,
-        isInlineExampleRadioBtnLabel, dropdownOption, isInlineExampleDropdownMenu, isInlineExampleCombobox, comboboxListItem,
+        recommendedExampleFormGroup,
+        recommendedExampleCheckboxLabel,
+        recommendedExampleTextArea,
+        recommendedExampleHelpIcon,
+        popover,
+        possibleExampleTextArea,
+        possibleExampleCheckboxLabel,
+        possibleExampleFormGroup,
+        possibleExampleHelpIcon,
+        notRecommendedExampleTextArea,
+        notRecommendedExampleCheckboxLabel,
+        notRecommendedExampleFormGroup,
+        notRecommendedExampleHelpIcon,
+        complexExampleTextArea,
+        complexExampleCheckboxLabel,
+        complexExampleFormGroup,
+        complexExampleHelpIcon,
+        complexExampleInputGroup,
+        complexExampleSubmitBtn,
+        complexExampleRadioBtn,
+        complexExampleRadioBtnLabel,
+        complexExampleStepInput,
+        complexExampleStepInputBtn,
+        complexExampleSwitch,
+        columnExampleTextArea,
+        formExampleTextArea,
+        formExampleSwitch,
+        formExampleHelpIcon,
+        changeExampleTextArea,
+        changeExampleCheckboxLabel,
+        changeExampleTextAreaLabel,
+        changeExampleHelpIcon,
+        isInlineExampleTextArea,
+        isInlineExampleCheckboxLabel,
+        isInlineExampleHelpIcon,
+        isInlineExampleRadioBtn,
+        isInlineExampleRadioBtnLabel,
+        dropdownOption,
+        isInlineExampleDropdownMenu,
+        isInlineExampleCombobox,
+        comboboxListItem,
         isInlineExampleComboboxBtn
     } = formContainerPage;
-    beforeAll( () => {
+    beforeAll(() => {
         formContainerPage.open();
     }, 1);
 
-    describe('Recommended form layouts example', function() {
+    describe('Recommended form layouts example', () => {
         it('should check the layout matches the described layout', () => {
             checkLayout(recommendedExampleFormGroup);
         });
@@ -56,9 +88,9 @@ describe('Form Container test suite', function() {
         });
     });
 
-    describe('Possible form layouts example', function() {
+    describe('Possible form layouts example', () => {
         it('should check the layout matches the described layout', () => {
-            checkLayout(possibleExampleFormGroup)
+            checkLayout(possibleExampleFormGroup);
         });
 
         it('should be able to mark checkboxes', () => {
@@ -76,7 +108,7 @@ describe('Form Container test suite', function() {
         });
     });
 
-    describe('Not recommended form layouts example', function() {
+    describe('Not recommended form layouts example', () => {
         it('should check the layout matches the described layout', () => {
             checkLayout(notRecommendedExampleFormGroup);
         });
@@ -96,7 +128,7 @@ describe('Form Container test suite', function() {
         });
     });
 
-    describe('Complex form example', function() {
+    describe('Complex form example', () => {
         it('should check the layout matches the described layout', () => {
             checkLayout(complexExampleFormGroup);
         });
@@ -140,8 +172,10 @@ describe('Form Container test suite', function() {
 
             for (let i = 0; i < buttonCount; i++) {
                 click(complexExampleRadioBtnLabel, i);
-                expect(getAttributeByName(complexExampleRadioBtn, 'aria-checked', i))
-                    .toBe('true', `button ${i} not selected`);
+                expect(getAttributeByName(complexExampleRadioBtn, 'aria-checked', i)).toBe(
+                    'true',
+                    `button ${i} not selected`
+                );
             }
         });
 
@@ -171,13 +205,13 @@ describe('Form Container test suite', function() {
         });
     });
 
-    describe('Column Binding example', function() {
+    describe('Column Binding example', () => {
         it('should be able to add text to the textarea', () => {
             checkAddingText(columnExampleTextArea);
         });
     });
 
-    describe('Form Field Group example', function() {
+    describe('Form Field Group example', () => {
         it('should be able to add text to the textarea', () => {
             checkAddingText(formExampleTextArea);
         });
@@ -193,7 +227,7 @@ describe('Form Container test suite', function() {
         });
     });
 
-    describe('Change of column number for a field example', function() {
+    describe('Change of column number for a field example', () => {
         it('should be able to add text to the textarea', () => {
             checkAddingText(changeExampleTextArea);
         });
@@ -205,7 +239,7 @@ describe('Form Container test suite', function() {
 
             for (let i = 0; i < labelCount; i++) {
                 const labelText = getText(changeExampleTextAreaLabel, i);
-                scrollIntoView(changeExampleHelpIcon, i)
+                scrollIntoView(changeExampleHelpIcon, i);
                 mouseHoverElement(changeExampleHelpIcon, i);
                 waitForElDisplayed(popover);
 
@@ -218,7 +252,7 @@ describe('Form Container test suite', function() {
         });
     });
 
-    describe('Change of isInline value for a field example', function() {
+    describe('Change of isInline value for a field example', () => {
         it('should be able to add text to the textarea', () => {
             checkAddingText(isInlineExampleTextArea);
         });
@@ -232,8 +266,10 @@ describe('Form Container test suite', function() {
 
             for (let i = 0; i < buttonCount; i++) {
                 click(isInlineExampleRadioBtnLabel, i);
-                expect(getAttributeByName(isInlineExampleRadioBtn, 'aria-checked', i))
-                    .toBe('true', `button ${i} not marked`);
+                expect(getAttributeByName(isInlineExampleRadioBtn, 'aria-checked', i)).toBe(
+                    'true',
+                    `button ${i} not marked`
+                );
             }
         });
 
@@ -247,7 +283,7 @@ describe('Form Container test suite', function() {
         });
 
         it('should be able to type option in combobox field', () => {
-            const appleText = 'Apple'
+            const appleText = 'Apple';
             click(isInlineExampleCombobox);
             sendKeys(appleText);
 
@@ -296,7 +332,7 @@ describe('Form Container test suite', function() {
     function markAllCheckboxes(selector: string): void {
         const checkboxCount = getElementArrayLength(selector);
 
-        for (let i = 0; i <  checkboxCount; i++) {
+        for (let i = 0; i < checkboxCount; i++) {
             scrollIntoView(selector, i);
             click(selector, i);
             expect([null, '', undefined]).not.toContain(executeScriptBeforeTagAttr(selector, 'content', i));

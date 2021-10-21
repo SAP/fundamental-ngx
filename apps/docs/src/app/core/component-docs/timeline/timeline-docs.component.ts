@@ -13,7 +13,6 @@ import * as timelineVerticalAxisExampleTs from '!raw-loader!./examples/timeline-
     templateUrl: './timeline-docs.component.html'
 })
 export class TimelineDocsComponent {
-
     timelineBasicExample: ExampleFile[] = [
         {
             language: 'html',
@@ -23,7 +22,7 @@ export class TimelineDocsComponent {
         {
             language: 'typescript',
             code: timelineBasicExampleTs,
-            name: 'timeline-basic-example.ts',
+            name: 'timeline-basic-example.ts'
         },
         {
             language: 'typescript',
@@ -41,7 +40,7 @@ export class TimelineDocsComponent {
         {
             language: 'typescript',
             code: timelineHorizontalAxisExampleTs,
-            name: 'timeline-template-example.component.ts',
+            name: 'timeline-template-example.component.ts'
         },
         {
             language: 'typescript',
@@ -59,7 +58,7 @@ export class TimelineDocsComponent {
         {
             language: 'typescript',
             code: timelineHorizontalDoubleExampleTs,
-            name: 'timeline-horizontal-double-side-example.component.ts',
+            name: 'timeline-horizontal-double-side-example.component.ts'
         },
         {
             language: 'typescript',
@@ -77,7 +76,7 @@ export class TimelineDocsComponent {
         {
             language: 'typescript',
             code: timelineVerticalAxisExampleTs,
-            name: 'timeline-vertical-double-side-example.component.ts',
+            name: 'timeline-vertical-double-side-example.component.ts'
         },
         {
             language: 'typescript',

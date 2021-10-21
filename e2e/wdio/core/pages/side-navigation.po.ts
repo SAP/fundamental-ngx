@@ -1,5 +1,5 @@
 import { CoreBaseComponentPo } from './core-base-component.po';
-import { waitForElDisplayed, waitForPresent} from '../../driver/wdio';
+import { waitForElDisplayed, waitForPresent } from '../../driver/wdio';
 
 export class SideNavigationPo extends CoreBaseComponentPo {
     private url = '/side-navigation';
@@ -21,7 +21,7 @@ export class SideNavigationPo extends CoreBaseComponentPo {
     expandArrow = this.pointContainsSubList + 'button';
     expandListExample = 'fd-popover-body ';
     expandedListPoint = '.fd-popover__popper ul li a';
-    subList = '.level-2'
+    subList = '.level-2';
     subListItem = this.subList + ' li a';
     condensedObjectSelected = 'fd-nested-list__link ng-star-inserted is-selected';
     objectSelected = 'fd-nested-list__link is-selected';
@@ -46,5 +46,4 @@ export class SideNavigationPo extends CoreBaseComponentPo {
     compareWithBaseline(specName: string = 'side-navigation'): any {
         return super.compareWithBaseline(specName, this.getScreenshotFolder());
     }
-
 }

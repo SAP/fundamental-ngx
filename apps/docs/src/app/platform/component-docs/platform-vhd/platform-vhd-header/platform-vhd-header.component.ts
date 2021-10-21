@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
     selector: 'app-vhd-header',
     templateUrl: './platform-vhd-header.component.html'
 })
-export class PlatformVhdHeaderComponent { }
+export class PlatformVhdHeaderComponent {}

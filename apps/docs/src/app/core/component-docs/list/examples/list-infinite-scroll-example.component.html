@@ -1,9 +1,8 @@
-
 <fd-busy-indicator size="l" class="fd-busy-indicator-custom" block="true" [loading]="loading">
     <ul
         fd-list
         fdInfiniteScroll
-        style="overflow-y: scroll; max-height: 250px;"
+        style="overflow-y: scroll; max-height: 250px"
         [scrollOffset]="40"
         (onScrollAction)="scrollHandler()"
     >

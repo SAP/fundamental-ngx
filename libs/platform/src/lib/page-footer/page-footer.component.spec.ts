@@ -11,15 +11,14 @@ import { PlatformPageFooterModule } from './page-footer.module';
         <fdp-page-footer [logo]="logo" [content]="content"></fdp-page-footer>
 
         <ng-template #logo>
-            <img id="fd-logo-1" src="/assets/images/logo-sap.svg" alt=""/>
+            <img id="fd-logo-1" src="/assets/images/logo-sap.svg" alt="" />
         </ng-template>
 
         <ng-template #content>
             <fdp-link id="fd-link-test-1" href="/" title="footer link Supported Browser">Supported Browser</fdp-link>
             <fdp-link id="fd-link-test-2" href="/" title="footer link Security Disclosure"
-            >Security Disclosure
-            </fdp-link
-            >
+                >Security Disclosure
+            </fdp-link>
             <fdp-link id="fd-link-test-3" href="/" title="footer link Privacy Statement">Privacy Statement</fdp-link>
             <fdp-link id="fd-link-test-4" href="/" title="footer link Cookie Statement">Cookie Statement</fdp-link>
             <fdp-link id="fd-link-test-5" href="/" title="footer link Participant Team">Participant Team</fdp-link>

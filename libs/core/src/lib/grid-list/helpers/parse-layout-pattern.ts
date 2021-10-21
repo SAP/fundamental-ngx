@@ -3,7 +3,7 @@ interface ParseLayout {
         pattern: string;
         value: number;
         size: string;
-    }
+    };
 }
 
 export function parseLayoutPattern(pattern: string, isBaseLayout = true): string[] | undefined {

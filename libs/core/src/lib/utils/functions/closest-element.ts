@@ -33,7 +33,7 @@ export function getClosest(selector, elem): Element | null {
     }
 
     // get the closest matching element
-    for ( ; elem && elem !== document; elem = elem.parentNode) {
+    for (; elem && elem !== document; elem = elem.parentNode) {
         if (elem.matches(selector)) {
             return elem;
         }

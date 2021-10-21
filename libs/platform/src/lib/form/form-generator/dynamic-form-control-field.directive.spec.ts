@@ -8,23 +8,19 @@ import { DynamicFormControl } from './dynamic-form-control';
 
 @Component({
     template: `
-        <div
-            class="should-show"
-            *fdpDynamicFormControlField="control; show: shouldShow"
-        >
+        <div class="should-show" *fdpDynamicFormControlField="control; show: shouldShow">
             <p>This is shown</p>
         </div>
 
-        <div
-            class="should-hide"
-            *fdpDynamicFormControlField="control; show: !shouldShow"
-        >
+        <div class="should-hide" *fdpDynamicFormControlField="control; show: !shouldShow">
             <p>This is hidden</p>
         </div>
     `
 })
 class HostComponent {
-    control = new DynamicFormControl('default value', {dynamicFormItem: {type: 'input', name: 'test', message: 'test'}});
+    control = new DynamicFormControl('default value', {
+        dynamicFormItem: { type: 'input', name: 'test', message: 'test' }
+    });
 
     shouldShow = true;
 }
@@ -33,11 +29,13 @@ class HostComponent {
 xdescribe('DynamicFormControlFieldDirective', () => {
     let fixture: ComponentFixture<HostComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [DynamicFormControlFieldDirective, HostComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [DynamicFormControlFieldDirective, HostComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(HostComponent);

@@ -1,7 +1,7 @@
 import { DynamicSideContentPo } from '../pages/dynamic-side-content.po';
 import { refreshPage, waitForPresent } from '../../driver/wdio';
 
-describe('dynamic side content test suite', function() {
+describe('dynamic side content test suite', () => {
     const dynamicSideContentPage = new DynamicSideContentPo();
 
     beforeAll(() => {
@@ -9,17 +9,17 @@ describe('dynamic side content test suite', function() {
     }, 1);
 
     afterEach(() => {
-       refreshPage();
-       waitForPresent(dynamicSideContentPage.pageHeader);
+        refreshPage();
+        waitForPresent(dynamicSideContentPage.pageHeader);
     }, 1);
 
-    describe('check orientation', function() {
+    describe('check orientation', () => {
         it('should check RTL and LTR orientation', () => {
             dynamicSideContentPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             dynamicSideContentPage.saveExampleBaselineScreenshot();
             expect(dynamicSideContentPage.compareWithBaseline()).toBeLessThan(5);

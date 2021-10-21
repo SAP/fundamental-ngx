@@ -1,4 +1,11 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, ViewEncapsulation, HostListener, Output} from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    EventEmitter,
+    ViewEncapsulation,
+    HostListener,
+    Output
+} from '@angular/core';
 
 /**
  * A component used to enforce a certain layout for the action sheet.
@@ -20,7 +27,6 @@ import {ChangeDetectionStrategy, Component, EventEmitter, ViewEncapsulation, Hos
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionSheetControlComponent {
-
     /** Emitted event when control button is clicked **/
     @Output()
     clicked: EventEmitter<void> = new EventEmitter<void>();
@@ -30,5 +36,4 @@ export class ActionSheetControlComponent {
     onClick(event: MouseEvent): void {
         this.clicked.emit();
     }
-
 }

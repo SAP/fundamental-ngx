@@ -14,11 +14,12 @@ import {
     saveElementScreenshot,
     scrollIntoView,
     checkElementScreenshot,
-    getElementArrayLength, browserIsFirefox
+    getElementArrayLength,
+    browserIsFirefox
 } from '../../driver/wdio';
-import { sections } from '../fixtures/appData/time-contents'
+import { sections } from '../fixtures/appData/time-contents';
 
-describe('Time component test', function () {
+describe('Time component test', () => {
     const timePage = new TimePo();
     const {
         downArrow,
@@ -87,7 +88,10 @@ describe('Time component test', function () {
         click(formExample + secondsColumn);
         const chosenSecondValue = getText(formExample3Second);
         click(formExample3Second);
-        expect(getText(enableTimeRow)).toEqual(chosenHourValue + 'h ' + chosenMinuteValue + 'm ' + chosenSecondValue + 's', 'Current value is not equal chosen value');
+        expect(getText(enableTimeRow)).toEqual(
+            chosenHourValue + 'h ' + chosenMinuteValue + 'm ' + chosenSecondValue + 's',
+            'Current value is not equal chosen value'
+        );
     });
 
     it('should check that no-spinner example does not have up/down arrows', () => {
@@ -99,35 +103,42 @@ describe('Time component test', function () {
         click(noSpinnersExample + secondsColumn);
         expect(doesItExist(noSpinnersExample + secondsColumn + UpArrow)).toBe(false, 'Up Arrow exists');
         expect(doesItExist(noSpinnersExample + secondsColumn + downArrow)).toBe(false, 'Down arrow exists');
-    })
+    });
 
-   it('Should check that click and drag works', () => {
-       // method not working on FF
-       if (browserIsFirefox()) {
-           return;
-       }
+    it('Should check that click and drag works', () => {
+        // method not working on FF
+        if (browserIsFirefox()) {
+            return;
+        }
         for (let i = 0; i < sections.length; i++) {
             checkScroll(sections[i], 'down');
             refreshPage();
             checkScroll(sections[i], 'up');
         }
-    })
+    });
 
     it('should check orientation', () => {
         timePage.checkRtlSwitch();
     });
 
-    xdescribe('Visual regression', function () {
+    xdescribe('Visual regression', () => {
         it('should check examples except dinamyc changes example', () => {
             const actionSheetCount = getElementArrayLength(exampleAreaContainersArr);
             for (let i = 0; actionSheetCount > i; i++) {
                 if (i !== 3) {
                     scrollIntoView(exampleAreaContainersArr, i);
-                    saveElementScreenshot(exampleAreaContainersArr,
-                        `time-example-${i}-core-${getImageTagBrowserPlatform()}`, timePage.getScreenshotFolder());
-                    expect(checkElementScreenshot(exampleAreaContainersArr,
-                        `time-example-${i}-core-${getImageTagBrowserPlatform()}`, timePage.getScreenshotFolder()))
-                        .toBeLessThan(5);
+                    saveElementScreenshot(
+                        exampleAreaContainersArr,
+                        `time-example-${i}-core-${getImageTagBrowserPlatform()}`,
+                        timePage.getScreenshotFolder()
+                    );
+                    expect(
+                        checkElementScreenshot(
+                            exampleAreaContainersArr,
+                            `time-example-${i}-core-${getImageTagBrowserPlatform()}`,
+                            timePage.getScreenshotFolder()
+                        )
+                    ).toBeLessThan(5);
                 }
             }
         });
@@ -135,52 +146,101 @@ describe('Time component test', function () {
 
     function checkClockMoving(section: string, action: 'arrowClick' | 'buttonClick'): void {
         const nextHourValue = getNextElementText(section + currentHour);
-        action === 'arrowClick' ? click(section + downArrow) : ''
-        action === 'buttonClick' ? clickNextElement(section + currentHour) : ''
+        if (action === 'arrowClick') {
+            click(section + downArrow);
+        }
+        if (action === 'buttonClick') {
+            clickNextElement(section + currentHour);
+        }
         expect(getText(section + currentHour)).toEqual(nextHourValue, 'Current hour is not equal chosen value');
 
         if (section !== onlyHoursExample) {
             click(section + minutesColumn);
             const previousMinuteValue = getPreviousElementText(section + currentMinute);
-            action === 'arrowClick' ? click(section + UpArrow) : ''
-            action === 'buttonClick' ? clickPreviousElement(section + currentMinute) : ''
-            expect(getText(section + currentMinute)).toEqual(previousMinuteValue, 'Current hour is not equal chosen value');
+            if (action === 'arrowClick') {
+                click(section + UpArrow);
+            }
+            if (action === 'buttonClick') {
+                clickPreviousElement(section + currentMinute);
+            }
+            expect(getText(section + currentMinute)).toEqual(
+                previousMinuteValue,
+                'Current hour is not equal chosen value'
+            );
         }
 
         if (section !== withoutSecondsExample && section !== onlyHoursExample) {
             click(section + secondsColumn);
             const previousSecondValue = getPreviousElementText(section + currentSec);
-            action === 'arrowClick' ? click(section + UpArrow) : ''
-            action === 'buttonClick' ? clickPreviousElement(section + currentSec) : ''
-            expect(getText(section + currentSec)).toEqual(previousSecondValue, 'Current hour is not equal chosen value');
+            if (action === 'arrowClick') {
+                click(section + UpArrow);
+            }
+            if (action === 'buttonClick') {
+                clickPreviousElement(section + currentSec);
+            }
+            expect(getText(section + currentSec)).toEqual(
+                previousSecondValue,
+                'Current hour is not equal chosen value'
+            );
         }
     }
 
     function checkScroll(section: string, direction: 'up' | 'down'): void {
         let scrollStep, scrollToHour, scrollToMinute, scrollToSec;
 
-        direction === 'up' ? getElementClass(section + clockArea) === 'fd-time fd-time--compact' ? scrollStep = 50 : scrollStep = 100 : '';
-        direction === 'down' ? getElementClass(section + clockArea) === 'fd-time fd-time--compact' ? scrollStep = -50 : scrollStep = -100 : '';
+        if (direction === 'up') {
+            if (getElementClass(section + clockArea) === 'fd-time fd-time--compact') {
+                scrollStep = 50;
+            } else {
+                scrollStep = 100;
+            }
+        } else if (direction === 'down') {
+            if (getElementClass(section + clockArea) === 'fd-time fd-time--compact') {
+                scrollStep = -50;
+            } else {
+                scrollStep = -100;
+            }
+        }
 
-        direction === 'up' ? scrollToHour = getText(section + upperhour) : ''
-        direction === 'down' ? scrollToHour = getText(section + lowerHour) : ''
+        if (direction === 'up') {
+            scrollToHour = getText(section + upperhour);
+        }
+        if (direction === 'down') {
+            scrollToHour = getText(section + lowerHour);
+        }
         clickAndMoveElement(section + hoursColumn, 0, scrollStep);
-        expect(getText(section + currentHour)).toEqual(scrollToHour, 'The current hour is not equivalent to the hour to which you have scrolled');
+        expect(getText(section + currentHour)).toEqual(
+            scrollToHour,
+            'The current hour is not equivalent to the hour to which you have scrolled'
+        );
 
         if (section !== onlyHoursExample) {
             click(section + minutesColumn);
-            direction === 'up' ? scrollToMinute = getText(section + upperMinute) : '';
-            direction === 'down' ? scrollToMinute = getText(section + lowerMinute) : ''
+            if (direction === 'up') {
+                scrollToMinute = getText(section + upperMinute);
+            }
+            if (direction === 'down') {
+                scrollToMinute = getText(section + lowerMinute);
+            }
             clickAndMoveElement(section + minutesColumn, 0, scrollStep);
-            expect(getText(section + currentMinute)).toEqual(scrollToMinute, 'The current hour is not equivalent to the hour to which you have scrolled');
+            expect(getText(section + currentMinute)).toEqual(
+                scrollToMinute,
+                'The current hour is not equivalent to the hour to which you have scrolled'
+            );
         }
         if (section !== withoutSecondsExample && section !== onlyHoursExample) {
             click(section + secondsColumn);
-            direction === 'up' ? scrollToSec = getText(section + upperSec) : ''
-            direction === 'down' ? scrollToSec = getText(section + lowerSec) : ''
+            if (direction === 'up') {
+                scrollToSec = getText(section + upperSec);
+            }
+            if (direction === 'down') {
+                scrollToSec = getText(section + lowerSec);
+            }
             clickAndMoveElement(section + secondsColumn, 0, scrollStep);
-            expect(getText(section + currentSec)).toEqual(scrollToSec, 'The current hour is not equivalent to the hour to which you have scrolled');
+            expect(getText(section + currentSec)).toEqual(
+                scrollToSec,
+                'The current hour is not equivalent to the hour to which you have scrolled'
+            );
         }
     }
-
 });

@@ -1,27 +1,27 @@
 {
-  "extends": "../../../../../tsconfig.base.json",
-  "files": [],
-  "include": [],
-  "references": [
-    {
-      "path": "./tsconfig.lib.json"
+    "extends": "../../../../../tsconfig.base.json",
+    "files": [],
+    "include": [],
+    "references": [
+        {
+            "path": "./tsconfig.lib.json"
+        },
+        {
+            "path": "./tsconfig.lib.prod.json"
+        },
+        {
+            "path": "./tsconfig.spec.json"
+        }
+    ],
+    "compilerOptions": {
+        "forceConsistentCasingInFileNames": true,
+        "strict": false,
+        "noImplicitReturns": false,
+        "noFallthroughCasesInSwitch": true
     },
-    {
-      "path": "./tsconfig.lib.prod.json"
-    },
-    {
-      "path": "./tsconfig.spec.json"
+    "angularCompilerOptions": {
+        "strictInjectionParameters": false,
+        "strictTemplates": false,
+        "fullTemplateTypeCheck": false
     }
-  ],
-  "compilerOptions": {
-    "forceConsistentCasingInFileNames": true,
-    "strict": false,
-    "noImplicitReturns": false,
-    "noFallthroughCasesInSwitch": true
-  },
-  "angularCompilerOptions": {
-    "strictInjectionParameters": false,
-    "strictTemplates": false,
-    "fullTemplateTypeCheck": false
-  }
 }

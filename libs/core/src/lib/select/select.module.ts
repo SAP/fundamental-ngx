@@ -12,13 +12,6 @@ import { OptionComponent } from './option/option.component';
 @NgModule({
     declarations: [SelectComponent, OptionComponent],
     exports: [SelectComponent, OptionComponent],
-    imports: [
-        BusyIndicatorModule,
-        CommonModule,
-        PopoverModule,
-        ButtonModule,
-        IconModule,
-        ListModule
-    ]
+    imports: [BusyIndicatorModule, CommonModule, PopoverModule, ButtonModule, IconModule, ListModule]
 })
 export class SelectModule {}

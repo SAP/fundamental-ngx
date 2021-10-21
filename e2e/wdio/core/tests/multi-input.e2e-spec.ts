@@ -1,24 +1,47 @@
 import {
     click,
     getAttributeByName,
-    getElementArrayLength, getText, isElementDisplayed,
+    getElementArrayLength,
+    getText,
+    isElementDisplayed,
     refreshPage,
-    scrollIntoView, setValue,
+    scrollIntoView,
+    setValue,
     waitForPresent
 } from '../../driver/wdio';
 
 import { MultiInputPo } from '../pages/multi-input.po';
 
 import {
-    testOptionsArray1, testOptionsArray2, testOptionsArray3, testOptionsArray4, testOptionsArray5, testOptionsArray6
+    testOptionsArray1,
+    testOptionsArray2,
+    testOptionsArray3,
+    testOptionsArray4,
+    testOptionsArray5,
+    testOptionsArray6
 } from '../fixtures/appData/multi-input-contents';
 
-xdescribe('Multi input test suite', function() {
+xdescribe('Multi input test suite', () => {
     const multiInputPage = new MultiInputPo();
     const {
-        activeDropdownButtons, activeInputs, disableInputs, options, multiInputOptions, buttonShowAll, expandedDropdown,
-        hiddenAddonButtonInputOptions, compactMultiInputOptions, multiSelectButton, approveButton, mobileInputOptions,
-        displayObjectOptions, searchTermOptions, customFilterOptions, asyncExampleOptions, tokenOptions, templateOptions
+        activeDropdownButtons,
+        activeInputs,
+        disableInputs,
+        options,
+        multiInputOptions,
+        buttonShowAll,
+        expandedDropdown,
+        hiddenAddonButtonInputOptions,
+        compactMultiInputOptions,
+        multiSelectButton,
+        approveButton,
+        mobileInputOptions,
+        displayObjectOptions,
+        searchTermOptions,
+        customFilterOptions,
+        asyncExampleOptions,
+        tokenOptions,
+        templateOptions
     } = multiInputPage;
 
     beforeAll(() => {
@@ -58,8 +81,7 @@ xdescribe('Multi input test suite', function() {
         }
     });
 
-    describe('Check Mobile Mode Multi Input', function() {
-
+    describe('Check Mobile Mode Multi Input', () => {
         it('verify Simple Multi Input by select each option', () => {
             scrollIntoView(activeDropdownButtons);
             click(activeDropdownButtons);
@@ -74,8 +96,7 @@ xdescribe('Multi input test suite', function() {
         });
     });
 
-    describe('Check Hidden Addon Button', function() {
-
+    describe('Check Hidden Addon Button', () => {
         it('verify Hidden Addon Button by select each option', () => {
             scrollIntoView(activeInputs, 1);
             setValue(activeInputs, 'to', 1);
@@ -95,8 +116,7 @@ xdescribe('Multi input test suite', function() {
         });
     });
 
-    describe('Check Compact Multi Input', function() {
-2
+    describe('Check Compact Multi Input', () => {
         it('verify Compact Multi Input by select each option', () => {
             scrollIntoView(activeDropdownButtons, 1);
             const inputOptionsLength = getElementArrayLength(compactMultiInputOptions);
@@ -118,8 +138,7 @@ xdescribe('Multi input test suite', function() {
         });
     });
 
-    describe('Check Mobile Mode Multi Input', function() {
-
+    describe('Check Mobile Mode Multi Input', () => {
         it('verify Mobile Mode Multi Input by multi select button', () => {
             scrollIntoView(activeDropdownButtons, 2);
             click(activeDropdownButtons, 2);
@@ -149,8 +168,7 @@ xdescribe('Multi input test suite', function() {
         });
     });
 
-    describe('Check Display Object Property', function() {
-
+    describe('Check Display Object Property', () => {
         it('verify Display Object Property by select each option', () => {
             scrollIntoView(activeDropdownButtons, 4);
             click(activeDropdownButtons, 4);
@@ -168,8 +186,7 @@ xdescribe('Multi input test suite', function() {
         });
     });
 
-    describe('Check Return results including search term', function() {
-
+    describe('Check Return results including search term', () => {
         it('verify Return results including search term by clicking each option', () => {
             scrollIntoView(activeDropdownButtons, 5);
             click(activeDropdownButtons, 5);
@@ -187,8 +204,7 @@ xdescribe('Multi input test suite', function() {
         });
     });
 
-    describe('Check Custom Filter', function() {
-
+    describe('Check Custom Filter', () => {
         it('verify Custom Filter by clicking each option', () => {
             scrollIntoView(activeDropdownButtons, 6);
             click(activeDropdownButtons, 6);
@@ -206,8 +222,7 @@ xdescribe('Multi input test suite', function() {
         });
     });
 
-    describe('Check Observable Async Example', function() {
-
+    describe('Check Observable Async Example', () => {
         it('verify Observable Async Example by clicking each option', () => {
             scrollIntoView(activeDropdownButtons, 7);
             click(activeDropdownButtons, 7);
@@ -225,8 +240,7 @@ xdescribe('Multi input test suite', function() {
         });
     });
 
-    describe('Check Multi Input in Reactive Form', function() {
-
+    describe('Check Multi Input in Reactive Form', () => {
         it('verify Multi Input in Reactive Form by clicking each option', () => {
             scrollIntoView(activeDropdownButtons, 8);
             click(activeDropdownButtons, 8);
@@ -241,8 +255,7 @@ xdescribe('Multi input test suite', function() {
         });
     });
 
-    describe('Check Adding New Tokens', function() {
-
+    describe('Check Adding New Tokens', () => {
         it('verify Adding New Tokens by clicking each option', () => {
             scrollIntoView(activeDropdownButtons, 9);
             click(activeDropdownButtons, 9);
@@ -260,8 +273,7 @@ xdescribe('Multi input test suite', function() {
         });
     });
 
-    describe('Check Custom Item Template', function() {
-
+    describe('Check Custom Item Template', () => {
         it('verify Custom Item Template by clicking each option', () => {
             scrollIntoView(activeDropdownButtons, 10);
             click(activeDropdownButtons, 10);
@@ -279,8 +291,7 @@ xdescribe('Multi input test suite', function() {
         });
     });
 
-    xdescribe('Check visual regression', function() {
-
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             multiInputPage.saveExampleBaselineScreenshot();
             expect(multiInputPage.compareWithBaseline()).toBeLessThan(5);

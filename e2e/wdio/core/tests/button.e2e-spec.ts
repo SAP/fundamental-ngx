@@ -8,28 +8,34 @@ import {
     click,
     sendKeys,
     checkElementScreenshot,
-    saveElementScreenshot, getText
+    saveElementScreenshot,
+    getText
 } from '../../driver/wdio';
-import {
-    testText, fdTypeOptions, iconOptions,
-} from '../fixtures/appData/button-contents';
-import {
-    buttonPlaygroundTag,
-} from '../fixtures/testData/button-tags';
+import { testText, fdTypeOptions, iconOptions } from '../fixtures/appData/button-contents';
+import { buttonPlaygroundTag } from '../fixtures/testData/button-tags';
 
-describe('Button test suite:', function() {
+describe('Button test suite:', () => {
     const buttonPage = new ButtonPo();
     const {
-        typeButtons, menuButtons, sizeButtons, iconButtons, stateButton, disableStateButtons, playgroundButton, inputLabel,
-        checkboxMenu, checkboxCompact, dropDownMenu, playgroundButtonText
+        typeButtons,
+        menuButtons,
+        sizeButtons,
+        iconButtons,
+        stateButton,
+        disableStateButtons,
+        playgroundButton,
+        inputLabel,
+        checkboxMenu,
+        checkboxCompact,
+        dropDownMenu,
+        playgroundButtonText
     } = buttonPage;
 
     beforeAll(() => {
         buttonPage.open();
     }, 1);
 
-    describe('Verify all buttons are clickable', function() {
-
+    describe('Verify all buttons are clickable', () => {
         it('verify clickable buttons types', () => {
             const typeButtonsLength = getElementArrayLength(typeButtons);
             for (let i = 0; i < typeButtonsLength; i++) {
@@ -78,8 +84,7 @@ describe('Button test suite:', function() {
         expect(getAttributeByName(disableStateButtons, 'disabled', 1)).toEqual('true');
     });
 
-    describe('Verify playground', function() {
-
+    describe('Verify playground', () => {
         it('verify changing text in label', () => {
             scrollIntoView(inputLabel);
             setValue(inputLabel, 'test');
@@ -95,9 +100,18 @@ describe('Button test suite:', function() {
                 sendKeys(['Enter']);
                 click(playgroundButton);
                 expect(getAttributeByName(playgroundButton, 'ng-reflect-fd-type')).toEqual(fdTypeOptions[i]);
-                saveElementScreenshot(playgroundButton, buttonPlaygroundTag + `${fdTypeOptions[i]}`, buttonPage.getScreenshotFolder());
-                expect(checkElementScreenshot(playgroundButton, buttonPlaygroundTag + `${fdTypeOptions[i]}`, buttonPage.getScreenshotFolder()))
-                    .toBeLessThan(5, `Playground button mismatch`);
+                saveElementScreenshot(
+                    playgroundButton,
+                    buttonPlaygroundTag + `${fdTypeOptions[i]}`,
+                    buttonPage.getScreenshotFolder()
+                );
+                expect(
+                    checkElementScreenshot(
+                        playgroundButton,
+                        buttonPlaygroundTag + `${fdTypeOptions[i]}`,
+                        buttonPage.getScreenshotFolder()
+                    )
+                ).toBeLessThan(5, `Playground button mismatch`);
             }
         });
 
@@ -110,11 +124,18 @@ describe('Button test suite:', function() {
                 sendKeys(['Enter']);
                 click(playgroundButton);
                 expect(getAttributeByName(playgroundButton, 'ng-reflect-glyph')).toEqual(iconOptions[i]);
-                saveElementScreenshot(playgroundButton, buttonPlaygroundTag + `${iconOptions[i]}`,
-                    buttonPage.getScreenshotFolder());
-                expect(checkElementScreenshot(playgroundButton, buttonPlaygroundTag + `${iconOptions[i]}`,
-                    buttonPage.getScreenshotFolder()))
-                    .toBeLessThan(5, `Playground button mismatch`);
+                saveElementScreenshot(
+                    playgroundButton,
+                    buttonPlaygroundTag + `${iconOptions[i]}`,
+                    buttonPage.getScreenshotFolder()
+                );
+                expect(
+                    checkElementScreenshot(
+                        playgroundButton,
+                        buttonPlaygroundTag + `${iconOptions[i]}`,
+                        buttonPage.getScreenshotFolder()
+                    )
+                ).toBeLessThan(5, `Playground button mismatch`);
             }
         });
 
@@ -123,13 +144,19 @@ describe('Button test suite:', function() {
             click(checkboxMenu);
             expect(getAttributeByName(playgroundButton, 'ng-reflect-fd-menu')).toEqual('true');
             saveElementScreenshot(playgroundButton, buttonPlaygroundTag + 'menu', buttonPage.getScreenshotFolder());
-            expect(checkElementScreenshot(playgroundButton, buttonPlaygroundTag + 'menu', buttonPage.getScreenshotFolder()))
-                .toBeLessThan(5, `Playground button mismatch`);
+            expect(
+                checkElementScreenshot(playgroundButton, buttonPlaygroundTag + 'menu', buttonPage.getScreenshotFolder())
+            ).toBeLessThan(5, `Playground button mismatch`);
             click(checkboxMenu);
             expect(getAttributeByName(playgroundButton, 'ng-reflect-fd-menu')).toEqual('false');
             saveElementScreenshot(playgroundButton, buttonPlaygroundTag + 'not-menu', buttonPage.getScreenshotFolder());
-            expect(checkElementScreenshot(playgroundButton, buttonPlaygroundTag + 'not-menu', buttonPage.getScreenshotFolder()))
-                .toBeLessThan(5, `Playground button mismatch`);
+            expect(
+                checkElementScreenshot(
+                    playgroundButton,
+                    buttonPlaygroundTag + 'not-menu',
+                    buttonPage.getScreenshotFolder()
+                )
+            ).toBeLessThan(5, `Playground button mismatch`);
         });
 
         xit('verify compact checkbox visual regression', () => {
@@ -137,18 +164,31 @@ describe('Button test suite:', function() {
             click(checkboxCompact);
             expect(getAttributeByName(playgroundButton, 'ng-reflect-compact')).toEqual('true');
             saveElementScreenshot(playgroundButton, buttonPlaygroundTag + 'compact', buttonPage.getScreenshotFolder());
-            expect(checkElementScreenshot(playgroundButton, buttonPlaygroundTag + 'compact', buttonPage.getScreenshotFolder()))
-                .toBeLessThan(5, `Playground button mismatch`);
+            expect(
+                checkElementScreenshot(
+                    playgroundButton,
+                    buttonPlaygroundTag + 'compact',
+                    buttonPage.getScreenshotFolder()
+                )
+            ).toBeLessThan(5, `Playground button mismatch`);
             click(checkboxCompact);
             expect(getAttributeByName(playgroundButton, 'ng-reflect-compact')).toEqual('false');
-            saveElementScreenshot(playgroundButton, buttonPlaygroundTag + 'not-compact', buttonPage.getScreenshotFolder());
-            expect(checkElementScreenshot(playgroundButton, buttonPlaygroundTag + 'not-compact', buttonPage.getScreenshotFolder()))
-                .toBeLessThan(5, `Playground button mismatch`);
+            saveElementScreenshot(
+                playgroundButton,
+                buttonPlaygroundTag + 'not-compact',
+                buttonPage.getScreenshotFolder()
+            );
+            expect(
+                checkElementScreenshot(
+                    playgroundButton,
+                    buttonPlaygroundTag + 'not-compact',
+                    buttonPage.getScreenshotFolder()
+                )
+            ).toBeLessThan(5, `Playground button mismatch`);
         });
     });
 
-    xdescribe('Check visual regression basic', function() {
-
+    xdescribe('Check visual regression basic', () => {
         it('should check examples visual regression', () => {
             buttonPage.saveExampleBaselineScreenshot();
             expect(buttonPage.compareWithBaseline()).toBeLessThan(5);

@@ -1,4 +1,4 @@
-<label class="fd-time__slider-label">{{timeConfig?.label}}</label>
+<label class="fd-time__slider-label">{{ timeConfig?.label }}</label>
 <button
     *ngIf="active && spinners"
     fd-button
@@ -11,11 +11,11 @@
 ></button>
 <div
     class="fd-time__wrapper"
-    [ngClass]="{'fd-time__wrapper--active': active, 'fd-time__wrapper--meridian': meridian}"
+    [ngClass]="{ 'fd-time__wrapper--active': active, 'fd-time__wrapper--meridian': meridian }"
 >
     <ul
         class="fd-time__list"
-        [ngClass]="{'fd-time-column-custom-hidden': !active}"
+        [ngClass]="{ 'fd-time-column-custom-hidden': !active }"
         [config]="config"
         (click)="indicator.focus()"
         (activeChange)="activeChangedHandle($event)"
@@ -30,10 +30,7 @@
             [id]="_createColumnItemIdByIndex(index)"
             [value]="row"
         >
-            <span
-                class="fd-time__unit"
-                (click)="pick(item, index)"
-            >
+            <span class="fd-time__unit" (click)="pick(item, index)">
                 {{ row.label }}
             </span>
         </li>
@@ -42,14 +39,10 @@
         class="fd-time__current-indicator"
         #indicator
         tabindex="-1"
-        [ngClass]="{'fd-time-column-custom-hidden': !active}"
+        [ngClass]="{ 'fd-time-column-custom-hidden': !active }"
         [id]="currentIndicatorId"
-    >
-    </div>
-    <span
-        class="fd-time__item fd-time__item--collapsed"
-        [ngClass]="{'fd-time-column-custom-hidden': active}"
-    >
+    ></div>
+    <span class="fd-time__item fd-time__item--collapsed" [ngClass]="{ 'fd-time-column-custom-hidden': active }">
         {{ activeValue?.label }}
     </span>
 </div>
@@ -62,5 +55,4 @@
     [attr.aria-label]="timeConfig?.increaseLabel"
     (keyup)="spinnerButtonKeyupHandle($event)"
     (click)="scrollDown()"
->
-</button>
+></button>

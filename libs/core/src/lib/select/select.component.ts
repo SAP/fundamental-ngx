@@ -22,24 +22,25 @@ import {
     Attribute,
     SimpleChanges,
     OnChanges,
-    Self
+    Self,
+    ViewContainerRef
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
+import { SelectionModel } from '@angular/cdk/collections';
 import { Subject, Subscription, merge, Observable, defer } from 'rxjs';
 import { startWith, takeUntil, switchMap } from 'rxjs/operators';
-import { SelectionModel } from '@angular/cdk/collections';
 
 import { PopoverFillMode } from '@fundamental-ngx/core/shared';
-import { DynamicComponentService } from '@fundamental-ngx/core/utils';
+import { ContentDensityService, DynamicComponentService, RtlService } from '@fundamental-ngx/core/utils';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
+
 import { SELECT_COMPONENT, SelectInterface } from './select.interface';
 import { SelectKeyManagerService } from './select-key-manager.service';
 import { OptionComponent, FdOptionSelectionChange } from './option/option.component';
 import { SelectMobileComponent } from './select-mobile/select-mobile.component';
-import { RtlService } from '@fundamental-ngx/core/utils';
-import { ContentDensityService } from '@fundamental-ngx/core/utils';
+import { SelectMobileModule } from './select-mobile/select-mobile.module';
 
 let selectUniqueId = 0;
 
@@ -53,10 +54,10 @@ export const SELECT_PANEL_MAX_HEIGHT = 250;
 export const SELECT_ITEM_HEIGHT_EM = 4;
 
 /**
-* Event object that is emitted when selection is changed
-*/
+ * Event object that is emitted when selection is changed
+ */
 export class FdSelectChange {
-    constructor(readonly source: SelectComponent, readonly value: any) { }
+    constructor(readonly source: SelectComponent, readonly value: any) {}
 }
 /**
  * Select component intended to mimic
@@ -70,7 +71,7 @@ export class FdSelectChange {
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[class.fd-select-custom-class]': 'true',
-        '[class.fd-select-custom-class--mobile]': 'mobile',
+        '[class.fd-select-custom-class--mobile]': 'mobile'
     },
     providers: [
         {
@@ -80,15 +81,9 @@ export class FdSelectChange {
         SelectKeyManagerService
     ]
 })
-export class SelectComponent implements
-    ControlValueAccessor,
-    SelectInterface,
-    OnInit,
-    AfterViewInit,
-    AfterContentInit,
-    OnChanges,
-    OnDestroy {
-
+export class SelectComponent
+    implements ControlValueAccessor, SelectInterface, OnInit, AfterViewInit, AfterContentInit, OnChanges, OnDestroy
+{
     /** Id of the control. */
     @Input()
     controlId = `fd-select-${selectUniqueId++}`;
@@ -211,14 +206,14 @@ export class SelectComponent implements
 
     /** @hidden */
     @ViewChild('selectControl')
-    _controlElementRef: ElementRef;
+    _controlElementRef: ElementRef<HTMLDivElement>;
 
     /** Reference to element containing list of options */
     @ViewChild('selectOptionsListTemplate')
     selectOptionsListTemplate: TemplateRef<any>;
 
     /** @hidden
-    * Reference to root element for the mobile mode dialog */
+     * Reference to root element for the mobile mode dialog */
     @ViewChild('dialogContainer')
     _dialogContainerElementRef: ElementRef;
 
@@ -258,14 +253,16 @@ export class SelectComponent implements
     /** @hidden */
     _selectionModel: SelectionModel<OptionComponent>;
 
-    /** @hidden
-    * Triggers when component is destroyed
-    */
+    /**
+     * @hidden
+     * Triggers when component is destroyed
+     */
     readonly _destroy = new Subject<void>();
 
-    /** @hidden
-    * Combined stream of all of the child options' change events.
-    */
+    /**
+     * @hidden
+     * Combined stream of all of the child options' change events.
+     */
     readonly _optionSelectionChanges: Observable<FdOptionSelectionChange> = defer(() => {
         const _options = this._options;
 
@@ -277,15 +274,14 @@ export class SelectComponent implements
         }
     }) as Observable<FdOptionSelectionChange>;
 
-    /**
-    * @hidden
-    */
+    /** @hidden */
     private _controlElemFontSize = 0;
 
     /** @hidden */
     private _focused = false;
 
-    /**@hidden
+    /**
+     * @hidden
      * Stored calculated maxHeight from Option Panel
      */
     private _maxHeight: number;
@@ -309,9 +305,7 @@ export class SelectComponent implements
         return this._selectionModel.selected[0];
     }
 
-    /**
-    * Retrieves selected value if any.
-    */
+    /** Retrieves selected value if any. */
     get triggerValue(): string {
         const emptyValue = ' ';
         if (this._selectionModel.isEmpty()) {
@@ -335,12 +329,12 @@ export class SelectComponent implements
     }
 
     /**
-   * Check if we can emit a value. They are 3 different paths where we can emit value:
-   *  - We are not in mobile mode [mobile]=false
-   *  - We are in mobile mode [mobile]=true and mobile dialog as just close X button to dismiss it
-   *  - We are in mobile mode [mobile]=true and mobile dialog has ApproveButton available and
-   *  dialog is closed. (meaning we already clicked this button)
-   */
+     * Check if we can emit a value. They are 3 different paths where we can emit value:
+     *  - We are not in mobile mode [mobile]=false
+     *  - We are in mobile mode [mobile]=true and mobile dialog as just close X button to dismiss it
+     *  - We are in mobile mode [mobile]=true and mobile dialog has ApproveButton available and
+     *  dialog is closed. (meaning we already clicked this button)
+     */
     get canEmitValueChange(): boolean {
         return (
             !this.mobile ||
@@ -353,11 +347,10 @@ export class SelectComponent implements
         );
     }
 
-    // /** @hidden */
+    /** @hidden */
     _compareWith = (o1: any, o2: any) => o1 === o2;
-    /**
-     * Function to compare the option values with the selected values.
-     */
+
+    /** Function to compare the option values with the selected values. */
     get compareWith(): (o1: any, o2: any) => boolean {
         return this._compareWith;
     }
@@ -373,25 +366,26 @@ export class SelectComponent implements
         }
     }
 
+    /** @hidden */
     get focused(): boolean {
         return this._focused || this._isOpen;
     }
 
+    /** @hidden */
     get calculatedMaxHeight(): number {
         return this._maxHeight || this._calculatedMaxHeight;
     }
 
     constructor(
-        private _elementRef: ElementRef,
         @Attribute('tabindex') _tabIndex: string,
-        @Optional() private _rtlService: RtlService,
-        private _keyManagerService: SelectKeyManagerService,
-        private _changeDetectorRef: ChangeDetectorRef,
-        @Optional() private _dynamicComponentService: DynamicComponentService,
-        @Optional() @Self() private ngControl: NgControl,
-        @Optional() private _injector: Injector,
-        @Optional() private _contentDensityService: ContentDensityService
-
+        @Optional() private readonly _rtlService: RtlService,
+        private readonly _keyManagerService: SelectKeyManagerService,
+        private readonly _changeDetectorRef: ChangeDetectorRef,
+        private readonly _viewContainerRef: ViewContainerRef,
+        @Optional() private readonly _dynamicComponentService: DynamicComponentService,
+        @Optional() @Self() private readonly ngControl: NgControl,
+        @Optional() private readonly _injector: Injector,
+        @Optional() private readonly _contentDensityService: ContentDensityService
     ) {
         if (this.ngControl) {
             this.ngControl.valueAccessor = this;
@@ -407,10 +401,12 @@ export class SelectComponent implements
         this._initializeCommonBehavior();
 
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this._changeDetectorRef.markForCheck();
-            }))
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._changeDetectorRef.markForCheck();
+                })
+            );
         }
     }
 
@@ -441,10 +437,10 @@ export class SelectComponent implements
     }
 
     /** @hidden */
-    onChange: Function = () => { };
+    onChange: Function = () => {};
 
     /** @hidden */
-    onTouched: Function = () => { };
+    onTouched: Function = () => {};
 
     /** Toggles the open state of the select. */
     toggle(): void {
@@ -470,6 +466,7 @@ export class SelectComponent implements
         this.isOpenChange.emit(true);
     }
 
+    /** @hidden */
     close(forceClose: boolean = false): void {
         if (this._isOpen && (forceClose || this.close)) {
             this._isOpen = false;
@@ -483,32 +480,25 @@ export class SelectComponent implements
 
     /** Focuses select control. */
     focus(): void {
-        if (this._controlElementRef) {
-            (this._controlElementRef.nativeElement as HTMLElement).focus();
-        }
-
+        (this._controlElementRef?.nativeElement as HTMLElement).focus();
     }
 
     /** Blurs select control. */
     blur(): void {
-        if (this._controlElementRef) {
-            (this._controlElementRef.nativeElement as HTMLElement).blur();
-        }
+        (this._controlElementRef?.nativeElement as HTMLElement).blur();
     }
 
     /** @hidden */
-    registerOnChange(fn: any): void {
+    registerOnChange(fn: Function): void {
         this.onChange = fn;
     }
 
     /** @hidden */
-    registerOnTouched(fn: any): void {
+    registerOnTouched(fn: Function): void {
         this.onTouched = fn;
     }
 
-    /** @hidden
-     *  from ControlValue Accessor
-    */
+    /** @hidden from ControlValue Accessor */
     writeValue(value: any): void {
         if (this._options) {
             this._setSelectionByValue(value);
@@ -560,12 +550,10 @@ export class SelectComponent implements
         isOpen ? this.open() : this.close();
     }
 
-    /** @hidden
-   * Returns _keyManagerService. */
+    /** @hidden Returns _keyManagerService. */
     _getKeyService(): SelectKeyManagerService {
         return this._keyManagerService;
     }
-
 
     /** @hidden */
     _setDisabledState(isDisabled: boolean): void {
@@ -590,7 +578,6 @@ export class SelectComponent implements
         this._destroy.complete();
     }
 
-
     /** @hidden */
     _initializeSelection(): void {
         // Defer setting the value in order to avoid the "Expression
@@ -601,22 +588,16 @@ export class SelectComponent implements
     }
 
     /**
-      * Expose expose outside of this mixin to give component ability
-      * to update caluclatedMaxHeight if needed
-      * @hidden
-      */
+     * Expose expose outside of this mixin to give component ability
+     * to update caluclatedMaxHeight if needed
+     * @hidden
+     */
     _updateCalculatedHeight(): void {
         this._calculatedMaxHeight = window.innerHeight * 0.45;
     }
 
-    /**
-    * @hidden
-    */
-    _getOptionScrollPosition(
-        optionIndex: number,
-        itemHeight: number,
-        currentScrollPosition: number
-    ): number {
+    /** @hidden */
+    _getOptionScrollPosition(optionIndex: number, itemHeight: number, currentScrollPosition: number): number {
         const offsetHeight = this._options.get(optionIndex)._getHtmlElement().offsetHeight;
         const optionHeight = offsetHeight === 0 ? itemHeight : offsetHeight;
         const optionOffset = optionIndex * optionHeight;
@@ -625,7 +606,6 @@ export class SelectComponent implements
         }
 
         if (optionOffset + optionHeight > currentScrollPosition + SELECT_PANEL_MAX_HEIGHT) {
-
             return Math.max(0, optionOffset - SELECT_PANEL_MAX_HEIGHT + optionHeight);
         }
         return currentScrollPosition;
@@ -649,7 +629,7 @@ export class SelectComponent implements
     _isRtl(): boolean {
         if (this._rtlService) {
             this._subscriptions.add(
-                this._rtlService.rtl.subscribe(rtl => {
+                this._rtlService.rtl.subscribe((rtl) => {
                     this._rtl = rtl;
                 })
             );
@@ -670,12 +650,16 @@ export class SelectComponent implements
         });
     }
 
+    /** @hidden */
     _handleKeydown(event: KeyboardEvent): void {
         if (!this.disabled && !this.readonly) {
-            this._isOpen ? this._keyManagerService._handleOpenKeydown(event) : this._keyManagerService._handleClosedKeydown(event);
+            this._isOpen
+                ? this._keyManagerService._handleOpenKeydown(event)
+                : this._keyManagerService._handleClosedKeydown(event);
         }
     }
 
+    /** @hidden */
     _getAriaActiveDescendant(): string | null {
         if (this._isOpen && this._keyManagerService._keyManager && this._keyManagerService._keyManager.activeItem) {
             return this._keyManagerService._keyManager.activeItem.id;
@@ -722,23 +706,19 @@ export class SelectComponent implements
             });
     }
 
-
     /**
      * @hidden
      * Invoked when an option is clicked.
      */
     private _onSelect(option: OptionComponent, isUserInput: boolean): void {
         const wasSelected = this._selectionModel.isSelected(option);
-        if ((option.value === null || option.value === undefined) &&
-            this.unselectMissingOption) {
+        if ((option.value === null || option.value === undefined) && this.unselectMissingOption) {
             option._deselect();
             this._selectionModel.clear();
             this._emitSelectChange(option.value);
         } else {
             if (wasSelected !== option.selected) {
-                option.selected ?
-                    this._selectionModel.select(option) :
-                    this._selectionModel.deselect(option);
+                option.selected ? this._selectionModel.select(option) : this._selectionModel.deselect(option);
             }
             if (isUserInput) {
                 this._keyManagerService._keyManager.setActiveItem(option);
@@ -753,15 +733,17 @@ export class SelectComponent implements
     /** @hidden */
     private _emitSelectChange(defaultVal?: any): void {
         if (this.canEmitValueChange) {
-            this._internalValue = (this._selectionModel.selected && this._selectionModel.selected.length !== 0)
-                ? (this.selected as OptionComponent).value
-                : defaultVal;
+            this._internalValue =
+                this._selectionModel.selected && this._selectionModel.selected.length !== 0
+                    ? (this.selected as OptionComponent).value
+                    : defaultVal;
             this.valueChange.emit(this._internalValue);
             this.onChange(this._internalValue);
             this._changeDetectorRef.markForCheck();
         }
     }
 
+    /** @hidden */
     private _getItemCount(): number {
         if (this._optionPanel && this._headerElements().length > 0) {
             return this._options.length + this._headerElements().length;
@@ -769,28 +751,28 @@ export class SelectComponent implements
         return this._options.length;
     }
 
-    /**
-     * @hidden
-     */
+    /** @hidden */
     private _headerElements(): NodeListOf<Element> {
-        return this._optionPanel.nativeElement.querySelectorAll(SELECT_HEADER_IDENTIFIER);
+        return this._optionPanel?.nativeElement.querySelectorAll(SELECT_HEADER_IDENTIFIER);
     }
 
-    private _setupMobileMode(): void {
-        if (this.mobile) {
-            this._dynamicComponentService.createDynamicComponent(
-                this.selectOptionsListTemplate,
-                SelectMobileComponent,
-                { container: this._elementRef.nativeElement },
-                { 
-                    injector: Injector.create({
-                        providers: [
-                            { provide: SELECT_COMPONENT, useValue: this },
-                            { provide: RtlService, useValue: this._rtlService }
-                        ]
-                    })
-                }
-            )
+    /** @hidden */
+    private async _setupMobileMode(): Promise<void> {
+        if (!this.mobile) {
+            return;
         }
+
+        const injector = Injector.create({
+            providers: [{ provide: SELECT_COMPONENT, useValue: this }],
+            parent: this._injector
+        });
+
+        await this._dynamicComponentService.createDynamicModule(
+            this.selectOptionsListTemplate,
+            SelectMobileModule,
+            SelectMobileComponent,
+            this._viewContainerRef,
+            injector
+        );
     }
 }

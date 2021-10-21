@@ -88,7 +88,10 @@ describe('AlertService', () => {
         expect(service['alerts'].length).toBe(0);
         expect(service['alertContainerRef']).toBeFalsy();
 
-        const alertRef: AlertRef = service.open(TemplateTestComponent, { dismissible: false, duration: -1 } as AlertConfig);
+        const alertRef: AlertRef = service.open(TemplateTestComponent, {
+            dismissible: false,
+            duration: -1
+        } as AlertConfig);
         expect(service['alerts'].length).toBe(1);
         expect(service['alertContainerRef']).toBeTruthy();
 

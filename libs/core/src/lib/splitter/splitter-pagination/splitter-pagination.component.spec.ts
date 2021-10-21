@@ -10,12 +10,14 @@ describe('SplitterPaginationComponent', () => {
     let component: SplitterPaginationComponent;
     let fixture: ComponentFixture<SplitterPaginationComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [SplitterModule],
-            providers: [SplitterComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [SplitterModule],
+                providers: [SplitterComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(SplitterPaginationComponent);
@@ -30,7 +32,7 @@ describe('SplitterPaginationComponent', () => {
 
     it('should change page', () => {
         const spy = spyOn(component.onPageChange, 'emit').and.callThrough();
-        const pages =  ['1', '2', '3'];
+        const pages = ['1', '2', '3'];
 
         component.pages = pages;
         fixture.detectChanges();

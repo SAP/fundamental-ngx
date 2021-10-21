@@ -9,4 +9,4 @@ import { RatingIndicatorComponent } from './components/rating-indicator.componen
     imports: [CommonModule, PopoverModule],
     exports: [RatingIndicatorComponent]
 })
-export class RatingIndicatorModule { }
+export class RatingIndicatorModule {}

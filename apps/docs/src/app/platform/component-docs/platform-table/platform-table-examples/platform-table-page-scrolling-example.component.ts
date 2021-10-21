@@ -79,7 +79,7 @@ export class TableDataProviderExample extends TableDataProvider<ExampleItem> {
 
         return of(this.items).pipe(
             delay(400),
-            finalize(() => (this.loading.next(false)))
+            finalize(() => this.loading.next(false))
         );
     }
 

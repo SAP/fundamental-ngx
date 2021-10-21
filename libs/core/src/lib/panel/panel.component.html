@@ -1,4 +1,4 @@
- <div class="fd-panel__header">
+<div class="fd-panel__header">
     <div *ngIf="!fixed" class="fd-panel__expand">
         <button
             fd-button
@@ -13,12 +13,12 @@
             [ariaLabel]="expandAriaLabel"
             [attr.aria-labelledby]="expandAriaLabelledBy + ' ' + expandId"
             [title]="expandAriaLabel"
-            (click)="toggleExpand()">
-        </button>
+            (click)="toggleExpand()"
+        ></button>
     </div>
     <ng-content select="[fd-panel-title]"></ng-content>
     <ng-content></ng-content>
- </div>
+</div>
 
 <ng-container *ngIf="expanded || fixed">
     <ng-content select="[fd-panel-content]"></ng-content>

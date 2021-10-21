@@ -5,5 +5,5 @@ export const OVERFLOW_PRIORITY_SCORE: Map<OverflowPriority, number> = new Map([
     ['disappear', 1],
     ['low', 2],
     ['high', 3],
-    ['never', 4],
+    ['never', 4]
 ]);

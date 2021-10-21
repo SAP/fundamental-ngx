@@ -87,25 +87,25 @@ import { SideNavigationMainDirective } from './side-navigation-main.directive';
     `
 })
 class TestNestedContainerComponent {
-
     @ViewChild(SideNavigationComponent)
     sideNav: SideNavigationComponent;
 
     expanded = false;
-
 }
 
 describe('SideNavigationComponent', () => {
     let component: TestNestedContainerComponent;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [NestedListModule],
-            declarations: [SideNavigationComponent, SideNavigationMainDirective, TestNestedContainerComponent],
-            providers: [MenuKeyboardService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [NestedListModule],
+                declarations: [SideNavigationComponent, SideNavigationMainDirective, TestNestedContainerComponent],
+                providers: [MenuKeyboardService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNestedContainerComponent);
@@ -118,11 +118,7 @@ describe('SideNavigationComponent', () => {
             component.sideNav.ngAfterContentInit();
             fixture.detectChanges();
             const anyComponent: any = component.sideNav;
-            expect(
-                anyComponent.keyboardService._getAllListItems(
-                    anyComponent.getLists()[0]
-                ).length
-            ).toBe(7);
+            expect(anyComponent.keyboardService._getAllListItems(anyComponent.getLists()[0]).length).toBe(7);
         });
     }));
 
@@ -132,11 +128,7 @@ describe('SideNavigationComponent', () => {
             component.sideNav.ngAfterContentInit();
             fixture.detectChanges();
             const anyComponent: any = component.sideNav;
-            expect(
-                anyComponent.keyboardService._getAllListItems(
-                    anyComponent.getLists()[0]
-                ).length
-            ).toBe(11);
+            expect(anyComponent.keyboardService._getAllListItems(anyComponent.getLists()[0]).length).toBe(11);
         });
     }));
 });
