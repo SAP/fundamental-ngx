@@ -103,6 +103,7 @@ describe('Rating indicator test suite', () => {
         });
 
         it('should check that minimal value in input is 1', () => {
+            refreshPage();
             click(inputsDynamicChanges);
             for (let i = parseInt(getValue(inputsDynamicChanges)); i !== 1; i--) {
                 sendKeys('ArrowDown');
