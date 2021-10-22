@@ -13,9 +13,13 @@ export class PlatformInputReactiveMinMaxValidationExampleComponent implements Af
     submitted = false;
     MIN_VALUE = MIN_VALUE;
     MAX_VALUE = MAX_VALUE;
-    inputValidator: ValidatorFn[] = [Validators.required, Validators.minLength(MIN_VALUE), Validators.maxLength(MAX_VALUE)];
+    inputValidator: ValidatorFn[] = [
+        Validators.required,
+        Validators.minLength(MIN_VALUE),
+        Validators.maxLength(MAX_VALUE)
+    ];
 
-    constructor(private cdr: ChangeDetectorRef) { }
+    constructor(private cdr: ChangeDetectorRef) {}
 
     ngAfterViewInit(): void {
         this.cdr.detectChanges();
