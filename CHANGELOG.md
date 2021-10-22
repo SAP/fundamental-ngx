@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.52 (2021-10-22)
+
+
+### Bug Fixes
+
+* **core:** remove unused class name ([#6961](https://github.com/SAP/fundamental-ngx/issues/6961)) ([621ba08](https://github.com/SAP/fundamental-ngx/commit/621ba08106909992f8c46f96cb3ceb7b7401fbdf))
+
 ## 0.33.0-rc.51 (2021-10-22)
 
 
