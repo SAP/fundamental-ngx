@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.53 (2021-10-22)
+
+
+### Bug Fixes
+
+* **platform:** combobox, fix alignment issue in IE ([#6762](https://github.com/SAP/fundamental-ngx/issues/6762)) ([7adb15b](https://github.com/SAP/fundamental-ngx/commit/7adb15baaae36476d3280dd20ef10e050e957aae)), closes [#6759](https://github.com/SAP/fundamental-ngx/issues/6759) [#6902](https://github.com/SAP/fundamental-ngx/issues/6902)
+
 ## 0.33.0-rc.52 (2021-10-22)
 
 
