@@ -147,7 +147,7 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
     _onKeyPress(event: KeyboardEvent): void {
         // prevent typing non-digit chars
         if (this._input.type === 'number') {
-            if (!event.key.match(/^[0-9]*\.?[0-9]*$/)) {
+            if (!event.key.match(/([0-9]|[-]|[,]|[.])/)) {
                 event.preventDefault();
             }
         }
