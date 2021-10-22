@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.50 (2021-10-22)
+
+
+### Bug Fixes
+
+* **platform:** combobox, not reading found items ([#6941](https://github.com/SAP/fundamental-ngx/issues/6941)) ([e0e6c7c](https://github.com/SAP/fundamental-ngx/commit/e0e6c7c8e84bb40441b0c08198cda490e7ffe8f4))
+
 ## 0.33.0-rc.49 (2021-10-22)
 
 ## 0.33.0-rc.48 (2021-10-21)
