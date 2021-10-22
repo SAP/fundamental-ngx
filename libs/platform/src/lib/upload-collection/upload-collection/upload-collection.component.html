@@ -156,7 +156,7 @@
                 noHorizontalBorders="true"
                 (rowSelectionChange)="_onRowSelectionChange($event)"
             >
-                <fdp-column name="name" label="Name" width="100px">
+                <fdp-column name="name" label="Name" width="5rem">
                     <fdp-table-cell *fdpCellDef="let item">
                         <div class="fdp-upload-collection__vertical-align-center">
                             <fd-icon
@@ -213,26 +213,26 @@
                     </fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column name="uploadedBy" label="Uploaded by" width="100px">
+                <fdp-column name="uploadedBy" label="Uploaded by" width="5rem">
                     <fdp-table-cell *fdpCellDef="let item" [innerText]="item.uploadedBy.name"></fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column name="uploadedOn" label="Uploaded on" width="100px">
+                <fdp-column name="uploadedOn" label="Uploaded on" width="5rem">
                     <fdp-table-cell
                         *fdpCellDef="let item"
                         [innerText]="item.uploadedOn | date: 'shortDate'"
                     ></fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column name="size" label="File size" width="100px">
+                <fdp-column name="size" label="File size" width="5rem">
                     <fdp-table-cell *fdpCellDef="let item" [innerText]="item.fileSize | convertBytes"></fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column name="version" label="Version" width="100px">
+                <fdp-column name="version" label="Version" width="5rem">
                     <fdp-table-cell *fdpCellDef="let item" [innerText]="item.version || ''"></fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column name="status" label="Status" width="100px">
+                <fdp-column name="status" label="Status" width="5rem">
                     <fdp-table-cell *fdpCellDef="let item">
                         <fd-busy-indicator
                             *ngIf="item.status === _uploadCollectionItemStatus.LOADING"
@@ -260,7 +260,7 @@
                     </fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column name="action" *ngIf="!readonly" width="100px">
+                <fdp-column name="action" *ngIf="!readonly" width="5rem">
                     <fdp-table-header *fdpHeaderCellDef>Action</fdp-table-header>
                     <fdp-table-cell *fdpCellDef="let item">
                         <div class="fdp-upload-collection__actions">
