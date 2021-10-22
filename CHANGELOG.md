@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.51 (2021-10-22)
+
+
+### Bug Fixes
+
+* **platform:** upload collection, fix a11y issues ([#6943](https://github.com/SAP/fundamental-ngx/issues/6943)) ([98d5f77](https://github.com/SAP/fundamental-ngx/commit/98d5f7732979cea54c111745626e401db1254f76))
+
 ## 0.33.0-rc.50 (2021-10-22)
 
 
