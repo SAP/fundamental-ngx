@@ -6,7 +6,8 @@ export const labelsArray = [
     'ReadOnly Input Field',
     'Disabled Input Field',
     'Inline Help Input Field',
-    'Password Input Field'
+    'Password Input Field',
+    'My Favorite Colors'
 ];
 export const favoriteColor = 'My';
 export const placeholdersArray = [
