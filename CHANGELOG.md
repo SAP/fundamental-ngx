@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.54 (2021-10-24)
+
+
+### Bug Fixes
+
+* **platform:** upload collection, fix display message after canceling folder creation ([#6973](https://github.com/SAP/fundamental-ngx/issues/6973)) ([de8e966](https://github.com/SAP/fundamental-ngx/commit/de8e96618ab1b58da00619f758e4881416fea161))
+
 ## 0.33.0-rc.53 (2021-10-22)
 
 
