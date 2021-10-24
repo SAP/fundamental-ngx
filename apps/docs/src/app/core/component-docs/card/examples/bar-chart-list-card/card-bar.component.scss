@@ -4,11 +4,31 @@
     align-items: center;
     width: 100%;
 
+    .test {
+        color: aqua;
+    }
+
     .bar-row {
         flex: 1 1 0;
         height: 0.6rem;
         display: flex;
         background-color: #d5dadc;
+
+        .information {
+            background-color: #1866b4;
+        }
+
+        .warning {
+            background-color: #da5a1b;
+        }
+
+        .critical {
+            background-color: #c67a0c;
+        }
+
+        .success {
+            background-color: #358a4d;
+        }
     }
 
     .value {
