@@ -122,7 +122,7 @@
     "@types/node": "14.14.10",
     "allure-commandline": "2.13.8",
     "classlist.js": "1.1.20150312",
-    "core-js": "3.7.0",
+    "core-js": "3.18.3",
     "focus-trap": "6.6.1",
     "focus-visible": "5.2.0",
     "fundamental-styles": "v0.20.1-rc.50",
