@@ -234,7 +234,7 @@ export abstract class BaseCombobox extends CollectionBaseInput implements AfterV
     protected _dataSource: FdpComboBoxDataSource<any>;
 
     /** @hidden */
-    private _flatSuggestions: OptionItem[];
+    _flatSuggestions: OptionItem[];
 
     /** @hidden */
     private _inputTextValue: string;

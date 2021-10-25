@@ -1,6 +1,8 @@
-## Related Issue.
+## Related Issue(s)
 
-Closes SAP/fundamental-ngx/#
+> **NOTE:** _If this PR fixes multiple issues, please use the full syntax(`closes #issue-number`) for each issue so that each issue gets automatically closed on PR merge; for example: `closes #1234, closes #5678`, and so on._
+
+closes
 
 ## Description
 

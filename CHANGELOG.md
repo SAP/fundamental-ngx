@@ -1,4 +1,51 @@
 
+## 0.33.0-rc.58 (2021-10-25)
+
+## 0.33.0-rc.57 (2021-10-25)
+
+## 0.33.0-rc.56 (2021-10-25)
+
+## 0.33.0-rc.55 (2021-10-25)
+
+## 0.33.0-rc.54 (2021-10-24)
+
+
+### Bug Fixes
+
+* **platform:** upload collection, fix display message after canceling folder creation ([#6973](https://github.com/SAP/fundamental-ngx/issues/6973)) ([de8e966](https://github.com/SAP/fundamental-ngx/commit/de8e96618ab1b58da00619f758e4881416fea161))
+
+## 0.33.0-rc.53 (2021-10-22)
+
+
+### Bug Fixes
+
+* **platform:** combobox, fix alignment issue in IE ([#6762](https://github.com/SAP/fundamental-ngx/issues/6762)) ([7adb15b](https://github.com/SAP/fundamental-ngx/commit/7adb15baaae36476d3280dd20ef10e050e957aae)), closes [#6759](https://github.com/SAP/fundamental-ngx/issues/6759) [#6902](https://github.com/SAP/fundamental-ngx/issues/6902)
+
+## 0.33.0-rc.52 (2021-10-22)
+
+
+### Bug Fixes
+
+* **core:** remove unused class name ([#6961](https://github.com/SAP/fundamental-ngx/issues/6961)) ([621ba08](https://github.com/SAP/fundamental-ngx/commit/621ba08106909992f8c46f96cb3ceb7b7401fbdf))
+
+## 0.33.0-rc.51 (2021-10-22)
+
+
+### Bug Fixes
+
+* **platform:** upload collection, fix a11y issues ([#6943](https://github.com/SAP/fundamental-ngx/issues/6943)) ([98d5f77](https://github.com/SAP/fundamental-ngx/commit/98d5f7732979cea54c111745626e401db1254f76))
+
+## 0.33.0-rc.50 (2021-10-22)
+
+
+### Bug Fixes
+
+* **platform:** combobox, not reading found items ([#6941](https://github.com/SAP/fundamental-ngx/issues/6941)) ([e0e6c7c](https://github.com/SAP/fundamental-ngx/commit/e0e6c7c8e84bb40441b0c08198cda490e7ffe8f4))
+
+## 0.33.0-rc.49 (2021-10-22)
+
+## 0.33.0-rc.48 (2021-10-21)
+
 ## 0.33.0-rc.47 (2021-10-21)
 
 ## 0.33.0-rc.46 (2021-10-21)
