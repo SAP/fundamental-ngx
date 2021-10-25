@@ -61,6 +61,10 @@ describe('Action Bar test suite:', () => {
         actionSheetPage.checkRtlSwitch();
     });
 
+    it('should check examples visual regression', () => {
+        actionSheetPage.checkVisualRegression('action-sheet');
+    });
+
     function checkClickableButton(selector: string): void {
         const buttonLength = getElementArrayLength(selector);
         for (let i = 0; i < buttonLength; i++) {

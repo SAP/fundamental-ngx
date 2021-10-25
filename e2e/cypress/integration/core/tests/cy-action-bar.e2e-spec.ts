@@ -75,12 +75,10 @@ describe('Action Bar test suite:', () => {
 
     it('should check RTL and LTR orientation', () => {
         actionBarPage.checkRtlSwitch();
-        scrollIntoView('.fd-doc-component', 0);
-        cy.get('.fd-doc-component').eq(0).screenshot('action-bar-example-' + 0);
     });
 
     it('should check examples visual regression', () => {
-        actionBarPage.checkVisualRegression();
+        actionBarPage.checkVisualRegression('action-bar');
     });
 
     function checkClickableButton(selector: string): void {

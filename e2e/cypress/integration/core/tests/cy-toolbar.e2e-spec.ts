@@ -120,5 +120,9 @@ describe('Toolbar test suite:', () => {
             click(alwaysButton);
         });
     });
+
+    it('should check examples visual regression', () => {
+        toolbarPage.checkVisualRegression('toolbar');
+    });
 });
 

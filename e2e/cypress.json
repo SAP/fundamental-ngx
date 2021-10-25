@@ -1,6 +1,6 @@
 {
   "baseUrl": "http://localhost:4200/fundamental-ngx#",
-  "viewportWidth": 1920,
-  "viewportHeight": 1080,
+  "viewportWidth": 1200,
+  "viewportHeight": 600,
   "video": false
 }
