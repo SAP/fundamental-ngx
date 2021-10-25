@@ -139,6 +139,7 @@ exports.config = {
             './e2e/wdio/platform/**/file-uploader.e2e-spec.ts',
             './e2e/wdio/platform/**/form-container.e2e-spec.ts',
             './e2e/wdio/platform/**/form-generator.e2e-spec.ts',
+            './e2e/wdio/platform/**/icon-tab-bar.e2e-spec.ts',
             './e2e/wdio/platform/**/info-label.e2e-spec.ts',
             './e2e/wdio/platform/**/input.e2e-spec.ts',
             './e2e/wdio/platform/**/input-group.e2e-spec.ts',
