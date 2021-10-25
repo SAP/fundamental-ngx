@@ -54,21 +54,25 @@ describe('TextTypePopoverComponent', () => {
             cssClasses: null,
             index: 0,
             uId: '0',
+            flatIndex: 0,
             subItems: [
                 {
                     cssClasses: null,
                     index: 1,
                     uId: '0.1',
+                    flatIndex: 1,
                     subItems: [
                         {
                             cssClasses: null,
                             index: 2,
                             uId: '0.1.2',
+                            flatIndex: 2,
                             subItems: [
                                 {
                                     cssClasses: null,
                                     index: 3,
-                                    uId: '0.1.2.3'
+                                    uId: '0.1.2.3',
+                                    flatIndex: 3,
                                 }
                             ]
                         }
@@ -101,7 +105,6 @@ describe('TextTypePopoverComponent', () => {
     it('should emit selectedSubItem event.', () => {
         const parentConfig = generateTestConfig(10, true);
         const tabs = generateTabBarItems(parentConfig);
-        component.isExtraItemsMode = false;
         component.parentTab = tabs[5];
         component.ngOnChanges({ parentTab: tabs[5] } as unknown as SimpleChanges);
 

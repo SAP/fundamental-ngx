@@ -7,7 +7,7 @@
     </fd-popover-control>
     <fd-popover-body>
         <ul class="fd-list fd-list--navigation fd-list--no-border fd-icon-tab-bar__list" role="list">
-            <ng-container *ngFor="let item of extraTabs">
+            <ng-container *ngFor="let item of extraTabs; let idx = index; trackBy: _trackByTab">
                 <li *ngIf="isSeparators" tabindex="-1" class="fd-icon-tab-bar__icon-separator">
                     <fd-icon glyph="process"></fd-icon>
                 </li>
@@ -19,21 +19,21 @@
                 >
                     <a
                         class="fd-list__link fd-icon-tab-bar__list-link"
+                        #tabItem
+                        [attr.data-flatIndex]="item.flatIndex"
                         tabindex="0"
                         (click)="_selectItem(item)"
-                        (keydown)="_keyDownHandler($event, item)"
+                        (keydown)="_keyDownHandler($event, item, idx)"
                     >
                         <span class="fd-icon-tab-bar__list-item-icon-container">
                             <span class="fd-list__icon fd-icon-tab-bar__list-item-icon">
                                 <fd-icon [glyph]="item.icon"></fd-icon>
                             </span>
-                            <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
                         </span>
-                        <span
-                            *ngIf="showItemLabel && item.label"
-                            class="fd-list__title fd-icon-tab-bar__list-item-title"
-                            >{{ item.label }}</span
-                        >
+                        <span *ngIf="showItemLabel && item.label" class="fd-list__title fd-icon-tab-bar__list-item-title">{{
+                            item.label
+                        }}</span>
+                        <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
                         <span *ngIf="item.counter" class="fd-list__counter fd-icon-tab-bar__list-item-counter"
                             >({{ item.counter }})</span
                         >

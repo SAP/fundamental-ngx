@@ -2,11 +2,15 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
     Input,
     OnChanges,
     Output,
-    SimpleChanges
+    QueryList,
+    SimpleChanges,
+    ViewChild,
+    ViewChildren
 } from '@angular/core';
 import { IconTabBarPopoverBase } from '../icon-tab-bar-popover-base.class';
 import { IconTabBarItem } from '../../../interfaces/icon-tab-bar-item.interface';
@@ -17,6 +21,11 @@ import { IconTabBarItem } from '../../../interfaces/icon-tab-bar-item.interface'
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TextTypePopoverComponent extends IconTabBarPopoverBase implements OnChanges {
+    /** @hidden reference for html element, that opens dropdown and can receive focus */
+    @ViewChild('dropdownTrigger') _dropdownTrigger: ElementRef<HTMLElement>;
+    /** @hidden list of tab html elements, that can receive focus */
+    @ViewChildren('tabItem') _tabExtraUIElements: QueryList<ElementRef<HTMLElement>>;
+
     /**
      * @description Is extra items mode or subitems mode
      */
@@ -69,13 +78,12 @@ export class TextTypePopoverComponent extends IconTabBarPopoverBase implements O
         this.popover.close();
     }
 
-    /**
-     * @hidden
-     * @param item
-     * @returns uId
-     */
-    _trackBy(item: IconTabBarItem): string {
-        return item.uId;
+    /** @hidden */
+    _textPopoverKeyDownHandler(event: KeyboardEvent, tab: IconTabBarItem): void {
+        // using relative index within popover (first popover tab should start from 0)
+        const baseIndex = this.parentTab ? this.parentTab.flatIndex + 1 : this.extraTabs[0].flatIndex;
+        const currentIndex = tab.flatIndex - baseIndex;
+        super._keyDownHandler(event, tab, currentIndex);
     }
 
     /** @hidden */

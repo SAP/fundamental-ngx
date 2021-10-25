@@ -10,7 +10,7 @@
         (overflowChanged)="_recalculateVisibleItems($event)"
     >
         <li
-            *ngFor="let item of _tabs; trackBy: _trackBy"
+            *ngFor="let item of _tabs; let idx = index; trackBy: _trackByTab"
             [class]="item.cssClasses"
             fdOverflowListItem
             fdpIconBarDndItem
@@ -23,10 +23,12 @@
             <a
                 *ngIf="!item.subItems?.length"
                 class="fd-icon-tab-bar__tab"
+                #tabItem
                 role="tab"
                 tabindex="0"
+                [attr.aria-placeholder]="item.color || null"
                 (click)="_selectItem(item, $event)"
-                (keydown)="_keyDownHandler($event, item)"
+                (keydown)="_keyDownHandler($event, item, idx)"
                 [attr.aria-selected]="item.uId === _selectedUid"
             >
                 <span *ngIf="layoutMode === 'row'; else columnsMode" class="fd-icon-tab-bar__tag">
@@ -41,9 +43,11 @@
             </a>
             <ng-container *ngIf="item.subItems?.length">
                 <fdp-text-type-popover
+                    #tabItem
                     [parentTab]="item"
                     [selectedSubItemUid]="_selectedUid"
                     (selectedSubItem)="_selectItem($event)"
+                    (keydown)="_keyDownHandler($event, item, idx)"
                 >
                 </fdp-text-type-popover>
             </ng-container>
@@ -57,9 +61,13 @@
             [anchorIndexInsideParent]="_lastVisibleTabIndex"
         >
             <fdp-text-type-popover
+                #extraItemsPopover
+                [isRtl]="isRtl"
                 [extraTabs]="_extraTabs"
                 [isExtraItemsMode]="true"
                 (selectedExtraItem)="_selectExtraItem($event)"
+                (focusFirstVisibleItem)="_focusItem(0)"
+                (focusLastVisibleItem)="_focusItem(_lastVisibleTabIndex)"
             >
             </fdp-text-type-popover>
         </li>

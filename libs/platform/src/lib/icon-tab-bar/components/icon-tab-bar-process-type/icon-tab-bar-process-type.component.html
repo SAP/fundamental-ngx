@@ -20,7 +20,7 @@
         ></fdp-icon-tab-bar-popover>
     </li>
     <li
-        *ngFor="let item of _tabs; let index = index"
+        *ngFor="let item of _tabs; let idx = index; trackBy: _trackByTab"
         [class]="item.cssClasses"
         class="fd-icon-tab-bar__item"
         role="presentation"
@@ -29,9 +29,11 @@
     >
         <a
             (click)="_selectItem(item)"
-            (keydown)="_keyDownHandler($event, item)"
+            (keydown)="_keyDownHandler($event, item, idx)"
             [attr.aria-selected]="item.uId === _selectedUid"
+            [attr.aria-placeholder]="item.color || null"
             class="fd-icon-tab-bar__tab"
+            #tabItem
             tabindex="0"
             role="tab"
         >
@@ -52,7 +54,7 @@
                 <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
             </ng-template>
         </a>
-        <span *ngIf="_lastVisibleTabIndex !== index" class="fd-icon-tab-bar__separator">
+        <span *ngIf="_lastVisibleTabIndex !== idx" class="fd-icon-tab-bar__separator">
             <fd-icon glyph="process"></fd-icon>
         </span>
     </li>
@@ -66,10 +68,13 @@
         [anchorIndexInsideParent]="_anchorIndexForExtraBtnDirective"
     >
         <fdp-icon-tab-bar-popover
+            [isRtl]="isRtl"
             [extraTabs]="_nextSteps"
             [isSeparators]="true"
             [label]="_nextSteps.length.toString()"
             (selectedExtraItem)="_selectExtraItem($event)"
+            (focusFirstVisibleItem)="_focusItem(0)"
+            (focusLastVisibleItem)="_focusItem(_lastVisibleTabIndex)"
         >
         </fdp-icon-tab-bar-popover>
     </li>

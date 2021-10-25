@@ -9,10 +9,11 @@
     <li *ngIf="showTotalTab" class="fd-icon-tab-bar__item" role="presentation" fdOverflowListItem>
         <a
             (click)="_selectItem(_totalTab)"
-            (keydown)="_keyDownHandler($event, _totalTab)"
+            (keydown)="_keyDownHandler($event, _totalTab, 0)"
             [attr.aria-selected]="_totalTab?.uId === _selectedUid"
             class="fd-icon-tab-bar__tab"
             tabindex="0"
+            #tabItem
             role="tab"
         >
             <div class="fd-icon-tab-bar__container fd-icon-tab-bar__container--filter">
@@ -22,7 +23,7 @@
         </a>
     </li>
     <li
-        *ngFor="let item of _tabs | slice: 1"
+        *ngFor="let item of _tabs | slice: 1; let idx = index; trackBy: _trackByTab"
         [class]="item.cssClasses"
         class="fd-icon-tab-bar__item"
         role="presentation"
@@ -32,9 +33,11 @@
         <a
             (click)="_selectItem(item)"
             [attr.aria-selected]="item.uId === _selectedUid"
+            [attr.aria-placeholder]="item.color || null"
             class="fd-icon-tab-bar__tab"
+            #tabItem
             tabindex="0"
-            (keydown)="_keyDownHandler($event, item)"
+            (keydown)="_keyDownHandler($event, item, idx + 1)"
             role="tab"
         >
             <div class="fd-icon-tab-bar__container">
@@ -55,8 +58,11 @@
         [anchorIndexInsideParent]="_lastVisibleTabIndex"
     >
         <fdp-icon-tab-bar-popover
+            [isRtl]="isRtl"
             [extraTabs]="_extraTabs"
             (selectedExtraItem)="_selectExtraItem($event)"
+            (focusFirstVisibleItem)="_focusItem(0)"
+            (focusLastVisibleItem)="_focusItem(_lastVisibleTabIndex)"
         ></fdp-icon-tab-bar-popover>
     </li>
 </ul>

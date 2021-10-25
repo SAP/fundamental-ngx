@@ -1,8 +1,20 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, NgZone, Output } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    EventEmitter,
+    Input,
+    NgZone,
+    Output,
+    QueryList,
+    ViewChild,
+    ViewChildren
+} from '@angular/core';
 import { IconTabBarBase } from '../icon-tab-bar-base.class';
 import { IconTabBarItem } from '../../interfaces/icon-tab-bar-item.interface';
 import { UNIQUE_KEY_SEPARATOR } from '../../constants';
 import { FdDnDEvent } from '../../directives/dnd/icon-bar-dnd-container.directive';
+import { TextTypePopoverComponent } from '../popovers/text-type-popover/text-type-popover.component';
 
 export interface DataForReordering {
     arr: IconTabBarItem[];
@@ -10,11 +22,19 @@ export interface DataForReordering {
     parentUid: string;
 }
 
+type TabItem = ElementRef<HTMLElement> | TextTypePopoverComponent;
+
 @Component({
     selector: 'fdp-icon-tab-bar-text-type',
     templateUrl: './icon-tab-bar-text-type.component.html'
 })
 export class IconTabBarTextTypeComponent extends IconTabBarBase {
+    /** @hidden list of tab html elements, that can receive focus */
+    @ViewChildren('tabItem') _tabUIElements: QueryList<TabItem>;
+
+    /** @hidden */
+    @ViewChild('extraItemsPopover') _tabBarPopover: TextTypePopoverComponent;
+
     /**
      * @description Disable or enable reordering(drag and drop) feature.
      */
@@ -34,7 +54,7 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
     reordered: EventEmitter<IconTabBarItem[]> = new EventEmitter<IconTabBarItem[]>();
 
     /** @hidden */
-    constructor(protected _cd: ChangeDetectorRef, protected _ngZone: NgZone) {
+    constructor(_cd: ChangeDetectorRef, _ngZone: NgZone) {
         super(_cd, _ngZone);
     }
 
@@ -42,7 +62,7 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
      * @hidden
      * @param selectedItem
      */
-    _selectExtraItem(selectedItem: IconTabBarItem): void {
+    async _selectExtraItem(selectedItem: IconTabBarItem): Promise<void> {
         // Check if selected item is subItem
         // Then to find root tab, and pass it to parent method.
         if (selectedItem.uId.includes(UNIQUE_KEY_SEPARATOR)) {
@@ -156,26 +176,26 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
      * @param parentUid
      * @description Update indexes, uIds, styles.
      */
-    private _updateTabs(arr: IconTabBarItem[], parentUid?: string): IconTabBarItem[] {
+    private _updateTabs(arr: IconTabBarItem[], parentUid?: string, flatIndexRef = { value: 0 }): IconTabBarItem[] {
         return arr.map((item, index) => {
             item.index = index;
             item.uId = parentUid ? `${parentUid}${UNIQUE_KEY_SEPARATOR}${index}` : `${index}`;
+            item.flatIndex = flatIndexRef.value++;
             if (!parentUid) {
                 item.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
             }
             if (Array.isArray(item.subItems)) {
-                item.subItems = this._updateTabs(item.subItems, item.uId);
+                item.subItems = this._updateTabs(item.subItems, item.uId, flatIndexRef);
             }
             return { ...item };
         });
     }
 
-    /**
-     * @hidden
-     * @param item
-     * @returns uId
-     */
-    _trackBy(item: IconTabBarItem): string {
-        return item.uId;
+    /** @hidden */
+    protected _getTabUIElementFocusable(tabUIElement: TabItem): HTMLElement {
+        if (typeof tabUIElement === 'object' && 'nativeElement' in tabUIElement) {
+            return tabUIElement.nativeElement;
+        }
+        return tabUIElement._dropdownTrigger.nativeElement;
     }
 }
