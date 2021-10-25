@@ -6,10 +6,10 @@ export const labelsArray = [
     'ReadOnly Input Field',
     'Disabled Input Field',
     'Inline Help Input Field',
-    'Password Input Field',
-    'My Favorite Colors'
+    'Password Input Field'
 ];
 export const favoriteColor = 'My';
+export const maxValidation = 'Maximum';
 export const placeholdersArray = [
     'Field placeholder text',
     'Field placeholder text',

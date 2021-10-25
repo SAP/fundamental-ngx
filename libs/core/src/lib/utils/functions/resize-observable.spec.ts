@@ -43,7 +43,7 @@ describe('Resize Observable utils', () => {
         resizeObservable(elementRef.nativeElement).subscribe((entries) => {
             console.log(entries[0]);
             const entry = entries[0];
-            expect(entry.contentRect.width).toEqual(0);
+            expect(entry.contentRect.width).toEqual(200);
         });
         fixture.componentInstance.elementDimensions.width = 200;
         fixture.detectChanges();
