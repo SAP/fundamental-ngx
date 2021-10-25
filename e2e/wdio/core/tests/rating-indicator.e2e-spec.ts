@@ -9,7 +9,9 @@ import {
     scrollIntoView,
     setValue,
     getValue,
-    sendKeys
+    sendKeys,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
 describe('Rating indicator test suite', () => {
@@ -104,6 +106,8 @@ describe('Rating indicator test suite', () => {
 
         it('should check that minimal value in input is 1', () => {
             refreshPage();
+            waitForPresent(ratingIndicatorPage.root);
+            waitForElDisplayed(ratingIndicatorPage.title);
             click(inputsDynamicChanges);
             for (let i = parseInt(getValue(inputsDynamicChanges)); i !== 1; i--) {
                 sendKeys('ArrowDown');

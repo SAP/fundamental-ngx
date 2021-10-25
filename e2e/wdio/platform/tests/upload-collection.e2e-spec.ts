@@ -5,6 +5,7 @@ import {
     getElementArrayLength,
     getElementPlaceholder,
     getText,
+    getValue,
     isElementClickable,
     refreshPage,
     scrollIntoView,
@@ -157,15 +158,15 @@ describe('Upload collection test suite', () => {
     }
 
     function checkRenaming(selector: string): void {
-        const defaultName = getText(selector + fileNameLabel);
         scrollIntoView(selector + checkbox);
         click(selector + checkbox, 1);
         click(selector + inputFields);
         sendKeys('Backspace');
         sendKeys('0');
+        const newName = getValue(selector + inputFields);
         click(selector + checkbox, 1);
         waitForNotDisplayed(selector + busyIndicator);
-        expect(getText(selector + fileNameLabel)).not.toEqual(defaultName);
+        expect(getText(selector + fileNameLabel)).toEqual(newName); 
     }
 
     function checkDisplayedItemsPerPage(selector: string): void {
