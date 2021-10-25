@@ -83,6 +83,12 @@ export function click(selector: string, index: number = 0, waitTime: number = de
     return $$(selector)[index].click();
 }
 
+export function clickRightMouseBtn(selector: string, index: number = 0, waitTime: number = defaultWaitTime()): void {
+    checkSelectorExists(selector, index);
+    $$(selector)[index].waitForDisplayed({ timeout: waitTime });
+    return $$(selector)[index].click({ button: 'right' });
+}
+
 export function clickWithOption(
     selector: string,
     index: number = 0,
