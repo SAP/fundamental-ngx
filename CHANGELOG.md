@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.60 (2021-10-25)
+
+
+### Bug Fixes
+
+* **platform:** input group prevent enter not a number value in input type number (Firefox and Safari) ([#6909](https://github.com/SAP/fundamental-ngx/issues/6909)) ([5b0d65e](https://github.com/SAP/fundamental-ngx/commit/5b0d65e69d29bfcb97a8d8eb0d132855ccf0f166))
+
 ## 0.33.0-rc.59 (2021-10-25)
 
 ## 0.33.0-rc.58 (2021-10-25)
