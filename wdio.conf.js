@@ -133,6 +133,7 @@ exports.config = {
             './e2e/wdio/core/**/shellbar.e2e-spec.ts',
             './e2e/wdio/core/**/side-navigation.e2e-spec.ts',
             './e2e/wdio/core/**/slider.e2e-spec.ts',
+            './e2e/wdio/core/**/splitter.e2e-spec.ts',
             './e2e/wdio/core/**/split-button.e2e-spec.ts',
             './e2e/wdio/core/**/standard-list.e2e-spec.ts',
             './e2e/wdio/core/**/status-indicator.e2e-spec.ts',
