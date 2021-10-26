@@ -54,12 +54,12 @@ describe('Multi input test suite', () => {
 
     beforeAll(() => {
         multiInputPage.open();
-        waitForPresent(activeDropdownButtons);
+        waitForPresent(multiInputPage.title);
     }, 1);
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(activeDropdownButtons);
+        waitForPresent(multiInputPage.title);
     }, 1);
 
     it('Check RTL/LTR orientation', () => {
