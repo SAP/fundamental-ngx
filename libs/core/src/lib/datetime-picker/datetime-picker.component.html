@@ -58,7 +58,7 @@
             [attr.aria-hidden]="!isOpen"
             [style.display]="'block'"
         >
-            <fd-form-message [embedded]="true" *ngIf="_message" [type]="state">
+            <fd-form-message tabindex="0" [embedded]="true" *ngIf="_message" [type]="state">
                 {{ _message }}
             </fd-form-message>
             <ng-content></ng-content>
