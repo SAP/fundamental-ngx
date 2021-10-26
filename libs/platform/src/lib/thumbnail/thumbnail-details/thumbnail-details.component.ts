@@ -1,4 +1,12 @@
-import { AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    Component,
+    HostListener,
+    OnInit,
+    ViewChild,
+    forwardRef
+} from '@angular/core';
 import { ThumbnailImageComponent } from '../thumbnail-image/thumbnail-image.component';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
@@ -31,8 +39,8 @@ export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
     /** max limit  */
     maxImages = this.dialogRef.data.maxImages;
 
-    /** Reference to humbnail images component */
-    @ViewChild(ThumbnailImageComponent)
+    /** Reference to thumbnail images component */
+    @ViewChild(forwardRef(() => ThumbnailImageComponent))
     thumbnailImage: ThumbnailImageComponent;
 
     /** @hidden */

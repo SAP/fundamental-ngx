@@ -8,7 +8,8 @@ import {
     Output,
     ViewEncapsulation,
     HostListener,
-    ViewChild
+    ViewChild,
+    forwardRef
 } from '@angular/core';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
@@ -52,7 +53,7 @@ export class ThumbnailComponent extends BaseComponent implements OnInit {
     thumbnailClicked: EventEmitter<ThumbnailClickedEvent> = new EventEmitter();
 
     /** Reference to thumbnail images component */
-    @ViewChild(ThumbnailImageComponent)
+    @ViewChild(forwardRef(() => ThumbnailImageComponent))
     thumbnailImage: ThumbnailImageComponent;
 
     /** Generate unique id for the thumbnail */
