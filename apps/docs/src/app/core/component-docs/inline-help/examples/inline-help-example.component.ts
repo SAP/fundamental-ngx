@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { map } from 'rxjs/operators';
@@ -20,12 +20,10 @@ import { map } from 'rxjs/operators';
         `
     ]
 })
-export class InlineHelpExampleComponent implements OnInit {
+export class InlineHelpExampleComponent {
     rtlDirection$: Observable<string>;
 
-    constructor(private _rtlService: RtlService) {}
-
-    ngOnInit(): void {
+    constructor(private _rtlService: RtlService) {
         this.rtlDirection$ = this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'left' : 'right')));
     }
 }
