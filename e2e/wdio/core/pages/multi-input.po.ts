@@ -5,7 +5,7 @@ export class MultiInputPo extends CoreBaseComponentPo {
     private url = '/multi-input';
     root = '#page-content';
 
-    activeDropdownButtons = '[ng-reflect-disabled="false"] button[ng-reflect-glyph="value-help"]';
+    activeDropdownButtons = 'button[title="value-help"]:not(:disabled)';
     activeInputs = '.fd-multi-input-field [ng-reflect-disabled="false"] input';
     disableInputs = 'div.is-disabled';
     options = 'fd-checkbox.ng-untouched';
