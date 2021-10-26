@@ -166,7 +166,7 @@ describe('Upload collection test suite', () => {
         const newName = getValue(selector + inputFields);
         click(selector + checkbox, 1);
         waitForNotDisplayed(selector + busyIndicator);
-        expect(getText(selector + fileNameLabel)).toEqual(newName); 
+        expect(getText(selector + fileNameLabel)).toEqual(newName);
     }
 
     function checkDisplayedItemsPerPage(selector: string): void {
