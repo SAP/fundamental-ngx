@@ -33,7 +33,7 @@
         [buttonFocusable]="false"
         [isControl]="true"
         glyph="value-help"
-        [state]="status"
+        [state]="state"
         [disabled]="disabled"
         [compact]="contentDensity === 'compact'"
         (keydown)="removeSelectedTokens($event)"
@@ -68,7 +68,7 @@
                 #searchInputElement
                 type="text"
                 [compact]="contentDensity === 'compact'"
-                class="fd-input fd-tokenizer__input fd-multi-input-tokenizer-input"
+                class="fd-input fd-multi-input-tokenizer-input"
                 fdp-auto-complete
                 (onComplete)="_onAutoComplete($event)"
                 (keydown.enter)="_onKeydownEnter($event)"

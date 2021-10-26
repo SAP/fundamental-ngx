@@ -1,7 +1,8 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { DATA_PROVIDERS } from '@fundamental-ngx/platform/shared';
+import { __values } from 'tslib';
 
 @Component({
     selector: 'fdp-platform-multi-input-reactive-example',
@@ -64,21 +65,11 @@ export class PlatformMultiInputReactiveExampleComponent {
         { state: 'Wyoming', city: 'Cheyenne' }
     ];
 
-    customForm = new FormGroup({
-        item: new FormControl([])
-    });
     submitted = false;
-
-    get itemField(): AbstractControl {
-        return this.customForm.controls['item'];
-    }
+    customForm: FormGroup = new FormGroup({ item: new FormControl([]) });
 
     hasError(): boolean {
-        return !this.hasValue();
-    }
-
-    hasValue(): boolean {
-        return this.itemField.value.length > 0;
+        return this.customForm.invalid;
     }
 
     onSubmit(): void {
@@ -87,5 +78,9 @@ export class PlatformMultiInputReactiveExampleComponent {
         }
 
         alert('form file Uploaded successfully');
+    }
+
+    reset(): void {
+        this.customForm.reset();
     }
 }
