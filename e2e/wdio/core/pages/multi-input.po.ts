@@ -23,6 +23,11 @@ export class MultiInputPo extends CoreBaseComponentPo {
     asyncExampleOptions = 'div#rtl-ex6 .fd-token__text span';
     tokenOptions = 'div#background-ex8 .fd-token__text span';
     templateOptions = 'div#background-ex9 .fd-token__text span';
+    simpleExampleTokens = 'fd-multi-input-example fd-tokenizer fd-token';
+    compactExampleTokens = 'fd-multi-input-compact-example fd-tokenizer fd-token';
+    popover = '.fd-popover__popper';
+    checkboxInput = this.popover + ' fd-checkbox';
+    listItem = this.popover + ' .fd-list__item';
 
     open(): void {
         super.open(this.url);

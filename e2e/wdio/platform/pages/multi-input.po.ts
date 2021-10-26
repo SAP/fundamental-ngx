@@ -17,6 +17,8 @@ export class MultiInputPo extends BaseComponentPo {
     selectedToken = "span[role='button']";
     dropdownOptionText = this.dropdownOptions + 'span';
     dropdownOptionTextValueHelp = '[role="option"]';
+    validationPopover = '.fd-popover__popper .fd-form-message';
+    compactExampleTokens = 'fdp-platform-multi-input-compact-example fd-token';
 
     crossButton = (option: string) => {
         return `//span[text() = '${option}']/../following-sibling::span`;
