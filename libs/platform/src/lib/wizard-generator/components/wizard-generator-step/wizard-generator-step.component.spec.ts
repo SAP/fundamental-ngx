@@ -7,6 +7,7 @@ import { PlatformWizardGeneratorModule } from '../../wizard-generator.module';
 import { WizardGeneratorService } from '../../wizard-generator.service';
 import { WizardStepForms } from './wizard-generator-step.component';
 import { WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
+import { first } from 'rxjs/operators';
 
 const items = [
     {
@@ -114,10 +115,13 @@ xdescribe('WizardGeneratorStepComponent', () => {
 
         await new Promise((resolve) => setTimeout(() => resolve(null), 200));
 
-        service.submitStepForms('productTypeStep').subscribe((forms) => {
-            expect(forms.productType.success).toBeTrue();
+        service
+            .submitStepForms('productTypeStep')
+            .pipe(first())
+            .subscribe((forms) => {
+                expect(forms.productType.success).toBeTrue();
 
-            done();
-        });
+                done();
+            });
     });
 });

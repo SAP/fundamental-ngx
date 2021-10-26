@@ -7,6 +7,7 @@ import { BaseWizardGenerator } from './base-wizard-generator';
 import { WizardGeneratorService } from './wizard-generator.service';
 import { PlatformWizardGeneratorModule } from './wizard-generator.module';
 import { WizardGeneratorItem } from './interfaces/wizard-generator-item.interface';
+import { first } from 'rxjs/operators';
 
 let shouldShow = false;
 
@@ -126,6 +127,7 @@ describe('WizardGeneratorService', () => {
         componentInstance = fixture.componentInstance;
 
         service = componentInstance.wizardGeneratorService;
+        fixture.detectChanges();
     });
 
     it('should be created', () => {
@@ -172,10 +174,13 @@ describe('WizardGeneratorService', () => {
     });
 
     it('should return visible steps in observable', async (done) => {
-        service.getVisibleSteps().subscribe((steps) => {
-            expect(steps.length).toEqual(3);
-            done();
-        });
+        service
+            .getVisibleSteps()
+            .pipe(first())
+            .subscribe((steps) => {
+                expect(steps.length).toEqual(3);
+                done();
+            });
 
         await service.prepareWizardItems(TEST_ITEMS);
     });
@@ -196,10 +201,13 @@ describe('WizardGeneratorService', () => {
 
     it('should set visible steps', async (done) => {
         const items = await service.prepareWizardItems(TEST_ITEMS);
-        service.getVisibleSteps().subscribe((steps) => {
-            expect(steps.length).toEqual(4);
-            done();
-        });
+        service
+            .getVisibleSteps()
+            .pipe(first())
+            .subscribe((steps) => {
+                expect(steps.length).toEqual(4);
+                done();
+            });
 
         service.setVisibleSteps(items);
     });
@@ -207,10 +215,13 @@ describe('WizardGeneratorService', () => {
     it('should clear steps components', async (done) => {
         await service.prepareWizardItems(TEST_ITEMS);
 
-        service.trackStepsComponents().subscribe((components) => {
-            expect(Object.keys(components).length).toEqual(0);
-            done();
-        });
+        service
+            .trackStepsComponents()
+            .pipe(first())
+            .subscribe((components) => {
+                expect(Object.keys(components).length).toEqual(0);
+                done();
+            });
 
         service.clearWizardStepComponents();
     });
