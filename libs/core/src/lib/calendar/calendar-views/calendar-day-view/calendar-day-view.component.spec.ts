@@ -40,10 +40,10 @@ describe('CalendarDayViewComponent', () => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
         component.ngOnInit();
         const dayPicked = component._dayViewGrid[2][3];
-        component.selectedDateChange.subscribe((date: FdDate) =>
+        component.selectedDateChange.subscribe((date: FdDate) => {
             expect(date.toDateString()).toBe(dayPicked.date.toDateString());
             done();
-        );
+        });
         component.selectDate(dayPicked);
     });
 
@@ -68,10 +68,10 @@ describe('CalendarDayViewComponent', () => {
         component.calType = 'range';
         component.ngOnInit();
         const dayPicked = component._dayViewGrid[2][3];
-        component.selectedRangeDateChange.subscribe((date: { start: FdDate; end: FdDate }) =>
+        component.selectedRangeDateChange.subscribe((date: { start: FdDate; end: FdDate }) => {
             expect(date.start.toDateString()).toBe(dayPicked.date.toDateString());
             done();
-        );
+        });
         component.selectDate(dayPicked);
     });
 

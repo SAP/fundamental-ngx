@@ -203,7 +203,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
      * Set focus on month cell.
      * It can be a selected cell, current month cell or first cell in the list
      */
-     setFocusOnCell(): void {
+    setFocusOnCell(): void {
         const cellToFocus = new DefaultCalendarActiveCellStrategy().getActiveCell(this._getYearList());
         if (!cellToFocus?.id) {
             return;
@@ -211,17 +211,17 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
         this._focusElementBySelector(`#${cellToFocus.id}`);
     }
 
-    /** 
+    /**
      * @hidden
-     * Method for handling the keyboard navigation. 
+     * Method for handling the keyboard navigation.
      */
-     _onKeydownYearHandler(event: KeyboardEvent, index: number): void {
+    _onKeydownYearHandler(event: KeyboardEvent, index: number): void {
         this._calendarService.onKeydownHandler(event, index);
     }
 
-    /** 
+    /**
      * @hidden
-     * Method that allows to focus elements inside this component 
+     * Method that allows to focus elements inside this component
      */
     _focusElementBySelector(elementSelector: string): void {
         const elementToFocus: HTMLElement = this._eRef.nativeElement.querySelector(elementSelector);
@@ -241,7 +241,7 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
     /**
      * @hidden
      * Get grid cell id be index
-     * @param index 
+     * @param index
      */
     _getId(index: number): string {
         return this.viewId + '-year-' + index;
@@ -302,18 +302,18 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
         this._changeDetectorRef.markForCheck();
     }
 
-    /** 
+    /**
      * @hidden
-     * Returns year name as a string. 
+     * Returns year name as a string.
      */
     private _getYearName(year: number): string {
         const formatted = this._dateTimeAdapter.getYearName(this._dateTimeAdapter.createDate(year, 1, 1));
         return this._getYearString(year, formatted);
     }
 
-    /** 
+    /**
      * @hidden
-     * Returns aria year name as a string. 
+     * Returns aria year name as a string.
      */
     private _getAriaYearName(year: number): string {
         const formatted = this._dateTimeAdapter.format(
@@ -323,9 +323,9 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
         return this._getYearString(year, formatted);
     }
 
-    /** 
+    /**
      * @hidden
-     * Returns year name taking into account yearMapping. 
+     * Returns year name taking into account yearMapping.
      */
     private _getYearString(year: number, defaultStr: string): string {
         if (typeof this.yearViewGrid.yearMapping === 'function') {
@@ -334,25 +334,25 @@ export class CalendarYearViewComponent<D> implements OnInit, OnChanges, OnDestro
         return defaultStr;
     }
 
-    /** 
+    /**
      * @hidden
-     * Returns transformed 1d array from 2d year grid. 
+     * Returns transformed 1d array from 2d year grid.
      */
     private _getYearList(): CalendarYear[] {
         return [].concat.apply([], this._calendarYearListGrid);
     }
 
-    /** 
+    /**
      * @hidden
-     * Amount of years displayed in year view 
+     * Amount of years displayed in year view
      */
     private _getAmountOfYearsShownAtOnce(): number {
         return this.yearViewGrid.rows * this.yearViewGrid.cols;
     }
 
-    /** 
+    /**
      * @hidden
-     * Method to put configuration and listeners on calendar keyboard service 
+     * Method to put configuration and listeners on calendar keyboard service
      */
     private _setupKeyboardService(): void {
         this._calendarService.colAmount = this.yearViewGrid.cols;

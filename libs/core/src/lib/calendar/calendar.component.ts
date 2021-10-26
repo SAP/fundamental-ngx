@@ -79,7 +79,7 @@ export type DaysOfWeek = 1 | 2 | 3 | 4 | 5 | 6 | 7;
     host: {
         '(blur)': 'onTouched()',
         '[attr.id]': 'id',
-        'class': 'fd-calendar fd-has-display-block'
+        class: 'fd-calendar fd-has-display-block'
     },
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -216,9 +216,9 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
     @ViewChild(CalendarHeaderComponent)
     _calendarHeaderComponent: CalendarHeaderComponent<D>;
 
-    /** 
+    /**
      * @hidden
-     * Currently displayed days depending on month and year 
+     * Currently displayed days depending on month and year
      */
     _currentlyDisplayed: CalendarCurrent;
 
@@ -473,7 +473,10 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
         if (this._currentlyDisplayed.month === 12) {
             this._currentlyDisplayed = { year: this._currentlyDisplayed.year + 1, month: 1 };
         } else {
-            this._currentlyDisplayed = { year: this._currentlyDisplayed.year, month: this._currentlyDisplayed.month + 1 };
+            this._currentlyDisplayed = {
+                year: this._currentlyDisplayed.year,
+                month: this._currentlyDisplayed.month + 1
+            };
         }
     }
 
@@ -482,7 +485,10 @@ export class CalendarComponent<D> implements OnInit, ControlValueAccessor, Valid
         if (this._currentlyDisplayed.month <= 1) {
             this._currentlyDisplayed = { year: this._currentlyDisplayed.year - 1, month: 12 };
         } else {
-            this._currentlyDisplayed = { year: this._currentlyDisplayed.year, month: this._currentlyDisplayed.month - 1 };
+            this._currentlyDisplayed = {
+                year: this._currentlyDisplayed.year,
+                month: this._currentlyDisplayed.month - 1
+            };
         }
     }
 

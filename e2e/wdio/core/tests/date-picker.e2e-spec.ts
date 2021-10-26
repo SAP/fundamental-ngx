@@ -29,11 +29,37 @@ import { blockExamples } from '../fixtures/appData/date-picker-contents';
 describe('Datetime picker suite', () => {
     const datePickerPage = new DatePickerPo();
     const {
-        defaultExample, formExample, rangeExample, disabledExample, allowNullExample, formRangeExample,
-        formattingExample, disableFuncExample, internationalExample, rangeDisabledExample, calendar, calendarIcon,
-        calendarInput, calendarItem, selectedTimeLine, currentItem, inputGroup, frenchButton, germanButton,
-        bulgarianButton, previousMonthButton, nextMonthButton, calendarBody, calendarRow, selectMonthButton,
-        selectYearButton, months, message, currentMonthCalendarItem, getCurrentDayIndex, altCalendarItem,
+        defaultExample,
+        formExample,
+        rangeExample,
+        disabledExample,
+        allowNullExample,
+        formRangeExample,
+        formattingExample,
+        disableFuncExample,
+        internationalExample,
+        rangeDisabledExample,
+        calendar,
+        calendarIcon,
+        calendarInput,
+        calendarItem,
+        selectedTimeLine,
+        currentItem,
+        inputGroup,
+        frenchButton,
+        germanButton,
+        bulgarianButton,
+        previousMonthButton,
+        nextMonthButton,
+        calendarBody,
+        calendarRow,
+        selectMonthButton,
+        selectYearButton,
+        months,
+        message,
+        currentMonthCalendarItem,
+        getCurrentDayIndex,
+        altCalendarItem,
         monthAttributeLabel
     } = new DatePickerPo();
 
@@ -227,11 +253,17 @@ describe('Datetime picker suite', () => {
         click(selectMonthButton);
 
         click(nextMonthButton);
-        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(nextMonthName, `next month is not chosen`);
+        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
+            nextMonthName,
+            `next month is not chosen`
+        );
 
         click(previousMonthButton);
         click(previousMonthButton);
-        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(previousMonthName, `previous month is not chosen`);
+        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
+            previousMonthName,
+            `previous month is not chosen`
+        );
         click(section + calendarIcon);
     }
 

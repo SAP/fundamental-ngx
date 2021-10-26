@@ -1,7 +1,11 @@
 <div class="fd-calendar__years">
     <table class="fd-calendar__table" role="grid" [attr.aria-roledescription]="_viewRoleDescription">
         <tbody class="fd-calendar__group" role="rowgroup">
-            <tr class="fd-calendar__row" role="row" *ngFor="let colYears of _calendarYearListGrid; let rowIndex = index">
+            <tr
+                class="fd-calendar__row"
+                role="row"
+                *ngFor="let colYears of _calendarYearListGrid; let rowIndex = index"
+            >
                 <td
                     class="fd-calendar__item"
                     role="gridcell"

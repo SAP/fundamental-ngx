@@ -8,8 +8,9 @@
                 fdType="transparent"
                 glyph="slim-arrow-left"
                 [attr.id]="_prevButtonId"
-                [attr.aria-label]="previousAriaLabel"
                 [attr.aria-disabled]="false"
+                [attr.title]="previousAriaLabel"
+                [ariaLabel]="previousAriaLabel"
                 type="button"
                 (click)="previousClicked.emit()"
             ></button>
@@ -65,8 +66,9 @@
                 fdType="transparent"
                 glyph="slim-arrow-right"
                 [attr.id]="_nextButtonId"
-                [attr.aria-label]="nextAriaLabel"
                 [attr.aria-disabled]="false"
+                [attr.title]="nextAriaLabel"
+                [ariaLabel]="nextAriaLabel"
                 (click)="nextClicked.emit()"
                 type="button"
             ></button>

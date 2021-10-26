@@ -33,7 +33,7 @@ export class DatePicker extends BaseComponentPo {
     };
 
     yearInCalendarByValue = (year: number): string => {
-        return `[data-fd-calendar-year="${year}"]`
+        return `[data-fd-calendar-year="${year}"]`;
     };
 
     open(): void {

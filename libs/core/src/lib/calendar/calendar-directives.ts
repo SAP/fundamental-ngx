@@ -6,7 +6,7 @@ import { CalendarI18nLabels } from './i18n/calendar-i18n-labels';
     // tslint:disable-next-line:directive-selector
     selector: '[fd-calendar-close-button]',
     host: {
-        'class': 'fd-calendar__close-button',
+        class: 'fd-calendar__close-button',
         '[attr.aria-label]': '_ariaLabel',
         '[attr.title]': '_title'
     }

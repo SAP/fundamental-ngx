@@ -184,7 +184,7 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
      * Set focus on month cell.
      * It can be a selected cell, current month cell or first cell in the list
      */
-     setFocusOnCell(): void {
+    setFocusOnCell(): void {
         const cellToFocus = new DefaultCalendarActiveCellStrategy().getActiveCell(this._getMonthList());
         if (!cellToFocus?.id) {
             return;
@@ -192,17 +192,17 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
         this._focusElementBySelector(`#${cellToFocus.id}`);
     }
 
-    /** 
+    /**
      * @hidden
-     * Method for handling the keyboard events (a11y) 
+     * Method for handling the keyboard events (a11y)
      */
     _onKeydownMonthHandler(event: KeyboardEvent, index: number): void {
         this._calendarService.onKeydownHandler(event, index);
     }
 
-    /** 
+    /**
      * @hidden
-     * Method that allows to focus elements inside this component 
+     * Method that allows to focus elements inside this component
      */
     _focusElementBySelector(elementSelector: string): void {
         const elementToFocus: HTMLElement = this._eRef.nativeElement.querySelector(elementSelector);
@@ -211,9 +211,9 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
         }
     }
 
-    /** 
+    /**
      * @hidden
-     * Method returning id of month cell 
+     * Method returning id of month cell
      */
     _getIndex(rowIndex: number, colIndex: number): number {
         return this._calendarService.getId(rowIndex, colIndex);
@@ -227,25 +227,25 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
         return this.viewId + '-month-' + index;
     }
 
-    /** 
+    /**
      * @hidden
-     * Method that checks if this is current month 
+     * Method that checks if this is current month
      */
     _isCurrent(id: number): boolean {
         return id + this._monthOffset === this.currentMonth;
     }
 
-    /** 
+    /**
      * @hidden
-     * Method that check if this is selected month 
+     * Method that check if this is selected month
      */
     _isSelected(id: number): boolean {
         return id + this._monthOffset === this.monthSelected;
     }
 
-    /** 
+    /**
      * @hidden
-     * Method that create month grid with required meta data 
+     * Method that create month grid with required meta data
      */
     private _constructMonthGrid(): void {
         const monthNames: string[] = this._dateTimeAdapter.getMonthNames('short');
@@ -281,9 +281,9 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
         this._changeDetectorRef.markForCheck();
     }
 
-    /** 
+    /**
      * @hidden
-     * Method to put configuration and listeners on calendar keyboard service 
+     * Method to put configuration and listeners on calendar keyboard service
      */
     private _setupKeyboardService(): void {
         this._calendarService.rowAmount = this._amountOfRows;
@@ -299,9 +299,9 @@ export class CalendarMonthViewComponent<D> implements OnInit, OnDestroy, OnChang
             .subscribe((index) => this.selectMonth(this._getMonthList()[index]));
     }
 
-    /** 
+    /**
      * @hidden
-     * Returns transformed 1d array from 2d month grid. 
+     * Returns transformed 1d array from 2d month grid.
      */
     private _getMonthList(): CalendarMonth[] {
         return [].concat.apply([], this._calendarMonthListGrid);
