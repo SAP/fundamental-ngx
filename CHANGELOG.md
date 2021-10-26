@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.63 (2021-10-26)
+
+
+### Features
+
+* **platform:** search field add missing examples and refresh mode ([#6694](https://github.com/SAP/fundamental-ngx/issues/6694)) ([dee522d](https://github.com/SAP/fundamental-ngx/commit/dee522df536a3365ec2362523bf8cc2fe511f8ae))
+
 ## 0.33.0-rc.62 (2021-10-26)
 
 ## 0.33.0-rc.61 (2021-10-26)
