@@ -8,6 +8,8 @@ import { APPROVAL_FLOW_APPROVER_TYPES, ApprovalFlowAddNodeComponent } from './ap
 import { TestApprovalFlowDataSource } from '../approval-flow.component.spec';
 import { ApprovalNode, ApprovalTeam } from '../interfaces';
 import { ApprovalFlowAddNodeViewService } from '../services/approval-flow-add-node-view.service';
+import { first } from 'rxjs/operators';
+import '@angular/localize/init';
 
 const node: ApprovalNode = {
     id: 'id1',
@@ -71,14 +73,10 @@ describe('ApprovalFlowAddNodeComponent', () => {
         expect(component._nodeType).toEqual('SERIAL');
     });
 
-    it('should map users of the selected team to the node approvers', () => {
-        let team: ApprovalTeam;
-        let teamMemberIds: string;
-
-        approvalFlowDataSource.fetchTeams().subscribe((teams) => {
-            team = teams[0];
-            teamMemberIds = team.members.map((memberId) => memberId).join(',');
-        });
+    it('should map users of the selected team to the node approvers', async () => {
+        const teams = await approvalFlowDataSource.fetchTeams().pipe(first()).toPromise();
+        const team = teams[0];
+        const teamMemberIds = team.members.map((memberId) => memberId).join(',');
 
         component._approverType = APPROVAL_FLOW_APPROVER_TYPES.EVERYONE;
         component._setSelectedTeam(team);
@@ -101,12 +99,11 @@ describe('ApprovalFlowAddNodeComponent', () => {
         expect(viewServiceSpy).toHaveBeenCalled();
     });
 
-    it('should confirm selected team', () => {
-        let approvalTeam: ApprovalTeam;
+    it('should confirm selected team', async () => {
         const viewServiceSpy = spyOn(TestBed.inject(ApprovalFlowAddNodeViewService), 'resetView').and.callThrough();
 
-        approvalFlowDataSource.fetchTeams().subscribe((teams) => (approvalTeam = teams[0]));
-
+        const teams = await approvalFlowDataSource.fetchTeams().pipe(first()).toPromise();
+        const approvalTeam: ApprovalTeam = teams[0];
         component._data.isEdit = true;
 
         component._setSelectedTeam(approvalTeam);
