@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { first } from 'rxjs/operators';
 import { TabsService } from './tabs.service';
 
 @Component({
@@ -55,15 +56,21 @@ describe('TabsService', () => {
         expect(elements[2].focus).toHaveBeenCalled();
     });
 
-    it('should handle select on first element', () => {
+    it('should handle select on first element', (done) => {
         const elements = anchors.map((anchor) => anchor.nativeElement);
-        service.tabSelected.subscribe((index) => expect(index).toBe(0));
+        service.tabSelected.pipe(first()).subscribe((index) => {
+            expect(index).toBe(0);
+            done();
+        });
         service.tabHeaderKeyHandler(0, { key: 'Enter', preventDefault: () => {} }, elements);
     });
 
-    it('should handle select when space click on first element', () => {
+    it('should handle select when space click on first element', (done) => {
         const elements = anchors.map((anchor) => anchor.nativeElement);
-        service.tabSelected.subscribe((index) => expect(index).toBe(1));
+        service.tabSelected.pipe(first()).subscribe((index) => {
+            expect(index).toBe(1);
+            done();
+        });
         service.tabHeaderKeyHandler(1, { key: ' ', preventDefault: () => {} }, elements);
     });
 });

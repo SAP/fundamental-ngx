@@ -1,4 +1,5 @@
 import { waitForAsync, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { first } from 'rxjs/operators';
 
 import { DatetimeAdapter, FdDatetimeAdapter, FdDatetimeModule } from '../../../datetime';
 import { FdDate } from '../../../datetime/fd-date';
@@ -35,13 +36,14 @@ describe('CalendarDayViewComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('Should Select Proper Date', () => {
+    it('Should Select Proper Date', (done) => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
         component.ngOnInit();
         const dayPicked = component.dayViewGrid[2][3];
-        component.selectedDateChange.subscribe((date: FdDate) =>
-            expect(date.toDateString()).toBe(dayPicked.date.toDateString())
-        );
+        component.selectedDateChange.pipe(first()).subscribe((date: FdDate) => {
+            expect(date.toDateString()).toBe(dayPicked.date.toDateString());
+            done();
+        });
         component.selectDate(dayPicked);
     });
 
@@ -61,27 +63,29 @@ describe('CalendarDayViewComponent', () => {
         expect(selected.date.toDateString()).toBe(component.selectedDate.toDateString());
     });
 
-    it('Should Select Proper First Range Date', () => {
+    it('Should Select Proper First Range Date', (done) => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
         component.calType = 'range';
         component.ngOnInit();
         const dayPicked = component.dayViewGrid[2][3];
-        component.selectedRangeDateChange.subscribe((date: { start: FdDate; end: FdDate }) =>
-            expect(date.start.toDateString()).toBe(dayPicked.date.toDateString())
-        );
+        component.selectedRangeDateChange.pipe(first()).subscribe((date: { start: FdDate; end: FdDate }) => {
+            expect(date.start.toDateString()).toBe(dayPicked.date.toDateString());
+            done();
+        });
         component.selectDate(dayPicked);
     });
 
-    it('Should Select Proper Second Range Date', () => {
+    it('Should Select Proper Second Range Date', (done) => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
         component.calType = 'range';
         component.ngOnInit();
         const dayStartPicked = component.dayViewGrid[2][3];
         const dayEndPicked = component.dayViewGrid[3][3];
         component.selectedRangeDate = { start: dayStartPicked.date, end: null };
-        component.selectedRangeDateChange.subscribe((date: { start: FdDate; end: FdDate }) =>
-            expect(date.end.toDateString()).toBe(dayEndPicked.date.toDateString())
-        );
+        component.selectedRangeDateChange.pipe(first()).subscribe((date: { start: FdDate; end: FdDate }) => {
+            expect(date.end.toDateString()).toBe(dayEndPicked.date.toDateString());
+            done();
+        });
         component.selectDate(dayEndPicked);
     });
 
