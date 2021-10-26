@@ -23,4 +23,6 @@ export interface IconTabBarItem extends TabConfig {
     /** This field is used in overflow mode. Determines whether particular tab should be hidden */
     hidden?: boolean;
     subItems?: IconTabBarItem[];
+    /** Unique id of the parent tab, if current item is a subItem */
+    parentUId?: string;
 }

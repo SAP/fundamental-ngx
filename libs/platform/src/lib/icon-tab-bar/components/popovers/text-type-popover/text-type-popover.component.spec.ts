@@ -105,6 +105,7 @@ describe('TextTypePopoverComponent', () => {
     it('should emit selectedSubItem event.', () => {
         const parentConfig = generateTestConfig(10, true);
         const tabs = generateTabBarItems(parentConfig);
+        component.isExtraItemsMode = false;
         component.parentTab = tabs[5];
         component.ngOnChanges({ parentTab: tabs[5] } as unknown as SimpleChanges);
 

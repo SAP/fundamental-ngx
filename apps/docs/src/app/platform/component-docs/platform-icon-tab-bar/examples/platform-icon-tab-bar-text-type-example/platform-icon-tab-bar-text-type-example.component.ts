@@ -25,7 +25,7 @@ export class PlatformIconTabBarTextTypeExampleComponent implements OnInit {
     ngOnInit(): void {
         this.items = this.withOverflowExample ? cloneDeep(longTextTypeConfig) : cloneDeep(textTypeConfig);
         if (this.nested) {
-            this.items[7].subItems = [
+            this.items[3].subItems = [
                 {
                     label: 'Item 0',
                     counter: null,

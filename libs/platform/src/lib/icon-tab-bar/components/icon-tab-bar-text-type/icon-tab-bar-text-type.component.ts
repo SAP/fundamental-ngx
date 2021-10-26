@@ -16,12 +16,14 @@ import { UNIQUE_KEY_SEPARATOR } from '../../constants';
 import { FdDnDEvent } from '../../directives/dnd/icon-bar-dnd-container.directive';
 import { TextTypePopoverComponent } from '../popovers/text-type-popover/text-type-popover.component';
 
-export interface DataForReordering {
+/** @hidden */
+interface DataForReordering {
     arr: IconTabBarItem[];
     item: IconTabBarItem;
     parentUid: string;
 }
 
+/** @hidden */
 type TabItem = ElementRef<HTMLElement> | TextTypePopoverComponent;
 
 @Component({
@@ -78,14 +80,18 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
      * @param targetItem
      * @param action
      */
-    _onDropped({ draggableItem, targetItem, action }: FdDnDEvent): void {
-        const replacedParsedUidArr = targetItem.uId.split(UNIQUE_KEY_SEPARATOR);
+    _onDropped(event: FdDnDEvent): void {
+        if (!this._canDrop(event)) {
+            return;
+        }
+
+        const replacedParsedUidArr = event.targetItem.uId.split(UNIQUE_KEY_SEPARATOR);
         replacedParsedUidArr.length = replacedParsedUidArr.length - 1;
-        const draggableParsedUidArr = draggableItem.uId.split(UNIQUE_KEY_SEPARATOR);
+        const draggableParsedUidArr = event.draggableItem.uId.split(UNIQUE_KEY_SEPARATOR);
         draggableParsedUidArr.length = draggableParsedUidArr.length - 1;
 
-        const tabInfoForNewList = this._getTabInfoFromMainList(targetItem.uId);
-        const tabInfoForPrevList = this._getTabInfoFromMainList(draggableItem.uId);
+        const tabInfoForNewList = this._getTabInfoFromMainList(event.targetItem.uId);
+        const tabInfoForPrevList = this._getTabInfoFromMainList(event.draggableItem.uId);
 
         const dataForAction = {
             replacedItemInfo: {
@@ -100,9 +106,23 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
             }
         };
 
-        action === 'replace' ? this._replaceAsSibling(dataForAction) : this._insertItemAsChild(dataForAction);
+        event.action === 'replace' ? this._replaceAsSibling(dataForAction) : this._insertItemAsChild(dataForAction);
 
         this.reordered.emit(this._tabs);
+    }
+
+    /** @hidden */
+    private _canDrop(event: FdDnDEvent): boolean {
+        let parentUId: string | null = event.action === 'replace' ? event.targetItem.parentUId : event.targetItem.uId;
+        while (parentUId) {
+            if (parentUId === event.draggableItem.uId) {
+                return false;
+            }
+            const nextSeparatorIdx = parentUId.lastIndexOf(UNIQUE_KEY_SEPARATOR);
+
+            parentUId = nextSeparatorIdx > 0 ? parentUId.slice(0, nextSeparatorIdx) : null;
+        }
+        return true;
     }
 
     /**
@@ -181,6 +201,7 @@ export class IconTabBarTextTypeComponent extends IconTabBarBase {
             item.index = index;
             item.uId = parentUid ? `${parentUid}${UNIQUE_KEY_SEPARATOR}${index}` : `${index}`;
             item.flatIndex = flatIndexRef.value++;
+            item.parentUId = parentUid;
             if (!parentUid) {
                 item.cssClasses = [`fd-icon-tab-bar__item--${item.color}`];
             }

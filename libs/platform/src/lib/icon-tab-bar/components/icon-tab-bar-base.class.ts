@@ -178,7 +178,8 @@ export abstract class IconTabBarBase implements OnInit, OnChanges, AfterViewInit
                 uId: `${parent.uId}${UNIQUE_KEY_SEPARATOR}${index}`,
                 cssClasses: [],
                 subItems: null,
-                flatIndex: flatIndexRef.value++
+                flatIndex: flatIndexRef.value++,
+                parentUId: parent.uId
             };
             if (Array.isArray(item.subItems) && item.subItems.length) {
                 result.subItems = this._generateSubItems(item.subItems, result, flatIndexRef);

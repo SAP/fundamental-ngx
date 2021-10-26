@@ -30,9 +30,11 @@
                                 <fd-icon [glyph]="item.icon"></fd-icon>
                             </span>
                         </span>
-                        <span *ngIf="showItemLabel && item.label" class="fd-list__title fd-icon-tab-bar__list-item-title">{{
-                            item.label
-                        }}</span>
+                        <span
+                            *ngIf="showItemLabel && item.label"
+                            class="fd-list__title fd-icon-tab-bar__list-item-title"
+                            >{{ item.label }}</span
+                        >
                         <span *ngIf="item.badge" class="fd-icon-tab-bar__badge"></span>
                         <span *ngIf="item.counter" class="fd-list__counter fd-icon-tab-bar__list-item-counter"
                             >({{ item.counter }})</span
