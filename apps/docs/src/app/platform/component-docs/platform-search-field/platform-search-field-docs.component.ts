@@ -10,6 +10,8 @@ import * as platformCategoriesSearchFieldTsCode from '!raw-loader!./platform-sea
 import * as platformDataSourceSearchFieldSrc from '!raw-loader!./platform-search-field-examples/platform-search-field-data-source-example.component.html';
 import * as platformDataSourceSearchFieldTsCode from '!raw-loader!./platform-search-field-examples/platform-search-field-data-source-example.component';
 import * as platformDataSourceSearchFieldServiceTsCode from '!raw-loader!./platform-search-field-examples/platform-search-field-data-source-example.service';
+import * as platformSearchFieldMobileModeSrc from '!raw-loader!./platform-search-field-examples/platform-search-field-mobile/platform-search-field-mobile-example.component.html';
+import * as platformSearchFieldMobileModeTsCode from '!raw-loader!./platform-search-field-examples/platform-search-field-mobile/platform-search-field-mobile-example.component.ts';
 
 @Component({
     selector: 'app-search-field',
@@ -65,6 +67,21 @@ export class PlatformSearchFieldDocsComponent {
             fileName: 'platform-search-field-data-source-example',
             service: true,
             component: 'SearchFieldDataProvider'
+        }
+    ];
+
+    searchFieldMobileMode: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformSearchFieldMobileModeSrc,
+            fileName: 'platform-search-field-mobile-example'
+        },
+        {
+            language: 'typescript',
+            code: platformSearchFieldMobileModeTsCode,
+            fileName: 'platform-search-field-mobile-example',
+            component: 'PlatformSearchFieldMobileExampleComponent',
+            scssFileCode: platformSearchFieldExampleScss
         }
     ];
 }

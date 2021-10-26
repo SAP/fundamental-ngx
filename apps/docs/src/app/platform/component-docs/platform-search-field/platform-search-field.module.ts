@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { MOBILE_MODE_CONFIG } from '@fundamental-ngx/core/mobile-mode';
+import { SEARCH_FIELD_MOBILE_CONFIG } from '../../../documentation/utilities/consts';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
 import { SharedDocumentationPageModule } from '../../../documentation/shared-documentation-page.module';
@@ -10,6 +12,7 @@ import { PlatformSearchFieldDocsComponent } from './platform-search-field-docs.c
 import { PlatformSearchFieldBasicExampleComponent } from './platform-search-field-examples/platform-search-field-basic-example.component';
 import { PlatformSearchFieldCategoriesExampleComponent } from './platform-search-field-examples/platform-search-field-categories-example.component';
 import { PlatformSearchFieldDataSourceExampleComponent } from './platform-search-field-examples/platform-search-field-data-source-example.component';
+import { PlatformSearchFieldMobileExampleComponent } from './platform-search-field-examples/platform-search-field-mobile/platform-search-field-mobile-example.component';
 
 const routes: Routes = [
     {
@@ -30,7 +33,9 @@ const routes: Routes = [
         PlatformSearchFieldHeaderComponent,
         PlatformSearchFieldBasicExampleComponent,
         PlatformSearchFieldCategoriesExampleComponent,
-        PlatformSearchFieldDataSourceExampleComponent
-    ]
+        PlatformSearchFieldDataSourceExampleComponent,
+        PlatformSearchFieldMobileExampleComponent
+    ],
+    providers: [{ provide: MOBILE_MODE_CONFIG, useValue: SEARCH_FIELD_MOBILE_CONFIG, multi: true }]
 })
 export class PlatformSearchFieldDocsModule {}
