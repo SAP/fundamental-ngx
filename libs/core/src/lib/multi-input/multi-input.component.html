@@ -106,7 +106,7 @@
         <li
             *ngFor="let value of displayedValues"
             fd-list-item
-            (click)="openChangeHandle(false)"
+            (click)="dialogApprove()"
             [selected]="selected.indexOf(value) !== -1"
         >
             <fd-checkbox
