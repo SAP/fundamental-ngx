@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.70 (2021-10-27)
+
+
+### Bug Fixes
+
+* **platform:** hide label in "icon-only" mode ([#6974](https://github.com/SAP/fundamental-ngx/issues/6974)) ([e050d20](https://github.com/SAP/fundamental-ngx/commit/e050d20a2f4ee3385ecb27a84ce26c10d58509b1))
+
 ## 0.33.0-rc.69 (2021-10-27)
 
 ## 0.33.0-rc.68 (2021-10-27)
