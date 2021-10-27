@@ -6,7 +6,7 @@ export class MultiInputPo extends CoreBaseComponentPo {
     root = '#page-content';
 
     activeDropdownButtons = 'button[title="value-help"]:not(:disabled)';
-    activeInputs = '.fd-multi-input-field [ng-reflect-disabled="false"] input';
+    activeInputs = '.fd-multi-input-field input:not(:disabled)';
     disableInputs = 'div.is-disabled';
     options = 'fd-checkbox.ng-untouched';
     expandedDropdown = '.fd-list';
@@ -15,7 +15,7 @@ export class MultiInputPo extends CoreBaseComponentPo {
     hiddenAddonButtonInputOptions = 'fd-multi-input[inputid="noAddonMultiInput1"] .fd-token__text span';
     compactMultiInputOptions = 'div#rtl-ex1 .fd-token__text span';
     approveButton = '.fd-button--emphasized';
-    multiSelectButton = 'button[ng-reflect-glyph="multiselect-all"]';
+    multiSelectButton = '.custom-multi-input-select-all-bar-element button';
     mobileInputOptions = 'fd-multi-input-mobile-example .fd-token__text span';
     displayObjectOptions = 'div#background-ex3 .fd-token__text span';
     searchTermOptions = 'div#background-ex4 .fd-token__text span';
