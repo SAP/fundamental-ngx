@@ -174,8 +174,8 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** @hidden */
     ngAfterContentInit(): void {
-        this.menuInteractives.forEach((item) => {
-            item._fromSplitButton = true;
+        this.menu.menuItems.forEach((item) => {
+            item.menuInteractive._fromSplitButton = true;
         });
         this._setupMenuSubscription();
         this._setupMenuItemSubscriptions();
@@ -258,6 +258,10 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     private _handleMenuItemSelection(menuItem: MenuItemComponent): void {
         if (!this.mainAction || !this.mainAction.keepMainAction) {
             this.selected = menuItem;
+            this.menu.menuItems.forEach((item) => {
+                item.setSelected(false, true);
+            });
+            menuItem.setSelected(true, true);
             this.titleTemplate = null;
             this.mainActionTitle = menuItem.menuItemTitle.title;
             this._cdRef.detectChanges();
