@@ -11,6 +11,8 @@ import { Component } from '@angular/core';
         </fd-checkbox>
         Value: {{ checkboxValue1 }}
 
+        <br />
+
         <fd-checkbox
             label="Banana is the best fruit"
             tristate="true"

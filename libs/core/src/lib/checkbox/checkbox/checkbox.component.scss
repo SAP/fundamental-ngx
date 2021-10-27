@@ -3,3 +3,11 @@
 .fd-checkbox__text:empty {
     margin: 0;
 }
+
+.fd-checkbox,
+.fd-checkbox.is-warning,
+.fd-checkbox.is-error,
+.fd-checkbox.is-success,
+.fd-checkbox.is-information {
+    border-style: initial;
+}
