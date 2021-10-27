@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.67 (2021-10-27)
+
+
+### Bug Fixes
+
+* **platform:** fix thumbnail accessibility issue ([#6950](https://github.com/SAP/fundamental-ngx/issues/6950)) ([6e92e9d](https://github.com/SAP/fundamental-ngx/commit/6e92e9dcec263d90e33ba8757030acb59b63d73c))
+
 ## 0.33.0-rc.66 (2021-10-26)
 
 ## 0.33.0-rc.65 (2021-10-26)
