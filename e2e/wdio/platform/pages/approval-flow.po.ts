@@ -7,6 +7,7 @@ export class ApprovalFlowPo extends BaseComponentPo {
     watchers = 'fdp-approval-flow .fdp-approval-flow__watchers';
     watchersTitle = this.watchers + ' p';
     watchersAvatar = this.watchers + ' fd-avatar';
+    exampleFlow = 'fdp-platform-approval-flow-example ';
 
     detailsDialog = 'fd-dialog-container .fd-dialog--active';
     detailsDialogSearchInput = this.detailsDialog + ' input';
@@ -17,7 +18,6 @@ export class ApprovalFlowPo extends BaseComponentPo {
     detailsDialogHeader = ' fd-dialog-container .fd-dialog__header';
     detailsDialogAvatar = this.detailsDialog + ' fd-avatar';
     detailsDialogCancelBtn = this.detailsDialog + ' button.fd-button--transparent.fd-dialog__decisive-button';
-    detailsDialogSearchlBtn = this.detailsDialog + ' button.fdp-search-field__submit';
     detailsDialogSendReminderBtn = this.detailsDialog + ' button.fd-button--emphasized';
 
     detailsDialogUserTeamButton = this.detailsDialog + ' fd-multi-input button';
@@ -32,7 +32,7 @@ export class ApprovalFlowPo extends BaseComponentPo {
     approvalFlowNodeStatus = this.approvalFlowNode + ' fdp-object-status';
     approvalFlowNodeName = this.approvalFlowNode + ' .fdp-approval-flow-node__name';
     approvalFlowNodeDescription = this.approvalFlowNode + ' .fdp-approval-flow-node__description';
-    approvalFlowNodeCheckbox = '.fd-checkbox__label';
+    approvalFlowNodeCheckbox = '.fd-toolbar .fd-checkbox__label';
     approvalFlowNodeCheckboxAlt = '.fd-grid-list__item-input';
     approvalFlowNodeActionMenu = '.fdp-approval-flow-node__menu-button';
     approvalFlowNodeActionMenuItem = '[role="menuitem"]';
@@ -52,6 +52,24 @@ export class ApprovalFlowPo extends BaseComponentPo {
     messageStrip = 'fd-message-strip';
     messageStripUndoLink = 'fd-message-strip a';
     messageStripCancelUndoMessage = 'fd-message-strip button';
+    toolbarButtons = '.fdp-approval-flow-toolbar-actions .fd-button--standard';
+
+    optionInput = this.exampleFlow + 'input';
+    reminderOptionsButton = this.exampleFlow + '.fd-input-group .fd-button';
+    reminderOptionsList = '.fd-list.fd-multi-input-menu-overflow';
+    selectedOptions = this.reminderOptionsList + ' .fd-list__item.is-selected';
+    approvedNode = '//span[contains(@class, "fd-object-status--positive")]/../../..';
+    inProgressNode = '//span[contains(@class, "fd-object-status--informative")]/../../..';
+    rejectedNode = '//span[contains(@class, "fd-object-status--negative")]/../../..';
+    notStartedNode = '//span[@class="fd-object-status fd-object-status--inverted"]/../../..';
+    addApproverOptions = this.detailsDialog + ' .fd-select__control';
+    approverOptionListItem = '.cdk-overlay-container .fd-list__item';
+    radioButton = this.detailsDialog + ' input[type="radio"]';
+    footerButtons = this.detailsDialog + ' .fd-bar__element .fd-button';
+    nodeCardInfo = '.fdp-approval-flow-node__info';
+    dialogCheckbox = this.detailsDialog + ' .fd-checkbox';
+    reminderToaster = '.fd-message-toast-container .fd-message-toast';
+    dueDateNode = '.fd-grid-list__item-body .fd-object-status--critical';
 
     open(): void {
         super.open(this.url);
