@@ -32,13 +32,17 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
-        '[attr.tabindex]': 'clickable ? 0 : -1'
+        '[attr.tabindex]': 'clickable ? 0 : -1',
+        '[attr.aria-label]': 'status ? _labelText : null'
     }
 })
 export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder {
     /** User's custom classes */
     @Input()
     class: string;
+
+    /** @hidden */
+    _labelText: string;
 
     /**
      * The status represented by the Object Status.
@@ -94,6 +98,25 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     /** @hidden */
     ngOnInit(): void {
         this.buildComponentCssClass();
+
+        const label = this._elementRef.nativeElement.textContent;
+
+        switch (this.status) {
+            case 'negative':
+                this._labelText = 'Alert ' + label;
+                break;
+            case 'critical':
+                this._labelText = 'Warning ' + label;
+                break;
+            case 'informative':
+                this._labelText = 'Information ' + label;
+                break;
+            case 'positive':
+                this._labelText = 'Success ' + label;
+                break;
+            default:
+                this._labelText = null;
+        }
     }
 
     @applyCssClass
