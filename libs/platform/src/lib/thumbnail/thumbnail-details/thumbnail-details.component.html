@@ -1,6 +1,6 @@
 <fd-dialog [attr.dir]="_data.rtl ? 'rtl' : 'ltr'">
     <fd-dialog-header>
-        <h5 [headerSize]="5" fd-title>{{ _data.selectedMedia.title }}</h5>
+        <h5 [attr.id]="_data.thumbnailId" [headerSize]="5" fd-title>{{ _data.selectedMedia.title }}</h5>
     </fd-dialog-header>
     <fd-dialog-body>
         <button
@@ -69,7 +69,7 @@
 
     <fd-dialog-footer>
         <fd-dialog-footer-button>
-            <button fd-button label="Close" title="close" fdType="transparent" (click)="closeDialog()"></button>
+            <button fd-button label="Close" fdType="transparent" (click)="closeDialog()"></button>
         </fd-dialog-footer-button>
     </fd-dialog-footer>
 </fd-dialog>
