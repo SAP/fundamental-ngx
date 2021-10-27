@@ -6,7 +6,7 @@ import {
     getAlertText,
     getAttributeByName,
     getElementArrayLength, getElementClass,
-    getElementPlaceholder,
+    getElementPlaceholder, getElementSize,
     getText,
     getValue,
     isElementClickable,
@@ -60,7 +60,8 @@ describe('Table component test suite', function() {
         popoverDropdownButton, buttonAdd, buttonRemove, dialogInput, expandedButton, tableCustomColumnExample, inputFields,
         playgroundExample, fdpTable, optionCondensed, optionCozy, optionCompact, dropdown, optionSingle, optionMultiple,
         tableCellFixed, checkbox, playgroundSchemaInput, toolbarText, dropdownList, dropdownOption, dialogButton, tableCell,
-        tableNoItemsTemplateExample, tableSemanticExample, tableRowClassExample
+        tableNoItemsTemplateExample, tableSemanticExample, tableRowClassExample, dialogFilters, filterInput, filterButtonOk,
+        filterResetButton, allInputFields, sortableIcon, sortableOption, sortablePopover
     } = tablePage;
 
     beforeAll(() => {
@@ -204,6 +205,13 @@ describe('Table component test suite', function() {
             expect(getText(tableSortableExample + tableCellName)).toBe(nameEndTestText);
             expect(getText(tableSortableExample + tableCellName, 15)).toBe(nameStartTestText);
         });
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7007
+        xit('should check after selecting sorting option popover closed', () => {
+            scrollIntoView(tableSortableExample);
+            click(sortableIcon);
+            click(sortableOption);
+            expect(doesItExist(sortablePopover)).toBe(false, 'sortable popover still displayed');
+        });
     });
 
     describe('Check Column Filtering', function() {
@@ -241,6 +249,18 @@ describe('Table component test suite', function() {
             for (let i = 0; i < tableRowLength; i++) {
                 expect(getText(tableFilterableExample + tableCellStatus, i)).toBe(tableCellArr[3]);
             }
+        });
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7008
+        xit('should check on filter by price reset button is clickable', () => {
+            scrollIntoView(tableFilterableExample);
+            click(tableFilterableExample + button, 1);
+            click(dialogFilters);
+            setValue(filterInput, '10');
+            click(filterButtonOk);
+
+            click(tableFilterableExample + button, 1);
+            click(dialogFilters);
+            expect(getAttributeByName(filterResetButton, 'disabled')).toBe('false');
         });
     });
 
@@ -499,6 +519,10 @@ describe('Table component test suite', function() {
         it('should check sorting of columns', () => {
             checkSortingColumns(tableP13FilterExample, 2);
         });
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7005
+        xit('should check Exclude section in dialog always open', () => {
+            scrollIntoView(tableP13FilterExample);
+        });
     });
 
     describe('Check Grouping by multiple columns', function() {
@@ -514,6 +538,8 @@ describe('Table component test suite', function() {
 
         it('should check sorting of columns', () => {
             checkSortingColumns(tableP13GroupExample, 2);
+            click(tableP13FilterExample + button, 1);
+            expect(getAttributeByName(expandedButton, 'aria-expanded')).toBe('true');
         });
     });
 
@@ -660,6 +686,22 @@ describe('Table component test suite', function() {
 
         it('should check table item single selection', () => {
             findElementInTable(tableRowClassExample, tableCellArr);
+        });
+    });
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/7010
+    xdescribe('Check input fields', function() {
+
+        it('should check input fields does not change width', () => {
+            const inputFieldLength = getElementArrayLength(allInputFields);
+            for (let i = 0; i < inputFieldLength; i++) {
+                if (i === 13) {
+                    continue;
+                }
+                const beforeSize = getElementSize(allInputFields, i);
+                setValue(allInputFields, 'test', i);
+                const afterSize = getElementSize(allInputFields, i);
+                expect(beforeSize).toEqual(afterSize);
+            }
         });
     });
 

@@ -70,6 +70,14 @@ export class TablePo extends BaseComponentPo {
     dropdownList = '.fd-select-options';
     dropdownOption = 'fd-option.fd-list__item ';
     dialogButton = 'fd-dialog-body .fd-button--compact';
+    dialogFilters = 'fd-dialog-body .fd-list__item';
+    filterInput = 'fdp-filter-custom input';
+    filterButtonOk = 'fd-dialog-footer button';
+    filterResetButton = 'fdp-table-reset-button button';
+    allInputFields = 'fdp-search-field input';
+    sortableIcon = '.fd-table__icon';
+    sortableOption = 'fd-popover-body .fd-list__item'
+    sortablePopover = 'fd-popover-body';
 
     open(): void {
         super.open(this.url);
