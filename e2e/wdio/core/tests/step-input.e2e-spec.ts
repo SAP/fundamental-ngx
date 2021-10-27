@@ -142,9 +142,15 @@ describe('Step input component test suit', () => {
         for (let i = 0; i < inputLength; i++) {
             let defaultValue = getValue(section + input, i);
             clickRightMouseBtn(section + plusButton, i);
-            expect(getValue(section + input, i)).toEqual(defaultValue, 'value changed by clickin on right mouse button');
+            expect(getValue(section + input, i)).toEqual(
+                defaultValue,
+                'value changed by clickin on right mouse button'
+            );
             clickRightMouseBtn(section + minusButton, i);
-            expect(getValue(section + input, i)).toEqual(defaultValue, 'value changed by clickin on right mouse button');
+            expect(getValue(section + input, i)).toEqual(
+                defaultValue,
+                'value changed by clickin on right mouse button'
+            );
         }
     }
 
