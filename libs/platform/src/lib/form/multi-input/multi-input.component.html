@@ -2,22 +2,25 @@
     <ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
 </div>
 <ng-template #desktopTemplate>
-    <div class="fdp-multi-input" cdkOverlayOrigin #selectTrigger="cdkOverlayOrigin">
-        <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
-    </div>
-
-    <!-- Option panel using Material CDK overlay system -->
-    <ng-template
-        cdk-connected-overlay
-        [cdkConnectedOverlayOrigin]="selectTrigger"
-        [cdkConnectedOverlayOpen]="isOpen && _suggestions.length > 0"
-        (overlayOutsideClick)="close()"
-        [cdkConnectedOverlayMinWidth]="minWidth"
+    <fd-popover
+        additionalBodyClass="fdp-multi-input__list-container"
+        [isOpen]="isOpen && _suggestions.length > 0"
+        (isOpenChange)="_popoverOpenChangeHandle($event)"
+        [fillControlMode]="fillControlMode"
+        [focusTrapped]="true"
+        [triggers]="triggers"
+        [disabled]="disabled || readonly"
+        [maxWidth]="!autoResize && minWidth"
+        [closeOnOutsideClick]="closeOnOutsideClick"
     >
-        <div class="fdp-multi-input__list-container fd-popover__popper fd-popover__body--no-arrow">
-            <ng-container [ngTemplateOutlet]="listTemplate"></ng-container>
-        </div>
-    </ng-template>
+        <fd-popover-control>
+            <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
+        </fd-popover-control>
+        <fd-popover-body>
+            <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
+            <ng-content></ng-content>
+        </fd-popover-body>
+    </fd-popover>
 </ng-template>
 
 <ng-template #mobileTemplate>

@@ -347,8 +347,10 @@ export abstract class BaseMultiInput extends CollectionBaseInput implements Afte
     }
 
     /** @hidden */
-    popoverOpenChangeHandle(isOpen: boolean): void {
-        this.isOpen ? this.close() : this.open();
+    _popoverOpenChangeHandle(isOpen: boolean): void {
+        if (!isOpen) {
+            this.close();
+        }
     }
 
     /** Opens the select popover body. */
