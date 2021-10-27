@@ -32,13 +32,7 @@ import {
 import { fromEvent, isObservable, Observable, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import {
-    closestElement,
-    ContentDensity,
-    FocusEscapeDirection,
-    KeyUtil,
-    TemplateDirective
-} from '@fundamental-ngx/core/utils';
+import { ContentDensity, FocusEscapeDirection, KeyUtil, TemplateDirective } from '@fundamental-ngx/core/utils';
 import { DialogConfig } from '@fundamental-ngx/core/dialog';
 import { ListComponent } from '@fundamental-ngx/core/list';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
@@ -58,11 +52,11 @@ import {
     ObservableComboBoxDataSource,
     OptionItem
 } from '@fundamental-ngx/platform/shared';
+import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 import { AutoCompleteEvent } from '../../auto-complete/auto-complete.directive';
 import { ComboboxComponent } from '../combobox/combobox.component';
 import { ComboboxConfig } from '../combobox.config';
-import { PopoverFillMode } from '@fundamental-ngx/core/shared';
 
 export type TextAlignment = 'left' | 'right';
 export type FdpComboBoxDataSource<T> = ComboBoxDataSource<T> | Observable<T[]> | T[];
