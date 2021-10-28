@@ -7,7 +7,6 @@ import {
     ContentChildren,
     EventEmitter,
     HostBinding,
-    HostListener,
     Inject,
     Input,
     NgZone,
@@ -806,17 +805,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._setFreezableInfo();
 
         this._cdr.markForCheck();
-    }
-
-    /** @hidden
-     *  Needs to prevent scrolling and other events on loading.
-     *  TODO: refactor it on keyboard navigation implementation
-     * */
-    @HostListener('keydown', ['$event'])
-    keyDownHandler(event: KeyboardEvent): void {
-        if (this.loading) {
-            event.preventDefault();
-        }
     }
 
     // Private API
