@@ -22,7 +22,7 @@ import {
     invalidDate,
     getCurrentItemIndex,
     getCurrentMonth,
-    getNextDay
+    getNextDay, currentDay
 } from '../fixtures/testData/date-picker-tags';
 import { blockExamples } from '../fixtures/appData/date-picker-contents';
 
@@ -148,7 +148,7 @@ describe('Datetime picker suite', () => {
     it('should check that available only 2 next weeks in range disabled example', () => {
         click(rangeDisabledExample + calendarIcon);
         const currentDayIndex = getCurrentItemIndex();
-        const itemsLength = getElementArrayLength(currentMonthCalendarItem) - 1;
+        const itemsLength = getElementArrayLength(currentMonthCalendarItem) + 5;
 
         for (let i = currentDayIndex - 1; i !== 0; i--) {
             expect(isElementClickable(calendarItem, i)).toBe(false, `previous day not disabled`);
@@ -178,6 +178,9 @@ describe('Datetime picker suite', () => {
             }
 
             for (let i = availableLengthNextMonth + 1; i < itemsLength; i++) {
+                if (i >= 31) {
+                    break;
+                }
                 expect(isElementClickable(currentMonthCalendarItem, i)).toBe(false, `element ${i} is not disabled`);
             }
         }
@@ -372,15 +375,15 @@ describe('Datetime picker suite', () => {
         const dayCount = getElementArrayLength(currentMonthCalendarItem);
 
         if (currentDayIndex === dayCount) {
-            click(altCalendarItem, currentDayIndex - 1);
+            click(altCalendarItem, currentDayIndex - 5);
             click(section + calendarIcon);
         }
         if (currentDayIndex !== dayCount) {
-            click(altCalendarItem, currentDayIndex + 1);
+            click(altCalendarItem, currentDayIndex + 5);
 
             section === formattingExample
-                ? (chosenDate = `${getCurrentMonth(true)}/${getNextDay(true)}/${currentYear.toString().slice(2)}`)
-                : (chosenDate = `${getCurrentMonth(false)}/${getNextDay(false)}/${currentYear}`);
+                ? (chosenDate = `${getCurrentMonth(true)}/${currentDay}/${currentYear.toString().slice(2)}`)
+                : (chosenDate = `${getCurrentMonth(false)}/${currentDay}/${currentYear}`);
 
             expect(getValue(section + calendarInput)).toContain(
                 chosenDate,
