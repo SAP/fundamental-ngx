@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.72 (2021-10-28)
+
+
+### Bug Fixes
+
+* **platform:** approval flow screen frozen after click on approver name ([#6739](https://github.com/SAP/fundamental-ngx/issues/6739)) ([b58f4df](https://github.com/SAP/fundamental-ngx/commit/b58f4df70b966e07d8b679965945c3ae6cd576dc))
+
 ## 0.33.0-rc.71 (2021-10-27)
 
 ## 0.33.0-rc.70 (2021-10-27)
