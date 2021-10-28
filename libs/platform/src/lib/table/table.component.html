@@ -58,7 +58,9 @@
                 *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
                 labelClass="fd-table__checkbox-label"
                 [compact]="contentDensity !== CONTENT_DENSITY.COZY"
-                [ngModel]="_checkedAll"
+                [tristate]="true"
+                [tristateSelectable]="false"
+                [ngModel]="checkedState"
                 (ngModelChange)="_toggleAllSelectableRows($event)"
             ></fd-checkbox>
         </th>

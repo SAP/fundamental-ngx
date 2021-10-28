@@ -462,7 +462,23 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * @hidden
      * Indicates when all items are checked
      */
-    _checkedAll = false;
+    private _checkedAll = false;
+
+    /**
+     * @hidden
+     * Indicates whether at least 1 item is checked
+     */
+    private _checkedAny = false;
+
+    get checkedState(): boolean | null {
+        if (this._checkedAll) {
+            return true;
+        }
+        if (this._checkedAny) {
+            return null; // passing null for indeterminate state
+        }
+        return false;
+    }
 
     /**
      * @hidden
@@ -1751,12 +1767,16 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     private _resetAllSelectedRows(): void {
         this._checkedAll = false;
+        this._checkedAny = false;
         this._getSelectableRows().forEach((r) => (r.checked = false));
     }
 
     /** @hidden */
     private _calculateCheckedAll(): void {
-        this._checkedAll = this._getSelectableRows().every(({ checked }) => checked);
+        const selectableRows = this._getSelectableRows();
+        const totalSelected = selectableRows.filter((r) => r.checked);
+        this._checkedAll = totalSelected.length === selectableRows.length;
+        this._checkedAny = totalSelected.length > 0;
     }
 
     /** @hidden */
