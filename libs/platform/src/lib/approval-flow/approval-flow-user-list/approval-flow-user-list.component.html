@@ -17,7 +17,7 @@
     (selectedItemChange)="_onSelect($event)"
 >
     <fdp-standard-list-item
-        *ngFor="let _user of users; trackBy: _trackByFn"
+        *ngFor="let _user of _displayUsers; trackBy: _trackByFn"
         [attr.id]="_idPrefix + _user.id"
         [avatarSrc]="_user.imgUrl"
         [avatarTitle]="_user.name"
