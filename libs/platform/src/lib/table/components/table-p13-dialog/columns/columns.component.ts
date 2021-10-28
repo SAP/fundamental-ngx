@@ -14,7 +14,7 @@ import { SearchInput } from '@fundamental-ngx/platform/search-field';
 
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 
-export interface TableColumn {
+export interface DialogTableColumn {
     label: string;
     key: string;
 }
@@ -22,7 +22,7 @@ export interface TableColumn {
 type VisibleColumnType = string; // ColumnKey
 
 export interface ColumnsDialogData {
-    availableColumns: TableColumn[];
+    availableColumns: DialogTableColumn[];
     visibleColumns: VisibleColumnType[];
 }
 
@@ -37,7 +37,7 @@ class SelectableColumn {
         /** Active */
         public active: boolean,
         /** Table Column it belongs to */
-        public column: TableColumn
+        public column: DialogTableColumn
     ) {}
 }
 
@@ -61,7 +61,7 @@ export class P13ColumnsDialogComponent implements Resettable, OnInit, OnDestroy 
     readonly initialVisibleColumnKeys: string[];
 
     /** Table columns available for grouping */
-    readonly availableColumns: TableColumn[] = [];
+    readonly availableColumns: DialogTableColumn[] = [];
 
     /** All available columns for interacting */
     _selectableColumns: SelectableColumn[] = [];
