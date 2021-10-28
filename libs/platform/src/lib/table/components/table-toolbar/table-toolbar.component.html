@@ -15,6 +15,7 @@
 
         <fdp-search-field
             *ngIf="!hideSearchInput"
+            class="fdp-table__search-field"
             i18n-placeholder="@@platformTableToolbarSearchPlaceholder"
             placeholder="Search"
             [disabled]="tableLoading$ | async"
