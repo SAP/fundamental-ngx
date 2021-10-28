@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.75 (2021-10-28)
+
+
+### Features
+
+* **platform:** add wrapping ability to the platform column ([#7034](https://github.com/SAP/fundamental-ngx/issues/7034)) ([8768fdf](https://github.com/SAP/fundamental-ngx/commit/8768fdfccde058e0afc7ba47650ac74ba7f95e07))
+
 ## 0.33.0-rc.74 (2021-10-28)
 
 
