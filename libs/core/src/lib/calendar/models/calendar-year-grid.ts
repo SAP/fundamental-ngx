@@ -1,3 +1,4 @@
+import { BaseCalendarCell } from './common';
 export interface CalendarYearGrid {
     /** Number of rows in year grid */
     rows: number;
@@ -11,13 +12,6 @@ export interface CalendarYearGrid {
     yearMapping?: (year: number) => string;
 }
 
-export interface CalendarYear {
+export interface CalendarYear extends BaseCalendarCell {
     year: number;
-    label: string;
-    id?: string;
-    current?: boolean;
-    selected?: boolean;
-    tabIndex?: number;
-    ariaLabel?: string;
-    index?: number;
 }

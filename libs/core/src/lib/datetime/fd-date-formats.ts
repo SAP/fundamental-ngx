@@ -22,7 +22,7 @@ export const FD_DATETIME_FORMATS: DateTimeFormats = {
         dateTimeInput: dateTimeInput,
 
         dateA11yLabel: { year: 'numeric', month: 'long', day: 'numeric' },
-        monthA11yLabel: { month: 'long' },
+        monthA11yLabel: { month: 'long', year: 'numeric' },
         yearA11yLabel: { year: 'numeric' }
     },
     rangeDelimiter: ' - '
