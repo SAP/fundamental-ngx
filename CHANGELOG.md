@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.74 (2021-10-28)
+
+
+### Bug Fixes
+
+* **platform:** select, fix form reset and double emitting issue ([#6977](https://github.com/SAP/fundamental-ngx/issues/6977)) ([edc1528](https://github.com/SAP/fundamental-ngx/commit/edc152802363eb40f6ae79a8543bb9b214be361f))
+
 ## 0.33.0-rc.73 (2021-10-28)
 
 
