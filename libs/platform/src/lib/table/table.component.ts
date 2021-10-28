@@ -68,6 +68,7 @@ import {
 } from './models';
 import { TableColumnResizeService } from './table-column-resize.service';
 import { TableColumnResizableSide } from './directives/table-cell-resizable.directive';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
@@ -332,6 +333,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     @ViewChild('verticalScrollable')
     readonly verticalScrollable: TableScrollable;
+
+    /** @hidden */
+    @ViewChild('columnHeaderPopover')
+    readonly columnHeaderPopover: PopoverComponent;
 
     /** @hidden */
     @ContentChildren(TableColumn)
@@ -928,6 +933,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      */
     _columnHeaderGroupBy(field: string): void {
         this.group([{ field: field, direction: SortDirection.NONE, showAsColumn: true }]);
+        this.columnHeaderPopover.close();
     }
 
     /**
@@ -943,6 +949,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         };
 
         this.addFilter([collectionFilter]);
+        this.columnHeaderPopover.close();
     }
 
     /**
@@ -951,6 +958,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      */
     _columnHeaderSortBy(field: string, direction: SortDirection): void {
         this.sort([{ field: field, direction: direction }]);
+        this.columnHeaderPopover.close();
     }
 
     /** @hidden */
