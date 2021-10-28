@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.73 (2021-10-28)
+
+
+### Bug Fixes
+
+* **core:** fix fd-calendar accessibility ([#6485](https://github.com/SAP/fundamental-ngx/issues/6485)) ([6321b78](https://github.com/SAP/fundamental-ngx/commit/6321b785aff1630fc132df9f215941d4857d5f6b))
+
 ## 0.33.0-rc.72 (2021-10-28)
 
 
