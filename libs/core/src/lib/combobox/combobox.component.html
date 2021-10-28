@@ -110,6 +110,9 @@
             </button>
         </span>
     </fd-input-group>
+    <div class="fd-combobox-count-list-results" role="status" *ngIf="open">
+        {{ displayedValues?.length || 0 }} result list items
+    </div>
 </ng-template>
 
 <ng-template #listTemplate>
