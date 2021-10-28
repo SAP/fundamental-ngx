@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.77 (2021-10-28)
+
+
+### Bug Fixes
+
+* **core:** force button outline when clicked on safari ([#6927](https://github.com/SAP/fundamental-ngx/issues/6927)) ([05609e1](https://github.com/SAP/fundamental-ngx/commit/05609e16ce2c37bae360f3f63858c91700efba7e))
+
 ## 0.33.0-rc.76 (2021-10-28)
 
 ## 0.33.0-rc.75 (2021-10-28)
