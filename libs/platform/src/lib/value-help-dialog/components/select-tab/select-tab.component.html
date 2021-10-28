@@ -1,5 +1,5 @@
 <div class="table-header">
-    <h5 fd-title>
+    <h5 fd-title role="heading" aria-level="5">
         <ng-container i18n="@@platformI18nValueHelpDialogDisplayCountLabel">Items</ng-container> ({{
             displayedData.length
         }})
@@ -21,7 +21,13 @@
         [noBorderY]="false"
         [attr.aria-colcount]="_tableFilters.main.length"
         [attr.aria-rowcount]="displayedData.length"
+        role="grid"
+        aria-multiselectable="true"
+        [attr.aria-labelledby]="selectTitleId"
     >
+        <label [id]="selectTitleId" fd-form-label class="fdp-value-help-dialog__hidden_lable"
+            >contains {{ displayedData.length }} rows and {{ _tableFilters.main.length }} column</label
+        >
         <thead fd-table-header>
             <tr fd-table-row *ngIf="displayedData.length && _tableFilters">
                 <th fd-table-cell [fitContent]="mobile">

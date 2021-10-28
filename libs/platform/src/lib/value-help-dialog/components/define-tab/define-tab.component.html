@@ -1,4 +1,13 @@
-<h5 [id]="titleId" fd-title class="define-condition-title" i18n="@@platformI18nValueHelpDialog.Define.Condition.Title">Product</h5>
+<h5
+    [id]="titleId"
+    role="heading"
+    aria-level="5"
+    fd-title
+    class="define-condition-title"
+    i18n="@@platformI18nValueHelpDialog.Define.Condition.Title"
+>
+    Product
+</h5>
 <ng-container *ngFor="let item of _conditions; trackBy: _trackByKeyAndType; index as i">
     <fd-layout-grid class="condition-row" [noGap]="true">
         <div fdLayoutGridCol="5">
@@ -13,7 +22,11 @@
                 [name]="uid + '-' + type + '-strategy-' + item.id"
                 [(ngModel)]="item.strategy"
                 (valueChange)="_filterChanged()"
-                [attr.aria-labelledby]="titleId">
+                role="combobox"
+                aria-roledescription="select"
+                aria-haspopup="listbox"
+                [attr.aria-labelledby]="titleId"
+            >
                 <ng-container *ngIf="_includeStrategy.length">
                     <li fd-list-group-header>Include</li>
                     <fd-option *ngFor="let strategy of _includeStrategy" [value]="strategy.key">
@@ -126,7 +139,8 @@
                 [compact]="true"
                 title="Remove Define Condition"
                 i18n-title="@@platformI18nValueHelpDialog.defineTab.removeButton"
-                (click)="removeCondition(i)"></button>
+                (click)="removeCondition(i)"
+            ></button>
         </div>
     </fd-layout-grid>
 </ng-container>
@@ -143,7 +157,8 @@
                 label="Add"
                 [compact]="true"
                 title="Add New Define Condition"
-                (click)="addEmptyCondition()"></button>
+                (click)="addEmptyCondition()"
+            ></button>
         </div>
     </div>
 </fd-layout-grid>
