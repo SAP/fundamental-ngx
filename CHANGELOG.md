@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.78 (2021-10-29)
+
+
+### Bug Fixes
+
+* **core:** multiinput emit update ([#7027](https://github.com/SAP/fundamental-ngx/issues/7027)) ([4baaf1d](https://github.com/SAP/fundamental-ngx/commit/4baaf1d211c4f65c62058085f357787f3ad9e816))
+
 ## 0.33.0-rc.77 (2021-10-28)
 
 
