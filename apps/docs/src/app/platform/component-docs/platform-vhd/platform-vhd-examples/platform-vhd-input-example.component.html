@@ -45,7 +45,13 @@
                 item.name
             }}</fd-token>
         </ng-container>
-        <button fd-button aria-label="Open value help dialog" label="Open and select"></button>
+        <button
+            fd-button
+            [compact]="true"
+            (click)="vhd2.open()"
+            aria-label="Open value help dialog"
+            label="Open and select"
+        ></button>
     </div>
 </div>
 <fdp-value-help-dialog
