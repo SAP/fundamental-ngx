@@ -29,6 +29,7 @@ import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap }
 import { ContentDensityEnum, ContentDensityService, FdDropEvent, RtlService } from '@fundamental-ngx/core/utils';
 import { TableRowDirective } from '@fundamental-ngx/core/table';
 import { getNestedValue, isDataSource, isFunction, isString } from '@fundamental-ngx/platform/shared';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
 
 import { TableService } from './table.service';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
@@ -68,7 +69,6 @@ import {
 } from './models';
 import { TableColumnResizeService } from './table-column-resize.service';
 import { TableColumnResizableSide } from './directives/table-cell-resizable.directive';
-import { PopoverComponent } from '@fundamental-ngx/core/popover';
 
 export type FdpTableDataSource<T> = T[] | Observable<T[]> | TableDataSource<T>;
 
@@ -335,8 +335,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     readonly verticalScrollable: TableScrollable;
 
     /** @hidden */
-    @ViewChild('columnHeaderPopover')
-    readonly columnHeaderPopover: PopoverComponent;
+    @ViewChildren('columnHeaderPopover')
+    readonly columnHeaderPopovers: QueryList<PopoverComponent>;
 
     /** @hidden */
     @ContentChildren(TableColumn)
@@ -949,7 +949,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      */
     _columnHeaderGroupBy(field: string): void {
         this.group([{ field: field, direction: SortDirection.NONE, showAsColumn: true }]);
-        this.columnHeaderPopover.close();
+        this._closePopoverForColumnByFieldName(field);
     }
 
     /**
@@ -965,7 +965,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         };
 
         this.addFilter([collectionFilter]);
-        this.columnHeaderPopover.close();
+        this._closePopoverForColumnByFieldName(field);
     }
 
     /**
@@ -974,7 +974,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      */
     _columnHeaderSortBy(field: string, direction: SortDirection): void {
         this.sort([{ field: field, direction: direction }]);
-        this.columnHeaderPopover.close();
+        this._closePopoverForColumnByFieldName(field);
     }
 
     /** @hidden */
@@ -1143,6 +1143,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     _columnTrackBy(index: number, column: TableColumn): string {
         return column.name;
+    }
+
+    /** @hidden */
+    private _closePopoverForColumnByFieldName(field: string): void {
+        const index = this._visibleColumns.findIndex((c) => c.key === field);
+        if (index !== -1) {
+            this.columnHeaderPopovers.get(index)?.close();
+        }
     }
 
     /** @hidden */

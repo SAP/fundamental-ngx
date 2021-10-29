@@ -33,7 +33,6 @@ let tableToolbarTitleUniqueId = 0;
 @Component({
     selector: 'fdp-table-toolbar',
     templateUrl: './table-toolbar.component.html',
-    styleUrls: ['./table-toolbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [{ provide: TABLE_TOOLBAR, useExisting: TableToolbarComponent }]
 })
