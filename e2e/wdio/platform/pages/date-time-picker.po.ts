@@ -55,12 +55,12 @@ export class DateTimePicker extends BaseComponentPo {
         }
     };
 
-    filterCaledarValue = (name: string): string => {
-        return `//td[contains(@id,"fd-${name}")]`;
+    filterCalendarValue = (name: string): string => {
+        return `//td[contains(@id,"-view-${name}")]`;
     };
 
     dayInDisabledFunctionsCalendarByIndex = (index: string): string => {
-        return `#fd-calendar-9-fd-day-${index}`;
+        return `#fd-calendar-9-day-view-day-${index}`;
     };
 
     dayInCalendarButtonByValue = (index: string): string => {
@@ -68,7 +68,7 @@ export class DateTimePicker extends BaseComponentPo {
     };
 
     yearInCalendarByValue = (year: number): string => {
-        return `[aria-label="${year}"]`;
+        return `[data-fd-calendar-year="${year}"]`;
     };
 
     open(): void {

@@ -51,4 +51,6 @@ export class CalendarMobileExampleComponent {
     dateChanged(date: FdDate): void {
         this.datePicked = date;
     }
+
+    noop(): void {}
 }

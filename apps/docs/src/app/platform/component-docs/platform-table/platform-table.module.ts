@@ -42,6 +42,7 @@ import { PlatformTableNoItemsTemplateExampleComponent } from './platform-table-e
 import { PlatformTableSemanticExampleComponent } from './platform-table-examples/platform-table-semantic-example.component';
 import { PlatformTableRowClassExampleComponent } from './platform-table-examples/platform-table-row-class-example.component';
 import { PlatformTableNoOuterBordersExampleComponent } from './platform-table-examples/platform-table-no-outer-borders-example.component';
+import { PlatformTableWrapExampleComponent } from './platform-table-examples/platform-table-wrap-example.component';
 
 const routes: Routes = [
     {
@@ -95,7 +96,8 @@ const routes: Routes = [
         PlatformTableNoItemsTemplateExampleComponent,
         PlatformTableSemanticExampleComponent,
         PlatformTableRowClassExampleComponent,
-        PlatformTableNoOuterBordersExampleComponent
+        PlatformTableNoOuterBordersExampleComponent,
+        PlatformTableWrapExampleComponent
     ],
     providers: [RtlService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

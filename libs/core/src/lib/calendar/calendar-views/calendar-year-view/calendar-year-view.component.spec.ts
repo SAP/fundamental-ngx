@@ -36,7 +36,7 @@ describe('CalendarYearViewComponent', () => {
             key: 'Enter',
             preventDefault: () => {}
         };
-        component.onKeydownYearHandler(event, 6);
+        component._onKeydownYearHandler(event, 6);
         expect(component.yearSelected).toEqual(2025);
     });
 
@@ -45,16 +45,16 @@ describe('CalendarYearViewComponent', () => {
             key: ' ',
             preventDefault: () => {}
         };
-        component.onKeydownYearHandler(event, 6);
+        component._onKeydownYearHandler(event, 6);
         expect(component.yearSelected).toEqual(2025);
     });
 
     it('Should generate grid', () => {
-        expect(component.calendarYearListGrid).toBeDefined();
+        expect(component._calendarYearListGrid).toBeDefined();
 
         component.ngOnInit();
 
-        const sizes: number[] = component.calendarYearListGrid.map((list) => list.length);
+        const sizes: number[] = component._calendarYearListGrid.map((list) => list.length);
 
         expect(sizes).toEqual([4, 4, 4, 4]);
     });
@@ -62,7 +62,7 @@ describe('CalendarYearViewComponent', () => {
     it('Should generate 5x3 grid', () => {
         component.yearViewGrid = { cols: 5, rows: 3, yearMapping: (year) => year.toString() };
         component.ngOnInit();
-        const size: number = component.calendarYearListGrid.map((list) => list.length).reduce((c, i) => c + i);
+        const size: number = component._calendarYearListGrid.map((list) => list.length).reduce((c, i) => c + i);
 
         expect(size).toEqual(5 * 3);
     });
@@ -71,7 +71,7 @@ describe('CalendarYearViewComponent', () => {
         component.yearViewGrid = { cols: 3, rows: 3, yearMapping: (year) => year.toString() };
         component.yearSelected = 2000;
         component.ngOnInit();
-        const yearsGrid = component.calendarYearListGrid.map((row) => row.map(({ year }) => year));
+        const yearsGrid = component._calendarYearListGrid.map((row) => row.map(({ year }) => year));
         expect(yearsGrid).toEqual([
             [2000, 2001, 2002],
             [2003, 2004, 2005],
@@ -83,7 +83,7 @@ describe('CalendarYearViewComponent', () => {
         component.yearViewGrid = { cols: 9, rows: 1, yearMapping: (year) => year.toString() };
         component.yearSelected = 2000;
         component.ngOnInit();
-        const yearsGrid = component.calendarYearListGrid.map((row) => row.map(({ year }) => year));
+        const yearsGrid = component._calendarYearListGrid.map((row) => row.map(({ year }) => year));
         expect(yearsGrid).toEqual([[2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008]]);
     });
 
@@ -91,45 +91,45 @@ describe('CalendarYearViewComponent', () => {
         component.yearViewGrid = { cols: 1, rows: 9, yearMapping: (year) => year.toString() };
         component.yearSelected = 2000;
         component.ngOnInit();
-        const yearsGrid = component.calendarYearListGrid.map((row) => row.map(({ year }) => year));
+        const yearsGrid = component._calendarYearListGrid.map((row) => row.map(({ year }) => year));
         expect(yearsGrid).toEqual([[2000], [2001], [2002], [2003], [2004], [2005], [2006], [2007], [2008]]);
     });
 
     it('Should detect active year as current one', () => {
         component.yearViewGrid = { cols: 5, rows: 4, yearMapping: (year) => year.toString() };
 
-        component.currentYear = 2020;
-        component.firstYearInList = 2010;
+        component._currentYear = 2020;
+        component._firstYearInList = 2010;
         component.ngOnInit();
 
         component.yearSelected = 1900;
 
-        component.activeYear = (<any>component)._getActiveYear();
+        component._activeYear = (<any>component)._getActiveYear();
 
-        expect(component.activeYear).toBe(component.currentYear);
+        expect(component._activeYear).toBe(component._currentYear);
     });
 
     it('Should detect active year as selected one', () => {
         component.yearViewGrid = { cols: 5, rows: 4, yearMapping: (year) => year.toString() };
 
-        component.currentYear = 2020;
+        component._currentYear = 2020;
         component.yearSelected = 1900;
-        component.firstYearInList = 1890;
+        component._firstYearInList = 1890;
 
         component.ngOnInit();
 
-        expect(component.activeYear).toBe(component.yearSelected);
+        expect(component._activeYear).toBe(component.yearSelected);
     });
 
     it('Should detect active year as first from grid', () => {
         component.yearViewGrid = { cols: 5, rows: 4, yearMapping: (year) => year.toString() };
 
-        component.currentYear = 2020;
+        component._currentYear = 2020;
         component.yearSelected = 1900;
-        component.firstYearInList = 1890;
+        component._firstYearInList = 1890;
 
         component.ngOnInit();
 
-        expect(component.activeYear).toBe(component.calendarYearListGrid[0][0].year);
+        expect(component._activeYear).toBe(component._calendarYearListGrid[0][0].year);
     });
 });

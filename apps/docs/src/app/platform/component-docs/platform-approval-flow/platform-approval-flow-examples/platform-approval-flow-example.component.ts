@@ -206,6 +206,7 @@ const users: ApprovalUser[] = [
         imgUrl: 'https://randomuser.me/api/portraits/women/55.jpg'
     }
 ];
+
 const usersMap = {};
 users.forEach((u) => (usersMap[u.id] = u));
 

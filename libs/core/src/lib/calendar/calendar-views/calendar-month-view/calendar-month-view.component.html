@@ -1,10 +1,10 @@
 <div class="fd-calendar__months">
-    <table class="fd-calendar__table" role="grid">
+    <table class="fd-calendar__table" role="grid" [attr.aria-roledescription]="_viewRoleDescription">
         <tbody class="fd-calendar__group" role="rowgroup">
             <tr
                 class="fd-calendar__row"
                 role="row"
-                *ngFor="let colMonths of calendarMonthListGrid; let rowIndex = index"
+                *ngFor="let colMonths of _calendarMonthListGrid; let rowIndex = index"
             >
                 <td
                     class="fd-calendar__item"
@@ -16,14 +16,35 @@
                     }"
                     [attr.tabIndex]="monthCell.tabIndex"
                     [attr.id]="monthCell.id"
-                    (keydown)="onKeydownMonthHandler($event, monthCell.index)"
+                    [attr.aria-selected]="monthCell.selected"
+                    [attr.aria-disabled]="monthCell.disabled"
+                    [attr.data-fd-calendar-month]="monthCell.month"
+                    (keydown)="_onKeydownMonthHandler($event, monthCell.index)"
                     (click)="selectMonth(monthCell, $event)"
                 >
-                    <span role="button" class="fd-calendar__text" [attr.aria-label]="monthCell.ariaLabel">
+                    <span
+                        role="button"
+                        class="fd-calendar__text"
+                        [attr.aria-labelledby]="
+                            monthCell.id +
+                            '-aria-label ' +
+                            (monthCell.current ? _todayLabelId + ' ' : '') +
+                            (monthCell.selected ? _selectedDateLabelId : '')
+                        "
+                    >
                         {{ monthCell.label }}
+                    </span>
+                    <span hidden aria-hidden="true" [attr.id]="monthCell.id + '-aria-label'">
+                        {{ monthCell.ariaLabel }}
                     </span>
                 </td>
             </tr>
         </tbody>
     </table>
+
+    <!-- Hidden elements for aria purposes -->
+    <div hidden aria-hidden="true">
+        <div [attr.id]="_todayLabelId">{{ _todayAriaLabel }}</div>
+        <div [attr.id]="_selectedDateLabelId">{{ _selectedDateAriaLabel }}</div>
+    </div>
 </div>
