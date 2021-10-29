@@ -9,7 +9,10 @@ export class RatingIndicatorPo extends CoreBaseComponentPo {
     starsRatingDisplayMode = '[name="rating-6"]';
     starsRatingDynamicChanges = '[name="rating-13"]';
     containerDynamicChanges = '.is-display-mode';
+    inputsBasicExample = 'fd-rating-indicator-example input.ng-pristine';
+    touchedInputsBasicExample = 'fd-rating-indicator-example input.ng-dirty';
     inputsDynamicChanges = 'fd-ri-dynamic-example input.ng-pristine';
+    touchedInputsDynamicChanges = 'fd-ri-dynamic-example input.ng-dirty';
     sizeRatingIndicator = '[area-label="Total raiting"]';
 
     open(): void {

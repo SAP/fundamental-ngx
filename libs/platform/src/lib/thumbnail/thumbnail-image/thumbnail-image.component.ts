@@ -7,7 +7,10 @@ import {
     OnChanges,
     SimpleChanges,
     OnInit,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    ViewChildren,
+    QueryList,
+    ElementRef
 } from '@angular/core';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
@@ -33,9 +36,20 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     @Input()
     maxImages = 5;
 
+    /**Role description for the thumbnail image  */
+    @Input()
+    roleDescription = 'Image';
+
+    @Input()
+    thumbnailId: string;
+
     /** Output event for thumbnail image click */
     @Output()
     thumbnailClicked: EventEmitter<Media> = new EventEmitter();
+
+    /** List of thumbnail images reference */
+    @ViewChildren('thumbnailImage')
+    thumbnailImages: QueryList<ElementRef>;
 
     /** @hidden */
     constructor(
@@ -47,6 +61,7 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
     /** @hidden */
     ngOnInit(): void {
         this._setOverlay();
+        console.log('length', this.thumbnailImages.length);
     }
 
     /** @hidden */
@@ -69,11 +84,13 @@ export class ThumbnailImageComponent implements OnChanges, OnInit {
             backdropClickCloseable: false,
             escKeyCloseable: false,
             data: {
+                thumbnailId: this.thumbnailId,
                 selectedMedia: selectedMedia,
                 mediaList: mediaList,
                 rtl: this._isRtl(),
                 maxImages: this.maxImages
-            }
+            },
+            ariaLabelledBy: this.thumbnailId
         });
     }
 

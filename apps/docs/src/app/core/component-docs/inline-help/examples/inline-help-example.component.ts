@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { RtlService } from '@fundamental-ngx/core/utils';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'fd-inline-help-example',
@@ -17,4 +20,10 @@ import { Component } from '@angular/core';
         `
     ]
 })
-export class InlineHelpExampleComponent {}
+export class InlineHelpExampleComponent {
+    rtlDirection$: Observable<string>;
+
+    constructor(private _rtlService: RtlService) {
+        this.rtlDirection$ = this._rtlService.rtl.pipe(map((isRtl) => (isRtl ? 'left' : 'right')));
+    }
+}

@@ -19,7 +19,7 @@ export class DateTimePicker extends CoreBaseComponentPo {
     buttonSelectYearsRange = '.fd-calendar__action:nth-child(2) .fd-button';
     okButton = 'button[fdtype="emphasized"]';
     cancelButton = 'button[label="Cancel"]';
-    buttonFirstRangeYear = '(//td[contains(@id,"fd-aggregated-year")]/child::span)[1]';
+    buttonFirstRangeYear = '(//td[contains(@id,"-view-aggregated-years")]/child::span)[1]';
     buttonFirstYear = '(//td[contains(@id,"year")]/child::span)[1]';
     buttonFirstMonth = '(//td[contains(@id,"month")]/child::span)[1]';
     selectedHours = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[12]';
@@ -46,7 +46,7 @@ export class DateTimePicker extends CoreBaseComponentPo {
     };
 
     yearInCalendarByValue = (year: number): string => {
-        return `[aria-label="${year}"]`;
+        return `[data-fd-calendar-year="${year}"]`;
     };
 
     getScreenshotFolder(): object {

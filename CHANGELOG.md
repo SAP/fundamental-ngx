@@ -1,4 +1,87 @@
 
+## 0.33.0-rc.77 (2021-10-28)
+
+
+### Bug Fixes
+
+* **core:** force button outline when clicked on safari ([#6927](https://github.com/SAP/fundamental-ngx/issues/6927)) ([05609e1](https://github.com/SAP/fundamental-ngx/commit/05609e16ce2c37bae360f3f63858c91700efba7e))
+
+## 0.33.0-rc.76 (2021-10-28)
+
+## 0.33.0-rc.75 (2021-10-28)
+
+
+### Features
+
+* **platform:** add wrapping ability to the platform column ([#7034](https://github.com/SAP/fundamental-ngx/issues/7034)) ([8768fdf](https://github.com/SAP/fundamental-ngx/commit/8768fdfccde058e0afc7ba47650ac74ba7f95e07))
+
+## 0.33.0-rc.74 (2021-10-28)
+
+
+### Bug Fixes
+
+* **platform:** select, fix form reset and double emitting issue ([#6977](https://github.com/SAP/fundamental-ngx/issues/6977)) ([edc1528](https://github.com/SAP/fundamental-ngx/commit/edc152802363eb40f6ae79a8543bb9b214be361f))
+
+## 0.33.0-rc.73 (2021-10-28)
+
+
+### Bug Fixes
+
+* **core:** fix fd-calendar accessibility ([#6485](https://github.com/SAP/fundamental-ngx/issues/6485)) ([6321b78](https://github.com/SAP/fundamental-ngx/commit/6321b785aff1630fc132df9f215941d4857d5f6b))
+
+## 0.33.0-rc.72 (2021-10-28)
+
+
+### Bug Fixes
+
+* **platform:** approval flow screen frozen after click on approver name ([#6739](https://github.com/SAP/fundamental-ngx/issues/6739)) ([b58f4df](https://github.com/SAP/fundamental-ngx/commit/b58f4df70b966e07d8b679965945c3ae6cd576dc))
+
+## 0.33.0-rc.71 (2021-10-27)
+
+## 0.33.0-rc.70 (2021-10-27)
+
+
+### Bug Fixes
+
+* **platform:** hide label in "icon-only" mode ([#6974](https://github.com/SAP/fundamental-ngx/issues/6974)) ([e050d20](https://github.com/SAP/fundamental-ngx/commit/e050d20a2f4ee3385ecb27a84ce26c10d58509b1))
+
+## 0.33.0-rc.69 (2021-10-27)
+
+## 0.33.0-rc.68 (2021-10-27)
+
+## 0.33.0-rc.67 (2021-10-27)
+
+
+### Bug Fixes
+
+* **platform:** fix thumbnail accessibility issue ([#6950](https://github.com/SAP/fundamental-ngx/issues/6950)) ([6e92e9d](https://github.com/SAP/fundamental-ngx/commit/6e92e9dcec263d90e33ba8757030acb59b63d73c))
+
+## 0.33.0-rc.66 (2021-10-26)
+
+## 0.33.0-rc.65 (2021-10-26)
+
+## 0.33.0-rc.64 (2021-10-26)
+
+## 0.33.0-rc.63 (2021-10-26)
+
+
+### Features
+
+* **platform:** search field add missing examples and refresh mode ([#6694](https://github.com/SAP/fundamental-ngx/issues/6694)) ([dee522d](https://github.com/SAP/fundamental-ngx/commit/dee522df536a3365ec2362523bf8cc2fe511f8ae))
+
+## 0.33.0-rc.62 (2021-10-26)
+
+## 0.33.0-rc.61 (2021-10-26)
+
+## 0.33.0-rc.60 (2021-10-25)
+
+
+### Bug Fixes
+
+* **platform:** input group prevent enter not a number value in input type number (Firefox and Safari) ([#6909](https://github.com/SAP/fundamental-ngx/issues/6909)) ([5b0d65e](https://github.com/SAP/fundamental-ngx/commit/5b0d65e69d29bfcb97a8d8eb0d132855ccf0f166))
+
+## 0.33.0-rc.59 (2021-10-25)
+
 ## 0.33.0-rc.58 (2021-10-25)
 
 ## 0.33.0-rc.57 (2021-10-25)

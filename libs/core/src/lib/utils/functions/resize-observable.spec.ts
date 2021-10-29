@@ -1,5 +1,7 @@
 import { Component, ElementRef } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { from } from 'rxjs';
+import { delayWhen, first } from 'rxjs/operators';
 import { resizeObservable } from './resize-observable';
 
 const ELEMENT_DIMENSIONS = { width: 100 };
@@ -39,12 +41,17 @@ describe('Resize Observable utils', () => {
         expect(elementRef).toBeTruthy();
     });
 
-    it('should spy on element resize', () => {
-        resizeObservable(elementRef.nativeElement).subscribe((entries) => {
-            console.log(entries[0]);
-            const entry = entries[0];
-            expect(entry.contentRect.width).toEqual(200);
-        });
+    it('should spy on element resize', (done) => {
+        resizeObservable(elementRef.nativeElement)
+            .pipe(
+                delayWhen(() => from(fixture.whenStable())),
+                first()
+            )
+            .subscribe((entries) => {
+                const entry = entries[0];
+                expect(entry.contentRect.width).toEqual(200);
+                done();
+            });
         fixture.componentInstance.elementDimensions.width = 200;
         fixture.detectChanges();
     });

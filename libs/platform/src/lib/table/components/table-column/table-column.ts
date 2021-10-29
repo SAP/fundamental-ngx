@@ -39,4 +39,7 @@ export abstract class TableColumn {
 
     /** Column header template */
     abstract headerCellTemplate: TemplateRef<any>;
+
+    /** Whether or not  the text should wrap, when text is too long for 1 line */
+    abstract noWrap: boolean;
 }

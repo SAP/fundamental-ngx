@@ -62,7 +62,7 @@
     <input
         fd-form-control
         fd-inline-help="Inline Help Tooltip"
-        placement="right"
+        [placement]="rtlDirection$ | async"
         placeholder="Inline tooltip inside input"
         ariaLabel="Inline Help Tooltip"
         aria-describedby="fd-inline-help-input"
