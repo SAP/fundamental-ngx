@@ -40,13 +40,13 @@ let titleUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DefineTabComponent<T> extends VhdBaseTab implements OnChanges {
-  protected defaultId = `fd-title-id-${titleUniqueId++}`;
+    protected defaultId = `fd-title-id-${titleUniqueId++}`;
 
-  @Input()
-  titleId: string = this.defaultId;
+    @Input()
+    titleId: string = this.defaultId;
 
-  @Input()
-  fullBodyLabel = 'Product';
+    @Input()
+    fullBodyLabel = 'Product';
 
     @Input()
     conditions: ExtendedBaseEntity[] = [];

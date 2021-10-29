@@ -26,96 +26,96 @@ let titleUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, AfterViewInit {
-  protected defaultId = `fd-select-tab-title-id-${titleUniqueId++}`;
+    protected defaultId = `fd-select-tab-title-id-${titleUniqueId++}`;
 
-  @Input()
-  selectTitleId: string = this.defaultId;
+    @Input()
+    selectTitleId: string = this.defaultId;
 
-  @Input()
-  selected: T[] = [];
+    @Input()
+    selected: T[] = [];
 
-  /** Actual filters */
-  @Input()
-  filters: VhdFilter[] = [];
+    /** Actual filters */
+    @Input()
+    filters: VhdFilter[] = [];
 
-  /** Close dialog immediately after select any row from search table. It'll be skipped if multi option is true */
-  @Input()
-  selection: VdhTableSelection = 'single';
+    /** Close dialog immediately after select any row from search table. It'll be skipped if multi option is true */
+    @Input()
+    selection: VdhTableSelection = 'single';
 
-  /** Text displayed when table has no items. */
-  @Input()
-  emptyTableMessage = 'Use the search to get results';
+    /** Text displayed when table has no items. */
+    @Input()
+    emptyTableMessage = 'Use the search to get results';
 
-  /** Uniq field from data source */
-  @Input()
-  uniqueKey = 'id';
+    /** Uniq field from data source */
+    @Input()
+    uniqueKey = 'id';
 
-  /** Items per page for pagination below search table */
-  @Input()
-  pageSize: number;
+    /** Items per page for pagination below search table */
+    @Input()
+    pageSize: number;
 
-  /** Count of default mobile header from search table */
-  @Input()
-  defaultMobileHeaders = 2;
+    /** Count of default mobile header from search table */
+    @Input()
+    defaultMobileHeaders = 2;
 
-  /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
-  @Input()
-  contentTableDensity: ContentDensity = ContentDensityEnum.COMPACT;
+    /** The content density for which to render table. 'cozy' | 'compact' | 'condensed' */
+    @Input()
+    contentTableDensity: ContentDensity = ContentDensityEnum.COMPACT;
 
-  @Input()
-  /** Displayed data for search table */
-  displayedData: T[] = [];
+    @Input()
+    /** Displayed data for search table */
+    displayedData: T[] = [];
 
-  /** Event emitted when row was selected. */
-  @Output()
-  select = new EventEmitter<T[]>();
+    /** Event emitted when row was selected. */
+    @Output()
+    select = new EventEmitter<T[]>();
 
-  @ViewChild(InfiniteScrollDirective) infiniteScrollTable: InfiniteScrollDirective;
+    @ViewChild(InfiniteScrollDirective) infiniteScrollTable: InfiniteScrollDirective;
 
-  /** @hidden */
-  _contentDensityOptions = ContentDensityEnum;
+    /** @hidden */
+    _contentDensityOptions = ContentDensityEnum;
 
-  /** @hidden indeterminate flag for `select all` checkbox */
-  _selectedAll = false;
+    /** @hidden indeterminate flag for `select all` checkbox */
+    _selectedAll = false;
 
-  /** @hidden Shown items count in mobile view */
-  _shownFrom = 0;
+    /** @hidden Shown items count in mobile view */
+    _shownFrom = 0;
 
-  /** @hidden Shown items count in mobile view */
-  _shownCount = 0;
+    /** @hidden Shown items count in mobile view */
+    _shownCount = 0;
 
-  /** @hidden Current page in desktop view */
-  _currentPage = 0;
+    /** @hidden Current page in desktop view */
+    _currentPage = 0;
 
-  /** @hidden Headers and body for search table */
-  _tableFilters: {
-    main: VhdFilter[],
-    secondary: VhdFilter[]
-  } = {
-    main: [],
-    secondary: []
-  };
+    /** @hidden Headers and body for search table */
+    _tableFilters: {
+        main: VhdFilter[];
+        secondary: VhdFilter[];
+    } = {
+        main: [],
+        secondary: []
+    };
 
-  /** @hidden */
-  _selectedMap: { [key: string]: boolean; } = {};
+    /** @hidden */
+    _selectedMap: { [key: string]: boolean } = {};
 
-  /** @hidden */
-  private selectedItems: T[] = [];
+    /** @hidden */
+    private selectedItems: T[] = [];
 
-  /** Selection type getters */
-  get isSingleSelection(): boolean {
-    return this.selection === 'single';
-  }
-  get isOnceSelection(): boolean {
-    return this.selection === 'once';
-  }
-  get isMultiSelection(): boolean {
-    return this.selection === 'multi';
-  }
+    /** Selection type getters */
+    get isSingleSelection(): boolean {
+        return this.selection === 'single';
+    }
+    get isOnceSelection(): boolean {
+        return this.selection === 'once';
+    }
+    get isMultiSelection(): boolean {
+        return this.selection === 'multi';
+    }
 
-  ngAfterViewInit(): void {
-    Promise.resolve(true).then(() => this._checkScrollAndShowMore());
-  }
+    ngAfterViewInit(): void {
+        Promise.resolve(true).then(() => this._checkScrollAndShowMore());
+    }
 
     /** @hidden  */
     ngOnChanges(changes: SimpleChanges): void {

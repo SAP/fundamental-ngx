@@ -22,7 +22,7 @@
                     <ng-container *ngTemplateOutlet="defineConditionsContent"></ng-container>
                 </ng-container>
             </div>
-		</fd-dialog-body>
+        </fd-dialog-body>
         <fd-dialog-footer [dir]="_dir">
             <ng-template fdTemplate="footer">
                 <div
@@ -31,7 +31,7 @@
                     i18n-aria-label="@@platformI18nValueHelpDialog.SelectionBarLabel"
                     *ngIf="!isMobileAdvancedSearchActive"
                 >
-                    <h5 fd-title class="selected-and-condition-title" [id]="id+'-selected-item'">
+                    <h5 fd-title class="selected-and-condition-title" [id]="id + '-selected-item'">
                         <ng-container *ngIf="hasSelectedAndConditions; else noItemsPanelTitle">
                             <ng-container i18n="@@platformI18nValueHelpDialog.SelectedAndConditionLabel"
                                 >Selected Items and Conditions
@@ -42,8 +42,8 @@
 
                     <div class="fdp-value-help-dialog__tokens-wrapper">
                         <div class="fdp-value-help-dialog__tokens">
-                                <!-- Selected items -->
-								<fd-tokenizer [tokenizerFocusable]="false" [compact]="true">
+                            <!-- Selected items -->
+                            <fd-tokenizer [tokenizerFocusable]="false" [compact]="true">
                                 <fd-token
                                     fd-toolbar-item
                                     fdOverflowPriority="high"
@@ -67,15 +67,20 @@
                                         let item of validConditions;
                                         index as conditionIndex;
                                         trackBy: _trackByConditionFn
-                                    " 
+                                    "
                                 >
                                     <ng-container
                                         [ngTemplateOutlet]="conditionValue"
                                         [ngTemplateOutletContext]="{ item: item }"
                                     ></ng-container>
                                 </fd-token>
-								<input fd-form-control fd-tokenizer-input [compact]="true" [disabled]="!hasSelectedAndConditions"/>
-								</fd-tokenizer>
+                                <input
+                                    fd-form-control
+                                    fd-tokenizer-input
+                                    [compact]="true"
+                                    [disabled]="!hasSelectedAndConditions"
+                                />
+                            </fd-tokenizer>
                         </div>
                         <button
                             (click)="clearSelectedAndConditionItems()"
