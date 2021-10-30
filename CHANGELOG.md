@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.80 (2021-10-30)
+
+
+### Bug Fixes
+
+* **platform:** table, content density issues ([#6857](https://github.com/SAP/fundamental-ngx/issues/6857)) ([816c10d](https://github.com/SAP/fundamental-ngx/commit/816c10d25e056b927f857665874a8a216cbcfdf0)), closes [#6747](https://github.com/SAP/fundamental-ngx/issues/6747) [#6766](https://github.com/SAP/fundamental-ngx/issues/6766)
+
 ## 0.33.0-rc.79 (2021-10-29)
 
 ## 0.33.0-rc.78 (2021-10-29)
