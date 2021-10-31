@@ -13,7 +13,7 @@
                 fdType="transparent"
                 glyph="slim-arrow-left"
                 [id]="id + '-left-arrow'"
-                [attr.aria-label]="previousAriaLabel"
+                [ariaLabel]="previousAriaLabel"
                 [attr.aria-disabled]="false"
                 type="button"
                 (click)="previousClicked.emit()"
@@ -28,7 +28,7 @@
                     [compact]="compact"
                     fdType="transparent"
                     [label]="selectMonthLabel"
-                    [attr.aria-label]="selectMonthAriaLabel"
+                    [ariaLabel]="selectMonthAriaLabel"
                     (click)="processViewChange('month', $event)"
                 >
                 </button>
@@ -41,7 +41,7 @@
                     [compact]="compact"
                     fdType="transparent"
                     [label]="selectYearLabel"
-                    [attr.aria-label]="selectYearAriaLabel"
+                    [ariaLabel]="selectYearAriaLabel"
                     (click)="processViewChange('year', $event)"
                 >
                 </button>
@@ -54,7 +54,7 @@
                     [compact]="compact"
                     fdType="transparent"
                     [label]="selectAggregatedYearLabel"
-                    [attr.aria-label]="selectAggregatedYearAriaLabel"
+                    [ariaLabel]="selectAggregatedYearAriaLabel"
                     (click)="processViewChange('aggregatedYear', $event)"
                     type="button"
                 >
@@ -68,7 +68,7 @@
                 fdType="transparent"
                 glyph="slim-arrow-right"
                 [attr.id]="id + '-right-arrow'"
-                [attr.aria-label]="nextAriaLabel"
+                [ariaLabel]="nextAriaLabel"
                 [attr.aria-disabled]="false"
                 (click)="nextClicked.emit()"
                 type="button"
