@@ -59,8 +59,9 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
     /** Forces the focus outline around the button, which is not default behavior in Safari. */
     @HostListener('click', ['$event'])
     clicked(event: MouseEvent): void {
-        const target = event.target as HTMLElement;
-        if (document.activeElement !== target) {
+        const target = event?.target as HTMLElement;
+        // Target can be empty during unit tests execution.
+        if (target && document.activeElement !== target) {
             target.focus();
         }
     }
