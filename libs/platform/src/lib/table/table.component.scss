@@ -140,6 +140,13 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
         }
     }
 
+    // In fundamental-styles there's a fix for the table row height in condensed mode, that includes absolute positioning for the checkbox
+    // it's not needed here
+    &.fd-table--condensed .fd-table__body .fd-table__cell--checkbox .fd-checkbox__label {
+        position: relative;
+        margin-top: 0;
+    }
+
     &.#{$block}--no-outer-border {
         .#{$block}__header,
         .#{$block}__body,

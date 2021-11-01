@@ -1,4 +1,57 @@
 
+## 0.33.0-rc.80 (2021-10-30)
+
+
+### Bug Fixes
+
+* **platform:** table, content density issues ([#6857](https://github.com/SAP/fundamental-ngx/issues/6857)) ([816c10d](https://github.com/SAP/fundamental-ngx/commit/816c10d25e056b927f857665874a8a216cbcfdf0)), closes [#6747](https://github.com/SAP/fundamental-ngx/issues/6747) [#6766](https://github.com/SAP/fundamental-ngx/issues/6766)
+
+## 0.33.0-rc.79 (2021-10-29)
+
+## 0.33.0-rc.78 (2021-10-29)
+
+
+### Bug Fixes
+
+* **core:** multiinput emit update ([#7027](https://github.com/SAP/fundamental-ngx/issues/7027)) ([4baaf1d](https://github.com/SAP/fundamental-ngx/commit/4baaf1d211c4f65c62058085f357787f3ad9e816))
+
+## 0.33.0-rc.77 (2021-10-28)
+
+
+### Bug Fixes
+
+* **core:** force button outline when clicked on safari ([#6927](https://github.com/SAP/fundamental-ngx/issues/6927)) ([05609e1](https://github.com/SAP/fundamental-ngx/commit/05609e16ce2c37bae360f3f63858c91700efba7e))
+
+## 0.33.0-rc.76 (2021-10-28)
+
+## 0.33.0-rc.75 (2021-10-28)
+
+
+### Features
+
+* **platform:** add wrapping ability to the platform column ([#7034](https://github.com/SAP/fundamental-ngx/issues/7034)) ([8768fdf](https://github.com/SAP/fundamental-ngx/commit/8768fdfccde058e0afc7ba47650ac74ba7f95e07))
+
+## 0.33.0-rc.74 (2021-10-28)
+
+
+### Bug Fixes
+
+* **platform:** select, fix form reset and double emitting issue ([#6977](https://github.com/SAP/fundamental-ngx/issues/6977)) ([edc1528](https://github.com/SAP/fundamental-ngx/commit/edc152802363eb40f6ae79a8543bb9b214be361f))
+
+## 0.33.0-rc.73 (2021-10-28)
+
+
+### Bug Fixes
+
+* **core:** fix fd-calendar accessibility ([#6485](https://github.com/SAP/fundamental-ngx/issues/6485)) ([6321b78](https://github.com/SAP/fundamental-ngx/commit/6321b785aff1630fc132df9f215941d4857d5f6b))
+
+## 0.33.0-rc.72 (2021-10-28)
+
+
+### Bug Fixes
+
+* **platform:** approval flow screen frozen after click on approver name ([#6739](https://github.com/SAP/fundamental-ngx/issues/6739)) ([b58f4df](https://github.com/SAP/fundamental-ngx/commit/b58f4df70b966e07d8b679965945c3ae6cd576dc))
+
 ## 0.33.0-rc.71 (2021-10-27)
 
 ## 0.33.0-rc.70 (2021-10-27)

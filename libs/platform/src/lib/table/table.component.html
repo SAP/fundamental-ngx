@@ -333,7 +333,7 @@
                                 (click)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row)"
                                 (keyup.enter)="_isTreeRowFirstCell(colIdx, row) && _toggleGroupRow(row)"
                             >
-                                <div class="fd-table__text fd-table__text--no-wrap">
+                                <div fd-table-text [noWrap]="column.noWrap">
                                     <span
                                         *ngIf="_isTreeRowFirstCell(colIdx, row)"
                                         class="fd-table__expand"

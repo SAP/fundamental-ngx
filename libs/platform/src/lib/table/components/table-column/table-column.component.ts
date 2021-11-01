@@ -129,6 +129,10 @@ export class TableColumnComponent extends TableColumn implements OnInit, OnChang
         this._tableService?.recalculateColumnsWidth();
     }
 
+    /** Whether or not  the text should wrap, when text is too long for 1 line */
+    @Input()
+    noWrap = false;
+
     /** Column cell template */
     columnCellTemplate: TemplateRef<any>;
 
