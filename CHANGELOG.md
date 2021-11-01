@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.81 (2021-11-01)
+
+
+### Bug Fixes
+
+* **platform:** fix failing jest tests ([#7061](https://github.com/SAP/fundamental-ngx/issues/7061)) ([e4ddb31](https://github.com/SAP/fundamental-ngx/commit/e4ddb313aa0929344106db1f7478f1f26cac0e73))
+
 ## 0.33.0-rc.80 (2021-10-30)
 
 
