@@ -265,7 +265,8 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
         }
     }
 
-    &__empty {
+    // TODO: remove when fund-styles will be updated
+    .fd-table__empty {
         &-table-message {
             padding: 1rem;
             text-align: center;
@@ -318,11 +319,12 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
             }
         }
 
+        // TODO: remove when fund-styles will be updated
         &--group {
             min-width: 100%;
             border-left: none;
 
-            /** 
+            /**
                 Due to the changed table-layout group row cell may looe it's top border.
                 For example when previous (relatively to the group row) row columns tolal width < 100% of the table.
             */
