@@ -12,6 +12,9 @@ import * as platformInputAutoCompleteFormValidationTypesSrc from '!raw-loader!./
 import * as platformInputAutoCompleteFormValidationTypesTsSrc from '!raw-loader!./platform-input-example/platform-input-auto-complete-validation-example.component';
 import * as platformInputAutoCompleteFormValidationTypesScssSrc from '!raw-loader!./platform-input-example/platform-input-auto-complete-validation-example.component.scss';
 
+import * as platformInputReactiveFormMinMaxValidationTypesSrc from '!raw-loader!./platform-input-example/platform-input-reactive-min-max-validation-example.component.html';
+import * as platformInputReactiveFormMinMaxValidationTypesTsSrc from '!raw-loader!./platform-input-example/platform-input-reactive-min-max-validation-example.component';
+
 @Component({
     selector: 'fd-platform-input-docs',
     templateUrl: './platform-input-docs.component.html'
@@ -56,6 +59,19 @@ export class PlatformInputDocsComponent {
             fileName: 'platform-input-auto-complete-validation-example',
             component: 'PlatformInputAutoCompleteValidationExampleComponent',
             scssFileCode: platformInputAutoCompleteFormValidationTypesScssSrc
+        }
+    ];
+    inputReactiveFormMinMaxValidationInputType: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformInputReactiveFormMinMaxValidationTypesSrc,
+            fileName: 'platform-input-reactive-min-max-validation-example'
+        },
+        {
+            language: 'typescript',
+            code: platformInputReactiveFormMinMaxValidationTypesTsSrc,
+            fileName: 'platform-input-reactive-min-max-validation-example',
+            component: 'PlatformInputReactiveMinMaxValidationExampleComponent'
         }
     ];
 }

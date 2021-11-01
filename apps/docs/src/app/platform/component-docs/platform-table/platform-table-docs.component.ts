@@ -59,6 +59,9 @@ import * as platformTableNoOuterBordersSrc from '!raw-loader!./platform-table-ex
 import * as platformTableNoOuterBordersTsSrc from '!raw-loader!./platform-table-examples/platform-table-navigatable-row-indicator-example.component.ts';
 import * as platformTableCustomNoDataMessageSrc from '!raw-loader!./platform-table-examples/platform-table-no-items-template-example.component.html';
 import * as platformTableCustomNoDataMessageTsSrc from '!raw-loader!./platform-table-examples/platform-table-no-items-template-example.component.ts';
+import * as platformTableWrappedTextSrc from '!raw-loader!./platform-table-examples/platform-table-wrap-example.component.html';
+import * as platformTableWrappedTextTsSrc from '!raw-loader!./platform-table-examples/platform-table-wrap-example.component.ts';
+
 import * as illustrationDialogNoMail from '!raw-loader!../../../../assets/images/sapIllus-Dialog-NoMail.svg';
 
 import { TableDataProviderExample } from './platform-table-examples/platform-table-data-provider-example';
@@ -70,7 +73,7 @@ import { ExampleItem } from './platform-table-examples/platform-table-data-items
     providers: [RtlService]
 })
 export class PlatformTableDocsComponent {
-    static schema: any = {
+    static schema: Schema = {
         properties: {
             table: {
                 type: 'object',
@@ -530,6 +533,22 @@ export class PlatformTableDocsComponent {
             fileName: 'platform-table-no-outer-borders-example',
             component: 'PlatformTableNoOuterBordersExampleComponent',
             name: 'platform-table-no-outer-borders-example.component.ts'
+        }
+    ];
+
+    textWrapFiles: ExampleFile[] = [
+        {
+            language: 'html',
+            code: platformTableWrappedTextSrc,
+            fileName: 'platform-table-wrap-example',
+            name: 'platform-table-wrap-example.component.html'
+        },
+        {
+            language: 'typescript',
+            code: platformTableWrappedTextTsSrc,
+            fileName: 'platform-table-wrap-example',
+            component: 'PlatformTableWrapExampleComponent',
+            name: 'platform-table-wrap-example.component.ts'
         }
     ];
 

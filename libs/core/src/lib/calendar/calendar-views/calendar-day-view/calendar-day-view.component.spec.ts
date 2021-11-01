@@ -1,4 +1,5 @@
 import { waitForAsync, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { first } from 'rxjs/operators';
 
 import { DatetimeAdapter, FdDatetimeAdapter, FdDatetimeModule } from '../../../datetime';
 import { FdDate } from '../../../datetime/fd-date';
@@ -35,13 +36,14 @@ describe('CalendarDayViewComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('Should Select Proper Date', () => {
+    it('Should Select Proper Date', (done) => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
         component.ngOnInit();
-        const dayPicked = component.dayViewGrid[2][3];
-        component.selectedDateChange.subscribe((date: FdDate) =>
-            expect(date.toDateString()).toBe(dayPicked.date.toDateString())
-        );
+        const dayPicked = component._dayViewGrid[2][3];
+        component.selectedDateChange.subscribe((date: FdDate) => {
+            expect(date.toDateString()).toBe(dayPicked.date.toDateString());
+            done();
+        });
         component.selectDate(dayPicked);
     });
 
@@ -49,7 +51,7 @@ describe('CalendarDayViewComponent', () => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
         component.selectedDate = new FdDate(2018, 10, 20);
         component.ngOnInit();
-        const calendarDays: CalendarDay<FdDate>[] = component.dayViewGrid.reduce(
+        const calendarDays: CalendarDay<FdDate>[] = component._dayViewGrid.reduce(
             (a: CalendarDay<FdDate>[], b: CalendarDay<FdDate>[]) => {
                 if (!b) {
                     b = [];
@@ -61,27 +63,29 @@ describe('CalendarDayViewComponent', () => {
         expect(selected.date.toDateString()).toBe(component.selectedDate.toDateString());
     });
 
-    it('Should Select Proper First Range Date', () => {
+    it('Should Select Proper First Range Date', (done) => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
         component.calType = 'range';
         component.ngOnInit();
-        const dayPicked = component.dayViewGrid[2][3];
-        component.selectedRangeDateChange.subscribe((date: { start: FdDate; end: FdDate }) =>
-            expect(date.start.toDateString()).toBe(dayPicked.date.toDateString())
-        );
+        const dayPicked = component._dayViewGrid[2][3];
+        component.selectedRangeDateChange.subscribe((date: { start: FdDate; end: FdDate }) => {
+            expect(date.start.toDateString()).toBe(dayPicked.date.toDateString());
+            done();
+        });
         component.selectDate(dayPicked);
     });
 
-    it('Should Select Proper Second Range Date', () => {
+    it('Should Select Proper Second Range Date', (done) => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
         component.calType = 'range';
         component.ngOnInit();
-        const dayStartPicked = component.dayViewGrid[2][3];
-        const dayEndPicked = component.dayViewGrid[3][3];
+        const dayStartPicked = component._dayViewGrid[2][3];
+        const dayEndPicked = component._dayViewGrid[3][3];
         component.selectedRangeDate = { start: dayStartPicked.date, end: null };
-        component.selectedRangeDateChange.subscribe((date: { start: FdDate; end: FdDate }) =>
-            expect(date.end.toDateString()).toBe(dayEndPicked.date.toDateString())
-        );
+        component.selectedRangeDateChange.pipe(first()).subscribe((date: { start: FdDate; end: FdDate }) => {
+            expect(date.end.toDateString()).toBe(dayEndPicked.date.toDateString());
+            done();
+        });
         component.selectDate(dayEndPicked);
     });
 
@@ -89,34 +93,34 @@ describe('CalendarDayViewComponent', () => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
         component.calType = 'range';
         component.ngOnInit();
-        const dayStartPicked = component.dayViewGrid[1][1];
-        const dayEndPicked = component.dayViewGrid[3][3];
+        const dayStartPicked = component._dayViewGrid[1][1];
+        const dayEndPicked = component._dayViewGrid[3][3];
 
         component.selectDate(dayStartPicked);
         component.selectDate(dayEndPicked);
 
-        expect(component.dayViewGrid[2][2].selectedRange).toBe(true);
-        expect(component.dayViewGrid[1][1].selected).toBe(true);
-        expect(component.dayViewGrid[3][3].selected).toBe(true);
+        expect(component._dayViewGrid[2][2].selectedRange).toBe(true);
+        expect(component._dayViewGrid[1][1].selected).toBe(true);
+        expect(component._dayViewGrid[3][3].selected).toBe(true);
     });
 
     it('Should add flags to cells, when picked on range', () => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
         component.ngOnInit();
-        const dayPicked = component.dayViewGrid[1][1];
+        const dayPicked = component._dayViewGrid[1][1];
 
         component.selectDate(dayPicked);
 
-        expect(component.dayViewGrid[1][1].selected).toBe(true);
+        expect(component._dayViewGrid[1][1].selected).toBe(true);
     });
 
     it('Should add flags to cells, when picked on range', () => {
         component.currentlyDisplayed = { month: 10, year: 2018 };
         component.ngOnInit();
-        component.selectedDate = component.dayViewGrid[1][1].date;
+        component.selectedDate = component._dayViewGrid[1][1].date;
         component.ngOnInit();
 
-        expect(component.dayViewGrid[1][1].selected).toBe(true);
+        expect(component._dayViewGrid[1][1].selected).toBe(true);
     });
 
     it('should properly rearrange days when different startingDayOfWeek is used', () => {
@@ -135,14 +139,14 @@ describe('CalendarDayViewComponent', () => {
         component.currentlyDisplayed.year = 2010;
         component.currentlyDisplayed.month = 1;
         component.ngOnInit();
-        component.weeks = ['53', '1', '2', '3', '4', '5'];
+        component._weeks = ['53', '1', '2', '3', '4', '5'];
     });
 
     it('should generate proper week count on december 2010', () => {
         component.currentlyDisplayed.year = 2012;
         component.currentlyDisplayed.month = 12;
         component.ngOnInit();
-        component.weeks = ['48', '49', '50', '51', '52'];
+        component._weeks = ['48', '49', '50', '51', '52'];
     });
 
     it('should generate proper days for february 2020', () => {
@@ -150,7 +154,7 @@ describe('CalendarDayViewComponent', () => {
         component.currentlyDisplayed.month = 2;
         component.startingDayOfWeek = 2;
         component.ngOnInit();
-        expect(component.dayViewGrid.map((day) => day.map((_day) => _day.date.day))).toEqual([
+        expect(component._dayViewGrid.map((day) => day.map((_day) => _day.date.day))).toEqual([
             [27, 28, 29, 30, 31, 1, 2],
             [3, 4, 5, 6, 7, 8, 9],
             [10, 11, 12, 13, 14, 15, 16],
@@ -163,9 +167,9 @@ describe('CalendarDayViewComponent', () => {
         component.currentlyDisplayed.year = 2015;
         component.currentlyDisplayed.month = 6;
         component.ngOnInit();
-        const day: CalendarDay<FdDate> = component.calendarDayList[15];
+        const day: CalendarDay<FdDate> = component._calendarDayList[15];
         component.selectDate(day);
-        const activeCell: CalendarDay<FdDate> = (<any>component)._getActiveCell(component.calendarDayList);
+        const activeCell: CalendarDay<FdDate> = (<any>component)._getActiveCell(component._calendarDayList);
         expect(datetimeAdapter.datesEqual(activeCell.date, day.date)).toBe(true);
     });
 
@@ -173,9 +177,9 @@ describe('CalendarDayViewComponent', () => {
         component.currentlyDisplayed.year = 2015;
         component.currentlyDisplayed.month = 6;
         component.ngOnInit();
-        const day: CalendarDay<FdDate> = component.calendarDayList[15];
-        day.today = true;
-        const activeCell: CalendarDay<FdDate> = (<any>component)._getActiveCell(component.calendarDayList);
+        const day: CalendarDay<FdDate> = component._calendarDayList[15];
+        day.current = true;
+        const activeCell: CalendarDay<FdDate> = (<any>component)._getActiveCell(component._calendarDayList);
         expect(datetimeAdapter.datesEqual(activeCell.date, day.date)).toBe(true);
     });
 
@@ -186,7 +190,7 @@ describe('CalendarDayViewComponent', () => {
         component.calType = 'range';
         component.ngOnInit();
         component.selectedRangeDate = { start: null, end: null };
-        component.selectDate(component.calendarDayList[10], new MouseEvent('click'));
+        component.selectDate(component._calendarDayList[10], new MouseEvent('click'));
         expect((<any>component)._isOnRangePick).toBe(true);
     });
 
@@ -199,16 +203,8 @@ describe('CalendarDayViewComponent', () => {
         (<any>component)._isOnRangePick = true;
         component.ngOnInit();
         component.selectedRangeDate = { start: date, end: date };
-        component.refreshHoverRange(component.calendarDayList[0]);
-        expect(component.calendarDayList.filter((_day) => _day.hoverRange).length).toBe(13);
-    });
-
-    it('should change id of day focused', () => {
-        component.currentlyDisplayed.year = 2020;
-        component.currentlyDisplayed.month = 5;
-        component.newFocusedDayIndex = 10;
-        (<any>component)._selectPreviousMonth();
-        component.newFocusedDayIndex = 3;
+        component._refreshHoverRange(component._calendarDayList[0]);
+        expect(component._calendarDayList.filter((_day) => _day.hoverRange).length).toBe(13);
     });
 
     it('should put additional property select on single day', () => {
@@ -217,13 +213,13 @@ describe('CalendarDayViewComponent', () => {
         const date = new FdDate(2020, 4, 15);
         component.selectedDate = date;
         component.ngOnInit();
-        component.selectDate(component.calendarDayList[15]);
-        expect(component.selectedDate).toBe(component.calendarDayList[15].date);
-        expect(component.calendarDayList[15].selected).toBe(true);
-        component.selectDate(component.calendarDayList[10]);
-        expect(component.selectedDate).toBe(component.calendarDayList[10].date);
-        expect(component.calendarDayList[10].selected).toBe(true);
-        expect(component.calendarDayList[15].selected).toBe(false);
+        component.selectDate(component._calendarDayList[15]);
+        expect(component.selectedDate).toBe(component._calendarDayList[15].date);
+        expect(component._calendarDayList[15].selected).toBe(true);
+        component.selectDate(component._calendarDayList[10]);
+        expect(component.selectedDate).toBe(component._calendarDayList[10].date);
+        expect(component._calendarDayList[10].selected).toBe(true);
+        expect(component._calendarDayList[15].selected).toBe(false);
     });
 
     it('should put additional property select on range day', () => {
@@ -233,16 +229,16 @@ describe('CalendarDayViewComponent', () => {
         const startDate = new FdDate(2020, 4, 15);
         const endDate = new FdDate(2020, 4, 20);
         component.ngOnInit();
-        const newlyChosenDate: CalendarDay<FdDate> = component.calendarDayList[5];
-        const secondNewlyChosenDate: CalendarDay<FdDate> = component.calendarDayList[30];
+        const newlyChosenDate: CalendarDay<FdDate> = component._calendarDayList[5];
+        const secondNewlyChosenDate: CalendarDay<FdDate> = component._calendarDayList[30];
         component.selectedRangeDate = { start: startDate, end: endDate };
         component.selectDate(newlyChosenDate);
         expect(component.selectedRangeDate.start).toBe(newlyChosenDate.date);
         expect(newlyChosenDate.selected).toBe(true);
-        expect(component.calendarDayList.filter((_day) => _day.selectedRange).length).toBe(0);
+        expect(component._calendarDayList.filter((_day) => _day.selectedRange).length).toBe(0);
         component.selectDate(secondNewlyChosenDate);
         expect(component.selectedRangeDate).toEqual({ start: newlyChosenDate.date, end: secondNewlyChosenDate.date });
-        expect(component.calendarDayList.filter((_day) => _day.selectedRange).length).toBe(24);
+        expect(component._calendarDayList.filter((_day) => _day.selectedRange).length).toBe(24);
         expect(newlyChosenDate.selected).toBe(true);
         expect(secondNewlyChosenDate.selected).toBe(true);
     });
@@ -257,16 +253,16 @@ describe('CalendarDayViewComponent', () => {
         component.ngOnInit();
         const startDate = new FdDate(2020, 4, 15);
         const endDate = new FdDate(2020, 4, 20);
-        const newlyChosenDate: CalendarDay<FdDate> = component.calendarDayList[5];
-        const secondNewlyChosenDate: CalendarDay<FdDate> = component.calendarDayList[34];
+        const newlyChosenDate: CalendarDay<FdDate> = component._calendarDayList[5];
+        const secondNewlyChosenDate: CalendarDay<FdDate> = component._calendarDayList[34];
         component.selectedRangeDate = { start: startDate, end: endDate };
         component.selectDate(newlyChosenDate);
         expect(component.selectedRangeDate.start).toBe(newlyChosenDate.date);
         expect(newlyChosenDate.selected).toBe(true);
-        expect(component.calendarDayList.filter((_day) => _day.disabled).length).toBe(2);
+        expect(component._calendarDayList.filter((_day) => _day.disabled).length).toBe(2);
         component.selectDate(secondNewlyChosenDate);
         expect(component.selectedRangeDate).toEqual({ start: newlyChosenDate.date, end: secondNewlyChosenDate.date });
-        expect(component.calendarDayList.filter((_day) => _day.disabled).length).toBe(4);
+        expect(component._calendarDayList.filter((_day) => _day.disabled).length).toBe(4);
         expect(newlyChosenDate.selected).toBe(true);
         expect(secondNewlyChosenDate.selected).toBe(true);
     });

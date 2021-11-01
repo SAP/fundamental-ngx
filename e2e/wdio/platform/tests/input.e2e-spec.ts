@@ -22,7 +22,13 @@ import {
     waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
-import { errorText, favoriteColor, labelsArray, placeholdersArray } from '../fixtures/appData/input-page-contents';
+import {
+    errorText,
+    favoriteColor,
+    labelsArray,
+    maxValidation,
+    placeholdersArray
+} from '../fixtures/appData/input-page-contents';
 import { autocompleteOption, longLine, number, special_characters, text } from '../fixtures/testData/input';
 import { InputPo } from '../pages/input.po';
 
@@ -73,6 +79,7 @@ describe('Input should ', () => {
     it('have associated label element to describe its purpose', () => {
         expect(getTextArr(inputsLabels, 0, -2)).toEqual(labelsArray);
         expect(getText(inputsLabels, 8)).toContain(favoriteColor);
+        expect(getText(inputsLabels, 9)).toContain(maxValidation);
     });
 
     it('by default accept all kinds of input values – alphabet, numerical, special characters', () => {

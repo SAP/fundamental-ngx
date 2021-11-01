@@ -148,44 +148,51 @@ export class FormGroupComponent
     @Input()
     id: string;
 
+    /** Name property to be set on a form. Will be used if `useForm` is set to true */
     @Input()
     name: string;
 
+    /** Indicates if group is editable */
     @Input()
     editable = true;
 
+    /** Indicates when labels should not be displayed */
     @Input()
     noLabelLayout = false;
 
+    /** Whether form is in compact mode */
     @Input()
     compact: boolean;
 
-    /** user's custom classes*/
+    /** User's custom classes */
     @Input()
     class: string;
 
+    /** Defines form field label placement. */
     @Input()
     labelLayout: LabelLayout = 'horizontal';
 
+    /** Angular FormGroup where all underlying controls will be attached to. */
     @Input()
     formGroup: FormGroup;
-    /**
-     * This is rather simple for now just to have some Section Title if needed
-     */
+
+    /** This is rather simple for now just to have some Section Title if needed */
     @Input()
     topTitle: string;
 
+    /** Form's main title. */
     @Input()
     mainTitle: string;
 
-    @Input()
-    bottomTitle: string;
     /**
      * Convenient way to initialize internal FormControls from object
      */
     @Input()
     object: any;
+
     /**
+     * Translations template reference.
+     *
      * This is just here to support several ways to pass translation.
      *
      * One way is to provide ng-template #i18n inside the form-group tag and the other one
@@ -194,6 +201,7 @@ export class FormGroupComponent
     @Input()
     i18Strings: TemplateRef<any>;
 
+    /** Defines hint placement */
     @Input()
     get hintPlacement(): HintPlacement {
         return this._hintPlacement;
@@ -204,6 +212,7 @@ export class FormGroupComponent
         this._cd.markForCheck();
     }
 
+    /** Whether to wrap all the provided content in a `<form>` */
     @Input()
     get useForm(): boolean {
         return this._useForm;
@@ -214,7 +223,7 @@ export class FormGroupComponent
     }
 
     /**
-     * specify the column layout in the format `XLn-Ln-Mn-Sn` where n is the number of columns and can be different for each size.
+     * Specify the column layout in the format `XLn-Ln-Mn-Sn` where n is the number of columns and can be different for each size.
      * eg: XL2-L2-M2-S1 would create 2-column layouts for XL, L, and M sizes and single-column layout for S size.
      */
     @Input()
@@ -267,20 +276,31 @@ export class FormGroupComponent
      */
     private _formGroupDirectChildren: Array<FormField | FormFieldGroup> = [];
 
-    /** User specific */
+    /** @hidden */
     xlColumnsNumber: number;
+    /** @hidden */
     lgColumnsNumber: number;
+    /** @hidden */
     mdColumnsNumber: number;
 
-    /** User responsive layout */
+    /**
+     * @hidden
+     * User responsive layout
+     */
     xlCol: string;
 
-    /** Packed fields which should be rendered */
+    /**
+     * @hidden
+     * Packed fields which should be rendered
+     */
     formRows: { [key: number]: FieldColumn | FieldGroup } = {};
 
+    /** @hidden */
     private _useForm = false;
+    /** @hidden */
     private _hintPlacement: HintPlacement = 'right';
 
+    /** @hidden */
     protected _destroyed = new Subject<void>();
 
     /** @hidden */
@@ -294,10 +314,12 @@ export class FormGroupComponent
         this.formGroup = <FormGroup>(this.formContainer ? this.formContainer.control : new FormGroup({}));
     }
 
+    /** @hidden */
     ngOnChanges(): void {
         this.buildComponentCssClass();
     }
 
+    /** @hidden */
     ngOnInit(): void {
         if (!this.formGroup) {
             this.formGroup = new FormGroup({});
@@ -313,6 +335,7 @@ export class FormGroupComponent
         this.buildComponentCssClass();
     }
 
+    /** @hidden */
     ngAfterContentInit(): void {
         this.i18Strings = this.i18Strings ? this.i18Strings : this.i18Template;
 
@@ -324,16 +347,19 @@ export class FormGroupComponent
         this._cd.markForCheck();
     }
 
+    /** @hidden */
     ngAfterViewInit(): void {
         this._cd.detectChanges();
     }
 
+    /** @hidden */
     ngOnDestroy(): void {
         this._destroyed.next();
         this._destroyed.complete();
         this._subscriptions.unsubscribe();
     }
 
+    /** @hidden */
     addFormField(formField: FormField): void {
         // It's needed to set default FormField properties
         // on early stage otherwise validation errors
@@ -343,18 +369,22 @@ export class FormGroupComponent
         this._addDirectFormGroupChild(formField);
     }
 
+    /** @hidden */
     removeFormField(formField: FormField): void {
         this._removeDirectFormGroupChild(formField);
     }
 
+    /** @hidden */
     addFormFieldGroup(formFieldGroup: FormFieldGroup): void {
         this._addDirectFormGroupChild(formFieldGroup);
     }
 
+    /** @hidden */
     removeFormFieldGroup(formFieldGroup: FormFieldGroup): void {
         this._removeDirectFormGroupChild(formFieldGroup);
     }
 
+    /** @hidden */
     addFormControl(name: string, control: AbstractControl): void {
         this.formGroup.setControl(name, control);
         // letting control to set value. when provided value is 'false'.
@@ -363,22 +393,27 @@ export class FormGroupComponent
         }
     }
 
+    /** @hidden */
     removeFormControl(name: string): void {
         this.formGroup.removeControl(name);
     }
 
+    /** @hidden */
     trackByFn(index: number): number {
         return index;
     }
 
+    /** @hidden */
     trackByFieldName(index: number, field: Field): string | undefined {
         return field ? field.name : undefined;
     }
 
+    /** @hidden */
     isFieldGroupRow(row: KeyValue<FieldColumn, FieldGroup>): FieldColumn {
         return row.value instanceof FieldGroup ? row.value.fields : row.value;
     }
 
+    /** @hidden */
     buildComponentCssClass(): string[] {
         return ['fd-container', !this.compact ? 'fd-form-layout-grid-container' : '', this.class];
     }
@@ -481,6 +516,7 @@ export class FormGroupComponent
     }
 
     /**
+     * @hidden
      * Pass some global properties to each field. Even formGroup cna be inject directly inside form
      * field we are using here a setter method to initialize the
      *

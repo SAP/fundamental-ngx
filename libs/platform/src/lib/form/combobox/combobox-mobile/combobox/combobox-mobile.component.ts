@@ -97,13 +97,21 @@ export class ComboboxMobileComponent extends MobileModeBase<ComboboxInterface> i
             verticalPadding: false,
             ...this.dialogConfig,
             backdropClickCloseable: false,
-            escKeyCloseable: false,
             container: this._elementRef.nativeElement
         });
 
         // Have to fire "detectChanges" to fix "ExpressionChangedAfterItHasBeenCheckedError"
         this.dialogRef.afterLoaded.pipe(takeUntil(this._onDestroy$)).subscribe(() => {
             this._component.detectChanges();
+        });
+
+        const refSub = this.dialogRef.afterClosed.subscribe({
+            error: (type) => {
+                if (type === 'escape') {
+                    this._component.dialogDismiss(this._selectedBackup);
+                    refSub.unsubscribe();
+                }
+            }
         });
     }
 }

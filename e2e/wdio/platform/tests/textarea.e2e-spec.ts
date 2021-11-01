@@ -30,6 +30,7 @@ import {
     mouseHoverElement,
     pause,
     refreshPage,
+    scrollIntoView,
     sendKeys,
     setValue,
     waitForElDisplayed,
@@ -172,6 +173,7 @@ describe('Verify Textarea component', () => {
         });
 
         it('should see an error if trying to click empty mandatory textarea', () => {
+            scrollIntoView(detailedTextArea);
             const textLength = getText('fdp-platform-textarea-counter-example fdp-textarea').length;
 
             for (let i = 0; i < textLength; i++) {

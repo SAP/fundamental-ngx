@@ -45,4 +45,6 @@ export abstract class TableColumn {
 
     /** Whether cell inner is focusable, may be used only if the custom template defined, needed for the screen readers */
     abstract cellFocusable: boolean;
+    /** Whether or not  the text should wrap, when text is too long for 1 line */
+    abstract noWrap: boolean;
 }

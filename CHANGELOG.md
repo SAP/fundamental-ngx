@@ -1,4 +1,156 @@
 
+## 0.33.0-rc.80 (2021-10-30)
+
+
+### Bug Fixes
+
+* **platform:** table, content density issues ([#6857](https://github.com/SAP/fundamental-ngx/issues/6857)) ([816c10d](https://github.com/SAP/fundamental-ngx/commit/816c10d25e056b927f857665874a8a216cbcfdf0)), closes [#6747](https://github.com/SAP/fundamental-ngx/issues/6747) [#6766](https://github.com/SAP/fundamental-ngx/issues/6766)
+
+## 0.33.0-rc.79 (2021-10-29)
+
+## 0.33.0-rc.78 (2021-10-29)
+
+
+### Bug Fixes
+
+* **core:** multiinput emit update ([#7027](https://github.com/SAP/fundamental-ngx/issues/7027)) ([4baaf1d](https://github.com/SAP/fundamental-ngx/commit/4baaf1d211c4f65c62058085f357787f3ad9e816))
+
+## 0.33.0-rc.77 (2021-10-28)
+
+
+### Bug Fixes
+
+* **core:** force button outline when clicked on safari ([#6927](https://github.com/SAP/fundamental-ngx/issues/6927)) ([05609e1](https://github.com/SAP/fundamental-ngx/commit/05609e16ce2c37bae360f3f63858c91700efba7e))
+
+## 0.33.0-rc.76 (2021-10-28)
+
+## 0.33.0-rc.75 (2021-10-28)
+
+
+### Features
+
+* **platform:** add wrapping ability to the platform column ([#7034](https://github.com/SAP/fundamental-ngx/issues/7034)) ([8768fdf](https://github.com/SAP/fundamental-ngx/commit/8768fdfccde058e0afc7ba47650ac74ba7f95e07))
+
+## 0.33.0-rc.74 (2021-10-28)
+
+
+### Bug Fixes
+
+* **platform:** select, fix form reset and double emitting issue ([#6977](https://github.com/SAP/fundamental-ngx/issues/6977)) ([edc1528](https://github.com/SAP/fundamental-ngx/commit/edc152802363eb40f6ae79a8543bb9b214be361f))
+
+## 0.33.0-rc.73 (2021-10-28)
+
+
+### Bug Fixes
+
+* **core:** fix fd-calendar accessibility ([#6485](https://github.com/SAP/fundamental-ngx/issues/6485)) ([6321b78](https://github.com/SAP/fundamental-ngx/commit/6321b785aff1630fc132df9f215941d4857d5f6b))
+
+## 0.33.0-rc.72 (2021-10-28)
+
+
+### Bug Fixes
+
+* **platform:** approval flow screen frozen after click on approver name ([#6739](https://github.com/SAP/fundamental-ngx/issues/6739)) ([b58f4df](https://github.com/SAP/fundamental-ngx/commit/b58f4df70b966e07d8b679965945c3ae6cd576dc))
+
+## 0.33.0-rc.71 (2021-10-27)
+
+## 0.33.0-rc.70 (2021-10-27)
+
+
+### Bug Fixes
+
+* **platform:** hide label in "icon-only" mode ([#6974](https://github.com/SAP/fundamental-ngx/issues/6974)) ([e050d20](https://github.com/SAP/fundamental-ngx/commit/e050d20a2f4ee3385ecb27a84ce26c10d58509b1))
+
+## 0.33.0-rc.69 (2021-10-27)
+
+## 0.33.0-rc.68 (2021-10-27)
+
+## 0.33.0-rc.67 (2021-10-27)
+
+
+### Bug Fixes
+
+* **platform:** fix thumbnail accessibility issue ([#6950](https://github.com/SAP/fundamental-ngx/issues/6950)) ([6e92e9d](https://github.com/SAP/fundamental-ngx/commit/6e92e9dcec263d90e33ba8757030acb59b63d73c))
+
+## 0.33.0-rc.66 (2021-10-26)
+
+## 0.33.0-rc.65 (2021-10-26)
+
+## 0.33.0-rc.64 (2021-10-26)
+
+## 0.33.0-rc.63 (2021-10-26)
+
+
+### Features
+
+* **platform:** search field add missing examples and refresh mode ([#6694](https://github.com/SAP/fundamental-ngx/issues/6694)) ([dee522d](https://github.com/SAP/fundamental-ngx/commit/dee522df536a3365ec2362523bf8cc2fe511f8ae))
+
+## 0.33.0-rc.62 (2021-10-26)
+
+## 0.33.0-rc.61 (2021-10-26)
+
+## 0.33.0-rc.60 (2021-10-25)
+
+
+### Bug Fixes
+
+* **platform:** input group prevent enter not a number value in input type number (Firefox and Safari) ([#6909](https://github.com/SAP/fundamental-ngx/issues/6909)) ([5b0d65e](https://github.com/SAP/fundamental-ngx/commit/5b0d65e69d29bfcb97a8d8eb0d132855ccf0f166))
+
+## 0.33.0-rc.59 (2021-10-25)
+
+## 0.33.0-rc.58 (2021-10-25)
+
+## 0.33.0-rc.57 (2021-10-25)
+
+## 0.33.0-rc.56 (2021-10-25)
+
+## 0.33.0-rc.55 (2021-10-25)
+
+## 0.33.0-rc.54 (2021-10-24)
+
+
+### Bug Fixes
+
+* **platform:** upload collection, fix display message after canceling folder creation ([#6973](https://github.com/SAP/fundamental-ngx/issues/6973)) ([de8e966](https://github.com/SAP/fundamental-ngx/commit/de8e96618ab1b58da00619f758e4881416fea161))
+
+## 0.33.0-rc.53 (2021-10-22)
+
+
+### Bug Fixes
+
+* **platform:** combobox, fix alignment issue in IE ([#6762](https://github.com/SAP/fundamental-ngx/issues/6762)) ([7adb15b](https://github.com/SAP/fundamental-ngx/commit/7adb15baaae36476d3280dd20ef10e050e957aae)), closes [#6759](https://github.com/SAP/fundamental-ngx/issues/6759) [#6902](https://github.com/SAP/fundamental-ngx/issues/6902)
+
+## 0.33.0-rc.52 (2021-10-22)
+
+
+### Bug Fixes
+
+* **core:** remove unused class name ([#6961](https://github.com/SAP/fundamental-ngx/issues/6961)) ([621ba08](https://github.com/SAP/fundamental-ngx/commit/621ba08106909992f8c46f96cb3ceb7b7401fbdf))
+
+## 0.33.0-rc.51 (2021-10-22)
+
+
+### Bug Fixes
+
+* **platform:** upload collection, fix a11y issues ([#6943](https://github.com/SAP/fundamental-ngx/issues/6943)) ([98d5f77](https://github.com/SAP/fundamental-ngx/commit/98d5f7732979cea54c111745626e401db1254f76))
+
+## 0.33.0-rc.50 (2021-10-22)
+
+
+### Bug Fixes
+
+* **platform:** combobox, not reading found items ([#6941](https://github.com/SAP/fundamental-ngx/issues/6941)) ([e0e6c7c](https://github.com/SAP/fundamental-ngx/commit/e0e6c7c8e84bb40441b0c08198cda490e7ffe8f4))
+
+## 0.33.0-rc.49 (2021-10-22)
+
+## 0.33.0-rc.48 (2021-10-21)
+
+## 0.33.0-rc.47 (2021-10-21)
+
+## 0.33.0-rc.46 (2021-10-21)
+
+## 0.33.0-rc.45 (2021-10-21)
+
 ## 0.33.0-rc.44 (2021-10-21)
 
 ## 0.33.0-rc.43 (2021-10-21)

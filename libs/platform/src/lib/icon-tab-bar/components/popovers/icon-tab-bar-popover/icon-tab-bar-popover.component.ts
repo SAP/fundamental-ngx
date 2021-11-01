@@ -17,4 +17,8 @@ export class IconTabBarPopoverComponent extends IconTabBarPopoverBase {
      */
     @Input()
     label = 'more';
+
+    /** Whether to display labels for tab items */
+    @Input()
+    showItemLabel: boolean;
 }

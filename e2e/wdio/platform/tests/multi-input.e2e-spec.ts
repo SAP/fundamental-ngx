@@ -31,7 +31,9 @@ describe('Multi input test suite', () => {
         crossButton,
         dropdownOptionText,
         dropdownOptionTextValueHelp,
-        header
+        header,
+        validationPopover,
+        compactExampleTokens
     } = multiInputPage;
 
     beforeAll(() => {
@@ -93,8 +95,8 @@ describe('Multi input test suite', () => {
             waitForElDisplayed(expandedDropdown);
         }
     });
-    // skip until https://github.com/SAP/fundamental-ngx/pull/6765 merged
-    xit('Verify A token can be added using suggestions or value help.', () => {
+
+    it('Verify A token can be added using suggestions or value help.', () => {
         const inputQuantity = getElementArrayLength(activeInputs);
         const disabledExample = 5;
 
@@ -143,8 +145,7 @@ describe('Multi input test suite', () => {
         }
     });
 
-    // skip until https://github.com/SAP/fundamental-ngx/pull/6765 merged
-    xit('Verify When the user starts typing in the input field, the list is filtered', () => {
+    it('Verify When the user starts typing in the input field, the list is filtered', () => {
         multiInputPage.expandDropdown(activeDropdownButtons, 1);
         const optionsArr = getAttributeByNameArr(options, 'title');
         click(activeDropdownButtons, 1);
@@ -212,6 +213,48 @@ describe('Multi input test suite', () => {
         for (let i = 0; i < activeInputsQuantity; i++) {
             expect(placeholderValue).toContain(getElementPlaceholder(activeInputs, i));
         }
+    });
+
+    it('should check validation on empty required field', () => {
+        scrollIntoView(activeInputs, 7);
+        click(activeInputs, 7);
+
+        expect(waitForElDisplayed(validationPopover)).toBe(true);
+        expect(getText(validationPopover).trim()).toBe('Value is required');
+    });
+
+    // skip due to https://github.com/SAP/fundamental-ngx/issues/6969
+    xit('should check validation on invalid entry', () => {
+        scrollIntoView(activeInputs, 7);
+        click(activeInputs, 7);
+        sendKeys(['aaaaa']);
+
+        expect(waitForElDisplayed(validationPopover)).toBe(true);
+        expect(getText(validationPopover).trim()).toBe('Invalid entry');
+    });
+
+    it('should verify user cannot add the same item twice', () => {
+        scrollIntoView(activeInputs, 1);
+        multiInputPage.expandDropdown(activeDropdownButtons, 1);
+        const optionsArr = getAttributeByNameArr(options, 'title');
+        setValue(activeInputs, optionsArr[0].substring(0, 4), 1);
+        click(options);
+        const firstSelectionTokenCount = getElementArrayLength(compactExampleTokens);
+        setValue(activeInputs, optionsArr[0].substring(0, 4), 1);
+        click(options);
+        const secondSelectionTokenCount = getElementArrayLength(compactExampleTokens);
+
+        expect(firstSelectionTokenCount).toEqual(1);
+        expect(secondSelectionTokenCount).toEqual(1);
+    });
+
+    it('should verify only 1 token created', () => {
+        scrollIntoView(activeInputs, 1);
+        const originalTokenCount = getElementArrayLength(compactExampleTokens);
+        multiInputPage.expandDropdown(activeDropdownButtons, 1);
+        click(options);
+        const newTokenCount = getElementArrayLength(compactExampleTokens);
+        expect(newTokenCount).toEqual(originalTokenCount + 1);
     });
 
     xdescribe('Check visual regression', () => {

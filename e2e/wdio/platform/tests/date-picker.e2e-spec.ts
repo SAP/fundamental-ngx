@@ -248,7 +248,7 @@ describe('Date picker suite', () => {
                 click(buttonSelectYear);
                 waitForElDisplayed(filterCalendarValue('year'));
                 click(buttonSelectYearsRange);
-                waitForElDisplayed(filterCalendarValue('aggregated-year'));
+                waitForElDisplayed(filterCalendarValue('aggregated-years'));
                 click(buttonDatePicker, i);
             }
         }
@@ -271,7 +271,7 @@ describe('Date picker suite', () => {
                 click(buttonDatePicker, i);
                 click(buttonSelectYear);
                 click(buttonSelectYearsRange);
-                waitForElDisplayed(filterCalendarValue('aggregated-year'));
+                waitForElDisplayed(filterCalendarValue('aggregated-years'));
                 click(buttonFirstRangeYear);
                 waitForElDisplayed(filterCalendarValue('year'));
                 click(buttonDatePicker, i);

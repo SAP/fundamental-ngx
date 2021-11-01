@@ -5,7 +5,7 @@ import packageLockInfo from '../../../../../../../package-lock.json';
 export class StackblitzDependencies {
     private static _libDependencies: string[] = ['@fundamental-ngx/platform', '@fundamental-ngx/core'];
 
-    private static _dependencies: string[] = [
+    private static _ngDependencies: string[] = [
         '@angular/animations',
         '@angular/cdk',
         '@angular/core',
@@ -15,7 +15,10 @@ export class StackblitzDependencies {
         '@angular/localize',
         '@angular/router',
         '@angular/platform-browser',
-        '@angular/platform-browser-dynamic',
+        '@angular/platform-browser-dynamic'
+    ];
+
+    private static _dependencies: string[] = [
         '@sap-theming/theming-base-content',
         'core-js',
         'focus-trap',
@@ -26,23 +29,30 @@ export class StackblitzDependencies {
         'focus-trap'
     ];
 
-    static GetDependencies(): object {
+    static getDependencies(): object {
         const _dependencies: object = {};
 
-        this._libDependencies.forEach((libDep) => (_dependencies[libDep] = parseVersion(packageInfo.version)));
+        const libVersion = parseVersion(packageInfo.version);
+
+        this._libDependencies.forEach((libDep) => (_dependencies[libDep] = libVersion));
 
         this._dependencies.forEach((dep) => {
             if (packageLockInfo.dependencies && packageLockInfo.dependencies[dep]) {
-                _dependencies[dep] = packageLockInfo.dependencies[dep].version;
+                _dependencies[dep] = parseVersion(packageLockInfo.dependencies[dep].version);
             } else {
                 throw new Error('Dependency ' + dep + ' not found in package-lock.json');
             }
         });
 
+        const ngVersion = this.resolveNgVersion(libVersion);
+        this._ngDependencies.forEach((dep) => {
+            _dependencies[dep] = ngVersion;
+        });
+
         return _dependencies;
     }
 
-    static GetAngularJson(): string {
+    static getAngularJson(): string {
         return `
         {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
@@ -125,5 +135,21 @@ export class StackblitzDependencies {
   "defaultProject": "fundamental-ngx-example"
 }
         `;
+    }
+
+    /**
+     * ngx-fundamental introduced breaking change by migrating to Angular 12 in v0.33.0
+     * This function contrains an extra logic in order to bring compatibility between Angular and ngx-fundamental,
+     *
+     * @param parsedLibVersion ngx-fundamental version, that was processed by "parseVersion" function
+     * @returns version of Angular packages to be used
+     */
+    private static resolveNgVersion(parsedLibVersion: string): string {
+        const [, minor] = parsedLibVersion.split('.').map((n) => parseInt(n, 10));
+        if (minor === 32) {
+            return '^11';
+        } else {
+            return '^12';
+        }
     }
 }

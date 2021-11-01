@@ -5,6 +5,8 @@ import {
     Directive,
     ElementRef,
     EventEmitter,
+    HostListener,
+    Injector,
     Input,
     OnDestroy,
     OnInit,
@@ -27,9 +29,15 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import { fromEvent, isObservable, Observable, of, Subject, Subscription } from 'rxjs';
 import { filter, map, take, takeUntil, tap } from 'rxjs/operators';
 
-import { KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
 import { PopoverComponent } from '@fundamental-ngx/core/popover';
+import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { BaseComponent, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
+import {
+    SEARCH_FIELD_COMPONENT,
+    SearchFieldMobileInterface
+} from './search-field-mobile/search-field-mobile.interface';
+import { SearchFieldMobileComponent } from './search-field-mobile/search-field/search-field-mobile.component';
 
 export interface SearchInput {
     text: string;
@@ -71,12 +79,20 @@ let searchFieldIdCount = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class SearchFieldComponent extends BaseComponent implements OnInit, OnDestroy {
+export class SearchFieldComponent extends BaseComponent implements OnInit, OnDestroy, SearchFieldMobileInterface {
     /**
      * Place holder text for search input field.
      */
     @Input()
     placeholder: string;
+
+    /** Set Mobile Mode */
+    @Input()
+    mobile: boolean;
+
+    /** Search Field Mobile configuration */
+    @Input()
+    mobileConfig: MobileModeConfig;
 
     /**
      * List of string values to populate suggestion dropdown selection.
@@ -201,6 +217,12 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     @Output()
     cancelSearch: EventEmitter<SearchInput> = new EventEmitter();
 
+    /**
+     * Open mobile mode event.
+     */
+    @Output()
+    isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
     /** @hidden Focus state */
     get isFocused(): boolean {
         return this._isFocused;
@@ -239,7 +261,13 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     public inputId = '';
     public submitId = '';
     public menuId = '';
+    public refreshId = '';
+    public clearId = '';
     public dir = 'ltr';
+
+    public isOpen = false;
+    public isRefresh = false;
+    public isSearchDone = false;
 
     private _currentSearchSuggestionAnnoucementMessage = '';
     private _suggestionOverlayRef: OverlayRef;
@@ -257,6 +285,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     @ViewChild('inputGroup', { static: false }) inputGroup: ElementRef<HTMLElement>;
     @ViewChild('inputField', { static: false }) inputField: ElementRef<HTMLElement>;
 
+    @ViewChild('inputFieldTemplate') inputFieldTemplate: TemplateRef<any>;
     @ViewChild('suggestionMenuTemplate', { static: false }) suggestionMenuTemplate: TemplateRef<any>;
     @ViewChildren(SearchFieldSuggestionDirective) suggestionItems: QueryList<SearchFieldSuggestionDirective>;
 
@@ -274,7 +303,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         protected _cd: ChangeDetectorRef,
         @Optional() private _rtl: RtlService,
         private readonly _elementRef: ElementRef,
-        private _liveAnnouncer: LiveAnnouncer
+        private _liveAnnouncer: LiveAnnouncer,
+        readonly _dynamicComponentService: DynamicComponentService
     ) {
         super(_cd);
     }
@@ -285,6 +315,8 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this.submitId = `${baseId}-submit-${searchFieldIdCount++}`;
         this.menuId = `${baseId}-menu-${searchFieldIdCount++}`;
 
+        this.isRefresh = true;
+
         if (this._rtl) {
             this._rtlChangeSubscription = this._rtl.rtl.subscribe((isRtl: boolean) => {
                 this.dir = isRtl ? 'rtl' : 'ltr';
@@ -293,6 +325,10 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         }
 
         this._listenElementEvents();
+
+        if (this.mobile) {
+            this._setUpMobileMode();
+        }
     }
 
     ngOnDestroy(): void {
@@ -307,6 +343,15 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this._onDestroy$.next();
     }
 
+    /** @hidden */
+    @HostListener('keydown', ['$event'])
+    handleKeydown(event: KeyboardEvent): void {
+        if (this.mobile && this.isOpen && KeyUtil.isKeyCode(event, [ESCAPE])) {
+            this.showDialog(false);
+        }
+    }
+
+    /** Capturing onKeydown of input element */
     onKeydown(event: KeyboardEvent): void {
         if (!event) {
             return;
@@ -321,6 +366,18 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         }
     }
 
+    /** Capturing focus in mobile mode */
+    onFocus(): void {
+        this._isFocused = true;
+        this._cd.markForCheck();
+    }
+
+    /** Capturing blur in mobile mode */
+    onBlur(): void {
+        this._isFocused = false;
+        this._cd.markForCheck();
+    }
+
     /**
      * Capturing value change in input text field of combobox.
      * @hidden
@@ -329,6 +386,12 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         // when search result not changed but input text is changed.
         // again need to announce the result, so clear this message.
         setTimeout(() => (this._currentSearchSuggestionAnnoucementMessage = ''));
+        this.isSearchDone = false;
+        this.isRefresh = false;
+
+        if (this.mobile && !this.isOpen) {
+            this.openMobileMode();
+        }
 
         this.inputChange.emit(this.searchFieldValue);
         const inputStr: string = event.trim();
@@ -336,7 +399,11 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             this.closeSuggestionMenu();
             return;
         }
-        this.openSuggestionMenu();
+
+        if (!this.mobile) {
+            this.openSuggestionMenu();
+        }
+
         if (this.dataSource) {
             const match = new Map();
             match.set('keyword', inputStr);
@@ -358,6 +425,10 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this.inputChange.emit(this.searchFieldValue);
         this.searchSubmit.emit(this.searchFieldValue);
         this.closeSuggestionMenu();
+        if (this.mobile) {
+            this.showDialog(false);
+        }
+        this.isSearchDone = true;
         this._cd.detectChanges();
     }
 
@@ -371,7 +442,14 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         } else {
             this.searchSubmit.emit(this.searchFieldValue);
 
-            this.closeSuggestionMenu();
+            this.isRefresh = true;
+            this._isFocused = false;
+
+            if (this.inputText) {
+                this.isSearchDone = true;
+            }
+
+            this.closeSuggestionMenu(false);
         }
     }
 
@@ -424,6 +502,26 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this.showDropdown = true;
     }
 
+    openMobileMode(): void {
+        this.showDialog(true);
+    }
+
+    dialogApprove(): void {
+        this.onItemClick(this.inputText);
+    }
+
+    dialogDismiss(): void {
+        this.showDialog(false);
+    }
+
+    showDialog(isOpen: boolean): void {
+        if (this.isOpen !== isOpen) {
+            this.isOpen = isOpen;
+
+            this.isOpenChange.emit(isOpen);
+        }
+    }
+
     closeSuggestionMenu(focus = true): void {
         if (!this._suggestionOverlayRef) {
             return;
@@ -440,7 +538,12 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         this._cd.detectChanges();
         this.inputChange.emit(this.searchFieldValue);
         this.cancelSearch.emit(this.searchFieldValue);
-        this.closeSuggestionMenu();
+
+        this.isRefresh = true;
+        this._isFocused = false;
+        this.isSearchDone = false;
+
+        this.closeSuggestionMenu(false);
     }
 
     _createSuggetionOverlayConfig(): OverlayConfig {
@@ -500,7 +603,12 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     private _listenElementEvents(): void {
         fromEvent(this._elementRef.nativeElement, 'focus', { capture: true })
             .pipe(
-                tap(() => {
+                map((event: MouseEvent) => {
+                    const target = event.target as HTMLElement;
+                    if (!target.id || target.id.includes('fd-button-bar-id')) {
+                        return;
+                    }
+
                     this._isFocused = true;
                     this._cd.markForCheck();
                 }),
@@ -530,13 +638,24 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
             this._liveAnnouncer.announce(this._currentSearchSuggestionAnnoucementMessage);
         }
     }
+
+    private _setUpMobileMode(): void {
+        this._dynamicComponentService.createDynamicComponent(
+            { inputFieldTemplate: this.inputFieldTemplate, suggestionMenuTemplate: this.suggestionMenuTemplate },
+            SearchFieldMobileComponent,
+            { container: this._elementRef.nativeElement },
+            { injector: Injector.create({ providers: [{ provide: SEARCH_FIELD_COMPONENT, useValue: this }] }) }
+        );
+    }
 }
 
 @Pipe({
     name: 'suggestionMatches'
 })
 export class SuggestionMatchesPipe implements PipeTransform {
-    transform(values: string[], match: string): string[] {
-        return values.filter((value) => value.toLowerCase().indexOf(match?.trim().toLowerCase()) > -1);
+    transform(values: string[], match: string, mobile = false): string[] {
+        return mobile && !match
+            ? values
+            : values.filter((value) => value.toLowerCase().indexOf(match?.trim().toLowerCase()) > -1);
     }
 }

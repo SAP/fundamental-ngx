@@ -40,6 +40,7 @@ exports.config = {
             './e2e/wdio/platform/**/file-uploader.e2e-spec.ts',
             './e2e/wdio/platform/**/form-container.e2e-spec.ts',
             './e2e/wdio/platform/**/form-generator.e2e-spec.ts',
+            './e2e/wdio/platform/**/icon-tab-bar.e2e-spec.ts',
             './e2e/wdio/platform/**/info-label.e2e-spec.ts',
             './e2e/wdio/platform/**/input.e2e-spec.ts',
             './e2e/wdio/platform/**/input-group.e2e-spec.ts',
@@ -132,6 +133,7 @@ exports.config = {
             './e2e/wdio/core/**/shellbar.e2e-spec.ts',
             './e2e/wdio/core/**/side-navigation.e2e-spec.ts',
             './e2e/wdio/core/**/slider.e2e-spec.ts',
+            './e2e/wdio/core/**/splitter.e2e-spec.ts',
             './e2e/wdio/core/**/split-button.e2e-spec.ts',
             './e2e/wdio/core/**/standard-list.e2e-spec.ts',
             './e2e/wdio/core/**/status-indicator.e2e-spec.ts',
@@ -148,6 +150,7 @@ exports.config = {
             './e2e/wdio/core/**/title.e2e-spec.ts',
             './e2e/wdio/core/**/token.e2e-spec.ts',
             './e2e/wdio/core/**/toolbar.e2e-spec.ts',
+            './e2e/wdio/core/**/vertical-navigation.e2e-spec.ts',
             './e2e/wdio/core/**/wizard.e2e-spec.ts'
         ]
     },
