@@ -192,11 +192,17 @@ describe('Datetime picker suite', () => {
         scrollIntoView(disabledFunctionExample + datePickerButton);
         click(disabledFunctionExample + datePickerButton);
         waitForElDisplayed(calendarContainer);
-        waitForUnclickable(
-            dateTimePickerPage.dayInDisabledFunctionsCalendarByIndex(
-                (dateTimePickerPage.getCurrentDayIndex() - 1).toString()
-            )
-        );
+        if (dateTimePickerPage.getCurrentDayIndex() !== 0) {
+            waitForUnclickable(
+                dateTimePickerPage.dayInDisabledFunctionsCalendarByIndex(
+                    (dateTimePickerPage.getCurrentDayIndex() - 1).toString()
+                )
+            );
+        }
+        if (dateTimePickerPage.getCurrentDayIndex() === 0) {
+            // can't click previous day when today's day is index 0
+            return;
+        }
     });
 
     it('verify after the user selects a year, the view changes to the day view. The time remains the same. ', () => {
