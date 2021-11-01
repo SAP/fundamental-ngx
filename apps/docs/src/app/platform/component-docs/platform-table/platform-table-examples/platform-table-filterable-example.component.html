@@ -16,7 +16,7 @@
 <fdp-table-view-settings-dialog [table]="table">
     <fdp-table-view-settings-filter column="price" label="Price" type="custom">
         <ng-container *fdpViewSettingsFilterCustomDef="let model">
-            <fd-layout-panel>
+            <fd-layout-panel style="box-shadow: none">
                 <fd-layout-panel-body>
                     <label>Minimum Price:</label>
                     <fdp-input type="number" name="min" [(ngModel)]="model.min"></fdp-input>
