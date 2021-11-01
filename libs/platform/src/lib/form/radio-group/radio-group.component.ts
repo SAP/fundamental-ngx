@@ -34,13 +34,14 @@ import {
     ResponsiveBreakPointConfig,
     ResponsiveBreakpointsService
 } from '@fundamental-ngx/platform/shared';
+import { KeyUtil } from '@fundamental-ngx/core/utils';
+
 import { RadioButtonComponent } from './radio/radio.component';
 
 /**
  * Radio group implementation based on the
  * https://github.com/SAP/fundamental-ngx/wiki/Platform:-RadioGroup-Technical-Design
  * documents.
- *
  */
 
 // Increasing integer for generating unique ids for radio components.
@@ -79,9 +80,6 @@ export class RadioGroupComponent
         this._cd.markForCheck();
     }
 
-    /** @hidden */
-    private _isInline: boolean;
-
     /**
      * None value radio button created
      */
@@ -109,13 +107,17 @@ export class RadioGroupComponent
     /** @hidden */
     private _activeItemSet = false;
 
-    /** The currently selected radio button. Should match value. */
+    /** @hidden The currently selected radio button. Should match value. */
     private _selected: RadioButtonComponent | null = null;
 
-    private destroy$ = new Subject<boolean>();
+    /** @hidden */
+    private _destroy$ = new Subject<boolean>();
 
-    // FocusKeyManager instance
-    private keyboardEventsManager: FocusKeyManager<RadioButtonComponent>;
+    /** @hidden FocusKeyManager instance */
+    private _keyboardEventsManager: FocusKeyManager<RadioButtonComponent>;
+
+    /** @hidden */
+    private _isInline: boolean;
 
     constructor(
         protected _cd: ChangeDetectorRef,
@@ -157,7 +159,7 @@ export class RadioGroupComponent
     /**
      * Access display value for objects, acts as checkbox label.
      */
-    public getDisplayValue(item: any): string {
+    getDisplayValue(item: any): string {
         return this.displayValue(item);
     }
 
@@ -172,7 +174,7 @@ export class RadioGroupComponent
      * Called on button click for view radio button, created from list of values
      * @param event
      */
-    public selected(event: RadioButtonComponent): void {
+    selected(event: RadioButtonComponent): void {
         this._selectedValueChanged(event);
     }
 
@@ -204,34 +206,30 @@ export class RadioGroupComponent
      * Destroys event subscription.
      */
     ngOnDestroy(): void {
-        this.destroy$.next(true);
-        this.destroy$.complete();
+        this._destroy$.next(true);
+        this._destroy$.complete();
     }
 
     /** @hidden */
-    public getListItemDisabledValue(item: RadioGroupComponent['list'][number]): boolean {
+    getListItemDisabledValue(item: RadioGroupComponent['list'][number]): boolean {
         return this.disabled || typeof item === 'string' ? this.disabled : item.disabled;
     }
 
     /** @hidden */
     @HostListener('keydown', ['$event'])
-    public handleKeydown(event: KeyboardEvent): void {
+    handleKeydown(event: KeyboardEvent): void {
         event.stopImmediatePropagation();
-        if (this.keyboardEventsManager) {
+        if (this._keyboardEventsManager) {
             // sets Active item. so arrow key starts after the active item.
             // Need to do only once, when one radio is already selected
             if (this._selected && !this._activeItemSet) {
-                this.keyboardEventsManager.setActiveItem(this._selected);
+                this._keyboardEventsManager.setActiveItem(this._selected);
                 this._activeItemSet = true;
             }
-            if (
-                event.keyCode === DOWN_ARROW ||
-                event.keyCode === UP_ARROW ||
-                event.keyCode === LEFT_ARROW ||
-                event.keyCode === RIGHT_ARROW
-            ) {
+
+            if (KeyUtil.isKeyCode(event, [DOWN_ARROW, UP_ARROW, LEFT_ARROW, RIGHT_ARROW])) {
                 // passing the event to key manager so we get a change fired
-                this.keyboardEventsManager.onKeydown(event);
+                this._keyboardEventsManager.onKeydown(event);
             }
         }
     }
@@ -239,7 +237,7 @@ export class RadioGroupComponent
     private _initialSetup(radioButtons: QueryList<RadioButtonComponent>): void {
         if (radioButtons && radioButtons.length > 0) {
             let firstEnabledButtonIndex = -1;
-            this.keyboardEventsManager = new FocusKeyManager(radioButtons).withWrap().withHorizontalOrientation('ltr');
+            this._keyboardEventsManager = new FocusKeyManager(radioButtons).withWrap().withHorizontalOrientation('ltr');
 
             radioButtons.forEach((button, i) => {
                 if (this.list) {
@@ -253,7 +251,7 @@ export class RadioGroupComponent
                 if (!button.disabled && !this._disabled && firstEnabledButtonIndex < 0) {
                     firstEnabledButtonIndex = i;
                 }
-                button.checked.pipe(takeUntil(this.destroy$)).subscribe((ev) => this._selectedValueChanged(ev));
+                button.checked.pipe(takeUntil(this._destroy$)).subscribe((ev) => this._selectedValueChanged(ev));
             });
             // accessibility requirement
             if (!this._selected && radioButtons && firstEnabledButtonIndex > -1) {
@@ -281,7 +279,6 @@ export class RadioGroupComponent
 
     /** Called every time a radio button is clicked, In content child as well as viewchild */
     private _selectedValueChanged(button: RadioButtonComponent): void {
-        this.onTouched();
         if (this._selected !== button) {
             this.resetTabIndex(button);
             if (this._selected) {
@@ -292,7 +289,6 @@ export class RadioGroupComponent
         }
         this.value = button.value;
         this.change.emit(button);
-        this.onChange(this.value);
     }
 
     /** resets tabIndex for first radio in radio group. for accessibility tabIndex was set */
