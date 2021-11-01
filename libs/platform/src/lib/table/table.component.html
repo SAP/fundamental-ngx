@@ -263,6 +263,7 @@
                             fd-table-row
                             fd-dnd-item
                             role="row"
+                            [applyDragItemClass]="_rowsDraggable"
                             [class]="_getRowClasses(row)"
                             [tabindex]="rowsActivable || !!row.navigatable ? 0 : -1"
                             [focusable]="rowsActivable || !!row.navigatable"
