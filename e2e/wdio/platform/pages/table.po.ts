@@ -55,6 +55,7 @@ export class TablePo extends BaseComponentPo {
     buttonRemove = '[title="Remove"]';
     dialogInput = 'fdp-table-filter-rule input';
     expandedButton = '.fd-panel__expand button';
+    expandedOption = 'fd-popover-control .fd-select__control';
     inputFields = '.fdp-search-field__input';
     playgroundExample = 'playground ';
     dropdown = 'select';
@@ -76,8 +77,11 @@ export class TablePo extends BaseComponentPo {
     filterResetButton = 'fdp-table-reset-button button';
     allInputFields = 'fdp-search-field input';
     sortableIcon = '.fd-table__icon';
-    sortableOption = 'fd-popover-body .fd-list__item'
+    sortableOption = 'fd-popover-body .fd-list__item';
     sortablePopover = 'fd-popover-body';
+    buttonActionOne = '[label="Action One"] button';
+    buttonActionTwo = '[label="Action Two"] button';
+    ellipsisButton = '.fd-ellipsis';
 
     open(): void {
         super.open(this.url);

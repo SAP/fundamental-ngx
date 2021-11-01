@@ -14,18 +14,9 @@ export const priceEndTestText = '489.01';
 export const nameStartTestText = '10 Portable DVD player';
 export const nameEndTestText = 'Gaming Monster Pro';
 export const testText2 = 'Product name 0';
-export const tableCellArr2 = [
-    'Product name 0',
-    'Product description goes here 0',
-    '0',
-    'Available'
-];
+export const tableCellArr2 = ['Product name 0', 'Product description goes here 0', '0', 'Available'];
 export const testText3 = 'Gaming Monster Pro';
-export const tableCellArr3 = [
-    'Gaming Monster Pro',
-    '213.47',
-    'Out of stock'
-];
+export const tableCellArr3 = ['Gaming Monster Pro', '213.47', 'Out of stock'];
 export const tableCellArr4 = [
     '10 Portable DVD player',
     'diam neque vestibulum eget vulputate',

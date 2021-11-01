@@ -5,12 +5,16 @@ import {
     doesItExist,
     getAlertText,
     getAttributeByName,
-    getElementArrayLength, getElementClass,
-    getElementPlaceholder, getElementSize,
+    getElementArrayLength,
+    getElementClass,
+    getElementPlaceholder,
+    getElementSize,
     getText,
     getValue,
     isElementClickable,
-    isElementDisplayed, isEnabled, pause,
+    isElementDisplayed,
+    isEnabled,
+    pause,
     refreshPage,
     scrollIntoView,
     setValue,
@@ -44,24 +48,90 @@ import {
     astroTestText,
     testText7,
     pharetraTestText,
-    nuncTestText, massaTestText
+    nuncTestText,
+    massaTestText
 } from '../fixtures/appData/table-contents';
 
-describe('Table component test suite', function() {
+describe('Table component test suite', function () {
     const tablePage = new TablePo();
     const {
-        tableDefaultExample, button, input, tableRow, tableCellText, tableCustomWidthExample, tableActivableExample,
-        tableSingleRowSelectionExample, tableSortableExample, buttonSortedBy, barButton, tableCellDescription, tableCellPrice,
-        tableCellName, buttonSortedOrder, tableMultipleRowSelectionExample, tableGroupableExample, tableFreezableExample,
-        tableLoadingExample, busyIndicator, buttonSearch, tablePageScrollingExample, tableInitialStateExample,
-        tableNavigatableRowIndicatorExample, tableFilterableExample, filterItem, filterByColorItem,
-        tableCellStatusColor, tableCellStatus, tableP13ColumnsExample, dialogCompactInput, dialogItemText, dialogMoveToBottom,
-        footerButtonOk, dialogItem, columnHeader, tableP13SortExample, tableP13FilterExample, tableP13GroupExample,
-        popoverDropdownButton, buttonAdd, buttonRemove, dialogInput, expandedButton, tableCustomColumnExample, inputFields,
-        playgroundExample, fdpTable, optionCondensed, optionCozy, optionCompact, dropdown, optionSingle, optionMultiple,
-        tableCellFixed, checkbox, playgroundSchemaInput, toolbarText, dropdownList, dropdownOption, dialogButton, tableCell,
-        tableNoItemsTemplateExample, tableSemanticExample, tableRowClassExample, dialogFilters, filterInput, filterButtonOk,
-        filterResetButton, allInputFields, sortableIcon, sortableOption, sortablePopover
+        tableDefaultExample,
+        button,
+        input,
+        tableRow,
+        tableCellText,
+        tableCustomWidthExample,
+        tableActivableExample,
+        tableSingleRowSelectionExample,
+        tableSortableExample,
+        buttonSortedBy,
+        barButton,
+        tableCellDescription,
+        tableCellPrice,
+        tableCellName,
+        buttonSortedOrder,
+        tableMultipleRowSelectionExample,
+        tableGroupableExample,
+        tableFreezableExample,
+        tableLoadingExample,
+        busyIndicator,
+        buttonSearch,
+        tablePageScrollingExample,
+        tableInitialStateExample,
+        tableNavigatableRowIndicatorExample,
+        tableFilterableExample,
+        filterItem,
+        filterByColorItem,
+        tableCellStatusColor,
+        tableCellStatus,
+        tableP13ColumnsExample,
+        dialogCompactInput,
+        dialogItemText,
+        dialogMoveToBottom,
+        footerButtonOk,
+        dialogItem,
+        columnHeader,
+        tableP13SortExample,
+        tableP13FilterExample,
+        tableP13GroupExample,
+        popoverDropdownButton,
+        buttonAdd,
+        buttonRemove,
+        dialogInput,
+        expandedButton,
+        tableCustomColumnExample,
+        inputFields,
+        playgroundExample,
+        fdpTable,
+        optionCondensed,
+        optionCozy,
+        optionCompact,
+        dropdown,
+        optionSingle,
+        optionMultiple,
+        tableCellFixed,
+        checkbox,
+        playgroundSchemaInput,
+        toolbarText,
+        dropdownList,
+        dropdownOption,
+        dialogButton,
+        tableCell,
+        tableNoItemsTemplateExample,
+        tableSemanticExample,
+        tableRowClassExample,
+        dialogFilters,
+        filterInput,
+        filterButtonOk,
+        filterResetButton,
+        allInputFields,
+        sortableIcon,
+        sortableOption,
+        sortablePopover,
+        buttonActionOne,
+        buttonActionTwo,
+        ellipsisButton,
+        expandedOption
     } = tablePage;
 
     beforeAll(() => {
@@ -73,10 +143,9 @@ describe('Table component test suite', function() {
         waitForPresent(tableDefaultExample);
     }, 1);
 
-    describe('Check Simple Table example', function() {
-
+    describe('Check Simple Table example', function () {
         it('should check alert messages', () => {
-            checkAlertMessages(tableDefaultExample, 1, 2);
+            checkAlertMessages(tableDefaultExample);
         });
 
         it('should check table item single selection', () => {
@@ -84,10 +153,9 @@ describe('Table component test suite', function() {
         });
     });
 
-    describe('Check Custom Column Width & Column Resizing', function() {
-
+    describe('Check Custom Column Width & Column Resizing', function () {
         it('should check alert messages', () => {
-            checkAlertMessages(tableCustomWidthExample, 1, 2);
+            checkAlertMessages(tableCustomWidthExample);
         });
 
         it('should check table item single selection', () => {
@@ -95,10 +163,9 @@ describe('Table component test suite', function() {
         });
     });
 
-    describe('Check Activable Rows', function() {
-
+    describe('Check Activable Rows', function () {
         it('should check alert messages', () => {
-            checkAlertMessages(tableActivableExample, 1, 2);
+            checkAlertMessages(tableActivableExample);
         });
 
         it('should check table item single selection', () => {
@@ -111,8 +178,7 @@ describe('Table component test suite', function() {
         });
     });
 
-    describe('Check Custom Column', function() {
-
+    describe('Check Custom Column', function () {
         it('should check table item single selection', () => {
             scrollIntoView(tableCustomColumnExample);
             setValue(tableCustomColumnExample + input, testText);
@@ -135,8 +201,7 @@ describe('Table component test suite', function() {
         });
     });
 
-    describe('Check Single Row Selection', function() {
-
+    describe('Check Single Row Selection', function () {
         it('should check table item single selection', () => {
             findElementInTable(tableSingleRowSelectionExample, tableCellArr);
         });
@@ -144,8 +209,7 @@ describe('Table component test suite', function() {
         it('should check table item single selection', () => {
             scrollIntoView(tableSingleRowSelectionExample);
             click(tableSingleRowSelectionExample + tableRow + tableCell);
-            expect(getAttributeByName(tableSingleRowSelectionExample + tableRow, 'aria-selected'))
-                .toBe('true');
+            expect(getAttributeByName(tableSingleRowSelectionExample + tableRow, 'aria-selected')).toBe('true');
         });
 
         // skipped due to https://github.com/SAP/fundamental-ngx/issues/6545
@@ -155,53 +219,50 @@ describe('Table component test suite', function() {
             click(tableSingleRowSelectionExample + button, 1);
             click(tableSingleRowSelectionExample + tableCell);
             click(tableSingleRowSelectionExample + button);
-            expect(getAttributeByName(tableSingleRowSelectionExample + tableRow, 'aria-selected', 1))
-                .toBe('true');
+            expect(getAttributeByName(tableSingleRowSelectionExample + tableRow, 'aria-selected', 1)).toBe('true');
         });
     });
 
-    describe('Check Multi Row Selection', function() {
-
+    describe('Check Multi Row Selection', function () {
         it('should verify checkboxes', () => {
             checkAllCheckbox(tableMultipleRowSelectionExample);
         });
     });
 
-    describe('Check Column Sorting', function() {
-
+    describe('Check Column Sorting', function () {
         it('should check table item single selection', () => {
             findElementInTable(tableSortableExample, tableCellArr);
         });
 
         it('should check ascending sorting by name, description and price', () => {
             scrollIntoView(tableSortableExample);
-            chooseSortOptionBy(tableSortableExample, 1);
+            chooseSortOptionBy(tableSortableExample, ellipsisButton, 1);
             expect(getText(tableSortableExample + tableCellDescription)).toBe(descriptionStartTestText);
             expect(getText(tableSortableExample + tableCellDescription, 15)).toBe(descriptionEndTestText);
 
-            chooseSortOptionBy(tableSortableExample, 2);
+            chooseSortOptionBy(tableSortableExample, ellipsisButton, 2);
             expect(getText(tableSortableExample + tableCellPrice)).toBe(priceStartTestText);
             expect(getText(tableSortableExample + tableCellPrice, 15)).toBe(priceEndTestText);
 
-            chooseSortOptionBy(tableSortableExample, 0);
+            chooseSortOptionBy(tableSortableExample, ellipsisButton, 0);
             expect(getText(tableSortableExample + tableCellName)).toBe(nameStartTestText);
             expect(getText(tableSortableExample + tableCellName, 15)).toBe(nameEndTestText);
         });
 
         it('should check descending sorting by name, description and price', () => {
             scrollIntoView(tableSortableExample);
-            click(tableSortableExample + button, 1);
+            click(tableSortableExample + ellipsisButton);
             click(buttonSortedOrder, 1);
             click(buttonSortedBy, 1);
             click(barButton);
             expect(getText(tableSortableExample + tableCellDescription)).toBe(descriptionEndTestText);
             expect(getText(tableSortableExample + tableCellDescription, 15)).toBe(descriptionStartTestText);
 
-            chooseSortOptionBy(tableSortableExample, 2);
+            chooseSortOptionBy(tableSortableExample, ellipsisButton, 2);
             expect(getText(tableSortableExample + tableCellPrice)).toBe(priceEndTestText);
             expect(getText(tableSortableExample + tableCellPrice, 15)).toBe(priceStartTestText);
 
-            chooseSortOptionBy(tableSortableExample, 0);
+            chooseSortOptionBy(tableSortableExample, ellipsisButton, 0);
             expect(getText(tableSortableExample + tableCellName)).toBe(nameEndTestText);
             expect(getText(tableSortableExample + tableCellName, 15)).toBe(nameStartTestText);
         });
@@ -214,8 +275,7 @@ describe('Table component test suite', function() {
         });
     });
 
-    describe('Check Column Filtering', function() {
-
+    describe('Check Column Filtering', function () {
         it('should check table item single selection', () => {
             findElementInTable(tableFilterableExample, tableCellArr, 1);
         });
@@ -264,11 +324,9 @@ describe('Table component test suite', function() {
         });
     });
 
-    describe('Check Column Grouping', function() {
-
+    describe('Check Column Grouping', function () {
         it('should check table item single selection', () => {
             findElementInTable(tableGroupableExample, tableCellArr);
-
         });
 
         it('should verify checkboxes', () => {
@@ -277,33 +335,32 @@ describe('Table component test suite', function() {
 
         it('should check ascending sorting by name and status', () => {
             scrollIntoView(tableGroupableExample);
-            chooseSortOptionBy(tableGroupableExample, 0);
+            chooseSortOptionBy(tableGroupableExample, ellipsisButton, 0);
             expect(getText(tableGroupableExample + tableCellDescription)).toBe(tableCellArr[1]);
             expect(getText(tableGroupableExample + tableCellDescription, 15)).toBe(pharetraTestText);
 
-            chooseSortOptionBy(tableGroupableExample, 1);
+            chooseSortOptionBy(tableGroupableExample, ellipsisButton, 1);
             expect(getText(tableGroupableExample + tableCellDescription)).toBe(nuncTestText);
             expect(getText(tableGroupableExample + tableCellDescription, 15)).toBe(massaTestText);
         });
 
         it('should check descending sorting by name and status', () => {
             scrollIntoView(tableGroupableExample);
-            click(tableGroupableExample + button, 1);
+            click(tableGroupableExample + ellipsisButton);
             click(buttonSortedOrder, 1);
             click(buttonSortedBy, 1);
             click(barButton);
-            chooseSortOptionBy(tableGroupableExample, 0);
+            chooseSortOptionBy(tableGroupableExample, ellipsisButton, 0);
             expect(getText(tableGroupableExample + tableCellDescription)).toBe(pharetraTestText);
             expect(getText(tableGroupableExample + tableCellDescription, 15)).toBe(tableCellArr[1]);
 
-            chooseSortOptionBy(tableGroupableExample, 1);
+            chooseSortOptionBy(tableGroupableExample, ellipsisButton, 1);
             expect(getText(tableGroupableExample + tableCellDescription)).toBe(tableCellArr[1]);
             expect(getText(tableGroupableExample + tableCellDescription, 15)).toBe('integer ac leo pellentesque');
         });
     });
 
-    describe('Check Column Freezing', function() {
-
+    describe('Check Column Freezing', function () {
         it('should check table item single selection', () => {
             scrollIntoView(tableFreezableExample);
             setValue(tableFreezableExample + input, tableCellArr[1]);
@@ -321,10 +378,9 @@ describe('Table component test suite', function() {
         });
     });
 
-    describe('Check Loading/Busy State', function() {
-
+    describe('Check Loading/Busy State', function () {
         it('should check alert messages', () => {
-            checkAlertMessages(tableLoadingExample, 2, 3);
+            checkAlertMessages(tableLoadingExample);
         });
 
         it('should check table item single selection', () => {
@@ -351,8 +407,7 @@ describe('Table component test suite', function() {
         });
     });
 
-    describe('Check Page Scrolling', function() {
-
+    describe('Check Page Scrolling', function () {
         it('should check table item single selection', () => {
             scrollIntoView(tablePageScrollingExample);
             setValue(tablePageScrollingExample + input, testText2);
@@ -372,15 +427,14 @@ describe('Table component test suite', function() {
             scrollIntoView(tablePageScrollingExample);
             scrollIntoView(tablePageScrollingExample + tableRow, 40);
 
-            expect(getText(tablePageScrollingExample + tableCellName, 40))
-                .toBe('Product name 40');
-            expect(getText(tablePageScrollingExample + tableCellDescription, 40))
-                .toBe('Product description goes here 40');
+            expect(getText(tablePageScrollingExample + tableCellName, 40)).toBe('Product name 40');
+            expect(getText(tablePageScrollingExample + tableCellDescription, 40)).toBe(
+                'Product description goes here 40'
+            );
         });
     });
 
-    describe('Check Initial State', function() {
-
+    describe('Check Initial State', function () {
         it('should check table item single selection', () => {
             scrollIntoView(tableInitialStateExample);
             setValue(tableInitialStateExample + input, testText3);
@@ -398,39 +452,35 @@ describe('Table component test suite', function() {
             click(tableInitialStateExample + tableCell);
             click(tableInitialStateExample + tableCell, 1);
 
-            expect(getAttributeByName(tableInitialStateExample + tableCell, 'aria-expanded'))
-                .toBe('false');
-            expect(getAttributeByName(tableInitialStateExample + tableCell, 'aria-expanded'))
-                .toBe('false');
+            expect(getAttributeByName(tableInitialStateExample + tableCell, 'aria-expanded')).toBe('false');
+            expect(getAttributeByName(tableInitialStateExample + tableCell, 'aria-expanded')).toBe('false');
             expect(doesItExist(tableInitialStateExample + tableRow)).toBe(false, 'table row still displayed');
         });
     });
 
-    describe('Check Table columns visibility and order', function() {
-
+    describe('Check Table columns visibility and order', function () {
         it('should check table item single selection', () => {
             findElementInTable(tableP13ColumnsExample, tableCellArr4);
         });
 
         it('should check searching and placeholder in dialog', () => {
-            checkPlaceholder(tableP13ColumnsExample);
+            checkPlaceholder(tableP13ColumnsExample, 2);
             checkSearchingInDialog();
         });
 
         it('should check sorting of columns', () => {
-            checkSortingColumns(tableP13ColumnsExample);
+            checkSortingColumns(tableP13ColumnsExample, ellipsisButton);
         });
     });
 
-    describe('Check Sorting by multiple columns', function() {
-
+    describe('Check Sorting by multiple columns', function () {
         it('should check table item single selection', () => {
             findElementInTable(tableP13SortExample, tableCellArr4);
         });
 
         it('should check sorting ascending and descending by name', () => {
             scrollIntoView(tableP13SortExample);
-            click(tableP13SortExample + button, 1);
+            click(tableP13SortExample + ellipsisButton);
             click(popoverDropdownButton);
             click(buttonSortedBy);
             click(footerButtonOk);
@@ -445,7 +495,7 @@ describe('Table component test suite', function() {
 
         it('should check sorting ascending and descending by price', () => {
             scrollIntoView(tableP13SortExample);
-            click(tableP13SortExample + button, 1);
+            click(tableP13SortExample + ellipsisButton);
             click(buttonAdd);
             click(buttonRemove);
             click(popoverDropdownButton);
@@ -462,16 +512,16 @@ describe('Table component test suite', function() {
         });
 
         it('should check searching and placeholder in dialog', () => {
-            checkPlaceholder(tableP13SortExample, 2);
+            checkPlaceholder(tableP13SortExample, 3);
         });
 
         it('should check sorting of columns', () => {
-            checkSortingColumns(tableP13SortExample, 2);
+            checkSortingColumns(tableP13SortExample, ellipsisButton, 1);
         });
 
         it('should check impossible select columns multiple times', () => {
             scrollIntoView(tableP13SortExample);
-            click(tableP13SortExample + button, 1);
+            click(tableP13SortExample + ellipsisButton);
             click(popoverDropdownButton);
             expect(isElementDisplayed(dropdownList)).toBe(true);
             click(dropdownOption);
@@ -485,18 +535,16 @@ describe('Table component test suite', function() {
             click(popoverDropdownButton, 4);
             expect(doesItExist(dropdownList)).toBe(false);
         });
-
     });
 
-    describe('Check Filtering by multiple columns', function() {
-
+    describe('Check Filtering by multiple columns', function () {
         it('should check table item single selection', () => {
             findElementInTable(tableP13FilterExample, tableCellArr5);
         });
 
         it('should check filtering with include and exclude', () => {
             scrollIntoView(tableP13FilterExample);
-            click(tableP13FilterExample + button, 1);
+            click(tableP13FilterExample + ellipsisButton);
             setValue(dialogInput, astroTestText);
             click(expandedButton, 1);
             click(popoverDropdownButton, 2);
@@ -508,16 +556,15 @@ describe('Table component test suite', function() {
             expect(rowLength).toEqual(1);
             expect(getText(tableP13FilterExample + tableRow + tableCellText)).toBe(testText4);
             expect(getText(tableP13FilterExample + tableRow + tableCellText, 1)).toBe(testText5);
-
         });
 
         it('should check searching and placeholder in dialog', () => {
-            checkPlaceholder(tableP13FilterExample, 2);
+            checkPlaceholder(tableP13FilterExample, 3);
             checkSearchingInDialog();
         });
 
         it('should check sorting of columns', () => {
-            checkSortingColumns(tableP13FilterExample, 2);
+            checkSortingColumns(tableP13FilterExample, ellipsisButton, 1);
         });
         // skipped due to https://github.com/SAP/fundamental-ngx/issues/7005
         xit('should check Exclude section in dialog always open', () => {
@@ -525,42 +572,43 @@ describe('Table component test suite', function() {
         });
     });
 
-    describe('Check Grouping by multiple columns', function() {
-
+    describe('Check Grouping by multiple columns', function () {
         it('should check table item single selection', () => {
             findElementInTable(tableP13GroupExample, tableCellArr4);
         });
 
         it('should check searching and placeholder in dialog', () => {
-            checkPlaceholder(tableP13GroupExample, 2);
+            checkPlaceholder(tableP13GroupExample, 3);
             checkSearchingInDialog();
         });
 
         it('should check sorting of columns', () => {
-            checkSortingColumns(tableP13GroupExample, 2);
-            click(tableP13FilterExample + button, 1);
-            expect(getAttributeByName(expandedButton, 'aria-expanded')).toBe('true');
+            checkSortingColumns(tableP13GroupExample, ellipsisButton, 1);
+            click(tableP13FilterExample + ellipsisButton);
+            expect(getAttributeByName(expandedOption, 'aria-expanded')).toBe('false');
         });
     });
 
-    describe('Check  Navigatable rows', function() {
-
+    describe('Check  Navigatable rows', function () {
         it('should check clickable elements', () => {
             scrollIntoView(tableNavigatableRowIndicatorExample);
             click(tableNavigatableRowIndicatorExample + button);
-            expect(isElementClickable(tableNavigatableRowIndicatorExample + button, 1))
-                .toBe(true, 'button isnt clickable');
+            expect(isElementClickable(tableNavigatableRowIndicatorExample + button, 1)).toBe(
+                true,
+                'button isnt clickable'
+            );
 
             const rowLength = getElementArrayLength(tableNavigatableRowIndicatorExample + tableRow);
             for (let i = 0; i < rowLength; i++) {
-                expect(isElementClickable(tableNavigatableRowIndicatorExample + tableRow, i))
-                    .toBe(true, `table row with index ${i} not clickable`);
+                expect(isElementClickable(tableNavigatableRowIndicatorExample + tableRow, i)).toBe(
+                    true,
+                    `table row with index ${i} not clickable`
+                );
             }
         });
     });
 
-    describe('Check placeholders', function() {
-
+    describe('Check placeholders', function () {
         it('should check placeholders in all input fields', () => {
             const inputLength = getElementArrayLength(inputFields);
             for (let i = 0; i < inputLength; i++) {
@@ -569,8 +617,7 @@ describe('Table component test suite', function() {
         });
     });
 
-    describe('Check playground', function() {
-
+    describe('Check playground', function () {
         it('should check table item single selection', () => {
             scrollIntoView(playgroundExample);
             setValue(playgroundExample + inputFields, tableCellArr[1]);
@@ -629,15 +676,15 @@ describe('Table component test suite', function() {
         it('should should check table without all borders', () => {
             scrollIntoView(playgroundExample);
             click(playgroundExample + checkbox, 2);
-            expect(getElementClass(playgroundExample + fdpTable))
-                .toContain('fd-table--no-horizontal-borders fd-table--no-vertical-borders');
+            expect(getElementClass(playgroundExample + fdpTable)).toContain(
+                'fd-table--no-horizontal-borders fd-table--no-vertical-borders'
+            );
         });
 
         it('should check busy indicator appearance', () => {
             scrollIntoView(playgroundExample);
             click(playgroundExample + checkbox, 5);
-            expect(isElementDisplayed(playgroundExample + busyIndicator))
-                .toBe(true, 'busy indicator not displayed');
+            expect(isElementDisplayed(playgroundExample + busyIndicator)).toBe(true, 'busy indicator not displayed');
         });
 
         it('should check changing title and hide element count', () => {
@@ -664,17 +711,15 @@ describe('Table component test suite', function() {
         expect(nonFilterRowCount).toEqual(16);
     });
 
-    describe('Check Custom component to render "No data" message', function() {
-
+    describe('Check Custom component to render "No data" message', function () {
         it('should check alert messages', () => {
-            checkAlertMessages(tableNoItemsTemplateExample, 1, 2);
+            checkAlertMessages(tableNoItemsTemplateExample);
         });
     });
 
-    describe('Check Semantic Highlighting', function() {
-
+    describe('Check Semantic Highlighting', function () {
         it('should check alert messages', () => {
-            checkAlertMessages(tableSemanticExample, 1, 2);
+            checkAlertMessages(tableSemanticExample);
         });
 
         it('should check table item single selection', () => {
@@ -682,15 +727,13 @@ describe('Table component test suite', function() {
         });
     });
 
-    describe('Check Row custom CSS class', function() {
-
+    describe('Check Row custom CSS class', function () {
         it('should check table item single selection', () => {
             findElementInTable(tableRowClassExample, tableCellArr);
         });
     });
     // skipped due to https://github.com/SAP/fundamental-ngx/issues/7010
-    xdescribe('Check input fields', function() {
-
+    xdescribe('Check input fields', function () {
         it('should check input fields does not change width', () => {
             const inputFieldLength = getElementArrayLength(allInputFields);
             for (let i = 0; i < inputFieldLength; i++) {
@@ -705,8 +748,7 @@ describe('Table component test suite', function() {
         });
     });
 
-    describe('Check orientation', function() {
-
+    describe('Check orientation', function () {
         it('should check RTL and LTR orientation', () => {
             const exampleAreaContainersArr = '.fd-doc-component';
             const rtlSwitcherArr = 'rtl-switch .fd-switch__handle';
@@ -727,21 +769,20 @@ describe('Table component test suite', function() {
         });
     });
 
-    xdescribe('Check visual regression', function() {
-
+    xdescribe('Check visual regression', function () {
         it('should check examples visual regression', () => {
             tablePage.saveExampleBaselineScreenshot();
             expect(tablePage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 
-    function checkAlertMessages(selector: string, index1: number, index2: number): void {
+    function checkAlertMessages(selector: string): void {
         scrollIntoView(selector + button);
-        click(selector + button, index1);
+        click(selector + buttonActionOne);
         expect(getAlertText()).toBe(alertTestText1);
         acceptAlert();
 
-        click(selector + button, index2);
+        click(selector + buttonActionTwo);
         expect(getAlertText()).toBe(alertTestText2);
         acceptAlert();
     }
@@ -758,8 +799,8 @@ describe('Table component test suite', function() {
         }
     }
 
-    function chooseSortOptionBy(selector: string, index: number): void {
-        click(selector + button, 1);
+    function chooseSortOptionBy(selector: string, transparentButton: string, index: number): void {
+        click(selector + transparentButton);
         click(buttonSortedBy, index);
         click(barButton);
     }
@@ -769,20 +810,19 @@ describe('Table component test suite', function() {
         click(selector + 'fd-checkbox');
         const checkboxLength = getElementArrayLength(selector + tableRow);
         for (let i = 0; i < checkboxLength; i++) {
-            expect(getAttributeByName(selector + tableRow, 'aria-selected', i))
-                .toBe('true');
+            expect(getAttributeByName(selector + tableRow, 'aria-selected', i)).toBe('true');
         }
     }
 
     function chooseFilter(indexFilter: number, indexBy): void {
         scrollIntoView(tableFilterableExample);
-        click(tableFilterableExample + button, 1);
+        click(tableFilterableExample + ellipsisButton);
         click(filterItem, indexFilter);
         click(filterByColorItem, indexBy);
         click(barButton);
     }
 
-    function checkPlaceholder(selector: string, index: number = 1): void {
+    function checkPlaceholder(selector: string, index: number = 0): void {
         scrollIntoView(selector);
         click(selector + button, index);
         expect(getElementPlaceholder(dialogCompactInput)).toBe(testTextSearch);
@@ -795,9 +835,9 @@ describe('Table component test suite', function() {
         expect(getText(dialogItemText)).toBe(testTextName);
     }
 
-    function checkSortingColumns(selector: string, index: number = 1): void {
+    function checkSortingColumns(selector: string, transparentButton: string, index: number = 0): void {
         scrollIntoView(selector);
-        click(selector + button, index);
+        click(selector + transparentButton, index);
         click(dialogMoveToBottom);
         click(dialogItem);
         click(footerButtonOk);
