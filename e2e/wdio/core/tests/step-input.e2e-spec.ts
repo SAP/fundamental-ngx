@@ -12,6 +12,7 @@ import {
     isElementClickable,
     scrollIntoView,
     browserIsFirefox,
+    clickRightMouseBtn,
     waitForElDisplayed
 } from '../../driver/wdio';
 import { sections } from '../fixtures/appData/step-input-content';
@@ -52,6 +53,13 @@ describe('Step input component test suit', () => {
         for (let i = 0; i < sections.length; i++) {
             checkIncDicValueByBtn(sections[i], '+');
             checkIncDicValueByBtn(sections[i], '-');
+        }
+    });
+
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6963
+    xit('should check increase/dicrease value by plus-minus buttons', () => {
+        for (let i = 0; i < sections.length; i++) {
+            checkClickByRightMouseBth(sections[i]);
         }
     });
 
@@ -127,6 +135,24 @@ describe('Step input component test suit', () => {
         stepInputPage.saveExampleBaselineScreenshot();
         expect(stepInputPage.compareWithBaseline()).toBeLessThan(5);
     });
+
+    function checkClickByRightMouseBth(section: string): void {
+        let inputLength = getElementArrayLength(section + input);
+        scrollIntoView(section);
+        for (let i = 0; i < inputLength; i++) {
+            let defaultValue = getValue(section + input, i);
+            clickRightMouseBtn(section + plusButton, i);
+            expect(getValue(section + input, i)).toEqual(
+                defaultValue,
+                'value changed by clickin on right mouse button'
+            );
+            clickRightMouseBtn(section + minusButton, i);
+            expect(getValue(section + input, i)).toEqual(
+                defaultValue,
+                'value changed by clickin on right mouse button'
+            );
+        }
+    }
 
     function checkInputWithInvalidValues(section: string): void {
         scrollIntoView(section);
