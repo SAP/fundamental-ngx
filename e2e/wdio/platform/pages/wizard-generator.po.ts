@@ -26,6 +26,7 @@ export class WizardGeneratorPO extends BaseComponentPo {
     nextStepBtn = '.fd-wizard__next-step .fd-button';
     nextStepBtn2 = '.fd-button[aria-label*="emphasized"]';
     listItemText = this.listItem + ' span';
+    errorMessage = '.fd-form-message--error span';
     input = '.fd-input';
     formLabel = '.fd-col-lg--5 .fd-form-label';
     editButton = '.fd-link';
