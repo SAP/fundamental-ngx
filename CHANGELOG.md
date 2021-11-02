@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.85 (2021-11-02)
+
+
+### Bug Fixes
+
+* **platform:** table navigation column width ([#7073](https://github.com/SAP/fundamental-ngx/issues/7073)) ([28ae176](https://github.com/SAP/fundamental-ngx/commit/28ae176c1ff143c66fd25a9e25ac7283e73b9dec))
+
 ## 0.33.0-rc.84 (2021-11-01)
 
 ## 0.33.0-rc.83 (2021-11-01)
