@@ -55,6 +55,17 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
         border-spacing: 0;
     }
 
+    /** Temporary until arrow keyboard navigation not implemented */
+    .fd-table__body:focus {
+        outline-offset: -0.1875rem;
+        outline-width: 0.0625rem;
+        outline-width: var(--sapContent_FocusWidth, 0.0625rem);
+        outline-color: #000;
+        outline-color: var(--sapContent_FocusColor, #000);
+        outline-style: dotted;
+        outline-style: var(--sapContent_FocusStyle, dotted);
+    }
+
     /** Fixes due to the absolute positioning */
     &.fd-table--tree,
     &.fd-table--group {
