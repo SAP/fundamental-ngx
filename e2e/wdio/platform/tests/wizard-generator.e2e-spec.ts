@@ -67,33 +67,51 @@ describe('Wizard generator test suite', () => {
     }, 1);
 
     describe('Default example', () => {
+        beforeEach(() => {
+            refreshPage();
+            waitForElDisplayed(WizardGeneratorPage.title);
+        }, 1);
         describe('Basic way', () => {
-            it('should check first step', () => {
+            it('should check basic way', () => {
                 completeFirstStep(defaultExample);
+                expect(getElementClass(defaultExample + step, 0)).toContain('completed', 'first step is not completed');
+                expect(getElementClass(defaultExample + step, 1)).toContain('current', 'you not moved to second step');
             });
 
             it('should check second step', () => {
+                completeFirstStep(defaultExample);
                 completeSecondStep(defaultExample);
+                expect(getElementClass(defaultExample + step, 1)).toContain(
+                    'completed',
+                    'second step is not completed'
+                );
+                expect(getElementClass(defaultExample + step, 2)).toContain('current', 'third step is not current');
             });
 
             it('should check third step and skip 4th step', () => {
+                completeFirstStep(defaultExample);
+                completeSecondStep(defaultExample);
                 completeThirdStep(defaultExample);
+                expect(getElementClass(defaultExample + step, 2)).toContain('completed', 'third step is not completed');
+                expect(getElementClass(defaultExample + step, 3)).toContain('completed', '4th step is not completed');
             });
 
             it('should check results', () => {
+                completeFirstStep(defaultExample);
+                completeSecondStep(defaultExample);
+                completeThirdStep(defaultExample);
                 checkResults(defaultExample);
             });
             it('should check editing', () => {
+                completeFirstStep(defaultExample);
+                completeSecondStep(defaultExample);
+                completeThirdStep(defaultExample);
+                checkResults(defaultExample);
                 checkEditing(defaultExample);
             });
         });
 
         describe('Other cases', () => {
-            beforeEach(() => {
-                refreshPage();
-                waitForElDisplayed(WizardGeneratorPage.title);
-            }, 1);
-
             it('should check validation first required field', () => {
                 checkFirstRequiredFieldValidation(defaultExample);
             });
@@ -118,23 +136,35 @@ describe('Wizard generator test suite', () => {
 
     describe('responsive example', () => {
         describe('Basic way', () => {
-            it('should check first step', () => {
+            it('should check basic way', () => {
                 completeFirstStep(responsiveExample);
-            });
-
-            it('should check second step', () => {
+                expect(getElementClass(responsiveExample + step, 0)).toContain(
+                    'completed',
+                    'first step is not completed'
+                );
+                expect(getElementClass(responsiveExample + step, 1)).toContain(
+                    'current',
+                    'you not moved to second step'
+                );
                 completeSecondStep(responsiveExample);
-            });
 
-            it('should check third step and skip 4th step', () => {
+                expect(getElementClass(responsiveExample + step, 1)).toContain(
+                    'completed',
+                    'second step is not completed'
+                );
+                expect(getElementClass(responsiveExample + step, 2)).toContain('current', 'third step is not current');
                 completeThirdStep(responsiveExample);
-            });
 
-            it('should check results', () => {
+                expect(getElementClass(responsiveExample + step, 2)).toContain(
+                    'completed',
+                    'third step is not completed'
+                );
+                expect(getElementClass(responsiveExample + step, 3)).toContain(
+                    'completed',
+                    '4th step is not completed'
+                );
+
                 checkResults(responsiveExample);
-            });
-            it('should check editing', () => {
-                checkEditing(responsiveExample);
             });
         });
 
@@ -168,27 +198,44 @@ describe('Wizard generator test suite', () => {
 
     describe('visible summary example', () => {
         describe('Basic way', () => {
-            it('should check first step', () => {
+            it('should check basic way', () => {
                 completeFirstStep(visibleSummaryExample);
-            });
+                expect(getElementClass(visibleSummaryExample + step, 0)).toContain(
+                    'completed',
+                    'first step is not completed'
+                );
+                expect(getElementClass(visibleSummaryExample + step, 1)).toContain(
+                    'current',
+                    'you not moved to second step'
+                );
 
-            it('should check second step', () => {
                 completeSecondStep(visibleSummaryExample);
-            });
+                expect(getElementClass(visibleSummaryExample + step, 1)).toContain(
+                    'completed',
+                    'second step is not completed'
+                );
+                expect(getElementClass(visibleSummaryExample + step, 2)).toContain(
+                    'current',
+                    'third step is not current'
+                );
 
-            it('should check third step and skip 4th step', () => {
                 completeThirdStep(visibleSummaryExample);
-            });
+                expect(getElementClass(visibleSummaryExample + step, 2)).toContain(
+                    'completed',
+                    'third step is not completed'
+                );
+                expect(getElementClass(visibleSummaryExample + step, 3)).toContain(
+                    'completed',
+                    '4th step is not completed'
+                );
 
-            it('should check results', () => {
                 checkResults(visibleSummaryExample);
-            });
-            // skipped for FF on macOS due to https://github.com/SAP/fundamental-ngx/issues/7038
-            if (!browserIsFirefox() && currentPlatformName() !== 'macOs') {
-                it('should check editing', () => {
+
+                // skipped for FF on macOS due to https://github.com/SAP/fundamental-ngx/issues/7038
+                if (!browserIsFirefox() && currentPlatformName() !== 'macOs') {
                     checkEditing(visibleSummaryExample);
-                });
-            }
+                }
+            });
         });
         describe('Other cases', () => {
             beforeEach(() => {
@@ -223,24 +270,38 @@ describe('Wizard generator test suite', () => {
 
     describe('external navigation example', () => {
         describe('Basic way', () => {
-            it('should check first step', () => {
+            it('should check basic way', () => {
                 completeFirstStep(externalNavigationExample);
-            });
+                expect(getElementClass(externalNavigationExample + step, 0)).toContain(
+                    'completed',
+                    'first step is not completed'
+                );
+                expect(getElementClass(externalNavigationExample + step, 1)).toContain(
+                    'current',
+                    'you not moved to second step'
+                );
 
-            it('should check second step', () => {
                 completeSecondStep(externalNavigationExample);
-            });
+                expect(getElementClass(externalNavigationExample + step, 1)).toContain(
+                    'completed',
+                    'second step is not completed'
+                );
+                expect(getElementClass(externalNavigationExample + step, 2)).toContain(
+                    'current',
+                    'third step is not current'
+                );
 
-            it('should check third step and skip 4th step', () => {
                 completeThirdStep(externalNavigationExample);
-            });
+                expect(getElementClass(externalNavigationExample + step, 2)).toContain(
+                    'completed',
+                    'third step is not completed'
+                );
+                expect(getElementClass(externalNavigationExample + step, 3)).toContain(
+                    'completed',
+                    '4th step is not completed'
+                );
 
-            it('should check results', () => {
                 checkResults(externalNavigationExample);
-            });
-
-            it('should check editing', () => {
-                checkEditing(externalNavigationExample);
             });
         });
         describe('Other cases', () => {
@@ -268,24 +329,38 @@ describe('Wizard generator test suite', () => {
 
     describe('customizable example', () => {
         describe('Basic way', () => {
-            it('should check first step', () => {
+            it('should check basic way', () => {
                 completeFirstStep(customizableGeneratorExample);
-            });
+                expect(getElementClass(customizableGeneratorExample + step, 0)).toContain(
+                    'completed',
+                    'first step is not completed'
+                );
+                expect(getElementClass(customizableGeneratorExample + step, 1)).toContain(
+                    'current',
+                    'you not moved to second step'
+                );
 
-            it('should check second step', () => {
                 completeSecondStep(customizableGeneratorExample);
-            });
+                expect(getElementClass(customizableGeneratorExample + step, 1)).toContain(
+                    'completed',
+                    'second step is not completed'
+                );
+                expect(getElementClass(customizableGeneratorExample + step, 2)).toContain(
+                    'current',
+                    'you not moved to third step'
+                );
 
-            it('should check third step and skip 4th step', () => {
                 completeThirdStep(customizableGeneratorExample);
-            });
+                expect(getElementClass(customizableGeneratorExample + step, 2)).toContain(
+                    'completed',
+                    'third step is not completed'
+                );
+                expect(getElementClass(customizableGeneratorExample + step, 3)).toContain(
+                    'completed',
+                    '4th step is not completed'
+                );
 
-            it('should check results', () => {
                 checkResults(customizableGeneratorExample);
-            });
-
-            it('should check editing', () => {
-                checkEditing(customizableGeneratorExample);
             });
         });
 
@@ -314,24 +389,38 @@ describe('Wizard generator test suite', () => {
 
     describe('summary object example', () => {
         describe('Basic way', () => {
-            it('should check first step', () => {
+            it('should check basic way', () => {
                 completeFirstStep(summaryObjectsExample);
-            });
+                expect(getElementClass(summaryObjectsExample + step, 0)).toContain(
+                    'completed',
+                    'first step is not completed'
+                );
+                expect(getElementClass(summaryObjectsExample + step, 1)).toContain(
+                    'current',
+                    'you not moved to second step'
+                );
 
-            it('should check second step', () => {
                 completeSecondStep(summaryObjectsExample);
-            });
+                expect(getElementClass(summaryObjectsExample + step, 1)).toContain(
+                    'completed',
+                    'second step is not completed'
+                );
+                expect(getElementClass(summaryObjectsExample + step, 2)).toContain(
+                    'current',
+                    'you not moved to third step'
+                );
 
-            it('should check third step and skip 4th step', () => {
                 completeThirdStep(summaryObjectsExample);
-            });
+                expect(getElementClass(summaryObjectsExample + step, 2)).toContain(
+                    'completed',
+                    'third step is not completed'
+                );
+                expect(getElementClass(summaryObjectsExample + step, 3)).toContain(
+                    'completed',
+                    '4th step is not completed'
+                );
 
-            it('should check results', () => {
                 checkResults(summaryObjectsExample);
-            });
-
-            it('should check editing', () => {
-                checkEditing(summaryObjectsExample);
             });
         });
 
@@ -422,36 +511,54 @@ describe('Wizard generator test suite', () => {
     });
 
     describe('dialog example', () => {
+        beforeEach(() => {
+            refreshPage();
+            waitForElDisplayed(WizardGeneratorPage.title);
+        }, 1);
+
         describe('Basic way', () => {
-            it('should check first step', () => {
-                refreshPage();
-                waitForElDisplayed(WizardGeneratorPage.title);
+            it('should check basic way', () => {
                 click(dialogExample + button);
                 completeFirstStep(dialog);
+                expect(getElementClass(dialog + step, 0)).toContain('completed', 'first step is not completed');
+                expect(getElementClass(dialog + step, 1)).toContain('current', 'you not moved to second step');
             });
-
             it('should check second step', () => {
+                click(dialogExample + button);
+                completeFirstStep(dialog);
                 completeSecondStep(dialog);
+                expect(getElementClass(dialog + step, 1)).toContain('completed', 'first step is not completed');
+                expect(getElementClass(dialog + step, 2)).toContain('current', 'you not moved to third step');
             });
 
-            it('should check third step and skip 4th step', () => {
+            it('should check third step', () => {
+                click(dialogExample + button);
+                completeFirstStep(dialog);
+                completeSecondStep(dialog);
                 completeThirdStep(dialog);
+                expect(getElementClass(dialog + step, 2)).toContain('completed', 'second step is not completed');
+                expect(getElementClass(dialog + step, 3)).toContain('completed', '4th step is not completed');
             });
 
             it('should check results', () => {
+                click(dialogExample + button);
+                completeFirstStep(dialog);
+                completeSecondStep(dialog);
+                completeThirdStep(dialog);
                 checkResults(dialog);
             });
+
             it('should check editing', () => {
+                click(dialogExample + button);
+                completeFirstStep(dialog);
+                completeSecondStep(dialog);
+                completeThirdStep(dialog);
+                checkResults(dialog);
                 checkEditing(dialog);
             });
         });
 
         describe('Other cases', () => {
-            beforeEach(() => {
-                refreshPage();
-                waitForElDisplayed(WizardGeneratorPage.title);
-            }, 1);
-
             it('should check validation first required field', () => {
                 click(dialogExample + button);
                 checkFirstRequiredFieldValidation(dialog);
@@ -480,26 +587,23 @@ describe('Wizard generator test suite', () => {
 
     describe('customizable dialog example', () => {
         describe('Basic way', () => {
-            it('should check first step', () => {
+            it('should check basic way', () => {
                 refreshPage();
                 waitForElDisplayed(WizardGeneratorPage.title);
                 click(customizableDialogExample + button);
                 completeFirstStep(dialog);
-            });
+                expect(getElementClass(dialog + step, 0)).toContain('completed', 'first step is not completed');
+                expect(getElementClass(dialog + step, 1)).toContain('current', 'you not moved to second step');
 
-            it('should check second step', () => {
                 completeSecondStep(dialog);
-            });
+                expect(getElementClass(dialog + step, 1)).toContain('completed', 'second step is not completed');
+                expect(getElementClass(dialog + step, 2)).toContain('current', 'you not moved to third step');
 
-            it('should check third step and skip 4th step', () => {
                 completeThirdStep(dialog);
-            });
+                expect(getElementClass(dialog + step, 2)).toContain('completed', 'first step is not completed');
+                expect(getElementClass(dialog + step, 3)).toContain('completed', '4th step is not completed');
 
-            it('should check results', () => {
                 checkResults(dialog);
-            });
-            it('should check editing', () => {
-                checkEditing(dialog);
             });
         });
         describe('Other cases', () => {
@@ -535,17 +639,18 @@ describe('Wizard generator test suite', () => {
 
     describe('condition dialog example', () => {
         describe('Basic way', () => {
-            it('should check first step', () => {
+            it('should check basic way', () => {
                 refreshPage();
                 scrollIntoView(branchingExample);
                 click(branchingExample + button);
                 completeFirstStep(dialog);
-            });
+                expect(getElementClass(dialog + step, 0)).toContain('completed', 'first step is not completed');
+                expect(getElementClass(dialog + step, 1)).toContain('current', 'you not moved to second step');
 
-            it('should check second step', () => {
                 completeSecondStep(dialog);
-            });
-            it('should check third', () => {
+                expect(getElementClass(dialog + step, 1)).toContain('completed', 'second step is not completed');
+                expect(getElementClass(dialog + step, 2)).toContain('current', 'you not moved to third step');
+
                 click(dialog + nextStepBtn2);
                 click(dialog + select);
                 const paymentMethod = getText(listItemText);
@@ -553,28 +658,24 @@ describe('Wizard generator test suite', () => {
 
                 click(listItem);
                 click(dialog + nextStepBtn2);
-            });
+                expect(getElementClass(dialog + step, 2)).toContain('completed', 'third step is not completed');
+                expect(getElementClass(dialog + step, 3)).toContain('current', 'you are not moved to 5th step');
 
-            it('should check 4th step and skip 5th step', () => {
                 setValue(dialog + input, cardDetails);
                 click(dialog + nextStepBtn2);
                 click(dialog + nextStepBtn2);
                 expect(getElementClass(dialog + step, 4)).toContain('completed', '5th step is not completed');
-            });
 
-            it('should check results', () => {
                 for (let i = 1; i < 6; i++) {
                     expect(getText(dialog + formLabel, i)).toBe(textArr[i - 1], 'value is not equal entered value');
                 }
                 // remove added value because it can force fail next result check
                 textArr.splice(3, 1);
-            });
 
-            it('should check editing', () => {
-                click(dialog + editButton, 3);
-                setValue(dialog + input, cardDetails2);
-                click(dialog + nextStepBtn2);
-                expect(getText(dialog + formLabel, 5)).toBe(cardDetails2, 'value is not equal changed value');
+                // click(dialog + editButton, 3);
+                // setValue(dialog + input, cardDetails2);
+                // click(dialog + nextStepBtn2);
+                // expect(getText(dialog + formLabel, 5)).toBe(cardDetails2, 'value is not equal changed value');
             });
         });
         describe('Other cases', () => {
@@ -616,27 +717,24 @@ describe('Wizard generator test suite', () => {
 
     describe('responsive dialog example', () => {
         describe('Basic way', () => {
-            it('should check first step', () => {
+            it('should check basic way', () => {
                 refreshPage();
                 waitForElDisplayed(WizardGeneratorPage.title);
                 scrollIntoView(responsiveDialogExample);
                 click(responsiveDialogExample + button);
                 completeFirstStep(dialog);
-            });
+                expect(getElementClass(dialog + step, 0)).toContain('completed', 'first step is not completed');
+                expect(getElementClass(dialog + step, 1)).toContain('current', 'you not moved to second step');
 
-            it('should check second step', () => {
                 completeSecondStep(dialog);
-            });
+                expect(getElementClass(dialog + step, 1)).toContain('completed', 'second step is not completed');
+                expect(getElementClass(dialog + step, 2)).toContain('current', 'you not moved to third step');
 
-            it('should check third step and skip 4th step', () => {
                 completeThirdStep(dialog);
-            });
+                expect(getElementClass(dialog + step, 2)).toContain('completed', 'first step is not completed');
+                expect(getElementClass(dialog + step, 3)).toContain('completed', '4th step is not completed');
 
-            it('should check results', () => {
                 checkResults(dialog);
-            });
-            it('should check editing', () => {
-                checkEditing(dialog);
             });
         });
 
@@ -822,11 +920,9 @@ describe('Wizard generator test suite', () => {
         ) {
             click(selector + nextStepBtn2);
         }
-        expect(getElementClass(selector + step, 0)).toContain('completed', 'first step is not completed');
     }
 
     function completeSecondStep(selector: string): void {
-        expect(getElementClass(selector + step, 1)).toContain('current', 'you not moved to second step');
         setValue(selector + input, name);
         setValue(selector + input, firstAdress, 1);
         setValue(selector + input, secondAdress, 2);
@@ -836,7 +932,6 @@ describe('Wizard generator test suite', () => {
             selector !== dialog
         ) {
             click(selector + nextStepBtn, 1);
-            expect(getElementClass(selector + step, 1)).toContain('completed', 'second step is not completed');
         }
         if (
             selector === externalNavigationExample ||
@@ -848,7 +943,6 @@ describe('Wizard generator test suite', () => {
     }
 
     function completeThirdStep(selector: string): void {
-        expect(getElementClass(selector + step, 2)).toContain('current', 'third step is not current');
         if (
             selector === externalNavigationExample ||
             selector === customizableGeneratorExample ||
@@ -867,7 +961,6 @@ describe('Wizard generator test suite', () => {
             click(selector + nextStepBtn, 2);
             click(selector + nextStepBtn, 3);
         }
-        expect(getElementClass(selector + step, 3)).toContain('completed', '4th step is not completed');
     }
 
     function checkResults(selector: string): void {
