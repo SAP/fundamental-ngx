@@ -19,6 +19,8 @@
     (keydown)="checkByKey($event)"
     (keyup)="handleInputKeyUp($event)"
     (click)="$event.stopPropagation()"
+    (blur)="onBlur()"
+    (focus)="onFocus()"
 />
 
 <label
