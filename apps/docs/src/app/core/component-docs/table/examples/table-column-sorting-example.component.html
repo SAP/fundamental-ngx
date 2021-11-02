@@ -23,8 +23,14 @@
                                 <i fd-list-icon [glyph]="'filter'"></i>
                                 <div fd-form-item [horizontal]="true" (click)="$event.stopPropagation()">
                                     <label fd-form-label for="input-1">Filter</label>
-                                    <input fd-form-control [compact]="true" id="input-1" (keyup)="inputKeyup($event)"
-                                           [(ngModel)]="filterVal" style="min-width: 164px;">
+                                    <input
+                                        fd-form-control
+                                        [compact]="true"
+                                        id="input-1"
+                                        (keyup)="inputKeyup($event)"
+                                        [(ngModel)]="filterVal"
+                                        style="min-width: 164px"
+                                    />
                                 </div>
                             </li>
                         </ul>
@@ -38,7 +44,7 @@
         </tr>
     </thead>
     <tbody fd-table-body>
-        <tr *ngFor="let row of displayedRows | sortBy: ascending: 'column1' | filter: filterVal : 'column1'" fd-table-row>
+        <tr *ngFor="let row of displayedRows | sortBy: ascending:'column1' | filter: filterVal:'column1'" fd-table-row>
             <td fd-table-cell class="fd-has-font-weight-semi">
                 <a href="#">{{ row.column1 }}</a>
             </td>

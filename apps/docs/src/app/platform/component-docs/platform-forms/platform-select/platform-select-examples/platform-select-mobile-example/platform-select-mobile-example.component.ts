@@ -21,7 +21,6 @@ export class Fruit {
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformSelectMobileExampleComponent {
-
     userList = [
         new Fruit('A', 'Apple', 10),
         new Fruit('B', 'orange', 70),
@@ -46,10 +45,10 @@ export class PlatformSelectMobileExampleComponent {
         dialogConfig: {
             width: '360px',
             height: '440px'
-            }
+        }
     };
 
     onSelect(item: FdpSelectionChangeEvent): void {
         this.selectedItem = item.payload;
     }
- }
+}

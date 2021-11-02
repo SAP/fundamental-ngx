@@ -14,6 +14,7 @@ import { PlatformInputModule, FdpFormGroupModule } from '@fundamental-ngx/platfo
 import { PlatformInputExampleComponent } from './platform-input-example/platform-input-example.component';
 import { PlatformInputReactiveValidationExampleComponent } from './platform-input-example/platform-input-reactive-validation-example.component';
 import { PlatformInputAutoCompleteValidationExampleComponent } from './platform-input-example/platform-input-auto-complete-validation-example.component';
+import { PlatformInputReactiveMinMaxValidationExampleComponent } from './platform-input-example/platform-input-reactive-min-max-validation-example.component';
 
 const routes: Routes = [
     {
@@ -35,7 +36,7 @@ const routes: Routes = [
         PlatformInputModule,
         PlatformButtonModule,
         SharedDocumentationPageModule,
-        RouterModule.forChild(routes),
+        RouterModule.forChild(routes)
     ],
     exports: [RouterModule],
     declarations: [
@@ -43,7 +44,8 @@ const routes: Routes = [
         PlatformInputHeaderComponent,
         PlatformInputDocsComponent,
         PlatformInputReactiveValidationExampleComponent,
-        PlatformInputAutoCompleteValidationExampleComponent
+        PlatformInputAutoCompleteValidationExampleComponent,
+        PlatformInputReactiveMinMaxValidationExampleComponent
     ]
 })
 export class PlatformInputDocsModule {}

@@ -10,19 +10,19 @@ export class ObjectIdentifierTableExampleComponent {
             column1: 'Apple',
             column1Description: 'Fruit',
             column2: 'USA',
-            column3: '1.50$',
+            column3: '1.50$'
         },
         {
             column1: 'Carrot',
             column1Description: 'Vegetable',
             column2: 'Uzbekistan',
-            column3: '3$',
+            column3: '3$'
         },
         {
             column1: 'Kiwi',
             column1Description: 'Fruit',
             column2: 'New Zealand',
-            column3: '5$',
+            column3: '5$'
         }
     ];
 }

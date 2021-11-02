@@ -12,7 +12,16 @@ import { FormMessageModule } from '@fundamental-ngx/core/form';
 
 @NgModule({
     declarations: [DatePickerComponent],
-    imports: [CommonModule, IconModule, PopoverModule, CalendarModule, FormsModule, InputGroupModule, ButtonModule, FormMessageModule],
+    imports: [
+        CommonModule,
+        IconModule,
+        PopoverModule,
+        CalendarModule,
+        FormsModule,
+        InputGroupModule,
+        ButtonModule,
+        FormMessageModule
+    ],
     exports: [DatePickerComponent]
 })
 export class DatePickerModule {}

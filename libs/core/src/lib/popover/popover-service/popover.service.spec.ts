@@ -5,7 +5,6 @@ import { PopoverBodyComponent } from '../popover-body/popover-body.component';
 import { BasePopoverClass } from '../base/base-popover.class';
 import { PopoverModule } from '../popover.module';
 
-
 @Component({
     template: `
         <fd-popover-body></fd-popover-body>
@@ -13,7 +12,7 @@ import { PopoverModule } from '../popover.module';
         <ng-container #container></ng-container>
         <div #triggerElement>trigger</div>
     `,
-    providers: [ PopoverService ]
+    providers: [PopoverService]
 })
 class PopoverTestComponent extends BasePopoverClass {
     @ViewChild(PopoverBodyComponent) popoverBody: PopoverBodyComponent;
@@ -45,7 +44,7 @@ describe('PopoverService', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             imports: [PopoverModule],
-            declarations: [PopoverTestComponent],
+            declarations: [PopoverTestComponent]
         }).compileComponents();
 
         fixture = TestBed.createComponent(PopoverTestComponent);
@@ -66,8 +65,8 @@ describe('PopoverService', () => {
 
         fixture.detectChanges();
 
-        expect((<any>service)._templateData).toEqual(componentInstance.getPopoverTemplateData())
-        expect((<any>service)._triggerElement).toBe(componentInstance.triggerRef)
+        expect((<any>service)._templateData).toEqual(componentInstance.getPopoverTemplateData());
+        expect((<any>service)._triggerElement).toBe(componentInstance.triggerRef);
         expect((<any>service)._refreshTriggerListeners).toHaveBeenCalled();
     });
 
@@ -83,8 +82,8 @@ describe('PopoverService', () => {
 
         fixture.detectChanges();
 
-        expect((<any>service)._triggerElement).toBe(componentInstance.triggerRef)
-        expect((<any>service)._popoverBody.text).toBe(testString)
+        expect((<any>service)._triggerElement).toBe(componentInstance.triggerRef);
+        expect((<any>service)._popoverBody.text).toBe(testString);
         expect((<any>service)._refreshTriggerListeners).toHaveBeenCalled();
     });
 
@@ -101,8 +100,8 @@ describe('PopoverService', () => {
         service.open();
         fixture.detectChanges();
 
-        expect((<any>service)._triggerElement).toBe(componentInstance.triggerRef)
-        expect((<any>service)._popoverBody._templateToDisplay).toBe(template)
+        expect((<any>service)._triggerElement).toBe(componentInstance.triggerRef);
+        expect((<any>service)._popoverBody._templateToDisplay).toBe(template);
         expect((<any>service)._refreshTriggerListeners).toHaveBeenCalled();
     });
 
@@ -172,9 +171,9 @@ describe('PopoverService', () => {
 
         service.refreshConfiguration(componentInstance);
 
-        expect(service.fillControlMode).toBe('at-least')
-        expect(service.noArrow).toBe(false)
-        expect(service.maxWidth).toBe(120)
+        expect(service.fillControlMode).toBe('at-least');
+        expect(service.noArrow).toBe(false);
+        expect(service.maxWidth).toBe(120);
     });
 
     it('should close', () => {
@@ -196,7 +195,6 @@ describe('PopoverService', () => {
         expect(service['_overlayRef'].hasAttached()).toBeFalsy();
         expect(service.isOpen).toBeFalse();
         expect(service.isOpenChange.emit).toHaveBeenCalledWith(false);
-
     });
 
     it('should toggle', () => {
@@ -236,10 +234,9 @@ describe('PopoverService', () => {
         (<any>service)._overlayRef.detach();
 
         expect(service.close).toHaveBeenCalled();
-
     });
 
-    it('shouldn\'t call close on inside click', () => {
+    it("shouldn't call close on inside click", () => {
         service.initialise(componentInstance.triggerRef, componentInstance, componentInstance.getPopoverTemplateData());
 
         service.open();
@@ -271,7 +268,9 @@ describe('PopoverService', () => {
 
         (<any>service)._applyWidthOverlay();
 
-        expect(componentInstance.popoverBody._popoverBodyMinWidth).toBe(componentInstance.triggerRef.nativeElement.offsetWidth);
+        expect(componentInstance.popoverBody._popoverBodyMinWidth).toBe(
+            componentInstance.triggerRef.nativeElement.offsetWidth
+        );
     });
 
     it('should resize overlay body equal, on refresh position', () => {
@@ -283,7 +282,9 @@ describe('PopoverService', () => {
 
         (<any>service)._applyWidthOverlay();
 
-        expect(componentInstance.popoverBody._popoverBodyWidth).toBe(componentInstance.triggerRef.nativeElement.offsetWidth);
+        expect(componentInstance.popoverBody._popoverBodyWidth).toBe(
+            componentInstance.triggerRef.nativeElement.offsetWidth
+        );
     });
 
     it('should toggle open state on trigger event', () => {
@@ -293,5 +294,5 @@ describe('PopoverService', () => {
         spyOn(service, 'toggle');
         componentInstance.triggerRef.nativeElement.dispatchEvent(mouseoverEvent);
         expect(service.toggle).toHaveBeenCalled();
-    })
+    });
 });

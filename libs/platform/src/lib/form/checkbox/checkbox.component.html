@@ -6,7 +6,7 @@
         [label]="label"
         [tristate]="tristate"
         [tristateSelectable]="tristateSelectable"
-        [state]="stateType"
+        [state]="state"
         [compact]="contentDensity === 'compact'"
         [title]="title"
         [required]="required"
@@ -15,6 +15,7 @@
         [ariaDescribedBy]="ariaDescribedBy"
         [ngModel]="checkboxCurrentValue"
         (ngModelChange)="onModelChange()"
+        (focusChange)="_onFocusChanged($event)"
     >
         <ng-content></ng-content>
     </fd-checkbox>

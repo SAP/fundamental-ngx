@@ -40,9 +40,9 @@ $block: fd-splitter;
     }
 
     @mixin fd-gradient($deg) {
-        background: #0854A0;
-        background: var(--sapUiHighlight, #0854A0);
-        background: linear-gradient($deg, rgba(8, 84,160, 0), rgba(8, 84,160, 1));
+        background: #0854a0;
+        background: var(--sapUiHighlight, #0854a0);
+        background: linear-gradient($deg, rgba(8, 84, 160, 0), rgba(8, 84, 160, 1));
         /** SCSS has rgba(...) function but variables doesn't supported there. */
     }
 
@@ -57,7 +57,7 @@ $block: fd-splitter;
     @mixin fd-splitter-resizer-decoration() {
         .#{$block}__resizer-decoration-before,
         .#{$block}__resizer-decoration-after {
-                @content;
+            @content;
         }
     }
 
@@ -207,8 +207,8 @@ $block: fd-splitter;
         &.#{$block}__resizer:active,
         &.#{$block}__resizer--active {
             @include fd-splitter-resizer-decoration {
-                background: #0854A0;
-                background: var(--sapUiHighlight, #0854A0);
+                background: #0854a0;
+                background: var(--sapUiHighlight, #0854a0);
             }
         }
 
@@ -283,7 +283,7 @@ $block: fd-splitter;
                     width: 0.5rem;
                     height: 0.5rem;
                     background: #0854a0;
-                    background: var(--sapUiContentIconColor, #0854a0)
+                    background: var(--sapUiContentIconColor, #0854a0);
                 }
             }
         }

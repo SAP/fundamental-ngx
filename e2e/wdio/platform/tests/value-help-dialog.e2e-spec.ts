@@ -16,19 +16,49 @@ import {
     basicSearchId,
     conditionsValues,
     customLabels,
-    inputIDs,
+    inputIDs
 } from '../fixtures/appData/value-help-dialog-contents';
 import { searchValues, valueOne, valueZero } from '../fixtures/testData/value-help-dialog';
 
-describe('Value help dialog test suite', function() {
+describe('Value help dialog test suite', () => {
     const valueHelpDialogPage = new ValueHelpDialogPo();
     const {
-        dialogHeader, openDialogBtn, formInputField, goBtn, tableRows, pageHeader, tableCheckboxes,
-        selectedItemName, selectedTokens, formTabs, addBtn, dialogContainer, footerBtns, productNameColumn,
-        productCodeColumn, productCityColumn, productZipcodeColumn, productAddressColumn, productNicknameColumn,
-        conditionSelectors, conditionsInputField, dropdownOptions, selectedItemID, miniOpenDialogBtn,
-        menuDialogBtn, menuCheckboxes, inputToken, menuItemNames, advSearchLabels, tableColumn,
-        advSearchOptions, advSearchToggle, tableCheckboxesFF, mobileExampleDialog, xBtn, showAllBtn
+        dialogHeader,
+        openDialogBtn,
+        formInputField,
+        goBtn,
+        tableRows,
+        pageHeader,
+        tableCheckboxes,
+        selectedItemName,
+        selectedTokens,
+        formTabs,
+        addBtn,
+        dialogContainer,
+        footerBtns,
+        productNameColumn,
+        productCodeColumn,
+        productCityColumn,
+        productZipcodeColumn,
+        productAddressColumn,
+        productNicknameColumn,
+        conditionSelectors,
+        conditionsInputField,
+        dropdownOptions,
+        selectedItemID,
+        miniOpenDialogBtn,
+        menuDialogBtn,
+        menuCheckboxes,
+        inputToken,
+        menuItemNames,
+        advSearchLabels,
+        tableColumn,
+        advSearchOptions,
+        advSearchToggle,
+        tableCheckboxesFF,
+        mobileExampleDialog,
+        xBtn,
+        showAllBtn
     } = valueHelpDialogPage;
 
     beforeAll(() => {
@@ -40,7 +70,7 @@ describe('Value help dialog test suite', function() {
         waitForElDisplayed(pageHeader);
     }, 1);
 
-    describe('Basic Value Help Dialog examples', function() {
+    describe('Basic Value Help Dialog examples', () => {
         it('should check default view and header', () => {
             click(openDialogBtn);
             // skip due to https://github.com/SAP/fundamental-ngx/issues/4573
@@ -62,8 +92,14 @@ describe('Value help dialog test suite', function() {
             click(advSearchToggle);
             click(showAllBtn);
             const advSearchFieldCount = 6;
-            const searchResultsColumnsArr = [productNameColumn, productCodeColumn, productCityColumn, productZipcodeColumn,
-                productAddressColumn, productNicknameColumn];
+            const searchResultsColumnsArr = [
+                productNameColumn,
+                productCodeColumn,
+                productCityColumn,
+                productZipcodeColumn,
+                productAddressColumn,
+                productNicknameColumn
+            ];
 
             for (let i = 0; advSearchFieldCount > i; i++) {
                 click(formInputField(inputIDs[i]));
@@ -144,7 +180,7 @@ describe('Value help dialog test suite', function() {
         });
     });
 
-    describe('custom strategy labels examples', function() {
+    describe('custom strategy labels examples', () => {
         // TODO: enable after resolving https://github.com/SAP/fundamental-ngx/issues/4957
         xit('should check define conditions custom labels', () => {
             scrollIntoView(openDialogBtn, 1);
@@ -172,7 +208,7 @@ describe('Value help dialog test suite', function() {
         });
     });
 
-    describe('token display function for the value help dialog examples', function() {
+    describe('token display function for the value help dialog examples', () => {
         it('should check custom tokens', () => {
             scrollIntoView(openDialogBtn, 2);
             click(openDialogBtn, 2);
@@ -183,7 +219,7 @@ describe('Value help dialog test suite', function() {
         });
     });
 
-    describe('selection in value help dialog examples', function() {
+    describe('selection in value help dialog examples', () => {
         it('should check single selection results', () => {
             scrollIntoView(miniOpenDialogBtn);
             click(miniOpenDialogBtn);
@@ -217,7 +253,7 @@ describe('Value help dialog test suite', function() {
         });
     });
 
-    describe('multi input field with value help dialog examples', function() {
+    describe('multi input field with value help dialog examples', () => {
         it('should check selection from mini dialog menu', () => {
             scrollIntoView(menuDialogBtn);
             click(menuDialogBtn);
@@ -239,7 +275,7 @@ describe('Value help dialog test suite', function() {
         });
     });
 
-    describe('should check orientation', function() {
+    describe('should check orientation', () => {
         it('should check RTL and LTR orientations', () => {
             valueHelpDialogPage.checkRtlSwitch();
         });
@@ -255,6 +291,6 @@ describe('Value help dialog test suite', function() {
     }
 
     function clickTableCheckbox(index: number): void {
-        return (browserIsFirefox() ? click(tableCheckboxesFF, index) : click(tableCheckboxes, index));
+        return browserIsFirefox() ? click(tableCheckboxesFF, index) : click(tableCheckboxes, index);
     }
 });

@@ -17,7 +17,8 @@ class TableComponentMock
             | 'openTableFilterSettings'
             | 'openTableGroupSettings'
             | 'openTableColumnSettings'
-        > {
+        >
+{
     openTableSortSettings = new EventEmitter();
     openTableFilterSettings = new EventEmitter();
     openTableGroupSettings = new EventEmitter();

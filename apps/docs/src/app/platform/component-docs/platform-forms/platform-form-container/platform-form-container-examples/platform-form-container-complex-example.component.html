@@ -11,12 +11,7 @@
     >
         <fdp-textarea name="basicTextarea22" [formControl]="ff1.formControl"></fdp-textarea>
     </fdp-form-field>
-    <fdp-form-field
-        #ff8 id="switch1"
-        label="Switch"
-        column="1"
-        rank="2"
-    >
+    <fdp-form-field #ff8 id="switch1" label="Switch" column="1" rank="2">
         <fdp-switch
             [formControl]="ff8.formControl"
             name="switch-1"
@@ -28,13 +23,7 @@
         </fdp-switch>
     </fdp-form-field>
 
-    <fdp-form-field
-        #ff3 label="Input Field"
-        id="inputField"
-        column="1"
-        rank="3"
-        placeholder="Field placeholder text"
-    >
+    <fdp-form-field #ff3 label="Input Field" id="inputField" column="1" rank="3" placeholder="Field placeholder text">
         <fdp-input name="inputField" id="inputField" type="text" [formControl]="ff3.formControl"> </fdp-input>
     </fdp-form-field>
     <fdp-form-field

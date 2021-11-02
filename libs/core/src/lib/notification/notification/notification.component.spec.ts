@@ -35,12 +35,14 @@ describe('NotificationComponent', () => {
     let fixture: ComponentFixture<NotificationComponent>;
     let notificationService: NotificationService;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [TestModule, RouterTestingModule],
-            providers: [DynamicComponentService, NotificationService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [TestModule, RouterTestingModule],
+                providers: [DynamicComponentService, NotificationService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(NotificationComponent);

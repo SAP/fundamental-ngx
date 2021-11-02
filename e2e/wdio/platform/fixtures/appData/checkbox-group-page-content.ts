@@ -9,7 +9,13 @@ export const hobbiesArr = ['Cooking', 'Painting', 'Coding', 'Gardening'];
 export const europeanCountriesArr = ['Italy', 'France', 'Switzerland', 'Austria'];
 export const reptilesArr = ['Snakes', 'Crocodiles', 'Lizards', 'Elephants'];
 export const threeFruitsArr = ['Apple', 'Banana', 'Grapes'];
+export const qualificationCheckboxesArr = ['Graduated', 'Engineering completed', '5 year of work experience'];
+export const subjectsArr = ['Math', 'Chemistry', 'Physics', 'Biology'];
 export const errorTooltipMessage = 'Value is required.';
+export const graduationErrorMessage = 'Graduation is mandatory';
+export const engineeringErrorMessage = 'Engineering is mandatory';
+export const workExpierenceErrorMessage = 'Minimum 5 years of work experience required';
 export const markingsStyle = 'flex';
 export const seasonsOutputLabel = 'Seasons: ';
-
+export const currencies = ['AUD', 'INR', 'USD'];
+export const purchasedItemsArr = ['coffee', 'pen', 'chair'];

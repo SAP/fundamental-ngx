@@ -7,12 +7,7 @@ import { PlatformTimePickerComponent } from './time-picker.component';
 
 @NgModule({
     declarations: [PlatformTimePickerComponent],
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        TimePickerModule
-    ],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, TimePickerModule],
     exports: [PlatformTimePickerComponent]
 })
 export class PlatformTimePickerModule {}

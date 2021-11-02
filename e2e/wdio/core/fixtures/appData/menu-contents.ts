@@ -1,1 +1,1 @@
-export const emptyValuesArr = ['', '\"\"', null, undefined];
+export const emptyValuesArr = ['', '""', null, undefined];

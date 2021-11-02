@@ -35,7 +35,13 @@ import * as selectSemanticStateTs from '!raw-loader!./examples/select-semantic-s
 @Component({
     selector: 'fd-select-docs',
     templateUrl: './select-docs.component.html',
-    styles: [`ul > li:not(:last-child) { margin-bottom: 0.5rem }`]
+    styles: [
+        `
+            ul > li:not(:last-child) {
+                margin-bottom: 0.5rem;
+            }
+        `
+    ]
 })
 export class SelectDocsComponent {
     selectMode: ExampleFile[] = [
@@ -52,13 +58,13 @@ export class SelectDocsComponent {
         {
             language: 'html',
             code: selectMobileHtml,
-            fileName: 'select-mobile-example',
+            fileName: 'select-mobile-example'
         },
         {
             language: 'typescript',
             component: 'SelectMobileExampleComponent',
             code: selectMobileTs,
-            fileName: 'select-mobile-example',
+            fileName: 'select-mobile-example'
         }
     ];
 
@@ -68,7 +74,6 @@ export class SelectDocsComponent {
             code: selectProgressiveHtml,
             fileName: 'select-programmatic-example',
             scssFileCode: selectProgressiveScss
-
         },
         {
             language: 'typescript',
@@ -120,7 +125,6 @@ export class SelectDocsComponent {
             language: 'html',
             code: selectFormHtml,
             fileName: 'select-forms'
-
         },
         {
             language: 'typescript',

@@ -26,8 +26,8 @@
 }
 
 .fd-multi-input-popover-custom.fd-popover-custom {
-	max-width: 100%;
-	display: block;
+    max-width: 100%;
+    display: block;
 
     .fd-tokenizer {
         height: 100%;
@@ -49,9 +49,9 @@
 }
 
 .fd-multi-input-show-all {
-	width: 100%;
-	display: flex;
-	justify-content: flex-end;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
     background-color: transparent;
     .fd-link:active {
         color: inherit;
@@ -72,5 +72,5 @@
 }
 
 .fd-popover__body--hidden {
-	display: none;
+    display: none;
 }

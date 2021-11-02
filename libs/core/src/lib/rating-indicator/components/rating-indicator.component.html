@@ -4,7 +4,7 @@
     <!-- Available rate values -->
     <ng-container *ngFor="let rate of _rates; index as i; trackBy: trackByFn">
         <input
-            [attr.aria-label]="(i + 1) + '-star'"
+            [attr.aria-label]="i + 1 + '-star'"
             type="radio"
             class="fd-rating-indicator__input"
             [disabled]="disabled"
@@ -12,7 +12,8 @@
             name="rating-{{ viewRatingUID }}"
             [value]="rate.value"
             [checked]="viewValue === rate.value"
-            (focus)="onSelect(rate.value)" />
+            (focus)="onSelect(rate.value)"
+        />
         <label class="fd-rating-indicator__label" [for]="rate.id">
             <i *ngIf="ratedIcon" class="rated" [ngClass]="unratedIcon"></i>
             <i *ngIf="unratedIcon" class="unrated" [ngClass]="ratedIcon"></i>
@@ -25,7 +26,8 @@
     *ngIf="displayAllRatings && _ratingItems?.length; else dynamicText"
     class="fd-rating-indicator__dynamic-text"
 >
-    (<span area-label="Total raiting" fd-link>{{ totalRatings }}</span>)
+    (<span area-label="Total raiting" fd-link>{{ totalRatings }}</span
+    >)
 </span>
 <fd-popover
     #allRatingContent
@@ -37,7 +39,10 @@
     <div class="rate-sum-row" [ngClass]="sizeClass" *ngFor="let rating of _ratingItems; trackBy: trackByFn">
         <div class="fd-rating-indicator__container rates">
             <ng-container *ngFor="let rate of _rates; trackBy: trackByFn">
-                <span [class.fd-rating-indicator__input-checked]="rate.value === rating.rate" class="fd-rating-indicator__input"></span>
+                <span
+                    [class.fd-rating-indicator__input-checked]="rate.value === rating.rate"
+                    class="fd-rating-indicator__input"
+                ></span>
                 <label class="fd-rating-indicator__label">
                     <i *ngIf="ratedIcon" class="rated" [ngClass]="unratedIcon"></i>
                     <i *ngIf="unratedIcon" class="unrated" [ngClass]="ratedIcon"></i>
@@ -50,8 +55,9 @@
 
 <ng-template #dynamicText>
     <span *ngIf="totalRatings" class="fd-rating-indicator__dynamic-text">({{ totalRatings }})</span>
-    <span *ngIf="!totalRatings" class="fd-rating-indicator__dynamic-text">({{ viewValue }} {{ dynamicTextIndicator }}
-        {{ indicatorCount }})</span>
+    <span *ngIf="!totalRatings" class="fd-rating-indicator__dynamic-text"
+        >({{ viewValue }} {{ dynamicTextIndicator }} {{ indicatorCount }})</span
+    >
 </ng-template>
 <ng-template #zeroRate let-halves="halves">
     <input
@@ -60,7 +66,8 @@
         class="fd-rating-indicator__zero-rating fd-rating-indicator__input"
         (focus)="onSelect(0)"
         [disabled]="disabled"
-        name="rating-{{ viewRatingUID }}{{halves ? '-halves' : '' }}"
-        [checked]="viewValue === 0" />
+        name="rating-{{ viewRatingUID }}{{ halves ? '-halves' : '' }}"
+        [checked]="viewValue === 0"
+    />
     <label class="fd-rating-indicator__zero-rating fd-rating-indicator__label"></label>
 </ng-template>

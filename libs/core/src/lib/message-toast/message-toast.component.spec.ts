@@ -9,11 +9,7 @@ import { DynamicComponentService } from '../utils/dynamic-component/dynamic-comp
 import { MessageToastConfig } from './message-toast-utils/message-toast-config';
 
 @Component({
-    template: `
-        <ng-template #testTemplate let-messageToast>
-            Message Toast Test Content
-        </ng-template>
-    `
+    template: ` <ng-template #testTemplate let-messageToast> Message Toast Test Content </ng-template> `
 })
 class TemplateTestComponent {
     @ViewChild('testTemplate', { static: true }) templateRef: TemplateRef<any>;
@@ -32,11 +28,13 @@ describe('MessageToastComponent', () => {
     let fixture: ComponentFixture<MessageToastComponent>;
     let service: MessageToastService;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [TestModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [TestModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MessageToastComponent);

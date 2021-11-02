@@ -9,13 +9,7 @@ import { FeedInputComponent } from './feed-input.component';
 
 @NgModule({
     declarations: [FeedInputComponent],
-    imports: [
-        CommonModule,
-        AvatarModule,
-        FormControlModule,
-        FormsModule,
-        PlatformButtonModule
-    ],
+    imports: [CommonModule, AvatarModule, FormControlModule, FormsModule, PlatformButtonModule],
     exports: [FeedInputComponent]
 })
-export class PlatformFeedInputModule { }
+export class PlatformFeedInputModule {}

@@ -18,6 +18,5 @@ export const CSS_CLASS_NAME = {
     colOffsetPrefix: 'fd-col--offset-',
     mdColOffsetPrefix: 'fd-col-md--offset-',
     lgColOffsetPrefix: 'fd-col-lg--offset-',
-    xlColOffsetPrefix: 'fd-col-xl--offset-',
-
+    xlColOffsetPrefix: 'fd-col-xl--offset-'
 } as const;

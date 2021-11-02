@@ -21,10 +21,10 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
+import { FocusKeyManager } from '@angular/cdk/a11y';
+import { CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
 import { fromEvent, Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
-import { CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
-import { FocusKeyManager } from '@angular/cdk/a11y';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
 import { FixedCardLayoutItemComponent } from './fixed-card-layout-item/fixed-card-layout-item.component';
@@ -99,12 +99,11 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     @Output()
     cardDraggedDropped: EventEmitter<CardDropped> = new EventEmitter<CardDropped>();
 
-    /** Array of CardDefinitionDirective Array.To make Table kind of layout.*/
-    public columns: CardColumn[];
+    /** @hidden Array of CardDefinitionDirective Array.To make Table kind of layout.*/
+    _columns: CardColumn[];
 
-    /** handles rtl service
-     * @hidden */
-    public dir: string;
+    /** handles rtl service */
+    dir: string;
 
     /** @hidden Number of Columns in layout */
     private _numberOfColumns: number;
@@ -121,7 +120,10 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     /** @hidden FocusKeyManager instance */
     private _keyboardEventsManager: FocusKeyManager<FixedCardLayoutItemComponent>;
 
-    constructor(private readonly _changeDetector: ChangeDetectorRef, @Optional() private _rtlService: RtlService) {}
+    constructor(
+        private readonly _changeDetector: ChangeDetectorRef,
+        @Optional() private readonly _rtlService: RtlService
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -194,7 +196,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     }
 
     /** Distribute cards on window resize */
-    public updateLayout(): void {
+    updateLayout(): void {
         this._numberOfColumns = this._getNumberOfColumns();
         if (this._previousNumberOfColumns !== this._numberOfColumns) {
             this._previousNumberOfColumns = this._numberOfColumns;
@@ -203,7 +205,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
     }
 
     /** Return available width for fd-card-layout */
-    public getWidthAvailable(): number {
+    getWidthAvailable(): number {
         return this.layout.nativeElement.getBoundingClientRect().width;
     }
 
@@ -271,7 +273,7 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
         // convert latest cards queryList to Array of cards
         this._cardsArray = this.cards.toArray();
         this._initializeColumns(this._numberOfColumns);
-        this._distributeCards(this.columns);
+        this._distributeCards(this._columns);
         this._changeDetector.detectChanges();
     }
 
@@ -279,9 +281,9 @@ export class FixedCardLayoutComponent implements OnInit, AfterContentInit, After
      * @hidden Initialize columns with empty arrays
      */
     private _initializeColumns(numberOfColumns: number): void {
-        this.columns = [];
+        this._columns = [];
         for (let i = 0; i < numberOfColumns; i++) {
-            this.columns.push([]);
+            this._columns.push([]);
         }
     }
 

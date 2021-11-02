@@ -3,14 +3,18 @@ import { Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { WizardDialogGeneratorService, WizardGeneratorFormsValue, WizardGeneratorItem, WizardTitle } from '@fundamental-ngx/platform/wizard-generator';
+import {
+    WizardDialogGeneratorService,
+    WizardGeneratorFormsValue,
+    WizardGeneratorItem,
+    WizardTitle
+} from '@fundamental-ngx/platform/wizard-generator';
 
 @Component({
-  selector: 'fdp-wizard-generator-customizable-example',
-  templateUrl: './wizard-generator-customizable-example.component.html'
+    selector: 'fdp-wizard-generator-customizable-example',
+    templateUrl: './wizard-generator-customizable-example.component.html'
 })
 export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
-
     @ViewChild('goNextTemplate') goNextTemplate: TemplateRef<any>;
     @ViewChild('goBackTemplate') goBackTemplate: TemplateRef<any>;
     @ViewChild('finishTemplate') finishTemplate: TemplateRef<any>;
@@ -124,9 +128,7 @@ export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
     /** An RxJS Subject that will kill the data stream upon component’s destruction (for unsubscribing)  */
     private readonly _onDestroy$: Subject<void> = new Subject<void>();
 
-    constructor(
-        private _wizardDialogService: WizardDialogGeneratorService
-    ) { }
+    constructor(private _wizardDialogService: WizardDialogGeneratorService) {}
 
     ngOnDestroy(): void {
         this._onDestroy$.next();
@@ -134,28 +136,33 @@ export class WizardGeneratorCustomizableExampleComponent implements OnDestroy {
     }
 
     openDialog(): void {
-        this._wizardDialogService.open({
-            width: '100%',
-            height: '100%',
-            verticalPadding: false,
-            data: {
-                items: this.stepItems,
-                appendToWizard: false,
-                displaySummaryStep: true,
-                responsivePaddings: true,
-                title: this.wizardTitle,
-                goNextButtonTemplate: this.goNextTemplate,
-                goBackButtonTemplate: this.goBackTemplate,
-                finishButtonTemplate: this.finishTemplate,
-                cancelButtonTemplate: this.cancelTemplate,
-                confirmationDialogTemplate: this.confirmationDialogTemplate,
-                summaryStepTemplate: this.summaryStepTemplate,
-                reviewButtonTemplate: this.reviewButtonTemplate
-            }
-        }).afterClosed.pipe(takeUntil(this._onDestroy$))
-        .subscribe((wizardValue: WizardGeneratorFormsValue) => {
-            this.wizardValue = wizardValue;
-        }, () => {});
+        this._wizardDialogService
+            .open({
+                width: '100%',
+                height: '100%',
+                verticalPadding: false,
+                data: {
+                    items: this.stepItems,
+                    appendToWizard: false,
+                    displaySummaryStep: true,
+                    responsivePaddings: true,
+                    title: this.wizardTitle,
+                    goNextButtonTemplate: this.goNextTemplate,
+                    goBackButtonTemplate: this.goBackTemplate,
+                    finishButtonTemplate: this.finishTemplate,
+                    cancelButtonTemplate: this.cancelTemplate,
+                    confirmationDialogTemplate: this.confirmationDialogTemplate,
+                    summaryStepTemplate: this.summaryStepTemplate,
+                    reviewButtonTemplate: this.reviewButtonTemplate
+                }
+            })
+            .afterClosed.pipe(takeUntil(this._onDestroy$))
+            .subscribe(
+                (wizardValue: WizardGeneratorFormsValue) => {
+                    this.wizardValue = wizardValue;
+                },
+                () => {}
+            );
     }
 
     _editStep(event: MouseEvent, stepId: string, callback: (stepId: string) => void): void {

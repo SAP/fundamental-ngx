@@ -4,6 +4,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
     selector: 'fdp-platform-form-group-example',
     templateUrl: './platform-form-group-example.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    encapsulation: ViewEncapsulation.None,
+    encapsulation: ViewEncapsulation.None
 })
 export class PlatformFormGroupExampleComponent {}

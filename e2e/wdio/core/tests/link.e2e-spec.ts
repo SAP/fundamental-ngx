@@ -1,11 +1,7 @@
 import { LinkPo } from '../pages/link.po';
-import {
-    getElementArrayLength,
-    isElementClickable,
-    refreshPage,
-} from '../../driver/wdio';
+import { getElementArrayLength, isElementClickable, refreshPage } from '../../driver/wdio';
 
-describe('Link test suite', function() {
+describe('Link test suite', () => {
     const linkPage = new LinkPo();
     const { links } = linkPage;
 
@@ -17,7 +13,7 @@ describe('Link test suite', function() {
         refreshPage();
     }, 1);
 
-    describe('check links', function() {
+    describe('check links', () => {
         it('should check links clickable', () => {
             const linkCount = getElementArrayLength(links);
             const disabledLinkIndex = 2;
@@ -32,11 +28,11 @@ describe('Link test suite', function() {
         });
 
         it('should check orientation', () => {
-           linkPage.checkRtlSwitch();
+            linkPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('visual regression', function() {
+    xdescribe('visual regression', () => {
         it('should check examples visual regression', () => {
             linkPage.saveExampleBaselineScreenshot();
             expect(linkPage.compareWithBaseline()).toBeLessThan(5);

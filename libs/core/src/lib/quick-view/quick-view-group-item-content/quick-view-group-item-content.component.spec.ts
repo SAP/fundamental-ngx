@@ -6,11 +6,13 @@ describe('QuickViewGroupItemContentComponent', () => {
     let component: QuickViewGroupItemContentComponent;
     let fixture: ComponentFixture<QuickViewGroupItemContentComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [QuickViewGroupItemContentComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [QuickViewGroupItemContentComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(QuickViewGroupItemContentComponent);

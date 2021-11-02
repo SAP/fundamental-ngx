@@ -20,12 +20,12 @@ export class DatePicker extends BaseComponentPo {
     buttonSelectMonth = '.fd-calendar__action:nth-child(2) .fd-button';
     buttonSelectYearsRange = '.fd-calendar__action:nth-child(2) .fd-button';
 
-    buttonFirstRangeYear = '(//td[contains(@id,"fd-aggregated-year")]/child::span)[1]';
+    buttonFirstRangeYear = '(//td[contains(@id,"-view-aggregated-years")]/child::span)[1]';
     buttonFirstYear = '(//td[contains(@id,"year")]/child::span)[1]';
     buttonFirstMonth = '(//td[contains(@id,"month")]/child::span)[1]';
 
     filterCalendarValue = (name: string): string => {
-        return `//td[contains(@id,"fd-${name}")]`;
+        return `//td[contains(@id,"-view-${name}")]`;
     };
 
     dayInCalendarButtonByValue = (index: string): string => {
@@ -33,14 +33,14 @@ export class DatePicker extends BaseComponentPo {
     };
 
     yearInCalendarByValue = (year: number): string => {
-        return `[aria-label="${year}"]`
+        return `[data-fd-calendar-year="${year}"]`;
     };
 
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
         waitForPresent(this.inputDatePicker);
-    };
+    }
 
     getScreenshotFolder(): object {
         return super.getScreenshotFolder(this.url);

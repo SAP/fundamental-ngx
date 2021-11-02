@@ -33,22 +33,34 @@ export class AutoCompleteDirective {
     @Output()
     readonly onComplete: EventEmitter<AutoCompleteEvent> = new EventEmitter<AutoCompleteEvent>();
 
+    /** @hidden */
     private readonly _completeKeys: number[] = [ENTER];
 
+    /** @hidden */
     private readonly _fillKeys: number[] = [LEFT_ARROW, RIGHT_ARROW];
 
+    /** @hidden */
     private readonly _stopKeys: number[] = [BACKSPACE, DELETE, ESCAPE];
 
+    /** @hidden */
     private _oldValue: string;
+
+    /** @hidden */
     private _lastKeyUpEvent: KeyboardEvent;
 
-    constructor(private readonly _elementRef: ElementRef) {}
+    /** @hidden */
+    private get _element(): HTMLInputElement {
+        return this._elementRef.nativeElement;
+    }
+
+    /** @hidden */
+    constructor(private readonly _elementRef: ElementRef<HTMLInputElement>) {}
 
     /** @hidden */
     @HostListener('blur')
     handleBlur(): void {
         if (Boolean(this.inputText) && !this.mobile) {
-            this._elementRef.nativeElement.value = this.inputText;
+            this._element.value = this.inputText;
         }
     }
 
@@ -56,7 +68,7 @@ export class AutoCompleteDirective {
     @HostListener('keyup', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent): void {
         if (KeyUtil.isKeyCode(event, this._stopKeys)) {
-            this._elementRef.nativeElement.value = this.inputText;
+            this._element.value = this.inputText;
         } else if (KeyUtil.isKeyCode(event, this._completeKeys)) {
             this._sendCompleteEvent(true);
         } else if (KeyUtil.isKeyCode(event, this._fillKeys)) {
@@ -77,25 +89,27 @@ export class AutoCompleteDirective {
         this._lastKeyUpEvent = event;
     }
 
+    /** @hidden */
     private _typeahead(displayedValue: string): void {
         const selectionStartIndex = this.inputText.length;
-        const el = this._elementRef.nativeElement;
-        el.value = displayedValue;
+        this._element.value = displayedValue;
 
         this._setSelectionRange(selectionStartIndex, displayedValue.length);
     }
 
+    /** @hidden */
     private _setSelectionRange(selectionStart: number, selectionEnd: number): void {
-        const el = this._elementRef.nativeElement;
-        const direction = el.selectionDirection;
+        const direction = this._element.selectionDirection;
 
-        el.setSelectionRange(selectionStart, selectionEnd, direction);
+        this._element.setSelectionRange(selectionStart, selectionEnd, direction);
     }
 
+    /** @hidden */
     private _isControlKey(event: KeyboardEvent): boolean {
         return KeyUtil.isKeyCode(event, CONTROL) || event.ctrlKey;
     }
 
+    /** @hidden */
     private _triggerTypeAhead(): boolean {
         return !(
             this._lastKeyUpEvent &&
@@ -104,15 +118,22 @@ export class AutoCompleteDirective {
         );
     }
 
+    /** @hidden */
     private _sendCompleteEvent(forceClose: boolean): void {
         this.onComplete.emit({
-            term: this._elementRef.nativeElement.value,
+            term: this._element.value,
             forceClose: forceClose
         });
+
+        if (this.inputText !== this._oldValue) {
+            const inputTextLength = this.inputText.length;
+            this._element.setSelectionRange(inputTextLength, inputTextLength);
+        }
     }
 
+    /** @hidden */
     private _searchByStrategy(): OptionItem | undefined {
-        const firstItem = this.options[0];
+        const [firstItem] = this.options;
         if (!firstItem) {
             return;
         }
@@ -136,6 +157,7 @@ export class AutoCompleteDirective {
         return this._findByStrategyStartsWith(this.options, this.inputText);
     }
 
+    /** @hidden */
     private _findByStrategyStartsWith(options: OptionItem[], inputText: string): OptionItem | undefined {
         return options.find((option) => option.label.toLocaleLowerCase().startsWith(inputText.toLocaleLowerCase()));
     }

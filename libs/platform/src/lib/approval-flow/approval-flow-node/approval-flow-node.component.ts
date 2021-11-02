@@ -31,8 +31,8 @@ import { isNodeApproved, isNodeStarted } from '../helpers';
 import { ApprovalFlowNodeTarget } from '../approval-flow-add-node/approval-flow-add-node.component';
 
 const NODE_STATUS_CLASS_MAP = {
-    'approved': 'positive',
-    'rejected': 'negative',
+    approved: 'positive',
+    rejected: 'negative',
     'in progress': 'informative',
     'not started': ''
 };
@@ -98,7 +98,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
     /** @hidden */
     @HostBinding('class.fdp-approval-flow-node--root')
     get _isRoot(): boolean {
-        return this.meta?.isRoot
+        return this.meta?.isRoot;
     }
 
     /** @hidden */
@@ -132,7 +132,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
             return this.meta?.rootNodesApproved;
         }
 
-        return this.meta.parents.every(node => isNodeApproved(node));
+        return this.meta.parents.every((node) => isNodeApproved(node));
     }
 
     /** @hidden */
@@ -239,13 +239,12 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     get _isEditActionsAvailable(): boolean {
-        return this.node.status === 'approved'
-            || this.node.status === 'rejected';
+        return this.node.status === 'approved' || this.node.status === 'rejected';
     }
 
     /** @hidden */
     get _activeDropZones(): ApprovalFlowDropZoneDirective[] {
-        return this._dropZones.filter(z => z.active);
+        return this._dropZones.filter((z) => z.active);
     }
 
     /** @hidden */
@@ -259,7 +258,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
             return this.meta?.isVerticalLineBeforeSolid;
         }
 
-        return this.meta.parents.every(parentNode => isNodeApproved(parentNode));
+        return this.meta.parents.every((parentNode) => isNodeApproved(parentNode));
     }
 
     /** @hidden */
@@ -273,32 +272,27 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     get _showAddButton(): boolean {
-        return this.isEdit
-            && !this._blank
-            && !this._space
-            && !this.node?.disableActions;
+        return this.isEdit && !this._blank && !this._space && !this.node?.disableActions;
     }
 
     /** @hidden */
     get _showAfterAllAddButton(): boolean {
-        return this.isEdit
-            && !this._space
-            && !this.node?.disableActions
+        return this.isEdit && !this._space && !this.node?.disableActions;
     }
 
     /** @hidden */
     _dropZonePartial(placement: ApprovalFlowNodeTarget): boolean {
-        return (!this._blank && (!this.isNextNodeBlank || placement === 'before'))
-            || (this._lastBlank && placement === 'after-all')
+        return (
+            (!this._blank && (!this.isNextNodeBlank || placement === 'before')) ||
+            (this._lastBlank && placement === 'after-all')
+        );
     }
 
     /** @hidden */
     ngOnInit(): void {
         this._checkNodeStatus();
 
-        this._subscriptions.add(
-            this._rtlService?.rtl.subscribe(() => this._cdr.markForCheck())
-        );
+        this._subscriptions.add(this._rtlService?.rtl.subscribe(() => this._cdr.markForCheck()));
     }
 
     /** @hidden */
@@ -323,13 +317,13 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
 
     /** @hidden */
     _deactivateDropZones(): void {
-        this._dropZones.forEach(dropZone => dropZone.active = false);
+        this._dropZones.forEach((dropZone) => (dropZone.active = false));
         this._cdr.detectChanges();
     }
 
     /** @hidden */
     _checkIfNodeDraggedInDropZone(nodeRect: DOMRect): void {
-        this._dropZones.forEach(dropZone => dropZone._checkIfNodeDraggedInDropZone(nodeRect));
+        this._dropZones.forEach((dropZone) => dropZone._checkIfNodeDraggedInDropZone(nodeRect));
         this._cdr.detectChanges();
     }
 
@@ -340,7 +334,7 @@ export class ApprovalFlowNodeComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         if (this.checkDueDate && this.node.dueDate) {
-            const dueThreshold = Number(new Date(this.node.dueDate)) - (this.dueDateThreshold * DAY_IN_MILLISECONDS);
+            const dueThreshold = Number(new Date(this.node.dueDate)) - this.dueDateThreshold * DAY_IN_MILLISECONDS;
             const nowAndDueDiff = Date.now() - dueThreshold;
 
             this._dueIn = Math.round(nowAndDueDiff / DAY_IN_MILLISECONDS);

@@ -7,13 +7,11 @@ export interface AutoCompleteEvent {
     forceClose: boolean;
 }
 
-
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[fd-auto-complete]',
+    selector: '[fd-auto-complete]'
 })
 export class AutoCompleteDirective {
-
     /** Values that will fill missing text in the input. */
     @Input()
     options: any[];
@@ -40,27 +38,16 @@ export class AutoCompleteDirective {
     @Output()
     readonly onComplete: EventEmitter<AutoCompleteEvent> = new EventEmitter<AutoCompleteEvent>();
 
-    private readonly _completeKeys: number[] = [
-        ENTER
-    ];
+    private readonly _completeKeys: number[] = [ENTER];
 
-    private readonly _fillKeys: number[] = [
-        LEFT_ARROW,
-        RIGHT_ARROW
-    ];
+    private readonly _fillKeys: number[] = [LEFT_ARROW, RIGHT_ARROW];
 
-    private readonly _stopKeys: number[] = [
-        BACKSPACE,
-        DELETE,
-        ESCAPE
-    ];
+    private readonly _stopKeys: number[] = [BACKSPACE, DELETE, ESCAPE];
 
     private oldValue: string;
     private lastKeyUpEvent: KeyboardEvent;
 
-    constructor(
-        private _elementRef: ElementRef
-    ) {}
+    constructor(private _elementRef: ElementRef) {}
 
     /** @hidden */
     @HostListener('keyup', ['$event'])
@@ -74,16 +61,15 @@ export class AutoCompleteDirective {
             } else if (KeyUtil.isKeyCode(event, this._fillKeys)) {
                 this._sendCompleteEvent(false);
             } else if (!this._isControlKey(event) && this.inputText) {
-
                 /** Prevention from triggering typeahead, when having crtl/cmd + keys */
                 if (!this._triggerTypeAhead()) {
-                    return
+                    return;
                 }
 
                 this.oldValue = this.inputText;
 
-                const item = this.options.find(
-                    option => this.displayFn(option).toLocaleLowerCase().startsWith(this.inputText.toLocaleLowerCase())
+                const item = this.options.find((option) =>
+                    this.displayFn(option).toLocaleLowerCase().startsWith(this.inputText.toLocaleLowerCase())
                 );
 
                 if (item) {
@@ -109,9 +95,11 @@ export class AutoCompleteDirective {
     }
 
     private _triggerTypeAhead(): boolean {
-        if (this.lastKeyUpEvent &&
+        if (
+            this.lastKeyUpEvent &&
             KeyUtil.isKeyCode(this.lastKeyUpEvent, CONTROL) &&
-            this.inputText === this.oldValue) {
+            this.inputText === this.oldValue
+        ) {
             return false;
         } else {
             return true;

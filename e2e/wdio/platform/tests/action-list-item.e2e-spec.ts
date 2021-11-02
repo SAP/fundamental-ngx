@@ -1,15 +1,18 @@
 import { ActionListItemPo } from '../pages/action-list-item.po';
 import { checkAttributeValueTrue, checkElementTextValue } from '../../helper/assertion-helper';
-import { acceptAlert, click, getElementArrayLength, getElementClass, refreshPage, waitForPresent } from '../../driver/wdio';
-import {btnText} from '../fixtures/appData/action-list-item-contents';
+import {
+    acceptAlert,
+    click,
+    getElementArrayLength,
+    getElementClass,
+    refreshPage,
+    waitForPresent
+} from '../../driver/wdio';
+import { btnText } from '../fixtures/appData/action-list-item-contents';
 
-describe('Action List Item Test Suite:', function() {
+describe('Action List Item Test Suite:', () => {
     const actionListPage = new ActionListItemPo();
-    const {
-        actionBtns,
-        actionLists,
-        actionSections
-    } = actionListPage;
+    const { actionBtns, actionLists, actionSections } = actionListPage;
 
     beforeAll(() => {
         actionListPage.open();
@@ -20,7 +23,7 @@ describe('Action List Item Test Suite:', function() {
         waitForPresent(actionBtns);
     }, 1);
 
-    describe('Main checks:', function() {
+    describe('Main checks:', () => {
         it('should check actions on click', () => {
             const actionBtnCount = getElementArrayLength(actionBtns);
             for (let i = 0; actionBtnCount > i; i++) {
@@ -37,13 +40,13 @@ describe('Action List Item Test Suite:', function() {
         });
     });
 
-    describe('Orientation check:', function() {
+    describe('Orientation check:', () => {
         it('should check RTL and LTR orientation', () => {
             actionListPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             actionListPage.saveExampleBaselineScreenshot();
             expect(actionListPage.compareWithBaseline()).toBeLessThan(5);

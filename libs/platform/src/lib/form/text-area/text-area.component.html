@@ -5,7 +5,7 @@
     [attr.id]="id"
     [attr.aria-label]="ariaLabel"
     [attr.aria-labelledby]="ariaLabelledBy"
-    [attr.aria-describedby]="id+'-counter'"
+    [attr.aria-describedby]="id + '-counter'"
     [attr.aria-required]="required"
     [attr.placeholder]="placeholder"
     [disabled]="disabled"
@@ -22,16 +22,21 @@
 ></textarea>
 
 <!-- ICU recommends full text in format -->
-<div class="fd-textarea-counter" *ngIf="showExceededText" aria-live="polite" aria-atomic="true" [attr.id]="id+'-counter'">
+<div
+    class="fd-textarea-counter"
+    *ngIf="showExceededText"
+    aria-live="polite"
+    aria-atomic="true"
+    [attr.id]="id + '-counter'"
+>
     <span>
         <ng-container
             *ngIf="counterExcessOrRemaining === 'excess'; else charactersRemaining"
-            i18n="@@platformI18nTextareaCounterMessageCharactersOverTheLimit">
+            i18n="@@platformI18nTextareaCounterMessageCharactersOverTheLimit"
+        >
             {{ exceededCharCount | number: '1.0-0' }} characters over the limit
         </ng-container>
-        <ng-template
-            #charactersRemaining
-            i18n="@@platformI18nTextareaCounterMessageCharacterseRemaining">
+        <ng-template #charactersRemaining i18n="@@platformI18nTextareaCounterMessageCharacterseRemaining">
             {{ exceededCharCount | number: '1.0-0' }} characters remaining
         </ng-template>
     </span>

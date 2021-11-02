@@ -14,7 +14,6 @@ import {
     OnDestroy,
     Optional,
     Renderer2,
-    SimpleChanges,
     TemplateRef,
     ViewChild,
     ViewContainerRef,
@@ -24,7 +23,7 @@ import {
 import { CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 import { DOWN_ARROW, ENTER, SPACE } from '@angular/cdk/keycodes';
 
-import { DynamicComponentService, KeyUtil, RtlService } from '@fundamental-ngx/core/utils';
+import { DynamicComponentService, KeyUtil } from '@fundamental-ngx/core/utils';
 import { MobileModeConfig } from '@fundamental-ngx/core/mobile-mode';
 import { BasePopoverClass } from './base/base-popover.class';
 import { PopoverBodyComponent } from './popover-body/popover-body.component';
@@ -32,6 +31,7 @@ import { PopoverService } from './popover-service/popover.service';
 import { PopoverControlComponent } from './popover-control/popover-control.component';
 import { POPOVER_COMPONENT } from './popover.interface';
 import { PopoverMobileComponent } from './popover-mobile/popover-mobile.component';
+import { PopoverMobileModule } from './popover-mobile/popover-mobile.module';
 import { PopoverChildContent } from './popover-child-content.interface';
 
 export const SELECT_CLASS_NAMES = {
@@ -58,7 +58,10 @@ let cdkPopoverUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [PopoverService]
 })
-export class PopoverComponent extends BasePopoverClass implements AfterViewInit, AfterContentInit, OnDestroy, OnChanges {
+export class PopoverComponent
+    extends BasePopoverClass
+    implements AfterViewInit, AfterContentInit, OnDestroy, OnChanges
+{
     /** Tooltip for popover */
     @Input()
     title: string;
@@ -123,12 +126,12 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
 
     /**@hidden */
     constructor(
-        private _elementRef: ElementRef,
-        private _popoverService: PopoverService,
-        private _cdr: ChangeDetectorRef,
-        private _rendered: Renderer2,
-        @Optional() private _rtlService: RtlService,
-        @Optional() private _dynamicComponentService: DynamicComponentService
+        private readonly _popoverService: PopoverService,
+        private readonly _cdr: ChangeDetectorRef,
+        private readonly _rendered: Renderer2,
+        private readonly _viewContainerRef: ViewContainerRef,
+        private readonly _injector: Injector,
+        @Optional() private readonly _dynamicComponentService: DynamicComponentService
     ) {
         super();
     }
@@ -167,7 +170,7 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     }
 
     /** @hidden */
-    ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(): void {
         this._popoverService.refreshConfiguration(this);
     }
 
@@ -261,21 +264,24 @@ export class PopoverComponent extends BasePopoverClass implements AfterViewInit,
     }
 
     /** @hidden Open Popover in mobile mode */
-    private _setupMobileMode(): void {
-        this._mobileModeComponentRef = this._dynamicComponentService.createDynamicComponent(
+    private async _setupMobileMode(): Promise<void> {
+        const injector = Injector.create({
+            providers: [{ provide: POPOVER_COMPONENT, useValue: this }],
+            parent: this._injector
+        });
+
+        this._mobileModeComponentRef = await this._dynamicComponentService.createDynamicModule(
             {
                 popoverBodyContentTemplate: this.popoverBodyContentTemplate,
                 popoverFooterContentTemplate: this.popoverFooterContentTemplate
             } as PopoverChildContent,
+            PopoverMobileModule,
             PopoverMobileComponent,
-            { container: this._elementRef.nativeElement },
-            {
-                injector: Injector.create({
-                    providers: [{ provide: POPOVER_COMPONENT, useValue: this }]
-                }),
-                services: [this._rtlService]
-            }
+            this._viewContainerRef,
+            injector
         );
+
+        console.log(111111, this._mobileModeComponentRef);
 
         this._listenOnTriggerRefClicks();
     }

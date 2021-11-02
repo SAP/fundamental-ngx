@@ -16,13 +16,32 @@ import {
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
 import { DynamicPagePo } from '../pages/dynamic-page.po';
 
-describe('dynamic side content test suite', function () {
+describe('dynamic side content test suite', () => {
     const dynamicPagePage = new DynamicPagePo();
     const {
-        button, pinButton, exitButton, saveButton, closeButton, cancelButton, rejectButton, acceptButton,
-        collapseButton, collapsibleHeader, columnLayoutExample, tabsExample, defaultExample,
-        responsiveExample, tab, dynamicPageContent, tabsContent, dynamicPage, flexileColumn,
-        dynamicPageBtn, breadcumbLink, article, currentBreadcumbLink
+        button,
+        pinButton,
+        exitButton,
+        saveButton,
+        closeButton,
+        cancelButton,
+        rejectButton,
+        acceptButton,
+        collapseButton,
+        collapsibleHeader,
+        columnLayoutExample,
+        tabsExample,
+        defaultExample,
+        responsiveExample,
+        tab,
+        dynamicPageContent,
+        tabsContent,
+        dynamicPage,
+        flexileColumn,
+        dynamicPageBtn,
+        breadcumbLink,
+        article,
+        currentBreadcumbLink
     } = dynamicPagePage;
 
     beforeAll(() => {
@@ -36,7 +55,6 @@ describe('dynamic side content test suite', function () {
     }, 1);
 
     describe('Tests for column layout example', () => {
-
         it('should check navigate by link', () => {
             openPage(columnLayoutExample);
             checkUrlNavigation();
@@ -118,7 +136,6 @@ describe('dynamic side content test suite', function () {
     });
 
     describe('Tests for responsive example', () => {
-
         it('should check close page by clicking exit button', () => {
             openPage(responsiveExample);
             checkPageClosed(exitButton);
@@ -165,13 +182,19 @@ describe('dynamic side content test suite', function () {
             const buttonsLength = getElementArrayLength(dynamicPage + button);
             for (let i = 0; i < buttonsLength; i++) {
                 if (i !== 5 && i !== 6) {
-                    expect(getElementClass(dynamicPageBtn, i)).not.toContain('compact', 'size of the button still compact');
+                    expect(getElementClass(dynamicPageBtn, i)).not.toContain(
+                        'compact',
+                        'size of the button still compact'
+                    );
                 }
             }
             click(dynamicPage + button, 7);
             for (let i = 0; i < buttonsLength; i++) {
                 if (i !== 5 && i !== 6) {
-                    expect(getElementClass(dynamicPageBtn, i)).toContain('compact', 'size of the button did not change to cozy');
+                    expect(getElementClass(dynamicPageBtn, i)).toContain(
+                        'compact',
+                        'size of the button did not change to cozy'
+                    );
                 }
             }
         });
@@ -185,11 +208,9 @@ describe('dynamic side content test suite', function () {
             openPage(responsiveExample);
             checkUrlNavigation();
         });
-
     });
 
     describe('Tests for tabs example', () => {
-
         it('should check close page by clicking exit button', () => {
             openPage(tabsExample);
             checkPageClosed(exitButton);
@@ -233,7 +254,10 @@ describe('dynamic side content test suite', function () {
         it('should check selecting tabs', () => {
             openPage(tabsExample);
             scrollIntoView(tabsContent, 1);
-            expect(getElementClass(tab, 1)).toContain('is-selected', 'tab is not highlited as selected after scroll to content');
+            expect(getElementClass(tab, 1)).toContain(
+                'is-selected',
+                'tab is not highlited as selected after scroll to content'
+            );
             expect(getElementClass(tab, 0)).not.toContain('is-selected', 'tab is selected, but should not');
             expect(getElementClass(tab, 2)).not.toContain('is-selected', 'tab is selected, but should not');
         });
@@ -247,11 +271,9 @@ describe('dynamic side content test suite', function () {
             openPage(tabsExample);
             checkUrlNavigation();
         });
-
     });
 
     describe('Tests for default example', () => {
-
         it('should check close page by clicking exit button', () => {
             openPage(defaultExample);
             checkPageClosed(exitButton);
@@ -291,15 +313,14 @@ describe('dynamic side content test suite', function () {
             openPage(defaultExample);
             checkUrlNavigation();
         });
-
     });
 
     it('should check RTL and LTR orientation', () => {
         dynamicPagePage.checkRtlSwitch();
     });
 
-    function checkPageClosed(button: string): void {
-        click(button);
+    function checkPageClosed(btn: string): void {
+        click(btn);
         expect(doesItExist(dynamicPageContent)).toBe(false, 'dynamic page is not closed');
     }
 
@@ -313,7 +334,10 @@ describe('dynamic side content test suite', function () {
         expect(getAttributeByName(pinButton, 'aria-selected')).toBe('true', 'area is not pinned');
         const articlesLength = getElementArrayLength(article);
         scrollIntoView(article, articlesLength - 1);
-        expect(isElementDisplayed(collapsibleHeader)).toBe(true, 'collapsible area is not visible, pinning works incorrect');
+        expect(isElementDisplayed(collapsibleHeader)).toBe(
+            true,
+            'collapsible area is not visible, pinning works incorrect'
+        );
         click(exitButton);
     }
 
@@ -328,7 +352,7 @@ describe('dynamic side content test suite', function () {
     function checkUrlNavigation(): void {
         const currentUrl = getCurrentUrl();
         click(currentBreadcumbLink);
-        // check that link is clickable and does not navigate 
+        // check that link is clickable and does not navigate
         expect(getCurrentUrl()).toEqual(currentUrl);
         click(breadcumbLink);
         // check that url works correct and directs to page

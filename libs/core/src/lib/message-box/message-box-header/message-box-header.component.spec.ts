@@ -5,7 +5,6 @@ import { BarModule } from '@fundamental-ngx/core/bar';
 import { MessageBoxConfig, MessageBoxHeaderComponent, MessageBoxModule } from '@fundamental-ngx/core/message-box';
 import { whenStable } from '@fundamental-ngx/core/tests';
 
-
 @Component({
     template: `
         <fd-message-box-header>
@@ -19,7 +18,7 @@ import { whenStable } from '@fundamental-ngx/core/tests';
             <ng-template fdTemplate="subheader">
                 <div fd-bar-middle>
                     <fd-bar-element>
-                        <input id="customInput"/>
+                        <input id="customInput" />
                     </fd-bar-element>
                 </div>
             </ng-template>
@@ -42,16 +41,18 @@ class DefaultHeaderTestComponent {
 }
 
 describe('MessageBoxHeaderComponent', () => {
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [BarModule, MessageBoxModule],
-            declarations: [CustomHeaderTestComponent, DefaultHeaderTestComponent],
-            providers: [{ provide: MessageBoxConfig, useValue: { ...new MessageBoxConfig(), mobile: true } }]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [BarModule, MessageBoxModule],
+                declarations: [CustomHeaderTestComponent, DefaultHeaderTestComponent],
+                providers: [{ provide: MessageBoxConfig, useValue: { ...new MessageBoxConfig(), mobile: true } }]
+            }).compileComponents();
+        })
+    );
 
     function setup<V>(testComponent): { fixture: ComponentFixture<V>; component: V } {
-        const fixture = TestBed.createComponent((testComponent as any) as Type<V>);
+        const fixture = TestBed.createComponent(testComponent as any as Type<V>);
         const component = fixture.componentInstance;
 
         return { fixture: fixture, component: component };

@@ -1,61 +1,58 @@
 <div>
     <label fd-form-label>Origin X</label>
-    <fd-segmented-button style="margin-right: 10px; margin-left: 10px;"
-                         [ngModel]="originX" (ngModelChange)="originX = $event; refresh()">
-        <button fd-button
-                *ngFor="let option of xPositions"
-                [attr.value]="option"
-                [label]="option">
-        </button>
+    <fd-segmented-button
+        style="margin-right: 10px; margin-left: 10px"
+        [ngModel]="originX"
+        (ngModelChange)="originX = $event; refresh()"
+    >
+        <button fd-button *ngFor="let option of xPositions" [attr.value]="option" [label]="option"></button>
     </fd-segmented-button>
 
-    <br>
+    <br />
 
     <label fd-form-label>Origin Y</label>
-    <fd-segmented-button style="margin-right: 10px; margin-left: 10px;"
-                         [ngModel]="originY" (ngModelChange)="originY = $event; refresh()">
-        <button fd-button
-                *ngFor="let option of yPositions"
-                [attr.value]="option"
-                [label]="option">
-        </button>
+    <fd-segmented-button
+        style="margin-right: 10px; margin-left: 10px"
+        [ngModel]="originY"
+        (ngModelChange)="originY = $event; refresh()"
+    >
+        <button fd-button *ngFor="let option of yPositions" [attr.value]="option" [label]="option"></button>
     </fd-segmented-button>
 
-    <br>
+    <br />
 
     <label fd-form-label>Overlay X</label>
-    <fd-segmented-button style="margin-right: 10px; margin-left: 10px;"
-                         [ngModel]="overlayX" (ngModelChange)="overlayX = $event; refresh()">
-    <button fd-button
-                *ngFor="let option of xPositions"
-                [attr.value]="option"
-                [label]="option">
-        </button>
+    <fd-segmented-button
+        style="margin-right: 10px; margin-left: 10px"
+        [ngModel]="overlayX"
+        (ngModelChange)="overlayX = $event; refresh()"
+    >
+        <button fd-button *ngFor="let option of xPositions" [attr.value]="option" [label]="option"></button>
     </fd-segmented-button>
 
-    <br>
+    <br />
 
     <label fd-form-label>Overlay Y</label>
-    <fd-segmented-button style="margin-right: 10px; margin-left: 10px;"
-                         [ngModel]="overlayY" (ngModelChange)="overlayY = $event; refresh()">
-        <button fd-button
-                *ngFor="let option of yPositions"
-                [attr.value]="option"
-                [label]="option">
-        </button>
+    <fd-segmented-button
+        style="margin-right: 10px; margin-left: 10px"
+        [ngModel]="overlayY"
+        (ngModelChange)="overlayY = $event; refresh()"
+    >
+        <button fd-button *ngFor="let option of yPositions" [attr.value]="option" [label]="option"></button>
     </fd-segmented-button>
 </div>
 
+<br /><br />
 
-<br><br>
-
-<div style="width: 300px; height: 300px; display: flex; align-items: center; justify-content: center;">
-    <fd-popover [cdkPositions]="cdkPosition"
-                    [noArrow]="false"
-                    [isOpen]="true"
-                    [triggers]="[]"
-                    [closeOnEscapeKey]="false"
-                    [closeOnOutsideClick]="false" >
+<div style="width: 300px; height: 300px; display: flex; align-items: center; justify-content: center">
+    <fd-popover
+        [cdkPositions]="cdkPosition"
+        [noArrow]="false"
+        [isOpen]="true"
+        [triggers]="[]"
+        [closeOnEscapeKey]="false"
+        [closeOnOutsideClick]="false"
+    >
         <fd-popover-control>
             <button fd-button glyph="navigation-up-arrow"></button>
         </fd-popover-control>
@@ -67,5 +64,4 @@
             </ul>
         </fd-popover-body>
     </fd-popover>
-
 </div>

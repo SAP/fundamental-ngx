@@ -1,7 +1,6 @@
 <fd-calendar-header
-    [currentlyDisplayed]="currentlyDisplayed"
+    [currentlyDisplayed]="_currentlyDisplayed"
     [activeView]="activeView"
-    (activeViewChange)="handleActiveViewChange($event)"
     [id]="id"
     [calendarYearGrid]="yearGrid"
     [compact]="compact"
@@ -9,6 +8,7 @@
     (closeClicked)="closeClicked.emit()"
     (nextClicked)="handleNextArrowClick()"
     (previousClicked)="handlePreviousArrowClick()"
+    (activeViewChange)="handleActiveViewChange($event)"
 ></fd-calendar-header>
 <ng-container [ngSwitch]="activeView">
     <div
@@ -27,7 +27,7 @@
             (selectedDateChange)="selectedDateChanged($event)"
             [selectedRangeDate]="selectedRangeDate"
             (selectedRangeDateChange)="selectedRangeDateChanged($event)"
-            [currentlyDisplayed]="currentlyDisplayed"
+            [currentlyDisplayed]="_currentlyDisplayed"
             [startingDayOfWeek]="getWeekStartDay()"
             [disableFunction]="disableFunction"
             [disableRangeEndFunction]="disableRangeEndFunction"
@@ -42,25 +42,25 @@
         ></fd-calendar-day-view>
         <fd-calendar-month-view
             *ngSwitchCase="'month'"
-            [monthSelected]="currentlyDisplayed?.month"
-            [year]="currentlyDisplayed.year"
+            [monthSelected]="_currentlyDisplayed?.month"
+            [year]="_currentlyDisplayed?.year"
             [id]="id"
             [focusEscapeFunction]="escapeFocusFunction"
             (monthClicked)="handleMonthViewChange($event)"
         ></fd-calendar-month-view>
         <fd-calendar-year-view
             *ngSwitchCase="'year'"
-            (yearClicked)="selectedYear($event)"
-            [yearSelected]="currentlyDisplayed.year"
+            [yearSelected]="_currentlyDisplayed?.year"
             [yearViewGrid]="yearGrid"
             [id]="id"
             [focusEscapeFunction]="escapeFocusFunction"
+            (yearClicked)="selectedYear($event)"
         >
         </fd-calendar-year-view>
         <fd-calendar-aggregated-year-view
             *ngSwitchCase="'aggregatedYear'"
             (yearsClicked)="selectedYears($event)"
-            [yearSelected]="currentlyDisplayed.year"
+            [yearSelected]="_currentlyDisplayed?.year"
             [yearViewGrid]="yearGrid"
             [aggregatedYearsViewGrid]="aggregatedYearGrid"
             [id]="id"

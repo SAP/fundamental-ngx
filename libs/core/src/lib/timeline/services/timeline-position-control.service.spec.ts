@@ -33,7 +33,9 @@ describe('TimelinePositionControlService', () => {
         service.setStrategy('horizontal-double');
         expect(service['_positionStrategy']).toBeInstanceOf(HorizontalDoubleSidesStrategy);
 
-        expect(() => service.setStrategy('horizontal-left')).toThrow(new Error('Unsupported strategy: horizontal-left'));
+        expect(() => service.setStrategy('horizontal-left')).toThrow(
+            new Error('Unsupported strategy: horizontal-left')
+        );
     });
 
     it('should register timeline node', () => {

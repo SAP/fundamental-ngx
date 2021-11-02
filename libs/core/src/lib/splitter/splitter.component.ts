@@ -1,8 +1,14 @@
-import { ChangeDetectionStrategy, Component, ContentChildren, Input, QueryList, ViewEncapsulation } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ContentChildren,
+    Input,
+    QueryList,
+    ViewEncapsulation
+} from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { SplitterSplitPaneComponent } from './splitter-split-pane/splitter-split-pane.component';
-
 
 @Component({
     selector: 'fd-splitter',
@@ -45,7 +51,7 @@ export class SplitterComponent {
             return false;
         }
 
-        const paneToCheck = this._panes.find(pane => pane.id === paneId);
+        const paneToCheck = this._panes.find((pane) => pane.id === paneId);
 
         return paneToCheck?.isOnCanvas;
     }
@@ -56,7 +62,7 @@ export class SplitterComponent {
             return;
         }
 
-        const paneToRemove = this._panes.find(pane => pane.id === paneId);
+        const paneToRemove = this._panes.find((pane) => pane.id === paneId);
 
         paneToRemove?.hideFromCanvas();
     }
@@ -67,7 +73,7 @@ export class SplitterComponent {
             return;
         }
 
-        const paneToShow = this._panes.find(pane => pane.id === paneId);
+        const paneToShow = this._panes.find((pane) => pane.id === paneId);
 
         paneToShow?.showOnCanvas();
     }

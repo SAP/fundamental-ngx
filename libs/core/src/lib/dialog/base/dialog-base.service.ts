@@ -24,7 +24,7 @@ export abstract class DialogBaseService<T> {
 
     /** Dismisses all currently open dialogs. */
     dismissAll(): void {
-        this._dialogs.forEach(item => this._destroyDialog(item));
+        this._dialogs.forEach((item) => this._destroyDialog(item));
     }
 
     abstract open<D>(content: unknown, config: DialogConfigBase<D>): DialogRefBase<D>;
@@ -45,6 +45,6 @@ export abstract class DialogBaseService<T> {
         this._dynamicComponentService.destroyComponent(dialog);
 
         this._dialogs[index] = null;
-        this._dialogs = this._dialogs.filter(item => item);
+        this._dialogs = this._dialogs.filter((item) => item);
     }
 }

@@ -3,7 +3,7 @@ import { click, scrollIntoView, waitForElDisplayed, waitForPresent } from '../..
 
 export class CalendarPo extends CoreBaseComponentPo {
     url = '/calendar';
-    root = '#page-content'
+    root = '#page-content';
 
     // example selectors
     standardCalendar = 'fd-calendar-single-example ';
@@ -17,7 +17,7 @@ export class CalendarPo extends CoreBaseComponentPo {
     programmaticCalendar = 'fd-calendar-programmatically-change-example ';
     mondayCalendar = 'fd-calendar-monday-start-example ';
     internationalCalendar = 'fd-calendar-i18n-example ';
-    reactiveCalendarExamples = 'fd-calendar-form-example '
+    reactiveCalendarExamples = 'fd-calendar-form-example ';
     singleReactiveCalendar = 'fd-calendar-form-example [caltype="single"] ';
     rangeReactiveCalendar = 'fd-calendar-form-example [caltype="range"] ';
 
@@ -31,7 +31,7 @@ export class CalendarPo extends CoreBaseComponentPo {
     yearBtn = '.fd-calendar__action.ng-star-inserted:nth-of-type(3)' + this.button;
     currentDay = '.fd-calendar__item--current';
     selectedDays = '.fd-calendar__item.is-active';
-    weekendDays  = '.fd-calendar__item--weekend';
+    weekendDays = '.fd-calendar__item--weekend';
     disabledDays = '.fd-calendar__item.is-disabled';
     disabledWeekendDays = this.weekendDays + '.is-disabled';
     calendarItem = 'td.fd-calendar__item';

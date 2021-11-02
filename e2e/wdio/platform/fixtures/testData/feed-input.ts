@@ -12,4 +12,3 @@ export const eight_lines_text = `
     line 6
     line 7
     line 8`;
-

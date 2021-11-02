@@ -29,8 +29,7 @@ import { StandardListItemComponent } from './standard-list-item.component';
         AvatarModule,
         RouterModule,
         PlatformObjectStatusModule
-
     ],
     exports: [StandardListItemComponent]
 })
-export class StandardListItemModule { }
+export class StandardListItemModule {}

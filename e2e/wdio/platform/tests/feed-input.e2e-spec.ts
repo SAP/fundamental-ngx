@@ -6,14 +6,18 @@ import {
     getAttributeByName,
     getAttributeByNameArr,
     getCSSPropertyByName,
-    getElementArrayLength, getElementClass, getElementSize,
+    getElementArrayLength,
+    getElementClass,
+    getElementSize,
     isEnabled,
     refreshPage,
     scrollIntoView,
     sendKeys,
     setValue,
     waitForElDisplayed,
-    waitForPresent
+    waitForPresent,
+    isElementDisplayed,
+    isElementClickable
 } from '../../driver/wdio';
 import { FeedInputPo } from '../pages/feed-input.po';
 import {
@@ -23,8 +27,16 @@ import {
 } from '../fixtures/appData/feed-input-page-contents';
 import { eight_lines_text, four_lines_text } from '../fixtures/testData/feed-input';
 
-describe('Verify Feed Input component', function() {
-    const { feedInputAvatar, feedInputTextArea, feedInput, feedInputNoAvatar, feedInputButton } = new FeedInputPo();
+describe('Verify Feed Input component', () => {
+    const {
+        feedInputAvatar,
+        feedInputTextArea,
+        feedInput,
+        feedInputNoAvatar,
+        feedInputButton,
+        feedInputPlaceholder1,
+        feedInputPlaceholder2
+    } = new FeedInputPo();
     const feedInputPage = new FeedInputPo();
 
     beforeAll(() => {
@@ -155,11 +167,28 @@ describe('Verify Feed Input component', function() {
         // expect(getAttributeByNameArr(feedInputAvatar, 'title')).toEqual(avatar_tooltip);
     });
 
+    it('should check that all placeholders are displayed', () => {
+        const firstPlaceholderLength = getElementArrayLength(feedInputPlaceholder1);
+        const secondPlaceholderLength = getElementArrayLength(feedInputPlaceholder2);
+
+        for (let i = 0; i < firstPlaceholderLength; i++) {
+            expect(isElementDisplayed(feedInputPlaceholder1, i)).toBe(true, 'placeholder is not displayed');
+        }
+        for (let i = 0; i < secondPlaceholderLength; i++) {
+            expect(isElementDisplayed(feedInputPlaceholder2, i)).toBe(true, 'placeholder is not displayed');
+        }
+    });
+
+    it('should check that no ablity to type text in disabled input', () => {
+        expect(isElementClickable(feedInputTextArea, 3)).toBe(false, 'input is not disabled');
+        expect(isElementClickable(feedInputButton, 3)).toBe(false, 'submit button is not disabled');
+    });
+
     it('should check RTL', () => {
         feedInputPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             feedInputPage.saveExampleBaselineScreenshot();
             expect(feedInputPage.compareWithBaseline()).toBeLessThan(5);

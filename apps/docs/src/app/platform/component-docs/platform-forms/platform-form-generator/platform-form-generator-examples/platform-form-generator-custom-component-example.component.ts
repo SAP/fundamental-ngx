@@ -13,12 +13,14 @@ import {
     selector: 'fdp-form-generator-slider',
     template: `
         <ng-container [formGroup]="form">
-           <fdp-slider [contentDensity]="formItem.guiOptions?.contentDensity"
-                       [customValues]="formItem.choices"
-                       [showTicks]="formItem.guiOptions?.additionalData?.showTicks"
-                       [showTicksLabels]="formItem.guiOptions?.additionalData?.showTicksLabels"
-                       [name]="name"
-                       [formControlName]="name"></fdp-slider>
+            <fdp-slider
+                [contentDensity]="formItem.guiOptions?.contentDensity"
+                [customValues]="formItem.choices"
+                [showTicks]="formItem.guiOptions?.additionalData?.showTicks"
+                [showTicksLabels]="formItem.guiOptions?.additionalData?.showTicksLabels"
+                [name]="name"
+                [formControlName]="name"
+            ></fdp-slider>
         </ng-container>
     `,
     viewProviders: [dynamicFormFieldProvider, dynamicFormGroupChildProvider]
@@ -34,7 +36,6 @@ export class PlatformFormGeneratorCustomSliderElement extends BaseDynamicFormGen
     templateUrl: './platform-form-generator-custom-component-example.component.html'
 })
 export class PlatformFormGeneratorCustomComponentExampleComponent {
-
     formCreated = false;
     formValue: DynamicFormValue;
 
@@ -43,12 +44,12 @@ export class PlatformFormGeneratorCustomComponentExampleComponent {
             type: 'slider',
             name: 'some_slider',
             message: 'Slider component',
-            default: {value: 30, label: 'Thirty'},
+            default: { value: 30, label: 'Thirty' },
             choices: [
-                {value: 10, label: 'Ten'},
-                {value: 20, label: 'Twenty'},
-                {value: 30, label: 'Thirty'},
-                {value: 40, label: 'Forty'},
+                { value: 10, label: 'Ten' },
+                { value: 20, label: 'Twenty' },
+                { value: 30, label: 'Thirty' },
+                { value: 40, label: 'Forty' }
             ],
             guiOptions: {
                 column: 1,
@@ -58,11 +59,9 @@ export class PlatformFormGeneratorCustomComponentExampleComponent {
                 }
             }
         }
-    ]
+    ];
 
-    constructor(
-        private readonly _formGeneratorService: FormGeneratorService
-    ) {
+    constructor(private readonly _formGeneratorService: FormGeneratorService) {
         this._formGeneratorService.addComponent(PlatformFormGeneratorCustomSliderElement, ['slider']);
     }
 

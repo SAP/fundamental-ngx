@@ -13,7 +13,6 @@ import * as timePickerTemplateTs from '!raw-loader!./examples/platform-time-pick
     templateUrl: './platform-time-picker-docs.component.html'
 })
 export class PlatformTimePickerDocsComponent {
-
     timePickerBasic: ExampleFile[] = [
         {
             language: 'html',

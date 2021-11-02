@@ -41,8 +41,6 @@ export class WizardPo extends CoreBaseComponentPo {
     continueButton = this.containerFooter + '.fd-button--emphasized';
     cancelButton = this.containerFooter + '.fd-button--transparent';
 
-
-
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);

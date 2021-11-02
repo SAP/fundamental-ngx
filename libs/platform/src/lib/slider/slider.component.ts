@@ -92,7 +92,9 @@ export class SliderComponent extends BaseInput {
      * *$event* can be used to retrieve the new state of the slider.
      */
     @Output()
-    readonly sliderChange: EventEmitter<SliderChangeEvent<SliderControlValue>> = new EventEmitter<SliderChangeEvent<SliderControlValue>>();
+    readonly sliderChange: EventEmitter<SliderChangeEvent<SliderControlValue>> = new EventEmitter<
+        SliderChangeEvent<SliderControlValue>
+    >();
 
     constructor(
         cd: ChangeDetectorRef,

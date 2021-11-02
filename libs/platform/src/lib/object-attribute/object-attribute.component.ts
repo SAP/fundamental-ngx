@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 
 export class ObjectAttributeClickedEvent {
-    constructor(public source: ObjectAttributeComponent, public payload: any) { }
+    constructor(public source: ObjectAttributeComponent, public payload: any) {}
 }
 
 @Component({
@@ -43,7 +43,7 @@ export class ObjectAttributeComponent implements OnInit {
     objectAttributeclick: EventEmitter<ObjectAttributeClickedEvent> = new EventEmitter();
 
     /** @hidden */
-    constructor(private _el: ElementRef, private _renderer: Renderer2) { }
+    constructor(private _el: ElementRef, private _renderer: Renderer2) {}
 
     /** @hidden */
     ngOnInit(): void {

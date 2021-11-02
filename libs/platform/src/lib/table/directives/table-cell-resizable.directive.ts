@@ -72,25 +72,25 @@ export class PlatformTableCellResizableDirective implements AfterViewInit {
         let resizedColumn: string;
 
         const pointerOnLeft = this._isRtl
-            ? (elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX && this._resizableSide !== 'end')
-            : (event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX  && this._resizableSide !== 'end');
+            ? elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX && this._resizableSide !== 'end'
+            : event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX && this._resizableSide !== 'end';
 
         if (pointerOnLeft) {
             resizerPosition = this._isRtl
-                ? (el.parentElement.offsetWidth - (el.offsetLeft + el.offsetWidth))
+                ? el.parentElement.offsetWidth - (el.offsetLeft + el.offsetWidth)
                 : el.offsetLeft;
 
             resizedColumn = this._tableColumnResizeService.getPreviousColumnName(this.columnName);
         }
 
         const pointerOnRight = this._isRtl
-            ? (event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX)
-            : (elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX);
+            ? event.clientX - elPosition.left < TABLE_CELL_RESIZABLE_THRESHOLD_PX
+            : elPosition.right - event.clientX < TABLE_CELL_RESIZABLE_THRESHOLD_PX;
 
         if (pointerOnRight) {
             resizerPosition = this._isRtl
-                ? (el.parentElement.offsetWidth - el.offsetLeft)
-                : (el.offsetLeft + el.offsetWidth);
+                ? el.parentElement.offsetWidth - el.offsetLeft
+                : el.offsetLeft + el.offsetWidth;
 
             resizedColumn = this.columnName;
         }

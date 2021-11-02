@@ -19,7 +19,7 @@ import {
     getElementClass
 } from '../../driver/wdio';
 
-describe('Standard List test suite', function() {
+describe('Standard List test suite', () => {
     const standardListPage = new StandardListPo();
     const {
         listItems,
@@ -35,14 +35,14 @@ describe('Standard List test suite', function() {
         selectedItems,
         keyboardSupportList,
         dragAndDropList,
-        infiniteList,
+        infiniteList
     } = standardListPage;
 
     beforeAll(() => {
         standardListPage.open();
     }, 1);
 
-    describe('action list examples', function() {
+    describe('action list examples', () => {
         it('should check show more button functionality', () => {
             const startItemsCount = getElementArrayLength(actionList + listItems);
 
@@ -53,7 +53,7 @@ describe('Standard List test suite', function() {
         });
     });
 
-    describe('filter and sort list examples', function() {
+    describe('filter and sort list examples', () => {
         afterEach(() => {
             refreshPage();
             waitForElDisplayed(standardListPage.title);
@@ -108,12 +108,11 @@ describe('Standard List test suite', function() {
         });
     });
 
-    describe('selection list example', function() {
+    describe('selection list example', () => {
         beforeEach(() => {
             refreshPage();
             waitForElDisplayed(standardListPage.title);
         }, 1);
-
 
         it('check cozy multi-selection functionality', () => {
             const itemCount = getElementArrayLength(cozyMultiSelectList + listItems);
@@ -148,23 +147,25 @@ describe('Standard List test suite', function() {
         });
     });
 
-    describe('keyboard support example', function() {
+    describe('keyboard support example', () => {
         it('should check keyboard navigation', () => {
             const itemCount = getElementArrayLength(keyboardSupportList + listItems);
             click(keyboardSupportList + button);
 
-            expect(executeScriptBeforeTagAttr(keyboardSupportList + listItems, pickBorderStyleAttribute(), 0))
-                .toContain('dotted');
+            expect(
+                executeScriptBeforeTagAttr(keyboardSupportList + listItems, pickBorderStyleAttribute(), 0)
+            ).toContain('dotted');
 
             for (let i = 1; i < itemCount; i++) {
                 sendKeys('ArrowDown');
-                expect(executeScriptBeforeTagAttr(keyboardSupportList + listItems, pickBorderStyleAttribute(), i))
-                    .toContain('dotted');
+                expect(
+                    executeScriptBeforeTagAttr(keyboardSupportList + listItems, pickBorderStyleAttribute(), i)
+                ).toContain('dotted');
             }
         });
     });
 
-    describe('drag and drop examples', function() {
+    describe('drag and drop examples', () => {
         it('check drag and drop ability', () => {
             scrollIntoView(dragAndDropList + listItems);
             const originalFirstItemText = getText(dragAndDropList + listItems);
@@ -182,8 +183,7 @@ describe('Standard List test suite', function() {
         });
     });
 
-    describe('Infinite scroll examples', function() {
-
+    describe('Infinite scroll examples', () => {
         it('should check scroll loads more items', () => {
             const initiallyLoadedItemCount = getElementArrayLength(infiniteList + listItems);
 
@@ -191,15 +191,14 @@ describe('Standard List test suite', function() {
             click(infiniteList + listItems);
             do {
                 sendKeys(['ArrowDown']);
-            }
-            while (doesItExist(busyIndicator) === false);
+            } while (doesItExist(busyIndicator) === false);
             waitForNotDisplayed(busyIndicator);
 
             expect(getElementArrayLength(infiniteList + listItems)).toBeGreaterThan(initiallyLoadedItemCount);
         });
     });
 
-    xdescribe('example block visual regression', function() {
+    xdescribe('example block visual regression', () => {
         it('should check examples visual regression', () => {
             refreshPage();
             waitForElDisplayed(standardListPage.title);
@@ -208,7 +207,7 @@ describe('Standard List test suite', function() {
         });
     });
 
-    describe('orientation check', function() {
+    describe('orientation check', () => {
         it('should check orientations', () => {
             standardListPage.checkRtlSwitch();
         });
@@ -219,12 +218,11 @@ describe('Standard List test suite', function() {
             const tag = `${listExample}-listItem-${i}-selected-state-${getImageTagBrowserPlatform()}-`;
 
             click(exampleSelector + listItems, i);
-            expect(getElementClass(exampleSelector + listItems, i))
-                .toContain('is-selected');
+            expect(getElementClass(exampleSelector + listItems, i)).toContain('is-selected');
         }
     }
 
     function pickBorderStyleAttribute(): string {
-        return (browserIsFirefox() ? 'border-bottom-style' : 'border');
+        return browserIsFirefox() ? 'border-bottom-style' : 'border';
     }
 });

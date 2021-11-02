@@ -4,10 +4,8 @@ import { SharedDocumentationPageModule } from '../../../documentation/shared-doc
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
 import { API_FILES } from '../../api-files';
 
-
 import { FlexibleColumnLayoutDocsComponent } from './flexible-column-layout-docs.component';
 import { FlexibleColumnLayoutDocsHeaderComponent } from './flexible-column-layout-docs-header/flexible-column-layout-docs-header.component';
-
 
 import { FlexibleColumnLayoutExampleComponent } from './examples/default/flexible-column-layout-example.component';
 import { FlexibleColumnLayoutDynamicPageExampleComponent } from './examples/dynamic-page/flexible-column-layout-dynamic-page-example.component';

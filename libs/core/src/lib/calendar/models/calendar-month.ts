@@ -1,10 +1,4 @@
-export interface CalendarMonth {
+import { BaseCalendarCell } from './common';
+export interface CalendarMonth extends BaseCalendarCell {
     month: number; // 1 - 12
-    label: string; // month name
-    id?: string;
-    current?: boolean;
-    selected?: boolean;
-    tabIndex?: number;
-    ariaLabel?: string;
-    index?: number;
 }

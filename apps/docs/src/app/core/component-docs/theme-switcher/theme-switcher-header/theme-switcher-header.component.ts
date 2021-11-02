@@ -6,10 +6,9 @@ import { ExampleFile } from '../../../../documentation/core-helpers/code-example
     templateUrl: './theme-switcher-header.component.html'
 })
 export class ThemeSwitcherHeaderComponent {
-    file: ExampleFile =
-        {
-            code: {
-                default: `{
+    file: ExampleFile = {
+        code: {
+            default: `{
     "glob": "**/css_variables.css",
     "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/",
     "output": "./assets/theming-base/"
@@ -19,8 +18,7 @@ export class ThemeSwitcherHeaderComponent {
     "input": "./node_modules/fundamental-styles/dist/theming/",
     "output": "./assets/fundamental-styles-theming/"
 }`
-            },
-            language: 'json'
-        }
-    ;
+        },
+        language: 'json'
+    };
 }

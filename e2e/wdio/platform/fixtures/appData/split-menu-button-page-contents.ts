@@ -1,8 +1,4 @@
-export const behaviorBtnTextArr = [
-    'Option 2',
-    'Option 2 with long text',
-    'Option 2 with text'
-];
+export const behaviorBtnTextArr = ['Option 2', 'Option 2 with long text', 'Option 2 with text'];
 export const typesBtnTextArr = [
     'Standard Button 2',
     'Positive Button 2',
@@ -11,11 +7,7 @@ export const typesBtnTextArr = [
     'Transparent Button 2',
     'Emphasized Button 2'
 ];
-export const iconBtnTextArr = [
-    'Option 2',
-    'Option 2 with long text',
-    'Option 2 with text'
-];
+export const iconBtnTextArr = ['Option 2', 'Option 2 with long text', 'Option 2 with text'];
 export const standardBtnText = 'Standard Button';
 export const standardBtnText2 = 'Standard Button 2';
 export const iconAttr = 'icon';

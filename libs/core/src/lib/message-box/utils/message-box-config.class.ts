@@ -5,13 +5,15 @@ import { DialogConfigBase } from '@fundamental-ngx/core/dialog';
 
 export const MESSAGE_BOX_DEFAULT_CONFIG = new InjectionToken<MessageBoxConfig>('Default MessageBoxConfig');
 /** @hidden */
-export const MESSAGE_BOX_CONFIGURABLE_ELEMENT = new InjectionToken<MessageBoxConfigurableElement>('Configurable Message Box element');
+export const MESSAGE_BOX_CONFIGURABLE_ELEMENT = new InjectionToken<MessageBoxConfigurableElement>(
+    'Configurable Message Box element'
+);
 
 export type MessageBoxType = 'error' | 'success' | 'warning' | 'information' | 'confirmation';
 
 /** @hidden */
 export interface MessageBoxConfigurableElement {
-    messageBoxConfig: MessageBoxConfig
+    messageBoxConfig: MessageBoxConfig;
 }
 
 @Injectable()

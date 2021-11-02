@@ -26,7 +26,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), FeedInputModule, SharedDocumentationPageModule, AvatarModule, FormControlModule],
+    imports: [
+        RouterModule.forChild(routes),
+        FeedInputModule,
+        SharedDocumentationPageModule,
+        AvatarModule,
+        FormControlModule
+    ],
     exports: [RouterModule],
     declarations: [
         FeedInputHeaderComponent,

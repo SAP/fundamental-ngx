@@ -4,21 +4,16 @@ import { Component, ViewChild } from '@angular/core';
 import { DynamicPageService } from '../../dynamic-page.service';
 import { DynamicPageModule } from '../../dynamic-page.module';
 import { DynamicPageSubheaderComponent } from './dynamic-page-subheader.component';
+import { first } from 'rxjs/operators';
 
 @Component({
-    template: `
-        <fd-dynamic-page-subheader></fd-dynamic-page-subheader>`,
-    providers: [
-        DynamicPageService
-    ]
+    template: ` <fd-dynamic-page-subheader></fd-dynamic-page-subheader>`,
+    providers: [DynamicPageService]
 })
 class TestComponent {
-
     @ViewChild(DynamicPageSubheaderComponent) subHeader: DynamicPageSubheaderComponent;
 
-    constructor(
-        public dynamicPageService: DynamicPageService
-    ) {}
+    constructor(public dynamicPageService: DynamicPageService) {}
 }
 
 describe('DynamicPageHeaderComponent', () => {
@@ -37,9 +32,8 @@ describe('DynamicPageHeaderComponent', () => {
         fixture = TestBed.createComponent(TestComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-        subHeader = component.subHeader
+        subHeader = component.subHeader;
     });
-
 
     it('should create', () => {
         expect(fixture).toBeTruthy();
@@ -54,7 +48,9 @@ describe('DynamicPageHeaderComponent', () => {
 
     it('should toggle collapse', () => {
         let visibilityChanged = false;
-        component.dynamicPageService.subheaderVisibilityChange.subscribe(() => visibilityChanged = true);
+        component.dynamicPageService.subheaderVisibilityChange
+            .pipe(first())
+            .subscribe(() => (visibilityChanged = true));
         subHeader.collapsed = false;
         subHeader.collapsed = true;
 
@@ -68,5 +64,4 @@ describe('DynamicPageHeaderComponent', () => {
 
         expect(subHeader.collapsed).toBeTrue();
     });
-
 });

@@ -41,13 +41,16 @@ import { ButtonComponent } from '@fundamental-ngx/core/button';
         class: 'fd-list__item',
         role: 'listitem'
     },
-    providers: [{
-        provide: LIST_ITEM_COMPONENT,
-        useExisting: forwardRef(() => ListItemComponent)
-    }, {
-        provide: ListFocusItem,
-        useExisting: forwardRef(() => ListItemComponent)
-    }],
+    providers: [
+        {
+            provide: LIST_ITEM_COMPONENT,
+            useExisting: forwardRef(() => ListItemComponent)
+        },
+        {
+            provide: ListFocusItem,
+            useExisting: forwardRef(() => ListItemComponent)
+        }
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
@@ -66,7 +69,7 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     }
     set tabindex(value: number) {
         this._tabIndex = coerceNumberProperty(value, -1);
-    };
+    }
 
     /** Whether there is no data inside list item */
     @Input()
@@ -130,10 +133,7 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
     /** @hidden */
     private _tabIndex = 0;
 
-    constructor(
-        public elementRef: ElementRef,
-        private _changeDetectorRef: ChangeDetectorRef
-    ) {
+    constructor(public elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
         super(elementRef);
     }
 
@@ -179,10 +179,7 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
 
     /** @hidden */
     private _listenOnLinkQueryChange(): void {
-        this.linkDirectives.changes.pipe(
-            takeUntil(this._onDestroy$),
-            startWith(0)
-        ).subscribe(() => {
+        this.linkDirectives.changes.pipe(takeUntil(this._onDestroy$), startWith(0)).subscribe(() => {
             this.link = this.linkDirectives.length > 0;
             this._changeDetectorRef.detectChanges();
         });
@@ -190,10 +187,7 @@ export class ListItemComponent extends ListFocusItem implements AfterContentInit
 
     /** @hidden */
     private _listenOnButtonQueryChange(): void {
-        this.buttons.changes.pipe(
-            takeUntil(this._onDestroy$),
-            startWith(0)
-        ).subscribe(_ => {
+        this.buttons.changes.pipe(takeUntil(this._onDestroy$), startWith(0)).subscribe((_) => {
             this.buttons.forEach(this._addClassToButtons);
         });
     }

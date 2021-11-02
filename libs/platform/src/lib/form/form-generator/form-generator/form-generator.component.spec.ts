@@ -28,18 +28,18 @@ import { FormGeneratorService } from '../form-generator.service';
             [formItems]="formItems"
             [mainTitle]="formTitle"
             (formSubmitted)="onFormSubmitted($event)"
-            (formCreated)="onFormCreated($event)"></fdp-form-generator>
+            (formCreated)="onFormCreated($event)"
+        ></fdp-form-generator>
     `
 })
 export class HostComponent {
-
     @ViewChild(FormGeneratorComponent) formGenerator: FormGeneratorComponent;
 
     formCreated = false;
 
     form: FormGroup;
 
-    formValue: {[key: string]: any};
+    formValue: { [key: string]: any };
 
     formTitle = 'Test form title';
 
@@ -48,9 +48,9 @@ export class HostComponent {
             name: 'firstQuestion',
             message: 'First question',
             type: 'input',
-            validate: (value) => value === 25 ? null : 'Should be 25'
+            validate: (value) => (value === 25 ? null : 'Should be 25')
         }
-    ]
+    ];
 
     onFormCreated(form): void {
         this.formCreated = true;
@@ -71,39 +71,41 @@ xdescribe('FormGeneratorComponent', () => {
     let component: HostComponent;
     let fixture: ComponentFixture<HostComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [
-                FdpFormGroupModule,
-                PlatformInputModule,
-                FormsModule,
-                ReactiveFormsModule,
-                PlatformButtonModule,
-                PlatformCheckboxGroupModule,
-                PlatformSelectModule,
-                PlatformRadioGroupModule,
-                PlatformTextAreaModule,
-                PlatformInputModule,
-                PlatformDatePickerModule,
-                PlatformSwitchModule,
-                BusyIndicatorModule,
-            ],
-            declarations: [
-                DynamicFormControlDirective,
-                DynamicFormControlFieldDirective,
-                DynamicFormGeneratorInputComponent,
-                FormGeneratorComponent,
-                HostComponent
-            ],
-            providers: [FormGeneratorService]
-        })
-            .overrideModule(BrowserDynamicTestingModule, {
-                set: {
-                    entryComponents: [DynamicFormGeneratorInputComponent]
-                }
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [
+                    FdpFormGroupModule,
+                    PlatformInputModule,
+                    FormsModule,
+                    ReactiveFormsModule,
+                    PlatformButtonModule,
+                    PlatformCheckboxGroupModule,
+                    PlatformSelectModule,
+                    PlatformRadioGroupModule,
+                    PlatformTextAreaModule,
+                    PlatformInputModule,
+                    PlatformDatePickerModule,
+                    PlatformSwitchModule,
+                    BusyIndicatorModule
+                ],
+                declarations: [
+                    DynamicFormControlDirective,
+                    DynamicFormControlFieldDirective,
+                    DynamicFormGeneratorInputComponent,
+                    FormGeneratorComponent,
+                    HostComponent
+                ],
+                providers: [FormGeneratorService]
             })
-            .compileComponents();
-    }));
+                .overrideModule(BrowserDynamicTestingModule, {
+                    set: {
+                        entryComponents: [DynamicFormGeneratorInputComponent]
+                    }
+                })
+                .compileComponents();
+        })
+    );
 
     beforeEach(async () => {
         fixture = TestBed.createComponent(HostComponent);
@@ -115,17 +117,18 @@ xdescribe('FormGeneratorComponent', () => {
     it('should render form title', async () => {
         await whenStable(fixture);
 
-        expect(fixture.debugElement.query(By.css('.fd-form-header__text')).nativeElement.innerText)
-            .toEqual(component.formTitle)
+        expect(fixture.debugElement.query(By.css('.fd-form-header__text')).nativeElement.innerText).toEqual(
+            component.formTitle
+        );
     });
 
-    it('should create form', async() => {
+    it('should create form', async () => {
         await whenStable(fixture);
 
         expect(component.formCreated).toBeTruthy();
     });
 
-    it('should create form and pass form object', async() => {
+    it('should create form and pass form object', async () => {
         await whenStable(fixture);
         expect(component.form.controls).toBeTruthy();
     });
@@ -135,11 +138,11 @@ xdescribe('FormGeneratorComponent', () => {
 
         component.form.controls.firstQuestion.setValue(25);
 
-        await new Promise(resolve => setTimeout(() => resolve(null), 20));
+        await new Promise((resolve) => setTimeout(() => resolve(null), 20));
 
         component.submitForm();
 
-        await new Promise(resolve => setTimeout(() => resolve(null), 200));
+        await new Promise((resolve) => setTimeout(() => resolve(null), 200));
         fixture.detectChanges();
 
         expect(component.formValue).toBeTruthy();
@@ -149,11 +152,11 @@ xdescribe('FormGeneratorComponent', () => {
         await whenStable(fixture);
         component.form.controls.firstQuestion.setValue(0);
 
-        await new Promise(resolve => setTimeout(() => resolve(null), 20));
+        await new Promise((resolve) => setTimeout(() => resolve(null), 20));
 
         component.submitForm();
 
-        await new Promise(resolve => setTimeout(() => resolve(null), 200));
+        await new Promise((resolve) => setTimeout(() => resolve(null), 200));
         fixture.detectChanges();
 
         expect(component.formValue).toBeFalsy();

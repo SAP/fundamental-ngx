@@ -93,7 +93,7 @@ const ITEMS: ExampleItem[] = [
             value: 489.01,
             currency: 'EUR'
         },
-        status: 'Out of stock',
+        status: 'Out of stock'
     },
     {
         name: 'Astro Phone 6',
@@ -112,7 +112,7 @@ const ITEMS: ExampleItem[] = [
             value: 36.56,
             currency: 'NZD'
         },
-        status: 'Stocked on demand',
+        status: 'Stocked on demand'
     },
     {
         name: 'Beam Breaker B-2',
@@ -131,7 +131,7 @@ const ITEMS: ExampleItem[] = [
             value: 243.49,
             currency: 'CNY'
         },
-        status: 'Stocked on demand',
+        status: 'Stocked on demand'
     },
     {
         name: 'Bending Screen 21HD',
@@ -188,7 +188,7 @@ const ITEMS: ExampleItem[] = [
             value: 354.46,
             currency: 'EUR'
         },
-        status: 'Stocked on demand',
+        status: 'Stocked on demand'
     },
     {
         name: 'Ergo Screen E-I',
@@ -207,7 +207,7 @@ const ITEMS: ExampleItem[] = [
             value: 75.86,
             currency: 'EUR'
         },
-        status: 'No info',
+        status: 'No info'
     },
     {
         name: 'Gaming Monster',
@@ -226,6 +226,6 @@ const ITEMS: ExampleItem[] = [
             value: 213.47,
             currency: 'MZN'
         },
-        status: 'Out of stock',
+        status: 'Out of stock'
     }
 ];

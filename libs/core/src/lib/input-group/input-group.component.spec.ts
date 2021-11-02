@@ -10,23 +10,26 @@ import {
 import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 import { ContentDensityService, DEFAULT_CONTENT_DENSITY } from '../utils/public_api';
+import { first } from 'rxjs/operators';
 
 describe('InputGroupComponent', () => {
     let component: InputGroupComponent;
     let fixture: ComponentFixture<InputGroupComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [FormsModule, ButtonModule, IconModule],
-            declarations: [
-                InputGroupInputDirective,
-                InputGroupAddOnDirective,
-                InputGroupTextareaDirective,
-                InputGroupComponent
-            ],
-            providers: [ContentDensityService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [FormsModule, ButtonModule, IconModule],
+                declarations: [
+                    InputGroupInputDirective,
+                    InputGroupAddOnDirective,
+                    InputGroupTextareaDirective,
+                    InputGroupComponent
+                ],
+                providers: [ContentDensityService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(InputGroupComponent);
@@ -38,8 +41,11 @@ describe('InputGroupComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should get an ID and handle the close event for that ID', () => {
-        component.addOnButtonClicked.subscribe(($event) => expect($event).toBeDefined());
+    it('should get an ID and handle the close event for that ID', (done) => {
+        component.addOnButtonClicked.pipe(first()).subscribe(($event) => {
+            expect($event).toBeDefined();
+            done();
+        });
         component.buttonClicked({});
     });
 

@@ -6,11 +6,13 @@ describe('NotificationLimitComponent', () => {
     let component: NotificationLimitComponent;
     let fixture: ComponentFixture<NotificationLimitComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [NotificationLimitComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [NotificationLimitComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(NotificationLimitComponent);

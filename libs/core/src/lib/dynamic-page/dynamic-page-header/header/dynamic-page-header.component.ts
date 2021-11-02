@@ -36,7 +36,6 @@ export const ActionSquashBreakpointPx = 1280;
     }
 })
 export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDestroy {
-
     /** Title property for dynamic page */
     @Input()
     title: string;
@@ -73,8 +72,7 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
         private _dynamicPageService: DynamicPageService,
         private _ngZone: NgZone,
         private _changeDetRef: ChangeDetectorRef
-    ) {
-    }
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
@@ -143,15 +141,12 @@ export class DynamicPageHeaderComponent implements OnInit, AfterViewInit, OnDest
 
     /** @hidden */
     private _listenToPageChanges(): void {
-        this._dynamicPageService.pixelsSizeChanged
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(pixels => {
-                const actionsSquashed: boolean = pixels < ActionSquashBreakpointPx;
-                if (actionsSquashed !== this._actionsSquashed) {
-                    this._actionsSquashed = actionsSquashed;
-                    this._changeDetRef.detectChanges();
-                }
-            })
-        ;
+        this._dynamicPageService.pixelsSizeChanged.pipe(takeUntil(this._onDestroy$)).subscribe((pixels) => {
+            const actionsSquashed: boolean = pixels < ActionSquashBreakpointPx;
+            if (actionsSquashed !== this._actionsSquashed) {
+                this._actionsSquashed = actionsSquashed;
+                this._changeDetRef.detectChanges();
+            }
+        });
     }
 }

@@ -11,13 +11,9 @@ import {
     waitForNotDisplayed
 } from '../../driver/wdio';
 
-describe('Textarea component test', function () {
+describe('Textarea component test', () => {
     const messageToastPage = new MessageToastPo();
-    const {
-        openMessageButton,
-        hideAllButton,
-        messageToast
-    } = messageToastPage;
+    const { openMessageButton, hideAllButton, messageToast } = messageToastPage;
 
     beforeAll(() => {
         messageToastPage.open();
@@ -79,5 +75,4 @@ describe('Textarea component test', function () {
         messageToastPage.saveExampleBaselineScreenshot();
         expect(messageToastPage.compareWithBaseline()).toBeLessThan(5);
     });
-
 });

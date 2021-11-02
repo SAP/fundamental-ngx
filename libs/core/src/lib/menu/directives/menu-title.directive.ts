@@ -8,7 +8,6 @@ import { Directive, ElementRef, HostBinding } from '@angular/core';
     selector: '[fd-menu-title]'
 })
 export class MenuTitleDirective {
-
     /** @hidden */
     @HostBinding('class.fd-menu__title')
     fdMenuTitleClass = true;

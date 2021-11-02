@@ -6,23 +6,23 @@ import {
     doesItExist,
     getElementClass,
     scrollIntoView,
-    getElementArrayLength, 
-    setValue, 
-    sendKeys, 
+    getElementArrayLength,
+    setValue,
+    sendKeys,
     waitForElDisplayed
 } from '../../driver/wdio';
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
 
-describe('Token component test', function () {
+describe('Token component test', () => {
     const tokenPage = new TokenPo();
     const {
-        defaultExample, 
-        tokenizerExample, 
-        selectedExample, 
-        readOnlyExample, 
-        compactExample, 
-        token, 
-        closeBtn, 
+        defaultExample,
+        tokenizerExample,
+        selectedExample,
+        readOnlyExample,
+        compactExample,
+        token,
+        closeBtn,
         input,
         compactTokenizer
     } = tokenPage;
@@ -36,7 +36,7 @@ describe('Token component test', function () {
         waitForElDisplayed(tokenPage.title);
     }, 2);
 
-    describe('default example', function () {
+    describe('default example', () => {
         it('should check tokens clickable in default example', () => {
             checkElArrIsClickable(defaultExample + token);
         });
@@ -50,7 +50,10 @@ describe('Token component test', function () {
         it('should check size of tokens in compact example', () => {
             const tokensLength = getElementArrayLength(compactExample + token);
             for (let i = 0; i < tokensLength; i++) {
-                expect(getElementClass(compactExample + token, i)).toContain('compact', `token with index ${i} is not compact`);
+                expect(getElementClass(compactExample + token, i)).toContain(
+                    'compact',
+                    `token with index ${i} is not compact`
+                );
             }
         });
     });
@@ -63,7 +66,10 @@ describe('Token component test', function () {
         it('should check selected example', () => {
             const tokensLength = getElementArrayLength(selectedExample + token);
             for (let i = 0; i < tokensLength; i++) {
-                expect(getElementClass(selectedExample + token, i)).toContain('selected', `token with index ${i} is not selected by default but should`);
+                expect(getElementClass(selectedExample + token, i)).toContain(
+                    'selected',
+                    `token with index ${i} is not selected by default but should`
+                );
             }
         });
     });
@@ -77,7 +83,10 @@ describe('Token component test', function () {
             const tokensLength = getElementArrayLength(readOnlyExample + token);
             for (let i = 0; i < tokensLength; i++) {
                 click(readOnlyExample + token, i);
-                expect(getElementClass(readOnlyExample + token, i)).not.toContain('selected', `token with index ${i} selected but should not`);
+                expect(getElementClass(readOnlyExample + token, i)).not.toContain(
+                    'selected',
+                    `token with index ${i} selected but should not`
+                );
             }
         });
 
@@ -133,7 +142,10 @@ describe('Token component test', function () {
         sendKeys('Enter');
         const tokensLengthAfter = getElementArrayLength(section + token);
         expect(tokensLengthAfter).toEqual(tokensLengthBefore + 1, `new token is not created`);
-        expect(getText(section + token, tokensLengthAfter - 1)).toEqual('asd', `token value is not equal entered value`);
+        expect(getText(section + token, tokensLengthAfter - 1)).toEqual(
+            'asd',
+            `token value is not equal entered value`
+        );
     }
 
     function checkSelectingTokens(section: string): void {

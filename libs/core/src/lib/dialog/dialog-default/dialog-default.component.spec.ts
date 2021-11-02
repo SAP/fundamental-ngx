@@ -1,30 +1,35 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { DialogConfig, DialogDefaultComponent, DialogDefaultContent, DialogModule, DialogRef } from '@fundamental-ngx/core/dialog';
+import {
+    DialogConfig,
+    DialogDefaultComponent,
+    DialogDefaultContent,
+    DialogModule,
+    DialogRef
+} from '@fundamental-ngx/core/dialog';
 
 describe('DefaultDialogComponent', () => {
     let component: DialogDefaultComponent;
     let fixture: ComponentFixture<DialogDefaultComponent>;
     let object: DialogDefaultContent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [DialogModule, BrowserAnimationsModule],
-            providers: [DialogConfig, DialogRef]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [DialogModule, BrowserAnimationsModule],
+                providers: [DialogConfig, DialogRef]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         object = {
             approveButton: 'approveButton',
-            approveButtonCallback: () => {
-            },
+            approveButtonCallback: () => {},
             cancelButton: 'cancelButton',
-            cancelButtonCallback: () => {
-            },
-            closeButtonCallback: () => {
-            }
+            cancelButtonCallback: () => {},
+            closeButtonCallback: () => {}
         };
         fixture = TestBed.createComponent(DialogDefaultComponent);
         component = fixture.componentInstance;
@@ -54,9 +59,9 @@ describe('DefaultDialogComponent', () => {
         let closeClicked = false;
         component._defaultDialogContent = {
             ...component._defaultDialogContent,
-            closeButtonCallback: () => closeClicked = true,
-            cancelButtonCallback: () => cancelClicked = true,
-            approveButtonCallback: () => approveClicked = true
+            closeButtonCallback: () => (closeClicked = true),
+            cancelButtonCallback: () => (cancelClicked = true),
+            approveButtonCallback: () => (approveClicked = true)
         };
 
         component._approveButtonClicked();

@@ -28,7 +28,7 @@ export class ObjectMarkerComponent implements OnChanges, OnInit, CssClassBuilder
     /** User's custom classes */
     @Input()
     class: string;
-    
+
     /** Glyph (icon) of the Object Status.*/
     @Input()
     glyph: string;

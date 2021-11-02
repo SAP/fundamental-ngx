@@ -10,11 +10,7 @@ import { MessageToastRef } from '../message-toast-utils/message-toast-ref';
 import { MessageToastConfig } from '../message-toast-utils/message-toast-config';
 
 @Component({
-    template: `
-        <ng-template #testTemplate let-messageToast>
-            Message Toast Test Content
-        </ng-template>
-    `
+    template: ` <ng-template #testTemplate let-messageToast> Message Toast Test Content </ng-template> `
 })
 class TemplateTestComponent {
     @ViewChild('testTemplate') templateRef: TemplateRef<any>;

@@ -8,7 +8,9 @@ import {
     elementDisplayed,
     getAttributeByName,
     getElementArrayLength,
-    getText, mouseHoverElement, refreshPage,
+    getText,
+    mouseHoverElement,
+    refreshPage,
     scrollIntoView,
     sendKeys,
     waitForElDisplayed
@@ -20,20 +22,40 @@ import {
     tickLabelAttribute
 } from '../fixtures/appData/slider-contents';
 
-describe('slider test suite', function() {
+describe('slider test suite', () => {
     const sliderPage = new SliderPo();
     const {
-        basicExamples, sliderHandles, valueLabels, tooltipExamples, sliderTooltip, ticksAndLabelsExamples, sliderAttr,
-        sliderLabels, customExamples, rangeExamples, disabledExamples, cozyExamples, playgroundExamples,
-        sliderTypeMenu, sliderTypeOptions, sliderInput, firstSliderLabel, lastSliderLabel, secondSliderLabel,
-        progressTracker, inputCheckboxes, sliderTicks, sliderTooltipInput, sliderTooltipInputFF
+        basicExamples,
+        sliderHandles,
+        valueLabels,
+        tooltipExamples,
+        sliderTooltip,
+        ticksAndLabelsExamples,
+        sliderAttr,
+        sliderLabels,
+        customExamples,
+        rangeExamples,
+        disabledExamples,
+        cozyExamples,
+        playgroundExamples,
+        sliderTypeMenu,
+        sliderTypeOptions,
+        sliderInput,
+        firstSliderLabel,
+        lastSliderLabel,
+        secondSliderLabel,
+        progressTracker,
+        inputCheckboxes,
+        sliderTicks,
+        sliderTooltipInput,
+        sliderTooltipInputFF
     } = sliderPage;
 
     beforeAll(() => {
         sliderPage.open();
     }, 1);
 
-    describe('basic examples', function() {
+    describe('basic examples', () => {
         it('should check slider with default state', () => {
             const startValue = getText(basicExamples + valueLabels);
             clickAndMoveElement(basicExamples + sliderHandles, -50, 0);
@@ -44,7 +66,7 @@ describe('slider test suite', function() {
             const startValue = getText(basicExamples + valueLabels, 1);
             clickAndMoveElement(basicExamples + sliderHandles, -50, 0, 1);
             expect(getText(basicExamples + valueLabels, 1)).not.toEqual(startValue);
-            expect(getText(basicExamples + valueLabels, 1)).toContain(('-'));
+            expect(getText(basicExamples + valueLabels, 1)).toContain('-');
         });
 
         it('should check slider with step by 5', () => {
@@ -58,7 +80,7 @@ describe('slider test suite', function() {
         });
     });
 
-    describe('tooltip examples', function() {
+    describe('tooltip examples', () => {
         it('should check readonly tooltip', () => {
             scrollIntoView(tooltipExamples);
             mouseHoverElement(tooltipExamples + sliderHandles);
@@ -76,7 +98,7 @@ describe('slider test suite', function() {
         });
     });
 
-    xdescribe('tick marks and labels examples', function() {
+    xdescribe('tick marks and labels examples', () => {
         it('should check tick marks', () => {
             // in prod mode missed attr: ng-reflect-show-ticks and ng-reflect-show-ticks-labels
             scrollIntoView(ticksAndLabelsExamples);
@@ -89,7 +111,7 @@ describe('slider test suite', function() {
         });
     });
 
-    describe('custom value examples', function() {
+    describe('custom value examples', () => {
         it('should check custom slider values', () => {
             scrollIntoView(customExamples);
             const startValue = getText(customExamples + valueLabels);
@@ -98,7 +120,7 @@ describe('slider test suite', function() {
         });
     });
 
-    describe('range slider examples', function() {
+    describe('range slider examples', () => {
         it('should check default range slider', () => {
             scrollIntoView(rangeExamples);
             const startValuesArr = getText(rangeExamples + valueLabels).split('\n');
@@ -132,7 +154,7 @@ describe('slider test suite', function() {
         });
     });
 
-    xdescribe('disabled examples', function() {
+    xdescribe('disabled examples', () => {
         // in prod mode missed attr: ng-reflect-disabled
         it('should check range slider is disabled', () => {
             scrollIntoView(disabledExamples);
@@ -140,7 +162,7 @@ describe('slider test suite', function() {
         });
     });
 
-    describe('cozy examples', function() {
+    describe('cozy examples', () => {
         // in prod mode missed attr: ng-reflect-cozy
         xit('should check cozy property', () => {
             scrollIntoView(cozyExamples);
@@ -154,7 +176,7 @@ describe('slider test suite', function() {
         });
     });
 
-    describe('playground examples', function() {
+    describe('playground examples', () => {
         it('should check slider single and range sliders available', () => {
             scrollIntoView(playgroundExamples);
             expect(getElementArrayLength(playgroundExamples + sliderHandles)).toBe(1);
@@ -213,13 +235,13 @@ describe('slider test suite', function() {
         });
     });
 
-    describe('orientation check', function() {
+    describe('orientation check', () => {
         it('should check RTL/LTR orientations', () => {
             sliderPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             refreshPage();
             waitForElDisplayed(basicExamples);
@@ -229,10 +251,10 @@ describe('slider test suite', function() {
     });
 
     function clickTooltipInput(): void {
-        return (browserIsFirefox() ? click(sliderTooltipInputFF) : click(sliderTooltipInput));
+        return browserIsFirefox() ? click(sliderTooltipInputFF) : click(sliderTooltipInput);
     }
 
     function clearTooltipInput(): void {
-        return (browserIsFirefox() ? clearValue(sliderTooltipInputFF) : clearValue(sliderTooltipInput));
+        return browserIsFirefox() ? clearValue(sliderTooltipInputFF) : clearValue(sliderTooltipInput);
     }
 });

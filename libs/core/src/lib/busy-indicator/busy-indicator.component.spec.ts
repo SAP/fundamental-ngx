@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BusyIndicatorComponent } from './busy-indicator.component';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-
 @Component({
     template: `
         <fd-busy-indicator [loading]="loading" [size]="size" [block]="block">
@@ -24,9 +23,11 @@ describe('BusyIndicatorComponent', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [TestWrapperComponent, BusyIndicatorComponent]
-        }).overrideComponent(BusyIndicatorComponent, {
-            set: {changeDetection: ChangeDetectionStrategy.Default}
-        }).compileComponents();
+        })
+            .overrideComponent(BusyIndicatorComponent, {
+                set: { changeDetection: ChangeDetectionStrategy.Default }
+            })
+            .compileComponents();
 
         fixture = TestBed.createComponent(TestWrapperComponent);
         component = fixture.componentInstance;

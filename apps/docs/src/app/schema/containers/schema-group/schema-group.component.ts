@@ -52,6 +52,6 @@ export class SchemaGroupComponent implements OnInit {
      * Emits reset event.
      */
     reset(): void {
-        this.onReset.emit()
+        this.onReset.emit();
     }
 }

@@ -13,7 +13,6 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './message-strip-docs.component.html'
 })
 export class MessageStripDocsComponent {
-
     static schema: any = {
         properties: {
             properties: {
@@ -90,7 +89,7 @@ export class MessageStripDocsComponent {
     /**
      * Should show message strip component in playground.
      */
-     shouldShow = true;
+    shouldShow = true;
 
     /**
      * @hidden

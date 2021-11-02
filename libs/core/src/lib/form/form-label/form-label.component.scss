@@ -3,71 +3,71 @@
 $form-label-inline-help-placement-space: 0rem;
 
 @mixin rtl() {
-	@at-root {
-		[dir="rtl"] &,
-		&[dir="rtl"] {
-			@content;
-		}
-	}
+    @at-root {
+        [dir='rtl'] &,
+        &[dir='rtl'] {
+            @content;
+        }
+    }
 }
 
 @mixin left-placed() {
-	left: 0;
-	right: auto;
+    left: 0;
+    right: auto;
 }
 
 @mixin right-placed() {
-	right: 0;
-	left: auto;
+    right: 0;
+    left: auto;
 }
 
 .fd-form-label {
-	display: inline-block;
+    display: inline-block;
 }
 
 .fd-form-label__wrapper {
-	position: relative;
-	display: block;
+    position: relative;
+    display: block;
 
-	&--inline-help {
-		display: flex;
-		padding-left: $form-label-inline-help-placement-space;
+    &--inline-help {
+        display: flex;
+        padding-left: $form-label-inline-help-placement-space;
 
-		@include rtl() {
-			padding-left: 0;
-			padding-right: $form-label-inline-help-placement-space;
-		}
+        @include rtl() {
+            padding-left: 0;
+            padding-right: $form-label-inline-help-placement-space;
+        }
 
-		&--after {
-			padding-left: 0;
-			padding-right: $form-label-inline-help-placement-space;
+        &--after {
+            padding-left: 0;
+            padding-right: $form-label-inline-help-placement-space;
 
-			@include rtl() {
-				padding-right: 0;
-				padding-left: $form-label-inline-help-placement-space;
-			}
-		}
-	}
+            @include rtl() {
+                padding-right: 0;
+                padding-left: $form-label-inline-help-placement-space;
+            }
+        }
+    }
 }
 
 .fd-form-label__help {
-	position: relative;
-	top: 50%;
-	transform: translateY(3%);
-	align-items: center;
-	display: flex;
+    position: relative;
+    top: 50%;
+    transform: translateY(3%);
+    align-items: center;
+    display: flex;
 
-	@include left-placed();
+    @include left-placed();
 
-	@include rtl() {
-		@include right-placed();
-	}
+    @include rtl() {
+        @include right-placed();
+    }
 
-	&--after {
-		@include right-placed();
+    &--after {
+        @include right-placed();
 
-		@include rtl() {
-			@include left-placed();
-		}
-	}
+        @include rtl() {
+            @include left-placed();
+        }
+    }
 }

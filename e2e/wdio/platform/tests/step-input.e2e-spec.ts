@@ -1,6 +1,7 @@
 import {
     clearValue,
-    click, doubleClick,
+    click,
+    doubleClick,
     getElementArrayLength,
     getText,
     getValue,
@@ -9,7 +10,8 @@ import {
     sendKeys,
     setValue,
     waitForElDisplayed,
-    waitForPresent
+    waitForPresent,
+    clickRightMouseBtn
 } from '../../driver/wdio';
 import { StepInputPo } from '../pages/step-input.po';
 import {
@@ -19,12 +21,25 @@ import {
     checkValueChanged
 } from '../../helper/assertion-helper';
 
-describe('Step input test suite', function() {
+describe('Step input test suite', () => {
     const stepInputPage: StepInputPo = new StepInputPo();
     const {
-        stepInputRoot, activeButtonIncrement, activeButtonDecrement, allInput, allButtonIncrement, allButtonDecrement,
-        activeInput, reactiveFormInput, formInput, errorMessage, minMaxButtonDecrement,
-        minMaxButtonIncrement, inputWithoutForm, quantityText, formStatusText, fillInput
+        stepInputRoot,
+        activeButtonIncrement,
+        activeButtonDecrement,
+        allInput,
+        allButtonIncrement,
+        allButtonDecrement,
+        activeInput,
+        reactiveFormInput,
+        formInput,
+        errorMessage,
+        minMaxButtonDecrement,
+        minMaxButtonIncrement,
+        inputWithoutForm,
+        quantityText,
+        formStatusText,
+        fillInput
     } = stepInputPage;
 
     beforeAll(() => {
@@ -159,11 +174,24 @@ describe('Step input test suite', function() {
         }
     });
 
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6963
+    xit('Verify increment and decrement buttons', () => {
+        const arr = getElementArrayLength(activeInput);
+        for (let i = 0; i < arr; i++) {
+            scrollIntoView(activeInput, i);
+            let defaultValue = getValue(activeInput, i);
+            clickRightMouseBtn(activeButtonIncrement, i);
+            expect(getValue(activeInput, i)).toEqual(defaultValue, 'value changed by clickin on right mouse button');
+            clickRightMouseBtn(activeButtonDecrement, i);
+            expect(getValue(activeInput, i)).toEqual(defaultValue, 'value changed by clickin on right mouse button');
+        }
+    });
+
     it('Check LTR/RTL orientation', () => {
         stepInputPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             stepInputPage.saveExampleBaselineScreenshot();
             expect(stepInputPage.compareWithBaseline()).toBeLessThan(5);

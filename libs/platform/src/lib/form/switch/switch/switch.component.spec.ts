@@ -19,7 +19,8 @@ import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
                     ariaLabel="switch-label-0"
                     ariaLabelledby="switch-labelledby-0"
                     formControlName="switch0"
-                    (switchChange)="switchChange($event)">
+                    (switchChange)="switchChange($event)"
+                >
                 </fdp-switch>
             </fdp-form-field>
 
@@ -30,7 +31,8 @@ import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
                     ariaLabel="switch-label-1"
                     ariaLabelledby="switch-labelledby-1"
                     formControlName="switch1"
-                    contentDensity="compact">
+                    contentDensity="compact"
+                >
                 </fdp-switch>
             </fdp-form-field>
 
@@ -41,7 +43,8 @@ import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
                     ariaLabel="switch-label-2"
                     ariaLabelledby="switch-labelledby-2"
                     formControlName="switch2"
-                    semantic="true">
+                    semantic="true"
+                >
                 </fdp-switch>
             </fdp-form-field>
 
@@ -52,7 +55,8 @@ import { FdpFormGroupModule } from '../../form-group/fdp-form.module';
                     ariaLabel="switch-label-3"
                     ariaLabelledby="switch-labelledby-3"
                     formControlName="switch3"
-                    semantic="true">
+                    semantic="true"
+                >
                 </fdp-switch>
             </fdp-form-field>
         </fdp-form-group>
@@ -79,12 +83,14 @@ describe('SwitchComponent', () => {
     let component: TestSwitchComponent;
     let fixture: ComponentFixture<TestSwitchComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, FormsModule, ReactiveFormsModule, SwitchModule],
-            declarations: [TestSwitchComponent, SwitchComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [FdpFormGroupModule, FormModule, FormsModule, ReactiveFormsModule, SwitchModule],
+                declarations: [TestSwitchComponent, SwitchComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestSwitchComponent);

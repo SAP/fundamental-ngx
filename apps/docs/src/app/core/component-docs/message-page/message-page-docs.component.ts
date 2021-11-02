@@ -19,7 +19,7 @@ export class MessagePageDocsComponent {
             language: 'html',
             fileName: 'message-page-filter-example',
             code: messagePageFilterExample
-        },
+        }
     ];
 
     messagePageSearchExample: ExampleFile[] = [
@@ -27,7 +27,7 @@ export class MessagePageDocsComponent {
             language: 'html',
             fileName: 'message-page-search-example',
             code: messagePageSearchExample
-        },
+        }
     ];
 
     messagePageNoItemsExample: ExampleFile[] = [
@@ -35,7 +35,7 @@ export class MessagePageDocsComponent {
             language: 'html',
             fileName: 'message-page-no-items-example',
             code: messagePageNoItemsExample
-        },
+        }
     ];
 
     messagePageErrorExample: ExampleFile[] = [
@@ -43,7 +43,7 @@ export class MessagePageDocsComponent {
             language: 'html',
             fileName: 'message-page-error-example',
             code: messagePageErrorExample
-        },
+        }
     ];
 
     messagePageActionsExample: ExampleFile[] = [
@@ -51,7 +51,7 @@ export class MessagePageDocsComponent {
             language: 'html',
             fileName: 'message-page-actions-example',
             code: messagePageActionsExample
-        },
+        }
     ];
 
     messagePageCustomIconExample: ExampleFile[] = [
@@ -59,7 +59,7 @@ export class MessagePageDocsComponent {
             language: 'html',
             fileName: 'message-page-custom-icon-example',
             code: messagePageCustomIconExample
-        },
+        }
     ];
 
     messagePageNoIconExample: ExampleFile[] = [
@@ -67,6 +67,6 @@ export class MessagePageDocsComponent {
             language: 'html',
             fileName: 'message-page-no-icon-example',
             code: messagePageNoIconExample
-        },
+        }
     ];
 }

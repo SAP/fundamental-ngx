@@ -28,12 +28,14 @@ describe('MenuItemComponent', () => {
     let menuItem: MenuItemComponent;
     let menuInteractive: MenuInteractiveDirective;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestMenuItemComponent],
-            imports: [MenuModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestMenuItemComponent],
+                imports: [MenuModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestMenuItemComponent);
@@ -162,13 +164,14 @@ describe('MenuItemComponent nested', () => {
     let menuNestedItem: MenuItemComponent;
     let menuInteractive: MenuInteractiveDirective;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TesNestedMenuItemComponent],
-            imports: [CommonModule, PopoverModule, MenuModule]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TesNestedMenuItemComponent],
+                imports: [CommonModule, PopoverModule, MenuModule]
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TesNestedMenuItemComponent);
@@ -194,7 +197,6 @@ describe('MenuItemComponent nested', () => {
         expect(menuItem.submenu).toBeTruthy();
         expect(menuItem.submenuVisible).toBeFalse();
     });
-
 
     it('should open/close submenu', fakeAsync(() => {
         const setSelectedSpy = spyOn(menuInteractive, 'setSelected');

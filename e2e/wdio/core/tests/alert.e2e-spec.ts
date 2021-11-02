@@ -8,19 +8,16 @@ import {
     saveElementScreenshot,
     waitForElDisplayed,
     waitForInvisibilityOf,
-    checkElementScreenshot, isElementDisplayed, pause, waitForPresent, waitForNotDisplayed
+    checkElementScreenshot,
+    isElementDisplayed,
+    pause,
+    waitForPresent,
+    waitForNotDisplayed
 } from '../../driver/wdio';
 
-describe('Alert test suite', function() {
+describe('Alert test suite', () => {
     const alertPage = new AlertPo();
-    const {
-        alerts,
-        closeAlertButton,
-        openOverlayButton,
-        popupAlert,
-        button,
-        openCustomAlertButton
-    } = alertPage;
+    const { alerts, closeAlertButton, openOverlayButton, popupAlert, button, openCustomAlertButton } = alertPage;
 
     beforeAll(() => {
         alertPage.open();
@@ -31,7 +28,7 @@ describe('Alert test suite', function() {
         waitForElDisplayed(alerts);
     }, 1);
 
-    describe('main checks', function() {
+    describe('main checks', () => {
         it('should check ability to dismiss alert', () => {
             const dismissableAlertCount = getElementArrayLength(closeAlertButton);
 
@@ -53,11 +50,10 @@ describe('Alert test suite', function() {
 
         it('should check RTL/LTR orientations', () => {
             alertPage.checkRtlSwitch();
-        })
+        });
     });
 
-    xdescribe('visual regression', function() {
-
+    xdescribe('visual regression', () => {
         it('should check example blocks visual regression', () => {
             alertPage.saveExampleBaselineScreenshot();
             expect(alertPage.compareWithBaseline()).toBeLessThan(5);
@@ -69,9 +65,18 @@ describe('Alert test suite', function() {
             for (let i = 0; customAlertCount > i; i++) {
                 click(openCustomAlertButton, i);
                 waitForPresent(popupAlert);
-                saveElementScreenshot(popupAlert, `alert-customPopup-example-${i}-core-${getImageTagBrowserPlatform()}`, alertPage.getScreenshotFolder());
-                expect(checkElementScreenshot(popupAlert, `alert-customPopup-example-${i}-core-${getImageTagBrowserPlatform()}`, alertPage.getScreenshotFolder()))
-                    .toBeLessThan(5);
+                saveElementScreenshot(
+                    popupAlert,
+                    `alert-customPopup-example-${i}-core-${getImageTagBrowserPlatform()}`,
+                    alertPage.getScreenshotFolder()
+                );
+                expect(
+                    checkElementScreenshot(
+                        popupAlert,
+                        `alert-customPopup-example-${i}-core-${getImageTagBrowserPlatform()}`,
+                        alertPage.getScreenshotFolder()
+                    )
+                ).toBeLessThan(5);
                 waitForInvisibilityOf(popupAlert);
             }
         }, 1);

@@ -31,10 +31,7 @@ export class SliderDocsComponent {
                 properties: {
                     mode: {
                         type: 'string',
-                        enum: [
-                            'single',
-                            'range'
-                        ]
+                        enum: ['single', 'range']
                     },
                     min: {
                         type: 'integer'

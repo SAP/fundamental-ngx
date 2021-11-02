@@ -34,13 +34,15 @@ describe('NestedListDirectives', () => {
     let titleElement: NestedListTitleDirective;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [NestedListModule],
-            declarations: [TestNestedContainerComponent],
-            providers: [NestedItemService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [NestedListModule],
+                declarations: [TestNestedContainerComponent],
+                providers: [NestedItemService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNestedContainerComponent);
@@ -63,7 +65,6 @@ describe('NestedListDirectives', () => {
 
         expect((<any>expandIconElement)._itemService.toggle.next).toHaveBeenCalled();
         expect(expandIconElement.expanded).toBeTruthy();
-
     });
 
     it('Title should give valid title string', () => {

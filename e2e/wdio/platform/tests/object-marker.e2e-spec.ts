@@ -1,20 +1,17 @@
 import { ObjectMarkerPo } from '../pages/object-marker.po';
 import {
     getElementAriaLabel,
-    getElementArrayLength, getElementTitle,
+    getElementArrayLength,
+    getElementTitle,
     refreshPage,
     waitForPresent
 } from '../../driver/wdio';
 import { iconStatusesList } from '../fixtures/appData/object-marker-contents';
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
 
-describe('Object marker test suite', function() {
+describe('Object marker test suite', () => {
     const objectMarkerPage = new ObjectMarkerPo();
-    const {
-        marker,
-        iconOnlyMarkers,
-        clickableMarkers
-    } = objectMarkerPage;
+    const { marker, iconOnlyMarkers, clickableMarkers } = objectMarkerPage;
 
     beforeAll(() => {
         objectMarkerPage.open();

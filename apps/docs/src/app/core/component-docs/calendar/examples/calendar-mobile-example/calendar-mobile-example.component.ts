@@ -1,5 +1,11 @@
 import { Component, TemplateRef, ViewEncapsulation } from '@angular/core';
-import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import {
+    DatetimeAdapter,
+    DATE_TIME_FORMATS,
+    FdDate,
+    FdDatetimeAdapter,
+    FD_DATETIME_FORMATS
+} from '@fundamental-ngx/core/datetime';
 import { DialogService } from '@fundamental-ngx/core/dialog';
 
 @Component({
@@ -45,4 +51,6 @@ export class CalendarMobileExampleComponent {
     dateChanged(date: FdDate): void {
         this.datePicked = date;
     }
+
+    noop(): void {}
 }

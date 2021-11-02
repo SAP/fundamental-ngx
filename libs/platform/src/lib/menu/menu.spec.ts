@@ -27,7 +27,8 @@ function mouseClickOnElement(el: Element): void {
             <fdp-menu-item (itemSelect)="onSelect('Orange')">Orange</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onSelect('Peach')">Peach</fdp-menu-item>
         </fdp-menu>
-        <button #otherButton>Another Button</button> `
+        <button #otherButton>Another Button</button>
+    `
 })
 class SimpleMenuComponent {
     @ViewChild('button', { static: false }) button: ElementRef<HTMLElement>;
@@ -38,7 +39,7 @@ class SimpleMenuComponent {
 
     public currentSelectedItem = '';
 
-    constructor() { }
+    constructor() {}
 
     onSelect(item: string): void {
         this.currentSelectedItem = item;
@@ -54,17 +55,19 @@ describe('Simple Menu', () => {
     let otherButton: ElementRef<HTMLElement>;
     let trigger: MenuTriggerDirective;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [PlatformMenuModule],
-            declarations: [SimpleMenuComponent],
-            providers: [RtlService]
-        }).compileComponents();
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformMenuModule],
+                declarations: [SimpleMenuComponent],
+                providers: [RtlService]
+            }).compileComponents();
 
-        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-            overlayContainerEl = overlayContainer.getContainerElement();
-        })();
-    }));
+            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+                overlayContainerEl = overlayContainer.getContainerElement();
+            })();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(SimpleMenuComponent);
@@ -366,9 +369,8 @@ describe('Simple Menu', () => {
         </fdp-menu>
         <fdp-menu #appleMenu id="appleMenu">
             <fdp-menu-item (itemSelect)="onSelect('Braeburn')" [fdpMenuTriggerFor]="braeburnMenu"
-            >Braeburn
-            </fdp-menu-item
-            >
+                >Braeburn
+            </fdp-menu-item>
             <fdp-menu-item (itemSelect)="onSelect('Fuji')">Fuji</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onSelect('Honey Crisp')">Honey Crisp</fdp-menu-item>
         </fdp-menu>
@@ -380,7 +382,8 @@ describe('Simple Menu', () => {
         <fdp-menu #braeburnMenu id="braeburnMenu">
             <fdp-menu-item (itemSelect)="onSelect('Red Braeburn')">Red Braeburn</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onSelect('Pink Braeburn')">Pink Braeburn</fdp-menu-item>
-        </fdp-menu> `
+        </fdp-menu>
+    `
 })
 class CascadingMenuComponent {
     @ViewChild('button', { static: false }) button: ElementRef<HTMLElement>;
@@ -390,7 +393,7 @@ class CascadingMenuComponent {
 
     public currentSelectedItem = '';
 
-    constructor() { }
+    constructor() {}
 
     onSelect(item: string): void {
         this.currentSelectedItem = item;
@@ -405,17 +408,19 @@ describe('Cascading Menu', () => {
     let button: ElementRef<HTMLElement>;
     let trigger: MenuTriggerDirective;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [PlatformMenuModule],
-            declarations: [CascadingMenuComponent],
-            providers: [RtlService]
-        }).compileComponents();
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformMenuModule],
+                declarations: [CascadingMenuComponent],
+                providers: [RtlService]
+            }).compileComponents();
 
-        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-            overlayContainerEl = overlayContainer.getContainerElement();
-        })();
-    }));
+            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+                overlayContainerEl = overlayContainer.getContainerElement();
+            })();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CascadingMenuComponent);
@@ -764,7 +769,8 @@ describe('Cascading Menu', () => {
             <fdp-menu-item (itemSelect)="onSelect('Cavandish')">Cavandish</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onSelect('Lady Finger')">Lady Finger</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onSelect('Red')">Red</fdp-menu-item>
-        </fdp-menu> `
+        </fdp-menu>
+    `
 })
 class CascadingBeforeMenuComponent {
     @ViewChild('button', { static: false }) button: ElementRef<HTMLElement>;
@@ -774,7 +780,7 @@ class CascadingBeforeMenuComponent {
 
     public currentSelectedItem = '';
 
-    constructor() { }
+    constructor() {}
 
     onSelect(item: string): void {
         this.currentSelectedItem = item;
@@ -789,17 +795,19 @@ describe('Cascading Menu - Position Before', () => {
     let button: ElementRef<HTMLElement>;
     let trigger: MenuTriggerDirective;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [PlatformMenuModule],
-            declarations: [CascadingBeforeMenuComponent],
-            providers: [RtlService]
-        }).compileComponents();
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformMenuModule],
+                declarations: [CascadingBeforeMenuComponent],
+                providers: [RtlService]
+            }).compileComponents();
 
-        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-            overlayContainerEl = overlayContainer.getContainerElement();
-        })();
-    }));
+            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+                overlayContainerEl = overlayContainer.getContainerElement();
+            })();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CascadingBeforeMenuComponent);
@@ -885,7 +893,8 @@ describe('Cascading Menu - Position Before', () => {
             <fdp-menu-item (itemSelect)="onSelect('Cavandish')">Cavandish</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onSelect('Lady Finger')">Lady Finger</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onSelect('Red')">Red</fdp-menu-item>
-        </fdp-menu> `
+        </fdp-menu>
+    `
 })
 class CascadingAfterRTLMenuComponent {
     @ViewChild('button', { static: false }) button: ElementRef<HTMLElement>;
@@ -895,7 +904,7 @@ class CascadingAfterRTLMenuComponent {
 
     public currentSelectedItem = '';
 
-    constructor() { }
+    constructor() {}
 
     onSelect(item: string): void {
         this.currentSelectedItem = item;
@@ -914,22 +923,24 @@ describe('Cascading Menu - Position After, RTL', () => {
         rtl: of(true)
     };
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [PlatformMenuModule],
-            declarations: [CascadingAfterRTLMenuComponent],
-            providers: [
-                {
-                    provide: RtlService,
-                    useFactory: () => dirProvider
-                }
-            ]
-        }).compileComponents();
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformMenuModule],
+                declarations: [CascadingAfterRTLMenuComponent],
+                providers: [
+                    {
+                        provide: RtlService,
+                        useFactory: () => dirProvider
+                    }
+                ]
+            }).compileComponents();
 
-        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-            overlayContainerEl = overlayContainer.getContainerElement();
-        })();
-    }));
+            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+                overlayContainerEl = overlayContainer.getContainerElement();
+            })();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CascadingAfterRTLMenuComponent);
@@ -1015,7 +1026,8 @@ describe('Cascading Menu - Position After, RTL', () => {
             <fdp-menu-item (itemSelect)="onSelect('Cavandish')">Cavandish</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onSelect('Lady Finger')">Lady Finger</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onSelect('Red')">Red</fdp-menu-item>
-        </fdp-menu> `
+        </fdp-menu>
+    `
 })
 class CascadingBeforeRTLMenuComponent {
     @ViewChild('button', { static: false }) button: ElementRef<HTMLElement>;
@@ -1025,7 +1037,7 @@ class CascadingBeforeRTLMenuComponent {
 
     public currentSelectedItem = '';
 
-    constructor() { }
+    constructor() {}
 
     onSelect(item: string): void {
         this.currentSelectedItem = item;
@@ -1044,22 +1056,24 @@ describe('Cascading Menu - Position Before, RTL', () => {
         rtl: of(true)
     };
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [PlatformMenuModule],
-            declarations: [CascadingBeforeRTLMenuComponent],
-            providers: [
-                {
-                    provide: RtlService,
-                    useFactory: () => dirProvider
-                }
-            ]
-        }).compileComponents();
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformMenuModule],
+                declarations: [CascadingBeforeRTLMenuComponent],
+                providers: [
+                    {
+                        provide: RtlService,
+                        useFactory: () => dirProvider
+                    }
+                ]
+            }).compileComponents();
 
-        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-            overlayContainerEl = overlayContainer.getContainerElement();
-        })();
-    }));
+            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+                overlayContainerEl = overlayContainer.getContainerElement();
+            })();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CascadingBeforeRTLMenuComponent);
@@ -1137,7 +1151,8 @@ describe('Cascading Menu - Position Before, RTL', () => {
             <fdp-menu-item (itemSelect)="onSelect('Banana')">Banana</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onSelect('Orange')">Orange</fdp-menu-item>
             <fdp-menu-item (itemSelect)="onSelect('Peach')">Peach</fdp-menu-item>
-        </fdp-menu> `
+        </fdp-menu>
+    `
 })
 class MultipleTriggersMenuComponent {
     @ViewChild('fruitButton') fruitButton: ElementRef<HTMLElement>;
@@ -1148,7 +1163,7 @@ class MultipleTriggersMenuComponent {
 
     public currentSelectedItem = '';
 
-    constructor() { }
+    constructor() {}
 
     onSelect(item: string): void {
         this.currentSelectedItem = item;
@@ -1164,22 +1179,24 @@ describe('Multiple triggers sharing same menu', () => {
         rtl: of(false)
     };
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [PlatformMenuModule],
-            declarations: [MultipleTriggersMenuComponent],
-            providers: [
-                {
-                    provide: RtlService,
-                    useFactory: () => dirProvider
-                }
-            ]
-        }).compileComponents();
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformMenuModule],
+                declarations: [MultipleTriggersMenuComponent],
+                providers: [
+                    {
+                        provide: RtlService,
+                        useFactory: () => dirProvider
+                    }
+                ]
+            }).compileComponents();
 
-        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-            overlayContainerEl = overlayContainer.getContainerElement();
-        })();
-    }));
+            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+                overlayContainerEl = overlayContainer.getContainerElement();
+            })();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MultipleTriggersMenuComponent);
@@ -1210,5 +1227,4 @@ describe('Multiple triggers sharing same menu', () => {
         menuEl = overlayContainerEl.querySelectorAll('.fd-menu');
         expect(menuEl.length).toBeGreaterThan(0);
     }));
-
 });

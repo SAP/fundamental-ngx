@@ -7,7 +7,6 @@ import { ModifyItemEvent } from '@fundamental-ngx/platform/list';
     templateUrl: './platform-list-with-delete-button-example.component.html'
 })
 export class PlatformListWithDeleteButtonExampleComponent {
-
     _deleteRow(event: ModifyItemEvent): void {
         event.source.itemEl.nativeElement.style.display = 'none';
     }

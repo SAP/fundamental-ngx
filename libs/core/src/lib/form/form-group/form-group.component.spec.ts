@@ -6,11 +6,13 @@ describe('FormGroupComponent', () => {
     let component: FormGroupComponent;
     let fixture: ComponentFixture<FormGroupComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [FormGroupComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [FormGroupComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(FormGroupComponent);

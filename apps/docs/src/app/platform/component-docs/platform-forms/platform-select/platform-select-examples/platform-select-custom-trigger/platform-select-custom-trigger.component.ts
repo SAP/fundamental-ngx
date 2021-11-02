@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ViewEncapsulation} from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 
 import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
 
@@ -10,7 +10,6 @@ import { FdpSelectionChangeEvent } from '@fundamental-ngx/platform/form';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlatformSelectCustomTriggerComponent {
-
     selectedValue: string;
     selected: string;
 
@@ -18,8 +17,7 @@ export class PlatformSelectCustomTriggerComponent {
         'Maximum width is part of the screen furthest to the right.',
         'Apple With less price',
         'Banana With bit more big line',
-        'Lorem ipsum dolor sit, amet' +
-       ' consectetur adipisicing elit.',
+        'Lorem ipsum dolor sit, amet' + ' consectetur adipisicing elit.',
         'Strawberry',
         'Broccoli',
         'Carrot',

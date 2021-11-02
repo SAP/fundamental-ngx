@@ -17,7 +17,7 @@ export class InlineHelpDocsComponent {
         {
             language: 'html',
             code: inlineHelpSrc,
-            fileName: 'inline-help-example',
+            fileName: 'inline-help-example'
         },
         {
             language: 'typescript',

@@ -7,10 +7,8 @@ import { KeyboardSupportService } from './services/keyboard-support/keyboard-sup
 import { FocusTrapService } from './services/focus-trap.service';
 
 @NgModule({
-    imports: [
-        CommonModule,
-    ],
+    imports: [CommonModule],
     exports: [],
     providers: [ContentDensityService, RtlService, ThemesService, KeyboardSupportService, FocusTrapService]
 })
-export class UtilsModule { }
+export class UtilsModule {}

@@ -25,7 +25,10 @@ import { DialogContentType } from '../dialog-service/dialog.service';
     template: '<ng-container #contentContainer></ng-container>',
     styleUrls: ['./dialog-container.component.scss']
 })
-export class DialogContainerComponent extends DynamicComponentContainer<DialogContentType> implements AfterViewInit, CssClassBuilder {
+export class DialogContainerComponent
+    extends DynamicComponentContainer<DialogContentType>
+    implements AfterViewInit, CssClassBuilder
+{
     /** Custom classes */
     @Input()
     set class(userClass: string) {
@@ -59,10 +62,7 @@ export class DialogContainerComponent extends DynamicComponentContainer<DialogCo
     /** @hidden */
     @applyCssClass
     buildComponentCssClass(): string[] {
-        return [
-            this.dialogConfig.containerClass ? this.dialogConfig.containerClass : '',
-            this._class
-        ];
+        return [this.dialogConfig.containerClass ? this.dialogConfig.containerClass : '', this._class];
     }
 
     /** @hidden */

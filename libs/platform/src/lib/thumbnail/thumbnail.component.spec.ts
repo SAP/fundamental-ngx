@@ -10,27 +10,31 @@ import { Media } from './thumbnail.interfaces';
     template: `<fdp-thumbnail [mediaList]="mediaList"></fdp-thumbnail>`
 })
 class DefaultThumbnailTestComponent {
-    mediaList: Media[] = [{
-        title: 'Nature Details',
-        thumbnailUrl: 'https://picsum.photos/400/400',
-        mediaType: 'video',
-        mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
-        alt: 'Failed to load https://picsum.photos/400/400',
-        label: 'nature'
-    }];
+    mediaList: Media[] = [
+        {
+            title: 'Nature Details',
+            thumbnailUrl: 'https://picsum.photos/400/400',
+            mediaType: 'video',
+            mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+            alt: 'Failed to load https://picsum.photos/400/400',
+            label: 'nature'
+        }
+    ];
 }
 
 describe('DefaultThumbnailComponent', () => {
     let component: DefaultThumbnailTestComponent;
     let fixture: ComponentFixture<DefaultThumbnailTestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [PlatformThumbnailModule],
-            declarations: [DefaultThumbnailTestComponent],
-            providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformThumbnailModule],
+                declarations: [DefaultThumbnailTestComponent],
+                providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DefaultThumbnailTestComponent);
@@ -48,7 +52,6 @@ describe('DefaultThumbnailComponent', () => {
     });
 
     it('check for loading of video element on media type video', () => {
-
         const videoElement = fixture.debugElement.query(By.css('video'));
         const imageElement = fixture.debugElement.query(By.css('img'));
         expect(imageElement).toBeFalsy();
@@ -60,27 +63,31 @@ describe('DefaultThumbnailComponent', () => {
     template: `<fdp-thumbnail [mediaList]="mediaList" [isHorizontal]="true"></fdp-thumbnail>`
 })
 class HorizontalThumbnailTestComponent {
-    mediaList: Media[] = [{
-        title: 'Nature Details',
-        thumbnailUrl: 'https://picsum.photos/400/400',
-        mediaType: 'video',
-        mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
-        alt: 'Failed to load https://picsum.photos/400/400',
-        label: 'nature'
-    }];
+    mediaList: Media[] = [
+        {
+            title: 'Nature Details',
+            thumbnailUrl: 'https://picsum.photos/400/400',
+            mediaType: 'video',
+            mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+            alt: 'Failed to load https://picsum.photos/400/400',
+            label: 'nature'
+        }
+    ];
 }
 
 describe('HorizontalThumbnailComponent', () => {
     let component: HorizontalThumbnailTestComponent;
     let fixture: ComponentFixture<HorizontalThumbnailTestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [PlatformThumbnailModule],
-            declarations: [HorizontalThumbnailTestComponent],
-            providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformThumbnailModule],
+                declarations: [HorizontalThumbnailTestComponent],
+                providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(HorizontalThumbnailTestComponent);
@@ -93,10 +100,8 @@ describe('HorizontalThumbnailComponent', () => {
     });
 
     it('check for thumbnail load horizontal', () => {
-
         const divElement = fixture.debugElement.query(By.css('div'));
         expect(divElement.nativeElement.classList.contains('fdp-thumbnail-container--horizontal')).toBe(true);
-
     });
 });
 
@@ -104,26 +109,30 @@ describe('HorizontalThumbnailComponent', () => {
     template: `<fdp-thumbnail [mediaList]="mediaList" [isHorizontal]="true"></fdp-thumbnail>`
 })
 class ImageThumbnailTestComponent {
-    mediaList = [{
-        thumbnailUrl: 'https://picsum.photos/400/400',
-        mediaType: 'image',
-        mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
-        alt: 'Failed to load https://picsum.photos/400/400',
-        label: 'nature'
-    }];
+    mediaList = [
+        {
+            thumbnailUrl: 'https://picsum.photos/400/400',
+            mediaType: 'image',
+            mediaUrl: 'https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4',
+            alt: 'Failed to load https://picsum.photos/400/400',
+            label: 'nature'
+        }
+    ];
 }
 
 describe('ImageThumbnailComponent', () => {
     let component: ImageThumbnailTestComponent;
     let fixture: ComponentFixture<ImageThumbnailTestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [PlatformThumbnailModule],
-            declarations: [ImageThumbnailTestComponent],
-            providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformThumbnailModule],
+                declarations: [ImageThumbnailTestComponent],
+                providers: [{ provide: RtlService, useValue: { rtl: { getValue: () => false } } }]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ImageThumbnailTestComponent);

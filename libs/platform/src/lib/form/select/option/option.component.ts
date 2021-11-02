@@ -1,9 +1,4 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    Input,
-    ViewEncapsulation
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 // Increasing integer for generating unique ids for radio components.
 let nextUniqueId = 0;
@@ -13,11 +8,7 @@ let nextUniqueId = 0;
  */
 @Component({
     selector: 'fdp-option',
-    template: `<fd-option
-    [id]= "id"
-    [value]="value"
-    [disabled]="disabled"
-    ><ng-content></ng-content></fd-option>`,
+    template: `<fd-option [id]="id" [value]="value" [disabled]="disabled"><ng-content></ng-content></fd-option>`,
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })

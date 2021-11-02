@@ -25,7 +25,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), SharedDocumentationPageModule, PlatformStepInputModule, FdpFormGroupModule],
+    imports: [
+        RouterModule.forChild(routes),
+        SharedDocumentationPageModule,
+        PlatformStepInputModule,
+        FdpFormGroupModule
+    ],
     exports: [RouterModule],
     declarations: [
         PlatformStepInputDocsComponent,

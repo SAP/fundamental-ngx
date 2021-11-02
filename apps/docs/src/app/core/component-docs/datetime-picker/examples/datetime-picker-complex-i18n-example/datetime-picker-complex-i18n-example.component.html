@@ -1,18 +1,10 @@
 <label fd-form-label>Languages</label>
 <div class="example">
-  <fd-select
-    (valueChange)="setLocale($event)"
-    placeholder="Select an option"
-    [(value)]="locale"
-  >
-    <fd-option
-      *ngFor="let option of ['en-ca','fr','de','bg','ar', 'zh']"
-      [value]="option"
-    >{{ option }}</fd-option>
-  </fd-select>
+    <fd-select (valueChange)="setLocale($event)" placeholder="Select an option" [(value)]="locale">
+        <fd-option *ngFor="let option of ['en-ca', 'fr', 'de', 'bg', 'ar', 'zh']" [value]="option">{{
+            option
+        }}</fd-option>
+    </fd-select>
 </div>
 
-<fd-datetime-picker
-  [placeholder]="placeholder"
-  [(ngModel)]="date"
-></fd-datetime-picker>
+<fd-datetime-picker [placeholder]="placeholder" [(ngModel)]="date"></fd-datetime-picker>

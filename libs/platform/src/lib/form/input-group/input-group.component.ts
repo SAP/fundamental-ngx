@@ -96,8 +96,8 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
 
     /** @hidden */
     get _controlStateClass(): string {
-        const status = this.status;
-        return status ? `is-${status}` : null;
+        const state = this.state;
+        return state ? `is-${state}` : null;
     }
 
     /** @hidden */
@@ -141,6 +141,16 @@ export class InputGroupComponent extends BaseInput implements OnInit, AfterConte
     /** @hidden */
     _onChangeInputValue(value: string): void {
         this.value = value;
+    }
+
+    /** @hidden */
+    _onKeyPress(event: KeyboardEvent): void {
+        // prevent typing non-digit chars
+        if (this._input.type === 'number') {
+            if (!event.key.match(/([0-9]|[-]|[,]|[.])/)) {
+                event.preventDefault();
+            }
+        }
     }
 
     /** @hidden */

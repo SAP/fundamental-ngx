@@ -6,7 +6,7 @@ import { QuickViewModule } from '../quick-view.module';
 import { QuickViewGroupItemComponent } from './quick-view-group-item.component';
 
 @Component({
-    template: `        
+    template: `
         <fd-quick-view-group-item>
             <fd-quick-view-group-item-label> Group Item Label </fd-quick-view-group-item-label>
             <fd-quick-view-group-item-content> Group Item Content </fd-quick-view-group-item-content>
@@ -19,12 +19,14 @@ describe('QuickViewGroupItemComponent', () => {
     let component: TestComponent;
     let fixture: ComponentFixture<TestComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [QuickViewModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [QuickViewModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);

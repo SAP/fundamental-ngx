@@ -12,13 +12,12 @@ import { ExampleFile } from '../../../documentation/core-helpers/code-example/ex
     templateUrl: './feed-input-docs.component.html'
 })
 export class FeedInputDocsComponent {
-
     feedInput: ExampleFile[] = [
         {
             language: 'html',
             code: feedInputH,
             fileName: 'feed-input-example'
-        },
+        }
     ];
 
     feedInputPlaceholder: ExampleFile[] = [
@@ -27,7 +26,7 @@ export class FeedInputDocsComponent {
             code: feedInputPlaceholderH,
             fileName: 'feed-input-placeholder-example'
         }
-    ]
+    ];
 
     feedInputNoAvatar: ExampleFile[] = [
         {
@@ -51,5 +50,5 @@ export class FeedInputDocsComponent {
             code: feedInputMaxHeightH,
             fileName: 'feed-input-max-height-example'
         }
-    ]
+    ];
 }

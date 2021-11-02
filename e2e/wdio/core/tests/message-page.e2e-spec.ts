@@ -11,17 +11,9 @@ import {
 import { subtitleTextArr, titleTextArr } from '../fixtures/appData/message-page-content';
 import { checkElArrIsClickable } from '../../helper/assertion-helper';
 
-describe('Message Page test suite', function() {
+describe('Message Page test suite', () => {
     const messagePage = new MessagePagePo();
-    const {
-        examples,
-        icons,
-        content,
-        contentTitle,
-        contentSubTitle,
-        contentButton,
-        contentLink
-    } = messagePage;
+    const { examples, icons, content, contentTitle, contentSubTitle, contentButton, contentLink } = messagePage;
 
     beforeAll(() => {
         messagePage.open();
@@ -77,6 +69,6 @@ describe('Message Page test suite', function() {
     });
 
     it('should check RTL mode', () => {
-       messagePage.checkRtlSwitch();
+        messagePage.checkRtlSwitch();
     });
 });

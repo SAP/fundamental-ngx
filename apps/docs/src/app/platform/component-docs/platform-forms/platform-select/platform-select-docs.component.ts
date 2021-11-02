@@ -28,11 +28,16 @@ import * as selectNoneTs from '!raw-loader!./platform-select-examples/platform-s
 import * as selectNoWrapHtml from '!raw-loader!./platform-select-examples/platform-select-nowrap/platform-select-nowrap-example.component.html';
 import * as selectNoWrapTs from '!raw-loader!./platform-select-examples/platform-select-nowrap/platform-select-nowrap-example.component';
 
-
 @Component({
     selector: 'fdp-select-docs',
     templateUrl: './platform-select-docs.component.html',
-    styles: [`ul > li:not(:last-child) { margin-bottom: 0.5rem }`]
+    styles: [
+        `
+            ul > li:not(:last-child) {
+                margin-bottom: 0.5rem;
+            }
+        `
+    ]
 })
 export class PlatformSelectDocsComponent {
     selectMode: ExampleFile[] = [
@@ -40,7 +45,8 @@ export class PlatformSelectDocsComponent {
             language: 'html',
             code: selectModeHtml,
             fileName: 'platform-select-mode-example'
-        }, {
+        },
+        {
             language: 'typescript',
             fileName: 'platform-select-mode-example',
             code: selectModeTs,
@@ -48,28 +54,31 @@ export class PlatformSelectDocsComponent {
         }
     ];
 
-    selectColumns: ExampleFile[] = [{
-        language: 'html',
-        fileName: 'platform-select-columns-example',
-        code: selectColumnsHtml
-    }, {
-        language: 'typescript',
-        fileName: 'platform-select-columns-example',
-        code: selectColumnsTs,
-        component: 'PlatformSelectColumnsExampleComponent'
-    }];
+    selectColumns: ExampleFile[] = [
+        {
+            language: 'html',
+            fileName: 'platform-select-columns-example',
+            code: selectColumnsHtml
+        },
+        {
+            language: 'typescript',
+            fileName: 'platform-select-columns-example',
+            code: selectColumnsTs,
+            component: 'PlatformSelectColumnsExampleComponent'
+        }
+    ];
 
     selectMobile: ExampleFile[] = [
         {
             language: 'html',
             code: selectMobileHtml,
-            fileName: 'platform-select-mobile-example',
+            fileName: 'platform-select-mobile-example'
         },
         {
             language: 'typescript',
             component: 'PlatformSelectMobileExampleComponent',
             code: selectMobileTs,
-            fileName: 'platform-select-mobile-example',
+            fileName: 'platform-select-mobile-example'
         }
     ];
 
@@ -77,13 +86,13 @@ export class PlatformSelectDocsComponent {
         {
             language: 'html',
             code: selectNoWrapHtml,
-            fileName: 'platform-select-nowrap-example',
+            fileName: 'platform-select-nowrap-example'
         },
         {
             language: 'typescript',
             component: 'PlatformSelectNoWrapExampleComponent',
             code: selectNoWrapTs,
-            fileName: 'platform-select-nowrap-example',
+            fileName: 'platform-select-nowrap-example'
         }
     ];
 
@@ -92,7 +101,7 @@ export class PlatformSelectDocsComponent {
             language: 'html',
             code: customTriggerHtml,
             fileName: 'platform-select-custom-trigger'
-        } ,
+        },
         {
             language: 'typescript',
             component: 'PlatformSelectCustomTriggerComponent',

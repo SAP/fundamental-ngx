@@ -1,6 +1,4 @@
-<fd-docs-section-title id="simple" componentName="menu">
-    Simple menu
-</fd-docs-section-title>
+<fd-docs-section-title id="simple" componentName="menu"> Simple menu </fd-docs-section-title>
 <description>
     To create simple menu use following directives:
     <ul>
@@ -17,14 +15,14 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="with-icons" componentName="menu">
-    Menu with icons
-</fd-docs-section-title>
+<fd-docs-section-title id="with-icons" componentName="menu"> Menu with icons </fd-docs-section-title>
 <description>
     Menu items can be extended with additional content using the following directives:
     <ul>
-        <li><code>fd-menu-addon</code> - adds icon to menu item. If you want to add the icon before the menu item title,
-            remember to add the <code>position="before"</code></li>
+        <li>
+            <code>fd-menu-addon</code> - adds icon to menu item. If you want to add the icon before the menu item title,
+            remember to add the <code>position="before"</code>
+        </li>
         <li><code>fd-menu-shortcut</code> - adds information about useful shortcuts</li>
     </ul>
 </description>
@@ -39,7 +37,7 @@
     Menu with separator and compact mode
 </fd-docs-section-title>
 <description>
-    To add a visual separation line between menu items, use the <code>fd-menu-separator</code> component.<br/>
+    To add a visual separation line between menu items, use the <code>fd-menu-separator</code> component.<br />
     To display Menu in compact mode use <code>[compact]="true"</code>.
 </description>
 <component-example>
@@ -49,21 +47,20 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="with-submenu" componentName="menu">
-    Menu with submenu
-</fd-docs-section-title>
+<fd-docs-section-title id="with-submenu" componentName="menu"> Menu with submenu </fd-docs-section-title>
 <description>
     Each Menu item can have its submenu. To create a submenu, do the following:
     <ul>
         <li>Create standard menu</li>
         <li>Create submenus using <code>fd-submenu</code> component</li>
         <li>Attach created submenus to <code>fd-menu-item</code> using <code>[submenu]</code> input</li>
-        <li>You can use <code>fd-menu-addon</code> with <code>[submenuIndicator]="true"</code> to add icon indicating
+        <li>
+            You can use <code>fd-menu-addon</code> with <code>[submenuIndicator]="true"</code> to add icon indicating
             menu items with submenus
         </li>
     </ul>
-    Use <code>(activePath)</code> output to receive information about currently active items.
-    Use <code>(openOnHoverTime)</code> to specify after how much hover time menu item should expand.
+    Use <code>(activePath)</code> output to receive information about currently active items. Use
+    <code>(openOnHoverTime)</code> to specify after how much hover time menu item should expand.
 </description>
 <component-example>
     <fd-menu-with-submenu-example></fd-menu-with-submenu-example>
@@ -72,22 +69,20 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="mobile" componentName="menu">
-    Menu in mobile mode
-</fd-docs-section-title>
-<import module="MenuMobileModule" subPackage="menu"></import>
+<fd-docs-section-title id="mobile" componentName="menu"> Menu in mobile mode </fd-docs-section-title>
 <description>
     To use Menu in mobile mode:
     <ul>
-        <li>import <code>MenuMobileModule</code></li>
         <li>Set <code>[mobile]</code> property to true</li>
-        <li>Set <code>[mobileConfig]</code> with <code>MobileModeConfig</code> configuration object to customize the
+        <li>
+            Set <code>[mobileConfig]</code> with <code>MobileModeConfig</code> configuration object to customize the
             look of the control
         </li>
     </ul>
 
     Menu Mobile Mode can be configured <strong>globally</strong> by providing <code>MOBILE_MODE_CONFIG</code> token.
-    Check <a [routerLink]="['/core/global-config']" fragment="mobile-mode-config">Global Configuration page</a> for more information.
+    Check <a [routerLink]="['/core/global-config']" fragment="mobile-mode-config">Global Configuration page</a> for more
+    information.
 </description>
 <component-example>
     <fd-menu-mobile-example></fd-menu-mobile-example>

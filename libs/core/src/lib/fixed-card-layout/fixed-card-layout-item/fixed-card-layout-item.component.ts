@@ -14,7 +14,7 @@ export class FixedCardLayoutItemComponent implements FocusableOption {
 
     /** Set focus on the element. */
     focus(): void {
-        const header = this._elementRef.nativeElement.querySelector('.fd-card__header')
+        const header = this._elementRef.nativeElement.querySelector('.fd-card__header');
         if (header) {
             header.focus();
         }

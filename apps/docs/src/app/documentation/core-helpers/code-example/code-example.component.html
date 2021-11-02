@@ -1,33 +1,38 @@
 <div class="docs-code-example-toolbar">
-    <button fd-button
-            [glyph]="expandIcon"
-            [label]="(isOpen ? 'Hide' : 'Show') + ' Code'"
-            (click)="isOpen = !isOpen">
-    </button>
+    <button
+        fd-button
+        [glyph]="expandIcon"
+        [label]="(isOpen ? 'Hide' : 'Show') + ' Code'"
+        (click)="isOpen = !isOpen"
+    ></button>
     <div>
-        <button fd-button
-                glyph="copy"
-                title="Copy example to clipboard"
-                label="Copy"
-                style="margin-right: 1rem;"
-                *ngIf="isOpen"
-                (click)="copyText()">
-        </button>
-        <button fd-button
-                glyph="play"
-                title="Open code in stackblitz"
-                label="StackBlitz"
-                *ngIf="isOpen"
-                (click)="openStackBlitz()" >
-        </button>
+        <button
+            fd-button
+            glyph="copy"
+            title="Copy example to clipboard"
+            label="Copy"
+            style="margin-right: 1rem"
+            *ngIf="isOpen"
+            (click)="copyText()"
+        ></button>
+        <button
+            fd-button
+            glyph="play"
+            title="Open code in stackblitz"
+            label="StackBlitz"
+            *ngIf="isOpen"
+            (click)="openStackBlitz()"
+        ></button>
     </div>
 </div>
 <div class="docs-html-example-container" [@height]="isOpen">
     <div class="docs-code-example-content">
         <fd-tab-list>
-            <fd-tab *ngFor="let file of _displayedFiles; let i = index"
-                    [title]="file.name || file.language | titlecase"
-                    (opened)="activeIndex = i">
+            <fd-tab
+                *ngFor="let file of _displayedFiles; let i = index"
+                [title]="file.name || file.language | titlecase"
+                (opened)="activeIndex = i"
+            >
                 <fd-code-snippet [file]="file"></fd-code-snippet>
             </fd-tab>
         </fd-tab-list>

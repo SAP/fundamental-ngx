@@ -15,7 +15,10 @@ describe('MultiInputMobileComponent', () => {
     let fixture: ComponentFixture<MultiInputMobileComponent>;
 
     const multiInputConfigObject: MobileModeConfig = {
-        title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true
+        title: 'title',
+        approveButtonText: 'approve',
+        cancelButtonText: 'cancel',
+        hasCloseButton: true
     };
 
     const backupData: any[] = ['option 1', 'option 2', 'option 3'];
@@ -29,19 +32,28 @@ describe('MultiInputMobileComponent', () => {
         openChange: new EventEmitter<boolean>()
     };
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ DialogModule, BrowserAnimationsModule ],
-            declarations: [MultiInputMobileComponent],
-            providers: [ DynamicComponentService, {provide: MULTI_INPUT_COMPONENT, useValue: mockedMultiInputComponent} ]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [DialogModule, BrowserAnimationsModule],
+                declarations: [MultiInputMobileComponent],
+                providers: [
+                    DynamicComponentService,
+                    { provide: MULTI_INPUT_COMPONENT, useValue: mockedMultiInputComponent }
+                ]
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         mockedMultiInputComponent = {
             selected: backupData,
-            mobileConfig: {title: 'title', approveButtonText: 'approve', cancelButtonText: 'cancel', hasCloseButton: true},
+            mobileConfig: {
+                title: 'title',
+                approveButtonText: 'approve',
+                cancelButtonText: 'cancel',
+                hasCloseButton: true
+            },
             dialogDismiss: (backupArguments: any[]) => {},
             selectAllItems: () => {},
             dialogApprove: () => {},

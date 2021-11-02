@@ -25,7 +25,7 @@ class VerticalCarouselComponent {
     @ViewChildren(CarouselItemDirective)
     items: QueryList<CarouselItemDirective>;
 
-    configuration: CarouselConfig = { vertical: true,  elementsAtOnce: 1 };
+    configuration: CarouselConfig = { vertical: true, elementsAtOnce: 1 };
 }
 
 @Component({
@@ -50,7 +50,6 @@ class VerticalCarouselComponent {
                 display: flex;
             }
 
-
             .container-wrap {
                 overflow: hidden;
                 width: 210px;
@@ -61,7 +60,8 @@ class VerticalCarouselComponent {
                 display: flex;
                 width: 210px;
                 min-width: 210px;
-            }`
+            }
+        `
     ]
 })
 class HorizontalCarouselComponent {
@@ -82,13 +82,20 @@ describe('CarouselDirective', () => {
     let verticalFixture: ComponentFixture<VerticalCarouselComponent>;
     let horizontalFixture: ComponentFixture<HorizontalCarouselComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [CommonModule],
-            declarations: [HorizontalCarouselComponent, VerticalCarouselComponent, CarouselItemDirective, CarouselDirective],
-            providers: [CarouselService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CommonModule],
+                declarations: [
+                    HorizontalCarouselComponent,
+                    VerticalCarouselComponent,
+                    CarouselItemDirective,
+                    CarouselDirective
+                ],
+                providers: [CarouselService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         horizontalFixture = TestBed.createComponent(HorizontalCarouselComponent);
@@ -167,7 +174,9 @@ describe('CarouselDirective', () => {
         verticalFixture.detectChanges();
 
         expect(verticalDirective.carouselService.currentTransitionPx).toBe(thirdDelta);
-        expect((<any>verticalDirective)._carouselService._getClosest().value).toBe(verticalDirective.items.toArray()[3].value);
+        expect((<any>verticalDirective)._carouselService._getClosest().value).toBe(
+            verticalDirective.items.toArray()[3].value
+        );
     });
 
     it('should handle pan end', () => {
@@ -185,10 +194,14 @@ describe('CarouselDirective', () => {
     it('should return closest with half', () => {
         verticalDirective.carouselService.currentTransitionPx = -160;
 
-        expect((<any>verticalDirective)._carouselService._getClosest().value).toBe(verticalDirective.items.toArray()[5].value);
+        expect((<any>verticalDirective)._carouselService._getClosest().value).toBe(
+            verticalDirective.items.toArray()[5].value
+        );
         verticalDirective.carouselService.currentTransitionPx = -170;
 
-        expect((<any>verticalDirective)._carouselService._getClosest().value).toBe(verticalDirective.items.toArray()[6].value);
+        expect((<any>verticalDirective)._carouselService._getClosest().value).toBe(
+            verticalDirective.items.toArray()[6].value
+        );
     });
 
     it('should handle get put last/first element when pan after/before list ', () => {
@@ -197,7 +210,9 @@ describe('CarouselDirective', () => {
         (<any>verticalDirective)._carouselService._handlePanEnd(-6000);
         verticalFixture.detectChanges();
 
-        expect(verticalDirective.carouselService.currentTransitionPx).toBe(-verticalDirective.items.first.getHeight() * 6);
+        expect(verticalDirective.carouselService.currentTransitionPx).toBe(
+            -verticalDirective.items.first.getHeight() * 6
+        );
 
         (<any>verticalDirective)._carouselService._handlePanEnd(1000);
         verticalFixture.detectChanges();
@@ -206,7 +221,6 @@ describe('CarouselDirective', () => {
     });
 
     it('horizontal should handle pan start and move', () => {
-
         spyOn<any>(horizontalDirective.dragStateChange, 'emit').and.callThrough();
 
         (<any>horizontalDirective)._carouselService._handlePanStart();
@@ -233,32 +247,37 @@ describe('CarouselDirective', () => {
         horizontalFixture.detectChanges();
 
         expect(horizontalDirective.carouselService.currentTransitionPx).toBe(thirdDelta);
-        expect((<any>horizontalDirective)._carouselService._getClosest().value).toBe(horizontalDirective.items.toArray()[3].value);
+        expect((<any>horizontalDirective)._carouselService._getClosest().value).toBe(
+            horizontalDirective.items.toArray()[3].value
+        );
     });
 
     it('horizontal should return closest with half', () => {
-
         horizontalDirective.carouselService.currentTransitionPx = -160;
 
-        expect((<any>horizontalDirective)._carouselService._getClosest().value).toBe(horizontalDirective.items.toArray()[5].value);
+        expect((<any>horizontalDirective)._carouselService._getClosest().value).toBe(
+            horizontalDirective.items.toArray()[5].value
+        );
         horizontalDirective.carouselService.currentTransitionPx = -170;
 
-        expect((<any>horizontalDirective)._carouselService._getClosest().value).toBe(horizontalDirective.items.toArray()[6].value);
+        expect((<any>horizontalDirective)._carouselService._getClosest().value).toBe(
+            horizontalDirective.items.toArray()[6].value
+        );
     });
 
     it('horizontal should handle get put last/first element when pan after/before list ', () => {
-
         (<any>horizontalDirective)._carouselService._handlePanStart();
 
         (<any>horizontalDirective)._carouselService._handlePanEnd(-6000);
         horizontalFixture.detectChanges();
 
-        expect(horizontalDirective.carouselService.currentTransitionPx).toBe(-horizontalDirective.items.first.getWidth() * 6);
+        expect(horizontalDirective.carouselService.currentTransitionPx).toBe(
+            -horizontalDirective.items.first.getWidth() * 6
+        );
 
         (<any>horizontalDirective)._carouselService._handlePanEnd(1000);
         horizontalFixture.detectChanges();
 
         expect(horizontalDirective.carouselService.currentTransitionPx).toBe(0);
     });
-
 });

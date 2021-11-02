@@ -1,6 +1,5 @@
 import { FileUploaderService, FileUploadOutput } from './file-uploader.service';
 
-
 describe('FileUploadService', () => {
     const service: FileUploaderService = new FileUploaderService();
 
@@ -18,51 +17,31 @@ describe('FileUploadService', () => {
     ];
 
     it('should valid files with min size', () => {
-        const files: FileUploadOutput = service.validateFiles(
-            <any>fileSource,
-            '1KB',
-            '',
-            null)
+        const files: FileUploadOutput = service.validateFiles(<any>fileSource, '1KB', '', null);
         expect(files.validFiles.length).toBe(6);
         expect(files.invalidFiles.length).toBe(4);
     });
 
     it('should valid files with max size', () => {
-        const files: FileUploadOutput = service.validateFiles(
-            <any>fileSource,
-            '',
-            '1KB',
-            null)
+        const files: FileUploadOutput = service.validateFiles(<any>fileSource, '', '1KB', null);
         expect(files.validFiles.length).toBe(4);
         expect(files.invalidFiles.length).toBe(6);
     });
 
     it('should valid files with max size and min size', () => {
-        const files: FileUploadOutput = service.validateFiles(
-            <any>fileSource,
-            '500byte',
-            '10Kb',
-            null)
+        const files: FileUploadOutput = service.validateFiles(<any>fileSource, '500byte', '10Kb', null);
         expect(files.validFiles.length).toBe(2);
         expect(files.invalidFiles.length).toBe(8);
     });
 
     it('should valid files with max size and min size and extension', () => {
-        const files: FileUploadOutput = service.validateFiles(
-            <any>fileSource,
-            '2KB',
-            '1Mb',
-            'png, jpeg, mp3')
+        const files: FileUploadOutput = service.validateFiles(<any>fileSource, '2KB', '1Mb', 'png, jpeg, mp3');
         expect(files.validFiles.length).toBe(4);
         expect(files.invalidFiles.length).toBe(6);
     });
 
     it('should valid files with extension', () => {
-        const files: FileUploadOutput = service.validateFiles(
-            <any>fileSource,
-            '',
-            '',
-            'png, jpeg, mp3')
+        const files: FileUploadOutput = service.validateFiles(<any>fileSource, '', '', 'png, jpeg, mp3');
         expect(files.validFiles.length).toBe(6);
         expect(files.invalidFiles.length).toBe(4);
     });

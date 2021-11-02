@@ -17,6 +17,7 @@ import {
     elementArray,
     getAttributeByName,
     getElementArrayLength,
+    getElementSize,
     getElementTitle,
     refreshPage,
     waitForElDisplayed,
@@ -27,8 +28,18 @@ import {
 describe('Split menu button test suite', () => {
     const spMenuBtnPage = new SplitMenuButtonPo();
     const {
-        arrowBtnArr, mainBtnArr, menuOverlay, menuItemArr, behaviorsExSelectionBtnArr, behaviorsExArrowBtnArr,
-        typesExSelectionBtnArr, typesExArrowBtnArr, typesOutput, iconExSelectionBtnArr, iconExArrowBtnArr, iconBtnAttrArr
+        arrowBtnArr,
+        mainBtnArr,
+        menuOverlay,
+        menuItemArr,
+        behaviorsExSelectionBtnArr,
+        behaviorsExArrowBtnArr,
+        typesExSelectionBtnArr,
+        typesExArrowBtnArr,
+        typesOutput,
+        iconExSelectionBtnArr,
+        iconExArrowBtnArr,
+        iconBtnAttrArr
     } = spMenuBtnPage;
 
     beforeAll(() => {
@@ -50,7 +61,7 @@ describe('Split menu button test suite', () => {
         const dropdownArrowBtnArr = getElementArrayLength(arrowBtnArr);
 
         // -1 for last disabled button. on disabled button click, click will be intercepted.
-        for (let i = 0; i < dropdownArrowBtnArr -1; i++) {
+        for (let i = 0; i < dropdownArrowBtnArr - 1; i++) {
             click(arrowBtnArr, i);
             expect(waitForElDisplayed(menuOverlay));
             click(arrowBtnArr, i);
@@ -123,11 +134,25 @@ describe('Split menu button test suite', () => {
         spMenuBtnPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
+    it('should check menu item density matches button density', () => {
+        const compactButtonHeight = getElementSize(iconExArrowBtnArr, 1, 'height');
+        const cozyButtonHeight = getElementSize(iconExArrowBtnArr, 0, 'height');
+
+        click(iconExArrowBtnArr);
+        const cozyMenuItemHeight = getElementSize(menuItemArr, 0, 'height');
+
+        click(iconExArrowBtnArr);
+        click(iconExArrowBtnArr, 1);
+        const compactMenuItemHeight = getElementSize(menuItemArr, 0, 'height');
+
+        expect(compactButtonHeight).toBeLessThan(cozyButtonHeight);
+        expect(compactMenuItemHeight).toBeLessThan(cozyMenuItemHeight);
+    });
+
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             spMenuBtnPage.saveExampleBaselineScreenshot();
             expect(spMenuBtnPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
-

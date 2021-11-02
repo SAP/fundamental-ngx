@@ -25,10 +25,18 @@
                         </fd-quick-view-group-item-label>
                         <fd-quick-view-group-item-content>
                             <ng-container [ngSwitch]="item.label">
-                                <a *ngSwitchCase="item.label === 'Mobile' || item.label === 'Phone' ? item.label : ''"
-                                    [href]="'tel:' + item.value" [innerText]="item.value" fd-link></a>
-                                <a *ngSwitchCase="'Email'" [href]="'mailto:' + item.value" [innerText]="item.value"
-                                    fd-link></a>
+                                <a
+                                    *ngSwitchCase="item.label === 'Mobile' || item.label === 'Phone' ? item.label : ''"
+                                    [href]="'tel:' + item.value"
+                                    [innerText]="item.value"
+                                    fd-link
+                                ></a>
+                                <a
+                                    *ngSwitchCase="'Email'"
+                                    [href]="'mailto:' + item.value"
+                                    [innerText]="item.value"
+                                    fd-link
+                                ></a>
                                 <div *ngSwitchDefault [innerText]="item.value"></div>
                             </ng-container>
                         </fd-quick-view-group-item-content>

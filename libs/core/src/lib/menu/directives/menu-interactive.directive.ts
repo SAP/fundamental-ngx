@@ -8,7 +8,6 @@ import { Directive, ElementRef, HostBinding } from '@angular/core';
     }
 })
 export class MenuInteractiveDirective {
-
     /** @hidden */
     @HostBinding('attr.tabindex')
     tabindex = 0;
@@ -35,11 +34,14 @@ export class MenuInteractiveDirective {
     readonly fdMenuLinkClass: boolean = true;
 
     /** @hidden */
-    constructor(public elementRef: ElementRef) { }
+    _fromSplitButton = false;
+
+    /** @hidden */
+    constructor(public elementRef: ElementRef) {}
 
     /** @hidden */
     setSelected(isSelected: boolean): void {
-        this.selected = isSelected && this.ariaHaspopup;
+        this.selected = isSelected && (this.ariaHaspopup || this._fromSplitButton);
     }
 
     /** @hidden */
@@ -51,8 +53,6 @@ export class MenuInteractiveDirective {
     /** @hidden */
     setSubmenu(hasSubmenu: boolean, itemId?: string): void {
         this.ariaHaspopup = hasSubmenu;
-        this.ariaControls = hasSubmenu
-            ? itemId || this.ariaControls
-            : null;
+        this.ariaControls = hasSubmenu ? itemId || this.ariaControls : null;
     }
 }

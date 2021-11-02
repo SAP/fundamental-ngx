@@ -7,26 +7,29 @@ import { PlatformWizardGeneratorModule } from '../../wizard-generator.module';
 import { WizardGeneratorService } from '../../wizard-generator.service';
 import { WizardStepForms } from './wizard-generator-step.component';
 import { WizardGeneratorItem } from '../../interfaces/wizard-generator-item.interface';
+import { first } from 'rxjs/operators';
 
-const items = [{
-    name: 'Product type',
-    id: 'productTypeStep',
-    formGroups: [
-        {
-            title: '1. Product Type',
-            id: 'productType',
-            formItems: [
-                {
-                    name: 'product',
-                    message: 'Select appropriate product type',
-                    type: 'select',
-                    choices: ['Mobile', 'Tablet', 'Desktop'],
-                    default: 'Mobile'
-                }
-            ]
-        }
-    ]
-}];
+const items = [
+    {
+        name: 'Product type',
+        id: 'productTypeStep',
+        formGroups: [
+            {
+                title: '1. Product Type',
+                id: 'productType',
+                formItems: [
+                    {
+                        name: 'product',
+                        message: 'Select appropriate product type',
+                        type: 'select',
+                        choices: ['Mobile', 'Tablet', 'Desktop'],
+                        default: 'Mobile'
+                    }
+                ]
+            }
+        ]
+    }
+];
 
 @Component({
     template: `
@@ -39,7 +42,6 @@ const items = [{
     providers: [WizardGeneratorService]
 })
 export class TestComponent {
-
     forms: WizardStepForms;
 
     items: WizardGeneratorItem[] = [];
@@ -57,19 +59,20 @@ xdescribe('WizardGeneratorStepComponent', () => {
     let fixture: ComponentFixture<TestComponent>;
     let service: WizardGeneratorService;
 
-    beforeEach(waitForAsync(() => {
-        TestBed
-            .configureTestingModule({
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
                 imports: [PlatformWizardGeneratorModule],
                 declarations: [TestComponent]
             })
-            .overrideModule(BrowserDynamicTestingModule, {
-                set: {
-                    entryComponents: [DynamicFormGeneratorSelectComponent]
-                }
-            })
-            .compileComponents();
-    }));
+                .overrideModule(BrowserDynamicTestingModule, {
+                    set: {
+                        entryComponents: [DynamicFormGeneratorSelectComponent]
+                    }
+                })
+                .compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -94,7 +97,7 @@ xdescribe('WizardGeneratorStepComponent', () => {
 
         fixture.detectChanges();
 
-        await new Promise(resolve => setTimeout(() => resolve(null), 200));
+        await new Promise((resolve) => setTimeout(() => resolve(null), 200));
 
         expect(formCreatedSpy).toHaveBeenCalled();
         expect(component.forms.productType).toBeTruthy();
@@ -110,13 +113,15 @@ xdescribe('WizardGeneratorStepComponent', () => {
 
         fixture.detectChanges();
 
-        await new Promise(resolve => setTimeout(() => resolve(null), 200));
+        await new Promise((resolve) => setTimeout(() => resolve(null), 200));
 
-        service.submitStepForms('productTypeStep').subscribe((forms) => {
+        service
+            .submitStepForms('productTypeStep')
+            .pipe(first())
+            .subscribe((forms) => {
+                expect(forms.productType.success).toBeTrue();
 
-            expect(forms.productType.success).toBeTrue();
-
-            done();
-        });
+                done();
+            });
     });
 });

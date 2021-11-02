@@ -1,15 +1,9 @@
-<ng-container
-    *ngIf="_isSideBefore"
-    [ngTemplateOutlet]="sideTemplate"
-></ng-container>
+<ng-container *ngIf="_isSideBefore" [ngTemplateOutlet]="sideTemplate"></ng-container>
 
 <!-- Main Content -->
 <ng-content select="fd-dynamic-side-content-main"></ng-content>
 
-<ng-container
-    *ngIf="!_isSideBefore"
-    [ngTemplateOutlet]="sideTemplate"
-></ng-container>
+<ng-container *ngIf="!_isSideBefore" [ngTemplateOutlet]="sideTemplate"></ng-container>
 
 <ng-template #sideTemplate>
     <!-- Side Content -->

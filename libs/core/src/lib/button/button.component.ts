@@ -3,6 +3,7 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    HostListener,
     Input,
     OnChanges,
     OnDestroy,
@@ -15,7 +16,6 @@ import { Subscription } from 'rxjs';
 import { ContentDensityService } from '@fundamental-ngx/core/utils';
 import { CssClassBuilder } from '@fundamental-ngx/core/utils';
 import { applyCssClass } from '@fundamental-ngx/core/utils';
-
 
 /**
  * Button directive, used to enhance standard HTML buttons.
@@ -38,10 +38,11 @@ import { applyCssClass } from '@fundamental-ngx/core/utils';
     host: {
         '[attr.type]': 'type',
         '[attr.disabled]': '_disabled || null',
-        '[attr.aria-label]': 'ariaLabel ? ariaLabel : specialButtonType.includes(fdType) ? label != null ?  label +" ,"+ fdType : glyph != undefined || glyph != null ? fdType +","+ glyph.split("-").join(" ")  : title : title'
+        '[attr.aria-label]':
+            'ariaLabel ? ariaLabel : specialButtonType.includes(fdType) ? label != null ?  label +" ,"+ fdType : glyph != undefined || glyph != null ? fdType +","+ glyph.split("-").join(" ")  : title : title'
     }
 })
-export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit,  OnDestroy {
+export class ButtonComponent extends BaseButton implements OnChanges, CssClassBuilder, OnInit, OnDestroy {
     /** The property allows user to pass additional css classes. */
     @Input()
     class = '';
@@ -55,13 +56,23 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
     /** @hidden */
     private _subscriptions = new Subscription();
 
+    /** Forces the focus outline around the button, which is not default behavior in Safari. */
+    @HostListener('click', ['$event'])
+    clicked(event: MouseEvent): void {
+        const target = event?.target as HTMLElement;
+        // Target can be empty during unit tests execution.
+        if (target && document.activeElement !== target) {
+            target.focus();
+        }
+    }
+
     /** @hidden */
     constructor(
         private _elementRef: ElementRef,
         private _changeDetectorRef: ChangeDetectorRef,
         @Optional() private _contentDensityService: ContentDensityService
     ) {
-        super()
+        super();
     }
 
     /** Function runs when component is initialized
@@ -74,17 +85,19 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
 
     public ngOnInit(): void {
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this.buildComponentCssClass();
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this.buildComponentCssClass();
+                })
+            );
         }
         this.buildComponentCssClass();
     }
 
     /** @hidden */
     ngOnDestroy(): void {
-      this._subscriptions.unsubscribe();
+        this._subscriptions.unsubscribe();
     }
 
     @applyCssClass
@@ -106,7 +119,7 @@ export class ButtonComponent extends BaseButton implements OnChanges, CssClassBu
     /** HasElementRef interface implementation
      * function used by applyCssClass and applyCssStyle decorators
      */
-    public elementRef(): ElementRef<any> {
+    public elementRef(): ElementRef<HTMLButtonElement | HTMLAnchorElement> {
         return this._elementRef;
     }
 

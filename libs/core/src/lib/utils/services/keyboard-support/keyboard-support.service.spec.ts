@@ -2,6 +2,7 @@ import { KeyboardSupportService } from './keyboard-support.service';
 import { KeyboardSupportItemInterface } from '../../interfaces/keyboard-support-item.interface';
 import { EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 class MockKeyboardListElement implements KeyboardSupportItemInterface {
     keyDown = new EventEmitter<KeyboardEvent>();
@@ -10,25 +11,20 @@ class MockKeyboardListElement implements KeyboardSupportItemInterface {
     click(): void {}
 }
 
-
 describe('MenuKeyboardService', () => {
     let service: KeyboardSupportService<MockKeyboardListElement>;
     let menuItems: any;
     let items: MockKeyboardListElement[];
 
     beforeEach(() => {
-        items = [
-            new MockKeyboardListElement(),
-            new MockKeyboardListElement(),
-            new MockKeyboardListElement()
-        ];
+        items = [new MockKeyboardListElement(), new MockKeyboardListElement(), new MockKeyboardListElement()];
         service = new KeyboardSupportService();
         menuItems = {
             changes: new Subject(),
             length: items.length,
             last: items[0],
             first: items[items.length - 1]
-        }
+        };
     });
 
     it('should refresh listeners', () => {
@@ -37,20 +33,26 @@ describe('MenuKeyboardService', () => {
 
         menuItems.changes.next();
 
-        expect((<any>service)._refreshEscapeLogic).toHaveBeenCalled()
+        expect((<any>service)._refreshEscapeLogic).toHaveBeenCalled();
     });
 
-    it('should call escape methods ', () => {
+    it('should call escape methods ', (done) => {
         service.setKeyboardService(menuItems);
         let escapeAfter = false;
         let escapeBefore = false;
-
-        service.focusEscapeList.subscribe(direction => {
-            if (direction === 'up') {
-                escapeAfter = true;
-            }
-            if (direction === 'down') {
-                escapeBefore = true
+        service.focusEscapeList.pipe(take(2)).subscribe({
+            next: (direction) => {
+                if (direction === 'up') {
+                    escapeAfter = true;
+                }
+                if (direction === 'down') {
+                    escapeBefore = true;
+                }
+            },
+            complete: () => {
+                expect(escapeBefore).toBeTrue();
+                expect(escapeAfter).toBeTrue();
+                done();
             }
         });
 
@@ -64,8 +66,5 @@ describe('MenuKeyboardService', () => {
 
         menuItems.first.keyDown.next(keyDownEventUp);
         menuItems.last.keyDown.next(keyDownEventDown);
-
-        expect(escapeBefore).toBeTrue();
-        expect(escapeAfter).toBeTrue();
     });
 });

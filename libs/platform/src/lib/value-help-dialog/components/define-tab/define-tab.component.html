@@ -14,7 +14,8 @@
                 [controlTemplate]="customSelectTemplate"
                 [name]="uid + '-' + type + '-strategy-' + item.id"
                 [(ngModel)]="item.strategy"
-                (valueChange)="_filterChanged()">
+                (valueChange)="_filterChanged()"
+            >
                 <ng-container *ngIf="_includeStrategy.length">
                     <li fd-list-group-header>Include</li>
                     <fd-option *ngFor="let strategy of _includeStrategy" [value]="strategy.key">
@@ -35,7 +36,11 @@
                 </ng-container>
             </fd-select>
         </div>
-        <div fdLayoutGridCol colGrow *ngIf="item.strategy !== _strategyIncludeValues.empty && item.strategy !== _strategyExcludeValues.not_empty">
+        <div
+            fdLayoutGridCol
+            colGrow
+            *ngIf="item.strategy !== _strategyIncludeValues.empty && item.strategy !== _strategyExcludeValues.not_empty"
+        >
             <div fdLayoutGridRow>
                 <ng-container *ngIf="item.strategy === _strategyIncludeValues.between; else valueIncludeTemplate">
                     <div fdLayoutGridCol colGrow>
@@ -53,8 +58,12 @@
                                 [name]="uid + '-' + type + '-from-' + item.id"
                                 (blur)="_validateConditionValue(item, [fromModel.valid, toModel.valid])"
                                 #fromModel="ngModel"
-                                [(ngModel)]="item.value" />
-                                <ng-container [ngTemplateOutlet]="countError" [ngTemplateOutletContext]="{ $implicit: item.value?.length }"></ng-container>
+                                [(ngModel)]="item.value"
+                            />
+                            <ng-container
+                                [ngTemplateOutlet]="countError"
+                                [ngTemplateOutletContext]="{ $implicit: item.value?.length }"
+                            ></ng-container>
                         </fd-form-input-message-group>
                     </div>
                     <div fdLayoutGridCol colGrow>
@@ -72,8 +81,12 @@
                                 [name]="uid + '-' + type + '-to-' + item.id"
                                 (blur)="_validateConditionValue(item, [fromModel.valid, toModel.valid])"
                                 #toModel="ngModel"
-                                [(ngModel)]="item.valueTo" />
-                                <ng-container [ngTemplateOutlet]="countError" [ngTemplateOutletContext]="{ $implicit: item.valueTo?.length }"></ng-container>
+                                [(ngModel)]="item.valueTo"
+                            />
+                            <ng-container
+                                [ngTemplateOutlet]="countError"
+                                [ngTemplateOutletContext]="{ $implicit: item.valueTo?.length }"
+                            ></ng-container>
                         </fd-form-input-message-group>
                     </div>
                 </ng-container>
@@ -92,9 +105,13 @@
                                 [name]="uid + '-' + type + '-value-' + item.id"
                                 (blur)="_validateConditionValue(item, valueModel.valid)"
                                 #valueModel="ngModel"
-                                [(ngModel)]="item.value" />
+                                [(ngModel)]="item.value"
+                            />
                             <ng-container *ngIf="valueModel.invalid">
-                                <ng-container [ngTemplateOutlet]="countError" [ngTemplateOutletContext]="{ $implicit: item.value?.length }"></ng-container>
+                                <ng-container
+                                    [ngTemplateOutlet]="countError"
+                                    [ngTemplateOutletContext]="{ $implicit: item.value?.length }"
+                                ></ng-container>
                             </ng-container>
                         </fd-form-input-message-group>
                     </div>
@@ -109,11 +126,11 @@
                 fdType="transparent"
                 glyph="decline"
                 [compact]="true"
-                (click)="removeCondition(i)"></button>
+                (click)="removeCondition(i)"
+            ></button>
         </div>
     </fd-layout-grid>
 </ng-container>
-
 
 <fd-layout-grid class="condition-row new-condition-row" [noGap]="true">
     <div fdLayoutGridRow>
@@ -126,84 +143,99 @@
                 aria-label="Add new define condition"
                 label="Add"
                 [compact]="true"
-                (click)="addEmptyCondition()"></button>
+                (click)="addEmptyCondition()"
+            ></button>
         </div>
     </div>
 </fd-layout-grid>
 
 <ng-template #conditionStrategyOption let-type="type" let-strategy="strategy">
-    <ng-container *ngIf="strategyLabels[strategy.key]; else defaultOption">{{ strategyLabels[strategy.key] }}</ng-container>
+    <ng-container *ngIf="strategyLabels[strategy.key]; else defaultOption">{{
+        strategyLabels[strategy.key]
+    }}</ng-container>
     <ng-template #defaultOption>
         <ng-container [ngSwitch]="strategy.key">
             <ng-container
                 *ngSwitchCase="'contains'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.Contains">
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.Contains"
+            >
                 contains
             </ng-container>
 
             <ng-container
                 *ngSwitchCase="'equalTo'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.EqualTo">
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.EqualTo"
+            >
                 equal to
             </ng-container>
 
             <ng-container
                 *ngSwitchCase="'between'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.Between">
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.Between"
+            >
                 between
             </ng-container>
 
             <ng-container
                 *ngSwitchCase="'startsWith'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.StartsWith">
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.StartsWith"
+            >
                 starts with
             </ng-container>
 
             <ng-container
                 *ngSwitchCase="'endsWith'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.EndsWith">
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.EndsWith"
+            >
                 ends with
             </ng-container>
 
             <ng-container
                 *ngSwitchCase="'lessThan'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.LessThan">
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.LessThan"
+            >
                 less than
             </ng-container>
 
             <ng-container
                 *ngSwitchCase="'lessThanEqual'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.LessThanEqual">
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.LessThanEqual"
+            >
                 less than equal
             </ng-container>
 
             <ng-container
                 *ngSwitchCase="'greaterThan'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.GreaterThan'">
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.GreaterThan'"
+            >
                 greater than
             </ng-container>
 
             <ng-container
                 *ngSwitchCase="'greaterThanEqual'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.GreaterThanEqual">
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.GreaterThanEqual"
+            >
                 greater than equal
             </ng-container>
 
             <ng-container
                 *ngSwitchCase="'empty'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.Empty">
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.Empty"
+            >
                 empty
             </ng-container>
 
             <ng-container
                 *ngSwitchCase="'not_equalTo'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.NotEqualTo">
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.NotEqualTo"
+            >
                 not equal to
             </ng-container>
 
             <ng-container
                 *ngSwitchCase="'not_empty'"
-                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.NotEmpty">
+                i18n="@@platformI18nValueHelpDialog.Define.Condition.Strategy.Label.NotEmpty"
+            >
                 not empty
             </ng-container>
         </ng-container>
@@ -212,7 +244,9 @@
 
 <ng-template #countError let-count>
     <fd-form-message type="error" *ngIf="count && count > 7">
-        <ng-container i18n="@@platformI18nValueHelpDialog.Condition.MaxCountError">Enter a value with no more than 7 characters</ng-container>
+        <ng-container i18n="@@platformI18nValueHelpDialog.Condition.MaxCountError"
+            >Enter a value with no more than 7 characters</ng-container
+        >
     </fd-form-message>
 </ng-template>
 

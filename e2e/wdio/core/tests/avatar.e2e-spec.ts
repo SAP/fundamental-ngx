@@ -1,6 +1,6 @@
 import { AvatarPo } from '../pages/avatar.po';
 
-describe('Avatar test suite', function() {
+describe('Avatar test suite', () => {
     const avatarPage = new AvatarPo();
 
     beforeAll(() => {

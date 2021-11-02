@@ -1,12 +1,20 @@
 import { PanelPo } from '../pages/panel.po';
 import {
-    click, getAttributeByName, getElementArrayLength, getElementSize, getText, isElementDisplayed,
-    refreshPage, scrollIntoView, waitForElDisplayed
+    click,
+    getAttributeByName,
+    getElementArrayLength,
+    getElementSize,
+    getText,
+    isElementDisplayed,
+    refreshPage,
+    scrollIntoView,
+    waitForElDisplayed
 } from '../../driver/wdio';
 
-describe('Panel test suite', function() {
+describe('Panel test suite', () => {
     const panelPage = new PanelPo();
-    const { toggleButton, panelExpandableButton, panelParagraphs, expandableButton, compactPanelButton, panelTitle } = panelPage;
+    const { toggleButton, panelExpandableButton, panelParagraphs, expandableButton, compactPanelButton, panelTitle } =
+        panelPage;
 
     beforeAll(() => {
         panelPage.open();
@@ -63,8 +71,7 @@ describe('Panel test suite', function() {
         }
     });
 
-    xdescribe('Check visual regression', function() {
-
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             panelPage.saveExampleBaselineScreenshot();
             expect(panelPage.compareWithBaseline()).toBeLessThan(5);

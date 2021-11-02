@@ -18,7 +18,7 @@ export class ImportComponent implements OnInit {
 
     library: string;
 
-    constructor(@Inject('CURRENT_LIB') private currentLib: Libraries) { }
+    constructor(@Inject('CURRENT_LIB') private currentLib: Libraries) {}
 
     ngOnInit(): void {
         const libraryPath = ['@fundamental-ngx', this.currentLib];

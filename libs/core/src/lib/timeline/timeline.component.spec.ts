@@ -14,8 +14,7 @@ describe('TimelineComponent', () => {
             declarations: [TimelineTestApp],
             imports: [TimelineModule],
             providers: [TimelinePositionControlService]
-        })
-            .compileComponents();
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -44,16 +43,14 @@ describe('TimelineComponent', () => {
 
         expect(nodesArr.length).toBe(component.data.length);
 
-        component.data = [
-            { title: 'Title #1' },
-            { title: 'Title #2' },
-            { title: 'Title #3' }
-        ];
+        component.data = [{ title: 'Title #1' }, { title: 'Title #2' }, { title: 'Title #3' }];
         fixture.detectChanges();
 
-        const nodeWithInitialIndexAttr = getNodes(fixture.debugElement.nativeElement).filter((node: Element, index: number) => {
-            return node.hasAttribute('initialIndex');
-        });
+        const nodeWithInitialIndexAttr = getNodes(fixture.debugElement.nativeElement).filter(
+            (node: Element, index: number) => {
+                return node.hasAttribute('initialIndex');
+            }
+        );
 
         expect(nodeWithInitialIndexAttr.length).toBe(0);
     });
@@ -91,8 +88,7 @@ describe('TimelineComponentWithTrackBy', () => {
             declarations: [TimelineTestApp, TimelineTestAppWithTrackBy],
             imports: [TimelineModule],
             providers: [TimelinePositionControlService]
-        })
-            .compileComponents();
+        }).compileComponents();
     });
 
     beforeEach(() => {
@@ -113,16 +109,14 @@ describe('TimelineComponentWithTrackBy', () => {
 
         expect(nodesArr.length).toBe(component.data.length);
 
-        component.data = [
-            { title: 'Title #1' },
-            { title: 'Title #2' },
-            { title: 'Title #3' }
-        ];
+        component.data = [{ title: 'Title #1' }, { title: 'Title #2' }, { title: 'Title #3' }];
         fixture.detectChanges();
 
-        const nodeWithInitialIndexAttr = getNodes(fixture.debugElement.nativeElement).filter((node: Element, index: number) => {
-            return node.hasAttribute('initialIndex');
-        });
+        const nodeWithInitialIndexAttr = getNodes(fixture.debugElement.nativeElement).filter(
+            (node: Element, index: number) => {
+                return node.hasAttribute('initialIndex');
+            }
+        );
 
         expect(nodeWithInitialIndexAttr.length).toBe(component.data.length);
     });
@@ -133,19 +127,14 @@ describe('TimelineComponentWithTrackBy', () => {
         <div style="width: 300px;">
             <fd-timeline [dataSource]="data" [axis]="axis" [layout]="layout">
                 <fd-timeline-node *fdTimelineNodeDef="let node">
-                    {{node.title}}
+                    {{ node.title }}
                 </fd-timeline-node>
             </fd-timeline>
         </div>
     `
 })
 class TimelineTestApp {
-
-    data = [
-        { title: 'Title #1' },
-        { title: 'Title #2' },
-        { title: 'Title #3' }
-    ];
+    data = [{ title: 'Title #1' }, { title: 'Title #2' }, { title: 'Title #3' }];
 
     axis: TimelineAxis = 'vertical';
     layout: TimelineSidePosition = 'right';
@@ -156,19 +145,18 @@ class TimelineTestApp {
         <div style="width: 300px;">
             <fd-timeline [dataSource]="data" [trackBy]="trackBy">
                 <fd-timeline-node *fdTimelineNodeDef="let node">
-                    {{node.title}}
+                    {{ node.title }}
                 </fd-timeline-node>
             </fd-timeline>
         </div>
     `
 })
 class TimelineTestAppWithTrackBy extends TimelineTestApp {
-
     enableTrackBy = false;
 
     trackBy(index: number, item: any): string {
         return item.title;
-    };
+    }
 }
 
 function getNodes(treeElement: Element): HTMLElement[] {

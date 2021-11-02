@@ -1,9 +1,7 @@
 <fd-dialog>
     <fd-dialog-header>
         <ng-template fdTemplate="header">
-            <p i18n="@@platformApprovalFlowSelectTypeDialogMoveApproverAs">
-                Move approver as
-            </p>
+            <p i18n="@@platformApprovalFlowSelectTypeDialogMoveApproverAs">Move approver as</p>
         </ng-template>
     </fd-dialog-header>
 
@@ -20,7 +18,8 @@
                     [(ngModel)]="_nodeType"
                     [compact]="true"
                     id="select-type-parallel"
-                    name="select-type-parallel">
+                    name="select-type-parallel"
+                >
                     Parallel approver
                 </fd-radio-button>
             </div>
@@ -32,18 +31,16 @@
                     [(ngModel)]="_nodeType"
                     [compact]="true"
                     id="select-type-serial"
-                    name="select-type-serial">
+                    name="select-type-serial"
+                >
                     Serial approver
                 </fd-radio-button>
             </div>
 
-            <div
-                *ngIf="_nodeType === _nodeTypes.PARALLEL"
-                fd-form-item
-            >
-                <fd-checkbox
-                    [(ngModel)]="_toNextSerial"
-                    i18n="@@platformApprovalFlowAddToNext">Add to the next serial node</fd-checkbox>
+            <div *ngIf="_nodeType === _nodeTypes.PARALLEL" fd-form-item>
+                <fd-checkbox [(ngModel)]="_toNextSerial" i18n="@@platformApprovalFlowAddToNext"
+                    >Add to the next serial node</fd-checkbox
+                >
             </div>
         </fd-form-group>
     </fd-dialog-body>
@@ -58,8 +55,8 @@
                     i18n-label="@@platformApprovalFlowSelectTypeDialogConfirm"
                     label="Confirm"
                     [compact]="true"
-                    (click)="_submit()">
-                </button>
+                    (click)="_submit()"
+                ></button>
             </fd-dialog-footer-button>
 
             <fd-dialog-footer-button>
@@ -71,8 +68,8 @@
                     i18n-label="@@platformApprovalFlowSelectTypeDialogCancel"
                     label="Cancel"
                     [compact]="true"
-                    (click)="_dialogRef.close()">
-                </button>
+                    (click)="_dialogRef.close()"
+                ></button>
             </fd-dialog-footer-button>
         </ng-container>
     </fd-dialog-footer>

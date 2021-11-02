@@ -2,6 +2,7 @@ import { ElementRef } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { RatingIndicatorComponent, RatingIndicatorModule } from '@fundamental-ngx/core/rating-indicator';
+import { first } from 'rxjs/operators';
 
 const prefix = 'fd-rating-indicator';
 
@@ -10,11 +11,13 @@ describe('RatingIndicatorComponent', () => {
     let component: RatingIndicatorComponent;
     let fixture: ComponentFixture<RatingIndicatorComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [RatingIndicatorModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [RatingIndicatorModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(RatingIndicatorComponent);
@@ -76,14 +79,16 @@ describe('RatingIndicatorComponent', () => {
         expect(component._rates.length).toEqual(5);
     });
 
-    it(`should have value after click on rate icon`, () => {
+    it(`should have value after click on rate icon`, (done) => {
         component.allowHalves = false;
-        elementRef.nativeElement.querySelectorAll('.fd-rating-indicator__label')[2].click();
 
-        expect(component.value).toBe(2);
-        component.ratingChanged.subscribe((value: number) => {
+        component.ratingChanged.pipe(first()).subscribe((value: number) => {
+            expect(component.value).toBe(2);
             expect(value).toBe(2);
+            done();
         });
+
+        elementRef.nativeElement.querySelectorAll('.fd-rating-indicator__label')[2].click();
     });
 
     it(`should have ratings data with correct rating object`, () => {

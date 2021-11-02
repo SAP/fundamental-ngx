@@ -2,7 +2,9 @@ import {
     browserIsIEorSafari,
     click,
     getAlertText,
-    getElementArrayLength, getElementPlaceholder, getElementTitle,
+    getElementArrayLength,
+    getElementPlaceholder,
+    getElementTitle,
     getText,
     refreshPage,
     uploadFile,
@@ -11,15 +13,10 @@ import {
 import { FileUploaderPo } from '../pages/file-uploader.po';
 import { imagePath, placeholderValue, titleValue } from '../fixtures/appData/file-uploader.page-content';
 
-describe('File uploader test suite', function() {
+describe('File uploader test suite', () => {
     const fileUploaderPage: FileUploaderPo = new FileUploaderPo();
-    const {
-        fileUploaderRoot,
-        fileUploaderInput,
-        fileUploaderInputFile,
-        browseButton,
-        fileSelectedText
-    } = fileUploaderPage;
+    const { fileUploaderRoot, fileUploaderInput, fileUploaderInputFile, browseButton, fileSelectedText } =
+        fileUploaderPage;
 
     beforeAll(() => {
         fileUploaderPage.open();
@@ -71,11 +68,10 @@ describe('File uploader test suite', function() {
         fileUploaderPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             fileUploaderPage.saveExampleBaselineScreenshot();
             expect(fileUploaderPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
-
 });

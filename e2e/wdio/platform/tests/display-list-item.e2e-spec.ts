@@ -3,7 +3,7 @@ import { click, getCurrentUrl, getElementClass, refreshPage, waitForPresent } fr
 import { checkElArrIsClickable, checkElementText, checkElementTextValue } from '../../helper/assertion-helper';
 import { navTitlesArr, navUrl } from '../fixtures/appData/display-list-item-contents';
 
-describe('Display List Item test suite:', function () {
+describe('Display List Item test suite:', () => {
     const displayListPage = new DisplayListItemPo();
     const {
         displayLinks,
@@ -24,7 +24,7 @@ describe('Display List Item test suite:', function () {
         waitForPresent(displayLinks);
     }, 1);
 
-    describe('Display List Item - cozy and comfy examples:', function () {
+    describe('Display List Item - cozy and comfy examples:', () => {
         it('should do basic checks', () => {
             checkElArrIsClickable(displayLinks);
             checkElementText(cozyDisplayTitles);
@@ -42,7 +42,7 @@ describe('Display List Item test suite:', function () {
         });
     });
 
-    describe('Display List Item - declarative examples:', function () {
+    describe('Display List Item - declarative examples:', () => {
         it('should do basic checks', () => {
             checkElArrIsClickable(declarativeDisplayLinks);
             checkElementTextValue(declarativeDisplayTitles, navTitlesArr);
@@ -51,13 +51,13 @@ describe('Display List Item test suite:', function () {
         });
     });
 
-    describe('Orientation check:', function () {
+    describe('Orientation check:', () => {
         it('should check RTL and LTR orientation', () => {
             displayListPage.checkRtlSwitch();
         });
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             displayListPage.saveExampleBaselineScreenshot();
             expect(displayListPage.compareWithBaseline()).toBeLessThan(5);

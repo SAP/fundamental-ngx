@@ -42,8 +42,9 @@ import { TokenComponent } from './token.component';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TokenizerComponent implements AfterViewChecked, AfterViewInit, AfterContentInit, OnDestroy,
-    CssClassBuilder, OnInit, OnChanges {
+export class TokenizerComponent
+    implements AfterViewChecked, AfterViewInit, AfterContentInit, OnDestroy, CssClassBuilder, OnInit, OnChanges
+{
     /** user's custom classes */
     @Input()
     class: string;
@@ -51,6 +52,10 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** Disables possibility to remove tokens by keyboard */
     @Input()
     disableKeyboardDeletion = false;
+
+    /** role description for tokenizer component */
+    @Input()
+    ariaRoleDescription = 'tokenizer';
 
     /** @hidden */
     @ContentChildren(forwardRef(() => TokenComponent))
@@ -203,11 +208,13 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** @hidden */
     ngOnInit(): void {
         if (this.compact === undefined && this._contentDensityService) {
-            this._contentDensitySubscription.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this._cdRef.markForCheck();
-                this.buildComponentCssClass();
-            }))
+            this._contentDensitySubscription.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._cdRef.markForCheck();
+                    this.buildComponentCssClass();
+                })
+            );
         }
         this.buildComponentCssClass();
     }
@@ -217,14 +224,16 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         this.buildComponentCssClass();
     }
 
-    constructor(private _elementRef: ElementRef,
+    constructor(
+        private _elementRef: ElementRef,
         @Optional() private _contentDensityService: ContentDensityService,
         private _cdRef: ChangeDetectorRef,
         @Optional() private _rtlService: RtlService,
-        private _renderer: Renderer2) {
+        private _renderer: Renderer2
+    ) {
         this._renderer.listen('window', 'click', (e: Event) => {
             if (this.elementRef().nativeElement.contains(e.target) === false) {
-                this.tokenList.forEach(token => {
+                this.tokenList.forEach((token) => {
                     token.selected = false;
                 });
             }
@@ -237,9 +246,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        return [
-            this.class
-        ];
+        return [this.class];
     }
 
     elementRef(): ElementRef<any> {
@@ -250,18 +257,20 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     handleTokenClickSubscriptions(): void {
         this._unsubscribeClicks();
         this.tokenList.forEach((token, index) => {
-            this.tokenListClickSubscriptions.push(token.onTokenClick.subscribe((event) => {
-                event.stopPropagation();
-                this.focusTokenElement(index);
-                if (this._isControlKey(event)) {
-                    this._ctrlSelected(token, index);
-                } else if (!event.shiftKey || this._ctrlPrevious) {
-                    this._basicSelected(token, index);
-                } else if (event.shiftKey) {
-                    this.resetFirstAndLastElement();
-                    this._shiftSelected(index);
-                }
-            }));
+            this.tokenListClickSubscriptions.push(
+                token.onTokenClick.subscribe((event) => {
+                    event.stopPropagation();
+                    this.focusTokenElement(index);
+                    if (this._isControlKey(event)) {
+                        this._ctrlSelected(token, index);
+                    } else if (!event.shiftKey || this._ctrlPrevious) {
+                        this._basicSelected(token, index);
+                    } else if (event.shiftKey) {
+                        this.resetFirstAndLastElement();
+                        this._shiftSelected(index);
+                    }
+                })
+            );
         });
     }
 
@@ -298,12 +307,14 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** @hidden */
     @HostListener('keydown', ['$event'])
     keyDown(keyboardEvent: KeyboardEvent): void {
-        if (KeyUtil.isKeyCode(keyboardEvent, [DELETE, BACKSPACE]) &&
+        if (
+            KeyUtil.isKeyCode(keyboardEvent, [DELETE, BACKSPACE]) &&
             (!this._isInputFocused() || this._tokensSelected()) &&
-            !this.disableKeyboardDeletion) {
+            !this.disableKeyboardDeletion
+        ) {
             const selectedElements = this._getActiveTokens();
             const focusedTokenIndex = this._getFocusedTokenIndex();
-            selectedElements.forEach(element => element.onCloseClick.emit());
+            selectedElements.forEach((element) => element.onCloseClick.emit());
             if (selectedElements.length > 0) {
                 if (KeyUtil.isKeyCode(keyboardEvent, DELETE)) {
                     this._focusInput();
@@ -313,10 +324,12 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             }
         }
 
-        if (KeyUtil.isKeyCode(keyboardEvent, BACKSPACE) &&
+        if (
+            KeyUtil.isKeyCode(keyboardEvent, BACKSPACE) &&
             this._isInputFocused() &&
             !this._getInputValue() &&
-            !this.disableKeyboardDeletion) {
+            !this.disableKeyboardDeletion
+        ) {
             this.focusTokenElement(this.tokenList.length - 1);
         }
     }
@@ -336,36 +349,33 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
         }
     }
 
-
     /** @hidden */
     handleKeyDown(event: KeyboardEvent, fromIndex: number): void {
         let newIndex: number;
         const rtl = this._rtlService && this._rtlService.rtl ? this._rtlService.rtl.getValue() : false;
         if (KeyUtil.isKeyCode(event, SPACE) && !this._isInputFocused()) {
             const token = this.tokenList.find((_, index) => index === fromIndex);
-            this.tokenList.forEach(shadowedToken => {
+            this.tokenList.forEach((shadowedToken) => {
                 if (shadowedToken !== token) {
-                    shadowedToken.selected = false
+                    shadowedToken.selected = false;
                 }
             });
             token.selected = !token.selected;
             event.preventDefault();
         } else if (KeyUtil.isKeyCode(event, ENTER)) {
             this._focusInput();
-
         } else if ((KeyUtil.isKeyCode(event, LEFT_ARROW) && !rtl) || (KeyUtil.isKeyCode(event, RIGHT_ARROW) && rtl)) {
             this._handleArrowLeft(fromIndex);
             newIndex = fromIndex - 1;
-
         } else if ((KeyUtil.isKeyCode(event, RIGHT_ARROW) && !rtl) || (KeyUtil.isKeyCode(event, LEFT_ARROW) && rtl)) {
             this._handleArrowRight(fromIndex);
             newIndex = fromIndex + 1;
-
         } else if (KeyUtil.isKeyCode(event, A) && !this._getInputValue() && this._isControlKey(event)) {
             event.preventDefault();
-            this.tokenList.forEach(token => token.selected = true);
+            this.tokenList.forEach((token) => (token.selected = true));
         }
-        if (newIndex === this.tokenList.length &&
+        if (
+            newIndex === this.tokenList.length &&
             ((KeyUtil.isKeyCode(event, RIGHT_ARROW) && !rtl) || (KeyUtil.isKeyCode(event, LEFT_ARROW) && rtl))
         ) {
             this._focusInput();
@@ -407,7 +417,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** Removes all selected tokens */
     removeSelectedTokens(): void {
         const selectedElements = this._getActiveTokens();
-        selectedElements.forEach(element => element.onRemove.emit());
+        selectedElements.forEach((element) => element.onRemove.emit());
     }
 
     /** @hidden */
@@ -522,8 +532,11 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     private _getHiddenCozyTokenCount(): void {
         const elementLeft = this._elementRef.nativeElement.getBoundingClientRect().left;
         this.hiddenCozyTokenCount = 0;
-        this.tokenList.forEach(token => {
-            if (token.tokenWrapperElement && token.tokenWrapperElement.nativeElement.getBoundingClientRect().right < elementLeft) {
+        this.tokenList.forEach((token) => {
+            if (
+                token.tokenWrapperElement &&
+                token.tokenWrapperElement.nativeElement.getBoundingClientRect().right < elementLeft
+            ) {
                 this.hiddenCozyTokenCount += 1;
             }
         });
@@ -534,13 +547,11 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
     /** @hidden */
     private _handleInitCozyTokenCount(): void {
         // because justify-content breaks scrollbar, it cannot be used on cozy screens, so use JS to scroll to the end
-        this.tokenizerInnerEl.nativeElement.scrollLeft =
-            this.tokenizerInnerEl.nativeElement.scrollWidth;
+        this.tokenizerInnerEl.nativeElement.scrollLeft = this.tokenizerInnerEl.nativeElement.scrollWidth;
         this._getHiddenCozyTokenCount();
         if (this.hiddenCozyTokenCount > 0) {
             // need to do this again in case "____ more" text was added
-            this.tokenizerInnerEl.nativeElement.scrollLeft =
-                this.tokenizerInnerEl.nativeElement.scrollWidth;
+            this.tokenizerInnerEl.nativeElement.scrollLeft = this.tokenizerInnerEl.nativeElement.scrollWidth;
             this._getHiddenCozyTokenCount();
         }
     }
@@ -553,7 +564,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     private _unsubscribeClicks(): void {
         if (this.tokenListClickSubscriptions && this.tokenListClickSubscriptions.length) {
-            this.tokenListClickSubscriptions.forEach(subscription => {
+            this.tokenListClickSubscriptions.forEach((subscription) => {
                 subscription.unsubscribe();
             });
         }
@@ -567,7 +578,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** @hidden Method which handles what happens to token when it is clicked and no key is being held down.*/
     private _basicSelected(token, index): void {
-        this.tokenList.forEach(shadowedToken => {
+        this.tokenList.forEach((shadowedToken) => {
             if (shadowedToken !== token) {
                 shadowedToken.selected = false;
             }
@@ -580,7 +591,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** @hidden Restart first and last elements for shift selection.*/
     private resetFirstAndLastElement(): void {
-        const reset = !this.tokenList.some(token => token.selected)
+        const reset = !this.tokenList.some((token) => token.selected);
         if (reset) {
             this._firstElementInSelection = null;
             this._lastElementInSelection = null;
@@ -639,7 +650,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
             this.tokenList.forEach((element, indexOfToken) => {
                 if (!this._firstElementInSelection) {
                     if (element.selected) {
-                        this._firstElementInSelection = indexOfToken
+                        this._firstElementInSelection = indexOfToken;
                     }
                 } else {
                     this._lastElementInSelection = indexOfToken;
@@ -657,12 +668,12 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** Get selected and focused tokens */
     private _getActiveTokens(): TokenComponent[] {
-        return this.tokenList.filter(item => item.selected || this._isTokenFocused(item));
+        return this.tokenList.filter((item) => item.selected || this._isTokenFocused(item));
     }
 
     /** @hidden */
     private _getFocusedTokenIndex(): number {
-        return this.tokenList.toArray().findIndex(token => this._isTokenFocused(token));
+        return this.tokenList.toArray().findIndex((token) => this._isTokenFocused(token));
     }
 
     /** @hidden */
@@ -677,7 +688,7 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** @hidden */
     private _tokensSelected(): boolean {
-        return this.tokenList.some(t => t.selected);
+        return this.tokenList.some((t) => t.selected);
     }
 
     /** @hidden */
@@ -697,20 +708,24 @@ export class TokenizerComponent implements AfterViewChecked, AfterViewInit, Afte
 
     /** @hidden */
     private _listenElementEvents(): void {
-        fromEvent(this.elementRef().nativeElement, 'focus', { capture: true }).pipe(
-            filter(event => event['target']?.tagName === 'INPUT' && this.tokenizerFocusable),
-            tap(() => {
-                this._tokenizerHasFocus = true;
-                this._cdRef.markForCheck();
-            }),
-            takeUntil(this._onDestroy$)
-        ).subscribe();
-        fromEvent(this.elementRef().nativeElement, 'blur', { capture: true }).pipe(
-            tap(() => {
-                this._tokenizerHasFocus = false;
-                this._cdRef.markForCheck();
-            }),
-            takeUntil(this._onDestroy$)
-        ).subscribe();
+        fromEvent(this.elementRef().nativeElement, 'focus', { capture: true })
+            .pipe(
+                filter((event) => event['target']?.tagName === 'INPUT' && this.tokenizerFocusable),
+                tap(() => {
+                    this._tokenizerHasFocus = true;
+                    this._cdRef.markForCheck();
+                }),
+                takeUntil(this._onDestroy$)
+            )
+            .subscribe();
+        fromEvent(this.elementRef().nativeElement, 'blur', { capture: true })
+            .pipe(
+                tap(() => {
+                    this._tokenizerHasFocus = false;
+                    this._cdRef.markForCheck();
+                }),
+                takeUntil(this._onDestroy$)
+            )
+            .subscribe();
     }
 }

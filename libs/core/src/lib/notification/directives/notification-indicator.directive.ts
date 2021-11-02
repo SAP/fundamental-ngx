@@ -35,11 +35,7 @@ export class NotificationIndicatorDirective implements OnChanges, OnInit, CssCla
      * function is responsible for order which css classes are applied
      */
     buildComponentCssClass(): string[] {
-        return [
-            'fd-notification__indicator',
-            this.type ? 'fd-notification__indicator--' + this.type : '',
-            this.class
-        ];
+        return ['fd-notification__indicator', this.type ? 'fd-notification__indicator--' + this.type : '', this.class];
     }
 
     /** @hidden */

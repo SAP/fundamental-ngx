@@ -34,6 +34,9 @@ import * as objectDialogHtml from '!raw-loader!./examples/dialog-object-example/
 import * as autoLabelTs from '!raw-loader!./examples/auto-label/auto-label-dialog-example.component.ts';
 import * as autoLabelHtml from '!raw-loader!./examples/auto-label/auto-label-dialog-example.component.html';
 
+import * as formDialogTs from '!raw-loader!./examples/dialog-form/form-dialog-example.component.ts';
+import * as formDialogHtml from '!raw-loader!./examples/dialog-form/form-dialog-example.component.html';
+
 import * as popoverDialogTs from '!raw-loader!./examples/dialog-inner-popover/dialog-inner-popover.component.ts';
 
 import { DialogService } from '@fundamental-ngx/core/dialog';
@@ -130,7 +133,7 @@ export class DialogDocsComponent {
             minWidth: '',
             maxWidth: '',
             ariaLabelledBy: 'fd-dialog-header-11',
-            ariaDescribedBy: 'fd-dialog-body-11',
+            ariaDescribedBy: 'fd-dialog-body-11'
         }
     };
 
@@ -145,6 +148,20 @@ export class DialogDocsComponent {
             code: templateBasedDialogTs,
             fileName: 'template-based-dialog-example',
             component: 'TemplateBasedDialogExampleComponent'
+        }
+    ];
+
+    formDialog: ExampleFile[] = [
+        {
+            language: 'html',
+            code: formDialogHtml,
+            fileName: 'form-dialog-example'
+        },
+        {
+            language: 'typescript',
+            code: formDialogTs,
+            fileName: 'form-dialog-example',
+            component: 'FormDialogExampleComponent'
         }
     ];
 

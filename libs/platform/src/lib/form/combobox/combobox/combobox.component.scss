@@ -14,13 +14,25 @@
 
     &__list {
         overflow: auto;
+
         .fd-list__item {
             justify-content: space-between;
 
             span {
                 overflow: hidden;
                 text-overflow: ellipsis;
+                width: 100%;
             }
         }
+
+        fd-form-message {
+            max-width: 100%;
+        }
+    }
+
+    &__count-list-results {
+        position: absolute;
+        opacity: 0;
+        z-index: -1;
     }
 }

@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { By } from '@angular/platform-browser';
 import { DOWN_ARROW, ENTER } from '@angular/cdk/keycodes';
+import '@angular/localize/init';
 import { Observable, of } from 'rxjs';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
@@ -97,7 +98,7 @@ class TestComponent {
 
     @ViewChild('outsideButton') outsideButton: ElementRef<HTMLElement>;
 
-    constructor() { }
+    constructor() {}
 
     onInputChange($event): void {
         this.inputValue = $event;
@@ -119,17 +120,19 @@ describe('SearchFieldComponent', () => {
 
     let overlayContainerEl: HTMLElement;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestComponent],
-            imports: [PlatformSearchFieldModule],
-            providers: [RtlService]
-        }).compileComponents();
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestComponent],
+                imports: [PlatformSearchFieldModule],
+                providers: [RtlService]
+            }).compileComponents();
 
-        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-            overlayContainerEl = overlayContainer.getContainerElement();
-        })();
-    }));
+            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+                overlayContainerEl = overlayContainer.getContainerElement();
+            })();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponent);
@@ -333,6 +336,7 @@ describe('SearchFieldComponent', () => {
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         host.categories = CATEGORIES;
         host.categoryLabel = 'Category';
+        host.isLoading = true;
 
         fixture.detectChanges();
         let inputField: ElementRef = fixture.debugElement.query(By.css('input.fd-input'));
@@ -578,7 +582,7 @@ describe('SearchFieldComponent', () => {
         host.isLoading = true;
         fixture.detectChanges();
 
-        const cancelButton: ElementRef = fixture.debugElement.query(By.css('.fdp-search-field__loading'));
+        const cancelButton: ElementRef = fixture.debugElement.query(By.css('.fdp-search-field__submit'));
         cancelButton.nativeElement.click();
         fixture.detectChanges();
 
@@ -774,7 +778,7 @@ class DataSourceTestComponent implements OnInit {
 
     @ViewChild('outsideButton') outsideButton: ElementRef<HTMLElement>;
 
-    constructor() { }
+    constructor() {}
 
     ngOnInit(): void {
         this.dataSource = new SearchFieldDataSource(new SearchFieldDataProvider());
@@ -800,17 +804,19 @@ describe('SearchFieldComponent with DataSource', () => {
 
     let overlayContainerEl: HTMLElement;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [DataSourceTestComponent],
-            imports: [PlatformSearchFieldModule],
-            providers: [RtlService]
-        }).compileComponents();
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [DataSourceTestComponent],
+                imports: [PlatformSearchFieldModule],
+                providers: [RtlService]
+            }).compileComponents();
 
-        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-            overlayContainerEl = overlayContainer.getContainerElement();
-        })();
-    }));
+            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+                overlayContainerEl = overlayContainer.getContainerElement();
+            })();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(DataSourceTestComponent);

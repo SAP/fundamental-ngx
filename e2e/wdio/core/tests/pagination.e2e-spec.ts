@@ -1,23 +1,52 @@
 import { PaginationPo } from '../pages/pagination.po';
 import {
-    click, doesItExist, getElementArrayLength, getText, getValue, pause,
-    refreshPage, scrollIntoView, setValue,
+    click,
+    doesItExist,
+    getElementArrayLength,
+    getText,
+    getValue,
+    pause,
+    refreshPage,
+    scrollIntoView,
+    setValue,
     waitForPresent
 } from '../../driver/wdio';
 import {
-    basicPaginationTestArr, itemPaginationTestArr, selectPaginationTestArr1, selectPaginationTestArr2,
-    selectPaginationTestArr3, selectPaginationTestArr4, selectPaginationTestArr5, selectPaginationTestArr6,
-    selectPaginationTestArr7, selectPaginationTestText, playgroundPaginationItemArr, playgroundPaginationTestText,
+    basicPaginationTestArr,
+    itemPaginationTestArr,
+    selectPaginationTestArr1,
+    selectPaginationTestArr2,
+    selectPaginationTestArr3,
+    selectPaginationTestArr4,
+    selectPaginationTestArr5,
+    selectPaginationTestArr6,
+    selectPaginationTestArr7,
+    selectPaginationTestText,
+    playgroundPaginationItemArr,
+    playgroundPaginationTestText,
     playgroundLabelArr
 } from '../fixtures/appData/pagination-contents';
 
-describe('Pagination test suite:', function() {
-
+describe('Pagination test suite:', () => {
     const paginationPage = new PaginationPo();
     const {
-        standardButton, basicPaginationDiv, basicPaginationPages, itemPaginationPages, totalPagination,
-        linkPrevious, linkNext, selectPaginationPages, dropdownButton, dropDownOption, toggledButton,
-        playgroundInputFields, playgroundPages, playgroundLabel, playgroundExamples, playground, page
+        standardButton,
+        basicPaginationDiv,
+        basicPaginationPages,
+        itemPaginationPages,
+        totalPagination,
+        linkPrevious,
+        linkNext,
+        selectPaginationPages,
+        dropdownButton,
+        dropDownOption,
+        toggledButton,
+        playgroundInputFields,
+        playgroundPages,
+        playgroundLabel,
+        playgroundExamples,
+        playground,
+        page
     } = paginationPage;
 
     beforeAll(() => {
@@ -29,8 +58,7 @@ describe('Pagination test suite:', function() {
         waitForPresent(standardButton);
     }, 1);
 
-    describe('Check Basic Pagination example', function() {
-
+    describe('Check Basic Pagination example', () => {
         it('should check selected pages by clicking each option', () => {
             scrollIntoView(standardButton);
             click(standardButton);
@@ -60,8 +88,7 @@ describe('Pagination test suite:', function() {
         });
     });
 
-    describe('Check Pagination showing items example', function() {
-
+    describe('Check Pagination showing items example', () => {
         it('should check selected pages by clicking each option', () => {
             scrollIntoView(itemPaginationPages);
             const linksLength = getElementArrayLength(itemPaginationPages);
@@ -81,8 +108,7 @@ describe('Pagination test suite:', function() {
         });
     });
 
-    describe('Check Pagination with per page select example', function() {
-
+    describe('Check Pagination with per page select example', () => {
         it('should check default property for items per page by clicking each page', () => {
             scrollIntoView(selectPaginationPages);
             const linksLength = getElementArrayLength(selectPaginationPages);
@@ -223,8 +249,7 @@ describe('Pagination test suite:', function() {
         });
     });
 
-    describe('Check Playground example', function() {
-
+    describe('Check Playground example', () => {
         it('should check that pages displayed correctly if total items more then 1', () => {
             scrollIntoView(playgroundInputFields);
             setValue(playgroundInputFields, '10');
@@ -267,7 +292,7 @@ describe('Pagination test suite:', function() {
             setValue(playgroundInputFields, '0', 1);
             setValue(playgroundInputFields, '0', 2);
 
-            expect(doesItExist(playgroundPages)).toBe(false, 'playground pages still exist')
+            expect(doesItExist(playgroundPages)).toBe(false, 'playground pages still exist');
         });
 
         it('should check that all text labels are displayed', () => {
@@ -283,13 +308,10 @@ describe('Pagination test suite:', function() {
         paginationPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
-
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             paginationPage.saveExampleBaselineScreenshot();
             expect(paginationPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 });
-
-

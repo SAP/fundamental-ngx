@@ -1,7 +1,8 @@
 import {
     click,
     getAttributeByNameArr,
-    getElementArrayLength, getElementPlaceholder,
+    getElementArrayLength,
+    getElementPlaceholder,
     getText,
     refreshPage,
     scrollIntoView,
@@ -13,12 +14,26 @@ import {
 import { placeholderValue } from '../fixtures/appData/file-uploader.page-content';
 import { MultiInputPo } from '../pages/multi-input.po';
 
-describe('Multi input test suite', function() {
+describe('Multi input test suite', () => {
     const multiInputPage: MultiInputPo = new MultiInputPo();
     const {
-        expandedDropdown, activeDropdownButtons, activeInputs, mobileInput, filledInput, approveButton, groupHeader,
-        groupDropdown, options, dropdownOptions, selectedToken, crossButton, dropdownOptionText, dropdownOptionTextValueHelp,
-        header
+        expandedDropdown,
+        activeDropdownButtons,
+        activeInputs,
+        mobileInput,
+        filledInput,
+        approveButton,
+        groupHeader,
+        groupDropdown,
+        options,
+        dropdownOptions,
+        selectedToken,
+        crossButton,
+        dropdownOptionText,
+        dropdownOptionTextValueHelp,
+        header,
+        validationPopover,
+        compactExampleTokens
     } = multiInputPage;
 
     beforeAll(() => {
@@ -167,7 +182,7 @@ describe('Multi input test suite', function() {
                 continue;
             }
             if (i !== mobileExample) {
-                scrollIntoView(activeDropdownButtons, i)
+                scrollIntoView(activeDropdownButtons, i);
                 multiInputPage.expandDropdown(activeDropdownButtons, i);
                 const optionsArr = getAttributeByNameArr(options, 'title');
                 scrollIntoView(header, i);
@@ -196,12 +211,53 @@ describe('Multi input test suite', function() {
     it('Verify inputs should have placeholder', () => {
         const activeInputsQuantity = getElementArrayLength(activeInputs);
         for (let i = 0; i < activeInputsQuantity; i++) {
-            expect(placeholderValue).toContain(getElementPlaceholder
-            (activeInputs, i));
+            expect(placeholderValue).toContain(getElementPlaceholder(activeInputs, i));
         }
     });
 
-    xdescribe('Check visual regression', function() {
+    it('should check validation on empty required field', () => {
+        scrollIntoView(activeInputs, 7);
+        click(activeInputs, 7);
+
+        expect(waitForElDisplayed(validationPopover)).toBe(true);
+        expect(getText(validationPopover).trim()).toBe('Value is required');
+    });
+
+    // skip due to https://github.com/SAP/fundamental-ngx/issues/6969
+    xit('should check validation on invalid entry', () => {
+        scrollIntoView(activeInputs, 7);
+        click(activeInputs, 7);
+        sendKeys(['aaaaa']);
+
+        expect(waitForElDisplayed(validationPopover)).toBe(true);
+        expect(getText(validationPopover).trim()).toBe('Invalid entry');
+    });
+
+    it('should verify user cannot add the same item twice', () => {
+        scrollIntoView(activeInputs, 1);
+        multiInputPage.expandDropdown(activeDropdownButtons, 1);
+        const optionsArr = getAttributeByNameArr(options, 'title');
+        setValue(activeInputs, optionsArr[0].substring(0, 4), 1);
+        click(options);
+        const firstSelectionTokenCount = getElementArrayLength(compactExampleTokens);
+        setValue(activeInputs, optionsArr[0].substring(0, 4), 1);
+        click(options);
+        const secondSelectionTokenCount = getElementArrayLength(compactExampleTokens);
+
+        expect(firstSelectionTokenCount).toEqual(1);
+        expect(secondSelectionTokenCount).toEqual(1);
+    });
+
+    it('should verify only 1 token created', () => {
+        scrollIntoView(activeInputs, 1);
+        const originalTokenCount = getElementArrayLength(compactExampleTokens);
+        multiInputPage.expandDropdown(activeDropdownButtons, 1);
+        click(options);
+        const newTokenCount = getElementArrayLength(compactExampleTokens);
+        expect(newTokenCount).toEqual(originalTokenCount + 1);
+    });
+
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             multiInputPage.saveExampleBaselineScreenshot();
             expect(multiInputPage.compareWithBaseline()).toBeLessThan(5);

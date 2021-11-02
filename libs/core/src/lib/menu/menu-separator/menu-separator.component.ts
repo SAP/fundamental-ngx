@@ -7,7 +7,6 @@ import { ChangeDetectionStrategy, Component, HostBinding, ViewEncapsulation } fr
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuSeparatorComponent {
-
     /** @hidden */
     @HostBinding('class.fd-menu__separator')
     readonly fdMenuSeparatorClass: boolean = true;

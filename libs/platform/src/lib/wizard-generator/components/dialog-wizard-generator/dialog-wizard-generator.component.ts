@@ -22,7 +22,6 @@ import { WizardGeneratorService } from '../../wizard-generator.service';
     providers: [WizardGeneratorService]
 })
 export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
-
     @ViewChild('defaultConfirmationDialogTemplate') defaultConfirmationDialogTemplate: TemplateRef<HTMLElement>;
 
     /**
@@ -136,17 +135,22 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
         const dialogRef = this._dialogService.open(template, { responsivePadding: true });
 
         dialogRef.afterClosed
-        .pipe(filter((result) => result), takeUntil(this._onDestroy$))
-        .subscribe(() => {
-            this._dialogRef.dismiss();
-        }, () => {});
+            .pipe(
+                filter((result) => result),
+                takeUntil(this._onDestroy$)
+            )
+            .subscribe(
+                () => {
+                    this._dialogRef.dismiss();
+                },
+                () => {}
+            );
     }
 
     /**
      * @description Completes Wizard process, emits Wizard result and closes the dialog.
      */
     async finish(): Promise<void> {
-
         if (this.isSummaryStep) {
             const wizardResult = await this._wizardGeneratorService.getWizardFormValue(true);
             this._dialogRef.close(wizardResult);
@@ -155,15 +159,15 @@ export class DialogWizardGeneratorComponent extends BaseWizardGenerator {
 
         const currentStepId = this._wizardGeneratorService.getCurrentStepId();
         this.submitStepForms(currentStepId)
-        .pipe(takeUntil(this._onDestroy$))
-        .subscribe(async (result) => {
-            if (Object.values(result).some(r => !r.success)) {
-                return;
-            }
+            .pipe(takeUntil(this._onDestroy$))
+            .subscribe(async (result) => {
+                if (Object.values(result).some((r) => !r.success)) {
+                    return;
+                }
 
-            const wizardResult = await this._wizardGeneratorService.getWizardFormValue(true);
-            this._dialogRef.close(wizardResult);
-        });
+                const wizardResult = await this._wizardGeneratorService.getWizardFormValue(true);
+                this._dialogRef.close(wizardResult);
+            });
     }
 
     /**

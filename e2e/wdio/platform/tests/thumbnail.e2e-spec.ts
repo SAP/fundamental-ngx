@@ -1,5 +1,6 @@
 import {
-    click, clickWithOption,
+    click,
+    clickWithOption,
     doesItExist,
     getAttributeByName,
     getElementArrayLength,
@@ -11,11 +12,19 @@ import {
 } from '../../driver/wdio';
 import { ThumbnailPo } from '../pages/thumbnail.po';
 
-describe('Thumbnail field', function() {
+describe('Thumbnail field', () => {
     const thumbnailPage: ThumbnailPo = new ThumbnailPo();
     const {
-        mainImage, mainVideo, verticalGalleryImages, horizontalGalleryImages, galleryDialog, galleryDialogCloseButton,
-        galleryDialogLeftArrowButton, galleryDialogRightArrowButton, dialogMainImg, horizontalMainImg
+        mainImage,
+        mainVideo,
+        verticalGalleryImages,
+        horizontalGalleryImages,
+        galleryDialog,
+        galleryDialogCloseButton,
+        galleryDialogLeftArrowButton,
+        galleryDialogRightArrowButton,
+        dialogMainImg,
+        horizontalMainImg
     } = thumbnailPage;
 
     beforeAll(() => {
@@ -51,8 +60,7 @@ describe('Thumbnail field', function() {
         const arrLength = getElementArrayLength(horizontalGalleryImages);
         for (let i = 0; arrLength > i; i++) {
             const imageUrl = getAttributeByName(horizontalGalleryImages, 'style', i);
-            const trimmedImageUrl = imageUrl.replace('background-image: url("', '')
-                .replace('");', '');
+            const trimmedImageUrl = imageUrl.replace('background-image: url("', '').replace('");', '');
             click(horizontalGalleryImages, i);
             expect(getAttributeByName(mainImage, 'src', 1)).toContain(trimmedImageUrl);
         }
@@ -61,7 +69,7 @@ describe('Thumbnail field', function() {
     it('should be able to close gallery popup', () => {
         scrollIntoView(verticalGalleryImages, 4);
         waitForElDisplayed(verticalGalleryImages, 4);
-        clickWithOption(verticalGalleryImages, 4, 5000, {x: 10});
+        clickWithOption(verticalGalleryImages, 4, 5000, { x: 10 });
         scrollIntoView(galleryDialog);
         waitForElDisplayed(galleryDialog);
         click(galleryDialogCloseButton);
@@ -72,7 +80,7 @@ describe('Thumbnail field', function() {
     it('should be able to switch image in gallery popup', () => {
         waitForElDisplayed(horizontalGalleryImages);
         scrollIntoView(horizontalGalleryImages, 2);
-        clickWithOption(horizontalGalleryImages, 2, 5000, {x: 20});
+        clickWithOption(horizontalGalleryImages, 2, 5000, { x: 20 });
         click(horizontalMainImg);
         waitForElDisplayed(galleryDialog);
         const startingImage = getAttributeByName(dialogMainImg, 'src');
@@ -91,7 +99,7 @@ describe('Thumbnail field', function() {
         thumbnailPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             thumbnailPage.saveExampleBaselineScreenshot();
             expect(thumbnailPage.compareWithBaseline()).toBeLessThan(5);

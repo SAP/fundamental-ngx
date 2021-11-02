@@ -7,13 +7,10 @@
 >
     <div class="fd-tabs__wrapper" [class.fd-tabs__wrapper--collapsible]="_isCollapsed">
         <ng-container *ngFor="let tab of _visualOrder.visible; let i = index; let last = last">
-            <div fd-tab-item
-                 [header]="tab.isHeader"
-                 [tabItemState]="tab.tabState"
-                 [attr.aria-selected]="tab.active">
+            <div fd-tab-item [header]="tab.isHeader" [tabItemState]="tab.tabState" [attr.aria-selected]="tab.active">
                 <a
                     fd-tab-link
-                    [attr.tabindex]= "tab.active ? '0':'-1'"
+                    [attr.tabindex]="tab.active ? '0' : '-1'"
                     [attr.aria-controls]="tab.id"
                     [attr.aria-label]="tab.ariaLabel || null"
                     [attr.aria-labelledby]="!tab.ariaLabel && tab.ariaLabelledBy ? tab.ariaLabelledBy : null"
@@ -39,9 +36,9 @@
                         </ng-container>
 
                         <ng-container *ngSwitchCase="'icon-only'">
-                        <span fd-tab-icon [icon]="tab.glyph">
-                            <p fd-tab-count>{{ tab.count }}</p>
-                        </span>
+                            <span fd-tab-icon [icon]="tab.glyph">
+                                <p fd-tab-count>{{ tab.count }}</p>
+                            </span>
                         </ng-container>
 
                         <ng-container *ngSwitchCase="'process'">
@@ -65,27 +62,33 @@
         </ng-container>
     </div>
 
-    <fd-item-expand *ngIf="_isCollapsed"
-                    [fdMenuTrigger]="menu"
-                    [label]="expandOverflowText"
-                    (keydown)="_onTriggerKeydown($event, menu)">
+    <fd-item-expand
+        *ngIf="_isCollapsed"
+        [fdMenuTrigger]="menu"
+        [label]="expandOverflowText"
+        (keydown)="_onTriggerKeydown($event, menu)"
+    >
     </fd-item-expand>
 </div>
 
-<div #contentContainer
-     class="fd-tabs__content"
-     [style.maxHeight]="maxContentHeight"
-     fdScrollSpy
-     [trackedTags]="['fd-tab']"
-     [scrollSpyDisabled]="_disableScrollSpy"
-     (spyChange)="_highlightActiveTab($event)">
+<div
+    #contentContainer
+    class="fd-tabs__content"
+    [style.maxHeight]="maxContentHeight"
+    fdScrollSpy
+    [trackedTags]="['fd-tab']"
+    [scrollSpyDisabled]="_disableScrollSpy"
+    (spyChange)="_highlightActiveTab($event)"
+>
     <ng-content></ng-content>
 </div>
 
 <fd-menu #menu>
-    <li fd-menu-item
+    <li
+        fd-menu-item
         *ngFor="let tab of _visualOrder.overflowing"
-        (onSelect)="_overflowingTabHeaderClickHandler(tab.panel)">
+        (onSelect)="_overflowingTabHeaderClickHandler(tab.panel)"
+    >
         <div fd-menu-interactive>
             <ng-container
                 *ngTemplateOutlet="

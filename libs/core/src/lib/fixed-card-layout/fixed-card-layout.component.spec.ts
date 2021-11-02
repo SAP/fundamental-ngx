@@ -28,13 +28,15 @@ describe('FixedCardLayoutComponent', () => {
     let component: TestFixedCardLayoutComponent;
     let fixture: ComponentFixture<TestFixedCardLayoutComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [CardModule, FixedCardLayoutModule],
-            declarations: [TestFixedCardLayoutComponent],
-            providers: [RtlService]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CardModule, FixedCardLayoutModule],
+                declarations: [TestFixedCardLayoutComponent],
+                providers: [RtlService]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestFixedCardLayoutComponent);
@@ -60,7 +62,7 @@ describe('FixedCardLayoutComponent', () => {
         component.fixedCardLayout.updateLayout();
         await whenStable(fixture);
 
-        expect(component.fixedCardLayout.columns.length).toEqual(4);
+        expect(component.fixedCardLayout._columns.length).toEqual(4);
     });
 
     it('should have 1 columns on 500px width size value', async () => {
@@ -71,7 +73,7 @@ describe('FixedCardLayoutComponent', () => {
         component.fixedCardLayout.updateLayout();
         await whenStable(fixture);
 
-        expect(component.fixedCardLayout.columns.length).toEqual(1);
+        expect(component.fixedCardLayout._columns.length).toEqual(1);
     });
 
     it('should have 2 columns on 656px width size value', async () => {
@@ -82,7 +84,7 @@ describe('FixedCardLayoutComponent', () => {
         component.fixedCardLayout.updateLayout();
         await whenStable(fixture);
 
-        expect(component.fixedCardLayout.columns.length).toEqual(2);
+        expect(component.fixedCardLayout._columns.length).toEqual(2);
     });
 
     it('should have 3 columns on 992px width size value', async () => {
@@ -93,7 +95,7 @@ describe('FixedCardLayoutComponent', () => {
         component.fixedCardLayout.updateLayout();
         await whenStable(fixture);
 
-        expect(component.fixedCardLayout.columns.length).toEqual(3);
+        expect(component.fixedCardLayout._columns.length).toEqual(3);
     });
 
     it('should have 5 columns on 1664px width size value', async () => {
@@ -104,7 +106,7 @@ describe('FixedCardLayoutComponent', () => {
         component.fixedCardLayout.updateLayout();
         await whenStable(fixture);
 
-        expect(component.fixedCardLayout.columns.length).toEqual(5);
+        expect(component.fixedCardLayout._columns.length).toEqual(5);
     });
 
     it('should have 1 columns on 300px width size value', async () => {
@@ -115,6 +117,6 @@ describe('FixedCardLayoutComponent', () => {
         component.fixedCardLayout.updateLayout();
         await whenStable(fixture);
 
-        expect(component.fixedCardLayout.columns.length).toEqual(1);
+        expect(component.fixedCardLayout._columns.length).toEqual(1);
     });
 });

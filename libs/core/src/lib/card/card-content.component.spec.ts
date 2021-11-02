@@ -9,12 +9,14 @@ describe('CardContentComponent', () => {
     let fixture: ComponentFixture<CardContentComponent>;
     let component: CardContentComponent;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [CommonModule],
-            declarations: [CardContentComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [CommonModule],
+                declarations: [CardContentComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(CardContentComponent);

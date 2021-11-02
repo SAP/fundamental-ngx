@@ -1,8 +1,6 @@
 <header>Popover</header>
 <description>
-    <p>
-        The popover is a wrapping component that accepts a “control” as well as a “body".
-    </p>
+    <p>The popover is a wrapping component that accepts a “control” as well as a “body".</p>
     <p>
         A control can be anything that you want to trigger the interaction from. The body will be the contents of what
         you reveal on the page after triggering the popover. Commonly used as the interaction/wrapping component when
@@ -17,10 +15,13 @@
         As a general rule, it is suggested that one popover be revealed on the page at any given time. Opening one
         popover should close all others to prevent multiple layers and collisions of several popovers.
     </p>
-    <p>Fundamental-ngx popovers use the <code>overlay</code> package provided by <a href="https://material.angular.io/cdk/overlay/overview" target="_blank">Angular CDK</a>.</p>
+    <p>
+        Fundamental-ngx popovers use the <code>overlay</code> package provided by
+        <a href="https://material.angular.io/cdk/overlay/overview" target="_blank">Angular CDK</a>.
+    </p>
     <fd-message-strip [dismissible]="false" type="information">
-        <b>IMPORTANT</b> If you place Popover inside scrollable container - you need to add <code>cdkScrollable</code> directive into container
-        and import <code>ScrollingModule</code> into module.
+        <b>IMPORTANT</b> If you place Popover inside scrollable container - you need to add
+        <code>cdkScrollable</code> directive into container and import <code>ScrollingModule</code> into module.
     </fd-message-strip>
 </description>
 <import module="PopoverModule" subPackage="popover"></import>

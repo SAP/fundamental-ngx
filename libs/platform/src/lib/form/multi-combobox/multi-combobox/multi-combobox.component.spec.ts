@@ -69,21 +69,23 @@ describe('MultiComboboxComponent default values', () => {
     let multiCombobox: MultiComboboxComponent;
     let overlayContainerEl: HTMLElement;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [FdpFormGroupModule, FormModule, ReactiveFormsModule, PlatformMultiComboboxModule],
-            declarations: [MultiComboboxStandardComponent],
-            providers: [
-                DynamicComponentService,
-                RtlService,
-                { provide: DATA_PROVIDERS, useClass: DataProvider as any }
-            ]
-        }).compileComponents();
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [FdpFormGroupModule, FormModule, ReactiveFormsModule, PlatformMultiComboboxModule],
+                declarations: [MultiComboboxStandardComponent],
+                providers: [
+                    DynamicComponentService,
+                    RtlService,
+                    { provide: DATA_PROVIDERS, useClass: DataProvider as any }
+                ]
+            }).compileComponents();
 
-        inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
-            overlayContainerEl = overlayContainer.getContainerElement();
-        })();
-    }));
+            inject([OverlayContainer], (overlayContainer: OverlayContainer) => {
+                overlayContainerEl = overlayContainer.getContainerElement();
+            })();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(MultiComboboxStandardComponent);
@@ -190,7 +192,7 @@ describe('MultiComboboxComponent default values', () => {
         const selectEvent = new KeyboardEvent('keydown', {
             keyCode: A,
             ctrlKey: true
-        })
+        });
         const unselectEvent = new KeyboardEvent('keydown', {
             keyCode: A,
             ctrlKey: true,
@@ -210,4 +212,3 @@ describe('MultiComboboxComponent default values', () => {
         expect(multiCombobox._selected.length).toEqual(0);
     });
 });
-

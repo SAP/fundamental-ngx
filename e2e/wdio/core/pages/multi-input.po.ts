@@ -5,8 +5,8 @@ export class MultiInputPo extends CoreBaseComponentPo {
     private url = '/multi-input';
     root = '#page-content';
 
-    activeDropdownButtons = '[ng-reflect-disabled="false"] button[ng-reflect-glyph="value-help"]';
-    activeInputs = '.fd-multi-input-field [ng-reflect-disabled="false"] input';
+    activeDropdownButtons = 'button[title="value-help"]:not(:disabled)';
+    activeInputs = '.fd-multi-input-field input:not(:disabled)';
     disableInputs = 'div.is-disabled';
     options = 'fd-checkbox.ng-untouched';
     expandedDropdown = '.fd-list';
@@ -15,7 +15,7 @@ export class MultiInputPo extends CoreBaseComponentPo {
     hiddenAddonButtonInputOptions = 'fd-multi-input[inputid="noAddonMultiInput1"] .fd-token__text span';
     compactMultiInputOptions = 'div#rtl-ex1 .fd-token__text span';
     approveButton = '.fd-button--emphasized';
-    multiSelectButton = 'button[ng-reflect-glyph="multiselect-all"]';
+    multiSelectButton = '.custom-multi-input-select-all-bar-element button';
     mobileInputOptions = 'fd-multi-input-mobile-example .fd-token__text span';
     displayObjectOptions = 'div#background-ex3 .fd-token__text span';
     searchTermOptions = 'div#background-ex4 .fd-token__text span';
@@ -23,12 +23,17 @@ export class MultiInputPo extends CoreBaseComponentPo {
     asyncExampleOptions = 'div#rtl-ex6 .fd-token__text span';
     tokenOptions = 'div#background-ex8 .fd-token__text span';
     templateOptions = 'div#background-ex9 .fd-token__text span';
+    simpleExampleTokens = 'fd-multi-input-example fd-tokenizer fd-token';
+    compactExampleTokens = 'fd-multi-input-compact-example fd-tokenizer fd-token';
+    popover = '.fd-popover__popper';
+    checkboxInput = this.popover + ' fd-checkbox';
+    listItem = this.popover + ' .fd-list__item';
 
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.root);
         waitForElDisplayed(this.title);
-    };
+    }
 
     getScreenshotFolder(): object {
         return super.getScreenshotFolder(this.url);

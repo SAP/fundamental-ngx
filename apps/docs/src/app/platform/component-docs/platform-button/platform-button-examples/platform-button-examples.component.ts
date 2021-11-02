@@ -5,31 +5,31 @@ import { Component } from '@angular/core';
     templateUrl: './platform-button-types-example.component.html',
     styleUrls: ['./platform-button-examples.scss']
 })
-export class PlatformButtonTypesExampleComponent { }
+export class PlatformButtonTypesExampleComponent {}
 
 @Component({
     selector: 'fdp-button-sizes-example',
     templateUrl: './platform-button-sizes-example.component.html',
     styleUrls: ['./platform-button-examples.scss']
 })
-export class PlatformButtonSizesExampleComponent { }
+export class PlatformButtonSizesExampleComponent {}
 
 @Component({
     selector: 'fdp-button-icons-example',
     templateUrl: './platform-button-icons-example.component.html',
     styleUrls: ['./platform-button-examples.scss']
 })
-export class PlatformButtonIconsExampleComponent { }
+export class PlatformButtonIconsExampleComponent {}
 
 @Component({
     selector: 'fdp-button-state-example',
     templateUrl: './platform-button-state-example.component.html',
     styleUrls: ['./platform-button-examples.scss']
 })
-export class PlatformButtonStateExampleComponent { }
+export class PlatformButtonStateExampleComponent {}
 @Component({
     selector: 'fdp-button-truncate-example',
     templateUrl: './platform-button-truncate-example.component.html',
     styleUrls: ['./platform-button-examples.scss']
 })
-export class PlatformButtonTruncateExampleComponent { }
+export class PlatformButtonTruncateExampleComponent {}

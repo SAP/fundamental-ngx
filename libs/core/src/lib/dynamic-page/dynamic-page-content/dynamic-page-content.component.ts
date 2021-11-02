@@ -11,8 +11,6 @@ import {
 import { DYNAMIC_PAGE_CLASS_NAME } from '../constants';
 import { addClassNameToElement } from '../utils';
 
-
-
 @Component({
     selector: 'fd-dynamic-page-content',
     templateUrl: './dynamic-page-content.component.html',

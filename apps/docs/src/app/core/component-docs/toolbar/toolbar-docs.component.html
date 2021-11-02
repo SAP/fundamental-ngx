@@ -11,7 +11,8 @@
 
 <fd-docs-section-title id="title" componentName="toolbar"> Toolbar Title </fd-docs-section-title>
 <description>
-    When the text inside a Toolbar is set to h4, the <code class="code-snippet">[hasTitle]="true"</code> must be used as seen in the exmaple below.
+    When the text inside a Toolbar is set to h4, the <code class="code-snippet">[hasTitle]="true"</code> must be used as
+    seen in the exmaple below.
 </description>
 <component-example>
     <fd-toolbar-title-example></fd-toolbar-title-example>
@@ -19,13 +20,13 @@
 <code-example [exampleFiles]="toolbarTitleExample"></code-example>
 <separator></separator>
 
-<fd-docs-section-title id="overflow" componentName="toolbar">
-    Toolbar Overflow
-</fd-docs-section-title>
+<fd-docs-section-title id="overflow" componentName="toolbar"> Toolbar Overflow </fd-docs-section-title>
 <description>
-   If there isn’t enough room in a Toolbar, the [shouldOverflow]="true" can be used to move buttons to an overflow area.
-   A popover button will be created which will contain all the items in the overflow.
-   Make sure to include the <code class="code-snippet">fd-toolbar-item </code>directive in each Toolbar. <code class="code-snippet">fd-toolbar-overflow-button</code> for button and <code class="code-snippet">fd-toolbar-overflow-button-menu</code> for menu button in each Toolbar.
+    If there isn’t enough room in a Toolbar, the [shouldOverflow]="true" can be used to move buttons to an overflow
+    area. A popover button will be created which will contain all the items in the overflow. Make sure to include the
+    <code class="code-snippet">fd-toolbar-item </code>directive in each Toolbar.
+    <code class="code-snippet">fd-toolbar-overflow-button</code> for button and
+    <code class="code-snippet">fd-toolbar-overflow-button-menu</code> for menu button in each Toolbar.
 </description>
 <component-example>
     <fd-toolbar-overflow-example></fd-toolbar-overflow-example>
@@ -37,13 +38,27 @@
     Toolbar Overflow Priority
 </fd-docs-section-title>
 <description>
-    Individual child elements can be "prioritized" for the overflow behavior using the <code class="code-snippet">fdOverflowPriority</code> attribute directive. The values for prioritization are as follows:
+    Individual child elements can be "prioritized" for the overflow behavior using the
+    <code class="code-snippet">fdOverflowPriority</code> attribute directive. The values for prioritization are as
+    follows:
     <ul>
         <li><code class="code-snippet">always</code> - This element will always be positioned in the overflow menu.</li>
-        <li><code class="code-snippet">never</code> - This element will never be added to the overflow. It will always be visible in the toolbar.</li>
-        <li><code class="code-snippet">low</code> - The element has low priority and will be consider first for moving to overflow menu.</li>
-        <li><code class="code-snippet">high</code> - This element has high priority and will be considered last for moving to overflow menu.</li>
-        <li><code class="code-snippet">disappear</code> - This element is not important and will be removed from the toolbar, and will not be added to the overflow menu.</li>
+        <li>
+            <code class="code-snippet">never</code> - This element will never be added to the overflow. It will always
+            be visible in the toolbar.
+        </li>
+        <li>
+            <code class="code-snippet">low</code> - The element has low priority and will be consider first for moving
+            to overflow menu.
+        </li>
+        <li>
+            <code class="code-snippet">high</code> - This element has high priority and will be considered last for
+            moving to overflow menu.
+        </li>
+        <li>
+            <code class="code-snippet">disappear</code> - This element is not important and will be removed from the
+            toolbar, and will not be added to the overflow menu.
+        </li>
     </ul>
 </description>
 <component-example>
@@ -52,17 +67,16 @@
 <code-example [exampleFiles]="toolbarOverflowPriorityExample"></code-example>
 <separator></separator>
 
-
 <fd-docs-section-title id="overflow-grouping" componentName="toolbar">
     Toolbar Overflow Grouping
 </fd-docs-section-title>
 <description>
     Child elements can be grouped so that they can "overflow" together. Setting the attribute directive
-    <code class="code-snippet">fdOverflowGroup</code> to the same number will allow child elements to be grouped.
-    Child elements which are grouped, will enter (or leave) the overflow menu together. Child elements grouped in this
-    manner cannot have the <code class="code-snippet">fdOverflowPriority</code> values of
-    <code class="code-snippet">always</code> or <code class="code-snippet">never</code>.
-    When the value of the property is 0, the element does not belong to any group.
+    <code class="code-snippet">fdOverflowGroup</code> to the same number will allow child elements to be grouped. Child
+    elements which are grouped, will enter (or leave) the overflow menu together. Child elements grouped in this manner
+    cannot have the <code class="code-snippet">fdOverflowPriority</code> values of
+    <code class="code-snippet">always</code> or <code class="code-snippet">never</code>. When the value of the property
+    is 0, the element does not belong to any group.
 </description>
 <component-example>
     <fd-toolbar-overflow-grouping-example></fd-toolbar-overflow-grouping-example>
@@ -70,12 +84,8 @@
 <code-example [exampleFiles]="toolbarOverflowGroupingExample"></code-example>
 <separator></separator>
 
-<fd-docs-section-title id="size" componentName="toolbar">
-    Toolbar Size
-</fd-docs-section-title>
-<description>
-    The Toolbar size can be set to either compact(default) or cozy. T
-</description>
+<fd-docs-section-title id="size" componentName="toolbar"> Toolbar Size </fd-docs-section-title>
+<description> The Toolbar size can be set to either compact(default) or cozy. T </description>
 <component-example>
     <fd-toolbar-size-example></fd-toolbar-size-example>
 </component-example>
@@ -94,12 +104,8 @@
 <code-example [exampleFiles]="toolbarSpacerExample"></code-example>
 <separator></separator>
 
-<fd-docs-section-title id="separator" componentName="toolbar">
-    Toolbar Separator
-</fd-docs-section-title>
-<description>
-    Separators should be used to visually separate items from each other.
-</description>
+<fd-docs-section-title id="separator" componentName="toolbar"> Toolbar Separator </fd-docs-section-title>
+<description> Separators should be used to visually separate items from each other. </description>
 <component-example>
     <fd-toolbar-separator-example></fd-toolbar-separator-example>
 </component-example>

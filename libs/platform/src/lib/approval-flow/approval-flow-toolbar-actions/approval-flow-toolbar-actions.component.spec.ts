@@ -17,7 +17,7 @@ const users: ApprovalUser[] = [
 ];
 
 const usersMap = {};
-users.forEach(u => usersMap[u.id] = u);
+users.forEach((u) => (usersMap[u.id] = u));
 
 const simpleGraph: ApprovalProcess = {
     watchers: [getUser('uid66161')],

@@ -13,24 +13,45 @@ import {
     browserIsSafari,
     click,
     getAttributeByName,
-    getCSSPropertyByName, getElementAriaLabel,
+    getCSSPropertyByName,
+    getElementAriaLabel,
     getElementSize,
     isElementClickable,
-    mouseHoverElement, pause,
+    mouseHoverElement,
+    pause,
     refreshPage,
     scrollIntoView,
     waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 
-describe('Verify Switch component', function() {
+describe('Verify Switch component', () => {
     const switchPage = new SwitchPo();
     const {
-        defaultSwitchLabel, defaultSwitchInput, defaultSwitchSizeAttr, defaultSwitchHandel, defaultCompactSwitchLabel,
-        defaultCompactSwitchInput, defaultCompactSwitchSizeAttr, defaultCompactSwitchHandel, disabledSwitchLabel, disabledSwitchInput,
-        disabledSwitchHandel, formDisabledSwitchLabel, formDisabledSwitchInput, formDisabledSwitchHandel, semanticSwitchLabel,
-        semanticSwitchInput, semanticSwitchHandel, semanticSwitchIconOff, semanticSwitchIconOn, semanticCompactSwitchLabel,
-        semanticCompactSwitchInput, semanticCompactSwitchHandel, semanticCompactSwitchIconOff, semanticCompactSwitchIconOn
+        defaultSwitchLabel,
+        defaultSwitchInput,
+        defaultSwitchSizeAttr,
+        defaultSwitchHandel,
+        defaultCompactSwitchLabel,
+        defaultCompactSwitchInput,
+        defaultCompactSwitchSizeAttr,
+        defaultCompactSwitchHandel,
+        disabledSwitchLabel,
+        disabledSwitchInput,
+        disabledSwitchHandel,
+        formDisabledSwitchLabel,
+        formDisabledSwitchInput,
+        formDisabledSwitchHandel,
+        semanticSwitchLabel,
+        semanticSwitchInput,
+        semanticSwitchHandel,
+        semanticSwitchIconOff,
+        semanticSwitchIconOn,
+        semanticCompactSwitchLabel,
+        semanticCompactSwitchInput,
+        semanticCompactSwitchHandel,
+        semanticCompactSwitchIconOff,
+        semanticCompactSwitchIconOn
     } = switchPage;
 
     beforeAll(() => {
@@ -42,7 +63,7 @@ describe('Verify Switch component', function() {
         waitForElDisplayed(switchPage.title);
     }, 1);
 
-    describe('has default and compact switch and', function() {
+    describe('has default and compact switch and', () => {
         it('should default change something to active or inactive', () => {
             // capture before state
             waitForPresent(defaultSwitchInput);
@@ -53,7 +74,6 @@ describe('Verify Switch component', function() {
 
             expect(isCheckedBefore).toBe('false', 'Default switch has incorrect state before click');
             expect(isCheckedAfter).toBe('true', 'Default switch has incorrect state after click');
-
         });
 
         it('should compact change something to active or inactive', () => {
@@ -107,7 +127,7 @@ describe('Verify Switch component', function() {
         });
     });
 
-    describe('has disabled and disabled-form switch and ', function() {
+    describe('has disabled and disabled-form switch and ', () => {
         it('should not be able to interact with disabled switch', () => {
             scrollIntoView(disabledSwitchInput);
             const isClickable = isElementClickable(disabledSwitchInput);
@@ -156,7 +176,6 @@ describe('Verify Switch component', function() {
         });
     });
 
-
     it('should have alternative title or aria-label for all switches', () => {
         waitForPresent(defaultSwitchInput);
         const alternativeTextDefaultSwitch = getElementAriaLabel(defaultSwitchLabel);
@@ -180,12 +199,11 @@ describe('Verify Switch component', function() {
         expect(testResult.violations.length).toBe(0);
     });*/
 
-
     it('should have RTL orientation', () => {
         switchPage.checkRtlSwitch();
     });
 
-    describe('has semantic switch and', function() {
+    describe('has semantic switch and', () => {
         it('should change something from positive to negative', () => {
             if (browserIsIE()) {
                 console.log('Skip for IE');
@@ -266,15 +284,14 @@ describe('Verify Switch component', function() {
         });*/
     });
 
-    xdescribe('Check visual regression', function() {
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             switchPage.saveExampleBaselineScreenshot();
             expect(switchPage.compareWithBaseline()).toBeLessThan(5);
         });
     });
 
-    /*xdescribe('has correct page content', function() {
+    /*xdescribe('has correct page content', () => {
          // TODO: add page content checks
     });*/
-})
-;
+});

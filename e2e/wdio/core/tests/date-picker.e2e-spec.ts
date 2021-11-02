@@ -7,7 +7,8 @@ import {
     getElementClass,
     getNextElementText,
     getText,
-    getValue, isElementClickable,
+    getValue,
+    isElementClickable,
     isElementDisplayed,
     mouseHoverElement,
     refreshPage,
@@ -16,17 +17,50 @@ import {
     waitForPresent
 } from '../../driver/wdio';
 import { DatePickerPo } from '../pages/date-picker.po';
-import { currentYear, invalidDate, getCurrentItemIndex, getCurrentMonth, getNextDay } from '../fixtures/testData/date-picker-tags'
+import {
+    currentYear,
+    invalidDate,
+    getCurrentItemIndex,
+    getCurrentMonth,
+    getNextDay
+} from '../fixtures/testData/date-picker-tags';
 import { blockExamples } from '../fixtures/appData/date-picker-contents';
 
-describe('Datetime picker suite', function () {
+describe('Datetime picker suite', () => {
     const datePickerPage = new DatePickerPo();
     const {
-        defaultExample, formExample, rangeExample, disabledExample, allowNullExample, formRangeExample,
-        formattingExample, disableFuncExample, internationalExample, rangeDisabledExample, calendar, calendarIcon,
-        calendarInput, calendarItem, selectedTimeLine, currentItem, itemText, inputGroup, frenchButton, germanButton,
-        bulgarianButton, previousMonthButton, nextMonthButton, calendarBody, calendarRow, selectMonthButton,
-        selectYearButton, months, buttonText, message, currentMonthCalendarItem, getCurrentDayIndex, altCalendarItem
+        defaultExample,
+        formExample,
+        rangeExample,
+        disabledExample,
+        allowNullExample,
+        formRangeExample,
+        formattingExample,
+        disableFuncExample,
+        internationalExample,
+        rangeDisabledExample,
+        calendar,
+        calendarIcon,
+        calendarInput,
+        calendarItem,
+        selectedTimeLine,
+        currentItem,
+        inputGroup,
+        frenchButton,
+        germanButton,
+        bulgarianButton,
+        previousMonthButton,
+        nextMonthButton,
+        calendarBody,
+        calendarRow,
+        selectMonthButton,
+        selectYearButton,
+        months,
+        message,
+        currentMonthCalendarItem,
+        getCurrentDayIndex,
+        altCalendarItem,
+        monthAttributeLabel
     } = new DatePickerPo();
 
     beforeAll(() => {
@@ -48,7 +82,11 @@ describe('Datetime picker suite', function () {
 
     it('should check choosing date', () => {
         for (let i = 0; i < blockExamples.length; i++) {
-            if (blockExamples[i] !== internationalExample && blockExamples[i] !== disabledExample && blockExamples[i] !== formRangeExample) {
+            if (
+                blockExamples[i] !== internationalExample &&
+                blockExamples[i] !== disabledExample &&
+                blockExamples[i] !== formRangeExample
+            ) {
                 checkChoosingDate(blockExamples[i]);
                 refreshPage();
             }
@@ -80,12 +118,16 @@ describe('Datetime picker suite', function () {
 
     it('should check typing invalid date in the input', () => {
         for (let i = 0; i < blockExamples.length; i++) {
-            if (blockExamples[i] !== disabledExample && blockExamples[i] !== internationalExample && blockExamples[i] !== formExample &&
-                blockExamples[i] !== disableFuncExample) {
+            if (
+                blockExamples[i] !== disabledExample &&
+                blockExamples[i] !== internationalExample &&
+                blockExamples[i] !== formExample &&
+                blockExamples[i] !== disableFuncExample
+            ) {
                 checkTypingInvalidDate(blockExamples[i]);
             }
         }
-    })
+    });
 
     it('should check that previous days are disabled in disabled func example', () => {
         click(disableFuncExample + calendarIcon);
@@ -100,8 +142,7 @@ describe('Datetime picker suite', function () {
         for (let i = currentDayIndex; i < itemsLength; i++) {
             expect(isElementClickable(calendarItem, i)).toBe(true, `element is disabled`);
         }
-
-    })
+    });
 
     it('should check that available only 2 next weeks in range disabled example', () => {
         click(rangeDisabledExample + calendarIcon);
@@ -207,16 +248,22 @@ describe('Datetime picker suite', function () {
         click(section + calendarIcon);
         click(selectMonthButton);
 
-        const previousMonthName = getAttributeByName(calendarItem + itemText, 'aria-label', getCurrentItemIndex() - 1);
-        const nextMonthName = getAttributeByName(calendarItem + itemText, 'aria-label', getCurrentItemIndex() + 1);
+        const previousMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() - 1);
+        const nextMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() + 1);
         click(selectMonthButton);
 
         click(nextMonthButton);
-        expect(getText(selectMonthButton + buttonText)).toEqual(nextMonthName, `next month is not chosen`);
+        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
+            nextMonthName,
+            `next month is not chosen`
+        );
 
         click(previousMonthButton);
         click(previousMonthButton);
-        expect(getText(selectMonthButton + buttonText)).toEqual(previousMonthName, `previous month is not chosen`);
+        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
+            previousMonthName,
+            `previous month is not chosen`
+        );
         click(section + calendarIcon);
     }
 
@@ -225,7 +272,7 @@ describe('Datetime picker suite', function () {
         click(selectYearButton);
         const nextYear = getNextElementText(currentItem);
         clickNextElement(currentItem);
-        expect(getText(selectYearButton + buttonText)).toEqual(nextYear);
+        expect(getText(selectYearButton)).toEqual(nextYear);
         click(section + calendarIcon);
     }
 
@@ -233,9 +280,9 @@ describe('Datetime picker suite', function () {
         click(section + calendarIcon);
         click(selectMonthButton);
         expect(isElementDisplayed(months)).toBe(true);
-        const firstMonth = getAttributeByName(calendarItem + itemText, 'aria-label');
+        const firstMonth = getAttributeByName(calendarItem, monthAttributeLabel);
         click(calendarItem);
-        expect(getText(selectMonthButton + buttonText)).toEqual(firstMonth, `month is not chosen`);
+        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(firstMonth, `month is not chosen`);
         click(section + calendarIcon);
     }
 
@@ -243,10 +290,20 @@ describe('Datetime picker suite', function () {
         scrollIntoView(section);
         section !== internationalExample ? click(section + calendarIcon) : click(section + calendarIcon, 3);
         for (let i = 0; i < 5; i++) {
-            if (!getElementClass(calendarBody + calendarRow + `:nth-child(${i + 1}) ` + calendarItem, 0).includes('other-month') &&
-                !getElementClass(calendarBody + calendarRow + `:nth-child(${i + 1}) ` + calendarItem, 6).includes('other-month')) {
-                expect(getElementClass(calendarBody + calendarRow + `:nth-child(${i + 1}) ` + calendarItem, 0)).toContain('-weekend', 'the day is not weekend');
-                expect(getElementClass(calendarBody + calendarRow + `:nth-child(${i + 1}) ` + calendarItem, 6)).toContain('-weekend', 'the day is not weekend');
+            if (
+                !getElementClass(calendarBody + calendarRow + `:nth-child(${i + 1}) ` + calendarItem, 0).includes(
+                    'other-month'
+                ) &&
+                !getElementClass(calendarBody + calendarRow + `:nth-child(${i + 1}) ` + calendarItem, 6).includes(
+                    'other-month'
+                )
+            ) {
+                expect(
+                    getElementClass(calendarBody + calendarRow + `:nth-child(${i + 1}) ` + calendarItem, 0)
+                ).toContain('-weekend', 'the day is not weekend');
+                expect(
+                    getElementClass(calendarBody + calendarRow + `:nth-child(${i + 1}) ` + calendarItem, 6)
+                ).toContain('-weekend', 'the day is not weekend');
             }
         }
         section !== internationalExample ? click(section + calendarIcon) : click(section + calendarIcon, 3);
@@ -267,7 +324,10 @@ describe('Datetime picker suite', function () {
         firstChosenDayText = '0' + getText(calendarItem, firstDayIndex);
 
         for (let i = itemsLength; i !== 0; i--) {
-            if (!getElementClass(calendarItem, i).includes('other-month') && !getElementClass(calendarItem, i).includes('hidden-day')) {
+            if (
+                !getElementClass(calendarItem, i).includes('other-month') &&
+                !getElementClass(calendarItem, i).includes('hidden-day')
+            ) {
                 lastDayIndex = i;
                 break;
             }
@@ -282,16 +342,23 @@ describe('Datetime picker suite', function () {
         expect(getElementClass(calendarItem, lastDayIndex)).toContain('is-active', `last day is not chosen`);
 
         for (let i = 0; i < itemsLength - 1; i++) {
-            if (getElementClass(calendarItem, i).includes('side-helper') || getElementClass(calendarItem, i).includes('other-month')
-                || getElementClass(calendarItem, i).includes('is-active')) {
+            if (
+                getElementClass(calendarItem, i).includes('side-helper') ||
+                getElementClass(calendarItem, i).includes('other-month') ||
+                getElementClass(calendarItem, i).includes('is-active')
+            ) {
                 continue;
             }
             expect(getElementClass(calendarItem, i)).toContain('--range', `range is not defined`);
         }
 
         if (section === formattingExample) {
-            expect(getText(formattingExample + selectedTimeLine, 1)).toContain(`${getCurrentMonth(true)}/${firstChosenDayText}/${currentYear.toString().slice(2)}`);
-            expect(getText(formattingExample + selectedTimeLine, 2)).toContain(`${getCurrentMonth(true)}/${secChosenDayText}/${currentYear.toString().slice(2)}`);
+            expect(getText(formattingExample + selectedTimeLine, 1)).toContain(
+                `${getCurrentMonth(true)}/${firstChosenDayText}/${currentYear.toString().slice(2)}`
+            );
+            expect(getText(formattingExample + selectedTimeLine, 2)).toContain(
+                `${getCurrentMonth(true)}/${secChosenDayText}/${currentYear.toString().slice(2)}`
+            );
         }
         click(section + calendarIcon, calendarIndex);
     }
@@ -314,11 +381,16 @@ describe('Datetime picker suite', function () {
             click(section + calendarIcon);
         }
         if (currentDayIndex !== dayCount) {
-            click(altCalendarItem, currentDayIndex + 1);
+            click(currentMonthCalendarItem, currentDayIndex + 1);
 
-            section === formattingExample ? chosenDate = `${getCurrentMonth(true)}/${getNextDay(true)}/${currentYear.toString().slice(2)}` : chosenDate = `${getCurrentMonth(false)}/${getNextDay(false)}/${currentYear}`;
+            section === formattingExample
+                ? (chosenDate = `${getCurrentMonth(true)}/${getNextDay(true)}/${currentYear.toString().slice(2)}`)
+                : (chosenDate = `${getCurrentMonth(false)}/${getNextDay(false)}/${currentYear}`);
 
-            expect(getValue(section + calendarInput)).toContain(chosenDate, `input does not contain chosen value for ${section}`);
+            expect(getValue(section + calendarInput)).toContain(
+                chosenDate,
+                `input does not contain chosen value for ${section}`
+            );
             click(section + calendarIcon);
         }
     }
@@ -329,5 +401,4 @@ describe('Datetime picker suite', function () {
         section === internationalExample ? click(section + calendarIcon, 3) : click(section + calendarIcon);
         expect(doesItExist(calendar)).toBe(false, `calendar is not closed in ${section} example`);
     }
-
 });

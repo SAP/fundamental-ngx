@@ -27,7 +27,7 @@ const declarations = [
     MessageBoxHeaderComponent,
     MessageBoxDecisiveButton,
     MessageBoxBodyComponent,
-    MessageBoxComponent,
+    MessageBoxComponent
 ];
 
 @NgModule({
@@ -37,5 +37,4 @@ const declarations = [
     providers: [MessageBoxService, DynamicComponentService],
     entryComponents: [MessageBoxContainerComponent, MessageBoxDefaultComponent]
 })
-export class MessageBoxModule {
-}
+export class MessageBoxModule {}

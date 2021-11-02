@@ -9,7 +9,6 @@ import { WizardStepStatus } from '@fundamental-ngx/core/wizard';
     encapsulation: ViewEncapsulation.None
 })
 export class WizardDialogExampleComponent {
-
     step1status: WizardStepStatus = 'current';
     step2status: WizardStepStatus = 'upcoming';
     step3status: WizardStepStatus = 'upcoming';

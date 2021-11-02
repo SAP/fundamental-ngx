@@ -35,11 +35,7 @@
         </div>
         <div class="fd-tree__col fd-tree__col--actions">
             <ng-container *ngIf="displayTreeActions">
-                <button fd-button
-                        fdType="transparent"
-                        glyph="vertical-grip"
-                        [fdMenuTrigger]="menu">
-                </button>
+                <button fd-button fdType="transparent" glyph="vertical-grip" [fdMenuTrigger]="menu"></button>
 
                 <fd-menu #menu>
                     <li fd-menu-item (click)="editTreeItem(row)">

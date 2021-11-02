@@ -3,26 +3,26 @@ import { TestBed } from '@angular/core/testing';
 import { TableService } from './table.service';
 
 describe('TableServiceService', () => {
-  let service: TableService;
+    let service: TableService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-        providers: [TableService]
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            providers: [TableService]
+        });
+        service = TestBed.inject(TableService);
     });
-    service = TestBed.inject(TableService);
-  });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        expect(service).toBeTruthy();
+    });
 
-  it ('should propagate keys', () => {
-      const keys = ['test1', 'test2'];
+    it('should propagate keys', () => {
+        const keys = ['test1', 'test2'];
 
-      spyOn(service.propagateKeys$, 'next');
+        spyOn(service.propagateKeys$, 'next');
 
-      service.changeKeys(keys);
+        service.changeKeys(keys);
 
-      expect(service.propagateKeys$.next).toHaveBeenCalledWith(keys);
-  })
+        expect(service.propagateKeys$.next).toHaveBeenCalledWith(keys);
+    });
 });

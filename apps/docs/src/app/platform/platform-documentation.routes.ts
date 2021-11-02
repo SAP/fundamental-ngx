@@ -319,15 +319,17 @@ export const ROUTES: Routes = [
             {
                 path: 'wizard-generator',
                 loadChildren: () =>
-                    import(
-                        './component-docs/platform-wizard-generator/platform-wizard-generator-docs.module'
-                    ).then((m) => m.PlatformWizardGeneratorDocsModule)
+                    import('./component-docs/platform-wizard-generator/platform-wizard-generator-docs.module').then(
+                        (m) => m.PlatformWizardGeneratorDocsModule
+                    )
             },
             {
                 path: 'icon-tab-bar',
-                loadChildren: () => import('./component-docs/platform-icon-tab-bar/platform-icon-tab-bar-docs.module')
-                    .then((m) => m.PlatformIconTabBarDocsModule)
-            },
+                loadChildren: () =>
+                    import('./component-docs/platform-icon-tab-bar/platform-icon-tab-bar-docs.module').then(
+                        (m) => m.PlatformIconTabBarDocsModule
+                    )
+            }
         ]
     }
 ];

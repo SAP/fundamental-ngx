@@ -5,10 +5,7 @@ import { Component } from '@angular/core';
     template: `
         <div>
             Third state selectable:
-            <fd-checkbox label="Option 1"
-                         tristate="true"
-                         [(ngModel)]="checkboxValue1">
-            </fd-checkbox>
+            <fd-checkbox label="Option 1" tristate="true" [(ngModel)]="checkboxValue1"> </fd-checkbox>
             Value: {{ checkboxValue1 | json }}
         </div>
 
@@ -16,10 +13,7 @@ import { Component } from '@angular/core';
 
         <div>
             Third state unselectable:
-            <fd-checkbox label="Option 2"
-                         tristate="true"
-                         [tristateSelectable]="false"
-                         [(ngModel)]="checkboxValue2">
+            <fd-checkbox label="Option 2" tristate="true" [tristateSelectable]="false" [(ngModel)]="checkboxValue2">
             </fd-checkbox>
             Value: {{ checkboxValue2 | json }}
         </div>

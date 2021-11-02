@@ -12,7 +12,7 @@ export class MicroProcessFlowFocusableItemDirective implements OnInit {
     constructor(
         public elRef: ElementRef<HTMLElement>,
         @Optional() @Inject(MICRO_PROCESS_FLOW) private _microProcessFlow: MicroProcessFlowComponentInterface
-    ) { }
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {

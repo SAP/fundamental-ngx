@@ -18,7 +18,7 @@ import { NgControl, NgForm } from '@angular/forms';
 
 import { TimePickerComponent } from '@fundamental-ngx/core/time-picker';
 import { Placement } from '@fundamental-ngx/core/shared';
-import { BaseInput, FormField, FormFieldControl, Status } from '@fundamental-ngx/platform/shared';
+import { BaseInput, FormField, FormFieldControl, ControlState } from '@fundamental-ngx/platform/shared';
 
 @Component({
     selector: 'fdp-time-picker',
@@ -27,7 +27,6 @@ import { BaseInput, FormField, FormFieldControl, Status } from '@fundamental-ngx
     providers: [{ provide: FormFieldControl, useExisting: PlatformTimePickerComponent, multi: true }]
 })
 export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit, AfterViewInit, OnDestroy {
-
     /**
      * @Input date time object representation
      */
@@ -105,20 +104,21 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
     @Input()
     placement: Placement = 'bottom-start';
 
+    /**
+     *  The state of the form control - applies css classes.
+     *  Can be `success`, `error`, `warning`, `information` or blank for default.
+     */
     @Input()
-    set state(state: Status) {
-        this._state = state ? state : 'default';
+    set state(state: ControlState) {
+        super.state = state;
     }
 
-    get state(): Status {
+    get state(): ControlState {
         if (this.timePickerComponent && this.timePickerComponent._isInvalidTimeInput) {
             // if any other error from core timePicker
             return 'error';
         }
-        if (this.status) {
-            return this.status;
-        }
-        return this._state;
+        return super.state;
     }
 
     /**
@@ -174,7 +174,7 @@ export class PlatformTimePickerComponent<D> extends BaseInput implements OnInit,
      */
     handleOpenChange(open: boolean): void {
         this.isOpenChange.emit(open);
-    };
+    }
 
     /**
      * logic to handle validation from both platform forms and core datetiimepicker

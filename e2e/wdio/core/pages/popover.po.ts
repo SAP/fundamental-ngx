@@ -20,7 +20,7 @@ export class PopoverPo extends CoreBaseComponentPo {
     programmaticControlButton = '#background-ex4 button';
     popoverDialogsButton = '#background-ex5 button';
     popoverDialogsHeader = '.fd-title.fd-title--h5';
-    multiInputButton  = '.fd-multi-input button';
+    multiInputButton = '.fd-multi-input button';
     multiInputOption = 'li.fd-list__item';
     multiInputSpan = '.no-text-select span';
     popoverDialogParagraph = 'fd-multi-input~p';
@@ -48,7 +48,7 @@ export class PopoverPo extends CoreBaseComponentPo {
     open(): void {
         super.open(this.url);
         waitForElDisplayed(this.avatar);
-    };
+    }
 
     getScreenshotFolder(): object {
         return super.getScreenshotFolder(this.url);

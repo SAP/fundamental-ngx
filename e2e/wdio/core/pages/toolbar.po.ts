@@ -19,7 +19,7 @@ export class ToolbarPo extends CoreBaseComponentPo {
     checkbox = '.fd-checkbox__label';
     dropdownMenu = '.fd-select__control.ng-star-inserted';
     dropdownOption = '.fd-list__item.ng-star-inserted';
-    inputFieldText  = 'div.fd-select__text-content';
+    inputFieldText = 'div.fd-select__text-content';
     selectedHours = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[12]';
     selectedMinutes = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[54]';
     navigationUpArrowButton = 'button[glyph="navigation-up-arrow"]';
@@ -31,7 +31,7 @@ export class ToolbarPo extends CoreBaseComponentPo {
     dateTimeInput = 'input.fd-input--compact';
 
     dayInCalendarButtonByValue = (index: string): string => {
-        return `//span[contains(.,"${index}")]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
+        return `//span[contains(@id,"day-${index}-")]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
     };
 
     open(): void {

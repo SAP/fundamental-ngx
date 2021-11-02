@@ -1,13 +1,13 @@
 <span>Table without Borders</span>
 <table fd-table [noBorderX]="true" [noBorderY]="true">
     <thead fd-table-header>
-    <tr fd-table-row>
-        <th fd-table-cell>Column Header</th>
-        <th fd-table-cell>Column Header</th>
-        <th fd-table-cell>Column Header</th>
-        <th fd-table-cell>Column Header</th>
-        <th fd-table-cell>Column Header</th>
-    </tr>
+        <tr fd-table-row>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+        </tr>
     </thead>
     <tbody fd-table-body>
         <tr *ngFor="let row of tableRows" fd-table-row>
@@ -21,17 +21,17 @@
         </tr>
     </tbody>
 </table>
-<br/>
+<br />
 <span>Table without Borders on Body</span>
 <table fd-table>
     <thead fd-table-header>
-    <tr fd-table-row>
-        <th fd-table-cell>Column Header</th>
-        <th fd-table-cell>Column Header</th>
-        <th fd-table-cell>Column Header</th>
-        <th fd-table-cell>Column Header</th>
-        <th fd-table-cell>Column Header</th>
-    </tr>
+        <tr fd-table-row>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+            <th fd-table-cell>Column Header</th>
+        </tr>
     </thead>
     <tbody fd-table-body [noBorderX]="true" [noBorderY]="true">
         <tr *ngFor="let row of tableRows" fd-table-row>
@@ -45,4 +45,4 @@
         </tr>
     </tbody>
 </table>
-<br/>
+<br />

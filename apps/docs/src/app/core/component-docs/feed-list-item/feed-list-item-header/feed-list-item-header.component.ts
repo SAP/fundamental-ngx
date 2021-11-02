@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
     selector: 'app-feed-list-item-header',
     templateUrl: './feed-list-item-header.component.html'
 })
-export class FeedListItemHeaderComponent { }
+export class FeedListItemHeaderComponent {}

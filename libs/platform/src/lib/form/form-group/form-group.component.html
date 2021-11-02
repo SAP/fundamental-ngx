@@ -4,8 +4,7 @@
 
 <ng-template #body>
     <!--  Render fields and field groups with assigned columns -->
-    <ng-container *ngTemplateOutlet="fields; context: { $implicit: formRows, title: mainTitle }">
-    </ng-container>
+    <ng-container *ngTemplateOutlet="fields; context: { $implicit: formRows, title: mainTitle }"> </ng-container>
 </ng-template>
 
 <ng-template #fields let-rows let-title="title">
@@ -19,7 +18,12 @@
                     <h1 class="fd-form-group__header-text">{{ row.value.label }}</h1>
                 </div>
                 <ng-container *ngFor="let fields of isFieldGroupRow(row) | keyvalue; trackBy: trackByFn">
-                    <div class="fd-form-group fd-col" [class.fd-col__form-group]="!compact" [class.fd-col--compact]="compact" [ngClass]="xlCol">
+                    <div
+                        class="fd-form-group fd-col"
+                        [class.fd-col__form-group]="!compact"
+                        [class.fd-col--compact]="compact"
+                        [ngClass]="xlCol"
+                    >
                         <div class="fd-form-item fd-row__form-item fd-row">
                             <div
                                 *ngFor="let field of fields.value; trackBy: trackByFieldName"

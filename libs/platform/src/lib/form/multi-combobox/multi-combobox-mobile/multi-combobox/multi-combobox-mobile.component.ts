@@ -36,8 +36,8 @@ export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxIn
      * List element, which will be rendered inside dialog.
      */
     childContent: {
-        listTemplate: TemplateRef<any>,
-        controlTemplate: TemplateRef<any>
+        listTemplate: TemplateRef<any>;
+        controlTemplate: TemplateRef<any>;
     } = null;
 
     /** @hidden */
@@ -104,23 +104,18 @@ export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxIn
 
     /** @hidden */
     private _listenOnMultiComboboxOpenChange(): void {
-        this._component.openChange
-            .pipe(takeUntil(this._onDestroy$))
-            .subscribe(isOpen => this._toggleDialog(isOpen));
+        this._component.openChange.pipe(takeUntil(this._onDestroy$)).subscribe((isOpen) => this._toggleDialog(isOpen));
     }
 
     /** @hidden */
     private _open(): void {
-        this.dialogRef = this._dialogService.open(
-            this.dialogTemplate,
-            {
-                mobile: true,
-                verticalPadding: false,
-                ...this.dialogConfig,
-                backdropClickCloseable: false,
-                escKeyCloseable: false,
-                container: this._elementRef.nativeElement
-            }
-        );
+        this.dialogRef = this._dialogService.open(this.dialogTemplate, {
+            mobile: true,
+            verticalPadding: false,
+            ...this.dialogConfig,
+            backdropClickCloseable: false,
+            escKeyCloseable: false,
+            container: this._elementRef.nativeElement
+        });
     }
 }

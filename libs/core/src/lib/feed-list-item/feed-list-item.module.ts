@@ -13,28 +13,22 @@ import { LineClampModule } from '@fundamental-ngx/core/utils';
 import { PipeModule } from '@fundamental-ngx/core/utils';
 
 @NgModule({
-  declarations: [
-    FeedListComponent,
-    FeedListItemComponent,
-    FeedListAvatarComponent,
-    FeedListActionComponent,
-    FeedListFooterComponent,
-    FeedListFooterBylineDirective
-  ],
-  imports: [
-    CommonModule,
-    PipeModule,
-    FormattedTextModule,
-    LinkModule,
-    LineClampModule
-  ],
-  exports: [
-    FeedListComponent,
-    FeedListItemComponent,
-    FeedListAvatarComponent,
-    FeedListActionComponent,
-    FeedListFooterComponent,
-    FeedListFooterBylineDirective
-  ]
+    declarations: [
+        FeedListComponent,
+        FeedListItemComponent,
+        FeedListAvatarComponent,
+        FeedListActionComponent,
+        FeedListFooterComponent,
+        FeedListFooterBylineDirective
+    ],
+    imports: [CommonModule, PipeModule, FormattedTextModule, LinkModule, LineClampModule],
+    exports: [
+        FeedListComponent,
+        FeedListItemComponent,
+        FeedListAvatarComponent,
+        FeedListActionComponent,
+        FeedListFooterComponent,
+        FeedListFooterBylineDirective
+    ]
 })
-export class FeedListItemModule { }
+export class FeedListItemModule {}

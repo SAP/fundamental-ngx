@@ -5,8 +5,10 @@ import {
     elementDisplayed,
     getAttributeByName,
     getCSSPropertyByName,
-    getElementArrayLength, getElementPlaceholder,
-    getElementSize, getElementTitle,
+    getElementArrayLength,
+    getElementPlaceholder,
+    getElementSize,
+    getElementTitle,
     isEnabled,
     refreshPage,
     scrollIntoView,
@@ -16,16 +18,24 @@ import {
     waitForPresent
 } from '../../driver/wdio';
 import { FeedInputPo } from '../pages/feed-input.po';
-import { four_lines_text, eight_lines_text} from '../fixtures/testData/feed-input';
+import { four_lines_text, eight_lines_text } from '../fixtures/testData/feed-input';
 import {
-    default_placeholder, default_avatar, send_button_tooltip, emptyValuesArr
+    default_placeholder,
+    default_avatar,
+    send_button_tooltip,
+    emptyValuesArr
 } from '../fixtures/appData/feed-input-page-contents';
 
-describe('Verify Feed Input component', function() {
+describe('Verify Feed Input component', () => {
     const feedInputPage = new FeedInputPo();
     const {
-        feedInputTextArea, feedInputAvatar, feedInputButton, feedInputNoAvatar, disableInputTextArea,
-        disableInputButton, activeInputTextAreas
+        feedInputTextArea,
+        feedInputAvatar,
+        feedInputButton,
+        feedInputNoAvatar,
+        disableInputTextArea,
+        disableInputButton,
+        activeInputTextAreas
     } = new FeedInputPo();
 
     beforeAll(() => {
@@ -90,26 +100,29 @@ describe('Verify Feed Input component', function() {
         }
     });
 
-    it('should grow if multiple row text is entered to the input ' +
-        'stop growing after max Height option value was reached', () => {
-        waitForPresent(feedInputTextArea);
-        scrollIntoView(feedInputTextArea);
-        const inputButtonLength = getElementArrayLength(feedInputButton);
-        for (let i = 0; i < inputButtonLength - 1; i++) {
-            if (i === 3) {
-                continue;
+    it(
+        'should grow if multiple row text is entered to the input ' +
+            'stop growing after max Height option value was reached',
+        () => {
+            waitForPresent(feedInputTextArea);
+            scrollIntoView(feedInputTextArea);
+            const inputButtonLength = getElementArrayLength(feedInputButton);
+            for (let i = 0; i < inputButtonLength - 1; i++) {
+                if (i === 3) {
+                    continue;
+                }
+                clearValue(feedInputTextArea);
+                const feedInputSize1 = getElementSize(feedInputTextArea, i, 'height');
+                setValue(feedInputTextArea, eight_lines_text, i);
+                const feedInputSize2 = getElementSize(feedInputTextArea, i, 'height');
+                addValue(feedInputTextArea, eight_lines_text, i);
+                const feedInputSize3 = getElementSize(feedInputTextArea, i, 'height');
+                expect(feedInputSize1).toBeLessThan(feedInputSize2);
+                expect(feedInputSize2).toBeLessThan(feedInputSize3);
+                expect([183, 188, 189, 184]).toContain(feedInputSize2);
             }
-            clearValue(feedInputTextArea);
-            const feedInputSize1 = getElementSize(feedInputTextArea, i, 'height');
-            setValue(feedInputTextArea, eight_lines_text, i);
-            const feedInputSize2 = getElementSize(feedInputTextArea, i, 'height');
-            addValue(feedInputTextArea, eight_lines_text, i);
-            const feedInputSize3 = getElementSize(feedInputTextArea, i, 'height');
-            expect(feedInputSize1).toBeLessThan(feedInputSize2);
-            expect(feedInputSize2).toBeLessThan(feedInputSize3);
-            expect([183, 188, 189, 184]).toContain(feedInputSize2);
         }
-    });
+    );
 
     it('should have focus stated assigned to elements', () => {
         const arrLength = getElementArrayLength(feedInputButton);
@@ -140,8 +153,7 @@ describe('Verify Feed Input component', function() {
         feedInputPage.checkRtlSwitch();
     });
 
-    xdescribe('Should check visual regression', function() {
-
+    xdescribe('Should check visual regression', () => {
         it('should check examples visual regression', () => {
             feedInputPage.saveExampleBaselineScreenshot();
             expect(feedInputPage.compareWithBaseline()).toBeLessThan(5);

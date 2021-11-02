@@ -4,9 +4,7 @@ import { RtlService } from '@fundamental-ngx/core/utils';
 @Component({
     selector: 'rtl-switch',
     template: `
-        <label fd-form-label>
-            Simulate RTL
-        </label>
+        <label fd-form-label> Simulate RTL </label>
         <fd-switch [compact]="true" [(ngModel)]="isChecked" (ngModelChange)="onChange()"></fd-switch>
     `,
     encapsulation: ViewEncapsulation.None

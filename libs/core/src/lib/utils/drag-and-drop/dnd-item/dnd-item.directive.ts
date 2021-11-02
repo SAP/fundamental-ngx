@@ -1,12 +1,4 @@
-import {
-    AfterContentInit,
-    Directive,
-    ElementRef,
-    EventEmitter,
-    Input,
-    OnDestroy,
-    Output
-} from '@angular/core';
+import { AfterContentInit, Directive, ElementRef, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { DragDrop, DragRef } from '@angular/cdk/drag-drop';
 import { ElementChord, LinkPosition } from '../dnd-list/dnd-list.directive';
 import { Subscription } from 'rxjs';
@@ -23,9 +15,7 @@ export interface ElementPosition {
     host: {
         class: 'fd-dnd-item'
     },
-    providers: [
-        DragDrop
-    ]
+    providers: [DragDrop]
 })
 export class DndItemDirective implements AfterContentInit, OnDestroy {
     @Input()
@@ -254,7 +244,7 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
     }
 
     /** @hidden */
-    private _getOffsetToParent(element: Element): { x: number, y: number } {
+    private _getOffsetToParent(element: Element): { x: number; y: number } {
         const parentElement = element.parentElement;
 
         const parentTop = parentElement.getBoundingClientRect().top;
@@ -263,42 +253,38 @@ export class DndItemDirective implements AfterContentInit, OnDestroy {
         return {
             x: Math.abs(element.getBoundingClientRect().left - parentLeft),
             y: Math.abs(element.getBoundingClientRect().top - parentTop)
-        }
-
+        };
     }
 
     /** @hidden */
     private _setCDKDrag(): void {
         this._dragRef = this._dragDrop.createDrag(this.elementRef);
         this._dragRef.disabled = !this._draggable;
-        this._subscriptions.add(
-            this._dragRef.moved.subscribe(event => this.onCdkMove(event.pointerPosition))
-        );
-        this._subscriptions.add(
-            this._dragRef.released.subscribe(() => this.onCdkDragReleased())
-        )
-        this._subscriptions.add(
-            this._dragRef.started.subscribe(() => this.onCdkDragStart())
-        );
+        this._subscriptions.add(this._dragRef.moved.subscribe((event) => this.onCdkMove(event.pointerPosition)));
+        this._subscriptions.add(this._dragRef.released.subscribe(() => this.onCdkDragReleased()));
+        this._subscriptions.add(this._dragRef.started.subscribe(() => this.onCdkDragStart()));
     }
 
     /** IE11 equivalent of Node.after() Method */
     private _placeAfter(element: Element, cloneNode: Node): void {
         const docFrag = document.createDocumentFragment();
         docFrag.appendChild(cloneNode);
-        element.parentNode.insertBefore(docFrag, element.nextSibling)
+        element.parentNode.insertBefore(docFrag, element.nextSibling);
     }
 
     private _listenElementEvents(): void {
-        this._subscriptions.add(this.released.pipe(
-            // postpone blur
-            delay(0),
-        ).subscribe(() => {
-            if (this.containerSelector) {
-                this.elementRef.nativeElement.children[0].blur();
-            }
-            this.elementRef.nativeElement.blur();
-        }));
+        this._subscriptions.add(
+            this.released
+                .pipe(
+                    // postpone blur
+                    delay(0)
+                )
+                .subscribe(() => {
+                    if (this.containerSelector) {
+                        this.elementRef.nativeElement.children[0].blur();
+                    }
+                    this.elementRef.nativeElement.blur();
+                })
+        );
     }
 }
-

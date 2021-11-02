@@ -22,14 +22,12 @@ import {
     PlatformMultiInputModule,
     PlatformFileUploaderModule,
     PlatformAutoCompleteModule,
-    PlatformComboboxMobileModule,
     PlatformComboboxModule,
     PlatformSelectModule,
     PlatformDatetimePickerModule,
     PlatformTimePickerModule,
-    PlatformMultiInputMobileModule,
     PlatformDatePickerModule,
-    PlatformFormGeneratorModule,
+    PlatformFormGeneratorModule
 } from '@fundamental-ngx/platform/form';
 import { PlatformInfoLabelModule } from '@fundamental-ngx/platform/info-label';
 import { PlatformLinkModule } from '@fundamental-ngx/platform/link';
@@ -91,14 +89,12 @@ import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-
         PlatformMultiInputModule,
         PlatformFileUploaderModule,
         PlatformAutoCompleteModule,
-        PlatformComboboxMobileModule,
         PlatformComboboxModule,
         PlatformSelectModule,
         PlatformDatetimePickerModule,
         PlatformTimePickerModule,
-        PlatformMultiInputMobileModule,
         PlatformDatePickerModule,
-        PlatformFormGeneratorModule,
+        PlatformFormGeneratorModule
     ],
     providers: []
 })

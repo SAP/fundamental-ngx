@@ -7,7 +7,7 @@
     [class.is-disabled]="disabled"
     [attr.aria-label]="ariaLabel"
 >
-    <span *ngIf="(isChecked ? activeText : inactiveText) as text" class="fd-switch__text">
+    <span *ngIf="isChecked ? activeText : inactiveText as text" class="fd-switch__text">
         {{ text }}
     </span>
     <span class="fd-switch__control">
@@ -39,12 +39,7 @@
                 ></i>
             </div>
 
-            <span
-                *ngIf="semantic"
-                [id]="_semanticLabelId"
-                aria-hidden="true"
-                class="fd-switch__invisible-text"
-            >
+            <span *ngIf="semantic" [id]="_semanticLabelId" aria-hidden="true" class="fd-switch__invisible-text">
                 {{ checked ? semanticAcceptLabel : semanticDeclineLabel }}
             </span>
         </div>

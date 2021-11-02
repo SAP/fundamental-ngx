@@ -5,7 +5,7 @@ import { Directive, Input } from '@angular/core';
     host: {
         class: 'fd-list__byline',
         '[class.fd-list__byline--2-col]': 'twoCol',
-        '[class.fd-list__byline--wrap]': 'wrap',
+        '[class.fd-list__byline--wrap]': 'wrap'
     }
 })
 export class ListBylineDirective {

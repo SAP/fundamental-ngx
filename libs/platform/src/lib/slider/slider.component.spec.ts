@@ -61,7 +61,8 @@ import { PlatformSliderModule } from './slider.module';
             </fdp-form-field>
 
             <fdp-form-field id="value6">
-                <fdp-slider class="example-6" contentDensity="cozy" name="value6" formControlName="value6"> </fdp-slider>
+                <fdp-slider class="example-6" contentDensity="cozy" name="value6" formControlName="value6">
+                </fdp-slider>
             </fdp-form-field>
         </fdp-form-group>
     `,
@@ -147,7 +148,8 @@ describe('PlatformSliderComponent', () => {
     });
 
     it('should emit value: "-1"', () => {
-        const sliderWidth = fixture.debugElement.query(By.css('.example-1 .fd-slider__inner')).nativeElement.clientWidth;
+        const sliderWidth = fixture.debugElement.query(By.css('.example-1 .fd-slider__inner')).nativeElement
+            .clientWidth;
         const handle = fixture.debugElement.query(By.css('.example-1 .fd-slider__handle'));
 
         const event = new MouseEvent('mousedown');
@@ -222,7 +224,8 @@ describe('PlatformSliderComponent', () => {
 
     // TODO investigate and fix - ticket #4893
     xit('range slider second handle should have the ability to be less than the first handle', async () => {
-        const sliderWidth = fixture.debugElement.query(By.css('.example-4 .fd-slider__inner')).nativeElement.offsetWidth;
+        const sliderWidth = fixture.debugElement.query(By.css('.example-4 .fd-slider__inner')).nativeElement
+            .offsetWidth;
         const handles = fixture.debugElement.queryAll(By.css('.example-4 .fd-slider__handle'));
 
         const event = new MouseEvent('mousedown');
@@ -251,7 +254,7 @@ describe('PlatformSliderComponent', () => {
         const bodyMargin = 20;
         const space = bodyClientWidth - sliderWidth - bodyMargin;
 
-        return space + ((sliderWidth * percentage) / 100);
+        return space + (sliderWidth * percentage) / 100;
     }
 });
 

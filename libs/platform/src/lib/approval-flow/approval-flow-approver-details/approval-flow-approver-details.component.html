@@ -7,7 +7,9 @@
                     [glyph]="'navigation-' + (_data.rtl ? 'right' : 'left') + '-arrow'"
                     (click)="_exitUserDetailsMode()"
                 ></fd-icon>
-                <ng-container *ngIf="_isListMode && !_userToShowDetails; else defaultHeader">{{ _data.node.description }} ({{ _data.node.approvers.length }})</ng-container>
+                <ng-container *ngIf="_isListMode && !_userToShowDetails; else defaultHeader"
+                    >{{ _data.node.description }} ({{ _data.node.approvers.length }})</ng-container
+                >
             </p>
 
             <fdp-search-field
@@ -37,7 +39,7 @@
     </fd-dialog-body>
 
     <fd-dialog-footer>
-        <fd-dialog-footer-button *ngIf="_isListMode || _userToShowDetails && _data.node?.approvers.length === 1">
+        <fd-dialog-footer-button *ngIf="_isListMode || (_userToShowDetails && _data.node?.approvers.length === 1)">
             <button
                 fd-button
                 fd-dialog-decisive-button
@@ -46,8 +48,8 @@
                 label="Send reminder"
                 [compact]="true"
                 [disabled]="!_data.allowSendReminder || (_isListMode && !_selectedUsers.length)"
-                (click)="_sendReminder()">
-            </button>
+                (click)="_sendReminder()"
+            ></button>
         </fd-dialog-footer-button>
 
         <fd-dialog-footer-button>
@@ -59,8 +61,8 @@
                 i18n-label="platformApprovalFlowDialogButtonCancel"
                 label="Cancel"
                 [compact]="true"
-                (click)="dialogRef.close('Cancel')">
-            </button>
+                (click)="dialogRef.close('Cancel')"
+            ></button>
         </fd-dialog-footer-button>
     </fd-dialog-footer>
 </fd-dialog>

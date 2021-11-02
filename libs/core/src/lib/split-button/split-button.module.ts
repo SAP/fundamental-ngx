@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SplitButtonComponent } from './split-button.component';
 import { ButtonModule } from '@fundamental-ngx/core/button';
-import {
-    SplitButtonActionTitle,
-} from './split-button-utils/split-button.directives';
+import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
 import { MenuModule } from '@fundamental-ngx/core/menu';
 
 @NgModule({

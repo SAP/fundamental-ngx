@@ -16,12 +16,14 @@ describe('TabIconComponent', () => {
     let directiveElement: TabIconComponent;
     let fixture: ComponentFixture<TestNestedContainerComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [TabsModule],
-            declarations: [TestNestedContainerComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [TabsModule],
+                declarations: [TestNestedContainerComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestNestedContainerComponent);

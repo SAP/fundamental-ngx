@@ -4,6 +4,7 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    EventEmitter,
     forwardRef,
     HostBinding,
     Inject,
@@ -11,13 +12,20 @@ import {
     OnDestroy,
     OnInit,
     Optional,
+    Output,
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FdCheckboxValues } from './fd-checkbox-values.interface';
 import { Platform } from '@angular/cdk/platform';
-import { LIST_ITEM_COMPONENT, ListItemInterface, compareObjects, KeyUtil, ContentDensityService } from '@fundamental-ngx/core/utils';
+import {
+    LIST_ITEM_COMPONENT,
+    ListItemInterface,
+    compareObjects,
+    KeyUtil,
+    ContentDensityService
+} from '@fundamental-ngx/core/utils';
 import { SPACE } from '@angular/cdk/keycodes';
 import { Subscription } from 'rxjs';
 import { FormStates } from '@fundamental-ngx/core/shared';
@@ -123,6 +131,9 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     @HostBinding('style.outline')
     readonly outline = 'none';
 
+    /** Emits event on focus change */
+    @Output() focusChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
     /** Values returned by control. */
     public values: FdCheckboxValues = { trueValue: true, falseValue: false, thirdStateValue: null };
     /** Stores current checkbox value. */
@@ -152,10 +163,12 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     /** @hidden */
     ngOnInit(): void {
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this._changeDetectorRef.markForCheck();
-            }));
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._changeDetectorRef.markForCheck();
+                })
+            );
         }
     }
 
@@ -251,11 +264,21 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
     /** Space event should be handled separately, when used inside list component and in firefox browser */
     handleInputKeyUp(event: KeyboardEvent): void {
         event.stopPropagation();
-        if (this._listItemComponent &&
-            this._platform.FIREFOX &&
-            KeyUtil.isKeyCode(event, SPACE)) {
+        if (this._listItemComponent && this._platform.FIREFOX && KeyUtil.isKeyCode(event, SPACE)) {
             event.preventDefault();
         }
+    }
+
+    /** Handles blur event */
+    onBlur(): void {
+        if (typeof this.onTouched === 'function') {
+            this.onTouched();
+        }
+        this.focusChange.emit(false);
+    }
+    /** Handles focus event */
+    onFocus(): void {
+        this.focusChange.emit(true);
     }
 
     /** @hidden Based on current control value sets new control state. */
@@ -274,9 +297,11 @@ export class CheckboxComponent implements ControlValueAccessor, OnInit, OnDestro
 
     /** @hidden */
     private _nextValueEvent(triggeredByClick?: boolean, event?: MouseEvent): void {
-        if (this._platform.TRIDENT &&
+        if (
+            this._platform.TRIDENT &&
             this._previousState === 'indeterminate' &&
-            this.checkboxState === 'indeterminate') {
+            this.checkboxState === 'indeterminate'
+        ) {
             this.checkboxState = 'force-checked';
             this._detectChanges();
             /** Prevents from keeping the old value */

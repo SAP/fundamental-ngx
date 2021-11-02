@@ -7,11 +7,14 @@ import {
     getElementArrayLength,
     refreshPage,
     scrollIntoView,
-    setValue
+    setValue,
+    getValue,
+    sendKeys,
+    waitForElDisplayed,
+    waitForPresent
 } from '../../driver/wdio';
 
-describe('Rating indicator test suite', function() {
-
+describe('Rating indicator test suite', () => {
     const ratingIndicatorPage = new RatingIndicatorPo();
 
     const {
@@ -20,15 +23,17 @@ describe('Rating indicator test suite', function() {
         starsRatingDisplayMode,
         starsRatingDynamicChanges,
         containerDynamicChanges,
-        inputsDynamicChanges
+        inputsDynamicChanges,
+        touchedInputsDynamicChanges,
+        inputsBasicExample,
+        touchedInputsBasicExample
     } = ratingIndicatorPage;
 
     beforeAll(() => {
         ratingIndicatorPage.open();
     }, 1);
 
-    describe('Test rating indicator with predefined ratings object', function() {
-
+    describe('Test rating indicator with predefined ratings object', () => {
         it('verify that amount of stars is 5', () => {
             const lengthOfStars = getElementArrayLength(starsRatingExamples) - 1;
             expect(lengthOfStars).toBe(5);
@@ -47,13 +52,24 @@ describe('Rating indicator test suite', function() {
         it('verify that star is disabled', () => {
             const lengthOfStars = getElementArrayLength(starsRatingDisplayMode);
             for (let i = 1; i < lengthOfStars; i++) {
-                expect(isElementClickable(starsRatingDisplayMode, i)).toBe(false, `${starsRatingDisplayMode} ${i} not clickable`);
+                expect(isElementClickable(starsRatingDisplayMode, i)).toBe(
+                    false,
+                    `${starsRatingDisplayMode} ${i} not clickable`
+                );
             }
+        });
+
+        it('should check that minimal value in input is 1', () => {
+            click(inputsBasicExample);
+            for (let i = parseFloat(getValue(inputsBasicExample)); i > 0; i = i - 0.1) {
+                sendKeys('ArrowDown');
+            }
+            sendKeys('ArrowDown');
+            expect(getValue(touchedInputsBasicExample)).toBe('0');
         });
     });
 
-    describe('Test dynamic changes', function() {
-
+    describe('Test dynamic changes', () => {
         it('verify that amount of stars changed', () => {
             const starCount = 7;
             scrollIntoView(inputsDynamicChanges);
@@ -73,13 +89,31 @@ describe('Rating indicator test suite', function() {
         it('verify that star is disabled', () => {
             scrollIntoView(inputsDynamicChanges);
             click(inputsDynamicChanges);
-            expect(isElementClickable(starsRatingDynamicChanges)).toBe(false, `${starsRatingDynamicChanges} not clickable`);
+            expect(isElementClickable(starsRatingDynamicChanges)).toBe(
+                false,
+                `${starsRatingDynamicChanges} not clickable`
+            );
         });
 
         it('verify that stars are in display mode', () => {
             scrollIntoView(inputsDynamicChanges);
             click(inputsDynamicChanges);
-            expect(getElementArrayLength(containerDynamicChanges)).toBe(2, `${starsRatingDisplayMode} stars are not in display mode`);
+            expect(getElementArrayLength(containerDynamicChanges)).toBe(
+                2,
+                `${starsRatingDisplayMode} stars are not in display mode`
+            );
+        });
+
+        it('should check that minimal value in input is 1', () => {
+            refreshPage();
+            waitForPresent(ratingIndicatorPage.root);
+            waitForElDisplayed(ratingIndicatorPage.title);
+            click(inputsDynamicChanges);
+            for (let i = parseInt(getValue(inputsDynamicChanges)); i !== 1; i--) {
+                sendKeys('ArrowDown');
+            }
+            sendKeys('ArrowDown');
+            expect(getValue(touchedInputsDynamicChanges)).toBe('1');
         });
     });
 
@@ -87,8 +121,7 @@ describe('Rating indicator test suite', function() {
         ratingIndicatorPage.checkRtlSwitch();
     });
 
-    xdescribe('Check visual regression', function() {
-
+    xdescribe('Check visual regression', () => {
         it('should check examples visual regression', () => {
             ratingIndicatorPage.saveExampleBaselineScreenshot();
             expect(ratingIndicatorPage.compareWithBaseline()).toBeLessThan(5);

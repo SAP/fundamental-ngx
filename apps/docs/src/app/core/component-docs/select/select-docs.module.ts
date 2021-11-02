@@ -15,7 +15,7 @@ import { SelectProgrammaticExampleComponent } from './examples/select-programmat
 import { SelectSemanticStateExampleComponent } from './examples/select-semantic-state-example/select-semantic-state-example.component';
 import { SelectModeExampleComponent } from './examples/select-mode-example/select-mode-example.component';
 import { SelectMobileExampleComponent } from './examples/select-mobile-example/select-mobile-example.component';
-import { SelectMobileModule, SelectModule } from '@fundamental-ngx/core/select';
+import { SelectModule } from '@fundamental-ngx/core/select';
 import { DialogModule } from '@fundamental-ngx/core/dialog';
 import { ListModule } from '@fundamental-ngx/core/list';
 import { FormModule } from '@fundamental-ngx/core/form';
@@ -35,7 +35,6 @@ const routes: Routes = [
     imports: [
         RouterModule.forChild(routes),
         SharedDocumentationPageModule,
-        SelectMobileModule,
         SelectModule,
         DialogModule,
         ListModule,

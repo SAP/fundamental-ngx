@@ -12,11 +12,12 @@ import {
     isElementClickable,
     scrollIntoView,
     browserIsFirefox,
-    waitForElDisplayed,
+    clickRightMouseBtn,
+    waitForElDisplayed
 } from '../../driver/wdio';
-import { sections } from '../fixtures/appData/step-input-content'
+import { sections } from '../fixtures/appData/step-input-content';
 
-describe('Step input component test suit', function () {
+describe('Step input component test suit', () => {
     const stepInputPage = new StepInputPo();
     const {
         formExample,
@@ -46,12 +47,19 @@ describe('Step input component test suit', function () {
             checkTypingValueInInput(sections[i], '+');
             checkTypingValueInInput(sections[i], '-');
         }
-    })
+    });
 
     it('should check increase/dicrease value by plus-minus buttons', () => {
         for (let i = 0; i < sections.length; i++) {
             checkIncDicValueByBtn(sections[i], '+');
             checkIncDicValueByBtn(sections[i], '-');
+        }
+    });
+
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6963
+    xit('should check increase/dicrease value by plus-minus buttons', () => {
+        for (let i = 0; i < sections.length; i++) {
+            checkClickByRightMouseBth(sections[i]);
         }
     });
 
@@ -72,13 +80,13 @@ describe('Step input component test suit', function () {
         clearInput(configExample, 5);
         setValue(configExample + input, '20', 5);
         sendKeys('Enter');
-        expect(getValue(configExample + input, 5)).toEqual('10')
+        expect(getValue(configExample + input, 5)).toEqual('10');
         expect(getElementClass(configExample + plusButton, 5)).toContain('is-disabled', 'button is not disabled');
 
         clearInput(configExample, 5);
         setValue(configExample + input, '-20', 5);
         sendKeys('Enter');
-        expect(getValue(configExample + input, 5)).toEqual('-10')
+        expect(getValue(configExample + input, 5)).toEqual('-10');
         expect(getElementClass(configExample + minusButton, 5)).toContain('is-disabled', 'button is not disabled');
     });
 
@@ -114,8 +122,8 @@ describe('Step input component test suit', function () {
 
     it('should check disabled inputs', () => {
         expect(getElementClass(formExample + step, 2)).toContain('is-disabled', 'input is not disabled');
-        expect(isElementClickable(formExample + plusButton, 2)).toBe(false, 'element is clickable')
-        expect(isElementClickable(formExample + minusButton, 2)).toBe(false, 'element is clickable')
+        expect(isElementClickable(formExample + plusButton, 2)).toBe(false, 'element is clickable');
+        expect(isElementClickable(formExample + minusButton, 2)).toBe(false, 'element is clickable');
         expect(getElementClass(formExample + step, 3)).toContain('is-readonly', 'input is not read-only');
     });
 
@@ -128,11 +136,31 @@ describe('Step input component test suit', function () {
         expect(stepInputPage.compareWithBaseline()).toBeLessThan(5);
     });
 
+    function checkClickByRightMouseBth(section: string): void {
+        let inputLength = getElementArrayLength(section + input);
+        scrollIntoView(section);
+        for (let i = 0; i < inputLength; i++) {
+            let defaultValue = getValue(section + input, i);
+            clickRightMouseBtn(section + plusButton, i);
+            expect(getValue(section + input, i)).toEqual(
+                defaultValue,
+                'value changed by clickin on right mouse button'
+            );
+            clickRightMouseBtn(section + minusButton, i);
+            expect(getValue(section + input, i)).toEqual(
+                defaultValue,
+                'value changed by clickin on right mouse button'
+            );
+        }
+    }
+
     function checkInputWithInvalidValues(section: string): void {
         scrollIntoView(section);
         let inputLength = getElementArrayLength(section + input);
         let defaultValue;
-        section === formExample || section === localExample ? inputLength = 2 : ''
+        if (section === formExample || section === localExample) {
+            inputLength = 2;
+        }
         for (let i = 0; i < inputLength; i++) {
             scrollIntoView(section + input, i);
             defaultValue = getValue(section + input, i);
@@ -145,7 +173,9 @@ describe('Step input component test suit', function () {
 
     function checkIncDicValueByBtn(section: string, sign: '+' | '-'): void {
         let inputLength = getElementArrayLength(section + input);
-        section === formExample || section === localExample ? inputLength = 2 : ''
+        if (section === formExample || section === localExample) {
+            inputLength = 2;
+        }
         let defaultValue;
 
         for (let i = 0; i < inputLength; i++) {
@@ -166,7 +196,9 @@ describe('Step input component test suit', function () {
 
     function checkTypingValueInInput(section: string, sign: '+' | '-'): void {
         let inputLength = getElementArrayLength(section + input);
-        section === formExample || section === localExample ? inputLength = 2 : ''
+        if (section === formExample || section === localExample) {
+            inputLength = 2;
+        }
         const plusValue = '5';
         const minusValue = '-5';
         let additionalText;
@@ -177,21 +209,36 @@ describe('Step input component test suit', function () {
 
             browserIsFirefox() ? clearInputFF(section, i) : clearInput(section, i);
 
-            sign === '+' ? setValue(section + input, plusValue.toString(), i) : setValue(section + input, minusValue.toString(), i);
+            sign === '+'
+                ? setValue(section + input, plusValue.toString(), i)
+                : setValue(section + input, minusValue.toString(), i);
             sendKeys('Enter');
 
-            section === configExample && i === 0 ? additionalText = '.0000' : '';
-            section === currencyExample && i === 0 || section == currencyExample && i === 2 ? additionalText = '.00' : '';
+            if (section === configExample && i === 0) {
+                additionalText = '.0000';
+            }
+            if ((section === currencyExample && i === 0) || (section === currencyExample && i === 2)) {
+                additionalText = '.00';
+            }
 
-            sign === '+' ? expectedValue = plusValue : ''
-            sign === '-' ? expectedValue = minusValue : ''
+            if (sign === '+') {
+                expectedValue = plusValue;
+            }
+            if (sign === '-') {
+                expectedValue = minusValue;
+            }
 
             expect(getValue(section + input, i)).toEqual(expectedValue + additionalText);
-            section !== formExample ? expect(getText(section + text, i)).toEqual(`Value: ${expectedValue}`) : ''
+            if (section !== formExample) {
+                expect(getText(section + text, i)).toEqual(`Value: ${expectedValue}`);
+            }
 
             if (section === formExample) {
-                i === 0 ? expect(getText(textForDisabledExample)).toEqual(expectedValue) : ''
-                i === 1 ? expect(getText(section + text)).toEqual(`Value: ${expectedValue}`) : ''
+                if (i === 0) {
+                    expect(getText(textForDisabledExample)).toEqual(expectedValue);
+                } else if (i === 1) {
+                    expect(getText(section + text)).toEqual(`Value: ${expectedValue}`);
+                }
             }
         }
     }
@@ -201,7 +248,7 @@ describe('Step input component test suit', function () {
         sendKeys('Backspace');
     }
 
-    function clearInputFF(section: string, index: number = 0) {
+    function clearInputFF(section: string, index: number = 0): void {
         let inputValue;
         inputValue = getValue(section + input, index);
         click(section + input, index);

@@ -55,7 +55,13 @@ const dialogConfig: DialogConfig = {
 @Component({
     selector: 'fdp-table-p13-dialog',
     template: '',
-    styles: [`:host { z-index: 999; }`],
+    styles: [
+        `
+            :host {
+                z-index: 999;
+            }
+        `
+    ],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableP13DialogComponent implements OnDestroy {

@@ -4,7 +4,10 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    Input, OnDestroy, OnInit, Optional,
+    Input,
+    OnDestroy,
+    OnInit,
+    Optional,
     Output,
     ViewChild,
     ViewEncapsulation
@@ -57,6 +60,14 @@ export class TokenComponent implements OnInit, OnDestroy {
     @Input()
     readOnly = false;
 
+    /**label for close icon */
+    @Input()
+    deleteButtonLabel = 'Deletable';
+
+    /**role description for token */
+    @Input()
+    ariaRoleDescription = 'token';
+
     /** Emitted when the *x* icon is clicked. Specifically, any pseudo-element. */
     @Output()
     readonly onCloseClick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
@@ -79,10 +90,12 @@ export class TokenComponent implements OnInit, OnDestroy {
     /** @hidden */
     ngOnInit(): void {
         if (this.compact === undefined && this._contentDensityService) {
-            this._subscriptions.add(this._contentDensityService._contentDensityListener.subscribe(density => {
-                this.compact = density !== 'cozy';
-                this._cdRef.markForCheck();
-            }))
+            this._subscriptions.add(
+                this._contentDensityService._contentDensityListener.subscribe((density) => {
+                    this.compact = density !== 'cozy';
+                    this._cdRef.markForCheck();
+                })
+            );
         }
     }
 

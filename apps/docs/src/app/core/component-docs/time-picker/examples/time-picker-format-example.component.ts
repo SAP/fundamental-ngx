@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATETIME_FORMATS } from '@fundamental-ngx/core/datetime';
+import {
+    DatetimeAdapter,
+    DATE_TIME_FORMATS,
+    FdDate,
+    FdDatetimeAdapter,
+    FD_DATETIME_FORMATS
+} from '@fundamental-ngx/core/datetime';
 
 @Component({
     selector: 'fd-time-picker-format-example',
@@ -18,5 +24,5 @@ import { DatetimeAdapter, DATE_TIME_FORMATS, FdDate, FdDatetimeAdapter, FD_DATET
 export class TimePickerFormatExampleComponent {
     time = new FdDate().setTime(12, 0, 0);
     // FdDatetimeAdapter is based on Intl.DateTimeFormat.
-    displayFormat = { hour: 'numeric', minute: '2-digit', second: '2-digit', hourCycle: 'h23'};
+    displayFormat = { hour: 'numeric', minute: '2-digit', second: '2-digit', hourCycle: 'h23' };
 }

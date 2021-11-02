@@ -1,6 +1,8 @@
-<span #tokenWrapperElement
+<span
+    #tokenWrapperElement
     class="fd-token"
-    role="button"
+    role="option"
+    [attr.aria-roledescription]="ariaRoleDescription"
     (click)="tokenClickHandler($event)"
     [ngClass]="{
         'fd-token__disabled': disabled,
@@ -8,9 +10,18 @@
         'fd-token--selected': selected,
         'fd-token--readonly': readOnly
     }"
+    [attr.aria-selected]="selected"
+    [attr.aria-readonly]="readOnly"
 >
     <span class="fd-token__text no-text-select">
         <ng-content></ng-content>
     </span>
-    <span (click)="closeClickHandler($event)" *ngIf="!readOnly" class="fd-token__close" tabindex="-1"></span>
+    <span
+        (click)="closeClickHandler($event)"
+        role="button"
+        [attr.aria-label]="deleteButtonLabel"
+        *ngIf="!readOnly"
+        class="fd-token__close"
+        tabindex="-1"
+    ></span>
 </span>

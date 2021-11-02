@@ -15,20 +15,15 @@ export interface Action {
 @Component({
     selector: 'fdp-test-fdp-action-list-item',
     template: `
-    <fdp-list>
-    <fdp-action-list-item title="Action 1">
-    </fdp-action-list-item>
-    <fdp-action-list-item title="Action 2">
-    </fdp-action-list-item>
-    <fdp-action-list-item title="Action 3">
-    </fdp-action-list-item>
-    <fdp-action-list-item title="Action 4">
-    </fdp-action-list-item>
-</fdp-list>
+        <fdp-list>
+            <fdp-action-list-item title="Action 1"> </fdp-action-list-item>
+            <fdp-action-list-item title="Action 2"> </fdp-action-list-item>
+            <fdp-action-list-item title="Action 3"> </fdp-action-list-item>
+            <fdp-action-list-item title="Action 4"> </fdp-action-list-item>
+        </fdp-list>
     `
 })
 class ActionListItemComponentTest {
-
     @ViewChild(ActionListItemComponent, { read: ElementRef, static: true })
     actionListElement: ElementRef;
 
@@ -48,13 +43,14 @@ describe('ActionListItemComponent', () => {
     let component: ActionListItemComponentTest;
     let fixture: ComponentFixture<ActionListItemComponentTest>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [PlatformListModule, RouterTestingModule],
-            declarations: [ActionListItemComponentTest, ActionListItemComponent]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformListModule, RouterTestingModule],
+                declarations: [ActionListItemComponentTest, ActionListItemComponent]
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ActionListItemComponentTest);
@@ -124,47 +120,40 @@ describe('ActionListItemComponent', () => {
     });
 });
 
-
 describe('ActionListItemComponent functions', () => {
     let component: ActionListItemComponent;
     let fixture: ComponentFixture<ActionListItemComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [PlatformListModule, RouterTestingModule],
-            declarations: [ActionListItemComponent, ListComponent]
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformListModule, RouterTestingModule],
+                declarations: [ActionListItemComponent, ListComponent]
+            }).compileComponents();
         })
-            .compileComponents();
-    }));
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ActionListItemComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
-
 });
-
 
 /**Impertive approach testing*/
 @Component({
     selector: 'fdp-test-action-list-item',
     template: `
-    <fdp-list>
-    <fdp-action-list-item *ngFor="let item of items" [title]="item.title"></fdp-action-list-item>
-</fdp-list>
+        <fdp-list>
+            <fdp-action-list-item *ngFor="let item of items" [title]="item.title"></fdp-action-list-item>
+        </fdp-list>
     `
 })
 class TestComponentContent {
-    items: Action[] = [
-        { 'title': 'Action 1' },
-        { 'title': 'Action 2' },
-        { 'title': 'Action 3' },
-        { 'title': 'Action 4' }];
+    items: Action[] = [{ title: 'Action 1' }, { title: 'Action 2' }, { title: 'Action 3' }, { title: 'Action 4' }];
 
     @ViewChild(ActionListItemComponent)
     actionListItem: ActionListItemComponent;
-
 }
 
 describe('ActionListItemComponent Imperative', () => {
@@ -172,12 +161,14 @@ describe('ActionListItemComponent Imperative', () => {
     let component: ActionListItemComponent;
     let fixture: ComponentFixture<TestComponentContent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [PlatformListModule, RouterTestingModule],
-            declarations: [TestComponentContent, ActionListItemComponent]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [PlatformListModule, RouterTestingModule],
+                declarations: [TestComponentContent, ActionListItemComponent]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(TestComponentContent);
@@ -196,7 +187,6 @@ describe('ActionListItemComponent Imperative', () => {
     });
 
     it('should create action list items with given values', () => {
-
         const actionListElems = fixture.debugElement.queryAll(By.css('li'));
         expect(actionListElems.length).toEqual(4);
         actionListElems.forEach((listElem) => {
@@ -211,7 +201,6 @@ describe('ActionListItemComponent Imperative', () => {
     });
 
     it('Title should to present for all Items', () => {
-
         const actionElems = fixture.debugElement.queryAll(By.css('button'));
 
         expect(actionElems[0].nativeElement.getAttribute('title')).toEqual('Action 1');

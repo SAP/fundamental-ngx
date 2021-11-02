@@ -14,10 +14,16 @@ import {
     selector: 'fdp-platform-table-row-class-example',
     templateUrl: './platform-table-row-class-example.component.html',
     encapsulation: ViewEncapsulation.None,
-    styles: [`
-        .valid { opacity: 1; }
-        .invalid { opacity: 0.5; }
-    `],
+    styles: [
+        `
+            .valid {
+                opacity: 1;
+            }
+            .invalid {
+                opacity: 0.5;
+            }
+        `
+    ]
 })
 export class PlatformTableRowClassExampleComponent {
     @ViewChild(TableComponent)
@@ -36,7 +42,7 @@ export class PlatformTableRowClassExampleComponent {
     }
 
     setRowClassFunction(): void {
-        this.rowsClass = (row: ExampleItem) => row.status === 'Stocked on demand' ? 'valid' : 'invalid';
+        this.rowsClass = (row: ExampleItem) => (row.status === 'Stocked on demand' ? 'valid' : 'invalid');
     }
 }
 

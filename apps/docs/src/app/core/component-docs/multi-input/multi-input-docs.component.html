@@ -1,6 +1,4 @@
-<fd-docs-section-title id="simple" componentName="multi-input">
-    Simple Multi Input
-</fd-docs-section-title>
+<fd-docs-section-title id="simple" componentName="multi-input"> Simple Multi Input </fd-docs-section-title>
 <description>
     The standard version of the component that most people will use regularly. Width of the input can be controlled
     simply through the top-level component element sizing. Overflowing tokens can be reviewed by swiping the tokens left
@@ -13,9 +11,7 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="compact" componentName="multi-input">
-    Compact Multi Input
-</fd-docs-section-title>
+<fd-docs-section-title id="compact" componentName="multi-input"> Compact Multi Input </fd-docs-section-title>
 <description>
     The compact Multi Input is for large screens. The user can review tokens by pressing the right or left arrows on the
     keyboard.
@@ -27,13 +23,10 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="mobile" componentName="multi-input">
-    Mobile Mode Multi Input
-</fd-docs-section-title>
+<fd-docs-section-title id="mobile" componentName="multi-input"> Mobile Mode Multi Input </fd-docs-section-title>
 <description>
     To use Multi Input in mobile mode:
     <ul>
-        <li>import <code>MultiInputMobileModule</code></li>
         <li>Set <code>[mobile]</code> property to true</li>
         <li>
             Set <code>[mobileConfig]</code> with <code>MobileModeConfig</code> configuration object to customize the
@@ -68,11 +61,13 @@
 
 <separator></separator>
 
-<fd-docs-section-title id="includes" componentName="multi-input"> Return results including search term </fd-docs-section-title>
+<fd-docs-section-title id="includes" componentName="multi-input">
+    Return results including search term
+</fd-docs-section-title>
 <description>
     By default, the multi-input will only return results where the result starts with the search term. By setting
-    <code>[includes]="true"</code>, the multi-input will return results where the result includes the search term at
-    any place in the string.
+    <code>[includes]="true"</code>, the multi-input will return results where the result includes the search term at any
+    place in the string.
 </description>
 <component-example>
     <fd-multi-input-includes-example></fd-multi-input-includes-example>
@@ -136,7 +131,8 @@
 
 <fd-docs-section-title id="custom-item" componentName="multi-input"> Custom Item Template </fd-docs-section-title>
 <description>
-    The way the items are rendered in the popover list can be customized by providing an <code>itemTemplate</code> to the component. The <code>itemTemplate</code> should align with the contents of an fd-list-item directive.
+    The way the items are rendered in the popover list can be customized by providing an <code>itemTemplate</code> to
+    the component. The <code>itemTemplate</code> should align with the contents of an fd-list-item directive.
 </description>
 <component-example>
     <fd-multi-input-custom-item-example></fd-multi-input-custom-item-example>

@@ -48,7 +48,10 @@ import { DialogTitleDirective } from './directives/dialog-title.directive';
     animations: [dialogFadeNgIf],
     encapsulation: ViewEncapsulation.None
 })
-export class DialogComponent extends DialogBase implements OnInit, OnChanges, AfterViewInit, OnDestroy, CssClassBuilder {
+export class DialogComponent
+    extends DialogBase
+    implements OnInit, OnChanges, AfterViewInit, OnDestroy, CssClassBuilder
+{
     /** Custom classes */
     @Input()
     set class(userClass: string) {
@@ -183,9 +186,9 @@ export class DialogComponent extends DialogBase implements OnInit, OnChanges, Af
 
     /** @hidden Listen on Dialog visibility */
     private _listenOnHidden(): void {
-        this._onHidden = this._dialogRef.onHide.subscribe(isHidden => {
+        this._onHidden = this._dialogRef.onHide.subscribe((isHidden) => {
             this.showDialogWindow = !isHidden;
             this.buildComponentCssClass();
-        })
+        });
     }
 }

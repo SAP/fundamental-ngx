@@ -12,7 +12,7 @@ export class MessageBoxPo extends CoreBaseComponentPo {
     positionExample = 'fd-message-box-position-example ';
     mobileExample = 'fd-message-box-mobile-example ';
     complexTemplateExample = 'fd-complex-template-example ';
-    messageBoxExample = 'fd-message-box-container '
+    messageBoxExample = 'fd-message-box-container ';
 
     messageBox = 'fd-message-box';
     button = '.fd-button';

@@ -90,13 +90,13 @@ export class PlatformTableColumnResizerComponent implements OnInit, OnDestroy {
         private readonly _tableColumnResizeService: TableColumnResizeService,
         @Inject(DOCUMENT) private readonly _document: Document | null,
         @Optional() private readonly _rtlService: RtlService
-    ) { }
+    ) {}
 
     /** @hidden */
     ngOnInit(): void {
         this._tableColumnResizeService.markForCheck
             .pipe(takeUntil(this._destroyed))
-            .subscribe(() => this._cd.markForCheck())
+            .subscribe(() => this._cd.markForCheck());
     }
 
     /** @hidden */

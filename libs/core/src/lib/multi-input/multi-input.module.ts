@@ -29,5 +29,4 @@ import { AutoCompleteModule } from '@fundamental-ngx/core/utils';
     ],
     exports: [MultiInputComponent]
 })
-export class MultiInputModule {
-}
+export class MultiInputModule {}

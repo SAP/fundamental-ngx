@@ -62,4 +62,4 @@ import { WizardGeneratorReviewButtonDirective } from './directives/wizard-genera
     ],
     providers: [WizardDialogGeneratorService]
 })
-export class PlatformWizardGeneratorModule { }
+export class PlatformWizardGeneratorModule {}

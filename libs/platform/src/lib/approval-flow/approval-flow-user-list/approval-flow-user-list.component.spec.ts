@@ -4,6 +4,7 @@ import { SelectionChangeEvent } from '@fundamental-ngx/platform/list';
 import { ApprovalUser } from '../interfaces';
 import { PlatformApprovalFlowModule } from '../approval-flow.module';
 import { ApprovalFlowUserListComponent } from './approval-flow-user-list.component';
+import { SimpleChanges } from '@angular/core';
 
 describe('ApprovalFlowUserListComponent', () => {
     let component: ApprovalFlowUserListComponent;
@@ -26,17 +27,21 @@ describe('ApprovalFlowUserListComponent', () => {
     });
 
     it('should preselect users', async () => {
-        const approvalUsers: ApprovalUser[] = [{
-            id: 'id1',
-            name: 'name1'
-        }];
+        const approvalUsers: ApprovalUser[] = [
+            {
+                id: 'id1',
+                name: 'name1'
+            }
+        ];
 
         component.users = approvalUsers;
         await fixture.whenStable();
 
         component.selectedUsers = approvalUsers;
-        fixture.detectChanges();
 
+        component.ngOnChanges({ users: {} as any } as SimpleChanges);
+        fixture.detectChanges();
+        await fixture.whenRenderingDone();
         component.ngAfterViewInit();
 
         expect(component._selectedItems.length).toEqual(approvalUsers.length);

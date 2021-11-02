@@ -6,11 +6,13 @@ describe('ProductMenuComponent', () => {
     let component: ProductMenuComponent;
     let fixture: ComponentFixture<ProductMenuComponent>;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [ShellbarModule]
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [ShellbarModule]
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(ProductMenuComponent);
