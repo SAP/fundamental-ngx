@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.93 (2021-11-02)
+
+
+### Bug Fixes
+
+* **core:** split button selection ([#7035](https://github.com/SAP/fundamental-ngx/issues/7035)) ([079c030](https://github.com/SAP/fundamental-ngx/commit/079c030c03050ffddbdbe773d7b5f734f566da51))
+
 ## 0.33.0-rc.92 (2021-11-02)
 
 ## 0.33.0-rc.91 (2021-11-02)
