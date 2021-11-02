@@ -41,7 +41,8 @@ import {
     sendKeys,
     waitForElDisplayed,
     waitForInvisibilityOf,
-    pause
+    pause,
+    waitForNotPresent
 } from '../../driver/wdio';
 
 describe('List test suite:', () => {
@@ -232,8 +233,7 @@ describe('List test suite:', () => {
             sendKeys(['ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown', 'ArrowDown']);
             // pause to give the browser time to process actions and generate loading icons
             pause(650);
-            expect(waitForElDisplayed(vScrollLoadIcon)).toBe(true);
-            waitForInvisibilityOf(vScrollLoadIcon);
+            waitForNotPresent(vScrollLoadIcon);
             const itemsEndCount = getElementArrayLength(vScrollListItems);
             expect(itemsStartCount).not.toEqual(itemsEndCount);
         });

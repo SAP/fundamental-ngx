@@ -1,6 +1,6 @@
 $fdp-media-player-size: 33.125rem;
 $fdp-thumbnail-image-size: 4.625rem;
-$fdp-thumbnail-selected-width: 5.7rem;
+$fdp-thumbnail-selected-width: 5.75rem;
 $fdp-thumbnail-selected-height: 5.5rem;
 $fdp-thumbnail-image-margin-size: 1rem;
 $fdp-thumbnail-image-border: 0.015rem solid;
@@ -46,6 +46,13 @@ $fdp-thumbnail-image-border-color: var(--sapButton_Emphasized_Hover_BorderColor,
                 width: $fdp-media-player-size;
                 height: $fdp-media-player-size;
                 margin: 0 25.438rem;
+                &:focus,
+                &.is-focus {
+                    outline-offset: 0.0625rem;
+                    outline-width: var(--sapContent_FocusWidth);
+                    outline-color: var(--sapContent_FocusColor);
+                    outline-style: var(--sapContent_FocusStyle);
+                }
                 img {
                     max-width: $fdp-media-player-size;
                     max-height: $fdp-media-player-size;
@@ -80,12 +87,9 @@ $fdp-thumbnail-image-border-color: var(--sapButton_Emphasized_Hover_BorderColor,
             }
             .fdp-thumbnail-image--selected,
             .fdp-thumbnail-image--horizontal.fdp-thumbnail-image--selected {
-                fd-avatar {
-                    width: $fdp-thumbnail-selected-width;
-                    height: $fdp-thumbnail-selected-height;
-                }
-                width: $fdp-thumbnail-selected-width;
-                height: $fdp-thumbnail-selected-height;
+                /** used !important to overide width and it's required*/
+                width: inherit !important;
+                height: inherit !important;
                 border: $fdp-thumbnail-image-border;
                 border-radius: $fdp-thumbnail-image-border-radius;
                 border-color: $fdp-thumbnail-image-border-color-default;

@@ -1,5 +1,13 @@
-import { AfterViewInit, ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
-
+import {
+    AfterViewInit,
+    ChangeDetectorRef,
+    Component,
+    HostListener,
+    OnInit,
+    ViewChild,
+    forwardRef
+} from '@angular/core';
+import { ThumbnailImageComponent } from '../thumbnail-image/thumbnail-image.component';
 import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { Media } from '../thumbnail.interfaces';
 
@@ -8,6 +16,7 @@ interface DialogRefData {
     mediaList: Media[];
     rtl: boolean;
     maxImages: number;
+    thumbnailId: string;
 }
 
 @Component({
@@ -29,6 +38,10 @@ export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
     mediaList = this.dialogRef.data.mediaList;
     /** max limit  */
     maxImages = this.dialogRef.data.maxImages;
+
+    /** Reference to thumbnail images component */
+    @ViewChild(forwardRef(() => ThumbnailImageComponent))
+    thumbnailImage: ThumbnailImageComponent;
 
     /** @hidden */
     constructor(public dialogRef: DialogRef, private _cdr: ChangeDetectorRef) {}
@@ -59,6 +72,8 @@ export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
         }
         this.currentActiveSlidesStartIndex = this.currentActiveSlidesStartIndex - 1;
         this.dialogRef.data.selectedMedia = this.mediaList[this.currentActiveSlidesStartIndex];
+        const thumbnailImagesArray = this.thumbnailImage.thumbnailImages.toArray();
+        thumbnailImagesArray[this.currentActiveSlidesStartIndex].nativeElement.focus();
         this.mediaList.forEach((item) => (item.selected = false));
         this.mediaList[this.currentActiveSlidesStartIndex].selected = true;
         this._cdr.detectChanges();
@@ -72,6 +87,8 @@ export class ThumbnailDetailsComponent implements OnInit, AfterViewInit {
         }
         this.currentActiveSlidesStartIndex = this.currentActiveSlidesStartIndex + 1;
         this.dialogRef.data.selectedMedia = this.mediaList[this.currentActiveSlidesStartIndex];
+        const thumbnailImagesArray = this.thumbnailImage.thumbnailImages.toArray();
+        thumbnailImagesArray[this.currentActiveSlidesStartIndex].nativeElement.focus();
         this.mediaList.forEach((item) => (item.selected = false));
         this.mediaList[this.currentActiveSlidesStartIndex].selected = true;
         this._cdr.detectChanges();

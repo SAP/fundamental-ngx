@@ -2,6 +2,7 @@ import { KeyboardSupportService } from './keyboard-support.service';
 import { KeyboardSupportItemInterface } from '../../interfaces/keyboard-support-item.interface';
 import { EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 class MockKeyboardListElement implements KeyboardSupportItemInterface {
     keyDown = new EventEmitter<KeyboardEvent>();
@@ -35,17 +36,23 @@ describe('MenuKeyboardService', () => {
         expect((<any>service)._refreshEscapeLogic).toHaveBeenCalled();
     });
 
-    it('should call escape methods ', () => {
+    it('should call escape methods ', (done) => {
         service.setKeyboardService(menuItems);
         let escapeAfter = false;
         let escapeBefore = false;
-
-        service.focusEscapeList.subscribe((direction) => {
-            if (direction === 'up') {
-                escapeAfter = true;
-            }
-            if (direction === 'down') {
-                escapeBefore = true;
+        service.focusEscapeList.pipe(take(2)).subscribe({
+            next: (direction) => {
+                if (direction === 'up') {
+                    escapeAfter = true;
+                }
+                if (direction === 'down') {
+                    escapeBefore = true;
+                }
+            },
+            complete: () => {
+                expect(escapeBefore).toBeTrue();
+                expect(escapeAfter).toBeTrue();
+                done();
             }
         });
 
@@ -59,8 +66,5 @@ describe('MenuKeyboardService', () => {
 
         menuItems.first.keyDown.next(keyDownEventUp);
         menuItems.last.keyDown.next(keyDownEventDown);
-
-        expect(escapeBefore).toBeTrue();
-        expect(escapeAfter).toBeTrue();
     });
 });
