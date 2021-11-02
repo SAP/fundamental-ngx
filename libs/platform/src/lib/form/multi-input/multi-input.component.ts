@@ -249,7 +249,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
             this._selected = null;
         }
         this._updateModel(this.selected);
-        this.cd.markForCheck();
+        this._cd.markForCheck();
     }
 
     /** @hidden */
@@ -265,7 +265,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         if (KeyUtil.isKeyCode(event, [ESCAPE])) {
             this.showList(false);
         }
-        this.cd.markForCheck();
+        this._cd.markForCheck();
     }
     /** @hidden Define is selected item selected */
     isSelectedOptionItem(selectedItem: any): boolean {
@@ -327,14 +327,8 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
     /** @hidden Handle dialog approval, closes popover and propagates data changes. */
     _dialogApprove(): void {
-        if (this.selected && this.selectedValue?.label === this.inputText) {
-            this._updateModel(this.selectedValue.value);
-        } else {
-            const optionItem = this._getSelectedOptionItem(this.inputText);
-
-            this._updateModel(optionItem ? optionItem.value : this.inputText);
-        }
-
+        this.onChange(this.selected);
+        this._updateModel(this.selected);
         this.showList(false);
     }
 
