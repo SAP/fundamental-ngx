@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.90 (2021-11-02)
+
+
+### Bug Fixes
+
+* **platform:** search-input, add mobile dynamic loading ([#7041](https://github.com/SAP/fundamental-ngx/issues/7041)) ([5e938d3](https://github.com/SAP/fundamental-ngx/commit/5e938d32a982459a7f98e5bbda618f10fae04fdf))
+
 ## 0.33.0-rc.89 (2021-11-02)
 
 ## 0.33.0-rc.88 (2021-11-02)
