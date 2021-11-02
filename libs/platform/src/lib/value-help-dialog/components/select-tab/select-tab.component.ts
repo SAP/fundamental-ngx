@@ -26,10 +26,14 @@ let titleUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectTabComponent<T> extends VhdBaseTab implements OnChanges, AfterViewInit {
-    protected defaultId = `fd-select-tab-title-id-${titleUniqueId++}`;
+    protected defaultTitleId = `fd-select-tab-title-id-${titleUniqueId++}`;
+    protected defaultCountId = `fd-select-tab-title-count-id-${titleUniqueId++}`;
 
     @Input()
-    selectTitleId: string = this.defaultId;
+    selectTabTitleId: string = this.defaultTitleId;
+
+    @Input()
+    selectTabCountId: string = this.defaultCountId;
 
     @Input()
     selected: T[] = [];

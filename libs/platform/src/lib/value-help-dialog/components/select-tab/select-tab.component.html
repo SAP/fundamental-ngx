@@ -23,11 +23,14 @@
         [attr.aria-rowcount]="displayedData.length"
         role="grid"
         aria-multiselectable="true"
-        [attr.aria-labelledby]="selectTitleId"
+        [attr.aria-labelledby]="selectTabCountId + ' ' + selectTabTitleId"
     >
-        <label [id]="selectTitleId" fd-form-label class="fdp-value-help-dialog__hidden_lable"
+        <label [id]="selectTabCountId" fd-form-label class="fdp-value-help-dialog__hidden_lable"
             >contains {{ displayedData.length }} rows and {{ _tableFilters.main.length }} column</label
         >
+        <label [id]="selectTabTitleId" fd-form-label class="fdp-value-help-dialog__hidden_lable"
+            >Items ({{ displayedData.length }})
+        </label>
         <thead fd-table-header>
             <tr fd-table-row *ngIf="displayedData.length && _tableFilters">
                 <th fd-table-cell [fitContent]="mobile">
