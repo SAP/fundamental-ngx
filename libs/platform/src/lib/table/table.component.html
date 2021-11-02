@@ -58,7 +58,9 @@
                 *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
                 labelClass="fd-table__checkbox-label"
                 [compact]="contentDensity !== CONTENT_DENSITY.COZY"
-                [ngModel]="_checkedAll"
+                [tristate]="true"
+                [tristateSelectable]="false"
+                [ngModel]="checkedState"
                 (ngModelChange)="_toggleAllSelectableRows($event)"
             ></fd-checkbox>
         </th>
@@ -75,7 +77,7 @@
                 [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
                 [ngStyle]="_getCellStyles(column)"
                 [fdPopoverTrigger]="columnHeaderPopover"
-                [class.fdp-table__item--clickable]="_isColumnHasHeaderMenu(column)"
+                [class.fd-table__item--clickable]="_isColumnHasHeaderMenu(column)"
                 [style.text-align]="column.align"
             >
                 <div
@@ -108,7 +110,7 @@
                         <!-- Sorting -->
                         <ng-container *ngIf="column.sortable">
                             <li
-                                class="fdp-table__item--clickable"
+                                class="fd-table__item--clickable"
                                 fd-list-item
                                 (click)="_columnHeaderSortBy(column.key, SORT_DIRECTION.ASC)"
                                 (keyup.enter)="_columnHeaderSortBy(column.key, SORT_DIRECTION.ASC)"
@@ -117,7 +119,7 @@
                                 <span fd-list-title i18n="@@platformTableHeaderMenuSortAsc">Sort Ascending</span>
                             </li>
                             <li
-                                class="fdp-table__item--clickable"
+                                class="fd-table__item--clickable"
                                 fd-list-item
                                 (click)="_columnHeaderSortBy(column.key, SORT_DIRECTION.DESC)"
                                 (keyup.enter)="_columnHeaderSortBy(column.key, SORT_DIRECTION.DESC)"
@@ -130,7 +132,7 @@
                         <!-- Grouping -->
                         <ng-container *ngIf="column.groupable">
                             <li
-                                class="fdp-table__item--clickable"
+                                class="fd-table__item--clickable"
                                 fd-list-item
                                 (click)="_columnHeaderGroupBy(column.key)"
                                 (keyup.enter)="_columnHeaderGroupBy(column.key)"
@@ -144,7 +146,7 @@
                         <ng-container *ngIf="column.freezable">
                             <li
                                 *ngIf="!_freezableColumns?.includes(column.name)"
-                                class="fdp-table__item--clickable"
+                                class="fd-table__item--clickable"
                                 fd-list-item
                                 (click)="freezeToColumn(column.name)"
                                 (keyup.enter)="freezeToColumn(column.name)"
@@ -154,7 +156,7 @@
                             </li>
                             <li
                                 *ngIf="_freezableColumns?.includes(column.name)"
-                                class="fdp-table__item--clickable"
+                                class="fd-table__item--clickable"
                                 fd-list-item
                                 (click)="unfreeze(column.name)"
                                 (keyup.enter)="unfreeze(column.name)"

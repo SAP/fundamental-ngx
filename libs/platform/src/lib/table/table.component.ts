@@ -7,7 +7,6 @@ import {
     ContentChildren,
     EventEmitter,
     HostBinding,
-    HostListener,
     Inject,
     Input,
     NgZone,
@@ -30,6 +29,7 @@ import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap }
 import { ContentDensityEnum, ContentDensityService, FdDropEvent, RtlService } from '@fundamental-ngx/core/utils';
 import { TableRowDirective } from '@fundamental-ngx/core/table';
 import { getNestedValue, isDataSource, isFunction, isString } from '@fundamental-ngx/platform/shared';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
 
 import { TableService } from './table.service';
 import { CollectionFilter, CollectionGroup, CollectionSort, CollectionStringFilter, TableState } from './interfaces';
@@ -335,6 +335,10 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     readonly verticalScrollable: TableScrollable;
 
     /** @hidden */
+    @ViewChildren('columnHeaderPopover')
+    readonly columnHeaderPopovers: QueryList<PopoverComponent>;
+
+    /** @hidden */
     @ContentChildren(TableColumn)
     readonly columns: QueryList<TableColumn>;
 
@@ -458,7 +462,23 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * @hidden
      * Indicates when all items are checked
      */
-    _checkedAll = false;
+    private _checkedAll = false;
+
+    /**
+     * @hidden
+     * Indicates whether at least 1 item is checked
+     */
+    private _checkedAny = false;
+
+    get checkedState(): boolean | null {
+        if (this._checkedAll) {
+            return true;
+        }
+        if (this._checkedAny) {
+            return null; // passing null for indeterminate state
+        }
+        return false;
+    }
 
     /**
      * @hidden
@@ -808,17 +828,6 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._cdr.markForCheck();
     }
 
-    /** @hidden
-     *  Needs to prevent scrolling and other events on loading.
-     *  TODO: refactor it on keyboard navigation implementation
-     * */
-    @HostListener('keydown', ['$event'])
-    keyDownHandler(event: KeyboardEvent): void {
-        if (this.loading) {
-            event.preventDefault();
-        }
-    }
-
     // Private API
 
     /** @hidden */
@@ -940,6 +949,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      */
     _columnHeaderGroupBy(field: string): void {
         this.group([{ field: field, direction: SortDirection.NONE, showAsColumn: true }]);
+        this._closePopoverForColumnByFieldName(field);
     }
 
     /**
@@ -955,6 +965,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         };
 
         this.addFilter([collectionFilter]);
+        this._closePopoverForColumnByFieldName(field);
     }
 
     /**
@@ -963,6 +974,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      */
     _columnHeaderSortBy(field: string, direction: SortDirection): void {
         this.sort([{ field: field, direction: direction }]);
+        this._closePopoverForColumnByFieldName(field);
     }
 
     /** @hidden */
@@ -1131,6 +1143,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     _columnTrackBy(index: number, column: TableColumn): string {
         return column.name;
+    }
+
+    /** @hidden */
+    private _closePopoverForColumnByFieldName(field: string): void {
+        const index = this._visibleColumns.findIndex((c) => c.key === field);
+        if (index !== -1) {
+            this.columnHeaderPopovers.get(index)?.close();
+        }
     }
 
     /** @hidden */
@@ -1755,12 +1775,16 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     private _resetAllSelectedRows(): void {
         this._checkedAll = false;
+        this._checkedAny = false;
         this._getSelectableRows().forEach((r) => (r.checked = false));
     }
 
     /** @hidden */
     private _calculateCheckedAll(): void {
-        this._checkedAll = this._getSelectableRows().every(({ checked }) => checked);
+        const selectableRows = this._getSelectableRows();
+        const totalSelected = selectableRows.filter((r) => r.checked);
+        this._checkedAll = totalSelected.length === selectableRows.length;
+        this._checkedAny = totalSelected.length > 0;
     }
 
     /** @hidden */
