@@ -22,7 +22,8 @@ import {
     invalidDate,
     getCurrentItemIndex,
     getCurrentMonth,
-    getNextDay, currentDay
+    getNextDay,
+    currentDay
 } from '../fixtures/testData/date-picker-tags';
 import { blockExamples } from '../fixtures/appData/date-picker-contents';
 
@@ -375,14 +376,14 @@ describe('Datetime picker suite', () => {
         const dayCount = getElementArrayLength(currentMonthCalendarItem);
 
         if (currentDayIndex === dayCount) {
-            click(altCalendarItem, currentDayIndex - 5);
+            click(altCalendarItem, currentDayIndex - 1);
             click(section + calendarIcon);
         }
         if (currentDayIndex !== dayCount) {
-            click(altCalendarItem, currentDayIndex + 5);
+            click(altCalendarItem, currentDayIndex + 1);
 
             section === formattingExample
-                ? (chosenDate = `${getCurrentMonth(true)}/${currentDay}/${currentYear.toString().slice(2)}`)
+                ? (chosenDate = `${getCurrentMonth(true)}/0${currentDay}/${currentYear.toString().slice(2)}`)
                 : (chosenDate = `${getCurrentMonth(false)}/${currentDay}/${currentYear}`);
 
             expect(getValue(section + calendarInput)).toContain(
