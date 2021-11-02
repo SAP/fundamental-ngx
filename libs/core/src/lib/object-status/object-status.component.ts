@@ -33,7 +33,7 @@ export type ObjectStatus = 'negative' | 'critical' | 'positive' | 'informative';
     changeDetection: ChangeDetectionStrategy.OnPush,
     host: {
         '[attr.tabindex]': 'clickable ? 0 : -1',
-        '[attr.aria-label]': 'status ? _labelText : null'
+        '[attr.aria-label]': 'ariaLabel ? (status ? ariaLabel : null) : null'
     }
 })
 export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder {
@@ -41,8 +41,9 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     @Input()
     class: string;
 
-    /** @hidden */
-    _labelText: string;
+    /** aria-label for ObjectStatusComponent */
+    @Input()
+    ariaLabel: string = null;
 
     /**
      * The status represented by the Object Status.
@@ -99,23 +100,25 @@ export class ObjectStatusComponent implements OnChanges, OnInit, CssClassBuilder
     ngOnInit(): void {
         this.buildComponentCssClass();
 
-        const label = this._elementRef.nativeElement.textContent;
+        if (!this.ariaLabel) {
+            const label = this._elementRef.nativeElement.textContent;
 
-        switch (this.status) {
-            case 'negative':
-                this._labelText = 'Alert ' + label;
-                break;
-            case 'critical':
-                this._labelText = 'Warning ' + label;
-                break;
-            case 'informative':
-                this._labelText = 'Information ' + label;
-                break;
-            case 'positive':
-                this._labelText = 'Success ' + label;
-                break;
-            default:
-                this._labelText = null;
+            switch (this.status) {
+                case 'negative':
+                    this.ariaLabel = 'Alert ' + label;
+                    break;
+                case 'critical':
+                    this.ariaLabel = 'Warning ' + label;
+                    break;
+                case 'informative':
+                    this.ariaLabel = 'Information ' + label;
+                    break;
+                case 'positive':
+                    this.ariaLabel = 'Success ' + label;
+                    break;
+                default:
+                    this.ariaLabel = null;
+            }
         }
     }
 
