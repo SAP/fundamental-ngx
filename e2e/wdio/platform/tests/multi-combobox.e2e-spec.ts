@@ -3,6 +3,7 @@ import {
     click,
     doesItExist,
     getElementArrayLength,
+    getElementClass,
     getText,
     getTextArr,
     refreshPage,
@@ -191,6 +192,16 @@ describe('multi-combobox test suite', () => {
         click(dialogListItem);
         click(showSelectedItemsBtn);
         expect(doesItExist(mobileModeExamples + token)).toBe(false);
+    });
+
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/7082
+    xit('should check that Show selected Items - Show all items works correct', () => {
+        scrollIntoView(mobileModeExamples);
+        click(mobileExpandButton);
+        click(dialogListItem);
+        click(showSelectedItemsBtn);
+        click(showSelectedItemsBtn);
+        expect(getElementClass(dialogListItem)).toContain('is-selected');
     });
 
     describe('orientation and visual regression checks', () => {
