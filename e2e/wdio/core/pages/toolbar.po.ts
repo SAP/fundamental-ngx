@@ -31,7 +31,7 @@ export class ToolbarPo extends CoreBaseComponentPo {
     dateTimeInput = 'input.fd-input--compact';
 
     dayInCalendarButtonByValue = (index: string): string => {
-        return `//span[contains(.,"${index}")]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
+        return `//span[contains(@id,"day-${index}-")]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
     };
 
     open(): void {
