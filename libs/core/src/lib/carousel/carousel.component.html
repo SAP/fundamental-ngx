@@ -63,6 +63,7 @@
             <ng-container *ngIf="pageIndicator">
                 <ng-container *ngFor="let item of pageIndicatorsCountArray; let i = index">
                     <li
+                        [attr.aria-label]="_slidesCopy[i].title"
                         [attr.data-slide-to]="i + 1"
                         class="fd-carousel__page-indicator"
                         [class.fd-carousel__page-indicator--active]="i === currentActiveSlidesStartIndex"

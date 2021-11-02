@@ -2,9 +2,11 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    ContentChild,
     ElementRef,
     HostBinding,
     Input,
+    OnInit,
     ViewEncapsulation
 } from '@angular/core';
 import { CarouselItemInterface } from '../carousel.service';
@@ -18,7 +20,10 @@ let carouselItemUniqueId = 0;
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
 })
-export class CarouselItemComponent implements CarouselItemInterface {
+export class CarouselItemComponent implements CarouselItemInterface, OnInit {
+    /** add #imgInfo to <img> to get attr.alt*/
+    @ContentChild('imgInfo', { static: true }) imgInfoRef: ElementRef;
+
     /** Id of the Carousel items. */
     @Input()
     @HostBinding('attr.id')
@@ -90,6 +95,12 @@ export class CarouselItemComponent implements CarouselItemInterface {
     }
 
     constructor(private readonly _changeDetectorRef: ChangeDetectorRef, private readonly _elementRef: ElementRef) {}
+
+    ngOnInit(): void {
+        if (!!this.imgInfoRef) {
+            this.title = this.imgInfoRef.nativeElement.getAttribute('alt');
+        }
+    }
 
     /** Width of element */
     getWidth(): number {

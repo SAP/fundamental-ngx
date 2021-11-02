@@ -17,3 +17,18 @@ fd-carousel:focus {
         }
     }
 }
+
+@media (max-width: 21.25rem) {
+    .fd-carousel {
+        min-width: 11rem;
+
+        &__page-indicators {
+            width: 8rem;
+            padding: 0;
+        }
+
+        &__page-indicator-container {
+            padding: 0;
+        }
+    }
+}
