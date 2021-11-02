@@ -232,6 +232,11 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
                 .fd-table__popover--custom {
                     display: none;
                 }
+
+                .fdp-table__navigation-indicator {
+                    opacity: 0;
+                    visibility: hidden;
+                }
             }
         }
     }
@@ -329,7 +334,7 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
             min-width: 100%;
             border-left: none;
 
-            /** 
+            /**
                 Due to the changed table-layout group row cell may looe it's top border.
                 For example when previous (relatively to the group row) row columns tolal width < 100% of the table.
             */

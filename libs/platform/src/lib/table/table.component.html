@@ -189,7 +189,10 @@
             </th>
         </ng-container>
 
-        <th *ngIf="_isShownNavigationColumn" fd-table-cell role="columnheader"></th>
+        <th *ngIf="_isShownNavigationColumn" fd-table-cell role="columnheader">
+            <!-- Instead of setting the width, let's have an invisible icon so if it's change its width everything still will be okay. -->
+            <i fd-table-icon [navigation]="true" class="fdp-table__navigation-indicator sap-icon--slim-arrow-left"></i>
+        </th>
 
         <th class="fd-table__cell--mock"></th>
     </tr>
