@@ -237,7 +237,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
-        super.writeValue(value);
+        super.writeValue(value ?? '');
         this.updateCounterInteractions();
         this.stateChanges.next('textarea: writeValue');
     }
@@ -333,13 +333,11 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         }
         if (this._shouldTrackTextLimit && KeyUtil.isKeyCode(event, [DELETE, BACKSPACE])) {
             // for the custom value set and showExceededText=false case, on any key press, remove excess characters
-            if (this.value) {
-                this._textAreaCharCount = this.value.length;
-                if (this._textAreaCharCount > this.maxLength) {
-                    // remove excess characters
-                    this.value = this.value.substring(0, this.maxLength);
-                    this.isValueCustomSet = false; // since value is now changed, it is no longer custom set
-                }
+            this._textAreaCharCount = this.value?.length ?? 0;
+            if (this._textAreaCharCount > this.maxLength) {
+                // remove excess characters
+                this.value = this.value?.substring(0, this.maxLength) ?? '';
+                this.isValueCustomSet = false; // since value is now changed, it is no longer custom set
             }
         }
     }
@@ -371,9 +369,7 @@ export class TextAreaComponent extends BaseInput implements AfterViewChecked, On
         if (this._targetElement) {
             contentLength = this._targetElement.value.length;
         }
-        if (this.value) {
-            contentLength = this.value.length;
-        }
+        contentLength = this.value?.length ?? 0;
         return contentLength;
     }
 
