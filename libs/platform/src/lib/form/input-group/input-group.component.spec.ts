@@ -205,10 +205,12 @@ describe('Input group within platform form', () => {
         expect(formControl.touched).not.toBeTrue();
 
         inputEl.nativeElement.focus();
+        await wait(fixture);
 
         expect(formControl.touched).toBeFalse();
 
         inputEl.nativeElement.blur();
+        await wait(fixture);
 
         expect(formControl.touched).toBeTrue();
     });
