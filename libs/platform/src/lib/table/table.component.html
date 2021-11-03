@@ -7,7 +7,7 @@
 
 <fd-busy-indicator [loading]="loading" block="true">
     <!-- Table Container -->
-    <div class="fdp-table__container" role="table">
+    <div class="fdp-table__container" role="table" #tableContainer>
         <!-- Table header outlet -->
         <ng-container [ngTemplateOutlet]="tableHeaderTemplate"></ng-container>
 
@@ -264,6 +264,7 @@
                             *ngSwitchDefault
                             fd-table-row
                             fd-dnd-item
+                            #tableRow
                             role="row"
                             [class]="_getRowClasses(row)"
                             [tabindex]="rowsActivable || !!row.navigatable ? 0 : -1"
@@ -293,7 +294,7 @@
                                         role="rowheader"
                                         fd-table-cell
                                         fd-table-cell-selectable
-                                        [style]="_getSelectionCellStyles()"
+                                        [style]="_getSelectionCellStyles(tableRow)"
                                         [focusable]="true"
                                         [attr.aria-selected]="row.checked"
                                         (click)="_toggleSelectableRow(row)"
@@ -307,7 +308,7 @@
                                         class="fd-table__cell--fixed fd-table__cell--checkbox"
                                         role="cell"
                                         fd-table-cell
-                                        [style]="_getSelectionCellStyles()"
+                                        [style]="_getSelectionCellStyles(tableRow)"
                                     >
                                         <fd-checkbox
                                             [compact]="contentDensity !== CONTENT_DENSITY.COZY"
