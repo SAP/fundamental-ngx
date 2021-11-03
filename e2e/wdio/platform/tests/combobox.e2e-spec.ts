@@ -1,4 +1,5 @@
 import {
+    browserIsFirefox,
     browserIsIE,
     clearValue,
     click,
@@ -131,8 +132,10 @@ describe('Combobox test suite', () => {
         }
     });
 
-    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6248
-    xit('Verify option hint when entering first characters', () => {
+    it('Verify option hint when entering first characters', () => {
+        if (browserIsFirefox()) {
+            return;
+        }
         for (let i = 0; i < activeTypeNames.length; i++) {
             scrollIntoView(comboBoxInputs(activeTypeNames[i]));
             setValue(comboBoxInputs(activeTypeNames[i]), appleOption.substring(0, 2));

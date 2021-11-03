@@ -3,12 +3,16 @@ import {
     click,
     getAttributeByName,
     getElementArrayLength,
+    getText,
     mouseHoverElement,
+    refreshPage,
     saveElementScreenshot,
     scrollIntoView,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 import { InlineHelpPo } from '../pages/inline-help.po';
+import { customMessage, defaultMessage } from '../fixtures/appData/inline-help-contents';
 
 describe('Inline help test suite', () => {
     const inlineHelpPage = new InlineHelpPo();
@@ -19,11 +23,17 @@ describe('Inline help test suite', () => {
         inlineHelpStyledIcon,
         inlineHelpTemplateExample,
         exampleAreaContainersArr,
-        inlineHelpExampleExtended
+        inlineHelpExampleExtended,
+        popover
     } = inlineHelpPage;
 
     beforeAll(() => {
         inlineHelpPage.open();
+    }, 1);
+
+    afterEach(() => {
+        refreshPage();
+        waitForElDisplayed(inlineHelpPage.title);
     }, 1);
 
     it('Verify icons hover tooltip', () => {
@@ -41,62 +51,26 @@ describe('Inline help test suite', () => {
         expect(getAttributeByName(inlineHelpInput, 'fd-inline-help')).toContain('Inline Help Tooltip');
     });
 
-    // skip due to visual regression
-    xit('Verify button inline help', () => {
+    it('Verify button inline help', () => {
         scrollIntoView(exampleAreaContainersArr, 1);
         click(inlineHelpButton);
-        waitForPresent('fd-popover-body');
-        saveElementScreenshot(inlineHelpExampleExtended, `inline-help-button`, inlineHelpPage.getScreenshotFolder(), 1);
-        const diff = checkElementScreenshot(
-            inlineHelpExampleExtended,
-            `inline-help-button`,
-            inlineHelpPage.getScreenshotFolder(),
-            1
-        );
-
-        expect(diff).toBeLessThan(5, `Inline help button has mismatch percentage of ${diff}%`);
-        expect(getAttributeByName(inlineHelpButton, 'fd-inline-help')).toContain('Inline Help Tooltip');
+        waitForPresent(popover);
+        expect(getText(popover)).toBe(defaultMessage);
     });
 
-    // skip due to visual regression
-    xit('Verify styled inline help icon', () => {
+    it('Verify styled inline help icon', () => {
         scrollIntoView(exampleAreaContainersArr, 2);
         mouseHoverElement(inlineHelpStyledIcon);
-        saveElementScreenshot(
-            inlineHelpExampleExtended,
-            `inline-help-styled-icon`,
-            inlineHelpPage.getScreenshotFolder(),
-            2
-        );
-        const diff = checkElementScreenshot(
-            inlineHelpExampleExtended,
-            `inline-help-styled-icon`,
-            inlineHelpPage.getScreenshotFolder(),
-            2
-        );
+        waitForPresent(popover);
 
-        expect(diff).toBeLessThan(5, `Inline help styled icon has mismatch percentage of ${diff}%`);
-        expect(getAttributeByName(inlineHelpStyledIcon, 'fd-inline-help')).toContain('Inline Help Tooltip');
+        expect(getText(popover)).toBe(defaultMessage);
     });
 
-    // skip due to visual regression
-    xit('Verify template inline help example', () => {
+    it('Verify template inline help example', () => {
         scrollIntoView(exampleAreaContainersArr, 3);
         mouseHoverElement(inlineHelpTemplateExample);
-        saveElementScreenshot(
-            inlineHelpExampleExtended,
-            `inline-help-template`,
-            inlineHelpPage.getScreenshotFolder(),
-            3
-        );
-        const diff = checkElementScreenshot(
-            inlineHelpExampleExtended,
-            `inline-help-template`,
-            inlineHelpPage.getScreenshotFolder(),
-            3
-        );
-
-        expect(diff).toBeLessThan(5, `Inline help template has mismatch percentage of ${diff}%`);
+        waitForPresent(popover);
+        expect(getText(popover)).toBe(customMessage);
     });
 
     xdescribe('Check visual regression', () => {

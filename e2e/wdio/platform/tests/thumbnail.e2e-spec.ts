@@ -44,8 +44,7 @@ describe('Thumbnail field', () => {
         expect(isElementDisplayed(mainVideo)).toBeTrue();
     });
 
-    // Skipped due https://github.com/SAP/fundamental-ngx/issues/4896
-    xit('should on click display image for vertical', () => {
+    it('should on click display image for vertical', () => {
         scrollIntoView(verticalGalleryImages);
         const arrLength = getElementArrayLength(verticalGalleryImages);
         for (let i = 0; arrLength - 1 > i; i++) {

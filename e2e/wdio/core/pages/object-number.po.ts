@@ -15,6 +15,7 @@ export class ObjectNumberPo extends CoreBaseComponentPo {
     objStatusExamples = 'fd-object-number-status-example ' + this.objectNumbers;
     largeObjExamples = 'fd-object-number-large-example ' + this.objectNumbers;
     boldObjExamples = 'fd-object-number-bold-example ' + this.objectNumbers;
+    boldObjExampleText = 'fd-object-number-bold-example ' + this.objText;
     unitObjExamples = 'fd-object-number-units-example ' + this.objectNumbers;
     decimalObjExamples = 'fd-object-number-decimal-example ' + this.objectNumbers;
     truncationObjExample = 'fd-object-number-truncation-example' + this.objectNumbers;

@@ -14,7 +14,7 @@ export class ComboBoxPo extends BaseComponentPo {
     root = '#page-content';
     pageTitle = 'fd-platform-combobox-header h1';
 
-    comboBoxRoot = '.fdp-combobox';
+    comboBoxRoot = 'fdp-combobox';
     comboBoxDropdownExpanded = '.fd-list';
     groupHeader = '.fd-list__group-header';
     comboboxWithGroup = 'input[ng-reflect-name="group"]';

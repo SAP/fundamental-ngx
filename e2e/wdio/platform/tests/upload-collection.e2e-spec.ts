@@ -1,6 +1,7 @@
 import { UploadCollectionPo } from '../pages/upload-collection.po';
 
 import {
+    browserIsFirefox,
     click,
     getElementArrayLength,
     getElementPlaceholder,
@@ -115,13 +116,16 @@ describe('Upload collection test suite', () => {
         checkClickabilityCancelButton(defaultExample);
     });
 
-    it('should check renaming folder', () => {
+    // skip due to https://github.com/SAP/fundamental-ngx/issues/7098
+    xit('should check renaming folder', () => {
         checkRenaming(turnOffExample);
         checkRenaming(defaultExample);
     });
 
-    // skipped due to broken layout https://github.com/SAP/fundamental-ngx/issues/6911
-    xit('should check moving folders', () => {
+    it('should check moving folders', () => {
+        if (browserIsFirefox()) {
+            return;
+        }
         checkMovingFolders(defaultExample);
         checkMovingFolders(turnOffExample);
     });

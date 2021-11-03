@@ -1,4 +1,2 @@
-export const tickAttribute = 'ng-reflect-show-ticks';
-export const tickLabelAttribute = 'ng-reflect-show-ticks-labels';
-export const disabledAttribute = 'ng-reflect-disabled';
-export const cozyAttribute = 'ng-reflect-cozy';
+export const disabledAttribute = 'is-disabled';
+export const cozySliderClass = 'fd-slider__handle--lg';
