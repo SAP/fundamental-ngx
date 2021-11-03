@@ -32,6 +32,7 @@ import {
     ContentDensityService,
     FdDropEvent,
     resizeObservable,
+    intersectionObservable,
     RtlService
 } from '@fundamental-ngx/core/utils';
 import { TableRowDirective } from '@fundamental-ngx/core/table';
@@ -61,6 +62,7 @@ import {
     FilterChange,
     FreezeChange,
     GroupChange,
+    RowComparator,
     SortChange,
     TableColumnFreezeEvent,
     TableColumnsChangeEvent,
@@ -71,8 +73,7 @@ import {
     TableRowSelectionChangeEvent,
     TableRowsRearrangeEvent,
     TableRowToggleOpenStateEvent,
-    TableSortChangeEvent,
-    RowComparator
+    TableSortChangeEvent
 } from './models';
 import { TableColumnResizeService } from './table-column-resize.service';
 import { TableColumnResizableSide } from './directives/table-cell-resizable.directive';
@@ -166,6 +167,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
             this._initializeDS(value);
         }
     }
+
     get dataSource(): FdpTableDataSource<T> {
         return this._ds;
     }
@@ -177,6 +179,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     set state(value: TableState) {
         this.setTableState(value || DEFAULT_TABLE_STATE);
     }
+
     get state(): TableState {
         return this.getTableState();
     }
@@ -585,6 +588,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         private readonly _tableService: TableService,
         private readonly _tableScrollDispatcher: TableScrollDispatcherService,
         private readonly _tableColumnResizeService: TableColumnResizeService,
+        private readonly _elRef: ElementRef,
         @Inject(DOCUMENT) private readonly _document: Document | null,
         @Optional() private readonly _rtlService: RtlService,
         @Optional() private readonly _contentDensityService: ContentDensityService
@@ -829,16 +833,33 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
     /** Manually triggers columns width recalculation */
     recalculateTableColumnWidth(): void {
+        const recalculateFn = () => {
+            const columnNames = this._visibleColumns.map((column) => column.name);
+            const offsetWidth = this._selectionColumnWidth + this._semanticHighlightingColumnWidth;
+
+            this._tableColumnResizeService.setColumnsWidth(columnNames, this.freezeColumnsTo, offsetWidth);
+            this._setFreezableInfo();
+
+            this._cdr.markForCheck();
+        };
+
         this._cdr.detectChanges();
 
-        this._tableColumnResizeService.setColumnsWidth(
-            this._visibleColumns.map((column) => column.name),
-            this.freezeColumnsTo,
-            this._selectionColumnWidth + this._semanticHighlightingColumnWidth
-        );
-        this._setFreezableInfo();
+        const elRect = this._elRef.nativeElement.getBoundingClientRect();
+        const elVisible = elRect.width && elRect.height;
 
-        this._cdr.markForCheck();
+        if (elVisible) {
+            recalculateFn();
+            return;
+        }
+
+        /** Element may not be visible due to any reason so process recalculation when it becomes visible */
+        const intersectionSubscription = intersectionObservable(this._elRef.nativeElement).subscribe(() => {
+            recalculateFn();
+            intersectionSubscription.unsubscribe();
+        });
+
+        this._subscriptions.add(intersectionSubscription);
     }
 
     // Private API
