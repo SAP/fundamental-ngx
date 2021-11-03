@@ -41,12 +41,15 @@ let titleUniqueId = 0;
 })
 export class DefineTabComponent<T> extends VhdBaseTab implements OnChanges {
     protected defaultId = `fd-title-id-${titleUniqueId++}`;
+    protected defaultSelectId = `fd-select-title-id-${titleUniqueId++}`;
 
+    /** title id for the table  */
     @Input()
     titleId: string = this.defaultId;
 
+    /** seelcted value id for the table  */
     @Input()
-    fullBodyLabel = 'Product';
+    selectedId: string = this.defaultSelectId;
 
     @Input()
     conditions: ExtendedBaseEntity[] = [];
