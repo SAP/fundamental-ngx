@@ -144,7 +144,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
 
     @Input()
     set value(value: any) {
-        this.setValue(value, true);
+        super.setValue(value, true);
     }
     get value(): any {
         return super.getValue();
@@ -376,7 +376,10 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
 
     /** write value for ControlValueAccessor */
     writeValue(value: any): void {
-        this.setValue(value, false);
+        this.selectedItems = coerceArraySafe(value);
+        super.writeValue(this.selectedItems);
+        this._setSelectedSuggestions();
+        this._emitChangeEvent();
     }
 
     /** @hidden */
