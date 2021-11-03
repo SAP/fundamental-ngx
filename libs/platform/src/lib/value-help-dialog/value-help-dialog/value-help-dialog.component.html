@@ -365,12 +365,18 @@
 <ng-template #desktopTabs>
     <nav fd-tab-nav class="fdp-value-help-dialog__tabs" *ngIf="showSelectionTab && showDefineTab">
         <div fd-tab-item (click)="switchTab(_tabTypes.selectFromList)" *ngIf="showSelectionTab">
-            <a fd-tab-link [active]="selectedTab === _tabTypes.selectFromList"
+            <a
+                fd-tab-link
+                [active]="selectedTab === _tabTypes.selectFromList"
+                [tabindex]="selectedTab === _tabTypes.selectFromList ? '0' : '-1'"
                 ><span fd-tab-tag>{{ selectTabTitle }}</span></a
             >
         </div>
         <div fd-tab-item (click)="switchTab(_tabTypes.defineConditions)" *ngIf="showDefineTab">
-            <a fd-tab-link [active]="selectedTab === _tabTypes.defineConditions"
+            <a
+                fd-tab-link
+                [active]="selectedTab === _tabTypes.defineConditions"
+                [tabindex]="selectedTab === _tabTypes.defineConditions ? '0' : '-1'"
                 ><span fd-tab-tag>{{ defineTabTitle }}</span></a
             >
         </div>

@@ -23,7 +23,7 @@
         [attr.aria-rowcount]="displayedData.length"
         role="grid"
         aria-multiselectable="true"
-        [attr.aria-labelledby]="selectTabCountId + ' ' + selectTabTitleId"
+        [attr.aria-labelledby]="selectTabTitleId + ' ' + selectTabCountId"
     >
         <label [id]="selectTabCountId" fd-form-label class="fdp-value-help-dialog__hidden_lable"
             >contains {{ displayedData.length }} rows and {{ _tableFilters.main.length }} column</label

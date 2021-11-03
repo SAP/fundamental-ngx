@@ -11,6 +11,9 @@
 <ng-container *ngFor="let item of _conditions; trackBy: _trackByKeyAndType; index as i">
     <fd-layout-grid class="condition-row" [noGap]="true">
         <div fdLayoutGridCol="5">
+            <label [id]="CONDITIONPANEL_OPERATOR_LABEL" fd-form-label class="fdp-value-help-dialog__hidden_lable">
+                CONDITIONPANEL_OPERATOR_LABEL</label
+            >
             <fd-select
                 class="vhd-condition-filters"
                 fdLayoutGridCol
@@ -25,7 +28,9 @@
                 role="combobox"
                 aria-roledescription="select"
                 aria-haspopup="listbox"
-                [attr.aria-labelledby]="titleId"
+                [ariaLabel]="item.strategy"
+                [ariaLabelledBy]="titleId + ' ' + 'CONDITIONPANEL_OPERATOR_LABEL'"
+                ariaLabel=""
             >
                 <ng-container *ngIf="_includeStrategy.length">
                     <li fd-list-group-header>Include</li>
@@ -133,12 +138,11 @@
             <button
                 fd-button
                 i18n-aria-label="@@platformI18nValueHelpDialog.Condition.RemoveLabel"
-                aria-label="Remove Define Condition"
+                ariaLabel="Remove Define Condition"
                 fdType="transparent"
                 glyph="decline"
                 [compact]="true"
                 title="Remove Define Condition"
-                aria-label="Remove Define Condition"
                 i18n-title="@@platformI18nValueHelpDialog.defineTab.removeButton"
                 (click)="removeCondition(i)"
             ></button>
