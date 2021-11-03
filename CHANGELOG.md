@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.96 (2021-11-03)
+
+
+### Bug Fixes
+
+* **platform:** replace using cdk overlay with Popover component ([#7032](https://github.com/SAP/fundamental-ngx/issues/7032)) ([835a832](https://github.com/SAP/fundamental-ngx/commit/835a832d751e91393c294e040c95bb9d35005a36))
+
 ## 0.33.0-rc.95 (2021-11-03)
 
 ## 0.33.0-rc.94 (2021-11-03)
