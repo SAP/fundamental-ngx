@@ -45,14 +45,14 @@
 
 <!-- Table Header Columns -->
 <ng-template #tableHeaderRowTemplate>
-    <tr fd-table-row>
+    <tr fd-table-row #headerRow>
         <th *ngIf="semanticHighlighting" class="fd-table__cell--fixed" fd-table-cell fd-table-status-indicator></th>
 
         <th
             *ngIf="_isShownSelectionColumn"
             fd-table-cell
             class="fd-table__cell--fixed fd-table__cell--checkbox"
-            [style]="_getSelectionCellStyles()"
+            [style]="_getSelectionCellStyles(headerRow)"
         >
             <fd-checkbox
                 *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
