@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.98 (2021-11-04)
+
+
+### Bug Fixes
+
+* **platform:** fixing the empty error message and adding reset example ([#7018](https://github.com/SAP/fundamental-ngx/issues/7018)) ([a6485ce](https://github.com/SAP/fundamental-ngx/commit/a6485ceacedb1e9216948c43fb898491986d9543))
+
 ## 0.33.0-rc.97 (2021-11-03)
 
 ## 0.33.0-rc.96 (2021-11-03)
