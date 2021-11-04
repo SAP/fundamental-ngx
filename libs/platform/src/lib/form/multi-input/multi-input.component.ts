@@ -115,6 +115,26 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         this._disabled = value;
     }
 
+    /**
+     * Preset options for the Select body width, whatever is chosen, the body has a 600px limit.
+     * `at-least` will apply a minimum width to the body equivalent to the width of the control. - Default
+     * `equal` will apply a width to the body equivalent to the width of the control.
+     * 'fit-content' will apply width needed to properly display items inside, independent of control.
+     */
+    @Input()
+    fillControlMode: PopoverFillMode = 'at-least';
+
+    /**
+     * The trigger events that will open/close the options popover.
+     * Accepts any [HTML DOM Events](https://www.w3schools.com/jsref/dom_obj_event.asp).
+     */
+    @Input()
+    triggers: string[] = [];
+
+    /** Whether the combobox should close, when a click is performed outside its boundaries. True by default */
+    @Input()
+    closeOnOutsideClick = true;
+
     /** @hidden */
     @ViewChild(TokenizerComponent)
     tokenizer: TokenizerComponent;
