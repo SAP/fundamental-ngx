@@ -7,7 +7,7 @@
 
 <fd-busy-indicator [loading]="loading" block="true">
     <!-- Table Container -->
-    <div class="fdp-table__container" role="table">
+    <div class="fdp-table__container" role="table" #tableContainer>
         <!-- Table header outlet -->
         <ng-container [ngTemplateOutlet]="tableHeaderTemplate"></ng-container>
 
@@ -45,14 +45,14 @@
 
 <!-- Table Header Columns -->
 <ng-template #tableHeaderRowTemplate>
-    <tr fd-table-row>
+    <tr fd-table-row #headerRow>
         <th *ngIf="semanticHighlighting" class="fd-table__cell--fixed" fd-table-cell fd-table-status-indicator></th>
 
         <th
             *ngIf="_isShownSelectionColumn"
             fd-table-cell
             class="fd-table__cell--fixed fd-table__cell--checkbox"
-            [style]="_getSelectionCellStyles()"
+            [style]="_getSelectionCellStyles(headerRow)"
         >
             <fd-checkbox
                 *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
@@ -264,6 +264,7 @@
                             *ngSwitchDefault
                             fd-table-row
                             fd-dnd-item
+                            #tableRow
                             role="row"
                             [applyDragItemClass]="_rowsDraggable"
                             [class]="_getRowClasses(row)"
@@ -295,7 +296,7 @@
                                         role="rowheader"
                                         fd-table-cell
                                         fd-table-cell-selectable
-                                        [style]="_getSelectionCellStyles()"
+                                        [style]="_getSelectionCellStyles(tableRow)"
                                         [focusable]="true"
                                         [attr.aria-selected]="row.checked"
                                         (click)="_toggleSelectableRow(row)"
@@ -309,7 +310,7 @@
                                         class="fd-table__cell--fixed fd-table__cell--checkbox"
                                         role="cell"
                                         fd-table-cell
-                                        [style]="_getSelectionCellStyles()"
+                                        [style]="_getSelectionCellStyles(tableRow)"
                                     >
                                         <fd-checkbox
                                             [compact]="contentDensity !== CONTENT_DENSITY.COZY"
