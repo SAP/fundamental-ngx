@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.100 (2021-11-04)
+
+
+### Bug Fixes
+
+* **platform:** empty icon tab bar ([#7092](https://github.com/SAP/fundamental-ngx/issues/7092)) ([759a65e](https://github.com/SAP/fundamental-ngx/commit/759a65e089b1aa7cb9559db5f0687498ef8892ac))
+
 ## 0.33.0-rc.99 (2021-11-04)
 
 
