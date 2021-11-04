@@ -12,6 +12,7 @@ import { DynamicComponentService } from '@fundamental-ngx/core/utils';
 export class MessageToastService {
     private _messageToasts: ComponentRef<MessageToastComponent>[] = [];
     private _messageToastContainerRef: ComponentRef<MessageToastContainerComponent>;
+    public textMessage: string = null;
 
     /** @hidden */
     constructor(private _dynamicComponentService: DynamicComponentService) {}
@@ -68,6 +69,9 @@ export class MessageToastService {
         });
 
         this._messageToasts.push(component);
+
+        this.textMessage = this._messageToastContainerRef.location.nativeElement.textContent;
+
         return service;
     }
 
