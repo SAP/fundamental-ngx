@@ -71,6 +71,7 @@
                 type="text"
                 role="combobox"
                 autocomplete="off"
+                aria-describedby="invalid-entry"
                 [attr.aria-label]="ariaLabel"
                 [attr.aria-labelledby]="ariaLabelledBy"
                 [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
@@ -88,6 +89,7 @@
                 [(ngModel)]="inputText"
                 (ngModelChange)="searchTermChanged()"
                 [placeholder]="placeholder"
+                [title]="placeholder"
                 (focus)="onTouched()"
                 (blur)="!mobile && onBlur($event)"
                 [attr.aria-expanded]="isOpen"
@@ -125,6 +127,7 @@
             type="text"
             role="combobox"
             autocomplete="off"
+            aria-describedby="invalid-entry"
             [attr.aria-label]="ariaLabel"
             [attr.aria-labelledby]="ariaLabelledBy"
             [attr.aria-autocomplete]="autoComplete && !mobile ? 'list' : null"
@@ -142,6 +145,7 @@
             [(ngModel)]="inputText"
             (ngModelChange)="searchTermChanged()"
             [placeholder]="placeholder"
+            [title]="placeholder"
             (focus)="onTouched()"
             (blur)="!mobile && onBlur($event)"
             [attr.aria-expanded]="isOpen"
@@ -290,6 +294,7 @@
 
 <ng-template #errorMessageTemplate>
     <fd-form-message
+        id="invalid-entry"
         *ngIf="isSearchInvalid"
         type="error"
         [embedded]="isOpen"

@@ -3,7 +3,7 @@
     [class.is-focus]="_tokenizerHasFocus"
     [class.fd-tokenizer--compact]="compact"
 >
-    <div class="fd-tokenizer__inner" #tokenizerInner>
+    <div class="fd-tokenizer__inner" role="listbox" #tokenizerInner>
         <ng-content select="fd-token"></ng-content>
         <span
             (click)="moreClicked()"

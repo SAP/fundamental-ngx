@@ -114,7 +114,7 @@ export class MultiComboboxMobileComponent extends MobileModeBase<MultiComboboxIn
             verticalPadding: false,
             ...this.dialogConfig,
             backdropClickCloseable: false,
-            escKeyCloseable: false,
+            escKeyCloseable: true,
             container: this._elementRef.nativeElement
         });
     }

@@ -1,16 +1,17 @@
 <ng-template let-dialog let-dialogConfig="dialogConfig" #dialogTemplate>
     <fd-dialog [dialogConfig]="dialogConfig" [dialogRef]="dialog">
-        <fd-dialog-header>
-            <h1 fd-title *ngIf="mobileConfig?.title" [innerText]="mobileConfig.title"></h1>
+        <fd-dialog-header aria-labelledby="fd-title">
+            <h1 id="fd-title" fd-title *ngIf="mobileConfig?.title" [innerText]="mobileConfig.title"></h1>
             <button
                 fd-dialog-close-button
                 *ngIf="mobileConfig?.hasCloseButton"
+                title="Close"
                 [mobile]="true"
                 (click)="handleDismiss()"
             ></button>
             <ng-template fdTemplate="subheader">
                 <div fd-bar-middle>
-                    <fd-bar-element [fullWidth]="true">
+                    <fd-bar-element fdInitialFocus [fullWidth]="true">
                         <ng-container *ngTemplateOutlet="childContent?.controlTemplate"></ng-container>
 
                         <button
