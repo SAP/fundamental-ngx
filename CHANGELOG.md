@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.102 (2021-11-04)
+
+
+### Bug Fixes
+
+* **platform:** table - selection row height issue ([#7091](https://github.com/SAP/fundamental-ngx/issues/7091)) ([d22a5ff](https://github.com/SAP/fundamental-ngx/commit/d22a5ff9cb5b81701ffc202dab1feb14d3c4a3b7))
+
 ## 0.33.0-rc.101 (2021-11-04)
 
 ## 0.33.0-rc.100 (2021-11-04)
