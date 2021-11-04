@@ -2,14 +2,14 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DialogConfig, DialogRef, DialogService } from '@fundamental-ngx/core/dialog';
-import { SortingComponent, SortDialogData } from './sorting.component';
+import { SortingComponent, SettingsSortDialogData } from './sorting.component';
 import { PlatformTableModule } from '../../../table.module';
 
 describe('PlatformTableSortDialogComponent', () => {
     let component: SortingComponent;
     let fixture: ComponentFixture<SortingComponent>;
     const dialogRef = new DialogRef();
-    const dialogData: SortDialogData = { columns: [], direction: null, field: null };
+    const dialogData: SettingsSortDialogData = { columns: [], direction: null, field: null };
     dialogRef.data = dialogData;
 
     beforeEach(

@@ -20,7 +20,7 @@ export class ComboBoxPo extends BaseComponentPo {
     comboboxWithGroup = 'input[ng-reflect-name="group"]';
     comboboxTwoColumns = '[name="columns"] input';
     optionsArray = '.fd-list__item';
-    comboBoxInput = this.comboBoxRoot + ' input';
+    comboBoxInput = 'fdp-combobox input:not([id*="mobile"])';
 
     selectedDropDownOption = (name: string) => {
         return `//span[contains(.,'${name}')]//ancestor::li[contains(@class, "is-selected")]`;

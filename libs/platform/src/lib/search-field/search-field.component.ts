@@ -38,6 +38,7 @@ import {
     SearchFieldMobileInterface
 } from './search-field-mobile/search-field-mobile.interface';
 import { SearchFieldMobileComponent } from './search-field-mobile/search-field/search-field-mobile.component';
+import { PlatformSearchFieldMobileModule } from './search-field-mobile/search-field-mobile.module';
 
 export interface SearchInput {
     text: string;
@@ -300,6 +301,7 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
     constructor(
         private _overlay: Overlay,
         private _viewContainerRef: ViewContainerRef,
+        private readonly _injector: Injector,
         protected _cd: ChangeDetectorRef,
         @Optional() private _rtl: RtlService,
         private readonly _elementRef: ElementRef,
@@ -639,12 +641,19 @@ export class SearchFieldComponent extends BaseComponent implements OnInit, OnDes
         }
     }
 
-    private _setUpMobileMode(): void {
-        this._dynamicComponentService.createDynamicComponent(
+    /** @hidden */
+    private async _setUpMobileMode(): Promise<void> {
+        const injector = Injector.create({
+            providers: [{ provide: SEARCH_FIELD_COMPONENT, useValue: this }],
+            parent: this._injector
+        });
+
+        this._dynamicComponentService.createDynamicModule(
             { inputFieldTemplate: this.inputFieldTemplate, suggestionMenuTemplate: this.suggestionMenuTemplate },
+            PlatformSearchFieldMobileModule,
             SearchFieldMobileComponent,
-            { container: this._elementRef.nativeElement },
-            { injector: Injector.create({ providers: [{ provide: SEARCH_FIELD_COMPONENT, useValue: this }] }) }
+            this._viewContainerRef,
+            injector
         );
     }
 }

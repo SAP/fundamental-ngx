@@ -39,7 +39,7 @@ import { PlatformObjectMarkerModule } from '@fundamental-ngx/platform/object-mar
 import { PlatformObjectStatusModule } from '@fundamental-ngx/platform/object-status';
 import { PlatformPageFooterModule } from '@fundamental-ngx/platform/page-footer';
 import { PlatformPanelModule } from '@fundamental-ngx/platform/panel';
-import { PlatformSearchFieldModule, PlatformSearchFieldMobileModule } from '@fundamental-ngx/platform/search-field';
+import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { PlatformSliderModule } from '@fundamental-ngx/platform/slider';
 import { PlatformSplitMenuButtonModule } from '@fundamental-ngx/platform/split-menu-button';
 import { PlatformTableModule } from '@fundamental-ngx/platform/table';
@@ -47,6 +47,7 @@ import { PlatformThumbnailModule } from '@fundamental-ngx/platform/thumbnail';
 import { PlatformUploadCollectionModule } from '@fundamental-ngx/platform/upload-collection';
 import { PlatformValueHelpDialogModule } from '@fundamental-ngx/platform/value-help-dialog';
 import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-generator';
+import { PlatformIconTabBarModule } from '@fundamental-ngx/platform/icon-tab-bar';
 
 @NgModule({
     imports: [CommonModule, FormsModule],
@@ -95,7 +96,7 @@ import { PlatformWizardGeneratorModule } from '@fundamental-ngx/platform/wizard-
         PlatformTimePickerModule,
         PlatformDatePickerModule,
         PlatformFormGeneratorModule,
-        PlatformSearchFieldMobileModule
+        PlatformIconTabBarModule
     ],
     providers: []
 })
