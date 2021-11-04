@@ -30,8 +30,7 @@ import {
     FormField,
     FormFieldControl,
     MultiInputDataSource,
-    MultiInputOption,
-    Status
+    MultiInputOption
 } from '@fundamental-ngx/platform/shared';
 import { ListComponent, SelectionType } from '@fundamental-ngx/platform/list';
 
@@ -114,14 +113,6 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
     }
     set disabled(value) {
         this._disabled = value;
-    }
-
-    @Input()
-    get status(): Status {
-        return this._state;
-    }
-    set status(value: Status) {
-        this._state = value;
     }
 
     /**
@@ -231,16 +222,9 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
             this.close();
         }
         this._updateModel(this.selected);
+        this.searchInputElement.nativeElement.focus();
         this.emitChangeEvent(value ? this.selected : null);
         this._cd.detectChanges();
-    }
-
-    /** @hidden Control Value Accessor */
-    writeValue(value: any[]): void {
-        if (value) {
-            super.writeValue(value);
-        }
-        this._cd.markForCheck();
     }
 
     /** @hidden */
@@ -267,6 +251,8 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
                 }
             });
         }
+        this._updateModel(this.selected);
+        this.searchInputElement.nativeElement.focus();
         this.close();
         if (this.selected.length < 10) {
             this.selectionMode = 'none';
@@ -279,7 +265,11 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         this.selected.splice(this.selected.indexOf(token), 1);
         this.emitChangeEvent(token ? this.selected : null);
         this.searchInputElement.nativeElement.focus();
+        if (this.selected.length === 0) {
+            this._selected = null;
+        }
         this._updateModel(this.selected);
+        this._cd.markForCheck();
     }
 
     /** @hidden */
@@ -295,6 +285,7 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
         if (KeyUtil.isKeyCode(event, [ESCAPE])) {
             this.showList(false);
         }
+        this._cd.markForCheck();
     }
     /** @hidden Define is selected item selected */
     isSelectedOptionItem(selectedItem: any): boolean {
@@ -356,14 +347,8 @@ export class PlatformMultiInputComponent extends BaseMultiInput implements OnIni
 
     /** @hidden Handle dialog approval, closes popover and propagates data changes. */
     _dialogApprove(): void {
-        if (this.selected && this.selectedValue?.label === this.inputText) {
-            this._updateModel(this.selectedValue.value);
-        } else {
-            const optionItem = this._getSelectedOptionItem(this.inputText);
-
-            this._updateModel(optionItem ? optionItem.value : this.inputText);
-        }
-
+        this.onChange(this.selected);
+        this._updateModel(this.selected);
         this.showList(false);
     }
 
