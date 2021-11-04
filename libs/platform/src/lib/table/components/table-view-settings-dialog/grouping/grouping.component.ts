@@ -6,18 +6,18 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { SortDirection } from '../../../enums/sort-direction.enum';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 
-export interface GroupDialogColumn {
+export interface SettingsGroupDialogColumn {
     label: string;
     key: string;
 }
 
-export interface GroupDialogData {
+export interface SettingsGroupDialogData {
     direction: SortDirection;
     field: string;
-    columns: GroupDialogColumn[];
+    columns: SettingsGroupDialogColumn[];
 }
 
-export interface GroupDialogResultData {
+export interface SettingsGroupDialogResultData {
     field: string;
     direction: SortDirection;
 }
@@ -43,7 +43,7 @@ export class GroupingComponent implements Resettable {
     field: string;
 
     /** Table columns */
-    readonly columns: GroupDialogColumn[] = [];
+    readonly columns: SettingsGroupDialogColumn[] = [];
 
     /** @hidden */
     private _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -59,7 +59,7 @@ export class GroupingComponent implements Resettable {
 
     /** @hidden */
     constructor(public dialogRef: DialogRef) {
-        const data: GroupDialogData = this.dialogRef.data;
+        const data: SettingsGroupDialogData = this.dialogRef.data;
 
         this.initialDirection = data.direction || this.initialDirection;
         this.initialField = data.field || this.initialField;
@@ -83,7 +83,7 @@ export class GroupingComponent implements Resettable {
 
     /** Confirm changes and close dialog */
     confirm(): void {
-        const result: GroupDialogResultData = { field: this.field, direction: this.direction };
+        const result: SettingsGroupDialogResultData = { field: this.field, direction: this.direction };
         this.dialogRef.close(result);
     }
 
