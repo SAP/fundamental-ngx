@@ -265,9 +265,11 @@
                             fd-table-row
                             fd-dnd-item
                             role="row"
+                            [applyDragItemClass]="_rowsDraggable"
                             [class]="_getRowClasses(row)"
                             [tabindex]="rowsActivable || !!row.navigatable ? 0 : -1"
-                            [hoverable]="_isShownSelectionColumn || !!row.navigatable"
+                            [focusable]="rowsActivable || !!row.navigatable"
+                            [hoverable]="rowsActivable || _isShownSelectionColumn || !!row.navigatable"
                             [activable]="rowsActivable || !!row.navigatable"
                             [attr.aria-selected]="row.checked"
                             [attr.aria-rowindex]="rowIdx"

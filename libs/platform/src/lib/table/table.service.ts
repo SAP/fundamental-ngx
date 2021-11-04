@@ -1,6 +1,7 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { skip } from 'rxjs/operators';
+import equal from 'fast-deep-equal';
 
 import { SearchInput } from './interfaces/search-field.interface';
 import { CollectionFilter, CollectionGroup, CollectionPage, CollectionSort, TableState } from './interfaces';
@@ -71,9 +72,11 @@ export class TableService {
         const newSortRules: CollectionSort[] = [...sortRules];
         const state: TableState = { ...prevState, sortBy: newSortRules };
 
-        this.setTableState(setCurrentPageToState(state, 1));
+        if (!equal(prevSortRules, state.sortBy)) {
+            this.setTableState(setCurrentPageToState(state, 1));
 
-        this.sortChange.emit({ current: state.sortBy, previous: prevSortRules });
+            this.sortChange.emit({ current: state.sortBy, previous: prevSortRules });
+        }
     }
 
     /** Add sort rules to the existing ones */
@@ -88,9 +91,11 @@ export class TableService {
 
         const state: TableState = { ...prevState, sortBy: newSortRules };
 
-        this.setTableState(setCurrentPageToState(state, 1));
+        if (!equal(prevSortRules, state.sortBy)) {
+            this.setTableState(setCurrentPageToState(state, 1));
 
-        this.sortChange.emit({ current: state.sortBy, previous: prevSortRules });
+            this.sortChange.emit({ current: state.sortBy, previous: prevSortRules });
+        }
     }
 
     /** Set new sort rules */
@@ -101,9 +106,11 @@ export class TableService {
         const newFilterRules: CollectionFilter[] = [...filterRules];
         const state: TableState = { ...prevState, filterBy: newFilterRules };
 
-        this.setTableState(setCurrentPageToState(state, 1));
+        if (!equal(prevFilterRules, state.filterBy)) {
+            this.setTableState(setCurrentPageToState(state, 1));
 
-        this.filterChange.emit({ current: state.filterBy, previous: prevFilterRules });
+            this.filterChange.emit({ current: state.filterBy, previous: prevFilterRules });
+        }
     }
 
     /** Add filter rules to the existing ones */
@@ -118,9 +125,11 @@ export class TableService {
 
         const state: TableState = { ...prevState, filterBy: newFilterRules };
 
-        this.setTableState(setCurrentPageToState(state, 1));
+        if (!equal(prevFilterRules, state.filterBy)) {
+            this.setTableState(setCurrentPageToState(state, 1));
 
-        this.filterChange.emit({ current: state.filterBy, previous: prevFilterRules });
+            this.filterChange.emit({ current: state.filterBy, previous: prevFilterRules });
+        }
     }
 
     /** Set group rules */
@@ -131,9 +140,11 @@ export class TableService {
         const newGroups: CollectionGroup[] = [...groups];
         const state: TableState = { ...prevState, groupBy: newGroups };
 
-        this.setTableState(state);
+        if (!equal(prevGroups, state.groupBy)) {
+            this.setTableState(state);
 
-        this.groupChange.emit({ current: state.groupBy, previous: prevGroups });
+            this.groupChange.emit({ current: state.groupBy, previous: prevGroups });
+        }
     }
 
     /** Add group rules to the existing ones */
@@ -148,9 +159,11 @@ export class TableService {
 
         const state: TableState = { ...prevState, groupBy: newGroups };
 
-        this.setTableState(state);
+        if (!equal(prevGroups, state.groupBy)) {
+            this.setTableState(state);
 
-        this.groupChange.emit({ current: state.groupBy, previous: prevGroups });
+            this.groupChange.emit({ current: state.groupBy, previous: prevGroups });
+        }
     }
 
     /** Freeze table to column */
@@ -170,9 +183,11 @@ export class TableService {
         const newColumns = [...columns];
         const state: TableState = { ...prevState, columns: newColumns };
 
-        this.setTableState(state);
+        if (!equal(prevColumns, state.columns)) {
+            this.setTableState(state);
 
-        this.columnsChange.emit({ current: state.columns, previous: prevColumns });
+            this.columnsChange.emit({ current: state.columns, previous: prevColumns });
+        }
     }
 
     /** Set page */

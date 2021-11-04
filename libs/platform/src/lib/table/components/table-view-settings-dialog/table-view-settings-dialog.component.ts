@@ -225,7 +225,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
 
     /** @hidden */
     private _applyGrouping(field: string, direction: SortDirection): void {
-        this._table?.group(field ? [{ field: field, direction: direction, showAsColumn: false }] : []);
+        this._table?.group(field ? [{ field: field, direction: direction, showAsColumn: true }] : []);
     }
 
     /** @hidden */
