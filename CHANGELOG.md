@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.99 (2021-11-04)
+
+
+### Bug Fixes
+
+* **platform:** table bugs and improvements ([#7071](https://github.com/SAP/fundamental-ngx/issues/7071)) ([a65a9f5](https://github.com/SAP/fundamental-ngx/commit/a65a9f581d7b0b719dcc19b3cfb1cb96f2eecb04)), closes [#6080](https://github.com/SAP/fundamental-ngx/issues/6080) [#7005](https://github.com/SAP/fundamental-ngx/issues/7005) [#7008](https://github.com/SAP/fundamental-ngx/issues/7008) [#7002](https://github.com/SAP/fundamental-ngx/issues/7002) [#7011](https://github.com/SAP/fundamental-ngx/issues/7011) [#7022](https://github.com/SAP/fundamental-ngx/issues/7022)
+
 ## 0.33.0-rc.98 (2021-11-04)
 
 
