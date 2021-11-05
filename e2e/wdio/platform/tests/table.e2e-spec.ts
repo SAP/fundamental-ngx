@@ -445,7 +445,9 @@ describe('Table component test suite', function () {
             expect(rowLength).toEqual(1);
             const cellLength = getElementArrayLength(tableInitialStateExample + tableRowInitialState + tableCellText);
             for (let i = 0; i < cellLength; i++) {
-                expect(getText(tableInitialStateExample + tableRowInitialState + tableCellText, i)).toBe(tableCellArr3[i]);
+                expect(getText(tableInitialStateExample + tableRowInitialState + tableCellText, i)).toBe(
+                    tableCellArr3[i]
+                );
             }
         });
 
@@ -455,8 +457,9 @@ describe('Table component test suite', function () {
             click(tableInitialStateExample + tableCellInitialState, 1);
 
             expect(getAttributeByName(tableInitialStateExample + tableCellInitialState, 'aria-expanded')).toBe('false');
-            expect(getAttributeByName(tableInitialStateExample + tableCellInitialState, 'aria-expanded', 1))
-                .toBe('false');
+            expect(getAttributeByName(tableInitialStateExample + tableCellInitialState, 'aria-expanded', 1)).toBe(
+                'false'
+            );
         });
     });
 
