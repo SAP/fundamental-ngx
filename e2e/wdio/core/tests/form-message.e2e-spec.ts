@@ -5,6 +5,7 @@ import {
     getText,
     getValue,
     isElementClickable,
+    isElementDisplayed,
     mouseHoverElement,
     refreshPage,
     scrollIntoView,
@@ -70,6 +71,16 @@ describe('Form Message test suite:', () => {
         setValue(messageWithTextArea, testMultilineText);
         expect(getValue(messageWithTextArea)).toBe(testMultilineText);
         expect(getText(messageInformation)).toBe(eventMessageTextArea);
+    });
+
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6982
+    xit('should check that messaging by hover does not work in other way after clicking button', () => {
+        scrollIntoView(messageWithInputGroup, 2);
+        mouseHoverElement(messageWithInputGroup, 2);
+        expect(isElementDisplayed(messageInformation)).toBe(true);
+        click(buttons, 2);
+        mouseHoverElement(messageWithInputGroup, 2);
+        expect(isElementDisplayed(messageInformation)).toBe(true);
     });
 
     xdescribe('Check visual regression', () => {
