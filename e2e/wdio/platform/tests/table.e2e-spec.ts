@@ -131,7 +131,9 @@ describe('Table component test suite', function () {
         buttonActionOne,
         buttonActionTwo,
         ellipsisButton,
-        expandedOption
+        expandedOption,
+        tableRowInitialState,
+        tableCellInitialState
     } = tablePage;
 
     beforeAll(() => {
@@ -439,22 +441,25 @@ describe('Table component test suite', function () {
             scrollIntoView(tableInitialStateExample);
             setValue(tableInitialStateExample + input, testText3);
             click(tableInitialStateExample + buttonSearch);
-            const rowLength = getElementArrayLength(tableInitialStateExample + tableRow);
+            const rowLength = getElementArrayLength(tableInitialStateExample + tableRowInitialState);
             expect(rowLength).toEqual(1);
-            const cellLength = getElementArrayLength(tableInitialStateExample + tableRow + tableCellText);
+            const cellLength = getElementArrayLength(tableInitialStateExample + tableRowInitialState + tableCellText);
             for (let i = 0; i < cellLength; i++) {
-                expect(getText(tableInitialStateExample + tableRow + tableCellText, i)).toBe(tableCellArr3[i]);
+                expect(getText(tableInitialStateExample + tableRowInitialState + tableCellText, i)).toBe(
+                    tableCellArr3[i]
+                );
             }
         });
 
         it('should check cell expanded', () => {
             scrollIntoView(tableInitialStateExample);
-            click(tableInitialStateExample + tableCell);
-            click(tableInitialStateExample + tableCell, 1);
+            click(tableInitialStateExample + tableCellInitialState);
+            click(tableInitialStateExample + tableCellInitialState, 1);
 
-            expect(getAttributeByName(tableInitialStateExample + tableCell, 'aria-expanded')).toBe('false');
-            expect(getAttributeByName(tableInitialStateExample + tableCell, 'aria-expanded')).toBe('false');
-            expect(doesItExist(tableInitialStateExample + tableRow)).toBe(false, 'table row still displayed');
+            expect(getAttributeByName(tableInitialStateExample + tableCellInitialState, 'aria-expanded')).toBe('false');
+            expect(getAttributeByName(tableInitialStateExample + tableCellInitialState, 'aria-expanded', 1)).toBe(
+                'false'
+            );
         });
     });
 
