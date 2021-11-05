@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.110 (2021-11-05)
+
+
+### Bug Fixes
+
+* **platform:** table - resettable bugs ([#7064](https://github.com/SAP/fundamental-ngx/issues/7064)) ([cb09d7d](https://github.com/SAP/fundamental-ngx/commit/cb09d7d8b1482cf82770d553ca506427bde2b8d1))
+
 ## 0.33.0-rc.109 (2021-11-05)
 
 ## 0.33.0-rc.108 (2021-11-05)
