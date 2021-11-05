@@ -55,7 +55,7 @@
             fd-table-cell
             role="columnheader"
             class="fd-table__cell--fixed fdp-table__cell--selection"
-            aria-label="Select row"
+            attr.aria-label="Toggle selection for {{ _totalItems }} rows"
             i18n-aria-label="@@platformTableSelectRow"
             [focusable]="true"
             [fdp-table-cell-selectable]="_firstCellNavigationId"
@@ -68,7 +68,7 @@
                 labelClass="fd-table__checkbox-label"
                 [compact]="contentDensity !== CONTENT_DENSITY.COZY"
                 [ngModel]="_checkedAll"
-                aria-label="Toggle selection for all rows"
+                attr.aria-label="Toggle selection for {{ _totalItems }} rows"
                 i18n-aria-label="@@platformTableSelectAllRows"
                 (ngModelChange)="_toggleAllSelectableRows()"
             ></fd-checkbox>
@@ -325,6 +325,7 @@
                                         (keydown.space)="_toggleSelectableRow(row, $event)"
                                     >
                                         <fd-checkbox
+                                            attr.aria-label="Select row number {{ rowIdx + 1 }} of {{ _totalItems }}"
                                             [compact]="contentDensity !== CONTENT_DENSITY.COZY"
                                             labelClass="fd-table__checkbox-label"
                                             [ngModel]="row.checked"
