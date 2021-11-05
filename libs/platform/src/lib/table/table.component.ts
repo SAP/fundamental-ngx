@@ -33,10 +33,12 @@ import {
     ContentDensityService,
     FdDropEvent,
     KeyUtil,
+    resizeObservable,
     RtlService
 } from '@fundamental-ngx/core/utils';
 import { TableRowDirective } from '@fundamental-ngx/core/table';
 import { getNestedValue, isDataSource, isFunction, isString } from '@fundamental-ngx/platform/shared';
+import { PopoverComponent } from '@fundamental-ngx/core/popover';
 
 import { TableCellNavigationId, TableService } from './table.service';
 
@@ -346,12 +348,15 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     readonly verticalScrollable: TableScrollable;
 
     /** @hidden */
-    @ViewChild('tableContainer')
-    readonly tableContainer: ElementRef;
-
-    /** @hidden */
     @ViewChild('focusableMock')
     readonly focusableMock: ElementRef;
+
+    @ViewChildren('columnHeaderPopover')
+    readonly columnHeaderPopovers: QueryList<PopoverComponent>;
+
+    /** @hidden */
+    @ViewChild('tableContainer')
+    readonly tableContainer: ElementRef<HTMLDivElement>;
 
     /** @hidden */
     @ContentChildren(TableColumn)
@@ -477,7 +482,23 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      * @hidden
      * Indicates when all items are checked
      */
-    _checkedAll = false;
+    private _checkedAll = false;
+
+    /**
+     * @hidden
+     * Indicates whether at least 1 item is checked
+     */
+    private _checkedAny = false;
+
+    get checkedState(): boolean | null {
+        if (this._checkedAll) {
+            return true;
+        }
+        if (this._checkedAny) {
+            return null; // passing null for indeterminate state
+        }
+        return false;
+    }
 
     /**
      * @hidden
@@ -665,6 +686,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         this._listenToColumnsWidthChange();
 
         this._listenToFocus();
+
+        this._listenToTableWidthChanges();
 
         this._cdr.detectChanges();
     }
@@ -968,6 +991,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      */
     _columnHeaderGroupBy(field: string): void {
         this.group([{ field: field, direction: SortDirection.NONE, showAsColumn: true }]);
+        this._closePopoverForColumnByFieldName(field);
     }
 
     /**
@@ -983,6 +1007,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         };
 
         this.addFilter([collectionFilter]);
+        this._closePopoverForColumnByFieldName(field);
     }
 
     /**
@@ -991,18 +1016,22 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
      */
     _columnHeaderSortBy(field: string, direction: SortDirection): void {
         this.sort([{ field: field, direction: direction }]);
+        this._closePopoverForColumnByFieldName(field);
     }
 
     /** @hidden */
-    _getFixedTableStyles(): { [klass: string]: number } {
+    _getFixedTableStyles(): { [styleProp: string]: number } {
         const key = this._rtl ? 'padding-right.px' : 'padding-left.px';
         return { [key]: this._tablePadding };
     }
 
     /** @hidden */
-    _getSelectionCellStyles(): { [klass: string]: string } {
-        const key = this._rtl ? 'right' : 'left';
-        return { [key]: this._semanticHighlightingColumnWidth + 'px' };
+    _getSelectionCellStyles(parentRow: HTMLTableRowElement): { [styleProp: string]: string } {
+        const rtlKey = this._rtl ? 'right' : 'left';
+        return {
+            [rtlKey]: this._semanticHighlightingColumnWidth + 'px',
+            height: parentRow ? parentRow.getBoundingClientRect().height + 'px' : 'unset'
+        };
     }
 
     _getRowClasses(row: TableRow<T>): string {
@@ -1013,7 +1042,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     }
 
     /** @hidden */
-    _getCellStyles(column: TableColumn): { [klass: string]: number | string } {
+    _getCellStyles(column: TableColumn): { [styleProp: string]: number | string } {
         const styles: { [property: string]: number | string } = {};
 
         if (this._freezableColumns.includes(column.name)) {
@@ -1139,6 +1168,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         const colIdxAddition = this._isShownSelectionColumn && !groupRow ? 1 : 0;
 
         return `${rowIdx},${colIdx + colIdxAddition}` as TableCellNavigationId;
+    }
+
+    /** @hidden */
+    private _closePopoverForColumnByFieldName(field: string): void {
+        const index = this._visibleColumns.findIndex((c) => c.key === field);
+        if (index !== -1) {
+            this.columnHeaderPopovers.get(index)?.close();
+        }
     }
 
     /** @hidden */
@@ -1768,12 +1805,16 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
     /** @hidden */
     private _resetAllSelectedRows(): void {
         this._checkedAll = false;
+        this._checkedAny = false;
         this._getSelectableRows().forEach((r) => (r.checked = false));
     }
 
     /** @hidden */
     private _calculateCheckedAll(): void {
-        this._checkedAll = this._getSelectableRows().every(({ checked }) => checked);
+        const selectableRows = this._getSelectableRows();
+        const totalSelected = selectableRows.filter((r) => r.checked);
+        this._checkedAll = totalSelected.length === selectableRows.length;
+        this._checkedAny = totalSelected.length > 0;
     }
 
     /** @hidden */
@@ -1823,7 +1864,7 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
             this._dataSourceItemsSubject.next(items);
 
-            this._cdr.markForCheck();
+            this._cdr.detectChanges();
         });
 
         this._subscriptions.add(this._dsSubscription);
@@ -1950,6 +1991,15 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         );
     }
 
+    private _listenToTableWidthChanges(): void {
+        this._subscriptions.add(
+            resizeObservable(this.tableContainer.nativeElement)
+                .pipe(debounceTime(100))
+                .subscribe(() => this._cdr.detectChanges())
+        );
+    }
+
+    /** @hidden */
     private _isRowNavigatable(row: T, rowNavigatable: string | boolean): boolean {
         if (!row) {
             return false;

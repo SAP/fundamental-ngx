@@ -15,6 +15,7 @@
         [ariaDescribedBy]="ariaDescribedBy"
         [ngModel]="checkboxCurrentValue"
         (ngModelChange)="onModelChange()"
+        (focusChange)="_onFocusChanged($event)"
     >
         <ng-content></ng-content>
     </fd-checkbox>

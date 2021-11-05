@@ -215,15 +215,4 @@ jobs:
             - name: smoke e2e on saucelabs with firebase deployment
               env:
                   CAP_SLUG: ${{ matrix.browser }}
-              if: ${{ needs.firebase_preview.outputs.output_url }}
-              run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio-cron.conf.js --${{ matrix.suite }} --baseUrl=${{ needs.firebase_preview.outputs.output_url }}/fundamental-ngx
-
-            - name: smoke e2e on saucelabs without firebase
-              env:
-                  CAP_SLUG: ${{ matrix.browser }}
-              if: ${{ !needs.firebase_preview.outputs.output_url }}
-              run: |
-                  sudo echo "127.0.0.1 sap.dev" | sudo tee -a /etc/hosts
-                  npx ng serve --disable-host-check --ssl --no-watch --aot --prod &
-                  npx wait-on https://localhost:4200
-                  TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio-cron.conf.js --${{ matrix.suite }} --baseUrl="https://sap.dev:4200/"
+              run: TS_NODE_PROJECT=./e2e/tsconfig.json npx wdio wdio-cron.conf.js --${{ matrix.suite }} --baseUrl=https://fundamental-ngx-gh.web.app/fundamental-ngx

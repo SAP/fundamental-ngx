@@ -26,15 +26,15 @@ export function getCurrentMonth(withZero: boolean): string {
 export function getNextDay(withZero: boolean): string {
     if (withZero) {
         // need to check that day number is less than 10 to return with 0, cz not needed to return 010 e.g.
-        if (date.getDate() + 1 < 10) {
-            return '0' + (date.getDate() + 1).toString();
+        if (date.getDate() < 10) {
+            return '0' + date.getDate().toString();
         }
-        if (date.getDate() + 1 >= 10) {
-            return (date.getDate() + 1).toString();
+        if (date.getDate() >= 10) {
+            return date.getDate().toString();
         }
     }
     if (!withZero) {
-        return (date.getDate() + 1).toString();
+        return date.getDate().toString();
     }
 }
 

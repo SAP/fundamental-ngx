@@ -47,7 +47,7 @@
 
 <!-- Table Header Columns -->
 <ng-template #tableHeaderRowTemplate>
-    <tr fd-table-row role="row">
+    <tr fd-table-row role="row" #headerRow>
         <th *ngIf="semanticHighlighting" class="fd-table__cell--fixed" fd-table-cell fd-table-status-indicator></th>
 
         <th
@@ -60,6 +60,7 @@
             [focusable]="true"
             [fdp-table-cell-selectable]="_firstCellNavigationId"
             [class.fd-table__cell--checkbox]="selectionMode === SELECTION_MODE.MULTIPLE"
+            [style]="_getSelectionCellStyles(headerRow)"
             (keydown.enter)="_toggleAllSelectableRows()"
             (keydown.space)="_toggleAllSelectableRows($event)"
         >
@@ -67,10 +68,12 @@
                 *ngIf="selectionMode === SELECTION_MODE.MULTIPLE"
                 labelClass="fd-table__checkbox-label"
                 [compact]="contentDensity !== CONTENT_DENSITY.COZY"
-                [ngModel]="_checkedAll"
                 attr.aria-label="Toggle selection for {{ _totalItems }} rows"
                 i18n-aria-label="@@platformTableSelectAllRows"
-                (ngModelChange)="_toggleAllSelectableRows()"
+                [tristate]="true"
+                [tristateSelectable]="false"
+                [ngModel]="checkedState"
+                (ngModelChange)="_toggleAllSelectableRows($event)"
             ></fd-checkbox>
         </th>
 
@@ -88,7 +91,7 @@
                 [class.fd-table__cell--fixed-last]="column.name === freezeColumnsTo"
                 [ngStyle]="_getCellStyles(column)"
                 [fdPopoverTrigger]="columnHeaderPopover"
-                [class.fdp-table__item--clickable]="_isColumnHasHeaderMenu(column)"
+                [class.fd-table__item--clickable]="_isColumnHasHeaderMenu(column)"
                 [style.text-align]="column.align"
                 [fdPopoverTrigger]="columnHeaderPopover"
             >
@@ -122,7 +125,7 @@
                         <!-- Sorting -->
                         <ng-container *ngIf="column.sortable">
                             <li
-                                class="fdp-table__item--clickable"
+                                class="fd-table__item--clickable"
                                 fd-list-item
                                 (click)="_columnHeaderSortBy(column.key, SORT_DIRECTION.ASC)"
                                 (keyup.enter)="_columnHeaderSortBy(column.key, SORT_DIRECTION.ASC)"
@@ -131,7 +134,7 @@
                                 <span fd-list-title i18n="@@platformTableHeaderMenuSortAsc">Sort Ascending</span>
                             </li>
                             <li
-                                class="fdp-table__item--clickable"
+                                class="fd-table__item--clickable"
                                 fd-list-item
                                 (click)="_columnHeaderSortBy(column.key, SORT_DIRECTION.DESC)"
                                 (keyup.enter)="_columnHeaderSortBy(column.key, SORT_DIRECTION.DESC)"
@@ -144,7 +147,7 @@
                         <!-- Grouping -->
                         <ng-container *ngIf="column.groupable">
                             <li
-                                class="fdp-table__item--clickable"
+                                class="fd-table__item--clickable"
                                 fd-list-item
                                 (click)="_columnHeaderGroupBy(column.key)"
                                 (keyup.enter)="_columnHeaderGroupBy(column.key)"
@@ -158,7 +161,7 @@
                         <ng-container *ngIf="column.freezable">
                             <li
                                 *ngIf="!_freezableColumns?.includes(column.name)"
-                                class="fdp-table__item--clickable"
+                                class="fd-table__item--clickable"
                                 fd-list-item
                                 (click)="freezeToColumn(column.name)"
                                 (keyup.enter)="freezeToColumn(column.name)"
@@ -168,7 +171,7 @@
                             </li>
                             <li
                                 *ngIf="_freezableColumns?.includes(column.name)"
-                                class="fdp-table__item--clickable"
+                                class="fd-table__item--clickable"
                                 fd-list-item
                                 (click)="unfreeze(column.name)"
                                 (keyup.enter)="unfreeze(column.name)"
@@ -203,7 +206,10 @@
             </th>
         </ng-container>
 
-        <th *ngIf="_isShownNavigationColumn" fd-table-cell role="columnheader"></th>
+        <th *ngIf="_isShownNavigationColumn" fd-table-cell role="columnheader">
+            <!-- Instead of setting the width, let's have an invisible icon so if it's change its width everything still will be okay. -->
+            <i fd-table-icon [navigation]="true" class="fdp-table__navigation-indicator sap-icon--slim-arrow-left"></i>
+        </th>
 
         <th class="fd-table__cell--mock"></th>
     </tr>
@@ -273,10 +279,13 @@
                             *ngSwitchDefault
                             fd-table-row
                             fd-dnd-item
+                            #tableRow
                             role="row"
+                            [applyDragItemClass]="_rowsDraggable"
                             [class]="_getRowClasses(row)"
                             [tabindex]="rowsActivable || !!row.navigatable ? 0 : -1"
-                            [hoverable]="_isShownSelectionColumn || !!row.navigatable"
+                            [focusable]="rowsActivable || !!row.navigatable"
+                            [hoverable]="rowsActivable || _isShownSelectionColumn || !!row.navigatable"
                             [activable]="rowsActivable || !!row.navigatable"
                             [navigatable]="row.navigatable || rowsActivable"
                             [attr.aria-selected]="row.checked"
@@ -302,8 +311,8 @@
                                         tabindex="0"
                                         role="rowheader"
                                         fd-table-cell
-                                        fdp-table-cell-selectable
-                                        [style]="_getSelectionCellStyles()"
+                                        fd-table-cell-selectable
+                                        [style]="_getSelectionCellStyles(tableRow)"
                                         [focusable]="true"
                                         [attr.aria-selected]="row.checked"
                                         (click)="_toggleSelectableRow(row)"
@@ -317,7 +326,7 @@
                                         class="fd-table__cell--fixed fd-table__cell--checkbox"
                                         role="gridcell"
                                         fd-table-cell
-                                        [style]="_getSelectionCellStyles()"
+                                        [style]="_getSelectionCellStyles(tableRow)"
                                         [focusable]="true"
                                         [class.fd-table__cell--checkbox]="selectionMode === SELECTION_MODE.MULTIPLE"
                                         (click)="_toggleSelectableRow(row)"

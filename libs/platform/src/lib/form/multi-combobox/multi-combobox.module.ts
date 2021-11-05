@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { OverlayModule } from '@angular/cdk/overlay';
 
 import { ButtonModule } from '@fundamental-ngx/core/button';
 import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
@@ -27,7 +26,6 @@ import { MultiComboboxHighlightPipe } from './pipes/highlight.pipe';
         ListModule,
         ButtonModule,
         FormModule,
-        OverlayModule,
         PopoverModule,
         PlatformListModule,
         StandardListItemModule,

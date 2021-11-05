@@ -16,14 +16,14 @@
 <fdp-table-view-settings-dialog [table]="table">
     <fdp-table-view-settings-filter column="price" label="Price" type="custom">
         <ng-container *fdpViewSettingsFilterCustomDef="let model">
-            <fd-layout-panel>
-                <fd-layout-panel-body>
-                    <label>Minimum Price:</label>
+            <fdp-form-group #fg1 columnLayout="XL1-L1-M1-S1" labelLayout="vertical">
+                <fdp-form-field label="Minimum Price">
                     <fdp-input type="number" name="min" [(ngModel)]="model.min"></fdp-input>
-                    <label>Maximum Price:</label>
+                </fdp-form-field>
+                <fdp-form-field label="Maximum Price">
                     <fdp-input type="number" name="max" [(ngModel)]="model.max"></fdp-input>
-                </fd-layout-panel-body>
-            </fd-layout-panel>
+                </fdp-form-field>
+            </fdp-form-group>
         </ng-container>
     </fdp-table-view-settings-filter>
 
