@@ -168,7 +168,8 @@ exports.config = {
             './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
             './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',
             './e2e/wdio/platform/**/table.e2e-spec.ts',
-            './e2e/wdio/platform/**/time-picker.e2e-spec.ts'
+            './e2e/wdio/platform/**/time-picker.e2e-spec.ts',
+            './e2e/wdio/platform/**/wizard-generator.e2e-spec.ts'
         ]
     },
     // ============
