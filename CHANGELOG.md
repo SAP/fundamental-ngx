@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.103 (2021-11-05)
+
+
+### Bug Fixes
+
+* **platform:** step-input, add state message ([#7042](https://github.com/SAP/fundamental-ngx/issues/7042)) ([1f0f14e](https://github.com/SAP/fundamental-ngx/commit/1f0f14e8ec034512d4f64c31cb6332eec3f7096f))
+
 ## 0.33.0-rc.102 (2021-11-04)
 
 
