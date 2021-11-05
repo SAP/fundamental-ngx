@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.105 (2021-11-05)
+
+
+### Bug Fixes
+
+* **platform:** table data source change ([#7107](https://github.com/SAP/fundamental-ngx/issues/7107)) ([949c3ba](https://github.com/SAP/fundamental-ngx/commit/949c3ba785c8bb394a0ac90252a185d9e39b9583))
+
 ## 0.33.0-rc.104 (2021-11-05)
 
 ## 0.33.0-rc.103 (2021-11-05)
