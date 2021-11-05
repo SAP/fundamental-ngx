@@ -19,7 +19,7 @@ export class DateTimePicker extends CoreBaseComponentPo {
     buttonSelectYearsRange = '.fd-calendar__action:nth-child(2) .fd-button';
     okButton = 'button[fdtype="emphasized"]';
     cancelButton = 'button[label="Cancel"]';
-    buttonFirstRangeYear = '(//td[contains(@id,"fd-aggregated-year")]/child::span)[1]';
+    buttonFirstRangeYear = '(//td[contains(@id,"-view-aggregated-years")]/child::span)[1]';
     buttonFirstYear = '(//td[contains(@id,"year")]/child::span)[1]';
     buttonFirstMonth = '(//td[contains(@id,"month")]/child::span)[1]';
     selectedHours = '(//div[contains(@class, "fd-time__wrapper")]//li[contains(@class, "fd-time__item")])[12]';
@@ -31,6 +31,7 @@ export class DateTimePicker extends CoreBaseComponentPo {
     optionButton = 'div.fd-select__control';
     countryOption = 'ul.fd-select-options';
     calendarItem = '.fd-calendar__table td.fd-calendar__item';
+    buttonText = ' .fd-button__text';
 
     filterCalendarValue = (name: string): string => {
         return `[id*="${name}"]`;
@@ -41,11 +42,11 @@ export class DateTimePicker extends CoreBaseComponentPo {
     };
 
     dayInCalendarButtonByValue = (index: string): string => {
-        return `//span[contains(.,"${index}")]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
+        return `//span[contains(@id,"day-${index}-")]/ancestor::td[not (contains(@class, 'fd-calendar__item--other-month'))]`;
     };
 
     yearInCalendarByValue = (year: number): string => {
-        return `[aria-label="${year}"]`;
+        return `[data-fd-calendar-year="${year}"]`;
     };
 
     getScreenshotFolder(): object {

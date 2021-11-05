@@ -4,10 +4,8 @@ import {
     doesItExist,
     getElementArrayLength,
     getText,
-    getTextArr,
     isElementClickable,
     isElementDisplayed,
-    pause,
     refreshPage,
     selectOptionByValueAttribute,
     sendKeys,
@@ -17,7 +15,8 @@ import {
     waitForNotDisplayed,
     waitForElDisplayed,
     waitForNotPresent,
-    waitForPresent
+    waitForPresent,
+    scrollIntoView
 } from '../../driver/wdio';
 import { ApprovalFlowPo } from '../pages/approval-flow.po';
 import {
@@ -28,8 +27,21 @@ import {
     node_statuses,
     rejected_node_status,
     remainder_text,
-    watchers_block_title
+    watchers_block_title,
+    nodeOptionsArr,
+    dueDateMessage
 } from '../fixtures/appData/approval-flow-contents';
+import {
+    editModeOption,
+    dueDateWarningsOption,
+    setStatusOption,
+    disableAllNodesOption,
+    disableAddingBeforeOption,
+    disableAddingAfterOption,
+    disableAddingParallelOption,
+    disableEditingOption,
+    disableRemovingOption
+} from '../fixtures/testData/approval-flow';
 
 describe('Approval flow', () => {
     const approvalFlowPage = new ApprovalFlowPo();
@@ -71,7 +83,24 @@ describe('Approval flow', () => {
         topActionButtons,
         approvalFlowNodeActionMenu,
         approvalFlowNodeActionMenuItem,
-        approvalFlowNodeCheckboxAlt
+        approvalFlowNodeCheckboxAlt,
+        optionInput,
+        toolbarButtons,
+        reminderOptionsButton,
+        reminderOptionsList,
+        selectedOptions,
+        approvedNode,
+        inProgressNode,
+        rejectedNode,
+        notStartedNode,
+        addApproverOptions,
+        approverOptionListItem,
+        radioButton,
+        footerButtons,
+        nodeCardInfo,
+        dialogCheckbox,
+        reminderToaster,
+        dueDateNode
     } = approvalFlowPage;
 
     beforeAll(() => {
@@ -106,8 +135,10 @@ describe('Approval flow', () => {
         expect(doesItExist(detailsDialog)).toBe(false);
     });
 
-    // TODO: Can't switch examples programmatically. Needs further investigation.
-    xit('should be able to switch example', () => {
+    it('should be able to switch example', () => {
+        selectOptionByValueAttribute(selectExample, 'empty');
+        expect(getElementArrayLength(approvalFlowNode)).toEqual(0);
+
         selectOptionByValueAttribute(selectExample, 'simple');
         expect(getElementArrayLength(approvalFlowNode)).toEqual(3);
 
@@ -142,7 +173,7 @@ describe('Approval flow', () => {
             waitForElDisplayed(detailsDialog);
 
             if (doesItExist(detailsDialogSearchInput)) {
-                // Check each teem member details dialog
+                // Check each team member details dialog
                 const teamMemberCount = getElementArrayLength(detailsDialogTeamMember);
                 for (let j = 0; teamMemberCount > j; j++) {
                     click(detailsDialogTeamMember, j);
@@ -158,33 +189,22 @@ describe('Approval flow', () => {
         }
     });
 
-    it('should be able send remainder to approved and rejected', () => {
+    it('should be able send remainder to all statuses', () => {
+        scrollIntoView(remaindersSendToInput);
         click(remaindersSendToInput);
         sendKeys(approved_node_status);
         waitForElDisplayed(selectItem);
         click(selectItem);
         sendKeys(rejected_node_status);
+        waitForElDisplayed(selectItem);
         click(selectItem);
 
-        const arrLength = getElementArrayLength(approvalFlowNode);
-        for (let i = 0; arrLength > i; i++) {
-            while (!isElementClickable(approvalFlowNode, i)) {
-                click(flowNavigationArrow);
-            }
-            const approvalNodeText = getText(approvalFlowNodeName, i);
-            if (approvalNodeText.includes('members')) {
-                continue;
-            }
-            waitElementToBeClickable(approvalFlowNode, i);
-            click(approvalFlowNode, i);
-            waitElementToBeClickable(detailsDialogSendReminderBtn);
-            click(detailsDialogSendReminderBtn);
-            waitForElDisappear(detailsDialog);
+        enterEditMode();
 
-            expect(isElementDisplayed(toastMessageDialog)).toBe(true);
-            expect(getTextArr(toastMessageDialog)).toContain(remainder_text + approvalNodeText);
-            waitForNotPresent(toastMessageDialog);
-        }
+        checkSendReminder(approvedNode);
+        checkSendReminder(rejectedNode);
+        checkSendReminder(inProgressNode);
+        checkSendReminder(notStartedNode);
     });
 
     it('should be able to search users', () => {
@@ -228,12 +248,12 @@ describe('Approval flow', () => {
             expect(watchersCountBefore).toBe(watchersCountAfter + 1);
         });
 
-        xit('should be able to add node in parallel', () => {
+        it('should be able to add node in parallel', () => {
             const approvalFlowNodeCountBefore = getElementArrayLength(approvalFlowNode);
 
             click(editExampleButton);
             waitForElDisplayed(addNode);
-            click(addNode);
+            click(addNode, 1);
             click(detailsDialogParallelSerialSelect);
             click(detailsDialogParallelSerialSelectOption);
             click(detailsDialogUserTeamButton);
@@ -244,7 +264,6 @@ describe('Approval flow', () => {
             click(detailsDialogSendReminderBtn);
             click(bottomMenuItems);
             const approvalFlowNodeCountAfter = getElementArrayLength(approvalFlowNode);
-            // some thing I need to debug later
             expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfter - 1);
         });
 
@@ -305,6 +324,36 @@ describe('Approval flow', () => {
             expect(approvalFlowNodeCountBefore).toBe(approvalFlowNodeCountAfterAdd - 1);
         });
 
+        it('should add the whole team as reviewer', () => {
+            enterEditMode();
+            click(addNode, 1);
+            waitForElDisplayed(detailsDialog);
+            click(addApproverOptions, 1);
+            waitForElDisplayed(approverOptionListItem);
+            click(approverOptionListItem, 2);
+            click(detailsDialogUserTeamButton);
+            click(radioButton);
+            click(footerButtons);
+            click(footerButtons);
+
+            expect(getText(nodeCardInfo, 4)).toContain('4 members\n' + 'Accounting team');
+        });
+
+        it('should add anyone from team as reviewer', () => {
+            enterEditMode();
+            click(addNode, 1);
+            waitForElDisplayed(detailsDialog);
+            click(addApproverOptions, 1);
+            waitForElDisplayed(approverOptionListItem);
+            click(approverOptionListItem, 1);
+            click(detailsDialogUserTeamButton);
+            click(radioButton);
+            click(footerButtons);
+            click(footerButtons);
+
+            expect(getText(nodeCardInfo, 4)).toContain('4 members\n' + 'Accounting team');
+        });
+
         it('should be able to remove node by button', () => {
             waitForElDisplayed(approvalFlowNode);
             const approvalFlowNodeCountBefore = getElementArrayLength(approvalFlowNode);
@@ -335,6 +384,38 @@ describe('Approval flow', () => {
             const approvalFlowNodeCountAfterRemove = getElementArrayLength(approvalFlowNode);
 
             expect(approvalFlowNodeCountBefore).toEqual(approvalFlowNodeCountAfterRemove + 1);
+        });
+
+        it('should add node before', () => {
+            const startingNodeCount = getElementArrayLength(nodeCardInfo);
+            enterEditMode();
+            click(approvalFlowNodeActionMenu, 4);
+            waitForElDisplayed(approvalFlowNodeActionMenuItem);
+            click(approvalFlowNodeActionMenuItem);
+            waitForElDisplayed(detailsDialog);
+            click(detailsDialogUserTeamButton);
+            waitForElDisplayed(dialogCheckbox);
+            click(dialogCheckbox);
+            click(footerButtons);
+            click(footerButtons);
+
+            expect(getElementArrayLength(nodeCardInfo)).toEqual(startingNodeCount + 1);
+        });
+
+        it('should add node after', () => {
+            const startingNodeCount = getElementArrayLength(nodeCardInfo);
+            enterEditMode();
+            click(approvalFlowNodeActionMenu, 4);
+            waitForElDisplayed(approvalFlowNodeActionMenuItem);
+            click(approvalFlowNodeActionMenuItem, 1);
+            waitForElDisplayed(detailsDialog);
+            click(detailsDialogUserTeamButton);
+            waitForElDisplayed(dialogCheckbox);
+            click(dialogCheckbox);
+            click(footerButtons);
+            click(footerButtons);
+
+            expect(getElementArrayLength(nodeCardInfo)).toEqual(startingNodeCount + 1);
         });
 
         // skip due to found issue https://github.com/SAP/fundamental-ngx/issues/6903
@@ -419,11 +500,109 @@ describe('Approval flow', () => {
                 );
             }
         });
+    });
 
-        describe('check example orientation', () => {
-            it('should check RTL orientation', () => {
-                approvalFlowPage.checkRtlSwitch();
-            });
+    describe('custom options', () => {
+        it('should check all statuses changed to not started', () => {
+            markOption(setStatusOption);
+            const nodeCardCount = getElementArrayLength(nodeCardInfo);
+
+            for (let i = 0; i < nodeCardCount; i++) {
+                expect(getText(nodeCardInfo, i)).toContain('not started');
+            }
+        });
+
+        it('check all node actions disabled', () => {
+            markOption(disableAllNodesOption);
+            enterEditMode();
+
+            expect(doesItExist(approvalFlowNodeActionMenu)).toBe(
+                false,
+                'menu button displayed when no options/actions available'
+            );
+            // skip due to issue https://github.com/SAP/fundamental-ngx/issues/6995
+            // expect(doesItExist(approvalFlowNodeCheckbox)).toBe(false, 'checkbox displayed when no options/actions available');
+        });
+
+        it('check disable adding before', () => {
+            markOption(disableAddingBeforeOption);
+            enterEditMode();
+
+            checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[0], 4);
+            checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[0], 4);
+        });
+
+        it('check disable adding after', () => {
+            markOption(disableAddingAfterOption);
+            enterEditMode();
+
+            checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[1], 4);
+            checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[1], 4);
+        });
+
+        it('check disable adding parallel', () => {
+            markOption(disableAddingParallelOption);
+            enterEditMode();
+
+            checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[2], 4);
+            checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[2], 4);
+        });
+
+        it('check disable editing', () => {
+            markOption(disableEditingOption);
+            enterEditMode();
+
+            checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[3], 4);
+            checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[3], 4);
+        });
+
+        it('check disable remove', () => {
+            markOption(disableRemovingOption);
+            enterEditMode();
+
+            checkMenuForDisabledOption(approvalFlowNodeActionMenu, nodeOptionsArr[4], 4);
+            checkToolbarForDisabledOption(approvalFlowNodeCheckbox, nodeOptionsArr[4], 4);
+        });
+
+        it('check disabling edit mode', () => {
+            markOption(editModeOption);
+
+            expect(doesItExist(editExampleButton)).toBe(false, 'edit button still present');
+        });
+
+        it('should check send reminders disabled', () => {
+            scrollIntoView(reminderOptionsButton);
+            click(reminderOptionsButton);
+            waitForElDisplayed(reminderOptionsList);
+            const listItemCount = getElementArrayLength(selectedOptions);
+
+            // deselects all send reminder options
+            for (let i = 0; i < listItemCount; i++) {
+                scrollIntoView(reminderOptionsList);
+                click(selectedOptions);
+                click(reminderOptionsButton);
+                waitForElDisplayed(reminderOptionsList);
+            }
+
+            enterEditMode();
+
+            checkReminderDisabled(approvedNode);
+            checkReminderDisabled(rejectedNode);
+            checkReminderDisabled(notStartedNode);
+            checkReminderDisabled(inProgressNode);
+        });
+
+        it('should check due date node', () => {
+            markOption(dueDateWarningsOption);
+
+            expect(waitForPresent(dueDateNode)).toBe(true, 'due date not shown');
+            expect(getText(dueDateNode)).toContain(dueDateMessage);
+        });
+    });
+
+    describe('check example orientation', () => {
+        it('should check RTL orientation', () => {
+            approvalFlowPage.checkRtlSwitch();
         });
     });
 
@@ -447,5 +626,53 @@ describe('Approval flow', () => {
         expect(isElementDisplayed(detailsDialogAvatar)).toBe(true);
         expect(getText(detailsDialogCancelBtn)).toBe(details_dialog_cancel_btn);
         expect(getText(detailsDialogHeader)).toBe(details_dialog_header);
+    }
+
+    function markOption(option: number): void {
+        scrollIntoView(optionInput, option);
+        click(optionInput, option);
+    }
+
+    function enterEditMode(): void {
+        scrollIntoView(editExampleButton);
+        click(editExampleButton);
+        waitForNotDisplayed(editExampleButton);
+    }
+
+    function checkMenuForDisabledOption(selector: string, disabledOption: any, selectorIndex: number): void {
+        click(selector, selectorIndex);
+        const menuItemLength = getElementArrayLength(approvalFlowNodeActionMenuItem);
+
+        for (let i = 0; i < menuItemLength; i++) {
+            expect(getText(approvalFlowNodeActionMenuItem, i)).not.toBe(disabledOption);
+        }
+    }
+
+    function checkToolbarForDisabledOption(selector: string, disabledOption: any, selectorIndex: number): void {
+        click(selector, selectorIndex);
+        const menuItemLength = getElementArrayLength(toolbarButtons);
+
+        for (let i = 0; i < menuItemLength; i++) {
+            expect(getText(toolbarButtons, i)).not.toBe(disabledOption);
+        }
+    }
+
+    function checkReminderDisabled(nodeSelection: string): void {
+        click(nodeSelection);
+        waitForElDisplayed(detailsDialog);
+        expect(isElementClickable(detailsDialogSendReminderBtn)).toBe(false, 'reminder button is enabled');
+        click(detailsDialogCancelBtn);
+    }
+
+    function checkSendReminder(nodeSelection: string): void {
+        click(nodeSelection);
+        waitForElDisplayed(detailsDialog);
+        if (doesItExist(dialogCheckbox)) {
+            click(dialogCheckbox);
+        }
+        click(detailsDialogSendReminderBtn);
+        expect(waitForElDisplayed(reminderToaster)).toBe(true, 'toast message not displayed');
+        expect(getText(reminderToaster)).toContain(remainder_text);
+        waitForNotPresent(reminderToaster);
     }
 });

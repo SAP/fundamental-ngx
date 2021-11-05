@@ -7,6 +7,7 @@ import { CheckboxModule } from '@fundamental-ngx/core/checkbox';
 import { FormModule } from '@fundamental-ngx/core/form';
 import { CheckboxComponent } from './checkbox.component';
 import { FdpFormGroupModule } from './../form-group/fdp-form.module';
+import { runValueAccessorTests } from 'ngx-cva-test-suite';
 
 @Component({
     selector: 'fdp-test-checkbox',
@@ -567,4 +568,24 @@ describe('Checkbox test Component with Template driven form', () => {
         expect(host.example4).toBeTruthy();
         expect(checkboxes[5].checkboxCurrentValue).toEqual(true);
     });
+});
+
+const CHECKBOX_IDENTIFIER = 'platform-checkbox-unit-test';
+
+runValueAccessorTests({
+    component: CheckboxComponent,
+    testModuleMetadata: {
+        imports: [CheckboxModule]
+    },
+    additionalSetup: (fixture, done) => {
+        fixture.componentInstance.id = CHECKBOX_IDENTIFIER;
+        done();
+    },
+    supportsOnBlur: true,
+    nativeControlSelector: `input[type="checkbox"][id="${CHECKBOX_IDENTIFIER}"]`,
+    internalValueChangeSetter: (fixture, value) => {
+        fixture.componentInstance.value = value;
+    },
+    getComponentValue: (fixture) => fixture.componentInstance.value,
+    getValues: () => [true, false, true]
 });

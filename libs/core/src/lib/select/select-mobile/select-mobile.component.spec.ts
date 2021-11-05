@@ -57,7 +57,7 @@ describe('SelectComponent in mobile mode', () => {
     }
 
     it('should create', async () => {
-        setup();
+        await setup();
         expect(testComponent).toBeTruthy();
 
         await whenStable(fixture);
@@ -66,14 +66,14 @@ describe('SelectComponent in mobile mode', () => {
     });
 
     it('should start closed', async () => {
-        setup();
+        await setup();
         await whenStable(fixture);
 
         expect(fixture.nativeElement.querySelector('.fd-dialog--active')).toBeFalsy();
     });
 
     it('should open', async () => {
-        setup();
+        await setup();
         await whenStable(fixture);
 
         testComponent.selectComponent.open();
@@ -86,7 +86,7 @@ describe('SelectComponent in mobile mode', () => {
     });
 
     it('should close', async () => {
-        setup();
+        await setup();
         await whenStable(fixture);
 
         testComponent.selectComponent.open();
@@ -101,7 +101,7 @@ describe('SelectComponent in mobile mode', () => {
     });
 
     it('should open on click', async () => {
-        setup();
+        await setup();
         await whenStable(fixture);
 
         fixture.nativeElement.querySelector('.fd-select__control').click();
@@ -112,7 +112,7 @@ describe('SelectComponent in mobile mode', () => {
     });
 
     it('should close on click while open', async () => {
-        setup();
+        await setup();
         await whenStable(fixture);
 
         fixture.nativeElement.querySelector('.fd-select__control').click();
@@ -128,7 +128,7 @@ describe('SelectComponent in mobile mode', () => {
     });
 
     it('should select an option', async () => {
-        setup();
+        await setup();
         await whenStable(fixture);
 
         testComponent.selectComponent.open();
@@ -143,7 +143,7 @@ describe('SelectComponent in mobile mode', () => {
     });
 
     it('should properly render with empty MobileConfig', async () => {
-        setup({});
+        await setup({});
 
         await whenStable(fixture);
 
@@ -159,7 +159,7 @@ describe('SelectComponent in mobile mode', () => {
     });
 
     it('should emit value on submit', async () => {
-        setup({ approveButtonText: 'SUBMIT', hasCloseButton: true });
+        await setup({ approveButtonText: 'SUBMIT', hasCloseButton: true });
 
         await whenStable(fixture);
 
@@ -178,7 +178,7 @@ describe('SelectComponent in mobile mode', () => {
     });
 
     it('should emit value on cancel', async () => {
-        setup({ approveButtonText: 'SUBMIT', hasCloseButton: true });
+        await setup({ approveButtonText: 'SUBMIT', hasCloseButton: true });
         await whenStable(fixture);
 
         spyOn(testComponent.selectComponent.isOpenChange, 'emit').and.callThrough();

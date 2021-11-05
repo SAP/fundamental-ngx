@@ -139,10 +139,12 @@ export class MenuItemComponent implements DefaultMenuItem, OnChanges, AfterConte
     }
 
     /** @hidden Sets menu item as selected/unselected based on isSelected flag */
-    setSelected(isSelected: boolean): void {
+    setSelected(isSelected: boolean, fromSplit?: boolean): void {
         this.menuInteractive.setSelected(isSelected);
         this.submenuVisible = isSelected && !!this.submenu;
-        this.onSelect.emit();
+        if (!fromSplit) {
+            this.onSelect.emit();
+        }
         this._changeDetectorRef.markForCheck();
     }
 

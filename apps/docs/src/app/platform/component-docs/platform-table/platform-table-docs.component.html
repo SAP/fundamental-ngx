@@ -206,29 +206,27 @@
 
 <separator></separator>
 
-<div style="display: none">
-    <fd-docs-section-title id="tree" componentName="table"> Tree Table </fd-docs-section-title>
-    <description>
-        This example shows tree table usage. To setup tree table use next properties:
+<fd-docs-section-title id="tree" componentName="table"> Tree Table </fd-docs-section-title>
+<description>
+    This example shows tree table usage. To setup tree table use next properties:
 
-        <ul>
-            <li><code>[isTreeTable]</code> Whether tree mode enabled or no.</li>
-            <li><code>[relationKey]</code> Name of the field in the object which contains children nodes.</li>
-        </ul>
+    <ul>
+        <li><code>[isTreeTable]</code> Whether tree mode enabled or no.</li>
+        <li><code>[relationKey]</code> Name of the field in the object which contains children nodes.</li>
+    </ul>
 
-        <h3>Drag & Drop</h3>
+    <h3>Drag & Drop</h3>
 
-        Tree table supports Drag & Drop by default, so rows can be moved & placed inside other rows. Please consider
-        that Drag & Drop isn't possible yet with <code>[sortable]</code>, <code>[groupable]</code>,
-        <code>[filterable]</code> columns and <code>[freezeColumnsTo]</code> enabled.
-    </description>
-    <component-example>
-        <fdp-platform-table-tree-example></fdp-platform-table-tree-example>
-    </component-example>
-    <code-example [exampleFiles]="treeTableFiles"></code-example>
+    Tree table supports Drag & Drop by default, so rows can be moved & placed inside other rows. Please consider that
+    Drag & Drop isn't possible yet with <code>[sortable]</code>, <code>[groupable]</code>,
+    <code>[filterable]</code> columns and <code>[freezeColumnsTo]</code> enabled.
+</description>
+<component-example>
+    <fdp-platform-table-tree-example></fdp-platform-table-tree-example>
+</component-example>
+<code-example [exampleFiles]="treeTableFiles"></code-example>
 
-    <separator></separator>
-</div>
+<separator></separator>
 
 <fd-docs-section-title id="p13" componentName="table"> Personalization Dialog. </fd-docs-section-title>
 <description>
@@ -395,6 +393,22 @@
 </component-example>
 
 <code-example [exampleFiles]="rowClassTableFiles"></code-example>
+
+<separator></separator>
+
+<fd-docs-section-title id="text-wrap" componentName="table">Wrapping text in columns</fd-docs-section-title>
+<description>
+    <p>This example demonstrates ability to disable wrapping column text into multiple lines.</p>
+    <p>
+        Pass (<code>[noWrap]="true"</code>) input property to the column definition in order to make text inside it not
+        to wrap.
+    </p>
+</description>
+<component-example>
+    <fdp-platform-table-wrap-example></fdp-platform-table-wrap-example>
+</component-example>
+
+<code-example [exampleFiles]="textWrapFiles"></code-example>
 
 <separator></separator>
 

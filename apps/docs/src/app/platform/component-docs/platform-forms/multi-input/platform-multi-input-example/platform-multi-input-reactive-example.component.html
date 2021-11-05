@@ -2,7 +2,7 @@
     <fdp-form-group [formGroup]="customForm">
         <fdp-form-field
             label="Default Multi Input Field"
-            id="input-simple"
+            id="fdp-id-reactive"
             rank="1"
             placeholder="Field placeholder text"
             required="true"
@@ -16,14 +16,21 @@
                 [dataSource]="_datasource"
                 displayKey="state"
                 selectionMode="Multi"
-                [status]="hasError() ? 'error' : 'success'"
             >
             </fdp-multi-input>
         </fdp-form-field>
         <ng-template #i18n let-errors>
-            <span *ngIf="errors?.required"> Value is required </span>
+            <span *ngIf="errors.required"> Value is required </span>
         </ng-template>
     </fdp-form-group>
-    <p>Form Selected Item: {{ itemField.value | json }}</p>
+    <p>Form Selected Item: {{ customForm.value | json }}</p>
+    <p>Form state: {{ customForm.status }}</p>
     <fdp-button contentDensity="compact" type="submit" style="margin-left: 2rem" label="Submit"></fdp-button>
+    <fdp-button
+        contentDensity="compact"
+        type="button"
+        style="margin-left: 2rem"
+        label="Reset"
+        (click)="reset()"
+    ></fdp-button>
 </form>

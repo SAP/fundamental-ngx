@@ -122,7 +122,7 @@ exports.config = {
     //
     specs: ['./e2e/wdio/**/*.e2e-spec.ts'],
     // Patterns to exclude.
-    exclude: ['./e2e/wdio/core/**/date-picker.e2e-spec.ts'],
+    exclude: [],
     suites: {
         platformA: [
             './e2e/wdio/platform/**/action-bar.e2e-spec.ts',
@@ -139,6 +139,7 @@ exports.config = {
             './e2e/wdio/platform/**/file-uploader.e2e-spec.ts',
             './e2e/wdio/platform/**/form-container.e2e-spec.ts',
             './e2e/wdio/platform/**/form-generator.e2e-spec.ts',
+            './e2e/wdio/platform/**/icon-tab-bar.e2e-spec.ts',
             './e2e/wdio/platform/**/info-label.e2e-spec.ts',
             './e2e/wdio/platform/**/input.e2e-spec.ts',
             './e2e/wdio/platform/**/input-group.e2e-spec.ts',
@@ -166,6 +167,7 @@ exports.config = {
             './e2e/wdio/platform/**/textarea.e2e-spec.ts',
             './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
             './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',
+            './e2e/wdio/platform/**/table.e2e-spec.ts',
             './e2e/wdio/platform/**/time-picker.e2e-spec.ts'
         ]
     },
@@ -184,7 +186,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 20,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:

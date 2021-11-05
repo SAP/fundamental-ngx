@@ -18,11 +18,15 @@ import { CollectionFilter } from '../../interfaces/collection-filter.interface';
 import { Table } from '../../table';
 import { TableColumn } from '../table-column/table-column';
 import { FiltersComponent, FiltersDialogData, FiltersDialogResultData } from './filtering/filters.component';
-import { GroupDialogData, GroupDialogResultData, GroupingComponent } from './grouping/grouping.component';
-import { SortDialogData, SortDialogResultData, SortingComponent } from './sorting/sorting.component';
+import {
+    SettingsGroupDialogData,
+    SettingsGroupDialogResultData,
+    GroupingComponent
+} from './grouping/grouping.component';
+import { SettingsSortDialogData, SettingsSortDialogResultData, SortingComponent } from './sorting/sorting.component';
 import { TableViewSettingsFilterComponent } from './table-view-settings-filter.component';
 
-const dialogConfig: DialogConfig = {
+export const dialogConfig: DialogConfig = {
     responsivePadding: false,
     verticalPadding: false,
     minWidth: '30%',
@@ -95,7 +99,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
         const state = this._getTableState();
         const columns = this._getTableColumns();
         const sortBy = state.sortBy?.[0];
-        const dialogData: SortDialogData = {
+        const dialogData: SettingsSortDialogData = {
             columns: columns.filter(({ sortable }) => sortable),
             direction: sortBy?.direction,
             field: sortBy?.field
@@ -109,7 +113,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
         this._subscriptions.add(
             dialogRef.afterClosed
                 .pipe(filter((result) => !!result))
-                .subscribe(({ field, direction }: SortDialogResultData) => {
+                .subscribe(({ field, direction }: SettingsSortDialogResultData) => {
                     this._applySorting(field, direction);
                 })
         );
@@ -141,7 +145,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
     showGroupingSettings(): void {
         const state = this._getTableState();
         const columns = this._getTableColumns();
-        const dialogData: GroupDialogData = {
+        const dialogData: SettingsGroupDialogData = {
             columns: columns.filter(({ groupable }) => groupable),
             direction: state.groupBy?.[0]?.direction,
             field: state.groupBy?.[0]?.field
@@ -155,7 +159,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
         this._subscriptions.add(
             dialogRef.afterClosed
                 .pipe(filter((result) => !!result))
-                .subscribe(({ field, direction }: GroupDialogResultData) => {
+                .subscribe(({ field, direction }: SettingsGroupDialogResultData) => {
                     this._applyGrouping(field, direction);
                 })
         );
@@ -225,7 +229,7 @@ export class TableViewSettingsDialogComponent implements AfterViewInit, OnDestro
 
     /** @hidden */
     private _applyGrouping(field: string, direction: SortDirection): void {
-        this._table?.group(field ? [{ field: field, direction: direction, showAsColumn: false }] : []);
+        this._table?.group(field ? [{ field: field, direction: direction, showAsColumn: true }] : []);
     }
 
     /** @hidden */

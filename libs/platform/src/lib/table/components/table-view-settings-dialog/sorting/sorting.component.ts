@@ -6,18 +6,18 @@ import { DialogRef } from '@fundamental-ngx/core/dialog';
 import { SortDirection } from '../../../enums/sort-direction.enum';
 import { Resettable, RESETTABLE_TOKEN } from '../../reset-button/reset-button.component';
 
-export interface SortDialogColumn {
+export interface SettingsSortDialogColumn {
     label: string;
     key: string;
 }
 
-export interface SortDialogData {
+export interface SettingsSortDialogData {
     direction: SortDirection;
     field: string;
-    columns: SortDialogColumn[];
+    columns: SettingsSortDialogColumn[];
 }
 
-export interface SortDialogResultData {
+export interface SettingsSortDialogResultData {
     field: string;
     direction: SortDirection;
 }
@@ -43,7 +43,7 @@ export class SortingComponent implements Resettable {
     field: string;
 
     /** Table columns */
-    readonly columns: SortDialogColumn[] = [];
+    readonly columns: SettingsSortDialogColumn[] = [];
 
     /** @hidden */
     readonly _isResetAvailableSubject$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -58,7 +58,7 @@ export class SortingComponent implements Resettable {
 
     /** @hidden */
     constructor(public dialogRef: DialogRef) {
-        const data: SortDialogData = this.dialogRef.data;
+        const data: SettingsSortDialogData = this.dialogRef.data;
 
         this.initialDirection = data.direction || this.initialDirection;
         this.initialField = data.field || this.initialField;
@@ -82,7 +82,7 @@ export class SortingComponent implements Resettable {
 
     /** Confirm changes and close dialog */
     confirm(): void {
-        const result: SortDialogResultData = { direction: this.direction, field: this.field };
+        const result: SettingsSortDialogResultData = { direction: this.direction, field: this.field };
         this.dialogRef.close(result);
     }
 

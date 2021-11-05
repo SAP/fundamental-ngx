@@ -23,7 +23,7 @@ exports.config = {
     //
     specs: ['./e2e/wdio/**/*.e2e-spec.ts'],
     // Patterns to exclude.
-    exclude: ['./e2e/wdio/core/**/date-picker.e2e-spec.ts'],
+    exclude: [],
     suites: {
         platformA: [
             './e2e/wdio/platform/**/action-bar.e2e-spec.ts',
@@ -40,6 +40,7 @@ exports.config = {
             './e2e/wdio/platform/**/file-uploader.e2e-spec.ts',
             './e2e/wdio/platform/**/form-container.e2e-spec.ts',
             './e2e/wdio/platform/**/form-generator.e2e-spec.ts',
+            './e2e/wdio/platform/**/icon-tab-bar.e2e-spec.ts',
             './e2e/wdio/platform/**/info-label.e2e-spec.ts',
             './e2e/wdio/platform/**/input.e2e-spec.ts',
             './e2e/wdio/platform/**/input-group.e2e-spec.ts',
@@ -64,6 +65,7 @@ exports.config = {
             './e2e/wdio/platform/**/standard-list-item.e2e-spec.ts',
             './e2e/wdio/platform/**/step-input.e2e-spec.ts',
             './e2e/wdio/platform/**/switch.e2e-spec.ts',
+            './e2e/wdio/platform/**/table.e2e-spec.ts',
             './e2e/wdio/platform/**/textarea.e2e-spec.ts',
             './e2e/wdio/platform/**/thumbnail.e2e-spec.ts',
             './e2e/wdio/platform/**/value-help-dialog.e2e-spec.ts',
@@ -132,6 +134,7 @@ exports.config = {
             './e2e/wdio/core/**/shellbar.e2e-spec.ts',
             './e2e/wdio/core/**/side-navigation.e2e-spec.ts',
             './e2e/wdio/core/**/slider.e2e-spec.ts',
+            './e2e/wdio/core/**/splitter.e2e-spec.ts',
             './e2e/wdio/core/**/split-button.e2e-spec.ts',
             './e2e/wdio/core/**/standard-list.e2e-spec.ts',
             './e2e/wdio/core/**/status-indicator.e2e-spec.ts',
@@ -148,6 +151,7 @@ exports.config = {
             './e2e/wdio/core/**/title.e2e-spec.ts',
             './e2e/wdio/core/**/token.e2e-spec.ts',
             './e2e/wdio/core/**/toolbar.e2e-spec.ts',
+            './e2e/wdio/core/**/vertical-navigation.e2e-spec.ts',
             './e2e/wdio/core/**/wizard.e2e-spec.ts'
         ]
     },

@@ -1,6 +1,7 @@
 <div class="fdp-thumbnail-container" [class.fdp-thumbnail-container--horizontal]="isHorizontal">
     <fdp-thumbnail-image
         *ngIf="!isHorizontal"
+        [thumbnailId]="thumbnailId"
         [mediaList]="mediaList"
         [maxImages]="maxImagesDisplay"
         [isHorizontal]="isHorizontal"
@@ -16,7 +17,7 @@
             [attr.src]="selectedMedia.mediaUrl"
             [attr.alt]="selectedMedia.alt"
             (click)="openDialog(selectedMedia, mediaList)"
-            (keydown.enter)="openDialog(selectedMedia, mediaList)"
+            (keydown.space)="openDialog(selectedMedia, mediaList)"
         />
         <video
             tabindex="0"
@@ -24,7 +25,7 @@
             *ngIf="selectedMedia.mediaType === 'video'"
             [src]="selectedMedia.mediaUrl"
             (click)="openDialog(selectedMedia, mediaList)"
-            (keydown.enter)="openDialog(selectedMedia, mediaList)"
+            (keydown.space)="openDialog(selectedMedia, mediaList)"
             [attr.aria-label]="selectedMedia.label"
         >
             {{ selectedMedia.alt }}

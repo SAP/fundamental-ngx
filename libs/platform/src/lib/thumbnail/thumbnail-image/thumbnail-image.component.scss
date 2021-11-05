@@ -1,3 +1,20 @@
+@mixin fdp-thumbnail-focus {
+    &:focus,
+    &.is-focus {
+        outline-offset: 0.0625rem;
+        outline-width: var(--sapContent_FocusWidth);
+        outline-color: var(--sapContent_FocusColor);
+        outline-style: var(--sapContent_FocusStyle);
+    }
+}
+
+@mixin fdp-thumbnail-hover {
+    &:hover {
+        cursor: pointer;
+        border-color: var(--sapLink_Hover_Color);
+    }
+}
+
 .fdp-thumbnail-image-container {
     $fdp-thumbnail-image-size: 4.625rem;
     $fdp-thumbnail-selected-width: 5.75rem;
@@ -16,10 +33,15 @@
         border-radius: $fdp-thumbnail-image-border-radius;
         margin: 0.688rem;
         position: relative;
-        &:hover {
-            cursor: pointer;
-            border-color: var(--sapLink_Hover_Color);
+        fd-avatar {
+            width: $fdp-thumbnail-image-size;
+            height: $fdp-thumbnail-image-size;
+            max-width: $fdp-thumbnail-image-size;
+            max-height: $fdp-thumbnail-image-size;
         }
+
+        @include fdp-thumbnail-hover();
+        @include fdp-thumbnail-focus();
     }
 
     .fdp-thumbnail-image--horizontal {
@@ -28,18 +50,9 @@
         background-clip: border-box;
         margin: 0.688rem;
         position: relative;
-        &:hover {
-            cursor: pointer;
-            border-color: $fdp-thumbnail-image-border-color-default;
-            border-color: $fdp-thumbnail-image-border-color;
-            border-radius: $fdp-thumbnail-image-border-radius;
-        }
-    }
-    fd-avatar {
-        width: $fdp-thumbnail-image-size;
-        height: $fdp-thumbnail-image-size;
-        max-width: $fdp-thumbnail-image-size;
-        max-height: $fdp-thumbnail-image-size;
+
+        @include fdp-thumbnail-hover();
+        @include fdp-thumbnail-focus();
     }
 
     .fdp-thumbnail-image--selected,
@@ -58,6 +71,7 @@
         border-radius: $fdp-thumbnail-image-border-radius;
         border-color: $fdp-thumbnail-image-border-color-default;
         border-color: $fdp-thumbnail-image-border-color;
+        border-width: var(--sapButton_BorderWidth);
     }
 
     .fdp-thumbnail-image--overlay,

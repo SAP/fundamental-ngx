@@ -71,8 +71,8 @@ describe('MenuMobileComponent', () => {
         fixture.detectChanges();
     }
 
-    it('should create', () => {
-        setup();
+    it('should create', async () => {
+        await setup();
         expect(menu).toBeTruthy();
         expect(menuMobile).toBeTruthy();
     });

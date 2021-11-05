@@ -9,7 +9,9 @@ export const labelsArray = [
     'Password Input Field'
 ];
 export const favoriteColor = 'My';
+export const maxValidation = 'Maximum';
 export const placeholdersArray = [
+    'Field placeholder text',
     'Field placeholder text',
     'Field placeholder text',
     'Field placeholder text',

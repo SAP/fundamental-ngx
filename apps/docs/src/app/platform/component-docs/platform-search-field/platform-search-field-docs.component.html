@@ -22,6 +22,11 @@
     >The Search field <code>ariaLabelledBy</code> property can be used to set ARIA attribute with id of elements which
     labels search input to clarify what search field is.
 </description>
+<description
+    >A refresh button in the search field makes it possible to utilize search and refresh together in one field. If the
+    Refresh button is available, the user can update the list without triggering a new search. This is usually needed
+    when backend data changes quickly and often.
+</description>
 <component-example>
     <fdp-platform-search-field-basic-example></fdp-platform-search-field-basic-example>
 </component-example>
@@ -61,3 +66,25 @@
 <code-example [exampleFiles]="searchFieldDataSource"></code-example>
 
 <separator></separator>
+
+<fd-docs-section-title id="mobile" componentName="search-field"> Search Field Mobile Mode </fd-docs-section-title>
+<description>
+    To use Search-Field in mobile mode:
+    <ul>
+        <li>Set <code>[mobile]</code> property to true</li>
+        <li>
+            Set <code>[mobileConfig]</code> with <code>MobileModeConfig</code> configuration object to customize the
+            look of the control
+        </li>
+    </ul>
+
+    Search-Field Mobile Mode can be configured <strong>globally</strong> by providing
+    <code>MOBILE_MODE_CONFIG</code> token. Check
+    <a routerLink="/core/global-config" fragment="mobile-mode-config">Global Configuration page</a> for more
+    information.
+</description>
+
+<component-example>
+    <fdp-platform-search-field-mobile-example></fdp-platform-search-field-mobile-example>
+</component-example>
+<code-example [exampleFiles]="searchFieldMobileMode"></code-example>

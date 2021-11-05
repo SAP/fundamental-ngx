@@ -12,6 +12,7 @@ import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformInputModule } from '@fundamental-ngx/platform/form';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 import { API_FILES } from '../../api-files';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -42,6 +43,7 @@ import { PlatformTableNoItemsTemplateExampleComponent } from './platform-table-e
 import { PlatformTableSemanticExampleComponent } from './platform-table-examples/platform-table-semantic-example.component';
 import { PlatformTableRowClassExampleComponent } from './platform-table-examples/platform-table-row-class-example.component';
 import { PlatformTableNoOuterBordersExampleComponent } from './platform-table-examples/platform-table-no-outer-borders-example.component';
+import { PlatformTableWrapExampleComponent } from './platform-table-examples/platform-table-wrap-example.component';
 
 const routes: Routes = [
     {
@@ -67,7 +69,8 @@ const routes: Routes = [
         FdDatetimeModule,
         PlatformInputModule,
         PlatformSearchFieldModule,
-        IllustratedMessageModule
+        IllustratedMessageModule,
+        FdpFormGroupModule
     ],
     exports: [RouterModule],
     declarations: [
@@ -95,7 +98,8 @@ const routes: Routes = [
         PlatformTableNoItemsTemplateExampleComponent,
         PlatformTableSemanticExampleComponent,
         PlatformTableRowClassExampleComponent,
-        PlatformTableNoOuterBordersExampleComponent
+        PlatformTableNoOuterBordersExampleComponent,
+        PlatformTableWrapExampleComponent
     ],
     providers: [RtlService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

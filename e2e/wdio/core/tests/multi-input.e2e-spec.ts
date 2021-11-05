@@ -1,12 +1,15 @@
 import {
     click,
+    doesItExist,
     getAttributeByName,
     getElementArrayLength,
     getText,
     isElementDisplayed,
     refreshPage,
     scrollIntoView,
+    sendKeys,
     setValue,
+    waitForElDisplayed,
     waitForPresent
 } from '../../driver/wdio';
 
@@ -21,7 +24,7 @@ import {
     testOptionsArray6
 } from '../fixtures/appData/multi-input-contents';
 
-xdescribe('Multi input test suite', () => {
+describe('Multi input test suite', () => {
     const multiInputPage = new MultiInputPo();
     const {
         activeDropdownButtons,
@@ -41,17 +44,23 @@ xdescribe('Multi input test suite', () => {
         customFilterOptions,
         asyncExampleOptions,
         tokenOptions,
-        templateOptions
+        templateOptions,
+        simpleExampleTokens,
+        checkboxInput,
+        listItem,
+        popover,
+        compactExampleTokens,
+        dialogCheckbox
     } = multiInputPage;
 
     beforeAll(() => {
         multiInputPage.open();
-        waitForPresent(activeDropdownButtons);
+        waitForPresent(multiInputPage.title);
     }, 1);
 
     afterEach(() => {
         refreshPage();
-        waitForPresent(activeDropdownButtons);
+        waitForPresent(multiInputPage.title);
     }, 1);
 
     it('Check RTL/LTR orientation', () => {
@@ -81,6 +90,41 @@ xdescribe('Multi input test suite', () => {
         }
     });
 
+    it('should check enter key doesnt add an empty token', () => {
+        const originalTokenCount = getElementArrayLength(simpleExampleTokens);
+        click(activeInputs);
+        sendKeys(['Enter']);
+        const newTokenCount = getElementArrayLength(simpleExampleTokens);
+
+        expect(newTokenCount).toEqual(originalTokenCount);
+    });
+
+    it('should check multiInput options stay open when clicking checkbox', () => {
+        click(activeDropdownButtons);
+        waitForElDisplayed(popover);
+        click(checkboxInput);
+
+        expect(isElementDisplayed(popover)).toBe(true, 'popover not displayed');
+    });
+
+    it('should check multiInput options close when clicking on list item', () => {
+        click(activeDropdownButtons);
+        waitForElDisplayed(popover);
+        click(listItem);
+
+        expect(doesItExist(popover)).toBe(false, 'popover still displayed');
+    });
+
+    it('should be able to select all tokens and delete with delete key', () => {
+        scrollIntoView(compactExampleTokens);
+        click(activeInputs, 3);
+        sendKeys(['Control', 'a']);
+        sendKeys(['Delete']);
+        const newTokenCount = getElementArrayLength(compactExampleTokens);
+
+        expect(newTokenCount).toEqual(0);
+    });
+
     describe('Check Mobile Mode Multi Input', () => {
         it('verify Simple Multi Input by select each option', () => {
             scrollIntoView(activeDropdownButtons);
@@ -102,11 +146,11 @@ xdescribe('Multi input test suite', () => {
             setValue(activeInputs, 'to', 1);
             scrollIntoView(buttonShowAll);
             click(buttonShowAll);
-            expect(isElementDisplayed(expandedDropdown, 1)).toBe(true);
-            const optionsLength = getElementArrayLength(options);
-            for (let i = 8; i < optionsLength; i++) {
-                scrollIntoView(options, i);
-                click(options, i);
+            expect(waitForElDisplayed(expandedDropdown, 1)).toBe(true);
+            const optionsLength = getElementArrayLength(checkboxInput);
+            for (let i = 0; i < optionsLength; i++) {
+                scrollIntoView(checkboxInput, i);
+                click(checkboxInput, i);
             }
             const inputOptionsLength = getElementArrayLength(hiddenAddonButtonInputOptions);
             for (let i = 0; i < inputOptionsLength; i++) {
@@ -125,10 +169,10 @@ xdescribe('Multi input test suite', () => {
                 expect(getText(compactMultiInputOptions, i)).toBe(testOptionsArray1[i]);
             }
             click(activeDropdownButtons, 1);
-            const optionsLength = getElementArrayLength(options);
-            for (let i = 8; i < optionsLength - 4; i++) {
-                scrollIntoView(options, i);
-                click(options, i);
+            const optionsLength = getElementArrayLength(checkboxInput);
+            for (let i = 0; i < optionsLength - 4; i++) {
+                scrollIntoView(checkboxInput, i);
+                click(checkboxInput, i);
             }
             click(activeDropdownButtons, 1);
             for (let i = 0; i < inputOptionsLength - 4; i++) {
@@ -154,10 +198,10 @@ xdescribe('Multi input test suite', () => {
         it('verify Mobile Mode Multi Input by select each option', () => {
             scrollIntoView(activeDropdownButtons, 2);
             click(activeDropdownButtons, 2);
-            const optionsLength = getElementArrayLength(options);
+            const optionsLength = getElementArrayLength(dialogCheckbox);
             for (let i = 0; i < optionsLength; i++) {
-                scrollIntoView(options, i);
-                click(options, i);
+                scrollIntoView(dialogCheckbox, i);
+                click(dialogCheckbox, i);
             }
             click(approveButton);
             const inputOptionsLength = getElementArrayLength(mobileInputOptions);
@@ -172,10 +216,10 @@ xdescribe('Multi input test suite', () => {
         it('verify Display Object Property by select each option', () => {
             scrollIntoView(activeDropdownButtons, 4);
             click(activeDropdownButtons, 4);
-            const optionsLength = getElementArrayLength(options);
-            for (let i = 8; i < optionsLength; i++) {
-                scrollIntoView(options, i);
-                click(options, i);
+            const optionsLength = getElementArrayLength(checkboxInput);
+            for (let i = 0; i < optionsLength; i++) {
+                scrollIntoView(checkboxInput, i);
+                click(checkboxInput, i);
             }
             click(activeDropdownButtons, 4);
             const inputOptionsLength = getElementArrayLength(displayObjectOptions);
@@ -190,10 +234,10 @@ xdescribe('Multi input test suite', () => {
         it('verify Return results including search term by clicking each option', () => {
             scrollIntoView(activeDropdownButtons, 5);
             click(activeDropdownButtons, 5);
-            const optionsLength = getElementArrayLength(options);
-            for (let i = 8; i < optionsLength; i++) {
-                scrollIntoView(options, i);
-                click(options, i);
+            const optionsLength = getElementArrayLength(checkboxInput);
+            for (let i = 0; i < optionsLength; i++) {
+                scrollIntoView(checkboxInput, i);
+                click(checkboxInput, i);
             }
             click(activeDropdownButtons, 5);
             const inputOptionsLength = getElementArrayLength(searchTermOptions);
@@ -208,10 +252,10 @@ xdescribe('Multi input test suite', () => {
         it('verify Custom Filter by clicking each option', () => {
             scrollIntoView(activeDropdownButtons, 6);
             click(activeDropdownButtons, 6);
-            const optionsLength = getElementArrayLength(options);
-            for (let i = 8; i < optionsLength; i++) {
-                scrollIntoView(options, i);
-                click(options, i);
+            const optionsLength = getElementArrayLength(checkboxInput);
+            for (let i = 0; i < optionsLength; i++) {
+                scrollIntoView(checkboxInput, i);
+                click(checkboxInput, i);
             }
             click(activeDropdownButtons, 6);
             const inputOptionsLength = getElementArrayLength(customFilterOptions);
@@ -226,10 +270,10 @@ xdescribe('Multi input test suite', () => {
         it('verify Observable Async Example by clicking each option', () => {
             scrollIntoView(activeDropdownButtons, 7);
             click(activeDropdownButtons, 7);
-            const optionsLength = getElementArrayLength(options);
-            for (let i = 8; i < optionsLength; i++) {
-                scrollIntoView(options, i);
-                click(options, i);
+            const optionsLength = getElementArrayLength(checkboxInput);
+            for (let i = 0; i < optionsLength; i++) {
+                scrollIntoView(checkboxInput, i);
+                click(checkboxInput, i);
             }
             click(activeDropdownButtons, 7);
             const inputOptionsLength = getElementArrayLength(asyncExampleOptions);
@@ -244,8 +288,8 @@ xdescribe('Multi input test suite', () => {
         it('verify Multi Input in Reactive Form by clicking each option', () => {
             scrollIntoView(activeDropdownButtons, 8);
             click(activeDropdownButtons, 8);
-            click(options, 10);
-            click(options, 11);
+            click(checkboxInput, 2);
+            click(checkboxInput, 3);
             click(activeDropdownButtons, 8);
             const inputOptionsLength = getElementArrayLength(asyncExampleOptions);
             for (let i = 0; i < inputOptionsLength; i++) {
@@ -259,10 +303,10 @@ xdescribe('Multi input test suite', () => {
         it('verify Adding New Tokens by clicking each option', () => {
             scrollIntoView(activeDropdownButtons, 9);
             click(activeDropdownButtons, 9);
-            const optionsLength = getElementArrayLength(options);
-            for (let i = 8; i < optionsLength; i++) {
-                scrollIntoView(options, i);
-                click(options, i);
+            const optionsLength = getElementArrayLength(checkboxInput);
+            for (let i = 0; i < optionsLength; i++) {
+                scrollIntoView(checkboxInput, i);
+                click(checkboxInput, i);
             }
             click(activeDropdownButtons, 9);
             const inputOptionsLength = getElementArrayLength(tokenOptions);
@@ -277,10 +321,10 @@ xdescribe('Multi input test suite', () => {
         it('verify Custom Item Template by clicking each option', () => {
             scrollIntoView(activeDropdownButtons, 10);
             click(activeDropdownButtons, 10);
-            const optionsLength = getElementArrayLength(options);
-            for (let i = 13; i < optionsLength; i++) {
-                scrollIntoView(options, i);
-                click(options, i);
+            const optionsLength = getElementArrayLength(checkboxInput);
+            for (let i = 5; i < optionsLength; i++) {
+                scrollIntoView(checkboxInput, i);
+                click(checkboxInput, i);
             }
             click(activeDropdownButtons, 10);
             const inputOptionsLength = getElementArrayLength(templateOptions);

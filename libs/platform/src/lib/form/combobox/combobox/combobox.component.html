@@ -1,25 +1,25 @@
 <ng-container *ngTemplateOutlet="mobile ? mobileTemplate : desktopTemplate"></ng-container>
 
 <ng-template #desktopTemplate>
-    <div class="fdp-combobox" cdkOverlayOrigin #selectTrigger="cdkOverlayOrigin">
-        <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
-    </div>
-
-    <!-- Option panel using Material CDK overlay system -->
-    <ng-template
-        cdk-connected-overlay
-        [cdkConnectedOverlayOrigin]="selectTrigger"
-        [cdkConnectedOverlayOpen]="isOpen && _suggestions.length > 0"
-        (overlayOutsideClick)="close($event)"
-        [cdkConnectedOverlayMinWidth]="minWidth"
+    <fd-popover
+        [class.fd-combobox-full-width]="isSearch"
+        [isOpen]="isOpen && _suggestions.length > 0"
+        (isOpenChange)="isOpenChangeHandle($event)"
+        [fillControlMode]="fillControlMode"
+        [focusTrapped]="true"
+        [triggers]="triggers"
+        [disabled]="disabled || readonly"
+        [maxWidth]="!autoResize && minWidth"
+        [closeOnOutsideClick]="closeOnOutsideClick"
     >
-        <div
-            class="fdp-combobox__list-container fd-popover__popper fd-popover__body--no-arrow"
-            [style.width.%]="!autoResize && 100"
-        >
-            <ng-container [ngTemplateOutlet]="listTemplate"></ng-container>
-        </div>
-    </ng-template>
+        <fd-popover-control>
+            <ng-container *ngTemplateOutlet="controlTemplate"></ng-container>
+        </fd-popover-control>
+        <fd-popover-body [hidden]="_suggestions.length === 0">
+            <ng-container *ngTemplateOutlet="listTemplate"></ng-container>
+            <ng-content></ng-content>
+        </fd-popover-body>
+    </fd-popover>
 </ng-template>
 
 <ng-template #mobileTemplate>
@@ -38,12 +38,12 @@
             [disabled]="disabled"
             [readonly]="readonly"
             [isControl]="true"
-            (addOnButtonClicked)="!mobile && onPrimaryButtonClick(_connectedOverlay.open)"
+            (addOnButtonClicked)="onPrimaryButtonClick()"
             [isExpanded]="!mobile && isOpen && _suggestions.length > 0"
             [attr.aria-disabled]="disabled"
             [attr.aria-readonly]="readonly"
             [glyphAriaLabel]="ariaLabel"
-            (click)="mobile && openInMobileMode()"
+            (click)="openInMobileMode()"
         >
             <input
                 #searchInputElement
@@ -72,12 +72,20 @@
                 (ngModelChange)="searchTermChanged()"
                 [placeholder]="placeholder"
                 (focus)="onTouched()"
-                (blur)="!mobile && _onBlur($event)"
+                (blur)="_onBlur($event)"
                 [attr.aria-expanded]="isOpen && _suggestions.length > 0"
                 [readonly]="readonly"
                 [attr.aria-readonly]="readonly"
             />
         </fd-input-group>
+        <div
+            class="fdp-combobox__count-list-results"
+            role="status"
+            *ngIf="isOpen"
+            i18n="@@platform.Combobox.CountListResults"
+        >
+            {{ _flatSuggestions?.length || 0 }} result list items
+        </div>
         <fd-form-message
             *ngIf="mobile && isOpen ? null : !!stateMessage"
             [type]="state"
@@ -97,7 +105,6 @@
         [compact]="isCompact"
         [attr.aria-labelledby]="id + '-search'"
         [style.maxHeight]="!mobile && maxHeight"
-        [style.minWidth]="!mobile && minWidth + 'px'"
         [style.maxWidth]="autoResize && maxWidth + 'px'"
     >
         <fd-form-message *ngIf="!!stateMessage" [type]="state" [innerHtml]="stateMessage"></fd-form-message>

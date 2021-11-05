@@ -1,0 +1,9 @@
+export const editModeOption = 0;
+export const dueDateWarningsOption = 1;
+export const setStatusOption = 2;
+export const disableAllNodesOption = 3;
+export const disableAddingBeforeOption = 4;
+export const disableAddingAfterOption = 5;
+export const disableAddingParallelOption = 6;
+export const disableEditingOption = 7;
+export const disableRemovingOption = 8;

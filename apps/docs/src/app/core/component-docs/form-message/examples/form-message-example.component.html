@@ -1,21 +1,24 @@
 <div fd-form-item class="fd-custom-form-item-message">
-    <label fd-form-label for="input-message"> Message With Input </label>
+    <label fd-form-label for="input-message" id="label-input"> Message With Input </label>
     <fd-form-input-message-group>
         <input
             fd-form-control
             type="text"
             id="input-message"
             placeholder="Field placeholder text"
-            [state]="'information'"
+            state="information"
+            aria-labelledby="label-input input-message message-input"
         />
-        <fd-form-message [type]="'information'"> This message is triggered by a click event. </fd-form-message>
+        <fd-form-message type="information" id="message-input">
+            This message is triggered by a click event.
+        </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item class="fd-custom-form-item-message">
     <label fd-form-label for="group-message-2"> Message With InputGroup - Changed Programmatically </label>
     <fd-popover
-        [placement]="'bottom'"
+        placement="bottom"
         [(isOpen)]="open"
         [triggers]="[]"
         [closeOnOutsideClick]="false"
@@ -24,15 +27,15 @@
         <fd-popover-control>
             <fd-input-group
                 id="group-message-2"
-                [state]="'information'"
-                [button]="true"
-                [addOnText]="'Toggle Message'"
+                state="information"
+                button="true"
+                addOnText="Toggle Message"
                 (addOnButtonClicked)="open = !open"
             >
             </fd-input-group>
         </fd-popover-control>
         <fd-popover-body>
-            <fd-form-message [type]="'information'">
+            <fd-form-message type="information" [static]="true">
                 This message is controlled by <code>open</code> variable.
             </fd-form-message>
         </fd-popover-body>
@@ -40,30 +43,44 @@
 </div>
 
 <div fd-form-item class="fd-custom-form-item-message">
-    <label fd-form-label for="group-message"> Message With InputGroup - Hover </label>
+    <label fd-form-label for="group-message" id="label-group"> Message With InputGroup - Hover </label>
     <fd-form-input-message-group
-        [placement]="'bottom'"
-        [triggers]="['mouseenter', 'mouseleave']"
+        placement="bottom"
+        [triggers]="['mouseenter', 'mouseleave', 'focusin', 'focusout']"
         [closeOnOutsideClick]="false"
         [closeOnEscapeKey]="false"
+        aria-labelledby="label-group message-group"
     >
-        <fd-input-group id="group-message" [glyph]="'world'" [state]="'information'" [button]="true"></fd-input-group>
-        <fd-form-message [type]="'information'">
+        <fd-input-group
+            id="group-message"
+            glyph="world"
+            iconTitle="Icon title world"
+            state="information"
+            [button]="true"
+        >
+        </fd-input-group>
+        <fd-form-message type="information" id="message-group">
             This message is only triggered by hovering over the InputGroup.
         </fd-form-message>
     </fd-form-input-message-group>
 </div>
 
 <div fd-form-item class="fd-custom-form-item-message">
-    <label fd-form-label for="textarea-message"> Message With Textarea - Try to focus </label>
+    <label fd-form-label for="textarea-message" id="label-textarea"> Message With Textarea - Try to focus </label>
     <fd-form-input-message-group
         [triggers]="['focusin', 'focusout']"
-        [placement]="'bottom'"
+        placement="bottom"
         [closeOnOutsideClick]="false"
         [closeOnEscapeKey]="false"
     >
-        <textarea fd-form-control id="textarea-message" [state]="'information'"></textarea>
-        <fd-form-message [type]="'information'">
+        <textarea
+            fd-form-control
+            id="textarea-message"
+            state="information"
+            aria-labelledby="label-textarea message-textarea"
+        >
+        </textarea>
+        <fd-form-message type="information" id="message-textarea">
             This message is only triggered by focusing inside the textarea. The message box placement is also changed.
         </fd-form-message>
     </fd-form-input-message-group>

@@ -140,6 +140,13 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
         }
     }
 
+    // In fundamental-styles there's a fix for the table row height in condensed mode, that includes absolute positioning for the checkbox
+    // it's not needed here
+    &.fd-table--condensed .fd-table__body .fd-table__cell--checkbox .fd-checkbox__label {
+        position: relative;
+        margin-top: 0;
+    }
+
     &.#{$block}--no-outer-border {
         .#{$block}__header,
         .#{$block}__body,
@@ -224,6 +231,11 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
 
                 .fd-table__popover--custom {
                     display: none;
+                }
+
+                .fdp-table__navigation-indicator {
+                    opacity: 0;
+                    visibility: hidden;
                 }
             }
         }
@@ -322,7 +334,7 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
             min-width: 100%;
             border-left: none;
 
-            /** 
+            /**
                 Due to the changed table-layout group row cell may looe it's top border.
                 For example when previous (relatively to the group row) row columns tolal width < 100% of the table.
             */
@@ -364,6 +376,5 @@ $fd-table-header-color-var: var(--sapList_HeaderBackground, #f2f2f2);
 
     .fd-dnd-item {
         position: inherit;
-        cursor: default;
     }
 }

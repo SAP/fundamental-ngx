@@ -45,7 +45,6 @@ describe('Datetime picker suite', () => {
         calendarItem,
         selectedTimeLine,
         currentItem,
-        itemText,
         inputGroup,
         frenchButton,
         germanButton,
@@ -57,11 +56,11 @@ describe('Datetime picker suite', () => {
         selectMonthButton,
         selectYearButton,
         months,
-        buttonText,
         message,
         currentMonthCalendarItem,
         getCurrentDayIndex,
-        altCalendarItem
+        altCalendarItem,
+        monthAttributeLabel
     } = new DatePickerPo();
 
     beforeAll(() => {
@@ -148,7 +147,7 @@ describe('Datetime picker suite', () => {
     it('should check that available only 2 next weeks in range disabled example', () => {
         click(rangeDisabledExample + calendarIcon);
         const currentDayIndex = getCurrentItemIndex();
-        const itemsLength = getElementArrayLength(currentMonthCalendarItem) - 1;
+        const itemsLength = getElementArrayLength(currentMonthCalendarItem);
 
         for (let i = currentDayIndex - 1; i !== 0; i--) {
             expect(isElementClickable(calendarItem, i)).toBe(false, `previous day not disabled`);
@@ -178,6 +177,9 @@ describe('Datetime picker suite', () => {
             }
 
             for (let i = availableLengthNextMonth + 1; i < itemsLength; i++) {
+                if (i >= 31) {
+                    break;
+                }
                 expect(isElementClickable(currentMonthCalendarItem, i)).toBe(false, `element ${i} is not disabled`);
             }
         }
@@ -249,16 +251,22 @@ describe('Datetime picker suite', () => {
         click(section + calendarIcon);
         click(selectMonthButton);
 
-        const previousMonthName = getAttributeByName(calendarItem + itemText, 'aria-label', getCurrentItemIndex() - 1);
-        const nextMonthName = getAttributeByName(calendarItem + itemText, 'aria-label', getCurrentItemIndex() + 1);
+        const previousMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() - 1);
+        const nextMonthName = getAttributeByName(calendarItem, monthAttributeLabel, getCurrentItemIndex() + 1);
         click(selectMonthButton);
 
         click(nextMonthButton);
-        expect(getText(selectMonthButton + buttonText)).toEqual(nextMonthName, `next month is not chosen`);
+        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
+            nextMonthName,
+            `next month is not chosen`
+        );
 
         click(previousMonthButton);
         click(previousMonthButton);
-        expect(getText(selectMonthButton + buttonText)).toEqual(previousMonthName, `previous month is not chosen`);
+        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(
+            previousMonthName,
+            `previous month is not chosen`
+        );
         click(section + calendarIcon);
     }
 
@@ -267,7 +275,7 @@ describe('Datetime picker suite', () => {
         click(selectYearButton);
         const nextYear = getNextElementText(currentItem);
         clickNextElement(currentItem);
-        expect(getText(selectYearButton + buttonText)).toEqual(nextYear);
+        expect(getText(selectYearButton)).toEqual(nextYear);
         click(section + calendarIcon);
     }
 
@@ -275,9 +283,9 @@ describe('Datetime picker suite', () => {
         click(section + calendarIcon);
         click(selectMonthButton);
         expect(isElementDisplayed(months)).toBe(true);
-        const firstMonth = getAttributeByName(calendarItem + itemText, 'aria-label');
+        const firstMonth = getAttributeByName(calendarItem, monthAttributeLabel);
         click(calendarItem);
-        expect(getText(selectMonthButton + buttonText)).toEqual(firstMonth, `month is not chosen`);
+        expect(getAttributeByName(selectMonthButton, monthAttributeLabel)).toEqual(firstMonth, `month is not chosen`);
         click(section + calendarIcon);
     }
 

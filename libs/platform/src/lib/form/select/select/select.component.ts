@@ -225,8 +225,6 @@ export class SelectComponent extends BaseSelect implements OnInit, AfterViewInit
     _onSelection(value: any): void {
         this.value = value;
         this._updateModel(this.value);
-        this.onChange(this.value);
-        this.onTouched();
         this.cd.markForCheck();
     }
 

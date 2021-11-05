@@ -22,7 +22,8 @@ export enum MobileModeControl {
     POPOVER = 'POPOVER',
     COMBOBOX = 'COMBOBOX',
     MULTI_INPUT = 'MULTI_INPUT',
-    MULTI_COMBOBOX = 'MULTI_COMBOBOX'
+    MULTI_COMBOBOX = 'MULTI_COMBOBOX',
+    SEARCH_FIELD = 'SEARCH_FIELD'
 }
 
 export abstract class MobileModeBase<T extends MobileMode> {

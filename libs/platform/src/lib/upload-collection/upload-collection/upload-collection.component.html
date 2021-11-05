@@ -156,18 +156,22 @@
                 noHorizontalBorders="true"
                 (rowSelectionChange)="_onRowSelectionChange($event)"
             >
-                <fdp-column name="name" label="Name">
+                <fdp-column name="name" label="Name" width="5rem">
                     <fdp-table-cell *fdpCellDef="let item">
                         <div class="fdp-upload-collection__vertical-align-center">
                             <fd-icon
                                 class="fdp-upload-collection__fd-icon"
                                 *ngIf="item.type === 'folder'"
                                 glyph="folder-blank"
+                                i18n-title="platformUploadCollection.Icon.Folder|Title attribute"
+                                title="Folder icon"
                             ></fd-icon>
                             <fd-icon
                                 class="fdp-upload-collection__fd-icon"
                                 *ngIf="item.type === 'file'"
                                 [glyph]="_getIconByType(item)"
+                                i18n-title="platformUploadCollection.Icon.File|Title attribute"
+                                title="File icon"
                             ></fd-icon>
 
                             <ng-container *ngIf="disabled || readonly || !_isSelectedItem(item); else editMode">
@@ -189,7 +193,7 @@
                                             (blur)="_fileNameChange($event, item)"
                                             (input)="_checkName($event, item)"
                                             type="text"
-                                            i18n-placeholder
+                                            i18n-placeholder="platformUploadCollection.Edit.Input|Placeholder attribute"
                                             placeholder="Enter a name"
                                             compact="true"
                                             [state]="item.sameFilenameState"
@@ -209,30 +213,32 @@
                     </fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column name="uploadedBy" label="Uploaded by">
+                <fdp-column name="uploadedBy" label="Uploaded by" width="5rem">
                     <fdp-table-cell *fdpCellDef="let item" [innerText]="item.uploadedBy.name"></fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column name="uploadedOn" label="Uploaded on">
+                <fdp-column name="uploadedOn" label="Uploaded on" width="5rem">
                     <fdp-table-cell
                         *fdpCellDef="let item"
                         [innerText]="item.uploadedOn | date: 'shortDate'"
                     ></fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column name="size" label="File size">
+                <fdp-column name="size" label="File size" width="5rem">
                     <fdp-table-cell *fdpCellDef="let item" [innerText]="item.fileSize | convertBytes"></fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column name="version" label="Version">
+                <fdp-column name="version" label="Version" width="5rem">
                     <fdp-table-cell *fdpCellDef="let item" [innerText]="item.version || ''"></fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column name="status" label="Status">
+                <fdp-column name="status" label="Status" width="5rem">
                     <fdp-table-cell *fdpCellDef="let item">
                         <fd-busy-indicator
                             *ngIf="item.status === _uploadCollectionItemStatus.LOADING"
                             [loading]="true"
+                            ariaLabel="Status: Loading"
+                            ariaLive="polite"
                             size="s"
                         ></fd-busy-indicator>
                         <span
@@ -254,7 +260,7 @@
                     </fdp-table-cell>
                 </fdp-column>
 
-                <fdp-column name="action" *ngIf="!readonly">
+                <fdp-column name="action" *ngIf="!readonly" width="5rem">
                     <fdp-table-header *fdpHeaderCellDef>Action</fdp-table-header>
                     <fdp-table-cell *fdpCellDef="let item">
                         <div class="fdp-upload-collection__actions">
@@ -332,6 +338,7 @@
             <!-- Pagination -->
             <div class="fdp-upload-collection__pagination">
                 <span
+                    [id]="id + '-pagination'"
                     class="fdp-upload-collection__pagination--total"
                     i18n="@@platformUploadCollection.Pagination.Total"
                 >
@@ -343,6 +350,7 @@
                     (pageChangeStart)="_pageChanged($event)"
                     [itemsPerPage]="_itemsPerPage"
                     [currentPage]="_currentPage"
+                    [attr.aria-labelledby]="id + '-pagination'"
                 ></fd-pagination>
             </div>
 
@@ -373,8 +381,9 @@
         *ngFor="let value of _itemsPerPageOptions"
         (itemSelect)="_itemsPerPageChange(value.label)"
         [attr.title]="'Results per page: ' + value.label"
-        [innerText]="value.label"
-    ></fdp-menu-item>
+    >
+        <span [innerText]="value.label"></span>
+    </fdp-menu-item>
 </fdp-menu>
 
 <fdp-menu #menuActions xPosition="before" contentDensity="compact">
