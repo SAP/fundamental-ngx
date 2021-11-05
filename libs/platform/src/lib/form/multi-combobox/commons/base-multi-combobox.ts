@@ -592,7 +592,16 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
                 filter((data) => !!data.length)
             )
             .subscribe((data) => {
-                this._suggestions = this._convertToOptionItems(data);
+                this._suggestions = this._convertToOptionItems(data).map((optionItem: SelectableOptionItem) => {
+                    const selectedElement = this._selected.find(
+                        (selectedItem: SelectableOptionItem) => selectedItem.label === optionItem.label
+                    );
+                    if (selectedElement) {
+                        optionItem.selected = selectedElement.selected;
+                    }
+                    return optionItem;
+                });
+
                 this._flatSuggestions = this.isGroup ? this._flatGroups(this._suggestions) : this._suggestions;
 
                 this.stateChanges.next('initDataSource.open().');
