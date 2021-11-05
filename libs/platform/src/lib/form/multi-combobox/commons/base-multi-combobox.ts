@@ -538,7 +538,7 @@ export abstract class BaseMultiCombobox extends CollectionBaseInput implements A
             }
         }
 
-        this._cd.markForCheck();
+        this._cd.detectChanges();
     }
 
     /** @hidden */
