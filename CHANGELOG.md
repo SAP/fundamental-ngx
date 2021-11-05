@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.106 (2021-11-05)
+
+
+### Bug Fixes
+
+* **platform:** fix flaky unit test ([#7099](https://github.com/SAP/fundamental-ngx/issues/7099)) ([b8e0c3d](https://github.com/SAP/fundamental-ngx/commit/b8e0c3d1613f3064e2f874a6e3bb3f44e3c228dc))
+
 ## 0.33.0-rc.105 (2021-11-05)
 
 
