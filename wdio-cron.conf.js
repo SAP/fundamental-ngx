@@ -122,7 +122,7 @@ exports.config = {
     //
     specs: ['./e2e/wdio/**/*.e2e-spec.ts'],
     // Patterns to exclude.
-    exclude: ['./e2e/wdio/core/**/date-picker.e2e-spec.ts'],
+    exclude: [],
     suites: {
         platformA: [
             './e2e/wdio/platform/**/action-bar.e2e-spec.ts',
