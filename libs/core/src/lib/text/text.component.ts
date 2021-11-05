@@ -81,8 +81,9 @@ export class TextComponent {
     }
 
     /** @hidden */
-    checkLineCount(count: number): void {
-        this._hasMore = count > this.maxLines;
+    checkCharCount(isMore: boolean): void {
+        // this._hasMore = count > this.maxLines;
+        this._hasMore = isMore;
         this._changeDetectorRef.detectChanges();
     }
 }

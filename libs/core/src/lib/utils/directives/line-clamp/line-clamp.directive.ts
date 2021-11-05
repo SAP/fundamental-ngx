@@ -1,18 +1,23 @@
 import { coerceNumberProperty } from '@angular/cdk/coercion';
 import {
+    AfterViewInit,
     Directive,
     ElementRef,
     EventEmitter,
     Input,
-    AfterViewInit,
-    OnDestroy,
     OnChanges,
+    OnDestroy,
     Output,
     Renderer2,
     SimpleChanges
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+
+export enum TruncateCharCount {
+    DEFAULT = 500,
+    LESS = 300
+}
 
 @Directive({
     // tslint:disable-next-line:directive-selector
@@ -67,26 +72,52 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
     }
 
     /**
+     * Count chars for clamping
+     * @param value
+     */
+    @Input()
+    set fdLineClampChars(value: number) {
+        this._charCount = coerceNumberProperty(value);
+    }
+
+    /**
      * Clamping state
      */
     @Input()
-    fdLineclampState = false;
+    fdLineClampState = false;
 
     /**
-     * Event return count of lines from the target
+     * Event return count of characters from the target
      */
     @Output()
-    lineCountUpdate = new EventEmitter<number>();
+    charCountUpdate = new EventEmitter<boolean>();
 
     /** @hidden */
     private _lineClampTarget: HTMLElement;
+
     /** @hidden */
     private _originalText: string;
+
+    /** @hidden */
+    private _truncatedText: string;
+
     /** @hidden */
     private windowResize$: Subscription;
-    private _isNativeSupport = true;
+
     /** @hidden */
-    private _lineCount: number;
+    private _lineCount: number; // deprecated
+
+    /** @hidden */
+    private _charCount: number;
+
+    /** @hidden */
+    private _widthCount: number;
+
+    /** @hidden */
+    private _maxChars: number;
+
+    /** @hidden */
+    private _hasMore: boolean;
 
     /** @hidden */
     constructor(private readonly _elementRef: ElementRef, private readonly _renderer: Renderer2) {}
@@ -100,16 +131,16 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
 
     /** @hidden */
     ngAfterViewInit(): void {
-        this._isNativeSupport = typeof this.rootElement.style.webkitLineClamp !== 'undefined';
-
         if (this.rootElement) {
-            this._checkLineCount();
+            this._initLineClamp();
 
             this.windowResize$ = fromEvent(window, 'resize')
                 .pipe(distinctUntilChanged(), debounceTime(200))
                 .subscribe({
-                    next: () => this._checkLineCount()
+                    next: () => this._checkWidth()
                 });
+
+            this.refreshClamp();
         }
     }
 
@@ -128,10 +159,7 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
 
     reset(): void {
         if (this._lineClampTarget && this._originalText) {
-            this._lineClampTarget.textContent = this._originalText;
-        }
-        if (this._isNativeSupport) {
-            this._resetNative();
+            this._lineClampTarget.textContent = this._originalText + ' ';
         }
     }
 
@@ -143,95 +171,63 @@ export class LineClampDirective implements OnChanges, AfterViewInit, OnDestroy {
     }
 
     refreshClamp(): void {
-        if (this.fdLineclampState && this._lineCount) {
-            this.native();
-            if (!this._isNativeSupport) {
-                this._truncate();
-            }
+        if (this.fdLineClampState && this._hasMore) {
+            this._toggleTruncate();
         }
     }
 
     /** @hidden
-     * Truncate text in the target box, if browser not support lineclamp style
+     *  Initialising lineclamp properties
+     */
+    private _initLineClamp(): void {
+        const style = window.getComputedStyle(this.rootElement, null);
+        this._widthCount = parseInt(style.getPropertyValue('font-size'), 10) * 25;
+
+        this._checkWidth();
+
+        if (this._originalText && this._originalText.length > this._maxChars) {
+            this._hasMore = true;
+            this.charCountUpdate.emit(this._hasMore);
+            this._truncate();
+        }
+    }
+
+    /** @hidden
+     *  Toggle present text depends on lineclamp state
+     */
+    private _toggleTruncate(): void {
+        this._lineClampTarget.textContent = this.fdLineClampState ? this._truncatedText : this._originalText;
+    }
+
+    /** @hidden
+     * Truncate text in the target box, if the target exceeds the number of characters
      */
     private _truncate(): void {
         if (!this._lineClampTarget) {
             return;
         }
-        const lineClampHeight = Math.ceil(this.getLineHeight() * this._lineCount);
-        const ellipsisTextArray = this._originalText.split(' ');
-        const ellipsisText = () => {
-            if (this.rootElement.scrollHeight > lineClampHeight) {
-                ellipsisTextArray.pop();
-                this._lineClampTarget.textContent = ellipsisTextArray.join(' ') + '...';
-                ellipsisText.call(this);
-            }
-        };
-        ellipsisText();
-    }
 
-    /** @hidden
-     * Get lineheight for rootelement, if browser not support lineclamp style
-     */
-    private getLineHeight(): number {
-        const lineHeight = window.getComputedStyle(this.rootElement, null).getPropertyValue('line-height');
-        if (lineHeight === 'normal') {
-            return parseInt(window.getComputedStyle(this.rootElement, null).getPropertyValue('font-size'), 10) * 1.25;
+        const ellipsisTextArray = this._originalText.split('');
+
+        while (ellipsisTextArray.length >= this._maxChars) {
+            ellipsisTextArray.pop();
         }
 
-        return parseFloat(lineHeight);
-    }
-
-    /** @hidden
-     * Setup native styles for lineclamp text
-     */
-    private native(): void {
-        if (this._isNativeSupport) {
-            this._renderer.setStyle(this.rootElement, 'display', '-webkit-box');
-            this._renderer.setStyle(this.rootElement, 'overflow', 'hidden');
-            this._renderer.setStyle(this.rootElement, 'text-overflow', 'ellipsis');
-            this._renderer.setStyle(this.rootElement, '-webkit-box-orient', 'vertical');
-            this._renderer.setStyle(this.rootElement, '-webkit-line-clamp', `${this._lineCount}`);
-        }
-    }
-
-    /** @hidden
-     * Reset native styles for lineclamp text
-     */
-    private _resetNative(): void {
-        if (this._isNativeSupport) {
-            this._renderer.setStyle(this.rootElement, 'display', '');
-            this._renderer.setStyle(this.rootElement, 'overflow', '');
-            this._renderer.setStyle(this.rootElement, 'text-overflow', '');
-            this._renderer.setStyle(this.rootElement, '-webkit-box-orient', '');
-            this._renderer.setStyle(this.rootElement, '-webkit-line-clamp', '');
-        }
+        this._truncatedText = this._lineClampTarget.textContent = ellipsisTextArray.join('') + ' ... ';
     }
 
     /** @hidden */
-    private _checkLineCount(): void {
-        if (!this.rootElement) {
-            return;
-        }
-        const style = window.getComputedStyle(this.rootElement, null);
+    private _checkWidth(): void {
+        const width = this.rootElement.offsetWidth;
 
-        this.reset();
+        this._maxChars = this._charCount
+            ? this._charCount
+            : width >= this._widthCount
+            ? TruncateCharCount.DEFAULT
+            : TruncateCharCount.LESS;
 
-        const fontSize = parseInt(style.getPropertyValue('font-size'), 10);
-        const boxSizing = style.getPropertyValue('box-sizing');
-        let height = parseInt(style.getPropertyValue('height'), 10);
-        let lineHeight = parseFloat(style.getPropertyValue('line-height'));
-        if (isNaN(lineHeight)) {
-            lineHeight = fontSize * 1.2;
+        if (this.fdLineClampState && this._hasMore) {
+            this._truncate();
         }
-        if (boxSizing === 'border-box') {
-            const padding_top = parseInt(style.getPropertyValue('padding-top'), 10);
-            const padding_bottom = parseInt(style.getPropertyValue('padding-bottom'), 10);
-            const border_top = parseInt(style.getPropertyValue('border-top-width'), 10);
-            const border_bottom = parseInt(style.getPropertyValue('border-bottom-width'), 10);
-            height = height - padding_top - padding_bottom - border_top - border_bottom;
-        }
-        this.refreshClamp();
-        this.lineCountUpdate.emit(Math.ceil(height / lineHeight));
     }
 }

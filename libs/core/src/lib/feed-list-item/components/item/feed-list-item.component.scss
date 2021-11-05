@@ -3,7 +3,23 @@ $block: fd-feed-list;
 .#{$block} {
     &__item--collapsible {
         .lineclamp {
-            display: block;
+            //display: block;
+
+            //    overflow: hidden;
+            //    text-overflow: ellipsis;
+            //    display: -webkit-box;
+            //    -webkit-line-clamp: 2;
+            //    -webkit-box-orient: vertical;
+            //    width: 580px;
+            //}
+            //
+            //.lineclamp + a {
+            //    //display: -webkit-inline-box;
+            //    vertical-align: top;
+            //    margin-top: -20px;
+            //    margin-right: 10px;
+            //    float: right;
+            //}
         }
     }
     &__name a {
@@ -31,6 +47,9 @@ $block: fd-feed-list;
 
     &__link--more {
         cursor: pointer;
+        text-transform: capitalize;
+        margin-left: 1rem;
+
         &:hover {
             text-decoration: underline;
         }
