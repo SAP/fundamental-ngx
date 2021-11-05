@@ -77,9 +77,7 @@ export class P13FilteringDialogComponent implements Resettable {
 
         this._calculateValidRulesCount();
 
-        if (this._validExcludeRulesCount && !this._validIncludeRulesCount) {
-            this._excludePanelExpanded = true;
-        }
+        this._excludePanelExpanded = this._validExcludeRulesCount > 0;
     }
 
     /** Reset changes to the initial state */

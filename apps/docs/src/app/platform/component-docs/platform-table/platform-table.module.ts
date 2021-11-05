@@ -12,6 +12,7 @@ import { PlatformButtonModule } from '@fundamental-ngx/platform/button';
 import { PlatformInputModule } from '@fundamental-ngx/platform/form';
 import { PlatformSearchFieldModule } from '@fundamental-ngx/platform/search-field';
 import { IllustratedMessageModule } from '@fundamental-ngx/core/illustrated-message';
+import { FdpFormGroupModule } from '@fundamental-ngx/platform/form';
 
 import { API_FILES } from '../../api-files';
 import { ApiComponent } from '../../../documentation/core-helpers/api/api.component';
@@ -68,7 +69,8 @@ const routes: Routes = [
         FdDatetimeModule,
         PlatformInputModule,
         PlatformSearchFieldModule,
-        IllustratedMessageModule
+        IllustratedMessageModule,
+        FdpFormGroupModule
     ],
     exports: [RouterModule],
     declarations: [

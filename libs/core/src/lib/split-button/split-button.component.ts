@@ -5,6 +5,7 @@ import {
     ChangeDetectorRef,
     Component,
     ContentChild,
+    ContentChildren,
     ElementRef,
     EventEmitter,
     Input,
@@ -13,6 +14,7 @@ import {
     OnInit,
     Optional,
     Output,
+    QueryList,
     Renderer2,
     SimpleChanges,
     TemplateRef,
@@ -21,7 +23,7 @@ import {
 } from '@angular/core';
 import { SplitButtonActionTitle } from './split-button-utils/split-button.directives';
 import { ButtonType } from '@fundamental-ngx/core/button';
-import { MenuComponent } from '@fundamental-ngx/core/menu';
+import { MenuComponent, MenuInteractiveDirective } from '@fundamental-ngx/core/menu';
 import { MenuItemComponent } from '@fundamental-ngx/core/menu';
 import { Subscription } from 'rxjs';
 import { MainAction } from './main-action';
@@ -114,6 +116,10 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     menu: MenuComponent;
 
     /** @hidden */
+    @ContentChildren(MenuInteractiveDirective)
+    menuInteractives: QueryList<MenuInteractiveDirective>;
+
+    /** @hidden */
     @ViewChild('mainActionButton', { read: ElementRef })
     mainActionBtn: ElementRef;
 
@@ -168,6 +174,9 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
 
     /** @hidden */
     ngAfterContentInit(): void {
+        this.menu.menuItems.forEach((item) => {
+            item.menuInteractive._fromSplitButton = true;
+        });
         this._setupMenuSubscription();
         this._setupMenuItemSubscriptions();
         this._handleMainActionObject();
@@ -249,6 +258,10 @@ export class SplitButtonComponent implements AfterContentInit, OnChanges, OnDest
     private _handleMenuItemSelection(menuItem: MenuItemComponent): void {
         if (!this.mainAction || !this.mainAction.keepMainAction) {
             this.selected = menuItem;
+            this.menu.menuItems.forEach((item) => {
+                item.setSelected(false, true);
+            });
+            menuItem.setSelected(true, true);
             this.titleTemplate = null;
             this.mainActionTitle = menuItem.menuItemTitle.title;
             this._cdRef.detectChanges();
