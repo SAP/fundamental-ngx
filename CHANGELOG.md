@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.113 (2021-11-06)
+
+
+### Bug Fixes
+
+* **platform:** search-field, fix empty suggestions ([#7087](https://github.com/SAP/fundamental-ngx/issues/7087)) ([261d086](https://github.com/SAP/fundamental-ngx/commit/261d086b29e8adf622163f166ea3de1bf86931ab))
+
 ## 0.33.0-rc.112 (2021-11-06)
 
 ## 0.33.0-rc.111 (2021-11-05)
