@@ -194,7 +194,7 @@
     "karma-typescript": "5.5.2",
     "karma-typescript-angular2-transform": "latest",
     "karma-webpack": "5.0.0",
-    "lint-staged": "11.2.3",
+    "lint-staged": "11.2.6",
     "nan": "2.14.2",
     "ng-packagr": "12.2.1",
     "ngx-cva-test-suite": "~1.0.4",
