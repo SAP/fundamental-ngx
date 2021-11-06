@@ -7,8 +7,7 @@ import '@angular/localize/init';
 import { Observable, of } from 'rxjs';
 
 import { RtlService } from '@fundamental-ngx/core/utils';
-import { createKeyboardEvent } from '@fundamental-ngx/platform/shared';
-import { DataProvider, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
+import { createKeyboardEvent, DataProvider, SearchFieldDataSource } from '@fundamental-ngx/platform/shared';
 import { PlatformSearchFieldModule } from './search-field.module';
 import { SearchFieldComponent, SearchInput, SuggestionItem, ValueLabelItem } from './search-field.component';
 
@@ -83,22 +82,20 @@ function mouseClickOnElement(el: Element): void {
 })
 class TestComponent {
     @ViewChild(SearchFieldComponent, { static: true }) component: SearchFieldComponent;
-    public placeholder: string;
-    public suggestions: SuggestionItem[] | Observable<SuggestionItem[]>;
-    public categories: ValueLabelItem[];
-    public categoryLabel: string;
-    public hideCategoryLabel = false;
-    public contentDensity: 'cozy' | 'compact';
-    public isLoading = false;
-    public disabled = false;
+    placeholder: string;
+    suggestions: SuggestionItem[] | Observable<SuggestionItem[]>;
+    categories: ValueLabelItem[];
+    categoryLabel: string;
+    hideCategoryLabel = false;
+    contentDensity: 'cozy' | 'compact';
+    isLoading = false;
+    disabled = false;
 
-    public inputValue: SearchInput;
-    public submitValue: SearchInput;
-    public isSearchCanceled = false;
+    inputValue: SearchInput;
+    submitValue: SearchInput;
+    isSearchCanceled = false;
 
     @ViewChild('outsideButton') outsideButton: ElementRef<HTMLElement>;
-
-    constructor() {}
 
     onInputChange($event): void {
         this.inputValue = $event;
@@ -240,8 +237,7 @@ describe('SearchFieldComponent', () => {
         expect(menuEls.length).toBe(0);
     });
 
-    // TODO: Upskip after fix
-    xit('should show the "category button" if "categories" is set with one or more items', () => {
+    it('should show the "category button" if "categories" is set with one or more items', () => {
         host.placeholder = 'Search';
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         host.categories = CATEGORIES;
@@ -252,11 +248,10 @@ describe('SearchFieldComponent', () => {
         expect(categoryButton.length).toBe(1);
 
         const categoryLabel = fixture.debugElement.query(By.css('.fdp-search-field__category-label'));
-        expect(categoryLabel.nativeElement.textContent).toBe('Category');
+        expect(categoryLabel.nativeElement.innerText).toBe('Category');
     });
 
-    // TODO: Unskip after fix
-    xit('should allow the user to set the text of the category label', () => {
+    it('should allow the user to set the text of the category label', () => {
         host.placeholder = 'Search';
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         host.categories = CATEGORIES;
@@ -264,7 +259,7 @@ describe('SearchFieldComponent', () => {
         fixture.detectChanges();
 
         const categoryLabel = fixture.debugElement.query(By.css('.fdp-search-field__category-label'));
-        expect(categoryLabel.nativeElement.textContent).toBe('Categoría');
+        expect(categoryLabel.nativeElement.innerText).toBe('Categoría');
     });
 
     it('should allow the user to hide the category label', () => {
@@ -289,8 +284,7 @@ describe('SearchFieldComponent', () => {
         expect(categoryDropdown.length).toBe(0);
     });
 
-    // TODO: Unskip after test
-    xit('should change the category label to the selected category', fakeAsync(() => {
+    it('should change the category label to the selected category', fakeAsync(() => {
         host.placeholder = 'Search';
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
         host.categories = CATEGORIES;
@@ -311,7 +305,7 @@ describe('SearchFieldComponent', () => {
 
         expect(component.currentCategory).toEqual(CATEGORIES[2]);
         let categoryLabel = fixture.debugElement.query(By.css('.fdp-search-field__category-label'));
-        expect(categoryLabel.nativeElement.textContent).toBe(CATEGORIES[2].label);
+        expect(categoryLabel.nativeElement.innerText).toBe(CATEGORIES[2].label);
         expect(host.inputValue.category).toBe(CATEGORIES[2].value);
 
         // click on category button
@@ -327,7 +321,7 @@ describe('SearchFieldComponent', () => {
 
         expect(component.currentCategory).toEqual(CATEGORIES[1]);
         categoryLabel = fixture.debugElement.query(By.css('.fdp-search-field__category-label'));
-        expect(categoryLabel.nativeElement.textContent).toBe(CATEGORIES[1].label);
+        expect(categoryLabel.nativeElement.innerText).toBe(CATEGORIES[1].label);
         expect(host.inputValue.category).toBe(CATEGORIES[1].value);
     }));
 
@@ -685,7 +679,7 @@ describe('SearchFieldComponent', () => {
     });
 
     // TODO: Unskip after fix
-    xit('should return focus to the input field after suggestion item is selected', () => {
+    it('should return focus to the input field after suggestion item is selected', () => {
         // set up component
         host.placeholder = 'Search';
         host.suggestions = [{ value: 'Apple' }, { value: 'Banana' }, { value: 'Carrot' }];
@@ -763,18 +757,18 @@ describe('SearchFieldComponent', () => {
 })
 class DataSourceTestComponent implements OnInit {
     @ViewChild(SearchFieldComponent, { static: true }) component: SearchFieldComponent;
-    public placeholder: string;
-    public categories: ValueLabelItem[];
-    public categoryLabel: string;
-    public hideCategoryLabel = false;
-    public contentDensity: 'cozy' | 'compact';
-    public isLoading = false;
-    public disabled = false;
-    public dataSource: SearchFieldDataSource<any>;
+    placeholder: string;
+    categories: ValueLabelItem[];
+    categoryLabel: string;
+    hideCategoryLabel = false;
+    contentDensity: 'cozy' | 'compact';
+    isLoading = false;
+    disabled = false;
+    dataSource: SearchFieldDataSource<any>;
 
-    public inputValue: SearchInput;
-    public submitValue: SearchInput;
-    public isSearchCanceled = false;
+    inputValue: SearchInput;
+    submitValue: SearchInput;
+    isSearchCanceled = false;
 
     @ViewChild('outsideButton') outsideButton: ElementRef<HTMLElement>;
 
