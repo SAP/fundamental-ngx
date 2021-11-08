@@ -6,6 +6,7 @@ import {
     Component,
     ContentChild,
     ContentChildren,
+    DoCheck,
     ElementRef,
     HostBinding,
     Input,
@@ -41,7 +42,7 @@ import { addClassNameToElement } from './utils';
     encapsulation: ViewEncapsulation.None,
     providers: [DynamicPageService]
 })
-export class DynamicPageComponent extends BaseComponent implements AfterContentInit, AfterViewInit, OnDestroy {
+export class DynamicPageComponent extends BaseComponent implements AfterContentInit, AfterViewInit, DoCheck, OnDestroy {
     /** Page role  */
     @Input()
     @HostBinding('attr.role')
@@ -162,6 +163,11 @@ export class DynamicPageComponent extends BaseComponent implements AfterContentI
         }
 
         this._cd.detectChanges();
+    }
+
+    /** @hidden */
+    ngDoCheck(): void {
+        this._cd.markForCheck();
     }
 
     /**
