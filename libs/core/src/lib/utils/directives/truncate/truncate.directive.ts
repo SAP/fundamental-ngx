@@ -111,7 +111,7 @@ export class TruncateDirective implements OnChanges, AfterViewInit, OnDestroy {
     constructor(private readonly _elementRef: ElementRef, private readonly _renderer: Renderer2) {}
 
     /**
-     * Root native element of clamping box
+     * Root native element
      */
     get rootElement(): HTMLElement {
         return this._elementRef.nativeElement;

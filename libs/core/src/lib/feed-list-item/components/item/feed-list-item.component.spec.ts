@@ -103,6 +103,4 @@ describe('FeedListItemComponent', () => {
         component.toggleTextView();
         expect(component.isCollapsed).toBeTrue();
     });
-
-    it('should have 500 chars by default', () => {});
 });
