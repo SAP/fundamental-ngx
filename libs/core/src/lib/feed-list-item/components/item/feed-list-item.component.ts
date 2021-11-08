@@ -140,7 +140,6 @@ export class FeedListItemComponent implements OnInit, OnChanges, CssClassBuilder
 
     /** @hidden */
     checkCharCount(isMore: boolean): void {
-        // this.hasMore = +this.maxChars && count > +this.maxChars
         this.hasMore = isMore;
         this._changeDetectorRef.detectChanges();
     }
