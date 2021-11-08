@@ -12,12 +12,13 @@ import {
     isElementDisplayed,
     pause,
     waitForPresent,
-    waitForNotDisplayed
+    waitForNotDisplayed,
+    scrollIntoView
 } from '../../driver/wdio';
 
 describe('Alert test suite', () => {
     const alertPage = new AlertPo();
-    const { alerts, closeAlertButton, openOverlayButton, popupAlert, button, openCustomAlertButton } = alertPage;
+    const { alerts, closeAlertButton, openOverlayButton, popupAlert, button, openCustomAlertButton, playgroundAlert, select, option } = alertPage;
 
     beforeAll(() => {
         alertPage.open();
@@ -46,6 +47,15 @@ describe('Alert test suite', () => {
         it('should check custom popup alerts appear and disappear', () => {
             const customAlertCount = getElementArrayLength(openCustomAlertButton);
             checkPopupAlert(openCustomAlertButton, customAlertCount);
+        });
+
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/6405
+        xit('should check that after removing one alert and changing alert mode will not be added one more alert', () => {
+            scrollIntoView(playgroundAlert);
+            click(playgroundAlert + button);
+            click(select);
+            click(option);
+            expect(getElementArrayLength(playgroundAlert)).toBe(1, 'new alert appeared, but should not');
         });
 
         it('should check RTL/LTR orientations', () => {

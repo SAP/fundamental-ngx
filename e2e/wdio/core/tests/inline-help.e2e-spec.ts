@@ -4,6 +4,7 @@ import {
     getAttributeByName,
     getElementArrayLength,
     getText,
+    isElementDisplayed,
     mouseHoverElement,
     refreshPage,
     saveElementScreenshot,
@@ -24,7 +25,8 @@ describe('Inline help test suite', () => {
         inlineHelpTemplateExample,
         exampleAreaContainersArr,
         inlineHelpExampleExtended,
-        popover
+        popover,
+        inlineHelp
     } = inlineHelpPage;
 
     beforeAll(() => {
@@ -71,6 +73,16 @@ describe('Inline help test suite', () => {
         mouseHoverElement(inlineHelpTemplateExample);
         waitForPresent(popover);
         expect(getText(popover)).toBe(customMessage);
+    });
+
+    // skipped due to https://github.com/SAP/fundamental-ngx/issues/6398
+    xit('should check that inline help by hover does not work in other way after clicking button', () => {
+        scrollIntoView(inlineHelpIcons, 2);
+        mouseHoverElement(inlineHelpIcons, 2);
+        expect(isElementDisplayed(inlineHelp)).toBe(true);
+        click(inlineHelpIcons, 2);
+        mouseHoverElement(inlineHelpIcons, 2);
+        expect(isElementDisplayed(inlineHelp)).toBe(true);
     });
 
     xdescribe('Check visual regression', () => {
