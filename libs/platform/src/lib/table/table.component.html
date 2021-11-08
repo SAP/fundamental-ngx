@@ -55,7 +55,9 @@
             fd-table-cell
             role="columnheader"
             class="fd-table__cell--fixed fdp-table__cell--selection"
-            attr.aria-label="Toggle selection for {{ _totalItems }} rows"
+            attr.aria-label="Toggle selection for all rows, Checkbox {{
+                checkedState ? '' : 'not'
+            }} checked, To check press Spacebar."
             [attr.aria-colindex]="colIdx"
             [attr.aria-rowcount]="_totalItems"
             i18n-aria-label="@@platformTableSelectRow"
