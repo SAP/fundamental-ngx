@@ -9,7 +9,7 @@ export class UploadCollectionPo extends BaseComponentPo {
     readonlyExample = 'fdp-upload-collection-readonly-example';
     turnOffExample = 'fdp-upload-collection-turn-off-example';
 
-    tableItems = ' .fd-dnd-item';
+    tableItems = ' .fd-table__row--hoverable';
     buttons = ' .fd-button--ghost.fd-button--menu';
     menuItem = '.fd-menu__item';
     tablePages = ' .fd-pagination__link.ng-star-inserted';
@@ -32,6 +32,7 @@ export class UploadCollectionPo extends BaseComponentPo {
     listItemTitle = '.fd-list__title';
     moveButton = '.fd-button--emphasized';
     ghostButton = ' .fd-button--ghost';
+    dialog = 'div.fd-dialog__content';
 
     open(): void {
         super.open(this.url);

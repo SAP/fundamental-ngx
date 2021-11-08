@@ -12,6 +12,7 @@ import {
     scrollIntoView,
     sendKeys,
     setValue,
+    waitForElDisplayed,
     waitForNotDisplayed,
     waitForPresent
 } from '../../driver/wdio';
@@ -51,7 +52,8 @@ describe('Upload collection test suite', () => {
         listItem,
         moveButton,
         tableItem,
-        ghostButton
+        ghostButton,
+        dialog
     } = uploadCollectionPage;
 
     beforeAll(() => {
@@ -264,6 +266,7 @@ describe('Upload collection test suite', () => {
     function checkClickabilityCancelButton(selector: string): void {
         scrollIntoView(selector + transparentButton);
         click(defaultExample + transparentButton);
+        waitForElDisplayed(dialog);
         expect(isElementClickable(dialogCreateButton, 1)).toBe(true, '"Cancel" button not clickable');
         sendKeys(['Escape']);
     }
