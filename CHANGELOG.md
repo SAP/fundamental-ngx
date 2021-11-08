@@ -1,4 +1,11 @@
 
+## 0.33.0-rc.119 (2021-11-08)
+
+
+### Bug Fixes
+
+* **platform:** table deffer columns width recalculation ([#7097](https://github.com/SAP/fundamental-ngx/issues/7097)) ([9205a72](https://github.com/SAP/fundamental-ngx/commit/9205a72a4fda1716c36e282c53389c795e071d78))
+
 ## 0.33.0-rc.118 (2021-11-08)
 
 ## 0.33.0-rc.117 (2021-11-08)
