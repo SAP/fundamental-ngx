@@ -1,4 +1,41 @@
 
+## 0.33.0-rc.119 (2021-11-08)
+
+
+### Bug Fixes
+
+* **platform:** table deffer columns width recalculation ([#7097](https://github.com/SAP/fundamental-ngx/issues/7097)) ([9205a72](https://github.com/SAP/fundamental-ngx/commit/9205a72a4fda1716c36e282c53389c795e071d78))
+
+## 0.33.0-rc.118 (2021-11-08)
+
+## 0.33.0-rc.117 (2021-11-08)
+
+## 0.33.0-rc.116 (2021-11-07)
+
+## 0.33.0-rc.115 (2021-11-06)
+
+## 0.33.0-rc.114 (2021-11-06)
+
+## 0.33.0-rc.113 (2021-11-06)
+
+
+### Bug Fixes
+
+* **platform:** search-field, fix empty suggestions ([#7087](https://github.com/SAP/fundamental-ngx/issues/7087)) ([261d086](https://github.com/SAP/fundamental-ngx/commit/261d086b29e8adf622163f166ea3de1bf86931ab))
+
+## 0.33.0-rc.112 (2021-11-06)
+
+## 0.33.0-rc.111 (2021-11-05)
+
+## 0.33.0-rc.110 (2021-11-05)
+
+
+### Bug Fixes
+
+* **platform:** table - resettable bugs ([#7064](https://github.com/SAP/fundamental-ngx/issues/7064)) ([cb09d7d](https://github.com/SAP/fundamental-ngx/commit/cb09d7d8b1482cf82770d553ca506427bde2b8d1))
+
+## 0.33.0-rc.109 (2021-11-05)
+
 ## 0.33.0-rc.108 (2021-11-05)
 
 ## 0.33.0-rc.107 (2021-11-05)

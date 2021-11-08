@@ -61,9 +61,6 @@ export class P13SortingDialogComponent implements Resettable {
     /** @hidden */
     readonly SORT_DIRECTION = SortDirection;
 
-    /** Initial sortBy collection */
-    readonly initialCollectionSort: CollectionSort[];
-
     /** Sort rules to render */
     rules: ValidatedSortRule[] = [];
 
@@ -71,11 +68,9 @@ export class P13SortingDialogComponent implements Resettable {
     constructor(private dialogRef: DialogRef, private cdr: ChangeDetectorRef) {
         const { columns, collectionSort }: SortDialogData = this.dialogRef.data;
 
-        this.initialCollectionSort = [...collectionSort];
-
         this.columns = columns || [];
 
-        this._initiateRules();
+        this._initiateRules(collectionSort);
     }
 
     /** Reset changes to the initial state */
@@ -105,7 +100,7 @@ export class P13SortingDialogComponent implements Resettable {
             this.rules.push(new ValidatedSortRule());
         }
 
-        this._onModelChange();
+        this._recalculateResetAvailability();
     }
 
     /** @hidden */
@@ -116,19 +111,20 @@ export class P13SortingDialogComponent implements Resettable {
     /** @hidden */
     _onRuleColumnKeyChange(rule: ValidatedSortRule, columnKey: string): void {
         rule.columnKey = columnKey;
-        this._onModelChange();
+        this._recalculateResetAvailability();
         this.cdr.detectChanges();
     }
 
     /** @hidden */
     _onRuleDirectionChange(rule: ValidatedSortRule, direction: SortDirection): void {
         rule.direction = direction;
-        this._onModelChange();
+        this._recalculateResetAvailability();
     }
 
     /** @hidden */
-    _onModelChange(): void {
-        this._isResetAvailableSubject$.next(true);
+    _recalculateResetAvailability(): void {
+        const hasOnlyOneEmptyRule = this.rules.length === 1 && !this.rules[0].isValid;
+        this._isResetAvailableSubject$.next(!hasOnlyOneEmptyRule);
     }
 
     /** @hidden */
@@ -137,13 +133,15 @@ export class P13SortingDialogComponent implements Resettable {
     }
 
     /** @hidden */
-    private _initiateRules(): void {
-        this.rules = this._createRules(this.initialCollectionSort);
+    private _initiateRules(collectionSort?: CollectionSort[]): void {
+        this.rules = this._createRules(collectionSort);
 
         // Keep at least one item in the list
         if (this.rules.length === 0) {
             this.rules.push(new ValidatedSortRule());
         }
+
+        this._recalculateResetAvailability();
     }
 
     /** @hidden */
