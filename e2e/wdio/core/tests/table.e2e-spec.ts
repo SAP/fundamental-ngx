@@ -7,6 +7,7 @@ import {
     getAlertText,
     getAttributeByName,
     getElementArrayLength,
+    getElementClass,
     getImageTagBrowserPlatform,
     getText,
     isElementClickable,
@@ -119,6 +120,16 @@ describe('Table test suite', () => {
             for (let i = 0; i < cellLength; i++) {
                 expect(getText(tableToolbarExample + tableRow + tableCell, i)).toBe(tableCellArr[i]);
             }
+        });
+
+        // skipped due to https://github.com/SAP/fundamental-ngx/issues/7096
+        xit('should check that we can not do anything while table is loading', () => {
+            scrollIntoView(tableToolbarExample);
+            click(tableToolbarExample + button, 1);
+            expect(isElementDisplayed(busyIndicator)).toBe(true, 'busy indicator not displayed');
+            expect(getElementClass(tableToolbarExample + inputField)).toContain('disabled');
+            expect(getElementClass(tableToolbarExample + button, 2)).toContain('disabled');
+            expect(getElementClass(tableToolbarExample + button)).toContain('disabled');
         });
     });
 
