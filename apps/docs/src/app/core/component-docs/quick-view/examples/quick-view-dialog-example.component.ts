@@ -55,7 +55,7 @@ export class QuickViewDialogExampleComponent {
     constructor(private readonly dialogService: DialogService) {}
 
     openDialog(dialog: TemplateRef<any>): void {
-        this.dialogService.open(dialog, { id: this.data.id, ariaLabelledBy: `${this.data.id}-header` });
+        this.dialogService.open(dialog, { id: this.data.id });
     }
 
     getGroupId(idx: number, group: any): string {
