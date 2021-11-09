@@ -845,8 +845,8 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
 
         this._cdr.detectChanges();
 
-        const elRect = this._elRef.nativeElement.getBoundingClientRect();
-        const elVisible = elRect.width && elRect.height;
+        let elRect = this._elRef.nativeElement.getBoundingClientRect();
+        let elVisible = elRect.width && elRect.height;
 
         if (elVisible) {
             recalculateFn();
@@ -854,9 +854,14 @@ export class TableComponent<T = any> extends Table implements AfterViewInit, OnD
         }
 
         /** Element may not be visible due to any reason so process recalculation when it becomes visible */
-        const intersectionSubscription = intersectionObservable(this._elRef.nativeElement).subscribe(() => {
-            recalculateFn();
-            intersectionSubscription.unsubscribe();
+        const intersectionSubscription = intersectionObservable(this._elRef.nativeElement).subscribe((entries) => {
+            elRect = entries[0]?.boundingClientRect;
+            elVisible = elRect?.width && elRect?.height;
+
+            if (elVisible) {
+                recalculateFn();
+                intersectionSubscription.unsubscribe();
+            }
         });
 
         this._subscriptions.add(intersectionSubscription);
